@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.gnome-2-16\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-09 11:52+0100\n"
-"PO-Revision-Date: 2007-01-07 00:42+0100\n"
+"POT-Creation-Date: 2007-02-10 23:28+0100\n"
+"PO-Revision-Date: 2007-02-09 18:42+0100\n"
 "Last-Translator: Kenneth Nielsen <k.nielsen81@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -152,7 +152,7 @@ msgstr ""
 
 #: ../data/gedit.schemas.in.h:23
 msgid "Header Font for Printing"
-msgstr "Sidehovedskrifttype ved udskrivning"
+msgstr "Sidehoved-skrifttype ved udskrivning"
 
 #: ../data/gedit.schemas.in.h:24
 msgid "Highlight Current Line"
@@ -160,7 +160,7 @@ msgstr "Fremhæv aktuel linje"
 
 #: ../data/gedit.schemas.in.h:25
 msgid "Highlight Matching Bracket"
-msgstr "Fremhæv modsvarende parantes"
+msgstr "Fremhæv modsvarende parentes"
 
 #: ../data/gedit.schemas.in.h:26
 msgid ""
@@ -249,7 +249,7 @@ msgstr "Monospace 9"
 #. print_font_body_pango.
 #: ../data/gedit.schemas.in.h:46
 msgid "Monospace Regular 9"
-msgstr "Monospace Regular 9"
+msgstr "Monospace Regulær 9"
 
 #: ../data/gedit.schemas.in.h:47
 msgid ""
@@ -322,7 +322,6 @@ msgid "Side Pane is Visible"
 msgstr "Sidepanel er synligt"
 
 #: ../data/gedit.schemas.in.h:71
-#, fuzzy
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" represents the current locale encoding. Only recognized "
@@ -518,7 +517,7 @@ msgstr "Om alle forekomster af den søgte tekst skal fremhæves."
 
 #: ../data/gedit.schemas.in.h:99
 msgid "Whether gedit should highlight matching bracket."
-msgstr "Om modsvarende paranteser skal fremhæves."
+msgstr "Om modsvarende parenteser skal fremhæves."
 
 #: ../data/gedit.schemas.in.h:100
 msgid "Whether gedit should highlight the current line."
@@ -574,15 +573,14 @@ msgstr ""
 "tekstfarve\" og \"Markeringsfarve\" benyttet."
 
 #: ../data/gedit.schemas.in.h:110
-#, fuzzy
 msgid ""
 "Whether to use the system's default fixed width font for editing text "
 "instead of a font specific to gedit. If this option is turned off, then the "
 "font named in the \"Editor Font\" option will be used instead of the system "
 "font."
 msgstr ""
-"Om systemets standardskrifttype for redigeringsteksten skal bruges. Hvis "
-"dette er slået fra, bliver den skrifttype der er angivet under "
+"Om systemets forvalgte fastbredde-skrifttype skal bruges ved redigering. "
+"Hvis dette er slået fra, bliver den skrifttype der er angivet under "
 "\"Redigeringsskrifttype\", brugt i stedet."
 
 #: ../data/gedit.schemas.in.h:111
@@ -607,9 +605,8 @@ msgstr "[ISO-8859-15]"
 #. See http://svn.gnome.org/viewcvs/gedit/trunk/gedit/gedit-encodings.c?view=markup for
 #. a list of supported encodings
 #: ../data/gedit.schemas.in.h:126
-#, fuzzy
 msgid "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
-msgstr "[UTF-8,CURRENT,ISO-8859-15]"
+msgstr "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:140
 msgid "Logout _without Saving"
@@ -672,7 +669,6 @@ msgstr[1] ""
 "Hvis du ikke gemmer, vil ændringer fra de sidste %ld minutter gå tabt."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:451
-#, fuzzy
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgstr "Hvis du ikke gemmer, vil ændringer fra den sidste time gå tabt."
 
@@ -691,7 +687,7 @@ msgstr[1] ""
 "tabt."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be permanently lost."
 msgid_plural ""
@@ -891,7 +887,7 @@ msgstr ""
 #: ../gedit/dialogs/gedit-preferences-dialog.c:670
 #, c-format
 msgid "_Use the system fixed width font (%s)"
-msgstr ""
+msgstr "Br_ug systemets fastbredde-skrifttype (%s)"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.c:1178
 msgid "Elements"
@@ -973,7 +969,7 @@ msgstr "Fremhævnings_tilstand"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:23
 msgid "Highlight matching _bracket"
-msgstr "Fremhæv modsvarende _parantes"
+msgstr "Fremhæv modsvarende _parentes"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:24
 msgid "Insert _spaces instead of tabs"
@@ -1105,7 +1101,7 @@ msgid "Replace _All"
 msgstr "Erstat _alle"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:391
-#: ../gedit/gedit-commands-file.c:661
+#: ../gedit/gedit-commands-file.c:673
 msgid "_Replace"
 msgstr "_Erstat"
 
@@ -1171,59 +1167,59 @@ msgstr "%s: ugyldig kodning.\n"
 msgid "- Edit text files"
 msgstr "- Redigér tekstfiler"
 
-#: ../gedit/gedit-commands-file.c:212 ../gedit/gedit-commands-file.c:258
+#: ../gedit/gedit-commands-file.c:224 ../gedit/gedit-commands-file.c:270
 #, c-format
 msgid "Loading file '%s'…"
 msgstr "Indlæser filen \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:267
+#: ../gedit/gedit-commands-file.c:279
 #, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
 msgstr[0] "Indlæser %d fil…"
 msgstr[1] "Indlæser %d filer…"
 
-#: ../gedit/gedit-commands-file.c:407
+#: ../gedit/gedit-commands-file.c:419
 msgid "Open Files…"
 msgstr "Åbn filer..."
 
-#: ../gedit/gedit-commands-file.c:513
+#: ../gedit/gedit-commands-file.c:525
 msgid "The entered location is not valid."
 msgstr "Det angivne sted er ikke gyldigt."
 
-#: ../gedit/gedit-commands-file.c:516
+#: ../gedit/gedit-commands-file.c:528
 msgid "Please, check that you typed the location correctly and try again."
 msgstr "Kontrollér at du har indtastet stedet korrekt og prøv igen."
 
-#: ../gedit/gedit-commands-file.c:642
+#: ../gedit/gedit-commands-file.c:654
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "Filen \"%s\" er skrivebeskyttet."
 
-#: ../gedit/gedit-commands-file.c:653
+#: ../gedit/gedit-commands-file.c:665
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Vil du forsøge at erstatte den med den du er ved at gemme?"
 
-#: ../gedit/gedit-commands-file.c:719 ../gedit/gedit-commands-file.c:918
+#: ../gedit/gedit-commands-file.c:731 ../gedit/gedit-commands-file.c:930
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Gemmer filen \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:816
+#: ../gedit/gedit-commands-file.c:828
 msgid "Save As…"
 msgstr "Gem som…"
 
-#: ../gedit/gedit-commands-file.c:1113
+#: ../gedit/gedit-commands-file.c:1109
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Forkaster ændringer i dokumentet \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:1135
+#: ../gedit/gedit-commands-file.c:1154
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Forkast ugemte ændringer i dokumentet \"%s\"?"
 
-#: ../gedit/gedit-commands-file.c:1144
+#: ../gedit/gedit-commands-file.c:1163
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1236,13 +1232,13 @@ msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for de sidste %ld sekunder vil gå "
 "tabt."
 
-#: ../gedit/gedit-commands-file.c:1153
+#: ../gedit/gedit-commands-file.c:1172
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Ændringer foretaget i dokumentet inden for det sidste minut vil gå tabt."
 
-#: ../gedit/gedit-commands-file.c:1159
+#: ../gedit/gedit-commands-file.c:1178
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1257,7 +1253,7 @@ msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for det sidste minut og %ld sekunder "
 "gå tabt."
 
-#: ../gedit/gedit-commands-file.c:1169
+#: ../gedit/gedit-commands-file.c:1188
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1270,13 +1266,12 @@ msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for de sidste %ld minutter vil gå "
 "tabt."
 
-#: ../gedit/gedit-commands-file.c:1184
-#, fuzzy
+#: ../gedit/gedit-commands-file.c:1203
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Ændringer foretaget i dokumentet inden for den sidste time vil gå tabt."
 
-#: ../gedit/gedit-commands-file.c:1190
+#: ../gedit/gedit-commands-file.c:1209
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1291,8 +1286,8 @@ msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for den sidste time og %d minutter gå "
 "tabt."
 
-#: ../gedit/gedit-commands-file.c:1205
-#, fuzzy, c-format
+#: ../gedit/gedit-commands-file.c:1224
+#, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
 msgid_plural ""
@@ -1302,7 +1297,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for de sidste %d timer vil gå tabt."
 
-#: ../gedit/gedit-commands-file.c:1231
+#: ../gedit/gedit-commands-file.c:1250
 msgid "_Revert"
 msgstr "_Forkast"
 
@@ -1321,6 +1316,7 @@ msgstr ""
 "Marie Lund\n"
 "Martin Willemoes Hansen\n"
 "Ole Laursen\n"
+"Kenneth Nielsen\n"
 "\n"
 "Dansk-gruppen <dansk@klid.dk>\n"
 "Mere info: http://www.klid.dk/dansk/"
@@ -1457,7 +1453,7 @@ msgstr "Kinesisk, forenklet"
 
 #: ../gedit/gedit-encodings.c:227
 msgid "Georgian"
-msgstr "Geogiansk"
+msgstr "Georgiansk"
 
 #: ../gedit/gedit-encodings.c:257
 msgid "Cyrillic/Ukrainian"
@@ -1490,88 +1486,85 @@ msgstr "Aktuel region (%s)"
 msgid "Add or _Remove..."
 msgstr "Tilføj eller _fjern..."
 
-#: ../gedit/gedit-file-chooser-dialog.c:72
-msgid "C_haracter Coding:"
-msgstr "_Tegnkodning:"
-
-#: ../gedit/gedit-file-chooser-dialog.c:189
+#: ../gedit/gedit-file-chooser-dialog.c:52
 msgid "All Files"
 msgstr "Alle filer"
 
-#: ../gedit/gedit-file-chooser-dialog.c:197
+#: ../gedit/gedit-file-chooser-dialog.c:53
 msgid "All Text Files"
 msgstr "Alle tekstfiler"
+
+#: ../gedit/gedit-file-chooser-dialog.c:79
+msgid "C_haracter Coding:"
+msgstr "_Tegnkodning:"
 
 #: ../gedit/gedit-help.c:66
 msgid "There was an error displaying help."
 msgstr "Der opstod en fejl ved visning af hjælp."
 
-#: ../gedit/gedit-io-error-message-area.c:186
+#: ../gedit/gedit-io-error-message-area.c:185
 #, c-format
 msgid "Could not find the file %s."
 msgstr "Kunne ikke finde filen \"%s\"."
 
-#: ../gedit/gedit-io-error-message-area.c:188
-#: ../gedit/gedit-io-error-message-area.c:227
-#: ../gedit/gedit-io-error-message-area.c:243
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:187
+#: ../gedit/gedit-io-error-message-area.c:226
+#: ../gedit/gedit-io-error-message-area.c:242
 msgid "Please check that you typed the location correctly and try again."
 msgstr "Kontrollér at du har indtastet stedet korrekt og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:193
-#: ../gedit/gedit-io-error-message-area.c:432
+#: ../gedit/gedit-io-error-message-area.c:192
+#: ../gedit/gedit-io-error-message-area.c:431
 msgid "The file contains corrupted data."
 msgstr "Filen indeholder ødelagte data."
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:204
-#: ../gedit/gedit-io-error-message-area.c:443
+#: ../gedit/gedit-io-error-message-area.c:203
+#: ../gedit/gedit-io-error-message-area.c:442
 #, c-format
 msgid "gedit cannot handle %s locations."
 msgstr "Kan ikke håndtere \"%s\"-steder."
 
-#: ../gedit/gedit-io-error-message-area.c:210
-#: ../gedit/gedit-io-error-message-area.c:449
+#: ../gedit/gedit-io-error-message-area.c:209
+#: ../gedit/gedit-io-error-message-area.c:448
 msgid "gedit cannot handle this location."
 msgstr "Kan ikke håndtere dette sted."
 
-#: ../gedit/gedit-io-error-message-area.c:217
-#: ../gedit/gedit-io-error-message-area.c:456
+#: ../gedit/gedit-io-error-message-area.c:216
+#: ../gedit/gedit-io-error-message-area.c:455
 msgid "The file contains data in an invalid format."
 msgstr "Filen indeholder data i et ugyldigt format."
 
-#: ../gedit/gedit-io-error-message-area.c:221
-#: ../gedit/gedit-io-error-message-area.c:460
+#: ../gedit/gedit-io-error-message-area.c:220
+#: ../gedit/gedit-io-error-message-area.c:459
 msgid "The file is too big."
 msgstr "Filen er for stor."
 
-#: ../gedit/gedit-io-error-message-area.c:225
+#: ../gedit/gedit-io-error-message-area.c:224
 #, c-format
 msgid "%s is not a valid location."
 msgstr "%s er ikke et gyldigt sted."
 
-#: ../gedit/gedit-io-error-message-area.c:232
-#: ../gedit/gedit-io-error-message-area.c:464
+#: ../gedit/gedit-io-error-message-area.c:231
+#: ../gedit/gedit-io-error-message-area.c:463
 msgid "You do not have the permissions necessary to open the file."
 msgstr "Du har ikke de nødvendige rettigheder til at åbne filen."
 
-#: ../gedit/gedit-io-error-message-area.c:236
-#: ../gedit/gedit-io-error-message-area.c:468
-#: ../gedit/gedit-io-error-message-area.c:1221
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:235
+#: ../gedit/gedit-io-error-message-area.c:467
+#: ../gedit/gedit-io-error-message-area.c:1220
 msgid ""
 "There are too many open files. Please close some applications and try again."
 msgstr "Der er for mange filer åbne. Luk nogle programmer og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:241
-#: ../gedit/gedit-io-error-message-area.c:473
+#: ../gedit/gedit-io-error-message-area.c:240
+#: ../gedit/gedit-io-error-message-area.c:472
 #, c-format
 msgid "%s is a directory."
 msgstr "\"%s\" er en mappe."
 
-#: ../gedit/gedit-io-error-message-area.c:248
-#: ../gedit/gedit-io-error-message-area.c:478
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:247
+#: ../gedit/gedit-io-error-message-area.c:477
 msgid ""
 "Not enough available memory to open the file. Please close some running "
 "applications and try again."
@@ -1579,26 +1572,25 @@ msgstr ""
 "Ikke tilstrækkeligt med hukommelse til at åbne filen. Luk nogle åbne "
 "programmer og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:276
-#: ../gedit/gedit-io-error-message-area.c:506
-#: ../gedit/gedit-io-error-message-area.c:1260
-#, fuzzy, c-format
+#: ../gedit/gedit-io-error-message-area.c:275
+#: ../gedit/gedit-io-error-message-area.c:505
+#: ../gedit/gedit-io-error-message-area.c:1259
+#, c-format
 msgid ""
 "Host %s could not be found. Please check that your proxy settings are "
 "correct and try again."
 msgstr ""
-"Værten \"%s\" blev ikke fundet. Kontrollér at dine proxy-indstillinger er "
-"korrekte og prøv igen."
+"Værten \"%s\" blev ikke fundet. Kontrollér at dine mellemværts-indstillinger "
+"er korrekte og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:287
-#: ../gedit/gedit-io-error-message-area.c:298
-#: ../gedit/gedit-io-error-message-area.c:306
-#: ../gedit/gedit-io-error-message-area.c:517
-#: ../gedit/gedit-io-error-message-area.c:528
-#: ../gedit/gedit-io-error-message-area.c:1271
-#: ../gedit/gedit-io-error-message-area.c:1282
-#: ../gedit/gedit-io-error-message-area.c:1290
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:286
+#: ../gedit/gedit-io-error-message-area.c:297
+#: ../gedit/gedit-io-error-message-area.c:305
+#: ../gedit/gedit-io-error-message-area.c:516
+#: ../gedit/gedit-io-error-message-area.c:527
+#: ../gedit/gedit-io-error-message-area.c:1270
+#: ../gedit/gedit-io-error-message-area.c:1281
+#: ../gedit/gedit-io-error-message-area.c:1289
 msgid ""
 "Host name was invalid. Please check that you typed the location correctly "
 "and try again."
@@ -1606,20 +1598,18 @@ msgstr ""
 "Værtsnavnet er ugyldigt. Kontrollér at du har indtastet stedet korrekt og "
 "prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:312
-#: ../gedit/gedit-io-error-message-area.c:536
-#: ../gedit/gedit-io-error-message-area.c:1296
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:311
+#: ../gedit/gedit-io-error-message-area.c:535
+#: ../gedit/gedit-io-error-message-area.c:1295
 msgid ""
 "Host name was empty. Please check that your proxy settings are correct and "
 "try again."
 msgstr ""
-"Værtsnavnet var tomt. Kontrollér at mellemværtsindstillingerne er korrekte "
+"Værtsnavnet var tomt. Kontrollér at mellemværts-indstillingerne er korrekte "
 "og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:318
-#: ../gedit/gedit-io-error-message-area.c:1302
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:317
+#: ../gedit/gedit-io-error-message-area.c:1301
 msgid ""
 "Attempt to log in failed. Please check that you typed the location correctly "
 "and try again."
@@ -1627,86 +1617,85 @@ msgstr ""
 "Forsøg på at logge på mislykkedes. Kontrollér at du har indtastet stedet "
 "korrekt prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:324
+#: ../gedit/gedit-io-error-message-area.c:323
 msgid "The file you are trying to open is not a regular file."
 msgstr "Filen du prøver at åbne, er ikke en almindelig fil."
 
-#: ../gedit/gedit-io-error-message-area.c:328
-#: ../gedit/gedit-io-error-message-area.c:551
-#: ../gedit/gedit-io-error-message-area.c:1330
+#: ../gedit/gedit-io-error-message-area.c:327
+#: ../gedit/gedit-io-error-message-area.c:550
+#: ../gedit/gedit-io-error-message-area.c:1329
 msgid "Connection timed out. Please try again."
-msgstr ""
+msgstr "Tidsfristen for forbindelsen udløb. Prøv venligst igen."
 
-#: ../gedit/gedit-io-error-message-area.c:367
-#: ../gedit/gedit-io-error-message-area.c:601
-#: ../gedit/gedit-io-error-message-area.c:1371
+#: ../gedit/gedit-io-error-message-area.c:366
+#: ../gedit/gedit-io-error-message-area.c:600
+#: ../gedit/gedit-io-error-message-area.c:1370
 #, c-format
 msgid "Unexpected error: %s"
 msgstr "Uventet fejl: %s"
 
-#: ../gedit/gedit-io-error-message-area.c:373
-#: ../gedit/gedit-io-error-message-area.c:767
+#: ../gedit/gedit-io-error-message-area.c:372
+#: ../gedit/gedit-io-error-message-area.c:766
 #, c-format
 msgid "Could not open the file %s."
 msgstr "Kunne ikke åbne filen \"%s\"."
 
-#: ../gedit/gedit-io-error-message-area.c:382
-#: ../gedit/gedit-io-error-message-area.c:674
+#: ../gedit/gedit-io-error-message-area.c:381
+#: ../gedit/gedit-io-error-message-area.c:673
 msgid "_Retry"
 msgstr "_Prøv igen"
 
-#: ../gedit/gedit-io-error-message-area.c:427
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:426
 msgid "gedit cannot find it. Perhaps it has recently been deleted."
 msgstr "Kan ikke finde filen. Måske er den lige blevet slettet."
 
-#: ../gedit/gedit-io-error-message-area.c:542
+#: ../gedit/gedit-io-error-message-area.c:541
 msgid "Attempt to log in failed."
 msgstr "Forsøg på at logge på mislykkedes."
 
-#: ../gedit/gedit-io-error-message-area.c:546
+#: ../gedit/gedit-io-error-message-area.c:545
 #, c-format
 msgid "%s is not a regular file."
 msgstr "%s er ikke en almindelig fil."
 
-#: ../gedit/gedit-io-error-message-area.c:607
+#: ../gedit/gedit-io-error-message-area.c:606
 #, c-format
 msgid "Could not revert the file %s."
 msgstr "Kunne ikke forkaste ændringerne i filen \"%s\"."
 
-#: ../gedit/gedit-io-error-message-area.c:631
+#: ../gedit/gedit-io-error-message-area.c:630
 msgid "Ch_aracter Coding:"
 msgstr "_Tegnkodning:"
 
-#: ../gedit/gedit-io-error-message-area.c:769
+#: ../gedit/gedit-io-error-message-area.c:768
 msgid "gedit has not been able to detect the character coding."
 msgstr "Kunne ikke bestemme tegnkodningen."
 
-#: ../gedit/gedit-io-error-message-area.c:771
-#: ../gedit/gedit-io-error-message-area.c:780
+#: ../gedit/gedit-io-error-message-area.c:770
+#: ../gedit/gedit-io-error-message-area.c:779
 msgid "Please check that you are not trying to open a binary file."
 msgstr "Kontrollér at du ikke er ved at åbne en binær fil."
 
-#: ../gedit/gedit-io-error-message-area.c:772
+#: ../gedit/gedit-io-error-message-area.c:771
 msgid "Select a character coding from the menu and try again."
 msgstr "Vælg en tegnkodning fra menuen og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:777
+#: ../gedit/gedit-io-error-message-area.c:776
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
 msgstr "Kunne ikke åbne filen \"%s\" med tegnkodningen %s."
 
-#: ../gedit/gedit-io-error-message-area.c:781
-#: ../gedit/gedit-io-error-message-area.c:833
+#: ../gedit/gedit-io-error-message-area.c:780
+#: ../gedit/gedit-io-error-message-area.c:832
 msgid "Select a different character coding from the menu and try again."
 msgstr "Vælg en anden tegnkodning fra menuen og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:828
+#: ../gedit/gedit-io-error-message-area.c:827
 #, c-format
 msgid "Could not save the file %s using the %s character coding."
 msgstr "Kunne ikke gemme filen \"%s\" med tegnkodningen %s."
 
-#: ../gedit/gedit-io-error-message-area.c:831
+#: ../gedit/gedit-io-error-message-area.c:830
 msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
@@ -1714,21 +1703,20 @@ msgstr ""
 "Dokumentet indeholder et eller flere tegn der ikke kan kodes med den angivne "
 "tegnkodning."
 
-#: ../gedit/gedit-io-error-message-area.c:894
+#: ../gedit/gedit-io-error-message-area.c:893
 msgid "_Edit Anyway"
 msgstr "_Redigér alligevel"
 
-#: ../gedit/gedit-io-error-message-area.c:897
+#: ../gedit/gedit-io-error-message-area.c:896
 msgid "_Don't Edit"
 msgstr "Redigér _ikke"
 
-#: ../gedit/gedit-io-error-message-area.c:912
-#, fuzzy, c-format
+#: ../gedit/gedit-io-error-message-area.c:911
+#, c-format
 msgid "This file (%s) is already open in another gedit window."
-msgstr "Filen (%s) er allerede åben i er andet gedit windue."
+msgstr "Filen (%s) er allerede åben i er andet gedit-vindue."
 
-#: ../gedit/gedit-io-error-message-area.c:927
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:926
 msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
@@ -1736,39 +1724,39 @@ msgstr ""
 "Den instans af filen er åbnet på måde så den ikke kan redigeres. Ønsker du "
 "at redigere den alligevel?"
 
-#: ../gedit/gedit-io-error-message-area.c:985
-#: ../gedit/gedit-io-error-message-area.c:1080
+#: ../gedit/gedit-io-error-message-area.c:984
+#: ../gedit/gedit-io-error-message-area.c:1079
 msgid "_Save Anyway"
 msgstr "_Gem alligevel"
 
-#: ../gedit/gedit-io-error-message-area.c:989
-#: ../gedit/gedit-io-error-message-area.c:1084
+#: ../gedit/gedit-io-error-message-area.c:988
+#: ../gedit/gedit-io-error-message-area.c:1083
 msgid "_Don't Save"
 msgstr "Gem _ikke"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1007
+#: ../gedit/gedit-io-error-message-area.c:1006
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "Filen \"%s\" er blevet ændret siden den blev læst sidst."
 
-#: ../gedit/gedit-io-error-message-area.c:1023
+#: ../gedit/gedit-io-error-message-area.c:1022
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr "Hvis du gemmer den, går alle eksterne ændringer tabt. Gem alligevel?"
 
-#: ../gedit/gedit-io-error-message-area.c:1102
+#: ../gedit/gedit-io-error-message-area.c:1101
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "Kunne ikke oprette en sikkerhedskopi ved gemning af %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1105
+#: ../gedit/gedit-io-error-message-area.c:1104
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "Kunne ikke oprette en midlertidig sikkerhedskopi ved gemning af %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1122
+#: ../gedit/gedit-io-error-message-area.c:1121
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1779,8 +1767,8 @@ msgstr ""
 "ved gemningen, kan du miste den gamle kopi af filen. Gem alligevel?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1183
-#, fuzzy, c-format
+#: ../gedit/gedit-io-error-message-area.c:1182
+#, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1788,8 +1776,7 @@ msgstr ""
 "Kan ikke håndtere \"%s\"-steder i skrivetilstand. Kontrollér at du har "
 "indtastet stedet korrekt og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1191
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1190
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1797,7 +1784,7 @@ msgstr ""
 "Kan ikke håndtere dette sted i skrivetilstand. Kontrollér at du har "
 "indtastet stedet korrekt og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1200
+#: ../gedit/gedit-io-error-message-area.c:1199
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1807,8 +1794,8 @@ msgstr ""
 "filstørrelserne. Forsøg at gemme en mindre fil eller gem den på en disk uden "
 "denne begrænsning."
 
-#: ../gedit/gedit-io-error-message-area.c:1207
-#, fuzzy, c-format
+#: ../gedit/gedit-io-error-message-area.c:1206
+#, c-format
 msgid ""
 "%s is not a valid location. Please check that you typed the location "
 "correctly and try again."
@@ -1816,8 +1803,7 @@ msgstr ""
 "\"%s\" er ikke et gyldigt sted. Kontrollér at du har indtastet stedet "
 "korrekt og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1214
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1213
 msgid ""
 "You do not have the permissions necessary to save the file. Please check "
 "that you typed the location correctly and try again."
@@ -1825,8 +1811,8 @@ msgstr ""
 "Du har ikke de nødvendige rettigheder til at gemme filen. Kontrollér at du "
 "har indtastet stedet korrekt og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1226
-#, fuzzy, c-format
+#: ../gedit/gedit-io-error-message-area.c:1225
+#, c-format
 msgid ""
 "%s is a directory. Please check that you typed the location correctly and "
 "try again."
@@ -1834,8 +1820,7 @@ msgstr ""
 "\"%s\" er en mappe. Kontrollér at du har indtastet stedet korrekt og prøv "
 "igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1232
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1231
 msgid ""
 "Not enough available memory to save the file. Please close some running "
 "applications and try again."
@@ -1843,17 +1828,15 @@ msgstr ""
 "Ikke tilstrækkeligt hukommelse til at gemme filen. Luk nogle åbne programmer "
 "og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1308
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1307
 msgid ""
 "There is not enough disk space to save the file. Please free some disk space "
 "and try again."
 msgstr ""
-"Der er ikke tilstrækkeligt ledig plads på disken til at gemme filen. Frigør "
+"Der er ikke tilstrækkelig ledig plads på disken til at gemme filen. Frigør "
 "noget diskplads og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1314
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1313
 msgid ""
 "You are trying to save the file on a read-only disk. Please check that you "
 "typed the location correctly and try again."
@@ -1861,14 +1844,12 @@ msgstr ""
 "Du prøver at gemme filen på en skrivebeskyttet disk. Kontrollér at du har "
 "indtastet stedet korrekt og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1320
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1319
 msgid "A file with the same name already exists. Please use a different name."
 msgstr ""
 "En fil med det samme navn eksisterer allerede. Vælg venligst et andet navn."
 
-#: ../gedit/gedit-io-error-message-area.c:1325
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1324
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please use a shorter name."
@@ -1876,8 +1857,8 @@ msgstr ""
 "Den disk du forsøger at gemme filen på, har en begrænsning på længden af "
 "filnavne. Vælg et kortere navn."
 
-#: ../gedit/gedit-io-error-message-area.c:1334
-#, fuzzy, c-format
+#: ../gedit/gedit-io-error-message-area.c:1333
+#, c-format
 msgid ""
 "%s is not a regular file. Please check that you typed the location correctly "
 "and try again."
@@ -1885,7 +1866,7 @@ msgstr ""
 "\"%s\" er ikke en almindelig fil. Kontrollér at du har indtastet stedet "
 "korrekt og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1377
+#: ../gedit/gedit-io-error-message-area.c:1376
 #, c-format
 msgid "Could not save the file %s."
 msgstr "Kunne ikke gemme filen \"%s\"."
@@ -1893,24 +1874,22 @@ msgstr "Kunne ikke gemme filen \"%s\"."
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1419
-#, fuzzy, c-format
+#: ../gedit/gedit-io-error-message-area.c:1418
+#, c-format
 msgid "The file %s changed on disk."
-msgstr "Filen er for stor."
+msgstr "Filen %s er ændret på disken."
 
-#: ../gedit/gedit-io-error-message-area.c:1424
+#: ../gedit/gedit-io-error-message-area.c:1423
 msgid "Do you want to drop your changes and reload the file?"
-msgstr ""
+msgstr "Vil du forkaste dine ændringer og genindlæse filen?"
 
-#: ../gedit/gedit-io-error-message-area.c:1426
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1425
 msgid "Do you want to reload the file?"
-msgstr "Tekst der skal søges efter"
+msgstr "Vil du genindlæse filen?"
 
-#: ../gedit/gedit-io-error-message-area.c:1436
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1435
 msgid "_Reload"
-msgstr "_Erstat"
+msgstr "_Genindlæs"
 
 #: ../gedit/gedit-notebook.c:845
 msgid "Close document"
@@ -2044,6 +2023,11 @@ msgstr "Zoom ind på siden"
 msgid "Zoom the page out"
 msgstr "Zoom ud på siden"
 
+#: ../gedit/gedit-print-job-preview.c:852
+#, fuzzy
+msgid "_Close Preview"
+msgstr "Luk udskriftsvisning"
+
 #: ../gedit/gedit-print-job-preview.c:856
 msgid "Close print preview"
 msgstr "Luk udskriftsvisning"
@@ -2157,7 +2141,7 @@ msgstr "MIME-type:"
 msgid "Encoding:"
 msgstr "Kodning:"
 
-#: ../gedit/gedit-tab.c:2181
+#: ../gedit/gedit-tab.c:2197
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Tegner side %d af %d..."
@@ -2364,14 +2348,12 @@ msgid "Go to a specific line"
 msgstr "Gå til en bestemt linje"
 
 #: ../gedit/gedit-ui.h:129
-#, fuzzy
 msgid "Incremental search..."
-msgstr "Interaktiv søgning..."
+msgstr "Løbende søgning..."
 
 #: ../gedit/gedit-ui.h:130
-#, fuzzy
 msgid "Incrementally search for text"
-msgstr "Søg efter tekst interaktivt"
+msgstr "Søg efter tekst løbende"
 
 #. Documents menu
 #: ../gedit/gedit-ui.h:133
@@ -2479,11 +2461,11 @@ msgstr "Søg kun efter _hele ord"
 msgid "_Match Case"
 msgstr "_Forskel på små/store bogstaver"
 
-#: ../gedit/gedit-view.c:1438
+#: ../gedit/gedit-view.c:1439
 msgid "String you want to search for"
 msgstr "Tekst der skal søges efter"
 
-#: ../gedit/gedit-view.c:1447
+#: ../gedit/gedit-view.c:1449
 msgid "Line you want to move the cursor to"
 msgstr "Linje som markøren skal flyttes til"
 
@@ -2523,9 +2505,9 @@ msgstr "Åbn"
 
 #. Translators: %s is a URI
 #: ../gedit/gedit-window.c:1549
-#, fuzzy, c-format
+#, c-format
 msgid "Activate '%s'"
-msgstr "Aktivér %s"
+msgstr "Aktivér \"%s\""
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
 msgid "Change Case"
@@ -2685,8 +2667,8 @@ msgid "Current word"
 msgstr "Aktuelt ord"
 
 #: ../plugins/externaltools/tools/manager.py:48
-msgid "Insert in output panel"
-msgstr "Indsæt i uddata-panel"
+msgid "Display in bottom pane"
+msgstr "Vis i bundpanelet"
 
 #: ../plugins/externaltools/tools/manager.py:49
 msgid "Create new document"
@@ -2801,7 +2783,7 @@ msgstr "_Gem:"
 
 #: ../plugins/externaltools/tools/tools.glade.h:12
 msgid "_Shortcut Key:"
-msgstr ""
+msgstr "Genvej_stast:"
 
 #: ../plugins/externaltools/tools/tools.glade.h:13
 msgid "_Tools:"
@@ -2809,54 +2791,54 @@ msgstr "_Værktøjer:"
 
 #: ../plugins/externaltools/tools/tools.glade.h:14
 msgid "gtk-revert-to-saved"
-msgstr ""
+msgstr "gtk-revert-to-saved"
 
 #: ../plugins/externaltools/data/build.desktop.in.h:1
-#, fuzzy
 msgid "Build"
-msgstr "Fed"
+msgstr "Byg"
 
 #: ../plugins/externaltools/data/build.desktop.in.h:2
-#, fuzzy
 msgid "Run \"make\" in the document directory"
-msgstr "Start “make” i dokumentmappen"
+msgstr "Start \"make\" i dokumentmappen"
 
 #: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:1
-#, fuzzy
 msgid "Open a terminal in the document location"
-msgstr "Åben en terminal i den mappe som er åben nu"
+msgstr "Åben en terminal der hvor filen er gemt"
 
 #: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:2
-#, fuzzy
 msgid "Open terminal here"
-msgstr "_Åben terminal her"
+msgstr "Åben terminal her"
 
 #: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:1
-#, fuzzy
 msgid "Remove trailing spaces"
-msgstr "_Fjern dubletter"
+msgstr "Fjern efterfølgende mellemrum"
 
 #: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:2
 msgid "Remove useless trailing spaces in your file"
-msgstr ""
+msgstr "Fjern nyttesløse afsluttende mellemrum i filen"
 
 #: ../plugins/externaltools/data/run-command.desktop.in.h:1
 msgid "Execute a custom command and put its output in a new document"
-msgstr ""
+msgstr "Kør en tilpasset kommando og anbring dens uddata i et nyt dokument"
 
 #: ../plugins/externaltools/data/run-command.desktop.in.h:2
 msgid "Run command"
-msgstr ""
+msgstr "Kør kommando"
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
 msgid "Easy file access from the side pane"
 msgstr "Enkel tilgang til filer fra sidepanel"
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "File Browser Pane"
 msgstr "Filvælger-panel"
 
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:189
+#, fuzzy
+msgid "on"
+msgstr "Ingen"
+
+#. ex:ts=8:noet:
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:1
 msgid "Enable Restore of Remote Locations"
 msgstr "Aktivér gendannelse af eksterne steder"
@@ -2999,13 +2981,12 @@ msgid "An error occurred"
 msgstr "Der opstod en fejl"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1112
-#, fuzzy
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
 msgstr ""
-"Filen kan ikke flyttes til skraldespanden\n"
-" Ønsker du at slette den med det samme?"
+"Filen kan ikke flyttes til papirkurven,\n"
+"ønsker du at slette den permanent?"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1116
 #, c-format
@@ -3013,9 +2994,8 @@ msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "Filen \"%s\" kan ikke flyttes til papirkurven."
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1119
-#, fuzzy
 msgid "The selected files cannot be moved to the trash."
-msgstr "Filen \"%s\" kan ikke flyttes til papirkurven."
+msgstr "De valgte filer kan ikke flyttes til papirkurven."
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1152
 #, c-format
@@ -3027,13 +3007,12 @@ msgstr ""
 "slette \"%s\" permanent?"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1155
-#, fuzzy
 msgid ""
 "Are you sure you want to\n"
 "permanently delete the selected files?."
 msgstr ""
-"Er du sikker at du ønsker at\n"
-"slette \"%s\" permanent?"
+"Er du sikker på at du ønsker at\n"
+"slette de valgte filer permanent?"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1158
 msgid "If you delete an item it is permanently lost."
@@ -3066,25 +3045,22 @@ msgid "Bookmarks"
 msgstr "Bogmærker"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:746
-#, fuzzy
 msgid "Recent Files"
-msgstr "Maksimalt antal seneste filer"
+msgstr "Seneste filer"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:830
 msgid "_Move To Trash"
-msgstr "_Flyt til skraldespanden"
+msgstr "_Flyt til papirkurv"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:831
-#, fuzzy
 msgid "Move selected file or folder to trash"
-msgstr "Flyt den valgte fil eller mappe til skraldespanden"
+msgstr "Flyt den valgte fil eller mappe til papirkurven"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:833
 msgid "_Delete"
 msgstr "_Slet"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:834
-#, fuzzy
 msgid "Delete selected file or folder"
 msgstr "Slet den valgte fil eller mappe"
 
@@ -3097,14 +3073,12 @@ msgid "Open the parent folder"
 msgstr "Åben den underliggende mappe"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:846
-#, fuzzy
 msgid "_New Folder"
-msgstr "Ny F_il"
+msgstr "Ny _mappe"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:847
-#, fuzzy
 msgid "Add new empty folder"
-msgstr "Tilføj ny tom fil"
+msgstr "Tilføj ny tom mappe"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:849
 msgid "New F_ile"
@@ -3119,7 +3093,6 @@ msgid "_Rename"
 msgstr "_Omdøb"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:856
-#, fuzzy
 msgid "Rename selected file or folder"
 msgstr "Omdøb den valgte fil eller mappe"
 
@@ -3149,10 +3122,9 @@ msgstr "Opdatér visningen"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:870
 msgid "_View Folder"
-msgstr ""
+msgstr "_Vis mappe"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:871
-#, fuzzy
 msgid "View folder in file manager"
 msgstr "Vis mappe i filvælgeren"
 
@@ -3161,7 +3133,6 @@ msgid "Show _Hidden"
 msgstr "Vis s_kjulte"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:879
-#, fuzzy
 msgid "Show hidden files and folders"
 msgstr "Vis skjulte filer og mapper"
 
@@ -3197,9 +3168,8 @@ msgid "Go to next location"
 msgstr "Gå til næste sted"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1193
-#, fuzzy
 msgid "_Match Filename"
-msgstr "_Forskel på små/store bogstaver"
+msgstr "_Find filnavn"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -3218,7 +3188,6 @@ msgid "Unindent selected lines"
 msgstr "Fjerner indrykningen fra de markerede linjer"
 
 #: ../plugins/indent/indent.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Indent Lines"
 msgstr "Indryk linjer"
 
@@ -3273,7 +3242,7 @@ msgstr "<b>Aktivering</b>"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:3
 msgid "S_hortcut key:"
-msgstr ""
+msgstr "_Genvejstast:"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:4
 msgid "Snippets Manager"
@@ -3298,15 +3267,17 @@ msgid ""
 "Execution of the python command (%s) exceeds the maximum time, execution "
 "aborted."
 msgstr ""
+"Eksekvering af python-kommandoen (%s) overskred maksimum-tiden, eksekvering "
+"afbrudt."
 
 #: ../plugins/snippets/snippets/SnippetPlaceholders.py:526
 #, python-format
 msgid "Execution of the python command (%s) failed: %s"
-msgstr ""
+msgstr "Eksekvering af python-kommandoen (%s) fejlede: %s"
 
 #: ../plugins/snippets/snippets/SnippetPlaceholders.py:532
 msgid "The following python code, run in a snippet, does not return a value"
-msgstr ""
+msgstr "Det følgende python-kode, kørt i en tekststump, returnerer ingen værdi"
 
 #: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
 msgid "Manage _Snippets..."
@@ -3333,13 +3304,11 @@ msgstr ""
 "eller et enkelt tegn som ikke er alfanumerisk som f.eks. { eller [."
 
 #: ../plugins/snippets/snippets/SnippetsDialog.py:600
-#, fuzzy
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr ""
 "Indtast en ny genvej eller tryk på \"slet tilbage\"-knappen for at rydde"
 
 #: ../plugins/snippets/snippets/SnippetsDialog.py:602
-#, fuzzy
 msgid "Type a new shortcut"
 msgstr "Indtast en ny genvej"
 
@@ -3433,9 +3402,9 @@ msgstr "Stavekontrol færdig"
 #. * the correct translation. You MUST OMIT it in the translated string.
 #: ../plugins/spell/gedit-spell-checker-language.c:287
 #: ../plugins/spell/gedit-spell-checker-language.c:295
-#, fuzzy, c-format
+#, c-format
 msgid "language|%s (%s)"
-msgstr "Sprog"
+msgstr "%s (%s)"
 
 #. Translators: The text before the "|" is context to help you decide on
 #. * the correct translation. You MUST OMIT it in the translated string.
@@ -3445,7 +3414,7 @@ msgstr "Sprog"
 #: ../plugins/spell/gedit-spell-checker-language.c:306
 #, c-format
 msgid "language|Unknown (%s)"
-msgstr ""
+msgstr "Ukendt (%s)"
 
 #. Translators: The text before the "|" is context to help you decide on
 #. * the correct translation. You MUST OMIT it in the translated string.
@@ -3453,7 +3422,6 @@ msgstr ""
 #. * spell checker
 #.
 #: ../plugins/spell/gedit-spell-checker-language.c:414
-#, fuzzy
 msgid "language|Default"
 msgstr "Forvalgt"
 
@@ -3571,7 +3539,6 @@ msgid "Checks the spelling of the current document."
 msgstr "Kontrollér stavningen i det aktuelle dokument."
 
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Spell Checker"
 msgstr "Stavekontrol"
 
@@ -3606,7 +3573,7 @@ msgstr "Over"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
-msgstr "Tilgængelighedsnøgletegn"
+msgstr "Tilgængeligheds-nøgletegn"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:5
 msgid "Acronym"
@@ -3638,9 +3605,8 @@ msgstr "Kode for programklassefil"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:13
-#, fuzzy
 msgid "Applet class file code (deprecated)"
-msgstr "Kode for programklassefil"
+msgstr "Kode for programklassefil (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:14
 msgid "Array"
@@ -3664,9 +3630,8 @@ msgstr "Baggrundsfarve"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Background color (deprecated)"
-msgstr "Baggrundsfarve"
+msgstr "Baggrundsfarve (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Background texture tile"
@@ -3674,9 +3639,8 @@ msgstr "Baggrundsteksturflise"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:23
-#, fuzzy
 msgid "Background texture tile (deprecated)"
-msgstr "Baggrundsteksturflise"
+msgstr "Baggrundsteksturflise (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:24
 msgid "Base URI"
@@ -3689,7 +3653,7 @@ msgstr "Stamskrifttype"
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
 msgid "Base font (deprecated)"
-msgstr ""
+msgstr "Basis skrifttype (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Border"
@@ -3698,7 +3662,7 @@ msgstr "Kant"
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:31
 msgid "Border (deprecated)"
-msgstr ""
+msgstr "Kant (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Border color"
@@ -3715,7 +3679,7 @@ msgstr "Centrér"
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Center (deprecated)"
-msgstr ""
+msgstr "Centrér (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:37
 msgid "Character encoding of linked resource"
@@ -3728,9 +3692,8 @@ msgstr "Afkrydset (tilstand)"
 
 # drejer sig om den tilstand en afkrydsningsknap/radioknap skal være i
 #: ../plugins/taglist/HTML.tags.xml.in.h:39
-#, fuzzy
 msgid "Checked state"
-msgstr "Afkrydset (tilstand)"
+msgstr "Afkrydset tilstand"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:40
 msgid "Citation"
@@ -3762,9 +3725,8 @@ msgstr "Farve for markerede henvisninger"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:48
-#, fuzzy
 msgid "Color of selected links (deprecated)"
-msgstr "Farve for markerede henvisninger"
+msgstr "Farve for markerede henvisninger  (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:49
 msgid "Column span"
@@ -3793,9 +3755,8 @@ msgstr "Indholdstype"
 #. The "type" attribute is deprecated for the "ol" tag only,
 #. since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Content type (deprecated)"
-msgstr "Indholdstype"
+msgstr "Indholdstype  (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Coordinates"
@@ -3853,9 +3814,8 @@ msgstr "Rettethed"
 # svær eftersom "retning" lige er taget
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:75
-#, fuzzy
 msgid "Directionality (deprecated)"
-msgstr "Rettethed"
+msgstr "Rettethed (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Directory list"
@@ -3913,7 +3873,7 @@ msgstr "Skrifttype"
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:90
 msgid "Font face (deprecated)"
-msgstr ""
+msgstr "Skrifttype (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:91
 msgid "For label"
@@ -4074,12 +4034,10 @@ msgstr "Vandret mellemrum"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:131
-#, fuzzy
 msgid "Horizontal space (deprecated)"
-msgstr "Vandret mellemrum"
+msgstr "Vandret mellemrum  (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:132
-#, fuzzy
 msgid "HttP header name"
 msgstr "HTTP-hovednavn"
 
@@ -4133,9 +4091,8 @@ msgstr "Java-program"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:146
-#, fuzzy
 msgid "Java applet (deprecated)"
-msgstr "Java-program"
+msgstr "Java-program (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "Label"
@@ -4159,9 +4116,8 @@ msgstr "Henvisningsfarve"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:153
-#, fuzzy
 msgid "Link color (deprecated)"
-msgstr "Henvisningsfarve"
+msgstr "Henvisningsfarve (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:154
 msgid "List item"
@@ -4228,7 +4184,7 @@ msgstr "Menuliste"
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:173
 msgid "Menu list (deprecated)"
-msgstr ""
+msgstr "Menuliste (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:174
 msgid "Multi-line text field"
@@ -4289,7 +4245,7 @@ msgstr "Ingen skygge"
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:189
 msgid "No shade (deprecated)"
-msgstr ""
+msgstr "Ingen skygge (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:190
 msgid "No word wrap"
@@ -4297,13 +4253,12 @@ msgstr "Ingen tekstombrydning"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:192
-#, fuzzy
 msgid "No word wrap (deprecated)"
-msgstr "Ingen tekstombrydning"
+msgstr "Ingen tekstombrydning (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Non-breaking space"
-msgstr ""
+msgstr "Ikke-brydende mellemrum"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Note"
@@ -4315,9 +4270,8 @@ msgstr "Objektprogramfil"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:197
-#, fuzzy
 msgid "Object applet file (deprecated)"
-msgstr "Objektprogramfil"
+msgstr "Objektprogramfil (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Object data reference"
@@ -4465,9 +4419,8 @@ msgstr "Reduceret mellemrum"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:235
-#, fuzzy
 msgid "Reduced spacing (deprecated)"
-msgstr "Reduceret mellemrum"
+msgstr "Reduceret mellemrum (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Reverse link"
@@ -4537,7 +4490,7 @@ msgstr "Størrelse"
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Size (deprecated)"
-msgstr ""
+msgstr "Størrelse (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Small text style"
@@ -4589,9 +4542,8 @@ msgstr "Startsekvensnummer"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:268
-#, fuzzy
 msgid "Starting sequence number (deprecated)"
-msgstr "Startsekvensnummer"
+msgstr "Startsekvensnummer (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:269
 msgid "Strike-through text"
@@ -4599,9 +4551,8 @@ msgstr "Gennemstreget tekst"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:271
-#, fuzzy
 msgid "Strike-through text (deprecated)"
-msgstr "Gennemstreget tekst-stil"
+msgstr "Gennemstreget tekst (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:272
 msgid "Strike-through text style"
@@ -4609,9 +4560,8 @@ msgstr "Gennemstreget tekst-stil"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:274
-#, fuzzy
 msgid "Strike-through text style (deprecated)"
-msgstr "Gennemstreget tekst-stil"
+msgstr "Gennemstreget tekst-stil (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:275
 msgid "Strong emphasis"
@@ -4707,9 +4657,8 @@ msgstr "Tekstfarve"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:299
-#, fuzzy
 msgid "Text color (deprecated)"
-msgstr "Tekstfarve"
+msgstr "Tekstfarve (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:300
 msgid "Text entered by user"
@@ -4761,9 +4710,8 @@ msgstr "Lodret mellemrum"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:313
-#, fuzzy
 msgid "Vertical space (deprecated)"
-msgstr "Lodret mellemrum"
+msgstr "Lodret mellemrum (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:314
 msgid "Visited link color"
@@ -4771,18 +4719,16 @@ msgstr "Farve for besøgt henvisning"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:316
-#, fuzzy
 msgid "Visited link color (deprecated)"
-msgstr "Farve for besøgt henvisning"
+msgstr "Farve for besøgt henvisning (forældet)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:317
 msgid "Width"
 msgstr "Bredde"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:318
-#, fuzzy
 msgid "XHTML 1.0 - Tags"
-msgstr "HTML - mærker"
+msgstr "XHTML 1.0 - mærker"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography (cite)"
@@ -4803,11 +4749,11 @@ msgstr "Litteraturliste (thebibliography)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets ()"
-msgstr "Paranteser ()"
+msgstr "Parenteser ()"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:6
 msgid "Brackets <>"
-msgstr "Paranteser <>"
+msgstr "Parenteser <>"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:7
 msgid "Brackets []"
@@ -5164,9 +5110,8 @@ msgid "self"
 msgstr "selv"
 
 #: ../plugins/taglist/XUL.tags.xml.in.h:1
-#, fuzzy
 msgid "XUL - Tags"
-msgstr "HTML - mærker"
+msgstr "XUL - mærker"
 
 #: ../plugins/time/gedit-time-plugin.c:183
 msgid "In_sert Date and Time..."
@@ -5223,6 +5168,9 @@ msgstr "_Spørg efter et format"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Benyt _brugerdefineret format"
+
+#~ msgid "Insert in output panel"
+#~ msgstr "Indsæt i uddata-panel"
 
 #~ msgid "_Use default theme font"
 #~ msgstr "_Benyt standardtemaskrifttype"
