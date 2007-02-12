@@ -195,7 +195,7 @@ parse_emacs_modeline (gchar         *s,
 			intval = atoi (value->str);
 			if (intval) options->tabs_size = intval;
 		}
-		else if (strcmp (key->str, "use-tabs") == 0)
+		else if (strcmp (key->str, "indent-tabs-mode") == 0)
 		{
 			intval = strcmp (value->str, "nil") == 0;
 			options->insert_spaces = intval;
