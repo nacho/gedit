@@ -8,6 +8,7 @@ headers
 #include "gedit-app.h"
 #include "gedit-encodings.h"
 #include "gedit-enum-types.h"
+#include "gedit-statusbar.h"
 
 void pygedit_register_classes (PyObject *d); 
 void pygedit_add_constants (PyObject *module, const gchar *strip_prefix);
@@ -42,6 +43,7 @@ import gtk.gdk.Screen as PyGdkScreen_Type
 import gtk.VBox as PyGtkVBox_Type
 import gtk.Window as PyGtkWindow_Type
 import gtk.Image as PyGtkImage_Type
+import gtk.Statusbar as PyGtkStatusbar_Type
 import gtksourceview.SourceBuffer as PyGtkSourceBuffer_Type
 import gtksourceview.SourceView as PyGtkSourceView_Type
 import gtksourceview.SourceLanguage as PyGtkSourceLanguage_Type

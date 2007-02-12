@@ -28,6 +28,13 @@
   (gtype-id "GEDIT_TYPE_PLUGIN")
 )
 
+(define-object Statusbar
+  (in-module "Gedit")
+  (parent "GtkStatusbar")
+  (c-name "GeditStatusbar")
+  (gtype-id "GEDIT_TYPE_STATUSBAR")
+)
+
 (define-object Tab
   (in-module "Gedit")
   (parent "GtkVBox")
@@ -648,7 +655,17 @@
   (return-type "GtkWidget*")
 )
 
+;; From ../../gedit/gedit-status-bar.h
 
+(define-method flash_message
+  (of-object "GeditStatusbar")
+  (c-name "gedit_statusbar_flash_message")
+  (return-type "none")
+  (parameters
+    '("int" "context_id")
+    '("const-gchar*" "message")
+  )
+ )
 
 ;; From ../../gedit/gedit-tab.h
 
