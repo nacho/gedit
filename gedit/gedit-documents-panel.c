@@ -300,15 +300,22 @@ window_tab_added (GeditWindow         *window,
 	}
 	else
 	{
-		GtkTreeSelection *selection;
+		GeditTab *active_tab;
 
 		gtk_list_store_append (GTK_LIST_STORE (panel->priv->model), 
 				       &iter);
 
-		selection = gtk_tree_view_get_selection (
-					GTK_TREE_VIEW (panel->priv->treeview));
+		active_tab = gedit_window_get_active_tab (panel->priv->window);
 
-		gtk_tree_selection_select_iter (selection, &iter);
+		if (tab == active_tab)
+		{
+			GtkTreeSelection *selection;
+
+			selection = gtk_tree_view_get_selection (
+						GTK_TREE_VIEW (panel->priv->treeview));
+
+			gtk_tree_selection_select_iter (selection, &iter);
+		}
 	}
 
 	name = tab_get_name (tab);

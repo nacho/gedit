@@ -1,5 +1,10 @@
 2007-02-24  Paolo Borelli  <pborelli@katamail.com>
 
+	* gedit/gedit-documents-panel.c: when adding a row, select
+	it only if the corresponding tab is active. Bug #407536.
+
+2007-02-24  Paolo Borelli  <pborelli@katamail.com>
+
 	* gedit/gedit-document-loader.c: handle sigbus signal
 	when acessing the mmaped file since it is fired in case
 	of I/O error. This should fix #354046.
