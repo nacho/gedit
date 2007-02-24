@@ -87,6 +87,7 @@ struct _GeditDocumentLoaderPrivate
 
 	gchar                    *buffer;
 
+	const GeditEncoding      *metadata_encoding;
 	const GeditEncoding      *auto_detected_encoding;
 
 	GError                   *error;
@@ -249,6 +250,24 @@ gedit_document_loader_new (GeditDocument *doc)
 	return dl;						  
 }
 
+static const GeditEncoding *
+get_metadata_encoding (const gchar *uri)
+{
+	const GeditEncoding *enc;
+	gchar *charset;
+
+	charset = gedit_metadata_manager_get (uri, "encoding");
+
+	if (charset == NULL)
+		return NULL;
+
+	enc = gedit_encoding_get_from_charset (charset);
+
+	g_free (charset);
+
+	return enc;
+}
+
 static void
 insert_text_in_document (GeditDocumentLoader *loader,
 			 const gchar         *text,
@@ -316,29 +335,17 @@ update_document_contents (GeditDocumentLoader  *loader,
 			/* Autodetecting the encoding: first try with the encoding
 			stored in the metadata, if any */
 
-			const GeditEncoding *enc;
-			gchar *charset;
-
-			charset = gedit_metadata_manager_get (loader->priv->uri, "encoding");
-
-			if (charset != NULL)
+			if (loader->priv->metadata_encoding != NULL)
 			{
-				enc = gedit_encoding_get_from_charset (charset);
+				converted_text = gedit_convert_to_utf8 (
+								file_contents,
+								file_size,
+								&loader->priv->metadata_encoding,
+								&new_len,
+								NULL);
 
-				if (enc != NULL)
-				{	
-					converted_text = gedit_convert_to_utf8 (
-									file_contents,
-									file_size,
-									&enc,
-									&new_len,
-									NULL);
-
-					if (converted_text != NULL)
-						loader->priv->auto_detected_encoding = enc;
-				}
-
-				g_free (charset);
+				if (converted_text != NULL)
+					loader->priv->auto_detected_encoding = loader->priv->metadata_encoding;
 			}
 		}
 
@@ -566,7 +573,7 @@ load_local_file_real (GeditDocumentLoader *loader)
 				    MAP_PRIVATE, /* flags */
 				    loader->priv->fd,
 				    0 /* offset */);
-				    
+
 		if (mapped_file == MAP_FAILED)
 		{
 			gedit_debug_message (DEBUG_LOADER, "mmap failed");
@@ -969,6 +976,11 @@ gedit_document_loader_load (GeditDocumentLoader *loader,
 	}
 
 	loader->priv->encoding = encoding;
+
+	if (encoding == NULL)
+	{
+		loader->priv->metadata_encoding = get_metadata_encoding (uri);
+	}
 
 	loader->priv->uri = g_strdup (uri);
 
