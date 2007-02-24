@@ -36,6 +36,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/mman.h>
+#include <signal.h>
+#include <setjmp.h>
 #include <string.h>
 #include <errno.h>
 
@@ -507,6 +509,18 @@ load_completed_or_failed (GeditDocumentLoader *loader)
 
 #define MAX_MIME_SNIFF_SIZE 4096
 
+static sigjmp_buf mmap_env;
+static struct sigaction old_sigbusact;
+
+/* When we access the mmapped data we need to handle
+ * SIGBUS signal, which is emitted if there was an
+ * I/O error or if the file was truncated */
+static void
+mmap_sigbus_handler (int signo)
+{
+	siglongjmp (mmap_env, 0);
+}
+
 static gboolean
 load_local_file_real (GeditDocumentLoader *loader)
 {
@@ -565,6 +579,7 @@ load_local_file_real (GeditDocumentLoader *loader)
 	{
 		gchar *mapped_file;
 		const gchar *mime_type;
+		struct sigaction sigbusact;
 
 		/* CHECK: should we lock the file */		
 		mapped_file = mmap (0, /* start */
@@ -587,9 +602,37 @@ load_local_file_real (GeditDocumentLoader *loader)
 
 			goto done;
 		}
-		
+
+		/* prepare to handle the SIGBUS signal which
+		 * may be fired when accessing the mmapped
+		 * data in case of I/O error.
+		 * See bug #354046.
+		 */
+		sigbusact.sa_handler = mmap_sigbus_handler;
+		sigemptyset (&sigbusact.sa_mask);
+		sigbusact.sa_flags = SA_RESETHAND;
+		sigaction (SIGBUS, &sigbusact, &old_sigbusact );
+
+		if (sigsetjmp (mmap_env, 1) != 0)
+		{
+			gedit_debug_message (DEBUG_LOADER, "SIGBUS during mmap");
+
+			g_set_error (&loader->priv->error,
+				     GEDIT_DOCUMENT_ERROR,
+				     GNOME_VFS_ERROR_IO,
+				     gnome_vfs_result_to_string (GNOME_VFS_ERROR_IO));
+
+			ret = munmap (mapped_file, loader->priv->info->size);
+			if (ret != 0)
+				g_warning ("File '%s' has not been correctly unmapped: %s",
+					   loader->priv->uri,
+					   strerror (errno));
+
+			goto done;
+		}
+
 		loader->priv->bytes_read = loader->priv->info->size;
-		
+
 		if (!update_document_contents (loader,
 					       mapped_file,
 					       loader->priv->info->size,
@@ -603,6 +646,9 @@ load_local_file_real (GeditDocumentLoader *loader)
 
 			goto done;
 		}
+
+		/* restore the default sigbus handler */
+		sigaction (SIGBUS, &old_sigbusact, 0);
 
 		mime_type = gnome_vfs_get_mime_type_for_name_and_data (loader->priv->local_file_name,
 				mapped_file,

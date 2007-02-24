@@ -1,5 +1,11 @@
 2007-02-24  Paolo Borelli  <pborelli@katamail.com>
 
+	* gedit/gedit-document-loader.c: handle sigbus signal
+	when acessing the mmaped file since it is fired in case
+	of I/O error. This should fix #354046.
+
+2007-02-24  Paolo Borelli  <pborelli@katamail.com>
+
 	* gedit/gedit-document-loader.c: refactor how the
 	encoding is fetched from metadata.
 

@@ -327,6 +327,16 @@ gedit_io_loading_error_message_area_new (const gchar  *uri,
 		message_details = g_strdup (_("Connection timed out. Please try again."));
 		break;
 
+	case GNOME_VFS_ERROR_IO:
+		/* FIXME: add a specific message when I are out
+		 * of string freeze
+
+		message_details = g_strdup ();
+
+		*/
+
+		break;
+
 	case GNOME_VFS_ERROR_GENERIC:
 		break;
 
