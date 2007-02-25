@@ -554,7 +554,7 @@ add_preview_widget (GeditTaglistPluginPanel *panel)
 	GtkWidget *expander;
 	GtkWidget *frame;
 
-	expander = gtk_expander_new_with_mnemonic ("_Preview");
+	expander = gtk_expander_new_with_mnemonic (_("_Preview"));
 
 	panel->priv->preview = 	gtk_label_new (NULL);
 	gtk_widget_set_size_request (panel->priv->preview, -1, 80);
@@ -570,7 +570,7 @@ add_preview_widget (GeditTaglistPluginPanel *panel)
 
 	frame = gtk_frame_new (0);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-				  
+
 	gtk_container_add (GTK_CONTAINER (frame),
 			   panel->priv->preview);
 
