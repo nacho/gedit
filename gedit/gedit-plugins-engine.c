@@ -96,7 +96,32 @@ static GList *gedit_plugins_list = NULL;
 
 static GConfClient *gedit_plugins_engine_gconf_client = NULL;
 
-GSList *active_plugins = NULL;
+static GSList *active_plugins = NULL;
+
+static void
+gedit_plugin_info_free (GeditPluginInfo *info)
+{
+	if (info->plugin != NULL)
+	{
+	       	gedit_debug_message (DEBUG_PLUGINS, "Unref plugin %s", info->name);
+
+		g_object_unref (info->plugin);
+		
+		/* info->module must not be unref since it is not possible to finalize 
+		 * a type module */
+	}
+
+	g_free (info->file);
+	g_free (info->location);
+	g_free (info->name);
+	g_free (info->desc);
+	g_free (info->icon_name);
+	g_free (info->website);
+	g_free (info->copyright);
+	g_strfreev (info->authors);
+
+	g_free (info);
+}
 
 static GeditPluginInfo *
 gedit_plugins_engine_load (const gchar *file)
@@ -258,6 +283,13 @@ error:
 	return NULL;
 }
 
+static gint
+compare_plugin_info (GeditPluginInfo *info1,
+		     GeditPluginInfo *info2)
+{
+	return strcmp (info1->location, info2->location);
+}
+
 static void
 gedit_plugins_engine_load_dir (const gchar *dir)
 {
@@ -290,6 +322,21 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 
 			if (info == NULL)
 				continue;
+
+			/* If a plugin with this name has already been loaded
+			 * drop this one (user plugins override system plugins) */
+			if (g_slist_find_custom (gedit_plugins_list,
+						 info,
+						 (GCompareFunc)compare_plugin_info) != NULL)
+			{
+				g_warning ("Two or more plugins named '%s'. "
+					   "Only the first will be considered.\n",
+					   info->location);
+
+				gedit_plugin_info_free (info);
+
+				continue;
+			}
 
 			/* Actually, the plugin will be activated when reactivate_all
 			 * will be called for the first time. */
@@ -393,26 +440,7 @@ gedit_plugins_engine_shutdown (void)
 	{
 		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
 
-		if (info->plugin != NULL)
-		{
-		       	gedit_debug_message (DEBUG_PLUGINS, "Unref plugin %s", info->name);
-
-			g_object_unref (info->plugin);
-			
-			/* info->module must not be unref since it is not possible to finalize 
-			 * a type module */
-		}
-
-		g_free (info->file);
-		g_free (info->location);
-		g_free (info->name);
-		g_free (info->desc);
-		g_free (info->icon_name);
-		g_free (info->website);
-		g_free (info->copyright);
-		g_strfreev (info->authors);
-		
-		g_free (info);
+		gedit_plugin_info_free (info);
 	}
 
 	g_slist_foreach (active_plugins, (GFunc)g_free, NULL);
