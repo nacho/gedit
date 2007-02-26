@@ -17,7 +17,7 @@ libmodelines_la_SOURCES = \
 	modeline-parser.c
 
 libmodelines_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
-libindent_la_LIBADD  = $(GEDIT_LIBS)
+libmodelines_la_LIBADD  = $(GEDIT_LIBS)
 
 plugin_in_files = modelines.gedit-plugin.desktop.in
 %.gedit-plugin: %.gedit-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache

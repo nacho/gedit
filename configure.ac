@@ -73,14 +73,14 @@ if test "x$enable_enchant" = "xyes" ; then
 			  have_enchant=yes, have_enchant=no)
 
 	if test "x$have_enchant" = "xyes"; then
-	
+
 		PKG_CHECK_EXISTS([iso-codes >= $ISO_CODES_REQUIRED],
 				 [have_iso_codes=yes],[have_iso_codes=no])
 
 		if test "x$have_iso_codes" = "xyes"; then
 			AC_MSG_CHECKING([whether iso-codes has iso-639 and iso-3166 domains])
-			if $PKG_CONFIG --variable=domains iso-codes | grep -q 639 && \
-			   $PKG_CONFIG --variable=domains iso-codes | grep -q 3166 ; then
+			if $PKG_CONFIG --variable=domains iso-codes | grep 639 > /dev/null && \
+			   $PKG_CONFIG --variable=domains iso-codes | grep 3166 > /dev/null ; then
 				result=yes
 			else
 				result=no
