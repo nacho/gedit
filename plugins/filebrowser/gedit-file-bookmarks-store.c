@@ -186,6 +186,7 @@ add_uri (GeditFileBookmarksStore * model, GnomeVFSURI * uri,
 		if (local)
 			name = tmp;
 		else {
+			/* Translators: this is used in "file on host", e.g. "/foo/bar on ftp.baz.org" */
 			name = g_strconcat(tmp, " ", _("on"), " ", gnome_vfs_uri_get_host_name (uri), NULL);
 			g_free (tmp);
 		}
