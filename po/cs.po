@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-26 15:34+0100\n"
-"PO-Revision-Date: 2007-02-26 15:34+0100\n"
+"POT-Creation-Date: 2007-02-28 14:35+0100\n"
+"PO-Revision-Date: 2007-02-28 14:35+0100\n"
 "Last-Translator: Jakub Friedl <jfriedl@suse.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -692,7 +692,6 @@ msgstr[2] ""
 "ztraceny."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:451
-#, fuzzy
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgstr ""
 "Pokud je neuložíte, budou změny provedené za poslední hodinu navždy ztraceny."
@@ -716,13 +715,14 @@ msgstr[2] ""
 "navždy ztraceny."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] ""
-"Pokud je neuložíte, budou změny provedené za poslední hodinu navždy ztraceny."
+"Pokud je neuložíte, budou změny provedené za poslední %d hodinu navždy "
+"ztraceny."
 msgstr[1] ""
 "Pokud je neuložíte, budou změny provedené za poslední %d hodiny navždy "
 "ztraceny."
@@ -1307,7 +1307,6 @@ msgstr[2] ""
 "Změny provedené v dokumentu za posledních %ld minut budou navždy ztraceny."
 
 #: ../gedit/gedit-commands-file.c:1203
-#, fuzzy
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr "Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
 
@@ -1330,13 +1329,13 @@ msgstr[2] ""
 "ztraceny."
 
 #: ../gedit/gedit-commands-file.c:1224
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] ""
-"Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
+"Změny provedené v dokumentu za poslední %d hodinu budou navždy ztraceny."
 msgstr[1] ""
 "Změny provedené v dokumentu za poslední %d hodiny budou navždy ztraceny."
 msgstr[2] ""
@@ -1757,7 +1756,6 @@ msgid "This file (%s) is already open in another gedit window."
 msgstr "Tento soubor (%s) je již otevřen v jiném okně geditu."
 
 #: ../gedit/gedit-io-error-message-area.c:936
-#, fuzzy
 msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
@@ -1811,7 +1809,7 @@ msgstr ""
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
 #: ../gedit/gedit-io-error-message-area.c:1192
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1820,7 +1818,6 @@ msgstr ""
 "jste zadali umístění správně, a zkuste to znovu."
 
 #: ../gedit/gedit-io-error-message-area.c:1200
-#, fuzzy
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1893,12 +1890,11 @@ msgid "A file with the same name already exists. Please use a different name."
 msgstr "Soubor se stejným jménem již existuje. Použijte prosím jiné jméno."
 
 #: ../gedit/gedit-io-error-message-area.c:1334
-#, fuzzy
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please use a shorter name."
 msgstr ""
-"Disk, kam se snažíte uložit tento soubor má nastaven limit délky názvu "
+"Disk, na který se snažíte uložit tento soubor, má nastaven limit délky názvu "
 "souboru. Použijte prosím kratší název."
 
 #: ../gedit/gedit-io-error-message-area.c:1343
@@ -2883,7 +2879,8 @@ msgstr "Jednoduchý přístup k souborům z postranního panelu"
 msgid "File Browser Pane"
 msgstr "Panel prohlížeče souborů"
 
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:189
+#. Translators: this is used in "file on host", e.g. "/foo/bar on ftp.baz.org"
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:190
 #, fuzzy
 msgid "on"
 msgstr "Žádný"
@@ -3303,6 +3300,8 @@ msgid ""
 "Execution of the python command (%s) exceeds the maximum time, execution "
 "aborted."
 msgstr ""
+"Vykonání pythonovského příkazu (%s) překročilo časový limit, vykonávání bylo "
+"přerušeno."
 
 #: ../plugins/snippets/snippets/SnippetPlaceholders.py:526
 #, python-format
@@ -3701,7 +3700,7 @@ msgstr "Okraj"
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:31
 msgid "Border (deprecated)"
-msgstr ""
+msgstr "Okraj (zastaralé)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Border color"
