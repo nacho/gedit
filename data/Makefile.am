@@ -16,6 +16,9 @@ pkgconfig_DATA = gedit-@GEDIT_MAJOR@.pc
 gedit-@GEDIT_MAJOR@.pc: gedit.pc
 	cp gedit.pc gedit-@GEDIT_MAJOR@.pc
 
+bugreportdir      = $(libdir)/gedit-2
+bugreport_SCRIPTS = gedit-bugreport.sh
+
 if GCONF_SCHEMAS_INSTALL
 install-data-local:
 	        if test -z "$(DESTDIR)" ; then \

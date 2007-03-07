@@ -43,6 +43,26 @@ AC_PROG_MAKE_SET
 dnl make sure we keep ACLOCAL_FLAGS around for maintainer builds to work
 AC_SUBST(ACLOCAL_AMFLAGS, "$ACLOCAL_FLAGS -I m4")
 
+dnl ===============================================================
+dnl Expanded dirs
+dnl ===============================================================
+
+# This macro expands DIR and assigns it to RET.
+# If DIR is NONE, then it's replaced by DEFAULT.
+# Based on AC_DEFINE_DIR
+AC_DEFUN([GEDIT_FULLPATH], [
+  test "x$prefix" = xNONE && prefix="$ac_default_prefix"
+  test "x$exec_prefix" = xNONE && exec_prefix='${prefix}'
+  ac_expand=[$]$1
+  test "x$ac_expand" = xNONE && ac_expand="[$]$2"
+  ac_expand=`eval echo [$]ac_expand`
+  $3=`eval echo [$]ac_expand`
+])
+
+dnl FULL_LIBDIR is used for X-GNOME-Bugzilla-ExtraInfoScript expansion
+dnl in data/gedit.desktop.in.in
+GEDIT_FULLPATH(libdir, NONE, FULL_LIBDIR)
+AC_SUBST(FULL_LIBDIR)
 
 dnl ================================================================
 dnl Gettext stuff.
