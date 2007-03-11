@@ -325,9 +325,9 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 
 			/* If a plugin with this name has already been loaded
 			 * drop this one (user plugins override system plugins) */
-			if (g_slist_find_custom (gedit_plugins_list,
-						 info,
-						 (GCompareFunc)compare_plugin_info) != NULL)
+			if (g_list_find_custom (gedit_plugins_list,
+						info,
+						(GCompareFunc)compare_plugin_info) != NULL)
 			{
 				g_warning ("Two or more plugins named '%s'. "
 					   "Only the first will be considered.\n",

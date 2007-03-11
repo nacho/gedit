@@ -34,7 +34,8 @@ EXTRA_DIST = 				\
 	$(desktop_in_files)		\
 	$(schemas_in_files)		\
 	$(man_MANS)			\
-	gedit.pc.in
+	gedit.pc.in			\
+	gedit-bugreport.sh
 
 CLEANFILES =	 			\
 	$(desktop_DATA)			\

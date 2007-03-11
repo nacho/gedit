@@ -17,6 +17,7 @@ libchangecase_la_SOURCES = \
 	gedit-changecase-plugin.c
 
 libchangecase_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libchangecase_la_LIBADD = $(GEDIT_LIBS)
 
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA =

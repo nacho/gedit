@@ -44,14 +44,14 @@ plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
 EXTRA_DIST = \
 	$(taglist_in_files) $(taglist_DATA)	\
-	$(plugin_in_files) $(plugin_DATA)	
+	$(plugin_in_files) $(plugin_DATA)
 
 CLEANFILES = \
 	$(taglist_DATA)	\
- 	$(plugin_DATA)
+	$(plugin_DATA)
 DISTCLEANFILES = \
 	$(taglist_DATA)	\
- 	$(plugin_DATA)		
+	$(plugin_DATA)
 
 
 
