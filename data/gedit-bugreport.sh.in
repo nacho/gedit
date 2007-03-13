@@ -48,7 +48,7 @@ then
 	for i in $PKG_CONFIG_MODULES
 	do
 		echo_padded "`echo -n $i | sed -r -e 's/^(.*)-[0-9]\.[0-9]$/\1/'`"
-		pkg-config --modversion $i
+		pkg-config --modversion $i 2>/dev/null || echo
 	done
 else
 	echo "  pkg-config unavailable"
