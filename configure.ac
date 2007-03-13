@@ -288,6 +288,9 @@ fi
 
 AM_CONDITIONAL([ENABLE_PYTHON],[test "x$enable_python" = "xyes"])
 
+dnl This allows the bug-report script to know whether python has been enabled
+AC_SUBST(enable_python)
+
 dnl ================================================================
 dnl Misc
 dnl ================================================================
@@ -319,6 +322,7 @@ Makefile
 bindings/Makefile
 bindings/python/Makefile
 data/gedit.desktop.in
+data/gedit-bugreport.sh
 data/gedit.pc
 data/Makefile
 docs/Makefile

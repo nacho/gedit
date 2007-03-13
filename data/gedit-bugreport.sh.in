@@ -1,0 +1,80 @@
+#!/bin/sh
+
+ENABLE_PYTHON=@enable_python@
+
+PKG_CONFIG_MODULES="glib-2.0 gtk+-2.0 gtksourceview-1.0 libgnomeui-2.0 \
+		    libglade-2.0 libgnomeprintui-2.2 gnome-vfs-2.0 \
+		    pygobject-2.0 pygtk-2.0 gnome-python-2.0 \
+		    gnome-python-desktop-2.0 enchant iso-codes"
+
+echo_padded ()
+{
+	echo -n "  - $1 "
+	N=$(echo -n $1 | wc -m)
+	while test $N -le 20
+	do
+		echo -n " "
+		N=`expr $N + 1`
+	done
+}
+
+#if (which gconftool-2 >/dev/null)
+#then
+#	echo "GConf configuration dump:"
+#	gconftool-2 --dump /apps/gedit-2 | grep -Ev "</?(entry|gconfentryfile|entrylist|value|schema_key)" | cut -c4-
+#	echo
+#fi
+
+echo "Active plugins:"
+gconftool-2 --get /apps/gedit-2/plugins/active-plugins			\
+	| sed -r -e 's/^\[(.*)\]$/\1/' -e 's/,/\n/g'			\
+	| sed -e 's/^.*$/  - \0/'
+echo
+
+# Manually installed plugins (in $HOME)
+if [ -d $HOME/.gnome2/gedit/plugins ]
+then
+	echo "Plugins in \$HOME:"
+	ls $HOME/.gnome2/gedit/plugins/*.gedit-plugin			\
+		| sed -r -e 's#.*/([^/]*)\.gedit-plugin$#  - \1#'
+else
+	echo "No plugin installed in \$HOME."
+fi
+echo
+
+echo "Module versions:"
+if (which pkg-config > /dev/null)
+then
+	for i in $PKG_CONFIG_MODULES
+	do
+		echo_padded "`echo -n $i | sed -r -e 's/^(.*)-[0-9]\.[0-9]$/\1/'`"
+		pkg-config --modversion $i
+	done
+else
+	echo "  pkg-config unavailable"
+fi
+echo
+
+echo "Python module versions:"
+if test "$ENABLE_PYTHON" = "yes"
+then
+	echo_padded "python"
+	python -V 2>&1 | cut -c8-
+
+	echo_padded "pygtk"
+	python -c "import gtk, sys; \
+		   sys.stdout.write('%d.%d.%d ' % gtk.pygtk_version); \
+		   sys.stdout.write('(GTK+ %d.%d.%d)' % gtk.gtk_version)" \
+		   2>/dev/null
+	echo
+
+	echo_padded "gnome-python"
+	python -c "import gnome, sys; \
+		   sys.stdout.write('%d.%d.%d' % gnome.gnome_python_version)" \
+		   2>/dev/null
+	echo
+else
+	echo "  Python support was not enabled at compile time."
+fi
+echo
+
