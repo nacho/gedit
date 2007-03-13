@@ -275,12 +275,14 @@ insert_text_in_document (GeditDocumentLoader *loader,
 			 const gchar         *text,
 			 gint                 len)
 {
+	g_return_if_fail (text != NULL);
+
 	gtk_source_buffer_begin_not_undoable_action (
 				GTK_SOURCE_BUFFER (loader->priv->document));
 
 	/* If the last char is a newline, don't add it to the buffer
 	(otherwise GtkTextView shows it as an empty line). See bug #324942. */
-	if (text[len-1] == '\n')
+	if ((len > 0) && (text[len-1] == '\n'))
 		len--;
 
 	/* Insert text in the buffer */
@@ -572,6 +574,9 @@ load_local_file_real (GeditDocumentLoader *loader)
 	{
 		if (loader->priv->encoding == NULL)
 			loader->priv->auto_detected_encoding = gedit_encoding_get_current ();
+
+		/* clear the contents in case we are reverting */
+		insert_text_in_document (loader, "", 0);
 
 		/* guessing the mime from the filename is up to the caller */
 	}
