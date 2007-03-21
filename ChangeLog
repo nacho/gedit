@@ -1,3 +1,15 @@
+2007-03-21  Steve Frécinaux  <code@istique.net>
+
+	* plugins/taglist/HTML.tags.xml.in:
+	* plugins/taglist/Latex.tags.xml.in:
+	* plugins/taglist/XSLT.tags.xml.in:
+	* plugins/taglist/XUL.tags.xml.in:
+
+	Set gedit namespace as the default namespace, and rework indentation.
+	This doesn't change anything for the (libxml-based) Tag list plugin,
+	but lowers the total size of the translated XML files from about 9.2M
+	to about 6.7M (27%).
+
 2007-03-13  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-document-loader.c: clear the buffer when reloading
