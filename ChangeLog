@@ -1,5 +1,16 @@
 2007-03-21  Steve Frécinaux  <code@istique.net>
 
+	* configure.ac: add AC_PATH_PROG for gzip.
+
+	* plugins/taglist/gedit-taglist-plugin-parser.c: take advantage of
+	libxml built-in gzip support.
+
+	* plugins/taglist/Makefile.am: generate gzip'ed tag files.
+
+	Total size of tags files felt from 6.7M to 560K (~92%)
+
+2007-03-21  Steve Frécinaux  <code@istique.net>
+
 	* plugins/taglist/HTML.tags.xml.in:
 	* plugins/taglist/Latex.tags.xml.in:
 	* plugins/taglist/XSLT.tags.xml.in:

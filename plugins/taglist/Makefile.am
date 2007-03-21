@@ -9,7 +9,7 @@ taglist_in_files = \
 	XSLT.tags.xml.in \
 	XUL.tags.xml.in
 
-taglist_DATA = $(taglist_in_files:.tags.xml.in=.tags)
+taglist_DATA = $(taglist_in_files:.tags.xml.in=.tags.gz)
 
 INCLUDES = 							\
 	-I$(top_srcdir) 					\
@@ -36,9 +36,12 @@ libtaglist_la_LIBADD  = $(GEDIT_LIBS)
 
 plugin_in_files = taglist.gedit-plugin.desktop.in
 
-%.gedit-plugin: %.gedit-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+%.gedit-plugin: %.gedit-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po)
+	$(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
-%.tags: %.tags.xml.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; LC_ALL=C $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -x -u -c $(top_builddir)/po/.intltool-merge-cache
+%.tags.gz: %.tags.xml.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po)
+	LC_ALL=C $(INTLTOOL_MERGE) $(top_srcdir)/po $< $(@:.gz=) -x -u -c $(top_builddir)/po/.intltool-merge-cache
+	$(GZIP) $(@:.gz=)
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
