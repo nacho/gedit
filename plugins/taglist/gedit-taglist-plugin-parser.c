@@ -579,7 +579,7 @@ parse_taglist_dir (const gchar *dir)
 	while ((e = readdir (d)) != NULL)
 	{
 		if (strncmp (e->d_name + strlen (e->d_name) - 5, ".tags", 5) == 0 ||
-		    strncmp (e->d_name + strlen (e->d_name) - 8, ".tags.gz", 5) == 0)
+		    strncmp (e->d_name + strlen (e->d_name) - 8, ".tags.gz", 8) == 0)
 		{
 			gchar *tags_file = g_strconcat (dir, e->d_name, NULL);
 			parse_taglist_file (tags_file);

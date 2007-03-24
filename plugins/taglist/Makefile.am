@@ -41,7 +41,7 @@ plugin_in_files = taglist.gedit-plugin.desktop.in
 
 %.tags.gz: %.tags.xml.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po)
 	LC_ALL=C $(INTLTOOL_MERGE) $(top_srcdir)/po $< $(@:.gz=) -x -u -c $(top_builddir)/po/.intltool-merge-cache
-	$(GZIP) $(@:.gz=)
+	$(GZIP) --best -f $(@:.gz=)
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
