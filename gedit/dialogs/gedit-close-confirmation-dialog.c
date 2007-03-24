@@ -511,11 +511,15 @@ build_single_doc_dialog (GeditCloseConfirmationDialog *dlg)
 	doc_name = gedit_document_get_short_name_for_display (doc);
 
 	if (dlg->priv->disable_save_to_disk)
-		str = g_strdup_printf (_("Changes to document \"%s\" will be permanently lost."),
-				       doc_name);
+	{
+		str = g_markup_printf_escaped (_("Changes to document \"%s\" will be permanently lost."),
+					       doc_name);
+	}
 	else
-		str = g_strdup_printf (_("Save the changes to document \"%s\" before closing?"),
-				       doc_name);
+	{
+		str = g_markup_printf_escaped (_("Save the changes to document \"%s\" before closing?"),
+					       doc_name);
+	}
 
 	g_free (doc_name);
 
