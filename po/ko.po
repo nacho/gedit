@@ -1,14 +1,14 @@
 # gedit ko.po
 # Sung-Hyun Nam <namsh@lgic.co.kr>, 1998
 # Chideok Hwang <hwang@mizi.co.kr>, 2000, 2001
-# Young-Ho, Cha <ganadist@chollian.net>, 2000, 2002
-# Changwoo Ryu <cwryu@debian.org>, 2004
+# Young-Ho, Cha <ganadist@chollian.net>, 2000, 2002, 2007
+# Changwoo Ryu <cwryu@debian.org>, 2004, 2007
 msgid ""
 msgstr ""
 "Project-Id-Version: AC_PACKAGE_NAME AC_PACKAGE_VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-02-25 13:19+0900\n"
-"PO-Revision-Date: 2007-02-25 14:18+0900\n"
+"PO-Revision-Date: 2007-03-26 06:42+0900\n"
 "Last-Translator: Young-Ho Cha <ganadist@gmail.com>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
@@ -1245,7 +1245,7 @@ msgid "translator-credits"
 msgstr ""
 "남성현 <namsh@lgic.co.kr>, 1998\n"
 "황치덕 <hwang@mizi.co.kr>, 2000, 2001\n"
-"류창우 <cwryu@debian.org>, 2004\n"
+"류창우 <cwryu@debian.org>, 2004, 2007\n"
 "차영호 <ganadist@gmail.com>, 2001 - 2003, 2005, 2006, 2007"
 
 #: ../gedit/gedit-commands-search.c:165
@@ -1876,7 +1876,7 @@ msgstr "파일: %s"
 
 #: ../gedit/gedit-print.c:194
 msgid "Page %N of %Q"
-msgstr "전체 %Q쪽 중 %N쪽"
+msgstr "전체 %Q페이지 중 %N페이지"
 
 #: ../gedit/gedit-print.c:316
 msgid "Print"
@@ -1900,21 +1900,21 @@ msgstr "그 외"
 
 #: ../gedit/gedit-print-job-preview.c:740
 msgid "Show the previous page"
-msgstr "이전 쪽 보기"
+msgstr "이전 페이지 보기"
 
 #: ../gedit/gedit-print-job-preview.c:751
 msgid "Show the next page"
-msgstr "다음 쪽 보기"
+msgstr "다음 페이지 보기"
 
 #: ../gedit/gedit-print-job-preview.c:767
 msgid "Current page (Alt+P)"
-msgstr "현재 쪽 (Alt+P)"
+msgstr "현재 페이지 (Alt+P)"
 
 #. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
 #. We are displaying 'XXX of XXX'.
 #: ../gedit/gedit-print-job-preview.c:781
 msgid "of"
-msgstr ""
+msgstr "/"
 
 #: ../gedit/gedit-print-job-preview.c:787
 msgid "Page total"
@@ -1922,11 +1922,11 @@ msgstr "페이지 전체"
 
 #: ../gedit/gedit-print-job-preview.c:788
 msgid "The total number of pages in the document"
-msgstr "문서의 전체 쪽 수"
+msgstr "문서의 전체 페이지 수 "
 
 #: ../gedit/gedit-print-job-preview.c:805
 msgid "Show multiple pages"
-msgstr "여러 쪽을 봅니다"
+msgstr "여러 페이지를 봅니다"
 
 #: ../gedit/gedit-print-job-preview.c:817
 msgid "Zoom 1:1"
@@ -1934,15 +1934,15 @@ msgstr "1:1로 확대"
 
 #: ../gedit/gedit-print-job-preview.c:825
 msgid "Zoom to fit the whole page"
-msgstr "전체 쪽을 맞게 확대"
+msgstr "전체 페이지에 맞게 크기 조정"
 
 #: ../gedit/gedit-print-job-preview.c:834
 msgid "Zoom the page in"
-msgstr "쪽 확대"
+msgstr "페이지 확대"
 
 #: ../gedit/gedit-print-job-preview.c:842
 msgid "Zoom the page out"
-msgstr "쪽 축소"
+msgstr "페이지 축소"
 
 #: ../gedit/gedit-print-job-preview.c:852
 msgid "_Close Preview"
@@ -1955,12 +1955,12 @@ msgstr "인쇄 미리보기 닫기"
 #: ../gedit/gedit-print-job-preview.c:1096
 #: ../gedit/gedit-print-job-preview.c:1097
 msgid "Number of pages horizontally"
-msgstr "쪽 번호를 세로로"
+msgstr "페이지 번호를 세로로"
 
 #: ../gedit/gedit-print-job-preview.c:1100
 #: ../gedit/gedit-print-job-preview.c:1101
 msgid "Number of pages vertically"
-msgstr "쪽 번호를 가로로"
+msgstr "페이지 번호를 가로로"
 
 #: ../gedit/gedit-print-job-preview.c:1165
 msgid "No visible output was created."
@@ -2062,7 +2062,7 @@ msgstr "인코딩:"
 #: ../gedit/gedit-tab.c:2197
 #, c-format
 msgid "Rendering page %d of %d..."
-msgstr "%2$d쪽 중 %1$d쪽 그리는 중..."
+msgstr "%2$d페이지 중 %1$d페이지 그리는 중..."
 
 #. Toplevel
 #: ../gedit/gedit-ui.h:52
@@ -2173,7 +2173,7 @@ msgstr "인쇄(_P)..."
 
 #: ../gedit/gedit-ui.h:93
 msgid "Print the current page"
-msgstr "현재 쪽을 인쇄합니다"
+msgstr "현재 페이지를 인쇄합니다"
 
 #: ../gedit/gedit-ui.h:95
 msgid "Close the current file"
@@ -2781,7 +2781,7 @@ msgid ""
 "document given that the file browser hasn't been used yet. (Thus this "
 "generally applies to opening a document from the command line or opening it "
 "with nautilus etc)"
-msgstr ""
+msgstr "참이면 파일 찾아보기 플러그인을 맨 처음 사용할 때, 주어진 문서를 맨 처음 연 디렉토리를 봅니다.(즉 명령행에서 문서를 열거나, 노틸러스에서 문서를 여는 따위의 동작에도 적용됩니다.)"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:7
 msgid "Open With Tree View"
