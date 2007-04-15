@@ -620,13 +620,21 @@ save_existing_local_file (GeditDocumentSaver *saver)
 		if (fchown (tmpfd, statbuf.st_uid, statbuf.st_gid) == -1 ||
 		    fchmod (tmpfd, statbuf.st_mode) == -1)
 		{
+			struct stat tmp_statbuf;
 			gedit_debug_message (DEBUG_SAVER, "could not set perms");
 
-			close (tmpfd);
-			unlink (tmp_filename);
-			g_free (tmp_filename);
+			/* Check that we really needed to change something */
+			if (fstat (saver->priv->fd, &tmp_statbuf) != 0 ||
+					statbuf.st_uid != tmp_statbuf.st_uid ||
+					statbuf.st_gid != tmp_statbuf.st_gid ||
+					statbuf.st_mode != tmp_statbuf.st_mode)
+			{
+				close (tmpfd);
+				unlink (tmp_filename);
+				g_free (tmp_filename);
 
-			goto fallback_strategy;
+				goto fallback_strategy;
+			}
 		}
 
 		/* copy the xattrs, like user.mime_type, over. Also ACLs and
@@ -757,6 +765,7 @@ save_existing_local_file (GeditDocumentSaver *saver)
 	if ((saver->priv->flags & GEDIT_DOCUMENT_SAVE_IGNORE_BACKUP) == 0)
 	{
 		gint bfd;
+		struct stat tmp_statbuf;
 
 		gedit_debug_message (DEBUG_SAVER, "copying to backup");
 
@@ -794,11 +803,26 @@ save_existing_local_file (GeditDocumentSaver *saver)
 			goto out;
 		}
 
-		/* Try to set the group of the backup same as the
-		 * original file. If this fails, set the protection
+		if (fstat (saver->priv->fd, &tmp_statbuf) != 0)
+		{
+			gedit_debug_message (DEBUG_SAVER, "could not stat the backup file");
+
+			g_set_error (&saver->priv->error,
+				     GEDIT_DOCUMENT_ERROR,
+				     GEDIT_DOCUMENT_ERROR_CANT_CREATE_BACKUP,
+				     "No backup created");
+
+			unlink (backup_filename);
+			close (bfd);
+			goto out;
+		}
+
+		/* If needed, Try to set the group of the backup same as
+		 * the original file. If this fails, set the protection
 		 * bits for the group same as the protection bits for
 		 * others. */
-		if (fchown (bfd, (uid_t) -1, statbuf.st_gid) != 0)
+		if ((statbuf.st_gid != tmp_statbuf.st_gid) &&
+		    fchown (bfd, (uid_t) -1, statbuf.st_gid) != 0)
 		{
 			gedit_debug_message (DEBUG_SAVER, "could not restore group");
 
