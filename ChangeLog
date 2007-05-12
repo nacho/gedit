@@ -1,7 +1,14 @@
-    
+2007-05-12  Steve Frécinaux  <code@istique.net>
+
+	* plugins/externaltools/data/build.desktop.in: Use Ctrl+F8 as the
+	shortcut for the Build tool (workaround bug #406176).
+
+	* plugins/externaltools/data/build.tool.in: Look recursively for
+	Makefiles in the parent directories of the current file.
+
 2007-04-15  Pascal Terjan  <pterjan@linuxfr.org>
 
-	* gedit/gedit-document-saver.c: Don't fail when we cannot change
+	 gedit/gedit-document-saver.c: Don't fail when we cannot change
 	rights on the backup file if it was not needed (e.g. on FAT).
 	Bug #427548
 
