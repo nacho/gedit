@@ -62,9 +62,6 @@ struct _GeditMetadataManager
 	gboolean	 values_loaded; /* It is true if the file 
 					   has been read */
 
-	gboolean	 modified;	/* It is true if the file 
-					   has top be written */
-
 	guint 		 timeout_id;
 
 	GHashTable	*items;
@@ -92,6 +89,19 @@ item_free (gpointer data)
 	g_free (item);
 }
 
+static void
+gedit_metadata_manager_arm_timeout (void)
+{
+	if (ev_metadata_manager->timeout_id)
+		return;
+	ev_metadata_manager->timeout_id = 
+		g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE,
+				    2000, /* 2 sec */
+				    (GSourceFunc)ev_metadata_manager_save,
+				    NULL,
+				    NULL);
+}
+
 static gboolean
 gedit_metadata_manager_init (void)
 {
@@ -103,7 +113,6 @@ gedit_metadata_manager_init (void)
 	gedit_metadata_manager = g_new0 (GeditMetadataManager, 1);
 
 	gedit_metadata_manager->values_loaded = FALSE;
-	gedit_metadata_manager->modified = FALSE;
 
 	gedit_metadata_manager->items = 
 		g_hash_table_new_full (g_str_hash, 
@@ -111,13 +120,6 @@ gedit_metadata_manager_init (void)
 				       g_free,
 				       item_free);
 
-	gedit_metadata_manager->timeout_id = 
-		g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE,
-				    2000, /* 2 sec */
-				    (GSourceFunc)gedit_metadata_manager_save,
-				    NULL,
-				    NULL);
-	
 	return TRUE;
 }
 
@@ -130,9 +132,12 @@ gedit_metadata_manager_shutdown (void)
 	if (gedit_metadata_manager == NULL)
 		return;
 
-	g_source_remove (gedit_metadata_manager->timeout_id);
-
-	gedit_metadata_manager_save (NULL);
+	if (gedit_metadata_manager->timeout_id)
+	{
+		g_source_remove (gedit_metadata_manager->timeout_id);
+		gedit_metadata_manager->timeout_id = 0;
+		gedit_metadata_manager_save (NULL);
+	}
 
 	if (gedit_metadata_manager->items != NULL)
 		g_hash_table_destroy (gedit_metadata_manager->items);
@@ -368,7 +373,7 @@ gedit_metadata_manager_set (const gchar *uri,
 
 	item->atime = time (NULL);
 
-	gedit_metadata_manager->modified = TRUE;
+	gedit_metadata_manager_arm_timeout ();
 }
 
 static void
@@ -481,8 +486,7 @@ gedit_metadata_manager_save (gpointer data)
 
 	gedit_debug (DEBUG_METADATA);
 
-	if (!gedit_metadata_manager->modified)
-		return TRUE;
+	ev_metadata_manager->timeout_id = 0;
 
 	resize_items ();
 		
@@ -507,10 +511,8 @@ gedit_metadata_manager_save (gpointer data)
 
 	xmlFreeDoc (doc); 
 
-	gedit_metadata_manager->modified = FALSE;
-
 	gedit_debug_message (DEBUG_METADATA, "DONE");
 
-	return TRUE;
+	return FALSE;
 }
 

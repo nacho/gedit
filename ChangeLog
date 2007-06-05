@@ -1,3 +1,11 @@
+2007-06-05  Bastien Nocera  <hadess@hadess.net>
+
+	* gedit/gedit-metadata-manager.c:
+	(gedit_metadata_manager_arm_timeout),
+	(gedit_metadata_manager_init), (gedit_metadata_manager_shutdown),
+	(gedit_metadata_manager_set), (gedit_metadata_manager_save):
+	Avoid having an always-running timeout, uses power (Closes: #444270)
+
 2007-05-12  Steve Frécinaux  <code@istique.net>
 
 	* plugins/externaltools/data/build.desktop.in: Use Ctrl+F8 as the
