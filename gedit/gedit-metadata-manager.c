@@ -92,12 +92,12 @@ item_free (gpointer data)
 static void
 gedit_metadata_manager_arm_timeout (void)
 {
-	if (ev_metadata_manager->timeout_id)
+	if (gedit_metadata_manager->timeout_id)
 		return;
-	ev_metadata_manager->timeout_id = 
+	gedit_metadata_manager->timeout_id = 
 		g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE,
 				    2000, /* 2 sec */
-				    (GSourceFunc)ev_metadata_manager_save,
+				    (GSourceFunc)gedit_metadata_manager_save,
 				    NULL,
 				    NULL);
 }
@@ -486,7 +486,7 @@ gedit_metadata_manager_save (gpointer data)
 
 	gedit_debug (DEBUG_METADATA);
 
-	ev_metadata_manager->timeout_id = 0;
+	gedit_metadata_manager->timeout_id = 0;
 
 	resize_items ();
 		
