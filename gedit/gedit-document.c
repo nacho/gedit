@@ -982,6 +982,15 @@ document_loader_loaded (GeditDocumentLoader *loader,
 			gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc),
 							    &iter,
 							    MAX (offset, 0));
+
+			/* make sure it's a valid position, if the file
+			 * changed we may have ended up in the middle of
+			 * a utf8 character cluster */
+			if (!gtk_text_iter_is_cursor_position (&iter))
+			{
+				gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (doc),
+								&iter);
+			}
 		}
 		/* otherwise to the top */
 		else
