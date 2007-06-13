@@ -18,8 +18,8 @@ AC_SUBST(GEDIT_MINOR_VERSION, gedit_minor_version)
 AC_DEFINE(GEDIT_MICRO_VERSION, gedit_micro_version, [Gedit micro version])
 AC_SUBST(GEDIT_MICRO_VERSION, gedit_micro_version)
 
-GEDIT_MAJOR=2.16
-AC_SUBST(GEDIT_MAJOR)
+GEDIT_API_VERSION=2.16
+AC_SUBST(GEDIT_API_VERSION)
 
 AM_INIT_AUTOMAKE([1.8 dist-bzip2 no-dist-gzip])
 

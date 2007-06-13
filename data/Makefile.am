@@ -11,10 +11,10 @@ schemas_DATA 	 = $(schemas_in_files:.schemas.in=.schemas)
 man_MANS = gedit.1
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = gedit-@GEDIT_MAJOR@.pc
+pkgconfig_DATA = gedit-@GEDIT_API_VERSION@.pc
 
-gedit-@GEDIT_MAJOR@.pc: gedit.pc
-	cp gedit.pc gedit-@GEDIT_MAJOR@.pc
+gedit-@GEDIT_API_VERSION@.pc: gedit.pc
+	cp gedit.pc gedit-@GEDIT_API_VERSION@.pc
 
 bugreportdir      = $(libdir)/gedit-2
 bugreport_SCRIPTS = gedit-bugreport.sh

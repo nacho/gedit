@@ -101,7 +101,7 @@ INST_H_FILES =				\
 	gedit-view.h 			\
 	gedit-window.h
 
-headerdir = $(prefix)/include/gedit-@GEDIT_MAJOR@/gedit
+headerdir = $(prefix)/include/gedit-@GEDIT_API_VERSION@/gedit
 
 header_DATA = 				\
 	$(INST_H_FILES)	
