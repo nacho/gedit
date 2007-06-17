@@ -1,3 +1,20 @@
+2007-06-17  Paolo Maggi  <paolo@gnome.org>
+
+	Fixes weird focus behavior in the search/replace dialog
+	
+	* gedit/dialogs/gedit-search-dialog.c
+	(gedit_search_dialog_present_with_time): new function
+	(gedit_search_dialog_focus_in_event): removed
+	(gedit_search_dialog_class_init): don't use 
+	gedit_search_dialog_focus_in_event
+	
+	* gedit/dialogs/gedit-search-dialog.h: added prototype of
+	gedit_search_dialog_present_with_time
+	
+	* gedit/gedit-commands-search.c (_gedit_cmd_search_find),
+	(_gedit_cmd_search_replace): call gedit_search_dialog_present_with_time
+	instead if gtk_window_present
+
 2007-06-13  Steve Frécinaux  <code@istique.net>
 
 	* configure.ac:

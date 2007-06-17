@@ -536,7 +536,8 @@ _gedit_cmd_search_find (GtkAction   *action,
 		 * it is already open
 		 */
 
-		gtk_window_present (GTK_WINDOW (data));
+		gedit_search_dialog_present_with_time (GEDIT_SEARCH_DIALOG (data),
+						       GDK_CURRENT_TIME);
 
 		return;
 	}
@@ -618,7 +619,8 @@ _gedit_cmd_search_replace (GtkAction   *action,
 			gedit_search_dialog_set_show_replace (GEDIT_SEARCH_DIALOG (data),
 							      TRUE);
 
-		gtk_window_present (GTK_WINDOW (data));
+		gedit_search_dialog_present_with_time (GEDIT_SEARCH_DIALOG (data),
+						       GDK_CURRENT_TIME);
 
 		return;
 	}

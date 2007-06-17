@@ -90,6 +90,9 @@ GType 		 gedit_search_dialog_get_type 		(void) G_GNUC_CONST;
 GtkWidget	*gedit_search_dialog_new		(GtkWindow         *parent,
 							 gboolean           show_replace);
 
+void		 gedit_search_dialog_present_with_time	(GeditSearchDialog *dialog,
+							 guint32 timestamp);
+
 gboolean	 gedit_search_dialog_get_show_replace	(GeditSearchDialog *dialog);
 
 void		 gedit_search_dialog_set_show_replace	(GeditSearchDialog *dialog,

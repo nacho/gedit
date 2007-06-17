@@ -123,28 +123,15 @@ gedit_search_dialog_get_property (GObject    *object,
 	}
 }
 
-static gboolean
-gedit_search_dialog_focus_in_event (GtkWidget     *widget,
-				    GdkEventFocus *event)
+void
+gedit_search_dialog_present_with_time (GeditSearchDialog *dialog,
+				       guint32            timestamp)
 {
-	gboolean res;
-	GeditSearchDialog *dlg = GEDIT_SEARCH_DIALOG (widget);
+	g_return_if_fail (GEDIT_SEARCH_DIALOG (dialog));
 
-	res = GTK_WIDGET_CLASS (gedit_search_dialog_parent_class)->focus_in_event (widget, event);
+	gtk_window_present_with_time (GTK_WINDOW (dialog), timestamp);
 
-	/*
-	 * If the document is focused and we print ctrl+F
-	 * we want the focus to go on the entry even if it
-	 * currently was on the Find button.
-	 */
-	if (!GTK_WIDGET_HAS_FOCUS (dlg->priv->search_text_entry))
-	{
-		gtk_widget_grab_focus (dlg->priv->search_text_entry);
-		gtk_editable_set_position (GTK_EDITABLE (dlg->priv->search_text_entry),
-					   -1);
-	}
-
-	return res;
+	gtk_widget_grab_focus (dialog->priv->search_text_entry);	
 }
 
 static gboolean
@@ -159,12 +146,10 @@ static void
 gedit_search_dialog_class_init (GeditSearchDialogClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 	GtkBindingSet *binding_set;
 	
 	object_class->set_property = gedit_search_dialog_set_property;
 	object_class->get_property = gedit_search_dialog_get_property;
-	widget_class->focus_in_event = gedit_search_dialog_focus_in_event;
 	
 	klass->show_replace = show_replace;
 	
