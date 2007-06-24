@@ -15,13 +15,12 @@
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import gtksourceview
-import gedit
-import gtk
-from gtk import gdk
 import re
 import os
 import gettext
+import gtk
+from gtk import gdk
+import gedit
 from SnippetController import SnippetController
 from SnippetsLibrary import SnippetsLibrary
 

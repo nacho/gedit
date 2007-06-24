@@ -466,11 +466,13 @@ build_suggestion_menu (GeditAutomaticSpellChecker *spell, const gchar *word)
 				 (GDestroyNotify)g_free);
 
 			g_free (label_text);
-			g_signal_connect (G_OBJECT (mi), "activate",
-					  G_CALLBACK (replace_word), spell);
-			
+			g_signal_connect (mi,
+					  "activate",
+					  G_CALLBACK (replace_word),
+					  spell);
+
 			count++;
-			
+
 			suggestions = g_slist_next (suggestions);
 		}
 	}
@@ -497,11 +499,13 @@ build_suggestion_menu (GeditAutomaticSpellChecker *spell, const gchar *word)
 				       gtk_image_new_from_stock (GTK_STOCK_GOTO_BOTTOM, 
 					       			 GTK_ICON_SIZE_MENU));
 	
-	g_signal_connect (G_OBJECT(mi), "activate",
-			  G_CALLBACK(ignore_all), spell);
-	
+	g_signal_connect (mi,
+			  "activate",
+			  G_CALLBACK(ignore_all),
+			  spell);
+
 	gtk_widget_show_all (mi);
-	
+
 	gtk_menu_shell_append (GTK_MENU_SHELL (topmenu), mi);
 
 	/* + Add to Dictionary */
@@ -510,8 +514,10 @@ build_suggestion_menu (GeditAutomaticSpellChecker *spell, const gchar *word)
 				       gtk_image_new_from_stock (GTK_STOCK_ADD, 
 					       			 GTK_ICON_SIZE_MENU));
 
-	g_signal_connect (G_OBJECT(mi), "activate",
-			  G_CALLBACK(add_to_dictionary), spell);
+	g_signal_connect (mi,
+			  "activate",
+			  G_CALLBACK (add_to_dictionary),
+			  spell);
 
 	gtk_widget_show_all (mi);
 	
@@ -656,19 +662,18 @@ popup_menu_event (GtkTextView *view, GeditAutomaticSpellChecker *spell)
 }
 
 static void
-tag_table_changed (GtkSourceTagTable          *table,
+tag_table_changed (GtkTextTagTable            *table,
 		   GeditAutomaticSpellChecker *spell)
 {
 	g_return_if_fail (spell->tag_highlight !=  NULL);
-	g_return_if_fail (GTK_TEXT_BUFFER (spell->doc)->tag_table != NULL);
-	g_return_if_fail (GTK_IS_SOURCE_TAG_TABLE (GTK_TEXT_BUFFER (spell->doc)->tag_table));
 
-	gtk_text_tag_set_priority (spell->tag_highlight, 
-				   gtk_text_tag_table_get_size (GTK_TEXT_BUFFER (spell->doc)->tag_table) - 1);
+	gtk_text_tag_set_priority (spell->tag_highlight,
+				   gtk_text_tag_table_get_size (table) - 1);
 }
 
 GeditAutomaticSpellChecker *
-gedit_automatic_spell_checker_new (GeditDocument *doc, GeditSpellChecker *checker)
+gedit_automatic_spell_checker_new (GeditDocument     *doc,
+				   GeditSpellChecker *checker)
 {
 	GeditAutomaticSpellChecker *spell;
 
@@ -699,39 +704,36 @@ gedit_automatic_spell_checker_new (GeditDocument *doc, GeditSpellChecker *checke
 				 spell, 
 				 (GDestroyNotify)gedit_automatic_spell_checker_free_internal);
 
-	g_signal_connect (G_OBJECT (doc),
+	g_signal_connect (doc,
 			  "insert-text",
 			  G_CALLBACK (insert_text_before), 
 			  spell);
-	g_signal_connect_after (G_OBJECT (doc),
+	g_signal_connect_after (doc,
 			  "insert-text",
 			  G_CALLBACK (insert_text_after), 
 			  spell);
-	g_signal_connect_after (G_OBJECT (doc),
+	g_signal_connect_after (doc,
 			  "delete-range",
 			  G_CALLBACK (delete_range_after), 
 			  spell);
-	g_signal_connect (G_OBJECT (doc),
+	g_signal_connect (doc,
 			  "mark-set",
 			  G_CALLBACK (mark_set), 
 			  spell);
 
-	g_signal_connect (G_OBJECT (spell->spell_checker),
+	g_signal_connect (spell->spell_checker,
 			  "add_word_to_session",
 			  G_CALLBACK (add_word_signal_cb),
 			  spell);
-
-	g_signal_connect (G_OBJECT (spell->spell_checker),
+	g_signal_connect (spell->spell_checker,
 			  "add_word_to_personal",
 			  G_CALLBACK (add_word_signal_cb),
 			  spell);
-
-	g_signal_connect (G_OBJECT (spell->spell_checker),
+	g_signal_connect (spell->spell_checker,
 			  "clear_session",
 			  G_CALLBACK (clear_session_cb),
 			  spell);
-
-	g_signal_connect (G_OBJECT (spell->spell_checker),
+	g_signal_connect (spell->spell_checker,
 			  "set_language",
 			  G_CALLBACK (set_language_cb),
 			  spell);
@@ -743,12 +745,11 @@ gedit_automatic_spell_checker_new (GeditDocument *doc, GeditSpellChecker *checke
 				NULL);
 
 	g_return_val_if_fail (GTK_TEXT_BUFFER (doc)->tag_table != NULL, NULL);
-	g_return_val_if_fail (GTK_IS_SOURCE_TAG_TABLE (GTK_TEXT_BUFFER (doc)->tag_table), NULL);
 
 	gtk_text_tag_set_priority (spell->tag_highlight, 
 				   gtk_text_tag_table_get_size (GTK_TEXT_BUFFER (doc)->tag_table) - 1);
 
-	g_signal_connect (G_OBJECT (GTK_TEXT_BUFFER (doc)->tag_table),
+	g_signal_connect (GTK_TEXT_BUFFER (doc)->tag_table,
 			  "changed",
                           G_CALLBACK (tag_table_changed),
 			  spell);
@@ -903,19 +904,19 @@ gedit_automatic_spell_checker_attach_view (
 	g_return_if_fail (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)) ==
 			  GTK_TEXT_BUFFER (spell->doc));
 
-	g_signal_connect (G_OBJECT (view), 
+	g_signal_connect (view,
 			  "button-press-event",
 			  G_CALLBACK (button_press_event), 
 			  spell);
-	g_signal_connect (G_OBJECT (view), 
+	g_signal_connect (view,
 			  "popup-menu",
 			  G_CALLBACK (popup_menu_event), 
 			  spell);
-	g_signal_connect (G_OBJECT (view), 
+	g_signal_connect (view,
 			  "populate-popup",
 			  G_CALLBACK (populate_popup), 
 			  spell);
-	g_signal_connect (G_OBJECT (view), 
+	g_signal_connect (view,
 			  "destroy",
 			  G_CALLBACK (view_destroy), 
 			  spell);
