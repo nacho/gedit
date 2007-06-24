@@ -48,7 +48,7 @@
 #include "gedit-utils.h"
 #include "gedit-commands.h"
 #include "gedit-debug.h"
-#include "gedit-languages-manager.h"
+#include "gedit-language-manager.h"
 #include "gedit-prefs-manager-app.h"
 #include "gedit-panel.h"
 #include "gedit-documents-panel.h"

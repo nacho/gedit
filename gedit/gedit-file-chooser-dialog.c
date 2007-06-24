@@ -43,7 +43,7 @@
 
 #include "gedit-file-chooser-dialog.h"
 #include "gedit-encodings-option-menu.h"
-#include "gedit-languages-manager.h"
+#include "gedit-language-manager.h"
 #include "gedit-prefs-manager-app.h"
 #include "gedit-debug.h"
 
