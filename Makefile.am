@@ -11,7 +11,6 @@ EXTRA_DIST = 			\
 	MAINTAINERS		\
 	xmldocs.make 		\
 	omf.make		\
-	m4			\
 	message-of-doom		\
 	gnome-doc-utils.make    \
 	intltool-extract.in 	\
