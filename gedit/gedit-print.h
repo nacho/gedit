@@ -33,7 +33,7 @@
 #define __GEDIT_PRINT_H__
 
 #include <gedit/gedit-document.h>
-#include <gtksourceview/gtksourceprintjob.h>
+#include <gedit/gtksourceprintjob.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 
 G_BEGIN_DECLS

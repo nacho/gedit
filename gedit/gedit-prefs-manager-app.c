@@ -45,6 +45,7 @@
 #include "gedit-view.h"
 #include "gedit-window.h"
 #include "gedit-window-private.h"
+#include "gedit-source-style-manager.h"
 
 static void gedit_prefs_manager_editor_font_changed	(GConfClient *client,
 							 guint        cnxn_id,
@@ -111,6 +112,11 @@ static void gedit_prefs_manager_search_hl_enable_changed(GConfClient *client,
 							 GConfEntry  *entry, 
 							 gpointer     user_data);
 
+static void gedit_prefs_manager_source_style_scheme_changed
+							(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
 
 static void gedit_prefs_manager_max_recents_changed	(GConfClient *client,
 							 guint        cnxn_id, 
@@ -224,6 +230,11 @@ gedit_prefs_manager_app_init (void)
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
 				GPM_SEARCH_HIGHLIGHTING_ENABLE,
 				gedit_prefs_manager_search_hl_enable_changed,
+				NULL, NULL, NULL);
+
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_SOURCE_STYLE_DIR,
+				gedit_prefs_manager_source_style_scheme_changed,
 				NULL, NULL, NULL);
 
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
@@ -1178,6 +1189,52 @@ gedit_prefs_manager_search_hl_enable_changed (GConfClient *client,
 									enable);
 
 			l = l->next;
+		}
+
+		g_list_free (docs);
+	}
+}
+
+static void
+gedit_prefs_manager_source_style_scheme_changed (GConfClient *client,
+						 guint        cnxn_id,
+						 GConfEntry  *entry,
+						 gpointer     user_data)
+{
+	gedit_debug (DEBUG_PREFS);
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	if (strcmp (entry->key, GPM_SOURCE_STYLE_SCHEME) == 0)
+	{
+		const gchar *scheme;
+		gboolean changed;
+		GtkSourceStyleScheme *style;
+		GList *docs;
+		GList *l;
+
+		if (entry->value->type == GCONF_VALUE_STRING)
+			scheme = gconf_value_get_string (entry->value);
+		else
+			scheme = GPM_DEFAULT_SOURCE_STYLE_SCHEME;
+
+		changed = _gedit_source_style_manager_set_default_scheme
+					(gedit_get_source_style_manager (),
+					 scheme);
+		if (!changed)
+			return;
+
+		style = gedit_source_style_manager_get_default_scheme
+					(gedit_get_source_style_manager ());
+
+		docs = gedit_app_get_documents (gedit_app_get_default ());
+		for (l = docs; l != NULL; l = l->next)
+		{
+			g_return_if_fail (GTK_IS_SOURCE_BUFFER (l->data));
+
+			gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (l->data),
+							    style);
 		}
 
 		g_list_free (docs);

@@ -30,13 +30,13 @@ gedit_la_CFLAGS = \
 
 $(top_builddir)/gedit/gedit-enum-types.h:
 	cd $(top_builddir)/gedit && $(MAKE) gedit-enum-types.h
-	
+
 gedit.c: gedit.defs gedit.override $(top_builddir)/gedit/gedit-enum-types.h
 	( cd $(srcdir) && $(PYGTK_CODEGEN) \
 		--register $(PYGTK_DEFSDIR)/pango-types.defs \
 		--register $(PYGTK_DEFSDIR)/gdk-types.defs \
 		--register $(PYGTK_DEFSDIR)/gtk-types.defs \
-		--register $(PYGTK_DEFSDIR)/gtksourceview.defs \
+		--register $(PYGTK_DEFSDIR)/gtksourceview2.defs \
 		--override $*.override \
 		--prefix py$* $(<F) ) > $@ 
 
@@ -83,7 +83,7 @@ regenerate-python-binding:
 	$(PYGTK_H2DEF) $(sort $(BINDING_COMMANDS_HEADERS_SRCDIR) $(BINDING_HEADERS_BUILDDIR)) > geditcommands.defs.new
 
 BUILT_SOURCES = \
-	gedit.c			\
+	gedit.c		\
 	geditutils.c	\
 	geditcommands.c
 

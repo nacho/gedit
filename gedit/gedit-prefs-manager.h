@@ -91,6 +91,10 @@
 #define GPM_SEARCH_HIGHLIGHTING_DIR	GPM_PREFS_DIR "/editor/search_highlighting"
 #define GPM_SEARCH_HIGHLIGHTING_ENABLE	GPM_SEARCH_HIGHLIGHTING_DIR "/enable"
 
+// FIXME: Still have to add schemas
+#define GPM_SOURCE_STYLE_DIR		GPM_PREFS_DIR "/editor/source_style"
+#define GPM_SOURCE_STYLE_SCHEME		GPM_SOURCE_STYLE_DIR "/scheme"
+
 /* UI */
 #define GPM_TOOLBAR_DIR			GPM_PREFS_DIR "/ui/toolbar"
 #define GPM_TOOLBAR_VISIBLE	 	GPM_TOOLBAR_DIR "/toolbar_visible"
@@ -232,6 +236,8 @@
 #define GPM_DEFAULT_RESTORE_CURSOR_POSITION 1 /* TRUE */
 
 #define GPM_DEFAULT_SEARCH_HIGHLIGHTING_ENABLE 1 /* TRUE */
+
+#define GPM_DEFAULT_SOURCE_STYLE_SCHEME "gvim"
 
 typedef enum {
 	GEDIT_TOOLBAR_SYSTEM = 0,
@@ -446,6 +452,11 @@ gboolean 		 gedit_prefs_manager_get_restore_cursor_position (void);
 gboolean 		 gedit_prefs_manager_get_enable_search_highlighting (void);
 void			 gedit_prefs_manager_set_enable_search_highlighting (gboolean esh);
 gboolean		 gedit_prefs_manager_enable_search_highlighting_can_set (void);
+
+/* Style scheme */
+gchar			*gedit_prefs_manager_get_source_style_scheme	(void);
+void			 gedit_prefs_manager_set_source_style_scheme	(const gchar *scheme);
+gboolean		 gedit_prefs_manager_source_style_scheme_can_set(void);
 
 /* Global lockdown */
 GeditLockdownMask	 gedit_prefs_manager_get_lockdown			(void);

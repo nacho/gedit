@@ -338,17 +338,52 @@ gedit_init_pygtk (void)
 }
 
 static void
+old_gtksourceview_init (void)
+{
+	PyErr_SetString(PyExc_ImportError,
+			"gtksourceview module not allowed, use gtksourceview2");
+}
+
+static void
 gedit_init_pygtksourceview (void)
 {
-	PyObject *gtksourceview;
+	PyObject *gtksourceview, *mdict, *version, *required_version;
 
-	gtksourceview = PyImport_ImportModule("gtksourceview");
+	gtksourceview = PyImport_ImportModule("gtksourceview2");
 	if (gtksourceview == NULL)
 	{
 		PyErr_SetString (PyExc_ImportError,
 				 "could not import gtksourceview");
 		return;
 	}
+
+	mdict = PyModule_GetDict (gtksourceview);
+	version = PyDict_GetItemString (mdict, "pygtksourceview2_version");
+	if (!version)
+	{
+		PyErr_SetString (PyExc_ImportError,
+				 "PyGtkSourceView version too old");
+		return;
+	}
+
+	required_version = Py_BuildValue ("(iii)", 0, 8, 0); /* FIXME */
+
+	if (PyObject_Compare (version, required_version) == -1)
+	{
+		PyErr_SetString (PyExc_ImportError,
+				 "PyGtkSourceView version too old");
+		Py_DECREF (required_version);
+		return;
+	}
+
+	Py_DECREF (required_version);
+
+	/* Create a dummy 'gtksourceview' module to prevent
+	 * loading of the old 'gtksourceview' modules that
+	 * has conflicting symbols with the gtksourceview2 module.
+	 * Raise an exception when trying to import it.
+	 */
+	PyImport_AppendInittab ("gtksourceview", old_gtksourceview_init);
 }
 
 gboolean
@@ -366,7 +401,7 @@ gedit_python_init (void)
 	if (init_failed)
 	{
 		/* We already failed to initialized Python, don't need to
-		   retry again */
+		 * retry again */
 		return FALSE;
 	}
 	
@@ -375,18 +410,18 @@ gedit_python_init (void)
 		/* Python has already been successfully initialized */
 		return TRUE;
 	}
-	
+
 	/* We are trying to initialize Python for the first time,
 	   set init_failed to FALSE only if the entire initialization process
 	   ends with success */
 	init_failed = TRUE;
-	
+
 	/* Hack to make python not overwrite SIGINT: this is needed to avoid
 	 * the crash reported on bug #326191 */
-	 
-       /* CHECK: can't we use Py_InitializeEx instead of Py_Initialize in order
+
+	/* CHECK: can't we use Py_InitializeEx instead of Py_Initialize in order
           to avoid to manage signal handlers ? - Paolo (Dec. 31, 2006) */
-	
+
 	/* Save old handler */
 	res = sigaction (SIGINT, NULL, &old_sigint);  
 	if (res != 0)

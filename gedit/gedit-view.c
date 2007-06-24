@@ -99,10 +99,6 @@ GtkListStore *search_completion_model = NULL;
 
 static void	gedit_view_destroy		(GtkObject       *object);
 static void	gedit_view_finalize		(GObject         *object);
-static void	gedit_view_move_cursor		(GtkTextView     *text_view,
-						 GtkMovementStep  step,
-						 gint             count,
-						 gboolean         extend_selection);
 static gint     gedit_view_focus_out		(GtkWidget       *widget,
 						 GdkEventFocus   *event);
 
@@ -156,7 +152,6 @@ gedit_view_class_init (GeditViewClass *klass)
 {
 	GObjectClass     *object_class = G_OBJECT_CLASS (klass);
 	GtkObjectClass   *gtkobject_class = GTK_OBJECT_CLASS (klass);
-	GtkTextViewClass *textview_class = GTK_TEXT_VIEW_CLASS (klass);
 	GtkWidgetClass   *widget_class = GTK_WIDGET_CLASS (klass);
 	GtkBindingSet    *binding_set;
 
@@ -169,7 +164,6 @@ gedit_view_class_init (GeditViewClass *klass)
 	klass->start_interactive_search = start_interactive_search;
 	klass->start_interactive_goto_line = start_interactive_goto_line;
 	klass->reset_searched_text = reset_searched_text;	
-	textview_class->move_cursor = gedit_view_move_cursor;
 
 	view_signals[START_INTERACTIVE_SEARCH] =
     		g_signal_new ("start_interactive_search",
@@ -211,107 +205,6 @@ gedit_view_class_init (GeditViewClass *klass)
 	gtk_binding_entry_add_signal (binding_set, GDK_k, GDK_CONTROL_MASK | GDK_SHIFT_MASK, "reset_searched_text", 0);
 	gtk_binding_entry_add_signal (binding_set, GDK_K, GDK_CONTROL_MASK | GDK_SHIFT_MASK, "reset_searched_text", 0);	
 
-}
-
-static void
-move_cursor (GtkTextView       *text_view,
-	     const GtkTextIter *new_location,
-	     gboolean           extend_selection)
-{
-	GtkTextBuffer *buffer = text_view->buffer;
-
-	if (extend_selection)
-		gtk_text_buffer_move_mark_by_name (buffer,
-						   "insert",
-						   new_location);
-	else
-		gtk_text_buffer_place_cursor (buffer, new_location);
-
-	gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (text_view),
-				      gtk_text_buffer_get_insert (buffer),
-				      GEDIT_VIEW_SCROLL_MARGIN,
-				      FALSE,
-				      0.0,
-				      0.0);
-}
-
-/*
- * This feature is implemented in gedit and not in gtksourceview since the latter
- * has a similar feature called smart home/end that it is not compatible with this 
- * one and is more "invasive". Maybe in the future we will move this feature in 
- * gtksourceview or even better in gtktextview.
- */
-static void
-gedit_view_move_cursor (GtkTextView    *text_view,
-			GtkMovementStep step,
-			gint            count,
-			gboolean        extend_selection)
-{
-	GtkTextBuffer *buffer = text_view->buffer;
-	GtkTextMark *mark;
-	GtkTextIter cur, iter;
-
-	/* really make sure gtksourceview's home/end is disabled */
-	g_return_if_fail (!gtk_source_view_get_smart_home_end (
-						GTK_SOURCE_VIEW (text_view)));
-
-	mark = gtk_text_buffer_get_insert (buffer);
-	gtk_text_buffer_get_iter_at_mark (buffer, &cur, mark);
-	iter = cur;
-
-	if (step == GTK_MOVEMENT_DISPLAY_LINE_ENDS &&
-	    (count == -1) && gtk_text_iter_starts_line (&iter))
-	{
-		/* Find the iter of the first character on the line. */
-		while (!gtk_text_iter_ends_line (&cur))
-		{
-			gunichar c;
-
-			c = gtk_text_iter_get_char (&cur);
-			if (g_unichar_isspace (c))
-				gtk_text_iter_forward_char (&cur);
-			else
-				break;
-		}
-
-		/* if we are clearing selection, we need to move_cursor even
-		 * if we are at proper iter because selection_bound may need
-		 * to be moved */
-		if (!gtk_text_iter_equal (&cur, &iter) || !extend_selection)
-			move_cursor (text_view, &cur, extend_selection);
-	}
-	else if (step == GTK_MOVEMENT_DISPLAY_LINE_ENDS &&
-	         (count == 1) && gtk_text_iter_ends_line (&iter))
-	{
-		/* Find the iter of the last character on the line. */
-		while (!gtk_text_iter_starts_line (&cur))
-		{
-			gunichar c;
-
-			gtk_text_iter_backward_char (&cur);
-			c = gtk_text_iter_get_char (&cur);
-			if (!g_unichar_isspace (c))
-			{
-				/* We've gone one character too far. */
-				gtk_text_iter_forward_char (&cur);
-				break;
-			}
-		}
-
-		/* if we are clearing selection, we need to move_cursor even
-		 * if we are at proper iter because selection_bound may need
-		 * to be moved */
-		if (!gtk_text_iter_equal (&cur, &iter) || !extend_selection)
-			move_cursor (text_view, &cur, extend_selection);
-	}
-	else
-	{
-		/* note that we chain up to GtkTextView skipping GtkSourceView */
-		(* GTK_TEXT_VIEW_CLASS (gedit_view_parent_class)->move_cursor) (text_view,
-										step,
-										count,
-										extend_selection);
-	}
 }
 
 static gboolean
@@ -378,8 +271,8 @@ gedit_view_init (GeditView *view)
 		      "show_margin", gedit_prefs_manager_get_display_right_margin (), 
 		      "margin", gedit_prefs_manager_get_right_margin_position (),
 		      "highlight_current_line", gedit_prefs_manager_get_highlight_current_line (), 
+		      "smart_home_end", GTKSOURCEVIEW_SMART_HOME_END_AFTER, /* TODO: add a gconf setting */
 		      "indent_on_tab", TRUE,
-		      "smart_home_end", FALSE, /* Never changes this */
 		      NULL);
 
 	/* Make sure that the view is scrolled to the cursor so

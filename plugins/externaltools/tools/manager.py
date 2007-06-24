@@ -20,7 +20,7 @@ __all__ = ('Manager', )
 
 import gedit
 import gtk
-import gtksourceview as gsv
+import gtksourceview2 as gsv
 from gtk import glade
 import os.path
 from library import *
@@ -133,8 +133,8 @@ class Manager(object):
     def custom_handler(self, xml, function_name, widget_name,
                        str1, str2, int1 , int2):
         if function_name == 'create_commands':
-            buf = gsv.SourceBuffer()
-            view = gsv.SourceView(buf)
+            buf = gsv.Buffer()
+            view = gsv.View(buf)
             view.set_wrap_mode(gtk.WRAP_WORD)
             view.show()
             return view
@@ -208,8 +208,8 @@ class Manager(object):
         script = default(''.join(node.get_script()), '')
         buf.set_text(script)
         self.script_hash = self.compute_hash(script)
-        mimetype = gnomevfs.get_mime_type_for_data(script)
-        language = gsv.SourceLanguagesManager().get_language_from_mime_type(mimetype)
+#        mimetype = gnomevfs.get_mime_type_for_data(script)
+#        language = gsv.SourceLanguagesManager().get_language_from_mime_type(mimetype)
         if language is not None:
             buf.set_language(language)
             buf.set_highlight(True)
@@ -362,7 +362,6 @@ class Manager(object):
     def on_accelerator_focus_out(self, entry, event):
         if self.current_node is not None:
             entry.set_text(default(self.current_node.shortcut, ''))
-
 
     def on_tool_manager_dialog_response(self, dialog, response):
         if response == gtk.RESPONSE_HELP:

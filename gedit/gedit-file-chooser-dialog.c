@@ -161,42 +161,44 @@ all_text_files_filter (const GtkFileFilterInfo *filter_info,
 
 	if (known_mime_types == NULL)
 	{
-		GtkSourceLanguagesManager *lm;
+		GtkSourceLanguageManager *lm;
 		const GSList *languages;
+		const GSList *l;
 
-		lm = gedit_get_languages_manager ();
-		languages = gtk_source_languages_manager_get_available_languages (lm);
+		lm = gedit_get_language_manager ();
+		languages = gtk_source_language_manager_get_available_languages (lm);
 
-		while (languages != NULL)
+		for (l = languages; l != NULL; l = l->next)
 		{
-			GSList *mime_types, *tmp;
+			gchar **mime_types;
+			gint i;
 			GtkSourceLanguage *lang;
 
-			lang = GTK_SOURCE_LANGUAGE (languages->data);
+			lang = l->data;
 
-			tmp = mime_types = gtk_source_language_get_mime_types (lang);
+			mime_types = gtk_source_language_get_mime_types (lang);
+			if (mime_types == NULL)
+				continue;
 
-			while (tmp != NULL)
+			for (i = 0; mime_types[i] != NULL; i++)
 			{
 				GnomeVFSMimeEquivalence res;
-				res = gnome_vfs_mime_type_get_equivalence ((const gchar*)tmp->data,
+
+				res = gnome_vfs_mime_type_get_equivalence (mime_types[i],
 									   "text/plain");
 
 				if (res == GNOME_VFS_MIME_UNRELATED)
 				{
 					gedit_debug_message (DEBUG_COMMANDS,
-							     "Mime-type %s is not related to text/plain", (const gchar*)tmp->data);
+							     "Mime-type %s is not related to text/plain",
+							     mime_types[i]);
 
-					known_mime_types = g_slist_prepend (known_mime_types, g_strdup (tmp->data));
+					known_mime_types = g_slist_prepend (known_mime_types,
+									    g_strdup (mime_types[i]));
 				}
-
-				tmp = g_slist_next (tmp);
 			}
 
-			g_slist_foreach (mime_types, (GFunc) g_free, NULL);
-			g_slist_free (mime_types);
-
-			languages = g_slist_next (languages);
+			g_strfreev (mime_types);
 		}
 
 		/* known_mime_types always has "text/plain" as first item" */

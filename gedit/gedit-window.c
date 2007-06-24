@@ -37,8 +37,6 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include <gtksourceview/gtksourcelanguage.h>
-#include <gtksourceview/gtksourcelanguagesmanager.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "gedit-ui.h"
@@ -826,17 +824,17 @@ language_toggled (GtkToggleAction *action,
 	}
 	else
 	{
-		languages = gedit_languages_manager_get_available_languages_sorted (
-						gedit_get_languages_manager ());
+		languages = gedit_language_manager_get_available_languages_sorted (
+						gedit_get_language_manager ());
 
-		lang = GTK_SOURCE_LANGUAGE (g_slist_nth_data ((GSList *) languages, n));
+		lang = g_slist_nth_data ((GSList *) languages, n);
 	}
 
 	gedit_document_set_language (doc, (GtkSourceLanguage *) lang);
 }
 
 static gchar *
-escape_section_name (gchar *name)
+escape_section_name (const gchar *name)
 {
 	gchar *tmp;
 	gchar *ret;
@@ -863,9 +861,9 @@ create_language_menu_item (GtkSourceLanguage *lang,
 	GtkRadioAction *action;
 	GtkAction *normal_action;
 	GSList *group;
-	gchar *section;
+	const gchar *section;
 	gchar *escaped_section;
-	gchar *lang_name;
+	const gchar *lang_name;
 	gchar *escaped_lang_name;
 	gchar *tip;
 	gchar *path;
@@ -898,7 +896,6 @@ create_language_menu_item (GtkSourceLanguage *lang,
 
 	/* now add the language item to the section */
 	lang_name = gtk_source_language_get_name (lang);
-
 	escaped_lang_name = g_markup_escape_text (lang_name, -1);
 
 	tip = g_strdup_printf (_("Use %s highlight mode"), lang_name);
@@ -937,9 +934,7 @@ create_language_menu_item (GtkSourceLanguage *lang,
 
 	g_free (path);
 	g_free (tip);
-	g_free (lang_name);
 	g_free (escaped_lang_name);
-	g_free (section);
 	g_free (escaped_section);
 }
 
@@ -984,11 +979,11 @@ create_languages_menu (GeditWindow *window)
 	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action_none), TRUE);
 
 	/* now add all the known languages */
-	languages = gedit_languages_manager_get_available_languages_sorted (
-						gedit_get_languages_manager ());
+	languages = gedit_language_manager_get_available_languages_sorted (
+						gedit_get_language_manager ());
 
 	for (l = languages, i = 0; l != NULL; l = l->next, ++i)
-		create_language_menu_item (GTK_SOURCE_LANGUAGE (l->data),
+		create_language_menu_item (l->data,
 					    i,
 					    id,
 					    window);
@@ -1002,7 +997,7 @@ update_languages_menu (GeditWindow *window)
 	GList *l;
 	GtkAction *action;
 	GtkSourceLanguage *lang;
-	gchar *lang_name;
+	const gchar *lang_name;
 	gchar *escaped_lang_name;
 
 	doc = gedit_window_get_active_document (window);
@@ -1013,7 +1008,7 @@ update_languages_menu (GeditWindow *window)
 	if (lang != NULL)
 		lang_name = gtk_source_language_get_name (lang);
 	else
-		lang_name = g_strdup ("LangNone");
+		lang_name = "LangNone";
 
 	escaped_lang_name = g_markup_escape_text (lang_name, -1);
 
@@ -1040,7 +1035,6 @@ update_languages_menu (GeditWindow *window)
 	}
 
 	g_list_free (actions);
-	g_free (lang_name);
 	g_free (escaped_lang_name);
 }
 
@@ -2431,32 +2425,38 @@ can_search_again (GeditDocument *doc,
 
 static void
 can_undo (GeditDocument *doc,
-          gboolean       can,
-          GeditWindow   *window)
+	  GParamSpec    *pspec,
+	  GeditWindow   *window)
 {
 	GtkAction *action;
-	
+	gboolean sensitive;
+
+	sensitive = gtk_source_buffer_can_undo (GTK_SOURCE_BUFFER (doc));
+
 	if (doc != gedit_window_get_active_document (window))
 		return;
-		
+
 	action = gtk_action_group_get_action (window->priv->action_group,
 					     "EditUndo");
-	gtk_action_set_sensitive (action, can);
+	gtk_action_set_sensitive (action, sensitive);
 }
 
 static void
 can_redo (GeditDocument *doc,
-          gboolean       can,
-          GeditWindow   *window)
+	  GParamSpec    *pspec,
+	  GeditWindow   *window)
 {
 	GtkAction *action;
+	gboolean sensitive;
+
+	sensitive = gtk_source_buffer_can_redo (GTK_SOURCE_BUFFER (doc));
 
 	if (doc != gedit_window_get_active_document (window))
 		return;
-	
+
 	action = gtk_action_group_get_action (window->priv->action_group,
 					     "EditRedo");
-	gtk_action_set_sensitive (action, can);
+	gtk_action_set_sensitive (action, sensitive);
 }
 
 static void
@@ -2633,11 +2633,11 @@ notebook_tab_added (GeditNotebook *notebook,
 			  G_CALLBACK (can_search_again),
 			  window);
 	g_signal_connect (doc,
-			  "can-undo",
+			  "notify::can-undo",
 			  G_CALLBACK (can_undo),
 			  window);
 	g_signal_connect (doc,
-			  "can-redo",
+			  "notify::can-redo",
 			  G_CALLBACK (can_redo),
 			  window);
 	g_signal_connect (doc,

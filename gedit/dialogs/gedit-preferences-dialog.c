@@ -37,9 +37,6 @@
 
 #include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
-#include <gtksourceview/gtksourcetag.h>
-#include <gtksourceview/gtksourcelanguage.h>
-#include <gtksourceview/gtksourcelanguagesmanager.h>
 
 #include <gedit/gedit-prefs-manager.h>
 
@@ -48,7 +45,6 @@
 #include "gedit-debug.h"
 #include "gedit-document.h"
 #include "gedit-plugin-manager.h"
-#include "gedit-languages-manager.h"
 #include "gedit-help.h"
 
 /*
@@ -77,6 +73,8 @@ enum
 struct _GeditPreferencesDialogPrivate
 {
 	GtkTooltips	*tooltips;
+
+	GtkWidget	*notebook;
 
 	/* Font & Colors */
 	GtkWidget	*default_font_checkbutton;
@@ -759,498 +757,6 @@ setup_font_colors_page (GeditPreferencesDialog *dlg)
 }
 
 static void
-enable_syntax_hl_button_toggled (GtkWidget              *button,
-				 GeditPreferencesDialog *dlg)
-{
-	g_return_if_fail (button == dlg->priv->enable_syntax_hl_checkbutton);
-
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
-	{
-		gedit_prefs_manager_set_enable_syntax_highlighting (TRUE);
-		gtk_widget_set_sensitive (dlg->priv->hl_vbox, TRUE);
-	}
-	else
-	{
-		gedit_prefs_manager_set_enable_syntax_highlighting (FALSE);
-		gtk_widget_set_sensitive (dlg->priv->hl_vbox, FALSE);
-	}
-}
-
-static void
-language_changed_cb (GtkComboBox            *combobox,
-		     GeditPreferencesDialog *dlg)
-{
-	const GSList *languages;
-	gint active;
-	GSList *tags, *l;
-	GtkSourceLanguage *lang;
-	GtkTreeIter iter;
-	GtkTreePath *path;
-
-	languages = gedit_languages_manager_get_available_languages_sorted (
-						gedit_get_languages_manager ());
-
-	active = gtk_combo_box_get_active (combobox);
-	if (active < 0)
-	{
-		/* no active language: no lang files found */
-		return;
-	}
-
-	lang = g_slist_nth_data ((GSList*)languages, active);
-
-	gtk_list_store_clear (dlg->priv->tags_treeview_model);
-
-	tags = gtk_source_language_get_tags (lang);
-	l = tags;
-
-	while (l != NULL)
-	{
-		gchar *name;
-		gchar *id;
-		GtkSourceTag *tag;
-
-		tag = GTK_SOURCE_TAG (l->data);
-
-		g_object_get (tag, "name", &name, "id", &id, NULL);
-		gtk_list_store_append (dlg->priv->tags_treeview_model, &iter);
-		gtk_list_store_set (dlg->priv->tags_treeview_model, 
-				    &iter, 
-				    NAME_COLUMN, name, 
-				    ID_COLUMN, id,
-				    -1);
-		g_free (name);
-		g_free (id);
-
-		l = g_slist_next (l);
-	}
-
-	g_slist_foreach (tags, (GFunc)g_object_unref, NULL);
-	g_slist_free (tags);
-	
-	/* Trigger styles_cb on first item so color & font widgets get set. */
-	path = gtk_tree_path_new_first ();
-	gtk_tree_view_set_cursor (GTK_TREE_VIEW (dlg->priv->tags_treeview), path, NULL, FALSE);
-	gtk_tree_path_free (path);
-}
-
-static GtkSourceLanguage *
-get_selected_language (GeditPreferencesDialog *dlg)
-{
-	const GSList *languages;
-	GtkSourceLanguage *lang;
-	
-	languages = gedit_languages_manager_get_available_languages_sorted (
-						gedit_get_languages_manager ());
-	lang = g_slist_nth_data ((GSList*)languages,
-		gtk_combo_box_get_active (GTK_COMBO_BOX (dlg->priv->hl_mode_combobox)));
-
-	return lang;
-}
-
-static GtkSourceTagStyle *
-get_selected_style (GeditPreferencesDialog *dlg)
-{
-	GtkTreePath *path;
-	GtkTreeIter iter;
-	gchar *id;
-	GtkSourceLanguage *lang;
-	GtkSourceTagStyle *style;
-	GtkSourceTagStyle *def_style;
-
-	gtk_tree_view_get_cursor (GTK_TREE_VIEW (dlg->priv->tags_treeview), &path, NULL);
-	gtk_tree_model_get_iter (GTK_TREE_MODEL (dlg->priv->tags_treeview_model),
-				 &iter, path);
-	gtk_tree_path_free (path);
-	gtk_tree_model_get (GTK_TREE_MODEL (dlg->priv->tags_treeview_model),
-			    &iter, ID_COLUMN, &id, -1);
-
-	lang = get_selected_language (dlg);
-
-	style = gtk_source_language_get_tag_style (lang, id);
-	def_style = gtk_source_language_get_tag_default_style (lang, id);
-
-	if (style == NULL)
-		return def_style;
-
-	style->is_default = TRUE;
-	def_style->is_default = TRUE;
-
-	style->is_default = (memcmp (style, def_style, sizeof (GtkSourceTagStyle)) == 0);
-	gtk_source_tag_style_free (def_style);
-	
-	g_free (id);
-
-	return style;
-}
-
-static void
-style_button_toggled (GtkToggleButton        *button,
-		      GeditPreferencesDialog *dlg)
-{
-	GtkTreePath *path;
-	GtkTreeIter iter;
-	gchar *id;
-	GtkSourceLanguage *lang;
-	GtkSourceTagStyle *style;
-	GtkSourceTagStyle *new_style;
-
-	gtk_tree_view_get_cursor (GTK_TREE_VIEW (dlg->priv->tags_treeview), &path, NULL);
-	gtk_tree_model_get_iter (GTK_TREE_MODEL (dlg->priv->tags_treeview_model),
-				 &iter, path);
-	gtk_tree_path_free (path);
-	gtk_tree_model_get (GTK_TREE_MODEL (dlg->priv->tags_treeview_model),
-			    &iter, ID_COLUMN, &id, -1);
-
-	lang = get_selected_language (dlg);
-
-	style = gtk_source_language_get_tag_style (lang, id);
-	if (style == NULL)
-	{
-		style = gtk_source_tag_style_new ();
-	}
-
-	new_style = gtk_source_tag_style_copy (style);
-	
-	new_style->bold = gtk_toggle_button_get_active (
-					GTK_TOGGLE_BUTTON (dlg->priv->bold_togglebutton));
-	new_style->italic = gtk_toggle_button_get_active (
-					GTK_TOGGLE_BUTTON (dlg->priv->italic_togglebutton));
-	new_style->underline = gtk_toggle_button_get_active (
-					GTK_TOGGLE_BUTTON (dlg->priv->underline_togglebutton));
-	new_style->strikethrough = gtk_toggle_button_get_active (
-					GTK_TOGGLE_BUTTON (dlg->priv->strikethrough_togglebutton));
-
-	if (gtk_toggle_button_get_active (
-		GTK_TOGGLE_BUTTON (dlg->priv->foreground_checkbutton)))
-	{
-		new_style->mask |= GTK_SOURCE_TAG_STYLE_USE_FOREGROUND;
-		gtk_color_button_get_color (GTK_COLOR_BUTTON (dlg->priv->foreground_colorbutton),
-					    &new_style->foreground);
-		gtk_widget_set_sensitive (dlg->priv->foreground_colorbutton,
-					  TRUE);
-	}
-	else
-	{
-		new_style->mask &= ~GTK_SOURCE_TAG_STYLE_USE_FOREGROUND;
-		gtk_widget_set_sensitive (dlg->priv->foreground_colorbutton,
-					  FALSE);
-	}
-
-	if (gtk_toggle_button_get_active (
-		GTK_TOGGLE_BUTTON (dlg->priv->background_checkbutton)))
-	{
-		new_style->mask |= GTK_SOURCE_TAG_STYLE_USE_BACKGROUND;
-		gtk_color_button_get_color (GTK_COLOR_BUTTON (dlg->priv->background_colorbutton_2),
-					    &new_style->background);
-		gtk_widget_set_sensitive (dlg->priv->background_colorbutton_2,
-					  TRUE);
-	}
-	else
-	{
-		new_style->mask &= ~GTK_SOURCE_TAG_STYLE_USE_BACKGROUND;
-		gtk_widget_set_sensitive (dlg->priv->background_colorbutton_2,
-					  FALSE);
-	}
-
-	if (memcmp (style, new_style, sizeof (GtkSourceTagStyle)) != 0)
-	{
-		GtkSourceTagStyle *def_style;
-
-		def_style = gtk_source_language_get_tag_default_style (lang, id);
-
-		if (!(new_style->mask & GTK_SOURCE_TAG_STYLE_USE_BACKGROUND))
-		{
-			new_style->background = def_style->background;
-		}
-
-		if (!(new_style->mask & GTK_SOURCE_TAG_STYLE_USE_FOREGROUND))
-		{
-			new_style->foreground = def_style->foreground;
-		}
-		
-		gtk_widget_set_sensitive (dlg->priv->reset_button, 
-					  memcmp (new_style, def_style, sizeof (GtkSourceTagStyle)) != 0);
-
-		gedit_language_set_tag_style (lang, id, new_style);
-
-		gtk_source_tag_style_free (def_style);
-	}
-
-	gtk_source_tag_style_free (style);
-	gtk_source_tag_style_free (new_style);
-
-	g_free (id);
-}
-
-static void
-style_color_set (GtkColorButton         *button,
-		 GeditPreferencesDialog *dlg)
-{
-	style_button_toggled (NULL, dlg);
-}
-
-static void
-styles_cb (GtkWidget              *treeview,
-	   GeditPreferencesDialog *dlg)
-{
-	GtkSourceTagStyle *style;
-
-	style = get_selected_style (dlg);
-	g_return_if_fail (style != NULL);
-
-	/* we must block callbacks while setting the new values */
-	g_signal_handlers_block_by_func (G_OBJECT (dlg->priv->bold_togglebutton),
-					 G_CALLBACK (style_button_toggled), dlg);
-	g_signal_handlers_block_by_func (G_OBJECT (dlg->priv->italic_togglebutton),
-					 G_CALLBACK (style_button_toggled), dlg);
-	g_signal_handlers_block_by_func (G_OBJECT (dlg->priv->underline_togglebutton),
-					 G_CALLBACK (style_button_toggled), dlg);
-	g_signal_handlers_block_by_func (G_OBJECT (dlg->priv->strikethrough_togglebutton),
-					 G_CALLBACK (style_button_toggled), dlg);
-	g_signal_handlers_block_by_func (G_OBJECT (dlg->priv->foreground_checkbutton), 
-					 G_CALLBACK (style_button_toggled), dlg);
-	g_signal_handlers_block_by_func (G_OBJECT (dlg->priv->background_checkbutton), 
-					 G_CALLBACK (style_button_toggled), dlg);
-	g_signal_handlers_block_by_func (G_OBJECT (dlg->priv->foreground_colorbutton),
-					 G_CALLBACK (style_color_set), dlg);
-	g_signal_handlers_block_by_func (G_OBJECT (dlg->priv->background_colorbutton_2), 
-					 G_CALLBACK (style_color_set), dlg);
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->bold_togglebutton),
-				      style->bold);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->italic_togglebutton),
-				      style->italic);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->underline_togglebutton),
-				      style->underline);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->strikethrough_togglebutton),
-				      style->strikethrough);
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->foreground_checkbutton),
-				      style->mask & GTK_SOURCE_TAG_STYLE_USE_FOREGROUND);
-
-	if ((style->mask & GTK_SOURCE_TAG_STYLE_USE_FOREGROUND) == GTK_SOURCE_TAG_STYLE_USE_FOREGROUND)
-	{
-		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->priv->foreground_colorbutton),
-					    &style->foreground);
-	}
-	else
-	{
-		GdkColor text_color;
-		
-		text_color = gedit_prefs_manager_get_text_color ();
-		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->priv->foreground_colorbutton),
-					    &text_color);
-	}
-	
-	gtk_widget_set_sensitive (dlg->priv->foreground_colorbutton, 
-				  style->mask & GTK_SOURCE_TAG_STYLE_USE_FOREGROUND);
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->background_checkbutton),
-				      style->mask & GTK_SOURCE_TAG_STYLE_USE_BACKGROUND);
-	
-	if ((style->mask & GTK_SOURCE_TAG_STYLE_USE_BACKGROUND) == GTK_SOURCE_TAG_STYLE_USE_BACKGROUND)
-	{
-		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->priv->background_colorbutton_2),
-					    &style->background);
-	}
-	else
-	{
-		GdkColor background_color;
-		
-		background_color = gedit_prefs_manager_get_background_color ();
-		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->priv->background_colorbutton_2),
-					    &background_color);
-	}
-
-	gtk_widget_set_sensitive (dlg->priv->background_colorbutton_2, 
-				  style->mask & GTK_SOURCE_TAG_STYLE_USE_BACKGROUND);
-
-	gtk_widget_set_sensitive (dlg->priv->reset_button, !style->is_default);
-
-	/* reenable callbacks */
-	g_signal_handlers_unblock_by_func (dlg->priv->bold_togglebutton,
-					   G_CALLBACK (style_button_toggled), dlg);
-	g_signal_handlers_unblock_by_func (dlg->priv->italic_togglebutton,
-					   G_CALLBACK (style_button_toggled), dlg);
-	g_signal_handlers_unblock_by_func (dlg->priv->underline_togglebutton,
-					   G_CALLBACK (style_button_toggled), dlg);
-	g_signal_handlers_unblock_by_func (dlg->priv->strikethrough_togglebutton,
-					   G_CALLBACK (style_button_toggled), dlg);
-	g_signal_handlers_unblock_by_func (dlg->priv->foreground_checkbutton, 
-					   G_CALLBACK (style_button_toggled), dlg);
-	g_signal_handlers_unblock_by_func (dlg->priv->background_checkbutton, 
-					   G_CALLBACK (style_button_toggled), dlg);
-	g_signal_handlers_unblock_by_func (dlg->priv->foreground_colorbutton,
-					   G_CALLBACK (style_color_set), dlg);
-	g_signal_handlers_unblock_by_func (dlg->priv->background_colorbutton_2, 
-					   G_CALLBACK (style_color_set), dlg);
-
-	gtk_source_tag_style_free (style);
-}
-
-static void
-reset_button_clicked (GtkButton              *button, 
-		      GeditPreferencesDialog *dlg)
-{
-	GtkTreePath *path;
-	GtkTreeIter iter;
-	gchar *id;
-	GtkSourceLanguage *lang;
-
-	gtk_tree_view_get_cursor (GTK_TREE_VIEW (dlg->priv->tags_treeview), &path, NULL);
-	gtk_tree_model_get_iter (GTK_TREE_MODEL (dlg->priv->tags_treeview_model),
-				 &iter, path);
-	gtk_tree_path_free (path);
-	gtk_tree_model_get (GTK_TREE_MODEL (dlg->priv->tags_treeview_model),
-			    &iter, ID_COLUMN, &id, -1);
-
-	lang = get_selected_language (dlg);
-
-	gedit_language_set_tag_style (lang, id, NULL);
-
-	styles_cb (NULL, dlg);
-}
-
-static void
-select_default_language (GeditPreferencesDialog *dlg)
-{
-	const GSList *languages, *l;
-	GeditDocument *current_document;
-	GtkSourceLanguage *current_document_language;
-	int current_item;
-
-	current_document = gedit_window_get_active_document (GEDIT_WINDOW(
-						gtk_window_get_transient_for (GTK_WINDOW(dlg))));
-	if (current_document != NULL)
-		current_document_language = gedit_document_get_language (current_document);
-	else
-		current_document_language = NULL;
-
-	languages = gedit_languages_manager_get_available_languages_sorted (
-						gedit_get_languages_manager ());
-
-	l = languages;
-	current_item = 0;
-
-	while (l != NULL)
-	{
-		GtkSourceLanguage *lang = GTK_SOURCE_LANGUAGE (l->data);
-
-		if (lang == current_document_language)
-			break;
-
-		current_item++;
-		l = g_slist_next (l);
-	}
-
-	if (l != NULL)
-		gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->hl_mode_combobox),
-					  current_item);
-}
-
-static void
-setup_syntax_highlighting_page (GeditPreferencesDialog *dlg)
-{
-	gboolean hl_enabled;
-	const GSList *languages, *l;
-	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
-
-	/* Set initial state */
-	hl_enabled = gedit_prefs_manager_get_enable_syntax_highlighting ();
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->enable_syntax_hl_checkbutton),
-				      hl_enabled);
-	gtk_widget_set_sensitive (dlg->priv->hl_vbox, hl_enabled);
-
-	/* Create GtkListStore for styles & setup treeview. */
-	dlg->priv->tags_treeview_model = gtk_list_store_new (NUM_COLUMNS, 
-							     G_TYPE_STRING, 
-							     G_TYPE_STRING);
-
-	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (dlg->priv->tags_treeview_model),
-					      0, 
-					      GTK_SORT_ASCENDING);
-	gtk_tree_view_set_model (GTK_TREE_VIEW (dlg->priv->tags_treeview),
-				 GTK_TREE_MODEL (dlg->priv->tags_treeview_model));
-
-	renderer = gtk_cell_renderer_text_new ();
-	column = gtk_tree_view_column_new_with_attributes (_("Elements"), renderer,
-							   "text", NAME_COLUMN, NULL);
-
-	gtk_tree_view_append_column (GTK_TREE_VIEW (dlg->priv->tags_treeview), column);
-
-	/* Connect signals */
-	g_signal_connect (dlg->priv->hl_mode_combobox,
-			  "changed",
-			  G_CALLBACK (language_changed_cb),
-			  dlg);
-	g_signal_connect (dlg->priv->tags_treeview,
-			  "cursor-changed",
-			  G_CALLBACK (styles_cb),
-			  dlg);
-
-	languages = gedit_languages_manager_get_available_languages_sorted (
-						gedit_get_languages_manager ());
-
-	l = languages;
-
-	while (l != NULL)
-	{
-		GtkSourceLanguage *lang = GTK_SOURCE_LANGUAGE (l->data);
-		gchar *name = gtk_source_language_get_name (lang);
-
-		gtk_combo_box_append_text (GTK_COMBO_BOX (dlg->priv->hl_mode_combobox), name);
-		g_free (name);
-
-		l = g_slist_next (l);
-	}
-
-	gtk_combo_box_set_active (GTK_COMBO_BOX (dlg->priv->hl_mode_combobox), 0);
-
-	g_signal_connect (dlg->priv->enable_syntax_hl_checkbutton,
-			 "toggled",
-			  G_CALLBACK (enable_syntax_hl_button_toggled),
-			  dlg);
-	g_signal_connect (dlg->priv->bold_togglebutton,
-			  "toggled",
-			  G_CALLBACK (style_button_toggled),
-			  dlg);
-	g_signal_connect (dlg->priv->italic_togglebutton,
-			  "toggled",
-			  G_CALLBACK (style_button_toggled),
-			  dlg);
-	g_signal_connect (dlg->priv->underline_togglebutton,
-			  "toggled",
-			  G_CALLBACK (style_button_toggled),
-			  dlg);
-	g_signal_connect (dlg->priv->strikethrough_togglebutton,
-			  "toggled",
-			  G_CALLBACK (style_button_toggled),
-			  dlg);
-	g_signal_connect (dlg->priv->foreground_checkbutton,
-			  "toggled",
-			  G_CALLBACK (style_button_toggled),
-			  dlg);
-	g_signal_connect (dlg->priv->background_checkbutton,
-			  "toggled",
-			  G_CALLBACK (style_button_toggled),
-			  dlg);
-	g_signal_connect (dlg->priv->foreground_colorbutton,
-			  "color_set",
-			  G_CALLBACK (style_color_set),
-			  dlg);
-	g_signal_connect (dlg->priv->background_colorbutton_2,
-			  "color_set",
-			  G_CALLBACK (style_color_set),
-			  dlg);
-	g_signal_connect (dlg->priv->reset_button,
-			  "clicked",
-			  G_CALLBACK (reset_button_clicked),
-			  dlg);
-}
-
-static void
 setup_plugins_page (GeditPreferencesDialog *dlg)
 {
 	GtkWidget *page_content;
@@ -1270,9 +776,19 @@ setup_plugins_page (GeditPreferencesDialog *dlg)
 }
 
 static void
+setup_syntax_highlighting_page (GeditPreferencesDialog *dlg)
+{
+	GtkWidget *page;
+
+	// TODO
+
+	page = gtk_notebook_get_nth_page (GTK_NOTEBOOK (dlg->priv->notebook), 3);
+	gtk_widget_hide (page);
+}
+
+static void
 gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 {
-	GtkWidget *content;
 	GtkWidget *error_widget;
 	gboolean ret;
 
@@ -1303,7 +819,8 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 		"notebook",
 		&error_widget,
 
-		"notebook", &content,
+		"notebook", &dlg->priv->notebook,
+
 		"display_line_numbers_checkbutton", &dlg->priv->display_line_numbers_checkbutton,
 		"highlight_current_line_checkbutton", &dlg->priv->highlight_current_line_checkbutton,
 				
@@ -1366,7 +883,7 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	}
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-			    content, FALSE, FALSE, 0);
+			    dlg->priv->notebook, FALSE, FALSE, 0);
 
 	setup_editor_page (dlg);
 	setup_view_page (dlg);
@@ -1395,7 +912,6 @@ gedit_show_preferences_dialog (GeditWindow *parent)
 	{
 		gtk_window_set_transient_for (GTK_WINDOW (preferences_dialog),
 					      GTK_WINDOW (parent));
-		select_default_language (GEDIT_PREFERENCES_DIALOG (preferences_dialog));
 	}
 
 	gtk_window_present (GTK_WINDOW (preferences_dialog));

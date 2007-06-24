@@ -1238,6 +1238,10 @@ DEFINE_BOOL_PREF (enable_search_highlighting,
 		  GPM_SEARCH_HIGHLIGHTING_ENABLE,
 		  GPM_DEFAULT_SEARCH_HIGHLIGHTING_ENABLE)
 
+/* Source style scheme */
+DEFINE_STRING_PREF (source_style_scheme,
+		    GPM_SOURCE_STYLE_SCHEME,
+		    GPM_DEFAULT_SOURCE_STYLE_SCHEME)
 
 GSList *
 gedit_prefs_manager_get_writable_vfs_schemes (void)

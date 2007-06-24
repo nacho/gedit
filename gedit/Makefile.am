@@ -54,6 +54,7 @@ NOINST_H_FILES =			\
 	gedit-commands.h		\
 	gedit-tooltips.h		\
 	gedit-languages-manager.h	\
+	gedit-source-style-manager.h	\
 	gedit-plugin-manager.h		\
 	gedit-plugins-engine.h		\
 	gedit-module.h			\
@@ -63,12 +64,15 @@ NOINST_H_FILES =			\
 	gedit-document-loader.h		\
 	gedit-document-saver.h		\
 	gedit-history-entry.h		\
+	gedit-print.h			\
+	gedit-print-job-preview.h	\
 	gedit-io-error-message-area.h	\
 	gedit-spinner.h			\
 	gedit-prefs-manager-private.h	\
 	sexy-icon-entry.h		\
 	gedittextregion.h		\
-	gedit-session.h
+	gedit-session.h			\
+	gtksourceprintjob.h
 
 if ENABLE_PYTHON
 NOINST_H_FILES += \
@@ -92,8 +96,6 @@ INST_H_FILES =				\
 	gedit-plugin.h			\
 	gedit-prefs-manager-app.h	\
 	gedit-prefs-manager.h		\
-	gedit-print.h			\
-	gedit-print-job-preview.h	\
 	gedit-progress-message-area.h	\
 	gedit-statusbar.h		\
 	gedit-tab.h 			\
@@ -147,6 +149,7 @@ libgedit_la_SOURCES = 			\
 	gedit-session.c			\
 	gedit-spinner.c			\
 	gedit-statusbar.c		\
+	gedit-source-style-manager.c	\
 	gedit-tab.c 			\
 	gedit-tooltips.c		\
 	gedit-utils.c 			\
@@ -154,6 +157,7 @@ libgedit_la_SOURCES = 			\
 	gedit-window.c			\
 	sexy-icon-entry.c		\
 	gedittextregion.c		\
+	gtksourceprintjob.c		\
 	$(NOINST_H_FILES)		\
 	$(INST_H_FILES)
 

@@ -39,6 +39,7 @@
 
 #include <glib/gi18n.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <gtksourceview/gtksourceiter.h>
 
 #include "gedit-prefs-manager-app.h"
 #include "gedit-document.h"
@@ -46,12 +47,11 @@
 #include "gedit-utils.h"
 #include "gedit-metadata-manager.h"
 #include "gedit-languages-manager.h"
+#include "gedit-source-style-manager.h"
 #include "gedit-document-loader.h"
 #include "gedit-document-saver.h"
 #include "gedit-marshal.h"
 #include "gedittextregion.h"
-
-#include <gtksourceview/gtksourceiter.h>
 
 #undef ENABLE_PROFILE 
 
@@ -216,8 +216,6 @@ gedit_document_finalize (GObject *object)
 	{
 		GtkTextIter iter;
 		gchar *position;
-		gchar *lang_id = NULL;
-		GtkSourceLanguage *lang;
 
 		gtk_text_buffer_get_iter_at_mark (
 				GTK_TEXT_BUFFER (doc),			
@@ -234,15 +232,13 @@ gedit_document_finalize (GObject *object)
 
 		if (doc->priv->language_set_by_user)
 		{
+			GtkSourceLanguage *lang;
+
 			lang = gedit_document_get_language (doc);
 
-			if (lang != NULL)
-				lang_id = gtk_source_language_get_id (lang);
-
 			gedit_metadata_manager_set (doc->priv->uri,
-						    "language",
-						    (lang_id == NULL) ? "_NORMAL_" : lang_id);
-			g_free (lang_id);
+				    "language",
+				    (lang == NULL) ? "_NORMAL_" : gtk_source_language_get_id (lang));
 		}
 	}
 
@@ -508,9 +504,7 @@ set_language (GeditDocument     *doc,
 		return;
 
 	gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (doc), lang);
-	if (lang != NULL)
-		gedit_language_init_tag_styles (lang);
-		
+
 	if (lang != NULL)
 		gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (doc),
 						 gedit_prefs_manager_get_enable_syntax_highlighting ());
@@ -520,21 +514,11 @@ set_language (GeditDocument     *doc,
 
 	if (set_by_user && (doc->priv->uri != NULL))
 	{
-		gchar *lang_id = NULL;
-
-		if (lang != NULL)
-		{
-			lang_id = gtk_source_language_get_id (lang);
-			g_return_if_fail (lang_id != NULL);
-		}
-		
 		gedit_metadata_manager_set (doc->priv->uri,
-					    "language",
-					    (lang_id == NULL) ? "_NORMAL_" : lang_id);
-
-		g_free (lang_id);
+			    "language",
+			    (lang == NULL) ? "_NORMAL_" : gtk_source_language_get_id (lang));
 	}
-	
+
 	doc->priv->language_set_by_user = set_by_user;
 }
 
@@ -569,6 +553,9 @@ set_encoding (GeditDocument       *doc,
 static void
 gedit_document_init (GeditDocument *doc)
 {
+	GtkSourceStyleManager *style_manager;
+	GtkSourceStyleScheme *style_scheme;
+
 	gedit_debug (DEBUG_DOCUMENT);
 
 	doc->priv = GEDIT_DOCUMENT_GET_PRIVATE (doc);
@@ -601,6 +588,11 @@ gedit_document_init (GeditDocument *doc)
 
 	gedit_document_set_enable_search_highlighting (doc,
 						       gedit_prefs_manager_get_enable_search_highlighting ());
+
+	style_manager = gedit_get_source_style_manager ();
+	style_scheme = gedit_source_style_manager_get_default_scheme (style_manager);
+	gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (doc),
+					    style_scheme);
 
 	g_signal_connect_after (doc, 
 			  	"insert-text",
@@ -698,8 +690,8 @@ set_uri (GeditDocument *doc,
 
 			if (strcmp (data, "_NORMAL_") != 0)
 			{
-				language = gedit_languages_manager_get_language_from_id (
-							gedit_get_languages_manager (),
+				language = gtk_source_language_manager_get_language_by_id (
+							gedit_get_language_manager (),
 							data);
 			}
 
@@ -711,8 +703,8 @@ set_uri (GeditDocument *doc,
 
 			if (strcmp (doc->priv->mime_type, "text/plain") != 0)
 			{
-				language = gedit_languages_manager_get_language_from_mime_type (
-							gedit_get_languages_manager (),
+				language = gedit_language_manager_get_language_from_mime_type (
+							gedit_get_language_manager (),
 							doc->priv->mime_type);
 			}
 		}

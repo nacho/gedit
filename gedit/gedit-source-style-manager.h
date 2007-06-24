@@ -1,9 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gedit-languages-manager.h
- * This file is part of gedit
+ * gedit-source-style-manager.h
  *
- * Copyright (C) 2003-2005 - Paolo Maggi 
+ * Copyright (C) 2007 - Paolo Borelli
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,32 +18,27 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA.
- */
- 
-/*
- * Modified by the gedit Team, 2003-2005. See the AUTHORS file for a 
- * list of people on the gedit Team.  
- * See the ChangeLog files for a list of changes. 
  *
- * $Id$
+ * $Id: gedit-source-style-manager.h 5598 2007-04-15 13:16:24Z pborelli $
  */
 
-#ifndef __GEDIT_LANGUAGES_MANAGER_H__
-#define __GEDIT_LANGUAGES_MANAGER_H__
+#ifndef __GEDIT_SOURCE_STYLE_MANAGER_H__
+#define __GEDIT_SOURCE_STYLE_MANAGER_H__
 
-#include <gtksourceview/gtksourcelanguagemanager.h>
+#include <gtksourceview/gtksourcestylemanager.h>
 
 G_BEGIN_DECLS
 
-GtkSourceLanguageManager	*gedit_get_language_manager	(void);
+GtkSourceStyleManager	*gedit_get_source_style_manager			(void);
 
-const GSList			*gedit_language_manager_get_available_languages_sorted
-								(GtkSourceLanguageManager	*lm);
+GtkSourceStyleScheme	*gedit_source_style_manager_get_default_scheme	(GtkSourceStyleManager	*manager);
 
-GtkSourceLanguage		*gedit_language_manager_get_language_from_mime_type 
-								(GtkSourceLanguageManager	*lm,
-								 const gchar			*mime_type);
+/*
+ * Non exported functions
+ */
+gboolean		_gedit_source_style_manager_set_default_scheme	(GtkSourceStyleManager	*manager,
+									 const gchar		*scheme_id);
 
 G_END_DECLS
 
-#endif /* __GEDIT_LANGUAGES_MANAGER_H__ */
+#endif /* __GEDIT_SOURCE_STYLE_MANAGER_H__ */

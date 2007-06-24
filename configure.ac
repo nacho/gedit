@@ -148,7 +148,7 @@ dnl ================================================================
 PKG_CHECK_MODULES(GEDIT, [
 	glib-2.0 >= 2.12.0
 	gtk+-2.0 >= 2.10.0
-	gtksourceview-1.0 >= 1.8.0
+	gtksourceview-2.0 >= 1.90.1
 	libgnomeui-2.0 >= 2.16.0
 	libglade-2.0 >= 2.5.1
 	libgnomeprintui-2.2 >= 2.12.1
@@ -232,12 +232,12 @@ fi
 if test "x$have_python" != "xno"; then
 	PYGOBJECT_REQUIRED=2.11.5
 	PYGTK_REQUIRED=2.9.7
-	GNOME_PYTHON_DESKTOP_REQUIRED=2.15.90
+	PYGTKSOURCEVIEW_REQUIRED=1.90.0
 
 	PKG_CHECK_MODULES([PYGTK], [
 		pygobject-2.0 >= $PYGOBJECT_REQUIRED
 		pygtk-2.0 >= $PYGTK_REQUIRED
-		gnome-python-desktop-2.0 >= $GNOME_PYTHON_DESKTOP_REQUIRED],
+		pygtksourceview-2.0 >= $PYGTKSOURCEVIEW_REQUIRED],
 		[],[have_python=no])
 
 	AC_SUBST([PYGTK_CFLAGS])
