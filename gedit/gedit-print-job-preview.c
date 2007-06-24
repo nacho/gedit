@@ -129,7 +129,7 @@ static void gedit_print_job_preview_set_nx_and_ny (GeditPrintJobPreview *pmp,
 static gint
 goto_page (GeditPrintJobPreview *mp, gint page)
 {
-	guchar c[32];
+	gchar c[32];
 
 	g_return_val_if_fail (mp != NULL, GNOME_PRINT_ERROR_BADVALUE);
 
@@ -521,9 +521,7 @@ preview_canvas_key (GtkWidget *widget, GdkEventKey *event, gpointer data)
 	if (domove)
 		gnome_canvas_scroll_to (pmp->priv->canvas, x, y);
 
-	g_signal_stop_emission (G_OBJECT (widget), g_signal_lookup ("key_press_event", G_OBJECT_TYPE (widget)), 0);
-	
-	return TRUE;
+	return FALSE;
 }
 
 static void
