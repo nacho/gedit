@@ -1131,31 +1131,31 @@ on_confirm_no_trash_cb (GeditFileBrowserWidget * widget,
 }
 
 static gboolean
-on_confirm_delete_cb (GeditFileBrowserWidget * widget,
-                      GeditFileBrowserStore * store,
+on_confirm_delete_cb (GeditFileBrowserWidget *widget,
+                      GeditFileBrowserStore *store,
                       GList *paths,
-                      GeditWindow * window)
+                      GeditWindow *window)
 {
 	gchar *normal;
 	gchar *message;
 	gchar *secondary;
 	gboolean result;
 	GeditFileBrowserPluginData *data;
-	
+
 	data = get_plugin_data (window);
 
 	if (!data->confirm_trash)
 		return TRUE;
-	
+
 	if (paths->next == NULL) {
 		normal = get_filename_from_path (GTK_TREE_MODEL (store), (GtkTreePath *)(paths->data));
-		message = g_strdup_printf (_("Are you sure you want to\npermanently delete \"%s\"?"), normal);
+		message = g_strdup_printf (_("Are you sure you want to permanently delete \"%s\"?"), normal);
 		g_free (normal);
 	} else {
-		message = g_strdup (_("Are you sure you want to\npermanently delete the selected files?."));
+		message = g_strdup (_("Are you sure you want to permanently delete the selected files?"));
 	}
 
-	secondary = _("If you delete an item it is permanently lost.");
+	secondary = _("If you delete an item, it is permanently lost.");
 
 	result = gedit_file_browser_utils_confirmation_dialog (window,
 	                                                       GTK_MESSAGE_QUESTION, 
