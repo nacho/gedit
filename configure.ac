@@ -3,8 +3,8 @@ dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.59)
 
 m4_define(gedit_major_version,  2)
-m4_define(gedit_minor_version, 18)
-m4_define(gedit_micro_version,  2)
+m4_define(gedit_minor_version, 19)
+m4_define(gedit_micro_version,  1)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
 AC_INIT(gedit, gedit_version, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
@@ -232,7 +232,7 @@ fi
 if test "x$have_python" != "xno"; then
 	PYGOBJECT_REQUIRED=2.11.5
 	PYGTK_REQUIRED=2.9.7
-	PYGTKSOURCEVIEW_REQUIRED=1.90.0
+	PYGTKSOURCEVIEW_REQUIRED=1.90.1
 
 	PKG_CHECK_MODULES([PYGTK], [
 		pygobject-2.0 >= $PYGOBJECT_REQUIRED
