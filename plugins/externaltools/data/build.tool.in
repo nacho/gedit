@@ -9,7 +9,7 @@ while test "$DIR" != "/"; do
             make -C "${DIR}"
             exit
         fi
-        DIR=`dirname "${DIR}"`
     done
+    DIR=`dirname "${DIR}"`
 done
 echo "No Makefile found!" > /dev/stderr
