@@ -525,7 +525,7 @@ open_location_dialog_response_cb (GeditOpenLocationDialog *dlg,
 					      _("The entered location is not valid."));
 
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (msg),
-							  _("Please, check that you typed the "
+							  _("Please check that you typed the "
 							    "location correctly and try again."));
 
 		gtk_window_group_add_window (wg, GTK_WINDOW (msg));
