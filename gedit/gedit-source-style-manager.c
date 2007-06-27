@@ -89,8 +89,7 @@ _gedit_source_style_manager_set_default_scheme (GtkSourceStyleManager *manager,
 		return FALSE;
 	}
 
-	if (def_style != NULL)
-		g_object_unref (def_style);
+	/* manager owns the ref to the old style, we don't need to unref it */
 
 	def_style = new_style;
 
