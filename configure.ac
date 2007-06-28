@@ -332,7 +332,6 @@ gedit/dialogs/Makefile
 gedit/Makefile
 help/Makefile
 help/eu/Makefile
-help/ko/Makefile
 help/ro/Makefile
 pixmaps/Makefile
 plugins/changecase/Makefile
