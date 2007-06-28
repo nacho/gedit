@@ -60,6 +60,19 @@ typedef enum
 
 } GeditSearchFlags;
 
+/**
+ * GeditDocumentSaveFlags:
+ * @GEDIT_DOCUMENT_SAVE_IGNORE_MTIME: save file despite external modifications.
+ * @GEDIT_DOCUMENT_SAVE_IGNORE_BACKUP: write the file directly without attempting to backup.
+ * @GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP: preserve previous backup file, needed to support autosaving.
+ */
+typedef enum
+{
+	GEDIT_DOCUMENT_SAVE_IGNORE_MTIME 	= 1 << 0,
+	GEDIT_DOCUMENT_SAVE_IGNORE_BACKUP	= 1 << 1,
+	GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP	= 1 << 2
+} GeditDocumentSaveFlags;
+
 /* Private structure type */
 typedef struct _GeditDocumentPrivate    GeditDocumentPrivate;
 
@@ -98,6 +111,11 @@ struct _GeditDocumentClass
 					 const GError     *error);
 
 	/* Document save */
+	void (* save)			(GeditDocument          *document,
+					 const gchar            *uri,
+					 const GeditEncoding    *encoding,
+					 GeditDocumentSaveFlags  flags);
+
 	void (* saving)			(GeditDocument    *document,
 					 GnomeVFSFileSize  size,
 					 GnomeVFSFileSize  total_size);
@@ -110,19 +128,6 @@ struct _GeditDocumentClass
 					 GtkTextIter      *start,
 					 GtkTextIter      *end);
 };
-
-
-typedef enum
-{
-	/* save file despite external modifications */
-	GEDIT_DOCUMENT_SAVE_IGNORE_MTIME 	= 1 << 0,
-
-	/* write the file directly without attempting to backup */
-	GEDIT_DOCUMENT_SAVE_IGNORE_BACKUP	= 1 << 1,
-	
-	/* preserve previous backup file, needed to support autosaving */
-	GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP	= 1 << 2
-} GeditDocumentSaveFlags;
 
 
 #define GEDIT_DOCUMENT_ERROR gedit_document_error_quark ()
@@ -230,8 +235,6 @@ gboolean	 gedit_document_get_enable_search_highlighting
 /* 
  * Non exported functions
  */
-gboolean	_gedit_document_is_saving_as	(GeditDocument       *doc);
-
 glong		 _gedit_document_get_seconds_since_last_save_or_load 
 						(GeditDocument       *doc);
 

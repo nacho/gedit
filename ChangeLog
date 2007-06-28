@@ -1,3 +1,16 @@
+2007-06-29  Steve Frécinaux  <code@istique.net>
+
+	* docs/reference/tmpl/gedit-document.sgml:
+	* gedit/gedit-document.c:
+	* gedit/gedit-document.h:
+	* gedit/gedit-marshal.list:
+	* gedit/gedit-window.c:
+
+	Implement Save and Save As as operations of GeditDocument as the
+	default handler of a "save" signal.
+	Also kill "document->priv->is_saving_as" and write some related bits
+	of developper documentation.
+
 2007-06-28  Changwoo Ryu  <cwryu@debian.org>
 
 	* configure.ac: Removed help/ko/Makefile for gnome-doc-utils

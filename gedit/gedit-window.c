@@ -2582,12 +2582,6 @@ doc_saved (GeditDocument *doc,
 		return;
 	}
 	
-	if (!_gedit_document_is_saving_as (doc))
-	{
-		gedit_debug_message (DEBUG_WINDOW, "Not saving as");
-		return;
-	}
-
 	update_default_path (window, doc);
 }
 

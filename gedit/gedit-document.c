@@ -51,6 +51,7 @@
 #include "gedit-document-loader.h"
 #include "gedit-document-saver.h"
 #include "gedit-marshal.h"
+#include "gedit-enum-types.h"
 #include "gedittextregion.h"
 
 #undef ENABLE_PROFILE 
@@ -73,6 +74,10 @@ PROFILE (static GTimer *timer = NULL)
 
 #define GEDIT_DOCUMENT_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_DOCUMENT, GeditDocumentPrivate))
 
+static void	gedit_document_save_real	(GeditDocument          *doc,
+						 const gchar            *uri,
+						 const GeditEncoding    *encoding,
+						 GeditDocumentSaveFlags  flags);
 static void	gedit_document_set_readonly	(GeditDocument *doc,
 						 gboolean       readonly);
 static void	to_search_region_range 		(GeditDocument *doc,
@@ -92,7 +97,6 @@ struct _GeditDocumentPrivate
 	gint	     readonly : 1;
 	gint	     last_save_was_manually : 1; 	
 	gint	     language_set_by_user : 1;
-	gint         is_saving_as : 1;
 	gint         stop_cursor_moved_emission : 1;
 
 	gchar	    *uri;
@@ -143,6 +147,7 @@ enum {
 	CURSOR_MOVED,
 	LOADING,
 	LOADED,
+	SAVE,
 	SAVING,
 	SAVED,
 	SEARCH_HIGHLIGHT_UPDATED,
@@ -368,6 +373,8 @@ gedit_document_class_init (GeditDocumentClass *klass)
 	buf_class->mark_set = gedit_document_mark_set;
 	buf_class->changed = gedit_document_changed;
 
+	klass->save = gedit_document_save_real;
+
 	g_object_class_install_property (object_class, PROP_URI,
 					 g_param_spec_string ("uri",
 					 		      "URI",
@@ -450,6 +457,32 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_TYPE_NONE,
 			      1,
 			      G_TYPE_POINTER);
+
+	/**
+	 * GeditDocument::save:
+	 * @document: the #GeditDocument.
+	 * @uri: the uri where the document is about to be saved.
+	 * @encoding: the #GeditEncoding used to save the document.
+	 * @flags: the #GeditDocumentSaveFlags for the save operation.
+	 *
+	 * The "save" signal is emitted when the document is saved.
+	 *
+	 * Since: 2.20
+	 */
+	document_signals[SAVE] =
+		g_signal_new ("save",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditDocumentClass, save),
+			      NULL, NULL,
+			      gedit_marshal_VOID__STRING_BOXED_FLAGS,
+			      G_TYPE_NONE,
+			      3,
+			      G_TYPE_STRING,
+			      /* we rely on the fact that the GeditEncoding pointer stays
+			       * the same forever */
+			      GEDIT_TYPE_ENCODING | G_SIGNAL_TYPE_STATIC_SCOPE,
+			      GEDIT_TYPE_DOCUMENT_SAVE_FLAGS);
 
 	document_signals[SAVING] =
    		g_signal_new ("saving",
@@ -1129,7 +1162,6 @@ document_saver_saving (GeditDocumentSaver *saver,
 		/* the saver has been used, throw it away */
 		g_object_unref (doc->priv->saver);
 		doc->priv->saver = NULL;
-		doc->priv->is_saving_as = FALSE;
 	}
 	else
 	{
@@ -1150,11 +1182,10 @@ document_saver_saving (GeditDocumentSaver *saver,
 }
 
 static void
-document_save_real (GeditDocument          *doc,
-		    const gchar            *uri,
-		    const GeditEncoding    *encoding,
-		    time_t                  mtime,
-		    GeditDocumentSaveFlags  flags)
+gedit_document_save_real (GeditDocument          *doc,
+			  const gchar            *uri,
+			  const GeditEncoding    *encoding,
+			  GeditDocumentSaveFlags  flags)
 {
 	g_return_if_fail (doc->priv->saver == NULL);
 
@@ -1171,10 +1202,18 @@ document_save_real (GeditDocument          *doc,
 	gedit_document_saver_save (doc->priv->saver,
 				   uri,
 				   encoding,
-				   mtime,
+				   doc->priv->mtime,
 				   flags);
 }
 
+/**
+ * gedit_document_save:
+ * @document: the #GeditDocument.
+ * @flags: optionnal #GeditDocumentSaveFlags.
+ *
+ * Save the document to its previous location. This results in the "save"
+ * signal to be emitted.
+ */
 void
 gedit_document_save (GeditDocument          *doc,
 		     GeditDocumentSaveFlags  flags)
@@ -1182,13 +1221,24 @@ gedit_document_save (GeditDocument          *doc,
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 	g_return_if_fail (doc->priv->uri != NULL);
 
-	document_save_real (doc,
-			    doc->priv->uri,
-			    doc->priv->encoding,
-			    doc->priv->mtime,
-			    flags);
+	g_signal_emit (doc,
+		       document_signals[SAVE],
+		       0,
+		       doc->priv->uri,
+		       doc->priv->encoding,
+		       flags);
 }
 
+/**
+ * gedit_document_save_as:
+ * @document: the #GeditDocument.
+ * @uri: the uri where to save the document.
+ * @encoding: the #GeditEncoding to encode the document.
+ * @flags: optionnal #GeditDocumentSaveFlags.
+ *
+ * Save the document to a new location. This results in the "save" signal
+ * to be emitted.
+ */
 void
 gedit_document_save_as (GeditDocument          *doc,
 			const gchar            *uri,
@@ -1199,9 +1249,14 @@ gedit_document_save_as (GeditDocument          *doc,
 	g_return_if_fail (uri != NULL);
 	g_return_if_fail (encoding != NULL);
 
-	doc->priv->is_saving_as = TRUE;
-	
-	document_save_real (doc, uri, encoding, 0, flags);
+	/* priv->mtime refers to the the old uri (if any). Thus, it should be
+	 * ignored when saving as. */
+	g_signal_emit (doc,
+		       document_signals[SAVE],
+		       0,
+		       uri,
+		       encoding,
+		       flags | GEDIT_DOCUMENT_SAVE_IGNORE_MTIME);
 }
 
 gboolean
@@ -1702,16 +1757,6 @@ _gedit_document_get_seconds_since_last_save_or_load (GeditDocument *doc)
 	g_get_current_time (&current_time);
 
 	return (current_time.tv_sec - doc->priv->time_of_last_save_or_load.tv_sec);
-}
-
-gboolean
-_gedit_document_is_saving_as (GeditDocument *doc)
-{
-	gedit_debug (DEBUG_DOCUMENT);
-	
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-	
-	return (doc->priv->is_saving_as);
 }
 
 static void
