@@ -38,7 +38,7 @@ G_BEGIN_DECLS
 
 GtkSourceLanguageManager	*gedit_get_language_manager	(void);
 
-const GSList			*gedit_language_manager_get_available_languages_sorted
+GSList				*gedit_language_manager_list_languages_sorted
 								(GtkSourceLanguageManager	*lm);
 
 GtkSourceLanguage		*gedit_language_manager_get_language_from_mime_type 

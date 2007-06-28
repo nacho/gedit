@@ -799,14 +799,15 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	gedit_plugins_engine_update_plugins_ui (window, FALSE);
 }
 
+#define GEDIT_SOURCE_LANGUAGE_KEY "sourcelanguage"
+
 static void
 language_toggled (GtkToggleAction *action,
 		  GeditWindow     *window)
 {
 	GeditDocument *doc;
-	const GSList *languages;
-	const GtkSourceLanguage *lang;
-	gint n;
+	GtkSourceLanguage *lang;
+	const gchar *lang_id;
 
 	if (gtk_toggle_action_get_active (action) == FALSE)
 		return;
@@ -815,22 +816,25 @@ language_toggled (GtkToggleAction *action,
 	if (doc == NULL)
 		return;
 
-	n = gtk_radio_action_get_current_value (GTK_RADIO_ACTION (action));
-
-	if (n < 0)
+	lang_id = g_object_get_data (G_OBJECT (action),
+				     GEDIT_SOURCE_LANGUAGE_KEY);
+	if (lang_id == NULL)
 	{
 		/* Normal (no highlighting) */
 		lang = NULL;
 	}
 	else
 	{
-		languages = gedit_language_manager_get_available_languages_sorted (
-						gedit_get_language_manager ());
-
-		lang = g_slist_nth_data ((GSList *) languages, n);
+		lang = gtk_source_language_manager_get_language_by_id (
+				gedit_get_language_manager (),
+				lang_id);
+		if (lang == NULL)
+		{
+			g_warning ("Could not get language %s\n", lang_id);
+		}
 	}
 
-	gedit_document_set_language (doc, (GtkSourceLanguage *) lang);
+	gedit_document_set_language (doc, lang);
 }
 
 static gchar *
@@ -863,6 +867,7 @@ create_language_menu_item (GtkSourceLanguage *lang,
 	GSList *group;
 	const gchar *section;
 	gchar *escaped_section;
+	const gchar *lang_id;
 	const gchar *lang_name;
 	gchar *escaped_lang_name;
 	gchar *tip;
@@ -908,6 +913,13 @@ create_language_menu_item (GtkSourceLanguage *lang,
 				       NULL,
 				       index);
 
+	/* store lang id */
+	lang_id = gtk_source_language_get_id (lang);
+	g_object_set_data_full (G_OBJECT (action),
+				GEDIT_SOURCE_LANGUAGE_KEY,
+				g_strdup (lang_id),
+				(GDestroyNotify) g_free);
+
 	/* Action is added with a NULL accel to make the accel overridable */
 	gtk_action_group_add_action_with_accel (window->priv->languages_action_group,
 						GTK_ACTION (action),
@@ -942,8 +954,8 @@ static void
 create_languages_menu (GeditWindow *window)
 {
 	GtkRadioAction *action_none;
-	const GSList *languages;
-	const GSList *l;
+	GSList *languages;
+	GSList *l;
 	guint id;
 	gint i;
 
@@ -979,14 +991,18 @@ create_languages_menu (GeditWindow *window)
 	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action_none), TRUE);
 
 	/* now add all the known languages */
-	languages = gedit_language_manager_get_available_languages_sorted (
+	languages = gedit_language_manager_list_languages_sorted (
 						gedit_get_language_manager ());
 
 	for (l = languages, i = 0; l != NULL; l = l->next, ++i)
+	{
 		create_language_menu_item (l->data,
-					    i,
-					    id,
-					    window);
+					   i,
+					   id,
+					   window);
+	}
+
+	g_slist_free (languages);
 }
 
 static void

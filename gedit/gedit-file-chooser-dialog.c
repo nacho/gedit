@@ -162,11 +162,11 @@ all_text_files_filter (const GtkFileFilterInfo *filter_info,
 	if (known_mime_types == NULL)
 	{
 		GtkSourceLanguageManager *lm;
-		const GSList *languages;
-		const GSList *l;
+		GSList *languages;
+		GSList *l;
 
 		lm = gedit_get_language_manager ();
-		languages = gtk_source_language_manager_get_available_languages (lm);
+		languages = gtk_source_language_manager_list_languages (lm);
 
 		for (l = languages; l != NULL; l = l->next)
 		{
@@ -200,6 +200,8 @@ all_text_files_filter (const GtkFileFilterInfo *filter_info,
 
 			g_strfreev (mime_types);
 		}
+
+		g_slist_free (languages);
 
 		/* known_mime_types always has "text/plain" as first item" */
 		known_mime_types = g_slist_prepend (known_mime_types, g_strdup ("text/plain"));

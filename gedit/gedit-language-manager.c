@@ -37,9 +37,6 @@
 #include "gedit-debug.h"
 
 static GtkSourceLanguageManager *language_manager = NULL;
-static const GSList *languages_list = NULL;
-static GSList *languages_list_sorted = NULL;
-
 
 GtkSourceLanguageManager *
 gedit_get_language_manager (void)
@@ -55,39 +52,22 @@ gedit_get_language_manager (void)
 static gint
 language_compare (gconstpointer a, gconstpointer b)
 {
-	GtkSourceLanguage *lang_a = a;
-	GtkSourceLanguage *lang_b = b;
+	GtkSourceLanguage *lang_a = (GtkSourceLanguage *)a;
+	GtkSourceLanguage *lang_b = (GtkSourceLanguage *)b;
 	const gchar *name_a = gtk_source_language_get_name (lang_a);
 	const gchar *name_b = gtk_source_language_get_name (lang_b);
-	gint res;
-	
-	res = g_utf8_collate (name_a, name_b);
-		
-	return res;
+
+	return g_utf8_collate (name_a, name_b);
 }
 
-/* Move the sorting in sourceview as a flag to get_available_langs? */
-const GSList *
-gedit_language_manager_get_available_languages_sorted (GtkSourceLanguageManager *lm)
+GSList *
+gedit_language_manager_list_languages_sorted (GtkSourceLanguageManager *lm)
 {
-	const GSList *languages;
+	GSList *languages;
 
-	// FIXME This is totally broken also in the old code: checking if
-	// languages != languages_list is not a good way to see if no new lang
-	// were loaded: elements could have been appended to the list without
-	// changing the list head! Should be easy to fix if we make gsv return
-	// an array and the array len... or even better if gsv is able to sort
+	languages = gtk_source_language_manager_list_languages (lm);
 
-	languages = gtk_source_language_manager_get_available_languages (lm);
-
-	if ((languages_list_sorted == NULL) || (languages != languages_list))
-	{
-		languages_list = languages;
-		languages_list_sorted = g_slist_copy ((GSList *)languages);
-		languages_list_sorted = g_slist_sort (languages_list_sorted, (GCompareFunc)language_compare);
-	}
-
-	return languages_list_sorted;
+	return g_slist_sort (languages, (GCompareFunc)language_compare);
 }
 
 /* Returns a hash table that is used as a cache of already matched mime-types */
@@ -143,8 +123,8 @@ GtkSourceLanguage *
 gedit_language_manager_get_language_from_mime_type (GtkSourceLanguageManager *lm,
 						    const gchar              *mime_type)
 {
-	const GSList *languages;
-	const GSList *l;
+	GSList *languages;
+	GSList *l;
 	GtkSourceLanguage *lang;
 	GtkSourceLanguage *parent = NULL;
 
@@ -160,7 +140,7 @@ gedit_language_manager_get_language_from_mime_type (GtkSourceLanguageManager *lm
 	gedit_debug_message (DEBUG_DOCUMENT,
 			     "Cache miss for %s", mime_type);
 
-	languages = gtk_source_language_manager_get_available_languages (lm);
+	languages = gtk_source_language_manager_list_languages (lm);
 
 	for (l = languages; l != NULL; l = l->next)
 	{
@@ -220,6 +200,8 @@ gedit_language_manager_get_language_from_mime_type (GtkSourceLanguageManager *lm
 
 		g_strfreev (mime_types);
 	}
+
+	g_slist_free (languages);
 
 	if (parent != NULL)
 		add_language_to_cache (lm, mime_type, parent);
