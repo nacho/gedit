@@ -385,6 +385,9 @@ open_dialog_response_cb (GeditFileChooserDialog *dialog,
 
 	gtk_widget_destroy (GTK_WIDGET (dialog));
 
+	/* Remember the folder we navigated to */
+	 _gedit_window_set_default_path (window, uris->data);
+
 	gedit_commands_load_uris (window,
 				  uris,
 				  encoding,
@@ -732,6 +735,10 @@ save_dialog_response_cb (GeditFileChooserDialog *dialog,
 					       uri_for_display);
 
 		g_free (uri_for_display);
+
+		/* let's remember the dir we navigated too,
+		 * even if the saving fails... */
+		 _gedit_window_set_default_path (window, uri);
 
 		_gedit_tab_save_as (tab, uri, encoding);
 	}

@@ -164,6 +164,9 @@ gboolean	 _gedit_window_is_removing_tabs		(GeditWindow         *window);
 G_CONST_RETURN gchar
 		*_gedit_window_get_default_path 	(GeditWindow         *window);
 
+void		 _gedit_window_set_default_path 	(GeditWindow         *window,
+							 const gchar         *uri);
+
 void		 _gedit_window_set_saving_session_state	(GeditWindow         *window,
 							 gboolean             saving_session);
 

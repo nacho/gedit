@@ -2522,70 +2522,6 @@ sync_languages_menu (GeditDocument *doc,
 }
 
 static void
-update_default_path (GeditWindow   *window,
-		     GeditDocument *doc)
-{
-	gchar *uri;
-
-	uri = gedit_document_get_uri (doc);
-	// CHECK: what does it happens when loading from stdin? - Paolo
-	g_return_if_fail (uri != NULL);
-
-	if (gedit_utils_uri_has_file_scheme (uri))
-	{
-		gchar *default_path;
-
-		// CHECK: does it work with uri chaining? - Paolo
-		default_path = g_path_get_dirname (uri);
-
-		g_return_if_fail (strlen (default_path) >= 5 /* strlen ("file:") */);
-		if (strcmp (default_path, "file:") == 0)
-		{
-			g_free (default_path);
-		
-			default_path = g_strdup ("file:///");
-		}
-
-		g_free (window->priv->default_path);
-
-		window->priv->default_path = default_path;
-
-		gedit_debug_message (DEBUG_WINDOW, 
-				     "New default path: %s", default_path);
-	}
-
-	g_free (uri);
-}
-
-static void
-doc_loaded (GeditDocument *doc,
-	    const GError  *error,
-	    GeditWindow   *window)
-{
-	if (error != NULL)
-	{
-		gedit_debug_message (DEBUG_WINDOW, "Error");
-		return;
-	}
-	
-	update_default_path (window, doc);
-}
-
-static void
-doc_saved (GeditDocument *doc,
-	   const GError  *error,
-	   GeditWindow   *window)
-{
-	if (error != NULL)
-	{
-		gedit_debug_message (DEBUG_WINDOW, "Error");
-		return;
-	}
-	
-	update_default_path (window, doc);
-}
-
-static void
 editable_changed (GeditView  *view,
                   GParamSpec  *arg1,
                   GeditWindow *window)
@@ -2658,14 +2594,6 @@ notebook_tab_added (GeditNotebook *notebook,
 			  "notify::language",
 			  G_CALLBACK (sync_languages_menu),
 			  window);
-	g_signal_connect (doc,
-			  "loaded",
-			  G_CALLBACK (doc_loaded),
-			  window);			  			  
-	g_signal_connect (doc,
-			  "saved",
-			  G_CALLBACK (doc_saved),
-			  window);
 	g_signal_connect (view,
 			  "toggle_overwrite",
 			  G_CALLBACK (update_overwrite_mode_statusbar),
@@ -2715,16 +2643,16 @@ notebook_tab_removed (GeditNotebook *notebook,
 	GeditView     *view;
 	GeditDocument *doc;
 	GtkAction     *action;
-	
+
 	gedit_debug (DEBUG_WINDOW);
-	
+
 	g_return_if_fail ((window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION) == 0);
-		
+
 	--window->priv->num_tabs;
-	
+
 	view = gedit_tab_get_view (tab);
 	doc = gedit_tab_get_document (tab);
-	
+
 	g_signal_handlers_disconnect_by_func (tab,
 					      G_CALLBACK (sync_name), 
 					      window);
@@ -2749,12 +2677,6 @@ notebook_tab_removed (GeditNotebook *notebook,
 	g_signal_handlers_disconnect_by_func (doc,
 					      G_CALLBACK (sync_languages_menu),
 					      window);
-	g_signal_handlers_disconnect_by_func (doc, 
-					      G_CALLBACK (doc_loaded),
-					      window);
-	g_signal_handlers_disconnect_by_func (doc, 
-					      G_CALLBACK (doc_saved),
-					      window);					      				      
 	g_signal_handlers_disconnect_by_func (view, 
 					      G_CALLBACK (update_overwrite_mode_statusbar),
 					      window);
@@ -3674,6 +3596,36 @@ _gedit_window_get_default_path (GeditWindow *window)
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 	
 	return window->priv->default_path;
+}
+
+void
+_gedit_window_set_default_path (GeditWindow *window,
+				const gchar *uri)
+{
+	g_return_if_fail (uri != NULL);
+
+	if (gedit_utils_uri_has_file_scheme (uri))
+	{
+		gchar *default_path;
+
+		// CHECK: does it work with uri chaining? - Paolo
+		default_path = g_path_get_dirname (uri);
+
+		g_return_if_fail (strlen (default_path) >= 5 /* strlen ("file:") */);
+		if (strcmp (default_path, "file:") == 0)
+		{
+			g_free (default_path);
+		
+			default_path = g_strdup ("file:///");
+		}
+
+		g_free (window->priv->default_path);
+
+		window->priv->default_path = default_path;
+
+		gedit_debug_message (DEBUG_WINDOW, 
+				     "New default path: %s", default_path);
+	}
 }
 
 /* Returns the documents that need to be saved before closing the window */
