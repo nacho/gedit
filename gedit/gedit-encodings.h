@@ -42,9 +42,6 @@ typedef struct _GeditEncoding GeditEncoding;
 
 GType              	 gedit_encoding_get_type (void) G_GNUC_CONST;
 
-GeditEncoding		*gedit_encoding_copy		 (const GeditEncoding *enc);
-void               	 gedit_encoding_free		 (GeditEncoding       *enc);
-
 const GeditEncoding	*gedit_encoding_get_from_charset (const gchar         *charset);
 const GeditEncoding	*gedit_encoding_get_from_index	 (gint                 index);
 
@@ -55,6 +52,10 @@ const gchar		*gedit_encoding_get_charset	 (const GeditEncoding *enc);
 
 const GeditEncoding 	*gedit_encoding_get_utf8	 (void);
 const GeditEncoding 	*gedit_encoding_get_current	 (void);
+
+/* These should not be used, they are just to make python bindings happy */
+GeditEncoding		*gedit_encoding_copy		 (const GeditEncoding *enc);
+void               	 gedit_encoding_free		 (GeditEncoding       *enc);
 
 G_END_DECLS
 

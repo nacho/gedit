@@ -42,8 +42,8 @@
 struct _GeditEncoding
 {
 	gint   index;
-	gchar *charset;
-	gchar *name;
+	const gchar *charset;
+	const gchar *name;
 };
 
 /* 
@@ -134,21 +134,20 @@ typedef enum
   
 } GeditEncodingIndex;
 
-static GeditEncoding utf8_encoding = 
-	{ GEDIT_ENCODING_UTF_8,
-	  "UTF-8", 
-	  N_("Unicode") 
-	};
+static const GeditEncoding utf8_encoding =  {
+	GEDIT_ENCODING_UTF_8,
+	"UTF-8",
+	N_("Unicode")
+};
 
 /* initialized in gedit_encoding_lazy_init() */
-static GeditEncoding unknown_encoding = 
-	{ GEDIT_ENCODING_UNKNOWN,
-	  NULL, 
-	  NULL 
-	};
+static GeditEncoding unknown_encoding = {
+	GEDIT_ENCODING_UNKNOWN,
+	NULL, 
+	NULL 
+};
 
-	
-static GeditEncoding encodings [] = {
+static const GeditEncoding encodings [] = {
 
   { GEDIT_ENCODING_ISO_8859_1,
     "ISO-8859-1", N_("Western") },
@@ -291,24 +290,10 @@ static void
 gedit_encoding_lazy_init (void)
 {
 	static gboolean initialized = FALSE;
-	gint i;
 	const gchar *locale_charset;
 
 	if (initialized)
 		return;
-
-	i = 0;
-	while (i < GEDIT_ENCODING_LAST)
-	{
-		g_return_if_fail (encodings[i].index == i);
-
-		/* Translate the names */
-		encodings[i].name = _(encodings[i].name);
-
-		++i;
-    	}
-
-	utf8_encoding.name = _(utf8_encoding.name);
 
 	if (g_get_charset (&locale_charset) == FALSE)
 	{
@@ -418,7 +403,9 @@ gedit_encoding_to_string (const GeditEncoding* enc)
 	g_return_val_if_fail (enc->charset != NULL, NULL);
 
 	if (enc->name != NULL)
-	    	return g_strdup_printf ("%s (%s)", enc->name, enc->charset);
+	{
+	    	return g_strdup_printf ("%s (%s)", _(enc->name), enc->charset);
+	}
 	else
 	{
 		if (g_ascii_strcasecmp (enc->charset, "ANSI_X3.4-1968") == 0)
@@ -447,7 +434,25 @@ gedit_encoding_get_name (const GeditEncoding* enc)
 
 	gedit_encoding_lazy_init ();
 
-	return (enc->name == NULL) ? _("Unknown") : enc->name;
+	return (enc->name == NULL) ? _("Unknown") : _(enc->name);
+}
+
+/* These are to make language bindings happy. Since Encodings are
+ * const, copy() just returns the same pointer and fres() doesn't
+ * do nothing */
+
+GeditEncoding *
+gedit_encoding_copy (const GeditEncoding *enc)
+{
+	g_return_val_if_fail (enc != NULL, NULL);
+
+	return (GeditEncoding *) enc;
+}
+
+void 
+gedit_encoding_free (GeditEncoding *enc)
+{
+	g_return_if_fail (enc != NULL);
 }
 
 /**
@@ -471,45 +476,4 @@ gedit_encoding_get_type (void)
 
 	return our_type;
 } 
-
-/**
- * gedit_encoding_copy:
- * @enc: a #GeditEncoding.
- * 
- * Makes a copy of the given encoding.
- * This function is used by language bindings.
- *
- * Return value: a new #GeditEncoding.
- **/
-GeditEncoding *
-gedit_encoding_copy (const GeditEncoding *enc)
-{
-	GeditEncoding *new_enc;
-
-	g_return_val_if_fail (enc != NULL, NULL);
-	
-	new_enc = g_new0 (GeditEncoding, 1);
-	*new_enc = *enc;
-
-	return new_enc;
-}
-
-
-/**
- * gedit_encoding_free:
- * @enc: a #GeditEncoding.
- * 
- * Frees the resources allocated by the given encoding.
- * This function is used by language bindings.
- **/
-void 
-gedit_encoding_free (GeditEncoding *enc)
-{
-	g_return_if_fail (enc != NULL);
-	
-	g_free (enc);
-}
-
-
-
 

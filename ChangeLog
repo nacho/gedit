@@ -1,5 +1,17 @@
 2007-06-29  Paolo Borelli  <pborelli@katamail.com>
 
+	* gedit-encodings.[ch]:
+
+	Make gedit_encodings_copy just return the same pointer and
+	gedit_encodings_free a noop: GeditEncoding is not a real 
+	boxed type and the GeditEncoding object for a given encoding
+	should always be the same pointer.
+	While at it also make sure that our table of encodings is 
+	const so that it can go in readonly section. Translation
+	of encoding names are resolved lazily.
+
+2007-06-29  Paolo Borelli  <pborelli@katamail.com>
+
 	* gedit-commands-file.c:
 	* gedit/gedit-window.[ch]:
 
