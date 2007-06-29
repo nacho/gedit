@@ -40,7 +40,6 @@ G_BEGIN_DECLS
  */
 #define GEDIT_TYPE_MESSAGE_AREA              (gedit_message_area_get_type())
 #define GEDIT_MESSAGE_AREA(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_MESSAGE_AREA, GeditMessageArea))
-#define GEDIT_MESSAGE_AREA_CONST(obj)        (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_MESSAGE_AREA, GeditMessageArea const))
 #define GEDIT_MESSAGE_AREA_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GEDIT_TYPE_MESSAGE_AREA, GeditMessageAreaClass))
 #define GEDIT_IS_MESSAGE_AREA(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GEDIT_TYPE_MESSAGE_AREA))
 #define GEDIT_IS_MESSAGE_AREA_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_MESSAGE_AREA))

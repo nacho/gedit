@@ -41,7 +41,6 @@ G_BEGIN_DECLS
  */
 #define GEDIT_TYPE_DOCUMENT_SAVER              (gedit_document_saver_get_type())
 #define GEDIT_DOCUMENT_SAVER(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_DOCUMENT_SAVER, GeditDocumentSaver))
-#define GEDIT_DOCUMENT_SAVER_CONST(obj)        (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_DOCUMENT_SAVER, GeditDocumentSaver const))
 #define GEDIT_DOCUMENT_SAVER_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GEDIT_TYPE_DOCUMENT_SAVER, GeditDocumentSaverClass))
 #define GEDIT_IS_DOCUMENT_SAVER(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GEDIT_TYPE_DOCUMENT_SAVER))
 #define GEDIT_IS_DOCUMENT_SAVER_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_DOCUMENT_SAVER))

@@ -42,7 +42,6 @@ G_BEGIN_DECLS
  */
 #define GEDIT_TYPE_APP              (gedit_app_get_type())
 #define GEDIT_APP(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_APP, GeditApp))
-#define GEDIT_APP_CONST(obj)        (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_APP, GeditApp const))
 #define GEDIT_APP_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GEDIT_TYPE_APP, GeditAppClass))
 #define GEDIT_IS_APP(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GEDIT_TYPE_APP))
 #define GEDIT_IS_APP_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_APP))

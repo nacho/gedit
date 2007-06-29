@@ -43,7 +43,6 @@ G_BEGIN_DECLS
  */
 #define GEDIT_TYPE_PRINT_JOB              (gedit_print_job_get_type())
 #define GEDIT_PRINT_JOB(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_PRINT_JOB, GeditPrintJob))
-#define GEDIT_PRINT_JOB_CONST(obj)        (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_PRINT_JOB, GeditPrintJob const))
 #define GEDIT_PRINT_JOB_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GEDIT_TYPE_PRINT_JOB, GeditPrintJobClass))
 #define GEDIT_IS_PRINT_JOB(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GEDIT_TYPE_PRINT_JOB))
 #define GEDIT_IS_PRINT_JOB_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_PRINT_JOB))

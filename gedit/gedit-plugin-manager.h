@@ -40,7 +40,6 @@ G_BEGIN_DECLS
  */
 #define GEDIT_TYPE_PLUGIN_MANAGER              (gedit_plugin_manager_get_type())
 #define GEDIT_PLUGIN_MANAGER(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_PLUGIN_MANAGER, GeditPluginManager))
-#define GEDIT_PLUGIN_MANAGER_CONST(obj)        (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_PLUGIN_MANAGER, GeditPluginManager const))
 #define GEDIT_PLUGIN_MANAGER_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GEDIT_TYPE_PLUGIN_MANAGER, GeditPluginManagerClass))
 #define GEDIT_IS_PLUGIN_MANAGER(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GEDIT_TYPE_PLUGIN_MANAGER))
 #define GEDIT_IS_PLUGIN_MANAGER_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_PLUGIN_MANAGER))

@@ -40,7 +40,6 @@ G_BEGIN_DECLS
  */
 #define GEDIT_TYPE_PANEL		(gedit_panel_get_type())
 #define GEDIT_PANEL(obj)		(G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_PANEL, GeditPanel))
-#define GEDIT_PANEL_CONST(obj)		(G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_PANEL, GeditPanel const))
 #define GEDIT_PANEL_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST((klass), GEDIT_TYPE_PANEL, GeditPanelClass))
 #define GEDIT_IS_PANEL(obj)		(G_TYPE_CHECK_INSTANCE_TYPE((obj), GEDIT_TYPE_PANEL))
 #define GEDIT_IS_PANEL_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_PANEL))
