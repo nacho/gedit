@@ -76,7 +76,7 @@ def insert_with_indent(view, piter, text, indentfirst = True):
                 view.get_buffer().insert(piter, text[:-1])
 
 def snippets_debug(*s):
-        print s
+        return
 
 def write_xml(node, file, cdata_nodes=()):
         assert node is not None
