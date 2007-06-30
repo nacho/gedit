@@ -35,7 +35,6 @@
 
 #include <gedit/gedit-view.h>
 #include <gedit/gedit-document.h>
-#include <gedit/gedit-print.h>
 
 G_BEGIN_DECLS
 
@@ -146,12 +145,15 @@ void		 _gedit_tab_save		(GeditTab            *tab);
 void		 _gedit_tab_save_as		(GeditTab            *tab,
 						 const gchar         *uri,
 						 const GeditEncoding *encoding);
+
+/* print_job is a gpointer instead of GeditPrintJob because gedit-print is
+ * is not public so it cannot be included in this header */
 void		 _gedit_tab_print		(GeditTab            *tab,
-						 GeditPrintJob       *pjob,
+						 gpointer             print_job,
 						 GtkTextIter         *start, 
 			  			 GtkTextIter         *end);
 void		 _gedit_tab_print_preview	(GeditTab            *tab,
-						 GeditPrintJob       *pjob,
+						 gpointer             print_job,
 						 GtkTextIter         *start, 
 			  			 GtkTextIter         *end);
 void		 _gedit_tab_mark_for_closing	(GeditTab	     *tab);

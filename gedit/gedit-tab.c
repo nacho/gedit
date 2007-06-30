@@ -42,6 +42,7 @@
 #include "gedit-utils.h"
 #include "gedit-message-area.h"
 #include "gedit-io-error-message-area.h"
+#include "gedit-print.h"
 #include "gedit-print-job-preview.h"
 #include "gedit-progress-message-area.h"
 #include "gedit-debug.h"
@@ -2303,12 +2304,15 @@ show_printing_message_area (GeditTab      *tab,
 
 void 
 _gedit_tab_print (GeditTab      *tab,
-		  GeditPrintJob *pjob,
+		  gpointer       print_job,
 		  GtkTextIter   *start, 
 		  GtkTextIter   *end)
 {
+	GeditPrintJob *pjob;
 	GeditDocument *doc;
-	
+
+	pjob = (GtkSourcePrintJob *) print_job;
+
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 	g_return_if_fail (GEDIT_IS_PRINT_JOB (pjob));
 	g_return_if_fail (start != NULL);
@@ -2348,12 +2352,15 @@ _gedit_tab_print (GeditTab      *tab,
 
 void
 _gedit_tab_print_preview (GeditTab      *tab,
-			  GeditPrintJob *pjob,
+			  gpointer       print_job,
 			  GtkTextIter   *start, 
-			  GtkTextIter   *end)		  
+			  GtkTextIter   *end)
 {
+	GeditPrintJob *pjob;
 	GeditDocument *doc;
-	
+
+	pjob = (GtkSourcePrintJob *) print_job;
+
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 	g_return_if_fail (GEDIT_IS_PRINT_JOB (pjob));
 	g_return_if_fail (start != NULL);
