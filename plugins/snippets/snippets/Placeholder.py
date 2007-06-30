@@ -17,19 +17,22 @@
 
 import traceback
 import re
-from functions import *
 import os
 import sys
 import signal
-import gobject
 import select
 import locale
 import subprocess
 
+import gobject
+
+from Helper import *
+
 # These are places in a view where the cursor can go and do things
-class SnippetPlaceholder:
+class Placeholder:
         def __init__(self, view, tabstop, defaults, begin):
                 self.ok = True
+                self.done = False
                 self.buf = view.get_buffer()
                 self.view = view
                 self.has_references = False
@@ -139,8 +142,8 @@ class SnippetPlaceholder:
                 # Remove everything between self.begin and self.end
                 begin = self.begin_iter()
                 self.buf.delete(begin, self.end_iter())
-                # Insert the text from the mirror
 
+                # Insert the text from the mirror
                 insert_with_indent(self.view, begin, text, True)
                 self.buf.end_user_action()
                 
@@ -162,10 +165,10 @@ class SnippetPlaceholder:
                         if not mirror.update(self):
                                 return
 
-# This is an placeholder which inserts a mirror of another SnippetPlaceholder        
-class SnippetPlaceholderMirror(SnippetPlaceholder):
+# This is an placeholder which inserts a mirror of another Placeholder        
+class PlaceholderMirror(Placeholder):
         def __init__(self, view, tabstop, begin):
-                SnippetPlaceholder.__init__(self, view, -1, None, begin)
+                Placeholder.__init__(self, view, -1, None, begin)
                 self.mirror_stop = tabstop
 
         def update(self, mirror):
@@ -173,7 +176,7 @@ class SnippetPlaceholderMirror(SnippetPlaceholder):
                 return True
         
         def run_last(self, placeholders):
-                SnippetPlaceholder.run_last(self, placeholders)
+                Placeholder.run_last(self, placeholders)
                 
                 if placeholders.has_key(self.mirror_stop):
                         mirror = placeholders[self.mirror_stop]
@@ -186,12 +189,12 @@ class SnippetPlaceholderMirror(SnippetPlaceholder):
                         self.ok = False
 
 # This placeholder indicates the end of a snippet
-class SnippetPlaceholderEnd(SnippetPlaceholder):
+class PlaceholderEnd(Placeholder):
         def __init__(self, view, begin, default):
-                SnippetPlaceholder.__init__(self, view, 0, default, begin)
+                Placeholder.__init__(self, view, 0, default, begin)
         
         def run_last(self, placeholders):
-                SnippetPlaceholder.run_last(self, placeholders)
+                Placeholder.run_last(self, placeholders)
                 
                 # Remove the begin mark and set the begin mark
                 # to the end mark, this is needed so the end placeholder won't contain
@@ -209,9 +212,9 @@ class SnippetPlaceholderEnd(SnippetPlaceholder):
                 self.enter()
 
 # This placeholder is used to expand a command with embedded mirrors        
-class SnippetPlaceholderExpand(SnippetPlaceholder):
+class PlaceholderExpand(Placeholder):
         def __init__(self, view, tabstop, begin, s):
-                SnippetPlaceholder.__init__(self, view, tabstop, None, begin)
+                Placeholder.__init__(self, view, tabstop, None, begin)
 
                 self.mirror_text = {0: ''}
                 self.timeout_id = None
@@ -242,7 +245,7 @@ class SnippetPlaceholderExpand(SnippetPlaceholder):
                 
         # Check if all substitution placeholders are accounted for
         def run_last(self, placeholders):
-                SnippetPlaceholder.run_last(self, placeholders)
+                Placeholder.run_last(self, placeholders)
 
                 self.ok = True
                 mirrors = self.get_mirrors(placeholders)
@@ -265,7 +268,7 @@ class SnippetPlaceholderExpand(SnippetPlaceholder):
                         self.default = self.get_text() or None
 
                         if self.tabstop == -1:
-                                self.ok = False
+                                self.done = True
                 
         def re_placeholder(self, m):
                 if m.group(1):
@@ -276,7 +279,7 @@ class SnippetPlaceholderExpand(SnippetPlaceholder):
                         else:
                                 index = int(m.group(4))
                         
-                        return SnippetPlaceholder.literal(self, self.mirror_text[index])
+                        return Placeholder.literal(self, self.mirror_text[index])
 
         def remove_timeout(self):
                 if self.timeout_id != None:
@@ -297,7 +300,7 @@ class SnippetPlaceholderExpand(SnippetPlaceholder):
                 text = re.sub('(\\\\)?\\$({([0-9]+)}|([0-9]+))', self.re_placeholder, 
                                 self.cmd)
                 
-                return SnippetPlaceholder.expand_environment(self, text)
+                return Placeholder.expand_environment(self, text)
         
         def update(self, mirror):
                 text = None
@@ -324,9 +327,9 @@ class SnippetPlaceholderExpand(SnippetPlaceholder):
                 return True
 
 # The shell placeholder executes commands in a subshell
-class SnippetPlaceholderShell(SnippetPlaceholderExpand):
+class PlaceholderShell(PlaceholderExpand):
         def __init__(self, view, tabstop, begin, s):
-                SnippetPlaceholderExpand.__init__(self, view, tabstop, begin, s)
+                PlaceholderExpand.__init__(self, view, tabstop, begin, s)
 
                 self.shell = None
                 self.remove_me = False
@@ -336,7 +339,7 @@ class SnippetPlaceholderShell(SnippetPlaceholderExpand):
                 self.shell = None        
         
         def timeout_cb(self):
-                SnippetPlaceholderExpand.timeout_cb(self)
+                PlaceholderExpand.timeout_cb(self)
                 self.remove_timeout()
                 
                 if not self.shell:
@@ -346,7 +349,7 @@ class SnippetPlaceholderShell(SnippetPlaceholderExpand):
                 self.close_shell()
 
                 if self.remove_me:
-                        SnippetPlaceholderExpand.remove(self)
+                        PlaceholderExpand.remove(self)
 
                 message_dialog(None, gtk.MESSAGE_ERROR, 'Execution of the shell ' \
                                 'command (%s) exceeds the maximum time, ' \
@@ -358,14 +361,14 @@ class SnippetPlaceholderShell(SnippetPlaceholderExpand):
                 self.close_shell()
                 self.remove_timeout()
 
-                self.set_text(str.join('', self.shell_output))
+                self.set_text(str.join('', self.shell_output).rstrip('\n'))
                 
                 if self.default == None:
                         self.default = self.get_text()
                         self.leave()
                         
                 if self.remove_me:
-                        SnippetPlaceholderExpand.remove(self, True)
+                        PlaceholderExpand.remove(self, True)
                 
         def process_cb(self, source, condition):
                 if condition & gobject.IO_IN:
@@ -420,7 +423,7 @@ class SnippetPlaceholderShell(SnippetPlaceholderExpand):
                                 if self.shell:
                                         self.close_shell()
 
-                        SnippetPlaceholderExpand.remove(self, force)
+                        PlaceholderExpand.remove(self, force)
 
 class TimeoutError(Exception):
         def __init__(self, value):
@@ -430,9 +433,9 @@ class TimeoutError(Exception):
                 return repr(self.value)
 
 # The python placeholder evaluates commands in python
-class SnippetPlaceholderEval(SnippetPlaceholderExpand):
+class PlaceholderEval(PlaceholderExpand):
         def __init__(self, view, tabstop, refs, begin, s, namespace):
-                SnippetPlaceholderExpand.__init__(self, view, tabstop, begin, s)
+                PlaceholderExpand.__init__(self, view, tabstop, begin, s)
 
                 self.fdread = 0
                 self.remove_me = False
@@ -445,7 +448,7 @@ class SnippetPlaceholderEval(SnippetPlaceholderExpand):
                                 self.refs.append(int(ref.strip()))
         
         def get_mirrors(self, placeholders):
-                mirrors = SnippetPlaceholderExpand.get_mirrors(self, placeholders)
+                mirrors = PlaceholderExpand.get_mirrors(self, placeholders)
                 
                 if not self.ok:
                         return None

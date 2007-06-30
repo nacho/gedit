@@ -3,15 +3,16 @@ plugindir = $(libdir)/gedit-2/plugins/snippets
 
 plugin_PYTHON = \
 	__init__.py \
-	SnippetPluginInstance.py \
-	SnippetController.py \
-	SnippetsLibrary.py \
+	WindowHelper.py \
+	Document.py \
+	Library.py \
 	ElementTree.py \
 	Snippet.py \
-	SnippetPlaceholders.py \
-	SnippetsDialog.py \
+	Parser.py \
+	Placeholder.py \
+	Manager.py \
 	SnippetComplete.py \
-	functions.py
+	Helper.py
 
 plugin_DATA = snippets.glade
 

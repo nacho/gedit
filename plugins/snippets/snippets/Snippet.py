@@ -15,21 +15,24 @@
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from SnippetPlaceholders import *
 import os
-from functions import *
+
+from Placeholder import *
+from Parser import Parser, Token
+from Helper import *
 
 class EvalUtilities:
         def __init__(self, view=None):
                 self.view = view
-                self.namespace = {}
-                self.init_namespace()
+                self._init_namespace()
         
-        def init_namespace(self):
-                self.namespace['__builtins__'] = __builtins__
-                self.namespace['align'] = self.util_align
+        def _init_namespace(self):
+                self.namespace = {
+                        '__builtins__': __builtins__,
+                        'align': self.util_align
+                }
 
-        def real_len(self, s, tablen = 0):
+        def _real_len(self, s, tablen = 0):
                 if tablen == 0:
                         tablen = self.view.get_tabs_width()
                 
@@ -45,7 +48,7 @@ class EvalUtilities:
                                         maxlen.append(0)
                                 
                                 items[row][col] += "\t"
-                                rl = self.real_len(items[row][col], tablen)
+                                rl = self._real_len(items[row][col], tablen)
                                 
                                 if (rl > maxlen[col]):
                                         maxlen[col] = rl
@@ -57,7 +60,7 @@ class EvalUtilities:
                                 item = items[row][col]
                                 
                                 result += item + ("\t" * ((maxlen[col] - \
-                                                self.real_len(item, tablen)) / tablen))
+                                                self._real_len(item, tablen)) / tablen))
                         
                         result += items[row][len(items[row]) - 1]
                         
@@ -104,236 +107,146 @@ class Snippet:
                         return nm + ' (<b>' + markup_escape(str.join(', ', detail)) + \
                                         '</b>)'
 
-        def add_placeholder(self, placeholders, placeholder):
-                if placeholders.has_key(placeholder.tabstop):
+        def _add_placeholder(self, placeholder):
+                if self._placeholders.has_key(placeholder.tabstop):
                         if placeholder.tabstop == -1:
-                                placeholders[-1].append(placeholder)
-                        else:
-                                # This would be an error, really....
-                                None
+                                self._placeholders[-1].append(placeholder)
                 elif placeholder.tabstop == -1:
-                        placeholders[-1] = [placeholder]
+                        self._placeholders[-1] = [placeholder]
                 else:
-                        placeholders[placeholder.tabstop] = placeholder
+                        self._placeholders[placeholder.tabstop] = placeholder
+
+        def _insert_text(self, text):
+                # Insert text keeping indentation in mind
+                indented = unicode.join('\n' + unicode(self._indent), spaces_instead_of_tabs(self._view, text).split('\n'))
+                self._view.get_buffer().insert(self._begin_iter(), indented)
+
+        def _begin_iter(self):
+                return self._view.get_buffer().get_iter_at_mark(self._begin_mark)
+                
+        def _create_environment(self, data):
+                val = ((data in os.environ) and os.environ[data]) or ''
+                
+                # Get all the current indentation
+                all_indent = compute_indentation(self._view, self._begin_iter())
+                
+                # Substract initial indentation to get the snippet indentation
+                indent = all_indent[len(self._indent):]
+
+                # Keep indentation
+                return unicode.join('\n' + unicode(indent), val.split('\n'))
         
-        def updateLastInsert(self, view, index, lastInsert, text, mark, indent):
-                if index - lastInsert > 0:
-                        buf = view.get_buffer()
-                        piter = buf.get_iter_at_mark(mark)
+        def _create_placeholder(self, data):
+                tabstop = data['tabstop']
+                begin = self._begin_iter()
+                
+                if tabstop == 0:
+                        # End placeholder
+                        return PlaceholderEnd(self._view, begin, data['default'])
+                elif self._placeholders.has_key(tabstop):
+                        # Mirror placeholder
+                        return PlaceholderMirror(self._view, tabstop, begin)
+                else:
+                        # Default placeholder
+                        return Placeholder(self._view, tabstop, data['default'], begin)
+     
+        def _create_shell(self, data):
+                begin = self._begin_iter()
+                return PlaceholderShell(self._view, data['tabstop'], begin, data['contents'])
+
+        def _create_eval(self, data):
+                begin = self._begin_iter()
+                return PlaceholderEval(self._view, data['tabstop'], data['dependencies'], begin, data['contents'], self._utils.namespace)
+        
+        def _create_text(self, data):
+                return data
+
+        def _invalid_placeholder(self, placeholder, remove):
+                buf = self._view.get_buffer()
+              
+                # Remove the text because this placeholder is invalid
+                if placeholder.default and remove:
+                        buf.delete(placeholder.begin_iter(), placeholder.end_iter())
+                
+                placeholder.remove()
+
+                if placeholder.tabstop == -1:
+                        index = self._placeholders[-1].index(placeholder)
+                        del self._placeholders[-1][index]
+                else:
+                        del self._placeholders[placeholder.tabstop]
+
+        def _parse(self, view, marks):
+                # Initialize current variables
+                self._view = view
+                self._indent = compute_indentation(view, view.get_buffer().get_iter_at_mark(marks[1]))        
+                self._utils = EvalUtilities(view)
+                self._placeholders = {}
+                self._begin_mark = marks[1]
+                
+                # Create parser
+                parser = Parser(data=self['text'])
+
+                # Parse tokens
+                while (True):
+                        token = parser.token()
                         
-                        lines = re.sub('\\\\(.)', '\\1', text[lastInsert:index]).split('\n')
+                        if not token:
+                                break
+
+                        try:
+                                val = {'environment': self._create_environment,
+                                        'placeholder': self._create_placeholder,
+                                        'shell': self._create_shell,
+                                        'eval': self._create_eval,
+                                        'text': self._create_text}[token.klass](token.data)
+                        except:
+                                continue
                         
-                        if len(lines) == 1:
-                                buf.insert(piter, spaces_instead_of_tabs(view, lines[0]))
+                        if isinstance(val, str):
+                                # Insert text
+                                self._insert_text(val)
                         else:
-                                text = lines[0] + '\n'
-                        
-                                for i in range(1, len(lines)):
-                                        text += indent + spaces_instead_of_tabs(view, lines[i]) + '\n'
-
-                                buf.insert(piter, text[:-1])
-
-                        lastInsert = index
-                        
-                return lastInsert
-        
-        def substitute_environment(self, text, index, m):
-                # make sure indentation is preserved
-                
-                if m.group(1) in os.environ:
-                        linestart = text.rfind('\n', 0, index)
-                        indentend = linestart + 1
-                        
-                        while text[indentend].isspace() and not text[indentend] == '\n' \
-                                        and not text[indentend] == '\r':
-                                indentend += 1
-
-                        indent = text[linestart + 1:indentend]
-                        lines = os.environ[m.group(1)].split('\n')
-                        insert = unicode.join('\n' + unicode(indent), lines)
-                        text = text[:index] + insert + text[index + \
-                                        len(m.group(0)):]
-                        
-                        return (text, index + len(insert))
-                else:
-                        return (text, index + len(m.group(0)))
-                
-        def parse_variables(self, text, index):
-                # Environmental variable substitution
-                s = text[index:]
-                match = re.match('\\$([A-Z_]+)', s) or re.match('\\${([A-Z_]+)}', s)
-                                
-                if match:
-                        text, index = self.substitute_environment(text, index, match)
-                
-                return text, index, match
-
-        def parse_placeholder(self, s):
-                result = re.match('\\${([0-9]+)(:(.+?))?}', s) or \
-                                re.match('\\$([0-9]+)', s)
-                
-                return result and (result, SnippetPlaceholder)
-        
-        def parse_shell(self, s):
-                result = re.match('`(([0-9]+):)?((\\\\`|[^`])+?)`', s) or \
-                                re.match('\\$\\((([0-9]+):)?((\\\\\\)|[^`])+?)\\)', s)
-                
-                return result and (result, SnippetPlaceholderShell)
-        
-        def parse_eval(self, s):
-                result = re.match('\\$<(([0-9]+):)?(([0-9, ]+):)?((\\\\>|[^>])+?)>', s)
-                
-                return result and (result, SnippetPlaceholderEval)
-
-        def parse_default(self, s):
-                index = 0
-                previndex = 0
-                defaults = []
-
-                while index < len(s):
-                        c = s[index]
-                        
-                        if c == '\\':
-                                index += 1
-                        elif c == ':':
-                                defaults.append(re.sub('\\\\(.)', '\\1', s[previndex:index]))
-                                previndex = index + 1
-                        
-                        index += 1
-                                
-                if previndex < index:
-                        defaults.append(re.sub('\\\\(.)', '\\1', s[previndex:index]))
-                
-                return defaults
-        
-        def parse_text(self, view, marks):
-                placeholders = {}
-                lastInsert = 0
-                index = 0
-                text = self['text']
-                buf = view.get_buffer()
-
-                indent = compute_indentation(view, \
-                                view.get_buffer().get_iter_at_mark(marks[1]))
-
-                utils = EvalUtilities(view)
-
-                while index < len(text):
-                        c = text[index]
-                        match = None
-                        s = text[index:]        
-                                        
-                        if c == '\\':
-                                # Skip escapements
-                                index += 1
-                        elif c == '`':
-                                match = self.parse_shell(s)
-                        elif c == '$':
-                                text, index, handled = self.parse_variables(text, index)
-                                
-                                if handled:
-                                        continue
-
-                                match = self.parse_placeholder(s) or \
-                                                self.parse_shell(s) or \
-                                                self.parse_eval(s)
-
-                        if match:
-                                if index != lastInsert or index == 0:
-                                        self.updateLastInsert(view, index, lastInsert, \
-                                                        text, marks[1], indent)
-                                        begin = buf.get_iter_at_mark(marks[1])
-
-                                        if match[1] == SnippetPlaceholderEval:
-                                                tabstop = (match[0].group(2) and \
-                                                                int(match[0].group(2))) or -1
-                                                refs = (match[0].group(4) and \
-                                                                match[0].group(4).split(','))
-                                                placeholder = SnippetPlaceholderEval(view, \
-                                                                tabstop, refs, begin, match[0].group(5), \
-                                                                utils.namespace)
-                                        elif match[1] == SnippetPlaceholderShell:
-                                                tabstop = (match[0].group(2) and \
-                                                                int(match[0].group(2))) or -1
-                                                placeholder = SnippetPlaceholderShell(view, \
-                                                                tabstop, begin, match[0].group(3))                                                
-                                        else:
-                                                tabstop = int(match[0].group(1))
-                                                defaults = match[0].lastindex >= 2 and \
-                                                                self.parse_default(match[0].group(3))
-                                                
-                                                if tabstop == 0:
-                                                        # End placeholder
-                                                        placeholder = SnippetPlaceholderEnd(view, begin,
-                                                                        defaults)
-                                                elif placeholders.has_key(tabstop):
-                                                        # Mirror placeholder
-                                                        placeholder = SnippetPlaceholderMirror(view, \
-                                                                        tabstop, begin)
-                                                else:
-                                                        # Default placeholder
-                                                        placeholder = SnippetPlaceholder(view, tabstop, \
-                                                                        defaults, begin)
-                                                
-                                        
-                                        self.add_placeholder(placeholders, placeholder)
-                                        index += len(match[0].group(0)) - 1
-                                        lastInsert = index + 1
-                                        
-                        index += 1
-                
-                lastInsert = self.updateLastInsert(view, index, lastInsert, text, \
-                                marks[1], indent)
+                                # Insert placeholder
+                                self._add_placeholder(val)
 
                 # Create end placeholder if there isn't one yet
-                if not placeholders.has_key(0):
-                        placeholders[0] = SnippetPlaceholderEnd(view, \
-                                        buf.get_iter_at_mark(marks[1]), None)
+                if not self._placeholders.has_key(0):
+                        self._placeholders[0] = PlaceholderEnd(view, view.get_buffer().get_iter_at_mark(marks[1]), None)
 
                 # Make sure run_last is ran for all placeholders and remove any
                 # non `ok` placeholders
-                for tabstop in placeholders.copy():
-                        if tabstop == -1: # anonymous
-                                ph = list(placeholders[-1])
-                        else:
-                                ph = [placeholders[tabstop]]
-                        
-                        for placeholder in ph:
-                                placeholder.run_last(placeholders)
-                                
-                                if not placeholder.ok:
-                                        if placeholder.default:
-                                                buf.delete(placeholder.begin_iter(), \
-                                                                placeholder.end_iter())
-                                        
-                                        placeholder.remove()
+                for tabstop in self._placeholders.copy():
+                        ph = (tabstop == -1 and list(self._placeholders[-1])) or [self._placeholders[tabstop]]
 
-                                        if placeholder.tabstop == -1:
-                                                del placeholders[-1][placeholders[-1].index(\
-                                                                placeholder)]
-                                        else:
-                                                del placeholders[placeholder.tabstop]
+                        for placeholder in ph:
+                                placeholder.run_last(self._placeholders)
+                                
+                                if not placeholder.ok or placeholder.done:
+                                        self._invalid_placeholder(placeholder, not placeholder.ok)
 
                 # Remove all the Expand placeholders which have a tabstop because
                 # they can be used to mirror, but they shouldn't be real tabstops
                 # (if they have mirrors installed). This is problably a bit of 
                 # a dirty hack :)
-                if not placeholders.has_key(-1):
-                        placeholders[-1] = []
+                if not self._placeholders.has_key(-1):
+                        self._placeholders[-1] = []
 
-                for tabstop in placeholders.copy():
+                for tabstop in self._placeholders.copy():
+                        placeholder = self._placeholders[tabstop]
+
                         if tabstop != -1:
-                                if isinstance(placeholders[tabstop], SnippetPlaceholderExpand) and \
-                                                placeholders[tabstop].has_references:
-                                        placeholders[-1].append(placeholders[tabstop])
-                                        del placeholders[tabstop]
-                
-                return placeholders
+                                if isinstance(placeholder, PlaceholderExpand) and placeholder.has_references:
+                                        # Add to anonymous placeholders
+                                        self._placeholders[-1].append(placeholder)
+                                        
+                                        # Remove placeholder
+                                        del self._placeholders[tabstop]
         
         def insert_into(self, plugin_data):
                 buf = plugin_data.view.get_buffer()
                 insert = buf.get_iter_at_mark(buf.get_insert())
-                lastIndex = 0
+                last_index = 0
                 
                 # Find closest mark at current insertion, so that we may insert
                 # our marks in the correct order
@@ -341,47 +254,47 @@ class Snippet:
                 
                 if current:
                         # Insert AFTER current
-                        lastIndex = plugin_data.placeholders.index(current) + 1
+                        last_index = plugin_data.placeholders.index(current) + 1
                 elif next:
                         # Insert BEFORE next
-                        lastIndex = plugin_data.placeholders.index(next)
+                        last_index = plugin_data.placeholders.index(next)
                 else:
                         # Insert at first position
-                        lastIndex = 0
+                        last_index = 0
                 
                 # lastIndex now contains the position of the last mark
                 # Create snippet bounding marks
-                marks = (buf.create_mark(None, insert, True), \
-                                buf.create_mark(None, insert, False), \
-                                buf.create_mark(None, insert, False))
+                marks = (buf.create_mark(None, insert, True), 
+                         buf.create_mark(None, insert, False),
+                         buf.create_mark(None, insert, False))
                 
-                # Now parse the contents of this snippet, create SnippetPlaceholders
+                # Now parse the contents of this snippet, create Placeholders
                 # and insert the placholder marks in the marks array of plugin_data
-                placeholders = self.parse_text(plugin_data.view, marks)
+                self._parse(plugin_data.view, marks)
                 
                 # So now all of the snippet is in the buffer, we have all our 
                 # placeholders right here, what's next, put all marks in the 
                 # plugin_data.marks
-                k = placeholders.keys()
+                k = self._placeholders.keys()
                 k.sort(reverse=True)
                 
-                plugin_data.placeholders.insert(lastIndex, placeholders[0])
-                lastIter = placeholders[0].end_iter()
+                plugin_data.placeholders.insert(last_index, self._placeholders[0])
+                last_iter = self._placeholders[0].end_iter()
                 
                 for tabstop in k:
                         if tabstop != -1 and tabstop != 0:
-                                placeholder = placeholders[tabstop]
-                                endIter = placeholder.end_iter()
+                                placeholder = self._placeholders[tabstop]
+                                end_iter = placeholder.end_iter()
                                 
-                                if lastIter.compare(endIter) < 0:
-                                        lastIter = endIter
+                                if last_iter.compare(end_iter) < 0:
+                                        last_iter = end_iter
                                 
                                 # Inserting placeholder
-                                plugin_data.placeholders.insert(lastIndex, placeholder)
+                                plugin_data.placeholders.insert(last_index, placeholder)
                 
                 # Move end mark to last placeholder
-                buf.move_mark(marks[1], lastIter)
+                buf.move_mark(marks[1], last_iter)
                 
-                return (marks[0], marks[1], marks[2], placeholders)
+                return (marks[0], marks[1], marks[2], self._placeholders)
 
 # ex:ts=8:et:

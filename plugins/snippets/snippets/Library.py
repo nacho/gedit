@@ -15,12 +15,14 @@
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import ElementTree as et
 import os
 import weakref
 import sys
+
 import gtk
-from functions import *
+
+import ElementTree as et
+from Helper import *
 
 class NamespacedId:
         def __init__(self, namespace, id):
@@ -108,7 +110,7 @@ class SnippetData:
                 if not self['tag'] and not self['accelerator']:
                         return False
 
-                library = SnippetsLibrary()
+                library = Library()
                 keyval, mod = gtk.accelerator_parse(self['accelerator'])
                 
                 self.valid = library.valid_tab_trigger(self['tag']) and \
@@ -145,7 +147,7 @@ class SnippetData:
                         self.properties[prop].text = value
                         
                         if prop == 'tag' or prop == 'accelerator':
-                                container = SnippetsLibrary().container(self.language())
+                                container = Library().container(self.language())
                                 container.prop_changed(self, prop, oldvalue)
                 
                 self.check_validation()
@@ -157,11 +159,11 @@ class SnippetData:
                         return None
         
         def is_override(self):
-                return self.override and SnippetsLibrary().overridden[self.override]
+                return self.override and Library().overridden[self.override]
 
         def _override(self):
                 # Find the user file
-                target = SnippetsLibrary().get_user_library(self.language())
+                target = Library().get_user_library(self.language())
 
                 # Create a new node there with override
                 element = et.SubElement(target.root, 'snippet', \
@@ -194,7 +196,7 @@ class SnippetData:
                 target.tainted = True
                 
                 # Add the override
-                SnippetsLibrary().overridden[self.override] = override
+                Library().overridden[self.override] = override
         
         def revert(self, snippet):
                 userlib = self.library()
@@ -262,7 +264,7 @@ class LanguageContainer:
                 if prop == 'accelerator':
                         keyval, mod = gtk.accelerator_parse(value)
                         self.accel_group.connect_group(keyval, mod, 0, \
-                                        SnippetsLibrary().accelerator_activated)
+                                        Library().accelerator_activated)
                 
                 snippets = self.snippets_by_prop[prop]
                 
@@ -449,7 +451,7 @@ class SnippetsSystemFile:
                                         return
 
                 for element in self.loading_elements:
-                        snippet = SnippetsLibrary().add_snippet(self, element)
+                        snippet = Library().add_snippet(self, element)
                 
                 del self.loading_elements[:]
                 self.ok = True
@@ -509,7 +511,7 @@ class SnippetsUserFile(SnippetsSystemFile):
                 
                 self.tainted = True
                 
-                return SnippetsLibrary().add_snippet(self, element)
+                return Library().add_snippet(self, element)
         
         def set_language(self, element):
                 SnippetsSystemFile.set_language(self, element)
@@ -530,10 +532,10 @@ class SnippetsUserFile(SnippetsSystemFile):
                 
                 if language:
                         root = et.Element('snippets', {'language': language})
-                        self.path = os.path.join(SnippetsLibrary().userdir, language.lower() + '.xml')
+                        self.path = os.path.join(Library().userdir, language.lower() + '.xml')
                 else:
                         root = et.Element('snippets')
-                        self.path = os.path.join(SnippetsLibrary().userdir, 'global.xml')
+                        self.path = os.path.join(Library().userdir, 'global.xml')
                 
                 self._set_root(root)
                 self.loaded = True
@@ -552,7 +554,7 @@ class SnippetsUserFile(SnippetsSystemFile):
                         first = self.root[0]
                 except:
                         # No more elements, this library is useless now
-                        SnippetsLibrary().remove_library(self)
+                        Library().remove_library(self)
         
         def save(self):
                 if not self.ok or self.root == None or not self.tainted:
@@ -579,7 +581,7 @@ class SnippetsUserFile(SnippetsSystemFile):
                 SnippetsSystemFile.unload(self)
                 self.root = None
 
-class SnippetsLibraryImpl:
+class LibraryImpl:
         def __init__(self):
                 self._accelerator_activated_cb = None
                 self.loaded = False
@@ -831,6 +833,7 @@ class SnippetsLibraryImpl:
                                 self.remove_container(language)
 
         def ensure(self, language):
+        	self.ensure_files()
                 language = self.normalize_language(language)
 
                 # Ensure language as well as the global snippets (None)
@@ -934,14 +937,14 @@ class SnippetsLibraryImpl:
                 
                 return result
 
-class SnippetsLibrary:
+class Library:
         __instance = None
         
         def __init__(self):
-                if not SnippetsLibrary.__instance:
-                        SnippetsLibrary.__instance = SnippetsLibraryImpl()
+                if not Library.__instance:
+                        Library.__instance = LibraryImpl()
         
-                self.__dict__['_SnippetsLibrary__instance'] = SnippetsLibrary.__instance
+                self.__dict__['_Library__instance'] = Library.__instance
                 
         def __getattr__(self, attr):
                 return getattr(self.__instance, attr)

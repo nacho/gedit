@@ -14,16 +14,18 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-    
-import gedit
-import gtk
-from gtk import gdk
+
 import sys
 import os
 import shutil
-from SnippetPluginInstance import SnippetsPluginInstance
-from SnippetsLibrary import SnippetsLibrary
-from SnippetsDialog import SnippetsDialog
+
+import gtk
+from gtk import gdk    
+import gedit
+
+from WindowHelper import WindowHelper
+from Library import Library
+from Manager import Manager
 from Snippet import Snippet
 
 class SnippetsPlugin(gedit.Plugin):
@@ -32,7 +34,7 @@ class SnippetsPlugin(gedit.Plugin):
 
                 self.dlg = None
                 
-                library = SnippetsLibrary()
+                library = Library()
                 library.set_accelerator_callback(self.accelerator_activated)
                 
                 userdir = os.path.join(os.environ['HOME'], '.gnome2', 'gedit', 'snippets')
@@ -55,7 +57,7 @@ class SnippetsPlugin(gedit.Plugin):
                 return dirs
         
         def activate(self, window):
-                data = SnippetsPluginInstance(self)
+                data = WindowHelper(self)
                 window._snippets_plugin_data = data
                 data.run(window)
 
@@ -68,7 +70,7 @@ class SnippetsPlugin(gedit.Plugin):
         
         def create_configure_dialog(self):
                 if not self.dlg:
-                        self.dlg = SnippetsDialog()
+                        self.dlg = Manager()
                 else:
                         self.dlg.run()
                 

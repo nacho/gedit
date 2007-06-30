@@ -15,15 +15,16 @@
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import gtk
-from SnippetsLibrary import SnippetsLibrary
-from gtk import gdk
-from Snippet import Snippet
 import os
-from SnippetPlaceholders import *
+import gtk
+from gtk import gdk
+
+from Library import Library
+from Snippet import Snippet
+from Placeholder import *
 from SnippetComplete import SnippetComplete
 
-class SnippetController:
+class Document:
         TAB_KEY_VAL = (gtk.keysyms.Tab, \
                         gtk.keysyms.ISO_Left_Tab)
         SPACE_KEY_VAL = (gtk.keysyms.space,)
@@ -42,6 +43,8 @@ class SnippetController:
                 self.language_id = 0
                 self.timeout_update_id = 0
                 
+                # Always have a reference to the global snippets
+                Library().ref(None)
                 self.set_view(view)
         
         # Stop controlling the view. Remove all active snippets, remove references
@@ -53,7 +56,8 @@ class SnippetController:
                         del self.update_placeholders[:]
                         del self.jump_placeholders[:]
 
-                SnippetsLibrary().unref(None)
+		# Always release the reference to the global snippets
+                Library().unref(None)
                 self.set_view(None)
                 self.instance = None
                 self.active_placeholder = None
@@ -102,7 +106,8 @@ class SnippetController:
                         
                         self.update_language()
                 elif self.language_id != 0:
-                        SnippetsLibrary().unref(self.language_id)
+                        Library().unref(self.language_id)
+                        self.language_id = 0
         
         def set_view(self, view):
                 if view == self.view:
@@ -121,7 +126,7 @@ class SnippetController:
                         return
 
                 if self.language_id != 0:
-                        SnippetsLibrary().unref(self.language_id)
+                        Library().unref(self.language_id)
 
                 if lang:
                         self.language_id = lang.get_id()
@@ -129,14 +134,14 @@ class SnippetController:
                         self.language_id = None
 
                 self.instance.language_changed(self)
-                SnippetsLibrary().ref(self.language_id)
+                Library().ref(self.language_id)
 
         def accelerator_activate(self, keyval, mod):
                 if not self.view or not self.view.get_editable():
                         return
 
                 accelerator = gtk.accelerator_name(keyval, mod)
-                snippets = SnippetsLibrary().from_accelerator(accelerator, \
+                snippets = Library().from_accelerator(accelerator, \
                                 self.language_id)
 
                 snippets_debug('Accel!')
@@ -241,7 +246,7 @@ class SnippetController:
                         # Signal this placeholder to end action
                         current.leave()
                         
-                        if current.__class__ == SnippetPlaceholderEnd:
+                        if current.__class__ == PlaceholderEnd:
                                 last = current
                 
                 self.active_placeholder = next
@@ -249,7 +254,7 @@ class SnippetController:
                 if next:
                         next.enter()
                         
-                        if next.__class__ == SnippetPlaceholderEnd:
+                        if next.__class__ == PlaceholderEnd:
                                 last = next
 
                 if last:
@@ -344,7 +349,7 @@ class SnippetController:
                 
                 # You know, we could be in an end placeholder
                 (current, next) = self.next_placeholder()
-                if current and current.__class__ == SnippetPlaceholderEnd:
+                if current and current.__class__ == PlaceholderEnd:
                         self.goto_placeholder(current, None)
                 
                 buf.begin_user_action()
@@ -417,7 +422,7 @@ class SnippetController:
                 if not word:
                         return self.skip_to_next_placeholder()
                 
-                snippets = SnippetsLibrary().from_tag(word, self.language_id)
+                snippets = Library().from_tag(word, self.language_id)
                 
                 if snippets:
                         if len(snippets) == 1:
@@ -514,10 +519,10 @@ class SnippetController:
                         # There is no preset, find all the global snippets and the language
                         # specific snippets
                         
-                        nodes = SnippetsLibrary().get_snippets(None)
+                        nodes = Library().get_snippets(None)
                         
                         if self.language_id:
-                                nodes += SnippetsLibrary().get_snippets(self.language_id)
+                                nodes += Library().get_snippets(self.language_id)
                         
                         if prefix and len(prefix) == 1 and not prefix.isalnum():
                                 hasnodes = False
@@ -623,7 +628,7 @@ class SnippetController:
                 self._set_view(view)
         
         def on_view_key_press(self, view, event):
-                library = SnippetsLibrary()
+                library = Library()
 
                 if not (event.state & gdk.CONTROL_MASK) and \
                                 not (event.state & gdk.MOD1_MASK) and \

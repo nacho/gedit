@@ -15,11 +15,12 @@
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import gtk
-from gtk import gdk
+import string
 from xml.sax import saxutils
 from ElementTree import *
-import string
+
+import gtk
+from gtk import gdk
 
 def message_dialog(par, typ, msg):
         d = gtk.MessageDialog(par, gtk.DIALOG_MODAL, typ, \
@@ -75,7 +76,7 @@ def insert_with_indent(view, piter, text, indentfirst = True):
                 view.get_buffer().insert(piter, text[:-1])
 
 def snippets_debug(*s):
-        return
+        print s
 
 def write_xml(node, file, cdata_nodes=()):
         assert node is not None

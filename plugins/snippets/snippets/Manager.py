@@ -15,19 +15,21 @@
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import os
+
+import gobject
 import gtk
 from gtk import glade
 from gtk import gdk
+import gtksourceview
 import pango
-import os
 import gedit
-import gtksourceview2 as gtksourceview
-from Snippet import Snippet
-from functions import *
-from SnippetsLibrary import *
-import gobject
 
-class SnippetsDialog:
+from Snippet import Snippet
+from Helper import *
+from Library import *
+
+class Manager:
         NAME_COLUMN = 0
         SORT_COLUMN = 1
         OBJ_COLUMN = 2
@@ -42,7 +44,7 @@ class SnippetsDialog:
                 self.run()
 
         def get_language_snippets(self, path, name = None):
-                library = SnippetsLibrary()
+                library = Library()
                 
                 name = self.get_language(path)
                 nodes = library.get_snippets(name)
@@ -64,7 +66,7 @@ class SnippetsDialog:
                 nodes = self.get_language_snippets(path)
                 language = self.get_language(path)
                 
-                SnippetsLibrary().ref(language)
+                Library().ref(language)
                 
                 if nodes:
                         for node in nodes:
@@ -98,13 +100,13 @@ class SnippetsDialog:
 
                 tree_view = self['tree_view_snippets']
                 expand = None
-
+                
                 if not self.model:
                         self.model = gtk.TreeStore(str, str, object)
                         self.model.set_sort_column_id(self.SORT_COLUMN, gtk.SORT_ASCENDING)
-                        manager = gtksourceview.LanguageManager()
+                        manager = gtksourceview.SourceLanguagesManager()
                         langs = manager.get_available_languages()
-
+                        
                         piter = self.model.append(None, (_('Global'), '', None))
                         # Add dummy node
                         self.model.append(piter, ('', '', None))
@@ -180,9 +182,9 @@ class SnippetsDialog:
         def custom_handler(self, xml, function_name, widget_name, str1, str2, \
                         int1 , int2):
                 if function_name == 'create_source_view':
-                        buf = gtksourceview.Buffer()
+                        buf = gtksourceview.SourceBuffer()
                         buf.set_highlight(True)
-                        source_view = gtksourceview.View(buf)
+                        source_view = gtksourceview.SourceView(buf)
                         source_view.set_auto_indent(True)
                         source_view.set_insert_spaces_instead_of_tabs(False)
                         source_view.set_smart_home_end(True)
@@ -376,7 +378,7 @@ class SnippetsDialog:
                         return None
 
                 parent = self.model.get_iter(self.language_path)
-                snippet = SnippetsLibrary().new_snippet(self.get_language( \
+                snippet = Library().new_snippet(self.get_language( \
                                 self.language_path), properties)
                 
                 return Snippet(snippet)
@@ -394,7 +396,7 @@ class SnippetsDialog:
         
         def unref_languages(self):
                 piter = self.model.get_iter_first()
-                library = SnippetsLibrary()
+                library = Library()
                 
                 while piter:
                         if self.is_filled(piter):
@@ -467,7 +469,7 @@ class SnippetsDialog:
                 entry = self['entry_tab_trigger']
                 text = entry.get_text()
                 
-                if text and not SnippetsLibrary().valid_tab_trigger(text):
+                if text and not Library().valid_tab_trigger(text):
                         entry.modify_base(gtk.STATE_NORMAL, gtk.gdk.Color(0xffff, 0x6666, \
                                         0x6666))
                         entry.modify_text(gtk.STATE_NORMAL, gtk.gdk.Color(0xffff, 0xffff, \
@@ -541,10 +543,10 @@ class SnippetsDialog:
                         return
                 
                 if node.is_override():
-                        SnippetsLibrary().revert_snippet(node)
+                        Library().revert_snippet(node)
                         self.selection_changed()
                 else:
-                        SnippetsLibrary().remove_snippet(node)
+                        Library().remove_snippet(node)
                         self.snippet = None
 
                         path = self.model.get_path(piter)
@@ -565,7 +567,7 @@ class SnippetsDialog:
                 self.snippet['accelerator'] = accelerator
 
                 return True
-
+        
         def on_entry_accelerator_key_press(self, entry, event):
                 source_view = self['source_view_snippet']
 
@@ -584,7 +586,7 @@ class SnippetsDialog:
                         
                         self.snippet_changed()
                         return True
-                elif SnippetsLibrary().valid_accelerator(event.keyval, event.state):
+                elif Library().valid_accelerator(event.keyval, event.state):
                         # New accelerator
                         self.set_accelerator(event.keyval, \
                                         event.state & gtk.accelerator_get_default_mod_mask())

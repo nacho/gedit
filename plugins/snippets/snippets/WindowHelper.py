@@ -18,13 +18,16 @@
 import re
 import os
 import gettext
+
+import gtksourceview
 import gtk
 from gtk import gdk
 import gedit
-from SnippetController import SnippetController
-from SnippetsLibrary import SnippetsLibrary
 
-class SnippetsPluginInstance:
+from Document import Document
+from Library import Library
+
+class WindowHelper:
         def __init__(self, plugin):
                 self.plugin = plugin
                 self.current_controller = None
@@ -35,7 +38,7 @@ class SnippetsPluginInstance:
                 self.window = window
                 self.insert_menu()
                 
-                self.accel_group = SnippetsLibrary().get_accel_group(None)
+                self.accel_group = Library().get_accel_group(None)
                 
                 window.add_accel_group(self.accel_group)
                 window.connect('tab-added', self.on_tab_added)
@@ -43,7 +46,7 @@ class SnippetsPluginInstance:
                 # Add controllers to all the current views
                 for view in self.window.get_views():
                         if isinstance(view, gedit.View) and not self.has_controller(view):
-                                view._snippet_controller = SnippetController(self, view)
+                                view._snippet_controller = Document(self, view)
                 
                 self.update()
         
@@ -98,7 +101,7 @@ class SnippetsPluginInstance:
 
         def update_language(self):
                 if self.current_language:
-                        accel_group = SnippetsLibrary().get_accel_group( \
+                        accel_group = Library().get_accel_group( \
                                         self.current_language)
                         self.window.remove_accel_group(accel_group)
 
@@ -106,7 +109,7 @@ class SnippetsPluginInstance:
                         self.current_language = self.current_controller.language_id
                         
                         if self.current_language != None:
-                                accel_group = SnippetsLibrary().get_accel_group( \
+                                accel_group = Library().get_accel_group( \
                                                 self.current_language)
                                 self.window.add_accel_group(accel_group)
                 else:
@@ -135,7 +138,7 @@ class SnippetsPluginInstance:
                 view = tab.get_view()
                 
                 if isinstance(view, gedit.View) and not self.has_controller(view):
-                        view._snippet_controller = SnippetController(self, view)
+                        view._snippet_controller = Document(self, view)
 
         def on_action_snippets_activate(self, item):
                 self.plugin.create_configure_dialog()
