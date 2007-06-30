@@ -43,6 +43,7 @@
 #define NAUTILUS_CLICK_POLICY_KEY	"click_policy"
 #define NAUTILUS_ENABLE_DELETE_KEY	"enable_delete"
 #define NAUTILUS_CONFIRM_TRASH_KEY	"confirm_trash"
+#define TERMINAL_EXEC_KEY		"/desktop/gnome/applications/terminal/exec"
 
 #define GEDIT_FILE_BROWSER_PLUGIN_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_FILE_BROWSER_PLUGIN, GeditFileBrowserPluginPrivate))
 
@@ -466,14 +467,20 @@ get_terminal (void)
 	gchar * terminal;
 
 	client = gconf_client_get_default ();
-	terminal = gconf_client_get_string (client, "/desktop/gnome/applications/terminal/exec", NULL);
-	
-	if (terminal == NULL)
-		terminal = g_strdup(getenv("TERM"));
-	
-	if (terminal == NULL)
-		terminal = g_strdup("xterm");
-	
+	terminal = gconf_client_get_string (client,
+					    TERMINAL_EXEC_KEY,
+					    NULL);
+	g_object_unref (client);
+
+	if (terminal == NULL) {
+		const gchar *term = g_getenv ("TERM");
+
+		if (term != NULL)
+			terminal = g_strdup (term);
+		else
+			terminal = g_strdup ("xterm");
+	}
+
 	return terminal;
 }
 

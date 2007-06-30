@@ -1,5 +1,11 @@
 2007-06-30  Paolo Borelli  <pborelli@katamail.com>
 
+	* plugins/filebrowser/gedit-file-browser-plugin.c: use
+	g_getenv instead of getenv. Fixes a warning noted by
+	Christian Kirbach.
+
+2007-06-30  Paolo Borelli  <pborelli@katamail.com>
+
 	* gedit-tab.[ch]: do not include gedit-print.h in the public
 	gedit-tab header since gedit-print.h is not installed anymore.
 
