@@ -61,7 +61,8 @@ BINDING_GEDIT_HEADERS_SRCDIR_IN = \
 	gedit/gedit-tab.h 		\
 	gedit/gedit-panel.h 		\
 	gedit/gedit-window.h 		\
-	gedit/gedit-help.h
+	gedit/gedit-help.h		\
+	gedit/gedit-language-manager.h
 
 BINDING_UTILS_HEADERS_SRCDIR_IN = \
 	gedit/gedit-utils.h

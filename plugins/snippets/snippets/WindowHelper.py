@@ -19,7 +19,6 @@ import re
 import os
 import gettext
 
-import gtksourceview
 import gtk
 from gtk import gdk
 import gedit

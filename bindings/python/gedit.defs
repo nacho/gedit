@@ -959,3 +959,26 @@
   )
 )
 
+;; From gedit-language-manager.h
+
+(define-function get_language_manager
+  (c-name "gedit_get_language_manager")
+  (return-type "GtkSourceLanguageManager*")
+)
+
+(define-function language_manager_list_languages_sorted
+  (c-name "gedit_language_manager_list_languages_sorted")
+  (return-type "GSList*")
+  (parameters
+    '("GtkSourceLanguageManager*" "lm")
+  )
+)
+
+(define-function language_manager_get_language_from_mime_type
+  (c-name "gedit_language_manager_get_language_from_mime_type")
+  (return-type "GtkSourceLanguage*")
+  (parameters
+    '("GtkSourceLanguageManager*" "lm")
+    '("const-gchar*" "mime_type")
+  )
+)

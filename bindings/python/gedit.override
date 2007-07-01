@@ -4,6 +4,7 @@ headers
 #include "pygobject.h"
 #include <pygtk/pygtk.h>
 
+#include "gedit-language-manager.h"
 #include "gedit-plugin.h"
 #include "gedit-app.h"
 #include "gedit-encodings.h"
@@ -34,6 +35,28 @@ _helper_wrap_gobject_glist (const GList *list)
     }
     return py_list;
 }
+
+static PyObject *
+_helper_wrap_gobject_gslist (const GSList *list)
+{
+    PyObject *py_list;
+    const GSList *tmp;
+
+    if ((py_list = PyList_New(0)) == NULL) {
+        return NULL;
+    }
+    for (tmp = list; tmp != NULL; tmp = tmp->next) {
+        PyObject *py_obj = pygobject_new(G_OBJECT(tmp->data));
+
+        if (py_obj == NULL) {
+            Py_DECREF(py_list);
+            return NULL;
+        }
+        PyList_Append(py_list, py_obj);
+        Py_DECREF(py_obj);
+    }
+    return py_list;
+}
 %%
 modulename gedit 
 %%
@@ -47,6 +70,7 @@ import gtk.Statusbar as PyGtkStatusbar_Type
 import gtksourceview2.Buffer as PyGtkSourceBuffer_Type
 import gtksourceview2.View as PyGtkSourceView_Type
 import gtksourceview2.Language as PyGtkSourceLanguage_Type
+import gtksourceview2.LanguageManager as PyGtkSourceLanguageManager_Type
 %%
 ignore-glob
   *_get_type
@@ -323,3 +347,26 @@ _wrap_gedit_tab_get_from_document_deprecated(PyObject *self, PyObject *args, PyO
 	return NULL;
     return _wrap_gedit_tab_get_from_document(self, args, kwargs);
 }
+%%
+override gedit_language_manager_list_languages_sorted
+static PyObject *
+_wrap_gedit_language_manager_list_languages_sorted(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+
+    static char *kwlist[] = { "lm", NULL };
+    PyGObject *lm;
+    GSList *list;
+    PyObject *py_list;
+    
+    if (!PyArg_ParseTupleAndKeywords (args, kwargs,"O!:language_manager_list_languages_sorted", kwlist, &PyGtkSourceLanguageManager_Type, &lm))
+        return NULL;
+    
+    list = gedit_language_manager_list_languages_sorted (GTK_SOURCE_LANGUAGE_MANAGER (lm->obj));
+
+    py_list = _helper_wrap_gobject_gslist (list);
+
+    g_slist_free (list);
+
+    return py_list;
+}
+%%

@@ -208,8 +208,9 @@ class Manager(object):
         script = default(''.join(node.get_script()), '')
         buf.set_text(script)
         self.script_hash = self.compute_hash(script)
-#        mimetype = gnomevfs.get_mime_type_for_data(script)
-#        language = gsv.SourceLanguagesManager().get_language_from_mime_type(mimetype)
+        mimetype = gnomevfs.get_mime_type_for_data(script)
+        language = gedit.language_manager_get_language_from_mime_type(mimetype)
+        
         if language is not None:
             buf.set_language(language)
             buf.set_highlight(True)
