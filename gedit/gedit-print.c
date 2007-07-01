@@ -165,8 +165,8 @@ buffer_set (GeditPrintJob *job, GParamSpec *pspec, gpointer d)
 		config = GNOME_PRINT_CONFIG (data);
 	}
 
-	gnome_print_config_set_int (config, GNOME_PRINT_KEY_NUM_COPIES, 1);
-	gnome_print_config_set_boolean (config, GNOME_PRINT_KEY_COLLATE, FALSE);
+	gnome_print_config_set_int (config, (guchar *) GNOME_PRINT_KEY_NUM_COPIES, 1);
+	gnome_print_config_set_boolean (config, (guchar *) GNOME_PRINT_KEY_COLLATE, FALSE);
 
 	gtk_source_print_job_set_config (pjob, config);
 	
@@ -313,7 +313,7 @@ gedit_print_dialog_new (GeditPrintJob *job)
 	dialog = g_object_new (GNOME_TYPE_PRINT_DIALOG, "print_config", config, NULL);
 
 	gnome_print_dialog_construct (GNOME_PRINT_DIALOG (dialog), 
-				      _("Print"),
+				      (guchar *) _("Print"),
 			              GNOME_PRINT_DIALOG_RANGE | GNOME_PRINT_DIALOG_COPIES);
 
 	lines = gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (buffer));
@@ -322,7 +322,10 @@ gedit_print_dialog_new (GeditPrintJob *job)
 						 GNOME_PRINT_RANGE_ALL |
 						 GNOME_PRINT_RANGE_RANGE |
 						 selection_flag,
-						 1, lines, "A", _("Lines"));
+						 1, 
+						 lines,
+						 (guchar *) "A",
+						 (guchar *) _("Lines"));
 
 	/* Disable the print preview button of the gnome print dialog if 
 	 * the state of the active tab is print_previewing or 

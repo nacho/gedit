@@ -2311,7 +2311,7 @@ _gedit_tab_print (GeditTab      *tab,
 	GeditPrintJob *pjob;
 	GeditDocument *doc;
 
-	pjob = (GtkSourcePrintJob *) print_job;
+	pjob = (GeditPrintJob *) print_job;
 
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 	g_return_if_fail (GEDIT_IS_PRINT_JOB (pjob));
@@ -2359,7 +2359,7 @@ _gedit_tab_print_preview (GeditTab      *tab,
 	GeditPrintJob *pjob;
 	GeditDocument *doc;
 
-	pjob = (GtkSourcePrintJob *) print_job;
+	pjob = (GeditPrintJob *) print_job;
 
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 	g_return_if_fail (GEDIT_IS_PRINT_JOB (pjob));

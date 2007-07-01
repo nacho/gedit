@@ -142,26 +142,28 @@ save_window_session (xmlTextWriterPtr  writer,
 
 	active_document = gedit_window_get_active_document (window);
 
-	ret = xmlTextWriterStartElement (writer, (xmlChar *) "window");
+	ret = xmlTextWriterStartElement (writer, BAD_CAST "window");
 	if (ret < 0)
 		return ret;
 	
 	role = gtk_window_get_role (GTK_WINDOW (window));
 	if (role != NULL)
 	{
-		ret = xmlTextWriterWriteAttribute (writer, "role", role);
+		ret = xmlTextWriterWriteAttribute (writer,
+						   BAD_CAST "role",
+						   BAD_CAST role);
 		if (ret < 0)
 			return ret;
 	}
 
-	ret = xmlTextWriterStartElement (writer, (xmlChar *) "side-pane");
+	ret = xmlTextWriterStartElement (writer, BAD_CAST "side-pane");
 	if (ret < 0)
 		return ret;
 
 	panel = gedit_window_get_side_panel (window);
 	ret = xmlTextWriterWriteAttribute (writer,
-					   "visible", 
-					   GTK_WIDGET_VISIBLE (panel) ? "yes": "no");
+					   BAD_CAST "visible", 
+					   BAD_CAST (GTK_WIDGET_VISIBLE (panel) ? "yes": "no"));
 	if (ret < 0)
 		return ret;
 
@@ -169,14 +171,14 @@ save_window_session (xmlTextWriterPtr  writer,
 	if (ret < 0)
 		return ret;
 
-	ret = xmlTextWriterStartElement (writer, (xmlChar *) "bottom-panel");
+	ret = xmlTextWriterStartElement (writer, BAD_CAST "bottom-panel");
 	if (ret < 0)
 		return ret;
 
 	panel = gedit_window_get_bottom_panel (window);
 	ret = xmlTextWriterWriteAttribute (writer,
-					   "visible", 
-					   GTK_WIDGET_VISIBLE (panel) ? "yes" : "no");
+					   BAD_CAST "visible", 
+					   BAD_CAST (GTK_WIDGET_VISIBLE (panel) ? "yes" : "no"));
 	if (ret < 0)
 		return ret;
 
@@ -190,7 +192,7 @@ save_window_session (xmlTextWriterPtr  writer,
 	{
 		gchar *uri;
 		
-		ret = xmlTextWriterStartElement (writer, (xmlChar *) "document");
+		ret = xmlTextWriterStartElement (writer, BAD_CAST "document");
 		if (ret < 0)
 			return ret;
 
@@ -199,8 +201,8 @@ save_window_session (xmlTextWriterPtr  writer,
 		if (uri != NULL)
 		{
 			ret = xmlTextWriterWriteAttribute (writer,
-							   "uri", 
-							   uri);
+							   BAD_CAST "uri", 
+							   BAD_CAST uri);
 
 			g_free (uri);
 
@@ -211,8 +213,8 @@ save_window_session (xmlTextWriterPtr  writer,
 		if (active_document == GEDIT_DOCUMENT (l->data))
 		{
 			ret = xmlTextWriterWriteAttribute (writer,
-							   "active", 
-							   "yes");
+							   BAD_CAST "active", 
+							   BAD_CAST "yes");
 			if (ret < 0)
 				return ret;
 		}
@@ -259,12 +261,12 @@ save_session ()
 	if (ret < 0)
 		goto out;
 
-	ret = xmlTextWriterSetIndentString (writer, (const xmlChar *) " ");
+	ret = xmlTextWriterSetIndentString (writer, BAD_CAST " ");
 	if (ret < 0)
 		goto out;
 
 	/* create and set the root node for the session */
-	ret = xmlTextWriterStartElement (writer, (const xmlChar *) "session");
+	ret = xmlTextWriterStartElement (writer, BAD_CAST "session");
 	if (ret < 0)
 		goto out;
 
@@ -670,10 +672,10 @@ parse_window (xmlNodePtr node)
 	xmlChar *role;
 	xmlNodePtr child;
 
-	role = xmlGetProp (node, (const xmlChar *) "role");
+	role = xmlGetProp (node, BAD_CAST "role");
 	gedit_debug_message (DEBUG_SESSION, "Window role: %s", role);
 
-	window = _gedit_app_restore_window (gedit_app_get_default (), role);
+	window = _gedit_app_restore_window (gedit_app_get_default (), (gchar *) role);
 
 	if (role != NULL)
 		xmlFree (role);
@@ -693,7 +695,7 @@ parse_window (xmlNodePtr node)
 			xmlChar *visible;
 			GeditPanel *panel;
 
-			visible = xmlGetProp (child, (const xmlChar *) "visible");
+			visible = xmlGetProp (child, BAD_CAST "visible");
 			panel = gedit_window_get_side_panel (window);
 
 			if ((visible != NULL) &&
@@ -716,7 +718,7 @@ parse_window (xmlNodePtr node)
 			xmlChar *visible;
 			GeditPanel *panel;
 
-			visible = xmlGetProp (child, (const xmlChar *) "visible");
+			visible = xmlGetProp (child, BAD_CAST "visible");
 			panel = gedit_window_get_bottom_panel (window);
 
 			if ((visible != NULL) &&
@@ -739,15 +741,16 @@ parse_window (xmlNodePtr node)
 			xmlChar *uri;
 			xmlChar *active;
 
-			uri = xmlGetProp (child, (const xmlChar *) "uri");
+			uri = xmlGetProp (child, BAD_CAST "uri");
 			if (uri != NULL)
 			{
 				gboolean jump_to;
 
-				active =  xmlGetProp (child, (const xmlChar *) "active");
+				active =  xmlGetProp (child,
+						      BAD_CAST "active");
 				if (active != NULL)
 				{
-					jump_to = (strcmp ((char *) active, "yes") == 0);
+					jump_to = (xmlStrcmp (BAD_CAST "yes", active) == 0);
 					xmlFree (active);
 				}
 				else
@@ -809,7 +812,7 @@ gedit_session_load (void)
 
 	while (child != NULL)
 	{
-		if (xmlStrEqual (child->name, (const xmlChar *) "window"))
+		if (xmlStrEqual (child->name, BAD_CAST "window"))
 		{
 			gedit_debug_message (DEBUG_SESSION, "Restore window");
 
