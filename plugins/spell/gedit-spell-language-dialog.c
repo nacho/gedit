@@ -34,13 +34,10 @@
 #include <glib/gi18n.h>
 #include <glade/glade-xml.h>
 #include <gtk/gtk.h>
-#include <libgnome/gnome-help.h>
 #include <gedit/gedit-utils.h>
-
 #include <gedit/gedit-help.h>
 
 #include "gedit-spell-language-dialog.h"
-
 #include "gedit-spell-checker-language.h"
 
 enum
