@@ -2099,17 +2099,37 @@ _gedit_tab_save_as (GeditTab            *tab,
 		    const GeditEncoding *encoding)
 {
 	GeditDocument *doc;
+	GeditDocumentSaveFlags save_flags;
 
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 	g_return_if_fail ((tab->priv->state == GEDIT_TAB_STATE_NORMAL) ||
+			  (tab->priv->state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION) ||
 			  (tab->priv->state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW));
 	g_return_if_fail (encoding != NULL);
-				  
+
 	g_return_if_fail (tab->priv->tmp_save_uri == NULL);
 	g_return_if_fail (tab->priv->tmp_encoding == NULL);
-	
+
 	doc = gedit_tab_get_document (tab);
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	/* reset the save flags, when saving as */
+	tab->priv->save_flags = 0;
+
+	if (tab->priv->state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION)
+	{
+		/* We already told the user about the external
+		 * modification: hide the message area and set
+		 * the save flag.
+		 */
+
+		set_message_area (tab, NULL);
+		save_flags = tab->priv->save_flags | GEDIT_DOCUMENT_SAVE_IGNORE_MTIME;
+	}
+	else
+	{
+		save_flags = tab->priv->save_flags;
+	}
 
 	gedit_tab_set_state (tab, GEDIT_TAB_STATE_SAVING);
 
@@ -2118,9 +2138,6 @@ _gedit_tab_save_as (GeditTab            *tab,
 	tab->priv->tmp_save_uri = g_strdup (uri);
 	tab->priv->tmp_encoding = encoding;
 
-	/* reset the save flags, when saving as */
-	tab->priv->save_flags = 0;
-	
 	if (tab->priv->auto_save_timeout > 0)
 		remove_auto_save_timeout (tab);
 
