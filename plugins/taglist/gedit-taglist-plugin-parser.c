@@ -42,14 +42,13 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 
-#include <libgnome/gnome-util.h>
-
 #include <gedit/gedit-debug.h>
 
 #include "gedit-taglist-plugin-parser.h"
 
-// FIXME
-#define USER_GEDIT_TAGLIST_PLUGIN_LOCATION ".gedit-2/plugins/taglist/"
+/* we screwed up so we still look here for compatibility */
+#define USER_GEDIT_TAGLIST_PLUGIN_LOCATION_LEGACY ".gedit-2/plugins/taglist/"
+#define USER_GEDIT_TAGLIST_PLUGIN_LOCATION ".gnome2/gedit/taglist/"
 
 TagList *taglist = NULL;
 static gint taglist_ref_count = 0;
@@ -593,7 +592,7 @@ parse_taglist_dir (const gchar *dir)
 
 TagList* create_taglist (void)
 {
-	gchar const * const home = g_get_home_dir ();
+	const gchar *home;
 
 	gedit_debug_message (DEBUG_PLUGINS, "ref_count: %d", taglist_ref_count);
 
@@ -603,14 +602,22 @@ TagList* create_taglist (void)
 		
 		return taglist;
 	}
-		
+
 	/* load user's taglists */
+	home = g_get_home_dir ();
 	if (home != NULL)
 	{
 		gchar *pdir;
 
-		pdir = gnome_util_prepend_user_home (
-				USER_GEDIT_TAGLIST_PLUGIN_LOCATION);
+		pdir = g_build_filename (home,
+					 USER_GEDIT_TAGLIST_PLUGIN_LOCATION_LEGACY,
+					 NULL);
+		parse_taglist_dir (pdir);
+		g_free (pdir);
+
+		pdir = g_build_filename (home,
+					 USER_GEDIT_TAGLIST_PLUGIN_LOCATION,
+					 NULL);
 		parse_taglist_dir (pdir);
 		g_free (pdir);
 	}
