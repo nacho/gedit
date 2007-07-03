@@ -187,9 +187,9 @@ class Manager:
                         source_view = gsv.View(buf)
                         source_view.set_auto_indent(True)
                         source_view.set_insert_spaces_instead_of_tabs(False)
-                        source_view.set_smart_home_end(True)
+                        source_view.set_smart_home_end(gsv.SMART_HOME_END_AFTER)
                         source_view.set_tabs_width(4)
-                        
+
                         return source_view
                 else:
                         return None
