@@ -12,7 +12,8 @@ plugin_PYTHON = \
 	Placeholder.py \
 	Manager.py \
 	SnippetComplete.py \
-	Helper.py
+	Helper.py \
+	SubstitutionParser.py
 
 plugin_DATA = snippets.glade
 
