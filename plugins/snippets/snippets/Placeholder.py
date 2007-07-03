@@ -23,7 +23,7 @@ import signal
 import select
 import locale
 import subprocess
-
+from SubstitutionParser import SubstitutionParser
 import gobject
 
 from Helper import *
@@ -68,7 +68,7 @@ class Placeholder:
 
         def re_environment(self, m):
                 if m.group(1) or not m.group(2) in os.environ:
-                        return '"$' + m.group(2) + '"'
+                        return '$' + m.group(2)
                 else:
                         return os.environ[m.group(2)]
 
@@ -165,6 +165,33 @@ class Placeholder:
                         if not mirror.update(self):
                                 return
 
+        def find_mirrors(self, text, placeholders):
+                mirrors = []
+                
+                while (True):
+                        m = re.search('(\\\\)?\\$(?:{([0-9]+)}|([0-9]+))', text)
+                        
+                        if not m:
+                                break
+                        
+                        # Skip escaped mirrors
+                        if m.group(1):
+                                text = text[m.end():]
+                                continue
+
+                        tabstop = int(m.group(2) or m.group(3))
+                        
+                        if placeholders.has_key(tabstop):
+                                if not tabstop in mirrors:
+                                        mirrors.append(tabstop)
+
+                                text = text[m.end():]
+                        else:
+                                self.ok = False
+                                return None
+                
+                return mirrors 
+
 # This is an placeholder which inserts a mirror of another Placeholder        
 class PlaceholderMirror(Placeholder):
         def __init__(self, view, tabstop, begin):
@@ -205,11 +232,14 @@ class PlaceholderEnd(Placeholder):
                         self.begin = self.buf.create_mark(None, self.end_iter(), False)
 
         def enter(self):
-                self.buf.move_mark(self.buf.get_insert(), self.begin_iter())
-                self.buf.move_mark(self.buf.get_selection_bound(), self.end_iter())
+                if self.begin and not self.begin.get_deleted():
+                        self.buf.move_mark(self.buf.get_insert(), self.begin_iter())
+                
+                if self.end and not self.end.get_deleted():
+                        self.buf.move_mark(self.buf.get_selection_bound(), self.end_iter())
                 
         def leave(self):
-                self.enter()
+                self.enter()                        
 
 # This placeholder is used to expand a command with embedded mirrors        
 class PlaceholderExpand(Placeholder):
@@ -219,29 +249,10 @@ class PlaceholderExpand(Placeholder):
                 self.mirror_text = {0: ''}
                 self.timeout_id = None
                 self.cmd = s
+                self.instant_update = False
 
         def get_mirrors(self, placeholders):
-                s = self.cmd
-                mirrors = []                
-
-                while (True):
-                        m = re.search('\\${([0-9]+)}', s) or re.search('\\$([0-9]+)', s)
-                        
-                        if not m:
-                                break
-
-                        tabstop = int(m.group(1))
-                        
-                        if placeholders.has_key(tabstop):
-                                if not tabstop in mirrors:
-                                        mirrors.append(tabstop)
-
-                                s = s[m.end():]
-                        else:
-                                self.ok = False
-                                return None
-                
-                return mirrors
+                return self.find_mirrors(self.cmd, placeholders)
                 
         # Check if all substitution placeholders are accounted for
         def run_last(self, placeholders):
@@ -255,14 +266,14 @@ class PlaceholderExpand(Placeholder):
                                 
                         for mirror in mirrors:
                                 p = placeholders[mirror]
-                                p.add_mirror(self, True)
+                                p.add_mirror(self, not self.instant_update)
                                 self.mirror_text[p.tabstop] = p.default
                                 
                                 if not p.default:
                                         allDefault = False
                         
                         if allDefault:
-                                self.expand(self.substitute())
+                                self.update(None)
                 else:
                         self.update(None)
                         self.default = self.get_text() or None
@@ -270,7 +281,7 @@ class PlaceholderExpand(Placeholder):
                         if self.tabstop == -1:
                                 self.done = True
                 
-        def re_placeholder(self, m):
+        def re_placeholder(self, m, formatter):
                 if m.group(1):
                         return '"$' + m.group(2) + '"'
                 else:
@@ -279,7 +290,7 @@ class PlaceholderExpand(Placeholder):
                         else:
                                 index = int(m.group(4))
                         
-                        return Placeholder.literal(self, self.mirror_text[index])
+                        return formatter(self.mirror_text[index])
 
         def remove_timeout(self):
                 if self.timeout_id != None:
@@ -295,13 +306,23 @@ class PlaceholderExpand(Placeholder):
                 
                 return False
                 
-        def substitute(self):
+        def substitute(self, text, formatter = None):
+                formatter = formatter or self.literal
+
                 # substitute all mirrors, but also environmental variables
-                text = re.sub('(\\\\)?\\$({([0-9]+)}|([0-9]+))', self.re_placeholder, 
-                                self.cmd)
+                text = re.sub('(\\\\)?\\$({([0-9]+)}|([0-9]+))', lambda m: self.re_placeholder(m, formatter), 
+                                text)
                 
-                return Placeholder.expand_environment(self, text)
+                return self.expand_environment(text)
         
+        def run_update(self):
+                text = self.substitute(self.cmd)
+                
+                if text:
+                        return self.expand(text)
+                
+                return True
+              
         def update(self, mirror):
                 text = None
                 
@@ -316,12 +337,7 @@ class PlaceholderExpand(Placeholder):
                                 if not self.mirror_text[tabstop]:
                                         return False
 
-                text = self.substitute()
-                
-                if text:
-                        return self.expand(text)
-                
-                return True
+                return self.run_update()
 
         def expand(self, text):
                 return True
@@ -539,4 +555,89 @@ class PlaceholderEval(PlaceholderExpand):
                 
                 return True
 
+# Regular expression placeholder
+class PlaceholderRegex(PlaceholderExpand):
+        def __init__(self, view, tabstop, begin, inp, pattern, substitution, modifiers):
+                PlaceholderExpand.__init__(self, view, tabstop, begin, '')
+                
+                self.instant_update = True
+                self.inp = inp
+                self.pattern = pattern
+                self.substitution = substitution
+                
+                self.init_modifiers(modifiers)
+        
+        def init_modifiers(self, modifiers):
+                mods = {'I': re.I,
+                        'L': re.L,
+                        'M': re.M,
+                        'S': re.S,
+                        'U': re.U,
+                        'X': re.X}
+                
+                self.modifiers = 0
+                
+                for modifier in modifiers:
+                        if mods.has_key(modifier):
+                                self.modifiers |= mods[modifier]
+        
+        def get_mirrors(self, placeholders):
+                mirrors = self.find_mirrors(self.pattern, placeholders) + self.find_mirrors(self.substitution, placeholders)
+                
+                if isinstance(self.inp, int):
+                        if not placeholders.has_key(self.inp):
+                                self.ok = False
+                                return None
+                        elif not self.inp in mirrors:
+                                mirrors.append(self.inp)
+
+                return mirrors
+        
+        def literal(self, s):
+                return re.escape(s)
+
+        def get_input(self):
+                if isinstance(self.inp, int):
+                        return self.mirror_text[self.inp]
+                elif self.inp in os.environ:
+                        return os.environ[self.inp]
+                else:
+                        return ''
+        
+        def run_update(self):
+                pattern = self.substitute(self.pattern)
+                substitution = self.substitute(self.substitution, SubstitutionParser.escape_substitution)
+                
+                if pattern:
+                        return self.expand(pattern, substitution)
+                
+                return True
+        
+        def expand(self, pattern, substitution):
+                # Try to compile pattern
+                try:
+                        regex = re.compile(pattern, self.modifiers)
+                except re.Error, message:
+                        sys.stderr.write('Could not compile regular expression: %s\n%s\n' % (pattern, message))
+                        return False
+                
+                inp = self.get_input()
+                match = regex.search(inp)
+                
+                if not match:
+                        self.set_text(inp)
+                else:
+                        groups = match.groupdict()
+                        
+                        idx = 0
+                        for group in match.groups():
+                                groups[str(idx + 1)] = group
+                                idx += 1
+
+                        groups['0'] = match.group(0)
+
+                        parser = SubstitutionParser(substitution, groups)
+                        self.set_text(parser.parse())
+                
+                return True
 # ex:ts=8:et:

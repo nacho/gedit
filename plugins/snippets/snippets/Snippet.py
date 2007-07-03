@@ -158,6 +158,10 @@ class Snippet:
                 begin = self._begin_iter()
                 return PlaceholderEval(self._view, data['tabstop'], data['dependencies'], begin, data['contents'], self._utils.namespace)
         
+        def _create_regex(self, data):
+                begin = self._begin_iter()
+                return PlaceholderRegex(self._view, data['tabstop'], begin, data['input'], data['pattern'], data['substitution'], data['modifiers'])
+                
         def _create_text(self, data):
                 return data
 
@@ -199,8 +203,10 @@ class Snippet:
                                         'placeholder': self._create_placeholder,
                                         'shell': self._create_shell,
                                         'eval': self._create_eval,
+                                        'regex': self._create_regex,
                                         'text': self._create_text}[token.klass](token.data)
                         except:
+                                sys.stderr.write('Token class not supported: %s\n' % token.klass)
                                 continue
                         
                         if isinstance(val, str):

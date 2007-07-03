@@ -17,6 +17,8 @@
 
 import os
 import re
+import sys
+from SubstitutionParser import SubstitutionParser
 
 class Token:
         def __init__(self, klass, data):
@@ -45,7 +47,7 @@ class Parser:
                 self.position = 0
                 self.data_length = len(self.data)
                 
-                self.RULES = (self._match_env, self._match_placeholder, self._match_shell, self._match_eval, self._text)
+                self.RULES = (self._match_env, self._match_regex, self._match_placeholder, self._match_shell, self._match_eval, self._text)
         
         def remains(self):
                 return self.data[self.position:]
@@ -228,5 +230,26 @@ class Parser:
                 self.position += len(match.group(0))
                 
                 return Token('eval', {'tabstop': tabstop, 'dependencies': depend, 'contents': groups[5].replace('\\>', '>')})
+                
+        def _match_regex(self):
+                text = self.remains()
+                
+                content = '((?:\\\\[/]|\\\\}|[^/}])+)'
+                match = re.match('\\${(?:(%s):)?(%s|\\$([A-Z_]+))?[/]%s[/]%s(?:[/]([a-zA-Z]*))?}' % (self.SREG_ID, self.SREG_ID, content, content), text)
+                
+                if not match:
+                        return None
+                
+                groups = match.groups()
+                tabstop = (groups[0] and int(groups[0])) or -1
+                inp = (groups[2] or (groups[1] and int(groups[1]))) or ''
+                
+                pattern = re.sub('\\\\([/}])', '\\1', groups[3])
+                substitution = re.sub('\\\\([/}])', '\\1', groups[4])
+                modifiers = groups[5] or ''
+                
+                self.position += len(match.group(0))
+                
+                return Token('regex', {'tabstop': tabstop, 'input': inp, 'pattern': pattern, 'substitution': substitution, 'modifiers': modifiers})
 
 # ex:ts=8:et:
