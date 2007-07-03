@@ -209,8 +209,9 @@ class Manager(object):
         buf.set_text(script)
         self.script_hash = self.compute_hash(script)
         mimetype = gnomevfs.get_mime_type_for_data(script)
-        language = gedit.language_manager_get_language_from_mime_type(mimetype)
-        
+        lmanager = gedit.get_language_manager()
+        language = gedit.language_manager_get_language_from_mime_type(lmanager, mimetype)
+
         if language is not None:
             buf.set_language(language)
             buf.set_highlight(True)

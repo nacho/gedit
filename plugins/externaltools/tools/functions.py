@@ -175,7 +175,7 @@ def capture_end_execute_panel(capture, exit_code, panel, view, update_type):
         end = start.copy()
         end.forward_chars(300)
 
-        mtype = gnomevfs.get_mime_type_for_data(doc.get_text(start, end)))
+        mtype = gnomevfs.get_mime_type_for_data(doc.get_text(start, end))
         language = gedit.languages_manager_get_language_from_mime_type(mtype)
         if language is not None:
             doc.set_language(language)
