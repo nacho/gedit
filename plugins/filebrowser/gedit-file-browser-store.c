@@ -1573,7 +1573,7 @@ model_create_dummy_node (GeditFileBrowserStore * model,
 	FileBrowserNode *dummy;
 
 	dummy = file_browser_node_new (NULL, parent);
-	dummy->name = g_strdup ("(Empty)");
+	dummy->name = g_strdup (_("(Empty)"));
 
 	dummy->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_DUMMY;
 	dummy->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
@@ -1828,12 +1828,13 @@ model_load_directory_cb (GnomeVFSAsyncHandle * handle,
 			 guint entries_read, gpointer user_data)
 {
 	FileBrowserNode *parent = (FileBrowserNode *) user_data;
-	GeditFileBrowserStore *model =
-	    FILE_BROWSER_NODE_DIR (parent)->model;
+	GeditFileBrowserStore *model;
 	GnomeVFSFileInfo *info;
 	GnomeVFSURI *uri;
 	FileBrowserNodeDir *dir;
 	GList *item;
+
+	model = FILE_BROWSER_NODE_DIR (parent)->model;
 
 	if (result == GNOME_VFS_OK || result == GNOME_VFS_ERROR_EOF) {
 		// Do something with these nodes!
