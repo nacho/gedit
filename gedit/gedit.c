@@ -70,7 +70,7 @@ static GSList *file_list = NULL;
 static const GOptionEntry options [] =
 {
 	{ "encoding", '\0', 0, G_OPTION_ARG_STRING, &encoding_charset,
-	  N_("Set the character encoding to be used to open the files listed on the command line"), "ENCODING" /* When out of string freeze, use N_("ENCODING") */ },
+	  N_("Set the character encoding to be used to open the files listed on the command line"), N_("ENCODING")},
 
 	{ "new-window", '\0', 0, G_OPTION_ARG_NONE, &new_window_option,
 	  N_("Create a new toplevel window in an existing instance of gedit"), NULL },
