@@ -822,7 +822,7 @@ create_combo (GeditFileBrowserWidget * obj)
 
 static GtkActionEntry toplevel_actions[] = 
 {
-	{"FilterMenuAction", NULL, "_Filter"}
+	{"FilterMenuAction", NULL, N_("_Filter")}
 };
 
 static const GtkActionEntry tree_actions_selection[] = 
@@ -905,64 +905,70 @@ create_toolbar (GeditFileBrowserWidget * obj)
 		return;
 	}
 
-	action_group =
-	    gtk_action_group_new ("FileBrowserWidgetActionGroupToplevel");
-	gtk_action_group_add_actions (action_group, toplevel_actions,
+	action_group = gtk_action_group_new ("FileBrowserWidgetActionGroupToplevel");
+	gtk_action_group_set_translation_domain (action_group, NULL);
+	gtk_action_group_add_actions (action_group,
+				      toplevel_actions,
 				      G_N_ELEMENTS (toplevel_actions),
 				      obj);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 
-	action_group =
-	    gtk_action_group_new ("FileBrowserWidgetActionGroup");
+	action_group = gtk_action_group_new ("FileBrowserWidgetActionGroup");
+	gtk_action_group_set_translation_domain (action_group, NULL);
 	gtk_action_group_add_actions (action_group,
 				      tree_actions,
-				      G_N_ELEMENTS
-				      (tree_actions), obj);
+				      G_N_ELEMENTS (tree_actions),
+				      obj);
 	gtk_action_group_add_toggle_actions (action_group,
 					     tree_actions_toggle,
-					     G_N_ELEMENTS
-					     (tree_actions_toggle), obj);
+					     G_N_ELEMENTS (tree_actions_toggle),
+					     obj);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	obj->priv->action_group = action_group;
 
-	action_group =
-	    gtk_action_group_new ("FileBrowserWidgetSelectionActionGroup");
-	gtk_action_group_add_actions (action_group, tree_actions_selection,
-				      G_N_ELEMENTS
-				      (tree_actions_selection), obj);
+	action_group = gtk_action_group_new ("FileBrowserWidgetSelectionActionGroup");
+	gtk_action_group_set_translation_domain (action_group, NULL);
+	gtk_action_group_add_actions (action_group,
+				      tree_actions_selection,
+				      G_N_ELEMENTS (tree_actions_selection),
+				      obj);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	obj->priv->action_group_selection = action_group;
 
-	action_group =
-	    gtk_action_group_new ("FileBrowserWidgetSingleSelectionActionGroup");
-	gtk_action_group_add_actions (action_group, tree_actions_single_selection,
-				      G_N_ELEMENTS
-				      (tree_actions_single_selection), obj);
+	action_group = gtk_action_group_new ("FileBrowserWidgetSingleSelectionActionGroup");
+	gtk_action_group_set_translation_domain (action_group, NULL);
+	gtk_action_group_add_actions (action_group,
+				      tree_actions_single_selection,
+				      G_N_ELEMENTS (tree_actions_single_selection),
+				      obj);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	obj->priv->action_group_single_selection = action_group;
 
-	action_group =
-	    gtk_action_group_new ("FileBrowserWidgetSingleMostSelectionActionGroup");
-	gtk_action_group_add_actions (action_group, tree_actions_single_most_selection,
-				      G_N_ELEMENTS
-				      (tree_actions_single_most_selection), obj);
+	action_group = gtk_action_group_new ("FileBrowserWidgetSingleMostSelectionActionGroup");
+	gtk_action_group_set_translation_domain (action_group, NULL);
+	gtk_action_group_add_actions (action_group,
+				      tree_actions_single_most_selection,
+				      G_N_ELEMENTS (tree_actions_single_most_selection),
+				      obj);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	obj->priv->action_group_single_most_selection = action_group;
 
-	action_group =
-	    gtk_action_group_new ("FileBrowserWidgetSensitiveActionGroup");
-	gtk_action_group_add_actions (action_group, tree_actions_sensitive,
-				      G_N_ELEMENTS
-				      (tree_actions_sensitive), obj);
+	action_group = gtk_action_group_new ("FileBrowserWidgetSensitiveActionGroup");
+	gtk_action_group_set_translation_domain (action_group, NULL);
+	gtk_action_group_add_actions (action_group,
+				      tree_actions_sensitive,
+				      G_N_ELEMENTS (tree_actions_sensitive),
+				      obj);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	obj->priv->action_group_sensitive = action_group;
 
-	gtk_action_set_sensitive (gtk_action_group_get_action
-				  (obj->priv->action_group_sensitive,
-				   "DirectoryPrevious"), FALSE);
-	gtk_action_set_sensitive (gtk_action_group_get_action
-				  (obj->priv->action_group_sensitive,
-				   "DirectoryNext"), FALSE);
+	action = gtk_action_group_get_action (obj->priv->action_group_sensitive,
+					      "DirectoryPrevious");
+	gtk_action_set_sensitive (action, FALSE);
+
+	action = gtk_action_group_get_action (obj->priv->action_group_sensitive,
+					      "DirectoryNext");
+	gtk_action_set_sensitive (action, FALSE);
 
 	toolbar = gtk_ui_manager_get_widget (manager, "/ToolBar");
 	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar), GTK_TOOLBAR_ICONS);

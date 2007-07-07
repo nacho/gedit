@@ -619,17 +619,19 @@ add_popup_ui (GeditWindow * window)
 	data = get_plugin_data (window);
 	manager = gedit_file_browser_widget_get_ui_manager (data->tree_widget);
 
-	action_group =
-	    gtk_action_group_new ("FileBrowserPluginExtra");
-	gtk_action_group_add_actions (action_group, extra_actions,
+	action_group = gtk_action_group_new ("FileBrowserPluginExtra");
+	gtk_action_group_set_translation_domain (action_group, NULL);
+	gtk_action_group_add_actions (action_group,
+				      extra_actions,
 				      G_N_ELEMENTS (extra_actions),
 				      window);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	data->action_group = action_group;
-	
-	action_group =
-	    gtk_action_group_new ("FileBrowserPluginSingleSelectionExtra");
-	gtk_action_group_add_actions (action_group, extra_single_selection_actions,
+
+	action_group = gtk_action_group_new ("FileBrowserPluginSingleSelectionExtra");
+	gtk_action_group_set_translation_domain (action_group, NULL);
+	gtk_action_group_add_actions (action_group,
+				      extra_single_selection_actions,
 				      G_N_ELEMENTS (extra_single_selection_actions),
 				      window);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
