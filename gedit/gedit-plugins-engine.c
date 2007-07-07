@@ -36,7 +36,6 @@
 
 #include <glib/gi18n.h>
 #include <glib/gkeyfile.h>
-#include <libgnome/gnome-util.h>
 #include <gconf/gconf-client.h>
 
 #include "gedit-plugins-engine.h"
@@ -49,7 +48,7 @@
 #include "gedit-python-module.h"
 #endif
 
-#define USER_GEDIT_PLUGINS_LOCATION "gedit/plugins/"
+#define USER_GEDIT_PLUGINS_LOCATION ".gnome2/gedit/plugins/"
 
 #define GEDIT_PLUGINS_ENGINE_BASE_KEY "/apps/gedit-2/plugins"
 #define GEDIT_PLUGINS_ENGINE_KEY GEDIT_PLUGINS_ENGINE_BASE_KEY "/active-plugins"
@@ -358,15 +357,27 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 static void
 gedit_plugins_engine_load_all (void)
 {
-	gchar *pdir;
-
-	pdir = gnome_util_home_file (USER_GEDIT_PLUGINS_LOCATION);
+	const gchar *home;
 
 	/* load user's plugins */
-	if (g_file_test (pdir, G_FILE_TEST_IS_DIR))
-		gedit_plugins_engine_load_dir (pdir);
-	
-	g_free (pdir);
+	home = g_get_home_dir ();
+	if (home == NULL)
+	{
+		g_warning ("Could not get HOME directory\n");
+	}
+	else
+	{
+		gchar *pdir;
+
+		pdir = g_build_filename (home,
+					 USER_GEDIT_PLUGINS_LOCATION,
+					 NULL);
+
+		if (g_file_test (pdir, G_FILE_TEST_IS_DIR))
+			gedit_plugins_engine_load_dir (pdir);
+		
+		g_free (pdir);
+	}
 
 	/* load system plugins */
 	gedit_plugins_engine_load_dir (GEDIT_PLUGINDIR "/");

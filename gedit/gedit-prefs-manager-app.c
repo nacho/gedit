@@ -35,8 +35,6 @@
 
 #include <string.h>
 
-#include <libgnome/gnome-config.h>
-
 #include "gedit-prefs-manager.h"
 #include "gedit-prefs-manager-private.h"
 #include "gedit-prefs-manager-app.h"
@@ -133,17 +131,447 @@ static void gedit_prefs_manager_lockdown_changed	(GConfClient *client,
 							 GConfEntry  *entry,
 							 gpointer     user_data);
 
+/* GUI state is serialized to a .desktop file, not in gconf */
+
+#define GEDIT_STATE_DEFAULT_WINDOW_STATE	0
+#define GEDIT_STATE_DEFAULT_WINDOW_WIDTH	650
+#define GEDIT_STATE_DEFAULT_WINDOW_HEIGHT	500
+#define GEDIT_STATE_DEFAULT_SIDE_PANEL_SIZE	200
+#define GEDIT_STATE_DEFAULT_BOTTOM_PANEL_SIZE	140
+
+#define GEDIT_STATE_FILE_LOCATION ".gnome2/gedit-2"
+
+#define GEDIT_STATE_WINDOW_GROUP "window"
+#define GEDIT_STATE_WINDOW_STATE "state"
+#define GEDIT_STATE_WINDOW_HEIGHT "height"
+#define GEDIT_STATE_WINDOW_WIDTH "width"
+#define GEDIT_STATE_SIDE_PANEL_SIZE "side_panel_size"
+#define GEDIT_STATE_BOTTOM_PANEL_SIZE "bottom_panel_size"
+#define GEDIT_STATE_SIDE_PANEL_ACTIVE_PAGE "side_panel_active_page"
+#define GEDIT_STATE_BOTTOM_PANEL_ACTIVE_PAGE "bottom_panel_active_page"
+
+#define GEDIT_STATE_FILEFILTER_GROUP "filefilter"
+#define GEDIT_STATE_FILEFILTER_ID "id"
 
 static gint window_state = -1;
 static gint window_height = -1;
 static gint window_width = -1;
 static gint side_panel_size = -1;
 static gint bottom_panel_size = -1;
-
 static gint side_panel_active_page = 0;
 static gint bottom_panel_active_page = 0;
-
 static gint active_file_filter = -1;
+
+static GKeyFile *
+get_gedit_state_file ()
+{
+	static GKeyFile *state_file = NULL;
+
+	if (state_file == NULL)
+	{
+		const gchar *home;
+		gchar *path;
+		GError *err = NULL;
+
+		state_file = g_key_file_new ();
+
+		home = g_get_home_dir ();
+		if (home == NULL)
+		{
+			g_warning ("Could not get HOME directory\n");
+			goto out;
+		}
+
+		path = g_build_filename (home,
+					 GEDIT_STATE_FILE_LOCATION,
+					 NULL);
+
+		if (!g_key_file_load_from_file (state_file,
+						path,
+						G_KEY_FILE_NONE,
+						&err))
+		{
+			if (err->domain != G_FILE_ERROR ||
+			    err->code != G_FILE_ERROR_NOENT)
+			{
+				g_warning ("Could not load gedit state file: %s\n",
+					   err->message);
+			}
+		}
+	}
+
+ out:
+	g_return_val_if_fail (state_file != NULL, NULL);
+	return state_file;
+}
+
+static void
+gedit_state_get_int (const gchar *group,
+		     const gchar *key,
+		     gint         defval,
+		     gint        *result)
+{
+	GKeyFile *state_file;
+	gint res;
+	GError *err = NULL;
+
+	state_file = get_gedit_state_file ();
+	res = g_key_file_get_integer (state_file,
+				      group,
+				      key,
+				      &err);
+
+	if (err != NULL)
+	{
+		if ((err->domain != G_KEY_FILE_ERROR) ||
+		    ((err->code != G_KEY_FILE_ERROR_GROUP_NOT_FOUND &&
+		      err->code != G_KEY_FILE_ERROR_KEY_NOT_FOUND)))
+		{
+			g_warning ("Could not get state value %s::%s : %s\n",
+				   group,
+				   key,
+				   err->message);
+		}
+
+		if (defval > 0)
+			*result = defval;
+	}
+	else
+	{
+		*result = res;
+	}
+}
+
+static void
+gedit_state_set_int (const gchar *group,
+		     const gchar *key,
+		     gint         value)
+{
+	GKeyFile *state_file;
+
+	state_file = get_gedit_state_file ();
+	g_key_file_set_integer (state_file,
+				group,
+				key,
+				value);
+}
+
+static gboolean
+gedit_state_file_sync ()
+{
+	GKeyFile *state_file;
+
+	state_file = get_gedit_state_file ();
+	if (state_file != NULL)
+	{
+		const gchar *home;
+		gchar *path;
+		gchar *content;
+		gsize length;
+		GError *err = NULL;
+
+		home = g_get_home_dir ();
+		if (home == NULL)
+		{
+			g_warning ("Could not get HOME directory\n");
+			return FALSE;
+		}
+
+		path = g_build_filename (home,
+					 GEDIT_STATE_FILE_LOCATION,
+					 NULL);
+
+		content = g_key_file_to_data (state_file,
+					      &length,
+					      NULL);
+
+		if ((content != NULL) &&
+		    (!g_file_set_contents (path,
+					   content,
+					   length,
+					   &err)))
+		{
+			g_warning ("Could not write gedit state file: %s\n",
+				   err->message);
+			return FALSE;
+		}
+	}
+
+	return TRUE;
+}
+
+/* Window state */
+gint
+gedit_prefs_manager_get_window_state (void)
+{
+	if (window_state == -1)
+	{
+		gedit_state_get_int (GEDIT_STATE_WINDOW_GROUP,
+				     GEDIT_STATE_WINDOW_STATE,
+				     GEDIT_STATE_DEFAULT_WINDOW_STATE,
+				     &window_state);
+	}
+
+	return window_state;
+}
+			
+void
+gedit_prefs_manager_set_window_state (gint ws)
+{
+	g_return_if_fail (ws > -1);
+	
+	window_state = ws;
+
+	gedit_state_set_int (GEDIT_STATE_WINDOW_GROUP,
+			     GEDIT_STATE_WINDOW_STATE,
+			     ws);
+}
+
+gboolean
+gedit_prefs_manager_window_state_can_set (void)
+{
+	return TRUE;
+}
+
+/* Window size */
+void
+gedit_prefs_manager_get_window_size (gint *width, gint *height)
+{
+	g_return_if_fail (width != NULL && height != NULL);
+
+	if (window_width == -1)
+	{
+		gedit_state_get_int (GEDIT_STATE_WINDOW_GROUP,
+				     GEDIT_STATE_WINDOW_WIDTH,
+				     GEDIT_STATE_DEFAULT_WINDOW_WIDTH,
+				     &window_width);
+	}
+
+	if (window_height == -1)
+	{
+		gedit_state_get_int (GEDIT_STATE_WINDOW_GROUP,
+				     GEDIT_STATE_WINDOW_HEIGHT,
+				     GEDIT_STATE_DEFAULT_WINDOW_HEIGHT,
+				     &window_height);
+	}
+
+	*width = window_width;
+	*height = window_height;
+}
+
+void
+gedit_prefs_manager_get_default_window_size (gint *width, gint *height)
+{
+	g_return_if_fail (width != NULL && height != NULL);
+
+	*width = GEDIT_STATE_DEFAULT_WINDOW_WIDTH;
+	*height = GEDIT_STATE_DEFAULT_WINDOW_HEIGHT;
+}
+
+void
+gedit_prefs_manager_set_window_size (gint width, gint height)
+{
+	g_return_if_fail (width > -1 && height > -1);
+
+	window_width = width;
+	window_height = height;
+
+	gedit_state_set_int (GEDIT_STATE_WINDOW_GROUP,
+			     GEDIT_STATE_WINDOW_WIDTH,
+			     width);
+	gedit_state_set_int (GEDIT_STATE_WINDOW_GROUP,
+			     GEDIT_STATE_WINDOW_HEIGHT,
+			     height);
+}
+
+gboolean 
+gedit_prefs_manager_window_size_can_set (void)
+{
+	return TRUE;
+}
+
+/* Side panel */
+gint
+gedit_prefs_manager_get_side_panel_size (void)
+{
+	if (side_panel_size == -1)
+	{
+		gedit_state_get_int (GEDIT_STATE_WINDOW_GROUP,
+				     GEDIT_STATE_SIDE_PANEL_SIZE,
+				     GEDIT_STATE_DEFAULT_SIDE_PANEL_SIZE,
+				     &side_panel_size);
+	}
+
+	return side_panel_size;
+}
+
+gint 
+gedit_prefs_manager_get_default_side_panel_size (void)
+{
+	return GEDIT_STATE_DEFAULT_SIDE_PANEL_SIZE;
+}
+
+void 
+gedit_prefs_manager_set_side_panel_size (gint ps)
+{
+	g_return_if_fail (ps > -1);
+	
+	if (side_panel_size == ps)
+		return;
+		
+	side_panel_size = ps;
+	gedit_state_set_int (GEDIT_STATE_WINDOW_GROUP,
+			     GEDIT_STATE_SIDE_PANEL_SIZE,
+			     ps);
+}
+
+gboolean 
+gedit_prefs_manager_side_panel_size_can_set (void)
+{
+	return TRUE;
+}
+
+gint
+gedit_prefs_manager_get_side_panel_active_page (void)
+{
+	if (side_panel_active_page == 0)
+	{
+		gedit_state_get_int (GEDIT_STATE_WINDOW_GROUP,
+				     GEDIT_STATE_SIDE_PANEL_ACTIVE_PAGE,
+				     -1,
+				     &side_panel_active_page);
+	}
+
+	return side_panel_active_page;
+}
+
+void
+gedit_prefs_manager_set_side_panel_active_page (gint id)
+{
+	if (side_panel_active_page == id)
+		return;
+
+	side_panel_active_page = id;
+	gedit_state_set_int (GEDIT_STATE_WINDOW_GROUP,
+			     GEDIT_STATE_SIDE_PANEL_ACTIVE_PAGE,
+			     id);
+}
+
+gboolean 
+gedit_prefs_manager_side_panel_active_page_can_set (void)
+{
+	return TRUE;
+}
+
+/* Bottom panel */
+gint
+gedit_prefs_manager_get_bottom_panel_size (void)
+{
+	if (bottom_panel_size == -1)
+	{
+		gedit_state_get_int (GEDIT_STATE_WINDOW_GROUP,
+				     GEDIT_STATE_BOTTOM_PANEL_SIZE,
+				     GEDIT_STATE_DEFAULT_BOTTOM_PANEL_SIZE,
+				     &bottom_panel_size);
+	}
+
+	return bottom_panel_size;
+}
+
+gint 
+gedit_prefs_manager_get_default_bottom_panel_size (void)
+{
+	return GEDIT_STATE_DEFAULT_BOTTOM_PANEL_SIZE;
+}
+
+void 
+gedit_prefs_manager_set_bottom_panel_size (gint ps)
+{
+	g_return_if_fail (ps > -1);
+
+	if (bottom_panel_size == ps)
+		return;
+	
+	bottom_panel_size = ps;
+	gedit_state_set_int (GEDIT_STATE_WINDOW_GROUP,
+			     GEDIT_STATE_BOTTOM_PANEL_SIZE,
+			     ps);
+}
+
+gboolean 
+gedit_prefs_manager_bottom_panel_size_can_set (void)
+{
+	return TRUE;
+}
+
+gint
+gedit_prefs_manager_get_bottom_panel_active_page (void)
+{
+	if (bottom_panel_active_page == 0)
+	{
+		gedit_state_get_int (GEDIT_STATE_WINDOW_GROUP,
+				     GEDIT_STATE_BOTTOM_PANEL_ACTIVE_PAGE,
+				     -1,
+				     &bottom_panel_active_page);
+	}
+
+	return bottom_panel_active_page;
+}
+
+void
+gedit_prefs_manager_set_bottom_panel_active_page (gint id)
+{
+	if (bottom_panel_active_page == id)
+		return;
+
+	bottom_panel_active_page = id;
+	gedit_state_set_int (GEDIT_STATE_WINDOW_GROUP,
+			     GEDIT_STATE_BOTTOM_PANEL_ACTIVE_PAGE,
+			     id);
+}
+
+gboolean 
+gedit_prefs_manager_bottom_panel_active_page_can_set (void)
+{
+	return TRUE;
+}
+
+/* File filter */
+gint
+gedit_prefs_manager_get_active_file_filter (void)
+{
+	if (active_file_filter == -1)
+	{
+		gedit_state_get_int (GEDIT_STATE_FILEFILTER_GROUP,
+				     GEDIT_STATE_FILEFILTER_ID,
+				     0,
+				     &active_file_filter);
+	}
+
+	return active_file_filter;
+}
+
+void
+gedit_prefs_manager_set_active_file_filter (gint id)
+{
+	g_return_if_fail (id >= 0);
+	
+	if (active_file_filter == id)
+		return;
+
+	active_file_filter = id;
+	gedit_state_set_int (GEDIT_STATE_FILEFILTER_GROUP,
+			     GEDIT_STATE_FILEFILTER_ID,
+			     id);
+}
+
+gboolean 
+gedit_prefs_manager_active_file_filter_can_set (void)
+{
+	return TRUE;
+}
+
+/* Normal prefs are stored in GConf */
 
 gboolean
 gedit_prefs_manager_app_init (void)
@@ -151,9 +579,9 @@ gedit_prefs_manager_app_init (void)
 	gedit_debug (DEBUG_PREFS);
 
 	g_return_val_if_fail (gedit_prefs_manager == NULL, FALSE);
-	
+
 	gedit_prefs_manager_init ();
-	
+
 	if (gedit_prefs_manager != NULL)
 	{
 		/* TODO: notify, add dirs */
@@ -264,224 +692,10 @@ gedit_prefs_manager_app_shutdown ()
 
 	gedit_prefs_manager_shutdown ();
 
-	gnome_config_sync ();
+	gedit_state_file_sync ();
 }
 
-/* Window state */
-gint
-gedit_prefs_manager_get_window_state (void)
-{
-	if (window_state == -1)
-		window_state = gnome_config_get_int (GPM_WINDOW_STATE "=" GPM_DEFAULT_WINDOW_STATE_STR);
 
-	return window_state;
-}
-			
-void
-gedit_prefs_manager_set_window_state (gint ws)
-{
-	g_return_if_fail (ws > -1);
-	
-	window_state = ws;
-	gnome_config_set_int (GPM_WINDOW_STATE, ws);
-}
-
-gboolean
-gedit_prefs_manager_window_state_can_set (void)
-{
-	return TRUE;
-}
-
-/* Window size */
-void
-gedit_prefs_manager_get_window_size (gint *width, gint *height)
-{
-	g_return_if_fail (width != NULL && height != NULL);
-
-	if (window_width == -1)
-		window_width = gnome_config_get_int (GPM_WINDOW_WIDTH "=" GPM_DEFAULT_WINDOW_WIDTH_STR);
-
-	if (window_height == -1)
-		window_height = gnome_config_get_int (GPM_WINDOW_HEIGHT "=" GPM_DEFAULT_WINDOW_HEIGHT_STR);
-
-	*width = window_width;
-	*height = window_height;
-}
-
-void
-gedit_prefs_manager_get_default_window_size (gint *width, gint *height)
-{
-	g_return_if_fail (width != NULL && height != NULL);
-
-	*width = GPM_DEFAULT_WINDOW_WIDTH;
-	*height = GPM_DEFAULT_WINDOW_HEIGHT;
-}
-
-void
-gedit_prefs_manager_set_window_size (gint width, gint height)
-{
-	g_return_if_fail (width > -1 && height > -1);
-
-	window_width = width;
-	window_height = height;
-
-	gnome_config_set_int (GPM_WINDOW_WIDTH, width);
-	gnome_config_set_int (GPM_WINDOW_HEIGHT, height);
-}
-
-gboolean 
-gedit_prefs_manager_window_size_can_set (void)
-{
-	return TRUE;
-}
-
-/* Side panel */
-gint
-gedit_prefs_manager_get_side_panel_size (void)
-{
-	if (side_panel_size == -1)
-		side_panel_size = gnome_config_get_int (GPM_SIDE_PANEL_SIZE "=" GPM_DEFAULT_SIDE_PANEL_SIZE_STR);
-
-	return side_panel_size;
-}
-
-gint 
-gedit_prefs_manager_get_default_side_panel_size (void)
-{
-	return GPM_DEFAULT_SIDE_PANEL_SIZE;
-}
-
-void 
-gedit_prefs_manager_set_side_panel_size (gint ps)
-{
-	g_return_if_fail (ps > -1);
-	
-	if (side_panel_size == ps)
-		return;
-		
-	side_panel_size = ps;
-	gnome_config_set_int (GPM_SIDE_PANEL_SIZE, ps);
-}
-
-gboolean 
-gedit_prefs_manager_side_panel_size_can_set (void)
-{
-	return TRUE;
-}
-
-gint
-gedit_prefs_manager_get_side_panel_active_page (void)
-{
-	if (side_panel_active_page == 0)
-		side_panel_active_page = gnome_config_get_int (
-				GPM_SIDE_PANEL_ACTIVE_PAGE);
-
-	return side_panel_active_page;
-}
-
-void
-gedit_prefs_manager_set_side_panel_active_page (gint id)
-{
-	if (side_panel_active_page == id)
-		return;
-
-	side_panel_active_page = id;
-	gnome_config_set_int (GPM_SIDE_PANEL_ACTIVE_PAGE, id);
-}
-
-gboolean 
-gedit_prefs_manager_side_panel_active_page_can_set (void)
-{
-	return TRUE;
-}
-
-/* Bottom panel */
-gint
-gedit_prefs_manager_get_bottom_panel_size (void)
-{
-	if (bottom_panel_size == -1)
-		bottom_panel_size = gnome_config_get_int (GPM_BOTTOM_PANEL_SIZE "=" GPM_DEFAULT_BOTTOM_PANEL_SIZE_STR);
-
-	return bottom_panel_size;
-}
-
-gint 
-gedit_prefs_manager_get_default_bottom_panel_size (void)
-{
-	return GPM_DEFAULT_BOTTOM_PANEL_SIZE;
-}
-
-void 
-gedit_prefs_manager_set_bottom_panel_size (gint ps)
-{
-	g_return_if_fail (ps > -1);
-
-	if (bottom_panel_size == ps)
-		return;
-	
-	bottom_panel_size = ps;
-	gnome_config_set_int (GPM_BOTTOM_PANEL_SIZE, ps);
-}
-
-gboolean 
-gedit_prefs_manager_bottom_panel_size_can_set (void)
-{
-	return TRUE;
-}
-
-gint
-gedit_prefs_manager_get_bottom_panel_active_page (void)
-{
-	if (bottom_panel_active_page == 0)
-		bottom_panel_active_page = gnome_config_get_int (
-				GPM_BOTTOM_PANEL_ACTIVE_PAGE);
-
-	return bottom_panel_active_page;
-}
-
-void
-gedit_prefs_manager_set_bottom_panel_active_page (gint id)
-{
-	if (bottom_panel_active_page == id)
-		return;
-
-	bottom_panel_active_page = id;
-	gnome_config_set_int (GPM_BOTTOM_PANEL_ACTIVE_PAGE, id);
-}
-
-gboolean 
-gedit_prefs_manager_bottom_panel_active_page_can_set (void)
-{
-	return TRUE;
-}
-
-/* File filter */
-gint
-gedit_prefs_manager_get_active_file_filter (void)
-{
-	if (active_file_filter == -1)
-		active_file_filter = gnome_config_get_int (GPM_ACTIVE_FILE_FILTER "=0");
-
-	return active_file_filter;
-}
-
-void
-gedit_prefs_manager_set_active_file_filter (gint id)
-{
-	g_return_if_fail (id >= 0);
-	
-	if (active_file_filter == id)
-		return;
-
-	active_file_filter = id;
-	gnome_config_set_int (GPM_ACTIVE_FILE_FILTER, id);
-}
-
-gboolean 
-gedit_prefs_manager_active_file_filter_can_set (void)
-{
-	return TRUE;
-}
 static void 
 gedit_prefs_manager_editor_font_changed (GConfClient *client,
 					 guint        cnxn_id, 
