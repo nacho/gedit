@@ -33,11 +33,7 @@
 
 #include <time.h>
 #include <stdlib.h>
-
 #include <libxml/xmlreader.h>
-
-#include <libgnome/gnome-util.h>
-
 #include "gedit-metadata-manager.h"
 #include "gedit-debug.h"
 
@@ -213,6 +209,21 @@ parseItem (xmlDocPtr doc, xmlNodePtr cur)
 	xmlFree (atime);
 }
 
+static gchar *
+get_metadata_filename (void)
+{
+	const gchar *home;
+
+	home = g_get_home_dir ();
+	if (home == NULL)
+	{
+		g_warning ("Could not get home directory\n");
+		return NULL;
+	}
+
+	return g_build_filename (home, ".gnome2", METADATA_FILE, NULL);
+}
+
 static gboolean
 load_values ()
 {
@@ -230,8 +241,9 @@ load_values ()
 	xmlKeepBlanksDefault (0);
 
 	/* FIXME: file locking - Paolo */
-	file_name = gnome_util_home_file (METADATA_FILE);
-	if (!g_file_test (file_name, G_FILE_TEST_EXISTS))
+	file_name = get_metadata_filename ();
+	if ((file_name == NULL) ||
+	    (!g_file_test (file_name, G_FILE_TEST_EXISTS)))
 	{
 		g_free (file_name);
 		return FALSE;
@@ -505,9 +517,12 @@ gedit_metadata_manager_save (gpointer data)
 			      root);        
 
 	/* FIXME: lock file - Paolo */
-	file_name = gnome_util_home_file (METADATA_FILE);
-	xmlSaveFormatFile (file_name, doc, 1);
-	g_free (file_name);
+	file_name = get_metadata_filename ();
+	if (file_name != NULL)
+	{
+		xmlSaveFormatFile (file_name, doc, 1);
+		g_free (file_name);
+	}
 
 	xmlFreeDoc (doc); 
 
