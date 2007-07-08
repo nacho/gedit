@@ -1,5 +1,12 @@
 2007-07-08  Paolo Borelli  <pborelli@katamail.com>
 
+	* gedit/gedit-utils.c: use gnome_vfs_url_show instead
+	of gnome_url_show, the latter is just a wrapper of the
+	former which uses GError and we are using a NULL GError
+	anyway.
+
+2007-07-08  Paolo Borelli  <pborelli@katamail.com>
+
 	* data/gedit.pc.in: require gtksourceview-2.0. Reported
 	by Götz Waschk in bug #454801.
 

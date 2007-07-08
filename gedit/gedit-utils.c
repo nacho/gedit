@@ -49,7 +49,6 @@
 #include <glib/gi18n.h>
 #include <glade/glade-xml.h>
 #include <libgnomevfs/gnome-vfs.h>
-#include <libgnome/gnome-url.h>
 
 #include "gedit-utils.h"
 
@@ -893,7 +892,7 @@ gedit_utils_activate_url (GtkAboutDialog *about,
 			  const gchar    *url,
 			  gpointer        data)
 {
-	gnome_url_show (url, NULL);
+	gnome_vfs_url_show (url);
 }
 
 static gboolean
