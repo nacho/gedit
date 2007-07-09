@@ -64,7 +64,7 @@ class ${1:ClassName} ${3:extends AnotherClass}
     <tag>$</tag>
   </snippet>
   <snippet id="foreach">
-    <text><![CDATA[foreach( \$${1:variable} as \$${2:key} => \$${3:value} )
+    <text><![CDATA[foreach( $${1:variable} as $${2:key} => $${3:value} )
 {
 	${0:# code...}
 }]]></text>
@@ -72,7 +72,7 @@ class ${1:ClassName} ${3:extends AnotherClass}
     <tag>foreach</tag>
   </snippet>
   <snippet id="for">
-    <text><![CDATA[for ( \$${1:i}=${2:0}; \$${1:i} < $3; \$${1:i}++ )
+    <text><![CDATA[for ( $${1:i}=${2:0}; $${1:i} < $3; $${1:i}++ )
 { 
 	${0:# code...}
 }]]></text>
@@ -80,7 +80,7 @@ class ${1:ClassName} ${3:extends AnotherClass}
     <tag>for</tag>
   </snippet>
   <snippet id="function">
-    <text><![CDATA[${1:public }function ${2:FunctionName} (${3: \$${4:value}${5:=''} })
+    <text><![CDATA[${1:public }function ${2:FunctionName} (${3: $${4:value}${5:=''} })
 {
 	${0:# code...}
 }]]></text>
@@ -93,12 +93,12 @@ class ${1:ClassName} ${3:extends AnotherClass}
     <tag>$</tag>
   </snippet>
   <snippet id="globals">
-    <text><![CDATA[\$GLOBALS['${1:variable}']${2: = }${3:something}${4:;}$0]]></text>
+    <text><![CDATA[$GLOBALS['${1:variable}']${2: = }${3:something}${4:;}$0]]></text>
     <description>$GLOBALS['..']</description>
     <tag>globals</tag>
   </snippet>
   <snippet id="if?">
-    <text><![CDATA[\$${1:retVal} = ( ${2:condition} ) ? ${3:a} : ${4:b} ;]]></text>
+    <text><![CDATA[$${1:retVal} = ( ${2:condition} ) ? ${3:a} : ${4:b} ;]]></text>
     <description>$.. =</description>
     <tag>iff</tag>
   </snippet>
@@ -134,7 +134,7 @@ $0]]></text>
     <tag>incl</tag>
   </snippet>
   <snippet id="array">
-    <text><![CDATA[\$${1:arrayName} = array( '$2'${3:,} );$0]]></text>
+    <text><![CDATA[$${1:arrayName} = array( '$2'${3:,} );$0]]></text>
     <description>$.. = array</description>
     <tag>array</tag>
   </snippet>

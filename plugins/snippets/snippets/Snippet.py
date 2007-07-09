@@ -209,7 +209,7 @@ class Snippet:
                                 sys.stderr.write('Token class not supported: %s\n' % token.klass)
                                 continue
                         
-                        if isinstance(val, str):
+                        if isinstance(val, basestring):
                                 # Insert text
                                 self._insert_text(val)
                         else:

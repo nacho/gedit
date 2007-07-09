@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <snippets language="Tcl">
   <snippet id="foreach">
-    <text><![CDATA[foreach ${1:var} ${2:\$list} {
+    <text><![CDATA[foreach ${1:var} ${2:$list} {
 	${3}
 }
 ]]></text>
@@ -9,7 +9,7 @@
     <tag>foreach</tag>
   </snippet>
   <snippet id="for">
-    <text><![CDATA[for {${1:set i 0}} {${2:\$i < \$n}} {${3:incr i}} {
+    <text><![CDATA[for {${1:set i 0}} {${2:$i < $n}} {${3:incr i}} {
 	${4}
 }
 ]]></text>
@@ -25,7 +25,7 @@
     <tag>if</tag>
   </snippet>
   <snippet id="proc">
-    <text><![CDATA[proc ${1:name} {${2:args}} \\
+    <text><![CDATA[proc ${1:name} {${2:args}} \
 {
 	${3}
 }
@@ -34,7 +34,7 @@
     <tag>proc</tag>
   </snippet>
   <snippet id="switch">
-    <text><![CDATA[switch ${1:-exact} -- ${2:\$var} {
+    <text><![CDATA[switch ${1:-exact} -- ${2:$var} {
 	${3:match} {
 		${4}
 	}
