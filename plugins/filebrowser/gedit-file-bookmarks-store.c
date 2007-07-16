@@ -329,7 +329,7 @@ process_volume (GeditFileBookmarksStore * model, GnomeVFSVolume * volume,
 		if (strcmp (uri, "file:///") == 0) {
 			*root = TRUE;
 
-			add_volume (model, volume, "File System",
+			add_volume (model, volume, _("File System"),
 				    GEDIT_FILE_BOOKMARKS_STORE_IS_ROOT |
 				    GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE,
 				    NULL);

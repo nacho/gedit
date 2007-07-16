@@ -1115,6 +1115,31 @@ model_resort_node (GeditFileBrowserStore * model, FileBrowserNode * node)
 }
 
 static void
+row_inserted (GeditFileBrowserStore * model,
+	      const GtkTreePath * path,
+	      GtkTreeIter * iter)
+{
+	GtkTreePath *copy = gtk_tree_path_copy (path);
+	
+	/* Insert a copy of the actual path here because the row-inserted
+	   signal may alter the path */
+	gtk_tree_model_row_inserted (GTK_TREE_MODEL(model), copy, iter);
+	gtk_tree_path_free (copy);
+}
+
+static void
+row_deleted (GeditFileBrowserStore * model,
+	     const GtkTreePath * path)
+{
+	GtkTreePath *copy = gtk_tree_path_copy (path);
+	
+	/* Delete a copy of the actual path here because the row-deleted
+	   signal may alter the path */
+	gtk_tree_model_row_deleted (GTK_TREE_MODEL(model), copy);
+	gtk_tree_path_free (copy);
+}
+
+static void
 model_refilter_node (GeditFileBrowserStore * model, FileBrowserNode * node,
 		     GtkTreePath * path)
 {
@@ -1169,12 +1194,9 @@ model_refilter_node (GeditFileBrowserStore * model, FileBrowserNode * node,
 			iter.user_data = node;
 
 			if (old_visible) {
-				gtk_tree_model_row_deleted (GTK_TREE_MODEL
-							    (model), path);
+				row_deleted (model, path);
 			} else {
-				gtk_tree_model_row_inserted (GTK_TREE_MODEL
-							     (model), path,
-							     &iter);
+				row_inserted (model, path, &iter);
 
 				model_check_dummy (model, node);
 				gtk_tree_path_next (path);
@@ -1394,7 +1416,7 @@ model_remove_node (GeditFileBrowserStore * model, FileBrowserNode * node,
 	/* Only delete if the node is visible in the tree (but only when it's
 	   not the virtual root) */
 	if (model_node_visibility (model, node) && node != model->priv->virtual_root)
-		gtk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
+		row_deleted (model, path);
 
 	if (free_path)
 		gtk_tree_path_free (path);
@@ -1452,7 +1474,7 @@ model_clear (GeditFileBrowserStore * model, gboolean free_nodes)
 			if (NODE_IS_DUMMY (dummy)
 			    && model_node_visibility (model, dummy)) {
 				path = gtk_tree_path_new_first ();
-				gtk_tree_model_row_deleted (GTK_TREE_MODEL
+				gtk_tree_model_row_deleted (GTK_TREE_MODEL 
 							    (model), path);
 				gtk_tree_path_free (path);
 			}
@@ -1643,9 +1665,7 @@ model_check_dummy (GeditFileBrowserStore * model, FileBrowserNode * node)
 				    gedit_file_browser_store_get_path_real
 				    (model, dummy);
 
-				gtk_tree_model_row_inserted (GTK_TREE_MODEL
-							     (model), path,
-							     &iter);
+				row_inserted (model, path, &iter);
 				gtk_tree_path_free (path);
 			}
 		} else {
@@ -1704,8 +1724,7 @@ model_add_node (GeditFileBrowserStore * model, FileBrowserNode * child,
 		    gedit_file_browser_store_get_path_real (model, child);
 
 		// Emit row inserted
-		gtk_tree_model_row_inserted (GTK_TREE_MODEL (model), path,
-					     &iter);
+		row_inserted (model, path, &iter);
 		gtk_tree_path_free (path);
 	}
 
@@ -1973,8 +1992,8 @@ model_fill (GeditFileBrowserStore * model, FileBrowserNode * node,
 	if (node != model->priv->virtual_root) {
 		/* Insert node */
 		iter.user_data = node;
-		gtk_tree_model_row_inserted (GTK_TREE_MODEL (model), path,
-					     &iter);
+		
+		row_inserted(model, path, &iter);
 		model_check_dummy (model, node);
 	}
 
