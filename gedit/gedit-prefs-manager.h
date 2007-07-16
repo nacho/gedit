@@ -33,6 +33,7 @@
 #include <gdk/gdkcolor.h>
 #include <gtk/gtkenums.h>
 #include <glib/gslist.h>
+#include <gtksourceview/gtksourceview.h>
 #include "gedit-app.h"
 
 #define GEDIT_BASE_KEY	"/apps/gedit-2"
@@ -84,6 +85,9 @@
 #define GPM_RIGHT_MARGIN_DIR		GPM_PREFS_DIR "/editor/right_margin"
 #define GPM_DISPLAY_RIGHT_MARGIN	GPM_RIGHT_MARGIN_DIR "/display_right_margin"
 #define GPM_RIGHT_MARGIN_POSITION	GPM_RIGHT_MARGIN_DIR "/right_margin_position"
+
+#define GPM_SMART_HOME_END_DIR		GPM_PREFS_DIR "/editor/smart_home_end"
+#define GPM_SMART_HOME_END		GPM_SMART_HOME_END_DIR "/smart_home_end"
 
 #define GPM_CURSOR_POSITION_DIR		GPM_PREFS_DIR  "/editor/cursor_position"
 #define GPM_RESTORE_CURSOR_POSITION	GPM_CURSOR_POSITION_DIR "/restore_cursor_position"
@@ -202,6 +206,8 @@
 
 #define GPM_DEFAULT_DISPLAY_RIGHT_MARGIN  0 /* FALSE */
 #define GPM_DEFAULT_RIGHT_MARGIN_POSITION 80
+
+#define GPM_DEFAULT_SMART_HOME_END	"AFTER"
 
 #define GPM_DEFAULT_SYNTAX_HL_ENABLE	1 /* TRUE */
 
@@ -410,6 +416,12 @@ gboolean		 gedit_prefs_manager_display_right_margin_can_set (void);
 gint		 	 gedit_prefs_manager_get_right_margin_position	(void);
 void 			 gedit_prefs_manager_set_right_margin_position	(gint rmp);
 gboolean		 gedit_prefs_manager_right_margin_position_can_set (void);
+
+/* Smart home end */
+GtkSourceSmartHomeEndType
+		 	 gedit_prefs_manager_get_smart_home_end		(void);
+void 			 gedit_prefs_manager_set_smart_home_end		(GtkSourceSmartHomeEndType  smart_he);
+gboolean		 gedit_prefs_manager_smart_home_end_can_set	(void);
 
 /* Enable syntax highlighting */
 gboolean 		 gedit_prefs_manager_get_enable_syntax_highlighting (void);

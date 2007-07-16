@@ -171,7 +171,7 @@ gedit_prefs_manager_init (void)
 			g_warning (_("Cannot initialize preferences manager."));
 			return FALSE;
 		}
-		
+
 		gedit_prefs_manager = g_new0 (GeditPrefsManager, 1);
 
 		gedit_prefs_manager->gconf_client = gconf_client;
@@ -210,7 +210,7 @@ gedit_prefs_manager_get_bool (const gchar* key, gboolean def)
 						   key,
 						   def,
 						   NULL);
-}	
+}
 
 static gint 
 gedit_prefs_manager_get_int (const gchar* key, gint def)
@@ -772,8 +772,8 @@ gedit_prefs_manager_get_print_wrap_mode (void)
 void
 gedit_prefs_manager_set_print_wrap_mode (GtkWrapMode pwp)
 {
-	const gchar * str;
-	
+	const gchar *str;
+
 	gedit_debug (DEBUG_PREFS);
 
 	switch (pwp)
@@ -790,8 +790,7 @@ gedit_prefs_manager_set_print_wrap_mode (GtkWrapMode pwp)
 			str = "GTK_WRAP_CHAR";
 	}
 
-	gedit_prefs_manager_set_string (GPM_PRINT_WRAP_MODE,
-					str);
+	gedit_prefs_manager_set_string (GPM_PRINT_WRAP_MODE, str);
 }
 
 gboolean
@@ -1227,6 +1226,79 @@ DEFINE_BOOL_PREF (display_right_margin,
 DEFINE_INT_PREF (right_margin_position,
 		 GPM_RIGHT_MARGIN_POSITION,
 		 GPM_DEFAULT_RIGHT_MARGIN_POSITION)
+
+static GtkSourceSmartHomeEndType
+get_smart_home_end_from_string (const gchar *str)
+{
+	GtkSourceSmartHomeEndType res;
+
+	g_return_val_if_fail (str != NULL, GTK_SOURCE_SMART_HOME_END_AFTER);
+
+	if (strcmp (str, "DISABLED") == 0)
+		res = GTK_SOURCE_SMART_HOME_END_DISABLED;
+	else if (strcmp (str, "BEFORE") == 0)
+		res = GTK_SOURCE_SMART_HOME_END_BEFORE;
+	else if (strcmp (str, "ALWAYS") == 0)
+		res = GTK_SOURCE_SMART_HOME_END_ALWAYS;
+	else
+		res = GTK_SOURCE_SMART_HOME_END_AFTER;
+
+	return res;
+}
+
+GtkSourceSmartHomeEndType
+gedit_prefs_manager_get_smart_home_end (void)
+{
+	gchar *str;
+	GtkSourceSmartHomeEndType res;
+
+	gedit_debug (DEBUG_PREFS);
+
+	str = gedit_prefs_manager_get_string (GPM_SMART_HOME_END,
+					      GPM_DEFAULT_SMART_HOME_END);
+
+	res = get_smart_home_end_from_string (str);
+
+	g_free (str);
+
+	return res;
+}
+	
+void
+gedit_prefs_manager_set_smart_home_end (GtkSourceSmartHomeEndType smart_he)
+{
+	const gchar *str;
+
+	gedit_debug (DEBUG_PREFS);
+
+	switch (smart_he)
+	{
+		case GTK_SOURCE_SMART_HOME_END_DISABLED:
+			str = "DISABLED";
+			break;
+
+		case GTK_SOURCE_SMART_HOME_END_BEFORE:
+			str = "BEFORE";
+			break;
+
+		case GTK_SOURCE_SMART_HOME_END_ALWAYS:
+			str = "ALWAYS";
+			break;
+
+		default: /* GTK_SOURCE_SMART_HOME_END_AFTER */
+			str = "AFTER";
+	}
+
+	gedit_prefs_manager_set_string (GPM_WRAP_MODE, str);
+}
+
+gboolean
+gedit_prefs_manager_smart_home_end_can_set (void)
+{
+	gedit_debug (DEBUG_PREFS);
+	
+	return gedit_prefs_manager_key_is_writable (GPM_SMART_HOME_END);
+}
 
 /* Enable syntax highlighting */
 DEFINE_BOOL_PREF (enable_syntax_highlighting,

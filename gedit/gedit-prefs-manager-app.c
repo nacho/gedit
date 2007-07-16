@@ -90,6 +90,11 @@ static void gedit_prefs_manager_right_margin_changed	(GConfClient *client,
 							 GConfEntry  *entry, 
 							 gpointer     user_data);
 
+static void gedit_prefs_manager_smart_home_end_changed	(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
+
 static void gedit_prefs_manager_hl_current_line_changed	(GConfClient *client,
 							 guint        cnxn_id, 
 							 GConfEntry  *entry, 
@@ -638,6 +643,11 @@ gedit_prefs_manager_app_init (void)
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
 				GPM_RIGHT_MARGIN_DIR,
 				gedit_prefs_manager_right_margin_changed,
+				NULL, NULL, NULL);
+
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_SMART_HOME_END_DIR,
+				gedit_prefs_manager_smart_home_end_changed,
 				NULL, NULL, NULL);
 
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
@@ -1305,6 +1315,63 @@ gedit_prefs_manager_right_margin_changed (GConfClient *client,
 		{
 			gtk_source_view_set_show_margin (GTK_SOURCE_VIEW (l->data),
 							 display);
+
+			l = l->next;
+		}
+
+		g_list_free (views);
+	}
+}
+
+static GtkSourceSmartHomeEndType
+get_smart_home_end_from_string (const gchar *str)
+{
+	GtkSourceSmartHomeEndType res;
+
+	g_return_val_if_fail (str != NULL, GTK_SOURCE_SMART_HOME_END_AFTER);
+
+	if (strcmp (str, "DISABLED") == 0)
+		res = GTK_SOURCE_SMART_HOME_END_DISABLED;
+	else if (strcmp (str, "BEFORE") == 0)
+		res = GTK_SOURCE_SMART_HOME_END_BEFORE;
+	else if (strcmp (str, "ALWAYS") == 0)
+		res = GTK_SOURCE_SMART_HOME_END_ALWAYS;
+	else
+		res = GTK_SOURCE_SMART_HOME_END_AFTER;
+
+	return res;
+}
+
+static void
+gedit_prefs_manager_smart_home_end_changed (GConfClient *client,
+					    guint        cnxn_id,
+					    GConfEntry  *entry,
+					    gpointer     user_data)
+{
+	gedit_debug (DEBUG_PREFS);
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	if (strcmp (entry->key, GPM_SMART_HOME_END) == 0)
+	{
+		GtkSourceSmartHomeEndType smart_he;
+		GList *views;
+		GList *l;
+
+		if (entry->value->type == GCONF_VALUE_STRING)
+			smart_he = 
+				get_smart_home_end_from_string (gconf_value_get_string (entry->value));	
+		else
+			smart_he = get_smart_home_end_from_string (GPM_DEFAULT_SMART_HOME_END);
+
+		views = gedit_app_get_views (gedit_app_get_default ());
+		l = views;
+
+		while (l != NULL)
+		{
+			gtk_source_view_set_smart_home_end (GTK_SOURCE_VIEW (l->data),
+							    smart_he);
 
 			l = l->next;
 		}

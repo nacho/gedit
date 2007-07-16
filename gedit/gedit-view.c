@@ -270,8 +270,8 @@ gedit_view_init (GeditView *view)
 		      "insert_spaces_instead_of_tabs", gedit_prefs_manager_get_insert_spaces (),
 		      "show_margin", gedit_prefs_manager_get_display_right_margin (), 
 		      "margin", gedit_prefs_manager_get_right_margin_position (),
-		      "highlight_current_line", gedit_prefs_manager_get_highlight_current_line (), 
-		      "smart_home_end", GTK_SOURCE_SMART_HOME_END_AFTER, /* TODO: add a gconf setting */
+		      "highlight_current_line", gedit_prefs_manager_get_highlight_current_line (),
+		      "smart_home_end", gedit_prefs_manager_get_smart_home_end (),
 		      "indent_on_tab", TRUE,
 		      NULL);
 
