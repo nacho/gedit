@@ -617,7 +617,7 @@ class PlaceholderRegex(PlaceholderExpand):
                 # Try to compile pattern
                 try:
                         regex = re.compile(pattern, self.modifiers)
-                except re.Error, message:
+                except re.error, message:
                         sys.stderr.write('Could not compile regular expression: %s\n%s\n' % (pattern, message))
                         return False
                 
