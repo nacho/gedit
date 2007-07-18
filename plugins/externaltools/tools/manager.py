@@ -175,7 +175,7 @@ class Manager(object):
             return combo.get_model().get_value(combo.get_active_iter(), self.NAME_COLUMN)
 
         self.current_node.input = combo_value(self, 'input')
-        self.current_node.ouput = combo_value(self, 'output')
+        self.current_node.output = combo_value(self, 'output')
         self.current_node.applicability = combo_value(self, 'applicability')
         self.current_node.comment = self['description'].get_text()
 
