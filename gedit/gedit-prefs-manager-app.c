@@ -265,42 +265,54 @@ static gboolean
 gedit_state_file_sync ()
 {
 	GKeyFile *state_file;
+	const gchar *home;
+	gchar *path;
+	gchar *content;
+	gsize length;
+	GError *err = NULL;
+	gboolean ret = FALSE;
 
 	state_file = get_gedit_state_file ();
-	if (state_file != NULL)
+	g_return_val_if_fail (state_file != NULL, FALSE);
+
+	home = g_get_home_dir ();
+	if (home == NULL)
 	{
-		const gchar *home;
-		gchar *path;
-		gchar *content;
-		gsize length;
-		GError *err = NULL;
-
-		home = g_get_home_dir ();
-		if (home == NULL)
-		{
-			g_warning ("Could not get HOME directory\n");
-			return FALSE;
-		}
-
-		path = g_build_filename (home,
-					 GEDIT_STATE_FILE_LOCATION,
-					 NULL);
-
-		content = g_key_file_to_data (state_file,
-					      &length,
-					      NULL);
-
-		if ((content != NULL) &&
-		    (!g_file_set_contents (path,
-					   content,
-					   length,
-					   &err)))
-		{
-			g_warning ("Could not write gedit state file: %s\n",
-				   err->message);
-			return FALSE;
-		}
+		g_warning ("Could not get HOME directory\n");
+		return ret;
 	}
+
+	path = g_build_filename (home,
+				 GEDIT_STATE_FILE_LOCATION,
+				 NULL);
+
+	content = g_key_file_to_data (state_file,
+				      &length,
+				      &err);
+
+	if (err != NULL)
+	{
+		g_warning ("Could not get data from state file: %s\n",
+			   err->message);
+		goto out;
+	}
+
+	if ((content != NULL) &&
+	    (!g_file_set_contents (path,
+				   content,
+				   length,
+				   &err)))
+	{
+		g_warning ("Could not write gedit state file: %s\n",
+			   err->message);
+		goto out;
+	}
+
+	ret = TRUE;
+
+ out:
+	g_free (content);
+	g_free (path);
 
 	return TRUE;
 }
