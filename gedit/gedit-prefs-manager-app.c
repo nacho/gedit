@@ -203,6 +203,8 @@ get_gedit_state_file ()
 					   err->message);
 			}
 		}
+
+		g_free (path);
 	}
 
  out:
