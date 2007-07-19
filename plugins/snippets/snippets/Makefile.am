@@ -13,11 +13,13 @@ plugin_PYTHON = \
 	Manager.py \
 	SnippetComplete.py \
 	Helper.py \
-	SubstitutionParser.py
+	SubstitutionParser.py \
+	Importer.py \
+	Exporter.py
 
 plugin_DATA = snippets.glade
 
 EXTRA_DIST = snippets.glade
 
-CLEANFILES = *.bak *.gladep
-DISTCLEANFILES = *.bak *.gladep
+CLEANFILES = *.bak *.gladep *.pyc
+DISTCLEANFILES = *.bak *.gladep *.pyc
