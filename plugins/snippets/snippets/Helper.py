@@ -23,8 +23,9 @@ import gtk
 from gtk import gdk
 
 def message_dialog(par, typ, msg):
-        d = gtk.MessageDialog(par, gtk.DIALOG_MODAL, typ, \
-                        gtk.BUTTONS_OK, msg)
+        d = gtk.MessageDialog(par, gtk.DIALOG_MODAL, typ, gtk.BUTTONS_OK, msg)
+        d.set_property('use-markup', True)
+
         d.run()
         d.destroy()
 
@@ -169,3 +170,4 @@ def buffer_word_boundary(buf):
                 iter.forward_word_end()
                 
         return (start, iter)
+# ex:ts=8:et:

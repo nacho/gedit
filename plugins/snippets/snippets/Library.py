@@ -18,6 +18,7 @@
 import os
 import weakref
 import sys
+import tempfile
 
 import gtk
 
@@ -136,7 +137,6 @@ class SnippetData:
                         # This snippet data container will effectively become the container
                         # for the newly created node, but transparently to whoever uses
                         # it
-                        
                         self._override()
 
                 if self.can_modify() and self.properties[prop].text != value:
@@ -160,20 +160,33 @@ class SnippetData:
         
         def is_override(self):
                 return self.override and Library().overridden[self.override]
+        
+        def to_xml(self):
+                return self._create_xml()
 
+        def _create_xml(self, parent=None, update=False, attrib={}):
+                # Create a new node
+                if parent:
+                        element = et.SubElement('snippet', attrib)
+                else:
+                        element = et.Element('snippet')
+
+                # Create all the properties
+                for p in self.properties:
+                        prop = et.SubElement(element, p)
+                        prop.text = self[p]
+                        
+                        if update:
+                                self.properties[p] = prop
+                
+                return element              
+        
         def _override(self):
                 # Find the user file
                 target = Library().get_user_library(self.language())
 
                 # Create a new node there with override
-                element = et.SubElement(target.root, 'snippet', \
-                                {'override': self.id})
-                
-                # Create all the properties
-                for p in self.properties:
-                        prop = et.SubElement(element, p)
-                        prop.text = self.properties[p]
-                        self.properties[p] = prop
+                element = self._create_xml(target.root, True, {'override': self.id})
 
                 # Create an override snippet data, feed it element so that it stores
                 # all the values and then set the node to None so that it only contains
@@ -353,8 +366,8 @@ class SnippetsSystemFile:
                                 "available, please correct or remove the file.\n")
 
         def _add_snippet(self, element):
-        	if not self.need_id or element.attrib.get('id'):
-                	self.loading_elements.append(element)
+                if not self.need_id or element.attrib.get('id'):
+                        self.loading_elements.append(element)
 
         def set_language(self, element):
                 self.language = element.attrib.get('language')
@@ -386,7 +399,7 @@ class SnippetsSystemFile:
         def _process_element(self, element):
                 if element.tag == 'snippet':
                         self._add_snippet(element)
-                        self.insnippet = False			
+                        self.insnippet = False                        
 
                 return True
 
@@ -581,12 +594,23 @@ class SnippetsUserFile(SnippetsSystemFile):
                 SnippetsSystemFile.unload(self)
                 self.root = None
 
-class LibraryImpl:
-        def __init__(self):
+class Singleton(object):
+        _instance = None
+
+        def __new__(cls, *args, **kwargs):
+                if not cls._instance:
+                        cls._instance = super(Singleton, cls).__new__(
+                                         cls, *args, **kwargs)
+                        cls._instance.__init_once__()
+
+                return cls._instance
+
+class Library(Singleton):        
+        def __init_once__(self):
                 self._accelerator_activated_cb = None
                 self.loaded = False
                 self.check_buffer = gtk.TextBuffer()
-                        
+
         def set_dirs(self, userdir, systemdirs):
                 self.userdir = userdir
                 self.systemdirs = systemdirs
@@ -710,7 +734,6 @@ class LibraryImpl:
         
         def add_override(self, snippet):
                 snippets_debug('Add override:', snippet.override)
-                
                 if not snippet.override in self.overridden:
                         self.overridden[snippet.override] = None
         
@@ -719,7 +742,7 @@ class LibraryImpl:
                 
                 if not library.ok:
                         snippets_debug('Library in wrong format, ignoring')
-                        return
+                        return False
                 
                 snippets_debug('Adding library (' + str(library.language) + '): ' + \
                                 library.path)
@@ -732,6 +755,8 @@ class LibraryImpl:
                                 self.libraries[library.language].append(library)
                 else:
                         self.libraries[library.language] = [library]
+
+                return True
         
         def remove_library(self, library):
                 if not library.ok:
@@ -751,13 +776,13 @@ class LibraryImpl:
                         if snippet.library() == library:
                                 container.remove(snippet)
         
-        def _add_user_library(self, path):
+        def add_user_library(self, path):
                 library = SnippetsUserFile(path)
-                self.add_library(library)
+                return self.add_library(library)
                 
-        def _add_system_library(self, path):
+        def add_system_library(self, path):
                 library = SnippetsSystemFile(path)
-                self.add_library(library)
+                return self.add_library(library)
 
         def find_libraries(self, path, searched, addcb):
                 snippets_debug("Finding in: " + path)
@@ -833,7 +858,7 @@ class LibraryImpl:
                                 self.remove_container(language)
 
         def ensure(self, language):
-        	self.ensure_files()
+                self.ensure_files()
                 language = self.normalize_language(language)
 
                 # Ensure language as well as the global snippets (None)
@@ -851,11 +876,11 @@ class LibraryImpl:
 
                 searched = []
                 searched = self.find_libraries(self.userdir, searched, \
-                                self._add_user_library)
+                                self.add_user_library)
                 
                 for d in self.systemdirs:
                         searched = self.find_libraries(d, searched, \
-                                        self._add_system_library)
+                                        self.add_system_library)
 
                 self.loaded = True
 
@@ -905,7 +930,7 @@ class LibraryImpl:
         def from_accelerator(self, accelerator, language=None):
                 self.ensure_files()
                 
-                result = []		
+                result = []                
                 language = self.normalize_language(language)
                         
                 if not language in self.containers:
@@ -936,18 +961,4 @@ class LibraryImpl:
                         result = self.containers[None].from_prop('tag', tag)
                 
                 return result
-
-class Library:
-        __instance = None
-        
-        def __init__(self):
-                if not Library.__instance:
-                        Library.__instance = LibraryImpl()
-        
-                self.__dict__['_Library__instance'] = Library.__instance
-                
-        def __getattr__(self, attr):
-                return getattr(self.__instance, attr)
-        
-        def __setattr__(self, attr, value):
-                return setattr(self.__instance, attr, value)
+# ex:ts=8:et:
