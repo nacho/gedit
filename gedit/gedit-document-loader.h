@@ -2,7 +2,8 @@
  * gedit-document-loader.h
  * This file is part of gedit
  *
- * Copyright (C) 2005 - Paolo Maggi 
+ * Copyright (C) 2005 - Paolo Maggi
+ * Copyright (C) 2007 - Paolo Maggi, Steve Frécinaux
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,9 +22,9 @@
  */
  
 /*
- * Modified by the gedit Team, 2005. See the AUTHORS file for a 
- * list of people on the gedit Team.  
- * See the ChangeLog files for a list of changes. 
+ * Modified by the gedit Team, 2005-2007. See the AUTHORS file for a
+ * list of people on the gedit Team.
+ * See the ChangeLog files for a list of changes.
  *
  * $Id$
  */
@@ -58,8 +59,14 @@ struct _GeditDocumentLoader
 {
 	GObject object;
 
-	/*< private > */
-	GeditDocumentLoaderPrivate *priv;
+	GeditDocument		 *document;
+	gboolean		  used;
+
+	/* Info on the current file */
+	gchar			 *uri;
+	const GeditEncoding	 *encoding;
+	const GeditEncoding	 *metadata_encoding;
+	const GeditEncoding	 *auto_detected_encoding;
 };
 
 /*
@@ -71,9 +78,19 @@ struct _GeditDocumentLoaderClass
 {
 	GObjectClass parent_class;
 
+	/* Signals */
 	void (* loading) (GeditDocumentLoader *loader,
 			  gboolean             completed,
 			  const GError        *error);
+
+	/* VTable */
+	void			(* load)		(GeditDocumentLoader *loader);
+	gboolean		(* cancel)		(GeditDocumentLoader *loader);
+	const gchar *		(* get_mime_type)	(GeditDocumentLoader *loader);
+	time_t			(* get_mtime)		(GeditDocumentLoader *loader);
+	GnomeVFSFileSize	(* get_file_size)	(GeditDocumentLoader *loader);
+	GnomeVFSFileSize	(* get_bytes_read)	(GeditDocumentLoader *loader);
+	gboolean		(* get_readonly)	(GeditDocumentLoader *loader);
 };
 
 /*
@@ -81,12 +98,21 @@ struct _GeditDocumentLoaderClass
  */
 GType 		 	 gedit_document_loader_get_type		(void) G_GNUC_CONST;
 
-GeditDocumentLoader 	*gedit_document_loader_new 		(GeditDocument       *doc);
-
 /* If enconding == NULL, the encoding will be autodetected */
-void			 gedit_document_loader_load		(GeditDocumentLoader *loader,
-							 	 const gchar         *uri,
+GeditDocumentLoader 	*gedit_document_loader_new 		(GeditDocument       *doc,
+								 const gchar         *uri,
 								 const GeditEncoding *encoding);
+
+gboolean		 gedit_document_loader_update_document_contents
+								(GeditDocumentLoader  *loader,
+								 const gchar          *file_contents,
+								 gint                  file_size,
+								 GError              **error);
+void			 gedit_document_loader_loading		(GeditDocumentLoader *loader,
+								 gboolean             completed,
+								 GError              *error);
+
+void			 gedit_document_loader_load		(GeditDocumentLoader *loader);
 #if 0
 gboolean		 gedit_document_loader_load_from_stdin	(GeditDocumentLoader *loader);
 #endif		 
@@ -108,9 +134,10 @@ gboolean		 gedit_document_loader_get_readonly	(GeditDocumentLoader *loader);
 const GeditEncoding	*gedit_document_loader_get_encoding	(GeditDocumentLoader *loader);
 
 /* Returns 0 if file size is unknown */
-GnomeVFSFileSize	 gedit_document_loader_get_file_size	(GeditDocumentLoader *loader);									 
+/* FIXME: change GnomeVFSFileSize to what glib provides. */
+GnomeVFSFileSize	 gedit_document_loader_get_file_size	(GeditDocumentLoader *loader);
 
-GnomeVFSFileSize	 gedit_document_loader_get_bytes_read	(GeditDocumentLoader *loader);									 
+GnomeVFSFileSize	 gedit_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
 
 
 G_END_DECLS

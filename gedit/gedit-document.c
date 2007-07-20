@@ -1091,7 +1091,7 @@ gedit_document_load (GeditDocument       *doc,
 	g_return_if_fail (doc->priv->loader == NULL);
 
 	/* create a loader. It will be destroyed when loading is completed */
-	doc->priv->loader = gedit_document_loader_new (doc);
+	doc->priv->loader = gedit_document_loader_new (doc, uri, encoding);
 
 	g_signal_connect (doc->priv->loader,
 			  "loading",
@@ -1104,9 +1104,7 @@ gedit_document_load (GeditDocument       *doc,
 
 	set_uri (doc, uri, NULL);
 
-	gedit_document_loader_load (doc->priv->loader,
-				    uri,
-				    encoding);
+	gedit_document_loader_load (doc->priv->loader);
 }
 
 gboolean

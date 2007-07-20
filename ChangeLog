@@ -1,3 +1,13 @@
+2007-07-20  Steve Frécinaux  <code@istique.net>
+
+	* gedit/gedit-document-loader.[ch]:
+	* gedit/gedit-mmap-document-loader.[ch]:
+	* gedit/gedit-gnomevfs-document-loader.[ch]:
+	* gedit/gedit-document.c:
+
+	Split GeditDocumentLoader into an abstract type and implementations of
+	it (Bug 453048).
+
 2007-07-20  Paolo Maggi  <paolo@gnome.org>
 
 	First step toward the new preference dialog
@@ -10,7 +20,6 @@
 	page
 	* gedit/dialogs/gedit-style-scheme-dialog.[ch]: new files
 	* gedit/dialogs/gedit-style-scheme-dialog.glade: new file
-
 	* gedit/dialogs/gedit-style-scheme-generator.[ch]: new file
 	* gedit/gedit-document.c (gedit_document_init): check the default style
 	is not NULL before using it
