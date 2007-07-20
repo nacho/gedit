@@ -30,12 +30,32 @@
 static GtkSourceStyleManager *style_manager = NULL;
 static GtkSourceStyleScheme  *def_style = NULL;
 
+#define GEDIT_STYLES_DIR ".gnome2/gedit/styles"
+
+static void
+add_gedit_styles_path (GtkSourceStyleManager *mgr)
+{
+	const gchar *home;
+
+	home = g_get_home_dir ();
+	if (home != NULL)
+	{
+		gchar *dir;
+		
+		dir = g_build_filename (home, GEDIT_STYLES_DIR, NULL);
+
+		gtk_source_style_manager_append_search_path (mgr, dir);
+		g_free (dir);
+	}
+}
+
 GtkSourceStyleManager *
 gedit_get_source_style_manager (void)
 {
 	if (style_manager == NULL)
 	{
 		style_manager = gtk_source_style_manager_new ();
+		add_gedit_styles_path (style_manager);
 	}
 
 	return style_manager;
@@ -94,5 +114,38 @@ _gedit_source_style_manager_set_default_scheme (GtkSourceStyleManager *manager,
 	def_style = new_style;
 
 	return TRUE;
+}
+
+gboolean
+_gedit_source_style_manager_scheme_is_gedit_user_scheme (GtkSourceStyleManager *manager,
+							 const gchar           *scheme_id)
+{
+	GtkSourceStyleScheme *scheme;
+	const gchar *filename;
+	const gchar *home;
+	gchar *dir;
+	gboolean res = FALSE;
+
+	scheme = gtk_source_style_manager_get_scheme (manager, scheme_id);
+	if (scheme == NULL)
+		return FALSE;
+
+	filename = gtk_source_style_scheme_get_filename (scheme);
+	if (filename == NULL)
+		return FALSE;
+
+	home = g_get_home_dir ();
+	if (home == NULL)
+		return FALSE;
+
+	dir = g_strdup_printf ("%s/%s",
+			       home,
+			       GEDIT_STYLES_DIR);
+
+	res = g_str_has_prefix (filename, dir);
+
+	g_free (dir);
+
+	return res;
 }
 

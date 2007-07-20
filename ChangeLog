@@ -1,3 +1,26 @@
+2007-07-20  Paolo Maggi  <paolo@gnome.org>
+
+	First step toward the new preference dialog
+	
+	* gedit/dialogs/Makefile.am: compile new files
+	
+	* gedit/dialogs/gedit-preferences-dialog.c: set the new "Font & Colors" 
+	page
+	* gedit/dialogs/gedit-preferences-dialog.glade: new "Font & Colors" 
+	page
+	* gedit/dialogs/gedit-style-scheme-dialog.[ch]: new files
+	* gedit/dialogs/gedit-style-scheme-dialog.glade: new file
+
+	* gedit/dialogs/gedit-style-scheme-generator.[ch]: new file
+	* gedit/gedit-document.c (gedit_document_init): check the default style
+	is not NULL before using it
+	* gedit/gedit-source-style-manager.c (add_gedit_styles_path): new 
+	function to add the gedit styles dir to the search path of the style
+	schemes manager
+	(gedit_get_source_style_manager): call the add_gedit_styles_path 
+	function
+	(_gedit_source_style_manager_scheme_is_gedit_user_scheme): new function
+
 2007-07-19  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	* plugins/snippets/snippets/Importer.py:

@@ -624,8 +624,9 @@ gedit_document_init (GeditDocument *doc)
 
 	style_manager = gedit_get_source_style_manager ();
 	style_scheme = gedit_source_style_manager_get_default_scheme (style_manager);
-	gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (doc),
-					    style_scheme);
+	if (style_scheme != NULL)
+		gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (doc),
+						    style_scheme);
 
 	g_signal_connect_after (doc, 
 			  	"insert-text",

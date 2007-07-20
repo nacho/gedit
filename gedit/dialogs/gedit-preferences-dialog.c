@@ -33,6 +33,7 @@
 #include <config.h>
 #endif
 
+#include <stdio.h>
 #include <string.h>
 
 #include <glib/gi18n.h>
@@ -44,7 +45,9 @@
 #include "gedit-utils.h"
 #include "gedit-debug.h"
 #include "gedit-document.h"
+#include "gedit-source-style-manager.h"
 #include "gedit-plugin-manager.h"
+#include "gedit-style-scheme-dialog.h"
 #include "gedit-help.h"
 
 /*
@@ -61,14 +64,17 @@ static GtkWidget *preferences_dialog = NULL;
 
 enum
 {
-	NAME_COLUMN = 0,
-	ID_COLUMN,
+	ID_COLUMN = 0,
+	NAME_COLUMN,
+	DESC_COLUMN,
+	FILE_COLUMN,
 	NUM_COLUMNS
 };
 
 
-#define GEDIT_PREFERENCES_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_PREFERENCES_DIALOG, GeditPreferencesDialogPrivate))
-
+#define GEDIT_PREFERENCES_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
+						     GEDIT_TYPE_PREFERENCES_DIALOG, \
+						     GeditPreferencesDialogPrivate))
 
 struct _GeditPreferencesDialogPrivate
 {
@@ -76,16 +82,17 @@ struct _GeditPreferencesDialogPrivate
 
 	GtkWidget	*notebook;
 
-	/* Font & Colors */
+	/* Font */
 	GtkWidget	*default_font_checkbutton;
-	GtkWidget	*default_colors_checkbutton;
 	GtkWidget	*font_button;
-	GtkWidget	*text_colorbutton;
-	GtkWidget	*background_colorbutton;
-	GtkWidget	*seltext_colorbutton;
-	GtkWidget	*selection_colorbutton;
-	GtkWidget	*colors_table;
 	GtkWidget	*font_hbox;
+
+	/* Style Scheme */
+	GtkListStore	*schemes_treeview_model;
+	GtkWidget	*schemes_treeview;
+	GtkWidget	*new_scheme_button;
+	GtkWidget	*remove_scheme_button;
+	GtkWidget	*edit_scheme_button;
 
 	/* Tabs */
 	GtkWidget	*tabs_width_spinbutton;
@@ -119,24 +126,11 @@ struct _GeditPreferencesDialogPrivate
 	GtkWidget	*right_margin_position_spinbutton;
 	GtkWidget	*right_margin_position_hbox;
 
-	/* Syntax Highlighting */
-	GtkWidget	*enable_syntax_hl_checkbutton;
-	GtkWidget	*hl_vbox;
-	GtkWidget	*hl_mode_combobox;
-	GtkListStore	*tags_treeview_model;
-	GtkWidget	*tags_treeview;
-	GtkWidget	*bold_togglebutton;
-	GtkWidget	*italic_togglebutton;
-	GtkWidget	*underline_togglebutton;
-	GtkWidget	*strikethrough_togglebutton;
-	GtkWidget	*foreground_checkbutton;
-	GtkWidget	*foreground_colorbutton;
-	GtkWidget	*background_checkbutton;
-	GtkWidget	*background_colorbutton_2;
-	GtkWidget	*reset_button;
-
 	/* Plugins manager */
 	GtkWidget	*plugin_manager_place_holder;
+
+	/* Style Scheme editor dialog */
+	GtkWidget	*style_scheme_dialog;
 };
 
 
@@ -556,30 +550,6 @@ default_font_font_checkbutton_toggled (GtkToggleButton        *button,
 }
 
 static void
-default_font_colors_checkbutton_toggled (GtkToggleButton        *button,
-					 GeditPreferencesDialog *dlg)
-{
-	gedit_debug (DEBUG_PREFS);
-
-	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->priv->default_colors_checkbutton));
-
-	if (gtk_toggle_button_get_active (button))
-	{
-		gtk_widget_set_sensitive (dlg->priv->colors_table, FALSE);
-		gedit_prefs_manager_set_use_default_colors (TRUE);
-	}
-	else
-	{
-		gedit_prefs_manager_set_use_default_colors (FALSE);
-		gtk_widget_set_sensitive (dlg->priv->colors_table, 
-					  gedit_prefs_manager_background_color_can_set () &&
-				  	  gedit_prefs_manager_text_color_can_set () &&
-				  	  gedit_prefs_manager_selection_color_can_set () &&
-				  	  gedit_prefs_manager_selected_text_color_can_set ());
-	}
-}
-
-static void
 editor_font_button_font_set (GtkFontButton          *font_button,
 			     GeditPreferencesDialog *dlg)
 {
@@ -600,69 +570,24 @@ editor_font_button_font_set (GtkFontButton          *font_button,
 	gedit_prefs_manager_set_editor_font (font_name);
 }
 
-static void 
-editor_color_button_color_set (GtkColorButton         *button, 
-			       GeditPreferencesDialog *dlg)
-{
-	GdkColor color;
-
-	gtk_color_button_get_color (button, &color);
-
-	if (button == GTK_COLOR_BUTTON (dlg->priv->text_colorbutton))
-	{
-		gedit_prefs_manager_set_text_color (color);
-		return;
-	}
-
-	if (button == GTK_COLOR_BUTTON (dlg->priv->background_colorbutton))
-	{
-		gedit_prefs_manager_set_background_color (color);
-		return;
-	}
-
-	if (button == GTK_COLOR_BUTTON (dlg->priv->seltext_colorbutton))
-	{
-		gedit_prefs_manager_set_selected_text_color (color);
-		return;
-	}
-
-	if (button == GTK_COLOR_BUTTON (dlg->priv->selection_colorbutton))
-	{
-		gedit_prefs_manager_set_selection_color (color);
-		return;
-	}
-
-	g_return_if_reached ();	
-}
-
 static void
-setup_font_colors_page (GeditPreferencesDialog *dlg)
+setup_font_colors_page_font_section (GeditPreferencesDialog *dlg)
 {
 	gboolean use_default_font;
-	gboolean use_default_colors;
 	gchar *editor_font = NULL;
-	GdkColor color;
 	gchar *label;
 
 	gedit_debug (DEBUG_PREFS);
 
 	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->font_button, 
 			_("Push this button to select the font to be used by the editor"), NULL);
-	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->text_colorbutton, 
-			_("Push this button to configure text color"), NULL);
-	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->background_colorbutton, 
-			_("Push this button to configure background color"), NULL);
-	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->seltext_colorbutton, 
-			_("Push this button to configure the color in which the selected "
-			  "text should appear"), NULL);
-	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->selection_colorbutton, 
-			_("Push this button to configure the color in which the selected "
-			  "text should be marked"), NULL);
 
-	gedit_utils_set_atk_relation (dlg->priv->font_button, dlg->priv->default_font_checkbutton, 
-                                                          ATK_RELATION_CONTROLLED_BY);
-	gedit_utils_set_atk_relation (dlg->priv->default_font_checkbutton, dlg->priv->font_button, 
-                                                         ATK_RELATION_CONTROLLER_FOR);	
+	gedit_utils_set_atk_relation (dlg->priv->font_button,
+				      dlg->priv->default_font_checkbutton,
+				      ATK_RELATION_CONTROLLED_BY);
+	gedit_utils_set_atk_relation (dlg->priv->default_font_checkbutton,
+				      dlg->priv->font_button, 
+				      ATK_RELATION_CONTROLLER_FOR);	
 
 	editor_font = gedit_prefs_manager_get_system_font ();
 	label = g_strdup_printf(_("_Use the system fixed width font (%s)"),
@@ -677,83 +602,342 @@ setup_font_colors_page (GeditPreferencesDialog *dlg)
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->default_font_checkbutton),
 				      use_default_font);
 
-	use_default_colors = gedit_prefs_manager_get_use_default_colors ();
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->default_colors_checkbutton),
-				      use_default_colors);
-
 	editor_font = gedit_prefs_manager_get_editor_font ();
 	if (editor_font != NULL)
+	{
 		gtk_font_button_set_font_name (GTK_FONT_BUTTON (dlg->priv->font_button),
 					       editor_font);
-	g_free (editor_font);
-
-	color = gedit_prefs_manager_get_text_color ();
-	gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->priv->text_colorbutton),
-				    &color);
-
-	color = gedit_prefs_manager_get_background_color ();
-	gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->priv->background_colorbutton),
-				    &color);
-
-	color = gedit_prefs_manager_get_selected_text_color ();
-	gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->priv->seltext_colorbutton),
-				    &color);
-
-	color = gedit_prefs_manager_get_selection_color ();
-	gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->priv->selection_colorbutton),
-				    &color);
+		g_free (editor_font);
+	}
 
 	/* Connect signals */
 	g_signal_connect (dlg->priv->default_font_checkbutton,
 			  "toggled",
 			  G_CALLBACK (default_font_font_checkbutton_toggled),
 			  dlg);
-	g_signal_connect (dlg->priv->default_colors_checkbutton,
-			  "toggled",
-			  G_CALLBACK (default_font_colors_checkbutton_toggled),
-			  dlg);
 	g_signal_connect (dlg->priv->font_button,
 			  "font_set",
 			  G_CALLBACK (editor_font_button_font_set),
 			  dlg);
-	g_signal_connect (dlg->priv->text_colorbutton,
-			  "color_set",
-			  G_CALLBACK (editor_color_button_color_set),
-			  dlg);
-	g_signal_connect (dlg->priv->background_colorbutton,
-			  "color_set",
-			  G_CALLBACK (editor_color_button_color_set),
-			  dlg);
-	g_signal_connect (dlg->priv->seltext_colorbutton,
-			  "color_set",
-			  G_CALLBACK (editor_color_button_color_set),
-			  dlg);
-	g_signal_connect (dlg->priv->selection_colorbutton,
-			  "color_set",
-			  G_CALLBACK (editor_color_button_color_set),
-			 dlg);
 
 	/* Set initial widget sensitivity */
 	gtk_widget_set_sensitive (dlg->priv->default_font_checkbutton, 
 				  gedit_prefs_manager_use_default_font_can_set ());
-
-	gtk_widget_set_sensitive (dlg->priv->default_colors_checkbutton, 
-				  gedit_prefs_manager_use_default_colors_can_set ());
 
 	if (use_default_font)
 		gtk_widget_set_sensitive (dlg->priv->font_hbox, FALSE);
 	else
 		gtk_widget_set_sensitive (dlg->priv->font_hbox, 
 					  gedit_prefs_manager_editor_font_can_set ());
+}
 
-	if (use_default_colors)
-		gtk_widget_set_sensitive (dlg->priv->colors_table, FALSE);
+static void
+set_buttons_sensisitivity_according_to_scheme (GeditPreferencesDialog *dlg,
+					       const gchar            *scheme_id)
+{
+	gboolean editable;
+	
+	editable = (scheme_id != NULL) && 
+	           _gedit_source_style_manager_scheme_is_gedit_user_scheme (
+						gedit_get_source_style_manager (),
+						scheme_id);
+
+	gtk_widget_set_sensitive (dlg->priv->new_scheme_button,
+				  (scheme_id != NULL));
+	gtk_widget_set_sensitive (dlg->priv->remove_scheme_button,
+				  editable);
+	gtk_widget_set_sensitive (dlg->priv->edit_scheme_button,
+				  editable);
+}
+
+static void
+style_scheme_changed (GtkWidget              *treeview,
+		      GeditPreferencesDialog *dlg)
+{
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	gchar *id;
+	gboolean editable;
+
+	gtk_tree_view_get_cursor (GTK_TREE_VIEW (dlg->priv->schemes_treeview), &path, NULL);
+	gtk_tree_model_get_iter (GTK_TREE_MODEL (dlg->priv->schemes_treeview_model),
+				 &iter, path);
+	gtk_tree_path_free (path);
+	gtk_tree_model_get (GTK_TREE_MODEL (dlg->priv->schemes_treeview_model),
+			    &iter, ID_COLUMN, &id, -1);
+
+	gedit_prefs_manager_set_source_style_scheme (id);
+
+	set_buttons_sensisitivity_according_to_scheme (dlg, id);
+
+	g_free (id);
+}
+
+static void
+new_scheme_clicked (GtkButton              *button,
+		    GeditPreferencesDialog *dlg)
+{
+
+	GtkTreeSelection *selection;
+	GtkTreeModel     *model;
+	GtkTreeIter       iter;
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->schemes_treeview));
+	model = GTK_TREE_MODEL (dlg->priv->schemes_treeview_model);
+
+	if (gtk_tree_selection_get_selected (selection,
+					     &model,
+					     &iter))
+	{
+		gchar                     *id = NULL;
+		GtkSourceStyleScheme      *sel_scheme;
+		GeditStyleSchemeGenerator *scheme_generator;
+		GtkWidget                 *scheme_dialog;
+	
+		
+		gtk_tree_model_get (model, &iter,
+				    ID_COLUMN, &id,
+				    -1);
+		g_return_if_fail (id != NULL);
+		
+		sel_scheme = gtk_source_style_manager_get_scheme (
+						gedit_get_source_style_manager (),
+						id);
+		g_return_if_fail (sel_scheme != NULL);
+		
+		scheme_generator = gedit_style_scheme_generator_new (sel_scheme);
+		
+		scheme_dialog = gedit_style_scheme_dialog_new (scheme_generator);
+		g_object_unref (scheme_generator);
+	
+		gtk_widget_show (scheme_dialog);
+	}
+}
+
+static void
+remove_scheme_clicked (GtkButton              *button,
+		       GeditPreferencesDialog *dlg)
+{
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->schemes_treeview));
+	model = GTK_TREE_MODEL (dlg->priv->schemes_treeview_model);
+
+	if (gtk_tree_selection_get_selected (selection,
+					     &model,
+					     &iter))
+	{
+		gchar *filename = NULL;
+
+		gtk_tree_model_get (model, &iter,
+				    FILE_COLUMN, &filename,
+				    -1);
+
+		if (filename == NULL)
+			return;
+
+		if (remove (filename) != 0)
+		{
+			GtkWidget *errdlg;
+
+			errdlg = gtk_message_dialog_new (GTK_WINDOW (dlg),
+							 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+							 GTK_MESSAGE_ERROR,
+							 GTK_BUTTONS_CLOSE,
+							 _("Could not remove the style scheme \"%s\""), filename);
+
+			g_signal_connect (errdlg,
+					  "response",
+					  G_CALLBACK (gtk_widget_destroy),
+					  NULL);
+
+			gtk_widget_show (errdlg);
+		}
+		else
+		{
+			if (gtk_list_store_remove (dlg->priv->schemes_treeview_model,
+						   &iter))
+			{
+				gtk_tree_selection_select_iter (selection, &iter);
+			}
+			
+			// TODO: force reloading of the styles ???
+		}
+
+		g_free (filename);
+		
+	}
+}
+
+static void
+edit_scheme_clicked (GtkButton              *button,
+		     GeditPreferencesDialog *dlg)
+{
+}
+
+static void
+scheme_description_cell_data_func (GtkTreeViewColumn *column,
+				   GtkCellRenderer   *renderer,
+				   GtkTreeModel      *model,
+				   GtkTreeIter       *iter,
+				   gpointer           data)
+{
+	gchar *name;
+	gchar *desc;
+	gchar *text;
+
+	gtk_tree_model_get (model, iter,
+			    NAME_COLUMN, &name,
+			    DESC_COLUMN, &desc,
+			    -1);
+
+	if (desc != NULL)
+	{
+		text = g_markup_printf_escaped ("<b>%s</b> - %s",
+						name,
+						desc);
+	}
 	else
-		gtk_widget_set_sensitive (dlg->priv->colors_table, 
-					  gedit_prefs_manager_background_color_can_set () &&
-				  	  gedit_prefs_manager_text_color_can_set () &&
-				  	  gedit_prefs_manager_selection_color_can_set () &&
-				  	  gedit_prefs_manager_selected_text_color_can_set ());
+	{
+		text = g_markup_printf_escaped ("<b>%s</b>",
+						name);
+	}
+
+	g_object_set (G_OBJECT (renderer),
+		      "markup",
+		      text,
+		      NULL);
+
+	g_free (text);
+}
+
+static void
+setup_font_colors_page_style_scheme_section (GeditPreferencesDialog *dlg)
+{
+	GtkSourceStyleScheme *def_scheme;
+	const gchar *def_id = NULL;
+	const gchar * const * scheme_ids;
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+	GtkTreeSelection *selection;
+
+	gedit_debug (DEBUG_PREFS);
+			  
+	/* Create GtkListStore for styles & setup treeview. */
+	dlg->priv->schemes_treeview_model = gtk_list_store_new (NUM_COLUMNS,
+								G_TYPE_STRING,
+								G_TYPE_STRING,
+								G_TYPE_STRING,
+								G_TYPE_STRING);
+
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (dlg->priv->schemes_treeview_model),
+					      0,
+					      GTK_SORT_ASCENDING);
+	gtk_tree_view_set_model (GTK_TREE_VIEW (dlg->priv->schemes_treeview),
+				 GTK_TREE_MODEL (dlg->priv->schemes_treeview_model));
+
+	column = gtk_tree_view_column_new ();
+
+	renderer = gtk_cell_renderer_text_new ();
+	g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
+	gtk_tree_view_column_pack_start (column, renderer, TRUE);
+	gtk_tree_view_column_set_cell_data_func (column,
+						 renderer,
+						 scheme_description_cell_data_func,
+						 dlg,
+						 NULL);
+
+	gtk_tree_view_append_column (GTK_TREE_VIEW (dlg->priv->schemes_treeview),
+				     column);
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->schemes_treeview));
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
+
+	def_scheme = gedit_source_style_manager_get_default_scheme (
+			gedit_get_source_style_manager ());
+	if (def_scheme != NULL)
+	{
+		def_id = gtk_source_style_scheme_get_id (def_scheme);
+	}
+
+	/* FIXME: do we need a _sorted() variant as with languages? */
+	scheme_ids = gtk_source_style_manager_get_scheme_ids (
+				gedit_get_source_style_manager ());
+
+	while (*scheme_ids != NULL)
+	{
+		GtkSourceStyleScheme *scheme;
+		const gchar *id;
+		const gchar *name;
+		const gchar *description;
+		const gchar *filename;
+		GtkTreeIter iter;
+
+		scheme = gtk_source_style_manager_get_scheme (gedit_get_source_style_manager (), 
+							      *scheme_ids);
+		if (def_scheme == NULL)
+		{
+			def_scheme = scheme;
+			def_id = gtk_source_style_scheme_get_id (def_scheme);
+		}
+
+		id = gtk_source_style_scheme_get_id (scheme);
+		name = gtk_source_style_scheme_get_name (scheme);
+		description = gtk_source_style_scheme_get_description (scheme);
+		filename = gtk_source_style_scheme_get_filename (scheme);
+
+		gtk_list_store_append (dlg->priv->schemes_treeview_model, &iter);
+		gtk_list_store_set (dlg->priv->schemes_treeview_model,
+				    &iter,
+				    ID_COLUMN, id,
+				    NAME_COLUMN, name,
+				    DESC_COLUMN, description,
+				    FILE_COLUMN, filename,
+				    -1);
+
+		g_return_if_fail (def_id != NULL);
+		if (strcmp (id, def_id) == 0)
+		{
+			gtk_tree_selection_select_iter (selection, &iter);
+		}
+		
+		++scheme_ids;
+	}
+	
+	/* Connect signals */
+	g_signal_connect (dlg->priv->schemes_treeview,
+			  "cursor-changed",
+			  G_CALLBACK (style_scheme_changed),
+			  dlg);
+	g_signal_connect (dlg->priv->new_scheme_button,
+			  "clicked",
+			  G_CALLBACK (new_scheme_clicked),
+			  dlg);
+	g_signal_connect (dlg->priv->remove_scheme_button,
+			  "clicked",
+			  G_CALLBACK (remove_scheme_clicked),
+			  dlg);
+	g_signal_connect (dlg->priv->edit_scheme_button,
+			  "clicked",
+			  G_CALLBACK (edit_scheme_clicked),
+			  dlg);
+		
+	/* Set initial widget sensitivity */
+	set_buttons_sensisitivity_according_to_scheme (dlg, def_id);
+	
+	/* FIXME: hide the buttons since they are not working */
+	gtk_widget_hide (dlg->priv->new_scheme_button);
+	gtk_widget_hide (dlg->priv->remove_scheme_button);
+	gtk_widget_hide (dlg->priv->edit_scheme_button);	
+}
+
+static void
+setup_font_colors_page (GeditPreferencesDialog *dlg)
+{
+	setup_font_colors_page_font_section (dlg);
+	setup_font_colors_page_style_scheme_section (dlg);
 }
 
 static void
@@ -773,17 +957,6 @@ setup_plugins_page (GeditPreferencesDialog *dlg)
 			    0);
 
 	gtk_widget_show_all (page_content);
-}
-
-static void
-setup_syntax_highlighting_page (GeditPreferencesDialog *dlg)
-{
-	GtkWidget *page;
-
-	// TODO
-
-	page = gtk_notebook_get_nth_page (GTK_NOTEBOOK (dlg->priv->notebook), 3);
-	gtk_widget_hide (page);
 }
 
 static void
@@ -808,8 +981,10 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
-	g_signal_connect (dlg, "response",
-			  G_CALLBACK (dialog_response_handler), NULL);
+	g_signal_connect (dlg,
+			  "response",
+			  G_CALLBACK (dialog_response_handler),
+			  NULL);
 
 	dlg->priv->tooltips = gtk_tooltips_new ();
 	g_object_ref (dlg->priv->tooltips);
@@ -823,21 +998,9 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 
 		"display_line_numbers_checkbutton", &dlg->priv->display_line_numbers_checkbutton,
 		"highlight_current_line_checkbutton", &dlg->priv->highlight_current_line_checkbutton,
-				
 		"bracket_matching_checkbutton", &dlg->priv->bracket_matching_checkbutton,
 		"wrap_text_checkbutton", &dlg->priv->wrap_text_checkbutton,
 		"split_checkbutton", &dlg->priv->split_checkbutton,
-		"default_font_checkbutton", &dlg->priv->default_font_checkbutton,
-		"default_colors_checkbutton", &dlg->priv->default_colors_checkbutton,
-
-		"font_button", &dlg->priv->font_button,
-		"text_colorbutton", &dlg->priv->text_colorbutton,
-		"background_colorbutton", &dlg->priv->background_colorbutton,
-		"seltext_colorbutton", &dlg->priv->seltext_colorbutton,
-		"selection_colorbutton", &dlg->priv->selection_colorbutton,
-
-		"colors_table", &dlg->priv->colors_table,
-		"font_hbox", &dlg->priv->font_hbox,
 
 		"right_margin_checkbutton", &dlg->priv->right_margin_checkbutton,
 		"right_margin_position_spinbutton", &dlg->priv->right_margin_position_spinbutton,
@@ -854,22 +1017,16 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 		"auto_save_checkbutton", &dlg->priv->auto_save_checkbutton,
 		"auto_save_spinbutton", &dlg->priv->auto_save_spinbutton,
 
+		"default_font_checkbutton", &dlg->priv->default_font_checkbutton,
+		"font_button", &dlg->priv->font_button,
+		"font_hbox", &dlg->priv->font_hbox,
+
+		"schemes_treeview", &dlg->priv->schemes_treeview,
+		"new_scheme_button", &dlg->priv->new_scheme_button,
+		"remove_scheme_button", &dlg->priv->remove_scheme_button,
+		"edit_scheme_button", &dlg->priv->edit_scheme_button,
+
 		"plugin_manager_place_holder", &dlg->priv->plugin_manager_place_holder,
-
-		"enable_syntax_hl_checkbutton", &dlg->priv->enable_syntax_hl_checkbutton,
-		"hl_vbox", &dlg->priv->hl_vbox,
-		"hl_mode_combobox", &dlg->priv->hl_mode_combobox,
-		"tags_treeview", &dlg->priv->tags_treeview,
-
-		"bold_togglebutton", &dlg->priv->bold_togglebutton,
-		"italic_togglebutton", &dlg->priv->italic_togglebutton,
-		"underline_togglebutton", &dlg->priv->underline_togglebutton,
-		"strikethrough_togglebutton", &dlg->priv->strikethrough_togglebutton,
-		"foreground_checkbutton", &dlg->priv->foreground_checkbutton,
-		"foreground_colorbutton", &dlg->priv->foreground_colorbutton,
-		"background_checkbutton", &dlg->priv->background_checkbutton,
-		"background_colorbutton_2", &dlg->priv->background_colorbutton_2,
-		"reset_button", &dlg->priv->reset_button,
 		NULL);
 
 	if (!ret)
@@ -888,7 +1045,6 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	setup_editor_page (dlg);
 	setup_view_page (dlg);
 	setup_font_colors_page (dlg);
-	setup_syntax_highlighting_page (dlg);
 	setup_plugins_page (dlg);
 }
 

@@ -39,6 +39,10 @@ GtkSourceStyleScheme	*gedit_source_style_manager_get_default_scheme	(GtkSourceSt
 gboolean		_gedit_source_style_manager_set_default_scheme	(GtkSourceStyleManager	*manager,
 									 const gchar		*scheme_id);
 
+gboolean		_gedit_source_style_manager_scheme_is_gedit_user_scheme
+									(GtkSourceStyleManager	*manager,
+									const gchar		*scheme_id);
+
 G_END_DECLS
 
 #endif /* __GEDIT_SOURCE_STYLE_MANAGER_H__ */
