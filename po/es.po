@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-17 03:43+0100\n"
-"PO-Revision-Date: 2007-07-17 11:47+0200\n"
+"POT-Creation-Date: 2007-07-21 04:05+0100\n"
+"PO-Revision-Date: 2007-07-21 16:32+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -350,13 +350,14 @@ msgid ""
 "the start/end of the line and \"ALWAYS\" to always move to the start/end of "
 "the text instead of the start/end of the line."
 msgstr ""
-"Especifica cómo se mueve el cursor cuando se pulsan las teclas «INICIO» y «FIN». Use "
-"«DESACTIVADO» para moverse siempre al incio/final de la línea, «DESPUÉS» para moverse al "
-"inicio/final de la línea la primera vez que se pulsan las teclas y al "
-"inicio/final del texto, ignorando los espacios en blanco, la segunda vez que se "
-"pulsan, «ANTES» para moverse al inicio/final del texto antes de moverse "
-"al inicio/final de la línea y «SIEMPRE» para moverse siempre al inicio/final del "
-"texto en lugar del inicio/final de la línea."
+"Especifica cómo se mueve el cursor cuando se pulsan las teclas «INICIO» y "
+"«FIN». Use «DESACTIVADO» para moverse siempre al incio/final de la línea, "
+"«DESPUÉS» para moverse al inicio/final de la línea la primera vez que se "
+"pulsan las teclas y al inicio/final del texto, ignorando los espacios en "
+"blanco, la segunda vez que se pulsan, «ANTES» para moverse al inicio/final "
+"del texto antes de moverse al inicio/final de la línea y «SIEMPRE» para "
+"moverse siempre al inicio/final del texto en lugar del inicio/final de la "
+"línea."
 
 #: ../data/gedit.schemas.in.h:74
 msgid ""
@@ -838,22 +839,22 @@ msgid "    "
 msgstr "    "
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:2
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:8
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
 msgid "<b>Line Numbers</b>"
 msgstr "<b>Números de línea</b>"
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:3
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:11
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
 msgid "<b>Text Wrapping</b>"
 msgstr "<b>Ajuste del texto</b>"
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:4
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:16
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
 msgid "Do not _split words over two lines"
 msgstr "No _dividir palabras en dos líneas"
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:5
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:19
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
 msgid "Enable text _wrapping"
 msgstr "Activar a_juste de texto"
 
@@ -901,40 +902,21 @@ msgstr "_Restaurar tipografías predeterminadas"
 msgid "lines"
 msgstr "líneas"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:650
+#: ../gedit/dialogs/gedit-preferences-dialog.c:583
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Pulse este botón para seleccionar la tipografía que utilizará el editor"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:652
-msgid "Push this button to configure text color"
-msgstr "Pulse este botón para configurar el color del texto"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.c:654
-msgid "Push this button to configure background color"
-msgstr "Pulse este botón para configurar el color de fondo"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.c:656
-msgid ""
-"Push this button to configure the color in which the selected text should "
-"appear"
-msgstr ""
-"Pulse este botón para configurar el color con el cual debe aparecer el texto "
-"seleccionado"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.c:659
-msgid ""
-"Push this button to configure the color in which the selected text should be "
-"marked"
-msgstr ""
-"Pulse este botón para configurar el color con el cual debe marcarse el texto "
-"seleccionado"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.c:668
+#: ../gedit/dialogs/gedit-preferences-dialog.c:593
 #, c-format
 msgid "_Use the system fixed width font (%s)"
 msgstr "_Usar la tipografía de ancho fijo del sistema (%s)"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:806
+#: ../gedit/dialogs/gedit-preferences-dialog.c:749
+#, c-format
+msgid "Could not remove the style scheme \"%s\""
+msgstr "No se ha podido quitar el estilo «%s»"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:979
 msgid "gedit Preferences"
 msgstr "Preferencias de gedit"
 
@@ -951,179 +933,94 @@ msgid "<b>Current Line</b>"
 msgstr "<b>Línea actual</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:5
-msgid "<b>Elements</b>"
-msgstr "<b>Elementos</b>"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:6
 msgid "<b>File Saving</b>"
 msgstr "<b>Guardado de archivo</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:6
 msgid "<b>Font</b>"
 msgstr "<b>Tipografía</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:9
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:8
 msgid "<b>Right Margin</b>"
 msgstr "<b>Margen derecho</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:9
 msgid "<b>Tab Stops</b>"
 msgstr "<b>Tabulaciones</b>"
 
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:11
+msgid "<span weight=\"bold\">Color Scheme</span>"
+msgstr "<span weight=\"bold\">Esquema de colores</span>"
+
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:12
-msgid "<span weight=\"bold\">Colors</span>"
-msgstr "<span weight=\"bold\">Colores</span>"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:13
-#: ../plugins/taglist/HTML.tags.xml.in.h:28
-msgid "Bold"
-msgstr "Negrita"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
 msgid "Create a _backup copy of files before saving"
 msgstr "Crear una copia de _respaldo de los archivos antes de guardarlos"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:15
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:13
 msgid "Display right _margin"
 msgstr "Mostrar margen _derecho"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:15
 msgid "Editor"
 msgstr "Editor"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:18
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:16
 msgid "Editor _font: "
 msgstr "Tipogra_fía del editor: "
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:20
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:18
 msgid "Font & Colors"
 msgstr "Tipografías y colores"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:21
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:19
 msgid "Hi_ghlight current line"
 msgstr "_Resaltar la línea actual"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:22
-msgid "Highlight _mode:"
-msgstr "_Modo de resaltado:"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:23
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:20
 msgid "Highlight matching _bracket"
 msgstr "Resaltar la pareja del _corchete"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:24
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:21
 msgid "Insert _spaces instead of tabs"
 msgstr "Insertar e_spacios en lugar de tabuladores"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:25
-msgid "Italic"
-msgstr "Cursiva"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
-msgid "Normal _text color:"
-msgstr "Color del _texto normal:"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
-msgid "Pick a color"
-msgstr "Elija un color"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
-msgid "Pick the background color"
-msgstr "Elija el color de fondo"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:22
 msgid "Pick the editor font"
 msgstr "Elija la tipografía del editor"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
-msgid "Pick the normal text color"
-msgstr "Elija el color del texto normal"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
-msgid "Pick the selected text color"
-msgstr "Elija el color del texto seleccionado"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:32
-msgid "Pick the selection color"
-msgstr "Elija el el color de selección"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:33
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:23
 msgid "Plugins"
 msgstr "Complementos"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:34
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:24
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:35
-msgid "Se_lection color:"
-msgstr "Color de se_lección:"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:36
-msgid "Selecte_d text color:"
-msgstr "Color del texto s_eleccionado:"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:37
-msgid "Strikethrough"
-msgstr "Tachado"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:38
-msgid "Syntax Highlighting"
-msgstr "Resaltado de sintaxis"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:39
-msgid "U_se default theme colors"
-msgstr "U_sar los colores del tema predeterminado"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:40
-msgid "Underline"
-msgstr "Subrayado"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:41
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:25
 msgid "View"
 msgstr "Ver"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:42
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
 msgid "_Autosave files every"
 msgstr "_Autoguardar archivos cada"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:43
-msgid "_Background color:"
-msgstr "_Color del fondo:"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:44
-msgid "_Background:"
-msgstr "_Fondo:"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:45
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
 msgid "_Display line numbers"
 msgstr "_Mostrar números de línea"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:46
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
 msgid "_Enable automatic indentation"
 msgstr "_Activar sangría automática"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:47
-msgid "_Enable syntax highlighting"
-msgstr "_Activar resaltado de sintaxis"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:48
-msgid "_Foreground:"
-msgstr "_Primer plano:"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:49
-msgid "_Reset to Default "
-msgstr "_Restablecer predeterminados"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:50
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
 msgid "_Right margin at column:"
 msgstr "Margen _derecho en la columna:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:51
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
 msgid "_Tab width:"
 msgstr "Ancho del _tabulador:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:52
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
 msgid "_minutes"
 msgstr "_minutos"
 
@@ -1380,7 +1277,7 @@ msgstr "Se encontró y reemplazó una aparición"
 msgid "Phrase not found"
 msgstr "Frase no encontrada "
 
-#: ../gedit/gedit-document.c:767 ../gedit/gedit-document.c:861
+#: ../gedit/gedit-document.c:768 ../gedit/gedit-document.c:862
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "No se ha guardado %d documento"
@@ -3295,33 +3192,208 @@ msgid "<b>Activation</b>"
 msgstr "<b>Activación</b>"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:3
+msgid "Create new snippet"
+msgstr "Crear un recorte nuevo"
+
+#: ../plugins/snippets/snippets/snippets.glade.h:4
+#: ../plugins/snippets/snippets/Manager.py:391
+msgid "Delete selected snippet"
+msgstr "Borrar el recorte seleccionado"
+
+#: ../plugins/snippets/snippets/snippets.glade.h:5
+msgid "Export selected snippets"
+msgstr "Exportar el recorte seleccionado"
+
+#: ../plugins/snippets/snippets/snippets.glade.h:6
+#: ../plugins/snippets/snippets/Manager.py:759
+msgid "Import snippets"
+msgstr "Importar recortes"
+
+#: ../plugins/snippets/snippets/snippets.glade.h:7
 msgid "S_hortcut key:"
 msgstr "_Tecla rápida:"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:4
+#: ../plugins/snippets/snippets/snippets.glade.h:8
 msgid "Snippets Manager"
-msgstr "Administrador de snippets"
+msgstr "Administrador de recortes"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:5
-msgid "_Edit snippet:"
-msgstr "_Editar snippet:"
+#: ../plugins/snippets/snippets/snippets.glade.h:9
+msgid "_Edit:"
+msgstr "_Editar:"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:6
+#: ../plugins/snippets/snippets/snippets.glade.h:10
 msgid "_Snippets:"
 msgstr "_Snippets:"
 
 #. "tab" here means the tab key, not the notebook tab!
-#: ../plugins/snippets/snippets/snippets.glade.h:8
+#: ../plugins/snippets/snippets/snippets.glade.h:12
 msgid "_Tab trigger:"
 msgstr "_Disparador:"
 
 #: ../plugins/snippets/snippets/WindowHelper.py:74
 msgid "Manage _Snippets..."
-msgstr "Administrar _snippets…"
+msgstr "Administrar _recortes…"
 
 #: ../plugins/snippets/snippets/WindowHelper.py:75
 msgid "Manage snippets"
-msgstr "Administre snippets"
+msgstr "Administre recortes"
+
+#: ../plugins/snippets/snippets/Manager.py:44
+msgid "Snippets archive"
+msgstr "Archivo de recortes"
+
+#: ../plugins/snippets/snippets/Manager.py:65
+msgid "Add a new snippet..."
+msgstr "Añadir un nuevo recorte…"
+
+#: ../plugins/snippets/snippets/Manager.py:121
+msgid "Global"
+msgstr "Global"
+
+#: ../plugins/snippets/snippets/Manager.py:388
+msgid "Revert selected snippet"
+msgstr "Revertir el recorte seleccionado"
+
+#: ../plugins/snippets/snippets/Manager.py:655
+msgid ""
+"This is not a valid tab trigger. Triggers can either contain letters or a "
+"single, non alphanumeric, character like {, [, etcetera."
+msgstr ""
+"Este no es un disparador válido. Los disparadores pueden contener letras o "
+"un solo carácter alfanumérico como {,[, etcétera."
+
+#: ../plugins/snippets/snippets/Manager.py:738
+#, python-format
+msgid "The following error occurred while importing: %s"
+msgstr "Ocurrió el siguiente error al importar: %s"
+
+#: ../plugins/snippets/snippets/Manager.py:745
+msgid "Import succesfully completed"
+msgstr "La importación se completó satisfactoriamente"
+
+#: ../plugins/snippets/snippets/Manager.py:764
+#: ../plugins/snippets/snippets/Manager.py:850
+#: ../plugins/snippets/snippets/Manager.py:913
+msgid "All supported archives"
+msgstr "Todos los archivos soportados"
+
+#: ../plugins/snippets/snippets/Manager.py:765
+#: ../plugins/snippets/snippets/Manager.py:851
+#: ../plugins/snippets/snippets/Manager.py:914
+msgid "Gzip compressed archive"
+msgstr "Archivo comprimizo con Gzip"
+
+#: ../plugins/snippets/snippets/Manager.py:766
+#: ../plugins/snippets/snippets/Manager.py:852
+#: ../plugins/snippets/snippets/Manager.py:915
+msgid "Bzip compressed archive"
+msgstr "Archivo comprimido con Bzip"
+
+#: ../plugins/snippets/snippets/Manager.py:767
+msgid "Single snippets file"
+msgstr "Archivo individual de recortes"
+
+#: ../plugins/snippets/snippets/Manager.py:768
+#: ../plugins/snippets/snippets/Manager.py:854
+#: ../plugins/snippets/snippets/Manager.py:917
+msgid "All files"
+msgstr "Todos los archivos"
+
+#: ../plugins/snippets/snippets/Manager.py:780
+#, python-format
+msgid "The following error occurred while exporting: %s"
+msgstr "Ocurrió el siguiente error al exportar: %s"
+
+#: ../plugins/snippets/snippets/Manager.py:784
+msgid "Export succesfully completed"
+msgstr "La exportación se completó satisfactoriamente"
+
+#. Ask if system snippets should also be exported
+#: ../plugins/snippets/snippets/Manager.py:824
+#: ../plugins/snippets/snippets/Manager.py:891
+msgid "Do you want to include selected <b>system</b> snippets in your export?"
+msgstr "¿Quiere incluir los recortes del <b>sistema</b> seleccionados en su exportación?"
+
+#: ../plugins/snippets/snippets/Manager.py:839
+#: ../plugins/snippets/snippets/Manager.py:909
+msgid "There are no snippets selected to be exported"
+msgstr "No hay recortes seleccionados para exportar"
+
+#: ../plugins/snippets/snippets/Manager.py:844
+#: ../plugins/snippets/snippets/Manager.py:882
+msgid "Export snippets"
+msgstr "Exportar recortes"
+
+#: ../plugins/snippets/snippets/Manager.py:1021
+msgid "Type a new shortcut, or press Backspace to clear"
+msgstr "Teclee un acelerador nuevo o pulse Retroceso para limpiar"
+
+#: ../plugins/snippets/snippets/Manager.py:1023
+msgid "Type a new shortcut"
+msgstr "Teclee un acelerador nuevo"
+
+#: ../plugins/snippets/snippets/Exporter.py:65
+#, python-format
+msgid "The archive `%s` could not be created"
+msgstr "No se pudo crear el archivo «%s»"
+
+#: ../plugins/snippets/snippets/Exporter.py:82
+#, python-format
+msgid "Target directory `%s` does not exist"
+msgstr "El directorio de destino «%s» no existe"
+
+#: ../plugins/snippets/snippets/Exporter.py:85
+#, python-format
+msgid "Target directory `%s` is not a valid directory"
+msgstr "El directorio de destino «%s» no es un directorio válido"
+
+#: ../plugins/snippets/snippets/Importer.py:29
+#: ../plugins/snippets/snippets/Importer.py:83
+#, python-format
+msgid "File `%s` does not exist"
+msgstr "El archivo «%s» no existe"
+
+#: ../plugins/snippets/snippets/Importer.py:32
+#, python-format
+msgid "File `%s` is not a valid snippets file"
+msgstr "El archivo «%s» no es un archivo de recortes válido"
+
+#: ../plugins/snippets/snippets/Importer.py:42
+#, python-format
+msgid "Imported file `%s` is not a valid snippets file"
+msgstr "El archivo importado «%s» no es un archivo de recortes válido"
+
+#: ../plugins/snippets/snippets/Importer.py:52
+#, python-format
+msgid "The archive `%s` could not be extracted"
+msgstr "No se pudo extraer el archivo «%s»"
+
+#: ../plugins/snippets/snippets/Importer.py:70
+#, python-format
+msgid "The following files could not be imported: %s"
+msgstr "No se pudieron importar los siguientes archivos: %s"
+
+#: ../plugins/snippets/snippets/Importer.py:86
+#: ../plugins/snippets/snippets/Importer.py:99
+#, python-format
+msgid "File `%s` is not a valid snippets archive"
+msgstr "El archivo «%s» no es un archivador de recortes válido"
+
+#: ../plugins/snippets/snippets/Placeholder.py:537
+#, python-format
+msgid ""
+"Execution of the python command (%s) exceeds the maximum time, execution "
+"aborted."
+msgstr "La ejecución del comando python (%s) excede el tiempo máximo, ejecución abortada."
+
+#: ../plugins/snippets/snippets/Placeholder.py:545
+#, python-format
+msgid "Execution of the python command (%s) failed: %s"
+msgstr "La ejecución del comando python (%s) falló: %s"
+
+#: ../plugins/snippets/snippets/Placeholder.py:551
+msgid "The following python code, run in a snippet, does not return a value"
+msgstr "El siguiente código python, ejecutado en un recorte, no devuelve ningún valor"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -3669,6 +3741,10 @@ msgstr "Tipografía base"
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
 msgid "Base font (deprecated)"
 msgstr "Tipografía base (obsoleto)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:28
+msgid "Bold"
+msgstr "Negrita"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Border"
