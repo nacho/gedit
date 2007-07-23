@@ -791,19 +791,6 @@
   (return-type "none")
 )
 
-(define-method set_colors
-  (of-object "GeditView")
-  (c-name "gedit_view_set_colors")
-  (return-type "none")
-  (parameters
-    '("gboolean" "def")
-    '("GdkColor*" "backgroud")
-    '("GdkColor*" "text")
-    '("GdkColor*" "selection")
-    '("GdkColor*" "sel_text")
-  )
-)
-
 (define-method set_font
   (of-object "GeditView")
   (c-name "gedit_view_set_font")

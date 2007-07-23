@@ -55,11 +55,6 @@ static void gedit_prefs_manager_system_font_changed	(GConfClient *client,
 							 GConfEntry  *entry,
 							 gpointer     user_data);
 
-static void gedit_prefs_manager_editor_colors_changed	(GConfClient *client,
-							 guint        cnxn_id,
-							 GConfEntry  *entry,
-							 gpointer     user_data);
-
 static void gedit_prefs_manager_tabs_size_changed	(GConfClient *client,
 							 guint        cnxn_id, 
 							 GConfEntry  *entry, 
@@ -625,11 +620,6 @@ gedit_prefs_manager_app_init (void)
 				NULL, NULL, NULL);
 
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
-				GPM_COLORS_DIR,
-				gedit_prefs_manager_editor_colors_changed,
-				NULL, NULL, NULL);
-
-		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
 				GPM_TABS_DIR,
 				gedit_prefs_manager_tabs_size_changed,
 				NULL, NULL, NULL);
@@ -824,145 +814,6 @@ gedit_prefs_manager_system_font_changed (GConfClient *client,
 
 	g_list_free (views);
 	g_free (font);
-}
-
-static void 
-set_colors (gboolean  def, 
-	    GdkColor *backgroud, 
-	    GdkColor *text,
-	    GdkColor *selection, 
-	    GdkColor *sel_text)
-{
-	GList *views;
-	GList *l;
-
-	views = gedit_app_get_views (gedit_app_get_default ());
-	l = views;
-
-	while (l != NULL)
-	{
-		gedit_view_set_colors (GEDIT_VIEW (l->data),
-				       def,
-				       backgroud,
-				       text,
-				       selection,
-				       sel_text);
-
-		l = l->next;
-	}
-
-	g_list_free (views);
-}
-
-static void 
-gedit_prefs_manager_editor_colors_changed (GConfClient *client,
-					   guint        cnxn_id, 
-					   GConfEntry  *entry, 
-					   gpointer     user_data)
-{	
-	gchar *str_color;
-	GdkColor color;
-
-	gedit_debug (DEBUG_PREFS);
-
-	g_return_if_fail (entry->key != NULL);
-	g_return_if_fail (entry->value != NULL);
-
-	if (strcmp (entry->key, GPM_USE_DEFAULT_COLORS) == 0)
-	{
-		gboolean def = TRUE;
-		
-		if (entry->value->type == GCONF_VALUE_BOOL)
-			def = gconf_value_get_bool (entry->value);
-		else
-			def = GPM_DEFAULT_USE_DEFAULT_COLORS;
-
-		if (def)
-			set_colors (TRUE, NULL, NULL, NULL, NULL);
-		else
-		{
-			GdkColor background, text, selection, sel_text;
-
-			background = gedit_prefs_manager_get_background_color ();
-			text = gedit_prefs_manager_get_text_color ();
-			selection = gedit_prefs_manager_get_selection_color ();
-			sel_text = gedit_prefs_manager_get_selected_text_color ();
-
-			set_colors (FALSE,
-				    &background, 
-				    &text, 
-				    &selection, 
-				    &sel_text);
-		}
-
-		return;
-	}
-	
-	if (gedit_prefs_manager_get_use_default_colors ())
-	{
-		set_colors (TRUE, NULL, NULL, NULL, NULL);
-		return;
-	}
-		
-	if (strcmp (entry->key, GPM_BACKGROUND_COLOR) == 0)
-	{
-		if (entry->value->type == GCONF_VALUE_STRING)
-			str_color = g_strdup (gconf_value_get_string (entry->value));
-		else
-			str_color = g_strdup (GPM_DEFAULT_BACKGROUND_COLOR);
-				
-		gdk_color_parse (str_color, &color);	
-		g_free (str_color);
-
-		set_colors (FALSE, &color, NULL, NULL, NULL);
-	
-		return;
-	}
-
-	if (strcmp (entry->key, GPM_TEXT_COLOR) == 0)
-	{
-		if (entry->value->type == GCONF_VALUE_STRING)
-			str_color = g_strdup (gconf_value_get_string (entry->value));
-		else
-			str_color = g_strdup (GPM_DEFAULT_TEXT_COLOR);
-				
-		gdk_color_parse (str_color, &color);	
-		g_free (str_color);
-
-		set_colors (FALSE, NULL, &color, NULL, NULL);
-	
-		return;
-	}
-
-	if (strcmp (entry->key, GPM_SELECTION_COLOR) == 0)
-	{
-		if (entry->value->type == GCONF_VALUE_STRING)
-			str_color = g_strdup (gconf_value_get_string (entry->value));
-		else
-			str_color = g_strdup (GPM_DEFAULT_SELECTION_COLOR);
-				
-		gdk_color_parse (str_color, &color);	
-		g_free (str_color);
-
-		set_colors (FALSE, NULL, NULL, &color, NULL);
-	
-		return;
-	}
-
-	if (strcmp (entry->key, GPM_SELECTED_TEXT_COLOR) == 0)
-	{
-		if (entry->value->type == GCONF_VALUE_STRING)
-			str_color = g_strdup (gconf_value_get_string (entry->value));
-		else
-			str_color = g_strdup (GPM_DEFAULT_SELECTED_TEXT_COLOR);
-
-		gdk_color_parse (str_color, &color);	
-		g_free (str_color);
-
-		set_colors (FALSE, NULL, NULL, NULL, &color);
-	
-		return;
-	}
 }
 
 static void 

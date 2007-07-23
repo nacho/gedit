@@ -96,13 +96,6 @@ void		 gedit_view_select_all		(GeditView       *view);
 
 void		 gedit_view_scroll_to_cursor 	(GeditView       *view);
 
-void 		 gedit_view_set_colors 		(GeditView       *view, 
-						 gboolean         def,
-						 GdkColor        *backgroud, 
-						 GdkColor        *text,
-						 GdkColor        *selection, 
-						 GdkColor        *sel_text);
-
 void 		 gedit_view_set_font		(GeditView       *view,
 						 gboolean         def,
 						 const gchar     *font_name);

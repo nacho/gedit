@@ -30,7 +30,6 @@
 #ifndef __GEDIT_PREFS_MANAGER_H__
 #define __GEDIT_PREFS_MANAGER_H__
 
-#include <gdk/gdkcolor.h>
 #include <gtk/gtkenums.h>
 #include <glib/gslist.h>
 #include <gtksourceview/gtksourceview.h>
@@ -45,13 +44,6 @@
 #define GPM_USE_DEFAULT_FONT		GPM_FONT_DIR "/use_default_font"
 #define GPM_EDITOR_FONT			GPM_FONT_DIR "/editor_font"
 #define GPM_SYSTEM_FONT			"/desktop/gnome/interface/monospace_font_name"
-
-#define GPM_COLORS_DIR			GPM_PREFS_DIR  "/editor/colors"
-#define GPM_USE_DEFAULT_COLORS		GPM_COLORS_DIR "/use_default_colors"
-#define GPM_BACKGROUND_COLOR		GPM_COLORS_DIR "/background_color"
-#define GPM_TEXT_COLOR			GPM_COLORS_DIR "/text_color"
-#define GPM_SELECTED_TEXT_COLOR		GPM_COLORS_DIR "/selected_text_color"
-#define GPM_SELECTION_COLOR		GPM_COLORS_DIR "/selection_color"
 
 #define GPM_SAVE_DIR			GPM_PREFS_DIR  "/editor/save"
 #define GPM_CREATE_BACKUP_COPY  	GPM_SAVE_DIR "/create_backup_copy"
@@ -156,12 +148,6 @@
 #define GPM_DEFAULT_EDITOR_FONT 	(const gchar*) "Monospace 12"
 #define GPM_DEFAULT_SYSTEM_FONT 	(const gchar*) "Monospace 10"
 
-#define GPM_DEFAULT_USE_DEFAULT_COLORS 	1 /* TRUE */
-#define GPM_DEFAULT_BACKGROUND_COLOR	(const gchar*) "#ffffffffffff"
-#define GPM_DEFAULT_TEXT_COLOR		(const gchar*) "#000000000000"
-#define GPM_DEFAULT_SELECTED_TEXT_COLOR	(const gchar*) "#ffffffffffff"
-#define GPM_DEFAULT_SELECTION_COLOR	(const gchar*) "#000000009c9c"
-
 #define GPM_DEFAULT_CREATE_BACKUP_COPY	1 /* TRUE */
 #define GPM_DEFAULT_BACKUP_COPY_EXTENSION (const gchar*) "~"
 
@@ -248,31 +234,6 @@ gboolean		 gedit_prefs_manager_editor_font_can_set	(void);
 
 /* System font */
 gchar 			*gedit_prefs_manager_get_system_font		(void);
-
-/* Use default colors */
-gboolean 		 gedit_prefs_manager_get_use_default_colors 	(void);
-void			 gedit_prefs_manager_set_use_default_colors 	(gboolean udc);
-gboolean		 gedit_prefs_manager_use_default_colors_can_set	(void);
-
-/* Background color */	
-GdkColor		 gedit_prefs_manager_get_background_color	(void);
-void 			 gedit_prefs_manager_set_background_color	(GdkColor color);
-gboolean		 gedit_prefs_manager_background_color_can_set	(void);
-
-/* Text color */	
-GdkColor		 gedit_prefs_manager_get_text_color		(void);
-void 			 gedit_prefs_manager_set_text_color		(GdkColor color);
-gboolean		 gedit_prefs_manager_text_color_can_set		(void);
-
-/* Selection color */	
-GdkColor		 gedit_prefs_manager_get_selection_color	(void);
-void 			 gedit_prefs_manager_set_selection_color	(GdkColor color);
-gboolean		 gedit_prefs_manager_selection_color_can_set	(void);
-
-/* Selected text color */	
-GdkColor		 gedit_prefs_manager_get_selected_text_color	(void);
-void 			 gedit_prefs_manager_set_selected_text_color	(GdkColor color);
-gboolean		 gedit_prefs_manager_selected_text_color_can_set(void);
 
 /* Create backup copy */
 gboolean		 gedit_prefs_manager_get_create_backup_copy	(void);
