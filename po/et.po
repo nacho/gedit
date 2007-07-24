@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit2 HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-29 19:25+0100\n"
-"PO-Revision-Date: 2007-06-10 20:09+0300\n"
+"POT-Creation-Date: 2007-07-17 03:43+0100\n"
+"PO-Revision-Date: 2007-07-19 08:39+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgstr ""
 "Kohandatud kirjatüüp, mida kasutatakse redaktoris. See väärtus kehtib vaid "
 "siis, kui \"Kasuta teema vaikimisi kirjatüüpi\" on välja lülitatud."
 
-#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:766
+#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:765
 msgid "Active plugins"
 msgstr "Aktiivsed pluginad"
 
@@ -149,7 +149,7 @@ msgstr "Päise kirjatüüp printimisel"
 
 #: ../data/gedit.schemas.in.h:24
 msgid "Highlight Current Line"
-msgstr "Käesoleva rea esiletõstmine"
+msgstr "Käesolev rida tõstetakse esile"
 
 #: ../data/gedit.schemas.in.h:25
 msgid "Highlight Matching Bracket"
@@ -314,6 +314,10 @@ msgid "Side Pane is Visible"
 msgstr "Külgpaan on nähtav"
 
 #: ../data/gedit.schemas.in.h:71
+msgid "Smart Home End"
+msgstr ""
+
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" represents the current locale encoding. Only recognized "
@@ -323,7 +327,18 @@ msgstr ""
 "sorditud loetelu. \"CURRENT\" on praegusest lokaadist tulenev kooditabel. "
 "Kasutatakse ainult teadaolevaid kooditabeleid."
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:73
+msgid ""
+"Specifies how the cursor moves when the HOME and END keys are pressed. Use "
+"\"DISABLED\" to always move at the start/end of the line, \"AFTER\" to move "
+"to the start/end of the line the first time the keys are pressed and to the "
+"start/end of the text ignoring whitespaces the second time the keys are "
+"pressed, \"BEFORE\" to move to the start/end of the text before moving to "
+"the start/end of the line and \"ALWAYS\" to always move to the start/end of "
+"the text instead of the start/end of the line."
+msgstr ""
+
+#: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -336,7 +351,7 @@ msgstr ""
 "\"GTK_WRAP_CHAR\" korral murtakse murdmispiiril asuva märgist. NB! Väärtused "
 "on tõstutundlikud."
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -349,12 +364,12 @@ msgstr ""
 "\"GTK_WRAP_CHAR\" korral murtakse murdmispiiril asuva märgist. NB! Väärtused "
 "on tõstutundlikud."
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "Dokumendi sisu printimiseks kasutatav kirjatüüp."
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:77
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -362,7 +377,7 @@ msgstr ""
 "Printimisel dokumendi sisu jaoks kasutatav kirjatüüp. See on gnome-print "
 "kirjatüübi nimi ja see asendatakse print_font_body_pango poolt."
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:78
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -370,7 +385,7 @@ msgstr ""
 "Printimisel reanumbrite jaoks kasutatav kirjatüüp. Seda kasutatakse ainult "
 "juhul, kui valiku \"Prindi reanumbrid\" väärtus erineb nullist."
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:79
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -380,7 +395,7 @@ msgstr ""
 "juhul, kui valiku \"Prindi reanumbrid\" väärtus erineb nullist. See on gnome-"
 "print kirjatüübi nimi ja see asendatakse print_font_numbers_pango poolt."
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:80
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -388,7 +403,7 @@ msgstr ""
 "Printimisel lehekülje päise jaoks kasutatav kirjatüüp. Seda kasutatakse "
 "ainult juhul, kui valiku \"Prindi päis\" väärtus on märgitud."
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:81
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -398,7 +413,7 @@ msgstr ""
 "ainult juhul, kui valiku \"Prindi päis\" väärtus on märgitud. See on gnome-"
 "print kirjatüübi nimi ja see asendatakse print_font_header_pango poolt."
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:82
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -406,21 +421,21 @@ msgstr ""
 "Suurim hiljuti avatud failide arv, mis kuvatakse \"Hiljutiste failide\" "
 "alammenüüs."
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:83
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Tabulaatorimärgi asemel kuvatavate tühikute arvu määramine."
 
-#: ../data/gedit.schemas.in.h:82
+#: ../data/gedit.schemas.in.h:84
 msgid "Specifies the position of the right margin."
 msgstr "Paremveerise asukoha määramine."
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:85
 msgid "Status Bar is Visible"
 msgstr "Olekuriba on nähtav"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:86
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -436,35 +451,35 @@ msgstr ""
 "ainult tähtsamat teksti. Väärtused on tõstutundlikud ja seetõttu tuleb "
 "jälgida, et need määrataks täpselt nii nagu siin kirjeldatud."
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:87
 msgid "Tab Size"
 msgstr "Saki suurus"
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:88
 msgid "Text Color"
 msgstr "Teksti värv"
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:89
 msgid "Toolbar Buttons Style"
 msgstr "Tööriistariba nuppude välimus"
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:90
 msgid "Toolbar is Visible"
 msgstr "Tööriistariba on nähtav"
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:91
 msgid "Undo Actions Limit (DEPRECATED)"
 msgstr "Unustatavate toimingute piirang (AEGUNUD)"
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:92
 msgid "Use Default Colors"
 msgstr "Vaikevärvuste kasutamine"
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:93
 msgid "Use Default Font"
 msgstr "Vaikekirjatüüpide kasutamine"
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:94
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -473,7 +488,7 @@ msgstr ""
 "Kas gedit peab faile etteantud ajaintervalliga automaatselt salvestama. "
 "Intervalli saad määrata sättega \"Automaatse salvestamise intervall\"."
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:95
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -481,73 +496,73 @@ msgstr ""
 "Kas gedit peab faili salvestamisel sellest varukoopia tegema või mitte. "
 "Varukoopia faili laiendit saab määrata valikust \"Varukoopia laiend\"."
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:96
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Kas gedit peab readktoris reanumbreid näitama."
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Kas gedit peab redigerimisalas kuvama paremveerist."
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:98
 msgid "Whether gedit should enable auto indentation."
 msgstr "Kas gedit peab autotaandeid lubama."
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:99
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Kas gedit peab lubama süntaksi esiletõstmist."
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:100
 msgid ""
 "Whether gedit should highlight all the occurrences of the searched text."
 msgstr "Kas gedit peab kõiki otsitava teksi vastavusi esile tõstma."
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:101
 msgid "Whether gedit should highlight matching bracket."
 msgstr "Kas gedit peab vastavuses olevaid sulge esile tõstma."
 
-#: ../data/gedit.schemas.in.h:100
+#: ../data/gedit.schemas.in.h:102
 msgid "Whether gedit should highlight the current line."
 msgstr "Kas gedit peab käesolevat rida esile tõstma."
 
-#: ../data/gedit.schemas.in.h:101
+#: ../data/gedit.schemas.in.h:103
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Kas gedit peab kaasama printimisel ka dokumendi päise."
 
-#: ../data/gedit.schemas.in.h:102
+#: ../data/gedit.schemas.in.h:104
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Kas gedit peab tühikuid tabulaatorite asemel lisama."
 
-#: ../data/gedit.schemas.in.h:103
+#: ../data/gedit.schemas.in.h:105
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Kas gedit peab printimisel kasutama süntaksi esiletõstmist."
 
-#: ../data/gedit.schemas.in.h:104
+#: ../data/gedit.schemas.in.h:106
 msgid ""
 "Whether gedit should restore the previous cursor position when a file is "
 "loaded."
 msgstr "Kas gedit peab faili laadimisel taastama kursori eelmise asukoha."
 
-#: ../data/gedit.schemas.in.h:105
+#: ../data/gedit.schemas.in.h:107
 msgid ""
 "Whether the bottom panel at the bottom of editing windows should be visible."
 msgstr "Kas redaktoriaknast allpool olev alumine paneel peab olema nähtav."
 
-#: ../data/gedit.schemas.in.h:106
+#: ../data/gedit.schemas.in.h:108
 msgid ""
 "Whether the side pane at the left of the editing window should be visible."
 msgstr "Kas redaktoriaknast vasakul pool olev külgpaan peab olema nähtav."
 
-#: ../data/gedit.schemas.in.h:107
+#: ../data/gedit.schemas.in.h:109
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Kas redaktoriaknast allpool olev olekuriba peab olema nähtav."
 
-#: ../data/gedit.schemas.in.h:108
+#: ../data/gedit.schemas.in.h:110
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Kas tööriistariba peab redigeerimisaknas nähtav olema."
 
-#: ../data/gedit.schemas.in.h:109
+#: ../data/gedit.schemas.in.h:111
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -558,7 +573,7 @@ msgstr ""
 "see võti on märkimata, siis määratakse redigeerimisala värvused valikutega "
 "\"Teksti värv\", \"Valitud teksti värv\" ja \"Valiku värv\"."
 
-#: ../data/gedit.schemas.in.h:110
+#: ../data/gedit.schemas.in.h:112
 msgid ""
 "Whether to use the system's default fixed width font for editing text "
 "instead of a font specific to gedit. If this option is turned off, then the "
@@ -569,13 +584,13 @@ msgstr ""
 "asemel süsteemset vaikimisi kirjatüüpi. Kui see on märkimata, siis "
 "kasutatakse valikus \"Redaktori kirjatüüp\" määratud kirjatüüpi."
 
-#: ../data/gedit.schemas.in.h:111
+#: ../data/gedit.schemas.in.h:113
 msgid "Writable VFS schemes"
 msgstr "Kirjutatavad VFS-skeemid"
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:114
+#: ../data/gedit.schemas.in.h:116
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
@@ -590,7 +605,7 @@ msgstr "[ISO-8859-15]"
 #. Only recognized encodings are used.
 #. See http://svn.gnome.org/viewcvs/gedit/trunk/gedit/gedit-encodings.c?view=markup for
 #. a list of supported encodings
-#: ../data/gedit.schemas.in.h:126
+#: ../data/gedit.schemas.in.h:128
 msgid "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
 
@@ -812,7 +827,7 @@ msgstr "Üle _kahe rea sõnu ei murta"
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:5
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:19
 msgid "Enable text _wrapping"
-msgstr "_Tekstmurdmine lubatud"
+msgstr "_Tekstmurdmine on lubatud"
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:6
 msgid "Fonts"
@@ -858,40 +873,36 @@ msgstr "_Taasta vaikimisi kirjatüübid"
 msgid "lines"
 msgstr "rea"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:652
+#: ../gedit/dialogs/gedit-preferences-dialog.c:650
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Redaktoris kasutatava kirjatüübi valimiseks klõpsa sellel nupul"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:654
+#: ../gedit/dialogs/gedit-preferences-dialog.c:652
 msgid "Push this button to configure text color"
 msgstr "Teksti värvi määramiseks klõpsa sellel nupul"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:656
+#: ../gedit/dialogs/gedit-preferences-dialog.c:654
 msgid "Push this button to configure background color"
 msgstr "Tausta värvi muutmiseks klõpsa sellel nupul"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:658
+#: ../gedit/dialogs/gedit-preferences-dialog.c:656
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Valitud teksti värvi määramiseks klõpsa sellel nupul"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:661
+#: ../gedit/dialogs/gedit-preferences-dialog.c:659
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Valitud teksti taustavärvi määramiseks klõpsa sellel nupul"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:670
-#, c-format
+#: ../gedit/dialogs/gedit-preferences-dialog.c:668
+#, , c-format
 msgid "_Use the system fixed width font (%s)"
-msgstr ""
+msgstr "Kasutatakse süsteemset määratud laiusega _kirjatüüpi (%s)"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1178
-msgid "Elements"
-msgstr "Elemendid"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1290
+#: ../gedit/dialogs/gedit-preferences-dialog.c:806
 msgid "gedit Preferences"
 msgstr "gedit'i Eelistused"
 
@@ -913,7 +924,7 @@ msgstr "<b>Elemendid</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:6
 msgid "<b>File Saving</b>"
-msgstr "<b>Faili salvestamine</b>"
+msgstr "<b>Failide salvestamine</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
 msgid "<b>Font</b>"
@@ -938,7 +949,7 @@ msgstr "Rasvane"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
 msgid "Create a _backup copy of files before saving"
-msgstr "Failist _varukoopia tegemine enne salvestamist"
+msgstr "Failist tehakse enne salvestamist _varukoopia"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:15
 msgid "Display right _margin"
@@ -954,11 +965,11 @@ msgstr "_Redaktori kirjatüüp: "
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:20
 msgid "Font & Colors"
-msgstr "Kirjatüübid ja värvid"
+msgstr "Kirjatüübid ja värvused"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:21
 msgid "Hi_ghlight current line"
-msgstr "Käesoleva rea _esiletõstmine"
+msgstr "Käesolev rida tõstetakse _esile"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:22
 msgid "Highlight _mode:"
@@ -970,7 +981,7 @@ msgstr "Vastavuses olevate sul_gude esiletõstmine"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:24
 msgid "Insert _spaces instead of tabs"
-msgstr "Tabulaatorite ase_mel tühikute lisamine"
+msgstr "Tabulaatorite ase_mel lisatakse tühikud"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:25
 msgid "Italic"
@@ -978,7 +989,7 @@ msgstr "Kursiiv"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
 msgid "Normal _text color:"
-msgstr "_Tavateksti värv:"
+msgstr "_Tavateksti värvus:"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
 msgid "Pick a color"
@@ -1014,11 +1025,11 @@ msgstr "Eelistused"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:35
 msgid "Se_lection color:"
-msgstr "Va_liku värv:"
+msgstr "Va_liku värvus:"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:36
 msgid "Selecte_d text color:"
-msgstr "_Valitud teksti värv:"
+msgstr "_Valitud teksti värvus:"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:37
 msgid "Strikethrough"
@@ -1030,7 +1041,7 @@ msgstr "Süntaksi esiletõstmine"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:39
 msgid "U_se default theme colors"
-msgstr "Teema vaikimisi värvide kasuta_mine"
+msgstr "Kasutatakse tee_ma vaikimisi värvuseid"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:40
 msgid "Underline"
@@ -1042,11 +1053,11 @@ msgstr "Vaade"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:42
 msgid "_Autosave files every"
-msgstr "Failide _automaatne salvestamine iga"
+msgstr "Failid salvestatakse _automaatselt iga"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:43
 msgid "_Background color:"
-msgstr "Ta_ustavärv:"
+msgstr "Ta_ustavärvus:"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:44
 msgid "_Background:"
@@ -1054,11 +1065,11 @@ msgstr "_Taust:"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:45
 msgid "_Display line numbers"
-msgstr "_Reanumbrite näitamine"
+msgstr "_Reanumbreid näidatakse"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:46
 msgid "_Enable automatic indentation"
-msgstr "Automaatne taa_ndamine lubatud"
+msgstr "Automaatne taa_ndamine on lubatud"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:47
 msgid "_Enable syntax highlighting"
@@ -1084,21 +1095,21 @@ msgstr "_Tabulaatori laius:"
 msgid "_minutes"
 msgstr "_minuti järel"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:302
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1365
+#: ../gedit/dialogs/gedit-search-dialog.c:287
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1375
 msgid "Replace"
 msgstr "Asenda"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:313 ../gedit/gedit-window.c:1363
+#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1373
 msgid "Find"
 msgstr "Otsi"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:390
+#: ../gedit/dialogs/gedit-search-dialog.c:375
 msgid "Replace _All"
 msgstr "Asenda _kõik"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:391
-#: ../gedit/gedit-commands-file.c:673
+#: ../gedit/dialogs/gedit-search-dialog.c:376
+#: ../gedit/gedit-commands-file.c:676
 msgid "_Replace"
 msgstr "_Asenda"
 
@@ -1112,11 +1123,11 @@ msgstr "Asenda kõik"
 
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:4
 msgid "Replace _with: "
-msgstr "_Asendada tekstiga:"
+msgstr "Asendada _tekstiga:"
 
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:5
 msgid "Search _backwards"
-msgstr "Otsimine tagantpoolt _ettepoole"
+msgstr "Otsitakse tagantpoolt _ettepoole"
 
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:6
 msgid "_Match case"
@@ -1128,13 +1139,17 @@ msgstr "_Otsitav tekst:"
 
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:8
 msgid "_Wrap around"
-msgstr ""
+msgstr "_Lõppu (või algusese) jõudmisel otsingut ei katkestata"
 
 #: ../gedit/gedit.c:73
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
-msgstr "Käsureal avamiseks määratud failidele kooditabeli seadmine"
+msgstr "Käsurealt avatavate failidele kooditabeli seadmine"
+
+#: ../gedit/gedit.c:73
+msgid "ENCODING"
+msgstr "KOODITABEL"
 
 #: ../gedit/gedit.c:76
 msgid "Create a new toplevel window in an existing instance of gedit"
@@ -1175,47 +1190,51 @@ msgid_plural "Loading %d files…"
 msgstr[0] "%d faili laadimine…"
 msgstr[1] "%d faili laadimine…"
 
-#: ../gedit/gedit-commands-file.c:419
-msgid "Open Files…"
-msgstr "Failide avamine…"
+##: ../gedit/gedit-commands-file.c:422
+##, fuzzy
+#msgid "Open Files"
+#msgstr "Failide avamine…"
 
-#: ../gedit/gedit-commands-file.c:525
+#: ../gedit/gedit-commands-file.c:528
 msgid "The entered location is not valid."
 msgstr "Sisestatud asukoht on vigane."
 
-#: ../gedit/gedit-commands-file.c:528
-msgid "Please, check that you typed the location correctly and try again."
+#: ../gedit/gedit-commands-file.c:531
+#: ../gedit/gedit-io-error-message-area.c:187
+#: ../gedit/gedit-io-error-message-area.c:226
+#: ../gedit/gedit-io-error-message-area.c:242
+msgid "Please check that you typed the location correctly and try again."
 msgstr "Palun kontrolli, kas sisestasid asukoha õigesti ja proovi uuesti."
 
-#: ../gedit/gedit-commands-file.c:654
+#: ../gedit/gedit-commands-file.c:657
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "Fail \"%s\" on kirjutuskaitsega."
 
-#: ../gedit/gedit-commands-file.c:665
+#: ../gedit/gedit-commands-file.c:668
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Kas tahad üritada seda salvestatava failiga asendada?"
 
-#: ../gedit/gedit-commands-file.c:731 ../gedit/gedit-commands-file.c:930
+#: ../gedit/gedit-commands-file.c:734 ../gedit/gedit-commands-file.c:937
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Faili '%s' salvestamine…"
 
-#: ../gedit/gedit-commands-file.c:828
+#: ../gedit/gedit-commands-file.c:835
 msgid "Save As…"
 msgstr "Salvesta kui…"
 
-#: ../gedit/gedit-commands-file.c:1109
+#: ../gedit/gedit-commands-file.c:1116
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Dokumendi '%s' taastamine…"
 
-#: ../gedit/gedit-commands-file.c:1154
+#: ../gedit/gedit-commands-file.c:1161
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Kas taastada dokumendi salvestamata muudatused '%s'?"
 
-#: ../gedit/gedit-commands-file.c:1163
+#: ../gedit/gedit-commands-file.c:1170
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1229,14 +1248,14 @@ msgstr[1] ""
 "Dokumendile viimase %ld sekundi jooksul tehtud muudatused lähevad jäädavalt "
 "kaotsi."
 
-#: ../gedit/gedit-commands-file.c:1172
+#: ../gedit/gedit-commands-file.c:1179
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Dokumendile viimase minuti jooksul tehtud muudatused lähevad jäädavalt "
 "kaotsi."
 
-#: ../gedit/gedit-commands-file.c:1178
+#: ../gedit/gedit-commands-file.c:1185
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1251,7 +1270,7 @@ msgstr[1] ""
 "Dokumendile viimase minuti ja %ld sekundi jooksul tehtud muudatused lähevad "
 "jäädavalt kaotsi."
 
-#: ../gedit/gedit-commands-file.c:1188
+#: ../gedit/gedit-commands-file.c:1195
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1265,12 +1284,12 @@ msgstr[1] ""
 "Dokumendile viimase %ld minuti jooksul tehtud muudatused lähevad jäädavalt "
 "kaotsi."
 
-#: ../gedit/gedit-commands-file.c:1203
+#: ../gedit/gedit-commands-file.c:1210
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Dokumendile viimase tunni jooksul tehtud muudatused lähevad jäädavalt kaotsi."
 
-#: ../gedit/gedit-commands-file.c:1209
+#: ../gedit/gedit-commands-file.c:1216
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1285,7 +1304,7 @@ msgstr[1] ""
 "Dokumendile viimase tunni ja %d minuti jooksul tehtud muudatused lähevad "
 "jäädavalt kaotsi."
 
-#: ../gedit/gedit-commands-file.c:1224
+#: ../gedit/gedit-commands-file.c:1231
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1297,7 +1316,7 @@ msgstr[1] ""
 "Dokumendile viimase %d tunni jooksul tehtud muudatused lähevad jäädavalt "
 "kaotsi."
 
-#: ../gedit/gedit-commands-file.c:1250
+#: ../gedit/gedit-commands-file.c:1257
 msgid "_Revert"
 msgstr "_Taasta"
 
@@ -1328,7 +1347,7 @@ msgstr "Leitud ja asendatud üks vastavus"
 msgid "Phrase not found"
 msgstr "Fraasi ei leitud"
 
-#: ../gedit/gedit-document.c:742 ../gedit/gedit-document.c:836
+#: ../gedit/gedit-document.c:767 ../gedit/gedit-document.c:861
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Salvestamata dokument %d"
@@ -1339,7 +1358,7 @@ msgid "Could not obtain backup filename"
 msgstr "Varukoopia failinime pole võimalik hankida"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1934 ../gedit/gedit-window.c:1939
+#: ../gedit/gedit-window.c:1944 ../gedit/gedit-window.c:1949
 msgid "Read Only"
 msgstr "Kirjutuskaitsega"
 
@@ -1347,120 +1366,120 @@ msgstr "Kirjutuskaitsega"
 msgid "Documents"
 msgstr "Dokumendid"
 
-#: ../gedit/gedit-encodings.c:140 ../gedit/gedit-encodings.c:185
-#: ../gedit/gedit-encodings.c:187 ../gedit/gedit-encodings.c:189
-#: ../gedit/gedit-encodings.c:191 ../gedit/gedit-encodings.c:193
-#: ../gedit/gedit-encodings.c:195 ../gedit/gedit-encodings.c:197
+#: ../gedit/gedit-encodings.c:140 ../gedit/gedit-encodings.c:184
+#: ../gedit/gedit-encodings.c:186 ../gedit/gedit-encodings.c:188
+#: ../gedit/gedit-encodings.c:190 ../gedit/gedit-encodings.c:192
+#: ../gedit/gedit-encodings.c:194 ../gedit/gedit-encodings.c:196
 msgid "Unicode"
 msgstr "Unicode"
 
-#: ../gedit/gedit-encodings.c:154 ../gedit/gedit-encodings.c:180
-#: ../gedit/gedit-encodings.c:232 ../gedit/gedit-encodings.c:275
+#: ../gedit/gedit-encodings.c:153 ../gedit/gedit-encodings.c:179
+#: ../gedit/gedit-encodings.c:231 ../gedit/gedit-encodings.c:274
 msgid "Western"
 msgstr "Lääne"
 
-#: ../gedit/gedit-encodings.c:156 ../gedit/gedit-encodings.c:234
-#: ../gedit/gedit-encodings.c:271
+#: ../gedit/gedit-encodings.c:155 ../gedit/gedit-encodings.c:233
+#: ../gedit/gedit-encodings.c:270
 msgid "Central European"
 msgstr "Kesk-Euroopa"
 
-#: ../gedit/gedit-encodings.c:158
+#: ../gedit/gedit-encodings.c:157
 msgid "South European"
 msgstr "Lõuna-Euroopa"
 
-#: ../gedit/gedit-encodings.c:160 ../gedit/gedit-encodings.c:176
-#: ../gedit/gedit-encodings.c:285
+#: ../gedit/gedit-encodings.c:159 ../gedit/gedit-encodings.c:175
+#: ../gedit/gedit-encodings.c:284
 msgid "Baltic"
 msgstr "Balti"
 
-#: ../gedit/gedit-encodings.c:162 ../gedit/gedit-encodings.c:236
-#: ../gedit/gedit-encodings.c:249 ../gedit/gedit-encodings.c:253
-#: ../gedit/gedit-encodings.c:255 ../gedit/gedit-encodings.c:273
+#: ../gedit/gedit-encodings.c:161 ../gedit/gedit-encodings.c:235
+#: ../gedit/gedit-encodings.c:248 ../gedit/gedit-encodings.c:252
+#: ../gedit/gedit-encodings.c:254 ../gedit/gedit-encodings.c:272
 msgid "Cyrillic"
 msgstr "Kirillits"
 
-#: ../gedit/gedit-encodings.c:164 ../gedit/gedit-encodings.c:242
-#: ../gedit/gedit-encodings.c:283
+#: ../gedit/gedit-encodings.c:163 ../gedit/gedit-encodings.c:241
+#: ../gedit/gedit-encodings.c:282
 msgid "Arabic"
 msgstr "Araabia"
 
-#: ../gedit/gedit-encodings.c:166 ../gedit/gedit-encodings.c:277
+#: ../gedit/gedit-encodings.c:165 ../gedit/gedit-encodings.c:276
 msgid "Greek"
 msgstr "Kreeka"
 
-#: ../gedit/gedit-encodings.c:168
+#: ../gedit/gedit-encodings.c:167
 msgid "Hebrew Visual"
 msgstr "Heebrea visuaalne"
 
-#: ../gedit/gedit-encodings.c:170 ../gedit/gedit-encodings.c:240
-#: ../gedit/gedit-encodings.c:281
+#: ../gedit/gedit-encodings.c:169 ../gedit/gedit-encodings.c:239
+#: ../gedit/gedit-encodings.c:280
 msgid "Hebrew"
 msgstr "Heebrea"
 
-#: ../gedit/gedit-encodings.c:172 ../gedit/gedit-encodings.c:238
-#: ../gedit/gedit-encodings.c:279
+#: ../gedit/gedit-encodings.c:171 ../gedit/gedit-encodings.c:237
+#: ../gedit/gedit-encodings.c:278
 msgid "Turkish"
 msgstr "Türgi"
 
-#: ../gedit/gedit-encodings.c:174
+#: ../gedit/gedit-encodings.c:173
 msgid "Nordic"
 msgstr "Põhjamaade"
 
-#: ../gedit/gedit-encodings.c:178
+#: ../gedit/gedit-encodings.c:177
 msgid "Celtic"
 msgstr "Keldi"
 
-#: ../gedit/gedit-encodings.c:182
+#: ../gedit/gedit-encodings.c:181
 msgid "Romanian"
 msgstr "Rumeenia"
 
-#: ../gedit/gedit-encodings.c:200
+#: ../gedit/gedit-encodings.c:199
 msgid "Armenian"
 msgstr "Armeenia"
 
-#: ../gedit/gedit-encodings.c:202 ../gedit/gedit-encodings.c:204
-#: ../gedit/gedit-encodings.c:218
+#: ../gedit/gedit-encodings.c:201 ../gedit/gedit-encodings.c:203
+#: ../gedit/gedit-encodings.c:217
 msgid "Chinese Traditional"
 msgstr "Hiina traditsiooniline"
 
-#: ../gedit/gedit-encodings.c:206
+#: ../gedit/gedit-encodings.c:205
 msgid "Cyrillic/Russian"
 msgstr "Kirillits/Vene"
 
-#: ../gedit/gedit-encodings.c:209 ../gedit/gedit-encodings.c:211
-#: ../gedit/gedit-encodings.c:213 ../gedit/gedit-encodings.c:245
-#: ../gedit/gedit-encodings.c:260
+#: ../gedit/gedit-encodings.c:208 ../gedit/gedit-encodings.c:210
+#: ../gedit/gedit-encodings.c:212 ../gedit/gedit-encodings.c:244
+#: ../gedit/gedit-encodings.c:259
 msgid "Japanese"
 msgstr "Jaapani"
 
-#: ../gedit/gedit-encodings.c:216 ../gedit/gedit-encodings.c:247
-#: ../gedit/gedit-encodings.c:251 ../gedit/gedit-encodings.c:266
+#: ../gedit/gedit-encodings.c:215 ../gedit/gedit-encodings.c:246
+#: ../gedit/gedit-encodings.c:250 ../gedit/gedit-encodings.c:265
 msgid "Korean"
 msgstr "Korea"
 
-#: ../gedit/gedit-encodings.c:221 ../gedit/gedit-encodings.c:223
-#: ../gedit/gedit-encodings.c:225 ../gedit/gedit-encodings.c:229
+#: ../gedit/gedit-encodings.c:220 ../gedit/gedit-encodings.c:222
+#: ../gedit/gedit-encodings.c:224 ../gedit/gedit-encodings.c:228
 msgid "Chinese Simplified"
 msgstr "Hiina lihtsustatud"
 
-#: ../gedit/gedit-encodings.c:227
+#: ../gedit/gedit-encodings.c:226
 msgid "Georgian"
 msgstr "Gruusia"
 
-#: ../gedit/gedit-encodings.c:257
+#: ../gedit/gedit-encodings.c:256
 msgid "Cyrillic/Ukrainian"
 msgstr "Kirillits/Ukraina"
 
-#: ../gedit/gedit-encodings.c:262 ../gedit/gedit-encodings.c:268
-#: ../gedit/gedit-encodings.c:287
+#: ../gedit/gedit-encodings.c:261 ../gedit/gedit-encodings.c:267
+#: ../gedit/gedit-encodings.c:286
 msgid "Vietnamese"
 msgstr "Vietnami"
 
-#: ../gedit/gedit-encodings.c:264
+#: ../gedit/gedit-encodings.c:263
 msgid "Thai"
 msgstr "Tai"
 
-#: ../gedit/gedit-encodings.c:450
+#: ../gedit/gedit-encodings.c:437
 msgid "Unknown"
 msgstr "Tundmatu"
 
@@ -1498,12 +1517,6 @@ msgstr "Abiteabe kuvamisel tekkis viga."
 #, c-format
 msgid "Could not find the file %s."
 msgstr "Faili %s pole võimalik leida."
-
-#: ../gedit/gedit-io-error-message-area.c:187
-#: ../gedit/gedit-io-error-message-area.c:226
-#: ../gedit/gedit-io-error-message-area.c:242
-msgid "Please check that you typed the location correctly and try again."
-msgstr "Palun kontrolli, kas sisestasid asukoha õigesti ja proovi uuesti."
 
 #: ../gedit/gedit-io-error-message-area.c:192
 #: ../gedit/gedit-io-error-message-area.c:441
@@ -1898,39 +1911,39 @@ msgstr "Tühi"
 msgid "Hide panel"
 msgstr "Peida paneel"
 
-#: ../gedit/gedit-plugin-manager.c:56
+#: ../gedit/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Plugin"
 
-#: ../gedit/gedit-plugin-manager.c:57
+#: ../gedit/gedit-plugin-manager.c:56
 msgid "Enabled"
 msgstr "Lubatud"
 
-#: ../gedit/gedit-plugin-manager.c:515
+#: ../gedit/gedit-plugin-manager.c:514
 msgid "_About"
 msgstr "_Pluginast lähemalt"
 
-#: ../gedit/gedit-plugin-manager.c:523
+#: ../gedit/gedit-plugin-manager.c:522
 msgid "C_onfigure"
 msgstr "Sea_dista"
 
-#: ../gedit/gedit-plugin-manager.c:533
+#: ../gedit/gedit-plugin-manager.c:532
 msgid "A_ctivate"
 msgstr "_Aktiveeri"
 
-#: ../gedit/gedit-plugin-manager.c:545
+#: ../gedit/gedit-plugin-manager.c:544
 msgid "Ac_tivate All"
 msgstr "A_ktiveeri kõik"
 
-#: ../gedit/gedit-plugin-manager.c:550
+#: ../gedit/gedit-plugin-manager.c:549
 msgid "_Deactivate All"
 msgstr "_Deaktiveeri kõik"
 
-#: ../gedit/gedit-plugin-manager.c:795
+#: ../gedit/gedit-plugin-manager.c:794
 msgid "_About Plugin"
 msgstr "_Pluginast lähemalt"
 
-#: ../gedit/gedit-plugin-manager.c:799
+#: ../gedit/gedit-plugin-manager.c:798
 msgid "C_onfigure Plugin"
 msgstr "Sea_dista pluginat"
 
@@ -1938,7 +1951,7 @@ msgstr "Sea_dista pluginat"
 msgid "Cannot initialize preferences manager."
 msgstr "Eelistuste haldurit pole võimalik lähtestada."
 
-#: ../gedit/gedit-prefs-manager.c:1406
+#: ../gedit/gedit-prefs-manager.c:1482
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Võtmele %s oodatava `%s' asemel saadi `%s'"
@@ -1956,87 +1969,87 @@ msgstr "Lehekülg %N/%Q"
 msgid "Print"
 msgstr "Printimine"
 
-#: ../gedit/gedit-print.c:325 ../plugins/docinfo/docinfo.glade2.h:9
+#: ../gedit/gedit-print.c:328 ../plugins/docinfo/docinfo.glade2.h:9
 msgid "Lines"
 msgstr "_Read"
 
-#: ../gedit/gedit-print-job-preview.c:623
+#: ../gedit/gedit-print-job-preview.c:621
 msgid "Page Preview"
 msgstr "Lehekülje eelvaade"
 
-#: ../gedit/gedit-print-job-preview.c:624
+#: ../gedit/gedit-print-job-preview.c:622
 msgid "The preview of a page in the document to be printed"
 msgstr "Prinditava dokumendi eelvaade"
 
-#: ../gedit/gedit-print-job-preview.c:710
+#: ../gedit/gedit-print-job-preview.c:708
 msgid "Other"
 msgstr "Muu"
 
-#: ../gedit/gedit-print-job-preview.c:740
+#: ../gedit/gedit-print-job-preview.c:738
 msgid "Show the previous page"
 msgstr "Eelmise lehekülje näitamine"
 
-#: ../gedit/gedit-print-job-preview.c:751
+#: ../gedit/gedit-print-job-preview.c:749
 msgid "Show the next page"
 msgstr "Järgmise lehekülje näitamine"
 
-#: ../gedit/gedit-print-job-preview.c:767
+#: ../gedit/gedit-print-job-preview.c:765
 msgid "Current page (Alt+P)"
 msgstr "Käesolev lehekülg (Alt+P)"
 
 #. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
 #. We are displaying 'XXX of XXX'.
-#: ../gedit/gedit-print-job-preview.c:781
+#: ../gedit/gedit-print-job-preview.c:779
 msgid "of"
 msgstr ""
 
-#: ../gedit/gedit-print-job-preview.c:787
+#: ../gedit/gedit-print-job-preview.c:785
 msgid "Page total"
 msgstr "Lehekülgi kokku"
 
-#: ../gedit/gedit-print-job-preview.c:788
+#: ../gedit/gedit-print-job-preview.c:786
 msgid "The total number of pages in the document"
 msgstr "Selles dokumendis olevate lehekülgede koguarv"
 
-#: ../gedit/gedit-print-job-preview.c:805
+#: ../gedit/gedit-print-job-preview.c:803
 msgid "Show multiple pages"
 msgstr "Mitme lehekülje näitamine"
 
-#: ../gedit/gedit-print-job-preview.c:817
+#: ../gedit/gedit-print-job-preview.c:815
 msgid "Zoom 1:1"
 msgstr "Suurendus 1:1"
 
-#: ../gedit/gedit-print-job-preview.c:825
+#: ../gedit/gedit-print-job-preview.c:823
 msgid "Zoom to fit the whole page"
 msgstr "Suurendus kogu leheküljele sobitamiseks"
 
-#: ../gedit/gedit-print-job-preview.c:834
+#: ../gedit/gedit-print-job-preview.c:832
 msgid "Zoom the page in"
 msgstr "Lehekülje suurendamine"
 
-#: ../gedit/gedit-print-job-preview.c:842
+#: ../gedit/gedit-print-job-preview.c:840
 msgid "Zoom the page out"
 msgstr "Lehekülje vähendamine"
 
-#: ../gedit/gedit-print-job-preview.c:852
+#: ../gedit/gedit-print-job-preview.c:850
 msgid "_Close Preview"
 msgstr "_Sulge eelvaade"
 
-#: ../gedit/gedit-print-job-preview.c:856
+#: ../gedit/gedit-print-job-preview.c:854
 msgid "Close print preview"
 msgstr "Printimise eelvaate sulgemine"
 
-#: ../gedit/gedit-print-job-preview.c:1096
-#: ../gedit/gedit-print-job-preview.c:1097
+#: ../gedit/gedit-print-job-preview.c:1094
+#: ../gedit/gedit-print-job-preview.c:1095
 msgid "Number of pages horizontally"
 msgstr "Lehekülgede horisontaalne nummerdamine"
 
-#: ../gedit/gedit-print-job-preview.c:1100
-#: ../gedit/gedit-print-job-preview.c:1101
+#: ../gedit/gedit-print-job-preview.c:1098
+#: ../gedit/gedit-print-job-preview.c:1099
 msgid "Number of pages vertically"
 msgstr "Lehekülgede vertikaalne nummerdamine"
 
-#: ../gedit/gedit-print-job-preview.c:1165
+#: ../gedit/gedit-print-job-preview.c:1163
 msgid "No visible output was created."
 msgstr "Nähtavat väljundit ei loodud."
 
@@ -2064,77 +2077,77 @@ msgstr[1] ""
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:662
+#: ../gedit/gedit-tab.c:663
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "Dokumendi %s taastamine kataloogist %s"
 
-#: ../gedit/gedit-tab.c:669
+#: ../gedit/gedit-tab.c:670
 #, c-format
 msgid "Reverting %s"
 msgstr "%s taastamine"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:685
+#: ../gedit/gedit-tab.c:686
 #, c-format
 msgid "Loading %s from %s"
 msgstr "Faili %s laadimine kataloogist %s"
 
-#: ../gedit/gedit-tab.c:692
+#: ../gedit/gedit-tab.c:693
 #, c-format
 msgid "Loading %s"
 msgstr "%s laadimine"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:775
+#: ../gedit/gedit-tab.c:776
 #, c-format
 msgid "Saving %s to %s"
 msgstr "%s salvestamine kataloogi %s"
 
-#: ../gedit/gedit-tab.c:782
+#: ../gedit/gedit-tab.c:783
 #, c-format
 msgid "Saving %s"
 msgstr "%s salvestamine"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1645
+#: ../gedit/gedit-tab.c:1646
 msgid "RO"
 msgstr ""
 
-#: ../gedit/gedit-tab.c:1690
+#: ../gedit/gedit-tab.c:1691
 #, c-format
 msgid "Error opening file %s"
 msgstr "Viga faili %s avamisel"
 
-#: ../gedit/gedit-tab.c:1695
+#: ../gedit/gedit-tab.c:1696
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Viga faili %s taastamisel"
 
-#: ../gedit/gedit-tab.c:1700
+#: ../gedit/gedit-tab.c:1701
 #, c-format
 msgid "Error saving file %s"
 msgstr "Viga faili %s salvestamisel"
 
-#: ../gedit/gedit-tab.c:1718
+#: ../gedit/gedit-tab.c:1719
 msgid "Unicode (UTF-8)"
 msgstr "Unikood (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1725
+#: ../gedit/gedit-tab.c:1726
 msgid "Name:"
 msgstr "Nimi:"
 
-#: ../gedit/gedit-tab.c:1726
+#: ../gedit/gedit-tab.c:1727
 msgid "MIME Type:"
 msgstr "MIME tüüp:"
 
-#: ../gedit/gedit-tab.c:1727
+#: ../gedit/gedit-tab.c:1728
 msgid "Encoding:"
 msgstr "Kodeering:"
 
-#: ../gedit/gedit-tab.c:2197
+#: ../gedit/gedit-tab.c:2215
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Lehekülje %d/%d renderdamine..."
@@ -2176,7 +2189,7 @@ msgstr "Uue dokumendi loomine"
 msgid "_Open..."
 msgstr "_Ava..."
 
-#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1488
+#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1498
 msgid "Open a file"
 msgstr "Faili avamine"
 
@@ -2341,8 +2354,8 @@ msgid "Go to a specific line"
 msgstr "Liikumine määratud reale"
 
 #: ../gedit/gedit-ui.h:129
-msgid "Incremental search..."
-msgstr "Kasvav otsing..."
+msgid "_Incremental Search..."
+msgstr "_Kasvav otsing..."
 
 #: ../gedit/gedit-ui.h:130
 msgid "Incrementally search for text"
@@ -2425,44 +2438,44 @@ msgstr "_Alumine paan"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Käesoleva akna alumise paani näitamine või peitmine"
 
-#: ../gedit/gedit-utils.c:998
+#: ../gedit/gedit-utils.c:997
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Faili %s pole võimalik leida."
 
-#: ../gedit/gedit-utils.c:1002 ../gedit/gedit-utils.c:1031
+#: ../gedit/gedit-utils.c:1001 ../gedit/gedit-utils.c:1030
 msgid "Please check your installation."
 msgstr "Palun kontrolli oma paigaldust."
 
-#: ../gedit/gedit-utils.c:1027
+#: ../gedit/gedit-utils.c:1026
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "Vajalikke vidinaid pole võimalik failist %s leida."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1330
+#: ../gedit/gedit-view.c:1223
 msgid "_Wrap Around"
 msgstr ""
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1340
+#: ../gedit/gedit-view.c:1233
 msgid "Match _Entire Word Only"
 msgstr ""
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1350
+#: ../gedit/gedit-view.c:1243
 msgid "_Match Case"
-msgstr "_Tõstutundlik"
+msgstr "Tõst_utundlik"
 
-#: ../gedit/gedit-view.c:1439
+#: ../gedit/gedit-view.c:1332
 msgid "String you want to search for"
 msgstr "String, mida Sa tahad otsida"
 
-#: ../gedit/gedit-view.c:1449
+#: ../gedit/gedit-view.c:1342
 msgid "Line you want to move the cursor to"
 msgstr "Rida, millele Sa tahad kursorit viia"
 
-#: ../gedit/gedit-window.c:904
+#: ../gedit/gedit-window.c:906
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s esiletõstmise kasutamine"
@@ -2470,34 +2483,34 @@ msgstr "%s esiletõstmise kasutamine"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:961
+#: ../gedit/gedit-window.c:968
 msgid "None"
 msgstr "Puudub"
 
-#: ../gedit/gedit-window.c:962
+#: ../gedit/gedit-window.c:969
 msgid "Disable syntax highlighting"
 msgstr "Süntaksi esiletõstmise keelamine"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1242
+#: ../gedit/gedit-window.c:1252
 #, c-format
 msgid "Open '%s'"
 msgstr "Ava '%s'"
 
-#: ../gedit/gedit-window.c:1361
+#: ../gedit/gedit-window.c:1371
 msgid "Save"
 msgstr "Salvesta"
 
-#: ../gedit/gedit-window.c:1492
+#: ../gedit/gedit-window.c:1502
 msgid "Open a recently used file"
 msgstr "Viimati kasutatud failide hulgast avamine"
 
-#: ../gedit/gedit-window.c:1499
+#: ../gedit/gedit-window.c:1509
 msgid "Open"
 msgstr "Ava"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1549
+#: ../gedit/gedit-window.c:1559
 #, c-format
 msgid "Activate '%s'"
 msgstr "'%s' aktiveerimine"
@@ -2623,11 +2636,11 @@ msgstr "Väliste tööriistade halduri avamine"
 msgid "Shell Output"
 msgstr "Kestprogrammi väljund"
 
-#: ../plugins/externaltools/tools/functions.py:108
+#: ../plugins/externaltools/tools/functions.py:109
 msgid "You must be inside a word to run this command"
 msgstr "Selle käsu käivitamiseks peab kursor olema sõna peal"
 
-#: ../plugins/externaltools/tools/functions.py:165
+#: ../plugins/externaltools/tools/functions.py:166
 msgid "Running tool:"
 msgstr "Tööriista käivitamine:"
 
@@ -2704,8 +2717,8 @@ msgid "Untitled documents only"
 msgstr "Ainult pealkirjata dokumendid"
 
 #: ../plugins/externaltools/tools/manager.py:200
-#: ../plugins/externaltools/tools/manager.py:228
-#: ../plugins/externaltools/tools/manager.py:276
+#: ../plugins/externaltools/tools/manager.py:230
+#: ../plugins/externaltools/tools/manager.py:278
 #, python-format
 msgid "Edit tool <i>%s</i>:"
 msgstr "Tööriista <i>%s</i> redigeerimine:"
@@ -2714,20 +2727,20 @@ msgstr "Tööriista <i>%s</i> redigeerimine:"
 msgid "A Brand New Tool"
 msgstr "Täiesti uus tööriist"
 
-#: ../plugins/externaltools/tools/manager.py:237
+#: ../plugins/externaltools/tools/manager.py:239
 msgid "New tool"
 msgstr "Uus tööriist"
 
-#: ../plugins/externaltools/tools/manager.py:312
+#: ../plugins/externaltools/tools/manager.py:314
 #, python-format
 msgid "This accelerator is already bound to %s"
 msgstr "See kiirklahv on juba seotud \"%s\"-ga"
 
-#: ../plugins/externaltools/tools/manager.py:358
+#: ../plugins/externaltools/tools/manager.py:360
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Sisesta uus kiirklahv. Nullimiseks vajuta Backspace"
 
-#: ../plugins/externaltools/tools/manager.py:360
+#: ../plugins/externaltools/tools/manager.py:362
 msgid "Type a new accelerator"
 msgstr "Sisesta uus kiirklahv"
 
@@ -2744,6 +2757,10 @@ msgid "Edit tool <i>make</i>:"
 msgstr "Tööriista <i>make</i> redigeerimine:"
 
 #: ../plugins/externaltools/tools/tools.glade.h:4
+msgid "External Tools Manager"
+msgstr "Väliste tööriistade haldur"
+
+#: ../plugins/externaltools/tools/tools.glade.h:5
 msgid ""
 "Nothing\n"
 "Current document\n"
@@ -2753,35 +2770,35 @@ msgstr ""
 "Käesolev dokument\n"
 "Kõik dokumendid"
 
-#: ../plugins/externaltools/tools/tools.glade.h:7
+#: ../plugins/externaltools/tools/tools.glade.h:8
 msgid "_Applicability:"
 msgstr "_Rakendumine:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:8
+#: ../plugins/externaltools/tools/tools.glade.h:9
 msgid "_Description:"
 msgstr "K_irjeldus:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:9
+#: ../plugins/externaltools/tools/tools.glade.h:10
 msgid "_Input:"
 msgstr "S_isend:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:10
+#: ../plugins/externaltools/tools/tools.glade.h:11
 msgid "_Output:"
 msgstr "_Väljund:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:11
+#: ../plugins/externaltools/tools/tools.glade.h:12
 msgid "_Save:"
 msgstr "_Salvesta:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:12
+#: ../plugins/externaltools/tools/tools.glade.h:13
 msgid "_Shortcut Key:"
 msgstr "_Kiirklahv:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:13
+#: ../plugins/externaltools/tools/tools.glade.h:14
 msgid "_Tools:"
 msgstr "_Tööriistad:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:14
+#: ../plugins/externaltools/tools/tools.glade.h:15
 msgid "gtk-revert-to-saved"
 msgstr ""
 
@@ -2829,6 +2846,10 @@ msgstr "Failisirvimispaan"
 #: ../plugins/filebrowser/gedit-file-bookmarks-store.c:190
 msgid "on"
 msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:332
+msgid "File System"
+msgstr "Failisüsteem"
 
 #. ex:ts=8:noet:
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:1
@@ -2905,59 +2926,59 @@ msgid ""
 "files)."
 msgstr ""
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:591
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
 msgid "_Set root to active document"
 msgstr "_Määra juurikas aktiivseks kataloogiks"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:593
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:600
 msgid "Set the root to the active document location"
 msgstr "Juurkataloogi määramine aktiivse dokumendi asukohale"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:605
 msgid "_Open terminal here"
 msgstr "_Ava terminal siin"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:600
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:607
 msgid "Open a terminal at the currently opened directory"
 msgstr "Terminali avamine käesolevaga avatud kataloogis"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:732
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:741
 msgid "File Browser"
 msgstr "Failisirvija"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:855
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:864
 msgid "An error occurred while creating a new directory"
 msgstr "Uue kataloogi loomisel tekkis viga"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:858
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:867
 msgid "An error occurred while creating a new file"
 msgstr "Uue faili loomisel tekkis viga"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:863
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:872
 msgid "An error occurred while renaming a file or directory"
 msgstr "Faili või kataloogi nime muutmisel tekkis viga"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:868
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:877
 msgid "An error occurred while deleting a file or directory"
 msgstr "Faili või kataloogi kustutamisel tekkis viga"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:873
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:882
 msgid "An error occurred while opening a directory in the file manager"
 msgstr "Faili või kataloogi avamisel failihalduris tekkis viga"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:877
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:886
 msgid "An error occurred while setting a root directory"
 msgstr "Juurkataloogi seadmisel tekkis viga"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:881
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:890
 msgid "An error occurred while loading a directory"
 msgstr "Kataloogi laadimisel tekkis viga"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:884
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:893
 msgid "An error occurred"
 msgstr "Tekkis viga"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1112
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1121
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
@@ -2965,46 +2986,43 @@ msgstr ""
 "Faili pole võimalik prügikasti tõsta.\n"
 "Kas selle faili võib lihtsalt ära kustutada?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1116
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1125
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "Faili \"%s\" pole võimalik prügikasti tõsta."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1119
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1128
 msgid "The selected files cannot be moved to the trash."
 msgstr "Valitud faile pole võimalik prügikasti tõsta."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1152
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1161
 #, c-format
-msgid ""
-"Are you sure you want to\n"
-"permanently delete \"%s\"?"
+msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Kas soovid \"%s\" jäädavalt kustutada?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1155
-msgid ""
-"Are you sure you want to\n"
-"permanently delete the selected files?."
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1164
+msgid "Are you sure you want to permanently delete the selected files?"
 msgstr "Kas soovid valitud faile jäädavalt kustutada?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1158
-msgid "If you delete an item it is permanently lost."
-msgstr ""
-"Kui sa selle kirje kustutad, siis läheb see jäädavalt kaotsi.Kui sa ei "
-"salvesta, siis lähevad viimase minuti jooksul tehtud muudatused jäädavalt "
-"kaotsi."
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1167
+msgid "If you delete an item, it is permanently lost."
+msgstr "Kui sa selle kirje kustutad, siis läheb see jäädavalt kaotsi."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2621
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1832
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1598
+msgid "(Empty)"
+msgstr "(Tühi)"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2641
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1838
 msgid "Invalid uri"
 msgstr "Vigane uri"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3054
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3074
 msgid "file"
 msgstr "fail"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3075
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3122
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3095
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3142
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -3012,7 +3030,7 @@ msgstr ""
 "Uus fail on hetkel välja filtreeritud. Selle nähtavaletoomiseks pead sa "
 "filtri sätteid muutma"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3103
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3123
 msgid "directory"
 msgstr "kataloog"
 
@@ -3023,6 +3041,11 @@ msgstr "Järjehoidjad"
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:746
 msgid "Recent Files"
 msgstr "Hiljutised failid"
+
+##: ../plugins/filebrowser/gedit-file-browser-widget.c:825
+##, fuzzy
+#msgid "_Filter"
+#msgstr "_Filter"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:830
 msgid "_Move To Trash"
@@ -3120,30 +3143,30 @@ msgstr "Näita _binaarseid"
 msgid "Show binary files"
 msgstr "Binaarfailide näitamine"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:981
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:997
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1029
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:987
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1003
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1035
 msgid "Previous location"
 msgstr "Eelmine asukoht"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:985
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:991
 msgid "Go to previous location"
 msgstr "Eelmisele asukohale siirdumine"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:990
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1022
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:996
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1028
 msgid "Go to a previously opened location"
 msgstr "Eelmisele avatud asukohale siirdumine"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1012
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1018
 msgid "Next location"
 msgstr "Järgmine asukoht"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1016
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1022
 msgid "Go to next location"
 msgstr "Järgmisele asukohale siirdumine"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1193
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1199
 msgid "_Match Filename"
 msgstr "Faili_nime sobitus"
 
@@ -3237,53 +3260,13 @@ msgstr ""
 msgid "_Tab trigger:"
 msgstr ""
 
-#: ../plugins/snippets/snippets/SnippetPlaceholders.py:518
-#, python-format
-msgid ""
-"Execution of the python command (%s) exceeds the maximum time, execution "
-"aborted."
-msgstr ""
-"Pythoni käsu (%s) töötamise aeg ületas selleks lubatud aja, töötamine "
-"katkestati."
-
-#: ../plugins/snippets/snippets/SnippetPlaceholders.py:526
-#, python-format
-msgid "Execution of the python command (%s) failed: %s"
-msgstr "Tõrge pythoni käsu (%s) täitmisel: %s"
-
-#: ../plugins/snippets/snippets/SnippetPlaceholders.py:532
-msgid "The following python code, run in a snippet, does not return a value"
-msgstr ""
-
-#: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
+#: ../plugins/snippets/snippets/WindowHelper.py:74
 msgid "Manage _Snippets..."
 msgstr ""
 
-#: ../plugins/snippets/snippets/SnippetPluginInstance.py:74
+#: ../plugins/snippets/snippets/WindowHelper.py:75
 msgid "Manage snippets"
 msgstr ""
-
-#: ../plugins/snippets/snippets/SnippetsDialog.py:53
-msgid "Add a new snippet..."
-msgstr ""
-
-#: ../plugins/snippets/snippets/SnippetsDialog.py:108
-msgid "Global"
-msgstr "Globaalne"
-
-#: ../plugins/snippets/snippets/SnippetsDialog.py:476
-msgid ""
-"This is not a valid tab trigger. Triggers can either contain letters or a "
-"single, non alphanumeric, character like {, [, etcetera."
-msgstr ""
-
-#: ../plugins/snippets/snippets/SnippetsDialog.py:600
-msgid "Type a new shortcut, or press Backspace to clear"
-msgstr "Sisesta uus kiirklahv. Nullimiseks vajuta Backspace"
-
-#: ../plugins/snippets/snippets/SnippetsDialog.py:602
-msgid "Type a new shortcut"
-msgstr "Sisesta uus kiirklahv"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -3336,16 +3319,16 @@ msgid "_More..."
 msgstr "_Veel..."
 
 #. Ignore all
-#: ../plugins/spell/gedit-automatic-spell-checker.c:495
+#: ../plugins/spell/gedit-automatic-spell-checker.c:497
 msgid "_Ignore All"
 msgstr "_Eira kõiki"
 
 #. + Add to Dictionary
-#: ../plugins/spell/gedit-automatic-spell-checker.c:508
+#: ../plugins/spell/gedit-automatic-spell-checker.c:512
 msgid "_Add"
 msgstr "_Lisa"
 
-#: ../plugins/spell/gedit-automatic-spell-checker.c:545
+#: ../plugins/spell/gedit-automatic-spell-checker.c:551
 msgid "_Spelling Suggestions..."
 msgstr "Õigekirjako_ntrolli soovitused..."
 
@@ -3398,12 +3381,12 @@ msgstr "Tundmatu (%s)"
 msgid "language|Default"
 msgstr "Eesti"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:237
+#: ../plugins/spell/gedit-spell-language-dialog.c:234
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "Ei leia vajalikke vidinaid failist %s."
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:258
+#: ../plugins/spell/gedit-spell-language-dialog.c:255
 msgid "Languages"
 msgstr "Keeled"
 
@@ -4468,7 +4451,7 @@ msgstr "Väikese teksti laad"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Soft line break"
-msgstr ""
+msgstr "Pehme reamurdmine"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:257
 msgid "Sound"
@@ -5127,267 +5110,3 @@ msgstr "_Küsitakse vormingut"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Kasutatakse o_ma vormingut"
-
-#~ msgid "_Use default theme font"
-#~ msgstr "Teema vaikimisi _kirjatüübi kasutamine"
-
-#~ msgid "Insert in output panel"
-#~ msgstr "Lisatakse väljundpaneelile"
-
-#~ msgid "External Tools Manager"
-#~ msgstr "Väliste tööriistade haldur"
-
-#~ msgid "F7"
-#~ msgstr "F7"
-
-#~ msgid "_Accelerator:"
-#~ msgstr "_Kiirklahv:"
-
-#~ msgid "_New Directory"
-#~ msgstr "_Uus kataloog"
-
-#~ msgid "Add new empty directory"
-#~ msgstr "Uue tühja kataloogi lisamine"
-
-#~ msgid "_View Directory"
-#~ msgstr "Vaata _kataloogi"
-
-#~ msgid "Advanced filtering"
-#~ msgstr "Laiendatud filtreerimine"
-
-#~ msgid "Afrikaans"
-#~ msgstr "Afrikaani"
-
-#~ msgid "Amharic"
-#~ msgstr "Amhari"
-
-#~ msgid "Arabic (Egypt)"
-#~ msgstr "Araabia (Egiptuse)"
-
-#~ msgid "Azerbaijani"
-#~ msgstr "Aserbaidžaani"
-
-#~ msgid "Belarusian"
-#~ msgstr "Valgevene"
-
-#~ msgid "Bulgarian"
-#~ msgstr "Bulgaaria"
-
-#~ msgid "Bengali"
-#~ msgstr "Bengali"
-
-#~ msgid "Breton"
-#~ msgstr "Bretooni"
-
-#~ msgid "Catalan"
-#~ msgstr "Katalaani"
-
-#~ msgid "Czech"
-#~ msgstr "Tšehhi"
-
-#~ msgid "Welsh"
-#~ msgstr "Uelsi"
-
-#~ msgid "Danish"
-#~ msgstr "Taani"
-
-#~ msgid "German (Austria)"
-#~ msgstr "Saksa (Austria)"
-
-#~ msgid "German (Germany)"
-#~ msgstr "Saksa (Saksamaa)"
-
-#~ msgid "German (Swiss)"
-#~ msgstr "Saksa (Šveitsi)"
-
-#~ msgid "English (American)"
-#~ msgstr "Inglise (Ameerika)"
-
-#~ msgid "English (British)"
-#~ msgstr "Inglise (Briti)"
-
-#~ msgid "English (Canadian)"
-#~ msgstr "Inglise (Kanada)"
-
-#~ msgid "Esperanto"
-#~ msgstr "Esperanto"
-
-#~ msgid "Spanish"
-#~ msgstr "Hispaania"
-
-#~ msgid "Estonian"
-#~ msgstr "Eesti"
-
-#~ msgid "Persian"
-#~ msgstr "Pärsia"
-
-#~ msgid "Finnish"
-#~ msgstr "Soome"
-
-#~ msgid "Faroese"
-#~ msgstr "Fääri"
-
-#~ msgid "French (France)"
-#~ msgstr "Prantsuse (Prantsusmaa)"
-
-#~ msgid "French (Swiss)"
-#~ msgstr "Prantsuse (Šveitsi)"
-
-#~ msgid "Irish"
-#~ msgstr "Iiri"
-
-#~ msgid "Scottish Gaelic"
-#~ msgstr "Šoti gaeli"
-
-#~ msgid "Gallegan"
-#~ msgstr "Galeegi"
-
-#~ msgid "Manx Gaelic"
-#~ msgstr "Mänksi gaeli"
-
-#~ msgid "Hindi"
-#~ msgstr "Hindi"
-
-#~ msgid "Croatian"
-#~ msgstr "Horvaatia"
-
-#~ msgid "Upper Sorbian"
-#~ msgstr "Ülemsorbi"
-
-#~ msgid "Hungarian"
-#~ msgstr "Ungari"
-
-#~ msgid "Interlingua (IALA)"
-#~ msgstr "Interlingua (IALA)"
-
-#~ msgid "Indonesian"
-#~ msgstr "Indoneesia"
-
-#~ msgid "Icelandic"
-#~ msgstr "Islandi"
-
-#~ msgid "Italian"
-#~ msgstr "Itaalia"
-
-#~ msgid "Kurdish"
-#~ msgstr "Kurdi"
-
-#~ msgid "Latin"
-#~ msgstr "Ladina"
-
-#~ msgid "Lithuanian"
-#~ msgstr "Leedu"
-
-#~ msgid "Latvian"
-#~ msgstr "Läti"
-
-#~ msgid "Malagasy"
-#~ msgstr "Malagassi"
-
-#~ msgid "Maori"
-#~ msgstr "Maoori"
-
-#~ msgid "Macedonian"
-#~ msgstr "Makedoonia"
-
-#~ msgid "Mongolian"
-#~ msgstr "Mongoolia"
-
-#~ msgid "Marathi"
-#~ msgstr "Marathi"
-
-#~ msgid "Malay"
-#~ msgstr "Malay"
-
-#~ msgid "Maltese"
-#~ msgstr "Malta"
-
-#~ msgid "Norwegian Bokmal"
-#~ msgstr "Norra bokmål"
-
-#~ msgid "Dutch"
-#~ msgstr "Hollandi"
-
-#~ msgid "Norwegian Nynorsk"
-#~ msgstr "Norra nynorsk"
-
-#~ msgid "Norwegian"
-#~ msgstr "Norra"
-
-#~ msgid "Nyanja"
-#~ msgstr "Njandža"
-
-#~ msgid "Polish"
-#~ msgstr "Poola"
-
-#~ msgid "Portuguese (Portugal)"
-#~ msgstr "Portugali (Portugal)"
-
-#~ msgid "Portuguese (Brazilian)"
-#~ msgstr "Portugali (Brasiilia)"
-
-#~ msgid "Quechua"
-#~ msgstr "Ketšua"
-
-#~ msgid "Russian"
-#~ msgstr "Vene"
-
-#~ msgid "Kinyarwanda"
-#~ msgstr "Ruanda"
-
-#~ msgid "Sardinian"
-#~ msgstr "Sardiinia"
-
-#~ msgid "Slovak"
-#~ msgstr "Slovaki"
-
-#~ msgid "Slovenian"
-#~ msgstr "Sloveenia"
-
-#~ msgid "Swedish"
-#~ msgstr "Rootsi"
-
-#~ msgid "Swahili"
-#~ msgstr "Suahiili"
-
-#~ msgid "Tamil"
-#~ msgstr "Tamili"
-
-#~ msgid "Tetum"
-#~ msgstr "Tetumi"
-
-#~ msgid "Tagalog"
-#~ msgstr "Tagalogi"
-
-#~ msgid "Tswana"
-#~ msgstr "Tsvana"
-
-#~ msgid "Ukrainian"
-#~ msgstr "Ukraina"
-
-#~ msgid "Uzbek"
-#~ msgstr "Usbeki"
-
-#~ msgid "Walloon"
-#~ msgstr "Vallooni"
-
-#~ msgid "Yiddish"
-#~ msgstr "Jidiš"
-
-#~ msgid "Zulu"
-#~ msgstr "Suulu"
-
-#~ msgid "BGSound"
-#~ msgstr "Taustaheli"
-
-#~ msgid "Behavior"
-#~ msgstr "Käitumine"
-
-#~ msgid "Blinking text"
-#~ msgstr "Vilkuv tekst"
-
-#~ msgid "Box"
-#~ msgstr "Kast"
-
-#~ msgid "Space"
-#~ msgstr "Tühik"
