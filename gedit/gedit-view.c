@@ -1764,6 +1764,8 @@ gedit_view_drag_data_received (GtkWidget        *widget,
 		{
 			g_signal_emit (widget, view_signals[DROP_URIS], 0, uri_list);
 			g_strfreev (uri_list);
+			
+			gtk_drag_finish (context, TRUE, FALSE, time);
 		}
 	}
 	else

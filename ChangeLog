@@ -1,10 +1,15 @@
 2007-07-25  Jesse van den Kieboom  <jesse@icecrew.nl>
 
-	* gedit-utils.h:
-	* gedit-utils.c:
-	* gedit-window.c:
-	* gedit-view.c:
-	* gedit-view.h:
+	* gedit/gedit-view.c: added call to gtk_drag_finish after emitting
+	drop_uris
+	
+2007-07-25  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* gedit/gedit-utils.h:
+	* gedit/gedit-utils.c:
+	* gedit/gedit-window.c:
+	* gedit/gedit-view.c:
+	* gedit/gedit-view.h:
 	
 	Moved handling drag and drop of the view from GeditWindow into 
 	GeditView. Added a signal 'drop-uris' to GeditView which is emitted
