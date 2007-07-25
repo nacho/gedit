@@ -1,3 +1,22 @@
+2007-07-25  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* gedit-utils.h:
+	* gedit-utils.c:
+	* gedit-window.c:
+	* gedit-view.c:
+	* gedit-view.h:
+	
+	Moved handling drag and drop of the view from GeditWindow into 
+	GeditView. Added a signal 'drop-uris' to GeditView which is emitted
+	when uris have been dropped on the view. All the dnd for the view is
+	now handled in the default signal handlers for drag_motion, drag_drop
+	and drag_data_received. This way, the default behaviour of gedit
+	loading uris dropped on the view can be changed by connecting to
+	the drag_drop and drag_data_received signals from for example a 
+	plugin. This wasn't possible before because the window connected
+	signals to the view which made it impossible to intervene the signal
+	handling.
+
 2007-07-23  Paolo Borelli  <pborelli@katamail.com>
 
 	* bindings/python/gedit.defs:

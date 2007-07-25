@@ -146,6 +146,9 @@ gchar		*gedit_utils_make_canonical_uri_from_shell_arg
  * resulting string */
 gchar		*gedit_utils_format_uri_for_display 	(const gchar *uri);
 
+/* Turns data from a drop into a list of well formatted uris */
+gchar 	       **gedit_utils_drop_get_uris		(GtkSelectionData *selection_data);
+
 G_END_DECLS
 
 #endif /* __GEDIT_UTILS_H__ */

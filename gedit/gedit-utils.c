@@ -1139,3 +1139,45 @@ gedit_utils_format_uri_for_display (const gchar *uri)
 		return uri_for_display;
 	}
 }
+
+/**
+ * gedit_utils_drop_get_uris:
+ * @selection_data: the #GtkSelectionData from drag_data_received
+ * @info: the info from drag_data_received
+ *
+ * Create a list of valid uri's from a uri-list drop.
+ * 
+ * Return value: a string array which will hold the uris or NULL if there 
+ *		 were no valid uris. g_strfreev should be used when the 
+ *		 string array is no longer used
+ */
+gchar **
+gedit_utils_drop_get_uris (GtkSelectionData *selection_data)
+{
+	gchar **uris;
+	gint i;
+	gint p = 0;
+	gchar **uri_list;
+
+	uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
+	uri_list = g_new0(gchar *, g_strv_length (uris) + 1);
+
+	for (i = 0; uris[i] != NULL; i++)
+	{
+		gchar *uri;
+		
+		uri = gedit_utils_make_canonical_uri_from_shell_arg (uris[i]);
+		
+		/* Silently ignore malformed URI/filename */
+		if (uri != NULL)
+			uri_list[p++] = uri;
+	}
+
+	if (*uri_list == NULL)
+	{
+		g_free(uri_list);
+		return NULL;
+	}
+
+	return uri_list;
+}

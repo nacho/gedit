@@ -61,6 +61,11 @@ typedef enum
 	SEARCH
 } SearchMode;
 
+enum
+{
+	TARGET_URI_LIST = 100
+};
+
 struct _GeditViewPrivate
 {
 	GtkTooltips *tooltips;
@@ -97,25 +102,42 @@ struct _GeditViewPrivate
 /* The search entry completion is shared among all the views */
 GtkListStore *search_completion_model = NULL;
 
-static void	gedit_view_destroy		(GtkObject       *object);
-static void	gedit_view_finalize		(GObject         *object);
-static gint     gedit_view_focus_out		(GtkWidget       *widget,
-						 GdkEventFocus   *event);
+static void	gedit_view_destroy		(GtkObject        *object);
+static void	gedit_view_finalize		(GObject          *object);
+static gint     gedit_view_focus_out		(GtkWidget        *widget,
+						 GdkEventFocus    *event);
+static gboolean gedit_view_drag_motion		(GtkWidget        *widget,
+						 GdkDragContext   *context,
+						 gint              x,
+						 gint              y,
+						 guint             time);
+static void     gedit_view_drag_data_received   (GtkWidget        *widget,
+						 GdkDragContext   *context,
+						 gint              x,
+						 gint              y,
+						 GtkSelectionData *selection_data,
+						 guint             info,
+						 guint             time);
+static gboolean gedit_view_drag_drop		(GtkWidget        *widget,
+	      					 GdkDragContext   *context,
+	      					 gint              x,
+	      					 gint              y,
+	      					 guint             time);
 
-static gboolean start_interactive_search	(GeditView       *view);
-static gboolean start_interactive_goto_line	(GeditView       *view);
-static gboolean reset_searched_text		(GeditView       *view);
+static gboolean start_interactive_search	(GeditView        *view);
+static gboolean start_interactive_goto_line	(GeditView        *view);
+static gboolean reset_searched_text		(GeditView        *view);
 
-static void	hide_search_window 		(GeditView       *view,
-						 gboolean         cancel);
+static void	hide_search_window 		(GeditView        *view,
+						 gboolean          cancel);
 
 
-static gint	gedit_view_expose	 	(GtkWidget       *widget,
-						 GdkEventExpose  *event);
-static void 	search_highlight_updated_cb	(GeditDocument   *doc,
-						 GtkTextIter     *start,
-						 GtkTextIter     *end,
-						 GeditView       *view);
+static gint	gedit_view_expose	 	(GtkWidget        *widget,
+						 GdkEventExpose   *event);
+static void 	search_highlight_updated_cb	(GeditDocument    *doc,
+						 GtkTextIter      *start,
+						 GtkTextIter      *end,
+						 GeditView        *view);
 						 
 G_DEFINE_TYPE(GeditView, gedit_view, GTK_TYPE_SOURCE_VIEW)
 
@@ -125,6 +147,7 @@ enum
 	START_INTERACTIVE_SEARCH,
 	START_INTERACTIVE_GOTO_LINE,
 	RESET_SEARCHED_TEXT,
+	DROP_URIS,
 	LAST_SIGNAL
 };
 
@@ -160,6 +183,24 @@ gedit_view_class_init (GeditViewClass *klass)
 
 	widget_class->focus_out_event = gedit_view_focus_out;
 	widget_class->expose_event = gedit_view_expose;
+	
+	/*
+	 * Override the gtk_text_view_drag_motion and drag_drop
+	 * functions to get URIs
+	 *
+	 * If the mime type is text/uri-list, then we will accept
+	 * the potential drop, or request the data (depending on the
+	 * function).
+	 *
+	 * If the drag context has any other mime type, then pass the
+	 * information onto the GtkTextView's standard handlers.
+	 * (widget_class->function_name).
+	 *
+	 * See bug #89881 for details
+	 */
+	widget_class->drag_motion = gedit_view_drag_motion;
+	widget_class->drag_data_received = gedit_view_drag_data_received;
+	widget_class->drag_drop = gedit_view_drag_drop;
 
 	klass->start_interactive_search = start_interactive_search;
 	klass->start_interactive_goto_line = start_interactive_goto_line;
@@ -192,6 +233,24 @@ gedit_view_class_init (GeditViewClass *klass)
 			      gedit_marshal_BOOLEAN__NONE,
 			      G_TYPE_BOOLEAN, 0);		
 
+	/* A new signal DROP_URIS has been added to allow plugins to intercept
+	 * the default dnd behaviour of 'text/uri-list'. GeditView now handles
+	 * dnd in the default handlers of drag_drop, drag_motion and 
+	 * drag_data_received. The view emits drop_uris from drag_data_received
+	 * if valid uris have been dropped. Plugins should connect to 
+	 * drag_motion, drag_drop and drag_data_received to change this 
+	 * default behaviour. They should _NOT_ use this signal because this
+	 * will not prevent gedit from loading the uri
+	 */
+	view_signals[DROP_URIS] =
+    		g_signal_new ("drop_uris",
+		  	      G_TYPE_FROM_CLASS (object_class),
+		  	      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+		  	      G_STRUCT_OFFSET (GeditViewClass, drop_uris),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__BOXED,
+			      G_TYPE_NONE, 1, G_TYPE_STRV);
+
 	g_type_class_add_private (klass, sizeof (GeditViewPrivate));
 	
 	binding_set = gtk_binding_set_by_class (klass);
@@ -218,7 +277,9 @@ scroll_to_cursor_on_init (GeditView *view)
 
 static void 
 gedit_view_init (GeditView *view)
-{	
+{
+	GtkTargetList *tl;
+	
 	gedit_debug (DEBUG_VIEW);
 	
 	view->priv = GEDIT_VIEW_GET_PRIVATE (view);
@@ -265,7 +326,13 @@ gedit_view_init (GeditView *view)
 	view->priv->scroll_idle = g_idle_add ((GSourceFunc) scroll_to_cursor_on_init, view);
 	
 	view->priv->typeselect_flush_timeout = 0;	
-	view->priv->wrap_around = TRUE;	
+	view->priv->wrap_around = TRUE;
+
+	/* Drag and drop support */	
+	tl = gtk_drag_dest_get_target_list (GTK_WIDGET (view));
+
+	if (tl != NULL)
+		gtk_target_list_add_uri_targets (tl, TARGET_URI_LIST);
 }
 
 static void
@@ -1635,6 +1702,101 @@ gedit_view_expose (GtkWidget      *widget,
 	}
 
 	return (* GTK_WIDGET_CLASS (gedit_view_parent_class)->expose_event)(widget, event);
+}
+
+static GdkAtom
+drag_get_uri_target (GtkWidget      *widget,
+		     GdkDragContext *context)
+{
+	GdkAtom target;
+	GtkTargetList *tl;
+	
+	tl = gtk_target_list_new (NULL, 0);
+	gtk_target_list_add_uri_targets (tl, 0);
+	
+	target = gtk_drag_dest_find_target (widget, context, tl);
+	gtk_target_list_unref (tl);
+	
+	return target;	
+}
+
+static gboolean
+gedit_view_drag_motion (GtkWidget      *widget,
+			GdkDragContext *context,
+			gint            x,
+			gint            y,
+			guint           time)
+{
+	gboolean result;
+
+	/* If this is a URL, deal with it here, or pass to the text view */
+	if (drag_get_uri_target (widget, context) != GDK_NONE) 
+	{
+		gdk_drag_status (context, context->suggested_action, time);
+		result = TRUE;
+	}
+	else
+	{
+		/* Chain up */
+		result = GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_motion (widget, context, x, y, time);
+	}
+
+	return result;
+}
+
+static void
+gedit_view_drag_data_received (GtkWidget        *widget,
+		       	       GdkDragContext   *context,
+			       gint              x,
+			       gint              y,
+			       GtkSelectionData *selection_data,
+			       guint             info,
+			       guint             time)
+{
+	gchar **uri_list;
+	
+	/* If this is an URL emit DROP_URIS, otherwise chain up the signal */
+	if (info == TARGET_URI_LIST)
+	{
+		uri_list = gedit_utils_drop_get_uris (selection_data);
+		
+		if (uri_list != NULL)
+		{
+			g_signal_emit (widget, view_signals[DROP_URIS], 0, uri_list);
+			g_strfreev (uri_list);
+		}
+	}
+	else
+	{
+		GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_data_received (widget, context, x, y, selection_data, info, time);
+	}
+}
+
+static gboolean
+gedit_view_drag_drop (GtkWidget      *widget,
+		      GdkDragContext *context,
+		      gint            x,
+		      gint            y,
+		      guint           time)
+{
+	gboolean result;
+	GdkAtom target;
+
+	/* If this is a URL, just get the drag data */
+	target = drag_get_uri_target (widget, context);
+
+	if (target != GDK_NONE)
+	{
+		gtk_drag_get_data (widget, context, target, time);
+		result = TRUE;
+	}
+	else
+	{
+		/* Chain up */
+		result = GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_drop (widget, context, x, y, time);
+	}
+
+	return result;
 }
 
 static void 	

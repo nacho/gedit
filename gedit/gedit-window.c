@@ -83,11 +83,6 @@ enum
 	TARGET_URI_LIST = 100
 };
 
-static const GtkTargetEntry drag_types[] =
-{
-	{ "text/uri-list", 0, TARGET_URI_LIST },
-};
-
 G_DEFINE_TYPE(GeditWindow, gedit_window, GTK_TYPE_WINDOW)
 
 static void	recent_manager_changed	(GtkRecentManager *manager,
@@ -2279,6 +2274,45 @@ sync_name (GeditTab    *tab,
 	gedit_plugins_engine_update_plugins_ui (window, FALSE);
 }
 
+static GeditWindow *
+get_drop_window (GtkWidget *widget)
+{
+	GtkWidget *target_window;
+
+	target_window = gtk_widget_get_toplevel (widget);
+	g_return_val_if_fail (GEDIT_IS_WINDOW (target_window), NULL);
+
+	if ((GEDIT_WINDOW(target_window)->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION) != 0)
+		return NULL;
+	
+	return GEDIT_WINDOW (target_window);
+}
+
+static void
+load_uris_from_drop (GeditWindow  *window,
+		     gchar       **uri_list)
+{
+	GSList *uris = NULL;
+	gint i;
+	
+	if (uri_list == NULL)
+		return;
+	
+	for (i = 0; uri_list[i] != NULL; ++i)
+	{
+		uris = g_slist_prepend (uris, uri_list[i]);
+	}
+
+	uris = g_slist_reverse (uris);
+	gedit_commands_load_uris (window,
+				  uris,
+				  NULL,
+				  0);
+
+	g_slist_free (uris);
+}
+
+/* Handle drops on the GeditWindow */
 static void
 drag_data_received_cb (GtkWidget        *widget,
 		       GdkDragContext   *context,
@@ -2289,128 +2323,35 @@ drag_data_received_cb (GtkWidget        *widget,
 		       guint             time,
 		       gpointer          data)
 {
-	GtkWidget *target_window;
-	gchar **uris;
-	GSList *uri_list = NULL;
-	gint i;
+	GeditWindow *window;
+	gchar **uri_list;
 
-	if (info != TARGET_URI_LIST)
-		return;
-
-	g_return_if_fail (widget != NULL);
-
-	target_window = gtk_widget_get_toplevel (widget);
-	g_return_if_fail (GEDIT_IS_WINDOW (target_window));
+	window = get_drop_window (widget);
 	
-	if ((GEDIT_WINDOW(target_window)->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION) != 0)
+	if (window == NULL)
 		return;
 
-	uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
-
-	for (i = 0; uris[i] != NULL; i++)
+	if (info == TARGET_URI_LIST)
 	{
-		gchar *uri;
-		
-		uri = gedit_utils_make_canonical_uri_from_shell_arg (uris[i]);
-		
-		/* Silently ignore malformed URI/filename */
-		if (uri != NULL)
-			uri_list = g_slist_prepend (uri_list, uri);	
+		uri_list = gedit_utils_drop_get_uris(selection_data);
+		load_uris_from_drop (window, uri_list);
+		g_strfreev (uri_list);
 	}
+}
 
-	g_strfreev (uris);
+/* Handle drops on the GeditView */
+static void
+drop_uris_cb (GtkWidget    *widget,
+	      gchar       **uri_list)
+{
+	GeditWindow *window;
 
-	if (uri_list == NULL)
+	window = get_drop_window (widget);
+	
+	if (window == NULL)
 		return;
 
-	uri_list = g_slist_reverse (uri_list);
-
-	gedit_commands_load_uris (GEDIT_WINDOW (target_window),
-				  uri_list,
-				  NULL,
-				  0);
-
-	g_slist_foreach (uri_list, (GFunc) g_free, NULL);	
-	g_slist_free (uri_list);
-}
-
-/*
- * Override the gtk_text_view_drag_motion and drag_drop 
- * functions to get URIs
- *
- * If the mime type is text/uri-list, then we will accept
- * the potential drop, or request the data (depending on the
- * function).
- *
- * If the drag context has any other mime type, then pass the
- * information onto the GtkTextView's standard handlers.
- * (widget_class->function_name).
- *
- * See bug #89881 for details
- */
-
-static gboolean
-drag_motion_cb (GtkWidget      *widget,
-		GdkDragContext *context,
-		gint            x,
-		gint            y,
-		guint           time)
-{
-	GtkTargetList *tl;
-	GtkWidgetClass *widget_class;
-	gboolean result;
-
-	tl = gtk_target_list_new (drag_types,
-				  G_N_ELEMENTS (drag_types));
-
-	/* If this is a URL, deal with it here, or pass to the text view */
-	if (gtk_drag_dest_find_target (widget, context, tl) != GDK_NONE) 
-	{
-		gdk_drag_status (context, context->suggested_action, time);
-		result = TRUE;
-	}
-	else
-	{
-		widget_class = GTK_WIDGET_GET_CLASS (widget);
-		result = (*widget_class->drag_motion) (widget, context, x, y, time);
-	}
-
-	gtk_target_list_unref (tl);
-
-	return result;
-}
-
-static gboolean
-drag_drop_cb (GtkWidget      *widget,
-	      GdkDragContext *context,
-	      gint            x,
-	      gint            y,
-	      guint           time)
-{
-	GtkTargetList *tl;
-	GtkWidgetClass *widget_class;
-	gboolean result;
-	GdkAtom target;
-
-	tl = gtk_target_list_new (drag_types,
-				  G_N_ELEMENTS (drag_types));
-
-	/* If this is a URL, just get the drag data */
-	target = gtk_drag_dest_find_target (widget, context, tl);
-	if (target != GDK_NONE)
-	{
-		gtk_drag_get_data (widget, context, target, time);
-		result = TRUE;
-	}
-	else
-	{
-		widget_class = GTK_WIDGET_GET_CLASS (widget);
-		result = (*widget_class->drag_drop) (widget, context, x, y, time);
-	}
-
-	gtk_target_list_unref (tl);
-
-	return result;
+	load_uris_from_drop (window, uri_list);
 }
 
 static void
@@ -2536,7 +2477,6 @@ notebook_tab_added (GeditNotebook *notebook,
 {
 	GeditView *view;
 	GeditDocument *doc;
-	GtkTargetList *tl;
 	GtkAction *action;
 
 	gedit_debug (DEBUG_WINDOW);
@@ -2605,29 +2545,9 @@ notebook_tab_added (GeditNotebook *notebook,
 
 	update_documents_list_menu (window);
 	
-	/* CHECK: it seems to me this does not work when tab are moved between
-	   windows */
-	/* Drag and drop support */
-	tl = gtk_drag_dest_get_target_list (GTK_WIDGET (view));
-	g_return_if_fail (tl != NULL);
-
-	gtk_target_list_add_table (tl, drag_types, G_N_ELEMENTS (drag_types));
-
 	g_signal_connect (view,
-			  "drag_data_received",
-			  G_CALLBACK (drag_data_received_cb), 
-			  NULL);
-
-	/* Get signals before the standard text view functions to deal 
-	 * with uris for text files.
-	 */
-	g_signal_connect (view,
-			  "drag_motion",
-			  G_CALLBACK (drag_motion_cb), 
-			  NULL);
-	g_signal_connect (view,
-			  "drag_drop",
-			  G_CALLBACK (drag_drop_cb), 
+			  "drop_uris",
+			  G_CALLBACK (drop_uris_cb), 
 			  NULL);
 
 	update_window_state (window);
@@ -2684,13 +2604,7 @@ notebook_tab_removed (GeditNotebook *notebook,
 					      G_CALLBACK (editable_changed),
 					      window);
 	g_signal_handlers_disconnect_by_func (view, 
-					      G_CALLBACK (drag_data_received_cb),
-					      NULL);
-	g_signal_handlers_disconnect_by_func (view, 
-					      G_CALLBACK (drag_motion_cb),
-					      NULL);
-	g_signal_handlers_disconnect_by_func (view, 
-					      G_CALLBACK (drag_drop_cb),
+					      G_CALLBACK (drop_uris_cb),
 					      NULL);
 
 	g_return_if_fail (window->priv->num_tabs >= 0);
@@ -3147,6 +3061,7 @@ gedit_window_init (GeditWindow *window)
 {
 	static gboolean is_first = TRUE;
 	GtkWidget *main_box;
+	GtkTargetList *tl;
 
 	gedit_debug (DEBUG_WINDOW);
 
@@ -3219,14 +3134,27 @@ gedit_window_init (GeditWindow *window)
 	gtk_widget_show (window->priv->hpaned);
 	gtk_widget_show (window->priv->vpaned);
 
-	/* Drag and drop support */
+	/* Drag and drop support, set targets to NULL because we add the
+	   default uri_targets below */
 	gtk_drag_dest_set (GTK_WIDGET (window),
 			   GTK_DEST_DEFAULT_MOTION |
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
 			   GTK_DEST_DEFAULT_DROP,
-			   drag_types,
-			   G_N_ELEMENTS (drag_types),
+			   NULL,
+			   0,
 			   GDK_ACTION_COPY);
+
+	/* Add uri targets */
+	tl = gtk_drag_dest_get_target_list (GTK_WIDGET (window));
+	
+	if (tl == NULL)
+	{
+		tl = gtk_target_list_new (NULL, 0);
+		gtk_drag_dest_set_target_list (GTK_WIDGET (window), tl);
+		gtk_target_list_unref (tl);
+	}
+	
+	gtk_target_list_add_uri_targets (tl, TARGET_URI_LIST);
 
 	/* Connect signals */
 	g_signal_connect (window->priv->notebook,
