@@ -1,5 +1,22 @@
 2007-07-26  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* plugins/snippets/snippets/Library.py: fixed bug with override not
+	working
+	
+	* plugins/snippets/snippets/snippets.glade:
+	* plugins/snippets/snippets/Library.py:
+	* plugins/snippets/snippets/Manager.py:
+	* plugins/snippets/snippets/Document.py:
+	* plugins/snippets/snippets/Helper.py:
+	* plugins/snippets/snippets/Placeholder.py:
+	* plugins/snippets/snippets/Snippet.py:
+	
+	Implemented dnd snippets activation. Added tooltips in snippets manager.
+	Dnd works by specifying mime-types per snippet which will be activated
+	when someone drops one or more files in a view.
+	
+2007-07-26  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* gedit/gedit-view.c: always chain up the drag_motion signal to allow
 	gtktextview to scroll the view and move the dnd mark
 

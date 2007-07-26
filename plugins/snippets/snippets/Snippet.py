@@ -16,6 +16,7 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
+import gnomevfs
 
 from Placeholder import *
 from Parser import Parser, Token
@@ -29,7 +30,9 @@ class EvalUtilities:
         def _init_namespace(self):
                 self.namespace = {
                         '__builtins__': __builtins__,
-                        'align': self.util_align
+                        'align': self.util_align,
+                        'readfile': self.util_readfile,
+                        'filesize': self.util_filesize
                 }
 
         def _real_len(self, s, tablen = 0):
@@ -37,6 +40,20 @@ class EvalUtilities:
                         tablen = self.view.get_tabs_width()
                 
                 return len(s.expandtabs(tablen))
+
+        def _gnomevfs_filename(self, filename):
+                if filename.startswith('/'):
+                        return 'file://' + filename
+
+                return filename
+
+        def util_readfile(self, filename):
+                return gnomevfs.read_entire_file(self._gnomevfs_filename(filename))
+
+        def util_filesize(self, filename):
+                info = gnomevfs.get_file_info(self._gnomevfs_filename(filename), gnomevfs.FILE_INFO_FIELDS_SIZE)
+                
+                return info.size
 
         def util_align(self, items):
                 maxlen = []
@@ -249,9 +266,8 @@ class Snippet:
                                         # Remove placeholder
                                         del self._placeholders[tabstop]
         
-        def insert_into(self, plugin_data):
+        def insert_into(self, plugin_data, insert):
                 buf = plugin_data.view.get_buffer()
-                insert = buf.get_iter_at_mark(buf.get_insert())
                 last_index = 0
                 
                 # Find closest mark at current insertion, so that we may insert

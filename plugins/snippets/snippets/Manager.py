@@ -38,12 +38,13 @@ class Manager:
         NAME_COLUMN = 0
         SORT_COLUMN = 1
         OBJ_COLUMN = 2
+        TARGET_URI = 105
 
         model = None
         drag_icons = ('gnome-mime-application-x-tarz', 'gnome-package', 'package')
         default_export_name = _('Snippets archive') + '.tar.gz'
         dragging = False
-        dnd_target_list = [('text/uri-list', 0, 0)]
+        dnd_target_list = [('text/uri-list', 0, TARGET_URI)]
 
         def __init__(self):
                 self.snippet = None
@@ -316,6 +317,17 @@ class Manager:
                 source_view = self['source_view_snippet']
                 source_view.modify_font(pango.FontDescription('Monospace 8'))
 
+                entry = self['combo_drop_targets'].child
+                entry.connect('focus-out-event', self.on_entry_drop_targets_focus_out)
+                entry.connect('drag-data-received', self.on_entry_drop_targets_drag_data_received)
+                
+                #entry.drag_dest_set(gtk.DEST_DEFAULT_ALL, self.dnd_target_list, gtk.gdk.ACTION_COPY)
+                lst = entry.drag_dest_get_target_list()
+                lst = gtk.target_list_add_uri_targets(entry.drag_dest_get_target_list(), self.TARGET_URI)
+                entry.drag_dest_set_target_list(lst)
+                
+                #entry.
+                
                 self.dlg = self['dialog_snippets']
         
         def __getitem__(self, key):
@@ -390,10 +402,7 @@ class Manager:
                                 image_remove.set_from_stock(gtk.STOCK_DELETE, gtk.ICON_SIZE_BUTTON)
                                 tooltip = _('Delete selected snippet')
                         
-                        group, widget, text, priv = gtk.tooltips_data_get(button_remove)
-                        
-                        if group:
-                                group.set_tip(widget, tooltip)
+                        self.tooltips.set_tip(button_remove, tooltip)
 
         def snippet_changed(self, piter = None):
                 if piter:
@@ -505,6 +514,7 @@ class Manager:
                         self['entry_tab_trigger'].set_text('')
                         self['entry_accelerator'].set_text('')                        
                         self['source_view_snippet'].get_buffer().set_text('')
+                        self['combo_drop_targets'].child.set_text('')
 
                         self.tooltips.disable()
                 else:
@@ -513,6 +523,7 @@ class Manager:
                         self['entry_tab_trigger'].set_text(self.snippet['tag'])
                         self['entry_accelerator'].set_text( \
                                         self.snippet.accelerator_display())
+                        self['combo_drop_targets'].child.set_text(', '.join(self.snippet['drop-targets']))
                         
                         buf = self['source_view_snippet'].get_buffer()
                         lang = self.model.get_value(self.model.get_iter( \
@@ -523,8 +534,10 @@ class Manager:
                         
                         self.tooltips.enable()
 
-                for name in ['source_view_snippet', 'label_tab_trigger', \
-                                'entry_tab_trigger', 'label_accelerator', 'entry_accelerator']:
+                for name in ['source_view_snippet', 'label_tab_trigger',
+                                'entry_tab_trigger', 'label_accelerator', 
+                                'entry_accelerator', 'label_drop_targets',
+                                'combo_drop_targets']:
                         self[name].set_sensitive(sens)
                 
                 self.update_buttons()
@@ -657,7 +670,7 @@ class Manager:
                         entry.modify_base(gtk.STATE_NORMAL, None)
                         entry.modify_text(gtk.STATE_NORMAL, None)
 
-                        self.tooltips.set_tip(entry, None)
+                        self.tooltips.set_tip(entry, _('Single word with which the snippet is activated after pressing tab'))
                 
                 return False
 
@@ -669,6 +682,16 @@ class Manager:
 
                 # save tag
                 self.snippet['tag'] = text
+                self.snippet_changed()
+        
+        def on_entry_drop_targets_focus_out(self, entry, event):
+                if not self.snippet:
+                        return
+                
+                text = entry.get_text()
+
+                # save drop targets
+                self.snippet['drop-targets'] = text
                 self.snippet_changed()
         
         def on_entry_tab_trigger_changed(self, entry):
@@ -1047,10 +1070,12 @@ class Manager:
                 parent, piter, node = self.selected_snippet()
                 
                 if self.snippet:
-                        self.on_entry_tab_trigger_focus_out(self['entry_tab_trigger'], \
+                        self.on_entry_tab_trigger_focus_out(self['entry_tab_trigger'],
                                         None)
-                        self.on_source_view_snippet_focus_out( \
-                                        self['source_view_snippet'], None)
+                        self.on_source_view_snippet_focus_out(self['source_view_snippet'], 
+                                        None)
+                        self.on_entry_drop_targets_focus_out(self['combo_drop_targets'].child,
+                                        None)
                 
                 self.update_language_path()
 
@@ -1082,4 +1107,33 @@ class Manager:
                 # Check if it is already filled
                 self.fill_if_needed(piter)
                 self.select_iter(piter)
+        
+        def on_entry_drop_targets_drag_data_received(self, entry, context, x, y, selection_data, info, timestamp):
+                if not gtk.targets_include_uri(context.targets):
+                        return
+                
+                uris = drop_get_uris(selection_data)
+                
+                if not uris:
+                        return
+                
+                if entry.get_text():
+                        mimes = [entry.get_text()]
+                else:
+                        mimes = []
+                
+                for uri in uris:
+                        try:
+                                mime = gnomevfs.get_mime_type(uri)
+                        except:
+                                mime = None
+                        
+                        if mime:
+                                mimes.append(mime)
+                
+                entry.set_text(', '.join(mimes))
+                self.on_entry_drop_targets_focus_out(entry, None)
+                context.finish(True, False, timestamp)
+                
+                entry.stop_emission('drag_data_received')
 # ex:ts=8:et:

@@ -18,6 +18,7 @@
 import string
 from xml.sax import saxutils
 from ElementTree import *
+import re
 
 import gtk
 from gtk import gdk
@@ -170,4 +171,15 @@ def buffer_word_boundary(buf):
                 iter.forward_word_end()
                 
         return (start, iter)
+        
+                
+def drop_get_uris(selection):
+        lines = re.split('\\s*[\\n\\r]+\\s*', selection.data.strip())
+        result = []
+        
+        for line in lines:
+                if not line.startswith('#'):
+                        result.append(line)
+        
+        return result
 # ex:ts=8:et:

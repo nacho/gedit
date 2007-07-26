@@ -19,6 +19,7 @@ import os
 import weakref
 import sys
 import tempfile
+import re
 
 import gtk
 
@@ -39,7 +40,7 @@ class NamespacedId:
 
 class SnippetData:
         PROPS = {'tag': '', 'text': '', 'description': 'New snippet', 
-                        'accelerator': ''}
+                        'accelerator': '', 'drop-targets': ''}
 
         def __init__(self, node, library):
                 self.priv_id = node.attrib.get('id')
@@ -108,7 +109,7 @@ class SnippetData:
                 self.check_validation()
         
         def check_validation(self):
-                if not self['tag'] and not self['accelerator']:
+                if not self['tag'] and not self['accelerator'] and not self['drop-targets']:
                         return False
 
                 library = Library()
@@ -117,19 +118,28 @@ class SnippetData:
                 self.valid = library.valid_tab_trigger(self['tag']) and \
                                 (not self['accelerator'] or library.valid_accelerator(keyval, mod))
         
+        def _format_prop(self, prop, value):
+                if prop == 'drop-targets' and value != '':
+                        return re.split('\\s*[,;]\\s*', value)
+                else:
+                        return value
+        
         def __getitem__(self, prop):
                 if prop in self.properties:
                         if self.can_modify():
-                                return self.properties[prop].text or ''
+                                return self._format_prop(prop, self.properties[prop].text or '')
                         else:
-                                return self.properties[prop] or ''
+                                return self._format_prop(prop, self.properties[prop] or '')
                 
-                return ''
+                return self._format_prop(prop, '')
         
         def __setitem__(self, prop, value):
                 if not prop in self.properties:
                         return
-                        
+                
+                if isinstance(value, list):
+                        value = ','.join(value)
+                               
                 if not self.can_modify() and self.properties[prop] != value:
                         # ohoh, this is not can_modify, but it needs to be changed...
                         # make sure it is transfered to the changes file and set all the
@@ -146,7 +156,7 @@ class SnippetData:
                         oldvalue = self.properties[prop].text
                         self.properties[prop].text = value
                         
-                        if prop == 'tag' or prop == 'accelerator':
+                        if prop == 'tag' or prop == 'accelerator' or prop == 'drop-targets':
                                 container = Library().container(self.language())
                                 container.prop_changed(self, prop, oldvalue)
                 
@@ -167,7 +177,7 @@ class SnippetData:
         def _create_xml(self, parent=None, update=False, attrib={}):
                 # Create a new node
                 if parent:
-                        element = et.SubElement('snippet', attrib)
+                        element = et.SubElement(parent, 'snippet', attrib)
                 else:
                         element = et.Element('snippet')
 
@@ -260,7 +270,7 @@ class LanguageContainer:
         def __init__(self, language):
                 self.language = language
                 self.snippets = []
-                self.snippets_by_prop = {'tag': {}, 'accelerator': {}}
+                self.snippets_by_prop = {'tag': {}, 'accelerator': {}, 'drop-targets': {}}
                 self.accel_group = gtk.AccelGroup()
                 self._refs = 0
 
@@ -271,8 +281,7 @@ class LanguageContainer:
                 if not value or value == '':
                         return
 
-                snippets_debug('Added ' + prop + ' ' + value + ' to ' + \
-                                str(self.language))
+                snippets_debug('Added ', prop ,' ', value, ' to ', str(self.language))
                 
                 if prop == 'accelerator':
                         keyval, mod = gtk.accelerator_parse(value)
@@ -281,10 +290,14 @@ class LanguageContainer:
                 
                 snippets = self.snippets_by_prop[prop]
                 
-                if value in snippets:
-                        snippets[value].append(snippet)
-                else:
-                        snippets[value] = [snippet]
+                if not isinstance(value, list):
+                        value = [value]
+                
+                for val in value:
+                        if val in snippets:
+                                snippets[val].append(snippet)
+                        else:
+                                snippets[val] = [snippet]
 
         def _remove_prop(self, snippet, prop, value=0):
                 if value == 0:
@@ -293,8 +306,7 @@ class LanguageContainer:
                 if not value or value == '':
                         return
 
-                snippets_debug('Removed ' + prop + ' ' + value + ' from ' + \
-                                str(self.language))
+                snippets_debug('Removed ', prop, ' ', value, ' from ', str(self.language))
 
                 if prop == 'accelerator':
                         keyval, mod = gtk.accelerator_parse(value)
@@ -302,11 +314,15 @@ class LanguageContainer:
 
                 snippets = self.snippets_by_prop[prop]
                 
-                try:
-                        snippets[value].remove(snippet)
-                except:
-                        True
+                if not isinstance(value, list):
+                        value = [value]
                 
+                for val in value:
+                        try:
+                                snippets[val].remove(snippet)
+                        except:
+                                True
+
         def append(self, snippet):
                 tag = snippet['tag']
                 accelerator = snippet['accelerator']
@@ -315,6 +331,7 @@ class LanguageContainer:
                 
                 self._add_prop(snippet, 'tag')
                 self._add_prop(snippet, 'accelerator')
+                self._add_prop(snippet, 'drop-targets')
 
                 return snippet
         
@@ -326,6 +343,7 @@ class LanguageContainer:
                         
                 self._remove_prop(snippet, 'tag')
                 self._remove_prop(snippet, 'accelerator')
+                self._remove_prop(snippet, 'drop-targets')
         
         def prop_changed(self, snippet, prop, oldvalue):
                 snippets_debug('PROP CHANGED (', prop, ')', oldvalue)
@@ -336,10 +354,26 @@ class LanguageContainer:
         def from_prop(self, prop, value):
                 snippets = self.snippets_by_prop[prop]
                 
-                if value in snippets:
-                        return snippets[value]
+                if prop == 'drop-targets':
+                        s = []
+                        
+                        # FIXME: change this to use 
+                        # gnomevfs.mime_type_get_equivalence when it comes
+                        # available
+                        for key, val in snippets.items():
+                                if not value.startswith(key):
+                                        continue
+                                
+                                for snippet in snippets[key]:
+                                        if not snippet in s:
+                                                s.append(snippet)
+                        
+                        return s
                 else:
-                        return []
+                        if value in snippets:
+                                return snippets[value]
+                        else:
+                                return []
         
         def ref(self):
                 self._refs += 1
@@ -912,6 +946,22 @@ class Library(Singleton):
 
         # Snippet getters
         # ===============
+        def _from_prop(self, prop, value, language=None):
+                self.ensure_files()
+                
+                result = []                
+                language = self.normalize_language(language)
+                        
+                if not language in self.containers:
+                        return []
+
+                self.ensure(language)
+                result = self.containers[language].from_prop(prop, value)
+                
+                if len(result) == 0 and language and None in self.containers:
+                        result = self.containers[None].from_prop(prop, value)
+                
+                return result
         
         # Get snippets for a given language
         def get_snippets(self, language=None):
@@ -928,37 +978,14 @@ class Library(Singleton):
 
         # Get snippets for a given accelerator
         def from_accelerator(self, accelerator, language=None):
-                self.ensure_files()
-                
-                result = []                
-                language = self.normalize_language(language)
-                        
-                if not language in self.containers:
-                        return []
-
-                self.ensure(language)
-                result = self.containers[language].from_prop('accelerator', accelerator)
-                
-                if len(result) == 0 and language and None in self.containers:
-                        result = self.containers[None].from_prop('accelerator', accelerator)
-                
-                return result
+                return self._from_prop('accelerator', accelerator, language)
 
         # Get snippets for a given tag
         def from_tag(self, tag, language=None):
-                self.ensure_files()
+                return self._from_prop('tag', tag, language)
+        
+        # Get snippets for a given drop target
+        def from_drop_target(self, drop_target, language=None):
+                return self._from_prop('drop-targets', drop_target, language)
                 
-                result = []
-                language = self.normalize_language(language)
-                        
-                if not language in self.containers:
-                        return []
-
-                self.ensure(language)
-                result = self.containers[language].from_prop('tag', tag)
-                
-                if len(result) == 0 and language and None in self.containers:
-                        result = self.containers[None].from_prop('tag', tag)
-                
-                return result
 # ex:ts=8:et:

@@ -65,12 +65,15 @@ class Placeholder:
         
         def literal(self, s):
                 return repr(s)
+                
+        def format_environment(self, s):
+                return s
 
         def re_environment(self, m):
                 if m.group(1) or not m.group(2) in os.environ:
                         return '$' + m.group(2)
                 else:
-                        return os.environ[m.group(2)]
+                        return self.format_environment(os.environ[m.group(2)])
 
         def expand_environment(self, text):
                 if not text:
@@ -305,7 +308,10 @@ class PlaceholderExpand(Placeholder):
                 self.timeout_id = None
                 
                 return False
-                
+        
+        def format_environment(self, text):
+                return self.literal(text)
+
         def substitute(self, text, formatter = None):
                 formatter = formatter or self.literal
 
@@ -404,7 +410,10 @@ class PlaceholderShell(PlaceholderExpand):
 
                 self.process_close()
                 return False
-                
+        
+        def literal(self, text):
+                return '"' + re.sub('[\\\\"]', '\\\\\\1', text) + '"'
+        
         def expand(self, text):
                 self.remove_timeout()
 
@@ -462,7 +471,7 @@ class PlaceholderEval(PlaceholderExpand):
                 if refs:
                         for ref in refs:
                                 self.refs.append(int(ref.strip()))
-        
+
         def get_mirrors(self, placeholders):
                 mirrors = PlaceholderExpand.get_mirrors(self, placeholders)
                 

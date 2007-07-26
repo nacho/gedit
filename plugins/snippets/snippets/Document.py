@@ -16,8 +16,12 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
+import re
+
 import gtk
 from gtk import gdk
+import gnomevfs
+import gedit
 
 from Library import Library
 from Snippet import Snippet
@@ -56,17 +60,21 @@ class Document:
                         del self.update_placeholders[:]
                         del self.jump_placeholders[:]
 
-		# Always release the reference to the global snippets
+                # Always release the reference to the global snippets
                 Library().unref(None)
                 self.set_view(None)
                 self.instance = None
                 self.active_placeholder = None
 
         def disconnect_signal(self, obj, signal):
-                if signal in self.signal_ids:
-                        obj.disconnect(self.signal_ids[signal])
-                        del self.signal_ids[signal]
-
+                if (obj, signal) in self.signal_ids:
+                        obj.disconnect(self.signal_ids[(obj, signal)])
+                        del self.signal_ids[(obj, signal)]
+                
+        def connect_signal(self, obj, signal, cb):
+                self.disconnect_signal(obj, signal)     
+                self.signal_ids[(obj, signal)] = obj.connect(signal, cb)
+                
         # Set the view to be controlled. Installs signal handlers and sets current
         # language. If there is already a view set this function will first remove
         # all currently active snippets and disconnect all current signals. So
@@ -76,12 +84,14 @@ class Document:
                 if self.view:
                         buf = self.view.get_buffer()
                         
-                        self.disconnect_signal(self.view, 'key-press-event')
-                        self.disconnect_signal(self.view, 'destroy')
-                        self.disconnect_signal(buf, 'notify::language')
-                        self.disconnect_signal(self.view, 'notify::editable')
-                        self.disconnect_signal(buf, 'changed')
-                        self.disconnect_signal(buf, 'cursor-moved')
+                        # Remove signals
+                        signals = {self.view: ('key-press-event', 'destroy', 
+                                               'notify::editable', 'drag-data-received'),
+                                   buf:       ('notify::language', 'changed', 'cursor-moved')}
+                        
+                        for obj, sig in signals.items():
+                                for s in sig:
+                                        self.disconnect_signal(obj, s)
                         
                         # Remove all active snippets
                         for snippet in list(self.active_snippets):
@@ -91,19 +101,16 @@ class Document:
                 
                 if view != None:
                         buf = view.get_buffer()
-                        
-                        self.signal_ids['destroy'] = view.connect('destroy', \
-                                        self.on_view_destroy)
+                       
+                        self.connect_signal(view, 'destroy', self.on_view_destroy)
 
                         if view.get_editable():
-                                self.signal_ids['key-press-event'] = view.connect( \
-                                                'key_press_event', self.on_view_key_press)
+                                self.connect_signal(view, 'key-press-event', self.on_view_key_press)
 
-                        self.signal_ids['notify::language'] = buf.connect( \
-                                        'notify::language', self.on_notify_language)
-                        self.signal_ids['notify::editable'] = view.connect( \
-                                        'notify::editable', self.on_notify_editable)
-                        
+                        self.connect_signal(buf, 'notify::language', self.on_notify_language)
+                        self.connect_signal(view, 'notify::editable', self.on_notify_editable)
+                        self.connect_signal(view, 'drag-data-received', self.on_drag_data_received)
+
                         self.update_language()
                 elif self.language_id != 0:
                         Library().unref(self.language_id)
@@ -159,10 +166,8 @@ class Document:
         def first_snippet_inserted(self):
                 buf = self.view.get_buffer()
                 
-                self.signal_ids['changed'] = buf.connect('changed', \
-                                self.on_buffer_changed)
-                self.signal_ids['cursor-moved'] = buf.connect('cursor_moved', \
-                                        self.on_buffer_cursor_moved)
+                self.connect_signal(buf, 'changed', self.on_buffer_changed)
+                self.connect_signal(buf, 'cursor-moved', self.on_buffer_cursor_moved)
         
         def last_snippet_removed(self):
                 buf = self.view.get_buffer()
@@ -172,7 +177,7 @@ class Document:
         def current_placeholder(self):
                 buf = self.view.get_buffer()
                 
-                piter = buf.get_iter_at_mark(buf.get_insert())	
+                piter = buf.get_iter_at_mark(buf.get_insert())        
                 current = None
 
                 for placeholder in self.placeholders:
@@ -191,7 +196,7 @@ class Document:
                 
                 piter = buf.get_iter_at_mark(buf.get_insert())
                 prev = current = next = None
-                length = len(self.placeholders)		
+                length = len(self.placeholders)                
 
                 if direction == 1:
                         nearest = lambda w, x, y, z: (w.compare(y) >= 0 and (not z or \
@@ -308,10 +313,10 @@ class Document:
         def update_environment(self):
                 buf = self.view.get_buffer()
                 
-                variables = {'GEDIT_SELECTED_TEXT': self.env_get_selected_text, \
-                                'GEDIT_CURRENT_WORD': self.env_get_current_word, \
-                                'GEDIT_FILENAME': self.env_get_filename, \
-                                'GEDIT_BASENAME': self.env_get_basename}
+                variables = {'GEDIT_SELECTED_TEXT': self.env_get_selected_text, 
+                             'GEDIT_CURRENT_WORD': self.env_get_current_word, 
+                             'GEDIT_FILENAME': self.env_get_filename, 
+                             'GEDIT_BASENAME': self.env_get_basename}
                 
                 for var in variables:
                         os.environ[var] = variables[var](buf)
@@ -359,7 +364,7 @@ class Document:
                 
                 # Insert the snippet
                 holders = len(self.placeholders)
-                active_info = s.insert_into(self)
+                active_info = s.insert_into(self, start)
                 self.active_snippets.append(active_info)
 
                 # Put cursor back to beginning of the snippet
@@ -372,7 +377,7 @@ class Document:
                 if current and current != self.active_placeholder:
                         self.goto_placeholder(None, current)
                 elif next:
-                        self.goto_placeholder(None, next)		
+                        self.goto_placeholder(None, next)                
                         
                 buf.end_user_action()
                 
@@ -410,7 +415,7 @@ class Document:
                 
                 return (word, start, end)
 
-        def run_snippet(self):	
+        def run_snippet(self):        
                 if not self.view:
                         return False
                 
@@ -535,7 +540,7 @@ class Document:
                                 if not hasnodes:
                                         prefix = None
                         
-                        complete = SnippetComplete(nodes, prefix, False)	
+                        complete = SnippetComplete(nodes, prefix, False)        
                 else:
                         # There is a preset, so show that preset
                         complete = SnippetComplete(preset, None, True)
@@ -548,7 +553,7 @@ class Document:
                                 gtk.TEXT_WINDOW_TEXT, rect.x + rect.width, rect.y)
                 (xor, yor) = win.get_origin()
                 
-                self.move_completion_window(complete, x + xor, y + yor)		
+                self.move_completion_window(complete, x + xor, y + yor)                
                 return complete.run()
 
         def update_snippet_contents(self):
@@ -650,3 +655,121 @@ class Document:
                                         event.state & gtk.accelerator_get_default_mod_mask())
 
                 return False
+        
+        def path_split(self, path, components=[]):
+                head, tail = os.path.split(path)
+                
+                if not tail and head:
+                        return [head] + components
+                elif tail:
+                        return self.path_split(head, [tail] + components)
+                else:
+                        return components
+        
+        def relative_filename(self, first, second, mime):
+                prot1 = re.match('(^[a-z]+:\/\/|\/)(.*)', first)
+                prot2 = re.match('(^[a-z]+:\/\/|\/)(.*)', second)
+                
+                if not prot1 or not prot2:
+                        return second
+                
+                # Different protocols
+                if prot1.group(1) != prot2.group(1):
+                        return second
+                
+                # Split on backslash
+                path1 = self.path_split(prot1.group(2))
+                path2 = self.path_split(prot2.group(2))
+                
+                # Remove as long as common
+                while path1 and path2 and path1[0] == path2[0]:
+                        path1.pop(0)
+                        path2.pop(0)
+                
+                # If we need to ../ more than 3 times, then just return
+                # the absolute path
+                if len(path1) - 1 > 3:
+                        return second
+                
+                print path1
+                print path2
+                
+                if mime.startswith('x-directory'):
+                        # directory, special case
+                        if not path2:
+                                result = './'
+                        else:
+                                result = '../' * (len(path1) - 1)       
+                else:   
+                        # Insert ../
+                        result = '../' * (len(path1) - 1)
+                
+                        if not path2:
+                                result = os.path.basename(second)
+                
+                if path2:
+                        result += os.path.join(*path2)
+                        
+                return result
+        
+        def apply_uri_snippet(self, snippet, mime, uri):
+                # Remove file scheme
+                if gedit.utils.uri_has_file_scheme(uri):
+                        uri = gnomevfs.get_local_path_from_uri(uri)
+                
+                # Set environmental variables
+                filename = self.env_get_filename(self.view.get_buffer())
+                
+                os.environ['GEDIT_DROP_FILENAME'] = uri
+                os.environ['GEDIT_DROP_MIME_TYPE'] = mime
+                os.environ['GEDIT_DROP_REL_FILENAME'] = self.relative_filename(filename, uri, mime)
+
+                buf = self.view.get_buffer()
+                mark = buf.get_mark('gtk_drag_target')
+                
+                if not mark:
+                        mark = buf.get_insert()
+
+                piter = buf.get_iter_at_mark(mark)
+                self.apply_snippet(snippet, piter, piter)
+
+        def in_bounds(self, x, y):
+                rect = self.view.get_visible_rect()
+                rect.x, rect.y = self.view.buffer_to_window_coords(gtk.TEXT_WINDOW_WIDGET, rect.x, rect.y)
+
+                return not (x < rect.x or x > rect.x + rect.width or y < rect.y or y > rect.y + rect.height)
+        
+        def on_drag_data_received(self, view, context, x, y, data, info, timestamp):   
+                if not (gtk.targets_include_uri(context.targets) and data.data and self.in_bounds(x, y)):
+                        return
+
+                uris = drop_get_uris(data)
+                uris.reverse()
+                stop = False
+                
+                for uri in uris:
+                        try:
+                                mime = gnomevfs.get_mime_type(uri)
+                        except:
+                                mime = None
+
+                        if not mime:
+                                continue
+                        
+                        snippets = Library().from_drop_target(mime, self.language_id)
+                        
+                        if snippets:
+                                stop = True
+                                self.apply_uri_snippet(snippets[0], mime, uri)
+
+                if stop:
+                        context.finish(True, False, timestamp)
+                        view.stop_emission('drag-data-received')
+                        view.get_toplevel().present()
+                        view.grab_focus()
+        
+        def find_uri_target(self, context):
+                lst = gtk.target_list_add_uri_targets((), 0)
+                
+                return self.view.drag_dest_find_target(context, lst)
+# ex:ts=8:et:

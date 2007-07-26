@@ -413,7 +413,7 @@
 		      <child>
 			<widget class="GtkTable" id="table1">
 			  <property name="visible">True</property>
-			  <property name="n_rows">2</property>
+			  <property name="n_rows">3</property>
 			  <property name="n_columns">2</property>
 			  <property name="homogeneous">False</property>
 			  <property name="row_spacing">6</property>
@@ -452,6 +452,7 @@
 			    <widget class="GtkEntry" id="entry_tab_trigger">
 			      <property name="visible">True</property>
 			      <property name="sensitive">False</property>
+			      <property name="tooltip" translatable="yes">Single word with which the snippet is activated after pressing tab</property>
 			      <property name="can_focus">True</property>
 			      <property name="editable">True</property>
 			      <property name="visibility">True</property>
@@ -476,6 +477,7 @@
 			    <widget class="GtkEntry" id="entry_accelerator">
 			      <property name="visible">True</property>
 			      <property name="sensitive">False</property>
+			      <property name="tooltip" translatable="yes">Shortcut key with which the snippet is activated</property>
 			      <property name="can_focus">True</property>
 			      <property name="editable">False</property>
 			      <property name="visibility">True</property>
@@ -523,6 +525,60 @@
 			      <property name="bottom_attach">2</property>
 			      <property name="x_options">fill</property>
 			      <property name="y_options"></property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkLabel" id="label_drop_targets">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">_Drop targets:</property>
+			      <property name="use_underline">True</property>
+			      <property name="use_markup">False</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">False</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
+			      <property name="mnemonic_widget">entry_accelerator</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
+			    </widget>
+			    <packing>
+			      <property name="left_attach">0</property>
+			      <property name="right_attach">1</property>
+			      <property name="top_attach">2</property>
+			      <property name="bottom_attach">3</property>
+			      <property name="x_options">fill</property>
+			      <property name="y_options"></property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkComboBoxEntry" id="combo_drop_targets">
+			      <property name="visible">True</property>
+			      <property name="items">text
+text/plain
+text/xml
+image
+image/png
+image/jpeg
+audio
+video</property>
+			      <property name="add_tearoffs">False</property>
+			      <property name="has_frame">True</property>
+			      <property name="focus_on_click">True</property>
+			    </widget>
+			    <packing>
+			      <property name="left_attach">1</property>
+			      <property name="right_attach">2</property>
+			      <property name="top_attach">2</property>
+			      <property name="bottom_attach">3</property>
+			      <property name="x_options">fill</property>
+			      <property name="y_options">fill</property>
 			    </packing>
 			  </child>
 			</widget>
