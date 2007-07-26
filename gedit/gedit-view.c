@@ -1729,16 +1729,16 @@ gedit_view_drag_motion (GtkWidget      *widget,
 {
 	gboolean result;
 
-	/* If this is a URL, deal with it here, or pass to the text view */
+	/* Chain up to allow textview to scroll and position dnd mark, note 
+	 * that this needs to be checked if gtksourceview or gtktextview
+	 * changes drag_motion behaviour */
+	result = GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_motion (widget, context, x, y, time);
+
+	/* If this is a URL, deal with it here */
 	if (drag_get_uri_target (widget, context) != GDK_NONE) 
 	{
 		gdk_drag_status (context, context->suggested_action, time);
 		result = TRUE;
-	}
-	else
-	{
-		/* Chain up */
-		result = GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_motion (widget, context, x, y, time);
 	}
 
 	return result;

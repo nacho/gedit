@@ -1,3 +1,8 @@
+2007-07-26  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* gedit/gedit-view.c: always chain up the drag_motion signal to allow
+	gtktextview to scroll the view and move the dnd mark
+
 2007-07-25  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	* gedit/gedit-view.c: added call to gtk_drag_finish after emitting
