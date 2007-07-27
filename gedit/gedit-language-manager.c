@@ -49,6 +49,38 @@ gedit_get_language_manager (void)
 	return language_manager;
 }
 
+GSList *
+remove_hidden_languages (GSList *languages)
+{
+	GSList *item;
+	GSList *prev;
+	GtkSourceLanguage *language;
+
+	prev = NULL;
+	item = languages;
+
+	while (item != NULL)
+	{
+		language = GTK_SOURCE_LANGUAGE(item->data);
+
+		if (gtk_source_language_get_hidden (language))
+		{
+			languages = g_slist_delete_link (languages, item);
+
+			/* Set item to start of the list if we removed the first
+			 * language */
+			item = prev == NULL ? languages : prev->next;
+		}
+		else
+		{
+			prev = item;
+			item = item->next;
+		}
+	}
+
+	return languages;
+}
+
 static gint
 language_compare (gconstpointer a, gconstpointer b)
 {
@@ -61,11 +93,15 @@ language_compare (gconstpointer a, gconstpointer b)
 }
 
 GSList *
-gedit_language_manager_list_languages_sorted (GtkSourceLanguageManager *lm)
+gedit_language_manager_list_languages_sorted (GtkSourceLanguageManager *lm,
+					      gboolean                  include_hidden)
 {
 	GSList *languages;
 
 	languages = gtk_source_language_manager_list_languages (lm);
+
+	if (!include_hidden)
+		languages = remove_hidden_languages (languages);
 
 	return g_slist_sort (languages, (GCompareFunc)language_compare);
 }

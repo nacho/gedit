@@ -1120,12 +1120,12 @@ get_text_with_style (GtkSourcePrintJob *job,
 	gboolean have_toggle;
 	
 	/* make sure the region to print is highlighted */
-// FIXME: still needed with gsv2?
 //	_gtk_source_buffer_highlight_region (job->priv->buffer, start, end, TRUE);
+	gtk_source_buffer_ensure_highlight (job->priv->buffer, start, end);
 
 	next_toggle = *start;
 	have_toggle = gtk_text_iter_forward_to_tag_toggle (&next_toggle, NULL);
-	
+
 	/* FIXME: handle invisible text properly.  This also assumes
 	 * the text has no embedded images and stuff */
 	while (gtk_text_iter_compare (start, end) < 0)

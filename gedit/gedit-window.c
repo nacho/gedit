@@ -987,7 +987,8 @@ create_languages_menu (GeditWindow *window)
 
 	/* now add all the known languages */
 	languages = gedit_language_manager_list_languages_sorted (
-						gedit_get_language_manager ());
+						gedit_get_language_manager (),
+						FALSE);
 
 	for (l = languages, i = 0; l != NULL; l = l->next, ++i)
 	{

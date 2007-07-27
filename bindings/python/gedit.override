@@ -348,20 +348,24 @@ _wrap_gedit_tab_get_from_document_deprecated(PyObject *self, PyObject *args, PyO
     return _wrap_gedit_tab_get_from_document(self, args, kwargs);
 }
 %%
-override gedit_language_manager_list_languages_sorted
+override gedit_language_manager_list_languages_sorted kwargs
 static PyObject *
 _wrap_gedit_language_manager_list_languages_sorted(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-
-    static char *kwlist[] = { "lm", NULL };
+    static char *kwlist[] = { "lm", "include_hidden", NULL };
     PyGObject *lm;
-    GSList *list;
+    int include_hidden;
     PyObject *py_list;
-    
-    if (!PyArg_ParseTupleAndKeywords (args, kwargs,"O!:language_manager_list_languages_sorted", kwlist, &PyGtkSourceLanguageManager_Type, &lm))
+    GSList *list;
+
+    if (!PyArg_ParseTupleAndKeywords (args, kwargs,
+                                      "O!i:language_manager_list_languages_sorted",
+                                      kwlist, &PyGtkSourceLanguageManager_Type, &lm,
+                                      &include_hidden))
         return NULL;
-    
-    list = gedit_language_manager_list_languages_sorted (GTK_SOURCE_LANGUAGE_MANAGER (lm->obj));
+
+    list = gedit_language_manager_list_languages_sorted (GTK_SOURCE_LANGUAGE_MANAGER (lm->obj),
+                                                         include_hidden);
 
     py_list = _helper_wrap_gobject_gslist (list);
 
