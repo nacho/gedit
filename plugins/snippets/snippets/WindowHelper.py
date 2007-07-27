@@ -70,7 +70,7 @@ class WindowHelper:
 
                 self.action_group = gtk.ActionGroup("GeditSnippetPluginActions")
                 self.action_group.set_translation_domain('gedit')
-                self.action_group.add_actions([('Snippets', None,
+                self.action_group.add_actions([('ManageSnippets', None,
                                 _('Manage _Snippets...'), \
                                 None, _('Manage snippets'), \
                                 self.on_action_snippets_activate)])
@@ -78,7 +78,7 @@ class WindowHelper:
                 self.merge_id = manager.new_merge_id()
                 manager.insert_action_group(self.action_group, -1)		
                 manager.add_ui(self.merge_id, '/MenuBar/ToolsMenu/ToolsOps_5', \
-                                'Snippets', 'Snippets', gtk.UI_MANAGER_MENUITEM, False)
+                                'ManageSnippets', 'ManageSnippets', gtk.UI_MANAGER_MENUITEM, False)
 
         def remove_menu(self):
                 manager = self.window.get_ui_manager()

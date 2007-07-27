@@ -21,4 +21,9 @@ snippets_DATA = \
 	
 snippetsdir = $(datadir)/gedit-2/plugins/snippets
 
-EXTRA_DIST = $(snippets_DATA)
+lang_DATA = \
+	snippets.lang
+
+langdir = $(datadir)/gtksourceview-2.0/language-specs
+
+EXTRA_DIST = $(snippets_DATA) $(lang_DATA)

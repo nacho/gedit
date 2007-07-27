@@ -117,7 +117,7 @@ class Manager:
                         self.model = gtk.TreeStore(str, str, object)
                         self.model.set_sort_column_id(self.SORT_COLUMN, gtk.SORT_ASCENDING)
                         manager = gedit.get_language_manager()
-                        langs = manager.list_languages()
+                        langs = gedit.language_manager_list_languages_sorted(manager, True)
                         
                         piter = self.model.append(None, (_('Global'), '', None))
                         # Add dummy node
@@ -277,12 +277,19 @@ class Manager:
                         int1 , int2):
                 if function_name == 'create_source_view':
                         buf = gsv.Buffer()
-                        buf.set_highlight(True)
+
                         source_view = gsv.View(buf)
                         source_view.set_auto_indent(True)
                         source_view.set_insert_spaces_instead_of_tabs(False)
                         source_view.set_smart_home_end(gsv.SMART_HOME_END_AFTER)
                         source_view.set_tabs_width(4)
+                        
+                        manager = gedit.get_language_manager()
+                        lang = manager.get_language_by_id('snippets')
+                        
+                        if lang:
+                                buf.set_highlight(True)
+                                buf.set_language(lang)
 
                         return source_view
                 else:
@@ -321,12 +328,9 @@ class Manager:
                 entry.connect('focus-out-event', self.on_entry_drop_targets_focus_out)
                 entry.connect('drag-data-received', self.on_entry_drop_targets_drag_data_received)
                 
-                #entry.drag_dest_set(gtk.DEST_DEFAULT_ALL, self.dnd_target_list, gtk.gdk.ACTION_COPY)
                 lst = entry.drag_dest_get_target_list()
                 lst = gtk.target_list_add_uri_targets(entry.drag_dest_get_target_list(), self.TARGET_URI)
                 entry.drag_dest_set_target_list(lst)
-                
-                #entry.
                 
                 self.dlg = self['dialog_snippets']
         
@@ -496,8 +500,6 @@ class Manager:
                 selection = self.tree_view.get_selection()
                 (model, paths) = selection.get_selected_rows()
                 
-                #(model, piter) = self.tree_view.get_selection().get_selected()
-                
                 if len(paths) == 1:
                         piter = model.get_iter(paths[0])
                         parent = model.iter_parent(piter)
@@ -526,10 +528,6 @@ class Manager:
                         self['combo_drop_targets'].child.set_text(', '.join(self.snippet['drop-targets']))
                         
                         buf = self['source_view_snippet'].get_buffer()
-                        lang = self.model.get_value(self.model.get_iter( \
-                                        self.language_path), self.OBJ_COLUMN)
-                        
-                        buf.set_language(lang)
                         buf.set_text(self.snippet['text'])
                         
                         self.tooltips.enable()
