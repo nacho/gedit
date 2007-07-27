@@ -132,15 +132,17 @@
       </include>    
     </context>
     <context id="regex-placeholder" style-ref="regex-placeholder">
-      <match>\${\%{tabstop}?(?:(\%{number})|(\%{environment}))/\%{regex-pattern}/\%{regex-pattern}(?:[/]([a-zA-Z]*))?}</match>
+      <match>(\${)\%{tabstop}?(?:\s*(?:(\%{number})|(\%{environment})))/\%{regex-pattern}/\%{regex-pattern}(?:[/]([a-zA-Z]*))?(})</match>
       <include>
-        <context sub-pattern="2" style-ref="tabstop"/>
-        <context sub-pattern="3" style-ref="seperator"/>
-        <context sub-pattern="4" style-ref="tabstop"/>
-        <context sub-pattern="5" style-ref="environmental-var"/>
-        <context sub-pattern="6" style-ref="regex-pattern"/>
-        <context sub-pattern="7" style-ref="replace-pattern"/>
-        <context sub-pattern="8" style-ref="modifier"/>
+        <context sub-pattern="1" style-ref="placeholder-bounds"/>
+        <context sub-pattern="10" style-ref="placeholder-bounds"/>
+        <context sub-pattern="3" style-ref="tabstop"/>
+        <context sub-pattern="4" style-ref="seperator"/>
+        <context sub-pattern="5" style-ref="tabstop"/>
+        <context sub-pattern="6" style-ref="environmental-var"/>
+        <context sub-pattern="7" style-ref="regex-pattern"/>
+        <context sub-pattern="8" style-ref="replace-pattern"/>
+        <context sub-pattern="9" style-ref="modifier"/>
       </include>
     </context>
     <context id="environmental-variable" style-ref="environmental-var">

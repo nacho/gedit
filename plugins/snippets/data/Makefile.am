@@ -16,6 +16,7 @@ snippets_DATA = \
 	python.xml \
 	ruby.xml \
 	sh.xml \
+	snippets.xml \
 	tcl.xml \
 	xml.xml
 	

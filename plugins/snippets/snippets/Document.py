@@ -140,7 +140,9 @@ class Document:
                 else:
                         self.language_id = None
 
-                self.instance.language_changed(self)
+                if self.instance:
+                        self.instance.language_changed(self)
+
                 Library().ref(self.language_id)
 
         def accelerator_activate(self, keyval, mod):

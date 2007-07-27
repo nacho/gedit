@@ -33,6 +33,7 @@ from Helper import *
 from Library import *
 from Importer import *
 from Exporter import *
+from Document import Document
 
 class Manager:
         NAME_COLUMN = 0
@@ -52,6 +53,7 @@ class Manager:
                 self.key_press_id = 0
                 self._temp_export = None
                 self.tooltips = gtk.Tooltips()
+                self.snippets_doc = None
                 self.run()
 
         def get_language_snippets(self, path, name = None):
@@ -276,9 +278,9 @@ class Manager:
         def custom_handler(self, xml, function_name, widget_name, str1, str2, \
                         int1 , int2):
                 if function_name == 'create_source_view':
-                        buf = gsv.Buffer()
+                        buf = gedit.Document()
 
-                        source_view = gsv.View(buf)
+                        source_view = gedit.View(buf)
                         source_view.set_auto_indent(True)
                         source_view.set_insert_spaces_instead_of_tabs(False)
                         source_view.set_smart_home_end(gsv.SMART_HOME_END_AFTER)
@@ -290,6 +292,7 @@ class Manager:
                         if lang:
                                 buf.set_highlight(True)
                                 buf.set_language(lang)
+                                self.snippets_doc = Document(None, source_view)
 
                         return source_view
                 else:
@@ -600,6 +603,9 @@ class Manager:
                 if self._temp_export:
                       shutil.rmtree(os.path.dirname(self._temp_export))
                       self._temp_export = None
+
+                if self.snippets_doc:
+                        self.snippets_doc.stop()
 
                 self.unref_languages()        
                 self.snippet = None        

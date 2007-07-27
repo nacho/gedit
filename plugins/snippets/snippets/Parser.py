@@ -154,13 +154,17 @@ class Parser:
                 return items
         
         def _parse_default(self, default):
-                match = re.match('\\s*\\[((\\\\]|[^\\]])+)\\]\\s*', default)
+                match = re.match('^\\s*(\\\\)?(\\[((\\\\]|[^\\]])+)\\]\\s*)$', default)
                 
                 if not match:
                         return [default]
                 
                 groups = match.groups()
-                return self._parse_list(groups[0])
+                
+                if groups[0]:
+                        return [groups[1]]
+
+                return self._parse_list(groups[2])
         
         def _match_placeholder(self):
                 text = self.remains()
@@ -235,7 +239,7 @@ class Parser:
                 text = self.remains()
                 
                 content = '((?:\\\\[/]|\\\\}|[^/}])+)'
-                match = re.match('\\${(?:(%s):)?(%s|\\$([A-Z_]+))?[/]%s[/]%s(?:[/]([a-zA-Z]*))?}' % (self.SREG_ID, self.SREG_ID, content, content), text)
+                match = re.match('\\${(?:(%s):)?\\s*(%s|\\$([A-Z_]+))?[/]%s[/]%s(?:[/]([a-zA-Z]*))?}' % (self.SREG_ID, self.SREG_ID, content, content), text)
                 
                 if not match:
                         return None

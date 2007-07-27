@@ -109,6 +109,9 @@ class Placeholder:
                 
         # Do something on beginning this placeholder
         def enter(self):
+                if not self.begin or self.begin.get_deleted():
+                        return
+
                 self.buf.move_mark(self.buf.get_insert(), self.begin_iter())
 
                 if self.end:
