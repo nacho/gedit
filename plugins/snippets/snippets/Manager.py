@@ -387,6 +387,7 @@ class Manager:
                 snippets = self.selected_snippets(False)
                 override = False
                 remove = False
+                system = False
                 
                 for snippet in snippets:
                         if not snippet:
@@ -394,14 +395,16 @@ class Manager:
 
                         if snippet.is_override():
                                 override = True
-                        else:
+                        elif snippet.can_modify():
                                 remove = True
+                        else:
+                                system = True
                         
                         # No need to continue if both are found
                         if override and remove:
                                 break
 
-                return (override, remove)
+                return (override, remove, system)
 
         def update_buttons(self):
                 button_remove = self['button_remove_snippet']
@@ -409,9 +412,9 @@ class Manager:
                 image_remove = self['image_remove']
 
                 button_new.set_sensitive(self.language_path != None)
-                override, remove = self.selected_snippets_state()
+                override, remove, system = self.selected_snippets_state()
                 
-                if not (override ^ remove):
+                if not (override ^ remove) or system:
                         button_remove.set_sensitive(False)
                         image_remove.set_from_stock(gtk.STOCK_DELETE, gtk.ICON_SIZE_BUTTON)
                 else:
@@ -989,9 +992,9 @@ class Manager:
                         return dummy
        
         def on_button_remove_snippet_clicked(self, button):
-                override, remove = self.selected_snippets_state()
+                override, remove, system = self.selected_snippets_state()
                 
-                if not (override ^ remove):
+                if not (override ^ remove) or system:
                         return
                 
                 paths = self.selected_snippets(include_languages=False, as_path=True)
