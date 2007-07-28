@@ -104,12 +104,6 @@ class Manager:
                         else:
                                 current_lang = view.get_buffer().get_language()
                                 source_view = self['source_view_snippet']
-                                
-                                source_view.set_auto_indent(view.get_auto_indent())
-                                source_view.set_insert_spaces_instead_of_tabs( \
-                                                view.get_insert_spaces_instead_of_tabs())
-                                source_view.set_smart_home_end(view.get_smart_home_end())
-                                source_view.set_tabs_width(view.get_tabs_width())
 
                 else:
                         current_lang = None
@@ -292,13 +286,20 @@ class Manager:
         def custom_handler(self, xml, function_name, widget_name, str1, str2, \
                         int1 , int2):
                 if function_name == 'create_source_view':
+                        # Create the buffer, view and reset to defaults
                         buf = gedit.Document()
-
+                        #buf.set_style_scheme(None)
+                        buf.set_check_brackets(False)
+                        
                         source_view = gedit.View(buf)
                         source_view.set_auto_indent(True)
                         source_view.set_insert_spaces_instead_of_tabs(False)
                         source_view.set_smart_home_end(gsv.SMART_HOME_END_AFTER)
-                        source_view.set_tabs_width(4)
+                        source_view.set_tabs_width(2)
+                        source_view.set_highlight_current_line(False)
+                        source_view.set_show_margin(False)
+                        source_view.set_show_line_numbers(False)
+                        source_view.set_font(True, "Monospace 10")
                         
                         manager = self.get_language_manager()
                         lang = manager.get_language_by_id('snippets')
