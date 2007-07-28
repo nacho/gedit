@@ -1,4 +1,6 @@
 # Python snippets plugin
+SUBDIRS = lang
+
 snippets_DATA = \
 	css.xml \
 	c.xml \
@@ -21,10 +23,5 @@ snippets_DATA = \
 	xml.xml
 	
 snippetsdir = $(datadir)/gedit-2/plugins/snippets
-
-lang_DATA = \
-	snippets.lang
-
-langdir = $(datadir)/gtksourceview-2.0/language-specs
 
 EXTRA_DIST = $(snippets_DATA) $(lang_DATA)

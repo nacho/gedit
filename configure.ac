@@ -350,6 +350,7 @@ plugins/sample/Makefile
 plugins/snippets/Makefile
 plugins/snippets/snippets/Makefile
 plugins/snippets/data/Makefile
+plugins/snippets/data/lang/Makefile
 plugins/sort/Makefile
 plugins/spell/Makefile
 plugins/taglist/Makefile

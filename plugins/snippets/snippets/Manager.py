@@ -50,12 +50,14 @@ class Manager:
         def __init__(self):
                 self.snippet = None
                 self.dlg = None
-                self.key_press_id = 0
                 self._temp_export = None
-                self.tooltips = gtk.Tooltips()
                 self.snippets_doc = None
-                self.run()
+                self.manager = None
 
+                self.key_press_id = 0
+                self.tooltips = gtk.Tooltips()
+                self.run()
+        
         def get_language_snippets(self, path, name = None):
                 library = Library()
                 
@@ -118,7 +120,7 @@ class Manager:
                 if not self.model or force_reload:
                         self.model = gtk.TreeStore(str, str, object)
                         self.model.set_sort_column_id(self.SORT_COLUMN, gtk.SORT_ASCENDING)
-                        manager = gedit.get_language_manager()
+                        manager = self.get_language_manager()
                         langs = gedit.language_manager_list_languages_sorted(manager, True)
                         
                         piter = self.model.append(None, (_('Global'), '', None))
@@ -274,6 +276,18 @@ class Manager:
                 selection.connect('changed', self.on_tree_view_selection_changed)
                 
                 self.build_dnd()
+        
+        def get_language_manager(self):
+                if not self.manager:
+                        dirs = []
+                
+                        for d in Library().systemdirs:
+                                dirs.append(os.path.join(d, 'lang'))
+                
+                        self.manager = gsv.LanguageManager()
+                        self.manager.set_search_path(dirs + self.manager.get_search_path())
+                
+                return self.manager
 
         def custom_handler(self, xml, function_name, widget_name, str1, str2, \
                         int1 , int2):
@@ -286,7 +300,7 @@ class Manager:
                         source_view.set_smart_home_end(gsv.SMART_HOME_END_AFTER)
                         source_view.set_tabs_width(4)
                         
-                        manager = gedit.get_language_manager()
+                        manager = self.get_language_manager()
                         lang = manager.get_language_by_id('snippets')
                         
                         if lang:
@@ -606,6 +620,8 @@ class Manager:
 
                 if self.snippets_doc:
                         self.snippets_doc.stop()
+                
+                self.manager = None
 
                 self.unref_languages()        
                 self.snippet = None        

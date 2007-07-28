@@ -1,3 +1,18 @@
+2007-07-27  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* configure.ac:
+	* plugins/snippets/data/Makefile.am:
+	* plugins/snippets/data/snippets.lang:
+	* plugins/snippets/data/lang/*
+	* plugins/snippets/snippets/Library.py:
+	* plugins/snippets/snippets/Manager.py:
+	
+	Let snippets manager use a custom GtkLanguageManager which adds
+	search paths for the snippets language file. Install snippets language
+	file in $prefix/share/gedit-2/plugins/snippets/lang instead of 
+	the gtksourceview language directory because it's private to the 
+	snippets plugin
+	
 2007-07-27  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-window.c:

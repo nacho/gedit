@@ -833,9 +833,6 @@ class Library(Singleton):
                         # Determine what language this file provides snippets for
                         if os.path.isfile(f):
                                 addcb(f)
-                        elif os.path.isdir(f) and not f in searched:
-                                # Recursion rules!
-                                searched = self.find_libraries(self, f, searched, addcb)
                 
                 return searched
         
