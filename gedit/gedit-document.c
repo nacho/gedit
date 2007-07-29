@@ -1189,7 +1189,7 @@ gedit_document_save_real (GeditDocument          *doc,
 	g_return_if_fail (doc->priv->saver == NULL);
 
 	/* create a saver, it will be destroyed once saving is complete */
-	doc->priv->saver = gedit_document_saver_new (doc);
+	doc->priv->saver = gedit_document_saver_new (doc, uri, encoding, flags);
 
 	g_signal_connect (doc->priv->saver,
 			  "saving",
@@ -1199,10 +1199,7 @@ gedit_document_save_real (GeditDocument          *doc,
 	doc->priv->requested_encoding = encoding;
 
 	gedit_document_saver_save (doc->priv->saver,
-				   uri,
-				   encoding,
-				   doc->priv->mtime,
-				   flags);
+				   doc->priv->mtime);
 }
 
 /**

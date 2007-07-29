@@ -63,7 +63,8 @@ enum
 {
 	PROP_0,
 	PROP_DOCUMENT,
-	PROP_URI
+	PROP_URI,
+	PROP_ENCODING,
 };
 
 static void
