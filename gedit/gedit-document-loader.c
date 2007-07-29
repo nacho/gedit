@@ -85,6 +85,10 @@ gedit_document_loader_set_property (GObject      *object,
 			g_return_if_fail (loader->uri == NULL);
 			loader->uri = g_value_dup_string (value);
 			break;
+		case PROP_ENCODING:
+			g_return_if_fail (loader->encoding == NULL);
+			loader->encoding = g_value_get_boxed (value);
+			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -106,6 +110,9 @@ gedit_document_loader_get_property (GObject    *object,
 			break;
 		case PROP_URI:
 			g_value_set_string (value, loader->uri);
+			break;
+		case PROP_ENCODING:
+			g_value_set_boxed (value, gedit_document_loader_get_encoding (loader));
 			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -135,20 +142,29 @@ gedit_document_loader_class_init (GeditDocumentLoaderClass *klass)
 	g_object_class_install_property (object_class,
 					 PROP_DOCUMENT,
 					 g_param_spec_object ("document",
-							 "Document",
-							 "The GeditDocument this GeditDocumentLoader is associated with",
-							 GEDIT_TYPE_DOCUMENT,
-							 G_PARAM_READWRITE |
-							 G_PARAM_CONSTRUCT_ONLY));
+							      "Document",
+							      "The GeditDocument this GeditDocumentLoader is associated with",
+							      GEDIT_TYPE_DOCUMENT,
+							      G_PARAM_READWRITE |
+							      G_PARAM_CONSTRUCT_ONLY));
 
 	g_object_class_install_property (object_class,
 					 PROP_URI,
 					 g_param_spec_string ("uri",
-							 "URI",
-							 "The URI this GeditDocumentLoader loads the document from",
-							 "",
-							 G_PARAM_READWRITE |
-							 G_PARAM_CONSTRUCT_ONLY));
+							      "URI",
+							      "The URI this GeditDocumentLoader loads the document from",
+							      "",
+							      G_PARAM_READWRITE |
+							      G_PARAM_CONSTRUCT_ONLY));
+
+	g_object_class_install_property (object_class,
+					 PROP_ENCODING,
+					 g_param_spec_boxed ("encoding",
+							     "Encoding",
+							     "The encoding of the saved file",
+							     GEDIT_TYPE_ENCODING,
+							     G_PARAM_READWRITE |
+							     G_PARAM_CONSTRUCT_ONLY));
 
 	signals[LOADING] =
 		g_signal_new ("loading",
@@ -354,14 +370,8 @@ gedit_document_loader_new (GeditDocument       *doc,
 	loader = GEDIT_DOCUMENT_LOADER (g_object_new (loader_type,
 						      "document", doc,
 						      "uri", uri,
+						      "encoding", encoding,
 						      NULL));
-
-	loader->encoding = encoding;
-
-	if (encoding == NULL)
-	{
-		loader->metadata_encoding = get_metadata_encoding (uri);
-	}
 
 	return loader;
 }
@@ -377,6 +387,9 @@ gedit_document_loader_load (GeditDocumentLoader *loader)
 	/* the loader can be used just once, then it must be thrown away */
 	g_return_if_fail (loader->used == FALSE);
 	loader->used = TRUE;
+
+	if (loader->encoding == NULL)
+		loader->metadata_encoding = get_metadata_encoding (loader->uri);
 
 	GEDIT_DOCUMENT_LOADER_GET_CLASS (loader)->load (loader);
 }
@@ -460,6 +473,6 @@ gedit_document_loader_get_encoding (GeditDocumentLoader *loader)
 
 	g_return_val_if_fail (loader->auto_detected_encoding != NULL, 
 			      gedit_encoding_get_current ());
-			  
+
 	return loader->auto_detected_encoding;
 }
