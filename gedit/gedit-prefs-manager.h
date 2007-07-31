@@ -87,8 +87,7 @@
 #define GPM_SEARCH_HIGHLIGHTING_DIR	GPM_PREFS_DIR "/editor/search_highlighting"
 #define GPM_SEARCH_HIGHLIGHTING_ENABLE	GPM_SEARCH_HIGHLIGHTING_DIR "/enable"
 
-// FIXME: Still have to add schemas
-#define GPM_SOURCE_STYLE_DIR		GPM_PREFS_DIR "/editor/source_style"
+#define GPM_SOURCE_STYLE_DIR		GPM_PREFS_DIR "/editor/colors"
 #define GPM_SOURCE_STYLE_SCHEME		GPM_SOURCE_STYLE_DIR "/scheme"
 
 /* UI */
@@ -203,7 +202,7 @@
 
 #define GPM_DEFAULT_SEARCH_HIGHLIGHTING_ENABLE 1 /* TRUE */
 
-#define GPM_DEFAULT_SOURCE_STYLE_SCHEME "gvim"
+#define GPM_DEFAULT_SOURCE_STYLE_SCHEME "classic"
 
 typedef enum {
 	GEDIT_TOOLBAR_SYSTEM = 0,
