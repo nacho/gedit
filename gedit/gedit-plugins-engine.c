@@ -339,9 +339,16 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 
 			/* Actually, the plugin will be activated when reactivate_all
 			 * will be called for the first time. */
-			info->active = (g_slist_find_custom (active_plugins,
-							     info->location,
-							     (GCompareFunc)strcmp) != NULL);
+			if (g_slist_find_custom (active_plugins,
+						 info->location,
+						 (GCompareFunc)strcmp) != NULL)
+			{
+				info->active = TRUE;
+			}
+			else
+			{
+				info->active = FALSE;
+			}
 
 			gedit_plugins_list = g_list_prepend (gedit_plugins_list, info);
 

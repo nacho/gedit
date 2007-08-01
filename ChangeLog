@@ -1,3 +1,8 @@
+2007-08-01  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit/gedit-plugins-engine.c: do not assign to a bitfield
+	the result of a pointer comparison. It seems some compilers
+	do not like it. reported by Rémi Cardona <remi@gentoo.org>.
 
 === gedit 2.19.3 ===
 
