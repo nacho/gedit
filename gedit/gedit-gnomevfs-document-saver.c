@@ -44,7 +44,6 @@
 
 static void		 gedit_gnomevfs_document_saver_save			(GeditDocumentSaver *saver,
 										 time_t              old_mtime);
-static gboolean		 gedit_gnomevfs_document_saver_cancel			(GeditDocumentSaver *saver);
 static const gchar 	*gedit_gnomevfs_document_saver_get_mime_type		(GeditDocumentSaver *saver);
 static time_t		 gedit_gnomevfs_document_saver_get_mtime		(GeditDocumentSaver *saver);
 static GnomeVFSFileSize	 gedit_gnomevfs_document_saver_get_file_size		(GeditDocumentSaver *saver);
