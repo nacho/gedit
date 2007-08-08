@@ -2245,10 +2245,8 @@ on_combo_changed (GtkComboBox * combo, GeditFileBrowserWidget * obj)
 	guint id;
 	gchar *uri;
 
-	if (!gtk_combo_box_get_active_iter (combo, &iter)) {
-		g_warning ("Could not get iter in combo!");
+	if (!gtk_combo_box_get_active_iter (combo, &iter))
 		return;
-	}
 
 	gtk_tree_model_get (GTK_TREE_MODEL (obj->priv->combo_model), &iter,
 			    COLUMN_ID, &id, -1);

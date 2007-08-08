@@ -1,3 +1,10 @@
+2007-08-08  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* plugins/filebrowser/gedit-file-browser-widget.c: removed the warning
+	when the path combobox changes the current selection when there is no
+	active iter (because this is not really an invalid case). Fixes bug
+	#460586
+
 2007-08-01  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-plugins-engine.c: do not assign to a bitfield
