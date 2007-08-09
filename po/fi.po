@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-06 16:33+0300\n"
+"POT-Creation-Date: 2007-08-09 07:25+0300\n"
 "PO-Revision-Date: 2007-03-05 18:02+0300\n"
 "Last-Translator: Lauri Nurmi <lanurmi@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -141,7 +141,7 @@ msgid ""
 "List of VFS schemes gedit supports in write mode. The 'file' scheme is "
 "writable by default."
 msgstr ""
-"Lista VFS-skeemoista, joille kirjoitusta gedit tukee. Skeema \"file\" on "
+"Luettelo VFS-malleista, joille kirjoitusta gedit tukee. Malli \"file\" on "
 "kirjoitettavissa oletuksena."
 
 #: ../data/gedit.schemas.in.h:26
@@ -404,9 +404,8 @@ msgid "Status Bar is Visible"
 msgstr "Tilarivi näytetään"
 
 #: ../data/gedit.schemas.in.h:79
-#, fuzzy
 msgid "Style Scheme"
-msgstr "Kirjoitettavat VFS-skeemat"
+msgstr "Tyylimalli"
 
 #: ../data/gedit.schemas.in.h:80
 msgid ""
@@ -430,7 +429,7 @@ msgstr "Sarkaimen koko"
 
 #: ../data/gedit.schemas.in.h:82
 msgid "The id of a GtkSourceView Style Scheme used to color the text."
-msgstr ""
+msgstr "Tekstin väritykseen käytetyn GtkSourceView-tyylimallin tunniste"
 
 #: ../data/gedit.schemas.in.h:83
 msgid "Toolbar Buttons Style"
@@ -548,7 +547,7 @@ msgstr ""
 
 #: ../data/gedit.schemas.in.h:105
 msgid "Writable VFS schemes"
-msgstr "Kirjoitettavat VFS-skeemat"
+msgstr "Kirjoitettavat VFS-mallit"
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
@@ -844,9 +843,9 @@ msgid "_Use the system fixed width font (%s)"
 msgstr "_Käytä järjestelmän tasalevyistä kirjasinta (%s)"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.c:749
-#, fuzzy, c-format
+#, c-format
 msgid "Could not remove the style scheme \"%s\""
-msgstr "Tiedoston \"%s\" palauttaminen levyltä epäonnistui"
+msgstr "Tyylimalllia \"%s\" ei voitu poistaa"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.c:979
 msgid "gedit Preferences"
@@ -881,9 +880,8 @@ msgid "<b>Tab Stops</b>"
 msgstr "<b>Sarkaimet</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:11
-#, fuzzy
 msgid "<span weight=\"bold\">Color Scheme</span>"
-msgstr "<span weight=\"bold\">Värit</span>"
+msgstr "<span weight=\"bold\">Värimalli</span>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:12
 msgid "Create a _backup copy of files before saving"
@@ -1006,7 +1004,7 @@ msgstr "Jatka _alusta"
 #: ../gedit/dialogs/gedit-style-scheme-dialog.c:117
 #: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:26
 msgid "gedit Style Scheme editor"
-msgstr ""
+msgstr "geditin tyylimallien muokkain"
 
 #: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:2
 msgid "<b>Elements</b>"
@@ -1023,7 +1021,7 @@ msgstr "Lihavoitu"
 
 #: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:5
 msgid "Color scheme _name:"
-msgstr ""
+msgstr "Värimallin _nimi:"
 
 #: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:6
 msgid "Cu_rrent line color:"
@@ -1038,14 +1036,12 @@ msgid "Pick the background color"
 msgstr "Valitse taustaväri"
 
 #: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:9
-#, fuzzy
 msgid "Pick the current line color"
-msgstr "Valitse valintaväri"
+msgstr "Valitse nykyisen rivin väri"
 
 #: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:10
-#, fuzzy
 msgid "Pick the foreground color"
-msgstr "Valitse taustaväri"
+msgstr "Valitse edustaväri"
 
 #: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:11
 msgid "Pick the normal text color"
@@ -1114,7 +1110,7 @@ msgstr "_Aseta oletukseksi"
 #: ../gedit/dialogs/gedit-style-scheme-generator.c:117
 #, c-format
 msgid "My %s"
-msgstr ""
+msgstr "Oma - %s"
 
 #: ../gedit/gedit.c:73
 msgid ""
@@ -3225,37 +3221,33 @@ msgstr "Käyttäjänimi"
 
 #: ../plugins/snippets/snippets.gedit-plugin.desktop.in.h:1
 msgid "Insert often used pieces of text in a fast way"
-msgstr "Lisää usein käytetettyjä tekstinpätkiä nopeasti"
+msgstr "Lisää usein käytetettyjä tekstileikkeitä nopeasti"
 
 #: ../plugins/snippets/snippets.gedit-plugin.desktop.in.h:2
 msgid "Snippets"
-msgstr "Tekstinpätkät"
+msgstr "Tekstileikkeet"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:2
 msgid "<b>Activation</b>"
 msgstr "<b>Aktivointi</b>"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:3
-#, fuzzy
 msgid "Create new snippet"
-msgstr "Luo uusi asiakirja"
+msgstr "Luo uusi tekstileike"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:4
 #: ../plugins/snippets/snippets/Manager.py:428
-#, fuzzy
 msgid "Delete selected snippet"
-msgstr "Tyhjennä valittu teksti"
+msgstr "Poista valittu tekstileike"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:5
-#, fuzzy
 msgid "Export selected snippets"
-msgstr "Sisennä valitut rivit"
+msgstr "Vie valitut tekstileikkeet"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:6
 #: ../plugins/snippets/snippets/Manager.py:806
-#, fuzzy
 msgid "Import snippets"
-msgstr "_Muokkaa tekstinpätkää:"
+msgstr "Tuo tekstileikkeitä"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:7
 msgid "S_hortcut key:"
@@ -3263,21 +3255,20 @@ msgstr "P_ikanäppäin:"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:8
 msgid "Shortcut key with which the snippet is activated"
-msgstr ""
+msgstr "Pikanäppäin, jolla tekstileike aktivoidaan"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:9
 #: ../plugins/snippets/snippets/Manager.py:697
 msgid "Single word with which the snippet is activated after pressing tab"
-msgstr ""
+msgstr "Sana, jonka jälkeen tekstileike aktivoidaan sarkaimen jälkeen"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:10
 msgid "Snippets Manager"
-msgstr "Tekstinpätkien hallinta"
+msgstr "Tekstileikkeiden hallinta"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:11
-#, fuzzy
 msgid "_Drop targets:"
-msgstr "Raamin kohde"
+msgstr "_Pudotuskohteet:"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:12
 msgid "_Edit:"
@@ -3285,7 +3276,7 @@ msgstr "_Muokkaa:"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:13
 msgid "_Snippets:"
-msgstr "_Tekstinpätkät:"
+msgstr "_Tekstileikkeet:"
 
 #. "tab" here means the tab key, not the notebook tab!
 #: ../plugins/snippets/snippets/snippets.glade.h:15
@@ -3294,29 +3285,27 @@ msgstr "_Tab-liipaisu:"
 
 #: ../plugins/snippets/snippets/WindowHelper.py:74
 msgid "Manage _Snippets..."
-msgstr "Hallitse _tekstinpätkiä..."
+msgstr "Hallitse _tekstileikkeitä..."
 
 #: ../plugins/snippets/snippets/WindowHelper.py:75
 msgid "Manage snippets"
-msgstr "Hallitse tekstinpätkiä"
+msgstr "Hallitse tekstileikkeitä"
 
 #: ../plugins/snippets/snippets/Manager.py:46
-#, fuzzy
 msgid "Snippets archive"
-msgstr "Tekstinpätkien hallinta"
+msgstr "Tekstileikearkisto"
 
 #: ../plugins/snippets/snippets/Manager.py:70
 msgid "Add a new snippet..."
-msgstr "Lisää uusi tekstinpätkä..."
+msgstr "Lisää uusi tekstileike..."
 
 #: ../plugins/snippets/snippets/Manager.py:120
 msgid "Global"
 msgstr "Kaikkialla"
 
 #: ../plugins/snippets/snippets/Manager.py:425
-#, fuzzy
 msgid "Revert selected snippet"
-msgstr "Tyhjennä valittu teksti"
+msgstr "Peru valittu tekstileike"
 
 #: ../plugins/snippets/snippets/Manager.py:692
 msgid ""
@@ -3327,13 +3316,13 @@ msgstr ""
 "kirjaimia tai yhden merkin, joka ei ole kirjasin, kuten {, [ tai |."
 
 #: ../plugins/snippets/snippets/Manager.py:785
-#, fuzzy, python-format
+#, python-format
 msgid "The following error occurred while importing: %s"
-msgstr "Virhe luotaessa uutta tiedostoa"
+msgstr "Seuraava virhe tapahtui tuotaessa tekstileikkeitä: %s"
 
 #: ../plugins/snippets/snippets/Manager.py:792
 msgid "Import succesfully completed"
-msgstr ""
+msgstr "Tuonti onnistui"
 
 #: ../plugins/snippets/snippets/Manager.py:811
 #: ../plugins/snippets/snippets/Manager.py:897
@@ -3354,9 +3343,8 @@ msgid "Bzip compressed archive"
 msgstr "Bzip-pakattu arkisto"
 
 #: ../plugins/snippets/snippets/Manager.py:814
-#, fuzzy
 msgid "Single snippets file"
-msgstr "Hallitse tekstinpätkiä"
+msgstr "Yksi tekstileiketiedosto"
 
 #: ../plugins/snippets/snippets/Manager.py:815
 #: ../plugins/snippets/snippets/Manager.py:901
@@ -3365,30 +3353,29 @@ msgid "All files"
 msgstr "Kaikki tiedostot"
 
 #: ../plugins/snippets/snippets/Manager.py:827
-#, fuzzy, python-format
+#, python-format
 msgid "The following error occurred while exporting: %s"
-msgstr "Virhe luotaessa uutta tiedostoa"
+msgstr "Seuraava virhe tapahtui vietäessä tekstileikkeitä: %s"
 
 #: ../plugins/snippets/snippets/Manager.py:831
 msgid "Export succesfully completed"
-msgstr ""
+msgstr "Vienti onnistui"
 
 #. Ask if system snippets should also be exported
 #: ../plugins/snippets/snippets/Manager.py:871
 #: ../plugins/snippets/snippets/Manager.py:938
 msgid "Do you want to include selected <b>system</b> snippets in your export?"
-msgstr ""
+msgstr "Haluatko viedä myös valitut <b>järjestelmän</b> tekstileikkeet?"
 
 #: ../plugins/snippets/snippets/Manager.py:886
 #: ../plugins/snippets/snippets/Manager.py:956
 msgid "There are no snippets selected to be exported"
-msgstr ""
+msgstr "Tekstileikkeitä ei ole valittu vietäväksi"
 
 #: ../plugins/snippets/snippets/Manager.py:891
 #: ../plugins/snippets/snippets/Manager.py:929
-#, fuzzy
 msgid "Export snippets"
-msgstr "_Muokkaa tekstinpätkää:"
+msgstr "Vie tekstileikkeitä"
 
 #: ../plugins/snippets/snippets/Manager.py:1068
 msgid "Type a new shortcut, or press Backspace to clear"
@@ -3401,49 +3388,49 @@ msgstr "Syötä uusi pikanäppäin"
 #: ../plugins/snippets/snippets/Exporter.py:65
 #, python-format
 msgid "The archive `%s` could not be created"
-msgstr ""
+msgstr "Arkistoa \"%s\" ei voitu luoda"
 
 #: ../plugins/snippets/snippets/Exporter.py:82
 #, python-format
 msgid "Target directory `%s` does not exist"
-msgstr ""
+msgstr "Kohdekansiota \"%s\" ei ole olemassa"
 
 #: ../plugins/snippets/snippets/Exporter.py:85
 #, python-format
 msgid "Target directory `%s` is not a valid directory"
-msgstr ""
+msgstr "Kohdekansio \"%s\" ei ole kelvollinen kansio"
 
 #: ../plugins/snippets/snippets/Importer.py:29
 #: ../plugins/snippets/snippets/Importer.py:83
 #, python-format
 msgid "File `%s` does not exist"
-msgstr ""
+msgstr "Tiedostoa \"%s\" ei ole olemassa"
 
 #: ../plugins/snippets/snippets/Importer.py:32
-#, fuzzy, python-format
+#, python-format
 msgid "File `%s` is not a valid snippets file"
-msgstr "\"%s\" ei ole kelvollinen sijainti."
+msgstr "Tiedosto \"%s\" ei ole kelvollinen tekstileiketiedosto"
 
 #: ../plugins/snippets/snippets/Importer.py:42
 #, python-format
 msgid "Imported file `%s` is not a valid snippets file"
-msgstr ""
+msgstr "Tuotu tiedosto \"%s\" ei ole kelvollinen tekstileiketiedosto"
 
 #: ../plugins/snippets/snippets/Importer.py:52
 #, python-format
 msgid "The archive `%s` could not be extracted"
-msgstr ""
+msgstr "Arkistoa \"%s\" ei voitu avata"
 
 #: ../plugins/snippets/snippets/Importer.py:70
 #, python-format
 msgid "The following files could not be imported: %s"
-msgstr ""
+msgstr "Seuraavia tiedostoja ei voitu tuoda: %s"
 
 #: ../plugins/snippets/snippets/Importer.py:86
 #: ../plugins/snippets/snippets/Importer.py:99
 #, python-format
 msgid "File `%s` is not a valid snippets archive"
-msgstr ""
+msgstr "Tiedosto \"%s\" ei ole kelvollinen tekstileikearkisto"
 
 #: ../plugins/snippets/snippets/Placeholder.py:549
 #, python-format
@@ -3460,7 +3447,7 @@ msgstr "Python-komennon (%s) suoritus epäonnistui: %s"
 
 #: ../plugins/snippets/snippets/Placeholder.py:563
 msgid "The following python code, run in a snippet, does not return a value"
-msgstr "Seuraava python-koodi, suoritettuna tekstinpätkstä, ei palauta arvoa"
+msgstr "Seuraava python-koodi, suoritettuna tekstileikkeessä, ei palauta arvoa"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -3898,7 +3885,7 @@ msgstr "Tietokonemuotoinen koodin osa"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Content scheme"
-msgstr "Sisällön kaavain"
+msgstr "Sisältömalli"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Content type"
