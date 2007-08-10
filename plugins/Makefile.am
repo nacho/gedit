@@ -1,9 +1,29 @@
-DIST_SUBDIRS = changecase docinfo filebrowser indent sample sort spell taglist time
+DIST_SUBDIRS =		\
+	changecase 	\
+	docinfo 	\
+	filebrowser 	\
+	indent 		\
+	modelines	\
+	sample 		\
+	sort 		\
+	spell 		\
+	taglist 	\
+	time
 
-SUBDIRS = changecase docinfo filebrowser indent sample sort taglist time $(SPELL_PLUGIN_DIR)
+SUBDIRS = 		\
+	changecase	\
+	docinfo		\
+	filebrowser	\
+	indent		\
+	modelines	\
+	sample		\
+	sort		\
+	taglist		\
+	time		\
+	$(SPELL_PLUGIN_DIR)
 
 if ENABLE_PYTHON
-DIST_SUBDIRS += externaltools modelines pythonconsole snippets
-SUBDIRS      += externaltools modelines pythonconsole snippets
+DIST_SUBDIRS += externaltools pythonconsole snippets
+SUBDIRS      += externaltools pythonconsole snippets
 endif
 
