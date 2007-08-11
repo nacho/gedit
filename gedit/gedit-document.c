@@ -1756,6 +1756,98 @@ _gedit_document_get_seconds_since_last_save_or_load (GeditDocument *doc)
 }
 
 static void
+get_search_match_colors (GeditDocument *doc,
+			 gboolean      *foreground_set,
+			 GdkColor      *foreground,
+			 gboolean      *background_set,
+			 GdkColor      *background)
+{
+	GtkSourceStyleScheme *style_scheme;
+	GtkSourceStyle *style;
+	gchar *bg;
+	gchar *fg;
+
+	style_scheme = gtk_source_buffer_get_style_scheme (GTK_SOURCE_BUFFER (doc));
+	if (style_scheme == NULL)
+		goto fallback;
+
+	style = gtk_source_style_scheme_get_style (style_scheme,
+						   "search-match");
+	if (style == NULL)
+		goto fallback;
+
+	g_object_get (style, 
+		      "foreground-set", foreground_set, 
+		      "foreground", &fg,
+		      "background-set", background_set, 
+		      "background", &bg,
+		      NULL);
+
+	if (*foreground_set)
+	{
+		if (fg == NULL ||
+		    !gdk_color_parse (fg, foreground))
+		{
+			*foreground_set = FALSE;
+		}
+	}
+
+	if (*background_set)
+	{
+		if (bg == NULL ||
+		    !gdk_color_parse (bg, background))
+		{
+			*background_set = FALSE;
+		}
+	}	
+
+	g_free (fg);
+	g_free (bg);
+
+	return;
+
+ fallback:
+	gedit_debug_message (DEBUG_DOCUMENT, 
+			     "Falling back to hard-coded colors "
+			     "for the \"found\" text tag.");
+
+	gdk_color_parse ("#FFFF78", background);
+	*background_set = TRUE;
+	*foreground_set = FALSE;
+
+	return;
+}
+
+static void
+sync_found_tag (GeditDocument *doc,
+		GParamSpec    *pspec,
+		gpointer       data)
+{
+	GdkColor fg;
+	GdkColor bg;
+	gboolean fg_set;
+	gboolean bg_set;
+
+	gedit_debug (DEBUG_DOCUMENT);
+
+	g_return_if_fail (GTK_TEXT_TAG (doc->priv->found_tag));
+
+	get_search_match_colors (doc,
+				 &fg_set, &fg,
+				 &bg_set, &bg);
+
+	if (fg_set)
+		g_object_set (doc->priv->found_tag,
+			      "foreground-gdk", &fg,
+			      NULL);
+
+	if (bg_set)
+		g_object_set (doc->priv->found_tag,
+			      "background-gdk", &bg,
+			      NULL);
+}
+
+static void
 search_region (GeditDocument *doc,
 	       GtkTextIter   *start,
 	       GtkTextIter   *end)
@@ -1774,12 +1866,16 @@ search_region (GeditDocument *doc,
 	
 	if (doc->priv->found_tag == NULL)
 	{
-		/* FIXME: the colors are hardcoded */
 		doc->priv->found_tag = gtk_text_buffer_create_tag (GTK_TEXT_BUFFER (doc), 
 								   "found",
-								   "background", "#FFFF78",
-								   //"foreground", "black",
 								   NULL);
+
+		sync_found_tag (doc, NULL, NULL);
+
+		g_signal_connect (doc, 
+				  "notify::style-scheme",
+				  G_CALLBACK (sync_found_tag),
+				  NULL);
 	}
 
 	if (doc->priv->search_text == NULL)
