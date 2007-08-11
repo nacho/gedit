@@ -1848,6 +1848,18 @@ sync_found_tag (GeditDocument *doc,
 }
 
 static void
+text_tag_set_highest_priority (GtkTextTag    *tag,
+			       GtkTextBuffer *buffer)
+{
+	GtkTextTagTable *table;
+	gint n;
+
+	table = gtk_text_buffer_get_tag_table (buffer);
+	n = gtk_text_tag_table_get_size (table);
+	gtk_text_tag_set_priority (tag, n - 1);
+}
+
+static void
 search_region (GeditDocument *doc,
 	       GtkTextIter   *start,
 	       GtkTextIter   *end)
@@ -1877,6 +1889,12 @@ search_region (GeditDocument *doc,
 				  G_CALLBACK (sync_found_tag),
 				  NULL);
 	}
+
+	/* make sure the 'found' tag has the priority over
+	 * syntax highlighting tags */
+	text_tag_set_highest_priority (doc->priv->found_tag,
+				       GTK_TEXT_BUFFER (doc));
+				   
 
 	if (doc->priv->search_text == NULL)
 		return;
