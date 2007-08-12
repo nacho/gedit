@@ -319,7 +319,7 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 				NULL);
 				
 	/* HIG defaults */
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)), 5);
+	gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2); /* 2 * 5 + 2 = 12 */
 	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), 5);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);
