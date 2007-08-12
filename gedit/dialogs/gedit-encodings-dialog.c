@@ -315,6 +315,12 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 	gtk_window_set_title (GTK_WINDOW (dlg), _("Character Codings"));
 	gtk_window_set_default_size (GTK_WINDOW (dlg), 650, 400);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
+	
+	/* HIG defaults */
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2); /* 2 * 5 + 2 = 12 */
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);	
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dlg),
 					 GTK_RESPONSE_OK);
@@ -340,12 +346,14 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 
 		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 					     error_widget);
+		gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);			     
 
 		return;
 	}
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 			    content, TRUE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (content), 5);			     
 
 	g_signal_connect (dlg->priv->add_button,
 			  "clicked",

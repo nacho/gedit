@@ -980,6 +980,12 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
+	
+	/* HIG defaults */
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2); /* 2 * 5 + 2 = 12 */
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);	
 
 	g_signal_connect (dlg,
 			  "response",
@@ -987,8 +993,7 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 			  NULL);
 
 	dlg->priv->tooltips = gtk_tooltips_new ();
-	g_object_ref (dlg->priv->tooltips);
-	gtk_object_sink (GTK_OBJECT (dlg->priv->tooltips));
+	g_object_ref_sink (dlg->priv->tooltips);
 
 	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "gedit-preferences-dialog.glade",
 		"notebook",
@@ -1027,7 +1032,7 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 		"edit_scheme_button", &dlg->priv->edit_scheme_button,
 
 		"plugin_manager_place_holder", &dlg->priv->plugin_manager_place_holder,
-		NULL);
+		NULL);	
 
 	if (!ret)
 	{
@@ -1035,12 +1040,14 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 			
 		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 					     error_widget);
+		gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);			     
 
 		return;
 	}
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 			    dlg->priv->notebook, FALSE, FALSE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);		    
 
 	setup_editor_page (dlg);
 	setup_view_page (dlg);

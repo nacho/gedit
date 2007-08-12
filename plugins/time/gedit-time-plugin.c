@@ -814,6 +814,12 @@ get_configure_dialog (GeditTimePlugin *plugin)
 						      GTK_RESPONSE_HELP,
 						      NULL);
 						      
+	/* HIG defaults */
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog->dialog)), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox), 2); /* 2 * 5 + 2 = 12 */
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog->dialog)->action_area), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog->dialog)->action_area), 6);						      
+						      
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
 						      
 	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "time.glade2",
@@ -833,6 +839,7 @@ get_configure_dialog (GeditTimePlugin *plugin)
 	{
 		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
 					     error_widget);
+		gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);			     
 
 		gtk_widget_show (error_widget);
 
@@ -885,6 +892,7 @@ get_configure_dialog (GeditTimePlugin *plugin)
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
 			    content, FALSE, FALSE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (content), 5);		     			    
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
 					 GTK_RESPONSE_OK);

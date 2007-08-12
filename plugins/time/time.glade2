@@ -347,6 +347,7 @@
 </widget>
 
 <widget class="GtkDialog" id="choose_format_dialog">
+  <property name="border_width">5</property>
   <property name="title" translatable="yes">Insert Date and Time</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -359,7 +360,7 @@
     <widget class="GtkVBox" id="dialog-vbox2">
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
-      <property name="spacing">0</property>
+      <property name="spacing">2</property>
 
       <child internal-child="action_area">
 	<widget class="GtkHButtonBox" id="dialog-action_area2">
@@ -466,7 +467,7 @@
 
       <child>
 	<widget class="GtkVBox" id="vbox7">
-	  <property name="border_width">10</property>
+	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">6</property>

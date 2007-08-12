@@ -528,6 +528,12 @@ gedit_page_setup_dialog_init (GeditPageSetupDialog *dlg)
 	gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
+	
+	/* HIG defaults */
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2); /* 2 * 5 + 2 = 12 */
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);		
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dlg),
 					 GTK_RESPONSE_CLOSE);
@@ -561,12 +567,14 @@ gedit_page_setup_dialog_init (GeditPageSetupDialog *dlg)
 			
 		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 					     error_widget);
+		gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);			     
 
 		return;
 	}
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 			    content, FALSE, FALSE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (content), 5);			     
 
 	setup_general_page (dlg);
 	setup_font_page (dlg);

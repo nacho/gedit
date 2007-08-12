@@ -317,6 +317,12 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 	gtk_dialog_add_buttons (GTK_DIALOG (dlg),
 				GTK_STOCK_CLOSE, GTK_RESPONSE_CANCEL,
 				NULL);
+				
+	/* HIG defaults */
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2); /* 2 * 5 + 2 = 12 */
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), 5);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);
 
 	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "gedit-search-dialog.glade",
 					     "search_dialog_content",
@@ -337,6 +343,7 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 
 		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 					     error_widget);
+		gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);					     
 
 		dlg->priv->glade_error = TRUE;
 
@@ -405,6 +412,7 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 			    content, FALSE, FALSE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (content), 5);	     
 
 	g_signal_connect (dlg->priv->search_text_entry,
 			  "insert_text",
