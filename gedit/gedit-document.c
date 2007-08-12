@@ -98,6 +98,7 @@ struct _GeditDocumentPrivate
 	gint	     last_save_was_manually : 1; 	
 	gint	     language_set_by_user : 1;
 	gint         stop_cursor_moved_emission : 1;
+	gint         dispose_has_run : 1;
 
 	gchar	    *uri;
 	gint 	     untitled_number;
@@ -205,19 +206,17 @@ release_untitled_number (gint n)
 }
 
 static void
-gedit_document_finalize (GObject *object)
+gedit_document_dispose (GObject *object)
 {
 	GeditDocument *doc = GEDIT_DOCUMENT (object); 
-	
+
 	gedit_debug (DEBUG_DOCUMENT);
 
-	if (doc->priv->untitled_number > 0)
-	{
-		g_return_if_fail (doc->priv->uri == NULL);
-		release_untitled_number (doc->priv->untitled_number);
-	}
-
-	if (doc->priv->uri != NULL)
+	/* Metadata must be saved here and not in finalize
+	 * because the language is gone by the time finalize runs.
+	 * beside if some plugin prevents proper finalization by
+	 * holding a ref to the doc, we still save the metadata */
+	if ((!doc->priv->dispose_has_run) && (doc->priv->uri != NULL))
 	{
 		GtkTextIter iter;
 		gchar *position;
@@ -247,17 +246,37 @@ gedit_document_finalize (GObject *object)
 		}
 	}
 
+	if (doc->priv->loader)
+	{
+		g_object_unref (doc->priv->loader);
+		doc->priv->loader = NULL;
+	}
+
+	doc->priv->dispose_has_run = TRUE;
+
+	G_OBJECT_CLASS (gedit_document_parent_class)->dispose (object);
+}
+
+static void
+gedit_document_finalize (GObject *object)
+{
+	GeditDocument *doc = GEDIT_DOCUMENT (object); 
+
+	gedit_debug (DEBUG_DOCUMENT);
+
+	if (doc->priv->untitled_number > 0)
+	{
+		g_return_if_fail (doc->priv->uri == NULL);
+		release_untitled_number (doc->priv->untitled_number);
+	}
+
 	g_free (doc->priv->uri);
 	if (doc->priv->vfs_uri != NULL)
 		gnome_vfs_uri_unref (doc->priv->vfs_uri);
 
 	g_free (doc->priv->mime_type);
-
-	if (doc->priv->loader)
-		g_object_unref (doc->priv->loader);
-
 	g_free (doc->priv->search_text);
-	
+
 	if (doc->priv->to_search_region != NULL)
 	{
 		/* we can't delete marks if we're finalizing the buffer */
@@ -366,6 +385,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GtkTextBufferClass *buf_class = GTK_TEXT_BUFFER_CLASS (klass);
 
+	object_class->dispose = gedit_document_dispose;
 	object_class->finalize = gedit_document_finalize;
 	object_class->get_property = gedit_document_get_property;
 	object_class->set_property = gedit_document_set_property;	
@@ -605,6 +625,8 @@ gedit_document_init (GeditDocument *doc)
 
 	doc->priv->last_save_was_manually = TRUE;
 	doc->priv->language_set_by_user = FALSE;
+
+	doc->priv->dispose_has_run = FALSE;
 
 	doc->priv->mtime = 0;
 

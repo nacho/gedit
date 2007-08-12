@@ -1,5 +1,10 @@
 2007-08-12  Paolo Borelli  <pborelli@katamail.com>
 
+	* gedit/gedit-document.c: save the metadata in ::dispose()
+	so that we have a valid language. Fixes bug #464382.
+
+2007-08-12  Paolo Borelli  <pborelli@katamail.com>
+
 	* gedit/gedit-io-error-message-area.c: avoid conflicting
 	accelerators. Patch by Patrick Wade, bug #444909.
 
