@@ -617,6 +617,63 @@ panel_popup_menu (GtkWidget           *treeview,
 	return FALSE;
 }
 
+static gboolean
+treeview_query_tooltip (GtkWidget  *widget,
+			gint        x,
+			gint        y,
+			gboolean    keyboard_tip,
+			GtkTooltip *tooltip,
+			gpointer    data)
+{
+	GtkTreeIter iter;
+	GtkTreeView *tree_view = GTK_TREE_VIEW (widget);
+	GtkTreeModel *model = gtk_tree_view_get_model (tree_view);
+	GtkTreePath *path = NULL;
+	gpointer *tab;
+	gchar *tip;
+
+	if (keyboard_tip)
+	{
+		gtk_tree_view_get_cursor (tree_view, &path, NULL);
+
+		if (path == NULL)
+		{
+			return FALSE;
+		}
+	}
+	else
+	{
+		gint bin_x, bin_y;
+
+		gtk_tree_view_convert_widget_to_bin_window_coords (tree_view,
+								   x, y,
+								   &bin_x, &bin_y);
+      
+		if (!gtk_tree_view_get_path_at_pos (tree_view,
+						    bin_x, bin_y,
+						    &path,
+						    NULL, NULL, NULL))
+		{
+			return FALSE;
+		}
+	}
+
+	gtk_tree_model_get_iter (model, &iter, path);
+	gtk_tree_model_get (model, 
+			    &iter, 
+			    2, 
+			    &tab, 
+			    -1);
+
+	tip = _gedit_tab_get_tooltips (GEDIT_TAB (tab));
+	gtk_tooltip_set_markup (tooltip, tip);
+
+	g_free (tip);
+	gtk_tree_path_free (path);
+
+	return TRUE;
+}
+
 static void
 treeview_row_inserted (GtkTreeModel        *tree_model,
 		       GtkTreePath         *path,
@@ -693,7 +750,9 @@ gedit_documents_panel_init (GeditDocumentsPanel *panel)
   	gtk_container_add (GTK_CONTAINER (sw), panel->priv->treeview);
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (panel->priv->treeview), FALSE);
 	gtk_tree_view_set_reorderable (GTK_TREE_VIEW (panel->priv->treeview), TRUE);
-	
+
+	g_object_set (panel->priv->treeview, "has-tooltip", TRUE, NULL);
+
 	gtk_widget_show (panel->priv->treeview);
 	
 	column = gtk_tree_view_column_new ();
@@ -726,6 +785,10 @@ gedit_documents_panel_init (GeditDocumentsPanel *panel)
 			  "popup-menu",
 			  G_CALLBACK (panel_popup_menu),
 			  panel);
+  	g_signal_connect (panel->priv->treeview,
+			  "query-tooltip",
+			  G_CALLBACK (treeview_query_tooltip),
+			  NULL);
 
 	g_signal_connect (panel->priv->model, 
 			  "row-inserted",
