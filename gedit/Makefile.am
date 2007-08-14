@@ -52,7 +52,6 @@ BUILT_SOURCES = 			\
 
 NOINST_H_FILES =			\
 	gedit-commands.h		\
-	gedit-tooltips.h		\
 	gedit-language-manager.h	\
 	gedit-source-style-manager.h	\
 	gedit-plugin-manager.h		\
@@ -159,7 +158,6 @@ libgedit_la_SOURCES = 			\
 	gedit-statusbar.c		\
 	gedit-source-style-manager.c	\
 	gedit-tab.c 			\
-	gedit-tooltips.c		\
 	gedit-utils.c 			\
 	gedit-view.c 			\
 	gedit-window.c			\

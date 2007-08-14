@@ -760,11 +760,9 @@ create_toplevel (GeditPrintJobPreview *mp)
 	mp->priv->page_entry = gtk_entry_new ();
 	gtk_entry_set_width_chars (GTK_ENTRY (mp->priv->page_entry), 3);
 	gtk_entry_set_max_length (GTK_ENTRY (mp->priv->page_entry), 6);
-	gtk_tooltips_set_tip (GTK_TOOLBAR (tb)->tooltips,
-	                      mp->priv->page_entry,
-	                      _("Current page (Alt+P)"),
-	                      NULL);
-	                      
+	gtk_widget_set_tooltip_text (mp->priv->page_entry,
+	                             _("Current page (Alt+P)"));
+
 	g_signal_connect (G_OBJECT (mp->priv->page_entry), "activate", 
 			  G_CALLBACK (change_page_cmd), mp);
 	g_signal_connect (G_OBJECT (mp->priv->page_entry), "insert_text",

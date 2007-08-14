@@ -55,7 +55,6 @@
 #include "gedit-notebook.h"
 #include "gedit-marshal.h"
 #include "gedit-window.h"
-#include "gedit-tooltips.h"
 #include "gedit-spinner.h"
 
 #define AFTER_ALL_TABS -1
@@ -66,7 +65,6 @@
 struct _GeditNotebookPrivate
 {
 	GList         *focused_pages;
-	GeditTooltips *title_tips;
 	gulong         motion_notify_handler_id;
 	gint           x_start;
 	gint           y_start;
@@ -665,9 +663,6 @@ gedit_notebook_init (GeditNotebook *notebook)
 	gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 
-	notebook->priv->title_tips = gedit_tooltips_new ();
-	g_object_ref_sink (notebook->priv->title_tips);
-
 	notebook->priv->always_show_tabs = TRUE;
 
 	g_signal_connect (notebook, 
@@ -694,8 +689,6 @@ gedit_notebook_finalize (GObject *object)
 
 	if (notebook->priv->focused_pages)
 		g_list_free (notebook->priv->focused_pages);
-		
-	g_object_unref (notebook->priv->title_tips);
 
 	G_OBJECT_CLASS (gedit_notebook_parent_class)->finalize (object);
 }
@@ -708,12 +701,10 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GtkWidget *hbox)
 	GtkWidget *ebox;
 	GtkWidget *button;
 	GtkWidget *spinner;
-	GeditTooltips *tips;	
 	gchar *str;
 	GtkImage *icon;
 	GeditTabState  state;
 	
-	tips = GEDIT_TOOLTIPS (g_object_get_data (G_OBJECT (hbox), "tooltips"));
 	label = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label"));
 	ebox = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label-ebox"));
 	icon = GTK_IMAGE (g_object_get_data (G_OBJECT (hbox), "icon"));
@@ -722,9 +713,8 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GtkWidget *hbox)
 
 	nb = GEDIT_NOTEBOOK (gtk_widget_get_parent (GTK_WIDGET (tab)));
 
-	g_return_if_fail ((tips    != NULL) && 
-			  (label   != NULL) && 
-			  (ebox    != NULL) && 
+	g_return_if_fail ((label   != NULL) &&
+			  (ebox    != NULL) &&
 			  (button  != NULL) &&
 			  (icon    != NULL) &&
 			  (spinner != NULL) &&
@@ -739,7 +729,7 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GtkWidget *hbox)
 	str = _gedit_tab_get_tooltips (tab);
 	g_return_if_fail (str != NULL);
 	
-	gedit_tooltips_set_tip (tips, ebox, str, NULL);
+	gtk_widget_set_tooltip_markup (ebox, str);
 	g_free (str);
 		
 	state = gedit_tab_get_state (tab);
@@ -841,8 +831,7 @@ build_tab_label (GeditNotebook *nb,
 	gtk_container_add (GTK_CONTAINER (close_button), image);
 	gtk_box_pack_start (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
 
-	gedit_tooltips_set_tip (nb->priv->title_tips, close_button,
-			      _("Close document"), NULL);
+	gtk_widget_set_tooltip_text (close_button, _("Close document"));
 
 	g_signal_connect (close_button,
 			  "clicked",
@@ -886,7 +875,6 @@ build_tab_label (GeditNotebook *nb,
 	g_object_set_data (G_OBJECT (hbox), "icon", icon);
 	g_object_set_data (G_OBJECT (hbox), "close-button", close_button);
 	g_object_set_data (G_OBJECT (tab), "close-button", close_button);
-	g_object_set_data (G_OBJECT (hbox), "tooltips", nb->priv->title_tips);
 
 	return hbox;
 }
@@ -995,10 +983,6 @@ remove_tab (GeditTab      *tab,
 
 	label = gtk_notebook_get_tab_label (GTK_NOTEBOOK (nb), GTK_WIDGET (tab));
 	ebox = GTK_WIDGET (g_object_get_data (G_OBJECT (label), "label-ebox"));
-	gedit_tooltips_set_tip (GEDIT_TOOLTIPS (nb->priv->title_tips), 
-			        ebox, 
-			        NULL, 
-			        NULL);
 
 	g_signal_handlers_disconnect_by_func (tab,
 					      G_CALLBACK (sync_name), 

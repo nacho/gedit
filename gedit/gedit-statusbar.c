@@ -16,14 +16,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307, USA.
  */
- 
+
 /*
- * Modified by the gedit Team, 2005. See the AUTHORS file for a 
- * list of people on the gedit Team.  
- * See the ChangeLog files for a list of changes. 
+ * Modified by the gedit Team, 2005. See the AUTHORS file for a
+ * list of people on the gedit Team.
+ * See the ChangeLog files for a list of changes.
  *
  * $Id$
  */
@@ -37,7 +37,6 @@
 #include <gtk/gtk.h>
 
 #include "gedit-statusbar.h"
-#include "gedit-tooltips.h"
 
 #define GEDIT_STATUSBAR_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_STATUSBAR, GeditStatusbarPrivate))
 
@@ -45,16 +44,14 @@ struct _GeditStatusbarPrivate
 {
 	GtkWidget     *overwrite_mode_statusbar;
 	GtkWidget     *cursor_position_statusbar;
-	
+
 	GtkWidget     *state_frame;
 	GtkWidget     *load_image;
 	GtkWidget     *save_image;
 	GtkWidget     *print_image;
-	
+
 	GtkWidget     *error_frame;
 	GtkWidget     *error_event_box;
-
-	GeditTooltips *tooltips;
 
 	/* tmp flash timeout data */
 	guint          flash_timeout;
@@ -86,8 +83,6 @@ gedit_statusbar_finalize (GObject *object)
 {
 	GeditStatusbar *statusbar = GEDIT_STATUSBAR (object);
 
-	g_object_unref (statusbar->priv->tooltips);
-
 	if (statusbar->priv->flash_timeout > 0)
 		g_source_remove (statusbar->priv->flash_timeout);
 
@@ -117,8 +112,8 @@ gedit_statusbar_init (GeditStatusbar *statusbar)
 
 	statusbar->priv->overwrite_mode_statusbar = gtk_statusbar_new ();
 	gtk_widget_show (statusbar->priv->overwrite_mode_statusbar);
-	gtk_widget_set_size_request (statusbar->priv->overwrite_mode_statusbar, 
-				     80, 
+	gtk_widget_set_size_request (statusbar->priv->overwrite_mode_statusbar,
+				     80,
 				     10);
 
 	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (statusbar->priv->overwrite_mode_statusbar),
@@ -128,9 +123,9 @@ gedit_statusbar_init (GeditStatusbar *statusbar)
 			  FALSE, TRUE, 0);
 
 	statusbar->priv->cursor_position_statusbar = gtk_statusbar_new ();
-	gtk_widget_show (statusbar->priv->cursor_position_statusbar);	
-	gtk_widget_set_size_request (statusbar->priv->cursor_position_statusbar, 
-				     160, 
+	gtk_widget_show (statusbar->priv->cursor_position_statusbar);
+	gtk_widget_set_size_request (statusbar->priv->cursor_position_statusbar,
+				     160,
 				     10);
 	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (statusbar->priv->cursor_position_statusbar),
 					   FALSE);
@@ -141,7 +136,7 @@ gedit_statusbar_init (GeditStatusbar *statusbar)
 	statusbar->priv->state_frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (statusbar->priv->state_frame), GTK_SHADOW_IN);
 
-	hbox = gtk_hbox_new (FALSE, 0);	
+	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_container_add (GTK_CONTAINER (statusbar->priv->state_frame), hbox);
 
 	statusbar->priv->load_image = gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU);
@@ -177,8 +172,8 @@ gedit_statusbar_init (GeditStatusbar *statusbar)
 	gtk_widget_show (statusbar->priv->error_event_box);
 
 	gtk_container_add (GTK_CONTAINER (statusbar->priv->error_frame),
-			   statusbar->priv->error_event_box);		    
-	gtk_container_add (GTK_CONTAINER (statusbar->priv->error_event_box), 
+			   statusbar->priv->error_event_box);
+	gtk_container_add (GTK_CONTAINER (statusbar->priv->error_event_box),
 			   error_image);
 
 	gtk_box_pack_start (GTK_BOX (statusbar),
@@ -188,16 +183,13 @@ gedit_statusbar_init (GeditStatusbar *statusbar)
 	gtk_box_reorder_child (GTK_BOX (statusbar),
 			       statusbar->priv->error_frame,
 			       0);
-
-	statusbar->priv->tooltips = gedit_tooltips_new ();
-	g_object_ref_sink (statusbar->priv->tooltips);
 }
 
 /**
  * gedit_statusbar_new:
- * 
+ *
  * Creates a new #GeditStatusbar.
- * 
+ *
  * Return value: the new #GeditStatusbar object
  **/
 GtkWidget *
@@ -210,9 +202,9 @@ gedit_statusbar_new (void)
  * gedit_set_has_resize_grip:
  * @statusbar: a #GeditStatusbar
  * @show: if the resize grip is shown
- * 
+ *
  * Sets if a resize grip showld be shown.
- * 
+ *
  **/
  /*
   * I don't like this much, in a perfect world it would have been
@@ -220,7 +212,7 @@ gedit_statusbar_new (void)
   * gtk_statusbar_set_has_resize_grip. Unfortunately this is not
   * possible and it's not even possible to intercept the notify signal
   * since the parent property should always be set to false thus when
-  * using set_resize_grip (FALSE) the property doesn't change and the 
+  * using set_resize_grip (FALSE) the property doesn't change and the
   * notification is not emitted.
   * For now just add this private method; if needed we can turn it into
   * a property.
@@ -250,7 +242,7 @@ gedit_statusbar_set_overwrite (GeditStatusbar *statusbar,
 
 	g_return_if_fail (GEDIT_IS_STATUSBAR (statusbar));
 
-	gtk_statusbar_pop (GTK_STATUSBAR (statusbar->priv->overwrite_mode_statusbar), 0); 
+	gtk_statusbar_pop (GTK_STATUSBAR (statusbar->priv->overwrite_mode_statusbar), 0);
 
 	if (overwrite)
 		msg = g_strdup (_("  OVR"));
@@ -267,7 +259,7 @@ gedit_statusbar_clear_overwrite (GeditStatusbar *statusbar)
 {
 	g_return_if_fail (GEDIT_IS_STATUSBAR (statusbar));
 
-	gtk_statusbar_pop (GTK_STATUSBAR (statusbar->priv->overwrite_mode_statusbar), 0); 
+	gtk_statusbar_pop (GTK_STATUSBAR (statusbar->priv->overwrite_mode_statusbar), 0);
 }
 
 /**
@@ -287,11 +279,11 @@ gedit_statusbar_set_cursor_position (GeditStatusbar *statusbar,
 
 	g_return_if_fail (GEDIT_IS_STATUSBAR (statusbar));
 
-	gtk_statusbar_pop (GTK_STATUSBAR (statusbar->priv->cursor_position_statusbar), 0); 
+	gtk_statusbar_pop (GTK_STATUSBAR (statusbar->priv->cursor_position_statusbar), 0);
 
 	if ((line == -1) && (col == -1))
 		return;
-		
+
 	/* Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 	use abbreviations if possible to avoid space problems. */
 	msg = g_strdup_printf (_("  Ln %d, Col %d"), line, col);
@@ -360,18 +352,18 @@ gedit_statusbar_flash_message (GeditStatusbar *statusbar,
 	g_free (msg);
 }
 
-void		 
+void
 gedit_statusbar_set_window_state (GeditStatusbar   *statusbar,
 				  GeditWindowState  state,
 				  gint              num_of_errors)
 {
 	g_return_if_fail (GEDIT_IS_STATUSBAR (statusbar));
-	
+
 	gtk_widget_hide (statusbar->priv->state_frame);
 	gtk_widget_hide (statusbar->priv->save_image);
 	gtk_widget_hide (statusbar->priv->load_image);
-	gtk_widget_hide (statusbar->priv->print_image);			
-	
+	gtk_widget_hide (statusbar->priv->print_image);
+
 	if (state & GEDIT_WINDOW_STATE_SAVING)
 	{
 		gtk_widget_show (statusbar->priv->state_frame);
@@ -382,33 +374,32 @@ gedit_statusbar_set_window_state (GeditStatusbar   *statusbar,
 		gtk_widget_show (statusbar->priv->state_frame);
 		gtk_widget_show (statusbar->priv->load_image);
 	}
-	
+
 	if (state & GEDIT_WINDOW_STATE_PRINTING)
 	{
 		gtk_widget_show (statusbar->priv->state_frame);
 		gtk_widget_show (statusbar->priv->print_image);
 	}
-	
+
 	if (state & GEDIT_WINDOW_STATE_ERROR)
 	{
 	 	gchar *tip;
-	 	
+
  		tip = g_strdup_printf (ngettext("There is a tab with errors",
 						"There are %d tabs with errors",
 						num_of_errors),
 			       		num_of_errors);
-				       
-		gedit_tooltips_set_tip (statusbar->priv->tooltips,
-					statusbar->priv->error_event_box,
-					tip,
-					NULL);
-					
+
+		gtk_widget_set_tooltip_text (statusbar->priv->error_event_box,
+					     tip);
 		g_free (tip);
-					
+
 		gtk_widget_show (statusbar->priv->error_frame);
 	}
 	else
+	{
 		gtk_widget_hide (statusbar->priv->error_frame);
+	}
 }
 
 

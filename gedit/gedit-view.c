@@ -68,8 +68,6 @@ enum
 
 struct _GeditViewPrivate
 {
-	GtkTooltips *tooltips;
-
 	/* idle hack to make open-at-line work */
 	guint        scroll_idle;
 	
@@ -372,9 +370,6 @@ gedit_view_finalize (GObject *object)
 	view = GEDIT_VIEW (object);
 
 	g_free (view->priv->old_search_text);
-	
-	if (view->priv->tooltips != NULL)
-		g_object_unref (view->priv->tooltips);
 
 	(* G_OBJECT_CLASS (gedit_view_parent_class)->finalize) (object);
 }
@@ -1236,21 +1231,17 @@ customize_for_search_mode (GeditView *view)
 	{
 		icon = gtk_image_new_from_stock (GTK_STOCK_FIND,
 						 GTK_ICON_SIZE_MENU);
-		
-		gtk_tooltips_set_tip (view->priv->tooltips,
-				      view->priv->search_entry,
-				      _("String you want to search for"),
-				      NULL);
+
+		gtk_widget_set_tooltip_text (view->priv->search_entry,
+					     _("String you want to search for"));
 	}
 	else
 	{
 		icon = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO,
 						 GTK_ICON_SIZE_MENU);
-		
-		gtk_tooltips_set_tip (view->priv->tooltips,
-				      view->priv->search_entry,
-				      _("Line you want to move the cursor to"),
-				      NULL);
+
+		gtk_widget_set_tooltip_text (view->priv->search_entry,
+					     _("Line you want to move the cursor to"));
 	}
 
 	gtk_widget_show (icon);
@@ -1429,9 +1420,6 @@ ensure_search_window (GeditView *view)
 	g_object_unref (completion);
 
 	gtk_widget_realize (view->priv->search_entry);
-
-	view->priv->tooltips = gtk_tooltips_new ();
-	g_object_ref_sink (view->priv->tooltips);
 
 	customize_for_search_mode (view);	
 }

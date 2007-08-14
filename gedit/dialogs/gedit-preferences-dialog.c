@@ -78,8 +78,6 @@ enum
 
 struct _GeditPreferencesDialogPrivate
 {
-	GtkTooltips	*tooltips;
-
 	GtkWidget	*notebook;
 
 	/* Font */
@@ -137,21 +135,11 @@ struct _GeditPreferencesDialogPrivate
 G_DEFINE_TYPE(GeditPreferencesDialog, gedit_preferences_dialog, GTK_TYPE_DIALOG)
 
 
-static void
-gedit_preferences_dialog_finalize (GObject *object)
-{
-	GeditPreferencesDialog *dialog = GEDIT_PREFERENCES_DIALOG(object);
-
-	g_object_unref (dialog->priv->tooltips);
-	G_OBJECT_CLASS (gedit_preferences_dialog_parent_class)->finalize (object);
-}
-
 static void 
 gedit_preferences_dialog_class_init (GeditPreferencesDialogClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	object_class->finalize = gedit_preferences_dialog_finalize;
 	g_type_class_add_private (object_class, sizeof (GeditPreferencesDialogPrivate));
 }
 
@@ -579,8 +567,8 @@ setup_font_colors_page_font_section (GeditPreferencesDialog *dlg)
 
 	gedit_debug (DEBUG_PREFS);
 
-	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->font_button, 
-			_("Push this button to select the font to be used by the editor"), NULL);
+	gtk_widget_set_tooltip_text (dlg->priv->font_button,
+			 _("Push this button to select the font to be used by the editor"));
 
 	gedit_utils_set_atk_relation (dlg->priv->font_button,
 				      dlg->priv->default_font_checkbutton,
@@ -991,9 +979,6 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 			  "response",
 			  G_CALLBACK (dialog_response_handler),
 			  NULL);
-
-	dlg->priv->tooltips = gtk_tooltips_new ();
-	g_object_ref_sink (dlg->priv->tooltips);
 
 	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "gedit-preferences-dialog.glade",
 		"notebook",
