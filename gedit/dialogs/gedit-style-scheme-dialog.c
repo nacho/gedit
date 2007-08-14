@@ -48,7 +48,25 @@ struct _GeditStyleSchemeDialogPrivate
 {
 	GeditStyleSchemeGenerator *generator;
 	
-	GtkWidget                 *main_vbox;
+	GtkWidget                 *scheme_name_entry;
+	
+	GtkWidget                 *normal_text_checkbutton;
+	GtkWidget                 *normal_text_colorbutton;
+	
+	GtkWidget                 *background_checkbutton;
+	GtkWidget                 *background_colorbutton;
+	
+	GtkWidget                 *selected_text_checkbutton;
+	GtkWidget                 *selected_text_colorbutton;
+	
+	GtkWidget                 *selection_checkbutton;
+	GtkWidget                 *selection_colorbutton;
+	
+	GtkWidget                 *current_line_checkbutton;
+	GtkWidget                 *current_line_colorbutton;
+	
+	GtkWidget                 *search_hl_checkbutton;
+	GtkWidget                 *search_hl_colorbutton;
 };
 
 
@@ -101,6 +119,7 @@ static void
 gedit_style_scheme_dialog_init (GeditStyleSchemeDialog *dlg)
 {
 	GtkWidget *error_widget;
+	GtkWidget *main_vbox;
 	gboolean ret;
 
 	gedit_debug (DEBUG_PREFS);
@@ -126,9 +145,30 @@ gedit_style_scheme_dialog_init (GeditStyleSchemeDialog *dlg)
 
 	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "gedit-style-scheme-dialog.glade",
 		"contents",
-		&error_widget,
 
-		"contents", &dlg->priv->main_vbox,
+		&error_widget,
+		
+		"contents", &main_vbox,
+
+		"scheme_name_entry", &dlg->priv->scheme_name_entry,
+
+		"normal_text_checkbutton", &dlg->priv->normal_text_checkbutton,
+		"normal_text_colorbutton", &dlg->priv->normal_text_colorbutton,
+
+		"background_checkbutton", &dlg->priv->background_checkbutton,
+		"background_colorbutton", &dlg->priv->background_colorbutton,
+
+		"selected_text_checkbutton", &dlg->priv->selected_text_checkbutton,
+		"selected_text_colorbutton", &dlg->priv->selected_text_colorbutton,
+
+		"selection_checkbutton", &dlg->priv->selection_checkbutton,
+		"selection_colorbutton", &dlg->priv->selection_colorbutton,
+
+		"current_line_checkbutton", &dlg->priv->current_line_checkbutton,
+		"current_line_colorbutton", &dlg->priv->current_line_colorbutton,
+
+		"search_hl_checkbutton", &dlg->priv->search_hl_checkbutton,
+		"search_hl_colorbutton", &dlg->priv->search_hl_colorbutton,
 
 		NULL);
 
@@ -143,8 +183,18 @@ gedit_style_scheme_dialog_init (GeditStyleSchemeDialog *dlg)
 	}
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
-			    dlg->priv->main_vbox,
+			    main_vbox,
 			    FALSE, FALSE, 0);
+}
+
+static void
+set_generator (GeditStyleSchemeDialog    *dlg, 
+	       GeditStyleSchemeGenerator *generator)
+{
+	dlg->priv->generator = g_object_ref (generator);
+	
+	gtk_entry_set_text (GTK_ENTRY (dlg->priv->scheme_name_entry),
+			    gedit_style_scheme_generator_get_scheme_name (dlg->priv->generator));
 }
 
 GtkWidget *
@@ -152,10 +202,11 @@ gedit_style_scheme_dialog_new (GeditStyleSchemeGenerator *generator)
 {
 	GeditStyleSchemeDialog *dlg;
 	
+	g_return_val_if_fail (GEDIT_IS_STYLE_SCHEME_GENERATOR (generator), NULL);
+	
 	dlg = GEDIT_STYLE_SCHEME_DIALOG (g_object_new (GEDIT_TYPE_STYLE_SCHEME_DIALOG, NULL));
 	
-	dlg->priv->generator = g_object_ref (generator);
-	
-	
+	set_generator (dlg, generator);
+
 	return GTK_WIDGET (dlg);
 }
