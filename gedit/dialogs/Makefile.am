@@ -25,11 +25,7 @@ libdialogs_la_SOURCES = 			\
 	gedit-open-location-dialog.c		\
 	gedit-open-location-dialog.h		\
 	gedit-search-dialog.h			\
-	gedit-search-dialog.c			\
-	gedit-style-scheme-dialog.h		\
-	gedit-style-scheme-dialog.c		\
-	gedit-style-scheme-generator.h		\
-	gedit-style-scheme-generator.c	
+	gedit-search-dialog.c
 
 
 glade_DATA =					\
@@ -37,9 +33,7 @@ glade_DATA =					\
 	gedit-open-location-dialog.glade	\
 	gedit-page-setup-dialog.glade		\
 	gedit-preferences-dialog.glade		\
-	gedit-search-dialog.glade		\
-	gedit-style-scheme-dialog.glade
-
+	gedit-search-dialog.glade
 
 
 EXTRA_DIST = $(glade_DATA) 

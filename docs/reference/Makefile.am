@@ -54,7 +54,6 @@ IGNORE_HFILES=		\
 	gedit-python-plugin.h			\
 	gedit-session.h				\
 	gedit-spinner.h				\
-	gedit-tooltips.h			\
 	gedit-ui.h				\
 	gedit-window-private.h			\
 	gedit-output-window.h			\
