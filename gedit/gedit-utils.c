@@ -559,7 +559,6 @@ gedit_warning (GtkWindow *parent, const gchar *format, ...)
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
 	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-	gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
 
 	g_signal_connect (G_OBJECT (dialog),
 			  "response",
@@ -1002,11 +1001,14 @@ gedit_utils_get_glade_widgets (const gchar *filename,
 		label = gtk_label_new (msg);
 
 		gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-
+		gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+		
 		g_free (filename_markup);
 		g_free (msg_plain);
 		g_free (msg);
 
+		gtk_misc_set_padding (GTK_MISC (label), 5, 5);
+ 		
 		*error_widget = label;
 
 		return FALSE;
@@ -1021,6 +1023,10 @@ gedit_utils_get_glade_widgets (const gchar *filename,
 		*wid = glade_xml_get_widget (gui, name);
 		if (*wid == NULL)
 		{
+			g_warning ("Cannot find widget '%s' inside file '%s'.",
+				   name,
+				   filename);
+				   
 			filename_markup = g_markup_printf_escaped ("<i>%s</i>", filename);
 			msg_plain = g_strdup_printf (
 					_("Unable to find the required widgets inside file %s."),
@@ -1031,11 +1037,14 @@ gedit_utils_get_glade_widgets (const gchar *filename,
 			label = gtk_label_new (msg);
 
 			gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-
+			gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+			
 			g_free (filename_markup);
 			g_free (msg_plain);
 			g_free (msg);
 
+			gtk_misc_set_padding (GTK_MISC (label), 5, 5);
+ 			
 			*error_widget = label;
 
 			ret = FALSE;

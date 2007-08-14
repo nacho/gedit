@@ -1,5 +1,11 @@
 2007-08-15  Paolo Maggi  <paolo@gnome.org>
 
+	* gedit/gedit-utils.c (gedit_warning): do not call 
+	gtk_dialog_set_has_separator
+	(gedit_utils_get_glade_widgets): layout fixes in case of error
+
+2007-08-15  Paolo Maggi  <paolo@gnome.org>
+
 	* gedit/gedit-metadata-manager.c: the debug output of the metadata 
 	manager was too verbose. Now verbose debug output is enabled only when
 	GEDIT_METADATA_VERBOSE_DEBUG is #defined
