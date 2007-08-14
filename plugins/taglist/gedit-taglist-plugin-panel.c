@@ -44,7 +44,9 @@
 #include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
 
-#define GEDIT_TAGLIST_PLUGIN_PANEL_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_TAGLIST_PLUGIN_PANEL, GeditTaglistPluginPanelPrivate))
+#define GEDIT_TAGLIST_PLUGIN_PANEL_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
+						       GEDIT_TYPE_TAGLIST_PLUGIN_PANEL, \
+						       GeditTaglistPluginPanelPrivate))
 
 enum
 {
@@ -60,8 +62,6 @@ struct _GeditTaglistPluginPanelPrivate
 	GtkWidget *tag_groups_combo;
 	GtkWidget *tags_list;
 	GtkWidget *preview;
-	
-	GtkTooltips *tooltips;
 
 	TagGroup *selected_tag_group;
 };
@@ -95,7 +95,6 @@ gedit_taglist_plugin_panel_set_property (GObject      *object,
 	GeditTaglistPluginPanel *panel = GEDIT_TAGLIST_PLUGIN_PANEL (object);
 
 	switch (prop_id)
-
 	{
 		case PROP_WINDOW:
 			set_window (panel, g_value_get_object (value));
@@ -350,30 +349,24 @@ populate_tags_list (GeditTaglistPluginPanel *panel)
 	g_return_if_fail (taglist != NULL);
 
 	model = create_model (panel);
-
 	gtk_tree_view_set_model (GTK_TREE_VIEW (panel->priv->tags_list),
 			         model);
-
-	g_object_unref (G_OBJECT (model));
+	g_object_unref (model);
 }
 
 static TagGroup *
 find_tag_group (const gchar *name)
 {
-	GList *list;
+	GList *l;
 
 	gedit_debug (DEBUG_PLUGINS);
 
 	g_return_val_if_fail (taglist != NULL, NULL);
 
-	list = taglist->tag_groups;
-
-	while (list)
+	for (l = taglist->tag_groups; l != NULL; l = g_list_next (l))
 	{
-		if (strcmp (name, (gchar *)((TagGroup*)list->data)->name) == 0)
-			return (TagGroup*)list->data;
-
-			list = g_list_next (list);
+		if (strcmp (name, (gchar *)((TagGroup*)l->data)->name) == 0)
+			return (TagGroup*)l->data;
 	}
 
 	return NULL;
@@ -382,7 +375,7 @@ find_tag_group (const gchar *name)
 static void
 populate_tag_groups_combo (GeditTaglistPluginPanel *panel)
 {
-	GList *list;
+	GList *l;
 	GtkComboBox *combo;
 
 	gedit_debug (DEBUG_PLUGINS);
@@ -392,15 +385,10 @@ populate_tag_groups_combo (GeditTaglistPluginPanel *panel)
 	if (taglist == NULL)
 		return;
 
-	list = taglist->tag_groups;
-
-	/* Build cbitems */
-	while (list)
+	for (l = taglist->tag_groups; l != NULL; l = g_list_next (l))
 	{
 		gtk_combo_box_append_text (combo,
-					   (gchar *)((TagGroup*)list->data)->name);
-
-		list = g_list_next (list);
+					   (gchar *)((TagGroup*)l->data)->name);
 	}
 
 	gtk_combo_box_set_active (combo, 0);
@@ -444,9 +432,8 @@ selected_group_changed (GtkComboBox             *combo,
 	g_free (group_name);
 }
 
-static void
-update_preview (GeditTaglistPluginPanel *panel,
-		Tag                     *tag)
+static gchar *
+create_preview_string (Tag *tag)
 {
 	GString *str;
 
@@ -472,10 +459,21 @@ update_preview (GeditTaglistPluginPanel *panel,
 
 	g_string_append (str, "</small></tt>");
 
-	gtk_label_set_markup (GTK_LABEL (panel->priv->preview),
-			      str->str);
+	return g_string_free (str, FALSE);
+}
 
-	g_string_free (str, TRUE);
+static void
+update_preview (GeditTaglistPluginPanel *panel,
+		Tag                     *tag)
+{
+	gchar *str;
+
+	str = create_preview_string (tag);
+
+	gtk_label_set_markup (GTK_LABEL (panel->priv->preview),
+			      str);
+
+	g_free (str);
 }
 
 static void
@@ -505,6 +503,73 @@ tag_list_cursor_changed_cb (GtkTreeView *tag_list,
 }
 
 static gboolean
+tags_list_query_tooltip_cb (GtkWidget               *widget,
+			    gint                     x,
+			    gint                     y,
+			    gboolean                 keyboard_tip,
+			    GtkTooltip              *tooltip,
+			    GeditTaglistPluginPanel *panel)
+{
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	GtkTreePath *path = NULL;
+	gint index;
+	Tag *tag;
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
+
+	if (keyboard_tip)
+	{
+		gtk_tree_view_get_cursor (GTK_TREE_VIEW (widget),
+					  &path,
+					  NULL);
+
+		if (path == NULL)
+		{
+			return FALSE;
+		}
+	}
+	else
+	{
+		gint bin_x, bin_y;
+
+		gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW (widget),
+								   x, y,
+								   &bin_x, &bin_y);
+
+		if (!gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (widget),
+						    bin_x, bin_y,
+						    &path,
+						    NULL, NULL, NULL))
+		{
+			return FALSE;
+		}
+	}
+
+	gtk_tree_model_get_iter (model, &iter, path);
+	gtk_tree_model_get (model, &iter,
+			    COLUMN_TAG_INDEX_IN_GROUP, &index,
+			    -1);
+
+	tag = g_list_nth_data (panel->priv->selected_tag_group->tags, index);
+	if (tag != NULL)
+	{
+		gchar *tip;
+
+		tip = create_preview_string (tag);
+		gtk_tooltip_set_markup (tooltip, tip);
+		g_free (tip);
+		gtk_tree_path_free (path);
+
+		return TRUE;
+	}
+
+	gtk_tree_path_free (path);
+
+	return FALSE;
+}
+
+static gboolean
 expose_event_cb (GtkWidget      *panel,
                  GdkEventExpose *event,
                  gpointer        user_data)
@@ -528,24 +593,20 @@ static void
 set_combo_tooltip (GtkWidget *widget,
 		   gpointer   data)
 {
-	GtkTooltips *tooltips = (GtkTooltips *)data;
-
 	if (GTK_IS_BUTTON (widget))
-		gtk_tooltips_set_tip (tooltips,
-				      widget,
-				      _("Select the group of tags you want to use"),
-				      NULL);
+	{
+		gtk_widget_set_tooltip_text (widget,
+					     _("Select the group of tags you want to use"));
+	}
 }
 
 static void
 realize_tag_groups_combo (GtkWidget *combo,
 			  gpointer   data)
 {
-	GeditTaglistPluginPanel *panel = (GeditTaglistPluginPanel *)data;
-
 	gtk_container_forall (GTK_CONTAINER (combo),
 			      set_combo_tooltip,
-			      panel->priv->tooltips);
+			      NULL);
 }
 
 static void
@@ -594,10 +655,6 @@ gedit_taglist_plugin_panel_init (GeditTaglistPluginPanel *panel)
 
 	panel->priv = GEDIT_TAGLIST_PLUGIN_PANEL_GET_PRIVATE (panel);
 
-	panel->priv->tooltips = gtk_tooltips_new ();
-	g_object_ref (G_OBJECT (panel->priv->tooltips));
-	gtk_object_sink (GTK_OBJECT (panel->priv->tooltips));
-
 	/* Build the window content */
 	panel->priv->tag_groups_combo = gtk_combo_box_new_text ();
 	gtk_box_pack_start (GTK_BOX (panel),
@@ -639,10 +696,7 @@ gedit_taglist_plugin_panel_init (GeditTaglistPluginPanel *panel)
 	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (panel->priv->tags_list), FALSE);
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (panel->priv->tags_list), FALSE);
 
-	gtk_tooltips_set_tip (panel->priv->tooltips,
-			      panel->priv->tags_list,
-			      _("Double-click on a tag to insert it in the current document"),
-			      NULL);
+	g_object_set (panel->priv->tags_list, "has-tooltip", TRUE, NULL);
 
 	/* Add the tags column */
 	cell = gtk_cell_renderer_text_new ();
@@ -675,22 +729,22 @@ gedit_taglist_plugin_panel_init (GeditTaglistPluginPanel *panel)
 				"row_activated",
 				G_CALLBACK (tag_list_row_activated_cb),
 				panel);
-
 	g_signal_connect (panel->priv->tags_list,
 			  "key_press_event",
 			  G_CALLBACK (tag_list_key_press_event_cb),
 			  panel);
-
+	g_signal_connect (panel->priv->tags_list,
+			  "query-tooltip",
+			  G_CALLBACK (tags_list_query_tooltip_cb),
+			  panel);
 	g_signal_connect (panel->priv->tags_list,
 			  "cursor_changed",
 			  G_CALLBACK (tag_list_cursor_changed_cb),
 			  panel);
-
 	g_signal_connect (panel->priv->tag_groups_combo,
 			  "changed",
 			  G_CALLBACK (selected_group_changed),
 			  panel);
-
 	g_signal_connect (panel,
 			  "expose-event",
 			  G_CALLBACK (expose_event_cb),
