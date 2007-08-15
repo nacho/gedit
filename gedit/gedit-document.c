@@ -603,6 +603,32 @@ set_encoding (GeditDocument       *doc,
 	g_object_notify (G_OBJECT (doc), "encoding");
 }
 
+static GtkSourceStyleScheme *
+get_default_style_scheme (void)
+{
+	gchar                 *scheme_id;
+	GtkSourceStyleScheme  *def_style;
+	GtkSourceStyleManager *manager;
+	
+	manager = gedit_get_source_style_manager ();
+	scheme_id = gedit_prefs_manager_get_source_style_scheme ();
+	def_style = gtk_source_style_manager_get_scheme (manager, scheme_id);
+
+	if (def_style == NULL)
+	{
+		g_warning ("Default style scheme '%s' cannot be found, falling back to 'classic' style scheme ", scheme_id);
+			
+		def_style = gtk_source_style_manager_get_scheme (manager, "classic");
+		if (def_style == NULL) 
+		{
+			g_warning ("Style scheme 'classic' cannot be found, check your GtkSourceView installation.");			
+		}
+	}
+
+	g_free (scheme_id);
+
+	return def_style;
+}
 static void
 gedit_document_init (GeditDocument *doc)
 {
@@ -645,7 +671,7 @@ gedit_document_init (GeditDocument *doc)
 						       gedit_prefs_manager_get_enable_search_highlighting ());
 
 	style_manager = gedit_get_source_style_manager ();
-	style_scheme = gedit_source_style_manager_get_default_scheme (style_manager);
+	style_scheme = get_default_style_scheme ();
 	if (style_scheme != NULL)
 		gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (doc),
 						    style_scheme);

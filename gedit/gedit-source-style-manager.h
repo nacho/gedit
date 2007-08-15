@@ -31,17 +31,21 @@ G_BEGIN_DECLS
 
 GtkSourceStyleManager	*gedit_get_source_style_manager			(void);
 
-GtkSourceStyleScheme	*gedit_source_style_manager_get_default_scheme	(GtkSourceStyleManager	*manager);
+/* Returns a sorted list of style schemes */
+GSList 			*gedit_source_style_manager_list_schemes_sorted (GtkSourceStyleManager *manager);
 
 /*
  * Non exported functions
  */
-gboolean		_gedit_source_style_manager_set_default_scheme	(GtkSourceStyleManager	*manager,
-									 const gchar		*scheme_id);
+gboolean		 _gedit_source_style_manager_scheme_is_gedit_user_scheme
+									(GtkSourceStyleManager *manager,
+									 const gchar           *scheme_id);
 
-gboolean		_gedit_source_style_manager_scheme_is_gedit_user_scheme
-									(GtkSourceStyleManager	*manager,
-									const gchar		*scheme_id);
+const gchar		*_gedit_source_style_manager_install_scheme	(GtkSourceStyleManager *manager,
+									 const gchar           *fname);
+
+gboolean		 _gedit_source_style_manager_uninstall_scheme	(GtkSourceStyleManager *manager,
+									 const gchar           *id);
 
 G_END_DECLS
 

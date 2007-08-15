@@ -1,5 +1,22 @@
 2007-08-15  Paolo Maggi  <paolo@gnome.org>
 
+	* gedit/dialogs/gedit-preferences-dialog.c: allow to add/remove style
+	schemes
+
+	* gedit/dialogs/gedit-preferences-dialog.glade: ditto
+
+	* gedit/gedit-document.c (get_default_style_scheme): new function
+	(gedit_document_init): use get_default_style_scheme instead of the 
+	removed gedit_source_style_manager_get_default_scheme
+
+	* gedit/gedit-prefs-manager-app.c
+	(gedit_prefs_manager_source_style_scheme_changed): do not use 
+	the removed function gedit_source_style_manager_get_default_scheme
+
+	* gedit/gedit-source-style-manager.[ch]: mostly rewritten
+
+2007-08-15  Paolo Maggi  <paolo@gnome.org>
+
 	* docs/reference/Makefile.am: fix building
 	* docs/reference/gedit.types: ditto
 

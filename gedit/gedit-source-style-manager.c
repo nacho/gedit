@@ -2,7 +2,7 @@
 /*
  * gedit-source-style-manager.c
  *
- * Copyright (C) 2007 - Paolo Borelli
+ * Copyright (C) 2007 - Paolo Borelli and Paolo Maggi
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,24 +16,33 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307, USA.
+ */
+
+/*
+ * Modified by the gedit Team, 2007. See the AUTHORS file for a
+ * list of people on the gedit Team.
+ * See the ChangeLog files for a list of changes.
  *
- * $Id: gedit-source-style-manager.c 5598 2007-04-15 13:16:24Z pborelli $
+ * $Id$
  */
 
 #include <string.h>
+#include <errno.h>
+
+#include <glib/gi18n.h>
+#include <glib/gstdio.h>
 
 #include "gedit-source-style-manager.h"
 #include "gedit-prefs-manager.h"
 
 static GtkSourceStyleManager *style_manager = NULL;
-static GtkSourceStyleScheme  *def_style = NULL;
 
 #define GEDIT_STYLES_DIR ".gnome2/gedit/styles"
 
-static void
-add_gedit_styles_path (GtkSourceStyleManager *mgr)
+static gchar *
+get_gedit_styles_path (void)
 {
 	const gchar *home;
 
@@ -41,12 +50,27 @@ add_gedit_styles_path (GtkSourceStyleManager *mgr)
 	if (home != NULL)
 	{
 		gchar *dir;
-		
+
 		dir = g_build_filename (home, GEDIT_STYLES_DIR, NULL);
 
+		return dir;
+	}
+	
+	return NULL;
+}
+
+static void
+add_gedit_styles_path (GtkSourceStyleManager *mgr)
+{
+	gchar *dir;
+	
+	dir = get_gedit_styles_path();
+	
+	if (dir != NULL)
+	{
 		gtk_source_style_manager_append_search_path (mgr, dir);
 		g_free (dir);
-	}
+	}	
 }
 
 GtkSourceStyleManager *
@@ -61,59 +85,44 @@ gedit_get_source_style_manager (void)
 	return style_manager;
 }
 
-GtkSourceStyleScheme *
-gedit_source_style_manager_get_default_scheme (GtkSourceStyleManager *manager)
+static gint
+schemes_compare (gconstpointer a, gconstpointer b)
 {
-	g_return_val_if_fail (GTK_IS_SOURCE_STYLE_MANAGER (manager), def_style);
+	GtkSourceStyleScheme *scheme_a = (GtkSourceStyleScheme *)a;
+	GtkSourceStyleScheme *scheme_b = (GtkSourceStyleScheme *)b;
 
-	if (def_style == NULL)
-	{
-		gchar *scheme_id;
+	const gchar *name_a = gtk_source_style_scheme_get_name (scheme_a);
+	const gchar *name_b = gtk_source_style_scheme_get_name (scheme_b);
 
-		scheme_id = gedit_prefs_manager_get_source_style_scheme ();
-		def_style = gtk_source_style_manager_get_scheme (manager,
-							         scheme_id);
-		if (def_style == NULL)
-		{
-			g_warning ("Style Scheme %s not found", scheme_id);
-		}
-
-		g_free (scheme_id);
-	}
-
-	return def_style;
+	return g_utf8_collate (name_a, name_b);
 }
 
-/* Return TRUE if style scheme changed */
-gboolean
-_gedit_source_style_manager_set_default_scheme (GtkSourceStyleManager *manager,
-						const gchar           *scheme_id)
+GSList *
+gedit_source_style_manager_list_schemes_sorted (GtkSourceStyleManager *manager)
 {
-	GtkSourceStyleScheme *new_style;
-
-	g_return_val_if_fail (GTK_IS_SOURCE_STYLE_MANAGER (manager), FALSE);
-	g_return_val_if_fail (scheme_id != NULL, FALSE);
-
-	if (def_style != NULL &&
-	    strcmp (scheme_id, gtk_source_style_scheme_get_id (def_style)) == 0)
+	const gchar * const * scheme_ids;
+	GSList *schemes = NULL;
+	
+	g_return_val_if_fail (GTK_IS_SOURCE_STYLE_MANAGER (manager), NULL);
+	
+	scheme_ids = gtk_source_style_manager_get_scheme_ids (manager);
+	
+	while (*scheme_ids != NULL)
 	{
-		return FALSE;
+		GtkSourceStyleScheme *scheme;
+
+		scheme = gtk_source_style_manager_get_scheme (manager, 
+							      *scheme_ids);
+							      
+		schemes = g_slist_prepend (schemes, scheme);
+		
+		++scheme_ids;
 	}
-
-	new_style = gtk_source_style_manager_get_scheme (manager,
-						         scheme_id);
-
-	if (new_style == NULL)
-	{
-		g_warning ("Style Scheme %s not found", scheme_id);
-		return FALSE;
-	}
-
-	/* manager owns the ref to the old style, we don't need to unref it */
-
-	def_style = new_style;
-
-	return TRUE;
+	
+	if (schemes != NULL)
+		schemes = g_slist_sort (schemes, (GCompareFunc)schemes_compare);
+	
+	return schemes;
 }
 
 gboolean
@@ -149,3 +158,197 @@ _gedit_source_style_manager_scheme_is_gedit_user_scheme (GtkSourceStyleManager *
 	return res;
 }
 
+/**
+ * file_copy:
+ * @name: a pointer to a %NULL-terminated string, that names
+ * the file to be copied, in the GLib file name encoding
+ * @dest_name: a pointer to a %NULL-terminated string, that is the
+ * name for the destination file, in the GLib file name encoding
+ * @error: return location for a #GError, or %NULL
+ *
+ * Copies file @name to @dest_name.
+ *
+ * If the call was successful, it returns %TRUE. If the call was not
+ * successful, it returns %FALSE and sets @error. The error domain
+ * is #G_FILE_ERROR. Possible error
+ * codes are those in the #GFileError enumeration.
+ *
+ * Return value: %TRUE on success, %FALSE otherwise.
+ */
+static gboolean
+file_copy (const gchar  *name,
+	   const gchar  *dest_name,
+	   GError      **error)
+{
+	gchar *contents;
+	gsize length;
+	gchar *dest_dir;
+
+	/* FIXME - Paolo (Aug. 13, 2007):
+	 * Since the style scheme files are relatively small, we can implement
+	 * file copy getting all the content of the source file in a buffer and
+	 * then write the content to the destination file. In this way we
+	 * can use the g_file_get_contents and g_file_set_contents and avoid to
+	 * write custom code to copy the file (with sane error management).
+	 * If needed we can improve this code later. */
+
+	g_return_val_if_fail (name != NULL, FALSE);
+	g_return_val_if_fail (dest_name != NULL, FALSE);
+	g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+
+	/* Note: we allow to copy a file to itself since this is not a problem
+	 * in our use case */
+
+	/* Ensure the destination directory exists */
+	dest_dir = g_path_get_dirname (dest_name);
+
+	errno = 0;
+	if (g_mkdir_with_parents (dest_dir, 0755) != 0)
+	{
+		gint save_errno = errno;
+		gchar *display_filename = g_filename_display_name (dest_dir);
+
+		g_set_error (error,
+			     G_FILE_ERROR,
+			     g_file_error_from_errno (save_errno),
+			     _("Directory '%s' could not be created: g_mkdir_with_parents() failed: %s"),
+			     display_filename,
+			     g_strerror (save_errno));
+
+		g_free (dest_dir);
+		g_free (display_filename);
+
+		return FALSE;
+	}
+
+	g_free (dest_dir);
+
+	if (!g_file_get_contents (name, &contents, &length, error))
+		return FALSE;
+
+	if (!g_file_set_contents (dest_name, contents, length, error))
+		return FALSE;
+
+	g_free (contents);
+
+	return TRUE;
+}
+
+/**
+ * _gedit_source_style_manager_install_scheme:
+ * Install a new user scheme.
+ * @manager: a #GtkSourceStyleManager
+ * @fname: the file name of the style scheme to be installed
+ *
+ * This function copies @fname in #GEDIT_STYLES_DIR and ask the style manager to
+ * recompute the list of available style schemes. It then checks if a style
+ * scheme with the right file name exists.
+ *
+ * If the call was succesful, it returns the id of the installed scheme
+ * otherwise %NULL.
+ *
+ * Return value: the id of the installed scheme, %NULL otherwise.
+ */
+const gchar *
+_gedit_source_style_manager_install_scheme (GtkSourceStyleManager *manager,
+					    const gchar           *fname)
+{
+	gchar  *new_file_name;
+	gchar  *basename;
+	gchar  *styles_dir;
+	GError *error = NULL;
+
+	const gchar* const *ids;
+
+	g_return_val_if_fail (GTK_IS_SOURCE_STYLE_MANAGER (manager), NULL);
+	g_return_val_if_fail (fname != NULL, NULL);
+
+	basename = g_path_get_basename (fname);
+	styles_dir = get_gedit_styles_path();
+	new_file_name = g_build_filename (styles_dir, basename, NULL);
+	g_free (styles_dir);
+	g_free (basename);
+
+	/* Copy the style scheme file into GEDIT_STYLES_DIR */
+	if (!file_copy (fname, new_file_name, &error))
+	{
+		g_message ("Cannot install style scheme:\n%s",
+			   error->message);
+
+		return NULL;
+	}
+
+	/* Reload the available style schemes */
+	gtk_source_style_manager_force_rescan (manager);
+
+	/* Check the new style scheme has been actually installed */
+	ids = gtk_source_style_manager_get_scheme_ids (manager);
+
+	while (*ids != NULL)
+	{
+		GtkSourceStyleScheme *scheme;
+		const gchar *filename;
+
+		scheme = gtk_source_style_manager_get_scheme (gedit_get_source_style_manager (),
+							      *ids);
+
+		filename = gtk_source_style_scheme_get_filename (scheme);
+		
+		if (strcmp (filename, new_file_name) == 0)
+		{
+			/* The style scheme has been correctly installed */
+			g_free (new_file_name);
+
+			return gtk_source_style_scheme_get_id (scheme);
+		}
+		++ids;
+	}
+
+	/* The style scheme has not been correctly installed */
+	g_unlink (new_file_name);
+
+	g_free (new_file_name);
+
+	return NULL;
+}
+
+/**
+ * _gedit_source_style_manager_uninstall_scheme:
+ * Uninstall a  user scheme.
+ * @manager: a #GtkSourceStyleManager
+ * @id: the id of the style scheme to be uninstalled
+ *
+ * Uninstall a user scheme.
+ *
+ * If the call was succesful, it returns %TRUE
+ * otherwise %FALSE.
+ *
+ * Return value: %TRUE on success, %FALSE otherwise.
+ */
+gboolean
+_gedit_source_style_manager_uninstall_scheme (GtkSourceStyleManager *manager,
+					      const gchar           *id)
+{
+	GtkSourceStyleScheme *scheme;
+	const gchar *filename;
+
+	g_return_val_if_fail (GTK_IS_SOURCE_STYLE_MANAGER (manager), FALSE);
+	g_return_val_if_fail (id != NULL, FALSE);
+	
+	scheme = gtk_source_style_manager_get_scheme (manager,
+						      id);
+	if (scheme == NULL)
+		return FALSE;
+		
+	filename = gtk_source_style_scheme_get_filename (scheme);
+	if (filename == NULL)
+		return FALSE;
+
+	if (g_unlink (filename) == -1)
+		return FALSE;
+		
+	/* Reload the available style schemes */
+	gtk_source_style_manager_force_rescan (manager);
+	
+	return TRUE;	
+}

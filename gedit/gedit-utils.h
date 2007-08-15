@@ -108,7 +108,7 @@ gchar		*gedit_utils_unescape_search_text	(const gchar *text);
 
 gchar		*gedit_utils_get_stdin			(void);
 
-void		gedit_warning				(GtkWindow  *parent,
+void		 gedit_warning				(GtkWindow  *parent,
 							 const gchar *format,
 							 ...) G_GNUC_PRINTF(2, 3);
 

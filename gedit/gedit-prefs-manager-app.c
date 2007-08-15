@@ -1354,8 +1354,8 @@ gedit_prefs_manager_source_style_scheme_changed (GConfClient *client,
 
 	if (strcmp (entry->key, GPM_SOURCE_STYLE_SCHEME) == 0)
 	{
+		static gchar *old_scheme = NULL;
 		const gchar *scheme;
-		gboolean changed;
 		GtkSourceStyleScheme *style;
 		GList *docs;
 		GList *l;
@@ -1365,14 +1365,27 @@ gedit_prefs_manager_source_style_scheme_changed (GConfClient *client,
 		else
 			scheme = GPM_DEFAULT_SOURCE_STYLE_SCHEME;
 
-		changed = _gedit_source_style_manager_set_default_scheme
-					(gedit_get_source_style_manager (),
-					 scheme);
-		if (!changed)
-			return;
+		if (old_scheme != NULL && (strcmp (scheme, old_scheme) == 0))
+		    	return;
 
-		style = gedit_source_style_manager_get_default_scheme
-					(gedit_get_source_style_manager ());
+		g_free (old_scheme);
+		old_scheme = g_strdup (scheme);
+		
+		style = gtk_source_style_manager_get_scheme (gedit_get_source_style_manager (), 
+							     scheme);
+
+		if (style == NULL)
+		{
+			g_warning ("Default style scheme '%s' not found, falling back to 'classic'", scheme);
+			
+			style = gtk_source_style_manager_get_scheme (gedit_get_source_style_manager (), 
+								     "classic");
+			if (style == NULL) 
+			{
+				g_warning ("Style scheme 'classic' cannot be found, check your GtkSourceView installation.");
+				return;
+			}
+		}
 
 		docs = gedit_app_get_documents (gedit_app_get_default ());
 		for (l = docs; l != NULL; l = l->next)
