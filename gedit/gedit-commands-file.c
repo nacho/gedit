@@ -419,6 +419,7 @@ _gedit_cmd_file_open (GtkAction   *action,
 		return;
 	}
 
+	/* Translators: "Open Files" is the title of the file chooser window */ 
 	open_dialog = gedit_file_chooser_dialog_new (_("Open Files"),
 						     GTK_WINDOW (window),
 						     GTK_FILE_CHOOSER_ACTION_OPEN,
