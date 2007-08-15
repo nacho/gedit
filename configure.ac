@@ -4,7 +4,7 @@ AC_PREREQ(2.59)
 
 m4_define(gedit_major_version,  2)
 m4_define(gedit_minor_version, 19)
-m4_define(gedit_micro_version,  3)
+m4_define(gedit_micro_version, 90)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
 AC_INIT(gedit, gedit_version, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
@@ -146,7 +146,7 @@ dnl Start of pkg-config checks
 dnl ================================================================
 
 PKG_CHECK_MODULES(GEDIT, [
-	glib-2.0 >= 2.12.0
+	glib-2.0 >= 2.13.5
 	gtk+-2.0 >= 2.11.6
 	gtksourceview-2.0 >= 1.90.3
 	libgnomeui-2.0 >= 2.16.0

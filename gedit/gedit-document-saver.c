@@ -407,7 +407,7 @@ gedit_document_saver_save (GeditDocumentSaver     *saver,
 	saver->backup_ext = gedit_prefs_manager_get_backup_extension ();
 
 	/* never keep backup of autosaves */
-	if (saver->flags & GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP != 0)
+	if ((saver->flags & GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP) != 0)
 		saver->keep_backup = FALSE;
 	else
 		saver->keep_backup = gedit_prefs_manager_get_create_backup_copy ();
