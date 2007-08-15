@@ -218,7 +218,7 @@ gedit_document_loader_update_document_contents (GeditDocumentLoader  *loader,
 {
 	gedit_debug (DEBUG_LOADER);
 
-	g_return_val_if_fail (file_size > 0, FALSE);
+	g_return_val_if_fail (file_size >= 0, FALSE);
 	g_return_val_if_fail (file_contents != NULL, FALSE);
 
 	/* short-circuit the case where the file is empty */
