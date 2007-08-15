@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-13 19:18+0300\n"
+"POT-Creation-Date: 2007-08-15 17:46+0300\n"
 "PO-Revision-Date: 2007-03-05 18:02+0300\n"
 "Last-Translator: Lauri Nurmi <lanurmi@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -761,7 +761,6 @@ msgstr "Sivuasetukset"
 #. ex:ts=4:et:
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:1
 #: ../plugins/docinfo/docinfo.glade2.h:1
 #: ../plugins/externaltools/tools/tools.glade.h:1
 #: ../plugins/snippets/snippets/snippets.glade.h:1
@@ -806,7 +805,7 @@ msgid "Print _line numbers"
 msgstr "Tu_losta rivinumerot"
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:11
-msgid "Print s_yntax highlighting"
+msgid "Print synta_x highlighting"
 msgstr "Tulosta s_yntaksiväritys"
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:12
@@ -833,21 +832,42 @@ msgstr "_Palauta oletuskirjasimet"
 msgid "lines"
 msgstr "rivin välein"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:583
+#: ../gedit/dialogs/gedit-preferences-dialog.c:570
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Napsauta tästä valitaksesi muokkaimessa käytettävän kirjasimen"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:593
+#: ../gedit/dialogs/gedit-preferences-dialog.c:580
 #, c-format
 msgid "_Use the system fixed width font (%s)"
 msgstr "_Käytä järjestelmän tasalevyistä kirjasinta (%s)"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:749
-#, c-format
-msgid "Could not remove the style scheme \"%s\""
-msgstr "Tyylimalllia \"%s\" ei voitu poistaa"
+#: ../gedit/dialogs/gedit-preferences-dialog.c:767
+msgid "The selected color scheme cannot be installed."
+msgstr "Valittua värimallia ei voi asentaa."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:979
+#: ../gedit/dialogs/gedit-preferences-dialog.c:792
+msgid "Add Scheme"
+msgstr "Lisää värimalli"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:799
+msgid "A_dd Scheme"
+msgstr "_Lisää värimalli"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:807
+msgid "Color Scheme Files"
+msgstr "Värimallitiedostot"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:814
+#: ../gedit/gedit-file-chooser-dialog.c:52
+msgid "All Files"
+msgstr "Kaikki tiedostot"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:859
+#, c-format
+msgid "Could not remove color scheme \"%s\"."
+msgstr "Värimallia \"%s\" ei voitu poistaa"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1058
 msgid "gedit Preferences"
 msgstr "geditin asetukset"
 
@@ -904,8 +924,8 @@ msgid "Font & Colors"
 msgstr "Kirjasimet & Värit"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:19
-msgid "Hi_ghlight current line"
-msgstr "_Korosta nykyinen rivi"
+msgid "Highlight current _line"
+msgstr "Korosta nykyinen _rivi"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:20
 msgid "Highlight matching _bracket"
@@ -956,11 +976,11 @@ msgid "_minutes"
 msgstr "_minuutin välein"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:287
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1371
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1347
 msgid "Replace"
 msgstr "Korvaa"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1369
+#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1345
 msgid "Find"
 msgstr "Etsi"
 
@@ -969,7 +989,7 @@ msgid "Replace _All"
 msgstr "Korvaa k_aikki"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:383
-#: ../gedit/gedit-commands-file.c:676
+#: ../gedit/gedit-commands-file.c:677
 msgid "_Replace"
 msgstr "Ko_rvaa"
 
@@ -1000,117 +1020,6 @@ msgstr "_Hakusana:"
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:8
 msgid "_Wrap around"
 msgstr "Jatka _alusta"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.c:117
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:26
-msgid "gedit Style Scheme editor"
-msgstr "geditin tyylimallien muokkain"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:2
-msgid "<b>Elements</b>"
-msgstr "<b>Elementit</b>"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:3
-msgid "Basic Colors"
-msgstr "Perusvärit"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:4
-#: ../plugins/taglist/HTML.tags.xml.in.h:28
-msgid "Bold"
-msgstr "Lihavoitu"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:5
-msgid "Color scheme _name:"
-msgstr "Värimallin _nimi:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:6
-msgid "Cu_rrent line color:"
-msgstr "_Nykyinen riviväri:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:7
-msgid "Italic"
-msgstr "Kursiivi"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:8
-msgid "Pick the background color"
-msgstr "Valitse taustaväri"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:9
-msgid "Pick the current line color"
-msgstr "Valitse nykyisen rivin väri"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:10
-msgid "Pick the foreground color"
-msgstr "Valitse edustaväri"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:11
-msgid "Pick the normal text color"
-msgstr "Valitse normaali tekstiväri"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:12
-msgid "Pick the search highlighting color"
-msgstr "Valitse hakujen korostusväri"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:13
-msgid "Pick the selected text color"
-msgstr "Valitse valitun tekstin väri"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:14
-msgid "Pick the selection color"
-msgstr "Valitse valintaväri"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:15
-msgid "S_earch highlighting color:"
-msgstr "_Haun korostusväri:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:16
-msgid "Se_lection color:"
-msgstr "V_alintaväri:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:17
-msgid "Selecte_d text color:"
-msgstr "Valitun _tekstin väri:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:18
-msgid "Strikethrough"
-msgstr "Lävistetty"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:19
-msgid "Syntax Highlighting"
-msgstr "Syntaksiväritys"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:20
-msgid "Underline"
-msgstr "Alleviivattu"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:21
-msgid "_Background color:"
-msgstr "_Taustaväri:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:22
-msgid "_Background:"
-msgstr "_Tausta:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:23
-msgid "_Foreground:"
-msgstr "_Edustaväri:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:24
-msgid "_Normal text color:"
-msgstr "_Tavallinen tekstiväri:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:25
-msgid "_Reset to Default "
-msgstr "_Aseta oletukseksi"
-
-#. TRANSLATORS: %s is a color scheme name. The resulting string represents
-#. * the name of a color scheme generated by the color scheme in %s.
-#. * So if %s is "Dark", the resulting string should be something like
-#. * "My Dark"
-#: ../gedit/dialogs/gedit-style-scheme-generator.c:117
-#, c-format
-msgid "My %s"
-msgstr "Oma - %s"
 
 #: ../gedit/gedit.c:73
 msgid ""
@@ -1163,50 +1072,51 @@ msgid_plural "Loading %d files…"
 msgstr[0] "Ladataan %d tiedosto…"
 msgstr[1] "Ladataan %d tiedostoa…"
 
-#: ../gedit/gedit-commands-file.c:422
+#. Translators: "Open Files" is the title of the file chooser window
+#: ../gedit/gedit-commands-file.c:423
 msgid "Open Files"
 msgstr "Avaa tiedostoja"
 
-#: ../gedit/gedit-commands-file.c:528
+#: ../gedit/gedit-commands-file.c:529
 msgid "The entered location is not valid."
 msgstr "Annettu sijainti ei ole kelvollinen."
 
-#: ../gedit/gedit-commands-file.c:531
+#: ../gedit/gedit-commands-file.c:532
 #: ../gedit/gedit-io-error-message-area.c:187
 #: ../gedit/gedit-io-error-message-area.c:226
 #: ../gedit/gedit-io-error-message-area.c:242
 msgid "Please check that you typed the location correctly and try again."
 msgstr "Tarkista, että kirjoitit sijainnin oikein ja yritä uudelleen."
 
-#: ../gedit/gedit-commands-file.c:657
+#: ../gedit/gedit-commands-file.c:658
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "Tiedostoa \"%s\" voi vain lukea."
 
-#: ../gedit/gedit-commands-file.c:668
+#: ../gedit/gedit-commands-file.c:669
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Haluatko yrittää korvata sen tiedostolla jota olet tallentamassa?"
 
-#: ../gedit/gedit-commands-file.c:734 ../gedit/gedit-commands-file.c:937
+#: ../gedit/gedit-commands-file.c:735 ../gedit/gedit-commands-file.c:938
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Tallennetaan tiedostoa \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:835
+#: ../gedit/gedit-commands-file.c:836
 msgid "Save As…"
 msgstr "Tallenna nimellä…"
 
-#: ../gedit/gedit-commands-file.c:1116
+#: ../gedit/gedit-commands-file.c:1117
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Palautetaan asiakirjaa \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:1161
+#: ../gedit/gedit-commands-file.c:1162
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Peru tekemättömät muutokset asiakirjaan \"%s\"?"
 
-#: ../gedit/gedit-commands-file.c:1170
+#: ../gedit/gedit-commands-file.c:1171
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1220,14 +1130,14 @@ msgstr[1] ""
 "Viimeisten %ld sekunnin aikana asiakirjaan tehdyt muutokset menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1179
+#: ../gedit/gedit-commands-file.c:1180
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Viimeisen minuutin aikana asiakirjaan tehdyt muutokset menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1185
+#: ../gedit/gedit-commands-file.c:1186
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1242,7 +1152,7 @@ msgstr[1] ""
 "Viimeisen minuutin ja %ld sekunnin aikana asiakirjaan tehdyt muutokset "
 "menetetään lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1195
+#: ../gedit/gedit-commands-file.c:1196
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1256,12 +1166,12 @@ msgstr[1] ""
 "Viimeisten %ld minuutin aikana asiakirjaan tehdyt muutokset menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1210
+#: ../gedit/gedit-commands-file.c:1211
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Viimeisen tunnin aikana asiakirjaan tehdyt muutokset menetetään lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1216
+#: ../gedit/gedit-commands-file.c:1217
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1276,7 +1186,7 @@ msgstr[1] ""
 "Viimeisen tunnin %d minuutin aikana asiakirjaan tehdyt muutokset menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1231
+#: ../gedit/gedit-commands-file.c:1232
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1289,7 +1199,7 @@ msgstr[1] ""
 "Viimeisten %d tunnin aikana asiakirjaan tehdyt muutokset menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1257
+#: ../gedit/gedit-commands-file.c:1258
 msgid "_Revert"
 msgstr "_Palauta levyltä"
 
@@ -1322,17 +1232,17 @@ msgstr "Löydetty ja korvattu yksi esiintymä"
 msgid "Phrase not found"
 msgstr "Lausetta ei löytynyt"
 
-#: ../gedit/gedit-document.c:790 ../gedit/gedit-document.c:884
+#: ../gedit/gedit-document.c:816 ../gedit/gedit-document.c:910
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Tallentamaton asiakirja %d"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1940 ../gedit/gedit-window.c:1945
+#: ../gedit/gedit-window.c:1913 ../gedit/gedit-window.c:1918
 msgid "Read Only"
 msgstr "Vain luku"
 
-#: ../gedit/gedit-documents-panel.c:700
+#: ../gedit/gedit-documents-panel.c:759
 msgid "Documents"
 msgstr "Asiakirjat"
 
@@ -1466,10 +1376,6 @@ msgstr "Nykyiset maa-asetukset (%s)"
 #: ../gedit/gedit-encodings-option-menu.c:322
 msgid "Add or _Remove..."
 msgstr "Lisää tai _poista..."
-
-#: ../gedit/gedit-file-chooser-dialog.c:52
-msgid "All Files"
-msgstr "Kaikki tiedostot"
 
 #: ../gedit/gedit-file-chooser-dialog.c:53
 msgid "All Text Files"
@@ -1878,15 +1784,15 @@ msgstr "Ko_rvaa"
 msgid "Could not obtain backup filename"
 msgstr "Varmuuskopiointitiedostonimeä ei voitu luoda"
 
-#: ../gedit/gedit-notebook.c:845
+#: ../gedit/gedit-notebook.c:834
 msgid "Close document"
 msgstr "Sulje asiakirja"
 
-#: ../gedit/gedit-panel.c:365 ../gedit/gedit-panel.c:579
+#: ../gedit/gedit-panel.c:361 ../gedit/gedit-panel.c:569
 msgid "Empty"
 msgstr "Tyhjä"
 
-#: ../gedit/gedit-panel.c:523 ../gedit/gedit-panel.c:600
+#: ../gedit/gedit-panel.c:514 ../gedit/gedit-panel.c:588
 msgid "Hide panel"
 msgstr "Piilota paneeli"
 
@@ -1972,82 +1878,87 @@ msgstr "Näytä edellinen sivu"
 msgid "Show the next page"
 msgstr "Näytä seuraava sivu"
 
-#: ../gedit/gedit-print-job-preview.c:765
+#: ../gedit/gedit-print-job-preview.c:764
 msgid "Current page (Alt+P)"
 msgstr "Nykyinen sivu (Alt+P)"
 
 #. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
 #. We are displaying 'XXX of XXX'.
-#: ../gedit/gedit-print-job-preview.c:779
+#: ../gedit/gedit-print-job-preview.c:777
 msgid "of"
 msgstr "/"
 
-#: ../gedit/gedit-print-job-preview.c:785
+#: ../gedit/gedit-print-job-preview.c:783
 msgid "Page total"
 msgstr "Sivuja kaikkiaan"
 
-#: ../gedit/gedit-print-job-preview.c:786
+#: ../gedit/gedit-print-job-preview.c:784
 msgid "The total number of pages in the document"
 msgstr "Sivujen kokonaislukumäärä asiakirjassa"
 
-#: ../gedit/gedit-print-job-preview.c:803
+#: ../gedit/gedit-print-job-preview.c:801
 msgid "Show multiple pages"
 msgstr "Näytä useita sivuja"
 
-#: ../gedit/gedit-print-job-preview.c:815
+#: ../gedit/gedit-print-job-preview.c:813
 msgid "Zoom 1:1"
 msgstr "Suurennos 1:1"
 
-#: ../gedit/gedit-print-job-preview.c:823
+#: ../gedit/gedit-print-job-preview.c:821
 msgid "Zoom to fit the whole page"
 msgstr "Sovita ikkunan kokoiseksi"
 
-#: ../gedit/gedit-print-job-preview.c:832
+#: ../gedit/gedit-print-job-preview.c:830
 msgid "Zoom the page in"
 msgstr "Lähennä sivua"
 
-#: ../gedit/gedit-print-job-preview.c:840
+#: ../gedit/gedit-print-job-preview.c:838
 msgid "Zoom the page out"
 msgstr "Loitonna sivua"
 
-#: ../gedit/gedit-print-job-preview.c:850
+#: ../gedit/gedit-print-job-preview.c:848
 msgid "_Close Preview"
 msgstr "_Sulje esikatselu"
 
-#: ../gedit/gedit-print-job-preview.c:854
+#: ../gedit/gedit-print-job-preview.c:852
 msgid "Close print preview"
 msgstr "Sulje tulostuksen esikatselu"
 
-#: ../gedit/gedit-print-job-preview.c:1094
-#: ../gedit/gedit-print-job-preview.c:1095
+#: ../gedit/gedit-print-job-preview.c:1092
+#: ../gedit/gedit-print-job-preview.c:1093
 msgid "Number of pages horizontally"
 msgstr "Sivujen lukumäärä vaakasuunnassa"
 
-#: ../gedit/gedit-print-job-preview.c:1098
-#: ../gedit/gedit-print-job-preview.c:1099
+#: ../gedit/gedit-print-job-preview.c:1096
+#: ../gedit/gedit-print-job-preview.c:1097
 msgid "Number of pages vertically"
 msgstr "Sivujen lukumäärä pystysuunnassa"
 
-#: ../gedit/gedit-print-job-preview.c:1163
+#: ../gedit/gedit-print-job-preview.c:1161
 msgid "No visible output was created."
 msgstr "Näkyvää tulostetta ei syntynyt."
 
-#: ../gedit/gedit-statusbar.c:256
+#: ../gedit/gedit-source-style-manager.c:214
+#, c-format
+msgid "Directory '%s' could not be created: g_mkdir_with_parents() failed: %s"
+msgstr "Kansiota \"%s\" ei voitu luoda, g_mkdir_with_parents() epäonnistui: %s"
+
+#: ../gedit/gedit-statusbar.c:248
 msgid "  OVR"
 msgstr "  PÄÄLLE"
 
-#: ../gedit/gedit-statusbar.c:258
+#: ../gedit/gedit-statusbar.c:250
 msgid "  INS"
 msgstr "  LISÄÄ"
 
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-statusbar.c:297
+#: ../gedit/gedit-statusbar.c:289
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Rvi %d, Srke %d"
 
-#: ../gedit/gedit-statusbar.c:396
+#: ../gedit/gedit-statusbar.c:388
 #, c-format
 msgid "There is a tab with errors"
 msgid_plural "There are %d tabs with errors"
@@ -2168,7 +2079,7 @@ msgstr "Luo uusi asiakirja"
 msgid "_Open..."
 msgstr "_Avaa..."
 
-#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1494
+#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1467
 msgid "Open a file"
 msgstr "Avaa tiedosto"
 
@@ -2417,44 +2328,44 @@ msgstr "_Alapaneeli"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Näytä tai piilota alapaneeli nykyisessä ikkunassa"
 
-#: ../gedit/gedit-utils.c:997
+#: ../gedit/gedit-utils.c:996
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Tiedostoa %s ei löydy."
 
-#: ../gedit/gedit-utils.c:1001 ../gedit/gedit-utils.c:1030
+#: ../gedit/gedit-utils.c:1000 ../gedit/gedit-utils.c:1036
 msgid "Please check your installation."
 msgstr "Tarkista asennuksesi."
 
-#: ../gedit/gedit-utils.c:1026
+#: ../gedit/gedit-utils.c:1032
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "Tarvittavia elementtejä ei löytynyt tiedostosta %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1133
+#: ../gedit/gedit-view.c:1128
 msgid "_Wrap Around"
 msgstr "_Rivitä"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1143
+#: ../gedit/gedit-view.c:1138
 msgid "Match _Entire Word Only"
 msgstr "Täsmää vain _kokonaisia sanoja"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1153
+#: ../gedit/gedit-view.c:1148
 msgid "_Match Case"
 msgstr "_Huomioi kirjainkoko"
 
-#: ../gedit/gedit-view.c:1242
+#: ../gedit/gedit-view.c:1236
 msgid "String you want to search for"
 msgstr "Etsittävä merkkijono"
 
-#: ../gedit/gedit-view.c:1252
+#: ../gedit/gedit-view.c:1244
 msgid "Line you want to move the cursor to"
 msgstr "Rivi, jolle haluat siirtää kursorin"
 
-#: ../gedit/gedit-window.c:901
+#: ../gedit/gedit-window.c:872
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Käytä %s-väritystä"
@@ -2462,34 +2373,34 @@ msgstr "Käytä %s-väritystä"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:963
+#: ../gedit/gedit-window.c:934
 msgid "None"
 msgstr "Ei mitään"
 
-#: ../gedit/gedit-window.c:964
+#: ../gedit/gedit-window.c:935
 msgid "Disable syntax highlighting"
 msgstr "Älä käytä syntaksiväritystä"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1248
+#: ../gedit/gedit-window.c:1224
 #, c-format
 msgid "Open '%s'"
 msgstr "Avaa \"%s\""
 
-#: ../gedit/gedit-window.c:1367
+#: ../gedit/gedit-window.c:1343
 msgid "Save"
 msgstr "Tallenna"
 
-#: ../gedit/gedit-window.c:1498
+#: ../gedit/gedit-window.c:1471
 msgid "Open a recently used file"
 msgstr "Avaa äskettäin käytetty tiedosto"
 
-#: ../gedit/gedit-window.c:1505
+#: ../gedit/gedit-window.c:1478
 msgid "Open"
 msgstr "Avaa"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1555
+#: ../gedit/gedit-window.c:1528
 #, c-format
 msgid "Activate '%s'"
 msgstr "Avaa \"%s\""
@@ -3680,26 +3591,22 @@ msgstr "Tarkista aktiivisen asiakirjan oikeinkirjoitus."
 msgid "Spell Checker"
 msgstr "Oikoluku"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:536
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:599
 msgid "Select the group of tags you want to use"
 msgstr "Valitse käytettävä merkintäryhmä"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:557
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:618
 msgid "_Preview"
 msgstr "_Esikatselu"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:627
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:684
 msgid "Available Tag Lists"
 msgstr "Käytettävissä olevat merkinnät"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:630
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:649
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
 msgid "Tags"
 msgstr "Merkinnät"
-
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:644
-msgid "Double-click on a tag to insert it in the current document"
-msgstr "Lisää merkintä nykyiseen asiakirjaan kaksoisnapsauttamalla"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
@@ -3796,6 +3703,10 @@ msgstr "Oletuskirjasin"
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
 msgid "Base font (deprecated)"
 msgstr "Peruskirjasin (vanhentunut)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:28
+msgid "Bold"
+msgstr "Lihavoitu"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Border"
@@ -5292,6 +5203,81 @@ msgstr "_Kysy muotoilua"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Käytä mukautettua muotoilua"
+
+#~ msgid "gedit Style Scheme editor"
+#~ msgstr "geditin tyylimallien muokkain"
+
+#~ msgid "<b>Elements</b>"
+#~ msgstr "<b>Elementit</b>"
+
+#~ msgid "Basic Colors"
+#~ msgstr "Perusvärit"
+
+#~ msgid "Cu_rrent line color:"
+#~ msgstr "_Nykyinen riviväri:"
+
+#~ msgid "Italic"
+#~ msgstr "Kursiivi"
+
+#~ msgid "Pick the background color"
+#~ msgstr "Valitse taustaväri"
+
+#~ msgid "Pick the current line color"
+#~ msgstr "Valitse nykyisen rivin väri"
+
+#~ msgid "Pick the foreground color"
+#~ msgstr "Valitse edustaväri"
+
+#~ msgid "Pick the normal text color"
+#~ msgstr "Valitse normaali tekstiväri"
+
+#~ msgid "Pick the search highlighting color"
+#~ msgstr "Valitse hakujen korostusväri"
+
+#~ msgid "Pick the selected text color"
+#~ msgstr "Valitse valitun tekstin väri"
+
+#~ msgid "Pick the selection color"
+#~ msgstr "Valitse valintaväri"
+
+#~ msgid "S_earch highlighting color:"
+#~ msgstr "_Haun korostusväri:"
+
+#~ msgid "Se_lection color:"
+#~ msgstr "V_alintaväri:"
+
+#~ msgid "Selecte_d text color:"
+#~ msgstr "Valitun _tekstin väri:"
+
+#~ msgid "Strikethrough"
+#~ msgstr "Lävistetty"
+
+#~ msgid "Syntax Highlighting"
+#~ msgstr "Syntaksiväritys"
+
+#~ msgid "Underline"
+#~ msgstr "Alleviivattu"
+
+#~ msgid "_Background color:"
+#~ msgstr "_Taustaväri:"
+
+#~ msgid "_Background:"
+#~ msgstr "_Tausta:"
+
+#~ msgid "_Foreground:"
+#~ msgstr "_Edustaväri:"
+
+#~ msgid "_Normal text color:"
+#~ msgstr "_Tavallinen tekstiväri:"
+
+#~ msgid "_Reset to Default "
+#~ msgstr "_Aseta oletukseksi"
+
+#~ msgid "My %s"
+#~ msgstr "Oma - %s"
+
+#~ msgid "Double-click on a tag to insert it in the current document"
+#~ msgstr "Lisää merkintä nykyiseen asiakirjaan kaksoisnapsauttamalla"
 
 #~ msgid ""
 #~ "Background color for selected text in the editing area. This will only "
