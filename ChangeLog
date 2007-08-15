@@ -1,5 +1,15 @@
 2007-08-15  Paolo Borelli  <pborelli@katamail.com>
 
+	* plugins/spell/gedit-spell-plugin.c:
+	* plugins/spell/gedit-spell-language-dialog.[ch]:
+	* plugins/spell/gedit-spell-checker-dialog.c:
+
+	Turn the language dialog into a GtkDialog suubclass and 
+	make use of gedit_utils_get_glade_widgets instead of using
+	glade directly.
+
+2007-08-15  Paolo Borelli  <pborelli@katamail.com>
+
 	* gedit/gedit-commands-file.c: add comment for translators.
 
 2007-08-15  Paolo Borelli  <pborelli@katamail.com>

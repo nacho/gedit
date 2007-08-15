@@ -32,11 +32,9 @@
 #endif
 
 #include <string.h>
-
 #include <glib/gi18n.h>
-#include <glade/glade-xml.h>
 #include <gtk/gtk.h>
-
+#include <gedit/gedit-utils.h>
 #include "gedit-spell-checker-dialog.h"
 #include "gedit-spell-checker-dialog-marshal.h"
 
@@ -219,56 +217,43 @@ gedit_spell_checker_dialog_class_init (GeditSpellCheckerDialogClass * klass)
 static void
 gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 {
-	GladeXML *gui;
+	GtkWidget *error_widget;
 	GtkWidget *content;
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *cell;
 	GtkTreeSelection *selection;
+	gboolean ret;
 
 	g_return_if_fail (dlg != NULL);
-	
+
 	dlg->spell_checker = NULL;
 	dlg->misspelled_word = NULL;
 
-	gui = glade_xml_new (GEDIT_GLADEDIR "spell-checker.glade2",
-			     "content", NULL);
+	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "spell-checker.glade2",
+		"content",
+		&error_widget,
 
-	if (!gui) 
+		"content", &content,
+		"misspelled_word_label", &dlg->misspelled_word_label,
+		"word_entry", &dlg->word_entry,
+		"check_word_button", &dlg->check_word_button,
+		"ignore_button", &dlg->ignore_button,
+		"ignore_all_button", &dlg->ignore_all_button,
+		"change_button", &dlg->change_button,
+		"change_all_button", &dlg->change_all_button,
+		"add_word_button", &dlg->add_word_button,
+		"close_button", &dlg->close_button,
+		"suggestions_list", &dlg->suggestions_list,
+		"language_label", &dlg->language_label,
+		NULL);
+
+	if (!ret)
 	{
-		g_warning ("Could not find spell-checker.glade2, reinstall gedit.\n");
-		return;
-	}
-
-	content = glade_xml_get_widget (gui, "content");
-	
-	dlg->misspelled_word_label = glade_xml_get_widget (gui, "misspelled_word_label");
-	dlg->word_entry = glade_xml_get_widget (gui, "word_entry");
-	dlg->check_word_button = glade_xml_get_widget (gui, "check_word_button");
-	dlg->ignore_button = glade_xml_get_widget (gui, "ignore_button");
-	dlg->ignore_all_button = glade_xml_get_widget (gui, "ignore_all_button");
-	dlg->change_button = glade_xml_get_widget (gui, "change_button");
-	dlg->change_all_button = glade_xml_get_widget (gui, "change_all_button");
-	dlg->add_word_button = glade_xml_get_widget (gui, "add_word_button");
-	dlg->close_button = glade_xml_get_widget (gui, "close_button");
-	dlg->suggestions_list = glade_xml_get_widget (gui, "suggestions_list");
-	dlg->language_label = glade_xml_get_widget (gui, "language_label");
-	
-	if ((content == NULL) ||
-	    (dlg->misspelled_word_label == NULL) ||
-	    (dlg->word_entry == NULL) ||
-	    (dlg->check_word_button == NULL) ||
-	    (dlg->ignore_button == NULL) || 
-	    (dlg->ignore_all_button == NULL) ||
-	    (dlg->change_button == NULL) ||
-	    (dlg->change_all_button == NULL) ||
-	    (dlg->add_word_button == NULL) ||
-	    (dlg->close_button == NULL) ||
-	    (dlg->suggestions_list == NULL) ||
-	    (dlg->language_label == NULL))
-	{
-		g_object_unref (G_OBJECT (gui));
-
-		g_warning ("Could not find the required widgets inside spell-checker.glade2.\n");
+		gtk_widget_show (error_widget);
+			
+		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dlg)->vbox),
+					     error_widget);
+		
 		return;
 	}
 
@@ -340,8 +325,6 @@ gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 
 	g_signal_connect (G_OBJECT (dlg->suggestions_list), "row-activated",
 			  G_CALLBACK (suggestions_list_row_activated_handler), dlg);
-
-	g_object_unref (G_OBJECT (gui));
 }
 
 static void

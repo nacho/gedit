@@ -659,11 +659,31 @@ add_word_cb (GeditSpellCheckerDialog *dlg,
 }
 
 static void
+language_dialog_response (GtkDialog         *dlg,
+			  gint               res_id,
+			  GeditSpellChecker *spell)
+{
+	if (res_id == GTK_RESPONSE_OK)
+	{
+		const GeditSpellCheckerLanguage *lang;
+
+		lang = gedit_spell_language_get_selected_language (GEDIT_SPELL_LANGUAGE_DIALOG (dlg));
+		if (lang != NULL)
+			gedit_spell_checker_set_language (spell, lang);
+	}
+
+	gtk_widget_destroy (GTK_WIDGET (dlg));
+}
+
+static void
 set_language_cb (GtkAction   *action,
 		 GeditWindow *window)
 {
 	GeditDocument *doc;
 	GeditSpellChecker *spell;
+	const GeditSpellCheckerLanguage *lang;
+	GtkWidget *dlg;
+	GtkWindowGroup *wg;
 
 	gedit_debug (DEBUG_PLUGINS);
 
@@ -673,7 +693,22 @@ set_language_cb (GtkAction   *action,
 	spell = get_spell_checker_from_document (doc);
 	g_return_if_fail (spell != NULL);
 
-	gedit_spell_language_dialog_run (spell, GTK_WINDOW (window));
+	lang = gedit_spell_checker_get_language (spell);
+
+	dlg = gedit_spell_language_dialog_new (GTK_WINDOW (window), lang);
+
+	wg = gedit_window_get_group (window);
+
+	gtk_window_group_add_window (wg, GTK_WINDOW (dlg));
+
+	gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
+
+	g_signal_connect (dlg,
+			  "response",
+			  G_CALLBACK (language_dialog_response),
+			  spell);
+
+	gtk_widget_show (dlg);
 }
 
 static void
