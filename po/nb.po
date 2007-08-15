@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.15.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-02 13:45+0200\n"
-"PO-Revision-Date: 2007-08-02 13:54+0200\n"
+"POT-Creation-Date: 2007-08-15 11:07+0200\n"
+"PO-Revision-Date: 2007-08-15 11:12+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -692,13 +692,13 @@ msgstr "Hvis du ikke lagrer vil alle endringene gå tapt."
 msgid "Character Codings"
 msgstr "Tegnkodinger"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:365
-#: ../gedit/dialogs/gedit-encodings-dialog.c:426
+#: ../gedit/dialogs/gedit-encodings-dialog.c:373
+#: ../gedit/dialogs/gedit-encodings-dialog.c:434
 msgid "_Description"
 msgstr "_Beskrivelse"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:374
-#: ../gedit/dialogs/gedit-encodings-dialog.c:435
+#: ../gedit/dialogs/gedit-encodings-dialog.c:382
+#: ../gedit/dialogs/gedit-encodings-dialog.c:443
 msgid "_Encoding"
 msgstr "_Koding"
 
@@ -735,7 +735,6 @@ msgstr "Sideoppsett"
 #. ex:ts=4:et:
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:1
 #: ../plugins/docinfo/docinfo.glade2.h:1
 #: ../plugins/externaltools/tools/tools.glade.h:1
 #: ../plugins/snippets/snippets/snippets.glade.h:1
@@ -780,7 +779,7 @@ msgid "Print _line numbers"
 msgstr "Skriv ut _linjenummer"
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:11
-msgid "Print s_yntax highlighting"
+msgid "Print synta_x highlighting"
 msgstr "Skriv ut fargemerking av s_yntaks"
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:12
@@ -807,23 +806,44 @@ msgstr "Gjenopp_rett forvalgte skrifter"
 msgid "lines"
 msgstr "linjer"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:583
+#: ../gedit/dialogs/gedit-preferences-dialog.c:570
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Trykk på denne knappen for å velge skriften som skal brukes av "
 "redigeringsprogrammet"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:593
+#: ../gedit/dialogs/gedit-preferences-dialog.c:580
 #, c-format
 msgid "_Use the system fixed width font (%s)"
 msgstr "Br_uk systemets skrift for fast bredde (%s)"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:749
-#, c-format
-msgid "Could not remove the style scheme \"%s\""
-msgstr "Kunne ikke fjerne stilschema «%s»"
+#: ../gedit/dialogs/gedit-preferences-dialog.c:767
+msgid "The selected color scheme cannot be installed."
+msgstr "Valgt fargeschema kan ikke installeres."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:979
+#: ../gedit/dialogs/gedit-preferences-dialog.c:792
+msgid "Add Scheme"
+msgstr "Legg til schema"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:799
+msgid "A_dd Scheme"
+msgstr "_Legg til schema"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:807
+msgid "Color Scheme Files"
+msgstr "Filer for fargeschema"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:814
+#: ../gedit/gedit-file-chooser-dialog.c:52
+msgid "All Files"
+msgstr "Alle filer"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:859
+#, c-format
+msgid "Could not remove color scheme \"%s\"."
+msgstr "Kunne ikke fjerne fargeschema «%s»"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1058
 msgid "gedit Preferences"
 msgstr "Brukervalg for gedit"
 
@@ -880,8 +900,8 @@ msgid "Font & Colors"
 msgstr "Skrifter og farger"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:19
-msgid "Hi_ghlight current line"
-msgstr "Ut_hev aktiv linje"
+msgid "Highlight current _line"
+msgstr "Uthev aktiv _linje"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:20
 msgid "Highlight matching _bracket"
@@ -940,11 +960,11 @@ msgstr "Erstatt"
 msgid "Find"
 msgstr "Finn"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:375
+#: ../gedit/dialogs/gedit-search-dialog.c:382
 msgid "Replace _All"
 msgstr "Erstatt _alle"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:376
+#: ../gedit/dialogs/gedit-search-dialog.c:383
 #: ../gedit/gedit-commands-file.c:676
 msgid "_Replace"
 msgstr "E_rstatt"
@@ -976,117 +996,6 @@ msgstr "_Søk etter: "
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:8
 msgid "_Wrap around"
 msgstr "_Brytningsmodus"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.c:117
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:26
-msgid "gedit Style Scheme editor"
-msgstr "redigering av stilskjema"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:2
-msgid "<b>Elements</b>"
-msgstr "<b>Elementer</b>"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:3
-msgid "Basic Colors"
-msgstr "Grunnleggende farger"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:4
-#: ../plugins/taglist/HTML.tags.xml.in.h:28
-msgid "Bold"
-msgstr "Uthevet"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:5
-msgid "Color scheme _name:"
-msgstr "Navn på farge_schema:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:6
-msgid "Cu_rrent line color:"
-msgstr "Fa_rge for denne linjen:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:7
-msgid "Italic"
-msgstr "Kursiv"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:8
-msgid "Pick the background color"
-msgstr "Velg bakgrunnsfarge"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:9
-msgid "Pick the current line color"
-msgstr "Velg farge for denne linjen"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:10
-msgid "Pick the foreground color"
-msgstr "Velg forgrunnsfarge"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:11
-msgid "Pick the normal text color"
-msgstr "Velg normal tekstfarge"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:12
-msgid "Pick the search highlighting color"
-msgstr "Velg farge for utheving av søk"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:13
-msgid "Pick the selected text color"
-msgstr "Bruk valgt tekstfarge"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:14
-msgid "Pick the selection color"
-msgstr "Velg farge for utvalget"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:15
-msgid "S_earch highlighting color:"
-msgstr "Farge for uth_eving ved søk:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:16
-msgid "Se_lection color:"
-msgstr "Utva_lgsfarge:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:17
-msgid "Selecte_d text color:"
-msgstr "Val_gt tekstfarge:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:18
-msgid "Strikethrough"
-msgstr "Gjennomstreking"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:19
-msgid "Syntax Highlighting"
-msgstr "Syntaksutheving"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:20
-msgid "Underline"
-msgstr "Understrek"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:21
-msgid "_Background color:"
-msgstr "_Bakgrunnsfarge:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:22
-msgid "_Background:"
-msgstr "_Bakgrunn:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:23
-msgid "_Foreground:"
-msgstr "_Forgrunn:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:24
-msgid "_Normal text color:"
-msgstr "Farge for _normal tekst:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:25
-msgid "_Reset to Default "
-msgstr "_Nullstill til forvalg "
-
-#. TRANSLATORS: %s is a color scheme name. The resulting string represents
-#. * the name of a color scheme generated by the color scheme in %s.
-#. * So if %s is "Dark", the resulting string should be something like
-#. * "My Dark"
-#: ../gedit/dialogs/gedit-style-scheme-generator.c:117
-#, c-format
-msgid "My %s"
-msgstr "Min %s"
 
 #: ../gedit/gedit.c:73
 msgid ""
@@ -1272,7 +1181,7 @@ msgstr "Fant og erstattet en oppføring"
 msgid "Phrase not found"
 msgstr "Frase ikke funnet"
 
-#: ../gedit/gedit-document.c:768 ../gedit/gedit-document.c:862
+#: ../gedit/gedit-document.c:816 ../gedit/gedit-document.c:910
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Ikke-lagret dokument %d"
@@ -1282,7 +1191,7 @@ msgstr "Ikke-lagret dokument %d"
 msgid "Read Only"
 msgstr "Skrivebeskyttet"
 
-#: ../gedit/gedit-documents-panel.c:700
+#: ../gedit/gedit-documents-panel.c:759
 msgid "Documents"
 msgstr "Dokumenter"
 
@@ -1417,10 +1326,6 @@ msgstr "Aktivt locale (%s)"
 msgid "Add or _Remove..."
 msgstr "Legg til eller fje_rn..."
 
-#: ../gedit/gedit-file-chooser-dialog.c:52
-msgid "All Files"
-msgstr "Alle filer"
-
 #: ../gedit/gedit-file-chooser-dialog.c:53
 msgid "All Text Files"
 msgstr "Alle tekstfiler"
@@ -1517,6 +1422,7 @@ msgstr ""
 #: ../gedit/gedit-io-error-message-area.c:1280
 #: ../gedit/gedit-io-error-message-area.c:1291
 #: ../gedit/gedit-io-error-message-area.c:1299
+#, c-format
 msgid ""
 "Host name was invalid. Please check that you typed the location correctly "
 "and try again."
@@ -1652,12 +1558,12 @@ msgstr ""
 
 #: ../gedit/gedit-io-error-message-area.c:994
 #: ../gedit/gedit-io-error-message-area.c:1089
-msgid "_Save Anyway"
-msgstr "_Lagre likevel"
+msgid "S_ave Anyway"
+msgstr "L_agre likevel"
 
 #: ../gedit/gedit-io-error-message-area.c:998
 #: ../gedit/gedit-io-error-message-area.c:1093
-msgid "_Don't Save"
+msgid "D_on't Save"
 msgstr "_Ikke lagre"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
@@ -1825,15 +1731,15 @@ msgstr "_Last på nytt"
 msgid "Could not obtain backup filename"
 msgstr "Kunne ikke finne navn på sikkerhetskopi"
 
-#: ../gedit/gedit-notebook.c:845
+#: ../gedit/gedit-notebook.c:834
 msgid "Close document"
 msgstr "Lukk dokument"
 
-#: ../gedit/gedit-panel.c:365 ../gedit/gedit-panel.c:579
+#: ../gedit/gedit-panel.c:361 ../gedit/gedit-panel.c:569
 msgid "Empty"
 msgstr "Tom"
 
-#: ../gedit/gedit-panel.c:523 ../gedit/gedit-panel.c:600
+#: ../gedit/gedit-panel.c:514 ../gedit/gedit-panel.c:588
 msgid "Hide panel"
 msgstr "Skjul panel"
 
@@ -1919,82 +1825,87 @@ msgstr "Vis forrige side"
 msgid "Show the next page"
 msgstr "Vis neste side"
 
-#: ../gedit/gedit-print-job-preview.c:765
+#: ../gedit/gedit-print-job-preview.c:764
 msgid "Current page (Alt+P)"
 msgstr "Denne siden (Alt+P)"
 
 #. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
 #. We are displaying 'XXX of XXX'.
-#: ../gedit/gedit-print-job-preview.c:779
+#: ../gedit/gedit-print-job-preview.c:777
 msgid "of"
 msgstr "av"
 
-#: ../gedit/gedit-print-job-preview.c:785
+#: ../gedit/gedit-print-job-preview.c:783
 msgid "Page total"
 msgstr "Sider totalt"
 
-#: ../gedit/gedit-print-job-preview.c:786
+#: ../gedit/gedit-print-job-preview.c:784
 msgid "The total number of pages in the document"
 msgstr "Totalt antall sider i dokumentet"
 
-#: ../gedit/gedit-print-job-preview.c:803
+#: ../gedit/gedit-print-job-preview.c:801
 msgid "Show multiple pages"
 msgstr "Vis flere sider"
 
-#: ../gedit/gedit-print-job-preview.c:815
+#: ../gedit/gedit-print-job-preview.c:813
 msgid "Zoom 1:1"
 msgstr "Zoom 1:1"
 
-#: ../gedit/gedit-print-job-preview.c:823
+#: ../gedit/gedit-print-job-preview.c:821
 msgid "Zoom to fit the whole page"
 msgstr "Zoom tilpasset hele siden"
 
-#: ../gedit/gedit-print-job-preview.c:832
+#: ../gedit/gedit-print-job-preview.c:830
 msgid "Zoom the page in"
 msgstr "Sett inn på siden"
 
-#: ../gedit/gedit-print-job-preview.c:840
+#: ../gedit/gedit-print-job-preview.c:838
 msgid "Zoom the page out"
 msgstr "Zoom ut på siden"
 
-#: ../gedit/gedit-print-job-preview.c:850
+#: ../gedit/gedit-print-job-preview.c:848
 msgid "_Close Preview"
 msgstr "_Lukk forhåndsvisning"
 
-#: ../gedit/gedit-print-job-preview.c:854
+#: ../gedit/gedit-print-job-preview.c:852
 msgid "Close print preview"
 msgstr "Lukk forhåndsvisning av utskrift"
 
-#: ../gedit/gedit-print-job-preview.c:1094
-#: ../gedit/gedit-print-job-preview.c:1095
+#: ../gedit/gedit-print-job-preview.c:1092
+#: ../gedit/gedit-print-job-preview.c:1093
 msgid "Number of pages horizontally"
 msgstr "Antall sider horisontalt"
 
-#: ../gedit/gedit-print-job-preview.c:1098
-#: ../gedit/gedit-print-job-preview.c:1099
+#: ../gedit/gedit-print-job-preview.c:1096
+#: ../gedit/gedit-print-job-preview.c:1097
 msgid "Number of pages vertically"
 msgstr "Antall sider vertikalt"
 
-#: ../gedit/gedit-print-job-preview.c:1163
+#: ../gedit/gedit-print-job-preview.c:1161
 msgid "No visible output was created."
 msgstr "Ingen synlige utdata ble opprettet."
 
-#: ../gedit/gedit-statusbar.c:256
+#: ../gedit/gedit-source-style-manager.c:214
+#, c-format
+msgid "Directory '%s' could not be created: g_mkdir_with_parents() failed: %s"
+msgstr "Kunne ikke opprette katalog «%s»: g_mkdir_with_parents() feilet: %s"
+
+#: ../gedit/gedit-statusbar.c:248
 msgid "  OVR"
 msgstr "  OVR"
 
-#: ../gedit/gedit-statusbar.c:258
+#: ../gedit/gedit-statusbar.c:250
 msgid "  INS"
 msgstr "  SET"
 
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-statusbar.c:297
+#: ../gedit/gedit-statusbar.c:289
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ln. %d, Kol. %d"
 
-#: ../gedit/gedit-statusbar.c:396
+#: ../gedit/gedit-statusbar.c:388
 #, c-format
 msgid "There is a tab with errors"
 msgid_plural "There are %d tabs with errors"
@@ -2364,40 +2275,40 @@ msgstr "_Bunnpanel"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Vis eller skjul bunnpanelet i dette vinduet"
 
-#: ../gedit/gedit-utils.c:997
+#: ../gedit/gedit-utils.c:996
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Kunne ikke finne fil %s."
 
-#: ../gedit/gedit-utils.c:1001 ../gedit/gedit-utils.c:1030
+#: ../gedit/gedit-utils.c:1000 ../gedit/gedit-utils.c:1036
 msgid "Please check your installation."
 msgstr "Vennligst sjekk din installasjon."
 
-#: ../gedit/gedit-utils.c:1026
+#: ../gedit/gedit-utils.c:1032
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "Kunne ikke finne nødvendige komponenter i fil %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1133
+#: ../gedit/gedit-view.c:1128
 msgid "_Wrap Around"
 msgstr "_Bryting"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1143
+#: ../gedit/gedit-view.c:1138
 msgid "Match _Entire Word Only"
 msgstr "Kun treff på _hele ord"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1153
+#: ../gedit/gedit-view.c:1148
 msgid "_Match Case"
 msgstr "_Skill mellom små/store bokstaver"
 
-#: ../gedit/gedit-view.c:1242
+#: ../gedit/gedit-view.c:1236
 msgid "String you want to search for"
 msgstr "Streng du vil søke etter"
 
-#: ../gedit/gedit-view.c:1252
+#: ../gedit/gedit-view.c:1244
 msgid "Line you want to move the cursor to"
 msgstr "Linje du vil flytte markøren til"
 
@@ -3188,12 +3099,12 @@ msgstr "S_narveitast:"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:8
 msgid "Shortcut key with which the snippet is activated"
-msgstr ""
+msgstr "Snarveitast som aktiverer tekstblokker"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:9
 #: ../plugins/snippets/snippets/Manager.py:697
 msgid "Single word with which the snippet is activated after pressing tab"
-msgstr ""
+msgstr "Enkelt ord som aktiverer tekstblokker etter å trykke tabulator"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:10
 msgid "Snippets Manager"
@@ -3298,12 +3209,12 @@ msgstr "Eksport fullført"
 #: ../plugins/snippets/snippets/Manager.py:871
 #: ../plugins/snippets/snippets/Manager.py:938
 msgid "Do you want to include selected <b>system</b> snippets in your export?"
-msgstr ""
+msgstr "Vil du ta med valgte <b>system</b>-tekstblokker i eksporten?"
 
 #: ../plugins/snippets/snippets/Manager.py:886
 #: ../plugins/snippets/snippets/Manager.py:956
 msgid "There are no snippets selected to be exported"
-msgstr ""
+msgstr "Ingen tekstblokker valgt for eksport"
 
 #: ../plugins/snippets/snippets/Manager.py:891
 #: ../plugins/snippets/snippets/Manager.py:929
@@ -3321,23 +3232,23 @@ msgstr "Skriv inn en ny snarvei"
 #: ../plugins/snippets/snippets/Exporter.py:65
 #, python-format
 msgid "The archive `%s` could not be created"
-msgstr ""
+msgstr "Arkivet «%s» kunne ikke opprettes"
 
 #: ../plugins/snippets/snippets/Exporter.py:82
 #, python-format
 msgid "Target directory `%s` does not exist"
-msgstr ""
+msgstr "Målkatalog «%s» eksisterer ikke"
 
 #: ../plugins/snippets/snippets/Exporter.py:85
 #, python-format
 msgid "Target directory `%s` is not a valid directory"
-msgstr ""
+msgstr "Målkatalog «%s» er ikke en gyldig katalog"
 
 #: ../plugins/snippets/snippets/Importer.py:29
 #: ../plugins/snippets/snippets/Importer.py:83
 #, python-format
 msgid "File `%s` does not exist"
-msgstr ""
+msgstr "Fil «%s» eksisterer ikke"
 
 #: ../plugins/snippets/snippets/Importer.py:32
 #, python-format
@@ -3347,23 +3258,23 @@ msgstr "Filen «%s» er ikke en gyldig tekstblokkfil"
 #: ../plugins/snippets/snippets/Importer.py:42
 #, python-format
 msgid "Imported file `%s` is not a valid snippets file"
-msgstr ""
+msgstr "Importert fil «%s» er ikke en gyldig tekstblokkfil"
 
 #: ../plugins/snippets/snippets/Importer.py:52
 #, python-format
 msgid "The archive `%s` could not be extracted"
-msgstr ""
+msgstr "Arkivet «%s» kunne ikke pakkes ut"
 
 #: ../plugins/snippets/snippets/Importer.py:70
 #, python-format
 msgid "The following files could not be imported: %s"
-msgstr ""
+msgstr "Følgende filer kunne ikke importeres: %s"
 
 #: ../plugins/snippets/snippets/Importer.py:86
 #: ../plugins/snippets/snippets/Importer.py:99
 #, python-format
 msgid "File `%s` is not a valid snippets archive"
-msgstr ""
+msgstr "Fil «%s» er ikke et gyldig tekstblokkarkiv"
 
 #: ../plugins/snippets/snippets/Placeholder.py:549
 #, python-format
@@ -3612,26 +3523,22 @@ msgstr "Sjekker staving i aktivt dokument."
 msgid "Spell Checker"
 msgstr "Stavekontroll"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:536
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:599
 msgid "Select the group of tags you want to use"
 msgstr "Velg gruppen med «tagger» du vil bruke"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:557
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:618
 msgid "_Preview"
 msgstr "_Forhåndsvisning"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:627
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:684
 msgid "Available Tag Lists"
 msgstr "Tilgjengelige lister over tags"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:630
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:649
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
 msgid "Tags"
 msgstr "Tags"
-
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:644
-msgid "Double-click on a tag to insert it in the current document"
-msgstr "Dobbelklikk på en «tag» for å sette den inn i aktivt dokument"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
@@ -3728,6 +3635,10 @@ msgstr "Basisskrift"
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
 msgid "Base font (deprecated)"
 msgstr "Basisskrift (fases ut)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:28
+msgid "Bold"
+msgstr "Uthevet"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Border"
