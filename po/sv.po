@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-02 14:43+0200\n"
-"PO-Revision-Date: 2007-08-02 14:51+0100\n"
+"POT-Creation-Date: 2007-08-15 08:38+0200\n"
+"PO-Revision-Date: 2007-08-15 08:40+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -525,13 +525,13 @@ msgstr "Om du inte sparar kommer alla dina ändringar att vara borta för alltid
 msgid "Character Codings"
 msgstr "Teckenkodningar"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:365
-#: ../gedit/dialogs/gedit-encodings-dialog.c:426
+#: ../gedit/dialogs/gedit-encodings-dialog.c:373
+#: ../gedit/dialogs/gedit-encodings-dialog.c:434
 msgid "_Description"
 msgstr "_Beskrivning"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:374
-#: ../gedit/dialogs/gedit-encodings-dialog.c:435
+#: ../gedit/dialogs/gedit-encodings-dialog.c:382
+#: ../gedit/dialogs/gedit-encodings-dialog.c:443
 msgid "_Encoding"
 msgstr "_Kodning"
 
@@ -568,7 +568,6 @@ msgstr "Sidkonfiguration"
 #. ex:ts=4:et:
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:1
 #: ../plugins/docinfo/docinfo.glade2.h:1
 #: ../plugins/externaltools/tools/tools.glade.h:1
 #: ../plugins/snippets/snippets/snippets.glade.h:1
@@ -613,8 +612,8 @@ msgid "Print _line numbers"
 msgstr "Skriv ut _radnummer"
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:11
-msgid "Print s_yntax highlighting"
-msgstr "Skriv ut s_yntaxmarkering"
+msgid "Print synta_x highlighting"
+msgstr "Skriv ut synta_xmarkering"
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:12
 msgid "_Body:"
@@ -640,21 +639,42 @@ msgstr "_Återställ standardtypsnitt"
 msgid "lines"
 msgstr "rad"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:583
+#: ../gedit/dialogs/gedit-preferences-dialog.c:570
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Tryck på denna knapp för att välja det typsnitt som används av redigeraren"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:593
+#: ../gedit/dialogs/gedit-preferences-dialog.c:580
 #, c-format
 msgid "_Use the system fixed width font (%s)"
 msgstr "_Använd systemets typsnitt med fast breddsteg (%s)"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:749
-#, c-format
-msgid "Could not remove the style scheme \"%s\""
-msgstr "Kunde inte ta bort stilschemat \"%s\""
+#: ../gedit/dialogs/gedit-preferences-dialog.c:767
+msgid "The selected color scheme cannot be installed."
+msgstr "Det valda färgschemat kan inte installeras."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:979
+#: ../gedit/dialogs/gedit-preferences-dialog.c:792
+msgid "Add Scheme"
+msgstr "Lägg till schema"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:799
+msgid "A_dd Scheme"
+msgstr "Lä_gg till schema"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:807
+msgid "Color Scheme Files"
+msgstr "Färgschemafiler"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:814
+#: ../gedit/gedit-file-chooser-dialog.c:52
+msgid "All Files"
+msgstr "Alla filer"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:859
+#, c-format
+msgid "Could not remove color scheme \"%s\"."
+msgstr "Kunde inte ta bort färgschemat \"%s\"."
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1058
 msgid "gedit Preferences"
 msgstr "Inställningar för gedit"
 
@@ -711,8 +731,8 @@ msgid "Font & Colors"
 msgstr "Typsnitt och färger"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:19
-msgid "Hi_ghlight current line"
-msgstr "F_ärgmarkera aktuell rad"
+msgid "Highlight current _line"
+msgstr "Färgmarkera a_ktuell rad"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:20
 msgid "Highlight matching _bracket"
@@ -774,11 +794,11 @@ msgstr "Ersätt"
 msgid "Find"
 msgstr "Sök"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:375
+#: ../gedit/dialogs/gedit-search-dialog.c:382
 msgid "Replace _All"
 msgstr "Ersätt _alla"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:376
+#: ../gedit/dialogs/gedit-search-dialog.c:383
 #: ../gedit/gedit-commands-file.c:676
 msgid "_Replace"
 msgstr "_Ersätt"
@@ -810,117 +830,6 @@ msgstr "_Sök efter: "
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:8
 msgid "_Wrap around"
 msgstr "_Börja om från början"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.c:117
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:26
-msgid "gedit Style Scheme editor"
-msgstr "Stilschemaredigerare för gedit"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:2
-msgid "<b>Elements</b>"
-msgstr "<b>Element</b>"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:3
-msgid "Basic Colors"
-msgstr "Grundläggande färger"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:4
-#: ../plugins/taglist/HTML.tags.xml.in.h:28
-msgid "Bold"
-msgstr "Fet"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:5
-msgid "Color scheme _name:"
-msgstr "_Namn på färgschema:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:6
-msgid "Cu_rrent line color:"
-msgstr "Färg för aktuell _rad:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:7
-msgid "Italic"
-msgstr "Kursiv"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:8
-msgid "Pick the background color"
-msgstr "Välj bakgrundsfärg"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:9
-msgid "Pick the current line color"
-msgstr "Välj färg för aktuell rad"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:10
-msgid "Pick the foreground color"
-msgstr "Välj förgrundsfärgen"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:11
-msgid "Pick the normal text color"
-msgstr "Välj färgen på normal text"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:12
-msgid "Pick the search highlighting color"
-msgstr "Välj markeringsfärg för sökning"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:13
-msgid "Pick the selected text color"
-msgstr "Välj färgen på markerad text"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:14
-msgid "Pick the selection color"
-msgstr "Välj markeringsfärgen"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:15
-msgid "S_earch highlighting color:"
-msgstr "Markeringsfärg för s_ökning: "
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:16
-msgid "Se_lection color:"
-msgstr "Ma_rkeringsfärg:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:17
-msgid "Selecte_d text color:"
-msgstr "Färg på markera_d text:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:18
-msgid "Strikethrough"
-msgstr "Genomstrykning"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:19
-msgid "Syntax Highlighting"
-msgstr "Syntaxmarkering"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:20
-msgid "Underline"
-msgstr "Understrykning"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:21
-msgid "_Background color:"
-msgstr "_Bakgrundsfärg:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:22
-msgid "_Background:"
-msgstr "_Bakgrund:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:23
-msgid "_Foreground:"
-msgstr "_Förgrund:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:24
-msgid "_Normal text color:"
-msgstr "_Normal textfärg:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:25
-msgid "_Reset to Default "
-msgstr "_Återställ till standard"
-
-#. TRANSLATORS: %s is a color scheme name. The resulting string represents
-#. * the name of a color scheme generated by the color scheme in %s.
-#. * So if %s is "Dark", the resulting string should be something like
-#. * "My Dark"
-#: ../gedit/dialogs/gedit-style-scheme-generator.c:117
-#, c-format
-msgid "My %s"
-msgstr "Min %s"
 
 #: ../gedit/gedit.c:73
 msgid "Set the character encoding to be used to open the files listed on the command line"
@@ -1092,8 +1001,8 @@ msgstr "Hittade och ersatte en förekomst"
 msgid "Phrase not found"
 msgstr "Frasen hittades inte"
 
-#: ../gedit/gedit-document.c:768
-#: ../gedit/gedit-document.c:862
+#: ../gedit/gedit-document.c:816
+#: ../gedit/gedit-document.c:910
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Osparat dokument %d"
@@ -1105,7 +1014,7 @@ msgstr "Osparat dokument %d"
 msgid "Read Only"
 msgstr "Skrivskyddad"
 
-#: ../gedit/gedit-documents-panel.c:700
+#: ../gedit/gedit-documents-panel.c:759
 msgid "Documents"
 msgstr "Dokument"
 
@@ -1263,10 +1172,6 @@ msgstr "Aktuell lokal (%s)"
 msgid "Add or _Remove..."
 msgstr "Lägg till eller _ta bort..."
 
-#: ../gedit/gedit-file-chooser-dialog.c:52
-msgid "All Files"
-msgstr "Alla filer"
-
 #: ../gedit/gedit-file-chooser-dialog.c:53
 msgid "All Text Files"
 msgstr "Alla textfiler"
@@ -1353,6 +1258,7 @@ msgstr "Värden %s kunde inte hittas. Kontrollera att dina proxyinställningar �
 #: ../gedit/gedit-io-error-message-area.c:1280
 #: ../gedit/gedit-io-error-message-area.c:1291
 #: ../gedit/gedit-io-error-message-area.c:1299
+#, c-format
 msgid "Host name was invalid. Please check that you typed the location correctly and try again."
 msgstr "Värdnamnet var ogiltigt. Kontrollera att du angav platsen korrekt och försök igen."
 
@@ -1468,12 +1374,12 @@ msgstr "Gedit öppnade denna instans av filen på ett icke-redigerbart sätt. Vi
 
 #: ../gedit/gedit-io-error-message-area.c:994
 #: ../gedit/gedit-io-error-message-area.c:1089
-msgid "_Save Anyway"
-msgstr "_Spara ändå"
+msgid "S_ave Anyway"
+msgstr "Spara än_då"
 
 #: ../gedit/gedit-io-error-message-area.c:998
 #: ../gedit/gedit-io-error-message-area.c:1093
-msgid "_Don't Save"
+msgid "D_on't Save"
 msgstr "Spara i_nte"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
@@ -1585,17 +1491,17 @@ msgstr "_Läs om"
 msgid "Could not obtain backup filename"
 msgstr "Kunde inte få tag på filnamn för säkerhetskopia"
 
-#: ../gedit/gedit-notebook.c:845
+#: ../gedit/gedit-notebook.c:834
 msgid "Close document"
 msgstr "Stäng dokument"
 
-#: ../gedit/gedit-panel.c:365
-#: ../gedit/gedit-panel.c:579
+#: ../gedit/gedit-panel.c:361
+#: ../gedit/gedit-panel.c:569
 msgid "Empty"
 msgstr "Tom"
 
-#: ../gedit/gedit-panel.c:523
-#: ../gedit/gedit-panel.c:600
+#: ../gedit/gedit-panel.c:514
+#: ../gedit/gedit-panel.c:588
 msgid "Hide panel"
 msgstr "Dölj panel"
 
@@ -1682,82 +1588,87 @@ msgstr "Visa föregående sida"
 msgid "Show the next page"
 msgstr "Visa nästa sida"
 
-#: ../gedit/gedit-print-job-preview.c:765
+#: ../gedit/gedit-print-job-preview.c:764
 msgid "Current page (Alt+P)"
 msgstr "Aktuell sida (Alt+P)"
 
 #. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
 #. We are displaying 'XXX of XXX'.
-#: ../gedit/gedit-print-job-preview.c:779
+#: ../gedit/gedit-print-job-preview.c:777
 msgid "of"
 msgstr "av"
 
-#: ../gedit/gedit-print-job-preview.c:785
+#: ../gedit/gedit-print-job-preview.c:783
 msgid "Page total"
 msgstr "Sidor totalt"
 
-#: ../gedit/gedit-print-job-preview.c:786
+#: ../gedit/gedit-print-job-preview.c:784
 msgid "The total number of pages in the document"
 msgstr "Det totala antalet sidor i dokumentet"
 
-#: ../gedit/gedit-print-job-preview.c:803
+#: ../gedit/gedit-print-job-preview.c:801
 msgid "Show multiple pages"
 msgstr "Visa flera sidor"
 
-#: ../gedit/gedit-print-job-preview.c:815
+#: ../gedit/gedit-print-job-preview.c:813
 msgid "Zoom 1:1"
 msgstr "Zooma 1:1"
 
-#: ../gedit/gedit-print-job-preview.c:823
+#: ../gedit/gedit-print-job-preview.c:821
 msgid "Zoom to fit the whole page"
 msgstr "Zooma för att passa hela sidan"
 
-#: ../gedit/gedit-print-job-preview.c:832
+#: ../gedit/gedit-print-job-preview.c:830
 msgid "Zoom the page in"
 msgstr "Zooma in sidan"
 
-#: ../gedit/gedit-print-job-preview.c:840
+#: ../gedit/gedit-print-job-preview.c:838
 msgid "Zoom the page out"
 msgstr "Zooma ut sidan"
 
-#: ../gedit/gedit-print-job-preview.c:850
+#: ../gedit/gedit-print-job-preview.c:848
 msgid "_Close Preview"
 msgstr "_Stäng förhandsvisning"
 
-#: ../gedit/gedit-print-job-preview.c:854
+#: ../gedit/gedit-print-job-preview.c:852
 msgid "Close print preview"
 msgstr "Stäng förhandsgranskning"
 
-#: ../gedit/gedit-print-job-preview.c:1094
-#: ../gedit/gedit-print-job-preview.c:1095
+#: ../gedit/gedit-print-job-preview.c:1092
+#: ../gedit/gedit-print-job-preview.c:1093
 msgid "Number of pages horizontally"
 msgstr "Antal sidor horisontellt"
 
-#: ../gedit/gedit-print-job-preview.c:1098
-#: ../gedit/gedit-print-job-preview.c:1099
+#: ../gedit/gedit-print-job-preview.c:1096
+#: ../gedit/gedit-print-job-preview.c:1097
 msgid "Number of pages vertically"
 msgstr "Antal sidor vertikalt"
 
-#: ../gedit/gedit-print-job-preview.c:1163
+#: ../gedit/gedit-print-job-preview.c:1161
 msgid "No visible output was created."
 msgstr "Ingen synlig utdata skapades."
 
-#: ../gedit/gedit-statusbar.c:256
+#: ../gedit/gedit-source-style-manager.c:214
+#, c-format
+msgid "Directory '%s' could not be created: g_mkdir_with_parents() failed: %s"
+msgstr "Katalogen \"%s\" kunde inte skapas: g_mkdir_with_parents() misslyckades: %s"
+
+#: ../gedit/gedit-statusbar.c:248
 msgid "  OVR"
 msgstr "  ÖVR"
 
-#: ../gedit/gedit-statusbar.c:258
+#: ../gedit/gedit-statusbar.c:250
 msgid "  INS"
 msgstr "  INF"
 
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-statusbar.c:297
+#: ../gedit/gedit-statusbar.c:289
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Rad %d, kolumn %d"
 
-#: ../gedit/gedit-statusbar.c:396
+#: ../gedit/gedit-statusbar.c:388
 #, c-format
 msgid "There is a tab with errors"
 msgid_plural "There are %d tabs with errors"
@@ -2128,41 +2039,41 @@ msgstr "_Underpanel"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Visa eller dölj underpanelen i det aktuella fönstret"
 
-#: ../gedit/gedit-utils.c:997
+#: ../gedit/gedit-utils.c:996
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Kunde inte hitta filen %s."
 
-#: ../gedit/gedit-utils.c:1001
-#: ../gedit/gedit-utils.c:1030
+#: ../gedit/gedit-utils.c:1000
+#: ../gedit/gedit-utils.c:1036
 msgid "Please check your installation."
 msgstr "Kontrollera din installation."
 
-#: ../gedit/gedit-utils.c:1026
+#: ../gedit/gedit-utils.c:1032
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "Kunde inte hitta de nödvändiga widgetarna i filen %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1133
+#: ../gedit/gedit-view.c:1128
 msgid "_Wrap Around"
 msgstr "_Radbrytningsläge"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1143
+#: ../gedit/gedit-view.c:1138
 msgid "Match _Entire Word Only"
 msgstr "Matcha endast _hela ord"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1153
+#: ../gedit/gedit-view.c:1148
 msgid "_Match Case"
 msgstr "_Gör skillnad på skiftläge"
 
-#: ../gedit/gedit-view.c:1242
+#: ../gedit/gedit-view.c:1236
 msgid "String you want to search for"
 msgstr "Sträng du vill söka efter"
 
-#: ../gedit/gedit-view.c:1252
+#: ../gedit/gedit-view.c:1244
 msgid "Line you want to move the cursor to"
 msgstr "Rad du vill flytta markören till"
 
@@ -2900,7 +2811,6 @@ msgid "Insert often used pieces of text in a fast way"
 msgstr "Infoga ofta använda textdelar på ett snabbt sätt"
 
 #: ../plugins/snippets/snippets.gedit-plugin.desktop.in.h:2
-#: ../plugins/snippets/data/lang/snippets.lang.h:15
 msgid "Snippets"
 msgstr "Textsnuttar"
 
@@ -3350,26 +3260,22 @@ msgstr "Kontrollerar stavningen i det aktuella dokumentet."
 msgid "Spell Checker"
 msgstr "Stavningskontroll"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:536
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:599
 msgid "Select the group of tags you want to use"
 msgstr "Välj den grupp med taggar som du vill använda"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:557
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:618
 msgid "_Preview"
 msgstr "_Förhandsgranska"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:627
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:684
 msgid "Available Tag Lists"
 msgstr "Tillgängliga tagglistor"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:630
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:649
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
 msgid "Tags"
 msgstr "Taggar"
-
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:644
-msgid "Double-click on a tag to insert it in the current document"
-msgstr "Dubbelklicka på en tagg för att infoga det i det aktuella dokumentet"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
@@ -3466,6 +3372,10 @@ msgstr "Bastypsnitt"
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
 msgid "Base font (deprecated)"
 msgstr "Grundtypsnitt (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:28
+msgid "Bold"
+msgstr "Fet"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Border"
@@ -4960,66 +4870,87 @@ msgstr "_Fråga efter ett format"
 msgid "_Use custom format"
 msgstr "_Använd anpassat format"
 
-#: ../plugins/snippets/data/lang/snippets.lang.h:1
-msgid "Default Value"
-msgstr "Standardvärde"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:2
-msgid "Environmental Variable"
-msgstr "Miljövariabel"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:3
-msgid "Escape"
-msgstr "Escape"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:4
-msgid "Modifier"
-msgstr "Modifierare"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:5
-msgid "Placeholder Default"
-msgstr "Standardplatshållare"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:6
-msgid "Placeholder Reference"
-msgstr "Platshållarreferens"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:7
-msgid "Placeholder begin and end"
-msgstr "Platshållare början och slut"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:8
-msgid "Python Placeholder"
-msgstr "Python-platshållare"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:9
-msgid "Regular Expression Pattern"
-msgstr "Reguljärt uttrycksmönster"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:10
-msgid "Regular Expression Placeholder"
-msgstr "Platshållare för reguljärt uttryck"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:11
-msgid "Regular Expression Replace Pattern"
-msgstr "Reguljärt uttryck för ersättningsmönster"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:12
-msgid "Seperator"
-msgstr "Avgränsare"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:13
-msgid "Shell Placeholder"
-msgstr "Skalplatshållare"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:14
-msgid "Single Placeholder"
-msgstr "Enkel platshållare"
-
-#: ../plugins/snippets/data/lang/snippets.lang.h:16
-msgid "Tabstop"
-msgstr "Tabulatorstopp"
-
+#~ msgid "gedit Style Scheme editor"
+#~ msgstr "Stilschemaredigerare för gedit"
+#~ msgid "<b>Elements</b>"
+#~ msgstr "<b>Element</b>"
+#~ msgid "Basic Colors"
+#~ msgstr "Grundläggande färger"
+#~ msgid "Cu_rrent line color:"
+#~ msgstr "Färg för aktuell _rad:"
+#~ msgid "Italic"
+#~ msgstr "Kursiv"
+#~ msgid "Pick the background color"
+#~ msgstr "Välj bakgrundsfärg"
+#~ msgid "Pick the current line color"
+#~ msgstr "Välj färg för aktuell rad"
+#~ msgid "Pick the foreground color"
+#~ msgstr "Välj förgrundsfärgen"
+#~ msgid "Pick the normal text color"
+#~ msgstr "Välj färgen på normal text"
+#~ msgid "Pick the search highlighting color"
+#~ msgstr "Välj markeringsfärg för sökning"
+#~ msgid "Pick the selected text color"
+#~ msgstr "Välj färgen på markerad text"
+#~ msgid "Pick the selection color"
+#~ msgstr "Välj markeringsfärgen"
+#~ msgid "S_earch highlighting color:"
+#~ msgstr "Markeringsfärg för s_ökning: "
+#~ msgid "Se_lection color:"
+#~ msgstr "Ma_rkeringsfärg:"
+#~ msgid "Selecte_d text color:"
+#~ msgstr "Färg på markera_d text:"
+#~ msgid "Strikethrough"
+#~ msgstr "Genomstrykning"
+#~ msgid "Syntax Highlighting"
+#~ msgstr "Syntaxmarkering"
+#~ msgid "Underline"
+#~ msgstr "Understrykning"
+#~ msgid "_Background color:"
+#~ msgstr "_Bakgrundsfärg:"
+#~ msgid "_Background:"
+#~ msgstr "_Bakgrund:"
+#~ msgid "_Foreground:"
+#~ msgstr "_Förgrund:"
+#~ msgid "_Normal text color:"
+#~ msgstr "_Normal textfärg:"
+#~ msgid "_Reset to Default "
+#~ msgstr "_Återställ till standard"
+#~ msgid "My %s"
+#~ msgstr "Min %s"
+#~ msgid "Double-click on a tag to insert it in the current document"
+#~ msgstr ""
+#~ "Dubbelklicka på en tagg för att infoga det i det aktuella dokumentet"
+#~ msgid "Default Value"
+#~ msgstr "Standardvärde"
+#~ msgid "Environmental Variable"
+#~ msgstr "Miljövariabel"
+#~ msgid "Escape"
+#~ msgstr "Escape"
+#~ msgid "Modifier"
+#~ msgstr "Modifierare"
+#~ msgid "Placeholder Default"
+#~ msgstr "Standardplatshållare"
+#~ msgid "Placeholder Reference"
+#~ msgstr "Platshållarreferens"
+#~ msgid "Placeholder begin and end"
+#~ msgstr "Platshållare början och slut"
+#~ msgid "Python Placeholder"
+#~ msgstr "Python-platshållare"
+#~ msgid "Regular Expression Pattern"
+#~ msgstr "Reguljärt uttrycksmönster"
+#~ msgid "Regular Expression Placeholder"
+#~ msgstr "Platshållare för reguljärt uttryck"
+#~ msgid "Regular Expression Replace Pattern"
+#~ msgstr "Reguljärt uttryck för ersättningsmönster"
+#~ msgid "Seperator"
+#~ msgstr "Avgränsare"
+#~ msgid "Shell Placeholder"
+#~ msgstr "Skalplatshållare"
+#~ msgid "Single Placeholder"
+#~ msgstr "Enkel platshållare"
+#~ msgid "Tabstop"
+#~ msgstr "Tabulatorstopp"
 #~ msgid "Background Color"
 #~ msgstr "Bakgrundsfärg"
 #~ msgid ""
