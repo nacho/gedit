@@ -66,13 +66,13 @@ struct _GeditWindowPrivate
 	GeditToolbarSetting toolbar_style;
 
 	/* recent files */
-	GtkRecentManager *recent_manager;
 	GtkActionGroup *recents_action_group;
 	guint           recents_menu_ui_id;
+	gulong          recents_handler_id;
 
 	GeditTab       *active_tab;
 	gint            num_tabs;
-	
+
 	gint            num_tabs_with_error;
 
 	gint            width;
@@ -85,7 +85,7 @@ struct _GeditWindowPrivate
 	GeditWindowState state;
 
 	GtkWindowGroup *window_group;
-	
+
 	gchar          *default_path;
 
 	gboolean	removing_tabs : 1;

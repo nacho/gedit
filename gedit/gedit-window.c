@@ -120,12 +120,14 @@ gedit_window_dispose (GObject *object)
 	 */
 	gedit_plugins_engine_garbage_collect ();
 
-	if (window->priv->recent_manager != NULL)
+	if (window->priv->recents_handler_id != 0)
 	{
-		g_signal_handlers_disconnect_by_func (window->priv->recent_manager,
-						      G_CALLBACK (recent_manager_changed),
-						      window);
-		window->priv->recent_manager = NULL;
+		GtkRecentManager *recent_manager;
+
+		recent_manager =  gtk_recent_manager_get_default ();
+		g_signal_handler_disconnect (recent_manager,
+					     window->priv->recents_handler_id);
+		window->priv->recents_handler_id = 0;
 	}
 
 	if (window->priv->manager != NULL)
@@ -279,36 +281,6 @@ gedit_window_key_press_event (GtkWidget   *widget,
 }
 
 static void
-gedit_window_screen_changed (GtkWidget *widget,
-			     GdkScreen *old_screen)
-{
-	GeditWindowPrivate *priv = GEDIT_WINDOW (widget)->priv;
-	GdkScreen *screen;
-
-	screen = gtk_widget_get_screen (widget);
-
-	/* FIXME: this seems to be happening when then spinner is destroyed!? */
-	if (old_screen == screen)
-		return;
-
-	if (old_screen != NULL)
-	{
-		g_signal_handlers_disconnect_by_func
-			(gtk_recent_manager_get_for_screen (old_screen),
-			 G_CALLBACK (recent_manager_changed), widget);
-	}
-
-	priv->recent_manager = gtk_recent_manager_get_for_screen (screen);
-	g_signal_connect (priv->recent_manager,
-			  "changed",
-			  G_CALLBACK (recent_manager_changed),
-			  widget);
-
-	if (GTK_WIDGET_CLASS (gedit_window_parent_class)->screen_changed)
-		GTK_WIDGET_CLASS (gedit_window_parent_class)->screen_changed (widget, old_screen);
-}
-
-static void
 gedit_window_tab_removed (GeditWindow *window,
 			  GeditTab    *tab) 
 {
@@ -333,7 +305,6 @@ gedit_window_class_init (GeditWindowClass *klass)
 	widget_class->window_state_event = gedit_window_window_state_event;
 	widget_class->configure_event = gedit_window_configure_event;
 	widget_class->key_press_event = gedit_window_key_press_event;
-	widget_class->screen_changed = gedit_window_screen_changed;
 
 	signals[TAB_ADDED] =
 		g_signal_new ("tab_added",
@@ -1055,12 +1026,15 @@ _gedit_recent_add (GeditWindow *window,
 		   const gchar *uri,
 		   const gchar *mime)
 {
+	GtkRecentManager *recent_manager;
 	GtkRecentData *recent_data;
 
 	static gchar *groups[2] = {
 		"gedit",
 		NULL
 	};
+
+	recent_manager =  gtk_recent_manager_get_default ();
 
 	recent_data = g_slice_new (GtkRecentData);
 
@@ -1072,7 +1046,7 @@ _gedit_recent_add (GeditWindow *window,
 	recent_data->groups = groups;
 	recent_data->is_private = FALSE;
 
-	gtk_recent_manager_add_full (window->priv->recent_manager,
+	gtk_recent_manager_add_full (recent_manager,
 				     uri,
 				     recent_data);
 
@@ -1085,9 +1059,11 @@ void
 _gedit_recent_remove (GeditWindow *window,
 		      const gchar *uri)
 {
-	gtk_recent_manager_remove_item (window->priv->recent_manager,
-					uri,
-					NULL);
+	GtkRecentManager *recent_manager;
+
+	recent_manager =  gtk_recent_manager_get_default ();
+
+	gtk_recent_manager_remove_item (recent_manager, uri, NULL);
 }
 
 static void
@@ -1150,8 +1126,6 @@ recent_manager_changed (GtkRecentManager *manager,
 	update_recent_files_menu (window);
 }
 
-
-
 /*
  * Manually construct the inline recents list in the File menu.
  * Hopefully gtk 2.12 will add support for it.
@@ -1160,6 +1134,7 @@ static void
 update_recent_files_menu (GeditWindow *window)
 {
 	GeditWindowPrivate *p = window->priv;
+	GtkRecentManager *recent_manager;
 	gint max_recents;
 	GList *actions, *l, *items;
 	GList *filtered_items = NULL;
@@ -1188,7 +1163,8 @@ update_recent_files_menu (GeditWindow *window)
 
 	p->recents_menu_ui_id = gtk_ui_manager_new_merge_id (p->manager);
 
-	items = gtk_recent_manager_get_items (p->recent_manager);
+	recent_manager =  gtk_recent_manager_get_default ();
+	items = gtk_recent_manager_get_items (recent_manager);
 
 	/* filter */
 	for (l = items; l != NULL; l = l->next)
@@ -1319,7 +1295,7 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	GtkUIManager *manager;
 	GtkWidget *menubar;
 	GtkToolItem *open_button;
-	GdkScreen *screen;
+	GtkRecentManager *recent_manager;
 	GtkRecentFilter *filter;
 	GError *error = NULL;
 	GeditLockdownMask lockdown;
@@ -1419,18 +1395,15 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	g_object_unref (action_group);
 
-	screen = gtk_widget_get_screen (GTK_WIDGET (window));
-	window->priv->recent_manager = gtk_recent_manager_get_for_screen (screen);
-
-	g_signal_connect (window->priv->recent_manager,
-			  "changed",
-			  G_CALLBACK (recent_manager_changed),
-			  window);
-
+	recent_manager = gtk_recent_manager_get_default ();
+	window->priv->recents_handler_id = g_signal_connect (recent_manager,
+							     "changed",
+							     G_CALLBACK (recent_manager_changed),
+							     window);
 	update_recent_files_menu (window);
 
 	/* recent files menu tool button */
-	window->priv->toolbar_recent_menu = gtk_recent_chooser_menu_new_for_manager (window->priv->recent_manager);
+	window->priv->toolbar_recent_menu = gtk_recent_chooser_menu_new_for_manager (recent_manager);
 
 	gtk_recent_chooser_set_local_only (GTK_RECENT_CHOOSER (window->priv->toolbar_recent_menu),
 					   FALSE);
