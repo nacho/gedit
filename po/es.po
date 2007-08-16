@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-13 03:45+0100\n"
-"PO-Revision-Date: 2007-08-13 15:00+0200\n"
+"POT-Creation-Date: 2007-08-16 03:48+0100\n"
+"PO-Revision-Date: 2007-08-16 21:21+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -147,7 +147,7 @@ msgid ""
 "List of VFS schemes gedit supports in write mode. The 'file' scheme is "
 "writable by default."
 msgstr ""
-"Lista de esquemas VFS que soporta gedit en modo escritura. El esquema 'file' "
+"Lista de esquemas VFS que soporta gedit en modo escritura. El esquema «file» "
 "es escribible por omisión."
 
 #: ../data/gedit.schemas.in.h:26
@@ -767,7 +767,6 @@ msgstr "Configurar página"
 #. ex:ts=4:et:
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:1
 #: ../plugins/docinfo/docinfo.glade2.h:1
 #: ../plugins/externaltools/tools/tools.glade.h:1
 #: ../plugins/snippets/snippets/snippets.glade.h:1
@@ -812,8 +811,8 @@ msgid "Print _line numbers"
 msgstr "Imprimir los números de _línea"
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:11
-msgid "Print s_yntax highlighting"
-msgstr "I_mprimir el resaltado de sintaxis"
+msgid "Print synta_x highlighting"
+msgstr "Imprimir el resaltado de sinta_xis"
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:12
 msgid "_Body:"
@@ -839,21 +838,42 @@ msgstr "_Restaurar tipografías predeterminadas"
 msgid "lines"
 msgstr "líneas"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:583
+#: ../gedit/dialogs/gedit-preferences-dialog.c:570
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Pulse este botón para seleccionar la tipografía que utilizará el editor"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:593
+#: ../gedit/dialogs/gedit-preferences-dialog.c:580
 #, c-format
 msgid "_Use the system fixed width font (%s)"
 msgstr "_Usar la tipografía de ancho fijo del sistema (%s)"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:749
-#, c-format
-msgid "Could not remove the style scheme \"%s\""
-msgstr "No se ha podido quitar el estilo «%s»"
+#: ../gedit/dialogs/gedit-preferences-dialog.c:767
+msgid "The selected color scheme cannot be installed."
+msgstr "No se puede instalar el estilo de color seleccionado."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:979
+#: ../gedit/dialogs/gedit-preferences-dialog.c:792
+msgid "Add Scheme"
+msgstr "Añadir estilo"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:799
+msgid "A_dd Scheme"
+msgstr "_Añadir estilo"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:807
+msgid "Color Scheme Files"
+msgstr "Archivos de estilos de color"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:814
+#: ../gedit/gedit-file-chooser-dialog.c:52
+msgid "All Files"
+msgstr "Todos los archivos"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:859
+#, c-format
+msgid "Could not remove color scheme \"%s\"."
+msgstr "No se pudo quitar el estilo «%s»."
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1058
 msgid "gedit Preferences"
 msgstr "Preferencias de gedit"
 
@@ -887,7 +907,7 @@ msgstr "<b>Tabulaciones</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:11
 msgid "<span weight=\"bold\">Color Scheme</span>"
-msgstr "<span weight=\"bold\">Esquema de colores</span>"
+msgstr "<span weight=\"bold\">Estilos de colores</span>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:12
 msgid "Create a _backup copy of files before saving"
@@ -910,8 +930,8 @@ msgid "Font & Colors"
 msgstr "Tipografías y colores"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:19
-msgid "Hi_ghlight current line"
-msgstr "_Resaltar la línea actual"
+msgid "Highlight current _line"
+msgstr "Resaltar la _línea actual"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:20
 msgid "Highlight matching _bracket"
@@ -962,11 +982,11 @@ msgid "_minutes"
 msgstr "_minutos"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:287
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1371
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1347
 msgid "Replace"
 msgstr "Reemplazar"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1369
+#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1345
 msgid "Find"
 msgstr "Buscar"
 
@@ -975,7 +995,7 @@ msgid "Replace _All"
 msgstr "Reemplazar _todo"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:383
-#: ../gedit/gedit-commands-file.c:676
+#: ../gedit/gedit-commands-file.c:677
 msgid "_Replace"
 msgstr "_Reemplazar"
 
@@ -1006,117 +1026,6 @@ msgstr "_Buscar: "
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:8
 msgid "_Wrap around"
 msgstr "A_justar aproximadamente"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.c:117
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:26
-msgid "gedit Style Scheme editor"
-msgstr "Editor de estilo de gedit"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:2
-msgid "<b>Elements</b>"
-msgstr "<b>Elementos</b>"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:3
-msgid "Basic Colors"
-msgstr "Colores básicos"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:4
-#: ../plugins/taglist/HTML.tags.xml.in.h:28
-msgid "Bold"
-msgstr "Negrita"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:5
-msgid "Color scheme _name:"
-msgstr "_Nombre del esquema de color:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:6
-msgid "Cu_rrent line color:"
-msgstr "Color de la _línea actual:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:7
-msgid "Italic"
-msgstr "Cursiva"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:8
-msgid "Pick the background color"
-msgstr "Elija el color de fondo"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:9
-msgid "Pick the current line color"
-msgstr "Elija el color de la línea actual"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:10
-msgid "Pick the foreground color"
-msgstr "Elija el color del primer plano"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:11
-msgid "Pick the normal text color"
-msgstr "Elija el color del texto normal"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:12
-msgid "Pick the search highlighting color"
-msgstr "Elija el color del resaltado de la búsqueda"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:13
-msgid "Pick the selected text color"
-msgstr "Elija el color del texto seleccionado"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:14
-msgid "Pick the selection color"
-msgstr "Elija el el color de selección"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:15
-msgid "S_earch highlighting color:"
-msgstr "Color del resaltado de la _búsqueda:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:16
-msgid "Se_lection color:"
-msgstr "Color de la se_lección:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:17
-msgid "Selecte_d text color:"
-msgstr "Color del texto s_eleccionado:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:18
-msgid "Strikethrough"
-msgstr "Tachado"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:19
-msgid "Syntax Highlighting"
-msgstr "Resaltado de sintaxis"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:20
-msgid "Underline"
-msgstr "Subrayado"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:21
-msgid "_Background color:"
-msgstr "Color de _fondo:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:22
-msgid "_Background:"
-msgstr "_Fondo:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:23
-msgid "_Foreground:"
-msgstr "_Primer plano:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:24
-msgid "_Normal text color:"
-msgstr "Color del texto _normal:"
-
-#: ../gedit/dialogs/gedit-style-scheme-dialog.glade.h:25
-msgid "_Reset to Default "
-msgstr "_Restaurar a predeterminados "
-
-#. TRANSLATORS: %s is a color scheme name. The resulting string represents
-#. * the name of a color scheme generated by the color scheme in %s.
-#. * So if %s is "Dark", the resulting string should be something like
-#. * "My Dark"
-#: ../gedit/dialogs/gedit-style-scheme-generator.c:117
-#, c-format
-msgid "My %s"
-msgstr "Mi %s"
 
 #: ../gedit/gedit.c:73
 msgid ""
@@ -1171,50 +1080,51 @@ msgid_plural "Loading %d files…"
 msgstr[0] "Cargando %d archivo…"
 msgstr[1] "Cargando %d archivos…"
 
-#: ../gedit/gedit-commands-file.c:422
+#. Translators: "Open Files" is the title of the file chooser window
+#: ../gedit/gedit-commands-file.c:423
 msgid "Open Files"
 msgstr "Abrir archivos"
 
-#: ../gedit/gedit-commands-file.c:528
+#: ../gedit/gedit-commands-file.c:529
 msgid "The entered location is not valid."
 msgstr "El lugar introducido no es válido."
 
-#: ../gedit/gedit-commands-file.c:531
+#: ../gedit/gedit-commands-file.c:532
 #: ../gedit/gedit-io-error-message-area.c:187
 #: ../gedit/gedit-io-error-message-area.c:226
 #: ../gedit/gedit-io-error-message-area.c:242
 msgid "Please check that you typed the location correctly and try again."
 msgstr "Compruebe que ha tecleado el lugar correctamente y pruebe de nuevo."
 
-#: ../gedit/gedit-commands-file.c:657
+#: ../gedit/gedit-commands-file.c:658
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "El archivo «%s» es de sólo lectura."
 
-#: ../gedit/gedit-commands-file.c:668
+#: ../gedit/gedit-commands-file.c:669
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "¿Desea intentar reemplazarlo por el que está guardando ahora?"
 
-#: ../gedit/gedit-commands-file.c:734 ../gedit/gedit-commands-file.c:937
+#: ../gedit/gedit-commands-file.c:735 ../gedit/gedit-commands-file.c:938
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Guardando el archivo «%s»…"
 
-#: ../gedit/gedit-commands-file.c:835
+#: ../gedit/gedit-commands-file.c:836
 msgid "Save As…"
 msgstr "Guardar como…"
 
-#: ../gedit/gedit-commands-file.c:1116
+#: ../gedit/gedit-commands-file.c:1117
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Revirtiendo el documento «%s»…"
 
-#: ../gedit/gedit-commands-file.c:1161
+#: ../gedit/gedit-commands-file.c:1162
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "¿Revertir los cambios no guardados en el documento «%s»?"
 
-#: ../gedit/gedit-commands-file.c:1170
+#: ../gedit/gedit-commands-file.c:1171
 #, c-format
 msgid "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
@@ -1227,13 +1137,13 @@ msgstr[1] ""
 "Los cambios realizados al documento en los últimos %ld segundos se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1179
+#: ../gedit/gedit-commands-file.c:1180
 msgid "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Los cambios realizados al documento en el último minuto se perderán para "
 "siempre."
 
-#: ../gedit/gedit-commands-file.c:1185
+#: ../gedit/gedit-commands-file.c:1186
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1248,7 +1158,7 @@ msgstr[1] ""
 "Los cambios realizados al documento en el último minuto y %ld se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1195
+#: ../gedit/gedit-commands-file.c:1196
 #, c-format
 msgid "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
@@ -1261,13 +1171,13 @@ msgstr[1] ""
 "Los cambios realizados al documento en los últimos %ld minutos se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1210
+#: ../gedit/gedit-commands-file.c:1211
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Los cambios realizados al documento en la última hora se perderán para "
 "siempre."
 
-#: ../gedit/gedit-commands-file.c:1216
+#: ../gedit/gedit-commands-file.c:1217
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1282,7 +1192,7 @@ msgstr[1] ""
 "Los cambios realizados al documento en la última hora y %d minutos se "
 "perderán para siempre."
 
-#: ../gedit/gedit-commands-file.c:1231
+#: ../gedit/gedit-commands-file.c:1232
 #, c-format
 msgid "Changes made to the document in the last %d hour will be permanently lost."
 msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
@@ -1293,7 +1203,7 @@ msgstr[1] ""
 "Los cambios realizados en el documento en las últimas %d horas se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1257
+#: ../gedit/gedit-commands-file.c:1258
 msgid "_Revert"
 msgstr "Re_vertir"
 
@@ -1325,17 +1235,17 @@ msgstr "Se encontró y reemplazó una aparición"
 msgid "Phrase not found"
 msgstr "Frase no encontrada "
 
-#: ../gedit/gedit-document.c:790 ../gedit/gedit-document.c:884
+#: ../gedit/gedit-document.c:816 ../gedit/gedit-document.c:910
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "No se ha guardado %d documento"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1940 ../gedit/gedit-window.c:1945
+#: ../gedit/gedit-window.c:1913 ../gedit/gedit-window.c:1918
 msgid "Read Only"
 msgstr "Sólo lectura"
 
-#: ../gedit/gedit-documents-panel.c:700
+#: ../gedit/gedit-documents-panel.c:759
 msgid "Documents"
 msgstr "Documentos"
 
@@ -1469,10 +1379,6 @@ msgstr "Configuración regional actual (%s)"
 #: ../gedit/gedit-encodings-option-menu.c:322
 msgid "Add or _Remove..."
 msgstr "Añadir o _quitar…"
-
-#: ../gedit/gedit-file-chooser-dialog.c:52
-msgid "All Files"
-msgstr "Todos los archivos"
 
 #: ../gedit/gedit-file-chooser-dialog.c:53
 msgid "All Text Files"
@@ -1883,15 +1789,15 @@ msgstr "_Recargar"
 msgid "Could not obtain backup filename"
 msgstr "No se pudo obtener el nombre de archivo de la copia de respaldo"
 
-#: ../gedit/gedit-notebook.c:845
+#: ../gedit/gedit-notebook.c:834
 msgid "Close document"
 msgstr "Cerrar documento"
 
-#: ../gedit/gedit-panel.c:365 ../gedit/gedit-panel.c:579
+#: ../gedit/gedit-panel.c:361 ../gedit/gedit-panel.c:569
 msgid "Empty"
 msgstr "Vaciar"
 
-#: ../gedit/gedit-panel.c:523 ../gedit/gedit-panel.c:600
+#: ../gedit/gedit-panel.c:514 ../gedit/gedit-panel.c:588
 msgid "Hide panel"
 msgstr "Ocultar panel"
 
@@ -1977,82 +1883,87 @@ msgstr "Muestra la página anterior"
 msgid "Show the next page"
 msgstr "Muestra la página siguiente"
 
-#: ../gedit/gedit-print-job-preview.c:765
+#: ../gedit/gedit-print-job-preview.c:764
 msgid "Current page (Alt+P)"
 msgstr "Página actual (Alt+P)"
 
 #. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
 #. We are displaying 'XXX of XXX'.
-#: ../gedit/gedit-print-job-preview.c:779
+#: ../gedit/gedit-print-job-preview.c:777
 msgid "of"
 msgstr "de"
 
-#: ../gedit/gedit-print-job-preview.c:785
+#: ../gedit/gedit-print-job-preview.c:783
 msgid "Page total"
 msgstr "Total de páginas"
 
-#: ../gedit/gedit-print-job-preview.c:786
+#: ../gedit/gedit-print-job-preview.c:784
 msgid "The total number of pages in the document"
 msgstr "El número total de páginas del documento"
 
-#: ../gedit/gedit-print-job-preview.c:803
+#: ../gedit/gedit-print-job-preview.c:801
 msgid "Show multiple pages"
 msgstr "Mostrar varias páginas"
 
-#: ../gedit/gedit-print-job-preview.c:815
+#: ../gedit/gedit-print-job-preview.c:813
 msgid "Zoom 1:1"
 msgstr "Ampliación 1:1"
 
-#: ../gedit/gedit-print-job-preview.c:823
+#: ../gedit/gedit-print-job-preview.c:821
 msgid "Zoom to fit the whole page"
 msgstr "Ampliar hasta ajustar toda la página"
 
-#: ../gedit/gedit-print-job-preview.c:832
+#: ../gedit/gedit-print-job-preview.c:830
 msgid "Zoom the page in"
 msgstr "Ampliar la página"
 
-#: ../gedit/gedit-print-job-preview.c:840
+#: ../gedit/gedit-print-job-preview.c:838
 msgid "Zoom the page out"
 msgstr "Reducir la página"
 
-#: ../gedit/gedit-print-job-preview.c:850
+#: ../gedit/gedit-print-job-preview.c:848
 msgid "_Close Preview"
 msgstr "_Cerrar vista previa"
 
-#: ../gedit/gedit-print-job-preview.c:854
+#: ../gedit/gedit-print-job-preview.c:852
 msgid "Close print preview"
 msgstr "Cerrar vista previa de impresión"
 
-#: ../gedit/gedit-print-job-preview.c:1094
-#: ../gedit/gedit-print-job-preview.c:1095
+#: ../gedit/gedit-print-job-preview.c:1092
+#: ../gedit/gedit-print-job-preview.c:1093
 msgid "Number of pages horizontally"
 msgstr "Número de páginas horizontalmente"
 
-#: ../gedit/gedit-print-job-preview.c:1098
-#: ../gedit/gedit-print-job-preview.c:1099
+#: ../gedit/gedit-print-job-preview.c:1096
+#: ../gedit/gedit-print-job-preview.c:1097
 msgid "Number of pages vertically"
 msgstr "Número de páginas verticalmente"
 
-#: ../gedit/gedit-print-job-preview.c:1163
+#: ../gedit/gedit-print-job-preview.c:1161
 msgid "No visible output was created."
 msgstr "No se creó una salida visible."
 
-#: ../gedit/gedit-statusbar.c:256
+#: ../gedit/gedit-source-style-manager.c:214
+#, c-format
+msgid "Directory '%s' could not be created: g_mkdir_with_parents() failed: %s"
+msgstr "No se pudo crear el directorio «%s»: falló g_mkdir_with_parents(): %s"
+
+#: ../gedit/gedit-statusbar.c:248
 msgid "  OVR"
 msgstr "  SOB"
 
-#: ../gedit/gedit-statusbar.c:258
+#: ../gedit/gedit-statusbar.c:250
 msgid "  INS"
 msgstr "  INS"
 
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-statusbar.c:297
+#: ../gedit/gedit-statusbar.c:289
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ln %d, Col %d"
 
-#: ../gedit/gedit-statusbar.c:396
+#: ../gedit/gedit-statusbar.c:388
 #, c-format
 msgid "There is a tab with errors"
 msgid_plural "There are %d tabs with errors"
@@ -2173,7 +2084,7 @@ msgstr "Crear un documento nuevo"
 msgid "_Open..."
 msgstr "_Abrir…"
 
-#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1494
+#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1467
 msgid "Open a file"
 msgstr "Abrir un archivo"
 
@@ -2422,44 +2333,44 @@ msgstr "Panel _inferior"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Muestra u oculta el panel inferior en la ventana actual"
 
-#: ../gedit/gedit-utils.c:997
+#: ../gedit/gedit-utils.c:996
 #, c-format
 msgid "Unable to find file %s."
 msgstr "No se ha podido encontrar el archivo %s."
 
-#: ../gedit/gedit-utils.c:1001 ../gedit/gedit-utils.c:1030
+#: ../gedit/gedit-utils.c:1000 ../gedit/gedit-utils.c:1036
 msgid "Please check your installation."
 msgstr "Compruebe su instalación."
 
-#: ../gedit/gedit-utils.c:1026
+#: ../gedit/gedit-utils.c:1032
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "No se han podido encontrar los widgets necesarios dentro del archivo %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1133
+#: ../gedit/gedit-view.c:1128
 msgid "_Wrap Around"
 msgstr "_Volver al principio"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1143
+#: ../gedit/gedit-view.c:1138
 msgid "Match _Entire Word Only"
 msgstr "Coincidir sólo con palabras compl_etas"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1153
+#: ../gedit/gedit-view.c:1148
 msgid "_Match Case"
 msgstr "Coi_ncidir con capitalización"
 
-#: ../gedit/gedit-view.c:1242
+#: ../gedit/gedit-view.c:1236
 msgid "String you want to search for"
 msgstr "La cadena que quiere buscar"
 
-#: ../gedit/gedit-view.c:1252
+#: ../gedit/gedit-view.c:1244
 msgid "Line you want to move the cursor to"
 msgstr "Línea a la que quiere mover el cursor"
 
-#: ../gedit/gedit-window.c:901
+#: ../gedit/gedit-window.c:872
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Usar modo de resaltado %s"
@@ -2467,34 +2378,34 @@ msgstr "Usar modo de resaltado %s"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:963
+#: ../gedit/gedit-window.c:934
 msgid "None"
 msgstr "Ninguno"
 
-#: ../gedit/gedit-window.c:964
+#: ../gedit/gedit-window.c:935
 msgid "Disable syntax highlighting"
 msgstr "Desactivar resaltado de sintaxis"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1248
+#: ../gedit/gedit-window.c:1224
 #, c-format
 msgid "Open '%s'"
 msgstr "Abrir «%s»"
 
-#: ../gedit/gedit-window.c:1367
+#: ../gedit/gedit-window.c:1343
 msgid "Save"
 msgstr "Guardar"
 
-#: ../gedit/gedit-window.c:1498
+#: ../gedit/gedit-window.c:1471
 msgid "Open a recently used file"
 msgstr "Abrir un archivo usado recientemente"
 
-#: ../gedit/gedit-window.c:1505
+#: ../gedit/gedit-window.c:1478
 msgid "Open"
 msgstr "Abrir"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1555
+#: ../gedit/gedit-window.c:1528
 #, c-format
 msgid "Activate '%s'"
 msgstr "Activar «%s»"
@@ -3502,7 +3413,7 @@ msgid "_Sort"
 msgstr "_Ordenar"
 
 #: ../plugins/spell/gedit-automatic-spell-checker.c:418
-#: ../plugins/spell/gedit-spell-checker-dialog.c:494
+#: ../plugins/spell/gedit-spell-checker-dialog.c:477
 msgid "(no suggested words)"
 msgstr "(no hay palabras sugeridas)"
 
@@ -3524,19 +3435,19 @@ msgstr "_Añadir"
 msgid "_Spelling Suggestions..."
 msgstr "_Sugerencias de ortografía…"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:289
+#: ../plugins/spell/gedit-spell-checker-dialog.c:274
 msgid "Check Spelling"
 msgstr "Comprobar ortografía"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:300
+#: ../plugins/spell/gedit-spell-checker-dialog.c:285
 msgid "Suggestions"
 msgstr "Sugerencias"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:600
+#: ../plugins/spell/gedit-spell-checker-dialog.c:583
 msgid "(correct spelling)"
 msgstr "(ortografía correcta)"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:743
+#: ../plugins/spell/gedit-spell-checker-dialog.c:726
 msgid "Completed spell checking"
 msgstr "Comprobación de ortografía finalizada"
 
@@ -3573,12 +3484,12 @@ msgstr "Desconocido (%s)"
 msgid "language|Default"
 msgstr "Predeterminado"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:234
-#, c-format
-msgid "Could not find the required widgets inside %s."
-msgstr "No se han podido encontrar los widgets necesarios dentro de %s."
+#: ../plugins/spell/gedit-spell-language-dialog.c:135
+#: ../plugins/spell/languages-dialog.glade2.h:2
+msgid "Set language"
+msgstr "Establecer idioma"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:255
+#: ../plugins/spell/gedit-spell-language-dialog.c:184
 msgid "Languages"
 msgstr "Idiomas"
 
@@ -3606,21 +3517,17 @@ msgstr "Autocomprob_ar ortografía"
 msgid "Automatically spell-check the current document"
 msgstr "Comprobar automáticamente la ortografía del documento actual"
 
-#: ../plugins/spell/gedit-spell-plugin.c:714
+#: ../plugins/spell/gedit-spell-plugin.c:749
 msgid "The document is empty."
 msgstr "El documento está vacío."
 
-#: ../plugins/spell/gedit-spell-plugin.c:746
+#: ../plugins/spell/gedit-spell-plugin.c:781
 msgid "No misspelled words"
 msgstr "Sin palabras mal escritas"
 
 #: ../plugins/spell/languages-dialog.glade2.h:1
 msgid "Select the _language of the current document."
 msgstr "Seleccione el _idioma del documento actual."
-
-#: ../plugins/spell/languages-dialog.glade2.h:2
-msgid "Set language"
-msgstr "Establecer idioma"
 
 #: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
 msgid "*"
@@ -3690,26 +3597,22 @@ msgstr "Comprueba la ortografía del documento actual."
 msgid "Spell Checker"
 msgstr "Corrector ortográfico"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:536
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:599
 msgid "Select the group of tags you want to use"
 msgstr "Seleccione el grupo de etiquetas que quiere usar"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:557
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:618
 msgid "_Preview"
 msgstr "Vista _previa"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:627
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:684
 msgid "Available Tag Lists"
 msgstr "Listas de etiquetas disponibles"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:630
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:649
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
 msgid "Tags"
 msgstr "Etiquetas"
-
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:644
-msgid "Double-click on a tag to insert it in the current document"
-msgstr "Pulse dos veces en una etiqueta para insertarla en el documento actual"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
@@ -3806,6 +3709,10 @@ msgstr "Tipografía base"
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
 msgid "Base font (deprecated)"
 msgstr "Tipografía base (obsoleto)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:28
+msgid "Bold"
+msgstr "Negrita"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Border"
