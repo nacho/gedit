@@ -55,6 +55,8 @@
 #include "gedit-plugins-engine.h"
 #include "gedit-enum-types.h"
 
+#define LANGUAGE_NONE (const gchar *)"LangNone"
+
 #define GEDIT_WINDOW_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),\
 					 GEDIT_TYPE_WINDOW,                    \
 					 GeditWindowPrivate))
@@ -765,8 +767,6 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	gedit_plugins_engine_update_plugins_ui (window, FALSE);
 }
 
-#define GEDIT_SOURCE_LANGUAGE_KEY "sourcelanguage"
-
 static void
 language_toggled (GtkToggleAction *action,
 		  GeditWindow     *window)
@@ -782,9 +782,9 @@ language_toggled (GtkToggleAction *action,
 	if (doc == NULL)
 		return;
 
-	lang_id = g_object_get_data (G_OBJECT (action),
-				     GEDIT_SOURCE_LANGUAGE_KEY);
-	if (lang_id == NULL)
+	lang_id = gtk_action_get_name (GTK_ACTION (action));
+	
+	if (strcmp (lang_id, LANGUAGE_NONE) == 0)
 	{
 		/* Normal (no highlighting) */
 		lang = NULL;
@@ -848,10 +848,16 @@ create_language_menu_item (GtkSourceLanguage *lang,
 
 	if (section_action == NULL)
 	{
+		gchar *section_name;
+		
+		section_name = gedit_utils_escape_underscores (section, -1);
+		
 		section_action = gtk_action_new (escaped_section,
-						 section,
+						 section_name,
 						 NULL,
 						 NULL);
+						 
+		g_free (section_name);
 
 		gtk_action_group_add_action (window->priv->languages_action_group,
 					     section_action);
@@ -860,31 +866,29 @@ create_language_menu_item (GtkSourceLanguage *lang,
 		gtk_ui_manager_add_ui (window->priv->manager,
 				       ui_id,
 				       "/MenuBar/ViewMenu/ViewHighlightModeMenu/LanguagesMenuPlaceholder",
-				       escaped_section, escaped_section,
+				       escaped_section,
+				       escaped_section,
 				       GTK_UI_MANAGER_MENU,
 				       FALSE);
 	}
 
 	/* now add the language item to the section */
 	lang_name = gtk_source_language_get_name (lang);
-	escaped_lang_name = g_markup_escape_text (lang_name, -1);
-
+	lang_id = gtk_source_language_get_id (lang);
+	
+	escaped_lang_name = gedit_utils_escape_underscores (lang_name, -1);
+	
 	tip = g_strdup_printf (_("Use %s highlight mode"), lang_name);
 	path = g_strdup_printf ("/MenuBar/ViewMenu/ViewHighlightModeMenu/LanguagesMenuPlaceholder/%s",
 				escaped_section);
 
-	action = gtk_radio_action_new (escaped_lang_name,
-				       lang_name,
+	action = gtk_radio_action_new (lang_id,
+				       escaped_lang_name,
 				       tip,
 				       NULL,
 				       index);
 
-	/* store lang id */
-	lang_id = gtk_source_language_get_id (lang);
-	g_object_set_data_full (G_OBJECT (action),
-				GEDIT_SOURCE_LANGUAGE_KEY,
-				g_strdup (lang_id),
-				(GDestroyNotify) g_free);
+	g_free (escaped_lang_name);
 
 	/* Action is added with a NULL accel to make the accel overridable */
 	gtk_action_group_add_action_with_accel (window->priv->languages_action_group,
@@ -894,7 +898,7 @@ create_language_menu_item (GtkSourceLanguage *lang,
 
 	/* add the action to the same radio group of the "Normal" action */
 	normal_action = gtk_action_group_get_action (window->priv->languages_action_group,
-						     "LangNone");
+						     LANGUAGE_NONE);
 	group = gtk_radio_action_get_group (GTK_RADIO_ACTION (normal_action));
 	gtk_radio_action_set_group (action, group);
 
@@ -906,13 +910,13 @@ create_language_menu_item (GtkSourceLanguage *lang,
 	gtk_ui_manager_add_ui (window->priv->manager,
 			       ui_id,
 			       path,
-			       escaped_lang_name, escaped_lang_name,
+			       lang_id, 
+			       lang_id,
 			       GTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 
 	g_free (path);
 	g_free (tip);
-	g_free (escaped_lang_name);
 	g_free (escaped_section);
 }
 
@@ -931,7 +935,7 @@ create_languages_menu (GeditWindow *window)
 	
 	/* Translators: "None" means that no highlight mode is selected in the 
 	 * "View->Highlight Mode" submenu and so syntax highlighting is disabled */
-	action_none = gtk_radio_action_new ("LangNone", _("None"),
+	action_none = gtk_radio_action_new (LANGUAGE_NONE, _("None"),
 					    _("Disable syntax highlighting"),
 					    NULL,
 					    -1);
@@ -950,7 +954,8 @@ create_languages_menu (GeditWindow *window)
 	gtk_ui_manager_add_ui (window->priv->manager,
 			       id,
 			       "/MenuBar/ViewMenu/ViewHighlightModeMenu/LanguagesMenuPlaceholder",
-			       "LangNone", "LangNone",
+			       LANGUAGE_NONE, 
+			       LANGUAGE_NONE,
 			       GTK_UI_MANAGER_MENUITEM,
 			       TRUE);
 
@@ -980,8 +985,7 @@ update_languages_menu (GeditWindow *window)
 	GList *l;
 	GtkAction *action;
 	GtkSourceLanguage *lang;
-	const gchar *lang_name;
-	gchar *escaped_lang_name;
+	const gchar *lang_id;
 
 	doc = gedit_window_get_active_document (window);
 	if (doc == NULL)
@@ -989,11 +993,9 @@ update_languages_menu (GeditWindow *window)
 
 	lang = gedit_document_get_language (doc);
 	if (lang != NULL)
-		lang_name = gtk_source_language_get_name (lang);
+		lang_id = gtk_source_language_get_id (lang);
 	else
-		lang_name = "LangNone";
-
-	escaped_lang_name = g_markup_escape_text (lang_name, -1);
+		lang_id = LANGUAGE_NONE;
 
 	actions = gtk_action_group_list_actions (window->priv->languages_action_group);
 
@@ -1006,7 +1008,7 @@ update_languages_menu (GeditWindow *window)
 	}
 
 	action = gtk_action_group_get_action (window->priv->languages_action_group,
-					      escaped_lang_name);
+					      lang_id);
 
 	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
 
@@ -1018,7 +1020,6 @@ update_languages_menu (GeditWindow *window)
 	}
 
 	g_list_free (actions);
-	g_free (escaped_lang_name);
 }
 
 void
