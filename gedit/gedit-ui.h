@@ -39,10 +39,7 @@
 
 #include "gedit-commands.h"
 
-/* FIXME: remove it when bumping dependency to GTK 2.10 */
-#ifndef GTK_STOCK_SELECT_ALL
-#	define GTK_STOCK_SELECT_ALL NULL
-#endif
+#define GEDIT_STOCK_PAGE_SETUP  "document-page-setup"
 
 G_BEGIN_DECLS
 
@@ -85,7 +82,7 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Save the current file with a different name"), G_CALLBACK (_gedit_cmd_file_save_as) },
 	{ "FileRevert", GTK_STOCK_REVERT_TO_SAVED, NULL, NULL,
 	  N_("Revert to a saved version of the file"), G_CALLBACK (_gedit_cmd_file_revert) },
-	{ "FilePageSetup", NULL, N_("Page Set_up..."), NULL,
+	{ "FilePageSetup", GEDIT_STOCK_PAGE_SETUP, N_("Page Set_up..."), NULL,
 	  N_("Setup the page settings"), G_CALLBACK (_gedit_cmd_file_page_setup) },
 	{ "FilePrintPreview", GTK_STOCK_PRINT_PREVIEW, N_("Print Previe_w"),"<control><shift>P",
 	  N_("Print preview"), G_CALLBACK (_gedit_cmd_file_print_preview) },
