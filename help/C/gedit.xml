@@ -422,22 +422,6 @@
 		<para>To undo a change you have made, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Undo</guimenuitem> </menuchoice>. To reverse this action, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Redo</guimenuitem> </menuchoice>. The number of previous edits that you can undo is determined by the <guilabel>Undo</guilabel> limit setting in the <guilabel>Editor</guilabel> tabbed section of the <guilabel>Preferences</guilabel> dialog: see  <xref linkend="gedit-prefs-editor"/>.  </para>
 	 </sect2>
 
-<!-- ============= To Position the Cursor on a Specific Line ======================= -->
-	 <sect2 id="gedit-goto-line">
-		<title>Positioning the Cursor on a Specific Line</title>
-		<para>To position the cursor on a specific line in the current file, perform the following steps:</para>
-		<orderedlist>
-		  <listitem><para>Choose <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Go to Line</guimenuitem> </menuchoice> to display the <guilabel>Go to Line</guilabel> dialog.</para>
-		  </listitem>
-		  <listitem><para>Type the number of the line that you want to move the cursor to in the <guilabel>Line number</guilabel> field.</para>
-		  </listitem>
-		  <listitem><para>Click <guibutton>Go to Line</guibutton>. The application moves the cursor to the line number that you specify.</para>
-		  </listitem>
-		  <listitem><para>To close the <guilabel>Go to Line</guilabel> dialog, click <guibutton>Close</guibutton>.</para>
-		  </listitem>
-		</orderedlist>
-	 </sect2>
-
 	</sect1>
 	<sect1 id="gedit-find">
 		<title>Finding and Replacing</title>
@@ -531,6 +515,16 @@
         </varlistentry>
 			 </variablelist>
     </sect2>
+
+<!-- ============= To Position the Cursor on a Specific Line ======================= -->
+    <sect2 id="gedit-goto-line">
+      <title>Positioning the Cursor on a Specific Line</title>
+
+      <para>To position the cursor on a specific line in the current file, choose <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Go to Line</guimenuitem> </menuchoice>. The line number box appears at the top of the display area.</para>
+      <para>Begin typing the number of the line that you want to move the cursor to and the document will scroll to the specified line.</para>
+      <para>To dismiss the box and move the cursor to the specified line, press <keycap>Return</keycap>.</para>
+    </sect2>
+
   </sect1>
 
   <sect1 id="gedit-printing">
