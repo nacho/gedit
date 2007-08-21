@@ -590,7 +590,7 @@ set_paste_sensitivity_according_to_clipboard (GeditWindow  *window,
 	if (gdk_display_supports_selection_notification (display))
 	{
 		gtk_clipboard_request_contents (clipboard,
-						gdk_atom_intern ("TARGETS", FALSE),
+						gdk_atom_intern_static_string ("TARGETS"),
 						(GtkClipboardReceivedFunc) received_clipboard_contents,
 						g_object_ref (window));
 	}
