@@ -662,14 +662,22 @@ ensure_color_scheme_id (const gchar *id)
 	GtkSourceStyleManager *manager = gedit_get_source_style_manager ();
 
 	if (id == NULL)
-		id = gedit_prefs_manager_get_source_style_scheme ();
-		
-	if (id != NULL) 
+	{
+		gchar *pref_id;
+
+		pref_id = gedit_prefs_manager_get_source_style_scheme ();
+		scheme = gtk_source_style_manager_get_scheme (manager, pref_id);
+
+		g_free (pref_id);
+	}
+	else
+	{
 		scheme = gtk_source_style_manager_get_scheme (manager, id);
-	
+	}
+
 	if (scheme == NULL) /* Fall-back to classic style scheme */
 		scheme = gtk_source_style_manager_get_scheme (manager, "classic");
-		
+
 	if (scheme == NULL) /* Cannot determine default style scheme -> broken GtkSourceView installation */
 		return NULL;
 
@@ -943,6 +951,9 @@ scheme_description_cell_data_func (GtkTreeViewColumn *column,
 		text = g_markup_printf_escaped ("<b>%s</b>",
 						name);
 	}
+
+	g_free (name);
+	g_free (desc);
 
 	g_object_set (G_OBJECT (renderer),
 		      "markup",

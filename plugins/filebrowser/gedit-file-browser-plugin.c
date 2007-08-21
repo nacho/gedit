@@ -1053,13 +1053,11 @@ on_tab_added_cb (GeditWindow * window,
                  GeditTab * tab,
                  GeditFileBrowserPluginData * data)
 {
-	GConfClient * client;
-	GeditDocument * doc;
+	GConfClient *client;
 	gboolean open;
-	gchar *uri;
 
 	client = gconf_client_get_default ();
-	
+
 	if (!client)
 		return;
 
@@ -1068,26 +1066,30 @@ on_tab_added_cb (GeditWindow * window,
 	                              NULL);
 
 	if (open) {
+		GeditDocument *doc;
+
 		doc = gedit_tab_get_document (tab);
-		
+
 		if (!gedit_document_is_untitled (doc)) {
+			gchar *uri;
+
 			uri = gedit_document_get_uri (doc);
-			
+
 			if (gedit_utils_uri_has_file_scheme (uri)) {
 				prepare_auto_root (data);
 				set_root_from_doc (data, doc);
 			}
+
+			g_free (uri);
 		}
-		
 	}
-	
+
 	g_object_unref (client);
-	
+
 	/* Disconnect this signal, it's only called once */
 	g_signal_handlers_disconnect_by_func (window, 
 	                                      G_CALLBACK (on_tab_added_cb),
 	                                      data);
-	
 }
 
 static gchar *

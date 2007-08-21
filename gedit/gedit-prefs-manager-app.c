@@ -312,9 +312,11 @@ gedit_state_file_sync ()
 	ret = TRUE;
 
  out:
+	if (err != NULL)
+		g_error_free (err);
+
 	g_free (content);
 	g_free (path);
-	g_error_free (err);
 
 	return TRUE;
 }
