@@ -197,6 +197,8 @@ get_gedit_state_file ()
 				g_warning ("Could not load gedit state file: %s\n",
 					   err->message);
 			}
+
+			g_error_free (err);
 		}
 
 		g_free (path);
@@ -237,6 +239,8 @@ gedit_state_get_int (const gchar *group,
 
 		if (defval > 0)
 			*result = defval;
+
+		g_error_free (err);
 	}
 	else
 	{
@@ -310,6 +314,7 @@ gedit_state_file_sync ()
  out:
 	g_free (content);
 	g_free (path);
+	g_error_free (err);
 
 	return TRUE;
 }

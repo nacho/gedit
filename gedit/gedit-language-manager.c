@@ -49,7 +49,7 @@ gedit_get_language_manager (void)
 	return language_manager;
 }
 
-GSList *
+static GSList *
 remove_hidden_languages (GSList *languages)
 {
 	GSList *item;
@@ -230,6 +230,7 @@ gedit_language_manager_get_language_from_mime_type (GtkSourceLanguageManager *lm
 			add_language_to_cache (lm, mime_type, lang);
 
 			g_strfreev (mime_types);
+			g_slist_free (languages);
 
 			return lang;
 		}
