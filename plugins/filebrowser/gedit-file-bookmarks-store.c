@@ -142,9 +142,10 @@ add_node (GeditFileBookmarksStore * model, GdkPixbuf * pixbuf,
 }
 
 static gboolean
-add_uri (GeditFileBookmarksStore * model, GnomeVFSURI * uri,
+add_uri (GeditFileBookmarksStore * model, const gchar * uri,
 	 gchar * name, guint flags, GtkTreeIter * iter)
 {
+	GnomeVFSURI *vfs_uri;
 	GdkPixbuf *pixbuf = NULL;
 	gchar *mime;
 	gchar *path;
@@ -152,14 +153,15 @@ add_uri (GeditFileBookmarksStore * model, GnomeVFSURI * uri,
 	gboolean free_name = FALSE;
 	gboolean local;
 
-	if (uri == NULL)
+	vfs_uri = gnome_vfs_uri_new (uri);
+	if (vfs_uri == NULL)
 		return FALSE;
 
-	path = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE);
+	path = gnome_vfs_uri_to_string (vfs_uri, GNOME_VFS_URI_HIDE_NONE);
 	local = gedit_utils_uri_has_file_scheme (path);
 
-	if (local && !gnome_vfs_uri_exists (uri)) {
-		gnome_vfs_uri_unref (uri);
+	if (local && !gnome_vfs_uri_exists (vfs_uri)) {
+		gnome_vfs_uri_unref (vfs_uri);
 		g_free (path);
 		return FALSE;
 	}
@@ -182,29 +184,29 @@ add_uri (GeditFileBookmarksStore * model, GnomeVFSURI * uri,
 	}
 
 	g_free (path);
-	
+
 	if (name == NULL) {
-		tmp = gedit_file_browser_utils_uri_basename (gnome_vfs_uri_get_path (uri));
+		tmp = gedit_file_browser_utils_uri_basename (gnome_vfs_uri_get_path (vfs_uri));
 		
 		if (local)
 			name = tmp;
 		else {
 			/* Translators: this is used in "file on host", e.g. "/foo/bar on ftp.baz.org" */
-			name = g_strconcat(tmp, " ", _("on"), " ", gnome_vfs_uri_get_host_name (uri), NULL);
+			name = g_strconcat(tmp, " ", _("on"), " ", gnome_vfs_uri_get_host_name (vfs_uri), NULL);
 			g_free (tmp);
 		}
 		
 		free_name = TRUE;
 	}
 
-	add_node (model, pixbuf, name, uri, flags, iter);
+	add_node (model, pixbuf, name, vfs_uri, flags, iter);
 
 	if (pixbuf)
 		g_object_unref (pixbuf);
 
 	if (free_name)
 		g_free (name);
-	
+
 	return TRUE;
 }
 
@@ -212,37 +214,33 @@ static void
 init_special_directories (GeditFileBookmarksStore * model)
 {
 	gchar const *path;
-	gchar *local;
-	GnomeVFSURI *uri;
+	gchar *uri;
 
 	path = g_get_home_dir ();
 	if (path != NULL)
 	{
-		local = gnome_vfs_get_uri_from_local_path (path);
-		uri = gnome_vfs_uri_new (local);
+		uri = gnome_vfs_get_uri_from_local_path (path);
 		add_uri (model, uri, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_HOME |
 			 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
-		g_free (local);
+		g_free (uri);
 	}
 
 	path = g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP);
 	if (path != NULL)
 	{
-		local = gnome_vfs_get_uri_from_local_path (path);
-		uri = gnome_vfs_uri_new (local);
+		uri = gnome_vfs_get_uri_from_local_path (path);
 		add_uri (model, uri, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_DESKTOP |
 			 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
-		g_free (local);
+		g_free (uri);
 	}
 
 	path = g_get_user_special_dir (G_USER_DIRECTORY_DOCUMENTS);
 	if (path != NULL)
 	{
-		local = gnome_vfs_get_uri_from_local_path (path);
-		uri = gnome_vfs_uri_new (local);
+		uri = gnome_vfs_get_uri_from_local_path (path);
 		add_uri (model, uri, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_DOCUMENTS |
 			 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
-		g_free (local);
+		g_free (uri);
 	}
 }
 
@@ -384,45 +382,38 @@ init_bookmarks (GeditFileBookmarksStore * model)
 	gchar *contents;
 	gchar **lines;
 	gchar **line;
-	gchar *pos;
-	gchar *unescape;
-	GnomeVFSURI *uri;
 	gboolean added = FALSE;
 
 	/* Read the bookmarks file */
-	bookmarks =
-	    g_build_filename (g_get_home_dir (), ".gtk-bookmarks", NULL);
+	bookmarks = g_build_filename (g_get_home_dir (),
+				      ".gtk-bookmarks",
+				      NULL);
 
 	if (g_file_get_contents (bookmarks, &contents, NULL, &error)) {
 		lines = g_strsplit (contents, "\n", 0);
 
 		for (line = lines; *line; ++line) {
 			if (**line) {
+				gchar *pos;
+				gchar *name;
+				gchar *unescape;
+
 				/* Check, is this really utf8? */
 				pos = g_utf8_strchr (*line, -1, ' ');
 
-				if (pos == NULL) {
-					unescape =
-					    gnome_vfs_unescape_string
-					    (*line, "");
-					uri = gnome_vfs_uri_new (unescape);
-					g_free (unescape);
-
-					added = add_uri (model, uri, NULL,
-						 GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK,
-						 NULL);
-				} else {
+				if (pos != NULL) {
 					*pos = '\0';
-					unescape =
-					    gnome_vfs_unescape_string
-					    (*line, "");
-					uri = gnome_vfs_uri_new (unescape);
-					g_free (unescape);
+					name = pos + 1;
+				} else {
+					name = NULL;
+				}
 
-					added = add_uri (model, uri, pos + 1,
+				unescape = gnome_vfs_unescape_string (*line, "");
+
+				added = add_uri (model, unescape, name,
 						 GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK,
 						 NULL);
-				}
+				g_free (unescape);
 			}
 		}
 
