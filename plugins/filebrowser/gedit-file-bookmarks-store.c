@@ -151,10 +151,13 @@ add_uri (GeditFileBookmarksStore * model, GnomeVFSURI * uri,
 	gchar *tmp;
 	gboolean free_name = FALSE;
 	gboolean local;
-	
+
+	if (uri == NULL)
+		return FALSE;
+
 	path = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE);
 	local = gedit_utils_uri_has_file_scheme (path);
-	
+
 	if (local && !gnome_vfs_uri_exists (uri)) {
 		gnome_vfs_uri_unref (uri);
 		g_free (path);
@@ -213,37 +216,34 @@ init_special_directories (GeditFileBookmarksStore * model)
 	GnomeVFSURI *uri;
 
 	path = g_get_home_dir ();
-	local = gnome_vfs_get_uri_from_local_path (path);
-	uri = gnome_vfs_uri_new (local);
-	g_free (local);
-
-	add_uri (model, uri, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_HOME |
-		 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
-
-	local = g_build_filename (path, "Desktop", NULL);
-	uri = gnome_vfs_uri_new (local);
-	add_uri (model, uri, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_DESKTOP |
-		 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
-	g_free (local);
-
-	local = g_build_filename (path, "Documents", NULL);
-	uri = gnome_vfs_uri_new (local);
-
-	if (gnome_vfs_uri_is_local (uri)) {
-		if (gnome_vfs_uri_exists (uri))
-			add_uri (model, uri, NULL,
-				 GEDIT_FILE_BOOKMARKS_STORE_IS_DOCUMENTS |
-				 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
-		else
-			gnome_vfs_uri_unref (uri);
-	} else {
-		add_uri (model, uri, NULL,
-			 GEDIT_FILE_BOOKMARKS_STORE_IS_DOCUMENTS |
+	if (path != NULL)
+	{
+		local = gnome_vfs_get_uri_from_local_path (path);
+		uri = gnome_vfs_uri_new (local);
+		add_uri (model, uri, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_HOME |
 			 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
+		g_free (local);
 	}
-		
 
-	g_free (local);
+	path = g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP);
+	if (path != NULL)
+	{
+		local = gnome_vfs_get_uri_from_local_path (path);
+		uri = gnome_vfs_uri_new (local);
+		add_uri (model, uri, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_DESKTOP |
+			 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
+		g_free (local);
+	}
+
+	path = g_get_user_special_dir (G_USER_DIRECTORY_DOCUMENTS);
+	if (path != NULL)
+	{
+		local = gnome_vfs_get_uri_from_local_path (path);
+		uri = gnome_vfs_uri_new (local);
+		add_uri (model, uri, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_DOCUMENTS |
+			 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
+		g_free (local);
+	}
 }
 
 static void
