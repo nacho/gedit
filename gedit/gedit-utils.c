@@ -373,9 +373,15 @@ gedit_utils_escape_search_text (const gchar* text)
 
     	length = strlen (text);
 
+	/* no escape when typing.
+	 * The short circuit works only for ascii, but we only
+	 * care about not escaping a single '\' */
+	if (length == 1)
+		return g_strdup (text);
+
 	str = g_string_new ("");
 
-  	p = text;
+	p = text;
   	end = text + length;
 
   	while (p != end)
@@ -393,6 +399,9 @@ gedit_utils_escape_search_text (const gchar* text)
           			break;
 			case '\t':
           			g_string_append (str, "\\t");
+          			break;
+			case '\\':
+          			g_string_append (str, "\\\\");
           			break;
         		default:
           			g_string_append_len (str, p, next - p);
