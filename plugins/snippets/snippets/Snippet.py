@@ -37,8 +37,8 @@ class EvalUtilities:
 
         def _real_len(self, s, tablen = 0):
                 if tablen == 0:
-                        tablen = self.view.get_tabs_width()
-                
+                        tablen = self.view.get_tab_width()
+
                 return len(s.expandtabs(tablen))
 
         def _gnomevfs_filename(self, filename):
@@ -57,8 +57,8 @@ class EvalUtilities:
 
         def util_align(self, items):
                 maxlen = []
-                tablen = self.view.get_tabs_width()
-                
+                tablen = self.view.get_tab_width()
+
                 for row in range(0, len(items)):
                         for col in range(0, len(items[row]) - 1):
                                 if row == 0:

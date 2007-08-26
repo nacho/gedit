@@ -214,9 +214,9 @@ class Manager(object):
 
         if language is not None:
             buf.set_language(language)
-            buf.set_highlight(True)
+            buf.set_highlight_syntax(True)
         else:
-            buf.set_highlight(False)
+            buf.set_highlight_syntax(False)
 
         self.set_active_by_name('input',
                                 default(node.input,

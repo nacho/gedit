@@ -1801,7 +1801,7 @@ update_cursor_position_statusbar (GtkTextBuffer *buffer,
 	gtk_text_iter_set_line_offset (&start, 0);
 	col = 0;
 
-	tab_size = gtk_source_view_get_tabs_width (GTK_SOURCE_VIEW (view));
+	tab_size = gtk_source_view_get_tab_width (GTK_SOURCE_VIEW (view));
 
 	while (!gtk_text_iter_equal (&start, &iter))
 	{

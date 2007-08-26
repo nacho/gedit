@@ -288,26 +288,26 @@ class Manager:
                 if function_name == 'create_source_view':
                         # Create the buffer, view and reset to defaults
                         buf = gedit.Document()
-                        #buf.set_style_scheme(None)
-                        buf.set_check_brackets(False)
-                        
+
                         source_view = gedit.View(buf)
                         source_view.set_auto_indent(True)
                         source_view.set_insert_spaces_instead_of_tabs(False)
                         source_view.set_smart_home_end(gsv.SMART_HOME_END_AFTER)
-                        source_view.set_tabs_width(2)
+                        source_view.set_tab_width(2)
                         source_view.set_highlight_current_line(False)
                         source_view.set_show_margin(False)
                         source_view.set_show_line_numbers(False)
                         source_view.set_font(True, "Monospace 10")
-                        
+
                         manager = self.get_language_manager()
                         lang = manager.get_language_by_id('snippets')
-                        
+
                         if lang:
-                                buf.set_highlight(True)
+                                buf.set_highlight_syntax(True)
                                 buf.set_language(lang)
                                 self.snippets_doc = Document(None, source_view)
+
+                        buf.set_highlight_matching_brackets(False)
 
                         return source_view
                 else:

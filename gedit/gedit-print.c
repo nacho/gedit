@@ -171,7 +171,7 @@ buffer_set (GeditPrintJob *job, GParamSpec *pspec, gpointer d)
 	gtk_source_print_job_set_config (pjob, config);
 	
 	gtk_source_print_job_set_highlight (pjob, 
-					    gtk_source_buffer_get_highlight (buffer) &&
+					    gtk_source_buffer_get_highlight_syntax (buffer) &&
 					    gedit_prefs_manager_get_print_syntax_hl ());
 		
 	if (gedit_prefs_manager_get_print_header ())

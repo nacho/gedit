@@ -769,7 +769,7 @@ gedit_prefs_manager_editor_font_changed (GConfClient *client,
 	{
 		/* Note: we use def=FALSE to avoid GeditView to query gconf */
 		gedit_view_set_font (GEDIT_VIEW (l->data), FALSE,  font);
-		gtk_source_view_set_tabs_width (GTK_SOURCE_VIEW (l->data), ts);
+		gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (l->data), ts);
 
 		l = l->next;
 	}
@@ -815,7 +815,7 @@ gedit_prefs_manager_system_font_changed (GConfClient *client,
 		/* Note: we use def=FALSE to avoid GeditView to query gconf */
 		gedit_view_set_font (GEDIT_VIEW (l->data), FALSE, font);
 
-		gtk_source_view_set_tabs_width (GTK_SOURCE_VIEW (l->data), ts);
+		gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (l->data), ts);
 		l = l->next;
 	}
 
@@ -836,24 +836,24 @@ gedit_prefs_manager_tabs_size_changed (GConfClient *client,
 
 	if (strcmp (entry->key, GPM_TABS_SIZE) == 0)
 	{
-		gint tabs_size;
+		gint tab_width;
 		GList *views;
 		GList *l;
-		
+
 		if (entry->value->type == GCONF_VALUE_INT)
-			tabs_size = gconf_value_get_int (entry->value);
+			tab_width = gconf_value_get_int (entry->value);
 		else
-			tabs_size = GPM_DEFAULT_TABS_SIZE;
+			tab_width = GPM_DEFAULT_TABS_SIZE;
 	
-		tabs_size = CLAMP (tabs_size, 1, 24);
+		tab_width = CLAMP (tab_width, 1, 24);
 
 		views = gedit_app_get_views (gedit_app_get_default ());
 		l = views;
 
 		while (l != NULL)
 		{
-			gtk_source_view_set_tabs_width (GTK_SOURCE_VIEW (l->data), 
-							tabs_size);
+			gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (l->data), 
+						       tab_width);
 
 			l = l->next;
 		}
@@ -865,7 +865,7 @@ gedit_prefs_manager_tabs_size_changed (GConfClient *client,
 		gboolean enable;
 		GList *views;
 		GList *l;
-		
+
 		if (entry->value->type == GCONF_VALUE_BOOL)
 			enable = gconf_value_get_bool (entry->value);	
 		else
@@ -1046,8 +1046,8 @@ gedit_prefs_manager_bracket_matching_changed (GConfClient *client,
 
 		while (l != NULL)
 		{
-			gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (l->data),
-							      enable);
+			gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (l->data),
+									   enable);
 
 			l = l->next;
 		}
@@ -1282,8 +1282,8 @@ gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
 		{
 			g_return_if_fail (GTK_IS_SOURCE_BUFFER (l->data));
 
-			gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (l->data),
-							 enable);
+			gtk_source_buffer_set_highlight_syntax (GTK_SOURCE_BUFFER (l->data),
+								enable);
 
 			l = l->next;
 		}

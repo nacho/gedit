@@ -32,7 +32,7 @@ typedef struct _ModelineOptions
 	 * same names.
 	 */
 	gboolean	insert_spaces;
-	guint		tabs_size;
+	guint		tab_width;
 	GtkWrapMode	wrap_mode;
 	gboolean	display_right_margin;
 	guint		right_margin_position;
@@ -116,7 +116,7 @@ parse_vim_modeline (gchar           *s,
 			 strcmp (key->str, "tabstop") == 0)
 		{
 			intval = atoi (value->str);
-			if (intval) options->tabs_size = intval;
+			if (intval) options->tab_width = intval;
 		}
 		else if (strcmp (key->str, "wrap") == 0)
 		{
@@ -193,7 +193,7 @@ parse_emacs_modeline (gchar         *s,
 		if (strcmp (key->str, "tab-width") == 0)
 		{
 			intval = atoi (value->str);
-			if (intval) options->tabs_size = intval;
+			if (intval) options->tab_width = intval;
 		}
 		else if (strcmp (key->str, "indent-tabs-mode") == 0)
 		{
@@ -266,7 +266,7 @@ parse_kate_modeline (gchar *s,
 		    strcmp (key->str, "indent-width") == 0)
 		{
 			intval = atoi (value->str);
-			if (intval) options->tabs_size = intval;
+			if (intval) options->tab_width = intval;
 		}
 		else if (strcmp (key->str, "space-indent") == 0)
 		{
@@ -349,7 +349,7 @@ apply_modeline (GtkSourceView *view)
 
 	/* Default values for modeline options */
 	options.insert_spaces = gedit_prefs_manager_get_insert_spaces ();
-	options.tabs_size = gedit_prefs_manager_get_tabs_size ();
+	options.tab_width = gedit_prefs_manager_get_tabs_size ();
 	options.wrap_mode = gedit_prefs_manager_get_wrap_mode ();
 	options.display_right_margin =
 			gedit_prefs_manager_get_display_right_margin ();
@@ -399,7 +399,7 @@ apply_modeline (GtkSourceView *view)
 	/* Apply the options we got from modelines */
 	gtk_source_view_set_insert_spaces_instead_of_tabs
 						(view, options.insert_spaces);
-	gtk_source_view_set_tabs_width (view, options.tabs_size);
+	gtk_source_view_set_tab_width (view, options.tab_width);
 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), options.wrap_mode);
 	gtk_source_view_set_margin (view, options.right_margin_position);
 	gtk_source_view_set_show_margin (view, options.display_right_margin);

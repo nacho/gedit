@@ -2055,9 +2055,9 @@ gtk_source_print_job_setup_from_view (GtkSourcePrintJob *job,
 	if (job->priv->buffer == NULL && buffer != NULL)
 		gtk_source_print_job_set_buffer (job, buffer);
 
-	gtk_source_print_job_set_tabs_width (job, gtk_source_view_get_tabs_width (view));
+	gtk_source_print_job_set_tabs_width (job, gtk_source_view_get_tab_width (view));
 	if (buffer != NULL)
-		gtk_source_print_job_set_highlight (job, gtk_source_buffer_get_highlight (buffer));
+		gtk_source_print_job_set_highlight (job, gtk_source_buffer_get_highlight_syntax (buffer));
 	gtk_source_print_job_set_wrap_mode (job, gtk_text_view_get_wrap_mode (GTK_TEXT_VIEW (view)));
 
 	pango_context = gtk_widget_get_pango_context (GTK_WIDGET (view));

@@ -559,11 +559,11 @@ set_language (GeditDocument     *doc,
 	gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (doc), lang);
 
 	if (lang != NULL)
-		gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (doc),
-						 gedit_prefs_manager_get_enable_syntax_highlighting ());
+		gtk_source_buffer_set_highlight_syntax (GTK_SOURCE_BUFFER (doc),
+				 gedit_prefs_manager_get_enable_syntax_highlighting ());
 	else
-		gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (doc), 
-						 FALSE);
+		gtk_source_buffer_set_highlight_syntax (GTK_SOURCE_BUFFER (doc), 
+				 FALSE);
 
 	if (set_by_user && (doc->priv->uri != NULL))
 	{
@@ -663,9 +663,8 @@ gedit_document_init (GeditDocument *doc)
 	gtk_source_buffer_set_max_undo_levels (GTK_SOURCE_BUFFER (doc), 
 					       gedit_prefs_manager_get_undo_actions_limit ());
 
-	/* TODO: Set the bracket matching tag style -- Paolo (10 Jan. 2005) */
-	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (doc), 
-					      gedit_prefs_manager_get_bracket_matching ());
+	gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (doc), 
+							   gedit_prefs_manager_get_bracket_matching ());
 
 	gedit_document_set_enable_search_highlighting (doc,
 						       gedit_prefs_manager_get_enable_search_highlighting ());
@@ -1663,7 +1662,7 @@ gedit_document_replace_all (GeditDocument       *doc,
 	gchar *replace_text;
 	gint replace_text_len;
 	GtkTextBuffer *buffer;
-	gboolean check_brackets;
+	gboolean brackets_highlighting;
 	gboolean search_highliting;
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), 0);
@@ -1697,8 +1696,8 @@ gedit_document_replace_all (GeditDocument       *doc,
 	doc->priv->stop_cursor_moved_emission = TRUE;
 
 	/* also avoid spending time matching brackets */
-	check_brackets = gtk_source_buffer_get_check_brackets (GTK_SOURCE_BUFFER (buffer));
-	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (buffer), FALSE);
+	brackets_highlighting = gtk_source_buffer_get_highlight_matching_brackets (GTK_SOURCE_BUFFER (buffer));
+	gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (buffer), FALSE);
 
 	/* and do search highliting later */
 	search_highliting = gedit_document_get_enable_search_highlighting (doc);
@@ -1754,8 +1753,8 @@ gedit_document_replace_all (GeditDocument       *doc,
 	doc->priv->stop_cursor_moved_emission = FALSE;
 	emit_cursor_moved (doc);
 
-	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (buffer),
-					      check_brackets);
+	gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (buffer),
+							   brackets_highlighting);
 	gedit_document_set_enable_search_highlighting (doc, search_highliting);
 
 	g_free (search_text);

@@ -305,7 +305,7 @@ gedit_view_init (GeditView *view)
 		      "wrap_mode", gedit_prefs_manager_get_wrap_mode (),
 		      "show_line_numbers", gedit_prefs_manager_get_display_line_numbers (),
 		      "auto_indent", gedit_prefs_manager_get_auto_indent (),
-		      "tabs_width", gedit_prefs_manager_get_tabs_size (),
+		      "tab_width", gedit_prefs_manager_get_tabs_size (),
 		      "insert_spaces_instead_of_tabs", gedit_prefs_manager_get_insert_spaces (),
 		      "show_margin", gedit_prefs_manager_get_display_right_margin (), 
 		      "margin", gedit_prefs_manager_get_right_margin_position (),

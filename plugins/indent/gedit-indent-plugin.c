@@ -112,10 +112,10 @@ indent_cb (GtkAction   *action,
 
 	if (gtk_source_view_get_insert_spaces_instead_of_tabs (view))
 	{
-		gint tabs_size;
+		gint tab_width;
 
-		tabs_size = gtk_source_view_get_tabs_width (view);
-		tab_buffer = g_strnfill (tabs_size, ' ');
+		tab_width = gtk_source_view_get_tab_width (view);
+		tab_buffer = g_strnfill (tab_width, ' ');
 	}
 	else
 	{
@@ -192,13 +192,13 @@ unindent_cb (GtkAction   *action,
 			if (spaces > 0)
 			{
 				gint tabs = 0;
-				gint tabs_size = gtk_source_view_get_tabs_width (view);
+				gint tab_width = gtk_source_view_get_tab_width (view);
 
-				tabs = spaces / tabs_size;
-				spaces = spaces - (tabs * tabs_size);
+				tabs = spaces / tab_width;
+				spaces = spaces - (tabs * tab_width);
 
 				if (spaces == 0)
-					spaces = tabs_size;
+					spaces = tab_width;
 
 				iter2 = iter;
 
