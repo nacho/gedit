@@ -300,7 +300,7 @@ class Manager:
                         source_view.set_font(True, "Monospace 10")
 
                         manager = self.get_language_manager()
-                        lang = manager.get_language_by_id('snippets')
+                        lang = manager.get_language('snippets')
 
                         if lang:
                                 buf.set_highlight_syntax(True)

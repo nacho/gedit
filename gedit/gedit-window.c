@@ -791,7 +791,7 @@ language_toggled (GtkToggleAction *action,
 	}
 	else
 	{
-		lang = gtk_source_language_manager_get_language_by_id (
+		lang = gtk_source_language_manager_get_language (
 				gedit_get_language_manager (),
 				lang_id);
 		if (lang == NULL)

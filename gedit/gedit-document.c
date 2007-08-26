@@ -771,7 +771,7 @@ set_uri (GeditDocument *doc,
 
 			if (strcmp (data, "_NORMAL_") != 0)
 			{
-				language = gtk_source_language_manager_get_language_by_id (
+				language = gtk_source_language_manager_get_language (
 							gedit_get_language_manager (),
 							data);
 			}
