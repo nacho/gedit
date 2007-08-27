@@ -33,6 +33,7 @@ typedef struct _ModelineOptions
 	 */
 	gboolean	insert_spaces;
 	guint		tab_width;
+	guint		indent_width;
 	GtkWrapMode	wrap_mode;
 	gboolean	display_right_margin;
 	guint		right_margin_position;
@@ -118,6 +119,12 @@ parse_vim_modeline (gchar           *s,
 			intval = atoi (value->str);
 			if (intval) options->tab_width = intval;
 		}
+		else if (strcmp (key->str, "sw") == 0 ||
+			 strcmp (key->str, "shiftwidth") == 0)
+		{
+			intval = atoi (value->str);
+			if (intval) options->indent_width = intval;
+		}
 		else if (strcmp (key->str, "wrap") == 0)
 		{
 			options->wrap_mode = neg ? GTK_WRAP_NONE
@@ -195,6 +202,11 @@ parse_emacs_modeline (gchar         *s,
 			intval = atoi (value->str);
 			if (intval) options->tab_width = intval;
 		}
+		else if (strcmp (key->str, "indent-offset") == 0)
+		{
+			intval = atoi (value->str);
+			if (intval) options->indent_width = intval;
+		}
 		else if (strcmp (key->str, "indent-tabs-mode") == 0)
 		{
 			intval = strcmp (value->str, "nil") == 0;
@@ -262,11 +274,15 @@ parse_kate_modeline (gchar *s,
 				     "Kate modeline bit: %s = %s",
 				     key->str, value->str);
 
-		if (strcmp (key->str, "tab-width") == 0 ||
-		    strcmp (key->str, "indent-width") == 0)
+		if (strcmp (key->str, "tab-width") == 0)
 		{
 			intval = atoi (value->str);
 			if (intval) options->tab_width = intval;
+		}
+		else if (strcmp (key->str, "indent-width") == 0)
+		{
+			intval = atoi (value->str);
+			if (intval) options->indent_width = intval;
 		}
 		else if (strcmp (key->str, "space-indent") == 0)
 		{
@@ -343,13 +359,13 @@ apply_modeline (GtkSourceView *view)
 	ModelineOptions options;
 	GtkTextBuffer *buffer;
 	GtkTextIter iter, liter;
-	gchar *line;
 	gint line_number;
 	gint line_count;
 
 	/* Default values for modeline options */
 	options.insert_spaces = gedit_prefs_manager_get_insert_spaces ();
 	options.tab_width = gedit_prefs_manager_get_tabs_size ();
+	options.indent_width = -1; /* not set by default */
 	options.wrap_mode = gedit_prefs_manager_get_wrap_mode ();
 	options.display_right_margin =
 			gedit_prefs_manager_get_display_right_margin ();
@@ -364,6 +380,8 @@ apply_modeline (GtkSourceView *view)
 	/* Parse the modelines on the 10 first lines... */
 	while (line_number < 10 && line_number < line_count)
 	{
+		gchar *line;
+
 		liter = iter;
 		gtk_text_iter_forward_to_line_end (&iter);
 		line = gtk_text_buffer_get_text (buffer, &liter, &iter, TRUE);
@@ -386,6 +404,8 @@ apply_modeline (GtkSourceView *view)
 
 	while (line_number < line_count)
 	{
+		gchar *line;
+
 		liter = iter;
 		gtk_text_iter_forward_to_line_end (&iter);
 		line = gtk_text_buffer_get_text (buffer, &liter, &iter, TRUE);
@@ -400,6 +420,7 @@ apply_modeline (GtkSourceView *view)
 	gtk_source_view_set_insert_spaces_instead_of_tabs
 						(view, options.insert_spaces);
 	gtk_source_view_set_tab_width (view, options.tab_width);
+	gtk_source_view_set_indent_width (view, options.indent_width);
 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), options.wrap_mode);
 	gtk_source_view_set_right_margin_position (view, options.right_margin_position);
 	gtk_source_view_set_show_right_margin (view, options.display_right_margin);

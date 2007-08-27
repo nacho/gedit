@@ -1749,10 +1749,14 @@
 <sect2 id="gedit-modelines-plugin">
   <title>Modelines Plugin</title>
     <para>The <application>Modelines</application> plugin allows you to set  preferences for individual documents. A <firstterm>modeline</firstterm> is a line of text at the start or end of the document with settings that <application>&app;</application> recognises.</para>
-    <para>You can override the following preferences with modelines:</para>
+    <para>Preferences set using modelines take precedence over the ones specified in the preference dialog.</para>
+    <para>You can set the following preferences with modelines:</para>
     <itemizedlist>
       <listitem>
         <para>Tab width</para>
+      </listitem>
+      <listitem>
+        <para>Indent width</para>
       </listitem>
       <listitem>
         <para>Insert spaces instead of tabs</para>
@@ -1770,7 +1774,7 @@
     <sect3 id="gedit-modelines-plugin-emacs">
       <title>Emacs Modelines</title>
       <para>The first two lines of a document are scanned for <application>Emacs</application> modelines.</para>
-      <para>The <application>Emacs</application> options for tab-width, indent-tabs-mode and autowrap are supported. For more information, see the <ulink type="http" url="http://www.delorie.com/gnu/docs/emacs/emacs_486.html">GNU Emacs Manual</ulink>.</para>
+      <para>The <application>Emacs</application> options for tab-width, indent-offset, indent-tabs-mode and autowrap are supported. For more information, see the <ulink type="http" url="http://www.delorie.com/gnu/docs/emacs/emacs_486.html">GNU Emacs Manual</ulink>.</para>
     </sect3>
     <sect3 id="gedit-modelines-plugin-kate">
       <title>Kate Modelines</title>
@@ -1780,7 +1784,7 @@
     <sect3 id="gedit-modelines-plugin-vim">
       <title>Vim Modelines</title>
       <para>The first and last three lines a document are scanned for <application>Vim</application> modelines.</para>
-      <para>The <application>Vim</application> options for et, expandtab, ts, tabstop, wrap, and textwidth are supported. For more information, see the <ulink type="http" url="http://vimdoc.sourceforge.net/htmldoc/options.html#modeline">Vim website</ulink>.</para>
+      <para>The <application>Vim</application> options for et, expandtab, ts, tabstop, sw, shiftwidth, wrap, and textwidth are supported. For more information, see the <ulink type="http" url="http://vimdoc.sourceforge.net/htmldoc/options.html#modeline">Vim website</ulink>.</para>
     </sect3>
 </sect2>
 
