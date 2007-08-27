@@ -47,7 +47,7 @@
 #include "gedit-utils.h"
 #include "gedit-metadata-manager.h"
 #include "gedit-language-manager.h"
-#include "gedit-source-style-manager.h"
+#include "gedit-style-scheme-manager.h"
 #include "gedit-document-loader.h"
 #include "gedit-document-saver.h"
 #include "gedit-marshal.h"
@@ -606,19 +606,20 @@ set_encoding (GeditDocument       *doc,
 static GtkSourceStyleScheme *
 get_default_style_scheme (void)
 {
-	gchar                 *scheme_id;
-	GtkSourceStyleScheme  *def_style;
-	GtkSourceStyleManager *manager;
-	
-	manager = gedit_get_source_style_manager ();
+	gchar *scheme_id;
+	GtkSourceStyleScheme *def_style;
+	GtkSourceStyleSchemeManager *manager;
+
+	manager = gedit_get_style_scheme_manager ();
 	scheme_id = gedit_prefs_manager_get_source_style_scheme ();
-	def_style = gtk_source_style_manager_get_scheme (manager, scheme_id);
+	def_style = gtk_source_style_scheme_manager_get_scheme (manager,
+								scheme_id);
 
 	if (def_style == NULL)
 	{
 		g_warning ("Default style scheme '%s' cannot be found, falling back to 'classic' style scheme ", scheme_id);
-			
-		def_style = gtk_source_style_manager_get_scheme (manager, "classic");
+
+		def_style = gtk_source_style_scheme_manager_get_scheme (manager, "classic");
 		if (def_style == NULL) 
 		{
 			g_warning ("Style scheme 'classic' cannot be found, check your GtkSourceView installation.");			
@@ -632,7 +633,6 @@ get_default_style_scheme (void)
 static void
 gedit_document_init (GeditDocument *doc)
 {
-	GtkSourceStyleManager *style_manager;
 	GtkSourceStyleScheme *style_scheme;
 
 	gedit_debug (DEBUG_DOCUMENT);
@@ -669,7 +669,6 @@ gedit_document_init (GeditDocument *doc)
 	gedit_document_set_enable_search_highlighting (doc,
 						       gedit_prefs_manager_get_enable_search_highlighting ());
 
-	style_manager = gedit_get_source_style_manager ();
 	style_scheme = get_default_style_scheme ();
 	if (style_scheme != NULL)
 		gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (doc),

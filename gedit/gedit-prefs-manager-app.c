@@ -43,7 +43,7 @@
 #include "gedit-view.h"
 #include "gedit-window.h"
 #include "gedit-window-private.h"
-#include "gedit-source-style-manager.h"
+#include "gedit-style-scheme-manager.h"
 
 static void gedit_prefs_manager_editor_font_changed	(GConfClient *client,
 							 guint        cnxn_id,
@@ -1377,16 +1377,19 @@ gedit_prefs_manager_source_style_scheme_changed (GConfClient *client,
 
 		g_free (old_scheme);
 		old_scheme = g_strdup (scheme);
-		
-		style = gtk_source_style_manager_get_scheme (gedit_get_source_style_manager (), 
-							     scheme);
+
+		style = gtk_source_style_scheme_manager_get_scheme (
+				gedit_get_style_scheme_manager (),
+				scheme);
 
 		if (style == NULL)
 		{
 			g_warning ("Default style scheme '%s' not found, falling back to 'classic'", scheme);
 			
-			style = gtk_source_style_manager_get_scheme (gedit_get_source_style_manager (), 
-								     "classic");
+			style = gtk_source_style_scheme_manager_get_scheme (
+				gedit_get_style_scheme_manager (),
+				"classic");
+
 			if (style == NULL) 
 			{
 				g_warning ("Style scheme 'classic' cannot be found, check your GtkSourceView installation.");

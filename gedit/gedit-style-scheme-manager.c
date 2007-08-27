@@ -34,10 +34,10 @@
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
 
-#include "gedit-source-style-manager.h"
+#include "gedit-style-scheme-manager.h"
 #include "gedit-prefs-manager.h"
 
-static GtkSourceStyleManager *style_manager = NULL;
+static GtkSourceStyleSchemeManager *style_scheme_manager = NULL;
 
 #define GEDIT_STYLES_DIR ".gnome2/gedit/styles"
 
@@ -60,29 +60,29 @@ get_gedit_styles_path (void)
 }
 
 static void
-add_gedit_styles_path (GtkSourceStyleManager *mgr)
+add_gedit_styles_path (GtkSourceStyleSchemeManager *mgr)
 {
 	gchar *dir;
-	
+
 	dir = get_gedit_styles_path();
-	
+
 	if (dir != NULL)
 	{
-		gtk_source_style_manager_append_search_path (mgr, dir);
+		gtk_source_style_scheme_manager_append_search_path (mgr, dir);
 		g_free (dir);
 	}	
 }
 
-GtkSourceStyleManager *
-gedit_get_source_style_manager (void)
+GtkSourceStyleSchemeManager *
+gedit_get_style_scheme_manager (void)
 {
-	if (style_manager == NULL)
+	if (style_scheme_manager == NULL)
 	{
-		style_manager = gtk_source_style_manager_new ();
-		add_gedit_styles_path (style_manager);
+		style_scheme_manager = gtk_source_style_scheme_manager_new ();
+		add_gedit_styles_path (style_scheme_manager);
 	}
 
-	return style_manager;
+	return style_scheme_manager;
 }
 
 static gint
@@ -98,36 +98,36 @@ schemes_compare (gconstpointer a, gconstpointer b)
 }
 
 GSList *
-gedit_source_style_manager_list_schemes_sorted (GtkSourceStyleManager *manager)
+gedit_style_scheme_manager_list_schemes_sorted (GtkSourceStyleSchemeManager *manager)
 {
 	const gchar * const * scheme_ids;
 	GSList *schemes = NULL;
-	
-	g_return_val_if_fail (GTK_IS_SOURCE_STYLE_MANAGER (manager), NULL);
-	
-	scheme_ids = gtk_source_style_manager_get_scheme_ids (manager);
+
+	g_return_val_if_fail (GTK_IS_SOURCE_STYLE_SCHEME_MANAGER (manager), NULL);
+
+	scheme_ids = gtk_source_style_scheme_manager_get_scheme_ids (manager);
 	
 	while (*scheme_ids != NULL)
 	{
 		GtkSourceStyleScheme *scheme;
 
-		scheme = gtk_source_style_manager_get_scheme (manager, 
-							      *scheme_ids);
-							      
+		scheme = gtk_source_style_scheme_manager_get_scheme (manager, 
+								     *scheme_ids);
+
 		schemes = g_slist_prepend (schemes, scheme);
-		
+
 		++scheme_ids;
 	}
-	
+
 	if (schemes != NULL)
 		schemes = g_slist_sort (schemes, (GCompareFunc)schemes_compare);
-	
+
 	return schemes;
 }
 
 gboolean
-_gedit_source_style_manager_scheme_is_gedit_user_scheme (GtkSourceStyleManager *manager,
-							 const gchar           *scheme_id)
+_gedit_style_scheme_manager_scheme_is_gedit_user_scheme (GtkSourceStyleSchemeManager *manager,
+							 const gchar                 *scheme_id)
 {
 	GtkSourceStyleScheme *scheme;
 	const gchar *filename;
@@ -135,7 +135,7 @@ _gedit_source_style_manager_scheme_is_gedit_user_scheme (GtkSourceStyleManager *
 	gchar *dir;
 	gboolean res = FALSE;
 
-	scheme = gtk_source_style_manager_get_scheme (manager, scheme_id);
+	scheme = gtk_source_style_scheme_manager_get_scheme (manager, scheme_id);
 	if (scheme == NULL)
 		return FALSE;
 
@@ -235,11 +235,11 @@ file_copy (const gchar  *name,
 }
 
 /**
- * _gedit_source_style_manager_install_scheme:
- * Install a new user scheme.
- * @manager: a #GtkSourceStyleManager
+ * _gedit_style_scheme_manager_install_scheme:
+ * @manager: a #GtkSourceStyleSchemeManager
  * @fname: the file name of the style scheme to be installed
  *
+ * Install a new user scheme.
  * This function copies @fname in #GEDIT_STYLES_DIR and ask the style manager to
  * recompute the list of available style schemes. It then checks if a style
  * scheme with the right file name exists.
@@ -250,8 +250,8 @@ file_copy (const gchar  *name,
  * Return value: the id of the installed scheme, %NULL otherwise.
  */
 const gchar *
-_gedit_source_style_manager_install_scheme (GtkSourceStyleManager *manager,
-					    const gchar           *fname)
+_gedit_style_scheme_manager_install_scheme (GtkSourceStyleSchemeManager *manager,
+					    const gchar                 *fname)
 {
 	gchar  *new_file_name;
 	gchar  *basename;
@@ -260,7 +260,7 @@ _gedit_source_style_manager_install_scheme (GtkSourceStyleManager *manager,
 
 	const gchar* const *ids;
 
-	g_return_val_if_fail (GTK_IS_SOURCE_STYLE_MANAGER (manager), NULL);
+	g_return_val_if_fail (GTK_IS_SOURCE_STYLE_SCHEME_MANAGER (manager), NULL);
 	g_return_val_if_fail (fname != NULL, NULL);
 
 	basename = g_path_get_basename (fname);
@@ -279,22 +279,22 @@ _gedit_source_style_manager_install_scheme (GtkSourceStyleManager *manager,
 	}
 
 	/* Reload the available style schemes */
-	gtk_source_style_manager_force_rescan (manager);
+	gtk_source_style_scheme_manager_force_rescan (manager);
 
 	/* Check the new style scheme has been actually installed */
-	ids = gtk_source_style_manager_get_scheme_ids (manager);
+	ids = gtk_source_style_scheme_manager_get_scheme_ids (manager);
 
 	while (*ids != NULL)
 	{
 		GtkSourceStyleScheme *scheme;
 		const gchar *filename;
 
-		scheme = gtk_source_style_manager_get_scheme (gedit_get_source_style_manager (),
-							      *ids);
+		scheme = gtk_source_style_scheme_manager_get_scheme (
+				gedit_get_style_scheme_manager (), *ids);
 
 		filename = gtk_source_style_scheme_get_filename (scheme);
-		
-		if (strcmp (filename, new_file_name) == 0)
+
+		if (filename && (strcmp (filename, new_file_name) == 0))
 		{
 			/* The style scheme has been correctly installed */
 			g_free (new_file_name);
@@ -313,9 +313,8 @@ _gedit_source_style_manager_install_scheme (GtkSourceStyleManager *manager,
 }
 
 /**
- * _gedit_source_style_manager_uninstall_scheme:
- * Uninstall a  user scheme.
- * @manager: a #GtkSourceStyleManager
+ * _gedit_style_scheme_manager_uninstall_scheme:
+ * @manager: a #GtkSourceStyleSchemeManager
  * @id: the id of the style scheme to be uninstalled
  *
  * Uninstall a user scheme.
@@ -326,20 +325,19 @@ _gedit_source_style_manager_install_scheme (GtkSourceStyleManager *manager,
  * Return value: %TRUE on success, %FALSE otherwise.
  */
 gboolean
-_gedit_source_style_manager_uninstall_scheme (GtkSourceStyleManager *manager,
-					      const gchar           *id)
+_gedit_style_scheme_manager_uninstall_scheme (GtkSourceStyleSchemeManager *manager,
+					      const gchar                 *id)
 {
 	GtkSourceStyleScheme *scheme;
 	const gchar *filename;
 
-	g_return_val_if_fail (GTK_IS_SOURCE_STYLE_MANAGER (manager), FALSE);
+	g_return_val_if_fail (GTK_IS_SOURCE_STYLE_SCHEME_MANAGER (manager), FALSE);
 	g_return_val_if_fail (id != NULL, FALSE);
-	
-	scheme = gtk_source_style_manager_get_scheme (manager,
-						      id);
+
+	scheme = gtk_source_style_scheme_manager_get_scheme (manager, id);
 	if (scheme == NULL)
 		return FALSE;
-		
+
 	filename = gtk_source_style_scheme_get_filename (scheme);
 	if (filename == NULL)
 		return FALSE;
@@ -348,7 +346,7 @@ _gedit_source_style_manager_uninstall_scheme (GtkSourceStyleManager *manager,
 		return FALSE;
 		
 	/* Reload the available style schemes */
-	gtk_source_style_manager_force_rescan (manager);
+	gtk_source_style_scheme_manager_force_rescan (manager);
 	
 	return TRUE;	
 }

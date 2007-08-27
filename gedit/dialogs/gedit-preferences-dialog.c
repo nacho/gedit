@@ -45,7 +45,7 @@
 #include "gedit-utils.h"
 #include "gedit-debug.h"
 #include "gedit-document.h"
-#include "gedit-source-style-manager.h"
+#include "gedit-style-scheme-manager.h"
 #include "gedit-plugin-manager.h"
 #include "gedit-help.h"
 
@@ -625,8 +625,8 @@ set_buttons_sensisitivity_according_to_scheme (GeditPreferencesDialog *dlg,
 	gboolean editable;
 	
 	editable = (scheme_id != NULL) && 
-	           _gedit_source_style_manager_scheme_is_gedit_user_scheme (
-						gedit_get_source_style_manager (),
+	           _gedit_style_scheme_manager_scheme_is_gedit_user_scheme (
+						gedit_get_style_scheme_manager (),
 						scheme_id);
 
 	gtk_widget_set_sensitive (dlg->priv->uninstall_scheme_button,
@@ -659,33 +659,41 @@ static const gchar *
 ensure_color_scheme_id (const gchar *id)
 {
 	GtkSourceStyleScheme *scheme = NULL;
-	GtkSourceStyleManager *manager = gedit_get_source_style_manager ();
+	GtkSourceStyleSchemeManager *manager = gedit_get_style_scheme_manager ();
 
 	if (id == NULL)
 	{
 		gchar *pref_id;
 
 		pref_id = gedit_prefs_manager_get_source_style_scheme ();
-		scheme = gtk_source_style_manager_get_scheme (manager, pref_id);
-
+		scheme = gtk_source_style_scheme_manager_get_scheme (manager,
+								     pref_id);
 		g_free (pref_id);
 	}
 	else
 	{
-		scheme = gtk_source_style_manager_get_scheme (manager, id);
+		scheme = gtk_source_style_scheme_manager_get_scheme (manager,
+								     id);
 	}
 
-	if (scheme == NULL) /* Fall-back to classic style scheme */
-		scheme = gtk_source_style_manager_get_scheme (manager, "classic");
+	if (scheme == NULL)
+	{
+		/* Fall-back to classic style scheme */
+		scheme = gtk_source_style_scheme_manager_get_scheme (manager,
+								     "classic");
+	}
 
-	if (scheme == NULL) /* Cannot determine default style scheme -> broken GtkSourceView installation */
+	if (scheme == NULL)
+	{
+		/* Cannot determine default style scheme -> broken GtkSourceView installation */
 		return NULL;
+	}
 
 	return 	gtk_source_style_scheme_get_id (scheme);
 }
 
 /* If def_id is NULL, use the default scheme as returned by 
- * gedit_source_style_manager_get_default_scheme. If this one returns NULL
+ * gedit_style_scheme_manager_get_default_scheme. If this one returns NULL
  * use the first available scheme as default */
 static const gchar *
 populate_color_scheme_list (GeditPreferencesDialog *dlg, const gchar *def_id)
@@ -703,7 +711,7 @@ populate_color_scheme_list (GeditPreferencesDialog *dlg, const gchar *def_id)
 		return NULL;
 	}
 	
-	schemes = gedit_source_style_manager_list_schemes_sorted (gedit_get_source_style_manager ());
+	schemes = gedit_style_scheme_manager_list_schemes_sorted (gedit_get_style_scheme_manager ());
 	l = schemes;
 	while (l != NULL)
 	{
@@ -764,11 +772,11 @@ add_scheme_chooser_response_cb (GtkDialog              *chooser,
 	
 	gtk_widget_hide (GTK_WIDGET (chooser));
 	
-	scheme_id = _gedit_source_style_manager_install_scheme (
-					gedit_get_source_style_manager (),
+	scheme_id = _gedit_style_scheme_manager_install_scheme (
+					gedit_get_style_scheme_manager (),
 					filename);
 	g_free (filename);
-	
+
 	if (scheme_id == NULL)
 	{
 		gedit_warning (GTK_WINDOW (dlg),
@@ -776,11 +784,11 @@ add_scheme_chooser_response_cb (GtkDialog              *chooser,
 
 		return;
 	}
-	
+
 	gedit_prefs_manager_set_source_style_scheme (scheme_id);
-	
+
 	scheme_id = populate_color_scheme_list (dlg, scheme_id);
-	
+
 	set_buttons_sensisitivity_according_to_scheme (dlg, scheme_id);
 }
 			 
@@ -861,7 +869,7 @@ uninstall_scheme_clicked (GtkButton              *button,
 				    NAME_COLUMN, &name,
 				    -1);
 	
-		if (!_gedit_source_style_manager_uninstall_scheme (gedit_get_source_style_manager (), id))
+		if (!_gedit_style_scheme_manager_uninstall_scheme (gedit_get_style_scheme_manager (), id))
 		{
 			gedit_warning (GTK_WINDOW (dlg),
 				       _("Could not remove color scheme \"%s\"."),

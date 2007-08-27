@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gedit-source-style-manager.h
+ * gedit-style-scheme-manager.h
  *
  * Copyright (C) 2007 - Paolo Borelli
  *
@@ -22,31 +22,35 @@
  * $Id: gedit-source-style-manager.h 5598 2007-04-15 13:16:24Z pborelli $
  */
 
-#ifndef __GEDIT_SOURCE_STYLE_MANAGER_H__
-#define __GEDIT_SOURCE_STYLE_MANAGER_H__
+#ifndef __GEDIT_STYLE_SCHEME_MANAGER_H__
+#define __GEDIT_STYLE_SCHEME_MANAGER_H__
 
-#include <gtksourceview/gtksourcestylemanager.h>
+#include <gtksourceview/gtksourcestyleschememanager.h>
 
 G_BEGIN_DECLS
 
-GtkSourceStyleManager	*gedit_get_source_style_manager			(void);
+GtkSourceStyleSchemeManager *
+		 gedit_get_style_scheme_manager		(void);
 
 /* Returns a sorted list of style schemes */
-GSList 			*gedit_source_style_manager_list_schemes_sorted (GtkSourceStyleManager *manager);
+GSList		*gedit_style_scheme_manager_list_schemes_sorted
+							(GtkSourceStyleSchemeManager *manager);
 
 /*
  * Non exported functions
  */
-gboolean		 _gedit_source_style_manager_scheme_is_gedit_user_scheme
-									(GtkSourceStyleManager *manager,
-									 const gchar           *scheme_id);
+gboolean	 _gedit_style_scheme_manager_scheme_is_gedit_user_scheme
+							(GtkSourceStyleSchemeManager *manager,
+							 const gchar                 *scheme_id);
 
-const gchar		*_gedit_source_style_manager_install_scheme	(GtkSourceStyleManager *manager,
-									 const gchar           *fname);
+const gchar	*_gedit_style_scheme_manager_install_scheme
+							(GtkSourceStyleSchemeManager *manager,
+							 const gchar                 *fname);
 
-gboolean		 _gedit_source_style_manager_uninstall_scheme	(GtkSourceStyleManager *manager,
-									 const gchar           *id);
+gboolean	 _gedit_style_scheme_manager_uninstall_scheme
+							(GtkSourceStyleSchemeManager *manager,
+							 const gchar                 *id);
 
 G_END_DECLS
 
-#endif /* __GEDIT_SOURCE_STYLE_MANAGER_H__ */
+#endif /* __GEDIT_STYLE_SCHEME_MANAGER_H__ */
