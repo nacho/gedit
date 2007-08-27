@@ -1161,8 +1161,8 @@ gedit_prefs_manager_right_margin_changed (GConfClient *client,
 
 		while (l != NULL)
 		{
-			gtk_source_view_set_margin (GTK_SOURCE_VIEW (l->data),
-						    pos);
+			gtk_source_view_set_right_margin_position (GTK_SOURCE_VIEW (l->data),
+								   pos);
 
 			l = l->next;
 		}
@@ -1185,8 +1185,8 @@ gedit_prefs_manager_right_margin_changed (GConfClient *client,
 
 		while (l != NULL)
 		{
-			gtk_source_view_set_show_margin (GTK_SOURCE_VIEW (l->data),
-							 display);
+			gtk_source_view_set_show_right_margin (GTK_SOURCE_VIEW (l->data),
+							       display);
 
 			l = l->next;
 		}

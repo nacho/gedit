@@ -295,7 +295,7 @@ class Manager:
                         source_view.set_smart_home_end(gsv.SMART_HOME_END_AFTER)
                         source_view.set_tab_width(2)
                         source_view.set_highlight_current_line(False)
-                        source_view.set_show_margin(False)
+                        source_view.set_show_right_margin(False)
                         source_view.set_show_line_numbers(False)
                         source_view.set_font(True, "Monospace 10")
 

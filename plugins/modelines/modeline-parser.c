@@ -401,6 +401,6 @@ apply_modeline (GtkSourceView *view)
 						(view, options.insert_spaces);
 	gtk_source_view_set_tab_width (view, options.tab_width);
 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), options.wrap_mode);
-	gtk_source_view_set_margin (view, options.right_margin_position);
-	gtk_source_view_set_show_margin (view, options.display_right_margin);
+	gtk_source_view_set_right_margin_position (view, options.right_margin_position);
+	gtk_source_view_set_show_right_margin (view, options.display_right_margin);
 }
