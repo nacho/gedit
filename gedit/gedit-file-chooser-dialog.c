@@ -152,6 +152,7 @@ filter_changed (GeditFileChooserDialog *dialog,
 	gedit_prefs_manager_set_active_file_filter (id);
 }
 
+/* FIXME: use globs too - Paolo (Aug. 27, 2007) */
 static gboolean
 all_text_files_filter (const GtkFileFilterInfo *filter_info,
 		       gpointer                 data)
@@ -162,19 +163,20 @@ all_text_files_filter (const GtkFileFilterInfo *filter_info,
 	if (known_mime_types == NULL)
 	{
 		GtkSourceLanguageManager *lm;
-		GSList *languages;
-		GSList *l;
+		const gchar * const *languages;
 
 		lm = gedit_get_language_manager ();
-		languages = gtk_source_language_manager_list_languages (lm);
+		languages = gtk_source_language_manager_get_language_ids (lm);
 
-		for (l = languages; l != NULL; l = l->next)
+		while (*languages != NULL)
 		{
 			gchar **mime_types;
 			gint i;
 			GtkSourceLanguage *lang;
 
-			lang = l->data;
+			lang = gtk_source_language_manager_get_language (lm, *languages);
+			g_return_val_if_fail (GTK_IS_SOURCE_LANGUAGE (lang), FALSE);
+			++languages;
 
 			mime_types = gtk_source_language_get_mime_types (lang);
 			if (mime_types == NULL)
@@ -200,8 +202,6 @@ all_text_files_filter (const GtkFileFilterInfo *filter_info,
 
 			g_strfreev (mime_types);
 		}
-
-		g_slist_free (languages);
 
 		/* known_mime_types always has "text/plain" as first item" */
 		known_mime_types = g_slist_prepend (known_mime_types, g_strdup ("text/plain"));
