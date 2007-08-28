@@ -5,9 +5,9 @@
 # Jorge González <jorgegonz@svn.gnome.org>, 2006, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: help.HEAD.es(13)\n"
-"POT-Creation-Date: 2007-08-18 03:48+0100\n"
-"PO-Revision-Date: 2007-08-18 14:22+0200\n"
+"Project-Id-Version: help.HEAD.es(1)\n"
+"POT-Creation-Date: 2007-08-28 04:20+0100\n"
+"PO-Revision-Date: 2007-08-28 16:03+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1377,7 +1377,7 @@ msgstr ""
 "especificar la frecuencia con la que desea que se impriman los números de "
 "línea, por ejemplo cada 5 líneas, cada 10 líneas, etc."
 
-#: C/gedit.xml:561(guilabel) C/gedit.xml:1150(guilabel) C/gedit.xml:1761(para)
+#: C/gedit.xml:561(guilabel) C/gedit.xml:1150(guilabel) C/gedit.xml:1765(para)
 msgid "Text Wrapping"
 msgstr "Ajuste de texto"
 
@@ -2389,9 +2389,9 @@ msgid ""
 "highlight the corresponding bracket when the cursor is positioned on a "
 "bracket character."
 msgstr ""
-"Seleccione la opción <guilabel>Resaltar coincidencia de corchetes</guilabel> para "
-"resaltar el corchete correspondiente cuando el cursor está posicionado en un "
-"carácter corchete."
+"Seleccione la opción <guilabel>Resaltar coincidencia de corchetes</guilabel> "
+"para resaltar el corchete correspondiente cuando el cursor está posicionado "
+"en un carácter corchete."
 
 #: C/gedit.xml:1186(title)
 msgid "Editor Preferences"
@@ -3608,22 +3608,34 @@ msgstr ""
 "con ajustes que <application>gedit</application> reconoce."
 
 #: C/gedit.xml:1752(para)
-msgid "You can override the following preferences with modelines:"
-msgstr "Puede redefinir las siguientes preferencias con líneas de modos:"
+msgid ""
+"Preferences set using modelines take precedence over the ones specified in "
+"the preference dialog."
+msgstr ""
+"Las preferencias establecidas para usar líneas de modo tienen preferencia sobre las especificadas "
+"en el diálogo de preferencias."
 
-#: C/gedit.xml:1755(para)
+#: C/gedit.xml:1753(para)
+msgid "You can set the following preferences with modelines:"
+msgstr "Puede establecer las siguientes preferencias con líneas de modos:"
+
+#: C/gedit.xml:1756(para)
 msgid "Tab width"
 msgstr "Ancho de tabulación"
 
-#: C/gedit.xml:1758(para)
+#: C/gedit.xml:1759(para)
+msgid "Indent width"
+msgstr "Anchura de la sangría"
+
+#: C/gedit.xml:1762(para)
 msgid "Insert spaces instead of tabs"
 msgstr "Insertar espacios en lugar de tabuladores"
 
-#: C/gedit.xml:1764(para)
+#: C/gedit.xml:1768(para)
 msgid "Right margin width"
 msgstr "Anchura del margen derecho"
 
-#: C/gedit.xml:1768(para)
+#: C/gedit.xml:1772(para)
 msgid ""
 "The <application>Modelines</application> plugin supports a subset of the "
 "options used by other text editors <application>Emacs</application>, "
@@ -3634,11 +3646,11 @@ msgstr ""
 "<application>Emacs</application>, <application>Kate</application> y "
 "<application>Vim</application>."
 
-#: C/gedit.xml:1771(title)
+#: C/gedit.xml:1775(title)
 msgid "Emacs Modelines"
 msgstr "Líneas de modo Emacs"
 
-#: C/gedit.xml:1772(para)
+#: C/gedit.xml:1776(para)
 msgid ""
 "The first two lines of a document are scanned for <application>Emacs</"
 "application> modelines."
@@ -3646,23 +3658,23 @@ msgstr ""
 "Las primeras dos líneas de un documento se analizan buscando líneas de modos "
 "<application>Emacs</application>"
 
-#: C/gedit.xml:1773(para)
+#: C/gedit.xml:1777(para)
 msgid ""
-"The <application>Emacs</application> options for tab-width, indent-tabs-mode "
-"and autowrap are supported. For more information, see the <ulink type=\"http"
-"\" url=\"http://www.delorie.com/gnu/docs/emacs/emacs_486.html\">GNU Emacs "
-"Manual</ulink>."
+"The <application>Emacs</application> options for tab-width, indent-offset, "
+"indent-tabs-mode and autowrap are supported. For more information, see the "
+"<ulink type=\"http\" url=\"http://www.delorie.com/gnu/docs/emacs/emacs_486."
+"html\">GNU Emacs Manual</ulink>."
 msgstr ""
-"Se soportan las opciones <application>Emacs</application> para tab-width, "
-"indent-tabs-mode y autowrap. Para más información, vea el manual de <ulink "
+"Se soportan las opciones <application>Emacs</application> para tab-width, indent-offset, "
+"indent-tabs-mode y autowrap. Para obtener más información, consulte el manual de <ulink "
 "type=\"http\" url=\"http://www.delorie.com/gnu/docs/emacs/emacs_486.html"
-"\">GNU Emacs Manual</ulink>."
+"\">GNU Emacs</ulink>."
 
-#: C/gedit.xml:1776(title)
+#: C/gedit.xml:1780(title)
 msgid "Kate Modelines"
 msgstr "Líneas de modo Kate"
 
-#: C/gedit.xml:1777(para)
+#: C/gedit.xml:1781(para)
 msgid ""
 "The first and last ten lines a document are scanned for <application>Kate</"
 "application> modelines."
@@ -3670,7 +3682,7 @@ msgstr ""
 "La primera y las últimas diez líneas de un documento se analizan buscando "
 "líneas de modo <application>Kate</application>."
 
-#: C/gedit.xml:1778(para)
+#: C/gedit.xml:1782(para)
 msgid ""
 "The <application>Kate</application> options for tab-width, indent-width, "
 "space-indent, word-wrap and word-wrap-column are supported. For more "
@@ -3682,11 +3694,11 @@ msgstr ""
 "información, vea el <ulink type=\"http\" url=\"http://www.kate-editor.org/"
 "article/katepart_modelines\">sitio web de Kate</ulink>."
 
-#: C/gedit.xml:1781(title)
+#: C/gedit.xml:1785(title)
 msgid "Vim Modelines"
 msgstr "Líneas de modo Vim"
 
-#: C/gedit.xml:1782(para)
+#: C/gedit.xml:1786(para)
 msgid ""
 "The first and last three lines a document are scanned for <application>Vim</"
 "application> modelines."
@@ -3694,23 +3706,23 @@ msgstr ""
 "La primera y las últimas tres líneas de un documento se escanean buscando "
 "líneas de modo <application>Vim</application>."
 
-#: C/gedit.xml:1783(para)
+#: C/gedit.xml:1787(para)
 msgid ""
 "The <application>Vim</application> options for et, expandtab, ts, tabstop, "
-"wrap, and textwidth are supported. For more information, see the <ulink type="
-"\"http\" url=\"http://vimdoc.sourceforge.net/htmldoc/options.html#modeline"
-"\">Vim website</ulink>."
+"sw, shiftwidth, wrap, and textwidth are supported. For more information, see "
+"the <ulink type=\"http\" url=\"http://vimdoc.sourceforge.net/htmldoc/options."
+"html#modeline\">Vim website</ulink>."
 msgstr ""
-"Se soportan las opciones <application>Vim</application> para et, expandtab, "
-"tstabstop, wrap, y textwidth. Para más información, vea el <ulink type=\"http"
+"Se soportan las opciones <application>Vim</application> para et, expandtab, ts, tabstop, "
+"sw, shiftwidth, wrap, y textwidth. Para obtener más información, consulte la <ulink type=\"http"
 "\" url=\"http://vimdoc.sourceforge.net/htmldoc/options.html#modeline\">"
-"\">Sitio web de Vim</ulink>."
+"\">página web de Vim</ulink>."
 
-#: C/gedit.xml:1788(title)
+#: C/gedit.xml:1792(title)
 msgid "Python Console Plugin"
 msgstr "Complemento consola Python"
 
-#: C/gedit.xml:1789(para)
+#: C/gedit.xml:1793(para)
 msgid ""
 "The <application>Python Console</application> Plugin allows you to run "
 "commands in the python programming language from <application>gedit</"
@@ -3722,7 +3734,7 @@ msgstr ""
 "application>. Activando el complemento se añade una solapa al panel "
 "inferior. Esta muestra su salida reciente y un campo de entrada de comandos."
 
-#: C/gedit.xml:1790(para)
+#: C/gedit.xml:1794(para)
 msgid ""
 "Commands entered into the python console are not checked before they are "
 "run. It is therefore possible to hang <application>gedit</application>, for "
@@ -3732,11 +3744,11 @@ msgstr ""
 "ejecutarlos. Es posible entonces colgar <application>gedit</application>, "
 "por ejemplo entrando un bucle infinito."
 
-#: C/gedit.xml:1794(title)
+#: C/gedit.xml:1798(title)
 msgid "Snippets Plugin"
 msgstr "Complemento Recortes"
 
-#: C/gedit.xml:1795(para)
+#: C/gedit.xml:1799(para)
 msgid ""
 "The <application>Snippets</application> plugin allows you to store "
 "frequently-used pieces of text, called <firstterm>snippets</firstterm>, and "
@@ -3746,7 +3758,7 @@ msgstr ""
 "trozos de texto usados frecuentemente, llamados <firstterm>recortes</"
 "firstterm>, e insertarlos rápidamente en un documento."
 
-#: C/gedit.xml:1796(para)
+#: C/gedit.xml:1800(para)
 msgid ""
 "Snippets are specific to the language syntax of the current document. For "
 "example, when you are working with an HTML document, you can choose from a "
@@ -3758,7 +3770,7 @@ msgstr ""
 "elegir de una lista de recortes que son útiles para HTML. Además, algunos "
 "recortes son globales, y están disponibles para todos los documentos."
 
-#: C/gedit.xml:1797(para)
+#: C/gedit.xml:1801(para)
 msgid ""
 "A number of built-in snippets are installed with <application>gedit</"
 "application>, which can be modified."
@@ -3766,11 +3778,11 @@ msgstr ""
 "Junto con <application>gedit</application>, se instalan varios recortes, que "
 "pueden modificarse."
 
-#: C/gedit.xml:1800(title)
+#: C/gedit.xml:1804(title)
 msgid "Inserting Snippets"
 msgstr "Inserción de recortes"
 
-#: C/gedit.xml:1801(para)
+#: C/gedit.xml:1805(para)
 msgid ""
 "To insert a snippet into a document, type its <firstterm>tab trigger</"
 "firstterm> and press <keycap>Tab</keycap>. A snippet's tab trigger is "
@@ -3782,7 +3794,7 @@ msgstr ""
 "usualmente las primeras pocas letras del recorte, o algo parecido que sea "
 "corto y fácil de recordar."
 
-#: C/gedit.xml:1802(para)
+#: C/gedit.xml:1806(para)
 msgid ""
 "Alternatively, press <keycombo><keycap>Ctrl</keycap><keycap>Space</keycap></"
 "keycombo> to see a list of snippets you can insert."
@@ -3790,15 +3802,15 @@ msgstr ""
 "Alternativamente, pulse <keycombo><keycap>Ctrl</keycap><keycap>Espacio</"
 "keycap></keycombo> para ver una lista de recortes que puede insertar."
 
-#: C/gedit.xml:1806(title)
+#: C/gedit.xml:1810(title)
 msgid "Adding Snippets"
 msgstr "Adición de recortes"
 
-#: C/gedit.xml:1807(para)
+#: C/gedit.xml:1811(para)
 msgid "To create a new snippet, do the following:"
 msgstr "Puede crear un recorte nuevo, haga lo siguiente:"
 
-#: C/gedit.xml:1810(para)
+#: C/gedit.xml:1814(para)
 msgid ""
 "Choose <menuchoice><guimenu>Tools</guimenu><guimenuitem>Manage Snippets</"
 "guimenuitem></menuchoice>. The <guilabel>Snippets Manager</guilabel> window "
@@ -3808,7 +3820,7 @@ msgstr ""
 "de Recortes</guimenuitem></menuchoice>. La ventana del <guilabel>Gestor de "
 "Recortes</guilabel> se abre."
 
-#: C/gedit.xml:1813(para)
+#: C/gedit.xml:1817(para)
 msgid ""
 "The list of snippets is grouped by language. Select the language you want to "
 "add a snippet to, or a snippet in that language group. To add a snippet for "
@@ -3821,19 +3833,19 @@ msgstr ""
 "superior de la lista. La sintaxis del documento con el que esta trabajando "
 "actualmente se muestra por omision."
 
-#: C/gedit.xml:1816(para)
+#: C/gedit.xml:1820(para)
 msgid "Click <guibutton>New</guibutton>. A new snippet appears in the list."
 msgstr "Pulse <guibutton>Nuevo</guibutton>. Aparece un recorte nuevo en la lista."
 
-#: C/gedit.xml:1819(para)
+#: C/gedit.xml:1823(para)
 msgid "Enter the following information for the new snippet:"
 msgstr "Introduzca la siguiente información para el recorte nuevo:"
 
-#: C/gedit.xml:1821(term)
+#: C/gedit.xml:1825(term)
 msgid "Name"
 msgstr "Nombre"
 
-#: C/gedit.xml:1823(para)
+#: C/gedit.xml:1827(para)
 msgid ""
 "Enter a name for the snippet in the text field within the snippet list. The "
 "name of a snippet serves only as a reminder of its purpose. You can change "
@@ -3844,11 +3856,11 @@ msgstr ""
 "propósito. Puede cambiar el nombre de un recorte que cree para pulsar en él "
 "en la lista."
 
-#: C/gedit.xml:1826(term)
+#: C/gedit.xml:1830(term)
 msgid "Snippet text"
 msgstr "Texto del recorte"
 
-#: C/gedit.xml:1828(para)
+#: C/gedit.xml:1832(para)
 msgid ""
 "Enter the text of the snippet in the <guilabel>Edit snippet</guilabel> text "
 "box. For special codes you can use, see <xref linkend=\"gedit-snippets-"
@@ -3858,7 +3870,7 @@ msgstr ""
 "recorte</guilabel>. Para códigos especiales, que pueda usar, vea <xref "
 "linkend=\"gedit-snippets-plugin-syntax\"/>."
 
-#: C/gedit.xml:1829(para)
+#: C/gedit.xml:1833(para)
 msgid ""
 "You can switch back to the document window to copy text without closing the "
 "<guilabel>Snippets Manager</guilabel> window."
@@ -3866,11 +3878,11 @@ msgstr ""
 "Puede volver a la ventana del documento para copiar texto sin cerrar la "
 "ventana del <guilabel>Gestor de recortes</guilabel>"
 
-#: C/gedit.xml:1832(term)
+#: C/gedit.xml:1836(term)
 msgid "Tab Trigger"
 msgstr "Disparador de tabulador"
 
-#: C/gedit.xml:1834(para)
+#: C/gedit.xml:1838(para)
 msgid ""
 "Enter the tab trigger for the snippet. This is the text that you type before "
 "pressing <keycap>Tab</keycap> to insert the snippet."
@@ -3878,7 +3890,7 @@ msgstr ""
 "Introduzca el disparado para el recorte. Este es el texto que teclea antes "
 "de pulsar la tecla <keycap>Tab</keycap> para insertar el recorte."
 
-#: C/gedit.xml:1835(para)
+#: C/gedit.xml:1839(para)
 msgid ""
 "The tag must be either a single word comprising only letters, or any single "
 "character. The <guilabel>Tab trigger</guilabel> will highlight in red if an "
@@ -3888,19 +3900,19 @@ msgstr ""
 "cualquier carácter en solitario. El <guilabel>disparador</guilabel> se "
 "resaltará en rojo si se introduce un disparador inválido."
 
-#: C/gedit.xml:1838(term)
+#: C/gedit.xml:1842(term)
 msgid "Shortcut key"
 msgstr "Tecla rápida"
 
-#: C/gedit.xml:1840(para)
+#: C/gedit.xml:1844(para)
 msgid "Type a shortcut key to use for inserting the snippet."
 msgstr "Teclee una tecla de acceso rápido para usarla para insertar el recorte."
 
-#: C/gedit.xml:1849(title)
+#: C/gedit.xml:1853(title)
 msgid "Editing and Removing Snippets"
 msgstr "Editar y quitar recortes"
 
-#: C/gedit.xml:1850(para)
+#: C/gedit.xml:1854(para)
 msgid ""
 "To edit a snippet, select it in the list and make changes to its text and "
 "activation properties."
@@ -3908,11 +3920,11 @@ msgstr ""
 "Para editar un recorte, selecciónelo en la lista y haga cambios a sus "
 "propiedades de activación de texto."
 
-#: C/gedit.xml:1851(para)
+#: C/gedit.xml:1855(para)
 msgid "To rename a snippet, click it again in the list."
 msgstr "Para renombrar un recorte, pulse otra vez en la lista."
 
-#: C/gedit.xml:1852(para)
+#: C/gedit.xml:1856(para)
 msgid ""
 "To restore a built-in snippet that you have changed, press <guilabel>Revert</"
 "guilabel>."
@@ -3920,7 +3932,7 @@ msgstr ""
 "Para restaurar un recorte integrado que haya modificado, pulse "
 "<guilabel>Revertir</guilabel>."
 
-#: C/gedit.xml:1853(para)
+#: C/gedit.xml:1857(para)
 msgid ""
 "To remove a snippet, select it in the list and press <guibutton>Remove</"
 "guibutton>. You can not remove built-in snippets, only those you have "
@@ -3930,11 +3942,11 @@ msgstr ""
 "<guibutton>Quitar</guibutton>. No puede quitar los recortes integrados, sólo "
 "aquellos que usted haya creado."
 
-#: C/gedit.xml:1857(title)
+#: C/gedit.xml:1861(title)
 msgid "Snippet Substitutions"
 msgstr "Sustituciones de recortes"
 
-#: C/gedit.xml:1858(para)
+#: C/gedit.xml:1862(para)
 msgid ""
 "In addition to inserting stored text, a snippet can include customizable "
 "text, or mark spaces where you can add text once the snippet is inserted in "
@@ -3944,17 +3956,17 @@ msgstr ""
 "personalizado, o marcar espacios donde puede añadir texto una vez que el "
 "recorte se ha insertado en su documento."
 
-#: C/gedit.xml:1862(para)
+#: C/gedit.xml:1866(para)
 msgid "You can use the following placeholder codes in snippet text:"
 msgstr ""
 "Puede usar los siguientes códigos de reserva de espacio en el texto del "
 "recorte:"
 
-#: C/gedit.xml:1864(term)
+#: C/gedit.xml:1868(term)
 msgid "Tab placeholders"
 msgstr "Reservas de espacio para tabuladores"
 
-#: C/gedit.xml:1866(para)
+#: C/gedit.xml:1870(para)
 msgid ""
 "<literal>$<replaceable>n</replaceable></literal> defines a tab placeholder, "
 "where <literal>n</literal> is any number from 1 upwards."
@@ -3963,7 +3975,7 @@ msgstr ""
 "de tabulador donde  <literal>n</literal> es cualquier número desde 1 en "
 "adelante."
 
-#: C/gedit.xml:1867(para)
+#: C/gedit.xml:1871(para)
 msgid ""
 "<literal>${<replaceable>n</replaceable>:<replaceable>default</replaceable>}</"
 "literal> defines a tab placeholder with a default value."
@@ -3971,7 +3983,7 @@ msgstr ""
 "<literal>${<replaceable>n</replaceable>:<replaceable>default</replaceable>}</"
 "literal> define una reserva de espacio de tabulación con un valor diferente."
 
-#: C/gedit.xml:1868(para)
+#: C/gedit.xml:1872(para)
 msgid ""
 "A tab placeholder marks a place in the snippet text where you can add extra "
 "text after the snippet is inserted."
@@ -3979,7 +3991,7 @@ msgstr ""
 "Una reserva de espacio de tabulación marca un lugar en el texto de un "
 "recorte donde puede añadir texto adicional después de insertar el recorte."
 
-#: C/gedit.xml:1869(para)
+#: C/gedit.xml:1873(para)
 msgid ""
 "To use tab placeholders, insert the snippet as normal. The cursor is placed "
 "at the first tab placeholder. Type text, and press <keycap>Tab</keycap> to "
@@ -3992,7 +4004,7 @@ msgstr ""
 "El número en el código de la reserva de espacio define el orden en que cada "
 "tabulación avanza a cada lugar del texto."
 
-#: C/gedit.xml:1870(para)
+#: C/gedit.xml:1874(para)
 msgid ""
 "Press <keycombo><keycap>Shift</keycap><keycap>Tab</keycap></keycombo> to "
 "return to the previous tab placeholder. Pressing <keycap>Tab</keycap> when "
@@ -4004,11 +4016,11 @@ msgstr ""
 "keycap> cuando no hay más reservas de espacio de tabulador mueve el cursor "
 "al final del recorte de texto, o a la reserva de espacio al final si existe."
 
-#: C/gedit.xml:1873(term)
+#: C/gedit.xml:1877(term)
 msgid "Mirror placeholders"
 msgstr "Replicar reservas de espacio"
 
-#: C/gedit.xml:1875(para)
+#: C/gedit.xml:1879(para)
 msgid ""
 "A repeated tab placeholder will mirror the placeholder already defined. This "
 "allows you to type in text only once that you want to appear several times "
@@ -4018,11 +4030,11 @@ msgstr ""
 "Esto permite teclear texto sólo una vez cuando quiere que aparezca varias "
 "veces en el recorte."
 
-#: C/gedit.xml:1878(term)
+#: C/gedit.xml:1882(term)
 msgid "End placeholder"
 msgstr "Terminar reserva de espacio"
 
-#: C/gedit.xml:1880(para)
+#: C/gedit.xml:1884(para)
 msgid ""
 "<literal>$0</literal> defines the end placeholder. This allows you to finish "
 "working with the snippet with the cursor at a point other than the end of "
@@ -4032,11 +4044,11 @@ msgstr ""
 "permite terminar de trabajar con el recorte con el cursor en un punto "
 "distinto que el final del texto recortado."
 
-#: C/gedit.xml:1883(term)
+#: C/gedit.xml:1887(term)
 msgid "Environmental variables"
 msgstr "Variables de entorno"
 
-#: C/gedit.xml:1885(para)
+#: C/gedit.xml:1889(para)
 msgid ""
 "Environmental variable such as <literal>$PATH</literal> and <literal>$HOME</"
 "literal> are substituted in snippet text. The following variables specific "
@@ -4046,19 +4058,19 @@ msgstr ""
 "literal> se sustituyen en el texto del recorte. Las siguientes variables "
 "específicas de <application>gedit</application> se pueden usar también."
 
-#: C/gedit.xml:1887(term)
+#: C/gedit.xml:1891(term)
 msgid "$GEDIT_SELECTED_TEXT"
 msgstr "$GEDIT_SELECTED_TEXT"
 
-#: C/gedit.xml:1889(para)
+#: C/gedit.xml:1893(para)
 msgid "The currently selected text."
 msgstr "El texto actualmente seleccionado."
 
-#: C/gedit.xml:1892(term)
+#: C/gedit.xml:1896(term)
 msgid "$GEDIT_FILENAME"
 msgstr "$GEDIT_FILENAME"
 
-#: C/gedit.xml:1894(para)
+#: C/gedit.xml:1898(para)
 msgid ""
 "The full filename of the document, or an empty string if the document isn't "
 "saved yet."
@@ -4066,11 +4078,11 @@ msgstr ""
 "El nombre completo del documento, o una cadena vacía si el documento no está "
 "guardado aún."
 
-#: C/gedit.xml:1897(term)
+#: C/gedit.xml:1901(term)
 msgid "$GEDIT_BASENAME"
 msgstr "$GEDIT_BASENAME"
 
-#: C/gedit.xml:1899(para)
+#: C/gedit.xml:1903(para)
 msgid ""
 "The basename of the filename of the document, or an empty string if the "
 "document isn't saved yet."
@@ -4078,11 +4090,11 @@ msgstr ""
 "El nombre base del nombre de archivo del documento, o una cadena vacía si el "
 "documento aún no se ha guardado."
 
-#: C/gedit.xml:1902(term)
+#: C/gedit.xml:1906(term)
 msgid "$GEDIT_CURRENT_WORD"
 msgstr "$GEDIT_CURRENT_WORD"
 
-#: C/gedit.xml:1904(para)
+#: C/gedit.xml:1908(para)
 msgid ""
 "The word at the cursor's location in the document. When this variable is "
 "used, the current word will be replaced by the snippet text."
@@ -4090,11 +4102,11 @@ msgstr ""
 "La palabra en al lugar del cursor en el documento. Cuando esta variable se "
 "esté usando, la palabra actual se reemplazará con el texto del recorte."
 
-#: C/gedit.xml:1912(term)
+#: C/gedit.xml:1916(term)
 msgid "Shell placeholders"
 msgstr "Reservas de espacio de shell"
 
-#: C/gedit.xml:1914(para)
+#: C/gedit.xml:1918(para)
 msgid ""
 "<literal>$(<replaceable>cmd</replaceable>)</literal> is replaced by the "
 "result of executing <replaceable>cmd</replaceable> in a shell."
@@ -4102,7 +4114,7 @@ msgstr ""
 "<literal>$(<replaceable>cmd</replaceable>)</literal> se reemplaza por el "
 "resultado de ejecutar <replaceable>cmd</replaceable> en una shell."
 
-#: C/gedit.xml:1915(para)
+#: C/gedit.xml:1919(para)
 msgid ""
 "<literal>$(<replaceable>n</replaceable>:<replaceable>cmd</replaceable>)</"
 "literal> allows you to give this placeholder a reference, where "
@@ -4116,11 +4128,11 @@ msgstr ""
 "<literal>$<replaceable>n</replaceable></literal> para usar la salida desde "
 "una reserva de espacio de shell como entrada en otra."
 
-#: C/gedit.xml:1918(term)
+#: C/gedit.xml:1922(term)
 msgid "Python placeholders"
 msgstr "Reservas de espacio de Python"
 
-#: C/gedit.xml:1920(para)
+#: C/gedit.xml:1924(para)
 msgid ""
 "<literal>$&lt;<replaceable>cmd</replaceable>&gt;</literal> is replaced by "
 "the result of evaluating <replaceable>cmd</replaceable> in the python "
@@ -4130,7 +4142,7 @@ msgstr ""
 "el resultado de evaluar <replaceable>cmd</replaceable> en el intérprete de "
 "python."
 
-#: C/gedit.xml:1921(para)
+#: C/gedit.xml:1925(para)
 msgid ""
 "<literal>$&lt;<replaceable>a</replaceable>:<replaceable>cmd</replaceable>&gt;"
 "</literal> specifies another python placeholder as a dependency, where "
@@ -4148,7 +4160,7 @@ msgstr ""
 "<replaceable>a</replaceable>,<replaceable>b</replaceable>:<replaceable>cmd</"
 "replaceable>&gt;</literal>"
 
-#: C/gedit.xml:1922(para)
+#: C/gedit.xml:1926(para)
 msgid ""
 "To use a variable in all other python snippets, declare it as "
 "<literal>global</literal>."
@@ -4156,11 +4168,11 @@ msgstr ""
 "Para usar una variable en todos los otros recortes de python, declárela como "
 "<literal>global</literal>."
 
-#: C/gedit.xml:1931(title)
+#: C/gedit.xml:1935(title)
 msgid "Sort Plugin"
 msgstr "Complemento Ordenar"
 
-#: C/gedit.xml:1932(para)
+#: C/gedit.xml:1936(para)
 msgid ""
 "The <application>Sort</application> plugin arranges selected lines of text "
 "into alphabetical order."
@@ -4168,7 +4180,7 @@ msgstr ""
 "El complemento <application>Ordenar</application> coloca las líneas "
 "seleccionadas en orden alfabético."
 
-#: C/gedit.xml:1933(para)
+#: C/gedit.xml:1937(para)
 msgid ""
 "You cannot undo the Sort operation, so you should save the file before "
 "performing the sort. To revert to the saved version of the file after the "
@@ -4181,15 +4193,15 @@ msgstr ""
 "<menuchoice><guimenu>Archivo</guimenu><guimenuitem>Revertir</guimenuitem></"
 "menuchoice>."
 
-#: C/gedit.xml:1936(para)
+#: C/gedit.xml:1940(para)
 msgid "To use the Sort plugin, perform the following steps:"
 msgstr "Para utilizar el complemento Ordenar, realice los siguientes pasos:"
 
-#: C/gedit.xml:1939(para)
+#: C/gedit.xml:1943(para)
 msgid "Select the lines of text you want to sort."
 msgstr "Seleccione las líneas de texto que quiere ordenar."
 
-#: C/gedit.xml:1941(para)
+#: C/gedit.xml:1945(para)
 msgid ""
 "Choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Sort</guimenuitem></"
 "menuchoice>. The <guilabel>Sort</guilabel> dialog opens."
@@ -4197,11 +4209,11 @@ msgstr ""
 "Seleccione <menuchoice><guimenu>Editar</guimenu><guimenuitem>Ordenar</"
 "guimenuitem></menuchoice>. El diálogo <guilabel>Ordenar</guilabel> se abre."
 
-#: C/gedit.xml:1944(para)
+#: C/gedit.xml:1948(para)
 msgid "Choose the options you want for the sort:"
 msgstr "Elija las opciones que quiera para la ordenación:"
 
-#: C/gedit.xml:1947(para)
+#: C/gedit.xml:1951(para)
 msgid ""
 "To arrange the text in reverse order, select <guilabel>Reverse order</"
 "guilabel>."
@@ -4209,19 +4221,19 @@ msgstr ""
 "Para ordenar el texto en orden inverso, seleccione la opción <guilabel>Orden "
 "inverso</guilabel>."
 
-#: C/gedit.xml:1950(para)
+#: C/gedit.xml:1954(para)
 msgid "To delete duplicate lines, select <guilabel>Remove duplicates</guilabel>."
 msgstr ""
 "Para borrar las líneas duplicadas, seleccione la opción <guilabel>Eliminar "
 "duplicados</guilabel>."
 
-#: C/gedit.xml:1953(para)
+#: C/gedit.xml:1957(para)
 msgid "To ignore case sensitivity, select <guilabel>Ignore case</guilabel>."
 msgstr ""
 "Para no distinguir entre mayúsculas y minúsculas, seleccione la opción "
 "<guilabel>Ignorar capitalización</guilabel>."
 
-#: C/gedit.xml:1956(para)
+#: C/gedit.xml:1960(para)
 msgid ""
 "To have the sort ignore the characters at the start of the lines, set the "
 "first character that should be used for sorting in the <guilabel>Start at "
@@ -4231,15 +4243,15 @@ msgstr ""
 "establezca el primer carácter que debería usarse para ordenar en el marcador "
 "incrementable <guilabel>Empezar en la columna</guilabel>."
 
-#: C/gedit.xml:1961(para)
+#: C/gedit.xml:1965(para)
 msgid "To perform the sort operation, click <guibutton>Sort</guibutton>."
 msgstr "Para efectuar la ordenación, pulse el botón <guibutton>Ordenar</guibutton>."
 
-#: C/gedit.xml:1968(title)
+#: C/gedit.xml:1972(title)
 msgid "Spell Checker Plugin"
 msgstr "Complemento Corrector ortográfico"
 
-#: C/gedit.xml:1969(para)
+#: C/gedit.xml:1973(para)
 msgid ""
 "The <application>Spell Checker</application> plugin checks the spelling in "
 "the selected text. You can configure <application>gedit</application> to "
@@ -4255,7 +4267,7 @@ msgstr ""
 "ortografía, se aplican por cada documento. Para usar el complemento "
 "Corrector ortográfico, realice los siguientes pasos:"
 
-#: C/gedit.xml:1971(para)
+#: C/gedit.xml:1975(para)
 msgid ""
 "Choose <menuchoice><guimenu>Tools</guimenu><guimenuitem>Set Language</"
 "guimenuitem></menuchoice> to display the <guilabel>Set language</guilabel> "
@@ -4269,7 +4281,7 @@ msgstr ""
 "guibutton> para cerrar el cuadro de diálogo <guilabel>Establecer idioma…</"
 "guilabel>."
 
-#: C/gedit.xml:1974(para)
+#: C/gedit.xml:1978(para)
 msgid ""
 "To check the spelling automatically, choose <menuchoice><guimenu>Tools</"
 "guimenu><guimenuitem>Autocheck Spelling</guimenuitem></menuchoice>. To unset "
@@ -4291,7 +4303,7 @@ msgstr ""
 "ortografía automático está sin seleccionar por omisión, cada vez que "
 "<application>gedit</application> comienza."
 
-#: C/gedit.xml:1975(para)
+#: C/gedit.xml:1979(para)
 msgid ""
 "Unknown spellings are displayed in a different color, and underlined. Right-"
 "click on an unknown spelling, then select <guimenu>Spelling Suggestions</"
@@ -4301,7 +4313,7 @@ msgstr ""
 "Pulse en el botón derecho en una ortografía desconocida, después seleccione "
 "<guimenu>Sugerencias de ortografía</guimenu> del menú emergente:"
 
-#: C/gedit.xml:1978(para)
+#: C/gedit.xml:1982(para)
 msgid ""
 "To replace the unknown spelling with another spelling in the list, select "
 "the replacement spelling from the <guimenu>Spelling Suggestions</guimenu> "
@@ -4311,7 +4323,7 @@ msgstr ""
 "seleccione sustituir ortografía desde <guimenu>Sugerencias de ortografía</"
 "guimenu> del menú emergente."
 
-#: C/gedit.xml:1981(para)
+#: C/gedit.xml:1985(para)
 msgid ""
 "To add the unknown spelling to your personal dictionary, select "
 "<menuchoice><guimenu>Spelling Suggestions</guimenu><guimenuitem>Add</"
@@ -4321,7 +4333,7 @@ msgstr ""
 "<menuchoice><guimenu>Editar</guimenu><guimenuitem>Anular sangría</"
 "guimenuitem></menuchoice>."
 
-#: C/gedit.xml:1984(para)
+#: C/gedit.xml:1988(para)
 msgid ""
 "To ignore all occurrences of the unknown spelling, so that they are no "
 "longer flagged as unknown but are not added to your personal dictionary, "
@@ -4336,7 +4348,7 @@ msgstr ""
 "desconocida es ignorada sólo en la actual sesión de <application>gedit</"
 "application>."
 
-#: C/gedit.xml:1989(para)
+#: C/gedit.xml:1993(para)
 msgid ""
 "To check the spelling manually, choose <menuchoice><guimenu>Tools</"
 "guimenu><guimenuitem>Check Spelling</guimenuitem></menuchoice>."
@@ -4345,7 +4357,7 @@ msgstr ""
 "<menuchoice><guimenu>Editar</guimenu><guimenuitem>Seleccionar todo</"
 "guimenuitem></menuchoice>."
 
-#: C/gedit.xml:1991(para)
+#: C/gedit.xml:1995(para)
 msgid ""
 "If there are no spelling errors, an <guilabel>Information</guilabel> dialog "
 "displays a message stating that the document does not contain misspelled "
@@ -4357,7 +4369,7 @@ msgstr ""
 "mal escritas. Pulse <guibutton>Aceptar</guibutton> para cerrar el diálogo de "
 "<guilabel>Información</guilabel>."
 
-#: C/gedit.xml:1993(para)
+#: C/gedit.xml:1997(para)
 msgid ""
 "If there are spelling errors, the <guilabel>Check Spelling</guilabel> dialog "
 "is displayed:"
@@ -4365,7 +4377,7 @@ msgstr ""
 "Si hay errores de ortografía, el <guilabel>Revisor de Ortografía</guilabel> "
 "diálogo se visualiza:"
 
-#: C/gedit.xml:1996(para)
+#: C/gedit.xml:2000(para)
 msgid ""
 "The <guilabel>Misspelled word</guilabel> is displayed at the top of the "
 "dialog."
@@ -4373,7 +4385,7 @@ msgstr ""
 "La <guilabel>Palabra mal escrita</guilabel> se visualiza en la parte de "
 "arriba del diálogo."
 
-#: C/gedit.xml:1999(para)
+#: C/gedit.xml:2003(para)
 msgid ""
 "A suggested known spelling is displayed in the <guilabel>Change to</"
 "guilabel> text box. You can replace this with another known spelling by "
@@ -4386,7 +4398,7 @@ msgstr ""
 "guilabel>, o puede introducir el texto directamente en la casilla de texto "
 "de <guilabel>Cambiar a</guilabel>."
 
-#: C/gedit.xml:2002(para)
+#: C/gedit.xml:2006(para)
 msgid ""
 "To check the spelling of the text in the <guilabel>Change to</guilabel> text "
 "box, click <guibutton>Check Word</guibutton>. If this is a known word, the "
@@ -4401,7 +4413,7 @@ msgstr ""
 "literal>. Si la palabra es desconocida, aparecerán nuevas entradas en la "
 "lista de <guilabel>Sugerencias</guilabel>."
 
-#: C/gedit.xml:2005(para)
+#: C/gedit.xml:2009(para)
 msgid ""
 "To ignore the current occurrence of the unknown word, click "
 "<guibutton>Ignore</guibutton>. To ignore all occurrences of the unknown "
@@ -4414,7 +4426,7 @@ msgstr ""
 "desconocida es ignorada sólo en la sesión actual de <application>gedit</"
 "application>."
 
-#: C/gedit.xml:2008(para)
+#: C/gedit.xml:2012(para)
 msgid ""
 "To change the current occurrence of the unknown word to the text in the "
 "<guilabel>Change to</guilabel> text box, click <guibutton>Change</"
@@ -4427,7 +4439,7 @@ msgstr ""
 "cambiar todas las palabras desconocidas al texto en la casilla de texto "
 "<guilabel>Cambiar por</guilabel>, pulse <guibutton>Cambiar todo</guibutton>."
 
-#: C/gedit.xml:2011(para)
+#: C/gedit.xml:2015(para)
 msgid ""
 "To add the unknown word to your personal dictionary, click <guibutton>Add "
 "word</guibutton>."
@@ -4435,7 +4447,7 @@ msgstr ""
 "Para añadir la palabra desconocida a su diccionario personal, pulse el botón "
 "<guibutton>Añadir palabra</guibutton>."
 
-#: C/gedit.xml:2014(para)
+#: C/gedit.xml:2018(para)
 msgid ""
 "To close the <guilabel>Check Spelling</guilabel> dialog, click "
 "<guibutton>Close</guibutton>."
@@ -4443,11 +4455,11 @@ msgstr ""
 "Para cerrar el cuadro de diálogo <guilabel>Ir a la línea</guilabel>, pulse "
 "en el botón <guibutton>Cerrar</guibutton>."
 
-#: C/gedit.xml:2023(title)
+#: C/gedit.xml:2027(title)
 msgid "Tag List Plugin"
 msgstr "Complemento Lista de etiquetas"
 
-#: C/gedit.xml:2024(para)
+#: C/gedit.xml:2028(para)
 msgid ""
 "The <application>Tag List</application> plugin allows you to insert common "
 "tags from a list in the side pane."
@@ -4455,13 +4467,13 @@ msgstr ""
 "La aplicación <application>Lista de etiquetas</application> le permite "
 "insertar etiquetas comunes de una lista en el panel lateral."
 
-#: C/gedit.xml:2025(para)
+#: C/gedit.xml:2029(para)
 msgid "To use the Tag List plugin, perform the following steps:"
 msgstr ""
 "Para utilizar el complemento Lista de etiquetas, realice los siguientes "
 "pasos:"
 
-#: C/gedit.xml:2027(para)
+#: C/gedit.xml:2031(para)
 msgid ""
 "Choose <menuchoice><guimenu>View</guimenu><guimenuitem>Side Pane</"
 "guimenuitem></menuchoice>."
@@ -4469,7 +4481,7 @@ msgstr ""
 "Elija <menuchoice><guimenu>Editar</guimenu><guimenuitem>Panel lateral</"
 "guimenuitem></menuchoice>."
 
-#: C/gedit.xml:2031(para)
+#: C/gedit.xml:2035(para)
 msgid ""
 "By default, the side pane shows a tab containing a list of open documents. "
 "Click on the tab showing a + icon at the bottom of the side pane to show the "
@@ -4479,7 +4491,7 @@ msgstr ""
 "documentos abiertos. pulse en la solapa mostrando un icono + en la parte de "
 "abajo del panel lateral para mostrar la solapa de listas de etiquetas."
 
-#: C/gedit.xml:2033(para)
+#: C/gedit.xml:2037(para)
 msgid ""
 "Select the appropriate tag category from the drop-down list. For example, "
 "<guilabel>HTML - Tags</guilabel>."
@@ -4487,11 +4499,11 @@ msgstr ""
 "Seleccione la categoría de etiquetas apropiada en la lista desplegable; por "
 "ejemplo, <literal>Etiquetas HTML</literal>."
 
-#: C/gedit.xml:2036(para)
+#: C/gedit.xml:2040(para)
 msgid "Scroll through the tag list to find the required tag."
 msgstr "Desplácese en la lista hasta encontrar la etiqueta deseada."
 
-#: C/gedit.xml:2039(para)
+#: C/gedit.xml:2043(para)
 msgid ""
 "To insert a tag at the cursor position in the current file, double-click on "
 "the tag in the tag list. You can also insert a tag as follows:"
@@ -4500,7 +4512,7 @@ msgstr ""
 "pulse dos veces sobre la etiqueta en la lista. También puede emplear este "
 "procedimiento:"
 
-#: C/gedit.xml:2041(para)
+#: C/gedit.xml:2045(para)
 msgid ""
 "To insert a tag in the current file and change the focus from the side pane "
 "to the display area, press <keycap>Return</keycap>."
@@ -4508,7 +4520,7 @@ msgstr ""
 "Para insertar una etiqueta en el archivo actual y cambiar el foco desde el "
 "panel lateral al área de visualización, pulse <keycap>Intro</keycap>."
 
-#: C/gedit.xml:2044(para)
+#: C/gedit.xml:2048(para)
 msgid ""
 "To insert a tag in the current file and maintain the focus on the "
 "<guilabel>Tag list plugin</guilabel> window, press <keycombo><keycap>Shift</"
@@ -4518,11 +4530,11 @@ msgstr ""
 "ventana del complemento <guilabel>Lista de etiquetas</guilabel>, pulse "
 "<keycombo><keycap>Mayús</keycap><keycap>Intro</keycap></keycombo>."
 
-#: C/gedit.xml:2053(title)
+#: C/gedit.xml:2057(title)
 msgid "User Name Plugin"
 msgstr "Complemento Nombre de usuario."
 
-#: C/gedit.xml:2054(para)
+#: C/gedit.xml:2058(para)
 msgid ""
 "The <application>User name</application> plugin inserts the username of the "
 "current user into the document."
@@ -4530,7 +4542,7 @@ msgstr ""
 "El complemento <application>Nombre de usuario</application> inserta el "
 "nombre del usuario actual en el documento."
 
-#: C/gedit.xml:2055(para)
+#: C/gedit.xml:2059(para)
 msgid ""
 "To insert your username at the cursor position, choose "
 "<menuchoice><guimenu>Edit</guimenu><guimenuitem>Insert User Name</"
@@ -4540,7 +4552,7 @@ msgstr ""
 "<menuchoice><guimenu>Editar</guimenu><guimenuitem>Insertar nombre de "
 "usuario</guimenuitem></menuchoice>."
 
-#: C/gedit.xml:2057(para)
+#: C/gedit.xml:2061(para)
 msgid ""
 "This plugin is mostly provided as an example of how to create your own "
 "plugins. For more information on creating plugins, see the <ulink type=\"http"
