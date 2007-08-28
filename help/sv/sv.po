@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2007-08-18 03:48+0100\n"
-"PO-Revision-Date: 2007-08-19 11:26+0100\n"
+"POT-Creation-Date: 2007-08-28 04:20+0100\n"
+"PO-Revision-Date: 2007-08-28 22:14+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -824,7 +824,7 @@ msgstr "Använd snurrväljaren <guilabel>Tal var ... rad </guilabel> för att an
 
 #: C/gedit.xml:561(guilabel)
 #: C/gedit.xml:1150(guilabel)
-#: C/gedit.xml:1761(para)
+#: C/gedit.xml:1765(para)
 msgid "Text Wrapping"
 msgstr "Textradbrytning"
 
@@ -2357,478 +2357,486 @@ msgid "The <application>Modelines</application> plugin allows you to set prefere
 msgstr "Insticksmodulen <application>Lägesrader</application> låter dig ställa in inställningar för individuella dokument. En <firstterm>lägesrad</firstterm> är en textrad vid början eller slutet av dokumentet med inställningar som <application>gedit</application> känner igen."
 
 #: C/gedit.xml:1752(para)
-msgid "You can override the following preferences with modelines:"
-msgstr "Du kan åsidosätta följande inställningar med lägesrader:"
+msgid "Preferences set using modelines take precedence over the ones specified in the preference dialog."
+msgstr "Inställningar inställda med lägesrader åsidosätter de som angivits i inställningsdialogen."
 
-#: C/gedit.xml:1755(para)
+#: C/gedit.xml:1753(para)
+msgid "You can set the following preferences with modelines:"
+msgstr "Du kan ställa in följande inställningar med lägesrader:"
+
+#: C/gedit.xml:1756(para)
 msgid "Tab width"
 msgstr "Tabulatorbredd"
 
-#: C/gedit.xml:1758(para)
+#: C/gedit.xml:1759(para)
+msgid "Indent width"
+msgstr "Indenteringsbredd"
+
+#: C/gedit.xml:1762(para)
 msgid "Insert spaces instead of tabs"
 msgstr "Infoga blanksteg istället för tabulatortecken"
 
-#: C/gedit.xml:1764(para)
+#: C/gedit.xml:1768(para)
 msgid "Right margin width"
 msgstr "Högermarginalbredd"
 
-#: C/gedit.xml:1768(para)
+#: C/gedit.xml:1772(para)
 msgid "The <application>Modelines</application> plugin supports a subset of the options used by other text editors <application>Emacs</application>, <application>Kate</application> and <application>Vim</application>."
 msgstr "Insticksmodulen <application>Lägesrader</application> har stöd för en mindre uppsättning av alternativ som används av de andra textredigerarna <application>Emacs</application>, <application>Kate</application> och <application>Vim</application>."
 
-#: C/gedit.xml:1771(title)
+#: C/gedit.xml:1775(title)
 msgid "Emacs Modelines"
 msgstr "Lägesrader för Emacs"
 
-#: C/gedit.xml:1772(para)
+#: C/gedit.xml:1776(para)
 msgid "The first two lines of a document are scanned for <application>Emacs</application> modelines."
 msgstr "De två raderna raderna i ett dokument söks igenom efter lägesrader för <application>Emacs</application>."
 
-#: C/gedit.xml:1773(para)
-msgid "The <application>Emacs</application> options for tab-width, indent-tabs-mode and autowrap are supported. For more information, see the <ulink type=\"http\" url=\"http://www.delorie.com/gnu/docs/emacs/emacs_486.html\">GNU Emacs Manual</ulink>."
-msgstr "<application>Emacs</application>-alternativen för tab-width, indent-tabs-mode och autowrap stöds. För mer information, se handboken för <ulink type=\"http\" url=\"http://www.delorie.com/gnu/docs/emacs/emacs_486.html\">GNU Emacs</ulink>."
+#: C/gedit.xml:1777(para)
+msgid "The <application>Emacs</application> options for tab-width, indent-offset, indent-tabs-mode and autowrap are supported. For more information, see the <ulink type=\"http\" url=\"http://www.delorie.com/gnu/docs/emacs/emacs_486.html\">GNU Emacs Manual</ulink>."
+msgstr "<application>Emacs</application>-alternativen för tab-width, indent-offset, indent-tabs-mode och autowrap stöds. För mer information, se handboken för <ulink type=\"http\" url=\"http://www.delorie.com/gnu/docs/emacs/emacs_486.html\">GNU Emacs</ulink>."
 
-#: C/gedit.xml:1776(title)
+#: C/gedit.xml:1780(title)
 msgid "Kate Modelines"
 msgstr "Lägesrader för Kate"
 
-#: C/gedit.xml:1777(para)
+#: C/gedit.xml:1781(para)
 msgid "The first and last ten lines a document are scanned for <application>Kate</application> modelines."
 msgstr "De tio första och sista raderna i ett dokument söks igenom efter lägesrader för <application>Kate</application>."
 
-#: C/gedit.xml:1778(para)
+#: C/gedit.xml:1782(para)
 msgid "The <application>Kate</application> options for tab-width, indent-width, space-indent, word-wrap and word-wrap-column are supported. For more information, see the <ulink type=\"http\" url=\"http://www.kate-editor.org/article/katepart_modelines\">Kate website</ulink>."
 msgstr "<application>Kate</application>-alternativen för tab-width, indent-width, space-indent, word-wrap och word-wrap-column stöds. För mer information, se webbsidan för <ulink type=\"http\" url=\"http://www.kate-editor.org/article/katepart_modelines\">Kate</ulink>."
 
-#: C/gedit.xml:1781(title)
+#: C/gedit.xml:1785(title)
 msgid "Vim Modelines"
 msgstr "Lägesrader för Vim"
 
-#: C/gedit.xml:1782(para)
+#: C/gedit.xml:1786(para)
 msgid "The first and last three lines a document are scanned for <application>Vim</application> modelines."
 msgstr "De tre första och sista raderna i ett dokument söks igenom efter lägesrader för <application>Vim</application>."
 
-#: C/gedit.xml:1783(para)
-msgid "The <application>Vim</application> options for et, expandtab, ts, tabstop, wrap, and textwidth are supported. For more information, see the <ulink type=\"http\" url=\"http://vimdoc.sourceforge.net/htmldoc/options.html#modeline\">Vim website</ulink>."
-msgstr "<application>Vim</application>-alternativen för et, expandtab, ts, tabstop, wrap, och textwidth stöds. För mer information, se webbsidan för <ulink type=\"http\" url=\"http://vimdoc.sourceforge.net/htmldoc/options.html#modeline\">Vim</ulink>."
+#: C/gedit.xml:1787(para)
+msgid "The <application>Vim</application> options for et, expandtab, ts, tabstop, sw, shiftwidth, wrap, and textwidth are supported. For more information, see the <ulink type=\"http\" url=\"http://vimdoc.sourceforge.net/htmldoc/options.html#modeline\">Vim website</ulink>."
+msgstr "<application>Vim</application>-alternativen för et, expandtab, ts, tabstop, sw, shiftwidth, wrap och textwidth stöds. För mer information, se webbsidan för <ulink type=\"http\" url=\"http://vimdoc.sourceforge.net/htmldoc/options.html#modeline\">Vim</ulink>."
 
-#: C/gedit.xml:1788(title)
+#: C/gedit.xml:1792(title)
 msgid "Python Console Plugin"
 msgstr "Insticksmodulen Python-konsoll"
 
-#: C/gedit.xml:1789(para)
+#: C/gedit.xml:1793(para)
 msgid "The <application>Python Console</application> Plugin allows you to run commands in the python programming language from <application>gedit</application>. Enabling the plugin adds a tab to the bottom pane. This shows recent output and a command prompt field."
 msgstr "insticksmodulen <application>Python-konsoll</application> låter dig köra kommandon i programspråket Python från <application>gedit</application>. Aktivering av insticksmodulen lägger till en flik till underpanelen. Den visar senaste utdata och ett kommandofält."
 
-#: C/gedit.xml:1790(para)
+#: C/gedit.xml:1794(para)
 msgid "Commands entered into the python console are not checked before they are run. It is therefore possible to hang <application>gedit</application>, for example by entering an infinite loop."
 msgstr "Kommandon som anges i Python-konsollen kontrolleras inte innan de körs. Det är därför möjligt att låsa hela <application>gedit</application>, till exempel genom att ange en oändlig slinga."
 
-#: C/gedit.xml:1794(title)
+#: C/gedit.xml:1798(title)
 msgid "Snippets Plugin"
 msgstr "Insticksmodulen Textsnuttar"
 
-#: C/gedit.xml:1795(para)
+#: C/gedit.xml:1799(para)
 msgid "The <application>Snippets</application> plugin allows you to store frequently-used pieces of text, called <firstterm>snippets</firstterm>, and insert them quickly into a document."
 msgstr "Insticksmodulen <application>Textsnuttar</application> låter dig lagra ofta använda delar av text, kallade <firstterm>textsnuttar</firstterm>, och infoga dem snabbt i ett dokument."
 
-#: C/gedit.xml:1796(para)
+#: C/gedit.xml:1800(para)
 msgid "Snippets are specific to the language syntax of the current document. For example, when you are working with an HTML document, you can choose from a list of snippets that are useful for HTML. In addition, some snippets are global, and are available in all documents."
 msgstr "Textsnuttar är specifika för språksyntaxen för det aktuella dokumentet. Till exempel när du arbetar med ett HTML-dokument kan du välja från en lista över textsnuttar som är användbara för HTML. I tilläggt till det är vissa textsnuttar globala och finns tillgängliga för alla dokument."
 
-#: C/gedit.xml:1797(para)
+#: C/gedit.xml:1801(para)
 msgid "A number of built-in snippets are installed with <application>gedit</application>, which can be modified."
 msgstr "Ett antal inbyggda textsnuttar installeras med <application>gedit</application>, vilka kan ändras."
 
-#: C/gedit.xml:1800(title)
+#: C/gedit.xml:1804(title)
 msgid "Inserting Snippets"
 msgstr "Infoga textsnuttar"
 
-#: C/gedit.xml:1801(para)
+#: C/gedit.xml:1805(para)
 msgid "To insert a snippet into a document, type its <firstterm>tab trigger</firstterm> and press <keycap>Tab</keycap>. A snippet's tab trigger is usually the first few letters of the snippet, or something else that is short and easy to remember."
 msgstr "För att infoga en textsnutt i ett dokument, skriv in dess <firstterm>tabulatorutlösare</firstterm> och tryck på <keycap>tabulatorn</keycap>. Tabulatorutlösaren för en textsnutt är vanligtvis de första bokstäverna i textsnutten, eller någonting annat som är kort och enkelt att komma ihåg."
 
-#: C/gedit.xml:1802(para)
+#: C/gedit.xml:1806(para)
 msgid "Alternatively, press <keycombo><keycap>Ctrl</keycap><keycap>Space</keycap></keycombo> to see a list of snippets you can insert."
 msgstr "Alternativt, tryck <keycombo><keycap>Ctrl</keycap><keycap>Blanksteg</keycap></keycombo> för att se en lista över de textsnuttar du kan infoga."
 
-#: C/gedit.xml:1806(title)
+#: C/gedit.xml:1810(title)
 msgid "Adding Snippets"
 msgstr "Lägg till textsnuttar"
 
-#: C/gedit.xml:1807(para)
+#: C/gedit.xml:1811(para)
 msgid "To create a new snippet, do the following:"
 msgstr "Gör följande för att skapa en ny textsnutt:"
 
-#: C/gedit.xml:1810(para)
+#: C/gedit.xml:1814(para)
 msgid "Choose <menuchoice><guimenu>Tools</guimenu><guimenuitem>Manage Snippets</guimenuitem></menuchoice>. The <guilabel>Snippets Manager</guilabel> window opens."
 msgstr "Välj <menuchoice><guimenu>Verktyg</guimenu><guimenuitem>Hantera textsnuttar</guimenuitem></menuchoice>. Fönstret <guilabel>Hantera textsnuttar</guilabel> öppnas."
 
-#: C/gedit.xml:1813(para)
+#: C/gedit.xml:1817(para)
 msgid "The list of snippets is grouped by language. Select the language you want to add a snippet to, or a snippet in that language group. To add a snippet for all languages, choose Global at the top of the list. The syntax of the document you are currently working with is shown by default."
 msgstr "Listan över textsnuttar grupperas efter språk. Välj språket som du vill lägga till en textsnutt till, eller en textsnutt i den språkgruppen. För att lägga till en textsnutt för alla språk, Välj Global i övre delen av listan. Syntaxen för dokumentet som du för närvarande arbetar med kommer att visas som standard."
 
-#: C/gedit.xml:1816(para)
+#: C/gedit.xml:1820(para)
 msgid "Click <guibutton>New</guibutton>. A new snippet appears in the list."
 msgstr "Klicka på <guibutton>Ny</guibutton>. En ny textsnutt visas i listan."
 
-#: C/gedit.xml:1819(para)
+#: C/gedit.xml:1823(para)
 msgid "Enter the following information for the new snippet:"
 msgstr "Ange följande information för den nya textsnutten:"
 
-#: C/gedit.xml:1821(term)
+#: C/gedit.xml:1825(term)
 msgid "Name"
 msgstr "Namn"
 
-#: C/gedit.xml:1823(para)
+#: C/gedit.xml:1827(para)
 msgid "Enter a name for the snippet in the text field within the snippet list. The name of a snippet serves only as a reminder of its purpose. You can change name of a snippet you create by clicking on it in the list."
 msgstr "Ange ett namn för textsnutten i textfältet i listan. Namnet på textsnutten är bara för att påminna om dess syfte. Du kan ändra namnet på en textsnutt som du har skapat genom att klicka på den i listan."
 
-#: C/gedit.xml:1826(term)
+#: C/gedit.xml:1830(term)
 msgid "Snippet text"
 msgstr "Textsnutt"
 
-#: C/gedit.xml:1828(para)
+#: C/gedit.xml:1832(para)
 msgid "Enter the text of the snippet in the <guilabel>Edit snippet</guilabel> text box. For special codes you can use, see <xref linkend=\"gedit-snippets-plugin-syntax\"/>."
 msgstr "Ange texten för textsnutten i textrutan <guilabel>Redigera textsnutt</guilabel>. För de specialkoder som du kan använda, se <xref linkend=\"gedit-snippets-plugin-syntax\"/>."
 
-#: C/gedit.xml:1829(para)
+#: C/gedit.xml:1833(para)
 msgid "You can switch back to the document window to copy text without closing the <guilabel>Snippets Manager</guilabel> window."
 msgstr "Du kan växla tillbaka till dokumentfönstret för att kopiera text utan att stänga fönstret <guilabel>Hantera textsnuttar</guilabel>."
 
-#: C/gedit.xml:1832(term)
+#: C/gedit.xml:1836(term)
 msgid "Tab Trigger"
 msgstr "Tabulatorutlösare"
 
-#: C/gedit.xml:1834(para)
+#: C/gedit.xml:1838(para)
 msgid "Enter the tab trigger for the snippet. This is the text that you type before pressing <keycap>Tab</keycap> to insert the snippet."
 msgstr "Ange tabulatorutlösaren för textsnutten. Det här är texten som du skriver innan du trycker på <keycap>tabulatorn</keycap> för att infoga textsnutten."
 
-#: C/gedit.xml:1835(para)
+#: C/gedit.xml:1839(para)
 msgid "The tag must be either a single word comprising only letters, or any single character. The <guilabel>Tab trigger</guilabel> will highlight in red if an invalid tab trigger is entered."
 msgstr "Taggen måste antingen vara ett enda ord som består av endast bokstäver, eller ett enda tecken. <guilabel>Tabulatorutlösaren</guilabel> kommer att färgmarkeras i rött om en ogiltig tabulatorutlösare anges."
 
-#: C/gedit.xml:1838(term)
+#: C/gedit.xml:1842(term)
 msgid "Shortcut key"
 msgstr "Snabbtangent"
 
-#: C/gedit.xml:1840(para)
+#: C/gedit.xml:1844(para)
 msgid "Type a shortcut key to use for inserting the snippet."
 msgstr "Ange en snabbtangent att använda för att infoga textsnutten."
 
-#: C/gedit.xml:1849(title)
+#: C/gedit.xml:1853(title)
 msgid "Editing and Removing Snippets"
 msgstr "Redigera och ta bort textsnuttar"
 
-#: C/gedit.xml:1850(para)
+#: C/gedit.xml:1854(para)
 msgid "To edit a snippet, select it in the list and make changes to its text and activation properties."
 msgstr "För att redigera en textsnutt, välj den i listan och gör ändringar till dess text- och aktiveringsegenskaper."
 
-#: C/gedit.xml:1851(para)
+#: C/gedit.xml:1855(para)
 msgid "To rename a snippet, click it again in the list."
 msgstr "För att byta namn på en textsnutt, klicka på den igen i listan."
 
-#: C/gedit.xml:1852(para)
+#: C/gedit.xml:1856(para)
 msgid "To restore a built-in snippet that you have changed, press <guilabel>Revert</guilabel>."
 msgstr "För att återställa en inbyggd textsnutt som du har ändrat, tryck på <guilabel>Återställ</guilabel>."
 
-#: C/gedit.xml:1853(para)
+#: C/gedit.xml:1857(para)
 msgid "To remove a snippet, select it in the list and press <guibutton>Remove</guibutton>. You can not remove built-in snippets, only those you have created yourself."
 msgstr "För att ta bort en textsnutt, välj den från listan och tryck på <guibutton>Ta bort</guibutton>. Du kan inte ta bort inbyggda textsnuttar, endast de som du själv har skapat."
 
-#: C/gedit.xml:1857(title)
+#: C/gedit.xml:1861(title)
 msgid "Snippet Substitutions"
 msgstr "Textsnuttsersättare"
 
-#: C/gedit.xml:1858(para)
+#: C/gedit.xml:1862(para)
 msgid "In addition to inserting stored text, a snippet can include customizable text, or mark spaces where you can add text once the snippet is inserted in your document."
 msgstr "I tillägg till att infoga lagrad text kan en textsnutt inkludera anpassningsbar text, eller markera utrymme där du kan lägga till text när textsnutten har infogats i ditt dokument."
 
-#: C/gedit.xml:1862(para)
+#: C/gedit.xml:1866(para)
 msgid "You can use the following placeholder codes in snippet text:"
 msgstr "Du kan använda följande koder för platshållare i textsnutten:"
 
-#: C/gedit.xml:1864(term)
+#: C/gedit.xml:1868(term)
 msgid "Tab placeholders"
 msgstr "Platshållare för tabulator"
 
-#: C/gedit.xml:1866(para)
+#: C/gedit.xml:1870(para)
 msgid "<literal>$<replaceable>n</replaceable></literal> defines a tab placeholder, where <literal>n</literal> is any number from 1 upwards."
 msgstr "<literal>$<replaceable>n</replaceable></literal> definierar en platshållare för tabulator, där <literal>n</literal> är någon siffra från 1 och uppåt."
 
-#: C/gedit.xml:1867(para)
+#: C/gedit.xml:1871(para)
 msgid "<literal>${<replaceable>n</replaceable>:<replaceable>default</replaceable>}</literal> defines a tab placeholder with a default value."
 msgstr "<literal>${<replaceable>n</replaceable>:<replaceable>standard</replaceable>}</literal> definierar en platshållare för tabulator med ett standardvärde."
 
-#: C/gedit.xml:1868(para)
+#: C/gedit.xml:1872(para)
 msgid "A tab placeholder marks a place in the snippet text where you can add extra text after the snippet is inserted."
 msgstr "En platshållare för tabulator markerar en plats i textsnutten där du kan lägga till extra text efter att textsnutten har infogats."
 
-#: C/gedit.xml:1869(para)
+#: C/gedit.xml:1873(para)
 msgid "To use tab placeholders, insert the snippet as normal. The cursor is placed at the first tab placeholder. Type text, and press <keycap>Tab</keycap> to advance to the next tab placeholder. The number in the placeholder code defines the order in which tab advances to each place in the text."
 msgstr "För att använda platshållare för tabulator, infoga textsnutten som vanligt. Markören placeras på den första platshållaren. Skriv in text och tryck på <keycap>tabulatorn</keycap> för att gå vidare till nästa platshållare. Siffran i platshållarkoden definierar ordningen i vilken tabulatorn går vidare till varje plats i texten."
 
-#: C/gedit.xml:1870(para)
+#: C/gedit.xml:1874(para)
 msgid "Press <keycombo><keycap>Shift</keycap><keycap>Tab</keycap></keycombo> to return to the previous tab placeholder. Pressing <keycap>Tab</keycap> when there are no more tab placeholders moves the cursor to the end of the snippet text, or to the end placeholder if it exists."
 msgstr "Tryck på <keycombo><keycap>Skift</keycap><keycap>Tabulator</keycap></keycombo> för att återgå till den föregående platshållaren. Tryck på <keycap>Tabulator</keycap> när det inte finns fler platshållare för tabulator flyttas markören till slutet av textsnutten, eller till slutet av platshållaren för avslut om det finns en."
 
-#: C/gedit.xml:1873(term)
+#: C/gedit.xml:1877(term)
 msgid "Mirror placeholders"
 msgstr "Platshållare för spegel"
 
-#: C/gedit.xml:1875(para)
+#: C/gedit.xml:1879(para)
 msgid "A repeated tab placeholder will mirror the placeholder already defined. This allows you to type in text only once that you want to appear several times in the snippet."
 msgstr "En upprepad platshållare för tabulator kommer att spegla platshållaren som redan har definierats. Det här gör att du kan skriva in text en gång som du vill ska visas flera gånger i textsnutten."
 
-#: C/gedit.xml:1878(term)
+#: C/gedit.xml:1882(term)
 msgid "End placeholder"
 msgstr "Platshållare för avslut"
 
-#: C/gedit.xml:1880(para)
+#: C/gedit.xml:1884(para)
 msgid "<literal>$0</literal> defines the end placeholder. This allows you to finish working with the snippet with the cursor at a point other than the end of the snippet text."
 msgstr "<literal>$0</literal> definierar platshållaren för avslut. Det här gör att du kan sluta arbeta med textsnutten när markören är vid en position annan än för slutet av textsnutten."
 
-#: C/gedit.xml:1883(term)
+#: C/gedit.xml:1887(term)
 msgid "Environmental variables"
 msgstr "Miljövariabler"
 
-#: C/gedit.xml:1885(para)
+#: C/gedit.xml:1889(para)
 msgid "Environmental variable such as <literal>$PATH</literal> and <literal>$HOME</literal> are substituted in snippet text. The following variables specific to <application>gedit</application> can also be used:"
 msgstr "Miljövariabler som <literal>$PATH</literal> och <literal>$HOME</literal> ersätts i textsnutten. Följande variabler som är specifika för <application>gedit</application> kan också användas:"
 
-#: C/gedit.xml:1887(term)
+#: C/gedit.xml:1891(term)
 msgid "$GEDIT_SELECTED_TEXT"
 msgstr "$GEDIT_SELECTED_TEXT"
 
-#: C/gedit.xml:1889(para)
+#: C/gedit.xml:1893(para)
 msgid "The currently selected text."
 msgstr "Den för närvarande markerade texten."
 
-#: C/gedit.xml:1892(term)
+#: C/gedit.xml:1896(term)
 msgid "$GEDIT_FILENAME"
 msgstr "$GEDIT_FILENAME"
 
-#: C/gedit.xml:1894(para)
+#: C/gedit.xml:1898(para)
 msgid "The full filename of the document, or an empty string if the document isn't saved yet."
 msgstr "Det fullständiga namnet på dokumentet, eller en tom sträng om dokumentet inte har sparats än."
 
-#: C/gedit.xml:1897(term)
+#: C/gedit.xml:1901(term)
 msgid "$GEDIT_BASENAME"
 msgstr "$GEDIT_BASENAME"
 
-#: C/gedit.xml:1899(para)
+#: C/gedit.xml:1903(para)
 msgid "The basename of the filename of the document, or an empty string if the document isn't saved yet."
 msgstr "Basnamnet för filnamnet för dokumentet, eller en tom sträng om dokumentet inte har sparats än."
 
-#: C/gedit.xml:1902(term)
+#: C/gedit.xml:1906(term)
 msgid "$GEDIT_CURRENT_WORD"
 msgstr "$GEDIT_CURRENT_WORD"
 
-#: C/gedit.xml:1904(para)
+#: C/gedit.xml:1908(para)
 msgid "The word at the cursor's location in the document. When this variable is used, the current word will be replaced by the snippet text."
 msgstr "Ordet vid markörens plats i dokumentet. När den här variabeln används kommer det aktuella ordet att ersättas med textsnutten."
 
-#: C/gedit.xml:1912(term)
+#: C/gedit.xml:1916(term)
 msgid "Shell placeholders"
 msgstr "Platshållare för skal"
 
-#: C/gedit.xml:1914(para)
+#: C/gedit.xml:1918(para)
 msgid "<literal>$(<replaceable>cmd</replaceable>)</literal> is replaced by the result of executing <replaceable>cmd</replaceable> in a shell."
 msgstr "<literal>$(<replaceable>kommando</replaceable>)</literal> ersätts av resultatet för körningen av <replaceable>kommando</replaceable> i ett skal."
 
-#: C/gedit.xml:1915(para)
+#: C/gedit.xml:1919(para)
 msgid "<literal>$(<replaceable>n</replaceable>:<replaceable>cmd</replaceable>)</literal> allows you to give this placeholder a reference, where <replaceable>n</replaceable> is any number from 1 upwards. Use <literal>$<replaceable>n</replaceable></literal> to use the output from one shell placeholder as input in another."
 msgstr "<literal>$(<replaceable>n</replaceable>:<replaceable>kommando</replaceable>)</literal> låter dig ange en referens för den här platshållaren, där <replaceable>n</replaceable> är en siffra från 1 och uppåt. Använd <literal>$<replaceable>n</replaceable></literal> för att använda utdata från en platshållare för skal som indata till ett annat."
 
-#: C/gedit.xml:1918(term)
+#: C/gedit.xml:1922(term)
 msgid "Python placeholders"
 msgstr "Platshållare för Python"
 
-#: C/gedit.xml:1920(para)
+#: C/gedit.xml:1924(para)
 msgid "<literal>$&lt;<replaceable>cmd</replaceable>&gt;</literal> is replaced by the result of evaluating <replaceable>cmd</replaceable> in the python interpreter."
 msgstr "<literal>$&lt;<replaceable>kommando</replaceable>&gt;</literal> ersätts av resultatet för evaluering av <replaceable>kommando</replaceable> i python-tolkaren."
 
-#: C/gedit.xml:1921(para)
+#: C/gedit.xml:1925(para)
 msgid "<literal>$&lt;<replaceable>a</replaceable>:<replaceable>cmd</replaceable>&gt;</literal> specifies another python placeholder as a dependency, where <replaceable>a</replaceable> gives its order in the snippet. This allows you to use python functions defined in another snippet. To specify several dependencies, separate the numbers with commas thus: <literal>$&lt;<replaceable>a</replaceable>,<replaceable>b</replaceable>:<replaceable>cmd</replaceable>&gt;</literal>"
 msgstr "<literal>$&lt;<replaceable>a</replaceable>:<replaceable>kommando</replaceable>&gt;</literal> anger en annan platshållare för python som en beroende, där <replaceable>a</replaceable> anger dess ordning i textsnutten. Det här låter dig använda python-funktioner som definierats i en annan textsnutt. För att ange flera beroenden, separera siffrorna med kommatecken så här: <literal>$&lt;<replaceable>a</replaceable>,<replaceable>b</replaceable>:<replaceable>kommando</replaceable>&gt;</literal>"
 
-#: C/gedit.xml:1922(para)
+#: C/gedit.xml:1926(para)
 msgid "To use a variable in all other python snippets, declare it as <literal>global</literal>."
 msgstr "För att använda en variabel i alla andra python-textsnuttar, deklarera den som <literal>global</literal>."
 
-#: C/gedit.xml:1931(title)
+#: C/gedit.xml:1935(title)
 msgid "Sort Plugin"
 msgstr "Insticksmodulen Sortera"
 
-#: C/gedit.xml:1932(para)
+#: C/gedit.xml:1936(para)
 msgid "The <application>Sort</application> plugin arranges selected lines of text into alphabetical order."
 msgstr "Insticksmodulen <application>Sortera</application> arrangerar om markerade textrader till alfabetisk ordning."
 
-#: C/gedit.xml:1933(para)
+#: C/gedit.xml:1937(para)
 msgid "You cannot undo the Sort operation, so you should save the file before performing the sort. To revert to the saved version of the file after the sort operation, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Revert</guimenuitem></menuchoice>."
 msgstr "Du kan inte ångra sorteringsåtgärden, så du bör spara filen innan du genomför sorteringen. För att återgå till den sparade versionen av filen efter sorteringsåtgärden, välj <menuchoice><guimenu>Arkiv</guimenu><guimenuitem>Återställ</guimenuitem></menuchoice>."
 
-#: C/gedit.xml:1936(para)
+#: C/gedit.xml:1940(para)
 msgid "To use the Sort plugin, perform the following steps:"
 msgstr "Genomför följande steg för att använda insticksmodulen Sortera:"
 
-#: C/gedit.xml:1939(para)
+#: C/gedit.xml:1943(para)
 msgid "Select the lines of text you want to sort."
 msgstr "Markera textraderna som du vill sortera."
 
-#: C/gedit.xml:1941(para)
+#: C/gedit.xml:1945(para)
 msgid "Choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Sort</guimenuitem></menuchoice>. The <guilabel>Sort</guilabel> dialog opens."
 msgstr "Välj <menuchoice><guimenu>Redigera</guimenu><guimenuitem>Sortera</guimenuitem></menuchoice>. Dialogrutan <guilabel>Sortera</guilabel> öppnas."
 
-#: C/gedit.xml:1944(para)
+#: C/gedit.xml:1948(para)
 msgid "Choose the options you want for the sort:"
 msgstr "Välj alternativen som du vill använda för sorteringen:"
 
-#: C/gedit.xml:1947(para)
+#: C/gedit.xml:1951(para)
 msgid "To arrange the text in reverse order, select <guilabel>Reverse order</guilabel>."
 msgstr "För att arrangera texten i omvänd ordning, välj <guilabel>Baklänges</guilabel>."
 
-#: C/gedit.xml:1950(para)
+#: C/gedit.xml:1954(para)
 msgid "To delete duplicate lines, select <guilabel>Remove duplicates</guilabel>."
 msgstr "För att ta bort dubblettrader, välj <guilabel>Ta bort dubletter</guilabel>."
 
-#: C/gedit.xml:1953(para)
+#: C/gedit.xml:1957(para)
 msgid "To ignore case sensitivity, select <guilabel>Ignore case</guilabel>."
 msgstr "För att ignorera skiftläge, välj <guilabel>Gör ingen skillnad på gemener/VERSALER</guilabel>."
 
-#: C/gedit.xml:1956(para)
+#: C/gedit.xml:1960(para)
 msgid "To have the sort ignore the characters at the start of the lines, set the first character that should be used for sorting in the <guilabel>Start at column</guilabel> spin box."
 msgstr "För att sorteringen ska ignorera tecknen i början av raderna, ställ in det första tecknet som ska användas för sorteringen i snurrväljaren <guilabel>Börja vid kolumn</guilabel>."
 
-#: C/gedit.xml:1961(para)
+#: C/gedit.xml:1965(para)
 msgid "To perform the sort operation, click <guibutton>Sort</guibutton>."
 msgstr "För att genomföra sorteringsåtgärden, klicka på <guibutton>Sortera</guibutton>."
 
-#: C/gedit.xml:1968(title)
+#: C/gedit.xml:1972(title)
 msgid "Spell Checker Plugin"
 msgstr "Insticksmodulen Stavningskontroll"
 
-#: C/gedit.xml:1969(para)
+#: C/gedit.xml:1973(para)
 msgid "The <application>Spell Checker</application> plugin checks the spelling in the selected text. You can configure <application>gedit</application> to check the spelling automatically, or you can check the spelling manually, in the specified language. The language setting, and the autocheck spelling properties, apply per document. To use the Spell checker plugin, perform the following steps:"
 msgstr "Insticksmodulen <application>Stavningskontroll</application> kontrollerar stavningen i den markerade texten. Du kan konfigurera <application>gedit</application> till att kontrollera stavningen automatiskt, eller bara kontrollera stavningen manuellt, för det angivna språket. Språkinställningen, och egenskaperna för den automatiskt stavningskontrollen, gäller per dokument. Genomför följande steg för att använda insticksmodulen Stavningskontroll:"
 
-#: C/gedit.xml:1971(para)
+#: C/gedit.xml:1975(para)
 msgid "Choose <menuchoice><guimenu>Tools</guimenu><guimenuitem>Set Language</guimenuitem></menuchoice> to display the <guilabel>Set language</guilabel> dialog. Select the appropriate language from the list. Click <guibutton>OK</guibutton> to close the <guilabel>Set language</guilabel> dialog."
 msgstr "Välj <menuchoice><guimenu>Verktyg</guimenu><guimenuitem>Ställ in språk</guimenuitem></menuchoice> för att visa dialogrutan <guilabel>Ställ in språk</guilabel>. Välj det lämpliga språket från listan. Klicka på <guibutton>OK</guibutton> för att stänga dialogrutan <guilabel>Ställ in språk</guilabel>."
 
-#: C/gedit.xml:1974(para)
+#: C/gedit.xml:1978(para)
 msgid "To check the spelling automatically, choose <menuchoice><guimenu>Tools</guimenu><guimenuitem>Autocheck Spelling</guimenuitem></menuchoice>. To unset the automatic spell check, choose <menuchoice><guimenu>Tools</guimenu><guimenuitem>Autocheck Spelling</guimenuitem></menuchoice> again. When automatic spell checking is set, an icon is displayed beside the <guimenuitem>Autocheck Spelling</guimenuitem> menu item. Automatic spell checking is unset by default, each time <application>gedit</application> starts."
 msgstr "För att automatiskt kontrollera stavningen, välj <menuchoice><guimenu>Verktyg</guimenu><guimenuitem>Kontrollera stavning automatiskt</guimenuitem></menuchoice>. För att inaktivera automatisk stavningskontroll, välj <menuchoice><guimenu>Verktyg</guimenu><guimenuitem>Kontrollera stavning automatiskt</guimenuitem></menuchoice> igen. När automatiskt stavningskontroll är aktiverad, kommer en ikon att visas bredvid menyobjektet <guimenuitem>Kontrollera stavning automatist</guimenuitem>. Automatisk stavningskontroll är inaktiverat som standard, varje gång <application>gedit</application> startar."
 
-#: C/gedit.xml:1975(para)
+#: C/gedit.xml:1979(para)
 msgid "Unknown spellings are displayed in a different color, and underlined. Right-click on an unknown spelling, then select <guimenu>Spelling Suggestions</guimenu> from the popup menu:"
 msgstr "Okända stavningar visas i en annan färg, och är understruken. Högerklicka på en okänd stavning, välj sedan <guimenu>Stavningsförslag</guimenu> från popup-menyn:"
 
-#: C/gedit.xml:1978(para)
+#: C/gedit.xml:1982(para)
 msgid "To replace the unknown spelling with another spelling in the list, select the replacement spelling from the <guimenu>Spelling Suggestions</guimenu> popup menu."
 msgstr "För att ersätta den okända stavningen med en annan stavning i listan, välj ersättningsstavningen från popup-menyn <guimenu>Stavningsförslag</guimenu>."
 
-#: C/gedit.xml:1981(para)
+#: C/gedit.xml:1985(para)
 msgid "To add the unknown spelling to your personal dictionary, select <menuchoice><guimenu>Spelling Suggestions</guimenu><guimenuitem>Add</guimenuitem></menuchoice>."
 msgstr "För att lägga till den okända stavningen till din personliga ordbok, välj <menuchoice><guimenu>Stavningsförslag</guimenu><guimenuitem>Lägg till</guimenuitem></menuchoice>."
 
-#: C/gedit.xml:1984(para)
+#: C/gedit.xml:1988(para)
 msgid "To ignore all occurrences of the unknown spelling, so that they are no longer flagged as unknown but are not added to your personal dictionary, select <menuchoice><guimenu>Spelling Suggestions</guimenu><guimenuitem>Ignore All</guimenuitem></menuchoice>. The unknown word is ignored in the current <application>gedit</application> session only."
 msgstr "För att ignorera alla förekomster av den okända stavningen, så att de inte längre flaggas som okända men inte läggs till i din personliga ordbok, välj <menuchoice><guimenu>Stavningsförslag</guimenu><guimenuitem>Ignorera alla</guimenuitem></menuchoice>. Det okända ordet kommer endast att ignoreras i den aktuella <application>gedit</application>-sessionen."
 
-#: C/gedit.xml:1989(para)
+#: C/gedit.xml:1993(para)
 msgid "To check the spelling manually, choose <menuchoice><guimenu>Tools</guimenu><guimenuitem>Check Spelling</guimenuitem></menuchoice>."
 msgstr "För att kontrollera stavningen manuellt, välj <menuchoice><guimenu>Verktyg</guimenu><guimenuitem>Kontrollera stavning</guimenuitem></menuchoice>."
 
-#: C/gedit.xml:1991(para)
+#: C/gedit.xml:1995(para)
 msgid "If there are no spelling errors, an <guilabel>Information</guilabel> dialog displays a message stating that the document does not contain misspelled words. Click <guibutton>OK</guibutton> to close the <guilabel>Information</guilabel> dialog."
 msgstr "Om det inte finns några stavningsfel, kommer dialogrutan <guilabel>Information</guilabel> att visa ett meddelande som säger att dokumentet inte innehåller några felstavade ord. Klicka på <guibutton>OK</guibutton> för att stänga dialogrutan <guilabel>Information</guilabel>."
 
-#: C/gedit.xml:1993(para)
+#: C/gedit.xml:1997(para)
 msgid "If there are spelling errors, the <guilabel>Check Spelling</guilabel> dialog is displayed:"
 msgstr "Om det finns stavningsfel kommer dialogrutan <guilabel>Kontrollera stavning</guilabel> att visa:"
 
-#: C/gedit.xml:1996(para)
+#: C/gedit.xml:2000(para)
 msgid "The <guilabel>Misspelled word</guilabel> is displayed at the top of the dialog."
 msgstr "<guilabel>Felstavade ord</guilabel> visas i överkant av dialogrutan."
 
-#: C/gedit.xml:1999(para)
+#: C/gedit.xml:2003(para)
 msgid "A suggested known spelling is displayed in the <guilabel>Change to</guilabel> text box. You can replace this with another known spelling by selecting a spelling from the <guilabel>Suggestions</guilabel> list, or you can enter text directly into the <guilabel>Change to</guilabel> text box."
 msgstr "Ett förslag på stavning visas i textrutan <guilabel>Ändra till</guilabel>. Du kan ersätta det här med en annan känd stavning genom att välja en stavning från listan <guilabel>Förslag</guilabel>, eller så kan du ange text direkt i textrutan <guilabel>Ändra till</guilabel>."
 
-#: C/gedit.xml:2002(para)
+#: C/gedit.xml:2006(para)
 msgid "To check the spelling of the text in the <guilabel>Change to</guilabel> text box, click <guibutton>Check Word</guibutton>. If this is a known word, the <guilabel>Suggestions</guilabel> list is replaced with the text <literal>(correct spelling)</literal>. If the word is not known, new entries appear in the <guilabel>Suggestions</guilabel> list."
 msgstr "För att kontrollera stavningen på texten i textrutan <guilabel>Ändra till</guilabel>, klicka på <guibutton>Kontrollera ord</guibutton>. Om det här är ett känt ord kommer listan <guilabel>Förslag</guilabel> att ersättas med texten <literal>(korrekt stavning)</literal>. Om ordet inte är känt kommer nya poster att visas i listan <guilabel>Förslag</guilabel>."
 
-#: C/gedit.xml:2005(para)
+#: C/gedit.xml:2009(para)
 msgid "To ignore the current occurrence of the unknown word, click <guibutton>Ignore</guibutton>. To ignore all occurrences of the unknown word, click <guibutton>Ignore All</guibutton>. The unknown word is ignored in the current <application>gedit</application> session only."
 msgstr "För att ignorera det aktuella förekomsten av det okända ordet, klicka på <guibutton>Ignorera</guibutton>. För att ignorera alla förekomster av det okända ordet, klicka på <guibutton>Ignorera alla</guibutton>. Det okända ordet kommer endast att ignoreras i den aktuella <application>gedit</application>-sessionen."
 
-#: C/gedit.xml:2008(para)
+#: C/gedit.xml:2012(para)
 msgid "To change the current occurrence of the unknown word to the text in the <guilabel>Change to</guilabel> text box, click <guibutton>Change</guibutton>. To change all occurrences of the unknown word to the text in the <guilabel>Change to</guilabel> text box, click <guibutton>Change All</guibutton>."
 msgstr "För att ändra den aktuella förekomsten av det okända ordet till texten i textrutan <guilabel>Ändra till</guilabel>, klicka på <guibutton>Ändra</guibutton>. För att ändra alla förekomster av det okända ordet till texten i textrutan <guilabel>Ändra till</guilabel>, klicka på <guibutton>Ändra alla</guibutton>."
 
-#: C/gedit.xml:2011(para)
+#: C/gedit.xml:2015(para)
 msgid "To add the unknown word to your personal dictionary, click <guibutton>Add word</guibutton>."
 msgstr "För att lägga till det okända ordet till din personliga ordbok, klicka på <guibutton>Lägg till ord</guibutton>."
 
-#: C/gedit.xml:2014(para)
+#: C/gedit.xml:2018(para)
 msgid "To close the <guilabel>Check Spelling</guilabel> dialog, click <guibutton>Close</guibutton>."
 msgstr "För att stänga dialogrutan <guilabel>Kontrollera stavning</guilabel>, klicka på <guibutton>Stäng</guibutton>."
 
-#: C/gedit.xml:2023(title)
+#: C/gedit.xml:2027(title)
 msgid "Tag List Plugin"
 msgstr "Insticksmodulen Tagglista"
 
-#: C/gedit.xml:2024(para)
+#: C/gedit.xml:2028(para)
 msgid "The <application>Tag List</application> plugin allows you to insert common tags from a list in the side pane."
 msgstr "Insticksmodulen <application>Tagglista</application> låter dig infoga vanligen använda taggar från en lista i sidopanelen."
 
-#: C/gedit.xml:2025(para)
+#: C/gedit.xml:2029(para)
 msgid "To use the Tag List plugin, perform the following steps:"
 msgstr "Genomför följande steg för att använda insticksmodulen Tagglista:"
 
-#: C/gedit.xml:2027(para)
+#: C/gedit.xml:2031(para)
 msgid "Choose <menuchoice><guimenu>View</guimenu><guimenuitem>Side Pane</guimenuitem></menuchoice>."
 msgstr "Välj <menuchoice><guimenu>Visa</guimenu><guimenuitem>Sidopanel</guimenuitem></menuchoice>."
 
-#: C/gedit.xml:2031(para)
+#: C/gedit.xml:2035(para)
 msgid "By default, the side pane shows a tab containing a list of open documents. Click on the tab showing a + icon at the bottom of the side pane to show the tag list tab."
 msgstr "Som standard visar sidopanelen en flik som innehåller en lista över öppna dokument. Klicka på fliken som visar ikonen + vid nederkant av sidopanelen för att visa fliken för tagglistor."
 
-#: C/gedit.xml:2033(para)
+#: C/gedit.xml:2037(para)
 msgid "Select the appropriate tag category from the drop-down list. For example, <guilabel>HTML - Tags</guilabel>."
 msgstr "Välj den lämpliga taggkategorin från rullgardinslistan. Till exempel, <guilabel>HTML - Taggar</guilabel>."
 
-#: C/gedit.xml:2036(para)
+#: C/gedit.xml:2040(para)
 msgid "Scroll through the tag list to find the required tag."
 msgstr "Rulla genom tagglistan för att hitta den önskade taggen."
 
-#: C/gedit.xml:2039(para)
+#: C/gedit.xml:2043(para)
 msgid "To insert a tag at the cursor position in the current file, double-click on the tag in the tag list. You can also insert a tag as follows:"
 msgstr "För att infoga en tagg vid markörpositionen i den aktuella filen, dubbelklicka på taggen i tagglistan. Du kan även infoga ett tagg på dessa sätt:"
 
-#: C/gedit.xml:2041(para)
+#: C/gedit.xml:2045(para)
 msgid "To insert a tag in the current file and change the focus from the side pane to the display area, press <keycap>Return</keycap>."
 msgstr "För att infoga en tagg i den aktuella filen och ändra fokus från sidopanelen till visningsrutan, tryck på <keycap>Return</keycap>."
 
-#: C/gedit.xml:2044(para)
+#: C/gedit.xml:2048(para)
 msgid "To insert a tag in the current file and maintain the focus on the <guilabel>Tag list plugin</guilabel> window, press <keycombo><keycap>Shift</keycap><keycap>Return</keycap></keycombo>."
 msgstr "För att infoga en tagg i den aktuella filen och bibehålla fokus för fönstret <guilabel>Insticksmodulen Tagglista</guilabel>, tryck på <keycombo><keycap>Skift</keycap><keycap>Return</keycap></keycombo>."
 
-#: C/gedit.xml:2053(title)
+#: C/gedit.xml:2057(title)
 msgid "User Name Plugin"
 msgstr "Insticksmodulen Användarnamn"
 
-#: C/gedit.xml:2054(para)
+#: C/gedit.xml:2058(para)
 msgid "The <application>User name</application> plugin inserts the username of the current user into the document."
 msgstr "Insticksmodulen <application>Användarnamn</application> infogar användarnamnet för den aktuella användaren in i dokumentet."
 
-#: C/gedit.xml:2055(para)
+#: C/gedit.xml:2059(para)
 msgid "To insert your username at the cursor position, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Insert User Name</guimenuitem></menuchoice>."
 msgstr "För att infoga ditt användarnamn vid markörpositionen, välj <menuchoice><guimenu>Redigera</guimenu><guimenuitem>Infoga användarnamn</guimenuitem></menuchoice>."
 
-#: C/gedit.xml:2057(para)
+#: C/gedit.xml:2061(para)
 msgid "This plugin is mostly provided as an example of how to create your own plugins. For more information on creating plugins, see the <ulink type=\"http\" url=\"http://live.gnome.org/Gedit/Plugins\"><application>gedit</application> website</ulink>."
 msgstr "Den här insticksmodulen tillhandahålls som ett exempel på hur man skapar sina egna insticksmoduler. För mer information om hur man skapar insticksmoduler, se webbsidan för <ulink type=\"http\" url=\"http://live.gnome.org/Gedit/Plugins\"><application>gedit</application></ulink>."
 
