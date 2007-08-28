@@ -58,6 +58,7 @@ BINDING_GEDIT_HEADERS_SRCDIR_IN = \
 	gedit/gedit-encodings.h		\
 	gedit/gedit-plugin.h		\
 	gedit/gedit-view.h		\
+	gedit/gedit-status-bar.h	\
 	gedit/gedit-tab.h 		\
 	gedit/gedit-panel.h 		\
 	gedit/gedit-window.h 		\
