@@ -248,7 +248,7 @@ gedit_message_area_init (GeditMessageArea *message_area)
 			    TRUE,
 			    0);
 
-	gtk_widget_set_app_paintable (message_area, TRUE);
+	gtk_widget_set_app_paintable (GTK_WIDGET(message_area), TRUE);
 
 	g_signal_connect (message_area,
 			  "expose_event",
