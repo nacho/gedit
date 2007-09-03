@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-16 03:48+0100\n"
-"PO-Revision-Date: 2007-08-25 12:48+0200\n"
+"POT-Creation-Date: 2007-08-25 22:40+0100\n"
+"PO-Revision-Date: 2007-09-04 01:44+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -221,11 +221,11 @@ msgstr ""
 
 #: ../data/gedit.schemas.in.h:43
 msgid "Print Header"
-msgstr "Nyomtatási fejléc"
+msgstr "Fejléc nyomtatása"
 
 #: ../data/gedit.schemas.in.h:44
 msgid "Print Line Numbers"
-msgstr "Sorok számának kiírása"
+msgstr "Sorszámok nyomtatása"
 
 #: ../data/gedit.schemas.in.h:45
 msgid "Print Syntax Highlighting"
@@ -296,7 +296,14 @@ msgid ""
 "pressed, \"BEFORE\" to move to the start/end of the text before moving to "
 "the start/end of the line and \"ALWAYS\" to always move to the start/end of "
 "the text instead of the start/end of the line."
-msgstr "Megadja a kurzor mozgásának módját a Home és End billentyűk lenyomásakor. A \"DISABLED\" használatakor mindig a sor elejére/végére mozognak, az \"AFTER\" esetén az első lenyomásukkor a sor elejére/végére és második alkalommal szöveg elejére/végére az üreshely karakterek kihagyásával, a \"BEFORE\" esetén a szöveg elejére/végére a sor elejére/végére mozgás előtt, és \"ALWAYS\" esetén mindig a szöveg elejére/végére mozognak a sor elejére/végére mozgás helyett."
+msgstr ""
+"Megadja a kurzor mozgásának módját a Home és End billentyűk lenyomásakor. A "
+"\"DISABLED\" használatakor mindig a sor elejére/végére mozognak, az \"AFTER"
+"\" esetén az első lenyomásukkor a sor elejére/végére és második alkalommal "
+"szöveg elejére/végére az üreshely karakterek kihagyásával, a \"BEFORE\" "
+"esetén a szöveg elejére/végére a sor elejére/végére mozgás előtt, és \"ALWAYS"
+"\" esetén mindig a szöveg elejére/végére mozognak a sor elejére/végére "
+"mozgás helyett."
 
 #: ../data/gedit.schemas.in.h:67
 msgid ""
@@ -816,33 +823,33 @@ msgstr "Nyomja meg ezt a gombot a szerkesztőben használt betűkészlet kivála
 msgid "_Use the system fixed width font (%s)"
 msgstr "A _rendszer rögzített szélességű betűkészletének használata (%s)"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:767
+#: ../gedit/dialogs/gedit-preferences-dialog.c:775
 msgid "The selected color scheme cannot be installed."
 msgstr "A kijelölt színséma nem telepíthető."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:792
+#: ../gedit/dialogs/gedit-preferences-dialog.c:800
 msgid "Add Scheme"
 msgstr "Séma hozzáadása"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:799
+#: ../gedit/dialogs/gedit-preferences-dialog.c:807
 msgid "A_dd Scheme"
 msgstr "Séma h_ozzáadása"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:807
+#: ../gedit/dialogs/gedit-preferences-dialog.c:815
 msgid "Color Scheme Files"
 msgstr "Színsémafájlok"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:814
+#: ../gedit/dialogs/gedit-preferences-dialog.c:822
 #: ../gedit/gedit-file-chooser-dialog.c:52
 msgid "All Files"
 msgstr "Minden fájl"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:859
+#: ../gedit/dialogs/gedit-preferences-dialog.c:867
 #, c-format
 msgid "Could not remove color scheme \"%s\"."
 msgstr "Nem távolítható el a(z) \"%s\" színséma."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1058
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1069
 msgid "gedit Preferences"
 msgstr "A gedit beállításai"
 
@@ -951,11 +958,11 @@ msgid "_minutes"
 msgstr "p_ercenként"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:287
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1347
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1348
 msgid "Replace"
 msgstr "Csere"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1345
+#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1346
 msgid "Find"
 msgstr "Keresés"
 
@@ -1195,7 +1202,7 @@ msgid "Unsaved Document %d"
 msgstr "Mentetlen dokumentum %d"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1913 ../gedit/gedit-window.c:1918
+#: ../gedit/gedit-window.c:1914 ../gedit/gedit-window.c:1919
 msgid "Read Only"
 msgstr "Csak olvasható"
 
@@ -1560,8 +1567,8 @@ msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
 msgstr ""
-"A gedit ezt a fájlt csak olvasható módban nyitotta meg. "
-"Mindenképpen szerkeszti?"
+"A gedit ezt a fájlt csak olvasható módban nyitotta meg. Mindenképpen "
+"szerkeszti?"
 
 #: ../gedit/gedit-io-error-message-area.c:994
 #: ../gedit/gedit-io-error-message-area.c:1089
@@ -1894,7 +1901,9 @@ msgstr "Nem készült látható kimenet."
 #: ../gedit/gedit-source-style-manager.c:214
 #, c-format
 msgid "Directory '%s' could not be created: g_mkdir_with_parents() failed: %s"
-msgstr "A(z) \"%s\" könyvtár nem hozható létre: a g_mkdir_with_parents() hívás meghiúsult: %s"
+msgstr ""
+"A(z) \"%s\" könyvtár nem hozható létre: a g_mkdir_with_parents() hívás "
+"meghiúsult: %s"
 
 #: ../gedit/gedit-statusbar.c:248
 msgid "  OVR"
@@ -1996,301 +2005,301 @@ msgid "Rendering page %d of %d..."
 msgstr "A(z) %d. oldal leképezése %d oldalból..."
 
 #. Toplevel
-#: ../gedit/gedit-ui.h:52
+#: ../gedit/gedit-ui.h:49
 msgid "_File"
 msgstr "_Fájl"
 
-#: ../gedit/gedit-ui.h:53
+#: ../gedit/gedit-ui.h:50
 msgid "_Edit"
 msgstr "S_zerkesztés"
 
-#: ../gedit/gedit-ui.h:54
+#: ../gedit/gedit-ui.h:51
 msgid "_View"
 msgstr "_Nézet"
 
-#: ../gedit/gedit-ui.h:55
+#: ../gedit/gedit-ui.h:52
 msgid "_Search"
 msgstr "_Keresés"
 
-#: ../gedit/gedit-ui.h:56
+#: ../gedit/gedit-ui.h:53
 msgid "_Tools"
 msgstr "_Eszközök"
 
-#: ../gedit/gedit-ui.h:57
+#: ../gedit/gedit-ui.h:54
 msgid "_Documents"
 msgstr "_Dokumentumok"
 
-#: ../gedit/gedit-ui.h:58
+#: ../gedit/gedit-ui.h:55
 msgid "_Help"
 msgstr "_Súgó"
 
-#: ../gedit/gedit-ui.h:62
+#: ../gedit/gedit-ui.h:59
 msgid "Create a new document"
 msgstr "Új dokumentum létrehozása"
 
-#: ../gedit/gedit-ui.h:63
+#: ../gedit/gedit-ui.h:60
 msgid "_Open..."
 msgstr "_Megnyitás..."
 
-#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1467
+#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1468
 msgid "Open a file"
 msgstr "Fájl megnyitása"
 
-#: ../gedit/gedit-ui.h:65
+#: ../gedit/gedit-ui.h:62
 msgid "Open _Location..."
 msgstr "_Hely megnyitása..."
 
-#: ../gedit/gedit-ui.h:66
+#: ../gedit/gedit-ui.h:63
 msgid "Open a file from a specified location"
 msgstr "Fájl megnyitása megadott helyről"
 
 #. Edit menu
-#: ../gedit/gedit-ui.h:69
+#: ../gedit/gedit-ui.h:66
 msgid "Pr_eferences"
 msgstr "_Beállítások"
 
-#: ../gedit/gedit-ui.h:70
+#: ../gedit/gedit-ui.h:67
 msgid "Configure the application"
 msgstr "Az alkalmazás beállítása"
 
 #. Help menu
-#: ../gedit/gedit-ui.h:73
+#: ../gedit/gedit-ui.h:70
 msgid "_Contents"
 msgstr "_Tartalom"
 
-#: ../gedit/gedit-ui.h:74
+#: ../gedit/gedit-ui.h:71
 msgid "Open the gedit manual"
 msgstr "A gedit felhasználói kézikönyvének megnyitása"
 
-#: ../gedit/gedit-ui.h:76
+#: ../gedit/gedit-ui.h:73
 msgid "About this application"
 msgstr "Az alkalmazás névjegye"
 
-#: ../gedit/gedit-ui.h:83
+#: ../gedit/gedit-ui.h:80
 msgid "Save the current file"
 msgstr "A jelenlegi fájl mentése"
 
-#: ../gedit/gedit-ui.h:84
+#: ../gedit/gedit-ui.h:81
 msgid "Save _As..."
 msgstr "Men_tés másként..."
 
-#: ../gedit/gedit-ui.h:85
+#: ../gedit/gedit-ui.h:82
 msgid "Save the current file with a different name"
 msgstr "A jelenlegi fájl mentése más néven"
 
-#: ../gedit/gedit-ui.h:87
+#: ../gedit/gedit-ui.h:84
 msgid "Revert to a saved version of the file"
 msgstr "Visszatérés a fájl egy korábban mentett változatához"
 
-#: ../gedit/gedit-ui.h:88
+#: ../gedit/gedit-ui.h:85
 msgid "Page Set_up..."
 msgstr "_Oldalbeállítás..."
 
-#: ../gedit/gedit-ui.h:89
+#: ../gedit/gedit-ui.h:86
 msgid "Setup the page settings"
 msgstr "Az oldalak beállítása a jelenlegi nyomtatóhoz"
 
-#: ../gedit/gedit-ui.h:90
+#: ../gedit/gedit-ui.h:87
 msgid "Print Previe_w"
 msgstr "Nyomtatási _kép"
 
-#: ../gedit/gedit-ui.h:91
+#: ../gedit/gedit-ui.h:88
 msgid "Print preview"
 msgstr "Nyomtatási kép"
 
-#: ../gedit/gedit-ui.h:92
+#: ../gedit/gedit-ui.h:89
 msgid "_Print..."
 msgstr "_Nyomtatás..."
 
-#: ../gedit/gedit-ui.h:93
+#: ../gedit/gedit-ui.h:90
 msgid "Print the current page"
 msgstr "A jelenlegi oldal nyomtatása"
 
-#: ../gedit/gedit-ui.h:95
+#: ../gedit/gedit-ui.h:92
 msgid "Close the current file"
 msgstr "A jelenlegi fájl bezárása"
 
-#: ../gedit/gedit-ui.h:99
+#: ../gedit/gedit-ui.h:96
 msgid "Undo the last action"
 msgstr "Az utolsó művelet visszavonása"
 
-#: ../gedit/gedit-ui.h:101
+#: ../gedit/gedit-ui.h:98
 msgid "Redo the last undone action"
 msgstr "A visszavont művelet ismételt végrehajtása"
 
-#: ../gedit/gedit-ui.h:103
+#: ../gedit/gedit-ui.h:100
 msgid "Cut the selection"
 msgstr "A kijelölés kivágása"
 
-#: ../gedit/gedit-ui.h:105
+#: ../gedit/gedit-ui.h:102
 msgid "Copy the selection"
 msgstr "A kijelölés másolása"
 
-#: ../gedit/gedit-ui.h:107
+#: ../gedit/gedit-ui.h:104
 msgid "Paste the clipboard"
 msgstr "A vágólap tartalmának beillesztése"
 
-#: ../gedit/gedit-ui.h:109
+#: ../gedit/gedit-ui.h:106
 msgid "Delete the selected text"
 msgstr "A kijelölt szöveg törlése"
 
-#: ../gedit/gedit-ui.h:110
+#: ../gedit/gedit-ui.h:107
 msgid "Select _All"
 msgstr "Mind_ent kijelöl"
 
-#: ../gedit/gedit-ui.h:111
+#: ../gedit/gedit-ui.h:108
 msgid "Select the entire document"
 msgstr "Teljes dokumentum kijelölése"
 
 #. View menu
-#: ../gedit/gedit-ui.h:114
+#: ../gedit/gedit-ui.h:111
 msgid "_Highlight Mode"
 msgstr "Kiemelési ü_zemmód"
 
 #. Search menu
-#: ../gedit/gedit-ui.h:117
+#: ../gedit/gedit-ui.h:114
 msgid "_Find..."
 msgstr "_Keresés..."
 
-#: ../gedit/gedit-ui.h:118
+#: ../gedit/gedit-ui.h:115
 msgid "Search for text"
 msgstr "Szöveg keresése"
 
-#: ../gedit/gedit-ui.h:119
+#: ../gedit/gedit-ui.h:116
 msgid "Find Ne_xt"
 msgstr "Kö_vetkező találat"
 
-#: ../gedit/gedit-ui.h:120
+#: ../gedit/gedit-ui.h:117
 msgid "Search forwards for the same text"
 msgstr "Keresés előre ugyanarra a szövegre"
 
-#: ../gedit/gedit-ui.h:121
+#: ../gedit/gedit-ui.h:118
 msgid "Find Pre_vious"
 msgstr "Elő_ző találat"
 
-#: ../gedit/gedit-ui.h:122
+#: ../gedit/gedit-ui.h:119
 msgid "Search backwards for the same text"
 msgstr "Keresés visszafelé ugyanarra a szövegre"
 
-#: ../gedit/gedit-ui.h:123
+#: ../gedit/gedit-ui.h:120
 msgid "_Replace..."
 msgstr "_Csere..."
 
-#: ../gedit/gedit-ui.h:124
+#: ../gedit/gedit-ui.h:121
 msgid "Search for and replace text"
 msgstr "Szöveg keresése és cseréje"
 
-#: ../gedit/gedit-ui.h:125
+#: ../gedit/gedit-ui.h:122
 msgid "_Clear Highlight"
 msgstr "Kiemelés _törlése"
 
-#: ../gedit/gedit-ui.h:126
+#: ../gedit/gedit-ui.h:123
 msgid "Clear highlighting of search matches"
 msgstr "A keresési eredmények kijelölésének törlése"
 
-#: ../gedit/gedit-ui.h:127
+#: ../gedit/gedit-ui.h:124
 msgid "Go to _Line..."
 msgstr "Ugrá_s sorra..."
 
-#: ../gedit/gedit-ui.h:128
+#: ../gedit/gedit-ui.h:125
 msgid "Go to a specific line"
 msgstr "Ugrás a megadott sorra"
 
-#: ../gedit/gedit-ui.h:129
+#: ../gedit/gedit-ui.h:126
 msgid "_Incremental Search..."
 msgstr "_Gyorskeresés..."
 
-#: ../gedit/gedit-ui.h:130
+#: ../gedit/gedit-ui.h:127
 msgid "Incrementally search for text"
 msgstr "Szöveg gépelés közbeni keresése"
 
 #. Documents menu
-#: ../gedit/gedit-ui.h:133
+#: ../gedit/gedit-ui.h:130
 msgid "_Save All"
 msgstr "Összes _mentése"
 
-#: ../gedit/gedit-ui.h:134
+#: ../gedit/gedit-ui.h:131
 msgid "Save all open files"
 msgstr "Minden megnyitott fájl mentése"
 
-#: ../gedit/gedit-ui.h:135
+#: ../gedit/gedit-ui.h:132
 msgid "_Close All"
 msgstr "Összes _bezárása"
 
-#: ../gedit/gedit-ui.h:136
+#: ../gedit/gedit-ui.h:133
 msgid "Close all open files"
 msgstr "Minden megnyitott fájl bezárása"
 
-#: ../gedit/gedit-ui.h:137
+#: ../gedit/gedit-ui.h:134
 msgid "_Previous Document"
 msgstr "_Előző dokumentum"
 
-#: ../gedit/gedit-ui.h:138
+#: ../gedit/gedit-ui.h:135
 msgid "Activate previous document"
 msgstr "Előző dokumentum aktiválása"
 
-#: ../gedit/gedit-ui.h:139
+#: ../gedit/gedit-ui.h:136
 msgid "_Next Document"
 msgstr "Kö_vetkező dokumentum"
 
-#: ../gedit/gedit-ui.h:140
+#: ../gedit/gedit-ui.h:137
 msgid "Activate next document"
 msgstr "Következő dokumentum aktiválása"
 
-#: ../gedit/gedit-ui.h:141
+#: ../gedit/gedit-ui.h:138
 msgid "_Move to New Window"
 msgstr "Át_helyezés új ablakba"
 
-#: ../gedit/gedit-ui.h:142
+#: ../gedit/gedit-ui.h:139
 msgid "Move the current document to a new window"
 msgstr "A jelenlegi dokumentum áthelyezése egy másik ablakba"
 
-#: ../gedit/gedit-ui.h:149
+#: ../gedit/gedit-ui.h:146
 msgid "Quit the program"
 msgstr "Kilépés a programból"
 
-#: ../gedit/gedit-ui.h:154
+#: ../gedit/gedit-ui.h:151
 msgid "_Toolbar"
 msgstr "_Eszköztár"
 
-#: ../gedit/gedit-ui.h:155
+#: ../gedit/gedit-ui.h:152
 msgid "Show or hide the toolbar in the current window"
 msgstr "Eszköztár megjelenítése vagy rejtése a jelenlegi ablakban"
 
-#: ../gedit/gedit-ui.h:157
+#: ../gedit/gedit-ui.h:154
 msgid "_Statusbar"
 msgstr "Á_llapotsor"
 
-#: ../gedit/gedit-ui.h:158
+#: ../gedit/gedit-ui.h:155
 msgid "Show or hide the statusbar in the current window"
 msgstr "Állapotsor megjelenítése vagy rejtése a jelenlegi ablakban"
 
-#: ../gedit/gedit-ui.h:160
+#: ../gedit/gedit-ui.h:157
 msgid "Side _Pane"
 msgstr "Oldalsó _ablaktábla"
 
-#: ../gedit/gedit-ui.h:161
+#: ../gedit/gedit-ui.h:158
 msgid "Show or hide the side pane in the current window"
 msgstr "Oldalsó ablaktábla megjelenítése vagy rejtése a jelenlegi ablakban"
 
-#: ../gedit/gedit-ui.h:167
+#: ../gedit/gedit-ui.h:164
 msgid "_Bottom Pane"
 msgstr "_Alsó ablaktábla"
 
-#: ../gedit/gedit-ui.h:168
+#: ../gedit/gedit-ui.h:165
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Alsó ablaktábla megjelenítése vagy rejtése a jelenlegi ablakban"
 
-#: ../gedit/gedit-utils.c:996
+#: ../gedit/gedit-utils.c:1005
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Nem található a(z) \"%s\" fájl."
 
-#: ../gedit/gedit-utils.c:1000 ../gedit/gedit-utils.c:1036
+#: ../gedit/gedit-utils.c:1009 ../gedit/gedit-utils.c:1045
 msgid "Please check your installation."
 msgstr "Ellenőrizze a telepítést."
 
-#: ../gedit/gedit-utils.c:1032
+#: ../gedit/gedit-utils.c:1041
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "A szükséges felületi elemek nem találhatók a(z) \"%s\" fájlban."
@@ -2318,7 +2327,7 @@ msgstr "A keresendő karaktersorozat"
 msgid "Line you want to move the cursor to"
 msgstr "A kurzor mozgatása a megadott sor elejére"
 
-#: ../gedit/gedit-window.c:872
+#: ../gedit/gedit-window.c:881
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s kiemelési mód használata"
@@ -2326,34 +2335,34 @@ msgstr "%s kiemelési mód használata"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:934
+#: ../gedit/gedit-window.c:938
 msgid "None"
 msgstr "Nincs"
 
-#: ../gedit/gedit-window.c:935
+#: ../gedit/gedit-window.c:939
 msgid "Disable syntax highlighting"
 msgstr "Nyelvtani kiemelések tiltása"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1224
+#: ../gedit/gedit-window.c:1225
 #, c-format
 msgid "Open '%s'"
 msgstr "\"%s\" megnyitása"
 
-#: ../gedit/gedit-window.c:1343
+#: ../gedit/gedit-window.c:1344
 msgid "Save"
 msgstr "Mentés"
 
-#: ../gedit/gedit-window.c:1471
+#: ../gedit/gedit-window.c:1472
 msgid "Open a recently used file"
 msgstr "Nemrég használt fájl megnyitása"
 
-#: ../gedit/gedit-window.c:1478
+#: ../gedit/gedit-window.c:1479
 msgid "Open"
 msgstr "Megnyitás"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1528
+#: ../gedit/gedit-window.c:1529
 #, c-format
 msgid "Activate '%s'"
 msgstr "\"%s\" aktiválása"
@@ -2686,11 +2695,11 @@ msgid "File Browser Pane"
 msgstr "Fájlböngésző ablaktábla"
 
 #. Translators: this is used in "file on host", e.g. "/foo/bar on ftp.baz.org"
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:190
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:195
 msgid "on"
 msgstr "ezen:"
 
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:332
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:330
 msgid "File System"
 msgstr "Fájlrendszer"
 
@@ -2835,7 +2844,7 @@ msgstr "Hiba történt könyvtár betöltésekor"
 msgid "An error occurred"
 msgstr "Hiba történt"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1121
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1123
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
@@ -2843,25 +2852,25 @@ msgstr ""
 "A fájl nem helyezhető át a Kukába,\n"
 "kívánja azonnal törölni?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1125
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1127
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "A(z) \"%s\" fájl nem helyezhető át a Kukába."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1128
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1130
 msgid "The selected files cannot be moved to the trash."
 msgstr "A kijelölt fájlok nem helyezhetők át a Kukába."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1161
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1163
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Valóban véglegesen törölni kívánja a(z) \"%s\" fájlt?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1164
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1166
 msgid "Are you sure you want to permanently delete the selected files?"
 msgstr "Valóban véglegesen törölni kívánja a kijelölt fájlokat?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1167
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1169
 msgid "If you delete an item, it is permanently lost."
 msgstr "Ha töröl egy elemet, az véglegesen elvész."
 
@@ -3176,7 +3185,9 @@ msgstr "A kijelölt töredék visszaállítása"
 msgid ""
 "This is not a valid tab trigger. Triggers can either contain letters or a "
 "single, non alphanumeric, character like {, [, etcetera."
-msgstr "Ez nem egy érvényes tab-aktiváló. Az aktiválók betűket vagy egyetlen, nem betű vagy szám karaktert, például {, [, stb. tartalmazhatnak."
+msgstr ""
+"Ez nem egy érvényes tab-aktiváló. Az aktiválók betűket vagy egyetlen, nem "
+"betű vagy szám karaktert, például {, [, stb. tartalmazhatnak."
 
 #: ../plugins/snippets/snippets/Manager.py:785
 #, python-format
@@ -3300,7 +3311,9 @@ msgstr "A(z) \"%s\" fájl nem egy érvényes töredékarchívum"
 msgid ""
 "Execution of the python command (%s) exceeds the maximum time, execution "
 "aborted."
-msgstr "A python parancs (%s) végrehajtása túllépi a maximálisan engedélyezett időt, a végrehajtás megszakítva."
+msgstr ""
+"A python parancs (%s) végrehajtása túllépi a maximálisan engedélyezett időt, "
+"a végrehajtás megszakítva."
 
 #: ../plugins/snippets/snippets/Placeholder.py:557
 #, python-format
