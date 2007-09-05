@@ -68,7 +68,7 @@ static const GtkActionEntry action_entries[] =
 	{ "CheckSpell",
 	  GTK_STOCK_SPELL_CHECK,
 	  N_("_Check Spelling"),
-	  "F7",
+	  "<shift>F7",
 	  N_("Check the current document for incorrect spelling"),
 	  G_CALLBACK (spell_cb)
 	},
