@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-16 03:48+0100\n"
-"PO-Revision-Date: 2007-07-26 19:58+0800\n"
+"POT-Creation-Date: 2007-08-26 21:18+0100\n"
+"PO-Revision-Date: 2007-09-06 21:11+0800\n"
 "Last-Translator: Funda Wang <fundawang@gmail.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -274,6 +274,11 @@ msgid ""
 "the start/end of the line and \"ALWAYS\" to always move to the start/end of "
 "the text instead of the start/end of the line."
 msgstr ""
+"指定在按下 HOME 和 END 键时光标如何移动。使用“DISABLED”以总是移动到行"
+"的开始/结尾，“AFTER”以在第一次按下键时移动到行的开始/结尾并在第二次按"
+"下键时忽略空白地移动到文本的开始/结尾，“BEFORE”以在移动到行的开始/结尾"
+"前先移动到文本的开始/结尾，“ALWAYS”以总是移动到文本的开始/结尾而不是行"
+"的开始/结尾。"
 
 #: ../data/gedit.schemas.in.h:67
 msgid ""
@@ -386,7 +391,7 @@ msgstr "制表符长度"
 
 #: ../data/gedit.schemas.in.h:82
 msgid "The id of a GtkSourceView Style Scheme used to color the text."
-msgstr ""
+msgstr "用于文本颜色的 GtkSourceView 样式主题 id。"
 
 #: ../data/gedit.schemas.in.h:83
 msgid "Toolbar Buttons Style"
@@ -760,33 +765,33 @@ msgstr "按下此按钮可以选择编辑器所用的字体"
 msgid "_Use the system fixed width font (%s)"
 msgstr "使用系统等宽字体(_U)(%s)"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:767
+#: ../gedit/dialogs/gedit-preferences-dialog.c:775
 msgid "The selected color scheme cannot be installed."
 msgstr "无法安装选中的配色方案。"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:792
+#: ../gedit/dialogs/gedit-preferences-dialog.c:800
 msgid "Add Scheme"
 msgstr "添加方案"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:799
+#: ../gedit/dialogs/gedit-preferences-dialog.c:807
 msgid "A_dd Scheme"
 msgstr "添加方案(_D)"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:807
+#: ../gedit/dialogs/gedit-preferences-dialog.c:815
 msgid "Color Scheme Files"
 msgstr "配色方案文件"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:814
+#: ../gedit/dialogs/gedit-preferences-dialog.c:822
 #: ../gedit/gedit-file-chooser-dialog.c:52
 msgid "All Files"
 msgstr "全部文件"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:859
+#: ../gedit/dialogs/gedit-preferences-dialog.c:867
 #, c-format
 msgid "Could not remove color scheme \"%s\"."
 msgstr "无法删除配色方案“%s”。"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1058
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1069
 msgid "gedit Preferences"
 msgstr "gedit 首选项"
 
@@ -895,11 +900,11 @@ msgid "_minutes"
 msgstr "分钟(_M)"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:287
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1347
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1348
 msgid "Replace"
 msgstr "替换"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1345
+#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1346
 msgid "Find"
 msgstr "查找"
 
@@ -1119,13 +1124,13 @@ msgstr "找到并替换了一处"
 msgid "Phrase not found"
 msgstr "短语未找到"
 
-#: ../gedit/gedit-document.c:816 ../gedit/gedit-document.c:910
+#: ../gedit/gedit-document.c:815 ../gedit/gedit-document.c:909
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "未保存文档 %d"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1913 ../gedit/gedit-window.c:1918
+#: ../gedit/gedit-window.c:1914 ../gedit/gedit-window.c:1919
 msgid "Read Only"
 msgstr "只读"
 
@@ -1884,301 +1889,301 @@ msgid "Rendering page %d of %d..."
 msgstr "正在渲染第 %d 页，共 %d 页..."
 
 #. Toplevel
-#: ../gedit/gedit-ui.h:52
+#: ../gedit/gedit-ui.h:49
 msgid "_File"
 msgstr "文件(_F)"
 
-#: ../gedit/gedit-ui.h:53
+#: ../gedit/gedit-ui.h:50
 msgid "_Edit"
 msgstr "编辑(_E)"
 
-#: ../gedit/gedit-ui.h:54
+#: ../gedit/gedit-ui.h:51
 msgid "_View"
 msgstr "查看(_V)"
 
-#: ../gedit/gedit-ui.h:55
+#: ../gedit/gedit-ui.h:52
 msgid "_Search"
 msgstr "搜索(_S)"
 
-#: ../gedit/gedit-ui.h:56
+#: ../gedit/gedit-ui.h:53
 msgid "_Tools"
 msgstr "工具(_T)"
 
-#: ../gedit/gedit-ui.h:57
+#: ../gedit/gedit-ui.h:54
 msgid "_Documents"
 msgstr "文档(_D)"
 
-#: ../gedit/gedit-ui.h:58
+#: ../gedit/gedit-ui.h:55
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../gedit/gedit-ui.h:62
+#: ../gedit/gedit-ui.h:59
 msgid "Create a new document"
 msgstr "新建一个文档"
 
-#: ../gedit/gedit-ui.h:63
+#: ../gedit/gedit-ui.h:60
 msgid "_Open..."
 msgstr "打开(_O)..."
 
-#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1467
+#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1468
 msgid "Open a file"
 msgstr "打开一个文件"
 
-#: ../gedit/gedit-ui.h:65
+#: ../gedit/gedit-ui.h:62
 msgid "Open _Location..."
 msgstr "打开位置(_L)..."
 
-#: ../gedit/gedit-ui.h:66
+#: ../gedit/gedit-ui.h:63
 msgid "Open a file from a specified location"
 msgstr "从指定的位置打开文件"
 
 #. Edit menu
-#: ../gedit/gedit-ui.h:69
+#: ../gedit/gedit-ui.h:66
 msgid "Pr_eferences"
 msgstr "首选项(_E)"
 
-#: ../gedit/gedit-ui.h:70
+#: ../gedit/gedit-ui.h:67
 msgid "Configure the application"
 msgstr "配置应用程序"
 
 #. Help menu
-#: ../gedit/gedit-ui.h:73
+#: ../gedit/gedit-ui.h:70
 msgid "_Contents"
 msgstr "目录(_C)"
 
-#: ../gedit/gedit-ui.h:74
+#: ../gedit/gedit-ui.h:71
 msgid "Open the gedit manual"
 msgstr "打开 gedit 手册"
 
-#: ../gedit/gedit-ui.h:76
+#: ../gedit/gedit-ui.h:73
 msgid "About this application"
 msgstr "关于本程序"
 
-#: ../gedit/gedit-ui.h:83
+#: ../gedit/gedit-ui.h:80
 msgid "Save the current file"
 msgstr "保存当前文件"
 
-#: ../gedit/gedit-ui.h:84
+#: ../gedit/gedit-ui.h:81
 msgid "Save _As..."
 msgstr "另存为(_A)..."
 
-#: ../gedit/gedit-ui.h:85
+#: ../gedit/gedit-ui.h:82
 msgid "Save the current file with a different name"
 msgstr "用新文件名保存当前文件"
 
-#: ../gedit/gedit-ui.h:87
+#: ../gedit/gedit-ui.h:84
 msgid "Revert to a saved version of the file"
 msgstr "恢复为已保存的文件"
 
-#: ../gedit/gedit-ui.h:88
+#: ../gedit/gedit-ui.h:85
 msgid "Page Set_up..."
 msgstr "页面设置(_U)..."
 
-#: ../gedit/gedit-ui.h:89
+#: ../gedit/gedit-ui.h:86
 msgid "Setup the page settings"
 msgstr "设置页面设置"
 
-#: ../gedit/gedit-ui.h:90
+#: ../gedit/gedit-ui.h:87
 msgid "Print Previe_w"
 msgstr "打印预览(_W)"
 
-#: ../gedit/gedit-ui.h:91
+#: ../gedit/gedit-ui.h:88
 msgid "Print preview"
 msgstr "打印预览"
 
-#: ../gedit/gedit-ui.h:92
+#: ../gedit/gedit-ui.h:89
 msgid "_Print..."
 msgstr "打印(_P)..."
 
-#: ../gedit/gedit-ui.h:93
+#: ../gedit/gedit-ui.h:90
 msgid "Print the current page"
 msgstr "打印当前文件"
 
-#: ../gedit/gedit-ui.h:95
+#: ../gedit/gedit-ui.h:92
 msgid "Close the current file"
 msgstr "关闭当前文件"
 
-#: ../gedit/gedit-ui.h:99
+#: ../gedit/gedit-ui.h:96
 msgid "Undo the last action"
 msgstr "撤消上次操作"
 
-#: ../gedit/gedit-ui.h:101
+#: ../gedit/gedit-ui.h:98
 msgid "Redo the last undone action"
 msgstr "重做上次撤消的操作"
 
-#: ../gedit/gedit-ui.h:103
+#: ../gedit/gedit-ui.h:100
 msgid "Cut the selection"
 msgstr "剪切选中的区域"
 
-#: ../gedit/gedit-ui.h:105
+#: ../gedit/gedit-ui.h:102
 msgid "Copy the selection"
 msgstr "复制选中的区域"
 
-#: ../gedit/gedit-ui.h:107
+#: ../gedit/gedit-ui.h:104
 msgid "Paste the clipboard"
 msgstr "粘贴剪贴板上的内容"
 
-#: ../gedit/gedit-ui.h:109
+#: ../gedit/gedit-ui.h:106
 msgid "Delete the selected text"
 msgstr "删除选中的文本"
 
-#: ../gedit/gedit-ui.h:110
+#: ../gedit/gedit-ui.h:107
 msgid "Select _All"
 msgstr "全部选中(_A)"
 
-#: ../gedit/gedit-ui.h:111
+#: ../gedit/gedit-ui.h:108
 msgid "Select the entire document"
 msgstr "选中整个文档"
 
 #. View menu
-#: ../gedit/gedit-ui.h:114
+#: ../gedit/gedit-ui.h:111
 msgid "_Highlight Mode"
 msgstr "突出显示模式(_H)"
 
 #. Search menu
-#: ../gedit/gedit-ui.h:117
+#: ../gedit/gedit-ui.h:114
 msgid "_Find..."
 msgstr "查找(_F)..."
 
-#: ../gedit/gedit-ui.h:118
+#: ../gedit/gedit-ui.h:115
 msgid "Search for text"
 msgstr "搜索文字"
 
-#: ../gedit/gedit-ui.h:119
+#: ../gedit/gedit-ui.h:116
 msgid "Find Ne_xt"
 msgstr "查找下一个(_X)"
 
-#: ../gedit/gedit-ui.h:120
+#: ../gedit/gedit-ui.h:117
 msgid "Search forwards for the same text"
 msgstr "正向搜索相同的文字"
 
-#: ../gedit/gedit-ui.h:121
+#: ../gedit/gedit-ui.h:118
 msgid "Find Pre_vious"
 msgstr "查找上一个(_V)"
 
-#: ../gedit/gedit-ui.h:122
+#: ../gedit/gedit-ui.h:119
 msgid "Search backwards for the same text"
 msgstr "反向搜索相同的文字"
 
-#: ../gedit/gedit-ui.h:123
+#: ../gedit/gedit-ui.h:120
 msgid "_Replace..."
 msgstr "替换(_R)..."
 
-#: ../gedit/gedit-ui.h:124
+#: ../gedit/gedit-ui.h:121
 msgid "Search for and replace text"
 msgstr "搜索并替换文字"
 
-#: ../gedit/gedit-ui.h:125
+#: ../gedit/gedit-ui.h:122
 msgid "_Clear Highlight"
 msgstr "清除突出显示(_C)"
 
-#: ../gedit/gedit-ui.h:126
+#: ../gedit/gedit-ui.h:123
 msgid "Clear highlighting of search matches"
 msgstr "清除搜索匹配项的突出显示"
 
-#: ../gedit/gedit-ui.h:127
+#: ../gedit/gedit-ui.h:124
 msgid "Go to _Line..."
 msgstr "跳到行(_L)..."
 
-#: ../gedit/gedit-ui.h:128
+#: ../gedit/gedit-ui.h:125
 msgid "Go to a specific line"
 msgstr "跳转到指定的行"
 
-#: ../gedit/gedit-ui.h:129
+#: ../gedit/gedit-ui.h:126
 msgid "_Incremental Search..."
 msgstr "增量搜索(_I)..."
 
-#: ../gedit/gedit-ui.h:130
+#: ../gedit/gedit-ui.h:127
 msgid "Incrementally search for text"
 msgstr "增量搜索文字"
 
 #. Documents menu
-#: ../gedit/gedit-ui.h:133
+#: ../gedit/gedit-ui.h:130
 msgid "_Save All"
 msgstr "全部保存(_S)"
 
-#: ../gedit/gedit-ui.h:134
+#: ../gedit/gedit-ui.h:131
 msgid "Save all open files"
 msgstr "保存所有已打开的文件"
 
-#: ../gedit/gedit-ui.h:135
+#: ../gedit/gedit-ui.h:132
 msgid "_Close All"
 msgstr "全部关闭(_C)"
 
-#: ../gedit/gedit-ui.h:136
+#: ../gedit/gedit-ui.h:133
 msgid "Close all open files"
 msgstr "关闭所有已打开的文件"
 
-#: ../gedit/gedit-ui.h:137
+#: ../gedit/gedit-ui.h:134
 msgid "_Previous Document"
 msgstr "上一个文档(_P)"
 
-#: ../gedit/gedit-ui.h:138
+#: ../gedit/gedit-ui.h:135
 msgid "Activate previous document"
 msgstr "激活上一个文档"
 
-#: ../gedit/gedit-ui.h:139
+#: ../gedit/gedit-ui.h:136
 msgid "_Next Document"
 msgstr "下一个文档(_N)"
 
-#: ../gedit/gedit-ui.h:140
+#: ../gedit/gedit-ui.h:137
 msgid "Activate next document"
 msgstr "激活下一个文档"
 
-#: ../gedit/gedit-ui.h:141
+#: ../gedit/gedit-ui.h:138
 msgid "_Move to New Window"
 msgstr "移动到新窗口(_M)"
 
-#: ../gedit/gedit-ui.h:142
+#: ../gedit/gedit-ui.h:139
 msgid "Move the current document to a new window"
 msgstr "将当前文档移动到新窗口"
 
-#: ../gedit/gedit-ui.h:149
+#: ../gedit/gedit-ui.h:146
 msgid "Quit the program"
 msgstr "退出程序"
 
-#: ../gedit/gedit-ui.h:154
+#: ../gedit/gedit-ui.h:151
 msgid "_Toolbar"
 msgstr "工具栏(_T)"
 
-#: ../gedit/gedit-ui.h:155
+#: ../gedit/gedit-ui.h:152
 msgid "Show or hide the toolbar in the current window"
 msgstr "当前窗口中显示或隐藏工具栏"
 
-#: ../gedit/gedit-ui.h:157
+#: ../gedit/gedit-ui.h:154
 msgid "_Statusbar"
 msgstr "状态栏(_S)"
 
-#: ../gedit/gedit-ui.h:158
+#: ../gedit/gedit-ui.h:155
 msgid "Show or hide the statusbar in the current window"
 msgstr "在当前窗口中显示或隐藏显示状态栏"
 
-#: ../gedit/gedit-ui.h:160
+#: ../gedit/gedit-ui.h:157
 msgid "Side _Pane"
 msgstr "侧边栏(_P)"
 
-#: ../gedit/gedit-ui.h:161
+#: ../gedit/gedit-ui.h:158
 msgid "Show or hide the side pane in the current window"
 msgstr "在当前窗口中显示或隐藏侧边栏"
 
-#: ../gedit/gedit-ui.h:167
+#: ../gedit/gedit-ui.h:164
 msgid "_Bottom Pane"
 msgstr "底部面板(_B)"
 
-#: ../gedit/gedit-ui.h:168
+#: ../gedit/gedit-ui.h:165
 msgid "Show or hide the bottom pane in the current window"
 msgstr "在当前窗口中显示或隐藏底部面板"
 
-#: ../gedit/gedit-utils.c:996
+#: ../gedit/gedit-utils.c:1005
 #, c-format
 msgid "Unable to find file %s."
 msgstr "找不到文件 %s。"
 
-#: ../gedit/gedit-utils.c:1000 ../gedit/gedit-utils.c:1036
+#: ../gedit/gedit-utils.c:1009 ../gedit/gedit-utils.c:1045
 msgid "Please check your installation."
 msgstr "请检查您的安装。"
 
-#: ../gedit/gedit-utils.c:1032
+#: ../gedit/gedit-utils.c:1041
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "在文件 %s 中找不到所需的部件。"
@@ -2206,7 +2211,7 @@ msgstr "您想要搜索的字符串"
 msgid "Line you want to move the cursor to"
 msgstr "您想要将光标移动到的行"
 
-#: ../gedit/gedit-window.c:872
+#: ../gedit/gedit-window.c:881
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "使用 %s 突出显示模式"
@@ -2214,34 +2219,34 @@ msgstr "使用 %s 突出显示模式"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:934
+#: ../gedit/gedit-window.c:938
 msgid "None"
 msgstr "无"
 
-#: ../gedit/gedit-window.c:935
+#: ../gedit/gedit-window.c:939
 msgid "Disable syntax highlighting"
 msgstr "禁用语法突出显示"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1224
+#: ../gedit/gedit-window.c:1225
 #, c-format
 msgid "Open '%s'"
 msgstr "打开“%s”"
 
-#: ../gedit/gedit-window.c:1343
+#: ../gedit/gedit-window.c:1344
 msgid "Save"
 msgstr "保存"
 
-#: ../gedit/gedit-window.c:1471
+#: ../gedit/gedit-window.c:1472
 msgid "Open a recently used file"
 msgstr "打开最近用过的文件"
 
-#: ../gedit/gedit-window.c:1478
+#: ../gedit/gedit-window.c:1479
 msgid "Open"
 msgstr "打开"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1528
+#: ../gedit/gedit-window.c:1529
 #, c-format
 msgid "Activate '%s'"
 msgstr "激活“%s”"
@@ -2572,11 +2577,11 @@ msgid "File Browser Pane"
 msgstr "文件浏览器面板"
 
 #. Translators: this is used in "file on host", e.g. "/foo/bar on ftp.baz.org"
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:190
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:195
 msgid "on"
 msgstr "于"
 
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:332
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:330
 msgid "File System"
 msgstr "文件系统"
 
@@ -2715,31 +2720,31 @@ msgstr "装入目录时发生了错误"
 msgid "An error occurred"
 msgstr "发生了错误"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1121
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1123
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
 msgstr "无法将文件移动到回收站，您是否想要永久删除？"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1125
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1127
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "无法将文件“%s”移动到回收站。"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1128
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1130
 msgid "The selected files cannot be moved to the trash."
 msgstr "无法将选中文件移动到回收站。"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1161
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1163
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "您确定想要永久删除“%s”吗？"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1164
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1166
 msgid "Are you sure you want to permanently delete the selected files?"
 msgstr "您确定想要永久删除选中文件吗？"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1167
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1169
 msgid "If you delete an item, it is permanently lost."
 msgstr "如果您删除的话，该文件将永久丢失。"
 
@@ -3000,7 +3005,7 @@ msgstr "此片断的快捷键已经激活"
 #: ../plugins/snippets/snippets/snippets.glade.h:9
 #: ../plugins/snippets/snippets/Manager.py:697
 msgid "Single word with which the snippet is activated after pressing tab"
-msgstr ""
+msgstr "按下 tab 键后激活片断所需的单字"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:10
 msgid "Snippets Manager"
@@ -5024,4 +5029,3 @@ msgstr "提示可使用的格式(_P)"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "使用自定义格式(_U)"
-
