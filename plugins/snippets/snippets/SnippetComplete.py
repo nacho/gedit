@@ -230,8 +230,9 @@ class SnippetComplete(gtk.Window):
                 column.set_attributes(renderer, markup=0)
                 
                 self.tree_view.append_column(column)
-        
+
                 self.tree_view.connect('row-activated', self.on_tree_view_row_activated)
+                self.tree_view.connect('key-press-event', self.on_tree_view_key_press)
 
         def build(self):
                 vbox = gtk.VBox(False, 3)
@@ -287,9 +288,16 @@ class SnippetComplete(gtk.Window):
                 if event.keyval == gdk.keyval_from_name('Escape'):
                         self.destroy()
                         return True
-                
+
                 return False
-        
+
+        def on_tree_view_key_press(self, entry, event):
+                if event.keyval == gdk.keyval_from_name('Escape'):
+                        self.destroy()
+                        return True
+
+                return False
+
         def on_tree_view_row_activated(self, view, path, column):
                 snippet = self.model.get_snippet(path)
 
