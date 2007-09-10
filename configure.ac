@@ -4,7 +4,7 @@ AC_PREREQ(2.59)
 
 m4_define(gedit_major_version,  2)
 m4_define(gedit_minor_version, 19)
-m4_define(gedit_micro_version, 91)
+m4_define(gedit_micro_version, 92)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
 AC_INIT(gedit, gedit_version, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
@@ -253,6 +253,7 @@ if test "x$have_python" != "xno"; then
 		if test "x$enable_python" = "xyes"; then
 			AC_MSG_ERROR([$PYGTK_PKG_ERRORS])
 		elif test "x$enable_python" = "xautodetect"; then
+                        enable_python=no
 			AC_MSG_WARN([$PYGTK_PKG_ERRORS])
 			AC_MSG_WARN([Disabling python support])
 		fi
