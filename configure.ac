@@ -3,8 +3,8 @@ dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.59)
 
 m4_define(gedit_major_version,  2)
-m4_define(gedit_minor_version, 19)
-m4_define(gedit_micro_version, 92)
+m4_define(gedit_minor_version, 20)
+m4_define(gedit_micro_version,  0)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
 AC_INIT(gedit, gedit_version, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
@@ -18,7 +18,7 @@ AC_SUBST(GEDIT_MINOR_VERSION, gedit_minor_version)
 AC_DEFINE(GEDIT_MICRO_VERSION, gedit_micro_version, [Gedit micro version])
 AC_SUBST(GEDIT_MICRO_VERSION, gedit_micro_version)
 
-GEDIT_API_VERSION=2.16
+GEDIT_API_VERSION=2.20
 AC_SUBST(GEDIT_API_VERSION)
 
 AM_INIT_AUTOMAKE([1.8 dist-bzip2 no-dist-gzip])
@@ -148,7 +148,7 @@ dnl ================================================================
 PKG_CHECK_MODULES(GEDIT, [
 	glib-2.0 >= 2.13.5
 	gtk+-2.0 >= 2.11.6
-	gtksourceview-2.0 >= 1.90.4
+	gtksourceview-2.0 >= 2.0.0
 	libgnomeui-2.0 >= 2.16.0
 	libglade-2.0 >= 2.5.1
 	libgnomeprintui-2.2 >= 2.12.1
@@ -241,7 +241,7 @@ fi
 if test "x$have_python" != "xno"; then
 	PYGOBJECT_REQUIRED=2.11.5
 	PYGTK_REQUIRED=2.9.7
-	PYGTKSOURCEVIEW_REQUIRED=1.90.4
+	PYGTKSOURCEVIEW_REQUIRED=2.0.0
 
 	PKG_CHECK_MODULES([PYGTK], [
 		pygobject-2.0 >= $PYGOBJECT_REQUIRED
