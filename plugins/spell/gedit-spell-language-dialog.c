@@ -124,10 +124,10 @@ gedit_spell_language_dialog_init (GeditSpellLanguageDialog *dlg)
 	GtkTreeViewColumn *column;
 
 	gtk_dialog_add_buttons (GTK_DIALOG (dlg),
-				GTK_STOCK_OK,
-				GTK_RESPONSE_OK,
 				GTK_STOCK_CANCEL,
 				GTK_RESPONSE_CANCEL,
+				GTK_STOCK_OK,
+				GTK_RESPONSE_OK,
 				GTK_STOCK_HELP,
 				GTK_RESPONSE_HELP,
 				NULL);
