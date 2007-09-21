@@ -56,7 +56,7 @@ def spaces_instead_of_tabs(view, text):
         if not view.get_insert_spaces_instead_of_tabs():
                 return text
 
-        return text.replace("\t", view.get_tabs_width() * ' ')
+        return text.replace("\t", view.get_tab_width() * ' ')
 
 def insert_with_indent(view, piter, text, indentfirst = True):
         text = spaces_instead_of_tabs(view, text)
