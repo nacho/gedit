@@ -99,7 +99,7 @@ parse_tag (Tag *tag, xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur)
 		cur = cur->next;
 	}
 
-	if ((tag->begin == NULL) && (tag->end = NULL))
+	if ((tag->begin == NULL) && (tag->end == NULL))
 		return FALSE;
 
 	return TRUE;
