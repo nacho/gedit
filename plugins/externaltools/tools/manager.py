@@ -253,7 +253,7 @@ class Manager(object):
         if node.is_global():
             if node.parent.revert_tool(node):
                 if self.current_node.shortcut and \
-                   self.accelerator.has_key(self.current_node.shortcut):
+                   self.current_node.shortcut in self.accelerator:
                     del self.accelerators[self.current_node.shortcut]                
                 self['revert-tool-button'].set_sensitive(False)
                 self.fill_fields()
@@ -306,7 +306,7 @@ class Manager(object):
             del self.accelerators[self.current_node.shortcut]
         name = gtk.accelerator_name(keyval, mod)
         if name != '':
-            if self.accelerators.has_key(name):
+            if name in self.accelerators:
                 dialog = gtk.MessageDialog(self.dialog,
                                            gtk.DIALOG_MODAL,
                                            gtk.MESSAGE_ERROR,

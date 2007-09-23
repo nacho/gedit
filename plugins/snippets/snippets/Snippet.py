@@ -125,7 +125,7 @@ class Snippet:
                                         '</b>)'
 
         def _add_placeholder(self, placeholder):
-                if self._placeholders.has_key(placeholder.tabstop):
+                if placeholder.tabstop in self._placeholders:
                         if placeholder.tabstop == -1:
                                 self._placeholders[-1].append(placeholder)
                 elif placeholder.tabstop == -1:
@@ -160,13 +160,13 @@ class Snippet:
                 if tabstop == 0:
                         # End placeholder
                         return PlaceholderEnd(self._view, begin, data['default'])
-                elif self._placeholders.has_key(tabstop):
+                elif tabstop in self._placeholders:
                         # Mirror placeholder
                         return PlaceholderMirror(self._view, tabstop, begin)
                 else:
                         # Default placeholder
                         return Placeholder(self._view, tabstop, data['default'], begin)
-     
+
         def _create_shell(self, data):
                 begin = self._begin_iter()
                 return PlaceholderShell(self._view, data['tabstop'], begin, data['contents'])
@@ -234,7 +234,7 @@ class Snippet:
                                 self._add_placeholder(val)
 
                 # Create end placeholder if there isn't one yet
-                if not self._placeholders.has_key(0):
+                if 0 not in self._placeholders:
                         self._placeholders[0] = PlaceholderEnd(view, view.get_buffer().get_iter_at_mark(marks[1]), None)
 
                 # Make sure run_last is ran for all placeholders and remove any
@@ -252,7 +252,7 @@ class Snippet:
                 # they can be used to mirror, but they shouldn't be real tabstops
                 # (if they have mirrors installed). This is problably a bit of 
                 # a dirty hack :)
-                if not self._placeholders.has_key(-1):
+                if -1 not in self._placeholders:
                         self._placeholders[-1] = []
 
                 for tabstop in self._placeholders.copy():

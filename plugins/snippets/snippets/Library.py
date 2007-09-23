@@ -76,21 +76,21 @@ class SnippetData:
 
                 self.properties = {}
                 props = SnippetData.PROPS.copy()
-                
+
                 # Store all properties present
                 for child in node:
-                        if props.has_key(child.tag):
+                        if child.tag in props:
                                 del props[child.tag]
-                                
+
                                 # Normalize accelerator
                                 if child.tag == 'accelerator' and child.text != None:
                                         keyval, mod = gtk.accelerator_parse(child.text)
-                                        
-                                        if not gtk.accelerator_valid(keyval, mod):
-                                                child.text = ''
-                                        else:
+
+                                        if gtk.accelerator_valid(keyval, mod):
                                                 child.text = gtk.accelerator_name(keyval, mod)
-                                
+                                        else:
+                                                child.text = ''
+
                                 if self.can_modify():
                                         self.properties[child.tag] = child
                                 else:

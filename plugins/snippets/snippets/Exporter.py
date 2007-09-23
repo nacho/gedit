@@ -11,18 +11,18 @@ class Exporter:
         def __init__(self, filename, snippets):
                 self.filename = filename
                 self.set_snippets(snippets)
-                
+
         def set_snippets(self, snippets):
                 self.snippets = {}
                 
                 for snippet in snippets:
                         lang = snippet.language()
-                        
-                        if self.snippets.has_key(lang):
+
+                        if lang in self.snippets:
                                 self.snippets[lang].append(snippet)
                         else:
                                 self.snippets[lang] = [snippet]
-        
+
         def export_xml(self, dirname, language, snippets):
                 # Create the root snippets node
                 root = et.Element('snippets')

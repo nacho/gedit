@@ -186,8 +186,8 @@ class Placeholder:
                                 continue
 
                         tabstop = int(m.group(2) or m.group(3))
-                        
-                        if placeholders.has_key(tabstop):
+
+                        if tabstop in placeholders:
                                 if not tabstop in mirrors:
                                         mirrors.append(tabstop)
 
@@ -207,11 +207,11 @@ class PlaceholderMirror(Placeholder):
         def update(self, mirror):
                 self.set_text(mirror.get_text())
                 return True
-        
+
         def run_last(self, placeholders):
                 Placeholder.run_last(self, placeholders)
-                
-                if placeholders.has_key(self.mirror_stop):
+
+                if self.mirror_stop in placeholders:
                         mirror = placeholders[self.mirror_stop]
                         
                         mirror.add_mirror(self)
@@ -477,20 +477,20 @@ class PlaceholderEval(PlaceholderExpand):
 
         def get_mirrors(self, placeholders):
                 mirrors = PlaceholderExpand.get_mirrors(self, placeholders)
-                
+
                 if not self.ok:
                         return None
-                
+
                 for ref in self.refs:
-                        if placeholders.has_key(ref):
-                                if not ref in mirrors:
+                        if ref in placeholders:
+                                if ref not in mirrors:
                                         mirrors.append(ref)
                         else:
                                 self.ok = False
                                 return None
-                
+
                 return mirrors
-        
+
         def timeout_cb(self, signum = 0, frame = 0):
                 raise TimeoutError, "Operation timed out (>2 seconds)"
         
@@ -588,23 +588,23 @@ class PlaceholderRegex(PlaceholderExpand):
                         'X': re.X}
                 
                 self.modifiers = 0
-                
+
                 for modifier in modifiers:
-                        if mods.has_key(modifier):
+                        if modifier in mods:
                                 self.modifiers |= mods[modifier]
-        
+
         def get_mirrors(self, placeholders):
                 mirrors = self.find_mirrors(self.pattern, placeholders) + self.find_mirrors(self.substitution, placeholders)
-                
+
                 if isinstance(self.inp, int):
-                        if not placeholders.has_key(self.inp):
+                        if self.inp not in placeholders:
                                 self.ok = False
                                 return None
-                        elif not self.inp in mirrors:
+                        elif self.inp not in mirrors:
                                 mirrors.append(self.inp)
 
                 return mirrors
-        
+
         def literal(self, s):
                 return re.escape(s)
 
