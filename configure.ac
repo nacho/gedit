@@ -141,6 +141,25 @@ dnl ================================================================
 
 AC_CHECK_LIB(attr, attr_copy_fd)
 
+AC_MSG_CHECKING([whether libattr support is requested])
+AC_ARG_ENABLE([attr],
+	AS_HELP_STRING([--enable-attr],[Enable libattr support]),
+	[enable_attr=$enableval have_attr=$enableval],
+	[enable_attr=autodetect have_attr=yes])
+AC_MSG_RESULT([$enable_attr])
+
+if test "x$have_attr" != "xno"; then
+	AC_CHECK_LIB([attr], [attr_copy_fd], [],
+                [
+                have_attr=no
+                if test "x$enable_attr" = "xyes"; then
+                        AC_MSG_ERROR([libattr not found])
+                elif test "x$enable_attr" = "xautodetect"; then
+                        AC_MSG_WARN([libattr not found, disabling libattr support])
+                fi
+                ])
+fi
+
 dnl ================================================================
 dnl Start of pkg-config checks
 dnl ================================================================
@@ -377,8 +396,9 @@ Configuration:
 
 	Source code location:	${srcdir}
 	Compiler:		${CC}
+	Libattr enabled:	$have_attr
 	Python Plugins Support: $enable_python
-	Spell Plugin enabled:	$enable_enchant	
+	Spell Plugin enabled:	$enable_enchant
 "
 
 dnl uncomment this in developement releases
