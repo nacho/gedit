@@ -101,9 +101,12 @@ response_handler (GeditOpenLocationDialog *dlg,
 
 				text = gtk_entry_get_text
 						(GTK_ENTRY (dlg->priv->uri_text_entry));
-				gedit_history_entry_prepend_text
-						 (GEDIT_HISTORY_ENTRY (dlg->priv->uri_entry),
-						  text);
+				if (*text != '\0')
+				{
+					gedit_history_entry_prepend_text
+							 (GEDIT_HISTORY_ENTRY (dlg->priv->uri_entry),
+							  text);
+				}
 
 				g_free (uri);
 			}

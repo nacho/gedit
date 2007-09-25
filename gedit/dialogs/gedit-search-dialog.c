@@ -258,16 +258,30 @@ response_handler (GeditSearchDialog *dialog,
 		case GEDIT_SEARCH_DIALOG_REPLACE_ALL_RESPONSE:
 			str = gtk_entry_get_text (GTK_ENTRY (dialog->priv->replace_text_entry));
 			if (*str != '\0')
+			{
+				gchar *text;
+
+				text = gedit_utils_unescape_search_text (str);
 				gedit_history_entry_prepend_text
 						(GEDIT_HISTORY_ENTRY (dialog->priv->replace_entry),
-						 str);
+						 text);
+
+				g_free (text);
+			}
 			/* fall through, so that we also save the find entry */
 		case GEDIT_SEARCH_DIALOG_FIND_RESPONSE:
 			str = gtk_entry_get_text (GTK_ENTRY (dialog->priv->search_text_entry));
 			if (*str != '\0')
+			{
+				gchar *text;
+
+				text = gedit_utils_unescape_search_text (str);
 				gedit_history_entry_prepend_text
 						(GEDIT_HISTORY_ENTRY (dialog->priv->search_entry),
-						 str);
+						 text);
+
+				g_free (text);
+			}
 	}
 }
 
@@ -353,6 +367,10 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 	dlg->priv->search_entry = gedit_history_entry_new ("gedit2_search_for_entry",
 							   TRUE);
 	gtk_widget_set_size_request (dlg->priv->search_entry, 300, -1);
+	gedit_history_entry_set_escape_func
+			(GEDIT_HISTORY_ENTRY (dlg->priv->search_entry),
+			 (GeditHistoryEntryEscapeFunc) gedit_utils_escape_search_text);
+
 	dlg->priv->search_text_entry = gedit_history_entry_get_entry
 			(GEDIT_HISTORY_ENTRY (dlg->priv->search_entry));
 	gtk_entry_set_activates_default (GTK_ENTRY (dlg->priv->search_text_entry),
@@ -364,6 +382,10 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 
 	dlg->priv->replace_entry = gedit_history_entry_new ("gedit2_replace_with_entry",
 							    TRUE);
+	gedit_history_entry_set_escape_func
+			(GEDIT_HISTORY_ENTRY (dlg->priv->replace_entry),
+			 (GeditHistoryEntryEscapeFunc) gedit_utils_escape_search_text);
+
 	dlg->priv->replace_text_entry = gedit_history_entry_get_entry
 			(GEDIT_HISTORY_ENTRY (dlg->priv->replace_entry));
 	gtk_entry_set_activates_default (GTK_ENTRY (dlg->priv->replace_text_entry),

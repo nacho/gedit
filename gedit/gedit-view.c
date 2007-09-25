@@ -603,22 +603,28 @@ gedit_view_set_font (GeditView   *view,
 }
 
 static void
-add_search_completion_entry (const gchar *text)
+add_search_completion_entry (const gchar *str)
 {
+	gchar        *text;
 	gboolean      valid;
 	GtkTreeModel *model;
 	GtkTreeIter   iter;
-	
-	if (text == NULL)
+
+	if (str == NULL)
 		return;
-				
+
+	text = gedit_utils_unescape_search_text (str);
+
 	if (g_utf8_strlen (text, -1) < MIN_SEARCH_COMPLETION_KEY_LEN)
+	{
+		g_free (text);
 		return;
-	
+	}
+
 	g_return_if_fail (GTK_IS_TREE_MODEL (search_completion_model));
-	
+
 	model = GTK_TREE_MODEL (search_completion_model);	
-		
+
 	/* Get the first iter in the list */
 	valid = gtk_tree_model_get_iter_first (model, &iter);
 
@@ -626,7 +632,7 @@ add_search_completion_entry (const gchar *text)
 	{
 		/* Walk through the list, reading each row */
      		gchar *str_data;
-      
+
 		gtk_tree_model_get (model, 
 				    &iter, 
                           	    0, 
@@ -635,6 +641,7 @@ add_search_completion_entry (const gchar *text)
 
 		if (strcmp (text, str_data) == 0)
 		{
+			g_free (text);
 			g_free (str_data);
 			gtk_list_store_move_after (GTK_LIST_STORE (model),
 						   &iter,
@@ -647,14 +654,16 @@ add_search_completion_entry (const gchar *text)
 
 		valid = gtk_tree_model_iter_next (model, &iter);
     	}
-        
+
 	gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
-	gtk_list_store_set (GTK_LIST_STORE (model), 
-			    &iter, 
-			    0, 
-			    text, 
+	gtk_list_store_set (GTK_LIST_STORE (model),
+			    &iter,
+			    0,
+			    text,
 			    -1);
-}		
+
+	g_free (text);
+}
 
 static void
 set_entry_background (GtkWidget               *entry,

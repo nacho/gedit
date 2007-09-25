@@ -84,14 +84,14 @@ last_search_data_set (LastSearchData    *data,
 	if (str != NULL && *str != '\0')
 	{
 		g_free (data->find_text);
-		data->find_text = g_strdup (str);
+		data->find_text = gedit_utils_unescape_search_text (str);
 	}
 
 	str = gedit_search_dialog_get_replace_text (dialog);
 	if (str != NULL && *str != '\0')
 	{
 		g_free (data->replace_text);
-		data->replace_text = g_strdup (str);
+		data->replace_text = gedit_utils_unescape_search_text (str);
 	}
 
 	data->match_case = gedit_search_dialog_get_match_case (dialog);

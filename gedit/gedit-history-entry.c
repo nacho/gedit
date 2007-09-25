@@ -120,7 +120,7 @@ gedit_history_entry_destroy (GtkObject *object)
 	gedit_history_entry_set_enable_completion (GEDIT_HISTORY_ENTRY (object),
 						   FALSE);
 
-	(* GTK_OBJECT_CLASS (gedit_history_entry_parent_class)->destroy) (object);
+	GTK_OBJECT_CLASS (gedit_history_entry_parent_class)->destroy (object);
 }
 
 static void
@@ -138,7 +138,7 @@ gedit_history_entry_finalize (GObject *object)
 		priv->gconf_client = NULL;
 	}
 
-	(* G_OBJECT_CLASS (gedit_history_entry_parent_class)->finalize) (object);
+	G_OBJECT_CLASS (gedit_history_entry_parent_class)->finalize (object);
 }
 
 static void 
@@ -171,7 +171,7 @@ gedit_history_entry_class_init (GeditHistoryEntryClass *klass)
 							    G_PARAM_READWRITE));
 
 	/* TODO: Add enable-completion property */
-	
+
 	g_type_class_add_private (object_class, sizeof(GeditHistoryEntryPrivate));
 }
 
@@ -513,10 +513,9 @@ gboolean
 gedit_history_entry_get_enable_completion (GeditHistoryEntry *entry)
 {
 	g_return_val_if_fail (GEDIT_IS_HISTORY_ENTRY (entry), FALSE);
-		
+	
 	return entry->priv->completion != NULL;
 }
-
 
 GtkWidget *
 gedit_history_entry_new (const gchar *history_id,
@@ -578,3 +577,49 @@ gedit_history_entry_get_entry (GeditHistoryEntry *entry)
 	return gtk_bin_get_child (GTK_BIN (entry));
 }
 
+static void
+escape_cell_data_func (GtkTreeViewColumn           *col,
+		       GtkCellRenderer             *renderer,
+		       GtkTreeModel                *model,
+		       GtkTreeIter                 *iter,
+		       GeditHistoryEntryEscapeFunc  escape_func)
+{
+	gchar *str;
+	gchar *escaped;
+
+	gtk_tree_model_get (model, iter, 0, &str, -1);
+	escaped = escape_func (str);
+	g_object_set (renderer, "text", escaped, NULL);
+
+	g_free (str);
+	g_free (escaped);
+}
+
+void
+gedit_history_entry_set_escape_func (GeditHistoryEntry           *entry,
+				     GeditHistoryEntryEscapeFunc  escape_func)
+{
+	GList *cells;
+
+	g_return_if_fail (GEDIT_IS_HISTORY_ENTRY (entry));
+
+	cells = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (entry));
+
+	/* We only have one cell renderer */
+	g_return_if_fail (cells->data != NULL && cells->next == NULL);
+
+	if (escape_func != NULL)
+		gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (entry),
+						    GTK_CELL_RENDERER (cells->data),
+						    (GtkCellLayoutDataFunc) escape_cell_data_func,
+						    escape_func,
+						    NULL);
+	else
+		gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (entry),
+						    GTK_CELL_RENDERER (cells->data),
+						    NULL,
+						    NULL,
+						    NULL);
+
+	g_list_free (cells);
+}
