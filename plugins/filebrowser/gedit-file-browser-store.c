@@ -26,6 +26,7 @@
 #include <glib/gi18n-lib.h>
 #include <libgnomeui/libgnomeui.h>
 #include <gedit/gedit-plugin.h>
+#include <gedit/gedit-utils.h>
 
 #include "gedit-file-browser-store.h"
 #include "gedit-file-browser-marshal.h"
@@ -77,6 +78,7 @@ struct _FileBrowserNodeDir
 {
 	FileBrowserNode node;
 	GSList *children;
+	GHashTable *hidden_file_hash;
 
 	GnomeVFSAsyncHandle *load_handle;
 	GnomeVFSMonitorHandle *monitor_handle;
@@ -1140,7 +1142,8 @@ row_deleted (GeditFileBrowserStore * model,
 }
 
 static void
-model_refilter_node (GeditFileBrowserStore * model, FileBrowserNode * node,
+model_refilter_node (GeditFileBrowserStore * model,
+		     FileBrowserNode * node,
 		     GtkTreePath * path)
 {
 	gboolean old_visible;
@@ -1161,9 +1164,8 @@ model_refilter_node (GeditFileBrowserStore * model, FileBrowserNode * node,
 
 	if (path == NULL) {
 		if (in_tree)
-			path =
-			    gedit_file_browser_store_get_path_real (model,
-								    node);
+			path = gedit_file_browser_store_get_path_real (model,
+								       node);
 		else
 			path = gtk_tree_path_new_first ();
 
@@ -1178,8 +1180,7 @@ model_refilter_node (GeditFileBrowserStore * model, FileBrowserNode * node,
 
 		for (item = dir->children; item; item = item->next) {
 			model_refilter_node (model,
-					     (FileBrowserNode *) (item->
-								  data),
+					     (FileBrowserNode *) (item->data),
 					     path);
 		}
 
@@ -1311,6 +1312,9 @@ file_browser_node_free (GeditFileBrowserStore * model,
 
 		if (dir->monitor_handle)
 			gnome_vfs_monitor_cancel (dir->monitor_handle);
+
+		if (dir->hidden_file_hash)
+			g_hash_table_destroy (dir->hidden_file_hash);
 	}
 
 	if (node->uri)
@@ -1737,8 +1741,11 @@ file_browser_node_set_from_info (GeditFileBrowserStore * model,
 				 FileBrowserNode * node,
 				 GnomeVFSFileInfo * info)
 {
+	FileBrowserNodeDir * dir;
 	gchar * filename;
 	gchar const * mime;
+
+	dir = FILE_BROWSER_NODE_DIR (node->parent);
 
 	g_free (node->mime_type);
 	node->mime_type = NULL;
@@ -1746,7 +1753,8 @@ file_browser_node_set_from_info (GeditFileBrowserStore * model,
 	if (info->name) {
 		if (*(info->name) == '.') {
 			node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
-		} else if (g_utf8_get_char (g_utf8_offset_to_pointer 
+		}
+		else if (g_utf8_get_char (g_utf8_offset_to_pointer 
 		           (&(info->name[strlen(info->name)]), -1)) == '~') {
 			node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
 			
@@ -1766,8 +1774,12 @@ file_browser_node_set_from_info (GeditFileBrowserStore * model,
 			else
 				node->mime_type = g_strdup(mime);
 		}
+		else if (dir != NULL && dir->hidden_file_hash != NULL &&
+			 g_hash_table_lookup (dir->hidden_file_hash, info->name) != NULL) {
+			node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
+		}
 	}
-	
+
 	if (node->mime_type == NULL)
 		node->mime_type = g_strdup (info->mime_type);
 
@@ -1807,7 +1819,8 @@ model_uri_exists (GeditFileBrowserStore * model, FileBrowserNode * parent,
 
 static FileBrowserNode *
 model_add_node_from_uri (GeditFileBrowserStore * model,
-			 FileBrowserNode * parent, GnomeVFSURI * uri,
+			 FileBrowserNode * parent,
+			 GnomeVFSURI * uri,
 			 GnomeVFSFileInfo * info)
 {
 	FileBrowserNode *node;
@@ -1825,8 +1838,7 @@ model_add_node_from_uri (GeditFileBrowserStore * model,
 		}
 
 		if (info->type == GNOME_VFS_FILE_TYPE_DIRECTORY) {
-			node =
-			    file_browser_node_dir_new (model, uri, parent);
+			node = file_browser_node_dir_new (model, uri, parent);
 		} else {
 			node = file_browser_node_new (uri, parent);
 		}
@@ -1841,6 +1853,102 @@ model_add_node_from_uri (GeditFileBrowserStore * model,
 	return node;
 }
 
+/* Read is sync, but we only do it for local files */
+static void
+parse_dot_hidden_file (FileBrowserNode *parent)
+{
+	FileBrowserNodeDir *dir;
+	GnomeVFSURI *vfs_uri;
+	gchar *uri;
+	GnomeVFSFileInfo *file_info;
+	GnomeVFSResult res;
+	gint i, file_size;
+	gchar *file_contents;
+
+	vfs_uri = gnome_vfs_uri_append_path (parent->uri, ".hidden");
+
+	uri = gnome_vfs_uri_to_string (vfs_uri, GNOME_VFS_URI_HIDE_NONE);
+	if (!gedit_utils_uri_has_file_scheme (uri) ||
+	    !gnome_vfs_uri_exists (vfs_uri)) {
+		gnome_vfs_uri_unref (vfs_uri);
+		g_free (uri);
+		return;
+	}
+
+	file_info = gnome_vfs_file_info_new ();
+	if (!file_info) {
+		gnome_vfs_uri_unref (vfs_uri);
+		g_free (uri);
+		return;
+	}
+
+	res = gnome_vfs_get_file_info_uri (vfs_uri,
+					   file_info,
+					   GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+	if (res != GNOME_VFS_OK) {
+		gnome_vfs_file_info_unref (file_info);
+		gnome_vfs_uri_unref (vfs_uri);
+		g_free (uri);
+		return;
+	}
+
+	if ((file_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE) &&
+	    (file_info->type != GNOME_VFS_FILE_TYPE_REGULAR)) {
+		gnome_vfs_file_info_unref (file_info);
+		gnome_vfs_uri_unref (vfs_uri);
+		g_free (uri);
+		return;
+	}
+
+	gnome_vfs_file_info_unref (file_info);
+
+	res = gnome_vfs_read_entire_file (uri, &file_size, &file_contents);
+
+	gnome_vfs_uri_unref (vfs_uri);
+	g_free (uri);
+
+	if (res != GNOME_VFS_OK) {
+		return;
+	}
+
+	dir = FILE_BROWSER_NODE_DIR (parent);
+
+	if (dir->hidden_file_hash) {
+		g_hash_table_destroy (dir->hidden_file_hash);
+	}
+
+	dir->hidden_file_hash = g_hash_table_new_full (g_str_hash,
+						       g_str_equal,
+						       g_free,
+						       NULL);
+
+	/* Now parse the data */
+	i = 0;
+	while (i < file_size) {
+		int start;
+
+		start = i;
+		while (i < file_size && file_contents[i] != '\n') {
+			i++;
+		}
+
+		if (i > start) {
+			gchar *tmp, *tmp2;
+
+			tmp = g_strndup (file_contents + start, i - start);
+			tmp2 = gnome_vfs_escape_string (tmp);
+			g_free (tmp);
+
+			g_hash_table_insert (dir->hidden_file_hash,
+					     tmp2, tmp2);
+		}
+
+		i++;
+	}
+
+	g_free (file_contents);
+}
+
 static void
 model_load_directory_cb (GnomeVFSAsyncHandle * handle,
 			 GnomeVFSResult result, GList * list,
@@ -1848,53 +1956,48 @@ model_load_directory_cb (GnomeVFSAsyncHandle * handle,
 {
 	FileBrowserNode *parent = (FileBrowserNode *) user_data;
 	GeditFileBrowserStore *model;
-	GnomeVFSFileInfo *info;
-	GnomeVFSURI *uri;
-	FileBrowserNodeDir *dir;
-	GList *item;
 
 	model = FILE_BROWSER_NODE_DIR (parent)->model;
 
 	if (result == GNOME_VFS_OK || result == GNOME_VFS_ERROR_EOF) {
-		// Do something with these nodes!
+		GList *item;
+
 		for (item = list; item; item = item->next) {
+			GnomeVFSFileInfo *info;
+			GnomeVFSURI *uri;
+
 			info = (GnomeVFSFileInfo *) (item->data);
 
-			// Skip all non regular, non directory files
+			/* Skip all non regular, non directory files */
 			if (info->type != GNOME_VFS_FILE_TYPE_REGULAR &&
 			    info->type != GNOME_VFS_FILE_TYPE_DIRECTORY &&
-			    info->type !=
-			    GNOME_VFS_FILE_TYPE_SYMBOLIC_LINK)
+			    info->type != GNOME_VFS_FILE_TYPE_SYMBOLIC_LINK)
 				continue;
 
-			// Skip '.' and '..' directories
+			/* Skip '.' and '..' directories */
 			if (info->type == GNOME_VFS_FILE_TYPE_DIRECTORY &&
 			    (strcmp (info->name, ".") == 0 ||
 			     strcmp (info->name, "..") == 0))
 				continue;
 
-			// Create uri
-			uri =
-			    gnome_vfs_uri_append_path (parent->uri,
-						       info->name);
+			uri = gnome_vfs_uri_append_path (parent->uri,
+							 info->name);
 			model_add_node_from_uri (model, parent, uri, info);
 			gnome_vfs_uri_unref (uri);
 		}
 
 		if (result == GNOME_VFS_ERROR_EOF) {
+			FileBrowserNodeDir *dir;
+
 			dir = FILE_BROWSER_NODE_DIR (parent);
 			dir->load_handle = NULL;
 
 			if (gnome_vfs_uri_is_local (parent->uri)
 			    && dir->monitor_handle == NULL) {
-				gnome_vfs_monitor_add (&
-						       (dir->
-							monitor_handle),
-						       gnome_vfs_uri_get_path
-						       (parent->uri),
+				gnome_vfs_monitor_add (&(dir->monitor_handle),
+						       gnome_vfs_uri_get_path (parent->uri),
 						       GNOME_VFS_MONITOR_DIRECTORY,
-						       (GnomeVFSMonitorCallback)
-on_directory_monitor_event, parent);
+						       (GnomeVFSMonitorCallback)on_directory_monitor_event, parent);
 			}
 
 			model_end_loading (model, parent);
@@ -1921,7 +2024,7 @@ model_load_directory (GeditFileBrowserStore * model,
 
 	dir = FILE_BROWSER_NODE_DIR (node);
 
-	// Cancel a previous load
+	/* Cancel a previous load */
 	if (dir->load_handle != NULL) {
 		gnome_vfs_async_cancel (dir->load_handle);
 		dir->load_handle = NULL;
@@ -1930,10 +2033,12 @@ model_load_directory (GeditFileBrowserStore * model,
 	node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_LOADED;
 	model_begin_loading (model, node);
 
-	// Start loading async
+	/* Read the '.hidden' file first (if any) */
+	parse_dot_hidden_file (node);
+
+	/* Start loading async */
 	gnome_vfs_async_load_directory_uri (&(dir->load_handle), node->uri,
-					    GNOME_VFS_FILE_INFO_GET_MIME_TYPE
-					    |
+					    GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
 					    GNOME_VFS_FILE_INFO_FOLLOW_LINKS,
 					    100,
 					    GNOME_VFS_PRIORITY_DEFAULT,
@@ -2166,17 +2271,13 @@ set_virtual_root_from_uri (GeditFileBrowserStore * model,
 
 		if (node == NULL) {
 			// Create the node
-			node =
-			    file_browser_node_dir_new (model, check,
-						       parent);
+			node = file_browser_node_dir_new (model, check, parent);
 
 			info = gnome_vfs_file_info_new ();
 			gnome_vfs_get_file_info_uri (check, info,
-						     GNOME_VFS_FILE_INFO_DEFAULT
-						     |
+						     GNOME_VFS_FILE_INFO_DEFAULT |
 						     GNOME_VFS_FILE_INFO_GET_MIME_TYPE);
-			file_browser_node_set_from_info (model, node,
-							 info);
+			file_browser_node_set_from_info (model, node, info);
 			gnome_vfs_file_info_unref (info);
 
 			model_add_node (model, node, parent);
@@ -2837,14 +2938,13 @@ gedit_file_browser_store_refresh (GeditFileBrowserStore * model)
 
 gboolean
 gedit_file_browser_store_rename (GeditFileBrowserStore * model,
-				 GtkTreeIter * iter, gchar const *new_name,
+				 GtkTreeIter * iter,
+				 const gchar * new_name,
 				 GError ** error)
 {
 	FileBrowserNode *node;
 	GnomeVFSURI *uri;
 	GnomeVFSURI *parent;
-	GnomeVFSFileInfo *info;
-	GtkTreePath *path;
 	GnomeVFSResult ret;
 
 	*error = NULL;
@@ -2867,22 +2967,22 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 	ret = gnome_vfs_move_uri (node->uri, uri, FALSE);
 
 	if (ret == GNOME_VFS_OK) {
+		GnomeVFSFileInfo *info;
+		GtkTreePath *path;
+
 		parent = node->uri;
 		node->uri = uri;
 		info = gnome_vfs_file_info_new ();
 		gnome_vfs_get_file_info_uri (uri, info,
 					     GNOME_VFS_FILE_INFO_DEFAULT |
 					     GNOME_VFS_FILE_INFO_GET_MIME_TYPE);
-
 		file_browser_node_set_from_info (model, node, info);
 		file_browser_node_set_name (node);
 		gnome_vfs_file_info_unref (info);
 		gnome_vfs_uri_unref (parent);
 
-		path =
-		    gedit_file_browser_store_get_path_real (model, node);
-		gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path,
-					    iter);
+		path = gedit_file_browser_store_get_path_real (model, node);
+		gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path, iter);
 		gtk_tree_path_free (path);
 
 		/* Reorder this item */
