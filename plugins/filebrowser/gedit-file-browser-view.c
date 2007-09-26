@@ -357,6 +357,21 @@ activate_selected_items (GeditFileBrowserView *view)
 		activate_selected_bookmark (view);
 }
 
+static void
+toggle_hidden_filter (GeditFileBrowserView *view)
+{
+	GeditFileBrowserStoreFilterMode mode;
+
+	if (GEDIT_IS_FILE_BROWSER_STORE (view->priv->model))
+	{
+		mode = gedit_file_browser_store_get_filter_mode
+			(GEDIT_FILE_BROWSER_STORE (view->priv->model));
+		mode ^=	GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN;
+		gedit_file_browser_store_set_filter_mode
+			(GEDIT_FILE_BROWSER_STORE (view->priv->model), mode);
+	}
+}
+
 static gboolean
 button_event_modifies_selection (GdkEventButton *event)
 {
@@ -565,10 +580,13 @@ key_press_event (GtkWidget   *widget,
 		 GdkEventKey *event)
 {
 	GeditFileBrowserView *view;
+	guint modifiers;
 	gboolean handled;
 
 	view = GEDIT_FILE_BROWSER_VIEW (widget);
 	handled = FALSE;
+
+	modifiers = gtk_accelerator_get_default_mod_mask ();
 
 	switch (event->keyval) {
 	case GDK_space:
@@ -580,15 +598,23 @@ key_press_event (GtkWidget   *widget,
 			handled = FALSE;
 			break;
 		}
-		
+
 		activate_selected_items (view);
 		handled = TRUE;
 		break;
+
 	case GDK_Return:
 	case GDK_KP_Enter:
 		activate_selected_items (view);
 		handled = TRUE;
 		break;
+
+	case GDK_h:
+		if ((event->state & modifiers) == GDK_CONTROL_MASK) {
+			toggle_hidden_filter (view);
+			handled = TRUE;
+			break;
+		}
 
 	default:
 		handled = FALSE;
