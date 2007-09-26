@@ -460,7 +460,7 @@ class Document:
                                                 placeholder[0].leave()
                                                 
                                         remove.append(placeholder)
-                
+
                 for placeholder in remove:
                         if placeholder == self.active_placeholder:
                                 self.active_placeholder = None
@@ -620,7 +620,8 @@ class Document:
                 current = self.current_placeholder()
                 
                 if current:
-                        self.update_placeholders.append(current)
+                        if not current in self.update_placeholders:
+                                self.update_placeholders.append(current)
                 
                         if self.timeout_update_id != 0:
                                 gobject.source_remove(self.timeout_update_id)
@@ -692,9 +693,6 @@ class Document:
                 # the absolute path
                 if len(path1) - 1 > 3:
                         return second
-                
-                print path1
-                print path2
                 
                 if mime.startswith('x-directory'):
                         # directory, special case
