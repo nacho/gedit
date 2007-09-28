@@ -2149,10 +2149,15 @@ print_preview_destroyed (GtkWidget *preview,
 			 GeditTab  *tab)
 {
 	tab->priv->print_preview = NULL;
-	
+
 	if (tab->priv->state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW)
 	{
+		GeditView *view;
+
 		gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
+
+		view = gedit_tab_get_view (tab);
+		gtk_widget_grab_focus (GTK_WIDGET (view));
 	}
 	else
 	{
@@ -2248,10 +2253,12 @@ static void
 print_finished_cb (GtkSourcePrintJob *pjob, GeditTab *tab)
 {
 	GnomePrintJob *gjob;
+	GeditView *view;
 
 	g_return_if_fail (GEDIT_IS_PROGRESS_MESSAGE_AREA (tab->priv->message_area));
+
 	set_message_area (tab, NULL); /* destroy the message area */
-	
+
 	gjob = gtk_source_print_job_get_print_job (pjob);
 
 	gnome_print_job_print (gjob);
@@ -2268,8 +2275,11 @@ print_finished_cb (GtkSourcePrintJob *pjob, GeditTab *tab)
 		gtk_widget_destroy (tab->priv->print_preview);
 		g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_PRINTING);
 	}
-	
+
 	gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
+
+	view = gedit_tab_get_view (tab);
+	gtk_widget_grab_focus (GTK_WIDGET (view));
 }
 
 static void
@@ -2277,6 +2287,8 @@ print_cancelled (GeditMessageArea *area,
                  gint              response_id,
                  GeditTab         *tab)
 {
+	GeditView *view;
+
 	g_return_if_fail (GEDIT_IS_PROGRESS_MESSAGE_AREA (tab->priv->message_area));
 	
 	gtk_source_print_job_cancel (GTK_SOURCE_PRINT_JOB (tab->priv->print_job));
@@ -2291,8 +2303,11 @@ print_cancelled (GeditMessageArea *area,
 		gtk_widget_destroy (tab->priv->print_preview);
 		g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_PRINTING);
 	}
-	
+
 	gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
+
+	view = gedit_tab_get_view (tab);
+	gtk_widget_grab_focus (GTK_WIDGET (view));
 }
 
 static void
