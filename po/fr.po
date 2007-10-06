@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.19\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 00:00+0200\n"
-"PO-Revision-Date: 2007-08-20 00:00+0200\n"
+"POT-Creation-Date: 2007-10-06 23:17+0200\n"
+"PO-Revision-Date: 2007-10-06 23:19+0200\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -792,7 +792,7 @@ msgstr "Codages des caractères"
 msgid "E_ncodings shown in menu:"
 msgstr "_Codages affichés dans le menu :"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.c:136
+#: ../gedit/dialogs/gedit-open-location-dialog.c:139
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
 msgid "Open Location"
 msgstr "Ouvrir un emplacement"
@@ -893,33 +893,33 @@ msgstr "Cliquez sur ce bouton pour choisir la police à utiliser par l'éditeur"
 msgid "_Use the system fixed width font (%s)"
 msgstr "_Utiliser la police système non proportionnelle (%s)"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:767
+#: ../gedit/dialogs/gedit-preferences-dialog.c:783
 msgid "The selected color scheme cannot be installed."
 msgstr "Le jeu de couleurs sélectionné ne peut pas être installé."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:792
+#: ../gedit/dialogs/gedit-preferences-dialog.c:808
 msgid "Add Scheme"
 msgstr "Ajout d'un jeu"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:799
+#: ../gedit/dialogs/gedit-preferences-dialog.c:815
 msgid "A_dd Scheme"
 msgstr "A_jouter un jeu"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:807
+#: ../gedit/dialogs/gedit-preferences-dialog.c:823
 msgid "Color Scheme Files"
 msgstr "Fichiers de jeux de couleurs"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:814
+#: ../gedit/dialogs/gedit-preferences-dialog.c:830
 #: ../gedit/gedit-file-chooser-dialog.c:52
 msgid "All Files"
 msgstr "Tous les fichiers"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:859
+#: ../gedit/dialogs/gedit-preferences-dialog.c:875
 #, c-format
 msgid "Could not remove color scheme \"%s\"."
 msgstr "Impossible de supprimer le jeu de couleurs « %s »."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1058
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1077
 msgid "gedit Preferences"
 msgstr "Préférences de gedit"
 
@@ -1004,43 +1004,47 @@ msgid "View"
 msgstr "Affichage"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
+msgid "_Add..."
+msgstr "A_jouter..."
+
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
 msgid "_Autosave files every"
 msgstr "Enregistrer _automatiquement toutes les"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
 msgid "_Display line numbers"
 msgstr "Afficher les _numéros de ligne"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
 msgid "_Enable automatic indentation"
 msgstr "Activer l'_indentation automatique"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
 msgid "_Right margin at column:"
 msgstr "_Marge de droite à la colonne :"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
 msgid "_Tab width:"
 msgstr "Largeur des _tabulations :"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:32
 msgid "_minutes"
 msgstr "_minutes"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:287
+#: ../gedit/dialogs/gedit-search-dialog.c:301
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1348
 msgid "Replace"
 msgstr "Remplacer"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1346
+#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1346
 msgid "Find"
 msgstr "Rechercher"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:382
+#: ../gedit/dialogs/gedit-search-dialog.c:404
 msgid "Replace _All"
 msgstr "_Tout remplacer"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:383
+#: ../gedit/dialogs/gedit-search-dialog.c:405
 #: ../gedit/gedit-commands-file.c:677
 msgid "_Replace"
 msgstr "Re_mplacer"
@@ -1294,7 +1298,7 @@ msgstr "Une occurrence trouvée et remplacée"
 msgid "Phrase not found"
 msgstr "Phrase non trouvée"
 
-#: ../gedit/gedit-document.c:816 ../gedit/gedit-document.c:910
+#: ../gedit/gedit-document.c:814 ../gedit/gedit-document.c:908
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Document %d non enregistré"
@@ -2001,13 +2005,6 @@ msgstr "Nombre de pages verticalement"
 msgid "No visible output was created."
 msgstr "Aucune sortie visible n'a été créée."
 
-#: ../gedit/gedit-source-style-manager.c:214
-#, c-format
-msgid "Directory '%s' could not be created: g_mkdir_with_parents() failed: %s"
-msgstr ""
-"Impossible de créer le répertoire « %s » : g_mkdir_with_parents() a échoué (%"
-"s)"
-
 #: ../gedit/gedit-statusbar.c:248
 msgid "  OVR"
 msgstr "  ECR"
@@ -2029,6 +2026,13 @@ msgid "There is a tab with errors"
 msgid_plural "There are %d tabs with errors"
 msgstr[0] "Il y a un onglet avec des erreurs"
 msgstr[1] "Il y a %d onglets avec des erreurs"
+
+#: ../gedit/gedit-style-scheme-manager.c:214
+#, c-format
+msgid "Directory '%s' could not be created: g_mkdir_with_parents() failed: %s"
+msgstr ""
+"Impossible de créer le répertoire « %s » : g_mkdir_with_parents() a échoué (%"
+"s)"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
@@ -2102,7 +2106,7 @@ msgstr "Type MIME :"
 msgid "Encoding:"
 msgstr "Codage :"
 
-#: ../gedit/gedit-tab.c:2215
+#: ../gedit/gedit-tab.c:2220
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Rendu de la page %d sur %d..."
@@ -2393,41 +2397,41 @@ msgstr "Panneau _inférieur"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Affiche ou cache le panneau inférieur dans la fenêtre actuelle"
 
-#: ../gedit/gedit-utils.c:996
+#: ../gedit/gedit-utils.c:1005
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Impossible de trouver le fichier %s."
 
-#: ../gedit/gedit-utils.c:1000 ../gedit/gedit-utils.c:1036
+#: ../gedit/gedit-utils.c:1009 ../gedit/gedit-utils.c:1045
 msgid "Please check your installation."
 msgstr "Vérifiez votre installation."
 
-#: ../gedit/gedit-utils.c:1032
+#: ../gedit/gedit-utils.c:1041
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr ""
 "Impossible de trouver les composants graphiques requis dans le fichier %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1128
+#: ../gedit/gedit-view.c:1137
 msgid "_Wrap Around"
 msgstr "_Recherche circulaire"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1138
+#: ../gedit/gedit-view.c:1147
 msgid "Match _Entire Word Only"
 msgstr "_Mots entiers seulement"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1148
+#: ../gedit/gedit-view.c:1157
 msgid "_Match Case"
 msgstr "Res_pecter la casse"
 
-#: ../gedit/gedit-view.c:1236
+#: ../gedit/gedit-view.c:1245
 msgid "String you want to search for"
 msgstr "Chaîne que vous recherchez"
 
-#: ../gedit/gedit-view.c:1244
+#: ../gedit/gedit-view.c:1253
 msgid "Line you want to move the cursor to"
 msgstr "La ligne vers laquelle vous souhaitez déplacer le curseur"
 
@@ -2802,11 +2806,11 @@ msgid "File Browser Pane"
 msgstr "Panneau du navigateur de fichiers"
 
 #. Translators: this is used in "file on host", e.g. "/foo/bar on ftp.baz.org"
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:190
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:195
 msgid "on"
 msgstr "sur"
 
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:332
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:330
 msgid "File System"
 msgstr "Système de fichiers"
 
@@ -2961,7 +2965,7 @@ msgstr "Une erreur s'est produite lors du chargement d'un répertoire"
 msgid "An error occurred"
 msgstr "Une erreur s'est produite"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1121
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1123
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
@@ -2969,44 +2973,44 @@ msgstr ""
 "Impossible de mettre le fichier à la corbeille,\n"
 "voulez-vous le supprimer définitivement ?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1125
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1127
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "Le fichier « %s » ne peut pas être mis à la corbeille."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1128
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1130
 msgid "The selected files cannot be moved to the trash."
 msgstr "Les fichiers sélectionnés ne peuvent pas être mis à la corbeille."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1161
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1163
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Voulez-vous vraiment supprimer définitivement « %s » ?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1164
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1166
 msgid "Are you sure you want to permanently delete the selected files?"
 msgstr ""
 "Voulez-vous vraiment supprimer définitivement les fichiers sélectionnés ?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1167
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1169
 msgid "If you delete an item, it is permanently lost."
 msgstr "Si vous supprimez un élément, il sera définitivement perdu."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1598
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1591
 msgid "(Empty)"
 msgstr "(vide)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2641
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2731
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1838
 msgid "Invalid uri"
 msgstr "URI non valide"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3074
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3163
 msgid "file"
 msgstr "fichier"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3095
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3142
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3184
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3231
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -3014,7 +3018,7 @@ msgstr ""
 "Le nouveau fichier est actuellement filtré. Ajustez les paramètres de votre "
 "filtre pour rendre le fichier visible"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3123
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3212
 msgid "directory"
 msgstr "répertoire"
 
