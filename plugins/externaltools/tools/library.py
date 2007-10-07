@@ -212,7 +212,7 @@ class Tool(object):
                 (key, value) = [i.strip() for i in line[2:].split('=', 1)]
                 m = self.RE_KEY.match(key)
                 if m.group(3) is None:
-                    if m.group(0) in self._properties:
+                    if m.group(0) not in self._properties:
                         self._properties[m.group(1)] = value
                 elif lang is not None and lang.startswith(m.group(3)):
                     self._properties[m.group(1)] = value
