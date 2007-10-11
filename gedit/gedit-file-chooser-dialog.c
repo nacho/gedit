@@ -168,7 +168,7 @@ all_text_files_filter (const GtkFileFilterInfo *filter_info,
 		lm = gedit_get_language_manager ();
 		languages = gtk_source_language_manager_get_language_ids (lm);
 
-		while (*languages != NULL)
+		while ((languages != NULL) && (*languages != NULL))
 		{
 			gchar **mime_types;
 			gint i;

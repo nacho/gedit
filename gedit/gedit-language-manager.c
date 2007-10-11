@@ -158,6 +158,8 @@ gedit_language_manager_get_language_from_mime_type (GtkSourceLanguageManager *lm
 			     "Cache miss for %s", mime_type);
 
 	languages = gtk_source_language_manager_get_language_ids (lm);
+	if (languages == NULL)
+		return NULL;
 
 	while (*languages != NULL)
 	{
