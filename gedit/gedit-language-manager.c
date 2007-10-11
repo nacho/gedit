@@ -49,8 +49,6 @@ gedit_get_language_manager (void)
 	return language_manager;
 }
 
-
-
 static gint
 language_compare (gconstpointer a, gconstpointer b)
 {
@@ -68,8 +66,11 @@ gedit_language_manager_list_languages_sorted (GtkSourceLanguageManager *lm,
 {
 	GSList *languages = NULL;
 	const gchar * const *ids;
-	
+
 	ids = gtk_source_language_manager_get_language_ids (lm);
+	if (ids == NULL)
+		return NULL;
+
 	while (*ids != NULL)
 	{
 		GtkSourceLanguage *lang;
@@ -79,7 +80,9 @@ gedit_language_manager_list_languages_sorted (GtkSourceLanguageManager *lm,
 		++ids;
 
 		if (include_hidden || !gtk_source_language_get_hidden (lang))
+		{
 			languages = g_slist_prepend (languages, lang);
+		}
 	}
 
 	return g_slist_sort (languages, (GCompareFunc)language_compare);
@@ -108,7 +111,7 @@ get_languages_cache (GtkSourceLanguageManager *lm)
 					 res,
 					 (GDestroyNotify)g_hash_table_unref);
 	}
-	
+
 	return res;
 }
 
