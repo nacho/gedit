@@ -417,7 +417,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 			gedit_debug_message (DEBUG_SAVER, "could not set perms");
 
 			/* Check that we really needed to change something */
-			if (fstat (lsaver->priv->fd, &tmp_statbuf) != 0 ||
+			if (fstat (tmpfd, &tmp_statbuf) != 0 ||
 			    statbuf.st_uid != tmp_statbuf.st_uid ||
 			    statbuf.st_gid != tmp_statbuf.st_gid ||
 			    statbuf.st_mode != tmp_statbuf.st_mode)
