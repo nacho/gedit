@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-26 00:37+0900\n"
-"PO-Revision-Date: 2007-09-26 00:37+0900\n"
+"POT-Creation-Date: 2007-10-22 23:23+0900\n"
+"PO-Revision-Date: 2007-10-22 23:23+0900\n"
 "Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -714,7 +714,7 @@ msgstr "文字コード"
 msgid "E_ncodings shown in menu:"
 msgstr "メニューに表示するエンコーディング(_N):"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.c:136
+#: ../gedit/dialogs/gedit-open-location-dialog.c:139
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
 msgid "Open Location"
 msgstr "場所を開く"
@@ -927,43 +927,47 @@ msgid "View"
 msgstr "表示"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
+msgid "_Add..."
+msgstr "追加(_A)..."
+
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
 msgid "_Autosave files every"
 msgstr "ファイルを自動的に保存する間隔(_A): "
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
 msgid "_Display line numbers"
 msgstr "行番号を表示する(_D)"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
 msgid "_Enable automatic indentation"
 msgstr "自動インデントを有効にする(_E)"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
 msgid "_Right margin at column:"
 msgstr "列の右マージン(_R):"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
 msgid "_Tab width:"
 msgstr "タブの幅(_T):"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:32
 msgid "_minutes"
 msgstr "分ごと(_M)"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:287
+#: ../gedit/dialogs/gedit-search-dialog.c:301
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1348
 msgid "Replace"
 msgstr "置換"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1346
+#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1346
 msgid "Find"
 msgstr "検索"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:382
+#: ../gedit/dialogs/gedit-search-dialog.c:404
 msgid "Replace _All"
 msgstr "全て置換(_A)"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:383
+#: ../gedit/dialogs/gedit-search-dialog.c:405
 #: ../gedit/gedit-commands-file.c:677
 msgid "_Replace"
 msgstr "置換(_R)"
@@ -1989,7 +1993,7 @@ msgstr "MIME 型:"
 msgid "Encoding:"
 msgstr "エンコーディング:"
 
-#: ../gedit/gedit-tab.c:2215
+#: ../gedit/gedit-tab.c:2220
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "ページ (%d / %d) の描画中..."
@@ -2295,25 +2299,25 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "ファイル %s の中に指定したウィジットが見つかりませんでした。"
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1128
+#: ../gedit/gedit-view.c:1137
 msgid "_Wrap Around"
 msgstr "折り返しも検索する(_W)"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1138
+#: ../gedit/gedit-view.c:1147
 msgid "Match _Entire Word Only"
 msgstr "単語全体にマッチさせる(_E)"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1148
+#: ../gedit/gedit-view.c:1157
 msgid "_Match Case"
 msgstr "大/小文字を区別する(_M)"
 
-#: ../gedit/gedit-view.c:1236
+#: ../gedit/gedit-view.c:1245
 msgid "String you want to search for"
 msgstr "検索する文字列"
 
-#: ../gedit/gedit-view.c:1244
+#: ../gedit/gedit-view.c:1253
 msgid "Line you want to move the cursor to"
 msgstr "カーソルを移動する行を入力して下さい"
 
@@ -2486,11 +2490,11 @@ msgstr "このコマンドを実行するために必要な語句を入力して
 msgid "Running tool:"
 msgstr "実行したツール:"
 
-#: ../plugins/externaltools/tools/functions.py:188
+#: ../plugins/externaltools/tools/functions.py:189
 msgid "Done."
 msgstr "完了しました。"
 
-#: ../plugins/externaltools/tools/functions.py:190
+#: ../plugins/externaltools/tools/functions.py:191
 msgid "Exited"
 msgstr "終了コード:"
 
@@ -2866,21 +2870,21 @@ msgstr "選択したファイルを完全に削除してもよろしいですか
 msgid "If you delete an item, it is permanently lost."
 msgstr "削除すると、そのアイテムは完全に無くなります。"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1598
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1591
 msgid "(Empty)"
 msgstr "(空)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2641
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2731
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1838
 msgid "Invalid uri"
 msgstr "URI が間違っています"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3074
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3163
 msgid "file"
 msgstr "ファイル"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3095
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3142
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3184
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3231
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2888,7 +2892,7 @@ msgstr ""
 "新しいファイルはフィルタで表示されていません。そのファイルを表示するにはフィ"
 "ルタの設定を変更して下さい。"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3123
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3212
 msgid "directory"
 msgstr "フォルダ"
 
