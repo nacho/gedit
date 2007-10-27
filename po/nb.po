@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.15.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-05 20:56+0200\n"
-"PO-Revision-Date: 2007-09-05 21:03+0200\n"
+"POT-Creation-Date: 2007-10-27 21:02+0200\n"
+"PO-Revision-Date: 2007-10-27 21:02+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -287,7 +287,13 @@ msgid ""
 "pressed, \"BEFORE\" to move to the start/end of the text before moving to "
 "the start/end of the line and \"ALWAYS\" to always move to the start/end of "
 "the text instead of the start/end of the line."
-msgstr "Spesifiserer hvordan markøren beveger seg når HOME og END tastene brukes. Bruk «DISABLED» for alltid å gå til start/slutt av linjen, «AFTER» for å gå til start/slutt av linjen første gang tasten brukes og start/slutt av teksten andre gang tasten trykkes, «BEFORE» for å gå til start/slutt av teksten før start/slutt av linjen og «ALWAYS» for alltid å gå til start/slutt av teksten i stedet for start/alutt av linjen."
+msgstr ""
+"Spesifiserer hvordan markøren beveger seg når HOME og END tastene brukes. "
+"Bruk «DISABLED» for alltid å gå til start/slutt av linjen, «AFTER» for å gå "
+"til start/slutt av linjen første gang tasten brukes og start/slutt av "
+"teksten andre gang tasten trykkes, «BEFORE» for å gå til start/slutt av "
+"teksten før start/slutt av linjen og «ALWAYS» for alltid å gå til start/"
+"slutt av teksten i stedet for start/alutt av linjen."
 
 #: ../data/gedit.schemas.in.h:67
 msgid ""
@@ -714,7 +720,7 @@ msgstr "Tegnkodinger"
 msgid "E_ncodings shown in menu:"
 msgstr "Kodi_nger som vises i menyen:"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.c:136
+#: ../gedit/dialogs/gedit-open-location-dialog.c:139
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
 msgid "Open Location"
 msgstr "Åpne lokasjon"
@@ -928,43 +934,47 @@ msgid "View"
 msgstr "Vis"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
+msgid "_Add..."
+msgstr "_Legg til..."
+
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
 msgid "_Autosave files every"
 msgstr "_Autolagre filer hver(t)"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
 msgid "_Display line numbers"
 msgstr "Vis _linjenummer"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
 msgid "_Enable automatic indentation"
 msgstr "Aktiv_er automatisk innrykk"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
 msgid "_Right margin at column:"
 msgstr "Høy_re marg ved kolonne:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
 msgid "_Tab width:"
 msgstr "_Tabulatorbredde:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:32
 msgid "_minutes"
 msgstr "_minutter"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:287
+#: ../gedit/dialogs/gedit-search-dialog.c:301
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1348
 msgid "Replace"
 msgstr "Erstatt"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1346
+#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1346
 msgid "Find"
 msgstr "Finn"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:382
+#: ../gedit/dialogs/gedit-search-dialog.c:404
 msgid "Replace _All"
 msgstr "Erstatt _alle"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:383
+#: ../gedit/dialogs/gedit-search-dialog.c:405
 #: ../gedit/gedit-commands-file.c:677
 msgid "_Replace"
 msgstr "E_rstatt"
@@ -1985,7 +1995,7 @@ msgstr "MIME-type:"
 msgid "Encoding:"
 msgstr "Koding:"
 
-#: ../gedit/gedit-tab.c:2215
+#: ../gedit/gedit-tab.c:2220
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Rendrer side %d av %d..."
@@ -2291,25 +2301,25 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "Kunne ikke finne nødvendige komponenter i fil %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1128
+#: ../gedit/gedit-view.c:1137
 msgid "_Wrap Around"
 msgstr "_Bryting"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1138
+#: ../gedit/gedit-view.c:1147
 msgid "Match _Entire Word Only"
 msgstr "Kun treff på _hele ord"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1148
+#: ../gedit/gedit-view.c:1157
 msgid "_Match Case"
 msgstr "_Skill mellom små/store bokstaver"
 
-#: ../gedit/gedit-view.c:1236
+#: ../gedit/gedit-view.c:1245
 msgid "String you want to search for"
 msgstr "Streng du vil søke etter"
 
-#: ../gedit/gedit-view.c:1244
+#: ../gedit/gedit-view.c:1253
 msgid "Line you want to move the cursor to"
 msgstr "Linje du vil flytte markøren til"
 
@@ -2482,11 +2492,11 @@ msgstr "Du må være inne i et ord for å kjøre denne kommandoen"
 msgid "Running tool:"
 msgstr "Kjører verktøy:"
 
-#: ../plugins/externaltools/tools/functions.py:188
+#: ../plugins/externaltools/tools/functions.py:189
 msgid "Done."
 msgstr "Ferdig."
 
-#: ../plugins/externaltools/tools/functions.py:190
+#: ../plugins/externaltools/tools/functions.py:191
 msgid "Exited"
 msgstr "Avsluttet"
 
@@ -2716,7 +2726,11 @@ msgid ""
 "document given that the file browser hasn't been used yet. (Thus this "
 "generally applies to opening a document from the command line or opening it "
 "with nautilus etc)"
-msgstr "Hvis denne er satt til TRUE vil fillesertillegget vise katalogen til det første åpnede dokumentet gitt at filleseren ikke har blitt brukt ennå. (Dette er mest relevant når man åpner et dokument fra kommandolinjen eller med nautilus)"
+msgstr ""
+"Hvis denne er satt til TRUE vil fillesertillegget vise katalogen til det "
+"første åpnede dokumentet gitt at filleseren ikke har blitt brukt ennå. "
+"(Dette er mest relevant når man åpner et dokument fra kommandolinjen eller "
+"med nautilus)"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:7
 msgid "Open With Tree View"
@@ -2741,20 +2755,26 @@ msgstr "Bestemmer om gjenoppretting fra eksterne lokasjoner skal aktiveres."
 msgid ""
 "The file browser root directory to use when loading the file browser plugin "
 "and onload/tree_view is TRUE."
-msgstr "Rotkatalog som brukes når fillesertillegget lastes og onload/tree_view er TRUE."
+msgstr ""
+"Rotkatalog som brukes når fillesertillegget lastes og onload/tree_view er "
+"TRUE."
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:12
 msgid ""
 "The file browser virtual root directory to use when loading the file browser "
 "plugin when onload/tree_view is TRUE. The virtual root must always be below "
 "the actual root."
-msgstr "Virtuell rotkatalog som brukes når fillesertillegget og onload/tree_view er TRUE. Virtuell rot må alltid være under faktisk rot."
+msgstr ""
+"Virtuell rotkatalog som brukes når fillesertillegget og onload/tree_view er "
+"TRUE. Virtuell rot må alltid være under faktisk rot."
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:13
 msgid ""
 "The filter pattern to filter the file browser with. This filter works on top "
 "of the filter_mode."
-msgstr "Filtermønster for å filtrere innhold i filleser. Dette filteret kommer i tillegg til filter_mode."
+msgstr ""
+"Filtermønster for å filtrere innhold i filleser. Dette filteret kommer i "
+"tillegg til filter_mode."
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:14
 msgid ""
@@ -2762,7 +2782,11 @@ msgid ""
 "values are: none (filter nothing), hidden (filter hidden files), binary "
 "(filter binary files) and hidden_and_binary (filter both hidden and binary "
 "files)."
-msgstr "Denne verdien bestemmer hvilke filer som blir filtrert fra filleseren. Gyldige verdier er non (ikke filtrer), hidden (filtrer skjulte filer), binary (filtrer binærfiler) og hidden_and_binary (filtrer både skjulte filer og binærfiler)."
+msgstr ""
+"Denne verdien bestemmer hvilke filer som blir filtrert fra filleseren. "
+"Gyldige verdier er non (ikke filtrer), hidden (filtrer skjulte filer), "
+"binary (filtrer binærfiler) og hidden_and_binary (filtrer både skjulte filer "
+"og binærfiler)."
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
 msgid "_Set root to active document"
@@ -2846,21 +2870,21 @@ msgstr "Er du sikker på at du vil slette valgte filer permanent?"
 msgid "If you delete an item, it is permanently lost."
 msgstr "Hvis du sletter en oppføring vil denne gå tapt."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1598
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1591
 msgid "(Empty)"
 msgstr "(Tom)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2641
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2731
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1838
 msgid "Invalid uri"
 msgstr "Ugyldig URI"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3074
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3163
 msgid "file"
 msgstr "fil"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3095
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3142
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3184
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3231
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2868,7 +2892,7 @@ msgstr ""
 "Den nye filen er filtrert ut. Du må justere filterinnstillingene for å gjøre "
 "den synlig"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3123
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3212
 msgid "directory"
 msgstr "katalog"
 
