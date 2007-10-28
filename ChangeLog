@@ -1,5 +1,10 @@
 2007-10-28  Steve Frécinaux  <code@istique.net>
 
+	* gedit/gedit-utils.c: Use gdk_error_trap_*() to protect direct
+	XGetWindowProperty() calls.
+
+2007-10-28  Steve Frécinaux  <code@istique.net>
+
 	Fix bug #484613 by adding viewport support to gedit.
 
 	* gedit/gedit-utils.[ch]: New utility function

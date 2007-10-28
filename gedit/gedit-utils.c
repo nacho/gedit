@@ -796,6 +796,7 @@ gedit_utils_get_current_workspace (GdkScreen *screen)
 	gulong nitems;
 	gulong bytes_after;
 	guint *current_desktop;
+	gint err, result;
 	guint ret = 0;
 
 	g_return_val_if_fail (GDK_IS_SCREEN (screen), 0);
@@ -803,18 +804,20 @@ gedit_utils_get_current_workspace (GdkScreen *screen)
 	root_win = gdk_screen_get_root_window (screen);
 	display = gdk_screen_get_display (screen);
 
-	XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (root_win),
-			    gdk_x11_get_xatom_by_name_for_display (display, "_NET_CURRENT_DESKTOP"),
-			    0, G_MAXLONG,
-			    False, XA_CARDINAL, &type, &format, &nitems,
-			    &bytes_after, (gpointer)&current_desktop);
+	gdk_error_trap_push ();
+	result = XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (root_win),
+				     gdk_x11_get_xatom_by_name_for_display (display, "_NET_CURRENT_DESKTOP"),
+				     0, G_MAXLONG, False, XA_CARDINAL, &type, &format, &nitems,
+				     &bytes_after, (gpointer) &current_desktop);
+	err = gdk_error_trap_pop ();
+
+	if (err != Success || result != Success)
+		return ret;
 
 	if (type == XA_CARDINAL && format == 32 && nitems > 0)
-	{
 		ret = current_desktop[0];
-		XFree (current_desktop);
-	}
 
+	XFree (current_desktop);
 	return ret;
 }
 
@@ -835,6 +838,7 @@ gedit_utils_get_window_workspace (GtkWindow *gtkwindow)
 	gulong nitems;
 	gulong bytes_after;
 	guint *workspace;
+	gint err, result;
 	guint ret = GEDIT_ALL_WORKSPACES;
 
 	g_return_val_if_fail (GTK_IS_WINDOW (gtkwindow), 0);
@@ -843,18 +847,20 @@ gedit_utils_get_window_workspace (GtkWindow *gtkwindow)
 	window = GTK_WIDGET (gtkwindow)->window;
 	display = gdk_drawable_get_display (window);
 
-	XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
-			    gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_DESKTOP"),
-			    0, G_MAXLONG,
-			    False, XA_CARDINAL, &type, &format, &nitems,
-			    &bytes_after, (gpointer)&workspace);
+	gdk_error_trap_push ();
+	result = XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
+				     gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_DESKTOP"),
+				     0, G_MAXLONG, False, XA_CARDINAL, &type, &format, &nitems,
+				     &bytes_after, (gpointer) &workspace);
+	err = gdk_error_trap_pop ();
+
+	if (err != Success || result != Success)
+		return ret;
 
 	if (type == XA_CARDINAL && format == 32 && nitems > 0)
-	{
 		ret = workspace[0];
-		XFree (workspace);
-	}
 
+	XFree (workspace);
 	return ret;
 }
 
@@ -909,7 +915,6 @@ gedit_utils_get_current_viewport (GdkScreen    *screen,
 	*y = coordinates[1];
 	XFree (coordinates);
 }
-
 
 void
 gedit_utils_activate_url (GtkAboutDialog *about,
