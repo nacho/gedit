@@ -198,6 +198,8 @@ on_message_received (const char *message,
 	gchar **commands;
 	gchar **params;
 	gint workspace;
+	gint viewport_x;
+	gint viewport_y;
 	gchar *display_name;
 	gint screen_number;
 	gint i;
@@ -213,11 +215,13 @@ on_message_received (const char *message,
 	commands = g_strsplit (message, "\v", -1);
 
 	/* header */
-	params = g_strsplit (commands[0], "\t", 4);
+	params = g_strsplit (commands[0], "\t", 6);
 	startup_timestamp = atoi (params[0]);
 	display_name = params[1];
 	screen_number = atoi (params[2]);
 	workspace = atoi (params[3]);
+	viewport_x = atoi (params[4]);
+	viewport_y = atoi (params[5]);
 
 	display = display_open_if_needed (display_name);
 	if (display == NULL)
@@ -283,9 +287,11 @@ on_message_received (const char *message,
 	else
 	{
 		/* get a window in the current workspace (if exists) and raise it */
-		window = _gedit_app_get_window_in_workspace (app,
-							     screen,
-							     workspace);
+		window = _gedit_app_get_window_in_viewport (app,
+							    screen,
+							    workspace,
+							    viewport_x,
+							    viewport_y);
 	}
 
 	if (file_list != NULL)
@@ -349,11 +355,13 @@ send_bacon_message (void)
 	const gchar *display_name;
 	gint screen_number;
 	gint ws;
+	gint viewport_x;
+	gint viewport_y;
 	GString *command;
 
 	/* the messages have the following format:
-	 * <---                   header                       ---> <----            body             ----->
-	 * timestamp \t display_name \t screen_number \t workspace \v OP1 \t arg \t arg \v OP2 \t arg \t arg|...
+	 * <---                                  header                                     ---> <----            body             ----->
+	 * timestamp \t display_name \t screen_number \t workspace \t viewport_x \t viewport_y \v OP1 \t arg \t arg \v OP2 \t arg \t arg|...
 	 *
 	 * when the arg is a list of uri, they are separated by a space.
 	 * So the delimiters are \v for the commands, \t for the tokens in
@@ -373,16 +381,19 @@ send_bacon_message (void)
 	gedit_debug_message (DEBUG_APP, "Screen: %d", screen_number);	
 
 	ws = gedit_utils_get_current_workspace (screen);
+	gedit_utils_get_current_viewport (screen, &viewport_x, &viewport_y);
 
 	command = g_string_new (NULL);
 
 	/* header */
 	g_string_append_printf (command,
-				"%" G_GUINT32_FORMAT "\t%s\t%d\t%d",
+				"%" G_GUINT32_FORMAT "\t%s\t%d\t%d\t%d\t%d",
 				startup_timestamp,
 				display_name,
 				screen_number,
-				ws);
+				ws,
+				viewport_x,
+				viewport_y);
 
 	/* NEW-WINDOW command */
 	if (new_window_option)

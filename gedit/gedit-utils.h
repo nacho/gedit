@@ -123,6 +123,10 @@ guint		 gedit_utils_get_current_workspace	(GdkScreen *screen);
 
 guint		 gedit_utils_get_window_workspace	(GtkWindow *gtkwindow);
 
+void		 gedit_utils_get_current_viewport	(GdkScreen    *screen,
+							 gint         *x,
+							 gint         *y);
+
 void		 gedit_utils_activate_url		(GtkAboutDialog *about,
 							 const gchar    *url,
 							 gpointer        data);

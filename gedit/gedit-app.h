@@ -112,9 +112,11 @@ GeditLockdownMask gedit_app_get_lockdown		(GeditApp *app);
  */
 GeditWindow	*_gedit_app_restore_window		(GeditApp    *app,
 							 const gchar *role);
-GeditWindow	*_gedit_app_get_window_in_workspace	(GeditApp  *app,
-							 GdkScreen *screen,
-							 gint       workspace);
+GeditWindow	*_gedit_app_get_window_in_viewport	(GeditApp     *app,
+							 GdkScreen    *screen,
+							 gint          workspace,
+							 gint          viewport_x,
+							 gint          viewport_y);
 void		 _gedit_app_set_lockdown		(GeditApp          *app,
 							 GeditLockdownMask  lockdown);
 void		 _gedit_app_set_lockdown_bit		(GeditApp          *app,

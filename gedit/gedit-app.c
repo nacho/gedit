@@ -399,9 +399,11 @@ gedit_app_get_active_window (GeditApp *app)
 }
 
 static gboolean
-is_in_workspace (GeditWindow *window,
-		 GdkScreen   *screen,
-		 gint         workspace)
+is_in_viewport (GeditWindow  *window,
+		GdkScreen    *screen,
+		gint          workspace,
+		gint          viewport_x,
+		gint          viewport_y)
 {
 	GdkScreen *s;
 	GdkDisplay *display;
@@ -410,7 +412,11 @@ is_in_workspace (GeditWindow *window,
 	gint cur_n;
 	gint n;
 	gint ws;
+	gint sc_width, sc_height;
+	gint x, y, width, height;
+	gint vp_x, vp_y;
 
+	/* Check for screen and display match */
 	display = gdk_screen_get_display (screen);
 	cur_name = gdk_display_get_name (display);
 	cur_n = gdk_screen_get_number (screen);
@@ -420,16 +426,50 @@ is_in_workspace (GeditWindow *window,
 	name = gdk_display_get_name (display);
 	n = gdk_screen_get_number (s);
 
-	ws = gedit_utils_get_window_workspace (GTK_WINDOW (window));
+	if (strcmp (cur_name, name) != 0 || cur_n != n)
+		return FALSE;
 
-	return ((strcmp (cur_name, name) == 0) && cur_n == n &&
-	        (ws == workspace || ws == GEDIT_ALL_WORKSPACES));
+	/* Check for workspace match */
+	ws = gedit_utils_get_window_workspace (GTK_WINDOW (window));
+	if (ws != workspace && ws != GEDIT_ALL_WORKSPACES)
+		return FALSE;
+
+	/* Check for viewport match */
+	gdk_window_get_position (GTK_WIDGET (window)->window, &x, &y);
+	gdk_drawable_get_size (GTK_WIDGET (window)->window, &width, &height);
+	gedit_utils_get_current_viewport (screen, &vp_x, &vp_y);
+	x += vp_x;
+	y += vp_y;
+
+	sc_width = gdk_screen_get_width (screen);
+	sc_height = gdk_screen_get_height (screen);
+
+	return x + width * .25 >= viewport_x &&
+	       x + width * .75 < viewport_x + sc_width &&
+	       y  >= viewport_y &&
+	       y + height < viewport_y + sc_height;
 }
 
+/**
+ * _gedit_app_get_window_in_viewport
+ * @app: the #GeditApp
+ * @screen: the #GdkScreen
+ * @workspace: the workspace number
+ * @viewport_x: the viewport horizontal origin
+ * @viewport_y: the viewport vertical origin
+ *
+ * Since a workspace can be larger than the screen, it is divided into several
+ * equal parts called viewports. This function retrives the #GeditWindow in
+ * the given viewport of the given workspace.
+ *
+ * Return value: the #GeditWindow in the given viewport of the given workspace.
+ */
 GeditWindow *
-_gedit_app_get_window_in_workspace (GeditApp  *app,
-				    GdkScreen *screen,
-				    gint       workspace)
+_gedit_app_get_window_in_viewport (GeditApp  *app,
+				   GdkScreen *screen,
+				   gint       workspace,
+				   gint       viewport_x,
+				   gint       viewport_y)
 {
 	GeditWindow *window;
 
@@ -442,7 +482,7 @@ _gedit_app_get_window_in_workspace (GeditApp  *app,
 
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 
-	if (is_in_workspace (window, screen, workspace))
+	if (is_in_viewport (window, screen, workspace, viewport_x, viewport_y))
 		return window;
 
 	/* otherwise try to see if there is a window on this workspace */
@@ -450,7 +490,7 @@ _gedit_app_get_window_in_workspace (GeditApp  *app,
 	{
 		window = l->data;
 
-		if (is_in_workspace (window, screen, workspace))
+		if (is_in_viewport (window, screen, workspace, viewport_x, viewport_y))
 			return window;
 	}
 

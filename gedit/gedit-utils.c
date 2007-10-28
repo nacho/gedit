@@ -858,6 +858,59 @@ gedit_utils_get_window_workspace (GtkWindow *gtkwindow)
 	return ret;
 }
 
+/**
+ * gedit_utils_get_current_viewport: Get the current viewport origin
+ *
+ * Get the currently visible viewport origin for the #GdkScreen.
+ *
+ * If the X11 window property isn't found, (0, 0) is returned.
+ */
+void
+gedit_utils_get_current_viewport (GdkScreen    *screen,
+				  gint         *x,
+				  gint         *y)
+{
+	GdkWindow *root_win;
+	GdkDisplay *display;
+	Atom type;
+	gint format;
+	gulong nitems;
+	gulong bytes_after;
+	gulong *coordinates;
+	gint err, result;
+
+	g_return_if_fail (GDK_IS_SCREEN (screen));
+	g_return_if_fail (x != NULL && y != NULL);
+
+	/* Default values for the viewport origin */
+	*x = 0;
+	*y = 0;
+
+	root_win = gdk_screen_get_root_window (screen);
+	display = gdk_screen_get_display (screen);
+
+	gdk_error_trap_push ();
+	result = XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (root_win),
+				     gdk_x11_get_xatom_by_name_for_display (display, "_NET_DESKTOP_VIEWPORT"),
+				     0, G_MAXLONG, False, XA_CARDINAL, &type, &format, &nitems,
+				     &bytes_after, (void*) &coordinates);
+	err = gdk_error_trap_pop ();
+
+	if (err != Success || result != Success)
+		return;
+
+	if (type != XA_CARDINAL || format != 32 || nitems < 2)
+	{
+		XFree (coordinates);
+		return;
+	}
+
+	*x = coordinates[0];
+	*y = coordinates[1];
+	XFree (coordinates);
+}
+
+
 void
 gedit_utils_activate_url (GtkAboutDialog *about,
 			  const gchar    *url,

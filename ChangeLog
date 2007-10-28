@@ -1,3 +1,16 @@
+2007-10-28  Steve Frécinaux  <code@istique.net>
+
+	Fix bug #484613 by adding viewport support to gedit.
+
+	* gedit/gedit-utils.[ch]: New utility function
+	gedit_utils_get_current_viewport().
+
+	* gedit/gedit-app.[ch]: Rename gedit_app_get_window_in_workspace() into
+	gedit_app_get_window_in_viewport and add viewport support to it.
+
+	* gedit/gedit.c: Adapt IPC protocol to specify the current viewport to
+	the running instance.
+
 2007-10-28  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-utils.[ch]:
