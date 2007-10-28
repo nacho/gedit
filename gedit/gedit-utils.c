@@ -619,43 +619,6 @@ gedit_utils_escape_underscores (const gchar* text,
 	return g_string_free (str, FALSE);
 }
 
-/*
- * Replaces '/' with '-' to avoid problems in xml paths.
- */
-gchar *
-gedit_utils_escape_slashes (const gchar *text,
-			    gssize       length)
-{
-	GString *str;
-	const gchar *p;
-	const gchar *end;
-
-	g_return_val_if_fail (text != NULL, NULL);
-
-	if (length < 0)
-		length = strlen (text);
-
-	str = g_string_sized_new (length);
-
-	p = text;
-	end = text + length;
-
-	while (p != end)
-	{
-		const gchar *next;
-		next = g_utf8_next_char (p);
-
-		if (*p == '/')
-			g_string_append (str, "-");
-		else
-			g_string_append_len (str, p, next - p);
-
-		p = next;
-	}
-
-	return g_string_free (str, FALSE);
-}
-
 /* the following functions are taken from eel */
 
 gchar *

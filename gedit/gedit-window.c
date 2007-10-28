@@ -806,17 +806,12 @@ language_toggled (GtkToggleAction *action,
 static gchar *
 escape_section_name (const gchar *name)
 {
-	gchar *tmp;
 	gchar *ret;
-	gssize len;
 
-	len = strlen (name);
+	ret = g_markup_escape_text (name, -1);
 
-	/* escape slashes doesn't change the string lenght */
-	tmp = gedit_utils_escape_slashes (name, len);
-	ret = g_markup_escape_text (tmp, len);
-
-	g_free (tmp);
+	/* Replace '/' with '-' to avoid problems in xml paths */
+	g_strdelimit (ret, "/", '-');
 
 	return ret;
 }
