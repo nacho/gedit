@@ -1,5 +1,15 @@
 2007-11-02  Steve Frécinaux  <code@istique.net>
 
+	* bindings/python/Makefile.am:
+	* bindings/python/gedit.defs:
+	* bindings/python/gedit.override:
+
+	Bind gedit.debug in python, in such a way it works like gedit_debug or
+	gedit_debug_message without having to specify the filename and line
+	number and calling function name.
+
+2007-11-02  Steve Frécinaux  <code@istique.net>
+
 	Fix bug 491442 – gedit.commands.load_uri should only accept valid URIs
 
 	* gedit/gedit-commands-file.c (gedit_commands_load_uri): check that

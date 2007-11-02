@@ -10,6 +10,7 @@ headers
 #include "gedit-encodings.h"
 #include "gedit-enum-types.h"
 #include "gedit-statusbar.h"
+#include "gedit-debug.h"
 
 void pygedit_register_classes (PyObject *d); 
 void pygedit_add_constants (PyObject *module, const gchar *strip_prefix);
@@ -372,5 +373,65 @@ _wrap_gedit_language_manager_list_languages_sorted(PyObject *self, PyObject *arg
     g_slist_free (list);
 
     return py_list;
+}
+%%
+override gedit_debug kwargs
+static PyObject *
+_wrap_gedit_debug(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "message", NULL };
+    PyObject *traceback_module, *mdict, *func, *traceback, *tuple;
+    PyObject *filename, *lineno, *funcname;
+    char *message = NULL;
+
+    if (g_getenv ("GEDIT_DEBUG_PLUGINS") == NULL)
+    {
+        Py_INCREF (Py_None);
+        return Py_None;
+    }
+
+    if (!PyArg_ParseTupleAndKeywords (args, kwargs, "|s", kwlist, &message))
+        return NULL;
+
+    traceback_module = PyImport_ImportModule ("traceback");
+    if (traceback_module == NULL)
+    {
+        g_warning ("traceback module cannot be imported");
+        Py_INCREF (Py_None);
+        return Py_None;
+    }
+
+    mdict = PyModule_GetDict (traceback_module);
+    func = PyDict_GetItemString (mdict, "extract_stack");
+    traceback = PyObject_CallFunction (func, "zi", NULL, 1);
+    tuple = PyList_GetItem (traceback, 0);
+
+    if (tuple == NULL || !PyTuple_Check (tuple))
+    {
+        g_warning ("traceback tuple is null!");
+    }
+    else
+    {
+        filename = PyTuple_GetItem (tuple, 0);
+        lineno = PyTuple_GetItem (tuple, 1);
+        funcname = PyTuple_GetItem (tuple, 2);
+
+        if (message == NULL)
+            gedit_debug (GEDIT_DEBUG_PLUGINS,
+                         PyString_AsString (filename),
+                         PyInt_AsLong (lineno),
+                         PyString_AsString (funcname));
+        else
+            gedit_debug_message (GEDIT_DEBUG_PLUGINS,
+                                 PyString_AsString (filename),
+                                 PyInt_AsLong (lineno),
+                                 PyString_AsString (funcname),
+                                 message);
+    }
+    Py_DECREF (traceback);
+    Py_DECREF (traceback_module);
+
+    Py_INCREF (Py_None);
+    return Py_None;
 }
 %%

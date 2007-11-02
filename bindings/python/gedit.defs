@@ -970,3 +970,14 @@
     '("const-gchar*" "mime_type")
   )
 )
+
+;; From ../../gedit/gedit-debug.h
+
+(define-function debug
+  (c-name "gedit_debug")
+  (parameters
+    '("const-gchar*" "message")
+  )
+  (return-type "none")
+)
+
