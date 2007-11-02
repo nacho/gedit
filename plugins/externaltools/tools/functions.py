@@ -99,7 +99,7 @@ def capture_menu_action(action, window, node):
             start = document.get_iter_at_mark(document.get_insert())
             end = start.copy()
             if not start.starts_line():
-                start.backward_line()
+                start.set_line_offset(0)
             if not end.ends_line():
                 end.forward_to_line_end()
         elif input_type == 'word':

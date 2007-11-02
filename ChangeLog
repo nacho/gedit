@@ -1,3 +1,11 @@
+2007-11-02  Steve Frécinaux  <code@istique.net>
+
+	Fix bug #491312 – External Tools with two lines as input
+
+	* plugins/externaltools/tools/functions.py: go to the beginning of the
+	current line instead of the previous one when running an external tool
+	on "current line".
+
 2007-10-28  Steve Frécinaux  <code@istique.net>
 
 	* gedit/gedit-utils.c: Use gdk_error_trap_*() to protect direct
