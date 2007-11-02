@@ -301,17 +301,18 @@ gedit_commands_load_uri (GeditWindow         *window,
 			 gint                 line_pos)
 {
 	GSList *uris = NULL;
-	
+
 	g_return_if_fail (GEDIT_IS_WINDOW (window));
 	g_return_if_fail (uri != NULL);
+	g_return_if_fail (gedit_utils_is_valid_uri (uri));
 
-	gedit_debug (DEBUG_COMMANDS);	
-	
+	gedit_debug_message (DEBUG_COMMANDS, "Loading URI '%s'", uri);
+
 	uris = g_slist_prepend (uris, (gchar *)uri);
-	
+
 	load_file_list (window, uris, encoding, line_pos, FALSE);
-	
-	g_slist_free (uris);	
+
+	g_slist_free (uris);
 }
 
 /**

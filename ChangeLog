@@ -1,5 +1,12 @@
 2007-11-02  Steve Frécinaux  <code@istique.net>
 
+	Fix bug 491442 – gedit.commands.load_uri should only accept valid URIs
+
+	* gedit/gedit-commands-file.c (gedit_commands_load_uri): check that
+	the uri is valid before trying to open it.
+
+2007-11-02  Steve Frécinaux  <code@istique.net>
+
 	Fix bug #491312 – External Tools with two lines as input
 
 	* plugins/externaltools/tools/functions.py: go to the beginning of the
