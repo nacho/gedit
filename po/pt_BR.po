@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-02 03:46+0100\n"
-"PO-Revision-Date: 2007-09-02 10:51-0300\n"
+"POT-Creation-Date: 2007-11-03 19:33-0200\n"
+"PO-Revision-Date: 2007-11-03 19:36-0200\n"
 "Last-Translator: Og Maciel <ogmaciel@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "Edite arquivos de texto"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:463
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:474
 msgid "Text Editor"
 msgstr "Editor de Texto"
 
@@ -747,7 +747,7 @@ msgstr "Codificações de caracteres"
 msgid "E_ncodings shown in menu:"
 msgstr "Codificações exibidas no _menu:"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.c:136
+#: ../gedit/dialogs/gedit-open-location-dialog.c:139
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
 msgid "Open Location"
 msgstr "Abrir Localização"
@@ -959,44 +959,48 @@ msgid "View"
 msgstr "Visualização"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
+msgid "_Add..."
+msgstr "_Adicionar..."
+
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
 msgid "_Autosave files every"
 msgstr "_Salvar arquivos automaticamente a cada"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
 msgid "_Display line numbers"
 msgstr "_Mostrar números de linhas"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
 msgid "_Enable automatic indentation"
 msgstr "Ativar recuo _automático"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
 msgid "_Right margin at column:"
 msgstr "Margem _direita na coluna:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
 msgid "_Tab width:"
 msgstr "Largura das _tabulações:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:32
 msgid "_minutes"
 msgstr "_minutos"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:287
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1348
+#: ../gedit/dialogs/gedit-search-dialog.c:301
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1343
 msgid "Replace"
 msgstr "Substituir"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1346
+#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1341
 msgid "Find"
 msgstr "Procurar"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:382
+#: ../gedit/dialogs/gedit-search-dialog.c:404
 msgid "Replace _All"
 msgstr "Substituir _Todas"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:383
-#: ../gedit/gedit-commands-file.c:677
+#: ../gedit/dialogs/gedit-search-dialog.c:405
+#: ../gedit/gedit-commands-file.c:678
 msgid "_Replace"
 msgstr "_Substituir"
 
@@ -1063,7 +1067,7 @@ msgid "%s: invalid encoding.\n"
 msgstr "%s: codificação inválida.\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:455
+#: ../gedit/gedit.c:466
 msgid "- Edit text files"
 msgstr "- Editar arquivos de texto"
 
@@ -1080,15 +1084,15 @@ msgstr[0] "Carregando %d arquivo..."
 msgstr[1] "Carregando %d arquivos..."
 
 #. Translators: "Open Files" is the title of the file chooser window
-#: ../gedit/gedit-commands-file.c:423
+#: ../gedit/gedit-commands-file.c:424
 msgid "Open Files"
 msgstr "Abrir Arquivos"
 
-#: ../gedit/gedit-commands-file.c:529
+#: ../gedit/gedit-commands-file.c:530
 msgid "The entered location is not valid."
 msgstr "A localização digitada não é válido."
 
-#: ../gedit/gedit-commands-file.c:532
+#: ../gedit/gedit-commands-file.c:533
 #: ../gedit/gedit-io-error-message-area.c:187
 #: ../gedit/gedit-io-error-message-area.c:226
 #: ../gedit/gedit-io-error-message-area.c:242
@@ -1097,35 +1101,35 @@ msgstr ""
 "Por favor, verifique se você digitou a localização corretamente e tente "
 "novamente."
 
-#: ../gedit/gedit-commands-file.c:658
+#: ../gedit/gedit-commands-file.c:659
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "O arquivo \"%s\" é somente para leitura."
 
-#: ../gedit/gedit-commands-file.c:669
+#: ../gedit/gedit-commands-file.c:670
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Deseja tentar substituí-lo com o que você está salvando?"
 
-#: ../gedit/gedit-commands-file.c:735 ../gedit/gedit-commands-file.c:938
+#: ../gedit/gedit-commands-file.c:736 ../gedit/gedit-commands-file.c:939
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Salvando o arquivo \"%s\"..."
 
-#: ../gedit/gedit-commands-file.c:836
+#: ../gedit/gedit-commands-file.c:837
 msgid "Save As…"
 msgstr "Salvar Como..."
 
-#: ../gedit/gedit-commands-file.c:1117
+#: ../gedit/gedit-commands-file.c:1118
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Revertendo o documento \"%s\"..."
 
-#: ../gedit/gedit-commands-file.c:1162
+#: ../gedit/gedit-commands-file.c:1163
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Reverter as alterações não salvas para o documento \"%s\"?"
 
-#: ../gedit/gedit-commands-file.c:1171
+#: ../gedit/gedit-commands-file.c:1172
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1139,14 +1143,14 @@ msgstr[1] ""
 "As alterações feitas no documento nos últimos %ld segundos serão "
 "permanentemente perdidas."
 
-#: ../gedit/gedit-commands-file.c:1180
+#: ../gedit/gedit-commands-file.c:1181
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "As alterações feitas no documento no último minuto serão permanentemente "
 "perdidas."
 
-#: ../gedit/gedit-commands-file.c:1186
+#: ../gedit/gedit-commands-file.c:1187
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1161,7 +1165,7 @@ msgstr[1] ""
 "As alterações feitas no documento no último minuto e %ld segundos serão "
 "permanentemente perdidas."
 
-#: ../gedit/gedit-commands-file.c:1196
+#: ../gedit/gedit-commands-file.c:1197
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1175,13 +1179,13 @@ msgstr[1] ""
 "As alterações feitas no documento nos últimos %ld minutos serão "
 "permanentemente perdidas."
 
-#: ../gedit/gedit-commands-file.c:1211
+#: ../gedit/gedit-commands-file.c:1212
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "As alterações feitas no documento na última hora serão permanentemente "
 "perdidas."
 
-#: ../gedit/gedit-commands-file.c:1217
+#: ../gedit/gedit-commands-file.c:1218
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1196,7 +1200,7 @@ msgstr[1] ""
 "As alterações feitas no documento na última hora e %d minutos serão "
 "permanentemente perdidas."
 
-#: ../gedit/gedit-commands-file.c:1232
+#: ../gedit/gedit-commands-file.c:1233
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1209,7 +1213,7 @@ msgstr[1] ""
 "As alterações feitas no documento nas últimas %d horas serão permanentemente "
 "perdidas."
 
-#: ../gedit/gedit-commands-file.c:1258
+#: ../gedit/gedit-commands-file.c:1259
 msgid "_Revert"
 msgstr "_Reverter"
 
@@ -1253,7 +1257,7 @@ msgid "Unsaved Document %d"
 msgstr "Documento não-salvo %d"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1914 ../gedit/gedit-window.c:1919
+#: ../gedit/gedit-window.c:1909 ../gedit/gedit-window.c:1914
 msgid "Read Only"
 msgstr "Somente Leitura"
 
@@ -1489,6 +1493,7 @@ msgstr ""
 #: ../gedit/gedit-io-error-message-area.c:1280
 #: ../gedit/gedit-io-error-message-area.c:1291
 #: ../gedit/gedit-io-error-message-area.c:1299
+#, c-format
 msgid ""
 "Host name was invalid. Please check that you typed the location correctly "
 "and try again."
@@ -2054,7 +2059,7 @@ msgstr "Tipo MIME:"
 msgid "Encoding:"
 msgstr "Codificação:"
 
-#: ../gedit/gedit-tab.c:2215
+#: ../gedit/gedit-tab.c:2220
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Renderizando página %d de %d..."
@@ -2096,7 +2101,7 @@ msgstr "Cria um novo documento"
 msgid "_Open..."
 msgstr "_Abrir..."
 
-#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1468
+#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1463
 msgid "Open a file"
 msgstr "Abrir um arquivo"
 
@@ -2345,45 +2350,45 @@ msgstr "_Painel Inferior"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Mostrar ou ocultar o painel inferior na janela atual"
 
-#: ../gedit/gedit-utils.c:1005
+#: ../gedit/gedit-utils.c:1026
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Não foi possível localizar o arquivo \"%s\"."
 
-#: ../gedit/gedit-utils.c:1009 ../gedit/gedit-utils.c:1045
+#: ../gedit/gedit-utils.c:1030 ../gedit/gedit-utils.c:1066
 msgid "Please check your installation."
 msgstr "Favor verificar sua instalação."
 
-#: ../gedit/gedit-utils.c:1041
+#: ../gedit/gedit-utils.c:1062
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr ""
 "Não foi possível encontrar os widgets necessários dentro do arquivo %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1128
+#: ../gedit/gedit-view.c:1137
 msgid "_Wrap Around"
 msgstr "_Voltar ao Início"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1138
+#: ../gedit/gedit-view.c:1147
 msgid "Match _Entire Word Only"
 msgstr "Coincidir ap_enas com palavra completa"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1148
+#: ../gedit/gedit-view.c:1157
 msgid "_Match Case"
 msgstr "Diferenciar _maiúsculas/minúsculas"
 
-#: ../gedit/gedit-view.c:1236
+#: ../gedit/gedit-view.c:1245
 msgid "String you want to search for"
 msgstr "Expressão que você deseja pesquisar"
 
-#: ../gedit/gedit-view.c:1244
+#: ../gedit/gedit-view.c:1253
 msgid "Line you want to move the cursor to"
 msgstr "Linha para a qual que você deseja mover o cursor"
 
-#: ../gedit/gedit-window.c:881
+#: ../gedit/gedit-window.c:876
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Usar modo de destaque %s"
@@ -2391,34 +2396,34 @@ msgstr "Usar modo de destaque %s"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:938
+#: ../gedit/gedit-window.c:933
 msgid "None"
 msgstr "Nenhum"
 
-#: ../gedit/gedit-window.c:939
+#: ../gedit/gedit-window.c:934
 msgid "Disable syntax highlighting"
 msgstr "Desativar destaque de sintaxe"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1225
+#: ../gedit/gedit-window.c:1220
 #, c-format
 msgid "Open '%s'"
 msgstr "Abrir \"%s\""
 
-#: ../gedit/gedit-window.c:1344
+#: ../gedit/gedit-window.c:1339
 msgid "Save"
 msgstr "Salvar"
 
-#: ../gedit/gedit-window.c:1472
+#: ../gedit/gedit-window.c:1467
 msgid "Open a recently used file"
 msgstr "Abrir um arquivo recentemente usado"
 
-#: ../gedit/gedit-window.c:1479
+#: ../gedit/gedit-window.c:1474
 msgid "Open"
 msgstr "Abrir"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1529
+#: ../gedit/gedit-window.c:1524
 #, c-format
 msgid "Activate '%s'"
 msgstr "Ativar %s"
@@ -2552,11 +2557,11 @@ msgstr "Você deve estar dentro de uma palavra para executar este comando"
 msgid "Running tool:"
 msgstr "Executando ferramenta:"
 
-#: ../plugins/externaltools/tools/functions.py:188
+#: ../plugins/externaltools/tools/functions.py:189
 msgid "Done."
 msgstr "Pronto."
 
-#: ../plugins/externaltools/tools/functions.py:190
+#: ../plugins/externaltools/tools/functions.py:191
 msgid "Exited"
 msgstr "Saiu"
 
@@ -2926,27 +2931,29 @@ msgstr "Você tem certeza de que quer excluir \"%s\" permanentemente?"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1166
 msgid "Are you sure you want to permanently delete the selected files?"
-msgstr "Você tem certeza de que quer excluir permanentemente os arquivos selecionados?"
+msgstr ""
+"Você tem certeza de que quer excluir permanentemente os arquivos "
+"selecionados?"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1169
 msgid "If you delete an item, it is permanently lost."
 msgstr "Se você excluir um item, ele será perdido permanentemente."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1598
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1591
 msgid "(Empty)"
 msgstr "(Vazio)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2641
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2731
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1838
 msgid "Invalid uri"
 msgstr "URI inválido"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3074
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3163
 msgid "file"
 msgstr "arquivo"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3095
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3142
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3184
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3231
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2954,7 +2961,7 @@ msgstr ""
 "O novo arquivo está escondido pelo filtro. Será necessário ajustar a "
 "definição do filtro para torná-lo visível"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3123
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3212
 msgid "directory"
 msgstr "diretório"
 
