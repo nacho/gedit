@@ -964,7 +964,7 @@ _gedit_document_check_externally_modified (GeditDocument *doc)
 {
 	GnomeVFSFileInfo *info;
 	GnomeVFSResult result;
-	gint file_mtime;
+	gboolean res = FALSE;
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 
@@ -986,11 +986,14 @@ _gedit_document_check_externally_modified (GeditDocument *doc)
 		return FALSE;
 	}
 
-	file_mtime = info->mtime;
+	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
+	{
+		res = info->mtime > doc->priv->mtime;
+	}
 
 	gnome_vfs_file_info_unref (info);
 
-	return (file_mtime > doc->priv->mtime);
+	return res;
 }
 
 static void
