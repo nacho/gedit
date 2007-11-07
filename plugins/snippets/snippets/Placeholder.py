@@ -280,6 +280,7 @@ class PlaceholderExpand(Placeholder):
                         
                         if allDefault:
                                 self.update(None)
+                                self.default = self.get_text() or None
                 else:
                         self.update(None)
                         self.default = self.get_text() or None
