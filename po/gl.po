@@ -1,29 +1,30 @@
 # translation of gedit.HEAD.po to Galego
 # Galician translation of gedit.
-# Copyright (C) 1999-2001, 2005, 2006 Free Software Foundation, Inc.
+# Copyright (C) 1999-2001, 2005, 2006, 2007 Free Software Foundation, Inc.
 #
 # Ruben Lopez Gomez <ryu@mundivia.es>, 1999.
 # Manuel A. FernÃ¡ndez Montecelo <manuel@sindominio.net>, 2001.
 # Ignacio Casal Quinteiro <nacho.resa@gmail.com>, 2005, 2006.
+# Ignacio Casal Quinteiro <icq@svn.gnome.org>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-30 20:48+0200\n"
-"PO-Revision-Date: 2006-09-30 16:37+0200\n"
-"Last-Translator: Ignacio Casal Quinteiro <nacho.resa@gmail.com>\n"
-"Language-Team: Galego <trasno@ceu.fi.udc.es>\n"
+"POT-Creation-Date: 2007-11-15 09:02+0100\n"
+"PO-Revision-Date: 2007-11-15 09:01+0100\n"
+"Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
+"Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
 msgstr "Editar ficheiros de texto"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:463
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:474
 msgid "Text Editor"
 msgstr "Editor de texto"
 
@@ -276,7 +277,6 @@ msgid "Smart Home End"
 msgstr ""
 
 #: ../data/gedit.schemas.in.h:65
-#, fuzzy
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" represents the current locale encoding. Only recognized "
@@ -542,7 +542,6 @@ msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Se a barra de ferramentas debe ser visible nas ventás de edición."
 
 #: ../data/gedit.schemas.in.h:104
-#, fuzzy
 msgid ""
 "Whether to use the system's default fixed width font for editing text "
 "instead of a font specific to gedit. If this option is turned off, then the "
@@ -576,7 +575,6 @@ msgstr "[ISO-8859-15]"
 #. See http://svn.gnome.org/viewcvs/gedit/trunk/gedit/gedit-encodings.c?view=markup for
 #. a list of supported encodings
 #: ../data/gedit.schemas.in.h:120
-#, fuzzy
 msgid "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
 msgstr "[UTF-8,ACTUAL,ISO-8859-15,UTF-16]"
 
@@ -646,7 +644,6 @@ msgstr[1] ""
 "permanentemente."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:451
-#, fuzzy
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgstr ""
 "Se non garda, os cambios desde a última hora perderanse permanentemente."
@@ -667,7 +664,7 @@ msgstr[1] ""
 "permanentemente."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be permanently lost."
 msgid_plural ""
@@ -675,7 +672,8 @@ msgid_plural ""
 msgstr[0] ""
 "Se non garda, os cambios desde a última %d hora perderanse permanentemente."
 msgstr[1] ""
-"Se non garda, os cambios desde as últimas horas perderanse permanentemente."
+"Se non garda, os cambios desde as últimas %d horas perderanse "
+"permanentemente."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:515
 #, c-format
@@ -965,35 +963,40 @@ msgid "View"
 msgstr "Ver"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
+#, fuzzy
+msgid "_Add..."
+msgstr "Eng_adir"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
 msgid "_Autosave files every"
 msgstr "_Gardar automaticamente os ficheiros cada"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
 msgid "_Display line numbers"
 msgstr "_Mostrar os números de liña"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
 msgid "_Enable automatic indentation"
 msgstr "_Activar a sangría automática"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
 msgid "_Right margin at column:"
 msgstr "Marxe _dereita na columna:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
 msgid "_Tab width:"
 msgstr "Largura do _tabulador:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:32
 msgid "_minutes"
 msgstr "_minutos"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:301
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1348
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1343
 msgid "Replace"
 msgstr "Substituír"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1346
+#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1341
 msgid "Find"
 msgstr "Buscar"
 
@@ -1002,7 +1005,7 @@ msgid "Replace _All"
 msgstr "Substituír _todo"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:405
-#: ../gedit/gedit-commands-file.c:677
+#: ../gedit/gedit-commands-file.c:678
 msgid "_Replace"
 msgstr "_Substituír"
 
@@ -1070,7 +1073,7 @@ msgid "%s: invalid encoding.\n"
 msgstr "%s: codificación non válida.\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:455
+#: ../gedit/gedit.c:466
 msgid "- Edit text files"
 msgstr " - Editar ficheiros de texto"
 
@@ -1087,52 +1090,51 @@ msgstr[0] "Cargando %d ficheiro..."
 msgstr[1] "Cargando %d ficheiros..."
 
 #. Translators: "Open Files" is the title of the file chooser window
-#: ../gedit/gedit-commands-file.c:423
+#: ../gedit/gedit-commands-file.c:424
 #, fuzzy
 msgid "Open Files"
 msgstr "Abrir ficheiros..."
 
-#: ../gedit/gedit-commands-file.c:529
+#: ../gedit/gedit-commands-file.c:530
 msgid "The entered location is not valid."
 msgstr "A localización introducida non é válida."
 
-#: ../gedit/gedit-commands-file.c:532
+#: ../gedit/gedit-commands-file.c:533
 #: ../gedit/gedit-io-error-message-area.c:187
 #: ../gedit/gedit-io-error-message-area.c:226
 #: ../gedit/gedit-io-error-message-area.c:242
-#, fuzzy
 msgid "Please check that you typed the location correctly and try again."
 msgstr "Verifique que escribiu a localización correctamente e ténteo de novo."
 
-#: ../gedit/gedit-commands-file.c:658
+#: ../gedit/gedit-commands-file.c:659
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "O ficheiro \"%s\" é só de lectura."
 
-#: ../gedit/gedit-commands-file.c:669
+#: ../gedit/gedit-commands-file.c:670
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Quere tentar substituílo co que está gardando agora?"
 
-#: ../gedit/gedit-commands-file.c:735 ../gedit/gedit-commands-file.c:938
+#: ../gedit/gedit-commands-file.c:736 ../gedit/gedit-commands-file.c:939
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Gardando o ficheiro '%s'..."
 
-#: ../gedit/gedit-commands-file.c:836
+#: ../gedit/gedit-commands-file.c:837
 msgid "Save As…"
 msgstr "Gardar como..."
 
-#: ../gedit/gedit-commands-file.c:1117
+#: ../gedit/gedit-commands-file.c:1118
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Recuperando o documento '%s'..."
 
-#: ../gedit/gedit-commands-file.c:1162
+#: ../gedit/gedit-commands-file.c:1163
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Recuperar os cambios non gardados no documento '%s'?"
 
-#: ../gedit/gedit-commands-file.c:1171
+#: ../gedit/gedit-commands-file.c:1172
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1146,14 +1148,14 @@ msgstr[1] ""
 "Os cambios realizados ao documento nos últimos %ld segundos perderanse "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1180
+#: ../gedit/gedit-commands-file.c:1181
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Os cambios realizados ao documento no último %ld minuto perderanse "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1186
+#: ../gedit/gedit-commands-file.c:1187
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1168,7 +1170,7 @@ msgstr[1] ""
 "Os cambios realizados ao documento no último minuto e %ld segundos "
 "perderanse permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1196
+#: ../gedit/gedit-commands-file.c:1197
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1182,13 +1184,12 @@ msgstr[1] ""
 "Os cambios realizados ao documento nos últimos %ld minutos perderanse "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1211
-#, fuzzy
+#: ../gedit/gedit-commands-file.c:1212
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Os cambios realizados ao documento na última hora perderanse permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1217
+#: ../gedit/gedit-commands-file.c:1218
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1203,8 +1204,8 @@ msgstr[1] ""
 "Os cambios realizados ao documento na última hora e %d minutos perderanse "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1232
-#, fuzzy, c-format
+#: ../gedit/gedit-commands-file.c:1233
+#, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
 msgid_plural ""
@@ -1216,7 +1217,7 @@ msgstr[1] ""
 "Os cambios realizados ao documento nas últimas %d horas perderanse "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1258
+#: ../gedit/gedit-commands-file.c:1259
 msgid "_Revert"
 msgstr "_Recuperar"
 
@@ -1251,7 +1252,7 @@ msgid "Unsaved Document %d"
 msgstr "O documento %d non se gardou"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1914 ../gedit/gedit-window.c:1919
+#: ../gedit/gedit-window.c:1909 ../gedit/gedit-window.c:1914
 msgid "Read Only"
 msgstr "Só de lectura"
 
@@ -1447,7 +1448,6 @@ msgstr "Non ten os permisos necesarios para abrir o ficheiro."
 #: ../gedit/gedit-io-error-message-area.c:235
 #: ../gedit/gedit-io-error-message-area.c:477
 #: ../gedit/gedit-io-error-message-area.c:1230
-#, fuzzy
 msgid ""
 "There are too many open files. Please close some applications and try again."
 msgstr ""
@@ -1462,7 +1462,6 @@ msgstr "%s é un directorio."
 
 #: ../gedit/gedit-io-error-message-area.c:247
 #: ../gedit/gedit-io-error-message-area.c:487
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please close some running "
 "applications and try again."
@@ -1473,7 +1472,7 @@ msgstr ""
 #: ../gedit/gedit-io-error-message-area.c:275
 #: ../gedit/gedit-io-error-message-area.c:515
 #: ../gedit/gedit-io-error-message-area.c:1269
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host %s could not be found. Please check that your proxy settings are "
 "correct and try again."
@@ -1489,7 +1488,7 @@ msgstr ""
 #: ../gedit/gedit-io-error-message-area.c:1280
 #: ../gedit/gedit-io-error-message-area.c:1291
 #: ../gedit/gedit-io-error-message-area.c:1299
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host name was invalid. Please check that you typed the location correctly "
 "and try again."
@@ -1500,7 +1499,6 @@ msgstr ""
 #: ../gedit/gedit-io-error-message-area.c:311
 #: ../gedit/gedit-io-error-message-area.c:545
 #: ../gedit/gedit-io-error-message-area.c:1305
-#, fuzzy
 msgid ""
 "Host name was empty. Please check that your proxy settings are correct and "
 "try again."
@@ -1510,7 +1508,6 @@ msgstr ""
 
 #: ../gedit/gedit-io-error-message-area.c:317
 #: ../gedit/gedit-io-error-message-area.c:1311
-#, fuzzy
 msgid ""
 "Attempt to log in failed. Please check that you typed the location correctly "
 "and try again."
@@ -1547,7 +1544,6 @@ msgid "_Retry"
 msgstr "_Tentar de novo"
 
 #: ../gedit/gedit-io-error-message-area.c:436
-#, fuzzy
 msgid "gedit cannot find it. Perhaps it has recently been deleted."
 msgstr "O Gedit non puido encontralo. Talvez se eliminou recentemente."
 
@@ -1619,12 +1615,11 @@ msgid "_Don't Edit"
 msgstr "_Non editar"
 
 #: ../gedit/gedit-io-error-message-area.c:921
-#, fuzzy, c-format
+#, c-format
 msgid "This file (%s) is already open in another gedit window."
 msgstr "Este ficheiro (%s) xa está aberto noutra ventá do Gedit."
 
 #: ../gedit/gedit-io-error-message-area.c:936
-#, fuzzy
 msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
@@ -1681,7 +1676,7 @@ msgstr ""
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
 #: ../gedit/gedit-io-error-message-area.c:1192
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1690,7 +1685,6 @@ msgstr ""
 "que escribiu a localización correctamente e ténteo de novo."
 
 #: ../gedit/gedit-io-error-message-area.c:1200
-#, fuzzy
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1709,7 +1703,7 @@ msgstr ""
 "disco que non posúa esta limitación."
 
 #: ../gedit/gedit-io-error-message-area.c:1216
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is not a valid location. Please check that you typed the location "
 "correctly and try again."
@@ -1718,7 +1712,6 @@ msgstr ""
 "ténteo de novo."
 
 #: ../gedit/gedit-io-error-message-area.c:1223
-#, fuzzy
 msgid ""
 "You do not have the permissions necessary to save the file. Please check "
 "that you typed the location correctly and try again."
@@ -1727,7 +1720,7 @@ msgstr ""
 "escribiu o enderezo correctamente e ténteo de novo."
 
 #: ../gedit/gedit-io-error-message-area.c:1235
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is a directory. Please check that you typed the location correctly and "
 "try again."
@@ -1736,7 +1729,6 @@ msgstr ""
 "de novo."
 
 #: ../gedit/gedit-io-error-message-area.c:1241
-#, fuzzy
 msgid ""
 "Not enough available memory to save the file. Please close some running "
 "applications and try again."
@@ -1745,7 +1737,6 @@ msgstr ""
 "aplicacións en execución e ténteo de novo."
 
 #: ../gedit/gedit-io-error-message-area.c:1317
-#, fuzzy
 msgid ""
 "There is not enough disk space to save the file. Please free some disk space "
 "and try again."
@@ -1754,7 +1745,6 @@ msgstr ""
 "de espazo no disco e ténteo de novo."
 
 #: ../gedit/gedit-io-error-message-area.c:1323
-#, fuzzy
 msgid ""
 "You are trying to save the file on a read-only disk. Please check that you "
 "typed the location correctly and try again."
@@ -1763,12 +1753,10 @@ msgstr ""
 "escribiu o enderezo correctamente e ténteo de novo."
 
 #: ../gedit/gedit-io-error-message-area.c:1329
-#, fuzzy
 msgid "A file with the same name already exists. Please use a different name."
 msgstr "Xa existe un ficheiro co mesmo nome. Use un nome diferente."
 
 #: ../gedit/gedit-io-error-message-area.c:1334
-#, fuzzy
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please use a shorter name."
@@ -1777,7 +1765,7 @@ msgstr ""
 "lonxitude dos nomes de ficheiro. Use un nome máis curto."
 
 #: ../gedit/gedit-io-error-message-area.c:1343
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is not a regular file. Please check that you typed the location correctly "
 "and try again."
@@ -1794,7 +1782,7 @@ msgstr "Non se puido gardar o ficheiro %s."
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
 #: ../gedit/gedit-io-error-message-area.c:1428
-#, fuzzy, c-format
+#, c-format
 msgid "The file %s changed on disk."
 msgstr "O ficheiro %s modificouse no disco."
 
@@ -1807,7 +1795,6 @@ msgid "Do you want to reload the file?"
 msgstr "Quere recargar o ficheiro?"
 
 #: ../gedit/gedit-io-error-message-area.c:1445
-#, fuzzy
 msgid "_Reload"
 msgstr "_Recargar"
 
@@ -1949,7 +1936,6 @@ msgid "Zoom the page out"
 msgstr "Reducir a páxina"
 
 #: ../gedit/gedit-print-job-preview.c:848
-#, fuzzy
 msgid "_Close Preview"
 msgstr "Pe_char a previsualización"
 
@@ -2112,7 +2098,7 @@ msgstr "Crear un documento novo"
 msgid "_Open..."
 msgstr "_Abrir..."
 
-#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1468
+#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1463
 msgid "Open a file"
 msgstr "Abrir un ficheiro"
 
@@ -2282,7 +2268,6 @@ msgid "_Incremental Search..."
 msgstr "Busca gradual..."
 
 #: ../gedit/gedit-ui.h:127
-#, fuzzy
 msgid "Incrementally search for text"
 msgstr "Buscar texto gradualmente"
 
@@ -2363,16 +2348,16 @@ msgstr "Panel _inferior"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Mostrar ou ocultar o panel inferior na ventá actual"
 
-#: ../gedit/gedit-utils.c:1005
+#: ../gedit/gedit-utils.c:1026
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Non se puido localizar o ficheiro %s."
 
-#: ../gedit/gedit-utils.c:1009 ../gedit/gedit-utils.c:1045
+#: ../gedit/gedit-utils.c:1030 ../gedit/gedit-utils.c:1066
 msgid "Please check your installation."
 msgstr "Verifique a súa instalación."
 
-#: ../gedit/gedit-utils.c:1041
+#: ../gedit/gedit-utils.c:1062
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "Non se puideron localizar os widgets necesarios dentro do ficheiro %s."
@@ -2400,7 +2385,7 @@ msgstr "A cadea que quere buscar"
 msgid "Line you want to move the cursor to"
 msgstr "Liña á que quere mover o cursor"
 
-#: ../gedit/gedit-window.c:881
+#: ../gedit/gedit-window.c:876
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Usar o modo de realce %s"
@@ -2408,35 +2393,35 @@ msgstr "Usar o modo de realce %s"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:938
+#: ../gedit/gedit-window.c:933
 msgid "None"
 msgstr "Ningún"
 
-#: ../gedit/gedit-window.c:939
+#: ../gedit/gedit-window.c:934
 msgid "Disable syntax highlighting"
 msgstr "Desactivar o realce de sintaxe"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1225
+#: ../gedit/gedit-window.c:1220
 #, c-format
 msgid "Open '%s'"
 msgstr "Abrir '%s'"
 
-#: ../gedit/gedit-window.c:1344
+#: ../gedit/gedit-window.c:1339
 msgid "Save"
 msgstr "Gardar"
 
-#: ../gedit/gedit-window.c:1472
+#: ../gedit/gedit-window.c:1467
 msgid "Open a recently used file"
 msgstr "Abrir un ficheiro usado recentemente"
 
-#: ../gedit/gedit-window.c:1479
+#: ../gedit/gedit-window.c:1474
 msgid "Open"
 msgstr "Abrir"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1529
-#, fuzzy, c-format
+#: ../gedit/gedit-window.c:1524
+#, c-format
 msgid "Activate '%s'"
 msgstr "Activar '%s'"
 
@@ -2569,11 +2554,11 @@ msgstr "Debe introducir unha palabra para executar este comando"
 msgid "Running tool:"
 msgstr "Executando a ferramenta:"
 
-#: ../plugins/externaltools/tools/functions.py:188
+#: ../plugins/externaltools/tools/functions.py:189
 msgid "Done."
 msgstr "Feito."
 
-#: ../plugins/externaltools/tools/functions.py:190
+#: ../plugins/externaltools/tools/functions.py:191
 msgid "Exited"
 msgstr "Saíu"
 
@@ -2598,7 +2583,6 @@ msgid "Current word"
 msgstr "Palabra actual"
 
 #: ../plugins/externaltools/tools/manager.py:48
-#, fuzzy
 msgid "Display in bottom pane"
 msgstr "Mostrar no panel inferior"
 
@@ -2683,8 +2667,9 @@ msgid "Edit tool <i>make</i>:"
 msgstr "Editar a ferramenta <i>make</i>:"
 
 #: ../plugins/externaltools/tools/tools.glade.h:4
+#, fuzzy
 msgid "External Tools Manager"
-msgstr "Xestor de ferramentas externas"
+msgstr "Abre o xestor de ferramentas externas"
 
 #: ../plugins/externaltools/tools/tools.glade.h:5
 msgid ""
@@ -2729,22 +2714,18 @@ msgid "gtk-revert-to-saved"
 msgstr "gtk-revert-to-saved"
 
 #: ../plugins/externaltools/data/build.desktop.in.h:1
-#, fuzzy
 msgid "Build"
 msgstr "Compilación"
 
 #: ../plugins/externaltools/data/build.desktop.in.h:2
-#, fuzzy
 msgid "Run \"make\" in the document directory"
 msgstr "Executar \"make\" no directorio de documentos"
 
 #: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:1
-#, fuzzy
 msgid "Open a terminal in the document location"
 msgstr "Abrir un terminal na localización do documento"
 
 #: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:2
-#, fuzzy
 msgid "Open terminal here"
 msgstr "Abrir un terminal aquí"
 
@@ -2769,13 +2750,11 @@ msgid "Easy file access from the side pane"
 msgstr "Acceso fácil a ficheiros desde o panel lateral"
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "File Browser Pane"
 msgstr "Panel do navegador de ficheiros"
 
 #. Translators: this is used in "file on host", e.g. "/foo/bar on ftp.baz.org"
 #: ../plugins/filebrowser/gedit-file-bookmarks-store.c:195
-#, fuzzy
 msgid "on"
 msgstr "en"
 
@@ -2928,7 +2907,6 @@ msgid "An error occurred"
 msgstr "Ocorreu un erro"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1123
-#, fuzzy
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
@@ -2942,7 +2920,6 @@ msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "O ficheiro \"%s\" non se pode mover ao lixo."
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1130
-#, fuzzy
 msgid "The selected files cannot be moved to the trash."
 msgstr "Non se pode mover os ficheiros seleccionados ao lixo."
 
@@ -2997,7 +2974,6 @@ msgid "Bookmarks"
 msgstr "Marcadores"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:746
-#, fuzzy
 msgid "Recent Files"
 msgstr "Ficheiros recentes"
 
@@ -3011,7 +2987,6 @@ msgid "_Move To Trash"
 msgstr "_Mover ao lixo"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:831
-#, fuzzy
 msgid "Move selected file or folder to trash"
 msgstr "Mover o ficheiro ou cartafol seleccionado ao lixo"
 
@@ -3020,7 +2995,6 @@ msgid "_Delete"
 msgstr "E_liminar"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:834
-#, fuzzy
 msgid "Delete selected file or folder"
 msgstr "Eliminar o ficheiro ou directorio seleccionado"
 
@@ -3033,12 +3007,10 @@ msgid "Open the parent folder"
 msgstr "Abre o cartafol pai"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:846
-#, fuzzy
 msgid "_New Folder"
 msgstr "_Novo cartafol"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:847
-#, fuzzy
 msgid "Add new empty folder"
 msgstr "Engadir un cartafol novo baleiro"
 
@@ -3055,7 +3027,6 @@ msgid "_Rename"
 msgstr "_Renomear"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:856
-#, fuzzy
 msgid "Rename selected file or folder"
 msgstr "Renomear o ficheiro ou cartafol seleccionado"
 
@@ -3088,7 +3059,6 @@ msgid "_View Folder"
 msgstr "_Ver cartafol"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:871
-#, fuzzy
 msgid "View folder in file manager"
 msgstr "Ver o cartafol no xestor de ficheiros"
 
@@ -3097,7 +3067,6 @@ msgid "Show _Hidden"
 msgstr "Mostrar os _ocultos"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:879
-#, fuzzy
 msgid "Show hidden files and folders"
 msgstr "Mostrar os ficheiros e cartafoles ocultos"
 
@@ -3133,7 +3102,6 @@ msgid "Go to next location"
 msgstr "Ir á seguinte localización"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1199
-#, fuzzy
 msgid "_Match Filename"
 msgstr "Coi_ncidir co nome de ficheiro"
 
@@ -3154,7 +3122,6 @@ msgid "Unindent selected lines"
 msgstr "Eliminar a sangría nas liñas seleccionadas"
 
 #: ../plugins/indent/indent.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Indent Lines"
 msgstr "Sangrar as liñas"
 
@@ -3366,12 +3333,10 @@ msgid "Export snippets"
 msgstr "_Editar fragmento:"
 
 #: ../plugins/snippets/snippets/Manager.py:1068
-#, fuzzy
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "Escriba un atallo novo ou prema na tecla retroceso para limpar"
 
 #: ../plugins/snippets/snippets/Manager.py:1070
-#, fuzzy
 msgid "Type a new shortcut"
 msgstr "Escriba un atallo novo"
 
@@ -3422,7 +3387,7 @@ msgstr ""
 msgid "File `%s` is not a valid snippets archive"
 msgstr ""
 
-#: ../plugins/snippets/snippets/Placeholder.py:549
+#: ../plugins/snippets/snippets/Placeholder.py:550
 #, python-format
 msgid ""
 "Execution of the python command (%s) exceeds the maximum time, execution "
@@ -3431,12 +3396,12 @@ msgstr ""
 "A execución do comando python (%s) excedeu o tempo máximo, cancelouse a "
 "execución."
 
-#: ../plugins/snippets/snippets/Placeholder.py:557
+#: ../plugins/snippets/snippets/Placeholder.py:558
 #, python-format
 msgid "Execution of the python command (%s) failed: %s"
 msgstr "Fallou a execución do comando python (%s): %s"
 
-#: ../plugins/snippets/snippets/Placeholder.py:563
+#: ../plugins/snippets/snippets/Placeholder.py:564
 msgid "The following python code, run in a snippet, does not return a value"
 msgstr ""
 "O seguinte código python, executado nun fragmento, non devolve un valor"
@@ -3531,7 +3496,7 @@ msgstr "Verificación ortográfica concluída"
 #. * the correct translation. You MUST OMIT it in the translated string.
 #: ../plugins/spell/gedit-spell-checker-language.c:287
 #: ../plugins/spell/gedit-spell-checker-language.c:295
-#, fuzzy, c-format
+#, c-format
 msgid "language|%s (%s)"
 msgstr "%s (%s)"
 
@@ -3551,7 +3516,6 @@ msgstr "Descoñecido (%s)"
 #. * spell checker
 #.
 #: ../plugins/spell/gedit-spell-checker-language.c:414
-#, fuzzy
 msgid "language|Default"
 msgstr "Predeterminado"
 
@@ -3665,7 +3629,6 @@ msgid "Checks the spelling of the current document."
 msgstr "Verifica a ortografía do documento actual."
 
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Spell Checker"
 msgstr "Corrector ortográfico"
 
@@ -3674,7 +3637,6 @@ msgid "Select the group of tags you want to use"
 msgstr "Seleccione o grupo de etiquetas que quere usar"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:618
-#, fuzzy
 msgid "_Preview"
 msgstr "_Previsualización"
 
@@ -3733,7 +3695,6 @@ msgstr "Código de ficheiro de clase da miniaplicación"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:13
-#, fuzzy
 msgid "Applet class file code (deprecated)"
 msgstr "Código de ficheiro de clase da miniaplicación (obsoleto)"
 
@@ -3759,7 +3720,6 @@ msgstr "Cor de fondo"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Background color (deprecated)"
 msgstr "Cor de fondo (obsoleto)"
 
@@ -3769,7 +3729,6 @@ msgstr "Textura de mosaico do fondo"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:23
-#, fuzzy
 msgid "Background texture tile (deprecated)"
 msgstr "Textura de mosaico do fondo (obsoleto)"
 
@@ -3825,7 +3784,6 @@ msgid "Checked (state)"
 msgstr "Marcado (estado)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:39
-#, fuzzy
 msgid "Checked state"
 msgstr "Estado marcado"
 
@@ -3859,7 +3817,6 @@ msgstr "Cor das ligazóns seleccionadas"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:48
-#, fuzzy
 msgid "Color of selected links (deprecated)"
 msgstr "Cor das ligazóns seleccionadas (obsoleto)"
 
@@ -3890,7 +3847,6 @@ msgstr "Tipo de contido"
 #. The "type" attribute is deprecated for the "ol" tag only,
 #. since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Content type (deprecated)"
 msgstr "Tipo de contido (obsoleto)"
 
@@ -3948,7 +3904,6 @@ msgstr "Direccionalidade"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:75
-#, fuzzy
 msgid "Directionality (deprecated)"
 msgstr "Direccionalidade (obsoleto)"
 
@@ -4168,12 +4123,10 @@ msgstr "Espazo horizontal"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:131
-#, fuzzy
 msgid "Horizontal space (deprecated)"
 msgstr "Espazo horizontal (obsoleto)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:132
-#, fuzzy
 msgid "HttP header name"
 msgstr "Nome de cabeceira HttP"
 
@@ -4227,7 +4180,6 @@ msgstr "Miniaplicación de Java"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:146
-#, fuzzy
 msgid "Java applet (deprecated)"
 msgstr "Miniaplicación de Java (obsoleto)"
 
@@ -4253,7 +4205,6 @@ msgstr "Cor da ligazón"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:153
-#, fuzzy
 msgid "Link color (deprecated)"
 msgstr "Cor da ligazón (obsoleto)"
 
@@ -4389,7 +4340,6 @@ msgstr "Sen axuste de palabra"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:192
-#, fuzzy
 msgid "No word wrap (deprecated)"
 msgstr "Sen axuste de palabra (obsoleto)"
 
@@ -4407,7 +4357,6 @@ msgstr "Ficheiro do obxecto da miniaplicación"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:197
-#, fuzzy
 msgid "Object applet file (deprecated)"
 msgstr "Ficheiro do obxecto da miniaplicación (obsoleto)"
 
@@ -4557,7 +4506,6 @@ msgstr "Espazamento reducido"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:235
-#, fuzzy
 msgid "Reduced spacing (deprecated)"
 msgstr "Espazamento reducido (obsoleto)"
 
@@ -4681,7 +4629,6 @@ msgstr "Número da secuencia de inicio"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:268
-#, fuzzy
 msgid "Starting sequence number (deprecated)"
 msgstr "Número da secuencia de inicio (obsoleto)"
 
@@ -4691,7 +4638,6 @@ msgstr "Texto riscado"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:271
-#, fuzzy
 msgid "Strike-through text (deprecated)"
 msgstr "Estilo de texto riscado (obsoleto)"
 
@@ -4701,7 +4647,6 @@ msgstr "Estilo de texto riscado"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:274
-#, fuzzy
 msgid "Strike-through text style (deprecated)"
 msgstr "Estilo de texto riscado (obsoleto)"
 
@@ -4799,7 +4744,6 @@ msgstr "Cor do texto"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:299
-#, fuzzy
 msgid "Text color (deprecated)"
 msgstr "Cor do texto (obsoleto)"
 
@@ -4853,7 +4797,6 @@ msgstr "Espazo vertical"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:313
-#, fuzzy
 msgid "Vertical space (deprecated)"
 msgstr "Espazo vertical (obsoleto)"
 
@@ -4863,7 +4806,6 @@ msgstr "Cor de ligazón visitada"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:316
-#, fuzzy
 msgid "Visited link color (deprecated)"
 msgstr "Cor de ligazón visitada (obsoleto)"
 
@@ -4872,7 +4814,6 @@ msgid "Width"
 msgstr "Largura"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:318
-#, fuzzy
 msgid "XHTML 1.0 - Tags"
 msgstr "Etiquetas - XHTML 1.0"
 
@@ -5245,7 +5186,6 @@ msgid "self"
 msgstr "el mesmo"
 
 #: ../plugins/taglist/XUL.tags.xml.in.h:1
-#, fuzzy
 msgid "XUL - Tags"
 msgstr "Etiquetas - XUL"
 
@@ -5453,264 +5393,3 @@ msgstr "_Usar o formato personalizado"
 
 #~ msgid "Double-click on a tag to insert it in the current document"
 #~ msgstr "Prema dúas veces nunha etiqueta para inserila no documento actual"
-
-#~ msgid "_Use default theme font"
-#~ msgstr "_Usar o tipo de letra predeterminado do tema"
-
-#~ msgid "Insert in output panel"
-#~ msgstr "Inserir no panel de saída"
-
-#~ msgid "F7"
-#~ msgstr "F7"
-
-#~ msgid "_Accelerator:"
-#~ msgstr "_Tecla rápida:"
-
-#~ msgid "_New Directory"
-#~ msgstr "Directorio _novo"
-
-#~ msgid "Add new empty directory"
-#~ msgstr "Engade un directorio novo baleiro"
-
-#~ msgid "_View Directory"
-#~ msgstr "_Ver directorio"
-
-#~ msgid "Advanced filtering"
-#~ msgstr "Filtraxe avanzada"
-
-#~ msgid "Afrikaans"
-#~ msgstr "Africáner"
-
-#~ msgid "Amharic"
-#~ msgstr "Amhárico"
-
-#~ msgid "Arabic (Egypt)"
-#~ msgstr "Árabe (Exipto)"
-
-#~ msgid "Azerbaijani"
-#~ msgstr "Acerbaixano"
-
-#~ msgid "Belarusian"
-#~ msgstr "Bielorruso"
-
-#~ msgid "Bulgarian"
-#~ msgstr "Búlgaro"
-
-#~ msgid "Bengali"
-#~ msgstr "Bengalí"
-
-#~ msgid "Breton"
-#~ msgstr "Bretón"
-
-#~ msgid "Catalan"
-#~ msgstr "Catalán"
-
-#~ msgid "Czech"
-#~ msgstr "Checo"
-
-#~ msgid "Welsh"
-#~ msgstr "Galés"
-
-#~ msgid "Danish"
-#~ msgstr "Danés"
-
-#~ msgid "German (Austria)"
-#~ msgstr "Alemán (Austria)"
-
-#~ msgid "German (Germany)"
-#~ msgstr "Alemán (Alemaña)"
-
-#~ msgid "German (Swiss)"
-#~ msgstr "Alemán (Suíza)"
-
-#~ msgid "English (American)"
-#~ msgstr "Inglés (Americano)"
-
-#~ msgid "English (British)"
-#~ msgstr "Inglés (Británico)"
-
-#~ msgid "English (Canadian)"
-#~ msgstr "Inglés (Canadense)"
-
-#~ msgid "Esperanto"
-#~ msgstr "Esperanto"
-
-#~ msgid "Spanish"
-#~ msgstr "Castelán"
-
-#~ msgid "Estonian"
-#~ msgstr "Estoniano"
-
-#~ msgid "Persian"
-#~ msgstr "Persa"
-
-#~ msgid "Finnish"
-#~ msgstr "Finés"
-
-#~ msgid "Faroese"
-#~ msgstr "Feroés"
-
-#~ msgid "French (France)"
-#~ msgstr "Francés (Francia)"
-
-#~ msgid "French (Swiss)"
-#~ msgstr "Francés (Suíza)"
-
-#~ msgid "Irish"
-#~ msgstr "Irlandés"
-
-#~ msgid "Scottish Gaelic"
-#~ msgstr "Gaélico escocés"
-
-#~ msgid "Gallegan"
-#~ msgstr "Galego"
-
-#~ msgid "Manx Gaelic"
-#~ msgstr "Gaélico manés"
-
-#~ msgid "Hindi"
-#~ msgstr "Hindi"
-
-#~ msgid "Croatian"
-#~ msgstr "Croata"
-
-#~ msgid "Upper Sorbian"
-#~ msgstr "Alto Serbio"
-
-#~ msgid "Hungarian"
-#~ msgstr "Húngaro"
-
-#~ msgid "Interlingua (IALA)"
-#~ msgstr "Interlingua (IALA)"
-
-#~ msgid "Indonesian"
-#~ msgstr "Indonesio"
-
-#~ msgid "Icelandic"
-#~ msgstr "Islandés"
-
-#~ msgid "Italian"
-#~ msgstr "Italiano"
-
-#~ msgid "Kurdish"
-#~ msgstr "Kurdo"
-
-#~ msgid "Latin"
-#~ msgstr "Latín"
-
-#~ msgid "Lithuanian"
-#~ msgstr "Lituano"
-
-#~ msgid "Latvian"
-#~ msgstr "Letón"
-
-#~ msgid "Malagasy"
-#~ msgstr "Malgaxe"
-
-#~ msgid "Maori"
-#~ msgstr "Maorí"
-
-#~ msgid "Macedonian"
-#~ msgstr "Macedonio"
-
-#~ msgid "Mongolian"
-#~ msgstr "Mongol"
-
-#~ msgid "Marathi"
-#~ msgstr "Maratí"
-
-#~ msgid "Malay"
-#~ msgstr "Malaio"
-
-#~ msgid "Maltese"
-#~ msgstr "Maltés"
-
-#~ msgid "Norwegian Bokmal"
-#~ msgstr "Noruegués Bokmal"
-
-#~ msgid "Dutch"
-#~ msgstr "Holandés"
-
-#~ msgid "Norwegian Nynorsk"
-#~ msgstr "Noruegués Nynorsk"
-
-#~ msgid "Norwegian"
-#~ msgstr "Noruegués"
-
-#~ msgid "Nyanja"
-#~ msgstr "Nyanja"
-
-#~ msgid "Polish"
-#~ msgstr "Polaco"
-
-#~ msgid "Portuguese (Portugal)"
-#~ msgstr "Portugués (Portugal)"
-
-#~ msgid "Portuguese (Brazilian)"
-#~ msgstr "Portugués (Brasil)"
-
-#~ msgid "Quechua"
-#~ msgstr "Quechua"
-
-#~ msgid "Russian"
-#~ msgstr "Ruso"
-
-#~ msgid "Kinyarwanda"
-#~ msgstr "Kinyarwanda"
-
-#~ msgid "Sardinian"
-#~ msgstr "Sardo"
-
-#~ msgid "Slovak"
-#~ msgstr "Eslovaco"
-
-#~ msgid "Slovenian"
-#~ msgstr "Esloveno"
-
-#~ msgid "Swedish"
-#~ msgstr "Sueco"
-
-#~ msgid "Swahili"
-#~ msgstr "Suahili"
-
-#~ msgid "Tamil"
-#~ msgstr "Tamil"
-
-#~ msgid "Tetum"
-#~ msgstr "Tétum"
-
-#~ msgid "Tagalog"
-#~ msgstr "Tagalo"
-
-#~ msgid "Tswana"
-#~ msgstr "Tswana"
-
-#~ msgid "Ukrainian"
-#~ msgstr "Ucraíno"
-
-#~ msgid "Uzbek"
-#~ msgstr "Usbeco"
-
-#~ msgid "Walloon"
-#~ msgstr "Valón"
-
-#~ msgid "Yiddish"
-#~ msgstr "Yiddish"
-
-#~ msgid "Zulu"
-#~ msgstr "Zulú"
-
-#~ msgid "BGSound"
-#~ msgstr "Son de fondo"
-
-#~ msgid "Behavior"
-#~ msgstr "Comportamento"
-
-#~ msgid "Blinking text"
-#~ msgstr "Texto intermitente"
-
-#~ msgid "Box"
-#~ msgstr "Caixa"
-
-#~ msgid "Space"
-#~ msgstr "Espazo"
