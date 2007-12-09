@@ -19,11 +19,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#include <string.h>
+#include <glib/gi18n.h>
 #include <libgnomevfs/gnome-vfs.h>
-#include <libgnomeui/libgnomeui.h>
 #include <gedit/gedit-utils.h>
 #include <gedit/gedit-plugin.h>
-#include <glib/gi18n.h>
 
 #include "gedit-file-bookmarks-store.h"
 #include "gedit-file-browser-utils.h"

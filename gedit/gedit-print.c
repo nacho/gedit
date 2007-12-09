@@ -34,7 +34,6 @@
 #endif
 
 #include <glib/gi18n.h>
-#include <libgnome/gnome-util.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -68,8 +67,10 @@ load_print_config_from_file ()
 	
 	gedit_debug (DEBUG_PRINT);
 
-	file_name = gnome_util_home_file (GEDIT_PRINT_CONFIG_FILE);
-
+	file_name = g_build_filename (g_get_home_dir(),
+				      ".gnome2/",
+				      GEDIT_PRINT_CONFIG_FILE,
+				      NULL);
 	res = g_file_get_contents (file_name, &contents, NULL, NULL);
 	g_free (file_name);
 
@@ -100,8 +101,11 @@ save_print_config_to_file (GnomePrintConfig *gedit_print_config)
 
 	str = gnome_print_config_to_string (gedit_print_config, 0);
 	g_return_if_fail (str != NULL);
-	
-	file_name = gnome_util_home_file (GEDIT_PRINT_CONFIG_FILE);
+
+	file_name = g_build_filename (g_get_home_dir(),
+				      ".gnome2/",
+				      GEDIT_PRINT_CONFIG_FILE,
+				      NULL);
 
 	fd = open (file_name, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	g_free (file_name);

@@ -25,7 +25,9 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <string.h>
 #include <glib/gi18n-lib.h>
+#include <gdk/gdkkeysyms.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomeui/libgnomeui.h>
 #include <gedit/gedit-utils.h>
