@@ -590,8 +590,6 @@ main (int argc, char *argv[])
 	gedit_prefs_manager_app_shutdown ();
 	gedit_metadata_manager_shutdown ();
 
-	gnome_accelerators_sync ();
-
 	g_object_unref (program);
 
 	return 0;

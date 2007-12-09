@@ -111,11 +111,40 @@ gedit_app_class_init (GeditAppClass *klass)
 	g_type_class_add_private (object_class, sizeof(GeditAppPrivate));
 }
 
+static gchar *
+get_accel_file (void)
+{
+	const gchar *home;
+
+	home = g_get_home_dir();
+
+	if (home != NULL)
+	{
+		return g_build_filename (home,
+					 ".gnome2/accels/"
+					 "gedit",
+					 NULL);
+	}
+
+	return NULL;
+}
+
 static void
 gedit_app_init (GeditApp *app)
 {
+	gchar *accel_file;
+
 	app->priv = GEDIT_APP_GET_PRIVATE (app);
-		
+
+	/* Load accels */
+	accel_file = get_accel_file ();
+	if (accel_file != NULL)
+	{
+		gedit_debug_message (DEBUG_APP, "Loading keybindings from %s\n", accel_file);		
+		gtk_accel_map_load (accel_file);
+		g_free (accel_file);
+	}
+
 	/* initial lockdown state */
 	app->priv->lockdown = gedit_prefs_manager_get_lockdown ();
 }
@@ -213,6 +242,16 @@ window_destroy (GeditWindow *window,
 */					      
 	if (app->priv->windows == NULL)
 	{
+		gchar *accel_file;
+		accel_file = get_accel_file ();
+
+		if (accel_file != NULL)
+		{
+			gedit_debug_message (DEBUG_APP, "Saveing keybindings in %s\n", accel_file);		
+			gtk_accel_map_save (accel_file);
+			g_free (accel_file);
+		}
+
 		g_object_unref (app);
 	}
 }
