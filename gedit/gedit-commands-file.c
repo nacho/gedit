@@ -164,7 +164,8 @@ load_file_list (GeditWindow         *window,
 						doc = gedit_tab_get_document (tab);
 						view = gedit_tab_get_view (tab);
 
-						gedit_document_goto_line (doc, line_pos);
+						/* document counts lines starting from 0 */
+						gedit_document_goto_line (doc, line_pos - 1);
 						gedit_view_scroll_to_cursor (view);
 					}
 				}
@@ -316,7 +317,7 @@ gedit_commands_load_uri (GeditWindow         *window,
 }
 
 /**
- * gedit_commands_load_uri:
+ * gedit_commands_load_uris:
  *
  * Ignore non-existing URIs 
  */
@@ -349,7 +350,6 @@ _gedit_cmd_load_files_from_prompt (GeditWindow         *window,
 
 	return load_file_list (window, uris, encoding, line_pos, TRUE);
 }
-
 
 static void
 open_dialog_destroyed (GeditWindow            *window,
