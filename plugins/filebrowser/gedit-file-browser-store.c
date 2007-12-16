@@ -23,8 +23,8 @@
 #include <config.h>
 #endif
 
+#include <string.h>
 #include <glib/gi18n-lib.h>
-#include <libgnomeui/libgnomeui.h>
 #include <gedit/gedit-plugin.h>
 #include <gedit/gedit-utils.h>
 
@@ -1510,10 +1510,8 @@ model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
 			     FileBrowserNode * node)
 {
 	GtkIconTheme *theme;
-	gchar *icon;
+	GdkPixbuf *icon;
 	gchar *uri;
-	gint icon_size;
-	GdkPixbuf *pixbuf;
 
 	g_return_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model));
 	g_return_if_fail (node != NULL);
@@ -1523,26 +1521,21 @@ model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
 
 	theme = gtk_icon_theme_get_default ();
 
-	gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, NULL, &icon_size);
 	uri = gnome_vfs_uri_to_string (node->uri, GNOME_VFS_URI_HIDE_NONE);
-	icon =
-	    gnome_icon_lookup (theme, NULL, uri, NULL, NULL,
-			       node->mime_type,
-			       GNOME_ICON_LOOKUP_FLAGS_NONE,
-			       GNOME_ICON_LOOKUP_RESULT_FLAGS_NONE);
+
+	icon = gedit_file_browser_utils_pixbuf_from_mime_type (uri,
+							       node->mime_type,
+							       GTK_ICON_SIZE_MENU);
 
 	if (node->icon)
 		g_object_unref (node->icon);
 
-	if (icon == NULL)
-		pixbuf = NULL;
-	else
-		pixbuf =
-		    gtk_icon_theme_load_icon (theme, icon, icon_size, 0,
-					      NULL);
-
 	if (node->emblem) {
-		if (!pixbuf) {
+		gint icon_size;
+
+		gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, NULL, &icon_size);
+
+		if (icon == NULL) {
 			node->icon =
 			    gdk_pixbuf_new (gdk_pixbuf_get_colorspace
 					    (node->emblem),
@@ -1552,8 +1545,8 @@ model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
 					    (node->emblem), icon_size,
 					    icon_size);
 		} else {
-			node->icon = gdk_pixbuf_copy (pixbuf);
-			g_object_unref (pixbuf);
+			node->icon = gdk_pixbuf_copy (icon);
+			g_object_unref (icon);
 		}
 
 		gdk_pixbuf_composite (node->emblem, node->icon,
@@ -1561,11 +1554,10 @@ model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
 				      10, icon_size - 10, icon_size - 10,
 				      1, 1, GDK_INTERP_NEAREST, 255);
 	} else {
-		node->icon = pixbuf;
+		node->icon = icon;
 	}
 
 	g_free (uri);
-	g_free (icon);
 }
 
 static void
