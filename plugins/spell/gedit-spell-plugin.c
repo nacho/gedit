@@ -32,8 +32,6 @@
 #include <glib/gutils.h>
 #include <gmodule.h>
 
-#include <libgnomeui/gnome-stock-icons.h>
-
 #include <gedit/gedit-debug.h>
 #include <gedit/gedit-metadata-manager.h>
 #include <gedit/gedit-prefs-manager.h>
@@ -47,7 +45,9 @@
 #define WINDOW_DATA_KEY "GeditSpellPluginWindowData"
 #define MENU_PATH "/MenuBar/ToolsMenu/ToolsOps_1"
 
-#define GEDIT_SPELL_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_SPELL_PLUGIN, GeditSpellPluginPrivate))
+#define GEDIT_SPELL_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
+					       GEDIT_TYPE_SPELL_PLUGIN, \
+					       GeditSpellPluginPrivate))
 
 GEDIT_PLUGIN_REGISTER_TYPE(GeditSpellPlugin, gedit_spell_plugin)
 
@@ -74,7 +74,7 @@ static const GtkActionEntry action_entries[] =
 	},
 
 	{ "ConfigSpell",
-	  GNOME_STOCK_BOOK_BLUE,
+	  NULL,
 	  N_("Set _Language..."),
 	  NULL,
 	  N_("Set the language of the current document"),
