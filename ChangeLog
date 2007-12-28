@@ -1,5 +1,14 @@
 2007-12-28  Steve Frécinaux  <code@istique.net>
 
+	* gedit/gedit-plugin-manager.c: Update the plugin manager to use the
+	plugin engine signals.
+	    
+	This has the advantage of allowing us to update the plugin list of the
+	manager when a plugin is activated in the background (through gconf,
+	for a dependency, etc.).
+
+2007-12-28  Steve Frécinaux  <code@istique.net>
+
 	* gedit/gedit-plugins-engine.[ch]: Add (de)activate signals to the
 	engine.
 

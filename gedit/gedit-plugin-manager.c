@@ -353,13 +353,6 @@ plugin_manager_set_active (GeditPluginManager *pm,
 			res = FALSE;
 		}
 	}
-  
-	/* set new value */
-	gtk_list_store_set (GTK_LIST_STORE (model), 
-			    iter, 
-			    ACTIVE_COLUMN, gedit_plugin_info_is_active (info),
-			    AVAILABLE_COLUMN, gedit_plugin_info_is_available (info),			    
-			    -1);
 
 	return res;
 }
@@ -654,7 +647,7 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	model = gtk_list_store_new (N_COLUMNS, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_POINTER);
+	model = gtk_list_store_new (N_COLUMNS, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, GEDIT_TYPE_PLUGIN_INFO);
 
 	gtk_tree_view_set_model (GTK_TREE_VIEW (pm->priv->tree),
 				 GTK_TREE_MODEL (model));
@@ -741,6 +734,49 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 	gtk_widget_show (pm->priv->tree);
 }
 
+static void
+plugin_toggled_cb (GeditPluginsEngine *engine,
+		   GeditPluginInfo    *info,
+		   GeditPluginManager *pm)
+{
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	gboolean info_found = FALSE;
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (pm->priv->tree));
+
+	if (gtk_tree_selection_get_selected (selection, &model, &iter))
+	{
+		/* There is an item selected: it's probably the one we want! */
+		GeditPluginInfo *tinfo;
+		gtk_tree_model_get (model, &iter, INFO_COLUMN, &tinfo, -1);
+		info_found = info == tinfo;
+	}
+
+	if (!info_found)
+	{
+		gtk_tree_model_get_iter_first (model, &iter);
+
+		do
+		{
+			GeditPluginInfo *tinfo;
+			gtk_tree_model_get (model, &iter, INFO_COLUMN, &tinfo, -1);
+			info_found = info == tinfo;
+		}
+		while (!info_found && gtk_tree_model_iter_next (model, &iter));
+	}
+
+	if (!info_found)
+	{
+		g_warning ("GeditPluginManager: plugin '%s' not found in the tree model",
+			   gedit_plugin_info_get_name (info));
+		return;
+	}
+
+	gtk_list_store_set (model, &iter, ACTIVE_COLUMN, gedit_plugin_info_is_active (info), -1);
+}
+
 static void 
 gedit_plugin_manager_init (GeditPluginManager *pm)
 {
@@ -812,6 +848,15 @@ gedit_plugin_manager_init (GeditPluginManager *pm)
 	/* get the plugin engine and populate the treeview */
 	pm->priv->engine = gedit_plugins_engine_get_default ();
 
+	g_signal_connect_after (pm->priv->engine,
+				"activate-plugin",
+				G_CALLBACK (plugin_toggled_cb),
+				pm);
+	g_signal_connect_after (pm->priv->engine,
+				"deactivate-plugin",
+				G_CALLBACK (plugin_toggled_cb),
+				pm);
+
 	if (gedit_plugins_engine_get_plugin_list (pm->priv->engine) != NULL)
 	{
 		plugin_manager_populate_lists (pm);
@@ -827,6 +872,10 @@ static void
 gedit_plugin_manager_finalize (GObject *object)
 {
 	GeditPluginManager *pm = GEDIT_PLUGIN_MANAGER (object);
+
+	g_signal_handlers_disconnect_by_func (pm->priv->engine,
+					      plugin_toggled_cb,
+					      pm);
 
 	if (pm->priv->popup_menu)
 		gtk_widget_destroy (pm->priv->popup_menu);
