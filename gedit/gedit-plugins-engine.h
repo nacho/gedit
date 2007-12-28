@@ -33,6 +33,7 @@
 
 #include <glib.h>
 #include "gedit-window.h"
+#include "gedit-plugin-info.h"
 #include "gedit-plugin.h"
 
 G_BEGIN_DECLS
@@ -43,8 +44,6 @@ G_BEGIN_DECLS
 #define GEDIT_IS_PLUGINS_ENGINE(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GEDIT_TYPE_PLUGINS_ENGINE))
 #define GEDIT_IS_PLUGINS_ENGINE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_PLUGINS_ENGINE))
 #define GEDIT_PLUGINS_ENGINE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GEDIT_TYPE_PLUGINS_ENGINE, GeditPluginsEngineClass))
-
-typedef struct _GeditPluginInfo			GeditPluginInfo;
 
 typedef struct _GeditPluginsEngine		GeditPluginsEngine;
 typedef struct _GeditPluginsEnginePrivate	GeditPluginsEnginePrivate;
@@ -93,28 +92,6 @@ void		 gedit_plugins_engine_update_plugins_ui (GeditPluginsEngine *engine,
 							 GeditWindow        *window, 
 							 gboolean            new_window);
 
-/*
- * Plugin metadata
- */
-#define GEDIT_TYPE_PLUGIN_INFO                 (gedit_plugin_info_get_type ())
-
-GType		 gedit_plugin_info_get_type		(void) G_GNUC_CONST;
-
-gboolean 	 gedit_plugin_info_is_active		(GeditPluginInfo *info);
-gboolean 	 gedit_plugin_info_is_available		(GeditPluginInfo *info);
-gboolean	 gedit_plugin_info_is_configurable	(GeditPluginInfo *info);
-
-const gchar	*gedit_plugin_info_get_name		(GeditPluginInfo *info);
-const gchar	*gedit_plugin_info_get_description	(GeditPluginInfo *info);
-const gchar	*gedit_plugin_info_get_icon_name	(GeditPluginInfo *info);
-const gchar    **gedit_plugin_info_get_authors		(GeditPluginInfo *info);
-const gchar	*gedit_plugin_info_get_website		(GeditPluginInfo *info);
-const gchar	*gedit_plugin_info_get_copyright	(GeditPluginInfo *info);
-
-GeditPlugin	*gedit_plugin_info_get_plugin		(GeditPluginInfo *info);
-
 G_END_DECLS
 
 #endif  /* __GEDIT_PLUGINS_ENGINE_H__ */
-
-

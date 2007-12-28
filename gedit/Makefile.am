@@ -48,12 +48,14 @@ BUILT_SOURCES = 			\
 	gedit-enum-types.c		\
 	gedit-enum-types.h		\
 	gedit-marshal.c			\
-	gedit-marshal.h              
+	gedit-marshal.h
 
 NOINST_H_FILES =			\
 	gedit-commands.h		\
 	gedit-language-manager.h	\
 	gedit-style-scheme-manager.h	\
+	gedit-plugin-info.h		\
+	gedit-plugin-info-priv.h	\
 	gedit-plugin-manager.h		\
 	gedit-plugins-engine.h		\
 	gedit-module.h			\
@@ -144,6 +146,7 @@ libgedit_la_SOURCES = 			\
 	gedit-module.c			\
 	gedit-notebook.c		\
 	gedit-panel.c			\
+	gedit-plugin-info.c		\
 	gedit-plugin.c			\
 	gedit-plugin-manager.c		\
 	gedit-plugins-engine.c		\
