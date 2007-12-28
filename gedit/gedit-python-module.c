@@ -389,8 +389,8 @@ gedit_init_pygtksourceview (void)
 gboolean
 gedit_python_init (void)
 {
-	PyObject *mdict, *path, *tuple;
-	PyObject *sys_path, *gedit, *geditutils, *geditcommands;
+	PyObject *mdict, *tuple;
+	PyObject *gedit, *geditutils, *geditcommands;
 	PyObject *gettext, *install, *gettext_args;
 	struct sigaction old_sigint;
 	gint res;
@@ -484,12 +484,6 @@ gedit_python_init (void)
 		goto python_init_error;
 	}	
 	
-	/* sys.path.insert(0, ...) for system-wide plugins */
-	sys_path = PySys_GetObject ("path");
-	path = PyString_FromString (GEDIT_PLUGINDIR "/");
-	PyList_Insert (sys_path, 0, path);
-	Py_DECREF(path);
-
 	/* import gedit */
 	gedit = Py_InitModule ("gedit", pygedit_functions);
 	mdict = PyModule_GetDict (gedit);

@@ -1,5 +1,18 @@
 2007-12-28  Steve Frécinaux  <code@istique.net>
 
+	* gedit/gedit-plugins-engine.c: Add support for a GEDIT_PLUGINS_PATH
+	environment variable. Based on a patch by Paolo Borelli. Fixes bug
+	#339298.
+
+	* gedit/gedit-python-module.c: Remove explicit $PATH setting since it
+	is unneeded and done for each plugin separately.
+
+	Note: by appending ':/usr/lib/gedit-2/plugins' to GEDIT_PLUGINSDIR in
+	Makefile.am, one could manually add support for distro-packaged
+	plugins in a custom build. This has not been done here yet though.
+
+2007-12-28  Steve Frécinaux  <code@istique.net>
+
 	* gedit/gedit-plugin-info-priv.h:
 	* gedit/gedit-plugin-info.[ch]:
 	* gedit/gedit-plugins-engine.[ch]:

@@ -101,6 +101,7 @@ gedit_plugins_engine_load_dir (GeditPluginsEngine *engine,
 	const gchar *dirent;
 
 	g_return_if_fail (engine->priv->gconf_client != NULL);
+	g_return_if_fail (dir != NULL);
 
 	gedit_debug_message (DEBUG_PLUGINS, "DIR: %s", dir);
 
@@ -159,8 +160,11 @@ gedit_plugins_engine_load_dir (GeditPluginsEngine *engine,
 static void
 gedit_plugins_engine_load_all (GeditPluginsEngine *engine)
 {
-	const gchar *home;
 	GSList *active_plugins;
+	const gchar *home;
+	const gchar *pdirs_env;
+	const gchar **pdirs;
+	int i;
 
 	active_plugins = gconf_client_get_list (engine->priv->gconf_client,
 						GEDIT_PLUGINS_ENGINE_KEY,
@@ -187,8 +191,18 @@ gedit_plugins_engine_load_all (GeditPluginsEngine *engine)
 		g_free (pdir);
 	}
 
-	/* load system plugins */
-	gedit_plugins_engine_load_dir (engine, GEDIT_PLUGINDIR "/", active_plugins);
+	pdirs_env = g_getenv ("GEDIT_PLUGINS_PATH");
+	/* What if no env var is set? We use the default location(s)! */
+	if (pdirs_env == NULL)
+		pdirs_env = GEDIT_PLUGINDIR;
+
+	gedit_debug_message (DEBUG_PLUGINS, "GEDIT_PLUGINS_PATH=%s", pdirs_env);
+	pdirs = g_strsplit (pdirs_env, G_SEARCHPATH_SEPARATOR_S, 0);
+
+	for (i = 0; pdirs[i] != NULL; i++)
+		gedit_plugins_engine_load_dir (engine, pdirs[i], active_plugins);
+
+	g_strfreev (pdirs);
 }
 
 static void
