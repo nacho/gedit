@@ -1,5 +1,19 @@
 2007-12-28  Steve Frécinaux  <code@istique.net>
 
+	* gedit/gedit-plugins-engine.c: Kill engine->active_plugins once and
+	for all.
+
+	We now build the active plugin list only when we need it (and don't
+	store it anymore):
+	  - when we load the plugins for the first time
+	  - when the plugin list is changed externally
+	  - when we save the plugin list to gconf
+
+	This avoid information duplication, thus making the code simpler and
+	less error prone.
+
+2007-12-28  Steve Frécinaux  <code@istique.net>
+
 	* gedit/gedit-plugins-engine.[ch]: Register a new (refcounted) boxed
 	GeditPluginInfo type. The reason is that signal marshalling need a
 	GType.
