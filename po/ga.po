@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit-HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-24 04:19-0700\n"
-"PO-Revision-Date: 2007-12-24 04:18-0700\n"
+"POT-Creation-Date: 2007-12-28 00:30-0700\n"
+"PO-Revision-Date: 2007-12-28 00:30-0700\n"
 "Last-Translator: Seán de Búrca <leftmostcat@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr ""
 
 #: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:765
 msgid "Active plugins"
-msgstr ""
+msgstr "Breiseáin gníomhacha"
 
 #: ../data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -105,7 +105,7 @@ msgstr ""
 
 #: ../data/gedit.schemas.in.h:19
 msgid "Highlight Current Line"
-msgstr ""
+msgstr "Aibhsigh Líne Reatha"
 
 #: ../data/gedit.schemas.in.h:20
 msgid "Highlight Matching Bracket"
@@ -676,7 +676,7 @@ msgstr "<b>Uimhreacha na Línte</b>"
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:3
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
 msgid "<b>Text Wrapping</b>"
-msgstr ""
+msgstr "<b>Timfhilleadh Téacs</b>"
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:4
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
@@ -922,9 +922,8 @@ msgid "_Search for: "
 msgstr "_Cuardaigh ar: "
 
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:8
-#, fuzzy
 msgid "_Wrap around"
-msgstr "Fill ar"
+msgstr "_Timfhill"
 
 #: ../gedit/gedit.c:73
 msgid ""
@@ -969,12 +968,14 @@ msgid "Loading file '%s'…"
 msgstr "Comhad '%s' á luchtú..."
 
 #: ../gedit/gedit-commands-file.c:280
-#, fuzzy, c-format
+#, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
-msgstr[0] "Ag Lódaíl %d comhad ..."
-msgstr[1] "Ag Lódáil %d comhaid ..."
-msgstr[2] "Ag Lódáil %d comhaid ..."
+msgstr[0] "%d chomhad á luchtú..."
+msgstr[1] "%d chomhad á luchtú..."
+msgstr[2] "%d chomhad á luchtú..."
+msgstr[3] "%d gcomhad á luchtú..."
+msgstr[4] "%d comhad á luchtú..."
 
 #. Translators: "Open Files" is the title of the file chooser window
 #: ../gedit/gedit-commands-file.c:424
@@ -1087,7 +1088,7 @@ msgstr "_Fill"
 
 #: ../gedit/gedit-commands-help.c:80
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
-msgstr ""
+msgstr "Is gedit eagarthóir téacs beag agus éadrom leis an Deasc GNOME"
 
 #: ../gedit/gedit-commands-help.c:96
 msgid "translator-credits"
@@ -1252,7 +1253,7 @@ msgstr ""
 #: ../gedit/gedit-encodings-option-menu.c:261
 #, c-format
 msgid "Current Locale (%s)"
-msgstr ""
+msgstr "Logchaighdeán Reatha (%s)"
 
 #: ../gedit/gedit-encodings-option-menu.c:322
 msgid "Add or _Remove..."
@@ -1272,9 +1273,9 @@ msgid "There was an error displaying help."
 msgstr "Bhí erraid ag taispaint Cabhair: %s"
 
 #: ../gedit/gedit-io-error-message-area.c:185
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file %s."
-msgstr "Earraidh ag lódáil comhad \"%s\""
+msgstr "Níorbh fhéidir an comhad %s a aimsiú."
 
 #: ../gedit/gedit-io-error-message-area.c:192
 #: ../gedit/gedit-io-error-message-area.c:441
@@ -1324,7 +1325,7 @@ msgstr ""
 #: ../gedit/gedit-io-error-message-area.c:482
 #, c-format
 msgid "%s is a directory."
-msgstr ""
+msgstr "Is fillteán é %s."
 
 #: ../gedit/gedit-io-error-message-area.c:247
 #: ../gedit/gedit-io-error-message-area.c:487
@@ -1389,9 +1390,9 @@ msgstr ""
 
 #: ../gedit/gedit-io-error-message-area.c:382
 #: ../gedit/gedit-io-error-message-area.c:776
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file %s."
-msgstr "Earraidh ag lódáil comhad \"%s\""
+msgstr "Níorbh fhéidir an comhad %s a oscailt."
 
 #: ../gedit/gedit-io-error-message-area.c:391
 #: ../gedit/gedit-io-error-message-area.c:683
@@ -1589,9 +1590,9 @@ msgid ""
 msgstr ""
 
 #: ../gedit/gedit-io-error-message-area.c:1386
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file %s."
-msgstr "Earraidh ag lódáil comhad \"%s\""
+msgstr "Níorbh fhéidir an comhad %s a shábháil."
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
@@ -1648,7 +1649,7 @@ msgstr "C_umraigh"
 
 #: ../gedit/gedit-plugin-manager.c:532
 msgid "A_ctivate"
-msgstr ""
+msgstr "_Gníomhachtaigh"
 
 #: ../gedit/gedit-plugin-manager.c:544
 msgid "Ac_tivate All"
@@ -1702,7 +1703,7 @@ msgstr ""
 
 #: ../gedit/gedit-print-job-preview.c:708
 msgid "Other"
-msgstr ""
+msgstr "Eile"
 
 #: ../gedit/gedit-print-job-preview.c:738
 msgid "Show the previous page"
@@ -1714,7 +1715,7 @@ msgstr ""
 
 #: ../gedit/gedit-print-job-preview.c:764
 msgid "Current page (Alt+P)"
-msgstr ""
+msgstr "Leathanach reatha (Alt+P)"
 
 #. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
 #. We are displaying 'XXX of XXX'.
@@ -1756,9 +1757,8 @@ msgid "_Close Preview"
 msgstr "_Dún Réamhamharc"
 
 #: ../gedit/gedit-print-job-preview.c:852
-#, fuzzy
 msgid "Close print preview"
-msgstr "Reámhtaispeántas"
+msgstr "Dún réamhamharc priontála"
 
 #: ../gedit/gedit-print-job-preview.c:1092
 #: ../gedit/gedit-print-job-preview.c:1093
@@ -1844,9 +1844,9 @@ msgid "RO"
 msgstr "LA"
 
 #: ../gedit/gedit-tab.c:1691
-#, fuzzy, c-format
+#, c-format
 msgid "Error opening file %s"
-msgstr "Earraidh ag lódáil comhad \"%s\""
+msgstr "Earráid agus comhad %s á oscailt"
 
 #: ../gedit/gedit-tab.c:1696
 #, fuzzy, c-format
@@ -1854,9 +1854,9 @@ msgid "Error reverting file %s"
 msgstr "Earraidh ag lódáil comhad \"%s\""
 
 #: ../gedit/gedit-tab.c:1701
-#, fuzzy, c-format
+#, c-format
 msgid "Error saving file %s"
-msgstr "Earraidh ag lódáil comhad \"%s\""
+msgstr "Earráid agus comhad %s á shábháil"
 
 #: ../gedit/gedit-tab.c:1719
 msgid "Unicode (UTF-8)"
@@ -1926,7 +1926,7 @@ msgstr "Osc_ail Suíomh..."
 
 #: ../gedit/gedit-ui.h:63
 msgid "Open a file from a specified location"
-msgstr ""
+msgstr "Oscail comhad ó shuíomh "
 
 #. Edit menu
 #: ../gedit/gedit-ui.h:66
@@ -1935,7 +1935,7 @@ msgstr "_Sainroghanna"
 
 #: ../gedit/gedit-ui.h:67
 msgid "Configure the application"
-msgstr ""
+msgstr "Cumraigh an feidhmchlár"
 
 #. Help menu
 #: ../gedit/gedit-ui.h:70
@@ -1987,9 +1987,8 @@ msgid "_Print..."
 msgstr "_Priontáil"
 
 #: ../gedit/gedit-ui.h:90
-#, fuzzy
 msgid "Print the current page"
-msgstr "Priontáil an comhad seo"
+msgstr "Priontáil an leathanach reatha"
 
 #: ../gedit/gedit-ui.h:92
 msgid "Close the current file"
@@ -2108,18 +2107,16 @@ msgid "Close all open files"
 msgstr "Dún gach comhad oscailte"
 
 #: ../gedit/gedit-ui.h:134
-#, fuzzy
 msgid "_Previous Document"
-msgstr "Ca_péiseanna"
+msgstr "Cáipéis _Roimhe Seo"
 
 #: ../gedit/gedit-ui.h:135
 msgid "Activate previous document"
 msgstr ""
 
 #: ../gedit/gedit-ui.h:136
-#, fuzzy
 msgid "_Next Document"
-msgstr "Ca_péiseanna"
+msgstr "An Chéad Cháipéis _Eile"
 
 #: ../gedit/gedit-ui.h:137
 #, fuzzy
@@ -2186,9 +2183,8 @@ msgstr ""
 
 #. create "Wrap Around" menu item.
 #: ../gedit/gedit-view.c:1137
-#, fuzzy
 msgid "_Wrap Around"
-msgstr "Fill ar"
+msgstr "_Timfhill"
 
 #. create "Match Entire Word Only" menu item.
 #: ../gedit/gedit-view.c:1147
@@ -2408,7 +2404,7 @@ msgstr "Líne reatha"
 
 #: ../plugins/externaltools/tools/manager.py:45
 msgid "Current word"
-msgstr ""
+msgstr "Focal reatha"
 
 #: ../plugins/externaltools/tools/manager.py:48
 msgid "Display in bottom pane"
@@ -2424,14 +2420,12 @@ msgid "Append to current document"
 msgstr "Sábháil an comhad seo"
 
 #: ../plugins/externaltools/tools/manager.py:51
-#, fuzzy
 msgid "Replace current document"
-msgstr "Sábháil an comhad seo"
+msgstr "Ionadaigh cáipéis reatha"
 
 #: ../plugins/externaltools/tools/manager.py:52
-#, fuzzy
 msgid "Replace current selection"
-msgstr "Cóip roghnaithe"
+msgstr "Ionadaigh roghnú reatha"
 
 #: ../plugins/externaltools/tools/manager.py:53
 msgid "Insert at cursor position"
@@ -2454,9 +2448,8 @@ msgid "Remote files only"
 msgstr ""
 
 #: ../plugins/externaltools/tools/manager.py:60
-#, fuzzy
 msgid "Untitled documents only"
-msgstr "Ca_péiseanna"
+msgstr "Cáipéisí gan teideal amháin"
 
 #: ../plugins/externaltools/tools/manager.py:200
 #: ../plugins/externaltools/tools/manager.py:230
@@ -2678,7 +2671,7 @@ msgstr ""
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:605
 msgid "_Open terminal here"
-msgstr ""
+msgstr "_Oscail teirminéal anseo"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:607
 msgid "Open a terminal at the currently opened directory"
@@ -2797,18 +2790,16 @@ msgid "_Delete"
 msgstr "Scri_os"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:836
-#, fuzzy
 msgid "Delete selected file or folder"
-msgstr "Dealaigh an teacs roghaithe"
+msgstr "Scrios comhad nó fillteán roghnaithe"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:842
 msgid "Up"
 msgstr "Suas"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:843
-#, fuzzy
 msgid "Open the parent folder"
-msgstr "Sábháil an comhad seo"
+msgstr "Oscail an máthairfhillteán"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:848
 msgid "_New Folder"
@@ -2835,18 +2826,16 @@ msgid "Rename selected file or folder"
 msgstr ""
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:864
-#, fuzzy
 msgid "_Previous Location"
-msgstr "Oscail áit"
+msgstr "Suíomh _Roimhe Seo"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:866
 msgid "Go to the previous visited location"
 msgstr ""
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:868
-#, fuzzy
 msgid "_Next Location"
-msgstr "Oscail áit"
+msgstr "An Chéad Suíomh _Eile"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:869
 msgid "Go to the next visited location"
@@ -2887,9 +2876,8 @@ msgstr ""
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:989
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1005
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1037
-#, fuzzy
 msgid "Previous location"
-msgstr "Airméinis"
+msgstr "Suíomh roimhe seo"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:993
 msgid "Go to previous location"
@@ -2901,9 +2889,8 @@ msgid "Go to a previously opened location"
 msgstr ""
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1020
-#, fuzzy
 msgid "Next location"
-msgstr "Oscail áit"
+msgstr "An chéad suíomh eile"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1024
 msgid "Go to next location"
@@ -3208,9 +3195,8 @@ msgid "S_ort..."
 msgstr "Só_rtáil..."
 
 #: ../plugins/sort/gedit-sort-plugin.c:82
-#, fuzzy
 msgid "Sort the current document or selection"
-msgstr "Sábháil an comhad seo"
+msgstr "Sórtáil an cáipéis reatha nó roghnú"
 
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:1
 #: ../plugins/sort/sort.glade2.h:3
@@ -3328,7 +3314,7 @@ msgstr "Teangacha"
 
 #: ../plugins/spell/gedit-spell-plugin.c:70
 msgid "_Check Spelling"
-msgstr ""
+msgstr "_Seiceáil Litriú"
 
 #: ../plugins/spell/gedit-spell-plugin.c:72
 msgid "Check the current document for incorrect spelling"
@@ -3344,7 +3330,7 @@ msgstr ""
 
 #: ../plugins/spell/gedit-spell-plugin.c:89
 msgid "_Autocheck Spelling"
-msgstr ""
+msgstr "_Uathsheiceáil Litriú"
 
 #: ../plugins/spell/gedit-spell-plugin.c:91
 msgid "Automatically spell-check the current document"
@@ -3429,9 +3415,8 @@ msgid "Checks the spelling of the current document."
 msgstr ""
 
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Spell Checker"
-msgstr "Litriú"
+msgstr "Litreoir"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:599
 msgid "Select the group of tags you want to use"
@@ -3455,9 +3440,8 @@ msgid "Abbreviated form"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:2
-#, fuzzy
 msgid "Abbreviation"
-msgstr "Airméinis"
+msgstr "Giorrúchán"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
@@ -3524,9 +3508,8 @@ msgstr "Dath cúlra"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Background color (deprecated)"
-msgstr "Dá_th an Dúlra:"
+msgstr "Dath cúlra (lochtach)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:21
 #, fuzzy
@@ -3575,9 +3558,8 @@ msgid "Cell rowspan"
 msgstr "Eorpach Lárnach"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:34
-#, fuzzy
 msgid "Center"
-msgstr "Ginearál"
+msgstr "Lárnach"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:36
@@ -3701,14 +3683,12 @@ msgid "Definition term"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:71
-#, fuzzy
 msgid "Deleted text"
-msgstr "Dealaigh an teacs roghaithe"
+msgstr "Téacs scriosta"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:72
-#, fuzzy
 msgid "Direction"
-msgstr "_Cuma"
+msgstr "Treo"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Directionality"
@@ -3728,29 +3708,24 @@ msgid "Disabled"
 msgstr "Díchumasaithe"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:78
-#, fuzzy
 msgid "Document base"
-msgstr "Ca_péiseanna"
+msgstr "Bonn cáipéise"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:79
-#, fuzzy
 msgid "Document body"
-msgstr "Ca_péiseanna"
+msgstr "Corp cáipéise"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:80
-#, fuzzy
 msgid "Document head"
-msgstr "Ca_péiseanna"
+msgstr "Ceann cáipéise"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:81
-#, fuzzy
 msgid "Document title"
-msgstr "Ca_péiseanna"
+msgstr "Teideal cáipéise"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:82
-#, fuzzy
 msgid "Document type"
-msgstr "Ca_péiseanna"
+msgstr "Cineál cáipéise"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Element ID"
@@ -3774,9 +3749,8 @@ msgid "Figure"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:88
-#, fuzzy
 msgid "Font face"
-msgstr "ainm an Cló"
+msgstr "Cló-aghaidh"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:90
@@ -3784,9 +3758,8 @@ msgid "Font face (deprecated)"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:91
-#, fuzzy
 msgid "For label"
-msgstr "lipéaid"
+msgstr "Lipéad Do"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:92
 msgid "Forced line break"
@@ -3869,9 +3842,8 @@ msgid "Generic metainformation"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:112
-#, fuzzy
 msgid "Generic span"
-msgstr "Ginearál"
+msgstr "Réise ghinearálta"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:113
 msgid "HREF URI"
@@ -3975,9 +3947,8 @@ msgid "Image source"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:139
-#, fuzzy
 msgid "Inline frame"
-msgstr "Ainm Comhad neamhbhailí"
+msgstr "Fráma inlíne"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Inline layer"
@@ -4198,9 +4169,8 @@ msgid "OnBlur event"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:201
-#, fuzzy
 msgid "OnChange event"
-msgstr "A_thrú"
+msgstr "Teagmhas OnChange"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:202
 msgid "OnClick event"
@@ -4313,9 +4283,8 @@ msgid "Prompt message"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:229
-#, fuzzy
 msgid "Push button"
-msgstr "cnaipe1"
+msgstr "Brúigh cnaipe"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:230
 msgid "Quote"
@@ -4364,9 +4333,8 @@ msgstr ""
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:243
-#, fuzzy
 msgid "Script language name"
-msgstr "Pioc teanga"
+msgstr "Ainm teanga scripte"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Script statments"
@@ -4794,9 +4762,8 @@ msgid "Latex - Tags"
 msgstr ""
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:38
-#, fuzzy
 msgid "List description"
-msgstr "_Cuma"
+msgstr "Cur síos an liosta"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:39
 msgid "List enumerate"
