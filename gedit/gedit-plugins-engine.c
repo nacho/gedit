@@ -123,7 +123,7 @@ gedit_plugin_info_free (GeditPluginInfo *info)
 }
 
 static GeditPluginInfo *
-gedit_plugins_engine_load (const gchar *file)
+gedit_plugin_info_new (const gchar *file)
 {
 	GeditPluginInfo *info;
 	GKeyFile *plugin_file = NULL;
@@ -316,7 +316,7 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 			GeditPluginInfo *info;
 			
 			plugin_file = g_build_filename (dir, dirent, NULL);
-			info = gedit_plugins_engine_load (plugin_file);
+			info = gedit_plugin_info_new (plugin_file);
 			g_free (plugin_file);
 
 			if (info == NULL)
@@ -748,22 +748,6 @@ gedit_plugins_engine_deactivate_plugin (GeditPluginInfo *info)
 	return TRUE;
 }
 
-gboolean
-gedit_plugins_engine_plugin_is_active (GeditPluginInfo *info)
-{
-	g_return_val_if_fail (info != NULL, FALSE);
-	
-	return (info->available && info->active);
-}
-
-gboolean
-gedit_plugins_engine_plugin_is_available (GeditPluginInfo *info)
-{
-	g_return_val_if_fail (info != NULL, FALSE);
-	
-	return (info->available != FALSE);
-}
-
 static void
 reactivate_all (GeditWindow *window)
 {
@@ -817,19 +801,6 @@ gedit_plugins_engine_update_plugins_ui (GeditWindow *window,
 		
 		gedit_plugin_update_ui (info->plugin, window);
 	}
-}
-
-gboolean
-gedit_plugins_engine_plugin_is_configurable (GeditPluginInfo *info)
-{
-	gedit_debug (DEBUG_PLUGINS);
-
-	g_return_val_if_fail (info != NULL, FALSE);
-
-	if ((info->plugin == NULL) || !info->active || !info->available)
-		return FALSE;
-	
-	return gedit_plugin_is_configurable (info->plugin);
 }
 
 void 	 
@@ -921,58 +892,94 @@ gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 	}
 }
 
+gboolean
+gedit_plugin_info_is_active (GeditPluginInfo *info)
+{
+	g_return_val_if_fail (info != NULL, FALSE);
+
+	return info->available && info->active;
+}
+
+gboolean
+gedit_plugin_info_is_available (GeditPluginInfo *info)
+{
+	g_return_val_if_fail (info != NULL, FALSE);
+
+	return info->available != FALSE;
+}
+
+gboolean
+gedit_plugin_info_is_configurable (GeditPluginInfo *info)
+{
+	gedit_debug_message (DEBUG_PLUGINS, "Is '%s' configurable?", info->name);
+
+	g_return_val_if_fail (info != NULL, FALSE);
+
+	if (info->plugin == NULL || !info->active || !info->available)
+		return FALSE;
+
+	return gedit_plugin_is_configurable (info->plugin);
+}
+
 const gchar *
-gedit_plugins_engine_get_plugin_name (GeditPluginInfo *info)
+gedit_plugin_info_get_name (GeditPluginInfo *info)
 {
 	g_return_val_if_fail (info != NULL, NULL);
-	
+
 	return info->name;
 }
 
 const gchar *
-gedit_plugins_engine_get_plugin_description (GeditPluginInfo *info)
+gedit_plugin_info_get_description (GeditPluginInfo *info)
 {
 	g_return_val_if_fail (info != NULL, NULL);
-	
+
 	return info->desc;
 }
 
 const gchar *
-gedit_plugins_engine_get_plugin_icon_name (GeditPluginInfo *info)
+gedit_plugin_info_get_icon_name (GeditPluginInfo *info)
 {
 	g_return_val_if_fail (info != NULL, NULL);
-	
+
 	/* use the gedit-plugin icon as a default if the plugin does not
 	   have its own */
 	if (info->icon_name != NULL && 
 	    gtk_icon_theme_has_icon (gtk_icon_theme_get_default (),
-	    			     info->icon_name))
+				     info->icon_name))
 		return info->icon_name;
 	else
 		return "gedit-plugin";
 }
 
 const gchar **
-gedit_plugins_engine_get_plugin_authors (GeditPluginInfo *info)
+gedit_plugin_info_get_authors (GeditPluginInfo *info)
 {
 	g_return_val_if_fail (info != NULL, (const gchar **)NULL);
-	
-	return (const gchar **)info->authors;
+
+	return (const gchar **) info->authors;
 }
 
 const gchar *
-gedit_plugins_engine_get_plugin_website (GeditPluginInfo *info)
+gedit_plugin_info_get_website (GeditPluginInfo *info)
 {
 	g_return_val_if_fail (info != NULL, NULL);
-	
+
 	return info->website;
 }
 
 const gchar *
-gedit_plugins_engine_get_plugin_copyright (GeditPluginInfo *info)
+gedit_plugin_info_get_copyright (GeditPluginInfo *info)
 {
 	g_return_val_if_fail (info != NULL, NULL);
-	
+
 	return info->copyright;
 }
 
+GeditPlugin *
+gedit_plugin_info_get_plugin (GeditPluginInfo *info)
+{
+	g_return_val_if_fail (info != NULL, NULL);
+
+	return info->plugin;
+}

@@ -104,12 +104,12 @@ about_button_cb (GtkWidget          *button,
 		gtk_widget_destroy (pm->priv->about);
 
 	pm->priv->about = g_object_new (GTK_TYPE_ABOUT_DIALOG,
-		"name", gedit_plugins_engine_get_plugin_name (info),
-		"copyright", gedit_plugins_engine_get_plugin_copyright (info),
-		"authors", gedit_plugins_engine_get_plugin_authors (info),
-		"comments", gedit_plugins_engine_get_plugin_description (info),
-		"website", gedit_plugins_engine_get_plugin_website (info),
-		"logo-icon-name", gedit_plugins_engine_get_plugin_icon_name (info),
+		"name", gedit_plugin_info_get_name (info),
+		"copyright", gedit_plugin_info_get_copyright (info),
+		"authors", gedit_plugin_info_get_authors (info),
+		"comments", gedit_plugin_info_get_description (info),
+		"website", gedit_plugin_info_get_website (info),
+		"logo-icon-name", gedit_plugin_info_get_icon_name (info),
 		NULL);
 
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (pm->priv->about),
@@ -143,7 +143,7 @@ configure_button_cb (GtkWidget          *button,
 	g_return_if_fail (info != NULL);
 
 	gedit_debug_message (DEBUG_PLUGINS, "Configuring: %s\n", 
-			     gedit_plugins_engine_get_plugin_name (info));
+			     gedit_plugin_info_get_name (info));
 
 	toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(pm)));
 
@@ -171,13 +171,11 @@ plugin_manager_view_info_cell_cb (GtkTreeViewColumn *tree_column,
 		return;
 
 	text = g_markup_printf_escaped ("<b>%s</b>\n%s",
-					gedit_plugins_engine_get_plugin_name (info),
-					gedit_plugins_engine_get_plugin_description (info));
+					gedit_plugin_info_get_name (info),
+					gedit_plugin_info_get_description (info));
 	g_object_set (G_OBJECT (cell),
-		      "markup",
-		      text,
-		      "sensitive",
-		      gedit_plugins_engine_plugin_is_available (info),
+		      "markup", text,
+		      "sensitive", gedit_plugin_info_is_available (info),
 		      NULL);
 
 	g_free (text);
@@ -201,10 +199,8 @@ plugin_manager_view_icon_cell_cb (GtkTreeViewColumn *tree_column,
 		return;
 
 	g_object_set (G_OBJECT (cell),
-		      "icon-name",
-		      gedit_plugins_engine_get_plugin_icon_name (info),
-		      "sensitive",
-		      gedit_plugins_engine_plugin_is_available (info),
+		      "icon-name", gedit_plugin_info_get_icon_name (info),
+		      "sensitive", gedit_plugin_info_is_available (info),
 		      NULL);
 }
 
@@ -248,7 +244,7 @@ cursor_changed_cb (GtkTreeView *view,
 				  info != NULL);
 	gtk_widget_set_sensitive (GTK_WIDGET (pm->priv->configure_button),
 				  (info != NULL) && 
-				   gedit_plugins_engine_plugin_is_configurable (info));
+				   gedit_plugin_info_is_configurable (info));
 }
 
 static void
@@ -294,8 +290,8 @@ plugin_manager_populate_lists (GeditPluginManager *pm)
 
 		gtk_list_store_append (model, &iter);
 		gtk_list_store_set (model, &iter,
-				    ACTIVE_COLUMN, gedit_plugins_engine_plugin_is_active (info),
-				    AVAILABLE_COLUMN, gedit_plugins_engine_plugin_is_available (info),
+				    ACTIVE_COLUMN, gedit_plugin_info_is_active (info),
+				    AVAILABLE_COLUMN, gedit_plugin_info_is_available (info),
 				    INFO_COLUMN, info,
 				    -1);
 
@@ -316,7 +312,7 @@ plugin_manager_populate_lists (GeditPluginManager *pm)
 				    INFO_COLUMN, &info, -1);
 
 		gtk_widget_set_sensitive (GTK_WIDGET (pm->priv->configure_button),
-					  gedit_plugins_engine_plugin_is_configurable (info));
+					  gedit_plugin_info_is_configurable (info));
 	}
 }
 
@@ -339,8 +335,8 @@ plugin_manager_set_active (GtkTreeIter  *iter,
 		/* activate the plugin */
 		if (!gedit_plugins_engine_activate_plugin (info)) {
 			gedit_debug_message (DEBUG_PLUGINS, "Could not activate %s.\n", 
-					     gedit_plugins_engine_get_plugin_name (info));
-					     
+					     gedit_plugin_info_get_name (info));
+
 			res = FALSE;
 		}
 	}
@@ -349,7 +345,7 @@ plugin_manager_set_active (GtkTreeIter  *iter,
 		/* deactivate the plugin */
 		if (!gedit_plugins_engine_deactivate_plugin (info)) {
 			gedit_debug_message (DEBUG_PLUGINS, "Could not deactivate %s.\n", 
-					     gedit_plugins_engine_get_plugin_name (info));
+					     gedit_plugin_info_get_name (info));
 
 			res = FALSE;
 		}
@@ -358,10 +354,8 @@ plugin_manager_set_active (GtkTreeIter  *iter,
 	/* set new value */
 	gtk_list_store_set (GTK_LIST_STORE (model), 
 			    iter, 
-			    ACTIVE_COLUMN,
-			    gedit_plugins_engine_plugin_is_active (info),
-			    AVAILABLE_COLUMN,
-			    gedit_plugins_engine_plugin_is_available (info),			    
+			    ACTIVE_COLUMN, gedit_plugin_info_is_active (info),
+			    AVAILABLE_COLUMN, gedit_plugin_info_is_available (info),			    
 			    -1);
 
 	return res;
@@ -447,7 +441,7 @@ name_search_cb (GtkTreeModel *model,
 	if (!info)
 		return FALSE;
 
-	normalized_string = g_utf8_normalize (gedit_plugins_engine_get_plugin_name (info), -1, G_NORMALIZE_ALL);
+	normalized_string = g_utf8_normalize (gedit_plugin_info_get_name (info), -1, G_NORMALIZE_ALL);
 	normalized_key = g_utf8_normalize (key, -1, G_NORMALIZE_ALL);
 	case_normalized_string = g_utf8_casefold (normalized_string, -1);
 	case_normalized_key = g_utf8_casefold (normalized_key, -1);
@@ -525,18 +519,16 @@ create_tree_popup_menu (GeditPluginManager *pm)
 	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
 	g_signal_connect (item, "activate",
 			  G_CALLBACK (configure_button_cb), pm);
-	gtk_widget_set_sensitive (item,
-				  gedit_plugins_engine_plugin_is_configurable (info));
+	gtk_widget_set_sensitive (item, gedit_plugin_info_is_configurable (info));
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
 	item = gtk_check_menu_item_new_with_mnemonic (_("A_ctivate"));
-	gtk_widget_set_sensitive (item,
-				  gedit_plugins_engine_plugin_is_available (info));	
+	gtk_widget_set_sensitive (item, gedit_plugin_info_is_available (info));
 	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item),
-					gedit_plugins_engine_plugin_is_active (info));
+					gedit_plugin_info_is_active (info));
 	g_signal_connect (item, "toggled",
 			  G_CALLBACK (enable_plugin_menu_cb), pm);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);					
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
 	item = gtk_separator_menu_item_new ();
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
@@ -645,8 +637,8 @@ model_name_sort_func (GtkTreeModel *model,
 	gtk_tree_model_get (model, iter1, INFO_COLUMN, &info1, -1);
 	gtk_tree_model_get (model, iter2, INFO_COLUMN, &info2, -1);
 
-	return g_utf8_collate (gedit_plugins_engine_get_plugin_name (info1),
-			       gedit_plugins_engine_get_plugin_name (info2));
+	return g_utf8_collate (gedit_plugin_info_get_name (info1),
+			       gedit_plugin_info_get_name (info2));
 }
 
 static void

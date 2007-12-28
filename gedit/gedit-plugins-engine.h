@@ -32,7 +32,8 @@
 #define __GEDIT_PLUGINS_ENGINE_H__
 
 #include <glib.h>
-#include <gedit/gedit-window.h>
+#include "gedit-window.h"
+#include "gedit-plugin.h"
 
 typedef struct _GeditPluginInfo GeditPluginInfo;
 
@@ -45,12 +46,7 @@ const GList	*gedit_plugins_engine_get_plugins_list 	(void);
 
 gboolean 	 gedit_plugins_engine_activate_plugin 	(GeditPluginInfo *info);
 gboolean 	 gedit_plugins_engine_deactivate_plugin	(GeditPluginInfo *info);
-gboolean 	 gedit_plugins_engine_plugin_is_active 	(GeditPluginInfo *info);
-gboolean 	 gedit_plugins_engine_plugin_is_available
-							(GeditPluginInfo *info);
 
-gboolean	 gedit_plugins_engine_plugin_is_configurable 
-							(GeditPluginInfo *info);
 void	 	 gedit_plugins_engine_configure_plugin	(GeditPluginInfo *info, 
 							 GtkWindow       *parent);
 
@@ -61,18 +57,21 @@ void	 	 gedit_plugins_engine_configure_plugin	(GeditPluginInfo *info,
 void		 gedit_plugins_engine_update_plugins_ui (GeditWindow     *window, 
 							 gboolean         new_window);
 
+/*
+ * Plugin metadata
+ */
+gboolean 	 gedit_plugin_info_is_active		(GeditPluginInfo *info);
+gboolean 	 gedit_plugin_info_is_available		(GeditPluginInfo *info);
+gboolean	 gedit_plugin_info_is_configurable	(GeditPluginInfo *info);
 
-const gchar	*gedit_plugins_engine_get_plugin_name	(GeditPluginInfo *info);
-const gchar	*gedit_plugins_engine_get_plugin_description
-							(GeditPluginInfo *info);
-const gchar	*gedit_plugins_engine_get_plugin_icon_name
-							(GeditPluginInfo *info);
-const gchar    **gedit_plugins_engine_get_plugin_authors
-							(GeditPluginInfo *info);
-const gchar	*gedit_plugins_engine_get_plugin_website
-							(GeditPluginInfo *info);
-const gchar	*gedit_plugins_engine_get_plugin_copyright
-							(GeditPluginInfo *info);
+const gchar	*gedit_plugin_info_get_name		(GeditPluginInfo *info);
+const gchar	*gedit_plugin_info_get_description	(GeditPluginInfo *info);
+const gchar	*gedit_plugin_info_get_icon_name	(GeditPluginInfo *info);
+const gchar    **gedit_plugin_info_get_authors		(GeditPluginInfo *info);
+const gchar	*gedit_plugin_info_get_website		(GeditPluginInfo *info);
+const gchar	*gedit_plugin_info_get_copyright	(GeditPluginInfo *info);
+
+GeditPlugin	*gedit_plugin_info_get_plugin		(GeditPluginInfo *info);
 
 #endif  /* __GEDIT_PLUGINS_ENGINE_H__ */
 
