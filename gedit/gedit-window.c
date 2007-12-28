@@ -120,7 +120,7 @@ gedit_window_dispose (GObject *object)
 	/* First of all, force collection so that plugins
 	 * really drop some of the references.
 	 */
-	gedit_plugins_engine_garbage_collect ();
+	gedit_plugins_engine_garbage_collect (gedit_plugins_engine_get_default ());
 
 	if (window->priv->recents_handler_id != 0)
 	{
@@ -147,7 +147,7 @@ gedit_window_dispose (GObject *object)
 	/* Now that there have broken some reference loops,
 	 * force collection again.
 	 */
-	gedit_plugins_engine_garbage_collect ();
+	gedit_plugins_engine_garbage_collect (gedit_plugins_engine_get_default ());
 
 	G_OBJECT_CLASS (gedit_window_parent_class)->dispose (object);
 }
@@ -286,7 +286,7 @@ static void
 gedit_window_tab_removed (GeditWindow *window,
 			  GeditTab    *tab) 
 {
-	gedit_plugins_engine_garbage_collect();
+	gedit_plugins_engine_garbage_collect (gedit_plugins_engine_get_default ());
 }
 
 static void
@@ -764,7 +764,8 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 
 	update_next_prev_doc_sensitivity (window, tab);
 	
-	gedit_plugins_engine_update_plugins_ui (window, FALSE);
+	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
+						window, FALSE);
 }
 
 static void
@@ -2241,7 +2242,8 @@ sync_name (GeditTab    *tab,
 	g_free (escaped_name);
 	g_free (tip);
 
-	gedit_plugins_engine_update_plugins_ui (window, FALSE);
+	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
+						window, FALSE);
 }
 
 static GeditWindow *
@@ -2437,7 +2439,8 @@ editable_changed (GeditView  *view,
                   GParamSpec  *arg1,
                   GeditWindow *window)
 {
-	gedit_plugins_engine_update_plugins_ui (window, FALSE);
+	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
+						window, FALSE);
 }
 
 static void
@@ -2619,7 +2622,8 @@ notebook_tab_removed (GeditNotebook *notebook,
 						      "ViewHighlightMode");
 		gtk_action_set_sensitive (action, FALSE);
 
-		gedit_plugins_engine_update_plugins_ui (window, FALSE);
+		gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
+							window, FALSE);
 	}
 
 	if (window->priv->num_tabs <= 1)
@@ -3179,7 +3183,8 @@ gedit_window_init (GeditWindow *window)
 			  NULL);
 
 	gedit_debug_message (DEBUG_WINDOW, "Update plugins ui");
-	gedit_plugins_engine_update_plugins_ui (window, TRUE);
+	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
+						window, TRUE);
 
 	/* set visibility of panes.
 	 * This needs to be done after plugins activatation */

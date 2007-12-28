@@ -55,6 +55,15 @@
 
 #define PLUGIN_EXT	".gedit-plugin"
 
+G_DEFINE_TYPE(GeditPluginsEngine, gedit_plugins_engine, G_TYPE_OBJECT)
+
+struct _GeditPluginsEnginePrivate
+{
+	GList *plugin_list;
+	GConfClient *gconf_client;
+	GSList *active_plugins;
+};
+
 typedef enum
 {
 	GEDIT_PLUGIN_LOADER_C,
@@ -86,16 +95,12 @@ struct _GeditPluginInfo
 	gint               available : 1;
 };
 
+GeditPluginsEngine *default_engine = NULL;
+
 static void	gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 							     guint cnxn_id, 
 							     GConfEntry *entry, 
 							     gpointer user_data);
-
-static GList *gedit_plugins_list = NULL;
-
-static GConfClient *gedit_plugins_engine_gconf_client = NULL;
-
-static GSList *active_plugins = NULL;
 
 static void
 gedit_plugin_info_free (GeditPluginInfo *info)
@@ -290,13 +295,14 @@ compare_plugin_info (GeditPluginInfo *info1,
 }
 
 static void
-gedit_plugins_engine_load_dir (const gchar *dir)
+gedit_plugins_engine_load_dir (GeditPluginsEngine *engine,
+			       const gchar        *dir)
 {
 	GError *error = NULL;
 	GDir *d;
 	const gchar *dirent;
 
-	g_return_if_fail (gedit_plugins_engine_gconf_client != NULL);
+	g_return_if_fail (engine->priv->gconf_client != NULL);
 
 	gedit_debug_message (DEBUG_PLUGINS, "DIR: %s", dir);
 
@@ -324,7 +330,7 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 
 			/* If a plugin with this name has already been loaded
 			 * drop this one (user plugins override system plugins) */
-			if (g_list_find_custom (gedit_plugins_list,
+			if (g_list_find_custom (engine->priv->plugin_list,
 						info,
 						(GCompareFunc)compare_plugin_info) != NULL)
 			{
@@ -339,7 +345,7 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 
 			/* Actually, the plugin will be activated when reactivate_all
 			 * will be called for the first time. */
-			if (g_slist_find_custom (active_plugins,
+			if (g_slist_find_custom (engine->priv->active_plugins,
 						 info->module_name,
 						 (GCompareFunc)strcmp) != NULL)
 			{
@@ -350,19 +356,17 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 				info->active = FALSE;
 			}
 
-			gedit_plugins_list = g_list_prepend (gedit_plugins_list, info);
+			engine->priv->plugin_list = g_list_prepend (engine->priv->plugin_list, info);
 
 			gedit_debug_message (DEBUG_PLUGINS, "Plugin %s loaded", info->name);
 		}
 	}
 
-	gedit_plugins_list = g_list_reverse (gedit_plugins_list);
-
 	g_dir_close (d);
 }
 
 static void
-gedit_plugins_engine_load_all (void)
+gedit_plugins_engine_load_all (GeditPluginsEngine *engine)
 {
 	const gchar *home;
 
@@ -381,64 +385,64 @@ gedit_plugins_engine_load_all (void)
 					 NULL);
 
 		if (g_file_test (pdir, G_FILE_TEST_IS_DIR))
-			gedit_plugins_engine_load_dir (pdir);
+			gedit_plugins_engine_load_dir (engine, pdir);
 		
 		g_free (pdir);
 	}
 
 	/* load system plugins */
-	gedit_plugins_engine_load_dir (GEDIT_PLUGINDIR "/");
+	gedit_plugins_engine_load_dir (engine, GEDIT_PLUGINDIR "/");
 }
 
-gboolean
-gedit_plugins_engine_init (void)
+static void
+gedit_plugins_engine_init (GeditPluginsEngine *engine)
 {
 	gedit_debug (DEBUG_PLUGINS);
-	
-	g_return_val_if_fail (gedit_plugins_list == NULL, FALSE);
-	
+
 	if (!g_module_supported ())
 	{
 		g_warning ("gedit is not able to initialize the plugins engine.");
-		return FALSE;
+		return;
 	}
 
-	gedit_plugins_engine_gconf_client = gconf_client_get_default ();
-	g_return_val_if_fail (gedit_plugins_engine_gconf_client != NULL, FALSE);
+	engine->priv = G_TYPE_INSTANCE_GET_PRIVATE (engine,
+						    GEDIT_TYPE_PLUGINS_ENGINE,
+						    GeditPluginsEnginePrivate);
 
-	gconf_client_add_dir (gedit_plugins_engine_gconf_client,
+	engine->priv->gconf_client = gconf_client_get_default ();
+	g_return_if_fail (engine->priv->gconf_client != NULL);
+
+	gconf_client_add_dir (engine->priv->gconf_client,
 			      GEDIT_PLUGINS_ENGINE_BASE_KEY,
 			      GCONF_CLIENT_PRELOAD_ONELEVEL,
 			      NULL);
 
-	gconf_client_notify_add (gedit_plugins_engine_gconf_client,
+	gconf_client_notify_add (engine->priv->gconf_client,
 				 GEDIT_PLUGINS_ENGINE_KEY,
 				 gedit_plugins_engine_active_plugins_changed,
-				 NULL, NULL, NULL);
+				 engine, NULL, NULL);
 
 
-	active_plugins = gconf_client_get_list (gedit_plugins_engine_gconf_client,
-						GEDIT_PLUGINS_ENGINE_KEY,
-						GCONF_VALUE_STRING,
-						NULL);
+	engine->priv->active_plugins = gconf_client_get_list (engine->priv->gconf_client,
+							      GEDIT_PLUGINS_ENGINE_KEY,
+							      GCONF_VALUE_STRING,
+							      NULL);
 
-	gedit_plugins_engine_load_all ();
-
-	return TRUE;
+	gedit_plugins_engine_load_all (engine);
 }
 
 void
-gedit_plugins_engine_garbage_collect (void)
+gedit_plugins_engine_garbage_collect (GeditPluginsEngine *engine)
 {
 #ifdef ENABLE_PYTHON
 	gedit_python_garbage_collect ();
 #endif
 }
 
-void
-gedit_plugins_engine_shutdown (void)
+static void
+gedit_plugins_engine_finalize (GObject *object)
 {
-	GList *pl;
+	GeditPluginsEngine *engine = GEDIT_PLUGINS_ENGINE (object);
 
 	gedit_debug (DEBUG_PLUGINS);
 
@@ -452,33 +456,47 @@ gedit_plugins_engine_shutdown (void)
 	gedit_python_shutdown ();
 #endif
 
-	g_return_if_fail (gedit_plugins_engine_gconf_client != NULL);
+	g_return_if_fail (engine->priv->gconf_client != NULL);
 
-	for (pl = gedit_plugins_list; pl; pl = pl->next)
-	{
-		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
+	g_list_foreach (engine->priv->plugin_list,
+			(GFunc) gedit_plugin_info_free, NULL);
+	g_list_free (engine->priv->plugin_list);
 
-		gedit_plugin_info_free (info);
-	}
+	g_slist_foreach (engine->priv->active_plugins,
+			 (GFunc) g_free, NULL);
+	g_slist_free (engine->priv->active_plugins);
 
-	g_slist_foreach (active_plugins, (GFunc)g_free, NULL);
-	g_slist_free (active_plugins);
+	g_object_unref (engine->priv->gconf_client);
+}
 
-	active_plugins = NULL;
+static void
+gedit_plugins_engine_class_init (GeditPluginsEngineClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	g_list_free (gedit_plugins_list);
-	gedit_plugins_list = NULL;
+	object_class->finalize = gedit_plugins_engine_finalize;
 
-	g_object_unref (gedit_plugins_engine_gconf_client);
-	gedit_plugins_engine_gconf_client = NULL;
+	g_type_class_add_private (klass, sizeof (GeditPluginsEnginePrivate));
+}
+
+GeditPluginsEngine *
+gedit_plugins_engine_get_default (void)
+{
+	if (default_engine != NULL)
+		return default_engine;
+
+	default_engine = GEDIT_PLUGINS_ENGINE (g_object_new (GEDIT_TYPE_PLUGINS_ENGINE, NULL));
+	g_object_add_weak_pointer (G_OBJECT (default_engine),
+				   (gpointer) &default_engine);
+	return default_engine;
 }
 
 const GList *
-gedit_plugins_engine_get_plugins_list (void)
+gedit_plugins_engine_get_plugin_list (GeditPluginsEngine *engine)
 {
 	gedit_debug (DEBUG_PLUGINS);
 
-	return gedit_plugins_list;
+	return engine->priv->plugin_list;
 }
 
 static gboolean
@@ -629,8 +647,9 @@ gedit_plugins_engine_activate_plugin_real (GeditPluginInfo *info)
 	return res;
 }
 
-gboolean 	 
-gedit_plugins_engine_activate_plugin (GeditPluginInfo *info)
+gboolean
+gedit_plugins_engine_activate_plugin (GeditPluginsEngine *engine,
+				      GeditPluginInfo    *info)
 {
 	gedit_debug (DEBUG_PLUGINS);
 
@@ -651,7 +670,7 @@ gedit_plugins_engine_activate_plugin (GeditPluginInfo *info)
 		info->active = TRUE;
 
 		/* I want to be really sure :) */
-		list = active_plugins;
+		list = engine->priv->active_plugins;
 		while (list != NULL)
 		{
 			if (strcmp (info->module_name, (gchar *)list->data) == 0)
@@ -662,15 +681,15 @@ gedit_plugins_engine_activate_plugin (GeditPluginInfo *info)
 
 			list = g_slist_next (list);
 		}
-	
-		active_plugins = g_slist_insert_sorted (active_plugins, 
-						        g_strdup (info->module_name), 
-						        (GCompareFunc)strcmp);
+
+		engine->priv->active_plugins = g_slist_insert_sorted (engine->priv->active_plugins,
+								      g_strdup (info->module_name),
+								      (GCompareFunc)strcmp);
 		
-		res = gconf_client_set_list (gedit_plugins_engine_gconf_client,
+		res = gconf_client_set_list (engine->priv->gconf_client,
 		    			     GEDIT_PLUGINS_ENGINE_KEY,
 					     GCONF_VALUE_STRING,
-					     active_plugins,
+					     engine->priv->active_plugins,
 					     NULL);
 		
 		if (!res)
@@ -697,7 +716,8 @@ gedit_plugins_engine_deactivate_plugin_real (GeditPluginInfo *info)
 }
 
 gboolean
-gedit_plugins_engine_deactivate_plugin (GeditPluginInfo *info)
+gedit_plugins_engine_deactivate_plugin (GeditPluginsEngine *engine,
+					GeditPluginInfo    *info)
 {
 	gboolean res;
 	GSList *list;
@@ -714,7 +734,7 @@ gedit_plugins_engine_deactivate_plugin (GeditPluginInfo *info)
 	/* Update plugin state */
 	info->active = FALSE;
 
-	list = active_plugins;
+	list = engine->priv->active_plugins;
 	res = (list == NULL);
 
 	while (list != NULL)
@@ -722,7 +742,8 @@ gedit_plugins_engine_deactivate_plugin (GeditPluginInfo *info)
 		if (strcmp (info->module_name, (gchar *)list->data) == 0)
 		{
 			g_free (list->data);
-			active_plugins = g_slist_delete_link (active_plugins, list);
+			engine->priv->active_plugins = g_slist_delete_link (engine->priv->active_plugins,
+									    list);
 			list = NULL;
 			res = TRUE;
 		}
@@ -736,10 +757,10 @@ gedit_plugins_engine_deactivate_plugin (GeditPluginInfo *info)
 		return TRUE;
 	}
 
-	res = gconf_client_set_list (gedit_plugins_engine_gconf_client,
+	res = gconf_client_set_list (engine->priv->gconf_client,
 	    			     GEDIT_PLUGINS_ENGINE_KEY,
 				     GCONF_VALUE_STRING,
-				     active_plugins,
+				     engine->priv->active_plugins,
 				     NULL);
 		
 	if (!res)
@@ -749,13 +770,14 @@ gedit_plugins_engine_deactivate_plugin (GeditPluginInfo *info)
 }
 
 static void
-reactivate_all (GeditWindow *window)
+reactivate_all (GeditPluginsEngine *engine,
+		GeditWindow        *window)
 {
 	GList *pl;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	for (pl = gedit_plugins_list; pl; pl = pl->next)
+	for (pl = engine->priv->plugin_list; pl; pl = pl->next)
 	{
 		gboolean res = TRUE;
 		
@@ -777,8 +799,9 @@ reactivate_all (GeditWindow *window)
 }
 
 void
-gedit_plugins_engine_update_plugins_ui (GeditWindow *window, 
-					gboolean     new_window)
+gedit_plugins_engine_update_plugins_ui (GeditPluginsEngine *engine,
+					GeditWindow        *window,
+					gboolean            new_window)
 {
 	GList *pl;
 
@@ -787,10 +810,10 @@ gedit_plugins_engine_update_plugins_ui (GeditWindow *window,
 	g_return_if_fail (GEDIT_IS_WINDOW (window));
 
 	if (new_window)
-		reactivate_all (window);
+		reactivate_all (engine, window);
 
 	/* updated ui of all the plugins that implement update_ui */
-	for (pl = gedit_plugins_list; pl; pl = pl->next)
+	for (pl = engine->priv->plugin_list; pl; pl = pl->next)
 	{
 		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
 
@@ -804,8 +827,9 @@ gedit_plugins_engine_update_plugins_ui (GeditWindow *window,
 }
 
 void 	 
-gedit_plugins_engine_configure_plugin (GeditPluginInfo *info, 
-				       GtkWindow       *parent)
+gedit_plugins_engine_configure_plugin (GeditPluginsEngine *engine,
+				       GeditPluginInfo    *info,
+				       GtkWindow          *parent)
 {
 	GtkWidget *conf_dlg;
 	
@@ -840,6 +864,7 @@ gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 					     GConfEntry *entry,
 					     gpointer user_data)
 {
+	GeditPluginsEngine *engine;
 	GList *pl;
 	gboolean to_activate;
 
@@ -848,6 +873,7 @@ gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
 
+	engine = GEDIT_PLUGINS_ENGINE (user_data);
 	
 	if (!((entry->value->type == GCONF_VALUE_LIST) && 
 	      (gconf_value_get_list_type (entry->value) == GCONF_VALUE_STRING)))
@@ -856,19 +882,19 @@ gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 		return;
 	}
 	
-	active_plugins = gconf_client_get_list (gedit_plugins_engine_gconf_client,
-						GEDIT_PLUGINS_ENGINE_KEY,
-						GCONF_VALUE_STRING,
-						NULL);
+	engine->priv->active_plugins = gconf_client_get_list (engine->priv->gconf_client,
+							      GEDIT_PLUGINS_ENGINE_KEY,
+							      GCONF_VALUE_STRING,
+							      NULL);
 
-	for (pl = gedit_plugins_list; pl; pl = pl->next)
+	for (pl = engine->priv->plugin_list; pl; pl = pl->next)
 	{
 		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
 
 		if (!info->available)
 			continue;
 
-		to_activate = (g_slist_find_custom (active_plugins,
+		to_activate = (g_slist_find_custom (engine->priv->active_plugins,
 						    info->module_name,
 						    (GCompareFunc)strcmp) != NULL);
 

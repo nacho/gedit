@@ -64,7 +64,7 @@ struct _GeditPluginManagerPrivate
 	GtkWidget	*about_button;
 	GtkWidget	*configure_button;
 
-	const GList	*plugins;
+	GeditPluginsEngine *engine;
 
 	GtkWidget 	*about;
 	
@@ -74,7 +74,7 @@ struct _GeditPluginManagerPrivate
 G_DEFINE_TYPE(GeditPluginManager, gedit_plugin_manager, GTK_TYPE_VBOX)
 
 static GeditPluginInfo *plugin_manager_get_selected_plugin (GeditPluginManager *pm); 
-static void plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model); 
+static void plugin_manager_toggle_active (GeditPluginManager *pm, GtkTreeIter *iter, GtkTreeModel *model);
 static void gedit_plugin_manager_finalize (GObject *object);
 
 static void 
@@ -147,7 +147,8 @@ configure_button_cb (GtkWidget          *button,
 
 	toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(pm)));
 
-	gedit_plugins_engine_configure_plugin (info, toplevel);
+	gedit_plugins_engine_configure_plugin (pm->priv->engine,
+					       info, toplevel);
 
 	gedit_debug_message (DEBUG_PLUGINS, "Done");	
 }
@@ -224,7 +225,7 @@ active_toggled_cb (GtkCellRendererToggle *cell,
 	gtk_tree_model_get_iter (model, &iter, path);
 
 	if (&iter != NULL)
-		plugin_manager_toggle_active (&iter, model);
+		plugin_manager_toggle_active (pm, &iter, model);
 
 	gtk_tree_path_free (path);
 }
@@ -267,7 +268,7 @@ row_activated_cb (GtkTreeView       *tree_view,
 
 	g_return_if_fail (&iter != NULL);
 
-	plugin_manager_toggle_active (&iter, model);
+	plugin_manager_toggle_active (pm, &iter, model);
 }
 
 static void
@@ -279,7 +280,7 @@ plugin_manager_populate_lists (GeditPluginManager *pm)
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	plugins = pm->priv->plugins;
+	plugins = gedit_plugins_engine_get_plugin_list (pm->priv->engine);
 
 	model = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (pm->priv->tree)));
 
@@ -317,10 +318,12 @@ plugin_manager_populate_lists (GeditPluginManager *pm)
 }
 
 static gboolean
-plugin_manager_set_active (GtkTreeIter  *iter,
-			   GtkTreeModel *model,
-			   gboolean      active)
+plugin_manager_set_active (GeditPluginManager *pm,
+			   GtkTreeIter        *iter,
+			   GtkTreeModel       *model,
+			   gboolean            active)
 {
+	GeditPluginsEngine *engine;
 	GeditPluginInfo *info;
 	gboolean res = TRUE;
 	
@@ -333,7 +336,7 @@ plugin_manager_set_active (GtkTreeIter  *iter,
 	if (active)
 	{
 		/* activate the plugin */
-		if (!gedit_plugins_engine_activate_plugin (info)) {
+		if (!gedit_plugins_engine_activate_plugin (pm->priv->engine, info)) {
 			gedit_debug_message (DEBUG_PLUGINS, "Could not activate %s.\n", 
 					     gedit_plugin_info_get_name (info));
 
@@ -343,7 +346,7 @@ plugin_manager_set_active (GtkTreeIter  *iter,
 	else
 	{
 		/* deactivate the plugin */
-		if (!gedit_plugins_engine_deactivate_plugin (info)) {
+		if (!gedit_plugins_engine_deactivate_plugin (pm->priv->engine, info)) {
 			gedit_debug_message (DEBUG_PLUGINS, "Could not deactivate %s.\n", 
 					     gedit_plugin_info_get_name (info));
 
@@ -362,8 +365,9 @@ plugin_manager_set_active (GtkTreeIter  *iter,
 }
 
 static void
-plugin_manager_toggle_active (GtkTreeIter  *iter,
-			      GtkTreeModel *model)
+plugin_manager_toggle_active (GeditPluginManager *pm,
+			      GtkTreeIter        *iter,
+			      GtkTreeModel       *model)
 {
 	gboolean active;
 	
@@ -373,7 +377,7 @@ plugin_manager_toggle_active (GtkTreeIter  *iter,
 
 	active ^= 1;
 
-	plugin_manager_set_active (iter, model, active);
+	plugin_manager_set_active (pm, iter, model, active);
 }
 
 static GeditPluginInfo *
@@ -416,7 +420,7 @@ plugin_manager_set_active_all (GeditPluginManager *pm,
 	gtk_tree_model_get_iter_first (model, &iter);
 
 	do {
-		plugin_manager_set_active (&iter, model, active);		
+		plugin_manager_set_active (pm, &iter, model, active);
 	}
 	while (gtk_tree_model_iter_next (model, &iter));
 }
@@ -476,7 +480,7 @@ enable_plugin_menu_cb (GtkMenu            *menu,
 	g_return_if_fail (selection != NULL);
 
 	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
-		plugin_manager_toggle_active (&iter, model);
+		plugin_manager_toggle_active (pm, &iter, model);
 }
 
 static void
@@ -805,10 +809,10 @@ gedit_plugin_manager_init (GeditPluginManager *pm)
 
 	plugin_manager_construct_tree (pm);
 
-	/* get the list of available plugins (or installed) */
-	pm->priv->plugins = gedit_plugins_engine_get_plugins_list ();
+	/* get the plugin engine and populate the treeview */
+	pm->priv->engine = gedit_plugins_engine_get_default ();
 
-	if (pm->priv->plugins != NULL)
+	if (gedit_plugins_engine_get_plugin_list (pm->priv->engine) != NULL)
 	{
 		plugin_manager_populate_lists (pm);
 	}

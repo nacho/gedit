@@ -35,27 +35,58 @@
 #include "gedit-window.h"
 #include "gedit-plugin.h"
 
-typedef struct _GeditPluginInfo GeditPluginInfo;
+G_BEGIN_DECLS
 
-gboolean	 gedit_plugins_engine_init 		(void);
-void		 gedit_plugins_engine_shutdown 		(void);
+#define GEDIT_TYPE_PLUGINS_ENGINE              (gedit_plugins_engine_get_type ())
+#define GEDIT_PLUGINS_ENGINE(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_PLUGINS_ENGINE, GeditPluginsEngine))
+#define GEDIT_PLUGINS_ENGINE_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GEDIT_TYPE_PLUGINS_ENGINE, GeditPluginsEngineClass))
+#define GEDIT_IS_PLUGINS_ENGINE(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GEDIT_TYPE_PLUGINS_ENGINE))
+#define GEDIT_IS_PLUGINS_ENGINE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_PLUGINS_ENGINE))
+#define GEDIT_PLUGINS_ENGINE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GEDIT_TYPE_PLUGINS_ENGINE, GeditPluginsEngineClass))
 
-void		 gedit_plugins_engine_garbage_collect	(void);
 
-const GList	*gedit_plugins_engine_get_plugins_list 	(void);
+typedef struct _GeditPluginsEngineClass		GeditPluginsEngineClass;
 
-gboolean 	 gedit_plugins_engine_activate_plugin 	(GeditPluginInfo *info);
-gboolean 	 gedit_plugins_engine_deactivate_plugin	(GeditPluginInfo *info);
+struct _GeditPluginsEngineClass
+{
+	GObjectClass parent_class;
+};
 
-void	 	 gedit_plugins_engine_configure_plugin	(GeditPluginInfo *info, 
-							 GtkWindow       *parent);
+typedef struct _GeditPluginsEngine		GeditPluginsEngine;
+typedef struct _GeditPluginsEnginePrivate	GeditPluginsEnginePrivate;
+
+struct _GeditPluginsEngine
+{
+	GObject parent;
+	GeditPluginsEnginePrivate *priv;
+};
+
+typedef struct _GeditPluginInfo         GeditPluginInfo;
+
+GType			 gedit_plugins_engine_get_type		(void) G_GNUC_CONST;
+
+GeditPluginsEngine	*gedit_plugins_engine_get_default	(void);
+
+void		 gedit_plugins_engine_garbage_collect	(GeditPluginsEngine *engine);
+
+const GList	*gedit_plugins_engine_get_plugin_list 	(GeditPluginsEngine *engine);
+
+gboolean 	 gedit_plugins_engine_activate_plugin 	(GeditPluginsEngine *engine,
+							 GeditPluginInfo    *info);
+gboolean 	 gedit_plugins_engine_deactivate_plugin	(GeditPluginsEngine *engine,
+							 GeditPluginInfo    *info);
+
+void	 	 gedit_plugins_engine_configure_plugin	(GeditPluginsEngine *engine,
+							 GeditPluginInfo    *info,
+							 GtkWindow          *parent);
 
 /* 
  * new_window == TRUE if this function is called because a new top window
  * has been created
  */
-void		 gedit_plugins_engine_update_plugins_ui (GeditWindow     *window, 
-							 gboolean         new_window);
+void		 gedit_plugins_engine_update_plugins_ui (GeditPluginsEngine *engine,
+							 GeditWindow        *window, 
+							 gboolean            new_window);
 
 /*
  * Plugin metadata
@@ -72,6 +103,8 @@ const gchar	*gedit_plugin_info_get_website		(GeditPluginInfo *info);
 const gchar	*gedit_plugin_info_get_copyright	(GeditPluginInfo *info);
 
 GeditPlugin	*gedit_plugin_info_get_plugin		(GeditPluginInfo *info);
+
+G_END_DECLS
 
 #endif  /* __GEDIT_PLUGINS_ENGINE_H__ */
 

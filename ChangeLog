@@ -1,5 +1,15 @@
 2007-12-28  Steve Frécinaux  <code@istique.net>
 
+	* gedit/gedit-plugins-engine.[ch]: make the gedit plugins engine a
+	GObject.
+
+	* gedit/gedit-plugin-manager.c:
+	* gedit/gedit-window.c:
+	* gedit/gedit.c:
+	Adapt for above changes.
+
+2007-12-28  Steve Frécinaux  <code@istique.net>
+
 	* gedit/gedit-plugins-engine.c: talk about "module name" instead of
 	"location" (since it is really what it is about"). "Location" is
 	confusing because it is first understood as the directory where the

@@ -444,6 +444,7 @@ main (int argc, char *argv[])
 {
 	GnomeProgram *program;
 	GOptionContext *context;
+	GeditPluginsEngine *engine;
 	GeditWindow *window;
 	GeditApp *app;
 	gboolean restored = FALSE;
@@ -529,8 +530,8 @@ main (int argc, char *argv[])
 	gnome_authentication_manager_init ();
 	
 	/* Init plugins engine */
-	gedit_debug_message (DEBUG_APP, "Init plugins");	
-	gedit_plugins_engine_init ();
+	gedit_debug_message (DEBUG_APP, "Init plugins");
+	engine = gedit_plugins_engine_get_default ();
 
 	gtk_about_dialog_set_url_hook (gedit_utils_activate_url, NULL, NULL);
 	
@@ -586,7 +587,10 @@ main (int argc, char *argv[])
 
 	bacon_message_connection_free (connection);
 
-	gedit_plugins_engine_shutdown ();
+	/* We kept the original engine reference here. So let's unref it to
+	 * finalize it properly. 
+	 */
+	g_object_unref (engine);
 	gedit_prefs_manager_app_shutdown ();
 	gedit_metadata_manager_shutdown ();
 
