@@ -44,14 +44,7 @@ G_BEGIN_DECLS
 #define GEDIT_IS_PLUGINS_ENGINE_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_PLUGINS_ENGINE))
 #define GEDIT_PLUGINS_ENGINE_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GEDIT_TYPE_PLUGINS_ENGINE, GeditPluginsEngineClass))
 
-typedef struct _GeditPluginInfo         GeditPluginInfo;
-
-typedef struct _GeditPluginsEngineClass		GeditPluginsEngineClass;
-
-struct _GeditPluginsEngineClass
-{
-	GObjectClass parent_class;
-};
+typedef struct _GeditPluginInfo			GeditPluginInfo;
 
 typedef struct _GeditPluginsEngine		GeditPluginsEngine;
 typedef struct _GeditPluginsEnginePrivate	GeditPluginsEnginePrivate;
@@ -60,6 +53,19 @@ struct _GeditPluginsEngine
 {
 	GObject parent;
 	GeditPluginsEnginePrivate *priv;
+};
+
+typedef struct _GeditPluginsEngineClass		GeditPluginsEngineClass;
+
+struct _GeditPluginsEngineClass
+{
+	GObjectClass parent_class;
+
+	void	 (* activate_plugin)		(GeditPluginsEngine *engine,
+						 GeditPluginInfo    *info);
+
+	void	 (* deactivate_plugin)		(GeditPluginsEngine *engine,
+						 GeditPluginInfo    *info);
 };
 
 GType			 gedit_plugins_engine_get_type		(void) G_GNUC_CONST;

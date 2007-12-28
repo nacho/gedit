@@ -55,6 +55,16 @@
 
 #define PLUGIN_EXT	".gedit-plugin"
 
+/* Signals */
+enum
+{
+	ACTIVATE_PLUGIN,
+	DEACTIVATE_PLUGIN,
+	LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL];
+
 G_DEFINE_TYPE(GeditPluginsEngine, gedit_plugins_engine, G_TYPE_OBJECT)
 
 struct _GeditPluginsEnginePrivate
@@ -102,6 +112,10 @@ static void	gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 							     guint cnxn_id, 
 							     GConfEntry *entry, 
 							     gpointer user_data);
+static void	gedit_plugins_engine_activate_plugin_real (GeditPluginsEngine *engine,
+							   GeditPluginInfo    *info);
+static void	gedit_plugins_engine_deactivate_plugin_real (GeditPluginsEngine *engine,
+							     GeditPluginInfo    *info);
 
 static GeditPluginInfo *
 gedit_plugin_info_copy (GeditPluginInfo *info)
@@ -496,9 +510,34 @@ gedit_plugins_engine_finalize (GObject *object)
 static void
 gedit_plugins_engine_class_init (GeditPluginsEngineClass *klass)
 {
+	GType the_type = G_TYPE_FROM_CLASS (klass);
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->finalize = gedit_plugins_engine_finalize;
+	klass->activate_plugin = gedit_plugins_engine_activate_plugin_real;
+	klass->deactivate_plugin = gedit_plugins_engine_deactivate_plugin_real;
+
+	signals[ACTIVATE_PLUGIN] =
+		g_signal_new ("activate-plugin",
+			      the_type,
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditPluginsEngineClass, activate_plugin),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__BOXED,
+			      G_TYPE_NONE,
+			      1,
+			      GEDIT_TYPE_PLUGIN_INFO | G_SIGNAL_TYPE_STATIC_SCOPE);
+
+	signals[DEACTIVATE_PLUGIN] =
+		g_signal_new ("deactivate-plugin",
+			      the_type,
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditPluginsEngineClass, deactivate_plugin),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__BOXED,
+			      G_TYPE_NONE,
+			      1,
+			      GEDIT_TYPE_PLUGIN_INFO | G_SIGNAL_TYPE_STATIC_SCOPE);
 
 	g_type_class_add_private (klass, sizeof (GeditPluginsEnginePrivate));
 }
@@ -669,23 +708,15 @@ save_active_plugin_list (GeditPluginsEngine *engine)
 	g_slist_free (active_plugins);
 }
 
-static gboolean 	 
-gedit_plugins_engine_activate_plugin_real (GeditPluginInfo *info)
+static void
+gedit_plugins_engine_activate_plugin_real (GeditPluginsEngine *engine,
+					   GeditPluginInfo *info)
 {
 	gboolean res = TRUE;
 
-	if (info->active)
-	{
-		/* Plugin is already active */
-		return TRUE;
-	}
+	if (info->active || !info->available)
+		return;
 
-	if (!info->available)
-	{
-		/* Plugin is not available, don't try to activate/load it */
-		return FALSE;
-	}
-		
 	if (info->plugin == NULL)
 		res = load_plugin_module (info);
 
@@ -699,8 +730,6 @@ gedit_plugins_engine_activate_plugin_real (GeditPluginInfo *info)
 	}
 	else
 		g_warning ("Error activating plugin '%s'", info->name);
-
-	return res;
 }
 
 gboolean
@@ -717,18 +746,16 @@ gedit_plugins_engine_activate_plugin (GeditPluginsEngine *engine,
 	if (info->active)
 		return TRUE;
 
-	if (gedit_plugins_engine_activate_plugin_real (info))
-	{
+	g_signal_emit (engine, signals[ACTIVATE_PLUGIN], 0, info);
+	if (info->active)
 		save_active_plugin_list (engine);
 
-		return TRUE;
-	}
-
-	return FALSE;
+	return info->active;
 }
 
 static void
-gedit_plugins_engine_deactivate_plugin_real (GeditPluginInfo *info)
+gedit_plugins_engine_deactivate_plugin_real (GeditPluginsEngine *engine,
+					     GeditPluginInfo *info)
 {
 	const GList *wins;
 
@@ -753,11 +780,11 @@ gedit_plugins_engine_deactivate_plugin (GeditPluginsEngine *engine,
 	if (!info->active || !info->available)
 		return TRUE;
 
-	gedit_plugins_engine_deactivate_plugin_real (info);
+	g_signal_emit (engine, signals[DEACTIVATE_PLUGIN], 0, info);
+	if (!info->active)
+		save_active_plugin_list (engine);
 
-	save_active_plugin_list (engine);
-
-	return TRUE;
+	return !info->active;
 }
 
 static void
@@ -891,9 +918,9 @@ gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 						    (GCompareFunc)strcmp) != NULL);
 
 		if (!info->active && to_activate)
-			gedit_plugins_engine_activate_plugin_real (info);
+			g_signal_emit (engine, signals[ACTIVATE_PLUGIN], 0, info);
 		else if (info->active && !to_activate)
-			gedit_plugins_engine_deactivate_plugin_real (info);
+			g_signal_emit (engine, signals[DEACTIVATE_PLUGIN], 0, info);
 	}
 
 	g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
