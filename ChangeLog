@@ -1,5 +1,14 @@
 2007-12-28  Steve Frécinaux  <code@istique.net>
 
+	* gedit/gedit-plugins-engine.c: Move plugin status update into the
+	activate_real and deactivate_real methods. 
+
+	This way, the *_real methods are self-contained, and the other ones
+	just (de)activate the plugin and save the config into gconf. This is
+	needed for the signals that come with the next patch.
+
+2007-12-28  Steve Frécinaux  <code@istique.net>
+
 	* gedit/gedit-plugins-engine.c: Kill engine->active_plugins once and
 	for all.
 

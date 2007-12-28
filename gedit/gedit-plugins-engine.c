@@ -674,6 +674,12 @@ gedit_plugins_engine_activate_plugin_real (GeditPluginInfo *info)
 {
 	gboolean res = TRUE;
 
+	if (info->active)
+	{
+		/* Plugin is already active */
+		return TRUE;
+	}
+
 	if (!info->available)
 	{
 		/* Plugin is not available, don't try to activate/load it */
@@ -686,13 +692,10 @@ gedit_plugins_engine_activate_plugin_real (GeditPluginInfo *info)
 	if (res)
 	{
 		const GList *wins = gedit_app_get_windows (gedit_app_get_default ());
-		while (wins != NULL)
-		{
-			gedit_plugin_activate (info->plugin,
-					       GEDIT_WINDOW (wins->data));
-			
-			wins = g_list_next (wins);
-		}
+		for (; wins != NULL; wins = wins->next)
+			gedit_plugin_activate (info->plugin, GEDIT_WINDOW (wins->data));
+
+		info->active = TRUE;
 	}
 	else
 		g_warning ("Error activating plugin '%s'", info->name);
@@ -716,9 +719,6 @@ gedit_plugins_engine_activate_plugin (GeditPluginsEngine *engine,
 
 	if (gedit_plugins_engine_activate_plugin_real (info))
 	{
-		/* Update plugin state */
-		info->active = TRUE;
-
 		save_active_plugin_list (engine);
 
 		return TRUE;
@@ -730,15 +730,16 @@ gedit_plugins_engine_activate_plugin (GeditPluginsEngine *engine,
 static void
 gedit_plugins_engine_deactivate_plugin_real (GeditPluginInfo *info)
 {
-	const GList *wins = gedit_app_get_windows (gedit_app_get_default ());
-	
-	while (wins != NULL)
-	{
-		gedit_plugin_deactivate (info->plugin,
-					 GEDIT_WINDOW (wins->data));
-			
-		wins = g_list_next (wins);
-	}
+	const GList *wins;
+
+	if (!info->active || !info->available)
+		return;
+
+	wins = gedit_app_get_windows (gedit_app_get_default ());
+	for (; wins != NULL; wins = wins->next)
+		gedit_plugin_deactivate (info->plugin, GEDIT_WINDOW (wins->data));
+
+	info->active = FALSE;
 }
 
 gboolean
@@ -753,9 +754,6 @@ gedit_plugins_engine_deactivate_plugin (GeditPluginsEngine *engine,
 		return TRUE;
 
 	gedit_plugins_engine_deactivate_plugin_real (info);
-
-	/* Update plugin state */
-	info->active = FALSE;
 
 	save_active_plugin_list (engine);
 
@@ -893,22 +891,9 @@ gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 						    (GCompareFunc)strcmp) != NULL);
 
 		if (!info->active && to_activate)
-		{
-			/* Activate plugin */
-			if (gedit_plugins_engine_activate_plugin_real (info))
-				/* Update plugin state */
-				info->active = TRUE;
-		}
-		else
-		{
-			if (info->active && !to_activate)
-			{
-				gedit_plugins_engine_deactivate_plugin_real (info);	
-
-				/* Update plugin state */
-				info->active = FALSE;
-			}
-		}
+			gedit_plugins_engine_activate_plugin_real (info);
+		else if (info->active && !to_activate)
+			gedit_plugins_engine_deactivate_plugin_real (info);
 	}
 
 	g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
