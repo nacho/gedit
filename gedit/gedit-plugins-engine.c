@@ -72,8 +72,10 @@ typedef enum
 
 struct _GeditPluginInfo
 {
+	gint               refcount;
+
 	gchar             *file;
-	
+
 	gchar             *module_name;
 	GeditPluginLoader  loader;
 	GTypeModule       *module;
@@ -84,11 +86,11 @@ struct _GeditPluginInfo
 	gchar            **authors;
 	gchar             *copyright;
 	gchar             *website;
-	 
+
 	GeditPlugin       *plugin;
-	
+
 	gint               active : 1;
-	
+
 	/* A plugin is unavailable if it is not possible to activate it
 	   due to an error loading the plugin module (e.g. for Python plugins
 	   when the interpreter has not been correctly initializated) */
@@ -102,12 +104,22 @@ static void	gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 							     GConfEntry *entry, 
 							     gpointer user_data);
 
+static GeditPluginInfo *
+gedit_plugin_info_copy (GeditPluginInfo *info)
+{
+	g_atomic_int_inc (&info->refcount);
+	return info;
+}
+
 static void
 gedit_plugin_info_free (GeditPluginInfo *info)
 {
+	if (!g_atomic_int_dec_and_test (&info->refcount))
+		return;
+
 	if (info->plugin != NULL)
 	{
-	       	gedit_debug_message (DEBUG_PLUGINS, "Unref plugin %s", info->name);
+		gedit_debug_message (DEBUG_PLUGINS, "Unref plugin %s", info->name);
 
 		g_object_unref (info->plugin);
 		
@@ -127,6 +139,28 @@ gedit_plugin_info_free (GeditPluginInfo *info)
 	g_free (info);
 }
 
+/**
+ * gedit_plugin_info_get_type:
+ *
+ * Retrieves the GType object which is associated with the
+ * #GeditPluginInfo class.
+ *
+ * Return value: the GType associated with #GeditPluginInfo.
+ **/
+GType
+gedit_plugin_info_get_type (void)
+{
+	static GType the_type = 0;
+
+	if (!the_type)
+		the_type = g_boxed_type_register_static (
+					"GeditPluginInfo",
+					(GBoxedCopyFunc) gedit_plugin_info_copy,
+					(GBoxedFreeFunc) gedit_plugin_info_free);
+
+	return the_type;
+} 
+
 static GeditPluginInfo *
 gedit_plugin_info_new (const gchar *file)
 {
@@ -139,6 +173,7 @@ gedit_plugin_info_new (const gchar *file)
 	gedit_debug_message (DEBUG_PLUGINS, "Loading plugin: %s", file);
 
 	info = g_new0 (GeditPluginInfo, 1);
+	info->refcount = 1;
 	info->file = g_strdup (file);
 
 	plugin_file = g_key_file_new ();

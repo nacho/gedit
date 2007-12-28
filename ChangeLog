@@ -1,5 +1,11 @@
 2007-12-28  Steve Frécinaux  <code@istique.net>
 
+	* gedit/gedit-plugins-engine.[ch]: Register a new (refcounted) boxed
+	GeditPluginInfo type. The reason is that signal marshalling need a
+	GType.
+
+2007-12-28  Steve Frécinaux  <code@istique.net>
+
 	* gedit/gedit-plugins-engine.[ch]: make the gedit plugins engine a
 	GObject.
 
