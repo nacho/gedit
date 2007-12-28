@@ -65,7 +65,7 @@ struct _GeditPluginInfo
 {
 	gchar             *file;
 	
-	gchar             *location;
+	gchar             *module_name;
 	GeditPluginLoader  loader;
 	GTypeModule       *module;
 
@@ -111,7 +111,7 @@ gedit_plugin_info_free (GeditPluginInfo *info)
 	}
 
 	g_free (info->file);
-	g_free (info->location);
+	g_free (info->module_name);
 	g_free (info->name);
 	g_free (info->desc);
 	g_free (info->icon_name);
@@ -164,7 +164,7 @@ gedit_plugin_info_new (const gchar *file)
 		goto error;
 	}
 				    
-	/* Get Location */
+	/* Get module name */
 	str = g_key_file_get_string (plugin_file,
 				     "Gedit Plugin",
 				     "Module",
@@ -172,7 +172,7 @@ gedit_plugin_info_new (const gchar *file)
 
 	if ((str != NULL) && (*str != '\0'))
 	{
-		info->location = str;
+		info->module_name = str;
 	}
 	else
 	{
@@ -274,7 +274,7 @@ gedit_plugin_info_new (const gchar *file)
 
 error:
 	g_free (info->file);
-	g_free (info->location);
+	g_free (info->module_name);
 	g_free (info->name);
 	g_free (info);
 	g_key_file_free (plugin_file);
@@ -286,7 +286,7 @@ static gint
 compare_plugin_info (GeditPluginInfo *info1,
 		     GeditPluginInfo *info2)
 {
-	return strcmp (info1->location, info2->location);
+	return strcmp (info1->module_name, info2->module_name);
 }
 
 static void
@@ -330,7 +330,7 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 			{
 				g_warning ("Two or more plugins named '%s'. "
 					   "Only the first will be considered.\n",
-					   info->location);
+					   info->module_name);
 
 				gedit_plugin_info_free (info);
 
@@ -340,7 +340,7 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 			/* Actually, the plugin will be activated when reactivate_all
 			 * will be called for the first time. */
 			if (g_slist_find_custom (active_plugins,
-						 info->location,
+						 info->module_name,
 						 (GCompareFunc)strcmp) != NULL)
 			{
 				info->active = TRUE;
@@ -491,7 +491,7 @@ load_plugin_module (GeditPluginInfo *info)
 
 	g_return_val_if_fail (info != NULL, FALSE);
 	g_return_val_if_fail (info->file != NULL, FALSE);
-	g_return_val_if_fail (info->location != NULL, FALSE);
+	g_return_val_if_fail (info->module_name != NULL, FALSE);
 	g_return_val_if_fail (info->plugin == NULL, FALSE);
 	g_return_val_if_fail (info->available, FALSE);
 	
@@ -501,7 +501,7 @@ load_plugin_module (GeditPluginInfo *info)
 			dirname = g_path_get_dirname (info->file);	
 			g_return_val_if_fail (dirname != NULL, FALSE);
 
-			path = g_module_build_path (dirname, info->location);
+			path = g_module_build_path (dirname, info->module_name);
 			g_free (dirname);
 			g_return_val_if_fail (path != NULL, FALSE);
 	
@@ -529,12 +529,12 @@ load_plugin_module (GeditPluginInfo *info)
 
 			dir = g_path_get_dirname (info->file);
 			
-			g_return_val_if_fail ((info->location != NULL) &&
-			                      (info->location[0] != '\0'),
+			g_return_val_if_fail ((info->module_name != NULL) &&
+			                      (info->module_name[0] != '\0'),
 			                      FALSE);
 
 			info->module = G_TYPE_MODULE (
-					gedit_python_module_new (dir, info->location));
+					gedit_python_module_new (dir, info->module_name));
 					
 			g_free (dir);
 			break;
@@ -557,7 +557,7 @@ load_plugin_module (GeditPluginInfo *info)
 			case GEDIT_PLUGIN_LOADER_PY:
 				g_warning ("Cannot load Python plugin '%s' since file '%s' cannot be read.",
 					   info->name,			           
-					   info->location);
+					   info->module_name);
 				break;
 
 			default:
@@ -654,7 +654,7 @@ gedit_plugins_engine_activate_plugin (GeditPluginInfo *info)
 		list = active_plugins;
 		while (list != NULL)
 		{
-			if (strcmp (info->location, (gchar *)list->data) == 0)
+			if (strcmp (info->module_name, (gchar *)list->data) == 0)
 			{
 				g_warning ("Plugin '%s' is already active.", info->name);
 				return TRUE;
@@ -664,7 +664,7 @@ gedit_plugins_engine_activate_plugin (GeditPluginInfo *info)
 		}
 	
 		active_plugins = g_slist_insert_sorted (active_plugins, 
-						        g_strdup (info->location), 
+						        g_strdup (info->module_name), 
 						        (GCompareFunc)strcmp);
 		
 		res = gconf_client_set_list (gedit_plugins_engine_gconf_client,
@@ -719,7 +719,7 @@ gedit_plugins_engine_deactivate_plugin (GeditPluginInfo *info)
 
 	while (list != NULL)
 	{
-		if (strcmp (info->location, (gchar *)list->data) == 0)
+		if (strcmp (info->module_name, (gchar *)list->data) == 0)
 		{
 			g_free (list->data);
 			active_plugins = g_slist_delete_link (active_plugins, list);
@@ -869,7 +869,7 @@ gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 			continue;
 
 		to_activate = (g_slist_find_custom (active_plugins,
-						    info->location,
+						    info->module_name,
 						    (GCompareFunc)strcmp) != NULL);
 
 		if (!info->active && to_activate)

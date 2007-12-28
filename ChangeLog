@@ -1,5 +1,12 @@
 2007-12-28  Steve Frécinaux  <code@istique.net>
 
+	* gedit/gedit-plugins-engine.c: talk about "module name" instead of
+	"location" (since it is really what it is about"). "Location" is
+	confusing because it is first understood as the directory where the
+	plugin lies, while it's not.
+
+2007-12-28  Steve Frécinaux  <code@istique.net>
+
 	* gedit/gedit-plugins-engine.[ch]: Rename a bunch of
 	gedit_plugins_engine_get_plugin_* into gedit_plugin_info_get_*, which
 	is shorter and closer to the general naming convention.
