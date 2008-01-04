@@ -163,7 +163,7 @@ gedit_plugins_engine_load_all (GeditPluginsEngine *engine)
 	GSList *active_plugins;
 	const gchar *home;
 	const gchar *pdirs_env;
-	const gchar **pdirs;
+	gchar **pdirs;
 	int i;
 
 	active_plugins = gconf_client_get_list (engine->priv->gconf_client,
