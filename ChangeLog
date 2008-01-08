@@ -1,3 +1,9 @@
+2008-01-08  Willie Walker <william.walker@sun.com>
+
+	* gedit/gedit-view.c: fix for bug #475674 - state-changed:focused
+	events missing for document when go to line is used.  This forces
+	a focus event on the view when the search dialog goes away.
+
 2008-01-04  Steve Frécinaux  <code@istique.net>
 
 	* gedit/gedit-plugins-engine.c: fix a warning in GeditPluginsEngine.

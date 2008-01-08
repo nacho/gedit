@@ -873,6 +873,9 @@ hide_search_window (GeditView *view, gboolean cancel)
 		
 		gedit_view_scroll_to_cursor (view);
 	}
+
+	/* make sure a focus event is sent for the edit area */
+	send_focus_change (GTK_WIDGET (view), TRUE);
 }
 
 static gboolean
