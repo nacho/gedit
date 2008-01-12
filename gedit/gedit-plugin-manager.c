@@ -323,7 +323,6 @@ plugin_manager_set_active (GeditPluginManager *pm,
 			   GtkTreeModel       *model,
 			   gboolean            active)
 {
-	GeditPluginsEngine *engine;
 	GeditPluginInfo *info;
 	gboolean res = TRUE;
 	
@@ -774,7 +773,7 @@ plugin_toggled_cb (GeditPluginsEngine *engine,
 		return;
 	}
 
-	gtk_list_store_set (model, &iter, ACTIVE_COLUMN, gedit_plugin_info_is_active (info), -1);
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter, ACTIVE_COLUMN, gedit_plugin_info_is_active (info), -1);
 }
 
 static void 
