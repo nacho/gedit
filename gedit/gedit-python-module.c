@@ -222,8 +222,10 @@ gedit_python_module_class_init (GeditPythonModuleClass *class)
 					      "Module Name",
 					      "The Python module to load for this plugin",
 					      NULL,
-					      G_PARAM_WRITABLE | G_PARAM_READABLE | G_PARAM_CONSTRUCT_ONLY));
-					      
+					      G_PARAM_READWRITE |
+					      G_PARAM_CONSTRUCT_ONLY |
+					      G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property
 			(object_class,
 			 PROP_PATH,
@@ -231,7 +233,9 @@ gedit_python_module_class_init (GeditPythonModuleClass *class)
 					      "Path",
 					      "The Python path to use when loading this module",
 					      NULL,
-					      G_PARAM_WRITABLE | G_PARAM_READABLE | G_PARAM_CONSTRUCT_ONLY));
+					      G_PARAM_READWRITE |
+					      G_PARAM_CONSTRUCT_ONLY |
+					      G_PARAM_STATIC_STRINGS));
 
 	g_type_class_add_private (object_class, sizeof (GeditPythonModulePrivate));
 	

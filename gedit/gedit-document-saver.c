@@ -155,7 +155,8 @@ gedit_document_saver_class_init (GeditDocumentSaverClass *klass)
 							      "The GeditDocument this GeditDocumentSaver is associated with",
 							      GEDIT_TYPE_DOCUMENT,
 							      G_PARAM_READWRITE |
-							      G_PARAM_CONSTRUCT_ONLY));
+							      G_PARAM_CONSTRUCT_ONLY |
+							      G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class,
 					 PROP_URI,
@@ -164,7 +165,8 @@ gedit_document_saver_class_init (GeditDocumentSaverClass *klass)
 							      "The URI this GeditDocumentSaver saves the document to",
 							      "",
 							      G_PARAM_READWRITE |
-							      G_PARAM_CONSTRUCT_ONLY));
+							      G_PARAM_CONSTRUCT_ONLY |
+							      G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class,
 					 PROP_ENCODING,
@@ -173,7 +175,8 @@ gedit_document_saver_class_init (GeditDocumentSaverClass *klass)
 							     "The encoding of the saved file",
 							     GEDIT_TYPE_ENCODING,
 							     G_PARAM_READWRITE |
-							     G_PARAM_CONSTRUCT_ONLY));
+							     G_PARAM_CONSTRUCT_ONLY |
+							     G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class,
 					 PROP_FLAGS,

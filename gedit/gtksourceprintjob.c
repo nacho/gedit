@@ -265,14 +265,18 @@ gtk_source_print_job_class_init (GtkSourcePrintJobClass *klass)
 							      _("Configuration options for "
 								"the print job"),
 							      GNOME_TYPE_PRINT_CONFIG,
-							      G_PARAM_READWRITE));
+							      G_PARAM_READWRITE |
+							      G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_BUFFER,
 					 g_param_spec_object ("buffer",
 							      _("Source Buffer"),
 							      _("GtkSourceBuffer object to print"),
 							      GTK_TYPE_SOURCE_BUFFER,
-							      G_PARAM_READWRITE));
+							      G_PARAM_READWRITE |
+							      G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_TABS_WIDTH,
 					 g_param_spec_uint ("tabs_width",
@@ -280,7 +284,9 @@ gtk_source_print_job_class_init (GtkSourcePrintJobClass *klass)
 							    _("Width in equivalent space "
 							      "characters of tabs"),
 							    0, 100, 8,
-							    G_PARAM_READWRITE));
+							    G_PARAM_READWRITE |
+							    G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_WRAP_MODE,
 					 g_param_spec_enum ("wrap_mode",
@@ -288,7 +294,9 @@ gtk_source_print_job_class_init (GtkSourcePrintJobClass *klass)
 							    _("Word wrapping mode"),
 							    GTK_TYPE_WRAP_MODE,
 							    GTK_WRAP_NONE,
-							    G_PARAM_READWRITE));
+							    G_PARAM_READWRITE |
+							    G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_HIGHLIGHT,
 					 g_param_spec_boolean ("highlight",
@@ -297,7 +305,9 @@ gtk_source_print_job_class_init (GtkSourcePrintJobClass *klass)
 								 "document with highlighted "
 								 "syntax"),
 							       TRUE,
-							       G_PARAM_READWRITE));
+							       G_PARAM_READWRITE |
+							       G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_FONT,
 					 g_param_spec_string ("font",
@@ -305,7 +315,9 @@ gtk_source_print_job_class_init (GtkSourcePrintJobClass *klass)
 							      _("GnomeFont name to use for the "
 								"document text (deprecated)"),
 							      NULL,
-							      G_PARAM_READWRITE));
+							      G_PARAM_READWRITE |
+							      G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_FONT_DESC,
 					 g_param_spec_boxed ("font_desc",
@@ -313,7 +325,9 @@ gtk_source_print_job_class_init (GtkSourcePrintJobClass *klass)
 							     _("Font to use for the document text "
 							       "(e.g. \"Monospace 10\")"),
 							     PANGO_TYPE_FONT_DESCRIPTION,
-							      G_PARAM_READWRITE));
+							     G_PARAM_READWRITE |
+							     G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_NUMBERS_FONT,
 					 g_param_spec_string ("numbers_font",
@@ -321,7 +335,9 @@ gtk_source_print_job_class_init (GtkSourcePrintJobClass *klass)
 							      _("GnomeFont name to use for the "
 								"line numbers (deprecated)"),
 							      NULL,
-							      G_PARAM_READWRITE));
+							      G_PARAM_READWRITE |
+							      G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_NUMBERS_FONT_DESC,
 					 g_param_spec_boxed ("numbers_font_desc",
@@ -329,7 +345,9 @@ gtk_source_print_job_class_init (GtkSourcePrintJobClass *klass)
 							     _("Font description to use for the "
 							       "line numbers"),
 							     PANGO_TYPE_FONT_DESCRIPTION,
-							      G_PARAM_READWRITE));
+							     G_PARAM_READWRITE |
+							     G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_PRINT_NUMBERS,
 					 g_param_spec_uint ("print_numbers",
@@ -337,7 +355,9 @@ gtk_source_print_job_class_init (GtkSourcePrintJobClass *klass)
 							    _("Interval of printed line numbers "
 							      "(0 means no numbers)"),
 							    0, 100, 1,
-							    G_PARAM_READWRITE));
+							    G_PARAM_READWRITE |
+							    G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_PRINT_HEADER,
 					 g_param_spec_boolean ("print_header",
@@ -345,7 +365,9 @@ gtk_source_print_job_class_init (GtkSourcePrintJobClass *klass)
 							       _("Whether to print a header "
 								 "in each page"),
 							       FALSE,
-							       G_PARAM_READWRITE));
+							       G_PARAM_READWRITE |
+							       G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_PRINT_FOOTER,
 					 g_param_spec_boolean ("print_footer",
@@ -353,7 +375,9 @@ gtk_source_print_job_class_init (GtkSourcePrintJobClass *klass)
 							       _("Whether to print a footer "
 								 "in each page"),
 							       FALSE,
-							       G_PARAM_READWRITE));
+							       G_PARAM_READWRITE |
+							       G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_HEADER_FOOTER_FONT,
 					 g_param_spec_string ("header_footer_font",
@@ -361,7 +385,9 @@ gtk_source_print_job_class_init (GtkSourcePrintJobClass *klass)
 							      _("GnomeFont name to use for the header "
 								"and footer (deprecated)"),
 							      NULL,
-							      G_PARAM_READWRITE));
+							      G_PARAM_READWRITE |
+							      G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_HEADER_FOOTER_FONT_DESC,
 					 g_param_spec_boxed ("header_footer_font_desc",
@@ -369,8 +395,9 @@ gtk_source_print_job_class_init (GtkSourcePrintJobClass *klass)
 							     _("Font to use for headers and footers "
 							       "(e.g. \"Monospace 10\")"),
 							     PANGO_TYPE_FONT_DESCRIPTION,
-							     G_PARAM_READWRITE));
-	
+							     G_PARAM_READWRITE |
+							     G_PARAM_STATIC_STRINGS));
+
 	print_job_signals [BEGIN_PAGE] =
 	    g_signal_new ("begin_page",
 			  G_OBJECT_CLASS_TYPE (object_class),

@@ -146,7 +146,8 @@ gedit_document_loader_class_init (GeditDocumentLoaderClass *klass)
 							      "The GeditDocument this GeditDocumentLoader is associated with",
 							      GEDIT_TYPE_DOCUMENT,
 							      G_PARAM_READWRITE |
-							      G_PARAM_CONSTRUCT_ONLY));
+							      G_PARAM_CONSTRUCT_ONLY |
+							      G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class,
 					 PROP_URI,
@@ -164,7 +165,8 @@ gedit_document_loader_class_init (GeditDocumentLoaderClass *klass)
 							     "The encoding of the saved file",
 							     GEDIT_TYPE_ENCODING,
 							     G_PARAM_READWRITE |
-							     G_PARAM_CONSTRUCT_ONLY));
+							     G_PARAM_CONSTRUCT_ONLY |
+							     G_PARAM_STATIC_STRINGS));
 
 	signals[LOADING] =
 		g_signal_new ("loading",

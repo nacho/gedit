@@ -102,11 +102,12 @@ gedit_app_class_init (GeditAppClass *klass)
 	g_object_class_install_property (object_class,
 					 PROP_LOCKDOWN,
 					 g_param_spec_flags ("lockdown",
-					 		     "Lockdown",
-					 		     "The lockdown mask",
-					 		     GEDIT_TYPE_LOCKDOWN_MASK,
-					 		     0,
-					 		     G_PARAM_READABLE));
+							     "Lockdown",
+							     "The lockdown mask",
+							     GEDIT_TYPE_LOCKDOWN_MASK,
+							     0,
+							     G_PARAM_READABLE |
+							     G_PARAM_STATIC_STRINGS));
 
 	g_type_class_add_private (object_class, sizeof(GeditAppPrivate));
 }

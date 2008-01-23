@@ -364,8 +364,9 @@ gedit_window_class_init (GeditWindowClass *klass)
 							     "The window's state",
 							     GEDIT_TYPE_WINDOW_STATE,
 							     GEDIT_WINDOW_STATE_NORMAL,
-							     G_PARAM_READABLE));
-							   
+							     G_PARAM_READABLE |
+							     G_PARAM_STATIC_STRINGS));
+
 	g_type_class_add_private (object_class, sizeof(GeditWindowPrivate));
 }
 

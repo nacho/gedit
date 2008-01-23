@@ -122,12 +122,13 @@ gedit_encodings_option_menu_class_init (GeditEncodingsOptionMenuClass *klass)
 
 	g_object_class_install_property (object_class,
 					 PROP_SAVE_MODE,
-					 g_param_spec_boolean ("save_mode",
+					 g_param_spec_boolean ("save-mode",
 							       ("Save Mode"),
 							       ("Save Mode"),
 							       FALSE,
-					 		       (G_PARAM_READWRITE | 
-							        G_PARAM_CONSTRUCT)));
+							       G_PARAM_READWRITE | 
+							       G_PARAM_CONSTRUCT |
+							       G_PARAM_STATIC_STRINGS));
 
 	g_type_class_add_private (object_class, sizeof(GeditEncodingsOptionMenuPrivate));
 }

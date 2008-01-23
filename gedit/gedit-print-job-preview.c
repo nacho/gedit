@@ -1091,11 +1091,11 @@ gedit_print_job_preview_class_init (GeditPrintJobPreviewClass *klass)
 	g_object_class_install_property (gobject_class, PROP_NX,
 		g_param_spec_ulong ("nx", _("Number of pages horizontally"),
 			_("Number of pages horizontally"), 1, 0xffff, 1,
-			G_PARAM_READWRITE));
+			G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 	g_object_class_install_property (gobject_class, PROP_NY,
 		g_param_spec_ulong ("ny", _("Number of pages vertically"),
 			_("Number of pages vertically"), 1, 0xffff, 1,
-			G_PARAM_READWRITE));
+			G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
 	g_type_class_add_private(klass, sizeof(GeditPrintJobPreviewPrivate));
 }

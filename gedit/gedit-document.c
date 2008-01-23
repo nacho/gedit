@@ -404,47 +404,59 @@ gedit_document_class_init (GeditDocumentClass *klass)
 
 	g_object_class_install_property (object_class, PROP_URI,
 					 g_param_spec_string ("uri",
-					 		      "URI",
-					 		      "The document's URI",
-					 		      NULL,
-					 		      G_PARAM_READABLE));
+							      "URI",
+							      "The document's URI",
+							      NULL,
+							      G_PARAM_READABLE |
+							      G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class, PROP_SHORTNAME,
 					 g_param_spec_string ("shortname",
-					 		      "Short Name",
-					 		      "The document's short name",
-					 		      NULL,
-					 		      G_PARAM_READABLE));
+							      "Short Name",
+							      "The document's short name",
+							      NULL,
+							      G_PARAM_READABLE |
+							      G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class, PROP_MIME_TYPE,
 					 g_param_spec_string ("mime-type",
-					 		      "MIME Type",
-					 		      "The document's MIME Type",
-					 		      "text/plain",
-					 		      G_PARAM_READABLE));
+							      "MIME Type",
+							      "The document's MIME Type",
+							      "text/plain",
+							      G_PARAM_READABLE |
+							      G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class, PROP_READ_ONLY,
 					 g_param_spec_boolean ("read-only",
-					 		       "Read Only",
-					 		       "Whether the document is read only or not",
-					 		       FALSE,
-					 		       G_PARAM_READABLE));
+							       "Read Only",
+							       "Whether the document is read only or not",
+							       FALSE,
+							       G_PARAM_READABLE |
+							       G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class, PROP_ENCODING,
 					 g_param_spec_boxed ("encoding",
-					 		     "Encoding",
-					 		     "The GeditEncoding used for the document",
-					 		     GEDIT_TYPE_ENCODING,
-					 		     G_PARAM_READABLE));
+							     "Encoding",
+							     "The GeditEncoding used for the document",
+							     GEDIT_TYPE_ENCODING,
+							     G_PARAM_READABLE |
+							     G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class, PROP_CAN_SEARCH_AGAIN,
 					 g_param_spec_boolean ("can-search-again",
-					 		       "Can search again",
-					 		       "Wheter it's possible to search again in the document",
-					 		       FALSE,
-					 		       G_PARAM_READABLE));
+							       "Can search again",
+							       "Wheter it's possible to search again in the document",
+							       FALSE,
+							       G_PARAM_READABLE |
+							       G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class, PROP_ENABLE_SEARCH_HIGHLIGHTING,
 					 g_param_spec_boolean ("enable-search-highlighting",
-					 		       "Enable Search Highlighting",
-					 		       "Whether all the occurences of the searched string must be highlighted",
-					 		       FALSE,
-					 		       G_PARAM_READWRITE));
+							       "Enable Search Highlighting",
+							       "Whether all the occurences of the searched string must be highlighted",
+							       FALSE,
+							       G_PARAM_READWRITE |
+							       G_PARAM_STATIC_STRINGS));
 
 	/* This signal is used to update the cursor position is the statusbar,
 	 * it's emitted either when the insert mark is moved explicitely or

@@ -158,7 +158,8 @@ gedit_history_entry_class_init (GeditHistoryEntryClass *klass)
 							      "History ID",
 							      "History ID",
 							      NULL,
-							      G_PARAM_READWRITE));
+							      G_PARAM_READWRITE |
+							      G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class,
 					 PROP_HISTORY_LENGTH,
@@ -168,7 +169,8 @@ gedit_history_entry_class_init (GeditHistoryEntryClass *klass)
 							    0,
 							    G_MAXUINT,
 							    GEDIT_HISTORY_ENTRY_HISTORY_LENGTH_DEFAULT,
-							    G_PARAM_READWRITE));
+							    G_PARAM_READWRITE |
+							    G_PARAM_STATIC_STRINGS));
 
 	/* TODO: Add enable-completion property */
 

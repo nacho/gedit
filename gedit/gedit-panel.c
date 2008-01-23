@@ -199,7 +199,10 @@ gedit_panel_class_init (GeditPanelClass *klass)
 							    "The panel's orientation",
 							    GTK_TYPE_ORIENTATION,
 							    GTK_ORIENTATION_VERTICAL,
-							    G_PARAM_WRITABLE | G_PARAM_READABLE | G_PARAM_CONSTRUCT_ONLY));
+							    G_PARAM_WRITABLE |
+							    G_PARAM_READABLE |
+							    G_PARAM_CONSTRUCT_ONLY |
+							    G_PARAM_STATIC_STRINGS));
 
 	widget_class->grab_focus = gedit_panel_grab_focus;
 

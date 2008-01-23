@@ -264,7 +264,9 @@ gedit_tab_class_init (GeditTabClass *klass)
 							      "Name",
 							      "The tab's name",
 							      NULL,
-							      G_PARAM_READABLE));
+							      G_PARAM_READABLE |
+							      G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_STATE,
 					 g_param_spec_enum ("state",
@@ -272,26 +274,29 @@ gedit_tab_class_init (GeditTabClass *klass)
 							    "The tab's state",
 							    GEDIT_TYPE_TAB_STATE,
 							    GEDIT_TAB_STATE_NORMAL,
-							    G_PARAM_READABLE));							      	
-							      
+							    G_PARAM_READABLE |
+							    G_PARAM_STATIC_STRINGS));
+
 	g_object_class_install_property (object_class,
 					 PROP_AUTO_SAVE,
 					 g_param_spec_boolean ("autosave",
 							       "Autosave",
 							       "Autosave feature",
 							       TRUE,
-							       G_PARAM_READWRITE));
+							       G_PARAM_READWRITE |
+							       G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class,
 					 PROP_AUTO_SAVE_INTERVAL,
-					 g_param_spec_int ("autosave_interval",
+					 g_param_spec_int ("autosave-interval",
 							   "AutosaveInterval",
 							   "Time between two autosaves",
 							   0,
 							   G_MAXINT,
 							   0,
-							   G_PARAM_READWRITE));
-							      
+							   G_PARAM_READWRITE |
+							   G_PARAM_STATIC_STRINGS));
+
 	g_type_class_add_private (object_class, sizeof (GeditTabPrivate));
 }
 

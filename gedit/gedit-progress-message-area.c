@@ -123,7 +123,9 @@ gedit_progress_message_area_class_init (GeditProgressMessageAreaClass *klass)
 							       "Has Cancel Button",
 							       "If the message area has a cancel button",
 							       TRUE,
-							       G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));						      
+							       G_PARAM_WRITABLE |
+							       G_PARAM_CONSTRUCT_ONLY |
+							       G_PARAM_STATIC_STRINGS));
 
 	g_type_class_add_private (gobject_class, sizeof(GeditProgressMessageAreaPrivate));
 }

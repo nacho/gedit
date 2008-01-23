@@ -465,7 +465,8 @@ gedit_documents_panel_class_init (GeditDocumentsPanelClass *klass)
 							 "The GeditWindow this GeditDocumentsPanel is associated with",
 							 GEDIT_TYPE_WINDOW,
 							 G_PARAM_READWRITE |
-							 G_PARAM_CONSTRUCT_ONLY));	
+							 G_PARAM_CONSTRUCT_ONLY |
+							 G_PARAM_STATIC_STRINGS));
 
 	g_type_class_add_private (object_class, sizeof(GeditDocumentsPanelPrivate));
 }
