@@ -102,6 +102,12 @@ struct _GeditDocumentClass
 	void (* cursor_moved)		(GeditDocument    *document);
 
 	/* Document load */
+	void (* load)			(GeditDocument       *document,
+					 const gchar         *uri,
+					 const GeditEncoding *encoding,
+					 gint                 line_pos,
+					 gboolean             create);
+
 	void (* loading)		(GeditDocument    *document,
 					 GnomeVFSFileSize  size,
 					 GnomeVFSFileSize  total_size);

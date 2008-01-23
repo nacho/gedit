@@ -74,6 +74,11 @@ PROFILE (static GTimer *timer = NULL)
 
 #define GEDIT_DOCUMENT_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_DOCUMENT, GeditDocumentPrivate))
 
+static void	gedit_document_load_real	(GeditDocument          *doc,
+						 const gchar            *uri,
+						 const GeditEncoding    *encoding,
+						 gint                    line_pos,
+						 gboolean                create);
 static void	gedit_document_save_real	(GeditDocument          *doc,
 						 const gchar            *uri,
 						 const GeditEncoding    *encoding,
@@ -146,6 +151,7 @@ enum {
 
 enum {
 	CURSOR_MOVED,
+	LOAD,
 	LOADING,
 	LOADED,
 	SAVE,
@@ -393,6 +399,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 	buf_class->mark_set = gedit_document_mark_set;
 	buf_class->changed = gedit_document_changed;
 
+	klass->load = gedit_document_load_real;
 	klass->save = gedit_document_save_real;
 
 	g_object_class_install_property (object_class, PROP_URI,
@@ -454,6 +461,35 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
+
+	/**
+	 * GeditDocument::load:
+	 * @document: the #GeditDocument.
+	 * @uri: the uri where to load the document from.
+	 * @encoding: the #GeditEncoding to encode the document.
+	 * @line_pos: the line to show.
+	 * @create: whether the document should be created if it doesn't exist.
+	 *
+	 * The "load" signal is emitted when a document is loaded.
+	 *
+	 * Since: 2.22
+	 */
+	document_signals[LOAD] =
+		g_signal_new ("load",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditDocumentClass, load),
+			      NULL, NULL,
+			      gedit_marshal_VOID__STRING_BOXED_INT_BOOLEAN,
+			      G_TYPE_NONE,
+			      4,
+			      G_TYPE_STRING,
+			      /* we rely on the fact that the GeditEncoding pointer stays
+			       * the same forever */
+			      GEDIT_TYPE_ENCODING | G_SIGNAL_TYPE_STATIC_SCOPE,
+			      G_TYPE_INT,
+			      G_TYPE_BOOLEAN);
+
 
 	document_signals[LOADING] =
    		g_signal_new ("loading",
@@ -1126,17 +1162,13 @@ document_loader_loading (GeditDocumentLoader *loader,
 	}
 }
 
-void
-gedit_document_load (GeditDocument       *doc,
-		     const gchar         *uri,
-		     const GeditEncoding *encoding,
-		     gint                 line_pos,
-		     gboolean             create)
+static void
+gedit_document_load_real (GeditDocument       *doc,
+			  const gchar         *uri,
+			  const GeditEncoding *encoding,
+			  gint                 line_pos,
+			  gboolean             create)
 {
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (uri != NULL);
-	g_return_if_fail (gedit_utils_is_valid_uri (uri));
-
 	g_return_if_fail (doc->priv->loader == NULL);
 
 	/* create a loader. It will be destroyed when loading is completed */
@@ -1154,6 +1186,30 @@ gedit_document_load (GeditDocument       *doc,
 	set_uri (doc, uri, NULL);
 
 	gedit_document_loader_load (doc->priv->loader);
+}
+
+/**
+ * gedit_document_load:
+ * @document: the #GeditDocument.
+ * @uri: the uri where to load the document from.
+ * @encoding: the #GeditEncoding to encode the document.
+ * @line_pos: the line to show.
+ * @create: whether the document should be created if it doesn't exist.
+ *
+ * Load a document. This results in the "load" signal to be emitted.
+ */
+void
+gedit_document_load (GeditDocument       *doc,
+		     const gchar         *uri,
+		     const GeditEncoding *encoding,
+		     gint                 line_pos,
+		     gboolean             create)
+{
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (uri != NULL);
+	g_return_if_fail (gedit_utils_is_valid_uri (uri));
+
+	g_signal_emit (doc, document_signals[LOAD], 0, uri, encoding, line_pos, create);
 }
 
 gboolean
