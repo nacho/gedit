@@ -14,8 +14,6 @@ INCLUDES = 							\
 noinst_LTLIBRARIES = libdialogs.la
 
 libdialogs_la_SOURCES = 			\
-	gedit-page-setup-dialog.c		\
-	gedit-page-setup-dialog.h		\
 	gedit-preferences-dialog.h		\
 	gedit-preferences-dialog.c		\
 	gedit-close-confirmation-dialog.c 	\
@@ -31,7 +29,6 @@ libdialogs_la_SOURCES = 			\
 glade_DATA =					\
 	gedit-encodings-dialog.glade		\
 	gedit-open-location-dialog.glade	\
-	gedit-page-setup-dialog.glade		\
 	gedit-preferences-dialog.glade		\
 	gedit-search-dialog.glade
 
