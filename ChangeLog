@@ -1,5 +1,10 @@
 2008-01-24  Paolo Borelli  <pborelli@katamail.com>
 
+	* gedit/gedit-utils.c: use X functions only when GDK_WINDOWING_X11
+	is defined.
+
+2008-01-24  Paolo Borelli  <pborelli@katamail.com>
+
 	* gedit/Makefile.am: use install-exec-hook instead of 
 	install-exec-local, to make sure symlink is done when installation
 	is finished. 

@@ -40,11 +40,7 @@
 #include <sys/time.h>
 #include <fcntl.h>
 #include <string.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-#include <X11/Xatom.h>
 
-#include <gdk/gdkx.h>
 #include <glib/gunicode.h>
 #include <glib/gi18n.h>
 #include <glade/glade-xml.h>
@@ -56,6 +52,14 @@
 #include "gedit-prefs-manager.h"
 #include "gedit-debug.h"
 #include "gedit-convert.h"
+
+/* For the workspace/viewport stuff */
+#ifdef GDK_WINDOWING_X11
+#include <gdk/gdkx.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <X11/Xatom.h>
+#endif
 
 #define STDIN_DELAY_MICROSECONDS 100000
 
@@ -789,6 +793,7 @@ gedit_utils_replace_home_dir_with_tilde (const gchar *uri)
 guint
 gedit_utils_get_current_workspace (GdkScreen *screen)
 {
+#ifdef GDK_WINDOWING_X11
 	GdkWindow *root_win;
 	GdkDisplay *display;
 	Atom type;
@@ -819,6 +824,11 @@ gedit_utils_get_current_workspace (GdkScreen *screen)
 
 	XFree (current_desktop);
 	return ret;
+#else
+	/* FIXME: on mac etc proably there are native APIs
+	 * to get the current workspace etc */
+	return 0;
+#endif
 }
 
 /**
@@ -831,6 +841,7 @@ gedit_utils_get_current_workspace (GdkScreen *screen)
 guint
 gedit_utils_get_window_workspace (GtkWindow *gtkwindow)
 {
+#ifdef GDK_WINDOWING_X11
 	GdkWindow *window;
 	GdkDisplay *display;
 	Atom type;
@@ -862,6 +873,11 @@ gedit_utils_get_window_workspace (GtkWindow *gtkwindow)
 
 	XFree (workspace);
 	return ret;
+#else
+	/* FIXME: on mac etc proably there are native APIs
+	 * to get the current workspace etc */
+	return 0;
+#endif
 }
 
 /**
@@ -876,6 +892,7 @@ gedit_utils_get_current_viewport (GdkScreen    *screen,
 				  gint         *x,
 				  gint         *y)
 {
+#ifdef GDK_WINDOWING_X11
 	GdkWindow *root_win;
 	GdkDisplay *display;
 	Atom type;
@@ -914,6 +931,12 @@ gedit_utils_get_current_viewport (GdkScreen    *screen,
 	*x = coordinates[0];
 	*y = coordinates[1];
 	XFree (coordinates);
+#else
+	/* FIXME: on mac etc proably there are native APIs
+	 * to get the current workspace etc */
+	*x = 0;
+	*y = 0;
+#endif
 }
 
 void
