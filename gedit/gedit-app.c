@@ -44,6 +44,10 @@
 #include "gedit-utils.h"
 #include "gedit-enum-types.h"
 
+
+#define GEDIT_PAGE_SETUP_FILE		"gedit-page-setup"
+#define GEDIT_PRINT_SETTINGS_FILE	"gedit-print-settings"
+
 #define GEDIT_APP_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_APP, GeditAppPrivate))
 
 /* Properties */
@@ -57,7 +61,11 @@ struct _GeditAppPrivate
 {
 	GList	          *windows;
 	GeditWindow       *active_window;
+
 	GeditLockdownMask  lockdown;
+
+	GtkPageSetup      *page_setup;
+	GtkPrintSettings  *print_settings;
 };
 
 G_DEFINE_TYPE(GeditApp, gedit_app, G_TYPE_OBJECT)
@@ -68,6 +76,11 @@ gedit_app_finalize (GObject *object)
 	GeditApp *app = GEDIT_APP (object); 
 
 	g_list_free (app->priv->windows);
+
+	if (app->priv->page_setup)
+		g_object_unref (app->priv->page_setup);
+	if (app->priv->print_settings)
+		g_object_unref (app->priv->print_settings);
 
 	G_OBJECT_CLASS (gedit_app_parent_class)->finalize (object);
 }
@@ -122,7 +135,8 @@ get_accel_file (void)
 	if (home != NULL)
 	{
 		return g_build_filename (home,
-					 ".gnome2/accels/"
+					 ".gnome2",
+					 "accels"
 					 "gedit",
 					 NULL);
 	}
@@ -131,20 +145,183 @@ get_accel_file (void)
 }
 
 static void
+load_accels (void)
+{
+	gchar *filename;
+
+	filename = get_accel_file ();
+	if (filename != NULL)
+	{
+		gedit_debug_message (DEBUG_APP, "Loading keybindings from %s\n", filename);		
+		gtk_accel_map_load (filename);
+		g_free (filename);
+	}
+}
+
+static void
+save_accels (void)
+{
+	gchar *filename;
+
+	filename = get_accel_file ();
+	if (filename != NULL)
+	{
+		gedit_debug_message (DEBUG_APP, "Saving keybindings in %s\n", filename);		
+		gtk_accel_map_save (filename);
+		g_free (filename);
+	}
+}
+
+static gchar *
+get_page_setup_file (void)
+{
+	const gchar *home;
+
+	home = g_get_home_dir ();
+	if (home != NULL)
+	{
+		return g_build_filename (home,
+					 ".gnome2",
+					 "gedit",
+					 GEDIT_PAGE_SETUP_FILE,
+					 NULL);
+	}
+
+	return NULL;
+}
+
+static void
+load_page_setup (GeditApp *app)
+{
+	gchar *filename;
+	GError *error = NULL;
+
+	g_return_if_fail (app->priv->page_setup == NULL);
+
+	filename = get_page_setup_file ();
+
+	app->priv->page_setup = gtk_page_setup_new_from_file (filename,
+							      &error);
+	if (error)
+	{
+		/* Ignore file not found error */
+		if (error->domain != G_FILE_ERROR ||
+		    error->code != G_FILE_ERROR_NOENT)
+		{
+			g_warning (error->message);
+		}
+
+		g_error_free (error);
+	}
+
+	g_free (filename);
+
+	/* fall back to default settings */
+	if (app->priv->page_setup == NULL)
+		app->priv->page_setup = gtk_page_setup_new ();
+}
+
+static void
+save_page_setup (GeditApp *app)
+{
+	gchar *filename;
+	GError *error = NULL;
+
+	if (app->priv->page_setup == NULL)
+		return;
+
+	filename = get_page_setup_file ();
+
+	gtk_page_setup_to_file (app->priv->page_setup,
+				filename,
+				&error);
+	if (error)
+	{
+		g_warning (error->message);
+		g_error_free (error);
+	}
+
+	g_free (filename);
+}
+
+static gchar *
+get_print_settings_file (void)
+{
+	const gchar *home;
+
+	home = g_get_home_dir ();
+	if (home != NULL)
+	{
+		return g_build_filename (home,
+					 ".gnome2",
+					 "gedit",
+					 GEDIT_PRINT_SETTINGS_FILE,
+					 NULL);
+	}
+
+	return NULL;
+}
+
+static void
+load_print_settings (GeditApp *app)
+{
+	gchar *filename;
+	GError *error = NULL;
+
+	g_return_if_fail (app->priv->print_settings == NULL);
+
+	filename = get_print_settings_file ();
+
+	app->priv->print_settings = gtk_print_settings_new_from_file (filename,
+								      &error);
+	if (error)
+	{
+		/* Ignore file not found error */
+		if (error->domain != G_FILE_ERROR ||
+		    error->code != G_FILE_ERROR_NOENT)
+		{
+			g_warning (error->message);
+		}
+
+		g_error_free (error);
+	}
+
+	g_free (filename);
+
+	/* fall back to default settings */
+	if (app->priv->print_settings == NULL)
+		app->priv->print_settings = gtk_print_settings_new ();
+}
+
+static void
+save_print_settings (GeditApp *app)
+{
+	gchar *filename;
+	GError *error = NULL;
+
+	if (app->priv->print_settings == NULL)
+		return;
+
+	filename = get_print_settings_file ();
+
+	gtk_print_settings_to_file (app->priv->print_settings,
+				    filename,
+				    &error);
+	if (error)
+	{
+		g_warning (error->message);
+		g_error_free (error);
+	}
+
+	g_free (filename);
+}
+
+static void
 gedit_app_init (GeditApp *app)
 {
-	gchar *accel_file;
-
 	app->priv = GEDIT_APP_GET_PRIVATE (app);
 
-	/* Load accels */
-	accel_file = get_accel_file ();
-	if (accel_file != NULL)
-	{
-		gedit_debug_message (DEBUG_APP, "Loading keybindings from %s\n", accel_file);		
-		gtk_accel_map_load (accel_file);
-		g_free (accel_file);
-	}
+	load_accels ();
 
 	/* initial lockdown state */
 	app->priv->lockdown = gedit_prefs_manager_get_lockdown ();
@@ -243,15 +420,12 @@ window_destroy (GeditWindow *window,
 */					      
 	if (app->priv->windows == NULL)
 	{
-		gchar *accel_file;
-		accel_file = get_accel_file ();
+		/* Last window is gone... save some settings and exit */
 
-		if (accel_file != NULL)
-		{
-			gedit_debug_message (DEBUG_APP, "Saveing keybindings in %s\n", accel_file);		
-			gtk_accel_map_save (accel_file);
-			g_free (accel_file);
-		}
+		save_accels ();
+
+		save_page_setup (app);
+		save_print_settings (app);
 
 		g_object_unref (app);
 	}
@@ -649,3 +823,54 @@ _gedit_app_set_lockdown_bit (GeditApp          *app,
 
 	app_lockdown_changed (app);
 }
+
+/* Returns a copy */
+GtkPageSetup *
+_gedit_app_get_default_page_setup (GeditApp *app)
+{
+	g_return_val_if_fail (GEDIT_IS_APP (app), NULL);
+
+	if (app->priv->page_setup == NULL)
+		load_page_setup (app);
+
+	return gtk_page_setup_copy (app->priv->page_setup);
+}
+
+void
+_gedit_app_set_default_page_setup (GeditApp     *app,
+				   GtkPageSetup *page_setup)
+{
+	g_return_if_fail (GEDIT_IS_APP (app));
+	g_return_if_fail (GTK_IS_PAGE_SETUP (page_setup));
+
+	if (app->priv->page_setup != NULL)
+		g_object_unref (app->priv->page_setup);
+
+	app->priv->page_setup = page_setup;
+}
+
+/* Returns a copy */
+GtkPrintSettings *
+_gedit_app_get_default_print_settings (GeditApp *app)
+{
+	g_return_val_if_fail (GEDIT_IS_APP (app), NULL);
+
+	if (app->priv->print_settings == NULL)
+		load_print_settings (app);
+
+	return gtk_print_settings_copy (app->priv->print_settings);
+}
+
+void
+_gedit_app_set_default_print_settings (GeditApp         *app,
+				       GtkPrintSettings *settings)
+{
+	g_return_if_fail (GEDIT_IS_APP (app));
+	g_return_if_fail (GTK_IS_PRINT_SETTINGS (settings));
+
+	if (app->priv->print_settings != NULL)
+		g_object_unref (app->priv->print_settings);
+
+	app->priv->print_settings = settings;
+}
+

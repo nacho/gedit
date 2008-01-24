@@ -146,16 +146,10 @@ void		 _gedit_tab_save_as		(GeditTab            *tab,
 						 const gchar         *uri,
 						 const GeditEncoding *encoding);
 
-/* print_job is a gpointer instead of GeditPrintJob because gedit-print is
- * is not public so it cannot be included in this header */
-void		 _gedit_tab_print		(GeditTab            *tab,
-						 gpointer             print_job,
-						 GtkTextIter         *start, 
-			  			 GtkTextIter         *end);
-void		 _gedit_tab_print_preview	(GeditTab            *tab,
-						 gpointer             print_job,
-						 GtkTextIter         *start, 
-			  			 GtkTextIter         *end);
+void		 _gedit_tab_page_setup		(GeditTab            *tab);
+void		 _gedit_tab_print		(GeditTab            *tab);
+void		 _gedit_tab_print_preview	(GeditTab            *tab);
+
 void		 _gedit_tab_mark_for_closing	(GeditTab	     *tab);
 
 gboolean	 _gedit_tab_can_close		(GeditTab	     *tab);

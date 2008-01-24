@@ -69,15 +69,14 @@ NOINST_H_FILES =			\
 	gedit-local-document-saver.h	\
 	gedit-gnomevfs-document-saver.h	\
 	gedit-history-entry.h		\
-	gedit-print.h			\
-	gedit-print-job-preview.h	\
+	gedit-print-job.h		\
+	gedit-print-preview.h		\
 	gedit-io-error-message-area.h	\
 	gedit-spinner.h			\
 	gedit-prefs-manager-private.h	\
 	sexy-icon-entry.h		\
 	gedittextregion.h		\
-	gedit-session.h			\
-	gtksourceprintjob.h
+	gedit-session.h
 
 if ENABLE_PYTHON
 NOINST_H_FILES += \
@@ -153,8 +152,8 @@ libgedit_la_SOURCES = 			\
 	gedit-prefs-manager-app.c	\
 	gedit-prefs-manager.c		\
 	gedit-prefs-manager-private.h	\
-	gedit-print.c			\
-	gedit-print-job-preview.c	\
+	gedit-print-job.c		\
+	gedit-print-preview.c		\	
 	gedit-progress-message-area.c	\
 	gedit-session.c			\
 	gedit-spinner.c			\
@@ -166,7 +165,6 @@ libgedit_la_SOURCES = 			\
 	gedit-window.c			\
 	sexy-icon-entry.c		\
 	gedittextregion.c		\
-	gtksourceprintjob.c		\
 	$(NOINST_H_FILES)		\
 	$(INST_H_FILES)
 
@@ -192,11 +190,16 @@ gedit-marshal.c: gedit-marshal.list $(GLIB_GENMARSHAL)
 	echo "#include \"gedit-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_marshal >> $@
 
-ui_DATA = gedit-ui.xml
 uidir = $(datadir)/gedit-2/ui/
+ui_DATA = gedit-ui.xml
+
+gladedir = $(datadir)/gedit-2/glade/
+glade_DATA =				\
+	gedit-print-preferences.glade
 
 EXTRA_DIST = 				\
 	$(ui_DATA)			\
+	$(glade_DATA)			\
 	gedit-enum-types.h.template	\
 	gedit-enum-types.c.template	\
 	gedit-marshal.list
