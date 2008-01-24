@@ -209,7 +209,7 @@ CLEANFILES = $(BUILT_SOURCES)
 dist-hook:
 	cd $(distdir); rm -f $(BUILT_SOURCES)
 
-install-exec-local:
+install-exec-hook:
 	rm -f $(DESTDIR)$(bindir)/gnome-text-editor
 	ln -s gedit $(DESTDIR)$(bindir)/gnome-text-editor
 
