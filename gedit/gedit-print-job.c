@@ -105,13 +105,6 @@ static guint print_job_signals[LAST_SIGNAL] = { 0 };
 
 G_DEFINE_TYPE (GeditPrintJob, gedit_print_job, G_TYPE_OBJECT)
 
-/* these are used to keep a consistent init value
- * of preferences not currently stored in gconf
- * across multiple instances.
- */
-static gboolean split_button_state = TRUE;
-static gint old_line_numbers_value = 1;
-
 static void
 set_view (GeditPrintJob *job, GeditView *view)
 {
@@ -234,20 +227,6 @@ gedit_print_job_class_init (GeditPrintJobClass *klass)
 }
 
 static void
-syntax_checkbutton_toggled (GtkToggleButton *button,
-			    gpointer         data)
-{
-	gedit_prefs_manager_set_print_syntax_hl (gtk_toggle_button_get_active (button));
-}
-
-static void
-page_header_checkbutton_toggled (GtkToggleButton *button,
-				 gpointer         data)
-{
-	gedit_prefs_manager_set_print_header (gtk_toggle_button_get_active (button));
-}
-
-static void
 line_numbers_checkbutton_toggled (GtkToggleButton *button,
 				  GeditPrintJob   *job)
 {
@@ -255,24 +234,11 @@ line_numbers_checkbutton_toggled (GtkToggleButton *button,
 	{
 		gtk_widget_set_sensitive (job->priv->line_numbers_hbox, 
 					  gedit_prefs_manager_print_line_numbers_can_set ());
-
-		gedit_prefs_manager_set_print_line_numbers (
-			MAX (1, gtk_spin_button_get_value_as_int (
-			   GTK_SPIN_BUTTON (job->priv->line_numbers_spinbutton))));
 	}
 	else
 	{
 		gtk_widget_set_sensitive (job->priv->line_numbers_hbox, FALSE);
-		gedit_prefs_manager_set_print_line_numbers (0);
 	}
-}
-
-static void
-line_numbers_spinbutton_value_changed (GtkSpinButton *spin_button,
-				       gpointer       data)
-{
-	old_line_numbers_value = MAX (1, gtk_spin_button_get_value_as_int (spin_button));
-	gedit_prefs_manager_set_print_line_numbers (old_line_numbers_value);
 }
 
 static void
@@ -281,8 +247,6 @@ wrap_mode_checkbutton_toggled (GtkToggleButton *button,
 {
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->text_wrapping_checkbutton)))
 	{
-		gedit_prefs_manager_set_print_wrap_mode (GTK_WRAP_NONE);
-
 		gtk_widget_set_sensitive (job->priv->do_not_split_checkbutton, 
 					  FALSE);
 		gtk_toggle_button_set_inconsistent (
@@ -296,17 +260,6 @@ wrap_mode_checkbutton_toggled (GtkToggleButton *button,
 		gtk_toggle_button_set_inconsistent (
 			GTK_TOGGLE_BUTTON (job->priv->do_not_split_checkbutton),
 					   FALSE);
-
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->do_not_split_checkbutton)))
-		{
-			split_button_state = TRUE;
-			gedit_prefs_manager_set_print_wrap_mode (GTK_WRAP_WORD);
-		}
-		else
-		{
-			split_button_state = FALSE;
-			gedit_prefs_manager_set_print_wrap_mode (GTK_WRAP_CHAR);
-		}	
 	}
 }
 
@@ -324,8 +277,6 @@ restore_button_clicked (GtkButton     *button,
 		gtk_font_button_set_font_name (
 				GTK_FONT_BUTTON (job->priv->body_fontbutton),
 				font);
-
-		gedit_prefs_manager_set_print_font_body (font);
 	}
 	
 	if (gedit_prefs_manager_print_font_header_can_set ())
@@ -337,8 +288,6 @@ restore_button_clicked (GtkButton     *button,
 		gtk_font_button_set_font_name (
 				GTK_FONT_BUTTON (job->priv->headers_fontbutton),
 				font);
-
-		gedit_prefs_manager_set_print_font_header (font);
 	}
 
 	if (gedit_prefs_manager_print_font_numbers_can_set ())
@@ -350,32 +299,7 @@ restore_button_clicked (GtkButton     *button,
 		gtk_font_button_set_font_name (
 				GTK_FONT_BUTTON (job->priv->numbers_fontbutton),
 				font);
-
-		gedit_prefs_manager_set_print_font_numbers (font);
 	}
-}
-
-static void
-body_font_button_font_set (GtkFontButton *fb,
-			   gpointer       data)
-
-{
-	gedit_prefs_manager_set_print_font_body (gtk_font_button_get_font_name (fb));
-}
-
-static void
-headers_font_button_font_set (GtkFontButton *fb,
-			      gpointer       data)
-
-{
-	gedit_prefs_manager_set_print_font_header (gtk_font_button_get_font_name (fb));
-}
-
-static void
-numbers_font_button_font_set (GtkFontButton *fb,
-			      gpointer       data)
-{
-	gedit_prefs_manager_set_print_font_numbers (gtk_font_button_get_font_name (fb));
 }
 
 static GObject *
@@ -445,7 +369,7 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 	else
 	{
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (job->priv->line_numbers_spinbutton),
-					   (guint)old_line_numbers_value);
+					   1);
 		gtk_widget_set_sensitive (job->priv->line_numbers_hbox, FALSE);
 	}
 
@@ -469,9 +393,6 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 		default:
 			gtk_toggle_button_set_active (
 				GTK_TOGGLE_BUTTON (job->priv->text_wrapping_checkbutton), FALSE);
-			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (job->priv->do_not_split_checkbutton), 
-				split_button_state);
 			gtk_toggle_button_set_inconsistent (
 				GTK_TOGGLE_BUTTON (job->priv->do_not_split_checkbutton), TRUE);
 	}
@@ -510,21 +431,9 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 	gtk_widget_set_sensitive (job->priv->numbers_fontbutton, can_set);
 	gtk_widget_set_sensitive (job->priv->numbers_font_label, can_set);
 
-	g_signal_connect (job->priv->syntax_checkbutton,
-			  "toggled",
-			  G_CALLBACK (syntax_checkbutton_toggled),
-			  job);
-	g_signal_connect (job->priv->page_header_checkbutton,
-			  "toggled",
-			  G_CALLBACK (page_header_checkbutton_toggled),
-			  job);
 	g_signal_connect (job->priv->line_numbers_checkbutton,
 			  "toggled",
 			  G_CALLBACK (line_numbers_checkbutton_toggled),
-			  job);
-	g_signal_connect (job->priv->line_numbers_spinbutton,
-			  "value-changed",
-			  G_CALLBACK (line_numbers_spinbutton_value_changed),
 			  job);
 	g_signal_connect (job->priv->text_wrapping_checkbutton,
 			  "toggled",
@@ -533,18 +442,6 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 	g_signal_connect (job->priv->do_not_split_checkbutton,
 			  "toggled",
 			  G_CALLBACK (wrap_mode_checkbutton_toggled),
-			  job);
-	g_signal_connect (job->priv->body_fontbutton,
-			  "font-set", 
-			  G_CALLBACK (body_font_button_font_set), 
-			  job);
-	g_signal_connect (job->priv->headers_fontbutton,
-			  "font-set", 
-			  G_CALLBACK (headers_font_button_font_set), 
-			  job);
-	g_signal_connect (job->priv->numbers_fontbutton,
-			  "font-set", 
-			  G_CALLBACK (numbers_font_button_font_set), 
 			  job);
 	g_signal_connect (job->priv->restore_button,
 			  "clicked",
@@ -559,7 +456,39 @@ custom_widget_apply_cb (GtkPrintOperation *operation,
 			GtkWidget         *widget,
 			GeditPrintJob     *job)
 {
-	g_print ("custom widget apply");
+	gedit_prefs_manager_set_print_syntax_hl (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->syntax_checkbutton)));
+
+	gedit_prefs_manager_set_print_header (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->page_header_checkbutton)));
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->line_numbers_checkbutton)))
+	{
+		gedit_prefs_manager_set_print_line_numbers (
+			MAX (1, gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (job->priv->line_numbers_spinbutton))));
+	}
+	else
+	{
+		gedit_prefs_manager_set_print_line_numbers (0);
+	}
+
+	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->text_wrapping_checkbutton)))
+	{
+		gedit_prefs_manager_set_print_wrap_mode (GTK_WRAP_NONE);
+	}
+	else
+	{
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->do_not_split_checkbutton)))
+		{
+			gedit_prefs_manager_set_print_wrap_mode (GTK_WRAP_WORD);
+		}
+		else
+		{
+			gedit_prefs_manager_set_print_wrap_mode (GTK_WRAP_CHAR);
+		}	
+	}
+
+	gedit_prefs_manager_set_print_font_body (gtk_font_button_get_font_name (GTK_FONT_BUTTON (job->priv->body_fontbutton)));
+	gedit_prefs_manager_set_print_font_header (gtk_font_button_get_font_name (GTK_FONT_BUTTON (job->priv->headers_fontbutton)));
+	gedit_prefs_manager_set_print_font_numbers (gtk_font_button_get_font_name (GTK_FONT_BUTTON (job->priv->numbers_fontbutton)));
 }
 
 static void
