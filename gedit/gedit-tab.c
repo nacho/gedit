@@ -2161,7 +2161,7 @@ get_page_setup (GeditTab *tab)
 	}
 	else
 	{
-		return GTK_PAGE_SETUP (data);
+		return gtk_page_setup_copy (GTK_PAGE_SETUP (data));
 	}
 }
 
@@ -2182,7 +2182,7 @@ get_print_settings (GeditTab *tab)
 	}
 	else
 	{
-		return GTK_PRINT_SETTINGS (data);
+		return gtk_print_settings_copy (GTK_PRINT_SETTINGS (data));
 	}
 }
 

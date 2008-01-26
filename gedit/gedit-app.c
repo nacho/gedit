@@ -846,7 +846,7 @@ _gedit_app_set_default_page_setup (GeditApp     *app,
 	if (app->priv->page_setup != NULL)
 		g_object_unref (app->priv->page_setup);
 
-	app->priv->page_setup = page_setup;
+	app->priv->page_setup = g_object_ref (page_setup);
 }
 
 /* Returns a copy */
@@ -871,6 +871,6 @@ _gedit_app_set_default_print_settings (GeditApp         *app,
 	if (app->priv->print_settings != NULL)
 		g_object_unref (app->priv->print_settings);
 
-	app->priv->print_settings = settings;
+	app->priv->print_settings = g_object_ref (settings);
 }
 
