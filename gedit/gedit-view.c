@@ -590,11 +590,20 @@ gedit_view_set_font (GeditView   *view,
 	g_return_if_fail (GEDIT_IS_VIEW (view));
 
 	if (def)
-		font_name = gedit_prefs_manager_get_system_font ();
+	{
+		gchar *font;
 
-	g_return_if_fail (font_name != NULL);
+		font = gedit_prefs_manager_get_system_font ();
+		font_desc = pango_font_description_from_string (font);
+		g_free (font);
+	}
+	else
+	{
+		g_return_if_fail (font_name != NULL);
 
-	font_desc = pango_font_description_from_string (font_name);
+		font_desc = pango_font_description_from_string (font_name);
+	}
+
 	g_return_if_fail (font_desc != NULL);
 
 	gtk_widget_modify_font (GTK_WIDGET (view), font_desc);
