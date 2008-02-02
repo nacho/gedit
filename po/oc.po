@@ -8,20 +8,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-27 00:08+0100\n"
-"PO-Revision-Date: 2007-12-27 13:34+0100\n"
+"POT-Creation-Date: 2008-02-02 21:52+0100\n"
+"PO-Revision-Date: 2008-02-02 22:12+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);"
 
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
 msgstr "Editar de fichièrs tèxt"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:474
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:475
+#: ../gedit/gedit-print-job.c:751
 msgid "Text Editor"
 msgstr "Editor de tèxt"
 
@@ -33,7 +34,7 @@ msgstr ""
 "Una poliça personalizada que serà utilizada per la zòna d'edicion. Serà "
 "aplicat sonque se l'opcion \"Utilizar la poliça per defaut\" es desactivada."
 
-#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:765
+#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:796
 msgid "Active plugins"
 msgstr "Ajustons actius"
 
@@ -180,14 +181,7 @@ msgstr "Monospace 12"
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
-#. Translators: This is the Body font for printing.
-#. This is a gnome-print font name and is replaced by
-#. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:41
-msgid "Monospace Regular 9"
-msgstr "Monospace Regular 9"
-
-#: ../data/gedit.schemas.in.h:42
+#: ../data/gedit.schemas.in.h:38
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -196,72 +190,58 @@ msgstr ""
 "modificats.  Serà aplicat sonque se l'opcion \"Enregistrament automatic\" es "
 "activada."
 
-#: ../data/gedit.schemas.in.h:43
+#: ../data/gedit.schemas.in.h:39
 msgid "Print Header"
 msgstr "Estampar l'encap"
 
-#: ../data/gedit.schemas.in.h:44
+#: ../data/gedit.schemas.in.h:40
 msgid "Print Line Numbers"
 msgstr "Estampar los numeròs de linha"
 
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:41
 msgid "Print Syntax Highlighting"
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:42
 msgid "Printing Line Wrapping Mode"
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:43
 msgid "Restore Previous Cursor Position"
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:48
+#: ../data/gedit.schemas.in.h:44
 msgid "Right Margin Position"
 msgstr ""
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:51
+#: ../data/gedit.schemas.in.h:47
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:54
+#: ../data/gedit.schemas.in.h:50
 msgid "Sans 8"
 msgstr "Sans 8"
 
-#. Translators: This is the Header font for printing.
-#. This is a gnome-print font name and replaced by
-#. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:58
-msgid "Sans Regular 11"
-msgstr "Sans Regular 11"
-
-#. Translators: This is the Line Number font for printing.
-#. This is a gnome-print font name and replaced by
-#. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:62
-msgid "Sans Regular 8"
-msgstr "Sans Regular 8"
-
-#: ../data/gedit.schemas.in.h:63
+#: ../data/gedit.schemas.in.h:51
 msgid "Side Pane is Visible"
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:64
+#: ../data/gedit.schemas.in.h:52
 msgid "Smart Home End"
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:53
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" represents the current locale encoding. Only recognized "
 "encodings are used."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:54
 msgid ""
 "Specifies how the cursor moves when the HOME and END keys are pressed. Use "
 "\"DISABLED\" to always move at the start/end of the line, \"AFTER\" to move "
@@ -272,7 +252,7 @@ msgid ""
 "the text instead of the start/end of the line."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:55
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -281,7 +261,7 @@ msgid ""
 "here."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:56
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -290,20 +270,12 @@ msgid ""
 "here."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:57
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:70
-msgid ""
-"Specifies the font to use for a document's body when printing documents. "
-"This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr ""
-"Especifica la poliça d'utilizar per estampar lo còs de documents. Es un nom "
-"de poliça gnome-print e remplaçat per print_font_body_pango."
-
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:58
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -311,17 +283,7 @@ msgstr ""
 "Especifica la poliça d'utilizar per estampar los numeròs de linha. Serà "
 "aplicat sonque se l'opcion \"Estampar los numeròs de linha\" es pas zerò."
 
-#: ../data/gedit.schemas.in.h:72
-msgid ""
-"Specifies the font to use for line numbers when printing. This will only "
-"take effect if the \"Print Line Numbers\" option is non-zero. This is a "
-"gnome-print font name and replaced by print_font_numbers_pango."
-msgstr ""
-"Especifica la poliça d'utilizar per estampar los numeròs de linha. Serà "
-"aplicat sonque se l'opcion \"Estampar los numeròs de linha\" es pas zerò. Es "
-"un nom de poliça gnome-print e remplaçat per print_font_body_pango."
-
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:59
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -329,17 +291,7 @@ msgstr ""
 "Especifica la poliça d'utilizar per estampar los encaps de pagina. Serà "
 "aplicat sonque se l'opcion \"Estampar l'encap\" es activada."
 
-#: ../data/gedit.schemas.in.h:74
-msgid ""
-"Specifies the font to use for page headers when printing a document. This "
-"will only take effect if the \"Print Header\" option is turned on. This is a "
-"gnome-print font name and replaced by print_font_header_pango."
-msgstr ""
-"Especifica la poliça d'utilizar per estampar los encaps de pagina. Serà "
-"aplicat sonque se l'opcion \"Estampar l'encap\" es activada. Es un nom de "
-"poliça gnome-print e remplaçat per print_font_body_pango."
-
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:60
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -347,25 +299,25 @@ msgstr ""
 "Especifica lo nombre maximum de fichièrs recentament dobèrts que seràn "
 "visualizats dins lo sosmenut \"Fichièrs recents\"."
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:61
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:62
 msgid "Specifies the position of the right margin."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:63
 msgid "Status Bar is Visible"
 msgstr "La barra d'estat es visibla"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:64
 msgid "Style Scheme"
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:65
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -375,110 +327,111 @@ msgid ""
 "mentioned here."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:66
 msgid "Tab Size"
 msgstr "Talha de la tabulacion"
 
-#: ../data/gedit.schemas.in.h:82
+#: ../data/gedit.schemas.in.h:67
 msgid "The id of a GtkSourceView Style Scheme used to color the text."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:68
 msgid "Toolbar Buttons Style"
 msgstr "Estil dels botons de la barra d'espleches"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:69
 msgid "Toolbar is Visible"
 msgstr "La barra d'espleches es visibla"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:70
 msgid "Undo Actions Limit (DEPRECATED)"
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:71
 msgid "Use Default Font"
 msgstr "Utilisar la poliça per defaut"
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:74
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:75
 msgid "Whether gedit should display the right margin in the editing area."
-msgstr "Especifica se gedit deu visualizar lo marge drèch dins la zòna d'edicion."
+msgstr ""
+"Especifica se gedit deu visualizar lo marge drèch dins la zòna d'edicion."
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:76
 msgid "Whether gedit should enable auto indentation."
 msgstr "Especifica se gedit deu activar l'identacion automatica."
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:77
 msgid "Whether gedit should enable syntax highlighting."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:78
 msgid ""
 "Whether gedit should highlight all the occurrences of the searched text."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:79
 msgid "Whether gedit should highlight matching bracket."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:80
 msgid "Whether gedit should highlight the current line."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:81
 msgid "Whether gedit should include a document header when printing documents."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:82
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Especifica se gedit deu inserir d'espacis al luòc de tabulacions."
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:83
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:84
 msgid ""
 "Whether gedit should restore the previous cursor position when a file is "
 "loaded."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:100
+#: ../data/gedit.schemas.in.h:85
 msgid ""
 "Whether the bottom panel at the bottom of editing windows should be visible."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:101
+#: ../data/gedit.schemas.in.h:86
 msgid ""
 "Whether the side pane at the left of the editing window should be visible."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:102
+#: ../data/gedit.schemas.in.h:87
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:103
+#: ../data/gedit.schemas.in.h:88
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:104
+#: ../data/gedit.schemas.in.h:89
 msgid ""
 "Whether to use the system's default fixed width font for editing text "
 "instead of a font specific to gedit. If this option is turned off, then the "
@@ -486,13 +439,13 @@ msgid ""
 "font."
 msgstr ""
 
-#: ../data/gedit.schemas.in.h:105
+#: ../data/gedit.schemas.in.h:90
 msgid "Writable VFS schemes"
 msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:108
+#: ../data/gedit.schemas.in.h:93
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
@@ -507,7 +460,7 @@ msgstr "[ISO-8859-15]"
 #. Only recognized encodings are used.
 #. See http://svn.gnome.org/viewcvs/gedit/trunk/gedit/gedit-encodings.c?view=markup for
 #. a list of supported encodings
-#: ../data/gedit.schemas.in.h:120
+#: ../data/gedit.schemas.in.h:105
 msgid "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
 msgstr ""
 
@@ -534,10 +487,6 @@ msgid ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
 msgstr ""
-"S'enregistratz pas, las modificacions de la darrièra %ld segonda seràn "
-"perdudas per totjorn."
-"S'enregistratz pas, las modificacions de las darrièras %ld segondas seràn "
-"perdudas per totjorn."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:420
 msgid ""
@@ -554,10 +503,6 @@ msgid ""
 "If you don't save, changes from the last minute and %ld seconds will be "
 "permanently lost."
 msgstr ""
-"S'enregistratz pas, las modificacions de la darrièra minuta e %ld segonda "
-"seràn perdudas per totjorn."
-"S'enregistratz pas, las modificacions de la darrièra minuta e %ld segondas "
-"seràn perdudas per totjorn."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:436
 #, c-format
@@ -566,10 +511,6 @@ msgid ""
 "If you don't save, changes from the last %ld minutes will be permanently "
 "lost."
 msgstr ""
-"S'enregistratz pas, las modificacions de la darrièra %ld minuta seràn "
-"perdudas per totjorn."
-"S'enregistratz pas, las modificacions de las darrièras %ld minutas seràn "
-"perdudas per totjorn."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:451
 msgid "If you don't save, changes from the last hour will be permanently lost."
@@ -583,10 +524,6 @@ msgid ""
 "If you don't save, changes from the last hour and %d minutes will be "
 "permanently lost."
 msgstr ""
-"S'enregistratz pas, las modificacions de la darrièra ora e %d minuta seràn perdudas "
-"per totjorn."
-"S'enregistratz pas, las modificacions de la darrièra ora e %d minutas seràn perdudas "
-"per totjorn."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -594,7 +531,7 @@ msgid ""
 "If you don't save, changes from the last %d hour will be permanently lost."
 "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr ""
-""
+"S'enregi"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:515
 #, c-format
@@ -673,85 +610,6 @@ msgstr ""
 msgid "Enter the _location (URI) of the file you would like to open:"
 msgstr ""
 
-#: ../gedit/dialogs/gedit-page-setup-dialog.c:527
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:9
-msgid "Page Setup"
-msgstr "Configuracion de la pagina"
-
-#. ex:ts=4:et:
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#: ../plugins/docinfo/docinfo.glade2.h:1
-#: ../plugins/externaltools/tools/tools.glade.h:1
-#: ../plugins/snippets/snippets/snippets.glade.h:1
-#: ../plugins/time/time.glade2.h:1
-msgid "    "
-msgstr "    "
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:2
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
-msgid "<b>Line Numbers</b>"
-msgstr "<b>Numeròs de linha</b>"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:3
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
-msgid "<b>Text Wrapping</b>"
-msgstr ""
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:4
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
-msgid "Do not _split words over two lines"
-msgstr ""
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:5
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
-msgid "Enable text _wrapping"
-msgstr ""
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:6
-msgid "Fonts"
-msgstr "Poliças"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:7
-msgid "General"
-msgstr "General"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:8
-msgid "He_aders and footers:"
-msgstr ""
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:10
-msgid "Print _line numbers"
-msgstr ""
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:11
-msgid "Print synta_x highlighting"
-msgstr ""
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:12
-msgid "_Body:"
-msgstr ""
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:13
-msgid "_Line numbers:"
-msgstr ""
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:14
-msgid "_Number every"
-msgstr ""
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:15
-msgid "_Print page headers"
-msgstr ""
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:16
-msgid "_Restore Default Fonts"
-msgstr ""
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:17
-msgid "lines"
-msgstr "linhas"
-
 #: ../gedit/dialogs/gedit-preferences-dialog.c:570
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
@@ -791,6 +649,15 @@ msgstr ""
 msgid "gedit Preferences"
 msgstr "Preferéncas de gedit"
 
+#. ex:ts=4:et:
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
+#: ../plugins/docinfo/docinfo.glade2.h:1
+#: ../plugins/externaltools/tools/tools.glade.h:1
+#: ../plugins/snippets/snippets/snippets.glade.h:1
+#: ../plugins/time/time.glade2.h:1
+msgid "    "
+msgstr "    "
+
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:2
 msgid "<b>Automatic Indentation</b>"
 msgstr ""
@@ -811,12 +678,22 @@ msgstr ""
 msgid "<b>Font</b>"
 msgstr "<b>Poliça</b>"
 
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
+#: ../gedit/gedit-print-preferences.glade.h:2
+msgid "<b>Line Numbers</b>"
+msgstr "<b>Numeròs de linha</b>"
+
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:8
 msgid "<b>Right Margin</b>"
 msgstr ""
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:9
 msgid "<b>Tab Stops</b>"
+msgstr ""
+
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
+#: ../gedit/gedit-print-preferences.glade.h:5
+msgid "<b>Text Wrapping</b>"
 msgstr ""
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:11
@@ -831,6 +708,11 @@ msgstr ""
 msgid "Display right _margin"
 msgstr ""
 
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
+#: ../gedit/gedit-print-preferences.glade.h:6
+msgid "Do not _split words over two lines"
+msgstr ""
+
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:15
 msgid "Editor"
 msgstr "Editor"
@@ -838,6 +720,11 @@ msgstr "Editor"
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:16
 msgid "Editor _font: "
 msgstr "_Poliça de l'editor : "
+
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
+#: ../gedit/gedit-print-preferences.glade.h:7
+msgid "Enable text _wrapping"
+msgstr ""
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:18
 msgid "Font & Colors"
@@ -900,11 +787,11 @@ msgid "_minutes"
 msgstr "_minutas"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:301
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1343
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1347
 msgid "Replace"
 msgstr "Remplaçar"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1341
+#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1345
 msgid "Find"
 msgstr "Recercar"
 
@@ -978,7 +865,7 @@ msgid "%s: invalid encoding.\n"
 msgstr ""
 
 #. Setup command line options
-#: ../gedit/gedit.c:466
+#: ../gedit/gedit.c:467
 msgid "- Edit text files"
 msgstr "- Editar de fichièrs tèxt"
 
@@ -1111,17 +998,17 @@ msgstr ""
 msgid "Phrase not found"
 msgstr "Impossible de trobar la frasa"
 
-#: ../gedit/gedit-document.c:814 ../gedit/gedit-document.c:908
+#: ../gedit/gedit-document.c:862 ../gedit/gedit-document.c:956
 #, c-format
 msgid "Unsaved Document %d"
 msgstr ""
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1909 ../gedit/gedit-window.c:1914
+#: ../gedit/gedit-window.c:1913 ../gedit/gedit-window.c:1918
 msgid "Read Only"
 msgstr ""
 
-#: ../gedit/gedit-documents-panel.c:759
+#: ../gedit/gedit-documents-panel.c:760
 msgid "Documents"
 msgstr "Documents"
 
@@ -1242,17 +1129,17 @@ msgstr "Tailandés"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: ../gedit/gedit-encodings-option-menu.c:219
+#: ../gedit/gedit-encodings-option-menu.c:220
 msgid "Auto Detected"
 msgstr ""
 
-#: ../gedit/gedit-encodings-option-menu.c:239
-#: ../gedit/gedit-encodings-option-menu.c:261
+#: ../gedit/gedit-encodings-option-menu.c:240
+#: ../gedit/gedit-encodings-option-menu.c:262
 #, c-format
 msgid "Current Locale (%s)"
 msgstr ""
 
-#: ../gedit/gedit-encodings-option-menu.c:322
+#: ../gedit/gedit-encodings-option-menu.c:323
 msgid "Add or _Remove..."
 msgstr "Apondre o _suprimir..."
 
@@ -1620,11 +1507,11 @@ msgstr ""
 msgid "Close document"
 msgstr "Tampar lo document"
 
-#: ../gedit/gedit-panel.c:361 ../gedit/gedit-panel.c:569
+#: ../gedit/gedit-panel.c:364 ../gedit/gedit-panel.c:572
 msgid "Empty"
 msgstr "Void"
 
-#: ../gedit/gedit-panel.c:514 ../gedit/gedit-panel.c:588
+#: ../gedit/gedit-panel.c:517 ../gedit/gedit-panel.c:591
 msgid "Hide panel"
 msgstr "Amagar lo panèl"
 
@@ -1636,138 +1523,167 @@ msgstr "Ajuston"
 msgid "Enabled"
 msgstr "Activat"
 
-#: ../gedit/gedit-plugin-manager.c:514
+#: ../gedit/gedit-plugin-manager.c:504
 msgid "_About"
 msgstr "_A prepaus"
 
-#: ../gedit/gedit-plugin-manager.c:522
+#: ../gedit/gedit-plugin-manager.c:512
 msgid "C_onfigure"
 msgstr "_Configurar"
 
-#: ../gedit/gedit-plugin-manager.c:532
+#: ../gedit/gedit-plugin-manager.c:521
 msgid "A_ctivate"
 msgstr "A_ctivar"
 
-#: ../gedit/gedit-plugin-manager.c:544
+#: ../gedit/gedit-plugin-manager.c:532
 msgid "Ac_tivate All"
 msgstr "_Tot activar"
 
-#: ../gedit/gedit-plugin-manager.c:549
+#: ../gedit/gedit-plugin-manager.c:537
 msgid "_Deactivate All"
 msgstr "_Desactivar tot"
 
-#: ../gedit/gedit-plugin-manager.c:794
+#: ../gedit/gedit-plugin-manager.c:825
 msgid "_About Plugin"
 msgstr "_A prepaus de Plugin"
 
-#: ../gedit/gedit-plugin-manager.c:798
+#: ../gedit/gedit-plugin-manager.c:829
 msgid "C_onfigure Plugin"
 msgstr "C_onfigurar l'ajuston"
 
-#: ../gedit/gedit-prefs-manager.c:171
+#: ../gedit/gedit-prefs-manager.c:170
 msgid "Cannot initialize preferences manager."
 msgstr ""
 
-#: ../gedit/gedit-prefs-manager.c:1280
+#: ../gedit/gedit-prefs-manager.c:1102
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr ""
 
-#: ../gedit/gedit-print.c:190
+#: ../gedit/gedit-print-job.c:534
 #, c-format
 msgid "File: %s"
 msgstr "Fichièr : %s"
 
-#: ../gedit/gedit-print.c:198
+#: ../gedit/gedit-print-job.c:543
 msgid "Page %N of %Q"
 msgstr "Pagina %N sus %Q"
 
-#: ../gedit/gedit-print.c:320
-msgid "Print"
-msgstr "Estampar"
-
-#: ../gedit/gedit-print.c:332 ../plugins/docinfo/docinfo.glade2.h:9
-msgid "Lines"
-msgstr "Linhas"
-
-#: ../gedit/gedit-print-job-preview.c:621
-msgid "Page Preview"
-msgstr "Previsualizacion"
-
-#: ../gedit/gedit-print-job-preview.c:622
-msgid "The preview of a page in the document to be printed"
+#: ../gedit/gedit-print-job.c:801
+msgid "Preparing..."
 msgstr ""
 
-#: ../gedit/gedit-print-job-preview.c:708
-msgid "Other"
-msgstr "Autre"
+#: ../gedit/gedit-print-preferences.glade.h:1
+msgid "<b>Fonts</b>"
+msgstr "<b>Poliças</b>"
 
-#: ../gedit/gedit-print-job-preview.c:738
+#: ../gedit/gedit-print-preferences.glade.h:3
+msgid "<b>Page header</b>"
+msgstr ""
+
+#: ../gedit/gedit-print-preferences.glade.h:4
+msgid "<b>Syntax Highlighting</b>"
+msgstr ""
+
+#: ../gedit/gedit-print-preferences.glade.h:8
+msgid "He_aders and footers:"
+msgstr ""
+
+#: ../gedit/gedit-print-preferences.glade.h:9
+msgid "Print line nu_mbers"
+msgstr ""
+
+#: ../gedit/gedit-print-preferences.glade.h:10
+msgid "Print page _headers"
+msgstr ""
+
+#: ../gedit/gedit-print-preferences.glade.h:11
+msgid "Print synta_x highlighting"
+msgstr ""
+
+#: ../gedit/gedit-print-preferences.glade.h:12
+msgid "_Body:"
+msgstr ""
+
+#: ../gedit/gedit-print-preferences.glade.h:13
+msgid "_Line numbers:"
+msgstr ""
+
+#: ../gedit/gedit-print-preferences.glade.h:14
+msgid "_Number every"
+msgstr ""
+
+#: ../gedit/gedit-print-preferences.glade.h:15
+msgid "_Restore Default Fonts"
+msgstr ""
+
+#: ../gedit/gedit-print-preferences.glade.h:16
+msgid "lines"
+msgstr "linhas"
+
+#: ../gedit/gedit-print-preview.c:563
 msgid "Show the previous page"
 msgstr ""
 
-#: ../gedit/gedit-print-job-preview.c:749
+#: ../gedit/gedit-print-preview.c:577
 msgid "Show the next page"
 msgstr ""
 
-#: ../gedit/gedit-print-job-preview.c:764
+#: ../gedit/gedit-print-preview.c:594
 msgid "Current page (Alt+P)"
 msgstr ""
 
-#. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
-#. We are displaying 'XXX of XXX'.
-#: ../gedit/gedit-print-job-preview.c:777
+#: ../gedit/gedit-print-preview.c:616
 msgid "of"
 msgstr "sus"
 
-#: ../gedit/gedit-print-job-preview.c:783
+#: ../gedit/gedit-print-preview.c:624
 msgid "Page total"
 msgstr ""
 
-#: ../gedit/gedit-print-job-preview.c:784
+#: ../gedit/gedit-print-preview.c:625
 msgid "The total number of pages in the document"
 msgstr ""
 
-#: ../gedit/gedit-print-job-preview.c:801
+#: ../gedit/gedit-print-preview.c:644
 msgid "Show multiple pages"
 msgstr ""
 
-#: ../gedit/gedit-print-job-preview.c:813
+#: ../gedit/gedit-print-preview.c:659
 msgid "Zoom 1:1"
 msgstr "Zoom 1:1"
 
-#: ../gedit/gedit-print-job-preview.c:821
+#: ../gedit/gedit-print-preview.c:670
 msgid "Zoom to fit the whole page"
 msgstr ""
 
-#: ../gedit/gedit-print-job-preview.c:830
+#: ../gedit/gedit-print-preview.c:681
 msgid "Zoom the page in"
 msgstr ""
 
-#: ../gedit/gedit-print-job-preview.c:838
+#: ../gedit/gedit-print-preview.c:692
 msgid "Zoom the page out"
 msgstr ""
 
-#: ../gedit/gedit-print-job-preview.c:848
+#: ../gedit/gedit-print-preview.c:704
 msgid "_Close Preview"
 msgstr ""
 
-#: ../gedit/gedit-print-job-preview.c:852
+#: ../gedit/gedit-print-preview.c:708
 msgid "Close print preview"
 msgstr ""
 
-#: ../gedit/gedit-print-job-preview.c:1092
-#: ../gedit/gedit-print-job-preview.c:1093
-msgid "Number of pages horizontally"
-msgstr ""
+#: ../gedit/gedit-print-preview.c:774
+#, c-format
+msgid "Page %d of %d"
+msgstr "Pagina %d sus %d"
 
-#: ../gedit/gedit-print-job-preview.c:1096
-#: ../gedit/gedit-print-job-preview.c:1097
-msgid "Number of pages vertically"
-msgstr ""
+#: ../gedit/gedit-print-preview.c:953
+msgid "Page Preview"
+msgstr "Previsualizacion"
 
-#: ../gedit/gedit-print-job-preview.c:1161
-msgid "No visible output was created."
+#: ../gedit/gedit-print-preview.c:954
+msgid "The preview of a page in the document to be printed"
 msgstr ""
 
 #: ../gedit/gedit-statusbar.c:248
@@ -1797,79 +1713,74 @@ msgstr ""
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:663
+#: ../gedit/gedit-tab.c:660
 #, c-format
 msgid "Reverting %s from %s"
 msgstr ""
 
-#: ../gedit/gedit-tab.c:670
+#: ../gedit/gedit-tab.c:667
 #, c-format
 msgid "Reverting %s"
 msgstr ""
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:686
+#: ../gedit/gedit-tab.c:683
 #, c-format
 msgid "Loading %s from %s"
 msgstr ""
 
-#: ../gedit/gedit-tab.c:693
+#: ../gedit/gedit-tab.c:690
 #, c-format
 msgid "Loading %s"
 msgstr ""
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:776
+#: ../gedit/gedit-tab.c:773
 #, c-format
 msgid "Saving %s to %s"
 msgstr ""
 
-#: ../gedit/gedit-tab.c:783
+#: ../gedit/gedit-tab.c:780
 #, c-format
 msgid "Saving %s"
 msgstr "Enregistrament de %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1646
+#: ../gedit/gedit-tab.c:1643
 msgid "RO"
 msgstr ""
 
-#: ../gedit/gedit-tab.c:1691
+#: ../gedit/gedit-tab.c:1688
 #, c-format
 msgid "Error opening file %s"
 msgstr ""
 
-#: ../gedit/gedit-tab.c:1696
+#: ../gedit/gedit-tab.c:1693
 #, c-format
 msgid "Error reverting file %s"
 msgstr ""
 
-#: ../gedit/gedit-tab.c:1701
+#: ../gedit/gedit-tab.c:1698
 #, c-format
 msgid "Error saving file %s"
 msgstr ""
 
-#: ../gedit/gedit-tab.c:1719
+#: ../gedit/gedit-tab.c:1716
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1726
+#: ../gedit/gedit-tab.c:1723
 msgid "Name:"
 msgstr "Nom :"
 
-#: ../gedit/gedit-tab.c:1727
+#: ../gedit/gedit-tab.c:1724
 msgid "MIME Type:"
 msgstr "Tipe MIME :"
 
-#: ../gedit/gedit-tab.c:1728
+#: ../gedit/gedit-tab.c:1725
 msgid "Encoding:"
-msgstr ""
-
-#: ../gedit/gedit-tab.c:2220
-#, c-format
-msgid "Rendering page %d of %d..."
 msgstr ""
 
 #. Toplevel
@@ -1909,7 +1820,7 @@ msgstr "Crear un document novèl"
 msgid "_Open..."
 msgstr "_Dobrir..."
 
-#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1463
+#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1467
 msgid "Open a file"
 msgstr "Dobrir un fichièr"
 
@@ -2158,44 +2069,44 @@ msgstr ""
 msgid "Show or hide the bottom pane in the current window"
 msgstr ""
 
-#: ../gedit/gedit-utils.c:1026
+#: ../gedit/gedit-utils.c:1049
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Impossible de trobar lo fichièr %s."
 
-#: ../gedit/gedit-utils.c:1030 ../gedit/gedit-utils.c:1066
+#: ../gedit/gedit-utils.c:1053 ../gedit/gedit-utils.c:1089
 msgid "Please check your installation."
 msgstr ""
 
-#: ../gedit/gedit-utils.c:1062
+#: ../gedit/gedit-utils.c:1085
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr ""
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1137
+#: ../gedit/gedit-view.c:1149
 msgid "_Wrap Around"
 msgstr ""
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1147
+#: ../gedit/gedit-view.c:1159
 msgid "Match _Entire Word Only"
 msgstr ""
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1157
+#: ../gedit/gedit-view.c:1169
 msgid "_Match Case"
 msgstr ""
 
-#: ../gedit/gedit-view.c:1245
+#: ../gedit/gedit-view.c:1257
 msgid "String you want to search for"
 msgstr ""
 
-#: ../gedit/gedit-view.c:1253
+#: ../gedit/gedit-view.c:1265
 msgid "Line you want to move the cursor to"
 msgstr ""
 
-#: ../gedit/gedit-window.c:876
+#: ../gedit/gedit-window.c:880
 #, c-format
 msgid "Use %s highlight mode"
 msgstr ""
@@ -2203,34 +2114,34 @@ msgstr ""
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:933
+#: ../gedit/gedit-window.c:937
 msgid "None"
 msgstr "Pas cap"
 
-#: ../gedit/gedit-window.c:934
+#: ../gedit/gedit-window.c:938
 msgid "Disable syntax highlighting"
 msgstr ""
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1220
+#: ../gedit/gedit-window.c:1224
 #, c-format
 msgid "Open '%s'"
 msgstr "Dobrir '%s'"
 
-#: ../gedit/gedit-window.c:1339
+#: ../gedit/gedit-window.c:1343
 msgid "Save"
 msgstr "Enregistrar"
 
-#: ../gedit/gedit-window.c:1467
+#: ../gedit/gedit-window.c:1471
 msgid "Open a recently used file"
 msgstr ""
 
-#: ../gedit/gedit-window.c:1474
+#: ../gedit/gedit-window.c:1478
 msgid "Open"
 msgstr "Dobrir"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1524
+#: ../gedit/gedit-window.c:1528
 #, c-format
 msgid "Activate '%s'"
 msgstr "Activar '%s'"
@@ -2313,6 +2224,10 @@ msgstr ""
 #: ../plugins/docinfo/docinfo.glade2.h:7
 msgid "Document"
 msgstr "Document"
+
+#: ../plugins/docinfo/docinfo.glade2.h:9
+msgid "Lines"
+msgstr "Linhas"
 
 #: ../plugins/docinfo/docinfo.glade2.h:10
 msgid "Selection"
@@ -4944,19 +4859,19 @@ msgstr ""
 msgid "XUL - Tags"
 msgstr ""
 
-#: ../plugins/time/gedit-time-plugin.c:183
+#: ../plugins/time/gedit-time-plugin.c:180
 msgid "In_sert Date and Time..."
 msgstr "In_serir la data e l'ora..."
 
-#: ../plugins/time/gedit-time-plugin.c:185
+#: ../plugins/time/gedit-time-plugin.c:182
 msgid "Insert current date and time at the cursor position"
 msgstr ""
 
-#: ../plugins/time/gedit-time-plugin.c:628
+#: ../plugins/time/gedit-time-plugin.c:611
 msgid "Available formats"
 msgstr ""
 
-#: ../plugins/time/gedit-time-plugin.c:806
+#: ../plugins/time/gedit-time-plugin.c:755
 msgid "Configure insert date/time plugin..."
 msgstr ""
 
@@ -4999,3 +4914,4 @@ msgstr ""
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr ""
+
