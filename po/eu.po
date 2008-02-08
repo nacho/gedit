@@ -1,4 +1,4 @@
-# translation of gedit.HEAD.po to Basque
+# translation of eu.po to Basque
 # Copyright (C) 2001, 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
 #
 # Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2004.
@@ -6,10 +6,10 @@
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit.HEAD\n"
+"Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-05 18:10+0100\n"
-"PO-Revision-Date: 2008-01-04 11:39+0100\n"
+"POT-Creation-Date: 2008-02-08 18:12+0100\n"
+"PO-Revision-Date: 2008-02-08 18:14+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,6 +24,7 @@ msgstr "Editatu testu-fitxategiak"
 
 #
 #: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:475
+#: ../gedit/gedit-print-job.c:751
 msgid "Text Editor"
 msgstr "Testu-editorea"
 
@@ -35,7 +36,7 @@ msgstr ""
 "Editatzeko arean erabiliko den letra-tipo pertsonalizatua. Eragina izan "
 "dezan, \"Erabili letra-tipo lehenetsia\" aukerak desaktibatuta egon behar du."
 
-#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:797
+#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:796
 msgid "Active plugins"
 msgstr "Aktibatu plugin-ak"
 
@@ -202,14 +203,7 @@ msgstr "Tarte bakarrekoa 12"
 msgid "Monospace 9"
 msgstr "Tarte bakarrekoa 9"
 
-#. Translators: This is the Body font for printing.
-#. This is a gnome-print font name and is replaced by
-#. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:41
-msgid "Monospace Regular 9"
-msgstr "Tarte bakarreko arrunta 9"
-
-#: ../data/gedit.schemas.in.h:42
+#: ../data/gedit.schemas.in.h:38
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -219,66 +213,52 @@ msgstr ""
 "aktibatuta egon behar du"
 
 #
-#: ../data/gedit.schemas.in.h:43
+#: ../data/gedit.schemas.in.h:39
 msgid "Print Header"
 msgstr "Inprimatu goiburua"
 
 #
-#: ../data/gedit.schemas.in.h:44
+#: ../data/gedit.schemas.in.h:40
 msgid "Print Line Numbers"
 msgstr "Inprimatu lerro-zenbakiak"
 
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:41
 msgid "Print Syntax Highlighting"
 msgstr "Inprimatu sintaxiaren nabarmentzea"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:42
 msgid "Printing Line Wrapping Mode"
 msgstr "Lerroaren itzulbiratze-modua inprimatzen"
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:43
 msgid "Restore Previous Cursor Position"
 msgstr "Leheneratu kurtsorearen aurreko posizioa"
 
-#: ../data/gedit.schemas.in.h:48
+#: ../data/gedit.schemas.in.h:44
 msgid "Right Margin Position"
 msgstr "Eskuineko marjinaren kokalekua"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:51
+#: ../data/gedit.schemas.in.h:47
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:54
+#: ../data/gedit.schemas.in.h:50
 msgid "Sans 8"
 msgstr "Sans 8"
 
-#. Translators: This is the Header font for printing.
-#. This is a gnome-print font name and replaced by
-#. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:58
-msgid "Sans Regular 11"
-msgstr "Sans arrunta 11"
-
-#. Translators: This is the Line Number font for printing.
-#. This is a gnome-print font name and replaced by
-#. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:62
-msgid "Sans Regular 8"
-msgstr "Sans arrunta 8"
-
-#: ../data/gedit.schemas.in.h:63
+#: ../data/gedit.schemas.in.h:51
 msgid "Side Pane is Visible"
 msgstr "Alboko panela ikusgai dago"
 
-#: ../data/gedit.schemas.in.h:64
+#: ../data/gedit.schemas.in.h:52
 msgid "Smart Home End"
 msgstr "Hasiera Amaiera azkarra"
 
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:53
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" represents the current locale encoding. Only recognized "
@@ -288,7 +268,7 @@ msgstr ""
 "kodeketen zerrenda ordenatua. \"CURRENT\" uneko locale-aren kodeketa da. "
 "Kodeketa ezagunak bakarrik erabiltzen dira."
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:54
 msgid ""
 "Specifies how the cursor moves when the HOME and END keys are pressed. Use "
 "\"DISABLED\" to always move at the start/end of the line, \"AFTER\" to move "
@@ -307,7 +287,7 @@ msgstr ""
 "amaierara mugitu aurretik. Edo erabili \"BETI\" testuarean hasierara/"
 "amaierara beti mugitzeko, leroaren hasierara/amaierara mugitu ordez."
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:55
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -321,7 +301,7 @@ msgstr ""
 "itzulbiratzeko. Kontuan hartu balioek maiuskulak/minuskulak desberdintzen "
 "dituztela; beraz, ziurtatu hemen aipatu bezalaxe agertzen direla."
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:56
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -335,23 +315,13 @@ msgstr ""
 "itzulbiratzeko. Kontuan hartu balioek maiuskulak/minuskulak desberdintzen "
 "dituztela; beraz, ziurtatu hemen aipatu bezalaxe agertzen direla."
 
-#: ../data/gedit.schemas.in.h:69
-msgid ""
-"Specifies the font to use for a document's body when printing documents."
+#: ../data/gedit.schemas.in.h:57
+msgid "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 "Dokumentuak inprimatzean dokumentuaren testuan zein letra-tipo erabili behar "
 "den zehazten du."
 
-#: ../data/gedit.schemas.in.h:70
-msgid ""
-"Specifies the font to use for a document's body when printing documents. "
-"This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr ""
-"Dokumentuak inprimatzean dokumentuaren testuan zein letra-tipo erabili behar "
-"den zehazten du. Hau gnome-print-eko letra-tipoaren izena da eta "
-"print_font_body_pango-ek ordezten du."
-
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:58
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -359,18 +329,7 @@ msgstr ""
 "Inprimatzean lerro-zenbakietan erabili beharreko letra-tipoa zehazten du. "
 "\"Inprimatu lerro-zenbakiak\" aukera zero ez denean bakarrik du eragina."
 
-#: ../data/gedit.schemas.in.h:72
-msgid ""
-"Specifies the font to use for line numbers when printing. This will only "
-"take effect if the \"Print Line Numbers\" option is non-zero. This is a "
-"gnome-print font name and replaced by print_font_numbers_pango."
-msgstr ""
-"Inprimatzean lerro-zenbakietan erabili beharreko letra-tipoa zehazten du. "
-"\"Inprimatu lerro-zenbakiak\" aukera zero ez denean bakarrik du eragina. Hau "
-"gnome-print-eko letra-tipoaren izena da eta print_font_body_pango-ek "
-"ordezten du."
-
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:59
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -379,18 +338,7 @@ msgstr ""
 "behar den zehazten du. \"Inprimatu goiburua\" aukera aktibatuta dagoenean "
 "bakarrik du eragina."
 
-#: ../data/gedit.schemas.in.h:74
-msgid ""
-"Specifies the font to use for page headers when printing a document. This "
-"will only take effect if the \"Print Header\" option is turned on. This is a "
-"gnome-print font name and replaced by print_font_header_pango."
-msgstr ""
-"Dokumentuak inprimatzean orrialdearen goiburuan zein letra-tipo erabili "
-"behar den zehazten du. \"Inprimatu goiburua\" aukera aktibatuta dagoenean "
-"bakarrik du eragina. Hau gnome-print-eko letra-tipoaren izena da eta "
-"print_font_body_pango-ek ordezten du."
-
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:60
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -398,7 +346,7 @@ msgstr ""
 "\"Fitxategi berrienak\" azpimenuan bistaratuko diren fitxategi ireki berrien "
 "gehienezko kopurua zehazten du."
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:61
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
@@ -406,19 +354,19 @@ msgstr ""
 "Tabuladore-karaktereen ordez bistaratu behar diren zuriune-kopurua zehazten "
 "du."
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:62
 msgid "Specifies the position of the right margin."
 msgstr "Eskuineko marjinaren kokalekua zehazten du."
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:63
 msgid "Status Bar is Visible"
 msgstr "Egoera-barra ikusgai dago"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:64
 msgid "Style Scheme"
 msgstr "Estilo-eskema"
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:65
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -435,32 +383,32 @@ msgstr ""
 "bistaratzeko. Kontuan hartu balioek maiuskulak/minuskulak desberdintzen "
 "dituztela; beraz, ziurtatu hemen aipatu bezalaxe agertzen direla."
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:66
 msgid "Tab Size"
 msgstr "Tabuladorearen tamaina"
 
-#: ../data/gedit.schemas.in.h:82
+#: ../data/gedit.schemas.in.h:67
 msgid "The id of a GtkSourceView Style Scheme used to color the text."
 msgstr "Testuaren kolorean erabilitako GtkSourceView estilo-eskemaren IDa."
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:68
 msgid "Toolbar Buttons Style"
 msgstr "Tresna-barrako botoien estiloa"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:69
 msgid "Toolbar is Visible"
 msgstr "Tresna-barra ikusgai dago"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:70
 msgid "Undo Actions Limit (DEPRECATED)"
 msgstr "Desegin ekintzen muga (ZAHARKITUA)"
 
 #
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:71
 msgid "Use Default Font"
 msgstr "Erabili letra-tipo lehenetsia"
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -470,7 +418,7 @@ msgstr ""
 "gorde behar dituen ala ez. Denbora-tartea ezar dezakezu \"Gorde automatikoki "
 "tartea\" aukeraren bidez."
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -479,56 +427,53 @@ msgstr ""
 "Babeskopiaren luzapena ezar dezakezu \"Babeskopiaren luzapena\" aukeraren "
 "bidez."
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:74
 msgid "Whether gedit should display line numbers in the editing area."
-msgstr ""
-"Gedit-ek editatzeko arean lerro-zenbakiak bistaratu behar dituen ala ez."
+msgstr "Gedit-ek editatzeko arean lerro-zenbakiak bistaratu behar dituen ala ez."
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:75
 msgid "Whether gedit should display the right margin in the editing area."
-msgstr ""
-"Gedit-ek editatzeko arean eskuineko marjina bistaratu behar duen ala ez."
+msgstr "Gedit-ek editatzeko arean eskuineko marjina bistaratu behar duen ala ez."
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:76
 msgid "Whether gedit should enable auto indentation."
 msgstr "Gedit-ek koska automatikoa gaitu behar duen ala ez."
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:77
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Gedit-ek sintaxiaren nabarmentzea gaitu behar duen ala ez."
 
-#: ../data/gedit.schemas.in.h:93
-msgid ""
-"Whether gedit should highlight all the occurrences of the searched text."
+#: ../data/gedit.schemas.in.h:78
+msgid "Whether gedit should highlight all the occurrences of the searched text."
 msgstr ""
 "Gedit-ek bilaketako testuaren gertaera guztiak nabarmendu behar dituen ala "
 "ez."
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:79
 msgid "Whether gedit should highlight matching bracket."
 msgstr "Gedit-ek itxierako kortxetea nabarmendu behar duen ala ez."
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:80
 msgid "Whether gedit should highlight the current line."
 msgstr "Gedit-ek uneko lerroa nabarmendu behar duen ala ez."
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:81
 msgid "Whether gedit should include a document header when printing documents."
 msgstr ""
 "Gedit-ek dokumentuak inprimatzean dokumentuaren goiburua sartu behar duen "
 "ala ez."
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:82
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Gedit-ek tabuladoreen ordez zuriuneak sartu behar dituen ala ez."
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:83
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr ""
 "gedit-ek dokumentuak inprimatzean sintaxiaren nabarmentzea inprimatu behar "
 "duen ala ez."
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:84
 msgid ""
 "Whether gedit should restore the previous cursor position when a file is "
 "loaded."
@@ -536,27 +481,23 @@ msgstr ""
 "Fitxategi bat kargatzean Gedit-ek kurtsorearen aurreko posizioa leheneratu "
 "behar duen ala ez."
 
-#: ../data/gedit.schemas.in.h:100
-msgid ""
-"Whether the bottom panel at the bottom of editing windows should be visible."
+#: ../data/gedit.schemas.in.h:85
+msgid "Whether the bottom panel at the bottom of editing windows should be visible."
 msgstr "Editatzeko leihoen beheko panelak ikusgai egon behar duen ala ez."
 
-#: ../data/gedit.schemas.in.h:101
-msgid ""
-"Whether the side pane at the left of the editing window should be visible."
+#: ../data/gedit.schemas.in.h:86
+msgid "Whether the side pane at the left of the editing window should be visible."
 msgstr "Editatzeko leihoen alboko panelak ikusgai egon behar duen ala ez."
 
-#: ../data/gedit.schemas.in.h:102
-msgid ""
-"Whether the status bar at the bottom of editing windows should be visible."
-msgstr ""
-"Editatzeko leihoen beheko egoera-barrak ikusgai egon behar duen ala ez."
+#: ../data/gedit.schemas.in.h:87
+msgid "Whether the status bar at the bottom of editing windows should be visible."
+msgstr "Editatzeko leihoen beheko egoera-barrak ikusgai egon behar duen ala ez."
 
-#: ../data/gedit.schemas.in.h:103
+#: ../data/gedit.schemas.in.h:88
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Tresna-barrak editatzeko leihoetan ikusgai egon behar duen ala ez."
 
-#: ../data/gedit.schemas.in.h:104
+#: ../data/gedit.schemas.in.h:89
 msgid ""
 "Whether to use the system's default fixed width font for editing text "
 "instead of a font specific to gedit. If this option is turned off, then the "
@@ -568,13 +509,13 @@ msgstr ""
 "\"Editorearen letra-tipoa\" aukeran adierazitako letra-tipoa erabiliko da "
 "sistemaren letra-tipoaren ordez."
 
-#: ../data/gedit.schemas.in.h:105
+#: ../data/gedit.schemas.in.h:90
 msgid "Writable VFS schemes"
 msgstr "VFS eskema idazkorrak"
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:108
+#: ../data/gedit.schemas.in.h:93
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
@@ -589,7 +530,7 @@ msgstr "[ISO-8859-15]"
 #. Only recognized encodings are used.
 #. See http://svn.gnome.org/viewcvs/gedit/trunk/gedit/gedit-encodings.c?view=markup for
 #. a list of supported encodings
-#: ../data/gedit.schemas.in.h:120
+#: ../data/gedit.schemas.in.h:105
 msgid "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
 
@@ -613,19 +554,15 @@ msgstr "Galdera"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:411
 #, c-format
-msgid ""
-"If you don't save, changes from the last %ld second will be permanently lost."
+msgid "If you don't save, changes from the last %ld second will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
-msgstr[0] ""
-"Ez baduzu gordetzen, azken %ld segundoko aldaketak betirako galduko dira."
-msgstr[1] ""
-"Ez baduzu gordetzen, azken %ld segundotako aldaketak betirako galduko dira."
+msgstr[0] "Ez baduzu gordetzen, azken %ld segundoko aldaketak betirako galduko dira."
+msgstr[1] "Ez baduzu gordetzen, azken %ld segundotako aldaketak betirako galduko dira."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:420
-msgid ""
-"If you don't save, changes from the last minute will be permanently lost."
+msgid "If you don't save, changes from the last minute will be permanently lost."
 msgstr "Ez baduzu gordetzen, azken minutuko aldaketak betirako galduko dira."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:426
@@ -645,15 +582,12 @@ msgstr[1] ""
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:436
 #, c-format
-msgid ""
-"If you don't save, changes from the last %ld minute will be permanently lost."
+msgid "If you don't save, changes from the last %ld minute will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be permanently "
 "lost."
-msgstr[0] ""
-"Ez baduzu gordetzen, azken %ld minutuko aldaketak betirako galduko dira."
-msgstr[1] ""
-"Ez baduzu gordetzen, azken %ld minututako aldaketak betirako galduko dira."
+msgstr[0] "Ez baduzu gordetzen, azken %ld minutuko aldaketak betirako galduko dira."
+msgstr[1] "Ez baduzu gordetzen, azken %ld minututako aldaketak betirako galduko dira."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:451
 msgid "If you don't save, changes from the last hour will be permanently lost."
@@ -676,14 +610,10 @@ msgstr[1] ""
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Ez baduzu gordetzen, azken orduko (%d) aldaketak betirako galduko dira."
-msgstr[1] ""
-"Ez baduzu gordetzen, azken %d orduko aldaketak betirako galduko dira."
+msgid "If you don't save, changes from the last %d hour will be permanently lost."
+msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "Ez baduzu gordetzen, azken orduko (%d) aldaketak betirako galduko dira."
+msgstr[1] "Ez baduzu gordetzen, azken %d orduko aldaketak betirako galduko dira."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:515
 #, c-format
@@ -710,12 +640,9 @@ msgstr[1] "%d dokumentutan egindako aldaketak betirako galduko dira."
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:706
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
-msgid_plural ""
-"There are %d documents with unsaved changes. Save changes before closing?"
-msgstr[0] ""
-"Aldatutako  dokumentu %d gorde gabe dago. Aldaketak gorde itxi aurretik?"
-msgstr[1] ""
-"Aldatutako %d dokumentu gorde gabe daude. Aldaketak gorde itxi aurretik?"
+msgid_plural "There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] "Aldatutako  dokumentu %d gorde gabe dago. Aldaketak gorde itxi aurretik?"
+msgstr[1] "Aldatutako %d dokumentu gorde gabe daude. Aldaketak gorde itxi aurretik?"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:724
 msgid "Docum_ents with unsaved changes:"
@@ -773,94 +700,6 @@ msgstr "_Karaktere-kodeketa:"
 msgid "Enter the _location (URI) of the file you would like to open:"
 msgstr "I_datzi ireki nahi duzun fitxategiaren kokalekua (URI):"
 
-#
-#: ../gedit/dialogs/gedit-page-setup-dialog.c:527
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:9
-msgid "Page Setup"
-msgstr "Prestatu orrialdea"
-
-#. ex:ts=4:et:
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#: ../plugins/docinfo/docinfo.glade2.h:1
-#: ../plugins/externaltools/tools/tools.glade.h:1
-#: ../plugins/snippets/snippets/snippets.glade.h:1
-#: ../plugins/time/time.glade2.h:1
-msgid "    "
-msgstr "    "
-
-#
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:2
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
-msgid "<b>Line Numbers</b>"
-msgstr "<b>Lerro-zenbakiak</b>"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:3
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
-msgid "<b>Text Wrapping</b>"
-msgstr "<b>Testu-itzulbiratzea</b>"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:4
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
-msgid "Do not _split words over two lines"
-msgstr "Ez _zatitu hitzak bi lerrotan"
-
-#
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:5
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
-msgid "Enable text _wrapping"
-msgstr "Gaitu t_estu-itzulbiratzea"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:6
-msgid "Fonts"
-msgstr "Letra-tipoak"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:7
-msgid "General"
-msgstr "Orokorra"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:8
-msgid "He_aders and footers:"
-msgstr "Goib_uruak eta orri-oinak:"
-
-#
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:10
-msgid "Print _line numbers"
-msgstr "Inprimatu _lerro-zenbakiak"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:11
-msgid "Print synta_x highlighting"
-msgstr "Inprimatu s_intaxiaren nabarmentzea"
-
-#
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:12
-msgid "_Body:"
-msgstr "_Testua:"
-
-#
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:13
-msgid "_Line numbers:"
-msgstr "_Lerro-zenbakiak:"
-
-#
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:14
-msgid "_Number every"
-msgstr "_Zenbakia"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:15
-msgid "_Print page headers"
-msgstr "In_primatu orrialde-goiburuak"
-
-#
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:16
-msgid "_Restore Default Fonts"
-msgstr "_Leheneratu letra-tipo lehenetsiak"
-
-#
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:17
-msgid "lines"
-msgstr "lerroz behin"
-
 #: ../gedit/dialogs/gedit-preferences-dialog.c:570
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Sakatu botoi hau editoreak erabili beharreko letra-tipoa hautatzeko"
@@ -900,6 +739,15 @@ msgstr "Ezin izan da \"%s\" kolore-eskema kendu."
 msgid "gedit Preferences"
 msgstr "gedit-en hobespenak"
 
+#. ex:ts=4:et:
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
+#: ../plugins/docinfo/docinfo.glade2.h:1
+#: ../plugins/externaltools/tools/tools.glade.h:1
+#: ../plugins/snippets/snippets/snippets.glade.h:1
+#: ../plugins/time/time.glade2.h:1
+msgid "    "
+msgstr "    "
+
 #
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:2
 msgid "<b>Automatic Indentation</b>"
@@ -921,6 +769,12 @@ msgstr "<b>Fitxategia gordetzea</b>"
 msgid "<b>Font</b>"
 msgstr "<b>Letra-tipoa</b>"
 
+#
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
+#: ../gedit/gedit-print-preferences.glade.h:2
+msgid "<b>Line Numbers</b>"
+msgstr "<b>Lerro-zenbakiak</b>"
+
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:8
 msgid "<b>Right Margin</b>"
 msgstr "<b>Eskuineko marjina</b>"
@@ -928,6 +782,11 @@ msgstr "<b>Eskuineko marjina</b>"
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:9
 msgid "<b>Tab Stops</b>"
 msgstr "<b>Tabulazioak</b>"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
+#: ../gedit/gedit-print-preferences.glade.h:5
+msgid "<b>Text Wrapping</b>"
+msgstr "<b>Testu-itzulbiratzea</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:11
 msgid "<span weight=\"bold\">Color Scheme</span>"
@@ -941,6 +800,11 @@ msgstr "Sortu _fitxategien babeskopia gorde aurretik"
 msgid "Display right _margin"
 msgstr "_Bistaratu eskuineko marjina"
 
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
+#: ../gedit/gedit-print-preferences.glade.h:6
+msgid "Do not _split words over two lines"
+msgstr "Ez _zatitu hitzak bi lerrotan"
+
 #
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:15
 msgid "Editor"
@@ -950,6 +814,12 @@ msgstr "Editorea"
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:16
 msgid "Editor _font: "
 msgstr "Editorearen _letra-tipoa: "
+
+#
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
+#: ../gedit/gedit-print-preferences.glade.h:7
+msgid "Enable text _wrapping"
+msgstr "Gaitu t_estu-itzulbiratzea"
 
 #
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:18
@@ -1021,11 +891,11 @@ msgid "_minutes"
 msgstr "_minutuz behin"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:301
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1344
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1347
 msgid "Replace"
 msgstr "Ordeztu"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1342
+#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1345
 msgid "Find"
 msgstr "Bilatu"
 
@@ -1084,8 +954,7 @@ msgstr "KODEKETA"
 
 #: ../gedit/gedit.c:76
 msgid "Create a new toplevel window in an existing instance of gedit"
-msgstr ""
-"Sortu goi-mailako leiho berri bat lehendik dagoen gedit-en instantzia batean"
+msgstr "Sortu goi-mailako leiho berri bat lehendik dagoen gedit-en instantzia batean"
 
 #: ../gedit/gedit.c:79
 msgid "Create a new document in an existing instance of gedit"
@@ -1170,19 +1039,15 @@ msgstr "Leheneratu '%s' dokumentuko gorde ez diren aldaketak?"
 
 #: ../gedit/gedit-commands-file.c:1172
 #, c-format
-msgid ""
-"Changes made to the document in the last %ld second will be permanently lost."
+msgid "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
-msgstr[0] ""
-"Azken %ld segundoan dokumentuan egin diren aldaketak betirako galduko dira."
-msgstr[1] ""
-"Azken %ld segundotan dokumentuan egin diren aldaketak betirako galduko dira."
+msgstr[0] "Azken %ld segundoan dokumentuan egin diren aldaketak betirako galduko dira."
+msgstr[1] "Azken %ld segundotan dokumentuan egin diren aldaketak betirako galduko dira."
 
 #: ../gedit/gedit-commands-file.c:1181
-msgid ""
-"Changes made to the document in the last minute will be permanently lost."
+msgid "Changes made to the document in the last minute will be permanently lost."
 msgstr "Azken minutuan dokumentuan egin diren aldaketak betirako galduko dira."
 
 #: ../gedit/gedit-commands-file.c:1187
@@ -1202,15 +1067,12 @@ msgstr[1] ""
 
 #: ../gedit/gedit-commands-file.c:1197
 #, c-format
-msgid ""
-"Changes made to the document in the last %ld minute will be permanently lost."
+msgid "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
-msgstr[0] ""
-"Azken %ld minutuan dokumentuan egin diren aldaketak betirako galduko dira."
-msgstr[1] ""
-"Azken %ld minututan dokumentuan egin diren aldaketak betirako galduko dira."
+msgstr[0] "Azken %ld minutuan dokumentuan egin diren aldaketak betirako galduko dira."
+msgstr[1] "Azken %ld minututan dokumentuan egin diren aldaketak betirako galduko dira."
 
 #: ../gedit/gedit-commands-file.c:1212
 msgid "Changes made to the document in the last hour will be permanently lost."
@@ -1233,14 +1095,10 @@ msgstr[1] ""
 
 #: ../gedit/gedit-commands-file.c:1233
 #, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] ""
-"Azken orduan (%d) dokumentuan egin diren aldaketak betirako galduko dira."
-msgstr[1] ""
-"Azken %d ordutan dokumentuan egin diren aldaketak betirako galduko dira."
+msgid "Changes made to the document in the last %d hour will be permanently lost."
+msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "Azken orduan (%d) dokumentuan egin diren aldaketak betirako galduko dira."
+msgstr[1] "Azken %d ordutan dokumentuan egin diren aldaketak betirako galduko dira."
 
 #: ../gedit/gedit-commands-file.c:1259
 msgid "_Revert"
@@ -1272,17 +1130,17 @@ msgstr "Agerraldi bat aurkitu eta ordeztu da."
 msgid "Phrase not found"
 msgstr "Ez da esaldia aurkitu"
 
-#: ../gedit/gedit-document.c:814 ../gedit/gedit-document.c:908
+#: ../gedit/gedit-document.c:862 ../gedit/gedit-document.c:956
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Gorde gabeko %d dokumentua"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1910 ../gedit/gedit-window.c:1915
+#: ../gedit/gedit-window.c:1913 ../gedit/gedit-window.c:1918
 msgid "Read Only"
 msgstr "Irakurtzeko soilik (IS)"
 
-#: ../gedit/gedit-documents-panel.c:759
+#: ../gedit/gedit-documents-panel.c:760
 msgid "Documents"
 msgstr "Dokumentuak"
 
@@ -1403,17 +1261,17 @@ msgstr "Thailandiarra"
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: ../gedit/gedit-encodings-option-menu.c:219
+#: ../gedit/gedit-encodings-option-menu.c:220
 msgid "Auto Detected"
 msgstr "Automatikoki detektatuta"
 
-#: ../gedit/gedit-encodings-option-menu.c:239
-#: ../gedit/gedit-encodings-option-menu.c:261
+#: ../gedit/gedit-encodings-option-menu.c:240
+#: ../gedit/gedit-encodings-option-menu.c:262
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "Uneko locale-a (%s)"
 
-#: ../gedit/gedit-encodings-option-menu.c:322
+#: ../gedit/gedit-encodings-option-menu.c:323
 msgid "Add or _Remove..."
 msgstr "Gehitu edo _kendu..."
 
@@ -1474,8 +1332,7 @@ msgstr "Ez dituzu nahikoa baimen fitxategia irekitzeko."
 #: ../gedit/gedit-io-error-message-area.c:235
 #: ../gedit/gedit-io-error-message-area.c:477
 #: ../gedit/gedit-io-error-message-area.c:1230
-msgid ""
-"There are too many open files. Please close some applications and try again."
+msgid "There are too many open files. Please close some applications and try again."
 msgstr ""
 "Fitxategi gehiegi daude irekita. Itxi irekitako aplikazio batzuk eta saiatu "
 "berriro."
@@ -1606,8 +1463,7 @@ msgstr "Hautatu karaktere-kodeketa menutik eta saiatu berriro."
 #: ../gedit/gedit-io-error-message-area.c:786
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
-msgstr ""
-"Ezin izan da %s fitxategia ireki %s karaktere-kodeketa erabiltzen duelako."
+msgstr "Ezin izan da %s fitxategia ireki %s karaktere-kodeketa erabiltzen duelako."
 
 #: ../gedit/gedit-io-error-message-area.c:790
 #: ../gedit/gedit-io-error-message-area.c:842
@@ -1617,8 +1473,7 @@ msgstr "Hautatu beste karaktere-kodeketa menutik eta saiatu berriro."
 #: ../gedit/gedit-io-error-message-area.c:837
 #, c-format
 msgid "Could not save the file %s using the %s character coding."
-msgstr ""
-"Ezin izan da %s fitxategia gorde %s karaktere-kodeketa erabiltzen duelako."
+msgstr "Ezin izan da %s fitxategia gorde %s karaktere-kodeketa erabiltzen duelako."
 
 #: ../gedit/gedit-io-error-message-area.c:840
 msgid ""
@@ -1747,8 +1602,7 @@ msgstr ""
 msgid ""
 "%s is a directory. Please check that you typed the location correctly and "
 "try again."
-msgstr ""
-"%s direktorioa da. Egiaztatu helbidea ondo idatzi duzula eta saiatu berriro."
+msgstr "%s direktorioa da. Egiaztatu helbidea ondo idatzi duzula eta saiatu berriro."
 
 #: ../gedit/gedit-io-error-message-area.c:1241
 msgid ""
@@ -1776,8 +1630,7 @@ msgstr ""
 
 #: ../gedit/gedit-io-error-message-area.c:1329
 msgid "A file with the same name already exists. Please use a different name."
-msgstr ""
-"Izen berdineko fitxategia badago lehenedik ere. Erabili beste izen bat."
+msgstr "Izen berdineko fitxategia badago lehenedik ere. Erabili beste izen bat."
 
 #: ../gedit/gedit-io-error-message-area.c:1334
 msgid ""
@@ -1832,11 +1685,11 @@ msgstr "Ezin izan da babeskopiaren izena lortu."
 msgid "Close document"
 msgstr "Itxi dokumentua"
 
-#: ../gedit/gedit-panel.c:361 ../gedit/gedit-panel.c:569
+#: ../gedit/gedit-panel.c:364 ../gedit/gedit-panel.c:572
 msgid "Empty"
 msgstr "Hutsa"
 
-#: ../gedit/gedit-panel.c:514 ../gedit/gedit-panel.c:588
+#: ../gedit/gedit-panel.c:517 ../gedit/gedit-panel.c:591
 msgid "Hide panel"
 msgstr "Ezkutatu panela"
 
@@ -1850,147 +1703,182 @@ msgid "Enabled"
 msgstr "Gaituta"
 
 #
-#: ../gedit/gedit-plugin-manager.c:505
+#: ../gedit/gedit-plugin-manager.c:504
 msgid "_About"
 msgstr "_Honi buruz"
 
 #
-#: ../gedit/gedit-plugin-manager.c:513
+#: ../gedit/gedit-plugin-manager.c:512
 msgid "C_onfigure"
 msgstr "K_onfiguratu"
 
-#: ../gedit/gedit-plugin-manager.c:522
+#: ../gedit/gedit-plugin-manager.c:521
 msgid "A_ctivate"
 msgstr "_Aktibatu"
 
-#: ../gedit/gedit-plugin-manager.c:533
+#: ../gedit/gedit-plugin-manager.c:532
 msgid "Ac_tivate All"
 msgstr "A_ktibatu denak"
 
 #
-#: ../gedit/gedit-plugin-manager.c:538
+#: ../gedit/gedit-plugin-manager.c:537
 msgid "_Deactivate All"
 msgstr "_Desaktibatu denak"
 
 #
-#: ../gedit/gedit-plugin-manager.c:826
+#: ../gedit/gedit-plugin-manager.c:825
 msgid "_About Plugin"
 msgstr "_Plugin-ari buruz"
 
 #
-#: ../gedit/gedit-plugin-manager.c:830
+#: ../gedit/gedit-plugin-manager.c:829
 msgid "C_onfigure Plugin"
 msgstr "K_onfiguratu plugin-a"
 
 #
-#: ../gedit/gedit-prefs-manager.c:171
+#: ../gedit/gedit-prefs-manager.c:170
 msgid "Cannot initialize preferences manager."
 msgstr "Ezin da hobespenen kudeatzailea abiarazi."
 
-#: ../gedit/gedit-prefs-manager.c:1280
+#: ../gedit/gedit-prefs-manager.c:1102
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "'%s' espero zen, baina '%s' eskuratu da %s gakoarentzat"
 
-#: ../gedit/gedit-print.c:190
+#: ../gedit/gedit-print-job.c:534
 #, c-format
 msgid "File: %s"
 msgstr "Fitxategia: %s"
 
-#: ../gedit/gedit-print.c:198
+#: ../gedit/gedit-print-job.c:543
 msgid "Page %N of %Q"
 msgstr "%N/%Q orria"
 
-#: ../gedit/gedit-print.c:320
-msgid "Print"
-msgstr "Inprimatu"
+#
+#: ../gedit/gedit-print-job.c:801
+msgid "Preparing..."
+msgstr "Prestatzen..."
 
-#: ../gedit/gedit-print.c:332 ../plugins/docinfo/docinfo.glade2.h:9
-msgid "Lines"
-msgstr "Lerroak"
+#: ../gedit/gedit-print-preferences.glade.h:1
+msgid "<b>Fonts</b>"
+msgstr "<b>Letra-tipoak</b>"
+
+#: ../gedit/gedit-print-preferences.glade.h:3
+msgid "<b>Page header</b>"
+msgstr "<b>Orrialde-goiburuak</b>"
+
+#: ../gedit/gedit-print-preferences.glade.h:4
+msgid "<b>Syntax Highlighting</b>"
+msgstr "<b>Sintaxiaren nabarmentzea</b>"
+
+#: ../gedit/gedit-print-preferences.glade.h:8
+msgid "He_aders and footers:"
+msgstr "Goib_uruak eta orri-oinak:"
 
 #
-#: ../gedit/gedit-print-job-preview.c:621
-msgid "Page Preview"
-msgstr "Orrialdearen aurrebista"
+#: ../gedit/gedit-print-preferences.glade.h:9
+msgid "Print line nu_mbers"
+msgstr "Inprimatu _lerro-zenbakiak"
 
-#: ../gedit/gedit-print-job-preview.c:622
-msgid "The preview of a page in the document to be printed"
-msgstr "Inprimatuko den dokumentuaren orrialdearen aurrebista"
+#: ../gedit/gedit-print-preferences.glade.h:10
+msgid "Print page _headers"
+msgstr "In_primatu orrialde-goiburuak"
 
-#: ../gedit/gedit-print-job-preview.c:708
-msgid "Other"
-msgstr "Bestelakoa"
+#: ../gedit/gedit-print-preferences.glade.h:11
+msgid "Print synta_x highlighting"
+msgstr "Inprimatu s_intaxiaren nabarmentzea"
 
-#: ../gedit/gedit-print-job-preview.c:738
+#
+#: ../gedit/gedit-print-preferences.glade.h:12
+msgid "_Body:"
+msgstr "_Testua:"
+
+#
+#: ../gedit/gedit-print-preferences.glade.h:13
+msgid "_Line numbers:"
+msgstr "_Lerro-zenbakiak:"
+
+#
+#: ../gedit/gedit-print-preferences.glade.h:14
+msgid "_Number every"
+msgstr "_Zenbakia"
+
+#
+#: ../gedit/gedit-print-preferences.glade.h:15
+msgid "_Restore Default Fonts"
+msgstr "_Leheneratu letra-tipo lehenetsiak"
+
+#
+#: ../gedit/gedit-print-preferences.glade.h:16
+msgid "lines"
+msgstr "lerroz behin"
+
+#: ../gedit/gedit-print-preview.c:563
 msgid "Show the previous page"
 msgstr "Erakutsi aurreko orrialdea"
 
-#: ../gedit/gedit-print-job-preview.c:749
+#: ../gedit/gedit-print-preview.c:577
 msgid "Show the next page"
 msgstr "Erakutsi hurrengo orrialdea"
 
-#: ../gedit/gedit-print-job-preview.c:764
+#: ../gedit/gedit-print-preview.c:594
 msgid "Current page (Alt+P)"
 msgstr "Uneko orrialdea (Alt+P)"
 
-#. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
-#. We are displaying 'XXX of XXX'.
-#: ../gedit/gedit-print-job-preview.c:777
+#: ../gedit/gedit-print-preview.c:616
 msgid "of"
 msgstr " / "
 
 #
-#: ../gedit/gedit-print-job-preview.c:783
+#: ../gedit/gedit-print-preview.c:624
 msgid "Page total"
 msgstr "Orrialdeak guztira"
 
-#: ../gedit/gedit-print-job-preview.c:784
+#: ../gedit/gedit-print-preview.c:625
 msgid "The total number of pages in the document"
 msgstr "Dokumentuaren orrialde-kopurua"
 
-#: ../gedit/gedit-print-job-preview.c:801
+#: ../gedit/gedit-print-preview.c:644
 msgid "Show multiple pages"
 msgstr "Erakutsi hainbat orrialde"
 
-#: ../gedit/gedit-print-job-preview.c:813
+#: ../gedit/gedit-print-preview.c:659
 msgid "Zoom 1:1"
 msgstr "Zooma 1:1"
 
-#: ../gedit/gedit-print-job-preview.c:821
+#: ../gedit/gedit-print-preview.c:670
 msgid "Zoom to fit the whole page"
 msgstr "Orrialde osoa hartzeko doitzen du ikuspegia"
 
-#: ../gedit/gedit-print-job-preview.c:830
+#: ../gedit/gedit-print-preview.c:681
 msgid "Zoom the page in"
 msgstr "Handiagotu zooma"
 
-#: ../gedit/gedit-print-job-preview.c:838
+#: ../gedit/gedit-print-preview.c:692
 msgid "Zoom the page out"
 msgstr "Txikiagotu zooma"
 
-#: ../gedit/gedit-print-job-preview.c:848
+#: ../gedit/gedit-print-preview.c:704
 msgid "_Close Preview"
 msgstr "_Itxi aurrebista"
 
-#: ../gedit/gedit-print-job-preview.c:852
+#: ../gedit/gedit-print-preview.c:708
 msgid "Close print preview"
 msgstr "Itxi inprimatzeko aurrebista"
 
-#: ../gedit/gedit-print-job-preview.c:1092
-#: ../gedit/gedit-print-job-preview.c:1093
-msgid "Number of pages horizontally"
-msgstr "Orrialde-kopurua horizontalki"
+#: ../gedit/gedit-print-preview.c:774
+#, c-format
+msgid "Page %d of %d"
+msgstr "%d / %d orrialdea"
 
 #
-#: ../gedit/gedit-print-job-preview.c:1096
-#: ../gedit/gedit-print-job-preview.c:1097
-msgid "Number of pages vertically"
-msgstr "Orrialde-kopurua bertikalki"
+#: ../gedit/gedit-print-preview.c:953
+msgid "Page Preview"
+msgstr "Orrialdearen aurrebista"
 
-#: ../gedit/gedit-print-job-preview.c:1161
-msgid "No visible output was created."
-msgstr "Ez da irteera ikusgairik sortu."
+#: ../gedit/gedit-print-preview.c:954
+msgid "The preview of a page in the document to be printed"
+msgstr "Inprimatuko den dokumentuaren orrialdearen aurrebista"
 
 #: ../gedit/gedit-statusbar.c:248
 msgid "  OVR"
@@ -2017,85 +1905,79 @@ msgstr[1] "Erroreak dituzten %d fitxa daude"
 #: ../gedit/gedit-style-scheme-manager.c:214
 #, c-format
 msgid "Directory '%s' could not be created: g_mkdir_with_parents() failed: %s"
-msgstr ""
-"Ezin izan da '%s' direktorioa sortu: g_mkdir_with_parents() huts egin du: %s"
+msgstr "Ezin izan da '%s' direktorioa sortu: g_mkdir_with_parents() huts egin du: %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:663
+#: ../gedit/gedit-tab.c:660
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "%2$s(e)tik %1$s(e)ra leheneratzen"
 
-#: ../gedit/gedit-tab.c:670
+#: ../gedit/gedit-tab.c:667
 #, c-format
 msgid "Reverting %s"
 msgstr "%s leheneratzen"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:686
+#: ../gedit/gedit-tab.c:683
 #, c-format
 msgid "Loading %s from %s"
 msgstr "%2$s(e)tik %1$s kargatzen"
 
-#: ../gedit/gedit-tab.c:693
+#: ../gedit/gedit-tab.c:690
 #, c-format
 msgid "Loading %s"
 msgstr "%s kargatzen"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:776
+#: ../gedit/gedit-tab.c:773
 #, c-format
 msgid "Saving %s to %s"
 msgstr "%2$s(e)n %1$s gordetzen"
 
-#: ../gedit/gedit-tab.c:783
+#: ../gedit/gedit-tab.c:780
 #, c-format
 msgid "Saving %s"
 msgstr "%s gordetzen"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1646
+#: ../gedit/gedit-tab.c:1643
 msgid "RO"
 msgstr "IS"
 
-#: ../gedit/gedit-tab.c:1691
+#: ../gedit/gedit-tab.c:1688
 #, c-format
 msgid "Error opening file %s"
 msgstr "Errorea %s fitxategia irekitzean."
 
-#: ../gedit/gedit-tab.c:1696
+#: ../gedit/gedit-tab.c:1693
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Errorea %s fitxategia leheneratzean."
 
-#: ../gedit/gedit-tab.c:1701
+#: ../gedit/gedit-tab.c:1698
 #, c-format
 msgid "Error saving file %s"
 msgstr "Errorea %s fitxategia gordetzean."
 
-#: ../gedit/gedit-tab.c:1719
+#: ../gedit/gedit-tab.c:1716
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1726
+#: ../gedit/gedit-tab.c:1723
 msgid "Name:"
 msgstr "Izena:"
 
-#: ../gedit/gedit-tab.c:1727
+#: ../gedit/gedit-tab.c:1724
 msgid "MIME Type:"
 msgstr "MIME mota:"
 
-#: ../gedit/gedit-tab.c:1728
+#: ../gedit/gedit-tab.c:1725
 msgid "Encoding:"
 msgstr "Kodeketa:"
-
-#: ../gedit/gedit-tab.c:2220
-#, c-format
-msgid "Rendering page %d of %d..."
-msgstr "%d/%d orria errendatzen..."
 
 #. Toplevel
 #: ../gedit/gedit-ui.h:49
@@ -2139,7 +2021,7 @@ msgstr "Dokumentu berria sortzen du"
 msgid "_Open..."
 msgstr "_Ireki..."
 
-#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1464
+#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1467
 msgid "Open a file"
 msgstr "Fitxategi bat irekitzen du"
 
@@ -2415,44 +2297,44 @@ msgstr "_Beheko panela"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Erakutsi edo ezkutatu beheko panela uneko leihoan"
 
-#: ../gedit/gedit-utils.c:1026
+#: ../gedit/gedit-utils.c:1049
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Ezin izan da %s fitxategia aurkitu."
 
-#: ../gedit/gedit-utils.c:1030 ../gedit/gedit-utils.c:1066
+#: ../gedit/gedit-utils.c:1053 ../gedit/gedit-utils.c:1089
 msgid "Please check your installation."
 msgstr "Egiaztatu instalazioa"
 
-#: ../gedit/gedit-utils.c:1062
+#: ../gedit/gedit-utils.c:1085
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "Ezin dira behar diren trepetak %s fitxategiaren barruan bilatu."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1137
+#: ../gedit/gedit-view.c:1149
 msgid "_Wrap Around"
 msgstr "_Doitu"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1147
+#: ../gedit/gedit-view.c:1159
 msgid "Match _Entire Word Only"
 msgstr "_Hitz osoak soilik"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1157
+#: ../gedit/gedit-view.c:1169
 msgid "_Match Case"
 msgstr "_Maiuskula/minuskula"
 
-#: ../gedit/gedit-view.c:1245
+#: ../gedit/gedit-view.c:1257
 msgid "String you want to search for"
 msgstr "Bilatzea nahi duzun katea"
 
-#: ../gedit/gedit-view.c:1253
+#: ../gedit/gedit-view.c:1265
 msgid "Line you want to move the cursor to"
 msgstr "Lerroa kurtsorea kokatzeko"
 
-#: ../gedit/gedit-window.c:877
+#: ../gedit/gedit-window.c:880
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Erabili %s nabarmentze-modua"
@@ -2460,35 +2342,35 @@ msgstr "Erabili %s nabarmentze-modua"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:934
+#: ../gedit/gedit-window.c:937
 msgid "None"
 msgstr "Bat ere ez"
 
-#: ../gedit/gedit-window.c:935
+#: ../gedit/gedit-window.c:938
 msgid "Disable syntax highlighting"
 msgstr "Desgaitu sintaxiaren nabarmentzea"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1221
+#: ../gedit/gedit-window.c:1224
 #, c-format
 msgid "Open '%s'"
 msgstr "Ireki '%s'"
 
-#: ../gedit/gedit-window.c:1340
+#: ../gedit/gedit-window.c:1343
 msgid "Save"
 msgstr "Gorde"
 
 #
-#: ../gedit/gedit-window.c:1468
+#: ../gedit/gedit-window.c:1471
 msgid "Open a recently used file"
 msgstr "Erabili berri duzun fitxategi bat irekitzen du"
 
-#: ../gedit/gedit-window.c:1475
+#: ../gedit/gedit-window.c:1478
 msgid "Open"
 msgstr "Ireki"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1525
+#: ../gedit/gedit-window.c:1528
 #, c-format
 msgid "Activate '%s'"
 msgstr "Aktibatu '%s'"
@@ -2578,6 +2460,10 @@ msgstr "Karaktereak (tarteekin)"
 #: ../plugins/docinfo/docinfo.glade2.h:7
 msgid "Document"
 msgstr "Dokumentua"
+
+#: ../plugins/docinfo/docinfo.glade2.h:9
+msgid "Lines"
+msgstr "Lerroak"
 
 #
 #: ../plugins/docinfo/docinfo.glade2.h:10
@@ -2823,8 +2709,7 @@ msgstr "Kendu erabiltzen ez diren zuriuneak fitxategitik"
 
 #: ../plugins/externaltools/data/run-command.desktop.in.h:1
 msgid "Execute a custom command and put its output in a new document"
-msgstr ""
-"Exekutatu komando pertsonalizatua eta jarri bere irteera dokumentu berrian"
+msgstr "Exekutatu komando pertsonalizatua eta jarri bere irteera dokumentu berrian"
 
 #: ../plugins/externaltools/data/run-command.desktop.in.h:2
 msgid "Run command"
@@ -3400,8 +3285,7 @@ msgstr "Ongi esportatu da"
 #: ../plugins/snippets/snippets/Manager.py:871
 #: ../plugins/snippets/snippets/Manager.py:938
 msgid "Do you want to include selected <b>system</b> snippets in your export?"
-msgstr ""
-"Nahi duzu hautatutako <b>sistemako</b> mozkinak esportazioan txertatzea?"
+msgstr "Nahi duzu hautatutako <b>sistemako</b> mozkinak esportazioan txertatzea?"
 
 #: ../plugins/snippets/snippets/Manager.py:886
 #: ../plugins/snippets/snippets/Manager.py:956
@@ -5411,3 +5295,4 @@ msgstr "Eskatu _formatu bat"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Erabili formatu pertsonalizatua"
+
