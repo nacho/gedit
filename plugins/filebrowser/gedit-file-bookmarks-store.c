@@ -396,7 +396,6 @@ init_bookmarks (GeditFileBookmarksStore * model)
 			if (**line) {
 				gchar *pos;
 				gchar *name;
-				gchar *unescape;
 
 				/* Check, is this really utf8? */
 				pos = g_utf8_strchr (*line, -1, ' ');
@@ -408,12 +407,15 @@ init_bookmarks (GeditFileBookmarksStore * model)
 					name = NULL;
 				}
 
-				unescape = gnome_vfs_unescape_string (*line, "");
-
-				added = add_uri (model, unescape, name,
-						 GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK,
-						 NULL);
-				g_free (unescape);
+				/* the bookmarks file should contain valid
+				 * URIs, but paranoia is good */
+				if (gedit_utils_is_valid_uri (*line)) {
+					added = add_uri (model,
+							 *line,
+							 name,
+							 GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK,
+							 NULL);
+				}
 			}
 		}
 
