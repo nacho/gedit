@@ -16,7 +16,7 @@ pkgconfig_DATA = gedit-@GEDIT_API_VERSION@.pc
 gedit-@GEDIT_API_VERSION@.pc: gedit.pc
 	cp gedit.pc gedit-@GEDIT_API_VERSION@.pc
 
-bugreportdir      = $(libdir)/gedit-2
+bugreportdir = $(libexecdir)/gedit-2
 bugreport_SCRIPTS = gedit-bugreport.sh
 
 if GCONF_SCHEMAS_INSTALL

@@ -60,10 +60,10 @@ AC_DEFUN([GEDIT_FULLPATH], [
   $3=`eval echo [$]ac_expand`
 ])
 
-dnl FULL_LIBDIR is used for X-GNOME-Bugzilla-ExtraInfoScript expansion
+dnl FULL_LIBEXECDIR is used for X-GNOME-Bugzilla-ExtraInfoScript expansion
 dnl in data/gedit.desktop.in.in
-GEDIT_FULLPATH(libdir, NONE, FULL_LIBDIR)
-AC_SUBST(FULL_LIBDIR)
+GEDIT_FULLPATH(libexecdir, NONE, FULL_LIBEXECDIR)
+AC_SUBST(FULL_LIBEXECDIR)
 
 dnl ================================================================
 dnl Gettext stuff.
