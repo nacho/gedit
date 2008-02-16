@@ -2846,7 +2846,7 @@ create_side_panel (GeditWindow *window)
 	documents_panel = gedit_documents_panel_new (window);
 	gedit_panel_add_item_with_stock_icon (GEDIT_PANEL (window->priv->side_panel),
 					      documents_panel,
-					      "Documents",
+					      _("Documents"),
 					      GTK_STOCK_FILE);
 }
 
