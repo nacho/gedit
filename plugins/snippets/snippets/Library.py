@@ -854,8 +854,9 @@ class Library(Singleton):
                 
         def get_accel_group(self, language):
                 language = self.normalize_language(language)
-                
                 container = self.container(language)
+
+                self.ensure(language)
                 return container.accel_group
                 
         def save(self, language):

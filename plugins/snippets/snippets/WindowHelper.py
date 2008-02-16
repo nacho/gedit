@@ -60,7 +60,7 @@ class WindowHelper:
                 for view in self.window.get_views():
                         if isinstance(view, gedit.View) and self.has_controller(view):
                                 view._snippet_controller.stop()
-                                view._snippet_controller = None		
+                                view._snippet_controller = None
                 
                 self.window = None
                 self.plugin = None
@@ -76,7 +76,7 @@ class WindowHelper:
                                 self.on_action_snippets_activate)])
 
                 self.merge_id = manager.new_merge_id()
-                manager.insert_action_group(self.action_group, -1)		
+                manager.insert_action_group(self.action_group, -1)
                 manager.add_ui(self.merge_id, '/MenuBar/ToolsMenu/ToolsOps_5', \
                                 'ManageSnippets', 'ManageSnippets', gtk.UI_MANAGER_MENUITEM, False)
 
@@ -144,3 +144,5 @@ class WindowHelper:
 
         def accelerator_activated(self, keyval, mod):
                 return self.current_controller.accelerator_activate(keyval, mod)
+
+# ex:ts=8:et:

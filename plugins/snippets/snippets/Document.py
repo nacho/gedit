@@ -113,9 +113,15 @@ class Document:
 
                         self.update_language()
                 elif self.language_id != 0:
-                        Library().unref(self.language_id)
-                        self.language_id = 0
-        
+                        langid = self.language_id
+                        
+                        self.language_id = None;
+                        
+                        if self.instance:
+                                self.instance.language_changed(self)
+
+                        Library().unref(langid)
+
         def set_view(self, view):
                 if view == self.view:
                         return
@@ -132,8 +138,7 @@ class Document:
                 elif lang and lang.get_id() == self.language_id:
                         return
 
-                if self.language_id != 0:
-                        Library().unref(self.language_id)
+                langid = self.language_id
 
                 if lang:
                         self.language_id = lang.get_id()
@@ -142,6 +147,9 @@ class Document:
 
                 if self.instance:
                         self.instance.language_changed(self)
+
+                if langid != 0:
+                        Library().unref(langid)
 
                 Library().ref(self.language_id)
 
