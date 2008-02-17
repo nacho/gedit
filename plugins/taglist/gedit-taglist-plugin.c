@@ -91,7 +91,7 @@ impl_activate (GeditPlugin *plugin,
 	
 	gedit_panel_add_item_with_stock_icon (side_panel, 
 					      taglist_panel, 
-					      "Tags", 
+					      _("Tags"), 
 					      GTK_STOCK_ADD);
 
 	g_object_set_data (G_OBJECT (window), 
