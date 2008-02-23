@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-06 13:19+0100\n"
-"PO-Revision-Date: 2007-10-15 14:07+0800\n"
+"POT-Creation-Date: 2008-01-25 14:38+0000\n"
+"PO-Revision-Date: 2008-02-23 21:04+0800\n"
 "Last-Translator: Funda Wang <fundawang@gmail.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,8 @@ msgstr ""
 msgid "Edit text files"
 msgstr "编辑文本文件"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:463
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:475
+#: ../gedit/gedit-print-job.c:822
 msgid "Text Editor"
 msgstr "文本编辑器"
 
@@ -32,7 +33,7 @@ msgid ""
 "effect if the \"Use Default Font\" option is turned off."
 msgstr "编辑区使用的自定义字体。只有当“使用默认字体”选项关掉时才有效。"
 
-#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:765
+#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:796
 msgid "Active plugins"
 msgstr "激活插件"
 
@@ -184,78 +185,57 @@ msgstr "Monospace 10"
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
-#. Translators: This is the Body font for printing.
-#. This is a gnome-print font name and is replaced by
-#. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:41
-msgid "Monospace Regular 9"
-msgstr "Monospace Regular 9"
-
-#: ../data/gedit.schemas.in.h:42
+#: ../data/gedit.schemas.in.h:38
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
 msgstr "文件修改后到自动保存的时间。只有当“自动保存”选项打开后才有效。"
 
-#: ../data/gedit.schemas.in.h:43
+#: ../data/gedit.schemas.in.h:39
 msgid "Print Header"
 msgstr "打印页眉"
 
-#: ../data/gedit.schemas.in.h:44
+#: ../data/gedit.schemas.in.h:40
 msgid "Print Line Numbers"
 msgstr "打印行号"
 
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:41
 msgid "Print Syntax Highlighting"
 msgstr "打印语法突出显示"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:42
 msgid "Printing Line Wrapping Mode"
 msgstr "打印时换行模式"
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:43
 msgid "Restore Previous Cursor Position"
 msgstr "恢复上一次的光标位置"
 
-#: ../data/gedit.schemas.in.h:48
+#: ../data/gedit.schemas.in.h:44
 msgid "Right Margin Position"
 msgstr "右边距位置"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:51
+#: ../data/gedit.schemas.in.h:47
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:54
+#: ../data/gedit.schemas.in.h:50
 msgid "Sans 8"
 msgstr "Sans 8"
 
-#. Translators: This is the Header font for printing.
-#. This is a gnome-print font name and replaced by
-#. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:58
-msgid "Sans Regular 11"
-msgstr "Sans Regular 11"
-
-#. Translators: This is the Line Number font for printing.
-#. This is a gnome-print font name and replaced by
-#. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:62
-msgid "Sans Regular 8"
-msgstr "Sans Regular 8"
-
-#: ../data/gedit.schemas.in.h:63
+#: ../data/gedit.schemas.in.h:51
 msgid "Side Pane is Visible"
 msgstr "侧边栏可见"
 
-#: ../data/gedit.schemas.in.h:64
+#: ../data/gedit.schemas.in.h:52
 msgid "Smart Home End"
 msgstr "智能 Home End"
 
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:53
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" represents the current locale encoding. Only recognized "
@@ -264,7 +244,7 @@ msgstr ""
 "gedit 自动检测文件编码时所用的编码清单。“CURRENT”为当前区域编码。只能使用可识"
 "别的编码。"
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:54
 msgid ""
 "Specifies how the cursor moves when the HOME and END keys are pressed. Use "
 "\"DISABLED\" to always move at the start/end of the line, \"AFTER\" to move "
@@ -279,7 +259,7 @@ msgstr ""
 "地移动到文本的开始/结尾，“BEFORE”以在移动到行的开始/结尾前先移动到文本的开始/"
 "结尾，“ALWAYS”以总是移动到文本的开始/结尾而不是行的开始/结尾。"
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:55
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -291,7 +271,7 @@ msgstr ""
 "按单词换行，而“GTK_WRAP_CHAR”代表按字符换行。请注意，这些值是区分大小写的，所"
 "以请确定必须按照这里说明的大小写出现。"
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:56
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -303,74 +283,48 @@ msgstr ""
 "行，“GTK_WRAP_WORD”代表按单词换行，而“GTK_WRAP_CHAR”代表按字符换行。请注意，"
 "这些值是区分大小写的，所以请确定必须按照这里说明的大小写出现。"
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:57
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "设定打印时文档主体所用的字体。"
 
-#: ../data/gedit.schemas.in.h:70
-msgid ""
-"Specifies the font to use for a document's body when printing documents. "
-"This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr ""
-"设定打印时文档主体所用的字体。这是 gnome-print 字体名称，将被 "
-"print_font_body_pango 替换。"
-
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:58
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr "设定打印时行号所用的字体。只有当“打印行号”选项打开时才有效。"
 
-#: ../data/gedit.schemas.in.h:72
-msgid ""
-"Specifies the font to use for line numbers when printing. This will only "
-"take effect if the \"Print Line Numbers\" option is non-zero. This is a "
-"gnome-print font name and replaced by print_font_numbers_pango."
-msgstr ""
-"设定打印时行号所用的字体。只有当“打印行号”选项打开时才有效。这是 gnome-print "
-"字体名称，将被 print_font_body_pango 替换。"
-
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:59
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr "设定打印时页眉所用的字体。只有当“打印页眉”选项打开时才有效。"
 
-#: ../data/gedit.schemas.in.h:74
-msgid ""
-"Specifies the font to use for page headers when printing a document. This "
-"will only take effect if the \"Print Header\" option is turned on. This is a "
-"gnome-print font name and replaced by print_font_header_pango."
-msgstr ""
-"设定打印时页眉所用的字体。只有当“打印页眉”选项打开时才有效。这是 gnome-print "
-"字体名称，将被 print_font_body_pango 替换。"
-
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:60
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr "设定最近打开文件数的最大值，这个将在“最近打开过的文件”子菜单中显示。"
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:61
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "设定用于代替制表符的空格数。"
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:62
 msgid "Specifies the position of the right margin."
 msgstr "指定右边距的位置。"
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:63
 msgid "Status Bar is Visible"
 msgstr "状态栏可见"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:64
 msgid "Style Scheme"
 msgstr "风格大纲"
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:65
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -384,31 +338,31 @@ msgstr ""
 "图标和文字，而“GEDIT_TOOLBAR_ICONS_BOTH_HORIZ”代表在图标旁边显示文字。请注"
 "意，这些值是区分大小写的，所以请确定必须按照这里说明的大小写出现。"
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:66
 msgid "Tab Size"
 msgstr "制表符长度"
 
-#: ../data/gedit.schemas.in.h:82
+#: ../data/gedit.schemas.in.h:67
 msgid "The id of a GtkSourceView Style Scheme used to color the text."
 msgstr "用于文本颜色的 GtkSourceView 样式主题 id。"
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:68
 msgid "Toolbar Buttons Style"
 msgstr "工具栏按钮风格"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:69
 msgid "Toolbar is Visible"
 msgstr "显示工具栏"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:70
 msgid "Undo Actions Limit (DEPRECATED)"
 msgstr "撤消操作次数限制(不再使用)"
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:71
 msgid "Use Default Font"
 msgstr "使用默认字体"
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -417,7 +371,7 @@ msgstr ""
 "gedit 是否每隔一段时间自动保存已修改的文件。您可以在“自动保存时间间隔”选项中"
 "设置该时间间隔。"
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -425,73 +379,73 @@ msgstr ""
 "gedit 是否为保存的文件创建备份文件。您可以在“备份文件扩展名”选项中设置备份文"
 "件的扩展名。"
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:74
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "gedit 是否在编辑区域显示行号。"
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:75
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "gedit 是否在编辑区域显示右边距。"
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:76
 msgid "Whether gedit should enable auto indentation."
 msgstr "gedit 是否启用自动缩进。"
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:77
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "gedit 是否启用语法突出显示。"
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:78
 msgid ""
 "Whether gedit should highlight all the occurrences of the searched text."
 msgstr "gedit 是否应该突出显示被搜索文本的全部出现。"
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:79
 msgid "Whether gedit should highlight matching bracket."
 msgstr "gedit 是否启用突出显示匹配的括号。"
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:80
 msgid "Whether gedit should highlight the current line."
 msgstr "gedit 是否应该突出显示当前行。"
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:81
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "gedit 是否在打印文档时包含文档头。"
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:82
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "gedit 是否要插入空格代替制表符。"
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:83
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "gedit 是否在打印文档时打印语法突出显示。"
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:84
 msgid ""
 "Whether gedit should restore the previous cursor position when a file is "
 "loaded."
 msgstr "在装入文件时 gedit 是否应恢复上次的光标位置。"
 
-#: ../data/gedit.schemas.in.h:100
+#: ../data/gedit.schemas.in.h:85
 msgid ""
 "Whether the bottom panel at the bottom of editing windows should be visible."
 msgstr "是否显示编辑窗口底部的面板。"
 
-#: ../data/gedit.schemas.in.h:101
+#: ../data/gedit.schemas.in.h:86
 msgid ""
 "Whether the side pane at the left of the editing window should be visible."
 msgstr "是否显示编辑窗口左侧的侧边栏。"
 
-#: ../data/gedit.schemas.in.h:102
+#: ../data/gedit.schemas.in.h:87
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "是否显示编辑窗口底部的状态栏。"
 
-#: ../data/gedit.schemas.in.h:103
+#: ../data/gedit.schemas.in.h:88
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "是否在编辑窗口中显示工具栏。"
 
-#: ../data/gedit.schemas.in.h:104
+#: ../data/gedit.schemas.in.h:89
 msgid ""
 "Whether to use the system's default fixed width font for editing text "
 "instead of a font specific to gedit. If this option is turned off, then the "
@@ -501,13 +455,13 @@ msgstr ""
 "是否要为编辑文本指定不同于系统默认字体的字体。如果关闭了此选项，“编辑器字"
 "体”选项中的字体名称将会替代系统字体。"
 
-#: ../data/gedit.schemas.in.h:105
+#: ../data/gedit.schemas.in.h:90
 msgid "Writable VFS schemes"
 msgstr "可写入的 VFS 大纲"
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:108
+#: ../data/gedit.schemas.in.h:93
 msgid "[ISO-8859-15]"
 msgstr "[GB18030,GBK,GB2312,UTF-8]"
 
@@ -522,7 +476,7 @@ msgstr "[GB18030,GBK,GB2312,UTF-8]"
 #. Only recognized encodings are used.
 #. See http://svn.gnome.org/viewcvs/gedit/trunk/gedit/gedit-encodings.c?view=markup for
 #. a list of supported encodings
-#: ../data/gedit.schemas.in.h:120
+#: ../data/gedit.schemas.in.h:105
 msgid "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
 msgstr "[CURRENT,GB18030,GBK,GB2312,UTF-8,UTF-16]"
 
@@ -676,85 +630,6 @@ msgstr "字符编码(_A)："
 msgid "Enter the _location (URI) of the file you would like to open:"
 msgstr "输入您想打开文件的位置(URI)(_L)："
 
-#: ../gedit/dialogs/gedit-page-setup-dialog.c:527
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:9
-msgid "Page Setup"
-msgstr "页面设置"
-
-#. ex:ts=4:et:
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#: ../plugins/docinfo/docinfo.glade2.h:1
-#: ../plugins/externaltools/tools/tools.glade.h:1
-#: ../plugins/snippets/snippets/snippets.glade.h:1
-#: ../plugins/time/time.glade2.h:1
-msgid "    "
-msgstr "    "
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:2
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
-msgid "<b>Line Numbers</b>"
-msgstr "<b>行号</b>"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:3
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
-msgid "<b>Text Wrapping</b>"
-msgstr "<b>文字折行</b>"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:4
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
-msgid "Do not _split words over two lines"
-msgstr "不将一个单词拆在两行(_S)"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:5
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
-msgid "Enable text _wrapping"
-msgstr "启用自动换行(_W)"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:6
-msgid "Fonts"
-msgstr "字体"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:7
-msgid "General"
-msgstr "常规"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:8
-msgid "He_aders and footers:"
-msgstr "页眉和页脚(_A)："
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:10
-msgid "Print _line numbers"
-msgstr "打印行号(_L)"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:11
-msgid "Print synta_x highlighting"
-msgstr "打印语法突出显示(_X)"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:12
-msgid "_Body:"
-msgstr "主体(_B)："
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:13
-msgid "_Line numbers:"
-msgstr "行号(_L)："
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:14
-msgid "_Number every"
-msgstr "每几行打印一次行号(_N)"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:15
-msgid "_Print page headers"
-msgstr "打印页眉(_P)"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:16
-msgid "_Restore Default Fonts"
-msgstr "恢复为默认字体(_R)"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:17
-msgid "lines"
-msgstr "行"
-
 #: ../gedit/dialogs/gedit-preferences-dialog.c:570
 msgid "Push this button to select the font to be used by the editor"
 msgstr "按下此按钮可以选择编辑器所用的字体"
@@ -794,6 +669,16 @@ msgstr "无法删除配色方案“%s”。"
 msgid "gedit Preferences"
 msgstr "gedit 首选项"
 
+#. ex:ts=4:et:
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
+#: ../gedit/gedit-print-preferences.glade.h:1
+#: ../plugins/docinfo/docinfo.glade2.h:1
+#: ../plugins/externaltools/tools/tools.glade.h:1
+#: ../plugins/snippets/snippets/snippets.glade.h:1
+#: ../plugins/time/time.glade2.h:1
+msgid "    "
+msgstr "    "
+
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:2
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>自动缩进</b>"
@@ -814,6 +699,11 @@ msgstr "<b>文件保存</b>"
 msgid "<b>Font</b>"
 msgstr "<b>字体</b>"
 
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
+#: ../gedit/gedit-print-preferences.glade.h:3
+msgid "<b>Line Numbers</b>"
+msgstr "<b>行号</b>"
+
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:8
 msgid "<b>Right Margin</b>"
 msgstr "<b>右边距</b>"
@@ -821,6 +711,11 @@ msgstr "<b>右边距</b>"
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:9
 msgid "<b>Tab Stops</b>"
 msgstr "<b>制表位</b>"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
+#: ../gedit/gedit-print-preferences.glade.h:6
+msgid "<b>Text Wrapping</b>"
+msgstr "<b>文字折行</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:11
 msgid "<span weight=\"bold\">Color Scheme</span>"
@@ -834,6 +729,11 @@ msgstr "在保存之前创建一个备份文件(_B)"
 msgid "Display right _margin"
 msgstr "显示右边距(_M)"
 
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
+#: ../gedit/gedit-print-preferences.glade.h:7
+msgid "Do not _split words over two lines"
+msgstr "不将一个单词拆在两行(_S)"
+
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:15
 msgid "Editor"
 msgstr "编辑器"
@@ -841,6 +741,11 @@ msgstr "编辑器"
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:16
 msgid "Editor _font: "
 msgstr "编辑器字体(_F)："
+
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
+#: ../gedit/gedit-print-preferences.glade.h:8
+msgid "Enable text _wrapping"
+msgstr "启用自动换行(_W)"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:18
 msgid "Font & Colors"
@@ -903,11 +808,11 @@ msgid "_minutes"
 msgstr "分钟(_M)"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:301
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1348
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1347
 msgid "Replace"
 msgstr "替换"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1346
+#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1345
 msgid "Find"
 msgstr "查找"
 
@@ -916,7 +821,7 @@ msgid "Replace _All"
 msgstr "全部替换(_A)"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:405
-#: ../gedit/gedit-commands-file.c:677
+#: ../gedit/gedit-commands-file.c:678
 msgid "_Replace"
 msgstr "替换(_R)"
 
@@ -981,66 +886,66 @@ msgid "%s: invalid encoding.\n"
 msgstr "%s：无效的编码。\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:455
+#: ../gedit/gedit.c:467
 msgid "- Edit text files"
 msgstr "- 编辑文本文件"
 
-#: ../gedit/gedit-commands-file.c:224 ../gedit/gedit-commands-file.c:270
+#: ../gedit/gedit-commands-file.c:225 ../gedit/gedit-commands-file.c:271
 #, c-format
 msgid "Loading file '%s'…"
 msgstr "正在装入文件“%s”..."
 
-#: ../gedit/gedit-commands-file.c:279
+#: ../gedit/gedit-commands-file.c:280
 #, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
 msgstr[0] "正在载入 %d 个文件..."
 
 #. Translators: "Open Files" is the title of the file chooser window
-#: ../gedit/gedit-commands-file.c:423
+#: ../gedit/gedit-commands-file.c:424
 msgid "Open Files"
 msgstr "打开文件"
 
-#: ../gedit/gedit-commands-file.c:529
+#: ../gedit/gedit-commands-file.c:530
 msgid "The entered location is not valid."
 msgstr "指定的位置无效。"
 
-#: ../gedit/gedit-commands-file.c:532
+#: ../gedit/gedit-commands-file.c:533
 #: ../gedit/gedit-io-error-message-area.c:187
 #: ../gedit/gedit-io-error-message-area.c:226
 #: ../gedit/gedit-io-error-message-area.c:242
 msgid "Please check that you typed the location correctly and try again."
 msgstr "请检查键入的位置是否正确，然后重试。"
 
-#: ../gedit/gedit-commands-file.c:658
+#: ../gedit/gedit-commands-file.c:659
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "文件“%s”为只读。"
 
-#: ../gedit/gedit-commands-file.c:669
+#: ../gedit/gedit-commands-file.c:670
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "您想要试着将其替换为您正在保存的文件吗？"
 
-#: ../gedit/gedit-commands-file.c:735 ../gedit/gedit-commands-file.c:938
+#: ../gedit/gedit-commands-file.c:736 ../gedit/gedit-commands-file.c:939
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "正在保存文件“%s”..."
 
-#: ../gedit/gedit-commands-file.c:836
+#: ../gedit/gedit-commands-file.c:837
 msgid "Save As…"
 msgstr "另存为..."
 
-#: ../gedit/gedit-commands-file.c:1117
+#: ../gedit/gedit-commands-file.c:1118
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "正在还原文档“%s”..."
 
-#: ../gedit/gedit-commands-file.c:1162
+#: ../gedit/gedit-commands-file.c:1163
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "还原对文档“%s”未保存的更改吗？"
 
-#: ../gedit/gedit-commands-file.c:1171
+#: ../gedit/gedit-commands-file.c:1172
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1049,12 +954,12 @@ msgid_plural ""
 "lost."
 msgstr[0] "前 %ld 秒内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-commands-file.c:1180
+#: ../gedit/gedit-commands-file.c:1181
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "上一分钟内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-commands-file.c:1186
+#: ../gedit/gedit-commands-file.c:1187
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1064,7 +969,7 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "上一分钟零 %ld 秒内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-commands-file.c:1196
+#: ../gedit/gedit-commands-file.c:1197
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1073,11 +978,11 @@ msgid_plural ""
 "lost."
 msgstr[0] "前 %ld 分钟内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-commands-file.c:1211
+#: ../gedit/gedit-commands-file.c:1212
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr "上 %d 小时内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-commands-file.c:1217
+#: ../gedit/gedit-commands-file.c:1218
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1087,7 +992,7 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "上一小时零 %d 分钟内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-commands-file.c:1232
+#: ../gedit/gedit-commands-file.c:1233
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1095,7 +1000,7 @@ msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "上 %d 小时内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-commands-file.c:1258
+#: ../gedit/gedit-commands-file.c:1259
 msgid "_Revert"
 msgstr "还原(_R)"
 
@@ -1127,17 +1032,17 @@ msgstr "找到并替换了一处"
 msgid "Phrase not found"
 msgstr "短语未找到"
 
-#: ../gedit/gedit-document.c:814 ../gedit/gedit-document.c:908
+#: ../gedit/gedit-document.c:862 ../gedit/gedit-document.c:956
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "未保存文档 %d"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1914 ../gedit/gedit-window.c:1919
+#: ../gedit/gedit-window.c:1913 ../gedit/gedit-window.c:1918
 msgid "Read Only"
 msgstr "只读"
 
-#: ../gedit/gedit-documents-panel.c:759
+#: ../gedit/gedit-documents-panel.c:760
 msgid "Documents"
 msgstr "文档"
 
@@ -1258,17 +1163,17 @@ msgstr "泰语"
 msgid "Unknown"
 msgstr "未知"
 
-#: ../gedit/gedit-encodings-option-menu.c:219
+#: ../gedit/gedit-encodings-option-menu.c:220
 msgid "Auto Detected"
 msgstr "自动检测"
 
-#: ../gedit/gedit-encodings-option-menu.c:239
-#: ../gedit/gedit-encodings-option-menu.c:261
+#: ../gedit/gedit-encodings-option-menu.c:240
+#: ../gedit/gedit-encodings-option-menu.c:262
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "当前语系(%s)"
 
-#: ../gedit/gedit-encodings-option-menu.c:322
+#: ../gedit/gedit-encodings-option-menu.c:323
 msgid "Add or _Remove..."
 msgstr "添加或删除(_R)..."
 
@@ -1638,11 +1543,11 @@ msgstr "无法获得备份文件名"
 msgid "Close document"
 msgstr "关闭文档"
 
-#: ../gedit/gedit-panel.c:361 ../gedit/gedit-panel.c:569
+#: ../gedit/gedit-panel.c:364 ../gedit/gedit-panel.c:572
 msgid "Empty"
 msgstr "空"
 
-#: ../gedit/gedit-panel.c:514 ../gedit/gedit-panel.c:588
+#: ../gedit/gedit-panel.c:517 ../gedit/gedit-panel.c:591
 msgid "Hide panel"
 msgstr "隐藏面板"
 
@@ -1654,139 +1559,168 @@ msgstr "插件"
 msgid "Enabled"
 msgstr "已启用"
 
-#: ../gedit/gedit-plugin-manager.c:514
+#: ../gedit/gedit-plugin-manager.c:504
 msgid "_About"
 msgstr "关于(_A)"
 
-#: ../gedit/gedit-plugin-manager.c:522
+#: ../gedit/gedit-plugin-manager.c:512
 msgid "C_onfigure"
 msgstr "配置(_O)"
 
-#: ../gedit/gedit-plugin-manager.c:532
+#: ../gedit/gedit-plugin-manager.c:521
 msgid "A_ctivate"
 msgstr "激活(_C)"
 
-#: ../gedit/gedit-plugin-manager.c:544
+#: ../gedit/gedit-plugin-manager.c:532
 msgid "Ac_tivate All"
 msgstr "全部激活(_T)"
 
-#: ../gedit/gedit-plugin-manager.c:549
+#: ../gedit/gedit-plugin-manager.c:537
 msgid "_Deactivate All"
 msgstr "全部禁用(_D)"
 
-#: ../gedit/gedit-plugin-manager.c:794
+#: ../gedit/gedit-plugin-manager.c:825
 msgid "_About Plugin"
 msgstr "关于插件(_A)"
 
-#: ../gedit/gedit-plugin-manager.c:798
+#: ../gedit/gedit-plugin-manager.c:829
 msgid "C_onfigure Plugin"
 msgstr "配置插件(_O)"
 
-#: ../gedit/gedit-prefs-manager.c:171
+#: ../gedit/gedit-prefs-manager.c:170
 msgid "Cannot initialize preferences manager."
 msgstr "无法初始化首选项管理器。"
 
-#: ../gedit/gedit-prefs-manager.c:1280
+#: ../gedit/gedit-prefs-manager.c:1102
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Gconf 项 %3$s 期望的类型是“%1$s”，得到的类型是“%2$s”"
 
-#: ../gedit/gedit-print.c:186
+#: ../gedit/gedit-print-job.c:605
 #, c-format
 msgid "File: %s"
 msgstr "文件：%s"
 
-#: ../gedit/gedit-print.c:194
+#: ../gedit/gedit-print-job.c:614
 msgid "Page %N of %Q"
 msgstr "第 %N 页共 %Q 页"
 
-#: ../gedit/gedit-print.c:316
-msgid "Print"
-msgstr "打印"
+#: ../gedit/gedit-print-job.c:872
+msgid "Preparing..."
+msgstr "正在准备..."
 
-#: ../gedit/gedit-print.c:328 ../plugins/docinfo/docinfo.glade2.h:9
-msgid "Lines"
-msgstr "行数"
+#: ../gedit/gedit-print-preferences.glade.h:2
+msgid "<b>Fonts</b>"
+msgstr "<b>字体</b>"
 
-#: ../gedit/gedit-print-job-preview.c:621
-msgid "Page Preview"
-msgstr "页面预览"
+#: ../gedit/gedit-print-preferences.glade.h:4
+msgid "<b>Page header</b>"
+msgstr "<b>页眉</b>"
 
-#: ../gedit/gedit-print-job-preview.c:622
-msgid "The preview of a page in the document to be printed"
-msgstr "要打印文档中页面的预览"
+#: ../gedit/gedit-print-preferences.glade.h:5
+msgid "<b>Syntax Highlighting</b>"
+msgstr "<b>语法高亮</b>"
 
-#: ../gedit/gedit-print-job-preview.c:708
-msgid "Other"
-msgstr "其它"
+#: ../gedit/gedit-print-preferences.glade.h:9
+msgid "He_aders and footers:"
+msgstr "页眉和页脚(_A)："
 
-#: ../gedit/gedit-print-job-preview.c:738
+#: ../gedit/gedit-print-preferences.glade.h:10
+msgid "Print line nu_mbers"
+msgstr "打印行号(_M)"
+
+#: ../gedit/gedit-print-preferences.glade.h:11
+msgid "Print page _headers"
+msgstr "打印页眉(_H)"
+
+#: ../gedit/gedit-print-preferences.glade.h:12
+msgid "Print synta_x highlighting"
+msgstr "打印语法突出显示(_X)"
+
+#: ../gedit/gedit-print-preferences.glade.h:13
+msgid "_Body:"
+msgstr "主体(_B)："
+
+#: ../gedit/gedit-print-preferences.glade.h:14
+msgid "_Line numbers:"
+msgstr "行号(_L)："
+
+#: ../gedit/gedit-print-preferences.glade.h:15
+msgid "_Number every"
+msgstr "每几行打印一次行号(_N)"
+
+#: ../gedit/gedit-print-preferences.glade.h:16
+msgid "_Restore Default Fonts"
+msgstr "恢复为默认字体(_R)"
+
+#: ../gedit/gedit-print-preferences.glade.h:17
+msgid "lines"
+msgstr "行"
+
+#: ../gedit/gedit-print-preview.c:563
 msgid "Show the previous page"
 msgstr "显示上一页"
 
-#: ../gedit/gedit-print-job-preview.c:749
+#: ../gedit/gedit-print-preview.c:577
 msgid "Show the next page"
 msgstr "显示下一页"
 
-#: ../gedit/gedit-print-job-preview.c:764
+#: ../gedit/gedit-print-preview.c:594
 msgid "Current page (Alt+P)"
 msgstr "当前页面(Alt+P)"
 
-#. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
-#. We are displaying 'XXX of XXX'.
-#: ../gedit/gedit-print-job-preview.c:777
+#: ../gedit/gedit-print-preview.c:616
 msgid "of"
 msgstr "/"
 
-#: ../gedit/gedit-print-job-preview.c:783
+#: ../gedit/gedit-print-preview.c:624
 msgid "Page total"
 msgstr "总计页数"
 
-#: ../gedit/gedit-print-job-preview.c:784
+#: ../gedit/gedit-print-preview.c:625
 msgid "The total number of pages in the document"
 msgstr "文档的总页数"
 
-#: ../gedit/gedit-print-job-preview.c:801
+#: ../gedit/gedit-print-preview.c:644
 msgid "Show multiple pages"
 msgstr "显示多页"
 
-#: ../gedit/gedit-print-job-preview.c:813
+#: ../gedit/gedit-print-preview.c:659
 msgid "Zoom 1:1"
 msgstr "缩放至原大"
 
-#: ../gedit/gedit-print-job-preview.c:821
+#: ../gedit/gedit-print-preview.c:670
 msgid "Zoom to fit the whole page"
 msgstr "缩放至适合整个页面"
 
-#: ../gedit/gedit-print-job-preview.c:830
+#: ../gedit/gedit-print-preview.c:681
 msgid "Zoom the page in"
 msgstr "缩小页面"
 
-#: ../gedit/gedit-print-job-preview.c:838
+#: ../gedit/gedit-print-preview.c:692
 msgid "Zoom the page out"
 msgstr "缩小页面"
 
-#: ../gedit/gedit-print-job-preview.c:848
+#: ../gedit/gedit-print-preview.c:704
 msgid "_Close Preview"
 msgstr "关闭预览(_C)"
 
-#: ../gedit/gedit-print-job-preview.c:852
+#: ../gedit/gedit-print-preview.c:708
 msgid "Close print preview"
 msgstr "关闭打印预览"
 
-#: ../gedit/gedit-print-job-preview.c:1092
-#: ../gedit/gedit-print-job-preview.c:1093
-msgid "Number of pages horizontally"
-msgstr "水平方向的页数"
+#: ../gedit/gedit-print-preview.c:774
+#, c-format
+msgid "Page %d of %d"
+msgstr "第 %d 页，共 %d 页"
 
-#: ../gedit/gedit-print-job-preview.c:1096
-#: ../gedit/gedit-print-job-preview.c:1097
-msgid "Number of pages vertically"
-msgstr "垂直方向的页数"
+#: ../gedit/gedit-print-preview.c:953
+msgid "Page Preview"
+msgstr "页面预览"
 
-#: ../gedit/gedit-print-job-preview.c:1161
-msgid "No visible output was created."
-msgstr "没有创建可见的输出。"
+#: ../gedit/gedit-print-preview.c:954
+msgid "The preview of a page in the document to be printed"
+msgstr "要打印文档中页面的预览"
 
 #: ../gedit/gedit-statusbar.c:248
 msgid "  OVR"
@@ -1816,80 +1750,75 @@ msgstr "无法创建目录“%s”：g_mkdir_with_parents() 失败：%s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:663
+#: ../gedit/gedit-tab.c:660
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "从 %2$s 还原 %1$s"
 
-#: ../gedit/gedit-tab.c:670
+#: ../gedit/gedit-tab.c:667
 #, c-format
 msgid "Reverting %s"
 msgstr "还原 %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:686
+#: ../gedit/gedit-tab.c:683
 #, c-format
 msgid "Loading %s from %s"
 msgstr "从 %2$s 装入 %1$s"
 
-#: ../gedit/gedit-tab.c:693
+#: ../gedit/gedit-tab.c:690
 #, c-format
 msgid "Loading %s"
 msgstr "装入 %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:776
+#: ../gedit/gedit-tab.c:773
 #, c-format
 msgid "Saving %s to %s"
 msgstr "将 %s 保存到 %s"
 
-#: ../gedit/gedit-tab.c:783
+#: ../gedit/gedit-tab.c:780
 #, c-format
 msgid "Saving %s"
 msgstr "保存 %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1646
+#: ../gedit/gedit-tab.c:1643
 msgid "RO"
 msgstr "只读"
 
-#: ../gedit/gedit-tab.c:1691
+#: ../gedit/gedit-tab.c:1688
 #, c-format
 msgid "Error opening file %s"
 msgstr "打开文件 %s 出错"
 
-#: ../gedit/gedit-tab.c:1696
+#: ../gedit/gedit-tab.c:1693
 #, c-format
 msgid "Error reverting file %s"
 msgstr "还原文件 %s 出错"
 
-#: ../gedit/gedit-tab.c:1701
+#: ../gedit/gedit-tab.c:1698
 #, c-format
 msgid "Error saving file %s"
 msgstr "保存文件 %s 出错"
 
-#: ../gedit/gedit-tab.c:1719
+#: ../gedit/gedit-tab.c:1716
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1726
+#: ../gedit/gedit-tab.c:1723
 msgid "Name:"
 msgstr "名称："
 
-#: ../gedit/gedit-tab.c:1727
+#: ../gedit/gedit-tab.c:1724
 msgid "MIME Type:"
 msgstr "MIME 类型："
 
-#: ../gedit/gedit-tab.c:1728
+#: ../gedit/gedit-tab.c:1725
 msgid "Encoding:"
 msgstr "编码："
-
-#: ../gedit/gedit-tab.c:2220
-#, c-format
-msgid "Rendering page %d of %d..."
-msgstr "正在渲染第 %d 页，共 %d 页..."
 
 #. Toplevel
 #: ../gedit/gedit-ui.h:49
@@ -1928,7 +1857,7 @@ msgstr "新建一个文档"
 msgid "_Open..."
 msgstr "打开(_O)..."
 
-#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1468
+#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1467
 msgid "Open a file"
 msgstr "打开一个文件"
 
@@ -2177,44 +2106,44 @@ msgstr "底部面板(_B)"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "在当前窗口中显示或隐藏底部面板"
 
-#: ../gedit/gedit-utils.c:1005
+#: ../gedit/gedit-utils.c:1049
 #, c-format
 msgid "Unable to find file %s."
 msgstr "找不到文件 %s。"
 
-#: ../gedit/gedit-utils.c:1009 ../gedit/gedit-utils.c:1045
+#: ../gedit/gedit-utils.c:1053 ../gedit/gedit-utils.c:1089
 msgid "Please check your installation."
 msgstr "请检查您的安装。"
 
-#: ../gedit/gedit-utils.c:1041
+#: ../gedit/gedit-utils.c:1085
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "在文件 %s 中找不到所需的部件。"
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1137
+#: ../gedit/gedit-view.c:1140
 msgid "_Wrap Around"
 msgstr "回到文档头部继续搜索(_W)"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1147
+#: ../gedit/gedit-view.c:1150
 msgid "Match _Entire Word Only"
 msgstr "只匹配整个单词(_E)"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1157
+#: ../gedit/gedit-view.c:1160
 msgid "_Match Case"
 msgstr "区分大小写(_M)"
 
-#: ../gedit/gedit-view.c:1245
+#: ../gedit/gedit-view.c:1248
 msgid "String you want to search for"
 msgstr "您想要搜索的字符串"
 
-#: ../gedit/gedit-view.c:1253
+#: ../gedit/gedit-view.c:1256
 msgid "Line you want to move the cursor to"
 msgstr "您想要将光标移动到的行"
 
-#: ../gedit/gedit-window.c:881
+#: ../gedit/gedit-window.c:880
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "使用 %s 突出显示模式"
@@ -2222,34 +2151,34 @@ msgstr "使用 %s 突出显示模式"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:938
+#: ../gedit/gedit-window.c:937
 msgid "None"
 msgstr "无"
 
-#: ../gedit/gedit-window.c:939
+#: ../gedit/gedit-window.c:938
 msgid "Disable syntax highlighting"
 msgstr "禁用语法突出显示"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1225
+#: ../gedit/gedit-window.c:1224
 #, c-format
 msgid "Open '%s'"
 msgstr "打开“%s”"
 
-#: ../gedit/gedit-window.c:1344
+#: ../gedit/gedit-window.c:1343
 msgid "Save"
 msgstr "保存"
 
-#: ../gedit/gedit-window.c:1472
+#: ../gedit/gedit-window.c:1471
 msgid "Open a recently used file"
 msgstr "打开最近用过的文件"
 
-#: ../gedit/gedit-window.c:1479
+#: ../gedit/gedit-window.c:1478
 msgid "Open"
 msgstr "打开"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1529
+#: ../gedit/gedit-window.c:1528
 #, c-format
 msgid "Activate '%s'"
 msgstr "激活“%s”"
@@ -2333,6 +2262,10 @@ msgstr "字符数(含空格)"
 msgid "Document"
 msgstr "文档"
 
+#: ../plugins/docinfo/docinfo.glade2.h:9
+msgid "Lines"
+msgstr "行数"
+
 #: ../plugins/docinfo/docinfo.glade2.h:10
 msgid "Selection"
 msgstr "选中范围"
@@ -2381,11 +2314,11 @@ msgstr "您必须位于单词内才能运行此命令"
 msgid "Running tool:"
 msgstr "运行工具："
 
-#: ../plugins/externaltools/tools/functions.py:188
+#: ../plugins/externaltools/tools/functions.py:189
 msgid "Done."
 msgstr "完成。"
 
-#: ../plugins/externaltools/tools/functions.py:190
+#: ../plugins/externaltools/tools/functions.py:191
 msgid "Exited"
 msgstr "已退出"
 
@@ -2751,162 +2684,162 @@ msgstr "您确定想要永久删除选中文件吗？"
 msgid "If you delete an item, it is permanently lost."
 msgstr "如果您删除的话，该文件将永久丢失。"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1591
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1583
 msgid "(Empty)"
 msgstr "(空)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2731
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1838
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2723
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1840
 msgid "Invalid uri"
 msgstr "无效的 URI"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3163
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3155
 msgid "file"
 msgstr "文件"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3184
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3231
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3176
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3223
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
 msgstr "新文件现在已被过滤掉。您需要调整您的过滤器设置才能看到文件"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3212
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3204
 msgid "directory"
 msgstr "目录"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:736
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:738
 msgid "Bookmarks"
 msgstr "书签"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:746
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:748
 msgid "Recent Files"
 msgstr "最近的文件"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:825
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:827
 msgid "_Filter"
 msgstr "过滤器(_F)"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:830
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
 msgid "_Move To Trash"
 msgstr "移动到回收站(_M)"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:831
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
 msgid "Move selected file or folder to trash"
 msgstr "将选中文件或文件夹移动到回收站"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
 msgid "_Delete"
 msgstr "删除(_D)"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
 msgid "Delete selected file or folder"
 msgstr "删除选中的文件或文件夹"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:840
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:842
 msgid "Up"
 msgstr "向上"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:841
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:843
 msgid "Open the parent folder"
 msgstr "打开父文件夹"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:846
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
 msgid "_New Folder"
 msgstr "新建文件夹(_N)"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
 msgid "Add new empty folder"
 msgstr "添加新的空文件夹"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:851
 msgid "New F_ile"
 msgstr "新建文件(_I)"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:850
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
 msgid "Add new empty file"
 msgstr "添加新的空文件"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:855
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:857
 msgid "_Rename"
 msgstr "重命名(_R)"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:856
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:858
 msgid "Rename selected file or folder"
 msgstr "重命名选中的文件或文件夹"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:862
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:864
 msgid "_Previous Location"
 msgstr "上一个位置(_P)"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:864
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:866
 msgid "Go to the previous visited location"
 msgstr "转到浏览的上一个位置"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:866
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:868
 msgid "_Next Location"
 msgstr "下一个位置(_N)"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:867
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:869
 msgid "Go to the next visited location"
 msgstr "转到浏览的下一个位置"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:868
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:870
 msgid "Re_fresh View"
 msgstr "刷新视图(_F)"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:869
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:871
 msgid "Refresh the view"
 msgstr "刷新视图"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:870
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:872
 msgid "_View Folder"
 msgstr "查看文件夹(_V)"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:871
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:873
 msgid "View folder in file manager"
 msgstr "在文件管理器中查看文件夹"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:878
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:880
 msgid "Show _Hidden"
 msgstr "显示隐藏文件(_H)"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:879
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:881
 msgid "Show hidden files and folders"
 msgstr "显示隐藏的文件和文件夹"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:881
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:883
 msgid "Show _Binary"
 msgstr "显示二进制(_B)"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:882
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:884
 msgid "Show binary files"
 msgstr "显示二进制文件"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:987
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1003
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1035
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:989
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1005
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1037
 msgid "Previous location"
 msgstr "上一个位置"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:991
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:993
 msgid "Go to previous location"
 msgstr "转到上一个位置"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:996
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1028
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:998
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1030
 msgid "Go to a previously opened location"
 msgstr "转到上一个打开的位置"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1018
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1020
 msgid "Next location"
 msgstr "下一个位置"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1022
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1024
 msgid "Go to next location"
 msgstr "转到下一个位置"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1199
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1201
 msgid "_Match Filename"
 msgstr "匹配文件名(_M)"
 
@@ -3180,19 +3113,19 @@ msgstr "无法导入下列文件：%s"
 msgid "File `%s` is not a valid snippets archive"
 msgstr "文件“%s”不是有效的片断存档"
 
-#: ../plugins/snippets/snippets/Placeholder.py:549
+#: ../plugins/snippets/snippets/Placeholder.py:550
 #, python-format
 msgid ""
 "Execution of the python command (%s) exceeds the maximum time, execution "
 "aborted."
 msgstr "执行 Python 命令(%s)超过最长时间，执行被中止。"
 
-#: ../plugins/snippets/snippets/Placeholder.py:557
+#: ../plugins/snippets/snippets/Placeholder.py:558
 #, python-format
 msgid "Execution of the python command (%s) failed: %s"
 msgstr "执行 Python 命令(%s)失败：%s"
 
-#: ../plugins/snippets/snippets/Placeholder.py:563
+#: ../plugins/snippets/snippets/Placeholder.py:564
 msgid "The following python code, run in a snippet, does not return a value"
 msgstr "以下以片断方式运行的 Python 代码不返回值"
 
@@ -4977,19 +4910,19 @@ msgstr "self"
 msgid "XUL - Tags"
 msgstr "XUL - 标记"
 
-#: ../plugins/time/gedit-time-plugin.c:183
+#: ../plugins/time/gedit-time-plugin.c:180
 msgid "In_sert Date and Time..."
 msgstr "插入日期和时间(_S)..."
 
-#: ../plugins/time/gedit-time-plugin.c:185
+#: ../plugins/time/gedit-time-plugin.c:182
 msgid "Insert current date and time at the cursor position"
 msgstr "在光标处插入当前的日期和时间"
 
-#: ../plugins/time/gedit-time-plugin.c:628
+#: ../plugins/time/gedit-time-plugin.c:611
 msgid "Available formats"
 msgstr "可用格式"
 
-#: ../plugins/time/gedit-time-plugin.c:806
+#: ../plugins/time/gedit-time-plugin.c:755
 msgid "Configure insert date/time plugin..."
 msgstr "配置插入日期/时间插件..."
 
@@ -5032,3 +4965,62 @@ msgstr "提示可使用的格式(_P)"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "使用自定义格式(_U)"
+
+#~ msgid "Monospace Regular 9"
+#~ msgstr "Monospace Regular 9"
+
+#~ msgid "Sans Regular 11"
+#~ msgstr "Sans Regular 11"
+
+#~ msgid "Sans Regular 8"
+#~ msgstr "Sans Regular 8"
+
+#~ msgid ""
+#~ "Specifies the font to use for a document's body when printing documents. "
+#~ "This is a gnome-print font name and replaced by print_font_body_pango."
+#~ msgstr ""
+#~ "设定打印时文档主体所用的字体。这是 gnome-print 字体名称，将被 "
+#~ "print_font_body_pango 替换。"
+
+#~ msgid ""
+#~ "Specifies the font to use for line numbers when printing. This will only "
+#~ "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
+#~ "gnome-print font name and replaced by print_font_numbers_pango."
+#~ msgstr ""
+#~ "设定打印时行号所用的字体。只有当“打印行号”选项打开时才有效。这是 gnome-"
+#~ "print 字体名称，将被 print_font_body_pango 替换。"
+
+#~ msgid ""
+#~ "Specifies the font to use for page headers when printing a document. This "
+#~ "will only take effect if the \"Print Header\" option is turned on. This "
+#~ "is a gnome-print font name and replaced by print_font_header_pango."
+#~ msgstr ""
+#~ "设定打印时页眉所用的字体。只有当“打印页眉”选项打开时才有效。这是 gnome-"
+#~ "print 字体名称，将被 print_font_body_pango 替换。"
+
+#~ msgid "Page Setup"
+#~ msgstr "页面设置"
+
+#~ msgid "Fonts"
+#~ msgstr "字体"
+
+#~ msgid "General"
+#~ msgstr "常规"
+
+#~ msgid "Print"
+#~ msgstr "打印"
+
+#~ msgid "Other"
+#~ msgstr "其它"
+
+#~ msgid "Number of pages horizontally"
+#~ msgstr "水平方向的页数"
+
+#~ msgid "Number of pages vertically"
+#~ msgstr "垂直方向的页数"
+
+#~ msgid "No visible output was created."
+#~ msgstr "没有创建可见的输出。"
+
+#~ msgid "Rendering page %d of %d..."
+#~ msgstr "正在渲染第 %d 页，共 %d 页..."
