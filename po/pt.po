@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.22\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-30 20:00+0000\n"
-"PO-Revision-Date: 2008-01-30 20:05+0000\n"
+"POT-Creation-Date: 2008-02-25 22:22+0000\n"
+"PO-Revision-Date: 2008-02-25 22:25+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -258,7 +258,7 @@ msgid ""
 msgstr ""
 "Lista ordenada de codificações utilizadas pelo gedit para detectar "
 "automaticamente a codificação de um ficheiro. \"CURRENT\" é a codificação de "
-"local actual. Apenas são utilizadas codificações reconhecidas."
+"configuração regional actual. Apenas são utilizadas codificações reconhecidas."
 
 #: ../data/gedit.schemas.in.h:54
 msgid ""
@@ -1158,7 +1158,7 @@ msgstr "Documento por Gravar %d"
 msgid "Read Only"
 msgstr "Apenas de Leitura"
 
-#: ../gedit/gedit-documents-panel.c:760
+#: ../gedit/gedit-documents-panel.c:760 ../gedit/gedit-window.c:2849
 msgid "Documents"
 msgstr "Documentos"
 
@@ -1287,7 +1287,7 @@ msgstr "Auto-Detectado"
 #: ../gedit/gedit-encodings-option-menu.c:262
 #, c-format
 msgid "Current Locale (%s)"
-msgstr "Local Actual (%s)"
+msgstr "Configuração Regional Actual (%s)"
 
 #: ../gedit/gedit-encodings-option-menu.c:323
 msgid "Add or _Remove..."
@@ -3539,6 +3539,12 @@ msgstr "Efectua a verificação ortográfica do documento actual."
 msgid "Spell Checker"
 msgstr "Corrector Ortográfico"
 
+#: ../plugins/taglist/gedit-taglist-plugin.c:94
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
+msgid "Tags"
+msgstr "Etiquetas"
+
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:599
 msgid "Select the group of tags you want to use"
 msgstr "Seleccione o grupo de etiquetas que deseja utilizar"
@@ -3550,11 +3556,6 @@ msgstr "_Antever"
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:684
 msgid "Available Tag Lists"
 msgstr "Lista de Etiquetas Disponíveis"
-
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
-msgid "Tags"
-msgstr "Etiquetas"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
