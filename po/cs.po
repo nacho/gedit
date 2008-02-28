@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-17 00:21+0100\n"
-"PO-Revision-Date: 2008-02-17 00:14+0100\n"
+"POT-Creation-Date: 2008-02-28 01:45+0100\n"
+"PO-Revision-Date: 2008-02-28 01:42+0100\n"
 "Last-Translator: Petr Kovar <pknbe@volny.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr ""
 
 #: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:796
 msgid "Active plugins"
-msgstr "Aktivní pluginy"
+msgstr "Aktivní zásuvné moduly"
 
 #: ../data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -158,8 +158,8 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
-"Seznam aktivních pluginů. Obsahuje \"Umístění\" aktivních pluginů. Pro "
-"získání \"Umístění\" daného pluginu viz soubor .gedit-plugin."
+"Seznam aktivních zásuvných modulů. Obsahuje \"Umístění\" aktivních modulů. "
+"Pro získání \"Umístění\" daného modulu viz soubor .gedit-plugin."
 
 #: ../data/gedit.schemas.in.h:27
 msgid ""
@@ -862,7 +862,7 @@ msgstr "Zvolte písmo editoru"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:23
 msgid "Plugins"
-msgstr "Pluginy"
+msgstr "Zásuvné moduly"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:24
 msgid "Preferences"
@@ -960,11 +960,12 @@ msgstr "KÓDOVÁNÍ"
 
 #: ../gedit/gedit.c:76
 msgid "Create a new toplevel window in an existing instance of gedit"
-msgstr "Vytvořit nové top-level okno v existující instanci aplikace GEdit."
+msgstr ""
+"Vytvořit nové okno nejvyšší úrovně v existující instanci aplikace GEdit"
 
 #: ../gedit/gedit.c:79
 msgid "Create a new document in an existing instance of gedit"
-msgstr "Vytvořit nový dokument v existující instanci aplikace GEdit."
+msgstr "Vytvořit nový dokument v existující instanci aplikace GEdit"
 
 #: ../gedit/gedit.c:82
 msgid "[FILE...]"
@@ -1726,7 +1727,7 @@ msgstr "Skrýt panel"
 
 #: ../gedit/gedit-plugin-manager.c:55
 msgid "Plugin"
-msgstr "Plugin"
+msgstr "Zásuvný modul"
 
 #: ../gedit/gedit-plugin-manager.c:56
 msgid "Enabled"
@@ -1754,11 +1755,11 @@ msgstr "_Deaktivovat vše"
 
 #: ../gedit/gedit-plugin-manager.c:825
 msgid "_About Plugin"
-msgstr "_O pluginu"
+msgstr "_O zásuvném modulu"
 
 #: ../gedit/gedit-plugin-manager.c:829
 msgid "C_onfigure Plugin"
-msgstr "Na_stavit plugin"
+msgstr "Na_stavit zásuvný modul"
 
 #: ../gedit/gedit-prefs-manager.c:170
 msgid "Cannot initialize preferences manager."
@@ -2652,7 +2653,7 @@ msgstr "gtk-revert-to-saved"
 
 #: ../plugins/externaltools/data/build.desktop.in.h:1
 msgid "Build"
-msgstr "Build"
+msgstr "Sestavit"
 
 #: ../plugins/externaltools/data/build.desktop.in.h:2
 msgid "Run \"make\" in the document directory"
@@ -2729,7 +2730,7 @@ msgid ""
 msgstr ""
 "Pokud TRUE, prohlížeč souborů zobrazí adresář prvního otevřeného dokumentu, "
 "jestliže nebyl prohlížeč souborů dosud použit. (Tedy toto obecně platí pro "
-"otevírání dokumentů z příkazové řádky nebo v Nautilu atd.)"
+"otevírání dokumentů z příkazové řádky, nebo v Nautilu atd.)"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:7
 msgid "Open With Tree View"
@@ -2740,8 +2741,8 @@ msgid ""
 "Open the tree view when the file browser plugin gets loaded instead of the "
 "bookmarks view"
 msgstr ""
-"Otevřít stromové zobrazení, když se plugin prohlížeče souborů načte místo "
-"zobrazení záložek"
+"Otevřít stromové zobrazení, když se zásuvný modul prohlížeče souborů načte "
+"místo zobrazení záložek"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:9
 msgid "Set Location To First Document"
@@ -2757,7 +2758,7 @@ msgid ""
 "and onload/tree_view is TRUE."
 msgstr ""
 "Kořenový adresář prohlížeče souborů, který bude použit, když načítání "
-"pluginu prohlížeče souborů a onload/tree_view je TRUE."
+"zásuvného modulu prohlížeče souborů a onload/tree_view je TRUE."
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:12
 msgid ""
@@ -2766,7 +2767,7 @@ msgid ""
 "the actual root."
 msgstr ""
 "Virtuální kořenový adresář prohlížeče souborů, který bude použit během "
-"načítání pluginu prohlížeče souborů, když onload/tree_view je TRUE. "
+"načítání zásuvného modulu prohlížeče souborů, když onload/tree_view je TRUE. "
 "Virtuální kořen musí být vždy pod skutečným kořenem."
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:13
@@ -3030,7 +3031,7 @@ msgstr "Přejít na další umístění"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1201
 msgid "_Match Filename"
-msgstr "_Vyhledat soubor"
+msgstr "_Zadejte název souboru"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -3323,20 +3324,20 @@ msgstr "Následující kód Pythonu běžící v útržku nevrací hodnotu"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
-msgstr "_Třídit..."
+msgstr "_Seřadit..."
 
 #: ../plugins/sort/gedit-sort-plugin.c:82
 msgid "Sort the current document or selection"
-msgstr "Třídit aktuální dokument nebo výběr"
+msgstr "Řadit aktuální dokument nebo výběr"
 
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:1
 #: ../plugins/sort/sort.glade2.h:3
 msgid "Sort"
-msgstr "Třídit"
+msgstr "Řadit"
 
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:2
 msgid "Sorts a document or selected text."
-msgstr "Třídí dokument nebo vybraný text."
+msgstr "Seřadí dokument nebo vybraný text."
 
 #: ../plugins/sort/sort.glade2.h:1
 msgid "R_emove duplicates"
@@ -3348,7 +3349,7 @@ msgstr "Začít ve _sloupci:"
 
 #: ../plugins/sort/sort.glade2.h:4
 msgid "You cannot undo a sort operation"
-msgstr "Operaci třídění nemůžete vrátit zpět"
+msgstr "Operaci řazení nemůžete vrátit zpět"
 
 #: ../plugins/sort/sort.glade2.h:5
 msgid "_Ignore case"
@@ -3360,7 +3361,7 @@ msgstr "_Obrácené pořadí"
 
 #: ../plugins/sort/sort.glade2.h:7
 msgid "_Sort"
-msgstr "_Třídit"
+msgstr "_Seřadit"
 
 #: ../plugins/spell/gedit-automatic-spell-checker.c:418
 #: ../plugins/spell/gedit-spell-checker-dialog.c:477
@@ -3547,6 +3548,12 @@ msgstr "Zkontroluje pravopis aktuálního dokumentu."
 msgid "Spell Checker"
 msgstr "Kontrola pravopisu"
 
+#: ../plugins/taglist/gedit-taglist-plugin.c:94
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
+msgid "Tags"
+msgstr "Tagy"
+
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:599
 msgid "Select the group of tags you want to use"
 msgstr "Vyberte skupinu tagů, kterou chcete používat"
@@ -3558,11 +3565,6 @@ msgstr "_Náhled"
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:684
 msgid "Available Tag Lists"
 msgstr "Dostupné seznamy tagů"
-
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
-msgid "Tags"
-msgstr "Tagy"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
