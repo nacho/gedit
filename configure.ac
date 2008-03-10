@@ -3,8 +3,8 @@ dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.59)
 
 m4_define(gedit_major_version,  2)
-m4_define(gedit_minor_version, 21)
-m4_define(gedit_micro_version,  2)
+m4_define(gedit_minor_version, 22)
+m4_define(gedit_micro_version,  0)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
 AC_INIT(gedit, gedit_version, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
@@ -167,7 +167,7 @@ dnl ================================================================
 PKG_CHECK_MODULES(GEDIT, [
 	glib-2.0 >= 2.14.0
 	gtk+-2.0 >= 2.12.0
-	gtksourceview-2.0 >= 2.1.0
+	gtksourceview-2.0 >= 2.2.0
 	libgnomeui-2.0 >= 2.16.0
 	libglade-2.0 >= 2.5.1
 	gnome-vfs-2.0 >= 2.16.0
@@ -257,9 +257,9 @@ if test "x$have_python" != "xyes"; then
 fi
 
 if test "x$have_python" != "xno"; then
-	PYGOBJECT_REQUIRED=2.11.5
-	PYGTK_REQUIRED=2.9.7
-	PYGTKSOURCEVIEW_REQUIRED=2.0.0
+	PYGOBJECT_REQUIRED=2.12.0
+	PYGTK_REQUIRED=2.12.0
+	PYGTKSOURCEVIEW_REQUIRED=2.2.0
 
 	PKG_CHECK_MODULES([PYGTK], [
 		pygobject-2.0 >= $PYGOBJECT_REQUIRED
