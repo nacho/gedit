@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-26 13:13+0000\n"
-"PO-Revision-Date: 2008-02-29 16:21+0100\n"
+"POT-Creation-Date: 2008-03-04 09:11+0000\n"
+"PO-Revision-Date: 2008-03-11 13:07+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgid "Edit text files"
 msgstr "Edite archivos de texto"
 
 #: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:475
-#: ../gedit/gedit-print-job.c:822
+#: ../gedit/gedit-print-job.c:751
 msgid "Text Editor"
 msgstr "Editor de textos"
 
@@ -1147,7 +1147,7 @@ msgstr "Documento no guardado %d"
 msgid "Read Only"
 msgstr "Sólo lectura"
 
-#: ../gedit/gedit-documents-panel.c:760
+#: ../gedit/gedit-documents-panel.c:760 ../gedit/gedit-window.c:2849
 msgid "Documents"
 msgstr "Documentos"
 
@@ -1378,6 +1378,7 @@ msgstr ""
 #: ../gedit/gedit-io-error-message-area.c:1280
 #: ../gedit/gedit-io-error-message-area.c:1291
 #: ../gedit/gedit-io-error-message-area.c:1299
+#, c-format
 msgid ""
 "Host name was invalid. Please check that you typed the location correctly "
 "and try again."
@@ -1748,16 +1749,16 @@ msgstr "No se pudo inicializar el gestor de preferencias."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Se esperaba «%s» y se obtuvo «%s» para la clave %s"
 
-#: ../gedit/gedit-print-job.c:605
+#: ../gedit/gedit-print-job.c:534
 #, c-format
 msgid "File: %s"
 msgstr "Archivo: %s"
 
-#: ../gedit/gedit-print-job.c:614
+#: ../gedit/gedit-print-job.c:543
 msgid "Page %N of %Q"
 msgstr "Página %N de %Q"
 
-#: ../gedit/gedit-print-job.c:872
+#: ../gedit/gedit-print-job.c:801
 msgid "Preparing..."
 msgstr "Preparándose…"
 
@@ -2034,7 +2035,7 @@ msgstr "Configurar la aplicación"
 #. Help menu
 #: ../gedit/gedit-ui.h:70
 msgid "_Contents"
-msgstr "_Contenido"
+msgstr "_Índice"
 
 #: ../gedit/gedit-ui.h:71
 msgid "Open the gedit manual"
@@ -2082,7 +2083,7 @@ msgstr "_Imprimir…"
 
 #: ../gedit/gedit-ui.h:90
 msgid "Print the current page"
-msgstr "Imprime la página actual"
+msgstr "Imprimir la página actual"
 
 #: ../gedit/gedit-ui.h:92
 msgid "Close the current file"
@@ -2094,7 +2095,7 @@ msgstr "Deshace la última operación"
 
 #: ../gedit/gedit-ui.h:98
 msgid "Redo the last undone action"
-msgstr "Rehace la última acción deshecha"
+msgstr "Rehacer la última acción deshecha"
 
 #: ../gedit/gedit-ui.h:100
 msgid "Cut the selection"
@@ -2274,25 +2275,25 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "No se han podido encontrar los widgets necesarios dentro del archivo %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1140
+#: ../gedit/gedit-view.c:1149
 msgid "_Wrap Around"
 msgstr "_Volver al principio"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1150
+#: ../gedit/gedit-view.c:1159
 msgid "Match _Entire Word Only"
 msgstr "Coincidir sólo con palabras compl_etas"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1160
+#: ../gedit/gedit-view.c:1169
 msgid "_Match Case"
 msgstr "Coi_ncidir con capitalización"
 
-#: ../gedit/gedit-view.c:1248
+#: ../gedit/gedit-view.c:1257
 msgid "String you want to search for"
 msgstr "La cadena que quiere buscar"
 
-#: ../gedit/gedit-view.c:1256
+#: ../gedit/gedit-view.c:1265
 msgid "Line you want to move the cursor to"
 msgstr "Línea a la que quiere mover el cursor"
 
@@ -2622,10 +2623,6 @@ msgstr "_Tecla rápida:"
 #: ../plugins/externaltools/tools/tools.glade.h:14
 msgid "_Tools:"
 msgstr "_Herramientas:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:15
-msgid "gtk-revert-to-saved"
-msgstr "gtk-revert-to-saved"
 
 #: ../plugins/externaltools/data/build.desktop.in.h:1
 msgid "Build"
@@ -3527,6 +3524,12 @@ msgstr "Comprueba la ortografía del documento actual."
 msgid "Spell Checker"
 msgstr "Corrector ortográfico"
 
+#: ../plugins/taglist/gedit-taglist-plugin.c:94
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
+msgid "Tags"
+msgstr "Etiquetas"
+
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:599
 msgid "Select the group of tags you want to use"
 msgstr "Seleccione el grupo de etiquetas que quiere usar"
@@ -3538,11 +3541,6 @@ msgstr "Vista _previa"
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:684
 msgid "Available Tag Lists"
 msgstr "Listas de etiquetas disponibles"
-
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
-msgid "Tags"
-msgstr "Etiquetas"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
