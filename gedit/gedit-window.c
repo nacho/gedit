@@ -705,7 +705,8 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "EditCopy");
 	gtk_action_set_sensitive (action,
-				  state_normal &&
+				  (state_normal ||
+				   state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION) &&
 				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 				  
 	action = gtk_action_group_get_action (window->priv->action_group,
@@ -729,12 +730,14 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "SearchFind");
 	gtk_action_set_sensitive (action,
-				  state_normal);
+				  (state_normal ||
+				   state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "SearchIncrementalSearch");
 	gtk_action_set_sensitive (action,
-				  state_normal);
+				  (state_normal ||
+				   state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "SearchReplace");
@@ -744,20 +747,27 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	b = gedit_document_get_can_search_again (doc);
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "SearchFindNext");
-	gtk_action_set_sensitive (action, state_normal && b);
+	gtk_action_set_sensitive (action,
+				  (state_normal ||
+				   state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION) && b);
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "SearchFindPrevious");
-	gtk_action_set_sensitive (action, state_normal && b);
+	gtk_action_set_sensitive (action,
+				  (state_normal ||
+				   state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION) && b);
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "SearchClearHighlight");
-	gtk_action_set_sensitive (action, state_normal && b);
-
+	gtk_action_set_sensitive (action,
+				  (state_normal ||
+				   state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION) && b);
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "SearchGoToLine");
-	gtk_action_set_sensitive (action, state_normal);
+	gtk_action_set_sensitive (action,
+				  (state_normal ||
+				   state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION));
 	
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "ViewHighlightMode");
@@ -2419,7 +2429,8 @@ selection_changed (GeditDocument *doc,
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "EditCopy");
 	gtk_action_set_sensitive (action,
-				  state_normal &&
+				  (state_normal ||
+				   state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION) &&
 				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
