@@ -59,16 +59,7 @@ static gboolean find_with_flags       (GtkTreeModel * model,
                                        guint flags,
                                        guint notflags);
 
-GEDIT_PLUGIN_DEFINE_TYPE(GeditFileBookmarksStore, gedit_file_bookmarks_store,
-	       GTK_TYPE_TREE_STORE)
-
-static gboolean
-foreach_remove_node (GtkTreeModel * model, GtkTreePath * path,
-		     GtkTreeIter * iter, gpointer user_data)
-{
-	remove_node (model, iter, FALSE);
-	return FALSE;
-}
+GEDIT_PLUGIN_DEFINE_TYPE(GeditFileBookmarksStore, gedit_file_bookmarks_store, GTK_TYPE_TREE_STORE)
 
 static void
 gedit_file_bookmarks_store_dispose (GObject * object)
@@ -92,6 +83,14 @@ gedit_file_bookmarks_store_dispose (GObject * object)
 	G_OBJECT_CLASS (gedit_file_bookmarks_store_parent_class)->dispose (object);
 }
 
+static gboolean
+foreach_remove_node (GtkTreeModel * model, GtkTreePath * path,
+		     GtkTreeIter * iter, gpointer user_data)
+{
+	remove_node (model, iter, FALSE);
+	return FALSE;
+}
+
 static void
 gedit_file_bookmarks_store_finalize (GObject * object)
 {
@@ -103,8 +102,7 @@ gedit_file_bookmarks_store_finalize (GObject * object)
 }
 
 static void
-gedit_file_bookmarks_store_class_init (GeditFileBookmarksStoreClass *
-				       klass)
+gedit_file_bookmarks_store_class_init (GeditFileBookmarksStoreClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
