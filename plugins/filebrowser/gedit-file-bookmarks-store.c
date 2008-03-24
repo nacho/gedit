@@ -71,29 +71,35 @@ foreach_remove_node (GtkTreeModel * model, GtkTreePath * path,
 }
 
 static void
+gedit_file_bookmarks_store_dispose (GObject * object)
+{
+	GeditFileBookmarksStore *obj = GEDIT_FILE_BOOKMARKS_STORE (object);
+
+	if (obj->priv->volume_monitor != NULL) {
+		g_signal_handlers_disconnect_by_func (obj->priv->volume_monitor,
+						      on_volume_mounted,
+						      obj);
+		g_signal_handlers_disconnect_by_func (obj->priv->volume_monitor,
+						      on_volume_unmounted,
+						      obj);
+		obj->priv->volume_monitor = NULL;
+	}
+
+	if (obj->priv->bookmarks_monitor != NULL) {
+		gnome_vfs_monitor_cancel (obj->priv->bookmarks_monitor);
+	}
+
+	G_OBJECT_CLASS (gedit_file_bookmarks_store_parent_class)->dispose (object);
+}
+
+static void
 gedit_file_bookmarks_store_finalize (GObject * object)
 {
 	GeditFileBookmarksStore *obj = GEDIT_FILE_BOOKMARKS_STORE (object);
 
-	if (obj->priv->volume_monitor) {
-		g_signal_handlers_disconnect_by_func (obj->priv->
-						      volume_monitor,
-						      on_volume_mounted,
-						      obj);
-		g_signal_handlers_disconnect_by_func (obj->priv->
-						      volume_monitor,
-						      on_volume_mounted,
-						      obj);
-	}
+	gtk_tree_model_foreach (GTK_TREE_MODEL (obj), foreach_remove_node, NULL);
 
-	if (obj->priv->bookmarks_monitor != NULL)
-		gnome_vfs_monitor_cancel (obj->priv->bookmarks_monitor);
-
-	gtk_tree_model_foreach (GTK_TREE_MODEL (obj), foreach_remove_node,
-				NULL);
-
-	G_OBJECT_CLASS (gedit_file_bookmarks_store_parent_class)->
-	    finalize (object);
+	G_OBJECT_CLASS (gedit_file_bookmarks_store_parent_class)->finalize (object);
 }
 
 static void
@@ -102,10 +108,10 @@ gedit_file_bookmarks_store_class_init (GeditFileBookmarksStoreClass *
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+	object_class->dispose = gedit_file_bookmarks_store_dispose;
 	object_class->finalize = gedit_file_bookmarks_store_finalize;
 
-	g_type_class_add_private (object_class,
-				  sizeof (GeditFileBookmarksStorePrivate));
+	g_type_class_add_private (object_class, sizeof (GeditFileBookmarksStorePrivate));
 }
 
 static void
