@@ -427,7 +427,7 @@ gedit_spell_checker_get_suggestions (GeditSpellChecker *spell,
 	g_return_val_if_fail (word != NULL, NULL);
 
 	if (!lazy_init (spell, spell->active_lang))
-		return FALSE;
+		return NULL;
 
 	g_return_val_if_fail (spell->dict != NULL, NULL);
 

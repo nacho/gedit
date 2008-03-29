@@ -671,6 +671,23 @@ tag_table_changed (GtkTextTagTable            *table,
 				   gtk_text_tag_table_get_size (table) - 1);
 }
 
+static void 
+tag_added_or_removed (GtkTextTagTable            *table,
+		      GtkTextTag                 *tag,
+		      GeditAutomaticSpellChecker *spell)
+{
+	tag_table_changed (table, spell);
+}
+
+static void 
+tag_changed (GtkTextTagTable            *table,
+	     GtkTextTag                 *tag,
+	     gboolean                    size_changed,
+	     GeditAutomaticSpellChecker *spell)
+{
+	tag_table_changed (table, spell);
+}
+
 GeditAutomaticSpellChecker *
 gedit_automatic_spell_checker_new (GeditDocument     *doc,
 				   GeditSpellChecker *checker)
@@ -688,10 +705,8 @@ gedit_automatic_spell_checker_new (GeditDocument     *doc,
 	spell = g_new0 (GeditAutomaticSpellChecker, 1);
 
 	spell->doc = doc;
+	spell->spell_checker = g_object_ref (checker);
 
-	g_object_ref (checker);
-	spell->spell_checker = checker;
-	
 	if (automatic_spell_checker_id == 0)
 		automatic_spell_checker_id = 
 			g_quark_from_static_string ("GeditAutomaticSpellCheckerID");
@@ -750,8 +765,16 @@ gedit_automatic_spell_checker_new (GeditDocument     *doc,
 				   gtk_text_tag_table_get_size (GTK_TEXT_BUFFER (doc)->tag_table) - 1);
 
 	g_signal_connect (GTK_TEXT_BUFFER (doc)->tag_table,
-			  "changed",
-                          G_CALLBACK (tag_table_changed),
+			  "tag-added",
+			  G_CALLBACK (tag_added_or_removed),
+			  spell);
+	g_signal_connect (GTK_TEXT_BUFFER (doc)->tag_table,
+			  "tag-removed",
+			  G_CALLBACK (tag_added_or_removed),
+			  spell);
+	g_signal_connect (GTK_TEXT_BUFFER (doc)->tag_table,
+			  "tag-changed",
+			  G_CALLBACK (tag_changed),
 			  spell);
 
 	/* we create the mark here, but we don't use it until text is
