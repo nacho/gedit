@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-25 14:38+0000\n"
+"POT-Creation-Date: 2008-03-04 09:11+0000\n"
 "PO-Revision-Date: 2008-02-12 18:50+0200\n"
 "Last-Translator: Mark Krapivner <mark125@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -24,7 +24,7 @@ msgid "Edit text files"
 msgstr "ערוך קבצי טקסט"
 
 #: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:475
-#: ../gedit/gedit-print-job.c:822
+#: ../gedit/gedit-print-job.c:751
 msgid "Text Editor"
 msgstr "עורך טקסט"
 
@@ -726,7 +726,6 @@ msgstr "העדפות gedit"
 
 #. ex:ts=4:et:
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#: ../gedit/gedit-print-preferences.glade.h:1
 #: ../plugins/docinfo/docinfo.glade2.h:1
 #: ../plugins/externaltools/tools/tools.glade.h:1
 #: ../plugins/snippets/snippets/snippets.glade.h:1
@@ -755,7 +754,7 @@ msgid "<b>Font</b>"
 msgstr "<b>גופן</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
-#: ../gedit/gedit-print-preferences.glade.h:3
+#: ../gedit/gedit-print-preferences.glade.h:2
 msgid "<b>Line Numbers</b>"
 msgstr "<b>מספרי שורות</b>"
 
@@ -768,7 +767,7 @@ msgid "<b>Tab Stops</b>"
 msgstr "<b>עצירות טאב</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
-#: ../gedit/gedit-print-preferences.glade.h:6
+#: ../gedit/gedit-print-preferences.glade.h:5
 msgid "<b>Text Wrapping</b>"
 msgstr "<b>גלישת טקסט</b>"
 
@@ -785,7 +784,7 @@ msgid "Display right _margin"
 msgstr "_הצג שוליים ימניים"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
-#: ../gedit/gedit-print-preferences.glade.h:7
+#: ../gedit/gedit-print-preferences.glade.h:6
 msgid "Do not _split words over two lines"
 msgstr "אל ת_פצל מילים ליותר משתי שורות"
 
@@ -798,7 +797,7 @@ msgid "Editor _font: "
 msgstr "_גופן עורך: "
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
-#: ../gedit/gedit-print-preferences.glade.h:8
+#: ../gedit/gedit-print-preferences.glade.h:7
 msgid "Enable text _wrapping"
 msgstr "אפשר _גלישת טקסט"
 
@@ -996,12 +995,12 @@ msgstr "שמור בשם…"
 #: ../gedit/gedit-commands-file.c:1118
 #, c-format
 msgid "Reverting the document '%s'…"
-msgstr "משחזר את הקובץ '%s'…"
+msgstr "משחזר את המסמך '%s'…"
 
 #: ../gedit/gedit-commands-file.c:1163
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
-msgstr "לבטל את השינויים הבלתי שמורים לקובץ '%s'?"
+msgstr "לבטל את השינויים הבלתי שמורים במסמך '%s'?"
 
 #: ../gedit/gedit-commands-file.c:1172
 #, c-format
@@ -1010,59 +1009,68 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
-msgstr[0] "שינויים שנעשו למסמך ב-%ld השניות האחרונות יאבדו."
-msgstr[1] "שינויים שנעשו למסמך ב-%ld השניות האחרונות יאבדו."
+msgstr[0] ""
+"שינויים שנעשו למסמך בשניה האחרונה יאבדו."
+msgstr[1] ""
+"שינויים שנעשו למסמך ב-%ld השניות האחרונות יאבדו."
 
 #: ../gedit/gedit-commands-file.c:1181
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
-msgstr "שינויים שנעשו לקובץ בדקה האחרונה יאבדו."
+msgstr "שינויים שנעשו למסמך בדקה האחרונה יאבדו."
 
 #: ../gedit/gedit-commands-file.c:1187
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
 "permanently lost."
 msgid_plural ""
 "Changes made to the document in the last minute and %ld seconds will be "
 "permanently lost."
-msgstr[0] "שינויים שנעשו לקובץ בדקה האחרונה יאבדו."
-msgstr[1] "שינויים שנעשו לקובץ בדקה האחרונה יאבדו."
+msgstr[0] ""
+"שינויים שנעשו למסמך בדקה והשניה האחרונות יאבדו."
+msgstr[1] ""
+"שינויים שנעשו למסמך בדקה ו-%ld השניות האחרונות יאבדו."
 
 #: ../gedit/gedit-commands-file.c:1197
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
-msgstr[0] "שינויים שנעשו לקובץ בדקה האחרונה יאבדו."
-msgstr[1] "שינויים שנעשו לקובץ בדקה האחרונה יאבדו."
+msgstr[0] ""
+"שינויים שנעשו למסמך בדקה האחרונה יאבדו."
+msgstr[1] ""
+"שינויים שנעשו למסמך ב-%ld הדקות האחרונות יאבדו."
 
 #: ../gedit/gedit-commands-file.c:1212
-#, fuzzy
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "שינויים שנעשו לקובץ בשעה האחרונה יאבדו."
+msgstr "שינויים שנעשו למסמך בשעה האחרונה יאבדו."
 
 #: ../gedit/gedit-commands-file.c:1218
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
 "permanently lost."
 msgid_plural ""
 "Changes made to the document in the last hour and %d minutes will be "
 "permanently lost."
-msgstr[0] "שינויים שנעשו לקובץ בדקה האחרונה יאבדו."
-msgstr[1] "שינויים שנעשו לקובץ בדקה האחרונה יאבדו."
+msgstr[0] ""
+"שינויים שנעשו למסמך בשעה ובדקה האחרונות יאבדו."
+msgstr[1] ""
+"שינויים שנעשו למסמך בשעה וב-%d הדקות האחרונות יאבדו."
 
 #: ../gedit/gedit-commands-file.c:1233
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "שינויים שנעשו לקובץ בשעה האחרונה יאבדו."
-msgstr[1] "שינויים שנעשו לקובץ בשעה האחרונה יאבדו."
+msgstr[0] ""
+"שינויים שנעשו למסמך בשעה האחרונה יאבדו."
+msgstr[1] ""
+"שינויים שנעשו למסמך ב-%d השעות האחרונות יאבדו."
 
 #: ../gedit/gedit-commands-file.c:1259
 msgid "_Revert"
@@ -1108,7 +1116,7 @@ msgstr "מסמך שלא נשמר %d"
 msgid "Read Only"
 msgstr "(קריאה בלבד)"
 
-#: ../gedit/gedit-documents-panel.c:760
+#: ../gedit/gedit-documents-panel.c:760 ../gedit/gedit-window.c:2849
 msgid "Documents"
 msgstr "מסמכים"
 
@@ -1321,14 +1329,12 @@ msgstr ""
 #: ../gedit/gedit-io-error-message-area.c:275
 #: ../gedit/gedit-io-error-message-area.c:515
 #: ../gedit/gedit-io-error-message-area.c:1269
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host %s could not be found. Please check that your proxy settings are "
 "correct and try again."
 msgstr ""
-"לא ניתן לשחזר את הקובץ \"%s\" כיוון שמארח \"%s\" לא יכל להימצא.\n"
-"\n"
-"אנא, בדוק שהגדרות המתווך שלך נכונות ונסה שנית."
+"המארח %s לא נימצא. אנא בדוק את הגדרות מתווך הרשת ונסה שנית."
 
 #: ../gedit/gedit-io-error-message-area.c:286
 #: ../gedit/gedit-io-error-message-area.c:297
@@ -1338,14 +1344,12 @@ msgstr ""
 #: ../gedit/gedit-io-error-message-area.c:1280
 #: ../gedit/gedit-io-error-message-area.c:1291
 #: ../gedit/gedit-io-error-message-area.c:1299
-#, fuzzy
+#, c-format
 msgid ""
 "Host name was invalid. Please check that you typed the location correctly "
 "and try again."
 msgstr ""
-"\"%s\" איננו מקום תקני.\n"
-"\n"
-"אנא, ודא שהקלדת את המיקום הנכון ונסה שנית."
+"שם המארח לא היה תקין. אנא בדוק שהכנסת מיקום נכון ונסה שוב."
 
 #: ../gedit/gedit-io-error-message-area.c:311
 #: ../gedit/gedit-io-error-message-area.c:545
@@ -1426,8 +1430,7 @@ msgstr "קידוד _תו:"
 
 #: ../gedit/gedit-io-error-message-area.c:778
 msgid "gedit has not been able to detect the character coding."
-msgstr ""
-"‏gedit נכשל בזיהוי קידוד התווים"
+msgstr "‏gedit נכשל בזיהוי קידוד התווים"
 
 #: ../gedit/gedit-io-error-message-area.c:780
 #: ../gedit/gedit-io-error-message-area.c:789
@@ -1458,6 +1461,7 @@ msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
 msgstr ""
+"המסמך מכיל תו אחד או יותר שלא ניתן לקודד בקידוד התווים המצויין."
 
 #: ../gedit/gedit-io-error-message-area.c:903
 msgid "_Edit Anyway"
@@ -1552,8 +1556,7 @@ msgstr ""
 msgid ""
 "%s is not a valid location. Please check that you typed the location "
 "correctly and try again."
-msgstr 
-"‏%s אינו מיקום תקין. נא וודא שהקלדת את המיקום הנכון ונסה שוב."
+msgstr "‏%s אינו מיקום תקין. נא וודא שהקלדת את המיקום הנכון ונסה שוב."
 
 #: ../gedit/gedit-io-error-message-area.c:1223
 msgid ""
@@ -1646,9 +1649,8 @@ msgstr "_טען מחדש"
 
 #. bad bad luck...
 #: ../gedit/gedit-local-document-saver.c:361
-#, fuzzy
 msgid "Could not obtain backup filename"
-msgstr "לא ניתן ליצור קובץ גיבוי."
+msgstr "לא ניתן לקבל את שם קובץ הגיבוי"
 
 #: ../gedit/gedit-notebook.c:834
 msgid "Close document"
@@ -1707,64 +1709,64 @@ msgstr "לא ניתן לאתחל את מנהל ההעדפות."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "ציפה ל `%s' קיבל %s' למפתח %s"
 
-#: ../gedit/gedit-print-job.c:605
+#: ../gedit/gedit-print-job.c:534
 #, c-format
 msgid "File: %s"
 msgstr "קובץ: %s"
 
-#: ../gedit/gedit-print-job.c:614
+#: ../gedit/gedit-print-job.c:543
 msgid "Page %N of %Q"
 msgstr "עמוד %N מתוך %Q"
 
-#: ../gedit/gedit-print-job.c:872
+#: ../gedit/gedit-print-job.c:801
 msgid "Preparing..."
 msgstr "מכין..."
 
-#: ../gedit/gedit-print-preferences.glade.h:2
+#: ../gedit/gedit-print-preferences.glade.h:1
 msgid "<b>Fonts</b>"
 msgstr "<b>גופנים</b>"
 
-#: ../gedit/gedit-print-preferences.glade.h:4
+#: ../gedit/gedit-print-preferences.glade.h:3
 msgid "<b>Page header</b>"
 msgstr "<b>כותרת עמוד</b>"
 
-#: ../gedit/gedit-print-preferences.glade.h:5
+#: ../gedit/gedit-print-preferences.glade.h:4
 msgid "<b>Syntax Highlighting</b>"
 msgstr "<b>הדגשת תחביר</b>"
 
-#: ../gedit/gedit-print-preferences.glade.h:9
+#: ../gedit/gedit-print-preferences.glade.h:8
 msgid "He_aders and footers:"
 msgstr "כו_תרות ותחתיות:"
 
-#: ../gedit/gedit-print-preferences.glade.h:10
+#: ../gedit/gedit-print-preferences.glade.h:9
 msgid "Print line nu_mbers"
 msgstr "הדפס מס_פרי שורות"
 
-#: ../gedit/gedit-print-preferences.glade.h:11
+#: ../gedit/gedit-print-preferences.glade.h:10
 msgid "Print page _headers"
 msgstr "הדפס _כותרי עמוד"
 
-#: ../gedit/gedit-print-preferences.glade.h:12
+#: ../gedit/gedit-print-preferences.glade.h:11
 msgid "Print synta_x highlighting"
 msgstr "הדגשת ת_חביר בהדפסה"
 
-#: ../gedit/gedit-print-preferences.glade.h:13
+#: ../gedit/gedit-print-preferences.glade.h:12
 msgid "_Body:"
 msgstr "_גוף:"
 
-#: ../gedit/gedit-print-preferences.glade.h:14
+#: ../gedit/gedit-print-preferences.glade.h:13
 msgid "_Line numbers:"
 msgstr "מספרי _שורות:"
 
-#: ../gedit/gedit-print-preferences.glade.h:15
+#: ../gedit/gedit-print-preferences.glade.h:14
 msgid "_Number every"
 msgstr "_מספר כל"
 
-#: ../gedit/gedit-print-preferences.glade.h:16
+#: ../gedit/gedit-print-preferences.glade.h:15
 msgid "_Restore Default Fonts"
 msgstr "_שחזר גופני ברירת מחדל"
 
-#: ../gedit/gedit-print-preferences.glade.h:17
+#: ../gedit/gedit-print-preferences.glade.h:16
 msgid "lines"
 msgstr "שורות"
 
@@ -1863,9 +1865,9 @@ msgstr ""
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
 #: ../gedit/gedit-tab.c:660
-#, fuzzy, c-format
+#, c-format
 msgid "Reverting %s from %s"
-msgstr "שחזר את הקובץ \"%s\"..."
+msgstr "משחזר את %s מ-%s"
 
 #: ../gedit/gedit-tab.c:667
 #, c-format
@@ -2135,14 +2137,12 @@ msgid "Go to a specific line"
 msgstr "עבור לשורה מסוימת"
 
 #: ../gedit/gedit-ui.h:126
-#, fuzzy
 msgid "_Incremental Search..."
-msgstr "חפש מחרוזת"
+msgstr "חיפוש _תוספתי..."
 
 #: ../gedit/gedit-ui.h:127
-#, fuzzy
 msgid "Incrementally search for text"
-msgstr "חפש מחרוזת"
+msgstr "חיפוש טקסט תוספתי"
 
 #. Documents menu
 #: ../gedit/gedit-ui.h:130
@@ -2227,12 +2227,9 @@ msgid "Unable to find file %s."
 msgstr "לא ניתן למצוא את הקובץ %s"
 
 #: ../gedit/gedit-utils.c:1053 ../gedit/gedit-utils.c:1089
-#, fuzzy
 msgid "Please check your installation."
 msgstr ""
-"\"%s\" הוא ספרייה.\n"
-"\n"
-"אנא, בדוק שהקלדת את המיקום נכון."
+"אנא בדוק את ההתקנה שלך."
 
 #: ../gedit/gedit-utils.c:1085
 #, fuzzy, c-format
@@ -2240,25 +2237,25 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "לא ניתן למצוא את הפריטים המבוקשים בתוך %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1140
+#: ../gedit/gedit-view.c:1149
 msgid "_Wrap Around"
 msgstr "_גלוש מסביב"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1150
+#: ../gedit/gedit-view.c:1159
 msgid "Match _Entire Word Only"
 msgstr "התאם מילים _שלמות בלבד"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1160
+#: ../gedit/gedit-view.c:1169
 msgid "_Match Case"
 msgstr "הת_אם רשיות"
 
-#: ../gedit/gedit-view.c:1248
+#: ../gedit/gedit-view.c:1257
 msgid "String you want to search for"
 msgstr "המחרוזת שברצונך לחפש"
 
-#: ../gedit/gedit-view.c:1256
+#: ../gedit/gedit-view.c:1265
 msgid "Line you want to move the cursor to"
 msgstr "השורה אליה להעביר את הסמן"
 
@@ -2590,12 +2587,7 @@ msgstr "מקש _קיצור:"
 msgid "_Tools:"
 msgstr "_כלים:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:15
-msgid "gtk-revert-to-saved"
-msgstr "gtk-revert-to-saved"
-
 #: ../plugins/externaltools/data/build.desktop.in.h:1
-
 msgid "Build"
 msgstr "בנה"
 
@@ -2614,10 +2606,11 @@ msgstr "פתח מסוף כאן"
 #: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:1
 msgid "Remove trailing spaces"
 msgstr ""
+"הסר רווחים עוקבים"
 
 #: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:2
 msgid "Remove useless trailing spaces in your file"
-msgstr ""
+msgstr "הסר רווחים עוקבים מיותרים בקובץ שלך"
 
 #: ../plugins/externaltools/data/run-command.desktop.in.h:1
 msgid "Execute a custom command and put its output in a new document"
@@ -2812,15 +2805,16 @@ msgstr "לא ניתן להעביר את הקבצים הנבחרים לאשפה."
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr ""
+"למחוק את \"%s\" לצמיתות?"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1166
 msgid "Are you sure you want to permanently delete the selected files?"
 msgstr ""
+"למחוק את הקבציפ המסומנים?"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1169
-#, fuzzy
 msgid "If you delete an item, it is permanently lost."
-msgstr "אם לא תשמור, שינויים מהדקה האחרונה יאבדו."
+msgstr "אם תמחק פריט, הוא יאבד."
 
 #: ../plugins/filebrowser/gedit-file-browser-store.c:1583
 msgid "(Empty)"
@@ -2903,9 +2897,9 @@ msgid "_Rename"
 msgstr "_החלף שם"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:858
-#, fuzzy
 msgid "Rename selected file or folder"
-msgstr "הקובץ הנבחר אינו ניתן להפעלה."
+msgstr ""
+"שנה את שם הקובץ או תיקייה שניבחרו"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:864
 msgid "_Previous Location"
@@ -3127,7 +3121,7 @@ msgstr ""
 
 #: ../plugins/snippets/snippets/Manager.py:120
 msgid "Global"
-msgstr ""
+msgstr "כללי"
 
 #: ../plugins/snippets/snippets/Manager.py:425
 #, fuzzy
@@ -3278,9 +3272,8 @@ msgid "S_ort..."
 msgstr "_מיין..."
 
 #: ../plugins/sort/gedit-sort-plugin.c:82
-#, fuzzy
 msgid "Sort the current document or selection"
-msgstr "מיין את המסמך הנוכחי או את הבחירה."
+msgstr "מיין את המסמך הנוכחי או את הבחירה"
 
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:1
 #: ../plugins/sort/sort.glade2.h:3
@@ -3500,6 +3493,12 @@ msgstr "בדיקת האיות במסמך הנוכחי."
 msgid "Spell Checker"
 msgstr "בודק איות"
 
+#: ../plugins/taglist/gedit-taglist-plugin.c:94
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
+msgid "Tags"
+msgstr "תגיות"
+
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:599
 msgid "Select the group of tags you want to use"
 msgstr "בחר בקבוצת התגיות שברצונך להשתמש"
@@ -3511,11 +3510,6 @@ msgstr "תצוגה _מקדימה"
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:684
 msgid "Available Tag Lists"
 msgstr "תוסף רשימת תגיות"
-
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
-msgid "Tags"
-msgstr "תגיות"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 #, fuzzy
@@ -3696,8 +3690,7 @@ msgstr "צבע של הקישורים שנבחרו"
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Color of selected links (deprecated)"
-msgstr ""
-"צבע של הקישורים שנבחרו (מיושן)"
+msgstr "צבע של הקישורים שנבחרו (מיושן)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:49
 msgid "Column span"
@@ -3785,8 +3778,7 @@ msgstr "כיווניות"
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Directionality (deprecated)"
-msgstr ""
-"כיווניות (מיושן)"
+msgstr "כיווניות (מיושן)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Directory list"
@@ -3832,7 +3824,7 @@ msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Encode type"
-msgstr ""
+msgstr "סוג קידוד"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Figure"
@@ -4067,8 +4059,7 @@ msgstr "יישומון Java"
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:146
 msgid "Java applet (deprecated)"
-msgstr ""
-"יישומון Java (מיושן)"
+msgstr "יישומון Java (מיושן)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "Label"
@@ -5165,6 +5156,9 @@ msgstr "_שאל אודות תסדיר"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "השתמש במבנה _מותאם"
+
+#~ msgid "gtk-revert-to-saved"
+#~ msgstr "gtk-revert-to-saved"
 
 #~ msgid "Monospace Regular 9"
 #~ msgstr "Monospace Regular 9"
