@@ -784,25 +784,35 @@ preview_layout_key_press (GtkWidget         *widget,
 			  GeditPrintPreview *preview)
 {
 	GeditPrintPreviewPrivate *priv;
+	GtkAdjustment *hadj, *vadj;
 	double x, y;
 	guint h, w;
-	double lower, upper;
-	double page_size;
+	double hlower, hupper, vlower, vupper;
+	double hpage, vpage;
 	double hstep, vstep;
 	gboolean domove = FALSE;
 	gboolean ret = TRUE;
 
 	priv = preview->priv;
 
-	x = gtk_layout_get_hadjustment (GTK_LAYOUT (priv->layout))->value;
-	y = gtk_layout_get_vadjustment (GTK_LAYOUT (priv->layout))->value;
-	gtk_layout_get_size (GTK_LAYOUT (priv->layout), &w, &h);
+	hadj = gtk_layout_get_hadjustment (GTK_LAYOUT (priv->layout));
+	vadj = gtk_layout_get_vadjustment (GTK_LAYOUT (priv->layout));
 
-	g_object_get (gtk_layout_get_vadjustment (GTK_LAYOUT (priv->layout)),
-		      "lower", &lower,
-		      "upper", &upper,
-		      "page-size", &page_size,
+	x = hadj->value;
+	y = vadj->value;
+
+	g_object_get (hadj,
+		      "lower", &hlower,
+		      "upper", &hupper,
+		      "page-size", &hpage,
 		      NULL);
+	g_object_get (vadj,
+		      "lower", &vlower,
+		      "upper", &vupper,
+		      "page-size", &vpage,
+		      NULL);
+
+	gtk_layout_get_size (GTK_LAYOUT (priv->layout), &w, &h);
 
 	hstep = 10;
 	vstep = 10;
@@ -824,31 +834,31 @@ preview_layout_key_press (GtkWidget         *widget,
 	case GDK_KP_Right:
 	case GDK_Right:
 		if (event->state & GDK_SHIFT_MASK)
-			x += w;
+			x = hupper - hpage;
 		else
-			x += hstep;
+			x = MIN (hupper - hpage, x + hstep);
 		domove = TRUE;
 		break;
 	case GDK_KP_Left:
 	case GDK_Left:
 		if (event->state & GDK_SHIFT_MASK)
-			x -= w;
+			x = hlower;
 		else
-			x -= hstep;
+			x = MAX (hlower, x - hstep);
 		domove = TRUE;
 		break;
 	case GDK_KP_Up:
 	case GDK_Up:
 		if (event->state & GDK_SHIFT_MASK)
 			goto page_up;
-		y -= vstep;
+		y = MAX (vlower, y - vstep);
 		domove = TRUE;
 		break;
 	case GDK_KP_Down:
 	case GDK_Down:
 		if (event->state & GDK_SHIFT_MASK)
 			goto page_down;
-		y += vstep;
+		y = MIN (vupper - vpage, y + vstep);
 		domove = TRUE;
 		break;
 	case GDK_KP_Page_Up:
@@ -857,17 +867,17 @@ preview_layout_key_press (GtkWidget         *widget,
 	case GDK_KP_Delete:
 	case GDK_BackSpace:
 	page_up:
-		if (y <= lower)
+		if (y <= vlower)
 		{
 			if (preview->priv->cur_page > 0)
 			{
 				goto_page (preview, preview->priv->cur_page - 1);
-				y = (upper - page_size);
+				y = (vupper - vpage);
 			}
 		}
 		else
 		{
-			y = lower;
+			y = vlower;
 		}
 		domove = TRUE;
 		break;
@@ -875,17 +885,17 @@ preview_layout_key_press (GtkWidget         *widget,
 	case GDK_Page_Down:
 	case ' ':
 	page_down:
-		if (y >= (upper - page_size))
+		if (y >= (vupper - vpage))
 		{
 			if (preview->priv->cur_page < preview->priv->n_pages - 1)
 			{
 				goto_page (preview, preview->priv->cur_page + 1);
-				y = lower;
+				y = vlower;
 			}
 		}
 		else
 		{
-			y = (upper - page_size);
+			y = (vupper - vpage);
 		}
 		domove = TRUE;
 		break;
@@ -923,11 +933,6 @@ preview_layout_key_press (GtkWidget         *widget,
 
 	if (domove)
 	{
-		GtkAdjustment *hadj, *vadj;
-
-		hadj = gtk_layout_get_hadjustment (GTK_LAYOUT (priv->layout));
-		vadj = gtk_layout_get_vadjustment (GTK_LAYOUT (priv->layout));
-
 		gtk_adjustment_set_value (hadj, x);
 		gtk_adjustment_set_value (vadj, y);
 
