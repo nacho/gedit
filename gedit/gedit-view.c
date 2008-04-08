@@ -1893,7 +1893,6 @@ reset_im_context (GtkTextView *text_view)
 	}
 }
 
-
 static void
 delete_line (GtkTextView *text_view,
 	     gint         count)
@@ -1906,11 +1905,23 @@ delete_line (GtkTextView *text_view,
 
 	reset_im_context (text_view);
 
-	gtk_text_buffer_get_iter_at_mark (buffer, &start,
-					  gtk_text_buffer_get_insert (buffer));
-
+	/* If there is a selection delete the selected lines and
+	 * ignore count */
+	if (gtk_text_buffer_get_selection_bounds (buffer, &start, &end))
+	{
+		gtk_text_iter_order (&start, &end);
+		
+		if (gtk_text_iter_starts_line (&end))
+		{
+			/* Do no delete the line with the cursor if the cursor
+			 * is at the beginning of the line */
+			count = 0;
+		}
+		else	
+			count = 1;
+	}
+	
 	gtk_text_iter_set_line_offset (&start, 0);
-	end = start;
 
 	if (count > 0)
 	{		
@@ -1926,7 +1937,7 @@ delete_line (GtkTextView *text_view,
 	{
 		if (!gtk_text_iter_ends_line (&end))
 			gtk_text_iter_forward_to_line_end (&end);
-						
+
 		while (count < 0) 
 		{
 			if (!gtk_text_iter_backward_line (&start))
@@ -1934,7 +1945,7 @@ delete_line (GtkTextView *text_view,
 				
 			++count;
 		}
-		
+
 		if (count == 0)
 		{
 			if (!gtk_text_iter_ends_line (&start))
@@ -1952,14 +1963,14 @@ delete_line (GtkTextView *text_view,
 		gtk_text_buffer_begin_user_action (buffer);
 
 		gtk_text_buffer_place_cursor (buffer, &cur);
-		
+
 		gtk_text_buffer_delete_interactive (buffer, 
 						    &start,
 						    &end,
 						    gtk_text_view_get_editable (text_view));
 
 		gtk_text_buffer_end_user_action (buffer);
-	
+
 		gtk_text_view_scroll_mark_onscreen (text_view,
 						    gtk_text_buffer_get_insert (buffer));
 	}

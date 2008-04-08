@@ -1,5 +1,10 @@
 2008-04-08  Paolo Maggi  <paolo@gnome.org>
 
+	* gedit/gedit-view.c (delete_line): if there is a selection, delete
+	the selected lines.
+
+2008-04-08  Paolo Maggi  <paolo@gnome.org>
+
 	* gedit/gedit-view.c (gedit_view_class_init), (reset_im_context),
 	(delete_line), (gedit_view_delete_from_cursor): now you can delete
 	the current line with Ctrl+D (like in pico, nano, eclipse, vim, etc.)
