@@ -136,7 +136,11 @@ static void 	search_highlight_updated_cb	(GeditDocument    *doc,
 						 GtkTextIter      *start,
 						 GtkTextIter      *end,
 						 GeditView        *view);
-						 
+
+static void	gedit_view_delete_from_cursor 	(GtkTextView     *text_view,
+						 GtkDeleteType    type,
+						 gint             count);
+
 G_DEFINE_TYPE(GeditView, gedit_view, GTK_TYPE_SOURCE_VIEW)
 
 /* Signals */
@@ -174,6 +178,8 @@ gedit_view_class_init (GeditViewClass *klass)
 	GObjectClass     *object_class = G_OBJECT_CLASS (klass);
 	GtkObjectClass   *gtkobject_class = GTK_OBJECT_CLASS (klass);
 	GtkWidgetClass   *widget_class = GTK_WIDGET_CLASS (klass);
+	GtkTextViewClass *text_view_class = GTK_TEXT_VIEW_CLASS (klass);
+	
 	GtkBindingSet    *binding_set;
 
 	gtkobject_class->destroy = gedit_view_destroy;
@@ -204,6 +210,8 @@ gedit_view_class_init (GeditViewClass *klass)
 	klass->start_interactive_goto_line = start_interactive_goto_line;
 	klass->reset_searched_text = reset_searched_text;	
 
+	text_view_class->delete_from_cursor = gedit_view_delete_from_cursor;
+	
 	view_signals[START_INTERACTIVE_SEARCH] =
     		g_signal_new ("start_interactive_search",
 		  	      G_TYPE_FROM_CLASS (object_class),
@@ -248,20 +256,32 @@ gedit_view_class_init (GeditViewClass *klass)
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__BOXED,
 			      G_TYPE_NONE, 1, G_TYPE_STRV);
-
+			      
 	g_type_class_add_private (klass, sizeof (GeditViewPrivate));
 	
 	binding_set = gtk_binding_set_by_class (klass);
 	
-	gtk_binding_entry_add_signal (binding_set, GDK_k, GDK_CONTROL_MASK, "start_interactive_search", 0);
-	gtk_binding_entry_add_signal (binding_set, GDK_K, GDK_CONTROL_MASK, "start_interactive_search", 0);
+	gtk_binding_entry_add_signal (binding_set,
+				      GDK_k,
+				      GDK_CONTROL_MASK,
+				      "start_interactive_search", 0);
+		
+	gtk_binding_entry_add_signal (binding_set,
+				      GDK_i,
+				      GDK_CONTROL_MASK,
+				      "start_interactive_goto_line", 0);
 	
-	gtk_binding_entry_add_signal (binding_set, GDK_i, GDK_CONTROL_MASK, "start_interactive_goto_line", 0);
-	gtk_binding_entry_add_signal (binding_set, GDK_I, GDK_CONTROL_MASK, "start_interactive_goto_line", 0);
-	
-	gtk_binding_entry_add_signal (binding_set, GDK_k, GDK_CONTROL_MASK | GDK_SHIFT_MASK, "reset_searched_text", 0);
-	gtk_binding_entry_add_signal (binding_set, GDK_K, GDK_CONTROL_MASK | GDK_SHIFT_MASK, "reset_searched_text", 0);	
+	gtk_binding_entry_add_signal (binding_set,
+				      GDK_k,
+				      GDK_CONTROL_MASK | GDK_SHIFT_MASK,
+				      "reset_searched_text", 0);
 
+	gtk_binding_entry_add_signal (binding_set, 
+				      GDK_d, 
+				      GDK_CONTROL_MASK,
+				      "delete_from_cursor", 2,
+				      G_TYPE_ENUM, GTK_DELETE_PARAGRAPHS,
+				      G_TYPE_INT, 1);
 }
 
 static gboolean
@@ -1862,3 +1882,109 @@ search_highlight_updated_cb (GeditDocument *doc,
 	}
 }
 
+/* There is no "official" way to reset the im context in GtkTextView */
+static void
+reset_im_context (GtkTextView *text_view)
+{
+	if (text_view->need_im_reset)
+	{
+		text_view->need_im_reset = FALSE;
+		gtk_im_context_reset (text_view->im_context);
+	}
+}
+
+
+static void
+delete_line (GtkTextView *text_view,
+	     gint         count)
+{
+	GtkTextIter start;
+	GtkTextIter end;
+	GtkTextBuffer *buffer;
+
+	buffer = gtk_text_view_get_buffer (text_view);
+
+	reset_im_context (text_view);
+
+	gtk_text_buffer_get_iter_at_mark (buffer, &start,
+					  gtk_text_buffer_get_insert (buffer));
+
+	gtk_text_iter_set_line_offset (&start, 0);
+	end = start;
+
+	if (count > 0)
+	{		
+		gtk_text_iter_forward_lines (&end, count);
+
+		if (gtk_text_iter_is_end (&end))
+		{		
+			if (gtk_text_iter_backward_line (&start) && !gtk_text_iter_ends_line (&start))
+				gtk_text_iter_forward_to_line_end (&start);
+		}
+	}
+	else if (count < 0) 
+	{
+		if (!gtk_text_iter_ends_line (&end))
+			gtk_text_iter_forward_to_line_end (&end);
+						
+		while (count < 0) 
+		{
+			if (!gtk_text_iter_backward_line (&start))
+				break;
+				
+			++count;
+		}
+		
+		if (count == 0)
+		{
+			if (!gtk_text_iter_ends_line (&start))
+				gtk_text_iter_forward_to_line_end (&start);
+		}
+		else
+			gtk_text_iter_forward_line (&end);
+	}
+
+	if (!gtk_text_iter_equal (&start, &end))
+	{
+		GtkTextIter cur = start;
+		gtk_text_iter_set_line_offset (&cur, 0);
+		
+		gtk_text_buffer_begin_user_action (buffer);
+
+		gtk_text_buffer_place_cursor (buffer, &cur);
+		
+		gtk_text_buffer_delete_interactive (buffer, 
+						    &start,
+						    &end,
+						    gtk_text_view_get_editable (text_view));
+
+		gtk_text_buffer_end_user_action (buffer);
+	
+		gtk_text_view_scroll_mark_onscreen (text_view,
+						    gtk_text_buffer_get_insert (buffer));
+	}
+	else
+	{
+		gtk_widget_error_bell (GTK_WIDGET (text_view));
+	}
+}
+
+static void
+gedit_view_delete_from_cursor (GtkTextView   *text_view,
+			       GtkDeleteType  type,
+			       gint           count)
+{
+	/* We override the standard handler for delete_from_cursor since
+	   the GTK_DELETE_PARAGRAPHS case is not implemented as we like (i.e. it
+	   does not remove the carriage return in the previous line)
+	 */
+	switch (type)
+	{
+		case GTK_DELETE_PARAGRAPHS:
+			delete_line (text_view, count);
+			break;
+		default:
+			GTK_TEXT_VIEW_CLASS (gedit_view_parent_class)->delete_from_cursor(text_view, type, count);
+			break;
+	}
+}

@@ -77,8 +77,9 @@ struct _GeditViewClass
 
 	/* Key bindings */
 	gboolean (* start_interactive_search)	(GeditView       *view);
-	gboolean (* start_interactive_goto_line)(GeditView       *view);	
+	gboolean (* start_interactive_goto_line)(GeditView       *view);
 	gboolean (* reset_searched_text)	(GeditView       *view);
+
 	void	 (* drop_uris)			(GeditView	 *view, 
 						 gchar          **uri_list);
 };
