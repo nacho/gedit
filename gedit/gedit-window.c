@@ -617,6 +617,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	GtkAction     *action;
 	gboolean       b;
 	gboolean       state_normal;
+	gboolean       editable;
 	GeditTabState  state;
 	GtkClipboard  *clipboard;
 	GeditLockdownMask lockdown;
@@ -631,6 +632,8 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	state_normal = (state == GEDIT_TAB_STATE_NORMAL);
 
 	view = gedit_tab_get_view (tab);
+	editable = gtk_text_view_get_editable (GTK_TEXT_VIEW (view));
+
 	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
 
 	clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
@@ -677,7 +680,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 					      "FileClose");
 
 	gtk_action_set_sensitive (action,
-	                          (state != GEDIT_TAB_STATE_CLOSING) &&
+				  (state != GEDIT_TAB_STATE_CLOSING) &&
 				  (state != GEDIT_TAB_STATE_SAVING) &&
 				  (state != GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW) &&
 				  (state != GEDIT_TAB_STATE_PRINTING) &&
@@ -700,6 +703,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 					      "EditCut");
 	gtk_action_set_sensitive (action,
 				  state_normal &&
+				  editable &&
 				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
@@ -711,7 +715,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 				  
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "EditPaste");
-	if (state_normal)
+	if (state_normal && editable)
 	{
 		set_paste_sensitivity_according_to_clipboard (window,
 							      clipboard);
@@ -725,6 +729,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 					      "EditDelete");
 	gtk_action_set_sensitive (action,
 				  state_normal &&
+				  editable &&
 				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
@@ -742,7 +747,8 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "SearchReplace");
 	gtk_action_set_sensitive (action,
-				  state_normal);
+				  state_normal &&
+				  editable);
 
 	b = gedit_document_get_can_search_again (doc);
 	action = gtk_action_group_get_action (window->priv->action_group,
@@ -776,7 +782,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 				  gedit_prefs_manager_get_enable_syntax_highlighting ());
 
 	update_next_prev_doc_sensitivity (window, tab);
-	
+
 	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
 						window, FALSE);
 }
@@ -2407,9 +2413,11 @@ selection_changed (GeditDocument *doc,
 		   GeditWindow   *window)
 {
 	GeditTab *tab;
+	GeditView *view;
 	GtkAction *action;
 	GeditTabState state;
 	gboolean state_normal;
+	gboolean editable;
 
 	gedit_debug (DEBUG_WINDOW);
 
@@ -2420,10 +2428,14 @@ selection_changed (GeditDocument *doc,
 	state = gedit_tab_get_state (tab);
 	state_normal = (state == GEDIT_TAB_STATE_NORMAL);
 
+	view = gedit_tab_get_view (tab);
+	editable = gtk_text_view_get_editable (GTK_TEXT_VIEW (view));
+
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "EditCut");
 	gtk_action_set_sensitive (action,
 				  state_normal &&
+				  editable &&
 				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
@@ -2437,6 +2449,7 @@ selection_changed (GeditDocument *doc,
 					      "EditDelete");
 	gtk_action_set_sensitive (action,
 				  state_normal &&
+				  editable &&
 				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 }
 
