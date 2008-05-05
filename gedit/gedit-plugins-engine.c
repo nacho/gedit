@@ -239,9 +239,15 @@ gedit_plugins_engine_init (GeditPluginsEngine *engine)
 void
 gedit_plugins_engine_garbage_collect (GeditPluginsEngine *engine)
 {
-#ifdef ENABLE_PYTHON
-	gedit_python_garbage_collect ();
-#endif
+	GType *module_types = g_type_children (GEDIT_TYPE_MODULE, NULL);
+	unsigned i;
+	for (i = 0; module_types[i] != 0; i++)
+	{
+		gpointer klass = g_type_class_peek (module_types[i]);
+		if (klass != NULL)
+			gedit_module_class_garbage_collect (klass);
+	}
+	g_free (module_types);
 }
 
 static void
@@ -338,107 +344,50 @@ load_plugin_module (GeditPluginInfo *info)
 	g_return_val_if_fail (info->module_name != NULL, FALSE);
 	g_return_val_if_fail (info->plugin == NULL, FALSE);
 	g_return_val_if_fail (info->available, FALSE);
-	
-	switch (info->loader)
-	{
-		case GEDIT_PLUGIN_LOADER_C:
-			dirname = g_path_get_dirname (info->file);	
-			g_return_val_if_fail (dirname != NULL, FALSE);
 
-			path = g_module_build_path (dirname, info->module_name);
-			g_free (dirname);
-			g_return_val_if_fail (path != NULL, FALSE);
-	
-			info->module = G_TYPE_MODULE (gedit_module_new (path));
-			g_free (path);
-			
-			break;
+	dirname = g_path_get_dirname (info->file);
+	g_return_val_if_fail (dirname != NULL, FALSE);
 
 #ifdef ENABLE_PYTHON
-		case GEDIT_PLUGIN_LOADER_PY:
-		{
-			gchar *dir;
-			
-			if (!gedit_python_init ())
-			{
-				/* Mark plugin as unavailable and fails */
-				info->available = FALSE;
-				
-				g_warning ("Cannot load Python plugin '%s' since gedit "
-				           "was not able to initialize the Python interpreter.",
-				           info->name);
-
-				return FALSE;
-			}
-
-			dir = g_path_get_dirname (info->file);
-			
-			g_return_val_if_fail ((info->module_name != NULL) &&
-			                      (info->module_name[0] != '\0'),
-			                      FALSE);
-
-			info->module = G_TYPE_MODULE (
-					gedit_python_module_new (dir, info->module_name));
-					
-			g_free (dir);
-			break;
-		}
-#endif
-		default:
-			g_return_val_if_reached (FALSE);
-	}
-
-	if (!g_type_module_use (info->module))
+	if (info->module_type == GEDIT_TYPE_PYTHON_MODULE)
 	{
-		switch (info->loader)
+		if (!gedit_python_init ())
 		{
-			case GEDIT_PLUGIN_LOADER_C:
-				g_warning ("Cannot load plugin '%s' since file '%s' cannot be read.",
-					   info->name,			           
-					   gedit_module_get_path (GEDIT_MODULE (info->module)));
-				break;
-
-			case GEDIT_PLUGIN_LOADER_PY:
-				g_warning ("Cannot load Python plugin '%s' since file '%s' cannot be read.",
-					   info->name,			           
-					   info->module_name);
-				break;
-
-			default:
-				g_return_val_if_reached (FALSE);				
+			/* Mark plugin as unavailable and fail */
+			info->available = FALSE;
+			g_warning ("Cannot load Python plugin '%s' since gedit "
+			           "was not able to initialize the Python interpreter.",
+			           info->name);
 		}
-			   
+	}
+#endif
+
+	info->module = GEDIT_MODULE (g_object_new (info->module_type,
+						   "path", dirname,
+						   "module-name", info->module_name,
+						   NULL));
+
+	if (!g_type_module_use (G_TYPE_MODULE (info->module)))
+	{
+		g_warning ("Cannot load plugin '%s' since file '%s' cannot be read.",
+			   gedit_module_get_module_name (info->module),
+			   gedit_module_get_path (info->module));
+
 		g_object_unref (G_OBJECT (info->module));
 		info->module = NULL;
 
-		/* Mark plugin as unavailable and fails */
+		/* Mark plugin as unavailable and fail. */
 		info->available = FALSE;
 		
 		return FALSE;
 	}
-	
-	switch (info->loader)
-	{
-		case GEDIT_PLUGIN_LOADER_C:
-			info->plugin = 
-				GEDIT_PLUGIN (gedit_module_new_object (GEDIT_MODULE (info->module)));
-			break;
 
-#ifdef ENABLE_PYTHON
-		case GEDIT_PLUGIN_LOADER_PY:
-			info->plugin = 
-				GEDIT_PLUGIN (gedit_python_module_new_object (GEDIT_PYTHON_MODULE (info->module)));
-			break;
-#endif
+	info->plugin = GEDIT_PLUGIN (gedit_module_new_object (info->module));
 
-		default:
-			g_return_val_if_reached (FALSE);
-	}
-	
-	g_type_module_unuse (info->module);
+	g_type_module_unuse (G_TYPE_MODULE (info->module));
 
 	gedit_debug_message (DEBUG_PLUGINS, "End");
-	
+
 	return TRUE;
 }
 

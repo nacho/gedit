@@ -35,12 +35,6 @@
 #include "gedit-plugin-info.h"
 #include "gedit-plugin.h"
 
-typedef enum
-{
-	GEDIT_PLUGIN_LOADER_C,
-	GEDIT_PLUGIN_LOADER_PY,
-} GeditPluginLoader;
-
 struct _GeditPluginInfo
 {
 	gint               refcount;
@@ -48,8 +42,8 @@ struct _GeditPluginInfo
 	gchar             *file;
 
 	gchar             *module_name;
-	GeditPluginLoader  loader;
-	GTypeModule       *module;
+	GType              module_type;
+	GeditModule       *module;
 	gchar            **dependencies;
 
 	gchar             *name;

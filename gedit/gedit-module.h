@@ -36,10 +36,11 @@
  * $Id$
  */
  
-#ifndef GEDIT_MODULE_H
-#define GEDIT_MODULE_H
+#ifndef __GEDIT_MODULE_H__
+#define __GEDIT_MODULE_H__
 
 #include <glib-object.h>
+#include <gmodule.h>
 
 G_BEGIN_DECLS
 
@@ -47,18 +48,42 @@ G_BEGIN_DECLS
 #define GEDIT_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GEDIT_TYPE_MODULE, GeditModule))
 #define GEDIT_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GEDIT_TYPE_MODULE, GeditModuleClass))
 #define GEDIT_IS_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GEDIT_TYPE_MODULE))
-#define GEDIT_IS_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((obj), GEDIT_TYPE_MODULE))
+#define GEDIT_IS_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_MODULE))
 #define GEDIT_MODULE_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS((obj), GEDIT_TYPE_MODULE, GeditModuleClass))
 
-typedef struct _GeditModule	GeditModule;
+typedef struct _GeditModule GeditModule;
+
+struct _GeditModule
+{
+	GTypeModule parent;
+
+	GModule *library;
+
+	gchar *path;
+	gchar *module_name;
+	GType type;
+};
+
+typedef struct _GeditModuleClass GeditModuleClass;
+
+struct _GeditModuleClass
+{
+	GTypeModuleClass parent_class;
+
+	/* Virtual class methods */
+	void		 (* garbage_collect)	();
+};
 
 GType		 gedit_module_get_type		(void) G_GNUC_CONST;
 
-GeditModule	*gedit_module_new		(const gchar *path);
-
 const gchar	*gedit_module_get_path		(GeditModule *module);
 
+const gchar	*gedit_module_get_module_name	(GeditModule *module);
+
 GObject		*gedit_module_new_object	(GeditModule *module);
+
+void		 gedit_module_class_garbage_collect
+						(GeditModuleClass *klass);
 
 G_END_DECLS
 

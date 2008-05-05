@@ -20,11 +20,11 @@
  * Boston, MA 02111-1307, USA. 
  */
 
-#ifndef GEDIT_PYTHON_MODULE_H
-#define GEDIT_PYTHON_MODULE_H
+#ifndef __GEDIT_PYTHON_MODULE_H__
+#define __GEDIT_PYTHON_MODULE_H__
 
-#include <Python.h>
 #include <glib-object.h>
+#include "gedit-module.h"
 
 G_BEGIN_DECLS
 
@@ -32,30 +32,13 @@ G_BEGIN_DECLS
 #define GEDIT_PYTHON_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GEDIT_TYPE_PYTHON_MODULE, GeditPythonModule))
 #define GEDIT_PYTHON_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GEDIT_TYPE_PYTHON_MODULE, GeditPythonModuleClass))
 #define GEDIT_IS_PYTHON_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GEDIT_TYPE_PYTHON_MODULE))
-#define GEDIT_IS_PYTHON_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((obj), GEDIT_TYPE_PYTHON_MODULE))
+#define GEDIT_IS_PYTHON_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_PYTHON_MODULE))
 #define GEDIT_PYTHON_MODULE_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS((obj), GEDIT_TYPE_PYTHON_MODULE, GeditPythonModuleClass))
 
-typedef struct _GeditPythonModule		GeditPythonModule;
-typedef struct _GeditPythonModuleClass 		GeditPythonModuleClass;
-typedef struct _GeditPythonModulePrivate	GeditPythonModulePrivate;
-
-struct _GeditPythonModuleClass
-{
-	GTypeModuleClass parent_class;
-};
-
-struct _GeditPythonModule
-{
-	GTypeModule parent_instance;
-};
+typedef GeditModule		GeditPythonModule;
+typedef GeditModuleClass	GeditPythonModuleClass;
 
 GType			 gedit_python_module_get_type		(void);
-
-GeditPythonModule	*gedit_python_module_new		(const gchar* path,
-								 const gchar *module);
-
-GObject			*gedit_python_module_new_object		(GeditPythonModule *module);
-
 
 /* --- Python utils --- */
 
@@ -63,8 +46,6 @@ GObject			*gedit_python_module_new_object		(GeditPythonModule *module);
 gboolean		gedit_python_init			(void);
 
 void			gedit_python_shutdown			(void);
-
-void			gedit_python_garbage_collect		(void);
 
 G_END_DECLS
 

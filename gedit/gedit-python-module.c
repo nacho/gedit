@@ -24,6 +24,7 @@
 #include <config.h>
 #endif
 
+#include <Python.h>
 #include <pygobject.h>
 #include <pygtk/pygtk.h>
 
@@ -41,24 +42,6 @@ typedef int Py_ssize_t;
 #define PY_SSIZE_T_MIN INT_MIN
 #endif
 
-#define GEDIT_PYTHON_MODULE_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ((object), \
-						 GEDIT_TYPE_PYTHON_MODULE, \
-						 GeditPythonModulePrivate))
-
-struct _GeditPythonModulePrivate
-{
-	gchar *module;
-	gchar *path;
-	GType type;
-};
-
-enum
-{
-	PROP_0,
-	PROP_PATH,
-	PROP_MODULE
-};
-
 /* Exported by pygedit module */
 void pygedit_register_classes (PyObject *d);
 void pygedit_add_constants (PyObject *module, const gchar *strip_prefix);
@@ -75,14 +58,14 @@ extern PyMethodDef pygeditcommands_functions[];
 /* We retreive this to check for correct class hierarchy */
 static PyTypeObject *PyGeditPlugin_Type;
 
-G_DEFINE_TYPE (GeditPythonModule, gedit_python_module, G_TYPE_TYPE_MODULE)
+G_DEFINE_TYPE (GeditPythonModule, gedit_python_module, GEDIT_TYPE_MODULE)
 
 static gboolean
 gedit_python_module_load (GTypeModule *gmodule)
 {
-	GeditPythonModulePrivate *priv = GEDIT_PYTHON_MODULE_GET_PRIVATE (gmodule);
+	GeditModule *module = GEDIT_MODULE (gmodule);
 	PyObject *main_module, *main_locals, *locals, *key, *value;
-	PyObject *module, *fromlist;
+	PyObject *pymodule, *fromlist;
 	Py_ssize_t pos = 0;
 	
 	g_return_val_if_fail (Py_IsInitialized (), FALSE);
@@ -95,10 +78,10 @@ gedit_python_module_load (GTypeModule *gmodule)
 	}
 
 	/* If we have a special path, we register it */
-	if (priv->path != NULL)
+	if (module->path != NULL)
 	{
 		PyObject *sys_path = PySys_GetObject ("path");
-		PyObject *path = PyString_FromString (priv->path);
+		PyObject *path = PyString_FromString (module->path);
 
 		if (PySequence_Contains(sys_path, path) == 0)
 			PyList_Insert (sys_path, 0, path);
@@ -111,15 +94,15 @@ gedit_python_module_load (GTypeModule *gmodule)
 	/* we need a fromlist to be able to import modules with a '.' in the
 	   name. */
 	fromlist = PyTuple_New(0);
-	module = PyImport_ImportModuleEx (priv->module, main_locals, main_locals, fromlist); 
+	pymodule = PyImport_ImportModuleEx (module->module_name, main_locals, main_locals, fromlist);
 	Py_DECREF(fromlist);
-	if (!module)
+	if (!pymodule)
 	{
 		PyErr_Print ();
 		return FALSE;
 	}
 
-	locals = PyModule_GetDict (module);
+	locals = PyModule_GetDict (pymodule);
 	while (PyDict_Next (locals, &pos, &key, &value))
 	{
 		if (!PyType_Check(value))
@@ -127,7 +110,7 @@ gedit_python_module_load (GTypeModule *gmodule)
 
 		if (PyObject_IsSubclass (value, (PyObject*) PyGeditPlugin_Type))
 		{
-			priv->type = gedit_python_object_get_type (gmodule, value);
+			module->type = gedit_python_object_get_type (gmodule, value);
 			return TRUE;
 		}
 	}
@@ -138,22 +121,38 @@ gedit_python_module_load (GTypeModule *gmodule)
 static void
 gedit_python_module_unload (GTypeModule *module)
 {
-	GeditPythonModulePrivate *priv = GEDIT_PYTHON_MODULE_GET_PRIVATE (module);
 	gedit_debug_message (DEBUG_PLUGINS, "Unloading Python module");
-	
-	priv->type = 0;
+	GEDIT_MODULE (module)->type = 0;
 }
 
-GObject *
-gedit_python_module_new_object (GeditPythonModule *module)
+static gint idle_garbage_collect_id = 0;
+
+static gboolean
+run_gc (gpointer data)
 {
-	GeditPythonModulePrivate *priv = GEDIT_PYTHON_MODULE_GET_PRIVATE (module);
-	gedit_debug_message (DEBUG_PLUGINS, "Creating object of type %s", g_type_name (priv->type));
+	while (PyGC_Collect ())
+		;
 
-	if (priv->type == 0)
-		return NULL;
+	idle_garbage_collect_id = 0;
+	return FALSE;
+}
 
-	return g_object_new (priv->type, NULL);
+static void
+gedit_python_module_class_garbage_collect (void)
+{
+	if (Py_IsInitialized())
+	{
+		/*
+		 * We both run the GC right now and we schedule
+		 * a further collection in the main loop.
+		 */
+
+		while (PyGC_Collect ())
+			;
+
+		if (idle_garbage_collect_id == 0)
+			idle_garbage_collect_id = g_idle_add (run_gc, NULL);
+	}
 }
 
 static void
@@ -165,107 +164,28 @@ gedit_python_module_init (GeditPythonModule *module)
 static void
 gedit_python_module_finalize (GObject *object)
 {
-	GeditPythonModulePrivate *priv = GEDIT_PYTHON_MODULE_GET_PRIVATE (object);
-	gedit_debug_message (DEBUG_PLUGINS, "Finalizing Python module %s", g_type_name (priv->type));
-
-	g_free (priv->module);
-	g_free (priv->path);
+	gedit_debug_message (DEBUG_PLUGINS, "Finalizing Python module %s",
+			     g_type_name (GEDIT_MODULE (object)->type));
 
 	G_OBJECT_CLASS (gedit_python_module_parent_class)->finalize (object);
 }
 
 static void
-gedit_python_module_get_property (GObject    *object,
-				  guint       prop_id,
-				  GValue     *value,
-				  GParamSpec *pspec)
+gedit_python_module_class_init (GeditPythonModuleClass *klass)
 {
-	/* no readable properties */
-	g_return_if_reached ();
-}
-
-static void
-gedit_python_module_set_property (GObject      *object,
-				  guint         prop_id,
-				  const GValue *value,
-				  GParamSpec   *pspec)
-{
-	GeditPythonModule *mod = GEDIT_PYTHON_MODULE (object);
-
-	switch (prop_id)
-	{
-		case PROP_MODULE:
-			GEDIT_PYTHON_MODULE_GET_PRIVATE (mod)->module = g_value_dup_string (value);
-			break;
-		case PROP_PATH:
-			GEDIT_PYTHON_MODULE_GET_PRIVATE (mod)->path = g_value_dup_string (value);
-			break;
-		default:
-			g_return_if_reached ();
-	}
-}
-
-static void
-gedit_python_module_class_init (GeditPythonModuleClass *class)
-{
-	GObjectClass *object_class = G_OBJECT_CLASS (class);
-	GTypeModuleClass *module_class = G_TYPE_MODULE_CLASS (class);
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GTypeModuleClass *gmodule_class = G_TYPE_MODULE_CLASS (klass);
+	GeditModuleClass *module_class = GEDIT_MODULE_CLASS (klass);
 
 	object_class->finalize = gedit_python_module_finalize;
-	object_class->get_property = gedit_python_module_get_property;
-	object_class->set_property = gedit_python_module_set_property;
 
-	g_object_class_install_property
-			(object_class,
-			 PROP_MODULE,
-			 g_param_spec_string ("module",
-					      "Module Name",
-					      "The Python module to load for this plugin",
-					      NULL,
-					      G_PARAM_READWRITE |
-					      G_PARAM_CONSTRUCT_ONLY |
-					      G_PARAM_STATIC_STRINGS));
+	gmodule_class->load = gedit_python_module_load;
+	gmodule_class->unload = gedit_python_module_unload;
 
-	g_object_class_install_property
-			(object_class,
-			 PROP_PATH,
-			 g_param_spec_string ("path",
-					      "Path",
-					      "The Python path to use when loading this module",
-					      NULL,
-					      G_PARAM_READWRITE |
-					      G_PARAM_CONSTRUCT_ONLY |
-					      G_PARAM_STATIC_STRINGS));
-
-	g_type_class_add_private (object_class, sizeof (GeditPythonModulePrivate));
-	
-	module_class->load = gedit_python_module_load;
-	module_class->unload = gedit_python_module_unload;
+	module_class->garbage_collect = gedit_python_module_class_garbage_collect;
 }
-
-GeditPythonModule *
-gedit_python_module_new (const gchar *path,
-			 const gchar *module)
-{
-	GeditPythonModule *result;
-
-	if (module == NULL || module[0] == '\0')
-		return NULL;
-
-	result = g_object_new (GEDIT_TYPE_PYTHON_MODULE,
-			       "module", module,
-			       "path", path,
-			       NULL);
-
-	g_type_module_set_name (G_TYPE_MODULE (result), module);
-
-	return result;
-}
-
 
 /* --- these are not module methods, they are here out of convenience --- */
-
-static gint idle_garbage_collect_id = 0;
 
 /* C equivalent of
  *    import pygtk
@@ -575,32 +495,3 @@ gedit_python_shutdown (void)
 		Py_Finalize ();
 	}
 }
-
-static gboolean
-run_gc (gpointer data)
-{
-	while (PyGC_Collect ())
-		;
-
-	idle_garbage_collect_id = 0;
-	return FALSE;
-}
-
-void
-gedit_python_garbage_collect (void)
-{
-	if (Py_IsInitialized())
-	{
-		/*
-		 * We both run the GC right now and we schedule
-		 * a further collection in the main loop.
-		 */
-
-		while (PyGC_Collect ())
-			;
-
-		if (idle_garbage_collect_id == 0)
-			idle_garbage_collect_id = g_idle_add (run_gc, NULL);
-	}
-}
-

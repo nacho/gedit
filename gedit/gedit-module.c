@@ -41,69 +41,32 @@
 #include "gedit-module.h"
 #include "gedit-debug.h"
 
-#include <gmodule.h>
-
-typedef struct _GeditModuleClass GeditModuleClass;
-
-struct _GeditModuleClass
-{
-	GTypeModuleClass parent_class;
-};
-
-struct _GeditModule
-{
-	GTypeModule parent_instance;
-
-	GModule *library;
-
-	gchar *path;
-	GType type;
-};
-
 typedef GType (*GeditModuleRegisterFunc) (GTypeModule *);
 
-static void gedit_module_init		(GeditModule *action);
-static void gedit_module_class_init	(GeditModuleClass *class);
+enum {
+	PROP_0,
+	PROP_MODULE_NAME,
+	PROP_PATH
+};
 
-static GObjectClass *parent_class = NULL;
-
-GType
-gedit_module_get_type (void)
-{
-	static GType type = 0;
-
-	if (G_UNLIKELY (type == 0))
-	{
-		static const GTypeInfo type_info =
-		{
-			sizeof (GeditModuleClass),
-			(GBaseInitFunc) NULL,
-			(GBaseFinalizeFunc) NULL,
-			(GClassInitFunc) gedit_module_class_init,
-			(GClassFinalizeFunc) NULL,
-			NULL,
-			sizeof (GeditModule),
-			0, /* n_preallocs */
-			(GInstanceInitFunc) gedit_module_init,
-		};
-
-		type = g_type_register_static (G_TYPE_TYPE_MODULE,
-					       "GeditModule",
-					       &type_info, 0);
-	}
-
-	return type;
-}
+G_DEFINE_TYPE (GeditModule, gedit_module, G_TYPE_TYPE_MODULE);
 
 static gboolean
 gedit_module_load (GTypeModule *gmodule)
 {
 	GeditModule *module = GEDIT_MODULE (gmodule);
 	GeditModuleRegisterFunc register_func;
+	gchar *path;
 
-	gedit_debug_message (DEBUG_PLUGINS, "Loading %s", module->path);
+	gedit_debug_message (DEBUG_PLUGINS, "Loading %s module from %s",
+			     module->module_name, module->path);
 
-	module->library = g_module_open (module->path, 0);
+	path = g_module_build_path (module->path, module->module_name);
+	g_return_val_if_fail (path != NULL, FALSE);
+	gedit_debug_message (DEBUG_PLUGINS, "Module filename: %s", path);
+
+	module->library = g_module_open (path, 0);
+	g_free (path);
 
 	if (module->library == NULL)
 	{
@@ -136,7 +99,7 @@ gedit_module_load (GTypeModule *gmodule)
 
 	if (module->type == 0)
 	{
-		g_warning ("Invalid gedit plugin contained by module %s", module->path);
+		g_warning ("Invalid gedit plugin contained by module %s", module->module_name);
 		return FALSE;
 	}
 
@@ -156,25 +119,10 @@ gedit_module_unload (GTypeModule *gmodule)
 	module->type = 0;
 }
 
-const gchar *
-gedit_module_get_path (GeditModule *module)
+static void
+gedit_module_class_real_garbage_collect (void)
 {
-	g_return_val_if_fail (GEDIT_IS_MODULE (module), NULL);
-
-	return module->path;
-}
-
-GObject *
-gedit_module_new_object (GeditModule *module)
-{
-	gedit_debug_message (DEBUG_PLUGINS, "Creating object of type %s", g_type_name (module->type));
-
-	if (module->type == 0)
-	{
-		return NULL;
-	}
-
-	return g_object_new (module->type, NULL);
+	/* Do nothing */
 }
 
 static void
@@ -191,38 +139,119 @@ gedit_module_finalize (GObject *object)
 	gedit_debug_message (DEBUG_PLUGINS, "GeditModule %p finalising", module);
 
 	g_free (module->path);
+	g_free (module->module_name);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gedit_module_parent_class)->finalize (object);
 }
 
 static void
-gedit_module_class_init (GeditModuleClass *class)
+gedit_module_get_property (GObject    *object,
+			   guint       prop_id,
+			   GValue     *value,
+			   GParamSpec *pspec)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (class);
-	GTypeModuleClass *module_class = G_TYPE_MODULE_CLASS (class);
+	GeditModule *module = GEDIT_MODULE (object);
 
-	parent_class = (GObjectClass *) g_type_class_peek_parent (class);
+	switch (prop_id)
+	{
+		case PROP_MODULE_NAME:
+			g_value_set_string (value, module->module_name);
+			break;
+		case PROP_PATH:
+			g_value_set_string (value, module->path);
+			break;
+		default:
+			g_return_if_reached ();
+	}
+}
 
+static void
+gedit_module_set_property (GObject      *object,
+			   guint         prop_id,
+			   const GValue *value,
+			   GParamSpec   *pspec)
+{
+	GeditModule *module = GEDIT_MODULE (object);
+
+	switch (prop_id)
+	{
+		case PROP_MODULE_NAME:
+			module->module_name = g_value_dup_string (value);
+			g_type_module_set_name (G_TYPE_MODULE (object),
+						module->module_name);
+			break;
+		case PROP_PATH:
+			module->path = g_value_dup_string (value);
+			break;
+		default:
+			g_return_if_reached ();
+	}
+}
+
+static void
+gedit_module_class_init (GeditModuleClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GTypeModuleClass *module_class = G_TYPE_MODULE_CLASS (klass);
+
+	object_class->set_property = gedit_module_set_property;
+	object_class->get_property = gedit_module_get_property;
 	object_class->finalize = gedit_module_finalize;
 
 	module_class->load = gedit_module_load;
 	module_class->unload = gedit_module_unload;
+
+	klass->garbage_collect = gedit_module_class_real_garbage_collect;
+
+	g_object_class_install_property (object_class,
+					 PROP_MODULE_NAME,
+					 g_param_spec_string ("module-name",
+							      "Module Name",
+							      "The module to load for this plugin",
+							      NULL,
+							      G_PARAM_READWRITE |
+							      G_PARAM_CONSTRUCT_ONLY));
+
+	g_object_class_install_property (object_class,
+					 PROP_PATH,
+					 g_param_spec_string ("path",
+							      "Path",
+							      "The path to use when loading this module",
+							      NULL,
+							      G_PARAM_READWRITE |
+							      G_PARAM_CONSTRUCT_ONLY));
 }
 
-GeditModule *
-gedit_module_new (const gchar *path)
+void
+gedit_module_class_garbage_collect (GeditModuleClass *klass)
 {
-	GeditModule *result;
+	g_return_if_fail (GEDIT_IS_MODULE_CLASS (klass));
+	return GEDIT_MODULE_CLASS (klass)->garbage_collect ();
+}
 
-	if (path == NULL || path[0] == '\0')
-	{
-		return NULL;
-	}
+GObject *
+gedit_module_new_object (GeditModule *module)
+{
+	g_return_val_if_fail (module->type != 0, NULL);
 
-	result = g_object_new (GEDIT_TYPE_MODULE, NULL);
+	gedit_debug_message (DEBUG_PLUGINS, "Creating object of type %s",
+			     g_type_name (module->type));
 
-	g_type_module_set_name (G_TYPE_MODULE (result), path);
-	result->path = g_strdup (path);
+	return g_object_new (module->type, NULL);
+}
 
-	return result;
+const gchar *
+gedit_module_get_path (GeditModule *module)
+{
+	g_return_val_if_fail (GEDIT_IS_MODULE (module), NULL);
+
+	return module->path;
+}
+
+const gchar *
+gedit_module_get_module_name (GeditModule *module)
+{
+	g_return_val_if_fail (GEDIT_IS_MODULE (module), NULL);
+
+	return module->module_name;
 }

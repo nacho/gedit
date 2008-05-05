@@ -1,3 +1,19 @@
+2008-05-05  Steve Frécinaux  <frecinaux@multitel.be>
+
+	* gedit/gedit-module.c:
+	* gedit/gedit-module.h:
+	* gedit/gedit-python-module.c:
+	* gedit/gedit-python-module.h:
+	Make GeditPythonModule inherit from GeditModule, to somewhat
+	standardize the loader API.
+
+	* gedit/gedit-plugin-info-priv.h:
+	* gedit/gedit-plugin-info.c:
+	* gedit/gedit-plugin-info.h:
+	* gedit/gedit-plugins-engine.c:
+	Update to fit the above change, and use the directly GType instead of a Loader
+	enum (it allows a few shortcuts in the code).
+
 2008-05-05  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	* gedit/gedit-document.[ch]: added gedit_document_set_uri function which

@@ -42,6 +42,10 @@
 #include "gedit-debug.h"
 #include "gedit-plugin.h"
 
+#ifdef ENABLE_PYTHON
+#include "gedit-python-module.h"
+#endif
+
 void
 _gedit_plugin_info_ref (GeditPluginInfo *info)
 {
@@ -192,16 +196,17 @@ _gedit_plugin_info_new (const gchar *file)
 				     NULL);
 	if (str && strcmp(str, "python") == 0)
 	{
-		info->loader = GEDIT_PLUGIN_LOADER_PY;
 #ifndef ENABLE_PYTHON
 		g_warning ("Cannot load Python plugin '%s' since gedit was not "
 			   "compiled with Python support.", file);
 		goto error;
+#else
+		info->module_type = GEDIT_TYPE_PYTHON_MODULE;
 #endif
 	}
 	else
 	{
-		info->loader = GEDIT_PLUGIN_LOADER_C;
+		info->module_type = GEDIT_TYPE_MODULE;
 	}
 	g_free (str);
 
