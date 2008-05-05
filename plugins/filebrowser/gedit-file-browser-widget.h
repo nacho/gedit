@@ -23,7 +23,6 @@
 #define __GEDIT_FILE_BROWSER_WIDGET_H__
 
 #include <gtk/gtk.h>
-#include <libgnomevfs/gnome-vfs.h>
 #include "gedit-file-browser-store.h"
 #include "gedit-file-bookmarks-store.h"
 #include "gedit-file-browser-view.h"
@@ -68,7 +67,6 @@ struct _GeditFileBrowserWidgetClass
 	                              GeditFileBrowserStore * model,
 	                              GList *list);
 	gboolean (*confirm_no_trash) (GeditFileBrowserWidget * widget,
-                                      GeditFileBrowserStore * model,
 	                              GList *list);
 };
 

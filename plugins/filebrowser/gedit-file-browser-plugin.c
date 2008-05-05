@@ -94,8 +94,7 @@ static gboolean on_confirm_delete_cb     (GeditFileBrowserWidget * widget,
                                           GList * rows,
                                           GeditWindow * window);
 static gboolean on_confirm_no_trash_cb   (GeditFileBrowserWidget * widget,
-                                          GeditFileBrowserStore * store,
-                                          GList * rows,
+                                          GList * files,
                                           GeditWindow * window);
 static void on_end_loading_cb            (GeditFileBrowserStore      * store,
                                           GtkTreeIter                * iter,
@@ -159,7 +158,7 @@ restore_default_location (GeditFileBrowserPlugin * plugin,
 	gboolean bookmarks;
 	gboolean remote;
 	GConfClient * client;
-	GnomeVFSURI * uri = NULL;
+	GFile * file = NULL;
 
 	client = gconf_client_get_default ();
 
@@ -188,9 +187,9 @@ restore_default_location (GeditFileBrowserPlugin * plugin,
 	                                NULL);
 
 	if (root != NULL && *root != '\0') {
-		uri = gnome_vfs_uri_new (root);
+		file = g_file_new_for_uri (root);
 
-		if (uri == NULL || (!remote && !gedit_utils_uri_has_file_scheme (root))) {
+		if (!remote && !g_file_is_native (file)) {
 		} else if (virtual_root != NULL && virtual_root != '\0') {
 			prepare_auto_root(data);
 			gedit_file_browser_widget_set_root_and_virtual_root (data->tree_widget, 
@@ -203,9 +202,6 @@ restore_default_location (GeditFileBrowserPlugin * plugin,
 			                                    TRUE);
 		}
 	}
-
-	if (uri)
-		gnome_vfs_uri_unref (uri);
 
 	g_object_unref (client);
 	g_free (root);
@@ -412,9 +408,10 @@ static void
 set_root_from_doc (GeditFileBrowserPluginData * data,
                    GeditDocument * doc)
 {
-	gchar *uri;
-	gchar *root;
-	GnomeVFSURI *guri;
+	gchar * uri;
+	gchar * root;
+	GFile * parent;
+	GFile * file;
 
 	if (doc == NULL)
 		return;
@@ -423,28 +420,25 @@ set_root_from_doc (GeditFileBrowserPluginData * data,
 	if (uri == NULL)
 		return;
 
-	guri = gnome_vfs_uri_new (uri);
+	file = g_file_new_for_uri (uri);
 
-	if (guri == NULL) {
+	if (file == NULL) {
 		g_free (uri);
 		return;
 	}
 
-	if (gnome_vfs_uri_has_parent (guri)) {
-		GnomeVFSURI *parent;
-
-		parent = gnome_vfs_uri_get_parent (guri);
-		gnome_vfs_uri_unref (guri);
-		guri = parent;
+	if ((parent = g_file_get_parent (file))) {
+		g_object_unref (file);
+		file = parent;
 	}
 
-	root = gnome_vfs_uri_to_string (guri, GNOME_VFS_URI_HIDE_NONE);
+	root = g_file_get_uri (file);
 
 	gedit_file_browser_widget_set_root (data->tree_widget,
 		                            root,
 		                            TRUE);
 
-	gnome_vfs_uri_unref (guri);
+	g_object_unref (file);
 	g_free (root);
 	g_free (uri);
 }
@@ -493,6 +487,7 @@ on_action_open_terminal (GtkAction * action,
 	gchar * wd = NULL;
 	gchar * local;
 	gchar * argv[2];
+	GFile * file;
 
 	GtkTreeIter iter;
 	GeditFileBrowserStore * store;
@@ -514,7 +509,10 @@ on_action_open_terminal (GtkAction * action,
 		return;
 
 	terminal = get_terminal ();
-	local = gnome_vfs_get_local_path_from_uri (wd);
+	
+	file = g_file_new_for_uri (wd);
+	local = g_file_get_path (file);
+	g_object_unref (file);
 
 	argv[0] = terminal;
 	argv[1] = NULL;
@@ -537,13 +535,12 @@ static void
 on_selection_changed_cb (GtkTreeSelection *selection,
 			 GeditWindow      *window)
 {
-	GeditFileBrowserPluginData *data;
-	GtkTreeView *tree_view;
-	GtkTreeModel *model;
+	GeditFileBrowserPluginData * data;
+	GtkTreeView * tree_view;
+	GtkTreeModel * model;
 	GtkTreeIter iter;
 	gboolean sensitive;
-	GnomeVFSURI *guri;
-	gchar *uri;
+	gchar * uri;
 
 	data = get_plugin_data (window);
 	
@@ -565,13 +562,7 @@ on_selection_changed_cb (GtkTreeSelection *selection,
 				    GEDIT_FILE_BROWSER_STORE_COLUMN_URI, 
 				    &uri, -1);
 
-		guri = gnome_vfs_uri_new (uri);
-
-		sensitive = guri != NULL && gedit_utils_uri_has_file_scheme (uri);
-	
-		if (guri)
-			gnome_vfs_uri_unref (guri);
-
+		sensitive = gedit_utils_uri_has_file_scheme (uri);
 		g_free (uri);
 	}
 
@@ -1108,8 +1099,7 @@ get_filename_from_path (GtkTreeModel *model, GtkTreePath *path)
 
 static gboolean
 on_confirm_no_trash_cb (GeditFileBrowserWidget * widget,
-                        GeditFileBrowserStore * store,
-                        GList *paths,
+                        GList * files,
                         GeditWindow * window)
 {
 	gchar *normal;
@@ -1122,8 +1112,8 @@ on_confirm_no_trash_cb (GeditFileBrowserWidget * widget,
 
 	message = _("Cannot move file to trash, do you\nwant to delete permanently?");
 
-	if (paths->next == NULL) {
-		normal = get_filename_from_path (GTK_TREE_MODEL (store), (GtkTreePath *)(paths->data));
+	if (files->next == NULL) {
+		normal = gedit_file_browser_utils_file_basename (G_FILE (files->data));
 	    	secondary = g_strdup_printf (_("The file \"%s\" cannot be moved to the trash."), normal);
 		g_free (normal);
 	} else {

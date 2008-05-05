@@ -23,7 +23,6 @@
 #define __GEDIT_FILE_BROWSER_STORE_H__
 
 #include <gtk/gtk.h>
-#include <libgnomevfs/gnome-vfs.h>
 
 G_BEGIN_DECLS
 #define GEDIT_TYPE_FILE_BROWSER_STORE			(gedit_file_browser_store_get_type ())
@@ -104,6 +103,8 @@ struct _GeditFileBrowserStoreClass {
 	void (*error)                (GeditFileBrowserStore * model, 
 	                              guint code,
 		                      gchar * message);
+	gboolean (*no_trash)	     (GeditFileBrowserStore * model,
+				      GList * files);
 };
 
 GType gedit_file_browser_store_get_type               (void) G_GNUC_CONST;

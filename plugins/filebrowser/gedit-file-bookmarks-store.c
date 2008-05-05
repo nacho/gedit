@@ -21,7 +21,7 @@
 
 #include <string.h>
 #include <glib/gi18n.h>
-#include <libgnomevfs/gnome-vfs.h>
+#include <gio/gio.h>
 #include <gedit/gedit-utils.h>
 #include <gedit/gedit-plugin.h>
 
@@ -34,24 +34,23 @@
 
 struct _GeditFileBookmarksStorePrivate 
 {
-	GnomeVFSVolumeMonitor *volume_monitor;
-	GnomeVFSMonitorHandle *bookmarks_monitor;
+	GVolumeMonitor * volume_monitor;
+	GFileMonitor * bookmarks_monitor;
 };
 
 static void remove_node               (GtkTreeModel * model, 
-                                       GtkTreeIter * iter,
-                                       gboolean fromtree);
+                                       GtkTreeIter * iter);
 
-static void on_volume_mounted         (GnomeVFSVolumeMonitor * monitor,
-                                       GnomeVFSVolume * volume,
+static void on_mount_added            (GVolumeMonitor * monitor,
+                                       GMount * mount,
                                        GeditFileBookmarksStore * model);
-static void on_volume_unmounted       (GnomeVFSVolumeMonitor * monitor,
-                                       GnomeVFSVolume * volume,
+static void on_mount_removed          (GVolumeMonitor * monitor,
+                                       GMount * mount,
                                        GeditFileBookmarksStore * model);
-static void on_bookmarks_file_changed (GnomeVFSMonitorHandle * handle,
-				       gchar const *monitor_uri,
-				       gchar const *info_uri,
-				       GnomeVFSMonitorEventType event_type,
+static void on_bookmarks_file_changed (GFileMonitor * monitor,
+				       GFile * file,
+				       GFile * other_file,
+				       GFileMonitorEvent event_type,
 				       GeditFileBookmarksStore * model);
 static gboolean find_with_flags       (GtkTreeModel * model, 
                                        GtkTreeIter * iter,
@@ -68,36 +67,24 @@ gedit_file_bookmarks_store_dispose (GObject * object)
 
 	if (obj->priv->volume_monitor != NULL) {
 		g_signal_handlers_disconnect_by_func (obj->priv->volume_monitor,
-						      on_volume_mounted,
+						      on_mount_added,
 						      obj);
 		g_signal_handlers_disconnect_by_func (obj->priv->volume_monitor,
-						      on_volume_unmounted,
+						      on_mount_removed,
 						      obj);
-		obj->priv->volume_monitor = NULL;
+		g_object_unref (obj->priv->volume_monitor);
 	}
 
 	if (obj->priv->bookmarks_monitor != NULL) {
-		gnome_vfs_monitor_cancel (obj->priv->bookmarks_monitor);
+		g_object_unref (obj->priv->bookmarks_monitor);
 	}
 
 	G_OBJECT_CLASS (gedit_file_bookmarks_store_parent_class)->dispose (object);
 }
 
-static gboolean
-foreach_remove_node (GtkTreeModel * model, GtkTreePath * path,
-		     GtkTreeIter * iter, gpointer user_data)
-{
-	remove_node (model, iter, FALSE);
-	return FALSE;
-}
-
 static void
 gedit_file_bookmarks_store_finalize (GObject * object)
 {
-	GeditFileBookmarksStore *obj = GEDIT_FILE_BOOKMARKS_STORE (object);
-
-	gtk_tree_model_foreach (GTK_TREE_MODEL (obj), foreach_remove_node, NULL);
-
 	G_OBJECT_CLASS (gedit_file_bookmarks_store_parent_class)->finalize (object);
 }
 
@@ -119,13 +106,6 @@ gedit_file_bookmarks_store_init (GeditFileBookmarksStore * obj)
 }
 
 /* Private */
-static GdkPixbuf *
-pixbuf_from_stock (const gchar * stock)
-{
-	return gedit_file_browser_utils_pixbuf_from_theme(stock, 
-	                                                  GTK_ICON_SIZE_MENU);
-}
-
 static void
 add_node (GeditFileBookmarksStore * model, GdkPixbuf * pixbuf,
 	  gchar const *name, gpointer obj, guint flags, GtkTreeIter * iter)
@@ -146,110 +126,48 @@ add_node (GeditFileBookmarksStore * model, GdkPixbuf * pixbuf,
 }
 
 static gboolean
-add_uri (GeditFileBookmarksStore * model, const gchar * uri,
-	 gchar * name, guint flags, GtkTreeIter * iter)
+add_file (GeditFileBookmarksStore * model, GFile * file,
+	  gchar const * name, guint flags, GtkTreeIter * iter)
 {
-	GnomeVFSURI *vfs_uri;
-	GdkPixbuf *pixbuf = NULL;
-	gchar *mime;
-	gchar *path;
-	gchar *tmp;
-	gboolean free_name = FALSE;
-	gboolean local;
+	GdkPixbuf * pixbuf = NULL;
+	gboolean native;
+	gchar * newname;
 
-	vfs_uri = gnome_vfs_uri_new (uri);
-	if (vfs_uri == NULL)
-		return FALSE;
+	native = g_file_is_native (file);
 
-	path = gnome_vfs_uri_to_string (vfs_uri, GNOME_VFS_URI_HIDE_NONE);
-	local = gedit_utils_uri_has_file_scheme (path);
-
-	if (local && !gnome_vfs_uri_exists (vfs_uri)) {
-		gnome_vfs_uri_unref (vfs_uri);
-		g_free (path);
+	if (native && !g_file_query_exists (file, NULL)) {
 		return FALSE;
 	}
 
 	if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_HOME)
-		pixbuf = pixbuf_from_stock ("gnome-fs-home");
+		pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("gnome-fs-home", GTK_ICON_SIZE_MENU);
 	else if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_DESKTOP)
-		pixbuf = pixbuf_from_stock ("gnome-fs-desktop");
+		pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("gnome-fs-desktop", GTK_ICON_SIZE_MENU);
+	else if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_ROOT)
+		pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("drive-harddisk", GTK_ICON_SIZE_MENU);
 
 	if (pixbuf == NULL) {
-		if (local)
-			mime = gnome_vfs_get_mime_type (path);
-		else
-			mime = g_strdup ("x-directory/normal");
-
-		pixbuf = gedit_file_browser_utils_pixbuf_from_mime_type (path, 
-		                                                         mime, 
-		                                                         GTK_ICON_SIZE_MENU);
-		g_free (mime);
+		pixbuf = gedit_file_browser_utils_pixbuf_from_file (file, GTK_ICON_SIZE_MENU);
 	}
-
-	g_free (path);
 
 	if (name == NULL) {
-		tmp = gedit_file_browser_utils_uri_basename (gnome_vfs_uri_get_path (vfs_uri));
-		
-		if (local)
-			name = tmp;
-		else {
-			/* Translators: this is used in "file on host", e.g. "/foo/bar on ftp.baz.org" */
-			name = g_strconcat(tmp, " ", _("on"), " ", gnome_vfs_uri_get_host_name (vfs_uri), NULL);
-			g_free (tmp);
-		}
-		
-		free_name = TRUE;
+		newname = gedit_file_browser_utils_file_basename (file);
+	} else {
+		newname = g_strdup (name);
 	}
 
-	add_node (model, pixbuf, name, vfs_uri, flags, iter);
+	add_node (model, pixbuf, newname, file, flags, iter);
 
 	if (pixbuf)
 		g_object_unref (pixbuf);
 
-	if (free_name)
-		g_free (name);
+	g_free (newname);
 
 	return TRUE;
 }
 
 static void
-init_special_directories (GeditFileBookmarksStore * model)
-{
-	gchar const *path;
-	gchar *uri;
-
-	path = g_get_home_dir ();
-	if (path != NULL)
-	{
-		uri = gnome_vfs_get_uri_from_local_path (path);
-		add_uri (model, uri, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_HOME |
-			 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
-		g_free (uri);
-	}
-
-	path = g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP);
-	if (path != NULL)
-	{
-		uri = gnome_vfs_get_uri_from_local_path (path);
-		add_uri (model, uri, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_DESKTOP |
-			 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
-		g_free (uri);
-	}
-
-	path = g_get_user_special_dir (G_USER_DIRECTORY_DOCUMENTS);
-	if (path != NULL)
-	{
-		uri = gnome_vfs_get_uri_from_local_path (path);
-		add_uri (model, uri, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_DOCUMENTS |
-			 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
-		g_free (uri);
-	}
-}
-
-static void
-check_volume_separator (GeditFileBookmarksStore * model, guint flags,
+check_mount_separator (GeditFileBookmarksStore * model, guint flags,
 			gboolean added)
 {
 	GtkTreeIter iter;
@@ -266,116 +184,161 @@ check_volume_separator (GeditFileBookmarksStore * model, guint flags,
 			  flags | GEDIT_FILE_BOOKMARKS_STORE_IS_SEPARATOR,
 			  NULL);
 	} else if (!added && found) {
-		remove_node (GTK_TREE_MODEL (model), &iter, TRUE);
+		remove_node (GTK_TREE_MODEL (model), &iter);
 	}
 }
 
 static void
-add_volume (GeditFileBookmarksStore * model, GnomeVFSVolume * volume,
-	    const gchar * name, guint flags, GtkTreeIter * iter)
+init_special_directories (GeditFileBookmarksStore * model)
 {
-	GdkPixbuf *pixbuf;
-	gchar *icon;
+	gchar const *path;
+	GFile * file;
 
-	icon = gnome_vfs_volume_get_icon (volume);
-	pixbuf = pixbuf_from_stock (icon);
-	g_free (icon);
+	path = g_get_home_dir ();
+	if (path != NULL)
+	{
+		file = g_file_new_for_path (path);
+		add_file (model, file, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_HOME |
+			 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
+		g_object_unref (file);
+	}
 
-	add_node (model, pixbuf, name, volume,
-		  flags | GEDIT_FILE_BOOKMARKS_STORE_IS_VOLUME, iter);
+	path = g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP);
+	if (path != NULL)
+	{
+		file = g_file_new_for_path (path);
+		add_file (model, file, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_DESKTOP |
+			  GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
+		g_object_unref (file);
+	}
+
+	path = g_get_user_special_dir (G_USER_DIRECTORY_DOCUMENTS);
+	if (path != NULL)
+	{
+		file = g_file_new_for_path (path);
+		add_file (model, file, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_DOCUMENTS |
+			 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
+		g_object_unref (file);
+	}
+	
+	file = g_file_new_for_uri ("file:///");
+	add_file (model, file, _("File System"), GEDIT_FILE_BOOKMARKS_STORE_IS_ROOT, NULL);
+	g_object_unref (file);
+	
+	check_mount_separator (model, GEDIT_FILE_BOOKMARKS_STORE_IS_ROOT, TRUE);
+}
+
+static void
+add_mount (GeditFileBookmarksStore * model, GMount * mount,
+	   const gchar * name, guint flags, GtkTreeIter * iter)
+{
+	GdkPixbuf *pixbuf = NULL;
+	GIcon *icon;
+
+	icon = g_mount_get_icon (mount);
+	
+	if (icon) {
+		pixbuf = gedit_file_browser_utils_pixbuf_from_icon (icon, GTK_ICON_SIZE_MENU);
+		g_object_unref (icon);
+	}
+
+	add_node (model, pixbuf, name, mount,
+		  flags | GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT, iter);
 
 	if (pixbuf)
 		g_object_unref (pixbuf);
 
-	flags = flags & (GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE |
-			 GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT |
-			 GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_MOUNT);
-
-	if (flags)
-		check_volume_separator (model, flags, TRUE);
-}
-
-static gboolean
-process_volume (GeditFileBookmarksStore * model, GnomeVFSVolume * volume,
-		gboolean * root)
-{
-	GnomeVFSVolumeType vtype;
-	guint flags;
-
-	vtype = gnome_vfs_volume_get_volume_type (volume);
-
-	if (gnome_vfs_volume_get_device_type (volume) ==
-	    GNOME_VFS_DEVICE_TYPE_AUDIO_CD)
-		return FALSE;
-
-	if (gnome_vfs_volume_is_user_visible (volume)) {
-		gchar *name;
-
-		if (vtype == GNOME_VFS_VOLUME_TYPE_VFS_MOUNT)
-			flags = GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE;
-		else if (vtype == GNOME_VFS_VOLUME_TYPE_MOUNTPOINT)
-			flags = GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT;
-		else
-			flags = GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_MOUNT;
-
-		name = gnome_vfs_volume_get_display_name (volume);
-
-		add_volume (model, volume, name, flags, NULL);
-
-		g_free (name);
-	} else if (root && !*root) {
-		gchar *uri;
-
-		uri = gnome_vfs_volume_get_activation_uri (volume);
-
-		if (strcmp (uri, "file:///") == 0) {
-			*root = TRUE;
-
-			add_volume (model, volume, _("File System"),
-				    GEDIT_FILE_BOOKMARKS_STORE_IS_ROOT |
-				    GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE,
-				    NULL);
-		}
-
-		g_free (uri);
-	} else {
-		return FALSE;
-	}
-
-	return TRUE;
+	check_mount_separator (model, GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT, TRUE);
 }
 
 static void
-init_volumes (GeditFileBookmarksStore * model)
+process_mount (GeditFileBookmarksStore * model, GMount * mount,
+		gboolean * isroot)
 {
-	GList *volumes;
-	GList *item;
-	GnomeVFSVolume *volume;
+	guint flags = GEDIT_FILE_BOOKMARKS_STORE_NONE;
+	GFile * root;
+	GFileInfo * info;
+	gchar * name;
+	gboolean local;
+
+	root = g_mount_get_root (mount);
+	
+	if (!root)
+		return;
+
+	info = g_file_query_info (root, G_FILE_ATTRIBUTE_ACCESS_CAN_READ, G_FILE_QUERY_INFO_NONE, NULL, NULL);
+
+	/* Is this mount actually readable by the user */
+	if (info && g_file_info_get_attribute_boolean (info, G_FILE_ATTRIBUTE_ACCESS_CAN_READ)) {
+		/* Here we set up the flags for the mount */
+		local = g_file_is_native (root);
+		
+		if (local) {
+			flags |= GEDIT_FILE_BOOKMARKS_STORE_IS_LOCAL_MOUNT;
+		} else {
+			flags |= GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_MOUNT;
+		}
+		
+		name = g_mount_get_name (mount);
+		add_mount (model, mount, name, flags, NULL);
+		g_free (name);
+	}
+	
+	if (info)
+		g_object_unref (info);
+	
+	g_object_unref (root);
+}
+
+static void
+init_mounts (GeditFileBookmarksStore * model)
+{
+	GList * mounts;
+	GList * item;
 	gboolean root = FALSE;
 
 	if (model->priv->volume_monitor == NULL) {
-		model->priv->volume_monitor =
-		    gnome_vfs_get_volume_monitor ();
+		model->priv->volume_monitor = g_volume_monitor_get ();
 
 		/* Connect signals */
 		g_signal_connect (model->priv->volume_monitor,
-				  "volume-mounted",
-				  G_CALLBACK (on_volume_mounted), model);
+				  "mount-added",
+				  G_CALLBACK (on_mount_added), model);
 		g_signal_connect (model->priv->volume_monitor,
-				  "volume-unmounted",
-				  G_CALLBACK (on_volume_unmounted), model);
+				  "mount-removed",
+				  G_CALLBACK (on_mount_removed), model);
 	}
 
-	volumes =
-	    gnome_vfs_volume_monitor_get_mounted_volumes (model->priv->
-							  volume_monitor);
+	mounts = g_volume_monitor_get_mounts (model->priv->volume_monitor);
 
-	for (item = volumes; item; item = item->next) {
-		volume = GNOME_VFS_VOLUME (item->data);
-		process_volume (model, volume, &root);
+	for (item = mounts; item; item = item->next)
+		process_mount (model, G_MOUNT(item->data), &root);
+
+	g_list_foreach (mounts, (GFunc)g_object_unref, NULL);
+	g_list_free (mounts);
+}
+
+static gboolean
+add_bookmark (GeditFileBookmarksStore * model, 
+	      gchar const * name,
+	      gchar const * uri)
+{
+	GFile * file;
+	gboolean ret;
+	guint flags = GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK;
+	
+	file = g_file_new_for_uri (uri);
+	
+	if (g_file_is_native (file)) {
+		flags |= GEDIT_FILE_BOOKMARKS_STORE_IS_LOCAL_BOOKMARK;
+	} else {
+		flags |= GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_BOOKMARK;
 	}
 
-	g_list_free (volumes);
+	ret = add_file (model, file, name, flags, NULL);
+	g_object_unref (file);
+	
+	return ret;
 }
 
 static void
@@ -387,6 +350,7 @@ init_bookmarks (GeditFileBookmarksStore * model)
 	gchar **lines;
 	gchar **line;
 	gboolean added = FALSE;
+	GFile * file;
 
 	/* Read the bookmarks file */
 	bookmarks = g_build_filename (g_get_home_dir (),
@@ -401,7 +365,7 @@ init_bookmarks (GeditFileBookmarksStore * model)
 				gchar *pos;
 				gchar *name;
 
-				/* Check, is this really utf8? */
+				/* CHECK: is this really utf8? */
 				pos = g_utf8_strchr (*line, -1, ' ');
 
 				if (pos != NULL) {
@@ -414,11 +378,7 @@ init_bookmarks (GeditFileBookmarksStore * model)
 				/* the bookmarks file should contain valid
 				 * URIs, but paranoia is good */
 				if (gedit_utils_is_valid_uri (*line)) {
-					added = add_uri (model,
-							 *line,
-							 name,
-							 GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK,
-							 NULL);
+					added |= add_bookmark (model, name, *line);
 				}
 			}
 		}
@@ -428,11 +388,12 @@ init_bookmarks (GeditFileBookmarksStore * model)
 
 		/* Add a watch */
 		if (model->priv->bookmarks_monitor == NULL) {
-			gnome_vfs_monitor_add (&model->priv->bookmarks_monitor,
-					       bookmarks,
-					       GNOME_VFS_MONITOR_FILE,
-					       (GnomeVFSMonitorCallback)on_bookmarks_file_changed, 
-					       model);
+			file = g_file_new_for_path (bookmarks);
+			model->priv->bookmarks_monitor = g_file_monitor_file (file, G_FILE_MONITOR_NONE, NULL, NULL);
+			g_signal_connect (model->priv->bookmarks_monitor, 
+					  "changed", 
+					  (GCallback)on_bookmarks_file_changed, 
+					  model);
 		}
 	} else {
 		/* The bookmarks file doesn't exist (which is perfectly fine) */
@@ -453,11 +414,10 @@ static gint flags_order[] = {
 	GEDIT_FILE_BOOKMARKS_STORE_IS_HOME,
 	GEDIT_FILE_BOOKMARKS_STORE_IS_DESKTOP,
 	GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE,
 	GEDIT_FILE_BOOKMARKS_STORE_IS_ROOT,
 	GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_MOUNT,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_VOLUME,
+	GEDIT_FILE_BOOKMARKS_STORE_IS_LOCAL_MOUNT,
+	GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK,
 	-1
 };
 
@@ -565,8 +525,9 @@ find_with_flags (GtkTreeModel * model, GtkTreeIter * iter, gpointer obj,
 {
 	GtkTreeIter child;
 	guint childflags = 0;
-	gpointer childobj;
-
+ 	GObject * childobj;
+ 	gboolean fequal;
+	
 	if (!gtk_tree_model_get_iter_first (model, &child))
 		return FALSE;
 
@@ -576,8 +537,13 @@ find_with_flags (GtkTreeModel * model, GtkTreeIter * iter, gpointer obj,
 				    &childobj,
 				    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_FLAGS,
 				    &childflags, -1);
-
-		if ((obj == NULL || childobj == obj) &&
+		
+		fequal = (obj == childobj);
+		
+		if (childobj)
+			g_object_unref (childobj);
+		 
+		if ((obj == NULL || fequal) &&
 		    (childflags & flags) == flags
 		    && !(childflags & notflags)) {
 			*iter = child;
@@ -589,38 +555,23 @@ find_with_flags (GtkTreeModel * model, GtkTreeIter * iter, gpointer obj,
 }
 
 static void
-remove_node (GtkTreeModel * model, GtkTreeIter * iter, gboolean fromtree)
+remove_node (GtkTreeModel * model, GtkTreeIter * iter)
 {
-	gpointer obj;
 	guint flags;
 
 	gtk_tree_model_get (model, iter,
-			    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_FLAGS,
-			    &flags,
-			    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_OBJECT, &obj,
+			    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_FLAGS, &flags,
 			    -1);
 
 	if (!(flags & GEDIT_FILE_BOOKMARKS_STORE_IS_SEPARATOR)) {
-		if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_VOLUME) {
-			gnome_vfs_volume_unref (GNOME_VFS_VOLUME (obj));
-
-			if (fromtree)
-				check_volume_separator
-				    (GEDIT_FILE_BOOKMARKS_STORE (model),
-				     flags &
-				     (GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE |
-				      GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT),
-				     FALSE);
-		} else if ((flags &
-			   GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR) ||
-			   (flags &
-			   GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK)) {
-			gnome_vfs_uri_unref ((GnomeVFSURI *) obj);
+		if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT) {
+			check_mount_separator (GEDIT_FILE_BOOKMARKS_STORE (model),
+			     		       flags & GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT,
+					       FALSE);
 		}
 	}
 
-	if (fromtree)
-		gtk_tree_store_remove (GTK_TREE_STORE (model), iter);
+	gtk_tree_store_remove (GTK_TREE_STORE (model), iter);
 }
 
 static void
@@ -631,7 +582,7 @@ remove_bookmarks (GeditFileBookmarksStore * model)
 	while (find_with_flags (GTK_TREE_MODEL (model), &iter, NULL,
 				GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK,
 				0)) {
-		remove_node (GTK_TREE_MODEL (model), &iter, TRUE);
+		remove_node (GTK_TREE_MODEL (model), &iter);
 	}
 }
 
@@ -639,7 +590,7 @@ static void
 initialize_fill (GeditFileBookmarksStore * model)
 {
 	init_special_directories (model);
-	init_volumes (model);
+	init_mounts (model);
 	init_bookmarks (model);
 }
 
@@ -651,7 +602,7 @@ gedit_file_bookmarks_store_new ()
 	GType column_types[] = {
 		GDK_TYPE_PIXBUF,
 		G_TYPE_STRING,
-		G_TYPE_POINTER,
+		G_TYPE_OBJECT,
 		G_TYPE_UINT
 	};
 
@@ -676,9 +627,11 @@ gchar *
 gedit_file_bookmarks_store_get_uri (GeditFileBookmarksStore * model,
 				    GtkTreeIter * iter)
 {
-	gpointer obj;
+	GObject * obj;
+	GFile * file = NULL;
 	guint flags;
-
+	gchar * ret = NULL;
+	
 	g_return_val_if_fail (GEDIT_IS_FILE_BOOKMARKS_STORE (model), NULL);
 	g_return_val_if_fail (iter != NULL, NULL);
 
@@ -691,73 +644,70 @@ gedit_file_bookmarks_store_get_uri (GeditFileBookmarksStore * model,
 	if (obj == NULL)
 		return NULL;
 
-	if (!(flags & GEDIT_FILE_BOOKMARKS_STORE_IS_SEPARATOR)) {
-		if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_VOLUME) {
-			return
-			    gnome_vfs_volume_get_activation_uri
-			    (GNOME_VFS_VOLUME (obj));
-		} else
-		    if ((flags & GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR)
-			|| (flags &
-			    GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK)) {
-			return gnome_vfs_uri_to_string ((GnomeVFSURI *)
-							obj,
-							GNOME_VFS_URI_HIDE_NONE);
-		}
+	if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT) {
+		file = g_mount_get_root (G_MOUNT (obj));
+	} else {
+		file = g_object_ref (obj);
 	}
-
-	return NULL;
+	
+	g_object_unref (obj);
+	
+	if (file) {
+		ret = g_file_get_uri (file);
+		g_object_unref (file);
+	}
+	
+	return ret;
 }
 
 void
 gedit_file_bookmarks_store_refresh (GeditFileBookmarksStore * model)
 {
-	gtk_tree_model_foreach (GTK_TREE_MODEL (model), foreach_remove_node,
-				NULL);
-
 	gtk_tree_store_clear (GTK_TREE_STORE (model));
 	initialize_fill (model);
 }
 
 /* Signal handlers */
 static void
-on_volume_mounted (GnomeVFSVolumeMonitor * monitor,
-		   GnomeVFSVolume * volume,
-		   GeditFileBookmarksStore * model)
+on_mount_added (GVolumeMonitor * monitor,
+		GMount * mount,
+		GeditFileBookmarksStore * model)
 {
-	if (process_volume (model, volume, NULL))
-		gnome_vfs_volume_ref (volume);
+	process_mount (model, mount, NULL);
 }
 
 static void
-on_volume_unmounted (GnomeVFSVolumeMonitor * monitor,
-		     GnomeVFSVolume * volume,
-		     GeditFileBookmarksStore * model)
+on_mount_removed (GVolumeMonitor * monitor,
+		  GMount * mount,
+		  GeditFileBookmarksStore * model)
 {
 	GtkTreeIter iter;
 
-	/* Find the volume and remove it */
-	if (find_with_flags (GTK_TREE_MODEL (model), &iter, volume,
-			     GEDIT_FILE_BOOKMARKS_STORE_IS_VOLUME,
+	/* Find the mount and remove it */
+	if (find_with_flags (GTK_TREE_MODEL (model), &iter, mount,
+			     GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT,
 			     GEDIT_FILE_BOOKMARKS_STORE_IS_SEPARATOR))
-		remove_node (GTK_TREE_MODEL (model), &iter, TRUE);
+		remove_node (GTK_TREE_MODEL (model), &iter);
 }
 
 static void
-on_bookmarks_file_changed (GnomeVFSMonitorHandle * handle,
-			   gchar const *monitor_uri, gchar const *info_uri,
-			   GnomeVFSMonitorEventType event_type,
+on_bookmarks_file_changed (GFileMonitor * monitor,
+			   GFile * file,
+			   GFile * other_file,
+			   GFileMonitorEvent event_type,
 			   GeditFileBookmarksStore * model)
 {
 	switch (event_type) {
-	case GNOME_VFS_MONITOR_EVENT_CHANGED:
-	case GNOME_VFS_MONITOR_EVENT_CREATED:
+	case G_FILE_MONITOR_EVENT_CHANGED:
+	case G_FILE_MONITOR_EVENT_CREATED:
+		/* Re-initialize bookmarks */
 		remove_bookmarks (model);
 		init_bookmarks (model);
 		break;
-	case GNOME_VFS_MONITOR_EVENT_DELETED:
+	case G_FILE_MONITOR_EVENT_DELETED: // FIXME: shouldn't we also monitor the directory?
+		/* Remove bookmarks */
 		remove_bookmarks (model);
-		gnome_vfs_monitor_cancel (handle);
+		g_object_unref (monitor);
 		model->priv->bookmarks_monitor = NULL;
 		break;
 	default:

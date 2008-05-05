@@ -48,18 +48,19 @@ enum
 
 enum 
 {
-	GEDIT_FILE_BOOKMARKS_STORE_NONE            = 0,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_SEPARATOR    = 1 << 0,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR  = 1 << 1,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_HOME         = 1 << 2,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_DESKTOP      = 1 << 3,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_DOCUMENTS    = 1 << 4,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_VOLUME       = 1 << 5,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_ROOT         = 1 << 6,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE        = 1 << 7,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT        = 1 << 8,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_MOUNT = 1 << 9,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK     = 1 << 10
+	GEDIT_FILE_BOOKMARKS_STORE_NONE            	= 0,
+	GEDIT_FILE_BOOKMARKS_STORE_IS_SEPARATOR   	= 1 << 0,  /* Separator item */
+	GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR 	= 1 << 1,  /* Special user dir */
+	GEDIT_FILE_BOOKMARKS_STORE_IS_HOME         	= 1 << 2,  /* The special Home user directory */
+	GEDIT_FILE_BOOKMARKS_STORE_IS_DESKTOP      	= 1 << 3,  /* The special Desktop user directory */
+	GEDIT_FILE_BOOKMARKS_STORE_IS_DOCUMENTS    	= 1 << 4,  /* The special Documents user directory */
+	GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT        	= 1 << 5,  /* A mount point on file:// */
+	GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_MOUNT 	= 1 << 6,  /* A remote mount point (ssh://) */
+	GEDIT_FILE_BOOKMARKS_STORE_IS_LOCAL_MOUNT 	= 1 << 7,  /* A remote mount point (ssh://) */
+	GEDIT_FILE_BOOKMARKS_STORE_IS_ROOT         	= 1 << 8,  /* The root file system (file:///) */
+	GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK     	= 1 << 9,  /* A gtk bookmark */
+	GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_BOOKMARK	= 1 << 10, /* A remote gtk bookmark */
+	GEDIT_FILE_BOOKMARKS_STORE_IS_LOCAL_BOOKMARK	= 1 << 11  /* A local gtk bookmark */
 };
 
 struct _GeditFileBookmarksStore 

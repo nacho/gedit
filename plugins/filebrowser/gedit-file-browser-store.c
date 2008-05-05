@@ -25,6 +25,7 @@
 
 #include <string.h>
 #include <glib/gi18n-lib.h>
+#include <gio/gio.h>
 #include <gedit/gedit-plugin.h>
 #include <gedit/gedit-utils.h>
 
@@ -45,25 +46,33 @@
 
 #define FILE_BROWSER_NODE_DIR(node)		((FileBrowserNodeDir *)(node))
 
+#define DIRECTORY_LOAD_ITEMS_PER_CALLBACK 100
+#define STANDARD_ATTRIBUTE_TYPES G_FILE_ATTRIBUTE_STANDARD_TYPE "," \
+				 G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN "," \
+			 	 G_FILE_ATTRIBUTE_STANDARD_IS_BACKUP "," \
+				 G_FILE_ATTRIBUTE_STANDARD_NAME "," \
+				 G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE
+
 typedef struct _FileBrowserNode    FileBrowserNode;
 typedef struct _FileBrowserNodeDir FileBrowserNodeDir;
+typedef struct _AsyncData	   AsyncData;
 
 typedef gint (*SortFunc) (FileBrowserNode * node1,
 			  FileBrowserNode * node2);
 
-typedef struct 
+struct _AsyncData
 {
-	GnomeVFSAsyncHandle *handle;
-	GeditFileBrowserStore *model;
-	gpointer user_data;
-
-	gboolean alive;
-} AsyncHandle;
+	GeditFileBrowserStore * model;
+	GCancellable * cancellable;
+	gboolean trash;
+	GList * files;
+	GList * iter;
+	gboolean removed;
+};
 
 struct _FileBrowserNode 
 {
-	GnomeVFSURI *uri;
-	gchar *mime_type;
+	GFile *file;
 	guint flags;
 	gchar *name;
 
@@ -80,8 +89,8 @@ struct _FileBrowserNodeDir
 	GSList *children;
 	GHashTable *hidden_file_hash;
 
-	GnomeVFSAsyncHandle *load_handle;
-	GnomeVFSMonitorHandle *monitor_handle;
+	GCancellable *cancellable;
+	GFileMonitor *monitor;
 	GeditFileBrowserStore *model;
 };
 
@@ -102,7 +111,7 @@ struct _GeditFileBrowserStorePrivate
 
 static FileBrowserNode *model_find_node 		    (GeditFileBrowserStore *model,
 							     FileBrowserNode *node,
-							     GnomeVFSURI *uri);
+							     GFile *uri);
 static void model_remove_node                               (GeditFileBrowserStore * model,
 							     FileBrowserNode * node, 
 							     GtkTreePath * path,
@@ -165,11 +174,13 @@ static void print_tree                                      (GeditFileBrowserSto
 							     gchar * prefix);
 static void model_check_dummy                               (GeditFileBrowserStore * model,
 							     FileBrowserNode * node);
+static void next_files_async 				    (GFileEnumerator * enumerator,
+							     FileBrowserNodeDir * dir);
 
-static void on_directory_monitor_event                      (GnomeVFSMonitorHandle * handle,
-							     gchar const *monitor_uri,
-							     const gchar * info_uri,
-							     GnomeVFSMonitorEventType event_type,
+static void on_directory_monitor_event                      (GFileMonitor * handle,
+							     GFile *monitor_file,
+							     GFile * info_file,
+							     guint event_type,
 							     FileBrowserNode * parent);
 
 GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE (GeditFileBrowserStore, gedit_file_browser_store,
@@ -194,6 +205,7 @@ enum
 	BEGIN_LOADING,
 	END_LOADING,
 	ERROR,
+	NO_TRASH,
 	NUM_SIGNALS
 };
 
@@ -208,8 +220,14 @@ gedit_file_browser_store_finalize (GObject * object)
 	// Free all the nodes
 	file_browser_node_free (obj, obj->priv->root);
 
+	// Cancel any asynchronous operations
 	for (item = obj->priv->async_handles; item; item = item->next)
-		((AsyncHandle *) (item->data))->alive = FALSE;
+	{
+		AsyncData *data = (AsyncData *) (item->data);
+		g_cancellable_cancel (data->cancellable);
+		
+		data->removed = TRUE;
+	}
 
 	g_slist_free (obj->priv->async_handles);
 	G_OBJECT_CLASS (gedit_file_browser_store_parent_class)->
@@ -222,11 +240,10 @@ set_gvalue_from_node (GValue          *value,
 {
 	gchar * uri;
 
-	if (node == NULL || node->uri)
+	if (node == NULL || !node->file)
 		g_value_set_string (value, NULL);
 	else {
-		uri = gnome_vfs_uri_to_string (node->uri, 
-		                               GNOME_VFS_URI_HIDE_NONE);
+		uri = g_file_get_uri (node->file);
 		g_value_take_string (value, uri);
 	}
 }
@@ -331,6 +348,13 @@ gedit_file_browser_store_class_init (GeditFileBrowserStoreClass * klass)
 					   error), NULL, NULL,
 			  gedit_file_browser_marshal_VOID__UINT_STRING,
 			  G_TYPE_NONE, 2, G_TYPE_UINT, G_TYPE_STRING);
+	model_signals[NO_TRASH] =
+	    g_signal_new ("no-trash", G_OBJECT_CLASS_TYPE (object_class),
+			  G_SIGNAL_RUN_LAST,
+			  G_STRUCT_OFFSET (GeditFileBrowserStoreClass,
+					   no_trash), g_signal_accumulator_true_handled, NULL,
+			  gedit_file_browser_marshal_BOOL__POINTER,
+			  G_TYPE_BOOLEAN, 1, G_TYPE_POINTER);
 
 	g_type_class_add_private (object_class,
 				  sizeof (GeditFileBrowserStorePrivate));
@@ -574,7 +598,6 @@ gedit_file_browser_store_get_value (GtkTreeModel * tree_model,
 				    GValue * value)
 {
 	FileBrowserNode *node;
-	gchar *uri;
 
 	g_return_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model));
 	g_return_if_fail (iter != NULL);
@@ -588,14 +611,7 @@ gedit_file_browser_store_get_value (GtkTreeModel * tree_model,
 
 	switch (column) {
 	case GEDIT_FILE_BROWSER_STORE_COLUMN_URI:
-		if (node->uri == NULL)
-			uri = NULL;
-		else
-			uri =
-			    gnome_vfs_uri_to_string (node->uri,
-						     GNOME_VFS_URI_HIDE_NONE);
-
-		g_value_take_string (value, uri);
+		set_gvalue_from_node (value, node);
 		break;
 	case GEDIT_FILE_BROWSER_STORE_COLUMN_NAME:
 		g_value_set_string (value, node->name);
@@ -1187,14 +1203,14 @@ model_refilter_node (GeditFileBrowserStore * model,
 				row_deleted (model, path);
 			} else {
 				row_inserted (model, path, &iter);
-
-				model_check_dummy (model, node);
 				gtk_tree_path_next (path);
 			}
 		} else if (old_visible) {
 			gtk_tree_path_next (path);
 		}
 	}
+	
+	model_check_dummy (model, node);
 
 	if (free_path)
 		gtk_tree_path_free (path);
@@ -1211,19 +1227,19 @@ file_browser_node_set_name (FileBrowserNode * node)
 {
 	g_free (node->name);
 
-	if (node->uri) {
-		node->name = gedit_file_browser_utils_uri_basename (gnome_vfs_uri_get_path (node->uri));
+	if (node->file) {
+		node->name = gedit_file_browser_utils_file_basename (node->file);
 	} else {
 		node->name = NULL;
 	}
 }
 
 static void
-file_browser_node_init (FileBrowserNode * node, GnomeVFSURI * uri,
+file_browser_node_init (FileBrowserNode * node, GFile * file,
 			FileBrowserNode * parent)
 {
-	if (uri != NULL) {
-		node->uri = gnome_vfs_uri_ref (uri);
+	if (file != NULL) {
+		node->file = g_object_ref (file);
 		file_browser_node_set_name (node);
 	}
 
@@ -1231,25 +1247,24 @@ file_browser_node_init (FileBrowserNode * node, GnomeVFSURI * uri,
 }
 
 static FileBrowserNode *
-file_browser_node_new (GnomeVFSURI * uri, FileBrowserNode * parent)
+file_browser_node_new (GFile * file, FileBrowserNode * parent)
 {
 	FileBrowserNode *node = g_new0 (FileBrowserNode, 1);
 
-	file_browser_node_init (node, uri, parent);
+	file_browser_node_init (node, file, parent);
 	return node;
 }
 
 static FileBrowserNode *
 file_browser_node_dir_new (GeditFileBrowserStore * model,
-			   GnomeVFSURI * uri, FileBrowserNode * parent)
+			   GFile * file, FileBrowserNode * parent)
 {
 	FileBrowserNode *node =
 	    (FileBrowserNode *) g_new0 (FileBrowserNodeDir, 1);
 
-	file_browser_node_init (node, uri, parent);
+	file_browser_node_init (node, file, parent);
 
 	node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_DIRECTORY;
-	node->mime_type = g_strdup ("text/directory");
 
 	FILE_BROWSER_NODE_DIR (node)->model = model;
 
@@ -1292,22 +1307,26 @@ file_browser_node_free (GeditFileBrowserStore * model,
 	if (NODE_IS_DIR (node)) {
 		dir = FILE_BROWSER_NODE_DIR (node);
 
-		if (dir->load_handle) {
-			gnome_vfs_async_cancel (dir->load_handle);
+		if (dir->cancellable) {
+			g_cancellable_cancel (dir->cancellable);
+			g_object_unref (dir->cancellable);
+
 			model_end_loading (model, node);
 		}
 
 		file_browser_node_free_children (model, node);
 
-		if (dir->monitor_handle)
-			gnome_vfs_monitor_cancel (dir->monitor_handle);
+		if (dir->monitor) {
+			g_file_monitor_cancel (dir->monitor);
+			g_object_unref (dir->monitor);
+		}
 
 		if (dir->hidden_file_hash)
 			g_hash_table_destroy (dir->hidden_file_hash);
 	}
 
-	if (node->uri)
-		gnome_vfs_uri_unref (node->uri);
+	if (node->file)
+		g_object_unref (node->file);
 
 	if (node->icon)
 		g_object_unref (node->icon);
@@ -1316,7 +1335,6 @@ file_browser_node_free (GeditFileBrowserStore * model,
 		g_object_unref (node->emblem);
 
 	g_free (node->name);
-	g_free (node->mime_type);
 	g_free (node);
 }
 
@@ -1491,15 +1509,19 @@ file_browser_node_unload (GeditFileBrowserStore * model,
 	if (remove_children)
 		model_remove_node_children (model, node, NULL, TRUE);
 
-	if (dir->load_handle) {
-		gnome_vfs_async_cancel (dir->load_handle);
+	if (dir->cancellable) {
+		g_cancellable_cancel (dir->cancellable);
+		g_object_unref (dir->cancellable);
+
 		model_end_loading (model, node);
-		dir->load_handle = NULL;
+		dir->cancellable = NULL;
 	}
 
-	if (dir->monitor_handle) {
-		gnome_vfs_monitor_cancel (dir->monitor_handle);
-		dir->monitor_handle = NULL;
+	if (dir->monitor) {
+		g_file_monitor_cancel (dir->monitor);
+		g_object_unref (dir->monitor);
+		
+		dir->monitor = NULL;
 	}
 
 	node->flags &= ~GEDIT_FILE_BROWSER_STORE_FLAG_LOADED;
@@ -1511,21 +1533,15 @@ model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
 {
 	GtkIconTheme *theme;
 	GdkPixbuf *icon;
-	gchar *uri;
 
 	g_return_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model));
 	g_return_if_fail (node != NULL);
 
-	if (node->uri == NULL)
+	if (node->file == NULL)
 		return;
 
 	theme = gtk_icon_theme_get_default ();
-
-	uri = gnome_vfs_uri_to_string (node->uri, GNOME_VFS_URI_HIDE_NONE);
-
-	icon = gedit_file_browser_utils_pixbuf_from_mime_type (uri,
-							       node->mime_type,
-							       GTK_ICON_SIZE_MENU);
+	icon = gedit_file_browser_utils_pixbuf_from_file (node->file, GTK_ICON_SIZE_MENU);
 
 	if (node->icon)
 		g_object_unref (node->icon);
@@ -1556,8 +1572,6 @@ model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
 	} else {
 		node->icon = icon;
 	}
-
-	g_free (uri);
 }
 
 static void
@@ -1717,68 +1731,83 @@ model_add_node (GeditFileBrowserStore * model, FileBrowserNode * child,
 	model_check_dummy (model, child);
 }
 
+static gchar const *
+backup_content_type (GFileInfo * info)
+{
+	gchar const * content;
+	
+	if (!g_file_info_get_is_backup (info))
+		return NULL;
+	
+	content = g_file_info_get_content_type (info);
+	
+	if (!content || g_content_type_equals (content, "application/x-trash"))
+		return "text/plain";
+	
+	return content;
+}
+
 static void
 file_browser_node_set_from_info (GeditFileBrowserStore * model,
 				 FileBrowserNode * node,
-				 GnomeVFSFileInfo * info)
+				 GFileInfo * info,
+				 gboolean isadded)
 {
 	FileBrowserNodeDir * dir;
-	gchar * filename;
-	gchar const * mime;
+	gchar const * content;
+	gchar const * name;
+	gboolean free_info = FALSE;
+	GtkTreePath * path;
 
-	dir = FILE_BROWSER_NODE_DIR (node->parent);
-
-	g_free (node->mime_type);
-	node->mime_type = NULL;
-
-	if (info->name) {
-		if (*(info->name) == '.') {
-			node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
-		}
-		else if (g_utf8_get_char (g_utf8_offset_to_pointer 
-		           (&(info->name[strlen(info->name)]), -1)) == '~') {
-			node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
-			
-			/* FIXME: this isn't totally correct. We need this 
-			   though because the mime type system somehow says that
-			   files ending on ~ are application/x-trash. Don't
-			   ask why. The fact is that most ~ files are backup 
-			   files and are text. Therefore we will try to guess
-			   the mime type from the filename (minus ~) and default
-			   to text/plain. Eat that, mime type system! */
-			filename = g_strndup (info->name, strlen(info->name) - 1);
-		   	mime = gnome_vfs_get_mime_type_for_name (filename);
-			g_free (filename);
-			
-			if (strcmp(mime, GNOME_VFS_MIME_TYPE_UNKNOWN) == 0)
-				node->mime_type = g_strdup("text/plain");
-			else
-				node->mime_type = g_strdup(mime);
-		}
-		else if (dir != NULL && dir->hidden_file_hash != NULL &&
-			 g_hash_table_lookup (dir->hidden_file_hash, info->name) != NULL) {
-			node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
-		}
+	if (info == NULL) {
+		info = g_file_query_info (node->file,  
+					  STANDARD_ATTRIBUTE_TYPES,
+					  G_FILE_QUERY_INFO_NONE,
+					  NULL,
+					  NULL);
+		free_info = TRUE;
 	}
 
-	if (node->mime_type == NULL)
-		node->mime_type = g_strdup (info->mime_type);
+	dir = FILE_BROWSER_NODE_DIR (node->parent);
+	name = g_file_info_get_name (info);
 
-	if (info->type == GNOME_VFS_FILE_TYPE_DIRECTORY)
+	if (g_file_info_get_is_hidden (info) || g_file_info_get_is_backup (info))
+		node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
+	else if (dir != NULL && dir->hidden_file_hash != NULL &&
+		 g_hash_table_lookup (dir->hidden_file_hash, name) != NULL)
+		node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
+
+	if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY)
 		node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_DIRECTORY;
-	else if (node->mime_type && 
-	         gnome_vfs_mime_type_get_equivalence (node->mime_type,
-						      "text/plain") !=
-		 GNOME_VFS_MIME_UNRELATED)
-		node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_TEXT;
+	else {
+		if (!(content = backup_content_type (info)))
+			content = g_file_info_get_content_type (info);
+		
+		if (!content || 
+		    g_content_type_is_unknown (content) ||
+		    g_content_type_is_a (content, "text/plain"))
+			node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_TEXT;		
+	}
+	
+	if (free_info)
+		g_object_unref (info);
 
-	model_node_update_visibility (model, node);
 	model_recomposite_icon_real (model, node);
+
+	if (isadded) {
+		path = gedit_file_browser_store_get_path_real (model, node);
+		model_refilter_node (model, node, path);
+		gtk_tree_path_free (path);
+		
+		model_check_dummy (model, node->parent);
+	} else {
+		model_node_update_visibility (model, node);
+	}
 }
 
 static FileBrowserNode *
-model_uri_exists (GeditFileBrowserStore * model, FileBrowserNode * parent,
-		  GnomeVFSURI * uri)
+model_file_exists (GeditFileBrowserStore * model, FileBrowserNode * parent,
+		  GFile * file)
 {
 	GSList *item;
 	FileBrowserNode *node;
@@ -1790,8 +1819,8 @@ model_uri_exists (GeditFileBrowserStore * model, FileBrowserNode * parent,
 	     item = item->next) {
 		node = (FileBrowserNode *) (item->data);
 
-		if (node->uri != NULL
-		    && gnome_vfs_uri_equal (node->uri, uri))
+		if (node->file != NULL
+		    && g_file_equal (node->file, file))
 			return node;
 	}
 
@@ -1799,110 +1828,89 @@ model_uri_exists (GeditFileBrowserStore * model, FileBrowserNode * parent,
 }
 
 static FileBrowserNode *
-model_add_node_from_uri (GeditFileBrowserStore * model,
-			 FileBrowserNode * parent,
-			 GnomeVFSURI * uri,
-			 GnomeVFSFileInfo * info)
+model_add_node_from_file (GeditFileBrowserStore * model,
+			  FileBrowserNode * parent,
+			  GFile * file,
+			  GFileInfo * info)
 {
 	FileBrowserNode *node;
 	gboolean free_info = FALSE;
-
-	// Check if it already exists
-	if ((node = model_uri_exists (model, parent, uri)) == NULL) {
-		if (info == NULL) {
-			info = gnome_vfs_file_info_new ();
-			free_info = TRUE;
-			gnome_vfs_get_file_info_uri (uri, info,
-						     GNOME_VFS_FILE_INFO_DEFAULT
-						     |
-						     GNOME_VFS_FILE_INFO_GET_MIME_TYPE);
-		}
-
-		if (info->type == GNOME_VFS_FILE_TYPE_DIRECTORY) {
-			node = file_browser_node_dir_new (model, uri, parent);
-		} else {
-			node = file_browser_node_new (uri, parent);
-		}
-
-		file_browser_node_set_from_info (model, node, info);
-		model_add_node (model, node, parent);
-
-		if (free_info)
-			gnome_vfs_file_info_unref (info);
+	
+	if (!info)
+	{
+		info = g_file_query_info (file,
+					  STANDARD_ATTRIBUTE_TYPES,
+					  G_FILE_QUERY_INFO_NONE,
+					  NULL,
+					  NULL);
+		free_info = TRUE;
 	}
+	
+	// Check if it already exists
+	if ((node = model_file_exists (model, parent, file)) == NULL) {
+		if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
+			node = file_browser_node_dir_new (model, file, parent);
+		} else {
+			node = file_browser_node_new (file, parent);
+		}
+
+		file_browser_node_set_from_info (model, node, info, FALSE);
+		model_add_node (model, node, parent);
+	}
+	
+	if (free_info)
+		g_object_unref (info);
 
 	return node;
 }
 
 /* Read is sync, but we only do it for local files */
 static void
-parse_dot_hidden_file (FileBrowserNode *parent)
+parse_dot_hidden_file (FileBrowserNode *directory)
 {
-	FileBrowserNodeDir *dir;
-	GnomeVFSURI *vfs_uri;
-	gchar *uri;
-	GnomeVFSFileInfo *file_info;
-	GnomeVFSResult res;
-	gint i, file_size;
-	gchar *file_contents;
+	gsize file_size;
+	char *file_contents;
+	GFile *child;
+	GFileInfo *info;
+	GFileType type;
+	int i;
+	FileBrowserNodeDir * dir = FILE_BROWSER_NODE_DIR (directory);
 
-	vfs_uri = gnome_vfs_uri_append_path (parent->uri, ".hidden");
 
-	uri = gnome_vfs_uri_to_string (vfs_uri, GNOME_VFS_URI_HIDE_NONE);
-	if (!gedit_utils_uri_has_file_scheme (uri) ||
-	    !gnome_vfs_uri_exists (vfs_uri)) {
-		gnome_vfs_uri_unref (vfs_uri);
-		g_free (uri);
+	/* FIXME: We only support .hidden on file: uri's for the moment.
+	 * Need to figure out if we should do this async or sync to extend
+	 * it to all types of uris.
+	 */
+	if (directory->file == NULL || !g_file_is_native (directory->file)) {
+		return;
+	}
+	
+	child = g_file_get_child (directory->file, ".hidden");
+	info = g_file_query_info (child, G_FILE_ATTRIBUTE_STANDARD_TYPE, G_FILE_QUERY_INFO_NONE, NULL, NULL);
+
+	type = info ? g_file_info_get_file_type (info) : G_FILE_TYPE_UNKNOWN;
+	
+	if (info)
+		g_object_unref (info);
+	
+	if (type != G_FILE_TYPE_REGULAR) {
+		g_object_unref (child);
+
 		return;
 	}
 
-	file_info = gnome_vfs_file_info_new ();
-	if (!file_info) {
-		gnome_vfs_uri_unref (vfs_uri);
-		g_free (uri);
+	if (!g_file_load_contents (child, NULL, &file_contents, &file_size, NULL, NULL)) {
+		g_object_unref (child);
 		return;
 	}
 
-	res = gnome_vfs_get_file_info_uri (vfs_uri,
-					   file_info,
-					   GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-	if (res != GNOME_VFS_OK) {
-		gnome_vfs_file_info_unref (file_info);
-		gnome_vfs_uri_unref (vfs_uri);
-		g_free (uri);
-		return;
+	g_object_unref (child);
+
+	if (dir->hidden_file_hash == NULL) {
+		dir->hidden_file_hash =
+			g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 	}
-
-	if ((file_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE) &&
-	    (file_info->type != GNOME_VFS_FILE_TYPE_REGULAR)) {
-		gnome_vfs_file_info_unref (file_info);
-		gnome_vfs_uri_unref (vfs_uri);
-		g_free (uri);
-		return;
-	}
-
-	gnome_vfs_file_info_unref (file_info);
-
-	res = gnome_vfs_read_entire_file (uri, &file_size, &file_contents);
-
-	gnome_vfs_uri_unref (vfs_uri);
-	g_free (uri);
-
-	if (res != GNOME_VFS_OK) {
-		return;
-	}
-
-	dir = FILE_BROWSER_NODE_DIR (parent);
-
-	if (dir->hidden_file_hash) {
-		g_hash_table_destroy (dir->hidden_file_hash);
-	}
-
-	dir->hidden_file_hash = g_hash_table_new_full (g_str_hash,
-						       g_str_equal,
-						       g_free,
-						       NULL);
-
+	
 	/* Now parse the data */
 	i = 0;
 	while (i < file_size) {
@@ -1914,84 +1922,142 @@ parse_dot_hidden_file (FileBrowserNode *parent)
 		}
 
 		if (i > start) {
-			gchar *tmp, *tmp2;
-
-			tmp = g_strndup (file_contents + start, i - start);
-			tmp2 = gnome_vfs_escape_string (tmp);
-			g_free (tmp);
-
+			char *hidden_filename;
+		
+			hidden_filename = g_strndup (file_contents + start, i - start);
 			g_hash_table_insert (dir->hidden_file_hash,
-					     tmp2, tmp2);
+					     hidden_filename, hidden_filename);
 		}
 
 		i++;
+		
 	}
 
 	g_free (file_contents);
 }
 
 static void
-model_load_directory_cb (GnomeVFSAsyncHandle * handle,
-			 GnomeVFSResult result, GList * list,
-			 guint entries_read, gpointer user_data)
+model_iterate_next_files_cb (GFileEnumerator * enumerator, 
+			     GAsyncResult * result, 
+			     FileBrowserNode * parent)
 {
-	FileBrowserNode *parent = (FileBrowserNode *) user_data;
-	GeditFileBrowserStore *model;
+	GList * files;
+	GList * item;
+	GError * error = NULL;
+	GFileInfo * info;
+	GFileType type;
+	gchar const * name;
+	GFile * file;
+	FileBrowserNodeDir * dir = FILE_BROWSER_NODE_DIR (parent);
+	
+	files = g_file_enumerator_next_files_finish (enumerator, result, &error);
 
-	model = FILE_BROWSER_NODE_DIR (parent)->model;
-
-	if (result == GNOME_VFS_OK || result == GNOME_VFS_ERROR_EOF) {
-		GList *item;
-
-		for (item = list; item; item = item->next) {
-			GnomeVFSFileInfo *info;
-			GnomeVFSURI *uri;
-
-			info = (GnomeVFSFileInfo *) (item->data);
-
-			/* Skip all non regular, non directory files */
-			if (info->type != GNOME_VFS_FILE_TYPE_REGULAR &&
-			    info->type != GNOME_VFS_FILE_TYPE_DIRECTORY &&
-			    info->type != GNOME_VFS_FILE_TYPE_SYMBOLIC_LINK)
-				continue;
-
-			/* Skip '.' and '..' directories */
-			if (info->type == GNOME_VFS_FILE_TYPE_DIRECTORY &&
-			    (strcmp (info->name, ".") == 0 ||
-			     strcmp (info->name, "..") == 0))
-				continue;
-
-			uri = gnome_vfs_uri_append_path (parent->uri,
-							 info->name);
-			model_add_node_from_uri (model, parent, uri, info);
-			gnome_vfs_uri_unref (uri);
-		}
-
-		if (result == GNOME_VFS_ERROR_EOF) {
-			FileBrowserNodeDir *dir;
-
-			dir = FILE_BROWSER_NODE_DIR (parent);
-			dir->load_handle = NULL;
-
-			if (gnome_vfs_uri_is_local (parent->uri)
-			    && dir->monitor_handle == NULL) {
-				gnome_vfs_monitor_add (&(dir->monitor_handle),
-						       gnome_vfs_uri_get_path (parent->uri),
-						       GNOME_VFS_MONITOR_DIRECTORY,
-						       (GnomeVFSMonitorCallback)on_directory_monitor_event, parent);
+	if (files == NULL) {
+		g_file_enumerator_close (enumerator, NULL, NULL);
+		
+		if (!error)
+		{
+			/* We're done loading */
+			g_object_unref (dir->cancellable);
+			dir->cancellable = NULL;
+			
+			if (g_file_is_native (parent->file) && dir->monitor == NULL) {
+				dir->monitor = g_file_monitor_directory (parent->file, 
+									 G_FILE_MONITOR_NONE,
+									 NULL,
+									 NULL);
+				g_signal_connect (dir->monitor,
+						  "changed",
+						  G_CALLBACK (on_directory_monitor_event),
+						  parent);
 			}
 
-			model_end_loading (model, parent);
-			model_check_dummy (model, parent);
+			model_check_dummy (dir->model, parent);
+			model_end_loading (dir->model, parent);
+		} else {
+			/* Simply return if we were cancelled */
+			if (error->domain == G_IO_ERROR && error->code == G_IO_ERROR_CANCELLED)
+				return;
+		
+			/* Otherwise handle the error appropriately */
+			g_signal_emit (dir->model,
+				       model_signals[ERROR],
+				       0,
+				       GEDIT_FILE_BROWSER_ERROR_LOAD_DIRECTORY,
+				       error->message);
+
+			file_browser_node_unload (dir->model, (FileBrowserNode *)parent, TRUE);
+			g_error_free (error);
 		}
 	} else {
-		g_signal_emit (model, 
-		               model_signals[ERROR], 
-		               0,
-		               GEDIT_FILE_BROWSER_ERROR_LOAD_DIRECTORY,
-		               gnome_vfs_result_to_string (result));
+		for (item = files; item; item = item->next) {
+			info = G_FILE_INFO (item->data);
+			type = g_file_info_get_file_type (info);
+			
+			/* Skip all non regular, non directory files */
+			if (type != G_FILE_TYPE_REGULAR &&
+			    type != G_FILE_TYPE_DIRECTORY &&
+			    type != G_FILE_TYPE_SYMBOLIC_LINK)
+				continue;
 
-		file_browser_node_unload (model, parent, TRUE);
+			name = g_file_info_get_name (info);
+
+			/* Skip '.' and '..' directories */
+			if (type == G_FILE_TYPE_DIRECTORY &&
+			    (strcmp (name, ".") == 0 ||
+			     strcmp (name, "..") == 0))
+				continue;
+
+			file = g_file_get_child (parent->file, name);
+			model_add_node_from_file (dir->model, parent, file, info);
+
+			g_object_unref (file);
+			g_object_unref (info);
+		}
+		
+		g_list_free (files);
+		next_files_async (enumerator, dir);
+	}
+}
+
+static void
+next_files_async (GFileEnumerator * enumerator,
+		  FileBrowserNodeDir * dir)
+{
+	g_file_enumerator_next_files_async (enumerator,
+					    DIRECTORY_LOAD_ITEMS_PER_CALLBACK,
+					    G_PRIORITY_DEFAULT,
+					    dir->cancellable,
+					    (GAsyncReadyCallback)model_iterate_next_files_cb,
+					    dir);
+}
+
+static void
+model_iterate_children_cb (GFile * file, 
+			   GAsyncResult * result,
+			   FileBrowserNodeDir * dir)
+{
+	GError * error = NULL;
+	GFileEnumerator * enumerator;
+	
+	enumerator = g_file_enumerate_children_finish (file, result, &error);
+	
+	if (enumerator == NULL) {
+		/* Simply return if we were cancelled */
+		if (error->domain == G_IO_ERROR && error->code == G_IO_ERROR_CANCELLED)
+			return;
+		
+		/* Otherwise handle the error appropriately */
+		g_signal_emit (dir->model,
+			       model_signals[ERROR],
+			       0,
+			       GEDIT_FILE_BROWSER_ERROR_LOAD_DIRECTORY,
+			       error->message);
+
+		file_browser_node_unload (dir->model, (FileBrowserNode *)dir, TRUE);
+		g_error_free (error);
+	} else {
+		next_files_async (enumerator, dir);
 	}
 }
 
@@ -2006,9 +2072,8 @@ model_load_directory (GeditFileBrowserStore * model,
 	dir = FILE_BROWSER_NODE_DIR (node);
 
 	/* Cancel a previous load */
-	if (dir->load_handle != NULL) {
-		gnome_vfs_async_cancel (dir->load_handle);
-		dir->load_handle = NULL;
+	if (dir->cancellable != NULL) {
+		file_browser_node_unload (dir->model, node, TRUE);
 	}
 
 	node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_LOADED;
@@ -2016,32 +2081,33 @@ model_load_directory (GeditFileBrowserStore * model,
 
 	/* Read the '.hidden' file first (if any) */
 	parse_dot_hidden_file (node);
+	
+	dir->cancellable = g_cancellable_new ();
 
 	/* Start loading async */
-	gnome_vfs_async_load_directory_uri (&(dir->load_handle), node->uri,
-					    GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
-					    GNOME_VFS_FILE_INFO_FOLLOW_LINKS,
-					    100,
-					    GNOME_VFS_PRIORITY_DEFAULT,
-					    model_load_directory_cb, node);
+	g_file_enumerate_children_async (node->file,
+					 STANDARD_ATTRIBUTE_TYPES,
+					 G_FILE_QUERY_INFO_NONE,
+					 G_PRIORITY_DEFAULT,
+					 dir->cancellable,
+					 (GAsyncReadyCallback)model_iterate_children_cb,
+					 dir);
 }
 
 static GList *
-get_parent_uris (GeditFileBrowserStore * model, GnomeVFSURI * uri)
+get_parent_files (GeditFileBrowserStore * model, GFile * file)
 {
-	GList *result = NULL;
+	GList * result = NULL;
+	
+	result = g_list_prepend (result, g_object_ref (file));
 
-	result = g_list_prepend (result, gnome_vfs_uri_ref (uri));
-
-	while (gnome_vfs_uri_has_parent (uri)) {
-		uri = gnome_vfs_uri_get_parent (uri);
-
-		if (gnome_vfs_uri_equal (uri, model->priv->root->uri)) {
-			gnome_vfs_uri_unref (uri);
+	while ((file = g_file_get_parent (file))) {
+		if (g_file_equal (file, model->priv->root->file)) {
+			g_object_unref (file);
 			break;
 		}
 
-		result = g_list_prepend (result, uri);
+		result = g_list_prepend (result, file);
 	}
 
 	return result;
@@ -2224,102 +2290,36 @@ set_virtual_root_from_node (GeditFileBrowserStore * model,
 }
 
 static void
-set_virtual_root_from_uri (GeditFileBrowserStore * model,
-			   GnomeVFSURI * uri)
+set_virtual_root_from_file (GeditFileBrowserStore * model,
+			    GFile * file)
 {
-	GList *uris;
-	GList *item;
-	FileBrowserNode *node;
-	FileBrowserNode *parent;
-	GnomeVFSURI *check;
-	gboolean created = FALSE;
-	GnomeVFSFileInfo *info;
+	GList * files;
+	GList * item;
+	FileBrowserNode * parent;
+	GFile * check;
 
 	/* Always clear the model before altering the nodes */
 	model_clear (model, FALSE);
 
 	/* Create the node path, get all the uri's */
-	uris = get_parent_uris (model, uri);
+	files = get_parent_files (model, file);
 	parent = model->priv->root;
-	node = NULL;
 
-	for (item = uris; item; item = item->next) {
-		check = (GnomeVFSURI *) (item->data);
-		node = NULL;
-
-		if (!created)
-			node = model_uri_exists (model, parent, check);
-
-		if (node == NULL) {
-			// Create the node
-			node = file_browser_node_dir_new (model, check, parent);
-
-			info = gnome_vfs_file_info_new ();
-			gnome_vfs_get_file_info_uri (check, info,
-						     GNOME_VFS_FILE_INFO_DEFAULT |
-						     GNOME_VFS_FILE_INFO_GET_MIME_TYPE);
-			file_browser_node_set_from_info (model, node, info);
-			gnome_vfs_file_info_unref (info);
-
-			model_add_node (model, node, parent);
-			created = TRUE;
-		}
-
-		parent = node;
-		gnome_vfs_uri_unref (check);
+	for (item = files; item; item = item->next) {
+		check = G_FILE (item->data);
+		
+		parent = model_add_node_from_file (model, parent, check, NULL);
+		g_object_unref (check);
 	}
 
-	g_list_free (uris);
-
+	g_list_free (files);
 	set_virtual_root_from_node (model, parent);
 }
 
-static int
-progress_update_callback (GnomeVFSAsyncHandle * handle,
-			  GnomeVFSXferProgressInfo * progress_info,
-			  gpointer data)
-{
-	AsyncHandle *ahandle;
-
-	ahandle = (AsyncHandle *) (data);
-
-	switch (progress_info->status) {
-	case GNOME_VFS_XFER_PROGRESS_STATUS_VFSERROR:
-		if (ahandle->alive)
-			g_signal_emit (ahandle->model,
-				       model_signals[ERROR], 0,
-				       GEDIT_FILE_BROWSER_ERROR_DELETE,
-				       gnome_vfs_result_to_string
-				       (progress_info->vfs_status));
-
-		return GNOME_VFS_XFER_ERROR_ACTION_ABORT;
-		break;
-	case GNOME_VFS_XFER_PROGRESS_STATUS_OK:
-		switch (progress_info->phase) {
-		case GNOME_VFS_XFER_PHASE_COMPLETED:
-			if (ahandle->alive) {
-				ahandle->model->priv->async_handles =
-				    g_slist_remove (ahandle->model->priv->
-						    async_handles,
-						    ahandle);
-			}
-
-			g_free (ahandle);
-			break;
-		default:
-			break;
-		}
-	default:
-		break;
-	}
-
-	return 1;
-}
-
 static FileBrowserNode *
-model_find_node_children (GeditFileBrowserStore *model,
-			  FileBrowserNode *parent,
-			  GnomeVFSURI *uri)
+model_find_node_children (GeditFileBrowserStore * model,
+			  FileBrowserNode * parent,
+			  GFile * file)
 {
 	FileBrowserNodeDir *dir;
 	FileBrowserNode *child;
@@ -2334,7 +2334,7 @@ model_find_node_children (GeditFileBrowserStore *model,
 	for (children = dir->children; children; children = children->next) {
 		child = (FileBrowserNode *)(children->data);
 		
-		result = model_find_node (model, child, uri);
+		result = model_find_node (model, child, file);
 		
 		if (result)
 			return result;
@@ -2344,101 +2344,20 @@ model_find_node_children (GeditFileBrowserStore *model,
 }
 
 static FileBrowserNode *
-model_find_node (GeditFileBrowserStore *model,
-		 FileBrowserNode *node,
-		 GnomeVFSURI *uri)
+model_find_node (GeditFileBrowserStore * model,
+		 FileBrowserNode * node,
+		 GFile * file)
 {
 	if (node == NULL)
 		node = model->priv->root;
 
-	if (node->uri && gnome_vfs_uri_equal (node->uri, uri))
+	if (node->file && g_file_equal (node->file, file))
 		return node;
-	
-	if (NODE_IS_DIR (node) && gnome_vfs_uri_is_parent (node->uri, uri, TRUE))
-		return model_find_node_children (model, node, uri);
+
+	if (NODE_IS_DIR (node) && g_file_has_prefix (file, node->file))
+		return model_find_node_children (model, node, file);
 	
 	return NULL;
-}
-
-typedef struct {
-	GeditFileBrowserStore *model;
-	gchar *uri;
-} IdleDelete;
-
-static void
-idle_delete_free (IdleDelete *data)
-{
-	g_free (data->uri);
-	g_free (data);
-}
-
-static gboolean
-uri_deleted (IdleDelete *data)
-{
-	GnomeVFSURI *guri;
-	FileBrowserNode *node;
-
-	guri = gnome_vfs_uri_new (data->uri);
-	node = model_find_node (data->model, NULL, guri);
-	    	
-	if (node)
-		model_remove_node (data->model, node, NULL, TRUE);
-		
-	gnome_vfs_uri_unref (guri);
-	
-	return FALSE;
-}
-
-static int
-progress_sync_callback_trash (GnomeVFSXferProgressInfo * progress_info,
-			      gpointer data)
-{
-	AsyncHandle *ahandle = (AsyncHandle *) (data);
-	IdleDelete *delete;
-
-	if (!ahandle->alive)
-		return 1;
-
-	if (progress_info->status == GNOME_VFS_XFER_PROGRESS_STATUS_OK && 
-	    (progress_info->phase == GNOME_VFS_XFER_PHASE_DELETESOURCE ||
-	    progress_info->phase == GNOME_VFS_XFER_PHASE_MOVING)) {
-	    	delete = g_new(IdleDelete, 1);
-	    	delete->model = ahandle->model;
-	    	delete->uri = g_strdup (progress_info->source_name);
-
-		g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, 
-				 (GSourceFunc)uri_deleted,
-				 delete,
-				 (GDestroyNotify)idle_delete_free);
-	}
-
-	return 1;
-}
-
-
-static int
-progress_sync_callback_delete (GnomeVFSXferProgressInfo * progress_info,
-			       gpointer data)
-{
-	AsyncHandle *ahandle = (AsyncHandle *) (data);
-	IdleDelete *delete;
-
-	if (!ahandle->alive)
-		return 1;
-
-	if (progress_info->status == GNOME_VFS_XFER_PROGRESS_STATUS_OK && 
-	    progress_info->phase == GNOME_VFS_XFER_PHASE_DELETESOURCE) {
-	    	delete = g_new(IdleDelete, 1);
-	    	delete->model = ahandle->model;
-	    	delete->uri = g_strdup (progress_info->source_name);
-
-		g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, 
-				 (GSourceFunc)uri_deleted,
-				 delete,
-				 (GDestroyNotify)idle_delete_free);
-	}
-
-	return 1;
 }
 
 static GQuark
@@ -2454,44 +2373,29 @@ gedit_file_browser_store_error_quark (void)
 	return quark;
 }
 
-static GnomeVFSURI *
-unique_new_name (GnomeVFSURI * uri, gchar const *name)
+static GFile *
+unique_new_name (GFile * directory, gchar const * name)
 {
-	GnomeVFSURI *newuri = NULL;
+	GFile * newuri = NULL;
 	guint num = 0;
+	gchar * newname;
 
-	while (newuri == NULL || gnome_vfs_uri_exists (newuri)) {
-		gchar *newname;
-
+	while (newuri == NULL || g_file_query_exists (newuri, NULL)) {
 		if (newuri != NULL)
-			gnome_vfs_uri_unref (newuri);
+			g_object_unref (newuri);
 
 		if (num == 0)
 			newname = g_strdup (name);
 		else
 			newname = g_strdup_printf ("%s(%d)", name, num);
 
-		newuri = gnome_vfs_uri_append_file_name (uri, newname);
-
+		newuri = g_file_get_child (directory, newname);
 		g_free (newname);
 
 		++num;
 	}
 
 	return newuri;
-}
-
-static GnomeVFSURI *
-append_basename (GnomeVFSURI * target_uri, GnomeVFSURI * uri)
-{
-	gchar *basename;
-	GnomeVFSURI *ret;
-
-	basename = gnome_vfs_uri_extract_short_name (uri);
-	ret = gnome_vfs_uri_append_file_name (target_uri, basename);
-	g_free (basename);
-
-	return ret;
 }
 
 /* Public */
@@ -2571,27 +2475,27 @@ gedit_file_browser_store_set_virtual_root (GeditFileBrowserStore * model,
 GeditFileBrowserStoreResult
 gedit_file_browser_store_set_virtual_root_from_string
     (GeditFileBrowserStore * model, gchar const *root) {
-	GnomeVFSURI *uri = gnome_vfs_uri_new (root);
+	GFile * file = g_file_new_for_uri (root);
 	gchar *str, *str1;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model),
 			      GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
 
-	if (uri == NULL) {
+	if (file == NULL) {
 		g_warning ("Invalid uri (%s)", root);
 		return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 	}
 
 	/* Check if uri is already the virtual root */
 	if (model->priv->virtual_root &&
-	    gnome_vfs_uri_equal (model->priv->virtual_root->uri, uri)) {
-		gnome_vfs_uri_unref (uri);
+	    g_file_equal (model->priv->virtual_root->file, file)) {
+		g_object_unref (file);
 		return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 	}
 
 	/* Check if uri is the root itself */
-	if (gnome_vfs_uri_equal (model->priv->root->uri, uri)) {
-		gnome_vfs_uri_unref (uri);
+	if (g_file_equal (model->priv->root->file, file)) {
+		g_object_unref (file);
 
 		/* Always clear the model before altering the nodes */
 		model_clear (model, FALSE);
@@ -2599,25 +2503,23 @@ gedit_file_browser_store_set_virtual_root_from_string
 		return GEDIT_FILE_BROWSER_STORE_RESULT_OK;
 	}
 
-	if (!gnome_vfs_uri_is_parent (model->priv->root->uri, uri, TRUE)) {
-		str =
-		    gnome_vfs_uri_to_string (model->priv->root->uri,
-					     GNOME_VFS_URI_HIDE_PASSWORD);
-		str1 =
-		    gnome_vfs_uri_to_string (uri,
-					     GNOME_VFS_URI_HIDE_PASSWORD);
+	if (!g_file_has_prefix (file, model->priv->root->file)) {
+		str = gedit_file_browser_utils_file_display (model->priv->root->file);
+		str1 = gedit_file_browser_utils_file_display (file);
+
 		g_warning
 		    ("Virtual root (%s) is not below actual root (%s)",
 		     str1, str);
+
 		g_free (str);
 		g_free (str1);
 
-		gnome_vfs_uri_unref (uri);
+		g_object_unref (file);
 		return GEDIT_FILE_BROWSER_STORE_RESULT_ERROR;
 	}
 
-	set_virtual_root_from_uri (model, uri);
-	gnome_vfs_uri_unref (uri);
+	set_virtual_root_from_file (model, file);
+	g_object_unref (file);
 
 	return GEDIT_FILE_BROWSER_STORE_RESULT_OK;
 }
@@ -2703,9 +2605,9 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 						    gchar const *root,
 						    gchar const *virtual_root)
 {
-	GnomeVFSURI *uri = NULL;
-	GnomeVFSURI *vuri = NULL;
-	FileBrowserNode *node;
+	GFile * file = NULL;
+	GFile * vfile = NULL;
+	FileBrowserNode * node;
 	gboolean equal = FALSE;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model),
@@ -2715,9 +2617,9 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 		return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 
 	if (root != NULL) {
-		uri = gnome_vfs_uri_new (root);
+		file = g_file_new_for_uri (root);
 
-		if (uri == NULL) {
+		if (file == NULL) {
 			g_signal_emit (model, model_signals[ERROR], 0,
 				       GEDIT_FILE_BROWSER_ERROR_SET_ROOT,
 				       _("Invalid uri"));
@@ -2726,28 +2628,27 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 	}
 
 	if (root != NULL && model->priv->root != NULL) {
-		equal = gnome_vfs_uri_equal (uri, model->priv->root->uri);
+		equal = g_file_equal (file, model->priv->root->file);
 
 		if (equal && virtual_root == NULL) {
-			gnome_vfs_uri_unref (uri);
+			g_object_unref (file);
 			return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 		}
 	}
 
 	if (virtual_root) {
-		vuri = gnome_vfs_uri_new (virtual_root);
+		vfile = g_file_new_for_uri (virtual_root);
 
 		if (equal && model->priv->virtual_root &&
-		    gnome_vfs_uri_equal (vuri,
-					 model->priv->virtual_root->uri)) {
-			if (uri)
-				gnome_vfs_uri_unref (uri);
+		    g_file_equal (vfile, model->priv->virtual_root->file)) {
+			if (file)
+				g_object_unref (file);
 
-			gnome_vfs_uri_unref (vuri);
+			g_object_unref (vfile);
 			return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 		}
 
-		gnome_vfs_uri_unref (vuri);
+		g_object_unref (vfile);
 	}
 
 	/* Always clear the model before altering the nodes */
@@ -2757,10 +2658,10 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 	model->priv->root = NULL;
 	model->priv->virtual_root = NULL;
 
-	if (uri != NULL) {
+	if (file != NULL) {
 		/* Create the root node */
-		node = file_browser_node_dir_new (model, uri, NULL);
-		gnome_vfs_uri_unref (uri);
+		node = file_browser_node_dir_new (model, file, NULL);
+		g_object_unref (file);
 
 		model->priv->root = node;
 		model_check_dummy (model, node);
@@ -2797,18 +2698,20 @@ gchar *
 gedit_file_browser_store_get_root (GeditFileBrowserStore * model)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), NULL);
+	g_return_val_if_fail (model->priv->root != NULL, NULL);
+	g_return_val_if_fail (model->priv->root->file != NULL, NULL);
 
-	return gnome_vfs_uri_to_string (model->priv->root->uri,
-					GNOME_VFS_URI_HIDE_NONE);
+	return g_file_get_uri (model->priv->root->file);
 }
 
 gchar * 
 gedit_file_browser_store_get_virtual_root (GeditFileBrowserStore * model)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), NULL);
+	g_return_val_if_fail (model->priv->virtual_root != NULL, NULL);
+	g_return_val_if_fail (model->priv->virtual_root->file != NULL, NULL);
 	
-	return gnome_vfs_uri_to_string (model->priv->virtual_root->uri,
-	                                GNOME_VFS_URI_HIDE_NONE);
+	return g_file_get_uri (model->priv->virtual_root->file);
 }
 
 void
@@ -2924,11 +2827,10 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 				 GError ** error)
 {
 	FileBrowserNode *node;
-	GnomeVFSURI *uri;
-	GnomeVFSURI *parent;
-	GnomeVFSResult ret;
-
-	*error = NULL;
+	GFile * file;
+	GFile * parent;
+	GError * err = NULL;
+	GtkTreePath *path;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), FALSE);
 	g_return_val_if_fail (iter != NULL, FALSE);
@@ -2936,81 +2838,179 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 
 	node = (FileBrowserNode *) (iter->user_data);
 
-	parent = gnome_vfs_uri_get_parent (node->uri);
-	uri = gnome_vfs_uri_append_file_name (parent, new_name);
-	gnome_vfs_uri_unref (parent);
+	parent = g_file_get_parent (node->file);
+	g_return_val_if_fail (parent != NULL, FALSE);
 
-	if (gnome_vfs_uri_equal (node->uri, uri)) {
-		gnome_vfs_uri_unref (uri);
+	file = g_file_get_child (parent, new_name);
+	g_object_unref (parent);
+
+	if (g_file_equal (node->file, file)) {
+		g_object_unref (file);
 		return TRUE;
 	}
 
-	ret = gnome_vfs_move_uri (node->uri, uri, FALSE);
+	if (g_file_move (node->file, file, G_FILE_COPY_NONE, NULL, NULL, NULL, &err)) {
+		/* TODO: make sure to also re'path all the child nodes that
+		   might be there! */
+		parent = node->file;
+		node->file = file;
 
-	if (ret == GNOME_VFS_OK) {
-		GnomeVFSFileInfo *info;
-		GtkTreePath *path;
-
-		parent = node->uri;
-		node->uri = uri;
-		info = gnome_vfs_file_info_new ();
-		gnome_vfs_get_file_info_uri (uri, info,
-					     GNOME_VFS_FILE_INFO_DEFAULT |
-					     GNOME_VFS_FILE_INFO_GET_MIME_TYPE);
-		file_browser_node_set_from_info (model, node, info);
+		/* This makes sure the actual info for the node is requeried */
 		file_browser_node_set_name (node);
-		gnome_vfs_file_info_unref (info);
-		gnome_vfs_uri_unref (parent);
+		file_browser_node_set_from_info (model, node, NULL, TRUE);
 
-		path = gedit_file_browser_store_get_path_real (model, node);
-		gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path, iter);
-		gtk_tree_path_free (path);
+		/* Free the old nodes' GFile */
+		g_object_unref (parent);
+		
+		if (model_node_visibility (model, node)) {
+			path = gedit_file_browser_store_get_path_real (model, node);
+			gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path, iter);
+			gtk_tree_path_free (path);
 
-		/* Reorder this item */
-		model_resort_node (model, node);
+			/* Reorder this item */
+			model_resort_node (model, node);
+		} else {
+			if (error != NULL)
+				*error = g_error_new_literal (gedit_file_browser_store_error_quark (),
+							      GEDIT_FILE_BROWSER_ERROR_RENAME,
+				       			      _("The renamed file is currently filtered out. You need to adjust your filter settings to make the file visible"));
+			return FALSE;
+		}
 
 		return TRUE;
 	} else {
-		gnome_vfs_uri_unref (uri);
+		g_object_unref (file);
 
-		if (error != NULL) {
-			*error =
-			    g_error_new_literal
-			    (gedit_file_browser_store_error_quark (),
-			     GEDIT_FILE_BROWSER_ERROR_RENAME,
-			     gnome_vfs_result_to_string (ret));
+		if (err) {
+			if (error != NULL) {
+				*error =
+				    g_error_new_literal
+				    (gedit_file_browser_store_error_quark (),
+				     GEDIT_FILE_BROWSER_ERROR_RENAME,
+				     err->message);
+			}
+		
+			g_error_free (err);
 		}
 
 		return FALSE;
 	}
 }
 
+static void
+async_data_free (AsyncData * data)
+{
+	g_object_unref (data->cancellable);
+	
+	g_list_foreach (data->files, (GFunc)g_object_unref, NULL);
+	g_list_free (data->files);
+	
+	if (!data->removed)
+		data->model->priv->async_handles = g_slist_remove (data->model->priv->async_handles, data);
+	
+	g_free (data);
+}
+
+static gboolean
+emit_no_trash (AsyncData * data)
+{
+	/* Emit the no trash error */
+	gboolean ret;
+
+	g_signal_emit (data->model, model_signals[NO_TRASH], 0, data->files, &ret);
+	return ret;
+}
+
+typedef struct {
+	GeditFileBrowserStore * model;
+	GFile * file;
+} IdleDelete;
+
+static gboolean
+file_deleted (IdleDelete * data)
+{
+	FileBrowserNode * node;
+	node = model_find_node (data->model, NULL, data->file);
+	    	
+	if (node)
+		model_remove_node (data->model, node, NULL, TRUE);
+	
+	return FALSE;
+}
+
+static gboolean
+delete_files (GIOSchedulerJob * job,
+	      GCancellable * cancellable,
+	      AsyncData * data)
+{
+	GFile * file;
+	GError * error = NULL;
+	gboolean ret;
+	gint code;
+	IdleDelete delete;
+	
+	/* Check if our job is done */
+	if (!data->iter)
+		return FALSE;
+	
+	/* Move a file to the trash */
+	file = G_FILE (data->iter->data);
+	
+	if (data->trash)
+		ret = g_file_trash (file, cancellable, &error);
+	else
+		ret = g_file_delete (file, cancellable, &error);
+
+	if (ret) {
+		delete.model = data->model;
+		delete.file = file;
+
+		/* Remove the file from the model in the main loop */
+		g_io_scheduler_job_send_to_mainloop (job, (GSourceFunc)file_deleted, &delete, NULL);
+	} else if (!ret && error) {
+		code = error->code;
+		g_error_free (error);
+
+		if (data->trash && code == G_IO_ERROR_NOT_SUPPORTED) {
+			/* Trash is not supported on this system ... */
+			if (g_io_scheduler_job_send_to_mainloop (job, (GSourceFunc)emit_no_trash, data, NULL))
+			{
+				/* Changes this into a delete job */
+				data->trash = FALSE;
+				data->iter = data->files;
+
+				return TRUE;
+			}
+			
+			/* End the job */
+			return FALSE;
+		} else if (code == G_IO_ERROR_CANCELLED) {
+			/* Job has been cancelled, just let the job end */
+			return FALSE;
+		}
+	}
+	
+	/* Process the next item */
+	data->iter = data->iter->next;
+	return TRUE;
+}
+
 GeditFileBrowserStoreResult
 gedit_file_browser_store_delete_all (GeditFileBrowserStore *model,
 				     GList *rows, gboolean trash)
 {
-	FileBrowserNode *node;
-	AsyncHandle *handle;
-	GList *uris = NULL;
-	GList *row;
-	GList *target = NULL;
-	GnomeVFSURI *trash_uri;
-	GnomeVFSResult ret;
-	GnomeVFSXferOptions options;
+	FileBrowserNode * node;
+	AsyncData * data;
+	GList * files = NULL;
+	GList * row;
 	GtkTreeIter iter;
-	GeditFileBrowserStoreResult result = GEDIT_FILE_BROWSER_STORE_RESULT_OK;
-	GtkTreePath *prev = NULL;
-	GtkTreePath *path;
-	GnomeVFSXferProgressCallback sync_cb;
+	GtkTreePath * prev = NULL;
+	GtkTreePath * path;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
 	
 	if (rows == NULL)
 		return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
-
-	handle = g_new (AsyncHandle, 1);
-	handle->model = model;
-	handle->alive = TRUE;
 
 	/* First we sort the paths so that we can later on remove any
 	   files/directories that are actually subfiles/directories of
@@ -3030,76 +3030,26 @@ gedit_file_browser_store_delete_all (GeditFileBrowserStore *model,
 		
 		prev = path;
 		node = (FileBrowserNode *)(iter.user_data);
-		
-		if (trash) {
-			/* Find the trash */
-			ret =
-		    		gnome_vfs_find_directory (node->uri,
-					      GNOME_VFS_DIRECTORY_KIND_TRASH,
-					      &trash_uri, FALSE, TRUE,
-					      0777);
-
-			if (ret == GNOME_VFS_ERROR_NOT_FOUND || trash_uri == NULL) {
-				if (trash_uri != NULL)
-					gnome_vfs_uri_unref (trash_uri);
-					
-				result = GEDIT_FILE_BROWSER_STORE_RESULT_NO_TRASH;
-				break;
-			} else {
-				uris = g_list_append (uris, node->uri);
-				target =
-				    g_list_append (target,
-						   append_basename (trash_uri,
-								    node->uri));
-				gnome_vfs_uri_unref (trash_uri);
-			}
-		} else {
-			uris = g_list_append (uris, node->uri);
-		}
+		files = g_list_prepend (files, g_object_ref (node->file));
 	}
 	
-	if (result != GEDIT_FILE_BROWSER_STORE_RESULT_OK) {
-		if (target) {
-			g_list_foreach (target, (GFunc)gnome_vfs_uri_unref, NULL);
-			g_list_free (target);
-		}
-		
-		g_list_free (uris);
-		g_free (handle);
-		g_list_free (rows);
+	data = g_new (AsyncData, 1);
 
-		return result;
-	}
+	data->model = model;
+	data->cancellable = g_cancellable_new ();
+	data->files = files;
+	data->trash = trash;
+	data->iter = files;
+	data->removed = FALSE;
 	
-	if (trash) {
-		options =
-			GNOME_VFS_XFER_RECURSIVE |
-			GNOME_VFS_XFER_REMOVESOURCE;
-		sync_cb = progress_sync_callback_trash;
-	} else {
-		options =
-			GNOME_VFS_XFER_DELETE_ITEMS | GNOME_VFS_XFER_RECURSIVE;
-		sync_cb = progress_sync_callback_delete;
-	}
-
-	gnome_vfs_async_xfer (&(handle->handle), uris, target,
-			      options,
-			      GNOME_VFS_XFER_ERROR_MODE_QUERY,
-			      GNOME_VFS_XFER_OVERWRITE_MODE_REPLACE,
-			      GNOME_VFS_PRIORITY_DEFAULT,
-			      progress_update_callback,
-			      handle, sync_cb, handle);
-
 	model->priv->async_handles =
-	    g_slist_prepend (model->priv->async_handles, handle);
+	    g_slist_prepend (model->priv->async_handles, data);
 
-	g_list_free (uris);
-	
-	if (target) {
-		g_list_foreach (target, (GFunc)gnome_vfs_uri_unref, NULL);
-		g_list_free (target);
-	}
-	
+	g_io_scheduler_push_job ((GIOSchedulerJobFunc)delete_files, 
+				 data,
+				 (GDestroyNotify)async_data_free, 
+				 G_PRIORITY_DEFAULT, 
+				 data->cancellable);
 	g_list_free (rows);
 	
 	return GEDIT_FILE_BROWSER_STORE_RESULT_OK;
@@ -3136,12 +3086,12 @@ gedit_file_browser_store_new_file (GeditFileBrowserStore * model,
 				   GtkTreeIter * parent,
 				   GtkTreeIter * iter)
 {
-	GnomeVFSURI *uri;
-	GnomeVFSHandle *handle;
-	GnomeVFSResult ret;
+	GFile * file;
+	GFileOutputStream * stream;
 	FileBrowserNodeDir *parent_node;
 	gboolean result = FALSE;
 	FileBrowserNode *node;
+	GError * error = NULL;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), FALSE);
 	g_return_val_if_fail (parent != NULL, FALSE);
@@ -3152,19 +3102,22 @@ gedit_file_browser_store_new_file (GeditFileBrowserStore * model,
 	g_return_val_if_fail (iter != NULL, FALSE);
 
 	parent_node = FILE_BROWSER_NODE_DIR (parent->user_data);
-	uri = unique_new_name (((FileBrowserNode *) parent_node)->uri, _("file"));
+	file = unique_new_name (((FileBrowserNode *) parent_node)->file, _("file"));
 
-	ret = gnome_vfs_create_uri (&handle, uri,
-				    GNOME_VFS_OPEN_NONE |
-				    GNOME_VFS_OPEN_WRITE, FALSE, 0644);
-
-	if (ret != GNOME_VFS_OK) {
+	stream = g_file_create (file, G_FILE_CREATE_NONE, NULL, &error);
+	
+	if (!stream)
+	{
 		g_signal_emit (model, model_signals[ERROR], 0,
 			       GEDIT_FILE_BROWSER_ERROR_NEW_FILE,
-			       gnome_vfs_result_to_string (ret));
+			       error->message);
+		g_error_free (error);
 	} else {
-		node = model_add_node_from_uri (model, (FileBrowserNode *)
-						parent_node, uri, NULL);
+		g_object_unref (stream);
+		node = model_add_node_from_file (model, 
+						 (FileBrowserNode *)parent_node, 
+						 file, 
+						 NULL);
 
 		if (model_node_visibility (model, node)) {
 			iter->user_data = node;
@@ -3177,7 +3130,7 @@ gedit_file_browser_store_new_file (GeditFileBrowserStore * model,
 		}
 	}
 
-	gnome_vfs_uri_unref (uri);
+	g_object_unref (file);
 	return result;
 }
 
@@ -3186,11 +3139,11 @@ gedit_file_browser_store_new_directory (GeditFileBrowserStore * model,
 					GtkTreeIter * parent,
 					GtkTreeIter * iter)
 {
-	GnomeVFSURI *uri;
-	GnomeVFSResult ret;
+	GFile * file;
 	FileBrowserNodeDir *parent_node;
-	gboolean result = FALSE;
+	GError * error = NULL;
 	FileBrowserNode *node;
+	gboolean result = FALSE;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), FALSE);
 	g_return_val_if_fail (parent != NULL, FALSE);
@@ -3201,17 +3154,18 @@ gedit_file_browser_store_new_directory (GeditFileBrowserStore * model,
 	g_return_val_if_fail (iter != NULL, FALSE);
 
 	parent_node = FILE_BROWSER_NODE_DIR (parent->user_data);
-	uri = unique_new_name (((FileBrowserNode *) parent_node)->uri, _("directory"));
+	file = unique_new_name (((FileBrowserNode *) parent_node)->file, _("directory"));
 
-	ret = gnome_vfs_make_directory_for_uri (uri, 0755);
-
-	if (ret != GNOME_VFS_OK) {
+	if (!g_file_make_directory (file, NULL, &error)) {
 		g_signal_emit (model, model_signals[ERROR], 0,
 			       GEDIT_FILE_BROWSER_ERROR_NEW_DIRECTORY,
-			       gnome_vfs_result_to_string (ret));
+			       error->message);
+		g_error_free (error);
 	} else {
-		node = model_add_node_from_uri (model, (FileBrowserNode *)
-						parent_node, uri, NULL);
+		node = model_add_node_from_file (model, 
+						 (FileBrowserNode *)parent_node, 
+						 file, 
+						 NULL);
 
 		if (model_node_visibility (model, node)) {
 			iter->user_data = node;
@@ -3220,42 +3174,39 @@ gedit_file_browser_store_new_directory (GeditFileBrowserStore * model,
 			g_signal_emit (model, model_signals[ERROR], 0,
 				       GEDIT_FILE_BROWSER_ERROR_NEW_FILE,
 				       _
-				       ("The new file is currently filtered out. You need to adjust your filter settings to make the file visible"));
+				       ("The new directory is currently filtered out. You need to adjust your filter settings to make the directory visible"));
 		}
 	}
 
-	gnome_vfs_uri_unref (uri);
+	g_object_unref (file);
 	return result;
 }
 
 /* Signal handlers */
 static void
-on_directory_monitor_event (GnomeVFSMonitorHandle * handle,
-			    gchar const *monitor_uri,
-			    const gchar * info_uri,
-			    GnomeVFSMonitorEventType event_type,
+on_directory_monitor_event (GFileMonitor * monitor,
+			    GFile * file,
+			    GFile * other_file,
+			    GFileMonitorEvent event_type,
 			    FileBrowserNode * parent)
 {
 	FileBrowserNode *node;
 	FileBrowserNodeDir *dir = FILE_BROWSER_NODE_DIR (parent);
-	GnomeVFSURI *uri;
 
 	switch (event_type) {
-	case GNOME_VFS_MONITOR_EVENT_DELETED:
-		uri = gnome_vfs_uri_new (info_uri);
-		node = model_uri_exists (dir->model, parent, uri);
-		gnome_vfs_uri_unref (uri);
+	case G_FILE_MONITOR_EVENT_DELETED:
+		node = model_file_exists (dir->model, parent, file);
 
 		if (node != NULL) {
 			// Remove the node
 			model_remove_node (dir->model, node, NULL, TRUE);
 		}
 		break;
-	case GNOME_VFS_MONITOR_EVENT_CREATED:
-		uri = gnome_vfs_uri_new (info_uri);
-
-		model_add_node_from_uri (dir->model, parent, uri, NULL);
-		gnome_vfs_uri_unref (uri);
+	case G_FILE_MONITOR_EVENT_CREATED:
+		if (g_file_query_exists (file, NULL)) {
+			model_add_node_from_file (dir->model, parent, file, NULL);
+		}
+		
 		break;
 	default:
 		break;
