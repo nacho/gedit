@@ -1,5 +1,17 @@
 2008-05-05  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* gedit/gedit-document.[ch]: added gedit_document_set_uri function which
+	updates the documents uri
+	
+	* plugins/filebrowser/gedit-file-browser-marshal.list:
+	* plugins/filebrowser/gedit-file-browser-store.[ch]:
+	* plugins/filebrowser/gedit-file-browser-plugin.c:
+	
+	added support for resetting uris for open documents in gedit when
+	a file is renamed from the file browser plugin
+	
+2008-05-05  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* configure.ac: added gio dependency
 
 2008-05-05  Jesse van den Kieboom  <jesse@icecrew.nl>

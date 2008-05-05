@@ -26,6 +26,7 @@
 
 #include <gedit/gedit-commands.h>
 #include <gedit/gedit-utils.h>
+#include <gedit/gedit-app.h>
 #include <glib/gi18n-lib.h>
 #include <gedit/gedit-debug.h>
 #include <gconf/gconf-client.h>
@@ -83,6 +84,10 @@ static void on_virtual_root_changed_cb   (GeditFileBrowserStore * model,
 static void on_filter_mode_changed_cb    (GeditFileBrowserStore * model,
                                           GParamSpec * param,
                                           GeditWindow * window);
+static void on_rename_cb		 (GeditFileBrowserStore * model,
+					  const gchar * olduri,
+					  const gchar * newuri,
+					  GeditWindow * window);
 static void on_filter_pattern_changed_cb (GeditFileBrowserWidget * widget,
                                           GParamSpec * param,
                                           GeditWindow * window);
@@ -762,6 +767,11 @@ impl_activate (GeditPlugin * plugin, GeditWindow * window)
 	                  G_CALLBACK (on_filter_mode_changed_cb),
 	                  window);
 
+	g_signal_connect (store,
+			  "rename",
+			  G_CALLBACK (on_rename_cb),
+			  window);
+
 	g_signal_connect (window,
 	                  "tab-added",
 	                  G_CALLBACK (on_tab_added_cb),
@@ -959,6 +969,45 @@ on_filter_mode_changed_cb (GeditFileBrowserStore * model,
 	
 	g_object_unref (client);
 	
+}
+
+static void
+on_rename_cb (GeditFileBrowserStore * store,
+	      const gchar * olduri,
+	      const gchar * newuri,
+	      GeditWindow * window)
+{
+	GeditApp * app;
+	GList * documents;
+	GList * item;
+	GeditDocument * doc;
+	GFile * docfile;
+	GFile * oldfile;
+	gchar * uri;
+	
+	/* Find all documents and set its uri to newuri where it matches olduri */
+	app = gedit_app_get_default ();
+	documents = gedit_app_get_documents (app);
+	
+	oldfile = g_file_new_for_uri (olduri);
+	
+	for (item = documents; item; item = item->next) {
+		doc = GEDIT_DOCUMENT (item->data);
+		uri = gedit_document_get_uri (doc);
+		
+		docfile = g_file_new_for_uri (uri);
+		
+		if (g_file_equal (docfile, oldfile)) {
+			gedit_document_set_uri (doc, newuri);
+
+			gedit_debug_message (DEBUG_PLUGINS, "Renamed %s to %s", olduri, newuri);
+		}
+		
+		g_free (uri);
+		g_object_unref (docfile);
+	}
+	
+	g_list_free (documents);
 }
 
 static void 

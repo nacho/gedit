@@ -154,6 +154,8 @@ GType		 gedit_document_get_type      	(void) G_GNUC_CONST;
 GeditDocument   *gedit_document_new 		(void);
 
 gchar		*gedit_document_get_uri 	(GeditDocument       *doc);
+void		 gedit_document_set_uri		(GeditDocument       *doc,
+						 const gchar 	     *uri);
 
 gchar		*gedit_document_get_uri_for_display
 						(GeditDocument       *doc);

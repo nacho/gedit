@@ -105,6 +105,9 @@ struct _GeditFileBrowserStoreClass {
 		                      gchar * message);
 	gboolean (*no_trash)	     (GeditFileBrowserStore * model,
 				      GList * files);
+	void (*rename)		     (GeditFileBrowserStore * model,
+				      const gchar * olduri,
+				      const gchar * newuri);
 };
 
 GType gedit_file_browser_store_get_type               (void) G_GNUC_CONST;

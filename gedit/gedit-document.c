@@ -852,6 +852,16 @@ gedit_document_get_uri (GeditDocument *doc)
 	return g_strdup (doc->priv->uri);
 }
 
+void
+gedit_document_set_uri (GeditDocument *doc,
+			const gchar   *uri)
+{
+	gchar * mime_type = g_strdup (doc->priv->mime_type);
+	set_uri (doc, uri, mime_type);
+	
+	g_free (mime_type);
+}
+
 /* Never returns NULL */
 gchar *
 gedit_document_get_uri_for_display (GeditDocument *doc)

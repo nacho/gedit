@@ -206,6 +206,7 @@ enum
 	END_LOADING,
 	ERROR,
 	NO_TRASH,
+	RENAME,
 	NUM_SIGNALS
 };
 
@@ -355,6 +356,16 @@ gedit_file_browser_store_class_init (GeditFileBrowserStoreClass * klass)
 					   no_trash), g_signal_accumulator_true_handled, NULL,
 			  gedit_file_browser_marshal_BOOL__POINTER,
 			  G_TYPE_BOOLEAN, 1, G_TYPE_POINTER);
+	model_signals[RENAME] =
+	    g_signal_new ("rename",
+			  G_OBJECT_CLASS_TYPE (object_class),
+			  G_SIGNAL_RUN_LAST,
+			  G_STRUCT_OFFSET (GeditFileBrowserStoreClass,
+					   rename), NULL, NULL,
+			  gedit_file_browser_marshal_VOID__STRING_STRING, 
+			  G_TYPE_NONE, 2,
+			  G_TYPE_STRING,
+			  G_TYPE_STRING);
 
 	g_type_class_add_private (object_class,
 				  sizeof (GeditFileBrowserStorePrivate));
@@ -2829,7 +2840,10 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 	FileBrowserNode *node;
 	GFile * file;
 	GFile * parent;
+	GFile * previous;
 	GError * err = NULL;
+	gchar * olduri;
+	gchar * newuri;
 	GtkTreePath *path;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), FALSE);
@@ -2852,16 +2866,13 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 	if (g_file_move (node->file, file, G_FILE_COPY_NONE, NULL, NULL, NULL, &err)) {
 		/* TODO: make sure to also re'path all the child nodes that
 		   might be there! */
-		parent = node->file;
+		previous = node->file;
 		node->file = file;
 
 		/* This makes sure the actual info for the node is requeried */
 		file_browser_node_set_name (node);
 		file_browser_node_set_from_info (model, node, NULL, TRUE);
 
-		/* Free the old nodes' GFile */
-		g_object_unref (parent);
-		
 		if (model_node_visibility (model, node)) {
 			path = gedit_file_browser_store_get_path_real (model, node);
 			gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path, iter);
@@ -2870,12 +2881,23 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 			/* Reorder this item */
 			model_resort_node (model, node);
 		} else {
+			g_object_unref (previous);
+			
 			if (error != NULL)
 				*error = g_error_new_literal (gedit_file_browser_store_error_quark (),
 							      GEDIT_FILE_BROWSER_ERROR_RENAME,
 				       			      _("The renamed file is currently filtered out. You need to adjust your filter settings to make the file visible"));
 			return FALSE;
 		}
+
+		olduri = g_file_get_uri (previous);
+		newuri = g_file_get_uri (node->file);
+
+		g_signal_emit (model, model_signals[RENAME], 0, olduri, newuri);
+
+		g_object_unref (previous);
+		g_free (olduri);
+		g_free (newuri);
 
 		return TRUE;
 	} else {
