@@ -75,6 +75,9 @@ void		 gedit_plugins_engine_garbage_collect	(GeditPluginsEngine *engine);
 
 const GList	*gedit_plugins_engine_get_plugin_list 	(GeditPluginsEngine *engine);
 
+GeditPluginInfo	*gedit_plugins_engine_get_plugin_info	(GeditPluginsEngine *engine,
+							 const gchar        *name);
+
 gboolean 	 gedit_plugins_engine_activate_plugin 	(GeditPluginsEngine *engine,
 							 GeditPluginInfo    *info);
 gboolean 	 gedit_plugins_engine_deactivate_plugin	(GeditPluginsEngine *engine,

@@ -84,13 +84,6 @@ static void	gedit_plugins_engine_activate_plugin_real (GeditPluginsEngine *engin
 static void	gedit_plugins_engine_deactivate_plugin_real (GeditPluginsEngine *engine,
 							     GeditPluginInfo    *info);
 
-static gint
-compare_plugin_info (GeditPluginInfo *info1,
-		     GeditPluginInfo *info2)
-{
-	return strcmp (info1->module_name, info2->module_name);
-}
-
 static void
 gedit_plugins_engine_load_dir (GeditPluginsEngine *engine,
 			       const gchar        *dir,
@@ -129,9 +122,7 @@ gedit_plugins_engine_load_dir (GeditPluginsEngine *engine,
 
 			/* If a plugin with this name has already been loaded
 			 * drop this one (user plugins override system plugins) */
-			if (g_list_find_custom (engine->priv->plugin_list,
-						info,
-						(GCompareFunc)compare_plugin_info) != NULL)
+			if (gedit_plugins_engine_get_plugin_info (engine, info->module_name) != NULL)
 			{
 				g_warning ("Two or more plugins named '%s'. "
 					   "Only the first will be considered.\n",
@@ -329,6 +320,23 @@ gedit_plugins_engine_get_plugin_list (GeditPluginsEngine *engine)
 	gedit_debug (DEBUG_PLUGINS);
 
 	return engine->priv->plugin_list;
+}
+
+static gint
+compare_plugin_info_and_name (GeditPluginInfo *info,
+			      const gchar *module_name)
+{
+	return strcmp (info->module_name, module_name);
+}
+
+GeditPluginInfo *
+gedit_plugins_engine_get_plugin_info (GeditPluginsEngine *engine,
+				      const gchar        *name)
+{
+	GList *l = g_list_find_custom (engine->priv->plugin_list,
+				       name,
+				       (GCompareFunc) compare_plugin_info_and_name);
+	return l == NULL ? NULL : (GeditPluginInfo *) l->data;
 }
 
 static gboolean
