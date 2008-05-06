@@ -1,5 +1,11 @@
 2008-05-06  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* plugins/filebrowser/gedit-file-browser-store.c: fixed copy-paste 
+	typof error in row_changed (which called gtk_tree_model_row_inserted
+	instead of gtk_tree_model_row_changed, oops)
+	
+2008-05-06  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* plugins/filebrowser/gedit-file-browser-widget.c: fixed problem when
 	icon for virtual root is not available
 	* plugins/filebrowser/gedit-file-browser-utils.c: fixed using basename

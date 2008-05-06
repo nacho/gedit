@@ -1141,7 +1141,7 @@ row_changed (GeditFileBrowserStore * model,
 	
 	/* Insert a copy of the actual path here because the row-inserted
 	   signal may alter the path */
-	gtk_tree_model_row_inserted (GTK_TREE_MODEL(model), copy, iter);
+	gtk_tree_model_row_changed (GTK_TREE_MODEL(model), copy, iter);
 	gtk_tree_path_free (copy);
 }
 
