@@ -1133,6 +1133,19 @@ model_resort_node (GeditFileBrowserStore * model, FileBrowserNode * node)
 }
 
 static void
+row_changed (GeditFileBrowserStore * model,
+	     const GtkTreePath * path,
+	     GtkTreeIter * iter)
+{
+	GtkTreePath *copy = gtk_tree_path_copy (path);
+	
+	/* Insert a copy of the actual path here because the row-inserted
+	   signal may alter the path */
+	gtk_tree_model_row_inserted (GTK_TREE_MODEL(model), copy, iter);
+	gtk_tree_path_free (copy);
+}
+
+static void
 row_inserted (GeditFileBrowserStore * model,
 	      const GtkTreePath * path,
 	      GtkTreeIter * iter)
@@ -1769,13 +1782,26 @@ file_browser_node_set_from_info (GeditFileBrowserStore * model,
 	gchar const * name;
 	gboolean free_info = FALSE;
 	GtkTreePath * path;
+	gchar * uri;
+	GError * error = NULL;
 
 	if (info == NULL) {
 		info = g_file_query_info (node->file,  
 					  STANDARD_ATTRIBUTE_TYPES,
 					  G_FILE_QUERY_INFO_NONE,
 					  NULL,
-					  NULL);
+					  &error);
+					  
+		if (!info) {
+			uri = g_file_get_uri (node->file);
+			
+			g_warning ("Could not get info for %s: %s", uri, error->message);
+			g_error_free (error);
+			g_free (uri);
+			
+			return;
+		}
+		
 		free_info = TRUE;
 	}
 
@@ -1846,20 +1872,26 @@ model_add_node_from_file (GeditFileBrowserStore * model,
 {
 	FileBrowserNode *node;
 	gboolean free_info = FALSE;
-	
-	if (!info)
-	{
-		info = g_file_query_info (file,
-					  STANDARD_ATTRIBUTE_TYPES,
-					  G_FILE_QUERY_INFO_NONE,
-					  NULL,
-					  NULL);
-		free_info = TRUE;
-	}
-	
+	GError * error = NULL;
+
 	// Check if it already exists
-	if ((node = model_file_exists (model, parent, file)) == NULL) {
-		if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
+	if ((node = model_file_exists (model, parent, file)) == NULL) {	
+		if (!info) {
+			info = g_file_query_info (file,
+						  STANDARD_ATTRIBUTE_TYPES,
+						  G_FILE_QUERY_INFO_NONE,
+						  NULL,
+						  &error);
+			free_info = TRUE;
+		}
+		
+		if (!info) {
+			g_warning ("Error querying file info: %s", error->message);
+			g_error_free (error);
+			
+			/* FIXME: What to do now then... */
+			node = file_browser_node_new (file, parent);
+		} else if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
 			node = file_browser_node_dir_new (model, file, parent);
 		} else {
 			node = file_browser_node_new (file, parent);
@@ -1867,10 +1899,37 @@ model_add_node_from_file (GeditFileBrowserStore * model,
 
 		file_browser_node_set_from_info (model, node, info, FALSE);
 		model_add_node (model, node, parent);
+		
+		if (info && free_info)
+			g_object_unref (info);
 	}
-	
-	if (free_info)
-		g_object_unref (info);
+
+	return node;
+}
+
+static FileBrowserNode *
+model_add_node_from_dir (GeditFileBrowserStore * model,
+			 FileBrowserNode * parent,
+			 GFile * file,
+			 GFileInfo * info)
+{
+	FileBrowserNode *node;
+
+	// Check if it already exists
+	if ((node = model_file_exists (model, parent, file)) == NULL) {	
+		node = file_browser_node_dir_new (model, file, parent);
+		file_browser_node_set_from_info (model, node, info, FALSE);
+
+		if (node->name == NULL) {
+			file_browser_node_set_name (node);
+		}
+		
+		if (node->icon == NULL) {
+			node->icon = gedit_file_browser_utils_pixbuf_from_theme ("gnome-fs-directory", GTK_ICON_SIZE_MENU);
+		}
+
+		model_add_node (model, node, parent);
+	}
 
 	return node;
 }
@@ -2319,7 +2378,7 @@ set_virtual_root_from_file (GeditFileBrowserStore * model,
 	for (item = files; item; item = item->next) {
 		check = G_FILE (item->data);
 		
-		parent = model_add_node_from_file (model, parent, check, NULL);
+		parent = model_add_node_from_dir (model, parent, check, NULL);
 		g_object_unref (check);
 	}
 
@@ -2409,6 +2468,114 @@ unique_new_name (GFile * directory, gchar const * name)
 	return newuri;
 }
 
+static GeditFileBrowserStoreResult
+model_root_mounted (GeditFileBrowserStore * model, gchar const * virtual_root)
+{
+	model_check_dummy (model, model->priv->root);
+	g_object_notify (G_OBJECT (model), "root");
+
+	if (virtual_root != NULL)
+		return
+		    gedit_file_browser_store_set_virtual_root_from_string
+		    (model, virtual_root);
+	else
+		set_virtual_root_from_node (model,
+					    model->priv->root);
+
+	return GEDIT_FILE_BROWSER_STORE_RESULT_OK;
+}
+
+typedef struct {
+	GeditFileBrowserStore * model;
+	gchar * virtual_root;
+	GMountOperation * operation;
+} MountInfo;
+
+static void
+mount_cb (GFile * file, 
+	  GAsyncResult * res, 
+	  MountInfo * mount_info)
+{
+	GFile * mounted_on;
+	GError * error = NULL;
+	FileBrowserNode * root;
+	GeditFileBrowserStore * model = mount_info->model;
+	
+	mounted_on = g_file_mount_mountable_finish (file, res, &error);
+	
+	if (mounted_on) {
+		model_root_mounted (model, mount_info->virtual_root);
+		g_object_unref (mounted_on);
+	} else if (error->code != G_IO_ERROR_CANCELLED) {
+		g_signal_emit (model, 
+			       model_signals[ERROR], 
+			       0, 
+			       GEDIT_FILE_BROWSER_ERROR_SET_ROOT,
+			       error->message);
+
+		g_error_free (error);
+		
+		/* Set the virtual root to the root */
+		root = model->priv->root;
+		model->priv->virtual_root = root;
+		
+		/* Set the root to be loaded */
+		root->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_LOADED;
+		
+		/* Check the dummy */
+		model_check_dummy (model, root);
+		
+		g_object_notify (G_OBJECT (model), "root");
+		g_object_notify (G_OBJECT (model), "virtual-root");
+	}
+	
+	g_object_unref (mount_info->operation);
+	g_free (mount_info->virtual_root);
+	g_free (mount_info);
+}
+
+static GeditFileBrowserStoreResult
+model_mount_root (GeditFileBrowserStore * model, gchar const * virtual_root)
+{
+	GFileInfo * info;
+	GError * error = NULL;
+	MountInfo * mount_info;
+	
+	info = g_file_query_info (model->priv->root->file, 
+				  G_FILE_ATTRIBUTE_STANDARD_TYPE, 
+				  G_FILE_QUERY_INFO_NONE,
+				  NULL,
+				  &error);
+
+	if (!info) {
+		if (error->code == G_IO_ERROR_NOT_MOUNTED) {
+			/* Try to mount it */
+			FILE_BROWSER_NODE_DIR (model->priv->root)->cancellable = g_cancellable_new ();
+			
+			mount_info = g_new(MountInfo, 1);
+			mount_info->model = model;
+			mount_info->virtual_root = g_strdup (virtual_root);
+			mount_info->operation = g_mount_operation_new ();
+			
+			g_file_mount_mountable (model->priv->root->file, 
+						G_MOUNT_MOUNT_NONE,
+						mount_info->operation,
+						FILE_BROWSER_NODE_DIR (model->priv->root)->cancellable,
+						(GAsyncReadyCallback)mount_cb,
+						mount_info);
+						
+		}
+		
+		g_error_free (error);
+	} else {
+		g_object_unref (info);
+		
+		return model_root_mounted (model, virtual_root);
+	}
+	
+	return GEDIT_FILE_BROWSER_STORE_RESULT_OK;
+}
+
 /* Public */
 GeditFileBrowserStore *
 gedit_file_browser_store_new (gchar const *root)
@@ -2456,11 +2623,9 @@ gedit_file_browser_store_set_value (GeditFileBrowserStore * tree_model,
 	model_recomposite_icon (tree_model, iter);
 
 	if (model_node_visibility (tree_model, node)) {
-		path =
-		    gedit_file_browser_store_get_path (GTK_TREE_MODEL
-						       (tree_model), iter);
-		gtk_tree_model_row_changed (GTK_TREE_MODEL (tree_model),
-					    path, iter);
+		path = gedit_file_browser_store_get_path (GTK_TREE_MODEL (tree_model), 
+							  iter);
+		row_changed (tree_model, path, iter);
 		gtk_tree_path_free (path);
 	}
 }
@@ -2629,13 +2794,6 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 
 	if (root != NULL) {
 		file = g_file_new_for_uri (root);
-
-		if (file == NULL) {
-			g_signal_emit (model, model_signals[ERROR], 0,
-				       GEDIT_FILE_BROWSER_ERROR_SET_ROOT,
-				       _("Invalid uri"));
-			return GEDIT_FILE_BROWSER_STORE_RESULT_ERROR;
-		}
 	}
 
 	if (root != NULL && model->priv->root != NULL) {
@@ -2650,8 +2808,7 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 	if (virtual_root) {
 		vfile = g_file_new_for_uri (virtual_root);
 
-		if (equal && model->priv->virtual_root &&
-		    g_file_equal (vfile, model->priv->virtual_root->file)) {
+		if (equal && g_file_equal (vfile, model->priv->virtual_root->file)) {
 			if (file)
 				g_object_unref (file);
 
@@ -2672,20 +2829,11 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 	if (file != NULL) {
 		/* Create the root node */
 		node = file_browser_node_dir_new (model, file, NULL);
+		
 		g_object_unref (file);
 
 		model->priv->root = node;
-		model_check_dummy (model, node);
-		
-		g_object_notify (G_OBJECT (model), "root");
-
-		if (virtual_root != NULL)
-			return
-			    gedit_file_browser_store_set_virtual_root_from_string
-			    (model, virtual_root);
-		else
-			set_virtual_root_from_node (model,
-						    model->priv->root);
+		return model_mount_root (model, virtual_root);
 	} else {
 		g_object_notify (G_OBJECT (model), "root");
 		g_object_notify (G_OBJECT (model), "virtual-root");
@@ -2831,6 +2979,36 @@ gedit_file_browser_store_refresh (GeditFileBrowserStore * model)
 	model_load_directory (model, model->priv->virtual_root);
 }
 
+static void
+reparent_node (FileBrowserNode * node, gboolean reparent)
+{
+	FileBrowserNodeDir * dir;
+	GSList * child;
+	GFile * parent;
+	gchar * base;
+
+	if (!node->file) {
+		return;
+	}
+	
+	if (reparent) {
+		parent = node->parent->file;
+		base = g_file_get_basename (node->file);
+		g_object_unref (node->file);
+
+		node->file = g_file_get_child (parent, base);
+		g_free (base);
+	}
+	
+	if (NODE_IS_DIR (node)) {
+		dir = FILE_BROWSER_NODE_DIR (node);
+		
+		for (child = dir->children; child; child = child->next) {
+			reparent_node ((FileBrowserNode *)child->data, TRUE);
+		}
+	}
+}
+
 gboolean
 gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 				 GtkTreeIter * iter,
@@ -2864,18 +3042,18 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 	}
 
 	if (g_file_move (node->file, file, G_FILE_COPY_NONE, NULL, NULL, NULL, &err)) {
-		/* TODO: make sure to also re'path all the child nodes that
-		   might be there! */
 		previous = node->file;
 		node->file = file;
 
 		/* This makes sure the actual info for the node is requeried */
 		file_browser_node_set_name (node);
 		file_browser_node_set_from_info (model, node, NULL, TRUE);
+		
+		reparent_node (node, FALSE);
 
 		if (model_node_visibility (model, node)) {
 			path = gedit_file_browser_store_get_path_real (model, node);
-			gtk_tree_model_row_changed (GTK_TREE_MODEL (model), path, iter);
+			row_changed (model, path, iter);
 			gtk_tree_path_free (path);
 
 			/* Reorder this item */

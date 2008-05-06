@@ -156,7 +156,7 @@ gedit_file_browser_utils_file_basename (GFile * file)
 	gchar * ret;
 
 	if (!display)
-		return NULL;
+		return g_file_get_basename (file);
 
 	ret = g_path_get_basename (display);
 	

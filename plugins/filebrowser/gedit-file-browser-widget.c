@@ -1402,29 +1402,36 @@ create_goto_menu_item (GeditFileBrowserWidget * obj, GList * item,
 	GtkWidget *result;
 	GtkWidget *image;
 	gchar *unescape;
-	GdkPixbuf *pixbuf;
+	GdkPixbuf *pixbuf = NULL;
 	Location *loc;
 
 	loc = (Location *) (item->data);
 
 	if (!get_from_bookmark_file (obj, loc->virtual_root, &unescape, &pixbuf)) {
 		unescape = gedit_file_browser_utils_file_basename (loc->virtual_root);
-		pixbuf = g_object_ref (icon);
+		
+		if (icon)
+			pixbuf = g_object_ref (icon);
 	}
 
-	image = gtk_image_new_from_pixbuf (pixbuf);
-	g_object_unref (pixbuf);
+	if (pixbuf) {
+		image = gtk_image_new_from_pixbuf (pixbuf);
+		g_object_unref (pixbuf);
 
-	gtk_widget_show (image);
+		gtk_widget_show (image);
 
-	result = gtk_image_menu_item_new_with_label (unescape);
+		result = gtk_image_menu_item_new_with_label (unescape);
+		gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (result),
+					       image);
+	} else {
+		result = gtk_menu_item_new_with_label (unescape);
+	}
+	
 	g_object_set_data (G_OBJECT (result), LOCATION_DATA_KEY, item);
 	g_signal_connect (result, "activate",
 			  G_CALLBACK (on_location_jump_activate), obj);
 
 	gtk_widget_show (result);
-	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (result),
-				       image);
 
 	g_free (unescape);
 
