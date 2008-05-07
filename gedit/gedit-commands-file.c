@@ -37,8 +37,8 @@
 #include <string.h> /* For strlen and strcmp */
 
 #include <glib/gi18n.h>
+#include <gio/gio.h>
 #include <gtk/gtk.h>
-#include <libgnomevfs/gnome-vfs.h>
 
 #include "gedit-commands.h"
 #include "gedit-window.h"
@@ -75,83 +75,84 @@ _gedit_cmd_file_new (GtkAction   *action,
 }
 
 static GeditTab *
-get_tab_from_uri (const GList *docs, 
-		  const gchar *uri)
+get_tab_from_file (GList *docs, GFile *file)
 {
+	GeditTab *tab = NULL;
+
 	while (docs != NULL)
 	{
 		gchar *u;
 		GeditDocument *d;
-		
+
 		d = GEDIT_DOCUMENT (docs->data);
 
 		u = gedit_document_get_uri (d);
-
-		if ((u != NULL) && gnome_vfs_uris_match (uri, u))
+		if (u != NULL)
 		{
+			GFile *f;
+
+			f = g_file_new_for_uri (u);
 			g_free (u);
-			
-			return gedit_tab_get_from_document (d);
+
+			if (g_file_equal (f, file))
+			{
+				tab = gedit_tab_get_from_document (d);
+				g_object_unref (f);
+				break;
+			}
+
+			g_object_unref (f);
 		}
-		
-		g_free (u);
-		
+
 		docs = g_list_next (docs);
 	}
-	
-	return NULL;
+
+	return tab;
 }
 
 static gboolean
-is_duplicated_uri (const GSList *uris, 
-		   const gchar  *u)
+is_duplicated_file (GSList *files, GFile *file)
 {
-	while (uris != NULL)
+	while (files != NULL)
 	{
-		if (gnome_vfs_uris_match (u, (const gchar*)uris->data))
+		if (g_file_equal (files->data, file))
 			return TRUE;
-			
-		uris = g_slist_next (uris);
+
+		files = g_slist_next (files);
 	}
-	
+
 	return FALSE;
 }
 
 /* File loading */
 static gint
 load_file_list (GeditWindow         *window,
-		const GSList        *uris,
+		GSList              *files,
 		const GeditEncoding *encoding,
 		gint                 line_pos,
 		gboolean             create)
 {
 	GeditTab      *tab;
-
 	gint           loaded_files = 0; /* Number of files to load */
 	gboolean       jump_to = TRUE; /* Whether to jump to the new tab */
-	gboolean       flash = TRUE;   /* Whether to flash a message in the statusbar */
-
 	GList         *win_docs;
-	GSList        *uris_to_load = NULL;
-	const GSList  *l;
+	GSList        *files_to_load = NULL;
+	GSList        *l;
 
 	gedit_debug (DEBUG_COMMANDS);
-
-	g_return_val_if_fail ((uris != NULL) && (uris->data != NULL), 0);
 
 	win_docs = gedit_window_get_documents (window);
 
 	/* Remove the uris corresponding to documents already open
 	 * in "window" and remove duplicates from "uris" list */
-	l = uris;
-	while (uris != NULL)
+	for (l = files; l != NULL; l = l->next)
 	{
-		if (!is_duplicated_uri (uris_to_load, uris->data))
+		if (!is_duplicated_file (files_to_load, l->data))
 		{
-			tab = get_tab_from_uri (win_docs, (const gchar *)uris->data);
+			tab = get_tab_from_file (win_docs, l->data);
 			if (tab != NULL)
 			{
-				if (uris == l)
+				if (l == files)
 				{
 					gedit_window_set_active_tab (window, tab);
 					jump_to = FALSE;
@@ -174,21 +175,19 @@ load_file_list (GeditWindow         *window,
 			}
 			else
 			{
-				uris_to_load = g_slist_prepend (uris_to_load, 
-								uris->data);
+				files_to_load = g_slist_prepend (files_to_load, 
+								 l->data);
 			}
 		}
-
-		uris = g_slist_next (uris);
 	}
 
 	g_list_free (win_docs);
 
-	if (uris_to_load == NULL)
+	if (files_to_load == NULL)
 		return loaded_files;
 	
-	uris_to_load = g_slist_reverse (uris_to_load);
-	l = uris_to_load;
+	files_to_load = g_slist_reverse (files_to_load);
+	l = files_to_load;
 
 	tab = gedit_window_get_active_tab (window);
 	if (tab != NULL)
@@ -200,50 +199,39 @@ load_file_list (GeditWindow         *window,
 		if (gedit_document_is_untouched (doc) &&
 		    (gedit_tab_get_state (tab) == GEDIT_TAB_STATE_NORMAL))
 		{
-			const gchar *uri;
+			gchar *uri;
 
-			uri = (const gchar *)uris_to_load->data;
-
+			// FIXME: pass the GFile to tab when api is there
+			uri = g_file_get_uri (l->data);
 			_gedit_tab_load (tab,
 					 uri,
 					 encoding,
 					 line_pos,
 					 create);
+			g_free (uri);
 
-			uris_to_load = g_slist_next (uris_to_load);
+			l = g_slist_next (l);
 			jump_to = FALSE;
-
-			if (uris_to_load == NULL)
-			{
-				/* There is only a single file to load */
-				gchar *uri_for_display;
-
-				uri_for_display = gedit_utils_format_uri_for_display (uri);
-
-				gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
-							       window->priv->generic_message_cid,
-							       _("Loading file '%s'\342\200\246"),
-							       uri_for_display);
-
-				g_free (uri_for_display);
-
-				flash = FALSE;
-			}
 
 			++loaded_files;
 		}
 	}
 
-	while (uris_to_load != NULL)
+	while (l != NULL)
 	{
-		g_return_val_if_fail (uris_to_load->data != NULL, 0);
-		
+		gchar *uri;
+
+		g_return_val_if_fail (l->data != NULL, 0);
+
+		// FIXME: pass the GFile to tab when api is there
+		uri = g_file_get_uri (l->data);
 		tab = gedit_window_create_tab_from_uri (window,
-							(const gchar *)uris_to_load->data,
+							uri,
 							encoding,
 							line_pos,
 							create,
 							jump_to);
+		g_free (uri);
 
 		if (tab != NULL)
 		{
@@ -251,43 +239,69 @@ load_file_list (GeditWindow         *window,
 			++loaded_files;
 		}
 
-		uris_to_load = g_slist_next (uris_to_load);
+		l = g_slist_next (l);
 	}
 
-	if (flash)
+	if (loaded_files == 1)
 	{
-		if (loaded_files == 1)
-		{
-			GeditDocument *doc;
-			gchar *uri_for_display;
+		GeditDocument *doc;
+		gchar *uri_for_display;
 
-			g_return_val_if_fail (tab != NULL, loaded_files);
+		g_return_val_if_fail (tab != NULL, loaded_files);
 
-			doc = gedit_tab_get_document (tab);
-			uri_for_display = gedit_document_get_uri_for_display (doc);
+		doc = gedit_tab_get_document (tab);
+		uri_for_display = gedit_document_get_uri_for_display (doc);
 
-			gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
-						       window->priv->generic_message_cid,
-						       _("Loading file '%s'\342\200\246"),
-						       uri_for_display);
+		gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
+					       window->priv->generic_message_cid,
+					       _("Loading file '%s'\342\200\246"),
+					       uri_for_display);
 
-			g_free (uri_for_display);
-		}
-		else
-		{
-			gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
-						       window->priv->generic_message_cid,
-						       ngettext("Loading %d file\342\200\246",
-								"Loading %d files\342\200\246",
-								loaded_files),
-						       loaded_files);
-		}
+		g_free (uri_for_display);
 	}
-	
+	else
+	{
+		gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
+					       window->priv->generic_message_cid,
+					       ngettext("Loading %d file\342\200\246",
+							"Loading %d files\342\200\246",
+							loaded_files),
+					       loaded_files);
+	}
+
 	/* Free uris_to_load. Note that l points to the first element of uris_to_load */
-	g_slist_free ((GSList *)l);
+	g_slist_free (files_to_load);
 
 	return loaded_files;
+}
+
+
+// FIXME: we should expose API with GFile and just make the uri
+// variants backward compat wrappers
+
+static gint
+load_uri_list (GeditWindow         *window,
+	       const GSList        *uris,
+	       const GeditEncoding *encoding,
+	       gint                 line_pos,
+	       gboolean             create)
+{
+	GSList *files = NULL;
+	const GSList *u;
+	gint ret;
+
+	for (u = uris; u != NULL; u = u->next)
+	{
+		files = g_slist_prepend (files, g_file_new_for_uri (u->data));
+	}
+	files = g_slist_reverse (files);
+
+	ret = load_file_list (window, files, encoding, line_pos, create);
+
+	g_slist_foreach (files, (GFunc) g_object_unref, NULL);
+	g_slist_free (files);
+
+	return ret;
 }
 
 /**
@@ -311,7 +325,7 @@ gedit_commands_load_uri (GeditWindow         *window,
 
 	uris = g_slist_prepend (uris, (gchar *)uri);
 
-	load_file_list (window, uris, encoding, line_pos, FALSE);
+	load_uri_list (window, uris, encoding, line_pos, FALSE);
 
 	g_slist_free (uris);
 }
@@ -332,7 +346,7 @@ gedit_commands_load_uris (GeditWindow         *window,
 	
 	gedit_debug (DEBUG_COMMANDS);
 	
-	return load_file_list (window, uris, encoding, line_pos, FALSE);
+	return load_uri_list (window, uris, encoding, line_pos, FALSE);
 }
 
 /*
@@ -348,7 +362,7 @@ _gedit_cmd_load_files_from_prompt (GeditWindow         *window,
 {
 	gedit_debug (DEBUG_COMMANDS);
 
-	return load_file_list (window, uris, encoding, line_pos, TRUE);
+	return load_uri_list (window, uris, encoding, line_pos, TRUE);
 }
 
 static void
@@ -603,30 +617,31 @@ _gedit_cmd_file_open_uri (GtkAction   *action,
 /* File saving */
 static void file_save_as (GeditTab *tab, GeditWindow *window);
 
-/* CHECK: move to utils? If so, do not include vfs.h */
 static gboolean
-is_read_only (const gchar *uri)
+is_read_only (GFile *location)
 {
 	gboolean ret = TRUE; /* default to read only */
-	GnomeVFSFileInfo *info;
+	GFileInfo *info;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	g_return_val_if_fail (uri != NULL, FALSE);
+	info = g_file_query_info (location,
+				  G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE,
+				  G_FILE_QUERY_INFO_NONE,
+				  NULL,
+				  NULL);
 
-	info = gnome_vfs_file_info_new ();
-
-	/* FIXME: is GNOME_VFS_FILE_INFO_FOLLOW_LINKS right in this case? - Paolo */
-	if (gnome_vfs_get_file_info (uri,
-				     info,
-				     GNOME_VFS_FILE_INFO_FOLLOW_LINKS |
-				     GNOME_VFS_FILE_INFO_GET_ACCESS_RIGHTS) == GNOME_VFS_OK)
+	if (info != NULL)
 	{
-		if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_ACCESS)
-			ret = !(info->permissions & GNOME_VFS_PERM_ACCESS_WRITABLE);
-	}
+		if (g_file_info_has_attribute (info,
+					       G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE))
+		{
+			ret = !g_file_info_get_attribute_boolean (info,
+								  G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
+		}
 
-	gnome_vfs_file_info_unref (info);
+		g_object_unref (info);
+	}
 
 	return ret;
 }
@@ -634,45 +649,43 @@ is_read_only (const gchar *uri)
 /* FIXME: modify this dialog to be similar to the one provided by gtk+ for
  * already existing files - Paolo (Oct. 11, 2005) */
 static gboolean
-replace_read_only_file (GtkWindow   *parent,
-			const gchar *uri)
+replace_read_only_file (GtkWindow *parent, GFile *file)
 {
 	GtkWidget *dialog;
-	gint       ret;
-	gchar     *full_formatted_uri;
-	gchar     *uri_for_display;
-	gchar     *message_with_uri;
+	gint ret;
+	gchar *parse_name;
+	gchar *name_for_display;
+	gchar *message;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	full_formatted_uri = gedit_utils_format_uri_for_display (uri);
-	g_return_val_if_fail (full_formatted_uri != NULL, FALSE);
+	parse_name = g_file_get_parse_name (file);
 
-	/* Truncate the URI so it doesn't get insanely wide. Note that even
-	 * though the dialog uses wrapped text, if the URI doesn't contain
+	/* Truncate the name so it doesn't get insanely wide. Note that even
+	 * though the dialog uses wrapped text, if the name doesn't contain
 	 * white space then the text-wrapping code is too stupid to wrap it.
 	 */
-	uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 50);
-	g_return_val_if_fail (uri_for_display != NULL, FALSE);
-	g_free (full_formatted_uri);
+	name_for_display = gedit_utils_str_middle_truncate (parse_name, 50);
+	g_free (parse_name);
 
-	message_with_uri = g_strdup_printf (_("The file \"%s\" is read-only."),
-					    uri_for_display);
-	g_free (uri_for_display);
+	message = g_strdup_printf (_("The file \"%s\" is read-only."),
+				   name_for_display);
+	g_free (name_for_display);
 
 	dialog = gtk_message_dialog_new (parent,
 					 GTK_DIALOG_DESTROY_WITH_PARENT,
 					 GTK_MESSAGE_QUESTION,
 					 GTK_BUTTONS_NONE,
-					 message_with_uri);
+					 message);
 
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 						  _("Do you want to try to replace it "
 						    "with the one you are saving?"));
-	g_free (message_with_uri);
+	g_free (message);
 
 	gtk_dialog_add_button (GTK_DIALOG (dialog),
-			       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+			       GTK_STOCK_CANCEL,
+			       GTK_RESPONSE_CANCEL);
 
 	gedit_dialog_add_button (GTK_DIALOG (dialog),
 				 _("_Replace"),
@@ -794,15 +807,18 @@ confirm_overwrite_callback (GtkFileChooser *dialog,
 			    gpointer        data)
 {
 	gchar *uri;
+	GFile *file;
 	GtkFileChooserConfirmation res;
 
 	gedit_debug (DEBUG_COMMANDS);
 
 	uri = gtk_file_chooser_get_uri (dialog);
+	file = g_file_new_for_uri (uri);
+	g_free (uri);
 
-	if (is_read_only (uri))
+	if (is_read_only (file))
 	{
-		if (replace_read_only_file (GTK_WINDOW (dialog), uri))
+		if (replace_read_only_file (GTK_WINDOW (dialog), file))
 			res = GTK_FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME;
 		else
 			res = GTK_FILE_CHOOSER_CONFIRMATION_SELECT_AGAIN;
@@ -813,7 +829,7 @@ confirm_overwrite_callback (GtkFileChooser *dialog,
 		res = GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM;
 	}
 
-	g_free (uri);
+	g_object_unref (file);
 
 	return res;
 }

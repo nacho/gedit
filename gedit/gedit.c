@@ -40,7 +40,6 @@
 #include <gdk/gdkx.h>
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "gedit-app.h"
 #include "gedit-commands.h"
