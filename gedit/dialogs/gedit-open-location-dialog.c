@@ -33,7 +33,8 @@
 #endif
 
 #include <glib/gi18n.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
+#include <gio/gio.h>
+#include <gtk/gtk.h>
 
 #include "gedit-open-location-dialog.h"
 #include "gedit-history-entry.h"
@@ -82,6 +83,7 @@ response_handler (GeditOpenLocationDialog *dlg,
                   gpointer                 data)
 {
 	gchar *uri;
+	const gchar *text;
 
 	switch (response_id)
 	{
@@ -94,21 +96,13 @@ response_handler (GeditOpenLocationDialog *dlg,
 			break;
 
 		case GTK_RESPONSE_OK:
-			uri = gedit_open_location_dialog_get_uri (dlg);
-			if (uri != NULL)
+			text = gtk_entry_get_text
+					(GTK_ENTRY (dlg->priv->uri_text_entry));
+			if (*text != '\0')
 			{
-				const gchar *text;
-
-				text = gtk_entry_get_text
-						(GTK_ENTRY (dlg->priv->uri_text_entry));
-				if (*text != '\0')
-				{
-					gedit_history_entry_prepend_text
-							 (GEDIT_HISTORY_ENTRY (dlg->priv->uri_entry),
-							  text);
-				}
-
-				g_free (uri);
+				gedit_history_entry_prepend_text
+						 (GEDIT_HISTORY_ENTRY (dlg->priv->uri_entry),
+						  text);
 			}
 			break;
 	}
@@ -228,14 +222,11 @@ gedit_open_location_dialog_new (GtkWindow *parent)
 	return dlg;
 }
 
-/* Always return a valid gnome vfs uri or NULL */
-gchar *
-gedit_open_location_dialog_get_uri (GeditOpenLocationDialog *dlg)
+GFile *
+gedit_open_location_dialog_get_location (GeditOpenLocationDialog *dlg)
 {
 	const gchar *str;
-	gchar *uri;
-	gchar *canonical_uri;
-	GnomeVFSURI *vfs_uri;
+	GFile *location;
 
 	g_return_val_if_fail (GEDIT_IS_OPEN_LOCATION_DIALOG (dlg), NULL);
 
@@ -245,25 +236,9 @@ gedit_open_location_dialog_get_uri (GeditOpenLocationDialog *dlg)
 	if (str[0] == '\0')
 		return NULL;
 
-	uri = gnome_vfs_make_uri_from_input_with_dirs (str,
-						       GNOME_VFS_MAKE_URI_DIR_CURRENT);
-	g_return_val_if_fail (uri != NULL, NULL);
+	location = g_file_new_for_commandline_arg (str);
 
-	canonical_uri = gnome_vfs_make_uri_canonical (uri);
-	g_free (uri);
-
-	g_return_val_if_fail (canonical_uri != NULL, NULL);
-
-	vfs_uri = gnome_vfs_uri_new (canonical_uri);
-	if (vfs_uri == NULL)
-	{
-		g_free (canonical_uri);
-		return NULL;
-	}
-
-	gnome_vfs_uri_unref (vfs_uri);
-
-	return canonical_uri;
+	return location;
 }
 
 const GeditEncoding *

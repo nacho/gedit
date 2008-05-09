@@ -31,6 +31,7 @@
 #ifndef __GEDIT_OPEN_LOCATION_DIALOG_H__
 #define __GEDIT_OPEN_LOCATION_DIALOG_H__
 
+#include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <gedit/gedit-encodings.h>
 
@@ -80,7 +81,7 @@ GType	 		 gedit_open_location_dialog_get_type 		(void) G_GNUC_CONST;
 
 GtkWidget		*gedit_open_location_dialog_new			(GtkWindow               *parent);
 
-gchar			*gedit_open_location_dialog_get_uri		(GeditOpenLocationDialog *dlg);
+GFile			*gedit_open_location_dialog_get_location	(GeditOpenLocationDialog *dlg);
 
 const GeditEncoding	*gedit_open_location_dialog_get_encoding	(GeditOpenLocationDialog *dlg);
 

@@ -509,8 +509,9 @@ open_location_dialog_response_cb (GeditOpenLocationDialog *dlg,
 				  gint                    response_id,
 				  GeditWindow             *window)
 {
-	gchar               *uri;
-	GSList              *uris = NULL;
+	GFile *location;
+	gchar *uri;
+	GSList *uris = NULL;
 	const GeditEncoding *encoding;
 
 	gedit_debug (DEBUG_COMMANDS);
@@ -522,48 +523,10 @@ open_location_dialog_response_cb (GeditOpenLocationDialog *dlg,
 		return;
 	}
 
-	uri = gedit_open_location_dialog_get_uri (dlg);
-	if (uri == NULL)
-	{
-		GtkWidget      *msg;
-		GtkWindowGroup *wg;
-
-		wg = GTK_WINDOW (dlg)->group;
-
-		if (wg == NULL)
-		{
-			wg = gtk_window_group_new ();
-
-			gtk_window_group_add_window (wg, GTK_WINDOW (dlg));
-		}
-
-		msg = gtk_message_dialog_new (GTK_WINDOW (dlg),
-					      GTK_DIALOG_DESTROY_WITH_PARENT,
-					      GTK_MESSAGE_ERROR,
-					      GTK_BUTTONS_CLOSE,
-					      _("The entered location is not valid."));
-
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (msg),
-							  _("Please check that you typed the "
-							    "location correctly and try again."));
-
-		gtk_window_group_add_window (wg, GTK_WINDOW (msg));
-
-		g_signal_connect (G_OBJECT (msg),
-				  "response",
-				  G_CALLBACK (gtk_widget_destroy),
-				  NULL);
-
-		gtk_window_set_resizable (GTK_WINDOW (msg), FALSE);
-		gtk_window_set_modal (GTK_WINDOW (msg), TRUE);
-
-		gtk_widget_show (msg);
-
-		return;
-	}
-
+	location = gedit_open_location_dialog_get_location (dlg);
 	encoding = gedit_open_location_dialog_get_encoding (dlg);
-	uris = g_slist_prepend (uris, uri);
+
+	uris = g_slist_prepend (uris, g_file_get_uri (location));
 
 	gtk_widget_destroy (GTK_WIDGET (dlg));
 
