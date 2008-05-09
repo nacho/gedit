@@ -23,7 +23,6 @@ from gtk import glade
 import pango
 import gobject
 import os
-import gnomevfs
 from weakref import WeakKeyDictionary
 from capture import *
 

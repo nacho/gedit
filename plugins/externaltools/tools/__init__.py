@@ -21,7 +21,6 @@ __all__ = ('ExternalToolsPlugin', 'ExternalToolsWindowHelper',
 
 import gedit
 import gtk
-import gnomevfs
 from manager import Manager
 from library import ToolLibrary
 from outputpanel import OutputPanel
@@ -94,10 +93,8 @@ class ToolMenu(object):
         if document is None:
             return
 
-        uri = document.get_uri()
-
-        titled = uri is not None
-        remote = titled and gnomevfs.get_uri_scheme(uri) != 'file'
+        titled = document.get_uri() is not None
+        remote = not document.is_local()
 
         states = {
             'all' : True,
