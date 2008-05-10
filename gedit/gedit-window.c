@@ -37,7 +37,7 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
+#include <gio/gio.h>
 
 #include "gedit-ui.h"
 #include "gedit-window.h"
@@ -3617,45 +3617,63 @@ _gedit_window_set_saving_session_state (GeditWindow *window,
 }
 
 GeditTab *
-gedit_window_get_tab_from_uri (GeditWindow *window,
-			       const gchar *uri)
+gedit_window_get_tab_from_location (GeditWindow *window,
+				    GFile       *location)
 {
 	GList *tabs;
 	GList *l;
-	
+	GeditTab *ret = NULL;
+
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
-	g_return_val_if_fail (uri != NULL, NULL);
-	
+	g_return_val_if_fail (G_IS_FILE (location), NULL);
+
 	tabs = gtk_container_get_children (GTK_CONTAINER (window->priv->notebook));
 	
-	l = tabs;
-	while (l != NULL)
+	for (l = tabs; l != NULL; l = g_list_next (l))
 	{
-		gchar *u;
 		GeditDocument *d;
 		GeditTab *t;
-		
+		GFile *f;
+
 		t = GEDIT_TAB (l->data);
 		d = gedit_tab_get_document (t);
 
-		u = gedit_document_get_uri (d);
+		f = gedit_document_get_location (d);
 
-		if ((u != NULL) && gnome_vfs_uris_match (uri, u))
+		if ((f != NULL))
 		{
-			g_free (u);
-			
-			g_list_free (tabs);
-			
-			return t;
+			gboolean found = g_file_equal (location, f);
+
+			g_object_unref (f);
+
+			if (found)
+			{
+				ret = t;
+				break;
+			}
 		}
-		
-		g_free (u);
-		
-		l = g_list_next (l);
 	}
 	
 	g_list_free (tabs);
 	
-	return NULL;
+	return ret;
+}
+
+/* for backward compat since it is public api */
+GeditTab *
+gedit_window_get_tab_from_uri (GeditWindow *window,
+			       const gchar *uri)
+{
+	GFile *f;
+	GeditTab *tab;
+
+	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
+	g_return_val_if_fail (uri != NULL, NULL);
+
+	f = g_file_new_for_uri (uri);
+	tab = gedit_window_get_tab_from_location (window, f);
+	g_object_unref (f);
+
+	return tab;
 }
 

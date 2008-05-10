@@ -33,6 +33,7 @@
 #ifndef __GEDIT_DOCUMENT_H__
 #define __GEDIT_DOCUMENT_H__
 
+#include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksourcebuffer.h>
 #include <libgnomevfs/gnome-vfs.h>
@@ -152,6 +153,8 @@ GQuark		 gedit_document_error_quark	(void);
 GType		 gedit_document_get_type      	(void) G_GNUC_CONST;
 
 GeditDocument   *gedit_document_new 		(void);
+
+GFile		*gedit_document_get_location	(GeditDocument       *doc);
 
 gchar		*gedit_document_get_uri 	(GeditDocument       *doc);
 void		 gedit_document_set_uri		(GeditDocument       *doc,

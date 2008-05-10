@@ -844,6 +844,14 @@ set_uri (GeditDocument *doc,
 	g_object_notify (G_OBJECT (doc), "shortname");
 }
 
+GFile *
+gedit_document_get_location (GeditDocument *doc)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+
+	return doc->priv->uri == NULL ? NULL : g_file_new_for_uri (doc->priv->uri);
+}
+
 gchar *
 gedit_document_get_uri (GeditDocument *doc)
 {
