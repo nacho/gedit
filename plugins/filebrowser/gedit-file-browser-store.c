@@ -207,6 +207,9 @@ enum
 	ERROR,
 	NO_TRASH,
 	RENAME,
+	BEGIN_REFRESH,
+	END_REFRESH,
+	UNLOAD,
 	NUM_SIGNALS
 };
 
@@ -366,6 +369,31 @@ gedit_file_browser_store_class_init (GeditFileBrowserStoreClass * klass)
 			  G_TYPE_NONE, 2,
 			  G_TYPE_STRING,
 			  G_TYPE_STRING);
+	model_signals[BEGIN_REFRESH] =
+	    g_signal_new ("begin-refresh",
+	    		  G_OBJECT_CLASS_TYPE (object_class),
+	    		  G_SIGNAL_RUN_LAST,
+	    		  G_STRUCT_OFFSET (GeditFileBrowserStoreClass,
+	    		  		   begin_refresh), NULL, NULL,
+	    		  g_cclosure_marshal_VOID__VOID,
+	    		  G_TYPE_NONE, 0);
+	model_signals[END_REFRESH] =
+	    g_signal_new ("end-refresh",
+	    		  G_OBJECT_CLASS_TYPE (object_class),
+	    		  G_SIGNAL_RUN_LAST,
+	    		  G_STRUCT_OFFSET (GeditFileBrowserStoreClass,
+	    		  		   end_refresh), NULL, NULL,
+	    		  g_cclosure_marshal_VOID__VOID,
+	    		  G_TYPE_NONE, 0);
+	model_signals[UNLOAD] =
+	    g_signal_new ("unload",
+	    		  G_OBJECT_CLASS_TYPE (object_class),
+	    		  G_SIGNAL_RUN_LAST,
+	    		  G_STRUCT_OFFSET (GeditFileBrowserStoreClass,
+	    		  		   unload), NULL, NULL,
+	    		  g_cclosure_marshal_VOID__STRING,
+	    		  G_TYPE_NONE, 1,
+	    		  G_TYPE_STRING);
 
 	g_type_class_add_private (object_class,
 				  sizeof (GeditFileBrowserStorePrivate));
@@ -1323,7 +1351,8 @@ static void
 file_browser_node_free (GeditFileBrowserStore * model,
 			FileBrowserNode * node)
 {
-	FileBrowserNodeDir *dir;
+	FileBrowserNodeDir * dir;
+	gchar * uri;
 
 	if (node == NULL)
 		return;
@@ -1348,9 +1377,15 @@ file_browser_node_free (GeditFileBrowserStore * model,
 		if (dir->hidden_file_hash)
 			g_hash_table_destroy (dir->hidden_file_hash);
 	}
-
+	
 	if (node->file)
+	{
+		uri = g_file_get_uri (node->file);
+		g_signal_emit (model, model_signals[UNLOAD], 0, uri);
+
+		g_free (uri);
 		g_object_unref (node->file);
+	}
 
 	if (node->icon)
 		g_object_unref (node->icon);
@@ -2975,8 +3010,10 @@ gedit_file_browser_store_refresh (GeditFileBrowserStore * model)
 		return;
 
 	/* Clear the model */
+	g_signal_emit (model, model_signals[BEGIN_REFRESH], 0);
 	file_browser_node_unload (model, model->priv->virtual_root, TRUE);
 	model_load_directory (model, model->priv->virtual_root);
+	g_signal_emit (model, model_signals[END_REFRESH], 0);
 }
 
 static void

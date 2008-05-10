@@ -108,6 +108,10 @@ struct _GeditFileBrowserStoreClass {
 	void (*rename)		     (GeditFileBrowserStore * model,
 				      const gchar * olduri,
 				      const gchar * newuri);
+	void (*begin_refresh)	     (GeditFileBrowserStore * model);
+	void (*end_refresh)	     (GeditFileBrowserStore * model);
+	void (*unload)		     (GeditFileBrowserStore * model,
+				      const gchar * uri);
 };
 
 GType gedit_file_browser_store_get_type               (void) G_GNUC_CONST;

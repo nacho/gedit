@@ -1072,6 +1072,8 @@ create_tree (GeditFileBrowserWidget * obj)
 	obj->priv->treeview =
 	    GEDIT_FILE_BROWSER_VIEW (gedit_file_browser_view_new ());
 
+	gedit_file_browser_view_set_restore_expand_state (obj->priv->treeview, TRUE);
+
 	gedit_file_browser_store_set_filter_mode (obj->priv->file_store,
 						  GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN
 						  |

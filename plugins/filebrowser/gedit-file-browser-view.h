@@ -65,16 +65,18 @@ struct _GeditFileBrowserViewClass
 				    GtkTreeIter *iter);
 };
 
-GType gedit_file_browser_view_get_type        (void) G_GNUC_CONST;
-GType gedit_file_browser_view_register_type   (GTypeModule * module);
+GType gedit_file_browser_view_get_type			(void) G_GNUC_CONST;
+GType gedit_file_browser_view_register_type		(GTypeModule 			* module);
 
-GtkWidget *gedit_file_browser_view_new        (void);
-void gedit_file_browser_view_set_model        (GeditFileBrowserView * tree_view,
-					       GtkTreeModel * model);
-void gedit_file_browser_view_start_rename     (GeditFileBrowserView * tree_view, 
-                                               GtkTreeIter * iter);
-void gedit_file_browser_view_set_click_policy (GeditFileBrowserView * tree_view,
-                                               GeditFileBrowserViewClickPolicy policy);
+GtkWidget *gedit_file_browser_view_new			(void);
+void gedit_file_browser_view_set_model			(GeditFileBrowserView 		* tree_view,
+							 GtkTreeModel 			* model);
+void gedit_file_browser_view_start_rename		(GeditFileBrowserView 		* tree_view, 
+							 GtkTreeIter 			* iter);
+void gedit_file_browser_view_set_click_policy		(GeditFileBrowserView 		* tree_view,
+							 GeditFileBrowserViewClickPolicy  policy);
+void gedit_file_browser_view_set_restore_expand_state	(GeditFileBrowserView 		* tree_view,
+							 gboolean 			  restore_expand_state);
 
 G_END_DECLS
 #endif				/* __GEDIT_FILE_BROWSER_VIEW_H__ */
