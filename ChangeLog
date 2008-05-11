@@ -1,5 +1,15 @@
 2008-05-10  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* plugins/filebrowser/gedit-file-browser-store.c:
+	* plugins/filebrowser/gedit-file-browser-view.c:
+	Fixed problems with changing model when rows are inserted. This made it 
+	possible to change the expand/collapse actions from an idle function to
+	immediate functions. This results in much faster 'feel' of the file 
+	browser and also makes restoring the expanded state much faster. Also 
+	fixed two memory leaks
+	
+2008-05-10  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* plugins/filebrowser/gedit-file-browser-view.c:
 	* plugins/filebrowser/gedit-file-browser-view.h:
 	* plugins/filebrowser/gedit-file-browser-widget.c:

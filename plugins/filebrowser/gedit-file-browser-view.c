@@ -88,31 +88,35 @@ static const GtkTargetEntry drag_source_targets[] = {
 GEDIT_PLUGIN_DEFINE_TYPE (GeditFileBrowserView, gedit_file_browser_view,
 	                  GTK_TYPE_TREE_VIEW)
 
-static void on_cell_edited 	(GtkCellRendererText 	* cell, 
-				 gchar 			* path,
-				 gchar 			* new_text,
-				 GeditFileBrowserView 	* tree_view);
-static void on_begin_loading 	(GeditFileBrowserStore 	* model, 
-				 GtkTreeIter 		* iter,
-				 GeditFileBrowserView 	* obj);
-static void on_end_loading 	(GeditFileBrowserStore 	* model, 
-				 GtkTreeIter 		* iter,
-				 GeditFileBrowserView 	* obj);
+static void on_cell_edited 		(GtkCellRendererText 	* cell, 
+				 	 gchar 			* path,
+				 	 gchar 			* new_text,
+				 	GeditFileBrowserView 	* tree_view);
+static void on_begin_loading 		(GeditFileBrowserStore 	* model, 
+				 	 GtkTreeIter 		* iter,
+					 GeditFileBrowserView 	* obj);
+static void on_end_loading 		(GeditFileBrowserStore 	* model, 
+					 GtkTreeIter 		* iter,
+					 GeditFileBrowserView 	* obj);
 
-static void on_begin_refresh 	(GeditFileBrowserStore 	* model, 
-				 GeditFileBrowserView 	* view);
-static void on_end_refresh 	(GeditFileBrowserStore 	* model, 
-				 GeditFileBrowserView 	* view);
+static void on_begin_refresh 		(GeditFileBrowserStore 	* model, 
+					 GeditFileBrowserView 	* view);
+static void on_end_refresh 		(GeditFileBrowserStore 	* model, 
+					 GeditFileBrowserView 	* view);
 
-static void on_unload		(GeditFileBrowserStore 	* model, 
-				 gchar const		* uri,
-				 GeditFileBrowserView 	* view);
+static void on_unload			(GeditFileBrowserStore 	* model, 
+					 gchar const		* uri,
+					 GeditFileBrowserView 	* view);
 
-static void on_row_inserted	(GeditFileBrowserStore 	* model, 
-				 GtkTreePath		* path,
-				 GtkTreeIter		* iter,
-				 GeditFileBrowserView 	* view);
-				 				 
+static void on_row_inserted		(GeditFileBrowserStore 	* model, 
+					 GtkTreePath		* path,
+					 GtkTreeIter		* iter,
+					 GeditFileBrowserView 	* view);
+
+static void on_virtual_root_changed 	(GeditFileBrowserStore 	* model,
+					 GParamSpec 		* param,
+					 GeditFileBrowserView 	* view);
+		 
 static void
 gedit_file_browser_view_finalize (GObject * object)
 {
@@ -124,81 +128,40 @@ gedit_file_browser_view_finalize (GObject * object)
 	if (obj->priv->hover_path)
 		gtk_tree_path_free (obj->priv->hover_path);
 
+	if (obj->priv->expand_state)
+		g_hash_table_destroy (obj->priv->expand_state);
+
 	gdk_cursor_unref (obj->priv->busy_cursor);
 
 	G_OBJECT_CLASS (gedit_file_browser_view_parent_class)->
 	    finalize (object);
 }
 
-typedef struct _IdleInfo 
+static void
+add_expand_state (GeditFileBrowserView * view,
+		  gchar const * uri)
 {
-	GeditFileBrowserView *view;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	GtkTreePath *path;
-} IdleInfo;
-
-static gboolean
-row_expanded_idle (gpointer data)
-{
-	IdleInfo *info = (IdleInfo *) data;
-	gchar * uri;
 	GFile * file;
-
-	if (info->view->priv->restore_expand_state)
-	{
-		gtk_tree_model_get (info->model, 
-				    &(info->iter), 
-				    GEDIT_FILE_BROWSER_STORE_COLUMN_URI,
-				    &uri,
-				    -1);
-
-		if (uri)
-		{
-			file = g_file_new_for_uri (uri);
-			g_hash_table_insert (info->view->priv->expand_state, file, file);
-			g_free (uri);
-		}
-	}
-
-	_gedit_file_browser_store_iter_expanded (GEDIT_FILE_BROWSER_STORE
-						 (info->model),
-						 &(info->iter));
 	
-	g_free (info);
-	return FALSE;
+	if (!uri)
+		return;
+
+	file = g_file_new_for_uri (uri);
+	g_hash_table_insert (view->priv->expand_state, file, file);
 }
 
-static gboolean
-row_collapsed_idle (gpointer data)
+static void
+remove_expand_state (GeditFileBrowserView * view,
+		     gchar const * uri)
 {
-	IdleInfo *info = (IdleInfo *) data;
-	gchar * uri;
 	GFile * file;
 	
-	if (info->view->priv->restore_expand_state)
-	{
-		gtk_tree_model_get (info->model, 
-				    &(info->iter), 
-				    GEDIT_FILE_BROWSER_STORE_COLUMN_URI,
-				    &uri,
-				    -1);
+	if (!uri)
+		return;
 
-		if (uri)
-		{
-			file = g_file_new_for_uri (uri);
-			g_hash_table_remove (info->view->priv->expand_state, file);
-			g_object_unref (file);
-			g_free (uri);
-		}
-	}
-
-	_gedit_file_browser_store_iter_collapsed (GEDIT_FILE_BROWSER_STORE
-						  (info->model),
-						  &(info->iter));
-
-	g_free (info);
-	return FALSE;
+	file = g_file_new_for_uri (uri);
+	g_hash_table_remove (view->priv->expand_state, file);
+	g_object_unref (file);
 }
 
 static void
@@ -207,20 +170,28 @@ row_expanded (GtkTreeView * tree_view,
 	      GtkTreePath * path)
 {
 	GeditFileBrowserView *view = GEDIT_FILE_BROWSER_VIEW (tree_view);
-	IdleInfo *info;
-
-
-	if (GEDIT_IS_FILE_BROWSER_STORE (view->priv->model)) {
-		info = g_new (IdleInfo, 1);
-		info->model = view->priv->model;
-		info->iter = *iter;
-		info->view = view;
-
-		g_idle_add (row_expanded_idle, info);
-	}
+	gchar * uri;
 
 	if (GTK_TREE_VIEW_CLASS (gedit_file_browser_view_parent_class)->row_expanded)
 		GTK_TREE_VIEW_CLASS (gedit_file_browser_view_parent_class)->row_expanded (tree_view, iter, path);
+
+	if (!GEDIT_IS_FILE_BROWSER_STORE (view->priv->model))
+		return;
+
+	if (view->priv->restore_expand_state)
+	{
+		gtk_tree_model_get (view->priv->model,
+				    iter, 
+				    GEDIT_FILE_BROWSER_STORE_COLUMN_URI,
+				    &uri,
+				    -1);
+
+		add_expand_state (view, uri);
+		g_free (uri);
+	}
+
+	_gedit_file_browser_store_iter_expanded (GEDIT_FILE_BROWSER_STORE (view->priv->model),
+						 iter);
 }
 
 static void
@@ -229,19 +200,28 @@ row_collapsed (GtkTreeView * tree_view,
 	       GtkTreePath * path)
 {
 	GeditFileBrowserView *view = GEDIT_FILE_BROWSER_VIEW (tree_view);
-	IdleInfo *info;
-
-	if (GEDIT_IS_FILE_BROWSER_STORE (view->priv->model)) {
-		info = g_new (IdleInfo, 1);
-		info->model = view->priv->model;
-		info->iter = *iter;
-		info->view = view;
-
-		g_idle_add (row_collapsed_idle, info);
-	}
+	gchar * uri;
 
 	if (GTK_TREE_VIEW_CLASS (gedit_file_browser_view_parent_class)->row_collapsed)
 		GTK_TREE_VIEW_CLASS (gedit_file_browser_view_parent_class)->row_collapsed (tree_view, iter, path);
+
+	if (!GEDIT_IS_FILE_BROWSER_STORE (view->priv->model))
+		return;
+	
+	if (view->priv->restore_expand_state)
+	{
+		gtk_tree_model_get (view->priv->model, 
+				    iter, 
+				    GEDIT_FILE_BROWSER_STORE_COLUMN_URI,
+				    &uri,
+				    -1);
+
+		remove_expand_state (view, uri);
+		g_free (uri);
+	}
+
+	_gedit_file_browser_store_iter_collapsed (GEDIT_FILE_BROWSER_STORE (view->priv->model),
+						  iter);
 }
 
 static gboolean
@@ -694,7 +674,6 @@ fill_expand_state (GeditFileBrowserView * view, GtkTreeIter * iter)
 	GtkTreePath * path;
 	GtkTreeIter child;
 	gchar * uri;
-	GFile * file;
 	
 	if (!gtk_tree_model_iter_has_child (view->priv->model, iter))
 		return;
@@ -709,8 +688,8 @@ fill_expand_state (GeditFileBrowserView * view, GtkTreeIter * iter)
 				    &uri, 
 				    -1);
 
-		file = g_file_new_for_uri (uri);
-		g_hash_table_insert (view->priv->expand_state, uri, uri);
+		add_expand_state (view, uri);
+		g_free (uri);
 	}
 	
 	if (gtk_tree_model_iter_children (view->priv->model, &child, iter))
@@ -742,6 +721,10 @@ uninstall_restore_signals (GeditFileBrowserView * tree_view,
 	g_signal_handlers_disconnect_by_func (model, 
 					      on_row_inserted, 
 					      tree_view);
+					      
+	g_signal_handlers_disconnect_by_func (model, 
+					      on_virtual_root_changed, 
+					      tree_view);
 }
 
 static void
@@ -763,9 +746,14 @@ install_restore_signals (GeditFileBrowserView * tree_view,
 			  G_CALLBACK (on_unload), 
 			  tree_view);
 
-	g_signal_connect (model, 
+	g_signal_connect_after (model, 
 			  "row-inserted",
 			  G_CALLBACK (on_row_inserted), 
+			  tree_view);
+			  
+	g_signal_connect (model, 
+			  "notify::virtual-root",
+			  G_CALLBACK (on_virtual_root_changed), 
 			  tree_view);
 }
 
@@ -792,7 +780,11 @@ set_restore_expand_state (GeditFileBrowserView * view,
 		if (view->priv->model && GEDIT_IS_FILE_BROWSER_STORE (view->priv->model))
 		{
 			fill_expand_state (view, NULL);
+
 			install_restore_signals (view, view->priv->model);
+			on_virtual_root_changed (GEDIT_FILE_BROWSER_STORE (view->priv->model), 
+						 NULL, 
+						 view);
 		}
 	}
 	else if (view->priv->model && GEDIT_IS_FILE_BROWSER_STORE (view->priv->model))
@@ -1217,41 +1209,11 @@ on_unload (GeditFileBrowserStore * model,
 	   gchar const * uri,
 	   GeditFileBrowserView * view)
 {
-	GFile * file;
-	
 	/* Don't remove the expand state if we are refreshing */
 	if (!view->priv->restore_expand_state || view->priv->is_refresh)
 		return;
 	
-	file = g_file_new_for_uri (uri);
-	g_hash_table_remove (view->priv->expand_state, file);
-	g_object_unref (file);
-}
-
-typedef struct
-{
-	GeditFileBrowserView * view;
-	GtkTreeRowReference * reference;
-} ExpandRow;
-
-static gboolean
-idle_expand_row (ExpandRow * info)
-{
-	GtkTreePath * path = gtk_tree_row_reference_get_path (info->reference);
-	
-	if (path)
-	{
-		gtk_tree_view_expand_row (GTK_TREE_VIEW (info->view),
-					  path,
-					  FALSE);
-
-		gtk_tree_path_free (path);
-	}
-	
-	gtk_tree_row_reference_free (info->reference);
-	g_free (info);
-	
-	return FALSE;
+	remove_expand_state (view, uri);
 }
 
 static void
@@ -1261,7 +1223,6 @@ restore_expand_state (GeditFileBrowserView * view,
 {
 	gchar * uri;
 	GFile * file;
-	ExpandRow * info;
 	GtkTreePath * path;
 
 	gtk_tree_model_get (GTK_TREE_MODEL (model), 
@@ -1278,12 +1239,9 @@ restore_expand_state (GeditFileBrowserView * view,
 
 	if (g_hash_table_lookup (view->priv->expand_state, file))
 	{
-		info = g_new (ExpandRow, 1);
-		info->view = view;
-		info->reference = gtk_tree_row_reference_new (GTK_TREE_MODEL (model),
-							      path);
-		
-		g_idle_add ((GSourceFunc)idle_expand_row, info);
+		gtk_tree_view_expand_row (GTK_TREE_VIEW (view),
+					  path,
+					  FALSE);
 	}
 	
 	gtk_tree_path_free (path);
@@ -1323,6 +1281,18 @@ on_row_inserted (GeditFileBrowserStore * model,
 				 copy);
 
 	restore_expand_state (view, model, &parent);
+	gtk_tree_path_free (copy);
+}
+
+static void
+on_virtual_root_changed (GeditFileBrowserStore * model,
+			 GParamSpec * param,
+			 GeditFileBrowserView * view)
+{
+	gchar * uri = gedit_file_browser_store_get_virtual_root (model);
+	
+	add_expand_state (view, uri);
+	g_free (uri);
 }
 				 
 // ex:ts=8:noet:

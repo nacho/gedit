@@ -81,6 +81,7 @@ struct _FileBrowserNode
 
 	FileBrowserNode *parent;
 	gint pos;
+	gboolean inserted;
 };
 
 struct _FileBrowserNodeDir 
@@ -150,6 +151,9 @@ static gboolean gedit_file_browser_store_iter_nth_child     (GtkTreeModel * tree
 static gboolean gedit_file_browser_store_iter_parent        (GtkTreeModel * tree_model,
 							     GtkTreeIter * iter,
 							     GtkTreeIter * child);
+static void gedit_file_browser_store_row_inserted	    (GtkTreeModel * tree_model,
+							     GtkTreePath * path,
+							     GtkTreeIter * iter);
 
 static void gedit_file_browser_store_drag_source_init       (GtkTreeDragSourceIface * iface);
 static gboolean gedit_file_browser_store_row_draggable      (GtkTreeDragSource * drag_source,
@@ -414,6 +418,7 @@ gedit_file_browser_store_iface_init (GtkTreeModelIface * iface)
 	iface->iter_n_children = gedit_file_browser_store_iter_n_children;
 	iface->iter_nth_child = gedit_file_browser_store_iter_nth_child;
 	iface->iter_parent = gedit_file_browser_store_iter_parent;
+	iface->row_inserted = gedit_file_browser_store_row_inserted;
 }
 
 static void
@@ -482,6 +487,13 @@ model_node_visibility (GeditFileBrowserStore * model,
 	return !NODE_IS_FILTERED (node);
 }
 
+static gboolean
+model_node_inserted (GeditFileBrowserStore * model,
+		     FileBrowserNode * node)
+{
+	return node == model->priv->virtual_root || (model_node_visibility (model, node) && node->inserted);
+}
+
 /* Interface implementation */
 
 static GtkTreeModelFlags
@@ -518,10 +530,11 @@ static gboolean
 gedit_file_browser_store_get_iter (GtkTreeModel * tree_model,
 				   GtkTreeIter * iter, GtkTreePath * path)
 {
-	gint *indices, depth, i;
-	FileBrowserNode *node;
-	GeditFileBrowserStore *model;
-	GSList *item;
+	gint * indices, depth, i;
+	FileBrowserNode * node;
+	FileBrowserNode * child;
+	GeditFileBrowserStore * model;
+	GSList * item;
 	gint num;
 
 	g_assert (GEDIT_IS_FILE_BROWSER_STORE (tree_model));
@@ -541,14 +554,12 @@ gedit_file_browser_store_get_iter (GtkTreeModel * tree_model,
 		if (!NODE_IS_DIR (node))
 			return FALSE;
 
-		for (item = FILE_BROWSER_NODE_DIR (node)->children; item;
-		     item = item->next) {
-			if (model_node_visibility
-			    (model, (FileBrowserNode *) (item->data))) {
+		for (item = FILE_BROWSER_NODE_DIR (node)->children; item; item = item->next) {
+			child = (FileBrowserNode *) (item->data);
+
+			if (model_node_inserted (model, child)) {
 				if (num == indices[i]) {
-					node =
-					    (FileBrowserNode *) (item->
-								 data);
+					node = child;
 					break;
 				}
 
@@ -586,8 +597,7 @@ gedit_file_browser_store_get_path_real (GeditFileBrowserStore * model,
 
 		num = 0;
 
-		for (item = FILE_BROWSER_NODE_DIR (node->parent)->children;
-		     item; item = item->next) {
+		for (item = FILE_BROWSER_NODE_DIR (node->parent)->children; item; item = item->next) {
 			check = (FileBrowserNode *) (item->data);
 
 			if (model_node_visibility (model, check)) {
@@ -619,21 +629,20 @@ gedit_file_browser_store_get_path (GtkTreeModel * tree_model,
 {
 	FileBrowserNode *node;
 
-	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model),
-			      NULL);
+	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model), NULL);
 	g_return_val_if_fail (iter != NULL, NULL);
 	g_return_val_if_fail (iter->user_data != NULL, NULL);
 
 	node = (FileBrowserNode *) (iter->user_data);
 
-	return
-	    gedit_file_browser_store_get_path_real
-	    (GEDIT_FILE_BROWSER_STORE (tree_model), node);
+	return gedit_file_browser_store_get_path_real (GEDIT_FILE_BROWSER_STORE (tree_model), 
+						       node);
 }
 
 static void
 gedit_file_browser_store_get_value (GtkTreeModel * tree_model,
-				    GtkTreeIter * iter, gint column,
+				    GtkTreeIter * iter, 
+				    gint column,
 				    GValue * value)
 {
 	FileBrowserNode *node;
@@ -644,9 +653,7 @@ gedit_file_browser_store_get_value (GtkTreeModel * tree_model,
 
 	node = (FileBrowserNode *) (iter->user_data);
 
-	g_value_init (value,
-		      GEDIT_FILE_BROWSER_STORE (tree_model)->priv->
-		      column_types[column]);
+	g_value_init (value, GEDIT_FILE_BROWSER_STORE (tree_model)->priv->column_types[column]);
 
 	switch (column) {
 	case GEDIT_FILE_BROWSER_STORE_COLUMN_URI:
@@ -671,9 +678,10 @@ static gboolean
 gedit_file_browser_store_iter_next (GtkTreeModel * tree_model,
 				    GtkTreeIter * iter)
 {
-	GeditFileBrowserStore *model;
-	FileBrowserNode *node;
-	GSList *item;
+	GeditFileBrowserStore * model;
+	FileBrowserNode * node;
+	GSList * item;
+	GSList * first;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model),
 			      FALSE);
@@ -686,12 +694,10 @@ gedit_file_browser_store_iter_next (GtkTreeModel * tree_model,
 	if (node->parent == NULL)
 		return FALSE;
 
-	for (item =
-	     g_slist_next (g_slist_find
-			   (FILE_BROWSER_NODE_DIR (node->parent)->children,
-			    node)); item; item = item->next) {
-		if (model_node_visibility
-		    (model, (FileBrowserNode *) (item->data))) {
+	first = g_slist_next (g_slist_find (FILE_BROWSER_NODE_DIR (node->parent)->children, node));
+
+	for (item = first; item; item = item->next) {
+		if (model_node_inserted (model, (FileBrowserNode *) (item->data))) {
 			iter->user_data = item->data;
 			return TRUE;
 		}
@@ -705,9 +711,9 @@ gedit_file_browser_store_iter_children (GtkTreeModel * tree_model,
 					GtkTreeIter * iter,
 					GtkTreeIter * parent)
 {
-	FileBrowserNode *node;
-	GeditFileBrowserStore *model;
-	GSList *item;
+	FileBrowserNode * node;
+	GeditFileBrowserStore * model;
+	GSList * item;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model),
 			      FALSE);
@@ -727,10 +733,8 @@ gedit_file_browser_store_iter_children (GtkTreeModel * tree_model,
 	if (!NODE_IS_DIR (node))
 		return FALSE;
 
-	for (item = FILE_BROWSER_NODE_DIR (node)->children; item;
-	     item = item->next) {
-		if (model_node_visibility
-		    (model, (FileBrowserNode *) (item->data))) {
+	for (item = FILE_BROWSER_NODE_DIR (node)->children; item; item = item->next) {
+		if (model_node_inserted (model, (FileBrowserNode *) (item->data))) {
 			iter->user_data = item->data;
 			return TRUE;
 		}
@@ -744,15 +748,14 @@ filter_tree_model_iter_has_child_real (GeditFileBrowserStore * model,
 				       FileBrowserNode * node)
 {
 	GSList *item;
-
+	
 	if (!NODE_IS_DIR (node))
 		return FALSE;
 
-	for (item = FILE_BROWSER_NODE_DIR (node)->children; item;
-	     item = item->next)
-		if (model_node_visibility
-		    (model, (FileBrowserNode *) (item->data)))
+	for (item = FILE_BROWSER_NODE_DIR (node)->children; item; item = item->next) {
+		if (model_node_inserted (model, (FileBrowserNode *) (item->data)))
 			return TRUE;
+	}
 
 	return FALSE;
 }
@@ -803,10 +806,8 @@ gedit_file_browser_store_iter_n_children (GtkTreeModel * tree_model,
 	if (!NODE_IS_DIR (node))
 		return 0;
 
-	for (item = FILE_BROWSER_NODE_DIR (node)->children; item;
-	     item = item->next)
-		if (model_node_visibility
-		    (model, (FileBrowserNode *) (item->data)))
+	for (item = FILE_BROWSER_NODE_DIR (node)->children; item; item = item->next)
+		if (model_node_inserted (model, (FileBrowserNode *) (item->data)))
 			++num;
 
 	return num;
@@ -839,8 +840,7 @@ gedit_file_browser_store_iter_nth_child (GtkTreeModel * tree_model,
 
 	for (item = FILE_BROWSER_NODE_DIR (node)->children; item;
 	     item = item->next) {
-		if (model_node_visibility
-		    (model, (FileBrowserNode *) (item->data))) {
+		if (model_node_inserted (model, (FileBrowserNode *) (item->data))) {
 			if (num == n) {
 				iter->user_data = item->data;
 				return TRUE;
@@ -877,6 +877,16 @@ gedit_file_browser_store_iter_parent (GtkTreeModel * tree_model,
 
 	iter->user_data = node->parent;
 	return TRUE;
+}
+
+static void
+gedit_file_browser_store_row_inserted (GtkTreeModel * tree_model,
+				       GtkTreePath * path,
+				       GtkTreeIter * iter)
+{
+	FileBrowserNode * node = (FileBrowserNode *)(iter->user_data);
+	
+	node->inserted = TRUE;
 }
 
 static gboolean
@@ -1162,28 +1172,49 @@ model_resort_node (GeditFileBrowserStore * model, FileBrowserNode * node)
 
 static void
 row_changed (GeditFileBrowserStore * model,
-	     const GtkTreePath * path,
+	     GtkTreePath ** path,
 	     GtkTreeIter * iter)
 {
-	GtkTreePath *copy = gtk_tree_path_copy (path);
-	
+	GtkTreeRowReference *ref = gtk_tree_row_reference_new (GTK_TREE_MODEL (model), *path);
+
 	/* Insert a copy of the actual path here because the row-inserted
 	   signal may alter the path */
-	gtk_tree_model_row_changed (GTK_TREE_MODEL(model), copy, iter);
-	gtk_tree_path_free (copy);
+	gtk_tree_model_row_changed (GTK_TREE_MODEL(model), *path, iter);
+	gtk_tree_path_free (*path);
+	
+	*path = gtk_tree_row_reference_get_path (ref);
+	gtk_tree_row_reference_free (ref);
 }
 
 static void
 row_inserted (GeditFileBrowserStore * model,
-	      const GtkTreePath * path,
+	      GtkTreePath ** path,
 	      GtkTreeIter * iter)
 {
-	GtkTreePath *copy = gtk_tree_path_copy (path);
-	
-	/* Insert a copy of the actual path here because the row-inserted
-	   signal may alter the path */
+	/* This function creates a row reference for the path because it's
+	   uncertain what might change the actual model/view when we insert
+	   a node, maybe another directory load is triggered for example. 
+	   Because functions that use this function rely on the notion that
+	   the path remains pointed towards the inserted node, we use the
+	   reference to keep track. */
+	GtkTreeRowReference *ref = gtk_tree_row_reference_new (GTK_TREE_MODEL (model), *path);
+	GtkTreePath * copy = gtk_tree_path_copy (*path);
+
 	gtk_tree_model_row_inserted (GTK_TREE_MODEL(model), copy, iter);
 	gtk_tree_path_free (copy);
+	
+	if (ref) {
+		gtk_tree_path_free (*path);
+
+		/* To restore the path, we get the path from the reference. But, since
+		   we inserted a row, the path will be one index further than the
+		   actual path of our node. We therefore call gtk_tree_path_prev */
+		*path = gtk_tree_row_reference_get_path (ref);
+	
+		gtk_tree_path_prev (*path);
+	}
+
+	gtk_tree_row_reference_free (ref);
 }
 
 static void
@@ -1249,12 +1280,12 @@ model_refilter_node (GeditFileBrowserStore * model,
 		new_visible = model_node_visibility (model, node);
 
 		if (old_visible != new_visible) {
-			iter.user_data = node;
-
 			if (old_visible) {
+				node->inserted = FALSE;
 				row_deleted (model, path);
 			} else {
-				row_inserted (model, path, &iter);
+				iter.user_data = node;
+				row_inserted (model, &path, &iter);
 				gtk_tree_path_next (path);
 			}
 		} else if (old_visible) {
@@ -1486,7 +1517,10 @@ model_remove_node (GeditFileBrowserStore * model, FileBrowserNode * node,
 	/* Only delete if the node is visible in the tree (but only when it's
 	   not the virtual root) */
 	if (model_node_visibility (model, node) && node != model->priv->virtual_root)
+	{
+		node->inserted = FALSE;
 		row_deleted (model, path);
+	}
 
 	if (free_path)
 		gtk_tree_path_free (path);
@@ -1544,8 +1578,9 @@ model_clear (GeditFileBrowserStore * model, gboolean free_nodes)
 			if (NODE_IS_DUMMY (dummy)
 			    && model_node_visibility (model, dummy)) {
 				path = gtk_tree_path_new_first ();
-				gtk_tree_model_row_deleted (GTK_TREE_MODEL 
-							    (model), path);
+				
+				dummy->inserted = FALSE;
+				row_deleted (model, path);
 				gtk_tree_path_free (path);
 			}
 		}
@@ -1723,7 +1758,7 @@ model_check_dummy (GeditFileBrowserStore * model, FileBrowserNode * node)
 				    gedit_file_browser_store_get_path_real
 				    (model, dummy);
 
-				row_inserted (model, path, &iter);
+				row_inserted (model, &path, &iter);
 				gtk_tree_path_free (path);
 			}
 		} else {
@@ -1738,9 +1773,9 @@ model_check_dummy (GeditFileBrowserStore * model, FileBrowserNode * node)
 				    (model, dummy);
 				dummy->flags |=
 				    GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
-
-				gtk_tree_model_row_deleted (GTK_TREE_MODEL
-							    (model), path);
+				    
+				dummy->inserted = FALSE;
+				row_deleted (model, path);
 				gtk_tree_path_free (path);
 			}
 		}
@@ -1782,7 +1817,7 @@ model_add_node (GeditFileBrowserStore * model, FileBrowserNode * child,
 		    gedit_file_browser_store_get_path_real (model, child);
 
 		// Emit row inserted
-		row_inserted (model, path, &iter);
+		row_inserted (model, &path, &iter);
 		gtk_tree_path_free (path);
 	}
 
@@ -2250,8 +2285,7 @@ model_fill (GeditFileBrowserStore * model, FileBrowserNode * node,
 		/* Insert node */
 		iter.user_data = node;
 		
-		row_inserted(model, path, &iter);
-		model_check_dummy (model, node);
+		row_inserted(model, &path, &iter);
 	}
 
 	if (NODE_IS_DIR (node)) {
@@ -2273,6 +2307,8 @@ model_fill (GeditFileBrowserStore * model, FileBrowserNode * node,
 		/* Move back up to node path */
 		gtk_tree_path_up (path);
 	}
+	
+	model_check_dummy (model, node);
 
 	if (free_path)
 		gtk_tree_path_free (path);
@@ -2660,7 +2696,7 @@ gedit_file_browser_store_set_value (GeditFileBrowserStore * tree_model,
 	if (model_node_visibility (tree_model, node)) {
 		path = gedit_file_browser_store_get_path (GTK_TREE_MODEL (tree_model), 
 							  iter);
-		row_changed (tree_model, path, iter);
+		row_changed (tree_model, &path, iter);
 		gtk_tree_path_free (path);
 	}
 }
@@ -3090,7 +3126,7 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 
 		if (model_node_visibility (model, node)) {
 			path = gedit_file_browser_store_get_path_real (model, node);
-			row_changed (model, path, iter);
+			row_changed (model, &path, iter);
 			gtk_tree_path_free (path);
 
 			/* Reorder this item */
