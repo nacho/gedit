@@ -1264,23 +1264,13 @@ on_row_inserted (GeditFileBrowserStore * model,
 
 	copy = gtk_tree_path_copy (path);
 
-	if (!gtk_tree_path_up (copy))
+	if (gtk_tree_path_up (copy) &&
+	    (gtk_tree_path_get_depth (copy) != 0) &&
+	    gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &parent, copy))
 	{
-		gtk_tree_path_free (copy);
-		return;
+		restore_expand_state (view, model, &parent);
 	}
 
-	if (gtk_tree_path_get_depth (copy) == 0)
-	{
-		gtk_tree_path_free (copy);
-		return;
-	}
-		
-	gtk_tree_model_get_iter (GTK_TREE_MODEL (model),
-				 &parent,
-				 copy);
-
-	restore_expand_state (view, model, &parent);
 	gtk_tree_path_free (copy);
 }
 
