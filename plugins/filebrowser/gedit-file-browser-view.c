@@ -112,10 +112,6 @@ static void on_row_inserted		(GeditFileBrowserStore 	* model,
 					 GtkTreePath		* path,
 					 GtkTreeIter		* iter,
 					 GeditFileBrowserView 	* view);
-
-static void on_virtual_root_changed 	(GeditFileBrowserStore 	* model,
-					 GParamSpec 		* param,
-					 GeditFileBrowserView 	* view);
 		 
 static void
 gedit_file_browser_view_finalize (GObject * object)
@@ -721,10 +717,6 @@ uninstall_restore_signals (GeditFileBrowserView * tree_view,
 	g_signal_handlers_disconnect_by_func (model, 
 					      on_row_inserted, 
 					      tree_view);
-					      
-	g_signal_handlers_disconnect_by_func (model, 
-					      on_virtual_root_changed, 
-					      tree_view);
 }
 
 static void
@@ -749,11 +741,6 @@ install_restore_signals (GeditFileBrowserView * tree_view,
 	g_signal_connect_after (model, 
 			  "row-inserted",
 			  G_CALLBACK (on_row_inserted), 
-			  tree_view);
-			  
-	g_signal_connect (model, 
-			  "notify::virtual-root",
-			  G_CALLBACK (on_virtual_root_changed), 
 			  tree_view);
 }
 
@@ -782,14 +769,13 @@ set_restore_expand_state (GeditFileBrowserView * view,
 			fill_expand_state (view, NULL);
 
 			install_restore_signals (view, view->priv->model);
-			on_virtual_root_changed (GEDIT_FILE_BROWSER_STORE (view->priv->model), 
-						 NULL, 
-						 view);
 		}
 	}
 	else if (view->priv->model && GEDIT_IS_FILE_BROWSER_STORE (view->priv->model))
+	{
 		uninstall_restore_signals (view, view->priv->model);
-	
+	}
+
 	view->priv->restore_expand_state = state;
 }
 
@@ -1167,7 +1153,6 @@ on_cell_edited (GtkCellRendererText * cell, gchar * path, gchar * new_text,
 	}
 }
 
-
 static void
 on_begin_loading (GeditFileBrowserStore * model, GtkTreeIter * iter,
 		  GeditFileBrowserView * obj)
@@ -1272,17 +1257,6 @@ on_row_inserted (GeditFileBrowserStore * model,
 	}
 
 	gtk_tree_path_free (copy);
-}
-
-static void
-on_virtual_root_changed (GeditFileBrowserStore * model,
-			 GParamSpec * param,
-			 GeditFileBrowserView * view)
-{
-	gchar * uri = gedit_file_browser_store_get_virtual_root (model);
-	
-	add_expand_state (view, uri);
-	g_free (uri);
 }
 				 
 // ex:ts=8:noet:
