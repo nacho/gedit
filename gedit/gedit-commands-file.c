@@ -510,7 +510,6 @@ open_location_dialog_response_cb (GeditOpenLocationDialog *dlg,
 				  GeditWindow             *window)
 {
 	GFile *location;
-	gchar *uri;
 	GSList *uris = NULL;
 	const GeditEncoding *encoding;
 
