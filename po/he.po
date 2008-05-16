@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-04 09:11+0000\n"
+"POT-Creation-Date: 2008-05-09 16:59+0000\n"
 "PO-Revision-Date: 2008-02-12 18:50+0200\n"
 "Last-Translator: Mark Krapivner <mark125@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "ערוך קבצי טקסט"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:475
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:474
 #: ../gedit/gedit-print-job.c:751
 msgid "Text Editor"
 msgstr "עורך טקסט"
@@ -672,7 +672,7 @@ msgstr "קידוד תווים"
 msgid "E_ncodings shown in menu:"
 msgstr "ק_ידודים המופיעים בתפריט:"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.c:139
+#: ../gedit/dialogs/gedit-open-location-dialog.c:133
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
 msgid "Open Location"
 msgstr "פתח מיקום"
@@ -862,11 +862,11 @@ msgid "_minutes"
 msgstr "_דקות"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:301
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1347
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1363
 msgid "Replace"
 msgstr "החלף"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1345
+#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1361
 msgid "Find"
 msgstr "חפש"
 
@@ -875,7 +875,7 @@ msgid "Replace _All"
 msgstr "החלף ה_כל"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:405
-#: ../gedit/gedit-commands-file.c:678
+#: ../gedit/gedit-commands-file.c:654
 msgid "_Replace"
 msgstr "_החלף"
 
@@ -907,7 +907,7 @@ msgstr "_חפש: "
 msgid "_Wrap around"
 msgstr "_גלוש מסביב"
 
-#: ../gedit/gedit.c:73
+#: ../gedit/gedit.c:72
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -915,43 +915,43 @@ msgstr ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 
-#: ../gedit/gedit.c:73
+#: ../gedit/gedit.c:72
 msgid "ENCODING"
 msgstr "ENCODING"
 
-#: ../gedit/gedit.c:76
+#: ../gedit/gedit.c:75
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Create a new toplevel window in an existing instance of gedit"
 
-#: ../gedit/gedit.c:79
+#: ../gedit/gedit.c:78
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Create a new document in an existing instance of gedit"
 
-#: ../gedit/gedit.c:82
+#: ../gedit/gedit.c:81
 msgid "[FILE...]"
 msgstr "[FILE...]"
 
-#: ../gedit/gedit.c:114
+#: ../gedit/gedit.c:113
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr "%s: malformed file name or URI.\n"
 
-#: ../gedit/gedit.c:126
+#: ../gedit/gedit.c:125
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: invalid encoding.\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:467
+#: ../gedit/gedit.c:466
 msgid "- Edit text files"
 msgstr "- Edit text files"
 
-#: ../gedit/gedit-commands-file.c:225 ../gedit/gedit-commands-file.c:271
+#: ../gedit/gedit-commands-file.c:257
 #, c-format
 msgid "Loading file '%s'…"
 msgstr "טוען קובץ  '%s'…"
 
-#: ../gedit/gedit-commands-file.c:280
+#: ../gedit/gedit-commands-file.c:266
 #, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
@@ -959,67 +959,54 @@ msgstr[0] "טוען %d קבצים…"
 msgstr[1] "טוען %d קבצים…"
 
 #. Translators: "Open Files" is the title of the file chooser window
-#: ../gedit/gedit-commands-file.c:424
+#: ../gedit/gedit-commands-file.c:438
 msgid "Open Files"
 msgstr "פתח קבצים"
 
-#: ../gedit/gedit-commands-file.c:530
-msgid "The entered location is not valid."
-msgstr "המיקום שהוכנס אינו תקין."
-
-#: ../gedit/gedit-commands-file.c:533
-#: ../gedit/gedit-io-error-message-area.c:187
-#: ../gedit/gedit-io-error-message-area.c:226
-#: ../gedit/gedit-io-error-message-area.c:242
-msgid "Please check that you typed the location correctly and try again."
-msgstr "אנא ודא שהקלדת את המיקום נכון ונסה שנית."
-
-#: ../gedit/gedit-commands-file.c:659
+#: ../gedit/gedit-commands-file.c:634
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "הקובץ \"%s\" הינו לקריאה בלבד."
 
-#: ../gedit/gedit-commands-file.c:670
+#: ../gedit/gedit-commands-file.c:645
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "האם ברצונך לנסות להחליפו עם זה שאתה שומר?"
 
-#: ../gedit/gedit-commands-file.c:736 ../gedit/gedit-commands-file.c:939
+#: ../gedit/gedit-commands-file.c:712 ../gedit/gedit-commands-file.c:918
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "שומר קובץ  '%s'…"
 
-#: ../gedit/gedit-commands-file.c:837
+#: ../gedit/gedit-commands-file.c:816
 msgid "Save As…"
 msgstr "שמור בשם…"
 
-#: ../gedit/gedit-commands-file.c:1118
+#: ../gedit/gedit-commands-file.c:1097
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "משחזר את המסמך '%s'…"
 
-#: ../gedit/gedit-commands-file.c:1163
+#: ../gedit/gedit-commands-file.c:1142
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "לבטל את השינויים הבלתי שמורים במסמך '%s'?"
 
-#: ../gedit/gedit-commands-file.c:1172
+#: ../gedit/gedit-commands-file.c:1151
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
-msgstr[0] ""
-"שינויים שנעשו למסמך בשניה האחרונה יאבדו."
-msgstr[1] ""
-"שינויים שנעשו למסמך ב-%ld השניות האחרונות יאבדו."
+msgstr[0] "שינויים שנעשו למסמך בשניה האחרונה יאבדו."
+msgstr[1] "שינויים שנעשו למסמך ב-%ld השניות האחרונות יאבדו."
 
-#: ../gedit/gedit-commands-file.c:1181
+#: ../gedit/gedit-commands-file.c:1160
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "שינויים שנעשו למסמך בדקה האחרונה יאבדו."
 
-#: ../gedit/gedit-commands-file.c:1187
+#: ../gedit/gedit-commands-file.c:1166
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1027,28 +1014,24 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last minute and %ld seconds will be "
 "permanently lost."
-msgstr[0] ""
-"שינויים שנעשו למסמך בדקה והשניה האחרונות יאבדו."
-msgstr[1] ""
-"שינויים שנעשו למסמך בדקה ו-%ld השניות האחרונות יאבדו."
+msgstr[0] "שינויים שנעשו למסמך בדקה והשניה האחרונות יאבדו."
+msgstr[1] "שינויים שנעשו למסמך בדקה ו-%ld השניות האחרונות יאבדו."
 
-#: ../gedit/gedit-commands-file.c:1197
+#: ../gedit/gedit-commands-file.c:1176
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
-msgstr[0] ""
-"שינויים שנעשו למסמך בדקה האחרונה יאבדו."
-msgstr[1] ""
-"שינויים שנעשו למסמך ב-%ld הדקות האחרונות יאבדו."
+msgstr[0] "שינויים שנעשו למסמך בדקה האחרונה יאבדו."
+msgstr[1] "שינויים שנעשו למסמך ב-%ld הדקות האחרונות יאבדו."
 
-#: ../gedit/gedit-commands-file.c:1212
+#: ../gedit/gedit-commands-file.c:1191
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr "שינויים שנעשו למסמך בשעה האחרונה יאבדו."
 
-#: ../gedit/gedit-commands-file.c:1218
+#: ../gedit/gedit-commands-file.c:1197
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1056,23 +1039,19 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last hour and %d minutes will be "
 "permanently lost."
-msgstr[0] ""
-"שינויים שנעשו למסמך בשעה ובדקה האחרונות יאבדו."
-msgstr[1] ""
-"שינויים שנעשו למסמך בשעה וב-%d הדקות האחרונות יאבדו."
+msgstr[0] "שינויים שנעשו למסמך בשעה ובדקה האחרונות יאבדו."
+msgstr[1] "שינויים שנעשו למסמך בשעה וב-%d הדקות האחרונות יאבדו."
 
-#: ../gedit/gedit-commands-file.c:1233
+#: ../gedit/gedit-commands-file.c:1212
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] ""
-"שינויים שנעשו למסמך בשעה האחרונה יאבדו."
-msgstr[1] ""
-"שינויים שנעשו למסמך ב-%d השעות האחרונות יאבדו."
+msgstr[0] "שינויים שנעשו למסמך בשעה האחרונה יאבדו."
+msgstr[1] "שינויים שנעשו למסמך ב-%d השעות האחרונות יאבדו."
 
-#: ../gedit/gedit-commands-file.c:1259
+#: ../gedit/gedit-commands-file.c:1238
 msgid "_Revert"
 msgstr "_שחזר"
 
@@ -1106,17 +1085,17 @@ msgstr "מופע אחד נמצא והוחלף"
 msgid "Phrase not found"
 msgstr "הביטוי לא נמצא"
 
-#: ../gedit/gedit-document.c:862 ../gedit/gedit-document.c:956
+#: ../gedit/gedit-document.c:872 ../gedit/gedit-document.c:966
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "מסמך שלא נשמר %d"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1913 ../gedit/gedit-window.c:1918
+#: ../gedit/gedit-window.c:1929 ../gedit/gedit-window.c:1934
 msgid "Read Only"
 msgstr "(קריאה בלבד)"
 
-#: ../gedit/gedit-documents-panel.c:760 ../gedit/gedit-window.c:2849
+#: ../gedit/gedit-documents-panel.c:760 ../gedit/gedit-window.c:2873
 msgid "Documents"
 msgstr "מסמכים"
 
@@ -1257,7 +1236,7 @@ msgstr "כל קבצי הטקסט"
 
 #: ../gedit/gedit-file-chooser-dialog.c:79
 msgid "C_haracter Coding:"
-msgstr "קידוד _תו:"
+msgstr "קידוד _תוים:"
 
 #: ../gedit/gedit-help.c:66
 msgid "There was an error displaying help."
@@ -1267,6 +1246,12 @@ msgstr "ארעה שגיאה בהצגת עזרה."
 #, c-format
 msgid "Could not find the file %s."
 msgstr "לא ניתן לפתוח את הקובץ %s."
+
+#: ../gedit/gedit-io-error-message-area.c:187
+#: ../gedit/gedit-io-error-message-area.c:226
+#: ../gedit/gedit-io-error-message-area.c:242
+msgid "Please check that you typed the location correctly and try again."
+msgstr "אנא ודא שהקלדת את המיקום נכון ונסה שנית."
 
 #: ../gedit/gedit-io-error-message-area.c:192
 #: ../gedit/gedit-io-error-message-area.c:441
@@ -1283,7 +1268,8 @@ msgstr "gedit לא יכול להתמודד עם %s מיקומים."
 #: ../gedit/gedit-io-error-message-area.c:209
 #: ../gedit/gedit-io-error-message-area.c:458
 msgid "gedit cannot handle this location."
-msgstr "gedit לא יכול להתמודד עם מיקום זה."
+msgstr ""
+"‏gedit לא יכול להתמודד עם מיקום זה."
 
 #: ../gedit/gedit-io-error-message-area.c:216
 #: ../gedit/gedit-io-error-message-area.c:465
@@ -1316,7 +1302,8 @@ msgstr "ישנם יותר מידי קבצים פתוחים. אנא, סגור כ�
 #: ../gedit/gedit-io-error-message-area.c:482
 #, c-format
 msgid "%s is a directory."
-msgstr "%s הוא ספרייה"
+msgstr ""
+"‏%s הוא ספרייה"
 
 #: ../gedit/gedit-io-error-message-area.c:247
 #: ../gedit/gedit-io-error-message-area.c:487
@@ -1348,8 +1335,7 @@ msgstr ""
 msgid ""
 "Host name was invalid. Please check that you typed the location correctly "
 "and try again."
-msgstr ""
-"שם המארח לא היה תקין. אנא בדוק שהכנסת מיקום נכון ונסה שוב."
+msgstr "שם המארח לא היה תקין. אנא בדוק שהכנסת מיקום נכון ונסה שוב."
 
 #: ../gedit/gedit-io-error-message-area.c:311
 #: ../gedit/gedit-io-error-message-area.c:545
@@ -1417,7 +1403,8 @@ msgstr "הנסיון להתחבר נכשל."
 #: ../gedit/gedit-io-error-message-area.c:555
 #, c-format
 msgid "%s is not a regular file."
-msgstr "%s אינו קובץ רגיל."
+msgstr ""
+"‏%s אינו קובץ רגיל."
 
 #: ../gedit/gedit-io-error-message-area.c:616
 #, c-format
@@ -1426,7 +1413,7 @@ msgstr "לא ניתן לשחזר את הקובץ %s."
 
 #: ../gedit/gedit-io-error-message-area.c:640
 msgid "Ch_aracter Coding:"
-msgstr "קידוד _תו:"
+msgstr "קידוד _תוים:"
 
 #: ../gedit/gedit-io-error-message-area.c:778
 msgid "gedit has not been able to detect the character coding."
@@ -1444,7 +1431,8 @@ msgstr "בחר קידוד תווים מהתפריט ונסה שוב."
 #: ../gedit/gedit-io-error-message-area.c:786
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
-msgstr "לא ניתן לפתוח את הקובץ %s בעזרת קידוד התווים %s."
+msgstr ""
+"לא ניתן לפתוח את הקובץ %s בעזרת קידוד התווים %s."
 
 #: ../gedit/gedit-io-error-message-area.c:790
 #: ../gedit/gedit-io-error-message-area.c:842
@@ -1460,8 +1448,7 @@ msgstr "לא ניתן לשמור את הקובץ %s בעזרת קידוד התו
 msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
-msgstr ""
-"המסמך מכיל תו אחד או יותר שלא ניתן לקודד בקידוד התווים המצויין."
+msgstr "המסמך מכיל תו אחד או יותר שלא ניתן לקודד בקידוד התווים המצויין."
 
 #: ../gedit/gedit-io-error-message-area.c:903
 msgid "_Edit Anyway"
@@ -1481,6 +1468,7 @@ msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
 msgstr ""
+"‏gedit פתח את מופע זה של הקובץ עבור קריאה בלבד. להמשיך בעריכה למרות זאת?"
 
 #: ../gedit/gedit-io-error-message-area.c:994
 #: ../gedit/gedit-io-error-message-area.c:1089
@@ -1520,6 +1508,7 @@ msgid ""
 "You can ignore this warning and save the file anyway, but if an error occurs "
 "while saving, you could lose the old copy of the file. Save anyway?"
 msgstr ""
+"‏gedit לא יכל לגבות את העותק הישן של הקובץ לפני שמירת החדש. באפשרותך להתעלם מאזהרה זאת ולשמור את הקובץ, אבל במקרה שתחול שגיאה בזמן השמירה, העותק הישן עלול להאבד. לשמור את הקובץ?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
 #: ../gedit/gedit-io-error-message-area.c:1192
@@ -1556,7 +1545,8 @@ msgstr ""
 msgid ""
 "%s is not a valid location. Please check that you typed the location "
 "correctly and try again."
-msgstr "‏%s אינו מיקום תקין. נא וודא שהקלדת את המיקום הנכון ונסה שוב."
+msgstr ""
+"‏%s אינו מיקום תקין. נא וודא שהקלדת את המיקום הנכון ונסה שוב."
 
 #: ../gedit/gedit-io-error-message-area.c:1223
 msgid ""
@@ -1784,7 +1774,7 @@ msgstr "עמוד נוכחי (Alt+P)"
 
 #: ../gedit/gedit-print-preview.c:616
 msgid "of"
-msgstr ""
+msgstr "של"
 
 #: ../gedit/gedit-print-preview.c:624
 msgid "Page total"
@@ -1827,11 +1817,11 @@ msgstr "סגור תצוגה מקדימה"
 msgid "Page %d of %d"
 msgstr "עמוד %d מתוך %d"
 
-#: ../gedit/gedit-print-preview.c:953
+#: ../gedit/gedit-print-preview.c:958
 msgid "Page Preview"
 msgstr "תצוגה מקדימה"
 
-#: ../gedit/gedit-print-preview.c:954
+#: ../gedit/gedit-print-preview.c:959
 msgid "The preview of a page in the document to be printed"
 msgstr "תצוגה מקדימה של דף במסמך שמיועד להדפסה"
 
@@ -1861,6 +1851,7 @@ msgstr[1] "קיימות %d לשוניות עם שגיאות"
 #, c-format
 msgid "Directory '%s' could not be created: g_mkdir_with_parents() failed: %s"
 msgstr ""
+"לא ניתן ליצור את הספרייה '%s'‏:‏ ()g_mkdir_with_parents נכשלה: %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
@@ -1891,7 +1882,8 @@ msgstr "טוען %s"
 #: ../gedit/gedit-tab.c:773
 #, c-format
 msgid "Saving %s to %s"
-msgstr "שומר את %s ב-%s"
+msgstr ""
+"שומר את %s ב-%s"
 
 #: ../gedit/gedit-tab.c:780
 #, c-format
@@ -1907,12 +1899,14 @@ msgstr "ק\"ב"
 #: ../gedit/gedit-tab.c:1688
 #, c-format
 msgid "Error opening file %s"
-msgstr "שגיאה בטעינת קובץ %s"
+msgstr ""
+"שגיאה בטעינת הקובץ %s"
 
 #: ../gedit/gedit-tab.c:1693
 #, c-format
 msgid "Error reverting file %s"
-msgstr "שגיאה בטעינת קובץ %s"
+msgstr ""
+"שגיאה בשחזור הקובץ %s"
 
 #: ../gedit/gedit-tab.c:1698
 #, c-format
@@ -1972,7 +1966,7 @@ msgstr "צור מסמך חדש"
 msgid "_Open..."
 msgstr "_פתח..."
 
-#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1467
+#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1483
 msgid "Open a file"
 msgstr "פתח קובץ"
 
@@ -2094,7 +2088,7 @@ msgstr "_חפש..."
 
 #: ../gedit/gedit-ui.h:115
 msgid "Search for text"
-msgstr "חפש מחרוזת"
+msgstr "חפש טקסט"
 
 #: ../gedit/gedit-ui.h:116
 msgid "Find Ne_xt"
@@ -2102,7 +2096,7 @@ msgstr "חפש את ה_בא"
 
 #: ../gedit/gedit-ui.h:117
 msgid "Search forwards for the same text"
-msgstr "חיפוש חוזר עבור אותה המחרוזת לסוף המסמך"
+msgstr "חפש קדימה את אותו הטקסט"
 
 #: ../gedit/gedit-ui.h:118
 msgid "Find Pre_vious"
@@ -2110,7 +2104,7 @@ msgstr "חפש את ה_קודם"
 
 #: ../gedit/gedit-ui.h:119
 msgid "Search backwards for the same text"
-msgstr "חיפוש חוזר עבור אותה המחרוזת לראש המסמך"
+msgstr "חפש אחורה את אותו הטקסט"
 
 #: ../gedit/gedit-ui.h:120
 msgid "_Replace..."
@@ -2122,7 +2116,7 @@ msgstr "חפש והחלף מחרוזת"
 
 #: ../gedit/gedit-ui.h:122
 msgid "_Clear Highlight"
-msgstr "בטל ה_דגשה"
+msgstr "נקה ה_דגשה"
 
 #: ../gedit/gedit-ui.h:123
 msgid "Clear highlighting of search matches"
@@ -2228,8 +2222,7 @@ msgstr "לא ניתן למצוא את הקובץ %s"
 
 #: ../gedit/gedit-utils.c:1053 ../gedit/gedit-utils.c:1089
 msgid "Please check your installation."
-msgstr ""
-"אנא בדוק את ההתקנה שלך."
+msgstr "אנא בדוק את ההתקנה שלך."
 
 #: ../gedit/gedit-utils.c:1085
 #, fuzzy, c-format
@@ -2237,29 +2230,29 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "לא ניתן למצוא את הפריטים המבוקשים בתוך %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1149
+#: ../gedit/gedit-view.c:1169
 msgid "_Wrap Around"
 msgstr "_גלוש מסביב"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1159
+#: ../gedit/gedit-view.c:1179
 msgid "Match _Entire Word Only"
 msgstr "התאם מילים _שלמות בלבד"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1169
+#: ../gedit/gedit-view.c:1189
 msgid "_Match Case"
 msgstr "הת_אם רשיות"
 
-#: ../gedit/gedit-view.c:1257
+#: ../gedit/gedit-view.c:1277
 msgid "String you want to search for"
 msgstr "המחרוזת שברצונך לחפש"
 
-#: ../gedit/gedit-view.c:1265
+#: ../gedit/gedit-view.c:1285
 msgid "Line you want to move the cursor to"
 msgstr "השורה אליה להעביר את הסמן"
 
-#: ../gedit/gedit-window.c:880
+#: ../gedit/gedit-window.c:896
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "השתמש במצב הדגשה %s"
@@ -2267,35 +2260,35 @@ msgstr "השתמש במצב הדגשה %s"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:937
+#: ../gedit/gedit-window.c:953
 msgid "None"
 msgstr "ללא"
 
-#: ../gedit/gedit-window.c:938
+#: ../gedit/gedit-window.c:954
 msgid "Disable syntax highlighting"
 msgstr "_בטל הדגשת תחביר"
 
 #  Translators: %s is a URI
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1224
+#: ../gedit/gedit-window.c:1240
 #, c-format
 msgid "Open '%s'"
 msgstr "פתח את '%s'"
 
-#: ../gedit/gedit-window.c:1343
+#: ../gedit/gedit-window.c:1359
 msgid "Save"
 msgstr "שמור"
 
-#: ../gedit/gedit-window.c:1471
+#: ../gedit/gedit-window.c:1487
 msgid "Open a recently used file"
 msgstr "פתח קובץ שהיה בשימוש לאחרונה"
 
-#: ../gedit/gedit-window.c:1478
+#: ../gedit/gedit-window.c:1494
 msgid "Open"
 msgstr "פתח"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1528
+#: ../gedit/gedit-window.c:1544
 #, c-format
 msgid "Activate '%s'"
 msgstr "הפעל '%s'"
@@ -2413,15 +2406,15 @@ msgstr "הרץ פקודות חיצוניות ותסריטי מעטפת."
 msgid "External Tools"
 msgstr "כלים חיצוניים"
 
-#: ../plugins/externaltools/tools/__init__.py:129
+#: ../plugins/externaltools/tools/__init__.py:126
 msgid "_External Tools..."
 msgstr "_כלים חיצוניים..."
 
-#: ../plugins/externaltools/tools/__init__.py:131
+#: ../plugins/externaltools/tools/__init__.py:128
 msgid "Opens the External Tools Manager"
 msgstr "פותח את מנהל הכלים החיצוניים"
 
-#: ../plugins/externaltools/tools/__init__.py:161
+#: ../plugins/externaltools/tools/__init__.py:158
 msgid "Shell Output"
 msgstr "פלט מעטפת"
 
@@ -2533,7 +2526,7 @@ msgstr "הקש מאיץ חדש, או לחץ על Backspace לניקוי"
 msgid "Type a new accelerator"
 msgstr "הקש מאיץ חדש"
 
-#: ../plugins/externaltools/tools/outputpanel.py:78
+#: ../plugins/externaltools/tools/outputpanel.py:77
 msgid "Stopped."
 msgstr "נעצר."
 
@@ -2605,8 +2598,7 @@ msgstr "פתח מסוף כאן"
 
 #: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:1
 msgid "Remove trailing spaces"
-msgstr ""
-"הסר רווחים עוקבים"
+msgstr "הסר רווחים עוקבים"
 
 #: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:2
 msgid "Remove useless trailing spaces in your file"
@@ -2628,13 +2620,7 @@ msgstr "גישה קלה לקבצים מתפריט הצד"
 msgid "File Browser Pane"
 msgstr ""
 
-#. Translators: this is used in "file on host", e.g. "/foo/bar on ftp.baz.org"
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:195
-#, fuzzy
-msgid "on"
-msgstr "הסתיים"
-
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:330
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:225
 msgid "File System"
 msgstr "מערכת קבצים"
 
@@ -2729,62 +2715,62 @@ msgstr ""
 "(filter binary files) and hidden_and_binary (filter both hidden and binary "
 "files)."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:594
 #, fuzzy
 msgid "_Set root to active document"
 msgstr "בחר את כל המסמך"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:600
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:596
 #, fuzzy
 msgid "Set the root to the active document location"
 msgstr "מיין את המסמך הנוכחי או את הבחירה."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:605
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:601
 msgid "_Open terminal here"
 msgstr "פתח _מסוף כאן"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:607
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:603
 msgid "Open a terminal at the currently opened directory"
 msgstr "פתח מסוף בספרייה הפתוחה הנוכחית"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:741
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:737
 msgid "File Browser"
 msgstr "דפדפן קבצים"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:864
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:865
 msgid "An error occurred while creating a new directory"
 msgstr "ארעה שגיאה בעת יצירת ספרייה חדשה"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:867
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:868
 msgid "An error occurred while creating a new file"
 msgstr "ארעה שגיאה בעת יצירת קובץ חדש"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:872
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:873
 msgid "An error occurred while renaming a file or directory"
 msgstr "ארעה שגיאה בעת החלפת שם קובץ או ספרייה"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:877
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:878
 msgid "An error occurred while deleting a file or directory"
 msgstr "ארעה שגיאה בעת מחיקת קובץ או ספרייה"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:882
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:883
 msgid "An error occurred while opening a directory in the file manager"
 msgstr "ארעה שגיאה בעת פתיחת ספרייה במנהל הקבצים"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:886
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:887
 #, fuzzy
 msgid "An error occurred while setting a root directory"
 msgstr "ארעה שגיאה בעת הפעלת הפקודה המבוקשת."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:890
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:891
 msgid "An error occurred while loading a directory"
 msgstr "ארעה שגיאה בעת טעינת ספרייה"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:893
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:894
 msgid "An error occurred"
 msgstr "ארעה שגיאה"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1123
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1185
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
@@ -2792,187 +2778,186 @@ msgstr ""
 "לא ניתן להעביר לאשפה\n"
 "למחוק לצמיתות?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1127
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1189
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "לא ניתן להעביר את הקובץ \"%s\" לאשפה."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1130
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1192
 msgid "The selected files cannot be moved to the trash."
 msgstr "לא ניתן להעביר את הקבצים הנבחרים לאשפה."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1163
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1225
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
-msgstr ""
-"למחוק את \"%s\" לצמיתות?"
+msgstr "למחוק את \"%s\" לצמיתות?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1166
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1228
 msgid "Are you sure you want to permanently delete the selected files?"
-msgstr ""
-"למחוק את הקבציפ המסומנים?"
+msgstr "למחוק את הקבציפ המסומנים?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1169
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1231
 msgid "If you delete an item, it is permanently lost."
 msgstr "אם תמחק פריט, הוא יאבד."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1583
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1621
 msgid "(Empty)"
 msgstr "(ריק)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2723
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1840
-msgid "Invalid uri"
-msgstr "כתובת לא תקינה"
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3067
+msgid ""
+"The renamed file is currently filtered out. You need to adjust your filter "
+"settings to make the file visible"
+msgstr ""
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3155
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3305
 msgid "file"
 msgstr "קובץ"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3176
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3223
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3329
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
 msgstr ""
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3204
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3357
 msgid "directory"
 msgstr "ספרייה"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:738
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3377
+msgid ""
+"The new directory is currently filtered out. You need to adjust your filter "
+"settings to make the directory visible"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:673
 msgid "Bookmarks"
 msgstr "סימניות"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:748
-msgid "Recent Files"
-msgstr "קבצים שנפתחו לאחרונה"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:827
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:751
 msgid "_Filter"
 msgstr "_מסנן"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:756
 msgid "_Move To Trash"
 msgstr "העבר ל_אשפה"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:757
 msgid "Move selected file or folder to trash"
 msgstr "העבר את הקובץ או התיקייה הנבחרת לאשפה"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:759
 msgid "_Delete"
 msgstr "_מחק"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:760
 msgid "Delete selected file or folder"
 msgstr "מחק את הקובץ או התיקייה הנבחרת"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:842
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:766
 msgid "Up"
 msgstr "למעלה"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:843
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:767
 msgid "Open the parent folder"
 msgstr "פתח את ספריית ההורה"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:772
 msgid "_New Folder"
 msgstr "_תיקייה חדשה"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:773
 msgid "Add new empty folder"
 msgstr "הוסף תיקייה ריקה"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:851
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:775
 msgid "New F_ile"
 msgstr "_קובת חדש"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:776
 msgid "Add new empty file"
 msgstr "הוסף קובץ ריק"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:857
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:781
 msgid "_Rename"
 msgstr "_החלף שם"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:858
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:782
 msgid "Rename selected file or folder"
-msgstr ""
-"שנה את שם הקובץ או תיקייה שניבחרו"
+msgstr "שנה את שם הקובץ או תיקייה שניבחרו"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:864
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:788
 msgid "_Previous Location"
 msgstr "המיקום ה_קודם"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:866
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:790
 msgid "Go to the previous visited location"
 msgstr "עבור למיקום הקודם בו ביקרת"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:868
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:792
 msgid "_Next Location"
 msgstr "המיקום ה_בא"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:869
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:793
 msgid "Go to the next visited location"
 msgstr "עבור למיקום הבא בו ביקרת"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:870
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:794
 msgid "Re_fresh View"
 msgstr "ר_ענן תצוגה"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:871
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:795
 msgid "Refresh the view"
 msgstr "רענן את התצוגה"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:872
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:796
 msgid "_View Folder"
 msgstr "_הצג תיקיה"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:873
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:797
 msgid "View folder in file manager"
 msgstr "הצג תיקיה במנהל הקבצים"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:880
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
 msgid "Show _Hidden"
 msgstr "הצג _נסתרים"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:881
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:805
 msgid "Show hidden files and folders"
 msgstr "הצגת קבצים ותיקיות נסתרים"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:883
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
 msgid "Show _Binary"
 msgstr "הצג _בינארי"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:884
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
 msgid "Show binary files"
 msgstr "הצג קבצים בינאריים"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:989
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1005
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1037
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:913
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:929
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:961
 msgid "Previous location"
 msgstr "המיקום הקודם"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:993
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:917
 msgid "Go to previous location"
 msgstr "לך למיקום הקודם"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:998
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1030
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:922
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:954
 msgid "Go to a previously opened location"
 msgstr "לך למיקום שנפתח בעבר"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1020
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:944
 msgid "Next location"
 msgstr "המיקום הבא"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1024
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:948
 msgid "Go to next location"
 msgstr "לך למיקום הבא"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1201
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1125
 msgid "_Match Filename"
 msgstr "הת_אם שם קובץ"
 
@@ -3199,25 +3184,29 @@ msgstr ""
 #: ../plugins/snippets/snippets/Manager.py:1068
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr ""
+"הקש קיצור חדש, או לחץ על Backspace לניקוי"
 
 #: ../plugins/snippets/snippets/Manager.py:1070
 msgid "Type a new shortcut"
-msgstr ""
+msgstr "הקש קיצור חדש"
 
 #: ../plugins/snippets/snippets/Exporter.py:65
 #, python-format
 msgid "The archive `%s` could not be created"
 msgstr ""
+"לא ניתן ליצור את הארכיון '%s'"
 
 #: ../plugins/snippets/snippets/Exporter.py:82
 #, python-format
 msgid "Target directory `%s` does not exist"
 msgstr ""
+"ספריית היעד '%s' לא קיימת"
 
 #: ../plugins/snippets/snippets/Exporter.py:85
 #, python-format
 msgid "Target directory `%s` is not a valid directory"
 msgstr ""
+"ספריית היעד '%s' אינה ספרייה תקינה"
 
 #: ../plugins/snippets/snippets/Importer.py:29
 #: ../plugins/snippets/snippets/Importer.py:83
@@ -3239,11 +3228,13 @@ msgstr ""
 #, python-format
 msgid "The archive `%s` could not be extracted"
 msgstr ""
+"לא ניתן לחלץ את הארכיון '%s'"
 
 #: ../plugins/snippets/snippets/Importer.py:70
 #, python-format
 msgid "The following files could not be imported: %s"
 msgstr ""
+"לא ניתן הי לייבא את הקבצים הבאים: %s"
 
 #: ../plugins/snippets/snippets/Importer.py:86
 #: ../plugins/snippets/snippets/Importer.py:99
@@ -3262,6 +3253,7 @@ msgstr ""
 #, python-format
 msgid "Execution of the python command (%s) failed: %s"
 msgstr ""
+"הרצת פקודת ה-python ‏(%s) נכשלה: %s"
 
 #: ../plugins/snippets/snippets/Placeholder.py:564
 msgid "The following python code, run in a snippet, does not return a value"
@@ -3359,7 +3351,8 @@ msgstr "בדיקת איות הסתיימה"
 #: ../plugins/spell/gedit-spell-checker-language.c:295
 #, c-format
 msgid "language|%s (%s)"
-msgstr "%s (%s)"
+msgstr ""
+"‏%s (‏%s)"
 
 #. Translators: The text before the "|" is context to help you decide on
 #. * the correct translation. You MUST OMIT it in the translated string.
@@ -3512,1512 +3505,1468 @@ msgid "Available Tag Lists"
 msgstr "תוסף רשימת תגיות"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
-#, fuzzy
 msgid "Abbreviated form"
-msgstr "מבנים זמינים"
+msgstr "Abbreviated form"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:2
-#, fuzzy
 msgid "Abbreviation"
-msgstr "ארמנית"
+msgstr "Abbreviation"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
-msgstr "מעל"
+msgstr "Above"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
-msgstr ""
+msgstr "Accessibility key character"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:5
 msgid "Acronym"
-msgstr "מילה נרדפת"
+msgstr "Acronym"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:6
-#, fuzzy
 msgid "Align"
-msgstr "שורות"
+msgstr "Align"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
-msgstr ""
+msgstr "Alignment character"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:8
 msgid "Alternative"
-msgstr ""
+msgstr "Alternative"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:9
 msgid "Anchor"
-msgstr "עוגן"
+msgstr "Anchor"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:10
 msgid "Anchor URI"
-msgstr "כתובת עוגן"
+msgstr "Anchor URI"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:11
-#, fuzzy
 msgid "Applet class file code"
-msgstr "בחר קובץ לפתיחה"
+msgstr "Applet class file code"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:13
-#, fuzzy
 msgid "Applet class file code (deprecated)"
-msgstr "בחר קובץ לפתיחה"
+msgstr "Applet class file code (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:14
 msgid "Array"
-msgstr "מערך"
+msgstr "Array"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:15
 msgid "Associated information"
-msgstr ""
+msgstr "Associated information"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:16
 msgid "Author info"
-msgstr "מידע על המחבר"
+msgstr "Author info"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:17
-#, fuzzy
 msgid "Axis related headers"
-msgstr "_הדפס כותרי עמוד"
+msgstr "Axis related headers"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:18
 msgid "Background color"
-msgstr "צבע רקע"
+msgstr "Background color"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:20
 msgid "Background color (deprecated)"
-msgstr "צבע רקע (מיושן)"
+msgstr "Background color (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:21
-#, fuzzy
 msgid "Background texture tile"
-msgstr "צבע רקע"
+msgstr "Background texture tile"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:23
-#, fuzzy
 msgid "Background texture tile (deprecated)"
-msgstr "צבע רקע"
+msgstr "Background texture tile (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:24
 msgid "Base URI"
-msgstr "כתובת בסיס"
+msgstr "Base URI"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:25
 msgid "Base font"
-msgstr "גופן בסיס"
+msgstr "Base font"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
 msgid "Base font (deprecated)"
-msgstr "גופן בסיס (מיושן)"
+msgstr "Base font (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:28
 msgid "Bold"
-msgstr "מודגש"
+msgstr "Bold"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Border"
-msgstr "מסגרת"
+msgstr "Border"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:31
 msgid "Border (deprecated)"
-msgstr "מסגרת (מיושן)"
+msgstr "Border (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Border color"
-msgstr "צבע מסגרת"
+msgstr "Border color"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:33
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "מרכז אירופה"
+msgstr "Cell rowspan"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:34
 msgid "Center"
-msgstr "מרכז"
+msgstr "Center"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Center (deprecated)"
-msgstr "מרכז (מיושן)"
+msgstr "Center (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:37
-#, fuzzy
 msgid "Character encoding of linked resource"
-msgstr "קודי תווים"
+msgstr "Character encoding of linked resource"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Checked (state)"
-msgstr ""
+msgstr "Checked (state)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:39
 msgid "Checked state"
-msgstr ""
+msgstr "Checked state"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:40
 msgid "Citation"
-msgstr "ציטוט"
+msgstr "Citation"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Cite reason for change"
-msgstr ""
+msgstr "Cite reason for change"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:42
 msgid "Class implementation ID"
-msgstr ""
+msgstr "Class implementation ID"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:43
 msgid "Class list"
-msgstr "רשימת מחלקות"
+msgstr "Class list"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:44
 msgid "Clear text flow control"
-msgstr ""
+msgstr "Clear text flow control"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:45
 msgid "Code content type"
-msgstr ""
+msgstr "Code content type"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:46
 msgid "Color of selected links"
-msgstr "צבע של הקישורים שנבחרו"
+msgstr "Color of selected links"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Color of selected links (deprecated)"
-msgstr "צבע של הקישורים שנבחרו (מיושן)"
+msgstr "Color of selected links (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:49
 msgid "Column span"
-msgstr "פריסת עמודה"
+msgstr "Column span"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Columns"
-msgstr "עמודות"
+msgstr "Columns"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Comment"
-msgstr "הערה"
+msgstr "Comment"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Computer code fragment"
-msgstr ""
+msgstr "Computer code fragment"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Content scheme"
-msgstr "סכימת תוכן"
+msgstr "Content scheme"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Content type"
-msgstr "סוג תוכן"
+msgstr "Content type"
 
 #. The "type" attribute is deprecated for the "ol" tag only,
 #. since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:57
 msgid "Content type (deprecated)"
-msgstr "סוג תוכן (מיושן)"
+msgstr "Content type (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:58
-#, fuzzy
 msgid "Coordinates"
-msgstr "_תכנים"
+msgstr "Coordinates"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:59
 msgid "DIV Style container"
-msgstr ""
+msgstr "DIV Style container"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:60
 msgid "DIV container"
-msgstr ""
+msgstr "DIV container"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Date and time of change"
-msgstr ""
+msgstr "Date and time of change"
 
 #. NOTE: used in "object" tag
 #: ../plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Declare flag"
-msgstr ""
+msgstr "Declare flag"
 
 #. Translators: DEFER is an optional attribute of the <script> tag.
 #. It indicates that the script is not going to generate any document
 #. content. The browser can continue parsing and drawing the page.
 #: ../plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Defer attribute"
-msgstr ""
+msgstr "Defer attribute"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Definition description"
-msgstr "תיאור הגדרה"
+msgstr "Definition description"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Definition list"
-msgstr "רשימת הגדרות"
+msgstr "Definition list"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Definition term"
-msgstr ""
+msgstr "Definition term"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Deleted text"
-msgstr "טקסט שנמחק"
+msgstr "Deleted text"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Direction"
-msgstr "כיוון"
+msgstr "Direction"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Directionality"
-msgstr "כיווניות"
+msgstr "Directionality"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Directionality (deprecated)"
-msgstr "כיווניות (מיושן)"
+msgstr "Directionality (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Directory list"
-msgstr "רשימת ספריות"
+msgstr "Directory list"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Disabled"
-msgstr "מכובה"
+msgstr "Disabled"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Document base"
-msgstr "בסיס המסמך"
+msgstr "Document base"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Document body"
-msgstr "גוף המסמך"
+msgstr "Document body"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Document head"
-msgstr "ראש המסמך"
+msgstr "Document head"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Document title"
-msgstr "כותרת המסמך"
+msgstr "Document title"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Document type"
-msgstr "סוג מסמך"
+msgstr "Document type"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:83
-#, fuzzy
 msgid "Element ID"
-msgstr "רכיבים"
+msgstr "Element ID"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Embedded object"
-msgstr ""
+msgstr "Embedded object"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:85
 #: ../plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
-msgstr ""
+msgstr "Emphasis"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Encode type"
-msgstr "סוג קידוד"
+msgstr "Encode type"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Figure"
-msgstr ""
+msgstr "Figure"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:88
-#, fuzzy
 msgid "Font face"
-msgstr "שם הגופן"
+msgstr "Font face"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:90
 msgid "Font face (deprecated)"
-msgstr ""
+msgstr "Font face (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:91
-#, fuzzy
 msgid "For label"
-msgstr "תווית"
+msgstr "For label"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:92
 msgid "Forced line break"
-msgstr ""
+msgstr "Forced line break"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:93
 msgid "Form"
-msgstr "טופס"
+msgstr "Form"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:94
 msgid "Form action handler"
-msgstr ""
+msgstr "Form action handler"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:95
 msgid "Form control group"
-msgstr ""
+msgstr "Form control group"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:96
 msgid "Form field label text"
-msgstr ""
+msgstr "Form field label text"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Form input"
-msgstr ""
+msgstr "Form input"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Form input type"
-msgstr ""
+msgstr "Form input type"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Form method"
-msgstr ""
+msgstr "Form method"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Forward link"
-msgstr ""
+msgstr "Forward link"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Frame"
-msgstr "מסגרת"
+msgstr "Frame"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Frame render parts"
-msgstr ""
+msgstr "Frame render parts"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Frame source"
-msgstr ""
+msgstr "Frame source"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Frame target"
-msgstr ""
+msgstr "Frame target"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Frameborder"
-msgstr ""
+msgstr "Frameborder"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:106
-#, fuzzy
 msgid "Frameset"
-msgstr "פרוסי"
+msgstr "Frameset"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:107
-#, fuzzy
 msgid "Frameset columns"
-msgstr "התחל ב_עמודה:"
+msgstr "Frameset columns"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:108
 msgid "Frameset rows"
-msgstr ""
+msgstr "Frameset rows"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Framespacing"
-msgstr ""
+msgstr "Framespacing"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Generic embedded object"
-msgstr ""
+msgstr "Generic embedded object"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Generic metainformation"
-msgstr ""
+msgstr "Generic metainformation"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Generic span"
-msgstr "פריסה כללית"
+msgstr "Generic span"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:113
 msgid "HREF URI"
-msgstr "כתובת HREF"
+msgstr "HREF URI"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:114
 msgid "HTML - Special Characters"
-msgstr "HTML - תווים מיוחדים"
+msgstr ""
+"‏HTML - תווים מיוחדים"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:115
 msgid "HTML - Tags"
-msgstr "HTML - תגיות"
+msgstr ""
+"‏HTML - תגיות"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:116
 msgid "HTML root element"
-msgstr ""
+msgstr "HTML root element"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:117
 msgid "HTML version"
-msgstr "גירסת HTML"
+msgstr "HTML version"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:118
 msgid "HTTP header name"
-msgstr "שם כותרת HTTP"
+msgstr "HTTP header name"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Header cell ID's"
-msgstr ""
+msgstr "Header cell ID's"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Heading"
-msgstr "כותרת"
+msgstr "Heading"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Heading 1"
-msgstr "כותרת 1"
+msgstr "Heading 1"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Heading 2"
-msgstr "כותרת 2"
+msgstr "Heading 2"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Heading 3"
-msgstr "כותרת 3"
+msgstr "Heading 3"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Heading 4"
-msgstr "כותרת 4"
+msgstr "Heading 4"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:125
 msgid "Heading 5"
-msgstr "כותרת 5"
+msgstr "Heading 5"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:126
 msgid "Heading 6"
-msgstr "כותרת 6"
+msgstr "Heading 6"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Height"
-msgstr "גובה"
+msgstr "Height"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:128
 msgid "Horizontal rule"
-msgstr "קו מאוזן"
+msgstr "Horizontal rule"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Horizontal space"
-msgstr "רווח מאוזן"
+msgstr "Horizontal space"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Horizontal space (deprecated)"
-msgstr "רווח מאוזן (מיושן)"
+msgstr "Horizontal space (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:132
 msgid "HttP header name"
-msgstr "שם כותרת HttP"
+msgstr "HttP header name"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:133
 msgid "I18N BiDi over-ride"
-msgstr ""
+msgstr "I18N BiDi over-ride"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Image"
-msgstr "תמונה"
+msgstr "Image"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Image map"
-msgstr ""
+msgstr "Image map"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Image map area"
-msgstr ""
+msgstr "Image map area"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Image map name"
-msgstr ""
+msgstr "Image map name"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Image source"
-msgstr "מקור תמונה"
+msgstr "Image source"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Inline frame"
-msgstr "מסגרת פנימית"
+msgstr "Inline frame"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Inline layer"
-msgstr "שכבה פנימית"
+msgstr "Inline layer"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Inserted text"
-msgstr "טקסט שהוכנס"
+msgstr "Inserted text"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Instance definition"
-msgstr ""
+msgstr "Instance definition"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Italic text"
-msgstr "טקסט נטוי"
+msgstr "Italic text"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Java applet"
-msgstr "יישומון Java"
+msgstr "Java applet"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:146
 msgid "Java applet (deprecated)"
-msgstr "יישומון Java (מיושן)"
+msgstr "Java applet (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "Label"
-msgstr "תווית"
+msgstr "Label"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:148
 msgid "Language code"
-msgstr "קוד שפה"
+msgstr "Language code"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:149
 msgid "Large text style"
-msgstr ""
+msgstr "Large text style"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:150
 msgid "Layer"
-msgstr "שכבה"
+msgstr "Layer"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:151
 msgid "Link color"
-msgstr "צבע קישור"
+msgstr "Link color"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:153
 msgid "Link color (deprecated)"
-msgstr "צבע קישור (מיושן)"
+msgstr "Link color (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:154
 msgid "List item"
-msgstr ""
+msgstr "List item"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:155
 msgid "List of MIME types for file upload"
-msgstr ""
+msgstr "List of MIME types for file upload"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:156
 msgid "List of supported character sets"
-msgstr ""
+msgstr "List of supported character sets"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Listing"
-msgstr ""
+msgstr "Listing"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:158
-#, fuzzy
 msgid "Local change to font"
-msgstr "בחר גופן ברירת מחדל לעורך"
+msgstr "Local change to font"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:159
-#, fuzzy
 msgid "Long description link"
-msgstr "_תיאור"
+msgstr "Long description link"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:160
 msgid "Long quotation"
-msgstr ""
+msgstr "Long quotation"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:161
 msgid "Mail link"
-msgstr "קישור דואר"
+msgstr "Mail link"
 
 #. Supported in XHTML 1.0 Frameset DTD only.
 #: ../plugins/taglist/HTML.tags.xml.in.h:163
 msgid "Margin pixel height"
-msgstr ""
+msgstr "Margin pixel height"
 
 #. Supported in XHTML 1.0 Frameset DTD only.
 #: ../plugins/taglist/HTML.tags.xml.in.h:165
 msgid "Margin pixel width"
-msgstr ""
+msgstr "Margin pixel width"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:166
 msgid "Marquee"
-msgstr ""
+msgstr "Marquee"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:167
 msgid "Maximum length of text field"
-msgstr ""
+msgstr "Maximum length of text field"
 
 #. Here I take some liberties: There's no mandatory attributes,
 #. but those are most common, and will likely be used.
 #: ../plugins/taglist/HTML.tags.xml.in.h:170
 msgid "Media-independent link"
-msgstr ""
+msgstr "Media-independent link"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:171
 msgid "Menu list"
-msgstr ""
+msgstr "Menu list"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:173
 msgid "Menu list (deprecated)"
-msgstr ""
+msgstr "Menu list (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:174
 msgid "Multi-line text field"
-msgstr ""
+msgstr "Multi-line text field"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:175
 msgid "Multicolumn"
-msgstr ""
+msgstr "Multicolumn"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Multiple"
-msgstr ""
+msgstr "Multiple"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Name"
-msgstr "שם"
+msgstr "Name"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Named property value"
-msgstr ""
+msgstr "Named property value"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Next ID"
-msgstr ""
+msgstr "Next ID"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:180
 msgid "No URI"
-msgstr "אין כתובת"
+msgstr "No URI"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:181
 msgid "No embedded objects"
-msgstr ""
+msgstr "No embedded objects"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:182
 msgid "No frames"
-msgstr "אין מסגרות"
+msgstr "No frames"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:183
 msgid "No layers"
-msgstr "אין שכבות"
+msgstr "No layers"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:184
 msgid "No line break"
-msgstr ""
+msgstr "No line break"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:185
-#, fuzzy
 msgid "No resize"
-msgstr "הצג גודל"
+msgstr "No resize"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:186
 msgid "No script"
-msgstr ""
+msgstr "No script"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:187
 msgid "No shade"
-msgstr ""
+msgstr "No shade"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:189
 msgid "No shade (deprecated)"
-msgstr ""
+msgstr "No shade (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:190
 msgid "No word wrap"
-msgstr ""
+msgstr "No word wrap"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:192
 msgid "No word wrap (deprecated)"
-msgstr ""
+msgstr "No word wrap (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Non-breaking space"
-msgstr ""
+msgstr "Non-breaking space"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Note"
-msgstr "הערה"
+msgstr "Note"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:195
-#, fuzzy
 msgid "Object applet file"
-msgstr "פתח קובץ"
+msgstr "Object applet file"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:197
-#, fuzzy
 msgid "Object applet file (deprecated)"
-msgstr "פתח קובץ"
+msgstr "Object applet file (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Object data reference"
-msgstr ""
+msgstr "Object data reference"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Offset for alignment character"
-msgstr ""
+msgstr "Offset for alignment character"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:200
 msgid "OnBlur event"
-msgstr "אירוע OnBlur"
+msgstr "OnBlur event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:201
 msgid "OnChange event"
-msgstr "אירוע OnChange"
+msgstr "OnChange event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:202
 msgid "OnClick event"
-msgstr "אירוע OnClick"
+msgstr "OnClick event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:203
 msgid "OnDblClick event"
-msgstr "אירוע OnDblClick"
+msgstr "OnDblClick event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:204
 msgid "OnFocus event"
-msgstr "אירוע OnFocus"
+msgstr "OnFocus event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:205
 msgid "OnKeyDown event"
-msgstr "אירוע OnKeyDown"
+msgstr "OnKeyDown event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:206
 msgid "OnKeyPress event"
-msgstr "אירוע OnKeyPress"
+msgstr "OnKeyPress event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:207
 msgid "OnKeyUp event"
-msgstr "אירוע OnKeyUp"
+msgstr "OnKeyUp event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:208
 msgid "OnLoad event"
-msgstr "אירוע OnLoad"
+msgstr "OnLoad event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:209
 msgid "OnMouseDown event"
-msgstr "אירוע OnMouseDown"
+msgstr "OnMouseDown event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:210
 msgid "OnMouseMove event"
-msgstr "אירוע OnMouseMove"
+msgstr "OnMouseMove event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:211
 msgid "OnMouseOut event"
-msgstr "אירוע OnMouseOut"
+msgstr "OnMouseOut event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:212
 msgid "OnMouseOver event"
-msgstr "אירוע OnMouseOver"
+msgstr "OnMouseOver event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:213
 msgid "OnMouseUp event"
-msgstr "אירוע OnMouseUp"
+msgstr "OnMouseUp event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:214
 msgid "OnReset event"
-msgstr "אירוע OnReset"
+msgstr "OnReset event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:215
 msgid "OnSelect event"
-msgstr "אירוע OnSelect"
+msgstr "OnSelect event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:216
 msgid "OnSubmit event"
-msgstr "אירוע OnSubmit"
+msgstr "OnSubmit event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:217
 msgid "OnUnload event"
-msgstr "אירוע OnUnload"
+msgstr "OnUnload event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Option group"
-msgstr ""
+msgstr "Option group"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:219
-#, fuzzy
 msgid "Option selector"
-msgstr "בחירת גופן"
+msgstr "Option selector"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:220
 msgid "Ordered list"
-msgstr ""
+msgstr "Ordered list"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:221
 msgid "Output media"
-msgstr "מדיית פלט"
+msgstr "Output media"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:222
 msgid "Paragraph"
-msgstr ""
+msgstr "Paragraph"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Paragraph class"
-msgstr ""
+msgstr "Paragraph class"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Paragraph style"
-msgstr ""
+msgstr "Paragraph style"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Preformatted listing"
-msgstr ""
+msgstr "Preformatted listing"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:226
-#, fuzzy
 msgid "Preformatted text"
-msgstr "תצוגה מקדימה של טקסט"
+msgstr "Preformatted text"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Profile metainfo dictionary"
-msgstr ""
+msgstr "Profile metainfo dictionary"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:228
 msgid "Prompt message"
-msgstr ""
+msgstr "Prompt message"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:229
-#, fuzzy
 msgid "Push button"
-msgstr "כפתור1"
+msgstr "Push button"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:230
 msgid "Quote"
-msgstr "ציטוט"
+msgstr "Quote"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Range"
-msgstr "טווח"
+msgstr "Range"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:232
 msgid "ReadOnly text and password"
-msgstr ""
+msgstr "ReadOnly text and password"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Reduced spacing"
-msgstr ""
+msgstr "Reduced spacing"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:235
 msgid "Reduced spacing (deprecated)"
-msgstr ""
+msgstr "Reduced spacing (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:236
-#, fuzzy
 msgid "Reverse link"
-msgstr "סדר יור_ד"
+msgstr "Reverse link"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Root"
-msgstr ""
+msgstr "Root"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Rows"
-msgstr "שורות"
+msgstr "Rows"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Rulings between rows and columns"
-msgstr ""
+msgstr "Rulings between rows and columns"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Sample program output, scripts"
-msgstr ""
+msgstr "Sample program output, scripts"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:241
 msgid "Scope covered by header cells"
-msgstr ""
+msgstr "Scope covered by header cells"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:243
-#, fuzzy
 msgid "Script language name"
-msgstr "קבע שפה"
+msgstr "Script language name"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Script statments"
-msgstr ""
+msgstr "Script statments"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:245
 msgid "Scrollbar"
-msgstr ""
+msgstr "Scrollbar"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:246
-#, fuzzy
 msgid "Selectable option"
-msgstr "בחר קובץ לפתיחה"
+msgstr "Selectable option"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Selected"
-msgstr "נבחר"
+msgstr "Selected"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Server-side image map"
-msgstr ""
+msgstr "Server-side image map"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:249
-#, fuzzy
 msgid "Shape"
-msgstr "שמירה"
+msgstr "Shape"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:250
 msgid "Short inline quotation"
-msgstr ""
+msgstr "Short inline quotation"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:251
 msgid "Single line prompt"
-msgstr ""
+msgstr "Single line prompt"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Size"
-msgstr "גודל"
+msgstr "Size"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Size (deprecated)"
-msgstr "גודל (מיושן)"
+msgstr "Size (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:255
-#, fuzzy
 msgid "Small text style"
-msgstr "כל קבצי הטקסט"
+msgstr "Small text style"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Soft line break"
-msgstr ""
+msgstr "Soft line break"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:257
 msgid "Sound"
-msgstr "קול"
+msgstr "Sound"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:258
 msgid "Source"
-msgstr "מקור"
+msgstr "Source"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Space separated archive list"
-msgstr ""
+msgstr "Space separated archive list"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:260
-#, fuzzy
 msgid "Spacer"
-msgstr "החלף"
+msgstr "Spacer"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:261
 msgid "Spacing between cells"
-msgstr ""
+msgstr "Spacing between cells"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:262
 msgid "Spacing within cells"
-msgstr ""
+msgstr "Spacing within cells"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:263
 msgid "Span"
-msgstr "פריסה"
+msgstr "Span"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:264
 msgid "Square root"
-msgstr ""
+msgstr "Square root"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:265
 msgid "Standby load msg"
-msgstr ""
+msgstr "Standby load msg"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:266
-#, fuzzy
 msgid "Starting sequence number"
-msgstr "הדפס מספרי _שורות"
+msgstr "Starting sequence number"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:268
-#, fuzzy
 msgid "Starting sequence number (deprecated)"
-msgstr "הדפס מספרי _שורות"
+msgstr "Starting sequence number (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:269
-#, fuzzy
 msgid "Strike-through text"
-msgstr "קו מחיקה"
+msgstr "Strike-through text"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:271
-#, fuzzy
 msgid "Strike-through text (deprecated)"
-msgstr "קו מחיקה"
+msgstr "Strike-through text (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:272
-#, fuzzy
 msgid "Strike-through text style"
-msgstr "קו מחיקה"
+msgstr "Strike-through text style"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:274
-#, fuzzy
 msgid "Strike-through text style (deprecated)"
-msgstr "קו מחיקה"
+msgstr "Strike-through text style (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:275
 msgid "Strong emphasis"
-msgstr ""
+msgstr "Strong emphasis"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:276
 msgid "Style info"
-msgstr ""
+msgstr "Style info"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:277
 msgid "Subscript"
-msgstr ""
+msgstr "Subscript"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:278
-#, fuzzy
 msgid "Superscript"
-msgstr "_תיאור"
+msgstr "Superscript"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:279
 msgid "Tab order position"
-msgstr ""
+msgstr "Tab order position"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:280
 msgid "Table"
-msgstr "טבלה"
+msgstr "Table"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:281
 msgid "Table body"
-msgstr "גוף הטבלה"
+msgstr "Table body"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:282
-#, fuzzy
 msgid "Table caption"
-msgstr "פתח מיקום"
+msgstr "Table caption"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:283
 msgid "Table column group properties"
-msgstr ""
+msgstr "Table column group properties"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:284
 msgid "Table column properties"
-msgstr ""
+msgstr "Table column properties"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:285
 msgid "Table data cell"
-msgstr ""
+msgstr "Table data cell"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:286
 msgid "Table footer"
-msgstr ""
+msgstr "Table footer"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:287
 msgid "Table header"
-msgstr "כותרת הטבלה"
+msgstr "Table header"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:288
 msgid "Table header cell"
-msgstr ""
+msgstr "Table header cell"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:289
 msgid "Table row"
-msgstr ""
+msgstr "Table row"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:290
 msgid "Table summary"
-msgstr "סיכום הטבלה"
+msgstr "Table summary"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:291
 msgid "Target - Blank"
-msgstr ""
+msgstr "Target - Blank"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:292
 msgid "Target - Parent"
-msgstr ""
+msgstr "Target - Parent"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:293
 msgid "Target - Self"
-msgstr ""
+msgstr "Target - Self"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:294
 msgid "Target - Top"
-msgstr ""
+msgstr "Target - Top"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:295
 msgid "Teletype or monospace text style"
-msgstr ""
+msgstr "Teletype or monospace text style"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:296
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:297
 msgid "Text color"
-msgstr "צבע טקסט"
+msgstr "Text color"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:299
 msgid "Text color (deprecated)"
-msgstr "צבע טקסט (מיושן)"
+msgstr "Text color (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:300
 msgid "Text entered by user"
-msgstr ""
+msgstr "Text entered by user"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:301
 msgid "Title"
-msgstr "כותרת"
+msgstr "Title"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:302
 msgid "Topmargin in pixels"
-msgstr ""
+msgstr "Topmargin in pixels"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:303
 msgid "URL"
-msgstr "כתובת"
+msgstr "URL"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:304
-#, fuzzy
 msgid "Underlined text style"
-msgstr "קו תחתי"
+msgstr "Underlined text style"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:305
-#, fuzzy
 msgid "Unordered list"
-msgstr "קו תחתי"
+msgstr "Unordered list"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:306
 msgid "Use image map"
-msgstr ""
+msgstr "Use image map"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:307
 msgid "Value"
-msgstr "ערך"
+msgstr "Value"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:308
 msgid "Value interpretation"
-msgstr "פירוש ערך"
+msgstr "Value interpretation"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:309
 msgid "Variable or program argument"
-msgstr ""
+msgstr "Variable or program argument"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:310
 msgid "Vertical cell alignment"
-msgstr ""
+msgstr "Vertical cell alignment"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:311
-#, fuzzy
 msgid "Vertical space"
-msgstr "הכנס רווחים"
+msgstr "Vertical space"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:313
-#, fuzzy
 msgid "Vertical space (deprecated)"
-msgstr "הכנס רווחים"
+msgstr "Vertical space (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:314
-#, fuzzy
 msgid "Visited link color"
-msgstr "בחר את צבע הבחירה"
+msgstr "Visited link color"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:316
-#, fuzzy
 msgid "Visited link color (deprecated)"
-msgstr "בחר את צבע הבחירה"
+msgstr "Visited link color (deprecated)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:317
 msgid "Width"
-msgstr ""
+msgstr "Width"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:318
 msgid "XHTML 1.0 - Tags"
-msgstr "XHTML 1.0 - תגיות"
+msgstr ""
+"‏XHTML 1.0 - תגיות"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography (cite)"
-msgstr ""
+msgstr "Bibliography (cite)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:2
 msgid "Bibliography (item)"
-msgstr ""
+msgstr "Bibliography (item)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:3
 msgid "Bibliography (shortcite)"
-msgstr ""
+msgstr "Bibliography (shortcite)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:4
 msgid "Bibliography (thebibliography)"
-msgstr ""
+msgstr "Bibliography (thebibliography)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets ()"
-msgstr "סוגריים ()"
+msgstr "Brackets ()"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:6
 msgid "Brackets <>"
-msgstr "סוגריים <>"
+msgstr "Brackets <>"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:7
 msgid "Brackets []"
-msgstr "סוגריים []"
+msgstr "Brackets []"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:8
 msgid "Brackets {}"
-msgstr "סוגריים {}"
+msgstr "Brackets {}"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:10
 msgid "File input"
-msgstr ""
+msgstr "File input"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:11
-#, fuzzy
 msgid "Footnote"
-msgstr "גופן"
+msgstr "Footnote"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:12
 msgid "Function cosin"
-msgstr ""
+msgstr "Function cosin"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:13
 msgid "Function e^"
-msgstr ""
+msgstr "Function e^"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:14
 msgid "Function exp"
-msgstr ""
+msgstr "Function exp"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:15
 msgid "Function log"
-msgstr ""
+msgstr "Function log"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:16
 msgid "Function log10"
-msgstr ""
+msgstr "Function log10"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:17
 msgid "Function sine"
-msgstr ""
+msgstr "Function sine"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:18
 msgid "Greek alpha"
-msgstr "אלפא יוונית"
+msgstr "Greek alpha"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:19
 msgid "Greek beta"
-msgstr "ביתא יוונית"
+msgstr "Greek beta"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:20
 msgid "Greek epsilon"
-msgstr "אפסילון יווני"
+msgstr "Greek epsilon"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:21
 msgid "Greek gamma"
-msgstr "גמה יוונית"
+msgstr "Greek gamma"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:22
 msgid "Greek lambda"
-msgstr "למבדה יוונית"
+msgstr "Greek lambda"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:23
 msgid "Greek rho"
-msgstr "רו יוונית"
+msgstr "Greek rho"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:24
 msgid "Greek tau"
-msgstr "טאו יוונית"
+msgstr "Greek tau"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:25
 msgid "Header 0 (chapter)"
-msgstr ""
+msgstr "Header 0 (chapter)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:26
 msgid "Header 0 (chapter*)"
-msgstr ""
+msgstr "Header 0 (chapter*)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:27
 msgid "Header 1 (section)"
-msgstr ""
+msgstr "Header 1 (section)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:28
 msgid "Header 1 (section*)"
-msgstr ""
+msgstr "Header 1 (section*)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:29
 msgid "Header 2 (subsection)"
-msgstr ""
+msgstr "Header 2 (subsection)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:30
 msgid "Header 2 (subsection*)"
-msgstr ""
+msgstr "Header 2 (subsection*)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:31
 msgid "Header 3 (subsubsection)"
-msgstr ""
+msgstr "Header 3 (subsubsection)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:32
 msgid "Header 3 (subsubsection*)"
-msgstr ""
+msgstr "Header 3 (subsubsection*)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:33
 msgid "Header 4 (paragraph)"
-msgstr ""
+msgstr "Header 4 (paragraph)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:34
 msgid "Header appendix"
-msgstr ""
+msgstr "Header appendix"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:35
 msgid "Item"
-msgstr "פריט"
+msgstr "Item"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:36
 msgid "Item with label"
-msgstr "פריט עם תוית"
+msgstr "Item with label"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:37
 msgid "Latex - Tags"
 msgstr ""
+"‏Latex - תגיות"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:38
 msgid "List description"
-msgstr "תיאור רשימה"
+msgstr "List description"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:39
 msgid "List enumerate"
-msgstr ""
+msgstr "List enumerate"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:40
 msgid "List itemize"
-msgstr ""
+msgstr "List itemize"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:41
 msgid "Maths (display)"
-msgstr ""
+msgstr "Maths (display)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:42
 msgid "Maths (inline)"
-msgstr ""
+msgstr "Maths (inline)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:43
-#, fuzzy
 msgid "Operator fraction"
-msgstr "פתח מיקום"
+msgstr "Operator fraction"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
-msgstr ""
+msgstr "Operator integral (display)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:45
 msgid "Operator integral (inline)"
-msgstr ""
+msgstr "Operator integral (inline)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:46
 msgid "Operator sum (display)"
-msgstr ""
+msgstr "Operator sum (display)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:47
 msgid "Operator sum (inline)"
-msgstr ""
+msgstr "Operator sum (inline)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:48
-#, fuzzy
 msgid "Reference label"
-msgstr "העדפות"
+msgstr "Reference label"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:49
-#, fuzzy
 msgid "Reference ref"
-msgstr "העדפות"
+msgstr "Reference ref"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol <<"
-msgstr "הסמל <<"
+msgstr "Symbol <<"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:51
 msgid "Symbol <="
-msgstr "הסמל <="
+msgstr "Symbol <="
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:52
 msgid "Symbol >="
-msgstr "הסמל >="
+msgstr "Symbol >="
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:53
 msgid "Symbol >>"
-msgstr "הסמל >>"
+msgstr "Symbol >>"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:54
 msgid "Symbol and"
-msgstr "הסמל and"
+msgstr "Symbol and"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:55
 msgid "Symbol const"
-msgstr "הסמל const"
+msgstr "Symbol const"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:56
 msgid "Symbol d-by-dt"
-msgstr "הסמל d-by-dt"
+msgstr "Symbol d-by-dt"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:57
 msgid "Symbol d-by-dt-partial"
-msgstr "הסמל d-by-dt-partial"
+msgstr "Symbol d-by-dt-partial"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:58
 msgid "Symbol d2-by-dt2-partial"
-msgstr "הסמל d2-by-dt2-partial"
+msgstr "Symbol d2-by-dt2-partial"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:59
 msgid "Symbol dagger"
-msgstr "הסמל dagger"
+msgstr "Symbol dagger"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:60
 msgid "Symbol equiv"
-msgstr "הסמל equiv"
+msgstr "Symbol equiv"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:61
 msgid "Symbol hyphen --"
-msgstr "הסמל hyphen --"
+msgstr "Symbol hyphen --"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:62
 msgid "Symbol hyphen ---"
-msgstr "הסמל hyphen ---"
+msgstr "Symbol hyphen ---"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:63
 msgid "Symbol infinity"
-msgstr "הסמל infinity"
+msgstr "Symbol infinity"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:64
 msgid "Symbol mathspace ,"
-msgstr "הסמל mathspace ,"
+msgstr "Symbol mathspace ,"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:65
 msgid "Symbol mathspace ."
-msgstr "הסמל mathspace ."
+msgstr "Symbol mathspace ."
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:66
 msgid "Symbol mathspace _"
-msgstr "הסמל mathspace _"
+msgstr "Symbol mathspace _"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:67
 msgid "Symbol mathspace __"
-msgstr "הסמל mathspace __"
+msgstr "Symbol mathspace __"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:68
 msgid "Symbol simeq"
-msgstr "הסמל simeq"
+msgstr "Symbol simeq"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:69
 msgid "Symbol star"
-msgstr "הסמל star"
+msgstr "Symbol star"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:70
 msgid "Typeface bold"
-msgstr ""
+msgstr "Typeface bold"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:71
 msgid "Typeface italic"
-msgstr ""
+msgstr "Typeface italic"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:72
 msgid "Typeface slanted"
-msgstr ""
+msgstr "Typeface slanted"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:73
 msgid "Typeface type"
-msgstr ""
+msgstr "Typeface type"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:74
 msgid "Unbreakable text"
-msgstr ""
+msgstr "Unbreakable text"
 
 #: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
 msgid ""
@@ -5034,72 +4983,74 @@ msgstr "רשימת תגיות"
 #: ../plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
 msgstr ""
+"‏XSLT - צירים"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:2
-#, fuzzy
 msgid "XSLT - Elements"
-msgstr "רכיבים"
+msgstr ""
+"‏XSLT - אלמנטים"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:3
 msgid "XSLT - Functions"
 msgstr ""
+"‏XSLT - פונקציות"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:4
 msgid "ancestor"
-msgstr ""
+msgstr "ancestor"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:5
 msgid "ancestor-or-self"
-msgstr ""
+msgstr "ancestor-or-self"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:6
 msgid "attribute"
-msgstr ""
+msgstr "attribute"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:7
 msgid "child"
-msgstr ""
+msgstr "child"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:8
 msgid "descendant"
-msgstr ""
+msgstr "descendant"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:9
 msgid "descendant-or-self"
-msgstr ""
+msgstr "descendant-or-self"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:10
 msgid "following"
-msgstr ""
+msgstr "following"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:11
 msgid "following-sibling"
-msgstr ""
+msgstr "following-sibling"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:12
-#, fuzzy
 msgid "namespace"
-msgstr "הכנס רווחים"
+msgstr "namespace"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:13
 msgid "parent"
-msgstr "הורה"
+msgstr "parent"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:14
 msgid "preceding"
-msgstr ""
+msgstr "preceding"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:15
 msgid "preceding-sibling"
-msgstr ""
+msgstr "preceding-sibling"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:16
 msgid "self"
-msgstr "עצמי"
+msgstr "self"
 
 #: ../plugins/taglist/XUL.tags.xml.in.h:1
 msgid "XUL - Tags"
-msgstr "XUL - תגיות"
+msgstr ""
+"‏XUL - תגיות"
 
 #: ../plugins/time/gedit-time-plugin.c:180
 msgid "In_sert Date and Time..."
@@ -5156,6 +5107,19 @@ msgstr "_שאל אודות תסדיר"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "השתמש במבנה _מותאם"
+
+#~ msgid "The entered location is not valid."
+#~ msgstr "המיקום שהוכנס אינו תקין."
+
+#, fuzzy
+#~ msgid "on"
+#~ msgstr "הסתיים"
+
+#~ msgid "Invalid uri"
+#~ msgstr "כתובת לא תקינה"
+
+#~ msgid "Recent Files"
+#~ msgstr "קבצים שנפתחו לאחרונה"
 
 #~ msgid "gtk-revert-to-saved"
 #~ msgstr "gtk-revert-to-saved"
