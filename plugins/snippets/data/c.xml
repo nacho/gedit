@@ -80,12 +80,12 @@ except KeyError:
     <description>for loop</description>
   </snippet>
   <snippet id="while">
-    <text><![CDATA[while ($1)
+    <text><![CDATA[while (${1:condition})
 {
 	$0
 }]]></text>
     <tag>while</tag>
-    <description>while</description>
+    <description>while loop</description>
   </snippet>
   <snippet id="once">
     <text><![CDATA[#ifndef __${1:NAME}_H__
@@ -105,6 +105,22 @@ $0
 }]]></text>
     <tag>if</tag>
     <description>if</description>
+  </snippet>
+  <snippet id="elif">
+    <text><![CDATA[else if (${1:condition})
+{
+	$0
+}]]></text>
+    <tag>elif</tag>
+    <description>else if</description>
+  </snippet>
+  <snippet id="else">
+    <text><![CDATA[else
+{
+	$0
+}]]></text>
+    <tag>else</tag>
+    <description>else</description>
   </snippet>
   <snippet id="Inc">
     <text><![CDATA[#include <${1:file}.h>
