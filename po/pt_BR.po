@@ -10,7 +10,7 @@
 # João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>, 2004.
 # Raphael Higino <phhigino@gmail.com>, 2004-2005.
 # Everson Santos Araujo <everson@por.com.br>, 2005-2006.
-# Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>, 2006-2007.
+# Leonardo Ferreira Fontenelle <leonardof@gnome.org>, 2006-2007.
 # Og Maciel <ogmaciel@gnome.org>, 2007.
 # Jonh Wendell <wendell@bani.com.br>, 2008.
 #
@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.22\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-25 17:31-0300\n"
-"PO-Revision-Date: 2008-02-23 13:15-0300\n"
-"Last-Translator: Jonh Wendell <wendell@bani.com.br>\n"
+"POT-Creation-Date: 2008-05-24 08:46-0300\n"
+"PO-Revision-Date: 2008-05-24 08:58-0300\n"
+"Last-Translator: Leonardo Ferreira Fontenelle <leonardof@gnome.org>\n"
 "Language-Team: Portuguese/Brazil <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "Edite arquivos de texto"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:475
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:474
 #: ../gedit/gedit-print-job.c:751
 msgid "Text Editor"
 msgstr "Editor de Texto"
@@ -215,7 +215,7 @@ msgid ""
 "This will only take effect if the \"Auto Save\" option is turned on."
 msgstr ""
 "Número de minutos para que o gedit salve automaticamente os "
-"arquivosmodificados. Só terá efeito se a opção \"Salvar Automaticamente\" "
+"arquivos modificados. Só terá efeito se a opção \"Salvar Automaticamente\" "
 "estiver ligada."
 
 #: ../data/gedit.schemas.in.h:39
@@ -236,7 +236,7 @@ msgstr "Modo de Quebra de Linha na Impressão"
 
 #: ../data/gedit.schemas.in.h:43
 msgid "Restore Previous Cursor Position"
-msgstr "Restora Posição Anterior do Cursor"
+msgstr "Restaura Posição Anterior do Cursor"
 
 #: ../data/gedit.schemas.in.h:44
 msgid "Right Margin Position"
@@ -534,7 +534,7 @@ msgstr "_Terminar Sessão sem Salvar"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:144
 msgid "_Cancel Logout"
-msgstr "_Cancelar Térmido de Sessão"
+msgstr "_Cancelar Término de Sessão"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:151
 msgid "Close _without Saving"
@@ -701,7 +701,7 @@ msgstr "Codificações de caracteres"
 msgid "E_ncodings shown in menu:"
 msgstr "Codificações exibidas no _menu:"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.c:139
+#: ../gedit/dialogs/gedit-open-location-dialog.c:133
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
 msgid "Open Location"
 msgstr "Abrir Localização"
@@ -891,11 +891,11 @@ msgid "_minutes"
 msgstr "_minutos"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:301
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1347
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1363
 msgid "Replace"
 msgstr "Substituir"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1345
+#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1361
 msgid "Find"
 msgstr "Localizar"
 
@@ -904,7 +904,7 @@ msgid "Replace _All"
 msgstr "Substituir _Todas"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:405
-#: ../gedit/gedit-commands-file.c:678
+#: ../gedit/gedit-commands-file.c:653
 msgid "_Replace"
 msgstr "_Substituir"
 
@@ -936,7 +936,7 @@ msgstr "_Pesquisar por: "
 msgid "_Wrap around"
 msgstr "_Voltar ao início"
 
-#: ../gedit/gedit.c:73
+#: ../gedit/gedit.c:72
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -944,43 +944,43 @@ msgstr ""
 "Define a codificação de caracteres a ser usada para abrir os arquivos "
 "listados na linha de comando"
 
-#: ../gedit/gedit.c:73
+#: ../gedit/gedit.c:72
 msgid "ENCODING"
 msgstr "CODIFICAÇÃO"
 
-#: ../gedit/gedit.c:76
+#: ../gedit/gedit.c:75
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Cria uma nova janela principal em uma instância existente do gedit"
 
-#: ../gedit/gedit.c:79
+#: ../gedit/gedit.c:78
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Cria um novo documento em uma instância existente do gedit"
 
-#: ../gedit/gedit.c:82
+#: ../gedit/gedit.c:81
 msgid "[FILE...]"
 msgstr "[ARQUIVO...]"
 
-#: ../gedit/gedit.c:114
+#: ../gedit/gedit.c:113
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr "%s: nome de arquivo ou URI mal formado.\n"
 
-#: ../gedit/gedit.c:126
+#: ../gedit/gedit.c:125
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: codificação inválida.\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:467
+#: ../gedit/gedit.c:466
 msgid "- Edit text files"
 msgstr "- Editar arquivos de texto"
 
-#: ../gedit/gedit-commands-file.c:225 ../gedit/gedit-commands-file.c:271
+#: ../gedit/gedit-commands-file.c:257
 #, c-format
 msgid "Loading file '%s'…"
 msgstr "Carregando o arquivo \"%s\"..."
 
-#: ../gedit/gedit-commands-file.c:280
+#: ../gedit/gedit-commands-file.c:266
 #, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
@@ -988,52 +988,39 @@ msgstr[0] "Carregando %d arquivo..."
 msgstr[1] "Carregando %d arquivos..."
 
 #. Translators: "Open Files" is the title of the file chooser window
-#: ../gedit/gedit-commands-file.c:424
+#: ../gedit/gedit-commands-file.c:438
 msgid "Open Files"
 msgstr "Abrir Arquivos"
 
-#: ../gedit/gedit-commands-file.c:530
-msgid "The entered location is not valid."
-msgstr "A localização digitada não é válida."
-
-#: ../gedit/gedit-commands-file.c:533
-#: ../gedit/gedit-io-error-message-area.c:187
-#: ../gedit/gedit-io-error-message-area.c:226
-#: ../gedit/gedit-io-error-message-area.c:242
-msgid "Please check that you typed the location correctly and try again."
-msgstr ""
-"Por favor, verifique se você digitou a localização corretamente e tente de "
-"novo."
-
-#: ../gedit/gedit-commands-file.c:659
+#: ../gedit/gedit-commands-file.c:633
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "O arquivo \"%s\" é somente para leitura."
 
-#: ../gedit/gedit-commands-file.c:670
+#: ../gedit/gedit-commands-file.c:644
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Deseja tentar substituí-lo com o que você está salvando?"
 
-#: ../gedit/gedit-commands-file.c:736 ../gedit/gedit-commands-file.c:939
+#: ../gedit/gedit-commands-file.c:711 ../gedit/gedit-commands-file.c:917
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Salvando o arquivo \"%s\"..."
 
-#: ../gedit/gedit-commands-file.c:837
+#: ../gedit/gedit-commands-file.c:815
 msgid "Save As…"
 msgstr "Salvar Como..."
 
-#: ../gedit/gedit-commands-file.c:1118
+#: ../gedit/gedit-commands-file.c:1096
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Revertendo o documento \"%s\"..."
 
-#: ../gedit/gedit-commands-file.c:1163
+#: ../gedit/gedit-commands-file.c:1141
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Reverter as alterações não salvas para o documento \"%s\"?"
 
-#: ../gedit/gedit-commands-file.c:1172
+#: ../gedit/gedit-commands-file.c:1150
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1047,14 +1034,14 @@ msgstr[1] ""
 "As alterações feitas no documento nos últimos %ld segundos serão "
 "permanentemente perdidas."
 
-#: ../gedit/gedit-commands-file.c:1181
+#: ../gedit/gedit-commands-file.c:1159
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "As alterações feitas no documento no último minuto serão permanentemente "
 "perdidas."
 
-#: ../gedit/gedit-commands-file.c:1187
+#: ../gedit/gedit-commands-file.c:1165
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1069,7 +1056,7 @@ msgstr[1] ""
 "As alterações feitas no documento no último minuto e %ld segundos serão "
 "permanentemente perdidas."
 
-#: ../gedit/gedit-commands-file.c:1197
+#: ../gedit/gedit-commands-file.c:1175
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1083,13 +1070,13 @@ msgstr[1] ""
 "As alterações feitas no documento nos últimos %ld minutos serão "
 "permanentemente perdidas."
 
-#: ../gedit/gedit-commands-file.c:1212
+#: ../gedit/gedit-commands-file.c:1190
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "As alterações feitas no documento na última hora serão permanentemente "
 "perdidas."
 
-#: ../gedit/gedit-commands-file.c:1218
+#: ../gedit/gedit-commands-file.c:1196
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1104,7 +1091,7 @@ msgstr[1] ""
 "As alterações feitas no documento na última hora e %d minutos serão "
 "permanentemente perdidas."
 
-#: ../gedit/gedit-commands-file.c:1233
+#: ../gedit/gedit-commands-file.c:1211
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1117,13 +1104,13 @@ msgstr[1] ""
 "As alterações feitas no documento nas últimas %d horas serão permanentemente "
 "perdidas."
 
-#: ../gedit/gedit-commands-file.c:1259
+#: ../gedit/gedit-commands-file.c:1237
 msgid "_Revert"
 msgstr "_Reverter"
 
 #: ../gedit/gedit-commands-help.c:80
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
-msgstr "gedit é um editor de texto pequeno e leve para o GNOME Desktop"
+msgstr "gedit é um editor de texto pequeno e leve para o GNOME"
 
 #: ../gedit/gedit-commands-help.c:96
 msgid "translator-credits"
@@ -1137,7 +1124,7 @@ msgstr ""
 "João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>\n"
 "Raphael Higino <In memoriam>\n"
 "Everson Santos Araujo <everson@por.com.br>\n"
-"Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>\n"
+"Leonardo Ferreira Fontenelle <leonardof@gnome.org>\n"
 "Og Maciel <ogmaciel@gnome.org>\n"
 "Jonh Wendell <wendell@bani.com.br>"
 
@@ -1156,17 +1143,17 @@ msgstr "Uma ocorrência encontrada e substituída"
 msgid "Phrase not found"
 msgstr "Frase não encontrada"
 
-#: ../gedit/gedit-document.c:862 ../gedit/gedit-document.c:956
+#: ../gedit/gedit-document.c:880 ../gedit/gedit-document.c:974
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Documento não-salvo %d"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1913 ../gedit/gedit-window.c:1918
+#: ../gedit/gedit-window.c:1929 ../gedit/gedit-window.c:1934
 msgid "Read Only"
 msgstr "Somente Leitura"
 
-#: ../gedit/gedit-documents-panel.c:760 ../gedit/gedit-window.c:2849
+#: ../gedit/gedit-documents-panel.c:760 ../gedit/gedit-window.c:2873
 msgid "Documents"
 msgstr "Documentos"
 
@@ -1317,6 +1304,14 @@ msgstr "Houve um erro ao exibir a ajuda."
 #, c-format
 msgid "Could not find the file %s."
 msgstr "Não foi possível localizar o arquivo \"%s\"."
+
+#: ../gedit/gedit-io-error-message-area.c:187
+#: ../gedit/gedit-io-error-message-area.c:226
+#: ../gedit/gedit-io-error-message-area.c:242
+msgid "Please check that you typed the location correctly and try again."
+msgstr ""
+"Por favor, verifique se você digitou a localização corretamente e tente de "
+"novo."
 
 #: ../gedit/gedit-io-error-message-area.c:192
 #: ../gedit/gedit-io-error-message-area.c:441
@@ -1478,7 +1473,7 @@ msgstr "_Codificação de Caracteres:"
 
 #: ../gedit/gedit-io-error-message-area.c:778
 msgid "gedit has not been able to detect the character coding."
-msgstr "gedit não conseguiu detectar a codificação de caracteres."
+msgstr "O gedit não conseguiu detectar a codificação de caracteres."
 
 #: ../gedit/gedit-io-error-message-area.c:780
 #: ../gedit/gedit-io-error-message-area.c:789
@@ -1580,7 +1575,7 @@ msgid ""
 "while saving, you could lose the old copy of the file. Save anyway?"
 msgstr ""
 "O gedit não pode fazer uma cópia de segurança da antiga cópia do arquivo "
-"antes de salvar o novo.Você pode ignorar este aviso e salvar o arquivo mesmo "
+"antes de salvar o novo. Você pode ignorar este aviso e salvar o arquivo mesmo "
 "assim, mas se um erro ocorrer enquanto salvar o arquivo, você pode perder a "
 "cópia antiga do arquivo. Salvar mesmo assim?"
 
@@ -1790,7 +1785,7 @@ msgstr "<b>Fontes</b>"
 
 #: ../gedit/gedit-print-preferences.glade.h:3
 msgid "<b>Page header</b>"
-msgstr "<b>Cabeçaho de Página</b>"
+msgstr "<b>Cabeçalho de Página</b>"
 
 #: ../gedit/gedit-print-preferences.glade.h:4
 msgid "<b>Syntax Highlighting</b>"
@@ -1889,11 +1884,11 @@ msgstr "Fechar visualização de impressão"
 msgid "Page %d of %d"
 msgstr "Página %d de %d"
 
-#: ../gedit/gedit-print-preview.c:953
+#: ../gedit/gedit-print-preview.c:958
 msgid "Page Preview"
 msgstr "Visualização de Página"
 
-#: ../gedit/gedit-print-preview.c:954
+#: ../gedit/gedit-print-preview.c:959
 msgid "The preview of a page in the document to be printed"
 msgstr "A visualização da página no documento a ser impresso"
 
@@ -2034,7 +2029,7 @@ msgstr "Cria um novo documento"
 msgid "_Open..."
 msgstr "_Abrir..."
 
-#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1467
+#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1483
 msgid "Open a file"
 msgstr "Abre um arquivo"
 
@@ -2299,29 +2294,29 @@ msgstr ""
 "Não foi possível localizar os widgets necessários dentro do arquivo %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1149
+#: ../gedit/gedit-view.c:1169
 msgid "_Wrap Around"
 msgstr "_Voltar ao Início"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1159
+#: ../gedit/gedit-view.c:1179
 msgid "Match _Entire Word Only"
 msgstr "Coincidir ap_enas com palavra completa"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1169
+#: ../gedit/gedit-view.c:1189
 msgid "_Match Case"
 msgstr "Diferenciar _maiúsculas/minúsculas"
 
-#: ../gedit/gedit-view.c:1257
+#: ../gedit/gedit-view.c:1277
 msgid "String you want to search for"
 msgstr "Expressão que você deseja pesquisar"
 
-#: ../gedit/gedit-view.c:1265
+#: ../gedit/gedit-view.c:1285
 msgid "Line you want to move the cursor to"
 msgstr "Linha para a qual que você deseja mover o cursor"
 
-#: ../gedit/gedit-window.c:880
+#: ../gedit/gedit-window.c:896
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Usa modo de destaque %s"
@@ -2329,34 +2324,34 @@ msgstr "Usa modo de destaque %s"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:937
+#: ../gedit/gedit-window.c:953
 msgid "None"
 msgstr "Nenhum"
 
-#: ../gedit/gedit-window.c:938
+#: ../gedit/gedit-window.c:954
 msgid "Disable syntax highlighting"
 msgstr "Desabilita destaque de sintaxe"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1224
+#: ../gedit/gedit-window.c:1240
 #, c-format
 msgid "Open '%s'"
 msgstr "Abrir \"%s\""
 
-#: ../gedit/gedit-window.c:1343
+#: ../gedit/gedit-window.c:1359
 msgid "Save"
 msgstr "Salvar"
 
-#: ../gedit/gedit-window.c:1471
+#: ../gedit/gedit-window.c:1487
 msgid "Open a recently used file"
 msgstr "Abre um arquivo recentemente usado"
 
-#: ../gedit/gedit-window.c:1478
+#: ../gedit/gedit-window.c:1494
 msgid "Open"
 msgstr "Abrir"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1528
+#: ../gedit/gedit-window.c:1544
 #, c-format
 msgid "Activate '%s'"
 msgstr "Ativar \"%s\""
@@ -2410,8 +2405,8 @@ msgid ""
 "Analyzes the current document and reports the number of words, lines, "
 "characters and non-space characters in it."
 msgstr ""
-"Analisa o documento atual e determina o número de palavras, linhas, "
-"caracteres e caracteres não-espaciais nele."
+"Analisa o documento atual e relata o número de palavras, linhas, "
+"caracteres, e caracteres que não espaço."
 
 #: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 #: ../plugins/docinfo/docinfo.glade2.h:8
@@ -2464,7 +2459,7 @@ msgstr "_Estatísticas do Documento"
 
 #: ../plugins/docinfo/gedit-docinfo-plugin.c:413
 msgid "Get statistic info on current document"
-msgstr "Obtém informações estátisticas sobre o documento atual"
+msgstr "Obtém informações estatísticas sobre o documento atual"
 
 #: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:1
 msgid "Execute external commands and shell scripts."
@@ -2474,15 +2469,15 @@ msgstr "Executa comando externo e shell script."
 msgid "External Tools"
 msgstr "Ferramentas Externas"
 
-#: ../plugins/externaltools/tools/__init__.py:129
+#: ../plugins/externaltools/tools/__init__.py:126
 msgid "_External Tools..."
 msgstr "Ferramentas E_xternas..."
 
-#: ../plugins/externaltools/tools/__init__.py:131
+#: ../plugins/externaltools/tools/__init__.py:128
 msgid "Opens the External Tools Manager"
 msgstr "Abre o Gerente de Ferramentas Externas"
 
-#: ../plugins/externaltools/tools/__init__.py:161
+#: ../plugins/externaltools/tools/__init__.py:158
 msgid "Shell Output"
 msgstr "Saída Para o Shell"
 
@@ -2594,7 +2589,7 @@ msgstr "Digite um novo acelerador ou pressione Backspace para limpar"
 msgid "Type a new accelerator"
 msgstr "Digite um novo acelerador"
 
-#: ../plugins/externaltools/tools/outputpanel.py:78
+#: ../plugins/externaltools/tools/outputpanel.py:77
 msgid "Stopped."
 msgstr "Parado."
 
@@ -2648,10 +2643,6 @@ msgstr "_Tecla de atalho:"
 msgid "_Tools:"
 msgstr "_Ferramentas:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:15
-msgid "gtk-revert-to-saved"
-msgstr "gtk-revert-to-saved"
-
 #: ../plugins/externaltools/data/build.desktop.in.h:1
 msgid "Build"
 msgstr "Compilar"
@@ -2693,12 +2684,7 @@ msgstr "Fácil acesso a arquivos a partir do painel lateral"
 msgid "File Browser Pane"
 msgstr "Painel do Navegador de Arquivos"
 
-#. Translators: this is used in "file on host", e.g. "/foo/bar on ftp.baz.org"
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:195
-msgid "on"
-msgstr "em"
-
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:330
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:225
 msgid "File System"
 msgstr "Sistema de Arquivos"
 
@@ -2793,59 +2779,59 @@ msgstr ""
 "binários) ou \"hidden_and_binary\" (filtrar tanto arquivos ocultos quanto "
 "binários)."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:594
 msgid "_Set root to active document"
 msgstr "_Definir raiz para documento ativo"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:600
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:596
 msgid "Set the root to the active document location"
 msgstr "Define o diretório raiz como o mesmo local do documento ativo"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:605
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:601
 msgid "_Open terminal here"
 msgstr "_Abrir terminal aqui"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:607
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:603
 msgid "Open a terminal at the currently opened directory"
 msgstr "Abre um terminal no diretório aberto atualmente"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:741
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:737
 msgid "File Browser"
 msgstr "Navegador de Arquivos"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:864
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:865
 msgid "An error occurred while creating a new directory"
 msgstr "Ocorreu um erro ao criar um novo diretório"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:867
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:868
 msgid "An error occurred while creating a new file"
 msgstr "Ocorreu um erro ao criar um novo arquivo"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:872
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:873
 msgid "An error occurred while renaming a file or directory"
 msgstr "Ocorreu um erro ao renomear um arquivo ou diretório"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:877
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:878
 msgid "An error occurred while deleting a file or directory"
 msgstr "Ocorreu um erro ao excluir um arquivo ou diretório"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:882
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:883
 msgid "An error occurred while opening a directory in the file manager"
 msgstr "Ocorreu um erro ao abrir um diretório no gerente de arquivos"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:886
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:887
 msgid "An error occurred while setting a root directory"
 msgstr "Ocorreu um erro ao definir um diretório raiz"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:890
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:891
 msgid "An error occurred while loading a directory"
 msgstr "Ocorreu um erro ao carregar um diretório"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:893
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:894
 msgid "An error occurred"
 msgstr "Ocorreu um erro"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1123
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1185
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
@@ -2853,45 +2839,47 @@ msgstr ""
 "Não foi possível mover o arquivo para \n"
 "a lixeira; você deseja excluí-lo permanentemente?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1127
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1189
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "O arquivo \"%s\" não pôde ser movido para a lixeira."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1130
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1192
 msgid "The selected files cannot be moved to the trash."
 msgstr "Os arquivos selecionados não podem ser movido para a lixeira."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1163
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1225
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Você tem certeza de que quer excluir \"%s\" permanentemente?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1166
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1228
 msgid "Are you sure you want to permanently delete the selected files?"
 msgstr ""
 "Você tem certeza de que quer excluir permanentemente os arquivos "
 "selecionados?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1169
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1231
 msgid "If you delete an item, it is permanently lost."
 msgstr "Se você excluir um item, ele será perdido permanentemente."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1583
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1691
 msgid "(Empty)"
 msgstr "(Vazio)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2723
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1840
-msgid "Invalid uri"
-msgstr "URI inválido"
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3140
+msgid ""
+"The renamed file is currently filtered out. You need to adjust your filter "
+"settings to make the file visible"
+msgstr ""
+"O arquivo renomeado está escondido pelo filtro. Será necessário ajustar a "
+"definição do filtro para torná-lo visível"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3155
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3378
 msgid "file"
 msgstr "arquivo"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3176
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3223
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3402
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2899,142 +2887,146 @@ msgstr ""
 "O novo arquivo está escondido pelo filtro. Será necessário ajustar a "
 "definição do filtro para torná-lo visível"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3204
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3430
 msgid "directory"
 msgstr "diretório"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:738
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3450
+msgid ""
+"The new directory is currently filtered out. You need to adjust your filter "
+"settings to make the directory visible"
+msgstr ""
+"O novo diretório está escondido pelo filtro. Será necessário ajustar a "
+"definição do filtro para torná-lo visível"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:673
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:748
-msgid "Recent Files"
-msgstr "Arquivos Recentes"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:827
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:751
 msgid "_Filter"
 msgstr "_Filtrar"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:756
 msgid "_Move To Trash"
 msgstr "_Mover Para Lixeira"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:757
 msgid "Move selected file or folder to trash"
 msgstr "Move o arquivo ou diretório selecionado para a lixeira"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:759
 msgid "_Delete"
 msgstr "Ex_cluir"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:760
 msgid "Delete selected file or folder"
 msgstr "Exclui o arquivo ou diretório selecionado"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:842
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:766
 msgid "Up"
 msgstr "Para Cima"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:843
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:767
 msgid "Open the parent folder"
 msgstr "Abre a pasta pai"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:772
 msgid "_New Folder"
 msgstr "Nova _Pasta"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:773
 msgid "Add new empty folder"
 msgstr "Cria nova pasta vazia"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:851
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:775
 msgid "New F_ile"
 msgstr "Novo _Arquivo"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:776
 msgid "Add new empty file"
 msgstr "Cria novo arquivo vazio"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:857
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:781
 msgid "_Rename"
 msgstr "_Renomear"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:858
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:782
 msgid "Rename selected file or folder"
 msgstr "Renomeia o arquivo ou diretório selecionado"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:864
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:788
 msgid "_Previous Location"
 msgstr "Localização A_nterior"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:866
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:790
 msgid "Go to the previous visited location"
 msgstr "Vai para a localização visitada anteriormente"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:868
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:792
 msgid "_Next Location"
 msgstr "_Próxima Localização"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:869
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:793
 msgid "Go to the next visited location"
 msgstr "Vai para a localização visitada posteriormente"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:870
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:794
 msgid "Re_fresh View"
 msgstr "Atuali_zar Visão"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:871
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:795
 msgid "Refresh the view"
 msgstr "Atualiza a visão"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:872
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:796
 msgid "_View Folder"
 msgstr "_Ver Pasta"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:873
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:797
 msgid "View folder in file manager"
 msgstr "Abre o diretório no gerente de arquivos"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:880
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
 msgid "Show _Hidden"
 msgstr "Mostrar _Ocultos"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:881
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:805
 msgid "Show hidden files and folders"
 msgstr "Mostra arquivos e diretórios ocultos"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:883
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
 msgid "Show _Binary"
 msgstr "Mostrar _Binários"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:884
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
 msgid "Show binary files"
 msgstr "Mostra arquivos binários"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:989
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1005
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1037
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:913
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:929
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:961
 msgid "Previous location"
 msgstr "Localização anterior"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:993
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:917
 msgid "Go to previous location"
 msgstr "Vai para a localização anterior"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:998
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1030
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:922
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:954
 msgid "Go to a previously opened location"
 msgstr "Vai para uma localização aberta anteriormente"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1020
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:944
 msgid "Next location"
 msgstr "Próxima localização"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1024
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:948
 msgid "Go to next location"
 msgstr "Vai para a próxima localização"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1201
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1127
 msgid "_Match Filename"
 msgstr "Casar com _Nome de Arquivo"
 
@@ -3613,12 +3605,12 @@ msgstr "URI âncora"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:11
 msgid "Applet class file code"
-msgstr "Código de arquivo de classe do applet"
+msgstr "Código de arquivo de classe do miniaplicativo"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:13
 msgid "Applet class file code (deprecated)"
-msgstr "Código de arquivo de classe do applet (obsoleto)"
+msgstr "Código de arquivo de classe do miniaplicativo (obsoleto)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:14
 msgid "Array"
@@ -3994,7 +3986,7 @@ msgstr "HTML - Tags"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:116
 msgid "HTML root element"
-msgstr "Elemento raíz HTML"
+msgstr "Elemento raiz HTML"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:117
 msgid "HTML version"
@@ -4103,12 +4095,12 @@ msgstr "Texto em itálico"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Java applet"
-msgstr "Applet java"
+msgstr "Miniaplicativo java"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:146
 msgid "Java applet (deprecated)"
-msgstr "Applet java (obsoleto)"
+msgstr "Miniaplicativo java (obsoleto)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "Label"
@@ -4202,7 +4194,7 @@ msgstr "Lista de menu (obsoleto)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:174
 msgid "Multi-line text field"
-msgstr "Campo de texto multi-linha"
+msgstr "Campo de texto multilinha"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:175
 msgid "Multicolumn"
@@ -4280,12 +4272,12 @@ msgstr "Nota"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Object applet file"
-msgstr "Arquivo de objeto de applet"
+msgstr "Arquivo de objeto de miniaplicativo"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:197
 msgid "Object applet file (deprecated)"
-msgstr "Arquivo de objeto de applet (obsoleto)"
+msgstr "Arquivo de objeto de miniaplicativo (obsoleto)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Object data reference"
@@ -4552,12 +4544,12 @@ msgstr "Mensagem de aguardar"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:266
 msgid "Starting sequence number"
-msgstr "Número inicial da sequência"
+msgstr "Número inicial da seqüência"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:268
 msgid "Starting sequence number (deprecated)"
-msgstr "Número inicial da sequência (obsoleto)"
+msgstr "Número inicial da seqüência (obsoleto)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:269
 msgid "Strike-through text"
@@ -5171,3 +5163,18 @@ msgstr "_Perguntar por um formato"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Usar formato personalizado"
+
+#~ msgid "The entered location is not valid."
+#~ msgstr "A localização digitada não é válida."
+
+#~ msgid "gtk-revert-to-saved"
+#~ msgstr "gtk-revert-to-saved"
+
+#~ msgid "on"
+#~ msgstr "em"
+
+#~ msgid "Invalid uri"
+#~ msgstr "URI inválido"
+
+#~ msgid "Recent Files"
+#~ msgstr "Arquivos Recentes"
