@@ -163,10 +163,8 @@ restore_default_location (GeditFileBrowserPlugin * plugin,
 	gboolean bookmarks;
 	gboolean remote;
 	GConfClient * client;
-	GFile * file = NULL;
 
 	client = gconf_client_get_default ();
-
 	if (!client)
 		return;
 
@@ -192,20 +190,25 @@ restore_default_location (GeditFileBrowserPlugin * plugin,
 	                                NULL);
 
 	if (root != NULL && *root != '\0') {
+		GFile *file;
+
 		file = g_file_new_for_uri (root);
 
-		if (!remote && !g_file_is_native (file)) {
-		} else if (virtual_root != NULL && virtual_root != '\0') {
-			prepare_auto_root(data);
-			gedit_file_browser_widget_set_root_and_virtual_root (data->tree_widget, 
-			                                                     root,
-			                                                     virtual_root);
-		} else {
-			prepare_auto_root(data);
-			gedit_file_browser_widget_set_root (data->tree_widget,
-			                                    root,
-			                                    TRUE);
+		if (remote || g_file_is_native (file)) {
+			if (virtual_root != NULL && virtual_root != '\0') {
+				prepare_auto_root(data);
+				gedit_file_browser_widget_set_root_and_virtual_root (data->tree_widget, 
+					                                             root,
+					                                             virtual_root);
+			} else {
+				prepare_auto_root(data);
+				gedit_file_browser_widget_set_root (data->tree_widget,
+					                            root,
+					                            TRUE);
+			}
 		}
+
+		g_object_unref (file);
 	}
 
 	g_object_unref (client);
@@ -222,7 +225,6 @@ restore_filter (GeditFileBrowserPluginData * data)
 	gchar *pattern;
 
 	client = gconf_client_get_default ();
-	
 	if (!client)
 		return;
 
