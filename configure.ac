@@ -139,8 +139,6 @@ dnl ================================================================
 dnl libattr checks
 dnl ================================================================
 
-AC_CHECK_LIB(attr, attr_copy_fd)
-
 AC_MSG_CHECKING([whether libattr support is requested])
 AC_ARG_ENABLE([attr],
 	AS_HELP_STRING([--enable-attr],[Enable libattr support]),
