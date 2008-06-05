@@ -226,7 +226,8 @@ void
 gedit_module_class_garbage_collect (GeditModuleClass *klass)
 {
 	g_return_if_fail (GEDIT_IS_MODULE_CLASS (klass));
-	return GEDIT_MODULE_CLASS (klass)->garbage_collect ();
+
+	GEDIT_MODULE_CLASS (klass)->garbage_collect ();
 }
 
 GObject *
