@@ -181,12 +181,6 @@ static void model_check_dummy                               (GeditFileBrowserSto
 static void next_files_async 				    (GFileEnumerator * enumerator,
 							     FileBrowserNodeDir * dir);
 
-static void on_directory_monitor_event                      (GFileMonitor * handle,
-							     GFile *monitor_file,
-							     GFile * info_file,
-							     guint event_type,
-							     FileBrowserNode * parent);
-
 GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE (GeditFileBrowserStore, gedit_file_browser_store,
 			G_TYPE_OBJECT,
 			G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL,
@@ -2077,6 +2071,36 @@ parse_dot_hidden_file (FileBrowserNode *directory)
 }
 
 static void
+on_directory_monitor_event (GFileMonitor * monitor,
+			    GFile * file,
+			    GFile * other_file,
+			    GFileMonitorEvent event_type,
+			    FileBrowserNode * parent)
+{
+	FileBrowserNode *node;
+	FileBrowserNodeDir *dir = FILE_BROWSER_NODE_DIR (parent);
+
+	switch (event_type) {
+	case G_FILE_MONITOR_EVENT_DELETED:
+		node = model_file_exists (dir->model, parent, file);
+
+		if (node != NULL) {
+			// Remove the node
+			model_remove_node (dir->model, node, NULL, TRUE);
+		}
+		break;
+	case G_FILE_MONITOR_EVENT_CREATED:
+		if (g_file_query_exists (file, NULL)) {
+			model_add_node_from_file (dir->model, parent, file, NULL);
+		}
+		
+		break;
+	default:
+		break;
+	}
+}
+
+static void
 model_iterate_next_files_cb (GFileEnumerator * enumerator, 
 			     GAsyncResult * result, 
 			     FileBrowserNode * parent)
@@ -3453,37 +3477,6 @@ gedit_file_browser_store_new_directory (GeditFileBrowserStore * model,
 
 	g_object_unref (file);
 	return result;
-}
-
-/* Signal handlers */
-static void
-on_directory_monitor_event (GFileMonitor * monitor,
-			    GFile * file,
-			    GFile * other_file,
-			    GFileMonitorEvent event_type,
-			    FileBrowserNode * parent)
-{
-	FileBrowserNode *node;
-	FileBrowserNodeDir *dir = FILE_BROWSER_NODE_DIR (parent);
-
-	switch (event_type) {
-	case G_FILE_MONITOR_EVENT_DELETED:
-		node = model_file_exists (dir->model, parent, file);
-
-		if (node != NULL) {
-			// Remove the node
-			model_remove_node (dir->model, node, NULL, TRUE);
-		}
-		break;
-	case G_FILE_MONITOR_EVENT_CREATED:
-		if (g_file_query_exists (file, NULL)) {
-			model_add_node_from_file (dir->model, parent, file, NULL);
-		}
-		
-		break;
-	default:
-		break;
-	}
 }
 
 // ex:ts=8:noet:
