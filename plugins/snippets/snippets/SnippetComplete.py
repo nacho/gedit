@@ -130,7 +130,7 @@ class CompleteModel(gtk.GenericTreeModel):
                 return gtk.TREE_MODEL_LIST_ONLY
         
         def on_get_n_columns(self):
-                len(self.column_types)
+                return len(self.column_types)
 
         def on_get_column_type(self, index):
                 return self.column_types[index]
