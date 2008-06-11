@@ -173,9 +173,6 @@ static void model_clear                                     (GeditFileBrowserSto
 							     gboolean free_nodes);
 static gint model_sort_default                              (FileBrowserNode * node1,
 							     FileBrowserNode * node2);
-static void print_tree                                      (GeditFileBrowserStore * model,
-							     FileBrowserNode * parent, 
-							     gchar * prefix);
 static void model_check_dummy                               (GeditFileBrowserStore * model,
 							     FileBrowserNode * node);
 static void next_files_async 				    (GFileEnumerator * enumerator,
@@ -2265,40 +2262,6 @@ model_fill (GeditFileBrowserStore * model, FileBrowserNode * node,
 
 	if (free_path)
 		gtk_tree_path_free (path);
-}
-
-static void
-print_tree (GeditFileBrowserStore * model, FileBrowserNode * parent,
-	    gchar * prefix)
-{
-	GSList *item;
-	gchar *newpref;
-
-	if (parent == NULL)
-		parent = model->priv->root;
-
-	if (parent == NULL)
-		return;
-
-	if (prefix == NULL)
-		prefix = "";
-
-	g_message ("%s - %s (%d), loaded: %d", prefix, parent->name,
-		   model_node_visibility (model, parent),
-		   NODE_LOADED (parent));
-
-	if (NODE_IS_DIR (parent)) {
-		newpref = g_strdup_printf ("\t%s", prefix);
-
-		for (item = FILE_BROWSER_NODE_DIR (parent)->children; item;
-		     item = item->next) {
-			print_tree (model,
-				    (FileBrowserNode *) (item->data),
-				    newpref);
-		}
-
-		g_free (newpref);
-	}
 }
 
 static void
