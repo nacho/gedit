@@ -80,16 +80,16 @@ def insert_with_indent(view, piter, text, indentfirst = True):
 def snippets_debug(*s):
         return
 
-def write_xml(node, file, cdata_nodes=()):
+def write_xml(node, f, cdata_nodes=()):
         assert node is not None
 
-        if not hasattr(file, "write"):
-                file = open(file, "wb")
+        if not hasattr(f, "write"):
+                f = open(f, "wb")
 
         # Encoding
-        file.write("<?xml version='1.0' encoding='utf-8'?>\n")
+        f.write("<?xml version='1.0' encoding='utf-8'?>\n")
 
-        _write_node(node, file, cdata_nodes)
+        _write_node(node, f, cdata_nodes)
 
 def _write_indent(file, text, indent):
         file.write('  ' * indent + text)

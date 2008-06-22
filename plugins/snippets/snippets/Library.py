@@ -176,7 +176,7 @@ class SnippetData:
 
         def _create_xml(self, parent=None, update=False, attrib={}):
                 # Create a new node
-                if parent:
+                if parent != None:
                         element = et.SubElement(parent, 'snippet', attrib)
                 else:
                         element = et.Element('snippet')
