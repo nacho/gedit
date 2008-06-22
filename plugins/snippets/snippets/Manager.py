@@ -317,7 +317,9 @@ class Manager:
                 glade.set_custom_handler(self.custom_handler)
                 self.xml = glade.XML(os.path.dirname(__file__) + '/snippets.glade')
                 
-                handlers_dic = {'on_dialog_snippets_response': self.on_dialog_snippets_response,
+                handlers_dic = {
+                        'on_dialog_snippets_response': self.on_dialog_snippets_response,
+                        'on_dialog_snippets_destroy': self.on_dialog_snippets_destroy,
                         'on_button_new_snippet_clicked': self.on_button_new_snippet_clicked,
                         'on_button_import_snippets_clicked': self.on_button_import_snippets_clicked,
                         'on_button_export_snippets_clicked': self.on_button_export_snippets_clicked,
@@ -612,11 +614,7 @@ class Manager:
                         piter = self.model.iter_next(piter)
 
         # Callbacks
-        def on_dialog_snippets_response(self, dlg, resp):
-                if resp == gtk.RESPONSE_HELP:
-                        gedit.help_display(self.dlg, 'gedit.xml', 'gedit-snippets-plugin')
-                        return
-
+        def on_dialog_snippets_destroy(self, dlg):
                 # Remove temporary drag export
                 if self._temp_export:
                       shutil.rmtree(os.path.dirname(self._temp_export))
@@ -630,8 +628,14 @@ class Manager:
                 self.unref_languages()        
                 self.snippet = None        
                 self.model = None
+                self.dlg = None                
+        
+        def on_dialog_snippets_response(self, dlg, resp):                                
+                if resp == gtk.RESPONSE_HELP:
+                        gedit.help_display(self.dlg, 'gedit.xml', 'gedit-snippets-plugin')
+                        return
+
                 self.dlg.destroy()
-                self.dlg = None
         
         def on_cell_editing_started(self, renderer, editable, path):
                 piter = self.model.get_iter(path)

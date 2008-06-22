@@ -1,5 +1,14 @@
 2008-06-22  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* plugins/snippets/snippets/Manager.py:
+	* plguins/snippets/snippets/snippets.glade:
+	
+	Make sure to cleanup in destroy instead of 'response' because the 
+	'response' signal is not called if the gedit window is destroyed
+	(fixes bug #537987)
+
+2008-06-22  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* plugins/snippets/snippets/Library.py:
 	* plguins/snippets/snippets/Helper.py:
 	
