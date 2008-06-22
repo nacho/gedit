@@ -1087,7 +1087,7 @@ create_tree (GeditFileBrowserWidget * obj)
 					     GTK_SHADOW_ETCHED_IN);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 					GTK_POLICY_AUTOMATIC,
-					GTK_POLICY_ALWAYS);
+					GTK_POLICY_AUTOMATIC);
 
 	gtk_container_add (GTK_CONTAINER (sw),
 			   GTK_WIDGET (obj->priv->treeview));
