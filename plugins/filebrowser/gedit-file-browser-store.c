@@ -1915,7 +1915,7 @@ model_add_node_from_dir (GeditFileBrowserStore * model,
 		}
 		
 		if (node->icon == NULL) {
-			node->icon = gedit_file_browser_utils_pixbuf_from_theme ("gnome-fs-directory", GTK_ICON_SIZE_MENU);
+			node->icon = gedit_file_browser_utils_pixbuf_from_theme ("folder", GTK_ICON_SIZE_MENU);
 		}
 
 		model_add_node (model, node, parent);

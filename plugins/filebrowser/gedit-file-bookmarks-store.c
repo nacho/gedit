@@ -140,9 +140,9 @@ add_file (GeditFileBookmarksStore * model, GFile * file,
 	}
 
 	if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_HOME)
-		pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("gnome-fs-home", GTK_ICON_SIZE_MENU);
+		pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("user-home", GTK_ICON_SIZE_MENU);
 	else if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_DESKTOP)
-		pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("gnome-fs-desktop", GTK_ICON_SIZE_MENU);
+		pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("user-desktop", GTK_ICON_SIZE_MENU);
 	else if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_ROOT)
 		pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("drive-harddisk", GTK_ICON_SIZE_MENU);
 
@@ -348,7 +348,7 @@ add_bookmark (GeditFileBookmarksStore * model,
 				    -1);
 
 		if (!pixbuf) {
-			pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("gnome-fs-directory", GTK_ICON_SIZE_MENU);
+			pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("folder", GTK_ICON_SIZE_MENU);
 
 			if (pixbuf) {			
 				gtk_tree_store_set (GTK_TREE_STORE (model), 
