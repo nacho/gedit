@@ -1,5 +1,5 @@
 # Brazilian Portuguese translation of gedit.
-# Copyright (C) 1999-2007 Free Software Foundation, Inc.
+# Copyright (C) 1999-2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gedit package.
 # Frederic L. W. Meunier <linux@urbi.com.br>, 1999.
 # Evandro Fernandes Giovanini <evandrofg@ig.com.br>, 2000.
@@ -10,9 +10,10 @@
 # João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>, 2004.
 # Raphael Higino <phhigino@gmail.com>, 2004-2005.
 # Everson Santos Araujo <everson@por.com.br>, 2005-2006.
-# Leonardo Ferreira Fontenelle <leonardof@gnome.org>, 2006-2007.
+# Leonardo Ferreira Fontenelle <leonardof@gnome.org>, 2006-2008.
 # Og Maciel <ogmaciel@gnome.org>, 2007.
 # Jonh Wendell <wendell@bani.com.br>, 2008.
+# Fabrício Godoy <skarllot@gmail.com>, 2008.
 #
 #
 msgid ""
@@ -20,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gedit 2.22\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-24 08:46-0300\n"
-"PO-Revision-Date: 2008-05-24 08:58-0300\n"
-"Last-Translator: Leonardo Ferreira Fontenelle <leonardof@gnome.org>\n"
+"PO-Revision-Date: 2008-07-24 23:45-0300\n"
+"Last-Translator: Fabrício Godoy <skarllot@gmail.com>\n"
 "Language-Team: Portuguese/Brazil <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,7 +68,7 @@ msgstr "Recuo automático"
 
 #: ../data/gedit.schemas.in.h:7
 msgid "Backup Copy Extension"
-msgstr "Extensão de Cópia de Backup"
+msgstr "Extensão da Cópia de Backup"
 
 #: ../data/gedit.schemas.in.h:8
 msgid "Body Font for Printing"
@@ -110,7 +111,7 @@ msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
 msgstr ""
-"Extensão ou sufixo a ser usado para nomes de arquivos de backup. Isso só "
+"Extensão ou sufixo a ser usado para os nomes dos arquivos de backup. Isso só "
 "terá efeito se a opção \"Criar Cópias de Backup\" estiver ligada."
 
 #: ../data/gedit.schemas.in.h:18
@@ -214,9 +215,9 @@ msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
 msgstr ""
-"Número de minutos para que o gedit salve automaticamente os "
-"arquivos modificados. Só terá efeito se a opção \"Salvar Automaticamente\" "
-"estiver ligada."
+"Número de minutos para que o gedit salve automaticamente os arquivos "
+"modificados. Só terá efeito se a opção \"Salvar Automaticamente\" estiver "
+"ligada."
 
 #: ../data/gedit.schemas.in.h:39
 msgid "Print Header"
@@ -422,7 +423,7 @@ msgid ""
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
 "Criar ou não cópias de backup dos arquivos que salvar. Você pode definir a "
-"extensão do arquivo de backup na opção \"Extensão de Cópia de Backup\"."
+"extensão do arquivo de backup na opção \"Extensão da Cópia de Backup\"."
 
 #: ../data/gedit.schemas.in.h:74
 msgid "Whether gedit should display line numbers in the editing area."
@@ -1356,7 +1357,7 @@ msgstr "Você não tem a permissão necessária para abrir o arquivo."
 msgid ""
 "There are too many open files. Please close some applications and try again."
 msgstr ""
-"Há arquivos demais abertos. Por favor, feche algumas aplicações e tente "
+"Há arquivos demais abertos. Por favor, feche alguns aplicativos e tente "
 "novamente."
 
 #: ../gedit/gedit-io-error-message-area.c:240
@@ -1372,7 +1373,7 @@ msgid ""
 "applications and try again."
 msgstr ""
 "Não há memória suficiente disponível para abrir o arquivo. Por favor, feche "
-"algumas aplicações e tente novamente."
+"alguns aplicativos e tente novamente."
 
 #: ../gedit/gedit-io-error-message-area.c:275
 #: ../gedit/gedit-io-error-message-area.c:515
@@ -1566,7 +1567,8 @@ msgstr "Não foi possível criar um arquivo de backup enquanto salvava %s"
 #: ../gedit/gedit-io-error-message-area.c:1114
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
-msgstr "Não foi possível criar um arquivo de backup enquanto salvava: %s"
+msgstr ""
+"Não foi possível criar um arquivo temporário de backup enquanto salvava %s"
 
 #: ../gedit/gedit-io-error-message-area.c:1131
 msgid ""
@@ -1574,10 +1576,10 @@ msgid ""
 "You can ignore this warning and save the file anyway, but if an error occurs "
 "while saving, you could lose the old copy of the file. Save anyway?"
 msgstr ""
-"O gedit não pode fazer uma cópia de segurança da antiga cópia do arquivo "
-"antes de salvar o novo. Você pode ignorar este aviso e salvar o arquivo mesmo "
-"assim, mas se um erro ocorrer enquanto salvar o arquivo, você pode perder a "
-"cópia antiga do arquivo. Salvar mesmo assim?"
+"O gedit não pôde fazer backup da antiga cópia do arquivo antes de salvar o "
+"novo. Você pode ignorar este aviso e salvar o arquivo mesmo assim, mas se um "
+"erro ocorrer ao salvar o arquivo, você pode perder a cópia antiga do "
+"arquivo. Salvar mesmo assim?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
 #: ../gedit/gedit-io-error-message-area.c:1192
@@ -1639,7 +1641,7 @@ msgid ""
 "applications and try again."
 msgstr ""
 "Não há memória suficiente disponível para abrir o arquivo. Por favor, feche "
-"algumas aplicações e tente novamente."
+"alguns aplicativos e tente novamente."
 
 #: ../gedit/gedit-io-error-message-area.c:1317
 msgid ""
@@ -1707,7 +1709,7 @@ msgstr "_Reverter"
 #. bad bad luck...
 #: ../gedit/gedit-local-document-saver.c:361
 msgid "Could not obtain backup filename"
-msgstr "Não foi possível obter arquivo de backup"
+msgstr "Não foi possível obter o arquivo de backup"
 
 #: ../gedit/gedit-notebook.c:834
 msgid "Close document"
@@ -2048,7 +2050,7 @@ msgstr "_Preferências"
 
 #: ../gedit/gedit-ui.h:67
 msgid "Configure the application"
-msgstr "Configura a aplicação"
+msgstr "Configura o aplicativo"
 
 #. Help menu
 #: ../gedit/gedit-ui.h:70
@@ -2061,7 +2063,7 @@ msgstr "Abre o manual do gedit"
 
 #: ../gedit/gedit-ui.h:73
 msgid "About this application"
-msgstr "Sobre essa aplicação"
+msgstr "Sobre esse aplicativo"
 
 #: ../gedit/gedit-ui.h:80
 msgid "Save the current file"
@@ -2405,8 +2407,8 @@ msgid ""
 "Analyzes the current document and reports the number of words, lines, "
 "characters and non-space characters in it."
 msgstr ""
-"Analisa o documento atual e relata o número de palavras, linhas, "
-"caracteres, e caracteres que não espaço."
+"Analisa o documento atual e relata o número de palavras, linhas, caracteres, "
+"e caracteres que não espaço."
 
 #: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 #: ../plugins/docinfo/docinfo.glade2.h:8
