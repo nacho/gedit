@@ -56,6 +56,7 @@
 typedef struct _FileBrowserNode    FileBrowserNode;
 typedef struct _FileBrowserNodeDir FileBrowserNodeDir;
 typedef struct _AsyncData	   AsyncData;
+typedef struct _AsyncNode	   AsyncNode;
 
 typedef gint (*SortFunc) (FileBrowserNode * node1,
 			  FileBrowserNode * node2);
@@ -68,6 +69,12 @@ struct _AsyncData
 	GList * files;
 	GList * iter;
 	gboolean removed;
+};
+
+struct _AsyncNode
+{
+	FileBrowserNodeDir *dir;
+	GCancellable *cancellable;
 };
 
 struct _FileBrowserNode 
@@ -176,7 +183,7 @@ static gint model_sort_default                              (FileBrowserNode * n
 static void model_check_dummy                               (GeditFileBrowserStore * model,
 							     FileBrowserNode * node);
 static void next_files_async 				    (GFileEnumerator * enumerator,
-							     FileBrowserNodeDir * dir);
+							     AsyncNode * async);
 
 GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE (GeditFileBrowserStore, gedit_file_browser_store,
 			G_TYPE_OBJECT,
@@ -2027,9 +2034,16 @@ on_directory_monitor_event (GFileMonitor * monitor,
 }
 
 static void
+async_node_free (AsyncNode *async)
+{
+	g_object_unref (async->cancellable);
+	g_free (async);
+}
+
+static void
 model_iterate_next_files_cb (GFileEnumerator * enumerator, 
 			     GAsyncResult * result, 
-			     FileBrowserNode * parent)
+			     AsyncNode * async)
 {
 	GList * files;
 	GList * item;
@@ -2038,12 +2052,14 @@ model_iterate_next_files_cb (GFileEnumerator * enumerator,
 	GFileType type;
 	gchar const * name;
 	GFile * file;
-	FileBrowserNodeDir * dir = FILE_BROWSER_NODE_DIR (parent);
+	FileBrowserNodeDir * dir = async->dir;
+	FileBrowserNode * parent = (FileBrowserNode *)dir;
 	
 	files = g_file_enumerator_next_files_finish (enumerator, result, &error);
 
 	if (files == NULL) {
 		g_file_enumerator_close (enumerator, NULL, NULL);
+		async_node_free (async);
 		
 		if (!error)
 		{
@@ -2079,6 +2095,10 @@ model_iterate_next_files_cb (GFileEnumerator * enumerator,
 			file_browser_node_unload (dir->model, (FileBrowserNode *)parent, TRUE);
 			g_error_free (error);
 		}
+	} else if (g_cancellable_is_cancelled (async->cancellable)) {
+		/* Check cancel state manually */
+		g_file_enumerator_close (enumerator, NULL, NULL);
+		async_node_free (async);
 	} else {
 		for (item = files; item; item = item->next) {
 			info = G_FILE_INFO (item->data);
@@ -2106,26 +2126,26 @@ model_iterate_next_files_cb (GFileEnumerator * enumerator,
 		}
 		
 		g_list_free (files);
-		next_files_async (enumerator, dir);
+		next_files_async (enumerator, async);
 	}
 }
 
 static void
 next_files_async (GFileEnumerator * enumerator,
-		  FileBrowserNodeDir * dir)
+		  AsyncNode * async)
 {
 	g_file_enumerator_next_files_async (enumerator,
 					    DIRECTORY_LOAD_ITEMS_PER_CALLBACK,
 					    G_PRIORITY_DEFAULT,
-					    dir->cancellable,
+					    async->cancellable,
 					    (GAsyncReadyCallback)model_iterate_next_files_cb,
-					    dir);
+					    async);
 }
 
 static void
 model_iterate_children_cb (GFile * file, 
 			   GAsyncResult * result,
-			   FileBrowserNodeDir * dir)
+			   AsyncNode * async)
 {
 	GError * error = NULL;
 	GFileEnumerator * enumerator;
@@ -2134,6 +2154,9 @@ model_iterate_children_cb (GFile * file,
 	
 	if (enumerator == NULL) {
 		/* Simply return if we were cancelled */
+		FileBrowserNodeDir *dir = async->dir;
+		g_free (async);
+		
 		if (error->domain == G_IO_ERROR && error->code == G_IO_ERROR_CANCELLED)
 			return;
 		
@@ -2146,8 +2169,12 @@ model_iterate_children_cb (GFile * file,
 
 		file_browser_node_unload (dir->model, (FileBrowserNode *)dir, TRUE);
 		g_error_free (error);
+	} else if (g_cancellable_is_cancelled (async->cancellable)) {
+		/* Check cancelled state manually */
+		async_node_free (async);
+		return;
 	} else {
-		next_files_async (enumerator, dir);
+		next_files_async (enumerator, async);
 	}
 }
 
@@ -2173,15 +2200,19 @@ model_load_directory (GeditFileBrowserStore * model,
 	parse_dot_hidden_file (node);
 	
 	dir->cancellable = g_cancellable_new ();
+	
+	AsyncNode *async = g_new (AsyncNode, 1);
+	async->dir = dir;
+	async->cancellable = g_object_ref (dir->cancellable);
 
 	/* Start loading async */
 	g_file_enumerate_children_async (node->file,
 					 STANDARD_ATTRIBUTE_TYPES,
 					 G_FILE_QUERY_INFO_NONE,
 					 G_PRIORITY_DEFAULT,
-					 dir->cancellable,
+					 async->cancellable,
 					 (GAsyncReadyCallback)model_iterate_children_cb,
-					 dir);
+					 async);
 }
 
 static GList *
