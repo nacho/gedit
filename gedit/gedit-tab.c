@@ -926,7 +926,7 @@ document_loaded (GeditDocument *document,
 
 		if (error->domain == GEDIT_DOCUMENT_ERROR)
 		{
-			if (error->code == GNOME_VFS_ERROR_CANCELLED)
+			if (error->code == G_IO_ERROR_CANCELLED)
 			{
 				/* remove the tab, but in an idle handler, since
 				 * we are in the handler of doc loaded and we 
@@ -1804,17 +1804,16 @@ get_icon (GtkIconTheme *theme,
 	                          NULL, 
 	                          NULL);
 	
-	if (!info)
-		return get_stock_icon (theme, GTK_STOCK_FILE, size);
-
 	gicon = g_file_info_get_icon (info);
-	g_object_unref (info);
-	
-	if (!gicon)
+
+	if (gicon == NULL)
+	{
+		g_object_unref (info);
 		return get_stock_icon (theme, GTK_STOCK_FILE, size);
+	}
 
 	icon_info = gtk_icon_theme_lookup_by_gicon (theme, gicon, size, 0);
-	g_object_unref (gicon);
+	g_object_unref (info);	
 	
 	if (!icon_info)
 		return get_stock_icon (theme, GTK_STOCK_FILE, size);
