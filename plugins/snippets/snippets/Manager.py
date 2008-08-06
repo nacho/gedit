@@ -26,7 +26,7 @@ from gtk import gdk
 import gtksourceview2 as gsv
 import pango
 import gedit
-import gnomevfs
+import gio
 
 from Snippet import Snippet
 from Helper import *
@@ -174,7 +174,8 @@ class Manager:
                 
 
         def on_tree_view_drag_data_get(self, widget, context, selection_data, info, time):
-                selection_data.set_uris(['file://' + gnomevfs.escape_path_string(self._temp_export)])
+                gfile = gio.File(self._temp_export)
+                selection_data.set_uris([gfile.get_uri()])
        
         def on_tree_view_drag_begin(self, widget, context):
                 self.dragging = True
@@ -781,7 +782,9 @@ class Manager:
                                 continue
 
                         # Remove file://
-                        filename = gnomevfs.get_local_path_from_uri(filename)
+                        gfile = gio.File(filename)
+                        filename = gfile.get_path()
+
                         importer = Importer(filename)
                         error = importer.run()
          
@@ -1152,7 +1155,7 @@ class Manager:
                 
                 for uri in uris:
                         try:
-                                mime = gnomevfs.get_mime_type(uri)
+                                mime = gio.content_type_guess(uri)
                         except:
                                 mime = None
                         

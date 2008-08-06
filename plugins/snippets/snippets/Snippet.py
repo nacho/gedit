@@ -16,7 +16,7 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
-import gnomevfs
+import gio
 
 from Placeholder import *
 from Parser import Parser, Token
@@ -41,19 +41,30 @@ class EvalUtilities:
 
                 return len(s.expandtabs(tablen))
 
-        def _gnomevfs_filename(self, filename):
-                if filename.startswith('/'):
-                        return 'file://' + filename
+        def _filename_to_uri(self, filename):
+                gfile = gio.File(filename)
 
-                return filename
+                return gfile.get_uri()
 
         def util_readfile(self, filename):
-                return gnomevfs.read_entire_file(self._gnomevfs_filename(filename))
+                stream = gio.File(filename).read()
+                
+                if not stream:
+                        return ''
+                
+                res = stream.read()
+                stream.close()
+                
+                return res
 
         def util_filesize(self, filename):
-                info = gnomevfs.get_file_info(self._gnomevfs_filename(filename), gnomevfs.FILE_INFO_FIELDS_SIZE)
+                gfile = gio.File(filename)
+                info = gfile.query_info(gio.FILE_ATTRIBUTE_STANDARD_SIZE)
                 
-                return info.size
+                if not info:
+                        return 0
+                
+                return info.get_size()
 
         def util_align(self, items):
                 maxlen = []

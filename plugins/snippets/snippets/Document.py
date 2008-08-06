@@ -20,7 +20,7 @@ import re
 
 import gtk
 from gtk import gdk
-import gnomevfs
+import gio
 import gedit
 
 from Library import Library
@@ -723,7 +723,8 @@ class Document:
         def apply_uri_snippet(self, snippet, mime, uri):
                 # Remove file scheme
                 if gedit.utils.uri_has_file_scheme(uri):
-                        uri = gnomevfs.get_local_path_from_uri(uri)
+                        gfile = gio.File(uri)
+                        uri = gfile.get_path()
                 
                 # Set environmental variables
                 filename = self.env_get_filename(self.view.get_buffer())
@@ -757,7 +758,7 @@ class Document:
                 
                 for uri in uris:
                         try:
-                                mime = gnomevfs.get_mime_type(uri)
+                                mime = gio.content_type_guess(uri)
                         except:
                                 mime = None
 
