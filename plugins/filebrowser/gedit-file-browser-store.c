@@ -2507,6 +2507,7 @@ typedef struct {
 	GeditFileBrowserStore * model;
 	gchar * virtual_root;
 	GMountOperation * operation;
+	GCancellable * cancellable;
 } MountInfo;
 
 static void
@@ -2521,10 +2522,21 @@ mount_cb (GFile * file,
 	
 	mounted_on = g_file_mount_mountable_finish (file, res, &error);
 	
-	if (mounted_on) {
+	if (g_cancellable_is_cancelled (mount_info->cancellable))
+	{
+		if (error)
+			g_error_free (error);
+		
+		// Reset because it might be reused?
+		g_cancellable_reset (mount_info->cancellable);
+	}
+	else if (mounted_on)
+	{
 		model_root_mounted (model, mount_info->virtual_root);
 		g_object_unref (mounted_on);
-	} else if (error->code != G_IO_ERROR_CANCELLED) {
+	}
+	else if (error->code != G_IO_ERROR_CANCELLED)
+	{
 		g_signal_emit (model, 
 			       model_signals[ERROR], 
 			       0, 
@@ -2548,7 +2560,9 @@ mount_cb (GFile * file,
 	}
 	
 	g_object_unref (mount_info->operation);
+	g_object_unref (mount_info->cancellable);
 	g_free (mount_info->virtual_root);
+
 	g_free (mount_info);
 }
 
@@ -2573,14 +2587,17 @@ model_mount_root (GeditFileBrowserStore * model, gchar const * virtual_root)
 			mount_info = g_new(MountInfo, 1);
 			mount_info->model = model;
 			mount_info->virtual_root = g_strdup (virtual_root);
-			mount_info->operation = g_mount_operation_new ();
 			
-			g_file_mount_mountable (model->priv->root->file, 
-						G_MOUNT_MOUNT_NONE,
-						mount_info->operation,
-						FILE_BROWSER_NODE_DIR (model->priv->root)->cancellable,
-						(GAsyncReadyCallback)mount_cb,
-						mount_info);
+			/* FIXME: we should be setting the correct window */
+			mount_info->operation = gtk_mount_operation_new (NULL);
+			mount_info->cancellable = g_object_ref (FILE_BROWSER_NODE_DIR (model->priv->root)->cancellable);
+			
+			g_file_mount_enclosing_volume (model->priv->root->file, 
+						       G_MOUNT_MOUNT_NONE,
+						       mount_info->operation,
+						       mount_info->cancellable,
+						       (GAsyncReadyCallback)mount_cb,
+						       mount_info);
 						
 		}
 		

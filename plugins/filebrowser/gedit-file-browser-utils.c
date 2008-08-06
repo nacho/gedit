@@ -1,6 +1,5 @@
-#include <libgnomeui/libgnomeui.h>
-
 #include "gedit-file-browser-utils.h"
+#include <gedit/gedit-utils.h>
 
 static GdkPixbuf *
 process_icon_pixbuf (GdkPixbuf * pixbuf,
@@ -50,57 +49,25 @@ gedit_file_browser_utils_pixbuf_from_theme (gchar const * name,
 	return pixbuf;
 }
 
-static GdkPixbuf *
-pixbuf_from_theme_icon (GThemedIcon * icon, gint size)
-{
-	gchar **names;
-	GtkIconInfo * info;
-	GdkPixbuf * pixbuf;
-	GError * error = NULL;
-	gchar * name;
-	
-	// Get the icon theme names
-	g_object_get (icon, "names", &names, NULL);
-	info = gtk_icon_theme_choose_icon (gtk_icon_theme_get_default (), 
-					   (gchar const **)names, 
-					   size, 
-					   0);
-	
-	pixbuf = gtk_icon_info_load_icon (info, &error);
-	gtk_icon_info_free (info);
-	
-	name = g_strjoinv (", ", names);
-	pixbuf = process_icon_pixbuf (pixbuf, name, size, error);
-
-	g_free (name);
-	g_strfreev (names);
-
-	return pixbuf;	
-}
-
-static GdkPixbuf *
-pixbuf_from_loadable_icon (GLoadableIcon * icon, gint size)
-{
-	// TODO: actual implement this
-	return NULL;
-}
-
 GdkPixbuf *
 gedit_file_browser_utils_pixbuf_from_icon (GIcon * icon,
                                            GtkIconSize size)
 {
 	GdkPixbuf * ret = NULL;
-	gint width;
+	GtkIconTheme *theme;
+	GtkIconInfo *info;
 	
 	if (!icon)
 		return NULL;
 
-	gtk_icon_size_lookup (size, &width, NULL);
+	theme = gtk_icon_theme_get_default ();
+	info = gtk_icon_theme_lookup_by_gicon (theme, icon, size, 0);
 	
-	if (G_IS_THEMED_ICON (icon))
-		ret = pixbuf_from_theme_icon (G_THEMED_ICON (icon), width);
-	else if (G_IS_LOADABLE_ICON (icon))
-		ret = pixbuf_from_loadable_icon (G_LOADABLE_ICON (icon), width);
+	if (!info)
+		return NULL;
+		
+	ret = gtk_icon_info_load_icon (info, NULL);
+	gtk_icon_info_free (info);
 	
 	return ret;
 }
@@ -132,19 +99,12 @@ gedit_file_browser_utils_pixbuf_from_file (GFile * file,
 gchar *
 gedit_file_browser_utils_file_display (GFile * file)
 {
-	gchar * ret;
+	gchar *uri;
+	gchar *ret;
 	
-	GFileInfo * info = g_file_query_info (file,
-					     G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME, 
-					     G_FILE_QUERY_INFO_NONE,
-					     NULL, 
-					     NULL);
-	
-	if (!info)
-		return NULL;
-
-	ret = g_strdup(g_file_info_get_display_name (info));
-	g_object_unref (info);
+	uri = g_file_get_uri (file);
+	ret = gedit_utils_uri_for_display (uri);
+	g_free (uri);
 	
 	return ret;
 }
@@ -152,27 +112,20 @@ gedit_file_browser_utils_file_display (GFile * file)
 gchar *
 gedit_file_browser_utils_file_basename (GFile * file)
 {
-	gchar * display = gedit_file_browser_utils_file_display (file);
-	gchar * ret;
-
-	if (!display)
-		return g_file_get_basename (file);
-
-	ret = g_path_get_basename (display);
+	gchar *uri;
+	gchar *ret;
 	
-	g_free (display);
+	uri = g_file_get_uri (file);
+	ret = gedit_file_browser_utils_uri_basename (uri);
+	g_free (uri);
+	
 	return ret;
 }
 
 gchar *
 gedit_file_browser_utils_uri_basename (gchar const * uri)
 {
-	GFile * file = g_file_new_for_uri (uri);
-	gchar * ret = gedit_file_browser_utils_file_basename (file);
-	
-	g_object_unref (file);
-	
-	return ret;
+	return gedit_utils_basename_for_display (uri);
 }
 
 gboolean
@@ -224,18 +177,6 @@ gedit_file_browser_utils_confirmation_dialog (GeditWindow * window,
 	gtk_widget_destroy (dlg);
 
 	return (ret == GTK_RESPONSE_OK);
-}
-
-gboolean
-_gedit_file_browser_utils_file_has_parent (GFile * file)
-{
-	GFile * parent = g_file_get_parent (file);
-	
-	if (!parent)
-		return FALSE;
-	
-	g_object_unref (parent);
-	return TRUE;
 }
 
 // ex:ts=8:noet:

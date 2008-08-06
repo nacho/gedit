@@ -28,7 +28,6 @@
 #include <string.h>
 #include <glib.h>
 #include <glib/gi18n-lib.h>
-#include <libgnome/gnome-url.h>
 #include <gdk/gdkkeysyms.h>
 #include <gedit/gedit-utils.h>
 #include <gedit/gedit-plugin.h>
@@ -625,7 +624,7 @@ insert_location_path (GeditFileBrowserWidget * obj)
 							   obj);
 		}
 
-		if (g_file_equal (current, loc->root) || !_gedit_file_browser_utils_file_has_parent (current)) {
+		if (g_file_equal (current, loc->root) || !gedit_utils_file_has_parent (current)) {
 			if (current != loc->virtual_root)
 				g_object_unref (current);
 			break;
@@ -2539,7 +2538,7 @@ directory_open (GeditFileBrowserWidget *obj,
 	if (FILE_IS_DIR (flags)) {
 		result = TRUE;
 
-		if (!gnome_url_show (uri, &error)) {
+		if (!gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (obj)), uri, GDK_CURRENT_TIME, &error)) {
 			g_signal_emit (obj, signals[ERROR], 0,
 				       GEDIT_FILE_BROWSER_ERROR_OPEN_DIRECTORY,
 				       error->message);

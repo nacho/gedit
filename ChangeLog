@@ -1,5 +1,15 @@
 2008-08-06  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* plugins/filebrowser/gedit-file-browser-utils.[ch]: adapted to 
+	new uri helper functions in gedit-utils and icon loading functions
+	in gtk 2.14
+	* plugins/filebrowser/gedit-file-browser-store.c: fixed problem with
+	cancelling mount operation. Added use of gtk_mount_operation.
+	* plugins/filebrowser/gedit-file-browser-widget.c: use gtk_show_uri
+	instead of gnome_url_show
+
+2008-08-06  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* plugins/externaltools/functions.py:
 	* plugins/externaltools/manager.py:
 	

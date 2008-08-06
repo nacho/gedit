@@ -23,8 +23,6 @@ gboolean gedit_file_browser_utils_confirmation_dialog     (GeditWindow * window,
 		                                           gchar const * button_stock, 
 		                                           gchar const * button_label);
 
-gboolean _gedit_file_browser_utils_file_has_parent	  (GFile * file);
-
 #endif /* __GEDIT_FILE_BROWSER_UTILS_H__ */
 
 // ex:ts=8:noet:
