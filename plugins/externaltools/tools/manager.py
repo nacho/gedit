@@ -367,7 +367,7 @@ class Manager(object):
 
     def on_tool_manager_dialog_response(self, dialog, response):
         if response == gtk.RESPONSE_HELP:
-            gedit.help_display(self.dialog, 'gedit.xml', 'gedit-external-tools-plugin')
+            gedit.help_display(self.dialog, 'gedit', 'gedit-external-tools-plugin')
             return
 
         self.on_tool_manager_dialog_focus_out(dialog, None)

@@ -71,7 +71,7 @@ dialog_response_handler (GtkDialog *dlg,
 	if (res_id == GTK_RESPONSE_HELP)
 	{
 		gedit_help_display (GTK_WINDOW (dlg),
-				    "gedit.xml",
+				    NULL,
 				    "gedit-spell-checker-plugin");
 
 		g_signal_stop_emission_by_name (dlg, "response");

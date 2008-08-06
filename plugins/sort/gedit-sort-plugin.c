@@ -108,7 +108,7 @@ sort_dialog_response_handler (GtkDialog  *widget,
 
 		case GTK_RESPONSE_HELP:
 			gedit_help_display (GTK_WINDOW (widget),
-					    "gedit.xml",
+					    NULL,
 					    "gedit-sort-plugin");
 			break;
 

@@ -1,5 +1,28 @@
 2008-08-06  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* gedit/gedit-help.[ch]:
+	* bindings/python/gedit.defs:
+	
+	Changed the gedit help helper function to use gtk_show_uri with
+	the ghelp scheme instead of gnome_show_help. Using "gedit.xml" as
+	the name generates a deprecation warning but will translate to "gedit"
+	which will properly show the help to prevent regression for third party
+	plugins.
+	
+	* plugins/snippets/snippets/Manager.py:
+	* plugins/externaltools/tools/manager.py:
+	* plugins/spell/gedit-spell-language-dialog.c:
+	* plugins/sort/gedit-sort-plugin.c:
+	* plugins/time/gedit-time-plugin.c:
+	* plugins/spell/gedit-spell-language-dialog.c:
+	* gedit/dialogs/gedit-preferences-dialog.c:
+	* gedit/dialogs/gedit-style-scheme-dialog.c:
+	
+	Adapted plugins and gedit core to not use "gedit.xml" as the help name.
+	Changed to use NULL since they all want the default.
+	
+2008-08-06  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* gedit/gedit-tab.c:
 	* gedit/gedit-gnomevfs-document-saver.c:
 	* gedit/gedit-document-loader.c:

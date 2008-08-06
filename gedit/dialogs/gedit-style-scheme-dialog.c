@@ -103,7 +103,7 @@ dialog_response_handler (GtkDialog *dlg,
 	{
 		case GTK_RESPONSE_HELP:
 			gedit_help_display (GTK_WINDOW (dlg),
-					    "gedit.xml",
+					    NULL,
 					    "gedit-prefs"); // FIXME
 
 			g_signal_stop_emission_by_name (dlg, "response");

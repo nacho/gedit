@@ -36,24 +36,40 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtkmessagedialog.h>
-#include <libgnome/gnome-help.h>
+#include <string.h>
+#include <gtk/gtk.h>
 
 gboolean    
 gedit_help_display (GtkWindow   *parent,
-		    const gchar *file_name, /* "gedit.xml" if NULL */
+		    const gchar *name, /* "gedit" if NULL */
 		    const gchar *link_id)
 {
 	GError *error = NULL;
 	gboolean ret;
-
+	gchar *link;
+	
 	g_return_val_if_fail ((parent == NULL) || GTK_IS_WINDOW (parent), FALSE);
 
-	if (file_name == NULL)
-		file_name = "gedit.xml";
+	if (name == NULL)
+		name = "gedit";
+	else if (strcmp (name, "gedit.xml") == 0)
+	{
+		g_warning ("%s: Using \"gedit.xml\" for the help name is deprecated, use \"gedit\" or simply NULL instead", G_STRFUNC);
+		
+		name = "gedit";
+	}
 
-	ret = gnome_help_display (file_name,
-				  link_id,
-				  &error);
+	if (link_id)
+		link = g_strdup_printf ("ghelp:%s?%s", name, link_id);
+	else
+		link = g_strdup_printf ("ghelp:%s", name);
+
+	ret = gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (parent)),
+	                    link, 
+			    GDK_CURRENT_TIME, 
+			    &error);
+
+	g_free (link);
 
 	if (error != NULL)
 	{

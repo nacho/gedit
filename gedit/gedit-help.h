@@ -36,7 +36,7 @@
 G_BEGIN_DECLS
 
 gboolean	gedit_help_display (GtkWindow   *parent,
-				    const gchar *file_name, /* "gedit.xml" if NULL */
+				    const gchar *name, /* "gedit" if NULL */
 				    const gchar *link_id);
 				    
 G_END_DECLS

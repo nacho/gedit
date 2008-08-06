@@ -1015,7 +1015,7 @@ choose_format_dialog_response_cb (GtkWidget          *widget,
 		{
 			gedit_debug_message (DEBUG_PLUGINS, "GTK_RESPONSE_HELP");
 			gedit_help_display (GTK_WINDOW (widget),
-					    "gedit.xml",
+					    NULL,
 					    "gedit-insert-date-time-plugin");
 			break;
 		}
@@ -1170,7 +1170,7 @@ configure_dialog_response_cb (GtkWidget           *widget,
 			gedit_debug_message (DEBUG_PLUGINS, "GTK_RESPONSE_HELP");
 
 			gedit_help_display (GTK_WINDOW (dialog),
-					    "gedit.xml",
+					    NULL,
 					    "gedit-date-time-configure");
 			break;
 		}
