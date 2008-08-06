@@ -19,7 +19,7 @@
 import os
 import gtk
 from gtk import gdk
-import gnomevfs
+import gio
 import gedit
 #import gtksourceview
 from outputpanel import OutputPanel
@@ -55,13 +55,14 @@ def capture_menu_action(action, window, node):
         document = view.get_buffer()
         uri = document.get_uri()
         if uri is not None:
-            scheme = gnomevfs.get_uri_scheme(uri)
+            gfile = gio.File(uri)
+            scheme = gfile.get_uri_scheme()
             name = os.path.basename(uri)
             capture.set_env(GEDIT_CURRENT_DOCUMENT_URI    = uri,
                             GEDIT_CURRENT_DOCUMENT_NAME   = name,
                             GEDIT_CURRENT_DOCUMENT_SCHEME = scheme)
-            if scheme == 'file':
-                path = gnomevfs.get_local_path_from_uri(uri)
+            if gedit.utils.uri_has_file_scheme(uri):
+                path = gfile.get_path()
                 cwd = os.path.dirname(path)
                 capture.set_cwd(cwd)
                 capture.set_env(GEDIT_CURRENT_DOCUMENT_PATH = path,
@@ -70,9 +71,9 @@ def capture_menu_action(action, window, node):
         documents_uri = [doc.get_uri()
                                  for doc in window.get_documents()
                                  if doc.get_uri() is not None]
-        documents_path = [gnomevfs.get_local_path_from_uri(uri)
+        documents_path = [gio.File(uri).get_path()
                                  for uri in documents_uri
-                                 if gnomevfs.get_uri_scheme(uri) == 'file']
+                                 if gedit.utils.uri_has_file_scheme(uri)]
         capture.set_env(GEDIT_DOCUMENTS_URI  = ' '.join(documents_uri),
                         GEDIT_DOCUMENTS_PATH = ' '.join(documents_path))
 
@@ -175,7 +176,7 @@ def capture_end_execute_panel(capture, exit_code, panel, view, update_type):
         end = start.copy()
         end.forward_chars(300)
 
-        mtype = gnomevfs.get_mime_type_for_data(doc.get_text(start, end))
+        mtype = gio.content_type_guess(data=doc.get_text(start, end))
         lmanager = gedit.get_language_manager()
         language = gedit.language_manager_get_language_from_mime_type(lmanager, mtype)
         if language is not None:

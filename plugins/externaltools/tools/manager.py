@@ -208,7 +208,7 @@ class Manager(object):
         script = default(''.join(node.get_script()), '')
         buf.set_text(script)
         self.script_hash = self.compute_hash(script)
-        mimetype = gnomevfs.get_mime_type_for_data(script)
+        mimetype = gio.content_type_guess(data=script)
         lmanager = gedit.get_language_manager()
         language = gedit.language_manager_get_language_from_mime_type(lmanager, mimetype)
 
