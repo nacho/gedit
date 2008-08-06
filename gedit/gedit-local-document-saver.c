@@ -61,22 +61,22 @@ static void		 gedit_local_document_saver_save		(GeditDocumentSaver *saver,
 									 time_t              old_mtime);
 static const gchar 	*gedit_local_document_saver_get_mime_type	(GeditDocumentSaver *saver);
 static time_t		 gedit_local_document_saver_get_mtime		(GeditDocumentSaver *saver);
-static GnomeVFSFileSize	 gedit_local_document_saver_get_file_size	(GeditDocumentSaver *saver);
-static GnomeVFSFileSize	 gedit_local_document_saver_get_bytes_written	(GeditDocumentSaver *saver);
+static goffset		 gedit_local_document_saver_get_file_size	(GeditDocumentSaver *saver);
+static goffset		 gedit_local_document_saver_get_bytes_written	(GeditDocumentSaver *saver);
 
 
 struct _GeditLocalDocumentSaverPrivate
 {
-	GnomeVFSFileSize	  size;
-	GnomeVFSFileSize	  bytes_written;
+	goffset	  size;
+	goffset	  bytes_written;
 
 	/* temp data for local files */
-	gint			  fd;
-	gchar			 *local_path;
-	gchar                    *mime_type; //CHECK use FileInfo instead?
-	time_t                    doc_mtime;
+	gint	  fd;
+	gchar	 *local_path;
+	gchar    *mime_type; //CHECK use FileInfo instead?
+	time_t    doc_mtime;
 
-	GError                   *error;
+	GError   *error;
 };
 
 G_DEFINE_TYPE(GeditLocalDocumentSaver, gedit_local_document_saver, GEDIT_TYPE_DOCUMENT_SAVER)
@@ -873,13 +873,13 @@ gedit_local_document_saver_get_mtime (GeditDocumentSaver *saver)
 	return GEDIT_LOCAL_DOCUMENT_SAVER (saver)->priv->doc_mtime;
 }
 
-static GnomeVFSFileSize
+static goffset
 gedit_local_document_saver_get_file_size (GeditDocumentSaver *saver)
 {
 	return GEDIT_LOCAL_DOCUMENT_SAVER (saver)->priv->size;
 }
 
-static GnomeVFSFileSize
+static goffset
 gedit_local_document_saver_get_bytes_written (GeditDocumentSaver *saver)
 {
 	return GEDIT_LOCAL_DOCUMENT_SAVER (saver)->priv->bytes_written;

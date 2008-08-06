@@ -1232,7 +1232,7 @@ update_recent_files_menu (GeditWindow *window)
 
 		/* gtk_recent_info_get_uri_display (info) is buggy and
 		 * works only for local files */
-		uri = gedit_utils_format_uri_for_display (gtk_recent_info_get_uri (info));
+		uri = gedit_utils_uri_for_display (gtk_recent_info_get_uri (info));
 		ruri = gedit_utils_replace_home_dir_with_tilde (uri);
 		g_free (uri);
 

@@ -46,8 +46,8 @@ static void		 gedit_gnomevfs_document_saver_save			(GeditDocumentSaver *saver,
 										 time_t              old_mtime);
 static const gchar 	*gedit_gnomevfs_document_saver_get_mime_type		(GeditDocumentSaver *saver);
 static time_t		 gedit_gnomevfs_document_saver_get_mtime		(GeditDocumentSaver *saver);
-static GnomeVFSFileSize	 gedit_gnomevfs_document_saver_get_file_size		(GeditDocumentSaver *saver);
-static GnomeVFSFileSize	 gedit_gnomevfs_document_saver_get_bytes_written	(GeditDocumentSaver *saver);
+static goffset		 gedit_gnomevfs_document_saver_get_file_size		(GeditDocumentSaver *saver);
+static goffset		 gedit_gnomevfs_document_saver_get_bytes_written	(GeditDocumentSaver *saver);
 
 struct _GeditGnomeVFSDocumentSaverPrivate
 {
@@ -526,13 +526,13 @@ gedit_gnomevfs_document_saver_get_mtime (GeditDocumentSaver *saver)
 	return GEDIT_GNOMEVFS_DOCUMENT_SAVER (saver)->priv->doc_mtime;
 }
 
-static GnomeVFSFileSize
+static goffset
 gedit_gnomevfs_document_saver_get_file_size (GeditDocumentSaver *saver)
 {
 	return GEDIT_GNOMEVFS_DOCUMENT_SAVER (saver)->priv->size;
 }
 
-static GnomeVFSFileSize
+static goffset
 gedit_gnomevfs_document_saver_get_bytes_written (GeditDocumentSaver *saver)
 {
 	return GEDIT_GNOMEVFS_DOCUMENT_SAVER (saver)->priv->bytes_written;

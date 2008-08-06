@@ -31,10 +31,7 @@
 #endif
 
 #include <glib/gi18n.h>
-
-#include <libgnomeui/libgnomeui.h>
-#include <libgnomevfs/gnome-vfs-mime-handlers.h>
-#include <libgnomevfs/gnome-vfs-utils.h>
+#include <gio/gio.h>
 
 #include "gedit-app.h"
 #include "gedit-notebook.h"
@@ -753,7 +750,7 @@ show_saving_message_area (GeditTab *tab)
 
 		from = short_name;
 
-		to = gedit_utils_format_uri_for_display (tab->priv->tmp_save_uri);
+		to = gedit_utils_uri_for_display (tab->priv->tmp_save_uri);
 
 		str = gedit_utils_str_middle_truncate (to, 
 						       MAX (20, MAX_MSG_LENGTH - len));
@@ -795,9 +792,9 @@ show_saving_message_area (GeditTab *tab)
 }
 
 static void
-message_area_set_progress (GeditTab	    *tab,
-			   GnomeVFSFileSize  size,
-			   GnomeVFSFileSize  total_size)
+message_area_set_progress (GeditTab *tab,
+			   goffset   size,
+			   goffset   total_size)
 {
 	if (tab->priv->message_area == NULL)
 		return;
@@ -829,10 +826,10 @@ message_area_set_progress (GeditTab	    *tab,
 }
 
 static void
-document_loading (GeditDocument    *document,
-		  GnomeVFSFileSize  size,
-		  GnomeVFSFileSize  total_size,
-		  GeditTab         *tab)
+document_loading (GeditDocument *document,
+		  goffset        size,
+		  goffset        total_size,
+		  GeditTab      *tab)
 {
 	double et;
 
@@ -899,6 +896,7 @@ document_loaded (GeditDocument *document,
 {
 	GtkWidget *emsg;
 	gchar *uri;
+	GFile *location;
 	const GeditEncoding *encoding;
 
 	g_return_if_fail ((tab->priv->state == GEDIT_TAB_STATE_LOADING) ||
@@ -915,6 +913,7 @@ document_loaded (GeditDocument *document,
 	set_message_area (tab, NULL);
 
 	uri = gedit_document_get_uri (document);
+	location = gedit_document_get_location (document);
 
 	if (error != NULL)
 	{
@@ -1016,12 +1015,12 @@ document_loaded (GeditDocument *document,
 			
 			if (d != document)
 			{
-				gchar *u;
+				GFile *loc;
 
-				u = gedit_document_get_uri (d);
+				loc = gedit_document_get_location (d);
 
-				if ((u != NULL) &&
-			    	    gnome_vfs_uris_match (uri, u))
+				if ((loc != NULL) &&
+			    	    g_file_equal (location, loc))
 			    	{
 			    		GtkWidget *w;
 			    		GeditView *view;
@@ -1044,12 +1043,11 @@ document_loaded (GeditDocument *document,
 							  G_CALLBACK (file_already_open_warning_message_area_response),
 							  tab);
 
-					g_free (u);
-
+			    		g_object_unref (loc);
 			    		break;
 			    	}
 
-				g_free (u);
+				g_object_unref (loc);
 			}
 		}
 
@@ -1071,8 +1069,8 @@ document_loaded (GeditDocument *document,
 
 static void
 document_saving (GeditDocument    *document,
-		 GnomeVFSFileSize  size,
-		 GnomeVFSFileSize  total_size,
+		 goffset  size,
+		 goffset  total_size,
 		 GeditTab         *tab)
 {
 	double et;
@@ -1700,7 +1698,7 @@ _gedit_tab_get_tooltips	(GeditTab *tab)
 			break;			
 		default:
 			mime_type = gedit_document_get_mime_type (doc);
-			mime_description = gnome_vfs_mime_get_description (mime_type);
+			mime_description = g_content_type_get_description (mime_type);
 
 			if (mime_description == NULL)
 				mime_full_description = g_strdup (mime_type);
@@ -1773,29 +1771,6 @@ resize_icon (GdkPixbuf *pixbuf,
 }
 
 static GdkPixbuf *
-get_icon (GtkIconTheme *theme, 
-	  const gchar  *uri,
-	  const gchar  *mime_type, 
-	  gint          size)
-{
-	gchar *icon;
-	GdkPixbuf *pixbuf;
-	
-	icon = gnome_icon_lookup (theme, NULL, uri, NULL, NULL,
-				  mime_type, 0, NULL);
-	
-
-	g_return_val_if_fail (icon != NULL, NULL);
-
-	pixbuf = gtk_icon_theme_load_icon (theme, icon, size, 0, NULL);
-	g_free (icon);
-	if (pixbuf == NULL)
-		return NULL;
-		
-	return resize_icon (pixbuf, size);
-}
-
-static GdkPixbuf *
 get_stock_icon (GtkIconTheme *theme, 
 		const gchar  *stock,
 		gint          size)
@@ -1805,6 +1780,50 @@ get_stock_icon (GtkIconTheme *theme,
 	pixbuf = gtk_icon_theme_load_icon (theme, stock, size, 0, NULL);
 	if (pixbuf == NULL)
 		return NULL;
+		
+	return resize_icon (pixbuf, size);
+}
+
+static GdkPixbuf *
+get_icon (GtkIconTheme *theme, 
+	  GFile        *location,
+	  gint          size)
+{
+	GdkPixbuf *pixbuf;
+	GtkIconInfo *icon_info;
+	GFileInfo *info;
+	GIcon *gicon;
+	
+	if (!location)
+		return get_stock_icon (theme, GTK_STOCK_FILE, size);
+
+	/* FIXME: Doing a sync stat is bad, this should be fixed */
+	info = g_file_query_info (location, 
+	                          G_FILE_ATTRIBUTE_STANDARD_ICON, 
+	                          G_FILE_QUERY_INFO_NONE, 
+	                          NULL, 
+	                          NULL);
+	
+	if (!info)
+		return get_stock_icon (theme, GTK_STOCK_FILE, size);
+
+	gicon = g_file_info_get_icon (info);
+	g_object_unref (info);
+	
+	if (!gicon)
+		return get_stock_icon (theme, GTK_STOCK_FILE, size);
+
+	icon_info = gtk_icon_theme_lookup_by_gicon (theme, gicon, size, 0);
+	g_object_unref (gicon);
+	
+	if (!icon_info)
+		return get_stock_icon (theme, GTK_STOCK_FILE, size);
+	
+	pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
+	gtk_icon_info_free (icon_info);
+	
+	if (!pixbuf)
+		return get_stock_icon (theme, GTK_STOCK_FILE, size);
 		
 	return resize_icon (pixbuf, size);
 }
@@ -1881,19 +1900,13 @@ _gedit_tab_get_icon (GeditTab *tab)
 
 		default:
 		{
-			gchar *raw_uri;
-			gchar *mime_type;
+			GFile *location;
 			GeditDocument *doc;
 
 			doc = gedit_tab_get_document (tab);
 
-			raw_uri = gedit_document_get_uri (doc);
-			mime_type = gedit_document_get_mime_type (doc);
-
-			pixbuf = get_icon (theme, raw_uri, mime_type, icon_size);
-
-			g_free (raw_uri);
-			g_free (mime_type);
+			location = gedit_document_get_location (doc);
+			pixbuf = get_icon (theme, location, icon_size);
 		}
 	}
 

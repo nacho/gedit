@@ -163,8 +163,8 @@ dnl Start of pkg-config checks
 dnl ================================================================
 
 PKG_CHECK_MODULES(GEDIT, [
-	glib-2.0 >= 2.14.0
-	gtk+-2.0 >= 2.12.0
+	glib-2.0 >= 2.13.0
+	gtk+-2.0 >= 2.13.0
 	gtksourceview-2.0 >= 2.2.0
 	libgnomeui-2.0 >= 2.16.0
 	libglade-2.0 >= 2.5.1

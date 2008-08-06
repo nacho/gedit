@@ -110,8 +110,8 @@ struct _GeditDocumentClass
 					 gboolean             create);
 
 	void (* loading)		(GeditDocument    *document,
-					 GnomeVFSFileSize  size,
-					 GnomeVFSFileSize  total_size);
+					 goffset	   size,
+					 goffset	   total_size);
 
 	void (* loaded)			(GeditDocument    *document,
 					 const GError     *error);
@@ -123,8 +123,8 @@ struct _GeditDocumentClass
 					 GeditDocumentSaveFlags  flags);
 
 	void (* saving)			(GeditDocument    *document,
-					 GnomeVFSFileSize  size,
-					 GnomeVFSFileSize  total_size);
+					 goffset	   size,
+					 goffset	   total_size);
 
 	void (* saved)  		(GeditDocument    *document,
 					 const GError     *error);

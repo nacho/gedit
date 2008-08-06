@@ -53,8 +53,8 @@ static void		 gedit_gnomevfs_document_loader_load		(GeditDocumentLoader *loader)
 static gboolean		 gedit_gnomevfs_document_loader_cancel		(GeditDocumentLoader *loader);
 static const gchar	*gedit_gnomevfs_document_loader_get_mime_type	(GeditDocumentLoader *loader);
 static time_t		 gedit_gnomevfs_document_loader_get_mtime	(GeditDocumentLoader *loader);
-static GnomeVFSFileSize	 gedit_gnomevfs_document_loader_get_file_size	(GeditDocumentLoader *loader);
-static GnomeVFSFileSize	 gedit_gnomevfs_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
+static goffset		 gedit_gnomevfs_document_loader_get_file_size	(GeditDocumentLoader *loader);
+static goffset		 gedit_gnomevfs_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
 static gboolean		 gedit_gnomevfs_document_loader_get_readonly	(GeditDocumentLoader *loader);
 
 
@@ -178,8 +178,8 @@ static void
 async_read_cb (GnomeVFSAsyncHandle         *handle,
 	       GnomeVFSResult               result,
 	       gpointer                     buffer,
-	       GnomeVFSFileSize             bytes_requested,
-	       GnomeVFSFileSize             bytes_read,
+	       GnomeVFSFileSize	            bytes_requested,
+	       GnomeVFSFileSize	            bytes_read,
 	       GeditGnomeVFSDocumentLoader *gvloader)
 {
 	gedit_debug (DEBUG_LOADER);
@@ -436,18 +436,18 @@ gedit_gnomevfs_document_loader_get_mtime (GeditDocumentLoader *loader)
 }
 
 /* Returns 0 if file size is unknown */
-static GnomeVFSFileSize
+static goffset
 gedit_gnomevfs_document_loader_get_file_size (GeditDocumentLoader *loader)
 {
 	GeditGnomeVFSDocumentLoader *gvloader = GEDIT_GNOMEVFS_DOCUMENT_LOADER (loader);
 
 	if (gvloader->priv->info == NULL)
-		return (GnomeVFSFileSize) 0;
+		return (goffset) 0;
 
-	return (GnomeVFSFileSize) gvloader->priv->info->size;
+	return (goffset) gvloader->priv->info->size;
 }
 
-static GnomeVFSFileSize
+static goffset
 gedit_gnomevfs_document_loader_get_bytes_read (GeditDocumentLoader *loader)
 {
 	return GEDIT_GNOMEVFS_DOCUMENT_LOADER (loader)->priv->bytes_read;

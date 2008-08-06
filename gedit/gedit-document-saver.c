@@ -446,7 +446,7 @@ gedit_document_saver_get_mtime (GeditDocumentSaver *saver)
 }
 
 /* Returns 0 if file size is unknown */
-GnomeVFSFileSize
+goffset
 gedit_document_saver_get_file_size (GeditDocumentSaver *saver)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), 0);
@@ -454,7 +454,7 @@ gedit_document_saver_get_file_size (GeditDocumentSaver *saver)
 	return GEDIT_DOCUMENT_SAVER_GET_CLASS (saver)->get_file_size (saver);
 }
 
-GnomeVFSFileSize
+goffset
 gedit_document_saver_get_bytes_written (GeditDocumentSaver *saver)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), 0);

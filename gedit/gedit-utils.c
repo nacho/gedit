@@ -44,7 +44,7 @@
 #include <glib/gunicode.h>
 #include <glib/gi18n.h>
 #include <glade/glade-xml.h>
-#include <libgnomevfs/gnome-vfs.h>
+#include <gio/gio.h>
 
 #include "gedit-utils.h"
 
@@ -67,19 +67,13 @@
 gboolean
 gedit_utils_uri_has_file_scheme (const gchar *uri)
 {
-	gchar *canonical_uri;
-	gchar *tmp;
+	GFile *gfile;
 	gboolean res;
 
-	canonical_uri = gnome_vfs_make_uri_canonical (uri);
-	g_return_val_if_fail (canonical_uri != NULL, FALSE);
-
-	tmp = gnome_vfs_get_local_path_from_uri (canonical_uri);
-	res = (tmp != NULL);
+	gfile = g_file_new_for_uri (uri);
+	res = g_file_has_uri_scheme (gfile, "file");
 	
-	g_free (canonical_uri);
-	g_free (tmp);
-
+	g_object_unref (gfile);
 	return res;
 }
 
@@ -87,18 +81,17 @@ gedit_utils_uri_has_file_scheme (const gchar *uri)
 gboolean
 gedit_utils_uri_has_writable_scheme (const gchar *uri)
 {
-	gchar *canonical_uri;
+	GFile *gfile;
 	gchar *scheme;
 	GSList *writable_schemes;
 	gboolean res;
 
-	canonical_uri = gnome_vfs_make_uri_canonical (uri);
-	g_return_val_if_fail (canonical_uri != NULL, FALSE);
+	gfile = g_file_new_for_uri (uri);
+	scheme = g_file_get_uri_scheme (gfile);
 
-	scheme = gnome_vfs_get_uri_scheme (canonical_uri);
 	g_return_val_if_fail (scheme != NULL, FALSE);
 
-	g_free (canonical_uri);
+	g_object_unref (gfile);
 
 	writable_schemes = gedit_prefs_manager_get_writable_vfs_schemes ();
 
@@ -343,19 +336,17 @@ gedit_utils_set_atk_relation (GtkWidget *obj1,
 gboolean
 gedit_utils_uri_exists (const gchar* text_uri)
 {
-	GnomeVFSURI *uri;
+	GFile *gfile;
 	gboolean res;
 		
 	g_return_val_if_fail (text_uri != NULL, FALSE);
 	
 	gedit_debug_message (DEBUG_UTILS, "text_uri: %s", text_uri);
 
-	uri = gnome_vfs_uri_new (text_uri);
-	g_return_val_if_fail (uri != NULL, FALSE);
+	gfile = g_file_new_for_uri (text_uri);
+	res = g_file_query_exists (gfile, NULL);
 
-	res = gnome_vfs_uri_exists (uri);
-
-	gnome_vfs_uri_unref (uri);
+	g_object_unref (gfile);
 
 	gedit_debug_message (DEBUG_UTILS, res ? "TRUE" : "FALSE");
 
@@ -500,7 +491,6 @@ gedit_utils_get_stdin (void)
 	GString * file_contents;
 	gchar *tmp_buf = NULL;
 	guint buffer_length;
-	GnomeVFSResult	res;
 	fd_set rfds;
 	struct timeval tv;
 	
@@ -527,8 +517,6 @@ gedit_utils_get_stdin (void)
 
 		if (ferror (stdin) != 0)
 		{
-			res = gnome_vfs_result_from_errno (); 
-		
 			g_free (tmp_buf);
 			g_string_free (file_contents, TRUE);
 			return NULL;
@@ -944,7 +932,7 @@ gedit_utils_activate_url (GtkAboutDialog *about,
 			  const gchar    *url,
 			  gpointer        data)
 {
-	gnome_vfs_url_show (url);
+	gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (about)), url, GDK_CURRENT_TIME, NULL);
 }
 
 static gboolean
@@ -1115,13 +1103,14 @@ gedit_utils_get_glade_widgets (const gchar *filename,
 gchar *
 gedit_utils_make_canonical_uri_from_shell_arg (const gchar *str)
 {	
+	GFile *gfile;
 	gchar *uri;
-	gchar *canonical_uri;
 
 	g_return_val_if_fail (str != NULL, NULL);
 	g_return_val_if_fail (*str != '\0', NULL);
 	
 	/* Note for the future: 
+	 * FIXME: is still still relevant?
 	 *
 	 * <federico> paolo: and flame whoever tells 
 	 * you that file:///gnome/test_files/hëllò 
@@ -1136,21 +1125,110 @@ gedit_utils_make_canonical_uri_from_shell_arg (const gchar *str)
 	 * <paolo>: I will use gedit_utils_is_valid_uri ()
 	 *
 	 */
-	 
-	uri = gnome_vfs_make_uri_from_shell_arg (str);
-	canonical_uri = gnome_vfs_make_uri_canonical (uri);
+
+	gfile = g_file_new_for_commandline_arg (str);
+	uri = g_file_get_uri (gfile);
+	g_object_unref (gfile);
+
+	if (gedit_utils_is_valid_uri (uri))
+		return uri;
+	
 	g_free (uri);
-	
-	/* g_print ("URI: %s\n", canonical_uri); */
-	
-	if (gedit_utils_is_valid_uri (canonical_uri))
-		return canonical_uri;
-	
 	return NULL;
 }
 
 /**
- * gedit_utils_format_uri_for_display:
+ * gedit_utils_file_has_parent:
+ * @gfile: the GFile to check the parent for
+ *
+ * Return TRUE if the specified gfile has a parent (is not the root), FALSE
+ * otherwise
+ */
+gboolean
+gedit_utils_file_has_parent (GFile *gfile)
+{
+	GFile *parent;
+	gboolean ret;
+	
+	parent = g_file_get_parent (gfile);
+	ret = parent != NULL;
+	
+	if (parent)
+		g_object_unref (parent);
+	
+	return ret;
+}
+
+/**
+ * gedit_utils_basename_for_display:
+ * @uri: uri for which the basename should be displayed
+ *
+ * Return the basename of a file suitable for display to users.
+ */
+gchar *
+gedit_utils_basename_for_display (gchar const *uri)
+{
+	gchar *name;
+	GFile *gfile;
+	GFileInfo *info;
+	gchar *hn;
+	
+	g_return_val_if_fail (uri != NULL, NULL);
+	
+	gfile = g_file_new_for_uri (uri);
+	
+	/* First, try to query the display name */
+	info = g_file_query_info (gfile,
+				  G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME, 
+				  G_FILE_QUERY_INFO_NONE, 
+				  NULL, 
+				  NULL);
+
+	if (info)
+	{
+		/* Simply get the display name to use as the basename */
+		name = g_strdup (g_file_info_get_display_name (info));
+		g_object_unref (info);
+	}
+	else if (g_file_has_uri_scheme (gfile, "file"))
+	{
+		/* This is a local file, and therefore we will use
+		 * g_filename_display_basename on the local path */
+		gchar *local_path;
+		
+		local_path = g_file_get_path (gfile);
+		name = g_filename_display_basename (local_path);
+		g_free (local_path);
+	}
+	else if (gedit_utils_file_has_parent (gfile) || !gedit_utils_decode_uri (uri, NULL, NULL, &hn, NULL, NULL))
+	{
+		/* For remote files with a parent (so not just http://foo.com)
+		   or remote file for which the decoding of the host name fails,
+		   use the _parse_name and take basename of that */
+		 gchar *parse_name;
+
+		 parse_name = g_file_get_parse_name (gfile);
+		 name = g_path_get_basename (parse_name);
+		 g_free (parse_name);
+	}
+	else
+	{
+		/* display '/ on <host>' using the decoded host */
+		gchar *hn_utf8;
+		hn_utf8 = gedit_utils_make_valid_utf8 (hn);
+		
+		/* Translators: '/ on <remote-share>' */
+		name = g_strdup_printf (_("/ on %s"), hn_utf8);
+		
+		g_free (hn_utf8);
+		g_free (hn);
+	}
+	
+	return name;
+}
+
+/**
+ * gedit_utils_uri_for_display:
  * @uri: uri to be displayed.
  *
  * Filter, modify, unescape and change @uri to make it appropriate
@@ -1163,43 +1241,23 @@ gedit_utils_make_canonical_uri_from_shell_arg (const gchar *str)
  * <li>All other uri appear as expected.</li>
  * </ul>
  *
- * This function is very similar to gnome_vfs_format_uri_for_display but remove
- * the password from the resulting string
+ * This function is a convenient wrapper for g_file_get_parse_name
  *
  * Return value: a string which represents @uri and can be displayed.
  */
 gchar *
-gedit_utils_format_uri_for_display (const gchar *uri)
+gedit_utils_uri_for_display (const gchar *uri)
 {
-	GnomeVFSURI *vfs_uri;
+	GFile *gfile;
+	gchar *ret;
 	
-	g_return_val_if_fail (uri != NULL, NULL);
-
-	/* Note: vfs_uri may be NULL for some valid but
-	 * unsupported uris */
-	vfs_uri = gnome_vfs_uri_new (uri);
+	gfile = g_file_new_for_uri (uri);
 	
-	if (vfs_uri == NULL)
-	{
-		/* We may disclose the password here, but there is nothing we
-		 * can do since we cannot get a valid vfs_uri */
-		return gnome_vfs_format_uri_for_display (uri);
-	}
-	else
-	{	
-		gchar *name;
-		gchar *uri_for_display;
-		
-		name = gnome_vfs_uri_to_string (vfs_uri, GNOME_VFS_URI_HIDE_PASSWORD);
-		g_return_val_if_fail (name != NULL, gnome_vfs_format_uri_for_display (uri));
-		
-		uri_for_display = gnome_vfs_format_uri_for_display (name);
-		g_free (name);
-		
-		gnome_vfs_uri_unref (vfs_uri);
-		
-		return uri_for_display;
-	}
+	/* CHECK: does this actually do what we want? */
+	ret = g_file_get_parse_name (gfile);
+	
+	g_object_unref (gfile);
+	return ret;
 }
 
 /**
@@ -1242,4 +1300,155 @@ gedit_utils_drop_get_uris (GtkSelectionData *selection_data)
 	}
 
 	return uri_list;
+}
+
+static void
+null_ptr (gchar **ptr)
+{
+	if (ptr)
+		*ptr = NULL;
+}
+
+/**
+ * gedit_utils_decode_uri:
+ * @uri: the uri to decode
+ * @scheme: return value pointer for the uri's scheme (e.g. http, sftp, ...)
+ * @user: return value pointer for the uri user info
+ * @port: return value pointer for the uri port
+ * @host: return value pointer for the uri host
+ * @path: return value pointer for the uri path
+ *
+ * Parse and break an uri apart in its individual components like the uri
+ * scheme, user info, port, host and path. The return value pointer can be
+ * NULL to ignore certain parts of the uri. If the function returns TRUE, then
+ * all return value pointers should be freed using g_free
+ * 
+ * Return value: TRUE if the uri could be properly decoded, FALSE otherwise.
+ */
+gboolean
+gedit_utils_decode_uri (const gchar *uri,
+			gchar **scheme,
+			gchar **user,
+			gchar **host,
+			gchar **port,
+			gchar **path
+)
+{
+	/* Largely copied from glib/gio/gdummyfile.c:_g_decode_uri. This 
+	 * functionality should be in glib/gio, but for now we implement it
+	 * ourselves (see bug #546182) */
+
+	const char *p, *in, *hier_part_start, *hier_part_end;
+	char *out;
+	char c;
+
+	/* From RFC 3986 Decodes:
+	 * URI = scheme ":" hier-part [ "?" query ] [ "#" fragment ]
+	 */ 
+
+	p = uri;
+	
+	null_ptr (scheme);
+	null_ptr (user);
+	null_ptr (port);
+	null_ptr (host);
+	null_ptr (path);
+
+	/* Decode scheme:
+	 * scheme = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
+	 */
+
+	if (!g_ascii_isalpha (*p))
+		return FALSE;
+
+	while (1)
+	{
+		c = *p++;
+
+		if (c == ':')
+			break;
+
+		if (!(g_ascii_isalnum(c) ||
+		      c == '+' ||
+		      c == '-' ||
+		      c == '.'))
+			return FALSE;
+	}
+	
+	if (scheme)
+	{
+		*scheme = g_malloc (p - uri);
+		out = *scheme;
+	
+		for (in = uri; in < p - 1; in++)
+			*out++ = g_ascii_tolower (*in);
+			
+		*out = '\0';
+	}
+	
+	hier_part_start = p;
+	hier_part_end = p + strlen (p);
+	
+	if (hier_part_start[0] == '/' && hier_part_start[1] == '/')
+	{
+		const char *authority_start, *authority_end;
+		const char *userinfo_start, *userinfo_end;
+		const char *host_start, *host_end;
+		const char *port_start;
+		
+		authority_start = hier_part_start + 2;
+		/* authority is always followed by / or nothing */
+		authority_end = memchr (authority_start, '/', hier_part_end - authority_start);
+		
+		if (authority_end == NULL)
+			authority_end = hier_part_end;
+
+		/* 3.2:
+		 * authority = [ userinfo "@" ] host [ ":" port ]
+		 */
+
+		userinfo_end = memchr (authority_start, '@', authority_end - authority_start);
+		
+		if (userinfo_end)
+		{
+			userinfo_start = authority_start;
+			
+			if (user)
+				*user = g_uri_unescape_segment (userinfo_start, userinfo_end, NULL);
+			
+			if (user && *user == NULL)
+			{
+				if (scheme)
+					g_free (*scheme);
+
+				return FALSE;
+			}
+	
+			host_start = userinfo_end + 1;
+		}
+		else
+			host_start = authority_start;
+
+		port_start = memchr (host_start, ':', authority_end - host_start);
+
+		if (port_start)
+		{
+			host_end = port_start++;
+
+			if (port)
+				*port = g_strndup (port_start, authority_end - port_start);
+		}
+		else
+			host_end = authority_end;
+
+		if (host)
+			*host = g_strndup (host_start, host_end - host_start);
+
+		hier_part_start = authority_end;
+	}
+
+	if (path)
+		*path = g_uri_unescape_segment (hier_part_start, hier_part_end, "/");
+	
+	return TRUE;
 }

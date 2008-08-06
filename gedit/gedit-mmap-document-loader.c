@@ -64,24 +64,24 @@ static void		 gedit_mmap_document_loader_load		(GeditDocumentLoader *loader);
 static gboolean		 gedit_mmap_document_loader_cancel		(GeditDocumentLoader *loader);
 static const gchar	*gedit_mmap_document_loader_get_mime_type	(GeditDocumentLoader *loader);
 static time_t		 gedit_mmap_document_loader_get_mtime		(GeditDocumentLoader *loader);
-static GnomeVFSFileSize	 gedit_mmap_document_loader_get_file_size	(GeditDocumentLoader *loader);
-static GnomeVFSFileSize	 gedit_mmap_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
+static goffset		 gedit_mmap_document_loader_get_file_size	(GeditDocumentLoader *loader);
+static goffset		 gedit_mmap_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
 static gboolean		 gedit_mmap_document_loader_get_readonly	(GeditDocumentLoader *loader);
 
 struct _GeditMmapDocumentLoaderPrivate
 {
-	struct stat       statbuf;
-	gchar            *mime_type;
-	guint             statbuf_filled : 1;
+	struct stat statbuf;
+	gchar      *mime_type;
+	guint       statbuf_filled : 1;
 
-	GnomeVFSFileSize  bytes_read;
+	goffset     bytes_read;
 
-	gint              fd;
-	gchar            *local_file_name;
+	gint        fd;
+	gchar      *local_file_name;
 
-	gchar            *buffer;
+	gchar      *buffer;
 
-	GError           *error;
+	GError     *error;
 };
 
 G_DEFINE_TYPE(GeditMmapDocumentLoader, gedit_mmap_document_loader, GEDIT_TYPE_DOCUMENT_LOADER)
@@ -398,17 +398,17 @@ gedit_mmap_document_loader_get_mtime (GeditDocumentLoader *loader)
 	return mloader->priv->statbuf.st_mtime;
 }
 
-static GnomeVFSFileSize
+static goffset
 gedit_mmap_document_loader_get_file_size (GeditDocumentLoader *loader)
 {
 	GeditMmapDocumentLoader *mloader = GEDIT_MMAP_DOCUMENT_LOADER (loader);
 
 	if (!mloader->priv->statbuf_filled)
-		return (GnomeVFSFileSize) 0;
-	return (GnomeVFSFileSize) mloader->priv->statbuf.st_size;
+		return (goffset) 0;
+	return (goffset) mloader->priv->statbuf.st_size;
 }
 
-static GnomeVFSFileSize
+static goffset
 gedit_mmap_document_loader_get_bytes_read (GeditDocumentLoader *loader)
 {
 	return GEDIT_MMAP_DOCUMENT_LOADER (loader)->priv->bytes_read;

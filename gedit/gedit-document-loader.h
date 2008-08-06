@@ -88,8 +88,8 @@ struct _GeditDocumentLoaderClass
 	gboolean		(* cancel)		(GeditDocumentLoader *loader);
 	const gchar *		(* get_mime_type)	(GeditDocumentLoader *loader);
 	time_t			(* get_mtime)		(GeditDocumentLoader *loader);
-	GnomeVFSFileSize	(* get_file_size)	(GeditDocumentLoader *loader);
-	GnomeVFSFileSize	(* get_bytes_read)	(GeditDocumentLoader *loader);
+	goffset			(* get_file_size)	(GeditDocumentLoader *loader);
+	goffset			(* get_bytes_read)	(GeditDocumentLoader *loader);
 	gboolean		(* get_readonly)	(GeditDocumentLoader *loader);
 };
 
@@ -134,10 +134,10 @@ gboolean		 gedit_document_loader_get_readonly	(GeditDocumentLoader *loader);
 const GeditEncoding	*gedit_document_loader_get_encoding	(GeditDocumentLoader *loader);
 
 /* Returns 0 if file size is unknown */
-/* FIXME: change GnomeVFSFileSize to what glib provides. */
-GnomeVFSFileSize	 gedit_document_loader_get_file_size	(GeditDocumentLoader *loader);
+/* FIXME: change goffset to what glib provides. */
+goffset	 gedit_document_loader_get_file_size	(GeditDocumentLoader *loader);
 
-GnomeVFSFileSize	 gedit_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
+goffset	 gedit_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
 
 
 G_END_DECLS

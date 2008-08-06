@@ -704,7 +704,7 @@ save_dialog_response_cb (GeditFileChooserDialog *dialog,
 		doc = gedit_tab_get_document (tab);
 		g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 
-		uri_for_display = gedit_utils_format_uri_for_display (uri);
+		uri_for_display = gedit_utils_uri_for_display (uri);
 
 		gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
 					        window->priv->generic_message_cid,

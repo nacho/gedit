@@ -89,8 +89,8 @@ struct _GeditDocumentSaverClass
 							 time_t              old_mtime);
 	const gchar *		(* get_mime_type)	(GeditDocumentSaver *saver);
 	time_t			(* get_mtime)		(GeditDocumentSaver *saver);
-	GnomeVFSFileSize	(* get_file_size)	(GeditDocumentSaver *saver);
-	GnomeVFSFileSize	(* get_bytes_written)	(GeditDocumentSaver *saver);
+	goffset			(* get_file_size)	(GeditDocumentSaver *saver);
+	goffset			(* get_bytes_written)	(GeditDocumentSaver *saver);
 };
 
 /*
@@ -131,9 +131,9 @@ const gchar		*gedit_document_saver_get_mime_type	(GeditDocumentSaver  *saver);
 time_t			 gedit_document_saver_get_mtime		(GeditDocumentSaver  *saver);
 
 /* Returns 0 if file size is unknown */
-GnomeVFSFileSize	 gedit_document_saver_get_file_size	(GeditDocumentSaver  *saver);
+goffset	 gedit_document_saver_get_file_size	(GeditDocumentSaver  *saver);
 
-GnomeVFSFileSize	 gedit_document_saver_get_bytes_written	(GeditDocumentSaver  *saver);
+goffset	 gedit_document_saver_get_bytes_written	(GeditDocumentSaver  *saver);
 
 
 G_END_DECLS

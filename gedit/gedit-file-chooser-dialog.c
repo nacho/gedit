@@ -39,7 +39,6 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <libgnomevfs/gnome-vfs-mime-utils.h>
 
 #include "gedit-file-chooser-dialog.h"
 #include "gedit-encodings-option-menu.h"
@@ -184,12 +183,7 @@ all_text_files_filter (const GtkFileFilterInfo *filter_info,
 
 			for (i = 0; mime_types[i] != NULL; i++)
 			{
-				GnomeVFSMimeEquivalence res;
-
-				res = gnome_vfs_mime_type_get_equivalence (mime_types[i],
-									   "text/plain");
-
-				if (res == GNOME_VFS_MIME_UNRELATED)
+				if (!g_content_type_is_a (mime_types[i], "text/plain"))
 				{
 					gedit_debug_message (DEBUG_COMMANDS,
 							     "Mime-type %s is not related to text/plain",
@@ -226,11 +220,7 @@ all_text_files_filter (const GtkFileFilterInfo *filter_info,
 	mime_types = known_mime_types;
 	while (mime_types != NULL)
 	{
-		GnomeVFSMimeEquivalence res;
-		res = gnome_vfs_mime_type_get_equivalence (filter_info->mime_type,
-							   (const gchar*)mime_types->data);
-
-		if (res != GNOME_VFS_MIME_UNRELATED)
+		if (g_content_type_is_a (filter_info->mime_type, (const gchar*)mime_types->data))
 			return TRUE;
 
 		mime_types = g_slist_next (mime_types);

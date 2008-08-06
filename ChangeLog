@@ -1,3 +1,30 @@
+2008-08-06  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* gedit/gedit-tab.c:
+	* gedit/gedit-gnomevfs-document-saver.c:
+	* gedit/gedit-document-loader.c:
+	* gedit/gedit-local-document-saver.c:
+	* gedit/gedit-document-loader.h:
+	* gedit/gedit-utils.c:
+	* gedit/gedit-utils.h:
+	* gedit/gedit-file-chooser-dialog.c:
+	* gedit/gedit-io-error-message-area.c:
+	* gedit/gedit-window.c:
+	* gedit/gedit-mmap-document-loader.c:
+	* gedit/gedit-document.c:
+	* gedit/gedit-document.h:
+	* gedit/gedit-gnomevfs-document-loader.c:
+	* gedit/gedit-commands-file.c:
+	* gedit/gedit-language-manager.c:
+	* gedit/gedit-document-saver.c:
+	* gedit/gedit-document-saver.h:
+	* configure.ac:
+	
+	Implemented phase 1 of porting gedit to gio. This first phase includes
+	small pieces of gnome-vfs and libgnomeui to be ported to gio. This
+	includes mime type information, looking up icons, handling uri's
+	and replacing gnome-vfs types like GnomeVFSFileSize.
+	
 2008-07-31  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	Bug 539581 – GEdit segfaults when using the FileBrowser plugin

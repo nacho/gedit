@@ -139,13 +139,21 @@ gboolean	 gedit_utils_get_glade_widgets		(const gchar  *filename,
 							 const gchar  *widget_name,
 							 ...) G_GNUC_NULL_TERMINATED;
 
+gboolean         gedit_utils_file_has_parent            (GFile *gfile);
+
 /* Return NULL if str is not a valid URI and/or filename */
 gchar		*gedit_utils_make_canonical_uri_from_shell_arg
 							(const gchar *str);
 		
-/* Like gnome_vfs_format_uri_for_display but removes the password from the 
- * resulting string */
-gchar		*gedit_utils_format_uri_for_display 	(const gchar *uri);
+gchar		*gedit_utils_uri_for_display 	        (const gchar *uri);
+gchar           *gedit_utils_basename_for_display	(const gchar *uri);
+gboolean	 gedit_utils_decode_uri 		(const gchar *uri,
+							 gchar **scheme,
+							 gchar **user,
+							 gchar **port,
+							 gchar **host,
+							 gchar **path);
+
 
 /* Turns data from a drop into a list of well formatted uris */
 gchar 	       **gedit_utils_drop_get_uris		(GtkSelectionData *selection_data);

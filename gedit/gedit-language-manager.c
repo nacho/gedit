@@ -177,15 +177,7 @@ gedit_language_manager_get_language_from_mime_type (GtkSourceLanguageManager *lm
 
 		for (i = 0; mime_types[i] != NULL; ++i)
 		{
-			GnomeVFSMimeEquivalence res;
-
-			/* Use gnome_vfs_mime_type_get_equivalence instead of
-			 * strcmp, to take care of mime-types inheritance
-			 * (see bug #324191) */
-			res = gnome_vfs_mime_type_get_equivalence (mime_type, 
-								   mime_types[i]);
-
-			if (res == GNOME_VFS_MIME_IDENTICAL)
+			if (g_content_type_equals(mime_type, mime_types[i]))
 			{
 				/* If the mime-type of lang is identical to "mime-type" then
 				   return lang */
@@ -197,7 +189,7 @@ gedit_language_manager_get_language_from_mime_type (GtkSourceLanguageManager *lm
 
 				break;
 			}
-			else if ((res == GNOME_VFS_MIME_PARENT) && (parent == NULL))
+			else if (parent == NULL && g_content_type_is_a (mime_type, mime_types[i]))
 			{
 				/* If the mime-type of lang is a parent of "mime-type" then
 				   remember it. We will return it if we don't find

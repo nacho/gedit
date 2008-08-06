@@ -433,7 +433,7 @@ gedit_document_loader_get_mtime (GeditDocumentLoader *loader)
 }
 
 /* Returns 0 if file size is unknown */
-GnomeVFSFileSize
+goffset
 gedit_document_loader_get_file_size (GeditDocumentLoader *loader)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), 0);
@@ -441,7 +441,7 @@ gedit_document_loader_get_file_size (GeditDocumentLoader *loader)
 	return GEDIT_DOCUMENT_LOADER_GET_CLASS (loader)->get_file_size (loader);
 }
 
-GnomeVFSFileSize
+goffset
 gedit_document_loader_get_bytes_read (GeditDocumentLoader *loader)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), 0);

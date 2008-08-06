@@ -38,7 +38,6 @@
 #include <stdlib.h>
 
 #include <glib/gi18n.h>
-#include <libgnomevfs/gnome-vfs.h>
 #include <gtksourceview/gtksourceiter.h>
 
 #include "gedit-prefs-manager-app.h"
@@ -107,8 +106,6 @@ struct _GeditDocumentPrivate
 
 	gchar	    *uri;
 	gint 	     untitled_number;
-
-	GnomeVFSURI *vfs_uri;
 
 	const GeditEncoding *encoding;
 
@@ -277,9 +274,6 @@ gedit_document_finalize (GObject *object)
 	}
 
 	g_free (doc->priv->uri);
-	if (doc->priv->vfs_uri != NULL)
-		gnome_vfs_uri_unref (doc->priv->vfs_uri);
-
 	g_free (doc->priv->mime_type);
 	g_free (doc->priv->search_text);
 
@@ -688,7 +682,6 @@ gedit_document_init (GeditDocument *doc)
 	doc->priv = GEDIT_DOCUMENT_GET_PRIVATE (doc);
 
 	doc->priv->uri = NULL;
-	doc->priv->vfs_uri = NULL;
 	doc->priv->untitled_number = get_untitled_number ();
 
 	doc->priv->mime_type = g_strdup ("text/plain");
@@ -760,13 +753,6 @@ set_uri (GeditDocument *doc,
 		g_free (doc->priv->uri);
 		doc->priv->uri = g_strdup (uri);
 
-		if (doc->priv->vfs_uri != NULL)
-			gnome_vfs_uri_unref (doc->priv->vfs_uri);
-
-		/* Note: vfs_uri may be NULL for some valid but
-		 * unsupported uris */
-		doc->priv->vfs_uri = gnome_vfs_uri_new (uri);
-
 		if (doc->priv->untitled_number > 0)
 		{
 			release_untitled_number (doc->priv->untitled_number);
@@ -781,23 +767,16 @@ set_uri (GeditDocument *doc,
 	}
 	else
 	{
-		gchar *base_name = NULL;
-
-		/* Guess the mime type from file extension or fallback to "text/plain" */
-		if (doc->priv->vfs_uri != NULL)
-			base_name = gnome_vfs_uri_extract_short_path_name (doc->priv->vfs_uri);
-		if (base_name != NULL)
+		if (doc->priv->uri != NULL)
 		{
 			const gchar *detected_mime;
 
-			detected_mime = gnome_vfs_get_mime_type_for_name (base_name);
-			if (detected_mime == NULL ||
-			    strcmp (GNOME_VFS_MIME_TYPE_UNKNOWN, detected_mime) == 0)
+			detected_mime = g_content_type_guess (doc->priv->uri, NULL, 0, NULL);
+
+			if (detected_mime == NULL || g_content_type_is_unknown (detected_mime))
 				detected_mime = "text/plain";
 
 			doc->priv->mime_type = g_strdup (detected_mime);
-
-			g_free (base_name);
 		}
 		else
 		{
@@ -879,89 +858,8 @@ gedit_document_get_uri_for_display (GeditDocument *doc)
 	if (doc->priv->uri == NULL)
 		return g_strdup_printf (_("Unsaved Document %d"),
 					doc->priv->untitled_number);
-	else if (doc->priv->vfs_uri == NULL)
-		return gnome_vfs_format_uri_for_display (doc->priv->uri);
 	else
-	{	
-		gchar *name;
-		gchar *uri_for_display;
-		
-		name = gnome_vfs_uri_to_string (doc->priv->vfs_uri, GNOME_VFS_URI_HIDE_PASSWORD);
-		g_return_val_if_fail (name != NULL, gnome_vfs_format_uri_for_display (doc->priv->uri));
-		
-		uri_for_display = gnome_vfs_format_uri_for_display (name);
-		g_free (name);
-		
-		return uri_for_display;
-	}
-}
-
-/* move to gedit-utils? */
-static gchar *
-get_uri_shortname_for_display (GnomeVFSURI *uri)
-{
-	gchar *name;	
-	gboolean  validated;
-
-	validated = FALSE;
-
-	name = gnome_vfs_uri_extract_short_name (uri);
-	
-	if (name == NULL)
-	{
-		name = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_PASSWORD);
-	}
-	else if (g_ascii_strcasecmp (uri->method_string, "file") == 0)
-	{
-		gchar *text_uri;
-		gchar *local_file;
-		text_uri = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_PASSWORD);
-		local_file = gnome_vfs_get_local_path_from_uri (text_uri);
-
-		if (local_file != NULL)
-		{
-			g_free (name);
-			name = g_filename_display_basename (local_file);
-			validated = TRUE;
-		}
-
-		g_free (local_file);
-		g_free (text_uri);
-	} 
-	else if (!gnome_vfs_uri_has_parent (uri)) 
-	{
-		const gchar *method;
-
-		method = uri->method_string;
-
-		if (name == NULL ||
-		    strcmp (name, GNOME_VFS_URI_PATH_STR) == 0) 
-		{
-			g_free (name);
-			name = g_strdup (method);
-		} 
-		/*
-		else 
-		{
-			gchar *tmp;
-
-			tmp = name;
-			name = g_strdup_printf ("%s: %s", method, name);
-			g_free (tmp);
-		}
-		*/
-	}
-
-	if (!validated && !g_utf8_validate (name, -1, NULL)) 
-	{
-		gchar *utf8_name;
-
-		utf8_name = gedit_utils_make_valid_utf8 (name);
-		g_free (name);
-		name = utf8_name;
-	}
-
-	return name;
+		return gedit_utils_uri_for_display (doc->priv->uri);
 }
 
 /* Never returns NULL */
@@ -973,10 +871,8 @@ gedit_document_get_short_name_for_display (GeditDocument *doc)
 	if (doc->priv->uri == NULL)
 		return g_strdup_printf (_("Unsaved Document %d"),
 					doc->priv->untitled_number);	      
-	else if (doc->priv->vfs_uri == NULL)
-		return g_strdup (doc->priv->uri);
 	else
-		return get_uri_shortname_for_display (doc->priv->vfs_uri);
+		return gedit_utils_basename_for_display (doc->priv->uri);
 }
 
 /* Never returns NULL */
@@ -1028,9 +924,8 @@ gedit_document_get_readonly (GeditDocument *doc)
 gboolean
 _gedit_document_check_externally_modified (GeditDocument *doc)
 {
-	GnomeVFSFileInfo *info;
-	GnomeVFSResult result;
-	gboolean res = FALSE;
+	GFile *gfile;
+	GFileInfo *info;
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 
@@ -1039,27 +934,20 @@ _gedit_document_check_externally_modified (GeditDocument *doc)
 		return FALSE;
 	}
 
-	info = gnome_vfs_file_info_new ();
-
-	result = gnome_vfs_get_file_info_uri (doc->priv->vfs_uri,
-					      info,
-					      GNOME_VFS_FILE_INFO_DEFAULT|
-					      GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-	if (result != GNOME_VFS_OK)
+	gfile = g_file_new_for_uri (doc->priv->uri);
+	info = g_file_query_info (gfile, G_FILE_ATTRIBUTE_TIME_MODIFIED, G_FILE_QUERY_INFO_NONE, NULL, NULL);
+	g_object_unref (gfile);
+	
+	if (info == NULL)
 	{
-		gnome_vfs_file_info_unref (info);
-
 		return FALSE;
 	}
 
-	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MTIME)
-	{
-		res = info->mtime > doc->priv->mtime;
-	}
-
-	gnome_vfs_file_info_unref (info);
-
-	return res;
+	GTimeVal timeval;
+	g_file_info_get_modification_time (info, &timeval);
+	g_object_unref (info);
+	
+	return timeval.tv_sec > doc->priv->mtime;
 }
 
 static void
@@ -1178,8 +1066,8 @@ document_loader_loading (GeditDocumentLoader *loader,
 	}
 	else
 	{
-		GnomeVFSFileSize size;
-		GnomeVFSFileSize read;
+		goffset size;
+		goffset read;
 
 		size = gedit_document_loader_get_file_size (loader);
 		read = gedit_document_loader_get_bytes_read (loader);
@@ -1299,8 +1187,8 @@ document_saver_saving (GeditDocumentSaver *saver,
 	}
 	else
 	{
-		GnomeVFSFileSize size = 0;
-		GnomeVFSFileSize written = 0;
+		goffset size = 0;
+		goffset written = 0;
 
 		size = gedit_document_saver_get_file_size (saver);
 		written = gedit_document_saver_get_bytes_written (saver);
@@ -1441,10 +1329,7 @@ gedit_document_get_deleted (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 
-	if (doc->priv->uri == NULL || doc->priv->vfs_uri == NULL)
-		return FALSE;
-		
-	return !gnome_vfs_uri_exists (doc->priv->vfs_uri);
+	return doc->priv->uri && !gedit_utils_uri_exists (doc->priv->uri);
 }
 
 /*
