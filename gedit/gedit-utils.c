@@ -1170,35 +1170,38 @@ gedit_utils_basename_for_display (gchar const *uri)
 {
 	gchar *name;
 	GFile *gfile;
-	GFileInfo *info;
 	gchar *hn;
 	
 	g_return_val_if_fail (uri != NULL, NULL);
 	
 	gfile = g_file_new_for_uri (uri);
 	
-	/* First, try to query the display name */
-	info = g_file_query_info (gfile,
-				  G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME, 
-				  G_FILE_QUERY_INFO_NONE, 
-				  NULL, 
-				  NULL);
+	/* First, try to query the display name, but only on local files */
+	if (g_file_has_uri_scheme (gfile, "file"))
+	{
+		GFileInfo *info;
+		info = g_file_query_info (gfile,
+					  G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME, 
+					  G_FILE_QUERY_INFO_NONE, 
+					  NULL, 
+					  NULL);
 
-	if (info)
-	{
-		/* Simply get the display name to use as the basename */
-		name = g_strdup (g_file_info_get_display_name (info));
-		g_object_unref (info);
-	}
-	else if (g_file_has_uri_scheme (gfile, "file"))
-	{
-		/* This is a local file, and therefore we will use
-		 * g_filename_display_basename on the local path */
-		gchar *local_path;
+		if (info)
+		{
+			/* Simply get the display name to use as the basename */
+			name = g_strdup (g_file_info_get_display_name (info));
+			g_object_unref (info);
+		}
+		else
+		{
+			/* This is a local file, and therefore we will use
+			 * g_filename_display_basename on the local path */
+			gchar *local_path;
 		
-		local_path = g_file_get_path (gfile);
-		name = g_filename_display_basename (local_path);
-		g_free (local_path);
+			local_path = g_file_get_path (gfile);
+			name = g_filename_display_basename (local_path);
+			g_free (local_path);
+		}
 	}
 	else if (gedit_utils_file_has_parent (gfile) || !gedit_utils_decode_uri (uri, NULL, NULL, &hn, NULL, NULL))
 	{
