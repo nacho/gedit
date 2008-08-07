@@ -2510,6 +2510,34 @@ typedef struct {
 	GCancellable * cancellable;
 } MountInfo;
 
+
+static void
+handle_root_error (GeditFileBrowserStore * model, GError *error)
+{
+	FileBrowserNode * root;
+
+	g_signal_emit (model, 
+		       model_signals[ERROR], 
+		       0, 
+		       GEDIT_FILE_BROWSER_ERROR_SET_ROOT,
+		       error->message);
+
+	g_error_free (error);
+	
+	/* Set the virtual root to the root */
+	root = model->priv->root;
+	model->priv->virtual_root = root;
+	
+	/* Set the root to be loaded */
+	root->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_LOADED;
+	
+	/* Check the dummy */
+	model_check_dummy (model, root);
+	
+	g_object_notify (G_OBJECT (model), "root");
+	g_object_notify (G_OBJECT (model), "virtual-root");
+}
+
 static void
 mount_cb (GFile * file, 
 	  GAsyncResult * res, 
@@ -2517,7 +2545,6 @@ mount_cb (GFile * file,
 {
 	GFile * mounted_on;
 	GError * error = NULL;
-	FileBrowserNode * root;
 	GeditFileBrowserStore * model = mount_info->model;
 	
 	mounted_on = g_file_mount_mountable_finish (file, res, &error);
@@ -2537,26 +2564,7 @@ mount_cb (GFile * file,
 	}
 	else if (error->code != G_IO_ERROR_CANCELLED)
 	{
-		g_signal_emit (model, 
-			       model_signals[ERROR], 
-			       0, 
-			       GEDIT_FILE_BROWSER_ERROR_SET_ROOT,
-			       error->message);
-
-		g_error_free (error);
-		
-		/* Set the virtual root to the root */
-		root = model->priv->root;
-		model->priv->virtual_root = root;
-		
-		/* Set the root to be loaded */
-		root->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_LOADED;
-		
-		/* Check the dummy */
-		model_check_dummy (model, root);
-		
-		g_object_notify (G_OBJECT (model), "root");
-		g_object_notify (G_OBJECT (model), "virtual-root");
+		handle_root_error (model, error);
 	}
 	
 	g_object_unref (mount_info->operation);
@@ -2598,10 +2606,12 @@ model_mount_root (GeditFileBrowserStore * model, gchar const * virtual_root)
 						       mount_info->cancellable,
 						       (GAsyncReadyCallback)mount_cb,
 						       mount_info);
-						
+			g_error_free (error);
 		}
-		
-		g_error_free (error);
+		else
+		{
+			handle_root_error (model, error);
+		}
 	} else {
 		g_object_unref (info);
 		
