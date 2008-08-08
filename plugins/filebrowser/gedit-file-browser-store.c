@@ -51,7 +51,8 @@
 				 G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN "," \
 			 	 G_FILE_ATTRIBUTE_STANDARD_IS_BACKUP "," \
 				 G_FILE_ATTRIBUTE_STANDARD_NAME "," \
-				 G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE
+				 G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE "," \
+				 G_FILE_ATTRIBUTE_STANDARD_ICON
 
 typedef struct _FileBrowserNode    FileBrowserNode;
 typedef struct _FileBrowserNodeDir FileBrowserNodeDir;
@@ -1550,7 +1551,8 @@ file_browser_node_unload (GeditFileBrowserStore * model,
 
 static void
 model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
-			     FileBrowserNode * node)
+			     FileBrowserNode * node,
+			     GFileInfo * info)
 {
 	GtkIconTheme *theme;
 	GdkPixbuf *icon;
@@ -1562,7 +1564,11 @@ model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
 		return;
 
 	theme = gtk_icon_theme_get_default ();
-	icon = gedit_file_browser_utils_pixbuf_from_file (node->file, GTK_ICON_SIZE_MENU);
+	
+	if (info)
+		icon = gedit_file_browser_utils_pixbuf_from_icon (g_file_info_get_icon (info), GTK_ICON_SIZE_MENU);
+	else
+		icon = gedit_file_browser_utils_pixbuf_from_file (node->file, GTK_ICON_SIZE_MENU);
 
 	if (node->icon)
 		g_object_unref (node->icon);
@@ -1605,7 +1611,8 @@ model_recomposite_icon (GeditFileBrowserStore * tree_model,
 
 	model_recomposite_icon_real (tree_model,
 				     (FileBrowserNode *) (iter->
-							  user_data));
+							  user_data),
+				     NULL);
 }
 
 static FileBrowserNode *
@@ -1823,10 +1830,10 @@ file_browser_node_set_from_info (GeditFileBrowserStore * model,
 			node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_TEXT;		
 	}
 	
+	model_recomposite_icon_real (model, node, info);
+
 	if (free_info)
 		g_object_unref (info);
-
-	model_recomposite_icon_real (model, node);
 
 	if (isadded) {
 		path = gedit_file_browser_store_get_path_real (model, node);
