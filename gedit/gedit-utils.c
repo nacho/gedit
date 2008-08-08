@@ -1208,11 +1208,15 @@ gedit_utils_basename_for_display (gchar const *uri)
 		/* For remote files with a parent (so not just http://foo.com)
 		   or remote file for which the decoding of the host name fails,
 		   use the _parse_name and take basename of that */
-		 gchar *parse_name;
+		gchar *parse_name;
+		gchar *base;
 
-		 parse_name = g_file_get_parse_name (gfile);
-		 name = g_path_get_basename (parse_name);
-		 g_free (parse_name);
+		parse_name = g_file_get_parse_name (gfile);
+		base = g_filename_display_basename (parse_name);
+		name = g_uri_unescape_string (base, NULL);
+		
+		g_free (base);		
+		g_free (parse_name);
 	}
 	else
 	{
