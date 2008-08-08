@@ -1256,15 +1256,17 @@ gchar *
 gedit_utils_uri_for_display (const gchar *uri)
 {
 	GFile *gfile;
-	gchar *ret;
+	gchar *parse_name;
+	gchar *unescape;
 	
 	gfile = g_file_new_for_uri (uri);
 	
-	/* CHECK: does this actually do what we want? */
-	ret = g_file_get_parse_name (gfile);
+	parse_name = g_file_get_parse_name (gfile);
+	unescape = g_uri_unescape_string (parse_name, NULL);
+	g_free (parse_name);
 	
 	g_object_unref (gfile);
-	return ret;
+	return unescape;
 }
 
 /**
