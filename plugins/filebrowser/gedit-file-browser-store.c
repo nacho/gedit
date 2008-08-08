@@ -2521,8 +2521,6 @@ handle_root_error (GeditFileBrowserStore * model, GError *error)
 		       0, 
 		       GEDIT_FILE_BROWSER_ERROR_SET_ROOT,
 		       error->message);
-
-	g_error_free (error);
 	
 	/* Set the virtual root to the root */
 	root = model->priv->root;
@@ -2543,11 +2541,11 @@ mount_cb (GFile * file,
 	  GAsyncResult * res, 
 	  MountInfo * mount_info)
 {
-	GFile * mounted_on;
+	gboolean mounted;
 	GError * error = NULL;
 	GeditFileBrowserStore * model = mount_info->model;
 	
-	mounted_on = g_file_mount_mountable_finish (file, res, &error);
+	mounted = g_file_mount_enclosing_volume_finish (file, res, &error);
 	
 	if (g_cancellable_is_cancelled (mount_info->cancellable))
 	{
@@ -2557,16 +2555,18 @@ mount_cb (GFile * file,
 		// Reset because it might be reused?
 		g_cancellable_reset (mount_info->cancellable);
 	}
-	else if (mounted_on)
+	else if (mounted)
 	{
 		model_root_mounted (model, mount_info->virtual_root);
-		g_object_unref (mounted_on);
 	}
 	else if (error->code != G_IO_ERROR_CANCELLED)
 	{
 		handle_root_error (model, error);
 	}
 	
+	if (error)
+		g_error_free (error);
+
 	g_object_unref (mount_info->operation);
 	g_object_unref (mount_info->cancellable);
 	g_free (mount_info->virtual_root);
@@ -2606,12 +2606,13 @@ model_mount_root (GeditFileBrowserStore * model, gchar const * virtual_root)
 						       mount_info->cancellable,
 						       (GAsyncReadyCallback)mount_cb,
 						       mount_info);
-			g_error_free (error);
 		}
 		else
 		{
 			handle_root_error (model, error);
 		}
+		
+		g_error_free (error);
 	} else {
 		g_object_unref (info);
 		
