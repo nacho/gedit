@@ -121,7 +121,11 @@ gedit_style_scheme_dialog_init (GeditStyleSchemeDialog *dlg)
 	GtkWidget *error_widget;
 	GtkWidget *main_vbox;
 	gboolean ret;
-
+	gchar *root_objects[] = {
+		"contents",
+		NULL
+	};
+	
 	gedit_debug (DEBUG_PREFS);
 
 	dlg->priv = GEDIT_STYLE_SCHEME_DIALOG_GET_PRIVATE (dlg);
@@ -143,9 +147,8 @@ gedit_style_scheme_dialog_init (GeditStyleSchemeDialog *dlg)
 			  G_CALLBACK (dialog_response_handler),
 			  NULL);
 
-	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "gedit-style-scheme-dialog.glade",
-		"contents",
-
+	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "gedit-style-scheme-dialog.ui",
+		root_objects,
 		&error_widget,
 		
 		"contents", &main_vbox,

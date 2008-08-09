@@ -42,7 +42,7 @@
 #include "gedit-file-browser-enum-types.h"
 
 #define GEDIT_FILE_BROWSER_WIDGET_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_FILE_BROWSER_WIDGET, GeditFileBrowserWidgetPrivate))
-#define XML_UI_FILE GEDIT_FILE_BROWSER_DIR "/gedit-file-browser-widget-ui.xml"
+#define XML_UI_FILE GEDIT_UIDIR "/gedit-file-browser-widget-ui.xml"
 #define LOCATION_DATA_KEY "gedit-file-browser-widget-location"
 
 enum 

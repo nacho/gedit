@@ -1,8 +1,6 @@
 # filebrowser
 
 plugindir = $(libdir)/gedit-2/plugins
-filebrowserdir = $(datadir)/gedit-2/plugins/filebrowser
-filebrowser_DATA = gedit-file-browser-widget-ui.xml
 
 INCLUDES = \
 	-I$(top_srcdir) 						\
@@ -10,7 +8,7 @@ INCLUDES = \
 	$(WARN_CFLAGS)							\
 	$(DISABLE_DEPRECATED_CFLAGS)					\
 	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 	\
-	-DGEDIT_FILE_BROWSER_DIR=\""$(filebrowserdir)/"\"
+	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/plugins/filebrowser/"\"
 
 BUILT_SOURCES = \
 	gedit-file-browser-enum-types.h		\
@@ -42,9 +40,9 @@ libfilebrowser_la_SOURCES = \
 libfilebrowser_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libfilebrowser_la_LIBADD = $(GEDIT_LIBS)
 
-# Glade files (if you use glade for your plugin, list those files here)
-gladedir = $(datadir)/gedit-2/glade
-glade_DATA =
+# UI files (if you use ui for your plugin, list those files here)
+uidir = $(datadir)/gedit-2/plugins/filebrowser
+ui_DATA = gedit-file-browser-widget-ui.xml
 
 plugin_in_files = filebrowser.gedit-plugin.desktop.in
 
@@ -85,7 +83,7 @@ endif
 
 
 EXTRA_DIST = \
-	$(filebrowser_DATA)				\
+	$(ui_DATA)					\
 	$(plugin_in_files)				\
 	$(schemas_in_files)				\
 	gedit-file-browser-enum-types.h.template	\
@@ -95,12 +93,10 @@ EXTRA_DIST = \
 
 CLEANFILES = \
 	$(plugin_DATA)		\
-	$(glade_DATA) 		\
 	$(schemas_DATA)		\
 	$(BUILT_SOURCES)
 
 DISTCLEANFILES = \
 	$(plugin_DATA)		\
-	$(glade_DATA)		\
 	$(schemas_DATA)		\
 	$(BUILT_SOURCES)

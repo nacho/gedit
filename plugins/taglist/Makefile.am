@@ -18,7 +18,6 @@ INCLUDES = 							\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 		\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\
 	-DGEDIT_TAGLIST_DIR=\""$(taglistdir)/"\"
 
 plugin_LTLIBRARIES = libtaglist.la

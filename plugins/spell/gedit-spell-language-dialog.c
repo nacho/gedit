@@ -122,7 +122,11 @@ gedit_spell_language_dialog_init (GeditSpellLanguageDialog *dlg)
 	gboolean ret;
 	GtkCellRenderer *cell;
 	GtkTreeViewColumn *column;
-
+	gchar *root_objects[] = {
+		"content",
+		NULL
+	};
+	
 	gtk_dialog_add_buttons (GTK_DIALOG (dlg),
 				GTK_STOCK_CANCEL,
 				GTK_RESPONSE_CANCEL,
@@ -148,12 +152,13 @@ gedit_spell_language_dialog_init (GeditSpellLanguageDialog *dlg)
 			  G_CALLBACK (dialog_response_handler),
 			  NULL);
 
-	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "languages-dialog.glade2",
-					     "content",
-					     &error_widget,
-					     "content", &content,
-					     "languages_treeview", &dlg->languages_treeview,
-					     NULL);
+	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "languages-dialog.ui",
+					  root_objects,	
+					  &error_widget,
+					  
+					  "content", &content,
+					  "languages_treeview", &dlg->languages_treeview,
+					  NULL);
 
 	if (!ret)
 	{

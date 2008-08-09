@@ -95,24 +95,24 @@ get_docinfo_dialog (GeditWindow *window,
 
 	dialog = g_new (DocInfoDialog, 1);
 
-	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "docinfo.glade2",
-					     "dialog",
-					     &error_widget,
-					     "dialog", &dialog->dialog,
-					     "docinfo_dialog_content", &content,
-					     "file_name_label", &dialog->file_name_label,
-					     "words_label", &dialog->words_label,
-					     "bytes_label", &dialog->bytes_label,
-					     "lines_label", &dialog->lines_label,
-					     "chars_label", &dialog->chars_label,
-					     "chars_ns_label", &dialog->chars_ns_label,
-					     "selection_vbox", &dialog->selection_vbox,
-					     "selected_words_label", &dialog->selected_words_label,
-					     "selected_bytes_label", &dialog->selected_bytes_label,
-					     "selected_lines_label", &dialog->selected_lines_label,
-					     "selected_chars_label", &dialog->selected_chars_label,
-					     "selected_chars_ns_label", &dialog->selected_chars_ns_label,
-					     NULL);
+	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "docinfo.ui",
+					  NULL,
+					  &error_widget,
+					  "dialog", &dialog->dialog,
+					  "docinfo_dialog_content", &content,
+					  "file_name_label", &dialog->file_name_label,
+					  "words_label", &dialog->words_label,
+					  "bytes_label", &dialog->bytes_label,
+					  "lines_label", &dialog->lines_label,
+					  "chars_label", &dialog->chars_label,
+					  "chars_ns_label", &dialog->chars_ns_label,
+					  "selection_vbox", &dialog->selection_vbox,
+					  "selected_words_label", &dialog->selected_words_label,
+					  "selected_bytes_label", &dialog->selected_bytes_label,
+					  "selected_lines_label", &dialog->selected_lines_label,
+					  "selected_chars_label", &dialog->selected_chars_label,
+					  "selected_chars_ns_label", &dialog->selected_chars_ns_label,
+					  NULL);
 
 	if (!ret)
 	{

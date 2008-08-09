@@ -6,5 +6,5 @@ plugin_PYTHON =		\
 
 plugindir = $(libdir)/gedit-2/plugins/pythonconsole
 
-CLEANFILES = *.bak *.gladep
-DISTCLEANFILES = *.bak *.gladep
+CLEANFILES =
+DISTCLEANFILES =

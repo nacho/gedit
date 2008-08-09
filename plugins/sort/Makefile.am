@@ -8,7 +8,7 @@ INCLUDES = \
 	$(DISABLE_DEPRECATED_CFLAGS)			\
 	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
+	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/plugins/sort/"\"
 
 plugin_LTLIBRARIES = libsort.la
 
@@ -19,8 +19,8 @@ libsort_la_SOURCES = \
 libsort_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libsort_la_LIBADD  = $(GEDIT_LIBS)
 
-gladedir = $(datadir)/gedit-2/glade
-glade_DATA = sort.glade2
+uidir = $(datadir)/gedit-2/plugins/sort
+ui_DATA = sort.ui
 
 plugin_in_files = sort.gedit-plugin.desktop.in
 
@@ -28,7 +28,7 @@ plugin_in_files = sort.gedit-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-EXTRA_DIST = $(glade_DATA) $(plugin_in_files)
+EXTRA_DIST = $(ui_DATA) $(plugin_in_files)
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)

@@ -14,7 +14,7 @@ INCLUDES = 							\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 		\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
+	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/plugins/spell/"\"
 
 plugin_LTLIBRARIES = libspell.la
 
@@ -36,8 +36,8 @@ libspell_la_SOURCES = \
 libspell_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS) 
 libspell_la_LIBADD  = $(GEDIT_LIBS) $(ENCHANT_LIBS)
 
-gladedir = $(datadir)/gedit-2/glade
-glade_DATA = spell-checker.glade2 languages-dialog.glade2
+uidir = $(datadir)/gedit-2/plugins/spell
+ui_DATA = spell-checker.ui languages-dialog.ui
 
 gedit-spell-checker-dialog-marshal.h: gedit-spell-checker-dialog-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@
@@ -53,7 +53,7 @@ plugin_in_files = spell.gedit-plugin.desktop.in
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
 EXTRA_DIST = 					\
-	$(glade_DATA)				\
+	$(ui_DATA)				\
 	$(plugin_in_files)			\
 	gedit-spell-checker-dialog-marshal.list 
 

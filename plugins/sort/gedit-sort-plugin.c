@@ -129,15 +129,15 @@ get_sort_dialog (GtkWindow *parent)
 
 	dialog = g_new (SortDialog, 1);
 
-	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "sort.glade2",
-					     "sort_dialog",
-					     &error_widget,
-					     "sort_dialog", &dialog->dialog,
-					     "reverse_order_checkbutton", &dialog->reverse_order_checkbutton,
-					     "col_num_spinbutton", &dialog->col_num_spinbutton,
-					     "ignore_case_checkbutton", &dialog->ignore_case_checkbutton,
-					     "remove_dups_checkbutton", &dialog->remove_dups_checkbutton,
-					     NULL);
+	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "sort.ui",
+					  NULL,
+					  &error_widget,
+					  "sort_dialog", &dialog->dialog,
+					  "reverse_order_checkbutton", &dialog->reverse_order_checkbutton,
+					  "col_num_spinbutton", &dialog->col_num_spinbutton,
+					  "ignore_case_checkbutton", &dialog->ignore_case_checkbutton,
+					  "remove_dups_checkbutton", &dialog->remove_dups_checkbutton,
+					  NULL);
 
 	if (!ret)
 	{

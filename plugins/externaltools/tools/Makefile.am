@@ -9,7 +9,9 @@ plugin_PYTHON =		\
 	manager.py	\
 	outputpanel.py
 
-plugin_DATA = tools.glade
+plugin_DATA = tools.ui \
+	outputpanel.ui
+
 plugindir = $(libdir)/gedit-2/plugins/externaltools
 
 EXTRA_DIST = $(plugin_DATA)

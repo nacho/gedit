@@ -21,45 +21,19 @@ __all__ = ('Manager', )
 import gedit
 import gtk
 import gtksourceview2 as gsv
-from gtk import glade
 import os.path
 from library import *
 from functions import *
 import md5
 
 class Manager(object):
-    GLADE_FILE = os.path.join(os.path.dirname(__file__), "tools.glade")
+    UI_FILE = os.path.join(os.path.dirname(__file__), "tools.ui")
 
     LABEL_COLUMN = 0 # For Combo and Tree
     NODE_COLUMN  = 1 # For Tree only
     NAME_COLUMN = 1  # For Combo only
 
     __shared_state = None
-
-    combobox_items = {
-        'input': (
-            ('nothing'  , _('Nothing')),
-            ('document' , _('Current document')),
-            ('selection', _('Current selection')),
-            ('line'     , _('Current line')),
-            ('word'     , _('Current word'))
-        ),
-        'output': (
-            ('output-panel'     , _('Display in bottom pane')),
-            ('new-document'     , _('Create new document')),
-            ('append-document'  , _('Append to current document')),
-            ('replace-document' , _('Replace current document')),
-            ('replace-selection', _('Replace current selection')),
-            ('insert'           , _('Insert at cursor position'))
-        ),
-        'applicability': (
-            ('all'     , _('All documents')),
-            ('titled'  , _('All documents except untitled ones')),
-            ('local'   , _('Local files only')),
-            ('remote'  , _('Remote files only')),
-            ('untitled', _('Untitled documents only'))
-        )
-    }
 
     _instance = None
 
@@ -79,12 +53,12 @@ class Manager(object):
             'on_accelerator_focus_out'        : self.on_accelerator_focus_out
         }
 
-        # Load the "main-window" widget from the glade file.
-        glade.set_custom_handler(self.custom_handler)
-        self.ui = glade.XML(self.GLADE_FILE, 'tool-manager-dialog')
-        self.ui.signal_autoconnect(callbacks)
-        self.dialog = self.ui.get_widget('tool-manager-dialog')
-        self.view = self.ui.get_widget('view')
+        # Load the "main-window" widget from the ui file.
+        self.ui = gtk.Builder()
+        self.ui.add_from_file(self.UI_FILE)
+        self.ui.connect_signals(callbacks)
+        self.dialog = self.ui.get_object('tool-manager-dialog')
+        self.view = self.ui.get_object('view')
         for name in ['input', 'output', 'applicability']:
             self.__init_combobox(name)
         self.__init_tools_model()
@@ -119,27 +93,11 @@ class Manager(object):
 
     def __init_combobox(self, name):
         combo = self[name]
-        model = gtk.ListStore(str, str)
-        combo.set_model(model)
-
-        for name, label in Manager.combobox_items[name]:
-            model.append((label, name))
         combo.set_active(0)
 
-    # Convenience function to get a widget from its name
+    # Convenience function to get an object from its name
     def __getitem__(self, key):
-        return self.ui.get_widget(key)
-
-    def custom_handler(self, xml, function_name, widget_name,
-                       str1, str2, int1 , int2):
-        if function_name == 'create_commands':
-            buf = gsv.Buffer()
-            view = gsv.View(buf)
-            view.set_wrap_mode(gtk.WRAP_WORD)
-            view.show()
-            return view
-        else:
-            return None
+        return self.ui.get_object(key)
 
     def set_active_by_name(self, combo_name, option_name):
         combo = self[combo_name]
@@ -194,9 +152,9 @@ class Manager(object):
         self['accelerator'].set_text('')
         self['commands'].get_buffer().set_text('')
 
-        self.set_active_by_name('input', Manager.combobox_items['input'][0][0])
-        self.set_active_by_name('output', Manager.combobox_items['output'][0][0])
-        self.set_active_by_name('applicability', Manager.combobox_items['applicability'][0][0])
+        for nm in ('input', 'output', 'applicability'):
+            self[nm].set_active(0)
+
         self['title'].set_label(_('Edit tool <i>%s</i>:') % '') # a bit ugly, but we're string frozen
     
     def fill_fields(self):
@@ -218,15 +176,14 @@ class Manager(object):
         else:
             buf.set_highlight_syntax(False)
 
-        self.set_active_by_name('input',
-                                default(node.input,
-                                        Manager.combobox_items['input'][0][0]))
-        self.set_active_by_name('output',
-                                default(node.output,
-                                        Manager.combobox_items['output'][0][0]))
-        self.set_active_by_name('applicability',
-                                default(node.applicability,
-                                        Manager.combobox_items['applicability'][0][0]))
+        for nm in ('input', 'output', 'applicability'):
+            model = self[nm].get_model()
+            piter = model.get_iter_first()
+            
+            self.set_active_by_name(nm,
+                                    default(node.__getattribute__(nm),
+                                    model.get_value(piter, self.NAME_COLUMN)))
+
         self['title'].set_label(_('Edit tool <i>%s</i>:') % node.name)
 
     def on_new_tool_button_clicked(self, button):
@@ -278,6 +235,7 @@ class Manager(object):
             self['title'].set_label(_('Edit tool <i>%s</i>:') % new_text)
 
     def on_view_selection_changed(self, selection, userdata):
+        print 'saving current tool'
         self.save_current_tool()
         piter, node = self.get_selected_tool()
 

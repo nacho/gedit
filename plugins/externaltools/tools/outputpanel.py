@@ -19,14 +19,13 @@
 __all__ = ('OutputPanel', 'UniqueById')
 
 import gtk, gedit
-from gtk import glade
 import pango
 import gobject
 import os
 from weakref import WeakKeyDictionary
 from capture import *
 
-GLADE_FILE = os.path.join(os.path.dirname(__file__), "tools.glade")
+UI_FILE = os.path.join(os.path.dirname(__file__), "outputpanel.ui")
 
 class UniqueById:
     __shared_state = WeakKeyDictionary()
@@ -52,8 +51,10 @@ class OutputPanel(UniqueById):
         }
 
         self.window = window
-        self.ui = glade.XML(GLADE_FILE, "output-panel")
-        self.ui.signal_autoconnect(callbacks)
+        self.ui = gtk.Builder()
+        self.ui.add_from_file(UI_FILE)
+        self.ui.connect_signals(callbacks)
+
         self.panel = self["output-panel"]
         self['view'].modify_font(pango.FontDescription('Monospace'))
 
@@ -69,8 +70,8 @@ class OutputPanel(UniqueById):
         self.process = None
 
     def __getitem__(self, key):
-        # Convenience function to get a widget from its name
-        return self.ui.get_widget(key)
+        # Convenience function to get an object from its name
+        return self.ui.get_object(key)
 
     def on_stop_clicked(self, widget, *args):
         if self.process is not None:

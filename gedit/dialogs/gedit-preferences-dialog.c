@@ -1062,7 +1062,14 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 {
 	GtkWidget *error_widget;
 	gboolean ret;
-
+	gchar *root_objects[] = {
+		"notebook",
+		"adjustment1",
+		"adjustment2",
+		"adjustment3",
+		NULL
+	};
+	
 	gedit_debug (DEBUG_PREFS);
 
 	dlg->priv = GEDIT_PREFERENCES_DIALOG_GET_PRIVATE (dlg);
@@ -1089,9 +1096,9 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 			  "response",
 			  G_CALLBACK (dialog_response_handler),
 			  NULL);
-
-	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "gedit-preferences-dialog.glade",
-		"notebook",
+	
+	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "gedit-preferences-dialog.ui",
+		root_objects,
 		&error_widget,
 
 		"notebook", &dlg->priv->notebook,
@@ -1126,6 +1133,7 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 		"uninstall_scheme_button", &dlg->priv->uninstall_scheme_button,
 
 		"plugin_manager_place_holder", &dlg->priv->plugin_manager_place_holder,
+
 		NULL);
 
 	if (!ret)

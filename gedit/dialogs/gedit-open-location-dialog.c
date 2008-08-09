@@ -82,7 +82,6 @@ response_handler (GeditOpenLocationDialog *dlg,
                   gint                     response_id,
                   gpointer                 data)
 {
-	gchar *uri;
 	const gchar *text;
 
 	switch (response_id)
@@ -118,6 +117,10 @@ gedit_open_location_dialog_init (GeditOpenLocationDialog *dlg)
 	GtkWidget *encoding_hbox;
 	GtkWidget *error_widget;
 	gboolean   ret;
+	gchar     *root_objects[] = {
+		"open_uri_dialog_content",
+		NULL
+	};
 
 	dlg->priv = GEDIT_OPEN_LOCATION_DIALOG_GET_PRIVATE (dlg);
 
@@ -151,15 +154,15 @@ gedit_open_location_dialog_init (GeditOpenLocationDialog *dlg)
 			  G_CALLBACK (response_handler),
 			  NULL);
 
-	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "gedit-open-location-dialog.glade",
-					     "open_uri_dialog_content",
-					     &error_widget,
-					     "open_uri_dialog_content", &content,
-					     "main_vbox", &vbox,
-					     "location_label", &location_label,
-					     "encoding_label", &encoding_label,
-					     "encoding_hbox", &encoding_hbox,
-					     NULL);
+	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "gedit-open-location-dialog.ui",
+					  root_objects,
+					  &error_widget,
+					  "open_uri_dialog_content", &content,
+					  "main_vbox", &vbox,
+					  "location_label", &location_label,
+					  "encoding_label", &encoding_label,
+					  "encoding_hbox", &encoding_hbox,
+					   NULL);
 
 	if (!ret)
 	{

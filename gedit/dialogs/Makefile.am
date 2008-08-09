@@ -1,4 +1,4 @@
-gladedir = $(datadir)/gedit-2/glade/
+uidir = $(datadir)/gedit-2/ui/
 
 INCLUDES = 							\
 	-I$(top_srcdir)						\
@@ -9,7 +9,7 @@ INCLUDES = 							\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 		\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	
+	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/ui/"\"	
 
 noinst_LTLIBRARIES = libdialogs.la
 
@@ -25,13 +25,12 @@ libdialogs_la_SOURCES = 			\
 	gedit-search-dialog.h			\
 	gedit-search-dialog.c
 
+ui_DATA =					\
+	gedit-encodings-dialog.ui		\
+	gedit-open-location-dialog.ui		\
+	gedit-preferences-dialog.ui		\
+	gedit-search-dialog.ui
 
-glade_DATA =					\
-	gedit-encodings-dialog.glade		\
-	gedit-open-location-dialog.glade	\
-	gedit-preferences-dialog.glade		\
-	gedit-search-dialog.glade
 
-
-EXTRA_DIST = $(glade_DATA) 
+EXTRA_DIST = $(ui_DATA) 
 

@@ -300,6 +300,10 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 	GtkWidget *error_widget;
 	int i;
 	gboolean ret;
+	gchar *root_objects[] = {
+		"encodings-dialog-contents",
+		NULL
+	};
 
 	dlg->priv = GEDIT_ENCODINGS_DIALOG_GET_PRIVATE (dlg);
 	
@@ -330,15 +334,15 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 			  G_CALLBACK (response_handler),
 			  dlg);
 
-	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "gedit-encodings-dialog.glade",
-					     "encodings-dialog-contents",
-					     &error_widget,
-					     "encodings-dialog-contents", &content,
-					     "add-button", &dlg->priv->add_button,
-					     "remove-button", &dlg->priv->remove_button,
-					     "available-treeview", &dlg->priv->available_treeview,
-					     "displayed-treeview", &dlg->priv->displayed_treeview,
-					     NULL);
+	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "gedit-encodings-dialog.ui",
+					  root_objects,
+					  &error_widget,
+					  "encodings-dialog-contents", &content,
+					  "add-button", &dlg->priv->add_button,
+					  "remove-button", &dlg->priv->remove_button,
+					  "available-treeview", &dlg->priv->available_treeview,
+					  "displayed-treeview", &dlg->priv->displayed_treeview,
+					  NULL);
 
 	if (!ret)
 	{

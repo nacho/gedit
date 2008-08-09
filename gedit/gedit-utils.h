@@ -133,10 +133,10 @@ void		 gedit_utils_activate_url		(GtkAboutDialog *about,
 
 gboolean	 gedit_utils_is_valid_uri		(const gchar *uri);
 
-gboolean	 gedit_utils_get_glade_widgets		(const gchar  *filename,
-							 const gchar  *root_node,
+gboolean	 gedit_utils_get_ui_objects		(const gchar  *filename,
+                                                         gchar       **root_objects,
 							 GtkWidget   **error_widget,
-							 const gchar  *widget_name,
+							 const gchar  *object_name,
 							 ...) G_GNUC_NULL_TERMINATED;
 
 gboolean         gedit_utils_file_has_parent            (GFile *gfile);

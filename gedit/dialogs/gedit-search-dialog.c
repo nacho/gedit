@@ -73,7 +73,7 @@ struct _GeditSearchDialogPrivate
 	GtkWidget *replace_button;
 	GtkWidget *replace_all_button;
 
-	gboolean   glade_error;
+	gboolean   ui_error;
 };
 
 G_DEFINE_TYPE(GeditSearchDialog, gedit_search_dialog, GTK_TYPE_DIALOG)
@@ -321,6 +321,10 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 	GtkWidget *content;
 	GtkWidget *error_widget;
 	gboolean ret;
+	gchar *root_objects[] = {
+		"search_dialog_content",
+		NULL
+	};
 
 	dlg->priv = GEDIT_SEARCH_DIALOG_GET_PRIVATE (dlg);
 
@@ -338,18 +342,18 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), 5);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);
 
-	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "gedit-search-dialog.glade",
-					     "search_dialog_content",
-					     &error_widget,
-					     "search_dialog_content", &content,
-					     "table", &dlg->priv->table,
-					     "search_label", &dlg->priv->search_label,
-					     "replace_with_label", &dlg->priv->replace_label,
-					     "match_case_checkbutton", &dlg->priv->match_case_checkbutton,
-					     "entire_word_checkbutton", &dlg->priv->entire_word_checkbutton,
-					     "search_backwards_checkbutton", &dlg->priv->backwards_checkbutton,
-					     "wrap_around_checkbutton", &dlg->priv->wrap_around_checkbutton,
-					     NULL);
+	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "gedit-search-dialog.ui",
+					  root_objects,
+					  &error_widget,
+					  "search_dialog_content", &content,
+					  "table", &dlg->priv->table,
+					  "search_label", &dlg->priv->search_label,
+					  "replace_with_label", &dlg->priv->replace_label,
+					  "match_case_checkbutton", &dlg->priv->match_case_checkbutton,
+					  "entire_word_checkbutton", &dlg->priv->entire_word_checkbutton,
+					  "search_backwards_checkbutton", &dlg->priv->backwards_checkbutton,
+					  "wrap_around_checkbutton", &dlg->priv->wrap_around_checkbutton,
+					  NULL);
 
 	if (!ret)
 	{
@@ -359,7 +363,7 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 					     error_widget);
 		gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);					     
 
-		dlg->priv->glade_error = TRUE;
+		dlg->priv->ui_error = TRUE;
 
 		return;
 	}
@@ -486,7 +490,7 @@ gedit_search_dialog_set_show_replace (GeditSearchDialog *dialog,
 {
 	g_return_if_fail (GEDIT_IS_SEARCH_DIALOG (dialog));
 
-	if (dialog->priv->glade_error)
+	if (dialog->priv->ui_error)
 		return;
 
 	dialog->priv->show_replace = show_replace != FALSE;

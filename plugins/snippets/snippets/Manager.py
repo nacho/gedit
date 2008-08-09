@@ -21,7 +21,6 @@ import shutil
 
 import gobject
 import gtk
-from gtk import glade
 from gtk import gdk
 import gtksourceview2 as gsv
 import pango
@@ -283,40 +282,10 @@ class Manager:
                         self.manager.set_search_path(dirs + self.manager.get_search_path())
                 
                 return self.manager
-
-        def custom_handler(self, xml, function_name, widget_name, str1, str2, \
-                        int1 , int2):
-                if function_name == 'create_source_view':
-                        # Create the buffer, view and reset to defaults
-                        buf = gedit.Document()
-
-                        source_view = gedit.View(buf)
-                        source_view.set_auto_indent(True)
-                        source_view.set_insert_spaces_instead_of_tabs(False)
-                        source_view.set_smart_home_end(gsv.SMART_HOME_END_AFTER)
-                        source_view.set_tab_width(2)
-                        source_view.set_highlight_current_line(False)
-                        source_view.set_show_right_margin(False)
-                        source_view.set_show_line_numbers(False)
-                        source_view.set_font(True, "Monospace 10")
-
-                        manager = self.get_language_manager()
-                        lang = manager.get_language('snippets')
-
-                        if lang:
-                                buf.set_highlight_syntax(True)
-                                buf.set_language(lang)
-                                self.snippets_doc = Document(None, source_view)
-
-                        buf.set_highlight_matching_brackets(False)
-
-                        return source_view
-                else:
-                        return None
                 
         def build(self):
-                glade.set_custom_handler(self.custom_handler)
-                self.xml = glade.XML(os.path.dirname(__file__) + '/snippets.glade')
+                self.builder = gtk.Builder()
+                self.builder.add_from_file(os.path.dirname(__file__) + '/snippets.ui')
                 
                 handlers_dic = {
                         'on_dialog_snippets_response': self.on_dialog_snippets_response,
@@ -334,7 +303,7 @@ class Manager:
                         'on_tree_view_snippets_row_expanded': self.on_tree_view_snippets_row_expanded,
                         'on_tree_view_snippets_key_press': self.on_tree_view_snippets_key_press}
 
-                self.xml.signal_autoconnect(handlers_dic)
+                self.builder.connect_signals(handlers_dic)
                 
                 self.build_tree_view()
                 self.build_model()
@@ -344,7 +313,14 @@ class Manager:
 
                 source_view = self['source_view_snippet']
                 source_view.modify_font(pango.FontDescription('Monospace 8'))
+                manager = self.get_language_manager()
+                lang = manager.get_language('snippets')
 
+                if lang:
+                        source_view.get_buffer().set_highlight_syntax(True)
+                        source_view.get_buffer().set_language(lang)
+                        self.snippets_doc = Document(None, source_view)
+                                
                 entry = self['combo_drop_targets'].child
                 entry.connect('focus-out-event', self.on_entry_drop_targets_focus_out)
                 entry.connect('drag-data-received', self.on_entry_drop_targets_drag_data_received)
@@ -356,7 +332,7 @@ class Manager:
                 self.dlg = self['dialog_snippets']
         
         def __getitem__(self, key):
-                return self.xml.get_widget(key)
+                return self.builder.get_object(key)
 
         def is_filled(self, piter):
                 if not self.model.iter_has_child(piter):

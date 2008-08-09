@@ -17,9 +17,9 @@ plugin_PYTHON = \
 	Importer.py \
 	Exporter.py
 
-plugin_DATA = snippets.glade
+plugin_DATA = snippets.ui
 
-EXTRA_DIST = snippets.glade
+EXTRA_DIST = snippets.ui
 
 CLEANFILES = *.bak *.gladep *.pyc
 DISTCLEANFILES = *.bak *.gladep *.pyc

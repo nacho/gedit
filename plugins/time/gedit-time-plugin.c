@@ -747,7 +747,11 @@ get_configure_dialog (GeditTimePlugin *plugin)
 	gchar *sf, *cf;
 	GtkWidget *error_widget;
 	gboolean ret;
-
+	gchar *root_objects[] = {
+		"time_dialog_content",
+		NULL
+	};
+	
 	gedit_debug (DEBUG_PLUGINS);
 
 	dialog = g_new0 (TimeConfigureDialog, 1);
@@ -771,18 +775,18 @@ get_configure_dialog (GeditTimePlugin *plugin)
 
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
 
-	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "time.glade2",
-					     "time_dialog_content",
-					     &error_widget,
-					     "time_dialog_content", &content,
-					     "formats_viewport", &viewport,
-					     "formats_tree", &dialog->list,
-					     "always_prompt", &dialog->prompt,
-					     "never_prompt", &dialog->use_list,
-					     "use_custom", &dialog->custom,
-					     "custom_entry", &dialog->custom_entry,
-					     "custom_format_example", &dialog->custom_format_example,
-					     NULL);
+	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "time.ui",
+					  root_objects,
+					  &error_widget,
+					  "time_dialog_content", &content,
+					  "formats_viewport", &viewport,
+					  "formats_tree", &dialog->list,
+					  "always_prompt", &dialog->prompt,
+					  "never_prompt", &dialog->use_list,
+					  "use_custom", &dialog->custom,
+					  "custom_entry", &dialog->custom_entry,
+					  "custom_format_example", &dialog->custom_format_example,
+					  NULL);
 
 	if (!ret)
 	{
@@ -918,16 +922,16 @@ get_choose_format_dialog (GtkWindow                 *parent,
 
 	dialog = g_new0 (ChooseFormatDialog, 1);
 
-	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "time.glade2",
-					     "choose_format_dialog",
-					     &error_widget,
-					     "choose_format_dialog", &dialog->dialog,
-					     "choice_list", &dialog->list,
-					     "use_sel_format_radiobutton", &dialog->use_list,
-					     "use_custom_radiobutton", &dialog->custom,
-					     "custom_entry", &dialog->custom_entry,
-					     "custom_format_example", &dialog->custom_format_example,
-					     NULL);
+	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "time.ui",
+					  NULL,
+					  &error_widget,
+					  "choose_format_dialog", &dialog->dialog,
+					  "choice_list", &dialog->list,
+					  "use_sel_format_radiobutton", &dialog->use_list,
+					  "use_custom_radiobutton", &dialog->custom,
+					  "custom_entry", &dialog->custom_entry,
+					  "custom_format_example", &dialog->custom_format_example,
+					  NULL);
 
 	if (!ret)
 	{

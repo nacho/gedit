@@ -313,27 +313,31 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 	gint line_numbers;
 	gboolean can_set;
 	GtkWrapMode wrap_mode;
+	gchar *root_objects[] = {
+		"contents",
+		NULL
+	};
 
-	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "gedit-print-preferences.glade",
-					     "contents",
-					     &error_widget,
-					     "contents", &widget,
-					     "syntax_checkbutton", &job->priv->syntax_checkbutton,
-					     "line_numbers_checkbutton", &job->priv->line_numbers_checkbutton,
-					     "line_numbers_hbox", &job->priv->line_numbers_hbox,
-					     "line_numbers_spinbutton", &job->priv->line_numbers_spinbutton,
-					     "page_header_checkbutton", &job->priv->page_header_checkbutton,
-					     "text_wrapping_checkbutton", &job->priv->text_wrapping_checkbutton,
-					     "do_not_split_checkbutton", &job->priv->do_not_split_checkbutton,
-					     "fonts_table", &job->priv->fonts_table,
-					     "body_font_label", &job->priv->body_font_label,
-					     "body_fontbutton", &job->priv->body_fontbutton,
-					     "headers_font_label", &job->priv->headers_font_label,
-					     "headers_fontbutton", &job->priv->headers_fontbutton,
-					     "numbers_font_label", &job->priv->numbers_font_label,
-					     "numbers_fontbutton", &job->priv->numbers_fontbutton,
-					     "restore_button", &job->priv->restore_button,
-					     NULL);
+	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "gedit-print-preferences.ui",
+					  root_objects,
+					  &error_widget,
+					  "contents", &widget,
+					  "syntax_checkbutton", &job->priv->syntax_checkbutton,
+					  "line_numbers_checkbutton", &job->priv->line_numbers_checkbutton,
+					  "line_numbers_hbox", &job->priv->line_numbers_hbox,
+					  "line_numbers_spinbutton", &job->priv->line_numbers_spinbutton,
+					  "page_header_checkbutton", &job->priv->page_header_checkbutton,
+					  "text_wrapping_checkbutton", &job->priv->text_wrapping_checkbutton,
+					  "do_not_split_checkbutton", &job->priv->do_not_split_checkbutton,
+					  "fonts_table", &job->priv->fonts_table,
+					  "body_font_label", &job->priv->body_font_label,
+					  "body_fontbutton", &job->priv->body_fontbutton,
+					  "headers_font_label", &job->priv->headers_font_label,
+					  "headers_fontbutton", &job->priv->headers_fontbutton,
+					  "numbers_font_label", &job->priv->numbers_font_label,
+					  "numbers_fontbutton", &job->priv->numbers_fontbutton,
+					  "restore_button", &job->priv->restore_button,
+					  NULL);
 
 	if (!ret)
 	{

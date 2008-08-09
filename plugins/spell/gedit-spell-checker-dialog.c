@@ -223,14 +223,18 @@ gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 	GtkCellRenderer *cell;
 	GtkTreeSelection *selection;
 	gboolean ret;
-
+	gchar *root_objects[] = {
+		"content",
+		NULL
+	};
+	
 	g_return_if_fail (dlg != NULL);
 
 	dlg->spell_checker = NULL;
 	dlg->misspelled_word = NULL;
 
-	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "spell-checker.glade2",
-		"content",
+	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "spell-checker.ui",
+		root_objects,
 		&error_widget,
 
 		"content", &content,

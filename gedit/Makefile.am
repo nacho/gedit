@@ -14,9 +14,8 @@ INCLUDES =							\
 	-DDATADIR=\""$(datadir)"\"				\
 	-DGEDIT_DATADIR=\""$(datadir)/gedit-2"\"		\
 	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
-	-DGEDIT_UI_DIR=\""$(datadir)/gedit-2/ui/"\"		\
+	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/ui/"\"		\
 	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit-2/plugins"\"	\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\
 	-DGEDIT_ICONDIR=\""$(datadir)/gedit-2/icons"\"
 	
 if ENABLE_PYTHON
@@ -191,15 +190,12 @@ gedit-marshal.c: gedit-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_marshal >> $@
 
 uidir = $(datadir)/gedit-2/ui/
-ui_DATA = gedit-ui.xml
-
-gladedir = $(datadir)/gedit-2/glade/
-glade_DATA =				\
-	gedit-print-preferences.glade
+ui_DATA = 				\
+	gedit-ui.xml			\
+	gedit-print-preferences.ui
 
 EXTRA_DIST = 				\
 	$(ui_DATA)			\
-	$(glade_DATA)			\
 	gedit-enum-types.h.template	\
 	gedit-enum-types.c.template	\
 	gedit-marshal.list

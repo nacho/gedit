@@ -8,7 +8,7 @@ INCLUDES = \
 	$(DISABLE_DEPRECATED_CFLAGS)			\
 	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
+	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/plugins/docinfo/"\"
 
 plugin_LTLIBRARIES = libdocinfo.la
 
@@ -19,8 +19,8 @@ libdocinfo_la_SOURCES = \
 libdocinfo_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libdocinfo_la_LIBADD  = $(GEDIT_LIBS)
 
-gladedir = $(datadir)/gedit-2/glade
-glade_DATA = docinfo.glade2
+uidir = $(datadir)/gedit-2/plugins/docinfo
+ui_DATA = docinfo.ui
 
 plugin_in_files = docinfo.gedit-plugin.desktop.in
 
@@ -28,7 +28,7 @@ plugin_in_files = docinfo.gedit-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-EXTRA_DIST = $(glade_DATA) $(plugin_in_files)
+EXTRA_DIST = $(ui_DATA) $(plugin_in_files)
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)

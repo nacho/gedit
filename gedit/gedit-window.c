@@ -1380,7 +1380,7 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	window->priv->quit_action_group = action_group;
 
 	/* now load the UI definition */
-	gtk_ui_manager_add_ui_from_file (manager, GEDIT_UI_DIR "gedit-ui.xml", &error);
+	gtk_ui_manager_add_ui_from_file (manager, GEDIT_UIDIR "gedit-ui.xml", &error);
 	if (error != NULL)
 	{
 		g_warning ("Could not merge gedit-ui.xml: %s", error->message);
