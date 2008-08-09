@@ -255,8 +255,8 @@ if test "x$have_python" != "xyes"; then
 fi
 
 if test "x$have_python" != "xno"; then
-	PYGOBJECT_REQUIRED=2.12.0
-	PYGTK_REQUIRED=2.12.0
+	PYGOBJECT_REQUIRED=2.13.0
+	PYGTK_REQUIRED=2.13.0
 	PYGTKSOURCEVIEW_REQUIRED=2.2.0
 
 	PKG_CHECK_MODULES([PYGTK], [
