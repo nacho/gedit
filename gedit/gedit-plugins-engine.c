@@ -342,7 +342,6 @@ gedit_plugins_engine_get_plugin_info (GeditPluginsEngine *engine,
 static gboolean
 load_plugin_module (GeditPluginInfo *info)
 {
-	gchar *path;
 	gchar *dirname;
 
 	gedit_debug (DEBUG_PLUGINS);

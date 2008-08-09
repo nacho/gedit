@@ -36,7 +36,6 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include <glade/glade-xml.h>
 
 #include "gedit-plugin-manager.h"
 #include "gedit-utils.h"

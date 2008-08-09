@@ -92,7 +92,7 @@ gedit_print_preview_get_property (GObject    *object,
 				  GValue     *value,
 				  GParamSpec *pspec)
 {
-	GeditPrintPreview *preview = GEDIT_PRINT_PREVIEW (object);
+	//GeditPrintPreview *preview = GEDIT_PRINT_PREVIEW (object);
 	
 	switch (prop_id)
 	{
@@ -108,7 +108,7 @@ gedit_print_preview_set_property (GObject      *object,
 				  const GValue *value,
 				  GParamSpec   *pspec)
 {
-	GeditPrintPreview *preview = GEDIT_PRINT_PREVIEW (object);
+	//GeditPrintPreview *preview = GEDIT_PRINT_PREVIEW (object);
 	
 	switch (prop_id)
 	{
@@ -121,7 +121,7 @@ gedit_print_preview_set_property (GObject      *object,
 static void
 gedit_print_preview_finalize (GObject *object)
 {
-	GeditPrintPreview *preview = GEDIT_PRINT_PREVIEW (object);
+	//GeditPrintPreview *preview = GEDIT_PRINT_PREVIEW (object);
 
 	G_OBJECT_CLASS (gedit_print_preview_parent_class)->finalize (object);
 }
