@@ -95,6 +95,8 @@ struct _GeditViewPrivate
 	guint        search_entry_changed_id;
 	
 	gboolean     disable_popdown;
+	
+	GtkTextBuffer *current_buffer;
 };
 
 /* The search entry completion is shared among all the views */
@@ -293,6 +295,51 @@ scroll_to_cursor_on_init (GeditView *view)
 	return FALSE;
 }
 
+static void
+current_buffer_removed (GeditView *view)
+{
+	if (view->priv->current_buffer)
+	{
+		g_signal_handlers_disconnect_by_func (view->priv->current_buffer,
+						      document_read_only_notify_handler,
+						      view);
+		g_signal_handlers_disconnect_by_func (view->priv->current_buffer,
+						      search_highlight_updated_cb,
+						      view);
+				     
+		g_object_unref (view->priv->current_buffer);
+		view->priv->current_buffer = NULL;
+	}
+}
+
+static void
+on_notify_buffer_cb (GeditView  *view,
+		     GParamSpec *arg1,
+		     gpointer    userdata)
+{
+	GtkTextBuffer *buffer;
+	
+	current_buffer_removed (view);
+	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+	
+	if (buffer == NULL || !GEDIT_IS_DOCUMENT (buffer))
+		return;
+
+	view->priv->current_buffer = g_object_ref (buffer);
+	g_signal_connect (buffer,
+			  "notify::read-only",
+			  G_CALLBACK (document_read_only_notify_handler),
+			  view);
+
+	gtk_text_view_set_editable (GTK_TEXT_VIEW (view), 
+				    !gedit_document_get_readonly (GEDIT_DOCUMENT (buffer)));
+
+	g_signal_connect (buffer,
+			  "search_highlight_updated",
+			  G_CALLBACK (search_highlight_updated_cb),
+			  view);
+}
+
 static void 
 gedit_view_init (GeditView *view)
 {
@@ -351,6 +398,12 @@ gedit_view_init (GeditView *view)
 
 	if (tl != NULL)
 		gtk_target_list_add_uri_targets (tl, TARGET_URI_LIST);
+		
+	/* Act on buffer change */
+	g_signal_connect (view, 
+			  "notify::buffer", 
+			  G_CALLBACK (on_notify_buffer_cb),
+			  NULL);
 }
 
 static void
@@ -379,6 +432,12 @@ gedit_view_destroy (GtkObject *object)
 		}
 	}
 	
+	/* Disconnect notify buffer because the destroy of the textview will
+	   set the buffer to NULL, and we call get_buffer in the notify which
+	   would reinstate a GtkTextBuffer which we don't want */
+	current_buffer_removed (view);
+	g_signal_handlers_disconnect_by_func (view, on_notify_buffer_cb, NULL);
+	
 	(* GTK_OBJECT_CLASS (gedit_view_parent_class)->destroy) (object);
 }
 
@@ -388,6 +447,8 @@ gedit_view_finalize (GObject *object)
 	GeditView *view;
 
 	view = GEDIT_VIEW (object);
+
+	current_buffer_removed (view);
 
 	g_free (view->priv->old_search_text);
 
@@ -428,23 +489,7 @@ gedit_view_new (GeditDocument *doc)
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 
-	view = GTK_WIDGET (g_object_new (GEDIT_TYPE_VIEW, NULL));
-	
-	gtk_text_view_set_buffer (GTK_TEXT_VIEW (view),
-				  GTK_TEXT_BUFFER (doc));
-  		
-	g_signal_connect (doc,
-			  "notify::read-only",
-			  G_CALLBACK (document_read_only_notify_handler),
-			  view);
-
-	gtk_text_view_set_editable (GTK_TEXT_VIEW (view), 
-				    !gedit_document_get_readonly (doc));					  
-
-	g_signal_connect (doc,
-			  "search_highlight_updated",
-			  G_CALLBACK (search_highlight_updated_cb),
-			  view);
+	view = GTK_WIDGET (g_object_new (GEDIT_TYPE_VIEW, "buffer", doc, NULL));
 
 	gedit_debug_message (DEBUG_VIEW, "END: %d", G_OBJECT (view)->ref_count);
 
