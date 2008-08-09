@@ -167,7 +167,6 @@ PKG_CHECK_MODULES(GEDIT, [
 	gtk+-2.0 >= 2.13.0
 	gtksourceview-2.0 >= 2.2.0
 	libgnomeui-2.0 >= 2.16.0
-	libglade-2.0 >= 2.5.1
 	gnome-vfs-2.0 >= 2.16.0
 	gio-2.0 >= 2.16.0
 ])
