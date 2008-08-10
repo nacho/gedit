@@ -1238,7 +1238,9 @@ gedit_utils_basename_for_display (gchar const *uri)
 		g_free (hn_utf8);
 		g_free (hn);
 	}
-	
+
+	g_object_unref (gfile);
+
 	return name;
 }
 

@@ -672,6 +672,7 @@ get_default_style_scheme (void)
 
 	return def_style;
 }
+
 static void
 gedit_document_init (GeditDocument *doc)
 {
@@ -769,14 +770,19 @@ set_uri (GeditDocument *doc,
 	{
 		if (doc->priv->uri != NULL)
 		{
-			const gchar *detected_mime;
+			gchar *content_type;
+			gchar *detected_mime;
 
-			detected_mime = g_content_type_guess (doc->priv->uri, NULL, 0, NULL);
+			content_type = g_content_type_guess (doc->priv->uri, NULL, 0, NULL);
 
-			if (detected_mime == NULL || g_content_type_is_unknown (detected_mime))
-				detected_mime = "text/plain";
+			if (content_type == NULL || g_content_type_is_unknown (content_type))
+				detected_mime = g_strdup ("text/plain");
+			else
+				detected_mime = g_content_type_get_mime_type (content_type);
 
-			doc->priv->mime_type = g_strdup (detected_mime);
+			doc->priv->mime_type = detected_mime != NULL ? detected_mime : g_strdup ("text/plain");
+
+			g_free (content_type);
 		}
 		else
 		{

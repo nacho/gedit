@@ -408,8 +408,9 @@ gedit_history_entry_load_history (GeditHistoryEntry *entry)
 				    -1);
 	}
 
-	g_free (key);
+	g_slist_foreach (gconf_items, (GFunc) g_free, NULL);
 	g_slist_free (gconf_items);
+	g_free (key);
 }
 
 void

@@ -895,8 +895,8 @@ document_loaded (GeditDocument *document,
 		 GeditTab      *tab)
 {
 	GtkWidget *emsg;
-	gchar *uri;
 	GFile *location;
+	gchar *uri;
 	const GeditEncoding *encoding;
 
 	g_return_if_fail ((tab->priv->state == GEDIT_TAB_STATE_LOADING) ||
@@ -912,8 +912,8 @@ document_loaded (GeditDocument *document,
 
 	set_message_area (tab, NULL);
 
-	uri = gedit_document_get_uri (document);
 	location = gedit_document_get_location (document);
+	uri = gedit_document_get_uri (document);
 
 	if (error != NULL)
 	{
@@ -969,7 +969,7 @@ document_loaded (GeditDocument *document,
 		{
 			g_return_if_fail ((error->domain == G_CONVERT_ERROR) ||
 			      		  (error->domain == GEDIT_CONVERT_ERROR));
-			
+
 			// TODO: different error messages if tab->priv->state == GEDIT_TAB_STATE_REVERTING?
 			// note that while reverting encoding should be ok, so this is unlikely to happen
 			emsg = gedit_conversion_error_while_loading_message_area_new (
@@ -989,6 +989,8 @@ document_loaded (GeditDocument *document,
 							 GTK_RESPONSE_CANCEL);
 
 		gtk_widget_show (emsg);
+
+		g_object_unref (location);
 		g_free (uri);
 
 		return;
@@ -1061,6 +1063,7 @@ document_loaded (GeditDocument *document,
 	}
 
  end:
+	g_object_unref (location);
 	g_free (uri);
 
 	tab->priv->tmp_line_pos = 0;
@@ -1662,11 +1665,6 @@ _gedit_tab_get_tooltips	(GeditTab *tab)
 	gchar *uri;
 	gchar *ruri;
 	gchar *ruri_markup;
-	gchar *mime_type;
-	const gchar *mime_description = NULL;
-	gchar *mime_full_description; 
-	gchar *encoding;
-	const GeditEncoding *enc;
 
 	g_return_val_if_fail (GEDIT_IS_TAB (tab), NULL);
 
@@ -1682,6 +1680,12 @@ _gedit_tab_get_tooltips	(GeditTab *tab)
 
 	switch (tab->priv->state)
 	{
+		gchar *mime_type;
+		gchar *mime_description;
+		gchar *mime_full_description; 
+		gchar *encoding;
+		const GeditEncoding *enc;
+
 		case GEDIT_TAB_STATE_LOADING_ERROR:
 			tip = g_strdup_printf (_("Error opening file %s"),
 					       ruri_markup);
@@ -1706,6 +1710,7 @@ _gedit_tab_get_tooltips	(GeditTab *tab)
 				mime_full_description = g_strdup_printf ("%s (%s)", 
 						mime_description, mime_type);
 
+			g_free (mime_description);
 			g_free (mime_type);
 
 			enc = gedit_document_get_encoding (doc);
@@ -1724,7 +1729,7 @@ _gedit_tab_get_tooltips	(GeditTab *tab)
 
 			g_free (encoding);
 			g_free (mime_full_description);
-			
+
 			break;
 	}
 	
