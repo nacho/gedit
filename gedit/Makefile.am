@@ -152,7 +152,7 @@ libgedit_la_SOURCES = 			\
 	gedit-prefs-manager.c		\
 	gedit-prefs-manager-private.h	\
 	gedit-print-job.c		\
-	gedit-print-preview.c		\	
+	gedit-print-preview.c		\
 	gedit-progress-message-area.c	\
 	gedit-session.c			\
 	gedit-spinner.c			\

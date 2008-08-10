@@ -33,7 +33,6 @@
 #define __GEDIT_DOCUMENT_SAVER_H__
 
 #include <gedit/gedit-document.h>
-#include <libgnomevfs/gnome-vfs-file-size.h>
 
 G_BEGIN_DECLS
 
@@ -131,10 +130,9 @@ const gchar		*gedit_document_saver_get_mime_type	(GeditDocumentSaver  *saver);
 time_t			 gedit_document_saver_get_mtime		(GeditDocumentSaver  *saver);
 
 /* Returns 0 if file size is unknown */
-goffset	 gedit_document_saver_get_file_size	(GeditDocumentSaver  *saver);
+goffset			 gedit_document_saver_get_file_size	(GeditDocumentSaver  *saver);
 
-goffset	 gedit_document_saver_get_bytes_written	(GeditDocumentSaver  *saver);
-
+goffset			 gedit_document_saver_get_bytes_written	(GeditDocumentSaver  *saver);
 
 G_END_DECLS
 

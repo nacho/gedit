@@ -33,7 +33,6 @@
 #define __GEDIT_DOCUMENT_LOADER_H__
 
 #include <gedit/gedit-document.h>
-#include <libgnomevfs/gnome-vfs-file-size.h>
 
 G_BEGIN_DECLS
 
@@ -134,11 +133,9 @@ gboolean		 gedit_document_loader_get_readonly	(GeditDocumentLoader *loader);
 const GeditEncoding	*gedit_document_loader_get_encoding	(GeditDocumentLoader *loader);
 
 /* Returns 0 if file size is unknown */
-/* FIXME: change goffset to what glib provides. */
-goffset	 gedit_document_loader_get_file_size	(GeditDocumentLoader *loader);
+goffset			 gedit_document_loader_get_file_size	(GeditDocumentLoader *loader);
 
-goffset	 gedit_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
-
+goffset			 gedit_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
 
 G_END_DECLS
 
