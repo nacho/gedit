@@ -374,6 +374,8 @@ load_plugin_module (GeditPluginInfo *info)
 						   "module-name", info->module_name,
 						   NULL));
 
+	g_free (dirname);
+
 	if (!g_type_module_use (G_TYPE_MODULE (info->module)))
 	{
 		g_warning ("Cannot load plugin '%s' since file '%s' cannot be read.",
