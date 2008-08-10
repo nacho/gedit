@@ -1798,8 +1798,8 @@ get_icon (GtkIconTheme *theme,
 	GtkIconInfo *icon_info;
 	GFileInfo *info;
 	GIcon *gicon;
-	
-	if (!location)
+
+	if (location == NULL)
 		return get_stock_icon (theme, GTK_STOCK_FILE, size);
 
 	/* FIXME: Doing a sync stat is bad, this should be fixed */
@@ -1808,7 +1808,9 @@ get_icon (GtkIconTheme *theme,
 	                          G_FILE_QUERY_INFO_NONE, 
 	                          NULL, 
 	                          NULL);
-	
+	if (info == NULL)
+		return get_stock_icon (theme, GTK_STOCK_FILE, size);
+
 	gicon = g_file_info_get_icon (info);
 
 	if (gicon == NULL)
@@ -1820,13 +1822,13 @@ get_icon (GtkIconTheme *theme,
 	icon_info = gtk_icon_theme_lookup_by_gicon (theme, gicon, size, 0);
 	g_object_unref (info);	
 	
-	if (!icon_info)
+	if (icon_info == NULL)
 		return get_stock_icon (theme, GTK_STOCK_FILE, size);
 	
 	pixbuf = gtk_icon_info_load_icon (icon_info, NULL);
 	gtk_icon_info_free (icon_info);
 	
-	if (!pixbuf)
+	if (pixbuf == NULL)
 		return get_stock_icon (theme, GTK_STOCK_FILE, size);
 		
 	return resize_icon (pixbuf, size);
