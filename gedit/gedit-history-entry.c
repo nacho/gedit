@@ -290,8 +290,11 @@ remove_item (GtkListStore *store,
 		    strcmp (item_text, text) == 0)
 		{
 			gtk_list_store_remove (store, &iter);
+			g_free (item_text);
 			return TRUE;
 		}
+
+		g_free (item_text);
 
 	} while (gtk_tree_model_iter_next (GTK_TREE_MODEL (store), &iter));
 
