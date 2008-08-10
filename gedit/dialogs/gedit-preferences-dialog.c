@@ -1148,7 +1148,7 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 			    dlg->priv->notebook, FALSE, FALSE, 0);
-
+	g_object_unref (dlg->priv->notebook);
 	gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);
 
 	setup_editor_page (dlg);

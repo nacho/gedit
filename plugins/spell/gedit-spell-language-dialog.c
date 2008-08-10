@@ -155,7 +155,6 @@ gedit_spell_language_dialog_init (GeditSpellLanguageDialog *dlg)
 	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "languages-dialog.ui",
 					  root_objects,	
 					  &error_widget,
-					  
 					  "content", &content,
 					  "languages_treeview", &dlg->languages_treeview,
 					  NULL);
@@ -172,7 +171,7 @@ gedit_spell_language_dialog_init (GeditSpellLanguageDialog *dlg)
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 			    content, TRUE, TRUE, 0);
-
+	g_object_unref (content);
 	gtk_container_set_border_width (GTK_CONTAINER (content), 5);
 
 	dlg->model = GTK_TREE_MODEL (gtk_list_store_new (ENCODING_NUM_COLS,

@@ -845,6 +845,7 @@ get_configure_dialog (GeditTimePlugin *plugin)
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
 			    content, FALSE, FALSE, 0);
+	g_object_unref (content);
 	gtk_container_set_border_width (GTK_CONTAINER (content), 5);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),

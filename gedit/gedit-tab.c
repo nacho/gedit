@@ -1911,7 +1911,9 @@ _gedit_tab_get_icon (GeditTab *tab)
 
 			location = gedit_document_get_location (doc);
 			pixbuf = get_icon (theme, location, icon_size);
-			g_object_unref (location);
+
+			if (location)
+				g_object_unref (location);
 		}
 	}
 

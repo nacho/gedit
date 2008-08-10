@@ -357,6 +357,7 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 			    content, TRUE, TRUE, 0);
+	g_object_unref (content);
 	gtk_container_set_border_width (GTK_CONTAINER (content), 5);			     
 
 	g_signal_connect (dlg->priv->add_button,

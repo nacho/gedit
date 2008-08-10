@@ -208,6 +208,7 @@ gedit_open_location_dialog_init (GeditOpenLocationDialog *dlg)
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 			    content, FALSE, FALSE, 0);
+	g_object_unref (content);
 	gtk_container_set_border_width (GTK_CONTAINER (content), 5);			    
 }
 

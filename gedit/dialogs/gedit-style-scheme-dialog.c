@@ -188,6 +188,7 @@ gedit_style_scheme_dialog_init (GeditStyleSchemeDialog *dlg)
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 			    main_vbox,
 			    FALSE, FALSE, 0);
+	g_objet_unref (main_vbox);
 }
 
 static void

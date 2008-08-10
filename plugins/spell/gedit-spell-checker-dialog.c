@@ -273,6 +273,7 @@ gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 	gtk_label_set_label (GTK_LABEL (dlg->language_label), "");
 			
 	gtk_container_add (GTK_CONTAINER (dlg), content);
+	g_object_unref (content);
 
 	gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
 	gtk_window_set_title (GTK_WINDOW (dlg), _("Check Spelling"));
@@ -292,12 +293,11 @@ gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 	gtk_tree_view_append_column (GTK_TREE_VIEW (dlg->suggestions_list), column);
 
 	gtk_tree_view_set_search_column (GTK_TREE_VIEW (dlg->suggestions_list),
-			COLUMN_SUGGESTIONS);
+					 COLUMN_SUGGESTIONS);
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->suggestions_list));
 
-	gtk_tree_selection_set_mode (selection,
-				   GTK_SELECTION_SINGLE);
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
 
 	/* Set default button */
 	GTK_WIDGET_SET_FLAGS (dlg->change_button, GTK_CAN_DEFAULT);
@@ -306,28 +306,26 @@ gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 	gtk_entry_set_activates_default (GTK_ENTRY (dlg->word_entry), TRUE);
 
 	/* Connect signals */
-	g_signal_connect (G_OBJECT (dlg->word_entry), "changed",
+	g_signal_connect (dlg->word_entry, "changed",
 			  G_CALLBACK (word_entry_changed_handler), dlg);
-	g_signal_connect (G_OBJECT (dlg->close_button), "clicked",
+	g_signal_connect (dlg->close_button, "clicked",
 			  G_CALLBACK (close_button_clicked_handler), dlg);
 	g_signal_connect (selection, "changed", 
 			  G_CALLBACK (suggestions_list_selection_changed_handler), 
 			  dlg);
-	g_signal_connect (G_OBJECT (dlg->check_word_button), "clicked",
+	g_signal_connect (dlg->check_word_button, "clicked",
 			  G_CALLBACK (check_word_button_clicked_handler), dlg);
-	g_signal_connect (G_OBJECT (dlg->add_word_button), "clicked",
+	g_signal_connect (dlg->add_word_button, "clicked",
 			  G_CALLBACK (add_word_button_clicked_handler), dlg);
-	
-	g_signal_connect (G_OBJECT (dlg->ignore_button), "clicked",
+	g_signal_connect (dlg->ignore_button, "clicked",
 			  G_CALLBACK (ignore_button_clicked_handler), dlg);
-	g_signal_connect (G_OBJECT (dlg->ignore_all_button), "clicked",
+	g_signal_connect (dlg->ignore_all_button, "clicked",
 			  G_CALLBACK (ignore_all_button_clicked_handler), dlg);
-	g_signal_connect (G_OBJECT (dlg->change_button), "clicked",
+	g_signal_connect (dlg->change_button, "clicked",
 			  G_CALLBACK (change_button_clicked_handler), dlg);
-	g_signal_connect (G_OBJECT (dlg->change_all_button), "clicked",
+	g_signal_connect (dlg->change_all_button, "clicked",
 			  G_CALLBACK (change_all_button_clicked_handler), dlg);
-
-	g_signal_connect (G_OBJECT (dlg->suggestions_list), "row-activated",
+	g_signal_connect (dlg->suggestions_list, "row-activated",
 			  G_CALLBACK (suggestions_list_row_activated_handler), dlg);
 }
 

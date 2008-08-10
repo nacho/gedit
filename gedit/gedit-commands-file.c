@@ -510,8 +510,8 @@ open_location_dialog_response_cb (GeditOpenLocationDialog *dlg,
 				  GeditWindow             *window)
 {
 	GFile *location;
-	GSList *uris = NULL;
 	const GeditEncoding *encoding;
+	GSList *uris = NULL;
 
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -525,17 +525,25 @@ open_location_dialog_response_cb (GeditOpenLocationDialog *dlg,
 	location = gedit_open_location_dialog_get_location (dlg);
 	encoding = gedit_open_location_dialog_get_encoding (dlg);
 
-	uris = g_slist_prepend (uris, g_file_get_uri (location));
+	if (location != NULL)
+	{
+		uris = g_slist_prepend (uris, g_file_get_uri (location));
+
+		g_object_unref (location);
+	}
 
 	gtk_widget_destroy (GTK_WIDGET (dlg));
 
-	gedit_commands_load_uris (window,
-				  uris,
-				  encoding,
-				  0);
+	if (uris != NULL)
+	{
+		gedit_commands_load_uris (window,
+					  uris,
+					  encoding,
+					  0);
 
-	g_slist_foreach (uris, (GFunc) g_free, NULL);
-	g_slist_free (uris);
+		g_slist_foreach (uris, (GFunc) g_free, NULL);
+		g_slist_free (uris);
+	}
 }
 
 void

@@ -1069,7 +1069,7 @@ gedit_utils_get_ui_objects (const gchar  *filename,
 		gtk_builder_add_from_file (builder,
 					   filename,
 					   &error);
-	
+
 	if (error != NULL)
 	{
 		*error_widget = handle_builder_error (_("Unable to open ui file %s. Error: %s"),
@@ -1077,18 +1077,18 @@ gedit_utils_get_ui_objects (const gchar  *filename,
 						      error->message);
 		g_error_free (error);
 		g_free (filename_markup);
-		
+
 		return FALSE;
 	}
-	
+
 	va_start (args, object_name);
 	for (name = object_name; name; name = va_arg (args, const gchar *) )
 	{
 		GObject **gobj;
-		
+
 		gobj = va_arg (args, GObject **);
 		*gobj = gtk_builder_get_object (builder, name);
-		
+
 		if (!*gobj)
 		{
 			*error_widget = handle_builder_error (_("Unable to find the object '%s' inside file %s."), 
@@ -1097,8 +1097,21 @@ gedit_utils_get_ui_objects (const gchar  *filename,
 			ret = FALSE;
 			break;
 		}
-		
-		g_object_ref (*gobj);
+
+		/* we return a new ref for the root objects,
+		 * the others are already reffed by their parent root object */
+		if (root_objects != NULL)
+		{
+			gint i;
+
+			for (i = 0; root_objects[i] != NULL; ++i)
+			{
+				if ((strcmp (name, root_objects[i]) == 0))
+				{
+					g_object_ref (*gobj);
+				}
+			}
+		}
 	}
 	va_end (args);
 

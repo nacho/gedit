@@ -438,7 +438,8 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 			    content, FALSE, FALSE, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (content), 5);	     
+	g_object_unref (content);
+	gtk_container_set_border_width (GTK_CONTAINER (content), 5);
 
 	g_signal_connect (dlg->priv->search_text_entry,
 			  "insert_text",
