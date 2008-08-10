@@ -378,7 +378,6 @@ init_bookmarks (GeditFileBookmarksStore * model)
 	gchar **lines;
 	gchar **line;
 	gboolean added = FALSE;
-	GFile * file;
 
 	/* Read the bookmarks file */
 	bookmarks = g_build_filename (g_get_home_dir (),
@@ -416,8 +415,12 @@ init_bookmarks (GeditFileBookmarksStore * model)
 
 		/* Add a watch */
 		if (model->priv->bookmarks_monitor == NULL) {
+			GFile * file;
+
 			file = g_file_new_for_path (bookmarks);
 			model->priv->bookmarks_monitor = g_file_monitor_file (file, G_FILE_MONITOR_NONE, NULL, NULL);
+			g_object_unref (file);
+
 			g_signal_connect (model->priv->bookmarks_monitor, 
 					  "changed", 
 					  (GCallback)on_bookmarks_file_changed, 
