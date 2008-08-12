@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-13 13:00+0300\n"
-"PO-Revision-Date: 2007-03-05 18:02+0300\n"
+"POT-Creation-Date: 2008-08-12 15:43+0300\n"
+"PO-Revision-Date: 2008-08-12 15:40+0300\n"
 "Last-Translator: Lauri Nurmi <lanurmi@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -23,8 +23,8 @@ msgstr ""
 msgid "Edit text files"
 msgstr "Muokkaa tekstitiedostoja"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:475
-#: ../gedit/gedit-print-job.c:751
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:474
+#: ../gedit/gedit-print-job.c:755
 msgid "Text Editor"
 msgstr "Tekstieditori"
 
@@ -36,7 +36,7 @@ msgstr ""
 "Mukautettu kirjasin, jota käytetään muokkausalueella. Tämä on voimassa "
 "ainoastaan mikäli asetus \"Käytä oletuskirjasinta\" ei ole päällä."
 
-#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:796
+#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:795
 msgid "Active plugins"
 msgstr "Käytössä olevat liitännäiset"
 
@@ -665,42 +665,42 @@ msgstr "Valits_e asiakirjat jotka haluat tallentaa:"
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Mikäli et tallenna, kaikki tekemäsi muutokset menetetään lopullisesti."
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:315
+#: ../gedit/dialogs/gedit-encodings-dialog.c:319
 msgid "Character Codings"
 msgstr "Merkistökoodaukset"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:373
-#: ../gedit/dialogs/gedit-encodings-dialog.c:434
+#: ../gedit/dialogs/gedit-encodings-dialog.c:378
+#: ../gedit/dialogs/gedit-encodings-dialog.c:439
 msgid "_Description"
 msgstr "_Kuvaus"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:382
-#: ../gedit/dialogs/gedit-encodings-dialog.c:443
+#: ../gedit/dialogs/gedit-encodings-dialog.c:387
+#: ../gedit/dialogs/gedit-encodings-dialog.c:448
 msgid "_Encoding"
 msgstr "Koo_daustapa"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:1
+#: ../gedit/dialogs/gedit-encodings-dialog.ui.h:1
 msgid "A_vailable encodings:"
 msgstr "Käytettävissä olevat koodausta_vat:"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:2
+#: ../gedit/dialogs/gedit-encodings-dialog.ui.h:2
 msgid "Character codings"
 msgstr "Merkistön koodaustavat"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:3
+#: ../gedit/dialogs/gedit-encodings-dialog.ui.h:3
 msgid "E_ncodings shown in menu:"
 msgstr "Valikossa _näytettävät koodaustavat:"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.c:139
-#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
+#: ../gedit/dialogs/gedit-open-location-dialog.c:136
+#: ../gedit/dialogs/gedit-open-location-dialog.ui.h:3
 msgid "Open Location"
 msgstr "Avaa sijainti"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:1
+#: ../gedit/dialogs/gedit-open-location-dialog.ui.h:1
 msgid "Ch_aracter coding:"
 msgstr "Merkistön koodau_stapa:"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:2
+#: ../gedit/dialogs/gedit-open-location-dialog.ui.h:2
 msgid "Enter the _location (URI) of the file you would like to open:"
 msgstr "Anna sen tiedoston _sijainti (URI) jonka haluat avattavan:"
 
@@ -730,7 +730,7 @@ msgid "Color Scheme Files"
 msgstr "Värimallitiedostot"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.c:830
-#: ../gedit/gedit-file-chooser-dialog.c:52
+#: ../gedit/gedit-file-chooser-dialog.c:51
 msgid "All Files"
 msgstr "Kaikki tiedostot"
 
@@ -739,194 +739,295 @@ msgstr "Kaikki tiedostot"
 msgid "Could not remove color scheme \"%s\"."
 msgstr "Värimallia \"%s\" ei voitu poistaa"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1077
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1084
 msgid "gedit Preferences"
 msgstr "geditin asetukset"
 
 #. ex:ts=4:et:
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#: ../plugins/docinfo/docinfo.glade2.h:1
-#: ../plugins/externaltools/tools/tools.glade.h:1
-#: ../plugins/snippets/snippets/snippets.glade.h:1
-#: ../plugins/time/time.glade2.h:1
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:1
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:1
+#: ../plugins/docinfo/docinfo.ui.h:1
+#: ../plugins/externaltools/tools/tools.ui.h:1
+#: ../plugins/snippets/snippets/snippets.ui.h:1 ../plugins/time/time.ui.h:1
 msgid "    "
 msgstr "    "
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:2
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:2
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automaattinen sisennys</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:3
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:3
 msgid "<b>Bracket Matching</b>"
 msgstr "<b>Hakasulkujen vastaavuus</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:4
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:4
 msgid "<b>Current Line</b>"
 msgstr "<b>Nykyinen rivi</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:5
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:5
 msgid "<b>File Saving</b>"
 msgstr "<b>Tallentaminen</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:6
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:6
 msgid "<b>Font</b>"
 msgstr "<b>Kirjasin</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
-#: ../gedit/gedit-print-preferences.glade.h:2
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:7
+#: ../gedit/gedit-print-preferences.ui.h:2
 msgid "<b>Line Numbers</b>"
 msgstr "<b>Rivinumerot</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:8
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:8
 msgid "<b>Right Margin</b>"
 msgstr "<b>Oikea reunus</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:9
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:9
 msgid "<b>Tab Stops</b>"
 msgstr "<b>Sarkaimet</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
-#: ../gedit/gedit-print-preferences.glade.h:5
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:10
+#: ../gedit/gedit-print-preferences.ui.h:5
 msgid "<b>Text Wrapping</b>"
 msgstr "<b>Tekstin rivitys</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:11
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:11
 msgid "<span weight=\"bold\">Color Scheme</span>"
 msgstr "<span weight=\"bold\">Värimalli</span>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:12
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:12
 msgid "Create a _backup copy of files before saving"
 msgstr "Luo tiedostoista _varmuuskopio ennen tallentamista"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:13
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:13
 msgid "Display right _margin"
 msgstr "Näytä o_ikea reunus"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
-#: ../gedit/gedit-print-preferences.glade.h:6
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:14
+#: ../gedit/gedit-print-preferences.ui.h:6
 msgid "Do not _split words over two lines"
 msgstr "Älä jaa _sanoja yli kahdelle riville"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:15
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:15
 msgid "Editor"
 msgstr "Muokkain"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:16
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:16
 msgid "Editor _font: "
 msgstr "Muokkaimen _kirjasin: "
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
-#: ../gedit/gedit-print-preferences.glade.h:7
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:17
+#: ../gedit/gedit-print-preferences.ui.h:7
 msgid "Enable text _wrapping"
 msgstr "Käytä _rivitystä"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:18
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:18
 msgid "Font & Colors"
 msgstr "Kirjasimet & Värit"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:19
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:19
 msgid "Highlight current _line"
 msgstr "Korosta nykyinen _rivi"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:20
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:20
 msgid "Highlight matching _bracket"
 msgstr "Korosta _vastaava sulku"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:21
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:21
 msgid "Insert _spaces instead of tabs"
 msgstr "Lisää _välilyöntejä sarkaimien sijaan"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:22
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:22
 msgid "Pick the editor font"
 msgstr "Valitse muokkaimen kirjasin"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:23
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:23
 msgid "Plugins"
 msgstr "Liitännäiset"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:24
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:24
 msgid "Preferences"
 msgstr "Asetukset"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:25
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:25
 msgid "View"
 msgstr "Näytä"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:26
 msgid "_Add..."
 msgstr "_Lisää..."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:27
 msgid "_Autosave files every"
 msgstr "Tallenna tiedostot _automaattisesti "
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:28
 msgid "_Display line numbers"
 msgstr "Näytä rivi_numerot"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:29
 msgid "_Enable automatic indentation"
 msgstr "Käytä auto_maattisisennystä"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:30
 msgid "_Right margin at column:"
 msgstr "Oikea _reunus sarakkeessa:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:31
 msgid "_Tab width:"
 msgstr "_Sarkainleveys:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:32
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:32
 msgid "_minutes"
 msgstr "_minuutin välein"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:301
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1347
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:2 ../gedit/gedit-window.c:1363
 msgid "Replace"
 msgstr "Korvaa"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1345
+#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1361
 msgid "Find"
 msgstr "Etsi"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:404
+#: ../gedit/dialogs/gedit-search-dialog.c:408
 msgid "Replace _All"
 msgstr "Korvaa k_aikki"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:405
-#: ../gedit/gedit-commands-file.c:678
+#: ../gedit/dialogs/gedit-search-dialog.c:409
+#: ../gedit/gedit-commands-file.c:661
 msgid "_Replace"
 msgstr "Ko_rvaa"
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:1
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:1
 msgid "Match _entire word only"
 msgstr "Etsi _kokonaista sanaa"
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:3
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:3
 msgid "Replace All"
 msgstr "Korvaa kaikki"
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:4
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:4
 msgid "Replace _with: "
 msgstr "Korvaava _merkkijono:"
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:5
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:5
 msgid "Search _backwards"
 msgstr "Etsi _taaksepäin"
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:6
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:6
 msgid "_Match case"
 msgstr "_Huomioi kirjainkoko"
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:7
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:7
 msgid "_Search for: "
 msgstr "_Hakusana:"
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:8
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:8
 msgid "_Wrap around"
 msgstr "Jatka _alusta"
 
-#: ../gedit/gedit.c:73
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:2
+msgid "<b>Elements</b>"
+msgstr "<b>Elementit</b>"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:3
+msgid "Basic Colors"
+msgstr "Perusvärit"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:4
+#: ../plugins/taglist/HTML.tags.xml.in.h:28
+msgid "Bold"
+msgstr "Lihavoitu"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:5
+msgid "Color scheme _name:"
+msgstr "Värimallin _nimi:"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:6
+msgid "Cu_rrent line color:"
+msgstr "_Nykyinen riviväri:"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:7
+msgid "Italic"
+msgstr "Kursiivi"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:8
+msgid "Pick the background color"
+msgstr "Valitse taustaväri"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:9
+msgid "Pick the current line color"
+msgstr "Valitse nykyisen rivin väri"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:10
+msgid "Pick the foreground color"
+msgstr "Valitse edustaväri"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:11
+msgid "Pick the normal text color"
+msgstr "Valitse normaali tekstiväri"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:12
+msgid "Pick the search highlighting color"
+msgstr "Valitse hakujen korostusväri"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:13
+msgid "Pick the selected text color"
+msgstr "Valitse valitun tekstin väri"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:14
+msgid "Pick the selection color"
+msgstr "Valitse valintaväri"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:15
+msgid "S_earch highlighting color:"
+msgstr "_Haun korostusväri:"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:16
+msgid "Se_lection color:"
+msgstr "V_alintaväri:"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:17
+msgid "Strikethrough"
+msgstr "Lävistetty"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:18
+msgid "Syntax Highlighting"
+msgstr "Syntaksiväritys"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:19
+msgid "Underline"
+msgstr "Alleviivattu"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:20
+msgid "_Background color:"
+msgstr "_Taustaväri:"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:21
+msgid "_Background:"
+msgstr "_Tausta:"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:22
+msgid "_Foreground:"
+msgstr "_Edustaväri:"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:23
+msgid "_Normal text color:"
+msgstr "_Tavallinen tekstiväri:"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:24
+msgid "_Reset to Default "
+msgstr "_Aseta oletukseksi"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:25
+msgid "_Selected text color:"
+msgstr "Valitun _tekstin väri:"
+
+#: ../gedit/dialogs/gedit-style-scheme-dialog.ui.h:26
+msgid "gedit Style Scheme editor"
+msgstr "geditin tyylimallien muokkain"
+
+#: ../gedit/gedit.c:72
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -934,43 +1035,43 @@ msgstr ""
 "Aseta merkistön koodaus jota haluat käyttää avatessasi komentorivillä "
 "luettelemiasi tiedostoja"
 
-#: ../gedit/gedit.c:73
+#: ../gedit/gedit.c:72
 msgid "ENCODING"
 msgstr "KOODAUS"
 
-#: ../gedit/gedit.c:76
+#: ../gedit/gedit.c:75
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Luo uusi itsenäinen ikkuna käynnissä olevaan geditiin"
 
-#: ../gedit/gedit.c:79
+#: ../gedit/gedit.c:78
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Luo uusi asiakirja jo käynnissä olevaan geditiin"
 
-#: ../gedit/gedit.c:82
+#: ../gedit/gedit.c:81
 msgid "[FILE...]"
 msgstr "[TIEDOSTO...]"
 
-#: ../gedit/gedit.c:114
+#: ../gedit/gedit.c:113
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr "%s: virheellinen tiedostonimi tai URI.\n"
 
-#: ../gedit/gedit.c:126
+#: ../gedit/gedit.c:125
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: virheellinen koodaus.\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:467
+#: ../gedit/gedit.c:466
 msgid "- Edit text files"
 msgstr "- Muokkaa tekstitiedostoja"
 
-#: ../gedit/gedit-commands-file.c:225 ../gedit/gedit-commands-file.c:271
+#: ../gedit/gedit-commands-file.c:257
 #, c-format
 msgid "Loading file '%s'…"
 msgstr "Ladataan tiedostoa \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:280
+#: ../gedit/gedit-commands-file.c:266
 #, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
@@ -978,50 +1079,39 @@ msgstr[0] "Ladataan %d tiedosto…"
 msgstr[1] "Ladataan %d tiedostoa…"
 
 #. Translators: "Open Files" is the title of the file chooser window
-#: ../gedit/gedit-commands-file.c:424
+#: ../gedit/gedit-commands-file.c:438
 msgid "Open Files"
 msgstr "Avaa tiedostoja"
 
-#: ../gedit/gedit-commands-file.c:530
-msgid "The entered location is not valid."
-msgstr "Annettu sijainti ei ole kelvollinen."
-
-#: ../gedit/gedit-commands-file.c:533
-#: ../gedit/gedit-io-error-message-area.c:187
-#: ../gedit/gedit-io-error-message-area.c:226
-#: ../gedit/gedit-io-error-message-area.c:242
-msgid "Please check that you typed the location correctly and try again."
-msgstr "Tarkista, että kirjoitit sijainnin oikein ja yritä uudelleen."
-
-#: ../gedit/gedit-commands-file.c:659
+#: ../gedit/gedit-commands-file.c:641
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "Tiedostoa \"%s\" voi vain lukea."
 
-#: ../gedit/gedit-commands-file.c:670
+#: ../gedit/gedit-commands-file.c:652
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Haluatko yrittää korvata sen tiedostolla jota olet tallentamassa?"
 
-#: ../gedit/gedit-commands-file.c:736 ../gedit/gedit-commands-file.c:939
+#: ../gedit/gedit-commands-file.c:719 ../gedit/gedit-commands-file.c:925
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Tallennetaan tiedostoa \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:837
+#: ../gedit/gedit-commands-file.c:823
 msgid "Save As…"
 msgstr "Tallenna nimellä…"
 
-#: ../gedit/gedit-commands-file.c:1118
+#: ../gedit/gedit-commands-file.c:1104
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Palautetaan asiakirjaa \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:1163
+#: ../gedit/gedit-commands-file.c:1149
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Peru tekemättömät muutokset asiakirjaan \"%s\"?"
 
-#: ../gedit/gedit-commands-file.c:1172
+#: ../gedit/gedit-commands-file.c:1158
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1035,14 +1125,14 @@ msgstr[1] ""
 "Viimeisten %ld sekunnin aikana asiakirjaan tehdyt muutokset menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1181
+#: ../gedit/gedit-commands-file.c:1167
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Viimeisen minuutin aikana asiakirjaan tehdyt muutokset menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1187
+#: ../gedit/gedit-commands-file.c:1173
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1057,7 +1147,7 @@ msgstr[1] ""
 "Viimeisen minuutin ja %ld sekunnin aikana asiakirjaan tehdyt muutokset "
 "menetetään lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1197
+#: ../gedit/gedit-commands-file.c:1183
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1071,12 +1161,12 @@ msgstr[1] ""
 "Viimeisten %ld minuutin aikana asiakirjaan tehdyt muutokset menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1212
+#: ../gedit/gedit-commands-file.c:1198
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Viimeisen tunnin aikana asiakirjaan tehdyt muutokset menetetään lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1218
+#: ../gedit/gedit-commands-file.c:1204
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1091,7 +1181,7 @@ msgstr[1] ""
 "Viimeisen tunnin %d minuutin aikana asiakirjaan tehdyt muutokset menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1233
+#: ../gedit/gedit-commands-file.c:1219
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1104,7 +1194,7 @@ msgstr[1] ""
 "Viimeisten %d tunnin aikana asiakirjaan tehdyt muutokset menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1259
+#: ../gedit/gedit-commands-file.c:1245
 msgid "_Revert"
 msgstr "_Palauta levyltä"
 
@@ -1137,17 +1227,17 @@ msgstr "Löydetty ja korvattu yksi esiintymä"
 msgid "Phrase not found"
 msgstr "Lausetta ei löytynyt"
 
-#: ../gedit/gedit-document.c:862 ../gedit/gedit-document.c:956
+#: ../gedit/gedit-document.c:865 ../gedit/gedit-document.c:878
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Tallentamaton asiakirja %d"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1913 ../gedit/gedit-window.c:1918
+#: ../gedit/gedit-window.c:1929 ../gedit/gedit-window.c:1934
 msgid "Read Only"
 msgstr "Vain luku"
 
-#: ../gedit/gedit-documents-panel.c:760
+#: ../gedit/gedit-documents-panel.c:760 ../gedit/gedit-window.c:2873
 msgid "Documents"
 msgstr "Asiakirjat"
 
@@ -1282,15 +1372,15 @@ msgstr "Nykyiset maa-asetukset (%s)"
 msgid "Add or _Remove..."
 msgstr "Lisää tai _poista..."
 
-#: ../gedit/gedit-file-chooser-dialog.c:53
+#: ../gedit/gedit-file-chooser-dialog.c:52
 msgid "All Text Files"
 msgstr "Kaikki tekstitiedostot"
 
-#: ../gedit/gedit-file-chooser-dialog.c:79
+#: ../gedit/gedit-file-chooser-dialog.c:78
 msgid "C_haracter Coding:"
 msgstr "_Merkistön koodaus:"
 
-#: ../gedit/gedit-help.c:66
+#: ../gedit/gedit-help.c:82
 msgid "There was an error displaying help."
 msgstr "Virhe näytettäessä ohjetta."
 
@@ -1298,6 +1388,12 @@ msgstr "Virhe näytettäessä ohjetta."
 #, c-format
 msgid "Could not find the file %s."
 msgstr "Tiedostoa \"%s\" ei löytynyt."
+
+#: ../gedit/gedit-io-error-message-area.c:187
+#: ../gedit/gedit-io-error-message-area.c:226
+#: ../gedit/gedit-io-error-message-area.c:242
+msgid "Please check that you typed the location correctly and try again."
+msgstr "Tarkista, että kirjoitit sijainnin oikein ja yritä uudelleen."
 
 #: ../gedit/gedit-io-error-message-area.c:192
 #: ../gedit/gedit-io-error-message-area.c:441
@@ -1701,39 +1797,39 @@ msgstr "Tyhjä"
 msgid "Hide panel"
 msgstr "Piilota paneeli"
 
-#: ../gedit/gedit-plugin-manager.c:55
+#: ../gedit/gedit-plugin-manager.c:54
 msgid "Plugin"
 msgstr "Liitännäinen"
 
-#: ../gedit/gedit-plugin-manager.c:56
+#: ../gedit/gedit-plugin-manager.c:55
 msgid "Enabled"
 msgstr "Käytössä"
 
-#: ../gedit/gedit-plugin-manager.c:504
+#: ../gedit/gedit-plugin-manager.c:503
 msgid "_About"
 msgstr "Tietoj_a"
 
-#: ../gedit/gedit-plugin-manager.c:512
+#: ../gedit/gedit-plugin-manager.c:511
 msgid "C_onfigure"
 msgstr "_Asetukset"
 
-#: ../gedit/gedit-plugin-manager.c:521
+#: ../gedit/gedit-plugin-manager.c:520
 msgid "A_ctivate"
 msgstr "Ota _käyttöön"
 
-#: ../gedit/gedit-plugin-manager.c:532
+#: ../gedit/gedit-plugin-manager.c:531
 msgid "Ac_tivate All"
 msgstr "O_ta kaikki käyttöön"
 
-#: ../gedit/gedit-plugin-manager.c:537
+#: ../gedit/gedit-plugin-manager.c:536
 msgid "_Deactivate All"
 msgstr "Poi_sta kaikki käytöstä"
 
-#: ../gedit/gedit-plugin-manager.c:825
+#: ../gedit/gedit-plugin-manager.c:824
 msgid "_About Plugin"
 msgstr "Tietoj_a liitännäisestä"
 
-#: ../gedit/gedit-plugin-manager.c:829
+#: ../gedit/gedit-plugin-manager.c:828
 msgid "C_onfigure Plugin"
 msgstr "Mu_okkaa liitännäisen asetuksia"
 
@@ -1746,64 +1842,64 @@ msgstr "Asetusohjelman käynnistys epäonnistui."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Odotettiin: \"%s\". Saatiin: \"%s\" (avaimelle %s)."
 
-#: ../gedit/gedit-print-job.c:534
+#: ../gedit/gedit-print-job.c:538
 #, c-format
 msgid "File: %s"
 msgstr "Tiedosto: %s"
 
-#: ../gedit/gedit-print-job.c:543
+#: ../gedit/gedit-print-job.c:547
 msgid "Page %N of %Q"
 msgstr "Sivu %N / %Q"
 
-#: ../gedit/gedit-print-job.c:801
+#: ../gedit/gedit-print-job.c:805
 msgid "Preparing..."
 msgstr "Valmistellaan..."
 
-#: ../gedit/gedit-print-preferences.glade.h:1
+#: ../gedit/gedit-print-preferences.ui.h:1
 msgid "<b>Fonts</b>"
 msgstr "<b>Kirjasimet</b>"
 
-#: ../gedit/gedit-print-preferences.glade.h:3
+#: ../gedit/gedit-print-preferences.ui.h:3
 msgid "<b>Page header</b>"
 msgstr "<b>Sivun otsake</b>"
 
-#: ../gedit/gedit-print-preferences.glade.h:4
+#: ../gedit/gedit-print-preferences.ui.h:4
 msgid "<b>Syntax Highlighting</b>"
 msgstr "<b>Syntaksiväritys</b>"
 
-#: ../gedit/gedit-print-preferences.glade.h:8
+#: ../gedit/gedit-print-preferences.ui.h:8
 msgid "He_aders and footers:"
 msgstr "_Otsikot ja alatunnisteet:"
 
-#: ../gedit/gedit-print-preferences.glade.h:9
+#: ../gedit/gedit-print-preferences.ui.h:9
 msgid "Print line nu_mbers"
 msgstr "Tu_losta rivinumerot"
 
-#: ../gedit/gedit-print-preferences.glade.h:10
+#: ../gedit/gedit-print-preferences.ui.h:10
 msgid "Print page _headers"
 msgstr "Tulosta sivujen _otsakkeet"
 
-#: ../gedit/gedit-print-preferences.glade.h:11
+#: ../gedit/gedit-print-preferences.ui.h:11
 msgid "Print synta_x highlighting"
 msgstr "Tulosta s_yntaksiväritys"
 
-#: ../gedit/gedit-print-preferences.glade.h:12
+#: ../gedit/gedit-print-preferences.ui.h:12
 msgid "_Body:"
 msgstr "_Tekstiosa:"
 
-#: ../gedit/gedit-print-preferences.glade.h:13
+#: ../gedit/gedit-print-preferences.ui.h:13
 msgid "_Line numbers:"
 msgstr "_Rivinumerot:"
 
-#: ../gedit/gedit-print-preferences.glade.h:14
+#: ../gedit/gedit-print-preferences.ui.h:14
 msgid "_Number every"
 msgstr "_Numeroinnin rivitystiheys:"
 
-#: ../gedit/gedit-print-preferences.glade.h:15
+#: ../gedit/gedit-print-preferences.ui.h:15
 msgid "_Restore Default Fonts"
 msgstr "_Palauta oletuskirjasimet"
 
-#: ../gedit/gedit-print-preferences.glade.h:16
+#: ../gedit/gedit-print-preferences.ui.h:16
 msgid "lines"
 msgstr "rivin välein"
 
@@ -1864,11 +1960,11 @@ msgstr "Sulje tulostuksen esikatselu"
 msgid "Page %d of %d"
 msgstr "Sivu %d / %d"
 
-#: ../gedit/gedit-print-preview.c:953
+#: ../gedit/gedit-print-preview.c:958
 msgid "Page Preview"
 msgstr "Sivun esikatselu"
 
-#: ../gedit/gedit-print-preview.c:954
+#: ../gedit/gedit-print-preview.c:959
 msgid "The preview of a page in the document to be printed"
 msgstr "Esikatselunäkymä tulostettavan asiakirjan sivusta"
 
@@ -1901,73 +1997,73 @@ msgstr "Kansiota \"%s\" ei voitu luoda, g_mkdir_with_parents() epäonnistui: %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:660
+#: ../gedit/gedit-tab.c:657
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "Palautetaan %s hakemistosta %s"
 
-#: ../gedit/gedit-tab.c:667
+#: ../gedit/gedit-tab.c:664
 #, c-format
 msgid "Reverting %s"
 msgstr "Palautetaan %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:683
+#: ../gedit/gedit-tab.c:680
 #, c-format
 msgid "Loading %s from %s"
 msgstr "Ladataan %s hakemistosta %s"
 
-#: ../gedit/gedit-tab.c:690
+#: ../gedit/gedit-tab.c:687
 #, c-format
 msgid "Loading %s"
 msgstr "Ladataan %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:773
+#: ../gedit/gedit-tab.c:770
 #, c-format
 msgid "Saving %s to %s"
 msgstr "Tallennetaan %s hakemistoon %s"
 
-#: ../gedit/gedit-tab.c:780
+#: ../gedit/gedit-tab.c:777
 #, c-format
 msgid "Saving %s"
 msgstr "Tallennetaan %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1643
+#: ../gedit/gedit-tab.c:1644
 msgid "RO"
 msgstr "LUKU"
 
-#: ../gedit/gedit-tab.c:1688
+#: ../gedit/gedit-tab.c:1690
 #, c-format
 msgid "Error opening file %s"
 msgstr "Virhe avattaessa tiedostoa %s"
 
-#: ../gedit/gedit-tab.c:1693
+#: ../gedit/gedit-tab.c:1695
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Virhe palautettaessa tiedostoa %s"
 
-#: ../gedit/gedit-tab.c:1698
+#: ../gedit/gedit-tab.c:1700
 #, c-format
 msgid "Error saving file %s"
 msgstr "Virhe tallennettaessa tiedostoa %s"
 
-#: ../gedit/gedit-tab.c:1716
+#: ../gedit/gedit-tab.c:1719
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1723
+#: ../gedit/gedit-tab.c:1726
 msgid "Name:"
 msgstr "Nimi:"
 
-#: ../gedit/gedit-tab.c:1724
+#: ../gedit/gedit-tab.c:1727
 msgid "MIME Type:"
 msgstr "MIME-tyyppi:"
 
-#: ../gedit/gedit-tab.c:1725
+#: ../gedit/gedit-tab.c:1728
 msgid "Encoding:"
 msgstr "Koodaustapa:"
 
@@ -2008,7 +2104,7 @@ msgstr "Luo uusi asiakirja"
 msgid "_Open..."
 msgstr "_Avaa..."
 
-#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1467
+#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1483
 msgid "Open a file"
 msgstr "Avaa tiedosto"
 
@@ -2257,44 +2353,50 @@ msgstr "_Alapaneeli"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Näytä tai piilota alapaneeli nykyisessä ikkunassa"
 
-#: ../gedit/gedit-utils.c:1049
-#, c-format
-msgid "Unable to find file %s."
-msgstr "Tiedostoa %s ei löydy."
-
-#: ../gedit/gedit-utils.c:1053 ../gedit/gedit-utils.c:1089
+#: ../gedit/gedit-utils.c:1009
 msgid "Please check your installation."
 msgstr "Tarkista asennuksesi."
 
-#: ../gedit/gedit-utils.c:1085
+#: ../gedit/gedit-utils.c:1075
+#,  c-format
+msgid "Unable to open ui file %s. Error: %s"
+msgstr "UI-tiedostoa %s ei voi avata. Virhe: %s"
+
+#: ../gedit/gedit-utils.c:1094
 #, c-format
-msgid "Unable to find the required widgets inside file %s."
-msgstr "Tarvittavia elementtejä ei löytynyt tiedostosta %s."
+msgid "Unable to find the object '%s' inside file %s."
+msgstr "Kohdetta \"%s\" ei löydy tiedostosta %s."
+
+#. Translators: '/ on <remote-share>'
+#: ../gedit/gedit-utils.c:1249
+#, c-format
+msgid "/ on %s"
+msgstr "/ levyjaossa %s"
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1149
+#: ../gedit/gedit-view.c:1214
 msgid "_Wrap Around"
 msgstr "_Rivitä"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1159
+#: ../gedit/gedit-view.c:1224
 msgid "Match _Entire Word Only"
 msgstr "Täsmää vain _kokonaisia sanoja"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1169
+#: ../gedit/gedit-view.c:1234
 msgid "_Match Case"
 msgstr "_Huomioi kirjainkoko"
 
-#: ../gedit/gedit-view.c:1257
+#: ../gedit/gedit-view.c:1322
 msgid "String you want to search for"
 msgstr "Etsittävä merkkijono"
 
-#: ../gedit/gedit-view.c:1265
+#: ../gedit/gedit-view.c:1330
 msgid "Line you want to move the cursor to"
 msgstr "Rivi, jolle haluat siirtää kursorin"
 
-#: ../gedit/gedit-window.c:880
+#: ../gedit/gedit-window.c:896
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Käytä %s-väritystä"
@@ -2302,34 +2404,34 @@ msgstr "Käytä %s-väritystä"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:937
+#: ../gedit/gedit-window.c:953
 msgid "None"
 msgstr "Ei mitään"
 
-#: ../gedit/gedit-window.c:938
+#: ../gedit/gedit-window.c:954
 msgid "Disable syntax highlighting"
 msgstr "Älä käytä syntaksiväritystä"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1224
+#: ../gedit/gedit-window.c:1240
 #, c-format
 msgid "Open '%s'"
 msgstr "Avaa \"%s\""
 
-#: ../gedit/gedit-window.c:1343
+#: ../gedit/gedit-window.c:1359
 msgid "Save"
 msgstr "Tallenna"
 
-#: ../gedit/gedit-window.c:1471
+#: ../gedit/gedit-window.c:1487
 msgid "Open a recently used file"
 msgstr "Avaa äskettäin käytetty tiedosto"
 
-#: ../gedit/gedit-window.c:1478
+#: ../gedit/gedit-window.c:1494
 msgid "Open"
 msgstr "Avaa"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1528
+#: ../gedit/gedit-window.c:1544
 #, c-format
 msgid "Activate '%s'"
 msgstr "Avaa \"%s\""
@@ -2387,47 +2489,47 @@ msgstr ""
 "merkkien ja ei-tyhjien merkkien määrät."
 
 #: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
-#: ../plugins/docinfo/docinfo.glade2.h:8
+#: ../plugins/docinfo/docinfo.ui.h:8
 msgid "Document Statistics"
 msgstr "Asiakirjan tilastot"
 
-#: ../plugins/docinfo/docinfo.glade2.h:2
+#: ../plugins/docinfo/docinfo.ui.h:2
 msgid "0"
 msgstr "0"
 
-#: ../plugins/docinfo/docinfo.glade2.h:3
+#: ../plugins/docinfo/docinfo.ui.h:3
 msgid "<span weight=\"bold\">File Name</span>"
 msgstr "<span weight=\"bold\">Tiedostonimi</span>"
 
-#: ../plugins/docinfo/docinfo.glade2.h:4
+#: ../plugins/docinfo/docinfo.ui.h:4
 msgid "Bytes"
 msgstr "tavua"
 
-#: ../plugins/docinfo/docinfo.glade2.h:5
+#: ../plugins/docinfo/docinfo.ui.h:5
 msgid "Characters (no spaces)"
 msgstr "merkkiä (ei välilyöntejä)"
 
-#: ../plugins/docinfo/docinfo.glade2.h:6
+#: ../plugins/docinfo/docinfo.ui.h:6
 msgid "Characters (with spaces)"
 msgstr "merkkiä (välilyöntien kanssa)"
 
-#: ../plugins/docinfo/docinfo.glade2.h:7
+#: ../plugins/docinfo/docinfo.ui.h:7
 msgid "Document"
 msgstr "Asiakirja"
 
-#: ../plugins/docinfo/docinfo.glade2.h:9
+#: ../plugins/docinfo/docinfo.ui.h:9
 msgid "Lines"
 msgstr "Rivejä"
 
-#: ../plugins/docinfo/docinfo.glade2.h:10
+#: ../plugins/docinfo/docinfo.ui.h:10
 msgid "Selection"
 msgstr "Valinta"
 
-#: ../plugins/docinfo/docinfo.glade2.h:11
+#: ../plugins/docinfo/docinfo.ui.h:11
 msgid "Words"
 msgstr "Sanoja"
 
-#: ../plugins/docinfo/docinfo.glade2.h:12
+#: ../plugins/docinfo/docinfo.ui.h:12
 msgid "_Update"
 msgstr "_Päivitä"
 
@@ -2447,123 +2549,59 @@ msgstr "Suorita ulkoisia komentoja ja skriptejä."
 msgid "External Tools"
 msgstr "Ulkoiset työkalut"
 
-#: ../plugins/externaltools/tools/__init__.py:129
+#: ../plugins/externaltools/tools/__init__.py:126
 msgid "_External Tools..."
 msgstr "_Ulkoiset työkalut..."
 
-#: ../plugins/externaltools/tools/__init__.py:131
+#: ../plugins/externaltools/tools/__init__.py:128
 msgid "Opens the External Tools Manager"
 msgstr "Avaa ulkoisten työkalujen hallinnan"
 
-#: ../plugins/externaltools/tools/__init__.py:161
+#: ../plugins/externaltools/tools/__init__.py:158
 msgid "Shell Output"
 msgstr "Komentotulkin tuloste"
 
-#: ../plugins/externaltools/tools/functions.py:109
+#: ../plugins/externaltools/tools/functions.py:110
 msgid "You must be inside a word to run this command"
 msgstr "Kohdistimen täytyy olla sanan kohdalla jotta komento voidaan suorittaa"
 
-#: ../plugins/externaltools/tools/functions.py:166
+#: ../plugins/externaltools/tools/functions.py:167
 msgid "Running tool:"
 msgstr "Suoritetaan työkalua:"
 
-#: ../plugins/externaltools/tools/functions.py:189
+#: ../plugins/externaltools/tools/functions.py:190
 msgid "Done."
 msgstr "Valmis."
 
-#: ../plugins/externaltools/tools/functions.py:191
+#: ../plugins/externaltools/tools/functions.py:192
 msgid "Exited"
 msgstr "Päättyi"
 
-#: ../plugins/externaltools/tools/manager.py:41
-msgid "Nothing"
-msgstr "Ei mitään"
-
-#: ../plugins/externaltools/tools/manager.py:42
-msgid "Current document"
-msgstr "Nykyinen asiakirja"
-
-#: ../plugins/externaltools/tools/manager.py:43
-msgid "Current selection"
-msgstr "Nykyinen valinta"
-
-#: ../plugins/externaltools/tools/manager.py:44
-msgid "Current line"
-msgstr "Nykyinen rivi"
-
-#: ../plugins/externaltools/tools/manager.py:45
-msgid "Current word"
-msgstr "Nykyinen sana"
-
-#: ../plugins/externaltools/tools/manager.py:48
-msgid "Display in bottom pane"
-msgstr "Näytä alapaneelissa"
-
-#: ../plugins/externaltools/tools/manager.py:49
-msgid "Create new document"
-msgstr "Luo uusi asiakirja"
-
-#: ../plugins/externaltools/tools/manager.py:50
-msgid "Append to current document"
-msgstr "Lisää nykyiseen asiakirjaan"
-
-#: ../plugins/externaltools/tools/manager.py:51
-msgid "Replace current document"
-msgstr "Korvaa nykyinen asiakirja"
-
-#: ../plugins/externaltools/tools/manager.py:52
-msgid "Replace current selection"
-msgstr "Korvaa nykyinen valinta"
-
-#: ../plugins/externaltools/tools/manager.py:53
-msgid "Insert at cursor position"
-msgstr "Lisää kohdistimen kohdalle"
-
-#: ../plugins/externaltools/tools/manager.py:56
-msgid "All documents"
-msgstr "Kaikki asiakirjat"
-
-#: ../plugins/externaltools/tools/manager.py:57
-msgid "All documents except untitled ones"
-msgstr "Kaikki asiakirjat lukuun ottamatta nimeämättömiä"
-
-#: ../plugins/externaltools/tools/manager.py:58
-msgid "Local files only"
-msgstr "Vain paikalliset tiedostot"
-
-#: ../plugins/externaltools/tools/manager.py:59
-msgid "Remote files only"
-msgstr "Vain etätiedostot"
-
-#: ../plugins/externaltools/tools/manager.py:60
-msgid "Untitled documents only"
-msgstr "Vain nimeämättömät asiakirjat"
-
-#: ../plugins/externaltools/tools/manager.py:200
-#: ../plugins/externaltools/tools/manager.py:230
-#: ../plugins/externaltools/tools/manager.py:278
+#: ../plugins/externaltools/tools/manager.py:158
+#: ../plugins/externaltools/tools/manager.py:187
+#: ../plugins/externaltools/tools/manager.py:235
 #, python-format
 msgid "Edit tool <i>%s</i>:"
 msgstr "Muokkaa työkalua <i>%s</i>:"
 
-#: ../plugins/externaltools/tools/manager.py:204
+#: ../plugins/externaltools/tools/manager.py:162
 msgid "A Brand New Tool"
 msgstr "Tuliterä työkalu"
 
-#: ../plugins/externaltools/tools/manager.py:239
+#: ../plugins/externaltools/tools/manager.py:196
 msgid "New tool"
 msgstr "Uusi työkalu"
 
-#: ../plugins/externaltools/tools/manager.py:314
+#: ../plugins/externaltools/tools/manager.py:272
 #, python-format
 msgid "This accelerator is already bound to %s"
 msgstr "Tämä pikanäppäin on jo käytössä toiminnolle %s"
 
-#: ../plugins/externaltools/tools/manager.py:360
+#: ../plugins/externaltools/tools/manager.py:318
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Syötä uusi pikanäppäin tai tyhjennä arvo Backspacella"
 
-#: ../plugins/externaltools/tools/manager.py:362
+#: ../plugins/externaltools/tools/manager.py:320
 msgid "Type a new accelerator"
 msgstr "Syötä uusi pikanäppäin"
 
@@ -2571,59 +2609,109 @@ msgstr "Syötä uusi pikanäppäin"
 msgid "Stopped."
 msgstr "Pysäytetty."
 
-#: ../plugins/externaltools/tools/tools.glade.h:2
+#: ../plugins/externaltools/tools/tools.ui.h:2
+msgid "All documents"
+msgstr "Kaikki asiakirjat"
+
+#: ../plugins/externaltools/tools/tools.ui.h:3
+msgid "All documents except untitled ones"
+msgstr "Kaikki asiakirjat lukuun ottamatta nimeämättömiä"
+
+#: ../plugins/externaltools/tools/tools.ui.h:4
+msgid "Append to current document"
+msgstr "Lisää nykyiseen asiakirjaan"
+
+#: ../plugins/externaltools/tools/tools.ui.h:5
 msgid "Co_mmand(s):"
 msgstr "K_omento:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:3
+#: ../plugins/externaltools/tools/tools.ui.h:6
+msgid "Create new document"
+msgstr "Luo uusi asiakirja"
+
+#: ../plugins/externaltools/tools/tools.ui.h:7
+msgid "Current document"
+msgstr "Nykyinen asiakirja"
+
+#: ../plugins/externaltools/tools/tools.ui.h:8
+msgid "Current line"
+msgstr "Nykyinen rivi"
+
+#: ../plugins/externaltools/tools/tools.ui.h:9
+msgid "Current selection"
+msgstr "Nykyinen valinta"
+
+#: ../plugins/externaltools/tools/tools.ui.h:10
+msgid "Current word"
+msgstr "Nykyinen sana"
+
+#: ../plugins/externaltools/tools/tools.ui.h:11
+msgid "Display in bottom pane"
+msgstr "Näytä alapaneelissa"
+
+#: ../plugins/externaltools/tools/tools.ui.h:12
 msgid "Edit tool <i>make</i>:"
 msgstr "Muokkaa työkalua <i>make</i>:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:4
+#: ../plugins/externaltools/tools/tools.ui.h:13
 msgid "External Tools Manager"
 msgstr "Ulkoisten työkalujen hallinta"
 
-#: ../plugins/externaltools/tools/tools.glade.h:5
-msgid ""
-"Nothing\n"
-"Current document\n"
-"All documents"
-msgstr ""
-"Ei mitään\n"
-"Valittu asiakirja\n"
-"Kaikki asiakirjat"
+#: ../plugins/externaltools/tools/tools.ui.h:14
+msgid "Insert at cursor position"
+msgstr "Lisää kohdistimen kohdalle"
 
-#: ../plugins/externaltools/tools/tools.glade.h:8
+#: ../plugins/externaltools/tools/tools.ui.h:15
+msgid "Local files only"
+msgstr "Vain paikalliset tiedostot"
+
+#: ../plugins/externaltools/tools/tools.ui.h:16
+msgid "Nothing"
+msgstr "Ei mitään"
+
+#: ../plugins/externaltools/tools/tools.ui.h:17
+msgid "Remote files only"
+msgstr "Vain etätiedostot"
+
+#: ../plugins/externaltools/tools/tools.ui.h:18
+msgid "Replace current document"
+msgstr "Korvaa nykyinen asiakirja"
+
+#: ../plugins/externaltools/tools/tools.ui.h:19
+msgid "Replace current selection"
+msgstr "Korvaa nykyinen valinta"
+
+#: ../plugins/externaltools/tools/tools.ui.h:20
+msgid "Untitled documents only"
+msgstr "Vain nimeämättömät asiakirjat"
+
+#: ../plugins/externaltools/tools/tools.ui.h:21
 msgid "_Applicability:"
 msgstr "_Kohteet:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:9
+#: ../plugins/externaltools/tools/tools.ui.h:22
 msgid "_Description:"
 msgstr "_Kuvaus:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:10
+#: ../plugins/externaltools/tools/tools.ui.h:23
 msgid "_Input:"
 msgstr "_Syöte:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:11
+#: ../plugins/externaltools/tools/tools.ui.h:24
 msgid "_Output:"
 msgstr "Tulosterivit:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:12
+#: ../plugins/externaltools/tools/tools.ui.h:25
 msgid "_Save:"
 msgstr "_Tallenna_"
 
-#: ../plugins/externaltools/tools/tools.glade.h:13
+#: ../plugins/externaltools/tools/tools.ui.h:26
 msgid "_Shortcut Key:"
 msgstr "_Pikanäppäin:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:14
+#: ../plugins/externaltools/tools/tools.ui.h:27
 msgid "_Tools:"
 msgstr "Työ_kalut:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:15
-msgid "gtk-revert-to-saved"
-msgstr "gtk-revert-to-saved"
 
 #: ../plugins/externaltools/data/build.desktop.in.h:1
 msgid "Build"
@@ -2665,12 +2753,7 @@ msgstr "Sivupaneelin tiedostoselain."
 msgid "File Browser Pane"
 msgstr "Tiedostoselainpaneeli"
 
-#. Translators: this is used in "file on host", e.g. "/foo/bar on ftp.baz.org"
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:195
-msgid "on"
-msgstr "päällä"
-
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:330
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:225
 msgid "File System"
 msgstr "Tiedostojärjestelmä"
 
@@ -2764,59 +2847,59 @@ msgstr ""
 "piilotiedostot), binary (suodatetaan binääritiedostot) sekä "
 "hidden_and_binary (suodatetaan piilo- ja binääritiedostot)"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:596
 msgid "_Set root to active document"
 msgstr "_Aseta juuri aktiivinen asiakirjan sijaintiin"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:600
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
 msgid "Set the root to the active document location"
 msgstr "Aseta juurikansioksi aktiivisen asiakirjan sijainti"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:605
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:603
 msgid "_Open terminal here"
 msgstr "_Avaa pääte tähän"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:607
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:605
 msgid "Open a terminal at the currently opened directory"
 msgstr "Avaa pääte nyt valittuun kansioon"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:741
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:739
 msgid "File Browser"
 msgstr "Tiedostoselain"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:864
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:867
 msgid "An error occurred while creating a new directory"
 msgstr "Virhe luotaessa uutta kansiota"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:867
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:870
 msgid "An error occurred while creating a new file"
 msgstr "Virhe luotaessa uutta tiedostoa"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:872
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:875
 msgid "An error occurred while renaming a file or directory"
 msgstr "Virhe nimettäessä tiedostoa tai kansiota uudestaan"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:877
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:880
 msgid "An error occurred while deleting a file or directory"
 msgstr "Virhe poistettaessa tiedostoa tai kansiota"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:882
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:885
 msgid "An error occurred while opening a directory in the file manager"
 msgstr "Virhe avattaessa kansiota tiedostonhalintaan"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:886
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:889
 msgid "An error occurred while setting a root directory"
 msgstr "Virhe asetettaessa juurikansiota"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:890
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:893
 msgid "An error occurred while loading a directory"
 msgstr "Virhe ladattaessa kansiota"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:893
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:896
 msgid "An error occurred"
 msgstr "Tapahtui virhe"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1123
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1187
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
@@ -2824,43 +2907,45 @@ msgstr ""
 "Tiedostoa ei voi siirtää roskakoriin.\n"
 "Haluatko poistaa sen pysyvästi?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1127
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1191
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "Tiedostoa \"%s\" ei voi siirtää roskakoriin."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1130
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1194
 msgid "The selected files cannot be moved to the trash."
 msgstr "Valittuja tiedostoja ei voi siirtää roskakoriin."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1163
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1227
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Haluatko varmasti poistaa pysyvästi kohteen \"%s\"?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1166
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1230
 msgid "Are you sure you want to permanently delete the selected files?"
 msgstr "Haluatko varmasti poistaa valitut tiedostot pysyvästi?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1169
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1233
 msgid "If you delete an item, it is permanently lost."
 msgstr "Jos poistat kohteen, se menetetään pysyvästi."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1583
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1625
 msgid "(Empty)"
 msgstr "[Tyhjä]"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2723
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1840
-msgid "Invalid uri"
-msgstr "Virheellinen URI"
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3122
+msgid ""
+"The renamed file is currently filtered out. You need to adjust your filter "
+"settings to make the file visible"
+msgstr ""
+"Uudelleennimetty tiedosto on tällä hetkellä suodatettu pois. Sinun täytyy muuttaa "
+"suodatinasetuksiasi, jos haluat nähdä sen."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3155
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3360
 msgid "file"
 msgstr "tiedosto"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3176
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3223
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3384
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2868,142 +2953,146 @@ msgstr ""
 "Uusi tiedosto on tällä hetkellä suodatettu pois. Sinun täytyy säätää "
 "suodatinasetuksiasi, jos haluat nähdä sen."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3204
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3412
 msgid "directory"
 msgstr "kansio"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:738
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3432
+msgid ""
+"The new directory is currently filtered out. You need to adjust your filter "
+"settings to make the directory visible"
+msgstr ""
+"Uusi kansio on tällä hetkellä suodatettu pois. Sinun täytyy säätää "
+"suodatinasetuksiasi, jos haluat nähdä sen."
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:672
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:748
-msgid "Recent Files"
-msgstr "Viimeaikaiset tiedostot"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:827
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:750
 msgid "_Filter"
 msgstr "_Suodata"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:755
 msgid "_Move To Trash"
 msgstr "_Siirrä roskakoriin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:756
 msgid "Move selected file or folder to trash"
 msgstr "Siirrä valittu tiedosto tai kansio roskakoriin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:758
 msgid "_Delete"
 msgstr "_Poista"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:759
 msgid "Delete selected file or folder"
 msgstr "Poista valittu tiedosto tai kansio"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:842
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:765
 msgid "Up"
 msgstr "Ylös"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:843
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:766
 msgid "Open the parent folder"
 msgstr "Avaa yläkansio"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:771
 msgid "_New Folder"
 msgstr "Uusi kansio"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:772
 msgid "Add new empty folder"
 msgstr "Lisää uusi tyhjä kansio"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:851
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:774
 msgid "New F_ile"
 msgstr "Uusi _tiedosto"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:775
 msgid "Add new empty file"
 msgstr "Lisää uusi tyhjä tiedosto"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:857
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:780
 msgid "_Rename"
 msgstr "_Nimeä uudestaan"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:858
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:781
 msgid "Rename selected file or folder"
 msgstr "Nimeä valittu tiedosto tai kansio uudestaan"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:864
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:787
 msgid "_Previous Location"
 msgstr "_Edellinen sijainti"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:866
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:789
 msgid "Go to the previous visited location"
 msgstr "Siirry edelliseen aiemmin avattuun sijaintiin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:868
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:791
 msgid "_Next Location"
 msgstr "_Seuraava sijainti"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:869
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:792
 msgid "Go to the next visited location"
 msgstr "Siirry seuraavaan aiemmin avattuun sijaintiin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:870
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:793
 msgid "Re_fresh View"
 msgstr "_Päivitä näkymä"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:871
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:794
 msgid "Refresh the view"
 msgstr "Päivitä näkymä"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:872
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:795
 msgid "_View Folder"
 msgstr "_Näytä kansio"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:873
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:796
 msgid "View folder in file manager"
 msgstr "Näytä kansio tiedostoselaimessa"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:880
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
 msgid "Show _Hidden"
 msgstr "Näytä _piilotetut"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:881
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
 msgid "Show hidden files and folders"
 msgstr "Näytä piilotiedostot ja -kansiot"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:883
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
 msgid "Show _Binary"
 msgstr "Näytä _binäärit"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:884
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
 msgid "Show binary files"
 msgstr "Näytä binääritiedostot"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:989
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1005
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1037
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:912
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:928
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:960
 msgid "Previous location"
 msgstr "Edellinen sijainti"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:993
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:916
 msgid "Go to previous location"
 msgstr "Siirry edelliseen sijaintiin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:998
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1030
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:921
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:953
 msgid "Go to a previously opened location"
 msgstr "Siirry edelliseen avattuun sijaintiin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1020
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:943
 msgid "Next location"
 msgstr "Seuraava sijainti"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1024
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:947
 msgid "Go to next location"
 msgstr "Siirry seuraavaan sijaintiin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1201
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1126
 msgid "_Match Filename"
 msgstr "_Huomioi kirjainkoko"
 
@@ -3072,59 +3161,58 @@ msgstr "Lisää usein käytettyjä tekstileikkeitä nopeasti"
 msgid "Snippets"
 msgstr "Tekstileikkeet"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:2
+#: ../plugins/snippets/snippets/snippets.ui.h:2
 msgid "<b>Activation</b>"
 msgstr "<b>Aktivointi</b>"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:3
+#: ../plugins/snippets/snippets/snippets.ui.h:3
 msgid "Create new snippet"
 msgstr "Luo uusi tekstileike"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:4
-#: ../plugins/snippets/snippets/Manager.py:428
+#: ../plugins/snippets/snippets/snippets.ui.h:4
+#: ../plugins/snippets/snippets/Manager.py:407
 msgid "Delete selected snippet"
 msgstr "Poista valittu tekstileike"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:5
+#: ../plugins/snippets/snippets/snippets.ui.h:5
 msgid "Export selected snippets"
 msgstr "Vie valitut tekstileikkeet"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:6
-#: ../plugins/snippets/snippets/Manager.py:806
+#: ../plugins/snippets/snippets/snippets.ui.h:6
+#: ../plugins/snippets/snippets/Manager.py:789
 msgid "Import snippets"
 msgstr "Tuo tekstileikkeitä"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:7
+#: ../plugins/snippets/snippets/snippets.ui.h:7
 msgid "S_hortcut key:"
 msgstr "P_ikanäppäin:"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:8
+#: ../plugins/snippets/snippets/snippets.ui.h:8
 msgid "Shortcut key with which the snippet is activated"
 msgstr "Pikanäppäin, jolla tekstileike aktivoidaan"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:9
-#: ../plugins/snippets/snippets/Manager.py:697
+#: ../plugins/snippets/snippets/snippets.ui.h:9
+#: ../plugins/snippets/snippets/Manager.py:678
 msgid "Single word with which the snippet is activated after pressing tab"
 msgstr "Sana, jonka jälkeen tekstileike aktivoidaan sarkaimen jälkeen"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:10
+#: ../plugins/snippets/snippets/snippets.ui.h:10
 msgid "Snippets Manager"
 msgstr "Tekstileikkeiden hallinta"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:11
+#: ../plugins/snippets/snippets/snippets.ui.h:11
 msgid "_Drop targets:"
 msgstr "_Pudotuskohteet:"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:12
+#: ../plugins/snippets/snippets/snippets.ui.h:12
 msgid "_Edit:"
 msgstr "_Muokkaa:"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:13
+#: ../plugins/snippets/snippets/snippets.ui.h:13
 msgid "_Snippets:"
 msgstr "_Tekstileikkeet:"
 
-#. "tab" here means the tab key, not the notebook tab!
-#: ../plugins/snippets/snippets/snippets.glade.h:15
+#: ../plugins/snippets/snippets/snippets.ui.h:14
 msgid "_Tab trigger:"
 msgstr "_Tab-liipaisu:"
 
@@ -3136,23 +3224,23 @@ msgstr "Hallitse _tekstileikkeitä..."
 msgid "Manage snippets"
 msgstr "Hallitse tekstileikkeitä"
 
-#: ../plugins/snippets/snippets/Manager.py:46
+#: ../plugins/snippets/snippets/Manager.py:45
 msgid "Snippets archive"
 msgstr "Tekstileikearkisto"
 
-#: ../plugins/snippets/snippets/Manager.py:70
+#: ../plugins/snippets/snippets/Manager.py:69
 msgid "Add a new snippet..."
 msgstr "Lisää uusi tekstileike..."
 
-#: ../plugins/snippets/snippets/Manager.py:120
+#: ../plugins/snippets/snippets/Manager.py:119
 msgid "Global"
 msgstr "Kaikkialla"
 
-#: ../plugins/snippets/snippets/Manager.py:425
+#: ../plugins/snippets/snippets/Manager.py:404
 msgid "Revert selected snippet"
 msgstr "Peru valittu tekstileike"
 
-#: ../plugins/snippets/snippets/Manager.py:692
+#: ../plugins/snippets/snippets/Manager.py:673
 msgid ""
 "This is not a valid tab trigger. Triggers can either contain letters or a "
 "single, non alphanumeric, character like {, [, etcetera."
@@ -3160,73 +3248,73 @@ msgstr ""
 "Tämä ei ole kelvollinen sarkainliipaisin. Liipaisimet voivat joko sisältää "
 "kirjaimia tai yhden merkin, joka ei ole kirjasin, kuten {, [ tai |."
 
-#: ../plugins/snippets/snippets/Manager.py:785
+#: ../plugins/snippets/snippets/Manager.py:768
 #, python-format
 msgid "The following error occurred while importing: %s"
 msgstr "Seuraava virhe tapahtui tuotaessa tekstileikkeitä: %s"
 
-#: ../plugins/snippets/snippets/Manager.py:792
+#: ../plugins/snippets/snippets/Manager.py:775
 msgid "Import succesfully completed"
 msgstr "Tuonti onnistui"
 
-#: ../plugins/snippets/snippets/Manager.py:811
-#: ../plugins/snippets/snippets/Manager.py:897
-#: ../plugins/snippets/snippets/Manager.py:960
+#: ../plugins/snippets/snippets/Manager.py:794
+#: ../plugins/snippets/snippets/Manager.py:880
+#: ../plugins/snippets/snippets/Manager.py:943
 msgid "All supported archives"
 msgstr "Kaikki tuetut arkistot"
 
-#: ../plugins/snippets/snippets/Manager.py:812
-#: ../plugins/snippets/snippets/Manager.py:898
-#: ../plugins/snippets/snippets/Manager.py:961
+#: ../plugins/snippets/snippets/Manager.py:795
+#: ../plugins/snippets/snippets/Manager.py:881
+#: ../plugins/snippets/snippets/Manager.py:944
 msgid "Gzip compressed archive"
 msgstr "Gzip-pakattu arkisto"
 
-#: ../plugins/snippets/snippets/Manager.py:813
-#: ../plugins/snippets/snippets/Manager.py:899
-#: ../plugins/snippets/snippets/Manager.py:962
+#: ../plugins/snippets/snippets/Manager.py:796
+#: ../plugins/snippets/snippets/Manager.py:882
+#: ../plugins/snippets/snippets/Manager.py:945
 msgid "Bzip compressed archive"
 msgstr "Bzip-pakattu arkisto"
 
-#: ../plugins/snippets/snippets/Manager.py:814
+#: ../plugins/snippets/snippets/Manager.py:797
 msgid "Single snippets file"
 msgstr "Yksi tekstileiketiedosto"
 
-#: ../plugins/snippets/snippets/Manager.py:815
-#: ../plugins/snippets/snippets/Manager.py:901
-#: ../plugins/snippets/snippets/Manager.py:964
+#: ../plugins/snippets/snippets/Manager.py:798
+#: ../plugins/snippets/snippets/Manager.py:884
+#: ../plugins/snippets/snippets/Manager.py:947
 msgid "All files"
 msgstr "Kaikki tiedostot"
 
-#: ../plugins/snippets/snippets/Manager.py:827
+#: ../plugins/snippets/snippets/Manager.py:810
 #, python-format
 msgid "The following error occurred while exporting: %s"
 msgstr "Seuraava virhe tapahtui vietäessä tekstileikkeitä: %s"
 
-#: ../plugins/snippets/snippets/Manager.py:831
+#: ../plugins/snippets/snippets/Manager.py:814
 msgid "Export succesfully completed"
 msgstr "Vienti onnistui"
 
 #. Ask if system snippets should also be exported
-#: ../plugins/snippets/snippets/Manager.py:871
-#: ../plugins/snippets/snippets/Manager.py:938
+#: ../plugins/snippets/snippets/Manager.py:854
+#: ../plugins/snippets/snippets/Manager.py:921
 msgid "Do you want to include selected <b>system</b> snippets in your export?"
 msgstr "Haluatko viedä myös valitut <b>järjestelmän</b> tekstileikkeet?"
 
-#: ../plugins/snippets/snippets/Manager.py:886
-#: ../plugins/snippets/snippets/Manager.py:956
+#: ../plugins/snippets/snippets/Manager.py:869
+#: ../plugins/snippets/snippets/Manager.py:939
 msgid "There are no snippets selected to be exported"
 msgstr "Tekstileikkeitä ei ole valittu vietäväksi"
 
-#: ../plugins/snippets/snippets/Manager.py:891
-#: ../plugins/snippets/snippets/Manager.py:929
+#: ../plugins/snippets/snippets/Manager.py:874
+#: ../plugins/snippets/snippets/Manager.py:912
 msgid "Export snippets"
 msgstr "Vie tekstileikkeitä"
 
-#: ../plugins/snippets/snippets/Manager.py:1068
+#: ../plugins/snippets/snippets/Manager.py:1051
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "Syötä uusi pikanäppäin tai tyhjennä arvo Backspacella"
 
-#: ../plugins/snippets/snippets/Manager.py:1070
+#: ../plugins/snippets/snippets/Manager.py:1053
 msgid "Type a new shortcut"
 msgstr "Syötä uusi pikanäppäin"
 
@@ -3303,7 +3391,7 @@ msgid "Sort the current document or selection"
 msgstr "Lajittele valittu asiakirja tai valinta"
 
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:1
-#: ../plugins/sort/sort.glade2.h:3
+#: ../plugins/sort/sort.ui.h:3
 msgid "Sort"
 msgstr "Lajittelu"
 
@@ -3311,32 +3399,32 @@ msgstr "Lajittelu"
 msgid "Sorts a document or selected text."
 msgstr "Lajittelee asiakirjan tai valitun tekstin."
 
-#: ../plugins/sort/sort.glade2.h:1
+#: ../plugins/sort/sort.ui.h:1
 msgid "R_emove duplicates"
 msgstr "_Poista kaksoiskappaleet"
 
-#: ../plugins/sort/sort.glade2.h:2
+#: ../plugins/sort/sort.ui.h:2
 msgid "S_tart at column:"
 msgstr "Aloi_ta sarakkeesta:"
 
-#: ../plugins/sort/sort.glade2.h:4
+#: ../plugins/sort/sort.ui.h:4
 msgid "You cannot undo a sort operation"
 msgstr "Järjestämistä ei voi kumota"
 
-#: ../plugins/sort/sort.glade2.h:5
+#: ../plugins/sort/sort.ui.h:5
 msgid "_Ignore case"
 msgstr "_Jätä kirjainkoko huomiotta"
 
-#: ../plugins/sort/sort.glade2.h:6
+#: ../plugins/sort/sort.ui.h:6
 msgid "_Reverse order"
 msgstr "Käänteinen jä_rjestys"
 
-#: ../plugins/sort/sort.glade2.h:7
+#: ../plugins/sort/sort.ui.h:7
 msgid "_Sort"
 msgstr "_Lajittele"
 
 #: ../plugins/spell/gedit-automatic-spell-checker.c:418
-#: ../plugins/spell/gedit-spell-checker-dialog.c:477
+#: ../plugins/spell/gedit-spell-checker-dialog.c:479
 msgid "(no suggested words)"
 msgstr "(ei suositeltavia sanoja)"
 
@@ -3358,19 +3446,19 @@ msgstr "_Lisää"
 msgid "_Spelling Suggestions..."
 msgstr "_Kirjoitusehdotuksia..."
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:274
+#: ../plugins/spell/gedit-spell-checker-dialog.c:279
 msgid "Check Spelling"
 msgstr "Tarkista oikeinkirjoitus"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:285
+#: ../plugins/spell/gedit-spell-checker-dialog.c:290
 msgid "Suggestions"
 msgstr "Ehdotukset"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:583
+#: ../plugins/spell/gedit-spell-checker-dialog.c:585
 msgid "(correct spelling)"
 msgstr "(oikea kirjoitusasu)"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:726
+#: ../plugins/spell/gedit-spell-checker-dialog.c:728
 msgid "Completed spell checking"
 msgstr "Oikoluku on valmis"
 
@@ -3407,12 +3495,12 @@ msgstr "Tuntematon (%s)"
 msgid "language|Default"
 msgstr "Oletus"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:135
-#: ../plugins/spell/languages-dialog.glade2.h:2
+#: ../plugins/spell/gedit-spell-language-dialog.c:139
+#: ../plugins/spell/languages-dialog.ui.h:2
 msgid "Set language"
 msgstr "Aseta kieli"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:184
+#: ../plugins/spell/gedit-spell-language-dialog.c:188
 msgid "Languages"
 msgstr "Kielet"
 
@@ -3448,67 +3536,67 @@ msgstr "Asiakirja on tyhjä."
 msgid "No misspelled words"
 msgstr "Ei väärinkirjoitettuja sanoja"
 
-#: ../plugins/spell/languages-dialog.glade2.h:1
+#: ../plugins/spell/languages-dialog.ui.h:1
 msgid "Select the _language of the current document."
 msgstr "Valitse _aktiivisen asiakirjan kieli."
 
-#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
+#: ../plugins/spell/spell-checker.ui.h:1 ../plugins/time/time.ui.h:2
 msgid "*"
 msgstr "*"
 
-#: ../plugins/spell/spell-checker.glade2.h:2
+#: ../plugins/spell/spell-checker.ui.h:2
 msgid "<b>Language</b>"
 msgstr "<b>Kieli</b>"
 
-#: ../plugins/spell/spell-checker.glade2.h:3
+#: ../plugins/spell/spell-checker.ui.h:3
 msgid "<b>word</b>"
 msgstr "<b>sana</b>"
 
-#: ../plugins/spell/spell-checker.glade2.h:4
+#: ../plugins/spell/spell-checker.ui.h:4
 msgid "Add w_ord"
 msgstr "Lisää _sana"
 
-#: ../plugins/spell/spell-checker.glade2.h:5
+#: ../plugins/spell/spell-checker.ui.h:5
 msgid "Cha_nge"
 msgstr "M_uuta"
 
-#: ../plugins/spell/spell-checker.glade2.h:6
+#: ../plugins/spell/spell-checker.ui.h:6
 msgid "Change A_ll"
 msgstr "Ta_llenna kaikki"
 
-#: ../plugins/spell/spell-checker.glade2.h:7
+#: ../plugins/spell/spell-checker.ui.h:7
 msgid "Change _to:"
 msgstr "Mihin _muutetaan:"
 
-#: ../plugins/spell/spell-checker.glade2.h:8
+#: ../plugins/spell/spell-checker.ui.h:8
 msgid "Check _Word"
 msgstr "Tarkista _sana"
 
-#: ../plugins/spell/spell-checker.glade2.h:9
+#: ../plugins/spell/spell-checker.ui.h:9
 msgid "Check spelling"
 msgstr "Oikolue"
 
-#: ../plugins/spell/spell-checker.glade2.h:10
+#: ../plugins/spell/spell-checker.ui.h:10
 msgid "Ignore _All"
 msgstr "Ohita k_aikki"
 
-#: ../plugins/spell/spell-checker.glade2.h:11
+#: ../plugins/spell/spell-checker.ui.h:11
 msgid "Language:"
 msgstr "Kieli:"
 
-#: ../plugins/spell/spell-checker.glade2.h:12
+#: ../plugins/spell/spell-checker.ui.h:12
 msgid "Misspelled word:"
 msgstr "Väärinkirjoitettu sana:"
 
-#: ../plugins/spell/spell-checker.glade2.h:13
+#: ../plugins/spell/spell-checker.ui.h:13
 msgid "User dictionary:"
 msgstr "Käyttäjän sanakirja:"
 
-#: ../plugins/spell/spell-checker.glade2.h:14
+#: ../plugins/spell/spell-checker.ui.h:14
 msgid "_Ignore"
 msgstr "_Ohita"
 
-#: ../plugins/spell/spell-checker.glade2.h:15
+#: ../plugins/spell/spell-checker.ui.h:15
 msgid "_Suggestions:"
 msgstr "_Ehdotukset:"
 
@@ -3519,6 +3607,12 @@ msgstr "Tarkista aktiivisen asiakirjan oikeinkirjoitus."
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:2
 msgid "Spell Checker"
 msgstr "Oikoluku"
+
+#: ../plugins/taglist/gedit-taglist-plugin.c:94
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
+msgid "Tags"
+msgstr "Merkinnät"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:599
 msgid "Select the group of tags you want to use"
@@ -3531,11 +3625,6 @@ msgstr "_Esikatselu"
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:684
 msgid "Available Tag Lists"
 msgstr "Käytettävissä olevat merkinnät"
-
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
-msgid "Tags"
-msgstr "Merkinnät"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
@@ -3632,10 +3721,6 @@ msgstr "Oletuskirjasin"
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
 msgid "Base font (deprecated)"
 msgstr "Peruskirjasin (vanhentunut)"
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:28
-msgid "Bold"
-msgstr "Lihavoitu"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Border"
@@ -5089,7 +5174,7 @@ msgstr "Lisää päiväys ja aika kohdistimen kohdalle"
 msgid "Available formats"
 msgstr "Käytettävissä olevat muodot"
 
-#: ../plugins/time/gedit-time-plugin.c:755
+#: ../plugins/time/gedit-time-plugin.c:759
 msgid "Configure insert date/time plugin..."
 msgstr "Muokkaa päiväys/aika -liitännäisen asetuksia..."
 
@@ -5101,37 +5186,61 @@ msgstr "Lisää päiväys/aika"
 msgid "Inserts current date and time at the cursor position."
 msgstr "Lisää päiväys ja aika kohdistimen kohdalle."
 
-#: ../plugins/time/time.glade2.h:3
+#: ../plugins/time/time.ui.h:3
 msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
 msgstr "<span size=\"small\">01/11/2002 17:52:00</span>"
 
-#: ../plugins/time/time.glade2.h:4
+#: ../plugins/time/time.ui.h:4
 msgid "<span weight=\"bold\"> When inserting date/time...</span>"
 msgstr "<span weight=\"bold\"> Lisättäessä päiväystä/aikaa...</span>"
 
-#: ../plugins/time/time.glade2.h:5
+#: ../plugins/time/time.ui.h:5
 msgid "Configure date/time plugin"
 msgstr "Muokkaa päiväys/aika -liitännäisen asetuksia"
 
-#: ../plugins/time/time.glade2.h:6
+#: ../plugins/time/time.ui.h:6
 msgid "Insert Date and Time"
 msgstr "Lisää päiväys ja aika"
 
-#: ../plugins/time/time.glade2.h:7
+#: ../plugins/time/time.ui.h:7
 msgid "Use the _selected format"
 msgstr "Käytä _valittua muotoilua"
 
-#: ../plugins/time/time.glade2.h:8
+#: ../plugins/time/time.ui.h:8
 msgid "_Insert"
 msgstr "L_isää"
 
-#: ../plugins/time/time.glade2.h:9
+#: ../plugins/time/time.ui.h:9
 msgid "_Prompt for a format"
 msgstr "_Kysy muotoilua"
 
-#: ../plugins/time/time.glade2.h:10
+#: ../plugins/time/time.ui.h:10
 msgid "_Use custom format"
 msgstr "_Käytä mukautettua muotoilua"
+
+#~ msgid ""
+#~ "Nothing\n"
+#~ "Current document\n"
+#~ "All documents"
+#~ msgstr ""
+#~ "Ei mitään\n"
+#~ "Valittu asiakirja\n"
+#~ "Kaikki asiakirjat"
+
+#~ msgid "The entered location is not valid."
+#~ msgstr "Annettu sijainti ei ole kelvollinen."
+
+#~ msgid "gtk-revert-to-saved"
+#~ msgstr "gtk-revert-to-saved"
+
+#~ msgid "on"
+#~ msgstr "päällä"
+
+#~ msgid "Invalid uri"
+#~ msgstr "Virheellinen URI"
+
+#~ msgid "Recent Files"
+#~ msgstr "Viimeaikaiset tiedostot"
 
 #~ msgid "Monospace Regular 9"
 #~ msgstr "Monospace Regular 9"
@@ -5197,72 +5306,6 @@ msgstr "_Käytä mukautettua muotoilua"
 
 #~ msgid "Could not find the required widgets inside %s."
 #~ msgstr "Tarvittavia laajennuksia ei löytynyt kohteesta \"%s\"."
-
-#~ msgid "gedit Style Scheme editor"
-#~ msgstr "geditin tyylimallien muokkain"
-
-#~ msgid "<b>Elements</b>"
-#~ msgstr "<b>Elementit</b>"
-
-#~ msgid "Basic Colors"
-#~ msgstr "Perusvärit"
-
-#~ msgid "Cu_rrent line color:"
-#~ msgstr "_Nykyinen riviväri:"
-
-#~ msgid "Italic"
-#~ msgstr "Kursiivi"
-
-#~ msgid "Pick the background color"
-#~ msgstr "Valitse taustaväri"
-
-#~ msgid "Pick the current line color"
-#~ msgstr "Valitse nykyisen rivin väri"
-
-#~ msgid "Pick the foreground color"
-#~ msgstr "Valitse edustaväri"
-
-#~ msgid "Pick the normal text color"
-#~ msgstr "Valitse normaali tekstiväri"
-
-#~ msgid "Pick the search highlighting color"
-#~ msgstr "Valitse hakujen korostusväri"
-
-#~ msgid "Pick the selected text color"
-#~ msgstr "Valitse valitun tekstin väri"
-
-#~ msgid "Pick the selection color"
-#~ msgstr "Valitse valintaväri"
-
-#~ msgid "S_earch highlighting color:"
-#~ msgstr "_Haun korostusväri:"
-
-#~ msgid "Se_lection color:"
-#~ msgstr "V_alintaväri:"
-
-#~ msgid "Selecte_d text color:"
-#~ msgstr "Valitun _tekstin väri:"
-
-#~ msgid "Strikethrough"
-#~ msgstr "Lävistetty"
-
-#~ msgid "Underline"
-#~ msgstr "Alleviivattu"
-
-#~ msgid "_Background color:"
-#~ msgstr "_Taustaväri:"
-
-#~ msgid "_Background:"
-#~ msgstr "_Tausta:"
-
-#~ msgid "_Foreground:"
-#~ msgstr "_Edustaväri:"
-
-#~ msgid "_Normal text color:"
-#~ msgstr "_Tavallinen tekstiväri:"
-
-#~ msgid "_Reset to Default "
-#~ msgstr "_Aseta oletukseksi"
 
 #~ msgid "My %s"
 #~ msgstr "Oma - %s"
