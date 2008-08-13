@@ -33,6 +33,7 @@
 
 #include <string.h>
 #include <errno.h>
+#include <unistd.h>
 
 #include <glib/gi18n.h>
 

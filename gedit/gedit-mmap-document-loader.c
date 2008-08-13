@@ -41,6 +41,7 @@
 #include <setjmp.h>
 #include <string.h>
 #include <errno.h>
+#include <unistd.h>
 
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>

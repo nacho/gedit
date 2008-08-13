@@ -33,6 +33,7 @@
 #endif
 
 #include <string.h>
+#include <unistd.h>
 
 #include <glib/gi18n.h>
 
