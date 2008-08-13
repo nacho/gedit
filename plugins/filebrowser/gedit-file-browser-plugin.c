@@ -723,7 +723,7 @@ impl_activate (GeditPlugin * plugin, GeditWindow * window)
 			  window);			  
 
 	panel = gedit_window_get_side_panel (window);
-	pixbuf = gedit_file_browser_utils_pixbuf_from_theme("file-manager",  
+	pixbuf = gedit_file_browser_utils_pixbuf_from_theme("system-file-manager",  
 	                                                    GTK_ICON_SIZE_MENU);
 	
 	if (pixbuf) {
