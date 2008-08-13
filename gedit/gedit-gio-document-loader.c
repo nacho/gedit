@@ -450,7 +450,7 @@ recover_not_mounted (AsyncData *async)
 
 	async->tried_mount = TRUE;
 	loader = GEDIT_DOCUMENT_LOADER (async->loader);
-	mount_operation = gedit_document_create_mount_operation (loader->document);
+	mount_operation = _gedit_document_create_mount_operation (loader->document);
 	
 	g_file_mount_enclosing_volume (async->loader->priv->gfile,
 				       G_MOUNT_MOUNT_NONE,

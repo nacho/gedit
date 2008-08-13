@@ -1533,7 +1533,9 @@ gedit_tab_init (GeditTab *tab)
 	doc = gedit_document_new ();
 	g_object_set_data (G_OBJECT (doc), GEDIT_TAB_KEY, tab);
 
-	gedit_document_set_mount_operation_factory (doc, tab_mount_operation_factory, tab);
+	_gedit_document_set_mount_operation_factory (doc,
+						     tab_mount_operation_factory,
+						     tab);
 
 	tab->priv->view = gedit_view_new (doc);
 	g_object_unref (doc);

@@ -628,7 +628,7 @@ recover_not_mounted (AsyncData *async)
 	
 	async->tried_mount = TRUE;
 	saver = GEDIT_DOCUMENT_SAVER (async->saver);
-	mount_operation = gedit_document_create_mount_operation (saver->document);
+	mount_operation = _gedit_document_create_mount_operation (saver->document);
 	
 	g_file_mount_enclosing_volume (async->saver->priv->gfile,
 				       G_MOUNT_MOUNT_NONE,

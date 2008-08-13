@@ -135,8 +135,6 @@ struct _GeditDocumentClass
 					 GtkTextIter      *end);
 };
 
-typedef GMountOperation *(*GeditMountOperationFactory)(GeditDocument *doc, 
-						       gpointer       userdata);
 
 #define GEDIT_DOCUMENT_ERROR gedit_document_error_quark ()
 
@@ -243,15 +241,7 @@ void		 gedit_document_set_enable_search_highlighting
 gboolean	 gedit_document_get_enable_search_highlighting
 						(GeditDocument       *doc);
 
-void		 gedit_document_set_mount_operation_factory
-						(GeditDocument	            *doc,
-						 GeditMountOperationFactory  callback,
-						 gpointer	             userdata);
-GMountOperation
-		*gedit_document_create_mount_operation
-						(GeditDocument	     *doc);
 		
-
 /* 
  * Non exported functions
  */
@@ -278,6 +268,17 @@ void		_gedit_document_search_region   (GeditDocument       *doc,
 #define GEDIT_SEARCH_IS_CASE_SENSITIVE(sflags) ((sflags &  GEDIT_SEARCH_CASE_SENSITIVE) != 0)
 #define GEDIT_SEARCH_SET_CASE_SENSITIVE(sflags,state) ((state == TRUE) ? \
 (sflags |= GEDIT_SEARCH_CASE_SENSITIVE) : (sflags &= ~GEDIT_SEARCH_CASE_SENSITIVE))
+
+typedef GMountOperation *(*GeditMountOperationFactory)(GeditDocument *doc, 
+						       gpointer       userdata);
+
+void		 _gedit_document_set_mount_operation_factory
+						(GeditDocument	            *doc,
+						 GeditMountOperationFactory  callback,
+						 gpointer	             userdata);
+GMountOperation
+		*_gedit_document_create_mount_operation
+						(GeditDocument	     *doc);
 
 G_END_DECLS
 

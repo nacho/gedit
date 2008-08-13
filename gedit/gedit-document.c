@@ -2196,7 +2196,7 @@ gedit_document_get_enable_search_highlighting (GeditDocument *doc)
 }
 
 void
-gedit_document_set_mount_operation_factory (GeditDocument 	       *doc,
+_gedit_document_set_mount_operation_factory (GeditDocument 	       *doc,
 					    GeditMountOperationFactory	callback,
 					    gpointer	                userdata)
 {
@@ -2207,7 +2207,7 @@ gedit_document_set_mount_operation_factory (GeditDocument 	       *doc,
 }
 
 GMountOperation *
-gedit_document_create_mount_operation (GeditDocument *doc)
+_gedit_document_create_mount_operation (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 	
