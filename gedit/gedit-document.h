@@ -36,7 +36,6 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksourcebuffer.h>
-#include <libgnomevfs/gnome-vfs.h>
 
 #include <gedit/gedit-encodings.h>
 

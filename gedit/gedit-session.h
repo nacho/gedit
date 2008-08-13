@@ -38,7 +38,7 @@
 
 G_BEGIN_DECLS
 
-void		gedit_session_init 		(const char *argv0);
+void		gedit_session_init 		(void);
 gboolean	gedit_session_is_restored 	(void);
 gboolean 	gedit_session_load 		(void);
 

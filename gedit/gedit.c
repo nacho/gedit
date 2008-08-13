@@ -32,14 +32,14 @@
 #include <config.h>
 #endif
 
+#include <errno.h>
 #include <locale.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include <glib/gi18n.h>
 #include <glib/goption.h>
 #include <gdk/gdkx.h>
-#include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
 
 #include "gedit-app.h"
 #include "gedit-commands.h"
@@ -53,6 +53,7 @@
 #include "gedit-window.h"
 
 #include "bacon-message-connection.h"
+#include "eggsmclient.h"
 
 static guint32 startup_timestamp = 0;
 static BaconMessageConnection *connection;
@@ -441,12 +442,12 @@ send_bacon_message (void)
 int
 main (int argc, char *argv[])
 {
-	GnomeProgram *program;
 	GOptionContext *context;
 	GeditPluginsEngine *engine;
 	GeditWindow *window;
 	GeditApp *app;
 	gboolean restored = FALSE;
+	GError *error = NULL;
 
 	/* Setup debugging */
 	gedit_debug_init ();
@@ -460,22 +461,21 @@ main (int argc, char *argv[])
 
 	startup_timestamp = get_startup_timestamp();
 
-	gedit_debug_message (DEBUG_APP, "Run gnome_program_init");
-
 	/* Setup command line options */
 	context = g_option_context_new (_("- Edit text files"));
 	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
+	g_option_context_add_group (context, gtk_get_option_group (FALSE));
+	g_option_context_add_group (context, egg_sm_client_get_option_group ());
 	
-	/* Initialize gnome program */
-	program = gnome_program_init ("gedit", VERSION,
-			    LIBGNOMEUI_MODULE, argc, argv,
-			    GNOME_PARAM_GOPTION_CONTEXT, context,
-			    GNOME_PARAM_HUMAN_READABLE_NAME,
-		            _("Text Editor"),
-			    GNOME_PARAM_APP_DATADIR, DATADIR,
-			    NULL);
+	g_thread_init (NULL);
+	gtk_init (&argc, &argv);
 
-	gedit_debug_message (DEBUG_APP, "Done gnome_program_init");
+	if (!g_option_context_parse (context, &argc, &argv, &error))
+	{
+	        g_print(_("%s\nRun '%s --help' to see a full list of available command line options.\n"), error->message, argv[0]);
+		g_error_free (error);
+		return 1;
+	}
 
 	gedit_debug_message (DEBUG_APP, "Create bacon connection");
 
@@ -532,7 +532,7 @@ main (int argc, char *argv[])
 	
 	/* Initialize session management */
 	gedit_debug_message (DEBUG_APP, "Init session manager");		
-	gedit_session_init (argv[0]);
+	gedit_session_init ();
 
 	if (gedit_session_is_restored ())
 		restored = gedit_session_load ();
@@ -589,7 +589,6 @@ main (int argc, char *argv[])
 	gedit_prefs_manager_app_shutdown ();
 	gedit_metadata_manager_shutdown ();
 
-	g_object_unref (program);
 
 	return 0;
 }

@@ -320,7 +320,7 @@ gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
 					      GError             **error)
 {
 	gsize len;
-	ssize_t written;
+	gssize written;
 	gboolean res;
 	gchar *contents;
 
@@ -339,7 +339,7 @@ gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
 	if (res)
 	{
 		const gchar *write_buffer = contents;
-		ssize_t to_write = len;
+		gssize to_write = len;
 
 		do
 		{

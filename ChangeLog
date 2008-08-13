@@ -1,3 +1,33 @@
+2008-08-13  Johan Dahlin  <johan@gnome.org>
+
+	* configure.ac:
+	Remove libgnome/libgnomeui dependencies.
+	Replace them by direct GConf/libxml.
+	Add sm dependency
+
+	* gedit/Makefile.am:
+	Link against eggsmclient.
+
+	* gedit/gedit-document-saver.c
+	(gedit_document_saver_write_document_contents):
+	Remove the usage of a libgnome function.
+
+	* gedit/gedit-document.h:
+	* gedit/gedit-session.c (save_window_session),
+	(client_save_state_cb), (window_handled),
+	(close_confirmation_dialog_response_handler),
+	(client_quit_requested_cb), (client_quit_cb), (gedit_session_init),
+	(gedit_session_is_restored), (parse_window), (gedit_session_load):
+	* gedit/gedit-session.h:
+	Port over from GnomeClient to EggSMClient.
+	This was mostly done by Dan Winship.
+
+	* gedit/gedit.c (main):
+	Don't use GnomeProgram.
+
+	* gedit/smclient/*:
+	Make our own private copy of smclient
+
 === gedit 2.23.2 ===
 
 2008-08-13  Paolo Borelli  <pborelli@katamail.com>

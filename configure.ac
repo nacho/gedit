@@ -21,7 +21,7 @@ AC_SUBST(GEDIT_MICRO_VERSION, gedit_micro_version)
 GEDIT_API_VERSION=2.20
 AC_SUBST(GEDIT_API_VERSION)
 
-AM_INIT_AUTOMAKE([1.8 dist-bzip2 no-dist-gzip])
+AM_INIT_AUTOMAKE([1.8 dist-bzip2 no-dist-gzip -Wno-portability])
 
 AM_MAINTAINER_MODE
 AC_CONFIG_HEADERS(config.h)
@@ -168,7 +168,9 @@ PKG_CHECK_MODULES(GEDIT, [
 	gio-2.0 >= 2.16.0
 	gtk+-2.0 >= 2.13.0
 	gtksourceview-2.0 >= 2.2.0
-	libgnomeui-2.0 >= 2.16.0
+	gconf-2.0 >= 2.16.0
+	libxml-2.0 >= 2.6.22
+	sm >= 1.1.0
 ])
 GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)
@@ -357,6 +359,7 @@ data/Makefile
 docs/Makefile
 docs/reference/Makefile
 gedit/dialogs/Makefile
+gedit/smclient/Makefile
 gedit/Makefile
 help/Makefile
 help/eu/Makefile

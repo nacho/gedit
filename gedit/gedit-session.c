@@ -39,8 +39,6 @@
 #include <unistd.h>
 #include <string.h>
 
-#include <libgnome/gnome-util.h>
-#include <libgnomeui/gnome-client.h>
 #include <libxml/tree.h>
 #include <libxml/xmlwriter.h>
 
@@ -54,258 +52,105 @@
 #include "gedit-app.h"
 #include "gedit-commands.h"
 #include "dialogs/gedit-close-confirmation-dialog.h"
+#include "smclient/eggdesktopfile.h"
+#include "smclient/eggsmclient.h"
 
 /* The master client we use for SM */
-static GnomeClient *master_client = NULL;
+static EggSMClient *master_client = NULL;
 
-/* argv[0] from main(); used as the command to restart the program */
-static const char *program_argv0 = NULL;
-
-/* globals vars used during the interaction. We are
- * assuming there can only be one interaction at a time
- */
-static gint interaction_key;
+/* global var used during quit_requested */
 static GSList *window_dirty_list;
 
 static void	ask_next_confirmation	(void);
 
 #define GEDIT_SESSION_LIST_OF_DOCS_TO_SAVE "gedit-session-list-of-docs-to-save-key"
 
-static gchar *
-get_session_dir ()
-{
-	gchar *gedit_dir;
-	gchar *session_dir;
-
-	gedit_dir = gnome_util_home_file ("gedit");
-	session_dir = g_build_filename (gedit_dir, "sessions", NULL);	
-	g_free (gedit_dir);
-
-	return session_dir;
-}
-
-static gchar *
-get_session_file_path (GnomeClient *client)
-{
-	const gchar *prefix;
-	gchar *session_dir;
-	gchar *session_file;
-	gchar *session_path;
-
-	prefix = gnome_client_get_config_prefix (client);
-	gedit_debug_message (DEBUG_SESSION, "Prefix: %s", prefix);
-
-	session_file = g_strndup (prefix, strlen (prefix) - 1);
-	gedit_debug_message (DEBUG_SESSION, "Session File: %s", session_file);
-
-	session_dir = get_session_dir ();
-
-	session_path = g_build_filename (session_dir,
-					 session_file,
-					 NULL);
-
-	g_free (session_dir);
-	g_free (session_file);
-
-	gedit_debug_message (DEBUG_SESSION, "Session Path: %s", session_path);
-
-	return session_path;
-}
-
-static gboolean
-ensure_session_dir (void)
-{
-	gboolean ret = TRUE;
-	gchar *dir;
-
-	dir = get_session_dir ();
-
-	if (g_file_test (dir, G_FILE_TEST_IS_DIR) == FALSE)
-		ret = (g_mkdir_with_parents (dir, 488) == 0);
-
-	g_free (dir);
-
-	return ret;
-}
-
-static int
-save_window_session (xmlTextWriterPtr  writer,
+static void
+save_window_session (GKeyFile    *state_file,
+		     const gchar *group_name,
 		     GeditWindow      *window)
 {
 	const gchar *role;
+	int width, height;
 	GeditPanel *panel;
 	GList *docs, *l;
-	int ret;
+	GPtrArray *doc_array;
 	GeditDocument *active_document;
-
+	gchar *uri;
+	
 	gedit_debug (DEBUG_SESSION);
 
-	active_document = gedit_window_get_active_document (window);
-
-	ret = xmlTextWriterStartElement (writer, BAD_CAST "window");
-	if (ret < 0)
-		return ret;
-	
-	role = gtk_window_get_role (GTK_WINDOW (window));
-	if (role != NULL)
-	{
-		ret = xmlTextWriterWriteAttribute (writer,
-						   BAD_CAST "role",
-						   BAD_CAST role);
-		if (ret < 0)
-			return ret;
-	}
-
-	ret = xmlTextWriterStartElement (writer, BAD_CAST "side-pane");
-	if (ret < 0)
-		return ret;
+	g_key_file_set_string (state_file, group_name, "role", role);
+	gtk_window_get_size (GTK_WINDOW (window), &width, &height);
+	g_key_file_set_integer (state_file, group_name, "width", width);
+	g_key_file_set_integer (state_file, group_name, "height", height);
 
 	panel = gedit_window_get_side_panel (window);
-	ret = xmlTextWriterWriteAttribute (writer,
-					   BAD_CAST "visible", 
-					   BAD_CAST (GTK_WIDGET_VISIBLE (panel) ? "yes": "no"));
-	if (ret < 0)
-		return ret;
-
-	ret = xmlTextWriterEndElement (writer); /* side-pane */
-	if (ret < 0)
-		return ret;
-
-	ret = xmlTextWriterStartElement (writer, BAD_CAST "bottom-panel");
-	if (ret < 0)
-		return ret;
+	g_key_file_set_boolean (state_file, group_name, "side-panel-visible",
+				GTK_WIDGET_VISIBLE (panel));
 
 	panel = gedit_window_get_bottom_panel (window);
-	ret = xmlTextWriterWriteAttribute (writer,
-					   BAD_CAST "visible", 
-					   BAD_CAST (GTK_WIDGET_VISIBLE (panel) ? "yes" : "no"));
-	if (ret < 0)
-		return ret;
+	g_key_file_set_boolean (state_file, group_name, "bottom-panel-visible",
+				GTK_WIDGET_VISIBLE (panel));
 
-	ret = xmlTextWriterEndElement (writer); /* bottom-panel */
-	if (ret < 0)
-		return ret;
+	active_document = gedit_window_get_active_document (window);
+	if (active_document)
+	{
+	        uri = gedit_document_get_uri (active_document);
+	        g_key_file_set_string (state_file, group_name,
+				       "active-document", uri);
+	}
 
 	docs = gedit_window_get_documents (window);
-	l = docs;
-	while (l != NULL)
-	{
-		gchar *uri;
-		
-		ret = xmlTextWriterStartElement (writer, BAD_CAST "document");
-		if (ret < 0)
-			return ret;
 
+	doc_array = g_ptr_array_new ();
+	for (l = docs; l != NULL; l = g_list_next (l))
+	{
 		uri = gedit_document_get_uri (GEDIT_DOCUMENT (l->data));
 
 		if (uri != NULL)
-		{
-			ret = xmlTextWriterWriteAttribute (writer,
-							   BAD_CAST "uri", 
-							   BAD_CAST uri);
-
-			g_free (uri);
-
-			if (ret < 0)
-				return ret;
-		}
-
-		if (active_document == GEDIT_DOCUMENT (l->data))
-		{
-			ret = xmlTextWriterWriteAttribute (writer,
-							   BAD_CAST "active", 
-							   BAD_CAST "yes");
-			if (ret < 0)
-				return ret;
-		}
-
-		ret = xmlTextWriterEndElement (writer); /* document */
-		if (ret < 0)
-			return ret;
-
-		l = g_list_next (l);
+		        g_ptr_array_add (doc_array, uri);
+			  
 	}
 	g_list_free (docs);	
 
-	ret = xmlTextWriterEndElement (writer); /* window */
-
-	return ret;
+	if (doc_array->len)
+	{
+	        int i;
+ 
+		g_key_file_set_string_list (state_file, group_name,
+					    "documents",
+					    (char **)doc_array->pdata,
+					    doc_array->len);
+		for (i = 0; i < doc_array->len; i++)
+		        g_free (doc_array->pdata[i]);
+	}
+	g_ptr_array_free (doc_array, TRUE);
 }
 
 static void
-save_session ()
+client_save_state_cb (EggSMClient *client,
+		      GKeyFile    *state_file,
+		      gpointer     user_data)
 {
-	int ret;
-	gchar *fname;
-	xmlTextWriterPtr writer;
-	const GList *windows;
-
-	fname = get_session_file_path (master_client);
-
-	gedit_debug_message (DEBUG_SESSION, "Session file: %s", fname);
-
-	if (!ensure_session_dir ())
-	{
-		g_warning ("Cannot create or write in session directory");
-		return;
-	}
-
-	writer = xmlNewTextWriterFilename (fname, 0);
-	if (writer == NULL)
-	{
-		g_warning ("Cannot write the session file '%s'", fname);
-		return;
-	}
-
-	ret = xmlTextWriterSetIndent (writer, 1);
-	if (ret < 0)
-		goto out;
-
-	ret = xmlTextWriterSetIndentString (writer, BAD_CAST " ");
-	if (ret < 0)
-		goto out;
-
-	/* create and set the root node for the session */
-	ret = xmlTextWriterStartElement (writer, BAD_CAST "session");
-	if (ret < 0)
-		goto out;
+        const GList *windows;
+	gchar *group_name;
+	int n;
 
 	windows = gedit_app_get_windows (gedit_app_get_default ());
+	n = 1;
+
 	while (windows != NULL)
 	{
-		ret = save_window_session (writer, 
-					   GEDIT_WINDOW (windows->data));
-		if (ret < 0)
-			goto out;
-
+	        group_name = g_strdup_printf ("gedit window %d", n);
+		save_window_session (state_file,
+				     group_name,
+				     GEDIT_WINDOW (windows->data));
+		g_free (group_name);
+		
 		windows = g_list_next (windows);
+		n++;
 	}
-
-	ret = xmlTextWriterEndElement (writer); /* session */
-	if (ret < 0)
-		goto out;
-
-	ret = xmlTextWriterEndDocument (writer);		
-
-out:
-	xmlFreeTextWriter (writer);
-
-	if (ret < 0)
-		unlink (fname);
-
-	g_free (fname);
-}
-
-static void
-finish_interaction (gboolean cancel_shutdown)
-{
-	/* save session file even if shutdown was cancelled */
-	save_session ();
-
-	gnome_interaction_key_return (interaction_key,
-				      cancel_shutdown);
-
-	interaction_key = 0;
 }
 
 static void
@@ -315,7 +160,7 @@ window_handled (GeditWindow *window)
 
 	/* whee... we made it! */
 	if (window_dirty_list == NULL)
-		finish_interaction (FALSE);
+	        egg_sm_client_will_quit (master_client, TRUE);
 	else
 		ask_next_confirmation ();
 }
@@ -415,7 +260,7 @@ close_confirmation_dialog_response_handler (GeditCloseConfirmationDialog *dlg,
 			window_dirty_list = NULL;
 
 			/* cancel shutdown */
-			finish_interaction (TRUE);
+			egg_sm_client_will_quit (master_client, FALSE);
 
 			break;
 	}
@@ -482,11 +327,14 @@ ask_next_confirmation ()
 	show_confirmation_dialog (GEDIT_WINDOW (window_dirty_list->data));
 }
 
+/* quit_requested handler for the master client */
 static void
-save_all_docs_and_save_session ()
+client_quit_requested_cb (EggSMClient *client, gpointer data)
 {
 	GeditApp *app;
 	const GList *l;
+
+	gedit_debug (DEBUG_SESSION);
 
 	app = gedit_app_get_default ();
 
@@ -504,86 +352,22 @@ save_all_docs_and_save_session ()
 		}
 	}
 
-	/* no modified docs, go on and save session */
+	/* no modified docs */
 	if (window_dirty_list == NULL)
 	{
-		finish_interaction (FALSE);
+		egg_sm_client_will_quit (client, TRUE);
 
 		return;
 	}
 
 	ask_next_confirmation ();
-}
-
-static void
-interaction_function (GnomeClient     *client,
-		      gint             key,
-		      GnomeDialogType  dialog_type,
-		      gpointer         shutdown)
-{
-	gedit_debug (DEBUG_SESSION);
-
-	/* sanity checks */
-	g_return_if_fail (client == master_client);
-
-	if (interaction_key != 0)
-		g_critical ("global variable interaction_key not NULL");
-	interaction_key = key;
-
-	/* If we are shutting down, give the user the chance to save
-	 * first, otherwise just ignore untitled documents documents.
-	 */
-	if (GPOINTER_TO_INT (shutdown))
-	{
-		save_all_docs_and_save_session ();
-	}
-	else
-	{
-		finish_interaction (FALSE);
-	}
-}
-
-/* save_yourself handler for the master client */
-static gboolean
-client_save_yourself_cb (GnomeClient        *client,
-			 gint                phase,
-			 GnomeSaveStyle      save_style,
-			 gboolean            shutdown,
-			 GnomeInteractStyle  interact_style,
-			 gboolean            fast,
-			 gpointer            data)
-{
-	gchar *argv[] = { "rm", "-f", NULL };
-
-	gedit_debug (DEBUG_SESSION);
-
-	gnome_client_request_interaction (client, 
-					  GNOME_DIALOG_NORMAL, 
-					  interaction_function,
-					  GINT_TO_POINTER (shutdown));
-
-	/* Tell the session manager how to discard this save */
-	argv[2] = get_session_file_path (client);
-	gnome_client_set_discard_command (client, 3, argv);
-
-	g_free (argv[2]);
-
-	/* Tell the session manager how to clone or restart this instance */
-
-	argv[0] = (char *) program_argv0;
-	argv[1] = NULL;
-
-	gnome_client_set_clone_command (client, 1, argv);
-	gnome_client_set_restart_command (client, 1, argv);
 
 	gedit_debug_message (DEBUG_SESSION, "END");
-
-	return TRUE;
 }
 
-/* die handler for the master client */
+/* quit handler for the master client */
 static void
-client_die_cb (GnomeClient *client, gpointer data)
+client_quit_cb (EggSMClient *client, gpointer data)
 {
 #if 0
 	gedit_debug (DEBUG_SESSION);
@@ -618,24 +402,26 @@ client_die_cb (GnomeClient *client, gpointer data)
  * the beginning of the program.
  **/
 void
-gedit_session_init (const char *argv0)
+gedit_session_init (void)
 {
 	gedit_debug (DEBUG_SESSION);
 	
 	if (master_client)
-		return;
+	  return;
 
-	program_argv0 = argv0;
-	
-	master_client = gnome_master_client ();
-
+	egg_set_desktop_file (DATADIR "/applications/gedit.desktop");
+	master_client = egg_sm_client_get ();
 	g_signal_connect (master_client,
-			  "save_yourself",
-			  G_CALLBACK (client_save_yourself_cb),
+			  "save_state",
+			  G_CALLBACK (client_save_state_cb),
 			  NULL);
 	g_signal_connect (master_client,
-			  "die",
-			  G_CALLBACK (client_die_cb),
+			  "quit_requested",
+			  G_CALLBACK (client_quit_requested_cb),
+			  NULL);
+	g_signal_connect (master_client,
+			  "quit",
+			  G_CALLBACK (client_quit_cb),
 			  NULL);		  
 }
 
@@ -658,7 +444,7 @@ gedit_session_is_restored (void)
 	if (!master_client)
 		return FALSE;
 
-	restored = (gnome_client_get_flags (master_client) & GNOME_CLIENT_RESTORED) != 0;
+	restored = egg_sm_client_is_resumed (master_client);
 
 	gedit_debug_message (DEBUG_SESSION, restored ? "RESTORED" : "NOT RESTORED");
 
@@ -666,19 +452,21 @@ gedit_session_is_restored (void)
 }
 
 static void
-parse_window (xmlNodePtr node)
+parse_window (GKeyFile *state_file, const char *group_name)
 {
 	GeditWindow *window;
-	xmlChar *role;
-	xmlNodePtr child;
+	gchar *role, *active_document, **documents;
+	int width, height;
+	gboolean visible;
+	GeditPanel *panel;
+	GError *error = NULL;
+  
+	role = g_key_file_get_string (state_file, group_name, "role", NULL);
 
-	role = xmlGetProp (node, BAD_CAST "role");
 	gedit_debug_message (DEBUG_SESSION, "Window role: %s", role);
 
 	window = _gedit_app_restore_window (gedit_app_get_default (), (gchar *) role);
-
-	if (role != NULL)
-		xmlFree (role);
+	g_free (role);
 
 	if (window == NULL)
 	{
@@ -686,96 +474,96 @@ parse_window (xmlNodePtr node)
 		return;
 	}
 
-	child = node->children;
-
-	while (child != NULL)
+	width = g_key_file_get_integer (state_file, group_name,
+					"width", &error);
+	if (error)
 	{
-		if (strcmp ((char *) child->name, "side-pane") == 0)
-		{
-			xmlChar *visible;
-			GeditPanel *panel;
-
-			visible = xmlGetProp (child, BAD_CAST "visible");
-			panel = gedit_window_get_side_panel (window);
-
-			if ((visible != NULL) &&
-			    (strcmp ((char *) visible, "yes") == 0))
-			{
-				gedit_debug_message (DEBUG_SESSION, "Side panel visible");
-				gtk_widget_show (GTK_WIDGET (panel));
-			}
-			else
-			{
-				gedit_debug_message (DEBUG_SESSION, "Side panel _NOT_ visible");
-				gtk_widget_hide (GTK_WIDGET (panel));
-			}
-
-			if (visible != NULL)
-				xmlFree (visible);	
-		}
-		else if (strcmp ((char *) child->name, "bottom-panel") == 0)
-		{
-			xmlChar *visible;
-			GeditPanel *panel;
-
-			visible = xmlGetProp (child, BAD_CAST "visible");
-			panel = gedit_window_get_bottom_panel (window);
-
-			if ((visible != NULL) &&
-			    (strcmp ((char *) visible, "yes") == 0))
-			{
-				gedit_debug_message (DEBUG_SESSION, "Bottom panel visible");
-				gtk_widget_show (GTK_WIDGET (panel));
-			}
-			else
-			{
-				gedit_debug_message (DEBUG_SESSION, "Bottom panel _NOT_ visible");
-				gtk_widget_hide (GTK_WIDGET (panel));
-			}
-
-			if (visible != NULL)
-				xmlFree (visible);
-		}
-		else if  (strcmp ((char *) child->name, "document") == 0)
-		{
-			xmlChar *uri;
-			xmlChar *active;
-
-			uri = xmlGetProp (child, BAD_CAST "uri");
-			if (uri != NULL)
-			{
-				gboolean jump_to;
-
-				active =  xmlGetProp (child,
-						      BAD_CAST "active");
-				if (active != NULL)
-				{
-					jump_to = (xmlStrcmp (BAD_CAST "yes", active) == 0);
-					xmlFree (active);
-				}
-				else
-				{
-					jump_to = FALSE;
-				}
-
-				gedit_debug_message (DEBUG_SESSION,
-						     "URI: %s (%s)",
-						     (gchar *) uri,
-						     jump_to ? "active" : "not active");
-
-				gedit_window_create_tab_from_uri (window,
-								  (const gchar *)uri,
-								  NULL,
-								  0,
-								  FALSE,
-								  jump_to);
-
-				xmlFree (uri);
-			}
-		}
-		
-		child = child->next;
+	        g_clear_error (&error);
+		width = -1;
 	}
+	height = g_key_file_get_integer (state_file, group_name,
+					 "height", &error);
+	if (error)
+	{
+	        g_clear_error (&error);
+		height = -1;
+	}
+	gtk_window_set_default_size (GTK_WINDOW (window), width, height);
+  
+ 
+	visible = g_key_file_get_boolean (state_file, group_name,
+					  "side-panel-visible", &error);
+	if (error)
+	{
+	        g_clear_error (&error);
+		visible = FALSE;
+	}
+  
+	panel = gedit_window_get_side_panel (window);
+  
+	if (visible)
+	{
+	        gedit_debug_message (DEBUG_SESSION, "Side panel visible");
+		gtk_widget_show (GTK_WIDGET (panel));
+	}
+	else
+	{
+	      gedit_debug_message (DEBUG_SESSION, "Side panel _NOT_ visible");
+	      gtk_widget_hide (GTK_WIDGET (panel));
+	}
+  
+	visible = g_key_file_get_boolean (state_file, group_name,
+					  "bottom-panel-visible", &error);
+	if (error)
+	{
+	        g_clear_error (&error);
+		visible = FALSE;
+	}
+  
+	panel = gedit_window_get_bottom_panel (window);
+	if (visible)
+	{
+	        gedit_debug_message (DEBUG_SESSION, "Bottom panel visible");
+		gtk_widget_show (GTK_WIDGET (panel));
+	}
+	else
+	{
+	        gedit_debug_message (DEBUG_SESSION, "Bottom panel _NOT_ visible");
+		gtk_widget_hide (GTK_WIDGET (panel));
+	}
+
+  
+	active_document = g_key_file_get_string (state_file, group_name,
+						 "active-document", NULL);
+	documents = g_key_file_get_string_list (state_file, group_name,
+						"documents", NULL, NULL);
+	if (documents)
+	{
+	        int i;
+		gboolean jump_to = FALSE;
+  
+		for (i = 0; documents[i]; i++)
+		{
+		        if (active_document != NULL)
+			        jump_to = strcmp (active_document,
+						  documents[i]) == 0;
+  
+			gedit_debug_message (DEBUG_SESSION,
+					     "URI: %s (%s)",
+					     documents[i],
+					     jump_to ? "active" : "not active");
+			gedit_window_create_tab_from_uri (window,
+							  documents[i],
+							  NULL,
+							  0,
+							  FALSE,
+							  jump_to);
+		}
+		g_strfreev (documents);
+	}
+ 
+	g_free (active_document);
+	
 	gtk_widget_show (GTK_WIDGET (window));
 }
 
@@ -790,43 +578,24 @@ parse_window (xmlNodePtr node)
 gboolean
 gedit_session_load (void)
 {
-	xmlDocPtr doc;
-        xmlNodePtr child;
-	gchar *fname;
+       GKeyFile *state_file;
+       gchar **groups;
+       int i;
 
 	gedit_debug (DEBUG_SESSION);
 
-	fname = get_session_file_path (master_client);
-	gedit_debug_message (DEBUG_SESSION, "Session file: %s", fname);
-	
-	doc = xmlParseFile (fname);
-	g_free (fname);
-
-	if (doc == NULL)
-		return FALSE;
-
-	child = xmlDocGetRootElement (doc);
-
-	/* skip the session node */
-	child = child->children;
-
-	while (child != NULL)
-	{
-		if (xmlStrEqual (child->name, BAD_CAST "window"))
-		{
-			gedit_debug_message (DEBUG_SESSION, "Restore window");
-
-			parse_window (child);
-
-			// ephy_gui_window_update_user_time (widget, user_time);
-
-			//gtk_widget_show (widget);
-		}
-
-		child = child->next;
-	}
-
-	xmlFreeDoc (doc);
-
+	state_file = egg_sm_client_get_state_file (master_client);
+	if (state_file == NULL)
+	       return FALSE;
+  
+	groups = g_key_file_get_groups (state_file, NULL);
+  
+	/* FIXME: starting from 1 is awkward! */
+	for (i = 1; groups[i]; i++)
+	        parse_window (state_file, groups[i]);
+  
+	g_strfreev (groups);
+	g_key_file_free (state_file);
+ 
 	return TRUE;
 }

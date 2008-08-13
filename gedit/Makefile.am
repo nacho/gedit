@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-SUBDIRS = dialogs
+SUBDIRS = dialogs smclient
 
 bin_PROGRAMS = gedit
 
@@ -8,6 +8,7 @@ noinst_LTLIBRARIES = libgedit.la
 INCLUDES =							\
 	-I$(top_srcdir)						\
 	-I$(srcdir)						\
+	-I$(srcdir)/smclient					\
 	$(GEDIT_CFLAGS)						\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
@@ -17,7 +18,7 @@ INCLUDES =							\
 	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/ui/"\"		\
 	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit-2/plugins"\"	\
 	-DGEDIT_ICONDIR=\""$(datadir)/gedit-2/icons"\"
-	
+
 if ENABLE_PYTHON
 INCLUDES += \
 	$(NO_STRICT_ALIASING_CFLAGS)	\
@@ -27,7 +28,7 @@ INCLUDES += \
 endif
 
 gedit_SOURCES = gedit.c
-gedit_LDADD = libgedit.la $(GEDIT_LIBS)
+gedit_LDADD = libgedit.la smclient/libeggsmclient.la $(GEDIT_LIBS)
 
 gedit_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
