@@ -199,7 +199,7 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 	else
 	{
 		gchar *mapped_file;
-		const gchar *content_type;
+		gchar *content_type;
 		struct sigaction sigbusact;
 
 		/* CHECK: should we lock the file */		

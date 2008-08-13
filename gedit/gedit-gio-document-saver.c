@@ -346,6 +346,8 @@ remote_get_info_cb (GFileOutputStream *stream,
 				     error->code,
 				     error->message);
 			g_error_free (error);
+
+			next_callback = (GAsyncReadyCallback) close_async_ready_cb;
 		}
 	}
 	else

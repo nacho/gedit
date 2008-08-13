@@ -37,6 +37,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
+#include <unistd.h>
 
 #include <glib/gi18n.h>
 #include <glib/gfileutils.h>
