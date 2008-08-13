@@ -43,7 +43,7 @@
 
 void
 _gedit_cmd_help_contents (GtkAction   *action,
-			 GeditWindow *window)
+			  GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -52,7 +52,7 @@ _gedit_cmd_help_contents (GtkAction   *action,
 
 void
 _gedit_cmd_help_about (GtkAction   *action,
-		      GeditWindow *window)
+		       GeditWindow *window)
 {
 	static const gchar * const authors[] = {
 		"Paolo Maggi <paolo@gnome.org>",
@@ -88,6 +88,7 @@ _gedit_cmd_help_about (GtkAction   *action,
 					 NULL);
 
 	gtk_show_about_dialog (GTK_WINDOW (window),
+			       "program-name", "gedit",
 			       "authors", authors,
 			       "comments", _(comments),
 			       "copyright", copyright,
@@ -96,7 +97,6 @@ _gedit_cmd_help_about (GtkAction   *action,
 			       "translator-credits", _("translator-credits"),
 			       "version", VERSION,
 			       "website", "http://www.gedit.org",
-			       "name", "gedit",
 			       NULL);
 
 	if (logo)

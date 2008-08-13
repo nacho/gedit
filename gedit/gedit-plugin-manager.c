@@ -103,7 +103,7 @@ about_button_cb (GtkWidget          *button,
 		gtk_widget_destroy (pm->priv->about);
 
 	pm->priv->about = g_object_new (GTK_TYPE_ABOUT_DIALOG,
-		"name", gedit_plugin_info_get_name (info),
+		"program-name", gedit_plugin_info_get_name (info),
 		"copyright", gedit_plugin_info_get_copyright (info),
 		"authors", gedit_plugin_info_get_authors (info),
 		"comments", gedit_plugin_info_get_description (info),
