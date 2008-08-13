@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-12 15:43+0300\n"
-"PO-Revision-Date: 2008-08-12 15:40+0300\n"
+"POT-Creation-Date: 2008-08-13 16:14+0300\n"
+"PO-Revision-Date: 2008-08-13 16:10+0300\n"
 "Last-Translator: Lauri Nurmi <lanurmi@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1227,7 +1227,7 @@ msgstr "Löydetty ja korvattu yksi esiintymä"
 msgid "Phrase not found"
 msgstr "Lausetta ei löytynyt"
 
-#: ../gedit/gedit-document.c:865 ../gedit/gedit-document.c:878
+#: ../gedit/gedit-document.c:871 ../gedit/gedit-document.c:884
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Tallentamaton asiakirja %d"
@@ -1380,84 +1380,63 @@ msgstr "Kaikki tekstitiedostot"
 msgid "C_haracter Coding:"
 msgstr "_Merkistön koodaus:"
 
+#: ../gedit/gedit-gio-document-loader.c:231
+msgid "File too big"
+msgstr "Tiedosto on liian suuri"
+
+#: ../gedit/gedit-gio-document-loader.c:299
+#, c-format
+msgid "Not a regular file"
+msgstr "Ei ole tavallinen tiedosto"
+
 #: ../gedit/gedit-help.c:82
 msgid "There was an error displaying help."
 msgstr "Virhe näytettäessä ohjetta."
 
-#: ../gedit/gedit-io-error-message-area.c:185
+#: ../gedit/gedit-io-error-message-area.c:161
 #, c-format
 msgid "Could not find the file %s."
 msgstr "Tiedostoa \"%s\" ei löytynyt."
 
-#: ../gedit/gedit-io-error-message-area.c:187
-#: ../gedit/gedit-io-error-message-area.c:226
-#: ../gedit/gedit-io-error-message-area.c:242
+#: ../gedit/gedit-io-error-message-area.c:163
+#: ../gedit/gedit-io-error-message-area.c:206
+#: ../gedit/gedit-io-error-message-area.c:213
 msgid "Please check that you typed the location correctly and try again."
 msgstr "Tarkista, että kirjoitit sijainnin oikein ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:192
-#: ../gedit/gedit-io-error-message-area.c:441
-msgid "The file contains corrupted data."
-msgstr "Tiedosto sisältää viallista dataa."
-
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:203
-#: ../gedit/gedit-io-error-message-area.c:452
+#: ../gedit/gedit-io-error-message-area.c:178
 #, c-format
 msgid "gedit cannot handle %s locations."
 msgstr "gedit ei osaa käsitellä \"%s\"-sijainteja."
 
-#: ../gedit/gedit-io-error-message-area.c:209
-#: ../gedit/gedit-io-error-message-area.c:458
+#: ../gedit/gedit-io-error-message-area.c:184
 msgid "gedit cannot handle this location."
 msgstr "gedit ei pysty käsittelemään tätä sijaintia."
 
-#: ../gedit/gedit-io-error-message-area.c:216
-#: ../gedit/gedit-io-error-message-area.c:465
-msgid "The file contains data in an invalid format."
-msgstr "Tiedosto sisältää dataa epäkelvossa muodossa."
-
-#: ../gedit/gedit-io-error-message-area.c:220
-#: ../gedit/gedit-io-error-message-area.c:469
+#: ../gedit/gedit-io-error-message-area.c:192
 msgid "The file is too big."
 msgstr "Tiedosto on liian suuri."
 
-#: ../gedit/gedit-io-error-message-area.c:224
-#, c-format
-msgid "%s is not a valid location."
-msgstr "\"%s\" ei ole kelvollinen sijainti."
+#: ../gedit/gedit-io-error-message-area.c:196
+msgid "The location of the file cannot be mounted."
+msgstr "Tiedoston sijaintia ei voi liittää."
 
-#: ../gedit/gedit-io-error-message-area.c:231
-#: ../gedit/gedit-io-error-message-area.c:473
-msgid "You do not have the permissions necessary to open the file."
-msgstr "Sinulla ei ole tarvittavia oikeuksia tiedoston avaamiseksi."
+#: ../gedit/gedit-io-error-message-area.c:200
+msgid "The location of the file cannot be accessed because it is not mounted."
+msgstr "Tiedoston sijaintia ei voi avata, koska sitä ei ole liitetty."
 
-#: ../gedit/gedit-io-error-message-area.c:235
-#: ../gedit/gedit-io-error-message-area.c:477
-#: ../gedit/gedit-io-error-message-area.c:1230
-msgid ""
-"There are too many open files. Please close some applications and try again."
-msgstr ""
-"Liian monta avointa tiedostoa. Sulje joitain sovelluksia ja yritä uudelleen."
-
-#: ../gedit/gedit-io-error-message-area.c:240
-#: ../gedit/gedit-io-error-message-area.c:482
+#: ../gedit/gedit-io-error-message-area.c:204
 #, c-format
 msgid "%s is a directory."
 msgstr "\"%s\" on hakemisto."
 
-#: ../gedit/gedit-io-error-message-area.c:247
-#: ../gedit/gedit-io-error-message-area.c:487
-msgid ""
-"Not enough available memory to open the file. Please close some running "
-"applications and try again."
-msgstr ""
-"Muisti ei riitä tiedoston avaamiseen. Sulje jokin käynnissä oleva ohjelma ja "
-"yritä uudelleen."
+#: ../gedit/gedit-io-error-message-area.c:211
+#, c-format
+msgid "%s is not a valid location."
+msgstr "\"%s\" ei ole kelvollinen sijainti."
 
-#: ../gedit/gedit-io-error-message-area.c:275
-#: ../gedit/gedit-io-error-message-area.c:515
-#: ../gedit/gedit-io-error-message-area.c:1269
+#: ../gedit/gedit-io-error-message-area.c:238
 #, c-format
 msgid ""
 "Host %s could not be found. Please check that your proxy settings are "
@@ -1466,14 +1445,7 @@ msgstr ""
 "Verkkonimeä %s ei löydy. Tarkista että välipalvelimesi asetukset ovat "
 "kunnossa ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:286
-#: ../gedit/gedit-io-error-message-area.c:297
-#: ../gedit/gedit-io-error-message-area.c:305
-#: ../gedit/gedit-io-error-message-area.c:526
-#: ../gedit/gedit-io-error-message-area.c:537
-#: ../gedit/gedit-io-error-message-area.c:1280
-#: ../gedit/gedit-io-error-message-area.c:1291
-#: ../gedit/gedit-io-error-message-area.c:1299
+#: ../gedit/gedit-io-error-message-area.c:251
 #, c-format
 msgid ""
 "Host name was invalid. Please check that you typed the location correctly "
@@ -1482,104 +1454,85 @@ msgstr ""
 "Verkkonimi oli virheellinen. Tarkista, että kirjoitit osoitteen oikein ja "
 "yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:311
-#: ../gedit/gedit-io-error-message-area.c:545
-#: ../gedit/gedit-io-error-message-area.c:1305
-msgid ""
-"Host name was empty. Please check that your proxy settings are correct and "
-"try again."
-msgstr ""
-"Verkkonimi on tyhjä. Tarkista, että välipalvelimesi asetukset ovat kunnossa "
-"ja yritä uudelleen."
-
-#: ../gedit/gedit-io-error-message-area.c:317
-#: ../gedit/gedit-io-error-message-area.c:1311
-msgid ""
-"Attempt to log in failed. Please check that you typed the location correctly "
-"and try again."
-msgstr ""
-"Kirjautumisyritys epäonnistui. Tarkista, että annoit sijainnin oikein ja "
-"yritä uudelleen."
-
-#: ../gedit/gedit-io-error-message-area.c:323
-msgid "The file you are trying to open is not a regular file."
-msgstr "Tiedosto jota yrität avata ei ole tavallinen tiedosto."
-
-#: ../gedit/gedit-io-error-message-area.c:327
-#: ../gedit/gedit-io-error-message-area.c:560
-#: ../gedit/gedit-io-error-message-area.c:1339
-msgid "Connection timed out. Please try again."
-msgstr "Yhteys aikakatkaistiin, yritä uudestaan."
-
-#: ../gedit/gedit-io-error-message-area.c:376
-#: ../gedit/gedit-io-error-message-area.c:610
-#: ../gedit/gedit-io-error-message-area.c:1380
-#, c-format
-msgid "Unexpected error: %s"
-msgstr "Odottamaton virhe: %s"
-
-#: ../gedit/gedit-io-error-message-area.c:382
-#: ../gedit/gedit-io-error-message-area.c:776
-#, c-format
-msgid "Could not open the file %s."
-msgstr "Tiedoston \"%s\" avaaminen epäonnistui."
-
-#: ../gedit/gedit-io-error-message-area.c:391
-#: ../gedit/gedit-io-error-message-area.c:683
-msgid "_Retry"
-msgstr "Yritä _uudestaan"
-
-#: ../gedit/gedit-io-error-message-area.c:436
-msgid "gedit cannot find it. Perhaps it has recently been deleted."
-msgstr "gedit ei löydä sitä. Se on ehkä poistettu äskettäin."
-
-#: ../gedit/gedit-io-error-message-area.c:551
-msgid "Attempt to log in failed."
-msgstr "Kirjautuminen epäonnistui."
-
-#: ../gedit/gedit-io-error-message-area.c:555
+#: ../gedit/gedit-io-error-message-area.c:259
 #, c-format
 msgid "%s is not a regular file."
 msgstr "%s ei ole tavallinen tiedosto."
 
-#: ../gedit/gedit-io-error-message-area.c:616
+#: ../gedit/gedit-io-error-message-area.c:264
+msgid "Connection timed out. Please try again."
+msgstr "Yhteys aikakatkaistiin, yritä uudestaan."
+
+#: ../gedit/gedit-io-error-message-area.c:273
+#, c-format
+msgid "Unexpected error: %s"
+msgstr "Odottamaton virhe: %s"
+
+#: ../gedit/gedit-io-error-message-area.c:310
+msgid ""
+"The number of followed links is limited and the actual file could not be "
+"found within this limit."
+msgstr ""
+"Seurattujen linkkien lukumäärä on rajoitettu, eikä todellista tiedostoa "
+"löytynyt tämän rajan puitteissa."
+
+#: ../gedit/gedit-io-error-message-area.c:314
+msgid "You do not have the permissions necessary to open the file."
+msgstr "Sinulla ei ole tarvittavia oikeuksia tiedoston avaamiseksi."
+
+#: ../gedit/gedit-io-error-message-area.c:323
+#: ../gedit/gedit-io-error-message-area.c:545
+#, c-format
+msgid "Could not open the file %s."
+msgstr "Tiedoston \"%s\" avaaminen epäonnistui."
+
+#: ../gedit/gedit-io-error-message-area.c:332
+#: ../gedit/gedit-io-error-message-area.c:452
+msgid "_Retry"
+msgstr "Yritä _uudestaan"
+
+#: ../gedit/gedit-io-error-message-area.c:375
+msgid "gedit cannot find the file. Perhaps it has recently been deleted."
+msgstr "gedit ei löydä tiedostoa. Se on ehkä poistettu äskettäin."
+
+#: ../gedit/gedit-io-error-message-area.c:385
 #, c-format
 msgid "Could not revert the file %s."
 msgstr "Tiedoston \"%s\" palauttaminen levyltä epäonnistui"
 
-#: ../gedit/gedit-io-error-message-area.c:640
+#: ../gedit/gedit-io-error-message-area.c:409
 msgid "Ch_aracter Coding:"
 msgstr "_Merkistön koodaus:"
 
-#: ../gedit/gedit-io-error-message-area.c:778
+#: ../gedit/gedit-io-error-message-area.c:547
 msgid "gedit has not been able to detect the character coding."
 msgstr "gedit ei pystynyt selvittämään merkistön koodausta."
 
-#: ../gedit/gedit-io-error-message-area.c:780
-#: ../gedit/gedit-io-error-message-area.c:789
+#: ../gedit/gedit-io-error-message-area.c:549
+#: ../gedit/gedit-io-error-message-area.c:558
 msgid "Please check that you are not trying to open a binary file."
 msgstr "Tarkista, ettet yritä avata binääritiedostoa."
 
-#: ../gedit/gedit-io-error-message-area.c:781
+#: ../gedit/gedit-io-error-message-area.c:550
 msgid "Select a character coding from the menu and try again."
 msgstr "Valitse merkistön koodaus valikosta ja yritä uudestaan."
 
-#: ../gedit/gedit-io-error-message-area.c:786
+#: ../gedit/gedit-io-error-message-area.c:555
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
 msgstr "Tiedoston \"%s\" avaaminen merkistöä %s käyttäen epäonnistui."
 
-#: ../gedit/gedit-io-error-message-area.c:790
-#: ../gedit/gedit-io-error-message-area.c:842
+#: ../gedit/gedit-io-error-message-area.c:559
+#: ../gedit/gedit-io-error-message-area.c:611
 msgid "Select a different character coding from the menu and try again."
 msgstr "Valitse eri merkistön koodaus valikosta ja yritä uudestaan."
 
-#: ../gedit/gedit-io-error-message-area.c:837
+#: ../gedit/gedit-io-error-message-area.c:606
 #, c-format
 msgid "Could not save the file %s using the %s character coding."
 msgstr "Tiedoston \"%s\" tallennus merkistöä %s käyttäen epäonnistui."
 
-#: ../gedit/gedit-io-error-message-area.c:840
+#: ../gedit/gedit-io-error-message-area.c:609
 msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
@@ -1587,20 +1540,20 @@ msgstr ""
 "Asiakirja sisältää yhden tai useamman merkin, joita ei voida esittää "
 "käyttäen määriteltyä merkistökoodausta."
 
-#: ../gedit/gedit-io-error-message-area.c:903
+#: ../gedit/gedit-io-error-message-area.c:672
 msgid "_Edit Anyway"
 msgstr "_Muokkaa joka tapauksessa"
 
-#: ../gedit/gedit-io-error-message-area.c:906
+#: ../gedit/gedit-io-error-message-area.c:675
 msgid "_Don't Edit"
 msgstr "Älä m_uokkaa"
 
-#: ../gedit/gedit-io-error-message-area.c:921
+#: ../gedit/gedit-io-error-message-area.c:690
 #, c-format
 msgid "This file (%s) is already open in another gedit window."
 msgstr "Tiedosto (%s) on jo auki toisessa geditin ikkunassa."
 
-#: ../gedit/gedit-io-error-message-area.c:936
+#: ../gedit/gedit-io-error-message-area.c:705
 msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
@@ -1608,43 +1561,43 @@ msgstr ""
 "Tämä tiedoston näkymä on avattu vain luettavassa tilassa. Haluatko silti "
 "muokata sitä?"
 
-#: ../gedit/gedit-io-error-message-area.c:994
-#: ../gedit/gedit-io-error-message-area.c:1089
+#: ../gedit/gedit-io-error-message-area.c:763
+#: ../gedit/gedit-io-error-message-area.c:858
 msgid "S_ave Anyway"
 msgstr "T_allenna joka tapauksessa"
 
-#: ../gedit/gedit-io-error-message-area.c:998
-#: ../gedit/gedit-io-error-message-area.c:1093
+#: ../gedit/gedit-io-error-message-area.c:767
+#: ../gedit/gedit-io-error-message-area.c:862
 msgid "D_on't Save"
 msgstr "Älä Ta_llenna"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1016
+#: ../gedit/gedit-io-error-message-area.c:785
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "Tiedostoa \"%s\" on muokattu sen avaamisen jälkeen."
 
-#: ../gedit/gedit-io-error-message-area.c:1032
+#: ../gedit/gedit-io-error-message-area.c:801
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
 "Jos tallennat tiedoston, kaikki ulkopuoliset muutokset hukataan. "
 "Tallennetaanko silti?"
 
-#: ../gedit/gedit-io-error-message-area.c:1111
+#: ../gedit/gedit-io-error-message-area.c:880
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "Varmuuskopiointitiedostoa ei voitu luoda tallennettaessa tiedostoa %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1114
+#: ../gedit/gedit-io-error-message-area.c:883
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr ""
 "Väliaikaista varmuuskopiointitiedostoa ei voitu luoda tallennettaessa "
 "tiedostoa %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1131
+#: ../gedit/gedit-io-error-message-area.c:900
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1657,7 +1610,7 @@ msgstr ""
 "Tallennetaanko silti?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1192
+#: ../gedit/gedit-io-error-message-area.c:961
 #, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
@@ -1666,7 +1619,7 @@ msgstr ""
 "Gedit ei osaa kirjoittaa \"%s\"-sijainteihin. Tarkista, että annoit "
 "sijainnin oikein ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1200
+#: ../gedit/gedit-io-error-message-area.c:969
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1674,7 +1627,7 @@ msgstr ""
 "Gedit ei osaa kirjoittaa tämän tyyppiseen sijaintiin. Tarkista, että annoit "
 "sijainnin oikein ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1209
+#: ../gedit/gedit-io-error-message-area.c:978
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1684,7 +1637,7 @@ msgstr ""
 "Yritä tallentaa pienempi tiedosto tai tallenna levylle jolla ei ole "
 "rajoitusta."
 
-#: ../gedit/gedit-io-error-message-area.c:1216
+#: ../gedit/gedit-io-error-message-area.c:985
 #, c-format
 msgid ""
 "%s is not a valid location. Please check that you typed the location "
@@ -1693,7 +1646,7 @@ msgstr ""
 "%s ei ole kelvollinen sijainti. Tarkista, että kirjoitit osoitteen oikein ja "
 "yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1223
+#: ../gedit/gedit-io-error-message-area.c:991
 msgid ""
 "You do not have the permissions necessary to save the file. Please check "
 "that you typed the location correctly and try again."
@@ -1701,24 +1654,7 @@ msgstr ""
 "Oikeutesi eivät riitä tiedoston tallentamiseen. Tarkista, että annoit "
 "sijainnin oikein ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1235
-#, c-format
-msgid ""
-"%s is a directory. Please check that you typed the location correctly and "
-"try again."
-msgstr ""
-"%s on hakemisto. Tarkista, että kirjoitit osoitteen oikein ja yritä "
-"uudelleen."
-
-#: ../gedit/gedit-io-error-message-area.c:1241
-msgid ""
-"Not enough available memory to save the file. Please close some running "
-"applications and try again."
-msgstr ""
-"Muisti ei riitä tiedoston tallentamiseen. Sulje jokin muu käynnissä oleva "
-"ohjelma ja yritä uudelleen."
-
-#: ../gedit/gedit-io-error-message-area.c:1317
+#: ../gedit/gedit-io-error-message-area.c:998
 msgid ""
 "There is not enough disk space to save the file. Please free some disk space "
 "and try again."
@@ -1726,7 +1662,7 @@ msgstr ""
 "Levytila ei riitä tiedoston tallentamiseksi. Vapauta levytilaa ja yritä "
 "uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1323
+#: ../gedit/gedit-io-error-message-area.c:1003
 msgid ""
 "You are trying to save the file on a read-only disk. Please check that you "
 "typed the location correctly and try again."
@@ -1734,11 +1670,11 @@ msgstr ""
 "Yrität tallentaa tiedostoa levylle, jolta voi vain lukea. Tarkista, että "
 "kirjoitit osoitteen oikein ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1329
+#: ../gedit/gedit-io-error-message-area.c:1009
 msgid "A file with the same name already exists. Please use a different name."
 msgstr "Samanniminen tiedosto on jo olemassa. Käytä toista nimeä."
 
-#: ../gedit/gedit-io-error-message-area.c:1334
+#: ../gedit/gedit-io-error-message-area.c:1014
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please use a shorter name."
@@ -1746,16 +1682,7 @@ msgstr ""
 "Levy, jolle yrität tallentaa tiedostoa, rajoittaa tiedostonimien pituutta. "
 "Valitse lyhyempi nimi."
 
-#: ../gedit/gedit-io-error-message-area.c:1343
-#, c-format
-msgid ""
-"%s is not a regular file. Please check that you typed the location correctly "
-"and try again."
-msgstr ""
-"\"%s\" ei ole tavallinen tiedosto. Tarkista, että syötit sijainnin oikein ja "
-"yritä uudestaan."
-
-#: ../gedit/gedit-io-error-message-area.c:1386
+#: ../gedit/gedit-io-error-message-area.c:1029
 #, c-format
 msgid "Could not save the file %s."
 msgstr "Tiedoston \"%s\" tallentaminen epäonnistui."
@@ -1763,25 +1690,25 @@ msgstr "Tiedoston \"%s\" tallentaminen epäonnistui."
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1428
+#: ../gedit/gedit-io-error-message-area.c:1071
 #, c-format
 msgid "The file %s changed on disk."
 msgstr "Tiedosto %s on muuttunut levyllä."
 
-#: ../gedit/gedit-io-error-message-area.c:1433
+#: ../gedit/gedit-io-error-message-area.c:1076
 msgid "Do you want to drop your changes and reload the file?"
 msgstr "Haluatko hylätä muutoksesi ja ladata tiedoston uudestaan?"
 
-#: ../gedit/gedit-io-error-message-area.c:1435
+#: ../gedit/gedit-io-error-message-area.c:1078
 msgid "Do you want to reload the file?"
 msgstr "Haluatko ladata tiedoston uudestaan?"
 
-#: ../gedit/gedit-io-error-message-area.c:1445
+#: ../gedit/gedit-io-error-message-area.c:1088
 msgid "_Reload"
 msgstr "Ko_rvaa"
 
 #. bad bad luck...
-#: ../gedit/gedit-local-document-saver.c:361
+#: ../gedit/gedit-local-document-saver.c:359
 msgid "Could not obtain backup filename"
 msgstr "Varmuuskopiointitiedostonimeä ei voitu luoda"
 
@@ -2032,38 +1959,38 @@ msgid "Saving %s"
 msgstr "Tallennetaan %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1644
+#: ../gedit/gedit-tab.c:1657
 msgid "RO"
 msgstr "LUKU"
 
-#: ../gedit/gedit-tab.c:1690
+#: ../gedit/gedit-tab.c:1703
 #, c-format
 msgid "Error opening file %s"
 msgstr "Virhe avattaessa tiedostoa %s"
 
-#: ../gedit/gedit-tab.c:1695
+#: ../gedit/gedit-tab.c:1708
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Virhe palautettaessa tiedostoa %s"
 
-#: ../gedit/gedit-tab.c:1700
+#: ../gedit/gedit-tab.c:1713
 #, c-format
 msgid "Error saving file %s"
 msgstr "Virhe tallennettaessa tiedostoa %s"
 
-#: ../gedit/gedit-tab.c:1719
+#: ../gedit/gedit-tab.c:1732
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1726
+#: ../gedit/gedit-tab.c:1739
 msgid "Name:"
 msgstr "Nimi:"
 
-#: ../gedit/gedit-tab.c:1727
+#: ../gedit/gedit-tab.c:1740
 msgid "MIME Type:"
 msgstr "MIME-tyyppi:"
 
-#: ../gedit/gedit-tab.c:1728
+#: ../gedit/gedit-tab.c:1741
 msgid "Encoding:"
 msgstr "Koodaustapa:"
 
@@ -2358,7 +2285,7 @@ msgid "Please check your installation."
 msgstr "Tarkista asennuksesi."
 
 #: ../gedit/gedit-utils.c:1075
-#,  c-format
+#, c-format
 msgid "Unable to open ui file %s. Error: %s"
 msgstr "UI-tiedostoa %s ei voi avata. Virhe: %s"
 
@@ -2938,8 +2865,8 @@ msgid ""
 "The renamed file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
 msgstr ""
-"Uudelleennimetty tiedosto on tällä hetkellä suodatettu pois. Sinun täytyy muuttaa "
-"suodatinasetuksiasi, jos haluat nähdä sen."
+"Uudelleennimetty tiedosto on tällä hetkellä suodatettu pois. Sinun täytyy "
+"muuttaa suodatinasetuksiasi, jos haluat nähdä sen."
 
 #: ../plugins/filebrowser/gedit-file-browser-store.c:3360
 msgid "file"
@@ -5217,6 +5144,67 @@ msgstr "_Kysy muotoilua"
 #: ../plugins/time/time.ui.h:10
 msgid "_Use custom format"
 msgstr "_Käytä mukautettua muotoilua"
+
+#~ msgid "The file contains corrupted data."
+#~ msgstr "Tiedosto sisältää viallista dataa."
+
+#~ msgid "The file contains data in an invalid format."
+#~ msgstr "Tiedosto sisältää dataa epäkelvossa muodossa."
+
+#~ msgid ""
+#~ "There are too many open files. Please close some applications and try "
+#~ "again."
+#~ msgstr ""
+#~ "Liian monta avointa tiedostoa. Sulje joitain sovelluksia ja yritä "
+#~ "uudelleen."
+
+#~ msgid ""
+#~ "Not enough available memory to open the file. Please close some running "
+#~ "applications and try again."
+#~ msgstr ""
+#~ "Muisti ei riitä tiedoston avaamiseen. Sulje jokin käynnissä oleva ohjelma "
+#~ "ja yritä uudelleen."
+
+#~ msgid ""
+#~ "Host name was empty. Please check that your proxy settings are correct "
+#~ "and try again."
+#~ msgstr ""
+#~ "Verkkonimi on tyhjä. Tarkista, että välipalvelimesi asetukset ovat "
+#~ "kunnossa ja yritä uudelleen."
+
+#~ msgid ""
+#~ "Attempt to log in failed. Please check that you typed the location "
+#~ "correctly and try again."
+#~ msgstr ""
+#~ "Kirjautumisyritys epäonnistui. Tarkista, että annoit sijainnin oikein ja "
+#~ "yritä uudelleen."
+
+#~ msgid "The file you are trying to open is not a regular file."
+#~ msgstr "Tiedosto jota yrität avata ei ole tavallinen tiedosto."
+
+#~ msgid "Attempt to log in failed."
+#~ msgstr "Kirjautuminen epäonnistui."
+
+#~ msgid ""
+#~ "%s is a directory. Please check that you typed the location correctly and "
+#~ "try again."
+#~ msgstr ""
+#~ "%s on hakemisto. Tarkista, että kirjoitit osoitteen oikein ja yritä "
+#~ "uudelleen."
+
+#~ msgid ""
+#~ "Not enough available memory to save the file. Please close some running "
+#~ "applications and try again."
+#~ msgstr ""
+#~ "Muisti ei riitä tiedoston tallentamiseen. Sulje jokin muu käynnissä oleva "
+#~ "ohjelma ja yritä uudelleen."
+
+#~ msgid ""
+#~ "%s is not a regular file. Please check that you typed the location "
+#~ "correctly and try again."
+#~ msgstr ""
+#~ "\"%s\" ei ole tavallinen tiedosto. Tarkista, että syötit sijainnin oikein "
+#~ "ja yritä uudestaan."
 
 #~ msgid ""
 #~ "Nothing\n"
