@@ -1797,12 +1797,13 @@ file_browser_node_set_from_info (GeditFileBrowserStore * model,
 					  &error);
 					  
 		if (!info) {
-			uri = g_file_get_uri (node->file);
-			
-			g_warning ("Could not get info for %s: %s", uri, error->message);
+			if (!(error->domain == G_IO_ERROR && error->code == G_IO_ERROR_NOT_FOUND)) {
+				uri = g_file_get_uri (node->file);
+				g_warning ("Could not get info for %s: %s", uri, error->message);
+				g_free (uri);
+			}
 			g_error_free (error);
-			g_free (uri);
-			
+
 			return;
 		}
 		
@@ -1914,20 +1915,19 @@ model_add_node_from_file (GeditFileBrowserStore * model,
 static FileBrowserNode *
 model_add_node_from_dir (GeditFileBrowserStore * model,
 			 FileBrowserNode * parent,
-			 GFile * file,
-			 GFileInfo * info)
+			 GFile * file)
 {
 	FileBrowserNode *node;
 
-	// Check if it already exists
+	/* Check if it already exists */
 	if ((node = model_file_exists (model, parent, file)) == NULL) {	
 		node = file_browser_node_dir_new (model, file, parent);
-		file_browser_node_set_from_info (model, node, info, FALSE);
+		file_browser_node_set_from_info (model, node, NULL, FALSE);
 
 		if (node->name == NULL) {
 			file_browser_node_set_name (node);
 		}
-		
+
 		if (node->icon == NULL) {
 			node->icon = gedit_file_browser_utils_pixbuf_from_theme ("folder", GTK_ICON_SIZE_MENU);
 		}
@@ -2403,7 +2403,7 @@ set_virtual_root_from_file (GeditFileBrowserStore * model,
 	for (item = files; item; item = item->next) {
 		check = G_FILE (item->data);
 		
-		parent = model_add_node_from_dir (model, parent, check, NULL);
+		parent = model_add_node_from_dir (model, parent, check);
 		g_object_unref (check);
 	}
 
