@@ -77,9 +77,10 @@ save_window_session (GKeyFile    *state_file,
 	GPtrArray *doc_array;
 	GeditDocument *active_document;
 	gchar *uri;
-	
+
 	gedit_debug (DEBUG_SESSION);
 
+    role = gtk_window_get_role (GTK_WINDOW (window));
 	g_key_file_set_string (state_file, group_name, "role", role);
 	gtk_window_get_size (GTK_WINDOW (window), &width, &height);
 	g_key_file_set_integer (state_file, group_name, "width", width);
@@ -120,7 +121,7 @@ save_window_session (GKeyFile    *state_file,
  
 		g_key_file_set_string_list (state_file, group_name,
 					    "documents",
-					    (char **)doc_array->pdata,
+					    (const char **)doc_array->pdata,
 					    doc_array->len);
 		for (i = 0; i < doc_array->len; i++)
 		        g_free (doc_array->pdata[i]);
