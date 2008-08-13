@@ -32,8 +32,4 @@ libeggdesktopfile_la_SOURCES =           \
 	eggdesktopfile.h
 
 EXTRA_DIST =                             \
-	README                           \
-	gedit.diff                       \
-	eggsmclient-osx.c                \
-	eggsmclient-win32.c              \
 	eggsmclient-xsmp.c
