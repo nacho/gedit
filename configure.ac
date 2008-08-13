@@ -163,14 +163,13 @@ dnl Start of pkg-config checks
 dnl ================================================================
 
 PKG_CHECK_MODULES(GEDIT, [
+	sm >= 1.0.0
 	libxml-2.0 >= 2.5.0
 	glib-2.0 >= 2.13.0
 	gio-2.0 >= 2.16.0
 	gtk+-2.0 >= 2.13.0
 	gtksourceview-2.0 >= 2.2.0
-	gconf-2.0 >= 2.16.0
-	libxml-2.0 >= 2.6.22
-	sm >= 1.1.0
+	gconf-2.0 >= 1.1.11
 ])
 GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)
