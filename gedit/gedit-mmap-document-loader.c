@@ -44,7 +44,6 @@
 
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
-#include <libgnomevfs/gnome-vfs.h>
 
 #include "gedit-mmap-document-loader.h"
 #include "gedit-debug.h"
@@ -62,7 +61,7 @@
 
 static void		 gedit_mmap_document_loader_load		(GeditDocumentLoader *loader);
 static gboolean		 gedit_mmap_document_loader_cancel		(GeditDocumentLoader *loader);
-static const gchar	*gedit_mmap_document_loader_get_mime_type	(GeditDocumentLoader *loader);
+static const gchar	*gedit_mmap_document_loader_get_content_type	(GeditDocumentLoader *loader);
 static time_t		 gedit_mmap_document_loader_get_mtime		(GeditDocumentLoader *loader);
 static goffset		 gedit_mmap_document_loader_get_file_size	(GeditDocumentLoader *loader);
 static goffset		 gedit_mmap_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
@@ -71,7 +70,7 @@ static gboolean		 gedit_mmap_document_loader_get_readonly	(GeditDocumentLoader *
 struct _GeditMmapDocumentLoaderPrivate
 {
 	struct stat statbuf;
-	gchar      *mime_type;
+	gchar      *content_type;
 	guint       statbuf_filled : 1;
 
 	goffset     bytes_read;
@@ -93,7 +92,7 @@ gedit_mmap_document_loader_finalize (GObject *object)
 
 	priv = GEDIT_MMAP_DOCUMENT_LOADER (object)->priv;
 
-	g_free (priv->mime_type);
+	g_free (priv->content_type);
 	g_free (priv->local_file_name);
 	g_free (priv->buffer);
 
@@ -113,7 +112,7 @@ gedit_mmap_document_loader_class_init (GeditMmapDocumentLoaderClass *klass)
 
 	loader_class->load = gedit_mmap_document_loader_load;
 	loader_class->cancel = gedit_mmap_document_loader_cancel;
-	loader_class->get_mime_type = gedit_mmap_document_loader_get_mime_type;
+	loader_class->get_content_type = gedit_mmap_document_loader_get_content_type;
 	loader_class->get_mtime = gedit_mmap_document_loader_get_mtime;
 	loader_class->get_file_size = gedit_mmap_document_loader_get_file_size;
 	loader_class->get_bytes_read = gedit_mmap_document_loader_get_bytes_read;
@@ -127,7 +126,7 @@ gedit_mmap_document_loader_init (GeditMmapDocumentLoader *mloader)
 {
 	mloader->priv = GEDIT_MMAP_DOCUMENT_LOADER_GET_PRIVATE (mloader);
 	mloader->priv->statbuf_filled = FALSE;
-	mloader->priv->mime_type = NULL;
+	mloader->priv->content_type = NULL;
 	mloader->priv->fd = -1;
 	mloader->priv->error = NULL;
 }
@@ -149,19 +148,16 @@ mmap_sigbus_handler (int signo)
 static gboolean
 load_file_real (GeditMmapDocumentLoader *mloader)
 {
-	GnomeVFSResult result;
 	gint ret;
 
 	g_return_val_if_fail (mloader->priv->fd != -1, FALSE);
 
 	if (fstat (mloader->priv->fd, &mloader->priv->statbuf) != 0) 
 	{
-		result = gnome_vfs_result_from_errno ();
-
 		g_set_error (&mloader->priv->error,
 			     GEDIT_DOCUMENT_ERROR,
-			     result,
-			     gnome_vfs_result_to_string (result));
+			     g_io_error_from_errno (errno),
+			     g_strerror (errno));
 
 		goto done;
 	}
@@ -173,14 +169,14 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 		{
 			g_set_error (&mloader->priv->error,
 				     GEDIT_DOCUMENT_ERROR,
-				     GNOME_VFS_ERROR_IS_DIRECTORY,
-				     gnome_vfs_result_to_string (GNOME_VFS_ERROR_IS_DIRECTORY));
+				     G_IO_ERROR_IS_DIRECTORY,
+				     "Is a directory");
 		}
 		else
 		{
 			g_set_error (&mloader->priv->error,
 				     GEDIT_DOCUMENT_ERROR,
-				     GEDIT_DOCUMENT_ERROR_NOT_REGULAR_FILE,
+				     G_IO_ERROR_NOT_REGULAR_FILE,
 				     "Not a regular file");
 		}
 
@@ -202,7 +198,7 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 	else
 	{
 		gchar *mapped_file;
-		const gchar *mime_type;
+		const gchar *content_type;
 		struct sigaction sigbusact;
 
 		/* CHECK: should we lock the file */		
@@ -217,12 +213,10 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 		{
 			gedit_debug_message (DEBUG_LOADER, "mmap failed");
 
-			result = gnome_vfs_result_from_errno ();
-
 			g_set_error (&mloader->priv->error,
 				     GEDIT_DOCUMENT_ERROR,
-				     result,
-				     gnome_vfs_result_to_string (result));
+				     g_io_error_from_errno (errno),
+				     g_strerror (errno));
 
 			goto done;
 		}
@@ -243,8 +237,8 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 
 			g_set_error (&mloader->priv->error,
 				     GEDIT_DOCUMENT_ERROR,
-				     GNOME_VFS_ERROR_IO,
-				     gnome_vfs_result_to_string (GNOME_VFS_ERROR_IO));
+				     G_IO_ERROR_FAILED,
+				     "I/O error");
 
 			ret = munmap (mapped_file, mloader->priv->statbuf.st_size);
 			if (ret != 0)
@@ -275,15 +269,15 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 		/* restore the default sigbus handler */
 		sigaction (SIGBUS, &old_sigbusact, 0);
 
-		mime_type = gnome_vfs_get_mime_type_for_name_and_data (mloader->priv->local_file_name,
-								       mapped_file,
-								       MIN (mloader->priv->bytes_read,
-									    MAX_MIME_SNIFF_SIZE));
+		content_type = g_content_type_guess (mloader->priv->local_file_name,
+						    (const guchar *)mapped_file,
+						     MIN (mloader->priv->bytes_read,
+						         MAX_MIME_SNIFF_SIZE),
+						     NULL);
 
-		if ((mime_type != NULL) &&
-		     strcmp (mime_type, GNOME_VFS_MIME_TYPE_UNKNOWN) != 0)
+		if ((content_type != NULL) && !g_content_type_is_unknown (content_type))
 		{
-			mloader->priv->mime_type = g_strdup (mime_type);
+			mloader->priv->content_type = content_type;
 		}
 
 		ret = munmap (mapped_file, mloader->priv->statbuf.st_size);
@@ -335,12 +329,10 @@ load_file (GeditMmapDocumentLoader *mloader,
 	mloader->priv->fd = open (fname, O_RDONLY);
 	if (mloader->priv->fd == -1)
 	{
-		GnomeVFSResult result = gnome_vfs_result_from_errno ();
-
 		g_set_error (&mloader->priv->error,
 			     GEDIT_DOCUMENT_ERROR,
-			     result,
-			     gnome_vfs_result_to_string (result));
+			     g_io_error_from_errno (errno),
+			     g_strerror (errno));
 
 		g_timeout_add_full (G_PRIORITY_HIGH,
 				    0,
@@ -366,8 +358,12 @@ gedit_mmap_document_loader_load (GeditDocumentLoader *loader)
 {
 	GeditMmapDocumentLoader *mloader = GEDIT_MMAP_DOCUMENT_LOADER (loader);
 	gchar *local_path;
+	GFile *gfile;
+	
+	gfile = g_file_new_for_uri (loader->uri);
+	local_path = g_file_get_path (gfile);
+	g_object_unref (gfile);
 
-	local_path = gnome_vfs_get_local_path_from_uri (loader->uri);
 	if (local_path != NULL)
 	{
 		load_file (mloader, local_path);
@@ -377,15 +373,15 @@ gedit_mmap_document_loader_load (GeditDocumentLoader *loader)
 	{
 		g_set_error (&mloader->priv->error,
 			     GEDIT_DOCUMENT_ERROR,
-			     GNOME_VFS_ERROR_NOT_SUPPORTED,
-			     gnome_vfs_result_to_string (GNOME_VFS_ERROR_NOT_SUPPORTED));
+			     G_IO_ERROR_NOT_SUPPORTED,
+			     "Not supported");
 	}
 }
 
 static const gchar *
-gedit_mmap_document_loader_get_mime_type (GeditDocumentLoader *loader)
+gedit_mmap_document_loader_get_content_type (GeditDocumentLoader *loader)
 {
-	return GEDIT_MMAP_DOCUMENT_LOADER (loader)->priv->mime_type;
+	return GEDIT_MMAP_DOCUMENT_LOADER (loader)->priv->content_type;
 }
 
 static time_t
@@ -404,8 +400,8 @@ gedit_mmap_document_loader_get_file_size (GeditDocumentLoader *loader)
 	GeditMmapDocumentLoader *mloader = GEDIT_MMAP_DOCUMENT_LOADER (loader);
 
 	if (!mloader->priv->statbuf_filled)
-		return (goffset) 0;
-	return (goffset) mloader->priv->statbuf.st_size;
+		return 0;
+	return mloader->priv->statbuf.st_size;
 }
 
 static goffset
@@ -421,8 +417,8 @@ gedit_mmap_document_loader_cancel (GeditDocumentLoader *loader)
 
 	g_set_error (&mloader->priv->error,
 		     GEDIT_DOCUMENT_ERROR,
-		     GNOME_VFS_ERROR_CANCELLED,
-		     gnome_vfs_result_to_string (GNOME_VFS_ERROR_CANCELLED));
+		     G_IO_ERROR_CANCELLED,
+		     "Cancelled");
 
 	gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (mloader),
 				       TRUE,

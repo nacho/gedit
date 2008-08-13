@@ -86,7 +86,7 @@ struct _GeditDocumentSaverClass
 	/* VTable */
 	void			(* save)		(GeditDocumentSaver *saver,
 							 time_t              old_mtime);
-	const gchar *		(* get_mime_type)	(GeditDocumentSaver *saver);
+	const gchar *		(* get_content_type)	(GeditDocumentSaver *saver);
 	time_t			(* get_mtime)		(GeditDocumentSaver *saver);
 	goffset			(* get_file_size)	(GeditDocumentSaver *saver);
 	goffset			(* get_bytes_written)	(GeditDocumentSaver *saver);
@@ -102,6 +102,14 @@ GeditDocumentSaver 	*gedit_document_saver_new 		(GeditDocument        *doc,
 								 const gchar          *uri,
 								 const GeditEncoding  *encoding,
 								 GeditDocumentSaveFlags flags);
+
+gchar			*gedit_document_saver_get_document_contents (
+								 GeditDocumentSaver  *saver,
+								 gsize		     *len,
+								 GError             **error);
+
+gchar			*gedit_document_saver_get_end_newline	(GeditDocumentSaver *saver,
+								 gsize              *len);
 
 gboolean		 gedit_document_saver_write_document_contents (
 								 GeditDocumentSaver  *saver,
@@ -125,7 +133,7 @@ const gchar		*gedit_document_saver_get_backup_uri	(GeditDocumentSaver  *saver);
 void			*gedit_document_saver_set_backup_uri	(GeditDocumentSaver  *saver,
 							 	 const gchar         *backup_uri);
 
-const gchar		*gedit_document_saver_get_mime_type	(GeditDocumentSaver  *saver);
+const gchar		*gedit_document_saver_get_content_type	(GeditDocumentSaver  *saver);
 
 time_t			 gedit_document_saver_get_mtime		(GeditDocumentSaver  *saver);
 

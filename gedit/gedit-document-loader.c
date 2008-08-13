@@ -44,7 +44,7 @@
 
 /* Those are for the the gedit_document_loader_new() factory */
 #include "gedit-mmap-document-loader.h"
-#include "gedit-gnomevfs-document-loader.h"
+#include "gedit-gio-document-loader.h"
 
 G_DEFINE_ABSTRACT_TYPE(GeditDocumentLoader, gedit_document_loader, G_TYPE_OBJECT)
 
@@ -367,7 +367,7 @@ gedit_document_loader_new (GeditDocument       *doc,
 	if (gedit_utils_uri_has_file_scheme (uri))
 		loader_type = GEDIT_TYPE_MMAP_DOCUMENT_LOADER;
 	else
-		loader_type = GEDIT_TYPE_GNOMEVFS_DOCUMENT_LOADER;
+		loader_type = GEDIT_TYPE_GIO_DOCUMENT_LOADER;
 
 	loader = GEDIT_DOCUMENT_LOADER (g_object_new (loader_type,
 						      "document", doc,
@@ -417,11 +417,11 @@ gedit_document_loader_get_uri (GeditDocumentLoader *loader)
 
 /* it may return NULL, it's up to gedit-document handle it */
 const gchar *
-gedit_document_loader_get_mime_type (GeditDocumentLoader *loader)
+gedit_document_loader_get_content_type (GeditDocumentLoader *loader)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), NULL);
 
-	return GEDIT_DOCUMENT_LOADER_GET_CLASS (loader)->get_mime_type (loader);
+	return GEDIT_DOCUMENT_LOADER_GET_CLASS (loader)->get_content_type (loader);
 }
 
 time_t

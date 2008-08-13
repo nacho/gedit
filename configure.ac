@@ -164,11 +164,10 @@ dnl ================================================================
 
 PKG_CHECK_MODULES(GEDIT, [
 	glib-2.0 >= 2.13.0
+	gio-2.0 >= 2.16.0
 	gtk+-2.0 >= 2.13.0
 	gtksourceview-2.0 >= 2.2.0
 	libgnomeui-2.0 >= 2.16.0
-	gnome-vfs-2.0 >= 2.16.0
-	gio-2.0 >= 2.16.0
 ])
 GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)

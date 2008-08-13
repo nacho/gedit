@@ -40,7 +40,7 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include <libgnomevfs/gnome-vfs.h>
+#include <gio/gio.h>
 
 #include "gedit-utils.h"
 #include "gedit-convert.h"
@@ -60,14 +60,13 @@ is_recoverable_error (const GError *error)
 	if (error->domain == GEDIT_DOCUMENT_ERROR)
 	{
 		switch (error->code) {
-		case GNOME_VFS_ERROR_ACCESS_DENIED:
-		case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
-		case GNOME_VFS_ERROR_NO_MEMORY:
-		case GNOME_VFS_ERROR_HOST_NOT_FOUND:
-		case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
-		case GNOME_VFS_ERROR_LOGIN_FAILED:
-		case GNOME_VFS_ERROR_TIMEOUT:
-
+		case G_IO_ERROR_PERMISSION_DENIED:
+		case G_IO_ERROR_NOT_FOUND:
+		case G_IO_ERROR_HOST_NOT_FOUND:
+		case G_IO_ERROR_TIMED_OUT:
+		case G_IO_ERROR_NOT_MOUNTABLE_FILE:
+		case G_IO_ERROR_NOT_MOUNTED:
+		case G_IO_ERROR_BUSY:
 			is_recoverable = TRUE;
 		}
 	}
@@ -149,6 +148,134 @@ create_io_loading_error_message_area (const gchar *primary_text,
 	return message_area;
 }
 
+static void
+parse_error (const GError *error, 
+	     gchar       **error_message, 
+	     gchar       **message_details, 
+	     const gchar  *uri, 
+	     const gchar  *uri_for_display)
+{
+	switch (error->code)
+	{
+	case G_IO_ERROR_NOT_FOUND:
+		*error_message = g_strdup_printf (_("Could not find the file %s."),
+						  uri_for_display);
+		*message_details = g_strdup (_("Please check that you typed the "
+				      	       "location correctly and try again."));
+		break;
+	case G_IO_ERROR_NOT_SUPPORTED:
+		{
+			gchar *scheme_string;
+			gchar *scheme_markup;
+			
+			scheme_string = g_uri_parse_scheme (uri);
+
+			if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
+			{
+	  			scheme_markup = g_markup_printf_escaped ("<i>%s:</i>", scheme_string);
+
+				/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
+				*message_details = g_strdup_printf (_("gedit cannot handle %s locations."),
+								   scheme_markup);
+				g_free (scheme_markup);
+			}
+			else
+			{
+				*message_details = g_strdup (_("gedit cannot handle this location."));
+			}	
+
+			g_free (scheme_string);
+		}
+		break;
+
+	case GEDIT_DOCUMENT_ERROR_TOO_BIG:
+		*message_details = g_strdup (_("The file is too big."));
+		break;
+
+	case G_IO_ERROR_NOT_MOUNTABLE_FILE:
+		*message_details = g_strdup (_("The location of the file cannot be mounted."));
+		break;
+	
+	case G_IO_ERROR_NOT_MOUNTED:
+		*message_details = g_strdup( _("The location of the file cannot be accessed because it is not mounted."));
+
+		break;	
+	case G_IO_ERROR_IS_DIRECTORY:
+		*error_message = g_strdup_printf (_("%s is a directory."),
+						 uri_for_display);
+		*message_details = g_strdup (_("Please check that you typed the "
+					      "location correctly and try again."));
+		break;
+		
+	case G_IO_ERROR_INVALID_FILENAME:
+		*error_message = g_strdup_printf (_("%s is not a valid location."),
+						 uri_for_display);
+		*message_details = g_strdup (_("Please check that you typed the "
+					      "location correctly and try again."));
+		break;
+		
+	case G_IO_ERROR_HOST_NOT_FOUND:
+		/* This case can be hit for user-typed strings like "foo" due to
+		 * the code that guesses web addresses when there's no initial "/".
+		 * But this case is also hit for legitimate web addresses when
+		 * the proxy is set up wrong.
+		 */
+		{
+			gchar *hn = NULL;
+
+			if (gedit_utils_decode_uri (uri, NULL, NULL, &hn, NULL, NULL))
+			{
+				if (hn != NULL)
+				{
+					gchar *host_name = gedit_utils_make_valid_utf8 (hn);
+					g_free (hn);
+
+					gchar *host_markup = g_markup_printf_escaped ("<i>%s</i>", host_name);
+					g_free (host_name);
+
+					/* Translators: %s is a host name */
+					*message_details = g_strdup_printf (
+						_("Host %s could not be found. "
+	        		  	  	"Please check that your proxy settings "
+				  	  	"are correct and try again."),
+					  	host_markup);
+
+					g_free (host_markup);
+				}
+			}
+			
+			if (!*message_details)
+			{
+				/* use the same string as INVALID_HOST */
+				*message_details = g_strdup_printf (
+					_("Host name was invalid. "
+					  "Please check that you typed the location "
+					  "correctly and try again."));
+			}
+		}
+		break;
+
+	case G_IO_ERROR_NOT_REGULAR_FILE:
+		*message_details = g_strdup_printf (_("%s is not a regular file."),
+						   uri_for_display);
+		break;
+
+	case G_IO_ERROR_TIMED_OUT:
+		*message_details = g_strdup (_("Connection timed out. Please try again."));
+		break;
+	
+	case G_IO_ERROR_FAILED:
+		break;
+	
+	default:
+		g_warning ("Hit unhandled case %d (%s) in %s.", 
+			   error->code, error->message, G_STRFUNC);	
+		*message_details = g_strdup_printf (_("Unexpected error: %s"), 
+						   error->message);
+		break;
+	}
+}
+
 GtkWidget *
 gedit_io_loading_error_message_area_new (const gchar  *uri,
 					 const GError *error)
@@ -156,8 +283,6 @@ gedit_io_loading_error_message_area_new (const gchar  *uri,
 	gchar *error_message = NULL;
 	gchar *message_details = NULL;
 	gchar *full_formatted_uri;
-	gchar *scheme_string;
-	gchar *scheme_markup;
        	gchar *uri_for_display;
        	gchar *temp_uri_for_display;
 	GtkWidget *message_area;
@@ -181,200 +306,16 @@ gedit_io_loading_error_message_area_new (const gchar  *uri,
 
 	switch (error->code)
 	{
-	case GNOME_VFS_ERROR_NOT_FOUND:
-		error_message = g_strdup_printf (_("Could not find the file %s."),
-						 uri_for_display);
-		message_details = g_strdup (_("Please check that you typed the "
-				      	      "location correctly and try again."));
-	break;
-
-	case GNOME_VFS_ERROR_CORRUPTED_DATA:
-		message_details = g_strdup (_("The file contains corrupted data."));
+	case G_IO_ERROR_TOO_MANY_LINKS:
+		message_details = g_strdup (_("The number of followed links is limited and the actual file could not be found within this limit."));
 		break;
 
-	case GNOME_VFS_ERROR_NOT_SUPPORTED:
-		scheme_string = gnome_vfs_get_uri_scheme (uri);
-
-		if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
-		{
-  			scheme_markup = g_markup_printf_escaped ("<i>%s:</i>", scheme_string);
-
-			/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
-			message_details = g_strdup_printf (_("gedit cannot handle %s locations."),
-							   scheme_markup);
-			g_free (scheme_markup);
-		}
-		else
-		{
-			message_details = g_strdup (_("gedit cannot handle this location."));
-		}
-
-		g_free (scheme_string);
-		break;
-
-	case GNOME_VFS_ERROR_WRONG_FORMAT:
-		message_details = g_strdup (_("The file contains data in an invalid format."));
-		break;
-
-	case GNOME_VFS_ERROR_TOO_BIG:
-		message_details = g_strdup (_("The file is too big."));
-		break;
-
-	case GNOME_VFS_ERROR_INVALID_URI:
-		error_message = g_strdup_printf (_("%s is not a valid location."),
-						 uri_for_display);
-		message_details = g_strdup (_("Please check that you typed the "
-					      "location correctly and try again."));
-		break;
-
-	case GNOME_VFS_ERROR_ACCESS_DENIED:
+	case G_IO_ERROR_PERMISSION_DENIED:
 		message_details = g_strdup (_("You do not have the permissions necessary to open the file."));
-		break;
-
-	case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
-		message_details = g_strdup (_("There are too many open files. Please "
-					      "close some applications and try again."));
-		break;
-
-	case GNOME_VFS_ERROR_IS_DIRECTORY:
-		error_message = g_strdup_printf (_("%s is a directory."),
-						 uri_for_display);
-		message_details = g_strdup (_("Please check that you typed the "
-					      "location correctly and try again."));
-		break;
-
-	case GNOME_VFS_ERROR_NO_MEMORY:
-		message_details = g_strdup (_("Not enough available memory to open "
-					      "the file. Please close some running "
-					      "applications and try again."));
-		break;
-
-	case GNOME_VFS_ERROR_HOST_NOT_FOUND:
-		/* This case can be hit for user-typed strings like "foo" due to
-		 * the code that guesses web addresses when there's no initial "/".
-		 * But this case is also hit for legitimate web addresses when
-		 * the proxy is set up wrong.
-		 */
-		{
-			GnomeVFSURI *vfs_uri;
-
-			vfs_uri = gnome_vfs_uri_new (uri);
-
-			if (vfs_uri != NULL)
-			{
-				const gchar *hn = gnome_vfs_uri_get_host_name (vfs_uri);
-
-				if (hn != NULL)
-				{
-					gchar *host_name = gedit_utils_make_valid_utf8 (hn);
-					gchar *host_markup = g_markup_printf_escaped ("<i>%s</i>", host_name);
-					g_free (host_name);
-
-					/* Translators: %s is a host name */
-					message_details = g_strdup_printf (
-						_("Host %s could not be found. "
-	        		  	  	  "Please check that your proxy settings "
-				  	  	  "are correct and try again."),
-					  	host_markup);
-
-					g_free (host_markup);
-				}
-				else
-				{
-					/* use the same string as INVALID_HOST */
-					message_details = g_strdup_printf (
-						_("Host name was invalid. "
-						  "Please check that you typed the location "
-						  "correctly and try again."));
-				}
-
-				gnome_vfs_uri_unref (vfs_uri);		
-			}
-			else
-			{
-				/* use the same string as INVALID_HOST */
-				message_details = g_strdup_printf (
-					_("Host name was invalid. "
-					  "Please check that you typed the location "
-					  "correctly and try again."));
-			}
-		}
-		break;
-
-	case GNOME_VFS_ERROR_INVALID_HOST_NAME:
-		message_details = g_strdup_printf (_("Host name was invalid. "
-						     "Please check that you typed the location "
-						     "correctly and try again."));
-        		break;
-
-	case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
-		message_details = g_strdup (_("Host name was empty. "
-					      "Please check that your proxy settings "
-					      "are correct and try again."));
-		break;
-
-	case GNOME_VFS_ERROR_LOGIN_FAILED:
-		message_details = g_strdup (_("Attempt to log in failed. "
-					      "Please check that you typed the location "
-					      "correctly and try again."));
-		break;
-
-	case GEDIT_DOCUMENT_ERROR_NOT_REGULAR_FILE:
-		message_details = g_strdup (_("The file you are trying to open is not a regular file."));
-		break;
-
-	case GNOME_VFS_ERROR_TIMEOUT:
-		message_details = g_strdup (_("Connection timed out. Please try again."));
-		break;
-
-	case GNOME_VFS_ERROR_IO:
-		/* FIXME: add a specific message when I are out
-		 * of string freeze
-
-		message_details = g_strdup ();
-
-		*/
-
-		break;
-
-	case GNOME_VFS_ERROR_GENERIC:
-		break;
-
-	/*
-	case GNOME_VFS_ERROR_INTERNAL:
-	case GNOME_VFS_ERROR_BAD_PARAMETERS:
-	case GNOME_VFS_ERROR_IO:
-	case GNOME_VFS_ERROR_BAD_FILE:
-	case GNOME_VFS_ERROR_NO_SPACE:
-	case GNOME_VFS_ERROR_READ_ONLY:
-	case GNOME_VFS_ERROR_NOT_OPEN:
-	case GNOME_VFS_ERROR_INVALID_OPEN_MODE:
-	case GNOME_VFS_ERROR_EOF:
-	case GNOME_VFS_ERROR_NOT_A_DIRECTORY:
-	case GNOME_VFS_ERROR_IN_PROGRESS:
-	case GNOME_VFS_ERROR_INTERRUPTED:
-	case GNOME_VFS_ERROR_FILE_EXISTS:
-	case GNOME_VFS_ERROR_LOOP:
-	case GNOME_VFS_ERROR_NOT_PERMITTED:
-	case GNOME_VFS_ERROR_CANCELLED:
-	case GNOME_VFS_ERROR_DIRECTORY_BUSY:
-	case GNOME_VFS_ERROR_DIRECTORY_NOT_EMPTY:
-	case GNOME_VFS_ERROR_TOO_MANY_LINKS:
-	case GNOME_VFS_ERROR_READ_ONLY_FILE_SYSTEM:
-	case GNOME_VFS_ERROR_NOT_SAME_FILE_SYSTEM:
-	case GNOME_VFS_ERROR_NAME_TOO_LONG:
-	case GNOME_VFS_ERROR_SERVICE_NOT_AVAILABLE:
-	case GNOME_VFS_ERROR_SERVICE_OBSOLETE,
-	case GNOME_VFS_ERROR_PROTOCOL_ERROR,
-	case GNOME_VFS_NUM_ERRORS:
-	*/
+		break;		
 
 	default:
-		/* We should invent decent error messages for every case we actually experience. */
-		g_warning ("Hit unhandled case %d (%s) in %s.", 
-			   error->code, gnome_vfs_result_to_string (error->code), G_STRFUNC);	
-		message_details = g_strdup_printf (_("Unexpected error: %s"), 
-						   gnome_vfs_result_to_string (error->code));								 
+		parse_error (error, &error_message, &message_details, uri, uri_for_display);
 		break;
 	}
 
@@ -407,8 +348,6 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 	gchar *error_message = NULL;
 	gchar *message_details = NULL;
 	gchar *full_formatted_uri;
-	gchar *scheme_string;
-	gchar *scheme_markup;
        	gchar *uri_for_display;
        	gchar *temp_uri_for_display;
 	GtkWidget *message_area;
@@ -432,183 +371,13 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 
 	switch (error->code)
 	{
-	case GNOME_VFS_ERROR_NOT_FOUND:
-		message_details = g_strdup (_("gedit cannot find it. "
+	case G_IO_ERROR_NOT_FOUND:
+		message_details = g_strdup (_("gedit cannot find the file. "
 					      "Perhaps it has recently been deleted."));
 		break;
 
-	case GNOME_VFS_ERROR_CORRUPTED_DATA:
-		message_details = g_strdup (_("The file contains corrupted data."));
-		break;
-
-	case GNOME_VFS_ERROR_NOT_SUPPORTED:
-		scheme_string = gnome_vfs_get_uri_scheme (uri);
-
-		if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
-		{
-  			scheme_markup = g_markup_printf_escaped ("<i>%s:</i>", scheme_string);
-
-			/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
-			message_details = g_strdup_printf (_("gedit cannot handle %s locations."),
-							   scheme_markup);
-			g_free (scheme_markup);
-		}
-		else
-		{
-			message_details = g_strdup (_("gedit cannot handle this location."));
-		}	
-
-		g_free (scheme_string);
-       	        break;
-
-	case GNOME_VFS_ERROR_WRONG_FORMAT:
-		message_details = g_strdup (_("The file contains data in an invalid format."));
-		break;
-
-	case GNOME_VFS_ERROR_TOO_BIG:
-		message_details = g_strdup (_("The file is too big."));
-		break;
-
-	case GNOME_VFS_ERROR_ACCESS_DENIED:
-		message_details = g_strdup (_("You do not have the permissions necessary to open the file."));
-		break;
-
-	case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
-		message_details = g_strdup (_("There are too many open files. Please "
-					      "close some applications and try again."));
-		break;
-
-	case GNOME_VFS_ERROR_IS_DIRECTORY:
-		message_details = g_strdup_printf (_("%s is a directory."),
-						   uri_for_display);
-		break;
-
-	case GNOME_VFS_ERROR_NO_MEMORY:
-		message_details = g_strdup (_("Not enough available memory to open "
-					      "the file. Please close some running "
-					      "applications and try again."));
-		break;
-
-	case GNOME_VFS_ERROR_HOST_NOT_FOUND:
-		/* This case can be hit for user-typed strings like "foo" due to
-		 * the code that guesses web addresses when there's no initial "/".
-		 * But this case is also hit for legitimate web addresses when
-		 * the proxy is set up wrong.
-		 */
-		{
-			GnomeVFSURI *vfs_uri;
-
-			vfs_uri = gnome_vfs_uri_new (uri);
-
-			if (vfs_uri != NULL)
-			{
-				const gchar *hn = gnome_vfs_uri_get_host_name (vfs_uri);
-
-				if (hn != NULL)
-				{
-					gchar *host_name = gedit_utils_make_valid_utf8 (hn);
-					gchar *host_markup = g_markup_printf_escaped ("<i>%s</i>", host_name);
-					g_free (host_name);
-
-					/* Translators: %s is a host name */
-					message_details = g_strdup_printf (
-						_("Host %s could not be found. "
-	        		  	  	"Please check that your proxy settings "
-				  	  	"are correct and try again."),
-					  	host_markup);
-
-					g_free (host_markup);
-				}
-				else
-				{
-					/* use the same string as INVALID_HOST */
-					message_details = g_strdup_printf (
-						_("Host name was invalid. "
-						  "Please check that you typed the location "
-						  "correctly and try again."));
-				}
-
-				gnome_vfs_uri_unref (vfs_uri);		
-			}
-			else
-			{
-				/* use the same string as INVALID_HOST */
-				message_details = g_strdup_printf (
-					_("Host name was invalid. "
-					  "Please check that you typed the location "
-					  "correctly and try again."));
-			}
-		}
-		break;
-
-	case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
-		message_details = g_strdup (_("Host name was empty. "
-					      "Please check that your proxy settings "
-					      "are correct and try again."));
-		break;
-
-	case GNOME_VFS_ERROR_LOGIN_FAILED:
-		message_details = g_strdup (_("Attempt to log in failed."));
-		break;
-
-	case GEDIT_DOCUMENT_ERROR_NOT_REGULAR_FILE:
-		message_details = g_strdup_printf (_("%s is not a regular file."),
-						   uri_for_display);
-		break;
-
-	case GNOME_VFS_ERROR_TIMEOUT:
-		message_details = g_strdup (_("Connection timed out. Please try again."));
-		break;
-
-	/* this should never happen, revert should be insensitive */
-//CHECK: we used to have this before new_mdi... is it really useful (see comment above)
-/*
-	case GEDIT_ERROR_UNTITLED:
-		message_details = g_strdup (_("It is not possible to revert an Untitled document."));
-		break;
-*/
-
-	case GNOME_VFS_ERROR_GENERIC:
-		break;
-
-	/*
-	case GNOME_VFS_ERROR_INVALID_URI:
-	case GNOME_VFS_ERROR_INVALID_HOST_NAME:
-	case GNOME_VFS_ERROR_GENERIC:
-	case GNOME_VFS_ERROR_INTERNAL:
-	case GNOME_VFS_ERROR_BAD_PARAMETERS:
-	case GNOME_VFS_ERROR_IO:
-	case GNOME_VFS_ERROR_BAD_FILE:
-	case GNOME_VFS_ERROR_NO_SPACE:
-	case GNOME_VFS_ERROR_READ_ONLY:
-	case GNOME_VFS_ERROR_NOT_OPEN:
-	case GNOME_VFS_ERROR_INVALID_OPEN_MODE:
-	case GNOME_VFS_ERROR_EOF:
-	case GNOME_VFS_ERROR_NOT_A_DIRECTORY:
-	case GNOME_VFS_ERROR_IN_PROGRESS:
-	case GNOME_VFS_ERROR_INTERRUPTED:
-	case GNOME_VFS_ERROR_FILE_EXISTS:
-	case GNOME_VFS_ERROR_LOOP:
-	case GNOME_VFS_ERROR_NOT_PERMITTED:
-	case GNOME_VFS_ERROR_CANCELLED:
-	case GNOME_VFS_ERROR_DIRECTORY_BUSY:
-	case GNOME_VFS_ERROR_DIRECTORY_NOT_EMPTY:
-	case GNOME_VFS_ERROR_TOO_MANY_LINKS:
-	case GNOME_VFS_ERROR_READ_ONLY_FILE_SYSTEM:
-	case GNOME_VFS_ERROR_NOT_SAME_FILE_SYSTEM:
-	case GNOME_VFS_ERROR_NAME_TOO_LONG:
-	case GNOME_VFS_ERROR_SERVICE_NOT_AVAILABLE:
-	case GNOME_VFS_ERROR_SERVICE_OBSOLETE,
-	case GNOME_VFS_ERROR_PROTOCOL_ERROR,
-	case GNOME_VFS_NUM_ERRORS:
-	case GNOME_VFS_ERROR_IS_DIRECTORY:
-	*/
-	
-	default: 
-		g_warning ("Hit unhandled case %d (%s) in %s.", 
-			   error->code, gnome_vfs_result_to_string (error->code), G_STRFUNC);	
-		message_details = g_strdup_printf (_("Unexpected error: %s"), 
-						   gnome_vfs_result_to_string (error->code));								 
+	default:
+		parse_error (error, &error_message, &message_details, uri, uri_for_display);
 		break;
 	}
 
@@ -1181,8 +950,8 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 
 	switch (error->code)
 	{
-		case GNOME_VFS_ERROR_NOT_SUPPORTED:
-			scheme_string = gnome_vfs_get_uri_scheme (uri);
+		case G_IO_ERROR_NOT_SUPPORTED:
+			scheme_string = g_uri_parse_scheme (uri);
 
 			if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
 			{
@@ -1205,180 +974,54 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 			g_free (scheme_string);
 			break;
 
-		case GNOME_VFS_ERROR_TOO_BIG:
+		case GEDIT_DOCUMENT_ERROR_TOO_BIG:
 			message_details = g_strdup (_("The disk where you are trying to save the file has "
 						      "a limitation on file sizes.  Please try saving "
 						      "a smaller file or saving it to a disk that does not "
 						      "have this limitation."));
 			break;
 
-		case GNOME_VFS_ERROR_INVALID_URI:
+		case G_IO_ERROR_INVALID_FILENAME:
 			message_details = g_strdup (_("%s is not a valid location. " 
 						      "Please check that you typed the "
 						      "location correctly and try again."));
 			break;
 
-		case GNOME_VFS_ERROR_ACCESS_DENIED:
-		case GNOME_VFS_ERROR_NOT_PERMITTED:		
+		case G_IO_ERROR_PERMISSION_DENIED:
 			message_details = g_strdup (_("You do not have the permissions necessary to save the file. "
 						      "Please check that you typed the "
 						      "location correctly and try again."));
 
 			break;
 
-		case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
-			message_details = g_strdup (_("There are too many open files. Please "
-						      "close some applications and try again."));
-			break;
-
-		case GNOME_VFS_ERROR_IS_DIRECTORY:
-			message_details = g_strdup (_("%s is a directory. "
-						      "Please check that you typed the "
-						      "location correctly and try again."));
-			break;
-
-		case GNOME_VFS_ERROR_NO_MEMORY:
-			message_details = g_strdup (_("Not enough available memory to save "
-						      "the file. Please close some running "
-						      "applications and try again."));
-			break;
-
-		case GNOME_VFS_ERROR_HOST_NOT_FOUND:
-			/* This case can be hit for user-typed strings like "foo" due to
-			 * the code that guesses web addresses when there's no initial "/".
-			 * But this case is also hit for legitimate web addresses when
-			 * the proxy is set up wrong.
-			 */
-			{
-				GnomeVFSURI *vfs_uri;
-
-				vfs_uri = gnome_vfs_uri_new (uri);
-
-				if (vfs_uri != NULL)
-				{
-					const gchar *hn = gnome_vfs_uri_get_host_name (vfs_uri);
-
-					if (hn != NULL)
-					{
-						gchar *host_name = gedit_utils_make_valid_utf8 (hn);
-						gchar *host_markup = g_markup_printf_escaped ("<i>%s</i>", host_name);
-						g_free (host_name);		
-
-						/* Translators: %s is a host name */
-						message_details = g_strdup_printf (
-							_("Host %s could not be found. "
-		        		  	  	  "Please check that your proxy settings "
-					  	  	  "are correct and try again."),
-						  	host_markup);
-
-						g_free (host_markup);
-					}
-					else
-					{
-						/* use the same string as INVALID_HOST */
-						message_details = g_strdup_printf (
-							_("Host name was invalid. "
-							  "Please check that you typed the location "
-							  "correctly and try again."));
-					}
-
-					gnome_vfs_uri_unref (vfs_uri);		
-				}
-				else
-				{
-					/* use the same string as INVALID_HOST */
-					message_details = g_strdup_printf (
-						_("Host name was invalid. "
-						  "Please check that you typed the location "
-						  "correctly and try again."));
-				}
-			}
-			break;
-
-		case GNOME_VFS_ERROR_INVALID_HOST_NAME:
-			message_details = g_strdup_printf (_("Host name was invalid. "
-							     "Please check that you typed the location "
-							     "correctly and try again."));
-				break;
-
-		case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
-			message_details = g_strdup (_("Host name was empty. "
-						      "Please check that your proxy settings "
-						      "are correct and try again."));
-			break;
-
-		case GNOME_VFS_ERROR_LOGIN_FAILED:
-			message_details = g_strdup (_("Attempt to log in failed. "
-						      "Please check that you typed the location "
-						      "correctly and try again."));
-			break;
-
-		case GNOME_VFS_ERROR_NO_SPACE:
+		case G_IO_ERROR_NO_SPACE:
 			message_details = g_strdup (_("There is not enough disk space to save the file. "
 						      "Please free some disk space and try again."));
 			break;
 			
-		case GNOME_VFS_ERROR_READ_ONLY:
-		case GNOME_VFS_ERROR_READ_ONLY_FILE_SYSTEM:		
+		case G_IO_ERROR_READ_ONLY:	
 			message_details = g_strdup (_("You are trying to save the file on a read-only disk. "
 						      "Please check that you typed the location "
 						      "correctly and try again."));
 			break;
 			
-		case GNOME_VFS_ERROR_FILE_EXISTS:
+		case G_IO_ERROR_EXISTS:
 			message_details = g_strdup (_("A file with the same name already exists. "
 						      "Please use a different name."));
 			break;
 			
-		case GNOME_VFS_ERROR_NAME_TOO_LONG:
+		case G_IO_ERROR_FILENAME_TOO_LONG:
 			message_details = g_strdup (_("The disk where you are trying to save the file has "
 						      "a limitation on length of the file names. "
 						      "Please use a shorter name."));
-
-		case GNOME_VFS_ERROR_TIMEOUT:
-			message_details = g_strdup (_("Connection timed out. Please try again."));
 			break;
 
-		case GEDIT_DOCUMENT_ERROR_NOT_REGULAR_FILE:
-			message_details = g_strdup_printf (_("%s is not a regular file. "
-							     "Please check that you typed the location "
-							     "correctly and try again."),
-							   uri_for_display);
-
-		case GNOME_VFS_ERROR_GENERIC:
-			break;
-
-		/*
-		case GNOME_VFS_ERROR_NOT_FOUND:
-		case GNOME_VFS_ERROR_CORRUPTED_DATA:
-		case GNOME_VFS_ERROR_WRONG_FORMAT:
-		case GNOME_VFS_ERROR_INTERNAL:
-		case GNOME_VFS_ERROR_BAD_PARAMETERS:
-		case GNOME_VFS_ERROR_IO:
-		case GNOME_VFS_ERROR_BAD_FILE:
-		case GNOME_VFS_ERROR_NOT_OPEN:
-		case GNOME_VFS_ERROR_INVALID_OPEN_MODE:
-		case GNOME_VFS_ERROR_EOF:
-		case GNOME_VFS_ERROR_NOT_A_DIRECTORY:
-		case GNOME_VFS_ERROR_IN_PROGRESS:
-		case GNOME_VFS_ERROR_INTERRUPTED:
-		case GNOME_VFS_ERROR_LOOP:
-		case GNOME_VFS_ERROR_CANCELLED:
-		case GNOME_VFS_ERROR_DIRECTORY_BUSY:
-		case GNOME_VFS_ERROR_DIRECTORY_NOT_EMPTY:
-		case GNOME_VFS_ERROR_TOO_MANY_LINKS:
-		case GNOME_VFS_ERROR_NOT_SAME_FILE_SYSTEM:
-		case GNOME_VFS_ERROR_SERVICE_NOT_AVAILABLE:
-		case GNOME_VFS_ERROR_SERVICE_OBSOLETE,
-		case GNOME_VFS_ERROR_PROTOCOL_ERROR,
-		case GNOME_VFS_NUM_ERRORS:
-		*/
-
-		default: 
-			g_warning ("Hit unhandled case %d (%s) in %s.", 
-				   error->code, gnome_vfs_result_to_string (error->code), G_STRFUNC);	
-			message_details = g_strdup_printf (_("Unexpected error: %s"), 
-							   gnome_vfs_result_to_string (error->code));								 
+		default:
+			parse_error (error, 
+				     &error_message, 
+				     &message_details, 
+				     uri, 
+				     uri_for_display);
 			break;
 	}
 

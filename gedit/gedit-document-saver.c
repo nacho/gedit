@@ -45,7 +45,7 @@
 #include "gedit-enum-types.h"
 
 #include "gedit-local-document-saver.h"
-#include "gedit-gnomevfs-document-saver.h"
+#include "gedit-gio-document-saver.h"
 
 G_DEFINE_ABSTRACT_TYPE(GeditDocumentSaver, gedit_document_saver, G_TYPE_OBJECT)
 
@@ -126,7 +126,6 @@ gedit_document_saver_get_property (GObject    *object,
 			break;
 	}
 }
-
 
 static void
 gedit_document_saver_finalize (GObject *object)
@@ -221,7 +220,7 @@ gedit_document_saver_new (GeditDocument       *doc,
 	if (gedit_utils_uri_has_file_scheme (uri))
 		saver_type = GEDIT_TYPE_LOCAL_DOCUMENT_SAVER;
 	else
-		saver_type = GEDIT_TYPE_GNOMEVFS_DOCUMENT_SAVER;
+		saver_type = GEDIT_TYPE_GIO_DOCUMENT_SAVER;
 
 	if (encoding == NULL)
 		encoding = gedit_encoding_get_utf8 ();
@@ -236,28 +235,54 @@ gedit_document_saver_new (GeditDocument       *doc,
 	return saver;
 }
 
-/*
- * Write the document contents in fd.
- */
-gboolean
-gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
-					      gint                 fd,
-					      GError             **error)
+gchar *
+gedit_document_saver_get_end_newline (GeditDocumentSaver *saver,
+				      gsize 	         *len)
+{
+	gchar *n_buffer = NULL;
+	gsize n_len = 0;
+
+	if (saver->encoding != gedit_encoding_get_utf8 ())
+	{
+		n_buffer = gedit_convert_from_utf8 ("\n", 
+						    -1, 
+						    saver->encoding, 
+						    &n_len, 
+						    NULL);
+
+		if (n_buffer == NULL)
+		{
+			/* we do not error out for this */
+			g_warning ("Cannot convert '\\n' to the desired encoding.");
+		}
+	}
+	else
+	{
+		n_buffer = g_strdup ("\n");
+		n_len = 1;
+	}
+
+	*len = n_len;
+	return n_buffer;
+}
+
+/* FIXME: we should rework the code to not need to fetch the
+   whole buffer in memory. Also encoding conversion should
+   be done in chunks */
+gchar *
+gedit_document_saver_get_document_contents (GeditDocumentSaver *saver,
+					    gsize 	       *len,
+					    GError 	      **error)
 {
 	GtkTextBuffer *buffer = GTK_TEXT_BUFFER (saver->document);
 	GtkTextIter start_iter;
 	GtkTextIter end_iter;
 	gchar *contents;
-	gsize len;
-	ssize_t written;
-	gboolean res;
-
-	gedit_debug (DEBUG_SAVER);
-
+	
 	gtk_text_buffer_get_bounds (buffer, &start_iter, &end_iter);
 	contents = gtk_text_buffer_get_slice (buffer, &start_iter, &end_iter, TRUE);
 
-	len = strlen (contents);
+	*len = strlen (contents);
 
 	if (saver->encoding != gedit_encoding_get_utf8 ())
 	{
@@ -265,7 +290,7 @@ gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
 		gsize new_len;
 
 		converted_contents = gedit_convert_from_utf8 (contents, 
-							      len, 
+							      *len, 
 							      saver->encoding,
 							      &new_len,
 							      error);
@@ -274,14 +299,34 @@ gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
 		if (*error != NULL)
 		{
 			/* Conversion error */
-			return FALSE;
+			return NULL;
 		}
 		else
 		{
 			contents = converted_contents;
-			len = new_len;
+			*len = new_len;
 		}
 	}
+	
+	return contents;
+}
+
+/*
+ * Write the document contents in fd.
+ */
+gboolean
+gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
+					      gint                 fd,
+					      GError             **error)
+{
+	gsize len;
+	ssize_t written;
+	gboolean res;
+	gchar *contents;
+
+	gedit_debug (DEBUG_SAVER);
+
+	contents = gedit_document_saver_get_document_contents (saver, &len, error);
 
 	/* make sure we are at the start */
 	res = (lseek (fd, 0, SEEK_SET) != -1);
@@ -319,32 +364,19 @@ gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
 	   that we strip the trailing \n when loading the file */
 	if (res)
 	{
-		if (saver->encoding != gedit_encoding_get_utf8 ())
+		gchar *n_buf;
+		gsize n_len;
+
+		n_buf = gedit_document_saver_get_end_newline (saver, &n_len);
+		if (n_buf != NULL)
 		{
-			gchar *converted_n = NULL;
-			gsize n_len;
-
-			converted_n = gedit_convert_from_utf8 ("\n", 
-							       -1, 
-							       saver->encoding,
-							       &n_len,
-							       NULL);
-
-			if (converted_n == NULL)
-			{
-				/* we do not error out for this */
-				g_warning ("Cannot add '\\n' at the end of the file.");
-			}
-			else
-			{
-				written = write (fd, converted_n, n_len);
-				res = (written != -1 && (gsize) written == n_len);
-				g_free (converted_n);
-			}
+			written = write (fd, n_buf, n_len);
+			res = (written != -1 && (gsize) written == n_len);
+			g_free (n_buf);
 		}
 		else
 		{
-			res = (write (fd, "\n", 1) == 1);
+			g_warning ("Cannot add '\\n' at the end of the file.");
 		}
 	}
 
@@ -352,12 +384,10 @@ gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
 
 	if (!res)
 	{
-		GnomeVFSResult result = gnome_vfs_result_from_errno ();
-
 		g_set_error (error,
 			     GEDIT_DOCUMENT_ERROR,
-			     result,
-			     gnome_vfs_result_to_string (result));
+			     g_io_error_from_errno (errno),
+			     g_strerror (errno));
 	}
 
 	return res;
@@ -430,11 +460,11 @@ gedit_document_saver_get_uri (GeditDocumentSaver *saver)
 }
 
 const gchar *
-gedit_document_saver_get_mime_type (GeditDocumentSaver *saver)
+gedit_document_saver_get_content_type (GeditDocumentSaver *saver)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), NULL);
 
-	return GEDIT_DOCUMENT_SAVER_GET_CLASS (saver)->get_mime_type (saver);
+	return GEDIT_DOCUMENT_SAVER_GET_CLASS (saver)->get_content_type (saver);
 }
 
 time_t

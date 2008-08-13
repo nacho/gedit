@@ -40,7 +40,6 @@
 
 #include <glib/gi18n.h>
 #include <glib/gfileutils.h>
-#include <libgnomevfs/gnome-vfs.h>
 
 #include "gedit-local-document-saver.h"
 #include "gedit-debug.h"
@@ -59,7 +58,7 @@
 
 static void		 gedit_local_document_saver_save		(GeditDocumentSaver *saver,
 									 time_t              old_mtime);
-static const gchar 	*gedit_local_document_saver_get_mime_type	(GeditDocumentSaver *saver);
+static const gchar 	*gedit_local_document_saver_get_content_type	(GeditDocumentSaver *saver);
 static time_t		 gedit_local_document_saver_get_mtime		(GeditDocumentSaver *saver);
 static goffset		 gedit_local_document_saver_get_file_size	(GeditDocumentSaver *saver);
 static goffset		 gedit_local_document_saver_get_bytes_written	(GeditDocumentSaver *saver);
@@ -73,7 +72,7 @@ struct _GeditLocalDocumentSaverPrivate
 	/* temp data for local files */
 	gint	  fd;
 	gchar	 *local_path;
-	gchar    *mime_type; //CHECK use FileInfo instead?
+	gchar    *content_type;
 	time_t    doc_mtime;
 
 	GError   *error;
@@ -87,7 +86,7 @@ gedit_local_document_saver_finalize (GObject *object)
 	GeditLocalDocumentSaverPrivate *priv = GEDIT_LOCAL_DOCUMENT_SAVER (object)->priv;
 
 	g_free (priv->local_path);
-	g_free (priv->mime_type);
+	g_free (priv->content_type);
 
 	if (priv->error)
 		g_error_free (priv->error);
@@ -104,7 +103,7 @@ gedit_local_document_saver_class_init (GeditDocumentSaverClass *klass)
 	object_class->finalize = gedit_local_document_saver_finalize;
 
 	saver_class->save = gedit_local_document_saver_save;
-	saver_class->get_mime_type = gedit_local_document_saver_get_mime_type;
+	saver_class->get_content_type = gedit_local_document_saver_get_content_type;
 	saver_class->get_mtime = gedit_local_document_saver_get_mtime;
 	saver_class->get_file_size = gedit_local_document_saver_get_file_size;
 	saver_class->get_bytes_written = gedit_local_document_saver_get_bytes_written;
@@ -196,12 +195,10 @@ copy_file_data (gint     sfd,
 		bytes_read = read (sfd, buffer, BUFSIZE);
 		if (bytes_read == -1)
 		{
-			GnomeVFSResult result = gnome_vfs_result_from_errno ();
-
 			g_set_error (error,
 				     GEDIT_DOCUMENT_ERROR,
-				     result,
-				     gnome_vfs_result_to_string (result));
+				     g_io_error_from_errno (errno),
+				     g_strerror (errno));
 
 			ret = FALSE;
 
@@ -216,17 +213,13 @@ copy_file_data (gint     sfd,
 			bytes_written = write (dfd, write_buffer, bytes_to_write);
 			if (bytes_written == -1)
 			{
-				GnomeVFSResult result;
-
 				if (errno == EINTR)
 					continue;
 
-				result = gnome_vfs_result_from_errno ();
-
 				g_set_error (error,
 					     GEDIT_DOCUMENT_ERROR,
-					     result,
-					     gnome_vfs_result_to_string (result));
+					     g_io_error_from_errno (errno),
+					     g_strerror (errno));
 
 				ret = FALSE;
 
@@ -246,29 +239,36 @@ copy_file_data (gint     sfd,
 }
 
 /* FIXME: this is ugly for multple reasons: it refetches all the info,
- * it doesn't use fd etc... we need something better, possibly in gnome-vfs
- * public api.
+ * it is sync, it doesn't use fd etc...
  */
 static gchar *
-get_slow_mime_type (const char *text_uri)
+get_slow_content_type (const char *text_uri)
 {
-	GnomeVFSFileInfo *info;
-	char *mime_type;
-	GnomeVFSResult result;
+	GFile *gfile;
+	GFileInfo *info;
+	char *content_type = NULL;
 
-	info = gnome_vfs_file_info_new ();
-	result = gnome_vfs_get_file_info (text_uri, info,
-					  GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
-					  GNOME_VFS_FILE_INFO_FORCE_SLOW_MIME_TYPE |
-					  GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-	if (info->mime_type == NULL || result != GNOME_VFS_OK)
-		mime_type = NULL;
-	else
-		mime_type = g_strdup (info->mime_type);
+	gfile = g_file_new_for_uri (text_uri);
 
-	gnome_vfs_file_info_unref (info);
+	info = g_file_query_info (gfile,
+	                          G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+	                          G_FILE_QUERY_INFO_NONE,
+	                          NULL,
+	                          NULL);
 
-	return mime_type;
+	g_object_unref (gfile);
+
+	if (info != NULL &&
+	    g_file_info_has_attribute (info,
+				       G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE))
+	{
+		content_type = g_strdup (g_file_info_get_content_type (info));
+	}
+
+	if (info != NULL)
+		g_object_unref (info);
+
+	return content_type;
 }
 
 #ifdef HAVE_LIBATTR
@@ -295,12 +295,10 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 
 	if (fstat (lsaver->priv->fd, &statbuf) != 0) 
 	{
-		GnomeVFSResult result = gnome_vfs_result_from_errno ();
-
 		g_set_error (&lsaver->priv->error,
 			     GEDIT_DOCUMENT_ERROR,
-			     result,
-			     gnome_vfs_result_to_string (result));
+			     g_io_error_from_errno (errno),
+			     g_strerror (errno));
 
 		goto out;
 	}
@@ -312,14 +310,14 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 		{
 			g_set_error (&lsaver->priv->error,
 				     GEDIT_DOCUMENT_ERROR,
-				     GNOME_VFS_ERROR_IS_DIRECTORY,
-				     gnome_vfs_result_to_string (GNOME_VFS_ERROR_IS_DIRECTORY));
+				     G_IO_ERROR_IS_DIRECTORY,
+				     "Is a directory");
 		}
 		else
 		{
 			g_set_error (&lsaver->priv->error,
 				     GEDIT_DOCUMENT_ERROR,
-				     GEDIT_DOCUMENT_ERROR_NOT_REGULAR_FILE,
+				     G_IO_ERROR_NOT_REGULAR_FILE,
 				     "Not a regular file");
 		}
 
@@ -331,8 +329,8 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 	{
 		g_set_error (&lsaver->priv->error,
 			     GEDIT_DOCUMENT_ERROR,
-			     GNOME_VFS_ERROR_READ_ONLY,
-			     gnome_vfs_result_to_string (GNOME_VFS_ERROR_READ_ONLY));
+			     G_IO_ERROR_READ_ONLY,
+			     "File is read only");
 
 		goto out;
 	}
@@ -362,8 +360,8 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 
 		g_set_error (&lsaver->priv->error,
 			     GEDIT_DOCUMENT_ERROR,
-			     GNOME_VFS_ERROR_GENERIC,
-			     gnome_vfs_result_to_string (GNOME_VFS_ERROR_GENERIC));
+			     G_IO_ERROR_FAILED,
+			     "Failure");
 
 		goto out;
 	}
@@ -466,14 +464,12 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 		/* original -> backup */
 		if (rename (lsaver->priv->local_path, backup_filename) != 0)
 		{
-			GnomeVFSResult result = gnome_vfs_result_from_errno ();
-
 			gedit_debug_message (DEBUG_SAVER, "could not rename original -> backup");
 
 			g_set_error (&lsaver->priv->error,
 				     GEDIT_DOCUMENT_ERROR,
-				     result,
-				     gnome_vfs_result_to_string (result));
+				     g_io_error_from_errno (errno),
+				     g_strerror (errno));
 
 			close (tmpfd);
 			unlink (tmp_filename);
@@ -485,14 +481,12 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 		/* tmp -> original */
 		if (rename (tmp_filename, lsaver->priv->local_path) != 0)
 		{
-			GnomeVFSResult result = gnome_vfs_result_from_errno ();
-
 			gedit_debug_message (DEBUG_SAVER, "could not rename tmp -> original");
 
 			g_set_error (&lsaver->priv->error,
 				     GEDIT_DOCUMENT_ERROR,
-				     result,
-				     gnome_vfs_result_to_string (result));
+				     g_io_error_from_errno (errno),
+				     g_strerror (errno));
 
 			/* try to restore... no error checking */
 			rename (backup_filename, lsaver->priv->local_path);
@@ -509,12 +503,10 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 		/* restat and get the mime type */
 		if (fstat (tmpfd, &new_statbuf) != 0)
 		{
-			GnomeVFSResult result = gnome_vfs_result_from_errno ();
-
 			g_set_error (&lsaver->priv->error,
 				     GEDIT_DOCUMENT_ERROR,
-				     result,
-				     gnome_vfs_result_to_string (result));
+				     g_io_error_from_errno (errno),
+				     g_strerror (errno));
 
 			close (tmpfd);
 			goto out;
@@ -522,7 +514,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 
 		lsaver->priv->doc_mtime = new_statbuf.st_mtime;
 
-		lsaver->priv->mime_type = get_slow_mime_type (saver->uri);
+		lsaver->priv->content_type = get_slow_content_type (saver->uri);
 
 		if (saver->keep_backup)
 		{
@@ -697,20 +689,18 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 	/* re stat the file and refetch the mime type */
 	if (fstat (lsaver->priv->fd, &new_statbuf) != 0)
 	{
-		GnomeVFSResult result = gnome_vfs_result_from_errno ();
-
 		g_set_error (&lsaver->priv->error,
 			     GEDIT_DOCUMENT_ERROR,
-			     result,
-			     gnome_vfs_result_to_string (result));
+			     g_io_error_from_errno (errno),
+			     g_strerror (errno));
 
 		goto out;
 	}
 
 	lsaver->priv->doc_mtime = new_statbuf.st_mtime;
 
-	g_free (lsaver->priv->mime_type);
-	lsaver->priv->mime_type = get_slow_mime_type (saver->uri);
+	g_free (lsaver->priv->content_type);
+	lsaver->priv->content_type = get_slow_content_type (saver->uri);
 
  out:
 	if (close (lsaver->priv->fd))
@@ -745,20 +735,18 @@ save_new_local_file (GeditLocalDocumentSaver *lsaver)
 	/* stat the file and fetch the mime type */
 	if (fstat (lsaver->priv->fd, &statbuf) != 0)
 	{
-		GnomeVFSResult result = gnome_vfs_result_from_errno ();
-
 		g_set_error (&lsaver->priv->error,
 			     GEDIT_DOCUMENT_ERROR,
-			     result,
-			     gnome_vfs_result_to_string (result));
+			     g_io_error_from_errno (errno),
+			     g_strerror (errno));
 
 		goto out;
 	}
 
 	lsaver->priv->doc_mtime = statbuf.st_mtime;
 
-	g_free (lsaver->priv->mime_type);
-	lsaver->priv->mime_type = get_slow_mime_type (GEDIT_DOCUMENT_SAVER (lsaver)->uri);
+	g_free (lsaver->priv->content_type);
+	lsaver->priv->content_type = get_slow_content_type (GEDIT_DOCUMENT_SAVER (lsaver)->uri);
 
  out:
 	if (close (lsaver->priv->fd))
@@ -792,7 +780,6 @@ save_file (GeditLocalDocumentSaver *lsaver)
 {
 	GeditDocumentSaver *saver = GEDIT_DOCUMENT_SAVER (lsaver);
 	GSourceFunc next_phase;
-	GnomeVFSResult result;
 
 	gedit_debug (DEBUG_SAVER);
 
@@ -821,12 +808,10 @@ save_file (GeditLocalDocumentSaver *lsaver)
 	}
 
 	/* else error */
-	result = gnome_vfs_result_from_errno (); //may it happen that no errno?
-
 	g_set_error (&lsaver->priv->error,
 		     GEDIT_DOCUMENT_ERROR,
-		     result,
-		     gnome_vfs_result_to_string (result));
+		     g_io_error_from_errno (errno),
+		     g_strerror (errno));
 
 	next_phase = (GSourceFunc) open_local_failed;
 
@@ -844,10 +829,14 @@ gedit_local_document_saver_save (GeditDocumentSaver *saver,
 				 time_t              old_mtime)
 {
 	GeditLocalDocumentSaver *lsaver = GEDIT_LOCAL_DOCUMENT_SAVER (saver);
-
+	GFile *gfile;
+	
 	lsaver->priv->doc_mtime = old_mtime;
 
-	lsaver->priv->local_path = gnome_vfs_get_local_path_from_uri (saver->uri);
+	gfile = g_file_new_for_uri (saver->uri);
+	lsaver->priv->local_path = g_file_get_path (gfile);
+	g_object_unref (gfile);
+
 	if (lsaver->priv->local_path != NULL)
 	{
 		save_file (lsaver);
@@ -856,15 +845,15 @@ gedit_local_document_saver_save (GeditDocumentSaver *saver,
 	{
 		g_set_error (&lsaver->priv->error,
 			     GEDIT_DOCUMENT_ERROR,
-			     GNOME_VFS_ERROR_NOT_SUPPORTED,
-			     gnome_vfs_result_to_string (GNOME_VFS_ERROR_NOT_SUPPORTED));
+			     G_IO_ERROR_NOT_SUPPORTED,
+			     "Operation is not supported");
 	}
 }
 
 static const gchar *
-gedit_local_document_saver_get_mime_type (GeditDocumentSaver *saver)
+gedit_local_document_saver_get_content_type (GeditDocumentSaver *saver)
 {
-	return GEDIT_LOCAL_DOCUMENT_SAVER (saver)->priv->mime_type;
+	return GEDIT_LOCAL_DOCUMENT_SAVER (saver)->priv->content_type;
 }
 
 static time_t

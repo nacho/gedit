@@ -524,10 +524,6 @@ main (int argc, char *argv[])
 	gedit_debug_message (DEBUG_APP, "Init prefs manager");
 	gedit_prefs_manager_app_init ();
 
-	/* Initialize authentication manager */
-	gedit_debug_message (DEBUG_APP, "Init authentication manager");	
-	gnome_authentication_manager_init ();
-	
 	/* Init plugins engine */
 	gedit_debug_message (DEBUG_APP, "Init plugins");
 	engine = gedit_plugins_engine_get_default ();

@@ -132,6 +132,10 @@ struct _GeditDocumentPrivate
 	/* Search highlighting support variables */	
 	GeditTextRegion *to_search_region;
 	GtkTextTag      *found_tag;
+	
+	/* Mount operation factory */
+	GeditMountOperationFactory  mount_operation_factory;
+	gpointer		    mount_operation_userdata;
 };
 
 enum {
@@ -849,7 +853,9 @@ void
 gedit_document_set_uri (GeditDocument *doc,
 			const gchar   *uri)
 {
-	gchar * mime_type = g_strdup (doc->priv->mime_type);
+	gchar *mime_type;
+
+	mime_type = g_strdup (doc->priv->mime_type);
 	set_uri (doc, uri, mime_type);
 	
 	g_free (mime_type);
@@ -976,9 +982,11 @@ document_loader_loaded (GeditDocumentLoader *loader,
 	if (error == NULL)
 	{
 		GtkTextIter iter;
-		const gchar *mime_type;
+		const gchar *content_type;
+		gchar *mime_type;
 
-		mime_type = gedit_document_loader_get_mime_type (loader);
+		content_type = gedit_document_loader_get_content_type (loader);
+		mime_type = g_content_type_get_mime_type (content_type);
 
 		doc->priv->mtime = gedit_document_loader_get_mtime (loader);
 
@@ -993,6 +1001,8 @@ document_loader_loaded (GeditDocumentLoader *loader,
 		      
 		/* We already set the uri */
 		set_uri (doc, NULL, mime_type);
+
+		g_free (mime_type);
 
 		/* move the cursor at the requested line if any */
 		if (doc->priv->requested_line_pos > 0)
@@ -1039,7 +1049,7 @@ document_loader_loaded (GeditDocumentLoader *loader,
 
 	/* special case creating a named new doc */
 	else if (doc->priv->create &&
-	         (error->code == GNOME_VFS_ERROR_NOT_FOUND) &&
+	         (error->code == G_IO_ERROR_NOT_FOUND) &&
 	         (gedit_utils_uri_has_file_scheme (doc->priv->uri)))
 	{
 		reset_temp_loading_data (doc);
@@ -1161,10 +1171,13 @@ document_saver_saving (GeditDocumentSaver *saver,
 		if (error == NULL)
 		{
 			const gchar *uri;
-			const gchar *mime_type;
+			const gchar *content_type;
+			gchar *mime_type;
 
 			uri = gedit_document_saver_get_uri (saver);
-			mime_type = gedit_document_saver_get_mime_type (saver);
+
+			content_type = gedit_document_saver_get_content_type (saver);
+			mime_type = g_content_type_get_mime_type (content_type);
 
 			doc->priv->mtime = gedit_document_saver_get_mtime (saver);
 
@@ -1176,6 +1189,8 @@ document_saver_saving (GeditDocumentSaver *saver,
 						      FALSE);
 
 			set_uri (doc, uri, mime_type);
+
+			g_free (mime_type);
 
 			set_encoding (doc, 
 				      doc->priv->requested_encoding, 
@@ -2178,4 +2193,27 @@ gedit_document_get_enable_search_highlighting (GeditDocument *doc)
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 	
 	return (doc->priv->to_search_region != NULL);
+}
+
+void
+gedit_document_set_mount_operation_factory (GeditDocument 	       *doc,
+					    GeditMountOperationFactory	callback,
+					    gpointer	                userdata)
+{
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	
+	doc->priv->mount_operation_factory = callback;
+	doc->priv->mount_operation_userdata = userdata;
+}
+
+GMountOperation *
+gedit_document_create_mount_operation (GeditDocument *doc)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+	
+	if (doc->priv->mount_operation_factory == NULL)
+		return g_mount_operation_new ();
+	else
+		return doc->priv->mount_operation_factory (doc, 
+						           doc->priv->mount_operation_userdata);
 }

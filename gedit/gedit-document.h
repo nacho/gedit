@@ -135,16 +135,17 @@ struct _GeditDocumentClass
 					 GtkTextIter      *end);
 };
 
+typedef GMountOperation *(*GeditMountOperationFactory)(GeditDocument *doc, 
+						       gpointer       userdata);
 
 #define GEDIT_DOCUMENT_ERROR gedit_document_error_quark ()
 
 enum
 {
-	/* start at GNOME_VFS_NUM_ERRORS since we use GnomeVFSResult 
-	 * for the error codes */ 
-	GEDIT_DOCUMENT_ERROR_EXTERNALLY_MODIFIED = GNOME_VFS_NUM_ERRORS,
-	GEDIT_DOCUMENT_ERROR_NOT_REGULAR_FILE,
+	/* we use GIO error codes, so start at some high number? */
+	GEDIT_DOCUMENT_ERROR_EXTERNALLY_MODIFIED = 1 << 10,
 	GEDIT_DOCUMENT_ERROR_CANT_CREATE_BACKUP,
+	GEDIT_DOCUMENT_ERROR_TOO_BIG,
 	GEDIT_DOCUMENT_NUM_ERRORS 
 };
 
@@ -241,6 +242,15 @@ void		 gedit_document_set_enable_search_highlighting
 
 gboolean	 gedit_document_get_enable_search_highlighting
 						(GeditDocument       *doc);
+
+void		 gedit_document_set_mount_operation_factory
+						(GeditDocument	            *doc,
+						 GeditMountOperationFactory  callback,
+						 gpointer	             userdata);
+GMountOperation
+		*gedit_document_create_mount_operation
+						(GeditDocument	     *doc);
+		
 
 /* 
  * Non exported functions

@@ -63,10 +63,10 @@ NOINST_H_FILES =			\
 	gedit-documents-panel.h		\
 	gedit-document-loader.h		\
 	gedit-mmap-document-loader.h	\
-	gedit-gnomevfs-document-loader.h\
+	gedit-gio-document-loader.h	\
 	gedit-document-saver.h		\
 	gedit-local-document-saver.h	\
-	gedit-gnomevfs-document-saver.h	\
+	gedit-gio-document-saver.h	\
 	gedit-history-entry.h		\
 	gedit-print-job.h		\
 	gedit-print-preview.h		\
@@ -127,10 +127,10 @@ libgedit_la_SOURCES = 			\
 	gedit-document.c 		\
 	gedit-document-loader.c		\
 	gedit-mmap-document-loader.c	\
-	gedit-gnomevfs-document-loader.c\
+	gedit-gio-document-loader.c	\
 	gedit-document-saver.c		\
 	gedit-local-document-saver.c	\
-	gedit-gnomevfs-document-saver.c	\
+	gedit-gio-document-saver.c	\
 	gedit-documents-panel.c		\
 	gedit-encodings.c		\
 	gedit-encodings-option-menu.c	\

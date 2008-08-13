@@ -85,7 +85,7 @@ struct _GeditDocumentLoaderClass
 	/* VTable */
 	void			(* load)		(GeditDocumentLoader *loader);
 	gboolean		(* cancel)		(GeditDocumentLoader *loader);
-	const gchar *		(* get_mime_type)	(GeditDocumentLoader *loader);
+	const gchar *		(* get_content_type)	(GeditDocumentLoader *loader);
 	time_t			(* get_mtime)		(GeditDocumentLoader *loader);
 	goffset			(* get_file_size)	(GeditDocumentLoader *loader);
 	goffset			(* get_bytes_read)	(GeditDocumentLoader *loader);
@@ -122,7 +122,7 @@ gboolean		 gedit_document_loader_cancel		(GeditDocumentLoader *loader);
 #define STDIN_URI "stdin:" 
 const gchar		*gedit_document_loader_get_uri		(GeditDocumentLoader *loader);
 
-const gchar		*gedit_document_loader_get_mime_type	(GeditDocumentLoader *loader);
+const gchar		*gedit_document_loader_get_content_type	(GeditDocumentLoader *loader);
 
 time_t 			 gedit_document_loader_get_mtime 	(GeditDocumentLoader *loader);
 
