@@ -383,6 +383,29 @@ gedit_document_changed (GtkTextBuffer *buffer)
 	GTK_TEXT_BUFFER_CLASS (gedit_document_parent_class)->changed (buffer);
 }
 
+static GObject *
+gedit_document_constructor (GType                  type,
+			    guint                  n_construct_properties,
+			    GObjectConstructParam *construct_properties)
+{
+	GObject *gobj;
+	
+	gobj = G_OBJECT_CLASS (gedit_document_parent_class)->constructor (type,
+							                  n_construct_properties,
+							                  construct_properties);
+
+	gtk_source_buffer_set_max_undo_levels (GTK_SOURCE_BUFFER (gobj), 
+					       gedit_prefs_manager_get_undo_actions_limit ());
+
+	gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (gobj), 
+							   gedit_prefs_manager_get_bracket_matching ());
+
+	gedit_document_set_enable_search_highlighting (GEDIT_DOCUMENT (gobj),
+						       gedit_prefs_manager_get_enable_search_highlighting ());
+	
+	return gobj;
+}
+
 static void 
 gedit_document_class_init (GeditDocumentClass *klass)
 {
@@ -391,6 +414,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 
 	object_class->dispose = gedit_document_dispose;
 	object_class->finalize = gedit_document_finalize;
+	object_class->constructor = gedit_document_constructor;
 	object_class->get_property = gedit_document_get_property;
 	object_class->set_property = gedit_document_set_property;	
 
@@ -706,20 +730,11 @@ gedit_document_init (GeditDocument *doc)
 
 	doc->priv->encoding = gedit_encoding_get_utf8 ();
 
-	gtk_source_buffer_set_max_undo_levels (GTK_SOURCE_BUFFER (doc), 
-					       gedit_prefs_manager_get_undo_actions_limit ());
-
-	gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (doc), 
-							   gedit_prefs_manager_get_bracket_matching ());
-
-	gedit_document_set_enable_search_highlighting (doc,
-						       gedit_prefs_manager_get_enable_search_highlighting ());
-
 	style_scheme = get_default_style_scheme ();
 	if (style_scheme != NULL)
 		gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (doc),
 						    style_scheme);
-
+						    
 	g_signal_connect_after (doc, 
 			  	"insert-text",
 			  	G_CALLBACK (insert_text_cb),
