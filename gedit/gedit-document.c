@@ -1064,7 +1064,7 @@ document_loader_loaded (GeditDocumentLoader *loader,
 
 	/* special case creating a named new doc */
 	else if (doc->priv->create &&
-	         (error->code == G_IO_ERROR_NOT_FOUND) &&
+	         (error->domain == G_IO_ERROR && error->code == G_IO_ERROR_NOT_FOUND) &&
 	         (gedit_utils_uri_has_file_scheme (doc->priv->uri)))
 	{
 		reset_temp_loading_data (doc);

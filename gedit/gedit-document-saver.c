@@ -386,7 +386,7 @@ gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
 	if (!res)
 	{
 		g_set_error (error,
-			     GEDIT_DOCUMENT_ERROR,
+			     G_IO_ERROR,
 			     g_io_error_from_errno (errno),
 			     g_strerror (errno));
 	}

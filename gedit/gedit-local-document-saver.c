@@ -197,7 +197,7 @@ copy_file_data (gint     sfd,
 		if (bytes_read == -1)
 		{
 			g_set_error (error,
-				     GEDIT_DOCUMENT_ERROR,
+				     G_IO_ERROR,
 				     g_io_error_from_errno (errno),
 				     g_strerror (errno));
 
@@ -218,7 +218,7 @@ copy_file_data (gint     sfd,
 					continue;
 
 				g_set_error (error,
-					     GEDIT_DOCUMENT_ERROR,
+					     G_IO_ERROR,
 					     g_io_error_from_errno (errno),
 					     g_strerror (errno));
 
@@ -297,7 +297,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 	if (fstat (lsaver->priv->fd, &statbuf) != 0) 
 	{
 		g_set_error (&lsaver->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
+			     G_IO_ERROR,
 			     g_io_error_from_errno (errno),
 			     g_strerror (errno));
 
@@ -310,14 +310,14 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 		if (S_ISDIR (statbuf.st_mode))
 		{
 			g_set_error (&lsaver->priv->error,
-				     GEDIT_DOCUMENT_ERROR,
+				     G_IO_ERROR,
 				     G_IO_ERROR_IS_DIRECTORY,
 				     "Is a directory");
 		}
 		else
 		{
 			g_set_error (&lsaver->priv->error,
-				     GEDIT_DOCUMENT_ERROR,
+				     G_IO_ERROR,
 				     G_IO_ERROR_NOT_REGULAR_FILE,
 				     "Not a regular file");
 		}
@@ -329,7 +329,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 	if ((statbuf.st_mode & 0222) == 0) //FIXME... check better what else vim does
 	{
 		g_set_error (&lsaver->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
+			     G_IO_ERROR,
 			     G_IO_ERROR_READ_ONLY,
 			     "File is read only");
 
@@ -360,7 +360,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 		g_warning (_("Could not obtain backup filename"));
 
 		g_set_error (&lsaver->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
+			     G_IO_ERROR,
 			     G_IO_ERROR_FAILED,
 			     "Failure");
 
@@ -468,7 +468,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 			gedit_debug_message (DEBUG_SAVER, "could not rename original -> backup");
 
 			g_set_error (&lsaver->priv->error,
-				     GEDIT_DOCUMENT_ERROR,
+				     G_IO_ERROR,
 				     g_io_error_from_errno (errno),
 				     g_strerror (errno));
 
@@ -485,7 +485,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 			gedit_debug_message (DEBUG_SAVER, "could not rename tmp -> original");
 
 			g_set_error (&lsaver->priv->error,
-				     GEDIT_DOCUMENT_ERROR,
+				     G_IO_ERROR,
 				     g_io_error_from_errno (errno),
 				     g_strerror (errno));
 
@@ -505,7 +505,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 		if (fstat (tmpfd, &new_statbuf) != 0)
 		{
 			g_set_error (&lsaver->priv->error,
-				     GEDIT_DOCUMENT_ERROR,
+				     G_IO_ERROR,
 				     g_io_error_from_errno (errno),
 				     g_strerror (errno));
 
@@ -691,7 +691,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 	if (fstat (lsaver->priv->fd, &new_statbuf) != 0)
 	{
 		g_set_error (&lsaver->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
+			     G_IO_ERROR,
 			     g_io_error_from_errno (errno),
 			     g_strerror (errno));
 
@@ -707,7 +707,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 	if (close (lsaver->priv->fd))
 		g_warning ("File '%s' has not been correctly closed: %s",
 			   saver->uri,
-			   strerror (errno));
+			   g_strerror (errno));
 	lsaver->priv->fd = -1;
 
 	g_free (backup_filename);
@@ -737,7 +737,7 @@ save_new_local_file (GeditLocalDocumentSaver *lsaver)
 	if (fstat (lsaver->priv->fd, &statbuf) != 0)
 	{
 		g_set_error (&lsaver->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
+			     G_IO_ERROR,
 			     g_io_error_from_errno (errno),
 			     g_strerror (errno));
 
@@ -753,7 +753,7 @@ save_new_local_file (GeditLocalDocumentSaver *lsaver)
 	if (close (lsaver->priv->fd))
 		g_warning ("File '%s' has not been correctly closed: %s",
 			   GEDIT_DOCUMENT_SAVER (lsaver)->uri,
-			   strerror (errno));
+			   g_strerror (errno));
 
 	lsaver->priv->fd = -1;
 
@@ -810,7 +810,7 @@ save_file (GeditLocalDocumentSaver *lsaver)
 
 	/* else error */
 	g_set_error (&lsaver->priv->error,
-		     GEDIT_DOCUMENT_ERROR,
+		     G_IO_ERROR,
 		     g_io_error_from_errno (errno),
 		     g_strerror (errno));
 
@@ -845,7 +845,7 @@ gedit_local_document_saver_save (GeditDocumentSaver *saver,
 	else
 	{
 		g_set_error (&lsaver->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
+			     G_IO_ERROR,
 			     G_IO_ERROR_NOT_SUPPORTED,
 			     "Operation is not supported");
 	}

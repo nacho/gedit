@@ -924,46 +924,45 @@ document_loaded (GeditDocument *document,
 
 		encoding = gedit_document_get_encoding (document);
 
-		if (error->domain == GEDIT_DOCUMENT_ERROR)
+		if (error->domain == G_IO_ERROR && 
+		    error->code == G_IO_ERROR_CANCELLED)
 		{
-			if (error->code == G_IO_ERROR_CANCELLED)
-			{
-				/* remove the tab, but in an idle handler, since
-				 * we are in the handler of doc loaded and we 
-				 * don't want doc and tab to be finalized now.
-				 */
-				g_idle_add ((GSourceFunc) remove_tab_idle, tab);
+			/* remove the tab, but in an idle handler, since
+			 * we are in the handler of doc loaded and we 
+			 * don't want doc and tab to be finalized now.
+			 */
+			g_idle_add ((GSourceFunc) remove_tab_idle, tab);
 
-				goto end;
+			goto end;
+		}
+		else if (error->domain == G_IO_ERROR || 
+			 error->domain == GEDIT_DOCUMENT_ERROR)
+		{
+			_gedit_recent_remove (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))), uri);
+
+			if (tab->priv->state == GEDIT_TAB_STATE_LOADING_ERROR)
+			{
+				emsg = gedit_io_loading_error_message_area_new (uri, 
+										error);
+				g_signal_connect (emsg,
+						  "response",
+						  G_CALLBACK (io_loading_error_message_area_response),
+						  tab);
 			}
 			else
 			{
-				_gedit_recent_remove (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))), uri);
+				g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_REVERTING_ERROR);
+				
+				emsg = gedit_unrecoverable_reverting_error_message_area_new (uri, 
+											     error);
 
-				if (tab->priv->state == GEDIT_TAB_STATE_LOADING_ERROR)
-				{
-					emsg = gedit_io_loading_error_message_area_new (uri, 
-											error);
-					g_signal_connect (emsg,
-							  "response",
-							  G_CALLBACK (io_loading_error_message_area_response),
-							  tab);
-				}
-				else
-				{
-					g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_REVERTING_ERROR);
-					
-					emsg = gedit_unrecoverable_reverting_error_message_area_new (uri, 
-												     error);
-
-					g_signal_connect (emsg,
-							  "response",
-							  G_CALLBACK (unrecoverable_reverting_error_message_area_response),
-							  tab);
-				}
-
-				set_message_area (tab, emsg);
+				g_signal_connect (emsg,
+						  "response",
+						  G_CALLBACK (unrecoverable_reverting_error_message_area_response),
+						  tab);
 			}
+
+			set_message_area (tab, emsg);
 		}
 		else
 		{
@@ -1293,55 +1292,55 @@ document_saved (GeditDocument *document,
 	{
 		gedit_tab_set_state (tab, GEDIT_TAB_STATE_SAVING_ERROR);
 		
-		if (error->domain == GEDIT_DOCUMENT_ERROR)
+		if (error->domain == GEDIT_DOCUMENT_ERROR &&
+		    error->code == GEDIT_DOCUMENT_ERROR_EXTERNALLY_MODIFIED)
 		{
-			if (error->code == GEDIT_DOCUMENT_ERROR_EXTERNALLY_MODIFIED)
-			{
-				/* This error is recoverable */
-				emsg = gedit_externally_modified_saving_error_message_area_new (
-								tab->priv->tmp_save_uri, 
-								error);
-				g_return_if_fail (emsg != NULL);
+			/* This error is recoverable */
+			emsg = gedit_externally_modified_saving_error_message_area_new (
+							tab->priv->tmp_save_uri, 
+							error);
+			g_return_if_fail (emsg != NULL);
 
-				set_message_area (tab, emsg);
+			set_message_area (tab, emsg);
 
-				g_signal_connect (emsg,
-						  "response",
-						  G_CALLBACK (externally_modified_error_message_area_response),
-						  tab);
-			}
-			else if (error->code == GEDIT_DOCUMENT_ERROR_CANT_CREATE_BACKUP)
-			{
-				/* This error is recoverable */
-				emsg = gedit_no_backup_saving_error_message_area_new (
-								tab->priv->tmp_save_uri, 
-								error);
-				g_return_if_fail (emsg != NULL);
+			g_signal_connect (emsg,
+					  "response",
+					  G_CALLBACK (externally_modified_error_message_area_response),
+					  tab);
+		}
+		else if (error->domain == GEDIT_DOCUMENT_ERROR &&
+			 error->code == GEDIT_DOCUMENT_ERROR_CANT_CREATE_BACKUP)
+		{
+			/* This error is recoverable */
+			emsg = gedit_no_backup_saving_error_message_area_new (
+							tab->priv->tmp_save_uri, 
+							error);
+			g_return_if_fail (emsg != NULL);
 
-				set_message_area (tab, emsg);
+			set_message_area (tab, emsg);
 
-				g_signal_connect (emsg,
-						  "response",
-						  G_CALLBACK (no_backup_error_message_area_response),
-						  tab);
-			}
-			else
-			{
-				/* These errors are _NOT_ recoverable */
-				_gedit_recent_remove  (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))),
-						       tab->priv->tmp_save_uri);
+			g_signal_connect (emsg,
+					  "response",
+					  G_CALLBACK (no_backup_error_message_area_response),
+					  tab);
+		}
+		else if (error->domain == GEDIT_DOCUMENT_ERROR || 
+			 error->domain == G_IO_ERROR)
+		{
+			/* These errors are _NOT_ recoverable */
+			_gedit_recent_remove  (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))),
+					       tab->priv->tmp_save_uri);
 
-				emsg = gedit_unrecoverable_saving_error_message_area_new (tab->priv->tmp_save_uri, 
-									  error);
-				g_return_if_fail (emsg != NULL);
-		
-				set_message_area (tab, emsg);
+			emsg = gedit_unrecoverable_saving_error_message_area_new (tab->priv->tmp_save_uri, 
+								  error);
+			g_return_if_fail (emsg != NULL);
+	
+			set_message_area (tab, emsg);
 
-				g_signal_connect (emsg,
-						  "response",
-						  G_CALLBACK (unrecoverable_saving_error_message_area_response),
-						  tab);
-			}			
+			g_signal_connect (emsg,
+					  "response",
+					  G_CALLBACK (unrecoverable_saving_error_message_area_response),
+					  tab);
 		}
 		else
 		{
@@ -1365,7 +1364,6 @@ document_saved (GeditDocument *document,
 							 GTK_RESPONSE_CANCEL);
 
 		gtk_widget_show (emsg);
-		
 	}
 	else
 	{

@@ -57,7 +57,7 @@ is_recoverable_error (const GError *error)
 {
 	gboolean is_recoverable = FALSE;
 
-	if (error->domain == GEDIT_DOCUMENT_ERROR)
+	if (error->domain == G_IO_ERROR)
 	{
 		switch (error->code) {
 		case G_IO_ERROR_PERMISSION_DENIED:
@@ -72,6 +72,13 @@ is_recoverable_error (const GError *error)
 	}
 
 	return is_recoverable;
+}
+
+static gboolean
+is_gio_error (const GError *error,
+	      gint          code)
+{
+	return error->domain == G_IO_ERROR && error->code == code;
 }
 
 static void
@@ -148,14 +155,16 @@ create_io_loading_error_message_area (const gchar *primary_text,
 	return message_area;
 }
 
-static void
-parse_error (const GError *error, 
-	     gchar       **error_message, 
-	     gchar       **message_details, 
-	     const gchar  *uri, 
-	     const gchar  *uri_for_display)
+static gboolean
+parse_gio_error (gint          code,
+	         gchar       **error_message, 
+	         gchar       **message_details, 
+	         const gchar  *uri, 
+	         const gchar  *uri_for_display)
 {
-	switch (error->code)
+	gboolean ret = TRUE;
+
+	switch (code)
 	{
 	case G_IO_ERROR_NOT_FOUND:
 		*error_message = g_strdup_printf (_("Could not find the file %s."),
@@ -186,10 +195,6 @@ parse_error (const GError *error,
 
 			g_free (scheme_string);
 		}
-		break;
-
-	case GEDIT_DOCUMENT_ERROR_TOO_BIG:
-		*message_details = g_strdup (_("The file is too big."));
 		break;
 
 	case G_IO_ERROR_NOT_MOUNTABLE_FILE:
@@ -264,15 +269,69 @@ parse_error (const GError *error,
 		*message_details = g_strdup (_("Connection timed out. Please try again."));
 		break;
 	
-	case G_IO_ERROR_FAILED:
-		break;
-	
 	default:
+		ret = FALSE;
+		break;
+	}
+	
+	return ret;
+}
+
+static gboolean
+parse_gedit_error (gint          code,
+	           gchar       **error_message, 
+	           gchar       **message_details, 
+	           const gchar  *uri, 
+	           const gchar  *uri_for_display)
+{
+	gboolean ret = TRUE;
+	
+	switch (code)
+	{
+	case GEDIT_DOCUMENT_ERROR_TOO_BIG:
+		*message_details = g_strdup (_("The file is too big."));
+		break;
+		
+	default:
+		ret = FALSE;
+		break;
+	}
+	
+	return ret;
+}
+
+static void
+parse_error (const GError *error, 
+	     gchar       **error_message, 
+	     gchar       **message_details, 
+	     const gchar  *uri, 
+	     const gchar  *uri_for_display)
+{
+	gboolean ret = FALSE;
+	
+	if (error->domain == G_IO_ERROR)
+	{
+		ret = parse_gio_error (error->code, 
+				       error_message, 
+				       message_details,
+				       uri,
+				       uri_for_display);
+	}
+	else if (error->domain == GEDIT_DOCUMENT_ERROR)
+	{
+		ret = parse_gedit_error (error->code,
+					 error_message, 
+				         message_details,
+  				         uri,
+				         uri_for_display);
+	}
+	
+	if (!ret)
+	{
 		g_warning ("Hit unhandled case %d (%s) in %s.", 
 			   error->code, error->message, G_STRFUNC);	
 		*message_details = g_strdup_printf (_("Unexpected error: %s"), 
 						   error->message);
-		break;
 	}
 }
 
@@ -304,19 +363,17 @@ gedit_io_loading_error_message_area_new (const gchar  *uri,
 	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 
-	switch (error->code)
+	if (is_gio_error (error, G_IO_ERROR_TOO_MANY_LINKS))
 	{
-	case G_IO_ERROR_TOO_MANY_LINKS:
 		message_details = g_strdup (_("The number of followed links is limited and the actual file could not be found within this limit."));
-		break;
-
-	case G_IO_ERROR_PERMISSION_DENIED:
+	}
+	else if (is_gio_error (error, G_IO_ERROR_PERMISSION_DENIED))
+	{
 		message_details = g_strdup (_("You do not have the permissions necessary to open the file."));
-		break;		
-
-	default:
+	}
+	else
+	{
 		parse_error (error, &error_message, &message_details, uri, uri_for_display);
-		break;
 	}
 
 	if (error_message == NULL)
@@ -369,16 +426,14 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 
-	switch (error->code)
+	if (is_gio_error (error, G_IO_ERROR_NOT_FOUND))
 	{
-	case G_IO_ERROR_NOT_FOUND:
 		message_details = g_strdup (_("gedit cannot find the file. "
 					      "Perhaps it has recently been deleted."));
-		break;
-
-	default:
+	}
+	else
+	{
 		parse_error (error, &error_message, &message_details, uri, uri_for_display);
-		break;
 	}
 
 	if (error_message == NULL)
@@ -948,81 +1003,79 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 
-	switch (error->code)
+	if (is_gio_error (error, G_IO_ERROR_NOT_SUPPORTED))
 	{
-		case G_IO_ERROR_NOT_SUPPORTED:
-			scheme_string = g_uri_parse_scheme (uri);
+		scheme_string = g_uri_parse_scheme (uri);
 
-			if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
-			{
-				scheme_markup = g_markup_printf_escaped ("<i>%s:</i>", scheme_string);
- 
-				/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
-				message_details = g_strdup_printf (_("gedit cannot handle %s locations in write mode. "
-								     "Please check that you typed the "
-								     "location correctly and try again."),
-								   scheme_markup);
-				g_free (scheme_markup);
-			}
-			else
-			{
-				message_details = g_strdup (_("gedit cannot handle this location in write mode. "
-							      "Please check that you typed the "
-							      "location correctly and try again."));
-			}
+		if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
+		{
+			scheme_markup = g_markup_printf_escaped ("<i>%s:</i>", scheme_string);
 
-			g_free (scheme_string);
-			break;
-
-		case GEDIT_DOCUMENT_ERROR_TOO_BIG:
-			message_details = g_strdup (_("The disk where you are trying to save the file has "
-						      "a limitation on file sizes.  Please try saving "
-						      "a smaller file or saving it to a disk that does not "
-						      "have this limitation."));
-			break;
-
-		case G_IO_ERROR_INVALID_FILENAME:
-			message_details = g_strdup (_("%s is not a valid location. " 
+			/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
+			message_details = g_strdup_printf (_("gedit cannot handle %s locations in write mode. "
+							     "Please check that you typed the "
+							     "location correctly and try again."),
+							   scheme_markup);
+			g_free (scheme_markup);
+		}
+		else
+		{
+			message_details = g_strdup (_("gedit cannot handle this location in write mode. "
 						      "Please check that you typed the "
 						      "location correctly and try again."));
-			break;
+		}
 
-		case G_IO_ERROR_PERMISSION_DENIED:
-			message_details = g_strdup (_("You do not have the permissions necessary to save the file. "
-						      "Please check that you typed the "
-						      "location correctly and try again."));
-
-			break;
-
-		case G_IO_ERROR_NO_SPACE:
-			message_details = g_strdup (_("There is not enough disk space to save the file. "
-						      "Please free some disk space and try again."));
-			break;
-			
-		case G_IO_ERROR_READ_ONLY:	
-			message_details = g_strdup (_("You are trying to save the file on a read-only disk. "
-						      "Please check that you typed the location "
-						      "correctly and try again."));
-			break;
-			
-		case G_IO_ERROR_EXISTS:
-			message_details = g_strdup (_("A file with the same name already exists. "
-						      "Please use a different name."));
-			break;
-			
-		case G_IO_ERROR_FILENAME_TOO_LONG:
-			message_details = g_strdup (_("The disk where you are trying to save the file has "
-						      "a limitation on length of the file names. "
-						      "Please use a shorter name."));
-			break;
-
-		default:
-			parse_error (error, 
-				     &error_message, 
-				     &message_details, 
-				     uri, 
-				     uri_for_display);
-			break;
+		g_free (scheme_string);
+	}
+	else if (is_gio_error (error, G_IO_ERROR_INVALID_FILENAME))
+	{
+		message_details = g_strdup (_("%s is not a valid location. " 
+					      "Please check that you typed the "
+					      "location correctly and try again."));
+	}
+	else if (is_gio_error (error, G_IO_ERROR_PERMISSION_DENIED))
+	{
+		message_details = g_strdup (_("You do not have the permissions necessary to save the file. "
+					      "Please check that you typed the "
+					      "location correctly and try again."));
+	}
+	else if (is_gio_error (error, G_IO_ERROR_NO_SPACE))
+	{
+		message_details = g_strdup (_("There is not enough disk space to save the file. "
+					      "Please free some disk space and try again."));
+	}
+	else if (is_gio_error (error, G_IO_ERROR_READ_ONLY))
+	{
+		message_details = g_strdup (_("You are trying to save the file on a read-only disk. "
+					      "Please check that you typed the location "
+					      "correctly and try again."));
+	}
+	else if (is_gio_error (error, G_IO_ERROR_EXISTS))
+	{
+		message_details = g_strdup (_("A file with the same name already exists. "
+					      "Please use a different name."));
+	}
+	else if (is_gio_error (error, G_IO_ERROR_FILENAME_TOO_LONG))
+	{
+		message_details = g_strdup (_("The disk where you are trying to save the file has "
+					      "a limitation on length of the file names. "
+					      "Please use a shorter name."));
+	}
+	else if (error->domain == GEDIT_DOCUMENT_ERROR &&
+		 error->code == GEDIT_DOCUMENT_ERROR_TOO_BIG)
+	{
+		message_details = g_strdup (_("The disk where you are trying to save the file has "
+					      "a limitation on file sizes.  Please try saving "
+					      "a smaller file or saving it to a disk that does not "
+					      "have this limitation."));
+	}
+	else
+	{
+		parse_error (error, 
+			     &error_message, 
+			     &message_details, 
+			     uri, 
+			     uri_for_display);
 	}
 
 	if (error_message == NULL)

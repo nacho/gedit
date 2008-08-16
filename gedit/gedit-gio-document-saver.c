@@ -158,7 +158,8 @@ gedit_gio_document_saver_init (GeditGioDocumentSaver *gvsaver)
 }
 
 static void
-remote_save_completed_or_failed (GeditGioDocumentSaver *gvsaver, AsyncData *async)
+remote_save_completed_or_failed (GeditGioDocumentSaver *gvsaver, 
+				 AsyncData 	       *async)
 {
 	if (async)
 		async_data_free (async);
@@ -166,6 +167,16 @@ remote_save_completed_or_failed (GeditGioDocumentSaver *gvsaver, AsyncData *asyn
 	gedit_document_saver_saving (GEDIT_DOCUMENT_SAVER (gvsaver),
 				     TRUE,
 				     gvsaver->priv->error);
+}
+
+static void
+async_failed (AsyncData *async,
+	      GError    *error)
+{
+	g_propagate_error (&async->saver->priv->error, error);
+	g_error_free (error);
+	
+	remote_save_completed_or_failed (async->saver, async);
 }
 
 /* prototype, because they call each other... isn't C lovely */
@@ -225,11 +236,7 @@ remote_reget_info_cb (GFile        *source,
 	else
 	{
 		gedit_debug_message (DEBUG_SAVER, "Query info failed: %s", error->message);
-
-		g_set_error (&saver->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
-			     error->code,
-			     error->message);
+		g_propagate_error (&saver->priv->error, error);
 		g_error_free (error);
 	}
 
@@ -256,13 +263,7 @@ close_async_ready_get_info_cb (GOutputStream *stream,
 	{
 		gedit_debug_message (DEBUG_SAVER, "Closing stream error: %s", error->message);
 
-		g_set_error (&async->saver->priv->error,
-		             GEDIT_DOCUMENT_ERROR,
-		             error->code,
-		             error->message);
-		g_error_free (error);
-		
-		remote_save_completed_or_failed (async->saver, async);
+		async_failed (async, error);
 		return;
 	}
 	
@@ -292,10 +293,7 @@ close_async_ready_cb (GOutputStream *stream,
 
 	if (!g_output_stream_close_finish (stream, res, &error))
 	{
-		g_set_error (&async->saver->priv->error,
-		             GEDIT_DOCUMENT_ERROR,
-		             error->code,
-		             error->message);
+		g_propagate_error (&async->saver->priv->error, error);
 		g_error_free (error);
 	}
 
@@ -341,10 +339,7 @@ remote_get_info_cb (GFileOutputStream *stream,
 		else
 		{
 			gedit_debug_message (DEBUG_SAVER, "Query info failed: %s", error->message);
-			g_set_error (&saver->priv->error,
-				     GEDIT_DOCUMENT_ERROR,
-				     error->code,
-				     error->message);
+			g_propagate_error (&saver->priv->error, error);
 			g_error_free (error);
 
 			next_callback = (GAsyncReadyCallback) close_async_ready_cb;
@@ -409,13 +404,7 @@ async_write_cb (GOutputStream *stream,
 	if (bytes_written == -1)
 	{
 		gedit_debug_message (DEBUG_SAVER, "Write error: %s", error->message);
-
-		g_set_error (&gvsaver->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
-			     error->code,
-			     error->message);
-
-		remote_save_completed_or_failed (gvsaver, async);
+		async_failed (async, error);
 		return;
 	}
 	
@@ -481,12 +470,7 @@ async_replace_ready_callback (GFile        *source,
 	if (!gvsaver->priv->stream)
 	{
 		gedit_debug_message (DEBUG_SAVER, "Opening file failed: %s", error->message);
-		g_set_error (&gvsaver->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
-			     error->code,
-			     error->message);
-
-		remote_save_completed_or_failed (gvsaver, async);
+		async_failed (async, error);
 		return;
 	}
 
@@ -561,12 +545,7 @@ begin_write (AsyncData *async)
 	
 	if (!buffer)
 	{
-		g_set_error (&gvsaver->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
-			     error->code,
-			     error->message);
-
-		remote_save_completed_or_failed (gvsaver, async);
+		async_failed (async, error);
 		return;
 	}
 
@@ -605,13 +584,7 @@ mount_ready_callback (GFile        *file,
 	
 	if (!mounted)
 	{
-		g_set_error (&async->saver->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
-			     error->code,
-			     error->message);
-
-		g_error_free (error);
-		remote_save_completed_or_failed (async->saver, async);
+		async_failed (async, error);
 	}
 	else
 	{
@@ -670,13 +643,8 @@ check_modification_callback (GFile        *source,
 		}
 		
 		gedit_debug_message (DEBUG_SAVER, "Error getting modification: %s", error->message);
-		g_set_error (&gvsaver->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
-			     error->code,
-			     error->message);
 
-		remote_save_completed_or_failed (gvsaver, async);
-
+		async_failed (async, error);
 		return;
 	}
 

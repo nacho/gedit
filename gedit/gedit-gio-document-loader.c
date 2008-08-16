@@ -189,6 +189,15 @@ remote_load_completed_or_failed (GeditGioDocumentLoader *gvloader, AsyncData *as
 static void	read_file_chunk		(AsyncData *async);
 
 static void
+async_failed (AsyncData *async, GError *error)
+{
+	g_propagate_error (&async->loader->priv->error, error);
+	g_error_free (error);
+
+	remote_load_completed_or_failed (async->loader, async);
+}
+
+static void
 async_read_cb (GInputStream *stream,
 	       GAsyncResult *res,
 	       AsyncData    *async)
@@ -212,13 +221,7 @@ async_read_cb (GInputStream *stream,
 	/* error occurred */
 	if (bytes_read == -1)
 	{
-		g_set_error (&gvloader->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
-			     error->code,
-			     error->message);
-
-		remote_load_completed_or_failed (gvloader, async);
-
+		async_failed (async, error);
 		return;
 	}
 
@@ -228,7 +231,7 @@ async_read_cb (GInputStream *stream,
 		g_set_error (&gvloader->priv->error,
 			     GEDIT_DOCUMENT_ERROR,
 			     GEDIT_DOCUMENT_ERROR_TOO_BIG,
-			     _("File too big"));
+			     "File too big");
 
 		remote_load_completed_or_failed (gvloader, async);
 
@@ -294,9 +297,9 @@ finish_query_info (AsyncData *async)
 	    g_file_info_get_file_type (gvloader->priv->info) != G_FILE_TYPE_REGULAR)
 	{
 		g_set_error (&gvloader->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
+			     G_IO_ERROR,
 			     G_IO_ERROR_NOT_REGULAR_FILE,
-			     _("Not a regular file"));
+			     "Not a regular file");
 
 		remote_load_completed_or_failed (gvloader, async);
 
@@ -334,15 +337,7 @@ remote_get_file_info_cb (GFile        *source,
 	if (!gvloader->priv->info)
 	{
 		/* propagate the error and clean up */
-		g_set_error (&gvloader->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
-			     error->code,
-			     error->message);
-		
-		g_error_free (error);
-
-		remote_load_completed_or_failed (gvloader, async);
-
+		async_failed (async, error);
 		return;
 	}
 
@@ -391,15 +386,7 @@ remote_get_info_cb (GFileInputStream *source,
 		}
 		
 		/* propagate the error and clean up */
-		g_set_error (&gvloader->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
-			     error->code,
-			     error->message);
-		
-		g_error_free (error);
-
-		remote_load_completed_or_failed (gvloader, async);
-
+		async_failed (async, error);
 		return;
 	}
 	
@@ -425,13 +412,7 @@ mount_ready_callback (GFile        *file,
 	
 	if (!mounted)
 	{
-		g_set_error (&async->loader->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
-			     error->code,
-			     error->message);
-
-		g_error_free (error);
-		remote_load_completed_or_failed (async->loader, async);
+		async_failed (async, error);
 	}
 	else
 	{
@@ -491,12 +472,8 @@ async_read_ready_callback (GObject      *source,
 			return;
 		}
 		
-		/* Propagate error using GEDIT_DOCUMENT_ERROR for the domain */
-		g_set_error (&gvloader->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
-			     error->code,
-			     error->message);
-			     
+		/* Propagate error */
+		g_propagate_error (&gvloader->priv->error, error);
 		gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (gvloader),
 					       TRUE,
 					       gvloader->priv->error);
@@ -617,7 +594,7 @@ gedit_gio_document_loader_cancel (GeditDocumentLoader *loader)
 	g_cancellable_cancel (gvloader->priv->cancellable);
 
 	g_set_error (&gvloader->priv->error,
-		     GEDIT_DOCUMENT_ERROR,
+		     G_IO_ERROR,
 		     G_IO_ERROR_CANCELLED,
 		     "Operation cancelled");
 

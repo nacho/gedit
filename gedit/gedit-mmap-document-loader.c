@@ -156,7 +156,7 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 	if (fstat (mloader->priv->fd, &mloader->priv->statbuf) != 0) 
 	{
 		g_set_error (&mloader->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
+			     G_IO_ERROR,
 			     g_io_error_from_errno (errno),
 			     g_strerror (errno));
 
@@ -169,14 +169,14 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 		if (S_ISDIR (mloader->priv->statbuf.st_mode))
 		{
 			g_set_error (&mloader->priv->error,
-				     GEDIT_DOCUMENT_ERROR,
+				     G_IO_ERROR,
 				     G_IO_ERROR_IS_DIRECTORY,
 				     "Is a directory");
 		}
 		else
 		{
 			g_set_error (&mloader->priv->error,
-				     GEDIT_DOCUMENT_ERROR,
+				     G_IO_ERROR,
 				     G_IO_ERROR_NOT_REGULAR_FILE,
 				     "Not a regular file");
 		}
@@ -215,7 +215,7 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 			gedit_debug_message (DEBUG_LOADER, "mmap failed");
 
 			g_set_error (&mloader->priv->error,
-				     GEDIT_DOCUMENT_ERROR,
+				     G_IO_ERROR,
 				     g_io_error_from_errno (errno),
 				     g_strerror (errno));
 
@@ -237,7 +237,7 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 			gedit_debug_message (DEBUG_LOADER, "SIGBUS during mmap");
 
 			g_set_error (&mloader->priv->error,
-				     GEDIT_DOCUMENT_ERROR,
+				     G_IO_ERROR,
 				     G_IO_ERROR_FAILED,
 				     "I/O error");
 
@@ -245,7 +245,7 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 			if (ret != 0)
 				g_warning ("File '%s' has not been correctly unmapped: %s",
 					   GEDIT_DOCUMENT_LOADER (mloader)->uri,
-					   strerror (errno));
+					   g_strerror (errno));
 
 			goto done;
 		}
@@ -262,7 +262,7 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 			if (ret != 0)
 				g_warning ("File '%s' has not been correctly unmapped: %s",
 					   GEDIT_DOCUMENT_LOADER (mloader)->uri,
-					   strerror (errno));
+					   g_strerror (errno));
 
 			goto done;
 		}
@@ -286,7 +286,7 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 		if (ret != 0)
 			g_warning ("File '%s' has not been correctly unmapped: %s",
 				   GEDIT_DOCUMENT_LOADER (mloader)->uri,
-				   strerror (errno));
+				   g_strerror (errno));
 	}
 
  done:
@@ -295,7 +295,7 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 	if (ret != 0)
 		g_warning ("File '%s' has not been correctly closed: %s",
 			   GEDIT_DOCUMENT_LOADER (mloader)->uri,
-			   strerror (errno));
+			   g_strerror (errno));
 
 	mloader->priv->fd = -1;
 
@@ -331,7 +331,7 @@ load_file (GeditMmapDocumentLoader *mloader,
 	if (mloader->priv->fd == -1)
 	{
 		g_set_error (&mloader->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
+			     G_IO_ERROR,
 			     g_io_error_from_errno (errno),
 			     g_strerror (errno));
 
@@ -373,7 +373,7 @@ gedit_mmap_document_loader_load (GeditDocumentLoader *loader)
 	else
 	{
 		g_set_error (&mloader->priv->error,
-			     GEDIT_DOCUMENT_ERROR,
+			     G_IO_ERROR,
 			     G_IO_ERROR_NOT_SUPPORTED,
 			     "Not supported");
 	}
@@ -417,7 +417,7 @@ gedit_mmap_document_loader_cancel (GeditDocumentLoader *loader)
 	GeditMmapDocumentLoader *mloader = GEDIT_MMAP_DOCUMENT_LOADER (loader);
 
 	g_set_error (&mloader->priv->error,
-		     GEDIT_DOCUMENT_ERROR,
+		     G_IO_ERROR,
 		     G_IO_ERROR_CANCELLED,
 		     "Cancelled");
 
