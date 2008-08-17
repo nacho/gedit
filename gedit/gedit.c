@@ -449,6 +449,9 @@ main (int argc, char *argv[])
 	gboolean restored = FALSE;
 	GError *error = NULL;
 
+	/* Init glib threads asap */
+	g_thread_init (NULL);
+
 	/* Setup debugging */
 	gedit_debug_init ();
 	gedit_debug_message (DEBUG_APP, "Startup");
@@ -466,13 +469,13 @@ main (int argc, char *argv[])
 	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
 	g_option_context_add_group (context, gtk_get_option_group (FALSE));
 	g_option_context_add_group (context, egg_sm_client_get_option_group ());
-	
-	g_thread_init (NULL);
+
 	gtk_init (&argc, &argv);
 
 	if (!g_option_context_parse (context, &argc, &argv, &error))
 	{
-	        g_print(_("%s\nRun '%s --help' to see a full list of available command line options.\n"), error->message, argv[0]);
+	        g_print(_("%s\nRun '%s --help' to see a full list of available command line options.\n"),
+			error->message, argv[0]);
 		g_error_free (error);
 		return 1;
 	}
@@ -510,7 +513,9 @@ main (int argc, char *argv[])
 		}
 	}
 	else
+	{
 		g_warning ("Cannot create the 'gedit' connection.");
+	}
 
 	gedit_debug_message (DEBUG_APP, "Set icon");
 	
@@ -588,7 +593,6 @@ main (int argc, char *argv[])
 	g_object_unref (engine);
 	gedit_prefs_manager_app_shutdown ();
 	gedit_metadata_manager_shutdown ();
-
 
 	return 0;
 }
