@@ -1131,14 +1131,14 @@ row_inserted (GeditFileBrowserStore * model,
 	gtk_tree_model_row_inserted (GTK_TREE_MODEL(model), copy, iter);
 	gtk_tree_path_free (copy);
 	
-	if (ref) {
+	if (ref)
+	{
 		gtk_tree_path_free (*path);
 
 		/* To restore the path, we get the path from the reference. But, since
 		   we inserted a row, the path will be one index further than the
 		   actual path of our node. We therefore call gtk_tree_path_prev */
 		*path = gtk_tree_row_reference_get_path (ref);
-	
 		gtk_tree_path_prev (*path);
 	}
 
@@ -1160,14 +1160,14 @@ row_deleted (GeditFileBrowserStore * model,
 static void
 model_refilter_node (GeditFileBrowserStore * model,
 		     FileBrowserNode * node,
-		     GtkTreePath * path)
+		     GtkTreePath ** path)
 {
 	gboolean old_visible;
 	gboolean new_visible;
 	FileBrowserNodeDir *dir;
 	GSList *item;
 	GtkTreeIter iter;
-	gboolean free_path = FALSE;
+	GtkTreePath *tmppath = NULL;
 	gboolean in_tree;
 
 	if (node == NULL)
@@ -1178,19 +1178,20 @@ model_refilter_node (GeditFileBrowserStore * model,
 
 	in_tree = node_in_tree (model, node);
 
-	if (path == NULL) {
+	if (path == NULL)
+	{
 		if (in_tree)
-			path = gedit_file_browser_store_get_path_real (model,
+			tmppath = gedit_file_browser_store_get_path_real (model,
 								       node);
 		else
-			path = gtk_tree_path_new_first ();
+			tmppath = gtk_tree_path_new_first ();
 
-		free_path = TRUE;
+		path = &tmppath;
 	}
 
 	if (NODE_IS_DIR (node)) {
 		if (in_tree)
-			gtk_tree_path_down (path);
+			gtk_tree_path_down (*path);
 
 		dir = FILE_BROWSER_NODE_DIR (node);
 
@@ -1201,7 +1202,7 @@ model_refilter_node (GeditFileBrowserStore * model,
 		}
 
 		if (in_tree)
-			gtk_tree_path_up (path);
+			gtk_tree_path_up (*path);
 	}
 
 	if (in_tree) {
@@ -1210,21 +1211,21 @@ model_refilter_node (GeditFileBrowserStore * model,
 		if (old_visible != new_visible) {
 			if (old_visible) {
 				node->inserted = FALSE;
-				row_deleted (model, path);
+				row_deleted (model, *path);
 			} else {
 				iter.user_data = node;
-				row_inserted (model, &path, &iter);
-				gtk_tree_path_next (path);
+				row_inserted (model, path, &iter);
+				gtk_tree_path_next (*path);
 			}
 		} else if (old_visible) {
-			gtk_tree_path_next (path);
+			gtk_tree_path_next (*path);
 		}
 	}
 	
 	model_check_dummy (model, node);
 
-	if (free_path)
-		gtk_tree_path_free (path);
+	if (tmppath)
+		gtk_tree_path_free (tmppath);
 }
 
 static void
@@ -1838,7 +1839,7 @@ file_browser_node_set_from_info (GeditFileBrowserStore * model,
 
 	if (isadded) {
 		path = gedit_file_browser_store_get_path_real (model, node);
-		model_refilter_node (model, node, path);
+		model_refilter_node (model, node, &path);
 		gtk_tree_path_free (path);
 		
 		model_check_dummy (model, node->parent);

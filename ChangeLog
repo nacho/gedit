@@ -1,5 +1,12 @@
 2008-08-17  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* plugins/filebrowser/gedit-file-browser-store.c:
+	
+	Bug 547692 – Crash when selecting 'show hidden' from the side pane
+	Bug was caused by change in working of row_inserted
+
+2008-08-17  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* gedit/gedit-document.c: reverted applying settings in the constructor
 	since this problem is already fixed in gsv
 
