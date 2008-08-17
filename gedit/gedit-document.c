@@ -998,10 +998,12 @@ document_loader_loaded (GeditDocumentLoader *loader,
 	{
 		GtkTextIter iter;
 		const gchar *content_type;
-		gchar *mime_type;
+		gchar *mime_type = NULL;
 
 		content_type = gedit_document_loader_get_content_type (loader);
-		mime_type = g_content_type_get_mime_type (content_type);
+		
+		if (content_type)
+			mime_type = g_content_type_get_mime_type (content_type);
 
 		doc->priv->mtime = gedit_document_loader_get_mtime (loader);
 
