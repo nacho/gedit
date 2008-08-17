@@ -2157,17 +2157,18 @@ model_iterate_children_cb (GFile * file,
 	GError * error = NULL;
 	GFileEnumerator * enumerator;
 
+	if (g_cancellable_is_cancelled (async->cancellable))
+	{
+		async_node_free (async);
+		return;
+	}
+	
 	enumerator = g_file_enumerate_children_finish (file, result, &error);
 
 	if (enumerator == NULL) {
 		/* Simply return if we were cancelled or if the dir is not there */
 		FileBrowserNodeDir *dir = async->dir;
-		g_free (async);
-
-		if (error->domain == G_IO_ERROR &&
-		    (error->code == G_IO_ERROR_CANCELLED || error->code == G_IO_ERROR_NOT_FOUND))
-			return;
-
+		
 		/* Otherwise handle the error appropriately */
 		g_signal_emit (dir->model,
 			       model_signals[ERROR],
@@ -2177,10 +2178,7 @@ model_iterate_children_cb (GFile * file,
 
 		file_browser_node_unload (dir->model, (FileBrowserNode *)dir, TRUE);
 		g_error_free (error);
-	} else if (g_cancellable_is_cancelled (async->cancellable)) {
-		/* Check cancelled state manually */
 		async_node_free (async);
-		return;
 	} else {
 		next_files_async (enumerator, async);
 	}
