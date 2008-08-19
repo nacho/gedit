@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-13 23:10+0200\n"
-"PO-Revision-Date: 2008-08-13 23:11+0200\n"
+"POT-Creation-Date: 2008-08-19 18:11+0200\n"
+"PO-Revision-Date: 2008-08-19 18:12+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <icq@svn.gnome.org>\n"
 "Language-Team: Galego <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -971,11 +971,11 @@ msgid "%s: invalid encoding.\n"
 msgstr "%s: codificación non válida.\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:465
+#: ../gedit/gedit.c:468
 msgid "- Edit text files"
 msgstr " - Editar ficheiros de texto"
 
-#: ../gedit/gedit.c:475
+#: ../gedit/gedit.c:477
 #, c-format
 msgid ""
 "%s\n"
@@ -1295,65 +1295,51 @@ msgstr "Todos os ficheiros de texto"
 msgid "C_haracter Coding:"
 msgstr "Codificación de _carácter:"
 
-#: ../gedit/gedit-gio-document-loader.c:231
-#, c-format
-msgid "File too big"
-msgstr "O ficheiro é demasiado grande"
-
-#: ../gedit/gedit-gio-document-loader.c:299
-#, c-format
-msgid "Not a regular file"
-msgstr "Non é un ficheiro regular"
-
 #: ../gedit/gedit-help.c:82
 msgid "There was an error displaying help."
 msgstr "Houbo un erro ao mostrar a axuda."
 
-#: ../gedit/gedit-io-error-message-area.c:161
+#: ../gedit/gedit-io-error-message-area.c:170
 #, c-format
 msgid "Could not find the file %s."
 msgstr "Non se puido localizar o ficheiro %s."
 
-#: ../gedit/gedit-io-error-message-area.c:163
-#: ../gedit/gedit-io-error-message-area.c:206
-#: ../gedit/gedit-io-error-message-area.c:213
+#: ../gedit/gedit-io-error-message-area.c:172
+#: ../gedit/gedit-io-error-message-area.c:211
+#: ../gedit/gedit-io-error-message-area.c:218
 msgid "Please check that you typed the location correctly and try again."
 msgstr "Verifique que escribiu a localización correctamente e ténteo de novo."
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:178
+#: ../gedit/gedit-io-error-message-area.c:187
 #, c-format
 msgid "gedit cannot handle %s locations."
 msgstr "O Gedit non pode manipular %s localizacións."
 
-#: ../gedit/gedit-io-error-message-area.c:184
+#: ../gedit/gedit-io-error-message-area.c:193
 msgid "gedit cannot handle this location."
 msgstr "O Gedit non pode manipular este enderezo."
 
-#: ../gedit/gedit-io-error-message-area.c:192
-msgid "The file is too big."
-msgstr "O ficheiro é demasiado grande."
-
-#: ../gedit/gedit-io-error-message-area.c:196
+#: ../gedit/gedit-io-error-message-area.c:201
 msgid "The location of the file cannot be mounted."
 msgstr "Non se pode montar a localización do ficheiro."
 
-#: ../gedit/gedit-io-error-message-area.c:200
+#: ../gedit/gedit-io-error-message-area.c:205
 msgid "The location of the file cannot be accessed because it is not mounted."
 msgstr ""
 "Non se pode acceder á localización do ficheiro porque non está montada."
 
-#: ../gedit/gedit-io-error-message-area.c:204
+#: ../gedit/gedit-io-error-message-area.c:209
 #, c-format
 msgid "%s is a directory."
 msgstr "%s é un directorio."
 
-#: ../gedit/gedit-io-error-message-area.c:211
+#: ../gedit/gedit-io-error-message-area.c:216
 #, c-format
 msgid "%s is not a valid location."
 msgstr "%s non é unha localización válida."
 
-#: ../gedit/gedit-io-error-message-area.c:238
+#: ../gedit/gedit-io-error-message-area.c:243
 #, c-format
 msgid ""
 "Host %s could not be found. Please check that your proxy settings are "
@@ -1362,7 +1348,7 @@ msgstr ""
 "Non se puido encontrar o host %s. Verifique que a configuración do seu proxy "
 "sexa correcta e ténteo de novo."
 
-#: ../gedit/gedit-io-error-message-area.c:251
+#: ../gedit/gedit-io-error-message-area.c:256
 #, c-format
 msgid ""
 "Host name was invalid. Please check that you typed the location correctly "
@@ -1371,21 +1357,25 @@ msgstr ""
 "O nome do host non é válido. Verifique que escribiu ben o enderezo e ténteo "
 "de novo."
 
-#: ../gedit/gedit-io-error-message-area.c:259
+#: ../gedit/gedit-io-error-message-area.c:264
 #, c-format
 msgid "%s is not a regular file."
 msgstr "%s non é un ficheiro regular."
 
-#: ../gedit/gedit-io-error-message-area.c:264
+#: ../gedit/gedit-io-error-message-area.c:269
 msgid "Connection timed out. Please try again."
 msgstr "Excedeuse o tempo de espera da conexión. Ténteo de novo."
 
-#: ../gedit/gedit-io-error-message-area.c:273
+#: ../gedit/gedit-io-error-message-area.c:292
+msgid "The file is too big."
+msgstr "O ficheiro é demasiado grande."
+
+#: ../gedit/gedit-io-error-message-area.c:333
 #, c-format
 msgid "Unexpected error: %s"
 msgstr "Erro inesperado: %s"
 
-#: ../gedit/gedit-io-error-message-area.c:310
+#: ../gedit/gedit-io-error-message-area.c:368
 msgid ""
 "The number of followed links is limited and the actual file could not be "
 "found within this limit."
@@ -1393,69 +1383,69 @@ msgstr ""
 "O número de ligazóns a seguir é limitado e o ficheiro actual non se puido "
 "encontrar neste límite."
 
-#: ../gedit/gedit-io-error-message-area.c:314
+#: ../gedit/gedit-io-error-message-area.c:372
 msgid "You do not have the permissions necessary to open the file."
 msgstr "Non ten os permisos necesarios para abrir o ficheiro."
 
-#: ../gedit/gedit-io-error-message-area.c:323
-#: ../gedit/gedit-io-error-message-area.c:545
+#: ../gedit/gedit-io-error-message-area.c:380
+#: ../gedit/gedit-io-error-message-area.c:600
 #, c-format
 msgid "Could not open the file %s."
 msgstr "Non se puido abrir o ficheiro %s."
 
-#: ../gedit/gedit-io-error-message-area.c:332
-#: ../gedit/gedit-io-error-message-area.c:452
+#: ../gedit/gedit-io-error-message-area.c:389
+#: ../gedit/gedit-io-error-message-area.c:507
 msgid "_Retry"
 msgstr "_Tentar de novo"
 
-#: ../gedit/gedit-io-error-message-area.c:375
+#: ../gedit/gedit-io-error-message-area.c:431
 msgid "gedit cannot find the file. Perhaps it has recently been deleted."
 msgstr ""
 "O gedit non pode encontrar o ficheiro. Pode que fora eliminado recentemente."
 
-#: ../gedit/gedit-io-error-message-area.c:385
+#: ../gedit/gedit-io-error-message-area.c:440
 #, c-format
 msgid "Could not revert the file %s."
 msgstr "Non se puido recuperar o ficheiro %s."
 
-#: ../gedit/gedit-io-error-message-area.c:409
+#: ../gedit/gedit-io-error-message-area.c:464
 msgid "Ch_aracter Coding:"
 msgstr "Codificación de _carácter:"
 
-#: ../gedit/gedit-io-error-message-area.c:547
+#: ../gedit/gedit-io-error-message-area.c:602
 msgid "gedit has not been able to detect the character coding."
 msgstr "O Gedit non puido detectar a codificación de caracteres."
 
-#: ../gedit/gedit-io-error-message-area.c:549
-#: ../gedit/gedit-io-error-message-area.c:558
+#: ../gedit/gedit-io-error-message-area.c:604
+#: ../gedit/gedit-io-error-message-area.c:613
 msgid "Please check that you are not trying to open a binary file."
 msgstr "Verifique que non está tentando abrir un ficheiro binario."
 
-#: ../gedit/gedit-io-error-message-area.c:550
+#: ../gedit/gedit-io-error-message-area.c:605
 msgid "Select a character coding from the menu and try again."
 msgstr ""
 "Seleccione unha codificación de caracteres desde o menú e ténteo de novo."
 
-#: ../gedit/gedit-io-error-message-area.c:555
+#: ../gedit/gedit-io-error-message-area.c:610
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
 msgstr ""
 "Non se puido abrir o ficheiro %s usando a codificación de caracteres %s."
 
-#: ../gedit/gedit-io-error-message-area.c:559
-#: ../gedit/gedit-io-error-message-area.c:611
+#: ../gedit/gedit-io-error-message-area.c:614
+#: ../gedit/gedit-io-error-message-area.c:666
 msgid "Select a different character coding from the menu and try again."
 msgstr ""
 "Seleccione unha codificación de caracteres diferente desde o menú e ténteo "
 "de novo."
 
-#: ../gedit/gedit-io-error-message-area.c:606
+#: ../gedit/gedit-io-error-message-area.c:661
 #, c-format
 msgid "Could not save the file %s using the %s character coding."
 msgstr ""
 "Non se puido gardar o ficheiro %s usando a codificación de caracteres %s."
 
-#: ../gedit/gedit-io-error-message-area.c:609
+#: ../gedit/gedit-io-error-message-area.c:664
 msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
@@ -1463,20 +1453,20 @@ msgstr ""
 "O documento contén un ou máis caracteres que non se poden codificar usando a "
 "codificación de caracteres especificada."
 
-#: ../gedit/gedit-io-error-message-area.c:672
+#: ../gedit/gedit-io-error-message-area.c:727
 msgid "_Edit Anyway"
 msgstr "_Editar de todos os modos"
 
-#: ../gedit/gedit-io-error-message-area.c:675
+#: ../gedit/gedit-io-error-message-area.c:730
 msgid "_Don't Edit"
 msgstr "_Non editar"
 
-#: ../gedit/gedit-io-error-message-area.c:690
+#: ../gedit/gedit-io-error-message-area.c:745
 #, c-format
 msgid "This file (%s) is already open in another gedit window."
 msgstr "Este ficheiro (%s) xa está aberto noutra ventá do Gedit."
 
-#: ../gedit/gedit-io-error-message-area.c:705
+#: ../gedit/gedit-io-error-message-area.c:760
 msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
@@ -1484,41 +1474,41 @@ msgstr ""
 "O Gedit abriu esta instancia do ficheiro nunha forma non editable. Quere "
 "editalo de todos os modos?"
 
-#: ../gedit/gedit-io-error-message-area.c:763
-#: ../gedit/gedit-io-error-message-area.c:858
+#: ../gedit/gedit-io-error-message-area.c:818
+#: ../gedit/gedit-io-error-message-area.c:913
 msgid "S_ave Anyway"
 msgstr "_Gardar de todos os modos"
 
-#: ../gedit/gedit-io-error-message-area.c:767
-#: ../gedit/gedit-io-error-message-area.c:862
+#: ../gedit/gedit-io-error-message-area.c:822
+#: ../gedit/gedit-io-error-message-area.c:917
 msgid "D_on't Save"
 msgstr "_Non gardar"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:785
+#: ../gedit/gedit-io-error-message-area.c:840
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "O ficheiro %s modificouse desde que se leu."
 
-#: ../gedit/gedit-io-error-message-area.c:801
+#: ../gedit/gedit-io-error-message-area.c:856
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
 "Se o garda, todos os cambios externos poderían perderse. Quere gardalo de "
 "todos os modos?"
 
-#: ../gedit/gedit-io-error-message-area.c:880
+#: ../gedit/gedit-io-error-message-area.c:935
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "Non se puido crear un ficheiro de seguranza ao gardar %s"
 
-#: ../gedit/gedit-io-error-message-area.c:883
+#: ../gedit/gedit-io-error-message-area.c:938
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "Non se puido crear un ficheiro de seguranza ao gardar %s"
 
-#: ../gedit/gedit-io-error-message-area.c:900
+#: ../gedit/gedit-io-error-message-area.c:955
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1530,7 +1520,7 @@ msgstr ""
 "ficheiro. Quere gardar de todos os modos?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:961
+#: ../gedit/gedit-io-error-message-area.c:1015
 #, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
@@ -1539,7 +1529,7 @@ msgstr ""
 "O Gedit non pode manipular %s localizacións en modo de edición. Verifique "
 "que escribiu a localización correctamente e ténteo de novo."
 
-#: ../gedit/gedit-io-error-message-area.c:969
+#: ../gedit/gedit-io-error-message-area.c:1023
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1547,7 +1537,52 @@ msgstr ""
 "O Gedit non pode manipular esta localización en modo de edición. Verifique "
 "que escribiu a localización correctamente e ténteo de novo."
 
-#: ../gedit/gedit-io-error-message-area.c:978
+#: ../gedit/gedit-io-error-message-area.c:1032
+#, c-format
+msgid ""
+"%s is not a valid location. Please check that you typed the location "
+"correctly and try again."
+msgstr ""
+"%s non é unha localización válida. Verifique que escribiu ben o enderezo e "
+"ténteo de novo."
+
+#: ../gedit/gedit-io-error-message-area.c:1038
+msgid ""
+"You do not have the permissions necessary to save the file. Please check "
+"that you typed the location correctly and try again."
+msgstr ""
+"Non ten os permisos necesarios para gardar o ficheiro. Verifique que "
+"escribiu o enderezo correctamente e ténteo de novo."
+
+#: ../gedit/gedit-io-error-message-area.c:1044
+msgid ""
+"There is not enough disk space to save the file. Please free some disk space "
+"and try again."
+msgstr ""
+"Non hai suficiente espazo no disco para gardar o ficheiro. Libere un pouco "
+"de espazo no disco e ténteo de novo."
+
+#: ../gedit/gedit-io-error-message-area.c:1049
+msgid ""
+"You are trying to save the file on a read-only disk. Please check that you "
+"typed the location correctly and try again."
+msgstr ""
+"Está tentando gardar o ficheiro nun disco só de lectura. Verifique que "
+"escribiu o enderezo correctamente e ténteo de novo."
+
+#: ../gedit/gedit-io-error-message-area.c:1055
+msgid "A file with the same name already exists. Please use a different name."
+msgstr "Xa existe un ficheiro co mesmo nome. Use un nome diferente."
+
+#: ../gedit/gedit-io-error-message-area.c:1060
+msgid ""
+"The disk where you are trying to save the file has a limitation on length of "
+"the file names. Please use a shorter name."
+msgstr ""
+"O disco onde está tentando gardar o ficheiro ten unha limitación de "
+"lonxitude dos nomes de ficheiro. Use un nome máis curto."
+
+#: ../gedit/gedit-io-error-message-area.c:1067
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1557,52 +1592,7 @@ msgstr ""
 "tamaños de ficheiro. Tente gardar un ficheiro máis pequeno ou gardalo nun "
 "disco que non posúa esta limitación."
 
-#: ../gedit/gedit-io-error-message-area.c:985
-#, c-format
-msgid ""
-"%s is not a valid location. Please check that you typed the location "
-"correctly and try again."
-msgstr ""
-"%s non é unha localización válida. Verifique que escribiu ben o enderezo e "
-"ténteo de novo."
-
-#: ../gedit/gedit-io-error-message-area.c:991
-msgid ""
-"You do not have the permissions necessary to save the file. Please check "
-"that you typed the location correctly and try again."
-msgstr ""
-"Non ten os permisos necesarios para gardar o ficheiro. Verifique que "
-"escribiu o enderezo correctamente e ténteo de novo."
-
-#: ../gedit/gedit-io-error-message-area.c:998
-msgid ""
-"There is not enough disk space to save the file. Please free some disk space "
-"and try again."
-msgstr ""
-"Non hai suficiente espazo no disco para gardar o ficheiro. Libere un pouco "
-"de espazo no disco e ténteo de novo."
-
-#: ../gedit/gedit-io-error-message-area.c:1003
-msgid ""
-"You are trying to save the file on a read-only disk. Please check that you "
-"typed the location correctly and try again."
-msgstr ""
-"Está tentando gardar o ficheiro nun disco só de lectura. Verifique que "
-"escribiu o enderezo correctamente e ténteo de novo."
-
-#: ../gedit/gedit-io-error-message-area.c:1009
-msgid "A file with the same name already exists. Please use a different name."
-msgstr "Xa existe un ficheiro co mesmo nome. Use un nome diferente."
-
-#: ../gedit/gedit-io-error-message-area.c:1014
-msgid ""
-"The disk where you are trying to save the file has a limitation on length of "
-"the file names. Please use a shorter name."
-msgstr ""
-"O disco onde está tentando gardar o ficheiro ten unha limitación de "
-"lonxitude dos nomes de ficheiro. Use un nome máis curto."
-
-#: ../gedit/gedit-io-error-message-area.c:1029
+#: ../gedit/gedit-io-error-message-area.c:1082
 #, c-format
 msgid "Could not save the file %s."
 msgstr "Non se puido gardar o ficheiro %s."
@@ -1610,20 +1600,20 @@ msgstr "Non se puido gardar o ficheiro %s."
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1071
+#: ../gedit/gedit-io-error-message-area.c:1124
 #, c-format
 msgid "The file %s changed on disk."
 msgstr "O ficheiro %s modificouse no disco."
 
-#: ../gedit/gedit-io-error-message-area.c:1076
+#: ../gedit/gedit-io-error-message-area.c:1129
 msgid "Do you want to drop your changes and reload the file?"
 msgstr "Quere eliminar as modificacións e recargar o ficheiro?"
 
-#: ../gedit/gedit-io-error-message-area.c:1078
+#: ../gedit/gedit-io-error-message-area.c:1131
 msgid "Do you want to reload the file?"
 msgstr "Quere recargar o ficheiro?"
 
-#: ../gedit/gedit-io-error-message-area.c:1088
+#: ../gedit/gedit-io-error-message-area.c:1141
 msgid "_Reload"
 msgstr "_Recargar"
 
@@ -1880,38 +1870,38 @@ msgid "Saving %s"
 msgstr "Gardando %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1659
+#: ../gedit/gedit-tab.c:1657
 msgid "RO"
 msgstr "SL"
 
-#: ../gedit/gedit-tab.c:1705
+#: ../gedit/gedit-tab.c:1703
 #, c-format
 msgid "Error opening file %s"
 msgstr "Erro ao abrir o ficheiro %s"
 
-#: ../gedit/gedit-tab.c:1710
+#: ../gedit/gedit-tab.c:1708
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Erro ao recuperar o ficheiro %s"
 
-#: ../gedit/gedit-tab.c:1715
+#: ../gedit/gedit-tab.c:1713
 #, c-format
 msgid "Error saving file %s"
 msgstr "Erro ao gardar o ficheiro %s"
 
-#: ../gedit/gedit-tab.c:1734
+#: ../gedit/gedit-tab.c:1732
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1741
+#: ../gedit/gedit-tab.c:1739
 msgid "Name:"
 msgstr "Nome:"
 
-#: ../gedit/gedit-tab.c:1742
+#: ../gedit/gedit-tab.c:1740
 msgid "MIME Type:"
 msgstr "Tipo MIME:"
 
-#: ../gedit/gedit-tab.c:1743
+#: ../gedit/gedit-tab.c:1741
 msgid "Encoding:"
 msgstr "Codificación:"
 
@@ -2601,7 +2591,7 @@ msgstr "Acceso fácil a ficheiros desde o panel lateral"
 msgid "File Browser Pane"
 msgstr "Panel do navegador de ficheiros"
 
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:225
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:228
 msgid "File System"
 msgstr "Sistema de ficheiros"
 
@@ -2779,7 +2769,7 @@ msgstr ""
 msgid "If you delete an item, it is permanently lost."
 msgstr "Se elimina un elemento este pérdese permanentemente."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1625
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1626
 msgid "(Empty)"
 msgstr "(Baleiro)"
 
@@ -2815,136 +2805,151 @@ msgstr ""
 "O novo directorio está actualmente filtrado. Necesita axustar as definicións "
 "de filtros para facelo visible"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:672
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:688
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:750
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:766
 msgid "_Filter"
 msgstr "_Filtro"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:755
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:771
 msgid "_Move To Trash"
 msgstr "_Mover ao lixo"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:756
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:772
 msgid "Move selected file or folder to trash"
 msgstr "Mover o ficheiro ou cartafol seleccionado ao lixo"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:758
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:774
 msgid "_Delete"
 msgstr "E_liminar"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:759
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:775
 msgid "Delete selected file or folder"
 msgstr "Eliminar o ficheiro ou directorio seleccionado"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:765
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:781
 msgid "Up"
 msgstr "Arriba"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:766
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:782
 msgid "Open the parent folder"
 msgstr "Abre o cartafol pai"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:771
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:787
 msgid "_New Folder"
 msgstr "_Novo cartafol"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:772
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:788
 msgid "Add new empty folder"
 msgstr "Engadir un cartafol novo baleiro"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:774
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:790
 msgid "New F_ile"
 msgstr "F_icheiro novo"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:775
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:791
 msgid "Add new empty file"
 msgstr "Engade un ficheiro novo baleiro"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:780
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:796
 msgid "_Rename"
 msgstr "_Renomear"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:781
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:797
 msgid "Rename selected file or folder"
 msgstr "Renomear o ficheiro ou cartafol seleccionado"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:787
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
 msgid "_Previous Location"
 msgstr "Localización _anterior"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:789
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:805
 msgid "Go to the previous visited location"
 msgstr "Ir á anterior localización visitada"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:791
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
 msgid "_Next Location"
 msgstr "_Seguinte localización"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:792
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
 msgid "Go to the next visited location"
 msgstr "Ir á seguinte localización visitada"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:793
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
 msgid "Re_fresh View"
 msgstr "A_ctualizar visualización"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:794
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:810
 msgid "Refresh the view"
 msgstr "Actualizar a visualización"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:795
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:811
 msgid "_View Folder"
 msgstr "_Ver cartafol"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:796
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:812
 msgid "View folder in file manager"
 msgstr "Ver o cartafol no xestor de ficheiros"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
 msgid "Show _Hidden"
 msgstr "Mostrar os _ocultos"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
 msgid "Show hidden files and folders"
 msgstr "Mostrar os ficheiros e cartafoles ocultos"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
 msgid "Show _Binary"
 msgstr "Mostrar os _binarios"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
 msgid "Show binary files"
 msgstr "Mostrar os ficheiros binarios"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:912
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:928
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:960
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:944
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:976
 msgid "Previous location"
 msgstr "Localización anterior"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:916
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
 msgid "Go to previous location"
 msgstr "Ir á localización anterior"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:921
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:953
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:937
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:969
 msgid "Go to a previously opened location"
 msgstr "Ir a unha localización aberta anteriormente"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:943
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:959
 msgid "Next location"
 msgstr "Seguinte localización"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:947
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:963
 msgid "Go to next location"
 msgstr "Ir á seguinte localización"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1126
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1142
 msgid "_Match Filename"
 msgstr "Coi_ncidir co nome de ficheiro"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1985
+#, c-format
+msgid "No mount object for mounted volume: %s"
+msgstr "Non existe o obxecto de montado para o volume montado: %s"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2065
+#, c-format
+msgid "Could not open media: %s"
+msgstr "Non se puido abrir o soporte: %s"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2112
+#, c-format
+msgid "Could not mount volume: %s"
+msgstr "Non se puido montar o volume: %s"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -5074,6 +5079,12 @@ msgstr "_Preguntar por un formato"
 #: ../plugins/time/time.ui.h:10
 msgid "_Use custom format"
 msgstr "_Usar o formato personalizado"
+
+#~ msgid "File too big"
+#~ msgstr "O ficheiro é demasiado grande"
+
+#~ msgid "Not a regular file"
+#~ msgstr "Non é un ficheiro regular"
 
 #~ msgid "<b>Elements</b>"
 #~ msgstr "<b>Elementos</b>"
