@@ -147,6 +147,8 @@ struct _GeditFileBrowserWidgetPrivate
 	GtkWidget *current_location_menu_item;
 	
 	gboolean enable_delete;
+	
+	GCancellable *cancellable;
 };
 
 static void set_enable_delete		       (GeditFileBrowserWidget *obj,
@@ -185,7 +187,7 @@ static void on_virtual_root_changed            (GeditFileBrowserStore * model,
 static gboolean on_entry_filter_activate       (GeditFileBrowserWidget * obj);
 static void on_location_jump_activate          (GtkMenuItem * item,
 						GeditFileBrowserWidget * obj);
-static void on_bookmarks_row_inserted          (GtkTreeModel * model, 
+static void on_bookmarks_row_changed           (GtkTreeModel * model, 
                                                 GtkTreePath * path,
                                                 GtkTreeIter * iter,
                                                 GeditFileBrowserWidget * obj);
@@ -302,6 +304,18 @@ remove_path_items (GeditFileBrowserWidget * obj)
 }
 
 static void
+cancel_async_operation (GeditFileBrowserWidget *widget)
+{
+	if (!widget->priv->cancellable)
+		return;
+	
+	g_cancellable_cancel (widget->priv->cancellable);
+	g_object_unref (widget->priv->cancellable);
+
+	widget->priv->cancellable = NULL;
+}
+
+static void
 gedit_file_browser_widget_finalize (GObject * object)
 {
 	GeditFileBrowserWidget *obj = GEDIT_FILE_BROWSER_WIDGET (object);
@@ -328,6 +342,8 @@ gedit_file_browser_widget_finalize (GObject * object)
 	g_list_free (obj->priv->locations);
 
 	g_hash_table_destroy (obj->priv->bookmarks_hash);
+	
+	cancel_async_operation (obj);
 	G_OBJECT_CLASS (gedit_file_browser_widget_parent_class)->finalize (object);
 }
 
@@ -1013,7 +1029,7 @@ add_bookmark_hash (GeditFileBrowserWidget * obj,
 	uri = gedit_file_bookmarks_store_get_uri (obj->priv->
 						  bookmarks_store,
 						  iter);
-	
+
 	if (uri == NULL)
 		return;
 	
@@ -1051,8 +1067,8 @@ init_bookmarks_hash (GeditFileBrowserWidget * obj)
 	} while (gtk_tree_model_iter_next (model, &iter));
 	
 	g_signal_connect (obj->priv->bookmarks_store,
-		          "row-inserted",
-		          G_CALLBACK (on_bookmarks_row_inserted),
+		          "row-changed",
+		          G_CALLBACK (on_bookmarks_row_changed),
 		          obj);
 
 	g_signal_connect (obj->priv->bookmarks_store,
@@ -1898,6 +1914,278 @@ gedit_file_browser_widget_get_num_selected_files_or_directories (GeditFileBrowse
 	return result;
 }
 
+typedef struct
+{
+	GeditFileBrowserWidget *widget;
+	GCancellable *cancellable;
+} AsyncData;
+
+static AsyncData *
+async_data_new (GeditFileBrowserWidget *widget)
+{
+	AsyncData *ret;
+	
+	ret = g_new (AsyncData, 1);
+	ret->widget = widget;
+	
+	cancel_async_operation (widget);
+	widget->priv->cancellable = g_cancellable_new ();
+	
+	ret->cancellable = g_object_ref (widget->priv->cancellable);
+	
+	return ret;
+}
+
+static void
+async_free (AsyncData *async)
+{
+	g_object_unref (async->cancellable);
+	g_free (async);
+}
+
+static void
+set_busy (GeditFileBrowserWidget *obj, gboolean busy)
+{
+	GdkCursor *cursor;
+	GdkWindow *window;
+	
+	window = GTK_WIDGET (obj->priv->treeview)->window;
+	
+	if (!GDK_IS_WINDOW (window))
+		return;
+
+	if (busy)
+	{
+		cursor = gdk_cursor_new (GDK_WATCH);
+		gdk_window_set_cursor (window, cursor);
+		gdk_cursor_unref (cursor);
+	}
+	else
+	{
+		gdk_window_set_cursor (window, NULL);
+	}
+}
+
+static void try_mount_volume (GeditFileBrowserWidget *widget, GVolume *volume);
+
+static void
+activate_mount (GeditFileBrowserWidget *widget,
+		GVolume		       *volume,
+		GMount		       *mount)
+{
+	GFile *root;
+	gchar *uri;
+	
+	if (!mount)
+	{
+		gchar *message;
+		gchar *name;
+		
+		name = g_volume_get_name (volume);
+		message = g_strdup_printf (_("No mount object for mounted volume: %s"), name);
+		
+		g_signal_emit (widget, 
+			       signals[ERROR], 
+			       0, 
+			       GEDIT_FILE_BROWSER_ERROR_SET_ROOT,
+			       message);
+		
+		g_free (name);
+		g_free (message);
+		return;
+	}
+	
+	root = g_mount_get_root (mount);
+	uri = g_file_get_uri (root);
+	
+	gedit_file_browser_widget_set_root (widget, uri, FALSE);
+	
+	g_free (uri);
+	g_object_unref (root);
+}
+
+static void
+try_activate_drive (GeditFileBrowserWidget *widget,
+		    GDrive 		   *drive)
+{
+	GList *volumes;
+	GVolume *volume;
+	GMount *mount;
+	
+	volumes = g_drive_get_volumes (drive);
+	
+	volume = G_VOLUME (volumes->data);
+	mount = g_volume_get_mount (volume);
+	
+	if (mount)
+	{
+		/* try set the root of the mount */
+		activate_mount (widget, volume, mount);
+		g_object_unref (mount);
+	}
+	else
+	{
+		/* try to mount it then? */
+		try_mount_volume (widget, volume);
+	}
+	
+	g_list_foreach (volumes, (GFunc)g_object_unref, NULL);
+	g_list_free (volumes);
+}
+
+static void
+poll_for_media_cb (GDrive       *drive,
+		   GAsyncResult *res,
+		   AsyncData 	*async)
+{
+	GError *error = NULL;
+
+	/* check for cancelled state */
+	if (g_cancellable_is_cancelled (async->cancellable))
+	{
+		async_free (async);
+		return;
+	}
+	
+	/* finish poll operation */
+	set_busy (async->widget, FALSE);
+	
+	if (g_drive_poll_for_media_finish (drive, res, &error) && 
+	    g_drive_has_media (drive) &&
+	    g_drive_has_volumes (drive))
+	{
+		try_activate_drive (async->widget, drive);
+	}
+	else
+	{
+		gchar *message;
+		gchar *name;
+		
+		name = g_drive_get_name (drive);
+		message = g_strdup_printf (_("Could not open media: %s"), name);
+
+		g_signal_emit (async->widget, 
+			       signals[ERROR], 
+			       0, 
+			       GEDIT_FILE_BROWSER_ERROR_SET_ROOT,
+			       message);
+
+		g_free (name);
+		g_free (message);
+		
+		g_error_free (error);
+	}
+	
+	async_free (async);
+}
+
+static void
+mount_volume_cb (GVolume      *volume,
+		 GAsyncResult *res,
+		 AsyncData    *async)
+{
+	GError *error = NULL;
+
+	/* check for cancelled state */
+	if (g_cancellable_is_cancelled (async->cancellable))
+	{
+		async_free (async);
+		return;
+	}
+	
+	if (g_volume_mount_finish (volume, res, &error))
+	{
+		GMount *mount;
+		
+		mount = g_volume_get_mount (volume);
+		activate_mount (async->widget, volume, mount);
+		
+		if (mount)
+			g_object_unref (mount);
+	}
+	else
+	{
+		gchar *message;
+		gchar *name;
+		
+		name = g_volume_get_name (volume);
+		message = g_strdup_printf (_("Could not mount volume: %s"), name);
+
+		g_signal_emit (async->widget, 
+			       signals[ERROR], 
+			       0, 
+			       GEDIT_FILE_BROWSER_ERROR_SET_ROOT,
+			       message);
+
+		g_free (name);
+		g_free (message);
+		
+		g_error_free (error);
+	}
+	
+	set_busy (async->widget, FALSE);
+	async_free (async);
+}
+
+static void
+activate_drive (GeditFileBrowserWidget *obj,
+		GtkTreeIter	       *iter)
+{
+	GDrive *drive;
+	AsyncData *async;
+
+	gtk_tree_model_get (GTK_TREE_MODEL (obj->priv->bookmarks_store), iter,
+			    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_OBJECT,
+			    &drive, -1);
+
+	/* most common use case is a floppy drive, we'll poll for media and
+	   go from there */
+	async = async_data_new (obj);
+	g_drive_poll_for_media (drive, 
+				async->cancellable, 
+				(GAsyncReadyCallback)poll_for_media_cb,
+				async);
+
+	g_object_unref (drive);
+	set_busy (obj, TRUE);
+}
+
+static void 
+try_mount_volume (GeditFileBrowserWidget *widget, 
+		  GVolume 		 *volume)
+{
+	GMountOperation *operation;
+	AsyncData *async;
+
+	operation = gtk_mount_operation_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (widget))));
+	async = async_data_new (widget);
+	
+	g_volume_mount (volume,
+			G_MOUNT_MOUNT_NONE,
+			operation,
+			async->cancellable,
+			(GAsyncReadyCallback)mount_volume_cb,
+			async);
+			
+	g_object_unref (operation);
+	set_busy (widget, TRUE);
+}
+
+static void
+activate_volume (GeditFileBrowserWidget *obj,
+		 GtkTreeIter	        *iter)
+{
+	GVolume *volume;
+	
+	gtk_tree_model_get (GTK_TREE_MODEL (obj->priv->bookmarks_store), iter,
+			    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_OBJECT,
+			    &volume, -1);
+
+	/* see if we can mount the volume */
+	try_mount_volume (obj, volume);	
+	g_object_unref (volume);
+}
+
 /* Callbacks */
 static void
 on_bookmark_activated (GeditFileBrowserView   *tree_view,
@@ -1907,14 +2195,28 @@ on_bookmark_activated (GeditFileBrowserView   *tree_view,
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
 	gchar *uri;
 	gint flags;
-	
-	uri =
-	    gedit_file_bookmarks_store_get_uri
-	    (GEDIT_FILE_BOOKMARKS_STORE (model), iter);
 
 	gtk_tree_model_get (model, iter,
 			    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_FLAGS,
 			    &flags, -1);
+	
+	if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE)
+	{
+		/* handle a drive node */
+		activate_drive (obj, iter);
+		return;
+	}
+	else if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_VOLUME)
+	{
+		/* handle a volume node */
+		activate_volume (obj, iter);
+		return;
+	}
+
+	uri =
+	    gedit_file_bookmarks_store_get_uri
+	    (GEDIT_FILE_BOOKMARKS_STORE (model), iter);
+
 
 	if (uri) {
 		if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT) {
@@ -2113,6 +2415,9 @@ on_model_set (GObject * gobject, GParamSpec * arg1,
 					      G_CALLBACK
 					      (on_bookmark_activated), obj));
 	} else if (GEDIT_IS_FILE_BROWSER_STORE (model)) {
+		/* make sure any async operation is cancelled */
+		cancel_async_operation (obj);
+
 		add_signal (obj, gobject,
 			    g_signal_connect (gobject, "file-activated",
 					      G_CALLBACK
@@ -2348,10 +2653,10 @@ on_location_jump_activate (GtkMenuItem * item,
 }
 
 static void
-on_bookmarks_row_inserted (GtkTreeModel * model, 
-                           GtkTreePath * path,
-                           GtkTreeIter * iter,
-                           GeditFileBrowserWidget *obj)
+on_bookmarks_row_changed (GtkTreeModel * model, 
+                          GtkTreePath * path,
+                          GtkTreeIter * iter,
+                          GeditFileBrowserWidget *obj)
 {
 	add_bookmark_hash (obj, iter);
 }
