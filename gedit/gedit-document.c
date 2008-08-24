@@ -938,6 +938,7 @@ _gedit_document_check_externally_modified (GeditDocument *doc)
 {
 	GFile *gfile;
 	GFileInfo *info;
+	GTimeVal timeval;
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 
@@ -947,15 +948,18 @@ _gedit_document_check_externally_modified (GeditDocument *doc)
 	}
 
 	gfile = g_file_new_for_uri (doc->priv->uri);
-	info = g_file_query_info (gfile, G_FILE_ATTRIBUTE_TIME_MODIFIED, G_FILE_QUERY_INFO_NONE, NULL, NULL);
+	info = g_file_query_info (gfile,
+				  G_FILE_ATTRIBUTE_TIME_MODIFIED,
+				  G_FILE_QUERY_INFO_NONE,
+				  NULL, NULL);
 	g_object_unref (gfile);
-	
-	if (info == NULL)
+
+	if (info == NULL ||
+	    !g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_TIME_MODIFIED))
 	{
 		return FALSE;
 	}
 
-	GTimeVal timeval;
 	g_file_info_get_modification_time (info, &timeval);
 	g_object_unref (info);
 	
