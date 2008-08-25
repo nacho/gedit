@@ -72,6 +72,13 @@ gedit_plugin_init (GeditPlugin *plugin)
 	/* Empty */
 }
 
+/**
+ * gedit_plugin_activate:
+ * @plugin: a #GeditPlugin
+ * @window: a #GeditWindow
+ * 
+ * Activates the plugin.
+ */
 void
 gedit_plugin_activate (GeditPlugin *plugin,
 		       GeditWindow *window)
@@ -82,6 +89,13 @@ gedit_plugin_activate (GeditPlugin *plugin,
 	GEDIT_PLUGIN_GET_CLASS (plugin)->activate (plugin, window);
 }
 
+/**
+ * gedit_plugin_deactivate:
+ * @plugin: a #GeditPlugin
+ * @window: a #GeditWindow
+ * 
+ * Deactivates the plugin.
+ */
 void
 gedit_plugin_deactivate	(GeditPlugin *plugin,
 			 GeditWindow *window)
@@ -91,7 +105,15 @@ gedit_plugin_deactivate	(GeditPlugin *plugin,
 
 	GEDIT_PLUGIN_GET_CLASS (plugin)->deactivate (plugin, window);
 }
-				 
+
+/**
+ * gedit_plugin_update_ui:
+ * @plugin: a #GeditPlugin
+ * @window: a #GeditWindow
+ *
+ * Triggers an update of the user interface to take into account state changes
+ * caused by the plugin.
+ */		 
 void
 gedit_plugin_update_ui	(GeditPlugin *plugin,
 			 GeditWindow *window)
@@ -102,6 +124,14 @@ gedit_plugin_update_ui	(GeditPlugin *plugin,
 	GEDIT_PLUGIN_GET_CLASS (plugin)->update_ui (plugin, window);
 }
 
+/**
+ * gedit_plugin_is_configurable:
+ * @plugin: a #GeditPlugin
+ *
+ * Whether the plugin is configurable.
+ *
+ * Returns: TRUE if the plugin is configurable:
+ */
 gboolean
 gedit_plugin_is_configurable (GeditPlugin *plugin)
 {
@@ -110,6 +140,14 @@ gedit_plugin_is_configurable (GeditPlugin *plugin)
 	return GEDIT_PLUGIN_GET_CLASS (plugin)->is_configurable (plugin);
 }
 
+/**
+ * gedit_plugin_create_configure_dialog:
+ * @plugin: a #GeditPlugin
+ *
+ * Creates the configure dialog widget for the plugin.
+ *
+ * Returns: the configure dialog widget for the plugin.
+ */
 GtkWidget *
 gedit_plugin_create_configure_dialog (GeditPlugin *plugin)
 {

@@ -112,10 +112,10 @@ gboolean	 gedit_plugin_is_configurable	(GeditPlugin *plugin);
 GtkWidget	*gedit_plugin_create_configure_dialog		
 						(GeditPlugin *plugin);
 
-/*
- * Utility macro used to register plugins
+/**
+ * GEDIT_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE):
  *
- * use: GEDIT_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE)
+ * Utility macro used to register plugins with additional code.
  */
 #define GEDIT_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE)	\
 										\
@@ -169,18 +169,18 @@ register_gedit_plugin (GTypeModule *module)					\
 	return plugin_name##_type;						\
 }
 
-/*
- * Utility macro used to register plugins
- *
- * use: GEDIT_PLUGIN_REGISTER_TYPE(PluginName, plugin_name)
+/**
+ * GEDIT_PLUGIN_REGISTER_TYPE(PluginName, plugin_name):
+ * 
+ * Utility macro used to register plugins.
  */
 #define GEDIT_PLUGIN_REGISTER_TYPE(PluginName, plugin_name)			\
 	GEDIT_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, ;)
 
-/*
- * Utility macro used to register gobject types in plugins with additional code
+/**
+ * GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, CODE):
  *
- * use: GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, CODE)
+ * Utility macro used to register gobject types in plugins with additional code.
  */
 #define GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, CODE)	\
 										\
@@ -230,10 +230,10 @@ object_name##_register_type (GTypeModule *module)					\
 	return g_define_type_id;						\
 }
 
-/*
- * Utility macro used to register gobject types in plugins
+/**
+ * GEDIT_PLUGIN_DEFINE_TYPE(ObjectName, object_name, PARENT_TYPE):
  *
- * use: GEDIT_PLUGIN_DEFINE_TYPE(ObjectName, object_name, PARENT_TYPE)
+ * Utility macro used to register gobject types in plugins.
  */
 #define GEDIT_PLUGIN_DEFINE_TYPE(ObjectName, object_name, PARENT_TYPE)		\
 	GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, ;)
