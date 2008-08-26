@@ -192,8 +192,6 @@ static void
 async_failed (AsyncData *async, GError *error)
 {
 	g_propagate_error (&async->loader->priv->error, error);
-	g_error_free (error);
-
 	remote_load_completed_or_failed (async->loader, async);
 }
 
@@ -478,7 +476,6 @@ async_read_ready_callback (GObject      *source,
 					       TRUE,
 					       gvloader->priv->error);
 
-		g_error_free (error);
 		async_data_free (async);
 	}
 	else

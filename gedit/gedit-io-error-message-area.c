@@ -348,7 +348,8 @@ gedit_io_loading_error_message_area_new (const gchar  *uri,
 
 	g_return_val_if_fail (uri != NULL, NULL);
 	g_return_val_if_fail (error != NULL, NULL);
-	g_return_val_if_fail (error->domain == GEDIT_DOCUMENT_ERROR, NULL);
+	g_return_val_if_fail ((error->domain == GEDIT_DOCUMENT_ERROR) || 
+			      (error->domain == G_IO_ERROR), NULL);
 
 	full_formatted_uri = gedit_utils_uri_for_display (uri);
 
@@ -411,7 +412,8 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 
 	g_return_val_if_fail (uri != NULL, NULL);
 	g_return_val_if_fail (error != NULL, NULL);
-	g_return_val_if_fail (error->domain == GEDIT_DOCUMENT_ERROR, NULL);
+	g_return_val_if_fail ((error->domain == GEDIT_DOCUMENT_ERROR) || 
+			      (error->domain == G_IO_ERROR), NULL);
 
 	full_formatted_uri = gedit_utils_uri_for_display (uri);
 
@@ -988,7 +990,8 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 
 	g_return_val_if_fail (uri != NULL, NULL);
 	g_return_val_if_fail (error != NULL, NULL);
-	g_return_val_if_fail (error->domain == GEDIT_DOCUMENT_ERROR, NULL);
+	g_return_val_if_fail ((error->domain == GEDIT_DOCUMENT_ERROR) || 
+			      (error->domain == G_IO_ERROR), NULL);
 
 	full_formatted_uri = gedit_utils_uri_for_display (uri);
 

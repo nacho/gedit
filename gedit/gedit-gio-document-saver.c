@@ -174,7 +174,6 @@ async_failed (AsyncData *async,
 	      GError    *error)
 {
 	g_propagate_error (&async->saver->priv->error, error);
-	g_error_free (error);
 	
 	remote_save_completed_or_failed (async->saver, async);
 }
@@ -237,7 +236,6 @@ remote_reget_info_cb (GFile        *source,
 	{
 		gedit_debug_message (DEBUG_SAVER, "Query info failed: %s", error->message);
 		g_propagate_error (&saver->priv->error, error);
-		g_error_free (error);
 	}
 
 	remote_save_completed_or_failed (saver, async);
@@ -294,7 +292,6 @@ close_async_ready_cb (GOutputStream *stream,
 	if (!g_output_stream_close_finish (stream, res, &error))
 	{
 		g_propagate_error (&async->saver->priv->error, error);
-		g_error_free (error);
 	}
 
 	remote_save_completed_or_failed (async->saver, async);
@@ -340,7 +337,6 @@ remote_get_info_cb (GFileOutputStream *stream,
 		{
 			gedit_debug_message (DEBUG_SAVER, "Query info failed: %s", error->message);
 			g_propagate_error (&saver->priv->error, error);
-			g_error_free (error);
 
 			next_callback = (GAsyncReadyCallback) close_async_ready_cb;
 		}
