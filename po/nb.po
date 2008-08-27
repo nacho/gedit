@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.23.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-08-15 15:01+0200\n"
-"PO-Revision-Date: 2008-08-15 15:03+0200\n"
+"POT-Creation-Date: 2008-08-27 13:39+0200\n"
+"PO-Revision-Date: 2008-08-27 13:39+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -938,11 +938,11 @@ msgid "%s: invalid encoding.\n"
 msgstr "%s: ugyldig koding.\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:465
+#: ../gedit/gedit.c:468
 msgid "- Edit text files"
 msgstr "- Rediger tekstfiler"
 
-#: ../gedit/gedit.c:475
+#: ../gedit/gedit.c:477
 #, c-format
 msgid ""
 "%s\n"
@@ -1240,64 +1240,50 @@ msgstr "Alle tekstfiler"
 msgid "C_haracter Coding:"
 msgstr "Te_gnkoding:"
 
-#: ../gedit/gedit-gio-document-loader.c:231
-#, c-format
-msgid "File too big"
-msgstr "Filen er for stor"
-
-#: ../gedit/gedit-gio-document-loader.c:299
-#, c-format
-msgid "Not a regular file"
-msgstr "Ikke en vanlig fil"
-
 #: ../gedit/gedit-help.c:82
 msgid "There was an error displaying help."
 msgstr "Det oppsto en feil under visning av hjelp."
 
-#: ../gedit/gedit-io-error-message-area.c:161
+#: ../gedit/gedit-io-error-message-area.c:170
 #, c-format
 msgid "Could not find the file %s."
 msgstr "Kunne ikke finne filen %s."
 
-#: ../gedit/gedit-io-error-message-area.c:163
-#: ../gedit/gedit-io-error-message-area.c:206
-#: ../gedit/gedit-io-error-message-area.c:213
+#: ../gedit/gedit-io-error-message-area.c:172
+#: ../gedit/gedit-io-error-message-area.c:211
+#: ../gedit/gedit-io-error-message-area.c:218
 msgid "Please check that you typed the location correctly and try again."
 msgstr "Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:178
+#: ../gedit/gedit-io-error-message-area.c:187
 #, c-format
 msgid "gedit cannot handle %s locations."
 msgstr "gedit kan ikke håndtere %s-lokasjoner."
 
-#: ../gedit/gedit-io-error-message-area.c:184
+#: ../gedit/gedit-io-error-message-area.c:193
 msgid "gedit cannot handle this location."
 msgstr "gedit kan ikke håndtere denne lokasjonen."
 
-#: ../gedit/gedit-io-error-message-area.c:192
-msgid "The file is too big."
-msgstr "Filen er for stor."
-
-#: ../gedit/gedit-io-error-message-area.c:196
+#: ../gedit/gedit-io-error-message-area.c:201
 msgid "The location of the file cannot be mounted."
 msgstr "Lokasjonen for filen kan ikke monteres."
 
-#: ../gedit/gedit-io-error-message-area.c:200
+#: ../gedit/gedit-io-error-message-area.c:205
 msgid "The location of the file cannot be accessed because it is not mounted."
 msgstr "Lokasjonen for filen kan ikke aksesseres fordi den ikke er montert."
 
-#: ../gedit/gedit-io-error-message-area.c:204
+#: ../gedit/gedit-io-error-message-area.c:209
 #, c-format
 msgid "%s is a directory."
 msgstr "%s er en katalog."
 
-#: ../gedit/gedit-io-error-message-area.c:211
+#: ../gedit/gedit-io-error-message-area.c:216
 #, c-format
 msgid "%s is not a valid location."
 msgstr "«%s» er ikke en gyldig lokasjon."
 
-#: ../gedit/gedit-io-error-message-area.c:238
+#: ../gedit/gedit-io-error-message-area.c:243
 #, c-format
 msgid ""
 "Host %s could not be found. Please check that your proxy settings are "
@@ -1306,7 +1292,7 @@ msgstr ""
 "Vert %s ble ikke funnet. Vennligst sjekk at dine proxy-innstillinger er "
 "riktige og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:251
+#: ../gedit/gedit-io-error-message-area.c:256
 #, c-format
 msgid ""
 "Host name was invalid. Please check that you typed the location correctly "
@@ -1315,83 +1301,89 @@ msgstr ""
 "Vertsnavnet er ugyldig. Vennligst sjekk at du skrev inn lokasjonen korrekt "
 "og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:259
+#: ../gedit/gedit-io-error-message-area.c:264
 #, c-format
 msgid "%s is not a regular file."
 msgstr "%s er ikke en vanlig fil."
 
-#: ../gedit/gedit-io-error-message-area.c:264
+#: ../gedit/gedit-io-error-message-area.c:269
 msgid "Connection timed out. Please try again."
 msgstr "Tidsavbrudd for tilkobling. Vennligst prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:273
+#: ../gedit/gedit-io-error-message-area.c:292
+msgid "The file is too big."
+msgstr "Filen er for stor."
+
+#: ../gedit/gedit-io-error-message-area.c:333
 #, c-format
 msgid "Unexpected error: %s"
 msgstr "Uventet feil: %s"
 
-#: ../gedit/gedit-io-error-message-area.c:310
+#: ../gedit/gedit-io-error-message-area.c:369
 msgid ""
 "The number of followed links is limited and the actual file could not be "
 "found within this limit."
-msgstr "Antall lenker som kan følges er begrenset og filen ble ikke funnet innenfor denne grensen."
+msgstr ""
+"Antall lenker som kan følges er begrenset og filen ble ikke funnet innenfor "
+"denne grensen."
 
-#: ../gedit/gedit-io-error-message-area.c:314
+#: ../gedit/gedit-io-error-message-area.c:373
 msgid "You do not have the permissions necessary to open the file."
 msgstr "Du har ikke tilstrekkelige rettigheter til å åpne filen."
 
-#: ../gedit/gedit-io-error-message-area.c:323
-#: ../gedit/gedit-io-error-message-area.c:545
+#: ../gedit/gedit-io-error-message-area.c:381
+#: ../gedit/gedit-io-error-message-area.c:602
 #, c-format
 msgid "Could not open the file %s."
 msgstr "Kunne ikke åpne filen %s."
 
-#: ../gedit/gedit-io-error-message-area.c:332
-#: ../gedit/gedit-io-error-message-area.c:452
+#: ../gedit/gedit-io-error-message-area.c:390
+#: ../gedit/gedit-io-error-message-area.c:509
 msgid "_Retry"
 msgstr "P_røv igjen"
 
-#: ../gedit/gedit-io-error-message-area.c:375
+#: ../gedit/gedit-io-error-message-area.c:433
 msgid "gedit cannot find the file. Perhaps it has recently been deleted."
 msgstr "gedit ikke kan finne filen. Kanskje den ble slettet nylig."
 
-#: ../gedit/gedit-io-error-message-area.c:385
+#: ../gedit/gedit-io-error-message-area.c:442
 #, c-format
 msgid "Could not revert the file %s."
 msgstr "Kunne ikke forkaste endringer i fil %s."
 
-#: ../gedit/gedit-io-error-message-area.c:409
+#: ../gedit/gedit-io-error-message-area.c:466
 msgid "Ch_aracter Coding:"
 msgstr "Te_gnkoding:"
 
-#: ../gedit/gedit-io-error-message-area.c:547
+#: ../gedit/gedit-io-error-message-area.c:604
 msgid "gedit has not been able to detect the character coding."
 msgstr "gedit har ikke klart å gjenkjenne tegnkodingen."
 
-#: ../gedit/gedit-io-error-message-area.c:549
-#: ../gedit/gedit-io-error-message-area.c:558
+#: ../gedit/gedit-io-error-message-area.c:606
+#: ../gedit/gedit-io-error-message-area.c:615
 msgid "Please check that you are not trying to open a binary file."
 msgstr "Vennligst sjekk om du prøver å åpne en binær fil."
 
-#: ../gedit/gedit-io-error-message-area.c:550
+#: ../gedit/gedit-io-error-message-area.c:607
 msgid "Select a character coding from the menu and try again."
 msgstr "Velg tegnkoding fra menyen og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:555
+#: ../gedit/gedit-io-error-message-area.c:612
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
 msgstr "Kunne ikke åpne fil %s som bruker tegnkoding %s."
 
-#: ../gedit/gedit-io-error-message-area.c:559
-#: ../gedit/gedit-io-error-message-area.c:611
+#: ../gedit/gedit-io-error-message-area.c:616
+#: ../gedit/gedit-io-error-message-area.c:668
 msgid "Select a different character coding from the menu and try again."
 msgstr "Velg en annen tegnkoding fra menyen og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:606
+#: ../gedit/gedit-io-error-message-area.c:663
 #, c-format
 msgid "Could not save the file %s using the %s character coding."
 msgstr "Kunne ikke lagre fil %s med tegnkoding %s."
 
-#: ../gedit/gedit-io-error-message-area.c:609
+#: ../gedit/gedit-io-error-message-area.c:666
 msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
@@ -1399,20 +1391,20 @@ msgstr ""
 "Dokumentet inneholder et eller flere tegn som ikke kan kodes med oppgitt "
 "tegnkoding."
 
-#: ../gedit/gedit-io-error-message-area.c:672
+#: ../gedit/gedit-io-error-message-area.c:729
 msgid "_Edit Anyway"
 msgstr "R_ediger likevel"
 
-#: ../gedit/gedit-io-error-message-area.c:675
+#: ../gedit/gedit-io-error-message-area.c:732
 msgid "_Don't Edit"
 msgstr "_Ikke Rediger"
 
-#: ../gedit/gedit-io-error-message-area.c:690
+#: ../gedit/gedit-io-error-message-area.c:747
 #, c-format
 msgid "This file (%s) is already open in another gedit window."
 msgstr "Denne filen (%s) er allerede åpen i et annet gedit vindu."
 
-#: ../gedit/gedit-io-error-message-area.c:705
+#: ../gedit/gedit-io-error-message-area.c:762
 msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
@@ -1420,40 +1412,40 @@ msgstr ""
 "gedit åpnet denne instansen av filen uten mulighet for redigering. Vil du "
 "redigere den likevel?"
 
-#: ../gedit/gedit-io-error-message-area.c:763
-#: ../gedit/gedit-io-error-message-area.c:858
+#: ../gedit/gedit-io-error-message-area.c:820
+#: ../gedit/gedit-io-error-message-area.c:915
 msgid "S_ave Anyway"
 msgstr "L_agre likevel"
 
-#: ../gedit/gedit-io-error-message-area.c:767
-#: ../gedit/gedit-io-error-message-area.c:862
+#: ../gedit/gedit-io-error-message-area.c:824
+#: ../gedit/gedit-io-error-message-area.c:919
 msgid "D_on't Save"
 msgstr "_Ikke lagre"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:785
+#: ../gedit/gedit-io-error-message-area.c:842
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "Fil %s er endret siden den ble lest."
 
-#: ../gedit/gedit-io-error-message-area.c:801
+#: ../gedit/gedit-io-error-message-area.c:858
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
 "Hvis du lagrer den kan alle eksterne endringer gå tapt. Lagre den likevel?"
 
-#: ../gedit/gedit-io-error-message-area.c:880
+#: ../gedit/gedit-io-error-message-area.c:937
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "Kunne ikke opprette sikkerhetskopi ved lagring av %s"
 
-#: ../gedit/gedit-io-error-message-area.c:883
+#: ../gedit/gedit-io-error-message-area.c:940
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "Kunne ikke opprette en midlertidig sikkerhetskopi ved lagring av %s"
 
-#: ../gedit/gedit-io-error-message-area.c:900
+#: ../gedit/gedit-io-error-message-area.c:957
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1465,7 +1457,7 @@ msgstr ""
 "likevel?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:961
+#: ../gedit/gedit-io-error-message-area.c:1018
 #, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
@@ -1474,7 +1466,7 @@ msgstr ""
 "gedit kan ikke håndtere %s-lokasjoner i skrivemodus. Vennligst sjekk at du "
 "skrev inn lokasjonen korrekt og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:969
+#: ../gedit/gedit-io-error-message-area.c:1026
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1482,7 +1474,54 @@ msgstr ""
 "gedit kan ikke håndtere denne lokasjonen i skrivemodus. Vennligst sjekk at "
 "du skrev inn lokasjonen korrekt og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:978
+#: ../gedit/gedit-io-error-message-area.c:1035
+#, c-format
+msgid ""
+"%s is not a valid location. Please check that you typed the location "
+"correctly and try again."
+msgstr ""
+"%s er ikke en gyldig lokasjon. Vennligst sjekk at du skrev inn lokasjonen "
+"korrekt og prøv igjen."
+
+#: ../gedit/gedit-io-error-message-area.c:1041
+msgid ""
+"You do not have the permissions necessary to save the file. Please check "
+"that you typed the location correctly and try again."
+msgstr ""
+"Du har ikke nødvendige rettigheter til å lagre filen. Vennligst sjekk at du "
+"skrev inn lokasjonen korrekt og prøv igjen."
+
+#: ../gedit/gedit-io-error-message-area.c:1047
+msgid ""
+"There is not enough disk space to save the file. Please free some disk space "
+"and try again."
+msgstr ""
+"Det er ikke nok plass på disken til å lagre filen. Vennligst frigjør plass "
+"og prøv igjen."
+
+#: ../gedit/gedit-io-error-message-area.c:1052
+msgid ""
+"You are trying to save the file on a read-only disk. Please check that you "
+"typed the location correctly and try again."
+msgstr ""
+"Du prøver å lagre filen på en skrivebeskyttet disk. Vennligst sjekk at du "
+"skrev inn lokasjonen korrekt og prøv igjen."
+
+#: ../gedit/gedit-io-error-message-area.c:1058
+msgid "A file with the same name already exists. Please use a different name."
+msgstr ""
+"En fil med det samme navnet eksisterer allerede. Vennligst bruk et annet "
+"navn."
+
+#: ../gedit/gedit-io-error-message-area.c:1063
+msgid ""
+"The disk where you are trying to save the file has a limitation on length of "
+"the file names. Please use a shorter name."
+msgstr ""
+"Disken du prøver å lagre filen på har en begrensning på lengde på filnavn. "
+"Vennligst bruk et kortere navn."
+
+#: ../gedit/gedit-io-error-message-area.c:1070
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1492,54 +1531,7 @@ msgstr ""
 "Vennligst prøv å lagre en mindre fil eller lagre den på en disk som ikke har "
 "denne begrensningen."
 
-#: ../gedit/gedit-io-error-message-area.c:985
-#, c-format
-msgid ""
-"%s is not a valid location. Please check that you typed the location "
-"correctly and try again."
-msgstr ""
-"%s er ikke en gyldig lokasjon. Vennligst sjekk at du skrev inn lokasjonen "
-"korrekt og prøv igjen."
-
-#: ../gedit/gedit-io-error-message-area.c:991
-msgid ""
-"You do not have the permissions necessary to save the file. Please check "
-"that you typed the location correctly and try again."
-msgstr ""
-"Du har ikke nødvendige rettigheter til å lagre filen. Vennligst sjekk at du "
-"skrev inn lokasjonen korrekt og prøv igjen."
-
-#: ../gedit/gedit-io-error-message-area.c:998
-msgid ""
-"There is not enough disk space to save the file. Please free some disk space "
-"and try again."
-msgstr ""
-"Det er ikke nok plass på disken til å lagre filen. Vennligst frigjør plass "
-"og prøv igjen."
-
-#: ../gedit/gedit-io-error-message-area.c:1003
-msgid ""
-"You are trying to save the file on a read-only disk. Please check that you "
-"typed the location correctly and try again."
-msgstr ""
-"Du prøver å lagre filen på en skrivebeskyttet disk. Vennligst sjekk at du "
-"skrev inn lokasjonen korrekt og prøv igjen."
-
-#: ../gedit/gedit-io-error-message-area.c:1009
-msgid "A file with the same name already exists. Please use a different name."
-msgstr ""
-"En fil med det samme navnet eksisterer allerede. Vennligst bruk et annet "
-"navn."
-
-#: ../gedit/gedit-io-error-message-area.c:1014
-msgid ""
-"The disk where you are trying to save the file has a limitation on length of "
-"the file names. Please use a shorter name."
-msgstr ""
-"Disken du prøver å lagre filen på har en begrensning på lengde på filnavn. "
-"Vennligst bruk et kortere navn."
-
-#: ../gedit/gedit-io-error-message-area.c:1029
+#: ../gedit/gedit-io-error-message-area.c:1085
 #, c-format
 msgid "Could not save the file %s."
 msgstr "Kunne ikke lagre filen %s."
@@ -1547,20 +1539,20 @@ msgstr "Kunne ikke lagre filen %s."
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1071
+#: ../gedit/gedit-io-error-message-area.c:1127
 #, c-format
 msgid "The file %s changed on disk."
 msgstr "Fil %s er endret på disk."
 
-#: ../gedit/gedit-io-error-message-area.c:1076
+#: ../gedit/gedit-io-error-message-area.c:1132
 msgid "Do you want to drop your changes and reload the file?"
 msgstr "Vil du forkaste dine endringer og laste filen på nytt?"
 
-#: ../gedit/gedit-io-error-message-area.c:1078
+#: ../gedit/gedit-io-error-message-area.c:1134
 msgid "Do you want to reload the file?"
 msgstr "Vil du laste filen på nytt?"
 
-#: ../gedit/gedit-io-error-message-area.c:1088
+#: ../gedit/gedit-io-error-message-area.c:1144
 msgid "_Reload"
 msgstr "_Last på nytt"
 
@@ -1816,38 +1808,38 @@ msgid "Saving %s"
 msgstr "Lagrer %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1659
+#: ../gedit/gedit-tab.c:1657
 msgid "RO"
 msgstr "Skrivebeskyttet"
 
-#: ../gedit/gedit-tab.c:1705
+#: ../gedit/gedit-tab.c:1703
 #, c-format
 msgid "Error opening file %s"
 msgstr "Feil ved åpning av fil %s"
 
-#: ../gedit/gedit-tab.c:1710
+#: ../gedit/gedit-tab.c:1708
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Feil under forkasting av endringer i fil %s"
 
-#: ../gedit/gedit-tab.c:1715
+#: ../gedit/gedit-tab.c:1713
 #, c-format
 msgid "Error saving file %s"
 msgstr "Feil ved lagring av fil %s"
 
-#: ../gedit/gedit-tab.c:1734
+#: ../gedit/gedit-tab.c:1732
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1741
+#: ../gedit/gedit-tab.c:1739
 msgid "Name:"
 msgstr "Navn:"
 
-#: ../gedit/gedit-tab.c:1742
+#: ../gedit/gedit-tab.c:1740
 msgid "MIME Type:"
 msgstr "MIME-type:"
 
-#: ../gedit/gedit-tab.c:1743
+#: ../gedit/gedit-tab.c:1741
 msgid "Encoding:"
 msgstr "Koding:"
 
@@ -2537,7 +2529,7 @@ msgstr "Enkel filtilgang fra sidelinjen"
 msgid "File Browser Pane"
 msgstr "Filhåndtererområde"
 
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:225
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:230
 msgid "File System"
 msgstr "Filsystem"
 
@@ -2713,11 +2705,11 @@ msgstr "Er du sikker på at du vil slette valgte filer permanent?"
 msgid "If you delete an item, it is permanently lost."
 msgstr "Hvis du sletter en oppføring vil denne gå tapt."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1625
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1626
 msgid "(Empty)"
 msgstr "(Tom)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3123
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3122
 msgid ""
 "The renamed file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2725,11 +2717,11 @@ msgstr ""
 "Filen med det nye navnet er filtrert ut. Du må justere filterinnstillingene "
 "for å gjøre den synlig"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3361
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3360
 msgid "file"
 msgstr "fil"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3385
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3384
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2737,11 +2729,11 @@ msgstr ""
 "Den nye filen er filtrert ut. Du må justere filterinnstillingene for å gjøre "
 "den synlig"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3413
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3412
 msgid "directory"
 msgstr "katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3433
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3432
 msgid ""
 "The new directory is currently filtered out. You need to adjust your filter "
 "settings to make the directory visible"
@@ -2749,136 +2741,151 @@ msgstr ""
 "Den nye katalogen er filtrert ut. Du må justere filterinnstillingene for å "
 "gjøre den synlig"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:672
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:688
 msgid "Bookmarks"
 msgstr "Bokmerker"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:750
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:766
 msgid "_Filter"
 msgstr "_Filter"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:755
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:771
 msgid "_Move To Trash"
 msgstr "_Flytt til papirkurven"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:756
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:772
 msgid "Move selected file or folder to trash"
 msgstr "Flytt valgt fil eller mappe til papirkurven"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:758
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:774
 msgid "_Delete"
 msgstr "_Slett"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:759
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:775
 msgid "Delete selected file or folder"
 msgstr "Slett valgt fil eller mappe"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:765
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:781
 msgid "Up"
 msgstr "Opp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:766
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:782
 msgid "Open the parent folder"
 msgstr "Lagre opphavsmappe"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:771
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:787
 msgid "_New Folder"
 msgstr "_Ny mappe"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:772
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:788
 msgid "Add new empty folder"
 msgstr "Legg til en ny tom mappe"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:774
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:790
 msgid "New F_ile"
 msgstr "Ny f_il"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:775
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:791
 msgid "Add new empty file"
 msgstr "Legg til ny tom fil"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:780
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:796
 msgid "_Rename"
 msgstr "End_re navn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:781
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:797
 msgid "Rename selected file or folder"
 msgstr "Endre navn på valgt fil eller mappe"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:787
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
 msgid "_Previous Location"
 msgstr "_Forrige lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:789
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:805
 msgid "Go to the previous visited location"
 msgstr "Gå til forrige lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:791
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
 msgid "_Next Location"
 msgstr "_Neste lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:792
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
 msgid "Go to the next visited location"
 msgstr "Gå til neste lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:793
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
 msgid "Re_fresh View"
 msgstr "Opp_dater visningen"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:794
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:810
 msgid "Refresh the view"
 msgstr "Oppdater visningen"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:795
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:811
 msgid "_View Folder"
 msgstr "_Vis mappe"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:796
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:812
 msgid "View folder in file manager"
 msgstr "Vis mappe i filhåndterer"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
 msgid "Show _Hidden"
 msgstr "Vis s_kjulte"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
 msgid "Show hidden files and folders"
 msgstr "Vis skjulte filer og mapper"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
 msgid "Show _Binary"
 msgstr "Vis _binære filer"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
 msgid "Show binary files"
 msgstr "Vis binære filer"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:912
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:928
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:960
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:944
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:976
 msgid "Previous location"
 msgstr "Forrige lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:916
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
 msgid "Go to previous location"
 msgstr "Gå til forrige lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:921
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:953
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:937
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:969
 msgid "Go to a previously opened location"
 msgstr "Gå til en tidligere åpnet lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:943
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:959
 msgid "Next location"
 msgstr "Neste lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:947
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:963
 msgid "Go to next location"
 msgstr "Gå til neste lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1126
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1142
 msgid "_Match Filename"
 msgstr "_Treff på filnavn"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1985
+#, c-format
+msgid "No mount object for mounted volume: %s"
+msgstr "Ingen monteringsobjekt for montert volum: %s"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2065
+#, c-format
+msgid "Could not open media: %s"
+msgstr "Kunne ikke åpne medie: %s"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2112
+#, c-format
+msgid "Could not mount volume: %s"
+msgstr "Kunne ikke montere volum: %s"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
