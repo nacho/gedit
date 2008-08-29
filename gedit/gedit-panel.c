@@ -635,7 +635,16 @@ gedit_panel_constructor (GType type,
 	return obj;
 }
 
-
+/**
+ * gedit_panel_new:
+ * @orientation: a #GtkOrientation
+ *
+ * Creates a new #GeditPanel with the given @orientation. You shouldn't create
+ * a new panel use gedit_window_get_side_panel() or gedit_window_get_bottom_panel()
+ * instead.
+ *
+ * Returns: a new #GeditPanel object.
+ */
 GtkWidget *
 gedit_panel_new (GtkOrientation orientation)
 {
@@ -685,6 +694,15 @@ build_tab_label (GeditPanel  *panel,
 	return hbox;
 }
 
+/**
+ * gedit_panel_add_item:
+ * @panel: a #GeditPanel
+ * @item: the #GtkWidget to add to the @panel
+ * @name: the name to be shown in the @panel
+ * @image: the image to be shown in the @panel
+ *
+ * Adds a new item to the @panel.
+ */
 void
 gedit_panel_add_item (GeditPanel  *panel, 
 		      GtkWidget   *item, 
@@ -739,6 +757,15 @@ gedit_panel_add_item (GeditPanel  *panel,
 	g_signal_emit (G_OBJECT (panel), signals[ITEM_ADDED], 0, item);
 }
 
+/**
+ * gedit_panel_add_item_with_stock_icon:
+ * @panel: a #GeditPanel
+ * @item: the #GtkWidget to add to the @panel
+ * @name: the name to be shown in the @panel
+ * @stock_id: a stock id
+ *
+ * Same as gedit_panel_add_item() but using an image from stock.
+ */
 void
 gedit_panel_add_item_with_stock_icon (GeditPanel  *panel, 
 				      GtkWidget   *item, 
@@ -756,6 +783,16 @@ gedit_panel_add_item_with_stock_icon (GeditPanel  *panel,
 	gedit_panel_add_item (panel, item, name, icon);
 }
 
+/**
+ * gedit_panel_remove_item:
+ * @panel: a #GeditPanel
+ * @item: the item to be removed from the panel
+ *
+ * Removes the widget @item from the panel if it is in the @panel and returns
+ * TRUE if there was not any problem.
+ *
+ * Returns: TRUE if it was well removed.
+ */
 gboolean
 gedit_panel_remove_item (GeditPanel *panel,
 			 GtkWidget  *item)
@@ -803,6 +840,15 @@ gedit_panel_remove_item (GeditPanel *panel,
 	return TRUE;
 }
 
+/**
+ * gedit_panel_activate_item:
+ * @panel: a #GeditPanel
+ * @item: the item to be activated
+ *
+ * Switches to the page that contains @item.
+ *
+ * Returns: TRUE if it was activated
+ */
 gboolean
 gedit_panel_activate_item (GeditPanel *panel,
 			   GtkWidget  *item)
@@ -824,6 +870,15 @@ gedit_panel_activate_item (GeditPanel *panel,
 	return TRUE;
 }
 
+/**
+ * gedit_panel_item_is_active:
+ * @panel: a #GeditPanel
+ * @item: a widget contained in #GeditPanel
+ *
+ * Wheter @item is the one current active in @panel
+ *
+ * Returns: TRUE if the widget is active
+ */
 gboolean
 gedit_panel_item_is_active (GeditPanel *panel,
 			    GtkWidget  *item)
@@ -846,6 +901,14 @@ gedit_panel_item_is_active (GeditPanel *panel,
 	return (page_num == cur_page);
 }
 
+/**
+ * gedit_panel_get_orientation:
+ * @panel: a #GeditPanel
+ *
+ * Gets the orientation of the @panel. 
+ *
+ * Returns: the #GtkOrientation of #GeditPanel
+ */
 GtkOrientation
 gedit_panel_get_orientation (GeditPanel *panel)
 {
@@ -854,6 +917,14 @@ gedit_panel_get_orientation (GeditPanel *panel)
 	return panel->priv->orientation;
 }
 
+/**
+ * gedit_panel_get_n_items:
+ * @panel: a #GeditPanel
+ *
+ * Gets the number of items in a @panel.
+ * 
+ * Returns: the number of items contained in #GeditPanel
+ */
 gint
 gedit_panel_get_n_items (GeditPanel *panel)
 {
