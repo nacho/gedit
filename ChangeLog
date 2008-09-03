@@ -1,5 +1,12 @@
 2008-09-03  Paolo Borelli  <pborelli@katamail.com>
 
+	* plugins/gedit-file-browser-store.c:
+	* plugins/gedit-file-browser-utils.c:
+	* plugins/gedit-file-browser-utils.h:
+	Remove useless roundtrip from uri to gfile to parse_name.
+
+2008-09-03  Paolo Borelli  <pborelli@katamail.com>
+
 	* gedit/gedit-utils.c (gedit_utils_uri_for_display):
 	parse_name should not be further unescaped, it's already ready
 	to be used in the UI.

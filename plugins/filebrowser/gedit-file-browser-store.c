@@ -2704,12 +2704,12 @@ gedit_file_browser_store_set_virtual_root (GeditFileBrowserStore * model,
 GeditFileBrowserStoreResult
 gedit_file_browser_store_set_virtual_root_from_string
     (GeditFileBrowserStore * model, gchar const *root) {
-	GFile * file = g_file_new_for_uri (root);
-	gchar *str, *str1;
+	GFile *file;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model),
 			      GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
 
+	file = g_file_new_for_uri (root);
 	if (file == NULL) {
 		g_warning ("Invalid uri (%s)", root);
 		return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
@@ -2733,8 +2733,10 @@ gedit_file_browser_store_set_virtual_root_from_string
 	}
 
 	if (!g_file_has_prefix (file, model->priv->root->file)) {
-		str = gedit_file_browser_utils_file_display (model->priv->root->file);
-		str1 = gedit_file_browser_utils_file_display (file);
+		gchar *str, *str1;
+
+		str = g_file_get_parse_name (model->priv->root->file);
+		str1 = g_file_get_parse_name (file);
 
 		g_warning
 		    ("Virtual root (%s) is not below actual root (%s)",
