@@ -1264,13 +1264,6 @@ gedit_utils_basename_for_display (gchar const *uri)
  * Filter, modify, unescape and change @uri to make it appropriate
  * for display to users.
  * 
- * Rules:
- * <ul>
- * <li>file: uri without fragments should appear as local paths.</li>
- * <li>file: uri with fragments should appear as file:uri.</li>
- * <li>All other uri appear as expected.</li>
- * </ul>
- *
  * This function is a convenient wrapper for g_file_get_parse_name
  *
  * Return value: a string which represents @uri and can be displayed.
@@ -1280,16 +1273,12 @@ gedit_utils_uri_for_display (const gchar *uri)
 {
 	GFile *gfile;
 	gchar *parse_name;
-	gchar *unescape;
-	
+
 	gfile = g_file_new_for_uri (uri);
-	
 	parse_name = g_file_get_parse_name (gfile);
-	unescape = g_uri_unescape_string (parse_name, NULL);
-	g_free (parse_name);
-	
 	g_object_unref (gfile);
-	return unescape;
+
+	return parse_name;
 }
 
 /**

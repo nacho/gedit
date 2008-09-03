@@ -12,7 +12,6 @@ GdkPixbuf *gedit_file_browser_utils_pixbuf_from_icon	  (GIcon * icon,
 GdkPixbuf *gedit_file_browser_utils_pixbuf_from_file	  (GFile * file,
                                                            GtkIconSize size);
 
-gchar * gedit_file_browser_utils_file_display		  (GFile * file);
 gchar * gedit_file_browser_utils_file_basename		  (GFile * file);
 gchar * gedit_file_browser_utils_uri_basename             (gchar const * uri);
 

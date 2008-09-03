@@ -97,19 +97,6 @@ gedit_file_browser_utils_pixbuf_from_file (GFile * file,
 }
 
 gchar *
-gedit_file_browser_utils_file_display (GFile * file)
-{
-	gchar *uri;
-	gchar *ret;
-	
-	uri = g_file_get_uri (file);
-	ret = gedit_utils_uri_for_display (uri);
-	g_free (uri);
-	
-	return ret;
-}
-
-gchar *
 gedit_file_browser_utils_file_basename (GFile * file)
 {
 	gchar *uri;
