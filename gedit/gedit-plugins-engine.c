@@ -151,7 +151,7 @@ gedit_plugins_engine_load_dir (GeditPluginsEngine *engine,
 static void
 gedit_plugins_engine_load_all (GeditPluginsEngine *engine)
 {
-	GSList *active_plugins;
+	GSList *active_plugins = NULL;
 	const gchar *home;
 	const gchar *pdirs_env;
 	gchar **pdirs;
@@ -194,6 +194,8 @@ gedit_plugins_engine_load_all (GeditPluginsEngine *engine)
 		gedit_plugins_engine_load_dir (engine, pdirs[i], active_plugins);
 
 	g_strfreev (pdirs);
+	g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
+	g_slist_free (active_plugins);
 }
 
 static void
