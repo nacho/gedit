@@ -3616,6 +3616,15 @@ _gedit_window_set_saving_session_state (GeditWindow *window,
 	}
 }
 
+/**
+ * gedit_window_get_tab_from_location:
+ * @window: a #GeditWindow
+ * @location: a #GFile
+ *
+ * Gets the #GeditTab that matches with the given @location.
+ *
+ * Returns: the #GeditTab that matches with the given @location.
+ */
 GeditTab *
 gedit_window_get_tab_from_location (GeditWindow *window,
 				    GFile       *location)
