@@ -188,10 +188,12 @@ static void next_files_async 				    (GFileEnumerator * enumerator,
 
 GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE (GeditFileBrowserStore, gedit_file_browser_store,
 			G_TYPE_OBJECT,
-			G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL,
-					       gedit_file_browser_store_iface_init)
-			G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE,
-					       gedit_file_browser_store_drag_source_init))
+			GEDIT_PLUGIN_IMPLEMENT_INTERFACE (gedit_file_browser_store_tree_model,
+							  GTK_TYPE_TREE_MODEL,
+							  gedit_file_browser_store_iface_init)
+			GEDIT_PLUGIN_IMPLEMENT_INTERFACE (gedit_file_browser_store_drag_source,
+							  GTK_TYPE_TREE_DRAG_SOURCE,
+							  gedit_file_browser_store_drag_source_init))
 
 /* Properties */
 enum {
