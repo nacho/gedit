@@ -987,7 +987,6 @@ on_rename_cb (GeditFileBrowserStore * store,
 	GFile * oldfile;
 	GFile * newfile;
 	gchar * uri;
-	gchar * relative;
 	
 	/* Find all documents and set its uri to newuri where it matches olduri */
 	app = gedit_app_get_default ();
@@ -1008,30 +1007,33 @@ on_rename_cb (GeditFileBrowserStore * store,
 		if (g_file_equal (docfile, oldfile)) {
 			gedit_document_set_uri (doc, newuri);
 		} else {
+			gchar *relative;
+
 			relative = g_file_get_relative_path (oldfile, docfile);
-			g_object_unref (docfile);
-			g_free (uri);
-		
+
 			if (relative) {
 				/* relative now contains the part in docfile without
 				   the prefix oldfile */
 
+				g_object_unref (docfile);
+				g_free (uri);
+
 				docfile = g_file_get_child (newfile, relative);
 				uri = g_file_get_uri (docfile);
-			
+
 				gedit_document_set_uri (doc, uri);
 			}
-		
+
 			g_free (relative);
 		}
-		
+
 		g_free (uri);
 		g_object_unref (docfile);
 	}
-	
+
 	g_object_unref (oldfile);
 	g_object_unref (newfile);
-	
+
 	g_list_free (documents);
 }
 
