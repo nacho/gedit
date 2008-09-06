@@ -2219,7 +2219,13 @@ on_bookmark_activated (GeditFileBrowserView   *tree_view,
 
 
 	if (uri) {
-		if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT) {
+		/* here we check if the bookmark is a mount point, or if it
+		   is a remote bookmark. If that's the case, we will set the
+		   root to the uri of the bookmark and not try to set the
+		   topmost parent as root (since that may as well not be the
+		   mount point anymore) */
+		if ((flags & GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT) ||
+		    (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_BOOKMARK)) {
 			gedit_file_browser_widget_set_root (obj,
 							    uri,
 							    FALSE);
