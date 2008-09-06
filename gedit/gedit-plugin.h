@@ -238,6 +238,24 @@ object_name##_register_type (GTypeModule *module)					\
 #define GEDIT_PLUGIN_DEFINE_TYPE(ObjectName, object_name, PARENT_TYPE)		\
 	GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, ;)
 
+/**
+ * GEDIT_PLUGIN_IMPLEMENT_INTERFACE(TYPE_IFACE, iface_init):
+ *
+ * Utility macro used to register interfaces for gobject types in plugins.
+ */
+#define GEDIT_PLUGIN_IMPLEMENT_INTERFACE(object_name, TYPE_IFACE, iface_init)	\
+	const GInterfaceInfo object_name##_interface_info = 			\
+	{ 									\
+		(GInterfaceInitFunc) iface_init,				\
+		NULL, 								\
+		NULL								\
+	};									\
+										\
+	g_type_module_add_interface (module, 					\
+				     g_define_type_id, 				\
+				     TYPE_IFACE, 				\
+				     &object_name##_interface_info);		\
+
 G_END_DECLS
 
 #endif  /* __GEDIT_PLUGIN_H__ */
