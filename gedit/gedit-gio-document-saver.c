@@ -617,7 +617,7 @@ check_modification_callback (GFile        *source,
 			     AsyncData    *async)
 {
 	GeditGioDocumentSaver *gvsaver;
-	GError *error;
+	GError *error = NULL;
 	GFileInfo *info;
 	
 	/* manually check cancelled state */
