@@ -1525,6 +1525,9 @@ file_browser_node_unload (GeditFileBrowserStore * model,
 			  FileBrowserNode * node, gboolean remove_children)
 {
 	FileBrowserNodeDir *dir;
+	
+	if (node == NULL)
+		return;
 
 	if (!NODE_IS_DIR (node) || !NODE_LOADED (node))
 		return;
@@ -3028,7 +3031,7 @@ gedit_file_browser_store_refresh (GeditFileBrowserStore * model)
 {
 	g_return_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model));
 
-	if (model->priv->root == NULL)
+	if (model->priv->root == NULL || model->priv->virtual_root == NULL)
 		return;
 
 	/* Clear the model */
