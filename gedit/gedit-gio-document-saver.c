@@ -638,14 +638,18 @@ check_modification_callback (GFile        *source,
 			return;
 		}
 		
-		gedit_debug_message (DEBUG_SAVER, "Error getting modification: %s", error->message);
+		/* it's perfectly fine if the file doesn't exist yet */
+		if (error->code != G_IO_ERROR_NOT_FOUND)
+		{
+			gedit_debug_message (DEBUG_SAVER, "Error getting modification: %s", error->message);
 
-		async_failed (async, error);
-		return;
+			async_failed (async, error);
+			return;
+		}
 	}
 
 	/* check if the mtime is > what we know about it (if we have it) */
-	if (g_file_info_has_attribute (info,
+	if (info != NULL && g_file_info_has_attribute (info,
 				       G_FILE_ATTRIBUTE_TIME_MODIFIED))
 	{
 		GTimeVal mtime;
@@ -669,7 +673,8 @@ check_modification_callback (GFile        *source,
 		}
 	}
 
-	g_object_unref (info);
+	if (info != NULL)
+		g_object_unref (info);
 
 	/* modification check passed, start write */
 	begin_write (async);
