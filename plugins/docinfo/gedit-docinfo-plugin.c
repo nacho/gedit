@@ -116,8 +116,10 @@ get_docinfo_dialog (GeditWindow *window,
 
 	if (!ret)
 	{
-		gedit_warning (GTK_WINDOW (window),
-			       gtk_label_get_label (GTK_LABEL (error_widget)));
+		const gchar *err_message;
+
+		err_message = gtk_label_get_label (GTK_LABEL (error_widget));
+		gedit_warning (GTK_WINDOW (window), "%s", err_message);
 
 		g_free (dialog);
 		gtk_widget_destroy (error_widget);

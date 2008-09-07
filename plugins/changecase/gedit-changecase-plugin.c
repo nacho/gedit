@@ -326,7 +326,7 @@ impl_activate (GeditPlugin *plugin,
 							 &error);
 	if (data->ui_id == 0)
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		return;
 	}
 

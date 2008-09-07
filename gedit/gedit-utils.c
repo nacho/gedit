@@ -549,10 +549,10 @@ gedit_warning (GtkWindow *parent, const gchar *format, ...)
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 		   	GTK_MESSAGE_ERROR,
 		   	GTK_BUTTONS_OK,
-			str);
+			"%s", str);
 
 	g_free (str);
-	
+
 	if (wg != NULL)
 		gtk_window_group_add_window (wg, GTK_WINDOW (dialog));
 		

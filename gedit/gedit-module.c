@@ -70,7 +70,7 @@ gedit_module_load (GTypeModule *gmodule)
 
 	if (module->library == NULL)
 	{
-		g_warning (g_module_error());
+		g_warning ("%s: %s", module->module_name, g_module_error());
 
 		return FALSE;
 	}
@@ -79,7 +79,7 @@ gedit_module_load (GTypeModule *gmodule)
 	if (!g_module_symbol (module->library, "register_gedit_plugin",
 			      (void *) &register_func))
 	{
-		g_warning (g_module_error());
+		g_warning ("%s: %s", module->module_name, g_module_error());
 		g_module_close (module->library);
 
 		return FALSE;

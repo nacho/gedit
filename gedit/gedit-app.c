@@ -209,7 +209,7 @@ load_page_setup (GeditApp *app)
 		if (error->domain != G_FILE_ERROR ||
 		    error->code != G_FILE_ERROR_NOENT)
 		{
-			g_warning (error->message);
+			g_warning ("%s", error->message);
 		}
 
 		g_error_free (error);
@@ -238,7 +238,7 @@ save_page_setup (GeditApp *app)
 				&error);
 	if (error)
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 	}
 
@@ -281,7 +281,7 @@ load_print_settings (GeditApp *app)
 		if (error->domain != G_FILE_ERROR ||
 		    error->code != G_FILE_ERROR_NOENT)
 		{
-			g_warning (error->message);
+			g_warning ("%s", error->message);
 		}
 
 		g_error_free (error);
@@ -310,7 +310,7 @@ save_print_settings (GeditApp *app)
 				    &error);
 	if (error)
 	{
-		g_warning (error->message);
+		g_warning ("%s", error->message);
 		g_error_free (error);
 	}
 

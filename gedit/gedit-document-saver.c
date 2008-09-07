@@ -388,7 +388,7 @@ gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
 		g_set_error (error,
 			     G_IO_ERROR,
 			     g_io_error_from_errno (errno),
-			     g_strerror (errno));
+			     "%s", g_strerror (errno));
 	}
 
 	return res;

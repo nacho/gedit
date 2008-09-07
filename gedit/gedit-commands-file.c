@@ -625,7 +625,6 @@ replace_read_only_file (GtkWindow *parent, GFile *file)
 	gint ret;
 	gchar *parse_name;
 	gchar *name_for_display;
-	gchar *message;
 
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -638,20 +637,17 @@ replace_read_only_file (GtkWindow *parent, GFile *file)
 	name_for_display = gedit_utils_str_middle_truncate (parse_name, 50);
 	g_free (parse_name);
 
-	message = g_strdup_printf (_("The file \"%s\" is read-only."),
-				   name_for_display);
-	g_free (name_for_display);
-
 	dialog = gtk_message_dialog_new (parent,
 					 GTK_DIALOG_DESTROY_WITH_PARENT,
 					 GTK_MESSAGE_QUESTION,
 					 GTK_BUTTONS_NONE,
-					 message);
+					 _("The file \"%s\" is read-only."),
+				         name_for_display);
+	g_free (name_for_display);
 
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 						  _("Do you want to try to replace it "
 						    "with the one you are saving?"));
-	g_free (message);
 
 	gtk_dialog_add_button (GTK_DIALOG (dialog),
 			       GTK_STOCK_CANCEL,
@@ -1228,10 +1224,10 @@ revert_dialog (GeditWindow   *window,
 					 GTK_DIALOG_DESTROY_WITH_PARENT,
 					 GTK_MESSAGE_QUESTION,
 					 GTK_BUTTONS_NONE,
-					 primary_msg);
+					 "%s", primary_msg);
 
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						  secondary_msg);
+						  "%s", secondary_msg);
 	g_free (primary_msg);
 	g_free (secondary_msg);
 

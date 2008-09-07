@@ -158,7 +158,7 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 		g_set_error (&mloader->priv->error,
 			     G_IO_ERROR,
 			     g_io_error_from_errno (errno),
-			     g_strerror (errno));
+			     "%s", g_strerror (errno));
 
 		goto done;
 	}
@@ -217,7 +217,7 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 			g_set_error (&mloader->priv->error,
 				     G_IO_ERROR,
 				     g_io_error_from_errno (errno),
-				     g_strerror (errno));
+				     "%s", g_strerror (errno));
 
 			goto done;
 		}
@@ -243,9 +243,11 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 
 			ret = munmap (mapped_file, mloader->priv->statbuf.st_size);
 			if (ret != 0)
+			{
 				g_warning ("File '%s' has not been correctly unmapped: %s",
 					   GEDIT_DOCUMENT_LOADER (mloader)->uri,
 					   g_strerror (errno));
+			}
 
 			goto done;
 		}
@@ -260,9 +262,11 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 		{
 			ret = munmap (mapped_file, mloader->priv->statbuf.st_size);
 			if (ret != 0)
+			{
 				g_warning ("File '%s' has not been correctly unmapped: %s",
 					   GEDIT_DOCUMENT_LOADER (mloader)->uri,
 					   g_strerror (errno));
+			}
 
 			goto done;
 		}
@@ -282,20 +286,22 @@ load_file_real (GeditMmapDocumentLoader *mloader)
 		}
 
 		ret = munmap (mapped_file, mloader->priv->statbuf.st_size);
-
 		if (ret != 0)
+		{
 			g_warning ("File '%s' has not been correctly unmapped: %s",
 				   GEDIT_DOCUMENT_LOADER (mloader)->uri,
 				   g_strerror (errno));
+		}
 	}
 
  done:
 	ret = close (mloader->priv->fd);
-
 	if (ret != 0)
+	{
 		g_warning ("File '%s' has not been correctly closed: %s",
 			   GEDIT_DOCUMENT_LOADER (mloader)->uri,
 			   g_strerror (errno));
+	}
 
 	mloader->priv->fd = -1;
 
@@ -333,7 +339,7 @@ load_file (GeditMmapDocumentLoader *mloader,
 		g_set_error (&mloader->priv->error,
 			     G_IO_ERROR,
 			     g_io_error_from_errno (errno),
-			     g_strerror (errno));
+			     "%s", g_strerror (errno));
 
 		g_timeout_add_full (G_PRIORITY_HIGH,
 				    0,

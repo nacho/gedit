@@ -141,8 +141,10 @@ get_sort_dialog (GtkWindow *parent)
 
 	if (!ret)
 	{
-		gedit_warning (parent,
-			       gtk_label_get_label (GTK_LABEL (error_widget)));
+		const gchar *err_message;
+
+		err_message = gtk_label_get_label (GTK_LABEL (error_widget));
+		gedit_warning (parent, "%s", err_message);
 
 		g_free (dialog);
 		gtk_widget_destroy (error_widget);

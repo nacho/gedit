@@ -199,7 +199,7 @@ copy_file_data (gint     sfd,
 			g_set_error (error,
 				     G_IO_ERROR,
 				     g_io_error_from_errno (errno),
-				     g_strerror (errno));
+				     "%s", g_strerror (errno));
 
 			ret = FALSE;
 
@@ -220,7 +220,7 @@ copy_file_data (gint     sfd,
 				g_set_error (error,
 					     G_IO_ERROR,
 					     g_io_error_from_errno (errno),
-					     g_strerror (errno));
+					     "%s", g_strerror (errno));
 
 				ret = FALSE;
 
@@ -299,7 +299,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 		g_set_error (&lsaver->priv->error,
 			     G_IO_ERROR,
 			     g_io_error_from_errno (errno),
-			     g_strerror (errno));
+			     "%s", g_strerror (errno));
 
 		goto out;
 	}
@@ -470,7 +470,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 			g_set_error (&lsaver->priv->error,
 				     G_IO_ERROR,
 				     g_io_error_from_errno (errno),
-				     g_strerror (errno));
+				     "%s", g_strerror (errno));
 
 			close (tmpfd);
 			unlink (tmp_filename);
@@ -487,7 +487,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 			g_set_error (&lsaver->priv->error,
 				     G_IO_ERROR,
 				     g_io_error_from_errno (errno),
-				     g_strerror (errno));
+				     "%s", g_strerror (errno));
 
 			/* try to restore... no error checking */
 			rename (backup_filename, lsaver->priv->local_path);
@@ -507,7 +507,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 			g_set_error (&lsaver->priv->error,
 				     G_IO_ERROR,
 				     g_io_error_from_errno (errno),
-				     g_strerror (errno));
+				     "%s", g_strerror (errno));
 
 			close (tmpfd);
 			goto out;
@@ -693,7 +693,7 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 		g_set_error (&lsaver->priv->error,
 			     G_IO_ERROR,
 			     g_io_error_from_errno (errno),
-			     g_strerror (errno));
+			     "%s", g_strerror (errno));
 
 		goto out;
 	}
@@ -739,7 +739,7 @@ save_new_local_file (GeditLocalDocumentSaver *lsaver)
 		g_set_error (&lsaver->priv->error,
 			     G_IO_ERROR,
 			     g_io_error_from_errno (errno),
-			     g_strerror (errno));
+			     "%s", g_strerror (errno));
 
 		goto out;
 	}
@@ -812,7 +812,7 @@ save_file (GeditLocalDocumentSaver *lsaver)
 	g_set_error (&lsaver->priv->error,
 		     G_IO_ERROR,
 		     g_io_error_from_errno (errno),
-		     g_strerror (errno));
+		     "%s", g_strerror (errno));
 
 	next_phase = (GSourceFunc) open_local_failed;
 

@@ -901,9 +901,9 @@ on_error_cb (GeditFileBrowserWidget * tree_widget,
 				      GTK_DIALOG_MODAL |
 				      GTK_DIALOG_DESTROY_WITH_PARENT,
 				      GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-				      title);
+				      "%s", title);
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dlg),
-						  message);
+						  "%s", message);
 
 	gtk_dialog_run (GTK_DIALOG (dlg));
 	gtk_widget_destroy (dlg);

@@ -82,8 +82,8 @@ gedit_help_display (GtkWindow   *parent,
 						 _("There was an error displaying help."));
 
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-							  error->message);
-							  
+							  "%s", error->message);
+
 		g_signal_connect (G_OBJECT (dialog),
 				  "response",
 				  G_CALLBACK (gtk_widget_destroy),
