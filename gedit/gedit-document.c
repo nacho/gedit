@@ -1130,7 +1130,7 @@ gedit_document_load_real (GeditDocument       *doc,
 
 /**
  * gedit_document_load:
- * @document: the #GeditDocument.
+ * @doc: the #GeditDocument.
  * @uri: the uri where to load the document from.
  * @encoding: the #GeditEncoding to encode the document.
  * @line_pos: the line to show.
@@ -1152,6 +1152,12 @@ gedit_document_load (GeditDocument       *doc,
 	g_signal_emit (doc, document_signals[LOAD], 0, uri, encoding, line_pos, create);
 }
 
+/**
+ * gedit_document_load_cancel:
+ * @doc: the #GeditDocument.
+ *
+ * Cancel load of a document.
+ */
 gboolean
 gedit_document_load_cancel (GeditDocument *doc)
 {
@@ -1254,7 +1260,7 @@ gedit_document_save_real (GeditDocument          *doc,
 
 /**
  * gedit_document_save:
- * @document: the #GeditDocument.
+ * @doc: the #GeditDocument.
  * @flags: optionnal #GeditDocumentSaveFlags.
  *
  * Save the document to its previous location. This results in the "save"
@@ -1277,7 +1283,7 @@ gedit_document_save (GeditDocument          *doc,
 
 /**
  * gedit_document_save_as:
- * @document: the #GeditDocument.
+ * @doc: the #GeditDocument.
  * @uri: the uri where to save the document.
  * @encoding: the #GeditEncoding to encode the document.
  * @flags: optionnal #GeditDocumentSaveFlags.
