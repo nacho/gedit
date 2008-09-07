@@ -133,22 +133,26 @@ filter_changed (GeditFileChooserDialog *dialog,
 		gpointer		data)
 {
 	GtkFileFilter *filter;
-	const gchar *name;
-	gint id = 0;
 
 	if (!gedit_prefs_manager_active_file_filter_can_set ())
 		return;
 
 	filter = gtk_file_chooser_get_filter (GTK_FILE_CHOOSER (dialog));
-	name = gtk_file_filter_get_name (filter);
-	g_return_if_fail (name != NULL);
+	if (filter != NULL)
+	{
+		const gchar *name;
+		gint id = 0;
 
-	if (strcmp (name, ALL_TEXT_FILES) == 0)
-		id = 1;
+		name = gtk_file_filter_get_name (filter);
+		g_return_if_fail (name != NULL);
 
-	gedit_debug_message (DEBUG_COMMANDS, "Active filter: %s (%d)", name, id);
+		if (strcmp (name, ALL_TEXT_FILES) == 0)
+			id = 1;
 
-	gedit_prefs_manager_set_active_file_filter (id);
+		gedit_debug_message (DEBUG_COMMANDS, "Active filter: %s (%d)", name, id);
+
+		gedit_prefs_manager_set_active_file_filter (id);
+	}
 }
 
 /* FIXME: use globs too - Paolo (Aug. 27, 2007) */
