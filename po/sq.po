@@ -1,16 +1,16 @@
-# Përkthimi i mesazheve të gedit në shqip
+# Përkthimi i mesazheve të gedit në shqip.
+# Copyright (C) 2003-2007, 2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gedit package.
-# Copyright (C) 2006, 2007 Free Software Foundation, Inc.
 #
-# Laurent Dhima <laurenti@alblinux.net>, 2003, 2004, 2005, 2006, 2007.
+# Laurent Dhima <laurenti@alblinux.net>, 2003-2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-13 19:43+0200\n"
-"PO-Revision-Date: 2007-09-13 19:42+0200\n"
+"POT-Creation-Date: 2008-08-19 13:02+0000\n"
+"PO-Revision-Date: 2008-09-07 22:20+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
-"Language-Team: albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
+"Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,9 +18,9 @@ msgstr ""
 
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
-msgstr "Përpuno files teksti"
+msgstr "Ndrysho file teksti"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:463
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit-print-job.c:755
 msgid "Text Editor"
 msgstr "Editues teksti"
 
@@ -30,20 +30,20 @@ msgid ""
 "effect if the \"Use Default Font\" option is turned off."
 msgstr ""
 "Një gërmë e zgjedhur nga përdoruesi që do të përdoret në zonën e shkrimit. "
-"Do të përdoret vetëm nëqoftëse është ç'aktivuar opcioni \"Përdor gërmat e "
-"prezgjedhura\"."
+"Do të përdoret vetëm nëse është çaktivizuar opsioni \"Përdor gërmat e "
+"paracaktuara\"."
 
-#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:765
+#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:795
 msgid "Active plugins"
-msgstr "Aktivo plugins "
+msgstr "Plugin e aktivizuar"
 
 #: ../data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
-msgstr "Auto detektim i kodifikimit"
+msgstr "Kodifikime e zbuluara automatikisht"
 
 #: ../data/gedit.schemas.in.h:4
 msgid "Auto Save"
-msgstr "Ruajtje automatike"
+msgstr "Ruajtja automatike"
 
 #: ../data/gedit.schemas.in.h:5
 msgid "Auto Save Interval"
@@ -51,7 +51,7 @@ msgstr "Intervali i ruajtjes automatike"
 
 #: ../data/gedit.schemas.in.h:6
 msgid "Auto indent"
-msgstr "Ngushtim automatik"
+msgstr "Ngushtimi automatik"
 
 #: ../data/gedit.schemas.in.h:7
 msgid "Backup Copy Extension"
@@ -99,7 +99,7 @@ msgid ""
 "if the \"Create Backup Copies\" option is turned on."
 msgstr ""
 "Prapashtesa ose sufiksi i përdorur për emrat e file të backup. Do të ketë "
-"efekt vetëm nëse është aktivuar opcioni \"Krijo kopje backup\"."
+"efekt vetëm nëse është aktivizuar opsioni \"Krijo kopje backup\"."
 
 #: ../data/gedit.schemas.in.h:18
 msgid "Header Font for Printing"
@@ -142,14 +142,14 @@ msgid ""
 "writable by default."
 msgstr ""
 "Lista e skemave VFS që gedit suporton në modalitetin shkrim. Skema 'file' "
-"është në menyrë të prezgjedhur e shkruajtshme."
+"është në menyrë të paracaktuar e shkruajtshme."
 
 #: ../data/gedit.schemas.in.h:26
 msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
-"Lista e plugins aktivë. Përmban \"Vendodhjen\" e plugins të aktivuar. Shiko "
+"Lista e plugins aktivë. Përmban \"Vendodhjen\" e plugins të aktivizuar. Shiko "
 "file .gedit-plugin për të zbuluar \"Vendodhjen\" e një plugin të caktuar."
 
 #: ../data/gedit.schemas.in.h:27
@@ -158,7 +158,8 @@ msgid ""
 "Only recognized encodings are used."
 msgstr ""
 "Lista e kodifikimeve të shfaqura tek menu «Kodifikimi i gërmave» në dritaren "
-"e hapjes/ruajtjes të zgjedhësit të file. Shfaqen vetëm kodifikimet e njohura."
+"e hapjes/ruajtjes të zgjedhësit të file. Shfaqen vetëm kodifikimet e "
+"njohura."
 
 #: ../data/gedit.schemas.in.h:28
 msgid "Max Number of Undo Actions"
@@ -197,94 +198,70 @@ msgstr "Monospace 12"
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
-#. Translators: This is the Body font for printing.
-#. This is a gnome-print font name and is replaced by
-#. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:41
-msgid "Monospace Regular 9"
-msgstr "Monospace Regular 9"
-
-#: ../data/gedit.schemas.in.h:42
+#: ../data/gedit.schemas.in.h:38
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
 msgstr ""
-"Numri në minuta pas të cilit gedit do të ruajë automatikisht files e "
-"ndryshuar. Do të ketë efekt vetëm nëse opcioni \"Ruajtje automatike\" është "
-"aktivuar."
+"Numri në minuta pas të cilit gedit do të ruajë automatikisht file e "
+"ndryshuar. Do të ketë efekt vetëm nëse opsioni \"Ruajtje automatike\" "
+"të jetë aktivizuar."
 
-#: ../data/gedit.schemas.in.h:43
+#: ../data/gedit.schemas.in.h:39
 msgid "Print Header"
 msgstr "Printo kreun (Header)"
 
-#: ../data/gedit.schemas.in.h:44
+#: ../data/gedit.schemas.in.h:40
 msgid "Print Line Numbers"
 msgstr "Printo numrat e rreshtave"
 
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:41
 msgid "Print Syntax Highlighting"
 msgstr "Printo vënien në dukje të sintaksës"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:42
 msgid "Printing Line Wrapping Mode"
 msgstr "Printo në modalitetin në krye automatikisht"
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:43
 msgid "Restore Previous Cursor Position"
 msgstr "Rikthe pozicionin paraardhës të kursorit"
 
-#: ../data/gedit.schemas.in.h:48
+#: ../data/gedit.schemas.in.h:44
 msgid "Right Margin Position"
 msgstr "Pozicioni i kufirit të djathtë"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:51
+#: ../data/gedit.schemas.in.h:47
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:54
+#: ../data/gedit.schemas.in.h:50
 msgid "Sans 8"
 msgstr "Sans 8"
 
-#. Translators: This is the Header font for printing.
-#. This is a gnome-print font name and replaced by
-#. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:58
-msgid "Sans Regular 11"
-msgstr "Sans Regular 11"
-
-#. Translators: This is the Line Number font for printing.
-#. This is a gnome-print font name and replaced by
-#. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:62
-msgid "Sans Regular 8"
-msgstr "Sans Regular 8"
-
-#: ../data/gedit.schemas.in.h:63
+#: ../data/gedit.schemas.in.h:51
 msgid "Side Pane is Visible"
 msgstr "Paneli anësor është i dukshëm"
 
-#: ../data/gedit.schemas.in.h:64
-#, fuzzy
+#: ../data/gedit.schemas.in.h:52
 msgid "Smart Home End"
-msgstr "Shtëpia Mbarimi"
+msgstr "Fillim/Mbarim inteligjent"
 
-#: ../data/gedit.schemas.in.h:65
-#, fuzzy
+#: ../data/gedit.schemas.in.h:53
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" represents the current locale encoding. Only recognized "
 "encodings are used."
 msgstr ""
-"Lista e kodifikimeve të përdorur nga gedit për të identifikuar automatikisht "
-"kodifikimin e një file. \"CURRENT\" specifikon kodifikimin aktual. Përdoren "
-"vetëm kodifikimet e njohur."
+"Lista e renditur e kodifikimeve të përdorura nga gedit për të identifikuar "
+"automatikisht kodifikimin e një file. \"CURRENT\" tregon kodifikimin "
+"aktual. Përdoren vetëm kodifikimet e njohura."
 
-#: ../data/gedit.schemas.in.h:66
-#, fuzzy
+#: ../data/gedit.schemas.in.h:54
 msgid ""
 "Specifies how the cursor moves when the HOME and END keys are pressed. Use "
 "\"DISABLED\" to always move at the start/end of the line, \"AFTER\" to move "
@@ -294,10 +271,15 @@ msgid ""
 "the start/end of the line and \"ALWAYS\" to always move to the start/end of "
 "the text instead of the start/end of the line."
 msgstr ""
-"dhe e shtypur fund nga fund nga i pari e shtypur dhe fund nga tekst sekondë "
-"e shtypur fund nga tekst përpara fund nga dhe fund nga tekst nga fund nga."
+"Specifikon lëvizjen e kursorit kur shtypen pulsantët Fillimi dhe Fundi. Përdor "
+"\"DISABLED\" për të lëvizur gjithmonë në fillim/fund të rreshtit, \"AFTER\" "
+"për të lëvizur në fillim/fund të rreshtit në shtypjen e parë dhe në fillim/fund "
+"të tekstit, përjashtuar hapësirat, në shtypjen e dytë. Përdor \"BEFORE\" për "
+"të lëvizur në fillim/fund të tekstit para se të lëvizet në fillim/fund të rreshtit "
+"dhe \"ALWAYS\" për të lëvizur gjithmonë në fillim/fund të tekstit në vend të "
+"lëvizjes në fillim/fund të rreshtit."
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:55
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -307,12 +289,12 @@ msgid ""
 msgstr ""
 "Specifikon si duhet vepruar për automatikisht në krye të rreshtave tepër të "
 "gjatë për printim. Përdor \"GTK_WRAP_NONE\" për të shmangur automatikisht në "
-"krye, \"GTK_WRAP_WORD\" për t'a kryer në bazë të fjalëve dhe \"GTK_WRAP_CHAR"
-"\" për t'a kryer në bazë të secilës shkronjë. Kini kujdes faktin që vlerat "
-"janë të ndjeshme ndaj përdorimit të gërmave të mëdha/të vogla, prandaj duhet "
-"t'i shkruani ekzaktësisht sikurse janë të shkruara këtu sipër."
+"krye, \"GTK_WRAP_WORD\" për t'a kryer në bazë të fjalëve dhe \"GTK_WRAP_CHAR\" "
+"për t'a kryer në bazë të secilës shkronjë. Kini kujdes faktin që vlerat janë "
+"të ndjeshme ndaj përdorimit të gërmave të mëdha/të vogla, prandaj duhet t'i "
+"shkruani ekzaktësisht sikurse janë të shkruara këtu sipër."
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:56
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -328,60 +310,28 @@ msgstr ""
 "vogla, prandaj duhet t'i shkruani ekzaktësisht sikurse janë të shkruara këtu "
 "sipër."
 
-#: ../data/gedit.schemas.in.h:69
-msgid ""
-"Specifies the font to use for a document's body when printing documents."
-msgstr ""
-"Specifikon gërmat e përdorura për trupin e tekstit në momentin e printimit."
+#: ../data/gedit.schemas.in.h:57
+msgid "Specifies the font to use for a document's body when printing documents."
+msgstr "Specifikon gërmat e përdorura për trupin e tekstit në momentin e printimit."
 
-#: ../data/gedit.schemas.in.h:70
-msgid ""
-"Specifies the font to use for a document's body when printing documents. "
-"This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr ""
-"Specifikon gërmat që duhen përdorur për trupin e tekstit gjatë printimit të "
-"dokumentëve. Është emri i gërmave të gnome-print dhe zëvendësohet nga "
-"print_font_body_pango."
-
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:58
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr ""
 "Specifikon gërmat që duhen përdorur për numrat e rreshtave gjatë printimit. "
-"Do të ketë efekt vetëm nëse opcioni \"Printo numrat e rreshtave\" nuk është "
+"Do të ketë efekt vetëm nëse opsioni \"Printo numrat e rreshtave\" nuk është "
 "zero."
 
-#: ../data/gedit.schemas.in.h:72
-msgid ""
-"Specifies the font to use for line numbers when printing. This will only "
-"take effect if the \"Print Line Numbers\" option is non-zero. This is a "
-"gnome-print font name and replaced by print_font_numbers_pango."
-msgstr ""
-"Specifikon gërmat që duhen përdorur për numrat e rreshtave gjatë printimit. "
-"Do të ketë efekt vetëm nëse opcioni \"Printo numrat e rreshtave\" nuk është "
-"zero. Është emri i gërmave të gnome-print dhe zëvendësohet nga "
-"print_font_body_pango."
-
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:59
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr ""
 "Specifikon gërmat që duhen përdorur kreun e faqes gjatë printimit. Do të "
-"ketë efekt vetëm nëse opcioni \"Print Header\" është aktivuar."
+"ketë efekt vetëm nëse opsioni \"Print Header\" është aktivizuar."
 
-#: ../data/gedit.schemas.in.h:74
-msgid ""
-"Specifies the font to use for page headers when printing a document. This "
-"will only take effect if the \"Print Header\" option is turned on. This is a "
-"gnome-print font name and replaced by print_font_header_pango."
-msgstr ""
-"Specifikon gërmat që duhen përdorur kreun e faqes gjatë printimit. Do të "
-"ketë efekt vetëm nëse opcioni \"Print Header\" është aktivuar. Është emri i "
-"gërmave të gnome-print dhe zëvendësohet nga print_font_body_pango."
-
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:60
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -389,25 +339,25 @@ msgstr ""
 "Specifikon numrin maksimum të files të hapur të fundit që do të shfaqen tek "
 "nën-menu e \"Hapur të fundit\"."
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:61
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Specifikon numrin e hapësirave që do të shfaqen në vend të Tab."
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:62
 msgid "Specifies the position of the right margin."
 msgstr "Përcakton pozicionin e kufirit të djathtë."
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:63
 msgid "Status Bar is Visible"
 msgstr "Paneli i gjëndjes është i dukshëm"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:64
 msgid "Style Scheme"
 msgstr "Skema e stileve"
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:65
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -416,152 +366,151 @@ msgid ""
 "Note that the values are case-sensitive, so make sure they appear exactly as "
 "mentioned here."
 msgstr ""
-"Stili i pulsantëve të panelit të instrumentëve. Vlerat e pranueshme janë "
-"\"GEDIT_TOOLBAR_SYSTEM\" për të përdorur stilin e prezgjedhur të sistemit, "
+"Stili i butonëve të panelit të instrumentëve. Vlerat e pranueshme janë "
+"\"GEDIT_TOOLBAR_SYSTEM\" për të përdorur stilin e paracaktuar të sistemit, "
 "\"GEDIT_TOOLBAR_ICONS\" për të shfaqur vetëm ikonat, "
 "\"GEDIT_TOOLBAR_ICONS_AND_TEXT\" për të shfaqur ikonat dhe tekstin relativ "
-"njëkohësisht, \"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" për të shfaqurtekstin "
-"krahas ikonave. Kini kujdes faktin që vlerat janë të ndjeshme ndaj "
-"përdorimit të gërmave të mëdha/të vogla, prandaj duhet t'i shkruani "
-"ekzaktësisht sikurse janë të shkruara këtu sipër."
+"njëkohësisht, \"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" për të shfaqurtekstin krahas "
+"ikonave. Kini kujdes faktin që vlerat janë të ndjeshme ndaj përdorimit të "
+"gërmave të mëdha/të vogla, prandaj duhet t'i shkruani ekzaktësisht sikurse "
+"janë të shkruara këtu sipër."
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:66
 msgid "Tab Size"
 msgstr "Përmasa e tab"
 
-#: ../data/gedit.schemas.in.h:82
-#, fuzzy
+#: ../data/gedit.schemas.in.h:67
 msgid "The id of a GtkSourceView Style Scheme used to color the text."
-msgstr "nga a Stili Skema ngjyra tekst."
+msgstr "ID e një skeme në stil GtkSourceView përdorur për të ngjyrosur tekstin."
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:68
 msgid "Toolbar Buttons Style"
-msgstr "Stili i pulsantëve të panelit të instrumentëve"
+msgstr "Stili i butonëve të panelit të instrumentëve"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:69
 msgid "Toolbar is Visible"
 msgstr "Paneli i instrumentëve është i dukshëm"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:70
 msgid "Undo Actions Limit (DEPRECATED)"
-msgstr "Limiti për veprimet \"Anullo\" (NUK PËRDORET MË)"
+msgstr "Limiti për veprimet e anullimit (NUK PËRDORET MË)"
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:71
 msgid "Use Default Font"
-msgstr "Përdor gërmat e prezgjedhura"
+msgstr "Përdor gërmat e paracaktuara"
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
 msgstr ""
-"Aktivo ruajtjen automatike mbas një farë intervali kohe. Ky interval është "
-"përcaktuar tek «Intervali për ruajtjen automatike»."
+"Aktivizo ruajtjen automatike mbas një farë intervali kohe. Ky interval është "
+"përcaktuar tek opsioni «Intervali për ruajtjen automatike»."
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
-"Aktivo krijimin e kopjeve të backup për files që ruhen. Sufiksi i files të "
-"backup mund të konfigurohet me anë të opcionit \"Sufiksi i kopjes së backup"
-"\"."
+"Aktivizo krijimin e kopjeve të backup për file që ruhen. Prapashtesa e file "
+"të backup mund të konfigurohet me anë të opsionit \"Prapashtesa e kopjes "
+"së backup\"."
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:74
 msgid "Whether gedit should display line numbers in the editing area."
-msgstr "Aktivo vizualizimin e numrave të rreshtave tek zona e shkrimit."
-
-#: ../data/gedit.schemas.in.h:90
-msgid "Whether gedit should display the right margin in the editing area."
-msgstr "Nëse gedit duhet të shfaqë kufirin e djathtë tek zona e shkrimit."
-
-#: ../data/gedit.schemas.in.h:91
-msgid "Whether gedit should enable auto indentation."
-msgstr "Aktivo auto ngushtimin."
-
-#: ../data/gedit.schemas.in.h:92
-msgid "Whether gedit should enable syntax highlighting."
-msgstr "Nëse gedit duhet të aktivojë vënien në dukje të sintaksës."
-
-#: ../data/gedit.schemas.in.h:93
-msgid ""
-"Whether gedit should highlight all the occurrences of the searched text."
-msgstr "Nëse gedit duhet të vërë në dukje rezultuesit e tekstit të kërkuar."
-
-#: ../data/gedit.schemas.in.h:94
-msgid "Whether gedit should highlight matching bracket."
-msgstr "Nëse gedit duhet të vërë në dukje kllapat korrisponduese."
-
-#: ../data/gedit.schemas.in.h:95
-msgid "Whether gedit should highlight the current line."
-msgstr "Nëse gedit duhet të vërë në dukje rreshtin aktual."
-
-#: ../data/gedit.schemas.in.h:96
-msgid "Whether gedit should include a document header when printing documents."
-msgstr "Nëse gedit duhet të krijojë një krye (header) kur printon dokumentet."
-
-#: ../data/gedit.schemas.in.h:97
-msgid "Whether gedit should insert spaces instead of tabs."
-msgstr "Aktivo futjen e hapësirave në vend të tab-eve."
-
-#: ../data/gedit.schemas.in.h:98
-msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr ""
-"Aktivon printimin e vënies në dukje të sintaksës kur printon dokumentet."
+"Tregon nëse gedit duhet të shfaqë numrat e rreshtave tek zona e "
+"shkrimit."
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:75
+msgid "Whether gedit should display the right margin in the editing area."
+msgstr "Tregon nëse gedit duhet të shfaqë kufirin e djathtë tek zona e shkrimit."
+
+#: ../data/gedit.schemas.in.h:76
+msgid "Whether gedit should enable auto indentation."
+msgstr "Tregon nëse gedit duhet të aktivizojë ngushtimin automatik."
+
+#: ../data/gedit.schemas.in.h:77
+msgid "Whether gedit should enable syntax highlighting."
+msgstr "Tregon nëse gedit duhet të aktivizojë vënien në dukje të sintaksës."
+
+#: ../data/gedit.schemas.in.h:78
+msgid "Whether gedit should highlight all the occurrences of the searched text."
+msgstr "Tregon nëse gedit duhet të vërë në dukje rezultuesit e tekstit të kërkuar."
+
+#: ../data/gedit.schemas.in.h:79
+msgid "Whether gedit should highlight matching bracket."
+msgstr "Tregon nëse gedit duhet të vërë në dukje kllapat korrisponduese."
+
+#: ../data/gedit.schemas.in.h:80
+msgid "Whether gedit should highlight the current line."
+msgstr "Tregon nëse gedit duhet të vërë në dukje rreshtin aktual."
+
+#: ../data/gedit.schemas.in.h:81
+msgid "Whether gedit should include a document header when printing documents."
+msgstr "Tregon nëse gedit duhet të krijojë një krye (header) kur printon dokumentet."
+
+#: ../data/gedit.schemas.in.h:82
+msgid "Whether gedit should insert spaces instead of tabs."
+msgstr "Aktivizon futjen e hapësirave në vend të tab-eve."
+
+#: ../data/gedit.schemas.in.h:83
+msgid "Whether gedit should print syntax highlighting when printing documents."
+msgstr "Aktivizon printimin e vënies në dukje të sintaksës kur printon dokumentet."
+
+#: ../data/gedit.schemas.in.h:84
 msgid ""
 "Whether gedit should restore the previous cursor position when a file is "
 "loaded."
 msgstr ""
-"Nëse gedit duhet të rivendosë pozicionin e mëparshëm të kursorit kur "
+"Tregon nëse gedit duhet të rivendosë pozicionin e mëparshëm të kursorit kur "
 "ngarkohet një file."
 
-#: ../data/gedit.schemas.in.h:100
-msgid ""
-"Whether the bottom panel at the bottom of editing windows should be visible."
+#: ../data/gedit.schemas.in.h:85
+msgid "Whether the bottom panel at the bottom of editing windows should be visible."
 msgstr ""
-"Nëse paneli inferior tek ana e poshtme e dritares së edititmit duhet të jetë "
-"i dukshëm."
+"Tregon nëse paneli inferior tek ana e poshtme e dritares së shkrimit "
+"duhet të jetë i dukshëm."
 
-#: ../data/gedit.schemas.in.h:101
-msgid ""
-"Whether the side pane at the left of the editing window should be visible."
+#: ../data/gedit.schemas.in.h:86
+msgid "Whether the side pane at the left of the editing window should be visible."
 msgstr ""
-"Nëse paneli anësor në të majtë të dritares së edititmit duhet të jetë i "
-"dukshëm."
+"Tregon nëse paneli anësor në të majtë të dritares së shkrimit duhet "
+"të jetë i dukshëm."
 
-#: ../data/gedit.schemas.in.h:102
-msgid ""
-"Whether the status bar at the bottom of editing windows should be visible."
+#: ../data/gedit.schemas.in.h:87
+msgid "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
-"Bën të dukshëm ose jo panelin e gjëndjes në fund të dritareve të shkrimit."
+"Tregon nëse paneli i gjëndjes në fund të dritareve të shkrimit duhet "
+"të jetë i dukshëm."
 
-#: ../data/gedit.schemas.in.h:103
+#: ../data/gedit.schemas.in.h:88
 msgid "Whether the toolbar should be visible in editing windows."
-msgstr "Bën të dukshëm ose jo panelin e instrumentëve tek dritaret e shkrimit."
+msgstr ""
+"Tregon nëse paneli i instrumentëve duhet të jetë i dukshëm "
+"në dritaret e shkrimit."
 
-#: ../data/gedit.schemas.in.h:104
-#, fuzzy
+#: ../data/gedit.schemas.in.h:89
 msgid ""
 "Whether to use the system's default fixed width font for editing text "
 "instead of a font specific to gedit. If this option is turned off, then the "
 "font named in the \"Editor Font\" option will be used instead of the system "
 "font."
 msgstr ""
-"Aktivon përdorimin e gërmave të prezgjedhura të sistemit për ndryshimin e "
-"tekstit në vend të gërmave specifike të gedit. Nëse ky opcion është "
-"ç'aktivuar, atëhere gërmat e specifikuara me anë të opcionit \"Gërmat e "
-"editorit\" do të përdoren në vend të gërmave të sistemit."
+"Tregon nëse duhet aktivizuar përdorimi i gërmave me hapësirë fikse të "
+"paracaktuar të sistemit për ndryshimin e tekstit në vend të gërmave të "
+"specifikuara të gedit. Nëse ky opsion është i çaktivizuar, atëhere gërmat "
+"e specifikuara me anë të opsionit «Gërmat e editorit» do të përdoren në "
+"vend të gërmave të sistemit."
 
-#: ../data/gedit.schemas.in.h:105
+#: ../data/gedit.schemas.in.h:90
 msgid "Writable VFS schemes"
 msgstr "Skemat e shkruajtshme VFS"
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:108
+#: ../data/gedit.schemas.in.h:93
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
@@ -576,7 +525,7 @@ msgstr "[ISO-8859-15]"
 #. Only recognized encodings are used.
 #. See http://svn.gnome.org/viewcvs/gedit/trunk/gedit/gedit-encodings.c?view=markup for
 #. a list of supported encodings
-#: ../data/gedit.schemas.in.h:120
+#: ../data/gedit.schemas.in.h:105
 msgid "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
 msgstr "[UTF-8,AKTUAL,ISO-8859-15,UTF-16]"
 
@@ -598,8 +547,7 @@ msgstr "Pyetje"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:411
 #, c-format
-msgid ""
-"If you don't save, changes from the last %ld second will be permanently lost."
+msgid "If you don't save, changes from the last %ld second will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
@@ -611,10 +559,8 @@ msgstr[1] ""
 "përfundimisht."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:420
-msgid ""
-"If you don't save, changes from the last minute will be permanently lost."
-msgstr ""
-"Nëse nuk ruani, ndryshimet nga minuta e fundit do të humbin përfundimisht."
+msgid "If you don't save, changes from the last minute will be permanently lost."
+msgstr "Nëse nuk ruani, ndryshimet nga minuta e fundit do të humbin përfundimisht."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:426
 #, c-format
@@ -633,8 +579,7 @@ msgstr[1] ""
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:436
 #, c-format
-msgid ""
-"If you don't save, changes from the last %ld minute will be permanently lost."
+msgid "If you don't save, changes from the last %ld minute will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be permanently "
 "lost."
@@ -647,8 +592,7 @@ msgstr[1] ""
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:451
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr ""
-"Nëse nuk ruani, ndryshimet nga ora e fundit do të humbasin përfundimisht."
+msgstr "Nëse nuk ruani, ndryshimet nga ora e fundit do të humbasin përfundimisht."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:457
 #, c-format
@@ -667,14 +611,10 @@ msgstr[1] ""
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Nëse nuk ruani, ndryshimet nga %d ora e fundit do të humbasin përfundimisht."
-msgstr[1] ""
-"Nëse nuk ruani, ndryshimet nga %d orët e fundit do të humbasin përfundimisht."
+msgid "If you don't save, changes from the last %d hour will be permanently lost."
+msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "Nëse nuk ruani, ndryshimet nga %d ora e fundit do të humbasin përfundimisht."
+msgstr[1] "Nëse nuk ruani, ndryshimet nga %d orët e fundit do të humbasin përfundimisht."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:515
 #, c-format
@@ -689,7 +629,7 @@ msgstr "Ruan ndryshimet tek dokumenti \"%s\" para se t'a mbyllni?"
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:534
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:745
 msgid "Saving has been disabled by the system administrator."
-msgstr "Ruajtja është çaktivuar nga administratori i sistemit."
+msgstr "Ruajtja është çaktivizuar nga administratori i sistemit."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:700
 #, c-format
@@ -701,8 +641,7 @@ msgstr[1] "Ndryshimet e kryera në %d dokumente do të humbasin përgjithmonë."
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:706
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
-msgid_plural ""
-"There are %d documents with unsaved changes. Save changes before closing?"
+msgid_plural "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] ""
 "Keni %d dokument me ndryshime të paruajtura. Ruan ndryshimet para se t'a "
 "mbyllësh?"
@@ -720,131 +659,50 @@ msgstr "Z_gjidh dokumentet që dëshironi të ruani:"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:747
 msgid "If you don't save, all your changes will be permanently lost."
-msgstr ""
-"Nëse nuk ruani, të gjithë ndryshimet tuaja do të humbasin përgjithmonë."
+msgstr "Nëse nuk ruani, të gjithë ndryshimet tuaja do të humbasin përgjithmonë."
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:315
+#: ../gedit/dialogs/gedit-encodings-dialog.c:319
 msgid "Character Codings"
 msgstr "Kodifikimi i gërmave"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:373
-#: ../gedit/dialogs/gedit-encodings-dialog.c:434
+#: ../gedit/dialogs/gedit-encodings-dialog.c:378
+#: ../gedit/dialogs/gedit-encodings-dialog.c:439
 msgid "_Description"
 msgstr "_Përshkrimi"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:382
-#: ../gedit/dialogs/gedit-encodings-dialog.c:443
+#: ../gedit/dialogs/gedit-encodings-dialog.c:387
+#: ../gedit/dialogs/gedit-encodings-dialog.c:448
 msgid "_Encoding"
 msgstr "_Kodifikimi"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:1
+#: ../gedit/dialogs/gedit-encodings-dialog.ui.h:1
 msgid "A_vailable encodings:"
 msgstr "Kodifikimet në _dispozicion:"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:2
+#: ../gedit/dialogs/gedit-encodings-dialog.ui.h:2
 msgid "Character codings"
 msgstr "Kodifikimi i shkronjave"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:3
+#: ../gedit/dialogs/gedit-encodings-dialog.ui.h:3
 msgid "E_ncodings shown in menu:"
 msgstr "Kodifiki_met e shfaqura në menu:"
 
 #: ../gedit/dialogs/gedit-open-location-dialog.c:136
-#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
+#: ../gedit/dialogs/gedit-open-location-dialog.ui.h:3
 msgid "Open Location"
-msgstr "Hap pozicionin"
+msgstr "Hap Pozicionin"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:1
+#: ../gedit/dialogs/gedit-open-location-dialog.ui.h:1
 msgid "Ch_aracter coding:"
 msgstr "Kodifikimi i gërm_ave:"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:2
+#: ../gedit/dialogs/gedit-open-location-dialog.ui.h:2
 msgid "Enter the _location (URI) of the file you would like to open:"
 msgstr "Shkruaj _vendodhjen (URI) e file që dëshironi të hapni:"
 
-#: ../gedit/dialogs/gedit-page-setup-dialog.c:527
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:9
-msgid "Page Setup"
-msgstr "Rregullimi i faqes"
-
-#. ex:ts=4:et:
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#: ../plugins/docinfo/docinfo.glade2.h:1
-#: ../plugins/externaltools/tools/tools.glade.h:1
-#: ../plugins/snippets/snippets/snippets.glade.h:1
-#: ../plugins/time/time.glade2.h:1
-msgid "    "
-msgstr "    "
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:2
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
-msgid "<b>Line Numbers</b>"
-msgstr "<b>Numrat e rreshtit</b>"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:3
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
-msgid "<b>Text Wrapping</b>"
-msgstr "<b>Në krye automatikisht</b>"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:4
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
-msgid "Do not _split words over two lines"
-msgstr "Mos e _ndaj fjalën në dy rreshta"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:5
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
-msgid "Enable text _wrapping"
-msgstr "Aktivo në _krye automatikisht"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:6
-msgid "Fonts"
-msgstr "Gërmat"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:7
-msgid "General"
-msgstr "Të përgjithshme"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:8
-msgid "He_aders and footers:"
-msgstr "Fillimi i f_aqes dhe fundi i faqes:"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:10
-msgid "Print _line numbers"
-msgstr "Printo numrat e _rreshtit"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:11
-msgid "Print synta_x highlighting"
-msgstr "Printo vënien në dukje të sinta_ksës"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:12
-msgid "_Body:"
-msgstr "_Trupi:"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:13
-msgid "_Line numbers:"
-msgstr "Numrat e _rreshtit:"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:14
-msgid "_Number every"
-msgstr "_Numër çdo"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:15
-msgid "_Print page headers"
-msgstr "_Printo header e faqes"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:16
-msgid "_Restore Default Fonts"
-msgstr "_Rivendos gërmat e prezgjedhura"
-
-#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:17
-msgid "lines"
-msgstr "rreshta"
-
 #: ../gedit/dialogs/gedit-preferences-dialog.c:570
 msgid "Push this button to select the font to be used by the editor"
-msgstr ""
-"Shtyp këtë pulsant për të zgjedhur gërmat që duhen përdorur nga editori"
+msgstr "Shtyp këtë pulsant për të zgjedhur gërmat që duhen përdorur nga editori"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.c:580
 #, c-format
@@ -868,7 +726,7 @@ msgid "Color Scheme Files"
 msgstr "File e skemave të ngjyrave"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.c:830
-#: ../gedit/gedit-file-chooser-dialog.c:52
+#: ../gedit/gedit-file-chooser-dialog.c:51
 msgid "All Files"
 msgstr "Të gjithë files"
 
@@ -877,157 +735,189 @@ msgstr "Të gjithë files"
 msgid "Could not remove color scheme \"%s\"."
 msgstr "E pamundur heqja e skemës së ngjyrave \"%s\"."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1077
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1084
 msgid "gedit Preferences"
 msgstr "Preferimet e gedit"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:2
+#. ex:ts=4:et:
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:1
+#: ../plugins/docinfo/docinfo.ui.h:1
+#: ../plugins/externaltools/tools/tools.ui.h:1
+#: ../plugins/snippets/snippets/snippets.ui.h:1 ../plugins/time/time.ui.h:1
+msgid "    "
+msgstr "    "
+
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:2
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Dhëmbëzim automatik</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:3
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:3
 msgid "<b>Bracket Matching</b>"
 msgstr "<b>Korrispondimi i kllapave</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:4
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:4
 msgid "<b>Current Line</b>"
 msgstr "<b>Rreshti aktual</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:5
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:5
 msgid "<b>File Saving</b>"
 msgstr "<b>Ruajtja e file</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:6
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:6
 msgid "<b>Font</b>"
 msgstr "<b>Gërmat</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:8
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:7
+#: ../gedit/gedit-print-preferences.ui.h:2
+msgid "<b>Line Numbers</b>"
+msgstr "<b>Numrat e rreshtit</b>"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:8
 msgid "<b>Right Margin</b>"
 msgstr "<b>Kufiri i djathtë</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:9
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:9
 msgid "<b>Tab Stops</b>"
 msgstr "<b>Bllokimi i skedave</b>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:11
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:10
+#: ../gedit/gedit-print-preferences.ui.h:5
+msgid "<b>Text Wrapping</b>"
+msgstr "<b>Në krye automatikisht</b>"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:11
 msgid "<span weight=\"bold\">Color Scheme</span>"
 msgstr "<span weight=\"bold\">Skema e ngjyrave</span>"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:12
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:12
 msgid "Create a _backup copy of files before saving"
 msgstr "Krijo një kopje _backup të files para se të ruhen"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:13
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:13
 msgid "Display right _margin"
 msgstr "Shfaq _kufirin e djathtë"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:15
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:14
+#: ../gedit/gedit-print-preferences.ui.h:6
+msgid "Do not _split words over two lines"
+msgstr "Mos e _ndaj fjalën në dy rreshta"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:15
 msgid "Editor"
 msgstr "Editori"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:16
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:16
 msgid "Editor _font: "
 msgstr "Gërmat e _editorit:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:18
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:17
+#: ../gedit/gedit-print-preferences.ui.h:7
+msgid "Enable text _wrapping"
+msgstr "Aktivo në _krye automatikisht"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:18
 msgid "Font & Colors"
 msgstr "Gërmat & Ngjyrat"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:19
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:19
 msgid "Highlight current _line"
 msgstr "Vër në dukje rreshtin aktua_l"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:20
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:20
 msgid "Highlight matching _bracket"
 msgstr "Vër në dukje _kllapat korrisponduese"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:21
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:21
 msgid "Insert _spaces instead of tabs"
 msgstr "Shto hapë_sira në vend të tab"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:22
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:22
 msgid "Pick the editor font"
 msgstr "Zgjidh shkronjën e editorit"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:23
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:23
 msgid "Plugins"
 msgstr "Plugins"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:24
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:24
 msgid "Preferences"
-msgstr "Preferimet"
+msgstr "Preferime"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:25
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:25
 msgid "View"
-msgstr "Shiko"
+msgstr "Shfaq"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:26
+msgid "_Add..."
+msgstr "_Shto..."
+
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:27
 msgid "_Autosave files every"
 msgstr "Ruaj _automatikisht files çdo"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:28
 msgid "_Display line numbers"
 msgstr "_Shfaq numrat e rreshtit"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:29
 msgid "_Enable automatic indentation"
 msgstr "_Aktivo dhëmbëzimin automatik"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:30
 msgid "_Right margin at column:"
 msgstr "_Kufiri i djathtë tek kollona:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:31
 msgid "_Tab width:"
 msgstr "Gjerësia e _Tab:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
+#: ../gedit/dialogs/gedit-preferences-dialog.ui.h:32
 msgid "_minutes"
 msgstr "_minuta"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:287
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1348
+#: ../gedit/dialogs/gedit-search-dialog.c:301
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:2 ../gedit/gedit-window.c:1363
 msgid "Replace"
 msgstr "Zëvendëso"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:298 ../gedit/gedit-window.c:1346
+#: ../gedit/dialogs/gedit-search-dialog.c:312 ../gedit/gedit-window.c:1361
 msgid "Find"
 msgstr "Gjej"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:382
+#: ../gedit/dialogs/gedit-search-dialog.c:408
 msgid "Replace _All"
 msgstr "Zëvendëso _Gjithçka"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:383
-#: ../gedit/gedit-commands-file.c:677
+#: ../gedit/dialogs/gedit-search-dialog.c:409
+#: ../gedit/gedit-commands-file.c:661
 msgid "_Replace"
 msgstr "_Zëvendëso"
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:1
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:1
 msgid "Match _entire word only"
 msgstr "V_etëm fjalën e plotë"
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:3
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:3
 msgid "Replace All"
 msgstr "Zëvendëso gjithçka"
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:4
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:4
 msgid "Replace _with: "
 msgstr "Zëvendëso _me:"
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:5
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:5
 msgid "Search _backwards"
 msgstr "Kërko m_brapsht"
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:6
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:6
 msgid "_Match case"
 msgstr "Respekto _Gërma të mëdha/vogla"
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:7
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:7
 msgid "_Search for: "
 msgstr "_Kërko për: "
 
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:8
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:8
 msgid "_Wrap around"
 msgstr "_Rifillo nga fillimi"
 
@@ -1066,70 +956,68 @@ msgid "%s: invalid encoding.\n"
 msgstr "%s: kodifikim i pavlefshëm.\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:455
+#: ../gedit/gedit.c:468
 msgid "- Edit text files"
 msgstr "- Përpuno file teksti"
 
-#: ../gedit/gedit-commands-file.c:224 ../gedit/gedit-commands-file.c:270
+#: ../gedit/gedit.c:477
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Shkruaj '%s --help' për të shikuar listën e plotë të opcioneve të rreshtit "
+"të komandës.\n"
+
+#: ../gedit/gedit-commands-file.c:257
 #, c-format
 msgid "Loading file '%s'…"
 msgstr "Duke ngarkuar file '%s'..."
 
-#: ../gedit/gedit-commands-file.c:279
+#: ../gedit/gedit-commands-file.c:266
 #, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
 msgstr[0] "Duke ngarkuar %d file..."
-msgstr[1] "Duke ngarkuar %d files..."
+msgstr[1] "Duke ngarkuar %d file..."
 
 #. Translators: "Open Files" is the title of the file chooser window
-#: ../gedit/gedit-commands-file.c:423
+#: ../gedit/gedit-commands-file.c:438
 msgid "Open Files"
-msgstr "Hap file"
+msgstr "Hap files"
 
-#: ../gedit/gedit-commands-file.c:529
-msgid "The entered location is not valid."
-msgstr "Pozicioni i dhënë nuk është i vlefshëm."
-
-#: ../gedit/gedit-commands-file.c:532
-#: ../gedit/gedit-io-error-message-area.c:187
-#: ../gedit/gedit-io-error-message-area.c:226
-#: ../gedit/gedit-io-error-message-area.c:242
-msgid "Please check that you typed the location correctly and try again."
-msgstr "Kontrolloni që keni shkruar si duhet pozicionin dhe provoni përsëri."
-
-#: ../gedit/gedit-commands-file.c:658
+#: ../gedit/gedit-commands-file.c:641
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "File \"%s\" është në vetëm-lexim."
 
-#: ../gedit/gedit-commands-file.c:669
+#: ../gedit/gedit-commands-file.c:652
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Dëshironi të përpiqem t'a zevëndësoj me atë që jeni duke ruajtur?"
 
-#: ../gedit/gedit-commands-file.c:735 ../gedit/gedit-commands-file.c:938
+#: ../gedit/gedit-commands-file.c:719 ../gedit/gedit-commands-file.c:925
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Duke ruajtur file '%s'..."
 
-#: ../gedit/gedit-commands-file.c:836
+#: ../gedit/gedit-commands-file.c:823
 msgid "Save As…"
 msgstr "Ruaj si..."
 
-#: ../gedit/gedit-commands-file.c:1117
+#: ../gedit/gedit-commands-file.c:1104
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Duke rikthyer dokumentin '%s'..."
 
-#: ../gedit/gedit-commands-file.c:1162
+#: ../gedit/gedit-commands-file.c:1149
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Dëshironi të ktheni ndryshimet e paruajtura tek dokumenti '%s'?"
 
-#: ../gedit/gedit-commands-file.c:1171
+#: ../gedit/gedit-commands-file.c:1158
 #, c-format
-msgid ""
-"Changes made to the document in the last %ld second will be permanently lost."
+msgid "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
@@ -1140,14 +1028,13 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në %ld sekondat e fundit do të humbasin "
 "përgjithmonë."
 
-#: ../gedit/gedit-commands-file.c:1180
-msgid ""
-"Changes made to the document in the last minute will be permanently lost."
+#: ../gedit/gedit-commands-file.c:1167
+msgid "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Ndryshimet e kryera në dokument në minutën e fundit do të humbasin "
 "përgjithmonë."
 
-#: ../gedit/gedit-commands-file.c:1186
+#: ../gedit/gedit-commands-file.c:1173
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1162,10 +1049,9 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në minutën e fundit dhe %ld sekonda do të "
 "humbasin përgjithmonë."
 
-#: ../gedit/gedit-commands-file.c:1196
+#: ../gedit/gedit-commands-file.c:1183
 #, c-format
-msgid ""
-"Changes made to the document in the last %ld minute will be permanently lost."
+msgid "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
@@ -1176,12 +1062,13 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në %ld minutat e fundit do të humbasin "
 "përgjithmonë."
 
-#: ../gedit/gedit-commands-file.c:1211
+#: ../gedit/gedit-commands-file.c:1198
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
-"Ndryshimet e kryera në dokument në orën e fundit do të humbasin përgjithmonë."
+"Ndryshimet e kryera në dokument në orën e fundit do të humbasin "
+"përgjithmonë."
 
-#: ../gedit/gedit-commands-file.c:1217
+#: ../gedit/gedit-commands-file.c:1204
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1196,12 +1083,10 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në orën e fundit dhe %d minuta do të "
 "humbasin përgjithmonë."
 
-#: ../gedit/gedit-commands-file.c:1232
+#: ../gedit/gedit-commands-file.c:1219
 #, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
+msgid "Changes made to the document in the last %d hour will be permanently lost."
+msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] ""
 "Ndryshimet e kryera në dokument në %d orën e fundit do të humbasin "
 "përgjithmonë."
@@ -1209,7 +1094,7 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në %d orët e fundit do të humbasin "
 "përgjithmonë."
 
-#: ../gedit/gedit-commands-file.c:1258
+#: ../gedit/gedit-commands-file.c:1245
 msgid "_Revert"
 msgstr "_Kthe mbrapa"
 
@@ -1217,7 +1102,7 @@ msgstr "_Kthe mbrapa"
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit është një editor teksti i thjeshtë për Desktop GNOME"
 
-#: ../gedit/gedit-commands-help.c:96
+#: ../gedit/gedit-commands-help.c:97
 msgid "translator-credits"
 msgstr "Laurent Dhima <laurenti@alblinux.net>"
 
@@ -1225,8 +1110,8 @@ msgstr "Laurent Dhima <laurenti@alblinux.net>"
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
-msgstr[0] "U gjet dhe zëvendësua %d korrispondues."
-msgstr[1] "U gjetën dhe zëvendësuan %d korrispondues."
+msgstr[0] "U gjet dhe zëvendësua %d korrispondues"
+msgstr[1] "U gjetën dhe zëvendësuan %d korrispondues"
 
 #: ../gedit/gedit-commands-search.c:175
 msgid "Found and replaced one occurrence"
@@ -1236,17 +1121,17 @@ msgstr "U gjet dhe u zëvendësua një korrispondues"
 msgid "Phrase not found"
 msgstr "Fraza nuk u gjet"
 
-#: ../gedit/gedit-document.c:814 ../gedit/gedit-document.c:908
+#: ../gedit/gedit-document.c:871 ../gedit/gedit-document.c:884
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Dokument i paruajtur %d"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1914 ../gedit/gedit-window.c:1919
+#: ../gedit/gedit-window.c:1929 ../gedit/gedit-window.c:1934
 msgid "Read Only"
 msgstr "Vetëm në lexim"
 
-#: ../gedit/gedit-documents-panel.c:759
+#: ../gedit/gedit-documents-panel.c:760 ../gedit/gedit-window.c:2873
 msgid "Documents"
 msgstr "Dokumentë"
 
@@ -1269,7 +1154,7 @@ msgstr "Europa Qendrore"
 
 #: ../gedit/gedit-encodings.c:157
 msgid "South European"
-msgstr "Europa Jugore"
+msgstr "Europa jugore"
 
 #: ../gedit/gedit-encodings.c:159 ../gedit/gedit-encodings.c:175
 #: ../gedit/gedit-encodings.c:284
@@ -1285,7 +1170,7 @@ msgstr "Cyrillic"
 #: ../gedit/gedit-encodings.c:163 ../gedit/gedit-encodings.c:241
 #: ../gedit/gedit-encodings.c:282
 msgid "Arabic"
-msgstr "Arabe"
+msgstr "Arabisht"
 
 #: ../gedit/gedit-encodings.c:165 ../gedit/gedit-encodings.c:276
 msgid "Greek"
@@ -1307,7 +1192,7 @@ msgstr "Turqisht"
 
 #: ../gedit/gedit-encodings.c:173
 msgid "Nordic"
-msgstr "Nordik"
+msgstr "Nordike"
 
 #: ../gedit/gedit-encodings.c:177
 msgid "Celtic"
@@ -1361,105 +1246,78 @@ msgstr "Vietnameze"
 
 #: ../gedit/gedit-encodings.c:263
 msgid "Thai"
-msgstr "Thai"
+msgstr "Tailandeze"
 
 #: ../gedit/gedit-encodings.c:437
 msgid "Unknown"
 msgstr "Nuk njihet"
 
-#: ../gedit/gedit-encodings-option-menu.c:219
+#: ../gedit/gedit-encodings-option-menu.c:220
 msgid "Auto Detected"
 msgstr "Njohje automatike"
 
-#: ../gedit/gedit-encodings-option-menu.c:239
-#: ../gedit/gedit-encodings-option-menu.c:261
+#: ../gedit/gedit-encodings-option-menu.c:240
+#: ../gedit/gedit-encodings-option-menu.c:262
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "Gjuha aktuale (%s)"
 
-#: ../gedit/gedit-encodings-option-menu.c:322
+#: ../gedit/gedit-encodings-option-menu.c:323
 msgid "Add or _Remove..."
 msgstr "Shto ose _hiq..."
 
-#: ../gedit/gedit-file-chooser-dialog.c:53
+#: ../gedit/gedit-file-chooser-dialog.c:52
 msgid "All Text Files"
 msgstr "Të gjithë files teksti"
 
-#: ../gedit/gedit-file-chooser-dialog.c:79
+#: ../gedit/gedit-file-chooser-dialog.c:78
 msgid "C_haracter Coding:"
 msgstr "Kodifikimi i s_hkronjave:"
 
-#: ../gedit/gedit-help.c:66
+#: ../gedit/gedit-help.c:82
 msgid "There was an error displaying help."
-msgstr "U verifikua një gabim gjatë shfaqjes së ndihmës."
+msgstr "Gabim gjatë shfaqjes së ndihmës."
 
-#: ../gedit/gedit-io-error-message-area.c:185
+#: ../gedit/gedit-io-error-message-area.c:170
 #, c-format
 msgid "Could not find the file %s."
 msgstr "E pamundur gjetja e file %s."
 
-#: ../gedit/gedit-io-error-message-area.c:192
-#: ../gedit/gedit-io-error-message-area.c:441
-msgid "The file contains corrupted data."
-msgstr "File përmban të dhëna të dëmtuara."
+#: ../gedit/gedit-io-error-message-area.c:172
+#: ../gedit/gedit-io-error-message-area.c:211
+#: ../gedit/gedit-io-error-message-area.c:218
+msgid "Please check that you typed the location correctly and try again."
+msgstr "Kontrolloni që keni shkruar si duhet pozicionin dhe provoni përsëri."
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:203
-#: ../gedit/gedit-io-error-message-area.c:452
+#: ../gedit/gedit-io-error-message-area.c:187
 #, c-format
 msgid "gedit cannot handle %s locations."
 msgstr "gedit nuk mund të trajtojë pozicionet %s."
 
-#: ../gedit/gedit-io-error-message-area.c:209
-#: ../gedit/gedit-io-error-message-area.c:458
+#: ../gedit/gedit-io-error-message-area.c:193
 msgid "gedit cannot handle this location."
 msgstr "gedit nuk mund të trajtojë këtë pozicion."
 
-#: ../gedit/gedit-io-error-message-area.c:216
-#: ../gedit/gedit-io-error-message-area.c:465
-msgid "The file contains data in an invalid format."
-msgstr "File përmban të dhëna në një format të gabuar."
+#: ../gedit/gedit-io-error-message-area.c:201
+msgid "The location of the file cannot be mounted."
+msgstr "Pozicioni i file nuk mund të montohet."
 
-#: ../gedit/gedit-io-error-message-area.c:220
-#: ../gedit/gedit-io-error-message-area.c:469
-msgid "The file is too big."
-msgstr "Ky file është tepër i madh."
+#: ../gedit/gedit-io-error-message-area.c:205
+msgid "The location of the file cannot be accessed because it is not mounted."
+msgstr "E pamundur hyrja në pozicionin e file pasi nuk është montuar."
 
-#: ../gedit/gedit-io-error-message-area.c:224
-#, c-format
-msgid "%s is not a valid location."
-msgstr "%s nuk është një pozicion i vlefshëm."
-
-#: ../gedit/gedit-io-error-message-area.c:231
-#: ../gedit/gedit-io-error-message-area.c:473
-msgid "You do not have the permissions necessary to open the file."
-msgstr "Nuk të drejtat e duhura për të hapur atë file."
-
-#: ../gedit/gedit-io-error-message-area.c:235
-#: ../gedit/gedit-io-error-message-area.c:477
-#: ../gedit/gedit-io-error-message-area.c:1230
-msgid ""
-"There are too many open files. Please close some applications and try again."
-msgstr "Tepër file të hapur. Mbyll disa aplikativë dhe provo përsëri."
-
-#: ../gedit/gedit-io-error-message-area.c:240
-#: ../gedit/gedit-io-error-message-area.c:482
+#: ../gedit/gedit-io-error-message-area.c:209
 #, c-format
 msgid "%s is a directory."
 msgstr "%s është një directory."
 
-#: ../gedit/gedit-io-error-message-area.c:247
-#: ../gedit/gedit-io-error-message-area.c:487
-msgid ""
-"Not enough available memory to open the file. Please close some running "
-"applications and try again."
-msgstr ""
-"Memorje e pamjaftueshme për të hapur file. Të lutem, mbyll ndonjë nga "
-"programet në ekzekutim dhe provo përsëri."
+#: ../gedit/gedit-io-error-message-area.c:216
+#, c-format
+msgid "%s is not a valid location."
+msgstr "%s nuk është një pozicion i vlefshëm."
 
-#: ../gedit/gedit-io-error-message-area.c:275
-#: ../gedit/gedit-io-error-message-area.c:515
-#: ../gedit/gedit-io-error-message-area.c:1269
+#: ../gedit/gedit-io-error-message-area.c:243
 #, c-format
 msgid ""
 "Host %s could not be found. Please check that your proxy settings are "
@@ -1468,14 +1326,7 @@ msgstr ""
 "Host %s nuk u gjet. Kontrollo korrektësinë e konfigurimit të proxy dhe provo "
 "përsëri."
 
-#: ../gedit/gedit-io-error-message-area.c:286
-#: ../gedit/gedit-io-error-message-area.c:297
-#: ../gedit/gedit-io-error-message-area.c:305
-#: ../gedit/gedit-io-error-message-area.c:526
-#: ../gedit/gedit-io-error-message-area.c:537
-#: ../gedit/gedit-io-error-message-area.c:1280
-#: ../gedit/gedit-io-error-message-area.c:1291
-#: ../gedit/gedit-io-error-message-area.c:1299
+#: ../gedit/gedit-io-error-message-area.c:256
 #, c-format
 msgid ""
 "Host name was invalid. Please check that you typed the location correctly "
@@ -1484,125 +1335,112 @@ msgstr ""
 "Emri i host është i pavlefshëm. Të lutem, kontrollo që e ke shkruar si duhet "
 "pozicionin dhe provo përsëri."
 
-#: ../gedit/gedit-io-error-message-area.c:311
-#: ../gedit/gedit-io-error-message-area.c:545
-#: ../gedit/gedit-io-error-message-area.c:1305
-msgid ""
-"Host name was empty. Please check that your proxy settings are correct and "
-"try again."
-msgstr ""
-"Emri i host është bosh. Të lutem, kontrollo që konfigurimi i proxy tuaj të "
-"jetë korrekt dhe provo përsëri."
-
-#: ../gedit/gedit-io-error-message-area.c:317
-#: ../gedit/gedit-io-error-message-area.c:1311
-msgid ""
-"Attempt to log in failed. Please check that you typed the location correctly "
-"and try again."
-msgstr ""
-"Përpjekja për hyrje dështoi. Të lutem, kontrollo që ke shkruar si duhet "
-"pozicionin dhe provo përsëri."
-
-#: ../gedit/gedit-io-error-message-area.c:323
-msgid "The file you are trying to open is not a regular file."
-msgstr "File që dëshironi të hapni nuk është një file i rregullt."
-
-#: ../gedit/gedit-io-error-message-area.c:327
-#: ../gedit/gedit-io-error-message-area.c:560
-#: ../gedit/gedit-io-error-message-area.c:1339
-msgid "Connection timed out. Please try again."
-msgstr "Koha për lidhjen skadoi. Provo edhe njëherë."
-
-#: ../gedit/gedit-io-error-message-area.c:376
-#: ../gedit/gedit-io-error-message-area.c:610
-#: ../gedit/gedit-io-error-message-area.c:1380
-#, c-format
-msgid "Unexpected error: %s"
-msgstr "Gabim i papritur: %s"
-
-#: ../gedit/gedit-io-error-message-area.c:382
-#: ../gedit/gedit-io-error-message-area.c:776
-#, c-format
-msgid "Could not open the file %s."
-msgstr "E pamundur hapja e file %s."
-
-#: ../gedit/gedit-io-error-message-area.c:391
-#: ../gedit/gedit-io-error-message-area.c:683
-msgid "_Retry"
-msgstr "_Rikthe"
-
-#: ../gedit/gedit-io-error-message-area.c:436
-msgid "gedit cannot find it. Perhaps it has recently been deleted."
-msgstr "gedit nuk arrin t'a gjejë. Ndoshta ndërkohë është fshirë."
-
-#: ../gedit/gedit-io-error-message-area.c:551
-msgid "Attempt to log in failed."
-msgstr "Përpjekja për hyrje dështoi."
-
-#: ../gedit/gedit-io-error-message-area.c:555
+#: ../gedit/gedit-io-error-message-area.c:264
 #, c-format
 msgid "%s is not a regular file."
 msgstr "%s nuk është një file i rregullt."
 
-#: ../gedit/gedit-io-error-message-area.c:616
+#: ../gedit/gedit-io-error-message-area.c:269
+msgid "Connection timed out. Please try again."
+msgstr "Koha për lidhjen skadoi. Provo edhe njëherë."
+
+#: ../gedit/gedit-io-error-message-area.c:292
+msgid "The file is too big."
+msgstr "Ky file është tepër i madh."
+
+#: ../gedit/gedit-io-error-message-area.c:333
+#, c-format
+msgid "Unexpected error: %s"
+msgstr "Gabim i papritur: %s"
+
+#: ../gedit/gedit-io-error-message-area.c:369
+msgid ""
+"The number of followed links is limited and the actual file could not be "
+"found within this limit."
+msgstr ""
+"Numri i lidhjeve të ndjekuar është i kufizuar dhe file aktual nuk mund "
+"të gjehet me kufirin e përcaktuar."
+
+#: ../gedit/gedit-io-error-message-area.c:373
+msgid "You do not have the permissions necessary to open the file."
+msgstr "Nuk të drejtat e duhura për të hapur atë file."
+
+#: ../gedit/gedit-io-error-message-area.c:381
+#: ../gedit/gedit-io-error-message-area.c:602
+#, c-format
+msgid "Could not open the file %s."
+msgstr "E pamundur hapja e file %s."
+
+#: ../gedit/gedit-io-error-message-area.c:390
+#: ../gedit/gedit-io-error-message-area.c:509
+msgid "_Retry"
+msgstr "_Riprovo"
+
+#: ../gedit/gedit-io-error-message-area.c:433
+msgid "gedit cannot find the file. Perhaps it has recently been deleted."
+msgstr ""
+"gedit nuk arrin të gjejë këtë file. Ndoshta është fshirë para pak "
+"kohësh."
+
+#: ../gedit/gedit-io-error-message-area.c:442
 #, c-format
 msgid "Could not revert the file %s."
 msgstr "I pamundur rikthimi i file %s."
 
-#: ../gedit/gedit-io-error-message-area.c:640
+#: ../gedit/gedit-io-error-message-area.c:466
 msgid "Ch_aracter Coding:"
 msgstr "Kodifikimi i gërm_ave:"
 
-#: ../gedit/gedit-io-error-message-area.c:778
+#: ../gedit/gedit-io-error-message-area.c:604
 msgid "gedit has not been able to detect the character coding."
 msgstr "gedit nuk qe në gjëndje të zbulojë kodifikimin e gërmave."
 
-#: ../gedit/gedit-io-error-message-area.c:780
-#: ../gedit/gedit-io-error-message-area.c:789
+#: ../gedit/gedit-io-error-message-area.c:606
+#: ../gedit/gedit-io-error-message-area.c:615
 msgid "Please check that you are not trying to open a binary file."
 msgstr "Kontrollo që nuk po mundohesh të hapësh një file binar."
 
-#: ../gedit/gedit-io-error-message-area.c:781
+#: ../gedit/gedit-io-error-message-area.c:607
 msgid "Select a character coding from the menu and try again."
 msgstr "Zgjidh kodifikimin e gërmave nga menuja dhe provo përsëri."
 
-#: ../gedit/gedit-io-error-message-area.c:786
+#: ../gedit/gedit-io-error-message-area.c:612
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
 msgstr "E pamundur hapja e file %s duke përdorur kodifikimin %s."
 
-#: ../gedit/gedit-io-error-message-area.c:790
-#: ../gedit/gedit-io-error-message-area.c:842
+#: ../gedit/gedit-io-error-message-area.c:616
+#: ../gedit/gedit-io-error-message-area.c:668
 msgid "Select a different character coding from the menu and try again."
 msgstr "Zgjidh një kodifikim tjetër gërmash nga menuja dhe provo përsëri."
 
-#: ../gedit/gedit-io-error-message-area.c:837
+#: ../gedit/gedit-io-error-message-area.c:663
 #, c-format
 msgid "Could not save the file %s using the %s character coding."
 msgstr "E pamundur ruajtja e file %s duke përdorur kodifikimin %s."
 
-#: ../gedit/gedit-io-error-message-area.c:840
+#: ../gedit/gedit-io-error-message-area.c:666
 msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
 msgstr ""
-"Dokumenti përmban një apo më shumë gërma që nuk mund të kodifikohen duke "
+"Dokumenti përmban një apo më shumë shkronja që nuk mund të kodifikohen duke "
 "përdorur kodifikimin e përcaktuar të gërmave."
 
-#: ../gedit/gedit-io-error-message-area.c:903
+#: ../gedit/gedit-io-error-message-area.c:729
 msgid "_Edit Anyway"
 msgstr "_Shkruaj sidoqoftë"
 
-#: ../gedit/gedit-io-error-message-area.c:906
+#: ../gedit/gedit-io-error-message-area.c:732
 msgid "_Don't Edit"
 msgstr "_Mos shkruaj"
 
-#: ../gedit/gedit-io-error-message-area.c:921
+#: ../gedit/gedit-io-error-message-area.c:747
 #, c-format
 msgid "This file (%s) is already open in another gedit window."
 msgstr "File (%s) është hapur rregullisht në një dritare tjetër gedit."
 
-#: ../gedit/gedit-io-error-message-area.c:936
+#: ../gedit/gedit-io-error-message-area.c:762
 msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
@@ -1610,41 +1448,39 @@ msgstr ""
 "gedit ka hapur këtë instancë të file në menyrë të pa-shkruajtshme. Dëshiron "
 "ta shkruash sidoqoftë?"
 
-#: ../gedit/gedit-io-error-message-area.c:994
-#: ../gedit/gedit-io-error-message-area.c:1089
+#: ../gedit/gedit-io-error-message-area.c:820
+#: ../gedit/gedit-io-error-message-area.c:915
 msgid "S_ave Anyway"
 msgstr "Ru_aj sidoqoftë"
 
-#: ../gedit/gedit-io-error-message-area.c:998
-#: ../gedit/gedit-io-error-message-area.c:1093
+#: ../gedit/gedit-io-error-message-area.c:824
+#: ../gedit/gedit-io-error-message-area.c:919
 msgid "D_on't Save"
 msgstr "M_os ruaj"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1016
+#: ../gedit/gedit-io-error-message-area.c:842
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "File %s ka pësuar ndryshime që nga leximi i tij."
 
-#: ../gedit/gedit-io-error-message-area.c:1032
+#: ../gedit/gedit-io-error-message-area.c:858
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
-msgstr ""
-"Nëse e ruani, të gjitha ndryshimet e jashtme do të humbasin. Ruan sidoqoftë?"
+msgstr "Nëse e ruani, të gjitha ndryshimet e jashtme do të humbasin. Ruan sidoqoftë?"
 
-#: ../gedit/gedit-io-error-message-area.c:1111
+#: ../gedit/gedit-io-error-message-area.c:937
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "Krijimi i një file backup u bë i pamundur gjatë ruajtjes së %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1114
+#: ../gedit/gedit-io-error-message-area.c:940
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
-msgstr ""
-"Krijimi i një file backup të përkohshëm u bë i pamundur gjatë ruajtjes së %s"
+msgstr "Krijimi i një file backup të përkohshëm u bë i pamundur gjatë ruajtjes së %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1131
+#: ../gedit/gedit-io-error-message-area.c:957
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1656,7 +1492,7 @@ msgstr ""
 "versioni i vjetër i file. Ruan sidoqoftë?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1192
+#: ../gedit/gedit-io-error-message-area.c:1018
 #, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
@@ -1665,16 +1501,60 @@ msgstr ""
 "gedit nuk mund të trajtojë pozicionet %s në modalitet shkrimi. Të lutem, "
 "kontrollo që e ke shkruar si duhet pozicionin dhe provo përsëri."
 
-#: ../gedit/gedit-io-error-message-area.c:1200
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1026
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
 msgstr ""
-"gedit nuk mund të trajtojë këtë pozicion në modalitet shkrimi. Të lutem, "
-"kontrollo që ke shkruar si duhet pozicionin dhe provo përsëri."
+"gedit nuk mund të trajtojë këtë pozicion në modalitet shkrimi. "
+"Kontrollo që e ke shkruar si duhet pozicionin dhe provo përsëri."
 
-#: ../gedit/gedit-io-error-message-area.c:1209
+#: ../gedit/gedit-io-error-message-area.c:1035
+#, c-format
+msgid ""
+"%s is not a valid location. Please check that you typed the location "
+"correctly and try again."
+msgstr ""
+"%s nuk është një pozicion i vlefshëm. Të lutem, kontrollo që e ke shkruar "
+"si duhet pozicionin dhe provo përsëri."
+
+#: ../gedit/gedit-io-error-message-area.c:1041
+msgid ""
+"You do not have the permissions necessary to save the file. Please check "
+"that you typed the location correctly and try again."
+msgstr ""
+"Mungojnë të drejtat e duhura për të ruajtur file. Kontrollo që ke shkruar "
+"si duhet pozicionin dhe provo përsëri."
+
+#: ../gedit/gedit-io-error-message-area.c:1047
+msgid ""
+"There is not enough disk space to save the file. Please free some disk space "
+"and try again."
+msgstr ""
+"Hapësirë e pamjaftueshme në disk për të ruajtur file. Liro pak hapësirë në "
+"disk dhe provo përsëri."
+
+#: ../gedit/gedit-io-error-message-area.c:1052
+msgid ""
+"You are trying to save the file on a read-only disk. Please check that you "
+"typed the location correctly and try again."
+msgstr ""
+"Përpjekje për të ruajtur këtë file në një disk në vetëm-lexim. Kontrollo "
+"që ke shkruar si duhet pozicionin dhe provo përsëri."
+
+#: ../gedit/gedit-io-error-message-area.c:1058
+msgid "A file with the same name already exists. Please use a different name."
+msgstr "Një file me të njëjtin emër ekziston rregullisht. Përdor një emër tjetër."
+
+#: ../gedit/gedit-io-error-message-area.c:1063
+msgid ""
+"The disk where you are trying to save the file has a limitation on length of "
+"the file names. Please use a shorter name."
+msgstr ""
+"Disku ku po përpiqeni të ruani këtë file kufizon gjatësinë e emrave. "
+"Përdor një emër më të shkurtër."
+
+#: ../gedit/gedit-io-error-message-area.c:1070
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1684,84 +1564,7 @@ msgstr ""
 "madhësinë e file.  Provo të ruash një file më të vogël ose ruaje në një disk "
 "ku limitet nuk ekzistojnë."
 
-#: ../gedit/gedit-io-error-message-area.c:1216
-#, fuzzy, c-format
-msgid ""
-"%s is not a valid location. Please check that you typed the location "
-"correctly and try again."
-msgstr ""
-"%s nuk është një pozicion i vlefshëm. Të lutem, kontrollo që e ke shkruar si "
-"duhet pozicionin dhe provo përsëri."
-
-#: ../gedit/gedit-io-error-message-area.c:1223
-#, fuzzy
-msgid ""
-"You do not have the permissions necessary to save the file. Please check "
-"that you typed the location correctly and try again."
-msgstr ""
-"Nuk ke të drejtat e nevojshme për të ruajtur këtë file. Të lutem, kontrollo "
-"që ke shkruar si duhet pozicionin dhe provo përsëri."
-
-#: ../gedit/gedit-io-error-message-area.c:1235
-#, fuzzy, c-format
-msgid ""
-"%s is a directory. Please check that you typed the location correctly and "
-"try again."
-msgstr ""
-"%s është një directory. Ju lutem, kontrolloni që e keni shkruar si duhet "
-"pozicionin dhe provoni përsëri."
-
-#: ../gedit/gedit-io-error-message-area.c:1241
-#, fuzzy
-msgid ""
-"Not enough available memory to save the file. Please close some running "
-"applications and try again."
-msgstr ""
-"Memorje e pamjaftueshme për të ruajtur këtë file. Të lutem, mbyll ndonjë nga "
-"aplikativët në përdorim dhe provo përsëri."
-
-#: ../gedit/gedit-io-error-message-area.c:1317
-#, fuzzy
-msgid ""
-"There is not enough disk space to save the file. Please free some disk space "
-"and try again."
-msgstr ""
-"Hapësirë e pamjaftueshme në disk për të ruajtur këtë file. Liro pak vend në "
-"disk dhe provo përsëri."
-
-#: ../gedit/gedit-io-error-message-area.c:1323
-#, fuzzy
-msgid ""
-"You are trying to save the file on a read-only disk. Please check that you "
-"typed the location correctly and try again."
-msgstr ""
-"Po mundoheni të ruani këtë file në një disk ku nuk mund të shkruhet. Të "
-"lutem, kontrollo që e ke shkruar si duhet pozicionin dhe provo përsëri."
-
-#: ../gedit/gedit-io-error-message-area.c:1329
-#, fuzzy
-msgid "A file with the same name already exists. Please use a different name."
-msgstr "Një file me të njëjtin emër ekziston. Përdor një emër tjetër."
-
-#: ../gedit/gedit-io-error-message-area.c:1334
-#, fuzzy
-msgid ""
-"The disk where you are trying to save the file has a limitation on length of "
-"the file names. Please use a shorter name."
-msgstr ""
-"Disku ku po përpiqeni të ruani këtë file ka kufizim në gjatësinë e emrit të "
-"file. Përdor një emër më të shkurtër."
-
-#: ../gedit/gedit-io-error-message-area.c:1343
-#, fuzzy, c-format
-msgid ""
-"%s is not a regular file. Please check that you typed the location correctly "
-"and try again."
-msgstr ""
-"%s nuk është një file i rregullt. Të lutem, kontrollo që e ke shkruar si "
-"duhet pozicionin dhe provo përsëri."
-
-#: ../gedit/gedit-io-error-message-area.c:1386
+#: ../gedit/gedit-io-error-message-area.c:1085
 #, c-format
 msgid "Could not save the file %s."
 msgstr "E pamundur ruajtja e file %s."
@@ -1769,28 +1572,25 @@ msgstr "E pamundur ruajtja e file %s."
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1428
-#, fuzzy, c-format
+#: ../gedit/gedit-io-error-message-area.c:1127
+#, c-format
 msgid "The file %s changed on disk."
-msgstr "File %s është hapur njëherë."
+msgstr "File %s është ndryshuar në disk."
 
-#: ../gedit/gedit-io-error-message-area.c:1433
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1132
 msgid "Do you want to drop your changes and reload the file?"
-msgstr "dhe file?"
+msgstr "Lë pas dore ndryshimet e kryera dhe ngarkon përsëri këtë file?"
 
-#: ../gedit/gedit-io-error-message-area.c:1435
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1134
 msgid "Do you want to reload the file?"
-msgstr "Fjala që dëshiron të kërkosh"
+msgstr "Dëshiron të ringarkosh file?"
 
-#: ../gedit/gedit-io-error-message-area.c:1445
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1144
 msgid "_Reload"
-msgstr "_Zëvendëso"
+msgstr "_Ringarko"
 
 #. bad bad luck...
-#: ../gedit/gedit-local-document-saver.c:361
+#: ../gedit/gedit-local-document-saver.c:360
 msgid "Could not obtain backup filename"
 msgstr "E pamundur marrja e emrit të file backup"
 
@@ -1798,161 +1598,184 @@ msgstr "E pamundur marrja e emrit të file backup"
 msgid "Close document"
 msgstr "Mbyll dokumentin"
 
-#: ../gedit/gedit-panel.c:361 ../gedit/gedit-panel.c:569
+#: ../gedit/gedit-panel.c:364 ../gedit/gedit-panel.c:572
 msgid "Empty"
 msgstr "Bosh"
 
-#: ../gedit/gedit-panel.c:514 ../gedit/gedit-panel.c:588
+#: ../gedit/gedit-panel.c:517 ../gedit/gedit-panel.c:591
 msgid "Hide panel"
 msgstr "Fshih panelin"
 
-#: ../gedit/gedit-plugin-manager.c:55
+#: ../gedit/gedit-plugin-manager.c:54
 msgid "Plugin"
 msgstr "Plugin"
 
-#: ../gedit/gedit-plugin-manager.c:56
+#: ../gedit/gedit-plugin-manager.c:55
 msgid "Enabled"
 msgstr "Aktiv"
 
-#: ../gedit/gedit-plugin-manager.c:514
-#, fuzzy
+#: ../gedit/gedit-plugin-manager.c:503
 msgid "_About"
-msgstr "_Informacione në lidhje me plugin"
+msgstr "_Informacione"
 
-#: ../gedit/gedit-plugin-manager.c:522
-#, fuzzy
+#: ../gedit/gedit-plugin-manager.c:511
 msgid "C_onfigure"
-msgstr "K_onfiguro plugin"
+msgstr "K_onfigurimi"
 
-#: ../gedit/gedit-plugin-manager.c:532
-#, fuzzy
+#: ../gedit/gedit-plugin-manager.c:520
 msgid "A_ctivate"
-msgstr "Aktivo %s"
+msgstr "A_ktivizo"
 
-#: ../gedit/gedit-plugin-manager.c:544
-#, fuzzy
+#: ../gedit/gedit-plugin-manager.c:531
 msgid "Ac_tivate All"
-msgstr "Aktivo %s"
+msgstr "Ak_tivizoi të gjithë"
 
-#: ../gedit/gedit-plugin-manager.c:549
-#, fuzzy
+#: ../gedit/gedit-plugin-manager.c:536
 msgid "_Deactivate All"
-msgstr "_Ruaj gjithçka"
+msgstr "Ç_aktivizoi të gjithë"
 
-#: ../gedit/gedit-plugin-manager.c:794
+#: ../gedit/gedit-plugin-manager.c:824
 msgid "_About Plugin"
-msgstr "_Informacione në lidhje me plugin"
+msgstr "Inform_acione në lidhje me plugin"
 
-#: ../gedit/gedit-plugin-manager.c:798
+#: ../gedit/gedit-plugin-manager.c:828
 msgid "C_onfigure Plugin"
 msgstr "K_onfiguro plugin"
 
-#: ../gedit/gedit-prefs-manager.c:171
+#: ../gedit/gedit-prefs-manager.c:170
 msgid "Cannot initialize preferences manager."
 msgstr "Nuk arrij të nis manazhuesin e preferimeve."
 
-#: ../gedit/gedit-prefs-manager.c:1280
+#: ../gedit/gedit-prefs-manager.c:1102
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Pritej vlera `%s' por u mor vlera `%s' për kyçin %s"
 
-#: ../gedit/gedit-print.c:186
+#: ../gedit/gedit-print-job.c:538
 #, c-format
 msgid "File: %s"
 msgstr "File: %s"
 
-#: ../gedit/gedit-print.c:194
+#: ../gedit/gedit-print-job.c:547
 msgid "Page %N of %Q"
 msgstr "Faqja %N në %Q"
 
-#: ../gedit/gedit-print.c:316
-msgid "Print"
-msgstr "Printo"
+#: ../gedit/gedit-print-job.c:805
+msgid "Preparing..."
+msgstr "Duke përgatitur..."
 
-#: ../gedit/gedit-print.c:328 ../plugins/docinfo/docinfo.glade2.h:9
-msgid "Lines"
-msgstr "Rreshta"
+#: ../gedit/gedit-print-preferences.ui.h:1
+msgid "<b>Fonts</b>"
+msgstr "<b>Gërmat</b>"
 
-#: ../gedit/gedit-print-job-preview.c:621
-msgid "Page Preview"
-msgstr "Pamja e parë e printimit"
+#: ../gedit/gedit-print-preferences.ui.h:3
+msgid "<b>Page header</b>"
+msgstr "<b>Header i faqes</b>"
 
-#: ../gedit/gedit-print-job-preview.c:622
-msgid "The preview of a page in the document to be printed"
-msgstr "Pamja e parë e një faqe të dokumentit që do të printohet"
+#: ../gedit/gedit-print-preferences.ui.h:4
+msgid "<b>Syntax Highlighting</b>"
+msgstr "<b>Vënia në dukje e sintaksës</b>"
 
-#: ../gedit/gedit-print-job-preview.c:708
-msgid "Other"
-msgstr "Tjetër"
+#: ../gedit/gedit-print-preferences.ui.h:8
+msgid "He_aders and footers:"
+msgstr "Fillimi i f_aqes dhe fundi i faqes:"
 
-#: ../gedit/gedit-print-job-preview.c:738
+#: ../gedit/gedit-print-preferences.ui.h:9
+msgid "Print line nu_mbers"
+msgstr "Printo nu_mrat e rreshtave"
+
+#: ../gedit/gedit-print-preferences.ui.h:10
+msgid "Print page _headers"
+msgstr "Printo _header e faqeve"
+
+#: ../gedit/gedit-print-preferences.ui.h:11
+msgid "Print synta_x highlighting"
+msgstr "Printo vënien në dukje të sinta_ksës"
+
+#: ../gedit/gedit-print-preferences.ui.h:12
+msgid "_Body:"
+msgstr "_Trupi:"
+
+#: ../gedit/gedit-print-preferences.ui.h:13
+msgid "_Line numbers:"
+msgstr "Numrat e _rreshtit:"
+
+#: ../gedit/gedit-print-preferences.ui.h:14
+msgid "_Number every"
+msgstr "_Numër çdo"
+
+#: ../gedit/gedit-print-preferences.ui.h:15
+msgid "_Restore Default Fonts"
+msgstr "_Rivendos gërmat e prezgjedhura"
+
+#: ../gedit/gedit-print-preferences.ui.h:16
+msgid "lines"
+msgstr "rreshta"
+
+#: ../gedit/gedit-print-preview.c:563
 msgid "Show the previous page"
 msgstr "Shfaq faqen paraardhëse"
 
-#: ../gedit/gedit-print-job-preview.c:749
+#: ../gedit/gedit-print-preview.c:577
 msgid "Show the next page"
 msgstr "Shfaq faqen në vazhdim"
 
-#: ../gedit/gedit-print-job-preview.c:764
+#: ../gedit/gedit-print-preview.c:594
 msgid "Current page (Alt+P)"
 msgstr "Faqja aktuale (Alt+P)"
 
-#. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
-#. We are displaying 'XXX of XXX'.
-#: ../gedit/gedit-print-job-preview.c:777
+#: ../gedit/gedit-print-preview.c:616
 msgid "of"
 msgstr "nga"
 
-#: ../gedit/gedit-print-job-preview.c:783
+#: ../gedit/gedit-print-preview.c:624
 msgid "Page total"
 msgstr "Gjithsej faqe"
 
-#: ../gedit/gedit-print-job-preview.c:784
+#: ../gedit/gedit-print-preview.c:625
 msgid "The total number of pages in the document"
 msgstr "Numri i përgjithshëm i faqeve në dokument"
 
-#: ../gedit/gedit-print-job-preview.c:801
+#: ../gedit/gedit-print-preview.c:644
 msgid "Show multiple pages"
 msgstr "Shfaq faqet shumëfishe"
 
-#: ../gedit/gedit-print-job-preview.c:813
+#: ../gedit/gedit-print-preview.c:659
 msgid "Zoom 1:1"
 msgstr "Shkalla 1:1"
 
-#: ../gedit/gedit-print-job-preview.c:821
+#: ../gedit/gedit-print-preview.c:670
 msgid "Zoom to fit the whole page"
 msgstr "Përshtatja faqes"
 
-#: ../gedit/gedit-print-job-preview.c:830
+#: ../gedit/gedit-print-preview.c:681
 msgid "Zoom the page in"
 msgstr "Zmadho faqen"
 
-#: ../gedit/gedit-print-job-preview.c:838
+#: ../gedit/gedit-print-preview.c:692
 msgid "Zoom the page out"
 msgstr "Zvogëlo faqen"
 
-#: ../gedit/gedit-print-job-preview.c:848
-#, fuzzy
+#: ../gedit/gedit-print-preview.c:704
 msgid "_Close Preview"
-msgstr "Mbyll pamjen e parë të printimit"
+msgstr "_Mbyll pamjen e parë"
 
-#: ../gedit/gedit-print-job-preview.c:852
+#: ../gedit/gedit-print-preview.c:708
 msgid "Close print preview"
 msgstr "Mbyll pamjen e parë të printimit"
 
-#: ../gedit/gedit-print-job-preview.c:1092
-#: ../gedit/gedit-print-job-preview.c:1093
-msgid "Number of pages horizontally"
-msgstr "Numri i faqeve horizontalisht"
+#: ../gedit/gedit-print-preview.c:774
+#, c-format
+msgid "Page %d of %d"
+msgstr "Faqja %d në %d"
 
-#: ../gedit/gedit-print-job-preview.c:1096
-#: ../gedit/gedit-print-job-preview.c:1097
-msgid "Number of pages vertically"
-msgstr "Numër i faqeve vertikalisht"
+#: ../gedit/gedit-print-preview.c:958
+msgid "Page Preview"
+msgstr "Pamja e parë e printimit"
 
-#: ../gedit/gedit-print-job-preview.c:1161
-msgid "No visible output was created."
-msgstr "Nuk është krijuar asnjë rezultat i dukshëm."
+#: ../gedit/gedit-print-preview.c:959
+msgid "The preview of a page in the document to be printed"
+msgstr "Pamja e parë e një faqe të dokumentit që do të printohet"
 
 #: ../gedit/gedit-statusbar.c:248
 msgid "  OVR"
@@ -1977,86 +1800,81 @@ msgstr[0] "Ka një skedë me gabime"
 msgstr[1] "Ka %d skeda me gabime"
 
 #: ../gedit/gedit-style-scheme-manager.c:214
-#, fuzzy, c-format
+#, c-format
 msgid "Directory '%s' could not be created: g_mkdir_with_parents() failed: %s"
-msgstr "Directory nuk"
+msgstr "I pamundur krijimi i directory '%s': g_mkdir_with_parents() dështoi: %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:663
+#: ../gedit/gedit-tab.c:657
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "Duke rikthyer %s nga %s"
 
-#: ../gedit/gedit-tab.c:670
+#: ../gedit/gedit-tab.c:664
 #, c-format
 msgid "Reverting %s"
 msgstr "Duke rikthyer %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:686
+#: ../gedit/gedit-tab.c:680
 #, c-format
 msgid "Loading %s from %s"
 msgstr "Duke ngarkuar %s nga %s"
 
-#: ../gedit/gedit-tab.c:693
+#: ../gedit/gedit-tab.c:687
 #, c-format
 msgid "Loading %s"
 msgstr "Duke ngarkuar %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:776
+#: ../gedit/gedit-tab.c:770
 #, c-format
 msgid "Saving %s to %s"
 msgstr "Duke ruajtur %s në %s"
 
-#: ../gedit/gedit-tab.c:783
+#: ../gedit/gedit-tab.c:777
 #, c-format
 msgid "Saving %s"
 msgstr "Duke ruajtur %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1646
+#: ../gedit/gedit-tab.c:1657
 msgid "RO"
 msgstr "RO"
 
-#: ../gedit/gedit-tab.c:1691
+#: ../gedit/gedit-tab.c:1703
 #, c-format
 msgid "Error opening file %s"
 msgstr "Gabim gjatë hapjes së file %s"
 
-#: ../gedit/gedit-tab.c:1696
+#: ../gedit/gedit-tab.c:1708
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Gabim gjatë rikthimit të file %s"
 
-#: ../gedit/gedit-tab.c:1701
+#: ../gedit/gedit-tab.c:1713
 #, c-format
 msgid "Error saving file %s"
 msgstr "Gabim gjatë ruajtjes së file %s"
 
-#: ../gedit/gedit-tab.c:1719
+#: ../gedit/gedit-tab.c:1732
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1726
+#: ../gedit/gedit-tab.c:1739
 msgid "Name:"
 msgstr "Emri:"
 
-#: ../gedit/gedit-tab.c:1727
+#: ../gedit/gedit-tab.c:1740
 msgid "MIME Type:"
 msgstr "Lloji i MIME:"
 
-#: ../gedit/gedit-tab.c:1728
+#: ../gedit/gedit-tab.c:1741
 msgid "Encoding:"
 msgstr "Kodifikimi:"
-
-#: ../gedit/gedit-tab.c:2215
-#, c-format
-msgid "Rendering page %d of %d..."
-msgstr "Duke krijuar faqen %d në %d..."
 
 #. Toplevel
 #: ../gedit/gedit-ui.h:49
@@ -2077,7 +1895,7 @@ msgstr "_Kërko"
 
 #: ../gedit/gedit-ui.h:53
 msgid "_Tools"
-msgstr "_Instrumentë"
+msgstr "Ins_trumentë"
 
 #: ../gedit/gedit-ui.h:54
 msgid "_Documents"
@@ -2095,7 +1913,7 @@ msgstr "Krijo një dokument të ri"
 msgid "_Open..."
 msgstr "_Hap..."
 
-#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1468
+#: ../gedit/gedit-ui.h:61 ../gedit/gedit-window.c:1483
 msgid "Open a file"
 msgstr "Hap një file"
 
@@ -2179,7 +1997,7 @@ msgstr "Anullo veprimin e fundit"
 
 #: ../gedit/gedit-ui.h:98
 msgid "Redo the last undone action"
-msgstr "Përsërit veprimin e fundit të anulluar"
+msgstr "Rikthe veprimin e fundit të anulluar"
 
 #: ../gedit/gedit-ui.h:100
 msgid "Cut the selection"
@@ -2213,7 +2031,7 @@ msgstr "Modaliteti i vënies në _dukje"
 #. Search menu
 #: ../gedit/gedit-ui.h:114
 msgid "_Find..."
-msgstr "_Gjej..."
+msgstr "_Kërko..."
 
 #: ../gedit/gedit-ui.h:115
 msgid "Search for text"
@@ -2229,7 +2047,7 @@ msgstr "Kërko në vazhdim për të njëjtin tekst"
 
 #: ../gedit/gedit-ui.h:118
 msgid "Find Pre_vious"
-msgstr "Gjej para_ardhësen"
+msgstr "Gjej Par_aardhësen"
 
 #: ../gedit/gedit-ui.h:119
 msgid "Search backwards for the same text"
@@ -2260,14 +2078,12 @@ msgid "Go to a specific line"
 msgstr "Shko tek një rresht i caktuar"
 
 #: ../gedit/gedit-ui.h:126
-#, fuzzy
 msgid "_Incremental Search..."
-msgstr "Kërko."
+msgstr "Kërkim _inkremental..."
 
 #: ../gedit/gedit-ui.h:127
-#, fuzzy
 msgid "Incrementally search for text"
-msgstr "Kërko për tekstin"
+msgstr "Kryen një kërkim inkremental në tekst"
 
 #. Documents menu
 #: ../gedit/gedit-ui.h:130
@@ -2287,24 +2103,20 @@ msgid "Close all open files"
 msgstr "Mbyll të gjithë files e hapur"
 
 #: ../gedit/gedit-ui.h:134
-#, fuzzy
 msgid "_Previous Document"
-msgstr "_Dokumente"
+msgstr "Dokumenti _paraardhës"
 
 #: ../gedit/gedit-ui.h:135
-#, fuzzy
 msgid "Activate previous document"
-msgstr "Krijo një dokument të ri"
+msgstr "Aktivizon dokumentin paraardhës"
 
 #: ../gedit/gedit-ui.h:136
-#, fuzzy
 msgid "_Next Document"
-msgstr "_Dokumente"
+msgstr "Dokumenti _në vijim"
 
 #: ../gedit/gedit-ui.h:137
-#, fuzzy
 msgid "Activate next document"
-msgstr "Krijo një dokument të ri"
+msgstr "Aktivizon dokumentin pasardhës"
 
 #: ../gedit/gedit-ui.h:138
 msgid "_Move to New Window"
@@ -2316,7 +2128,7 @@ msgstr "Lëviz dokumentin aktual në një dritare të re"
 
 #: ../gedit/gedit-ui.h:146
 msgid "Quit the program"
-msgstr "Mbyll programin"
+msgstr "Dil nga programi"
 
 #: ../gedit/gedit-ui.h:151
 msgid "_Toolbar"
@@ -2350,44 +2162,50 @@ msgstr "_Paneli inferior"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Shfaq apo fshih panelin inferior në dritaren aktuale"
 
-#: ../gedit/gedit-utils.c:1005
-#, c-format
-msgid "Unable to find file %s."
-msgstr "E pamundur gjetja e file %s."
-
-#: ../gedit/gedit-utils.c:1009 ../gedit/gedit-utils.c:1045
+#: ../gedit/gedit-utils.c:1009
 msgid "Please check your installation."
 msgstr "Të lutem kontrollo instalimin."
 
-#: ../gedit/gedit-utils.c:1041
+#: ../gedit/gedit-utils.c:1075
 #, c-format
-msgid "Unable to find the required widgets inside file %s."
-msgstr "E pamundur gjetja e widgets të kërkuar në brendësi të file %s."
+msgid "Unable to open ui file %s. Error: %s"
+msgstr "E pamundur hapja e file ui %s. Gabimi: %s"
+
+#: ../gedit/gedit-utils.c:1094
+#, c-format
+msgid "Unable to find the object '%s' inside file %s."
+msgstr "E pamundur gjetja e objektit '%s' në brendësi të file %s."
+
+#. Translators: '/ on <remote-share>'
+#: ../gedit/gedit-utils.c:1249
+#, c-format
+msgid "/ on %s"
+msgstr "/ tek %s"
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1128
+#: ../gedit/gedit-view.c:1214
 msgid "_Wrap Around"
 msgstr "_Rreth e qark"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1138
+#: ../gedit/gedit-view.c:1224
 msgid "Match _Entire Word Only"
 msgstr "V_etëm fjalën e plotë"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1148
+#: ../gedit/gedit-view.c:1234
 msgid "_Match Case"
-msgstr "Respekto gërma të _Mëdha/vogla"
+msgstr "Respekto shkronja të _mëdha/vogla"
 
-#: ../gedit/gedit-view.c:1236
+#: ../gedit/gedit-view.c:1322
 msgid "String you want to search for"
 msgstr "Fjala që dëshiron të kërkosh"
 
-#: ../gedit/gedit-view.c:1244
+#: ../gedit/gedit-view.c:1330
 msgid "Line you want to move the cursor to"
 msgstr "Rreshti ku doni të çoni kursorin"
 
-#: ../gedit/gedit-window.c:881
+#: ../gedit/gedit-window.c:896
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Përdor mënyrën %s të vënies në dukje"
@@ -2395,75 +2213,73 @@ msgstr "Përdor mënyrën %s të vënies në dukje"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:938
-#, fuzzy
+#: ../gedit/gedit-window.c:953
 msgid "None"
-msgstr "Shënim"
+msgstr "Asnjë"
 
-#: ../gedit/gedit-window.c:939
-#, fuzzy
+#: ../gedit/gedit-window.c:954
 msgid "Disable syntax highlighting"
-msgstr "_Aktivo vënien në dukje të s_intaksës"
+msgstr "Çaktivizo vënien në dukje të sintaksës"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1225
+#: ../gedit/gedit-window.c:1240
 #, c-format
 msgid "Open '%s'"
-msgstr "Hap '%s'"
+msgstr "Hap :'%s'"
 
-#: ../gedit/gedit-window.c:1344
+#: ../gedit/gedit-window.c:1359
 msgid "Save"
 msgstr "Ruaj"
 
-#: ../gedit/gedit-window.c:1472
+#: ../gedit/gedit-window.c:1487
 msgid "Open a recently used file"
 msgstr "Hap një nga file të përdorur të fundit"
 
-#: ../gedit/gedit-window.c:1479
+#: ../gedit/gedit-window.c:1494
 msgid "Open"
 msgstr "Hap"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1529
-#, fuzzy, c-format
+#: ../gedit/gedit-window.c:1544
+#, c-format
 msgid "Activate '%s'"
-msgstr "Aktivo %s"
+msgstr "Aktivo '%s'"
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
 msgid "Change Case"
-msgstr "Ndrysho gërma të mëdha/vogla"
+msgstr "Ndrysho shkronja të mëdha/vogla"
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
 msgid "Changes the case of selected text."
-msgstr "Ndrusho gërma të mëdha/vogla tek teksti i zgjedhur."
+msgstr "Ndrysho shkronja të mëdha/vogla tek teksti i zgjedhur."
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:222
 msgid "C_hange Case"
-msgstr "N_drysho gërma të mëdha/vogla"
+msgstr "N_drysho shkronja të mëdha/vogla"
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:223
 msgid "All _Upper Case"
-msgstr "E gjitha me gërma të _mëdha"
+msgstr "E gjitha me shkronja të _mëdha"
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:224
 msgid "Change selected text to upper case"
-msgstr "Ndrysho në gërma të mëdha tekstin e zgjedhur"
+msgstr "Ndrysho në shkronja të mëdha tekstin e zgjedhur"
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:226
 msgid "All _Lower Case"
-msgstr "E gjitha me gërma të _vogla"
+msgstr "E gjitha me shkronja të _vogla"
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:227
 msgid "Change selected text to lower case"
-msgstr "Ndrysho në gërma të vogla tekstin e zgjedhur"
+msgstr "Ndrysho në shkronja të vogla tekstin e zgjedhur"
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:229
 msgid "_Invert Case"
-msgstr "_Inverto gërma të mëdha/të vogla"
+msgstr "_Inverto shkronja të mëdha/të vogla"
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:230
 msgid "Invert the case of selected text"
-msgstr "Ndrysho gërma të mëdha/vogla tek teksti i zgjedhur"
+msgstr "Ndrysho shkronja të mëdha/vogla tek teksti i zgjedhur"
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:232
 msgid "_Title Case"
@@ -2482,45 +2298,49 @@ msgstr ""
 "gërmave që ai përmban."
 
 #: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
-#: ../plugins/docinfo/docinfo.glade2.h:8
+#: ../plugins/docinfo/docinfo.ui.h:8
 msgid "Document Statistics"
 msgstr "Statistikat e dokumentit"
 
-#: ../plugins/docinfo/docinfo.glade2.h:2
+#: ../plugins/docinfo/docinfo.ui.h:2
 msgid "0"
 msgstr "0"
 
-#: ../plugins/docinfo/docinfo.glade2.h:3
+#: ../plugins/docinfo/docinfo.ui.h:3
 msgid "<span weight=\"bold\">File Name</span>"
 msgstr "<span weight=\"bold\">Emri i file</span>"
 
-#: ../plugins/docinfo/docinfo.glade2.h:4
+#: ../plugins/docinfo/docinfo.ui.h:4
 msgid "Bytes"
 msgstr "Bytes"
 
-#: ../plugins/docinfo/docinfo.glade2.h:5
+#: ../plugins/docinfo/docinfo.ui.h:5
 msgid "Characters (no spaces)"
 msgstr "Gërma (jo hapsirat)"
 
-#: ../plugins/docinfo/docinfo.glade2.h:6
+#: ../plugins/docinfo/docinfo.ui.h:6
 msgid "Characters (with spaces)"
 msgstr "Gërma (së bashku me hapsirat)"
 
-#: ../plugins/docinfo/docinfo.glade2.h:7
+#: ../plugins/docinfo/docinfo.ui.h:7
 msgid "Document"
-msgstr "Dokumenti"
+msgstr "Dokument"
 
-#: ../plugins/docinfo/docinfo.glade2.h:10
+#: ../plugins/docinfo/docinfo.ui.h:9
+msgid "Lines"
+msgstr "Rreshta"
+
+#: ../plugins/docinfo/docinfo.ui.h:10
 msgid "Selection"
 msgstr "Zgjedhja"
 
-#: ../plugins/docinfo/docinfo.glade2.h:11
+#: ../plugins/docinfo/docinfo.ui.h:11
 msgid "Words"
 msgstr "Fjalët"
 
-#: ../plugins/docinfo/docinfo.glade2.h:12
+#: ../plugins/docinfo/docinfo.ui.h:12
 msgid "_Update"
-msgstr "_Rifresko"
+msgstr "_Përditëso"
 
 #: ../plugins/docinfo/gedit-docinfo-plugin.c:411
 msgid "_Document Statistics"
@@ -2538,128 +2358,59 @@ msgstr "Ekzekuto komanda të jashtme dhe script-e shell."
 msgid "External Tools"
 msgstr "Instrumente të jashtëm"
 
-#: ../plugins/externaltools/tools/__init__.py:129
-#, fuzzy
+#: ../plugins/externaltools/tools/__init__.py:126
 msgid "_External Tools..."
-msgstr "Instrumente të jashtëm"
+msgstr "Instrum_entë të jashtëm..."
 
-#: ../plugins/externaltools/tools/__init__.py:131
-#, fuzzy
+#: ../plugins/externaltools/tools/__init__.py:128
 msgid "Opens the External Tools Manager"
-msgstr "Përgjegjësi i instrumentëve të jashtëm"
+msgstr "Hap menazhuesin e instrumentëve të jashtëm"
 
-#: ../plugins/externaltools/tools/__init__.py:161
-#, fuzzy
+#: ../plugins/externaltools/tools/__init__.py:158
 msgid "Shell Output"
-msgstr "_Output:"
+msgstr "Output i shell"
 
-#: ../plugins/externaltools/tools/functions.py:109
+#: ../plugins/externaltools/tools/functions.py:110
 msgid "You must be inside a word to run this command"
-msgstr ""
-"Duhet të ndodhesh në brendësi të një fjale për të ekzekutuar këtë komandë"
+msgstr "Duhet të ndodhesh në brendësi të një fjale për të ekzekutuar këtë komandë"
 
-#: ../plugins/externaltools/tools/functions.py:166
+#: ../plugins/externaltools/tools/functions.py:167
 msgid "Running tool:"
 msgstr "Në ekzekutim:"
 
-#: ../plugins/externaltools/tools/functions.py:188
+#: ../plugins/externaltools/tools/functions.py:190
 msgid "Done."
 msgstr "U plotësua."
 
-#: ../plugins/externaltools/tools/functions.py:190
+#: ../plugins/externaltools/tools/functions.py:192
 msgid "Exited"
 msgstr "U mbyll"
 
-#: ../plugins/externaltools/tools/manager.py:41
-msgid "Nothing"
-msgstr "Asgjë"
-
-#: ../plugins/externaltools/tools/manager.py:42
-msgid "Current document"
-msgstr "Dokumenti aktual"
-
-#: ../plugins/externaltools/tools/manager.py:43
-msgid "Current selection"
-msgstr "Zgjedhja aktuale"
-
-#: ../plugins/externaltools/tools/manager.py:44
-msgid "Current line"
-msgstr "Rreshti aktual"
-
-#: ../plugins/externaltools/tools/manager.py:45
-msgid "Current word"
-msgstr "Fjala aktuale"
-
-#: ../plugins/externaltools/tools/manager.py:48
-#, fuzzy
-msgid "Display in bottom pane"
-msgstr "Shfaq numrat e rreshtave"
-
-#: ../plugins/externaltools/tools/manager.py:49
-msgid "Create new document"
-msgstr "Krijo një dokument të ri"
-
-#: ../plugins/externaltools/tools/manager.py:50
-msgid "Append to current document"
-msgstr "Shtoja dokumentit aktual"
-
-#: ../plugins/externaltools/tools/manager.py:51
-msgid "Replace current document"
-msgstr "Zëvendëso dokumentin aktual"
-
-#: ../plugins/externaltools/tools/manager.py:52
-msgid "Replace current selection"
-msgstr "Zëvendëso pjesën e zgjedhur"
-
-#: ../plugins/externaltools/tools/manager.py:53
-msgid "Insert at cursor position"
-msgstr "Shto tek pozicioni i kursorit"
-
-#: ../plugins/externaltools/tools/manager.py:56
-msgid "All documents"
-msgstr "Të gjithë dokumentët"
-
-#: ../plugins/externaltools/tools/manager.py:57
-msgid "All documents except untitled ones"
-msgstr "Të gjithë dokumentët me përjashtim të atyre pa titull"
-
-#: ../plugins/externaltools/tools/manager.py:58
-msgid "Local files only"
-msgstr "Vetëm files lokalë"
-
-#: ../plugins/externaltools/tools/manager.py:59
-msgid "Remote files only"
-msgstr "Vetëm files remote"
-
-#: ../plugins/externaltools/tools/manager.py:60
-msgid "Untitled documents only"
-msgstr "Vetëm dokumentët pa tituj"
-
-#: ../plugins/externaltools/tools/manager.py:200
-#: ../plugins/externaltools/tools/manager.py:230
-#: ../plugins/externaltools/tools/manager.py:278
+#: ../plugins/externaltools/tools/manager.py:158
+#: ../plugins/externaltools/tools/manager.py:187
+#: ../plugins/externaltools/tools/manager.py:235
 #, python-format
 msgid "Edit tool <i>%s</i>:"
 msgstr "Ndrysho instrumentin <i>%s</i>:"
 
-#: ../plugins/externaltools/tools/manager.py:204
+#: ../plugins/externaltools/tools/manager.py:162
 msgid "A Brand New Tool"
 msgstr "Instrument i ri krijimi"
 
-#: ../plugins/externaltools/tools/manager.py:239
+#: ../plugins/externaltools/tools/manager.py:196
 msgid "New tool"
 msgstr "Instrument i re"
 
-#: ../plugins/externaltools/tools/manager.py:314
+#: ../plugins/externaltools/tools/manager.py:272
 #, python-format
 msgid "This accelerator is already bound to %s"
 msgstr "Ky përshpejtues ekziston e të çon tek %s"
 
-#: ../plugins/externaltools/tools/manager.py:360
+#: ../plugins/externaltools/tools/manager.py:318
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Shkruaj një përshpejtues të ri, ose shtyp \"Backspace\" për t'a fshirë"
 
-#: ../plugins/externaltools/tools/manager.py:362
+#: ../plugins/externaltools/tools/manager.py:320
 msgid "Type a new accelerator"
 msgstr "Shkruaj një përshpejtues të ri"
 
@@ -2667,504 +2418,515 @@ msgstr "Shkruaj një përshpejtues të ri"
 msgid "Stopped."
 msgstr "U ndërpre."
 
-#: ../plugins/externaltools/tools/tools.glade.h:2
+#: ../plugins/externaltools/tools/tools.ui.h:2
+msgid "All documents"
+msgstr "Të gjithë dokumentët"
+
+#: ../plugins/externaltools/tools/tools.ui.h:3
+msgid "All documents except untitled ones"
+msgstr "Të gjithë dokumentët me përjashtim të atyre pa titull"
+
+#: ../plugins/externaltools/tools/tools.ui.h:4
+msgid "Append to current document"
+msgstr "Shtoja dokumentit aktual"
+
+#: ../plugins/externaltools/tools/tools.ui.h:5
 msgid "Co_mmand(s):"
 msgstr "Ko_manda(t):"
 
-#: ../plugins/externaltools/tools/tools.glade.h:3
+#: ../plugins/externaltools/tools/tools.ui.h:6
+msgid "Create new document"
+msgstr "Krijo një dokument të ri"
+
+#: ../plugins/externaltools/tools/tools.ui.h:7
+msgid "Current document"
+msgstr "Dokumenti aktual"
+
+#: ../plugins/externaltools/tools/tools.ui.h:8
+msgid "Current line"
+msgstr "Rreshti aktual"
+
+#: ../plugins/externaltools/tools/tools.ui.h:9
+msgid "Current selection"
+msgstr "Zgjedhja aktuale"
+
+#: ../plugins/externaltools/tools/tools.ui.h:10
+msgid "Current word"
+msgstr "Fjala aktuale"
+
+#: ../plugins/externaltools/tools/tools.ui.h:11
+msgid "Display in bottom pane"
+msgstr "Shfaq në panelin inferior"
+
+#: ../plugins/externaltools/tools/tools.ui.h:12
 msgid "Edit tool <i>make</i>:"
 msgstr "Ndrysho instrumentin <i>make</i>:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:4
+#: ../plugins/externaltools/tools/tools.ui.h:13
 msgid "External Tools Manager"
 msgstr "Përgjegjësi i instrumentëve të jashtëm"
 
-#: ../plugins/externaltools/tools/tools.glade.h:5
-msgid ""
-"Nothing\n"
-"Current document\n"
-"All documents"
-msgstr ""
-"Asgjë\n"
-"Dokumenti aktual\n"
-"Të gjithë dokumentët"
+#: ../plugins/externaltools/tools/tools.ui.h:14
+msgid "Insert at cursor position"
+msgstr "Shto tek pozicioni i kursorit"
 
-#: ../plugins/externaltools/tools/tools.glade.h:8
+#: ../plugins/externaltools/tools/tools.ui.h:15
+msgid "Local files only"
+msgstr "Vetëm files lokalë"
+
+#: ../plugins/externaltools/tools/tools.ui.h:16
+msgid "Nothing"
+msgstr "Asgjë"
+
+#: ../plugins/externaltools/tools/tools.ui.h:17
+msgid "Remote files only"
+msgstr "Vetëm files remote"
+
+#: ../plugins/externaltools/tools/tools.ui.h:18
+msgid "Replace current document"
+msgstr "Zëvendëso dokumentin aktual"
+
+#: ../plugins/externaltools/tools/tools.ui.h:19
+msgid "Replace current selection"
+msgstr "Zëvendëso pjesën e zgjedhur"
+
+#: ../plugins/externaltools/tools/tools.ui.h:20
+msgid "Untitled documents only"
+msgstr "Vetëm dokumentët pa tituj"
+
+#: ../plugins/externaltools/tools/tools.ui.h:21
 msgid "_Applicability:"
 msgstr "_Aplikueshmëria:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:9
+#: ../plugins/externaltools/tools/tools.ui.h:22
 msgid "_Description:"
 msgstr "_Përshkrimi:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:10
+#: ../plugins/externaltools/tools/tools.ui.h:23
 msgid "_Input:"
 msgstr "_Input:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:11
+#: ../plugins/externaltools/tools/tools.ui.h:24
 msgid "_Output:"
 msgstr "_Output:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:12
+#: ../plugins/externaltools/tools/tools.ui.h:25
 msgid "_Save:"
 msgstr "_Ruaj:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:13
-#, fuzzy
+#: ../plugins/externaltools/tools/tools.ui.h:26
 msgid "_Shortcut Key:"
-msgstr "Kombinimi për_shpejtues Kyçi:"
+msgstr "Kombinimi për_shpejtues:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:14
+#: ../plugins/externaltools/tools/tools.ui.h:27
 msgid "_Tools:"
-msgstr "Ins_Trumentë:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:15
-msgid "gtk-revert-to-saved"
-msgstr ""
+msgstr "Ins_trumentë:"
 
 #: ../plugins/externaltools/data/build.desktop.in.h:1
-#, fuzzy
 msgid "Build"
-msgstr "Me të trasha"
+msgstr "Gjenero"
 
 #: ../plugins/externaltools/data/build.desktop.in.h:2
-#, fuzzy
 msgid "Run \"make\" in the document directory"
-msgstr "Ekzekuto “make” tek dir e dokumentit"
+msgstr "Ekzekuton \"make\" në directory e dokumentit"
 
 #: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:1
-#, fuzzy
 msgid "Open a terminal in the document location"
-msgstr "Hap një file nga pozicioni i specifikuar"
+msgstr "Hap një terminal në pozicionin e dokumentit"
 
 #: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:2
-#, fuzzy
 msgid "Open terminal here"
-msgstr "Hap terminal"
+msgstr "Hap terminalin këtu"
 
 #: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:1
-#, fuzzy
 msgid "Remove trailing spaces"
-msgstr "E_lemino duplikatët"
+msgstr "Hiq hapësirat e fundit të rreshtit"
 
 #: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:2
-#, fuzzy
 msgid "Remove useless trailing spaces in your file"
-msgstr "Hiq në file"
+msgstr "Heq hapësirat e fundit të rreshtit në file"
 
 #: ../plugins/externaltools/data/run-command.desktop.in.h:1
-#, fuzzy
 msgid "Execute a custom command and put its output in a new document"
-msgstr "a e personalizuar dhe në a i ri"
+msgstr ""
+"Ekzekuton një komandë të personalizuar dhe vë rezultatin e saj në "
+"një dokument të ri"
 
 #: ../plugins/externaltools/data/run-command.desktop.in.h:2
-#, fuzzy
 msgid "Run command"
-msgstr "Ekzekuto"
+msgstr "Ekzekuto një komandë"
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Easy file access from the side pane"
-msgstr "I Lehtë file"
+msgstr "Hyrje e lehtësuar në file nga paneli anësor"
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "File Browser Pane"
-msgstr "File Shfletuesi"
+msgstr "Shfletimi i file"
 
-#. Translators: this is used in "file on host", e.g. "/foo/bar on ftp.baz.org"
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:195
-#, fuzzy
-msgid "on"
-msgstr "në"
-
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:330
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:230
 msgid "File System"
-msgstr "File: %s"
+msgstr "File e sistemit"
 
 #. ex:ts=8:noet:
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:1
-#, fuzzy
 msgid "Enable Restore of Remote Locations"
-msgstr "Aktivo nga Lidhja në distancë"
+msgstr "Aktivizo restaurimin e pozicioneve në distancë"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:2
-#, fuzzy
 msgid "File Browser Filter Mode"
-msgstr "File Shfletuesi Filtri Modaliteti"
+msgstr "Modaliteti i filtrimit të shfletimit të file"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:3
-#, fuzzy
 msgid "File Browser Filter Pattern"
-msgstr "File Shfletuesi Filtri Motivi"
+msgstr "Modeli i filtrit të shfletimit të file"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:4
-#, fuzzy
 msgid "File Browser Root Directory"
-msgstr "File Shfletuesi Root Directory"
+msgstr "Directory bazë e shfletimit të file"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:5
-#, fuzzy
 msgid "File Browser Virtual Root Directory"
-msgstr "File Shfletuesi Root Directory"
+msgstr "Directory bazë virtuale e shfletimit të file"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:6
-#, fuzzy
 msgid ""
 "If TRUE the file browser plugin will view the directory of the first opened "
 "document given that the file browser hasn't been used yet. (Thus this "
 "generally applies to opening a document from the command line or opening it "
 "with nautilus etc)"
-msgstr "file nga i pari file a me"
+msgstr ""
+"Nëse TRUE plugin i shfletimit të file shfaq directory e dokumentit të parë "
+"të hapur akoma të papërdorur. (Zakonisht aplikohet në hapjen e një "
+"dokumenti nga rreshti i komandës ose nga nautilus)"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:7
-#, fuzzy
 msgid "Open With Tree View"
-msgstr "Hap Degëzimi Paraqitja"
+msgstr "Hap paraqitjen e degëzuar"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:8
-#, fuzzy
 msgid ""
 "Open the tree view when the file browser plugin gets loaded instead of the "
 "bookmarks view"
-msgstr "Hap degëzim file nga"
+msgstr ""
+"Hap paraqitjen e degëzuar gjatë nisjes së plugin të shfletimit në vend të "
+"paraqitjes me libërshënues"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:9
-#, fuzzy
 msgid "Set Location To First Document"
-msgstr "Vendodhja Për E Para Dokument"
+msgstr "Cakto pozicionin tek dokumenti i parë"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:10
-#, fuzzy
 msgid "Sets whether to enable restoring of remote locations."
-msgstr "nga."
+msgstr "Tregon nëse aktivizohet restaurimi i pozicioneve remote."
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:11
-#, fuzzy
 msgid ""
 "The file browser root directory to use when loading the file browser plugin "
 "and onload/tree_view is TRUE."
-msgstr "file file dhe është."
+msgstr ""
+"Directory bazë për tu përdorur gjatë nisjes së plugin të shfletimit të file "
+"nëse onload/tree_view është TRUE."
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:12
-#, fuzzy
 msgid ""
 "The file browser virtual root directory to use when loading the file browser "
 "plugin when onload/tree_view is TRUE. The virtual root must always be below "
 "the actual root."
-msgstr "file file është."
+msgstr ""
+"Directory bazë virtuale për tu përdorur gjatë nisjes së plugin të shfletimit "
+"të file nëse onload/tree_view është TRUE. Duhet të jetë gjithmonë një "
+"nivel më poshtë se directory bazë aktuale."
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:13
-#, fuzzy
 msgid ""
 "The filter pattern to filter the file browser with. This filter works on top "
 "of the filter_mode."
-msgstr "file _me në sipër nga."
+msgstr ""
+"Model i filtrit me të cilin të filtrohet shfletimi i file. Ky filtër aplikohet në "
+"modalitetin filter_mode"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:14
-#, fuzzy
 msgid ""
 "This value determines what files get filtered from the file browser. Valid "
 "values are: none (filter nothing), hidden (filter hidden files), binary "
 "(filter binary files) and hidden_and_binary (filter both hidden and binary "
 "files)."
-msgstr "file asnjë asgjë dhe dhe."
+msgstr ""
+"Kjo vlerë përcakton se çfarë file filtrohen në shfletimin e file. Vlerat "
+"e mundshme janë: none (asnjë lloj filtrimi), hidden (filtron file e "
+"fshehur), binary (filtron file binarë) dhe hidden_and_binary (filtron si "
+"file e fshehur ashtu dhe file binarë)."
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:596
+msgid "_Set root to active document"
+msgstr "_Cakto dokumentin aktual si bazë"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
-#, fuzzy
-msgid "_Set root to active document"
-msgstr "Zgjith të gjithë dokumentin"
-
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:600
-#, fuzzy
 msgid "Set the root to the active document location"
-msgstr "Rendit dokumentin apo zgjedhjen aktuale."
+msgstr "Cakton si bazë pozicionin e dokumentit aktual"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:603
+msgid "_Open terminal here"
+msgstr "_Hap terminalin këtu"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:605
-#, fuzzy
-msgid "_Open terminal here"
-msgstr "Hap terminal"
-
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:607
-#, fuzzy
 msgid "Open a terminal at the currently opened directory"
-msgstr "Hap a terminal"
+msgstr "Hap një terminal në directory e hapur aktualisht"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:741
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:739
 msgid "File Browser"
-msgstr "File: %s"
-
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:864
-#, fuzzy
-msgid "An error occurred while creating a new directory"
-msgstr "a i ri"
+msgstr "Shfletuesi i file"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:867
-#, fuzzy
+msgid "An error occurred while creating a new directory"
+msgstr "U ndesh një gabim gjatë krijimit të një directory të re"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:870
 msgid "An error occurred while creating a new file"
-msgstr "a i ri file"
+msgstr "U ndesh një gabim gjatë krijimit të një file të ri"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:872
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:875
 msgid "An error occurred while renaming a file or directory"
-msgstr "a file"
+msgstr ""
+"U ndesh një gabim gjatë ndryshimit të emrit të një file apo "
+"directory"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:877
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:880
 msgid "An error occurred while deleting a file or directory"
-msgstr "a file"
+msgstr "U ndesh një gabim gjatë eleminimit të një file apo directory"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:882
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:885
 msgid "An error occurred while opening a directory in the file manager"
-msgstr "a në file"
+msgstr ""
+"U ndesh një gabim gjatë hapjes së një directory në menazhuesin "
+"e file"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:886
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:889
 msgid "An error occurred while setting a root directory"
-msgstr "a"
-
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:890
-#, fuzzy
-msgid "An error occurred while loading a directory"
-msgstr "a"
+msgstr "U ndesh një gabim gjatë përcaktimit të directory bazë"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:893
-#, fuzzy
-msgid "An error occurred"
-msgstr "Ndodhi një gabim"
+msgid "An error occurred while loading a directory"
+msgstr "U ndesh një gabim gjatë ngarkimit të një directory"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1123
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:896
+msgid "An error occurred"
+msgstr "U verifikua një gabim"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1187
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
-msgstr "file Koshi elemino?"
-
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1127
-#, fuzzy, c-format
-msgid "The file \"%s\" cannot be moved to the trash."
-msgstr "File %s ka pësuar ndryshime që nga leximi i tij."
-
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1130
-#, fuzzy
-msgid "The selected files cannot be moved to the trash."
-msgstr "zgjedhur Koshi."
-
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1163
-#, fuzzy, c-format
-msgid "Are you sure you want to permanently delete \"%s\"?"
-msgstr "Të eleminoj përgjithmonë \"%s\"?"
-
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1166
-#, fuzzy
-msgid "Are you sure you want to permanently delete the selected files?"
-msgstr "elemino zgjedhur?"
-
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1169
-#, fuzzy
-msgid "If you delete an item, it is permanently lost."
 msgstr ""
-"Nëse nuk ruani, ndryshimet nga minuta e fundit do të humbin përfundimisht."
+"File nuk mund të çohet në kosh, dëshiron\n"
+"ta eleminosh përgjithmonë?"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1598
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1191
+#, c-format
+msgid "The file \"%s\" cannot be moved to the trash."
+msgstr "E pamundur lëvizja e file «%s» në kosh."
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1194
+msgid "The selected files cannot be moved to the trash."
+msgstr "File e zgjedhur nuk mund të hidhen në kosh."
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1227
+#, c-format
+msgid "Are you sure you want to permanently delete \"%s\"?"
+msgstr "Jeni i sigurt që dëshironi të eleminoni përgjithmonë \"%s\"?"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1230
+msgid "Are you sure you want to permanently delete the selected files?"
+msgstr ""
+"Je i sigurt që dëshiron të eleminosh përgjithmonë file e "
+"zgjedhur?"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1233
+msgid "If you delete an item, it is permanently lost."
+msgstr "Një element i eleminuar do të humbasë përgjithmonë."
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1626
 msgid "(Empty)"
-msgstr "Bosh"
+msgstr "(Bosh)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2641
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1838
-#, fuzzy
-msgid "Invalid uri"
-msgstr "E pavlefshme"
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3122
+msgid ""
+"The renamed file is currently filtered out. You need to adjust your filter "
+"settings to make the file visible"
+msgstr ""
+"File i riemërtuar është përjashtuar nga filtri. Ndrysho rregullimet e filtrit "
+"në menyrë që file të jetë i dukshëm"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3074
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3360
 msgid "file"
-msgstr "_File"
+msgstr "file"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3095
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3142
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3384
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
-msgstr "i ri file është Ti file i dukshëm"
+msgstr ""
+"File i ri është përjashtuar nga filtri. Ndrysho rregullimet e filtrit "
+"në menyrë që file të jetë i dukshëm"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3123
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3412
 msgid "directory"
-msgstr "Lista e directory"
+msgstr "directory"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:736
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3432
+msgid ""
+"The new directory is currently filtered out. You need to adjust your filter "
+"settings to make the directory visible"
+msgstr ""
+"Dirctory e re është përjashtuar nga filtri. Ndrysho rregullimet e filtrit "
+"në menyrë që directory të jetë e dukshme"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:688
 msgid "Bookmarks"
 msgstr "Libërshënues"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:746
-#, fuzzy
-msgid "Recent Files"
-msgstr "Numri maksimum i files të hapur të fundit"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:825
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:766
 msgid "_Filter"
-msgstr "_File"
+msgstr "_Filtro"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:830
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:771
 msgid "_Move To Trash"
-msgstr "Lëvize Për Koshi"
+msgstr "_Lëviz në kosh"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:831
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:772
 msgid "Move selected file or folder to trash"
-msgstr "Lëvize zgjedhur file Koshi"
+msgstr "Lëviz file apo directory e zgjedhur në kosh"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:774
 msgid "_Delete"
-msgstr "Zgjedhur"
+msgstr "_Elemino"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:775
 msgid "Delete selected file or folder"
-msgstr "Fshi tekstin e zgjedhur"
+msgstr "Eleminon file apo kartelën e zgjedhur"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:840
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:781
 msgid "Up"
 msgstr "Sipër"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:841
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:782
 msgid "Open the parent folder"
-msgstr "Ruaj file aktual"
+msgstr "Hap kartelën e nivelit superior"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:846
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:787
 msgid "_New Folder"
-msgstr "Instrument i re"
+msgstr "Kartelë e _re"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:788
 msgid "Add new empty folder"
-msgstr "Shto i ri"
+msgstr "Shton një kartelë të re bosh"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:790
 msgid "New F_ile"
-msgstr "E re F_ile"
+msgstr "F_ile i ri"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:850
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:791
 msgid "Add new empty file"
-msgstr "Shto i ri file"
+msgstr "Shton një file të ri bosh"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:855
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:796
 msgid "_Rename"
-msgstr "_Zëvendëso"
+msgstr "_Riemërto"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:856
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:797
 msgid "Rename selected file or folder"
-msgstr "Riemërto zgjedhur file"
+msgstr "Riemërton file apo kartelën e zgjedhur"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:862
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
 msgid "_Previous Location"
-msgstr "Hap pozicionin"
+msgstr "_Pozicioni paraardhës"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:864
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:805
 msgid "Go to the previous visited location"
-msgstr "Shko tek pozicioni paraardhës i vizituar"
+msgstr "Shkon tek pozicioni paraardhës i vizituar"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:866
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
 msgid "_Next Location"
-msgstr "Hap pozicionin"
+msgstr "Pozicioni në _vijim"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:867
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
 msgid "Go to the next visited location"
-msgstr "Shko tek pozicioni në vazhdim i vizituar"
+msgstr "Shkon tek pozicioni në vijim i vizituar"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:868
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
 msgid "Re_fresh View"
-msgstr "Ri_fresko Paraqitja"
+msgstr "Ri_fresko paraqitjen"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:869
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:810
 msgid "Refresh the view"
-msgstr "Rifresko"
+msgstr "Rifreskon paraqitjen"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:870
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:811
 msgid "_View Folder"
-msgstr "Paraqitja Kartelë"
+msgstr "Shfa_q kartelën"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:871
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:812
 msgid "View folder in file manager"
-msgstr "Paraqitja në file"
+msgstr "Shfaq kartelën në menazhuesin e file"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:878
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
 msgid "Show _Hidden"
-msgstr "S_hfaq"
+msgstr "Shfaq të _padukshmit"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:879
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
 msgid "Show hidden files and folders"
-msgstr "Shfaq dhe"
+msgstr "Shfaq file dhe directory e fshehura"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:881
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
 msgid "Show _Binary"
-msgstr "Shfaq"
+msgstr "Shfaq file _binarë"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:882
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
 msgid "Show binary files"
-msgstr "Shfaq"
+msgstr "Shfaq file binarë"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:987
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1003
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1035
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:928
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:944
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:976
 msgid "Previous location"
-msgstr "Shkurtim"
+msgstr "Pozicioni paraardhës"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:991
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
 msgid "Go to previous location"
-msgstr "Shfaq faqen paraardhëse"
+msgstr "Shkon tek pozicioni paraardhës"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:996
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1028
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:937
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:969
 msgid "Go to a previously opened location"
-msgstr "Shko a pozicioni"
+msgstr "Shkon tek një pozicion i hapur më parë"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1018
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:959
 msgid "Next location"
-msgstr "Hap pozicionin"
+msgstr "Pozicioni në vijim"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1022
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:963
 msgid "Go to next location"
-msgstr "Shko pozicioni"
+msgstr "Shkon tek pozicioni në vijim"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1199
-#, fuzzy
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1142
 msgid "_Match Filename"
-msgstr "Respekto _Gërma të mëdha/vogla"
+msgstr "Emri i file _korrespondues"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1985
+#, c-format
+msgid "No mount object for mounted volume: %s"
+msgstr "Asnjë objekt montimi për volumin e montuar: %s"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2065
+#, c-format
+msgid "Could not open media: %s"
+msgstr "E pamundur hapja e media: %s"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2112
+#, c-format
+msgid "Could not mount volume: %s"
+msgstr "I pamundur montimi i volumit: %s"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -3183,9 +2945,8 @@ msgid "Unindent selected lines"
 msgstr "Elemino ngushtimin për rreshtat e zgjedhur"
 
 #: ../plugins/indent/indent.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Indent Lines"
-msgstr "Ngushto rreshtat"
+msgstr "Apliko një ngushtim rreshtave"
 
 #: ../plugins/indent/indent.gedit-plugin.desktop.in.h:2
 msgid "Indents or un-indents selected lines."
@@ -3200,9 +2961,8 @@ msgid "Modelines"
 msgstr "Modelines"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Interactive python console standing in the bottom panel"
-msgstr "Hap një konsolë interaktive python në panelin inferior."
+msgstr "Hap një konsolë python interaktive në panelin inferior"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
 #: ../plugins/pythonconsole/pythonconsole/__init__.py:45
@@ -3231,293 +2991,275 @@ msgstr "Shton pjesët e përdorura më shpesh të tekstit në menyrë të shpejt
 
 #: ../plugins/snippets/snippets.gedit-plugin.desktop.in.h:2
 msgid "Snippets"
-msgstr "Snippets"
+msgstr "Snippet"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:2
+#: ../plugins/snippets/snippets/snippets.ui.h:2
 msgid "<b>Activation</b>"
-msgstr "<b>Aktivimi</b>"
+msgstr "<b>Aktivizimi</b>"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:3
-#, fuzzy
+#: ../plugins/snippets/snippets/snippets.ui.h:3
 msgid "Create new snippet"
-msgstr "Krijo një dokument të ri"
+msgstr "Krijo snippet të ri"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:4
-#: ../plugins/snippets/snippets/Manager.py:428
-#, fuzzy
+#: ../plugins/snippets/snippets/snippets.ui.h:4
+#: ../plugins/snippets/snippets/Manager.py:407
 msgid "Delete selected snippet"
-msgstr "Fshi tekstin e zgjedhur"
+msgstr "Elemino snippet e zgjedhur"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:5
-#, fuzzy
+#: ../plugins/snippets/snippets/snippets.ui.h:5
 msgid "Export selected snippets"
-msgstr "Ngushto rreshtat e zgjedhur"
+msgstr "Eksporto snippet e zgjedhur"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:6
-#: ../plugins/snippets/snippets/Manager.py:806
-#, fuzzy
+#: ../plugins/snippets/snippets/snippets.ui.h:6
+#: ../plugins/snippets/snippets/Manager.py:789
 msgid "Import snippets"
-msgstr "_Ndrysho pjesën:"
+msgstr "Importo snippet"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:7
-#, fuzzy
+#: ../plugins/snippets/snippets/snippets.ui.h:7
 msgid "S_hortcut key:"
-msgstr "Kombinimi përs_hpejtues:"
+msgstr "Pulsanti për_shpejtues:"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:8
-#, fuzzy
+#: ../plugins/snippets/snippets/snippets.ui.h:8
 msgid "Shortcut key with which the snippet is activated"
-msgstr "Kombinimi përshpejtues me është"
+msgstr "Pulsanti përshpejtues me të cilin snippet aktivizohet"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:9
-#: ../plugins/snippets/snippets/Manager.py:697
-#, fuzzy
+#: ../plugins/snippets/snippets/snippets.ui.h:9
+#: ../plugins/snippets/snippets/Manager.py:678
 msgid "Single word with which the snippet is activated after pressing tab"
-msgstr "me është mbas tab"
+msgstr ""
+"Fjala e vetme me të cilën snippet aktivizohet mbas shtypjes së "
+"pulsantit tab"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:10
+#: ../plugins/snippets/snippets/snippets.ui.h:10
 msgid "Snippets Manager"
-msgstr "Përgjegjësi i snippets"
+msgstr "Menazhuesi i snippet"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:11
-#, fuzzy
+#: ../plugins/snippets/snippets/snippets.ui.h:11
 msgid "_Drop targets:"
-msgstr "Destinimi i frame"
+msgstr "Ri_lësho objektivët:"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:12
-#, fuzzy
+#: ../plugins/snippets/snippets/snippets.ui.h:12
 msgid "_Edit:"
-msgstr "_Ndrysho"
+msgstr "_Ndrysho:"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:13
+#: ../plugins/snippets/snippets/snippets.ui.h:13
 msgid "_Snippets:"
-msgstr "_Snippets:"
+msgstr "_Snippet:"
 
-#. "tab" here means the tab key, not the notebook tab!
-#: ../plugins/snippets/snippets/snippets.glade.h:15
+#: ../plugins/snippets/snippets/snippets.ui.h:14
 msgid "_Tab trigger:"
 msgstr "_Tab trigger:"
 
 #: ../plugins/snippets/snippets/WindowHelper.py:74
 msgid "Manage _Snippets..."
-msgstr "Trajto _Snippets..."
+msgstr "Menazhuesi i _snippet..."
 
 #: ../plugins/snippets/snippets/WindowHelper.py:75
 msgid "Manage snippets"
-msgstr "Trajto snippets"
+msgstr "Menazhon snippet"
 
-#: ../plugins/snippets/snippets/Manager.py:46
-#, fuzzy
+#: ../plugins/snippets/snippets/Manager.py:45
 msgid "Snippets archive"
-msgstr "Përgjegjësi i snippets"
+msgstr "Arkivi i snippet"
 
-#: ../plugins/snippets/snippets/Manager.py:70
+#: ../plugins/snippets/snippets/Manager.py:69
 msgid "Add a new snippet..."
-msgstr "Shto një copë të re..."
+msgstr "Shto një snippet të ri..."
 
-#: ../plugins/snippets/snippets/Manager.py:120
+#: ../plugins/snippets/snippets/Manager.py:119
 msgid "Global"
 msgstr "Global"
 
-#: ../plugins/snippets/snippets/Manager.py:425
-#, fuzzy
+#: ../plugins/snippets/snippets/Manager.py:404
 msgid "Revert selected snippet"
-msgstr "Fshi tekstin e zgjedhur"
+msgstr "Rikthe snippet e zgjedhur"
 
-#: ../plugins/snippets/snippets/Manager.py:692
-#, fuzzy
+#: ../plugins/snippets/snippets/Manager.py:673
 msgid ""
 "This is not a valid tab trigger. Triggers can either contain letters or a "
 "single, non alphanumeric, character like {, [, etcetera."
-msgstr "është nuk a tab a."
+msgstr ""
+"Nuk është një tab trigger i vlefshëm. Trigger-ët mund të përmbajnë "
+"shkronja ose një simbol të vetëm, jo alfanumerik, si {, [, etj... ."
 
-#: ../plugins/snippets/snippets/Manager.py:785
-#, fuzzy, python-format
+#: ../plugins/snippets/snippets/Manager.py:768
+#, python-format
 msgid "The following error occurred while importing: %s"
-msgstr "vijues"
+msgstr "Gjatë importimit u ndesh gabimi në vijim: %s"
 
-#: ../plugins/snippets/snippets/Manager.py:792
-#, fuzzy
+#: ../plugins/snippets/snippets/Manager.py:775
 msgid "Import succesfully completed"
-msgstr "Importo"
+msgstr "Importimi u plotësua me sukses"
 
-#: ../plugins/snippets/snippets/Manager.py:811
-#: ../plugins/snippets/snippets/Manager.py:897
-#: ../plugins/snippets/snippets/Manager.py:960
-#, fuzzy
+#: ../plugins/snippets/snippets/Manager.py:794
+#: ../plugins/snippets/snippets/Manager.py:880
+#: ../plugins/snippets/snippets/Manager.py:943
 msgid "All supported archives"
-msgstr "Listë arkivesh të ndarë me hapësirë"
+msgstr "Të gjithë arkivët e suportuar"
 
-#: ../plugins/snippets/snippets/Manager.py:812
-#: ../plugins/snippets/snippets/Manager.py:898
-#: ../plugins/snippets/snippets/Manager.py:961
+#: ../plugins/snippets/snippets/Manager.py:795
+#: ../plugins/snippets/snippets/Manager.py:881
+#: ../plugins/snippets/snippets/Manager.py:944
 msgid "Gzip compressed archive"
-msgstr ""
+msgstr "Arkiv i kompresuar me gzip"
 
-#: ../plugins/snippets/snippets/Manager.py:813
-#: ../plugins/snippets/snippets/Manager.py:899
-#: ../plugins/snippets/snippets/Manager.py:962
+#: ../plugins/snippets/snippets/Manager.py:796
+#: ../plugins/snippets/snippets/Manager.py:882
+#: ../plugins/snippets/snippets/Manager.py:945
 msgid "Bzip compressed archive"
-msgstr ""
+msgstr "Arkiv i kompresuar me bzip"
+
+#: ../plugins/snippets/snippets/Manager.py:797
+msgid "Single snippets file"
+msgstr "File snippet i vetëm"
+
+#: ../plugins/snippets/snippets/Manager.py:798
+#: ../plugins/snippets/snippets/Manager.py:884
+#: ../plugins/snippets/snippets/Manager.py:947
+msgid "All files"
+msgstr "Të gjithë file"
+
+#: ../plugins/snippets/snippets/Manager.py:810
+#, python-format
+msgid "The following error occurred while exporting: %s"
+msgstr "Gjatë eksportimit u ndesh gabimi në vijim: %s"
 
 #: ../plugins/snippets/snippets/Manager.py:814
-#, fuzzy
-msgid "Single snippets file"
-msgstr "Trajto snippets"
-
-#: ../plugins/snippets/snippets/Manager.py:815
-#: ../plugins/snippets/snippets/Manager.py:901
-#: ../plugins/snippets/snippets/Manager.py:964
-#, fuzzy
-msgid "All files"
-msgstr "Të gjithë files"
-
-#: ../plugins/snippets/snippets/Manager.py:827
-#, fuzzy, python-format
-msgid "The following error occurred while exporting: %s"
-msgstr "vijues"
-
-#: ../plugins/snippets/snippets/Manager.py:831
-#, fuzzy
 msgid "Export succesfully completed"
-msgstr "Eksporto"
+msgstr "Eksportimi u plotësua me sukses"
 
 #. Ask if system snippets should also be exported
-#: ../plugins/snippets/snippets/Manager.py:871
-#: ../plugins/snippets/snippets/Manager.py:938
-#, fuzzy
+#: ../plugins/snippets/snippets/Manager.py:854
+#: ../plugins/snippets/snippets/Manager.py:921
 msgid "Do you want to include selected <b>system</b> snippets in your export?"
-msgstr "zgjedhur<b></b> në?"
+msgstr "Përfshin në eksportim snippet e zgjedhur të <b> sistemit</b>?"
 
-#: ../plugins/snippets/snippets/Manager.py:886
-#: ../plugins/snippets/snippets/Manager.py:956
-#, fuzzy
+#: ../plugins/snippets/snippets/Manager.py:869
+#: ../plugins/snippets/snippets/Manager.py:939
 msgid "There are no snippets selected to be exported"
-msgstr "jo zgjedhur"
+msgstr "Nuk ka snippet të zgjedhur për eksportim"
 
-#: ../plugins/snippets/snippets/Manager.py:891
-#: ../plugins/snippets/snippets/Manager.py:929
-#, fuzzy
+#: ../plugins/snippets/snippets/Manager.py:874
+#: ../plugins/snippets/snippets/Manager.py:912
 msgid "Export snippets"
-msgstr "_Ndrysho pjesën:"
+msgstr "Eksporto snippet"
 
-#: ../plugins/snippets/snippets/Manager.py:1068
-#, fuzzy
+#: ../plugins/snippets/snippets/Manager.py:1051
 msgid "Type a new shortcut, or press Backspace to clear"
-msgstr "Shkruaj një përshpejtues të ri, ose shtyp \"Backspace\" për t'a fshirë"
+msgstr "Shkruaj një përshpejtim të ri, ose shtyp Backspace për të pastruar"
 
-#: ../plugins/snippets/snippets/Manager.py:1070
-#, fuzzy
+#: ../plugins/snippets/snippets/Manager.py:1053
 msgid "Type a new shortcut"
-msgstr "Shkruaj një përshpejtues të ri"
+msgstr "Shkruaj një përshpejtim të ri"
 
 #: ../plugins/snippets/snippets/Exporter.py:65
-#, fuzzy, python-format
+#, python-format
 msgid "The archive `%s` could not be created"
-msgstr "nuk"
+msgstr "Arkivi «%s» nuk mund të krijohet"
 
 #: ../plugins/snippets/snippets/Exporter.py:82
-#, fuzzy, python-format
+#, python-format
 msgid "Target directory `%s` does not exist"
-msgstr "nuk"
+msgstr "Directory e destinimit «%s» nuk ekziston"
 
 #: ../plugins/snippets/snippets/Exporter.py:85
-#, fuzzy, python-format
+#, python-format
 msgid "Target directory `%s` is not a valid directory"
-msgstr "është nuk a"
+msgstr "Directory e destinimit «%s» nuk është një directory e vlefshme"
 
 #: ../plugins/snippets/snippets/Importer.py:29
 #: ../plugins/snippets/snippets/Importer.py:83
-#, fuzzy, python-format
+#, python-format
 msgid "File `%s` does not exist"
-msgstr "File nuk"
+msgstr "File «%s» nuk ekziston"
 
 #: ../plugins/snippets/snippets/Importer.py:32
-#, fuzzy, python-format
+#, python-format
 msgid "File `%s` is not a valid snippets file"
-msgstr "%s nuk është një pozicion i vlefshëm."
+msgstr "File «%s» nuk është një file i vlefshëm snippet"
 
 #: ../plugins/snippets/snippets/Importer.py:42
-#, fuzzy, python-format
+#, python-format
 msgid "Imported file `%s` is not a valid snippets file"
-msgstr "file është nuk a file"
+msgstr "File i importuar «%s» nuk ështl një file i vlefshëm snippet"
 
 #: ../plugins/snippets/snippets/Importer.py:52
-#, fuzzy, python-format
+#, python-format
 msgid "The archive `%s` could not be extracted"
-msgstr "nuk"
+msgstr "Arkivi «%s» nuk mund të hapet"
 
 #: ../plugins/snippets/snippets/Importer.py:70
-#, fuzzy, python-format
+#, python-format
 msgid "The following files could not be imported: %s"
-msgstr "vijues nuk"
+msgstr "File në vijim nuk mund të importohet: %s"
 
 #: ../plugins/snippets/snippets/Importer.py:86
 #: ../plugins/snippets/snippets/Importer.py:99
-#, fuzzy, python-format
+#, python-format
 msgid "File `%s` is not a valid snippets archive"
-msgstr "File është nuk a"
+msgstr "File «%s» nuk është një arkiv i vlefshëm snippet"
 
-#: ../plugins/snippets/snippets/Placeholder.py:549
-#, fuzzy, python-format
+#: ../plugins/snippets/snippets/Placeholder.py:550
+#, python-format
 msgid ""
 "Execution of the python command (%s) exceeds the maximum time, execution "
 "aborted."
-msgstr "nga."
+msgstr ""
+"Ekzekutimi i komandës python (%s) tejkaloi kohën maksimum, do të "
+"ndërpritet."
 
-#: ../plugins/snippets/snippets/Placeholder.py:557
-#, fuzzy, python-format
+#: ../plugins/snippets/snippets/Placeholder.py:558
+#, python-format
 msgid "Execution of the python command (%s) failed: %s"
-msgstr "nga"
+msgstr "Ekzekutimi i komandës python (%s) dështoi: %s"
 
-#: ../plugins/snippets/snippets/Placeholder.py:563
-#, fuzzy
+#: ../plugins/snippets/snippets/Placeholder.py:564
 msgid "The following python code, run in a snippet, does not return a value"
-msgstr "vijues në a nuk a"
+msgstr "Kodi python në vijim, i zbatuar në një snippet, nuk kthen asnjë vlerë"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
-msgstr "Rresht_o..."
+msgstr "R_enditja..."
 
 #: ../plugins/sort/gedit-sort-plugin.c:82
 msgid "Sort the current document or selection"
-msgstr "Rendit dokumentin apo zgjedhjen aktuale."
+msgstr "Rendit dokumentin aktual apo tekstin e zgjedhur"
 
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:1
-#: ../plugins/sort/sort.glade2.h:3
+#: ../plugins/sort/sort.ui.h:3
 msgid "Sort"
 msgstr "Renditja"
 
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:2
 msgid "Sorts a document or selected text."
-msgstr "Rendit një dokument apo tekstin e zgjedhur."
+msgstr "Rendit dokumentin aktual apo tekstin e zgjedhur."
 
-#: ../plugins/sort/sort.glade2.h:1
+#: ../plugins/sort/sort.ui.h:1
 msgid "R_emove duplicates"
-msgstr "E_lemino duplikatët"
+msgstr "El_emino të duplikuarët"
 
-#: ../plugins/sort/sort.glade2.h:2
+#: ../plugins/sort/sort.ui.h:2
 msgid "S_tart at column:"
-msgstr "Fillo _tek kollona:"
+msgstr "F_illo nga kollona:"
 
-#: ../plugins/sort/sort.glade2.h:4
+#: ../plugins/sort/sort.ui.h:4
 msgid "You cannot undo a sort operation"
-msgstr "Nuk mund të anullosh operacionin e renditjes."
+msgstr "Operacionet e renditjes nuk mund të anullohen."
 
-#: ../plugins/sort/sort.glade2.h:5
+#: ../plugins/sort/sort.ui.h:5
 msgid "_Ignore case"
-msgstr "_Injoro diferencën gërma të mëdha/të vogla"
+msgstr "Shpërf_ill shkronja të mëdha/vogla"
 
-#: ../plugins/sort/sort.glade2.h:6
+#: ../plugins/sort/sort.ui.h:6
 msgid "_Reverse order"
-msgstr "_Renditje e kundërt"
+msgstr "Renditje në të kundë_rt"
 
-#: ../plugins/sort/sort.glade2.h:7
+#: ../plugins/sort/sort.ui.h:7
 msgid "_Sort"
-msgstr "_Rreshto"
+msgstr "_Renditja"
 
 #: ../plugins/spell/gedit-automatic-spell-checker.c:418
-#: ../plugins/spell/gedit-spell-checker-dialog.c:477
+#: ../plugins/spell/gedit-spell-checker-dialog.c:479
 msgid "(no suggested words)"
 msgstr "(asnjë fjalë e propozuar)"
 
@@ -3539,19 +3281,19 @@ msgstr "_Shto"
 msgid "_Spelling Suggestions..."
 msgstr "_Propozime drejtshkrimore"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:274
+#: ../plugins/spell/gedit-spell-checker-dialog.c:279
 msgid "Check Spelling"
 msgstr "Kontrolli i drejtshkrimit"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:285
+#: ../plugins/spell/gedit-spell-checker-dialog.c:290
 msgid "Suggestions"
 msgstr "Propozime"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:583
+#: ../plugins/spell/gedit-spell-checker-dialog.c:585
 msgid "(correct spelling)"
 msgstr "(drejtshkrim korrekt)"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:726
+#: ../plugins/spell/gedit-spell-checker-dialog.c:728
 msgid "Completed spell checking"
 msgstr "Kontrolli i drejtshkrimit u kompletua"
 
@@ -3565,9 +3307,9 @@ msgstr "Kontrolli i drejtshkrimit u kompletua"
 #. * the correct translation. You MUST OMIT it in the translated string.
 #: ../plugins/spell/gedit-spell-checker-language.c:287
 #: ../plugins/spell/gedit-spell-checker-language.c:295
-#, fuzzy, c-format
+#, c-format
 msgid "language|%s (%s)"
-msgstr "Gjuhët"
+msgstr "%s (%s)"
 
 #. Translators: The text before the "|" is context to help you decide on
 #. * the correct translation. You MUST OMIT it in the translated string.
@@ -3575,9 +3317,9 @@ msgstr "Gjuhët"
 #. * (one which isn't in our built-in list).
 #.
 #: ../plugins/spell/gedit-spell-checker-language.c:306
-#, fuzzy, c-format
+#, c-format
 msgid "language|Unknown (%s)"
-msgstr "Nuk njihet"
+msgstr "Nuk njihet (%s)"
 
 #. Translators: The text before the "|" is context to help you decide on
 #. * the correct translation. You MUST OMIT it in the translated string.
@@ -3585,16 +3327,15 @@ msgstr "Nuk njihet"
 #. * spell checker
 #.
 #: ../plugins/spell/gedit-spell-checker-language.c:414
-#, fuzzy
 msgid "language|Default"
-msgstr "E prezgjedhur"
+msgstr "E paracaktuar"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:135
-#: ../plugins/spell/languages-dialog.glade2.h:2
+#: ../plugins/spell/gedit-spell-language-dialog.c:139
+#: ../plugins/spell/languages-dialog.ui.h:2
 msgid "Set language"
 msgstr "Vendos gjuhën"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:184
+#: ../plugins/spell/gedit-spell-language-dialog.c:188
 msgid "Languages"
 msgstr "Gjuhët"
 
@@ -3630,67 +3371,67 @@ msgstr "Dokumenti është bosh."
 msgid "No misspelled words"
 msgstr "Asnjë fjalë e gabuar"
 
-#: ../plugins/spell/languages-dialog.glade2.h:1
+#: ../plugins/spell/languages-dialog.ui.h:1
 msgid "Select the _language of the current document."
 msgstr "Zgjidh _gjuhën e dokumentit aktual."
 
-#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
+#: ../plugins/spell/spell-checker.ui.h:1 ../plugins/time/time.ui.h:2
 msgid "*"
 msgstr "*"
 
-#: ../plugins/spell/spell-checker.glade2.h:2
+#: ../plugins/spell/spell-checker.ui.h:2
 msgid "<b>Language</b>"
 msgstr "<b>Gjuha</b>"
 
-#: ../plugins/spell/spell-checker.glade2.h:3
+#: ../plugins/spell/spell-checker.ui.h:3
 msgid "<b>word</b>"
 msgstr "<b>fjala</b>"
 
-#: ../plugins/spell/spell-checker.glade2.h:4
+#: ../plugins/spell/spell-checker.ui.h:4
 msgid "Add w_ord"
 msgstr "Shto fj_alë"
 
-#: ../plugins/spell/spell-checker.glade2.h:5
+#: ../plugins/spell/spell-checker.ui.h:5
 msgid "Cha_nge"
 msgstr "N_drysho"
 
-#: ../plugins/spell/spell-checker.glade2.h:6
+#: ../plugins/spell/spell-checker.ui.h:6
 msgid "Change A_ll"
 msgstr "Ndryshoi të gj_itha"
 
-#: ../plugins/spell/spell-checker.glade2.h:7
+#: ../plugins/spell/spell-checker.ui.h:7
 msgid "Change _to:"
 msgstr "Ndryshoje _në:"
 
-#: ../plugins/spell/spell-checker.glade2.h:8
+#: ../plugins/spell/spell-checker.ui.h:8
 msgid "Check _Word"
 msgstr "Kontrollo _fjalën"
 
-#: ../plugins/spell/spell-checker.glade2.h:9
+#: ../plugins/spell/spell-checker.ui.h:9
 msgid "Check spelling"
 msgstr "Kontrollo drejtshkrimin"
 
-#: ../plugins/spell/spell-checker.glade2.h:10
+#: ../plugins/spell/spell-checker.ui.h:10
 msgid "Ignore _All"
 msgstr "Shpërfilli të _gjitha"
 
-#: ../plugins/spell/spell-checker.glade2.h:11
+#: ../plugins/spell/spell-checker.ui.h:11
 msgid "Language:"
 msgstr "Gjuha:"
 
-#: ../plugins/spell/spell-checker.glade2.h:12
+#: ../plugins/spell/spell-checker.ui.h:12
 msgid "Misspelled word:"
 msgstr "Fjala e gabuar:"
 
-#: ../plugins/spell/spell-checker.glade2.h:13
+#: ../plugins/spell/spell-checker.ui.h:13
 msgid "User dictionary:"
 msgstr "Fjalori i përdoruesit:"
 
-#: ../plugins/spell/spell-checker.glade2.h:14
+#: ../plugins/spell/spell-checker.ui.h:14
 msgid "_Ignore"
 msgstr "_Shpërfill"
 
-#: ../plugins/spell/spell-checker.glade2.h:15
+#: ../plugins/spell/spell-checker.ui.h:15
 msgid "_Suggestions:"
 msgstr "_Propozime:"
 
@@ -3699,27 +3440,26 @@ msgid "Checks the spelling of the current document."
 msgstr "Kontrollon drejtshkrimin e dokumentit aktual."
 
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Spell Checker"
-msgstr "Kontrolluesi i drejtshkrimit"
+msgstr "Kontrolli ortografik"
+
+#: ../plugins/taglist/gedit-taglist-plugin.c:94
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
+msgid "Tags"
+msgstr "Tags"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:599
 msgid "Select the group of tags you want to use"
 msgstr "Zgjidh grupin e tags që dëshiron të përdorësh"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:618
-#, fuzzy
 msgid "_Preview"
-msgstr "Pamja e parë e printimit"
+msgstr "_Pamja e parë"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:684
 msgid "Available Tag Lists"
 msgstr "Lista e Tag në dispozicion"
-
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:687
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:703
-msgid "Tags"
-msgstr "Tags"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
@@ -3763,13 +3503,12 @@ msgstr "URI spirancës"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:11
 msgid "Applet class file code"
-msgstr "File kodi i klasës applet"
+msgstr "File kodi klase applet"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:13
-#, fuzzy
 msgid "Applet class file code (deprecated)"
-msgstr "File kodi i klasës applet"
+msgstr "File kodi klase applet (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:14
 msgid "Array"
@@ -3793,19 +3532,17 @@ msgstr "Ngjyra e sfondit"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Background color (deprecated)"
-msgstr "Ngjyra e sfondit"
+msgstr "Ngjyra e sfondit (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Background texture tile"
-msgstr "Struktura e tullzave të sfondit"
+msgstr "File i figurës së sfondit"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:23
-#, fuzzy
 msgid "Background texture tile (deprecated)"
-msgstr "Struktura e tullzave të sfondit"
+msgstr "File i figurës së sfondit (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:24
 msgid "Base URI"
@@ -3813,13 +3550,12 @@ msgstr "URI Bazë"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:25
 msgid "Base font"
-msgstr "Gërmat bazë"
+msgstr "Gërma bazë"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Base font (deprecated)"
-msgstr "Bazë"
+msgstr "Gërma bazë (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:28
 msgid "Bold"
@@ -3831,9 +3567,8 @@ msgstr "Korniza"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:31
-#, fuzzy
 msgid "Border (deprecated)"
-msgstr "Korniza"
+msgstr "Korniza (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Border color"
@@ -3841,7 +3576,7 @@ msgstr "Ngjyra e kornizës"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Cell rowspan"
-msgstr "Hapsira e rreshtave të qelisë"
+msgstr "Shtrirja e qelisë në rreshta"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:34
 msgid "Center"
@@ -3849,22 +3584,20 @@ msgstr "Në qendër"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:36
-#, fuzzy
 msgid "Center (deprecated)"
-msgstr "Në qendër"
+msgstr "Në qendër (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:37
 msgid "Character encoding of linked resource"
-msgstr "Kodifikimi i gërmave të lidhur"
+msgstr "Kodifikimi i gërmave të një rezerve të jashtme"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Checked (state)"
-msgstr "Kontrolluar (gjendja)"
+msgstr "Zgjedhur (gjëndja)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:39
-#, fuzzy
 msgid "Checked state"
-msgstr "Kontrolluar (gjendja)"
+msgstr "Gjëndja zgjedhur"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:40
 msgid "Citation"
@@ -3872,11 +3605,11 @@ msgstr "Citim"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Cite reason for change"
-msgstr "Cito arsyen e ndryshimit"
+msgstr "Tregon shkakun e ndryshimit"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:42
 msgid "Class implementation ID"
-msgstr "ID e ekezekutimit të kategorisë"
+msgstr "ID ekezekutimi të klasës"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:43
 msgid "Class list"
@@ -3884,7 +3617,7 @@ msgstr "Lista e klasave"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:44
 msgid "Clear text flow control"
-msgstr "Kontrolli i fliksit të lirë të tekstit"
+msgstr "Fshin kontrollin e fluksit të tekstit"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:45
 msgid "Code content type"
@@ -3896,17 +3629,16 @@ msgstr "Ngjyra e lidhjeve të zgjedhura"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:48
-#, fuzzy
 msgid "Color of selected links (deprecated)"
-msgstr "Ngjyra e lidhjeve të zgjedhura"
+msgstr "Ngjyra e lidhjeve të zgjedhura (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:49
 msgid "Column span"
-msgstr "Hapsira e kollonës"
+msgstr "Gjerësia në kollona"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Columns"
-msgstr "Kollonat"
+msgstr "Kollona"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Comment"
@@ -3914,7 +3646,7 @@ msgstr "Komenti"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Computer code fragment"
-msgstr "Fragment kodi kompjuteri"
+msgstr "Fragment kodi"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Content scheme"
@@ -3927,17 +3659,16 @@ msgstr "Lloji i përmbajtjes"
 #. The "type" attribute is deprecated for the "ol" tag only,
 #. since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Content type (deprecated)"
-msgstr "Lloji i përmbajtjes"
+msgstr "Lloji i përmbajtjes (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Coordinates"
-msgstr "Koordinatat"
+msgstr "Koordinata"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:59
 msgid "DIV Style container"
-msgstr "Përmbajtës stili DIV"
+msgstr "Përmbajtës DIV me stil"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:60
 msgid "DIV container"
@@ -3950,14 +3681,14 @@ msgstr "Data dhe ora e ndryshimit"
 #. NOTE: used in "object" tag
 #: ../plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Declare flag"
-msgstr "Shenja deklarimit"
+msgstr "Deklarimi i shenjës"
 
 #. Translators: DEFER is an optional attribute of the <script> tag.
 #. It indicates that the script is not going to generate any document
 #. content. The browser can continue parsing and drawing the page.
 #: ../plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Defer attribute"
-msgstr "Ridërgimi i atributit"
+msgstr "Atributi defer"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Definition description"
@@ -3969,7 +3700,7 @@ msgstr "Lista përcaktimeve"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Definition term"
-msgstr "Term përcaktues"
+msgstr "Termi i përcaktimit"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Deleted text"
@@ -3985,9 +3716,8 @@ msgstr "Orientimi"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:75
-#, fuzzy
 msgid "Directionality (deprecated)"
-msgstr "Orientimi"
+msgstr "Orientimi (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Directory list"
@@ -3995,7 +3725,7 @@ msgstr "Lista e directory"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Disabled"
-msgstr "Jo aktiv"
+msgstr "Çaktivizuar"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Document base"
@@ -4023,7 +3753,7 @@ msgstr "ID e elementit"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Embedded object"
-msgstr "Objekt i trupëzuar"
+msgstr "Objekti i trupëzuar"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:85
 #: ../plugins/taglist/Latex.tags.xml.in.h:9
@@ -4032,7 +3762,7 @@ msgstr "Thekset"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Encode type"
-msgstr "Lloji i kodimit"
+msgstr "Lloji i kodifikimit"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Figure"
@@ -4044,13 +3774,12 @@ msgstr "Lloji i gërmave"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:90
-#, fuzzy
 msgid "Font face (deprecated)"
-msgstr "Gërmat"
+msgstr "Lloji i gërmave (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:91
 msgid "For label"
-msgstr "Për etiketat"
+msgstr "Etiketa for"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:92
 msgid "Forced line break"
@@ -4062,35 +3791,35 @@ msgstr "Formular"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:94
 msgid "Form action handler"
-msgstr "Trajtuesi i veprimeve të formularit"
+msgstr "Trajtues veprimesh të formularit"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:95
 msgid "Form control group"
-msgstr "Grupi i kontrollit të formularit"
+msgstr "Grup kontrolli formulari"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:96
 msgid "Form field label text"
-msgstr "Teksti i fushës së etiketës së formularit"
+msgstr "Etiketa e fushës së formularit"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Form input"
-msgstr "Input i formularit"
+msgstr "Input i form"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Form input type"
-msgstr "Lloji i input të formularit"
+msgstr "Input i form me lloj"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Form method"
-msgstr "Metoda e formularit"
+msgstr "Metodë e form"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Forward link"
-msgstr "Lidhja vazhdo"
+msgstr "Lidhja përpara"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Frame"
-msgstr "Frame"
+msgstr "Kornizë"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Frame render parts"
@@ -4202,18 +3931,16 @@ msgstr "Shirit horizontal"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Horizontal space"
-msgstr "Hapësirë horizontale"
+msgstr "Hapësira horizontale"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:131
-#, fuzzy
 msgid "Horizontal space (deprecated)"
-msgstr "Hapësirë horizontale"
+msgstr "Hapësira horizontale (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:132
-#, fuzzy
 msgid "HttP header name"
-msgstr "Emri i titullit HTTP"
+msgstr "Emri i titullit HttP"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:133
 msgid "I18N BiDi over-ride"
@@ -4221,7 +3948,7 @@ msgstr "I18N BiDi over-ride"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Image"
-msgstr "Figurë"
+msgstr "Figura"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Image map"
@@ -4261,13 +3988,12 @@ msgstr "Tekst Italic"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Java applet"
-msgstr "Applet Java"
+msgstr "Miniapliaktiv Java"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:146
-#, fuzzy
 msgid "Java applet (deprecated)"
-msgstr "Applet Java"
+msgstr "Miniapliaktiv Java (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "Label"
@@ -4287,13 +4013,12 @@ msgstr "Nivel"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:151
 msgid "Link color"
-msgstr "Ngjyra e lidhjes"
+msgstr "Ngjyrë lidhje"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:153
-#, fuzzy
 msgid "Link color (deprecated)"
-msgstr "Ngjyra e lidhjes"
+msgstr "Ngjyrë lidhje (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:154
 msgid "List item"
@@ -4353,13 +4078,12 @@ msgstr "Lidhje e varur-nga-mjeti"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:171
 msgid "Menu list"
-msgstr "Lista e menu"
+msgstr "Listë me menu"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:173
-#, fuzzy
 msgid "Menu list (deprecated)"
-msgstr "Menu listë"
+msgstr "Listë me menu (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:174
 msgid "Multi-line text field"
@@ -4371,7 +4095,7 @@ msgstr "Shumë kollonëshe"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Multiple"
-msgstr "Shumëfish"
+msgstr "Shumëfishe"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Name"
@@ -4379,19 +4103,19 @@ msgstr "Emri"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Named property value"
-msgstr "Vlera e pronësisë me emër"
+msgstr "Vlera e një pronësie me emër"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Next ID"
-msgstr "ID në vazhdo"
+msgstr "ID në vijim"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:180
 msgid "No URI"
-msgstr "Asnjë URI"
+msgstr "Pa URI"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:181
 msgid "No embedded objects"
-msgstr "Asnjë objekt i trupzuar"
+msgstr "Pa objekte të trupëzuar"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:182
 msgid "No frames"
@@ -4399,29 +4123,28 @@ msgstr "Pa korniza"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:183
 msgid "No layers"
-msgstr "PA nivelë"
+msgstr "Pa nivele"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:184
 msgid "No line break"
-msgstr "Pa ndërprerje rreshti"
+msgstr "Ndalo ndërprerjen e rreshtit"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:185
 msgid "No resize"
-msgstr "Pa ndryshim madhësie"
+msgstr "Ndalo ndryshimin e madhësisë"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:186
 msgid "No script"
-msgstr "Asnjë script"
+msgstr "Pa script"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:187
 msgid "No shade"
-msgstr "Asnjë ngjyrosje"
+msgstr "Pa hije"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:189
-#, fuzzy
 msgid "No shade (deprecated)"
-msgstr "Jo"
+msgstr "Pa hije (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:190
 msgid "No word wrap"
@@ -4429,14 +4152,12 @@ msgstr "Jo në krye automatikisht"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:192
-#, fuzzy
 msgid "No word wrap (deprecated)"
-msgstr "Jo në krye automatikisht"
+msgstr "Jo në krye automatikisht (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:193
-#, fuzzy
 msgid "Non-breaking space"
-msgstr "hapësirë"
+msgstr "Hapësirë jo përfunduese"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Note"
@@ -4444,13 +4165,12 @@ msgstr "Shënim"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Object applet file"
-msgstr "File të applet të një objekti"
+msgstr "File i miniaplikativit të një objekti"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:197
-#, fuzzy
 msgid "Object applet file (deprecated)"
-msgstr "File të applet të një objekti"
+msgstr "File i miniaplikativit të një objekti (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Object data reference"
@@ -4574,19 +4294,19 @@ msgstr "Fjalori i informacioneve të profilit"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:228
 msgid "Prompt message"
-msgstr "Mesazhi përshëndetës"
+msgstr "Mesazh përshëndetës"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Push button"
-msgstr "Pulsanti shtyp"
+msgstr "Buton push"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:230
 msgid "Quote"
-msgstr "Kuota"
+msgstr "Citim"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Range"
-msgstr "Grada"
+msgstr "Interval"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:232
 msgid "ReadOnly text and password"
@@ -4594,13 +4314,12 @@ msgstr "Tekst dhe fjalëkalim vetëm në lexim"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Reduced spacing"
-msgstr "Hapsirë e reduktuar"
+msgstr "Hapësirë e reduktuar"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:235
-#, fuzzy
 msgid "Reduced spacing (deprecated)"
-msgstr "Hapsirë e reduktuar"
+msgstr "Hapësirë e reduktuar (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Reverse link"
@@ -4637,11 +4356,11 @@ msgstr "Script"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:245
 msgid "Scrollbar"
-msgstr "Shtylla rrëshqitëse"
+msgstr "Shtylla e rrëshkitjes"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Selectable option"
-msgstr "Opcion i zgjedhshëm"
+msgstr "Opsion i zgjedhshëm"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Selected"
@@ -4649,7 +4368,7 @@ msgstr "Zgjedhur"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Server-side image map"
-msgstr "Harta figurës krahu server"
+msgstr "Harta e figurës ana server"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:249
 msgid "Shape"
@@ -4669,9 +4388,8 @@ msgstr "Madhësia"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:254
-#, fuzzy
 msgid "Size (deprecated)"
-msgstr "Madhësia"
+msgstr "Madhësia (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Small text style"
@@ -4723,9 +4441,8 @@ msgstr "Fillimi numërimit"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:268
-#, fuzzy
 msgid "Starting sequence number (deprecated)"
-msgstr "Fillimi numërimit"
+msgstr "Fillimi numërimit (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:269
 msgid "Strike-through text"
@@ -4733,19 +4450,17 @@ msgstr "Tekst i vizuar"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:271
-#, fuzzy
 msgid "Strike-through text (deprecated)"
-msgstr "Stili i tekstit të vizuar"
+msgstr "Tekst i vizuar (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:272
 msgid "Strike-through text style"
-msgstr "Stili i tekstit të vizuar"
+msgstr "Stil teksti të vizuar"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:274
-#, fuzzy
 msgid "Strike-through text style (deprecated)"
-msgstr "Stili i tekstit të vizuar"
+msgstr "Stil teksti të vizuar (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:275
 msgid "Strong emphasis"
@@ -4769,7 +4484,7 @@ msgstr "Pozicioni Tab"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:280
 msgid "Table"
-msgstr "Tabelë"
+msgstr "Tabela"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:281
 msgid "Table body"
@@ -4797,7 +4512,7 @@ msgstr "Fundi i tabelës"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:287
 msgid "Table header"
-msgstr "Kreu i tabelës"
+msgstr "Titull i tabelës"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:288
 msgid "Table header cell"
@@ -4829,11 +4544,11 @@ msgstr "Destinimi - Top"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:295
 msgid "Teletype or monospace text style"
-msgstr "Shkronja me hapsira fukse (teletype)"
+msgstr "Shkronja me hapësira fikse (teletype)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:296
 msgid "Text"
-msgstr "Tekst"
+msgstr "Teksti"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:297
 msgid "Text color"
@@ -4841,9 +4556,8 @@ msgstr "Ngjyra e tekstit"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:299
-#, fuzzy
 msgid "Text color (deprecated)"
-msgstr "Ngjyra e tekstit"
+msgstr "Ngjyra e tekstit (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:300
 msgid "Text entered by user"
@@ -4895,9 +4609,8 @@ msgstr "Hapësira vertikale"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:313
-#, fuzzy
 msgid "Vertical space (deprecated)"
-msgstr "Hapësira vertikale"
+msgstr "Hapësira vertikale (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:314
 msgid "Visited link color"
@@ -4905,18 +4618,16 @@ msgstr "Ngjyra e lidhjes së vizituar"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:316
-#, fuzzy
 msgid "Visited link color (deprecated)"
-msgstr "Ngjyra e lidhjes së vizituar"
+msgstr "Ngjyra e lidhjes së vizituar (nuk përdoret më)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:317
 msgid "Width"
 msgstr "Gjerësia"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:318
-#, fuzzy
 msgid "XHTML 1.0 - Tags"
-msgstr "HTML - Tags"
+msgstr "XHTML 1.0 - Tag"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography (cite)"
@@ -5052,7 +4763,7 @@ msgstr "Titull appendix"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:35
 msgid "Item"
-msgstr "Zë (Item)"
+msgstr "Elementi"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:36
 msgid "Item with label"
@@ -5215,8 +4926,8 @@ msgid ""
 "Provides a method to easily insert into a document commonly used tags/"
 "strings without having to type them."
 msgstr ""
-"Afron një metodë për të shtuar me lehtësi në brendësi të një dokumenti tags/"
-"strings më të përdorur pa patur nevojë që t'i shkruash."
+"Afron një metodë për të shtuar me lehtësi në brendësi të një dokumenti "
+"tags/strings më të përdorur pa patur nevojë që t'i shkruash."
 
 #: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
 msgid "Tag list"
@@ -5287,23 +4998,22 @@ msgid "self"
 msgstr "vetvetja"
 
 #: ../plugins/taglist/XUL.tags.xml.in.h:1
-#, fuzzy
 msgid "XUL - Tags"
-msgstr "HTML - Tags"
+msgstr "XUL - Tag"
 
-#: ../plugins/time/gedit-time-plugin.c:183
+#: ../plugins/time/gedit-time-plugin.c:180
 msgid "In_sert Date and Time..."
 msgstr "Sh_to datën dhe orën..."
 
-#: ../plugins/time/gedit-time-plugin.c:185
+#: ../plugins/time/gedit-time-plugin.c:182
 msgid "Insert current date and time at the cursor position"
 msgstr "Shto datën dhe orën aktuale tek pozicioni i kursorit"
 
-#: ../plugins/time/gedit-time-plugin.c:628
+#: ../plugins/time/gedit-time-plugin.c:611
 msgid "Available formats"
 msgstr "Formatet në dispozicion"
 
-#: ../plugins/time/gedit-time-plugin.c:806
+#: ../plugins/time/gedit-time-plugin.c:759
 msgid "Configure insert date/time plugin..."
 msgstr "Konfiguro plugin e «Shto datën dhe orën»..."
 
@@ -5315,34 +5025,35 @@ msgstr "Shto datën/orën"
 msgid "Inserts current date and time at the cursor position."
 msgstr "Shto datën dhe orën aktuale tek pozicioni i kursorit."
 
-#: ../plugins/time/time.glade2.h:3
+#: ../plugins/time/time.ui.h:3
 msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
 msgstr "<span size=\"small\">01/11/2002 17:52:00</span>"
 
-#: ../plugins/time/time.glade2.h:4
+#: ../plugins/time/time.ui.h:4
 msgid "<span weight=\"bold\"> When inserting date/time...</span>"
 msgstr "<span weight=\"bold\"> Kur shton datën dhe orën...</span>"
 
-#: ../plugins/time/time.glade2.h:5
+#: ../plugins/time/time.ui.h:5
 msgid "Configure date/time plugin"
 msgstr "Konfiguro plugin e «Shto datën dhe orën»"
 
-#: ../plugins/time/time.glade2.h:6
+#: ../plugins/time/time.ui.h:6
 msgid "Insert Date and Time"
 msgstr "Shto datën dhe orën"
 
-#: ../plugins/time/time.glade2.h:7
+#: ../plugins/time/time.ui.h:7
 msgid "Use the _selected format"
 msgstr "Përdor formatin e _zgjedhur"
 
-#: ../plugins/time/time.glade2.h:8
+#: ../plugins/time/time.ui.h:8
 msgid "_Insert"
 msgstr "_Ndërfut"
 
-#: ../plugins/time/time.glade2.h:9
+#: ../plugins/time/time.ui.h:9
 msgid "_Prompt for a format"
 msgstr "_Kërko formatin"
 
-#: ../plugins/time/time.glade2.h:10
+#: ../plugins/time/time.ui.h:10
 msgid "_Use custom format"
 msgstr "_Përdor një format të personalizuar"
+
