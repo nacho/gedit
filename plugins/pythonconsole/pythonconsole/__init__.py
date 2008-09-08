@@ -31,7 +31,7 @@ from console import PythonConsole
 class PythonConsolePlugin(gedit.Plugin):
 	def __init__(self):
 		gedit.Plugin.__init__(self)
-			
+		
 	def activate(self, window):
 		console = PythonConsole(namespace = {'__builtins__' : __builtins__,
 		                                     'gedit' : gedit,
@@ -44,9 +44,11 @@ class PythonConsolePlugin(gedit.Plugin):
 		                         gtk.ICON_SIZE_MENU)
 		bottom.add_item(console, _('Python Console'), image)
 		window.set_data('PythonConsolePluginInfo', console)
-	
+
 	def deactivate(self, window):
 		console = window.get_data("PythonConsolePluginInfo")
+		console.stop()
 		window.set_data("PythonConsolePluginInfo", None)
 		bottom = window.get_bottom_panel()
 		bottom.remove_item(console)
+
