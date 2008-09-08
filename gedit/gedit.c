@@ -451,6 +451,7 @@ main (int argc, char *argv[])
 
 	/* Init glib threads asap */
 	g_thread_init (NULL);
+	gdk_threads_init ();
 
 	/* Setup debugging */
 	gedit_debug_init ();
