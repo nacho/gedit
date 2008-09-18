@@ -11,13 +11,14 @@
 # Khaled Hosny <khaledhosny@eglug.org>, 2006, 2007, 2008.
 # Abderrahim Kitouni <a.kitouni@gmail.com>, 2006.
 # Sohaib Afifi <sohaibafifi@gmail.com>, 2007.
+# Anas Afif Emad <anas.e87@gmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-14 11:08+0100\n"
-"PO-Revision-Date: 2008-05-24 20:29+0300\n"
-"Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
+"POT-Creation-Date: 2008-09-18 02:42+0100\n"
+"PO-Revision-Date: 2008-09-16 16:04+0300\n"
+"Last-Translator: Anas Afif Emad <anas.e87@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -957,16 +958,18 @@ msgid "%s: invalid encoding.\n"
 msgstr "‏%s: ترميز غير سليم. \n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:469
+#: ../gedit/gedit.c:468
 msgid "- Edit text files"
 msgstr "- حرّر الملفات النصية"
 
-#: ../gedit/gedit.c:478
+#: ../gedit/gedit.c:477
 #, c-format
 msgid ""
 "%s\n"
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
+"%s\n"
+"نفّذ '%s --help' لتحصل على قائمة كاملة بخيارات سطر الأوامر المتاحة.\n"
 
 #: ../gedit/gedit-commands-file.c:257
 #, c-format
@@ -1139,7 +1142,8 @@ msgstr ""
 "يوسف الشهيبي\t<chahibi@gmail.com>\n"
 "جهاد عفيفي\t\t<djihed@gmail.com>\n"
 "خالد حسني\t\t<khaledhosny@eglug.org>\n"
-"صهيب عفيفي\t\t<sohaibafifi@gmail.com>"
+"صهيب عفيفي\t\t<sohaibafifi@gmail.com>\n"
+"أنس عفيف عماد\t\t<anas.e87@gmail.com>"
 
 #: ../gedit/gedit-commands-search.c:165
 #, c-format
@@ -1339,13 +1343,12 @@ msgid "gedit cannot handle this location."
 msgstr "لا يستطيع محرر النصوص معالجة هذا الموقع."
 
 #: ../gedit/gedit-io-error-message-area.c:201
-#, fuzzy
 msgid "The location of the file cannot be mounted."
-msgstr "لا يمكن تثبيت مخطط الألوان المختار"
+msgstr "لا يمكن وصل موقع الملف."
 
 #: ../gedit/gedit-io-error-message-area.c:205
 msgid "The location of the file cannot be accessed because it is not mounted."
-msgstr ""
+msgstr "لا يمكن الوصول إلى موقع الملف لأنه غير موصول."
 
 #: ../gedit/gedit-io-error-message-area.c:209
 #, c-format
@@ -1355,7 +1358,7 @@ msgstr "‏%s دليل"
 #: ../gedit/gedit-io-error-message-area.c:216
 #, c-format
 msgid "%s is not a valid location."
-msgstr "ليس %s موقعا سليما."
+msgstr "ليس %s موقعاً سليماً."
 
 #: ../gedit/gedit-io-error-message-area.c:243
 #, c-format
@@ -1396,6 +1399,8 @@ msgid ""
 "The number of followed links is limited and the actual file could not be "
 "found within this limit."
 msgstr ""
+"إن عدد الارتباطات المتبوعة محدود ولم يتم العثور على الملف الفعلي ضمن هذه "
+"الحدود."
 
 #: ../gedit/gedit-io-error-message-area.c:373
 msgid "You do not have the permissions necessary to open the file."
@@ -1413,9 +1418,8 @@ msgid "_Retry"
 msgstr "أ_عد المحاولة"
 
 #: ../gedit/gedit-io-error-message-area.c:433
-#, fuzzy
 msgid "gedit cannot find the file. Perhaps it has recently been deleted."
-msgstr "لا يمكن لمحرر النصوص العثور عليه. ربما حذف مؤخرا."
+msgstr "لم يستطيع محرر النصوص إيجاد الملف. ربما يكون قد حُذفَ مؤخراً."
 
 #: ../gedit/gedit-io-error-message-area.c:442
 #, c-format
@@ -2196,20 +2200,20 @@ msgid "Please check your installation."
 msgstr "رجاء تأكد من تثبيتك."
 
 #: ../gedit/gedit-utils.c:1075
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open ui file %s. Error: %s"
-msgstr "لا يمكن العثور على الملف %s"
+msgstr "غير قادر على فتح ملف ui %s. خطأ: %s"
 
 #: ../gedit/gedit-utils.c:1094
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find the object '%s' inside file %s."
-msgstr "لا يمكن إيجاد الودجات المطلوبة داخل الملف %s."
+msgstr "غير قادر على إيجاد الكائن '%s' ضمن الملف %s."
 
 #. Translators: '/ on <remote-share>'
 #: ../gedit/gedit-utils.c:1249
 #, c-format
 msgid "/ on %s"
-msgstr ""
+msgstr "/ على %s"
 
 #. create "Wrap Around" menu item.
 #: ../gedit/gedit-view.c:1214
@@ -2866,17 +2870,17 @@ msgstr "_طابِق اسم الملف"
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1985
 #, c-format
 msgid "No mount object for mounted volume: %s"
-msgstr ""
+msgstr "لا يوجد كائن وصل للقرص الموصول: %s"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:2065
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open media: %s"
-msgstr "تعذّر فتح الملف %s."
+msgstr "تعذّر فتح الوسيط: %s"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:2112
-#, fuzzy, c-format
+#, c-format
 msgid "Could not mount volume: %s"
-msgstr "تعذّر فتح الملف %s."
+msgstr "تعذّر وصل القرص: %s"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -5003,6 +5007,54 @@ msgstr "ا_سأل عن التنسيق"
 msgid "_Use custom format"
 msgstr "اس_تعمل تنسيقا مخصّصا"
 
+#~ msgid "All documents"
+#~ msgstr "كل المستندات"
+
+#~ msgid "All documents except untitled ones"
+#~ msgstr "كل المستندات إلا غير المعنونة"
+
+#~ msgid "Append to current document"
+#~ msgstr "ألحق بالمستند الحالي"
+
+#~ msgid "Create new document"
+#~ msgstr "أنشئ مستندا جديدا"
+
+#~ msgid "Current document"
+#~ msgstr "المستند الحالي"
+
+#~ msgid "Current line"
+#~ msgstr "السطر الحالي"
+
+#~ msgid "Current selection"
+#~ msgstr "التحديد الحالي"
+
+#~ msgid "Current word"
+#~ msgstr "الكلمة الحالية"
+
+#~ msgid "Display in bottom pane"
+#~ msgstr "اعرض في اللوح السفلي"
+
+#~ msgid "Insert at cursor position"
+#~ msgstr "أدرج في موقع المؤشّر"
+
+#~ msgid "Local files only"
+#~ msgstr "الملفات المحلية فقط"
+
+#~ msgid "Nothing"
+#~ msgstr "لا شيء"
+
+#~ msgid "Remote files only"
+#~ msgstr "الملفات عن بعد فقط"
+
+#~ msgid "Replace current document"
+#~ msgstr "استبدل المستند الحالي"
+
+#~ msgid "Replace current selection"
+#~ msgstr "استبدل التحديد الحالي"
+
+#~ msgid "Untitled documents only"
+#~ msgstr "المستندات غير المعنونة فقط"
+
 #~ msgid "The file contains corrupted data."
 #~ msgstr "يحوي الملف بيانات تالفة."
 
@@ -5052,54 +5104,6 @@ msgstr "اس_تعمل تنسيقا مخصّصا"
 #~ "%s is not a regular file. Please check that you typed the location "
 #~ "correctly and try again."
 #~ msgstr "‏%s ليس ملفا عاديا. تأكد من صحة كتابتك الموقع وحاول مجددا."
-
-#~ msgid "Nothing"
-#~ msgstr "لا شيء"
-
-#~ msgid "Current document"
-#~ msgstr "المستند الحالي"
-
-#~ msgid "Current selection"
-#~ msgstr "التحديد الحالي"
-
-#~ msgid "Current line"
-#~ msgstr "السطر الحالي"
-
-#~ msgid "Current word"
-#~ msgstr "الكلمة الحالية"
-
-#~ msgid "Display in bottom pane"
-#~ msgstr "اعرض في اللوح السفلي"
-
-#~ msgid "Create new document"
-#~ msgstr "أنشئ مستندا جديدا"
-
-#~ msgid "Append to current document"
-#~ msgstr "ألحق بالمستند الحالي"
-
-#~ msgid "Replace current document"
-#~ msgstr "استبدل المستند الحالي"
-
-#~ msgid "Replace current selection"
-#~ msgstr "استبدل التحديد الحالي"
-
-#~ msgid "Insert at cursor position"
-#~ msgstr "أدرج في موقع المؤشّر"
-
-#~ msgid "All documents"
-#~ msgstr "كل المستندات"
-
-#~ msgid "All documents except untitled ones"
-#~ msgstr "كل المستندات إلا غير المعنونة"
-
-#~ msgid "Local files only"
-#~ msgstr "الملفات المحلية فقط"
-
-#~ msgid "Remote files only"
-#~ msgstr "الملفات عن بعد فقط"
-
-#~ msgid "Untitled documents only"
-#~ msgstr "المستندات غير المعنونة فقط"
 
 #~ msgid ""
 #~ "Nothing\n"
