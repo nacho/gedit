@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: gedit2 HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-08-19 13:02+0000\n"
-"PO-Revision-Date: 2008-08-24 10:15+0300\n"
+"PO-Revision-Date: 2008-09-22 08:06+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -2565,11 +2565,11 @@ msgstr "Failisüsteem"
 #. ex:ts=8:noet:
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:1
 msgid "Enable Restore of Remote Locations"
-msgstr "Võrgukohtade taastamise lubamine"
+msgstr "Võrgukohtadelt taastamise lubamine"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:2
 msgid "File Browser Filter Mode"
-msgstr "Failisirvija filtrirežiim"
+msgstr "Failisirvija filtreerimisrežiim"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:3
 msgid "File Browser Filter Pattern"
@@ -2590,6 +2590,10 @@ msgid ""
 "generally applies to opening a document from the command line or opening it "
 "with nautilus etc)"
 msgstr ""
+"Kui märgitud, siis failisirvija plugin avab esimesena kataloogi, kus asub "
+"esimene avatud dokument, mida failisirvija pole veel kasutanud. (See leiab "
+"kasutust tavaliselt juhul, kui dokument avatakse käsurealt, nautiluse abil "
+"või muudel sarnastel juhtudel)"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:7
 msgid "Open With Tree View"
@@ -2604,17 +2608,19 @@ msgstr ""
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:9
 msgid "Set Location To First Document"
-msgstr ""
+msgstr "Asukoha määramine esimese dokumendi järgi"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:10
 msgid "Sets whether to enable restoring of remote locations."
-msgstr ""
+msgstr "Kas võrgus asuvatelt kohtadelt taastamine on lubatud või mitte."
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:11
 msgid ""
 "The file browser root directory to use when loading the file browser plugin "
 "and onload/tree_view is TRUE."
 msgstr ""
+"Failisirvija juurkataloog, mida kasutatakse failisirvija laadimise ajal "
+"juhul, kui võtmed onload/tree_view on märgitud."
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:12
 msgid ""
@@ -2622,12 +2628,17 @@ msgid ""
 "plugin when onload/tree_view is TRUE. The virtual root must always be below "
 "the actual root."
 msgstr ""
+"Failisirvija virtuaalne juurkataloog, mida kasutatakse failisirvija "
+"laadimise ajal juhul, kui võtmed onload/tree_view on märgitud. Virtuaalne "
+"juurkataloog peab alati kuuluma tegeliku juurkataloogi alla."
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:13
 msgid ""
 "The filter pattern to filter the file browser with. This filter works on top "
 "of the filter_mode."
 msgstr ""
+"Failisirvija filtri muster. See seda filtrit kasutatakse koos filter_mode "
+"võtmes määratud režiimiga."
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:14
 msgid ""
@@ -2636,6 +2647,10 @@ msgid ""
 "(filter binary files) and hidden_and_binary (filter both hidden and binary "
 "files)."
 msgstr ""
+"Selle väärtusega määratakse, millised failid sirvijas välja filtreeritakse. "
+"Võimalikud väärtused on: none (ei filtreerita midagi), hidden "
+"(filtreeritakse peidetud failid), binary (filtreeritakse binaarfailid) ja "
+"hidden_and_binary (filtreeritakse nii peidetud kui ka binaarfailid)."
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:596
 msgid "_Set root to active document"
@@ -2890,7 +2905,7 @@ msgstr "Faili_nime sobitus"
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1985
 #, c-format
 msgid "No mount object for mounted volume: %s"
-msgstr ""
+msgstr "Ühendatud ketta jaoks pole ühendamisobjekti: %s"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:2065
 #, c-format
