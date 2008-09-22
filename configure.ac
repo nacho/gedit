@@ -3,8 +3,8 @@ dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.59)
 
 m4_define(gedit_major_version,  2)
-m4_define(gedit_minor_version, 23)
-m4_define(gedit_micro_version, 93)
+m4_define(gedit_minor_version, 24)
+m4_define(gedit_micro_version,  0)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
 AC_INIT(gedit, gedit_version, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
@@ -402,4 +402,4 @@ Configuration:
 "
 
 dnl uncomment this in developement releases
-cat $srcdir/message-of-doom
+dnl cat $srcdir/message-of-doom
