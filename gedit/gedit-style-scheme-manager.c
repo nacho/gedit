@@ -253,30 +253,48 @@ const gchar *
 _gedit_style_scheme_manager_install_scheme (GtkSourceStyleSchemeManager *manager,
 					    const gchar                 *fname)
 {
-	gchar  *new_file_name;
-	gchar  *basename;
-	gchar  *styles_dir;
+	gchar *new_file_name = NULL;
+	gchar *dirname;
+	gchar *styles_dir;
 	GError *error = NULL;
+	gboolean copied = FALSE;
 
 	const gchar* const *ids;
 
 	g_return_val_if_fail (GTK_IS_SOURCE_STYLE_SCHEME_MANAGER (manager), NULL);
 	g_return_val_if_fail (fname != NULL, NULL);
 
-	basename = g_path_get_basename (fname);
+	dirname = g_path_get_dirname (fname);
 	styles_dir = get_gedit_styles_path();
-	new_file_name = g_build_filename (styles_dir, basename, NULL);
-	g_free (styles_dir);
-	g_free (basename);
 
-	/* Copy the style scheme file into GEDIT_STYLES_DIR */
-	if (!file_copy (fname, new_file_name, &error))
+	if (strcmp (dirname, styles_dir) != 0)
 	{
-		g_message ("Cannot install style scheme:\n%s",
-			   error->message);
+		gchar *basename;
 
-		return NULL;
+		basename = g_path_get_basename (fname);
+		new_file_name = g_build_filename (styles_dir, basename, NULL);
+		g_free (basename);
+
+		/* Copy the style scheme file into GEDIT_STYLES_DIR */
+		if (!file_copy (fname, new_file_name, &error))
+		{
+			g_free (new_file_name);
+
+			g_message ("Cannot install style scheme:\n%s",
+				   error->message);
+
+			return NULL;
+		}
+
+		copied = TRUE;
 	}
+	else
+	{
+		new_file_name = g_strdup (fname);
+	}
+
+	g_free (dirname);
+	g_free (styles_dir);
 
 	/* Reload the available style schemes */
 	gtk_source_style_scheme_manager_force_rescan (manager);
@@ -305,7 +323,8 @@ _gedit_style_scheme_manager_install_scheme (GtkSourceStyleSchemeManager *manager
 	}
 
 	/* The style scheme has not been correctly installed */
-	g_unlink (new_file_name);
+	if (copied)
+		g_unlink (new_file_name);
 
 	g_free (new_file_name);
 
