@@ -52,7 +52,6 @@
 #include "gedit-app.h"
 #include "gedit-commands.h"
 #include "dialogs/gedit-close-confirmation-dialog.h"
-#include "smclient/eggdesktopfile.h"
 #include "smclient/eggsmclient.h"
 
 /* The master client we use for SM */
@@ -410,7 +409,6 @@ gedit_session_init (void)
 	if (master_client)
 	  return;
 
-	egg_set_desktop_file (DATADIR "/applications/gedit.desktop");
 	master_client = egg_sm_client_get ();
 	g_signal_connect (master_client,
 			  "save_state",

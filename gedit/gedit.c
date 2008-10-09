@@ -54,6 +54,7 @@
 
 #include "bacon-message-connection.h"
 #include "eggsmclient.h"
+#include "eggdesktopfile.h"
 
 static guint32 startup_timestamp = 0;
 static BaconMessageConnection *connection;
@@ -522,8 +523,8 @@ main (int argc, char *argv[])
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
 					   GEDIT_ICONDIR);
 
-	/* Set default icon */
-	gtk_window_set_default_icon_name ("accessories-text-editor");
+	/* Set the associated .desktop file */
+	egg_set_desktop_file (DATADIR "/applications/gedit.desktop");
 
 	/* Load user preferences */
 	gedit_debug_message (DEBUG_APP, "Init prefs manager");

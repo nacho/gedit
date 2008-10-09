@@ -15,7 +15,7 @@ noinst_LTLIBRARIES =                     \
 	$(platform_ltlibraries)
 
 libeggsmclient_la_LIBADD =               \
-	$(GEDIT_LIBS)             \
+	$(GEDIT_LIBS)                    \
 	$(platform_libs)
 
 libeggsmclient_la_SOURCES =              \
