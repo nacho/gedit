@@ -3,7 +3,7 @@
 ENABLE_PYTHON=@enable_python@
 
 PKG_CONFIG_MODULES="glib-2.0 gtk+-2.0 gtksourceview-2.0 \
-		    pygobject-2.0 pygtk-2.0 gnome-python-2.0 \
+		    pygobject-2.0 pygtk-2.0 \
 		    pygtksourceview-2.0 enchant iso-codes"
 
 echo_padded ()
@@ -64,12 +64,6 @@ then
 	python -c "import gtk, sys; \
 		   sys.stdout.write('%d.%d.%d ' % gtk.pygtk_version); \
 		   sys.stdout.write('(GTK+ %d.%d.%d)' % gtk.gtk_version)" \
-		   2>/dev/null
-	echo
-
-	echo_padded "gnome-python"
-	python -c "import gnome, sys; \
-		   sys.stdout.write('%d.%d.%d' % gnome.gnome_python_version)" \
 		   2>/dev/null
 	echo
 else
