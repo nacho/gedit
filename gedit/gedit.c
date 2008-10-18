@@ -481,6 +481,8 @@ main (int argc, char *argv[])
 		return 1;
 	}
 
+	g_option_context_free (context);
+
 	gedit_debug_message (DEBUG_APP, "Create bacon connection");
 
 	connection = bacon_message_connection_new ("gedit");
