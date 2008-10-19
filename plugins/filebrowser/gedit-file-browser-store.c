@@ -1885,35 +1885,32 @@ model_add_node_from_file (GeditFileBrowserStore * model,
 	gboolean free_info = FALSE;
 	GError * error = NULL;
 
-	// Check if it already exists
-	if ((node = model_file_exists (model, parent, file)) == NULL) {	
-		if (!info) {
-			info = g_file_query_info (file,
-						  STANDARD_ATTRIBUTE_TYPES,
-						  G_FILE_QUERY_INFO_NONE,
-						  NULL,
-						  &error);
-			free_info = TRUE;
-		}
-		
-		if (!info) {
-			g_warning ("Error querying file info: %s", error->message);
-			g_error_free (error);
-			
-			/* FIXME: What to do now then... */
-			node = file_browser_node_new (file, parent);
-		} else if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
-			node = file_browser_node_dir_new (model, file, parent);
-		} else {
-			node = file_browser_node_new (file, parent);
-		}
-
-		file_browser_node_set_from_info (model, node, info, FALSE);
-		model_add_node (model, node, parent);
-		
-		if (info && free_info)
-			g_object_unref (info);
+	if (info == NULL) {
+		info = g_file_query_info (file,
+					  STANDARD_ATTRIBUTE_TYPES,
+					  G_FILE_QUERY_INFO_NONE,
+					  NULL,
+					  &error);
+		free_info = TRUE;
 	}
+	
+	if (!info) {
+		g_warning ("Error querying file info: %s", error->message);
+		g_error_free (error);
+		
+		/* FIXME: What to do now then... */
+		node = file_browser_node_new (file, parent);
+	} else if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
+		node = file_browser_node_dir_new (model, file, parent);
+	} else {
+		node = file_browser_node_new (file, parent);
+	}
+
+	file_browser_node_set_from_info (model, node, info, FALSE);
+	model_add_node (model, node, parent);
+	
+	if (info && free_info)
+		g_object_unref (info);
 
 	return node;
 }
@@ -2037,7 +2034,9 @@ on_directory_monitor_event (GFileMonitor * monitor,
 		break;
 	case G_FILE_MONITOR_EVENT_CREATED:
 		if (g_file_query_exists (file, NULL)) {
-			model_add_node_from_file (dir->model, parent, file, NULL);
+			if (model_file_exists (dir->model, parent, file) == NULL) {
+				model_add_node_from_file (dir->model, parent, file, NULL);
+			}
 		}
 		
 		break;
