@@ -76,6 +76,7 @@ struct _AsyncNode
 {
 	FileBrowserNodeDir *dir;
 	GCancellable *cancellable;
+	GSList *original_children;
 };
 
 struct _FileBrowserNode 
@@ -1723,7 +1724,8 @@ model_check_dummy (GeditFileBrowserStore * model, FileBrowserNode * node)
 }
 
 static void
-insert_node_sorted (GeditFileBrowserStore * model, FileBrowserNode * child,
+insert_node_sorted (GeditFileBrowserStore * model,
+		    FileBrowserNode * child,
 		    FileBrowserNode * parent)
 {
 	FileBrowserNodeDir *dir;
@@ -1763,6 +1765,92 @@ model_add_node (GeditFileBrowserStore * model, FileBrowserNode * child,
 
 	model_check_dummy (model, parent);
 	model_check_dummy (model, child);
+}
+
+static void
+model_add_nodes_batch (GeditFileBrowserStore * model,
+		       GSList * children,
+		       FileBrowserNode * parent)
+{
+	GSList *sorted_children;
+	GSList *child;
+	GSList *prev;
+	GSList *l;
+	FileBrowserNodeDir *dir;
+
+	dir = FILE_BROWSER_NODE_DIR (parent);
+
+	sorted_children = g_slist_sort (children, (GCompareFunc) model->priv->sort_func);
+
+	child = sorted_children;
+	l = dir->children;
+	prev = NULL;
+
+	model_check_dummy (model, parent);
+
+	while (child) {
+		FileBrowserNode *node = child->data;
+		GtkTreeIter iter;
+		GtkTreePath *path;
+
+		/* reached the end of the first list, just append the second */
+		if (l == NULL) {
+
+			dir->children = g_slist_concat (dir->children, child);
+
+			for (l = child; l; l = l->next) {
+				if (model_node_visibility (model, parent) &&
+				    model_node_visibility (model, l->data)) {
+					iter.user_data = l->data;
+					path = gedit_file_browser_store_get_path_real (model, l->data);
+
+					// Emit row inserted
+					row_inserted (model, &path, &iter);
+					gtk_tree_path_free (path);
+				}
+
+				model_check_dummy (model, l->data);
+			}
+
+			break;
+		}
+
+		if (model->priv->sort_func (l->data, node) > 0) {
+			GSList *next_child;
+
+			if (prev == NULL) {
+				/* prepend to the list */
+				dir->children = g_slist_prepend (dir->children, child);
+			} else {
+				prev->next = child;
+			}
+
+			next_child = child->next;
+			prev = child;
+			child->next = l;
+			child = next_child;
+
+			if (model_node_visibility (model, parent) &&
+			    model_node_visibility (model, node)) {
+				iter.user_data = node;
+				path = gedit_file_browser_store_get_path_real (model, node);
+
+				// Emit row inserted
+				row_inserted (model, &path, &iter);
+				gtk_tree_path_free (path);
+			}
+
+			model_check_dummy (model, node);
+
+			/* try again at the same l position with the
+			 * next child */
+		} else {
+
+			/* Move to the next item in the list */
+			prev = l;
+			l = l->next;
+		}
+	}
 }
 
 static gchar const *
@@ -1854,17 +1942,13 @@ file_browser_node_set_from_info (GeditFileBrowserStore * model,
 }
 
 static FileBrowserNode *
-model_file_exists (GeditFileBrowserStore * model, FileBrowserNode * parent,
-		  GFile * file)
+node_list_contains_file (GSList *children, GFile * file)
 {
 	GSList *item;
-	FileBrowserNode *node;
 
-	if (!NODE_IS_DIR (parent))
-		return NULL;
+	for (item = children; item; item = item->next) {
+		FileBrowserNode *node;
 
-	for (item = FILE_BROWSER_NODE_DIR (parent)->children; item;
-	     item = item->next) {
 		node = (FileBrowserNode *) (item->data);
 
 		if (node->file != NULL
@@ -1885,34 +1969,97 @@ model_add_node_from_file (GeditFileBrowserStore * model,
 	gboolean free_info = FALSE;
 	GError * error = NULL;
 
-	if (info == NULL) {
-		info = g_file_query_info (file,
-					  STANDARD_ATTRIBUTE_TYPES,
-					  G_FILE_QUERY_INFO_NONE,
-					  NULL,
-					  &error);
-		free_info = TRUE;
-	}
+	if ((node = node_list_contains_file (FILE_BROWSER_NODE_DIR (parent)->children, file)) == NULL) {
+		if (info == NULL) {
+			info = g_file_query_info (file,
+						  STANDARD_ATTRIBUTE_TYPES,
+						  G_FILE_QUERY_INFO_NONE,
+						  NULL,
+						  &error);
+			free_info = TRUE;
+		}
 	
-	if (!info) {
-		g_warning ("Error querying file info: %s", error->message);
-		g_error_free (error);
+		if (!info) {
+			g_warning ("Error querying file info: %s", error->message);
+			g_error_free (error);
 		
-		/* FIXME: What to do now then... */
-		node = file_browser_node_new (file, parent);
-	} else if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
-		node = file_browser_node_dir_new (model, file, parent);
-	} else {
-		node = file_browser_node_new (file, parent);
-	}
+			/* FIXME: What to do now then... */
+			node = file_browser_node_new (file, parent);
+		} else if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
+			node = file_browser_node_dir_new (model, file, parent);
+		} else {
+			node = file_browser_node_new (file, parent);
+		}
 
-	file_browser_node_set_from_info (model, node, info, FALSE);
-	model_add_node (model, node, parent);
+		file_browser_node_set_from_info (model, node, info, FALSE);
+		model_add_node (model, node, parent);
 	
-	if (info && free_info)
-		g_object_unref (info);
+		if (info && free_info)
+			g_object_unref (info);
+	}
 
 	return node;
+}
+
+/* We pass in a copy of the list of parent->children so that we do
+ * not have to check if a file already exists among the ones we just
+ * added */
+static void
+model_add_nodes_from_files (GeditFileBrowserStore * model,
+			    FileBrowserNode * parent,
+			    GSList * original_children,
+			    GList * files)
+{
+	GList *item;
+	GSList *nodes = NULL;
+
+	for (item = files; item; item = item->next) {
+		GFileInfo *info = G_FILE_INFO (item->data);
+		GFileType type;
+		gchar const * name;
+		GFile * file;
+		FileBrowserNode *node;
+
+		type = g_file_info_get_file_type (info);
+
+		/* Skip all non regular, non directory files */
+		if (type != G_FILE_TYPE_REGULAR &&
+		    type != G_FILE_TYPE_DIRECTORY &&
+		    type != G_FILE_TYPE_SYMBOLIC_LINK) {
+			g_object_unref (info);
+			continue;
+		}		
+
+		name = g_file_info_get_name (info);
+
+		/* Skip '.' and '..' directories */
+		if (type == G_FILE_TYPE_DIRECTORY &&
+		    (strcmp (name, ".") == 0 ||
+		     strcmp (name, "..") == 0)) {
+			continue;
+		}
+
+		file = g_file_get_child (parent->file, name);
+
+		if ((node = node_list_contains_file (original_children, file)) == NULL) {
+
+			if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
+				node = file_browser_node_dir_new (model, file, parent);
+			} else {
+				node = file_browser_node_new (file, parent);
+			}
+
+			file_browser_node_set_from_info (model, node, info, FALSE);
+
+			nodes = g_slist_prepend (nodes, node);
+		}
+
+		g_object_unref (file);
+		g_object_unref (info);
+	}
+
+	if (nodes)
+		model_add_nodes_batch (model, nodes, parent);
 }
 
 static FileBrowserNode *
@@ -1923,7 +2070,7 @@ model_add_node_from_dir (GeditFileBrowserStore * model,
 	FileBrowserNode *node;
 
 	/* Check if it already exists */
-	if ((node = model_file_exists (model, parent, file)) == NULL) {	
+	if ((node = node_list_contains_file (FILE_BROWSER_NODE_DIR (parent)->children, file)) == NULL) {	
 		node = file_browser_node_dir_new (model, file, parent);
 		file_browser_node_set_from_info (model, node, NULL, FALSE);
 
@@ -2025,7 +2172,7 @@ on_directory_monitor_event (GFileMonitor * monitor,
 
 	switch (event_type) {
 	case G_FILE_MONITOR_EVENT_DELETED:
-		node = model_file_exists (dir->model, parent, file);
+		node = node_list_contains_file (dir->children, file);
 
 		if (node != NULL) {
 			// Remove the node
@@ -2034,9 +2181,7 @@ on_directory_monitor_event (GFileMonitor * monitor,
 		break;
 	case G_FILE_MONITOR_EVENT_CREATED:
 		if (g_file_query_exists (file, NULL)) {
-			if (model_file_exists (dir->model, parent, file) == NULL) {
-				model_add_node_from_file (dir->model, parent, file, NULL);
-			}
+			model_add_node_from_file (dir->model, parent, file, NULL);
 		}
 		
 		break;
@@ -2049,6 +2194,7 @@ static void
 async_node_free (AsyncNode *async)
 {
 	g_object_unref (async->cancellable);
+	g_slist_free (async->original_children);
 	g_free (async);
 }
 
@@ -2058,12 +2204,7 @@ model_iterate_next_files_cb (GFileEnumerator * enumerator,
 			     AsyncNode * async)
 {
 	GList * files;
-	GList * item;
 	GError * error = NULL;
-	GFileInfo * info;
-	GFileType type;
-	gchar const * name;
-	GFile * file;
 	FileBrowserNodeDir * dir = async->dir;
 	FileBrowserNode * parent = (FileBrowserNode *)dir;
 	
@@ -2112,30 +2253,7 @@ model_iterate_next_files_cb (GFileEnumerator * enumerator,
 		g_file_enumerator_close (enumerator, NULL, NULL);
 		async_node_free (async);
 	} else {
-		for (item = files; item; item = item->next) {
-			info = G_FILE_INFO (item->data);
-			type = g_file_info_get_file_type (info);
-			
-			/* Skip all non regular, non directory files */
-			if (type != G_FILE_TYPE_REGULAR &&
-			    type != G_FILE_TYPE_DIRECTORY &&
-			    type != G_FILE_TYPE_SYMBOLIC_LINK)
-				continue;
-
-			name = g_file_info_get_name (info);
-
-			/* Skip '.' and '..' directories */
-			if (type == G_FILE_TYPE_DIRECTORY &&
-			    (strcmp (name, ".") == 0 ||
-			     strcmp (name, "..") == 0))
-				continue;
-
-			file = g_file_get_child (parent->file, name);
-			model_add_node_from_file (dir->model, parent, file, info);
-
-			g_object_unref (file);
-			g_object_unref (info);
-		}
+		model_add_nodes_from_files (dir->model, parent, async->original_children, files);
 		
 		g_list_free (files);
 		next_files_async (enumerator, async);
@@ -2215,6 +2333,7 @@ model_load_directory (GeditFileBrowserStore * model,
 	AsyncNode *async = g_new (AsyncNode, 1);
 	async->dir = dir;
 	async->cancellable = g_object_ref (dir->cancellable);
+	async->original_children = g_slist_copy (dir->children);
 
 	/* Start loading async */
 	g_file_enumerate_children_async (node->file,

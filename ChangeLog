@@ -1,3 +1,16 @@
+2008-10-27  Paolo Borelli  <pborelli@katamail.com>
+
+	* plugins/filebrowser/gedit-filebrowser-store.c: Optimize insertion
+	when loading a dir with lot of files:
+	1) files are now inserted in batch in order to reduce the amount
+	of searching in the ordered list
+	2) the previous changeset has been reverted since it caused duplicate
+	entries in some cases, but the check has been made way faster by only
+	looking in the existing list of nodes without iterating the ones we
+	just added.
+	See bug #554362 for details, in the future we should still consider
+	using GSequence.
+
 2008-10-19  Paolo Borelli  <pborelli@katamail.com>
 
 	* plugins/filebrowser/gedit-filebrowser-store.c: do not check if
