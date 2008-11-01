@@ -61,8 +61,11 @@ gedit_file_browser_utils_pixbuf_from_icon (GIcon * icon,
 		return NULL;
 
 	theme = gtk_icon_theme_get_default ();
-	info = gtk_icon_theme_lookup_by_gicon (theme, icon, size, 0);
-	
+	info = gtk_icon_theme_lookup_by_gicon (theme,
+					       icon,
+					       size,
+					       GTK_ICON_LOOKUP_USE_BUILTIN);
+
 	if (!info)
 		return NULL;
 		
@@ -90,7 +93,9 @@ gedit_file_browser_utils_pixbuf_from_file (GFile * file,
 		return NULL;
 
 	icon = g_file_info_get_icon (info);
-	ret = gedit_file_browser_utils_pixbuf_from_icon (icon, size);
+	if (icon != NULL)
+		ret = gedit_file_browser_utils_pixbuf_from_icon (icon, size);
+
 	g_object_unref (info);
 	
 	return ret;
