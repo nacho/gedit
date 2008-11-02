@@ -28,21 +28,26 @@ INCLUDES += \
 endif
 
 gedit_SOURCES = gedit.c
-gedit_LDADD = libgedit.la smclient/libeggsmclient.la $(GEDIT_LIBS)
-
+gedit_LDADD = libgedit.la $(GEDIT_LIBS)
+ 
+if PLATFORM_WIN32
+gedit_LDFLAGS = -Wl,--export-all-symbols -Wl,--out-implib,libgedit-$(GEDIT_API_VERSION).a
+else
 gedit_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
-
+endif
 
 libgedit_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
-libgedit_la_LIBADD =			\
-	$(GEDIT_LIBS)			\
-	dialogs/libdialogs.la
+libgedit_la_LIBADD = \
+	dialogs/libdialogs.la		\
+	smclient/libeggsmclient.la
 
 if ENABLE_PYTHON
-libgedit_la_LIBADD += \
-	$(top_builddir)/bindings/python/gedit.la
+libgedit_la_LIBADD += $(top_builddir)/bindings/python/gedit.la
 endif
+
+# GEDIT_LIBS must be the last to ensure correct order on some platforms
+libgedit_la_LIBADD += $(GEDIT_LIBS)
 
 BUILT_SOURCES = 			\
 	gedit-enum-types.c		\
@@ -209,6 +214,10 @@ dist-hook:
 install-exec-hook:
 	rm -f $(DESTDIR)$(bindir)/gnome-text-editor
 	ln -s gedit $(DESTDIR)$(bindir)/gnome-text-editor
+if PLATFORM_WIN32
+	$(mkinstalldirs) "$(DESTDIR)$(libdir)"
+	$(INSTALL_DATA) libgedit-$(GEDIT_API_VERSION).a "$(DESTDIR)$(libdir)"
+endif
 
 BACON_DIR=$(srcdir)/../../libbacon/src/
 BACON_FILES=bacon-message-connection.h bacon-message-connection.c

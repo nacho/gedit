@@ -44,6 +44,19 @@ AC_PATH_PROG(GZIP, gzip)
 dnl make sure we keep ACLOCAL_FLAGS around for maintainer builds to work
 AC_SUBST(ACLOCAL_AMFLAGS, "$ACLOCAL_FLAGS -I m4")
 
+dnl check for win32 platform
+AC_MSG_CHECKING([for some Win32 platform])
+case "$host" in
+  *-*-mingw*|*-*-cygwin*)
+    platform_win32=yes
+    ;;
+  *)
+    platform_win32=no
+    ;;
+esac
+AC_MSG_RESULT([$platform_win32])
+AM_CONDITIONAL(PLATFORM_WIN32, test "$platform_win32" = "yes")
+
 dnl ===============================================================
 dnl Expanded dirs
 dnl ===============================================================
@@ -345,7 +358,16 @@ if test "x$enable_deprecations" = "xyes"; then
    AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
 fi
 
-PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
+# on win32 plugins must be able to resolve all symbols at link time
+# so we create a lib
+if test "$platform_win32" = yes; then
+	GEDIT_IMPLIB="-lgedit-$GEDIT_API_VERSION"
+	PLUGIN_LIBTOOL_FLAGS="-module -avoid-version -no-undefined -Wl,\$(top_builddir)/gedit/libgedit-\$(GEDIT_API_VERSION).a"
+else
+	GEDIT_IMPLIB=""
+	PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
+fi
+AC_SUBST(GEDIT_IMPLIB)
 AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
 
 AC_CONFIG_FILES([
