@@ -22,6 +22,8 @@
 #include <string.h>
 #include <gtk/gtk.h>
 
+#include "gedit-marshal.h"
+
 #define ICON_MARGIN 2
 #define MAX_ICONS 2
 
@@ -128,7 +130,7 @@ sexy_icon_entry_class_init(SexyIconEntryClass *klass)
 					 G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
 					 G_STRUCT_OFFSET(SexyIconEntryClass, icon_pressed),
 					 NULL, NULL,
-					 gtk_marshal_VOID__INT_INT,
+					 gedit_marshal_VOID__INT_INT,
 					 G_TYPE_NONE, 2,
 					 G_TYPE_INT,
 					 G_TYPE_INT);
@@ -148,7 +150,7 @@ sexy_icon_entry_class_init(SexyIconEntryClass *klass)
 					 G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
 					 G_STRUCT_OFFSET(SexyIconEntryClass, icon_released),
 					 NULL, NULL,
-					 gtk_marshal_VOID__INT_INT,
+					 gedit_marshal_VOID__INT_INT,
 					 G_TYPE_NONE, 2,
 					 G_TYPE_INT,
 					 G_TYPE_INT);
