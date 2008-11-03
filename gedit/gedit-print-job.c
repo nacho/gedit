@@ -155,8 +155,6 @@ gedit_print_job_finalize (GObject *object)
 {
 	GeditPrintJob *job = GEDIT_PRINT_JOB (object);
 
-	g_debug ("Finalize.");
-	
 	g_free (job->priv->status_string);
 	
 	if (job->priv->compositor != NULL)
@@ -314,6 +312,7 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 	gboolean can_set;
 	GtkWrapMode wrap_mode;
 	gchar *root_objects[] = {
+		"adjustment1",
 		"contents",
 		NULL
 	};
@@ -672,7 +671,6 @@ end_print_cb (GtkPrintOperation *operation,
 	      GtkPrintContext   *context,
 	      GeditPrintJob     *job)
 {
-	g_debug ("end_print_cb");
 	g_object_unref (job->priv->compositor);
 	job->priv->compositor = NULL;
 }
@@ -685,8 +683,6 @@ done_cb (GtkPrintOperation       *operation,
 	GError *error = NULL;
 	GeditPrintJobResult print_result;
 
-	g_debug ("done_cb");
-	
 	switch (result) 
 	{
 		case GTK_PRINT_OPERATION_RESULT_CANCEL:
