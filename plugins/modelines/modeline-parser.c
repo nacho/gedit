@@ -337,7 +337,7 @@ parse_modeline (gchar           *s,
 		    	while (*s != ':') s++;
 		    	s = parse_vim_modeline (s + 1, options);
 		}
-		else if (line_number == 0 && strncmp (s, "-*-", 3) == 0)
+		else if (line_number < 2 && strncmp (s, "-*-", 3) == 0)
 		{
 			gedit_debug_message (DEBUG_PLUGINS, "Emacs modeline on line %d", line_number);
 
