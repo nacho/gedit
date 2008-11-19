@@ -56,14 +56,17 @@ gedit_file_browser_utils_pixbuf_from_icon (GIcon * icon,
 	GdkPixbuf * ret = NULL;
 	GtkIconTheme *theme;
 	GtkIconInfo *info;
-	
+	gint width;
+
 	if (!icon)
 		return NULL;
 
 	theme = gtk_icon_theme_get_default ();
+	gtk_icon_size_lookup (size, &width, NULL);
+	
 	info = gtk_icon_theme_lookup_by_gicon (theme,
 					       icon,
-					       size,
+					       width,
 					       GTK_ICON_LOOKUP_USE_BUILTIN);
 
 	if (!info)
