@@ -1253,12 +1253,24 @@ search_entry_insert_text (GtkEditable *editable,
 		gunichar c;
 		const gchar *p;
 	 	const gchar *end;
+	 	const gchar *next;
 
 		p = text;
 		end = text + length;
 
-		while (p != end) {
-			const gchar *next;
+		if (p == end)
+			return;
+
+		c = g_utf8_get_char (p);
+		
+		if (c == '-' || c == '+')
+		{
+			next = g_utf8_next_char (p);
+			p = next;
+		}
+
+		while (p != end)
+		{
 			next = g_utf8_next_char (p);
 
 			c = g_utf8_get_char (p);
@@ -1651,8 +1663,29 @@ search_init (GtkWidget *entry,
 		{
 			gboolean moved;
 			gint line;
-
-			line = MAX (atoi (entry_text) - 1, 0);
+			gint offset_line = 0;
+			
+			if (*entry_text == '-')
+			{
+				if (*(entry_text + 1) != '\0')
+					offset_line = MAX (atoi (entry_text + 1), 0);
+				
+				line = gtk_text_iter_get_line (&view->priv->start_search_iter)
+					 - offset_line;
+			}
+			else if (*entry_text == '+')
+			{
+				if (*(entry_text + 1) != '\0')
+					offset_line = MAX (atoi (entry_text + 1), 0);
+				
+				line = gtk_text_iter_get_line (&view->priv->start_search_iter)
+					 + offset_line;
+			}
+			else
+			{
+				line = MAX (atoi (entry_text) - 1, 0);
+			}
+			
 			moved = gedit_document_goto_line (doc, line);
 			gedit_view_scroll_to_cursor (view);
 
