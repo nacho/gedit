@@ -1263,7 +1263,7 @@ search_entry_insert_text (GtkEditable *editable,
 
 		c = g_utf8_get_char (p);
 		
-		if (c == '-' || c == '+')
+		if ((c == '-' || c == '+') && *position == 0)
 		{
 			next = g_utf8_next_char (p);
 			p = next;
@@ -1667,19 +1667,21 @@ search_init (GtkWidget *entry,
 			
 			if (*entry_text == '-')
 			{
+				gint cur_line = gtk_text_iter_get_line (&view->priv->start_search_iter);
+			
 				if (*(entry_text + 1) != '\0')
 					offset_line = MAX (atoi (entry_text + 1), 0);
 				
-				line = gtk_text_iter_get_line (&view->priv->start_search_iter)
-					 - offset_line;
+				line = MAX (cur_line - offset_line, 0);
 			}
 			else if (*entry_text == '+')
 			{
+				gint cur_line = gtk_text_iter_get_line (&view->priv->start_search_iter);
+			
 				if (*(entry_text + 1) != '\0')
 					offset_line = MAX (atoi (entry_text + 1), 0);
 				
-				line = gtk_text_iter_get_line (&view->priv->start_search_iter)
-					 + offset_line;
+				line = cur_line + offset_line;
 			}
 			else
 			{
