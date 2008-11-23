@@ -4,7 +4,7 @@ AC_PREREQ(2.59)
 
 m4_define(gedit_major_version,  2)
 m4_define(gedit_minor_version, 24)
-m4_define(gedit_micro_version,  1)
+m4_define(gedit_micro_version,  2)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
 AC_INIT(gedit, gedit_version, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
@@ -233,31 +233,6 @@ if test "x$have_python" != "xno"; then
 	AC_SUBST([PYTHON_LIB_LOC])
 	AC_SUBST([PYTHON_CFLAGS])
 	AC_SUBST([PYTHON_EXTRA_LIBS])
-
-	dnl FIXME: do we really need this test?
-	AC_MSG_CHECKING([whether we can build a shared library depending on libpython])
-	rm -rf testpython
-	mkdir testpython
-	cd testpython
-	cat > testpython.c <<EOF
-#include <Python.h>
-int testpython (void)
-{
-Py_Exit (0);
-}
-EOF
-
-	if /bin/sh ../libtool --mode=compile ${CC} $PYTHON_CFLAGS -c testpython.c >/dev/null 2>&1 && \
-		/bin/sh ../libtool --mode=link ${CC} -o testpython.la -rpath `pwd` -module -avoid-version -no-undefined $PYTHON_LIB_LOC testpython.lo $PYTHON_LIBS $PYTHON_EXTRA_LIBS >/dev/null 2>&1 && \
-		grep 'dlname.*testpython' testpython.la >/dev/null 2>&1; then
-		result=yes
-	else
-		result=no
-		have_python=no
-	fi
-	cd ..
-	rm -rf testpython
-	AC_MSG_RESULT([$result])
 fi
 
 if test "x$have_python" != "xyes"; then

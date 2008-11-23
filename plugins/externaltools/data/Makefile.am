@@ -17,7 +17,7 @@ toolsdir = $(datadir)/gedit-2/plugins/tools
 # (.desktop), which happens to be translated using intltool.
 $(tools_SCRIPTS): %: %.tool.in %.desktop $(TOOL_MERGE)
 	perl $(TOOL_MERGE) -o $@ $< $(word 2,$^)
-	chmod --reference=$< $@
+	chmod 755 $@
 
 EXTRA_DIST = \
 	$(desktop_in_files) \
