@@ -41,8 +41,11 @@
 #include "gedit-file-browser-marshal.h"
 #include "gedit-file-browser-enum-types.h"
 
-#define GEDIT_FILE_BROWSER_WIDGET_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_FILE_BROWSER_WIDGET, GeditFileBrowserWidgetPrivate))
-#define XML_UI_FILE GEDIT_UIDIR "/gedit-file-browser-widget-ui.xml"
+#define GEDIT_FILE_BROWSER_WIDGET_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), \
+						      GEDIT_TYPE_FILE_BROWSER_WIDGET, \
+						      GeditFileBrowserWidgetPrivate))
+
+#define XML_UI_FILE GEDIT_UIDIR "gedit-file-browser-widget-ui.xml"
 #define LOCATION_DATA_KEY "gedit-file-browser-widget-location"
 
 enum 
@@ -337,7 +340,7 @@ gedit_file_browser_widget_finalize (GObject * object)
 		location_free ((Location *) (loc->data));
 
 	if (obj->priv->current_location_menu_item)
-		gtk_widget_unref (obj->priv->current_location_menu_item);
+		g_object_unref (obj->priv->current_location_menu_item);
 
 	g_list_free (obj->priv->locations);
 
@@ -423,7 +426,7 @@ gedit_file_browser_widget_class_init (GeditFileBrowserWidgetClass * klass)
 			  G_STRUCT_OFFSET (GeditFileBrowserWidgetClass,
 					   uri_activated), NULL, NULL,
 			  g_cclosure_marshal_VOID__STRING, G_TYPE_NONE, 1,
-			  GTK_TYPE_STRING);
+			  G_TYPE_STRING);
 	signals[ERROR] =
 	    g_signal_new ("error", G_OBJECT_CLASS_TYPE (object_class),
 			  G_SIGNAL_RUN_LAST,
@@ -443,7 +446,7 @@ gedit_file_browser_widget_class_init (GeditFileBrowserWidgetClass * klass)
 	                  G_TYPE_BOOLEAN,
 	                  2,
 	                  G_TYPE_OBJECT,
-	                  GTK_TYPE_POINTER);
+	                  G_TYPE_POINTER);
 
 	signals[CONFIRM_NO_TRASH] =
 	    g_signal_new ("confirm-no-trash", G_OBJECT_CLASS_TYPE (object_class),
@@ -455,7 +458,7 @@ gedit_file_browser_widget_class_init (GeditFileBrowserWidgetClass * klass)
 	                  gedit_file_browser_marshal_BOOL__POINTER,
 	                  G_TYPE_BOOLEAN,
 	                  1,
-	                  GTK_TYPE_POINTER);
+	                  G_TYPE_POINTER);
 
 	g_type_class_add_private (object_class,
 				  sizeof (GeditFileBrowserWidgetPrivate));
@@ -919,64 +922,43 @@ create_toolbar (GeditFileBrowserWidget * obj)
 	obj->priv->location_previous_menu = gtk_menu_new ();
 	gtk_widget_show (obj->priv->location_previous_menu);
 
-	widget =
-	    GTK_WIDGET (gtk_menu_tool_button_new_from_stock
-			(GTK_STOCK_GO_BACK));
+	widget = GTK_WIDGET (gtk_menu_tool_button_new_from_stock (GTK_STOCK_GO_BACK));
 	gtk_menu_tool_button_set_menu (GTK_MENU_TOOL_BUTTON (widget),
 				       obj->priv->location_previous_menu);
 
 	g_object_set (widget, "label", _("Previous location"), NULL);
+	gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (widget),
+					_("Go to previous location"));
+	gtk_menu_tool_button_set_arrow_tooltip_text (GTK_MENU_TOOL_BUTTON (widget),
+						     _("Go to a previously opened location"));
 
-	gtk_tool_item_set_tooltip (GTK_TOOL_ITEM (widget),
-				   GTK_TOOLBAR (toolbar)->tooltips,
-				   _("Go to previous location"), NULL);
-	gtk_menu_tool_button_set_arrow_tooltip (GTK_MENU_TOOL_BUTTON
-						(widget),
-						GTK_TOOLBAR (toolbar)->
-						tooltips,
-						_("Go to a previously opened location"),
-						NULL);
-
-	action =
-	    gtk_action_group_get_action (obj->priv->action_group_sensitive,
-					 "DirectoryPrevious");
+	action = gtk_action_group_get_action (obj->priv->action_group_sensitive,
+					      "DirectoryPrevious");
 	g_object_set (action, "is_important", TRUE, "short_label",
 		      _("Previous location"), NULL);
 	gtk_action_connect_proxy (action, widget);
-	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (widget),
-			    0);
+	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (widget), 0);
 
 	/* Next directory menu tool item */
 	obj->priv->location_next_menu = gtk_menu_new ();
 	gtk_widget_show (obj->priv->location_next_menu);
 
-	widget =
-	    GTK_WIDGET (gtk_menu_tool_button_new_from_stock
-			(GTK_STOCK_GO_FORWARD));
+	widget = GTK_WIDGET (gtk_menu_tool_button_new_from_stock (GTK_STOCK_GO_FORWARD));
 	gtk_menu_tool_button_set_menu (GTK_MENU_TOOL_BUTTON (widget),
 				       obj->priv->location_next_menu);
 
 	g_object_set (widget, "label", _("Next location"), NULL);
+	gtk_tool_item_set_tooltip_text (GTK_TOOL_ITEM (widget),
+					_("Go to next location"));
+	gtk_menu_tool_button_set_arrow_tooltip_text (GTK_MENU_TOOL_BUTTON (widget),
+						     _("Go to a previously opened location"));
 
-	gtk_tool_item_set_tooltip (GTK_TOOL_ITEM (widget),
-				   GTK_TOOLBAR (toolbar)->tooltips,
-				   _("Go to next location"), NULL);
-	gtk_menu_tool_button_set_arrow_tooltip (GTK_MENU_TOOL_BUTTON
-						(widget),
-						GTK_TOOLBAR (toolbar)->
-						tooltips,
-						_
-						("Go to a previously opened location"),
-						NULL);
-
-	action =
-	    gtk_action_group_get_action (obj->priv->action_group_sensitive,
-					 "DirectoryNext");
+	action = gtk_action_group_get_action (obj->priv->action_group_sensitive,
+					      "DirectoryNext");
 	g_object_set (action, "is_important", TRUE, "short_label",
 		      _("Previous location"), NULL);
 	gtk_action_connect_proxy (action, widget);
-	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (widget),
-			    1);
+	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (widget), 1);
 
 	gtk_box_pack_start (GTK_BOX (obj), toolbar, FALSE, FALSE, 0);
 	gtk_widget_show (toolbar);
@@ -1513,13 +1495,13 @@ jump_to_location (GeditFileBrowserWidget * obj, GList * item,
 			gtk_menu_shell_prepend (GTK_MENU_SHELL (menu_to),
 						widget);
 
-			gtk_widget_unref (widget);
+			g_object_unref (widget);
 		}
 
 		widget = GTK_WIDGET (child->data);
 
 		/* Make sure the widget isn't destroyed when removed */
-		gtk_widget_ref (widget);
+		g_object_ref (widget);
 		gtk_container_remove (GTK_CONTAINER (menu_from), widget);
 
 		obj->priv->current_location_menu_item = widget;

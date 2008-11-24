@@ -80,14 +80,14 @@ struct _GeditViewClass
 	gboolean (* start_interactive_goto_line)(GeditView       *view);
 	gboolean (* reset_searched_text)	(GeditView       *view);
 
-	void	 (* drop_uris)			(GeditView	 *view, 
+	void	 (* drop_uris)			(GeditView	 *view,
 						 gchar          **uri_list);
 };
 
 /*
  * Public methods
  */
-GtkType		 gedit_view_get_type     	(void) G_GNUC_CONST;
+GType		 gedit_view_get_type     	(void) G_GNUC_CONST;
 
 GtkWidget	*gedit_view_new			(GeditDocument   *doc);
 

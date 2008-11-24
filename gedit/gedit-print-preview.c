@@ -558,9 +558,7 @@ create_bar (GeditPrintPreview *preview)
 	gtk_tool_button_set_label (GTK_TOOL_BUTTON (priv->prev),
 				   "P_revious Page");
 	gtk_tool_button_set_use_underline (GTK_TOOL_BUTTON (priv->prev), TRUE);
-	gtk_tool_item_set_tooltip (priv->prev,
-				   GTK_TOOLBAR (toolbar)->tooltips,
-				   _("Show the previous page"), "");
+	gtk_tool_item_set_tooltip_text (priv->prev, _("Show the previous page"));
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), priv->prev, -1);
 	g_signal_connect (priv->prev,
 			  "clicked",
@@ -572,9 +570,7 @@ create_bar (GeditPrintPreview *preview)
 	gtk_tool_button_set_label (GTK_TOOL_BUTTON (priv->next),
 				   "_Next Page");
 	gtk_tool_button_set_use_underline (GTK_TOOL_BUTTON (priv->next), TRUE);
-	gtk_tool_item_set_tooltip (priv->next,
-				   GTK_TOOLBAR (toolbar)->tooltips,
-				   _("Show the next page"), "");
+	gtk_tool_item_set_tooltip_text (priv->next, _("Show the next page"));
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), priv->next, -1);
 	g_signal_connect (priv->next,
 			  "clicked",
@@ -590,8 +586,7 @@ create_bar (GeditPrintPreview *preview)
 	priv->page_entry = gtk_entry_new ();
 	gtk_entry_set_width_chars (GTK_ENTRY (priv->page_entry), 3);
 	gtk_entry_set_max_length (GTK_ENTRY (priv->page_entry), 6);
-	gtk_widget_set_tooltip_text (priv->page_entry,
-				     _("Current page (Alt+P)"));
+	gtk_widget_set_tooltip_text (priv->page_entry, _("Current page (Alt+P)"));
 
 	g_signal_connect (priv->page_entry,
 			  "activate", 
@@ -639,9 +634,7 @@ create_bar (GeditPrintPreview *preview)
 	gtk_tool_button_set_label (GTK_TOOL_BUTTON (priv->multi),
 				   "_Show Multiple Pages");
 	gtk_tool_button_set_use_underline (GTK_TOOL_BUTTON (priv->multi), TRUE);
-	gtk_tool_item_set_tooltip (priv->multi,
-				   GTK_TOOLBAR (toolbar)->tooltips,
-				   _("Show multiple pages"), "");
+	gtk_tool_item_set_tooltip_text (priv->multi, _("Show multiple pages"));
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), priv->multi, -1);
 	g_signal_connect (priv->multi,
 			  "clicked",
@@ -654,9 +647,7 @@ create_bar (GeditPrintPreview *preview)
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), i, -1);
 
 	priv->zoom_one = gtk_tool_button_new_from_stock (GTK_STOCK_ZOOM_100);
-	gtk_tool_item_set_tooltip (priv->zoom_one,
-				   GTK_TOOLBAR (toolbar)->tooltips,
-				   _("Zoom 1:1"), "");
+	gtk_tool_item_set_tooltip_text (priv->zoom_one, _("Zoom 1:1"));
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), priv->zoom_one, -1);
 	g_signal_connect (priv->zoom_one,
 			  "clicked",
@@ -665,9 +656,7 @@ create_bar (GeditPrintPreview *preview)
 	gtk_widget_show (GTK_WIDGET (priv->zoom_one));
 
 	priv->zoom_fit = gtk_tool_button_new_from_stock (GTK_STOCK_ZOOM_FIT);
-	gtk_tool_item_set_tooltip (priv->zoom_fit,
-				   GTK_TOOLBAR (toolbar)->tooltips,
-				   _("Zoom to fit the whole page"), "");
+	gtk_tool_item_set_tooltip_text (priv->zoom_fit,	_("Zoom to fit the whole page"));
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), priv->zoom_fit, -1);
 	g_signal_connect (priv->zoom_fit,
 			  "clicked",
@@ -676,9 +665,7 @@ create_bar (GeditPrintPreview *preview)
 	gtk_widget_show (GTK_WIDGET (priv->zoom_fit));
 
 	priv->zoom_in = gtk_tool_button_new_from_stock (GTK_STOCK_ZOOM_IN);
-	gtk_tool_item_set_tooltip (priv->zoom_in,
-				   GTK_TOOLBAR (toolbar)->tooltips,
-				   _("Zoom the page in"), "");
+	gtk_tool_item_set_tooltip_text (priv->zoom_in, _("Zoom the page in"));
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), priv->zoom_in, -1);
 	g_signal_connect (priv->zoom_in,
 			  "clicked",
@@ -687,9 +674,7 @@ create_bar (GeditPrintPreview *preview)
 	gtk_widget_show (GTK_WIDGET (priv->zoom_in));
 
 	priv->zoom_out = gtk_tool_button_new_from_stock (GTK_STOCK_ZOOM_OUT);
-	gtk_tool_item_set_tooltip (priv->zoom_out,
-				   GTK_TOOLBAR (toolbar)->tooltips,
-				   _("Zoom the page out"), "");
+	gtk_tool_item_set_tooltip_text (priv->zoom_out, _("Zoom the page out"));
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), priv->zoom_out, -1);
 	g_signal_connect (priv->zoom_out,
 			  "clicked",
@@ -704,8 +689,7 @@ create_bar (GeditPrintPreview *preview)
 	i = gtk_tool_button_new (NULL, _("_Close Preview"));
 	gtk_tool_button_set_use_underline (GTK_TOOL_BUTTON (i), TRUE);
 	gtk_tool_item_set_is_important (i, TRUE);
-	gtk_tool_item_set_tooltip (i, GTK_TOOLBAR (toolbar)->tooltips, 
-				   _("Close print preview"), "");
+	gtk_tool_item_set_tooltip_text (i, _("Close print preview"));
 	g_signal_connect (i, "clicked",
 			  G_CALLBACK (close_button_clicked), preview);
 	gtk_widget_show (GTK_WIDGET (i));

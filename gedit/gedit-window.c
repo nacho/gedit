@@ -56,6 +56,7 @@
 #include "gedit-enum-types.h"
 
 #define LANGUAGE_NONE (const gchar *)"LangNone"
+#define GEDIT_UIFILE "gedit-ui.xml"
 
 #define GEDIT_WINDOW_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),\
 					 GEDIT_TYPE_WINDOW,                    \
@@ -1380,10 +1381,10 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	window->priv->quit_action_group = action_group;
 
 	/* now load the UI definition */
-	gtk_ui_manager_add_ui_from_file (manager, GEDIT_UIDIR "gedit-ui.xml", &error);
+	gtk_ui_manager_add_ui_from_file (manager, GEDIT_UIDIR GEDIT_UIFILE, &error);
 	if (error != NULL)
 	{
-		g_warning ("Could not merge gedit-ui.xml: %s", error->message);
+		g_warning ("Could not merge %s: %s", GEDIT_UIFILE, error->message);
 		g_error_free (error);
 	}
 
@@ -1474,18 +1475,9 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	gtk_menu_tool_button_set_menu (GTK_MENU_TOOL_BUTTON (open_button),
 				       window->priv->toolbar_recent_menu);
 
-	/* not very nice the way we access the tooltops object
-	 * but I can't see a better way and I don't want a differen GtkTooltip
-	 * just for this tool button.
-	 */
-	gtk_tool_item_set_tooltip (open_button,
-				   GTK_TOOLBAR (window->priv->toolbar)->tooltips,
-				   _("Open a file"),
-				   NULL);
-	gtk_menu_tool_button_set_arrow_tooltip (GTK_MENU_TOOL_BUTTON (open_button),
-						GTK_TOOLBAR (window->priv->toolbar)->tooltips,
-						_("Open a recently used file"),
-						NULL);
+	gtk_tool_item_set_tooltip_text (open_button, _("Open a file"));
+	gtk_menu_tool_button_set_arrow_tooltip_text (GTK_MENU_TOOL_BUTTON (open_button),
+						     _("Open a recently used file"));
 
 	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "FileOpen");
