@@ -78,6 +78,8 @@ const GList	*gedit_plugins_engine_get_plugin_list 	(GeditPluginsEngine *engine);
 GeditPluginInfo	*gedit_plugins_engine_get_plugin_info	(GeditPluginsEngine *engine,
 							 const gchar        *name);
 
+
+/* plugin load and unloading (overall, for all windows) */
 gboolean 	 gedit_plugins_engine_activate_plugin 	(GeditPluginsEngine *engine,
 							 GeditPluginInfo    *info);
 gboolean 	 gedit_plugins_engine_deactivate_plugin	(GeditPluginsEngine *engine,
@@ -87,13 +89,13 @@ void	 	 gedit_plugins_engine_configure_plugin	(GeditPluginsEngine *engine,
 							 GeditPluginInfo    *info,
 							 GtkWindow          *parent);
 
-/* 
- * new_window == TRUE if this function is called because a new top window
- * has been created
- */
-void		 gedit_plugins_engine_update_plugins_ui (GeditPluginsEngine *engine,
-							 GeditWindow        *window, 
-							 gboolean            new_window);
+/* plugin activation/deactivation per window, private to GeditWindow */
+void 		 gedit_plugins_engine_activate_plugins   (GeditPluginsEngine *engine,
+							  GeditWindow        *window);
+void 		 gedit_plugins_engine_deactivate_plugins (GeditPluginsEngine *engine,
+							  GeditWindow        *window);
+void		 gedit_plugins_engine_update_plugins_ui  (GeditPluginsEngine *engine,
+							  GeditWindow        *window);
 
 G_END_DECLS
 

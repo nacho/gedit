@@ -1,0 +1,544 @@
+%%
+headers
+
+#include <gedit/gedit-message-bus.h>
+#include <gedit/gedit-message.h>
+
+static GType
+_helper_wrap_get_gtype_from_pytype (PyObject *pytype)
+{
+    PyTypeObject *type = (PyTypeObject *)pytype;
+    
+    if (type == &PyList_Type || type == &PyTuple_Type)
+    	return G_TYPE_STRV;
+
+    return pyg_type_from_object (pytype);
+}
+
+static gchar *
+_helper_wrap_get_string (PyObject *obj)
+{
+	PyObject *str;
+	gchar *result;
+	
+	str = PyObject_Str (obj);
+	
+	if (!str)
+		return NULL;
+	
+	result = g_strdup (PyString_AsString (str));
+	Py_DECREF (str);
+	
+	return result;
+}
+
+static int
+_helper_wrap_message_types(PyObject *args, gchar ***keys, GType **types, gint *num, gboolean direct)
+{
+    guint len, i;
+    Py_ssize_t pos;
+    
+    len = PyTuple_Size(args);
+
+    if (len == 1 && PyDict_Check(PyTuple_GetItem(args, 0)))
+    {
+    	/* get key -> gtype from mapping */
+    	PyObject *dict = PyTuple_GetItem(args, 0);
+    	PyObject *key;
+    	PyObject *value;
+
+    	*num = PyDict_Size(dict);
+    	*types = g_new0(GType, *num);
+        *keys = g_new0(gchar *, *num + 1);
+        pos = 0;
+        i = 0;
+        
+        while (PyDict_Next(dict, &pos, &key, &value)) {
+            (*keys)[i] = _helper_wrap_get_string (key);
+            
+            if (direct) {
+                (*types)[i] = _helper_wrap_get_gtype_from_pytype(value);
+            } else {
+                (*types)[i] = _helper_wrap_get_gtype_from_pytype((PyObject *)value->ob_type);
+            }
+            
+            if ((*types)[i] == 0 || (*keys)[i] == NULL) {
+                g_free(*types);
+                g_strfreev(*keys);
+                return 0;
+            }
+            
+            i++;
+        }
+    }
+    else
+    {
+        if (len % 2 != 0) {
+            PyErr_SetString(PyExc_TypeError,
+                            "Even number of arguments expected (name/type pairs)");
+            return 0;
+        }
+
+        *num = len / 2;
+        *types = g_new(GType, *num);
+        *keys = g_new0(gchar *, *num + 1);
+
+        for (i = 0; i < *num; i++) {
+            PyObject *key = PyTuple_GetItem(args, i * 2);
+            PyObject *value = PyTuple_GetItem(args, i * 2 + 1);
+    
+            (*keys)[i] = _helper_wrap_get_string (key);
+            
+            if (direct) {
+                (*types)[i] = _helper_wrap_get_gtype_from_pytype(value);
+            } else {
+                (*types)[i] = _helper_wrap_get_gtype_from_pytype((PyObject *)value->ob_type);
+            }
+
+            if ((*types)[i] == 0 || (*keys)[i] == NULL) {
+                g_free(*types);
+                g_strfreev(*keys);
+                return 0;
+            }
+        }
+    }
+    
+    return 1;
+}
+
+static int
+_helper_wrap_list_to_gvalue (GValue *gvalue, PyObject *pyvalue)
+{
+	int num;
+	gchar **lst;
+	gint i;
+	
+	num = PySequence_Size (pyvalue);
+	lst = g_new0 (gchar *, num + 1);
+	
+	for (i = 0; i < num; i++)
+	{
+		lst[i] = _helper_wrap_get_string (PySequence_GetItem (pyvalue, i));
+		
+		if (lst[i] == NULL)
+		{
+			g_strfreev (lst);
+			return 1;
+		}
+	}
+	
+	g_value_set_boxed (gvalue, lst);
+	g_strfreev (lst);
+	
+	return 0;
+}
+
+static int
+_helper_wrap_get_gvalue_from_pyobject (GValue *gvalue, PyObject *pyvalue)
+{
+	if (pyvalue->ob_type == &PyList_Type || pyvalue->ob_type == &PyTuple_Type)
+		return _helper_wrap_list_to_gvalue (gvalue, pyvalue);
+
+	return pyg_value_from_pyobject(gvalue, pyvalue);
+}
+
+static int
+_helper_wrap_message_set_value(GeditMessage *message, PyObject *pykey, PyObject *pyvalue)
+{
+    gchar *key;
+    GType gtype;
+    GValue value = {0,};
+
+    key = _helper_wrap_get_string(pykey);
+    
+    if (key == NULL)
+        return 0;
+
+    gtype = gedit_message_get_key_type(message, key);
+    
+    if (gtype == 0) {
+        PyErr_SetString(PyExc_TypeError, "invalid key");
+        g_free (key);
+        return 0;
+    }
+
+    g_value_init(&value, gtype);
+    
+    if (_helper_wrap_get_gvalue_from_pyobject (&value, pyvalue)) {
+        PyErr_SetString(PyExc_TypeError,
+                        "value is of the wrong type for this key");
+        g_free (key);
+        return 0;
+    }
+
+    gedit_message_set_value(message, key, &value);
+    g_value_unset(&value);
+    g_free (key);
+    
+    return 1;
+}
+
+static int
+_helper_wrap_message_set_values(GeditMessage *message, PyObject *args)
+{
+    guint len;
+    Py_ssize_t i;
+    
+    len = PyTuple_Size(args);
+
+    if (len == 1 && PyDict_Check(PyTuple_GetItem(args, 0)))
+    {
+    	/* do key -> value from mapping */
+    	PyObject *dict = PyTuple_GetItem(args, 0);
+    	PyObject *pykey, *pyvalue;
+    	
+    	i = 0;
+
+        while (PyDict_Next(dict, &i, &pykey, &pyvalue)) {
+            if (!_helper_wrap_message_set_value(message, pykey, pyvalue))
+                return 0;
+        }
+    } else {
+        if (len % 2 != 0) {
+            PyErr_SetString(PyExc_TypeError,
+                            "Even number of arguments expected (name/type pairs)");
+            return 0;
+        }
+
+        for (i = 0; i < len / 2; i++) {
+            PyObject *pykey = PyTuple_GetItem(args, i * 2);
+            PyObject *pyvalue = PyTuple_GetItem(args, i * 2 + 1);
+            
+            if (!_helper_wrap_message_set_value(message, pykey, pyvalue))
+                return 0;
+        }
+    }
+    
+    return 1;
+}
+
+static GeditMessage *
+_helper_wrap_create_message(PyObject *args)
+{
+    guint len;
+    gint num;
+    gchar *domain;
+    gchar *name;
+    GType *types;
+    gchar **keys;
+    PyObject *slice;
+    GeditMessage *message;
+
+    len = PyTuple_Size(args);
+
+    if (len < 2) {
+        PyErr_SetString(PyExc_TypeError,
+                        "GeditMessage requires at least two arguments");
+        return NULL;
+    }
+    
+    domain = _helper_wrap_get_string(PyTuple_GetItem(args, 0));
+    name = _helper_wrap_get_string(PyTuple_GetItem(args, 1));
+    
+    if (!domain || !name) {
+        PyErr_SetString(PyExc_TypeError,
+                        "First two arguments need to be strings");
+        g_free (domain);
+        g_free (name);
+        return NULL;
+    }
+    
+    slice = PyTuple_GetSlice (args, 2, len);
+
+    if (!_helper_wrap_message_types (slice, &keys, &types, &num, FALSE)) {
+        Py_DECREF(slice);
+    	return NULL;
+    }
+
+    message = g_object_new(GEDIT_TYPE_MESSAGE, "domain", domain, "name", name, NULL);
+    gedit_message_set_types (message, (const gchar **)keys, types, num);
+
+    g_free(types);
+    g_strfreev(keys);
+    g_free (name);
+    g_free (domain);
+    
+    _helper_wrap_message_set_values(message, slice);
+    Py_DECREF(slice);
+
+    return message;
+}
+
+typedef struct {
+    PyObject *func;
+    PyObject *data;
+} PyGeditCustomNotify;
+
+static void 
+pygedit_custom_destroy_notify(gpointer user_data)
+{
+    PyGeditCustomNotify *cunote = user_data;
+    PyGILState_STATE state;
+    
+    g_return_if_fail(user_data);
+    state = pyg_gil_state_ensure();
+    Py_XDECREF(cunote->func);
+    Py_XDECREF(cunote->data);
+    pyg_gil_state_release(state);
+    
+    g_free(cunote);
+}
+%%
+ignore-glob
+  *_get_type
+  gedit_message_new_valist
+  gedit_message_get_valist
+  gedit_message_set_valist
+  gedit_message_set_valuesv
+  gedit_message_bus_disconnect_by_func
+  gedit_message_bus_block_by_func
+  gedit_message_bus_unblock_by_func
+%%
+override gedit_message_new
+static int
+_wrap_gedit_message_new(PyGObject *self, PyObject *args)
+{
+    self->obj = (GObject *)_helper_wrap_create_message(args);
+    
+    if (!self->obj) {
+        PyErr_SetString(PyExc_RuntimeError,
+                        "could not create GeditMessage object");
+        return -1;
+    }
+    pygobject_register_wrapper((PyObject *)self);
+
+    return 0;
+}
+%%
+override gedit_message_set_types args
+static PyObject *
+_wrap_gedit_message_set_types(PyGObject *self, PyObject *args)
+{
+    gint num;
+    GType *types;
+    gchar **keys;
+
+    if (!_helper_wrap_message_types (args, &keys, &types, &num, TRUE)) {
+    	return NULL;
+    }
+ 
+    gedit_message_set_types (GEDIT_MESSAGE(self->obj), (const gchar **)keys, types, num);
+
+    g_free(types);
+    g_strfreev(keys);
+
+    Py_INCREF (Py_None);
+    return Py_None;
+}
+%%
+override gedit_message_get args
+static PyObject *
+_wrap_gedit_message_get(PyGObject *self, PyObject *args)
+{
+    guint len, i;
+    PyObject *ret;
+
+    len = PyTuple_Size(args);
+    
+    ret = PyTuple_New(len);
+    
+    for (i = 0; i < len; i++) {
+        GValue value = { 0, };
+        PyObject *py_key = PyTuple_GetItem(args, i);
+        const gchar *key;
+        
+        if (!PyString_Check(py_key)) {
+	    PyErr_SetString(PyExc_TypeError, "keys must be strings");
+	    Py_DECREF(ret);
+	    return NULL;
+	}
+	
+	key = PyString_AsString(py_key);
+	gedit_message_get_value (GEDIT_MESSAGE (self->obj), key, &value);
+	
+	PyTuple_SetItem(ret, i, pyg_value_as_pyobject(&value, TRUE));
+	g_value_unset(&value);
+    }
+    
+    return ret;
+}
+%%
+override gedit_message_get_value kwargs
+static PyObject *
+_wrap_gedit_message_get_value(PyGObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "key", NULL };
+    const gchar *key;
+    PyObject *ret;
+    GValue value = { 0, };
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s:GeditMessage.get_value", kwlist, &key))
+        return NULL;
+
+    gedit_message_get_value(GEDIT_MESSAGE(self->obj), key, &value);
+    ret = pyg_value_as_pyobject(&value, TRUE);
+    g_value_unset(&value);
+    
+    return ret;
+}
+%%
+override gedit_message_set_value kwargs
+static PyObject *
+_wrap_gedit_message_set_value(PyGObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "key", "value", NULL };
+    PyObject *ret, *pykey, *pyvalue;
+    GValue value = { 0, };
+    GType gtype;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OO:GeditMessage.set_value", kwlist, &pykey, &pyvalue))
+        return NULL;
+    
+    if (!_helper_wrap_message_set_value(GEDIT_MESSAGE(self->obj), pykey, pyvalue))
+        return NULL;
+    
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+%%
+override gedit_message_set args
+static PyObject *
+_wrap_gedit_message_set (PyGObject *self, PyObject *args) {
+    if (!_helper_wrap_message_set_values(GEDIT_MESSAGE(self->obj), args))
+        return NULL;
+    
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+%%
+override gedit_message_get_keys args
+static PyObject *
+_wrap_gedit_message_get_keys (PyGObject *self, PyObject *args) {
+    PyObject *py_list;
+    gchar **keys;
+    gchar **ptr;
+    
+    if ((py_list = PyList_New(0)) == NULL) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+    
+    keys = gedit_message_get_keys (GEDIT_MESSAGE (self->obj));
+    ptr = keys;
+    
+    if (!keys)
+    	return py_list;
+    
+    while (*ptr)
+    	PyList_Append(py_list, PyString_FromString (*ptr));
+
+    g_strfreev (keys);
+    return py_list;
+}
+
+%%
+override gedit_message_bus_connect kwargs
+static void
+pygedit_message_bus_connect_cb(GeditMessageBus *bus, GeditMessage *message, gpointer data)
+{
+    PyGILState_STATE state;
+    PyGeditCustomNotify *cunote = data;
+    PyObject *pybus, *pymessage, *retobj;
+    gboolean ret = FALSE;
+
+    g_assert(cunote->func);
+
+    state = pyg_gil_state_ensure();
+
+    pybus = pygobject_new((GObject *)bus);
+    pymessage = pygobject_new((GObject *)message);
+
+    if (cunote->data) {
+        retobj = PyEval_CallFunction(cunote->func, "(NNO)", pybus, pymessage, cunote->data);
+    } else {
+        retobj = PyEval_CallFunction(cunote->func, "(NN)", pybus, pymessage);
+    }
+
+    if (PyErr_Occurred()) {
+        PyErr_Print();
+    }
+
+    Py_XDECREF(retobj);
+
+    pyg_gil_state_release(state);
+}
+
+static PyObject *
+_wrap_gedit_message_bus_connect(PyGObject *self, PyObject *args, PyObject *kwargs) 
+{
+    static char *kwlist[] = { "domain", "name", "func", "data", NULL };
+    PyObject *pyfunc, *pyarg = NULL;
+    const gchar *domain;
+    const gchar *name;
+    PyGeditCustomNotify *cunote;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,
+				     "ssO|O:GeditMessageBus.connect",
+				     kwlist, &domain, &name, &pyfunc, &pyarg))
+        return NULL;
+
+    if (!PyCallable_Check(pyfunc)) {
+        PyErr_SetString(PyExc_TypeError, "func must be a callable object");
+        return NULL;
+    }
+    cunote = g_new(PyGeditCustomNotify, 1);
+    Py_INCREF(pyfunc);
+    cunote->func = pyfunc;
+    Py_XINCREF(pyarg);
+    cunote->data = pyarg;
+
+    gedit_message_bus_connect(GEDIT_MESSAGE_BUS(self->obj),
+                              domain,
+                              name,
+                              pygedit_message_bus_connect_cb,
+                              (gpointer)cunote,
+                              pygedit_custom_destroy_notify);
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+%%
+override gedit_message_bus_send args
+static PyObject *
+_wrap_gedit_message_bus_send (PyGObject *self, PyObject *args)
+{
+    /* create a new message object */
+    GeditMessage *message;
+    
+    message = _helper_wrap_create_message(args);
+    
+    if (!message)
+        return NULL;
+    
+    gedit_message_bus_send_message(GEDIT_MESSAGE_BUS(self->obj), message);
+    g_object_unref (message);
+    
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+%%
+override gedit_message_bus_send_sync args
+static PyObject *
+_wrap_gedit_message_bus_send_sync (PyGObject *self, PyObject *args)
+{
+    /* create a new message object */
+    GeditMessage *message;
+    
+    message = _helper_wrap_create_message(args);
+    
+    if (!message)
+        return NULL;
+    
+    gedit_message_bus_send_message_sync(GEDIT_MESSAGE_BUS(self->obj), message);
+    return pygobject_new((GObject *)message);
+}
+%%

@@ -35,6 +35,7 @@
 
 #include <gedit/gedit-window.h>
 #include <gedit/gedit-debug.h>
+#include <gedit/gedit-object-module.h>
 
 /* TODO: add a .h file that includes all the .h files normally needed to
  * develop a plugin */ 
@@ -118,56 +119,15 @@ GtkWidget	*gedit_plugin_create_configure_dialog
  * Utility macro used to register plugins with additional code.
  */
 #define GEDIT_PLUGIN_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, CODE)	\
-										\
-static GType plugin_name##_type = 0;						\
-										\
-GType										\
-plugin_name##_get_type (void)							\
-{										\
-	return plugin_name##_type;						\
-}										\
-										\
-static void     plugin_name##_init              (PluginName        *self);	\
-static void     plugin_name##_class_init        (PluginName##Class *klass);	\
-static gpointer plugin_name##_parent_class = NULL;				\
-static void     plugin_name##_class_intern_init (gpointer klass)		\
-{										\
-	plugin_name##_parent_class = g_type_class_peek_parent (klass);		\
-	plugin_name##_class_init ((PluginName##Class *) klass);			\
-}										\
-										\
-G_MODULE_EXPORT GType								\
-register_gedit_plugin (GTypeModule *module)					\
-{										\
-	static const GTypeInfo our_info =					\
-	{									\
-		sizeof (PluginName##Class),					\
-		NULL, /* base_init */						\
-		NULL, /* base_finalize */					\
-		(GClassInitFunc) plugin_name##_class_intern_init,		\
-		NULL,								\
-		NULL, /* class_data */						\
-		sizeof (PluginName),						\
-		0, /* n_preallocs */						\
-		(GInstanceInitFunc) plugin_name##_init				\
-	};									\
-										\
-	gedit_debug_message (DEBUG_PLUGINS, "Registering " #PluginName);	\
-										\
+	GEDIT_OBJECT_MODULE_REGISTER_TYPE_WITH_CODE (register_gedit_plugin,	\
+						     PluginName,		\
+						     plugin_name,		\
+						     GEDIT_TYPE_PLUGIN,		\
 	/* Initialise the i18n stuff */						\
 	bindtextdomain (GETTEXT_PACKAGE, GEDIT_LOCALEDIR);			\
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");			\
 										\
-	plugin_name##_type = g_type_module_register_type (module,		\
-					    GEDIT_TYPE_PLUGIN,			\
-					    #PluginName,			\
-					    &our_info,				\
-					    0);					\
-										\
-	CODE									\
-										\
-	return plugin_name##_type;						\
-}
+						     CODE)
 
 /**
  * GEDIT_PLUGIN_REGISTER_TYPE(PluginName, plugin_name):
@@ -182,53 +142,7 @@ register_gedit_plugin (GTypeModule *module)					\
  *
  * Utility macro used to register gobject types in plugins with additional code.
  */
-#define GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, CODE)	\
-										\
-static GType g_define_type_id = 0;						\
-										\
-GType										\
-object_name##_get_type (void)							\
-{										\
-	return g_define_type_id;						\
-}										\
-										\
-static void     object_name##_init              (ObjectName        *self);	\
-static void     object_name##_class_init        (ObjectName##Class *klass);	\
-static gpointer object_name##_parent_class = NULL;				\
-static void     object_name##_class_intern_init (gpointer klass)		\
-{										\
-	object_name##_parent_class = g_type_class_peek_parent (klass);		\
-	object_name##_class_init ((ObjectName##Class *) klass);			\
-}										\
-										\
-GType										\
-object_name##_register_type (GTypeModule *module)					\
-{										\
-	static const GTypeInfo our_info =					\
-	{									\
-		sizeof (ObjectName##Class),					\
-		NULL, /* base_init */						\
-		NULL, /* base_finalize */					\
-		(GClassInitFunc) object_name##_class_intern_init,		\
-		NULL,								\
-		NULL, /* class_data */						\
-		sizeof (ObjectName),						\
-		0, /* n_preallocs */						\
-		(GInstanceInitFunc) object_name##_init				\
-	};									\
-										\
-	gedit_debug_message (DEBUG_PLUGINS, "Registering " #ObjectName);	\
-										\
-	g_define_type_id = g_type_module_register_type (module,			\
-					   	        PARENT_TYPE,		\
-					                #ObjectName,		\
-					                &our_info,		\
-					                0);			\
-										\
-	CODE									\
-										\
-	return g_define_type_id;						\
-}
+#define GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE GEDIT_OBJECT_MODULE_DEFINE_TYPE_WITH_CODE
 
 /**
  * GEDIT_PLUGIN_DEFINE_TYPE(ObjectName, object_name, PARENT_TYPE):
@@ -244,17 +158,7 @@ object_name##_register_type (GTypeModule *module)					\
  * Utility macro used to register interfaces for gobject types in plugins.
  */
 #define GEDIT_PLUGIN_IMPLEMENT_INTERFACE(object_name, TYPE_IFACE, iface_init)	\
-	const GInterfaceInfo object_name##_interface_info = 			\
-	{ 									\
-		(GInterfaceInitFunc) iface_init,				\
-		NULL, 								\
-		NULL								\
-	};									\
-										\
-	g_type_module_add_interface (module, 					\
-				     g_define_type_id, 				\
-				     TYPE_IFACE, 				\
-				     &object_name##_interface_info);		\
+	GEDIT_OBJECT_MODULE_IMPLEMENT_INTERFACE(object_name, TYPE_IFACE, iface_init)
 
 G_END_DECLS
 

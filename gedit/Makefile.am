@@ -5,34 +5,30 @@ bin_PROGRAMS = gedit
 
 noinst_LTLIBRARIES = libgedit.la
 
-INCLUDES =							\
-	-I$(top_srcdir)						\
-	-I$(srcdir)						\
-	-I$(srcdir)/smclient					\
-	$(GEDIT_CFLAGS)						\
-	$(WARN_CFLAGS)						\
-	$(DISABLE_DEPRECATED_CFLAGS)				\
-	-DDATADIR=\""$(datadir)"\"				\
-	-DGEDIT_DATADIR=\""$(datadir)/gedit-2"\"		\
-	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
-	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/ui/"\"		\
-	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit-2/plugins"\"	\
+INCLUDES =								\
+	-I$(top_srcdir)							\
+	-I$(srcdir)							\
+	-I$(srcdir)/smclient						\
+	$(GEDIT_CFLAGS)							\
+	$(WARN_CFLAGS)							\
+	$(DISABLE_DEPRECATED_CFLAGS)					\
+	-DDATADIR=\""$(datadir)"\"					\
+	-DGEDIT_DATADIR=\""$(datadir)/gedit-2"\"			\
+	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"		\
+	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/ui/"\"			\
+	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit-2/plugins"\"		\
+	-DGEDIT_LOADERDIR=\""$(libdir)/gedit-2/plugin-loaders"\"	\
 	-DGEDIT_ICONDIR=\""$(datadir)/gedit-2/icons"\"
 
-if ENABLE_PYTHON
-INCLUDES += \
-	$(NO_STRICT_ALIASING_CFLAGS)	\
-	$(PYGTK_CFLAGS)			\
-	$(PYTHON_CFLAGS)		\
-	$(AM_CFLAGS)
-endif
+gedit_SOURCES = \
+	gedit.c
 
-gedit_SOURCES = gedit.c
 gedit_LDADD = libgedit.la $(GEDIT_LIBS)
  
 if PLATFORM_WIN32
 gedit_LDFLAGS = -Wl,--export-all-symbols -Wl,--out-implib,libgedit-$(GEDIT_API_VERSION).a
 else
+
 gedit_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 endif
 
@@ -41,10 +37,6 @@ libgedit_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_
 libgedit_la_LIBADD = \
 	dialogs/libdialogs.la		\
 	smclient/libeggsmclient.la
-
-if ENABLE_PYTHON
-libgedit_la_LIBADD += $(top_builddir)/bindings/python/gedit.la
-endif
 
 # GEDIT_LIBS must be the last to ensure correct order on some platforms
 libgedit_la_LIBADD += $(GEDIT_LIBS)
@@ -63,7 +55,7 @@ NOINST_H_FILES =			\
 	gedit-plugin-info-priv.h	\
 	gedit-plugin-manager.h		\
 	gedit-plugins-engine.h		\
-	gedit-module.h			\
+	gedit-object-module.h		\
 	gedit-ui.h			\
 	gedit-window-private.h		\
 	gedit-documents-panel.h		\
@@ -83,12 +75,6 @@ NOINST_H_FILES =			\
 	gedittextregion.h		\
 	gedit-session.h
 
-if ENABLE_PYTHON
-NOINST_H_FILES += \
-	gedit-python-module.h		\
-	gedit-python-plugin.h 
-endif
-
 INST_H_FILES =				\
 	gedit-app.h			\
 	gedit-convert.h			\
@@ -103,6 +89,7 @@ INST_H_FILES =				\
 	gedit-notebook.h		\
 	gedit-panel.h			\
 	gedit-plugin.h			\
+	gedit-plugin-loader.h		\
 	gedit-prefs-manager-app.h	\
 	gedit-prefs-manager.h		\
 	gedit-progress-message-area.h	\
@@ -147,11 +134,12 @@ libgedit_la_SOURCES = 			\
 	gedit-language-manager.c	\
 	gedit-message-area.c		\
 	gedit-metadata-manager.c	\
-	gedit-module.c			\
+	gedit-object-module.c		\
 	gedit-notebook.c		\
 	gedit-panel.c			\
 	gedit-plugin-info.c		\
 	gedit-plugin.c			\
+	gedit-plugin-loader.c		\
 	gedit-plugin-manager.c		\
 	gedit-plugins-engine.c		\
 	gedit-prefs-manager-app.c	\
@@ -172,15 +160,6 @@ libgedit_la_SOURCES = 			\
 	gedittextregion.c		\
 	$(NOINST_H_FILES)		\
 	$(INST_H_FILES)
-
-
-if ENABLE_PYTHON
-libgedit_la_SOURCES += \
-	gedit-python-module.c		\
-	gedit-python-module.h		\
-	gedit-python-plugin.c		\
-	gedit-python-plugin.h	
-endif
 
 gedit-enum-types.h: gedit-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
 	(cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-enum-types.h.template $(INST_H_FILES)) > $@

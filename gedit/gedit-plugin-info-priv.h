@@ -39,11 +39,11 @@ struct _GeditPluginInfo
 {
 	gint               refcount;
 
+	GeditPlugin       *plugin;
 	gchar             *file;
 
 	gchar             *module_name;
-	GType              module_type;
-	GeditModule       *module;
+	gchar		  *loader;
 	gchar            **dependencies;
 
 	gchar             *name;
@@ -52,10 +52,6 @@ struct _GeditPluginInfo
 	gchar            **authors;
 	gchar             *copyright;
 	gchar             *website;
-
-	GeditPlugin       *plugin;
-
-	gint               active : 1;
 
 	/* A plugin is unavailable if it is not possible to activate it
 	   due to an error loading the plugin module (e.g. for Python plugins

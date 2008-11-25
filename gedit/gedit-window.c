@@ -116,12 +116,22 @@ gedit_window_dispose (GObject *object)
 {
 	GeditWindow *window;
 
+	gedit_debug (DEBUG_WINDOW);
+
 	window = GEDIT_WINDOW (object);
 
 	/* First of all, force collection so that plugins
 	 * really drop some of the references.
 	 */
 	gedit_plugins_engine_garbage_collect (gedit_plugins_engine_get_default ());
+
+	/* make sure to deactivate plugins for this window, but only once */
+	if (!window->priv->dispose_has_run)
+	{
+		gedit_plugins_engine_deactivate_plugins (gedit_plugins_engine_get_default (),
+					                  window);
+		window->priv->dispose_has_run = TRUE;
+	}
 
 	if (window->priv->recents_handler_id != 0)
 	{
@@ -144,7 +154,7 @@ gedit_window_dispose (GObject *object)
 		g_object_unref (window->priv->window_group);
 		window->priv->window_group = NULL;
 	}
-
+	
 	/* Now that there have broken some reference loops,
 	 * force collection again.
 	 */
@@ -157,6 +167,8 @@ static void
 gedit_window_finalize (GObject *object)
 {
 	GeditWindow *window; 
+
+	gedit_debug (DEBUG_WINDOW);
 
 	window = GEDIT_WINDOW (object);
 
@@ -785,7 +797,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	update_next_prev_doc_sensitivity (window, tab);
 
 	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-						window, FALSE);
+						 window);
 }
 
 static void
@@ -2254,7 +2266,7 @@ sync_name (GeditTab    *tab,
 	g_free (tip);
 
 	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-						window, FALSE);
+						 window);
 }
 
 static GeditWindow *
@@ -2459,7 +2471,7 @@ editable_changed (GeditView  *view,
                   GeditWindow *window)
 {
 	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-						window, FALSE);
+						 window);
 }
 
 static void
@@ -2642,7 +2654,7 @@ notebook_tab_removed (GeditNotebook *notebook,
 		gtk_action_set_sensitive (action, FALSE);
 
 		gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-							window, FALSE);
+							 window);
 	}
 
 	if (window->priv->num_tabs <= 1)
@@ -3064,6 +3076,7 @@ gedit_window_init (GeditWindow *window)
 	window->priv->removing_tabs = FALSE;
 	window->priv->state = GEDIT_WINDOW_STATE_NORMAL;
 	window->priv->destroy_has_run = FALSE;
+	window->priv->dispose_has_run = FALSE;
 
 	window->priv->window_group = gtk_window_group_new ();
 	gtk_window_group_add_window (window->priv->window_group, GTK_WINDOW (window));
@@ -3202,8 +3215,9 @@ gedit_window_init (GeditWindow *window)
 			  NULL);
 
 	gedit_debug_message (DEBUG_WINDOW, "Update plugins ui");
-	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-						window, TRUE);
+	
+	gedit_plugins_engine_activate_plugins (gedit_plugins_engine_get_default (),
+					        window);
 
 	/* set visibility of panes.
 	 * This needs to be done after plugins activatation */

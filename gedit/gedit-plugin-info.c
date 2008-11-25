@@ -42,10 +42,6 @@
 #include "gedit-debug.h"
 #include "gedit-plugin.h"
 
-#ifdef ENABLE_PYTHON
-#include "gedit-python-module.h"
-#endif
-
 void
 _gedit_plugin_info_ref (GeditPluginInfo *info)
 {
@@ -70,9 +66,6 @@ _gedit_plugin_info_unref (GeditPluginInfo *info)
 		gedit_debug_message (DEBUG_PLUGINS, "Unref plugin %s", info->name);
 
 		g_object_unref (info->plugin);
-		
-		/* info->module must not be unref since it is not possible to finalize 
-		 * a type module */
 	}
 
 	g_free (info->file);
@@ -83,6 +76,7 @@ _gedit_plugin_info_unref (GeditPluginInfo *info)
 	g_free (info->icon_name);
 	g_free (info->website);
 	g_free (info->copyright);
+	g_free (info->loader);
 	g_strfreev (info->authors);
 
 	g_free (info);
@@ -194,21 +188,16 @@ _gedit_plugin_info_new (const gchar *file)
 				     "Gedit Plugin",
 				     "Loader",
 				     NULL);
-	if (str && strcmp(str, "python") == 0)
+	
+	if ((str != NULL) && (*str != '\0'))
 	{
-#ifndef ENABLE_PYTHON
-		g_warning ("Cannot load Python plugin '%s' since gedit was not "
-			   "compiled with Python support.", file);
-		goto error;
-#else
-		info->module_type = GEDIT_TYPE_PYTHON_MODULE;
-#endif
+		info->loader = str;
 	}
 	else
 	{
-		info->module_type = GEDIT_TYPE_MODULE;
+		/* default to the C loader */
+		info->loader = g_strdup("c");
 	}
-	g_free (str);
 
 	/* Get Name */
 	str = g_key_file_get_locale_string (plugin_file,
@@ -286,6 +275,7 @@ error:
 	g_free (info->file);
 	g_free (info->module_name);
 	g_free (info->name);
+	g_free (info->loader);
 	g_free (info);
 	g_key_file_free (plugin_file);
 
@@ -297,7 +287,7 @@ gedit_plugin_info_is_active (GeditPluginInfo *info)
 {
 	g_return_val_if_fail (info != NULL, FALSE);
 
-	return info->available && info->active;
+	return info->available && info->plugin != NULL;
 }
 
 gboolean
@@ -315,10 +305,18 @@ gedit_plugin_info_is_configurable (GeditPluginInfo *info)
 
 	g_return_val_if_fail (info != NULL, FALSE);
 
-	if (info->plugin == NULL || !info->active || !info->available)
+	if (info->plugin == NULL || !info->available)
 		return FALSE;
 
 	return gedit_plugin_is_configurable (info->plugin);
+}
+
+const gchar *
+gedit_plugin_info_get_module_name (GeditPluginInfo *info)
+{
+	g_return_val_if_fail (info != NULL, NULL);
+
+	return info->module_name;
 }
 
 const gchar *

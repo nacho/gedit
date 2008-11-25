@@ -90,6 +90,7 @@ struct _GeditWindowPrivate
 
 	gboolean	removing_tabs : 1;
 	gboolean	destroy_has_run : 1;
+	gboolean	dispose_has_run : 1;
 };
 
 G_END_DECLS

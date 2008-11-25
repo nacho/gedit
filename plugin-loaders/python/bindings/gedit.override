@@ -1,16 +1,17 @@
 %%
 headers
-#define NO_IMPORT_PYGOBJECT
-#include "pygobject.h"
+#include <pygobject.h>
 #include <pygtk/pygtk.h>
 
-#include "gedit-language-manager.h"
-#include "gedit-plugin.h"
-#include "gedit-app.h"
-#include "gedit-encodings.h"
-#include "gedit-enum-types.h"
-#include "gedit-statusbar.h"
-#include "gedit-debug.h"
+#include <gedit/gedit-language-manager.h>
+#include <gedit/gedit-plugin.h>
+#include <gedit/gedit-app.h>
+#include <gedit/gedit-encodings.h>
+#include <gedit/gedit-enum-types.h>
+#include <gedit/gedit-statusbar.h>
+#include <gedit/gedit-debug.h>
+
+#include "gedit-plugin-python.h"
 
 void pygedit_register_classes (PyObject *d); 
 void pygedit_add_constants (PyObject *module, const gchar *strip_prefix);
@@ -58,6 +59,9 @@ _helper_wrap_gobject_gslist (const GSList *list)
     }
     return py_list;
 }
+%%
+include
+  geditplugin.override
 %%
 modulename gedit 
 %%
@@ -426,7 +430,8 @@ _wrap_gedit_debug(PyObject *self, PyObject *args, PyObject *kwargs)
                                  PyString_AsString (filename),
                                  PyInt_AsLong (lineno),
                                  PyString_AsString (funcname),
-                                 "%s", message);
+                                 "%s",
+                                 message);
     }
     Py_DECREF (traceback);
     Py_DECREF (traceback_module);

@@ -18,20 +18,22 @@ gedit_la_LIBADD = \
 	$(PYGTK_LIBS)
 
 gedit_la_CFLAGS = \
-	-I$(top_srcdir)			\
-	-I$(top_builddir)		\
-	-I$(top_srcdir)/gedit		\
-	-I$(top_builddir)/gedit		\
-	$(GEDIT_CFLAGS)			\
-	$(NO_STRICT_ALIASING_CFLAGS)	\
-	$(PYGTK_CFLAGS)			\
-	$(PYTHON_CFLAGS)		\
+	-I$(top_srcdir)					\
+	-I$(top_builddir)				\
+	-I$(top_srcdir)/gedit				\
+	-I$(top_builddir)/gedit				\
+	-I$(top_srcdir)/plugin-loaders/python	\
+	-I$(top_builddir)/plugin-loaders/python	\
+	$(GEDIT_CFLAGS)					\
+	$(NO_STRICT_ALIASING_CFLAGS)			\
+	$(PYGTK_CFLAGS)					\
+	$(PYTHON_CFLAGS)				\
 	$(AM_CFLAGS)
 
 $(top_builddir)/gedit/gedit-enum-types.h:
 	cd $(top_builddir)/gedit && $(MAKE) gedit-enum-types.h
 
-gedit.c: gedit.defs gedit.override $(top_builddir)/gedit/gedit-enum-types.h
+gedit.c: gedit.defs gedit.override geditplugin.override $(top_builddir)/gedit/gedit-enum-types.h
 	( cd $(srcdir) && $(PYGTK_CODEGEN) \
 		--register $(PYGTK_DEFSDIR)/pango-types.defs \
 		--register $(PYGTK_DEFSDIR)/gdk-types.defs \
@@ -57,8 +59,9 @@ BINDING_GEDIT_HEADERS_SRCDIR_IN = \
 	gedit/gedit-document.h		\
 	gedit/gedit-encodings.h		\
 	gedit/gedit-plugin.h		\
+	$(srcdir)/../gedit-plugin-python.h \
 	gedit/gedit-view.h		\
-	gedit/gedit-status-bar.h	\
+	gedit/gedit-statusbar.h		\
 	gedit/gedit-tab.h 		\
 	gedit/gedit-panel.h 		\
 	gedit/gedit-window.h 		\

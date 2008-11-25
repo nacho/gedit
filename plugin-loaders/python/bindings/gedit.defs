@@ -21,11 +21,18 @@
   (gtype-id "GEDIT_TYPE_PANEL")
 )
 
-(define-object Plugin
+(define-object __Plugin
   (in-module "Gedit")
   (parent "GObject")
   (c-name "GeditPlugin")
   (gtype-id "GEDIT_TYPE_PLUGIN")
+)
+
+(define-object Plugin
+  (in-module "Gedit")
+  (parent "GeditPlugin")
+  (c-name "GeditPluginPython")
+  (gtype-id "GEDIT_TYPE_PLUGIN_PYTHON")
 )
 
 (define-object Statusbar
@@ -653,6 +660,19 @@
   (of-object "GeditPlugin")
   (c-name "gedit_plugin_create_configure_dialog")
   (return-type "GtkWidget*")
+)
+
+;; From ../gedit/gedit-plugin-python.h
+
+(define-function gedit_plugin_python_get_type
+  (c-name "gedit_plugin_python_get_type")
+  (return-type "GType")
+)
+
+(define-function gedit_plugin_python_new
+  (c-name "gedit_plugin_python_new")
+  (is-constructor-of "GeditPluginPython")
+  (return-type "GObject*")
 )
 
 ;; From ../../gedit/gedit-status-bar.h
