@@ -46,12 +46,10 @@ IGNORE_HFILES=		\
 	gedit-documents-panel.h			\
 	gedit-io-error-message-area.h		\
 	gedit-languages-manager.h		\
-	gedit-module.h				\
+	gedit-object-module.h			\
 	gedit-plugin-manager.h			\
 	gedit-plugins-engine.h			\
 	gedit-prefs-manager-private.h		\
-	gedit-python-module.h			\
-	gedit-python-plugin.h			\
 	gedit-session.h				\
 	gedit-spinner.h				\
 	gedit-ui.h				\
@@ -113,7 +111,7 @@ GTKDOC_CFLAGS += \
         $(PYTHON_CFLAGS)                \
         $(AM_CFLAGS)
 GTKDOC_LIBS += \
-	$(top_builddir)/bindings/python/gedit.la
+	$(top_builddir)/plugin-loaders/python/bindings/gedit.la
 endif
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.
