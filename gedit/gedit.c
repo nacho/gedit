@@ -39,7 +39,10 @@
 
 #include <glib/gi18n.h>
 #include <glib/goption.h>
+
+#ifndef PLATFORM_OSX
 #include <gdk/gdkx.h>
+#endif
 
 #include "gedit-app.h"
 #include "gedit-commands.h"
@@ -325,11 +328,13 @@ on_message_received (const char *message,
 	if (!GTK_WIDGET_REALIZED (window))
 		gtk_widget_realize (GTK_WIDGET (window));
 
+#ifdef GDK_WINDOWING_X11
 	if (startup_timestamp <= 0)
 		startup_timestamp = gdk_x11_get_server_time (GTK_WIDGET (window)->window);
 
 	gdk_x11_window_set_user_time (GTK_WIDGET (window)->window,
 				      startup_timestamp);
+#endif
 
 	gtk_window_present (GTK_WINDOW (window));
 
@@ -526,7 +531,9 @@ main (int argc, char *argv[])
 					   GEDIT_ICONDIR);
 
 	/* Set the associated .desktop file */
+#ifndef PLATFORM_OSX
 	egg_set_desktop_file (DATADIR "/applications/gedit.desktop");
+#endif
 
 	/* Load user preferences */
 	gedit_debug_message (DEBUG_APP, "Init prefs manager");

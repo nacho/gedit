@@ -45,7 +45,7 @@ dnl make sure we keep ACLOCAL_FLAGS around for maintainer builds to work
 AC_SUBST(ACLOCAL_AMFLAGS, "$ACLOCAL_FLAGS -I m4")
 
 dnl check for win32 platform
-AC_MSG_CHECKING([for some Win32 platform])
+AC_MSG_CHECKING([for Win32 platform])
 case "$host" in
   *-*-mingw*|*-*-cygwin*)
     platform_win32=yes
@@ -56,6 +56,23 @@ case "$host" in
 esac
 AC_MSG_RESULT([$platform_win32])
 AM_CONDITIONAL(PLATFORM_WIN32, test "$platform_win32" = "yes")
+
+dnl check for osx platform
+AC_MSG_CHECKING([for Mac OS X platform])
+case "$host" in
+  *-*-darwin*)
+    platform_osx=yes
+    ;;
+  *)
+    platform_osx=no
+    ;;
+esac
+AC_MSG_RESULT([$platform_osx])
+AM_CONDITIONAL(PLATFORM_OSX, test "$platform_osx" = "yes")
+
+if test "$platform_osx" = "yes"; then
+	AC_DEFINE([PLATFORM_OSX],[1],[Defined if platform is Mac OSX])
+fi
 
 dnl ===============================================================
 dnl Expanded dirs
@@ -176,7 +193,6 @@ dnl Start of pkg-config checks
 dnl ================================================================
 
 PKG_CHECK_MODULES(GEDIT, [
-	sm >= 1.0.0
 	libxml-2.0 >= 2.5.0
 	glib-2.0 >= 2.13.0
 	gthread-2.0 >= 2.13.0
@@ -188,6 +204,19 @@ PKG_CHECK_MODULES(GEDIT, [
 GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)
 AC_SUBST(GEDIT_CFLAGS)
+
+if test "$platform_osx" = "no"; then
+	PKG_CHECK_MODULES(EGG_SMCLIENT, [
+		sm >= 1.0.0
+	])
+	SM_LIBS="${EGG_SMCLIENT_LIBS}"
+else
+	EGG_SMCLIENT_CFLAGS=
+	EGG_SM_CLIENT_LIBS=
+fi
+
+AC_SUBST(EGG_SMCLIENT_CFLAGS)
+AC_SUBST(EGG_SMCLIENT_LIBS)
 
 dnl ================================================================
 dnl GConf related settings
