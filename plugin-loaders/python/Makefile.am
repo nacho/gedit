@@ -24,10 +24,10 @@ NOINST_H_FILES = \
 
 libpythonloader_la_SOURCES = \
 	gedit-plugin-loader-python.c 	\
-	gedit-plugin-python.c
+	gedit-plugin-python.c		\
 	$(NOINST_H_FILES)
 
 libpythonloader_la_LDFLAGS = $(LOADER_LIBTOOL_FLAGS)
 libpythonloader_la_LIBADD = \
 	$(GEDIT_LIBS) 			\
-	$(srcdir)/bindings/gedit.la
+	bindings/gedit.la

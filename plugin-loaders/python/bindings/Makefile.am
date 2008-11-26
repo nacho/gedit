@@ -22,8 +22,8 @@ gedit_la_CFLAGS = \
 	-I$(top_builddir)				\
 	-I$(top_srcdir)/gedit				\
 	-I$(top_builddir)/gedit				\
-	-I$(top_srcdir)/plugin-loaders/python	\
-	-I$(top_builddir)/plugin-loaders/python	\
+	-I$(top_srcdir)/plugin-loaders/python		\
+	-I$(top_builddir)/plugin-loaders/python		\
 	$(GEDIT_CFLAGS)					\
 	$(NO_STRICT_ALIASING_CFLAGS)			\
 	$(PYGTK_CFLAGS)					\
@@ -98,8 +98,9 @@ EXTRA_DIST = \
 	gedit.defs		\
 	geditutils.override	\
 	geditutils.defs		\
-	geditcommands.override \
-	geditcommands.defs
+	geditcommands.override 	\
+	geditcommands.defs	\
+	geditplugin.override
 
 CLEANFILES = $(BUILT_SOURCES)
 
