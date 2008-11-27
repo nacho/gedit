@@ -40,7 +40,7 @@
 #include <glib/gi18n.h>
 #include <glib/goption.h>
 
-#ifndef PLATFORM_OSX
+#ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
 #endif
 
