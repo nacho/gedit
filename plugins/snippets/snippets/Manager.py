@@ -772,7 +772,7 @@ class Manager:
                 self.build_model(True)
 
                 if success:
-                        message = _('Import succesfully completed')
+                        message = _('Import successfully completed')
                         message_dialog(self.dlg, gtk.MESSAGE_INFO, message)
                
         def on_import_response(self, dialog, response):
@@ -793,7 +793,7 @@ class Manager:
                 
                 dlg.add_filter(self.file_filter(_('All supported archives'), ('*.gz','*.bz2','*.tar', '*.xml')))
                 dlg.add_filter(self.file_filter(_('Gzip compressed archive'), ('*.tar.gz',)))
-                dlg.add_filter(self.file_filter(_('Bzip compressed archive'), ('*.tar.bz2',)))
+                dlg.add_filter(self.file_filter(_('Bzip2 compressed archive'), ('*.tar.bz2',)))
                 dlg.add_filter(self.file_filter(_('Single snippets file'), ('*.xml',)))
                 dlg.add_filter(self.file_filter(_('All files'), '*'))
 
@@ -811,7 +811,7 @@ class Manager:
                         msgtype = gtk.MESSAGE_ERROR
                         retval = False
                 else:
-                        message = _('Export succesfully completed')
+                        message = _('Export successfully completed')
                         msgtype = gtk.MESSAGE_INFO
                         retval = True
 
@@ -879,7 +879,7 @@ class Manager:
                         dlg._export_snippets = export_snippets
                         dlg.add_filter(self.file_filter(_('All supported archives'), ('*.gz','*.bz2','*.tar')))
                         dlg.add_filter(self.file_filter(_('Gzip compressed archive'), ('*.tar.gz',)))
-                        dlg.add_filter(self.file_filter(_('Bzip compressed archive'), ('*.tar.bz2',)))
+                        dlg.add_filter(self.file_filter(_('Bzip2 compressed archive'), ('*.tar.bz2',)))
 
                         dlg.add_filter(self.file_filter(_('All files'), '*'))
                         dlg.set_do_overwrite_confirmation(True)
@@ -942,7 +942,7 @@ class Manager:
                 
                 dlg.add_filter(self.file_filter(_('All supported archives'), ('*.gz','*.bz2','*.tar')))
                 dlg.add_filter(self.file_filter(_('Gzip compressed archive'), ('*.tar.gz',)))
-                dlg.add_filter(self.file_filter(_('Bzip compressed archive'), ('*.tar.bz2',)))
+                dlg.add_filter(self.file_filter(_('Bzip2 compressed archive'), ('*.tar.bz2',)))
 
                 dlg.add_filter(self.file_filter(_('All files'), '*'))
                 dlg.set_do_overwrite_confirmation(True)
