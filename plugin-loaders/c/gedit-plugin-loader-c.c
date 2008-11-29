@@ -32,7 +32,8 @@ struct _GeditPluginLoaderCPrivate
 
 static void gedit_plugin_loader_iface_init (gpointer g_iface, gpointer iface_data);
 
-GEDIT_PLUGIN_LOADER_REGISTER_TYPE (GeditPluginLoaderC, gedit_plugin_loader_c);
+GEDIT_PLUGIN_LOADER_REGISTER_TYPE (GeditPluginLoaderC, gedit_plugin_loader_c, G_TYPE_OBJECT, gedit_plugin_loader_iface_init);
+
 
 static const gchar *
 gedit_plugin_loader_iface_get_name (void)
@@ -137,6 +138,11 @@ gedit_plugin_loader_c_class_init (GeditPluginLoaderCClass *klass)
 	object_class->finalize = gedit_plugin_loader_c_finalize;
 
 	g_type_class_add_private (object_class, sizeof (GeditPluginLoaderCPrivate));
+}
+
+static void
+gedit_plugin_loader_c_class_finalize (GeditPluginLoaderCClass *klass)
+{
 }
 
 static void

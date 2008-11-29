@@ -49,8 +49,8 @@ G_BEGIN_DECLS
 #define GEDIT_TYPE_OBJECT_MODULE		(gedit_object_module_get_type ())
 #define GEDIT_OBJECT_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GEDIT_TYPE_OBJECT_MODULE, GeditObjectModule))
 #define GEDIT_OBJECT_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GEDIT_TYPE_OBJECT_MODULE, GeditObjectModuleClass))
-#define GEDIT_IS_OBJECT_MODULE(obj)			(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GEDIT_TYPE_OBJECT_MODULE))
-#define GEDIT_IS_OBJECT_MODULE_CLASS(klass)		(G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_OBJECT_MODULE))
+#define GEDIT_IS_OBJECT_MODULE(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GEDIT_TYPE_OBJECT_MODULE))
+#define GEDIT_IS_OBJECT_MODULE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_OBJECT_MODULE))
 #define GEDIT_OBJECT_MODULE_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS((obj), GEDIT_TYPE_OBJECT_MODULE, GeditObjectModuleClass))
 
 typedef struct _GeditObjectModule 		GeditObjectModule;
@@ -87,142 +87,6 @@ const gchar	*gedit_object_module_get_path			(GeditObjectModule *module);
 const gchar	*gedit_object_module_get_module_name		(GeditObjectModule *module);
 const gchar 	*gedit_object_module_get_type_registration 	(GeditObjectModule *module);
 
-
-/**
- * GEDIT_OBJECT_MODULE_REGISTER_TYPE_WITH_CODE(type_registration, TypeName, type_name, PARENT_TYPE, CODE):
- *
- * Utility macro used to register types with additional code.
- */
-#define GEDIT_OBJECT_MODULE_REGISTER_TYPE_WITH_CODE(type_registration, TypeName, type_name, PARENT_TYPE, CODE) \
-										\
-static GType g_define_type_id = 0;						\
-										\
-GType										\
-type_name##_get_type (void)							\
-{										\
-	return g_define_type_id;						\
-}										\
-										\
-static void     type_name##_init              (TypeName        *self);		\
-static void     type_name##_class_init        (TypeName##Class *klass);		\
-static gpointer type_name##_parent_class = NULL;				\
-static void     type_name##_class_intern_init (gpointer klass)			\
-{										\
-	type_name##_parent_class = g_type_class_peek_parent (klass);		\
-	type_name##_class_init ((TypeName##Class *) klass);			\
-}										\
-										\
-G_MODULE_EXPORT GType								\
-type_registration (GTypeModule *module)						\
-{										\
-	static const GTypeInfo our_info =					\
-	{									\
-		sizeof (TypeName##Class),					\
-		NULL, /* base_init */						\
-		NULL, /* base_finalize */					\
-		(GClassInitFunc) type_name##_class_intern_init,			\
-		NULL,								\
-		NULL, /* class_data */						\
-		sizeof (TypeName),						\
-		0, /* n_preallocs */						\
-		(GInstanceInitFunc) type_name##_init				\
-	};									\
-										\
-	g_define_type_id = g_type_module_register_type (module,			\
-					    PARENT_TYPE,			\
-					    #TypeName,				\
-					    &our_info,				\
-					    0);					\
-										\
-	CODE									\
-										\
-	return g_define_type_id;						\
-}
-
-/**
- * GEDIT_PLUGIN_REGISTER_TYPE(TypeName, type_name):
- * 
- * Utility macro used to register plugins.
- */
-#define GEDIT_OBJECT_MODULE_REGISTER_TYPE(type_registration, TypeName, type_name, PARENT_TYPE) \
-	GEDIT_OBJECT_MODULE_REGISTER_TYPE_WITH_CODE(type_registration, TypeName, type_name, PARENT_TYPE, ;)
-
-/**
- * GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, CODE):
- *
- * Utility macro used to register gobject types in plugins with additional code.
- */
-#define GEDIT_OBJECT_MODULE_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, CODE)	\
-										\
-static GType g_define_type_id = 0;						\
-										\
-GType										\
-object_name##_get_type (void)							\
-{										\
-	return g_define_type_id;						\
-}										\
-										\
-static void     object_name##_init              (ObjectName        *self);	\
-static void     object_name##_class_init        (ObjectName##Class *klass);	\
-static gpointer object_name##_parent_class = NULL;				\
-static void     object_name##_class_intern_init (gpointer klass)		\
-{										\
-	object_name##_parent_class = g_type_class_peek_parent (klass);		\
-	object_name##_class_init ((ObjectName##Class *) klass);			\
-}										\
-										\
-GType										\
-object_name##_register_type (GTypeModule *module)				\
-{										\
-	static const GTypeInfo our_info =					\
-	{									\
-		sizeof (ObjectName##Class),					\
-		NULL, /* base_init */						\
-		NULL, /* base_finalize */					\
-		(GClassInitFunc) object_name##_class_intern_init,		\
-		NULL,								\
-		NULL, /* class_data */						\
-		sizeof (ObjectName),						\
-		0, /* n_preallocs */						\
-		(GInstanceInitFunc) object_name##_init				\
-	};									\
-										\
-	g_define_type_id = g_type_module_register_type (module,			\
-					   	        PARENT_TYPE,		\
-					                #ObjectName,		\
-					                &our_info,		\
-					                0);			\
-										\
-	CODE									\
-										\
-	return g_define_type_id;						\
-}
-
-/**
- * GEDIT_OBJECT_MODULE_DEFINE_TYPE(ObjectName, object_name, PARENT_TYPE):
- *
- * Utility macro used to register gobject types in plugins.
- */
-#define GEDIT_OBJECT_MODULE_DEFINE_TYPE(ObjectName, object_name, PARENT_TYPE)	\
-	GEDIT_OBJECT_MODULE_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, ;)
-
-/**
- * GEDIT_OBJECT_MODULE_IMPLEMENT_INTERFACE(TYPE_IFACE, iface_init):
- *
- * Utility macro used to register interfaces for gobject types in plugins.
- */
-#define GEDIT_OBJECT_MODULE_IMPLEMENT_INTERFACE(object_name, TYPE_IFACE, iface_init)	\
-	const GInterfaceInfo object_name##_interface_info = 			\
-	{ 									\
-		(GInterfaceInitFunc) iface_init,				\
-		NULL, 								\
-		NULL								\
-	};									\
-										\
-	g_type_module_add_interface (module, 					\
-				     g_define_type_id, 				\
-				     TYPE_IFACE, 				\
-				     &object_name##_interface_info);
 G_END_DECLS
 
 #endif

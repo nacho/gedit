@@ -1,3 +1,11 @@
+2008-11-29  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit/gedit-object-module.h:
+	* gedit/gedit-plugin.h:
+	* gedit/gedit-plugin-loader.h:
+	Rework macros since gedit-plugin.h is public while object-module
+	is not and also switch to G_DEFINE_DYNAMIC_TYPE where possible.
+
 2008-11-29  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	* plugin-loaders/c/plugin-loader-c.[ch]:

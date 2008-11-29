@@ -27,6 +27,8 @@
 #include <gedit/gedit-plugin.h>
 #include <gedit/gedit-plugin-info.h>
 
+G_BEGIN_DECLS
+
 #define GEDIT_TYPE_PLUGIN_LOADER                (gedit_plugin_loader_get_type ())
 #define GEDIT_PLUGIN_LOADER(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), GEDIT_TYPE_PLUGIN_LOADER, GeditPluginLoader))
 #define GEDIT_IS_PLUGIN_LOADER(obj)             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GEDIT_TYPE_PLUGIN_LOADER))
@@ -58,50 +60,47 @@ GeditPlugin *gedit_plugin_loader_load		(GeditPluginLoader 	*loader,
 						 const gchar		*path);
 void gedit_plugin_loader_unload			(GeditPluginLoader 	*loader,
 						 GeditPluginInfo	*info);
-
 void gedit_plugin_loader_garbage_collect	(GeditPluginLoader 	*loader);
-
-/**
- * GEDIT_PLUGIN_LOADER_REGISTER_TYPE_WITH_CODE(PluginLoaderName, plugin_loader_name, CODE):
- *
- * Utility macro used to register plugins with additional code.
- */
-#define GEDIT_PLUGIN_LOADER_REGISTER_TYPE_WITH_CODE(PluginLoaderName, plugin_loader_name, CODE) \
-	GEDIT_OBJECT_MODULE_REGISTER_TYPE_WITH_CODE (register_gedit_plugin_loader,	\
-						     PluginLoaderName,			\
-						     plugin_loader_name,		\
-						     G_TYPE_OBJECT,			\
-						     GEDIT_OBJECT_MODULE_IMPLEMENT_INTERFACE (cplugin_loader_iface, GEDIT_TYPE_PLUGIN_LOADER, gedit_plugin_loader_iface_init);	\
-						     CODE)
-/**
- * GEDIT_PLUGIN_LOADER_REGISTER_TYPE(PluginName, plugin_name):
- * 
- * Utility macro used to register plugins.
- */
-#define GEDIT_PLUGIN_LOADER_REGISTER_TYPE(PluginName, plugin_name)		\
-	GEDIT_PLUGIN_LOADER_REGISTER_TYPE_WITH_CODE(PluginName, plugin_name, ;)
-
-/**
- * GEDIT_PLUGIN_LOADER_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, CODE):
- *
- * Utility macro used to register gobject types in plugins with additional code.
- */
-#define GEDIT_PLUGIN_LOADER_DEFINE_TYPE_WITH_CODE GEDIT_OBJECT_MODULE_DEFINE_TYPE_WITH_CODE
-
-/**
- * GEDIT_PLUGIN_LOADER_DEFINE_TYPE(ObjectName, object_name, PARENT_TYPE):
- *
- * Utility macro used to register gobject types in plugins.
- */
-#define GEDIT_PLUGIN_LOADER_DEFINE_TYPE(ObjectName, object_name, PARENT_TYPE)	\
-	GEDIT_PLUGIN_LOADER_DEFINE_TYPE_WITH_CODE(ObjectName, object_name, PARENT_TYPE, ;)
 
 /**
  * GEDIT_PLUGIN_LOADER_IMPLEMENT_INTERFACE(TYPE_IFACE, iface_init):
  *
- * Utility macro used to register interfaces for gobject types in plugins.
+ * Utility macro used to register interfaces for gobject types in plugin loaders.
  */
-#define GEDIT_PLUGIN_LOADER_IMPLEMENT_INTERFACE(object_name, TYPE_IFACE, iface_init)	\
-	GEDIT_OBJECT_MODULE_IMPLEMENT_INTERFACE(object_name, TYPE_IFACE, iface_init)
+#define GEDIT_PLUGIN_LOADER_IMPLEMENT_INTERFACE(TYPE_IFACE, iface_init)		\
+	const GInterfaceInfo g_implement_interface_info = 			\
+	{ 									\
+		(GInterfaceInitFunc) iface_init,				\
+		NULL, 								\
+		NULL								\
+	};									\
+										\
+	g_type_module_add_interface (type_module,				\
+				     g_define_type_id, 				\
+				     TYPE_IFACE, 				\
+				     &g_implement_interface_info);
+
+/**
+ * GEDIT_PLUGIN_LOADER_REGISTER_TYPE(PluginLoaderName, plugin_loader_name, PARENT_TYPE, loader_interface_init):
+ *
+ * Utility macro used to register plugin loaders.
+ */
+#define GEDIT_PLUGIN_LOADER_REGISTER_TYPE(PluginLoaderName, plugin_loader_name, PARENT_TYPE, loader_iface_init) 	\
+	G_DEFINE_DYNAMIC_TYPE_EXTENDED (PluginLoaderName,			\
+					plugin_loader_name,			\
+					PARENT_TYPE,			\
+					0,					\
+					GEDIT_PLUGIN_LOADER_IMPLEMENT_INTERFACE(GEDIT_TYPE_PLUGIN_LOADER, loader_iface_init));	\
+										\
+										\
+G_MODULE_EXPORT GType								\
+register_gedit_plugin_loader (GTypeModule *type_module)				\
+{										\
+	plugin_loader_name##_register_type (type_module);			\
+										\
+	return plugin_loader_name##_get_type();					\
+}
+
+G_END_DECLS
 
 #endif /* __GEDIT_PLUGIN_LOADER_H__ */

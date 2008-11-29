@@ -73,7 +73,7 @@ extern PyMethodDef pygeditcommands_functions[];
 /* We retreive this to check for correct class hierarchy */
 static PyTypeObject *PyGeditPlugin_Type;
 
-GEDIT_PLUGIN_LOADER_REGISTER_TYPE (GeditPluginLoaderPython, gedit_plugin_loader_python);
+GEDIT_PLUGIN_LOADER_REGISTER_TYPE (GeditPluginLoaderPython, gedit_plugin_loader_python, G_TYPE_OBJECT, gedit_plugin_loader_iface_init);
 
 
 static PyObject *
@@ -616,6 +616,11 @@ gedit_plugin_loader_python_class_init (GeditPluginLoaderPythonClass *klass)
 	object_class->finalize = gedit_plugin_loader_python_finalize;
 
 	g_type_class_add_private (object_class, sizeof (GeditPluginLoaderPythonPrivate));
+}
+
+static void
+gedit_plugin_loader_python_class_finalize (GeditPluginLoaderPythonClass *klass)
+{
 }
 
 static void

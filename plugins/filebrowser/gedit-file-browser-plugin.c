@@ -103,11 +103,11 @@ static gboolean on_confirm_no_trash_cb   (GeditFileBrowserWidget * widget,
                                           GeditWindow * window);
 
 GEDIT_PLUGIN_REGISTER_TYPE_WITH_CODE (GeditFileBrowserPlugin, filetree_plugin, 	\
-	gedit_file_browser_enum_and_flag_register_type (module);		\
-	gedit_file_browser_store_register_type         (module);		\
-	gedit_file_bookmarks_store_register_type       (module);		\
-	gedit_file_browser_view_register_type	       (module);		\
-	gedit_file_browser_widget_register_type	       (module);		\
+	gedit_file_browser_enum_and_flag_register_type (type_module);		\
+	gedit_file_browser_store_register_type         (type_module);		\
+	gedit_file_bookmarks_store_register_type       (type_module);		\
+	gedit_file_browser_view_register_type	       (type_module);		\
+	gedit_file_browser_widget_register_type	       (type_module);		\
 )
 
 
