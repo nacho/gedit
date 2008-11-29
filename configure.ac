@@ -28,7 +28,7 @@ AC_CONFIG_HEADERS(config.h)
 AC_DISABLE_STATIC
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
-IT_PROG_INTLTOOL([0.35.0])
+IT_PROG_INTLTOOL([0.40.0])
 
 AC_PROG_LIBTOOL
 
@@ -194,7 +194,7 @@ dnl ================================================================
 
 PKG_CHECK_MODULES(GEDIT, [
 	libxml-2.0 >= 2.5.0
-	glib-2.0 >= 2.13.0
+	glib-2.0 >= 2.18.0
 	gthread-2.0 >= 2.13.0
 	gio-2.0 >= 2.16.0
 	gtk+-2.0 >= 2.13.0

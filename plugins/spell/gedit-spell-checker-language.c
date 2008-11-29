@@ -278,32 +278,26 @@ create_name_for_language (const char *code)
 		
 		if (localename != NULL)
 		{
-			/* Translators: The text before the "|" is context to help you decide on
-			 * the correct translation. You MUST OMIT it in the translated string.
-			 * Translators: the first %s is the language name, and the
+			/* Translators: the first %s is the language name, and the
 			 * second %s is the locale name. Example:
 			 * "French (France)"
 			 */
-			name = g_strdup_printf (Q_("language|%s (%s)"),
+			name = g_strdup_printf (C_("language", "%s (%s)"),
 						dgettext (ISO_639_DOMAIN, langname),
 						dgettext (ISO_3166_DOMAIN, localename));
 		}
 		else
 		{
-			/* Translators: The text before the "|" is context to help you decide on
-			 * the correct translation. You MUST OMIT it in the translated string. */
-			name = g_strdup_printf (Q_("language|%s (%s)"),
+			name = g_strdup_printf (C_("language", "%s (%s)"),
 						dgettext (ISO_639_DOMAIN, langname), str[1]);
 		}
 	}
 	else
 	{
-		/* Translators: The text before the "|" is context to help you decide on
-		 * the correct translation. You MUST OMIT it in the translated string.
-		 * Translators: this refers to an unknown language code
+		/* Translators: this refers to an unknown language code
 		 * (one which isn't in our built-in list).
 		 */
-		name = g_strdup_printf (Q_("language|Unknown (%s)"), code);
+		name = g_strdup_printf (C_("language", "Unknown (%s)"), code);
 	}
 
 	g_strfreev (str);
@@ -411,7 +405,7 @@ gedit_spell_checker_language_to_string (const GeditSpellCheckerLanguage *lang)
 		 * Translators: this refers the Default language used by the
 		 * spell checker
 		 */
-		return Q_("language|Default");
+		return C_("language", "Default");
 
 	return lang->name;
 }
