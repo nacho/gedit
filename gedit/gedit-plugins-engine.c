@@ -271,7 +271,7 @@ loader_destroy (LoaderInfo *info)
 
 static void
 add_loader (GeditPluginsEngine *engine,
-	    const gchar        *loader_name,
+	    const gchar        *loader_id,
 	    GeditObjectModule  *module)
 {
 	LoaderInfo *info;
@@ -280,7 +280,7 @@ add_loader (GeditPluginsEngine *engine,
 	info->loader = NULL;
 	info->module = module;
 
-	g_hash_table_insert (engine->priv->loaders, g_strdup (loader_name), info);
+	g_hash_table_insert (engine->priv->loaders, g_strdup (loader_id), info);
 }
 
 static void
@@ -412,7 +412,7 @@ load_loader (GeditPluginsEngine *engine,
 	GeditObjectModule *module;
 	gchar *base;
 	gchar *path;
-	const gchar *name;
+	const gchar *id;
 	GType type;
 	
 	/* try to load in the module */
@@ -432,13 +432,13 @@ load_loader (GeditPluginsEngine *engine,
 
 		return TRUE;
 	}
-	
+
 	/* get the exported type and check the name as exported by the 
 	 * loader interface */
 	type = gedit_object_module_get_object_type (module);
-	name = gedit_plugin_loader_type_get_name (type);
+	id = gedit_plugin_loader_type_get_id (type);
 	
-	add_loader (engine, name, module);	
+	add_loader (engine, id, module);	
 	g_type_module_unuse (G_TYPE_MODULE (module));
 
 	return TRUE;
@@ -470,14 +470,14 @@ ensure_loader (LoaderInfo *info)
 static GeditPluginLoader *
 get_plugin_loader (GeditPluginsEngine *engine, GeditPluginInfo *info)
 {
-	const gchar *loader_name;
+	const gchar *loader_id;
 	LoaderInfo *loader_info;
-	
-	loader_name = info->loader;
+
+	loader_id = info->loader;
 
 	loader_info = (LoaderInfo *)g_hash_table_lookup (
 			engine->priv->loaders, 
-			loader_name);
+			loader_id);
 
 	if (loader_info == NULL)
 	{
@@ -493,15 +493,13 @@ get_plugin_loader (GeditPluginsEngine *engine, GeditPluginInfo *info)
 		
 		loader_info = (LoaderInfo *)g_hash_table_lookup (
 				engine->priv->loaders, 
-				loader_name);
+				loader_id);
 	}
-	
-	
-	
+
 	if (loader_info == NULL)
 	{
 		/* cache non-existent so we don't scan again */
-		add_loader (engine, loader_name, NULL);
+		add_loader (engine, loader_id, NULL);
 		return NULL;
 	}
 	

@@ -61,7 +61,7 @@ gedit_plugin_loader_get_type (void)
 }
 
 const gchar *
-gedit_plugin_loader_type_get_name (GType type)
+gedit_plugin_loader_type_get_id (GType type)
 {
 	GTypeClass *klass;
 	GeditPluginLoaderInterface *iface;
@@ -84,8 +84,8 @@ gedit_plugin_loader_type_get_name (GType type)
 		return NULL;
 	}
 	
-	g_return_val_if_fail (iface->get_name != NULL, NULL);
-	return iface->get_name ();
+	g_return_val_if_fail (iface->get_id != NULL, NULL);
+	return iface->get_id ();
 }
 
 GeditPlugin *

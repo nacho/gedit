@@ -40,7 +40,7 @@ typedef struct _GeditPluginLoaderInterface GeditPluginLoaderInterface;
 struct _GeditPluginLoaderInterface {
 	GTypeInterface parent;
 
-	const gchar *(*get_name)		(void);
+	const gchar *(*get_id)		(void);
 
 	GeditPlugin *(*load) 		(GeditPluginLoader 	*loader,
 			     		 GeditPluginInfo	*info,
@@ -54,7 +54,7 @@ struct _GeditPluginLoaderInterface {
 
 GType gedit_plugin_loader_get_type (void);
 
-const gchar *gedit_plugin_loader_type_get_name	(GType 			 type);
+const gchar *gedit_plugin_loader_type_get_id	(GType 			 type);
 GeditPlugin *gedit_plugin_loader_load		(GeditPluginLoader 	*loader,
 						 GeditPluginInfo 	*info,
 						 const gchar		*path);

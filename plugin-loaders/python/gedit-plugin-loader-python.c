@@ -140,7 +140,7 @@ add_python_info (GeditPluginLoaderPython *loader,
 }
 
 static const gchar *
-gedit_plugin_loader_iface_get_name (void)
+gedit_plugin_loader_iface_get_id (void)
 {
 	return "Python";
 }
@@ -279,7 +279,7 @@ gedit_plugin_loader_iface_init (gpointer g_iface,
 {
 	GeditPluginLoaderInterface *iface = (GeditPluginLoaderInterface *)g_iface;
 	
-	iface->get_name = gedit_plugin_loader_iface_get_name;
+	iface->get_id = gedit_plugin_loader_iface_get_id;
 	iface->load = gedit_plugin_loader_iface_load;
 	iface->unload = gedit_plugin_loader_iface_unload;
 	iface->garbage_collect = gedit_plugin_loader_iface_garbage_collect;
