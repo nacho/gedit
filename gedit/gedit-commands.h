@@ -34,7 +34,7 @@
 #ifndef __GEDIT_COMMANDS_H__
 #define __GEDIT_COMMANDS_H__
 
-#include <gtk/gtkaction.h>
+#include <gtk/gtk.h>
 #include <gedit/gedit-window.h>
 
 G_BEGIN_DECLS

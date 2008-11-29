@@ -30,8 +30,8 @@
 #ifndef __GEDIT_PREFS_MANAGER_H__
 #define __GEDIT_PREFS_MANAGER_H__
 
-#include <gtk/gtkenums.h>
-#include <glib/gslist.h>
+#include <gtk/gtk.h>
+#include <glib.h>
 #include <gtksourceview/gtksourceview.h>
 #include "gedit-app.h"
 

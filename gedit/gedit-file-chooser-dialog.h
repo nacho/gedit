@@ -31,7 +31,7 @@
 #ifndef __GEDIT_FILE_CHOOSER_DIALOG_H__
 #define __GEDIT_FILE_CHOOSER_DIALOG_H__
 
-#include <gtk/gtkfilechooserdialog.h>
+#include <gtk/gtk.h>
 
 #include <gedit/gedit-encodings.h>
 

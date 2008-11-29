@@ -35,7 +35,6 @@
 #include "gedit-help.h"
 
 #include <glib/gi18n.h>
-#include <gtk/gtkmessagedialog.h>
 #include <string.h>
 #include <gtk/gtk.h>
 

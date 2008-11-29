@@ -41,7 +41,7 @@
 #include <fcntl.h>
 #include <string.h>
 
-#include <glib/gunicode.h>
+#include <glib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 

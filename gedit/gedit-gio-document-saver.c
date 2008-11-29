@@ -33,7 +33,7 @@
 #endif
 
 #include <glib/gi18n.h>
-#include <glib/gfileutils.h>
+#include <glib.h>
 #include <gio/gio.h>
 #include <string.h>
 

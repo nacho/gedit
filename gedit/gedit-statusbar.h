@@ -29,7 +29,7 @@
 #ifndef GEDIT_STATUSBAR_H
 #define GEDIT_STATUSBAR_H
 
-#include <gtk/gtkstatusbar.h>
+#include <gtk/gtk.h>
 #include <gedit/gedit-window.h>
 
 G_BEGIN_DECLS

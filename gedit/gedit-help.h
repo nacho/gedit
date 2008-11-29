@@ -31,7 +31,7 @@
 #ifndef __GEDIT_HELP_H__
 #define __GEDIT_HELP_H__
 
-#include <gtk/gtkwindow.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

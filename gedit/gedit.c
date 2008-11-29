@@ -37,8 +37,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <glib.h>
 #include <glib/gi18n.h>
-#include <glib/goption.h>
 
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>

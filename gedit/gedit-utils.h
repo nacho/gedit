@@ -34,11 +34,7 @@
 #define __GEDIT_UTILS_H__
 
 #include <glib.h>
-#include <gtk/gtkwidget.h>
-#include <gtk/gtkdialog.h>
-#include <gtk/gtkaboutdialog.h>
-#include <gtk/gtkmenu.h>
-#include <gtk/gtktextiter.h>
+#include <gtk/gtk.h>
 #include <atk/atk.h>
 #include <gedit/gedit-encodings.h>
 

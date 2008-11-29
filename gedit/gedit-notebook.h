@@ -41,7 +41,7 @@
 #include <gedit/gedit-tab.h>
 
 #include <glib.h>
-#include <gtk/gtknotebook.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

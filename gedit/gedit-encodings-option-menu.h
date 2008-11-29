@@ -32,7 +32,7 @@
 #ifndef __GEDIT_ENCODINGS_OPTION_MENU_H__
 #define __GEDIT_ENCODINGS_OPTION_MENU_H__
 
-#include <gtk/gtkoptionmenu.h>
+#include <gtk/gtk.h>
 #include <gedit/gedit-encodings.h>
 
 G_BEGIN_DECLS
