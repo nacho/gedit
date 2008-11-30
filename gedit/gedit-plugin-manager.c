@@ -645,7 +645,10 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	model = gtk_list_store_new (N_COLUMNS, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, GEDIT_TYPE_PLUGIN_INFO);
+	model = gtk_list_store_new (N_COLUMNS,
+				    G_TYPE_BOOLEAN,
+				    G_TYPE_BOOLEAN,
+				    G_TYPE_POINTER);
 
 	gtk_tree_view_set_model (GTK_TREE_VIEW (pm->priv->tree),
 				 GTK_TREE_MODEL (model));
