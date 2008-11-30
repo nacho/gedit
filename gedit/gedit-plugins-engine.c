@@ -110,7 +110,6 @@ load_dir_real (GeditPluginsEngine *engine,
 	gedit_debug_message (DEBUG_PLUGINS, "DIR: %s", dir);
 
 	d = g_dir_open (dir, 0, &error);
-
 	if (!d)
 	{
 		g_warning ("%s", error->message);
@@ -121,18 +120,20 @@ load_dir_real (GeditPluginsEngine *engine,
 	while ((dirent = g_dir_read_name (d)))
 	{
 		gchar *filename;
-		
+
 		if (!g_str_has_suffix (dirent, suffix))
 			continue;
-		
+
 		filename = g_build_filename (dir, dirent, NULL);
 
 		ret = callback (engine, filename, userdata);
-		
+
+		g_free (filename);
+
 		if (!ret)
 			break;
 	}
-	
+
 	g_dir_close (d);
 	return ret;
 }
@@ -736,6 +737,7 @@ gedit_plugins_engine_activate_plugins (GeditPluginsEngine *engine,
 	
 	if (engine->priv->activate_from_gconf)
 	{
+		g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
 		g_slist_free (active_plugins);
 		engine->priv->activate_from_gconf = FALSE;
 	}

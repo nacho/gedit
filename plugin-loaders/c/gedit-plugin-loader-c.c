@@ -57,6 +57,10 @@ gedit_plugin_loader_iface_load (GeditPluginLoader *loader,
 		module = gedit_object_module_new (gedit_plugin_info_get_module_name (info),
 						  path,
 						  "register_gedit_plugin");
+
+		/* Infos are available for all the lifetime of the loader.
+		 * If this changes, we should use weak refs or something */
+
 		g_hash_table_insert (cloader->priv->loaded_plugins, info, module);
 	}
 
@@ -112,19 +116,24 @@ gedit_plugin_loader_c_finalize (GObject *object)
 	GList *infos;
 	GList *item;
 
+	/* FIXME: this sanity check it's not efficient. Let's remove it
+	 * once we are confident with the code */
+
 	infos = g_hash_table_get_keys (cloader->priv->loaded_plugins);
 	
 	for (item = infos; item; item = item->next)
 	{
 		GeditPluginInfo *info = (GeditPluginInfo *)item->data;
-		
+
 		if (gedit_plugin_info_is_active (info))
 		{
 			g_warning ("There are still C plugins loaded during destruction");
 			break;
 		}
 	}
-	
+
+	g_list_free (infos);	
+
 	g_hash_table_destroy (cloader->priv->loaded_plugins);
 	
 	G_OBJECT_CLASS (gedit_plugin_loader_c_parent_class)->finalize (object);
