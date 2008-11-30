@@ -317,7 +317,7 @@ gedit_plugins_engine_init (GeditPluginsEngine *engine)
 	/* make sure that the first reactivation will read active plugins from
 	   gconf */
 	engine->priv->activate_from_gconf = TRUE;
-	
+
 	/* mapping from loadername -> loader object */
 	engine->priv->loaders = g_hash_table_new_full (hash_lowercase,
 						       equal_lowercase,
@@ -325,23 +325,19 @@ gedit_plugins_engine_init (GeditPluginsEngine *engine)
 						       (GDestroyNotify)loader_destroy);
 }
 
+static void
+loader_garbage_collect (const char *id, LoaderInfo *info)
+{
+	if (info->loader)
+		gedit_plugin_loader_garbage_collect (info->loader);
+}
+
 void
 gedit_plugins_engine_garbage_collect (GeditPluginsEngine *engine)
 {
-	GList *loaders;
-	GList *item;
-	
-	loaders = g_hash_table_get_values (engine->priv->loaders);
-	
-	for (item = loaders; item; item = item->next)
-	{
-		LoaderInfo *info = (LoaderInfo *)item->data;
-		
-		if (info->loader)
-			gedit_plugin_loader_garbage_collect (info->loader);
-	}
-	
-	g_list_free (loaders);
+	g_hash_table_foreach (engine->priv->loaders,
+			      (GHFunc) loader_garbage_collect,
+			      NULL);
 }
 
 static void
