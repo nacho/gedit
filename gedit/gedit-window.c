@@ -1270,6 +1270,7 @@ update_recent_files_menu (GeditWindow *window)
 
 		gtk_action_group_add_action (p->recents_action_group,
 					     action);
+		g_object_unref (action);
 
 		gtk_ui_manager_add_ui (p->manager,
 				       p->recents_menu_ui_id,

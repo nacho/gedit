@@ -352,7 +352,7 @@ set_window (GeditDocumentsPanel *panel,
 	g_return_if_fail (panel->priv->window == NULL);
 	g_return_if_fail (GEDIT_IS_WINDOW (window));
 
-	panel->priv->window = window;
+	panel->priv->window = g_object_ref (window);
 
 	g_signal_connect (window,
 			  "tab_added",
@@ -449,12 +449,26 @@ gedit_documents_panel_finalize (GObject *object)
 	G_OBJECT_CLASS (gedit_documents_panel_parent_class)->finalize (object);
 }
 
+static void
+gedit_documents_panel_dispose (GObject *object)
+{
+	GeditDocumentsPanel *panel = GEDIT_DOCUMENTS_PANEL (object);
+
+	if (panel->priv->window != NULL) {
+		g_object_unref (panel->priv->window);
+		panel->priv->window = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_documents_panel_parent_class)->dispose (object);
+}
+
 static void 
 gedit_documents_panel_class_init (GeditDocumentsPanelClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->finalize = gedit_documents_panel_finalize;
+	object_class->dispose = gedit_documents_panel_dispose;
 	object_class->get_property = gedit_documents_panel_get_property;
 	object_class->set_property = gedit_documents_panel_set_property;
 
