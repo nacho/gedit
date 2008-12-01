@@ -350,19 +350,27 @@ gedit_plugins_engine_finalize (GObject *object)
 
 	g_return_if_fail (engine->priv->gconf_client != NULL);
 
+	/* Firs deactivate all plugins */
 	for (item = engine->priv->plugin_list; item; item = item->next)
 	{
 		GeditPluginInfo *info = GEDIT_PLUGIN_INFO (item->data);
 		
 		if (gedit_plugin_info_is_active (info))
 			gedit_plugins_engine_deactivate_plugin_real (engine, info);
-		
-		_gedit_plugin_info_unref (info);
 	}
 	
-	g_list_free (engine->priv->plugin_list);
-	
+	/* unref the loaders */	
 	g_hash_table_destroy (engine->priv->loaders);
+
+	/* and finally free the infos */
+	for (item = engine->priv->plugin_list; item; item = item->next)
+	{
+		GeditPluginInfo *info = GEDIT_PLUGIN_INFO (item->data);
+
+		_gedit_plugin_info_unref (info);
+	}
+
+	g_list_free (engine->priv->plugin_list);
 	g_object_unref (engine->priv->gconf_client);
 }
 
