@@ -27,11 +27,11 @@ register_@enum_name@ (GTypeModule *module)
 /*** BEGIN value-tail ***/
 		{ 0, NULL, NULL }
 	};
-	
+
 	@enum_name@_type =
 		g_type_module_register_@type@ (module,
-		                             g_intern_static_string ("@EnumName@"),
-				             values);
+		                               "@EnumName@",
+		                               values);
 
 	return @enum_name@_type;
 }
