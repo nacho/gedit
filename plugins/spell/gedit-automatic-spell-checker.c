@@ -707,12 +707,13 @@ gedit_automatic_spell_checker_new (GeditDocument     *doc,
 	spell->doc = doc;
 	spell->spell_checker = g_object_ref (checker);
 
-	if (automatic_spell_checker_id == 0)
+	if (automatic_spell_checker_id == 0) {
 		automatic_spell_checker_id = 
-			g_quark_from_static_string ("GeditAutomaticSpellCheckerID");
-	if (suggestion_id == 0)
-		suggestion_id = 
-			g_quark_from_static_string ("GeditAutoSuggestionID");
+			g_quark_from_string ("GeditAutomaticSpellCheckerID");
+	}
+	if (suggestion_id == 0) {
+		suggestion_id = g_quark_from_string ("GeditAutoSuggestionID");
+	}
 
 	g_object_set_qdata_full (G_OBJECT (doc), 
 				 automatic_spell_checker_id, 

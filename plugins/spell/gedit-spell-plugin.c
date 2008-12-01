@@ -996,8 +996,8 @@ gedit_spell_plugin_class_init (GeditSpellPluginClass *klass)
 	plugin_class->update_ui = impl_update_ui;
 
 	if (spell_checker_id == 0)
-		spell_checker_id = g_quark_from_static_string ("GeditSpellCheckerID");
-	
+		spell_checker_id = g_quark_from_string ("GeditSpellCheckerID");
+
 	if (check_range_id == 0)
-		check_range_id = g_quark_from_static_string ("CheckRangeID");
+		check_range_id = g_quark_from_string ("CheckRangeID");
 }

@@ -2588,10 +2588,9 @@ gedit_file_browser_store_error_quark (void)
 {
 	static GQuark quark = 0;
 
-	if (G_UNLIKELY (quark == 0))
-		quark =
-		    g_quark_from_static_string
-		    ("gedit_file_browser_store_error");
+	if (G_UNLIKELY (quark == 0)) {
+		quark = g_quark_from_string ("gedit_file_browser_store_error");
+	}
 
 	return quark;
 }
