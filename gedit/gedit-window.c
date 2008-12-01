@@ -112,6 +112,39 @@ gedit_window_get_property (GObject    *object,
 }
 
 static void
+save_panes_state (GeditWindow *window)
+{
+	gint pane_page;
+
+	if (gedit_prefs_manager_window_size_can_set ())
+		gedit_prefs_manager_set_window_size (window->priv->width,
+						     window->priv->height);
+
+	if (gedit_prefs_manager_window_state_can_set ())
+		gedit_prefs_manager_set_window_state (window->priv->window_state);
+
+	if ((window->priv->side_panel_size > 0) &&
+	    gedit_prefs_manager_side_panel_size_can_set ())
+		gedit_prefs_manager_set_side_panel_size	(
+					window->priv->side_panel_size);
+
+	pane_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->side_panel));
+	if (pane_page != 0 &&
+	    gedit_prefs_manager_side_panel_active_page_can_set ())
+		gedit_prefs_manager_set_side_panel_active_page (pane_page);
+
+	if ((window->priv->bottom_panel_size > 0) && 
+	    gedit_prefs_manager_bottom_panel_size_can_set ())
+		gedit_prefs_manager_set_bottom_panel_size (
+					window->priv->bottom_panel_size);
+
+	pane_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->bottom_panel));
+	if (pane_page != 0 &&
+	    gedit_prefs_manager_bottom_panel_active_page_can_set ())
+		gedit_prefs_manager_set_bottom_panel_active_page (pane_page);
+}
+
+static void
 gedit_window_dispose (GObject *object)
 {
 	GeditWindow *window;
@@ -125,9 +158,12 @@ gedit_window_dispose (GObject *object)
 	 */
 	gedit_plugins_engine_garbage_collect (gedit_plugins_engine_get_default ());
 
-	/* make sure to deactivate plugins for this window, but only once */
+	/* save the panes position and make sure to deactivate plugins
+	 * for this window, but only once */
 	if (!window->priv->dispose_has_run)
 	{
+		save_panes_state (window);
+
 		gedit_plugins_engine_deactivate_plugins (gedit_plugins_engine_get_default (),
 					                  window);
 		window->priv->dispose_has_run = TRUE;
@@ -175,55 +211,6 @@ gedit_window_finalize (GObject *object)
 	g_free (window->priv->default_path);
 
 	G_OBJECT_CLASS (gedit_window_parent_class)->finalize (object);
-}
-
-static void
-save_panes_state (GeditWindow *window)
-{
-	gint pane_page;
-
-	if (gedit_prefs_manager_window_size_can_set ())
-		gedit_prefs_manager_set_window_size (window->priv->width,
-						     window->priv->height);
-
-	if (gedit_prefs_manager_window_state_can_set ())
-		gedit_prefs_manager_set_window_state (window->priv->window_state);
-
-	if ((window->priv->side_panel_size > 0) &&
-	    gedit_prefs_manager_side_panel_size_can_set ())
-		gedit_prefs_manager_set_side_panel_size	(
-					window->priv->side_panel_size);
-
-	pane_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->side_panel));
-	if (pane_page != 0 &&
-	    gedit_prefs_manager_side_panel_active_page_can_set ())
-		gedit_prefs_manager_set_side_panel_active_page (pane_page);
-
-	if ((window->priv->bottom_panel_size > 0) && 
-	    gedit_prefs_manager_bottom_panel_size_can_set ())
-		gedit_prefs_manager_set_bottom_panel_size (
-					window->priv->bottom_panel_size);
-
-	pane_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->bottom_panel));
-	if (pane_page != 0 &&
-	    gedit_prefs_manager_bottom_panel_active_page_can_set ())
-		gedit_prefs_manager_set_bottom_panel_active_page (pane_page);
-}
-
-static void
-gedit_window_destroy (GtkObject *object)
-{
-	GeditWindow *window;
-
-	window = GEDIT_WINDOW (object);
-
-	if (!window->priv->destroy_has_run)
-	{
-		save_panes_state (window);
-		window->priv->destroy_has_run = TRUE;
-	}
-
-	GTK_OBJECT_CLASS (gedit_window_parent_class)->destroy (object);
 }
 
 static gboolean
@@ -306,7 +293,6 @@ static void
 gedit_window_class_init (GeditWindowClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	GtkObjectClass *gobject_class = GTK_OBJECT_CLASS (klass);
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
 	klass->tab_removed = gedit_window_tab_removed;
@@ -314,8 +300,6 @@ gedit_window_class_init (GeditWindowClass *klass)
 	object_class->dispose = gedit_window_dispose;
 	object_class->finalize = gedit_window_finalize;
 	object_class->get_property = gedit_window_get_property;
-
-	gobject_class->destroy = gedit_window_destroy;
 
 	widget_class->window_state_event = gedit_window_window_state_event;
 	widget_class->configure_event = gedit_window_configure_event;
@@ -3076,7 +3060,6 @@ gedit_window_init (GeditWindow *window)
 	window->priv->num_tabs = 0;
 	window->priv->removing_tabs = FALSE;
 	window->priv->state = GEDIT_WINDOW_STATE_NORMAL;
-	window->priv->destroy_has_run = FALSE;
 	window->priv->dispose_has_run = FALSE;
 
 	window->priv->window_group = gtk_window_group_new ();
