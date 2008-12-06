@@ -662,6 +662,12 @@
   (return-type "GtkWidget*")
 )
 
+(define-method get_install_path
+  (of-object "GeditPlugin")
+  (c-name "gedit_plugin_get_install_path")
+  (return-type "const-gchar*")
+)
+
 ;; From ../gedit/gedit-plugin-python.h
 
 (define-function gedit_plugin_python_get_type
@@ -672,7 +678,7 @@
 (define-function gedit_plugin_python_new
   (c-name "gedit_plugin_python_new")
   (is-constructor-of "GeditPluginPython")
-  (return-type "GObject*")
+  (return-type "GeditPluginPython*")
 )
 
 ;; From ../../gedit/gedit-status-bar.h

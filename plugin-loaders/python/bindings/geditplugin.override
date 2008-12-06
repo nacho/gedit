@@ -196,14 +196,9 @@ override gedit_plugin_python_new
 static int
 _wrap_gedit_plugin_python_new(PyGObject *self)
 {
-        pygobject_construct (self, NULL);
-
-        if (!self->obj) {
-                PyErr_SetString (PyExc_RuntimeError, "could not create gedit.Plugin object");
-                return -1;
-        }
-        
-        _gedit_plugin_python_set_instance (GEDIT_PLUGIN_PYTHON (self->obj), (PyObject *)self);
+        /* explicitly don't create the gobject, because we do that
+		   in the loader so we can set the install path property
+		   at construction time */
         return 0;
 }
 %%

@@ -72,7 +72,7 @@ gedit_plugin_loader_iface_load (GeditPluginLoader *loader,
 	}
 	
 	/* create new plugin object */
-	result = (GeditPlugin *)gedit_object_module_new_object (module, NULL);
+	result = (GeditPlugin *)gedit_object_module_new_object (module, "install-path", path, NULL);
 	
 	if (!result)
 	{
@@ -81,7 +81,7 @@ gedit_plugin_loader_iface_load (GeditPluginLoader *loader,
 		
 		return NULL;
 	}
-	
+
 	g_type_module_unuse (G_TYPE_MODULE (module));
 	
 	return result;

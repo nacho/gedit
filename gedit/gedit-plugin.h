@@ -99,6 +99,7 @@ struct _GeditPluginClass
  * Public methods
  */
 GType 		 gedit_plugin_get_type 		(void) G_GNUC_CONST;
+gchar const	*gedit_plugin_get_install_path	(GeditPlugin *plugin);
 
 void 		 gedit_plugin_activate		(GeditPlugin *plugin,
 						 GeditWindow *window);

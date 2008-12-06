@@ -34,6 +34,21 @@
 
 #include "gedit-plugin.h"
 
+/* properties */
+enum {
+	PROP_0,
+	PROP_INSTALL_PATH
+};
+
+typedef struct _GeditPluginPrivate GeditPluginPrivate;
+
+struct _GeditPluginPrivate
+{
+	gchar *install_path;
+};
+
+#define GEDIT_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_PLUGIN, GeditPluginPrivate))
+
 G_DEFINE_TYPE(GeditPlugin, gedit_plugin, G_TYPE_OBJECT)
 
 static void
@@ -55,21 +70,96 @@ is_configurable (GeditPlugin *plugin)
 		create_configure_dialog);
 }
 
+static void
+gedit_plugin_get_property (GObject    *object,
+			   guint       prop_id,
+			   GValue     *value,
+			   GParamSpec *pspec)
+{
+	GeditPluginPrivate *priv = GEDIT_PLUGIN_GET_PRIVATE (object);
+
+	switch (prop_id)
+	{
+		case PROP_INSTALL_PATH:
+			g_value_set_string (value, priv->install_path);
+			break;
+		default:
+			g_return_if_reached ();
+	}
+}
+
+static void
+gedit_plugin_set_property (GObject      *object,
+			   guint         prop_id,
+			   const GValue *value,
+			   GParamSpec   *pspec)
+{
+	GeditPluginPrivate *priv = GEDIT_PLUGIN_GET_PRIVATE (object);
+
+	switch (prop_id)
+	{
+		case PROP_INSTALL_PATH:
+			priv->install_path = g_value_dup_string (value);
+			break;
+		default:
+			g_return_if_reached ();
+	}
+}
+
+static void
+gedit_plugin_finalize (GObject *object)
+{
+	GeditPluginPrivate *priv = GEDIT_PLUGIN_GET_PRIVATE (object);
+	
+	g_free (priv->install_path);
+}
+
 static void 
 gedit_plugin_class_init (GeditPluginClass *klass)
 {
+    	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
 	klass->activate = dummy;
 	klass->deactivate = dummy;
 	klass->update_ui = dummy;
 	
 	klass->create_configure_dialog = create_configure_dialog;
 	klass->is_configurable = is_configurable;
+
+	object_class->get_property = gedit_plugin_get_property;
+	object_class->set_property = gedit_plugin_set_property;
+	object_class->finalize = gedit_plugin_finalize;
+
+	g_object_class_install_property (object_class,
+					 PROP_INSTALL_PATH,
+					 g_param_spec_string ("install-path",
+							      "Install Path",
+							      "The path where the plugin is installed",
+							      NULL,
+							      G_PARAM_READWRITE | 
+								  G_PARAM_CONSTRUCT_ONLY));
+	
+	g_type_class_add_private (klass, sizeof (GeditPluginPrivate));
 }
 
 static void
 gedit_plugin_init (GeditPlugin *plugin)
 {
 	/* Empty */
+}
+
+/**
+ * gedit_plugin_get_install_path:
+ * @plugin: a #GeditPlugin
+ *
+ * Returns the path where the plugin is installed
+ */
+const gchar *
+gedit_plugin_get_install_path (GeditPlugin *plugin)
+{
+	g_return_val_if_fail (GEDIT_IS_PLUGIN (plugin), NULL);
+	
+	return GEDIT_PLUGIN_GET_PRIVATE (plugin)->install_path;
 }
 
 /**

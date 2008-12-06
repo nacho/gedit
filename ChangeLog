@@ -1,3 +1,17 @@
+2008-12-06  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* gedit/gedit-plugin.h:
+	* gedit/gedit-plugin.c:
+	* plugin-loaders/python/gedit-plugin-loader-python.c:
+	* plugin-loaders/python/bindings/gedit.defs:
+	* plugin-loaders/python/bindings/geditplugin.override:
+	* plugin-loaders/c/gedit-plugin-loader-c.c:
+
+	Added 'install-path' construct only property set by plugin
+	loaders so that plugins (especially C plugins) can find
+	out where they are installed (thus making relocation of
+	plugins + data possible without recompiling the plugin)
+
 === gedit 2.25.2 ===
 
 2008-12-01  Paolo Borelli  <pborelli@katamail.com>

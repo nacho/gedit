@@ -53,6 +53,7 @@ typedef struct
 	PyObject *type;
 	PyObject *instance;
 	gchar    *path;
+	GType     class_type;
 } PythonInfo;
 
 static void gedit_plugin_loader_iface_init (gpointer g_iface, gpointer iface_data);
@@ -104,19 +105,57 @@ new_plugin_from_info (GeditPluginLoaderPython *loader,
 		      GeditPluginInfo         *info)
 {
 	PythonInfo *pyinfo;
-	GObject *object;
-	
+	PyGObject *pygobject;
+	GeditPlugin *instance;
+
 	pyinfo = (PythonInfo *)g_hash_table_lookup (loader->priv->loaded_plugins, info);
 	
 	if (pyinfo == NULL)
 		return NULL;
 
-	pyinfo->instance = PyObject_CallObject (pyinfo->type, NULL);
+	/* To be able to set the install-path at construction time, we need two 
+	   different strategies. If the py object has a registered gtype, the normal
+	   construction of the underlying gobject will happen before we can set the
+	   install-path. Therefore, the following two cases defined:
+	   1) The python class has a gtype derived from GeditPluginPython
+	      The strategy here is to construct the gobject first (with the correct
+		  gtype, and setting the install-path), and then wrap it
+	   2) The python class has the GeditPluginPython gtype (but it is still
+	      a derived class from the python point of view)
+		  In this case, we create the python object first, and construct the gobject
+		  afterwards. The initialize function of the GeditPluginPython bindings
+		  prevent the early construction of the gobject
+	*/
+	if (pyinfo->class_type != GEDIT_TYPE_PLUGIN_PYTHON)
+	{
+		GObject *obj = g_object_new (pyinfo->class_type, "install-path", pyinfo->path, NULL);
+		pygobject = (PyGObject *)pygobject_new (obj);
+	}
+	else
+	{
+		pygobject = (PyGObject *)PyObject_CallObject (pyinfo->type, NULL);
+		
+		if (pygobject->obj != NULL)
+			g_error("GObject for plugin is already initialized!");
+		
+		pygobject_construct(pygobject, "install-path", pyinfo->path, NULL);
+	}
 
-        object = pygobject_get (pyinfo->instance);
+	if (pygobject == NULL || pygobject->obj == NULL)
+	{
+		g_warning ("Could not create instance for %s.", gedit_plugin_info_get_name (info));
+		return NULL;
+	}
 
+	instance = GEDIT_PLUGIN (pygobject->obj);
+	pyinfo->instance = (PyObject *)pygobject;
+
+	/* make sure to register the python instance for the GeditPluginPython
+	   object to it can wrap the virtual gedit plugin funcs back to python */
+	_gedit_plugin_python_set_instance (GEDIT_PLUGIN_PYTHON (instance), (PyObject *)pygobject);
+	
 	/* we return a reference here because the other is owned by python */
-	return GEDIT_PLUGIN (g_object_ref (object));
+	return GEDIT_PLUGIN (g_object_ref (instance));
 }
 
 static GeditPlugin *
@@ -131,7 +170,8 @@ add_python_info (GeditPluginLoaderPython *loader,
 	pyinfo = g_new (PythonInfo, 1);
 	pyinfo->path = g_strdup (path);
 	pyinfo->type = type;
-	
+	pyinfo->class_type = pyg_type_from_object(type);
+
 	Py_INCREF (pyinfo->type);
 	
 	g_hash_table_insert (loader->priv->loaded_plugins, info, pyinfo);
