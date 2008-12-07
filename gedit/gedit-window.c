@@ -3342,7 +3342,14 @@ add_view (GeditTab *tab, GList **res)
 	*res = g_list_prepend (*res, view);
 }
 
-/* Returns a newly allocated list with all the views in the window */
+/**
+ * gedit_window_get_views:
+ * @window: a #GeditWindow
+ *
+ * Gets a list with all the views in the window. This list must be freed.
+ *
+ * Returns: a newly allocated list with all the views in the window
+ */
 GList *
 gedit_window_get_views (GeditWindow *window)
 {
@@ -3437,6 +3444,13 @@ _gedit_window_move_tab_to_new_window (GeditWindow *window,
 	return new_window;
 }				      
 
+/**
+ * gedit_window_set_active_tab:
+ * @window: a #GeditWindow
+ * @tab: a #GeditTab
+ *
+ * Switches to the tab that matches with @tab.
+ */
 void
 gedit_window_set_active_tab (GeditWindow *window,
 			     GeditTab    *tab)
@@ -3470,6 +3484,14 @@ _gedit_window_is_removing_tabs (GeditWindow *window)
 	return window->priv->removing_tabs;
 }
 
+/**
+ * gedit_window_get_ui_manager:
+ * @window: a #GeditWindow
+ *
+ * Gets the #GtkUIManager associated with the @window.
+ *
+ * Returns: the #GtkUIManager of the @window.
+ */
 GtkUIManager *
 gedit_window_get_ui_manager (GeditWindow *window)
 {
@@ -3478,6 +3500,14 @@ gedit_window_get_ui_manager (GeditWindow *window)
 	return window->priv->manager;
 }
 
+/**
+ * gedit_window_get_side_panel:
+ * @window. a #GeditWindow
+ *
+ * Gets the side #GeditPanel of the @window.
+ *
+ * Returns: the side #GeditPanel.
+ */
 GeditPanel *
 gedit_window_get_side_panel (GeditWindow *window)
 {
@@ -3486,6 +3516,14 @@ gedit_window_get_side_panel (GeditWindow *window)
 	return GEDIT_PANEL (window->priv->side_panel);
 }
 
+/**
+ * gedit_window_get_bottom_panel:
+ * @window. a #GeditWindow
+ *
+ * Gets the bottom #GeditPanel of the @window.
+ *
+ * Returns: the bottom #GeditPanel.
+ */
 GeditPanel *
 gedit_window_get_bottom_panel (GeditWindow *window)
 {
@@ -3494,6 +3532,14 @@ gedit_window_get_bottom_panel (GeditWindow *window)
 	return GEDIT_PANEL (window->priv->bottom_panel);
 }
 
+/**
+ * gedit_window_get_statusbar:
+ * @window: a #GeditWindow
+ *
+ * Gets the #GeditStatusbar of the @window.
+ *
+ * Returns: the #GeditStatusbar of the @window.
+ */
 GtkWidget *
 gedit_window_get_statusbar (GeditWindow *window)
 {
@@ -3502,6 +3548,14 @@ gedit_window_get_statusbar (GeditWindow *window)
 	return window->priv->statusbar;
 }
 
+/**
+ * gedit_window_get_state:
+ * @window: a #GeditWindow
+ *
+ * Retrieves the state of the @window.
+ *
+ * Returns: the current #GeditWindowState of the @window.
+ */
 GeditWindowState
 gedit_window_get_state (GeditWindow *window)
 {
@@ -3548,7 +3602,14 @@ _gedit_window_set_default_path (GeditWindow *window,
 	}
 }
 
-/* Returns the documents that need to be saved before closing the window */
+/**
+ * gedit_window_get_unsaved_documents:
+ * @window: a #GeditWindow
+ *
+ * Gets the list of documents that need to be saved before closing the window.
+ *
+ * Returns: a list of #GeditDocument that need to be saved before closing the window
+ */
 GList *
 gedit_window_get_unsaved_documents (GeditWindow *window)
 {
