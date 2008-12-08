@@ -285,9 +285,18 @@ find_notebook_and_tab_at_pos (gint            abs_x,
 	}
 }
 
-/* If dest_position is greater than or equal to the number of tabs 
-   of the destination nootebook or negative, tab will be moved to the 
-   end of the tabs. */
+/**
+ * gedit_notebook_move_tab:
+ * @src: a #GeditNotebook
+ * @dest: a #GeditNotebook
+ * @tab: a #GeditTab
+ * @dest_position: the position for @tab
+ *
+ * Moves @tab from @src to @dest.
+ * If dest_position is greater than or equal to the number of tabs 
+ * of the destination nootebook or negative, tab will be moved to the 
+ * end of the tabs.
+ */
 void
 gedit_notebook_move_tab (GeditNotebook *src,
 			 GeditNotebook *dest,
@@ -306,9 +315,17 @@ gedit_notebook_move_tab (GeditNotebook *src,
 	g_object_unref (tab);
 }
 
-/* If dest_position is greater than or equal to the number of tabs 
-   of the destination nootebook or negative, tab will be moved to the 
-   end of the tabs. */
+/**
+ * gedit_notebook_reorder_tab:
+ * @src: a #GeditNotebook
+ * @tab: a #GeditTab
+ * @dest_position: the position for @tab
+ *
+ * Reorders the page containing @tab, so that it appears in @dest_position position.
+ * If dest_position is greater than or equal to the number of tabs 
+ * of the destination notebook or negative, tab will be moved to the 
+ * end of the tabs.
+ */
 void
 gedit_notebook_reorder_tab (GeditNotebook *src,
 			    GeditTab      *tab,
@@ -588,6 +605,13 @@ button_press_cb (GeditNotebook  *notebook,
 	return FALSE;
 }
 
+/**
+ * gedit_notebook_new:
+ *
+ * Creates a new #GeditNotebook object.
+ *
+ * Returns: a new #GeditNotebook
+ */
 GtkWidget *
 gedit_notebook_new (void)
 {
@@ -870,6 +894,13 @@ build_tab_label (GeditNotebook *nb,
 	return hbox;
 }
 
+/**
+ * gedit_notebook_set_always_show_tabs:
+ * @nb: a #GeditNotebook
+ * @show_tabs: %TRUE to always show the tabs
+ *
+ * Sets the visibility of the tabs in the @nb.
+ */
 void
 gedit_notebook_set_always_show_tabs (GeditNotebook *nb, 
 				     gboolean       show_tabs)
@@ -881,6 +912,15 @@ gedit_notebook_set_always_show_tabs (GeditNotebook *nb,
 	update_tabs_visibility (nb, FALSE);
 }
 
+/**
+ * gedit_notebook_add_tab:
+ * @nb: a #GeditNotebook
+ * @tab: a #GeditTab
+ * @position: the position where the @tab should be added
+ * @jump_to: %TRUE to set the @tab as active
+ *
+ * Adds the specified @tab to the @nb.
+ */
 void
 gedit_notebook_add_tab (GeditNotebook *nb,
 		        GeditTab      *tab,
@@ -993,6 +1033,13 @@ remove_tab (GeditTab      *tab,
 	g_object_unref (tab);	
 }
 
+/**
+ * gedit_notebook_remove_tab:
+ * @nb: a #GeditNotebook
+ * @tab: a #GeditTab
+ *
+ * Removes @tab from @nb.
+ */
 void
 gedit_notebook_remove_tab (GeditNotebook *nb,
 			   GeditTab      *tab)
@@ -1017,6 +1064,12 @@ gedit_notebook_remove_tab (GeditNotebook *nb,
 	remove_tab (tab, nb);
 }
 
+/**
+ * gedit_notebook_remove_all_tabs:
+ * @nb: a #GeditNotebook
+ *
+ * Removes all #GeditTab from @nb.
+ */
 void
 gedit_notebook_remove_all_tabs (GeditNotebook *nb)
 {	
@@ -1053,6 +1106,13 @@ set_close_buttons_sensitivity (GeditTab      *tab,
 				  (state != GEDIT_TAB_STATE_SAVING_ERROR));
 }
 
+/**
+ * gedit_notebook_set_close_buttons_sensitive:
+ * @nb: a #GeditNotebook
+ * @sensitive: %TRUE to make the buttons sensitive
+ *
+ * Sets whether the close buttons in the tabs of @nb are sensitive.
+ */
 void
 gedit_notebook_set_close_buttons_sensitive (GeditNotebook *nb,
 					    gboolean       sensitive)
@@ -1071,6 +1131,14 @@ gedit_notebook_set_close_buttons_sensitive (GeditNotebook *nb,
 			       nb);
 }
 
+/**
+ * gedit_notebook_get_close_buttons_sensitive:
+ * @nb: a #GeditNotebook
+ *
+ * Whether the close buttons are sensitive.
+ *
+ * Returns: %TRUE if the close buttons are sensitive
+ */
 gboolean
 gedit_notebook_get_close_buttons_sensitive (GeditNotebook *nb)
 {
@@ -1079,6 +1147,13 @@ gedit_notebook_get_close_buttons_sensitive (GeditNotebook *nb)
 	return nb->priv->close_buttons_sensitive;
 }
 
+/**
+ * gedit_notebook_set_tab_drag_and_drop_enabled:
+ * @nb: a #GeditNotebook
+ * @enable: %TRUE to enable the drag and drop
+ *
+ * Sets whether drag and drop of tabs in the @nb is enabled.
+ */
 void
 gedit_notebook_set_tab_drag_and_drop_enabled (GeditNotebook *nb,
 					      gboolean       enable)
@@ -1093,6 +1168,14 @@ gedit_notebook_set_tab_drag_and_drop_enabled (GeditNotebook *nb,
 	nb->priv->tab_drag_and_drop_enabled = enable;		
 }
 
+/**
+ * gedit_notebook_get_tab_drag_and_drop_enabled:
+ * @nb: a #GeditNotebook
+ *
+ * Whether the drag and drop is enabled in the @nb.
+ *
+ * Returns: %TRUE if the drag and drop is enabled.
+ */
 gboolean	
 gedit_notebook_get_tab_drag_and_drop_enabled (GeditNotebook *nb)
 {
