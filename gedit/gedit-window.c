@@ -3210,6 +3210,14 @@ gedit_window_init (GeditWindow *window)
 	gedit_debug_message (DEBUG_WINDOW, "END");
 }
 
+/**
+ * gedit_window_get_active_view:
+ * @window: a #GeditWindow
+ *
+ * Gets the active #GeditView.
+ *
+ * Returns: the active #GeditView
+ */
 GeditView *
 gedit_window_get_active_view (GeditWindow *window)
 {
@@ -3225,6 +3233,14 @@ gedit_window_get_active_view (GeditWindow *window)
 	return view;
 }
 
+/**
+ * gedit_window_get_active_document:
+ * @window: a #GeditWindow
+ *
+ * Gets the active #GeditDocument.
+ * 
+ * Returns: the active #GeditDocument
+ */
 GeditDocument *
 gedit_window_get_active_document (GeditWindow *window)
 {
@@ -3247,6 +3263,16 @@ _gedit_window_get_notebook (GeditWindow *window)
 	return window->priv->notebook;
 }
 
+/**
+ * gedit_window_create_tab:
+ * @window: a #GeditWindow
+ * @jump_to: %TRUE to set the new #GeditTab as active
+ *
+ * Creates a new #GeditTab and adds the new tab to the #GeditNotebook.
+ * In case @jump_to is %TRUE the #GeditNotebook switches to that new #GeditTab.
+ *
+ * Returns: a new #GeditTab
+ */
 GeditTab *
 gedit_window_create_tab (GeditWindow *window,
 			 gboolean     jump_to)
@@ -3266,6 +3292,22 @@ gedit_window_create_tab (GeditWindow *window,
 	return tab;
 }
 
+/**
+ * gedit_window_create_tab_from_uri:
+ * @window: a #GeditWindow
+ * @uri: the uri of the document
+ * @encoding: a #GeditEncoding
+ * @line_pos: the line position to visualize
+ * @create: %TRUE to create a new document in case @uri does exist
+ * @jump_to: %TRUE to set the new #GeditTab as active
+ *
+ * Creates a new #GeditTab loading the document specified by @uri.
+ * In case @jump_to is %TRUE the #GeditNotebook swithes to that new #GeditTab.
+ * Whether @create is %TRUE, creates a new empty document if location does 
+ * not refer to an existing file
+ *
+ * Returns: a new #GeditTab
+ */
 GeditTab *
 gedit_window_create_tab_from_uri (GeditWindow         *window,
 				  const gchar         *uri,
@@ -3296,6 +3338,14 @@ gedit_window_create_tab_from_uri (GeditWindow         *window,
 	return GEDIT_TAB (tab);
 }				  
 
+/**
+ * gedit_window_get_active_tab:
+ * @window: a GeditWindow
+ *
+ * Gets the active #GeditTab in the @window.
+ *
+ * Returns: the active #GeditTab in the @window.
+ */
 GeditTab *
 gedit_window_get_active_tab (GeditWindow *window)
 {
@@ -3315,7 +3365,15 @@ add_document (GeditTab *tab, GList **res)
 	*res = g_list_prepend (*res, doc);
 }
 
-/* Returns a newly allocated list with all the documents in the window */
+/**
+ * gedit_window_get_documents:
+ * @window: a #GeditWindow
+ *
+ * Gets a newly allocated list with all the documents in the window.
+ * This list must be freed.
+ *
+ * Returns: a newly allocated list with all the documents in the window
+ */
 GList *
 gedit_window_get_documents (GeditWindow *window)
 {
@@ -3366,6 +3424,13 @@ gedit_window_get_views (GeditWindow *window)
 	return res;
 }
 
+/**
+ * gedit_window_close_tab:
+ * @window: a #GeditWindow
+ * @tab: the #GeditTab to close
+ *
+ * Closes the @tab.
+ */
 void
 gedit_window_close_tab (GeditWindow *window,
 			GeditTab    *tab)
@@ -3379,6 +3444,12 @@ gedit_window_close_tab (GeditWindow *window,
 				   tab);
 }
 
+/**
+ * gedit_window_close_all_tabs:
+ * @window: a #GeditWindow
+ *
+ * Closes all opened tabs.
+ */
 void
 gedit_window_close_all_tabs (GeditWindow *window)
 {
@@ -3393,6 +3464,13 @@ gedit_window_close_all_tabs (GeditWindow *window)
 	window->priv->removing_tabs = FALSE;
 }
 
+/**
+ * gedit_window_close_tabs:
+ * @window: a #GeditWindow
+ * @tabs: a list of #GeditTab
+ *
+ * Closes all tabs specified by @tabs.
+ */
 void
 gedit_window_close_tabs (GeditWindow *window,
 			 const GList *tabs)
@@ -3468,6 +3546,14 @@ gedit_window_set_active_tab (GeditWindow *window,
 				       page_num);
 }
 
+/**
+ * gedit_window_get_group:
+ * @window: a #GeditWindow
+ *
+ * Gets the #GtkWindowGroup in which @window resides.
+ *
+ * Returns: the #GtkWindowGroup
+ */
 GtkWindowGroup *
 gedit_window_get_group (GeditWindow *window)
 {
@@ -3502,7 +3588,7 @@ gedit_window_get_ui_manager (GeditWindow *window)
 
 /**
  * gedit_window_get_side_panel:
- * @window. a #GeditWindow
+ * @window: a #GeditWindow
  *
  * Gets the side #GeditPanel of the @window.
  *
@@ -3518,7 +3604,7 @@ gedit_window_get_side_panel (GeditWindow *window)
 
 /**
  * gedit_window_get_bottom_panel:
- * @window. a #GeditWindow
+ * @window: a #GeditWindow
  *
  * Gets the bottom #GeditPanel of the @window.
  *
@@ -3719,7 +3805,17 @@ gedit_window_get_tab_from_location (GeditWindow *window,
 	return ret;
 }
 
-/* for backward compat since it is public api */
+/**
+ * gedit_window_get_tab_from_uri:
+ * @window: a #GeditWindow
+ * @uri: the uri to get the #GeditTab
+ *
+ * Gets the #GeditTab that matches @uri.
+ *
+ * Returns: the #GeditTab associated with @uri.
+ *
+ * Deprecated: 2.24: Use gedit_window_get_tab_from_location() instead.
+ */
 GeditTab *
 gedit_window_get_tab_from_uri (GeditWindow *window,
 			       const gchar *uri)
