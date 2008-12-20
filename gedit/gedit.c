@@ -63,6 +63,14 @@
 static guint32 startup_timestamp = 0;
 static BaconMessageConnection *connection;
 
+static void
+show_version_and_quit (void)
+{
+	g_print ("%s - Version %s\n", g_get_application_name (), VERSION);
+
+	exit (0);
+}
+
 /* command line */
 static gint line_position = 0;
 static gchar *encoding_charset = NULL;
@@ -74,6 +82,9 @@ static GSList *file_list = NULL;
 
 static const GOptionEntry options [] =
 {
+	{ "version", 'V', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
+	  show_version_and_quit, N_("Show the application's version"), NULL },
+
 	{ "encoding", '\0', 0, G_OPTION_ARG_STRING, &encoding_charset,
 	  N_("Set the character encoding to be used to open the files listed on the command line"), N_("ENCODING")},
 
