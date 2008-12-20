@@ -289,6 +289,14 @@ gedit_tab_class_init (GeditTabClass *klass)
 	g_type_class_add_private (object_class, sizeof (GeditTabPrivate));
 }
 
+/**
+ * gedit_tab_get_state:
+ * @tab: a #GeditTab
+ *
+ * Gets the #GeditTabState of @tab.
+ *
+ * Returns: the #GeditTabState of @tab
+ */
 GeditTabState
 gedit_tab_get_state (GeditTab *tab)
 {
@@ -1612,13 +1620,28 @@ _gedit_tab_new_from_uri (const gchar         *uri,
 	return GTK_WIDGET (tab);
 }		
 
+/**
+ * gedit_tab_get_view:
+ * @tab: a #GeditTab
+ *
+ * Gets the #GeditView inside @tab.
+ *
+ * Returns: the #GeditView inside @tab
+ */
 GeditView *
 gedit_tab_get_view (GeditTab *tab)
 {
 	return GEDIT_VIEW (tab->priv->view);
 }
 
-/* This is only an helper function */
+/**
+ * gedit_tab_get_document:
+ * @tab: a #GeditTab
+ *
+ * Gets the #GeditDocument associated to @tab.
+ *
+ * Returns: the #GeditDocument associated to @tab
+ */
 GeditDocument *
 gedit_tab_get_document (GeditTab *tab)
 {
@@ -1936,6 +1959,14 @@ _gedit_tab_get_icon (GeditTab *tab)
 	return pixbuf;
 }
 
+/**
+ * gedit_tab_get_from_document:
+ * @doc: a #GeditDocument
+ *
+ * Gets the #GeditTab associated with @doc.
+ *
+ * Returns: the #GeditTab associated with @doc
+ */
 GeditTab *
 gedit_tab_get_from_document (GeditDocument *doc)
 {
@@ -2620,11 +2651,11 @@ _gedit_tab_can_close (GeditTab *tab)
 
 /**
  * gedit_tab_get_auto_save_enabled:
- * @tab: 
+ * @tab: a #GeditTab
  * 
  * Gets the current state for the autosave feature
  * 
- * Return value: TRUE if the autosave is enabled, else FALSE
+ * Return value: %TRUE if the autosave is enabled, else %FALSE
  **/
 gboolean
 gedit_tab_get_auto_save_enabled	(GeditTab *tab)
@@ -2639,7 +2670,7 @@ gedit_tab_get_auto_save_enabled	(GeditTab *tab)
 /**
  * gedit_tab_set_auto_save_enabled:
  * @tab: a #GeditTab
- * @enable: enable (TRUE) or disable (FALSE) auto save
+ * @enable: enable (%TRUE) or disable (%FALSE) auto save
  * 
  * Enables or disables the autosave feature. It does not install an
  * autosave timeout if the document is new or is read-only
@@ -2700,7 +2731,7 @@ gedit_tab_set_auto_save_enabled	(GeditTab *tab,
 
 /**
  * gedit_tab_get_auto_save_interval:
- * @tab: 
+ * @tab: a #GeditTab
  * 
  * Gets the current interval for the autosaves
  * 
