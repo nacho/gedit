@@ -29,7 +29,6 @@
 #include <string.h> /* For strlen */
 
 #include <glib/gi18n.h>
-#include <glib/gutils.h>
 #include <gmodule.h>
 
 #include <gedit/gedit-debug.h>

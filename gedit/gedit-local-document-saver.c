@@ -40,7 +40,7 @@
 #include <unistd.h>
 
 #include <glib/gi18n.h>
-#include <glib/gfileutils.h>
+#include <glib.h>
 
 #include "gedit-local-document-saver.h"
 #include "gedit-debug.h"

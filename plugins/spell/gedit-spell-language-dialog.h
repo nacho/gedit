@@ -30,7 +30,7 @@
 #ifndef __GEDIT_SPELL_LANGUAGE_DIALOG_H__
 #define __GEDIT_SPELL_LANGUAGE_DIALOG_H__
 
-#include <gtk/gtkdialog.h>
+#include <gtk/gtk.h>
 #include "gedit-spell-checker-language.h"
 
 G_BEGIN_DECLS

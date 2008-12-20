@@ -36,7 +36,7 @@
 #include <enchant.h>
 
 #include <glib/gi18n.h>
-#include <glib/gstrfuncs.h>
+#include <glib.h>
 
 #include "gedit-spell-checker.h"
 

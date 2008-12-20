@@ -32,7 +32,7 @@
 #define __GEDIT_TAGLIST_PLUGIN_PARSER_H__
 
 #include <libxml/tree.h>
-#include <glib/glist.h>
+#include <glib.h>
 
 typedef struct _TagList TagList;
 typedef struct _TagGroup TagGroup;
