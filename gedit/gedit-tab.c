@@ -115,11 +115,11 @@ install_auto_save_timeout (GeditTab *tab)
 	g_return_if_fail (tab->priv->state != GEDIT_TAB_STATE_SAVING_ERROR);
 	g_return_if_fail (tab->priv->state != GEDIT_TAB_STATE_SAVING_ERROR);
 	g_return_if_fail (tab->priv->state != GEDIT_TAB_STATE_REVERTING_ERROR);
-	
+
 	/* Add a new timeout */
-	timeout = g_timeout_add (tab->priv->auto_save_interval * 1000 * 60,
-				 (GSourceFunc) gedit_tab_auto_save,
-				 tab);
+	timeout = g_timeout_add_seconds (tab->priv->auto_save_interval * 60,
+					 (GSourceFunc) gedit_tab_auto_save,
+					 tab);
 
 	tab->priv->auto_save_timeout = timeout;
 }
@@ -128,7 +128,7 @@ static gboolean
 install_auto_save_timeout_if_needed (GeditTab *tab)
 {
 	GeditDocument *doc;
-	
+
 	gedit_debug (DEBUG_TAB);
 	
 	g_return_val_if_fail (tab->priv->auto_save_timeout <= 0, FALSE);
@@ -2120,18 +2120,18 @@ gedit_tab_auto_save (GeditTab *tab)
 	if ((tab->priv->state != GEDIT_TAB_STATE_NORMAL) &&
 	    (tab->priv->state != GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW))
 	{
-		/* Retry after 15 seconds */
+		/* Retry after 30 seconds */
 		guint timeout;
-		
-		gedit_debug_message (DEBUG_TAB, "Retry after 15 seconds");
-	
+
+		gedit_debug_message (DEBUG_TAB, "Retry after 30 seconds");
+
 		/* Add a new timeout */
-		timeout = g_timeout_add (30 * 1000,
-					(GSourceFunc) gedit_tab_auto_save,
-					tab);
+		timeout = g_timeout_add_seconds (30,
+						 (GSourceFunc) gedit_tab_auto_save,
+						 tab);
 
 		tab->priv->auto_save_timeout = timeout;
-	    
+
 	    	/* Returns FALSE so the old timeout is "destroyed" */
 		return FALSE;
 	}

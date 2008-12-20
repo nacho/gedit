@@ -93,15 +93,15 @@ item_free (gpointer data)
 static void
 gedit_metadata_manager_arm_timeout (void)
 {
-	if (gedit_metadata_manager->timeout_id)
-		return;
-		
-	gedit_metadata_manager->timeout_id = 
-		g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE,
-				    2000, /* 2 sec */
-				    (GSourceFunc)gedit_metadata_manager_save,
-				    NULL,
-				    NULL);
+	if (gedit_metadata_manager->timeout_id == 0)
+	{
+		gedit_metadata_manager->timeout_id = 
+			g_timeout_add_seconds_full (G_PRIORITY_DEFAULT_IDLE,
+						    2,
+						    (GSourceFunc)gedit_metadata_manager_save,
+						    NULL,
+						    NULL);
+	}
 }
 
 static gboolean

@@ -347,7 +347,7 @@ AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
 GNOME_COMPILE_WARNINGS(yes)
 
 AC_ARG_ENABLE(deprecations,
-              [AC_HELP_STRING([--enable-deprecations],
+              [AS_HELP_STRING([--enable-deprecations],
                               [warn about deprecated usages [default=no]])],,
               [enable_deprecations=no])
 
