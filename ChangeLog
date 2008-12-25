@@ -1,3 +1,202 @@
+2008-12-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/Makefile.am:
+	* configure.ac:
+	Add the -mwindows flag.
+
+2008-12-25  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit.c:
+	Set the path at runtime.
+
+2008-12-25  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit/gedit-document.[ch]:
+	* gedit/gedit-tab.c:
+	Use content type instead of mime type where possible.
+
+2008-12-24  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit/gedit-plugins-engine.[ch]:
+	* gedit/gedit-prefs-manager.[ch]:
+	* gedit/gedit-prefs-manager.[ch]:
+	Centralize all gconf related code in the prefs manager.
+
+2008-12-24  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit/gedit-language-manager.[ch]:
+	* gedit/gedit-documemt.c:
+	Use gtk_source_language_manager_guess_language instead of
+	scanning mime types manually.
+
+2008-12-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* win32/build-installer:
+	* win32/gedit.iss.in:
+	Include the immodules too.
+
+2008-12-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* win32/build-installer:
+	* win32/gedit.iss.in:
+	Add pixbuf loaders.
+
+2008-12-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* win32/build-installer:
+	* win32/gedit.iss.in:
+	Add plugin files.
+
+2008-12-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit.c:
+	* gedit/Makefile.am:
+	* gedit/gedit-dirs.c:
+	* gedit/gedit-dirs.h:
+	Use dir func to manage the locale dir.
+
+2008-12-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit.c:
+	* gedit/Makefile.am:
+	Use dir functions to manage the icons path.
+
+2008-12-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit-commands-help.c:
+	* gedit/Makefile.am:
+	Manage the logo with the dir funcs.
+
+2008-12-23  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit-dirs.c:
+	* gedit/gedit-dirs.h:
+	* gedit/gedit-plugins-engine.c:
+	* gedit/Makefile.am:
+	Use dir functions to manage the loaders and plugins.
+
+2008-12-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* win32/build-installer:
+	* win32/gedit.iss.in:
+	Fix path.
+
+2008-12-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit-dirs.c:
+	Fixed bug in win32 part.
+
+2008-12-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* win32/build-installer:
+	* win32/gedit.iss.in:
+	Add gconf schemas.
+
+2008-12-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/dialogs/gedit-open-location-dialog.c:
+	* gedit/dialogs/gedit-encodings-dialog.c:
+	* gedit/dialogs/gedit-preferences-dialog.c:
+	* gedit/dialogs/gedit-style-scheme-dialog.c:
+	* gedit/dialogs/gedit-search-dialog.c:
+	* gedit/gedit-print-job.c:
+	* gedit/gedit-window.c:
+	* gedit/gedit-style-scheme-manager.c:
+	Use the dir functions.
+
+2008-12-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit-utils.c:
+	* gedit/gedit-utils.h:
+	* gedit/gedit-app.c:
+	* gedit/gedit-dirs.c:
+	* gedit/gedit-prefs-manager-app.c:
+	* gedit/gedit-dirs.h:
+	* gedit/gedit-style-scheme-manager.c:
+	* gedit/gedit-plugins-engine.c:
+	* gedit/Makefile.am:
+	Added gedit-dirs.[ch] to manage the dir cross platform funcs.
+
+2008-12-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* win32/build-installer:
+	* win32/gedit.iss.in:
+	Fix a few paths and comment python files for now.
+
+2008-12-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* win32/querymodules.bat:
+	* win32/Makefile.am:
+	* win32/build-installer:
+	* win32/README:
+	* win32/gedit.iss.in:
+	* configure.ac:
+	* Makefile.am:
+	Added win32 installer scripts based on glom ones.
+
+2008-12-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/Makefile.am:
+	Change LOADER_SOURCES name to POSIXIO_FILES.
+
+2008-12-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit-metadata-manager.c:
+	Changed to use the cache dir.
+
+2008-12-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit-plugins-engine.c:
+	Include gedit-utils.h
+
+2008-12-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit-metadata-manager.c:
+	* gedit/gedit-utils.c:
+	* gedit/gedit-utils.h:
+	* gedit/gedit-app.c:
+	* gedit/gedit-prefs-manager-app.c:
+	* gedit/gedit-style-scheme-manager.c:
+	* gedit/gedit-plugins-engine.c:
+	Use gedit_utils_get_config_dir instead of hardcoding to .gnome2.
+
+2008-12-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit-app.c:
+	Use a standard rol for all platforms.
+
+2008-12-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit-utils.c:
+	* gedit/gedit-utils.h:
+	Removed get_stdin function.
+
+2008-12-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* configure.ac:
+	Use the right flags for plugin loaders.
+
+2008-12-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit.c:
+	Changed define.
+
+2008-12-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit-document-loader.c:
+	* gedit/gedit-document-saver.c:
+	* gedit/Makefile.am:
+	Use always the gio loader and the gio saver in
+	case we are in windows.
+
+2008-12-21  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/gedit.c:
+	* gedit/gedit-app.c:
+	* gedit/Makefile.am:
+	* configure.ac:
+	Add some ifdefs to not build bacon on windows.
+
 2008-12-20  Paolo Borelli  <pborelli@katamail.com>
 
 	* plugins/spell/gedit-spell-plugin.c:

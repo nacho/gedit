@@ -39,6 +39,7 @@
 #include "gedit-utils.h"
 #include "gedit-debug.h"
 #include "gedit-help.h"
+#include "gedit-dirs.h"
 
 #define GEDIT_STYLE_SCHEME_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
 						      GEDIT_TYPE_STYLE_SCHEME_DIALOG, \
@@ -121,6 +122,7 @@ gedit_style_scheme_dialog_init (GeditStyleSchemeDialog *dlg)
 	GtkWidget *error_widget;
 	GtkWidget *main_vbox;
 	gboolean ret;
+	gchar *file;
 	gchar *root_objects[] = {
 		"contents",
 		NULL
@@ -147,7 +149,8 @@ gedit_style_scheme_dialog_init (GeditStyleSchemeDialog *dlg)
 			  G_CALLBACK (dialog_response_handler),
 			  NULL);
 
-	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "gedit-style-scheme-dialog.ui",
+	file = gedit_dirs_get_ui_file ("gedit-style-scheme-dialog.ui");
+	ret = gedit_utils_get_ui_objects (file,
 		root_objects,
 		&error_widget,
 		
@@ -174,6 +177,7 @@ gedit_style_scheme_dialog_init (GeditStyleSchemeDialog *dlg)
 		"search_hl_colorbutton", &dlg->priv->search_hl_colorbutton,
 
 		NULL);
+	g_free (file);
 
 	if (!ret)
 	{

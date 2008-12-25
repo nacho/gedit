@@ -42,6 +42,7 @@
 #include "gedit-print-preview.h"
 #include "gedit-marshal.h"
 #include "gedit-utils.h"
+#include "gedit-dirs.h"
 
 
 #define GEDIT_PRINT_JOB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
@@ -311,13 +312,15 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 	gint line_numbers;
 	gboolean can_set;
 	GtkWrapMode wrap_mode;
+	gchar *file;
 	gchar *root_objects[] = {
 		"adjustment1",
 		"contents",
 		NULL
 	};
 
-	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "gedit-print-preferences.ui",
+	file = gedit_dirs_get_ui_file ("gedit-print-preferences.ui");
+	ret = gedit_utils_get_ui_objects (file,
 					  root_objects,
 					  &error_widget,
 					  "contents", &widget,
@@ -337,6 +340,7 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 					  "numbers_fontbutton", &job->priv->numbers_fontbutton,
 					  "restore_button", &job->priv->restore_button,
 					  NULL);
+	g_free (file);
 
 	if (!ret)
 	{

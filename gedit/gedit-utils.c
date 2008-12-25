@@ -482,51 +482,6 @@ gedit_utils_unescape_search_text (const gchar *text)
 	return g_string_free (str, FALSE);
 }
 
-#define GEDIT_STDIN_BUFSIZE 1024
-
-gchar *
-gedit_utils_get_stdin (void)
-{
-	GString * file_contents;
-	gchar *tmp_buf = NULL;
-	guint buffer_length;
-	fd_set rfds;
-	struct timeval tv;
-	
-	FD_ZERO (&rfds);
-	FD_SET (0, &rfds);
-
-	/* wait for 1/4 of a second */
-	tv.tv_sec = 0;
-	tv.tv_usec = STDIN_DELAY_MICROSECONDS;
-
-	if (select (1, &rfds, NULL, NULL, &tv) != 1)
-		return NULL;
-
-	tmp_buf = g_new0 (gchar, GEDIT_STDIN_BUFSIZE + 1);
-	g_return_val_if_fail (tmp_buf != NULL, FALSE);
-
-	file_contents = g_string_new (NULL);
-	
-	while (feof (stdin) == 0)
-	{
-		buffer_length = fread (tmp_buf, 1, GEDIT_STDIN_BUFSIZE, stdin);
-		tmp_buf [buffer_length] = '\0';
-		g_string_append (file_contents, tmp_buf);
-
-		if (ferror (stdin) != 0)
-		{
-			g_free (tmp_buf);
-			g_string_free (file_contents, TRUE);
-			return NULL;
-		}
-	}
-
-	fclose (stdin);
-
-	return g_string_free (file_contents, FALSE);
-}
-
 void 
 gedit_warning (GtkWindow *parent, const gchar *format, ...)
 {

@@ -36,6 +36,7 @@
 #include <libxml/xmlreader.h>
 #include "gedit-metadata-manager.h"
 #include "gedit-debug.h"
+#include "gedit-dirs.h"
 
 /*
 #define GEDIT_METADATA_VERBOSE_DEBUG	1
@@ -220,16 +221,18 @@ parseItem (xmlDocPtr doc, xmlNodePtr cur)
 static gchar *
 get_metadata_filename (void)
 {
-	const gchar *home;
+	gchar *cache_dir;
+	gchar *metadata;
 
-	home = g_get_home_dir ();
-	if (home == NULL)
-	{
-		g_warning ("Could not get home directory\n");
-		return NULL;
-	}
+	cache_dir = gedit_dirs_get_user_cache_dir ();
 
-	return g_build_filename (home, ".gnome2", METADATA_FILE, NULL);
+	metadata = g_build_filename (cache_dir,
+				     METADATA_FILE,
+				     NULL);
+
+	g_free (cache_dir);
+
+	return metadata;
 }
 
 static gboolean
@@ -536,7 +539,18 @@ gedit_metadata_manager_save (gpointer data)
 	file_name = get_metadata_filename ();
 	if (file_name != NULL)
 	{
-		xmlSaveFormatFile (file_name, doc, 1);
+		gchar *cache_dir;
+		int res;
+
+		/* make sure the cache dir exists */
+		cache_dir = gedit_dirs_get_user_cache_dir ();
+		res = g_mkdir_with_parents (cache_dir, 0755);
+		if (res != -1)
+		{
+			xmlSaveFormatFile (file_name, doc, 1);
+		}
+
+		g_free (cache_dir);
 		g_free (file_name);
 	}
 

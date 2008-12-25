@@ -43,7 +43,9 @@
 #include "gedit-view.h"
 #include "gedit-window.h"
 #include "gedit-window-private.h"
+#include "gedit-plugins-engine.h"
 #include "gedit-style-scheme-manager.h"
+#include "gedit-dirs.h"
 
 static void gedit_prefs_manager_editor_font_changed	(GConfClient *client,
 							 guint        cnxn_id,
@@ -126,6 +128,11 @@ static void gedit_prefs_manager_auto_save_changed	(GConfClient *client,
 							 GConfEntry  *entry,
 							 gpointer     user_data);
 
+static void gedit_prefs_manager_active_plugins_changed	(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
+
 static void gedit_prefs_manager_lockdown_changed	(GConfClient *client,
 							 guint        cnxn_id,
 							 GConfEntry  *entry,
@@ -139,7 +146,7 @@ static void gedit_prefs_manager_lockdown_changed	(GConfClient *client,
 #define GEDIT_STATE_DEFAULT_SIDE_PANEL_SIZE	200
 #define GEDIT_STATE_DEFAULT_BOTTOM_PANEL_SIZE	140
 
-#define GEDIT_STATE_FILE_LOCATION ".gnome2/gedit-2"
+#define GEDIT_STATE_FILE_LOCATION "gedit-2"
 
 #define GEDIT_STATE_WINDOW_GROUP "window"
 #define GEDIT_STATE_WINDOW_STATE "state"
@@ -162,6 +169,26 @@ static gint side_panel_active_page = 0;
 static gint bottom_panel_active_page = 0;
 static gint active_file_filter = -1;
 
+
+static gchar *
+get_state_filename (void)
+{
+	gchar *config_dir;
+	gchar *filename = NULL;
+
+	config_dir = gedit_dirs_get_user_config_dir ();
+
+	if (config_dir != NULL)
+	{
+		filename = g_build_filename (config_dir,
+					     GEDIT_STATE_FILE_LOCATION,
+					     NULL);
+		g_free (config_dir);
+	}
+
+	return filename;
+}
+
 static GKeyFile *
 get_gedit_state_file ()
 {
@@ -169,25 +196,15 @@ get_gedit_state_file ()
 
 	if (state_file == NULL)
 	{
-		const gchar *home;
-		gchar *path;
+		gchar *filename;
 		GError *err = NULL;
 
 		state_file = g_key_file_new ();
 
-		home = g_get_home_dir ();
-		if (home == NULL)
-		{
-			g_warning ("Could not get HOME directory\n");
-			goto out;
-		}
-
-		path = g_build_filename (home,
-					 GEDIT_STATE_FILE_LOCATION,
-					 NULL);
+		filename = get_state_filename ();
 
 		if (!g_key_file_load_from_file (state_file,
-						path,
+						filename,
 						G_KEY_FILE_NONE,
 						&err))
 		{
@@ -201,11 +218,9 @@ get_gedit_state_file ()
 			g_error_free (err);
 		}
 
-		g_free (path);
+		g_free (filename);
 	}
 
- out:
-	g_return_val_if_fail (state_file != NULL, NULL);
 	return state_file;
 }
 
@@ -266,26 +281,30 @@ static gboolean
 gedit_state_file_sync ()
 {
 	GKeyFile *state_file;
-	const gchar *home;
-	gchar *path;
-	gchar *content;
+	gchar *config_dir;
+	gchar *filename = NULL;
+	gchar *content = NULL;
 	gsize length;
+	gint res;
 	GError *err = NULL;
 	gboolean ret = FALSE;
 
 	state_file = get_gedit_state_file ();
 	g_return_val_if_fail (state_file != NULL, FALSE);
 
-	home = g_get_home_dir ();
-	if (home == NULL)
+	config_dir = gedit_dirs_get_user_config_dir ();
+	if (config_dir == NULL)
 	{
-		g_warning ("Could not get HOME directory\n");
+		g_warning ("Could not get config directory\n");
 		return ret;
 	}
 
-	path = g_build_filename (home,
-				 GEDIT_STATE_FILE_LOCATION,
-				 NULL);
+	res = g_mkdir_with_parents (config_dir, 0755);
+	if (res < 0)
+	{
+		g_warning ("Could not create config directory\n");
+		goto out;
+	}
 
 	content = g_key_file_to_data (state_file,
 				      &length,
@@ -298,15 +317,18 @@ gedit_state_file_sync ()
 		goto out;
 	}
 
-	if ((content != NULL) &&
-	    (!g_file_set_contents (path,
-				   content,
-				   length,
-				   &err)))
+	if (content != NULL)
 	{
-		g_warning ("Could not write gedit state file: %s\n",
-			   err->message);
-		goto out;
+		filename = get_state_filename ();
+		if (!g_file_set_contents (filename,
+					  content,
+					  length,
+					  &err))
+		{
+			g_warning ("Could not write gedit state file: %s\n",
+				   err->message);
+			goto out;
+		}
 	}
 
 	ret = TRUE;
@@ -315,10 +337,11 @@ gedit_state_file_sync ()
 	if (err != NULL)
 		g_error_free (err);
 
+	g_free (config_dir);
+	g_free (filename);
 	g_free (content);
-	g_free (path);
 
-	return TRUE;
+	return ret;
 }
 
 /* Window state */
@@ -610,6 +633,11 @@ gedit_prefs_manager_app_init (void)
 				GPM_PREFS_DIR,
 				GCONF_CLIENT_PRELOAD_RECURSIVE,
 				NULL);
+
+		gconf_client_add_dir (gedit_prefs_manager->gconf_client,
+				GPM_PLUGINS_DIR,
+				GCONF_CLIENT_PRELOAD_RECURSIVE,
+				NULL);
 		
 		gconf_client_add_dir (gedit_prefs_manager->gconf_client,
 				GPM_LOCKDOWN_DIR,
@@ -695,7 +723,12 @@ gedit_prefs_manager_app_init (void)
 				GPM_SAVE_DIR,
 				gedit_prefs_manager_auto_save_changed,
 				NULL, NULL, NULL);
-		
+
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_ACTIVE_PLUGINS,
+				gedit_prefs_manager_active_plugins_changed,
+				NULL, NULL, NULL);
+
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
 				GPM_LOCKDOWN_DIR,
 				gedit_prefs_manager_lockdown_changed,
@@ -1518,6 +1551,31 @@ gedit_prefs_manager_auto_save_changed (GConfClient *client,
 		}
 
 		g_list_free (docs);
+	}
+}
+
+static void 
+gedit_prefs_manager_active_plugins_changed (GConfClient *client,
+					    guint        cnxn_id,
+					    GConfEntry  *entry,
+					    gpointer     user_data)
+{
+	gedit_debug (DEBUG_PREFS);
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	if (strcmp (entry->key, GPM_ACTIVE_PLUGINS) == 0)
+	{
+		if ((entry->value->type == GCONF_VALUE_LIST) && 
+		    (gconf_value_get_list_type (entry->value) == GCONF_VALUE_STRING))
+		{
+			GeditPluginsEngine *engine;
+
+			engine = gedit_plugins_engine_get_default ();
+
+			gedit_plugins_engine_active_plugins_changed (engine);
+		}
 	}
 }
 

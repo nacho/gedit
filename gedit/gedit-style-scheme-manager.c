@@ -36,27 +36,27 @@
 
 #include "gedit-style-scheme-manager.h"
 #include "gedit-prefs-manager.h"
+#include "gedit-dirs.h"
 
 static GtkSourceStyleSchemeManager *style_scheme_manager = NULL;
-
-#define GEDIT_STYLES_DIR ".gnome2/gedit/styles"
 
 static gchar *
 get_gedit_styles_path (void)
 {
-	const gchar *home;
+	gchar *config_dir;
+	gchar *dir = NULL;
 
-	home = g_get_home_dir ();
-	if (home != NULL)
+	config_dir = gedit_dirs_get_user_config_dir ();
+
+	if (config_dir != NULL)
 	{
-		gchar *dir;
-
-		dir = g_build_filename (home, GEDIT_STYLES_DIR, NULL);
-
-		return dir;
+		dir = g_build_filename (config_dir,
+					"styles",
+					NULL);
+		g_free (config_dir);
 	}
 	
-	return NULL;
+	return dir;
 }
 
 static void
@@ -131,7 +131,6 @@ _gedit_style_scheme_manager_scheme_is_gedit_user_scheme (GtkSourceStyleSchemeMan
 {
 	GtkSourceStyleScheme *scheme;
 	const gchar *filename;
-	const gchar *home;
 	gchar *dir;
 	gboolean res = FALSE;
 
@@ -143,13 +142,7 @@ _gedit_style_scheme_manager_scheme_is_gedit_user_scheme (GtkSourceStyleSchemeMan
 	if (filename == NULL)
 		return FALSE;
 
-	home = g_get_home_dir ();
-	if (home == NULL)
-		return FALSE;
-
-	dir = g_strdup_printf ("%s/%s",
-			       home,
-			       GEDIT_STYLES_DIR);
+	dir = get_gedit_styles_path ();
 
 	res = g_str_has_prefix (filename, dir);
 

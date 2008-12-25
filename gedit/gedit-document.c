@@ -109,7 +109,7 @@ struct _GeditDocumentPrivate
 
 	const GeditEncoding *encoding;
 
-	gchar	    *mime_type;
+	gchar	    *content_type;
 
 	time_t       mtime;
 
@@ -143,6 +143,7 @@ enum {
 
 	PROP_URI,
 	PROP_SHORTNAME,
+	PROP_CONTENT_TYPE,
 	PROP_MIME_TYPE,
 	PROP_READ_ONLY,
 	PROP_ENCODING,
@@ -278,7 +279,7 @@ gedit_document_finalize (GObject *object)
 	}
 
 	g_free (doc->priv->uri);
-	g_free (doc->priv->mime_type);
+	g_free (doc->priv->content_type);
 	g_free (doc->priv->search_text);
 
 	if (doc->priv->to_search_region != NULL)
@@ -306,8 +307,11 @@ gedit_document_get_property (GObject    *object,
 		case PROP_SHORTNAME:
 			g_value_take_string (value, gedit_document_get_short_name_for_display (doc));
 			break;
+		case PROP_CONTENT_TYPE:
+			g_value_take_string (value, gedit_document_get_content_type (doc));
+			break;
 		case PROP_MIME_TYPE:
-			g_value_set_string (value, doc->priv->mime_type);
+			g_value_take_string (value, gedit_document_get_mime_type (doc));
 			break;
 		case PROP_READ_ONLY:
 			g_value_set_boolean (value, doc->priv->readonly);
@@ -412,6 +416,14 @@ gedit_document_class_init (GeditDocumentClass *klass)
 					 g_param_spec_string ("shortname",
 							      "Short Name",
 							      "The document's short name",
+							      NULL,
+							      G_PARAM_READABLE |
+							      G_PARAM_STATIC_STRINGS));
+
+	g_object_class_install_property (object_class, PROP_CONTENT_TYPE,
+					 g_param_spec_string ("content-type",
+							      "Content Type",
+							      "The document's Content Type",
 							      NULL,
 							      G_PARAM_READABLE |
 							      G_PARAM_STATIC_STRINGS));
@@ -689,7 +701,7 @@ gedit_document_init (GeditDocument *doc)
 	doc->priv->uri = NULL;
 	doc->priv->untitled_number = get_untitled_number ();
 
-	doc->priv->mime_type = g_strdup ("text/plain");
+	doc->priv->content_type = g_content_type_from_mime_type ("text/plain");
 
 	doc->priv->readonly = FALSE;
 
@@ -739,12 +751,57 @@ gedit_document_new (void)
 	return GEDIT_DOCUMENT (g_object_new (GEDIT_TYPE_DOCUMENT, NULL));
 }
 
-/* If mime type is null, we guess from the filename */
-/* If uri is null, we only set the mime-type */
+static GtkSourceLanguage *
+guess_language (const gchar *uri,
+		const gchar *content_type)
+
+{
+	gchar *data;
+	GtkSourceLanguage *language = NULL;
+
+	data = gedit_metadata_manager_get (uri, "language");
+
+	if (data != NULL)
+	{
+		gedit_debug_message (DEBUG_DOCUMENT, "Language from metadata: %s", data);
+
+		if (strcmp (data, "_NORMAL_") != 0)
+		{
+			language = gtk_source_language_manager_get_language (
+						gedit_get_language_manager (),
+						data);
+		}
+
+		g_free (data);
+	}
+	else
+	{
+		GFile *file;
+		gchar *basename;
+
+		gedit_debug_message (DEBUG_DOCUMENT, "Sniffing Language");
+
+		file = g_file_new_for_uri (uri);
+		basename = g_file_get_basename (file);
+
+		language = gtk_source_language_manager_guess_language (
+					gedit_get_language_manager (),
+					basename,
+					content_type);
+
+		g_free (basename);
+		g_object_unref (file);
+	}
+
+	return language;
+}
+
+/* If content type is null, we guess from the filename */
+/* If uri is null, we only set the content-type */
 static void
 set_uri (GeditDocument *doc,
 	 const gchar   *uri,
-	 const gchar   *mime_type)
+	 const gchar   *content_type)
 {
 	gedit_debug (DEBUG_DOCUMENT);
 
@@ -765,66 +822,32 @@ set_uri (GeditDocument *doc,
 		}
 	}
 
-	g_free (doc->priv->mime_type);
-	if (mime_type != NULL)
+	g_free (doc->priv->content_type);
+
+	if (content_type != NULL)
 	{
-		doc->priv->mime_type = g_strdup (mime_type);
+		doc->priv->content_type = g_strdup (content_type);
 	}
 	else
 	{
 		if (doc->priv->uri != NULL)
 		{
-			gchar *content_type;
-			gchar *detected_mime;
-
-			content_type = g_content_type_guess (doc->priv->uri, NULL, 0, NULL);
-
-			if (content_type == NULL || g_content_type_is_unknown (content_type))
-				detected_mime = g_strdup ("text/plain");
-			else
-				detected_mime = g_content_type_get_mime_type (content_type);
-
-			doc->priv->mime_type = detected_mime != NULL ? detected_mime : g_strdup ("text/plain");
-
-			g_free (content_type);
+			doc->priv->content_type = g_content_type_guess (doc->priv->uri, NULL, 0, NULL);
 		}
 		else
 		{
-			doc->priv->mime_type = g_strdup ("text/plain");
+			doc->priv->content_type = g_content_type_from_mime_type ("text/plain");
 		}
 	}
 
 	if (!doc->priv->language_set_by_user)
 	{
-		gchar *data;
-		GtkSourceLanguage *language = NULL;
+		GtkSourceLanguage *language;
 
-		data = gedit_metadata_manager_get (doc->priv->uri, "language");
+		language = guess_language (doc->priv->uri, doc->priv->content_type);
 
-		if (data != NULL)
-		{
-			gedit_debug_message (DEBUG_DOCUMENT, "Language: %s", data);
-
-			if (strcmp (data, "_NORMAL_") != 0)
-			{
-				language = gtk_source_language_manager_get_language (
-							gedit_get_language_manager (),
-							data);
-			}
-
-			g_free (data);
-		}
-		else
-		{
-			gedit_debug_message (DEBUG_DOCUMENT, "Language Normal");
-
-			if (strcmp (doc->priv->mime_type, "text/plain") != 0)
-			{
-				language = gedit_language_manager_get_language_from_mime_type (
-							gedit_get_language_manager (),
-							doc->priv->mime_type);
-			}
-		}
+		gedit_debug_message (DEBUG_DOCUMENT, "Language: %s",
+				     language != NULL ? gtk_source_language_get_name (language) : "None");
 
 		set_language (doc, language, FALSE);
 	}
@@ -853,12 +876,7 @@ void
 gedit_document_set_uri (GeditDocument *doc,
 			const gchar   *uri)
 {
-	gchar *mime_type;
-
-	mime_type = g_strdup (doc->priv->mime_type);
-	set_uri (doc, uri, mime_type);
-	
-	g_free (mime_type);
+	set_uri (doc, uri, doc->priv->content_type);
 }
 
 /* Never returns NULL */
@@ -887,14 +905,29 @@ gedit_document_get_short_name_for_display (GeditDocument *doc)
 		return gedit_utils_basename_for_display (doc->priv->uri);
 }
 
+gchar *
+gedit_document_get_content_type (GeditDocument *doc)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+
+ 	return g_strdup (doc->priv->content_type);
+}
+
 /* Never returns NULL */
 gchar *
 gedit_document_get_mime_type (GeditDocument *doc)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), "text/plain");
-	g_return_val_if_fail (doc->priv->mime_type != NULL, "text/plain");
+	gchar *mime_type = NULL;
 
- 	return g_strdup (doc->priv->mime_type);
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), "text/plain");
+
+	if ((doc->priv->content_type != NULL) &&
+	    (!g_content_type_is_unknown (doc->priv->content_type)))
+	{
+		mime_type = g_content_type_get_mime_type (doc->priv->content_type);
+	}
+
+ 	return mime_type != NULL ? g_strdup (mime_type) : g_strdup ("text/plain");
 }
 
 /* Note: do not emit the notify::read-only signal */
@@ -987,12 +1020,8 @@ document_loader_loaded (GeditDocumentLoader *loader,
 	{
 		GtkTextIter iter;
 		const gchar *content_type;
-		gchar *mime_type = NULL;
 
 		content_type = gedit_document_loader_get_content_type (loader);
-		
-		if (content_type)
-			mime_type = g_content_type_get_mime_type (content_type);
 
 		doc->priv->mtime = gedit_document_loader_get_mtime (loader);
 
@@ -1006,9 +1035,7 @@ document_loader_loaded (GeditDocumentLoader *loader,
 			      (doc->priv->requested_encoding != NULL));
 		      
 		/* We already set the uri */
-		set_uri (doc, NULL, mime_type);
-
-		g_free (mime_type);
+		set_uri (doc, NULL, content_type);
 
 		/* move the cursor at the requested line if any */
 		if (doc->priv->requested_line_pos > 0)
@@ -1184,12 +1211,10 @@ document_saver_saving (GeditDocumentSaver *saver,
 		{
 			const gchar *uri;
 			const gchar *content_type;
-			gchar *mime_type;
 
 			uri = gedit_document_saver_get_uri (saver);
 
 			content_type = gedit_document_saver_get_content_type (saver);
-			mime_type = g_content_type_get_mime_type (content_type);
 
 			doc->priv->mtime = gedit_document_saver_get_mtime (saver);
 
@@ -1200,9 +1225,7 @@ document_saver_saving (GeditDocumentSaver *saver,
 			gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc),
 						      FALSE);
 
-			set_uri (doc, uri, mime_type);
-
-			g_free (mime_type);
+			set_uri (doc, uri, content_type);
 
 			set_encoding (doc, 
 				      doc->priv->requested_encoding, 
@@ -1226,7 +1249,7 @@ document_saver_saving (GeditDocumentSaver *saver,
 		size = gedit_document_saver_get_file_size (saver);
 		written = gedit_document_saver_get_bytes_written (saver);
 
-		gedit_debug_message (DEBUG_DOCUMENT, "save progress: %Lu of %Lu", written, size);
+		gedit_debug_message (DEBUG_DOCUMENT, "save progress: %" G_GINT64_FORMAT " of %" G_GINT64_FORMAT, written, size);
 
 		g_signal_emit (doc,
 			       document_signals[SAVING],

@@ -44,6 +44,7 @@
 #include "gedit-utils.h"
 #include "gedit-debug.h"
 #include "gedit-help.h"
+#include "gedit-dirs.h"
 
 #define GEDIT_ENCODINGS_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
 						   GEDIT_TYPE_ENCODINGS_DIALOG,           \
@@ -300,6 +301,7 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 	GtkWidget *error_widget;
 	int i;
 	gboolean ret;
+	gchar *file;
 	gchar *root_objects[] = {
 		"encodings-dialog-contents",
 		NULL
@@ -334,7 +336,8 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 			  G_CALLBACK (response_handler),
 			  dlg);
 
-	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "gedit-encodings-dialog.ui",
+	file = gedit_dirs_get_ui_file ("gedit-encodings-dialog.ui");
+	ret = gedit_utils_get_ui_objects (file,
 					  root_objects,
 					  &error_widget,
 					  "encodings-dialog-contents", &content,
@@ -343,6 +346,7 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 					  "available-treeview", &dlg->priv->available_treeview,
 					  "displayed-treeview", &dlg->priv->displayed_treeview,
 					  NULL);
+	g_free (file);
 
 	if (!ret)
 	{

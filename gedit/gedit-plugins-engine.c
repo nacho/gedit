@@ -35,17 +35,16 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include <gconf/gconf-client.h>
 
 #include "gedit-plugins-engine.h"
 #include "gedit-plugin-info-priv.h"
 #include "gedit-plugin.h"
 #include "gedit-debug.h"
 #include "gedit-app.h"
+#include "gedit-prefs-manager.h"
 #include "gedit-plugin-loader.h"
 #include "gedit-object-module.h"
-
-#define USER_GEDIT_LOCATION ".gnome2/gedit/"
+#include "gedit-dirs.h"
 
 #define GEDIT_PLUGINS_ENGINE_BASE_KEY "/apps/gedit-2/plugins"
 #define GEDIT_PLUGINS_ENGINE_KEY GEDIT_PLUGINS_ENGINE_BASE_KEY "/active-plugins"
@@ -76,16 +75,11 @@ struct _GeditPluginsEnginePrivate
 	GList *plugin_list;
 	GHashTable *loaders;
 
-	GConfClient *gconf_client;
-	gboolean activate_from_gconf;
+	gboolean activate_from_prefs;
 };
 
 GeditPluginsEngine *default_engine = NULL;
 
-static void	gedit_plugins_engine_active_plugins_changed (GConfClient *client,
-							     guint cnxn_id, 
-							     GConfEntry *entry, 
-							     gpointer user_data);
 static void	gedit_plugins_engine_activate_plugin_real (GeditPluginsEngine *engine,
 							   GeditPluginInfo    *info);
 static void	gedit_plugins_engine_deactivate_plugin_real (GeditPluginsEngine *engine,
@@ -178,27 +172,23 @@ load_all_real (GeditPluginsEngine *engine,
 	       LoadDirCallback     callback,
 	       gpointer            userdata)
 {
-	const gchar *home;
+	gchar *config_dir;
 	const gchar *pdirs_env = NULL;
 	gchar **pdirs;
 	int i;
 
 	/* load user's plugins */
-	home = g_get_home_dir ();
-
-	if (home == NULL)
-	{
-		g_warning ("Could not get HOME directory\n");
-	}
-	else
+	config_dir = gedit_dirs_get_user_config_dir ();
+	
+	if (config_dir != NULL)
 	{
 		gchar *pdir;
 		gboolean ret = TRUE;
 
-		pdir = g_build_filename (home,
-					 USER_GEDIT_LOCATION,
+		pdir = g_build_filename (config_dir,
 					 dir,
 					 NULL);
+		g_free (config_dir);
 
 		if (g_file_test (pdir, G_FILE_TEST_IS_DIR))
 			ret = load_dir_real (engine, pdir, suffix, callback, userdata);
@@ -230,13 +220,18 @@ load_all_real (GeditPluginsEngine *engine,
 static void
 load_all_plugins (GeditPluginsEngine *engine)
 {
+	gchar *plugin_dir;
+
+	plugin_dir = gedit_dirs_get_gedit_plugins_dir ();
+
 	load_all_real (engine, 
 		       "plugins", 
 		       "GEDIT_PLUGINS_PATH", 
-		       GEDIT_PLUGINDIR,
+		       plugin_dir,
 		       PLUGIN_EXT,
 		       load_plugin_info,
 		       NULL);
+	g_free (plugin_dir);
 }
 
 static guint
@@ -299,24 +294,11 @@ gedit_plugins_engine_init (GeditPluginsEngine *engine)
 						    GEDIT_TYPE_PLUGINS_ENGINE,
 						    GeditPluginsEnginePrivate);
 
-	engine->priv->gconf_client = gconf_client_get_default ();
-	g_return_if_fail (engine->priv->gconf_client != NULL);
-
-	gconf_client_add_dir (engine->priv->gconf_client,
-			      GEDIT_PLUGINS_ENGINE_BASE_KEY,
-			      GCONF_CLIENT_PRELOAD_ONELEVEL,
-			      NULL);
-
-	gconf_client_notify_add (engine->priv->gconf_client,
-				 GEDIT_PLUGINS_ENGINE_KEY,
-				 gedit_plugins_engine_active_plugins_changed,
-				 engine, NULL, NULL);
-
 	load_all_plugins (engine);
-	
-	/* make sure that the first reactivation will read active plugins from
-	   gconf */
-	engine->priv->activate_from_gconf = TRUE;
+
+	/* make sure that the first reactivation will read active plugins
+	   from the prefs */
+	engine->priv->activate_from_prefs = TRUE;
 
 	/* mapping from loadername -> loader object */
 	engine->priv->loaders = g_hash_table_new_full (hash_lowercase,
@@ -348,8 +330,6 @@ gedit_plugins_engine_finalize (GObject *object)
 	
 	gedit_debug (DEBUG_PLUGINS);
 
-	g_return_if_fail (engine->priv->gconf_client != NULL);
-
 	/* Firs deactivate all plugins */
 	for (item = engine->priv->plugin_list; item; item = item->next)
 	{
@@ -371,7 +351,6 @@ gedit_plugins_engine_finalize (GObject *object)
 	}
 
 	g_list_free (engine->priv->plugin_list);
-	g_object_unref (engine->priv->gconf_client);
 }
 
 static void
@@ -486,15 +465,20 @@ get_plugin_loader (GeditPluginsEngine *engine, GeditPluginInfo *info)
 
 	if (loader_info == NULL)
 	{
+		gchar *loader_dir;
+
+		loader_dir = gedit_dirs_get_gedit_plugin_loaders_dir ();
+
 		/* loader could not be found in the hash, try to find it by 
 		   scanning */
 		load_all_real (engine, 
 			       "plugin-loaders", 
 			       NULL, 
-			       GEDIT_LOADERDIR,
+			       loader_dir,
 			       LOADER_EXT,
 			       (LoadDirCallback)load_loader,
 			       NULL);
+		g_free (loader_dir);
 		
 		loader_info = (LoaderInfo *)g_hash_table_lookup (
 				engine->priv->loaders, 
@@ -546,6 +530,7 @@ gedit_plugins_engine_get_plugin_info (GeditPluginsEngine *engine,
 	GList *l = g_list_find_custom (engine->priv->plugin_list,
 				       name,
 				       (GCompareFunc) compare_plugin_info_and_name);
+
 	return l == NULL ? NULL : (GeditPluginInfo *) l->data;
 }
 
@@ -554,7 +539,6 @@ save_active_plugin_list (GeditPluginsEngine *engine)
 {
 	GSList *active_plugins = NULL;
 	GList *l;
-	gboolean res;
 
 	for (l = engine->priv->plugin_list; l != NULL; l = l->next)
 	{
@@ -567,14 +551,7 @@ save_active_plugin_list (GeditPluginsEngine *engine)
 		}
 	}
 
-	res = gconf_client_set_list (engine->priv->gconf_client,
-				     GEDIT_PLUGINS_ENGINE_KEY,
-				     GCONF_VALUE_STRING,
-				     active_plugins,
-				     NULL);
-
-	if (!res)
-		g_warning ("Error saving the list of active plugins.");
+	gedit_prefs_manager_set_active_plugins (active_plugins);
 
 	g_slist_free (active_plugins);
 }
@@ -702,35 +679,32 @@ void
 gedit_plugins_engine_activate_plugins (GeditPluginsEngine *engine,
 					GeditWindow        *window)
 {
-	GList *pl;
 	GSList *active_plugins = NULL;
+	GList *pl;
 
 	gedit_debug (DEBUG_PLUGINS);
 
 	g_return_if_fail (GEDIT_IS_PLUGINS_ENGINE (engine));
 	g_return_if_fail (GEDIT_IS_WINDOW (window));
-	
+
 	/* the first time, we get the 'active' plugins from gconf */
-	if (engine->priv->activate_from_gconf)
+	if (engine->priv->activate_from_prefs)
 	{
-		active_plugins = gconf_client_get_list (engine->priv->gconf_client,
-							GEDIT_PLUGINS_ENGINE_KEY,
-							GCONF_VALUE_STRING,
-							NULL);
+		active_plugins = gedit_prefs_manager_get_active_plugins ();
 	}
 
 	for (pl = engine->priv->plugin_list; pl; pl = pl->next)
 	{
 		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
 		
-		if (engine->priv->activate_from_gconf && 
+		if (engine->priv->activate_from_prefs && 
 		    g_slist_find_custom (active_plugins,
 					 gedit_plugin_info_get_module_name (info),
 					 (GCompareFunc)strcmp) == NULL)
 			continue;
 		
 		/* If plugin is not active, don't try to activate/load it */
-		if (!engine->priv->activate_from_gconf && 
+		if (!engine->priv->activate_from_prefs && 
 		    !gedit_plugin_info_is_active (info))
 			continue;
 
@@ -739,11 +713,11 @@ gedit_plugins_engine_activate_plugins (GeditPluginsEngine *engine,
 					       window);
 	}
 	
-	if (engine->priv->activate_from_gconf)
+	if (engine->priv->activate_from_prefs)
 	{
 		g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
 		g_slist_free (active_plugins);
-		engine->priv->activate_from_gconf = FALSE;
+		engine->priv->activate_from_prefs = FALSE;
 	}
 	
 	gedit_debug_message (DEBUG_PLUGINS, "End");
@@ -834,35 +808,16 @@ gedit_plugins_engine_configure_plugin (GeditPluginsEngine *engine,
 	gtk_widget_show (conf_dlg);
 }
 
-static void 
-gedit_plugins_engine_active_plugins_changed (GConfClient *client,
-					     guint cnxn_id,
-					     GConfEntry *entry,
-					     gpointer user_data)
+void 
+gedit_plugins_engine_active_plugins_changed (GeditPluginsEngine *engine)
 {
-	GeditPluginsEngine *engine;
-	GList *pl;
 	gboolean to_activate;
 	GSList *active_plugins;
+	GList *pl;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	g_return_if_fail (entry->key != NULL);
-	g_return_if_fail (entry->value != NULL);
-
-	engine = GEDIT_PLUGINS_ENGINE (user_data);
-	
-	if (!((entry->value->type == GCONF_VALUE_LIST) && 
-	      (gconf_value_get_list_type (entry->value) == GCONF_VALUE_STRING)))
-	{
-		g_warning ("The gconf key '%s' may be corrupted.", GEDIT_PLUGINS_ENGINE_KEY);
-		return;
-	}
-	
-	active_plugins = gconf_client_get_list (engine->priv->gconf_client,
-						GEDIT_PLUGINS_ENGINE_KEY,
-						GCONF_VALUE_STRING,
-						NULL);
+	active_plugins = gedit_prefs_manager_get_active_plugins ();
 
 	for (pl = engine->priv->plugin_list; pl; pl = pl->next)
 	{
@@ -884,5 +839,4 @@ gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 	g_slist_foreach (active_plugins, (GFunc) g_free, NULL);
 	g_slist_free (active_plugins);
 }
-
 

@@ -44,6 +44,7 @@
 #include "gedit-debug.h"
 #include "gedit-utils.h"
 #include "gedit-enum-types.h"
+#include "gedit-dirs.h"
 
 
 #define GEDIT_PAGE_SETUP_FILE		"gedit-page-setup"
@@ -126,31 +127,12 @@ gedit_app_class_init (GeditAppClass *klass)
 	g_type_class_add_private (object_class, sizeof(GeditAppPrivate));
 }
 
-static gchar *
-get_accel_file (void)
-{
-	const gchar *home;
-
-	home = g_get_home_dir();
-
-	if (home != NULL)
-	{
-		return g_build_filename (home,
-					 ".gnome2",
-					 "accels"
-					 "gedit",
-					 NULL);
-	}
-
-	return NULL;
-}
-
 static void
 load_accels (void)
 {
 	gchar *filename;
 
-	filename = get_accel_file ();
+	filename = gedit_dirs_get_user_accels_file ();
 	if (filename != NULL)
 	{
 		gedit_debug_message (DEBUG_APP, "Loading keybindings from %s\n", filename);		
@@ -164,7 +146,7 @@ save_accels (void)
 {
 	gchar *filename;
 
-	filename = get_accel_file ();
+	filename = gedit_dirs_get_user_accels_file ();
 	if (filename != NULL)
 	{
 		gedit_debug_message (DEBUG_APP, "Saving keybindings in %s\n", filename);		
@@ -176,19 +158,20 @@ save_accels (void)
 static gchar *
 get_page_setup_file (void)
 {
-	const gchar *home;
+	gchar *config_dir;
+	gchar *setup = NULL;
 
-	home = g_get_home_dir ();
-	if (home != NULL)
+	config_dir = gedit_dirs_get_user_config_dir ();
+	
+	if (config_dir != NULL)
 	{
-		return g_build_filename (home,
-					 ".gnome2",
-					 "gedit",
-					 GEDIT_PAGE_SETUP_FILE,
-					 NULL);
+		setup = g_build_filename (config_dir,
+					  GEDIT_PAGE_SETUP_FILE,
+					  NULL);
+		g_free (config_dir);
 	}
 
-	return NULL;
+	return setup;
 }
 
 static void
@@ -248,19 +231,20 @@ save_page_setup (GeditApp *app)
 static gchar *
 get_print_settings_file (void)
 {
-	const gchar *home;
+	gchar *config_dir;
+	gchar *settings = NULL;
 
-	home = g_get_home_dir ();
-	if (home != NULL)
+	config_dir = gedit_dirs_get_user_config_dir ();
+
+	if (config_dir != NULL)
 	{
-		return g_build_filename (home,
-					 ".gnome2",
-					 "gedit",
-					 GEDIT_PRINT_SETTINGS_FILE,
-					 NULL);
+		settings = g_build_filename (config_dir,
+					     GEDIT_PRINT_SETTINGS_FILE,
+					     NULL);
+		g_free (config_dir);
 	}
 
-	return NULL;
+	return settings;
 }
 
 static void
@@ -436,16 +420,14 @@ window_destroy (GeditWindow *window,
 static gchar *
 gen_role (void)
 {
-	time_t t;
+	GTimeVal result;
 	static gint serial;
+	
+	g_get_current_time (&result);
 
-	t = time (NULL);
-
-	return g_strdup_printf ("gedit-window-%d-%d-%d-%ld-%d@%s",
-				getpid (),
-				getgid (),
-				getppid (),
-				(long) t,
+	return g_strdup_printf ("gedit-window-%ld-%ld-%d-%s",
+				result.tv_sec,
+				result.tv_usec,
 				serial++,
 				g_get_host_name ());
 }

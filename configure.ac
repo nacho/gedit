@@ -205,7 +205,8 @@ GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)
 AC_SUBST(GEDIT_CFLAGS)
 
-if test "$platform_osx" = "no"; then
+if test "$platform_osx" = "no" &&
+   test "$platform_win32" = no; then
 	PKG_CHECK_MODULES(EGG_SMCLIENT, [
 		sm >= 1.0.0
 	])
@@ -365,15 +366,15 @@ fi
 # so we create a lib
 if test "$platform_win32" = yes; then
 	GEDIT_IMPLIB="-lgedit-$GEDIT_API_VERSION"
-	PLUGIN_LIBTOOL_FLAGS="-module -avoid-version -no-undefined -Wl,\$(top_builddir)/gedit/libgedit-\$(GEDIT_API_VERSION).a"
+	PLUGIN_LIBTOOL_FLAGS="-module -avoid-version -no-undefined -mwindows -Wl,\$(top_builddir)/gedit/libgedit-\$(GEDIT_API_VERSION).a"
+	LOADER_LIBTOOL_FLAGS="-module -avoid-version -no-undefined -mwindows -Wl,\$(top_builddir)/gedit/libgedit-\$(GEDIT_API_VERSION).a"
 else
 	GEDIT_IMPLIB=""
 	PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
+	LOADER_LIBTOOL_FLAGS="-module -avoid-version"
 fi
 AC_SUBST(GEDIT_IMPLIB)
 AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
-
-LOADER_LIBTOOL_FLAGS="-module -avoid-version"
 AC_SUBST(LOADER_LIBTOOL_FLAGS)
 
 AC_CONFIG_FILES([
@@ -416,7 +417,9 @@ plugins/sort/Makefile
 plugins/spell/Makefile
 plugins/taglist/Makefile
 plugins/time/Makefile
-po/Makefile.in])
+po/Makefile.in
+win32/gedit.iss
+win32/Makefile])
 
 AC_OUTPUT
 

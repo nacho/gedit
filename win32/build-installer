@@ -1,0 +1,245 @@
+#!/bin/sh
+echo "You need to execute this on a Windows machine within msys (http://www.mingw.org)"
+echo "You also need InnoSetup (http://www.innosetup.org) with iscc in your PATH"
+echo "You need to have python, pygobject, pycairo and pygtk installed into C:\\Python25"
+echo "Make sure gedit and all its dependencies have been installed correctly to /local"
+
+revision=$1
+if test "$revision" = ''; then
+  echo "Installer revision not provided, assuming 1"
+  revision=1
+fi
+
+# TODO: Let configure replace @pyexecdir@ to get the correct python path?
+PYTHONDIR=/c/Python25
+
+echo "Cleanup..."
+if test -e installer; then
+  rm installer -Rf || exit;
+fi
+
+mkdir -p installer || exit
+
+echo "Copying the docs..."
+mkdir -p installer/share/doc || exit
+cp ../COPYING installer/share/doc || exit
+cp ../AUTHORS installer/share/doc || exit
+cp ../README installer/share/doc || exit
+
+echo "Copying DLL files..."
+
+mkdir -p installer/bin
+
+#cp /local/bin/libintl-8.dll installer/bin || exit
+cp /bin/libgettextpo-0.dll installer/bin || exit
+# TODO: There are no usable libxslt Windows binaries, therefore I built this myself:
+#cp /local/bin/libxslt-1.dll installer/bin || exit
+
+cp /bin/libglib-2.0-0.dll installer/bin || exit
+cp /bin/libgio-2.0-0.dll installer/bin || exit
+cp /bin/libgmodule-2.0-0.dll installer/bin || exit
+cp /bin/libgobject-2.0-0.dll installer/bin || exit
+cp /bin/libgthread-2.0-0.dll installer/bin || exit
+
+# TODO: We can probably omit these, as we do not use g_spawn on Windows anymore
+cp /bin/gspawn-win32-helper.exe installer/bin || exit
+cp /bin/gspawn-win32-helper-console.exe installer/bin || exit
+
+cp /bin/libatk-1.0-0.dll installer/bin || exit
+cp /bin/libcairo-2.dll installer/bin || exit
+cp /bin/libpng12-0.dll installer/bin || exit
+cp /bin/jpeg62.dll installer/bin || exit
+cp /bin/libtiff3.dll installer/bin || exit
+
+cp /bin/libpango-1.0-0.dll installer/bin || exit
+cp /bin/libpangocairo-1.0-0.dll installer/bin || exit
+cp /bin/libpangowin32-1.0-0.dll installer/bin || exit
+
+cp /bin/libgdk-win32-2.0-0.dll installer/bin || exit
+cp /bin/libgdk_pixbuf-2.0-0.dll installer/bin || exit
+
+cp /bin/libgtk-win32-2.0-0.dll installer/bin || exit
+cp /local/bin/libgtksourceview-2.0-0.dll installer/bin || exit
+
+cp /bin/libORBit-2-0.dll installer/bin || exit
+cp /bin/libORBitCosNaming-2-0.dll installer/bin || exit
+cp /bin/libORBit-imodule-2-0.dll installer/bin || exit
+
+cp /bin/libgconf-2-4.dll installer/bin || exit
+
+cp /bin/libgailutil-18.dll installer/bin || exit
+
+cp /bin/libenchant.dll installer/bin || exit
+
+echo "Stripping DLL files..."
+strip installer/bin/*.dll || exit
+strip installer/bin/*.exe || exit
+
+# stripping libxml2.dll renders it unusable (although not changing it in size).
+# We therefore copy it after having stripped the rest. Same with the other DLLs
+# here. Perhaps those were built with MSVC.
+cp /bin/libxml2.dll installer/bin || exit
+cp /bin/intl.dll installer/bin || exit
+cp /bin/iconv.dll installer/bin || exit
+cp /bin/zlib1.dll installer/bin || exit
+
+#FIXME: We have to build with Python
+echo "Copying Python..."
+
+# TODO: Find out Windows directory somehow, perhaps by looking at PATH?
+#cp /c/WINDOWS/system32/python25.dll installer/bin || exit
+
+# We through all python modules into python/. Glom sets PYTHONPATH accordingly.
+#mkdir -p installer/python || exit
+
+# TODO: Perhaps some scripts need more python modules.
+#cp $PYTHONDIR/Lib/*.py installer/python || exit
+
+#mkdir -p installer/python/encodings || exit
+#cp $PYTHONDIR/Lib/encodings/*.py installer/python/encodings || exit
+
+#cp $PYTHONDIR/Lib/site-packages/glom.pyd installer/python || exit
+#strip installer/python/glom.pyd || exit
+#cp $PYTHONDIR/Lib/site-packages/gtk-2.0/gda.pyd installer/python || exit
+#strip installer/python/gda.pyd || exit
+
+#cp $PYTHONDIR/Lib/site-packages/pygtk.py installer/python || exit
+#cp $PYTHONDIR/Lib/site-packages/gtk-2.0/*.pyd installer/python || exit
+
+#mkdir -p installer/python/gobject || exit
+#cp $PYTHONDIR/Lib/site-packages/gtk-2.0/gobject/*.py installer/python/gobject || exit
+#cp $PYTHONDIR/Lib/site-packages/gtk-2.0/gobject/*.pyd installer/python/gobject || exit
+
+#mkdir -p installer/python/cairo || exit
+#cp $PYTHONDIR/Lib/site-packages/cairo/*.py installer/python/cairo || exit
+#cp $PYTHONDIR/Lib/site-packages/cairo/*.pyd installer/python/cairo || exit
+
+#mkdir -p installer/python/gtk || exit
+#cp $PYTHONDIR/Lib/site-packages/gtk-2.0/gtk/*.py installer/python/gtk || exit
+#cp $PYTHONDIR/Lib/site-packages/gtk-2.0/gtk/*.pyd installer/python/gtk || exit
+
+echo "Copying modules..."
+
+#cp $PYTHONDIR/Lib/site-packages/glom.pyd installer/bin || exit
+#cp $PYTHONDIR/Lib/site-packages/gtk-2.0/gda.pyd installer/bin || exit
+#strip installer/bin/*.pyd || exit
+
+mkdir -p installer/lib/gtk-2.0/2.10.0/immodules || exit
+cp /lib/gtk-2.0/2.10.0/immodules/*.dll installer/lib/gtk-2.0/2.10.0/immodules || exit
+strip installer/lib/gtk-2.0/2.10.0/immodules/*.dll || exit
+cp /bin/gtk-query-immodules-2.0.exe installer/bin || exit
+
+mkdir -p installer/lib/gtk-2.0/2.10.0/engines || exit
+cp /lib/gtk-2.0/2.10.0/engines/libwimp.dll installer/lib/gtk-2.0/2.10.0/engines || exit
+strip installer/lib/gtk-2.0/2.10.0/engines/libwimp.dll || exit
+
+mkdir -p installer/lib/gtk-2.0/2.10.0/loaders || exit
+cp /lib/gtk-2.0/2.10.0/loaders/*.dll installer/lib/gtk-2.0/2.10.0/loaders || exit
+strip installer/lib/gtk-2.0/2.10.0/loaders/*.dll || exit
+cp /bin/gdk-pixbuf-query-loaders.exe installer/bin || exit
+
+# Gail
+mkdir -p installer/lib/gtk-2.0/modules || exit
+cp /lib/gtk-2.0/modules/libgail.dll installer/lib/gtk-2.0/modules || exit
+strip installer/lib/gtk-2.0/modules/libgail.dll
+
+# TODO: Can we omit this?
+mkdir -p installer/etc/gtk-2.0
+cp /etc/gtk-2.0/gtk.immodules installer/etc/gtk-2.0 || exit -1
+cp /etc/gtk-2.0/gdk-pixbuf.loaders installer/etc/gtk-2.0 || exit -1
+
+mkdir -p installer/share/themes || exit
+cp -R /share/themes/MS-Windows installer/share/themes || exit
+mkdir -p installer/etc/gtk-2.0 || exit
+echo "gtk-theme-name = \"MS-Windows\"" > installer/etc/gtk-2.0/gtkrc || exit
+
+# Enchant
+mkdir -p installer/lib/enchant || exit
+cp /lib/enchant/* installer/lib/enchant || exit
+strip installer/lib/enchant/*.dll || exit
+mkdir -p installer/share/enchant || exit
+cp /share/enchant/* installer/share/enchant || exit
+
+# Iso codes
+mkdir -p installer/share/iso-codes || exit
+cp /share/iso-codes/* installer/share/iso-codes || exit
+mkdir -p installer/share/xml/iso-codes || exit
+cp /share/xml/iso-codes/* installer/share/xml/iso-codes || exit
+
+echo "Copying locales..."
+
+# We need to keep the locale files from share/locale in share/locale and those
+# from lib/locale in lib/locale:
+cp /share/locale installer/share -R || exit
+cp /local/share/locale installer/share -R || exit
+#cp /lib/locale installer/lib -R || exit
+#cp /gtksourceview/lib/locale installer/lib -R || exit
+
+find installer/share/locale/ -type f | grep -v atk10.mo | grep -v gtk20.mo | grep -v GConf2.mo | grep -v glib20.mo | grep -v gedit.mo | grep -v gtk20.mo | grep -v gtk20-properties.mo | grep -v gtksourceview-2.0.mo | grep -v iso_*.mo | xargs rm
+find installer/share/locale -type d | xargs rmdir -p --ignore-fail-on-non-empty
+
+echo "Copying executable..."
+cp /local/bin/gedit.exe installer/bin || exit
+strip installer/bin/gedit.exe || exit
+
+
+echo "Copying shared data (ui files, icons, etc.)..."
+
+mkdir -p installer/share/gtksourceview-2.0 || exit
+cp -R /local/share/gtksourceview-2.0/language-specs installer/share/gtksourceview-2.0 || exit
+cp -R /local/share/gtksourceview-2.0/styles installer/share/gtksourceview-2.0 || exit
+
+#GtkBuilder files and xml files
+mkdir -p installer/share/gedit-2/ui || exit
+cp /local/share/gedit-2/ui/* installer/share/gedit-2/ui || exit
+
+#Icons & logo
+mkdir -p installer/share/gedit-2/icons || exit
+cp /local/share/gedit-2/icons/gedit-plugin.png installer/share/gedit-2/icons || exit
+mkdir -p installer/share/gedit-2/logo || exit
+cp /local/share/gedit-2/logo/gedit-logo.png installer/share/gedit-2/logo || exit
+
+#Taglist
+mkdir -p installer/share/gedit-2/taglist || exit
+cp /local/share/gedit-2/taglist/* installer/share/gedit-2/taglist || exit
+
+#Plugins
+mkdir -p installer/share/gedit-2/plugins || exit
+cp -R /local/share/gedit-2/plugins/* installer/share/gedit-2/plugins || exit
+mkdir -p installer/lib/gedit-2/plugins || exit
+cp -R /local/lib/gedit-2/plugins/* installer/lib/gedit-2/plugins || exit
+mkdir -p installer/lib/gedit-2/plugin-loaders || exit
+cp -R /local/lib/gedit-2/plugin-loaders/* installer/lib/gedit-2/plugin-loaders || exit
+
+#GConf
+mkdir -p installer/etc/gconf/schemas || exit
+cp /local/etc/gconf/schemas/gedit* installer/etc/gconf/schemas || exit
+mkdir -p installer/etc/gconf/2 || exit
+cp /etc/gconf/2/* installer/etc/gconf/2 || exit
+mkdir -p installer/etc/gconf/gconf.xml.defaults || exit
+cp -R /etc/gconf/gconf.xml.defaults/* installer/etc/gconf/gconf.xml.defaults || exit
+mkdir -p installer/etc/gconf/gconf.xml.mandatory || exit
+cp -R /etc/gconf/gconf.xml.mandatory/ installer/etc/gconf/ || exit
+mkdir -p installer/lib/GConf/2 || exit
+cp /lib/GConf/2/* installer/lib/GConf/2 || exit
+strip installer/lib/GConf/2/*.dll || exit
+mkdir -p installer/libexec || exit
+cp /libexec/gconfd-2.exe installer/libexec || exit
+
+#Icons
+mkdir -p installer/share/icons || exit
+cp -R /share/icons/* installer/share/icons || exit
+
+# This is used for the glom icon in the initial dialog. I'm not sure why GTK
+# does not already get it from the icons/ directory, but it took me already
+# long enough to figure out that this works:
+#mkdir -p installer/share/pixmaps
+#cp /local/share/icons/hicolor/16x16/apps/gedit.png installer/share/pixmaps || exit
+
+echo "Creating installer..."
+
+perl -pe "s/INSTALLERREVISION/$revision/" gedit.iss > installer/gedit.iss || exit
+#cp installer || exit
+iscc installer/gedit.iss || exit
+
+echo "Done"

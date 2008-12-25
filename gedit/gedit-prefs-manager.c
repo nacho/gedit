@@ -669,6 +669,7 @@ gedit_prefs_manager_get_auto_detected_encodings (void)
 {
 	GSList *strings;
 	GSList *res = NULL;
+
 	gedit_debug (DEBUG_PREFS);
 
 	g_return_val_if_fail (gedit_prefs_manager != NULL, NULL);
@@ -738,6 +739,7 @@ gedit_prefs_manager_get_shown_in_menu_encodings (void)
 {
 	GSList *strings;
 	GSList *res = NULL;
+
 	gedit_debug (DEBUG_PREFS);
 
 	g_return_val_if_fail (gedit_prefs_manager != NULL, NULL);
@@ -813,8 +815,8 @@ gedit_prefs_manager_set_shown_in_menu_encodings (const GSList *encs)
 			GPM_SHOWN_IN_MENU_ENCODINGS,
 			GCONF_VALUE_STRING,
 		       	list,
-			NULL);	
-	
+			NULL);
+
 	g_slist_free (list);
 }
 
@@ -982,7 +984,51 @@ gedit_prefs_manager_get_restore_cursor_position (void)
 					     GPM_DEFAULT_RESTORE_CURSOR_POSITION);
 }
 
+/* Plugins: we just store/return a list of strings, all the magic has to
+ * happen in the plugin engine */
+
+GSList *
+gedit_prefs_manager_get_active_plugins (void)
+{
+	GSList *plugins;
+
+	gedit_debug (DEBUG_PREFS);
+
+	g_return_val_if_fail (gedit_prefs_manager != NULL, NULL);
+	g_return_val_if_fail (gedit_prefs_manager->gconf_client != NULL, NULL);
+
+	plugins = gconf_client_get_list (gedit_prefs_manager->gconf_client,
+					 GPM_ACTIVE_PLUGINS,
+					 GCONF_VALUE_STRING, 
+					 NULL);
+
+	return plugins;
+}
+
+void
+gedit_prefs_manager_set_active_plugins (const GSList *plugins)
+{	
+	g_return_if_fail (gedit_prefs_manager != NULL);
+	g_return_if_fail (gedit_prefs_manager->gconf_client != NULL);
+	g_return_if_fail (gedit_prefs_manager_active_plugins_can_set ());
+
+	gconf_client_set_list (gedit_prefs_manager->gconf_client,
+			       GPM_ACTIVE_PLUGINS,
+			       GCONF_VALUE_STRING,
+		       	       (GSList *) plugins,
+			       NULL);
+}
+
+gboolean
+gedit_prefs_manager_active_plugins_can_set (void)
+{
+	gedit_debug (DEBUG_PREFS);
+
+	return gedit_prefs_manager_key_is_writable (GPM_ACTIVE_PLUGINS);
+}
+
 /* Global Lockdown */
+
 GeditLockdownMask
 gedit_prefs_manager_get_lockdown (void)
 {

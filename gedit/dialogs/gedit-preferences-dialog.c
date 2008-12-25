@@ -48,6 +48,7 @@
 #include "gedit-style-scheme-manager.h"
 #include "gedit-plugin-manager.h"
 #include "gedit-help.h"
+#include "gedit-dirs.h"
 
 /*
  * gedit-preferences dialog is a singleton since we don't
@@ -1062,6 +1063,7 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 {
 	GtkWidget *error_widget;
 	gboolean ret;
+	gchar *file;
 	gchar *root_objects[] = {
 		"notebook",
 		"adjustment1",
@@ -1097,7 +1099,8 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 			  G_CALLBACK (dialog_response_handler),
 			  NULL);
 	
-	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "gedit-preferences-dialog.ui",
+	file = gedit_dirs_get_ui_file ("gedit-preferences-dialog.ui");
+	ret = gedit_utils_get_ui_objects (file,
 		root_objects,
 		&error_widget,
 
@@ -1135,6 +1138,7 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 		"plugin_manager_place_holder", &dlg->priv->plugin_manager_place_holder,
 
 		NULL);
+	g_free (file);
 
 	if (!ret)
 	{

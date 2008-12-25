@@ -40,6 +40,7 @@
 #include "gedit-history-entry.h"
 #include "gedit-utils.h"
 #include "gedit-marshal.h"
+#include "gedit-dirs.h"
 
 #define GEDIT_SEARCH_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
 						GEDIT_TYPE_SEARCH_DIALOG,              \
@@ -321,6 +322,7 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 	GtkWidget *content;
 	GtkWidget *error_widget;
 	gboolean ret;
+	gchar *file;
 	gchar *root_objects[] = {
 		"search_dialog_content",
 		NULL
@@ -342,7 +344,8 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), 5);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);
 
-	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "gedit-search-dialog.ui",
+	file = gedit_dirs_get_ui_file ("gedit-search-dialog.ui");
+	ret = gedit_utils_get_ui_objects (file,
 					  root_objects,
 					  &error_widget,
 					  "search_dialog_content", &content,
@@ -354,6 +357,7 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 					  "search_backwards_checkbutton", &dlg->priv->backwards_checkbutton,
 					  "wrap_around_checkbutton", &dlg->priv->wrap_around_checkbutton,
 					  NULL);
+	g_free (file);
 
 	if (!ret)
 	{

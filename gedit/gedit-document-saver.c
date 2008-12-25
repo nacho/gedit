@@ -218,9 +218,11 @@ gedit_document_saver_new (GeditDocument       *doc,
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 
+#ifndef G_OS_WIN32
 	if (gedit_utils_uri_has_file_scheme (uri))
 		saver_type = GEDIT_TYPE_LOCAL_DOCUMENT_SAVER;
 	else
+#endif
 		saver_type = GEDIT_TYPE_GIO_DOCUMENT_SAVER;
 
 	if (encoding == NULL)

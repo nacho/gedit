@@ -41,6 +41,7 @@
 #include "gedit-encodings-option-menu.h"
 #include "gedit-utils.h"
 #include "gedit-help.h"
+#include "gedit-dirs.h"
 
 #define GEDIT_OPEN_LOCATION_DIALOG_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ((object), \
 							GEDIT_TYPE_OPEN_LOCATION_DIALOG, \
@@ -117,6 +118,7 @@ gedit_open_location_dialog_init (GeditOpenLocationDialog *dlg)
 	GtkWidget *encoding_hbox;
 	GtkWidget *error_widget;
 	gboolean   ret;
+	gchar *file;
 	gchar     *root_objects[] = {
 		"open_uri_dialog_content",
 		NULL
@@ -154,7 +156,8 @@ gedit_open_location_dialog_init (GeditOpenLocationDialog *dlg)
 			  G_CALLBACK (response_handler),
 			  NULL);
 
-	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "gedit-open-location-dialog.ui",
+	file = gedit_dirs_get_ui_file ("gedit-open-location-dialog.ui");
+	ret = gedit_utils_get_ui_objects (file,
 					  root_objects,
 					  &error_widget,
 					  "open_uri_dialog_content", &content,
@@ -163,6 +166,7 @@ gedit_open_location_dialog_init (GeditOpenLocationDialog *dlg)
 					  "encoding_label", &encoding_label,
 					  "encoding_hbox", &encoding_hbox,
 					   NULL);
+	g_free (file);
 
 	if (!ret)
 	{

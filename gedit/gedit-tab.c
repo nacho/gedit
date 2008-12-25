@@ -1717,9 +1717,10 @@ _gedit_tab_get_tooltips	(GeditTab *tab)
 
 	switch (tab->priv->state)
 	{
+		gchar *content_type;
 		gchar *mime_type;
-		gchar *mime_description;
-		gchar *mime_full_description; 
+		gchar *content_description;
+		gchar *content_full_description; 
 		gchar *encoding;
 		const GeditEncoding *enc;
 
@@ -1738,16 +1739,17 @@ _gedit_tab_get_tooltips	(GeditTab *tab)
 						ruri_markup);
 			break;			
 		default:
+			content_type = gedit_document_get_content_type (doc);
 			mime_type = gedit_document_get_mime_type (doc);
-			mime_description = g_content_type_get_description (mime_type);
+			content_description = g_content_type_get_description (content_type);
 
-			if (mime_description == NULL)
-				mime_full_description = g_strdup (mime_type);
+			if (content_description == NULL)
+				content_full_description = g_strdup (mime_type);
 			else
-				mime_full_description = g_strdup_printf ("%s (%s)", 
-						mime_description, mime_type);
+				content_full_description = g_strdup_printf ("%s (%s)", 
+						content_description, mime_type);
 
-			g_free (mime_description);
+			g_free (content_description);
 			g_free (mime_type);
 
 			enc = gedit_document_get_encoding (doc);
@@ -1761,15 +1763,15 @@ _gedit_tab_get_tooltips	(GeditTab *tab)
 						        "<b>%s</b> %s\n"
 						        "<b>%s</b> %s",
 						        _("Name:"), ruri,
-						        _("MIME Type:"), mime_full_description,
+						        _("MIME Type:"), content_full_description,
 						        _("Encoding:"), encoding);
 
 			g_free (encoding);
-			g_free (mime_full_description);
+			g_free (content_full_description);
 
 			break;
 	}
-	
+
 	g_free (ruri);	
 	g_free (ruri_markup);
 	

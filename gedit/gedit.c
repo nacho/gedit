@@ -48,6 +48,7 @@
 #include "gedit-app.h"
 #include "gedit-commands.h"
 #include "gedit-debug.h"
+#include "gedit-dirs.h"
 #include "gedit-encodings.h"
 #include "gedit-metadata-manager.h"
 #include "gedit-plugins-engine.h"
@@ -56,12 +57,24 @@
 #include "gedit-utils.h"
 #include "gedit-window.h"
 
-#include "bacon-message-connection.h"
 #include "eggsmclient.h"
 #include "eggdesktopfile.h"
 
+#ifdef G_OS_WIN32
+#define SAVE_DATADIR DATADIR
+#undef DATADIR
+#include <windows.h>
+#define DATADIR SAVE_DATADIR
+#undef SAVE_DATADIR
+#endif
+
 static guint32 startup_timestamp = 0;
+
+#ifndef G_OS_WIN32
+#include "bacon-message-connection.h"
+
 static BaconMessageConnection *connection;
+#endif
 
 static void
 show_version_and_quit (void)
@@ -207,6 +220,7 @@ display_open_if_needed (const gchar *name)
 }
 
 /* serverside */
+#ifndef G_OS_WIN32
 static void
 on_message_received (const char *message,
 		     gpointer    data)
@@ -456,6 +470,37 @@ send_bacon_message (void)
 
 	g_string_free (command, TRUE);
 }
+#endif /* G_OS_WIN32 */
+
+#ifdef G_OS_WIN32
+static void
+setup_path (void)
+{
+	/* Set PATH to include the gedit executable's folder */
+	wchar_t exe_filename[MAX_PATH];
+	wchar_t *p;
+	gchar *exe_folder_utf8;
+	gchar *path;
+	
+	GetModuleFileNameW (NULL, exe_filename, G_N_ELEMENTS (exe_filename)); 
+	
+	p = wcsrchr (exe_filename, L'\\');
+	g_assert (p != NULL);
+	
+	*p = L'\0';
+	exe_folder_utf8 = g_utf16_to_utf8 (exe_filename, -1, NULL, NULL, NULL);
+	
+	path = g_build_path (";",
+			     exe_folder_utf8,
+			     g_getenv ("PATH"),
+			     NULL);
+	if (!g_setenv ("PATH", path, TRUE))
+		g_warning ("Could not set PATH for gedit");
+	
+	g_free (exe_folder_utf8);
+	g_free (path);
+}
+#endif
 
 int
 main (int argc, char *argv[])
@@ -466,6 +511,8 @@ main (int argc, char *argv[])
 	GeditApp *app;
 	gboolean restored = FALSE;
 	GError *error = NULL;
+	gchar *dir;
+	gchar *icon_dir;
 
 	/* Init glib threads asap */
 	g_thread_init (NULL);
@@ -476,7 +523,9 @@ main (int argc, char *argv[])
 	
 	setlocale (LC_ALL, "");
 
-	bindtextdomain (GETTEXT_PACKAGE, GEDIT_LOCALEDIR);
+	dir = gedit_dirs_get_gedit_locale_dir ();
+	bindtextdomain (GETTEXT_PACKAGE, dir);
+	g_free (dir);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
@@ -487,6 +536,10 @@ main (int argc, char *argv[])
 	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
 	g_option_context_add_group (context, gtk_get_option_group (FALSE));
 	g_option_context_add_group (context, egg_sm_client_get_option_group ());
+
+#ifdef G_OS_WIN32
+	setup_path ();
+#endif
 
 	gtk_init (&argc, &argv);
 
@@ -500,6 +553,7 @@ main (int argc, char *argv[])
 
 	g_option_context_free (context);
 
+#ifndef G_OS_WIN32
 	gedit_debug_message (DEBUG_APP, "Create bacon connection");
 
 	connection = bacon_message_connection_new ("gedit");
@@ -536,15 +590,27 @@ main (int argc, char *argv[])
 	{
 		g_warning ("Cannot create the 'gedit' connection.");
 	}
+#endif
 
 	gedit_debug_message (DEBUG_APP, "Set icon");
 	
+	dir = gedit_dirs_get_gedit_data_dir ();
+	icon_dir = g_build_filename (dir,
+				     "icons",
+				     NULL);
+	g_free (dir);
+	
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
-					   GEDIT_ICONDIR);
+					   icon_dir);
+	g_free (icon_dir);
 
+#if !defined PLATFORM_OSX && !defined G_OS_WIN32
 	/* Set the associated .desktop file */
-#ifndef PLATFORM_OSX
 	egg_set_desktop_file (DATADIR "/applications/gedit.desktop");
+#else
+	/* manually set name and icon */
+	g_set_application_name("gedit");
+	gtk_window_set_default_icon_name ("accessories-text-editor");
 #endif
 
 	/* Load user preferences */
@@ -607,7 +673,9 @@ main (int argc, char *argv[])
 	gedit_debug_message (DEBUG_APP, "Start gtk-main");		
 	gtk_main();
 
+#ifndef G_OS_WIN32
 	bacon_message_connection_free (connection);
+#endif
 
 	/* We kept the original engine reference here. So let's unref it to
 	 * finalize it properly. 

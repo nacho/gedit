@@ -364,9 +364,11 @@ gedit_document_loader_new (GeditDocument       *doc,
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 
+#ifndef G_OS_WIN32
 	if (gedit_utils_uri_has_file_scheme (uri))
 		loader_type = GEDIT_TYPE_MMAP_DOCUMENT_LOADER;
 	else
+#endif
 		loader_type = GEDIT_TYPE_GIO_DOCUMENT_LOADER;
 
 	loader = GEDIT_DOCUMENT_LOADER (g_object_new (loader_type,

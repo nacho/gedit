@@ -40,6 +40,7 @@
 #include "gedit-commands.h"
 #include "gedit-debug.h"
 #include "gedit-help.h"
+#include "gedit-dirs.h"
 
 void
 _gedit_cmd_help_contents (GtkAction   *action,
@@ -81,11 +82,19 @@ _gedit_cmd_help_about (GtkAction   *action,
 		   "GNOME Desktop");
 
 	GdkPixbuf *logo;
+	gchar *data_dir;
+	gchar *logo_file;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	logo = gdk_pixbuf_new_from_file (GEDIT_DATADIR "/logo/gedit-logo.png",
-					 NULL);
+	data_dir = gedit_dirs_get_gedit_data_dir ();
+	logo_file = g_build_filename (data_dir,
+				      "logo",
+				      "gedit-logo.png",
+				      NULL);
+	g_free (data_dir);
+	logo = gdk_pixbuf_new_from_file (logo_file, NULL);
+	g_free (logo_file);
 
 	gtk_show_about_dialog (GTK_WINDOW (window),
 			       "program-name", "gedit",

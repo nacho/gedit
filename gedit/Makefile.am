@@ -13,12 +13,7 @@ INCLUDES =								\
 	$(WARN_CFLAGS)							\
 	$(DISABLE_DEPRECATED_CFLAGS)					\
 	-DDATADIR=\""$(datadir)"\"					\
-	-DGEDIT_DATADIR=\""$(datadir)/gedit-2"\"			\
-	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"		\
-	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/ui/"\"			\
-	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit-2/plugins"\"		\
-	-DGEDIT_LOADERDIR=\""$(libdir)/gedit-2/plugin-loaders"\"	\
-	-DGEDIT_ICONDIR=\""$(datadir)/gedit-2/icons"\"
+	-DLIBDIR=\""$(libdir)"\"					
 
 gedit_SOURCES = \
 	gedit.c
@@ -26,7 +21,7 @@ gedit_SOURCES = \
 gedit_LDADD = libgedit.la $(GEDIT_LIBS) $(EGG_SMCLIENT_LIBS)
  
 if PLATFORM_WIN32
-gedit_LDFLAGS = -Wl,--export-all-symbols -Wl,--out-implib,libgedit-$(GEDIT_API_VERSION).a
+gedit_LDFLAGS = -Wl,--export-all-symbols -mwindows -Wl,--out-implib,libgedit-$(GEDIT_API_VERSION).a
 else
 gedit_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 endif
@@ -76,7 +71,8 @@ NOINST_H_FILES =			\
 	gedit-prefs-manager-private.h	\
 	sexy-icon-entry.h		\
 	gedittextregion.h		\
-	gedit-session.h
+	gedit-session.h			\
+	gedit-dirs.h
 
 INST_H_FILES =				\
 	gedit-app.h			\
@@ -107,9 +103,19 @@ headerdir = $(prefix)/include/gedit-@GEDIT_API_VERSION@/gedit
 header_DATA = 				\
 	$(INST_H_FILES)	
 
+if !PLATFORM_WIN32
+POSIXIO_FILES = 			\
+	gedit-mmap-document-loader.c	\
+	gedit-local-document-saver.c	
+else
+POSIXIO_FILES =
+endif
+
+
 libgedit_la_SOURCES = 			\
 	$(BUILT_SOURCES)		\
 	$(BACON_FILES)			\
+	$(POSIXIO_FILES)		\
 	gedit-app.c			\
 	gedit-commands-documents.c	\
 	gedit-commands-edit.c		\
@@ -120,12 +126,11 @@ libgedit_la_SOURCES = 			\
 	gedit-commands-view.c		\
 	gedit-convert.c			\
 	gedit-debug.c			\
+	gedit-dirs.c			\
 	gedit-document.c 		\
 	gedit-document-loader.c		\
-	gedit-mmap-document-loader.c	\
 	gedit-gio-document-loader.c	\
 	gedit-document-saver.c		\
-	gedit-local-document-saver.c	\
 	gedit-gio-document-saver.c	\
 	gedit-documents-panel.c		\
 	gedit-encodings.c		\
@@ -194,15 +199,20 @@ dist-hook:
 	cd $(distdir); rm -f $(BUILT_SOURCES)
 
 install-exec-hook:
-	rm -f $(DESTDIR)$(bindir)/gnome-text-editor
-	ln -s gedit $(DESTDIR)$(bindir)/gnome-text-editor
 if PLATFORM_WIN32
 	$(mkinstalldirs) "$(DESTDIR)$(libdir)"
 	$(INSTALL_DATA) libgedit-$(GEDIT_API_VERSION).a "$(DESTDIR)$(libdir)"
+else
+	rm -f $(DESTDIR)$(bindir)/gnome-text-editor
+	ln -s gedit $(DESTDIR)$(bindir)/gnome-text-editor
 endif
 
+if !PLATFORM_WIN32
 BACON_DIR=$(srcdir)/../../libbacon/src/
 BACON_FILES=bacon-message-connection.h bacon-message-connection.c
 
 regenerate-built-sources:
 	BACONFILES="$(BACON_FILES)" BACONDIR="$(BACON_DIR)" $(top_srcdir)/gedit/update-from-bacon.sh
+else
+BACON_DIR=
+endif

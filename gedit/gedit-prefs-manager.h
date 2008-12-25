@@ -131,6 +131,10 @@
 /* White list of writable gnome-vfs methods */
 #define GPM_WRITABLE_VFS_SCHEMES 	GPM_SAVE_DIR "/writable_vfs_schemes"
 
+/* Plugins */
+#define GPM_PLUGINS_DIR			GEDIT_BASE_KEY "/plugins"
+#define GPM_ACTIVE_PLUGINS		GPM_PLUGINS_DIR "/active-plugins"
+
 /* Global Lockdown keys */
 #define GPM_LOCKDOWN_DIR		"/desktop/gnome/lockdown"
 #define GPM_LOCKDOWN_COMMAND_LINE	GPM_LOCKDOWN_DIR "/disable_command_line"
@@ -269,7 +273,6 @@ gboolean		 gedit_prefs_manager_get_insert_spaces	 	(void);
 void			 gedit_prefs_manager_set_insert_spaces	 	(gboolean ai);
 gboolean		 gedit_prefs_manager_insert_spaces_can_set 	(void);
 
-
 /* Auto indent */
 gboolean		 gedit_prefs_manager_get_auto_indent	 	(void);
 void			 gedit_prefs_manager_set_auto_indent	 	(gboolean ai);
@@ -400,6 +403,11 @@ gboolean		 gedit_prefs_manager_enable_search_highlighting_can_set (void);
 gchar			*gedit_prefs_manager_get_source_style_scheme	(void);
 void			 gedit_prefs_manager_set_source_style_scheme	(const gchar *scheme);
 gboolean		 gedit_prefs_manager_source_style_scheme_can_set(void);
+
+/* Plugins */
+GSList			*gedit_prefs_manager_get_active_plugins		(void);
+void			 gedit_prefs_manager_set_active_plugins		(const GSList *plugins);
+gboolean 		 gedit_prefs_manager_active_plugins_can_set	(void);
 
 /* Global lockdown */
 GeditLockdownMask	 gedit_prefs_manager_get_lockdown			(void);

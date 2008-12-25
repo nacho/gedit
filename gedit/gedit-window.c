@@ -54,6 +54,7 @@
 #include "gedit-documents-panel.h"
 #include "gedit-plugins-engine.h"
 #include "gedit-enum-types.h"
+#include "gedit-dirs.h"
 
 #define LANGUAGE_NONE (const gchar *)"LangNone"
 #define GEDIT_UIFILE "gedit-ui.xml"
@@ -1313,6 +1314,7 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	GtkRecentFilter *filter;
 	GError *error = NULL;
 	GeditLockdownMask lockdown;
+	gchar *ui_file;
 
 	gedit_debug (DEBUG_WINDOW);
 
@@ -1378,7 +1380,9 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	window->priv->quit_action_group = action_group;
 
 	/* now load the UI definition */
-	gtk_ui_manager_add_ui_from_file (manager, GEDIT_UIDIR GEDIT_UIFILE, &error);
+	ui_file = gedit_dirs_get_ui_file (GEDIT_UIFILE);
+	gtk_ui_manager_add_ui_from_file (manager, ui_file, &error);
+	g_free (ui_file);
 	if (error != NULL)
 	{
 		g_warning ("Could not merge %s: %s", GEDIT_UIFILE, error->message);

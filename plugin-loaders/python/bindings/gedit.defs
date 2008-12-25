@@ -244,6 +244,12 @@
   (return-type "gchar*")
 )
 
+(define-method get_content_type
+  (of-object "GeditDocument")
+  (c-name "gedit_document_get_content_type")
+  (return-type "gchar*")
+)
+
 (define-method get_mime_type
   (of-object "GeditDocument")
   (c-name "gedit_document_get_mime_type")
@@ -985,15 +991,6 @@
   (parameters
     '("GtkSourceLanguageManager*" "lm")
     '("gboolean" "include_hidden")
-  )
-)
-
-(define-function language_manager_get_language_from_mime_type
-  (c-name "gedit_language_manager_get_language_from_mime_type")
-  (return-type "GtkSourceLanguage*")
-  (parameters
-    '("GtkSourceLanguageManager*" "lm")
-    '("const-gchar*" "mime_type")
   )
 )
 

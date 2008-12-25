@@ -78,7 +78,6 @@ const GList	*gedit_plugins_engine_get_plugin_list 	(GeditPluginsEngine *engine);
 GeditPluginInfo	*gedit_plugins_engine_get_plugin_info	(GeditPluginsEngine *engine,
 							 const gchar        *name);
 
-
 /* plugin load and unloading (overall, for all windows) */
 gboolean 	 gedit_plugins_engine_activate_plugin 	(GeditPluginsEngine *engine,
 							 GeditPluginInfo    *info);
@@ -96,6 +95,10 @@ void 		 gedit_plugins_engine_deactivate_plugins (GeditPluginsEngine *engine,
 							  GeditWindow        *window);
 void		 gedit_plugins_engine_update_plugins_ui  (GeditPluginsEngine *engine,
 							  GeditWindow        *window);
+
+/* private for gconf notification */
+void		 gedit_plugins_engine_active_plugins_changed
+							(GeditPluginsEngine *engine);
 
 G_END_DECLS
 

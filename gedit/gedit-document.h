@@ -162,6 +162,9 @@ gchar		*gedit_document_get_uri_for_display
 gchar		*gedit_document_get_short_name_for_display
 					 	(GeditDocument       *doc);
 
+gchar		*gedit_document_get_content_type
+					 	(GeditDocument       *doc);
+
 gchar		*gedit_document_get_mime_type 	(GeditDocument       *doc);
 
 gboolean	 gedit_document_get_readonly 	(GeditDocument       *doc);
