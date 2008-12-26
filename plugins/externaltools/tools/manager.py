@@ -24,7 +24,7 @@ import gtksourceview2 as gsv
 import os.path
 from library import *
 from functions import *
-import md5
+import hashlib
 
 class Manager(object):
     UI_FILE = os.path.join(os.path.dirname(__file__), "tools.ui")
@@ -119,7 +119,7 @@ class Manager(object):
             return None, None
 
     def compute_hash(self, string):
-        return md5.md5(string).hexdigest()
+        return hashlib.md5(string).hexdigest()
 
     def save_current_tool(self):
         if self.current_node is None:
