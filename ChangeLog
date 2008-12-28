@@ -1,5 +1,11 @@
 2008-12-28  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* plugin-loaders/python/bindings/gedit.override: Added custom
+	wrapper for gedit_statusbar_flash_message to avoid formatting
+	security problems (fixes #565778)
+
+2008-12-28  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* plugins/filebrowser/gedit-file-browser-store.c: Fix a problem
 	with fill_model where the tree path might have been altered and
 	is thus then invalid. Fixes bug #556410.

@@ -440,3 +440,20 @@ _wrap_gedit_debug(PyObject *self, PyObject *args, PyObject *kwargs)
     return Py_None;
 }
 %%
+override gedit_statusbar_flash_message kwargs
+static PyObject *
+_wrap_gedit_statusbar_flash_message(PyGObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "context_id", "message", NULL };
+    int context_id;
+    char *message;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,"is:GeditStatusbar.flash_message", kwlist, &context_id, &message))
+        return NULL;
+   
+    gedit_statusbar_flash_message(GEDIT_STATUSBAR(self->obj), context_id, "%s", message);
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+%%
