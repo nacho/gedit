@@ -64,13 +64,19 @@ typedef struct
 
 typedef struct
 {
+	GeditPlugin *plugin;
+	GeditWindow *window;
+} ActionData;
+
+typedef struct
+{
 	gboolean ignore_case;
 	gboolean reverse_order;
 	gboolean remove_duplicates;
 	gint starting_column;
 } SortInfo;
 
-static void sort_cb (GtkAction *action, GeditWindow *window);
+static void sort_cb (GtkAction *action, ActionData *action_data);
 static void sort_real (SortDialog *dialog);
 
 static const GtkActionEntry action_entries[] =
@@ -89,7 +95,7 @@ sort_dialog_destroy (GtkObject *obj,
 {
 	gedit_debug (DEBUG_PLUGINS);
 
-	g_free (dialog_pointer);
+	g_slice_free (SortDialog, dialog_pointer);
 }
 
 static void
@@ -119,17 +125,22 @@ sort_dialog_response_handler (GtkDialog  *widget,
 }
 
 static SortDialog *
-get_sort_dialog (GtkWindow *parent)
+get_sort_dialog (ActionData *action_data)
 {
 	SortDialog *dialog;
 	GtkWidget *error_widget;
 	gboolean ret;
+	gchar *data_dir;
+	gchar *ui_file;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	dialog = g_new (SortDialog, 1);
+	dialog = g_slice_new (SortDialog);
 
-	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "sort.ui",
+	data_dir = gedit_plugin_get_data_dir (action_data->plugin);
+	ui_file = g_build_filename (data_dir, "sort.ui", NULL);
+	g_free (data_dir);
+	ret = gedit_utils_get_ui_objects (ui_file,
 					  NULL,
 					  &error_widget,
 					  "sort_dialog", &dialog->dialog,
@@ -138,13 +149,15 @@ get_sort_dialog (GtkWindow *parent)
 					  "ignore_case_checkbutton", &dialog->ignore_case_checkbutton,
 					  "remove_dups_checkbutton", &dialog->remove_dups_checkbutton,
 					  NULL);
-
+	g_free (ui_file);
+	
 	if (!ret)
 	{
 		const gchar *err_message;
 
 		err_message = gtk_label_get_label (GTK_LABEL (error_widget));
-		gedit_warning (parent, "%s", err_message);
+		gedit_warning (GTK_WINDOW (action_data->window),
+			       "%s", err_message);
 
 		g_free (dialog);
 		gtk_widget_destroy (error_widget);
@@ -170,7 +183,7 @@ get_sort_dialog (GtkWindow *parent)
 
 static void
 sort_cb (GtkAction  *action,
-	 GeditWindow *window)
+	 ActionData *action_data)
 {
 	GeditDocument *doc;
 	GtkWindowGroup *wg;
@@ -178,20 +191,20 @@ sort_cb (GtkAction  *action,
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	doc = gedit_window_get_active_document (window);
+	doc = gedit_window_get_active_document (action_data->window);
 	g_return_if_fail (doc != NULL);
 
-	dialog = get_sort_dialog (GTK_WINDOW (window));
+	dialog = get_sort_dialog (action_data);
 	g_return_if_fail (dialog != NULL);
 
-	wg = gedit_window_get_group (window);
+	wg = gedit_window_get_group (action_data->window);
 	gtk_window_group_add_window (wg,
 				     GTK_WINDOW (dialog->dialog));
 
 	dialog->doc = doc;
 
 	gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
-				      GTK_WINDOW (window));
+				      GTK_WINDOW (action_data->window));
 				      
 	gtk_window_set_modal (GTK_WINDOW (dialog->dialog),
 			      TRUE);
@@ -412,7 +425,15 @@ free_window_data (WindowData *data)
 	g_return_if_fail (data != NULL);
 
 	g_object_unref (data->ui_action_group);
-	g_free (data);
+	g_slice_free (WindowData, data);
+}
+
+static void
+free_action_data (ActionData *data)
+{
+	g_return_if_fail (data != NULL);
+
+	g_slice_free (ActionData, data);
 }
 
 static void
@@ -436,20 +457,25 @@ impl_activate (GeditPlugin *plugin,
 {
 	GtkUIManager *manager;
 	WindowData *data;
+	ActionData *action_data;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	data = g_new (WindowData, 1);
+	data = g_slice_new (WindowData);
+	action_data = g_slice_new (ActionData);
+	action_data->window = window;
+	action_data->plugin = plugin;
 
 	manager = gedit_window_get_ui_manager (window);
 
 	data->ui_action_group = gtk_action_group_new ("GeditSortPluginActions");
 	gtk_action_group_set_translation_domain (data->ui_action_group, 
 						 GETTEXT_PACKAGE);
-	gtk_action_group_add_actions (data->ui_action_group,
-				      action_entries,
-				      G_N_ELEMENTS (action_entries),
-				      window);
+	gtk_action_group_add_actions_full (data->ui_action_group,
+					   action_entries,
+					   G_N_ELEMENTS (action_entries),
+					   action_data,
+					   (GDestroyNotify) free_action_data);
 
 	gtk_ui_manager_insert_action_group (manager,
 					    data->ui_action_group,
