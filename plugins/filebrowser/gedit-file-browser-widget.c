@@ -45,7 +45,7 @@
 						      GEDIT_TYPE_FILE_BROWSER_WIDGET, \
 						      GeditFileBrowserWidgetPrivate))
 
-#define XML_UI_FILE GEDIT_UIDIR "gedit-file-browser-widget-ui.xml"
+#define XML_UI_FILE "gedit-file-browser-widget-ui.xml"
 #define LOCATION_DATA_KEY "gedit-file-browser-widget-location"
 
 enum 
@@ -828,7 +828,8 @@ static const GtkToggleActionEntry tree_actions_toggle[] =
 };
 
 static void
-create_toolbar (GeditFileBrowserWidget * obj)
+create_toolbar (GeditFileBrowserWidget * obj,
+		const gchar *data_dir)
 {
 	GtkUIManager *manager;
 	GError *error = NULL;
@@ -836,11 +837,15 @@ create_toolbar (GeditFileBrowserWidget * obj)
 	GtkWidget *toolbar;
 	GtkWidget *widget;
 	GtkAction *action;
+	gchar *ui_file;
 
 	manager = gtk_ui_manager_new ();
 	obj->priv->manager = manager;
 
-	gtk_ui_manager_add_ui_from_file (manager, XML_UI_FILE, &error);
+	ui_file = g_build_filename (data_dir, XML_UI_FILE, NULL);
+	gtk_ui_manager_add_ui_from_file (manager, ui_file, &error);
+
+	g_free (ui_file);
 
 	if (error != NULL) {
 		g_warning ("Error in adding ui from file %s: %s",
@@ -962,6 +967,8 @@ create_toolbar (GeditFileBrowserWidget * obj)
 
 	gtk_box_pack_start (GTK_BOX (obj), toolbar, FALSE, FALSE, 0);
 	gtk_widget_show (toolbar);
+	
+	set_enable_delete (obj, obj->priv->enable_delete);
 }
 
 static void 
@@ -970,6 +977,9 @@ set_enable_delete (GeditFileBrowserWidget *obj,
 {
 	GtkAction *action;
 	obj->priv->enable_delete = enable;
+	
+	if (obj->priv->action_group_selection == NULL)
+		return;
 	
 	action =
 	    gtk_action_group_get_action (obj->priv->action_group_selection,
@@ -1156,14 +1166,7 @@ gedit_file_browser_widget_init (GeditFileBrowserWidget * obj)
 			                                   g_object_unref,
 			                                   free_name_icon);
 
-	create_toolbar (obj);
-	create_combo (obj);
-	create_tree (obj);
-	create_filter (obj);
-
 	gtk_box_set_spacing (GTK_BOX (obj), 3);
-
-	gedit_file_browser_widget_show_bookmarks (obj);
 }
 
 /* Private */
@@ -1670,10 +1673,17 @@ set_filter_pattern_real (GeditFileBrowserWidget * obj,
 /* Public */
 
 GtkWidget *
-gedit_file_browser_widget_new ()
+gedit_file_browser_widget_new (const gchar *data_dir)
 {
 	GeditFileBrowserWidget *obj =
 	    g_object_new (GEDIT_TYPE_FILE_BROWSER_WIDGET, NULL);
+
+	create_toolbar (obj, data_dir);
+	create_combo (obj);
+	create_tree (obj);
+	create_filter (obj);
+
+	gedit_file_browser_widget_show_bookmarks (obj);
 
 	return GTK_WIDGET (obj);
 }

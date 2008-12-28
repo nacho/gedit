@@ -7,8 +7,7 @@ INCLUDES = \
 	$(GEDIT_CFLAGS) 						\
 	$(WARN_CFLAGS)							\
 	$(DISABLE_DEPRECATED_CFLAGS)					\
-	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 	\
-	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/plugins/filebrowser/"\"
+	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 
 
 BUILT_SOURCES = \
 	gedit-file-browser-enum-types.h		\

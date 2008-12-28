@@ -73,7 +73,7 @@ struct _GeditFileBrowserWidgetClass
 GType gedit_file_browser_widget_get_type            (void) G_GNUC_CONST;
 GType gedit_file_browser_widget_register_type       (GTypeModule * module);
 
-GtkWidget *gedit_file_browser_widget_new            (void);
+GtkWidget *gedit_file_browser_widget_new            (const gchar *data_dir);
 
 void gedit_file_browser_widget_show_bookmarks       (GeditFileBrowserWidget * obj);
 void gedit_file_browser_widget_set_root             (GeditFileBrowserWidget * obj,
