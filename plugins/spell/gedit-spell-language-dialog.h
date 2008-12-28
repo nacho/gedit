@@ -55,7 +55,8 @@ struct _GeditSpellLanguageDialogClass
 GType		 gedit_spell_language_dialog_get_type		(void) G_GNUC_CONST;
 
 GtkWidget	*gedit_spell_language_dialog_new		(GtkWindow			 *parent,
-								 const GeditSpellCheckerLanguage *cur_lang);
+								 const GeditSpellCheckerLanguage *cur_lang,
+								 const gchar *data_dir);
 
 const GeditSpellCheckerLanguage *
 		 gedit_spell_language_get_selected_language	(GeditSpellLanguageDialog *dlg);

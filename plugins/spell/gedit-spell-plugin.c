@@ -57,8 +57,14 @@ typedef struct
 	guint           message_cid;
 } WindowData;
 
-static void	spell_cb	(GtkAction *action, GeditWindow *window);
-static void	set_language_cb	(GtkAction *action, GeditWindow *window);
+typedef struct
+{
+	GeditPlugin *plugin;
+	GeditWindow *window;
+} ActionData;
+
+static void	spell_cb	(GtkAction *action, ActionData *action_data);
+static void	set_language_cb	(GtkAction *action, ActionData *action_data);
 static void	auto_spell_cb	(GtkAction *action, GeditWindow *window);
 
 /* UI actions. */
@@ -676,17 +682,18 @@ language_dialog_response (GtkDialog         *dlg,
 
 static void
 set_language_cb (GtkAction   *action,
-		 GeditWindow *window)
+		 ActionData *action_data)
 {
 	GeditDocument *doc;
 	GeditSpellChecker *spell;
 	const GeditSpellCheckerLanguage *lang;
 	GtkWidget *dlg;
 	GtkWindowGroup *wg;
+	gchar *data_dir;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	doc = gedit_window_get_active_document (window);
+	doc = gedit_window_get_active_document (action_data->window);
 	g_return_if_fail (doc != NULL);
 
 	spell = get_spell_checker_from_document (doc);
@@ -694,9 +701,13 @@ set_language_cb (GtkAction   *action,
 
 	lang = gedit_spell_checker_get_language (spell);
 
-	dlg = gedit_spell_language_dialog_new (GTK_WINDOW (window), lang);
+	data_dir = gedit_plugin_get_data_dir (action_data->plugin);
+	dlg = gedit_spell_language_dialog_new (GTK_WINDOW (action_data->window),
+					       lang,
+					       data_dir);
+	g_free (data_dir);
 
-	wg = gedit_window_get_group (window);
+	wg = gedit_window_get_group (action_data->window);
 
 	gtk_window_group_add_window (wg, GTK_WINDOW (dlg));
 
@@ -712,7 +723,7 @@ set_language_cb (GtkAction   *action,
 
 static void
 spell_cb (GtkAction   *action,
-	  GeditWindow *window)
+	  ActionData *action_data)
 {
 	GeditView *view;
 	GeditDocument *doc;
@@ -722,10 +733,11 @@ spell_cb (GtkAction   *action,
 	GtkTextIter sel_start, sel_end;
 	gchar *word;
 	gboolean sel = FALSE;
+	gchar *data_dir;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	view = gedit_window_get_active_view (window);
+	view = gedit_window_get_active_view (action_data->window);
 	g_return_if_fail (view != NULL);
 
 	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
@@ -739,10 +751,11 @@ spell_cb (GtkAction   *action,
 		WindowData *data;
 		GtkWidget *statusbar;
 
-		data = (WindowData *) g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
+		data = (WindowData *) g_object_get_data (G_OBJECT (action_data->window),
+							 WINDOW_DATA_KEY);
 		g_return_if_fail (data != NULL);
 
-		statusbar = gedit_window_get_statusbar (window);
+		statusbar = gedit_window_get_statusbar (action_data->window);
 		gedit_statusbar_flash_message (GEDIT_STATUSBAR (statusbar),
 					       data->message_cid,
 					       _("The document is empty."));
@@ -771,10 +784,11 @@ spell_cb (GtkAction   *action,
 		WindowData *data;
 		GtkWidget *statusbar;
 
-		data = (WindowData *) g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
+		data = (WindowData *) g_object_get_data (G_OBJECT (action_data->window),
+							 WINDOW_DATA_KEY);
 		g_return_if_fail (data != NULL);
 
-		statusbar = gedit_window_get_statusbar (window);
+		statusbar = gedit_window_get_statusbar (action_data->window);
 		gedit_statusbar_flash_message (GEDIT_STATUSBAR (statusbar),
 					       data->message_cid,
 					       _("No misspelled words"));
@@ -782,9 +796,12 @@ spell_cb (GtkAction   *action,
 		return;
 	}
 
-	dlg = gedit_spell_checker_dialog_new_from_spell_checker (spell);
+	data_dir = gedit_plugin_get_data_dir (action_data->plugin);
+	dlg = gedit_spell_checker_dialog_new_from_spell_checker (spell, data_dir);
+	g_free (data_dir);
 	gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
-	gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (window));
+	gtk_window_set_transient_for (GTK_WINDOW (dlg),
+				      GTK_WINDOW (action_data->window));
 
 	g_signal_connect (dlg, "ignore", G_CALLBACK (ignore_cb), view);
 	g_signal_connect (dlg, "ignore_all", G_CALLBACK (ignore_cb), view);
@@ -854,7 +871,15 @@ free_window_data (WindowData *data)
 	g_return_if_fail (data != NULL);
 
 	g_object_unref (data->action_group);
-	g_free (data);
+	g_slice_free (WindowData, data);
+}
+
+static void
+free_action_data (gpointer data)
+{
+	g_return_if_fail (data != NULL);
+
+	g_slice_free (ActionData, data);
 }
 
 static void
@@ -887,20 +912,25 @@ impl_activate (GeditPlugin *plugin,
 {
 	GtkUIManager *manager;
 	WindowData *data;
+	ActionData *action_data;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	data = g_new (WindowData, 1);
+	data = g_slice_new (WindowData);
+	action_data = g_slice_new (ActionData);
+	action_data->plugin = plugin;
+	action_data->window = window;
 
 	manager = gedit_window_get_ui_manager (window);
 
 	data->action_group = gtk_action_group_new ("GeditSpellPluginActions");
 	gtk_action_group_set_translation_domain (data->action_group, 
 						 GETTEXT_PACKAGE);
-	gtk_action_group_add_actions (data->action_group, 
-				      action_entries,
-				      G_N_ELEMENTS (action_entries), 
-				      window);
+	gtk_action_group_add_actions_full (data->action_group,
+					   action_entries,
+					   G_N_ELEMENTS (action_entries),
+					   action_data,
+					   (GDestroyNotify) free_action_data);
 	gtk_action_group_add_toggle_actions (data->action_group, 
 					     toggle_action_entries,
 					     G_N_ELEMENTS (toggle_action_entries),

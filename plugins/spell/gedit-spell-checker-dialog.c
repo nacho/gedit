@@ -215,7 +215,8 @@ gedit_spell_checker_dialog_class_init (GeditSpellCheckerDialogClass * klass)
 }
 
 static void
-gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
+create_dialog (GeditSpellCheckerDialog *dlg,
+	       const gchar *data_dir)
 {
 	GtkWidget *error_widget;
 	GtkWidget *content;
@@ -223,6 +224,7 @@ gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 	GtkCellRenderer *cell;
 	GtkTreeSelection *selection;
 	gboolean ret;
+	gchar *ui_file;
 	gchar *root_objects[] = {
 		"content",
 		NULL
@@ -233,7 +235,8 @@ gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 	dlg->spell_checker = NULL;
 	dlg->misspelled_word = NULL;
 
-	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "spell-checker.ui",
+	ui_file = g_build_filename (data_dir, "spell-checker.ui", NULL);
+	ret = gedit_utils_get_ui_objects (ui_file,
 		root_objects,
 		&error_widget,
 
@@ -250,7 +253,8 @@ gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 		"suggestions_list", &dlg->suggestions_list,
 		"language_label", &dlg->language_label,
 		NULL);
-
+	g_free (ui_file);
+	
 	if (!ret)
 	{
 		gtk_widget_show (error_widget);
@@ -330,6 +334,11 @@ gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 }
 
 static void
+gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
+{
+}
+
+static void
 gedit_spell_checker_dialog_destroy (GtkObject *object)
 {
 	GeditSpellCheckerDialog *dlg = GEDIT_SPELL_CHECKER_DIALOG (object);
@@ -357,7 +366,7 @@ gedit_spell_checker_dialog_finalize (GObject *object)
 */
 
 GtkWidget *
-gedit_spell_checker_dialog_new (void)
+gedit_spell_checker_dialog_new (const gchar *data_dir)
 {
 	GeditSpellCheckerDialog *dlg;
 
@@ -365,12 +374,15 @@ gedit_spell_checker_dialog_new (void)
 			g_object_new (GEDIT_TYPE_SPELL_CHECKER_DIALOG, NULL));
 
 	g_return_val_if_fail (dlg != NULL, NULL);
+	
+	create_dialog (dlg, data_dir);
 
 	return GTK_WIDGET (dlg);
 }
 
 GtkWidget *
-gedit_spell_checker_dialog_new_from_spell_checker (GeditSpellChecker *spell)
+gedit_spell_checker_dialog_new_from_spell_checker (GeditSpellChecker *spell,
+						   const gchar *data_dir)
 {
 	GeditSpellCheckerDialog *dlg;
 
@@ -380,6 +392,8 @@ gedit_spell_checker_dialog_new_from_spell_checker (GeditSpellChecker *spell)
 			g_object_new (GEDIT_TYPE_SPELL_CHECKER_DIALOG, NULL));
 
 	g_return_val_if_fail (dlg != NULL, NULL);
+	
+	create_dialog (dlg, data_dir);
 
 	gedit_spell_checker_dialog_set_spell_checker (dlg, spell);
 

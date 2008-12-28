@@ -12,9 +12,7 @@ INCLUDES = 							\
 	$(ENCHANT_CFLAGS)					\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
-	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 		\
-	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/plugins/spell/"\"
+	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	
 
 plugin_LTLIBRARIES = libspell.la
 

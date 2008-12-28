@@ -115,13 +115,15 @@ language_row_activated (GtkTreeView *tree_view,
 }
 
 static void
-gedit_spell_language_dialog_init (GeditSpellLanguageDialog *dlg)
+create_dialog (GeditSpellLanguageDialog *dlg,
+	       const gchar *data_dir)
 {
 	GtkWidget *error_widget;
 	GtkWidget *content;
 	gboolean ret;
 	GtkCellRenderer *cell;
 	GtkTreeViewColumn *column;
+	gchar *ui_file;
 	gchar *root_objects[] = {
 		"content",
 		NULL
@@ -152,13 +154,15 @@ gedit_spell_language_dialog_init (GeditSpellLanguageDialog *dlg)
 			  G_CALLBACK (dialog_response_handler),
 			  NULL);
 
-	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "languages-dialog.ui",
+	ui_file = g_build_filename (data_dir, "languages-dialog.ui", NULL);
+	ret = gedit_utils_get_ui_objects (ui_file,
 					  root_objects,	
 					  &error_widget,
 					  "content", &content,
 					  "languages_treeview", &dlg->languages_treeview,
 					  NULL);
-
+	g_free (ui_file);
+	
 	if (!ret)
 	{
 		gtk_widget_show (error_widget);
@@ -208,6 +212,12 @@ gedit_spell_language_dialog_init (GeditSpellLanguageDialog *dlg)
 }
 
 static void
+gedit_spell_language_dialog_init (GeditSpellLanguageDialog *dlg)
+{
+	
+}
+
+static void
 populate_language_list (GeditSpellLanguageDialog        *dlg,
 			const GeditSpellCheckerLanguage *cur_lang)
 {
@@ -249,13 +259,16 @@ populate_language_list (GeditSpellLanguageDialog        *dlg,
 
 GtkWidget *
 gedit_spell_language_dialog_new (GtkWindow                       *parent,
-				 const GeditSpellCheckerLanguage *cur_lang)
+				 const GeditSpellCheckerLanguage *cur_lang,
+				 const gchar *data_dir)
 {
 	GeditSpellLanguageDialog *dlg;
 
 	g_return_val_if_fail (GTK_IS_WINDOW (parent), NULL);
 
 	dlg = g_object_new (GEDIT_TYPE_SPELL_LANGUAGE_DIALOG, NULL);
+
+	create_dialog (dlg, data_dir);
 
 	populate_language_list (dlg, cur_lang);
 
