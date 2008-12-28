@@ -2371,7 +2371,7 @@ get_parent_files (GeditFileBrowserStore * model, GFile * file)
 
 static void
 model_fill (GeditFileBrowserStore * model, FileBrowserNode * node,
-	    GtkTreePath * path)
+	    GtkTreePath ** path)
 {
 	gboolean free_path = FALSE;
 	GtkTreeIter iter = {0,};
@@ -2380,19 +2380,19 @@ model_fill (GeditFileBrowserStore * model, FileBrowserNode * node,
 
 	if (node == NULL) {
 		node = model->priv->virtual_root;
-		path = gtk_tree_path_new ();
+		*path = gtk_tree_path_new ();
 		free_path = TRUE;
 	}
 
-	if (path == NULL) {
-		path =
+	if (*path == NULL) {
+		*path =
 		    gedit_file_browser_store_get_path_real (model, node);
 		free_path = TRUE;
 	}
 
 	if (!model_node_visibility (model, node)) {
 		if (free_path)
-			gtk_tree_path_free (path);
+			gtk_tree_path_free (*path);
 
 		return;
 	}
@@ -2401,12 +2401,12 @@ model_fill (GeditFileBrowserStore * model, FileBrowserNode * node,
 		/* Insert node */
 		iter.user_data = node;
 		
-		row_inserted(model, &path, &iter);
+		row_inserted(model, path, &iter);
 	}
 
 	if (NODE_IS_DIR (node)) {
 		/* Go to the first child */
-		gtk_tree_path_down (path);
+		gtk_tree_path_down (*path);
 
 		for (item = FILE_BROWSER_NODE_DIR (node)->children; item;
 		     item = item->next) {
@@ -2416,18 +2416,18 @@ model_fill (GeditFileBrowserStore * model, FileBrowserNode * node,
 				model_fill (model, child, path);
 
 				/* Increase path for next child */
-				gtk_tree_path_next (path);
+				gtk_tree_path_next (*path);
 			}
 		}
 
 		/* Move back up to node path */
-		gtk_tree_path_up (path);
+		gtk_tree_path_up (*path);
 	}
 	
 	model_check_dummy (model, node);
 
 	if (free_path)
-		gtk_tree_path_free (path);
+		gtk_tree_path_free (*path);
 }
 
 static void
@@ -2440,6 +2440,7 @@ set_virtual_root_from_node (GeditFileBrowserStore * model,
 	FileBrowserNodeDir *dir;
 	GSList *item;
 	GSList *copy;
+	GtkTreePath *empty = NULL;
 
 	prev = node;
 	next = prev->parent;
@@ -2504,7 +2505,7 @@ set_virtual_root_from_node (GeditFileBrowserStore * model,
 
 	/* Now finally, set the virtual root, and load it up! */
 	model->priv->virtual_root = node;
-	model_fill (model, NULL, NULL);
+	model_fill (model, NULL, &empty);
 
 	if (!NODE_LOADED (node))
 		model_load_directory (model, node);
