@@ -60,7 +60,7 @@ struct _Tag
 /* Note that the taglist is ref counted */
 extern TagList *taglist;
 
-TagList* create_taglist (void);
+TagList* create_taglist (const gchar *data_dir);
 
 void free_taglist (void);
 

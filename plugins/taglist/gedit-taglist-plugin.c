@@ -81,13 +81,17 @@ impl_activate (GeditPlugin *plugin,
 {
 	GeditPanel *side_panel;
 	GtkWidget *taglist_panel;
+	gchar *data_dir;
 	
 	gedit_debug (DEBUG_PLUGINS);
 	
 	g_return_if_fail (g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY) == NULL);
 	
 	side_panel = gedit_window_get_side_panel (window);
-	taglist_panel = gedit_taglist_plugin_panel_new (window);
+	
+	data_dir = gedit_plugin_get_data_dir (plugin);
+	taglist_panel = gedit_taglist_plugin_panel_new (window, data_dir);
+	g_free (data_dir);
 	
 	gedit_panel_add_item_with_stock_icon (side_panel, 
 					      taglist_panel, 

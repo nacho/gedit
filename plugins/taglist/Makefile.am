@@ -1,7 +1,7 @@
 # Tag list plugin
 plugindir = $(libdir)/gedit-2/plugins
 
-taglistdir = $(datadir)/gedit-2/taglist
+taglistdir = $(datadir)/gedit-2/plugins/taglist
 
 taglist_in_files = \
 	HTML.tags.xml.in	\
@@ -16,9 +16,7 @@ INCLUDES = 							\
 	$(GEDIT_CFLAGS) 					\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
-	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 		\
-	-DGEDIT_TAGLIST_DIR=\""$(taglistdir)/"\"
+	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
 
 plugin_LTLIBRARIES = libtaglist.la
 

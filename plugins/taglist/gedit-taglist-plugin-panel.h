@@ -81,7 +81,8 @@ GType		 gedit_taglist_plugin_panel_register_type	(GTypeModule *module);
 							
 GType 		 gedit_taglist_plugin_panel_get_type		(void) G_GNUC_CONST;
 
-GtkWidget	*gedit_taglist_plugin_panel_new 		(GeditWindow *window);
+GtkWidget	*gedit_taglist_plugin_panel_new 		(GeditWindow *window,
+								 const gchar *data_dir);
 
 G_END_DECLS
 

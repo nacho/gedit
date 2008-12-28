@@ -64,6 +64,8 @@ struct _GeditTaglistPluginPanelPrivate
 	GtkWidget *preview;
 
 	TagGroup *selected_tag_group;
+	
+	gchar *data_dir;
 };
 
 GEDIT_PLUGIN_DEFINE_TYPE (GeditTaglistPluginPanel, gedit_taglist_plugin_panel, GTK_TYPE_VBOX)
@@ -129,7 +131,9 @@ gedit_taglist_plugin_panel_get_property (GObject    *object,
 static void
 gedit_taglist_plugin_panel_finalize (GObject *object)
 {
-	/* GeditTaglistPluginPanel *tab = GEDIT_TAGLIST_PLUGIN_PANEL (object); */
+	GeditTaglistPluginPanel *panel = GEDIT_TAGLIST_PLUGIN_PANEL (object);
+	
+	g_free (panel->priv->data_dir);
 
 	G_OBJECT_CLASS (gedit_taglist_plugin_panel_parent_class)->finalize (object);
 }
@@ -574,11 +578,13 @@ expose_event_cb (GtkWidget      *panel,
                  GdkEventExpose *event,
                  gpointer        user_data)
 {
+	GeditTaglistPluginPanel *ppanel = GEDIT_TAGLIST_PLUGIN_PANEL (panel);
+
 	gedit_debug (DEBUG_PLUGINS);
 
 	/* If needed load taglists from files at the first expose */
 	if (taglist == NULL)
-		create_taglist ();
+		create_taglist (ppanel->priv->data_dir);
 
 	/* And populate combo box */
 	populate_tag_groups_combo (GEDIT_TAGLIST_PLUGIN_PANEL (panel));
@@ -654,6 +660,7 @@ gedit_taglist_plugin_panel_init (GeditTaglistPluginPanel *panel)
 	gedit_debug (DEBUG_PLUGINS);
 
 	panel->priv = GEDIT_TAGLIST_PLUGIN_PANEL_GET_PRIVATE (panel);
+	panel->priv->data_dir = NULL;
 
 	/* Build the window content */
 	panel->priv->tag_groups_combo = gtk_combo_box_new_text ();
@@ -752,11 +759,18 @@ gedit_taglist_plugin_panel_init (GeditTaglistPluginPanel *panel)
 }
 
 GtkWidget *
-gedit_taglist_plugin_panel_new (GeditWindow *window)
+gedit_taglist_plugin_panel_new (GeditWindow *window,
+				const gchar *data_dir)
 {
+	GeditTaglistPluginPanel *panel;
+
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 
-	return GTK_WIDGET (g_object_new (GEDIT_TYPE_TAGLIST_PLUGIN_PANEL,
-					 "window", window,
-					 NULL));
+	panel = g_object_new (GEDIT_TYPE_TAGLIST_PLUGIN_PANEL,
+			      "window", window,
+			      NULL);
+	
+	panel->priv->data_dir = g_strdup (data_dir);
+	
+	return GTK_WIDGET (panel);
 }

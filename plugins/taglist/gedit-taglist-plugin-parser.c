@@ -580,7 +580,7 @@ parse_taglist_dir (const gchar *dir)
 		if (strncmp (e->d_name + strlen (e->d_name) - 5, ".tags", 5) == 0 ||
 		    strncmp (e->d_name + strlen (e->d_name) - 8, ".tags.gz", 8) == 0)
 		{
-			gchar *tags_file = g_strconcat (dir, e->d_name, NULL);
+			gchar *tags_file = g_build_filename (dir, e->d_name, NULL);
 			parse_taglist_file (tags_file);
 			g_free (tags_file);
 		}
@@ -590,7 +590,7 @@ parse_taglist_dir (const gchar *dir)
 	return taglist;
 }
 
-TagList* create_taglist (void)
+TagList* create_taglist (const gchar *data_dir)
 {
 	const gchar *home;
 
@@ -603,6 +603,7 @@ TagList* create_taglist (void)
 		return taglist;
 	}
 
+#ifndef G_OS_WIN32
 	/* load user's taglists */
 	home = g_get_home_dir ();
 	if (home != NULL)
@@ -621,9 +622,19 @@ TagList* create_taglist (void)
 		parse_taglist_dir (pdir);
 		g_free (pdir);
 	}
+#else
+	gchar *pdir;
 	
-	/* load system's taglists */	
-	parse_taglist_dir (GEDIT_TAGLIST_DIR);
+	pdir = g_build_filename (g_get_user_config_dir (),
+				 "gedit",
+				 "taglist",
+				 NULL);
+	parse_taglist_dir (pdir);
+	g_free (pdir);
+#endif
+	
+	/* load system's taglists */
+	parse_taglist_dir (data_dir);
 
 	++taglist_ref_count;
 	g_return_val_if_fail (taglist_ref_count == 1, taglist);
