@@ -2230,10 +2230,13 @@ model_iterate_next_files_cb (GFileEnumerator * enumerator,
 									 G_FILE_MONITOR_NONE,
 									 NULL,
 									 NULL);
-				g_signal_connect (dir->monitor,
-						  "changed",
-						  G_CALLBACK (on_directory_monitor_event),
-						  parent);
+				if (dir->monitor != NULL)
+				{
+					g_signal_connect (dir->monitor,
+							  "changed",
+							  G_CALLBACK (on_directory_monitor_event),
+							  parent);
+				}
 			}
 
 			model_check_dummy (dir->model, parent);

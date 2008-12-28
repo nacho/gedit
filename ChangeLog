@@ -1,5 +1,11 @@
 2008-12-28  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* plugins/filebrowser/gedit-file-browser-store.c: Fixed small
+	warning on trying to connect a signal on a file monitor when file
+	monitoring is not supported (e.g. on OS X)
+
+2008-12-28  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* plugin-loaders/python/bindings/gedit.override: Added custom
 	wrapper for gedit_statusbar_flash_message to avoid formatting
 	security problems (fixes #565778)
