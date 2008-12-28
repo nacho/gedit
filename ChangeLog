@@ -1,3 +1,17 @@
+2008-12-28  Paolo Borelli  <pborelli@katamail.com>
+
+	* plugins/docinfo/gedit-docinfo-plugin.c:
+	* plugins/time/gedit-time-plugin.c:
+	* plugin-loaders/python/gedit-plugin-loader-python.c:
+	* plugin-loaders/python/bindings/gedit.defs:
+	* plugin-loaders/c/gedit-plugin-loader-c.c:
+	* gedit/gedit-plugin.c:
+	* gedit/gedit-plugin.h:
+	Add an "data-dir" property to plugins that plugin can use to
+	locate data files in a relocable way (so that it works on
+	windows). Convert a couple of plugins as a test, eventually all
+	plugins need it.
+
 2008-12-28  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	* plugins/filebrowser/gedit-file-browser-store.c: Fixed small

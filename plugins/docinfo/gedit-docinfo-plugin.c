@@ -59,6 +59,8 @@ typedef struct
 
 typedef struct
 {
+	GeditPlugin *plugin;
+
 	GtkActionGroup *ui_action_group;
 	guint ui_id;
 
@@ -87,6 +89,8 @@ get_docinfo_dialog (GeditWindow *window,
 		    WindowData	*data)
 {
 	DocInfoDialog *dialog;
+	gchar *data_dir;
+	gchar *ui_file;
 	GtkWidget *content;
 	GtkWidget *error_widget;
 	gboolean ret;
@@ -95,7 +99,9 @@ get_docinfo_dialog (GeditWindow *window,
 
 	dialog = g_new (DocInfoDialog, 1);
 
-	ret = gedit_utils_get_ui_objects (GEDIT_UIDIR "docinfo.ui",
+	data_dir = gedit_plugin_get_data_dir (data->plugin);
+	ui_file = g_build_filename (data_dir, "docinfo.ui", NULL);
+	ret = gedit_utils_get_ui_objects (ui_file,
 					  NULL,
 					  &error_widget,
 					  "dialog", &dialog->dialog,
@@ -113,6 +119,9 @@ get_docinfo_dialog (GeditWindow *window,
 					  "selected_chars_label", &dialog->selected_chars_label,
 					  "selected_chars_ns_label", &dialog->selected_chars_ns_label,
 					  NULL);
+
+	g_free (data_dir);
+	g_free (ui_file);
 
 	if (!ret)
 	{
@@ -423,6 +432,8 @@ free_window_data (WindowData *data)
 	
 	gedit_debug (DEBUG_PLUGINS);
 
+	g_object_unref (data->plugin);
+
 	g_object_unref (data->ui_action_group);
 	
 	if (data->dialog != NULL)
@@ -478,8 +489,8 @@ impl_activate (GeditPlugin *plugin,
 	gedit_debug (DEBUG_PLUGINS);
 
 	data = g_new (WindowData, 1);
-	manager = gedit_window_get_ui_manager (window);
 
+	data->plugin = g_object_ref (plugin);
 	data->dialog = NULL;
 	data->ui_action_group = gtk_action_group_new ("GeditDocInfoPluginActions");
 	
@@ -490,6 +501,7 @@ impl_activate (GeditPlugin *plugin,
 				      G_N_ELEMENTS (action_entries),
 				      window);
 
+	manager = gedit_window_get_ui_manager (window);
 	gtk_ui_manager_insert_action_group (manager,
 					    data->ui_action_group,
 					    -1);

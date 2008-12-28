@@ -629,6 +629,18 @@
   (return-type "GType")
 )
 
+(define-method get_install_dir
+  (of-object "GeditPlugin")
+  (c-name "gedit_plugin_get_install_dir")
+  (return-type "gchar*")
+)
+
+(define-method get_data_dir
+  (of-object "GeditPlugin")
+  (c-name "gedit_plugin_get_data_dir")
+  (return-type "gchar*")
+)
+
 (define-method activate
   (of-object "GeditPlugin")
   (c-name "gedit_plugin_activate")
@@ -666,12 +678,6 @@
   (of-object "GeditPlugin")
   (c-name "gedit_plugin_create_configure_dialog")
   (return-type "GtkWidget*")
-)
-
-(define-method get_install_path
-  (of-object "GeditPlugin")
-  (c-name "gedit_plugin_get_install_path")
-  (return-type "const-gchar*")
 )
 
 ;; From ../gedit/gedit-plugin-python.h

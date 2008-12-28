@@ -128,7 +128,10 @@ new_plugin_from_info (GeditPluginLoaderPython *loader,
 	*/
 	if (pyinfo->class_type != GEDIT_TYPE_PLUGIN_PYTHON)
 	{
-		GObject *obj = g_object_new (pyinfo->class_type, "install-path", pyinfo->path, NULL);
+		GObject *obj = g_object_new (pyinfo->class_type,
+					     "install-dir", pyinfo->path,
+					     "data-dir-name", gedit_plugin_info_get_module_name (info),
+					     NULL);
 		pygobject = (PyGObject *)pygobject_new (obj);
 	}
 	else
@@ -137,8 +140,11 @@ new_plugin_from_info (GeditPluginLoaderPython *loader,
 		
 		if (pygobject->obj != NULL)
 			g_error("GObject for plugin is already initialized!");
-		
-		pygobject_construct(pygobject, "install-path", pyinfo->path, NULL);
+
+		pygobject_construct(pygobject,
+				    "install-dir", pyinfo->path,
+				    "data-dir-name", gedit_plugin_info_get_module_name (info),
+				    NULL);
 	}
 
 	if (pygobject == NULL || pygobject->obj == NULL)

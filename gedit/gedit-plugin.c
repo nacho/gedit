@@ -33,18 +33,22 @@
 #endif
 
 #include "gedit-plugin.h"
+#include "gedit-dirs.h"
 
 /* properties */
 enum {
 	PROP_0,
-	PROP_INSTALL_PATH
+	PROP_INSTALL_DIR,
+	PROP_DATA_DIR_NAME,
+	PROP_DATA_DIR
 };
 
 typedef struct _GeditPluginPrivate GeditPluginPrivate;
 
 struct _GeditPluginPrivate
 {
-	gchar *install_path;
+	gchar *install_dir;
+	gchar *data_dir_name;
 };
 
 #define GEDIT_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_PLUGIN, GeditPluginPrivate))
@@ -76,12 +80,13 @@ gedit_plugin_get_property (GObject    *object,
 			   GValue     *value,
 			   GParamSpec *pspec)
 {
-	GeditPluginPrivate *priv = GEDIT_PLUGIN_GET_PRIVATE (object);
-
 	switch (prop_id)
 	{
-		case PROP_INSTALL_PATH:
-			g_value_set_string (value, priv->install_path);
+		case PROP_INSTALL_DIR:
+			g_value_take_string (value, gedit_plugin_get_install_dir (GEDIT_PLUGIN (object)));
+			break;
+		case PROP_DATA_DIR:
+			g_value_take_string (value, gedit_plugin_get_data_dir (GEDIT_PLUGIN (object)));
 			break;
 		default:
 			g_return_if_reached ();
@@ -98,8 +103,11 @@ gedit_plugin_set_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_INSTALL_PATH:
-			priv->install_path = g_value_dup_string (value);
+		case PROP_INSTALL_DIR:
+			priv->install_dir = g_value_dup_string (value);
+			break;
+		case PROP_DATA_DIR_NAME:
+			priv->data_dir_name = g_value_dup_string (value);
 			break;
 		default:
 			g_return_if_reached ();
@@ -110,8 +118,9 @@ static void
 gedit_plugin_finalize (GObject *object)
 {
 	GeditPluginPrivate *priv = GEDIT_PLUGIN_GET_PRIVATE (object);
-	
-	g_free (priv->install_path);
+
+	g_free (priv->install_dir);
+	g_free (priv->data_dir_name);
 }
 
 static void 
@@ -131,14 +140,31 @@ gedit_plugin_class_init (GeditPluginClass *klass)
 	object_class->finalize = gedit_plugin_finalize;
 
 	g_object_class_install_property (object_class,
-					 PROP_INSTALL_PATH,
-					 g_param_spec_string ("install-path",
-							      "Install Path",
-							      "The path where the plugin is installed",
+					 PROP_INSTALL_DIR,
+					 g_param_spec_string ("install-dir",
+							      "Install Directory",
+							      "The directory where the plugin is installed",
 							      NULL,
-							      G_PARAM_READWRITE | 
-								  G_PARAM_CONSTRUCT_ONLY));
-	
+							      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+	/* the basename of the data dir is set at construction time by the plugin loader
+	 * while the full path is constructed on the fly to take into account relocability
+	 * that's why we have a writeonly prop and a readonly prop */
+	g_object_class_install_property (object_class,
+					 PROP_DATA_DIR_NAME,
+					 g_param_spec_string ("data-dir-name",
+							      "Basename of the data directory",
+							      "The basename of the directory where the plugin should look for its data files",
+							      NULL,
+							      G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
+	g_object_class_install_property (object_class,
+					 PROP_DATA_DIR,
+					 g_param_spec_string ("data-dir",
+							      "Data Directory",
+							      "The full path of the directory where the plugin should look for its data files",
+							      NULL,
+							      G_PARAM_READABLE));
+
 	g_type_class_add_private (klass, sizeof (GeditPluginPrivate));
 }
 
@@ -149,17 +175,70 @@ gedit_plugin_init (GeditPlugin *plugin)
 }
 
 /**
- * gedit_plugin_get_install_path:
+ * gedit_plugin_get_install_dir:
  * @plugin: a #GeditPlugin
  *
- * Returns the path where the plugin is installed
+ * Returns the path of the directory where the plugin is installed
  */
-const gchar *
-gedit_plugin_get_install_path (GeditPlugin *plugin)
+gchar *
+gedit_plugin_get_install_dir (GeditPlugin *plugin)
 {
 	g_return_val_if_fail (GEDIT_IS_PLUGIN (plugin), NULL);
-	
-	return GEDIT_PLUGIN_GET_PRIVATE (plugin)->install_path;
+
+	return g_strdup (GEDIT_PLUGIN_GET_PRIVATE (plugin)->install_dir);
+}
+
+/**
+ * gedit_plugin_get_data_dir:
+ * @plugin: a #GeditPlugin
+ *
+ * Returns the path of the directory where the plugin should look for
+ * its data files
+ */
+gchar *
+gedit_plugin_get_data_dir (GeditPlugin *plugin)
+{
+	GeditPluginPrivate *priv;
+	gchar *gedit_lib_dir;
+	gchar *data_dir;
+
+	g_return_val_if_fail (GEDIT_IS_PLUGIN (plugin), NULL);
+
+	priv = GEDIT_PLUGIN_GET_PRIVATE (plugin);
+
+	/* If it's a "user" plugin the data dir is
+	 * install_dir/data_dir_name if instead it's a
+	 * "system" plugin the data dir is under gedit_data_dir,
+	 * so it's under $prefix/share/gedit-2/plugins/data_dir_name
+	 * where data_dir_name usually it's the name of the plugin
+	 */
+	gedit_lib_dir = gedit_dirs_get_gedit_lib_dir ();
+
+	/* CHECK: is checking the prefix enough or should we be more
+	 * careful about normalizing paths etc? */
+	if (g_str_has_prefix (priv->install_dir, gedit_lib_dir))
+	{
+		gchar *gedit_data_dir;
+
+		gedit_data_dir = gedit_dirs_get_gedit_data_dir ();
+
+		data_dir = g_build_filename (gedit_data_dir,
+					     "plugins",
+					     priv->data_dir_name,
+					     NULL);
+
+		g_free (gedit_data_dir);
+	}
+	else
+	{
+		data_dir = g_build_filename (priv->install_dir,
+					     priv->data_dir_name,
+					     NULL);
+	}
+
+	g_free (gedit_lib_dir);
+
+	return data_dir;
 }
 
 /**

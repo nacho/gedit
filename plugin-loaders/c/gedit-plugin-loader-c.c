@@ -48,13 +48,15 @@ gedit_plugin_loader_iface_load (GeditPluginLoader *loader,
 {
 	GeditPluginLoaderC *cloader = GEDIT_PLUGIN_LOADER_C (loader);
 	GeditObjectModule *module;
+	const gchar *module_name;
 	GeditPlugin *result;
-	
+
 	module = (GeditObjectModule *)g_hash_table_lookup (cloader->priv->loaded_plugins, info);
-	
+	module_name = gedit_plugin_info_get_module_name (info);
+
 	if (module == NULL)
 	{
-		module = gedit_object_module_new (gedit_plugin_info_get_module_name (info),
+		module = gedit_object_module_new (module_name,
 						  path,
 						  "register_gedit_plugin");
 
@@ -70,10 +72,15 @@ gedit_plugin_loader_iface_load (GeditPluginLoader *loader,
 
 		return NULL;
 	}
-	
-	/* create new plugin object */
-	result = (GeditPlugin *)gedit_object_module_new_object (module, "install-path", path, NULL);
-	
+
+	/* TODO: for now we force data-dir-name = module-name... if needed we can
+	 * add a datadir field to the plugin descriptor file.
+	 */
+	result = (GeditPlugin *)gedit_object_module_new_object (module,
+								"install-dir", path,
+								"data-dir-name", module_name,
+								NULL);
+
 	if (!result)
 	{
 		g_warning ("Could not create plugin object: %s", gedit_plugin_info_get_name (info));
