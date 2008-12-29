@@ -312,7 +312,6 @@ class Manager:
                 image.set_from_stock(gtk.STOCK_REMOVE, gtk.ICON_SIZE_SMALL_TOOLBAR)
 
                 source_view = self['source_view_snippet']
-                source_view.modify_font(pango.FontDescription('Monospace 8'))
                 manager = self.get_language_manager()
                 lang = manager.get_language('snippets')
 
