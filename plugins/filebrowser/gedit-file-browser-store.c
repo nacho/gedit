@@ -2225,6 +2225,11 @@ model_iterate_next_files_cb (GFileEnumerator * enumerator,
 			g_object_unref (dir->cancellable);
 			dir->cancellable = NULL;
 			
+/*
+ * FIXME: This is temporarly, it is a bug in gio:
+ * http://bugzilla.gnome.org/show_bug.cgi?id=565924
+ */
+#ifndef G_OS_WIN32
 			if (g_file_is_native (parent->file) && dir->monitor == NULL) {
 				dir->monitor = g_file_monitor_directory (parent->file, 
 									 G_FILE_MONITOR_NONE,
@@ -2238,6 +2243,7 @@ model_iterate_next_files_cb (GFileEnumerator * enumerator,
 							  parent);
 				}
 			}
+#endif
 
 			model_check_dummy (dir->model, parent);
 			model_end_loading (dir->model, parent);
