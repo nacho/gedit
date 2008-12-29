@@ -11,8 +11,7 @@ INCLUDES = 							\
 	$(GEDIT_CFLAGS) 					\
 	$(ENCHANT_CFLAGS)					\
 	$(WARN_CFLAGS)						\
-	$(DISABLE_DEPRECATED_CFLAGS)				\
-	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	
+	$(DISABLE_DEPRECATED_CFLAGS)	
 
 plugin_LTLIBRARIES = libspell.la
 

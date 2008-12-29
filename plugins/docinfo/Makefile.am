@@ -5,10 +5,7 @@ INCLUDES = \
 	-I$(top_srcdir) 				\
 	$(GEDIT_CFLAGS) 				\
 	$(WARN_CFLAGS)					\
-	$(DISABLE_DEPRECATED_CFLAGS)			\
-	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
-	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/plugins/docinfo/"\"
+	$(DISABLE_DEPRECATED_CFLAGS)
 
 plugin_LTLIBRARIES = libdocinfo.la
 
