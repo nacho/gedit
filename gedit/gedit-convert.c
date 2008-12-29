@@ -89,9 +89,9 @@ gedit_convert_to_utf8_from_charset (const gchar  *content,
 					&bytes_read, 
 					new_len,
 					&conv_error); 
-	
-	gedit_debug_message (DEBUG_UTILS, "Bytes read: %d", bytes_read);
-		
+
+	gedit_debug_message (DEBUG_UTILS, "Bytes read: %" G_GSIZE_FORMAT, bytes_read);
+
 	/* There is no way we can avoid to run 	g_utf8_validate on the converted text.
 	 *
 	 * <paolo> hmmm... but in that case g_convert should fail 
@@ -126,9 +126,10 @@ gedit_convert_to_utf8_from_charset (const gchar  *content,
 	} 
 	else 
 	{
-		gedit_debug_message (DEBUG_UTILS, "Converted from %s to UTF-8 (newlen = %d).", 
+		gedit_debug_message (DEBUG_UTILS,
+				     "Converted from %s to UTF-8 (newlen = %" G_GSIZE_FORMAT ").", 
 				     charset, *new_len);
-	
+
 		g_return_val_if_fail (converted_contents != NULL, NULL); 
 
 		utf8_content = converted_contents;

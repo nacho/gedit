@@ -806,9 +806,9 @@ message_area_set_progress (GeditTab *tab,
 {
 	if (tab->priv->message_area == NULL)
 		return;
-	
-	gedit_debug_message (DEBUG_TAB, "%Ld/%Ld", size, total_size);
-	
+
+	gedit_debug_message (DEBUG_TAB, "%" G_GUINT64_FORMAT "/%" G_GUINT64_FORMAT, size, total_size);
+
 	g_return_if_fail (GEDIT_IS_PROGRESS_MESSAGE_AREA (tab->priv->message_area));
 	
 	if (total_size == 0)
@@ -844,8 +844,8 @@ document_loading (GeditDocument *document,
 	g_return_if_fail ((tab->priv->state == GEDIT_TAB_STATE_LOADING) ||
 		 	  (tab->priv->state == GEDIT_TAB_STATE_REVERTING));
 
-	gedit_debug_message (DEBUG_TAB, "%Ld/%Ld", size, total_size);
-	
+	gedit_debug_message (DEBUG_TAB, "%" G_GUINT64_FORMAT "/%" G_GUINT64_FORMAT, size, total_size);
+
 	if (tab->priv->timer == NULL)
 	{
 		g_return_if_fail (tab->priv->times_called == 0);
@@ -1088,8 +1088,9 @@ document_saving (GeditDocument    *document,
 
 	g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_SAVING);
 
-	gedit_debug_message (DEBUG_TAB, "%Ld/%Ld", size, total_size);
-	
+	gedit_debug_message (DEBUG_TAB, "%" G_GUINT64_FORMAT "/%" G_GUINT64_FORMAT, size, total_size);
+
+
 	if (tab->priv->timer == NULL)
 	{
 		g_return_if_fail (tab->priv->times_called == 0);

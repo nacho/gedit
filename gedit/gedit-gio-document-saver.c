@@ -394,9 +394,9 @@ async_write_cb (GOutputStream *stream,
 
 	gvsaver = async->saver;
 	bytes_written = g_output_stream_write_finish (stream, res, &error);
-	
-	gedit_debug_message (DEBUG_SAVER, "Written: %d", bytes_written);
-	
+
+	gedit_debug_message (DEBUG_SAVER, "Written: %" G_GSSIZE_FORMAT, bytes_written);
+
 	if (bytes_written == -1)
 	{
 		gedit_debug_message (DEBUG_SAVER, "Write error: %s", error->message);
@@ -432,7 +432,9 @@ write_file_chunk (AsyncData *async)
 
 	gvsaver = async->saver;
 
-	gedit_debug_message (DEBUG_SAVER, "Writing next chunk: %Ld/%Ld", gvsaver->priv->bytes_written, gvsaver->priv->size);
+	gedit_debug_message (DEBUG_SAVER,
+			     "Writing next chunk: %" G_GINT64_FORMAT "/%" G_GINT64_FORMAT,
+			     gvsaver->priv->bytes_written, gvsaver->priv->size);
 
 	g_output_stream_write_async (G_OUTPUT_STREAM (gvsaver->priv->stream),
 				     async->buffer + gvsaver->priv->bytes_written,
@@ -547,10 +549,10 @@ begin_write (AsyncData *async)
 
 	async->buffer = buffer;
 	gvsaver->priv->size = len;
-	
-	gedit_debug_message (DEBUG_SAVER, "File contents size: %Ld", gvsaver->priv->size);
+
+	gedit_debug_message (DEBUG_SAVER, "File contents size: %" G_GINT64_FORMAT, gvsaver->priv->size);
 	gedit_debug_message (DEBUG_SAVER, "Calling replace_async");
-	
+
 	g_file_replace_async (gvsaver->priv->gfile, 
 			      NULL,
 			      FALSE,
