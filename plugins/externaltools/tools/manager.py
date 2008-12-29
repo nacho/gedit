@@ -166,9 +166,9 @@ class Manager(object):
         script = default(''.join(node.get_script()), '')
         buf.set_text(script)
         self.script_hash = self.compute_hash(script)
-        mimetype = gio.content_type_guess(data=script)
+        contenttype = gio.content_type_guess(data=script)
         lmanager = gedit.get_language_manager()
-        language = gedit.language_manager_get_language_from_mime_type(lmanager, mimetype)
+        language = lmanager.guess_language(content_type=contenttype)
 
         if language is not None:
             buf.set_language(language)
