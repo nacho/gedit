@@ -14,6 +14,20 @@
   (gtype-id "GEDIT_TYPE_DOCUMENT")
 )
 
+(define-object Message
+  (in-module "Gedit")
+  (parent "GObject")
+  (c-name "GeditMessage")
+  (gtype-id "GEDIT_TYPE_MESSAGE")
+)
+
+(define-object MessageBus
+  (in-module "Gedit")
+  (parent "GObject")
+  (c-name "GeditMessageBus")
+  (gtype-id "GEDIT_TYPE_MESSAGE_BUS")
+)
+
 (define-object Panel
   (in-module "Gedit")
   (parent "GtkVBox")
@@ -147,6 +161,14 @@
 ;;    '("gchar*" "charset")
 ;;    '("gchar*" "name")
 ;;  )
+)
+
+(define-boxed MessageType
+  (in-module "Gedit")
+  (c-name "GeditMessageType")
+  (gtype-id "GEDIT_TYPE_MESSAGE_TYPE")
+  (copy-func "gedit_message_type_ref")
+  (release-func "gedit_message_type_unref")
 )
 
 
@@ -975,6 +997,12 @@
   (return-type "GeditWindowState")
 )
 
+(define-method get_message_bus
+  (of-object "GeditWindow")
+  (c-name "gedit_window_get_message_bus")
+  (return-type "GeditMessageBus*")
+)
+
 (define-method get_tab_from_uri
   (of-object "GeditWindow")
   (c-name "gedit_window_get_tab_from_uri")
@@ -999,6 +1027,412 @@
     '("gboolean" "include_hidden")
   )
 )
+
+
+;; From gedit-message-bus.h
+
+(define-function gedit_message_bus_get_type
+  (c-name "gedit_message_bus_get_type")
+  (return-type "GType")
+)
+
+(define-function message_bus_get_default
+  (c-name "gedit_message_bus_get_default")
+  (return-type "GeditMessageBus*")
+)
+
+(define-function gedit_message_bus_new
+  (c-name "gedit_message_bus_new")
+  (is-constructor-of "GeditMessageBus")
+  (return-type "GeditMessageBus*")
+)
+
+(define-method lookup
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_lookup")
+  (return-type "GeditMessageType*")
+  (parameters
+    '("const-gchar*" "object_path")
+    '("const-gchar*" "method")
+  )
+)
+
+(define-method register
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_register")
+  (return-type "GeditMessageType*")
+  (parameters
+    '("const-gchar*" "object_path")
+    '("const-gchar*" "method")
+    '("guint" "num_optional")
+  )
+  (varargs #t)
+)
+
+(define-method unregister
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_unregister")
+  (return-type "none")
+  (parameters
+    '("GeditMessageType*" "message_type")
+  )
+)
+
+(define-method unregister_all
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_unregister_all")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "object_path")
+  )
+)
+
+(define-method is_registered
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_is_registered")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "object_path")
+    '("const-gchar*" "method")
+  )
+)
+
+(define-method connect
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_connect")
+  (return-type "guint")
+  (parameters
+    '("const-gchar*" "object_path")
+    '("const-gchar*" "method")
+    '("GeditMessageCallback" "callback")
+    '("gpointer" "userdata")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-method disconnect
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_disconnect")
+  (return-type "none")
+  (parameters
+    '("guint" "id")
+  )
+)
+
+(define-method disconnect_by_func
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_disconnect_by_func")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "object_path")
+    '("const-gchar*" "method")
+    '("GeditMessageCallback" "callback")
+    '("gpointer" "userdata")
+  )
+)
+
+(define-method block
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_block")
+  (return-type "none")
+  (parameters
+    '("guint" "id")
+  )
+)
+
+(define-method block_by_func
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_block_by_func")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "object_path")
+    '("const-gchar*" "method")
+    '("GeditMessageCallback" "callback")
+    '("gpointer" "userdata")
+  )
+)
+
+(define-method unblock
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_unblock")
+  (return-type "none")
+  (parameters
+    '("guint" "id")
+  )
+)
+
+(define-method unblock_by_func
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_unblock_by_func")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "object_path")
+    '("const-gchar*" "method")
+    '("GeditMessageCallback" "callback")
+    '("gpointer" "userdata")
+  )
+)
+
+(define-method send_message
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_send_message")
+  (return-type "none")
+  (parameters
+    '("GeditMessage*" "message")
+  )
+)
+
+(define-method send_message_sync
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_send_message_sync")
+  (return-type "none")
+  (parameters
+    '("GeditMessage*" "message")
+  )
+)
+
+(define-method send
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_send")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "object_path")
+    '("const-gchar*" "method")
+  )
+  (varargs #t)
+)
+
+(define-method send_sync
+  (of-object "GeditMessageBus")
+  (c-name "gedit_message_bus_send_sync")
+  (return-type "GeditMessage*")
+  (parameters
+    '("const-gchar*" "object_path")
+    '("const-gchar*" "method")
+  )
+  (varargs #t)
+)
+
+
+;; From gedit-message-type.h
+
+(define-function gedit_message_type_get_type
+  (c-name "gedit_message_type_get_type")
+  (return-type "GType")
+)
+
+(define-function gedit_message_type_is_supported
+  (c-name "gedit_message_type_is_supported")
+  (return-type "gboolean")
+  (parameters
+    '("GType" "type")
+  )
+)
+
+(define-function gedit_message_type_identifier
+  (c-name "gedit_message_type_identifier")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "object_path")
+    '("const-gchar*" "method")
+  )
+)
+
+(define-function gedit_message_type_new
+  (c-name "gedit_message_type_new")
+  (is-constructor-of "GeditMessageType")
+  (return-type "GeditMessageType*")
+  (parameters
+    '("const-gchar*" "object_path")
+    '("const-gchar*" "method")
+    '("guint" "num_optional")
+  )
+  (varargs #t)
+)
+
+(define-function gedit_message_type_new_valist
+  (c-name "gedit_message_type_new_valist")
+  (return-type "GeditMessageType*")
+  (parameters
+    '("const-gchar*" "object_path")
+    '("const-gchar*" "method")
+    '("guint" "num_optional")
+    '("va_list" "va_args")
+  )
+)
+
+(define-method ref
+  (of-object "GeditMessageType")
+  (c-name "gedit_message_type_ref")
+  (return-type "GeditMessageType*")
+)
+
+(define-method unref
+  (of-object "GeditMessageType")
+  (c-name "gedit_message_type_unref")
+  (return-type "none")
+)
+
+(define-method instantiate_valist
+  (of-object "GeditMessageType")
+  (c-name "gedit_message_type_instantiate_valist")
+  (return-type "GeditMessage*")
+  (parameters
+    '("va_list" "va_args")
+  )
+)
+
+(define-method instantiate
+  (of-object "GeditMessageType")
+  (c-name "gedit_message_type_instantiate")
+  (return-type "GeditMessage*")
+  (parameters
+  )
+  (varargs #t)
+)
+
+(define-method get_object_path
+  (of-object "GeditMessageType")
+  (c-name "gedit_message_type_get_object_path")
+  (return-type "const-gchar*")
+)
+
+(define-method get_method
+  (of-object "GeditMessageType")
+  (c-name "gedit_message_type_get_method")
+  (return-type "const-gchar*")
+)
+
+(define-method lookup
+  (of-object "GeditMessageType")
+  (c-name "gedit_message_type_lookup")
+  (return-type "GType")
+  (parameters
+    '("const-gchar*" "key")
+  )
+)
+
+(define-method foreach
+  (of-object "GeditMessageType")
+  (c-name "gedit_message_type_foreach")
+  (return-type "none")
+  (parameters
+    '("GeditMessageTypeForeach" "func")
+    '("gpointer" "user_data")
+  )
+)
+
+
+;; From gedit-message.h
+
+(define-function gedit_message_get_type
+  (c-name "gedit_message_get_type")
+  (return-type "GType")
+)
+
+(define-method get
+  (of-object "GeditMessage")
+  (c-name "gedit_message_get")
+  (return-type "none")
+  (parameters
+  )
+  (varargs #t)
+)
+
+(define-method get_valist
+  (of-object "GeditMessage")
+  (c-name "gedit_message_get_valist")
+  (return-type "none")
+  (parameters
+    '("va_list" "var_args")
+  )
+)
+
+(define-method get_value
+  (of-object "GeditMessage")
+  (c-name "gedit_message_get_value")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "key")
+    '("GValue*" "value")
+  )
+)
+
+(define-method set
+  (of-object "GeditMessage")
+  (c-name "gedit_message_set")
+  (return-type "none")
+  (parameters
+  )
+  (varargs #t)
+)
+
+(define-method set_valist
+  (of-object "GeditMessage")
+  (c-name "gedit_message_set_valist")
+  (return-type "none")
+  (parameters
+    '("va_list" "var_args")
+  )
+)
+
+(define-method set_value
+  (of-object "GeditMessage")
+  (c-name "gedit_message_set_value")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "key")
+    '("GValue*" "value")
+  )
+)
+
+(define-method set_valuesv
+  (of-object "GeditMessage")
+  (c-name "gedit_message_set_valuesv")
+  (return-type "none")
+  (parameters
+    '("const-gchar**" "keys")
+    '("GValue*" "values")
+    '("gint" "n_values")
+  )
+)
+
+(define-method get_object_path
+  (of-object "GeditMessage")
+  (c-name "gedit_message_get_object_path")
+  (return-type "const-gchar*")
+)
+
+(define-method get_method
+  (of-object "GeditMessage")
+  (c-name "gedit_message_get_method")
+  (return-type "const-gchar*")
+)
+
+(define-method has_key
+  (of-object "GeditMessage")
+  (c-name "gedit_message_has_key")
+  (return-type "gboolean")
+  (parameters
+    '("const-gchar*" "key")
+  )
+)
+
+(define-method get_key_type
+  (of-object "GeditMessage")
+  (c-name "gedit_message_get_key_type")
+  (return-type "GType")
+  (parameters
+    '("const-gchar*" "key")
+  )
+)
+
+(define-method validate
+  (of-object "GeditMessage")
+  (c-name "gedit_message_validate")
+  (return-type "gboolean")
+)
+
 
 ;; From ../../gedit/gedit-debug.h
 

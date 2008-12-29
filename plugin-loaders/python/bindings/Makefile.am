@@ -3,9 +3,9 @@
 noinst_LTLIBRARIES = \
 	gedit.la
 
-nodist_gedit_la_SOURCES = \
+nodist_gedit_la_SOURCES = 	\
 	gedit.c			\
-	geditutils.c	\
+	geditutils.c		\
 	geditcommands.c
 
 gedit_la_LDFLAGS = \
@@ -33,7 +33,7 @@ gedit_la_CFLAGS = \
 $(top_builddir)/gedit/gedit-enum-types.h:
 	cd $(top_builddir)/gedit && $(MAKE) gedit-enum-types.h
 
-gedit.c: gedit.defs gedit.override geditplugin.override $(top_builddir)/gedit/gedit-enum-types.h
+gedit.c: gedit.defs gedit.override geditplugin.override geditmessage.override $(top_builddir)/gedit/gedit-enum-types.h
 	( cd $(srcdir) && $(PYGTK_CODEGEN) \
 		--register $(PYGTK_DEFSDIR)/pango-types.defs \
 		--register $(PYGTK_DEFSDIR)/gdk-types.defs \
@@ -59,7 +59,7 @@ BINDING_GEDIT_HEADERS_SRCDIR_IN = \
 	gedit/gedit-document.h		\
 	gedit/gedit-encodings.h		\
 	gedit/gedit-plugin.h		\
-	$(srcdir)/../gedit-plugin-python.h \
+	plugin-loaders/python/gedit-plugin-python.h \
 	gedit/gedit-view.h		\
 	gedit/gedit-statusbar.h		\
 	gedit/gedit-tab.h 		\
@@ -67,6 +67,9 @@ BINDING_GEDIT_HEADERS_SRCDIR_IN = \
 	gedit/gedit-window.h 		\
 	gedit/gedit-help.h		\
 	gedit/gedit-debug.h		\
+	gedit/gedit-message-type.h	\
+	gedit/gedit-message.h		\
+	gedit/gedit-message-bus.h	\
 	gedit/gedit-language-manager.h
 
 BINDING_UTILS_HEADERS_SRCDIR_IN = \
@@ -100,6 +103,7 @@ EXTRA_DIST = \
 	geditutils.defs		\
 	geditcommands.override 	\
 	geditcommands.defs	\
+	geditmessage.override	\
 	geditplugin.override
 
 CLEANFILES = $(BUILT_SOURCES)

@@ -1,3 +1,49 @@
+2008-12-29  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* gedit/gedit-message-type.h:
+	* gedit/gedit-message-type.c:
+	* gedit/gedit-message.h:
+	* gedit/gedit-message.c:
+	* gedit/gedit-message-bus.h:
+	* gedit/gedit-message-bus.c:
+	* gedit/gedit-window.h:
+	* gedit/gedit-window.c:
+	* gedit/gedit-window-private.h:
+	* gedit/Makefile.am:
+	
+	Merged message communication bus from message_system branch providing
+	a framework to allow (amongst others) plugins to cooperate in similar
+	way as DBus (but for in-process communication)
+	
+	* docs/reference/gedit-sections.txt:
+	* docs/reference/gedit.types:
+	* docs/reference/gedit-docs.sgml:
+	* docs/reference/tmpl/gedit-message.sgml:
+	* docs/reference/tmpl/gedit-message-type.sgml:
+	* docs/reference/tmpl/gedit-message-bus.sgml:
+	
+	Added API documentation for message bus
+	
+	* plugin-loaders/python/bindings/geditmessage.override:
+	* plugin-loaders/python/bindings/Makefile.am:
+	* plugin-loaders/python/bindings/gedit.override:
+	* plugin-loaders/python/bindings/gedit.defs:
+	
+	Implemented python bindings for message bus
+
+	* plugins/filebrowser/gedit-file-browser-messages.c:
+	* plugins/filebrowser/gedit-file-browser-messages.h:
+	* plugins/filebrowser/gedit-file-browser-widget.c:
+	* plugins/filebrowser/gedit-file-browser-widget.h:
+	* plugins/filebrowser/gedit-file-browser-plugin.c:
+	* plugins/filebrowser/Makefile.am:
+	
+	Added message bus support for the file browser plugin
+	
+	* plugins/filebrowser/gedit-file-browser-view.c:
+	
+	Added sanity checks for destruction of state restore table
+	
 2008-12-29  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-ui.h: Use stock icon for page setup.

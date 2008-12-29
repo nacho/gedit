@@ -24,7 +24,8 @@ NOINST_H_FILES = \
 	gedit-file-browser-widget.h 		\
 	gedit-file-browser-error.h		\
 	gedit-file-browser-utils.h		\
-	gedit-file-browser-plugin.h
+	gedit-file-browser-plugin.h		\
+	gedit-file-browser-messages.h
 
 libfilebrowser_la_SOURCES = \
 	$(BUILT_SOURCES) 			\
@@ -34,6 +35,7 @@ libfilebrowser_la_SOURCES = \
 	gedit-file-browser-widget.c 		\
 	gedit-file-browser-utils.c 		\
 	gedit-file-browser-plugin.c		\
+	gedit-file-browser-messages.c		\
 	$(NOINST_H_FILES)
 
 libfilebrowser_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)

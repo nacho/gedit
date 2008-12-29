@@ -1,0 +1,246 @@
+<!-- ##### SECTION Title ##### -->
+GeditMessageBus
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GeditMessageBus ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL GeditMessageBus::dispatch ##### -->
+<para>
+
+</para>
+
+@geditmessagebus: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GeditMessageBus::registered ##### -->
+<para>
+
+</para>
+
+@geditmessagebus: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GeditMessageBus::unregistered ##### -->
+<para>
+
+</para>
+
+@geditmessagebus: the object which received the signal.
+@arg1: 
+
+<!-- ##### USER_FUNCTION GeditMessageCallback ##### -->
+<para>
+
+</para>
+
+@bus: 
+@message: 
+@userdata: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_get_default ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_lookup ##### -->
+<para>
+
+</para>
+
+@bus: 
+@object_path: 
+@method: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_register ##### -->
+<para>
+
+</para>
+
+@bus: 
+@object_path: 
+@method: 
+@num_optional: 
+@Varargs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_unregister ##### -->
+<para>
+
+</para>
+
+@bus: 
+@message_type: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_unregister_all ##### -->
+<para>
+
+</para>
+
+@bus: 
+@object_path: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_is_registered ##### -->
+<para>
+
+</para>
+
+@bus: 
+@object_path: 
+@method: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_connect ##### -->
+<para>
+
+</para>
+
+@bus: 
+@object_path: 
+@method: 
+@callback: 
+@userdata: 
+@destroy_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_disconnect ##### -->
+<para>
+
+</para>
+
+@bus: 
+@id: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_disconnect_by_func ##### -->
+<para>
+
+</para>
+
+@bus: 
+@object_path: 
+@method: 
+@callback: 
+@userdata: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_block ##### -->
+<para>
+
+</para>
+
+@bus: 
+@id: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_block_by_func ##### -->
+<para>
+
+</para>
+
+@bus: 
+@object_path: 
+@method: 
+@callback: 
+@userdata: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_unblock ##### -->
+<para>
+
+</para>
+
+@bus: 
+@id: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_unblock_by_func ##### -->
+<para>
+
+</para>
+
+@bus: 
+@object_path: 
+@method: 
+@callback: 
+@userdata: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_send_message ##### -->
+<para>
+
+</para>
+
+@bus: 
+@message: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_send_message_sync ##### -->
+<para>
+
+</para>
+
+@bus: 
+@message: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_send ##### -->
+<para>
+
+</para>
+
+@bus: 
+@object_path: 
+@method: 
+@Varargs: 
+
+
+<!-- ##### FUNCTION gedit_message_bus_send_sync ##### -->
+<para>
+
+</para>
+
+@bus: 
+@object_path: 
+@method: 
+@Varargs: 
+@Returns: 
+
+

@@ -84,6 +84,9 @@ INST_H_FILES =				\
 	gedit-file-chooser-dialog.h	\
 	gedit-help.h 			\
 	gedit-message-area.h		\
+	gedit-message-bus.h		\
+	gedit-message-type.h		\
+	gedit-message.h			\
 	gedit-metadata-manager.h	\
 	gedit-notebook.h		\
 	gedit-panel.h			\
@@ -141,6 +144,9 @@ libgedit_la_SOURCES = 			\
 	gedit-io-error-message-area.c	\
 	gedit-language-manager.c	\
 	gedit-message-area.c		\
+	gedit-message-bus.c		\
+	gedit-message-type.c		\
+	gedit-message.c			\
 	gedit-metadata-manager.c	\
 	gedit-object-module.c		\
 	gedit-notebook.c		\

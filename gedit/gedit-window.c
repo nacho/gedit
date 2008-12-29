@@ -186,6 +186,12 @@ gedit_window_dispose (GObject *object)
 		window->priv->manager = NULL;
 	}
 
+	if (window->priv->message_bus != NULL)
+	{
+		g_object_unref (window->priv->message_bus);
+		window->priv->message_bus = NULL;
+	}
+
 	if (window->priv->window_group != NULL)
 	{
 		g_object_unref (window->priv->window_group);
@@ -3066,6 +3072,8 @@ gedit_window_init (GeditWindow *window)
 	window->priv->state = GEDIT_WINDOW_STATE_NORMAL;
 	window->priv->dispose_has_run = FALSE;
 
+	window->priv->message_bus = gedit_message_bus_new ();
+
 	window->priv->window_group = gtk_window_group_new ();
 	gtk_window_group_add_window (window->priv->window_group, GTK_WINDOW (window));
 
@@ -3807,6 +3815,23 @@ gedit_window_get_tab_from_location (GeditWindow *window,
 	g_list_free (tabs);
 	
 	return ret;
+}
+
+/**
+ * gedit_window_get_message_bus:
+ * @window: a #GeditWindow
+ *
+ * Gets the #GeditMessageBus associated with @window. The returned reference
+ * is owned by the window and should not be unreffed.
+ *
+ * Return value: the #GeditMessageBus associated with @window
+ */
+GeditMessageBus	*
+gedit_window_get_message_bus (GeditWindow *window)
+{
+	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
+	
+	return window->priv->message_bus;
 }
 
 /**

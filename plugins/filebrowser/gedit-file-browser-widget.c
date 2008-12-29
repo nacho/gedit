@@ -99,6 +99,7 @@ typedef struct
 	gulong id;
 	GeditFileBrowserWidgetFilterFunc func;
 	gpointer user_data;
+	GDestroyNotify destroy_notify;
 } FilterFunc;
 
 typedef struct 
@@ -249,7 +250,8 @@ free_name_icon (gpointer data)
 static FilterFunc *
 filter_func_new (GeditFileBrowserWidget * obj,
 		 GeditFileBrowserWidgetFilterFunc func,
-		 gpointer user_data)
+		 gpointer user_data,
+		 GDestroyNotify notify)
 {
 	FilterFunc *result;
 
@@ -258,7 +260,7 @@ filter_func_new (GeditFileBrowserWidget * obj,
 	result->id = ++obj->priv->filter_id;
 	result->func = func;
 	result->user_data = user_data;
-
+	result->destroy_notify = notify;
 	return result;
 }
 
@@ -1646,6 +1648,7 @@ set_filter_pattern_real (GeditFileBrowserWidget * obj,
 			obj->priv->glob_filter_id =
 			    gedit_file_browser_widget_add_filter (obj,
 								  filter_glob,
+								  NULL,
 								  NULL);
 	}
 
@@ -1705,16 +1708,32 @@ gedit_file_browser_widget_show_bookmarks (GeditFileBrowserWidget * obj)
 							   bookmarks_store));
 }
 
+static void
+show_files_real (GeditFileBrowserWidget *obj,
+		 gboolean                do_root_changed)
+{
+	gedit_file_browser_view_set_model (obj->priv->treeview,
+					   GTK_TREE_MODEL (obj->priv->
+							   file_store));
+
+	if (do_root_changed)
+		on_virtual_root_changed (obj->priv->file_store, NULL, obj);
+}
+
+void
+gedit_file_browser_widget_show_files (GeditFileBrowserWidget * obj)
+{
+	show_files_real (obj, TRUE);
+}
+
 void
 gedit_file_browser_widget_set_root_and_virtual_root (GeditFileBrowserWidget *obj,
 						     gchar const *root,
 						     gchar const *virtual_root)
 {
 	GeditFileBrowserStoreResult result;
-
-	gedit_file_browser_view_set_model (obj->priv->treeview,
-					   GTK_TREE_MODEL (obj->priv->
-							   file_store));
+	
+	show_files_real (obj, FALSE);
 
 	if (!virtual_root)
 		result =
@@ -1725,8 +1744,7 @@ gedit_file_browser_widget_set_root_and_virtual_root (GeditFileBrowserWidget *obj
 		    gedit_file_browser_store_set_root_and_virtual_root
 		    (obj->priv->file_store, root, virtual_root);
 
-	if (result == GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE)
-		on_virtual_root_changed (obj->priv->file_store, NULL, obj);
+	show_files_real (obj, result == GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
 }
 
 void
@@ -1793,14 +1811,15 @@ gedit_file_browser_widget_get_filter_entry (GeditFileBrowserWidget * obj)
 
 gulong
 gedit_file_browser_widget_add_filter (GeditFileBrowserWidget * obj,
-				      GeditFileBrowserWidgetFilterFunc
-				      func, gpointer user_data)
+				      GeditFileBrowserWidgetFilterFunc func, 
+				      gpointer user_data,
+				      GDestroyNotify notify)
 {
 	FilterFunc *f;
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model (GTK_TREE_VIEW (obj->priv->treeview));
 
-	f = filter_func_new (obj, func, user_data);
+	f = filter_func_new (obj, func, user_data, notify);
 	obj->priv->filter_funcs =
 	    g_slist_append (obj->priv->filter_funcs, f);
 
@@ -1818,10 +1837,15 @@ gedit_file_browser_widget_remove_filter (GeditFileBrowserWidget * obj,
 	GSList *item;
 	FilterFunc *func;
 
-	for (item = obj->priv->filter_funcs; item; item = item->next) {
+	for (item = obj->priv->filter_funcs; item; item = item->next)
+	{
 		func = (FilterFunc *) (item->data);
 
-		if (func->id == id) {
+		if (func->id == id)
+		{
+			if (func->destroy_notify)
+				func->destroy_notify (func->user_data);
+
 			obj->priv->filter_funcs =
 			    g_slist_remove_link (obj->priv->filter_funcs,
 						 item);
@@ -2176,6 +2200,46 @@ activate_volume (GeditFileBrowserWidget *obj,
 	/* see if we can mount the volume */
 	try_mount_volume (obj, volume);	
 	g_object_unref (volume);
+}
+
+void 
+gedit_file_browser_widget_refresh (GeditFileBrowserWidget *obj)
+{
+	GtkTreeModel *model =
+	    gtk_tree_view_get_model (GTK_TREE_VIEW (obj->priv->treeview));
+
+	if (GEDIT_IS_FILE_BROWSER_STORE (model))
+		gedit_file_browser_store_refresh (GEDIT_FILE_BROWSER_STORE
+						  (model));
+	else if (GEDIT_IS_FILE_BOOKMARKS_STORE (model)) {
+		g_hash_table_ref (obj->priv->bookmarks_hash);
+		g_hash_table_destroy (obj->priv->bookmarks_hash);
+
+		gedit_file_bookmarks_store_refresh
+		    (GEDIT_FILE_BOOKMARKS_STORE (model));
+	}
+}
+
+void 
+gedit_file_browser_widget_history_back (GeditFileBrowserWidget *obj)
+{
+	if (obj->priv->locations) {
+		if (obj->priv->current_location)
+			jump_to_location (obj,
+					  obj->priv->current_location->
+					  next, TRUE);
+		else {
+			jump_to_location (obj, obj->priv->locations, TRUE);
+		}
+	}
+}
+
+void
+gedit_file_browser_widget_history_forward (GeditFileBrowserWidget *obj)
+{
+	if (obj->priv->locations)
+		jump_to_location (obj, obj->priv->current_location->prev,
+				  FALSE);
 }
 
 /* Callbacks */
@@ -2712,24 +2776,14 @@ on_filter_mode_changed (GeditFileBrowserStore * model,
 static void
 on_action_directory_next (GtkAction * action, GeditFileBrowserWidget * obj)
 {
-	if (obj->priv->locations)
-		jump_to_location (obj, obj->priv->current_location->prev,
-				  FALSE);
+	gedit_file_browser_widget_history_forward (obj);
 }
 
 static void
 on_action_directory_previous (GtkAction * action,
 			      GeditFileBrowserWidget * obj)
 {
-	if (obj->priv->locations) {
-		if (obj->priv->current_location)
-			jump_to_location (obj,
-					  obj->priv->current_location->
-					  next, TRUE);
-		else {
-			jump_to_location (obj, obj->priv->locations, TRUE);
-		}
-	}
+	gedit_file_browser_widget_history_back (obj);
 }
 
 static void 
@@ -2810,19 +2864,7 @@ static void
 on_action_directory_refresh (GtkAction * action,
 			     GeditFileBrowserWidget * obj)
 {
-	GtkTreeModel *model =
-	    gtk_tree_view_get_model (GTK_TREE_VIEW (obj->priv->treeview));
-
-	if (GEDIT_IS_FILE_BROWSER_STORE (model))
-		gedit_file_browser_store_refresh (GEDIT_FILE_BROWSER_STORE
-						  (model));
-	else if (GEDIT_IS_FILE_BOOKMARKS_STORE (model)) {
-		g_hash_table_ref (obj->priv->bookmarks_hash);
-		g_hash_table_destroy (obj->priv->bookmarks_hash);
-
-		gedit_file_bookmarks_store_refresh
-		    (GEDIT_FILE_BOOKMARKS_STORE (model));
-	}
+	gedit_file_browser_widget_refresh (obj);
 }
 
 static gboolean

@@ -125,7 +125,10 @@ gedit_file_browser_view_finalize (GObject * object)
 		gtk_tree_path_free (obj->priv->hover_path);
 
 	if (obj->priv->expand_state)
+	{
 		g_hash_table_destroy (obj->priv->expand_state);
+		obj->priv->expand_state = NULL;
+	}
 
 	gdk_cursor_unref (obj->priv->busy_cursor);
 
@@ -143,7 +146,11 @@ add_expand_state (GeditFileBrowserView * view,
 		return;
 
 	file = g_file_new_for_uri (uri);
-	g_hash_table_insert (view->priv->expand_state, file, file);
+	
+	if (view->priv->expand_state)
+		g_hash_table_insert (view->priv->expand_state, file, file);
+	else
+		g_object_unref (file);
 }
 
 static void
@@ -156,7 +163,10 @@ remove_expand_state (GeditFileBrowserView * view,
 		return;
 
 	file = g_file_new_for_uri (uri);
-	g_hash_table_remove (view->priv->expand_state, file);
+	
+	if (view->priv->expand_state)
+		g_hash_table_remove (view->priv->expand_state, file);
+
 	g_object_unref (file);
 }
 

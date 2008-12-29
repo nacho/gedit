@@ -76,6 +76,8 @@ GType gedit_file_browser_widget_register_type       (GTypeModule * module);
 GtkWidget *gedit_file_browser_widget_new            (const gchar *data_dir);
 
 void gedit_file_browser_widget_show_bookmarks       (GeditFileBrowserWidget * obj);
+void gedit_file_browser_widget_show_files           (GeditFileBrowserWidget * obj);
+
 void gedit_file_browser_widget_set_root             (GeditFileBrowserWidget * obj,
                                                      gchar const *root,
                                                      gboolean virtual_root);
@@ -104,13 +106,18 @@ gedit_file_browser_widget_get_ui_manager            (GeditFileBrowserWidget * ob
 
 gulong gedit_file_browser_widget_add_filter         (GeditFileBrowserWidget * obj,
                                                      GeditFileBrowserWidgetFilterFunc func, 
-                                                     gpointer user_data);
+                                                     gpointer user_data,
+                                                     GDestroyNotify notify);
 void gedit_file_browser_widget_remove_filter        (GeditFileBrowserWidget * obj,
                                                      gulong id);
 void gedit_file_browser_widget_set_filter_pattern   (GeditFileBrowserWidget * obj,
                                                      gchar const *pattern);
 
+void gedit_file_browser_widget_refresh		    (GeditFileBrowserWidget * obj);
+void gedit_file_browser_widget_history_back	    (GeditFileBrowserWidget * obj);
+void gedit_file_browser_widget_history_forward	    (GeditFileBrowserWidget * obj);
+
 G_END_DECLS
-#endif				/* __GEDIT_FILE_BROWSER_WIDGET_H__ */
+#endif /* __GEDIT_FILE_BROWSER_WIDGET_H__ */
 
 // ex:ts=8:noet:

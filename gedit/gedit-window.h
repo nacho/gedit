@@ -36,6 +36,7 @@
 
 #include <gedit/gedit-tab.h>
 #include <gedit/gedit-panel.h>
+#include <gedit/gedit-message-bus.h>
 
 G_BEGIN_DECLS
 
@@ -155,6 +156,10 @@ GeditTab        *gedit_window_get_tab_from_location	(GeditWindow         *window
 
 GeditTab        *gedit_window_get_tab_from_uri		(GeditWindow         *window,
 							 const gchar         *uri);
+
+/* Message bus */
+GeditMessageBus	*gedit_window_get_message_bus		(GeditWindow         *window);
+
 /*
  * Non exported functions
  */

@@ -33,6 +33,7 @@
 
 #include "gedit/gedit-window.h"
 #include "gedit-prefs-manager.h"
+#include "gedit-message-bus.h"
 
 G_BEGIN_DECLS
 
@@ -46,7 +47,9 @@ struct _GeditWindowPrivate
 	GtkWidget      *bottom_panel;
 
 	GtkWidget      *hpaned;
-	GtkWidget      *vpaned;	
+	GtkWidget      *vpaned;
+	
+	GeditMessageBus *message_bus;	
 
 	/* statusbar and context ids for statusbar messages */
 	GtkWidget      *statusbar;	

@@ -37,6 +37,7 @@
 #include "gedit-file-browser-utils.h"
 #include "gedit-file-browser-error.h"
 #include "gedit-file-browser-widget.h"
+#include "gedit-file-browser-messages.h"
 
 #define WINDOW_DATA_KEY	        	"GeditFileBrowserPluginWindowData"
 #define FILE_BROWSER_BASE_KEY 		"/apps/gedit-2/plugins/filebrowser"
@@ -779,7 +780,10 @@ impl_activate (GeditPlugin * plugin, GeditWindow * window)
 	                  "tab-added",
 	                  G_CALLBACK (on_tab_added_cb),
 	                  data);
-	                  
+	
+	/* Register messages on the bus */
+	gedit_file_browser_messages_register (window, data->tree_widget);
+
 	impl_updateui (plugin, window);
 }
 
@@ -791,6 +795,9 @@ impl_deactivate (GeditPlugin * plugin, GeditWindow * window)
 	GConfClient *client;
 
 	data = get_plugin_data (window);
+
+	/* Unregister messages from the bus */
+	gedit_file_browser_messages_unregister (window);
 
 	/* Disconnect signals */
 	g_signal_handlers_disconnect_by_func (window, 
