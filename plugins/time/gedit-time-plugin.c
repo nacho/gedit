@@ -74,7 +74,7 @@ static const gchar *formats[] =
 	"%d/%m/%Y",
 	"%d/%m/%y",
 #ifndef G_OS_WIN32
-	"%D", //This one is not supported on win32
+	"%D", /* This one is not supported on win32 */
 #endif
 	"%A %d %B %Y",
 	"%A %B %d %Y",
