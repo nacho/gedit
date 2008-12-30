@@ -45,6 +45,14 @@ BUILT_SOURCES = 			\
 	gedit-marshal.c			\
 	gedit-marshal.h
 
+if PLATFORM_WIN32
+gedit.res : gedit.rc
+	$(WINDRES) -i gedit.rc --input-format=rc -o gedit.res -0 coff
+
+BUILT_SOURCES += gedit.res
+gedit_LDADD += gedit.res
+endif
+
 NOINST_H_FILES =			\
 	gedit-commands.h		\
 	gedit-language-manager.h	\
