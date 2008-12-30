@@ -245,9 +245,9 @@ gedit_statusbar_set_overwrite (GeditStatusbar *statusbar,
 	gtk_statusbar_pop (GTK_STATUSBAR (statusbar->priv->overwrite_mode_statusbar), 0);
 
 	if (overwrite)
-		msg = g_strdup (_("  OVR"));
+		msg = g_strconcat ("  ", _("OVR"), NULL);
 	else
-		msg = g_strdup (_("  INS"));
+		msg = g_strconcat ("  ", _("INS"), NULL);
 
 	gtk_statusbar_push (GTK_STATUSBAR (statusbar->priv->overwrite_mode_statusbar), 0, msg);
 

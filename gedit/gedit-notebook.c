@@ -148,6 +148,17 @@ gedit_notebook_class_init (GeditNotebookClass *klass)
 			      GEDIT_TYPE_TAB);
 
 	g_type_class_add_private (object_class, sizeof(GeditNotebookPrivate));
+	
+	/* Set up a style for the close button with no focus padding. */
+	gtk_rc_parse_string (
+		"style \"gedit-close-button-style\"\n"
+		"{\n"
+		"  GtkWidget::focus-padding = 0\n"
+		"  GtkWidget::focus-line-width = 0\n"
+		"  xthickness = 0\n"
+		"  ythickness = 0\n"
+		"}\n"
+		"widget \"*.gedit-close-button\" style \"gedit-close-button-style\"");
 }
 
 static GeditNotebook *
@@ -793,18 +804,16 @@ close_button_clicked_cb (GtkWidget *widget,
 }
 
 static void
-tab_label_style_set_cb (GtkWidget *hbox,
+tab_label_style_set_cb (GtkWidget *button,
 			GtkStyle *previous_style,
 			gpointer user_data)
 {
-	GtkWidget *button;
 	gint h, w;
 
-	gtk_icon_size_lookup_for_settings (gtk_widget_get_settings (hbox),
+	gtk_icon_size_lookup_for_settings (gtk_widget_get_settings (button),
 					   GTK_ICON_SIZE_MENU, &w, &h);
 
-	button = g_object_get_data (G_OBJECT (hbox), "close-button");
-	gtk_widget_set_size_request (button, w + 2, h + 2);
+	gtk_widget_set_size_request (button, w + 4, h + 4);
 }
 
 static GtkWidget *
@@ -814,7 +823,6 @@ build_tab_label (GeditNotebook *nb,
 	GtkWidget *hbox, *label_hbox, *label_ebox;
 	GtkWidget *label, *dummy_label;
 	GtkWidget *close_button;
-	GtkRcStyle *rcstyle;
 	GtkWidget *image;
 	GtkWidget *spinner;
 	GtkWidget *icon;
@@ -836,10 +844,7 @@ build_tab_label (GeditNotebook *nb,
 	gtk_button_set_focus_on_click (GTK_BUTTON (close_button), FALSE);
 
 	/* make it as small as possible */
-	rcstyle = gtk_rc_style_new ();
-	rcstyle->xthickness = rcstyle->ythickness = 0;
-	gtk_widget_modify_style (close_button, rcstyle);
-	gtk_rc_style_unref (rcstyle),
+	gtk_widget_set_name (close_button, "gedit-close-button");
 
 	image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
 					  GTK_ICON_SIZE_MENU);
@@ -872,7 +877,7 @@ build_tab_label (GeditNotebook *nb,
 	gtk_box_pack_start (GTK_BOX (label_hbox), dummy_label, TRUE, TRUE, 0);
 	
 	/* Set minimal size */
-	g_signal_connect (hbox, "style-set",
+	g_signal_connect (close_button, "style-set",
 			  G_CALLBACK (tab_label_style_set_cb), NULL);
 	
 	gtk_widget_show (hbox);
