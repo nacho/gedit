@@ -7,9 +7,7 @@ INCLUDES = 							\
 	-I$(top_builddir)/gedit					\
 	$(GEDIT_CFLAGS) 					\
 	$(WARN_CFLAGS)						\
-	$(DISABLE_DEPRECATED_CFLAGS)				\
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 		\
-	-DGEDIT_UIDIR=\""$(datadir)/gedit-2/ui/"\"	
+	$(DISABLE_DEPRECATED_CFLAGS)
 
 noinst_LTLIBRARIES = libdialogs.la
 
