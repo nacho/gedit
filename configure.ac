@@ -49,6 +49,7 @@ AC_MSG_CHECKING([for Win32 platform])
 case "$host" in
   *-*-mingw*|*-*-cygwin*)
     platform_win32=yes
+    AC_CHECK_TOOL(WINDRES, windres)
     ;;
   *)
     platform_win32=no

@@ -46,8 +46,8 @@ BUILT_SOURCES = 			\
 	gedit-marshal.h
 
 if PLATFORM_WIN32
-gedit.res : gedit.rc
-	$(WINDRES) -i gedit.rc --input-format=rc -o gedit.res -0 coff
+gedit.res: gedit.rc
+	$(WINDRES) -i gedit.rc --input-format=rc -o gedit.res -O coff
 
 BUILT_SOURCES += gedit.res
 gedit_LDADD += gedit.res
