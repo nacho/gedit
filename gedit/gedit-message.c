@@ -18,6 +18,8 @@
  * who is the sender and who is the receiver. There is no explicit distinction
  * between methods and signals.
  *
+ * Since: 2.25.3
+ *
  */
 #define GEDIT_MESSAGE_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_MESSAGE, GeditMessagePrivate))
 

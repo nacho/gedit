@@ -88,6 +88,9 @@
  *                         NULL);
  * </programlisting>
  * </example>
+ *
+ * Since: 2.25.3
+ *
  */
  
 #define GEDIT_MESSAGE_BUS_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_MESSAGE_BUS, GeditMessageBusPrivate))
