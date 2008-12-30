@@ -148,9 +148,24 @@ message_cache_data_new (GeditWindow            *window,
 }
 
 static void
-message_set_root_cb (GeditMessageBus        *bus,
-		     GeditMessage           *message,
-		     WindowData             *data)
+message_get_root_cb (GeditMessageBus *bus,
+		     GeditMessage    *message,
+		     WindowData      *data)
+{
+	GeditFileBrowserStore *store;
+	gchar *uri;
+	
+	store = gedit_file_browser_widget_get_browser_store (data->widget);
+	uri = gedit_file_browser_store_get_virtual_root (store);
+	
+	gedit_message_set (message, "uri", uri, NULL);
+	g_free (uri);
+}
+
+static void
+message_set_root_cb (GeditMessageBus *bus,
+		     GeditMessage    *message,
+		     WindowData      *data)
 {
 	gchar *root = NULL;
 	gchar *virtual = NULL;
@@ -522,6 +537,12 @@ register_methods (GeditWindow            *window,
 
 	/* Register method calls */
 	gedit_message_bus_register (bus, 
+				    MESSAGE_OBJECT_PATH, "get_root", 
+				    1,
+				    "uri", G_TYPE_STRING,
+				    NULL);
+ 
+	gedit_message_bus_register (bus, 
 				    MESSAGE_OBJECT_PATH, "set_root", 
 				    1, 
 				    "uri", G_TYPE_STRING,
@@ -570,6 +591,7 @@ register_methods (GeditWindow            *window,
 	gedit_message_bus_register (bus, MESSAGE_OBJECT_PATH, "show_bookmarks", 0, NULL);
 	gedit_message_bus_register (bus, MESSAGE_OBJECT_PATH, "show_files", 0, NULL);
 
+	BUS_CONNECT (bus, get_root, data);
 	BUS_CONNECT (bus, set_root, data);
 	BUS_CONNECT (bus, set_emblem, data);
 	BUS_CONNECT (bus, add_filter, window);
