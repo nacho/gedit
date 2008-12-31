@@ -1759,7 +1759,6 @@ language_combo_changed (GeditStatusComboBox *combo,
 typedef struct
 {
 	const gchar *label;
-	const gchar *text;
 	guint width;
 } TabWidthDefinition;
 	 
@@ -1767,11 +1766,11 @@ static void
 fill_tab_width_combo (GeditWindow *window)
 {
 	static TabWidthDefinition defs[] = {
-		{"2", "2", 2},
-		{"4", "4", 4},
-		{"8", "8", 8},
-		{N_("Other"), NULL, 0},
-		{NULL, NULL, 0}
+		{"2", 2},
+		{"4", 4},
+		{"8", 8},
+		{"", 0}, /* custom size */
+		{NULL, 0}
 	};
 	
 	GeditStatusComboBox *combo = GEDIT_STATUS_COMBO_BOX (window->priv->tab_width_combo);
@@ -1780,16 +1779,15 @@ fill_tab_width_combo (GeditWindow *window)
 	
 	while (defs[i].label != NULL)
 	{
-		item = gtk_menu_item_new_with_label (_(defs[i].label));
+		item = gtk_menu_item_new_with_label (defs[i].label);
 		g_object_set_data (G_OBJECT (item), TAB_WIDTH_DATA, GINT_TO_POINTER (defs[i].width));
-		gtk_widget_show (item);
 		
 		gedit_status_combo_box_add_item (combo,
 						 GTK_MENU_ITEM (item),
-						 defs[i].text);
+						 defs[i].label);
 
-		if (defs[i].width == 0)
-			gtk_widget_set_sensitive (item, FALSE);
+		if (defs[i].width != 0)
+			gtk_widget_show (item);
 
 		++i;
 	}
@@ -2187,6 +2185,7 @@ tab_width_changed (GObject     *object,
 	GList *item;
 	GeditStatusComboBox *combo = GEDIT_STATUS_COMBO_BOX (window->priv->tab_width_combo);
 	guint new_tab_width;
+	gboolean found = FALSE;
 
 	items = gedit_status_combo_box_get_items (combo);
 
@@ -2199,28 +2198,31 @@ tab_width_changed (GObject     *object,
 		if (tab_width == new_tab_width)
 		{
 			set_tab_width_item_blocked (window, GTK_MENU_ITEM (item->data));
-
-			break;
+			found = TRUE;
 		}
 		
 		if (GTK_IS_SEPARATOR_MENU_ITEM (item->next->data))
 		{
-			/* Set for the last item the custom thing */
-			gchar *text;
+			if (!found)
+			{
+				/* Set for the last item the custom thing */
+				gchar *text;
 			
-			text = g_strdup_printf ("<i>%u</i>", new_tab_width);
-			gedit_status_combo_box_set_item_text (combo, 
-							      GTK_MENU_ITEM (item->data),
-							      text);
-			g_free (text);
+				text = g_strdup_printf ("%u", new_tab_width);
+				gedit_status_combo_box_set_item_text (combo, 
+								      GTK_MENU_ITEM (item->data),
+								      text);
+
+				gtk_label_set_text (GTK_LABEL (gtk_bin_get_child (GTK_BIN (item->data))),
+						    text);
 			
-			text = g_strdup_printf ("Other <i>(%u)</i>", new_tab_width);
-			gtk_label_set_markup (GTK_LABEL (gtk_bin_get_child (GTK_BIN (item->data))),
-					      text);
-			g_free (text);
-			
-			set_tab_width_item_blocked (window, GTK_MENU_ITEM (item->data));
-			gtk_widget_set_sensitive (GTK_WIDGET (item->data), TRUE);
+				set_tab_width_item_blocked (window, GTK_MENU_ITEM (item->data));
+				gtk_widget_show (GTK_WIDGET (item->data));
+			}
+			else
+			{
+				gtk_widget_hide (GTK_WIDGET (item->data));
+			}
 			
 			break;
 		}
@@ -2966,19 +2968,19 @@ notebook_tab_removed (GeditNotebook *notebook,
 					      G_CALLBACK (drop_uris_cb),
 					      NULL);
 
-	if (window->priv->tab_width_id)
+	if (window->priv->tab_width_id && tab == gedit_window_get_active_tab (window))
 	{
 		g_signal_handler_disconnect (view, window->priv->tab_width_id);
 		window->priv->tab_width_id = 0;
 	}
 	
-	if (window->priv->spaces_instead_of_tabs_id)
+	if (window->priv->spaces_instead_of_tabs_id && tab == gedit_window_get_active_tab (window))
 	{
 		g_signal_handler_disconnect (view, window->priv->spaces_instead_of_tabs_id);
 		window->priv->spaces_instead_of_tabs_id = 0;
 	}
 	
-	if (window->priv->language_changed_id)
+	if (window->priv->language_changed_id && tab == gedit_window_get_active_tab (window))
 	{
 		g_signal_handler_disconnect (doc, window->priv->language_changed_id);
 		window->priv->language_changed_id = 0;
