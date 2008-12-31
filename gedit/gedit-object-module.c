@@ -304,7 +304,7 @@ gedit_object_module_get_type_registration (GeditObjectModule *module)
 {
 	g_return_val_if_fail (GEDIT_IS_OBJECT_MODULE (module), NULL);
 
-	return module->priv->module_name;
+	return module->priv->type_registration;
 }
 
 GType
