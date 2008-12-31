@@ -104,6 +104,7 @@ INST_H_FILES =				\
 	gedit-prefs-manager.h		\
 	gedit-progress-message-area.h	\
 	gedit-statusbar.h		\
+	gedit-status-combo-box.h	\
 	gedit-tab.h 			\
 	gedit-utils.h 			\
 	gedit-view.h 			\
@@ -173,6 +174,7 @@ libgedit_la_SOURCES = 			\
 	gedit-session.c			\
 	gedit-spinner.c			\
 	gedit-statusbar.c		\
+	gedit-status-combo-box.c	\
 	gedit-style-scheme-manager.c	\
 	gedit-tab.c 			\
 	gedit-utils.c 			\

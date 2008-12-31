@@ -49,12 +49,18 @@ struct _GeditWindowPrivate
 	GtkWidget      *hpaned;
 	GtkWidget      *vpaned;
 	
+	GtkWidget      *tab_width_combo;
+	GtkWidget      *language_combo;
+	
 	GeditMessageBus *message_bus;	
 
 	/* statusbar and context ids for statusbar messages */
 	GtkWidget      *statusbar;	
 	guint           generic_message_cid;
 	guint           tip_message_cid;
+	guint 		tab_width_id;
+	guint 		spaces_instead_of_tabs_id;
+	guint 		language_changed_id;
 
 	/* Menus & Toolbars */
 	GtkUIManager   *manager;

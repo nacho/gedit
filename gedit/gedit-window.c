@@ -55,9 +55,12 @@
 #include "gedit-plugins-engine.h"
 #include "gedit-enum-types.h"
 #include "gedit-dirs.h"
+#include "gedit-status-combo-box.h"
 
 #define LANGUAGE_NONE (const gchar *)"LangNone"
 #define GEDIT_UIFILE "gedit-ui.xml"
+#define TAB_WIDTH_DATA "GeditWindowTabWidthData"
+#define LANGUAGE_DATA "GeditWindowLanguageData"
 
 #define GEDIT_WINDOW_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),\
 					 GEDIT_TYPE_WINDOW,                    \
@@ -1696,9 +1699,162 @@ statusbar_visibility_changed (GtkWidget   *statusbar,
 }
 
 static void
+tab_width_combo_changed (GeditStatusComboBox *combo,
+			 GtkMenuItem         *item,
+			 GeditWindow         *window)
+{
+	GeditView *view;
+	guint width_data = 0;
+	
+	view = gedit_window_get_active_view (window);
+	
+	if (!view)
+		return;
+	
+	width_data = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), TAB_WIDTH_DATA));
+	
+	if (width_data == 0)
+		return;
+	
+	g_signal_handler_block (view, window->priv->tab_width_id);
+	gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (view), width_data);
+	g_signal_handler_unblock (view, window->priv->tab_width_id);
+}
+
+static void
+use_spaces_toggled (GtkCheckMenuItem *item,
+		    GeditWindow      *window)
+{
+	GeditView *view;
+	
+	view = gedit_window_get_active_view (window);
+	
+	g_signal_handler_block (view, window->priv->spaces_instead_of_tabs_id);
+	gtk_source_view_set_insert_spaces_instead_of_tabs (
+			GTK_SOURCE_VIEW (view),
+			gtk_check_menu_item_get_active (item));
+	g_signal_handler_unblock (view, window->priv->spaces_instead_of_tabs_id);
+}
+
+static void
+language_combo_changed (GeditStatusComboBox *combo,
+			GtkMenuItem         *item,
+			GeditWindow         *window)
+{
+	GeditDocument *doc;
+	GtkSourceLanguage *language;
+	
+	doc = gedit_window_get_active_document (window);
+	
+	if (!doc)
+		return;
+	
+	language = GTK_SOURCE_LANGUAGE (g_object_get_data (G_OBJECT (item), LANGUAGE_DATA));
+	
+	g_signal_handler_block (doc, window->priv->language_changed_id);
+	gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (doc), language);
+	g_signal_handler_unblock (doc, window->priv->language_changed_id);
+}
+
+typedef struct
+{
+	const gchar *label;
+	const gchar *text;
+	guint width;
+} TabWidthDefinition;
+	 
+static void
+fill_tab_width_combo (GeditWindow *window)
+{
+	static TabWidthDefinition defs[] = {
+		{"2", "2", 2},
+		{"4", "4", 4},
+		{"8", "8", 8},
+		{N_("Other"), NULL, 0},
+		{NULL, NULL, 0}
+	};
+	
+	GeditStatusComboBox *combo = GEDIT_STATUS_COMBO_BOX (window->priv->tab_width_combo);
+	guint i = 0;
+	GtkWidget *item;
+	
+	while (defs[i].label != NULL)
+	{
+		item = gtk_menu_item_new_with_label (_(defs[i].label));
+		g_object_set_data (G_OBJECT (item), TAB_WIDTH_DATA, GINT_TO_POINTER (defs[i].width));
+		gtk_widget_show (item);
+		
+		gedit_status_combo_box_add_item (combo,
+						 GTK_MENU_ITEM (item),
+						 defs[i].text);
+
+		if (defs[i].width == 0)
+			gtk_widget_set_sensitive (item, FALSE);
+
+		++i;
+	}
+	
+	item = gtk_separator_menu_item_new ();
+	gedit_status_combo_box_add_item (combo, GTK_MENU_ITEM (item), NULL);
+	gtk_widget_show (item);
+	
+	item = gtk_check_menu_item_new_with_label (_("Use spaces"));
+	gedit_status_combo_box_add_item (combo, GTK_MENU_ITEM (item), NULL);
+	gtk_widget_show (item);
+	
+	g_signal_connect (item, 
+			  "toggled", 
+			  G_CALLBACK (use_spaces_toggled), 
+			  window);
+}
+
+static void
+fill_language_combo (GeditWindow *window)
+{
+	GtkSourceLanguageManager *manager;
+	GSList *languages;
+	GSList *item;
+	GtkWidget *menu_item;
+	const gchar *name;
+	
+	manager = gedit_get_language_manager ();
+	languages = gedit_language_manager_list_languages_sorted (manager, FALSE);
+
+	name = _("Plain Text");
+	menu_item = gtk_menu_item_new_with_label (name);
+	gtk_widget_show (menu_item);
+	
+	g_object_set_data (G_OBJECT (menu_item), LANGUAGE_DATA, NULL);
+	gedit_status_combo_box_add_item (GEDIT_STATUS_COMBO_BOX (window->priv->language_combo),
+					 GTK_MENU_ITEM (menu_item),
+					 name);
+
+	for (item = languages; item; item = item->next)
+	{
+		GtkSourceLanguage *lang = GTK_SOURCE_LANGUAGE (item->data);
+		
+		name = gtk_source_language_get_name (lang);
+		menu_item = gtk_menu_item_new_with_label (name);
+		gtk_widget_show (menu_item);
+		
+		g_object_set_data_full (G_OBJECT (menu_item),
+				        LANGUAGE_DATA,		
+					g_object_ref (lang),
+					(GDestroyNotify)g_object_unref);
+
+		gedit_status_combo_box_add_item (GEDIT_STATUS_COMBO_BOX (window->priv->language_combo),
+						 GTK_MENU_ITEM (menu_item),
+						 name);
+	}
+	
+	g_slist_free (languages);
+}
+
+static void
 create_statusbar (GeditWindow *window, 
 		  GtkWidget   *main_box)
 {
+	GtkLabel *label;
 	gedit_debug (DEBUG_WINDOW);
 
 	window->priv->statusbar = gedit_statusbar_new ();
@@ -1713,6 +1869,41 @@ create_statusbar (GeditWindow *window,
 			  FALSE, 
 			  TRUE, 
 			  0);
+
+	window->priv->tab_width_combo = gedit_status_combo_box_new (_("Tab width"));
+	gtk_widget_show (window->priv->tab_width_combo);
+	gtk_box_pack_end (GTK_BOX (window->priv->statusbar),
+			  window->priv->tab_width_combo,
+			  FALSE,
+			  TRUE,
+			  0);
+
+	label = gedit_status_combo_box_get_item_label (GEDIT_STATUS_COMBO_BOX (window->priv->tab_width_combo));
+	gtk_label_set_width_chars (label, 2);
+	fill_tab_width_combo (window);
+
+	g_signal_connect (G_OBJECT (window->priv->tab_width_combo),
+			  "changed",
+			  G_CALLBACK (tab_width_combo_changed),
+			  window);
+			  
+	window->priv->language_combo = gedit_status_combo_box_new (NULL);
+	gtk_widget_show (window->priv->language_combo);
+	gtk_box_pack_end (GTK_BOX (window->priv->statusbar),
+			  window->priv->language_combo,
+			  FALSE,
+			  TRUE,
+			  0);
+
+	label = gedit_status_combo_box_get_item_label (GEDIT_STATUS_COMBO_BOX (window->priv->language_combo));
+	gtk_label_set_width_chars (label, 12);
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+	fill_language_combo (window);
+
+	g_signal_connect (G_OBJECT (window->priv->language_combo),
+			  "changed",
+			  G_CALLBACK (language_combo_changed),
+			  window);
 
 	g_signal_connect_after (G_OBJECT (window->priv->statusbar),
 				"show",
@@ -1952,6 +2143,134 @@ set_title (GeditWindow *window)
 
 #undef MAX_TITLE_LENGTH
 
+static void
+set_tab_width_item_blocked (GeditWindow *window,
+			    GtkMenuItem *item)
+{
+	g_signal_handlers_block_by_func (window->priv->tab_width_combo, 
+					 tab_width_combo_changed, 
+					 window);
+	
+	gedit_status_combo_box_set_item (GEDIT_STATUS_COMBO_BOX (window->priv->tab_width_combo),
+					 item);
+	
+	g_signal_handlers_unblock_by_func (window->priv->tab_width_combo, 
+					   tab_width_combo_changed, 
+					   window);
+}
+
+static void
+spaces_instead_of_tabs_changed (GObject     *object,
+		   		GParamSpec  *pspec,
+		 		GeditWindow *window)
+{
+	GeditView *view = GEDIT_VIEW (object);
+	gboolean active = gtk_source_view_get_insert_spaces_instead_of_tabs (
+			GTK_SOURCE_VIEW (view));
+	GList *children = gedit_status_combo_box_get_items (
+			GEDIT_STATUS_COMBO_BOX (window->priv->tab_width_combo));
+	GtkCheckMenuItem *item;
+	
+	item = GTK_CHECK_MENU_ITEM (g_list_last (children)->data);
+	
+	gtk_check_menu_item_set_active (item, active);
+	
+	g_list_free (children);	
+}
+
+static void
+tab_width_changed (GObject     *object,
+		   GParamSpec  *pspec,
+		   GeditWindow *window)
+{
+	GList *items;
+	GList *item;
+	GeditStatusComboBox *combo = GEDIT_STATUS_COMBO_BOX (window->priv->tab_width_combo);
+	guint new_tab_width;
+
+	items = gedit_status_combo_box_get_items (combo);
+
+	new_tab_width = gtk_source_view_get_tab_width (GTK_SOURCE_VIEW (object));
+	
+	for (item = items; item; item = item->next)
+	{
+		guint tab_width = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item->data), TAB_WIDTH_DATA));
+		
+		if (tab_width == new_tab_width)
+		{
+			set_tab_width_item_blocked (window, GTK_MENU_ITEM (item->data));
+
+			break;
+		}
+		
+		if (GTK_IS_SEPARATOR_MENU_ITEM (item->next->data))
+		{
+			/* Set for the last item the custom thing */
+			gchar *text;
+			
+			text = g_strdup_printf ("<i>%u</i>", new_tab_width);
+			gedit_status_combo_box_set_item_text (combo, 
+							      GTK_MENU_ITEM (item->data),
+							      text);
+			g_free (text);
+			
+			text = g_strdup_printf ("Other <i>(%u)</i>", new_tab_width);
+			gtk_label_set_markup (GTK_LABEL (gtk_bin_get_child (GTK_BIN (item->data))),
+					      text);
+			g_free (text);
+			
+			set_tab_width_item_blocked (window, GTK_MENU_ITEM (item->data));
+			gtk_widget_set_sensitive (GTK_WIDGET (item->data), TRUE);
+			
+			break;
+		}
+	}
+	
+	g_list_free (items);
+}
+
+static void
+language_changed (GObject     *object,
+		  GParamSpec  *pspec,
+		  GeditWindow *window)
+{
+	GList *items;
+	GList *item;
+	GeditStatusComboBox *combo = GEDIT_STATUS_COMBO_BOX (window->priv->language_combo);
+	GtkSourceLanguage *new_language;
+	const gchar *new_id;
+	
+	items = gedit_status_combo_box_get_items (combo);
+
+	new_language = gtk_source_buffer_get_language (GTK_SOURCE_BUFFER (object));
+	
+	if (new_language)
+		new_id = gtk_source_language_get_id (new_language);
+	else
+		new_id = NULL;
+	
+	for (item = items; item; item = item->next)
+	{
+		GtkSourceLanguage *lang = g_object_get_data (G_OBJECT (item->data), LANGUAGE_DATA);
+		
+		if ((new_id == NULL && lang == NULL) || 
+		    (new_id != NULL && lang != NULL && strcmp (gtk_source_language_get_id (lang),
+		    					       new_id) == 0))
+		{
+			g_signal_handlers_block_by_func (window->priv->language_combo, 
+							 language_combo_changed, 
+					 		 window);
+			
+			gedit_status_combo_box_set_item (GEDIT_STATUS_COMBO_BOX (window->priv->language_combo),
+					 		 GTK_MENU_ITEM (item->data));
+
+			g_signal_handlers_unblock_by_func (window->priv->language_combo, 
+							   language_combo_changed, 
+					 		   window);
+		}
+	}
+}
+
 static void 
 notebook_switch_page (GtkNotebook     *book, 
 		      GtkNotebookPage *pg,
@@ -1962,14 +2281,33 @@ notebook_switch_page (GtkNotebook     *book,
 	GeditTab *tab;
 	GtkAction *action;
 	gchar *action_name;
-
+	
 	/* CHECK: I don't know why but it seems notebook_switch_page is called
 	two times every time the user change the active tab */
 	
 	tab = GEDIT_TAB (gtk_notebook_get_nth_page (book, page_num));
 	if (tab == window->priv->active_tab)
 		return;
-
+	
+	if (window->priv->active_tab)
+	{
+		if (window->priv->tab_width_id)
+		{
+			g_signal_handler_disconnect (gedit_tab_get_view (window->priv->active_tab), 
+						     window->priv->tab_width_id);
+		
+			window->priv->tab_width_id = 0;
+		}
+		
+		if (window->priv->spaces_instead_of_tabs_id)
+		{
+			g_signal_handler_disconnect (gedit_tab_get_view (window->priv->active_tab), 
+						     window->priv->spaces_instead_of_tabs_id);
+		
+			window->priv->spaces_instead_of_tabs_id = 0;
+		}
+	}
+	
 	/* set the active tab */		
 	window->priv->active_tab = tab;
 
@@ -2000,6 +2338,26 @@ notebook_switch_page (GtkNotebook     *book,
 					  window);
 	gedit_statusbar_set_overwrite (GEDIT_STATUSBAR (window->priv->statusbar),
 				       gtk_text_view_get_overwrite (GTK_TEXT_VIEW (view)));
+
+	gtk_widget_set_sensitive (window->priv->tab_width_combo, TRUE);
+	window->priv->tab_width_id = g_signal_connect (view, 
+						       "notify::tab-width", 
+						       G_CALLBACK (tab_width_changed),
+						       window);
+	window->priv->spaces_instead_of_tabs_id = g_signal_connect (view, 
+								    "notify::insert-spaces-instead-of-tabs", 
+								    G_CALLBACK (spaces_instead_of_tabs_changed),
+								    window);
+
+	window->priv->language_changed_id = g_signal_connect (gedit_tab_get_document (tab),
+							      "notify::language",
+							      G_CALLBACK (language_changed),
+							      window);
+
+	/* call it for the first time */
+	tab_width_changed (G_OBJECT (view), NULL, window);
+	spaces_instead_of_tabs_changed (G_OBJECT (view), NULL, window);
+	language_changed (G_OBJECT (gedit_tab_get_document (tab)), NULL, window);
 
 	g_signal_emit (G_OBJECT (window), 
 		       signals[ACTIVE_TAB_CHANGED], 
@@ -2606,6 +2964,24 @@ notebook_tab_removed (GeditNotebook *notebook,
 					      G_CALLBACK (drop_uris_cb),
 					      NULL);
 
+	if (window->priv->tab_width_id)
+	{
+		g_signal_handler_disconnect (view, window->priv->tab_width_id);
+		window->priv->tab_width_id = 0;
+	}
+	
+	if (window->priv->spaces_instead_of_tabs_id)
+	{
+		g_signal_handler_disconnect (view, window->priv->spaces_instead_of_tabs_id);
+		window->priv->spaces_instead_of_tabs_id = 0;
+	}
+	
+	if (window->priv->language_changed_id)
+	{
+		g_signal_handler_disconnect (doc, window->priv->language_changed_id);
+		window->priv->language_changed_id = 0;
+	}
+
 	g_return_if_fail (window->priv->num_tabs >= 0);
 	if (window->priv->num_tabs == 0)
 	{
@@ -2620,7 +2996,9 @@ notebook_tab_removed (GeditNotebook *notebook,
 				-1);
 				
 		gedit_statusbar_clear_overwrite (
-				GEDIT_STATUSBAR (window->priv->statusbar));								
+				GEDIT_STATUSBAR (window->priv->statusbar));
+		
+		gtk_widget_set_sensitive (window->priv->tab_width_combo, FALSE);
 	}
 
 	if (!window->priv->removing_tabs)
