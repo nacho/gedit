@@ -66,7 +66,6 @@ window_data_new (GeditWindow            *window,
 	
 	groups = gtk_ui_manager_get_action_groups (manager);
 	gtk_ui_manager_insert_action_group (manager, data->merged_actions, g_list_length (groups));
-	g_list_free (groups);
 	
 	g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, data);
 
