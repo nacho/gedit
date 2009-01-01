@@ -609,7 +609,7 @@ gedit_file_browser_store_get_path_real (GeditFileBrowserStore * model,
 
 			check = (FileBrowserNode *) (item->data);
 
-			if (model_node_visibility (model, check)) {
+			if (model_node_visibility (model, check) && (check == node || check->inserted)) {
 				if (check == node) {
 					gtk_tree_path_prepend_index (path,
 								     num);
@@ -1401,7 +1401,7 @@ model_remove_node_children (GeditFileBrowserStore * model,
 		
 		return;
 	}
-
+	
 	if (path == NULL)
 		path_child =
 		    gedit_file_browser_store_get_path_real (model, node);
@@ -1706,7 +1706,7 @@ model_check_dummy (GeditFileBrowserStore * model, FileBrowserNode * node)
 				path =
 				    gedit_file_browser_store_get_path_real
 				    (model, dummy);
-
+				    
 				row_inserted (model, &path, &iter);
 				gtk_tree_path_free (path);
 			}
