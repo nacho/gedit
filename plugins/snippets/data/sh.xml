@@ -6,6 +6,18 @@
     <description>elif ..</description>
     <tag>elif</tag>
   </snippet>
+  <snippet id="case">
+    <text><![CDATA[case ${1:choice} in
+${2:first})
+	$3
+	;;
+*)
+	$4
+	;;
+esac]]></text>
+    <description>case ..</description>
+    <tag>case</tag>
+  </snippet>
   <snippet id="for">
     <text><![CDATA[for (( ${1:i = 0}; ${2:i < 10}; ${3:i++} )); do
 	$0
