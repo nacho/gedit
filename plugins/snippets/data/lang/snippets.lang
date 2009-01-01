@@ -85,17 +85,17 @@
         <context style-ref="shell-placeholder">
           <start>\$\(\%{tabstop}?</start>
           <end>\)</end>
-        <include>
-          <context sub-pattern="0" style-ref="placeholder-bounds" where="start"/>
-          <context sub-pattern="0" style-ref="placeholder-bounds" where="end"/>
-          <context sub-pattern="2" where="start" style-ref="tabstop"/>
-          <context sub-pattern="3" where="start" style-ref="seperator"/>
-          <context ref="shell-placeholder-contents"/>
-          <context>
-            <match>\\}</match>
-          </context>
-        </include>
-      </context>
+          <include>
+            <context sub-pattern="0" style-ref="placeholder-bounds" where="start"/>
+            <context sub-pattern="0" style-ref="placeholder-bounds" where="end"/>
+            <context sub-pattern="2" where="start" style-ref="tabstop"/>
+            <context sub-pattern="3" where="start" style-ref="seperator"/>
+            <context ref="shell-placeholder-contents"/>
+            <context>
+              <match>\\\)</match>
+            </context>
+          </include>
+        </context>
         <context style-ref="shell-placeholder">
           <start>`\%{tabstop}?</start>
           <end>`</end>
