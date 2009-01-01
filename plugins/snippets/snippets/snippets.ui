@@ -454,20 +454,39 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="entry_tab_trigger">
+                              <object class="GtkHBox" id="hbox_tab_trigger">
                                 <property name="visible">True</property>
-                                <property name="sensitive">False</property>
-                                <property name="tooltip-text" translatable="yes">Single word with which the snippet is activated after pressing tab</property>
-                                <property name="can_focus">True</property>
-                                <property name="editable">True</property>
-                                <property name="visibility">True</property>
-                                <property name="max_length">0</property>
-                                <property name="text" translatable="yes"/>
-                                <property name="has_frame">True</property>
-                                <property name="invisible_char">*</property>
-                                <property name="activates_default">False</property>
-                                <signal handler="on_entry_tab_trigger_focus_out" last_modification_time="Wed, 04 Jan 2006 14:07:29 GMT" name="focus_out_event"/>
-                                <signal handler="on_entry_tab_trigger_changed" last_modification_time="Fri, 28 Apr 2006 16:50:34 GMT" name="changed"/>
+                                <child>
+                                  <object class="GtkEntry" id="entry_tab_trigger">
+                                    <property name="visible">True</property>
+                                    <property name="sensitive">False</property>
+                                    <property name="tooltip-text" translatable="yes">Single word with which the snippet is activated after pressing tab</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="editable">True</property>
+                                    <property name="visibility">True</property>
+                                    <property name="max_length">0</property>
+                                    <property name="text" translatable="yes"/>
+                                    <property name="has_frame">True</property>
+                                    <property name="invisible_char">*</property>
+                                    <property name="activates_default">False</property>
+                                    <signal handler="on_entry_tab_trigger_focus_out" last_modification_time="Wed, 04 Jan 2006 14:07:29 GMT" name="focus_out_event"/>
+                                    <signal handler="on_entry_tab_trigger_changed" last_modification_time="Fri, 28 Apr 2006 16:50:34 GMT" name="changed"/>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkImage" id="image_tab_trigger">
+                                    <property name="visible">False</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="position">1</property>
+                                    <property name="padding">3</property>
+                                  </packing>
+                                </child>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>

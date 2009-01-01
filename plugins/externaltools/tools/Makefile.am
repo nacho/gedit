@@ -1,5 +1,6 @@
 # Python snippets plugin
 
+plugindir = $(GEDIT_PLUGINS_LIB_DIR)/externaltools
 plugin_PYTHON =		\
 	__init__.py	\
 	capture.py	\
@@ -9,12 +10,11 @@ plugin_PYTHON =		\
 	manager.py	\
 	outputpanel.py
 
-plugin_DATA = tools.ui \
+uidir = $(GEDIT_PLUGINS_DATA_DIR)/externaltools/ui
+ui_DATA = tools.ui \
 	outputpanel.ui
 
-plugindir = $(libdir)/gedit-2/plugins/externaltools
-
-EXTRA_DIST = $(plugin_DATA)
+EXTRA_DIST = $(ui_DATA)
 
 CLEANFILES = *.bak *.gladep
 DISTCLEANFILES = *.bak *.gladep

@@ -46,12 +46,14 @@ class Manager:
         dragging = False
         dnd_target_list = [('text/uri-list', 0, TARGET_URI)]
 
-        def __init__(self):
+        def __init__(self, datadir):
+                self.datadir = datadir
                 self.snippet = None
                 self.dlg = None
                 self._temp_export = None
                 self.snippets_doc = None
                 self.manager = None
+                self.default_size = None
 
                 self.key_press_id = 0
                 self.tooltips = gtk.Tooltips()
@@ -157,20 +159,25 @@ class Manager:
                 tree_view.expand_row(self.model.get_path(expand), False)
                 self.select_iter(expand)
 
+        def get_cell_data_pixbuf_cb(self, column, cell, model, iter):
+                s = model.get_value(iter, self.OBJ_COLUMN)
+                
+                snippet = isinstance(s, SnippetData)
+                
+                if snippet and not s.valid:
+                        cell.set_property('stock-id', gtk.STOCK_DIALOG_ERROR)
+                else:
+                        cell.set_property('stock-id', None)
+
+                cell.set_property('xalign', 1.0)
+                
         def get_cell_data_cb(self, column, cell, model, iter):
                 s = model.get_value(iter, self.OBJ_COLUMN)
                 
                 snippet = isinstance(s, SnippetData)
                 
                 cell.set_property('editable', snippet)
-                
-                if snippet and not s.valid:
-                        cell.set_property('foreground-gdk', gdk.color_parse('red'))
-                else:
-                        cell.set_property('foreground-set', False)
-                
                 cell.set_property('markup', model.get_value(iter, self.NAME_COLUMN))
-                
 
         def on_tree_view_drag_data_get(self, widget, context, selection_data, info, time):
                 gfile = gio.File(self._temp_export)
@@ -256,10 +263,15 @@ class Manager:
                 self.tree_view = self['tree_view_snippets']
                 
                 self.column = gtk.TreeViewColumn(None)
+
                 self.renderer = gtk.CellRendererText()
                 self.column.pack_start(self.renderer, False)
                 self.column.set_cell_data_func(self.renderer, self.get_cell_data_cb)
-                
+
+                renderer = gtk.CellRendererPixbuf()
+                self.column.pack_start(renderer, True)
+                self.column.set_cell_data_func(renderer, self.get_cell_data_pixbuf_cb)
+
                 self.tree_view.append_column(self.column)
                 
                 self.renderer.connect('edited', self.on_cell_edited)
@@ -285,7 +297,7 @@ class Manager:
                 
         def build(self):
                 self.builder = gtk.Builder()
-                self.builder.add_from_file(os.path.dirname(__file__) + '/snippets.ui')
+                self.builder.add_from_file(os.path.join(self.datadir, 'ui', 'snippets.ui'))
                 
                 handlers_dic = {
                         'on_dialog_snippets_response': self.on_dialog_snippets_response,
@@ -329,6 +341,9 @@ class Manager:
                 entry.drag_dest_set_target_list(lst)
                 
                 self.dlg = self['dialog_snippets']
+                
+                if self.default_size:
+                        self.dlg.set_default_size(*self.default_size)
         
         def __getitem__(self, key):
                 return self.builder.get_object(key)
@@ -432,7 +447,7 @@ class Manager:
         def run(self):
                 if not self.dlg:
                         self.build()
-                        self.dlg.show_all()
+                        self.dlg.show()
                 else:
                         self.build_model()
                         self.dlg.present()
@@ -599,6 +614,7 @@ class Manager:
                 if self.snippets_doc:
                         self.snippets_doc.stop()
                 
+                self.default_size = [dlg.allocation.width, dlg.allocation.height]
                 self.manager = None
 
                 self.unref_languages()        
@@ -664,16 +680,18 @@ class Manager:
                 text = entry.get_text()
                 
                 if text and not Library().valid_tab_trigger(text):
-                        entry.modify_base(gtk.STATE_NORMAL, gtk.gdk.Color(0xffff, 0x6666, \
-                                        0x6666))
-                        entry.modify_text(gtk.STATE_NORMAL, gtk.gdk.Color(0xffff, 0xffff, \
-                                        0xffff))
+                        img = self['image_tab_trigger']
+                        img.set_from_stock(gtk.STOCK_DIALOG_ERROR, gtk.ICON_SIZE_BUTTON)
+                        img.show()
 
-                        self.tooltips.set_tip(entry, _('This is not a valid tab trigger. Triggers can either contain letters or a single, non alphanumeric, character like {, [, etcetera.'))
+                        #self['hbox_tab_trigger'].set_spacing(3)
+                        tip = _('This is not a valid tab trigger. Triggers can either contain letters or a single, non alphanumeric, character like {, [, etcetera.')
+                        
+                        self.tooltips.set_tip(entry, tip)
+                        self.tooltips.set_tip(img, tip)
                 else:
-                        entry.modify_base(gtk.STATE_NORMAL, None)
-                        entry.modify_text(gtk.STATE_NORMAL, None)
-
+                        self['image_tab_trigger'].hide()
+                        #self['hbox_tab_trigger'].set_spacing(0)
                         self.tooltips.set_tip(entry, _('Single word with which the snippet is activated after pressing tab'))
                 
                 return False

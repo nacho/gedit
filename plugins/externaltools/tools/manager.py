@@ -26,23 +26,30 @@ from library import *
 from functions import *
 import hashlib
 
-class Manager(object):
-    UI_FILE = os.path.join(os.path.dirname(__file__), "tools.ui")
+class Singleton(object):
+    _instance = None
 
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(Singleton, cls).__new__(
+                             cls, *args, **kwargs)
+            cls._instance.__init_once__()
+
+        return cls._instance
+
+class Manager(Singleton):
     LABEL_COLUMN = 0 # For Combo and Tree
     NODE_COLUMN  = 1 # For Tree only
     NAME_COLUMN = 1  # For Combo only
 
-    __shared_state = None
+    def __init__(self, datadir):
+        self.datadir = datadir
 
-    _instance = None
-
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = object.__new__(cls)
-        return cls._instance
-
-    def __init__(self):
+    def __init_once__(self):
+        self.default_size = None
+        self.dialog = None
+    
+    def build(self):
         callbacks = {
             'on_new_tool_button_clicked'      : self.on_new_tool_button_clicked,
             'on_remove_tool_button_clicked'   : self.on_remove_tool_button_clicked,
@@ -55,16 +62,26 @@ class Manager(object):
 
         # Load the "main-window" widget from the ui file.
         self.ui = gtk.Builder()
-        self.ui.add_from_file(self.UI_FILE)
+        self.ui.add_from_file(os.path.join(self.datadir, 'ui', 'tools.ui'))
         self.ui.connect_signals(callbacks)
         self.dialog = self.ui.get_object('tool-manager-dialog')
+        
+        if self.default_size != None:
+            self.dialog.set_default_size(*self.default_size)
+        
         self.view = self.ui.get_object('view')
         for name in ['input', 'output', 'applicability']:
             self.__init_combobox(name)
         self.__init_tools_model()
         self.__init_tools_view()
-        self.dialog.show()
-
+    
+    def run(self):
+        if self.dialog == None:
+            self.build()
+            self.dialog.show()
+        else:
+            self.dialog.present()
+        
     def __init_tools_model(self):
         self.tools = ToolLibrary()
         self.current_node = None
@@ -329,7 +346,8 @@ class Manager(object):
             return
 
         self.on_tool_manager_dialog_focus_out(dialog, None)
-
+        self.default_size = [self.dialog.allocation.width, self.dialog.allocation.height]
+        
         self.dialog.destroy()
         self.dialog = None
         self.tools = None

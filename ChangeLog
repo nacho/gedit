@@ -1,5 +1,18 @@
 2009-01-01  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* configure.ac:
+	* plugins/externaltools:
+	* plugins/snippets:
+	
+	Added GEDIT_PLUGINS_LIB_DIR and GEDIT_PLUGINS_DATA_DIR to configure.ac
+	to be used in Makefile.am of plugins. Fixed loading ui files using
+	plugin.get_data_dir() for snippets and tools. Fixed data dirs for
+	win32 in snippets and externaltools. Added remembering dialog size
+	for snippets and tools. Changed showing error in snippets by using
+	icons instead of color changes (for usability, fixes: #352945)
+	
+2009-01-01  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* plugin-loaders/python/gedit-plugin-loader-python.c:
 	* plugin-loaders/python/bindings/geditplugin.override:
 	

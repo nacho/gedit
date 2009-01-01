@@ -152,7 +152,7 @@ class ExternalToolsWindowHelper(object):
         manager.ensure_update()
 
         # Create output console
-        self._output_buffer = OutputPanel(window)
+        self._output_buffer = OutputPanel(self._plugin.get_data_dir(), window)
         bottom = window.get_bottom_panel()
         bottom.add_item(self._output_buffer.panel,
                         _("Shell Output"),
@@ -177,6 +177,8 @@ class ExternalToolsPlugin(gedit.Plugin):
 
     def __init__(self):
         super(ExternalToolsPlugin, self).__init__()
+        
+        ToolLibrary().set_locations(self.get_data_dir())
 
     def activate(self, window):
         helper = ExternalToolsWindowHelper(self, window)
@@ -193,10 +195,13 @@ class ExternalToolsPlugin(gedit.Plugin):
         return self.open_dialog()
 
     def open_dialog(self):
-        tm = Manager().dialog
+        m = Manager(self.get_data_dir())
+
+        m.run()
         window = gedit.app_get_default().get_active_window()
         if window:
-            tm.set_transient_for(window)
-        return tm
+            m.dialog.set_transient_for(window)
+
+        return m.dialog
 
 # ex:ts=4:et:

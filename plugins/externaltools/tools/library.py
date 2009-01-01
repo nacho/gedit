@@ -19,21 +19,38 @@
 import os
 import re
 import locale
+import platform
 
-class ToolLibrary(object):
+class Singleton(object):
     _instance = None
 
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = object.__new__(cls)
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(Singleton, cls).__new__(
+                             cls, *args, **kwargs)
+            cls._instance.__init_once__()
+
         return cls._instance
 
-    def __init__(self):
-        self.locations = [os.path.join(d, 'gedit-2/plugins/tools')
-                            for d in self.get_xdg_data_dirs()]
+class ToolLibrary(Singleton):
+    def __init_once__(self):
+        self.locations = []
+    
+    def set_locations(self, datadir):
+        self.locations = []
+
+        if platform.platform() != 'Windows':
+            for d in self.get_xdg_data_dirs():
+                self.locations.append(os.path.join(d, 'gedit-2/plugins/tools'))
+
+        self.locations.append(datadir)
 
         # self.locations[0] is where we save the custom scripts
-        self.locations.insert(0, os.path.expanduser('~/.gnome2/gedit/tools'))
+        if platform.platform() == 'Windows':
+            self.locations.insert(0, os.path.expanduser('~/gedit/tools'))
+        else:
+            self.locations.insert(0, os.path.expanduser('~/.gnome2/gedit/tools'))
+
         if not os.path.isdir(self.locations[0]):
             os.makedirs(self.locations[0])
             self.tree = ToolDirectory(self, '')

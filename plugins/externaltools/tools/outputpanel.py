@@ -25,8 +25,6 @@ import os
 from weakref import WeakKeyDictionary
 from capture import *
 
-UI_FILE = os.path.join(os.path.dirname(__file__), "outputpanel.ui")
-
 class UniqueById:
     __shared_state = WeakKeyDictionary()
 
@@ -42,7 +40,7 @@ class UniqueById:
         return self.__class__.__shared_state
 
 class OutputPanel(UniqueById):
-    def __init__(self, window):
+    def __init__(self, datadir, window):
         if UniqueById.__init__(self, window):
             return
 
@@ -52,7 +50,7 @@ class OutputPanel(UniqueById):
 
         self.window = window
         self.ui = gtk.Builder()
-        self.ui.add_from_file(UI_FILE)
+        self.ui.add_from_file(os.path.join(datadir, 'ui', 'outputpanel.ui'))
         self.ui.connect_signals(callbacks)
 
         self.panel = self["output-panel"]

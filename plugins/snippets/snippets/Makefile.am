@@ -1,5 +1,5 @@
 # Python snippets plugin
-plugindir = $(libdir)/gedit-2/plugins/snippets
+plugindir = $(GEDIT_PLUGINS_LIB_DIR)/snippets
 
 plugin_PYTHON = \
 	__init__.py \
@@ -17,9 +17,10 @@ plugin_PYTHON = \
 	Importer.py \
 	Exporter.py
 
-plugin_DATA = snippets.ui
+uidir = $(GEDIT_PLUGINS_DATA_DIR)/snippets/ui
+ui_DATA = snippets.ui
 
-EXTRA_DIST = snippets.ui
+EXTRA_DIST = $(ui_DATA)
 
 CLEANFILES = *.bak *.gladep *.pyc
 DISTCLEANFILES = *.bak *.gladep *.pyc

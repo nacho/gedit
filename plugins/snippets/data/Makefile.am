@@ -22,6 +22,6 @@ snippets_DATA = \
 	tcl.xml \
 	xml.xml
 	
-snippetsdir = $(datadir)/gedit-2/plugins/snippets
+snippetsdir = $(GEDIT_PLUGINS_DATA_DIR)/snippets
 
-EXTRA_DIST = $(snippets_DATA) $(lang_DATA)
+EXTRA_DIST = $(snippets_DATA)

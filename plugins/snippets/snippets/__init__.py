@@ -22,6 +22,7 @@ import shutil
 import gtk
 from gtk import gdk    
 import gedit
+import platform
 
 from WindowHelper import WindowHelper
 from Library import Library
@@ -37,23 +38,29 @@ class SnippetsPlugin(gedit.Plugin):
                 library = Library()
                 library.set_accelerator_callback(self.accelerator_activated)
                 
-                userdir = os.path.join(os.environ['HOME'], '.gnome2', 'gedit', 'snippets')
+                if platform.platform() == 'Windows':
+	                userdir = os.path.expanduser('~/gedit/snippets')
+	        else:
+	        	userdir = os.path.expanduser('~/.gnome2/gedit/snippets')
+
                 library.set_dirs(userdir, self.system_dirs())
         
         def system_dirs(self):
-                if 'XDG_DATA_DIRS' in os.environ:
-                        datadirs = os.environ['XDG_DATA_DIRS']
-                else:
-                        datadirs = '/usr/local/share:/usr/share'
+        	if platform.platform() != 'Windows':
+		        if 'XDG_DATA_DIRS' in os.environ:
+		                datadirs = os.environ['XDG_DATA_DIRS']
+		        else:
+		                datadirs = '/usr/local/share:/usr/share'
+		        
+		        dirs = []
+		        
+		        for d in datadirs.split(':'):
+		                d = os.path.join(d, 'gedit-2', 'plugins', 'snippets')
+		                
+		                if os.path.isdir(d):
+		                        dirs.append(d)
                 
-                dirs = []
-                
-                for d in datadirs.split(':'):
-                        d = os.path.join(d, 'gedit-2', 'plugins', 'snippets')
-                        
-                        if os.path.isdir(d):
-                                dirs.append(d)
-                
+                dirs.append(self.get_data_dir())
                 return dirs
         
         def activate(self, window):
@@ -70,7 +77,7 @@ class SnippetsPlugin(gedit.Plugin):
         
         def create_configure_dialog(self):
                 if not self.dlg:
-                        self.dlg = Manager()
+                        self.dlg = Manager(self.get_data_dir())
                 else:
                         self.dlg.run()
                 

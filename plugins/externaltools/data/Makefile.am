@@ -9,7 +9,7 @@ tools_in_files = \
 desktop_in_files = $(tools_in_files:.tool.in=.desktop.in)
 desktop_files    = $(tools_in_files:.tool.in=.desktop)
 tools_SCRIPTS    = $(tools_in_files:.tool.in=)
-toolsdir = $(datadir)/gedit-2/plugins/tools
+toolsdir = $(GEDIT_PLUGINS_DATA_DIR)/tools
 
 @INTLTOOL_DESKTOP_RULE@
 
