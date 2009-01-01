@@ -1852,7 +1852,6 @@ static void
 create_statusbar (GeditWindow *window, 
 		  GtkWidget   *main_box)
 {
-	GtkLabel *label;
 	gedit_debug (DEBUG_WINDOW);
 
 	window->priv->statusbar = gedit_statusbar_new ();
@@ -1876,8 +1875,6 @@ create_statusbar (GeditWindow *window,
 			  TRUE,
 			  0);
 
-	label = gedit_status_combo_box_get_item_label (GEDIT_STATUS_COMBO_BOX (window->priv->tab_width_combo));
-	gtk_label_set_width_chars (label, 2);
 	fill_tab_width_combo (window);
 
 	g_signal_connect (G_OBJECT (window->priv->tab_width_combo),
@@ -1893,9 +1890,6 @@ create_statusbar (GeditWindow *window,
 			  TRUE,
 			  0);
 
-	label = gedit_status_combo_box_get_item_label (GEDIT_STATUS_COMBO_BOX (window->priv->language_combo));
-	gtk_label_set_width_chars (label, 12);
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	fill_language_combo (window);
 
 	g_signal_connect (G_OBJECT (window->priv->language_combo),
