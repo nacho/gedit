@@ -4,7 +4,8 @@ SUBDIRS = lang
 snippets_DATA = \
 	css.xml \
 	c.xml \
-	c++.xml \
+	cpp.xml \
+	chdr.xml \
 	docbook.xml \
 	global.xml \
 	haskell.xml \

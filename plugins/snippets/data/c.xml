@@ -87,17 +87,6 @@ except KeyError:
     <tag>while</tag>
     <description>while loop</description>
   </snippet>
-  <snippet id="once">
-    <text><![CDATA[#ifndef __${1:NAME}_H__
-#define __$1_H__
-
-$0
-
-#endif /* __$1_H__ */
-]]></text>
-    <tag>once</tag>
-    <description>Header-Include Guard</description>
-  </snippet>
   <snippet id="if">
     <text><![CDATA[if (${1:condition})
 {
@@ -163,5 +152,58 @@ $0]]></text>
 $0]]></text>
     <tag>td</tag>
     <description>typedef</description>
+  </snippet>
+  <snippet id="gobject">>
+    <text><![CDATA[#include "$1.h"
+$<
+global camel_str,low_str, type_str, is_str, up_str
+components = $1.split('-')
+low_str = '_'.join(components).lower()
+up_str = '_'.join(components).upper()
+type_str = '_'.join([components[0], 'TYPE'] + components[1:]).upper()
+is_str = '_'.join([components[0], 'IS'] + components[1:]).upper()
+camel_str = ''
+
+for t in components:
+  camel_str += t.capitalize()
+>
+
+#define $<[1]: return up_str >_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), $<[1]: return type_str >, $<[1]: return camel_str >Private))
+
+struct _$<[1]: return camel_str >Private
+{
+};
+
+G_DEFINE_TYPE ($<[1]: return camel_str >, $<[1]: return low_str >, ${2:G_TYPE_OBJECT})
+
+static void
+$<[1]: return low_str>_finalize (GObject *object)
+{
+	G_OBJECT_CLASS ($<[1]: return low_str >_parent_class)->finalize (object);
+}
+
+static void
+$<[1]: return low_str >_class_init ($<[1]: return camel_str >Class *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	
+	object_class->finalize = $<[1]: return low_str >_finalize;
+
+	g_type_class_add_private (object_class, sizeof($<[1]: return camel_str >Private));
+}
+
+static void
+$<[1]: return low_str >_init ($<[1]: return camel_str> *self)
+{
+	self->priv = $<[1]: return up_str >_GET_PRIVATE (self);
+}
+
+$<[1]: return camel_str >*
+$<[1]: return low_str >_new ()
+{
+	return g_object_new ($<[1]: return type_str >, NULL);
+}]]></text>
+    <tag>gobject</tag>
+    <description>GObject template</description>
   </snippet>
 </snippets>
