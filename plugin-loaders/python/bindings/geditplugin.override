@@ -191,15 +191,3 @@ _wrap_gedit_plugin_create_configure_dialog (PyGObject *self)
 	/* pygobject_new handles NULL checking */
 	return pygobject_new ((GObject *)ret);
 }
-%%
-override gedit_plugin_python_new
-static int
-_wrap_gedit_plugin_python_new(PyGObject *self)
-{
-        /* explicitly don't create the gobject, because we do that
-		   in the loader so we can set the install path property
-		   at construction time */
-        return 0;
-}
-%%
-new-constructor GEDIT_TYPE_PLUGIN_PYTHON
