@@ -2271,6 +2271,8 @@ language_changed (GObject     *object,
 					 		   window);
 		}
 	}
+
+	g_list_free (items);
 }
 
 static void 
