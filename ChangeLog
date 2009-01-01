@@ -1,5 +1,15 @@
 2009-01-01  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* gedit/gedit-plugins-engine.c: call gtk_ui_manager_ensure_update when
+	deactivating a plugin from the preference dialog. This fixes a crash
+	suspectedly caused by something in GtkUIManager using the static
+	strings from provided GtkActionEntry from the loaded plugin module.
+	When the module is unloaded, the 'static' strings are no longer valid,
+	and the ui manager updates the ui in an idle func (which causes access
+	to the now invalid strings).
+
+2009-01-01  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* plugins/filebrowser/gedit-file-browser-store.c: fixed wrong
 	calculation of node path
 

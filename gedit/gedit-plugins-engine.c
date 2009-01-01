@@ -631,6 +631,19 @@ gedit_plugins_engine_activate_plugin (GeditPluginsEngine *engine,
 }
 
 static void
+call_plugin_deactivate (GeditPlugin *plugin, 
+			GeditWindow *window)
+{
+	gedit_plugin_deactivate (plugin, window);
+
+	/* ensure update of ui manager, because we suspect it does something
+	   with expected static strings in the type module (when unloaded the
+	   strings don't exist anymore, and ui manager updates in an idle
+	   func) */
+	gtk_ui_manager_ensure_update (gedit_window_get_ui_manager (window));
+}
+
+static void
 gedit_plugins_engine_deactivate_plugin_real (GeditPluginsEngine *engine,
 					     GeditPluginInfo *info)
 {
@@ -643,7 +656,7 @@ gedit_plugins_engine_deactivate_plugin_real (GeditPluginsEngine *engine,
 
 	wins = gedit_app_get_windows (gedit_app_get_default ());
 	for (; wins != NULL; wins = wins->next)
-		gedit_plugin_deactivate (info->plugin, GEDIT_WINDOW (wins->data));
+		call_plugin_deactivate (info->plugin, GEDIT_WINDOW (wins->data));
 
 	/* first unref the plugin (the loader still has one) */
 	g_object_unref (info->plugin);
