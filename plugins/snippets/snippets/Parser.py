@@ -186,7 +186,7 @@ class Parser:
 
         def _match_shell(self):
                 text = self.remains()
-                match = re.match('`((%s):)?((\\\\`|[^`])+?)`' % self.SREG_ID, text) or re.match('\\$\\(((%s):)?((\\\\\\)|[^`])+?)\\)' % self.SREG_ID, text)
+                match = re.match('`((%s):)?((\\\\`|[^`])+?)`' % self.SREG_ID, text) or re.match('\\$\\(((%s):)?((\\\\\\)|[^\\)])+?)\\)' % self.SREG_ID, text)
                 
                 if not match:
                         return None
