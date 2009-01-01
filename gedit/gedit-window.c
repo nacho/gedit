@@ -953,11 +953,11 @@ create_languages_menu (GeditWindow *window)
 
 	gedit_debug (DEBUG_WINDOW);
 
-	/* add the "None" item before all the others */
+	/* add the "Plain Text" item before all the others */
 	
-	/* Translators: "None" means that no highlight mode is selected in the 
+	/* Translators: "Plain Text" means that no highlight mode is selected in the 
 	 * "View->Highlight Mode" submenu and so syntax highlighting is disabled */
-	action_none = gtk_radio_action_new (LANGUAGE_NONE, _("None"),
+	action_none = gtk_radio_action_new (LANGUAGE_NONE, _("Plain Text"),
 					    _("Disable syntax highlighting"),
 					    NULL,
 					    -1);
@@ -1796,7 +1796,7 @@ fill_tab_width_combo (GeditWindow *window)
 	gedit_status_combo_box_add_item (combo, GTK_MENU_ITEM (item), NULL);
 	gtk_widget_show (item);
 	
-	item = gtk_check_menu_item_new_with_label (_("Use spaces"));
+	item = gtk_check_menu_item_new_with_label (_("Use Spaces"));
 	gedit_status_combo_box_add_item (combo, GTK_MENU_ITEM (item), NULL);
 	gtk_widget_show (item);
 	
@@ -1867,7 +1867,7 @@ create_statusbar (GeditWindow *window,
 			  TRUE, 
 			  0);
 
-	window->priv->tab_width_combo = gedit_status_combo_box_new (_("Tab width"));
+	window->priv->tab_width_combo = gedit_status_combo_box_new (_("Tab Width"));
 	gtk_widget_show (window->priv->tab_width_combo);
 	gtk_box_pack_end (GTK_BOX (window->priv->statusbar),
 			  window->priv->tab_width_combo,
