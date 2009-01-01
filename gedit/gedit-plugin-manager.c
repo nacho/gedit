@@ -109,6 +109,7 @@ about_button_cb (GtkWidget          *button,
 		"comments", gedit_plugin_info_get_description (info),
 		"website", gedit_plugin_info_get_website (info),
 		"logo-icon-name", gedit_plugin_info_get_icon_name (info),
+		"version", gedit_plugin_info_get_version (info),
 		NULL);
 
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (pm->priv->about),

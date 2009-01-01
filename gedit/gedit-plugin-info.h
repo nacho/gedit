@@ -55,6 +55,7 @@ const gchar	*gedit_plugin_info_get_icon_name	(GeditPluginInfo *info);
 const gchar    **gedit_plugin_info_get_authors		(GeditPluginInfo *info);
 const gchar	*gedit_plugin_info_get_website		(GeditPluginInfo *info);
 const gchar	*gedit_plugin_info_get_copyright	(GeditPluginInfo *info);
+const gchar	*gedit_plugin_info_get_version		(GeditPluginInfo *info);
 
 G_END_DECLS
 

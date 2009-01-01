@@ -77,6 +77,7 @@ _gedit_plugin_info_unref (GeditPluginInfo *info)
 	g_free (info->website);
 	g_free (info->copyright);
 	g_free (info->loader);
+	g_free (info->version);
 	g_strfreev (info->authors);
 
 	g_free (info);
@@ -262,7 +263,17 @@ _gedit_plugin_info_new (const gchar *file)
 		info->website = str;
 	else
 		gedit_debug_message (DEBUG_PLUGINS, "Could not find 'Website' in %s", file);
-		
+	
+	/* Get Version */
+	str = g_key_file_get_string (plugin_file,
+				     "Gedit Plugin",
+				     "Version",
+				     NULL);
+	if (str)
+		info->version = str;
+	else
+		gedit_debug_message (DEBUG_PLUGINS, "Could not find 'Version' in %s", file);
+	
 	g_key_file_free (plugin_file);
 	
 	/* If we know nothing about the availability of the plugin,
@@ -372,4 +383,12 @@ gedit_plugin_info_get_copyright (GeditPluginInfo *info)
 	g_return_val_if_fail (info != NULL, NULL);
 
 	return info->copyright;
+}
+
+const gchar *
+gedit_plugin_info_get_version (GeditPluginInfo *info)
+{
+	g_return_val_if_fail (info != NULL, NULL);
+
+	return info->version;
 }
