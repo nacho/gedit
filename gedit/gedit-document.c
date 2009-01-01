@@ -927,7 +927,7 @@ gedit_document_get_mime_type (GeditDocument *doc)
 		mime_type = g_content_type_get_mime_type (doc->priv->content_type);
 	}
 
- 	return mime_type != NULL ? g_strdup (mime_type) : g_strdup ("text/plain");
+ 	return mime_type != NULL ? mime_type : g_strdup ("text/plain");
 }
 
 /* Note: do not emit the notify::read-only signal */

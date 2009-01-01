@@ -1750,8 +1750,9 @@ _gedit_tab_get_tooltips	(GeditTab *tab)
 				content_full_description = g_strdup_printf ("%s (%s)", 
 						content_description, mime_type);
 
-			g_free (content_description);
+			g_free (content_type);
 			g_free (mime_type);
+			g_free (content_description);
 
 			enc = gedit_document_get_encoding (doc);
 
