@@ -277,7 +277,8 @@ class Snippet:
                         placeholder = self.placeholders[tabstop]
 
                         if tabstop != -1:
-                                if isinstance(placeholder, PlaceholderExpand) and placeholder.has_references:
+                                if isinstance(placeholder, PlaceholderExpand) and \
+                                   placeholder.has_references:
                                         # Add to anonymous placeholders
                                         self.placeholders[-1].append(placeholder)
                                         

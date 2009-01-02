@@ -170,13 +170,16 @@ class Placeholder:
                         for mirror in self.mirrors:
                                 if not mirror.update(self):
                                         return
-                        
-        # Do something on ending this placeholder
-        def leave(self):
+
+        def update_leave_mirrors(self):
                 # Notify mirrors
                 for mirror in self.leave_mirrors:
                         if not mirror.update(self):
                                 return
+
+        # Do something on ending this placeholder
+        def leave(self):
+               self.update_leave_mirrors()
 
         def find_mirrors(self, text, placeholders):
                 mirrors = []
@@ -265,6 +268,11 @@ class PlaceholderExpand(Placeholder):
                 self.cmd = s
                 self.instant_update = False
 
+        def __str__(self):
+                s = Placeholder.__str__(self)
+                
+                return s + ' ' + self.cmd
+
         def get_mirrors(self, placeholders):
                 return self.find_mirrors(self.cmd, placeholders)
                 
@@ -274,7 +282,7 @@ class PlaceholderExpand(Placeholder):
 
                 self.ok = True
                 mirrors = self.get_mirrors(placeholders)
-        
+                
                 if mirrors:
                         allDefault = True
                                 
@@ -283,7 +291,7 @@ class PlaceholderExpand(Placeholder):
                                 p.add_mirror(self, not self.instant_update)
                                 self.mirror_text[p.tabstop] = p.default
                                 
-                                if not p.default:
+                                if not p.default and not isinstance(p, PlaceholderExpand):
                                         allDefault = False
                         
                         if allDefault:
@@ -337,22 +345,27 @@ class PlaceholderExpand(Placeholder):
                 text = self.substitute(self.cmd)
                 
                 if text:
-                        return self.expand(text)
+                        ret = self.expand(text)
+                        
+                        if ret:
+                                self.update_leave_mirrors()
+                else:
+                        ret = True
                 
-                return True
+                return ret
               
         def update(self, mirror):
                 text = None
                 
                 if mirror:
                         self.mirror_text[mirror.tabstop] = mirror.get_text()
-
+                        
                         # Check if all substitutions have been made
                         for tabstop in self.mirror_text:
                                 if tabstop == 0:
                                         continue
 
-                                if not self.mirror_text[tabstop]:
+                                if self.mirror_text[tabstop] == None:
                                         return False
 
                 return self.run_update()
@@ -569,7 +582,7 @@ class PlaceholderEval(PlaceholderExpand):
                                 return False
 
                         if result == None:
-                                sys.stderr.write("%s:\n>> %s\n" % (_('The following python code, run in a snippet, does not return a value'), "\n>> ".join(self.command.split("\n"))))
+                                # sys.stderr.write("%s:\n>> %s\n" % (_('The following python code, run in a snippet, does not return a value'), "\n>> ".join(self.command.split("\n"))))
                                 result = ''
 
                         self.set_text(str(result))
