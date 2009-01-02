@@ -64,6 +64,10 @@ modeline_parser_shutdown ()
 	g_hash_table_destroy (vim_languages);
 	g_hash_table_destroy (emacs_languages);
 	g_hash_table_destroy (kate_languages);
+	
+	vim_languages = NULL;
+	emacs_languages = NULL;
+	kate_languages = NULL;
 
 	g_free (modelines_data_dir);
 }
@@ -253,6 +257,7 @@ parse_vim_modeline (gchar           *s,
 		if (strcmp (key->str, "ft") == 0 ||
 		    strcmp (key->str, "filetype") == 0)
 		{
+			g_free (options->language_id);
 			options->language_id = get_language_id_vim (value->str);
 		}
 		else if (strcmp (key->str, "et") == 0 ||
@@ -346,6 +351,7 @@ parse_emacs_modeline (gchar           *s,
 
 		if (strcmp (key->str, "Mode") == 0)
 		{
+			g_free (options->language_id);
 			options->language_id = get_language_id_emacs (value->str);
 		}
 		else if (strcmp (key->str, "tab-width") == 0)
@@ -428,6 +434,7 @@ parse_kate_modeline (gchar           *s,
 		if (strcmp (key->str, "hl") == 0 ||
 		    strcmp (key->str, "syntax") == 0)
 		{
+			g_free (options->language_id);
 			options->language_id = get_language_id_kate (value->str);
 		}
 		else if (strcmp (key->str, "tab-width") == 0)
