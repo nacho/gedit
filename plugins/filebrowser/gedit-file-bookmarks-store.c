@@ -617,15 +617,23 @@ bookmarks_compare_names (GtkTreeModel * model, GtkTreeIter * a,
 	gchar *n1;
 	gchar *n2;
 	gint result;
+	guint f1;
+	guint f2;
 
 	gtk_tree_model_get (model, a,
 			    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_NAME, &n1,
+			    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_FLAGS, &f1,
 			    -1);
 	gtk_tree_model_get (model, b,
 			    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_NAME, &n2,
+			    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_FLAGS, &f2,
 			    -1);
 
-	if (n1 == NULL && n2 == NULL)
+	/* do not sort actual bookmarks to keep same order as in nautilus */
+	if ((f1 & GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK) &&
+	    (f2 & GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK))
+		result = 0;
+	else if (n1 == NULL && n2 == NULL)
 		result = 0;
 	else if (n1 == NULL)
 		result = -1;
