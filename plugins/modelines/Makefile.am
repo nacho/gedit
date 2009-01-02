@@ -7,6 +7,10 @@ INCLUDES = \
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED_CFLAGS)
 
+modelinesdir = $(datadir)/gedit-2/plugins/modelines
+modelines_DATA = \
+	language-mappings
+
 plugin_LTLIBRARIES = libmodelines.la
 
 libmodelines_la_SOURCES = \

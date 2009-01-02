@@ -45,9 +45,10 @@ typedef struct
 	gulong document_saved_handler_id;
 } DocumentData;
 
-static void gedit_modeline_plugin_activate (GeditPlugin *plugin, GeditWindow *window);
-static void gedit_modeline_plugin_deactivate (GeditPlugin *plugin, GeditWindow *window);
-static void gedit_modeline_plugin_finalize (GObject *object);
+static void	gedit_modeline_plugin_activate (GeditPlugin *plugin, GeditWindow *window);
+static void	gedit_modeline_plugin_deactivate (GeditPlugin *plugin, GeditWindow *window);
+static GObject	*gedit_modeline_plugin_constructor (GType type, guint n_construct_properties, GObjectConstructParam *construct_param);
+static void	gedit_modeline_plugin_finalize (GObject *object);
 
 GEDIT_PLUGIN_REGISTER_TYPE(GeditModelinePlugin, gedit_modeline_plugin)
 
@@ -69,10 +70,32 @@ gedit_modeline_plugin_class_init (GeditModelinePluginClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GeditPluginClass *plugin_class = GEDIT_PLUGIN_CLASS (klass);
 
+	object_class->constructor = gedit_modeline_plugin_constructor;
 	object_class->finalize = gedit_modeline_plugin_finalize;
 
 	plugin_class->activate = gedit_modeline_plugin_activate;
 	plugin_class->deactivate = gedit_modeline_plugin_deactivate;
+}
+
+static GObject *
+gedit_modeline_plugin_constructor (GType                  type,
+				   guint                  n_construct_properties,
+				   GObjectConstructParam *construct_param)
+{
+	GObject *object;
+	gchar *data_dir;
+
+	object = G_OBJECT_CLASS (gedit_modeline_plugin_parent_class)->constructor (type,
+										   n_construct_properties,
+										   construct_param);
+
+	data_dir = gedit_plugin_get_data_dir (GEDIT_PLUGIN (object));
+
+	modeline_parser_init (data_dir);
+
+	g_free (data_dir);
+
+	return object;
 }
 
 static void
@@ -86,6 +109,8 @@ gedit_modeline_plugin_finalize (GObject *object)
 {
 	gedit_debug_message (DEBUG_PLUGINS, "GeditModelinePlugin finalizing");
 
+	modeline_parser_shutdown ();
+
 	G_OBJECT_CLASS (gedit_modeline_plugin_parent_class)->finalize (object);
 }
 
@@ -94,7 +119,7 @@ on_document_loaded_or_saved (GeditDocument *document,
 			     const GError  *error,
 			     GtkSourceView *view)
 {
-	apply_modeline (view);
+	modeline_parser_apply_modeline (view);
 }
 
 static void
@@ -153,12 +178,12 @@ gedit_modeline_plugin_activate (GeditPlugin *plugin,
 	GList *l;
 
 	gedit_debug (DEBUG_PLUGINS);
-	
+
 	views = gedit_window_get_views (window);
 	for (l = views; l != NULL; l = l->next)
 	{
 		connect_handlers (GEDIT_VIEW (l->data));
-		apply_modeline (GTK_SOURCE_VIEW (l->data));
+		modeline_parser_apply_modeline (GTK_SOURCE_VIEW (l->data));
 	}
 	g_list_free (views);
 

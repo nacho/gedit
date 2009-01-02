@@ -22,12 +22,25 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <gedit/gedit-language-manager.h>
 #include <gedit/gedit-prefs-manager.h>
 #include <gedit/gedit-debug.h>
 #include "modeline-parser.h"
 
+#define MODELINES_LANGUAGE_MAPPINGS_FILE "language-mappings"
+
+/* base dir to lookup configuration files */
+static gchar *modelines_data_dir;
+
+/* Mappings: language name -> Gedit language ID */
+static GHashTable *vim_languages;
+static GHashTable *emacs_languages;
+static GHashTable *kate_languages;
+
 typedef struct _ModelineOptions
 {
+	gchar		*language_id;
+
 	/* these options are similar to the GtkSourceView properties of the
 	 * same names.
 	 */
@@ -38,6 +51,135 @@ typedef struct _ModelineOptions
 	gboolean	display_right_margin;
 	guint		right_margin_position;
 } ModelineOptions;
+
+void
+modeline_parser_init (const gchar *data_dir)
+{
+	modelines_data_dir = g_strdup (data_dir);
+}
+
+void
+modeline_parser_shutdown ()
+{
+	g_hash_table_destroy (vim_languages);
+	g_hash_table_destroy (emacs_languages);
+	g_hash_table_destroy (kate_languages);
+
+	g_free (modelines_data_dir);
+}
+
+static GHashTable *
+load_language_mappings_group (GKeyFile *key_file, const gchar *group)
+{
+	GHashTable *table;
+	gchar **keys;
+	gsize length = 0;
+	int i;
+
+	table = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+
+	keys = g_key_file_get_keys (key_file, group, &length, NULL);
+
+	gedit_debug_message (DEBUG_PLUGINS,
+			     "%" G_GSIZE_FORMAT " mappings in group %s",
+			     length, group);
+
+	for (i = 0; i < length; i++)
+	{
+		gchar *name = keys[i];
+		gchar *id = g_key_file_get_string (key_file, group, name, NULL);
+		g_hash_table_insert (table, name, id);
+	}
+	g_free (keys);
+
+	return table;
+}
+
+/* lazy loading of language mappings */
+static void
+load_language_mappings (void)
+{
+	gchar *fname;
+	GKeyFile *mappings;
+	GError *error = NULL;
+
+	fname = g_build_filename (modelines_data_dir,
+				  MODELINES_LANGUAGE_MAPPINGS_FILE,
+				  NULL);
+
+	mappings = g_key_file_new ();
+
+	if (g_key_file_load_from_file (mappings, fname, 0, &error))
+	{
+		gedit_debug_message (DEBUG_PLUGINS,
+				     "Loaded language mappings from %s",
+				     fname);
+
+		vim_languages = load_language_mappings_group (mappings, "vim");
+		emacs_languages	= load_language_mappings_group (mappings, "emacs");
+		kate_languages = load_language_mappings_group (mappings, "kate");
+	}
+	else
+	{
+		gedit_debug_message (DEBUG_PLUGINS,
+				     "Failed to loaded language mappings from %s: %s",
+				     fname, error->message);
+
+		g_error_free (error);
+	}
+
+	g_key_file_free (mappings);
+	g_free (fname);
+}
+
+static gchar *
+get_language_id (const gchar *language_name, GHashTable *mapping)
+{
+	gchar *name;
+	gchar *language_id;
+
+	name = g_ascii_strdown (language_name, -1);
+
+	language_id = g_hash_table_lookup (mapping, name);
+
+	if (language_id != NULL)
+	{
+		g_free (name);
+		return g_strdup (language_id);
+	}
+	else
+	{
+		/* by default assume that the gtksourcevuew id is the same */
+		return name;
+	}
+}
+
+static gchar *
+get_language_id_vim (const gchar *language_name)
+{
+	if (vim_languages == NULL)
+		load_language_mappings ();
+
+	return get_language_id (language_name, vim_languages);
+}
+
+static gchar *
+get_language_id_emacs (const gchar *language_name)
+{
+	if (emacs_languages == NULL)
+		load_language_mappings ();
+
+	return get_language_id (language_name, emacs_languages);
+}
+
+static gchar *
+get_language_id_kate (const gchar *language_name)
+{
+	if (kate_languages == NULL)
+		load_language_mappings ();
+
+	return get_language_id (language_name, kate_languages);
+}
 
 static gboolean
 skip_whitespaces (gchar **s)
@@ -108,7 +250,12 @@ parse_vim_modeline (gchar           *s,
 			}
 		}
 
-		if (strcmp (key->str, "et") == 0 ||
+		if (strcmp (key->str, "ft") == 0 ||
+		    strcmp (key->str, "filetype") == 0)
+		{
+			options->language_id = get_language_id_vim (value->str);
+		}
+		else if (strcmp (key->str, "et") == 0 ||
 		    strcmp (key->str, "expandtab") == 0)
 		{
 			options->insert_spaces = !neg;
@@ -151,7 +298,7 @@ parse_vim_modeline (gchar           *s,
  * See http://www.delorie.com/gnu/docs/emacs/emacs_486.html
  */
 static gchar *
-parse_emacs_modeline (gchar         *s,
+parse_emacs_modeline (gchar           *s,
 		      ModelineOptions *options)
 {
 	guint intval;
@@ -197,7 +344,11 @@ parse_emacs_modeline (gchar         *s,
 				     "Emacs modeline bit: %s = %s",
 				     key->str, value->str);
 
-		if (strcmp (key->str, "tab-width") == 0)
+		if (strcmp (key->str, "Mode") == 0)
+		{
+			options->language_id = get_language_id_emacs (value->str);
+		}
+		else if (strcmp (key->str, "tab-width") == 0)
 		{
 			intval = atoi (value->str);
 			if (intval) options->tab_width = intval;
@@ -233,7 +384,7 @@ parse_emacs_modeline (gchar         *s,
  * See http://wiki.kate-editor.org/index.php/Modelines
  */
 static gchar *
-parse_kate_modeline (gchar *s,
+parse_kate_modeline (gchar           *s,
 		     ModelineOptions *options)
 {
 	guint intval;
@@ -274,7 +425,12 @@ parse_kate_modeline (gchar *s,
 				     "Kate modeline bit: %s = %s",
 				     key->str, value->str);
 
-		if (strcmp (key->str, "tab-width") == 0)
+		if (strcmp (key->str, "hl") == 0 ||
+		    strcmp (key->str, "syntax") == 0)
+		{
+			options->language_id = get_language_id_kate (value->str);
+		}
+		else if (strcmp (key->str, "tab-width") == 0)
 		{
 			intval = atoi (value->str);
 			if (intval) options->tab_width = intval;
@@ -354,7 +510,7 @@ parse_modeline (gchar           *s,
 }
 
 void
-apply_modeline (GtkSourceView *view)
+modeline_parser_apply_modeline (GtkSourceView *view)
 {
 	ModelineOptions options;
 	GtkTextBuffer *buffer;
@@ -363,6 +519,7 @@ apply_modeline (GtkSourceView *view)
 	gint line_count;
 
 	/* Default values for modeline options */
+	options.language_id = NULL;
 	options.insert_spaces = gedit_prefs_manager_get_insert_spaces ();
 	options.tab_width = gedit_prefs_manager_get_tabs_size ();
 	options.indent_width = -1; /* not set by default */
@@ -414,6 +571,25 @@ apply_modeline (GtkSourceView *view)
 
 		g_free (line);
 		line_number ++;
+	}
+
+	/* Try to set language */
+	if (options.language_id != NULL)
+	{
+		GtkSourceLanguageManager *manager;
+		GtkSourceLanguage *language;
+
+		manager = gedit_get_language_manager ();
+		language = gtk_source_language_manager_get_language
+				(manager, options.language_id);
+
+		if (language != NULL)
+		{
+			gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (buffer),
+							language);
+		}
+
+		g_free (options.language_id);
 	}
 
 	/* Apply the options we got from modelines */
