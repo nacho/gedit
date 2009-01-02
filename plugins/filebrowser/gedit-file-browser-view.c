@@ -41,7 +41,7 @@ struct _GeditFileBrowserViewPrivate
 	GtkCellRenderer *text_renderer;
 
 	GtkTreeModel *model;
-	GtkTreePath *editable;
+	GtkTreeRowReference *editable;
 
 	GdkCursor *busy_cursor;
 
@@ -92,12 +92,6 @@ static void on_cell_edited 		(GtkCellRendererText 	* cell,
 				 	 gchar 			* path,
 				 	 gchar 			* new_text,
 				 	GeditFileBrowserView 	* tree_view);
-static void on_begin_loading 		(GeditFileBrowserStore 	* model, 
-				 	 GtkTreeIter 		* iter,
-					 GeditFileBrowserView 	* obj);
-static void on_end_loading 		(GeditFileBrowserStore 	* model, 
-					 GtkTreeIter 		* iter,
-					 GeditFileBrowserView 	* obj);
 
 static void on_begin_refresh 		(GeditFileBrowserStore 	* model, 
 					 GeditFileBrowserView 	* view);
@@ -929,9 +923,15 @@ cell_data_cb (GtkTreeViewColumn * tree_column, GtkCellRenderer * cell,
 			underline = PANGO_UNDERLINE_SINGLE;	
 	}
 
-	if (GEDIT_IS_FILE_BROWSER_STORE (tree_model)) {
-		if (obj->priv->editable != NULL)
-			editable = gtk_tree_path_compare (path, obj->priv->editable) == 0;
+	if (GEDIT_IS_FILE_BROWSER_STORE (tree_model))
+	{
+		if (obj->priv->editable != NULL && 
+		    gtk_tree_row_reference_valid (obj->priv->editable))
+		{
+			GtkTreePath *edpath = gtk_tree_row_reference_get_path (obj->priv->editable);
+			
+			editable = edpath && gtk_tree_path_compare (path, edpath) == 0;
+		}
 	}
 
 	gtk_tree_path_free (path);
@@ -1039,11 +1039,6 @@ gedit_file_browser_view_set_model (GeditFileBrowserView * tree_view,
 							 cell_data_cb,
 							 tree_view, NULL);
 
-		g_signal_connect (model, "begin-loading",
-				  G_CALLBACK (on_begin_loading), tree_view);
-		g_signal_connect (model, "end-loading",
-				  G_CALLBACK (on_end_loading), tree_view);
-
 		if (tree_view->priv->restore_expand_state)
 			install_restore_signals (tree_view, model);
 				  
@@ -1055,15 +1050,6 @@ gedit_file_browser_view_set_model (GeditFileBrowserView * tree_view,
 	}
 
 	if (GEDIT_IS_FILE_BROWSER_STORE (tree_view->priv->model)) {
-		/* Disconnect begin_loading and end_loading */
-		g_signal_handlers_disconnect_by_func (tree_view->priv->model, 
-						      on_begin_loading, 
-						      tree_view);
-
-		g_signal_handlers_disconnect_by_func (tree_view->priv->model, 
-						      on_end_loading, 
-						      tree_view);
-
 		if (tree_view->priv->restore_expand_state)
 			uninstall_restore_signals (tree_view, 
 						   tree_view->priv->model);
@@ -1078,7 +1064,8 @@ gedit_file_browser_view_start_rename (GeditFileBrowserView * tree_view,
 				      GtkTreeIter * iter)
 {
 	guint flags;
-	GtkTreePath *parent;
+	GtkTreeRowReference *rowref;
+	GtkTreePath *path;
 
 	g_return_if_fail (GEDIT_IS_FILE_BROWSER_VIEW (tree_view));
 	g_return_if_fail (GEDIT_IS_FILE_BROWSER_STORE
@@ -1089,24 +1076,32 @@ gedit_file_browser_view_start_rename (GeditFileBrowserView * tree_view,
 			    GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS, &flags,
 			    -1);
 
-	if (FILE_IS_DIR (flags) || !FILE_IS_DUMMY (flags)) {
-		tree_view->priv->editable =
-		    gtk_tree_model_get_path (tree_view->priv->model, iter);
+	if (!(FILE_IS_DIR (flags) || !FILE_IS_DUMMY (flags)))
+		return;
 
-		/* Start editing */
-		gtk_widget_grab_focus (GTK_WIDGET (tree_view));
-		
-		parent = gtk_tree_path_copy (tree_view->priv->editable);
-		
-		if (gtk_tree_path_up (parent))
-			gtk_tree_view_expand_to_path (GTK_TREE_VIEW (tree_view),
-						      parent);
-		
-		gtk_tree_path_free (parent);
-		gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view),
-					  tree_view->priv->editable,
-					  tree_view->priv->column, TRUE);
-	}
+	path = gtk_tree_model_get_path (tree_view->priv->model, iter);
+	rowref = gtk_tree_row_reference_new (tree_view->priv->model, path);
+
+	/* Start editing */
+	gtk_widget_grab_focus (GTK_WIDGET (tree_view));
+	
+	if (gtk_tree_path_up (path))
+		gtk_tree_view_expand_to_path (GTK_TREE_VIEW (tree_view),
+					      path);
+	
+	gtk_tree_path_free (path);
+	tree_view->priv->editable = rowref;
+
+	gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view),
+				  gtk_tree_row_reference_get_path (tree_view->priv->editable),
+				  tree_view->priv->column, TRUE);
+	
+	gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (tree_view),
+				      gtk_tree_row_reference_get_path (tree_view->priv->editable),
+				      tree_view->priv->column,
+				      TRUE,
+				      0.5,
+				      1);
 }
 
 void
@@ -1140,7 +1135,7 @@ on_cell_edited (GtkCellRendererText * cell, gchar * path, gchar * new_text,
 	gboolean ret;
 	GError * error = NULL;
 	
-	gtk_tree_path_free (tree_view->priv->editable);
+	gtk_tree_row_reference_free (tree_view->priv->editable);
 	tree_view->priv->editable = NULL;
 
 	if (new_text == NULL || *new_text == '\0')
@@ -1161,24 +1156,6 @@ on_cell_edited (GtkCellRendererText * cell, gchar * path, gchar * new_text,
 			}
 		}
 	}
-}
-
-static void
-on_begin_loading (GeditFileBrowserStore * model, GtkTreeIter * iter,
-		  GeditFileBrowserView * obj)
-{
-	if (GDK_IS_WINDOW (GTK_WIDGET (obj)->window))
-		gdk_window_set_cursor (GTK_WIDGET (obj)->window,
-				       obj->priv->busy_cursor);
-}
-
-static void
-on_end_loading (GeditFileBrowserStore * model, GtkTreeIter * iter,
-		GeditFileBrowserView * obj)
-{
-	if (GDK_IS_WINDOW (GTK_WIDGET (obj)->window))
-		gdk_window_set_cursor (GTK_WIDGET (obj)->window,
-				       obj->priv->hand_cursor);
 }
 
 static void 

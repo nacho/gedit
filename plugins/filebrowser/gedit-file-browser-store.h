@@ -59,7 +59,8 @@ typedef enum
 	GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE,
 	GEDIT_FILE_BROWSER_STORE_RESULT_ERROR,
 	GEDIT_FILE_BROWSER_STORE_RESULT_NO_TRASH,
-	GEDIT_FILE_BROWSER_STORE_RESULT_NUM,
+	GEDIT_FILE_BROWSER_STORE_RESULT_MOUNTING,
+	GEDIT_FILE_BROWSER_STORE_RESULT_NUM
 } GeditFileBrowserStoreResult;
 
 typedef enum 
@@ -190,6 +191,8 @@ gboolean gedit_file_browser_store_new_file            (GeditFileBrowserStore * m
 gboolean gedit_file_browser_store_new_directory       (GeditFileBrowserStore * model,
                                                        GtkTreeIter * parent,
                                                        GtkTreeIter * iter);
+
+void gedit_file_browser_store_cancel_mount_operation  (GeditFileBrowserStore *store);
 
 G_END_DECLS
 #endif				/* __GEDIT_FILE_BROWSER_STORE_H__ */

@@ -81,6 +81,13 @@ struct _AsyncNode
 	GSList *original_children;
 };
 
+typedef struct {
+	GeditFileBrowserStore * model;
+	gchar * virtual_root;
+	GMountOperation * operation;
+	GCancellable * cancellable;
+} MountInfo;
+
 struct _FileBrowserNode 
 {
 	GFile *file;
@@ -119,6 +126,7 @@ struct _GeditFileBrowserStorePrivate
 	SortFunc sort_func;
 
 	GSList *async_handles;
+	MountInfo *mount_info;
 };
 
 static FileBrowserNode *model_find_node 		    (GeditFileBrowserStore *model,
@@ -224,6 +232,17 @@ enum
 static guint model_signals[NUM_SIGNALS] = { 0 };
 
 static void
+cancel_mount_operation (GeditFileBrowserStore *obj)
+{
+	if (obj->priv->mount_info != NULL)
+	{
+		obj->priv->mount_info->model = NULL;
+		g_cancellable_cancel (obj->priv->mount_info->cancellable);
+		obj->priv->mount_info = NULL;
+	}
+}
+
+static void
 gedit_file_browser_store_finalize (GObject * object)
 {
 	GeditFileBrowserStore *obj = GEDIT_FILE_BROWSER_STORE (object);
@@ -240,6 +259,8 @@ gedit_file_browser_store_finalize (GObject * object)
 		
 		data->removed = TRUE;
 	}
+	
+	cancel_mount_operation (obj);
 
 	g_slist_free (obj->priv->async_handles);
 	G_OBJECT_CLASS (gedit_file_browser_store_parent_class)->finalize (object);
@@ -2647,14 +2668,6 @@ model_root_mounted (GeditFileBrowserStore * model, gchar const * virtual_root)
 	return GEDIT_FILE_BROWSER_STORE_RESULT_OK;
 }
 
-typedef struct {
-	GeditFileBrowserStore * model;
-	gchar * virtual_root;
-	GMountOperation * operation;
-	GCancellable * cancellable;
-} MountInfo;
-
-
 static void
 handle_root_error (GeditFileBrowserStore * model, GError *error)
 {
@@ -2690,12 +2703,15 @@ mount_cb (GFile * file,
 	GeditFileBrowserStore * model = mount_info->model;
 	
 	mounted = g_file_mount_enclosing_volume_finish (file, res, &error);
-	
-	if (g_cancellable_is_cancelled (mount_info->cancellable))
+
+	if (mount_info->model)
 	{
-		if (error)
-			g_error_free (error);
-		
+		model->priv->mount_info = NULL;	
+		model_end_loading (model, model->priv->root);
+	}
+
+	if (!mount_info->model || g_cancellable_is_cancelled (mount_info->cancellable))
+	{
 		// Reset because it might be reused?
 		g_cancellable_reset (mount_info->cancellable);
 	}
@@ -2744,12 +2760,16 @@ model_mount_root (GeditFileBrowserStore * model, gchar const * virtual_root)
 			mount_info->operation = gtk_mount_operation_new (NULL);
 			mount_info->cancellable = g_object_ref (FILE_BROWSER_NODE_DIR (model->priv->root)->cancellable);
 			
+			model_begin_loading (model, model->priv->root);
 			g_file_mount_enclosing_volume (model->priv->root->file, 
 						       G_MOUNT_MOUNT_NONE,
 						       mount_info->operation,
 						       mount_info->cancellable,
 						       (GAsyncReadyCallback)mount_cb,
 						       mount_info);
+			
+			model->priv->mount_info = mount_info;
+			return GEDIT_FILE_BROWSER_STORE_RESULT_MOUNTING;
 		}
 		else
 		{
@@ -2967,6 +2987,14 @@ gedit_file_browser_store_iter_equal (GeditFileBrowserStore * model,
 	return (iter1->user_data == iter2->user_data);
 }
 
+void
+gedit_file_browser_store_cancel_mount_operation (GeditFileBrowserStore *store)
+{
+	g_return_if_fail (GEDIT_IS_FILE_BROWSER_STORE (store));
+	
+	cancel_mount_operation (store);
+}
+
 GeditFileBrowserStoreResult
 gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 						    model,
@@ -3010,6 +3038,9 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 
 		g_object_unref (vfile);
 	}
+	
+	/* make sure to cancel any previous mount operations */
+	cancel_mount_operation (model);
 
 	/* Always clear the model before altering the nodes */
 	model_clear (model, TRUE);

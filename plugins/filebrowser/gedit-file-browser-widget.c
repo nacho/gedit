@@ -153,6 +153,8 @@ struct _GeditFileBrowserWidgetPrivate
 	gboolean enable_delete;
 	
 	GCancellable *cancellable;
+	
+	GdkCursor *busy_cursor;
 };
 
 static void set_enable_delete		       (GeditFileBrowserWidget *obj,
@@ -349,6 +351,9 @@ gedit_file_browser_widget_finalize (GObject * object)
 	g_hash_table_destroy (obj->priv->bookmarks_hash);
 	
 	cancel_async_operation (obj);
+	
+	gdk_cursor_unref (obj->priv->busy_cursor);
+
 	G_OBJECT_CLASS (gedit_file_browser_widget_parent_class)->finalize (object);
 }
 
@@ -1072,6 +1077,28 @@ init_bookmarks_hash (GeditFileBrowserWidget * obj)
 }
 
 static void
+on_begin_loading (GeditFileBrowserStore  *model, 
+		  GtkTreeIter            *iter,
+		  GeditFileBrowserWidget *obj)
+{
+	if (!GDK_IS_WINDOW (GTK_WIDGET (obj->priv->treeview)->window))
+		return;
+
+	gdk_window_set_cursor (GTK_WIDGET (obj)->window, obj->priv->busy_cursor);
+}
+
+static void
+on_end_loading (GeditFileBrowserStore  *model, 
+		GtkTreeIter            *iter,
+		GeditFileBrowserWidget *obj)
+{
+	if (!GDK_IS_WINDOW (GTK_WIDGET (obj->priv->treeview)->window))
+		return;
+
+	gdk_window_set_cursor (GTK_WIDGET (obj)->window, NULL);
+}
+
+static void
 create_tree (GeditFileBrowserWidget * obj)
 {
 	GtkWidget *sw;
@@ -1120,6 +1147,18 @@ create_tree (GeditFileBrowserWidget * obj)
 	g_signal_connect (obj->priv->file_store, "notify::filter-mode",
 			  G_CALLBACK (on_filter_mode_changed), obj);
 
+	g_signal_connect (obj->priv->file_store, "notify::virtual-root",
+			  G_CALLBACK (on_virtual_root_changed), obj);
+			  
+	g_signal_connect (obj->priv->file_store, "begin-loading",
+			  G_CALLBACK (on_begin_loading), obj);
+			  
+	g_signal_connect (obj->priv->file_store, "end-loading",
+			  G_CALLBACK (on_end_loading), obj);
+
+	g_signal_connect (obj->priv->file_store, "error",
+			  G_CALLBACK (on_file_store_error), obj);
+	      
 	init_bookmarks_hash (obj);
 
 	gtk_widget_show (sw);
@@ -1169,6 +1208,8 @@ gedit_file_browser_widget_init (GeditFileBrowserWidget * obj)
 			                                   free_name_icon);
 
 	gtk_box_set_spacing (GTK_BOX (obj), 3);
+	
+	obj->priv->busy_cursor = gdk_cursor_new (GDK_WATCH);
 }
 
 /* Private */
@@ -1732,8 +1773,6 @@ gedit_file_browser_widget_set_root_and_virtual_root (GeditFileBrowserWidget *obj
 						     gchar const *virtual_root)
 {
 	GeditFileBrowserStoreResult result;
-	
-	show_files_real (obj, FALSE);
 
 	if (!virtual_root)
 		result =
@@ -1744,7 +1783,8 @@ gedit_file_browser_widget_set_root_and_virtual_root (GeditFileBrowserWidget *obj
 		    gedit_file_browser_store_set_root_and_virtual_root
 		    (obj->priv->file_store, root, virtual_root);
 
-	show_files_real (obj, result == GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
+	if (result == GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE)
+		show_files_real (obj, TRUE);
 }
 
 void
@@ -2259,12 +2299,14 @@ on_bookmark_activated (GeditFileBrowserView   *tree_view,
 	if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE)
 	{
 		/* handle a drive node */
+		gedit_file_browser_store_cancel_mount_operation (obj->priv->file_store);
 		activate_drive (obj, iter);
 		return;
 	}
 	else if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_VOLUME)
 	{
 		/* handle a volume node */
+		gedit_file_browser_store_cancel_mount_operation (obj->priv->file_store);
 		activate_volume (obj, iter);
 		return;
 	}
@@ -2344,6 +2386,12 @@ on_virtual_root_changed (GeditFileBrowserStore * model,
 	GtkAction *action;
 	Location *loc;
 	GdkPixbuf *pixbuf;
+
+	if (gtk_tree_view_get_model (GTK_TREE_VIEW (obj->priv->treeview)) !=
+	    GTK_TREE_MODEL (obj->priv->file_store))
+	{
+		show_files_real (obj, FALSE);
+	}
 
 	if (gedit_file_browser_store_get_iter_virtual_root (model, &iter)) {
 		gtk_tree_model_get (GTK_TREE_MODEL (model), &iter,
@@ -2484,16 +2532,6 @@ on_model_set (GObject * gobject, GParamSpec * arg1,
 			    g_signal_connect (gobject, "file-activated",
 					      G_CALLBACK
 					      (on_file_activated), obj));
-		add_signal (obj, model,
-			    g_signal_connect (model,
-					      "notify::virtual-root",
-					      G_CALLBACK
-					      (on_virtual_root_changed),
-					      obj));
-		add_signal (obj, model,
-			    g_signal_connect (model, "error",
-					      G_CALLBACK
-					      (on_file_store_error), obj));
 
 		add_signal (obj, model,
 			    g_signal_connect (model, "no-trash",
