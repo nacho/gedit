@@ -42,6 +42,7 @@ class Document:
                 self.active_placeholder = None
                 self.signal_ids = {}
                 
+                self.ordered_placeholders = []
                 self.update_placeholders = []
                 self.jump_placeholders = []
                 self.language_id = 0
@@ -74,6 +75,10 @@ class Document:
         def connect_signal(self, obj, signal, cb):
                 self.disconnect_signal(obj, signal)     
                 self.signal_ids[(obj, signal)] = obj.connect(signal, cb)
+
+        def connect_signal_after(self, obj, signal, cb):
+                self.disconnect_signal(obj, signal)
+                self.signal_ids[(obj, signal)] = obj.connect_after(signal, cb)
                 
         # Set the view to be controlled. Installs signal handlers and sets current
         # language. If there is already a view set this function will first remove
@@ -87,7 +92,7 @@ class Document:
                         # Remove signals
                         signals = {self.view: ('key-press-event', 'destroy', 
                                                'notify::editable', 'drag-data-received'),
-                                   buf:       ('notify::language', 'changed', 'cursor-moved')}
+                                   buf:       ('notify::language', 'changed', 'cursor-moved', 'insert-text')}
                         
                         for obj, sig in signals.items():
                                 for s in sig:
@@ -178,67 +183,97 @@ class Document:
                 
                 self.connect_signal(buf, 'changed', self.on_buffer_changed)
                 self.connect_signal(buf, 'cursor-moved', self.on_buffer_cursor_moved)
+                self.connect_signal_after(buf, 'insert-text', self.on_buffer_insert_text)
         
         def last_snippet_removed(self):
                 buf = self.view.get_buffer()
                 self.disconnect_signal(buf, 'changed')
                 self.disconnect_signal(buf, 'cursor-moved')
+                self.disconnect_signal(buf, 'insert-text')
 
         def current_placeholder(self):
                 buf = self.view.get_buffer()
                 
                 piter = buf.get_iter_at_mark(buf.get_insert())        
-                current = None
+                found = []
 
                 for placeholder in self.placeholders:
                         begin = placeholder.begin_iter()
                         end = placeholder.end_iter()
 
-                        if piter.compare(begin) >= 0 and \
-                                        piter.compare(end) <= 0:
-                                current = placeholder
+                        if piter.compare(begin) >= 0 and piter.compare(end) <= 0:
+                                found.append(placeholder)
 
-                return current
+                if self.active_placeholder in found:
+                        return self.active_placeholder
+                elif len(found) > 0:
+                        return found[0]
+                else:
+                        return None
 
         def advance_placeholder(self, direction):
                 # Returns (CurrentPlaceholder, NextPlaceholder), depending on direction
                 buf = self.view.get_buffer()
                 
                 piter = buf.get_iter_at_mark(buf.get_insert())
-                prev = current = next = None
-                length = len(self.placeholders)                
+                found = current = next = None
+                length = len(self.placeholders)
+                
+                placeholders = list(self.placeholders)
+                
+                if self.active_placeholder:
+                        begin = self.active_placeholder.begin_iter()
+                        end = self.active_placeholder.end_iter()
+                        
+                        if piter.compare(begin) >= 0 and piter.compare(end) <= 0:
+                                current = self.active_placeholder
+                                currentIndex = placeholders.index(self.active_placeholder)
 
                 if direction == 1:
-                        nearest = lambda w, x, y, z: (w.compare(y) >= 0 and (not z or \
-                                        y.compare(z.end_iter()) >= 0))
+                        # w = piter, x = begin, y = end, z = found
+                        nearest = lambda w, x, y, z: (w.compare(x) <= 0 and (not z or \
+                                        x.compare(z.begin_iter()) < 0))
                         indexer = lambda x: x < length - 1
                 else:
-                        nearest = lambda w, x, y, z: (w.compare(x) <= 0 and (not z or \
-                                        x.compare(z.end_iter()) <= 0))
+                        # w = piter, x = begin, y = end, z = prev
+                        nearest = lambda w, x, y, z: (w.compare(x) >= 0 and (not z or \
+                                        x.compare(z.begin_iter()) >= 0))
                         indexer = lambda x: x > 0
 
                 for index in range(0, length):
-                        placeholder = self.placeholders[index]
+                        placeholder = placeholders[index]
                         begin = placeholder.begin_iter()
                         end = placeholder.end_iter()
                         
                         # Find the nearest placeholder
-                        if nearest(piter, begin, end, prev):
-                                prevIndex = index
-                                prev = placeholder
+                        if nearest(piter, begin, end, found):
+                                foundIndex = index
+                                found = placeholder
                         
                         # Find the current placeholder
                         if piter.compare(begin) >= 0 and \
-                                        piter.compare(end) <= 0:
+                                        piter.compare(end) <= 0 and \
+                                        current == None:
                                 currentIndex = index
                                 current = placeholder
                 
-                if current:
+                if current and current != found and \
+                   (current.begin_iter().compare(found.begin_iter()) == 0 or \
+                    current.end_iter().compare(found.begin_iter()) == 0) and \
+                   self.active_placeholder and \
+                   current.begin_iter().compare(self.active_placeholder.begin_iter()) == 0:
+                        # if current and found are at the same place, then
+                        # resolve the 'hugging' problem
+                        current = self.active_placeholder
+                        currentIndex = placeholders.index(current)
+
+                        found = current
+                
+                if current and current == found:
                         if indexer(currentIndex):
-                                next = self.placeholders[currentIndex + direction]
-                elif prev:
-                        if indexer(prevIndex):
-                                next = self.placeholders[prevIndex + direction]
+                                next = placeholders[currentIndex + direction]
+                elif found:
+                        next = found
                 elif length > 0:
                         next = self.placeholders[0]
                 
@@ -254,6 +289,9 @@ class Document:
                 buf = self.view.get_buffer()
                 self.view.scroll_mark_onscreen(buf.get_insert())
         
+        def set_active_placeholder(self, placeholder):
+                self.active_placeholder = placeholder
+
         def goto_placeholder(self, current, next):
                 last = None
 
@@ -264,7 +302,7 @@ class Document:
                         if current.__class__ == PlaceholderEnd:
                                 last = current
                 
-                self.active_placeholder = next
+                self.set_active_placeholder(next)
                 
                 if next:
                         next.enter()
@@ -275,7 +313,7 @@ class Document:
                 if last:
                         # This is the end of the placeholder, remove the snippet etc
                         for snippet in list(self.active_snippets):
-                                if snippet[3][0] == last:
+                                if snippet.placeholders[0] == last:
                                         self.deactivate_snippet(snippet)
                                         break
                 
@@ -374,25 +412,22 @@ class Document:
                 
                 # Insert the snippet
                 holders = len(self.placeholders)
-                active_info = s.insert_into(self, start)
-                self.active_snippets.append(active_info)
-
-                # Put cursor back to beginning of the snippet
-                piter = buf.get_iter_at_mark(active_info[0])
-                buf.place_cursor(piter)
-
-                # Jump to first placeholder
-                (current, next) = self.next_placeholder()
                 
-                if current and current != self.active_placeholder:
-                        self.goto_placeholder(None, current)
-                elif next:
-                        self.goto_placeholder(None, next)                
-                        
-                buf.end_user_action()
-                
-                if len(self.active_snippets) == 1:
+                if len(self.active_snippets) == 0:
                         self.first_snippet_inserted()
+
+                sn = s.insert_into(self, start)
+                self.active_snippets.append(sn)
+
+                # Put cursor at first tab placeholder
+                keys = filter(lambda x: x > 0, sn.placeholders.keys())
+                
+                if len(keys) == 0:
+                        buf.place_cursor(sn.begin_iter())
+                else:
+                        self.goto_placeholder(self.active_placeholder, sn.placeholders[keys[0]])
+                
+                buf.end_user_action()
 
                 return True
 
@@ -452,11 +487,11 @@ class Document:
                 buf = self.view.get_buffer()
                 remove = []
                 
-                for tabstop in snippet[3]:
+                for tabstop in snippet.placeholders:
                         if tabstop == -1:
-                                placeholders = snippet[3][-1]
+                                placeholders = snippet.placeholders[-1]
                         else:
-                                placeholders = [snippet[3][tabstop]]
+                                placeholders = [snippet.placeholders[tabstop]]
                         
                         for placeholder in placeholders:
                                 if placeholder in self.placeholders:
@@ -474,12 +509,11 @@ class Document:
                                 self.active_placeholder = None
 
                         self.placeholders.remove(placeholder)
+                        self.ordered_placeholders.remove(placeholder)
+
                         placeholder.remove(force)
 
-                buf.delete_mark(snippet[0])
-                buf.delete_mark(snippet[1])
-                buf.delete_mark(snippet[2])
-                
+                snippet.deactivate()
                 self.active_snippets.remove(snippet)
                 
                 if len(self.active_snippets) == 0:
@@ -600,11 +634,11 @@ class Document:
 
                 # Check for all snippets if the cursor is outside its scope
                 for snippet in list(self.active_snippets):
-                        if snippet[0].get_deleted() or snippet[1].get_deleted():
+                        if snippet.begin_mark.get_deleted() or snippet.end_mark.get_deleted():
                                 self.deactivate(snippet)
                         else:
-                                begin = buf.get_iter_at_mark(snippet[0])
-                                end = buf.get_iter_at_mark(snippet[1])
+                                begin = snippet.begin_iter()
+                                end = snippet.end_iter()
                         
                                 if piter.compare(begin) < 0 or piter.compare(end) > 0:
                                         # Oh no! Remove the snippet this instant!!
@@ -616,13 +650,11 @@ class Document:
                         if self.active_placeholder:
                                 self.jump_placeholders.append((self.active_placeholder, current))
                                 
-                                if self.timeout_update_id != 0:
-                                        gobject.source_remove(self.timeout_update_id)
-                                
-                                self.timeout_update_id = gobject.timeout_add(0, 
-                                                self.update_snippet_contents)
+                                if self.timeout_update_id == 0:
+                                        self.timeout_update_id = gobject.timeout_add(0, 
+                                                        self.update_snippet_contents)
 
-                        self.active_placeholder = current
+                        self.set_active_placeholder(current)
         
         def on_buffer_changed(self, buf):
                 current = self.current_placeholder()
@@ -631,11 +663,48 @@ class Document:
                         if not current in self.update_placeholders:
                                 self.update_placeholders.append(current)
                 
-                        if self.timeout_update_id != 0:
-                                gobject.source_remove(self.timeout_update_id)
-
-                        self.timeout_update_id = gobject.timeout_add(0, \
-                                        self.update_snippet_contents)
+                        if self.timeout_update_id == 0:
+                                self.timeout_update_id = gobject.timeout_add(0, \
+                                                self.update_snippet_contents)
+        
+        def on_buffer_insert_text(self, buf, piter, text, length):
+                ctx = get_buffer_context(buf)
+                
+                # do nothing special if there is no context and no active 
+                # placeholder
+                if (not ctx) and (not self.active_placeholder):
+                        return
+                
+                if not ctx:
+                        ctx = self.active_placeholder
+                
+                if not ctx in self.ordered_placeholders:
+                        return
+                        
+                # move any marks that were incorrectly moved by this insertion
+                # back to where they belong
+                begin = ctx.begin_iter()
+                end = ctx.end_iter()
+                idx = self.ordered_placeholders.index(ctx)
+                
+                for placeholder in self.ordered_placeholders:
+                        if placeholder == ctx:
+                                continue
+                        
+                        ob = placeholder.begin_iter()
+                        oe = placeholder.end_iter()
+                        
+                        if ob.compare(begin) == 0 and ((not oe) or oe.compare(end) == 0):
+                                oidx = self.ordered_placeholders.index(placeholder)
+                                
+                                if oidx > idx and ob:
+                                        buf.move_mark(placeholder.begin, end)
+                                elif oidx < idx and oe:
+                                        buf.move_mark(placeholder.end, begin)
+                        elif ob.compare(begin) >= 0 and ob.compare(end) < 0 and (oe and oe.compare(end) >= 0):
+                                buf.move_mark(placeholder.begin, end)
+                        elif (oe and oe.compare(begin) > 0) and ob.compare(begin) <= 0:
+                                buf.move_mark(placeholder.end, begin)
         
         def on_notify_language(self, buf, spec):
                 self.update_language()

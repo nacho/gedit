@@ -58,9 +58,11 @@ def spaces_instead_of_tabs(view, text):
 
         return text.replace("\t", view.get_tab_width() * ' ')
 
-def insert_with_indent(view, piter, text, indentfirst = True):
+def insert_with_indent(view, piter, text, indentfirst = True, context = None):
         text = spaces_instead_of_tabs(view, text)
         lines = text.split('\n')
+
+        view.get_buffer().set_data('GeditSnippetsPluginContext', context)
 
         if len(lines) == 1:
                 view.get_buffer().insert(piter, text)
@@ -76,6 +78,11 @@ def insert_with_indent(view, piter, text, indentfirst = True):
                                 text += lines[i] + '\n'
                 
                 view.get_buffer().insert(piter, text[:-1])
+
+        view.get_buffer().set_data('GeditSnippetsPluginContext', None)
+
+def get_buffer_context(buf):
+        return buf.get_data('GeditSnippetsPluginContext')
 
 def snippets_debug(*s):
         return
@@ -182,4 +189,5 @@ def drop_get_uris(selection):
                         result.append(line)
         
         return result
+
 # ex:ts=8:et:

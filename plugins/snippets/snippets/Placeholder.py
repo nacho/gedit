@@ -41,14 +41,21 @@ class Placeholder:
                 self.tabstop = tabstop
                 self.set_default(defaults)
                 self.prev_contents = self.default
+                self.set_mark_gravity()
                 
                 if begin:
-                        self.begin = self.buf.create_mark(None, begin, True)
+                        self.begin = self.buf.create_mark(None, begin, self.mark_gravity[0])
                 else:
                         self.begin = None
                 
                 self.end = None
         
+        def __str__(self):
+                return '%s (%s)' % (str(self.__class__), str(self.default))
+
+        def set_mark_gravity(self):
+                self.mark_gravity = [True, False]
+
         def set_default(self, defaults):
                 if not defaults:
                         self.default = None
@@ -95,10 +102,10 @@ class Placeholder:
         
         def run_last(self, placeholders):
                 begin = self.begin_iter()
-                self.end = self.buf.create_mark(None, begin, False)
-                
+                self.end = self.buf.create_mark(None, begin, self.mark_gravity[1])
+
                 if self.default:
-                        insert_with_indent(self.view, begin, self.default, False)
+                        insert_with_indent(self.view, begin, self.default, False, self)
         
         def remove(self, force = False):
                 if self.begin and not self.begin.get_deleted():
@@ -150,7 +157,7 @@ class Placeholder:
                 self.buf.delete(begin, self.end_iter())
 
                 # Insert the text from the mirror
-                insert_with_indent(self.view, begin, text, True)
+                insert_with_indent(self.view, begin, text, True, self)
                 self.buf.end_user_action()
                 
                 self.update_contents()
@@ -234,8 +241,9 @@ class PlaceholderEnd(Placeholder):
                 # any text
                 
                 if not self.default:
+                        self.mark_gravity[0] = False
                         self.buf.delete_mark(self.begin)
-                        self.begin = self.buf.create_mark(None, self.end_iter(), False)
+                        self.begin = self.buf.create_mark(None, self.end_iter(), self.mark_gravity[0])
 
         def enter(self):
                 if self.begin and not self.begin.get_deleted():
