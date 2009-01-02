@@ -43,6 +43,7 @@
 
 #include "gedit-view.h"
 #include "gedit-debug.h"
+#include "gedit-prefs-manager.h"
 #include "gedit-prefs-manager-app.h"
 #include "gedit-marshal.h"
 #include "gedit-utils.h"
@@ -123,6 +124,8 @@ static gboolean gedit_view_drag_drop		(GtkWidget        *widget,
 	      					 gint              x,
 	      					 gint              y,
 	      					 guint             time);
+static gboolean	gedit_view_button_press_event	(GtkWidget        *widget,
+						 GdkEventButton   *event);
 
 static gboolean start_interactive_search	(GeditView        *view);
 static gboolean start_interactive_goto_line	(GeditView        *view);
@@ -207,7 +210,7 @@ gedit_view_class_init (GeditViewClass *klass)
 	widget_class->drag_motion = gedit_view_drag_motion;
 	widget_class->drag_data_received = gedit_view_drag_data_received;
 	widget_class->drag_drop = gedit_view_drag_drop;
-
+	widget_class->button_press_event = gedit_view_button_press_event;
 	klass->start_interactive_search = start_interactive_search;
 	klass->start_interactive_goto_line = start_interactive_goto_line;
 	klass->reset_searched_text = reset_searched_text;	
@@ -1908,6 +1911,70 @@ gedit_view_drag_drop (GtkWidget      *widget,
 	}
 
 	return result;
+}
+
+static void
+show_line_numbers_toggled (GtkMenu   *menu,
+			   GeditView *view)
+{
+	gboolean show;
+
+	show = gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (menu));
+
+	gedit_prefs_manager_set_display_line_numbers (show);
+}
+
+static GtkWidget *
+create_line_numbers_menu (GtkWidget *view)
+{
+	GtkWidget *menu;
+	GtkWidget *item;
+
+	menu = gtk_menu_new ();
+
+	item = gtk_check_menu_item_new_with_mnemonic (_("_Display line numbers"));
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item),
+					gtk_source_view_get_show_line_numbers (GTK_SOURCE_VIEW (view)));
+	g_signal_connect (item, "toggled",
+			  G_CALLBACK (show_line_numbers_toggled), view);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+	
+	gtk_widget_show_all (menu);
+	
+	return menu;
+}
+
+static void
+show_line_numbers_menu (GtkWidget      *view,
+			GdkEventButton *event)
+{
+	GtkWidget *menu;
+
+	menu = create_line_numbers_menu (view);
+
+	gtk_menu_popup (GTK_MENU (menu), 
+			NULL, 
+			NULL,
+			NULL, 
+			NULL,
+			event->button, 
+			event->time);
+}
+
+static gboolean
+gedit_view_button_press_event (GtkWidget *widget, GdkEventButton *event)
+{
+	if ((event->type == GDK_BUTTON_PRESS) && 
+	    (event->button == 3) &&
+	    (event->window == gtk_text_view_get_window (GTK_TEXT_VIEW (widget),
+						        GTK_TEXT_WINDOW_LEFT)))
+	{
+		show_line_numbers_menu (widget, event);
+
+		return TRUE;
+	}
+
+	return GTK_WIDGET_CLASS (gedit_view_parent_class)->button_press_event (widget, event);
 }
 
 static void 	
