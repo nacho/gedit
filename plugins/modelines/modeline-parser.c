@@ -61,9 +61,14 @@ modeline_parser_init (const gchar *data_dir)
 void
 modeline_parser_shutdown ()
 {
-	g_hash_table_destroy (vim_languages);
-	g_hash_table_destroy (emacs_languages);
-	g_hash_table_destroy (kate_languages);
+	if (vim_languages != NULL)
+		g_hash_table_destroy (vim_languages);
+
+	if (emacs_languages != NULL)
+		g_hash_table_destroy (emacs_languages);
+
+	if (kate_languages != NULL)
+		g_hash_table_destroy (kate_languages);
 	
 	vim_languages = NULL;
 	emacs_languages = NULL;
