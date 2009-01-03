@@ -1,5 +1,5 @@
 # indent plugin
-plugindir = $(libdir)/gedit-2/plugins
+plugindir = $(GEDIT_PLUGINS_LIBS_DIR)
 
 INCLUDES = \
 	-I$(top_srcdir) 				\
@@ -16,7 +16,7 @@ libindent_la_SOURCES = \
 libindent_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libindent_la_LIBADD  = $(GEDIT_LIBS)
 
-uidir = $(datadir)/gedit-2/plugins/indent
+uidir = $(GEDIT_PLUGINS_DATA_DIR)/indent
 ui_DATA =
 
 plugin_in_files = indent.gedit-plugin.desktop.in

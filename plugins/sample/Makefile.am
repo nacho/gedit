@@ -1,5 +1,5 @@
 # Sample plugin
-plugindir = $(libdir)/gedit-2/plugins
+plugindir = $(GEDIT_PLUGINS_LIBS_DIR)
 
 INCLUDES = \
 	-I$(top_srcdir) 				\
@@ -16,7 +16,7 @@ libsample_la_SOURCES = \
 libsample_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libsample_la_LIBADD  = $(GEDIT_LIBS)
 
-uidir = $(datadir)/gedit-2/plugins/sample
+uidir = $(GEDIT_PLUGINS_DATA_DIR)/sample
 ui_DATA =
 
 plugin_in_files = sample.gedit-plugin.desktop.in

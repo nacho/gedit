@@ -1,5 +1,5 @@
 # Python snippets plugin
-plugindir = $(GEDIT_PLUGINS_LIB_DIR)/snippets
+plugindir = $(GEDIT_PLUGINS_LIBS_DIR)/snippets
 
 plugin_PYTHON = \
 	__init__.py \

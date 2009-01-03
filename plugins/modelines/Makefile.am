@@ -1,5 +1,5 @@
 # Modelines Plugin
-plugindir = $(libdir)/gedit-2/plugins
+plugindir = $(GEDIT_PLUGINS_LIBS_DIR)
 
 INCLUDES = \
 	-I$(top_srcdir) 				\
@@ -7,7 +7,7 @@ INCLUDES = \
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED_CFLAGS)
 
-modelinesdir = $(datadir)/gedit-2/plugins/modelines
+modelinesdir = $(GEDIT_PLUGINS_DATA_DIR)/modelines
 modelines_DATA = \
 	language-mappings
 

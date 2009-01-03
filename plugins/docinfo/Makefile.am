@@ -1,5 +1,5 @@
 # docinfo plugin
-plugindir = $(libdir)/gedit-2/plugins
+plugindir = $(GEDIT_PLUGINS_LIBS_DIR)
 
 INCLUDES = \
 	-I$(top_srcdir) 				\
@@ -16,7 +16,7 @@ libdocinfo_la_SOURCES = \
 libdocinfo_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libdocinfo_la_LIBADD  = $(GEDIT_LIBS)
 
-uidir = $(datadir)/gedit-2/plugins/docinfo
+uidir = $(GEDIT_PLUGINS_DATA_DIR)/docinfo
 ui_DATA = docinfo.ui
 
 plugin_in_files = docinfo.gedit-plugin.desktop.in

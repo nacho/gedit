@@ -1,6 +1,6 @@
 # Python snippets plugin
 
-plugindir = $(GEDIT_PLUGINS_LIB_DIR)/externaltools
+plugindir = $(GEDIT_PLUGINS_LIBS_DIR)/externaltools
 plugin_PYTHON =		\
 	__init__.py	\
 	capture.py	\

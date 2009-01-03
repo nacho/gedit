@@ -1,7 +1,7 @@
 # Tag list plugin
-plugindir = $(libdir)/gedit-2/plugins
+plugindir = $(GEDIT_PLUGINS_LIBS_DIR)
 
-taglistdir = $(datadir)/gedit-2/plugins/taglist
+taglistdir = $(GEDIT_PLUGINS_DATA_DIR)/taglist
 
 taglist_in_files = \
 	HTML.tags.xml.in	\

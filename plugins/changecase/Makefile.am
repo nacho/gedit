@@ -1,5 +1,5 @@
 # changecase plugin
-plugindir = $(libdir)/gedit-2/plugins
+plugindir = $(GEDIT_PLUGINS_LIBS_DIR)
 
 INCLUDES = \
 	-I$(top_srcdir) 				\
@@ -16,7 +16,7 @@ libchangecase_la_SOURCES = \
 libchangecase_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libchangecase_la_LIBADD = $(GEDIT_LIBS)
 
-uidir = $(datadir)/gedit-2/plugins/changecase
+uidir = $(GEDIT_PLUGINS_DATA_DIR)/changecase
 ui_DATA =
 
 plugin_in_files = changecase.gedit-plugin.desktop.in

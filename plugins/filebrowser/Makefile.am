@@ -1,6 +1,6 @@
 # filebrowser
 
-plugindir = $(libdir)/gedit-2/plugins
+plugindir = $(GEDIT_PLUGINS_LIBS_DIR)
 
 INCLUDES = \
 	-I$(top_srcdir) 						\
@@ -41,7 +41,7 @@ libfilebrowser_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libfilebrowser_la_LIBADD = $(GEDIT_LIBS)
 
 # UI files (if you use ui for your plugin, list those files here)
-uidir = $(datadir)/gedit-2/plugins/filebrowser
+uidir = $(GEDIT_PLUGINS_DATA_DIR)/filebrowser
 ui_DATA = gedit-file-browser-widget-ui.xml
 
 plugin_in_files = filebrowser.gedit-plugin.desktop.in

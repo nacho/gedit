@@ -4,7 +4,7 @@ plugin_PYTHON =		\
 	__init__.py	\
 	console.py
 
-plugindir = $(libdir)/gedit-2/plugins/pythonconsole
+plugindir = $(GEDIT_PLUGINS_LIBS_DIR)/pythonconsole
 
 CLEANFILES =
 DISTCLEANFILES =

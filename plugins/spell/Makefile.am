@@ -1,5 +1,5 @@
 # Spell checker plugin
-plugindir = $(libdir)/gedit-2/plugins
+plugindir = $(GEDIT_PLUGINS_LIBS_DIR)
 
 BUILT_SOURCES = 						\
 	gedit-spell-checker-dialog-marshal.c			\
@@ -33,7 +33,7 @@ libspell_la_SOURCES = \
 libspell_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS) 
 libspell_la_LIBADD  = $(GEDIT_LIBS) $(ENCHANT_LIBS)
 
-uidir = $(datadir)/gedit-2/plugins/spell
+uidir = $(GEDIT_PLUGINS_DATA_DIR)/spell
 ui_DATA = spell-checker.ui languages-dialog.ui
 
 gedit-spell-checker-dialog-marshal.h: gedit-spell-checker-dialog-marshal.list $(GLIB_GENMARSHAL)

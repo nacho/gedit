@@ -1,5 +1,5 @@
 # time plugin
-plugindir = $(libdir)/gedit-2/plugins
+plugindir = $(GEDIT_PLUGINS_LIBS_DIR)
 
 INCLUDES = \
 	-I$(top_srcdir) 				\
@@ -16,7 +16,7 @@ libtime_la_SOURCES = \
 libtime_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libtime_la_LIBADD  = $(GEDIT_LIBS)
 
-uidir = $(datadir)/gedit-2/plugins/time
+uidir = $(GEDIT_PLUGINS_DATA_DIR)
 ui_DATA = time.ui
 
 plugin_in_files = time.gedit-plugin.desktop.in
