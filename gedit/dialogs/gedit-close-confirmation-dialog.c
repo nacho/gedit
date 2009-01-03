@@ -517,7 +517,7 @@ build_single_doc_dialog (GeditCloseConfirmationDialog *dlg)
 	}
 	else
 	{
-		str = g_markup_printf_escaped (_("Save the changes to document \"%s\" before closing?"),
+		str = g_markup_printf_escaped (_("Save changes to document \"%s\" before closing?"),
 					       doc_name);
 	}
 
