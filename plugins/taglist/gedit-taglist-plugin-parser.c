@@ -34,10 +34,7 @@
 #include <config.h>
 #endif
 
-#include <dirent.h> 
 #include <string.h>
-#include <errno.h>
-
 #include <libxml/parser.h>
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -562,30 +559,32 @@ free_taglist (void)
 static TagList * 
 parse_taglist_dir (const gchar *dir)
 {
-	DIR *d;
-	struct dirent *e;
+	GError *error = NULL;
+	GDir *d;
+	const gchar *dirent;
 
 	gedit_debug_message (DEBUG_PLUGINS, "DIR: %s", dir);
 
-	d = opendir (dir);
-	
-	if (d == NULL)
-	{		
-		gedit_debug_message (DEBUG_PLUGINS, "%s", strerror (errno));
+	d = g_dir_open (dir, 0, &error);
+	if (!d)
+	{
+		gedit_debug_message (DEBUG_PLUGINS, "%s", error->message);
+		g_error_free (error);
 		return taglist;
 	}
-	
-	while ((e = readdir (d)) != NULL)
+
+	while ((dirent = g_dir_read_name (d)))
 	{
-		if (strncmp (e->d_name + strlen (e->d_name) - 5, ".tags", 5) == 0 ||
-		    strncmp (e->d_name + strlen (e->d_name) - 8, ".tags.gz", 8) == 0)
+		if (g_str_has_suffix (dirent, ".tags") ||
+		    g_str_has_suffix (dirent, ".tags.gz"))
 		{
-			gchar *tags_file = g_build_filename (dir, e->d_name, NULL);
+			gchar *tags_file = g_build_filename (dir, dirent, NULL);
 			parse_taglist_file (tags_file);
 			g_free (tags_file);
 		}
 	}
-	closedir (d);
+
+	g_dir_close (d);
 
 	return taglist;
 }
