@@ -278,8 +278,8 @@ create_name_for_language (const char *code)
 		
 		if (localename != NULL)
 		{
-			/* Translators: the first %s is the language name, and the
-			 * second %s is the locale name. Example:
+			/* Translators: the first %s is the language name, and
+			 * the second %s is the locale name. Example:
 			 * "French (France)"
 			 */
 			name = g_strdup_printf (C_("language", "%s (%s)"),
@@ -400,9 +400,7 @@ const gchar *
 gedit_spell_checker_language_to_string (const GeditSpellCheckerLanguage *lang)
 {
 	if (lang == NULL)
-		/* Translators: The text before the "|" is context to help you decide on
-		 * the correct translation. You MUST OMIT it in the translated string.
-		 * Translators: this refers the Default language used by the
+		/* Translators: this refers the Default language used by the
 		 * spell checker
 		 */
 		return C_("language", "Default");
