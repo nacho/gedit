@@ -178,7 +178,10 @@ gedit_plugin_init (GeditPlugin *plugin)
  * gedit_plugin_get_install_dir:
  * @plugin: a #GeditPlugin
  *
- * Returns the path of the directory where the plugin is installed
+ * Get the path of the directory where the plugin is installed.
+ *
+ * Return value: a newly allocated string with the path of the
+ * directory where the plugin is installed
  */
 gchar *
 gedit_plugin_get_install_dir (GeditPlugin *plugin)
@@ -192,8 +195,11 @@ gedit_plugin_get_install_dir (GeditPlugin *plugin)
  * gedit_plugin_get_data_dir:
  * @plugin: a #GeditPlugin
  *
- * Returns the path of the directory where the plugin should look for
- * its data files
+ * Get the path of the directory where the plugin should look for
+ * its data files.
+ *
+ * Return value: a newly allocated string with the path of the
+ * directory where the plugin should look for its data files
  */
 gchar *
 gedit_plugin_get_data_dir (GeditPlugin *plugin)

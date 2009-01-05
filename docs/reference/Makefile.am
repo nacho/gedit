@@ -69,14 +69,7 @@ IGNORE_HFILES=		\
 IGNORE_HFILES +=	\
 	bacon-message-connection.h		\
 	gedittextregion.h			\
-	sexy-icon-entry.h			\
-	egg-recent-item.h			\
-	egg-recent-model.h			\
-	egg-recent-util.h			\
-	egg-recent-view-gtk.h			\
-	egg-recent-view.h			\
-	egg-recent-view-uimanager.h
-
+	sexy-icon-entry.h
 
 # Images to copy into HTML directory.
 HTML_IMAGES=

@@ -583,6 +583,13 @@ gedit_view_paste_clipboard (GeditView *view)
 				      0.0);
 }
 
+/**
+ * gedit_view_delete_selection:
+ * @view: a #GeditView
+ * 
+ * Deletes the text currently selected in the #GtkTextBuffer associated
+ * to the view and scroll to the cursor position.
+ **/
 void
 gedit_view_delete_selection (GeditView *view)
 {
@@ -609,6 +616,12 @@ gedit_view_delete_selection (GeditView *view)
 				      0.0);
 }
 
+/**
+ * gedit_view_select_all:
+ * @view: a #GeditView
+ * 
+ * Selects all the text displayed in the @view.
+ **/
 void
 gedit_view_select_all (GeditView *view)
 {
@@ -626,6 +639,12 @@ gedit_view_select_all (GeditView *view)
 	gtk_text_buffer_select_range (buffer, &start, &end);
 }
 
+/**
+ * gedit_view_scroll_to_cursor:
+ * @view: a #GeditView
+ * 
+ * Scrolls the @view to the cursor position.
+ **/
 void
 gedit_view_scroll_to_cursor (GeditView *view)
 {
@@ -646,6 +665,15 @@ gedit_view_scroll_to_cursor (GeditView *view)
 				      0.0);
 }
 
+/**
+ * gedit_view_set_font:
+ * @view: a #GeditView
+ * @gboolean: whether to reset the default font
+ * @font_name: the name of the font to use
+ * 
+ * If @def is #TRUE, resets the font of the @view to the default font
+ * otherwise sets it to @font_name.
+ **/
 void
 gedit_view_set_font (GeditView   *view, 
 		     gboolean     def, 
