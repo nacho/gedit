@@ -27,7 +27,9 @@ plugin_in_files = modelines.gedit-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-EXTRA_DIST = $(plugin_in_files)
+EXTRA_DIST = \
+	$(plugin_in_files)				\
+	$(modelines_DATA)
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)
