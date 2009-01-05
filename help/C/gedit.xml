@@ -838,8 +838,6 @@
 		      </listitem>
 		    </varlistentry>
 		  </variablelist>
-	 <para>For more information about how to configure syntax highlighting, see <xref linkend="gedit-prefs-syntax"/>.
-</para>
 	 </sect2>
 
 <!-- ============= To Pipe the Output of a Command to a File ======= -->
@@ -1160,7 +1158,6 @@
       <listitem><para><xref linkend="gedit-prefs-view"/></para></listitem>
       <listitem><para><xref linkend="gedit-prefs-editor"/></para></listitem>
       <listitem><para><xref linkend="gedit-prefs-fontsandcolors"/></para></listitem>
-      <listitem><para><xref linkend="gedit-prefs-syntax"/></para></listitem>
       <listitem><para><xref linkend="gedit-prefs-plugins"/></para></listitem>
     </itemizedlist>
 
@@ -1203,199 +1200,82 @@
       </variablelist>
     </sect2>
 
-	 <sect2 id="gedit-prefs-editor">
-	 <title>Editor Preferences</title>
-			<variablelist>
-	 		<varlistentry> <term><guilabel>Tabs</guilabel> </term>
-			 <listitem>
-				<para>Use the <guilabel>Tab width</guilabel> spin box to specify the width of the space that <application> &app;</application> inserts when you press the <keycap>Tab</keycap> key. </para>
-				<para>Select the <guilabel>Insert spaces instead of tabs</guilabel> option to specify that <application> &app;</application> inserts spaces instead of a tab character when you press the <keycap>Tab</keycap> key. </para>
-			 </listitem>
-		  	</varlistentry>
-	 		<varlistentry> <term><guilabel>Auto Indentation</guilabel> </term>
-			 <listitem> <para>Select the <guilabel>Enable auto indentation</guilabel> option to specify that the next line starts at the indentation level of the current line.  </para>
-			 </listitem>
-		  	</varlistentry>
-	 		<varlistentry> <term><guilabel>File Saving</guilabel> </term>
-			 <listitem>
-				<para>Select the <guilabel>Create a backup copy of files before saving</guilabel> option to create a backup copy of a file each time you save the file. The backup copy of the file contains a ~ at the end of the filename.</para>
-				<para>Select the <guilabel>Autosave files every ... minutes</guilabel> option to automatically save the current file at regular intervals. Use the spin box to specify how often you want to save the file.</para>
-			 </listitem>
-		  	</varlistentry>
-			</variablelist>
-	 	</sect2>
-
-	 	<sect2 id="gedit-prefs-fontsandcolors">
-	 		<title>Font &amp; Colors Preferences</title>
-	 		<variablelist>
-		   <varlistentry> <term><guilabel>Font</guilabel> </term>
-			 <listitem>
-				<para>Select the <guilabel>Use default theme font</guilabel> option to use the default system font for the text in the <application>&app;</application> text window. </para>
-				<para>The <guilabel>Editor font</guilabel> field displays the font that <application>&app;</application> uses to display text. Click on the button to specify the font type, style, and size to use for text. </para>
-			 </listitem>
-		  	</varlistentry>
-		   <varlistentry> <term><guilabel>Color Scheme</guilabel></term>
-			<listitem>
-				<para>You can choose a color scheme from the list of color schemes. By default, the following color schemes are installed:</para>
-				<varlistentry>
-					<listitem>
-						<para><guilabel>Classic</guilabel> Classic color scheme based on the gvim color scheme.</para>
-					</listitem>
-					<listitem>
-						<para><guilabel>Kate</guilabel> Color scheme used in the Kate text editor.</para>
-					</listitem>
-					<listitem>
-						<para><guilabel>Oblivion</guilabel> Dark color scheme using the Tango color palette.</para>
-					</listitem>
-					<listitem>
-						<para><guilabel>Tango</guilabel> Color scheme using the Tango color scheme.</para>
-					</listitem>
-				</varlistentry>
-			</listitem>
-			<listitem>
-				<para>You can add a new color scheme by clicking on <guilabel>Add...</guilabel>, and selecting a color scheme file</para>
-			</listitem>
-			<listitem>
-				<para>You can remove the selected color scheme by clicking on <guilabel>Remove</guilabel></para>
-			</listitem>
-		  	</varlistentry>
-			</variablelist>
-		</sect2>
-
-	 <sect2 id="gedit-prefs-syntax">
-	 <title>Syntax Highlighting Preferences</title>
-	 	<variablelist>
-		  <varlistentry> <term><guilabel>Enable syntax highlighting</guilabel> </term>
-			 <listitem>
-				<para>Select this option to highlight the syntax of the text that you edit.  </para>
-			 </listitem>
-		  </varlistentry>
-		  <varlistentry> <term><guilabel>Highlight mode</guilabel> </term>
-			 <listitem>
-				<para>Use this drop-down list to select a syntax mode to configure.  </para>
-			 </listitem>
-		  </varlistentry>
-		  <varlistentry> <term><guilabel>Elements</guilabel> </term>
-			 <listitem>
-				<para>Use this list box to select a syntax element to configure.  </para>
-			 </listitem>
-		  </varlistentry>
-		  <varlistentry> <term>Format buttons </term>
-			 <listitem>
-				<para>Use the following buttons to change the format of the selected syntax element:  </para>
-    <informaltable frame="all">
-      <tgroup cols="2" colsep="1" rowsep="1">
-        <colspec colname="COLSPEC0" colwidth="50*"/>
-        <colspec colname="COLSPEC1" colwidth="50*"/>
-        <thead>
-          <row valign="top">
-            <entry colname="COLSPEC0">
-              <para>Button</para></entry>
-            <entry colname="COLSPEC1">
-              <para>Format</para></entry>
-          </row>
-        </thead>
-        <tbody>
-          <row valign="top">
-            <entry>
-              <para>
-                <inlinemediaobject>
-                  <imageobject>
-                    <imagedata fileref="figures/gedit_format_bold.png" format="PNG"/>
-                  </imageobject>
-                  <textobject>
-                    <phrase>Shows icon for bold format.</phrase>
-                  </textobject>
-                </inlinemediaobject>
-              </para>
-            </entry>
-            <entry>
-              <para>
-                Bold
-              </para>
-            </entry>
-          </row>
-          <row valign="top">
-            <entry>
-              <para>
-                <inlinemediaobject>
-                  <imageobject>
-                    <imagedata fileref="figures/gedit_format_italic.png" format="PNG"/>                    </imageobject>
-                  <textobject>
-                    <phrase>Shows icon for italic format.</phrase>
-                  </textobject>
-                </inlinemediaobject>
-              </para>
-            </entry>
-            <entry>
-              <para>
-                Italic
-              </para>
-            </entry>
-          </row>
-          <row valign="top">
-            <entry>
-              <para>
-                <inlinemediaobject>
-                  <imageobject>
-                    <imagedata fileref="figures/gedit_format_underline.png" format="PNG"/>                    </imageobject>
-                  <textobject>
-                    <phrase>Shows icon for underline.</phrase>
-                  </textobject>
-                </inlinemediaobject>
-              </para>
-            </entry>
-            <entry>
-              <para>
-                Underline
-              </para>
-            </entry>
-          </row>
-          <row valign="top">
-            <entry>
-              <para>
-                <inlinemediaobject>
-                  <imageobject>
-                    <imagedata fileref="figures/gedit_format_strikethrough.png" format="PNG"/>                    </imageobject>
-                  <textobject>
-                    <phrase>Shows icon for strikethrough.</phrase>
-                  </textobject>
-                </inlinemediaobject>
-              </para>
-            </entry>
-            <entry>
-              <para>
-                Strikethrough
-              </para>
-            </entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </informaltable>
-			 </listitem>
-		  </varlistentry>
-		  <varlistentry> <term><guilabel>Foreground</guilabel> </term>
-			 <listitem>
-				<para>Select this option to change the font color of the selected syntax element. Click on the color button to display the color selector dialog, then select the font color.</para>
-			 </listitem>
-		  </varlistentry>
-		  <varlistentry> <term><guilabel>Background</guilabel> </term>
-			 <listitem>
-				<para>Select this option to change the background color of the selected syntax element. Click on the color button to display the color selector dialog, then select the background color.</para>
-			 </listitem>
-		  </varlistentry>
-		  <varlistentry> <term><guibutton>Reset to Default</guibutton> </term>
-			 <listitem>
-				<para>Click on this button to reset the foreground color and background color of the selected syntax element to the default values.</para>
-			 </listitem>
-		  </varlistentry>
-	 	</variablelist>
+    <sect2 id="gedit-prefs-editor">
+      <title>Editor Preferences</title>
+      <variablelist>
+        <varlistentry>
+          <term><guilabel>Tabs</guilabel> </term>
+          <listitem>
+            <para>Use the <guilabel>Tab width</guilabel> spin box to specify the width of the space that <application> &app;</application> inserts when you press the <keycap>Tab</keycap> key. </para>
+            <para>Select the <guilabel>Insert spaces instead of tabs</guilabel> option to specify that <application> &app;</application> inserts spaces instead of a tab character when you press the <keycap>Tab</keycap> key. </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><guilabel>Auto Indentation</guilabel> </term>
+          <listitem>
+            <para>Select the <guilabel>Enable auto indentation</guilabel> option to specify that the next line starts at the indentation level of the current line.  </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><guilabel>File Saving</guilabel> </term>
+          <listitem>
+            <para>Select the <guilabel>Create a backup copy of files before saving</guilabel> option to create a backup copy of a file each time you save the file. The backup copy of the file contains a ~ at the end of the filename.</para>
+            <para>Select the <guilabel>Autosave files every ... minutes</guilabel> option to automatically save the current file at regular intervals. Use the spin box to specify how often you want to save the file.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
     </sect2>
 
-	 <sect2 id="gedit-prefs-plugins">
-	 <title>Plugins Preferences</title>
-	 <para>Plugins add extra features to <application>&app;</application>. For more information on plugins and how to use the built-in plugins, see <xref linkend="gedit-plugins-overview"/>.</para>
+    <sect2 id="gedit-prefs-fontsandcolors">
+      <title>Font &amp; Colors Preferences</title>
+      <variablelist>
+        <varlistentry>
+          <term><guilabel>Font</guilabel> </term>
+          <listitem>
+            <para>Select the <guilabel>Use default theme font</guilabel> option to use the default system font for the text in the <application>&app;</application> text window. </para>
+            <para>The <guilabel>Editor font</guilabel> field displays the font that <application>&app;</application> uses to display text. Click on the button to specify the font type, style, and size to use for text. </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><guilabel>Color Scheme</guilabel></term>
+          <listitem>
+            <para>You can choose a color scheme from the list of color schemes. By default, the following color schemes are installed:</para>
+            <variablelist>
+              <varlistentry>
+                <term><guilabel>Classic</guilabel></term>
+                <listitem>
+                  <para>Classic color scheme based on the gvim color scheme.</para>
+                </listitem>
+              </varlistentry>
+              <varlistentry>
+                <term><guilabel>Kate</guilabel></term>
+                <listitem>
+                  <para>Color scheme used in the Kate text editor.</para>
+                </listitem>
+              </varlistentry>
+              <varlistentry>
+                <term><guilabel>Oblivion</guilabel></term>
+                <listitem>
+                  <para>Dark color scheme using the Tango color palette.</para>
+                </listitem>
+              </varlistentry>
+              <varlistentry>
+                <term><guilabel>Tango</guilabel></term>
+                <listitem>
+                  <para>Color scheme using the Tango color scheme.</para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+            <para>You can add a new color scheme by clicking on <guilabel>Add...</guilabel>, and selecting a color scheme file</para>
+            <para>You can remove the selected color scheme by clicking on <guilabel>Remove</guilabel></para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect2>
 
+    <sect2 id="gedit-prefs-plugins">
+      <title>Plugins Preferences</title>
+      <para>Plugins add extra features to <application>&app;</application>. For more information on plugins and how to use the built-in plugins, see <xref linkend="gedit-plugins-overview"/>.</para>
 
 <!-- ============= To Load gedit Plugins ========================= -->
 	 <sect3 id="gedit-install-plugins">
