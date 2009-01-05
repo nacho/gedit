@@ -159,7 +159,7 @@ class Manager(Singleton):
         h = self.compute_hash(script)
         if h != self.script_hash:
             # script has changed -> save it
-            self.current_node.save_with_script([line + "\n" for line in script.split("\n")])
+            self.current_node.save_with_script([line + "\n" for line in script.splitlines()])
             self.script_hash = h
         else:
             self.current_node.save()
