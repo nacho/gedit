@@ -624,6 +624,7 @@ gedit_message_bus_register (GeditMessageBus *bus,
 	GeditMessageType *message_type;
 
 	g_return_val_if_fail (GEDIT_IS_MESSAGE_BUS (bus), NULL);
+	g_return_val_if_fail (gedit_message_type_is_valid_object_path (object_path), NULL);
 	
 	if (gedit_message_bus_is_registered (bus, object_path, method))
 	{
@@ -642,11 +643,15 @@ gedit_message_bus_register (GeditMessageBus *bus,
 	va_end (var_args);
 	
 	if (message_type)
+	{
 		g_hash_table_insert (bus->priv->types, identifier, message_type);
+		g_signal_emit (bus, message_bus_signals[REGISTERED], 0, message_type);
+	}
 	else
+	{
 		g_free (identifier);
+	}
 	
-	g_signal_emit (bus, message_bus_signals[REGISTERED], 0, message_type);
 	return message_type;	
 }
 
@@ -756,6 +761,44 @@ gedit_message_bus_is_registered (GeditMessageBus	*bus,
 	
 	g_free(identifier);
 	return ret;
+}
+
+typedef struct
+{
+	GeditMessageBusForeach func;
+	gpointer userdata;
+} ForeachInfo;
+
+static void
+foreach_type (const gchar      *key,
+	      GeditMessageType *message_type,
+	      ForeachInfo      *info)
+{
+	gedit_message_type_ref (message_type);
+	info->func (message_type, info->userdata);
+	gedit_message_type_unref (message_type);
+}
+
+/**
+ * gedit_message_bus_foreach:
+ * @bus: the #GeditMessagebus
+ * @func: the callback function
+ * @userdata: the user data to supply to the callback function
+ *
+ * Calls @func for each message type registered on the bus
+ *
+ */
+void 
+gedit_message_bus_foreach (GeditMessageBus        *bus,
+			   GeditMessageBusForeach  func,
+			   gpointer		   userdata)
+{
+	ForeachInfo info = {func, userdata};
+	
+	g_return_if_fail (GEDIT_IS_MESSAGE_BUS (bus));
+	g_return_if_fail (func != NULL);
+
+	g_hash_table_foreach (bus->priv->types, (GHFunc)foreach_type, &info);
 }
 
 /**

@@ -28,7 +28,7 @@ struct _GeditMessageBus {
 struct _GeditMessageBusClass {
 	GObjectClass parent_class;
 	
-	void (*dispatch)			(GeditMessageBus  *bus,
+	void (*dispatch)		(GeditMessageBus  *bus,
 					 GeditMessage     *message);
 	void (*registered)		(GeditMessageBus  *bus,
 					 GeditMessageType *message_type);
@@ -36,9 +36,12 @@ struct _GeditMessageBusClass {
 					 GeditMessageType *message_type);
 };
 
-typedef void (* GeditMessageCallback) 	(GeditMessageBus	 *bus,
+typedef void (* GeditMessageCallback) 	(GeditMessageBus *bus,
 					 GeditMessage	 *message,
 					 gpointer	  userdata);
+
+typedef void (* GeditMessageBusForeach) (GeditMessageType *message_type,
+					 gpointer	   userdata);
 
 GType gedit_message_bus_get_type (void) G_GNUC_CONST;
 
@@ -61,10 +64,13 @@ void gedit_message_bus_unregister	  (GeditMessageBus	*bus,
 void gedit_message_bus_unregister_all	  (GeditMessageBus	*bus,
 					   const gchar		*object_path);
 
-gboolean gedit_message_bus_is_registered	  (GeditMessageBus	*bus,
+gboolean gedit_message_bus_is_registered  (GeditMessageBus	*bus,
 					   const gchar		*object_path,
 					   const gchar		*method);
 
+void gedit_message_bus_foreach		  (GeditMessageBus        *bus,
+					   GeditMessageBusForeach  func,
+					   gpointer		   userdata);
 
 
 /* connecting to message events */		   

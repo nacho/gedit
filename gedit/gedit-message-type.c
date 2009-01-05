@@ -137,6 +137,45 @@ gedit_message_type_identifier (const gchar *object_path,
 }
 
 /**
+ * gedit_message_type_is_valid_object_path:
+ * @object_path: the object path
+ *
+ * Returns whether @object_path is a valid object path
+ *
+ * Return value: %TRUE if @object_path is a valid object path
+ *
+ */
+gboolean
+gedit_message_type_is_valid_object_path (const gchar *object_path)
+{
+	if (!object_path)
+		return FALSE;
+	
+	/* needs to start with / */
+	if (*object_path != '/')
+		return FALSE;
+	
+	while (*object_path)
+	{
+		if (*object_path == '/')
+		{
+			++object_path;
+			
+			if (!*object_path || !(g_ascii_isalpha (*object_path) || *object_path == '_'))
+				return FALSE;
+		}
+		else if (!(g_ascii_isalnum (*object_path) || *object_path == '_'))
+		{
+			return FALSE;
+		}
+		
+		++object_path;
+	}
+	
+	return TRUE;
+}
+
+/**
  * gedit_message_type_is_supported:
  * @type: the #GType
  *
@@ -209,6 +248,7 @@ gedit_message_type_new_valist (const gchar *object_path,
 
 	g_return_val_if_fail (object_path != NULL, NULL);
 	g_return_val_if_fail (method != NULL, NULL);
+	g_return_val_if_fail (gedit_message_type_is_valid_object_path (object_path), NULL);
 
 	message_type = g_new0(GeditMessageType, 1);
 	
