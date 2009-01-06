@@ -1391,12 +1391,12 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	/* now load the UI definition */
 	ui_file = gedit_dirs_get_ui_file (GEDIT_UIFILE);
 	gtk_ui_manager_add_ui_from_file (manager, ui_file, &error);
-	g_free (ui_file);
 	if (error != NULL)
 	{
-		g_warning ("Could not merge %s: %s", GEDIT_UIFILE, error->message);
+		g_warning ("Could not merge %s: %s", ui_file, error->message);
 		g_error_free (error);
 	}
+	g_free (ui_file);
 
 	/* show tooltips in the statusbar */
 	g_signal_connect (manager,
