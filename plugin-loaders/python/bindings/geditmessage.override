@@ -257,6 +257,8 @@ _wrap_gedit_message_type_new(PyGObject *self, PyObject *args, PyObject *kwargs)
     
     self->obj = (GObject *)message_type;    
     pygobject_register_wrapper((PyObject *) self);
+    
+    return 0;
 }
 %%
 override gedit_message_type_instantiate kwargs
