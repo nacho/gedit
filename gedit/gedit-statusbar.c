@@ -38,7 +38,9 @@
 
 #include "gedit-statusbar.h"
 
-#define GEDIT_STATUSBAR_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_STATUSBAR, GeditStatusbarPrivate))
+#define GEDIT_STATUSBAR_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),\
+					    GEDIT_TYPE_STATUSBAR,\
+					    GeditStatusbarPrivate))
 
 struct _GeditStatusbarPrivate
 {
@@ -60,6 +62,19 @@ struct _GeditStatusbarPrivate
 };
 
 G_DEFINE_TYPE(GeditStatusbar, gedit_statusbar, GTK_TYPE_STATUSBAR)
+
+
+static gchar *
+get_overwrite_mode_string (gboolean overwrite)
+{
+	return g_strconcat ("  ", overwrite ? _("OVR") :  _("INS"), NULL);
+}
+
+static gint
+get_overwrite_mode_length (void)
+{
+	return 2 + MAX (g_utf8_strlen (_("OVR"), -1), g_utf8_strlen (_("INS"), -1));
+}
 
 static void
 gedit_statusbar_notify (GObject    *object,
@@ -100,6 +115,38 @@ gedit_statusbar_class_init (GeditStatusbarClass *klass)
 	g_type_class_add_private (object_class, sizeof (GeditStatusbarPrivate));
 }
 
+#define RESIZE_GRIP_EXTRA_WIDTH 30
+
+static void
+set_statusbar_width_chars (GtkWidget *statusbar,
+			   gint       n_chars,
+			   gboolean   has_resize_grip)
+{
+	PangoContext *context;
+	PangoFontMetrics *metrics;
+	gint char_width, digit_width, width;
+
+	context = gtk_widget_get_pango_context (statusbar);
+	metrics = pango_context_get_metrics (context,
+					     GTK_WIDGET (statusbar)->style->font_desc, 
+					     pango_context_get_language (context));
+
+	char_width = pango_font_metrics_get_approximate_digit_width (metrics);
+	digit_width = pango_font_metrics_get_approximate_char_width (metrics);
+
+	width = PANGO_PIXELS (MAX (char_width, digit_width) * n_chars);
+
+	pango_font_metrics_unref (metrics);
+
+	/* If there is a resize grip, allocate some extra width.
+	 * It would be nice to calculate the exact size programmatically
+	 * but I could not find out how to do it */
+	if (has_resize_grip)
+		width += RESIZE_GRIP_EXTRA_WIDTH;
+
+	gtk_widget_set_size_request (statusbar, width, -1);
+}
+
 static void
 gedit_statusbar_init (GeditStatusbar *statusbar)
 {
@@ -112,23 +159,20 @@ gedit_statusbar_init (GeditStatusbar *statusbar)
 
 	statusbar->priv->overwrite_mode_statusbar = gtk_statusbar_new ();
 	gtk_widget_show (statusbar->priv->overwrite_mode_statusbar);
-	gtk_widget_set_size_request (statusbar->priv->overwrite_mode_statusbar,
-				     80,
-				     10);
-
 	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (statusbar->priv->overwrite_mode_statusbar),
 					   TRUE);
+	set_statusbar_width_chars (statusbar->priv->overwrite_mode_statusbar,
+				   get_overwrite_mode_length (),
+				   TRUE);
 	gtk_box_pack_end (GTK_BOX (statusbar),
 			  statusbar->priv->overwrite_mode_statusbar,
 			  FALSE, TRUE, 0);
 
 	statusbar->priv->cursor_position_statusbar = gtk_statusbar_new ();
 	gtk_widget_show (statusbar->priv->cursor_position_statusbar);
-	gtk_widget_set_size_request (statusbar->priv->cursor_position_statusbar,
-				     160,
-				     10);
 	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (statusbar->priv->cursor_position_statusbar),
 					   FALSE);
+	set_statusbar_width_chars (statusbar->priv->cursor_position_statusbar, 18, FALSE);
 	gtk_box_pack_end (GTK_BOX (statusbar),
 			  statusbar->priv->cursor_position_statusbar,
 			  FALSE, TRUE, 0);
@@ -244,10 +288,7 @@ gedit_statusbar_set_overwrite (GeditStatusbar *statusbar,
 
 	gtk_statusbar_pop (GTK_STATUSBAR (statusbar->priv->overwrite_mode_statusbar), 0);
 
-	if (overwrite)
-		msg = g_strconcat ("  ", _("OVR"), NULL);
-	else
-		msg = g_strconcat ("  ", _("INS"), NULL);
+	msg = get_overwrite_mode_string (overwrite);
 
 	gtk_statusbar_push (GTK_STATUSBAR (statusbar->priv->overwrite_mode_statusbar), 0, msg);
 
