@@ -2367,9 +2367,9 @@ notebook_switch_page (GtkNotebook     *book,
 	gedit_statusbar_set_overwrite (GEDIT_STATUSBAR (window->priv->statusbar),
 				       gtk_text_view_get_overwrite (GTK_TEXT_VIEW (view)));
 
-	gtk_widget_set_sensitive (window->priv->tab_width_combo, TRUE);
-	gtk_widget_set_sensitive (window->priv->language_combo, TRUE);
-	
+	gtk_widget_show (window->priv->tab_width_combo);
+	gtk_widget_show (window->priv->language_combo);
+
 	window->priv->tab_width_id = g_signal_connect (view, 
 						       "notify::tab-width", 
 						       G_CALLBACK (tab_width_changed),
@@ -3144,9 +3144,10 @@ notebook_tab_removed (GeditNotebook *notebook,
 				
 		gedit_statusbar_clear_overwrite (
 				GEDIT_STATUSBAR (window->priv->statusbar));
-		
-		gtk_widget_set_sensitive (window->priv->tab_width_combo, FALSE);
-		gtk_widget_set_sensitive (window->priv->language_combo, FALSE);
+
+		/* hide the combos */
+		gtk_widget_hide (window->priv->tab_width_combo);
+		gtk_widget_hide (window->priv->language_combo);
 	}
 
 	if (!window->priv->removing_tabs)
