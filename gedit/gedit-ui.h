@@ -161,7 +161,7 @@ static const GtkToggleActionEntry gedit_always_sensitive_toggle_menu_entries[] =
 	  N_("Show or hide the side pane in the current window"),
 	  G_CALLBACK (_gedit_cmd_view_show_side_pane), FALSE },
 	{ "ViewFullscreen", GTK_STOCK_FULLSCREEN, NULL, "F11",
-	  N_("Edit text at full screen"),
+	  N_("Edit text at fullscreen"),
 	  G_CALLBACK (_gedit_cmd_view_toggle_fullscreen_mode), FALSE }
 };
 
