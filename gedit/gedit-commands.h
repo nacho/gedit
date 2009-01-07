@@ -117,6 +117,10 @@ void		_gedit_cmd_view_show_side_pane		(GtkAction   *action,
 							 GeditWindow *window);
 void		_gedit_cmd_view_show_bottom_pane	(GtkAction   *action,
 							 GeditWindow *window);
+void		_gedit_cmd_view_toggle_fullscreen_mode	(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_view_leave_fullscreen_mode	(GtkAction   *action,
+							 GeditWindow *window);
 
 void		_gedit_cmd_search_find			(GtkAction   *action,
 							 GeditWindow *window);

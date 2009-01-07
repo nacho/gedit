@@ -82,6 +82,8 @@
       <menuitem name="ViewSidePaneMenu" action="ViewSidePane"/>
       <menuitem name="ViewBottomPaneMenu" action="ViewBottomPane"/>
       <separator/>
+      <menuitem name="ViewFullscreenMenu" action="ViewFullscreen"/>
+      <separator/>
       <menu name="ViewHighlightModeMenu" action="ViewHighlightMode">
         <placeholder name="LanguagesMenuPlaceholder">
         </placeholder>
@@ -165,6 +167,25 @@
     <separator/>
     <toolitem action="SearchFind"/>
     <toolitem action="SearchReplace"/>
+  </toolbar>
+
+  <toolbar name="FullscreenToolBar">
+    <toolitem action="FileNew"/>
+    <toolitem action="FileSave"/>
+    <separator/>
+    <toolitem action="FilePrint"/>
+    <separator/>
+    <toolitem action="EditUndo"/>
+    <toolitem action="EditRedo"/>
+    <separator/>
+    <toolitem action="EditCut"/>
+    <toolitem action="EditCopy"/>
+    <toolitem action="EditPaste"/>
+    <separator/>
+    <toolitem action="SearchFind"/>
+    <toolitem action="SearchReplace"/>
+    <separator expand="true"/>
+    <toolitem action="LeaveFullscreen"/>
   </toolbar>
 
   <popup name="NotebookPopup" action="NotebookPopupAction">

@@ -178,6 +178,12 @@ void		 _gedit_window_set_default_path 	(GeditWindow         *window,
 void		 _gedit_window_set_saving_session_state	(GeditWindow         *window,
 							 gboolean             saving_session);
 
+void		 _gedit_window_fullscreen		(GeditWindow         *window);
+
+void		 _gedit_window_unfullscreen		(GeditWindow         *window);
+
+gboolean	 _gedit_window_is_fullscreen		(GeditWindow         *window);
+
 /* these are in gedit-window because of screen safety */
 void		 _gedit_recent_add			(GeditWindow	     *window,
 							 const gchar         *uri,

@@ -173,6 +173,13 @@ gedit_window_dispose (GObject *object)
 		window->priv->dispose_has_run = TRUE;
 	}
 
+	if (window->priv->fullscreen_controls != NULL)
+	{
+		gtk_widget_destroy (window->priv->fullscreen_controls);
+		
+		window->priv->fullscreen_controls = NULL;
+	}
+
 	if (window->priv->recents_handler_id != 0)
 	{
 		GtkRecentManager *recent_manager;
@@ -434,6 +441,41 @@ disconnect_proxy_cb (GtkUIManager *manager,
 	}
 }
 
+static void
+apply_toolbar_style (GeditWindow *window,
+		     GtkWidget *toolbar)
+{
+	switch (window->priv->toolbar_style)
+	{
+		case GEDIT_TOOLBAR_SYSTEM:
+			gedit_debug_message (DEBUG_WINDOW, "GEDIT: SYSTEM");
+			gtk_toolbar_unset_style (
+					GTK_TOOLBAR (toolbar));
+			break;
+
+		case GEDIT_TOOLBAR_ICONS:
+			gedit_debug_message (DEBUG_WINDOW, "GEDIT: ICONS");
+			gtk_toolbar_set_style (
+					GTK_TOOLBAR (toolbar),
+					GTK_TOOLBAR_ICONS);
+			break;
+
+		case GEDIT_TOOLBAR_ICONS_AND_TEXT:
+			gedit_debug_message (DEBUG_WINDOW, "GEDIT: ICONS_AND_TEXT");
+			gtk_toolbar_set_style (
+					GTK_TOOLBAR (toolbar),
+					GTK_TOOLBAR_BOTH);
+			break;
+
+		case GEDIT_TOOLBAR_ICONS_BOTH_HORIZ:
+			gedit_debug_message (DEBUG_WINDOW, "GEDIT: ICONS_BOTH_HORIZ");
+			gtk_toolbar_set_style (
+					GTK_TOOLBAR (toolbar),
+					GTK_TOOLBAR_BOTH_HORIZ);
+			break;
+	}
+}
+
 /* Returns TRUE if toolbar is visible */
 static gboolean
 set_toolbar_style (GeditWindow *window,
@@ -467,36 +509,8 @@ set_toolbar_style (GeditWindow *window,
 		style = origin->priv->toolbar_style;
 	
 	window->priv->toolbar_style = style;
-
-	switch (style)
-	{
-		case GEDIT_TOOLBAR_SYSTEM:
-			gedit_debug_message (DEBUG_WINDOW, "GEDIT: SYSTEM");
-			gtk_toolbar_unset_style (
-					GTK_TOOLBAR (window->priv->toolbar));
-			break;
-
-		case GEDIT_TOOLBAR_ICONS:
-			gedit_debug_message (DEBUG_WINDOW, "GEDIT: ICONS");
-			gtk_toolbar_set_style (
-					GTK_TOOLBAR (window->priv->toolbar),
-					GTK_TOOLBAR_ICONS);
-			break;
-
-		case GEDIT_TOOLBAR_ICONS_AND_TEXT:
-			gedit_debug_message (DEBUG_WINDOW, "GEDIT: ICONS_AND_TEXT");
-			gtk_toolbar_set_style (
-					GTK_TOOLBAR (window->priv->toolbar),
-					GTK_TOOLBAR_BOTH);			
-			break;
-
-		case GEDIT_TOOLBAR_ICONS_BOTH_HORIZ:
-			gedit_debug_message (DEBUG_WINDOW, "GEDIT: ICONS_BOTH_HORIZ");
-			gtk_toolbar_set_style (
-					GTK_TOOLBAR (window->priv->toolbar),
-					GTK_TOOLBAR_BOTH_HORIZ);	
-			break;       
-	}
+	
+	apply_toolbar_style (window, window->priv->toolbar);
 	
 	return visible;
 }
@@ -1310,6 +1324,62 @@ toolbar_visibility_changed (GtkWidget   *toolbar,
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 }
 
+static GtkWidget *
+setup_toolbar_open_button (GeditWindow *window,
+			   GtkWidget *toolbar)
+{
+	GtkRecentManager *recent_manager;
+	GtkRecentFilter *filter;
+	GtkWidget *toolbar_recent_menu;
+	GtkToolItem *open_button;
+	GtkAction *action;
+
+	recent_manager = gtk_recent_manager_get_default ();
+
+	/* recent files menu tool button */
+	toolbar_recent_menu = gtk_recent_chooser_menu_new_for_manager (recent_manager);
+
+	gtk_recent_chooser_set_local_only (GTK_RECENT_CHOOSER (toolbar_recent_menu),
+					   FALSE);
+	gtk_recent_chooser_set_sort_type (GTK_RECENT_CHOOSER (toolbar_recent_menu),
+					  GTK_RECENT_SORT_MRU);
+	gtk_recent_chooser_set_limit (GTK_RECENT_CHOOSER (toolbar_recent_menu),
+				      gedit_prefs_manager_get_max_recents ());
+
+	filter = gtk_recent_filter_new ();
+	gtk_recent_filter_add_group (filter, "gedit");
+	gtk_recent_chooser_set_filter (GTK_RECENT_CHOOSER (toolbar_recent_menu),
+				       filter);
+
+	g_signal_connect (toolbar_recent_menu,
+			  "item_activated",
+			  G_CALLBACK (recent_chooser_item_activated),
+			  window);
+	
+	/* add the custom Open button to the toolbar */
+	open_button = gtk_menu_tool_button_new_from_stock (GTK_STOCK_OPEN);
+	gtk_menu_tool_button_set_menu (GTK_MENU_TOOL_BUTTON (open_button),
+				       toolbar_recent_menu);
+
+	gtk_tool_item_set_tooltip_text (open_button, _("Open a file"));
+	gtk_menu_tool_button_set_arrow_tooltip_text (GTK_MENU_TOOL_BUTTON (open_button),
+						     _("Open a recently used file"));
+
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
+					      "FileOpen");
+	g_object_set (action,
+		      "is_important", TRUE,
+		      "short_label", _("Open"),
+		      NULL);
+	gtk_action_connect_proxy (action, GTK_WIDGET (open_button));
+
+	gtk_toolbar_insert (GTK_TOOLBAR (toolbar),
+			    open_button,
+			    1);
+	
+	return toolbar_recent_menu;
+}
+
 static void
 create_menu_bar_and_toolbar (GeditWindow *window, 
 			     GtkWidget   *main_box)
@@ -1318,9 +1388,7 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	GtkAction *action;
 	GtkUIManager *manager;
 	GtkWidget *menubar;
-	GtkToolItem *open_button;
 	GtkRecentManager *recent_manager;
-	GtkRecentFilter *filter;
 	GError *error = NULL;
 	GeditLockdownMask lockdown;
 	gchar *ui_file;
@@ -1429,26 +1497,6 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 							     window);
 	update_recent_files_menu (window);
 
-	/* recent files menu tool button */
-	window->priv->toolbar_recent_menu = gtk_recent_chooser_menu_new_for_manager (recent_manager);
-
-	gtk_recent_chooser_set_local_only (GTK_RECENT_CHOOSER (window->priv->toolbar_recent_menu),
-					   FALSE);
-	gtk_recent_chooser_set_sort_type (GTK_RECENT_CHOOSER (window->priv->toolbar_recent_menu),
-					  GTK_RECENT_SORT_MRU);
-	gtk_recent_chooser_set_limit (GTK_RECENT_CHOOSER (window->priv->toolbar_recent_menu),
-				      gedit_prefs_manager_get_max_recents ());
-
-	filter = gtk_recent_filter_new ();
-	gtk_recent_filter_add_group (filter, "gedit");
-	gtk_recent_chooser_set_filter (GTK_RECENT_CHOOSER (window->priv->toolbar_recent_menu),
-				       filter);
-
-	g_signal_connect (window->priv->toolbar_recent_menu,
-			  "item_activated",
-			  G_CALLBACK (recent_chooser_item_activated),
-			  window);
-
 	/* languages menu */
 	action_group = gtk_action_group_new ("LanguagesActions");
 	gtk_action_group_set_translation_domain (action_group, NULL);
@@ -1479,27 +1527,9 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 			    0);
 
 	set_toolbar_style (window, NULL);
-
-	/* add the custom Open button to the toolbar */
-	open_button = gtk_menu_tool_button_new_from_stock (GTK_STOCK_OPEN);
-	gtk_menu_tool_button_set_menu (GTK_MENU_TOOL_BUTTON (open_button),
-				       window->priv->toolbar_recent_menu);
-
-	gtk_tool_item_set_tooltip_text (open_button, _("Open a file"));
-	gtk_menu_tool_button_set_arrow_tooltip_text (GTK_MENU_TOOL_BUTTON (open_button),
-						     _("Open a recently used file"));
-
-	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					      "FileOpen");
-	g_object_set (action,
-		      "is_important", TRUE,
-		      "short_label", _("Open"),
-		      NULL);
-	gtk_action_connect_proxy (action, GTK_WIDGET (open_button));
-
-	gtk_toolbar_insert (GTK_TOOLBAR (window->priv->toolbar),
-			    open_button,
-			    1);
+	
+	window->priv->toolbar_recent_menu = setup_toolbar_open_button (window,
+								       window->priv->toolbar);
 
 	gtk_container_foreach (GTK_CONTAINER (window->priv->toolbar),
 			       (GtkCallback)set_non_homogeneus,
@@ -2703,6 +2733,123 @@ drop_uris_cb (GtkWidget    *widget,
 }
 
 static void
+fullscreen_controls_show (GeditWindow *window)
+{
+	GdkScreen *screen;
+	GdkRectangle fs_rect;
+	gint w, h;
+
+	screen = gtk_window_get_screen (GTK_WINDOW (window));
+	gdk_screen_get_monitor_geometry (screen,
+					 gdk_screen_get_monitor_at_window (screen, GTK_WIDGET (window)->window),
+					 &fs_rect);
+
+	gtk_window_get_size (GTK_WINDOW (window->priv->fullscreen_controls), &w, &h);
+
+	gtk_window_resize (GTK_WINDOW (window->priv->fullscreen_controls),
+			   fs_rect.width, h);
+
+	gtk_window_move (GTK_WINDOW (window->priv->fullscreen_controls),
+			 fs_rect.x, fs_rect.y - h + 1);
+
+	gtk_widget_show_all (window->priv->fullscreen_controls);
+}
+
+static gboolean
+on_fullscreen_controls_enter_notify_event (GtkWidget        *widget,
+					   GdkEventCrossing *event,
+					   GeditWindow      *window)
+{
+	GdkScreen *screen;
+	GdkRectangle fs_rect;
+
+	if (event->type != GDK_ENTER_NOTIFY)
+		return FALSE;
+
+	screen = gtk_window_get_screen (GTK_WINDOW (window));
+	gdk_screen_get_monitor_geometry (screen,
+					 gdk_screen_get_monitor_at_window (screen, GTK_WIDGET (window)->window),
+					 &fs_rect);
+
+	gtk_window_move (GTK_WINDOW (window->priv->fullscreen_controls),
+			 fs_rect.x, fs_rect.y);
+	return FALSE;
+}
+
+static gboolean
+on_fullscreen_controls_leave_notify_event (GtkWidget        *widget,
+					   GdkEventCrossing *event,
+					   GeditWindow      *window)
+{
+	GdkDisplay *display;
+	GdkScreen *screen;
+	GdkRectangle fs_rect;
+	gint w, h;
+	gint x, y;
+
+	display = gdk_display_get_default ();
+	screen = gtk_window_get_screen (GTK_WINDOW (window));
+	gdk_screen_get_monitor_geometry (screen,
+					 gdk_screen_get_monitor_at_window (screen, GTK_WIDGET (window)->window),
+					 &fs_rect);
+
+	gtk_window_get_size (GTK_WINDOW (window->priv->fullscreen_controls), &w, &h);
+	gdk_display_get_pointer (display, &screen, &x, &y, NULL);
+	
+	/* gtk seems to emit leave notify when clicking on tool items,
+	 * work around it by checking the coordinates
+	 */
+	if (y > h)
+		gtk_window_move (GTK_WINDOW (window->priv->fullscreen_controls),
+				 fs_rect.x, fs_rect.y - h + 1);
+	
+	return FALSE;
+}
+
+static void
+fullscreen_controls_build (GeditWindow *window)
+{
+	GeditWindowPrivate *priv = window->priv;
+	GtkWidget *toolbar;
+	GtkWidget *toolbar_recent_menu;
+	GtkAction *action;
+
+	if (priv->fullscreen_controls != NULL)
+		return;
+	
+	priv->fullscreen_controls = gtk_window_new (GTK_WINDOW_POPUP);
+
+	gtk_window_set_transient_for (GTK_WINDOW (priv->fullscreen_controls),
+				      &window->window);
+	
+	/* popup toolbar */
+	toolbar = gtk_ui_manager_get_widget (priv->manager, "/FullscreenToolBar");
+	gtk_container_add (GTK_CONTAINER (priv->fullscreen_controls),
+			   toolbar);
+	
+	action = gtk_action_group_get_action (priv->always_sensitive_action_group,
+					      "LeaveFullscreen");
+	g_object_set (action, "is-important", TRUE, NULL);
+	
+	toolbar_recent_menu = setup_toolbar_open_button (window, toolbar);
+
+	gtk_container_foreach (GTK_CONTAINER (toolbar),
+			       (GtkCallback)set_non_homogeneus,
+			       NULL);
+
+	/* Set the toolbar style */
+	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar),
+			       GTK_TOOLBAR_BOTH_HORIZ);
+
+	g_signal_connect (priv->fullscreen_controls, "enter-notify-event",
+			  G_CALLBACK (on_fullscreen_controls_enter_notify_event),
+			  window);
+	g_signal_connect (priv->fullscreen_controls, "leave-notify-event",
+			  G_CALLBACK (on_fullscreen_controls_leave_notify_event),
+			  window);
+}
+
+static void
 can_search_again (GeditDocument *doc,
 		  GParamSpec    *pspec,
 		  GeditWindow   *window)
@@ -3450,6 +3597,7 @@ gedit_window_init (GeditWindow *window)
 	window->priv->removing_tabs = FALSE;
 	window->priv->state = GEDIT_WINDOW_STATE_NORMAL;
 	window->priv->dispose_has_run = FALSE;
+	window->priv->fullscreen_controls = NULL;
 
 	window->priv->message_bus = gedit_message_bus_new ();
 
@@ -4142,6 +4290,93 @@ _gedit_window_set_saving_session_state (GeditWindow *window,
 
 		g_object_notify (G_OBJECT (window), "state");
 	}
+}
+
+static void
+hide_notebook_tabs_on_fullscreen (GtkNotebook	*notebook, 
+				  GParamSpec	*pspec,
+				  GeditWindow	*window)
+{
+	gtk_notebook_set_show_tabs (notebook, FALSE);
+}
+
+void
+_gedit_window_fullscreen (GeditWindow *window)
+{
+	g_return_if_fail (GEDIT_IS_WINDOW (window));
+
+	if (_gedit_window_is_fullscreen (window))
+		return;
+
+	/* Go to fullscreen mode and hide bars */
+	gtk_window_fullscreen (&window->window);
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->priv->notebook), FALSE);
+	g_signal_connect (window->priv->notebook, "notify::show-tabs",
+			  G_CALLBACK (hide_notebook_tabs_on_fullscreen), window);
+	
+	gtk_widget_hide (gtk_ui_manager_get_widget (window->priv->manager,
+			 "/MenuBar"));
+	
+	g_signal_handlers_block_by_func (window->priv->toolbar,
+					 toolbar_visibility_changed,
+					 window);
+	gtk_widget_hide (window->priv->toolbar);
+	
+	g_signal_handlers_block_by_func (window->priv->statusbar,
+					 statusbar_visibility_changed,
+					 window);
+	gtk_widget_hide (window->priv->statusbar);
+
+	fullscreen_controls_build (window);
+	fullscreen_controls_show (window);
+}
+
+void
+_gedit_window_unfullscreen (GeditWindow *window)
+{
+	gboolean visible;
+	GtkAction *action;
+
+	g_return_if_fail (GEDIT_IS_WINDOW (window));
+
+	if (!_gedit_window_is_fullscreen (window))
+		return;
+
+	/* Unfullscreen and show bars */
+	gtk_window_unfullscreen (&window->window);
+	g_signal_handlers_disconnect_by_func (window->priv->notebook,
+					      hide_notebook_tabs_on_fullscreen,
+					      window);
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->priv->notebook), TRUE);
+	gtk_widget_show (gtk_ui_manager_get_widget (window->priv->manager, "/MenuBar"));
+	
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
+					      "ViewToolbar");
+	visible = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+	if (visible)
+		gtk_widget_show (window->priv->toolbar);
+	g_signal_handlers_unblock_by_func (window->priv->toolbar,
+					   toolbar_visibility_changed,
+					   window);
+	
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
+					      "ViewStatusbar");
+	visible = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+	if (visible)
+		gtk_widget_show (window->priv->statusbar);
+	g_signal_handlers_unblock_by_func (window->priv->statusbar,
+					   statusbar_visibility_changed,
+					   window);
+
+	gtk_widget_hide (window->priv->fullscreen_controls);
+}
+
+gboolean
+_gedit_window_is_fullscreen (GeditWindow *window)
+{
+	g_return_val_if_fail (GEDIT_IS_WINDOW (window), FALSE);
+
+	return window->priv->window_state & GDK_WINDOW_STATE_FULLSCREEN;
 }
 
 /**

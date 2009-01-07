@@ -121,3 +121,34 @@ _gedit_cmd_view_show_bottom_pane (GtkAction   *action,
 		gtk_widget_hide (GTK_WIDGET (panel));
 	}
 }
+
+void
+_gedit_cmd_view_toggle_fullscreen_mode (GtkAction *action,
+					GeditWindow *window)
+{
+	gedit_debug (DEBUG_COMMANDS);
+
+	if (_gedit_window_is_fullscreen (window))
+		_gedit_window_unfullscreen (window);
+	else
+		_gedit_window_fullscreen (window);
+}
+
+void
+_gedit_cmd_view_leave_fullscreen_mode (GtkAction *action,
+				       GeditWindow *window)
+{
+	GtkAction *view_action;
+
+	view_action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
+						   "ViewFullscreen");
+	g_signal_handlers_block_by_func
+		(view_action, G_CALLBACK (_gedit_cmd_view_toggle_fullscreen_mode),
+		 window);
+	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (view_action),
+				      FALSE);
+	_gedit_window_unfullscreen (window);
+	g_signal_handlers_unblock_by_func
+		(view_action, G_CALLBACK (_gedit_cmd_view_toggle_fullscreen_mode),
+		 window);
+}

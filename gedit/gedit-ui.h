@@ -68,7 +68,12 @@ static const GtkActionEntry gedit_always_sensitive_menu_entries[] =
 	{"HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
 	 N_("Open the gedit manual"), G_CALLBACK (_gedit_cmd_help_contents) },
 	{ "HelpAbout", GTK_STOCK_ABOUT, NULL, NULL,
-	 N_("About this application"), G_CALLBACK (_gedit_cmd_help_about) }
+	 N_("About this application"), G_CALLBACK (_gedit_cmd_help_about) },
+	
+	/* Fullscreen toolbar */
+	{ "LeaveFullscreen", GTK_STOCK_LEAVE_FULLSCREEN, NULL,
+	  NULL, N_("Leave fullscreen mode"),
+	  G_CALLBACK (_gedit_cmd_view_leave_fullscreen_mode) }
 };
 
 static const GtkActionEntry gedit_menu_entries[] =
@@ -154,7 +159,10 @@ static const GtkToggleActionEntry gedit_always_sensitive_toggle_menu_entries[] =
 	  G_CALLBACK (_gedit_cmd_view_show_statusbar), TRUE },
 	{ "ViewSidePane", NULL, N_("Side _Pane"), "F9",
 	  N_("Show or hide the side pane in the current window"),
-	  G_CALLBACK (_gedit_cmd_view_show_side_pane), FALSE }
+	  G_CALLBACK (_gedit_cmd_view_show_side_pane), FALSE },
+	{ "ViewFullscreen", GTK_STOCK_FULLSCREEN, NULL, "F11",
+	  N_("Edit text at full screen"),
+	  G_CALLBACK (_gedit_cmd_view_toggle_fullscreen_mode), FALSE }
 };
 
 static const GtkToggleActionEntry gedit_toggle_menu_entries[] =

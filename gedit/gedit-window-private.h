@@ -54,6 +54,9 @@ struct _GeditWindowPrivate
 	
 	GeditMessageBus *message_bus;	
 
+	/* Widgets for fullscreen mode */
+	GtkWidget      *fullscreen_controls;
+
 	/* statusbar and context ids for statusbar messages */
 	GtkWidget      *statusbar;	
 	guint           generic_message_cid;
