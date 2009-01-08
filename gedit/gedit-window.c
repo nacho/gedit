@@ -2799,7 +2799,7 @@ on_fullscreen_controls_leave_notify_event (GtkWidget        *widget,
 	/* gtk seems to emit leave notify when clicking on tool items,
 	 * work around it by checking the coordinates
 	 */
-	if (y > h)
+	if (y >= h)
 		gtk_window_move (GTK_WINDOW (window->priv->fullscreen_controls),
 				 fs_rect.x, fs_rect.y - h + 1);
 	
