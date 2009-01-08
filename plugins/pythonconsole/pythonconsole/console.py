@@ -32,13 +32,15 @@ import gobject
 import gtk
 import pango
 
+from config import PythonConsoleConfig
+
 __all__ = ('PythonConsole', 'OutFile')
 
 class PythonConsole(gtk.ScrolledWindow):
 	def __init__(self, namespace = {}):
 		gtk.ScrolledWindow.__init__(self)
 
-		self.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC);
+		self.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
 		self.set_shadow_type(gtk.SHADOW_IN)
 		self.view = gtk.TextView()
 		self.view.modify_font(pango.FontDescription('Monospace'))
@@ -50,11 +52,12 @@ class PythonConsole(gtk.ScrolledWindow):
 		buffer = self.view.get_buffer()
 		self.normal = buffer.create_tag("normal")
 		self.error  = buffer.create_tag("error")
-		self.error.set_property("foreground", "red")
 		self.command = buffer.create_tag("command")
-		self.command.set_property("foreground", "blue")
 
-		self.__spaces_pattern = re.compile(r'^\s+')		
+		PythonConsoleConfig.add_handler(self.apply_preferences)
+		self.apply_preferences()
+
+		self.__spaces_pattern = re.compile(r'^\s+')
 		self.namespace = namespace
 
 		self.block_command = False
@@ -77,6 +80,11 @@ class PythonConsole(gtk.ScrolledWindow):
 		# Signals
 		self.view.connect("key-press-event", self.__key_press_event_cb)
 		buffer.connect("mark-set", self.__mark_set_cb)
+		
+	def apply_preferences(self, *args):
+		config = PythonConsoleConfig()
+		self.error.set_property("foreground", config.color_error)
+		self.command.set_property("foreground", config.color_command)
 		
 	def stop(self):
 		self.namespace = None

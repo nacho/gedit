@@ -26,11 +26,14 @@
 
 import gtk
 import gedit
+
 from console import PythonConsole
+from config import PythonConsoleConfigDialog
 
 class PythonConsolePlugin(gedit.Plugin):
 	def __init__(self):
 		gedit.Plugin.__init__(self)
+		self.dlg = None
 		
 	def activate(self, window):
 		console = PythonConsole(namespace = {'__builtins__' : __builtins__,
@@ -51,4 +54,18 @@ class PythonConsolePlugin(gedit.Plugin):
 		window.set_data("PythonConsolePluginInfo", None)
 		bottom = window.get_bottom_panel()
 		bottom.remove_item(console)
+
+	def is_configurable(self):
+		return True
+
+	def create_configure_dialog(self):
+		if not self.dlg:
+			self.dlg = PythonConsoleConfigDialog(self.get_data_dir())
+		
+		dialog = self.dlg.dialog()
+		window = gedit.app_get_default().get_active_window()
+		if window:
+			dialog.set_transient_for(window)
+
+		return dialog
 
