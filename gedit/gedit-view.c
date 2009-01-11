@@ -668,7 +668,7 @@ gedit_view_scroll_to_cursor (GeditView *view)
 /**
  * gedit_view_set_font:
  * @view: a #GeditView
- * @gboolean: whether to reset the default font
+ * @def: whether to reset the default font
  * @font_name: the name of the font to use
  * 
  * If @def is #TRUE, resets the font of the @view to the default font
