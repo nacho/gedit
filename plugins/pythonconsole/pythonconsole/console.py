@@ -90,10 +90,13 @@ class PythonConsole(gtk.ScrolledWindow):
 		self.namespace = None
 
 	def __key_press_event_cb(self, view, event):
-		if event.keyval == gtk.keysyms.d and event.state == gtk.gdk.CONTROL_MASK:
+		modifier_mask = gtk.accelerator_get_default_mod_mask()
+		event_state = event.state & modifier_mask
+
+		if event.keyval == gtk.keysyms.d and event_state == gtk.gdk.CONTROL_MASK:
 			self.destroy()
-		
-		elif event.keyval == gtk.keysyms.Return and event.state == gtk.gdk.CONTROL_MASK:
+
+		elif event.keyval == gtk.keysyms.Return and event_state == gtk.gdk.CONTROL_MASK:
 			# Get the command
 			buffer = view.get_buffer()
 			inp_mark = buffer.get_mark("input")
@@ -182,13 +185,18 @@ class PythonConsole(gtk.ScrolledWindow):
 			buffer = view.get_buffer()
 			inp = buffer.get_iter_at_mark(buffer.get_mark("input"))
 			cur = buffer.get_iter_at_mark(buffer.get_insert())
-			return inp.compare(cur) == 0
+			if inp.compare(cur) == 0:
+				if not event_state:
+					buffer.place_cursor(inp)
+				return True
+			return False
 
-		elif event.keyval == gtk.keysyms.Home:
+		elif (event.keyval == gtk.keysyms.KP_Home or event.keyval == gtk.keysyms.Home) and \
+		     event_state == event_state & (gtk.gdk.SHIFT_MASK|gtk.gdk.CONTROL_MASK):
 			# Go to the begin of the command instead of the begin of the line
 			buffer = view.get_buffer()
 			inp = buffer.get_iter_at_mark(buffer.get_mark("input"))
-			if event.state == gtk.gdk.SHIFT_MASK:
+			if event_state & gtk.gdk.SHIFT_MASK:
 				buffer.move_mark_by_name("insert", inp)
 			else:
 				buffer.place_cursor(inp)
@@ -212,7 +220,6 @@ class PythonConsole(gtk.ScrolledWindow):
 		cur = buffer.get_end_iter()
 		buffer.delete(inp, cur)
 		buffer.insert(inp, command)
-		buffer.select_range(buffer.get_iter_at_mark(mark), buffer.get_end_iter())
 		self.view.grab_focus()
 	
 	def history_add(self, line):
