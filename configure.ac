@@ -396,8 +396,6 @@ gedit/dialogs/Makefile
 gedit/smclient/Makefile
 gedit/Makefile
 help/Makefile
-help/eu/Makefile
-help/ro/Makefile
 pixmaps/Makefile
 plugin-loaders/Makefile
 plugin-loaders/c/Makefile
