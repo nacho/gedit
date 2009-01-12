@@ -367,10 +367,8 @@ gedit_message_type_set_valist (GeditMessageType *message_type,
 		
 		if (num_optional > 0)
 		{
-			for (i = 0; i < num_optional - 1; ++i)
-			{
-				optional[i + 1] = optional[i];
-			}
+			for (i = num_optional - 1; i > 0; --i)
+				optional[i] = optional[i - 1];
 		
 			*optional = info;
 		}
