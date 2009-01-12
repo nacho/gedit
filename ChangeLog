@@ -1,5 +1,11 @@
 2009-01-12  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* plugins/filebrowser/gedit-file-browser-plugin.c: fixed initializing 
+	window data to 0 (prevents incorrect removal of gconf watches when they
+	are not actually installed)
+	
+2009-01-12  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* gedit/gedit-message-type.c: fixed correctly setting optional argument
 	types
 	

@@ -690,9 +690,7 @@ impl_activate (GeditPlugin * plugin, GeditWindow * window)
 	GeditFileBrowserStore * store;
 	gchar *data_dir;
 
-	data = g_new (GeditFileBrowserPluginData, 1);
-	data->auto_root = FALSE;
-	data->end_loading_handle = 0;
+	data = g_new0 (GeditFileBrowserPluginData, 1);
 	
 	data_dir = gedit_plugin_get_data_dir (plugin);
 	data->tree_widget = GEDIT_FILE_BROWSER_WIDGET (gedit_file_browser_widget_new (data_dir));
