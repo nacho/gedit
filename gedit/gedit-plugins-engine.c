@@ -164,74 +164,62 @@ load_plugin_info (GeditPluginsEngine *engine,
 }
 
 static void
-load_all_real (GeditPluginsEngine *engine,
-               const gchar        *dir,
-               const gchar        *envname,
-               const gchar        *envdefault,
-               const gchar        *suffix,
-	       LoadDirCallback     callback,
-	       gpointer            userdata)
-{
-	gchar *config_dir;
-	const gchar *pdirs_env = NULL;
-	gchar **pdirs;
-	int i;
-
-	/* load user's plugins */
-	config_dir = gedit_dirs_get_user_config_dir ();
-	
-	if (config_dir != NULL)
-	{
-		gchar *pdir;
-		gboolean ret = TRUE;
-
-		pdir = g_build_filename (config_dir,
-					 dir,
-					 NULL);
-		g_free (config_dir);
-
-		if (g_file_test (pdir, G_FILE_TEST_IS_DIR))
-			ret = load_dir_real (engine, pdir, suffix, callback, userdata);
-		
-		g_free (pdir);
-		
-		if (!ret)
-			return;
-	}
-	
-	if (envname)
-		pdirs_env = g_getenv (envname);
-
-	if (pdirs_env == NULL)
-		pdirs_env = envdefault;
-
-	gedit_debug_message (DEBUG_PLUGINS, "%s=%s", envname, pdirs_env);
-	pdirs = g_strsplit (pdirs_env, G_SEARCHPATH_SEPARATOR_S, 0);
-
-	for (i = 0; pdirs[i] != NULL; i++)
-	{
-		if (!load_dir_real (engine, pdirs[i], suffix, callback, userdata))
-			break;
-	}
-
-	g_strfreev (pdirs);
-}
-
-static void
 load_all_plugins (GeditPluginsEngine *engine)
 {
 	gchar *plugin_dir;
+	const gchar *pdirs_env = NULL;
 
-	plugin_dir = gedit_dirs_get_gedit_plugins_dir ();
+	/* load user plugins */
+	plugin_dir = gedit_dirs_get_user_plugins_dir ();
+	if (g_file_test (plugin_dir, G_FILE_TEST_IS_DIR))
+	{
+		load_dir_real (engine,
+			       plugin_dir,
+			       PLUGIN_EXT,
+			       load_plugin_info,
+			       NULL);
 
-	load_all_real (engine, 
-		       "plugins", 
-		       "GEDIT_PLUGINS_PATH", 
-		       plugin_dir,
-		       PLUGIN_EXT,
-		       load_plugin_info,
-		       NULL);
+	}
 	g_free (plugin_dir);
+
+	/* load system plugins */
+	pdirs_env = g_getenv ("GEDIT_PLUGINS_PATH");
+
+	gedit_debug_message (DEBUG_PLUGINS, "GEDIT_PLUGINS_PATH=%s", pdirs_env);
+
+	if (pdirs_env != NULL)
+	{
+		gchar **pdirs;
+		gint i;
+
+		pdirs = g_strsplit (pdirs_env, G_SEARCHPATH_SEPARATOR_S, 0);
+
+		for (i = 0; pdirs[i] != NULL; i++)
+		{
+			if (!load_dir_real (engine,
+					    pdirs[i],
+					    PLUGIN_EXT,
+					    load_plugin_info,
+					    NULL))
+			{
+				break;
+			}
+		}
+
+		g_strfreev (pdirs);
+	}
+	else
+	{
+		plugin_dir = gedit_dirs_get_gedit_plugins_dir ();
+
+		load_dir_real (engine,
+			       plugin_dir,
+			       PLUGIN_EXT,
+			       load_plugin_info,
+			       NULL);
+
+		g_free (plugin_dir);
+	}
 }
 
 static guint
@@ -471,9 +459,7 @@ get_plugin_loader (GeditPluginsEngine *engine, GeditPluginInfo *info)
 
 		/* loader could not be found in the hash, try to find it by 
 		   scanning */
-		load_all_real (engine, 
-			       "plugin-loaders", 
-			       NULL, 
+		load_dir_real (engine, 
 			       loader_dir,
 			       LOADER_EXT,
 			       (LoadDirCallback)load_loader,
