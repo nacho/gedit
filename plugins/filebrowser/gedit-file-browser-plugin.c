@@ -558,13 +558,8 @@ on_selection_changed_cb (GtkTreeSelection *selection,
 	if (!GEDIT_IS_FILE_BROWSER_STORE (model))
 		return;
 	
-	if (gedit_file_browser_widget_get_num_selected_files_or_directories (data->tree_widget) > 1)
-		sensitive = FALSE;
-	else if (!gedit_file_browser_widget_get_selected_directory (data->tree_widget, &iter))
-		sensitive = FALSE;
-	else
-		sensitive = TRUE;
-	
+	sensitive = gedit_file_browser_widget_get_selected_directory (data->tree_widget, &iter);
+
 	if (sensitive) {
 		gtk_tree_model_get (model, &iter, 
 				    GEDIT_FILE_BROWSER_STORE_COLUMN_URI, 
@@ -601,7 +596,7 @@ static GtkActionEntry extra_actions[] =
 };
 
 static GtkActionEntry extra_single_selection_actions[] = {
-	{"OpenTerminal", GTK_STOCK_EXECUTE, N_("_Open terminal here"),
+	{"OpenTerminal", "utilities-terminal", N_("_Open terminal here"),
 	 NULL,
 	 N_("Open a terminal at the currently opened directory"),
 	 G_CALLBACK (on_action_open_terminal)}
