@@ -100,6 +100,8 @@ void		 gedit_plugins_engine_update_plugins_ui  (GeditPluginsEngine *engine,
 void		 gedit_plugins_engine_active_plugins_changed
 							(GeditPluginsEngine *engine);
 
+void		 gedit_plugins_engine_rescan_plugins	(GeditPluginsEngine *engine);
+
 G_END_DECLS
 
 #endif  /* __GEDIT_PLUGINS_ENGINE_H__ */

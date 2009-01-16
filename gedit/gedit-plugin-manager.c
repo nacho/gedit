@@ -792,6 +792,11 @@ gedit_plugin_manager_init (GeditPluginManager *pm)
 
 	pm->priv = GEDIT_PLUGIN_MANAGER_GET_PRIVATE (pm);
 
+	/*
+	 * Always we create the manager, firstly we rescan the plugins directory
+	 */
+	gedit_plugins_engine_rescan_plugins (gedit_plugins_engine_get_default ());
+
 	gtk_box_set_spacing (GTK_BOX (pm), 6);
 
 	label = gtk_label_new (NULL);

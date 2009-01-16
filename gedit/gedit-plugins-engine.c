@@ -148,9 +148,9 @@ load_plugin_info (GeditPluginsEngine *engine,
 	 * drop this one (user plugins override system plugins) */
 	if (gedit_plugins_engine_get_plugin_info (engine, gedit_plugin_info_get_module_name (info)) != NULL)
 	{
-		g_warning ("Two or more plugins named '%s'. "
-			   "Only the first will be considered.\n",
-			   gedit_plugin_info_get_module_name (info));
+		gedit_debug_message (DEBUG_PLUGINS, "Two or more plugins named '%s'. "
+				     "Only the first will be considered.\n",
+				     gedit_plugin_info_get_module_name (info));
 
 		_gedit_plugin_info_unref (info);
 
@@ -839,3 +839,10 @@ gedit_plugins_engine_active_plugins_changed (GeditPluginsEngine *engine)
 	g_slist_free (active_plugins);
 }
 
+void
+gedit_plugins_engine_rescan_plugins (GeditPluginsEngine *engine)
+{
+	gedit_debug (DEBUG_PLUGINS);
+	
+	load_all_plugins (engine);
+}
