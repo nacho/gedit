@@ -216,7 +216,7 @@ class Tool(object):
 
         fp = file(filename, 'r', 1)
         in_block = False
-        lang = locale.getlocale()[0]
+        lang = locale.getlocale(locale.LC_MESSAGES)[0]
 
         for line in fp:
             if not in_block:
