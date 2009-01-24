@@ -1,5 +1,11 @@
 2009-01-24  Paolo Borelli  <pborelli@katamail.com>
 
+	* gedit/gedit-commands-file.c: synchronously check if a
+	document has been deleted only for local files, since
+	for remote files it may hang.
+
+2009-01-24  Paolo Borelli  <pborelli@katamail.com>
+
 	* gedit/gedit-window.c:
 	* gedit/gedit-prefs-manager-app.c:
 	Improve logic used to track, save and restore the state

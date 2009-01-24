@@ -956,6 +956,20 @@ _gedit_cmd_file_save_as (GtkAction   *action,
 	file_save_as (tab, window);
 }
 
+static gboolean
+document_needs_saving (GeditDocument *doc)
+{
+	if (gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc)))
+		return TRUE;
+
+	/* we check if it was deleted only for local files
+	 * since for remote files it may hang */
+	if (gedit_document_is_local (doc) && gedit_document_get_deleted (doc))
+		return TRUE;
+
+	return FALSE;
+}
+
 /*
  * The docs in the list must belong to the same GeditWindow.
  */
@@ -998,9 +1012,7 @@ _gedit_cmd_file_save_documents_list (GeditWindow *window,
 			if (gedit_document_is_untitled (doc) || 
 			    gedit_document_get_readonly (doc))
 			{
-				/* Do not save unmodified utitled or readonly documents */
-				if (gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc)) ||
-			     	    gedit_document_get_deleted (doc))
+				if (document_needs_saving (doc))
 			     	{
 				     	tabs_to_save_as = g_slist_prepend (tabs_to_save_as,
 									   t);
@@ -1350,8 +1362,7 @@ tab_state_changed_while_saving (GeditTab    *tab,
 
 		/* If the saving operation failed or was interrupted, then the
 		   document is still "modified" -> do not close the tab */
-		if (gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc)) ||
-		    gedit_document_get_deleted (doc))
+		if (document_needs_saving (doc))
 			return;
 
 		/* Close the document only if it has been succesfully saved.
@@ -1474,8 +1485,7 @@ save_and_close_all_documents (const GList  *docs,
 			    (state != GEDIT_TAB_STATE_REVERTING)) /* CHECK: is this the right behavior with REVERTING ?*/
 			{			
 				/* The document must be saved before closing */
-				g_return_if_fail (gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc)) ||
-		     				  gedit_document_get_deleted (doc));
+				g_return_if_fail (document_needs_saving (doc));
 				
 				/* FIXME: manage the case of local readonly files owned by the
 				   user is running gedit - Paolo (Dec. 8, 2005) */
