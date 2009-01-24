@@ -98,6 +98,8 @@ struct _GeditWindowPrivate
 
 	GeditWindowState state;
 
+	gint		bottom_panel_item_removed_handler_id;
+
 	GtkWindowGroup *window_group;
 
 	gchar          *default_path;

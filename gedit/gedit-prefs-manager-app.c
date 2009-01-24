@@ -165,8 +165,8 @@ static gint window_height = -1;
 static gint window_width = -1;
 static gint side_panel_size = -1;
 static gint bottom_panel_size = -1;
-static gint side_panel_active_page = 0;
-static gint bottom_panel_active_page = 0;
+static gint side_panel_active_page = -1;
+static gint bottom_panel_active_page = -1;
 static gint active_file_filter = -1;
 
 
@@ -252,9 +252,7 @@ gedit_state_get_int (const gchar *group,
 				   err->message);
 		}
 
-		if (defval > 0)
-			*result = defval;
-
+		*result = defval;
 		g_error_free (err);
 	}
 	else
@@ -478,11 +476,11 @@ gedit_prefs_manager_side_panel_size_can_set (void)
 gint
 gedit_prefs_manager_get_side_panel_active_page (void)
 {
-	if (side_panel_active_page == 0)
+	if (side_panel_active_page == -1)
 	{
 		gedit_state_get_int (GEDIT_STATE_WINDOW_GROUP,
 				     GEDIT_STATE_SIDE_PANEL_ACTIVE_PAGE,
-				     -1,
+				     0,
 				     &side_panel_active_page);
 	}
 
@@ -551,11 +549,11 @@ gedit_prefs_manager_bottom_panel_size_can_set (void)
 gint
 gedit_prefs_manager_get_bottom_panel_active_page (void)
 {
-	if (bottom_panel_active_page == 0)
+	if (bottom_panel_active_page == -1)
 	{
 		gedit_state_get_int (GEDIT_STATE_WINDOW_GROUP,
 				     GEDIT_STATE_BOTTOM_PANEL_ACTIVE_PAGE,
-				     -1,
+				     0,
 				     &bottom_panel_active_page);
 	}
 

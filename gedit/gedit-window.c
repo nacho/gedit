@@ -121,6 +121,8 @@ save_panes_state (GeditWindow *window)
 {
 	gint pane_page;
 
+	gedit_debug (DEBUG_WINDOW);
+
 	if (gedit_prefs_manager_window_size_can_set ())
 		gedit_prefs_manager_set_window_size (window->priv->width,
 						     window->priv->height);
@@ -157,6 +159,16 @@ gedit_window_dispose (GObject *object)
 	gedit_debug (DEBUG_WINDOW);
 
 	window = GEDIT_WINDOW (object);
+
+	/* Stop tracking removal of panes otherwise we always
+	 * end up with thinking we had no pane active, since they
+	 * should all be removed below */
+	if (window->priv->bottom_panel_item_removed_handler_id != 0)
+	{
+		g_signal_handler_disconnect (window->priv->bottom_panel,
+					     window->priv->bottom_panel_item_removed_handler_id);
+		window->priv->bottom_panel_item_removed_handler_id = 0;
+	}
 
 	/* First of all, force collection so that plugins
 	 * really drop some of the references.
@@ -1949,63 +1961,67 @@ create_statusbar (GeditWindow *window,
 static GeditWindow *
 clone_window (GeditWindow *origin)
 {
-	GtkWindow *window;
+	GeditWindow *window;
 	GdkScreen *screen;
 	GeditApp  *app;
+	gint panel_page;
 
 	gedit_debug (DEBUG_WINDOW);	
 
 	app = gedit_app_get_default ();
 
 	screen = gtk_window_get_screen (GTK_WINDOW (origin));
-	window = GTK_WINDOW (gedit_app_create_window (app, screen));
+	window = gedit_app_create_window (app, screen);
 
-	gtk_window_set_default_size (window, 
-				     origin->priv->width,
-				     origin->priv->height);
-				     
 	if ((origin->priv->window_state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
 	{
 		gint w, h;
 
 		gedit_prefs_manager_get_default_window_size (&w, &h);
-		gtk_window_set_default_size (window, w, h);
-		gtk_window_maximize (window);
+		gtk_window_set_default_size (GTK_WINDOW (window), w, h);
+		gtk_window_maximize (GTK_WINDOW (window));
 	}
 	else
 	{
-		gtk_window_set_default_size (window, 
-				     origin->priv->width,
-				     origin->priv->height);
+		gtk_window_set_default_size (GTK_WINDOW (window),
+					     origin->priv->width,
+					     origin->priv->height);
 
-		gtk_window_unmaximize (window);
+		gtk_window_unmaximize (GTK_WINDOW (window));
 	}		
 
 	if ((origin->priv->window_state & GDK_WINDOW_STATE_STICKY ) != 0)
-		gtk_window_stick (window);
+		gtk_window_stick (GTK_WINDOW (window));
 	else
-		gtk_window_unstick (window);
+		gtk_window_unstick (GTK_WINDOW (window));
 
-	gtk_paned_set_position (GTK_PANED (GEDIT_WINDOW (window)->priv->hpaned),
-				gtk_paned_get_position (GTK_PANED (origin->priv->hpaned)));
+	/* set the panes size, the paned position will be set when
+	 * they are mapped */ 
+	window->priv->side_panel_size = origin->priv->side_panel_size;
+	window->priv->bottom_panel_size = origin->priv->bottom_panel_size;
 
-	gtk_paned_set_position (GTK_PANED (GEDIT_WINDOW (window)->priv->vpaned),
-				gtk_paned_get_position (GTK_PANED (origin->priv->vpaned)));
-				
+	panel_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (origin->priv->side_panel));
+	_gedit_panel_set_active_item_by_id (GEDIT_PANEL (window->priv->side_panel),
+					    panel_page);
+
+	panel_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (origin->priv->bottom_panel));
+	_gedit_panel_set_active_item_by_id (GEDIT_PANEL (window->priv->bottom_panel),
+					    panel_page);
+
 	if (GTK_WIDGET_VISIBLE (origin->priv->side_panel))
-		gtk_widget_show (GEDIT_WINDOW (window)->priv->side_panel);
+		gtk_widget_show (window->priv->side_panel);
 	else
-		gtk_widget_hide (GEDIT_WINDOW (window)->priv->side_panel);
+		gtk_widget_hide (window->priv->side_panel);
 
 	if (GTK_WIDGET_VISIBLE (origin->priv->bottom_panel))
-		gtk_widget_show (GEDIT_WINDOW (window)->priv->bottom_panel);
+		gtk_widget_show (window->priv->bottom_panel);
 	else
-		gtk_widget_hide (GEDIT_WINDOW (window)->priv->bottom_panel);
-		
-	set_statusbar_style (GEDIT_WINDOW (window), origin);
-	set_toolbar_style (GEDIT_WINDOW (window), origin);
+		gtk_widget_hide (window->priv->bottom_panel);
 
-	return GEDIT_WINDOW (window);
+	set_statusbar_style (window, origin);
+	set_toolbar_style (window, origin);
+
+	return window;
 }
 
 static void
@@ -3393,13 +3409,39 @@ notebook_popup_menu (GtkNotebook *notebook,
 }
 
 static void
+side_panel_size_allocate (GtkWidget     *widget,
+			  GtkAllocation *allocation,
+			  GeditWindow   *window)
+{
+	window->priv->side_panel_size = allocation->width;
+}
+
+static void
+bottom_panel_size_allocate (GtkWidget     *widget,
+			    GtkAllocation *allocation,
+			    GeditWindow   *window)
+{
+	window->priv->bottom_panel_size = allocation->height;
+}
+
+static void
 hpaned_restore_position (GtkWidget   *widget,
 			 GeditWindow *window)
 {
 	gint pos;
 
-	pos = MAX (100, gedit_prefs_manager_get_side_panel_size ());
+	gedit_debug_message (DEBUG_WINDOW,
+			     "Restoring hpaned position: side panel size %d",
+			     window->priv->side_panel_size);
+
+	pos = MAX (100, window->priv->side_panel_size);
 	gtk_paned_set_position (GTK_PANED (window->priv->hpaned), pos);
+
+	/* start monitoring the size */
+	g_signal_connect (window->priv->side_panel,
+			  "size-allocate",
+			  G_CALLBACK (side_panel_size_allocate),
+			  window);
 
 	/* run this only once */
 	g_signal_handlers_disconnect_by_func (widget, hpaned_restore_position, window);
@@ -3411,9 +3453,19 @@ vpaned_restore_position (GtkWidget   *widget,
 {
 	gint pos;
 
+	gedit_debug_message (DEBUG_WINDOW,
+			     "Restoring vpaned position: bottom panel size %d",
+			     window->priv->bottom_panel_size);
+
 	pos = widget->allocation.height -
-	      MAX (50, gedit_prefs_manager_get_bottom_panel_size ());
+	      MAX (50, window->priv->bottom_panel_size);
 	gtk_paned_set_position (GTK_PANED (window->priv->vpaned), pos);
+
+	/* start monitoring the size */
+	g_signal_connect (window->priv->bottom_panel,
+			  "size-allocate",
+			  G_CALLBACK (bottom_panel_size_allocate),
+			  window);
 
 	/* run this only once */
 	g_signal_handlers_disconnect_by_func (widget, vpaned_restore_position, window);
@@ -3444,14 +3496,6 @@ side_panel_visibility_changed (GtkWidget   *side_panel,
 }
 
 static void
-side_panel_size_allocate (GtkWidget     *widget,
-			  GtkAllocation *allocation,
-			  GeditWindow   *window)
-{
-	window->priv->side_panel_size = allocation->width;
-}
-
-static void
 create_side_panel (GeditWindow *window)
 {
 	GtkWidget *documents_panel;
@@ -3464,12 +3508,6 @@ create_side_panel (GeditWindow *window)
 			 window->priv->side_panel, 
 			 FALSE, 
 			 FALSE);
-	gtk_widget_set_size_request (window->priv->side_panel, 100, -1);  			 
-
-	g_signal_connect (window->priv->side_panel,
-			  "size-allocate",
-			  G_CALLBACK (side_panel_size_allocate),
-			  window);
 
 	g_signal_connect_after (window->priv->side_panel,
 				"show",
@@ -3479,9 +3517,6 @@ create_side_panel (GeditWindow *window)
 				"hide",
 				G_CALLBACK (side_panel_visibility_changed),
 				window);
-
-	gtk_paned_set_position (GTK_PANED (window->priv->hpaned),
-				MAX (100, gedit_prefs_manager_get_side_panel_size ()));
 
 	documents_panel = gedit_documents_panel_new (window);
 	gedit_panel_add_item_with_stock_icon (GEDIT_PANEL (window->priv->side_panel),
@@ -3512,14 +3547,6 @@ bottom_panel_visibility_changed (GeditPanel  *bottom_panel,
 	if (!visible && window->priv->active_tab != NULL)
 		gtk_widget_grab_focus (GTK_WIDGET (
 				gedit_tab_get_view (GEDIT_TAB (window->priv->active_tab))));
-}
-
-static void
-bottom_panel_size_allocate (GtkWidget     *widget,
-			    GtkAllocation *allocation,
-			    GeditWindow   *window)
-{
-	window->priv->bottom_panel_size = allocation->height;
 }
 
 static void
@@ -3573,11 +3600,6 @@ create_bottom_panel (GeditWindow *window)
 			 FALSE,
 			 FALSE);
 
-	g_signal_connect (window->priv->bottom_panel,
-			  "size-allocate",
-			  G_CALLBACK (bottom_panel_size_allocate),
-			  window);
-
 	g_signal_connect_after (window->priv->bottom_panel,
 				"show",
 				G_CALLBACK (bottom_panel_visibility_changed),
@@ -3586,9 +3608,6 @@ create_bottom_panel (GeditWindow *window)
 				"hide",
 				G_CALLBACK (bottom_panel_visibility_changed),
 				window);
-
-	gtk_paned_set_position (GTK_PANED (window->priv->vpaned),
-				MAX (50, gedit_prefs_manager_get_bottom_panel_size ()));
 }
 
 static void
@@ -3604,7 +3623,9 @@ init_panels_visibility (GeditWindow *window)
 					    active_page);
 
 	if (gedit_prefs_manager_get_side_pane_visible ())
+	{
 		gtk_widget_show (window->priv->side_panel);
+	}
 
 	/* bottom pane, it can be empty */
 	if (gedit_panel_get_n_items (GEDIT_PANEL (window->priv->bottom_panel)) > 0)
@@ -3614,7 +3635,9 @@ init_panels_visibility (GeditWindow *window)
 						    active_page);
 
 		if (gedit_prefs_manager_get_bottom_panel_visible ())
+		{
   			gtk_widget_show (window->priv->bottom_panel);
+		}
 	}
 	else
 	{
@@ -3625,10 +3648,12 @@ init_panels_visibility (GeditWindow *window)
 	}
 
 	/* start track sensitivity after the initial state is set */
-  	g_signal_connect (window->priv->bottom_panel,
-			  "item_removed",
-			  G_CALLBACK (bottom_panel_item_removed),
-			  window);
+  	window->priv->bottom_panel_item_removed_handler_id =
+		g_signal_connect (window->priv->bottom_panel,
+				  "item_removed",
+				  G_CALLBACK (bottom_panel_item_removed),
+				  window);
+
   	g_signal_connect (window->priv->bottom_panel,
 			  "item_added",
 			  G_CALLBACK (bottom_panel_item_added),
@@ -3676,7 +3701,6 @@ window_unrealized (GtkWidget *window,
 static void
 gedit_window_init (GeditWindow *window)
 {
-	static gboolean is_first = TRUE;
 	GtkWidget *main_box;
 	GtkTargetList *tl;
 
@@ -3733,24 +3757,19 @@ gedit_window_init (GeditWindow *window)
   	create_side_panel (window);
 	create_bottom_panel (window);
 
-	/* restore paned positions as soon as we know the panes allocation.
-	 * This needs to be done only for the first window, the successive
-	 * windows are created by cloning the first one */
-	if (is_first)
-	{
-		is_first = FALSE;
+	/* panes' state must be restored after panels have been mapped,
+	 * since the bottom pane position depends on the size of the vpaned. */
+	window->priv->side_panel_size = gedit_prefs_manager_get_side_panel_size ();
+	window->priv->bottom_panel_size = gedit_prefs_manager_get_bottom_panel_size ();
 
-		window->priv->side_panel_size = gedit_prefs_manager_get_side_panel_size ();
-		window->priv->bottom_panel_size = gedit_prefs_manager_get_bottom_panel_size ();
-		g_signal_connect_after (window->priv->hpaned,
-					"map",
-					G_CALLBACK (hpaned_restore_position),
-					window);
-		g_signal_connect_after (window->priv->vpaned,
-					"map",
-					G_CALLBACK (vpaned_restore_position),
-					window);
-	}
+	g_signal_connect_after (window->priv->hpaned,
+				"map",
+				G_CALLBACK (hpaned_restore_position),
+				window);
+	g_signal_connect_after (window->priv->vpaned,
+				"map",
+				G_CALLBACK (vpaned_restore_position),
+				window);
 
 	gtk_widget_show (window->priv->hpaned);
 	gtk_widget_show (window->priv->vpaned);
