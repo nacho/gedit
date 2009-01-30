@@ -30,6 +30,8 @@ AC_DISABLE_STATIC
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 IT_PROG_INTLTOOL([0.40.0])
 
+PKG_PROG_PKG_CONFIG
+
 AC_PROG_LIBTOOL
 
 GNOME_DOC_INIT
@@ -205,6 +207,15 @@ PKG_CHECK_MODULES(GEDIT, [
 GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)
 AC_SUBST(GEDIT_CFLAGS)
+
+dnl FIXME: Remove this when removing sexy-icon-entry
+if $PKG_CONFIG --atleast-version 2.15.0 gtk+-2.0; then
+       gtkatleast=
+else
+       gtkatleast=no
+fi
+
+AM_CONDITIONAL(BUILD_SEXY, test "$gtkatleast" = "no")
 
 if test "$platform_osx" = "no" &&
    test "$platform_win32" = no; then

@@ -76,7 +76,6 @@ NOINST_H_FILES =			\
 	gedit-io-error-message-area.h	\
 	gedit-spinner.h			\
 	gedit-prefs-manager-private.h	\
-	sexy-icon-entry.h		\
 	gedittextregion.h		\
 	gedit-session.h			\
 	gedit-dirs.h
@@ -179,7 +178,6 @@ libgedit_la_SOURCES = 			\
 	gedit-utils.c 			\
 	gedit-view.c 			\
 	gedit-window.c			\
-	sexy-icon-entry.c		\
 	gedittextregion.c		\
 	$(NOINST_H_FILES)		\
 	$(INST_H_FILES)
@@ -230,4 +228,8 @@ regenerate-built-sources:
 	BACONFILES="$(BACON_FILES)" BACONDIR="$(BACON_DIR)" $(top_srcdir)/gedit/update-from-bacon.sh
 else
 BACON_DIR=
+endif
+
+if BUILD_SEXY
+libgedit_la_SOURCES += sexy-icon-entry.c sexy-icon-entry.h
 endif
