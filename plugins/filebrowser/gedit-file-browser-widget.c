@@ -761,6 +761,9 @@ create_combo (GeditFileBrowserWidget * obj)
 	gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (obj->priv->combo),
 				       renderer, "text", COLUMN_NAME);
 
+	g_object_set (renderer, "ellipsize-set", TRUE,
+		      "ellipsize", PANGO_ELLIPSIZE_END, NULL);
+
 	gtk_box_pack_start (GTK_BOX (obj), GTK_WIDGET (obj->priv->combo),
 			    FALSE, FALSE, 0);
 
