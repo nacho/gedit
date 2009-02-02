@@ -4,7 +4,7 @@ AC_PREREQ(2.59)
 
 m4_define(gedit_major_version,  2)
 m4_define(gedit_minor_version, 25)
-m4_define(gedit_micro_version,  5)
+m4_define(gedit_micro_version,  6)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
 AC_INIT(gedit, gedit_version, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
@@ -225,7 +225,7 @@ if test "$platform_osx" = "no" &&
 	SM_LIBS="${EGG_SMCLIENT_LIBS}"
 else
 	EGG_SMCLIENT_CFLAGS=
-	EGG_SM_CLIENT_LIBS=
+	EGG_SMCLIENT_LIBS=
 fi
 
 AC_SUBST(EGG_SMCLIENT_CFLAGS)
