@@ -1288,7 +1288,7 @@ file_browser_node_init (FileBrowserNode * node, GFile * file,
 static FileBrowserNode *
 file_browser_node_new (GFile * file, FileBrowserNode * parent)
 {
-	FileBrowserNode *node = g_new0 (FileBrowserNode, 1);
+	FileBrowserNode *node = g_slice_new0 (FileBrowserNode);
 
 	file_browser_node_init (node, file, parent);
 	return node;
@@ -1299,7 +1299,7 @@ file_browser_node_dir_new (GeditFileBrowserStore * model,
 			   GFile * file, FileBrowserNode * parent)
 {
 	FileBrowserNode *node =
-	    (FileBrowserNode *) g_new0 (FileBrowserNodeDir, 1);
+	    (FileBrowserNode *) g_slice_new0 (FileBrowserNodeDir);
 
 	file_browser_node_init (node, file, parent);
 
@@ -1381,7 +1381,11 @@ file_browser_node_free (GeditFileBrowserStore * model,
 		g_object_unref (node->emblem);
 
 	g_free (node->name);
-	g_free (node);
+	
+	if (NODE_IS_DIR (node))
+		g_slice_free (FileBrowserNodeDir, (FileBrowserNodeDir *)node);
+	else
+		g_slice_free (FileBrowserNode, (FileBrowserNode *)node);
 }
 
 /**
