@@ -917,7 +917,7 @@ uninstall_scheme_clicked (GtkButton              *button,
 			if (new_iter_set)
 				gtk_tree_model_get (model, &new_iter,
 						    ID_COLUMN, &new_id,
-						    NULL);
+						    -1);
 						    			
 			real_new_id = populate_color_scheme_list (dlg, new_id);
 			g_free (new_id);
