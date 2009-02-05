@@ -1,4 +1,4 @@
-if PLATFORM_WIN32
+if OS_WIN32
 platform_sources = eggsmclient-win32.c
 platform_logout_test_ldflags = -mwindows
 else
@@ -8,7 +8,7 @@ platform_ldflags = -framework Carbon
 platform_sources = eggsmclient-osx.c
 else
 platform_defines = -DEGG_SM_CLIENT_BACKEND_XSMP
-platform_libs = libeggdesktopfile.la -lSM -lICE
+platform_libs = libeggdesktopfile.la
 platform_ltlibraries = libeggdesktopfile.la
 platform_sources = eggsmclient-xsmp.c
 endif

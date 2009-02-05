@@ -60,6 +60,19 @@ esac
 AC_MSG_RESULT([$platform_win32])
 AM_CONDITIONAL(PLATFORM_WIN32, test "$platform_win32" = "yes")
 
+AC_MSG_CHECKING([for native Win32])
+LIB_EXE_MACHINE_FLAG=X86
+case "$host" in
+  *-*-mingw*)
+    os_win32=yes
+    ;;
+  *)
+    os_win32=no
+    ;;
+esac
+AC_MSG_RESULT([$os_win32])
+AM_CONDITIONAL(OS_WIN32, test "$os_win32" = "yes")
+
 dnl check for osx platform
 AC_MSG_CHECKING([for Mac OS X platform])
 case "$host" in
@@ -218,11 +231,10 @@ fi
 AM_CONDITIONAL(BUILD_SEXY, test "$gtkatleast" = "no")
 
 if test "$platform_osx" = "no" &&
-   test "$platform_win32" = no; then
+   test "$os_win32" = no; then
 	PKG_CHECK_MODULES(EGG_SMCLIENT, [
 		sm >= 1.0.0
 	])
-	SM_LIBS="${EGG_SMCLIENT_LIBS}"
 else
 	EGG_SMCLIENT_CFLAGS=
 	EGG_SMCLIENT_LIBS=
