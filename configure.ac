@@ -61,7 +61,6 @@ AC_MSG_RESULT([$platform_win32])
 AM_CONDITIONAL(PLATFORM_WIN32, test "$platform_win32" = "yes")
 
 AC_MSG_CHECKING([for native Win32])
-LIB_EXE_MACHINE_FLAG=X86
 case "$host" in
   *-*-mingw*)
     os_win32=yes
