@@ -196,6 +196,7 @@ get_startup_timestamp ()
 	return (retval > 0) ? retval : 0;
 }
 
+#ifndef G_OS_WIN32
 static GdkDisplay *
 display_open_if_needed (const gchar *name)
 {
@@ -220,7 +221,6 @@ display_open_if_needed (const gchar *name)
 }
 
 /* serverside */
-#ifndef G_OS_WIN32
 static void
 on_message_received (const char *message,
 		     gpointer    data)
