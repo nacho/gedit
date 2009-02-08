@@ -206,4 +206,78 @@ $<[1]: return low_str >_new ()
     <tag>gobject</tag>
     <description>GObject template</description>
   </snippet>
+  <snippet id="ginterface">
+    <text><![CDATA[#include "$1.h"
+$<
+global camel_str,low_str,up_str
+components = $1.split('-')
+low_str = '_'.join(components).lower()
+up_str = '_'.join(components).upper()
+camel_str = ''
+
+for t in components:
+  camel_str += t.capitalize()
+>
+/*
+ * This is an method example for an interface
+ */
+const gchar *
+$<[1]: return low_str>_example_method ($<[1]: return camel_str > *self)
+{
+	g_return_val_if_fail ($<[1]: return up_str> (self), NULL);
+	return $<[1]: return up_str>_GET_INTERFACE (self)->example_method (self);
+}
+
+/* Default implementation */
+static const gchar *
+$<[1]: return low_str>_example_method_default ($<[1]: return camel_str > *self)
+{
+	g_return_val_if_reached (NULL);
+}
+
+static void 
+$<[1]: return low_str>_init ($<[1]: return camel_str >Iface *iface)
+{
+	static gboolean initialized = FALSE;
+	
+	iface->example_method = $<[1]: return low_str>_example_method_default;
+	
+	if (!initialized)
+	{
+		initialized = TRUE;
+	}
+}
+
+GType 
+$<[1]: return low_str>_get_type ()
+{
+	static GType $<[1]: return low_str>_type_id = 0;
+	
+	if (!$<[1]: return low_str>_type_id)
+	{
+		static const GTypeInfo g_define_type_info =
+		{
+			sizeof ($<[1]: return camel_str >Iface),
+			(GBaseInitFunc) $<[1]: return low_str>_init, 
+			NULL,
+			NULL,
+			NULL,
+			NULL,
+			0,
+			0,
+			NULL
+		};
+		
+		$<[1]: return low_str>_type_id = 
+			g_type_register_static (G_TYPE_INTERFACE,
+						"$<[1]: return camel_str>",
+						&g_define_type_info,
+						0);
+	}
+	
+	return $<[1]: return low_str>_type_id;
+}]]></text>
+    <tag>ginterface</tag>
+    <description>GObject interface</description>
+  </snippet>
 </snippets>

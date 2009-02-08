@@ -186,4 +186,56 @@ G_END_DECLS
     <tag>gobject</tag>
     <description>GObject template</description>
   </snippet>
+  <snippet id="ginterface">
+    <text><![CDATA[#ifndef __${1:NAME}_H__
+#define __$1_H__
+
+#include <${2:glib-object.h}>
+
+G_BEGIN_DECLS
+
+$<
+global camel_str
+components = $1.split('_')
+type_str = '_'.join([components[0], 'TYPE'] + components[1:])
+is_str = '_'.join([components[0], 'IS'] + components[1:])
+camel_str = ''
+
+for t in components:
+  camel_str += t.capitalize()
+
+items = [ \
+['#define ' + type_str, '(' + $1.lower() + '_get_type ())'], \
+['#define ' + $1 + '(obj)', '(G_TYPE_CHECK_INSTANCE_CAST ((obj), ' + type_str + ', ' + camel_str + '))'], \
+['#define ' + is_str + '(obj)', '(G_TYPE_CHECK_INSTANCE_TYPE ((obj), ' + type_str + '))'], \
+['#define ' + $1 + '_GET_INTERFACE(obj)', '(G_TYPE_INSTANCE_GET_INTERFACE ((obj), ' + type_str + ', ' + camel_str + 'Iface))']
+]
+
+return align(items) >
+
+$<[1]:
+items = [ \
+['typedef struct _' + camel_str, camel_str + ';'], \
+['typedef struct _' + camel_str + 'Iface', camel_str + 'Iface;'], \
+]
+
+return align(items) >
+
+struct _$<[1]: return camel_str >Iface
+{
+	${7:GTypeInterface} parent;
+	
+	const gchar * (*example_method) ($<[1]: return camel_str > *self);
+};
+
+GType $< return $1.lower() + '_get_type' > (void) G_GNUC_CONST;
+
+const gchar *$< return $1.lower()>_example_method ($<[1]: return camel_str > *self);
+$0
+G_END_DECLS
+
+#endif /* __$1_H__ */]]></text>
+    <tag>ginterface</tag>
+    <description>GObject interface</description>
+  </snippet>
 </snippets>
