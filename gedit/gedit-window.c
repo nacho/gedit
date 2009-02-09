@@ -1801,7 +1801,7 @@ language_combo_changed (GeditStatusComboBox *combo,
 	language = GTK_SOURCE_LANGUAGE (g_object_get_data (G_OBJECT (item), LANGUAGE_DATA));
 	
 	g_signal_handler_block (doc, window->priv->language_changed_id);
-	gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (doc), language);
+	gedit_document_set_language (doc, language);
 	g_signal_handler_unblock (doc, window->priv->language_changed_id);
 }
 
