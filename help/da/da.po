@@ -1,19 +1,21 @@
 # Danish translation of gedit Manual
+#
 # M.P. Rommedahl <Lhademmor@gmail.com>, 2008
-# Ask Hjorth Larsen <asklarsen@gmail.com>, 2008
+# Ask Hjorth Larsen <asklarsen@gmail.com>, 2008, 09
 #
 # Konventioner:
 #
 #   display area -> visningsområde
 #
 # Husk at tilføje dig i credit-listen
-#      (besked id "translator_credits-PLEASE_ADD_YOURSELF_HERE")
+#      (besked id "translator-credits")
 #
+# NB.  Farveskemaer som henvises til nedenfor kommer fra gtksourceview
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit Manual V.2.16\n"
-"POT-Creation-Date: 2008-09-22 23:56+0000\n"
-"PO-Revision-Date: 2008-09-23 01:49+0200\n"
+"POT-Creation-Date: 2009-02-15 16:13+0100\n"
+"PO-Revision-Date: 2009-02-15 13:56+0100\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -35,38 +37,6 @@ msgstr "Intet skærmbillede"
 msgid ""
 "@@image: 'figures/gedit_recent_files_menu_icon.png'; "
 "md5=62b4bede31db64226f7e7f9b18f5eb74"
-msgstr "Intet skærmbillede"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gedit.xml:1289(None)
-msgid ""
-"@@image: 'figures/gedit_format_bold.png'; "
-"md5=950264711a3f0808bef134fa94b0a582"
-msgstr "Intet skærmbillede"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gedit.xml:1308(None)
-msgid ""
-"@@image: 'figures/gedit_format_italic.png'; "
-"md5=feb9817676516ae91b9f6b1cd36a5eca"
-msgstr "Intet skærmbillede"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gedit.xml:1326(None)
-msgid ""
-"@@image: 'figures/gedit_format_underline.png'; "
-"md5=58f5848d81ea3f0656ccce82ba32ec9c"
-msgstr "Intet skærmbillede"
-
-#. When image changes, this message will be marked fuzzy or untranslated for you.
-#. It doesn't matter what you translate it to: it's not used at all.
-#: ../C/gedit.xml:1344(None)
-msgid ""
-"@@image: 'figures/gedit_format_strikethrough.png'; "
-"md5=cf962f5d9df721c1f4f4cef2780915ed"
 msgstr "Intet skærmbillede"
 
 #: ../C/gedit.xml:23(title)
@@ -278,12 +248,13 @@ msgstr "Feedback"
 msgid ""
 "To report a bug or make a suggestion regarding the <application>gedit</"
 "application> application or this manual, follow the directions in the <ulink "
-"url=\"ghelp:gnome-feedback\" type=\"help\">GNOME Feedback Page</ulink>."
+"url=\"ghelp:user-guide?feedback-bugs\" type=\"help\">GNOME Feedback Page</"
+"ulink>."
 msgstr ""
 "For at rapportere fejl eller foreslå forbedringer vedrørende programmet "
 "<application>gedit</application> eller denne manual, bør du følge "
-"instruktionerne på <ulink url=\"ghelp:gnome-feedback\" type=\"help\">GNOME-"
-"Feedbacksiden</ulink>."
+"instruktionerne på <ulink url=\"ghelp:user-guide?feedback-bugs\" type=\"help"
+"\">GNOME-Feedbacksiden</ulink>."
 
 #: ../C/gedit.xml:213(para)
 msgid ""
@@ -592,7 +563,7 @@ msgstr ""
 "guimenu><guimenuitem>Ny</guimenuitem></menuchoice>. Programmet viser et nyt, "
 "tomt dokument i <application>gedit</application>-vinduet."
 
-#: ../C/gedit.xml:346(title) ../C/gedit.xml:1690(title)
+#: ../C/gedit.xml:346(title) ../C/gedit.xml:1591(title)
 msgid "Opening a File"
 msgstr "Åbn en fil"
 
@@ -1284,7 +1255,7 @@ msgstr ""
 "Vælg denne mulighed for at inkludere et sidehoved på hver side, som du "
 "udskriver. Du kan ikke konfigurere sidehovedet."
 
-#: ../C/gedit.xml:571(guilabel) ../C/gedit.xml:1178(guilabel)
+#: ../C/gedit.xml:571(guilabel) ../C/gedit.xml:1175(guilabel)
 msgid "Line Numbers"
 msgstr "Linjenummerering"
 
@@ -1306,8 +1277,8 @@ msgstr ""
 "hvor ofte linjenumrene skal udskrives, for eksempel hver 5. linje, hver 10. "
 "linje osv."
 
-#: ../C/gedit.xml:578(guilabel) ../C/gedit.xml:1171(guilabel)
-#: ../C/gedit.xml:1786(para)
+#: ../C/gedit.xml:578(guilabel) ../C/gedit.xml:1168(guilabel)
+#: ../C/gedit.xml:1687(para)
 msgid "Text Wrapping"
 msgstr "Tekstombrydning"
 
@@ -1803,19 +1774,11 @@ msgstr ""
 "Vis syntaksfremhævning til at redigere andre kodetyper. Brug undermenuen "
 "<guisubmenu>Andre</guisubmenu> til at vælge kodetype."
 
-#: ../C/gedit.xml:841(para)
-msgid ""
-"For more information about how to configure syntax highlighting, see <xref "
-"linkend=\"gedit-prefs-syntax\"/>."
-msgstr ""
-"For yderligere information om hvordan du konfigurerer syntaksfremhævning, se "
-"<xref linkend=\"gedit-prefs-syntax\"/>."
-
-#: ../C/gedit.xml:847(title)
+#: ../C/gedit.xml:845(title)
 msgid "Piping the Output of a Command to a File"
 msgstr "Videreled et kommandooutput til en fil"
 
-#: ../C/gedit.xml:848(para)
+#: ../C/gedit.xml:846(para)
 msgid ""
 "You can use <application>gedit</application> to pipe the output of a command "
 "to a text file. For example, to pipe the output of an <command>ls</command> "
@@ -1827,7 +1790,7 @@ msgstr ""
 "<command>ls</command>-kommando til en tekstfil skal du skrive <command>ls | "
 "gedit</command>, og derefter trykke <keycap>Enter</keycap>."
 
-#: ../C/gedit.xml:849(para)
+#: ../C/gedit.xml:847(para)
 msgid ""
 "The output of the <command>ls</command> command is displayed in a new text "
 "file in the <application>gedit</application> window."
@@ -1835,7 +1798,7 @@ msgstr ""
 "Output af kommandoen <command>ls</command> vises i en ny tekstfil i "
 "<application>gedit</application>-vinduet."
 
-#: ../C/gedit.xml:850(para)
+#: ../C/gedit.xml:848(para)
 msgid ""
 "Alternatively, you can use the <application>External tools</application> "
 "plugin to pipe command output to the current file."
@@ -1843,11 +1806,11 @@ msgstr ""
 "Alternativt kan du bruge udvidelsesmodulet <application>Eksterne værktøjer</"
 "application> til at viderelede kommandooutput til den nuværende fil."
 
-#: ../C/gedit.xml:856(title)
+#: ../C/gedit.xml:854(title)
 msgid "Shortcut Keys"
 msgstr "Genvejstaster"
 
-#: ../C/gedit.xml:857(para)
+#: ../C/gedit.xml:855(para)
 msgid ""
 "Use shortcut keys to perform common tasks more quickly than with the mouse "
 "and menus. The following tables list all of <application>gedit</"
@@ -1857,7 +1820,7 @@ msgstr ""
 "og menuerne. De følgende tabeller viser alle tastekombinationerne i "
 "<application>gedit</application>."
 
-#: ../C/gedit.xml:858(para)
+#: ../C/gedit.xml:856(para)
 msgid ""
 "For more on shortcut keys, see the <ulink type=\"help\" url=\"ghelp:user-"
 "guide?keyboard-skills\">Desktop User Guide</ulink>."
@@ -1866,383 +1829,387 @@ msgstr ""
 "brugervejledningen</ulink> for yderligere info om genvejstaster."
 
 #. ============= Tabs ========================
-#: ../C/gedit.xml:861(bridgehead) ../C/gedit.xml:1209(guilabel)
+#: ../C/gedit.xml:859(bridgehead) ../C/gedit.xml:1207(guilabel)
 msgid "Tabs"
 msgstr "Faneblade"
 
-#: ../C/gedit.xml:862(para)
+#: ../C/gedit.xml:860(para)
 msgid "Shortcuts for tabs:"
 msgstr "Genveje til faneblade:"
+
+#: ../C/gedit.xml:868(para) ../C/gedit.xml:912(para) ../C/gedit.xml:968(para)
+#: ../C/gedit.xml:1016(para) ../C/gedit.xml:1044(para)
+#: ../C/gedit.xml:1091(para) ../C/gedit.xml:1134(para)
+msgid "Shortcut Key"
+msgstr "Genvejstast"
 
 #: ../C/gedit.xml:870(para) ../C/gedit.xml:914(para) ../C/gedit.xml:970(para)
 #: ../C/gedit.xml:1018(para) ../C/gedit.xml:1046(para)
 #: ../C/gedit.xml:1093(para) ../C/gedit.xml:1136(para)
-msgid "Shortcut Key"
-msgstr "Genvejstast"
-
-#: ../C/gedit.xml:872(para) ../C/gedit.xml:916(para) ../C/gedit.xml:972(para)
-#: ../C/gedit.xml:1020(para) ../C/gedit.xml:1048(para)
-#: ../C/gedit.xml:1095(para) ../C/gedit.xml:1138(para)
 msgid "Command"
 msgstr "Kommando"
 
-#: ../C/gedit.xml:877(para) ../C/gedit.xml:881(para)
-msgid "Ctrl + Alt + PageDown"
-msgstr "Ctrl + Alt + PageDown"
+#: ../C/gedit.xml:875(para)
+msgid "Ctrl + Alt + PageUp"
+msgstr "Ctrl + Alt + PageUp"
 
-#: ../C/gedit.xml:878(para)
+#: ../C/gedit.xml:876(para)
 msgid "Switches to the next tab to the left."
 msgstr "Skifter til det næste faneblad til venstre."
 
-#: ../C/gedit.xml:882(para)
+#: ../C/gedit.xml:879(para)
+msgid "Ctrl + Alt + PageDown"
+msgstr "Ctrl + Alt + PageDown"
+
+#: ../C/gedit.xml:880(para)
 msgid "Switches to the next tab to the right."
 msgstr "Skifter til det næste faneblad til højre."
 
-#: ../C/gedit.xml:885(para) ../C/gedit.xml:949(para)
+#: ../C/gedit.xml:883(para) ../C/gedit.xml:947(para)
 msgid "Ctrl + W"
 msgstr "Ctrl + W"
 
-#: ../C/gedit.xml:886(para)
+#: ../C/gedit.xml:884(para)
 msgid "Close tab."
 msgstr "Luk faneblad."
 
-#: ../C/gedit.xml:889(para)
+#: ../C/gedit.xml:887(para)
 msgid "Ctrl + Shift + L"
 msgstr "Ctrl + Shift + L"
 
-#: ../C/gedit.xml:890(para)
+#: ../C/gedit.xml:888(para)
 msgid "Save all tabs."
 msgstr "Gem alle faneblade."
 
-#: ../C/gedit.xml:893(para)
+#: ../C/gedit.xml:891(para)
 msgid "Ctrl + Shift + W"
 msgstr "Ctrl + Shift + W"
 
-#: ../C/gedit.xml:894(para)
+#: ../C/gedit.xml:892(para)
 msgid "Close all tabs."
 msgstr "Luk alle faneblade."
 
-#: ../C/gedit.xml:897(para)
+#: ../C/gedit.xml:895(para)
 msgid "Alt + n"
 msgstr "Alt + n"
 
-#: ../C/gedit.xml:898(para)
+#: ../C/gedit.xml:896(para)
 msgid "Jump to nth tab."
 msgstr "Spring til n. tab."
 
 #. ============= Files ========================
-#: ../C/gedit.xml:905(bridgehead)
+#: ../C/gedit.xml:903(bridgehead)
 msgid "Files"
 msgstr "Filer"
 
-#: ../C/gedit.xml:906(para)
+#: ../C/gedit.xml:904(para)
 msgid "Shortcuts for working with files:"
 msgstr "Genveje til arbejde med filer:"
 
-#: ../C/gedit.xml:921(para)
+#: ../C/gedit.xml:919(para)
 msgid "Ctrl + N"
 msgstr "Ctrl + N"
 
-#: ../C/gedit.xml:922(para)
+#: ../C/gedit.xml:920(para)
 msgid "Create a new document."
 msgstr "Opret et nyt dokument."
 
-#: ../C/gedit.xml:925(para)
+#: ../C/gedit.xml:923(para)
 msgid "Ctrl + O"
 msgstr "Ctrl + O"
 
-#: ../C/gedit.xml:926(para)
+#: ../C/gedit.xml:924(para)
 msgid "Open a document."
 msgstr "Åbn et dokument."
 
-#: ../C/gedit.xml:929(para)
+#: ../C/gedit.xml:927(para)
 msgid "Ctrl + L"
 msgstr "Ctrl + L"
 
-#: ../C/gedit.xml:930(para)
+#: ../C/gedit.xml:928(para)
 msgid "Open a location."
 msgstr "Åbn en placering."
 
-#: ../C/gedit.xml:933(para)
+#: ../C/gedit.xml:931(para)
 msgid "Ctrl + S"
 msgstr "Ctrl + S"
 
-#: ../C/gedit.xml:934(para)
+#: ../C/gedit.xml:932(para)
 msgid "Save the current document to disk."
 msgstr "Gem det nuværende dokument til disken."
 
-#: ../C/gedit.xml:937(para)
+#: ../C/gedit.xml:935(para)
 msgid "Ctrl + Shift + S"
 msgstr "Ctrl + Shift + S"
 
-#: ../C/gedit.xml:938(para)
+#: ../C/gedit.xml:936(para)
 msgid "Save the current document with a new filename."
 msgstr "Gem det nuværende dokument med et nyt filnavn."
 
-#: ../C/gedit.xml:941(para)
+#: ../C/gedit.xml:939(para)
 msgid "Ctrl + P"
 msgstr "Ctrl + P"
 
-#: ../C/gedit.xml:942(para)
+#: ../C/gedit.xml:940(para)
 msgid "Print the current document."
 msgstr "Udskriv det nuværende dokument."
 
-#: ../C/gedit.xml:945(para)
+#: ../C/gedit.xml:943(para)
 msgid "Ctrl + Shift + P"
 msgstr "Ctrl + Shift + P"
 
-#: ../C/gedit.xml:946(para)
+#: ../C/gedit.xml:944(para)
 msgid "Print preview."
 msgstr "Vis udskrift."
 
-#: ../C/gedit.xml:950(para)
+#: ../C/gedit.xml:948(para)
 msgid "Close the current document."
 msgstr "Luk det nuværende dokument."
 
-#: ../C/gedit.xml:953(para)
+#: ../C/gedit.xml:951(para)
 msgid "Ctrl + Q"
 msgstr "Ctrl + Q"
 
-#: ../C/gedit.xml:954(para)
+#: ../C/gedit.xml:952(para)
 msgid "Quit Gedit."
 msgstr "Luk gedit."
 
 #. ============= Edit =======================
-#: ../C/gedit.xml:961(bridgehead) ../C/gedit.xml:1507(guimenu)
-#: ../C/gedit.xml:1513(guimenu) ../C/gedit.xml:1519(guimenu)
-#: ../C/gedit.xml:1525(guimenu)
+#: ../C/gedit.xml:959(bridgehead) ../C/gedit.xml:1408(guimenu)
+#: ../C/gedit.xml:1414(guimenu) ../C/gedit.xml:1420(guimenu)
+#: ../C/gedit.xml:1426(guimenu)
 msgid "Edit"
 msgstr "Redigér"
 
-#: ../C/gedit.xml:962(para)
+#: ../C/gedit.xml:960(para)
 msgid "Shortcuts for editing documents:"
 msgstr "Genveje til at redigere i dokumenter:"
 
-#: ../C/gedit.xml:977(para)
+#: ../C/gedit.xml:975(para)
 msgid "Ctrl + Z"
 msgstr "Ctrl + Z"
 
-#: ../C/gedit.xml:978(para)
+#: ../C/gedit.xml:976(para)
 msgid "Undo the last action."
 msgstr "Fortryd den seneste handling."
 
-#: ../C/gedit.xml:981(para)
+#: ../C/gedit.xml:979(para)
 msgid "Ctrl + Shift + Z"
 msgstr "Ctrl + Shift + Z"
 
-#: ../C/gedit.xml:982(para)
+#: ../C/gedit.xml:980(para)
 msgid "Redo the last undone action ."
 msgstr "Omgør den senest fortrudte handling."
 
-#: ../C/gedit.xml:985(para)
+#: ../C/gedit.xml:983(para)
 msgid "Ctrl + X"
 msgstr "Ctrl + X"
 
-#: ../C/gedit.xml:986(para)
+#: ../C/gedit.xml:984(para)
 msgid "Cut the selected text or region and place it on the clipboard."
 msgstr "Klip den valgte tekst og placer den i udklipsholderen."
 
-#: ../C/gedit.xml:989(para)
+#: ../C/gedit.xml:987(para)
 msgid "Ctrl + C"
 msgstr "Ctrl + C"
 
-#: ../C/gedit.xml:990(para)
+#: ../C/gedit.xml:988(para)
 msgid "Copy the selected text or region onto the clipboard."
 msgstr "Kopier den valgte tekst til udklipsholderen."
 
-#: ../C/gedit.xml:993(para)
+#: ../C/gedit.xml:991(para)
 msgid "Ctrl + V"
 msgstr "Ctrl + V"
 
-#: ../C/gedit.xml:994(para)
+#: ../C/gedit.xml:992(para)
 msgid "Paste the contents of the clipboard."
 msgstr "Indsæt indholdet af udklipsholderen."
 
-#: ../C/gedit.xml:997(para)
+#: ../C/gedit.xml:995(para)
 msgid "Ctrl + A"
 msgstr "Ctrl + A"
 
-#: ../C/gedit.xml:998(para)
+#: ../C/gedit.xml:996(para)
 msgid "Select all."
 msgstr "Markér alt."
 
-#: ../C/gedit.xml:1001(para)
+#: ../C/gedit.xml:999(para)
 msgid "Ctrl + D"
 msgstr "Ctrl + D"
 
-#: ../C/gedit.xml:1002(para)
+#: ../C/gedit.xml:1000(para)
 msgid "Delete current line."
 msgstr "Fjern aktuelle linje."
 
 #. ============= Panes =======================
-#: ../C/gedit.xml:1009(bridgehead)
+#: ../C/gedit.xml:1007(bridgehead)
 msgid "Panes"
 msgstr "Paneler"
 
-#: ../C/gedit.xml:1010(para)
+#: ../C/gedit.xml:1008(para)
 msgid "Shortcuts for showing and hiding panes:"
 msgstr "Genveje til at vise og skjule paneler:"
 
-#: ../C/gedit.xml:1025(para)
+#: ../C/gedit.xml:1023(para)
 msgid "F9"
 msgstr "F9"
 
-#: ../C/gedit.xml:1026(para)
+#: ../C/gedit.xml:1024(para)
 msgid "Show/hide the side pane."
 msgstr "Vis/skjul sidepanelet."
 
-#: ../C/gedit.xml:1029(para)
+#: ../C/gedit.xml:1027(para)
 msgid "Ctrl + F9"
 msgstr "Ctrl + F9"
 
-#: ../C/gedit.xml:1030(para)
+#: ../C/gedit.xml:1028(para)
 msgid "Show/hide the bottom pane."
 msgstr "Vis/skjul bundpanelet."
 
 #. ============= Search =======================
-#: ../C/gedit.xml:1037(bridgehead)
+#: ../C/gedit.xml:1035(bridgehead)
 msgid "Search"
 msgstr "Søg"
 
-#: ../C/gedit.xml:1038(para)
+#: ../C/gedit.xml:1036(para)
 msgid "Shortcuts for searching:"
 msgstr "Genveje til søgning:"
 
-#: ../C/gedit.xml:1053(para)
+#: ../C/gedit.xml:1051(para)
 msgid "Ctrl + F"
 msgstr "Ctrl + F"
 
-#: ../C/gedit.xml:1054(para)
+#: ../C/gedit.xml:1052(para)
 msgid "Find a string."
 msgstr "Find en streng."
 
-#: ../C/gedit.xml:1057(para)
+#: ../C/gedit.xml:1055(para)
 msgid "Ctrl + G"
 msgstr "Ctrl + G"
 
-#: ../C/gedit.xml:1058(para)
+#: ../C/gedit.xml:1056(para)
 msgid "Find the next instance of the string."
 msgstr "Find den næste forekomst af strengen."
 
-#: ../C/gedit.xml:1061(para)
+#: ../C/gedit.xml:1059(para)
 msgid "Ctrl + Shift + G"
 msgstr "Ctrl + Shift + G"
 
-#: ../C/gedit.xml:1062(para)
+#: ../C/gedit.xml:1060(para)
 msgid "Find the previous instance of the string."
 msgstr "Find den forrige forekomst af strengen."
 
-#: ../C/gedit.xml:1065(para)
+#: ../C/gedit.xml:1063(para)
 msgid "Ctrl + K"
 msgstr "Ctrl + K"
 
-#: ../C/gedit.xml:1066(para)
+#: ../C/gedit.xml:1064(para)
 msgid "Interactive search."
 msgstr "Interaktiv søgning."
 
-#: ../C/gedit.xml:1069(para)
+#: ../C/gedit.xml:1067(para)
 msgid "Ctrl + H"
 msgstr "Ctrl + H"
 
-#: ../C/gedit.xml:1070(para)
+#: ../C/gedit.xml:1068(para)
 msgid "Search and replace."
 msgstr "Søg og erstat."
 
-#: ../C/gedit.xml:1073(para)
+#: ../C/gedit.xml:1071(para)
 msgid "Ctrl + Shift + K"
 msgstr "Ctrl + Shift + K"
 
-#: ../C/gedit.xml:1074(para)
+#: ../C/gedit.xml:1072(para)
 msgid "Clear highlight."
 msgstr "Ryd fremhævning."
 
-#: ../C/gedit.xml:1077(para)
+#: ../C/gedit.xml:1075(para)
 msgid "Ctrl + I"
 msgstr "Ctrl + I"
 
-#: ../C/gedit.xml:1078(para)
+#: ../C/gedit.xml:1076(para)
 msgid "Goto line."
 msgstr "Gå til linje."
 
 #. ============= Tools =======================
-#: ../C/gedit.xml:1084(bridgehead)
+#: ../C/gedit.xml:1082(bridgehead)
 msgid "Tools"
 msgstr "Værktøjer"
 
-#: ../C/gedit.xml:1085(para)
+#: ../C/gedit.xml:1083(para)
 msgid "Shortcuts for tools:"
 msgstr "Genveje til værktøjer:"
 
-#: ../C/gedit.xml:1100(para)
+#: ../C/gedit.xml:1098(para)
 msgid "Shift + F7"
 msgstr "Shift + F7"
 
-#: ../C/gedit.xml:1101(para)
+#: ../C/gedit.xml:1099(para)
 msgid "Check spelling (with plugin)."
 msgstr "Tjek stavning (med udvidelsesmodul)."
 
-#: ../C/gedit.xml:1104(para)
+#: ../C/gedit.xml:1102(para)
 msgid "Alt + F12"
 msgstr "Alt + F12"
 
-#: ../C/gedit.xml:1105(para)
+#: ../C/gedit.xml:1103(para)
 msgid "Remove trailing spaces (with plugin)."
 msgstr "Fjern efterfølgende mellemrum (med udvidelsesmodul)."
 
-#: ../C/gedit.xml:1108(para)
+#: ../C/gedit.xml:1106(para)
 msgid "Ctrl + T"
 msgstr "Ctrl + T"
 
-#: ../C/gedit.xml:1109(para)
+#: ../C/gedit.xml:1107(para)
 msgid "Indent (with plugin)."
 msgstr "Ryk ind (med udvidelsesmodul)."
 
-#: ../C/gedit.xml:1112(para)
+#: ../C/gedit.xml:1110(para)
 msgid "Ctrl + Shift + T"
 msgstr "Ctrl + Shift + T"
 
-#: ../C/gedit.xml:1113(para)
+#: ../C/gedit.xml:1111(para)
 msgid "Remove Indent (with plugin)."
 msgstr "Fjern indryk (med udvidelsesmodul)."
 
-#: ../C/gedit.xml:1116(para)
+#: ../C/gedit.xml:1114(para)
 msgid "F8"
 msgstr "F8"
 
-#: ../C/gedit.xml:1117(para)
+#: ../C/gedit.xml:1115(para)
 msgid "Run \"make\" in current directory (with plugin)."
 msgstr "Kør \"make\" i det nuværende katalog (med udvidelsesmodul)."
 
-#: ../C/gedit.xml:1120(para)
+#: ../C/gedit.xml:1118(para)
 msgid "Ctrl + Shift + D"
 msgstr "Ctrl + Shift + D"
 
-#: ../C/gedit.xml:1121(para)
+#: ../C/gedit.xml:1119(para)
 msgid "Directory listing (with plugin)."
 msgstr "Vis katalogliste (med udvidelsesmodul)."
 
 #. ============= Help =======================
-#: ../C/gedit.xml:1127(bridgehead)
+#: ../C/gedit.xml:1125(bridgehead)
 msgid "Help"
 msgstr "Hjælp"
 
-#: ../C/gedit.xml:1128(para)
+#: ../C/gedit.xml:1126(para)
 msgid "Shortcuts for help:"
 msgstr "Genveje til hjælp:"
 
-#: ../C/gedit.xml:1143(para)
+#: ../C/gedit.xml:1141(para)
 msgid "F1"
 msgstr "F1"
 
-#: ../C/gedit.xml:1144(para)
+#: ../C/gedit.xml:1142(para)
 msgid "Open <application>gedit</application>'s user manual."
 msgstr "Åbn <application>gedit</application>s brugermanual."
 
-#: ../C/gedit.xml:1156(title)
+#: ../C/gedit.xml:1154(title)
 msgid "Preferences"
 msgstr "Indstillinger"
 
-#: ../C/gedit.xml:1158(para)
+#: ../C/gedit.xml:1156(para)
 msgid ""
 "To configure <application>gedit</application>, choose "
 "<menuchoice><guimenu>Edit</guimenu><guimenuitem>Preferences</guimenuitem></"
@@ -2255,11 +2222,11 @@ msgstr ""
 "indeholder de følgende kategorier:"
 
 # (+indstillinger)
-#: ../C/gedit.xml:1168(title)
+#: ../C/gedit.xml:1165(title)
 msgid "View Preferences"
 msgstr "Visning"
 
-#: ../C/gedit.xml:1173(para)
+#: ../C/gedit.xml:1170(para)
 msgid ""
 "Select the <guilabel>Enable text wrapping</guilabel> option to have long "
 "lines of text flow into paragraphs instead of running off the edge of the "
@@ -2269,7 +2236,7 @@ msgstr ""
 "at glide ned i afsnit i stedet for at de fortsætter ud af vinduet. Dette gør "
 "at du ikke behøver rulle horisontalt gennem vinduet"
 
-#: ../C/gedit.xml:1174(para)
+#: ../C/gedit.xml:1171(para)
 msgid ""
 "Select the <guilabel>Do not split words over two lines</guilabel> option to "
 "have the text wrapping option preserve whole words when flowing text to the "
@@ -2279,7 +2246,7 @@ msgstr ""
 "tekstombrydningen til at bevare hele ord når teksten ombrydes over flere "
 "linjer. Dette gør teksten nemmere at læse."
 
-#: ../C/gedit.xml:1180(para)
+#: ../C/gedit.xml:1177(para)
 msgid ""
 "Select the <guilabel>Display line numbers</guilabel> option to display line "
 "numbers on the left side of the <application>gedit</application> window."
@@ -2287,11 +2254,11 @@ msgstr ""
 "Vælg <guilabel>Vis linjenumre</guilabel> for at få vist linjenumre i venstre "
 "side af <application>gedit</application>-vinduet."
 
-#: ../C/gedit.xml:1184(guilabel)
+#: ../C/gedit.xml:1181(guilabel)
 msgid "Current Line"
 msgstr "Aktuel linje"
 
-#: ../C/gedit.xml:1186(para)
+#: ../C/gedit.xml:1183(para)
 msgid ""
 "Select the <guilabel>Highlight current line</guilabel> option to highlight "
 "the line where the cursor is placed."
@@ -2299,11 +2266,11 @@ msgstr ""
 "Vælg <guilabel>Fremhæv aktuel linje</guilabel> for at fremhæve den linje "
 "hvor markøren er placeret."
 
-#: ../C/gedit.xml:1190(guilabel)
+#: ../C/gedit.xml:1187(guilabel)
 msgid "Right Margin"
 msgstr "Højre margen"
 
-#: ../C/gedit.xml:1192(para)
+#: ../C/gedit.xml:1189(para)
 msgid ""
 "Select the <guilabel>Display right margin</guilabel> option to display a "
 "vertical line that indicates the right margin."
@@ -2311,7 +2278,7 @@ msgstr ""
 "Vælg <guilabel>Vis højre margen</guilabel> for at få vist en lodret linje, "
 "som indikerer den højre margen."
 
-#: ../C/gedit.xml:1193(para)
+#: ../C/gedit.xml:1190(para)
 msgid ""
 "Use the <guilabel>Right margin at column</guilabel> spin box to specify the "
 "location of the vertical line."
@@ -2319,11 +2286,11 @@ msgstr ""
 "Brug rulleboksen <guilabel>Højre margen ved kolonne</guilabel> til at angive "
 "placeringen af den lodrette linje."
 
-#: ../C/gedit.xml:1197(guilabel)
+#: ../C/gedit.xml:1194(guilabel)
 msgid "Bracket Matching"
 msgstr "Parantesfremhævning"
 
-#: ../C/gedit.xml:1199(para)
+#: ../C/gedit.xml:1196(para)
 msgid ""
 "Select the <guilabel>Highlight matching bracket</guilabel> option to "
 "highlight the corresponding bracket when the cursor is positioned on a "
@@ -2333,11 +2300,11 @@ msgstr ""
 "modsvarende parantes når markøren er placeret på en parantes."
 
 # (+sindstillinger)
-#: ../C/gedit.xml:1207(title)
+#: ../C/gedit.xml:1204(title)
 msgid "Editor Preferences"
 msgstr "Redigering"
 
-#: ../C/gedit.xml:1211(para)
+#: ../C/gedit.xml:1209(para)
 msgid ""
 "Use the <guilabel>Tab width</guilabel> spin box to specify the width of the "
 "space that <application> gedit</application> inserts when you press the "
@@ -2347,7 +2314,7 @@ msgstr ""
 "på det mellemrum, som <application>gedit</application> indsætter når du "
 "trykker på <keycap>Tab</keycap>-tasten."
 
-#: ../C/gedit.xml:1212(para)
+#: ../C/gedit.xml:1210(para)
 msgid ""
 "Select the <guilabel>Insert spaces instead of tabs</guilabel> option to "
 "specify that <application> gedit</application> inserts spaces instead of a "
@@ -2358,7 +2325,7 @@ msgstr ""
 "stedet for et enkelt tabulatortegn når du trykker på <keycap>Tab</keycap>-"
 "knappen."
 
-#: ../C/gedit.xml:1215(guilabel)
+#: ../C/gedit.xml:1214(guilabel)
 msgid "Auto Indentation"
 msgstr "Automatisk indrykning"
 
@@ -2370,11 +2337,11 @@ msgstr ""
 "Vælg <guilabel>Aktivér automatisk indrykning</guilabel> for at angive at den "
 "næste linje starter på samme indrykningsniveau som den nuværende linje."
 
-#: ../C/gedit.xml:1219(guilabel)
+#: ../C/gedit.xml:1220(guilabel)
 msgid "File Saving"
 msgstr "Filgemning"
 
-#: ../C/gedit.xml:1221(para)
+#: ../C/gedit.xml:1222(para)
 msgid ""
 "Select the <guilabel>Create a backup copy of files before saving</guilabel> "
 "option to create a backup copy of a file each time you save the file. The "
@@ -2384,7 +2351,7 @@ msgstr ""
 "at oprette en sikkerhedskopi af en fil hver gang du gemmer filen. "
 "Sikkerhedskopien indeholder et ~ i slutningen af filnavnet."
 
-#: ../C/gedit.xml:1222(para)
+#: ../C/gedit.xml:1223(para)
 msgid ""
 "Select the <guilabel>Autosave files every ... minutes</guilabel> option to "
 "automatically save the current file at regular intervals. Use the spin box "
@@ -2394,16 +2361,16 @@ msgstr ""
 "automatisk at gemme den aktuelle fil med regelmæssige intervaller. Brug "
 "rulleboksen til at angive hvor ofte du vil gemme filen."
 
-#: ../C/gedit.xml:1229(title)
+#: ../C/gedit.xml:1230(title)
 msgid "Font &amp; Colors Preferences"
 msgstr "Skrifttyper og farver"
 
-#: ../C/gedit.xml:1231(guilabel)
+#: ../C/gedit.xml:1233(guilabel)
 msgid "Font"
 msgstr "Skrifttype"
 
 # Den engelske streng er forældet!!  Bruger bedste gæt (som svarer til en streng i gedits po-fil)
-#: ../C/gedit.xml:1233(para)
+#: ../C/gedit.xml:1235(para)
 msgid ""
 "Select the <guilabel>Use default theme font</guilabel> option to use the "
 "default system font for the text in the <application>gedit</application> "
@@ -2413,7 +2380,7 @@ msgstr ""
 "standardskrifttype til teksten i <application>gedit</application>s "
 "tekstvindue."
 
-#: ../C/gedit.xml:1234(para)
+#: ../C/gedit.xml:1236(para)
 msgid ""
 "The <guilabel>Editor font</guilabel> field displays the font that "
 "<application>gedit</application> uses to display text. Click on the button "
@@ -2423,202 +2390,80 @@ msgstr ""
 "<application>gedit</application> bruger til at vise tekst. Klik på knappen "
 "for at angive skrifttype, stil og størrelse til brug på tekst."
 
-#: ../C/gedit.xml:1237(guilabel)
-msgid "Colors"
+#: ../C/gedit.xml:1240(guilabel)
+msgid "Color Scheme"
 msgstr "Farveskema"
 
-# Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1239(para)
-msgid ""
-"Select the <guilabel>Use default theme colors</guilabel> option to use the "
-"default theme colors in the <application>gedit</application> text window."
-msgstr ""
-"Vælg <guilabel>Brug farver fra standardtema</guilabel> for at bruge farverne "
-"fra tekstvinduet i <application>gedit</application>."
-
-# Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1240(para)
-msgid ""
-"Click on the <guibutton>Normal text color</guibutton> color button to "
-"display the color selector dialog. Select a color to use to display normal "
-"text in the <application>gedit</application> text window."
-msgstr ""
-"Klik på <guibutton>Normal tekstfarve</guibutton> for at få vist farvevælger-"
-"dialogen. Vælg en farve at bruge til at få fremvist normal tekst i "
-"tekstvinduet i <application>gedit</application>."
-
-# Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1241(para)
-msgid ""
-"Click on the <guibutton>Background color</guibutton> color button to display "
-"the color selector dialog. Select a background color for the "
-"<application>gedit</application> text window."
-msgstr ""
-"Klik på <guibutton>Baggrundsfarve</guibutton> for at få vist "
-"farvevælgerdialogen. Vælg en baggrundsfarve til brug i tekstvinduet i "
-"<application>gedit</application>."
-
-# Denne funktion lader til at være udgået i den seneste version af gedit...
 #: ../C/gedit.xml:1242(para)
 msgid ""
-"Click on the <guibutton>Selected text color</guibutton> color button to "
-"display the color selector dialog. Select a color to use to display selected "
-"text."
+"You can choose a color scheme from the list of color schemes. By default, "
+"the following color schemes are installed:"
 msgstr ""
-"Klik på <guibutton>Farve til markeret tekst</guibutton> for at få vist "
-"farvevælger-dialogen. Vælg en farve til brug ved visning af markeret tekst."
+"Du kan vælge et farveskema fra listen af farveskemaer: Som standard vil "
+"følgende farveskemaer være installeret:"
 
-# Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1244(para)
-msgid ""
-"Click on the <guibutton>Selection color</guibutton> color button to display "
-"the color selector dialog. Select a background color to use to highlight a "
-"text selection."
-msgstr ""
-"Klik på <guibutton>Markeringsfarve</guibutton> for at få vist farvevælger-"
-"dialogen. Vælg en baggrundsfarve som skal bruges til at fremhæve en "
-"tekstmarkering."
+#: ../C/gedit.xml:1245(guilabel)
+msgid "Classic"
+msgstr "Klassisk"
 
-# Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1251(title)
-msgid "Syntax Highlighting Preferences"
-msgstr "Syntaksfremhævningsindstillinger"
+#: ../C/gedit.xml:1247(para)
+msgid "Classic color scheme based on the gvim color scheme."
+msgstr "Klassisk farveskema baseret på gvim-farveskemaet."
 
-# Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1253(guilabel)
-msgid "Enable syntax highlighting"
-msgstr "Aktivér syntaksfremhævning"
+#: ../C/gedit.xml:1251(guilabel)
+msgid "Cobalt"
+msgstr "Cobalt"
 
-# Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1255(para)
-msgid "Select this option to highlight the syntax of the text that you edit."
-msgstr ""
-"Vælg denne mulighed for at fremhæve syntaksen i den tekst, som du redigerer."
+#: ../C/gedit.xml:1253(para)
+msgid "Blue based color scheme."
+msgstr "Blåligt farveskema."
 
-# Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1258(guilabel)
-msgid "Highlight mode"
-msgstr "Fremhævningstilstand"
+#: ../C/gedit.xml:1257(guilabel)
+msgid "Kate"
+msgstr "Kate"
 
-# Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1260(para)
-msgid "Use this drop-down list to select a syntax mode to configure."
-msgstr ""
-"Brug denne rullegardinsmenu til at vælge en syntakstilstand at konfigurere."
+#: ../C/gedit.xml:1259(para)
+msgid "Color scheme used in the Kate text editor."
+msgstr "Farveskemaet, der bruges i tekstredigeringsprogrammet Kate."
 
-# Denne funktion lader til at være udgået i den seneste version af gedit...
 #: ../C/gedit.xml:1263(guilabel)
-msgid "Elements"
-msgstr "Elementer"
+msgid "Oblivion"
+msgstr "Oblivion"
 
-# Denne funktion lader til at være udgået i den seneste version af gedit...
 #: ../C/gedit.xml:1265(para)
-msgid "Use this list box to select a syntax element to configure."
-msgstr "Brug denne listeboks til at vælge et syntakselement at konfigurere."
+msgid "Dark color scheme using the Tango color palette."
+msgstr "Mørkt farveskema der bruger Tango-farvepaletten."
 
-# Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1268(term)
-msgid "Format buttons"
-msgstr "Formatknapper"
+#: ../C/gedit.xml:1269(guilabel)
+msgid "Tango"
+msgstr "Tango"
 
-# Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1270(para)
+#: ../C/gedit.xml:1271(para)
+msgid "Color scheme using the Tango color scheme."
+msgstr "Farveskema der bruger Tango-farvepaletten."
+
+#: ../C/gedit.xml:1275(para)
 msgid ""
-"Use the following buttons to change the format of the selected syntax "
-"element:"
+"You can add a new color scheme by clicking on <guilabel>Add...</guilabel>, "
+"and selecting a color scheme file"
 msgstr ""
-"Brug de følgende knapper til at ændre det valgte syntakselements format:"
+"Du kan tilføje et nyt farveskema ved at klikke på <guilabel>Tilføj...</"
+"guilabel>, og vælge en farveskemafil"
 
-#: ../C/gedit.xml:1278(para)
-msgid "Button"
-msgstr "Knap"
-
-#: ../C/gedit.xml:1280(para)
-msgid "Format"
-msgstr "Format"
-
-#: ../C/gedit.xml:1292(phrase)
-msgid "Shows icon for bold format."
-msgstr "Viser ikonet for fedformatering."
-
-#: ../C/gedit.xml:1298(para)
-msgid "Bold"
-msgstr "Fed"
-
-#: ../C/gedit.xml:1310(phrase)
-msgid "Shows icon for italic format."
-msgstr "Viser ikonet for kursivformatering."
-
-#: ../C/gedit.xml:1316(para)
-msgid "Italic"
-msgstr "Kursiv"
-
-#: ../C/gedit.xml:1328(phrase)
-msgid "Shows icon for underline."
-msgstr "Viser ikonet for understregningsformatering."
-
-#: ../C/gedit.xml:1334(para)
-msgid "Underline"
-msgstr "Understregning"
-
-#: ../C/gedit.xml:1346(phrase)
-msgid "Shows icon for strikethrough."
-msgstr "Viser ikonet for gennemstregning."
-
-#: ../C/gedit.xml:1352(para)
-msgid "Strikethrough"
-msgstr "Gennemstregning"
-
-#: ../C/gedit.xml:1362(guilabel)
-msgid "Foreground"
-msgstr "Forgrund"
-
-# Dette er rent gæt, da funktionen lader til at være udgået i den nyeste version af gedit...
-#: ../C/gedit.xml:1364(para)
+#: ../C/gedit.xml:1276(para)
 msgid ""
-"Select this option to change the font color of the selected syntax element. "
-"Click on the color button to display the color selector dialog, then select "
-"the font color."
+"You can remove the selected color scheme by clicking on <guilabel>Remove</"
+"guilabel>"
 msgstr ""
-"Vælg denne mulighed for at ændre skriftfarven på det valgte syntakselement. "
-"Klik på farveknappen for at få vist farvevalgsdialogen, og vælg derefter "
-"skriftfarve."
-
-#: ../C/gedit.xml:1367(guilabel)
-msgid "Background"
-msgstr "Baggrund"
-
-# Dette er rent gæt, da funktionen lader til at være udgået i den nyeste version af gedit...
-#: ../C/gedit.xml:1369(para)
-msgid ""
-"Select this option to change the background color of the selected syntax "
-"element. Click on the color button to display the color selector dialog, "
-"then select the background color."
-msgstr ""
-"Vælg denne mulighed for at ændre baggrundsfarven på det valgte "
-"syntakselement. Klik på farveknappen for at få vist farvevalgsdialogen, og "
-"vælg derefter baggrundsfarve."
-
-# Dette er rent gæt, da funktionen lader til at være udgået i den nyeste version af gedit...
-#: ../C/gedit.xml:1372(guibutton)
-msgid "Reset to Default"
-msgstr "Gendan til standard"
-
-# Dette er rent gæt, da funktionen lader til at være udgået i den nyeste version af gedit...
-#: ../C/gedit.xml:1374(para)
-msgid ""
-"Click on this button to reset the foreground color and background color of "
-"the selected syntax element to the default values."
-msgstr ""
-"Klik på denne knap for at gendanne for- og baggrundsfarven på det valgte "
-"syntakselement til standardværdierne."
+"Du kan fjerne det valgte farveskema ved at klikke på <guilabel>Fjern</"
+"guilabel>"
 
 # (+indstillinger)
-#: ../C/gedit.xml:1381(title)
+#: ../C/gedit.xml:1283(title)
 msgid "Plugins Preferences"
 msgstr "Udvidelsesmoduler"
 
-#: ../C/gedit.xml:1382(para)
+#: ../C/gedit.xml:1284(para)
 msgid ""
 "Plugins add extra features to <application>gedit</application>. For more "
 "information on plugins and how to use the built-in plugins, see <xref "
@@ -2629,11 +2474,11 @@ msgstr ""
 "bruger de indbyggede udvidelsesmoduler kan du læse <xref linkend=\"gedit-"
 "plugins-overview\"/>."
 
-#: ../C/gedit.xml:1387(title)
+#: ../C/gedit.xml:1288(title)
 msgid "Enabling a Plugin"
 msgstr "Aktivér et udvidelsesmodul"
 
-#: ../C/gedit.xml:1388(para)
+#: ../C/gedit.xml:1289(para)
 msgid ""
 "To enable a <application>gedit</application> plugin, perform the following "
 "steps:"
@@ -2641,8 +2486,8 @@ msgstr ""
 "For at aktivere et udvidelsesmodul til <application>gedit</application> skal "
 "du gøre følgende:"
 
-#: ../C/gedit.xml:1391(para) ../C/gedit.xml:1412(para)
-#: ../C/gedit.xml:1736(para)
+#: ../C/gedit.xml:1292(para) ../C/gedit.xml:1313(para)
+#: ../C/gedit.xml:1637(para)
 msgid ""
 "Choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Preferences</"
 "guimenuitem></menuchoice>."
@@ -2650,19 +2495,19 @@ msgstr ""
 "Vælg <menuchoice><guimenu>Redigér</guimenu><guimenuitem>Indstillinger</"
 "guimenuitem></menuchoice>."
 
-#: ../C/gedit.xml:1394(para) ../C/gedit.xml:1415(para)
-#: ../C/gedit.xml:1739(para)
+#: ../C/gedit.xml:1295(para) ../C/gedit.xml:1316(para)
+#: ../C/gedit.xml:1640(para)
 msgid "Select the <guilabel>Plugins</guilabel> tab."
 msgstr "Vælg fanebladet <guilabel>Udvidelsesmoduler</guilabel>."
 
-#: ../C/gedit.xml:1397(para)
+#: ../C/gedit.xml:1298(para)
 msgid ""
 "Select the check box next to the name of the plugin that you want to enable."
 msgstr ""
 "Sæt flueben i feltet ved siden af navnet på det udvidelsesmodul som du "
 "ønsker at aktivere."
 
-#: ../C/gedit.xml:1400(para) ../C/gedit.xml:1421(para)
+#: ../C/gedit.xml:1301(para) ../C/gedit.xml:1322(para)
 msgid ""
 "Click <guibutton>Close</guibutton> to close the <guilabel>Preferences</"
 "guilabel> dialog."
@@ -2670,18 +2515,18 @@ msgstr ""
 "Klik <guibutton>Luk</guibutton> for at lukke dialogen "
 "<guilabel>Indstillinger</guilabel>."
 
-#: ../C/gedit.xml:1407(title)
+#: ../C/gedit.xml:1308(title)
 msgid "Disabling a Plugin"
 msgstr "Deaktivér et udvidelsesmodul"
 
-#: ../C/gedit.xml:1408(para)
+#: ../C/gedit.xml:1309(para)
 msgid ""
 "A plugin remains enabled when you quit <application>gedit</application>."
 msgstr ""
 "Et udvidelsesmodul forbliver aktiveret når du lukker <application>gedit</"
 "application>."
 
-#: ../C/gedit.xml:1409(para)
+#: ../C/gedit.xml:1310(para)
 msgid ""
 "To disable a <application>gedit</application> plugin, perform the following "
 "steps:"
@@ -2689,7 +2534,7 @@ msgstr ""
 "For at deaktivere et udvidelsesmodul til <application>gedit</application> "
 "skal du gøre følgende:"
 
-#: ../C/gedit.xml:1418(para)
+#: ../C/gedit.xml:1319(para)
 msgid ""
 "Deselect the check box next to the name of the plugin that you want to "
 "disable."
@@ -2697,15 +2542,15 @@ msgstr ""
 "Fjern flueben i feltet ved siden af navnet på det udvidelsesmodul som du "
 "ønsker at deaktivere."
 
-#: ../C/gedit.xml:1430(title)
+#: ../C/gedit.xml:1331(title)
 msgid "Plugins"
 msgstr "Udvidelsesmoduler"
 
-#: ../C/gedit.xml:1432(title)
+#: ../C/gedit.xml:1333(title)
 msgid "Working with Plugins"
 msgstr "Arbejde med udvidelsesmoduler"
 
-#: ../C/gedit.xml:1433(para)
+#: ../C/gedit.xml:1334(para)
 msgid ""
 "You can add extra features to <application>gedit</application> by enabling "
 "<firstterm>plugins</firstterm>. A plugin is a supplementary program that "
@@ -2718,7 +2563,7 @@ msgstr ""
 "Udvidelsesmoduler tilføjer nye elementer til menuerne i <application>gedit</"
 "application> for de nye funktioner som de yder."
 
-#: ../C/gedit.xml:1435(para)
+#: ../C/gedit.xml:1336(para)
 msgid ""
 "Several plugins come built-in with <application>gedit</application>, and you "
 "can install more. The <ulink type=\"http\" url=\"http://live.gnome.org/Gedit/"
@@ -2729,7 +2574,7 @@ msgstr ""
 "Gedit/Plugins\">gedits hjemmeside</ulink> har en liste over "
 "udvidelsesmoduler fra tredjepart."
 
-#: ../C/gedit.xml:1436(para)
+#: ../C/gedit.xml:1337(para)
 msgid ""
 "To enable and disable plugins, or see which plugins are currently enabled, "
 "use the <link linkend=\"gedit-prefs-plugins\">Plugins Preferences</link>."
@@ -2738,14 +2583,14 @@ msgstr ""
 "udvidelsesmoduler der aktuelt er aktiverede, kan du bruge <link linkend="
 "\"gedit-prefs-plugins\">indstillingerne for udvidelsesmoduler</link>."
 
-#: ../C/gedit.xml:1437(para)
+#: ../C/gedit.xml:1338(para)
 msgid ""
 "The following plugins come built-in with <application>gedit</application>:"
 msgstr ""
 "De følgende udvidelsesmoduler er indbygget i <application>gedit</"
 "application>:"
 
-#: ../C/gedit.xml:1443(para)
+#: ../C/gedit.xml:1344(para)
 msgid ""
 "<link linkend=\"gedit-change-case-plugin\"><application>Change Case</"
 "application></link> allows you to change the case of the selected text."
@@ -2754,7 +2599,7 @@ msgstr ""
 "application></link> lader dig skifte mellem store/små bogstaver i den "
 "markerede tekst."
 
-#: ../C/gedit.xml:1446(para)
+#: ../C/gedit.xml:1347(para)
 msgid ""
 "<application><link linkend=\"gedit-document-statistics-plugin\">Document "
 "Statistics</link></application> shows the number of lines, words, and "
@@ -2764,7 +2609,7 @@ msgstr ""
 "\">Dokumentstatistik</link></application> viser antallet af linjer, ord og "
 "tegn i dokumentet."
 
-#: ../C/gedit.xml:1449(para)
+#: ../C/gedit.xml:1350(para)
 msgid ""
 "<application><link linkend=\"gedit-external-tools-plugin\">External Tools</"
 "link></application> allows you to execute external commands from "
@@ -2774,7 +2619,7 @@ msgstr ""
 "værktøjer</link></application> lader dig udføre eksterne kommandoer fra "
 "<application>gedit</application>."
 
-#: ../C/gedit.xml:1452(para)
+#: ../C/gedit.xml:1353(para)
 msgid ""
 "<application>File Browser</application> allows you to browse your files and "
 "folders in the side pane."
@@ -2782,7 +2627,7 @@ msgstr ""
 "<application>Filvælger-panel</application> lader dig gennemse dine filer og "
 "kataloger i sidepanelet."
 
-#: ../C/gedit.xml:1455(para)
+#: ../C/gedit.xml:1356(para)
 msgid ""
 "<application><link linkend=\"gedit-indent-lines-plugin\">Indent Lines</"
 "link></application> adds or removes indentation from the selected lines."
@@ -2790,7 +2635,7 @@ msgstr ""
 "<application><link linkend=\"gedit-indent-lines-plugin\">Indryk linjer</"
 "link></application> tilføjer eller fjerner indrykning af markerede linjer."
 
-#: ../C/gedit.xml:1458(para)
+#: ../C/gedit.xml:1359(para)
 msgid ""
 "<application><link linkend=\"gedit-insert-date-time-plugin\">Insert Date/"
 "Time</link></application> adds the current date and time into a document."
@@ -2798,7 +2643,7 @@ msgstr ""
 "<application><link linkend=\"gedit-insert-date-time-plugin\">Indsæt dato/"
 "tid</link></application> tilføjer den aktuelle dato og tid til et dokument."
 
-#: ../C/gedit.xml:1461(para)
+#: ../C/gedit.xml:1362(para)
 msgid ""
 "<application><link linkend=\"gedit-modelines-plugin\">Modelines</link></"
 "application> allows you to set editing preferences for individual documents, "
@@ -2811,7 +2656,7 @@ msgstr ""
 "<application>Emacs</application>, <application>Kate</application> og "
 "<application>Vim</application>."
 
-#: ../C/gedit.xml:1464(para)
+#: ../C/gedit.xml:1365(para)
 msgid ""
 "<application><link linkend=\"gedit-python-console-plugin\">Python Console</"
 "link></application> allows you to run commands in the python programming "
@@ -2820,7 +2665,7 @@ msgstr ""
 "<application><link linkend=\"gedit-python-console-plugin\">Python-konsol</"
 "link></application> lader dig køre kommandoer i programmeringssproget python."
 
-#: ../C/gedit.xml:1467(para)
+#: ../C/gedit.xml:1368(para)
 msgid ""
 "<application><link linkend=\"gedit-snippets-plugin\">Snippets</link></"
 "application> allows you to store frequently-used pieces of text and insert "
@@ -2830,7 +2675,7 @@ msgstr ""
 "application> lader dig opbevare ofte-brugte stykker af tekst og indsætte dem "
 "nemt og hurtigt i et dokument."
 
-#: ../C/gedit.xml:1470(para)
+#: ../C/gedit.xml:1371(para)
 msgid ""
 "<application><link linkend=\"gedit-sort-plugin\">Sort</link></application> "
 "arranges selected lines of text into alphabetical order."
@@ -2838,7 +2683,7 @@ msgstr ""
 "<application><link linkend=\"gedit-sort-plugin\">Sortér</link></application> "
 "arrangerer markerede tekstlinjer i alfabetisk orden."
 
-#: ../C/gedit.xml:1473(para)
+#: ../C/gedit.xml:1374(para)
 msgid ""
 "<application><link linkend=\"gedit-spell-checker-plugin\">Spell Checker</"
 "link></application> corrects the spelling in the selected text, or marks "
@@ -2848,7 +2693,7 @@ msgstr ""
 "link></application> retter stavningen i den markerede tekst, eller markerer "
 "automatisk fejl i dokumentet."
 
-#: ../C/gedit.xml:1476(para)
+#: ../C/gedit.xml:1377(para)
 msgid ""
 "<application><link linkend=\"gedit-tag-list-plugin\">Tag List</link></"
 "application> lets you insert commonly-used tags for HTML and other languages "
@@ -2858,7 +2703,7 @@ msgstr ""
 "application> lader dig indsætte ofte-brugte mærker for HTML og andre sprog "
 "fra en liste i sidepanelet."
 
-#: ../C/gedit.xml:1479(para)
+#: ../C/gedit.xml:1380(para)
 msgid ""
 "<application><link linkend=\"gedit-user-name-plugin\">User Name</link></"
 "application> inserts the username of the current user into the document."
@@ -2866,11 +2711,11 @@ msgstr ""
 "<application><link linkend=\"gedit-user-name-plugin\">Brugernavn</link></"
 "application> indsætter den aktuelle brugers brugernavn i dokumentet."
 
-#: ../C/gedit.xml:1486(title)
+#: ../C/gedit.xml:1387(title)
 msgid "Change Case Plugin"
 msgstr "Udvidelsesmodulet Skift bogstaver"
 
-#: ../C/gedit.xml:1487(para)
+#: ../C/gedit.xml:1388(para)
 msgid ""
 "The <application>Change Case</application> plugin changes the case of the "
 "selected text."
@@ -2878,7 +2723,7 @@ msgstr ""
 "Udvidelsesmodulet <application>Skift bogstaver</application> skifter mellem "
 "store/små bogstaver i den markerede tekst."
 
-#: ../C/gedit.xml:1488(para)
+#: ../C/gedit.xml:1389(para)
 msgid ""
 "The following items are added to the <guimenu>Edit</guimenu> menu when the "
 "<application>Change Case</application> plugin is enabled:"
@@ -2886,82 +2731,82 @@ msgstr ""
 "De følgende elementer føjes til menuen <guimenu>Redigér</guimenu> når "
 "udvidelsesmodulet <application>Skift bogstaver</application> er aktiveret:"
 
-#: ../C/gedit.xml:1498(para)
+#: ../C/gedit.xml:1399(para)
 msgid "Menu Item"
 msgstr "Menuelement"
 
-#: ../C/gedit.xml:1500(para)
+#: ../C/gedit.xml:1401(para)
 msgid "Action"
 msgstr "Handling"
 
-#: ../C/gedit.xml:1502(para)
+#: ../C/gedit.xml:1403(para)
 msgid "Example"
 msgstr "Eksempel"
 
-#: ../C/gedit.xml:1508(guisubmenu) ../C/gedit.xml:1514(guisubmenu)
-#: ../C/gedit.xml:1520(guisubmenu) ../C/gedit.xml:1526(guisubmenu)
+#: ../C/gedit.xml:1409(guisubmenu) ../C/gedit.xml:1415(guisubmenu)
+#: ../C/gedit.xml:1421(guisubmenu) ../C/gedit.xml:1427(guisubmenu)
 msgid "Change Case"
 msgstr "Skift bogstaver"
 
-#: ../C/gedit.xml:1508(guimenuitem)
+#: ../C/gedit.xml:1409(guimenuitem)
 msgid "All Upper Case"
 msgstr "Alle bogstaver store"
 
-#: ../C/gedit.xml:1509(para)
+#: ../C/gedit.xml:1410(para)
 msgid "Change each character to uppercase."
 msgstr "Skifter alle bogstaver til store bogstaver."
 
-#: ../C/gedit.xml:1510(para)
+#: ../C/gedit.xml:1411(para)
 msgid "<literal>This text</literal> becomes <literal>THIS TEXT</literal>"
 msgstr ""
 "<literal>Denne tekst</literal> bliver til <literal>DENNE TEKST</literal>"
 
-#: ../C/gedit.xml:1514(guimenuitem)
+#: ../C/gedit.xml:1415(guimenuitem)
 msgid "All Lower Case"
 msgstr "Alle bogstaver små"
 
-#: ../C/gedit.xml:1515(para)
+#: ../C/gedit.xml:1416(para)
 msgid "Change each character to lowercase."
 msgstr "Skifter alle bogstaver til små bogstaver."
 
-#: ../C/gedit.xml:1516(para)
+#: ../C/gedit.xml:1417(para)
 msgid "<literal>This Text</literal> becomes <literal>this text</literal>"
 msgstr ""
 "<literal>Denne Tekst</literal> bliver til <literal>denne tekst</literal>"
 
-#: ../C/gedit.xml:1520(guimenuitem)
+#: ../C/gedit.xml:1421(guimenuitem)
 msgid "Invert Case"
 msgstr "Invertér bogstavstørrelse"
 
-#: ../C/gedit.xml:1521(para)
+#: ../C/gedit.xml:1422(para)
 msgid ""
 "Change each lowercase character to uppercase, and change each uppercase "
 "character to lowercase."
 msgstr "Skifter alle små bogstaver til store, og alle store bogstaver til små."
 
-#: ../C/gedit.xml:1522(para)
+#: ../C/gedit.xml:1423(para)
 msgid "<literal>This Text</literal> becomes <literal>tHIS tEXT</literal>"
 msgstr ""
 "<literal>Denne Tekst</literal> bliver til <literal>dENNE tEKST</literal>"
 
-#: ../C/gedit.xml:1526(guimenuitem)
+#: ../C/gedit.xml:1427(guimenuitem)
 msgid "Title Case"
 msgstr "Første bogstav med stort"
 
-#: ../C/gedit.xml:1527(para)
+#: ../C/gedit.xml:1428(para)
 msgid "Change the first character of each word to uppercase."
 msgstr "Ændrer det første bogstav i hvert ord til store bogstaver."
 
-#: ../C/gedit.xml:1528(para)
+#: ../C/gedit.xml:1429(para)
 msgid "<literal>this text</literal> becomes <literal>This Text</literal>"
 msgstr ""
 "<literal>denne tekst</literal> bliver til <literal>Denne Tekst</literal>"
 
-#: ../C/gedit.xml:1537(title)
+#: ../C/gedit.xml:1438(title)
 msgid "Document Statistics Plugin"
 msgstr "Udvidelsesmodulet Dokumentstatistik"
 
-#: ../C/gedit.xml:1538(para)
+#: ../C/gedit.xml:1439(para)
 msgid ""
 "The <application>Document Statistics</application> plugin counts the number "
 "of lines, words, characters with spaces, characters without spaces, and "
@@ -2975,7 +2820,7 @@ msgstr ""
 "<guilabel>Dokumentstatistik</guilabel>-dialog. For at bruge "
 "udvidelsesmodulet Dokumentstatistik skal du gøre følgende:"
 
-#: ../C/gedit.xml:1540(para)
+#: ../C/gedit.xml:1441(para)
 msgid ""
 "Choose <menuchoice><guimenu>Tools</guimenu><guimenuitem>Document Statistics</"
 "guimenuitem></menuchoice> to display the <guilabel>Document Statistics</"
@@ -2987,27 +2832,27 @@ msgstr ""
 "<guilabel>Dokumentstatistik</guilabel>. Denne dialog viser den følgende "
 "information om filen:"
 
-#: ../C/gedit.xml:1543(para)
+#: ../C/gedit.xml:1444(para)
 msgid "Number of lines in the current document."
 msgstr "Antal linjer i det aktuelle dokument."
 
-#: ../C/gedit.xml:1546(para)
+#: ../C/gedit.xml:1447(para)
 msgid "Number of words in the current document."
 msgstr "Antal ord i det aktuelle dokument."
 
-#: ../C/gedit.xml:1549(para)
+#: ../C/gedit.xml:1450(para)
 msgid "Number of characters, including spaces, in the current document."
 msgstr "Antal tegn, inklusive mellemrum, i det aktuelle dokument."
 
-#: ../C/gedit.xml:1552(para)
+#: ../C/gedit.xml:1453(para)
 msgid "Number of characters, not including spaces, in the current document."
 msgstr "Antal tegn, ikke medregnende mellemrum, i det aktuelle dokument."
 
-#: ../C/gedit.xml:1555(para)
+#: ../C/gedit.xml:1456(para)
 msgid "Number of bytes in the current document."
 msgstr "Antal bytes i det aktuelle dokument."
 
-#: ../C/gedit.xml:1560(para)
+#: ../C/gedit.xml:1461(para)
 msgid ""
 "You can continue to update the <application>gedit</application> file while "
 "the <guilabel>Document Statistics</guilabel> dialog is open. To refresh the "
@@ -3019,11 +2864,11 @@ msgstr ""
 "er åben. For at opdatere indholdet i dialogen <guilabel>Dokumentstatistik</"
 "guilabel> skal du klikke på<guibutton>Opdatér</guibutton>."
 
-#: ../C/gedit.xml:1567(title)
+#: ../C/gedit.xml:1468(title)
 msgid "External Tools Plugin"
 msgstr "Udvidelsesmodulet Eksterne værktøjer"
 
-#: ../C/gedit.xml:1568(para)
+#: ../C/gedit.xml:1469(para)
 msgid ""
 "The <application>External Tools</application> plugin allows you to execute "
 "external commands from <application>gedit</application>. You can pipe some "
@@ -3037,7 +2882,7 @@ msgstr ""
 "eksempel, <application>sed</application>), eller køre en foruddefineret "
 "kommando (for eksempel, <application>make</application>)."
 
-#: ../C/gedit.xml:1569(para)
+#: ../C/gedit.xml:1470(para)
 msgid ""
 "Use the <guilabel>External Tools Manager</guilabel> to create and edit "
 "commands. To run an external command, choose it from the <guimenu>Tools</"
@@ -3047,11 +2892,11 @@ msgstr ""
 "kommandoer. For at køre en ekstern kommando skal du vælge den fra menuen "
 "<guimenu>Værktøjer</guimenu>."
 
-#: ../C/gedit.xml:1572(title)
+#: ../C/gedit.xml:1473(title)
 msgid "Built-in Commands"
 msgstr "Indbyggede kommandoer"
 
-#: ../C/gedit.xml:1573(para)
+#: ../C/gedit.xml:1474(para)
 msgid ""
 "The following commands are provided with the <application>External Tools</"
 "application> plugin:"
@@ -3059,44 +2904,44 @@ msgstr ""
 "De følgende kommandoer følger i forvejen med udvidelsesmodulet "
 "<application>Eksterne værktøjer</application>:"
 
-#: ../C/gedit.xml:1575(term)
+#: ../C/gedit.xml:1476(term)
 msgid "Build"
 msgstr "Byg"
 
-#: ../C/gedit.xml:1577(para)
+#: ../C/gedit.xml:1478(para)
 msgid ""
 "Runs <application>make</application> in the current document's directory."
 msgstr ""
 "Kører <application>make</application> i det aktuelle dokuments katalog."
 
 # Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1580(term)
+#: ../C/gedit.xml:1481(term)
 msgid "Directory Listing"
 msgstr "Mappeoversigt"
 
 # Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1582(para)
+#: ../C/gedit.xml:1483(para)
 msgid ""
 "Lists the contents of the current document's directory in a new document."
 msgstr "Viser indholdet af det aktuelle dokuments mappe i et nyt dokument."
 
 # Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1585(term)
+#: ../C/gedit.xml:1486(term)
 msgid "Environment Variables"
 msgstr "Miljøvariable"
 
 # Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1587(para)
+#: ../C/gedit.xml:1488(para)
 msgid "Displays the environment variables list in the bottom pane."
 msgstr "Viser listen over miljøvariable i bundpanelet."
 
 # Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1590(term)
+#: ../C/gedit.xml:1491(term)
 msgid "Grep"
 msgstr "Grep"
 
 # Denne funktion lader til at være udgået i den seneste version af gedit...
-#: ../C/gedit.xml:1592(para)
+#: ../C/gedit.xml:1493(para)
 msgid ""
 "Searches for a term in all files in the current document directory, using "
 "pattern matching. Results are shown in the bottom pane."
@@ -3104,19 +2949,19 @@ msgstr ""
 "Søger efter en streng i alle filer i den aktuelle dokumentmappe ved hjælp af "
 "mønstersammenligning. Resultater vises i bundpanelet."
 
-#: ../C/gedit.xml:1595(term)
+#: ../C/gedit.xml:1496(term)
 msgid "Remove Trailing Spaces"
 msgstr "Fjern efterfølgende mellemrum"
 
-#: ../C/gedit.xml:1597(para)
+#: ../C/gedit.xml:1498(para)
 msgid "Removes all spaces from the end of lines in the document."
 msgstr "Fjerner alle mellemrum fra linjeslutningerne i dokumentet."
 
-#: ../C/gedit.xml:1604(title)
+#: ../C/gedit.xml:1505(title)
 msgid "Defining a Command"
 msgstr "Definér en kommando"
 
-#: ../C/gedit.xml:1605(para)
+#: ../C/gedit.xml:1506(para)
 msgid ""
 "To add an external command, choose <menuchoice><guimenu>Tools</"
 "guimenu><guimenuitem>External Tools</guimenuitem></menuchoice>."
@@ -3125,7 +2970,7 @@ msgstr ""
 "<menuchoice><guimenu>Værktøjer</guimenu><guimenuitem>Eksterne værktøjer...</"
 "guimenuitem></menuchoice>."
 
-#: ../C/gedit.xml:1606(para)
+#: ../C/gedit.xml:1507(para)
 msgid ""
 "In the <guilabel>External Tools Manager</guilabel> window, click "
 "<guibutton>New</guibutton>. You can speficy the following details for the "
@@ -3135,29 +2980,29 @@ msgstr ""
 "<guibutton>Ny</guibutton>. Du kan angive de følgende detaljer for den nye "
 "kommando:"
 
-#: ../C/gedit.xml:1608(term)
+#: ../C/gedit.xml:1509(term)
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: ../C/gedit.xml:1610(para)
+#: ../C/gedit.xml:1511(para)
 msgid ""
 "This description is shown in the statusbar when the menu command is chosen."
 msgstr ""
 "Denne beskrivelse bliver vist i statuslinjen når kommandoen vælges i menuen."
 
-#: ../C/gedit.xml:1613(term)
+#: ../C/gedit.xml:1514(term)
 msgid "Accelerator"
 msgstr "Genvejstast"
 
-#: ../C/gedit.xml:1615(para)
+#: ../C/gedit.xml:1516(para)
 msgid "Enter a keyboard shortcut for the command."
 msgstr "Vælg en tastaturgenvej til kommandoen."
 
-#: ../C/gedit.xml:1618(term)
+#: ../C/gedit.xml:1519(term)
 msgid "Commands"
 msgstr "Kommandoer"
 
-#: ../C/gedit.xml:1620(para)
+#: ../C/gedit.xml:1521(para)
 msgid ""
 "The actual commands to be run. Several <application>gedit</application> "
 "environment variables can be used to pass content to these commands: see "
@@ -3169,11 +3014,11 @@ msgstr ""
 ">."
 
 # Ja, jeg ved godt at der står "Inddata", men jeg satser på at vi skrotter den inden længe!
-#: ../C/gedit.xml:1623(term)
+#: ../C/gedit.xml:1524(term)
 msgid "Input"
 msgstr "Input"
 
-#: ../C/gedit.xml:1625(para)
+#: ../C/gedit.xml:1526(para)
 msgid ""
 "The content to give to the commands (as <systemitem>stdin</systemitem>): the "
 "entire text of the current document, the current selection, line, or word."
@@ -3183,11 +3028,11 @@ msgstr ""
 "ord."
 
 # Ja, jeg ved godt at der står "Uddata", men jeg satser på at vi skrotter den inden længe!
-#: ../C/gedit.xml:1628(term)
+#: ../C/gedit.xml:1529(term)
 msgid "Output"
 msgstr "Output"
 
-#: ../C/gedit.xml:1630(para)
+#: ../C/gedit.xml:1531(para)
 msgid ""
 "What to do with the output of the commands: display in the bottom pane, put "
 "in a new document, or place in the current document, at the end, at the "
@@ -3198,11 +3043,11 @@ msgstr ""
 "ved markørens placering eller som erstatning for den aktuelle markering "
 "eller hele dokumentet."
 
-#: ../C/gedit.xml:1633(term)
+#: ../C/gedit.xml:1534(term)
 msgid "Applicability"
 msgstr "Anvendelsesområde"
 
-#: ../C/gedit.xml:1635(para)
+#: ../C/gedit.xml:1536(para)
 msgid ""
 "Determines which sort of documents can be affected by the command, for "
 "example whether saved or not, and local or remote."
@@ -3210,22 +3055,22 @@ msgstr ""
 "Afgør hvilken slags dokumenter der kan berøres af kommandoen, for eksempel "
 "om filen skal være gemt eller ej, og om den skal være lokal eller ekstern."
 
-#: ../C/gedit.xml:1643(title)
+#: ../C/gedit.xml:1544(title)
 msgid "Editing and Removing Tools"
 msgstr "Redigér og fjern værktøjer"
 
-#: ../C/gedit.xml:1644(para)
+#: ../C/gedit.xml:1545(para)
 msgid ""
 "To edit a tool, select it in the list and make changes to its properties."
 msgstr ""
 "For at redigere et værktøj skal du vælge det i listen og ændre dets "
 "egenskaber."
 
-#: ../C/gedit.xml:1645(para)
+#: ../C/gedit.xml:1546(para)
 msgid "To rename a tool, click it again in the list."
 msgstr "For at omdøbe et værktøj skal du klikke på det igen i listen."
 
-#: ../C/gedit.xml:1646(para)
+#: ../C/gedit.xml:1547(para)
 msgid ""
 "To restore a built-in tool that you have changed, press <guilabel>Revert</"
 "guilabel>."
@@ -3233,7 +3078,7 @@ msgstr ""
 "For at gendanne et indbygget værktøj som du har ændret skal du trykke på "
 "<guilabel>Forkast</guilabel>."
 
-#: ../C/gedit.xml:1647(para)
+#: ../C/gedit.xml:1548(para)
 msgid ""
 "To remove a tool, select it in the list and press <guibutton>Remove</"
 "guibutton>. You can not remove built-in tools, only those you have created "
@@ -3243,11 +3088,11 @@ msgstr ""
 "<guibutton>Fjern</guibutton>. Du kan ikke fjerne indbyggede værktøjer, kun "
 "de som du selv har oprettet."
 
-#: ../C/gedit.xml:1651(title)
+#: ../C/gedit.xml:1552(title)
 msgid "Variables"
 msgstr "Variabler"
 
-#: ../C/gedit.xml:1652(para)
+#: ../C/gedit.xml:1553(para)
 msgid ""
 "You can use the following variables in the <guilabel>Commands</guilabel> "
 "field of the command definition:"
@@ -3255,39 +3100,39 @@ msgstr ""
 "Du kan bruge følgende variabler i  <guilabel>Kommando</guilabel>-feltet i "
 "definitionen af kommandoen:"
 
-#: ../C/gedit.xml:1655(para)
+#: ../C/gedit.xml:1556(para)
 msgid "GEDIT_CURRENT_DOCUMENT_URI"
 msgstr "GEDIT_CURRENT_DOCUMENT_URI"
 
-#: ../C/gedit.xml:1658(para)
+#: ../C/gedit.xml:1559(para)
 msgid "GEDIT_CURRENT_DOCUMENT_NAME"
 msgstr "GEDIT_CURRENT_DOCUMENT_NAME"
 
-#: ../C/gedit.xml:1661(para)
+#: ../C/gedit.xml:1562(para)
 msgid "GEDIT_CURRENT_DOCUMENT_SCHEME"
 msgstr "GEDIT_CURRENT_DOCUMENT_SCHEME"
 
-#: ../C/gedit.xml:1664(para)
+#: ../C/gedit.xml:1565(para)
 msgid "GEDIT_CURRENT_DOCUMENT_PATH"
 msgstr "GEDIT_CURRENT_DOCUMENT_PATH"
 
-#: ../C/gedit.xml:1667(para)
+#: ../C/gedit.xml:1568(para)
 msgid "GEDIT_CURRENT_DOCUMENT_DIR"
 msgstr "GEDIT_CURRENT_DOCUMENT_DIR"
 
-#: ../C/gedit.xml:1670(para)
+#: ../C/gedit.xml:1571(para)
 msgid "GEDIT_DOCUMENTS_URI"
 msgstr "GEDIT_DOCUMENTS_URI"
 
-#: ../C/gedit.xml:1673(para)
+#: ../C/gedit.xml:1574(para)
 msgid "GEDIT_DOCUMENTS_PATH"
 msgstr "GEDIT_DOCUMENTS_PATH"
 
-#: ../C/gedit.xml:1680(title)
+#: ../C/gedit.xml:1581(title)
 msgid "File Browser Plugin"
 msgstr "Udvidelsesmodulet Filvælger"
 
-#: ../C/gedit.xml:1681(para)
+#: ../C/gedit.xml:1582(para)
 msgid ""
 "The <application>File Browser</application> Plugin shows your files and "
 "folders in the side pane, allowing you to quickly open files."
@@ -3295,7 +3140,7 @@ msgstr ""
 "Udvidelsesmodulet <application>Filvælger</application> viser dine filer og "
 "mapper i sidepanelet, hvilket gør at du hurtigt og nemt kan åbne filer."
 
-#: ../C/gedit.xml:1682(para)
+#: ../C/gedit.xml:1583(para)
 msgid ""
 "To view the File Browser, choose <menuchoice><guimenu>View</"
 "guimenu><guimenuitem>Side Pane</guimenuitem></menuchoice> and then click on "
@@ -3305,11 +3150,11 @@ msgstr ""
 "guimenu><guimenuitem>Sidepanel</guimenuitem></menuchoice> og derefter klikke "
 "på fanebladet der viser Filvælger-ikonet i bunden af sidepanelet."
 
-#: ../C/gedit.xml:1684(title)
+#: ../C/gedit.xml:1585(title)
 msgid "Browsing your Files"
 msgstr "Gennemse dine filer"
 
-#: ../C/gedit.xml:1685(para)
+#: ../C/gedit.xml:1586(para)
 msgid ""
 "The File Browser tab initially shows your file manager bookmarks. To browse "
 "the contents of any item, double-click it."
@@ -3317,7 +3162,7 @@ msgstr ""
 "Filvælger-fanebladet viser dine bogmærker fra filhåndtering. For at gennemse "
 "indholdet af et element skal du dobbeltklikke på det."
 
-#: ../C/gedit.xml:1686(para)
+#: ../C/gedit.xml:1587(para)
 msgid ""
 "To show a parent folder, choose from the drop-down list, or press the up "
 "arrow on the File Browser's toolbar."
@@ -3325,7 +3170,7 @@ msgstr ""
 "For at få vist en forældermappe skal du vælge fra rullegardinslisten eller "
 "trykke på op-pilen i filvælgerens værktøjslinje."
 
-#: ../C/gedit.xml:1687(para)
+#: ../C/gedit.xml:1588(para)
 msgid ""
 "To show the folder that contains the document you are currently working on, "
 "right-click in the file list and choose <guimenuitem>Set root to active "
@@ -3335,7 +3180,7 @@ msgstr ""
 "på, skal du højreklikke på filen i listen og vælge <guimenuitem>Sæt rod til "
 "aktive dokument</guimenuitem>."
 
-#: ../C/gedit.xml:1691(para)
+#: ../C/gedit.xml:1592(para)
 msgid ""
 "To open a file in <application>gedit</application>, double-click it in the "
 "file list."
@@ -3343,11 +3188,11 @@ msgstr ""
 "For at åbne en fil i <application>gedit</application> skal du dobbeltklikke "
 "på den i fillisten."
 
-#: ../C/gedit.xml:1694(title)
+#: ../C/gedit.xml:1595(title)
 msgid "Creating Files and Folders"
 msgstr "Opret filer og mapper"
 
-#: ../C/gedit.xml:1695(para)
+#: ../C/gedit.xml:1596(para)
 msgid ""
 "To create a new, empty text file in the current folder shown in the browser, "
 "right-click in the file list and choose <guimenuitem>New File</guimenuitem>."
@@ -3355,7 +3200,7 @@ msgstr ""
 "For at oprette en ny, tom tekstfil i den aktuelle mappe vist i filvælgeren "
 "skal du højreklikke i fillisten og vælge <guimenuitem>Ny fil</guimenuitem>."
 
-#: ../C/gedit.xml:1696(para)
+#: ../C/gedit.xml:1597(para)
 msgid ""
 "To create a new folder in the current folder shown in the browser, right-"
 "click in the file list and choose <guimenuitem>New Folder</guimenuitem>."
@@ -3363,11 +3208,11 @@ msgstr ""
 "For at oprette en ny mappe i den aktuelle mappe vist i filvælgeren skal du "
 "højreklikke i fillisten og vælge <guimenuitem>Ny mappe</guimenuitem>."
 
-#: ../C/gedit.xml:1701(title)
+#: ../C/gedit.xml:1602(title)
 msgid "Indent Lines Plugin"
 msgstr "Udvidelsesmodulet Indryk linjer"
 
-#: ../C/gedit.xml:1702(para)
+#: ../C/gedit.xml:1603(para)
 msgid ""
 "The <application>Indent Lines</application> plugin adds or removes space "
 "from the beginning of lines of text."
@@ -3375,12 +3220,12 @@ msgstr ""
 "Udvidelsesmodulet <application>Indryk linjer</application> tilføjer eller "
 "fjerner mellemrum fra begyndelsen af tekstens linjer."
 
-#: ../C/gedit.xml:1703(para)
+#: ../C/gedit.xml:1604(para)
 msgid "To indent or unindent text, perform the following steps:"
 msgstr ""
 "Udfør følgende skridt for at indrykke eller fjerne indrykning af tekst:"
 
-#: ../C/gedit.xml:1705(para)
+#: ../C/gedit.xml:1606(para)
 msgid ""
 "Select the lines that you want to indent. To indent or unindent a single "
 "line, place the cursor anywhere on that line."
@@ -3389,7 +3234,7 @@ msgstr ""
 "fjerne indrykning for en enkelt linje, kan du placere markøren et sted på "
 "denne linje."
 
-#: ../C/gedit.xml:1710(para)
+#: ../C/gedit.xml:1611(para)
 msgid ""
 "To indent the text, choose <menuchoice><guimenu>Edit</"
 "guimenu><guimenuitem>Indent</guimenuitem></menuchoice>."
@@ -3397,7 +3242,7 @@ msgstr ""
 "Vælg <menuchoice><guimenu>Redigér</guimenu><guimenuitem>Indryk</"
 "guimenuitem></menuchoice> for at indrykke teksten."
 
-#: ../C/gedit.xml:1713(para)
+#: ../C/gedit.xml:1614(para)
 msgid ""
 "To remove the indentation, choose <menuchoice><guimenu>Edit</"
 "guimenu><guimenuitem>Unindent</guimenuitem></menuchoice>."
@@ -3405,7 +3250,7 @@ msgstr ""
 "Vælg <menuchoice><guimenu>Redigér</guimenu><guimenuitem>Fjern indrykning</"
 "guimenuitem></menuchoice> for at fjerne indrykning."
 
-#: ../C/gedit.xml:1718(para)
+#: ../C/gedit.xml:1619(para)
 msgid ""
 "The amount of space used, and whether tab character or space characters are "
 "used, depends on the <guilabel>Tab Stops</guilabel> settings in the Editor "
@@ -3415,11 +3260,11 @@ msgstr ""
 "eller mellemrumstegn, afhænger af indstillingerne <guilabel>Tabulatorstop</"
 "guilabel> i indstillingerne: se <xref linkend=\"gedit-prefs-editor\"/>."
 
-#: ../C/gedit.xml:1723(title)
+#: ../C/gedit.xml:1624(title)
 msgid "Insert Date/Time Plugin"
 msgstr "Udvidelsesmodulet Indsæt dato/tid"
 
-#: ../C/gedit.xml:1724(para)
+#: ../C/gedit.xml:1625(para)
 msgid ""
 "The <application>Insert Date/Time</application> plugin inserts the current "
 "date and time into a document. To use the Insert Date/Time plugin, perform "
@@ -3430,7 +3275,7 @@ msgstr ""
 "Indsæt dato/tid skal du gøre følgende:"
 
 # Kommandoen hedder det inklusive kommaer i gedit
-#: ../C/gedit.xml:1726(para)
+#: ../C/gedit.xml:1627(para)
 msgid ""
 "Choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Insert Date and Time</"
 "guimenuitem></menuchoice>."
@@ -3438,7 +3283,7 @@ msgstr ""
 "Vælg <menuchoice><guimenu>Redigér</guimenu><guimenuitem>Indsæt dato og tid..."
 "</guimenuitem></menuchoice>."
 
-#: ../C/gedit.xml:1727(para)
+#: ../C/gedit.xml:1628(para)
 msgid ""
 "If you have not configured the Insert Date/Time plugin to automatically "
 "insert the date/time without prompting you for the format, "
@@ -3455,7 +3300,7 @@ msgstr ""
 "lukke dialogen <guilabel>Indsæt dato og tid</guilabel>. <application>gedit</"
 "application> indsætter dato/tid ved markørens placering i den aktuelle fil."
 
-#: ../C/gedit.xml:1728(para)
+#: ../C/gedit.xml:1629(para)
 msgid ""
 "If you have configured <application>gedit</application> to use one "
 "particular date/time format, the <guilabel>Insert Date and Time</guilabel> "
@@ -3467,20 +3312,20 @@ msgstr ""
 "guilabel> ikke. Dato/tid indsættes automatisk ved markørens placering i den "
 "aktuelle fil."
 
-#: ../C/gedit.xml:1733(title)
+#: ../C/gedit.xml:1634(title)
 msgid "Configuring the Insert Date/Time Plugin"
 msgstr "Konfiguration af udvidelsesmodulet Indsæt dato/tid"
 
-#: ../C/gedit.xml:1734(para)
+#: ../C/gedit.xml:1635(para)
 msgid "To configure the Insert Date/Time plugin, perform the following steps:"
 msgstr ""
 "For at konfigurere udvidelsesmodulet Indsæt dato/tid skal du gøre følgende:"
 
-#: ../C/gedit.xml:1742(para)
+#: ../C/gedit.xml:1643(para)
 msgid "Select the <guilabel>Insert Date/Time</guilabel> plugin."
 msgstr "Vælg udvidelsesmodulet <guilabel>Indsæt dato/tid</guilabel>."
 
-#: ../C/gedit.xml:1745(para)
+#: ../C/gedit.xml:1646(para)
 msgid ""
 "Click <guibutton>Configure Plugin</guibutton> to display the "
 "<guilabel>Configure insert date/time plugin</guilabel> dialog."
@@ -3488,11 +3333,11 @@ msgstr ""
 "Klik på <guibutton>Konfigurér udvidelsesmodul</guibutton> for at få vist "
 "dialogen <guilabel>Konfigurér indsætning af dato/tid</guilabel>."
 
-#: ../C/gedit.xml:1748(para)
+#: ../C/gedit.xml:1649(para)
 msgid "Select one of the options, as follows:"
 msgstr "Vælg en af følgende muligheder:"
 
-#: ../C/gedit.xml:1750(para)
+#: ../C/gedit.xml:1651(para)
 msgid ""
 "To specify the date/time format each time you insert the date/time, select "
 "the <guilabel>Prompt for a format</guilabel> option."
@@ -3500,7 +3345,7 @@ msgstr ""
 "For at angive dato/tid-formatet hver gang du indsætter dato/tid skal du "
 "vælge <guilabel>Spørg efter et format</guilabel>."
 
-#: ../C/gedit.xml:1753(para)
+#: ../C/gedit.xml:1654(para)
 msgid ""
 "To use the same <application>gedit</application>-provided date/time format "
 "each time you insert the date/time, select the <guilabel>Use the selected "
@@ -3518,7 +3363,7 @@ msgstr ""
 "<menuchoice><guimenu>Redigér</guimenu><guimenuitem>Indsæt dato og tid...</"
 "guimenuitem></menuchoice>."
 
-#: ../C/gedit.xml:1756(para)
+#: ../C/gedit.xml:1657(para)
 msgid ""
 "To use the same customized date/time format each time you insert the date/"
 "time, select the <guilabel>Use custom format</guilabel> option, then enter "
@@ -3540,7 +3385,7 @@ msgstr ""
 "format når du vælger <menuchoice><guimenu>Redigér</"
 "guimenu><guimenuitem>Indsæt dato og tid...</guimenuitem></menuchoice>."
 
-#: ../C/gedit.xml:1761(para)
+#: ../C/gedit.xml:1662(para)
 msgid ""
 "Click <guibutton>OK</guibutton> to close the <guilabel>Configure insert date/"
 "time plugin</guilabel> dialog."
@@ -3548,7 +3393,7 @@ msgstr ""
 "Klik <guibutton>O.k.</guibutton> for at lukke dialogen <guilabel>Konfigurér "
 "indsætning af dato/tid</guilabel>."
 
-#: ../C/gedit.xml:1764(para)
+#: ../C/gedit.xml:1665(para)
 msgid ""
 "To close the <guilabel>Preferences</guilabel> dialog, click "
 "<guibutton>Close</guibutton>."
@@ -3556,11 +3401,11 @@ msgstr ""
 "For at lukke dialogen <guilabel>Indstillinger for gedit</guilabel> skal du "
 "klikke på <guibutton>Luk</guibutton>."
 
-#: ../C/gedit.xml:1771(title)
+#: ../C/gedit.xml:1672(title)
 msgid "Modelines Plugin"
 msgstr "Udvidelsesmodulet Tilstandslinjer"
 
-#: ../C/gedit.xml:1772(para)
+#: ../C/gedit.xml:1673(para)
 msgid ""
 "The <application>Modelines</application> plugin allows you to set "
 "preferences for individual documents. A <firstterm>modeline</firstterm> is a "
@@ -3572,7 +3417,7 @@ msgstr ""
 "firstterm> er en linje af tekst i begyndelsen af dokumentet med "
 "indstillinger, som <application>gedit</application> genkender."
 
-#: ../C/gedit.xml:1773(para)
+#: ../C/gedit.xml:1674(para)
 msgid ""
 "Preferences set using modelines take precedence over the ones specified in "
 "the preference dialog."
@@ -3580,27 +3425,27 @@ msgstr ""
 "Indstillinger, der angives ved hjælp af tilstandslinjer, har præcedens over "
 "dem, der angives i indstillingsdialogen."
 
-#: ../C/gedit.xml:1774(para)
+#: ../C/gedit.xml:1675(para)
 msgid "You can set the following preferences with modelines:"
 msgstr "Du kan angive følgende indstillinger med tilstandslinjer:"
 
-#: ../C/gedit.xml:1777(para)
+#: ../C/gedit.xml:1678(para)
 msgid "Tab width"
 msgstr "Tabulatorbredde"
 
-#: ../C/gedit.xml:1780(para)
+#: ../C/gedit.xml:1681(para)
 msgid "Indent width"
 msgstr "Indrykningsbredde"
 
-#: ../C/gedit.xml:1783(para)
+#: ../C/gedit.xml:1684(para)
 msgid "Insert spaces instead of tabs"
 msgstr "Indsæt mellemrumstegn frem for tabulartortegn"
 
-#: ../C/gedit.xml:1789(para)
+#: ../C/gedit.xml:1690(para)
 msgid "Right margin width"
 msgstr "Bredde af højre margen"
 
-#: ../C/gedit.xml:1793(para)
+#: ../C/gedit.xml:1694(para)
 msgid ""
 "The <application>Modelines</application> plugin supports a subset of the "
 "options used by other text editors <application>Emacs</application>, "
@@ -3611,11 +3456,11 @@ msgstr ""
 "<application>Emacs</application>, <application>Kate</application> og "
 "<application>Vim</application>."
 
-#: ../C/gedit.xml:1796(title)
+#: ../C/gedit.xml:1697(title)
 msgid "Emacs Modelines"
 msgstr "Emacs-tilstandslinjer"
 
-#: ../C/gedit.xml:1797(para)
+#: ../C/gedit.xml:1698(para)
 msgid ""
 "The first two lines of a document are scanned for <application>Emacs</"
 "application> modelines."
@@ -3623,7 +3468,7 @@ msgstr ""
 "De første to linjer af et dokument undersøges for <application>Emacs</"
 "application>-tilstandslinjer."
 
-#: ../C/gedit.xml:1798(para)
+#: ../C/gedit.xml:1699(para)
 msgid ""
 "The <application>Emacs</application> options for tab-width, indent-offset, "
 "indent-tabs-mode and autowrap are supported. For more information, see the "
@@ -3636,11 +3481,11 @@ msgstr ""
 "information findes i <ulink type=\"http\" url=\"http://www.delorie.com/gnu/"
 "docs/emacs/emacs_486.html\">manualen til GNU Emacs</ulink>."
 
-#: ../C/gedit.xml:1801(title)
+#: ../C/gedit.xml:1702(title)
 msgid "Kate Modelines"
 msgstr "Kate-tilstandslinjer"
 
-#: ../C/gedit.xml:1802(para)
+#: ../C/gedit.xml:1703(para)
 msgid ""
 "The first and last ten lines a document are scanned for <application>Kate</"
 "application> modelines."
@@ -3648,7 +3493,7 @@ msgstr ""
 "De første og sidste to linjer i et dokument undersøges efter "
 "<application>Kate</application>-tilstandslinjer."
 
-#: ../C/gedit.xml:1803(para)
+#: ../C/gedit.xml:1704(para)
 msgid ""
 "The <application>Kate</application> options for tab-width, indent-width, "
 "space-indent, word-wrap and word-wrap-column are supported. For more "
@@ -3662,11 +3507,11 @@ msgstr ""
 "\"http://www.kate-editor.org/article/katepart_modelines\\\">websiden for "
 "Kate</ulink>."
 
-#: ../C/gedit.xml:1806(title)
+#: ../C/gedit.xml:1707(title)
 msgid "Vim Modelines"
 msgstr "Vim-tilstandslinjer"
 
-#: ../C/gedit.xml:1807(para)
+#: ../C/gedit.xml:1708(para)
 msgid ""
 "The first and last three lines a document are scanned for <application>Vim</"
 "application> modelines."
@@ -3674,7 +3519,7 @@ msgstr ""
 "De første og sidste tre linjer af et dokument undersøges for "
 "<application>Vim</application>-tilstandslinjer."
 
-#: ../C/gedit.xml:1808(para)
+#: ../C/gedit.xml:1709(para)
 msgid ""
 "The <application>Vim</application> options for et, expandtab, ts, tabstop, "
 "sw, shiftwidth, wrap, and textwidth are supported. For more information, see "
@@ -3686,11 +3531,11 @@ msgstr ""
 "information kan findes på <ulink type=\"http\" url=\"http://vimdoc."
 "sourceforge.net/htmldoc/options.html#modeline\">websiden for Vim</ulink>."
 
-#: ../C/gedit.xml:1813(title)
+#: ../C/gedit.xml:1714(title)
 msgid "Python Console Plugin"
 msgstr "Udvidelsesmodulet Python-konsol"
 
-#: ../C/gedit.xml:1814(para)
+#: ../C/gedit.xml:1715(para)
 msgid ""
 "The <application>Python Console</application> Plugin allows you to run "
 "commands in the python programming language from <application>gedit</"
@@ -3702,7 +3547,7 @@ msgstr ""
 "application>. Når dette udvidelsesmodul aktiveres, føjes et faneblad til "
 "bundpanelet. Dette viser den seneste udskrift og et kommandoindtastningsfelt."
 
-#: ../C/gedit.xml:1815(para)
+#: ../C/gedit.xml:1716(para)
 msgid ""
 "Commands entered into the python console are not checked before they are "
 "run. It is therefore possible to hang <application>gedit</application>, for "
@@ -3712,11 +3557,11 @@ msgstr ""
 "Det er derfor muligt at få <application>gedit</application> til at gå i stå "
 "ved, for eksempel, at indtaste en uendelig løkke."
 
-#: ../C/gedit.xml:1819(title)
+#: ../C/gedit.xml:1720(title)
 msgid "Snippets Plugin"
 msgstr "Udvidelsesmodulet Tekststumper"
 
-#: ../C/gedit.xml:1820(para)
+#: ../C/gedit.xml:1721(para)
 msgid ""
 "The <application>Snippets</application> plugin allows you to store "
 "frequently-used pieces of text, called <firstterm>snippets</firstterm>, and "
@@ -3726,7 +3571,7 @@ msgstr ""
 "ofte brugte bidder af tekst, kaldet <firstterm>tekststumper</firstterm>, og "
 "indsætte dem hurtigt i et dokument."
 
-#: ../C/gedit.xml:1821(para)
+#: ../C/gedit.xml:1722(para)
 msgid ""
 "Snippets are specific to the language syntax of the current document. For "
 "example, when you are working with an HTML document, you can choose from a "
@@ -3738,7 +3583,7 @@ msgstr ""
 "tekststumper, som er nyttige til HTML. Ydermere er visse tekststumper "
 "globale, således at de er tilgængelige i alle dokumenter."
 
-#: ../C/gedit.xml:1822(para)
+#: ../C/gedit.xml:1723(para)
 msgid ""
 "A number of built-in snippets are installed with <application>gedit</"
 "application>, which can be modified."
@@ -3746,11 +3591,11 @@ msgstr ""
 "En samling af indbyggede tekststumper installeres sammen med "
 "<application>gedit</application>, og kan redigeres."
 
-#: ../C/gedit.xml:1825(title)
+#: ../C/gedit.xml:1726(title)
 msgid "Inserting Snippets"
 msgstr "Indsættelse af tekststumper"
 
-#: ../C/gedit.xml:1826(para)
+#: ../C/gedit.xml:1727(para)
 msgid ""
 "To insert a snippet into a document, type its <firstterm>tab trigger</"
 "firstterm> and press <keycap>Tab</keycap>. A snippet's tab trigger is "
@@ -3763,7 +3608,7 @@ msgstr ""
 "bogstaver i tekststumpen, eller noget tilsvarende som er kort og nemt at "
 "huske."
 
-#: ../C/gedit.xml:1827(para)
+#: ../C/gedit.xml:1728(para)
 msgid ""
 "Alternatively, press <keycombo><keycap>Ctrl</keycap><keycap>Space</keycap></"
 "keycombo> to see a list of snippets you can insert."
@@ -3772,15 +3617,15 @@ msgstr ""
 "keycap><keycap>Mellemrumstast</keycap></keycombo> for at se en liste af "
 "tekststumper, som kan indsættes."
 
-#: ../C/gedit.xml:1831(title)
+#: ../C/gedit.xml:1732(title)
 msgid "Adding Snippets"
 msgstr "Tilføjelse af tekststumper"
 
-#: ../C/gedit.xml:1832(para)
+#: ../C/gedit.xml:1733(para)
 msgid "To create a new snippet, do the following:"
 msgstr "Gør følgende for at oprette en ny tekststump:"
 
-#: ../C/gedit.xml:1835(para)
+#: ../C/gedit.xml:1736(para)
 msgid ""
 "Choose <menuchoice><guimenu>Tools</guimenu><guimenuitem>Manage Snippets</"
 "guimenuitem></menuchoice>. The <guilabel>Snippets Manager</guilabel> window "
@@ -3790,7 +3635,7 @@ msgstr ""
 "tekststumper</guimenuitem></menuchoice>. Vinduet <guilabel>Tekststumper</"
 "guilabel> åbnes."
 
-#: ../C/gedit.xml:1838(para)
+#: ../C/gedit.xml:1739(para)
 msgid ""
 "The list of snippets is grouped by language. Select the language you want to "
 "add a snippet to, or a snippet in that language group. To add a snippet for "
@@ -3802,20 +3647,20 @@ msgstr ""
 "tilføje en tekststump for alle sprog, så vælg Global øverst på listen. "
 "Syntaksen for dokumentet, du i øjeblikket arbejder med, vises som standard."
 
-#: ../C/gedit.xml:1841(para)
+#: ../C/gedit.xml:1742(para)
 msgid "Click <guibutton>New</guibutton>. A new snippet appears in the list."
 msgstr ""
 "Klik på <guibutton>Ny</guibutton>. En ny tekststump vil dukke op i listen."
 
-#: ../C/gedit.xml:1844(para)
+#: ../C/gedit.xml:1745(para)
 msgid "Enter the following information for the new snippet:"
 msgstr "Indtast følgende information for den nye tekststump:"
 
-#: ../C/gedit.xml:1846(term)
+#: ../C/gedit.xml:1747(term)
 msgid "Name"
 msgstr "Navn"
 
-#: ../C/gedit.xml:1848(para)
+#: ../C/gedit.xml:1749(para)
 msgid ""
 "Enter a name for the snippet in the text field within the snippet list. The "
 "name of a snippet serves only as a reminder of its purpose. You can change "
@@ -3826,12 +3671,12 @@ msgstr ""
 "formål. Du kan ændre navnet på en tekststump som du opretter, ved at klikke "
 "på det i listen."
 
-#: ../C/gedit.xml:1851(term)
+#: ../C/gedit.xml:1752(term)
 msgid "Snippet text"
 msgstr "Tekststump"
 
 # Der er ingen komponent med teksten Edit snippet, men Redigér henviser til teksten for en streng i gedit som henvises fra en kildefil snippets-mappen
-#: ../C/gedit.xml:1853(para)
+#: ../C/gedit.xml:1754(para)
 msgid ""
 "Enter the text of the snippet in the <guilabel>Edit snippet</guilabel> text "
 "box. For special codes you can use, see <xref linkend=\"gedit-snippets-"
@@ -3841,7 +3686,7 @@ msgstr ""
 "Du kan her anvende specielle koder - se <xref linkend=\"gedit-snippets-"
 "plugin-syntax\"/>."
 
-#: ../C/gedit.xml:1854(para)
+#: ../C/gedit.xml:1755(para)
 msgid ""
 "You can switch back to the document window to copy text without closing the "
 "<guilabel>Snippets Manager</guilabel> window."
@@ -3849,11 +3694,11 @@ msgstr ""
 "Du kan skifte tilbage til dokumentvinduet og kopiere teksten uden at lukke "
 "<guilabel>Tekststumper</guilabel>-vinduet."
 
-#: ../C/gedit.xml:1857(term)
+#: ../C/gedit.xml:1758(term)
 msgid "Tab Trigger"
 msgstr "Tabulator-udløser"
 
-#: ../C/gedit.xml:1859(para)
+#: ../C/gedit.xml:1760(para)
 msgid ""
 "Enter the tab trigger for the snippet. This is the text that you type before "
 "pressing <keycap>Tab</keycap> to insert the snippet."
@@ -3862,7 +3707,7 @@ msgstr ""
 "skrive før du trykker <keycap>Tabulatortest</keycap> for at indsætte "
 "tekststumpen."
 
-#: ../C/gedit.xml:1860(para)
+#: ../C/gedit.xml:1761(para)
 msgid ""
 "The tag must be either a single word comprising only letters, or any single "
 "character. The <guilabel>Tab trigger</guilabel> will highlight in red if an "
@@ -3872,19 +3717,19 @@ msgstr ""
 "enkelt tegn. <guilabel>Tabulator-udløser</guilabel> vil blive fremhævet med "
 "rødt hvis en ugyldig tabulator-udløser anføres."
 
-#: ../C/gedit.xml:1863(term)
+#: ../C/gedit.xml:1764(term)
 msgid "Shortcut key"
 msgstr "Genvejstast"
 
-#: ../C/gedit.xml:1865(para)
+#: ../C/gedit.xml:1766(para)
 msgid "Type a shortcut key to use for inserting the snippet."
 msgstr "Tryk på en genvejstast der skal bruges til at indsætte tekststumpen."
 
-#: ../C/gedit.xml:1874(title)
+#: ../C/gedit.xml:1775(title)
 msgid "Editing and Removing Snippets"
 msgstr "Redigér og fjern tekststumper"
 
-#: ../C/gedit.xml:1875(para)
+#: ../C/gedit.xml:1776(para)
 msgid ""
 "To edit a snippet, select it in the list and make changes to its text and "
 "activation properties."
@@ -3892,12 +3737,12 @@ msgstr ""
 "Ønsker du at redigere en tekststump, så vælg den i listen og foretag "
 "ændringer i dens tekst og aktiveringsegenskaber."
 
-#: ../C/gedit.xml:1876(para)
+#: ../C/gedit.xml:1777(para)
 msgid "To rename a snippet, click it again in the list."
 msgstr "Klik på tekststumpen igen i listen for at omdøbe den."
 
 # Engelske tekst findes ikke i po-filen, har valgt mest sandsynlige oversættelse
-#: ../C/gedit.xml:1877(para)
+#: ../C/gedit.xml:1778(para)
 msgid ""
 "To restore a built-in snippet that you have changed, press <guilabel>Revert</"
 "guilabel>."
@@ -3905,7 +3750,7 @@ msgstr ""
 "Du kan trykke <guilabel>Gendan den markerede tekststump</guilabel> for at "
 "gendanne en indbygget tekststump, du har redigeret."
 
-#: ../C/gedit.xml:1878(para)
+#: ../C/gedit.xml:1779(para)
 msgid ""
 "To remove a snippet, select it in the list and press <guibutton>Remove</"
 "guibutton>. You can not remove built-in snippets, only those you have "
@@ -3915,11 +3760,11 @@ msgstr ""
 "guibutton>. Du kan ikke fjerne indbyggede tekststumper, men kun dem som du "
 "selv har oprettet."
 
-#: ../C/gedit.xml:1882(title)
+#: ../C/gedit.xml:1783(title)
 msgid "Snippet Substitutions"
 msgstr "Substitution i tekststumper"
 
-#: ../C/gedit.xml:1883(para)
+#: ../C/gedit.xml:1784(para)
 msgid ""
 "In addition to inserting stored text, a snippet can include customizable "
 "text, or mark spaces where you can add text once the snippet is inserted in "
@@ -3929,15 +3774,15 @@ msgstr ""
 "redigerbar tekst, eller markere steder hvor du kan tilføje tekst når først "
 "tekstbidden er indsat i dit dokument."
 
-#: ../C/gedit.xml:1887(para)
+#: ../C/gedit.xml:1788(para)
 msgid "You can use the following placeholder codes in snippet text:"
 msgstr "Du kan anvende følgende substitutionskoder i tekststumpen:"
 
-#: ../C/gedit.xml:1889(term)
+#: ../C/gedit.xml:1790(term)
 msgid "Tab placeholders"
 msgstr "Tabulatorsubstitutioner"
 
-#: ../C/gedit.xml:1891(para)
+#: ../C/gedit.xml:1792(para)
 msgid ""
 "<literal>$<replaceable>n</replaceable></literal> defines a tab placeholder, "
 "where <literal>n</literal> is any number from 1 upwards."
@@ -3946,7 +3791,7 @@ msgstr ""
 "tabulatorsubstitution, hvor <literal>n</literal> er et tal større end eller "
 "lig med 1."
 
-#: ../C/gedit.xml:1892(para)
+#: ../C/gedit.xml:1793(para)
 msgid ""
 "<literal>${<replaceable>n</replaceable>:<replaceable>default</replaceable>}</"
 "literal> defines a tab placeholder with a default value."
@@ -3955,7 +3800,7 @@ msgstr ""
 "replaceable>}</literal> definerer en tabulatorsubstitution med en "
 "standardværdi."
 
-#: ../C/gedit.xml:1893(para)
+#: ../C/gedit.xml:1794(para)
 msgid ""
 "A tab placeholder marks a place in the snippet text where you can add extra "
 "text after the snippet is inserted."
@@ -3963,7 +3808,7 @@ msgstr ""
 "En tabulatorsubstitution markerer et sted i tekststumpen hvor du kan tilføje "
 "ekstra tekst efter at stumpen er indsat."
 
-#: ../C/gedit.xml:1894(para)
+#: ../C/gedit.xml:1795(para)
 msgid ""
 "To use tab placeholders, insert the snippet as normal. The cursor is placed "
 "at the first tab placeholder. Type text, and press <keycap>Tab</keycap> to "
@@ -3975,7 +3820,7 @@ msgstr ""
 "Tallet i substitutionskoden angiver rækkefølgen hvori der med tabulatortast "
 "navigeres mellem hver af substitutionsstederne i teksten."
 
-#: ../C/gedit.xml:1895(para)
+#: ../C/gedit.xml:1796(para)
 msgid ""
 "Press <keycombo><keycap>Shift</keycap><keycap>Tab</keycap></keycombo> to "
 "return to the previous tab placeholder. Pressing <keycap>Tab</keycap> when "
@@ -3988,11 +3833,11 @@ msgstr ""
 "flyttes markøren til slutningen af tekststumpen, eller til sidste "
 "substitutionssted, hvis det findes."
 
-#: ../C/gedit.xml:1898(term)
+#: ../C/gedit.xml:1799(term)
 msgid "Mirror placeholders"
 msgstr "Klonsubstitutioner"
 
-#: ../C/gedit.xml:1900(para)
+#: ../C/gedit.xml:1801(para)
 msgid ""
 "A repeated tab placeholder will mirror the placeholder already defined. This "
 "allows you to type in text only once that you want to appear several times "
@@ -4002,11 +3847,11 @@ msgstr ""
 "defineret. Dette tillader dig, kun at skrive et stykke tekst en enkelt gang, "
 "selvom du vil have den inkluderet flere gange i tekststumpen."
 
-#: ../C/gedit.xml:1903(term)
+#: ../C/gedit.xml:1804(term)
 msgid "End placeholder"
 msgstr "Slutsubstitution"
 
-#: ../C/gedit.xml:1905(para)
+#: ../C/gedit.xml:1806(para)
 msgid ""
 "<literal>$0</literal> defines the end placeholder. This allows you to finish "
 "working with the snippet with the cursor at a point other than the end of "
@@ -4016,11 +3861,11 @@ msgstr ""
 "afslutte behandlingen af en tekststump således at markøren vil være på et "
 "andet punkt end slutningen af tekststumpen."
 
-#: ../C/gedit.xml:1908(term)
+#: ../C/gedit.xml:1809(term)
 msgid "Environmental variables"
 msgstr "Miljøvariable"
 
-#: ../C/gedit.xml:1910(para)
+#: ../C/gedit.xml:1811(para)
 msgid ""
 "Environmental variable such as <literal>$PATH</literal> and <literal>$HOME</"
 "literal> are substituted in snippet text. The following variables specific "
@@ -4030,19 +3875,19 @@ msgstr ""
 "substitueres i tekststumpen. Specielt kan der i <application>gedit</"
 "application> også anvendes følgende variable:"
 
-#: ../C/gedit.xml:1912(term)
+#: ../C/gedit.xml:1813(term)
 msgid "$GEDIT_SELECTED_TEXT"
 msgstr "$GEDIT_SELECTED_TEXT"
 
-#: ../C/gedit.xml:1914(para)
+#: ../C/gedit.xml:1815(para)
 msgid "The currently selected text."
 msgstr "Den aktuelt markerede tekst."
 
-#: ../C/gedit.xml:1917(term)
+#: ../C/gedit.xml:1818(term)
 msgid "$GEDIT_FILENAME"
 msgstr "$GEDIT_FILENAME"
 
-#: ../C/gedit.xml:1919(para)
+#: ../C/gedit.xml:1820(para)
 msgid ""
 "The full filename of the document, or an empty string if the document isn't "
 "saved yet."
@@ -4050,11 +3895,11 @@ msgstr ""
 "Det fulde filnavn på dokumentet, eller en tom streng hvis dokumentet endnu "
 "ikke er blevet gemt."
 
-#: ../C/gedit.xml:1922(term)
+#: ../C/gedit.xml:1823(term)
 msgid "$GEDIT_BASENAME"
 msgstr "$GEDIT_BASENAME"
 
-#: ../C/gedit.xml:1924(para)
+#: ../C/gedit.xml:1825(para)
 msgid ""
 "The basename of the filename of the document, or an empty string if the "
 "document isn't saved yet."
@@ -4062,12 +3907,12 @@ msgstr ""
 "Filnavnets basenavn, eller en tom streng hvis dokumentet endnu ikke blevet "
 "gemt."
 
-#: ../C/gedit.xml:1927(term)
+#: ../C/gedit.xml:1828(term)
 msgid "$GEDIT_CURRENT_WORD"
 msgstr "$GEDIT_CURRENT_WORD"
 
 # Mystisk, dette lyder lidt omvendt
-#: ../C/gedit.xml:1929(para)
+#: ../C/gedit.xml:1830(para)
 msgid ""
 "The word at the cursor's location in the document. When this variable is "
 "used, the current word will be replaced by the snippet text."
@@ -4075,11 +3920,11 @@ msgstr ""
 "Ordet ved markørens placering i dokumentet. Når denne variabel bruges, "
 "erstattes det aktuelle ord med tekststumpen."
 
-#: ../C/gedit.xml:1937(term)
+#: ../C/gedit.xml:1838(term)
 msgid "Shell placeholders"
 msgstr "Skalsubstitutioner"
 
-#: ../C/gedit.xml:1939(para)
+#: ../C/gedit.xml:1840(para)
 msgid ""
 "<literal>$(<replaceable>cmd</replaceable>)</literal> is replaced by the "
 "result of executing <replaceable>cmd</replaceable> in a shell."
@@ -4088,7 +3933,7 @@ msgstr ""
 "resultatet af udførelsen af kommandoen <replaceable>kmd</replaceable> i en "
 "skal."
 
-#: ../C/gedit.xml:1940(para)
+#: ../C/gedit.xml:1841(para)
 msgid ""
 "<literal>$(<replaceable>n</replaceable>:<replaceable>cmd</replaceable>)</"
 "literal> allows you to give this placeholder a reference, where "
@@ -4102,11 +3947,11 @@ msgstr ""
 "<literal>$<replaceable>n</replaceable></literal> for at anvende uddata fra "
 "en skalsubstitution som inddata til en anden."
 
-#: ../C/gedit.xml:1943(term)
+#: ../C/gedit.xml:1844(term)
 msgid "Python placeholders"
 msgstr "Pythonsubstitutioner"
 
-#: ../C/gedit.xml:1945(para)
+#: ../C/gedit.xml:1846(para)
 msgid ""
 "<literal>$&lt;<replaceable>cmd</replaceable>&gt;</literal> is replaced by "
 "the result of evaluating <replaceable>cmd</replaceable> in the python "
@@ -4116,7 +3961,7 @@ msgstr ""
 "af resultatet af evaluering af <replaceable>cmd</replaceable> i python-"
 "fortolkeren."
 
-#: ../C/gedit.xml:1946(para)
+#: ../C/gedit.xml:1847(para)
 msgid ""
 "<literal>$&lt;<replaceable>a</replaceable>:<replaceable>cmd</replaceable>&gt;"
 "</literal> specifies another python placeholder as a dependency, where "
@@ -4134,7 +3979,7 @@ msgstr ""
 "$&lt;<replaceable>a</replaceable>,<replaceable>b</replaceable>:"
 "<replaceable>kmd</replaceable>&gt;</literal>"
 
-#: ../C/gedit.xml:1947(para)
+#: ../C/gedit.xml:1848(para)
 msgid ""
 "To use a variable in all other python snippets, declare it as "
 "<literal>global</literal>."
@@ -4142,11 +3987,11 @@ msgstr ""
 "Erklær en variabel som <literal>global</literal> for at bruge den i alle "
 "andre Python-tekststumper."
 
-#: ../C/gedit.xml:1956(title)
+#: ../C/gedit.xml:1857(title)
 msgid "Sort Plugin"
 msgstr "Udvidelsesmodulet Sortering"
 
-#: ../C/gedit.xml:1957(para)
+#: ../C/gedit.xml:1858(para)
 msgid ""
 "The <application>Sort</application> plugin arranges selected lines of text "
 "into alphabetical order."
@@ -4154,7 +3999,7 @@ msgstr ""
 "Udvidelsesmodulet <application>Sortering</application> sorterer markerede "
 "linjer af tekst i alfabetisk orden."
 
-#: ../C/gedit.xml:1958(para)
+#: ../C/gedit.xml:1859(para)
 msgid ""
 "You cannot undo the Sort operation, so you should save the file before "
 "performing the sort. To revert to the saved version of the file after the "
@@ -4166,15 +4011,15 @@ msgstr ""
 "sorteringsoperation, kan du vælge <menuchoice><guimenu>Fil</"
 "guimenu><guimenuitem>Forkast</guimenuitem></menuchoice>."
 
-#: ../C/gedit.xml:1961(para)
+#: ../C/gedit.xml:1862(para)
 msgid "To use the Sort plugin, perform the following steps:"
 msgstr "Udfør følgende trin for at anvende udvidelsesmodulet Sortering:"
 
-#: ../C/gedit.xml:1964(para)
+#: ../C/gedit.xml:1865(para)
 msgid "Select the lines of text you want to sort."
 msgstr "Vælg linjerne som du ønsker at sortere."
 
-#: ../C/gedit.xml:1966(para)
+#: ../C/gedit.xml:1867(para)
 msgid ""
 "Choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Sort</guimenuitem></"
 "menuchoice>. The <guilabel>Sort</guilabel> dialog opens."
@@ -4182,11 +4027,11 @@ msgstr ""
 "Vælg <menuchoice><guimenu>Redigér</guimenu><guimenuitem>Sortér</"
 "guimenuitem></menuchoice>. <Sortér>-dialogen vil blive åbnet."
 
-#: ../C/gedit.xml:1969(para)
+#: ../C/gedit.xml:1870(para)
 msgid "Choose the options you want for the sort:"
 msgstr "Vælg indstillinger for sorteringen:"
 
-#: ../C/gedit.xml:1972(para)
+#: ../C/gedit.xml:1873(para)
 msgid ""
 "To arrange the text in reverse order, select <guilabel>Reverse order</"
 "guilabel>."
@@ -4194,19 +4039,19 @@ msgstr ""
 "Vælg <guilabel>Omvendt orden</guilabel> for at sortere teksten i omvendt "
 "rækkefølge."
 
-#: ../C/gedit.xml:1975(para)
+#: ../C/gedit.xml:1876(para)
 msgid ""
 "To delete duplicate lines, select <guilabel>Remove duplicates</guilabel>."
 msgstr ""
 "Vælg <guilabel>Fjern dupletter</guilabel> for at fjerne linjer, der "
 "forekommer mere end en gang."
 
-#: ../C/gedit.xml:1978(para)
+#: ../C/gedit.xml:1879(para)
 msgid "To ignore case sensitivity, select <guilabel>Ignore case</guilabel>."
 msgstr ""
 "Du kan eventuelt vælge <guilabel>Ignorér store/små bogstaver</guilabel>."
 
-#: ../C/gedit.xml:1981(para)
+#: ../C/gedit.xml:1882(para)
 msgid ""
 "To have the sort ignore the characters at the start of the lines, set the "
 "first character that should be used for sorting in the <guilabel>Start at "
@@ -4216,16 +4061,16 @@ msgstr ""
 "gøres ved at angive kolonnenummeret på det første tegn der skal indgå i "
 "sorteringen i <guilabel>Begynd ved kolonne</guilabel>-rulleknappen."
 
-#: ../C/gedit.xml:1986(para)
+#: ../C/gedit.xml:1887(para)
 msgid "To perform the sort operation, click <guibutton>Sort</guibutton>."
 msgstr ""
 "Klik på <guibutton>Sortér</guibutton> for at udføre sorteringsoperationen."
 
-#: ../C/gedit.xml:1993(title)
+#: ../C/gedit.xml:1894(title)
 msgid "Spell Checker Plugin"
 msgstr "Udvidelsesmodulet Stavekontrol"
 
-#: ../C/gedit.xml:1994(para)
+#: ../C/gedit.xml:1895(para)
 msgid ""
 "The <application>Spell Checker</application> plugin checks the spelling in "
 "the selected text. You can configure <application>gedit</application> to "
@@ -4241,7 +4086,7 @@ msgstr ""
 "autokontrolegenskaberne gælder dokumentvis. For at bruge udvidelsesmodulet "
 "Stavekontrol, skal du gøre følgende:"
 
-#: ../C/gedit.xml:1996(para)
+#: ../C/gedit.xml:1897(para)
 msgid ""
 "Choose <menuchoice><guimenu>Tools</guimenu><guimenuitem>Set Language</"
 "guimenuitem></menuchoice> to display the <guilabel>Set language</guilabel> "
@@ -4253,7 +4098,7 @@ msgstr ""
 "guilabel>. Vælg så det ønskede sprog fra listen. Klik på <guibutton>O.k.</"
 "guibutton> for at lukke dialogen igen."
 
-#: ../C/gedit.xml:1999(para)
+#: ../C/gedit.xml:1900(para)
 msgid ""
 "To check the spelling automatically, choose <menuchoice><guimenu>Tools</"
 "guimenu><guimenuitem>Autocheck Spelling</guimenuitem></menuchoice>. To unset "
@@ -4274,7 +4119,7 @@ msgstr ""
 "stavekontrol er som standard slået fra når <application>gedit</application> "
 "startes."
 
-#: ../C/gedit.xml:2000(para)
+#: ../C/gedit.xml:1901(para)
 msgid ""
 "Unknown spellings are displayed in a different color, and underlined. Right-"
 "click on an unknown spelling, then select <guimenu>Spelling Suggestions</"
@@ -4284,7 +4129,7 @@ msgstr ""
 "ukendt stavemåde, og vælg så <guimenu>Stavningsforslag</guimenu> fra popup-"
 "menuen:"
 
-#: ../C/gedit.xml:2003(para)
+#: ../C/gedit.xml:1904(para)
 msgid ""
 "To replace the unknown spelling with another spelling in the list, select "
 "the replacement spelling from the <guimenu>Spelling Suggestions</guimenu> "
@@ -4293,7 +4138,7 @@ msgstr ""
 "For at erstatte den ukendte stavemåde med en anden stavemåde i listen, skal "
 "du vælge stavemåden i popup-menuen <guimenu>Stavningsforslag</guimenu>."
 
-#: ../C/gedit.xml:2006(para)
+#: ../C/gedit.xml:1907(para)
 msgid ""
 "To add the unknown spelling to your personal dictionary, select "
 "<menuchoice><guimenu>Spelling Suggestions</guimenu><guimenuitem>Add</"
@@ -4303,7 +4148,7 @@ msgstr ""
 "guimenuitem></menuchoice> for at tilføje den ukendte stavemåde til din "
 "personlige ordbog."
 
-#: ../C/gedit.xml:2009(para)
+#: ../C/gedit.xml:1910(para)
 msgid ""
 "To ignore all occurrences of the unknown spelling, so that they are no "
 "longer flagged as unknown but are not added to your personal dictionary, "
@@ -4318,7 +4163,7 @@ msgstr ""
 "ord vil så kun blive ignoreret i den aktuelle <application>gedit</"
 "application>-session."
 
-#: ../C/gedit.xml:2014(para)
+#: ../C/gedit.xml:1915(para)
 msgid ""
 "To check the spelling manually, choose <menuchoice><guimenu>Tools</"
 "guimenu><guimenuitem>Check Spelling</guimenuitem></menuchoice>."
@@ -4326,7 +4171,7 @@ msgstr ""
 "Vælg <menuchoice><guimenu>Værktøjer</guimenu><guimenuitem>Kontrollér "
 "stavning</guimenuitem></menuchoice> for at kontrollere stavningen manuelt."
 
-#: ../C/gedit.xml:2016(para)
+#: ../C/gedit.xml:1917(para)
 msgid ""
 "If there are no spelling errors, an <guilabel>Information</guilabel> dialog "
 "displays a message stating that the document does not contain misspelled "
@@ -4338,7 +4183,7 @@ msgstr ""
 "stavede ord. Klik <guibutton>O.k.</guibutton> for at lukke "
 "<guilabel>Information</guilabel>-dialogen."
 
-#: ../C/gedit.xml:2018(para)
+#: ../C/gedit.xml:1919(para)
 msgid ""
 "If there are spelling errors, the <guilabel>Check Spelling</guilabel> dialog "
 "is displayed:"
@@ -4346,13 +4191,13 @@ msgstr ""
 "Hvis der er stavefejl, vil dialogen <guilabel>Kontrollér stavning</guilabel> "
 "blive vist:"
 
-#: ../C/gedit.xml:2021(para)
+#: ../C/gedit.xml:1922(para)
 msgid ""
 "The <guilabel>Misspelled word</guilabel> is displayed at the top of the "
 "dialog."
 msgstr "<guilabel>Forkert stavet ord</guilabel> vises øverst i dialogen."
 
-#: ../C/gedit.xml:2024(para)
+#: ../C/gedit.xml:1925(para)
 msgid ""
 "A suggested known spelling is displayed in the <guilabel>Change to</"
 "guilabel> text box. You can replace this with another known spelling by "
@@ -4364,7 +4209,7 @@ msgstr ""
 "stavemåden fra listen <guilabel>Forslag</guilabel>, eller du kan indtaste "
 "teksten direkte i <guilabel>Ret til</guilabel>-tekstfeltet."
 
-#: ../C/gedit.xml:2027(para)
+#: ../C/gedit.xml:1928(para)
 msgid ""
 "To check the spelling of the text in the <guilabel>Change to</guilabel> text "
 "box, click <guibutton>Check Word</guibutton>. If this is a known word, the "
@@ -4378,7 +4223,7 @@ msgstr ""
 "<literal>(korrekt stavning)</literal>. Hvis ordet ikke kendes, vil nye ord "
 "dukke op i <guilabel>Forslag</guilabel>-listen."
 
-#: ../C/gedit.xml:2030(para)
+#: ../C/gedit.xml:1931(para)
 msgid ""
 "To ignore the current occurrence of the unknown word, click "
 "<guibutton>Ignore</guibutton>. To ignore all occurrences of the unknown "
@@ -4390,7 +4235,7 @@ msgstr ""
 "for at ignorere alle forekomster af det ukendte ord. Det ukendte ord vil så "
 "blive ignoreret i den aktuelle <application>gedit</application>-session."
 
-#: ../C/gedit.xml:2033(para)
+#: ../C/gedit.xml:1934(para)
 msgid ""
 "To change the current occurrence of the unknown word to the text in the "
 "<guilabel>Change to</guilabel> text box, click <guibutton>Change</"
@@ -4403,7 +4248,7 @@ msgstr ""
 "på <guibutton>Ret alle</guibutton> for at ændre alle forekomster af det "
 "ukendte ord til teksten i <guilabel>Ret til</guilabel>-tekstfeltet."
 
-#: ../C/gedit.xml:2036(para)
+#: ../C/gedit.xml:1937(para)
 msgid ""
 "To add the unknown word to your personal dictionary, click <guibutton>Add "
 "word</guibutton>."
@@ -4411,7 +4256,7 @@ msgstr ""
 "Klik på <guibutton>Tilføj ord</guibutton> for at føje det ukendte ord til "
 "din personlige ordbog."
 
-#: ../C/gedit.xml:2039(para)
+#: ../C/gedit.xml:1940(para)
 msgid ""
 "To close the <guilabel>Check Spelling</guilabel> dialog, click "
 "<guibutton>Close</guibutton>."
@@ -4419,11 +4264,11 @@ msgstr ""
 "Klik på <guibutton>Luk</guibutton> for at lukke dialogen "
 "<guilabel>Kontrollér stavning</guibutton>."
 
-#: ../C/gedit.xml:2048(title)
+#: ../C/gedit.xml:1949(title)
 msgid "Tag List Plugin"
 msgstr "Udvidelsesmodulet Mærkelister"
 
-#: ../C/gedit.xml:2049(para)
+#: ../C/gedit.xml:1950(para)
 msgid ""
 "The <application>Tag List</application> plugin allows you to insert common "
 "tags from a list in the side pane."
@@ -4431,11 +4276,11 @@ msgstr ""
 "Udvidelsesmodulet <application>Mærkeliste</application> lader dig indsætte "
 "almindelige mærker fra en liste i sidepanelet."
 
-#: ../C/gedit.xml:2050(para)
+#: ../C/gedit.xml:1951(para)
 msgid "To use the Tag List plugin, perform the following steps:"
 msgstr "For at bruge udvidelsesmodulet Mærkeliste, skal du gøre som følger:"
 
-#: ../C/gedit.xml:2052(para)
+#: ../C/gedit.xml:1953(para)
 msgid ""
 "Choose <menuchoice><guimenu>View</guimenu><guimenuitem>Side Pane</"
 "guimenuitem></menuchoice>."
@@ -4443,7 +4288,7 @@ msgstr ""
 "Vælg <menuchoice><guimenu>Vis</guimenu><guimenuitem>Sidepanel</guimenuitem></"
 "menuchoice>."
 
-#: ../C/gedit.xml:2056(para)
+#: ../C/gedit.xml:1957(para)
 msgid ""
 "By default, the side pane shows a tab containing a list of open documents. "
 "Click on the tab showing a + icon at the bottom of the side pane to show the "
@@ -4453,7 +4298,7 @@ msgstr ""
 "åbne dokumenter. Klik på fanebladet, der viser symbolet + i bunden af "
 "sidepanelet for at vise fanebladet for mærkelister."
 
-#: ../C/gedit.xml:2058(para)
+#: ../C/gedit.xml:1959(para)
 msgid ""
 "Select the appropriate tag category from the drop-down list. For example, "
 "<guilabel>HTML - Tags</guilabel>."
@@ -4461,11 +4306,11 @@ msgstr ""
 "Vælg den relevante mærkekategori fra rullegardinslisten, for eksempel "
 "<guilabel>HTML - mærker</guilabel>."
 
-#: ../C/gedit.xml:2061(para)
+#: ../C/gedit.xml:1962(para)
 msgid "Scroll through the tag list to find the required tag."
 msgstr "Rul gennem mærkelisten for at finde det påkrævede mærke."
 
-#: ../C/gedit.xml:2064(para)
+#: ../C/gedit.xml:1965(para)
 msgid ""
 "To insert a tag at the cursor position in the current file, double-click on "
 "the tag in the tag list. You can also insert a tag as follows:"
@@ -4475,7 +4320,7 @@ msgstr ""
 "følger:"
 
 # Jeg er ikke sikker på "visningsområdet", der synes ikke at være nogen streng i UI kaldet display area
-#: ../C/gedit.xml:2066(para)
+#: ../C/gedit.xml:1967(para)
 msgid ""
 "To insert a tag in the current file and change the focus from the side pane "
 "to the display area, press <keycap>Return</keycap>."
@@ -4484,7 +4329,7 @@ msgstr ""
 "ændre fokus fra sidepanelet til visningsområdet."
 
 # Jeg tror ikke den engelske titel på vinduet er helt rigtig, så oversættelsen er gjort mest muligt generisk
-#: ../C/gedit.xml:2069(para)
+#: ../C/gedit.xml:1970(para)
 msgid ""
 "To insert a tag in the current file and maintain the focus on the "
 "<guilabel>Tag list plugin</guilabel> window, press <keycombo><keycap>Shift</"
@@ -4494,11 +4339,11 @@ msgstr ""
 "at indsætte et mærke i den aktuelle fil og vedligeholde fokus på "
 "mærkelistevinduet."
 
-#: ../C/gedit.xml:2078(title)
+#: ../C/gedit.xml:1979(title)
 msgid "User Name Plugin"
 msgstr "Udvidelsesmodulet Brugernavn"
 
-#: ../C/gedit.xml:2079(para)
+#: ../C/gedit.xml:1980(para)
 msgid ""
 "The <application>User name</application> plugin inserts the username of the "
 "current user into the document."
@@ -4506,7 +4351,7 @@ msgstr ""
 "Udvidelsesmodulet <application>Brugernavn</application> indsætter "
 "brugernavnet for den aktuelle bruger i dokumentet."
 
-#: ../C/gedit.xml:2080(para)
+#: ../C/gedit.xml:1981(para)
 msgid ""
 "To insert your username at the cursor position, choose "
 "<menuchoice><guimenu>Edit</guimenu><guimenuitem>Insert User Name</"
@@ -4516,7 +4361,7 @@ msgstr ""
 "<menuchoice><guimenu>Redigér</guimenu><guimenuitem>Indsæt brugernavn</"
 "guimenuitem></menuchoice>."
 
-#: ../C/gedit.xml:2082(para)
+#: ../C/gedit.xml:1983(para)
 msgid ""
 "This plugin is mostly provided as an example of how to create your own "
 "plugins. For more information on creating plugins, see the <ulink type=\"http"
@@ -4640,3 +4485,194 @@ msgstr ""
 
 #~ msgid "July 2006"
 #~ msgstr "Juli 2006"
+
+#~ msgid ""
+#~ "@@image: 'figures/gedit_format_bold.png'; "
+#~ "md5=950264711a3f0808bef134fa94b0a582"
+#~ msgstr "Intet skærmbillede"
+
+#~ msgid ""
+#~ "@@image: 'figures/gedit_format_italic.png'; "
+#~ "md5=feb9817676516ae91b9f6b1cd36a5eca"
+#~ msgstr "Intet skærmbillede"
+
+#~ msgid ""
+#~ "@@image: 'figures/gedit_format_underline.png'; "
+#~ "md5=58f5848d81ea3f0656ccce82ba32ec9c"
+#~ msgstr "Intet skærmbillede"
+
+#~ msgid ""
+#~ "@@image: 'figures/gedit_format_strikethrough.png'; "
+#~ "md5=cf962f5d9df721c1f4f4cef2780915ed"
+#~ msgstr "Intet skærmbillede"
+
+#~ msgid ""
+#~ "For more information about how to configure syntax highlighting, see "
+#~ "<xref linkend=\"gedit-prefs-syntax\"/>."
+#~ msgstr ""
+#~ "For yderligere information om hvordan du konfigurerer syntaksfremhævning, "
+#~ "se <xref linkend=\"gedit-prefs-syntax\"/>."
+
+#~ msgid "Colors"
+#~ msgstr "Farveskema"
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid ""
+#~ "Select the <guilabel>Use default theme colors</guilabel> option to use "
+#~ "the default theme colors in the <application>gedit</application> text "
+#~ "window."
+#~ msgstr ""
+#~ "Vælg <guilabel>Brug farver fra standardtema</guilabel> for at bruge "
+#~ "farverne fra tekstvinduet i <application>gedit</application>."
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid ""
+#~ "Click on the <guibutton>Normal text color</guibutton> color button to "
+#~ "display the color selector dialog. Select a color to use to display "
+#~ "normal text in the <application>gedit</application> text window."
+#~ msgstr ""
+#~ "Klik på <guibutton>Normal tekstfarve</guibutton> for at få vist "
+#~ "farvevælger-dialogen. Vælg en farve at bruge til at få fremvist normal "
+#~ "tekst i tekstvinduet i <application>gedit</application>."
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid ""
+#~ "Click on the <guibutton>Background color</guibutton> color button to "
+#~ "display the color selector dialog. Select a background color for the "
+#~ "<application>gedit</application> text window."
+#~ msgstr ""
+#~ "Klik på <guibutton>Baggrundsfarve</guibutton> for at få vist "
+#~ "farvevælgerdialogen. Vælg en baggrundsfarve til brug i tekstvinduet i "
+#~ "<application>gedit</application>."
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid ""
+#~ "Click on the <guibutton>Selected text color</guibutton> color button to "
+#~ "display the color selector dialog. Select a color to use to display "
+#~ "selected text."
+#~ msgstr ""
+#~ "Klik på <guibutton>Farve til markeret tekst</guibutton> for at få vist "
+#~ "farvevælger-dialogen. Vælg en farve til brug ved visning af markeret "
+#~ "tekst."
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid ""
+#~ "Click on the <guibutton>Selection color</guibutton> color button to "
+#~ "display the color selector dialog. Select a background color to use to "
+#~ "highlight a text selection."
+#~ msgstr ""
+#~ "Klik på <guibutton>Markeringsfarve</guibutton> for at få vist farvevælger-"
+#~ "dialogen. Vælg en baggrundsfarve som skal bruges til at fremhæve en "
+#~ "tekstmarkering."
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid "Syntax Highlighting Preferences"
+#~ msgstr "Syntaksfremhævningsindstillinger"
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid "Enable syntax highlighting"
+#~ msgstr "Aktivér syntaksfremhævning"
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid ""
+#~ "Select this option to highlight the syntax of the text that you edit."
+#~ msgstr ""
+#~ "Vælg denne mulighed for at fremhæve syntaksen i den tekst, som du "
+#~ "redigerer."
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid "Highlight mode"
+#~ msgstr "Fremhævningstilstand"
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid "Use this drop-down list to select a syntax mode to configure."
+#~ msgstr ""
+#~ "Brug denne rullegardinsmenu til at vælge en syntakstilstand at "
+#~ "konfigurere."
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid "Elements"
+#~ msgstr "Elementer"
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid "Use this list box to select a syntax element to configure."
+#~ msgstr "Brug denne listeboks til at vælge et syntakselement at konfigurere."
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid "Format buttons"
+#~ msgstr "Formatknapper"
+
+# Denne funktion lader til at være udgået i den seneste version af gedit...
+#~ msgid ""
+#~ "Use the following buttons to change the format of the selected syntax "
+#~ "element:"
+#~ msgstr ""
+#~ "Brug de følgende knapper til at ændre det valgte syntakselements format:"
+
+#~ msgid "Button"
+#~ msgstr "Knap"
+
+#~ msgid "Format"
+#~ msgstr "Format"
+
+#~ msgid "Shows icon for bold format."
+#~ msgstr "Viser ikonet for fedformatering."
+
+#~ msgid "Bold"
+#~ msgstr "Fed"
+
+#~ msgid "Shows icon for italic format."
+#~ msgstr "Viser ikonet for kursivformatering."
+
+#~ msgid "Italic"
+#~ msgstr "Kursiv"
+
+#~ msgid "Shows icon for underline."
+#~ msgstr "Viser ikonet for understregningsformatering."
+
+#~ msgid "Underline"
+#~ msgstr "Understregning"
+
+#~ msgid "Shows icon for strikethrough."
+#~ msgstr "Viser ikonet for gennemstregning."
+
+#~ msgid "Strikethrough"
+#~ msgstr "Gennemstregning"
+
+#~ msgid "Foreground"
+#~ msgstr "Forgrund"
+
+# Dette er rent gæt, da funktionen lader til at være udgået i den nyeste version af gedit...
+#~ msgid ""
+#~ "Select this option to change the font color of the selected syntax "
+#~ "element. Click on the color button to display the color selector dialog, "
+#~ "then select the font color."
+#~ msgstr ""
+#~ "Vælg denne mulighed for at ændre skriftfarven på det valgte "
+#~ "syntakselement. Klik på farveknappen for at få vist farvevalgsdialogen, "
+#~ "og vælg derefter skriftfarve."
+
+#~ msgid "Background"
+#~ msgstr "Baggrund"
+
+# Dette er rent gæt, da funktionen lader til at være udgået i den nyeste version af gedit...
+#~ msgid ""
+#~ "Select this option to change the background color of the selected syntax "
+#~ "element. Click on the color button to display the color selector dialog, "
+#~ "then select the background color."
+#~ msgstr ""
+#~ "Vælg denne mulighed for at ændre baggrundsfarven på det valgte "
+#~ "syntakselement. Klik på farveknappen for at få vist farvevalgsdialogen, "
+#~ "og vælg derefter baggrundsfarve."
+
+# Dette er rent gæt, da funktionen lader til at være udgået i den nyeste version af gedit...
+#~ msgid "Reset to Default"
+#~ msgstr "Gendan til standard"
+
+# Dette er rent gæt, da funktionen lader til at være udgået i den nyeste version af gedit...
+#~ msgid ""
+#~ "Click on this button to reset the foreground color and background color "
+#~ "of the selected syntax element to the default values."
+#~ msgstr ""
+#~ "Klik på denne knap for at gendanne for- og baggrundsfarven på det valgte "
+#~ "syntakselement til standardværdierne."
