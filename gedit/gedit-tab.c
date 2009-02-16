@@ -1318,8 +1318,10 @@ document_saved (GeditDocument *document,
 					  G_CALLBACK (externally_modified_error_message_area_response),
 					  tab);
 		}
-		else if (error->domain == GEDIT_DOCUMENT_ERROR &&
-			 error->code == GEDIT_DOCUMENT_ERROR_CANT_CREATE_BACKUP)
+		else if ((error->domain == GEDIT_DOCUMENT_ERROR &&
+			  error->code == GEDIT_DOCUMENT_ERROR_CANT_CREATE_BACKUP) ||
+		         (error->domain == G_IO_ERROR &&
+			  error->code == G_IO_ERROR_CANT_CREATE_BACKUP))
 		{
 			/* This error is recoverable */
 			emsg = gedit_no_backup_saving_error_message_area_new (

@@ -894,8 +894,10 @@ gedit_no_backup_saving_error_message_area_new (const gchar  *uri,
 
 	g_return_val_if_fail (uri != NULL, NULL);
 	g_return_val_if_fail (error != NULL, NULL);
-	g_return_val_if_fail (error->domain == GEDIT_DOCUMENT_ERROR, NULL);
-	g_return_val_if_fail (error->code == GEDIT_DOCUMENT_ERROR_CANT_CREATE_BACKUP, NULL);
+	g_return_val_if_fail (((error->domain == GEDIT_DOCUMENT_ERROR &&
+			        error->code == GEDIT_DOCUMENT_ERROR_CANT_CREATE_BACKUP) ||
+			       (error->domain == G_IO_ERROR &&
+			        error->code == G_IO_ERROR_CANT_CREATE_BACKUP)), NULL);
 
 	full_formatted_uri = gedit_utils_uri_for_display (uri);
 
