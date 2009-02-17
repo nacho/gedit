@@ -245,7 +245,6 @@ static int
 _wrap_gedit_message_type_new(PyGObject *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *pypath, *pymethod, *optional = NULL, *pydict;
-    guint len;
     
     if (!PyArg_ParseTuple(args, "OO|OO:GeditMessageType.new", &pypath, &pymethod, &optional, &pydict))
         return -1;
@@ -268,7 +267,7 @@ _wrap_gedit_message_type_instantiate(PyGObject *self, PyObject *args, PyObject *
     GeditMessageType *message_type = GEDIT_MESSAGE_TYPE (self->obj);
     GeditMessage *message = gedit_message_type_instantiate(message_type, NULL);
     
-    _wrap_helper_message_set_value(message, args, kwargs);
+    _helper_wrap_message_set_value(message, args, kwargs);
     
     return pygobject_new((GObject *)message);
 }
@@ -329,9 +328,7 @@ static PyObject *
 _wrap_gedit_message_set_value(PyGObject *self, PyObject *args, PyObject *kwargs)
 {
     static char *kwlist[] = { "key", "value", NULL };
-    PyObject *ret, *pykey, *pyvalue;
-    GValue value = { 0, };
-    GType gtype;
+    PyObject *pykey, *pyvalue;
     
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OO:GeditMessage.set_value", kwlist, &pykey, &pyvalue))
         return NULL;
@@ -346,7 +343,7 @@ _wrap_gedit_message_set_value(PyGObject *self, PyObject *args, PyObject *kwargs)
 override gedit_message_set kwargs
 static PyObject *
 _wrap_gedit_message_set (PyGObject *self, PyObject *args, PyObject *kwargs) {
-    _helper_wrap_message_set_values(GEDIT_MESSAGE(self->obj), args, kwargs);
+    _helper_message_set_values(GEDIT_MESSAGE(self->obj), args, kwargs);
 
     Py_INCREF(Py_None);
     return Py_None;
@@ -373,7 +370,6 @@ static PyObject *
 _wrap_gedit_message_bus_register(PyGObject *self, PyObject *args, PyObject *kwargs)
 {
     PyObject *pypath, *pymethod, *optional = NULL, *pydict;
-    guint len;
     GeditMessageBus *bus = GEDIT_MESSAGE_BUS(self->obj);
 
     if (!PyArg_ParseTuple(args, "OO|OO:GeditMessageBus.register", &pypath, &pymethod, &optional, &pydict))
@@ -406,7 +402,6 @@ pygedit_message_bus_connect_cb(GeditMessageBus *bus, GeditMessage *message, gpoi
     PyGILState_STATE state;
     PyGeditCustomNotify *cunote = data;
     PyObject *pybus, *pymessage, *retobj;
-    gboolean ret = FALSE;
 
     g_assert(cunote->func);
 
