@@ -622,7 +622,7 @@ gedit_utils_make_valid_utf8 (const char *name)
 
 	string = NULL;
 	remainder = name;
-	remaining_bytes = strlen (name);
+	remaining_bytes = name ? strlen (name) : 0;
 
 	while (remaining_bytes != 0) {
 		if (g_utf8_validate (remainder, remaining_bytes, &invalid)) {

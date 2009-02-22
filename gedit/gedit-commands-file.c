@@ -292,7 +292,12 @@ load_uri_list (GeditWindow         *window,
 
 	for (u = uris; u != NULL; u = u->next)
 	{
-		files = g_slist_prepend (files, g_file_new_for_uri (u->data));
+		gchar *uri = u->data;
+
+		if (gedit_utils_is_valid_uri (uri))
+			files = g_slist_prepend (files, g_file_new_for_uri (uri));
+		else
+			g_warning ("invalid uri: %s", uri);
 	}
 	files = g_slist_reverse (files);
 
@@ -356,13 +361,13 @@ gedit_commands_load_uris (GeditWindow         *window,
  */
 gint
 _gedit_cmd_load_files_from_prompt (GeditWindow         *window,
-				   const GSList        *uris,
+				   GSList              *files,
 				   const GeditEncoding *encoding,
 				   gint                 line_pos)
 {
 	gedit_debug (DEBUG_COMMANDS);
 
-	return load_uri_list (window, uris, encoding, line_pos, TRUE);
+	return load_file_list (window, files, encoding, line_pos, TRUE);
 }
 
 static void

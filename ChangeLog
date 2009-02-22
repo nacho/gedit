@@ -1,3 +1,17 @@
+2009-02-22  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit/gedit-utils.c:
+	* gedit/gedit.c:
+	* gedit/gedit-document.c:
+	* gedit/gedit-commands.h:
+	* gedit/gedit-commands-file.c:
+
+	Try to handle better strange filenames passed on the command line that
+	contain	columns. Fixes bug #572746. I think there are still corner
+	cases where we do not properly handle uri vs filename-with-columns,
+	but probably the logic (if solvable at all) should go in
+	g_file_new_for_command_line_arg. 
+
 2009-02-17  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	* plugin-loaders/python/bindings/geditmessage.override:

@@ -900,7 +900,7 @@ gedit_document_get_short_name_for_display (GeditDocument *doc)
 
 	if (doc->priv->uri == NULL)
 		return g_strdup_printf (_("Unsaved Document %d"),
-					doc->priv->untitled_number);	      
+					doc->priv->untitled_number);
 	else
 		return gedit_utils_basename_for_display (doc->priv->uri);
 }
@@ -1137,6 +1137,8 @@ gedit_document_load_real (GeditDocument       *doc,
 			  gboolean             create)
 {
 	g_return_if_fail (doc->priv->loader == NULL);
+
+	gedit_debug_message (DEBUG_DOCUMENT, "load_real: uri = %s", uri);
 
 	/* create a loader. It will be destroyed when loading is completed */
 	doc->priv->loader = gedit_document_loader_new (doc, uri, encoding);

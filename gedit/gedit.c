@@ -132,16 +132,10 @@ gedit_get_command_line_data (void)
 			}
 			else
 			{
-				gchar *canonical_uri;
-				
-				canonical_uri = gedit_utils_make_canonical_uri_from_shell_arg (remaining_args[i]);
-				
-				if (canonical_uri != NULL)
-					file_list = g_slist_prepend (file_list, 
-								     canonical_uri);
-				else
-					g_print (_("%s: malformed file name or URI.\n"),
-						 remaining_args[i]);
+				GFile *file;
+
+				file = g_file_new_for_commandline_arg (remaining_args[i]);
+				file_list = g_slist_prepend (file_list, file);
 			} 
 		}
 
@@ -291,7 +285,13 @@ on_message_received (const char *message,
 			uris = g_strsplit (params[4], " ", n_uris);
 
 			for (j = 0; j < n_uris; j++)
-				file_list = g_slist_prepend (file_list, uris[j]);
+			{
+				GFile *file;
+
+				file = g_file_new_for_uri (uris[j]);
+				file_list = g_slist_prepend (file_list, file);
+			}
+
 			file_list = g_slist_reverse (file_list);
 
 			/* the list takes ownerhip of the strings,
@@ -365,7 +365,7 @@ on_message_received (const char *message,
 	gtk_window_present (GTK_WINDOW (window));
 
 	/* free the file list and reset to default */
-	g_slist_foreach (file_list, (GFunc) g_free, NULL);
+	g_slist_foreach (file_list, (GFunc) g_object_unref, NULL);
 	g_slist_free (file_list);
 	file_list = NULL;
 
@@ -457,9 +457,14 @@ send_bacon_message (void)
 
 		for (l = file_list; l != NULL; l = l->next)
 		{
-			command = g_string_append (command, l->data);
+			gchar *uri;
+
+			uri = g_file_get_uri (G_FILE (l->data));
+			command = g_string_append (command, uri);
 			if (l->next != NULL)
 				command = g_string_append_c (command, ' ');
+
+			g_free (uri);
 		}
 	}
 
@@ -658,7 +663,7 @@ main (int argc, char *argv[])
 		gedit_debug_message (DEBUG_APP, "Show window");
 		gtk_widget_show (GTK_WIDGET (window));
 
-		g_slist_foreach (file_list, (GFunc) g_free, NULL);
+		g_slist_foreach (file_list, (GFunc) g_object_unref, NULL);
 		g_slist_free (file_list);
 		file_list = NULL;
 
