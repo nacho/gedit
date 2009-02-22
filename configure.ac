@@ -213,7 +213,7 @@ PKG_CHECK_MODULES(GEDIT, [
 	gthread-2.0 >= 2.13.0
 	gio-2.0 >= 2.16.0
 	gtk+-2.0 >= 2.13.0
-	gtksourceview-2.0 >= 2.2.0
+	gtksourceview-2.0 >= 2.4.0
 	gconf-2.0 >= 1.1.11
 ])
 GEDIT_LIBS="${GEDIT_LIBS}"
