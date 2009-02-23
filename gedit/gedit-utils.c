@@ -620,9 +620,11 @@ gedit_utils_make_valid_utf8 (const char *name)
 	const char *remainder, *invalid;
 	int remaining_bytes, valid_bytes;
 
+	g_return_val_if_fail (name != NULL, NULL);
+
 	string = NULL;
 	remainder = name;
-	remaining_bytes = name ? strlen (name) : 0;
+	remaining_bytes = strlen (name);
 
 	while (remaining_bytes != 0) {
 		if (g_utf8_validate (remainder, remaining_bytes, &invalid)) {
@@ -1147,11 +1149,11 @@ gedit_utils_basename_for_display (gchar const *uri)
 	gchar *name;
 	GFile *gfile;
 	gchar *hn;
-	
+
 	g_return_val_if_fail (uri != NULL, NULL);
-	
+
 	gfile = g_file_new_for_uri (uri);
-	
+
 	/* First, try to query the display name, but only on local files */
 	if (g_file_has_uri_scheme (gfile, "file"))
 	{
@@ -1198,11 +1200,16 @@ gedit_utils_basename_for_display (gchar const *uri)
 	{
 		/* display '/ on <host>' using the decoded host */
 		gchar *hn_utf8;
-		hn_utf8 = gedit_utils_make_valid_utf8 (hn);
-		
+
+		if  (hn != NULL)
+			hn_utf8 = gedit_utils_make_valid_utf8 (hn);
+		else
+			/* we should never get here */
+			hn_utf8 = g_strdup ("?");
+
 		/* Translators: '/ on <remote-share>' */
 		name = g_strdup_printf (_("/ on %s"), hn_utf8);
-		
+
 		g_free (hn_utf8);
 		g_free (hn);
 	}
