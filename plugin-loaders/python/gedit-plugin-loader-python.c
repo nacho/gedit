@@ -520,7 +520,7 @@ gedit_python_init (GeditPluginLoaderPython *loader)
 	{
 		g_warning ("Error initializing Python interpreter: cannot get "
 		           "handler to SIGINT signal (%s)",
-		           strerror (errno));
+		           g_strerror (errno));
 
 		return FALSE;
 	}
@@ -534,7 +534,7 @@ gedit_python_init (GeditPluginLoaderPython *loader)
 	{
 		g_warning ("Error initializing Python interpreter: cannot restore "
 		           "handler to SIGINT signal (%s).",
-		           strerror (errno));
+		           g_strerror (errno));
 
 		goto python_init_error;
 	}
