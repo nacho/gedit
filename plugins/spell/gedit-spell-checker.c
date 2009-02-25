@@ -250,6 +250,8 @@ gedit_spell_checker_finalize (GObject *object)
 
 	if (spell_checker->broker != NULL)
 		enchant_broker_free (spell_checker->broker);
+
+	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static gboolean
