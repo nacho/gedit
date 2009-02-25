@@ -121,6 +121,8 @@ gedit_plugin_finalize (GObject *object)
 
 	g_free (priv->install_dir);
 	g_free (priv->data_dir_name);
+
+	G_OBJECT_CLASS (gedit_plugin_parent_class)->finalize (object);
 }
 
 static void 

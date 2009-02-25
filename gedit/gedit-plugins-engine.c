@@ -339,6 +339,8 @@ gedit_plugins_engine_finalize (GObject *object)
 	}
 
 	g_list_free (engine->priv->plugin_list);
+
+	G_OBJECT_CLASS (gedit_plugins_engine_parent_class)->finalize (object);
 }
 
 static void
