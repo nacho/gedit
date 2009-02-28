@@ -661,7 +661,9 @@ gedit_utils_uri_get_dirname (const gchar *uri)
 	gchar *res;
 	gchar *str;
 
-	// CHECK: does it work with uri chaining? - Paolo
+	g_return_val_if_fail (uri != NULL, NULL);
+
+	/* CHECK: does it work with uri chaining? - Paolo */
 	str = g_path_get_dirname (uri);
 	g_return_val_if_fail (str != NULL, ".");
 
@@ -676,6 +678,71 @@ gedit_utils_uri_get_dirname (const gchar *uri)
 
 	g_free (str);
 	
+	return res;
+}
+
+/**
+ * gedit_utils_location_get_dirname_for_display
+ * @file: the location
+ *
+ * Returns a string suitable to be displayed in the UI indicating
+ * the name of the directory where the file is located.
+ * For remote files it may also contain the hostname etc.
+ * For local files it tries to replace the home dir with ~.
+ *
+ * Returns: a string to display the dirname
+ */
+gchar *
+gedit_utils_location_get_dirname_for_display (GFile *location)
+{
+	gchar *uri;
+	gchar *res;
+	GMount *mount;
+
+	g_return_val_if_fail (location != NULL, NULL);
+
+	/* we use the parse name, that is either the local path
+	 * or an uri but which is utf8 safe */
+	uri = g_file_get_parse_name (location);
+
+	/* FIXME: this is sync... is it a problem? */
+	mount = g_file_find_enclosing_mount (location, NULL, NULL);
+	if (mount != NULL)
+	{
+		gchar *mount_name;
+		gchar *path;
+
+		mount_name = g_mount_get_name (mount);
+		g_object_unref (mount);
+
+		/* obtain the "path" patrt of the uri */
+		if (gedit_utils_decode_uri (uri,
+					    NULL, NULL,
+					    NULL, NULL,
+					    &path))
+		{
+			gchar *dirname;
+			
+			dirname = gedit_utils_uri_get_dirname (path);
+			res = g_strdup_printf ("%s %s", mount_name, dirname);
+
+			g_free (path);
+			g_free (dirname);
+			g_free (mount_name);
+		}
+		else
+		{
+			res = mount_name;
+		}
+	}
+	else
+	{
+		/* fallback for local files or uris without mounts */
+		res = gedit_utils_uri_get_dirname (uri);
+	}
+
+	g_free (uri);
+
 	return res;
 }
 

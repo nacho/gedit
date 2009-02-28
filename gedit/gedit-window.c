@@ -2125,15 +2125,16 @@ set_title (GeditWindow *window)
 	}
 	else
 	{
-		gchar *uri;
-		gchar *str;
+		GFile *file;
 
-		uri = gedit_document_get_uri_for_display (doc);
-		str = gedit_utils_uri_get_dirname (uri);
-		g_free (uri);
-
-		if (str != NULL)
+		file = gedit_document_get_location (doc);
+		if (file != NULL)
 		{
+			gchar *str;
+
+			str = gedit_utils_location_get_dirname_for_display (file);
+			g_object_unref (file);
+
 			/* use the remaining space for the dir, but use a min of 20 chars
 			 * so that we do not end up with a dirname like "(a...b)".
 			 * This means that in the worst case when the filename is long 99

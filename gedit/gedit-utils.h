@@ -111,6 +111,9 @@ gchar		*gedit_utils_make_valid_utf8		(const char *name);
 /* Note that this function replace home dir with ~ */
 gchar		*gedit_utils_uri_get_dirname		(const char *uri);
 
+gchar		*gedit_utils_location_get_dirname_for_display
+							(GFile *location);
+
 gchar		*gedit_utils_replace_home_dir_with_tilde (const gchar *uri);
 
 guint		 gedit_utils_get_current_workspace	(GdkScreen *screen);
