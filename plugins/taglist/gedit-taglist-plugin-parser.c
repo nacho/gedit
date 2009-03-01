@@ -181,13 +181,12 @@ parse_tag_group (TagGroup *tg, const gchar* fn, xmlDocPtr doc,
 	return TRUE;
 }
 
-
 static TagGroup*
 get_tag_group (const gchar* filename, xmlDocPtr doc, 
 		 xmlNsPtr ns, xmlNodePtr cur) 
 {
 	TagGroup *tag_group;
-	gchar *sort_str;
+	xmlChar *sort_str;
 	gboolean sort = FALSE;
 
 	tag_group = g_new0 (TagGroup, 1);
@@ -195,16 +194,18 @@ get_tag_group (const gchar* filename, xmlDocPtr doc,
 	/* Get TagGroup name */
 	tag_group->name = xmlGetProp (cur, (const xmlChar *) "name");
 
-	sort_str = (gchar *)xmlGetProp (cur, (const xmlChar *) "sort");
-	
+	sort_str = xmlGetProp (cur, (const xmlChar *) "sort");
+
 	if ((sort_str != NULL) &&
-	    ((g_ascii_strcasecmp (sort_str, "yes") == 0) ||
-	     (g_ascii_strcasecmp (sort_str, "true") == 0) ||
-	     (g_ascii_strcasecmp (sort_str, "1") == 0)))
+	    ((xmlStrcasecmp (sort_str, (const xmlChar *) "yes") == 0) ||
+	     (xmlStrcasecmp (sort_str, (const xmlChar *) "true") == 0) ||
+	     (xmlStrcasecmp (sort_str, (const xmlChar *) "1") == 0)))
 	{
 		sort = TRUE;
 	}
-	
+
+	xmlFree(sort_str);
+
 	if (tag_group->name == NULL)
 	{
 		/* Error: No name */
@@ -483,7 +484,6 @@ parse_taglist_file (const gchar* filename)
 	return taglist;
 }
 
-
 static void
 free_tag (Tag *tag)
 {
@@ -506,21 +506,20 @@ free_tag (Tag *tag)
 static void
 free_tag_group (TagGroup *tag_group)
 {
+	GList *l;
+
 	gedit_debug_message (DEBUG_PLUGINS, "Tag group: %s", tag_group->name);
 
 	g_return_if_fail (tag_group != NULL);
 
 	free (tag_group->name);
 
-	while (tag_group->tags)
+	for (l = tag_group->tags; l != NULL; l = g_list_next (l))
 	{
-		free_tag ((Tag *)tag_group->tags->data);
-
-		tag_group->tags = g_list_next (tag_group->tags);
+		free_tag ((Tag *) l->data);
 	}
 
 	g_list_free (tag_group->tags);
-	
 	g_free (tag_group);
 
 	gedit_debug_message (DEBUG_PLUGINS, "END");
@@ -529,28 +528,26 @@ free_tag_group (TagGroup *tag_group)
 void
 free_taglist (void)
 {
+	GList *l;
+
 	gedit_debug_message (DEBUG_PLUGINS, "ref_count: %d", taglist_ref_count);
-	
+
 	if (taglist == NULL)
 		return;
-		
+
 	g_return_if_fail (taglist_ref_count > 0);
 
 	--taglist_ref_count;
 	if (taglist_ref_count > 0)
 		return;
-		
-	while (taglist->tag_groups)
-	{
-		free_tag_group ((TagGroup *)taglist->tag_groups->data);
 
-		taglist->tag_groups = g_list_next (taglist->tag_groups);
+	for (l = taglist->tag_groups; l != NULL; l = g_list_next (l))
+	{
+		free_tag_group ((TagGroup *) l->data);
 	}
 
 	g_list_free (taglist->tag_groups);
-	
 	g_free (taglist);
-
 	taglist = NULL;
 
 	gedit_debug_message (DEBUG_PLUGINS, "Really freed");
