@@ -931,6 +931,10 @@ get_choose_format_dialog (GtkWindow                 *parent,
 	GtkWidget *error_widget;
 	gboolean ret;
 	gchar *sf, *cf;
+	GtkWindowGroup *wg = NULL;
+	
+	if (parent != NULL)
+		wg = parent->group;
 
 	dialog = g_new0 (ChooseFormatDialog, 1);
 
@@ -952,16 +956,38 @@ get_choose_format_dialog (GtkWindow                 *parent,
 
 	if (!ret)
 	{
-		const gchar *err_message;
+		GtkWidget *err_dialog;
 
-		err_message = gtk_label_get_label (GTK_LABEL (error_widget));
-		gedit_warning (parent, "%s", err_message);
+		err_dialog = gtk_dialog_new_with_buttons (NULL,
+			parent,
+			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+			NULL);
 
-		g_free (dialog);
-		gtk_widget_destroy (error_widget);
+		if (wg != NULL)
+			gtk_window_group_add_window (wg, GTK_WINDOW (err_dialog));
+
+		gtk_window_set_resizable (GTK_WINDOW (err_dialog), FALSE);
+		gtk_dialog_set_has_separator (GTK_DIALOG (err_dialog), FALSE);
+		gtk_dialog_set_default_response (GTK_DIALOG (err_dialog), GTK_RESPONSE_OK);
+
+		gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (err_dialog))),
+				   error_widget);
+
+		g_signal_connect (G_OBJECT (err_dialog),
+				  "response",
+				  G_CALLBACK (gtk_widget_destroy),
+				  NULL);
+
+		gtk_widget_show_all (err_dialog);
 
 		return NULL;
 	}
+
+	gtk_window_group_add_window (wg,
+			     	     GTK_WINDOW (dialog->dialog));
+	gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), parent);
+	gtk_window_set_modal (GTK_WINDOW (dialog->dialog), TRUE);
 
 	sf = get_selected_format (plugin);
 	create_formats_list (dialog->list, sf, plugin);
@@ -1113,32 +1139,23 @@ time_cb (GtkAction  *action,
 	}
         else
         {
-        	GtkWindowGroup *wg;
 		ChooseFormatDialog *dialog;
 
 		dialog = get_choose_format_dialog (GTK_WINDOW (data->window),
 						   prompt_type,
 						   data->plugin);
-		g_return_if_fail (dialog != NULL);
+		if (dialog != NULL)
+		{
+			dialog->buffer = buffer;
+			dialog->plugin = data->plugin;
 
-		wg = gedit_window_get_group (data->window);
+			g_signal_connect (dialog->dialog,
+					  "response",
+					  G_CALLBACK (choose_format_dialog_response_cb),
+					  dialog);
 
-		gtk_window_group_add_window (wg,
-				     	     GTK_WINDOW (dialog->dialog));
-
-		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
-					      GTK_WINDOW (data->window));
-		gtk_window_set_modal (GTK_WINDOW (dialog->dialog), TRUE);
-
-		dialog->buffer = buffer;
-		dialog->plugin = data->plugin;
-
-		g_signal_connect (dialog->dialog,
-				  "response",
-				  G_CALLBACK (choose_format_dialog_response_cb),
-				  dialog);
-
-		gtk_widget_show (GTK_WIDGET (dialog->dialog));
+			gtk_widget_show (GTK_WIDGET (dialog->dialog));
+		}
 
 		return;
 	}

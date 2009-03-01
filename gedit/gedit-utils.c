@@ -1016,8 +1016,7 @@ gedit_utils_is_valid_uri (const gchar *uri)
 }
 
 static GtkWidget *
-handle_builder_error (const gchar *message,
-		      ...)
+handle_builder_error (const gchar *message, ...)
 {
 	GtkWidget *label;
 	gchar *msg;
@@ -1025,16 +1024,18 @@ handle_builder_error (const gchar *message,
 	va_list args;
 
 	va_start (args, message);
-	va_arg (args, const gchar *);
 	msg_plain = g_strdup_vprintf (message, args);
+	va_end (args);
+
+	label = gtk_label_new (NULL);
+	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
 
 	msg = g_strconcat ("<span size=\"large\" weight=\"bold\">",
-			msg_plain, "</span>\n\n",
-			_("Please check your installation."), NULL);
-	label = gtk_label_new (msg);
+			   msg_plain, "</span>\n\n",
+			   _("Please check your installation."),
+			   NULL);
 
-	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+	gtk_label_set_markup (GTK_LABEL (label), msg);
 
 	g_free (msg_plain);
 	g_free (msg);
