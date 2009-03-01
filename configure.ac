@@ -43,6 +43,8 @@ AC_PROG_INSTALL
 AC_PROG_MAKE_SET
 AC_PATH_PROG(GZIP, gzip)
 
+AC_SYS_LARGEFILE
+
 dnl make sure we keep ACLOCAL_FLAGS around for maintainer builds to work
 AC_SUBST(ACLOCAL_AMFLAGS, "$ACLOCAL_FLAGS -I m4")
 
