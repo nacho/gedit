@@ -487,10 +487,10 @@ parse_modeline (gchar           *s,
 		gint             line_count,
 		ModelineOptions *options)
 {
-	gchar prev = ' ';
+	gchar prev;
 
 	/* look for the beginning of a modeline */
-	for (; *s != '\0'; prev = *(s++))
+	for (prev = ' '; (s != NULL) && (*s != '\0'); prev = *(s++))
 	{
 		if (!g_ascii_isspace (prev))
 			continue;
@@ -571,11 +571,17 @@ modeline_parser_apply_modeline (GtkSourceView *view)
 		gint cur_line;
 		guint remaining_lines;
 
+		/* we are on the 11th line (count from 0) */
 		cur_line = gtk_text_iter_get_line (&iter);
+		/* g_assert (10 == cur_line); */
 
 		remaining_lines = line_count - cur_line - 1;
-		gtk_text_buffer_get_end_iter (buffer, &iter);
-		gtk_text_iter_backward_lines (&iter, MIN (10, remaining_lines));
+
+		if (remaining_lines > 10)
+		{
+			gtk_text_buffer_get_end_iter (buffer, &iter);
+			gtk_text_iter_backward_lines (&iter, 9);
+		}
 	}
 
 	while (!gtk_text_iter_is_end (&iter))
