@@ -655,6 +655,28 @@ gedit_message_bus_register (GeditMessageBus *bus,
 	return message_type;	
 }
 
+static void
+gedit_message_bus_unregister_real (GeditMessageBus  *bus,
+				   GeditMessageType *message_type,
+				   gboolean          remove_from_store)
+{
+	gchar *identifier;
+	
+	g_return_if_fail (GEDIT_IS_MESSAGE_BUS (bus));
+
+	identifier = gedit_message_type_identifier (gedit_message_type_get_object_path (message_type), 
+						    gedit_message_type_get_method (message_type));
+	
+	/* Keep message type alive for signal emission */
+	gedit_message_type_ref (message_type);
+
+	if (!remove_from_store || g_hash_table_remove (bus->priv->types, identifier))
+		g_signal_emit (bus, message_bus_signals[UNREGISTERED], 0, message_type);
+	
+	gedit_message_type_unref (message_type);
+	g_free (identifier);
+}
+
 /**
  * gedit_message_bus_unregister:
  * @bus: a #GeditMessageBus
@@ -670,21 +692,8 @@ void
 gedit_message_bus_unregister (GeditMessageBus  *bus,
 			      GeditMessageType *message_type)
 {
-	gchar *identifier;
-	
 	g_return_if_fail (GEDIT_IS_MESSAGE_BUS (bus));
-
-	identifier = gedit_message_type_identifier (gedit_message_type_get_object_path (message_type), 
-						    gedit_message_type_get_method (message_type));
-	
-	// Keep message type alive for signal emission
-	gedit_message_type_ref (message_type);
-
-	if (g_hash_table_remove (bus->priv->types, identifier))
-		g_signal_emit (bus, message_bus_signals[UNREGISTERED], 0, message_type);
-	
-	gedit_message_type_unref (message_type);
-	g_free (identifier);
+	gedit_message_bus_unregister_real (bus, message_type, TRUE);
 }
 
 typedef struct 
@@ -693,7 +702,7 @@ typedef struct
 	const gchar *object_path;
 } UnregisterInfo;
 
-static void
+static gboolean
 unregister_each (const gchar      *identifier,
 		 GeditMessageType *message_type,
 		 UnregisterInfo   *info)
@@ -701,8 +710,11 @@ unregister_each (const gchar      *identifier,
 	if (strcmp (gedit_message_type_get_object_path (message_type),
 		    info->object_path) == 0)
 	{	
-		gedit_message_bus_unregister (info->bus, message_type);
+		gedit_message_bus_unregister_real (info->bus, message_type, FALSE);
+		return TRUE;
 	}
+	
+	return FALSE;
 }
 
 /**
@@ -726,9 +738,9 @@ gedit_message_bus_unregister_all (GeditMessageBus *bus,
 	g_return_if_fail (GEDIT_IS_MESSAGE_BUS (bus));
 	g_return_if_fail (object_path != NULL);
 
-	g_hash_table_foreach (bus->priv->types, 
-			      (GHFunc)unregister_each,
-			      &info);
+	g_hash_table_foreach_remove (bus->priv->types, 
+				     (GHRFunc)unregister_each,
+				     &info);
 }
 
 /**
