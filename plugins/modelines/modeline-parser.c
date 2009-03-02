@@ -527,7 +527,6 @@ modeline_parser_apply_modeline (GtkSourceView *view)
 	ModelineOptions options;
 	GtkTextBuffer *buffer;
 	GtkTextIter iter, liter;
-	gint line_number;
 	gint line_count;
 
 	/* Default values for modeline options */
@@ -543,11 +542,12 @@ modeline_parser_apply_modeline (GtkSourceView *view)
 
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 	gtk_text_buffer_get_start_iter (buffer, &iter);
-	line_number = 0;
+
 	line_count = gtk_text_buffer_get_line_count (buffer);
 
 	/* Parse the modelines on the 10 first lines... */
-	while (line_number < 10 && line_number < line_count)
+	while ((gtk_text_iter_get_line (&iter) < 10) &&
+	       !gtk_text_iter_is_end (&iter))
 	{
 		gchar *line;
 
@@ -555,23 +555,30 @@ modeline_parser_apply_modeline (GtkSourceView *view)
 		gtk_text_iter_forward_to_line_end (&iter);
 		line = gtk_text_buffer_get_text (buffer, &liter, &iter, TRUE);
 
-		parse_modeline (line, line_number, line_count, &options);
+		parse_modeline (line,
+				1 + gtk_text_iter_get_line (&iter),
+				line_count,
+				&options);
+
+		gtk_text_iter_forward_line (&iter);
 
 		g_free (line);
-		line_number ++;
 	}
 
 	/* ...and on the 10 last ones (modelines are not allowed in between) */
-	if (line_number < line_count - 10)
+	if (!gtk_text_iter_is_end (&iter))
 	{
-		guint remaining_lines = line_count - line_number - 1;
+		gint cur_line;
+		guint remaining_lines;
+
+		cur_line = gtk_text_iter_get_line (&iter);
+
+		remaining_lines = line_count - cur_line - 1;
 		gtk_text_buffer_get_end_iter (buffer, &iter);
-		gtk_text_iter_backward_lines (&iter,
-					      MIN (10, remaining_lines));
-		line_number = line_count - 11;
+		gtk_text_iter_backward_lines (&iter, MIN (10, remaining_lines));
 	}
 
-	while (line_number < line_count)
+	while (!gtk_text_iter_is_end (&iter))
 	{
 		gchar *line;
 
@@ -579,10 +586,14 @@ modeline_parser_apply_modeline (GtkSourceView *view)
 		gtk_text_iter_forward_to_line_end (&iter);
 		line = gtk_text_buffer_get_text (buffer, &liter, &iter, TRUE);
 
-		parse_modeline (line, line_number, line_count, &options);
+		parse_modeline (line,
+				1 + gtk_text_iter_get_line (&iter),
+				line_count,
+				&options);
+
+		gtk_text_iter_forward_line (&iter);
 
 		g_free (line);
-		line_number ++;
 	}
 
 	/* Try to set language */
