@@ -642,9 +642,9 @@ is_in_viewport (GeditWindow  *window,
 	sc_height = gdk_screen_get_height (screen);
 
 	return x + width * .25 >= viewport_x &&
-	       x + width * .75 < viewport_x + sc_width &&
+	       x + width * .75 <= viewport_x + sc_width &&
 	       y  >= viewport_y &&
-	       y + height < viewport_y + sc_height;
+	       y + height <= viewport_y + sc_height;
 }
 
 /**
