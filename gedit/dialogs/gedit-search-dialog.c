@@ -218,14 +218,12 @@ insert_text_handler (GtkEditable *editable,
 }
 
 static void
-search_entry_changed (GtkComboBox       *combo,
-		      GeditSearchDialog *dialog)
+search_text_entry_changed (GtkEditable       *editable,
+			   GeditSearchDialog *dialog)
 {
-	GtkWidget *entry;
 	const gchar *search_string;
 
-	entry = gtk_bin_get_child (GTK_BIN (combo));
-	search_string = gtk_entry_get_text (GTK_ENTRY (entry));
+	search_string = gtk_entry_get_text (GTK_ENTRY (editable));
 	g_return_if_fail (search_string != NULL);
 
 	if (*search_string != '\0')
@@ -453,9 +451,9 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 			  "insert_text",
 			  G_CALLBACK (insert_text_handler),
 			  NULL);
-	g_signal_connect (dlg->priv->search_entry,
+	g_signal_connect (dlg->priv->search_text_entry,
 			  "changed",
-			  G_CALLBACK (search_entry_changed),
+			  G_CALLBACK (search_text_entry_changed),
 			  dlg);
 
 	g_signal_connect (dlg,

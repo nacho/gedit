@@ -1,3 +1,10 @@
+2009-03-04  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
+
+	* gedit/dialogs/gedit-search-dialog.c:
+	Connect the changed signal to the editable instead
+	of the combobox making the search button sensitive when needing
+	to avoid problems with new versions of gtk+. (Fixes bug #574059).
+
 2009-03-03  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-app.c: correctly check viewport when
