@@ -234,6 +234,21 @@ copy_file_data (gint     sfd,
 
 	} while ((bytes_read != 0) && (ret == TRUE));
 
+#ifdef HAVE_FSYNC
+	if (ret)
+	{
+		/* Ensure that all the data reaches disk */
+		if (fsync (dfd) != 0)
+		{
+			g_set_error (error,
+				     G_IO_ERROR,
+				     g_io_error_from_errno (errno),
+				     "%s", g_strerror (errno));
+			ret = FALSE;
+		}
+	}
+#endif
+
 	g_free (buffer);
 
 	return ret;

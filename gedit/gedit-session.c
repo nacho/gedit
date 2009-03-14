@@ -531,7 +531,6 @@ parse_window (GKeyFile *state_file, const char *group_name)
 		gtk_widget_hide (GTK_WIDGET (panel));
 	}
 
-  
 	active_document = g_key_file_get_string (state_file, group_name,
 						 "active-document", NULL);
 	documents = g_key_file_get_string_list (state_file, group_name,

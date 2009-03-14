@@ -45,6 +45,8 @@ AC_PATH_PROG(GZIP, gzip)
 
 AC_SYS_LARGEFILE
 
+AC_CHECK_FUNCS(fsync)
+
 dnl make sure we keep ACLOCAL_FLAGS around for maintainer builds to work
 AC_SUBST(ACLOCAL_AMFLAGS, "$ACLOCAL_FLAGS -I m4")
 

@@ -336,7 +336,9 @@ gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
 
 	/* Truncate the file to 0, in case it was not empty */
 	if (res)
+	{
 		res = (ftruncate (fd, 0) == 0);
+	}
 
 	/* Save the file content */
 	if (res)
@@ -383,7 +385,17 @@ gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
 		}
 	}
 
-	g_free (contents);
+#ifdef HAVE_FSYNC
+	/* Ensure that all the data reaches disk */
+	if (res && fsync (fd) != 0)
+	{
+		g_set_error (error,
+			     G_IO_ERROR,
+			     g_io_error_from_errno (errno),
+			     "%s", g_strerror (errno));
+		res = FALSE;
+	}
+#endif
 
 	if (!res)
 	{
@@ -392,6 +404,8 @@ gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
 			     g_io_error_from_errno (errno),
 			     "%s", g_strerror (errno));
 	}
+
+	g_free (contents);
 
 	return res;
 }
