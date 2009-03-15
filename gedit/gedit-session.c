@@ -79,7 +79,7 @@ save_window_session (GKeyFile    *state_file,
 
 	gedit_debug (DEBUG_SESSION);
 
-    role = gtk_window_get_role (GTK_WINDOW (window));
+	role = gtk_window_get_role (GTK_WINDOW (window));
 	g_key_file_set_string (state_file, group_name, "role", role);
 	gtk_window_get_size (GTK_WINDOW (window), &width, &height);
 	g_key_file_set_integer (state_file, group_name, "width", width);
@@ -576,24 +576,26 @@ parse_window (GKeyFile *state_file, const char *group_name)
 gboolean
 gedit_session_load (void)
 {
-       GKeyFile *state_file;
-       gchar **groups;
-       int i;
+	GKeyFile *state_file;
+	gchar **groups;
+	int i;
 
 	gedit_debug (DEBUG_SESSION);
 
 	state_file = egg_sm_client_get_state_file (master_client);
 	if (state_file == NULL)
 	       return FALSE;
-  
+
 	groups = g_key_file_get_groups (state_file, NULL);
-  
-	/* FIXME: starting from 1 is awkward! */
-	for (i = 1; groups[i]; i++)
-	        parse_window (state_file, groups[i]);
-  
+
+	for (i = 0; groups[i] != NULL; i++)
+	{
+		if (g_str_has_prefix (groups[i], "gedit window "))
+		        parse_window (state_file, groups[i]);
+	}
+
 	g_strfreev (groups);
 	g_key_file_free (state_file);
- 
+
 	return TRUE;
 }
