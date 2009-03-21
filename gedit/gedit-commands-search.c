@@ -71,7 +71,7 @@ last_search_data_free (LastSearchData *data)
 {
 	g_free (data->find_text);
 	g_free (data->replace_text);
-	g_free (data);
+	g_slice_free (LastSearchData, data);
 }
 
 static void
@@ -136,7 +136,7 @@ restore_last_searched_data (GeditSearchDialog *dialog,
 
 	if (data == NULL)
 	{
-		data = g_new0 (LastSearchData, 1);
+		data = g_slice_new0 (LastSearchData);
 		last_search_data_set (data, dialog);
 
 		g_object_set_data (G_OBJECT (doc),
