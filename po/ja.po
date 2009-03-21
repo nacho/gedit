@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-22 19:20+0900\n"
-"PO-Revision-Date: 2009-02-22 19:19+0900\n"
+"POT-Creation-Date: 2009-03-21 22:16+0900\n"
+"PO-Revision-Date: 2009-03-21 22:15+0900\n"
 "Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -855,21 +855,21 @@ msgstr "タブの幅(_T):"
 msgid "_minutes"
 msgstr "分ごと(_M)"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:302
+#: ../gedit/dialogs/gedit-search-dialog.c:300
 #: ../gedit/dialogs/gedit-search-dialog.ui.h:2 ../gedit/gedit-window.c:1459
 msgid "Replace"
 msgstr "置換"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:313 ../gedit/gedit-window.c:1457
+#: ../gedit/dialogs/gedit-search-dialog.c:311 ../gedit/gedit-window.c:1457
 msgid "Find"
 msgstr "検索"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:412
+#: ../gedit/dialogs/gedit-search-dialog.c:410
 msgid "Replace _All"
 msgstr "全て置換(_A)"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:413
-#: ../gedit/gedit-commands-file.c:657
+#: ../gedit/dialogs/gedit-search-dialog.c:411
+#: ../gedit/gedit-commands-file.c:662
 msgid "_Replace"
 msgstr "置換(_R)"
 
@@ -887,7 +887,7 @@ msgstr "置換後の文字列(_W): "
 
 #: ../gedit/dialogs/gedit-search-dialog.ui.h:5
 msgid "Search _backwards"
-msgstr "前方へ検索する(_B)"
+msgstr "先頭に向かって検索する(_B)"
 
 #: ../gedit/dialogs/gedit-search-dialog.ui.h:6
 msgid "_Match case"
@@ -927,22 +927,17 @@ msgstr "既に実行中の gedit に新しいドキュメントを作成する"
 msgid "[FILE...]"
 msgstr "[ファイル...]"
 
-#: ../gedit/gedit.c:143
-#, c-format
-msgid "%s: malformed file name or URI.\n"
-msgstr "%s: ファイル名または URI が間違っています。\n"
-
-#: ../gedit/gedit.c:155
+#: ../gedit/gedit.c:149
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: エンコーディングが間違っています。\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:535
+#: ../gedit/gedit.c:540
 msgid "- Edit text files"
 msgstr "- テキスト・ファイルを編集する"
 
-#: ../gedit/gedit.c:548
+#: ../gedit/gedit.c:553
 #, c-format
 msgid ""
 "%s\n"
@@ -965,39 +960,39 @@ msgstr[0] "%d 個のファイルを読み込んでいます…"
 msgstr[1] "%d 個のファイルを読み込んでいます…"
 
 #. Translators: "Open Files" is the title of the file chooser window
-#: ../gedit/gedit-commands-file.c:438
+#: ../gedit/gedit-commands-file.c:443
 msgid "Open Files"
 msgstr "ファイルを開く"
 
-#: ../gedit/gedit-commands-file.c:644
+#: ../gedit/gedit-commands-file.c:649
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "ファイル \"%s\" は読み込み専用です。"
 
-#: ../gedit/gedit-commands-file.c:649
+#: ../gedit/gedit-commands-file.c:654
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "このファイルで上書きしてみますか？"
 
-#: ../gedit/gedit-commands-file.c:715 ../gedit/gedit-commands-file.c:921
+#: ../gedit/gedit-commands-file.c:720 ../gedit/gedit-commands-file.c:926
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "ファイル \"%s\" を保存しています…"
 
-#: ../gedit/gedit-commands-file.c:819
+#: ../gedit/gedit-commands-file.c:824
 msgid "Save As…"
 msgstr "別名で保存…"
 
-#: ../gedit/gedit-commands-file.c:1112
+#: ../gedit/gedit-commands-file.c:1117
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "ドキュメント \"%s\" を戻しています…"
 
-#: ../gedit/gedit-commands-file.c:1157
+#: ../gedit/gedit-commands-file.c:1162
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "変更部分を保存しないで、元のドキュメント '%s' に戻しますか？"
 
-#: ../gedit/gedit-commands-file.c:1166
+#: ../gedit/gedit-commands-file.c:1171
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1007,12 +1002,12 @@ msgid_plural ""
 msgstr[0] "%ld秒前に編集したドキュメントへの変更が完全に失われます。"
 msgstr[1] "%ld秒前に編集したドキュメントへの変更が完全に失われます。"
 
-#: ../gedit/gedit-commands-file.c:1175
+#: ../gedit/gedit-commands-file.c:1180
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "1分前に編集したドキュメントへの変更が完全に失われます。"
 
-#: ../gedit/gedit-commands-file.c:1181
+#: ../gedit/gedit-commands-file.c:1186
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1023,7 +1018,7 @@ msgid_plural ""
 msgstr[0] "1分 %ld秒前に編集したドキュメントへの変更が完全に失われます。"
 msgstr[1] "1分 %ld秒前に編集したドキュメントへの変更が完全に失われます。"
 
-#: ../gedit/gedit-commands-file.c:1191
+#: ../gedit/gedit-commands-file.c:1196
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1033,11 +1028,11 @@ msgid_plural ""
 msgstr[0] "%ld分前に編集したドキュメントへの変更が完全に失われます。"
 msgstr[1] "%ld分前に編集したドキュメントへの変更が完全に失われます。"
 
-#: ../gedit/gedit-commands-file.c:1206
+#: ../gedit/gedit-commands-file.c:1211
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr "1時間前に編集したドキュメントへの変更が完全に失われます。"
 
-#: ../gedit/gedit-commands-file.c:1212
+#: ../gedit/gedit-commands-file.c:1217
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1048,7 +1043,7 @@ msgid_plural ""
 msgstr[0] "1時間 %d分前に編集したドキュメントへの変更が完全に失われます。"
 msgstr[1] "1時間 %d分前に編集したドキュメントへの変更が完全に失われます。"
 
-#: ../gedit/gedit-commands-file.c:1227
+#: ../gedit/gedit-commands-file.c:1232
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1057,7 +1052,7 @@ msgid_plural ""
 msgstr[0] "%d時間前に編集したドキュメントへの変更が完全に失われます。"
 msgstr[1] "%d時間前に編集したドキュメントへの変更が完全に失われます。"
 
-#: ../gedit/gedit-commands-file.c:1253
+#: ../gedit/gedit-commands-file.c:1258
 msgid "_Revert"
 msgstr "戻す(_R)"
 
@@ -1099,11 +1094,11 @@ msgid "Unsaved Document %d"
 msgstr "編集中のドキュメント %d"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:2164 ../gedit/gedit-window.c:2169
+#: ../gedit/gedit-window.c:2165 ../gedit/gedit-window.c:2170
 msgid "Read Only"
 msgstr "書き込み禁止"
 
-#: ../gedit/gedit-documents-panel.c:774 ../gedit/gedit-window.c:3524
+#: ../gedit/gedit-documents-panel.c:774 ../gedit/gedit-window.c:3525
 msgid "Documents"
 msgstr "ドキュメントの一覧"
 
@@ -1563,7 +1558,7 @@ msgid "_Reload"
 msgstr "再読込み(_R)"
 
 #. bad bad luck...
-#: ../gedit/gedit-local-document-saver.c:360
+#: ../gedit/gedit-local-document-saver.c:375
 msgid "Could not obtain backup filename"
 msgstr "バックアップ・ファイルを取得できませんでした"
 
@@ -1780,73 +1775,73 @@ msgstr ""
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:665
+#: ../gedit/gedit-tab.c:666
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "%2$s から %1$s に戻しています"
 
-#: ../gedit/gedit-tab.c:672
+#: ../gedit/gedit-tab.c:673
 #, c-format
 msgid "Reverting %s"
 msgstr "%s に戻しています"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:688
+#: ../gedit/gedit-tab.c:689
 #, c-format
 msgid "Loading %s from %s"
 msgstr "%2$s から %1$s を読み込んでいます"
 
-#: ../gedit/gedit-tab.c:695
+#: ../gedit/gedit-tab.c:696
 #, c-format
 msgid "Loading %s"
 msgstr "%s を読み込んでいます"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:778
+#: ../gedit/gedit-tab.c:779
 #, c-format
 msgid "Saving %s to %s"
 msgstr "%s を %s へ保存しています"
 
-#: ../gedit/gedit-tab.c:785
+#: ../gedit/gedit-tab.c:786
 #, c-format
 msgid "Saving %s"
 msgstr "%s を保存しています"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1684
+#: ../gedit/gedit-tab.c:1685
 msgid "RO"
 msgstr "[書き込み禁止]"
 
-#: ../gedit/gedit-tab.c:1731
+#: ../gedit/gedit-tab.c:1732
 #, c-format
 msgid "Error opening file %s"
 msgstr "ファイル %s を読み込む際にエラー"
 
-#: ../gedit/gedit-tab.c:1736
+#: ../gedit/gedit-tab.c:1737
 #, c-format
 msgid "Error reverting file %s"
 msgstr "ファイル %s に戻す際にエラー"
 
-#: ../gedit/gedit-tab.c:1741
+#: ../gedit/gedit-tab.c:1742
 #, c-format
 msgid "Error saving file %s"
 msgstr "ファイル %s を保存する際にエラー"
 
-#: ../gedit/gedit-tab.c:1762
+#: ../gedit/gedit-tab.c:1763
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1769
+#: ../gedit/gedit-tab.c:1770
 msgid "Name:"
 msgstr "名前:"
 
-#: ../gedit/gedit-tab.c:1770
+#: ../gedit/gedit-tab.c:1771
 msgid "MIME Type:"
 msgstr "MIME 型:"
 
-#: ../gedit/gedit-tab.c:1771
+#: ../gedit/gedit-tab.c:1772
 msgid "Encoding:"
 msgstr "エンコーディング:"
 
@@ -2144,22 +2139,22 @@ msgstr "ボトム・ペイン(_B)"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "このウィンドウでボトム・ペインの表示/非表示を切り替えます"
 
-#: ../gedit/gedit-utils.c:964
+#: ../gedit/gedit-utils.c:1035
 msgid "Please check your installation."
 msgstr "gedit のインストールを確認して下さい。"
 
-#: ../gedit/gedit-utils.c:1030
+#: ../gedit/gedit-utils.c:1100
 #, c-format
 msgid "Unable to open ui file %s. Error: %s"
 msgstr "UI ファイルの %s を開けません (エラー: %s)"
 
-#: ../gedit/gedit-utils.c:1049
+#: ../gedit/gedit-utils.c:1119
 #, c-format
 msgid "Unable to find the object '%s' inside file %s."
 msgstr "オブジェクトの '%s' は %s というファイルの中にありませんでした。"
 
 #. Translators: '/ on <remote-share>'
-#: ../gedit/gedit-utils.c:1204
+#: ../gedit/gedit-utils.c:1279
 #, c-format
 msgid "/ on %s"
 msgstr "%s の / (ルート)"
