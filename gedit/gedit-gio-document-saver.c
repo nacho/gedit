@@ -114,7 +114,7 @@ async_data_new (GeditGioDocumentSaver *gvsaver)
 {
 	AsyncData *async;
 	
-	async = g_new (AsyncData, 1);
+	async = g_slice_new (AsyncData);
 	async->saver = gvsaver;
 	async->buffer = NULL;
 	async->cancellable = g_object_ref (gvsaver->priv->cancellable);
@@ -128,7 +128,7 @@ async_data_free (AsyncData *async)
 {
 	g_object_unref (async->cancellable);
 	g_free (async->buffer);
-	g_free (async);
+	g_slice_free (AsyncData, async);
 }
 
 static void 
