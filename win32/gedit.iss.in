@@ -22,11 +22,15 @@ Name: "locale"; Description: "Translations"; Types: full compact custom; Flags: 
 [Tasks]
 Name: common; Description: "For all users"; Components: main; Flags: exclusive
 Name: user; Description: "For the current user only"; Components: main; Flags: exclusive unchecked
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Icons]
 ; Common task icons
 Name: "{commonprograms}\{groupname}\gedit"; Filename: "{app}\bin\gedit.exe"; Tasks: common
 Name: "{commonprograms}\{groupname}\Uninstall gedit"; Filename: "{uninstallexe}"; Tasks: common
+Name: "{commondesktop}\gedit"; Filename: "{app}\bin\gedit.exe"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\gedit"; Filename: "{app}\bin\gedit.exe"; Tasks: quicklaunchicon
 
 ; User task icons
 Name: "{userprograms}\{groupname}\gedit"; Filename: "{app}\bin\gedit.exe"; Tasks: user
