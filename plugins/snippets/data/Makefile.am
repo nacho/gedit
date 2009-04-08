@@ -7,6 +7,7 @@ snippets_DATA = \
 	cpp.xml \
 	chdr.xml \
 	docbook.xml \
+	fortran.xml \
 	global.xml \
 	haskell.xml \
 	html.xml \
