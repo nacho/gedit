@@ -275,7 +275,7 @@ free_window_data (WindowData *data)
 {
 	g_return_if_fail (data != NULL);
 
-	g_free (data);
+	g_slice_free (WindowData, data);
 }
 
 static void
@@ -306,7 +306,7 @@ impl_activate (GeditPlugin *plugin,
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	data = g_new (WindowData, 1);
+	data = g_slice_new (WindowData);
 
 	manager = gedit_window_get_ui_manager (window);
 
@@ -327,6 +327,7 @@ impl_activate (GeditPlugin *plugin,
 	if (data->ui_id == 0)
 	{
 		g_warning ("%s", error->message);
+		free_window_data (data);
 		return;
 	}
 
