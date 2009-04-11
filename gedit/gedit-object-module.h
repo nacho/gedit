@@ -74,9 +74,11 @@ struct _GeditObjectModuleClass
 };
 
 GType		 gedit_object_module_get_type			(void) G_GNUC_CONST;
+
 GeditObjectModule *gedit_object_module_new			(const gchar *module_name,
 								 const gchar *path,
-								 const gchar *type_registration);
+								 const gchar *type_registration,
+								 gboolean     resident);
 
 GObject		*gedit_object_module_new_object			(GeditObjectModule *module, 
 								 const gchar	   *first_property_name,

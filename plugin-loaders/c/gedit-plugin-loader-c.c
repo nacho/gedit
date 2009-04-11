@@ -56,9 +56,11 @@ gedit_plugin_loader_iface_load (GeditPluginLoader *loader,
 
 	if (module == NULL)
 	{
+		/* For now we force all modules to be resident */
 		module = gedit_object_module_new (module_name,
 						  path,
-						  "register_gedit_plugin");
+						  "register_gedit_plugin",
+						  TRUE);
 
 		/* Infos are available for all the lifetime of the loader.
 		 * If this changes, we should use weak refs or something */

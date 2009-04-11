@@ -1,5 +1,15 @@
 2009-04-11  Paolo Borelli  <pborelli@katamail.com>
 
+	* plugin-loaders/c/gedit-plugin-loader-c.c:
+	* gedit/gedit-object-module.c:
+	* gedit/gedit-object-module.h:
+	* gedit/gedit-plugins-engine.c:
+	Make all C plugin resident since they may use libraries that
+	do not deal well with reload. Python plugins are already
+	resident.
+
+2009-04-11  Paolo Borelli  <pborelli@katamail.com>
+
 	* gedit/gedit-document.c: do not apply tags to the empty
 	string matches when clearing search highlighting.
 	Bug #578461, found by Zach Kanzler.

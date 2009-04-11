@@ -48,7 +48,8 @@ enum {
 	PROP_0,
 	PROP_MODULE_NAME,
 	PROP_PATH,
-	PROP_TYPE_REGISTRATION
+	PROP_TYPE_REGISTRATION,
+	PROP_RESIDENT
 };
 
 struct _GeditObjectModulePrivate
@@ -59,6 +60,8 @@ struct _GeditObjectModulePrivate
 	gchar *path;
 	gchar *module_name;
 	gchar *type_registration;
+
+	gboolean resident;
 };
 
 G_DEFINE_TYPE (GeditObjectModule, gedit_object_module, G_TYPE_TYPE_MODULE);
@@ -114,6 +117,11 @@ gedit_object_module_load (GTypeModule *gmodule)
 	{
 		g_warning ("Invalid object contained by module %s", module->priv->module_name);
 		return FALSE;
+	}
+
+	if (module->priv->resident)
+	{
+		g_module_make_resident (module->priv->library);
 	}
 
 	return TRUE;
@@ -174,6 +182,10 @@ gedit_object_module_get_property (GObject    *object,
 			break;
 		case PROP_TYPE_REGISTRATION:
 			g_value_set_string (value, module->priv->type_registration);
+			break;
+		case PROP_RESIDENT:
+			g_value_set_boolean (value, module->priv->resident);
+			break;
 		default:
 			g_return_if_reached ();
 	}
@@ -181,9 +193,9 @@ gedit_object_module_get_property (GObject    *object,
 
 static void
 gedit_object_module_set_property (GObject      *object,
-			   guint         prop_id,
-			   const GValue *value,
-			   GParamSpec   *pspec)
+				  guint         prop_id,
+				  const GValue *value,
+				  GParamSpec   *pspec)
 {
 	GeditObjectModule *module = GEDIT_OBJECT_MODULE (object);
 
@@ -199,6 +211,9 @@ gedit_object_module_set_property (GObject      *object,
 			break;
 		case PROP_TYPE_REGISTRATION:
 			module->priv->type_registration = g_value_dup_string (value);
+			break;
+		case PROP_RESIDENT:
+			module->priv->resident = g_value_get_boolean (value);
 			break;
 		default:
 			g_return_if_reached ();
@@ -245,13 +260,23 @@ gedit_object_module_class_init (GeditObjectModuleClass *klass)
 							      G_PARAM_READWRITE |
 							      G_PARAM_CONSTRUCT_ONLY));
 
+	g_object_class_install_property (object_class,
+					 PROP_RESIDENT,
+					 g_param_spec_boolean ("resident",
+							       "Resident",
+							       "Whether the module is resident",
+							       FALSE,
+							       G_PARAM_READWRITE |
+							       G_PARAM_CONSTRUCT_ONLY));
+
 	g_type_class_add_private (klass, sizeof (GeditObjectModulePrivate));
 }
 
 GeditObjectModule *
 gedit_object_module_new (const gchar *module_name,
 			 const gchar *path,
-			 const gchar *type_registration)
+			 const gchar *type_registration,
+			 gboolean     resident)
 {
 	return (GeditObjectModule *)g_object_new (GEDIT_TYPE_OBJECT_MODULE,
 						  "module-name",
@@ -260,6 +285,8 @@ gedit_object_module_new (const gchar *module_name,
 						  path,
 						  "type-registration",
 						  type_registration,
+						  "resident",
+						  resident,
 						  NULL);
 }
 

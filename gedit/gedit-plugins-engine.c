@@ -393,8 +393,12 @@ load_loader (GeditPluginsEngine *engine,
 	path = g_path_get_dirname (filename);
 	base = g_path_get_basename (filename);
 
-	module = gedit_object_module_new (base, path, "register_gedit_plugin_loader");
-	
+	/* for now they are all resident */
+	module = gedit_object_module_new (base,
+					  path,
+					  "register_gedit_plugin_loader",
+					  TRUE);
+
 	g_free (base);
 	g_free (path);
 
