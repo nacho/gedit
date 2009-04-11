@@ -1976,22 +1976,22 @@ search_region (GeditDocument *doc,
 
 	if (doc->priv->search_text == NULL)
 		return;
-		
+
 	g_return_if_fail (doc->priv->num_of_lines_search_text > 0);
-	
+
 	gtk_text_iter_backward_lines (start, doc->priv->num_of_lines_search_text);
 	gtk_text_iter_forward_lines (end, doc->priv->num_of_lines_search_text);
-	
+
 	if (gtk_text_iter_has_tag (start, doc->priv->found_tag) &&
 	    !gtk_text_iter_begins_tag (start, doc->priv->found_tag))
 		gtk_text_iter_backward_to_tag_toggle (start, doc->priv->found_tag);
-		
+
 	if (gtk_text_iter_has_tag (end, doc->priv->found_tag) &&
 	    !gtk_text_iter_ends_tag (end, doc->priv->found_tag))
 		gtk_text_iter_forward_to_tag_toggle (end, doc->priv->found_tag);
-		
+
 	/*
-	g_print ("[%u (%u), %u (%u)]\n", gtk_text_iter_get_line (start), gtk_text_iter_get_offset (start),	
+	g_print ("[%u (%u), %u (%u)]\n", gtk_text_iter_get_line (start), gtk_text_iter_get_offset (start),
 					   gtk_text_iter_get_line (end), gtk_text_iter_get_offset (end));
 	*/
 
@@ -1999,6 +1999,9 @@ search_region (GeditDocument *doc,
 				    doc->priv->found_tag,
 				    start,
 				    end);
+
+	if (*doc->priv->search_text == '\0')
+		return;
 
 	iter = *start;
 		
@@ -2033,17 +2036,16 @@ search_region (GeditDocument *doc,
 			if (!word)
 				continue;
 		}
-		
+
 		if (found)
 		{
-			/* g_print ("FOUND\n"); */
 			gtk_text_buffer_apply_tag (buffer,
 						   doc->priv->found_tag,
 						   &m_start,
 						   &m_end);
 		}		
 
-	} while (found);		
+	} while (found);
 }
 
 static void
