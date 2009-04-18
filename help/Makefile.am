@@ -12,5 +12,5 @@ DOC_FIGURES = \
 	figures/gedit_recent_files_menu_icon.png	\
 	figures/gedit_window.png	
 
-DOC_LINGUAS = bg da de el es fi fr hu it ja ko oc pt_BR ru sv th uk zh_CN zh_HK zh_TW
+DOC_LINGUAS = ar bg da de el es fi fr hu it ja ko oc pt_BR ru sv th uk zh_CN zh_HK zh_TW
 
