@@ -220,9 +220,6 @@ PKG_CHECK_MODULES(GEDIT, [
 	gtksourceview-2.0 >= 2.4.0
 	gconf-2.0 >= 1.1.11
 ])
-GEDIT_LIBS="${GEDIT_LIBS}"
-AC_SUBST(GEDIT_LIBS)
-AC_SUBST(GEDIT_CFLAGS)
 
 dnl FIXME: Remove this when removing sexy-icon-entry
 if $PKG_CONFIG --atleast-version 2.15.0 gtk+-2.0; then
@@ -315,14 +312,11 @@ if test "x$have_python" != "xno"; then
 		if test "x$enable_python" = "xyes"; then
 			AC_MSG_ERROR([$PYGTK_PKG_ERRORS])
 		elif test "x$enable_python" = "xautodetect"; then
-                        enable_python=no
+			enable_python=no
 			AC_MSG_WARN([$PYGTK_PKG_ERRORS])
 			AC_MSG_WARN([Disabling python support])
 		fi
 		])
-
-	AC_SUBST([PYGTK_CFLAGS])
-	AC_SUBST([PYGTK_LIBS])
 fi
 
 if test "x$have_python" != "xno"; then
