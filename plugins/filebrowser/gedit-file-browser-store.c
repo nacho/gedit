@@ -3084,20 +3084,22 @@ gchar *
 gedit_file_browser_store_get_root (GeditFileBrowserStore * model)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), NULL);
-	g_return_val_if_fail (model->priv->root != NULL, NULL);
-	g_return_val_if_fail (model->priv->root->file != NULL, NULL);
-
-	return g_file_get_uri (model->priv->root->file);
+	
+	if (model->priv->root == NULL || model->priv->root->file == NULL)
+		return NULL;
+	else
+		return g_file_get_uri (model->priv->root->file);
 }
 
 gchar * 
 gedit_file_browser_store_get_virtual_root (GeditFileBrowserStore * model)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), NULL);
-	g_return_val_if_fail (model->priv->virtual_root != NULL, NULL);
-	g_return_val_if_fail (model->priv->virtual_root->file != NULL, NULL);
 	
-	return g_file_get_uri (model->priv->virtual_root->file);
+	if (model->priv->virtual_root == NULL || model->priv->virtual_root->file == NULL)
+		return NULL;
+	else
+		return g_file_get_uri (model->priv->virtual_root->file);
 }
 
 void
