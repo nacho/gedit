@@ -477,7 +477,7 @@ _wrap_gedit_message_bus_send(PyGObject *self, PyObject *args, PyObject *kwargs)
     return Py_None;
 }
 %%
-override gedit_message_bus_send_sync args
+override gedit_message_bus_send_sync kwargs
 static PyObject *
 _wrap_gedit_message_bus_send_sync(PyGObject *self, PyObject *args, PyObject *kwargs)
 {
