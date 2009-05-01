@@ -481,6 +481,9 @@ parse_kate_modeline (gchar           *s,
 	return s;
 }
 
+/* Scan a line for vi(m)/emacs/kate modelines.
+ * Line numbers are counted starting at one.
+ */
 static void
 parse_modeline (gchar           *s,
 		gint             line_number,
@@ -495,7 +498,7 @@ parse_modeline (gchar           *s,
 		if (!g_ascii_isspace (prev))
 			continue;
 
-		if ((line_number < 3 || line_number >= line_count - 3) &&
+		if ((line_number <= 3 || line_number > line_count - 3) &&
 		    (strncmp (s, "ex:", 3) == 0 ||
 		     strncmp (s, "vi:", 3) == 0 ||
 		     strncmp (s, "vim:", 4) == 0))
@@ -505,13 +508,13 @@ parse_modeline (gchar           *s,
 		    	while (*s != ':') s++;
 		    	s = parse_vim_modeline (s + 1, options);
 		}
-		else if (line_number < 2 && strncmp (s, "-*-", 3) == 0)
+		else if (line_number <= 2 && strncmp (s, "-*-", 3) == 0)
 		{
 			gedit_debug_message (DEBUG_PLUGINS, "Emacs modeline on line %d", line_number);
 
 			s = parse_emacs_modeline (s + 3, options);
 		}
-		else if ((line_number < 10 || line_number >= line_count - 10) &&
+		else if ((line_number <= 10 || line_number > line_count - 10) &&
 			 strncmp (s, "kate:", 5) == 0)
 		{
 			gedit_debug_message (DEBUG_PLUGINS, "Kate modeline on line %d", line_number);
