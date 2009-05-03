@@ -127,6 +127,32 @@ gedit_app_class_init (GeditAppClass *klass)
 	g_type_class_add_private (object_class, sizeof(GeditAppPrivate));
 }
 
+static gboolean
+ensure_user_config_dir (void)
+{
+	gchar *config_dir;
+	gboolean ret = TRUE;
+	gint res;
+
+	config_dir = gedit_dirs_get_user_config_dir ();
+	if (config_dir == NULL)
+	{
+		g_warning ("Could not get config directory\n");
+		return FALSE;
+	}
+
+	res = g_mkdir_with_parents (config_dir, 0755);
+	if (res < 0)
+	{
+		g_warning ("Could not create config directory\n");
+		ret = FALSE;
+	}
+
+	g_free (config_dir);
+
+	return ret;
+}
+
 static void
 load_accels (void)
 {
@@ -407,8 +433,9 @@ window_destroy (GeditWindow *window,
 	{
 		/* Last window is gone... save some settings and exit */
 
-		save_accels ();
+		ensure_user_config_dir ();
 
+		save_accels ();
 		save_page_setup (app);
 		save_print_settings (app);
 
