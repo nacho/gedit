@@ -204,7 +204,8 @@ EXTRA_DIST = 				\
 	$(ui_DATA)			\
 	gedit-enum-types.h.template	\
 	gedit-enum-types.c.template	\
-	gedit-marshal.list
+	gedit-marshal.list		\
+	gedit.rc
 
 CLEANFILES = $(BUILT_SOURCES)
 
