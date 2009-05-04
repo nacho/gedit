@@ -185,6 +185,11 @@ AC_SUBST(ENCHANT_LIBS)
 AC_SUBST(SPELL_PLUGIN_DIR)
 
 dnl ================================================================
+dnl libsocket checks - needed for bacon-connection on solaris.
+dnl ================================================================
+AC_SEARCH_LIBS(bind, socket)
+
+dnl ================================================================
 dnl libattr checks
 dnl ================================================================
 
