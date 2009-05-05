@@ -116,3 +116,5 @@ include $(top_srcdir)/gtk-doc.make
 regenerate-types:
 	grep _get_type $(DOC_SOURCE_DIR)/gedit-*.h | grep -oR '^.*\.h' | sort | uniq - | sed -r 's/^.*\.h$/#include "\0"/' > gedit.types
 	grep _get_type $(DOC_SOURCE_DIR)/gedit-*.h | grep -oR '^.*\.h' | sort | uniq - | sed -re 'y/-/_/' -e 's/^(.*)\.h$/\1_get_type/' >> gedit.types.new
+
+-include $(top_srcdir)/git.mk

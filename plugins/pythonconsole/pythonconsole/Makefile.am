@@ -13,3 +13,5 @@ EXTRA_DIST = $(ui_DATA)
 
 CLEANFILES =
 DISTCLEANFILES =
+
+-include $(top_srcdir)/git.mk

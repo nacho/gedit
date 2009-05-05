@@ -27,3 +27,5 @@ DIST_SUBDIRS += externaltools pythonconsole snippets
 SUBDIRS      += externaltools pythonconsole snippets
 endif
 
+
+-include $(top_srcdir)/git.mk

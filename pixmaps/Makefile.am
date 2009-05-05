@@ -8,3 +8,5 @@ EXTRA_DIST = \
 	$(icon_DATA) \
 	$(logo_DATA) \
 	gedit.ico
+
+-include $(top_srcdir)/git.mk

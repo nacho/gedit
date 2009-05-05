@@ -48,3 +48,5 @@ EXTRA_DIST =                             \
 	eggsmclient-osx.c                \
 	eggsmclient-win32.c              \
 	eggsmclient-xsmp.c
+
+-include $(top_srcdir)/git.mk

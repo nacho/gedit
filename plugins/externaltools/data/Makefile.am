@@ -31,3 +31,5 @@ DISTCLEANFILES = \
 	$(desktop_files) \
 	$(tools_SCRIPTS)
 
+
+-include $(top_srcdir)/git.mk

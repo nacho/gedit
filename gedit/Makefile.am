@@ -234,3 +234,5 @@ endif
 if BUILD_SEXY
 libgedit_la_SOURCES += sexy-icon-entry.c sexy-icon-entry.h
 endif
+
+-include $(top_srcdir)/git.mk

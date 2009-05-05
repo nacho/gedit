@@ -27,3 +27,5 @@ snippets_DATA = \
 snippetsdir = $(GEDIT_PLUGINS_DATA_DIR)/snippets
 
 EXTRA_DIST = $(snippets_DATA)
+
+-include $(top_srcdir)/git.mk

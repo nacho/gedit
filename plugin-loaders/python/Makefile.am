@@ -31,3 +31,5 @@ libpythonloader_la_LDFLAGS = $(LOADER_LIBTOOL_FLAGS)
 libpythonloader_la_LIBADD = \
 	$(GEDIT_LIBS) 			\
 	bindings/gedit.la
+
+-include $(top_srcdir)/git.mk

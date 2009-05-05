@@ -100,3 +100,5 @@ DISTCLEANFILES = \
 	$(plugin_DATA)		\
 	$(schemas_DATA)		\
 	$(BUILT_SOURCES)
+
+-include $(top_srcdir)/git.mk

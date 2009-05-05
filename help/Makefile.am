@@ -14,3 +14,5 @@ DOC_FIGURES = \
 
 DOC_LINGUAS = ar bg ca da de el es fi fr hu it ja ko oc pt_BR ru sv th uk zh_CN zh_HK zh_TW
 
+
+-include $(top_srcdir)/git.mk

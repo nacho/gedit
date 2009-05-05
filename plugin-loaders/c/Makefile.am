@@ -20,3 +20,5 @@ libcloader_la_SOURCES = \
 
 libcloader_la_LDFLAGS = $(LOADER_LIBTOOL_FLAGS)
 libcloader_la_LIBADD = $(GEDIT_LIBS)
+
+-include $(top_srcdir)/git.mk

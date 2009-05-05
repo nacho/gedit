@@ -18,3 +18,5 @@ EXTRA_DIST = $(ui_DATA)
 
 CLEANFILES = *.bak *.gladep
 DISTCLEANFILES = *.bak *.gladep
+
+-include $(top_srcdir)/git.mk
