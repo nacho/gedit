@@ -159,6 +159,14 @@ def buffer_word_boundary(buf):
                 
         return (start, iter)
 
+def buffer_line_boundary(buf):
+        iter = buf.get_iter_at_mark(buf.get_insert())
+        start = iter.copy()
+        start.set_line_offset(0)
+        iter.forward_to_line_end()
+        
+        return (start, iter)
+
 def drop_get_uris(selection):
         lines = re.split('\\s*[\\n\\r]+\\s*', selection.data.strip())
         result = []

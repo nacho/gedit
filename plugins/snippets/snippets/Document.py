@@ -339,6 +339,11 @@ class Document:
                 start, end = buffer_word_boundary(buf)
                 
                 return buf.get_text(start, end)
+
+        def env_get_current_line(self, buf):
+                start, end = buffer_line_boundary(buf)
+                
+                return buf.get_text(start, end)
                 
         def env_get_filename(self, buf):
                 uri = buf.get_uri()
@@ -361,6 +366,7 @@ class Document:
                 
                 variables = {'GEDIT_SELECTED_TEXT': self.env_get_selected_text, 
                              'GEDIT_CURRENT_WORD': self.env_get_current_word, 
+                             'GEDIT_CURRENT_LINE': self.env_get_current_line,
                              'GEDIT_FILENAME': self.env_get_filename, 
                              'GEDIT_BASENAME': self.env_get_basename}
                 
@@ -369,6 +375,15 @@ class Document:
         
         def uses_current_word(self, snippet):
                 matches = re.findall('(\\\\*)\\$GEDIT_CURRENT_WORD', snippet['text'])
+                
+                for match in matches:
+                        if len(match) % 2 == 0:
+                                return True
+                
+                return False
+        
+        def uses_current_line(self, snippet):
+                matches = re.findall('(\\\\*)\\$GEDIT_CURRENT_LINE', snippet['text'])
                 
                 for match in matches:
                         if len(match) % 2 == 0:
@@ -394,6 +409,11 @@ class Document:
                         # the current word. Set start and end to the word boundary so that 
                         # it will be removed
                         start, end = buffer_word_boundary(buf)
+                elif start.equal(end) and self.uses_current_line(s):
+                        # There is no tab trigger and no selection and the snippet uses
+                        # the current line. Set start and end to the line boundary so that 
+                        # it will be removed
+                        start, end = buffer_line_boundary(buf)
 
                 # Set environmental variables
                 self.update_environment()
