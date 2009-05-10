@@ -102,32 +102,30 @@ def _write_indent(file, text, indent):
         file.write('  ' * indent + text)
 
 def _write_node(node, file, cdata_nodes=(), indent=0):
-    # write XML to file
+        # write XML to file
         tag = node.tag
 
         if node is Comment:
-                _write_indent(file, "<!-- %s -->\n" % _escape_cdata(node.text), indent)
+                _write_indent(file, "<!-- %s -->\n" % saxutils.escape(node.text.encode('utf-8')), indent)
         elif node is ProcessingInstruction:
-                _write_indent(file, "<?%s?>\n" % _escape_cdata(node.text), \
-                                indent)
+                _write_indent(file, "<?%s?>\n" % saxutils.escape(node.text.encode('utf-8')), indent)
         else:
                 items = node.items()
                 
                 if items or node.text or len(node):
                         _write_indent(file, "<" + tag.encode('utf-8'), indent)
-                
+
                         if items:
                                 items.sort() # lexical order
                                 for k, v in items:
-                                        file.write(" %s=\"%s\"" % (k.encode('utf-8'),
-                                                        _escape_attrib(v)))
+                                        file.write(" %s=%s" % (k.encode('utf-8'), saxutils.quoteattr(v.encode('utf-8'))))
                         if node.text or len(node):
                                 file.write(">")
                                 if node.text and node.text.strip() != "":
                                         if tag in cdata_nodes:
                                                 file.write(_cdata(node.text))
                                         else:
-                                                file.write(_escape_cdata(node.text))
+                                                file.write(saxutils.escape(node.text.encode('utf-8')))
                                 else:
                                         file.write("\n")
 
@@ -143,29 +141,11 @@ def _write_node(node, file, cdata_nodes=(), indent=0):
                                 file.write(" />\n")
 
                 if node.tail and node.tail.strip() != "":
-                        file.write(_escape_cdata(node.tail))
+                        file.write(saxutils.escape(node.tail.encode('utf-8')))
 
 def _cdata(text, replace=string.replace):
         text = text.encode('utf-8')
         return '<![CDATA[' + replace(text, ']]>', ']]]]><![CDATA[>') + ']]>'
-
-def _escape_cdata(text, replace=string.replace):
-        # escape character data
-        text = text.encode('utf-8')
-        text = replace(text, "&", "&amp;")
-        text = replace(text, "<", "&lt;")
-        text = replace(text, ">", "&gt;")
-        return text
-
-def _escape_attrib(text, replace=string.replace):
-        # escape attribute value
-        text = text.encode('utf-8')
-        text = replace(text, "&", "&amp;")
-        text = replace(text, "'", "&apos;")
-        text = replace(text, "\"", "&quot;")
-        text = replace(text, "<", "&lt;")
-        text = replace(text, ">", "&gt;")
-        return text
 
 def buffer_word_boundary(buf):
         iter = buf.get_iter_at_mark(buf.get_insert())
@@ -178,8 +158,7 @@ def buffer_word_boundary(buf):
                 iter.forward_word_end()
                 
         return (start, iter)
-        
-                
+
 def drop_get_uris(selection):
         lines = re.split('\\s*[\\n\\r]+\\s*', selection.data.strip())
         result = []
