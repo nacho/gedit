@@ -816,6 +816,15 @@ save_file (GeditLocalDocumentSaver *lsaver)
 	else if (errno == EEXIST)
 	{
 		lsaver->priv->fd = open (lsaver->priv->local_path, O_RDWR);
+
+		if (lsaver->priv->fd == -1 && errno == ENOTSUP)
+		{
+			/* Open for RDWR failed because it is not supported, open for write
+			 * only. This will disable creating backups in the fallback
+			 * strategy, but at least we can write the new file */
+			lsaver->priv->fd = open (lsaver->priv->local_path, O_WRONLY);
+		}
+
 		if (lsaver->priv->fd != -1)
 		{
 			next_phase = (GSourceFunc) save_existing_local_file;
