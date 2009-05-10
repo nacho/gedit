@@ -266,10 +266,8 @@ class Document:
                         # resolve the 'hugging' problem
                         current = self.active_placeholder
                         currentIndex = placeholders.index(current)
-
-                        found = current
                 
-                if current and current == found:
+                if current:
                         if indexer(currentIndex):
                                 next = placeholders[currentIndex + direction]
                 elif found:
