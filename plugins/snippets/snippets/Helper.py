@@ -163,7 +163,9 @@ def buffer_line_boundary(buf):
         iter = buf.get_iter_at_mark(buf.get_insert())
         start = iter.copy()
         start.set_line_offset(0)
-        iter.forward_to_line_end()
+        
+        if not iter.ends_line():
+                iter.forward_to_line_end()
         
         return (start, iter)
 
