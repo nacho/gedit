@@ -12,6 +12,7 @@ EXTRA_DIST = 			\
 	ChangeLog-20090418	\
 	HACKING			\
 	MAINTAINERS		\
+	gedit.doap		\
 	xmldocs.make 		\
 	omf.make		\
 	message-of-doom		\
