@@ -76,14 +76,6 @@ static guint32 startup_timestamp = 0;
 static BaconMessageConnection *connection;
 #endif
 
-static void
-show_version_and_quit (void)
-{
-	g_print ("%s - Version %s\n", g_get_application_name (), VERSION);
-
-	exit (0);
-}
-
 /* command line */
 static gint line_position = 0;
 static gchar *encoding_charset = NULL;
@@ -93,6 +85,30 @@ static gboolean new_document_option = FALSE;
 static gchar **remaining_args = NULL;
 static GSList *file_list = NULL;
 
+static void
+show_version_and_quit (void)
+{
+	g_print ("%s - Version %s\n", g_get_application_name (), VERSION);
+
+	exit (0);
+}
+
+static void
+list_encodings_and_quit (void)
+{
+	gint i = 0;
+	const GeditEncoding *enc;
+
+	while ((enc = gedit_encoding_get_from_index (i)) != NULL) 
+	{
+		g_print ("%s\n", gedit_encoding_get_charset (enc));
+
+		++i;
+	}
+
+	exit (0);
+}
+
 static const GOptionEntry options [] =
 {
 	{ "version", 'V', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
@@ -100,6 +116,9 @@ static const GOptionEntry options [] =
 
 	{ "encoding", '\0', 0, G_OPTION_ARG_STRING, &encoding_charset,
 	  N_("Set the character encoding to be used to open the files listed on the command line"), N_("ENCODING")},
+
+	{ "list-encodings", '\0', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
+	  list_encodings_and_quit, N_("Display list of possible values for the encoding option"), NULL},
 
 	{ "new-window", '\0', 0, G_OPTION_ARG_NONE, &new_window_option,
 	  N_("Create a new toplevel window in an existing instance of gedit"), NULL },
