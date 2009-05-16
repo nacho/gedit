@@ -1297,10 +1297,24 @@ search_entry_insert_text (GtkEditable *editable,
 
 		c = g_utf8_get_char (p);
 		
-		if ((c == '-' || c == '+') && *position == 0)
+		if (((c == '-' || c == '+') && *position == 0) ||
+		    (c == ':' && *position != 0))
 		{
-			next = g_utf8_next_char (p);
-			p = next;
+			gchar *s = NULL;
+		
+			if (c == ':')
+			{
+				s = gtk_editable_get_chars (editable, 0, -1);
+				s = g_utf8_strchr (s, -1, ':');
+			}
+			
+			if (s == NULL || s == p)
+			{
+				next = g_utf8_next_char (p);
+				p = next;
+			}
+			
+			g_free (s);
 		}
 
 		while (p != end)
@@ -1723,16 +1737,30 @@ search_init (GtkWidget *entry,
 	{
 		if (*entry_text != '\0')
 		{
-			gboolean moved;
+			gboolean moved, moved_offset;
 			gint line;
 			gint offset_line = 0;
+			gint line_offset = 0;
+			gchar **split_text = NULL;
+			const gchar *text;
 			
-			if (*entry_text == '-')
+			split_text = g_strsplit (entry_text, ":", -1);
+			
+			if (g_strv_length (split_text) > 1)
+			{
+				text = split_text[0];
+			}
+			else
+			{
+				text = entry_text;
+			}
+			
+			if (*text == '-')
 			{
 				gint cur_line = gtk_text_iter_get_line (&view->priv->start_search_iter);
 			
-				if (*(entry_text + 1) != '\0')
-					offset_line = MAX (atoi (entry_text + 1), 0);
+				if (*(text + 1) != '\0')
+					offset_line = MAX (atoi (text + 1), 0);
 				
 				line = MAX (cur_line - offset_line, 0);
 			}
@@ -1740,20 +1768,30 @@ search_init (GtkWidget *entry,
 			{
 				gint cur_line = gtk_text_iter_get_line (&view->priv->start_search_iter);
 			
-				if (*(entry_text + 1) != '\0')
-					offset_line = MAX (atoi (entry_text + 1), 0);
+				if (*(text + 1) != '\0')
+					offset_line = MAX (atoi (text + 1), 0);
 				
 				line = cur_line + offset_line;
 			}
 			else
 			{
-				line = MAX (atoi (entry_text) - 1, 0);
+				line = MAX (atoi (text) - 1, 0);
 			}
 			
+			if (split_text[1] != NULL)
+			{
+				line_offset = atoi (split_text[1]);
+			}
+			
+			g_strfreev (split_text);
+			
 			moved = gedit_document_goto_line (doc, line);
+			moved_offset = gedit_document_goto_line_offset (doc, line,
+									line_offset);
+			
 			gedit_view_scroll_to_cursor (view);
 
-			if (!moved)
+			if (!moved || !moved_offset)
 				set_entry_background (view->priv->search_entry,
 						      GEDIT_SEARCH_ENTRY_NOT_FOUND);
 			else

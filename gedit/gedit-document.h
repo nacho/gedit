@@ -200,6 +200,10 @@ gboolean	 gedit_document_get_deleted	(GeditDocument       *doc);
 gboolean	 gedit_document_goto_line 	(GeditDocument       *doc, 
 						 gint                 line);
 
+gboolean	 gedit_document_goto_line_offset(GeditDocument *doc,
+						 gint           line,
+						 gint           line_offset);
+
 void		 gedit_document_set_search_text	(GeditDocument       *doc,
 						 const gchar         *text,
 						 guint                flags);
