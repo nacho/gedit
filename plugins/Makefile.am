@@ -4,7 +4,6 @@ DIST_SUBDIRS =		\
 	filebrowser 	\
 	indent 		\
 	modelines	\
-	sample 		\
 	sort 		\
 	spell 		\
 	taglist 	\
@@ -16,7 +15,6 @@ SUBDIRS = 		\
 	filebrowser	\
 	indent		\
 	modelines	\
-	sample		\
 	sort		\
 	taglist		\
 	time		\
