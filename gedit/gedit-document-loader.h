@@ -117,6 +117,7 @@ gboolean		 gedit_document_loader_load_from_stdin	(GeditDocumentLoader *loader);
 #endif		 
 gboolean		 gedit_document_loader_cancel		(GeditDocumentLoader *loader);
 
+GeditDocument		*gedit_document_loader_get_document	(GeditDocumentLoader *loader);
 
 /* Returns STDIN_URI if loading from stdin */
 #define STDIN_URI "stdin:" 

@@ -422,15 +422,15 @@ mount_ready_callback (GFile        *file,
 static void
 recover_not_mounted (AsyncData *async)
 {
-	GeditDocumentLoader *loader;
+	GeditDocument *doc;
 	GMountOperation *mount_operation;
 
 	gedit_debug (DEBUG_LOADER);
 
+	doc = gedit_document_loader_get_document (GEDIT_DOCUMENT_LOADER (async->loader));
+	mount_operation = _gedit_document_create_mount_operation (doc);
+
 	async->tried_mount = TRUE;
-	loader = GEDIT_DOCUMENT_LOADER (async->loader);
-	mount_operation = _gedit_document_create_mount_operation (loader->document);
-	
 	g_file_mount_enclosing_volume (async->loader->priv->gfile,
 				       G_MOUNT_MOUNT_NONE,
 				       mount_operation,

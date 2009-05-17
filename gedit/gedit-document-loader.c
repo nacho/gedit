@@ -408,6 +408,14 @@ gedit_document_loader_cancel (GeditDocumentLoader *loader)
 	return GEDIT_DOCUMENT_LOADER_GET_CLASS (loader)->cancel (loader);
 }
 
+GeditDocument *
+gedit_document_loader_get_document (GeditDocumentLoader *loader)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), NULL);
+
+	return loader->document;
+}
+
 /* Returns STDIN_URI if loading from stdin */
 const gchar *
 gedit_document_loader_get_uri (GeditDocumentLoader *loader)
