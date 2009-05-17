@@ -65,7 +65,6 @@ NOINST_H_FILES =			\
 	gedit-window-private.h		\
 	gedit-documents-panel.h		\
 	gedit-document-loader.h		\
-	gedit-mmap-document-loader.h	\
 	gedit-gio-document-loader.h	\
 	gedit-document-saver.h		\
 	gedit-local-document-saver.h	\
@@ -115,7 +114,6 @@ header_DATA = 				\
 
 if !PLATFORM_WIN32
 POSIXIO_FILES = 			\
-	gedit-mmap-document-loader.c	\
 	gedit-local-document-saver.c	
 else
 POSIXIO_FILES =

@@ -43,7 +43,6 @@
 #include "gedit-marshal.h"
 
 /* Those are for the the gedit_document_loader_new() factory */
-#include "gedit-mmap-document-loader.h"
 #include "gedit-gio-document-loader.h"
 
 G_DEFINE_ABSTRACT_TYPE(GeditDocumentLoader, gedit_document_loader, G_TYPE_OBJECT)
