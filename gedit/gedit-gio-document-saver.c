@@ -594,15 +594,15 @@ mount_ready_callback (GFile        *file,
 static void
 recover_not_mounted (AsyncData *async)
 {
-	GeditDocumentSaver *saver;
+	GeditDocument *doc;
 	GMountOperation *mount_operation;
 	
-	gedit_debug_message (DEBUG_SAVER, "Try mount enclosing volume");
-	
+	gedit_debug (DEBUG_LOADER);
+
+	doc = gedit_document_saver_get_document (GEDIT_DOCUMENT_SAVER (async->saver));
+	mount_operation = _gedit_document_create_mount_operation (doc);
+
 	async->tried_mount = TRUE;
-	saver = GEDIT_DOCUMENT_SAVER (async->saver);
-	mount_operation = _gedit_document_create_mount_operation (saver->document);
-	
 	g_file_mount_enclosing_volume (async->saver->priv->gfile,
 				       G_MOUNT_MOUNT_NONE,
 				       mount_operation,

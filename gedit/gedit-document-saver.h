@@ -126,6 +126,8 @@ void			 gedit_document_saver_save		(GeditDocumentSaver  *saver,
 void			 gedit_document_saver_cancel		(GeditDocumentSaver  *saver);
 #endif
 
+GeditDocument		*gedit_document_saver_get_document	(GeditDocumentSaver  *saver);
+
 const gchar		*gedit_document_saver_get_uri		(GeditDocumentSaver  *saver);
 
 /* If backup_uri is NULL no backup will be made */

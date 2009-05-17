@@ -468,6 +468,14 @@ gedit_document_saver_save (GeditDocumentSaver     *saver,
 	GEDIT_DOCUMENT_SAVER_GET_CLASS (saver)->save (saver, old_mtime);
 }
 
+GeditDocument *
+gedit_document_saver_get_document (GeditDocumentSaver *saver)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), NULL);
+
+	return saver->document;
+}
+
 const gchar *
 gedit_document_saver_get_uri (GeditDocumentSaver *saver)
 {
