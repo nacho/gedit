@@ -18,19 +18,14 @@ libdialogs_la_SOURCES = 			\
 	gedit-close-confirmation-dialog.h 	\
 	gedit-encodings-dialog.c		\
 	gedit-encodings-dialog.h		\
-	gedit-open-location-dialog.c		\
-	gedit-open-location-dialog.h		\
 	gedit-search-dialog.h			\
 	gedit-search-dialog.c
 
 ui_DATA =					\
 	gedit-encodings-dialog.ui		\
-	gedit-open-location-dialog.ui		\
 	gedit-preferences-dialog.ui		\
 	gedit-search-dialog.ui
 
-
 EXTRA_DIST = $(ui_DATA) 
-
 
 -include $(top_srcdir)/git.mk

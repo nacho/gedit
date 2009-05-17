@@ -57,8 +57,6 @@ static const GtkActionEntry gedit_always_sensitive_menu_entries[] =
 	  N_("Create a new document"), G_CALLBACK (_gedit_cmd_file_new) },
 	{ "FileOpen", GTK_STOCK_OPEN, N_("_Open..."), "<control>O",
 	  N_("Open a file"), G_CALLBACK (_gedit_cmd_file_open) },
-	{ "FileOpenURI", NULL, N_("Open _Location..."), "<control>L",
-	  N_("Open a file from a specified location"), G_CALLBACK (_gedit_cmd_file_open_uri) },
 	
 	/* Edit menu */
 	{ "EditPreferences", GTK_STOCK_PREFERENCES, N_("Pr_eferences"), NULL,

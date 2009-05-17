@@ -46,14 +46,12 @@
 #include "gedit-statusbar.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
-#include "dialogs/gedit-close-confirmation-dialog.h"
-#include "dialogs/gedit-open-location-dialog.h"
 #include "gedit-file-chooser-dialog.h"
+#include "dialogs/gedit-close-confirmation-dialog.h"
 
 
 /* Defined constants */
 #define GEDIT_OPEN_DIALOG_KEY 		"gedit-open-dialog-key"
-#define GEDIT_OPEN_LOCATION_DIALOG_KEY  "gedit-open-location-dialog-key"
 #define GEDIT_TAB_TO_SAVE_AS  		"gedit-tab-to-save-as"
 #define GEDIT_LIST_OF_TABS_TO_SAVE_AS   "gedit-list-of-tabs-to-save-as"
 #define GEDIT_IS_CLOSING_ALL            "gedit-is-closing-all"
@@ -496,97 +494,6 @@ _gedit_cmd_file_open (GtkAction   *action,
 			  window);
 
 	gtk_widget_show (open_dialog);
-}
-
-static void
-open_location_dialog_destroyed (GeditWindow *window,
-				gpointer     data)
-{
-	gedit_debug (DEBUG_COMMANDS);
-
-	g_object_set_data (G_OBJECT (window),
-			   GEDIT_OPEN_LOCATION_DIALOG_KEY,
-			   NULL);
-}
-
-static void
-open_location_dialog_response_cb (GeditOpenLocationDialog *dlg,
-				  gint                    response_id,
-				  GeditWindow             *window)
-{
-	GFile *location;
-	const GeditEncoding *encoding;
-	GSList *uris = NULL;
-
-	gedit_debug (DEBUG_COMMANDS);
-
-	if (response_id != GTK_RESPONSE_OK)
-	{
-		gtk_widget_destroy (GTK_WIDGET (dlg));
-
-		return;
-	}
-
-	location = gedit_open_location_dialog_get_location (dlg);
-	encoding = gedit_open_location_dialog_get_encoding (dlg);
-
-	if (location != NULL)
-	{
-		uris = g_slist_prepend (uris, g_file_get_uri (location));
-
-		g_object_unref (location);
-	}
-
-	gtk_widget_destroy (GTK_WIDGET (dlg));
-
-	if (uris != NULL)
-	{
-		gedit_commands_load_uris (window,
-					  uris,
-					  encoding,
-					  0);
-
-		g_slist_foreach (uris, (GFunc) g_free, NULL);
-		g_slist_free (uris);
-	}
-}
-
-void
-_gedit_cmd_file_open_uri (GtkAction   *action,
-			  GeditWindow *window)
-{
-	GtkWidget *dlg;
-	gpointer   data;
-
-	gedit_debug (DEBUG_COMMANDS);
-
-	data = g_object_get_data (G_OBJECT (window), GEDIT_OPEN_LOCATION_DIALOG_KEY);
-
-	if (data != NULL)
-	{
-		g_return_if_fail (GEDIT_IS_OPEN_LOCATION_DIALOG (data));
-
-		gtk_window_present (GTK_WINDOW (data));
-
-		return;
-	}
-
-	dlg = gedit_open_location_dialog_new (GTK_WINDOW (window));
-
-	g_object_set_data (G_OBJECT (window),
-			   GEDIT_OPEN_LOCATION_DIALOG_KEY,
-			   dlg);
-
-	g_object_weak_ref (G_OBJECT (dlg),
-			   (GWeakNotify) open_location_dialog_destroyed,
-			   window);
-
-	g_signal_connect (dlg,
-			  "response",
-			  G_CALLBACK (open_location_dialog_response_cb),
-			  window);
-
-	gtk_widget_show (dlg);
 }
 
 /* File saving */
