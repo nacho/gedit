@@ -43,13 +43,6 @@
 #include "gedit-metadata-manager.h"
 #include "gedit-utils.h"
 
-typedef struct
-{
-	GeditGioDocumentLoader *loader;
-	GCancellable 	       *cancellable;
-	gboolean		tried_mount;
-} AsyncData;
-
 #define READ_CHUNK_SIZE 8192
 #define REMOTE_QUERY_ATTRIBUTES G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE "," \
 				G_FILE_ATTRIBUTE_STANDARD_TYPE "," \
@@ -70,18 +63,16 @@ static goffset	    gedit_gio_document_loader_get_file_size	(GeditDocumentLoader 
 static goffset	    gedit_gio_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
 static gboolean	    gedit_gio_document_loader_get_readonly	(GeditDocumentLoader *loader);
 
-static void open_async_read (AsyncData *async);
+static void open_async_read (GeditGioDocumentLoader *loader);
 
 struct _GeditGioDocumentLoaderPrivate
 {
-	/* Info on the current file */
 	GFile            *gfile;
-
 	GFileInfo        *info;
 	goffset           bytes_read;
+	gboolean          tried_mount;
 
-	/* Handle for remote files */
-	GCancellable 	 *cancellable;
+	GCancellable     *cancellable;
 	GFileInputStream *stream;
 
 	gchar            *buffer;
@@ -141,114 +132,99 @@ gedit_gio_document_loader_class_init (GeditGioDocumentLoaderClass *klass)
 }
 
 static void
-gedit_gio_document_loader_init (GeditGioDocumentLoader *gvloader)
+gedit_gio_document_loader_init (GeditGioDocumentLoader *loader)
 {
-	gvloader->priv = GEDIT_GIO_DOCUMENT_LOADER_GET_PRIVATE (gvloader);
-	gvloader->priv->error = NULL;
-}
+	GeditGioDocumentLoaderPrivate *priv;
 
-static AsyncData *
-async_data_new (GeditGioDocumentLoader *gvloader)
-{
-	AsyncData *async;
-	
-	async = g_new (AsyncData, 1);
-	async->loader = gvloader;
-	async->cancellable = g_object_ref (gvloader->priv->cancellable);
-	async->tried_mount = FALSE;
-	
-	return async;
+	priv = GEDIT_GIO_DOCUMENT_LOADER_GET_PRIVATE (loader);
+
+	priv->tried_mount = FALSE;
+	priv->error = NULL;
+
+	loader->priv = priv;
 }
 
 static void
-async_data_free (AsyncData *async)
-{
-	g_object_unref (async->cancellable);
-	g_free (async);
-}
-
-static void
-remote_load_completed_or_failed (GeditGioDocumentLoader *gvloader, AsyncData *async)
+remote_load_completed_or_failed (GeditGioDocumentLoader *loader)
 {
 	/* free the buffer */
-	g_free (gvloader->priv->buffer);
-	gvloader->priv->buffer = NULL;
+	g_free (loader->priv->buffer);
+	loader->priv->buffer = NULL;
 
-	if (async)
-		async_data_free (async);
-		
-	if (gvloader->priv->stream)
-		g_input_stream_close_async (G_INPUT_STREAM (gvloader->priv->stream), G_PRIORITY_HIGH, NULL, NULL, NULL);
+	if (loader->priv->stream != NULL)
+		g_input_stream_close_async (G_INPUT_STREAM (loader->priv->stream),
+					    G_PRIORITY_HIGH,
+					    NULL, NULL, NULL);
 
-	gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (gvloader),
+	gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (loader),
 				       TRUE,
-				       gvloader->priv->error);
+				       loader->priv->error);
 }
 
 /* prototype, because they call each other... isn't C lovely */
-static void	read_file_chunk		(AsyncData *async);
+static void	read_file_chunk		(GeditGioDocumentLoader *loader);
 
 static void
-async_failed (AsyncData *async, GError *error)
+async_failed (GeditGioDocumentLoader *loader, GError *error)
 {
-	g_propagate_error (&async->loader->priv->error, error);
-	remote_load_completed_or_failed (async->loader, async);
+	g_propagate_error (&loader->priv->error, error);
+	remote_load_completed_or_failed (loader);
 }
 
 static void
-async_read_cb (GInputStream *stream,
-	       GAsyncResult *res,
-	       AsyncData    *async)
+async_read_cb (GInputStream           *stream,
+	       GAsyncResult           *res,
+	       GeditGioDocumentLoader *loader)
 {
-	gedit_debug (DEBUG_LOADER);
 	GError *error = NULL;
-	GeditGioDocumentLoader *gvloader;
 	gssize bytes_read;
-	
+
+	gedit_debug (DEBUG_LOADER);
+
 	/* manually check cancelled state */
-	if (g_cancellable_is_cancelled (async->cancellable))
+	if (g_cancellable_is_cancelled (loader->priv->cancellable))
 	{
-		g_input_stream_close_async (stream, G_PRIORITY_HIGH, NULL, NULL, NULL);
-		async_data_free (async);
+		g_input_stream_close_async (stream,
+					    G_PRIORITY_HIGH,
+					    NULL, NULL, NULL);
 		return;
 	}
 
-	gvloader = async->loader;
 	bytes_read = g_input_stream_read_finish (stream, res, &error);
-	
+
 	/* error occurred */
 	if (bytes_read == -1)
 	{
-		async_failed (async, error);
+		async_failed (loader, error);
 		return;
 	}
 
 	/* Check for the extremely unlikely case where the file size overflows. */
-	if (gvloader->priv->bytes_read + bytes_read < gvloader->priv->bytes_read)
+	if (loader->priv->bytes_read + bytes_read < loader->priv->bytes_read)
 	{
-		g_set_error (&gvloader->priv->error,
+		g_set_error (&loader->priv->error,
 			     GEDIT_DOCUMENT_ERROR,
 			     GEDIT_DOCUMENT_ERROR_TOO_BIG,
 			     "File too big");
 
-		remote_load_completed_or_failed (gvloader, async);
+		remote_load_completed_or_failed (loader);
 
 		return;
 	}
 
 	/* Bump the size. */
-	gvloader->priv->bytes_read += bytes_read;
+	loader->priv->bytes_read += bytes_read;
 
 	/* end of the file, we are done! */
 	if (bytes_read == 0)
 	{
 		gedit_document_loader_update_document_contents (
-						GEDIT_DOCUMENT_LOADER (gvloader),
-						gvloader->priv->buffer,
-						gvloader->priv->bytes_read,
-						&gvloader->priv->error);
-		
-		remote_load_completed_or_failed (gvloader, async);
+						GEDIT_DOCUMENT_LOADER (loader),
+						loader->priv->buffer,
+						loader->priv->bytes_read,
+						&loader->priv->error);
+
+		remote_load_completed_or_failed (loader);
 
 		return;
 	}
@@ -258,254 +234,233 @@ async_read_cb (GInputStream *stream,
 	/* note that this signal blocks the read... check if it isn't
 	 * a performance problem
 	 */
-	gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (gvloader),
+	gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (loader),
 				       FALSE,
 				       NULL);
 
-	read_file_chunk (async);
+	read_file_chunk (loader);
 }
 
 static void
-read_file_chunk (AsyncData *async)
+read_file_chunk (GeditGioDocumentLoader *loader)
 {
-	GeditGioDocumentLoader *gvloader;
-	
-	gvloader = async->loader;
-	gvloader->priv->buffer = g_realloc (gvloader->priv->buffer,
-					    gvloader->priv->bytes_read + READ_CHUNK_SIZE);
+	loader->priv->buffer = g_realloc (loader->priv->buffer,
+					  loader->priv->bytes_read + READ_CHUNK_SIZE);
 
-	g_input_stream_read_async (G_INPUT_STREAM (gvloader->priv->stream),
-				   gvloader->priv->buffer + gvloader->priv->bytes_read,
+	g_input_stream_read_async (G_INPUT_STREAM (loader->priv->stream),
+				   loader->priv->buffer + loader->priv->bytes_read,
 				   READ_CHUNK_SIZE,
 				   G_PRIORITY_HIGH,
-				   async->cancellable,
+				   loader->priv->cancellable,
 				   (GAsyncReadyCallback) async_read_cb,
-				   async);
+				   loader);
 }
 
 static void
-finish_query_info (AsyncData *async)
+finish_query_info (GeditGioDocumentLoader *loader)
 {
-	GeditGioDocumentLoader *gvloader;
-	
-	gvloader = async->loader;
-
 	/* if it's not a regular file, error out... */
-	if (g_file_info_has_attribute (gvloader->priv->info, G_FILE_ATTRIBUTE_STANDARD_TYPE) &&
-	    g_file_info_get_file_type (gvloader->priv->info) != G_FILE_TYPE_REGULAR)
+	if (g_file_info_has_attribute (loader->priv->info, G_FILE_ATTRIBUTE_STANDARD_TYPE) &&
+	    g_file_info_get_file_type (loader->priv->info) != G_FILE_TYPE_REGULAR)
 	{
-		g_set_error (&gvloader->priv->error,
+		g_set_error (&loader->priv->error,
 			     G_IO_ERROR,
 			     G_IO_ERROR_NOT_REGULAR_FILE,
 			     "Not a regular file");
 
-		remote_load_completed_or_failed (gvloader, async);
+		remote_load_completed_or_failed (loader);
 
 		return;
 	}
 
 	/* start reading */
-	read_file_chunk (async);
+	read_file_chunk (loader);
 }
 
 static void
-remote_get_file_info_cb (GFile        *source,
-			 GAsyncResult *res,
-			 AsyncData    *async)
+remote_get_file_info_cb (GFile                  *source,
+			 GAsyncResult           *res,
+			 GeditGioDocumentLoader *loader)
 {
-	GeditGioDocumentLoader *gvloader;
 	GError *error = NULL;
 	
 	gedit_debug (DEBUG_LOADER);
 	
 	/* manually check the cancelled state */
-	if (g_cancellable_is_cancelled (async->cancellable))
+	if (g_cancellable_is_cancelled (loader->priv->cancellable))
 	{
-		async_data_free (async);
 		return;
 	}
 
-	gvloader = async->loader;
-	
 	/* finish the info query */
-	gvloader->priv->info = g_file_query_info_finish (gvloader->priv->gfile,
-	                                                 res, 
-	                                                 &error);
+	loader->priv->info = g_file_query_info_finish (loader->priv->gfile,
+	                                               res,
+	                                               &error);
 
-	if (!gvloader->priv->info)
+	if (!loader->priv->info)
 	{
 		/* propagate the error and clean up */
-		async_failed (async, error);
+		async_failed (loader, error);
 		return;
 	}
 
-	finish_query_info (async);
+	finish_query_info (loader);
 }
 
 static void
-remote_get_info_cb (GFileInputStream *source,
-		    GAsyncResult     *res,
-		    AsyncData        *async)
+remote_get_info_cb (GFileInputStream       *source,
+		    GAsyncResult           *res,
+		    GeditGioDocumentLoader *loader)
 {
-	GeditGioDocumentLoader *gvloader;
 	GError *error = NULL;
 	
 	gedit_debug (DEBUG_LOADER);
 
 	/* manually check the cancelled state */
-	if (g_cancellable_is_cancelled (async->cancellable))
+	if (g_cancellable_is_cancelled (loader->priv->cancellable))
 	{
-		async_data_free (async);
 		return;
-	}	
+	}
 
-	gvloader = async->loader;
-	
 	/* finish the info query */
-	gvloader->priv->info = g_file_input_stream_query_info_finish (gvloader->priv->stream,
-	                                                              res, 
-	                                                              &error);
+	loader->priv->info = g_file_input_stream_query_info_finish (loader->priv->stream,
+	                                                            res,
+	                                                            &error);
 
-	if (gvloader->priv->info == NULL)
+	if (loader->priv->info == NULL)
 	{
 		if (error->code == G_IO_ERROR_NOT_SUPPORTED)
 		{
 			gedit_debug_message (DEBUG_LOADER, "Query info not supported on stream, trying on file");
 
 			/* then try to query the info using g_file_query_info */
-			g_file_query_info_async (gvloader->priv->gfile,
+			g_file_query_info_async (loader->priv->gfile,
 						 REMOTE_QUERY_ATTRIBUTES,
 						 G_FILE_QUERY_INFO_NONE,
 						 G_PRIORITY_HIGH,
-						 async->cancellable,
+						 loader->priv->cancellable,
 						 (GAsyncReadyCallback)remote_get_file_info_cb,
-						 async);
+						 loader);
 			return;
 		}
-		
+
 		/* propagate the error and clean up */
-		async_failed (async, error);
+		async_failed (loader, error);
 		return;
 	}
-	
-	finish_query_info (async);
+
+	finish_query_info (loader);
 }
 
 static void
-mount_ready_callback (GFile        *file,
-		      GAsyncResult *res,
-		      AsyncData    *async)
+mount_ready_callback (GFile                  *file,
+		      GAsyncResult           *res,
+		      GeditGioDocumentLoader *loader)
 {
 	GError *error = NULL;
 	gboolean mounted;
-	
+
 	/* manual check for cancelled state */
-	if (g_cancellable_is_cancelled (async->cancellable))
+	if (g_cancellable_is_cancelled (loader->priv->cancellable))
 	{
-		async_data_free (async);
 		return;
 	}
 
 	mounted = g_file_mount_enclosing_volume_finish (file, res, &error);
-	
+
 	if (!mounted)
 	{
-		async_failed (async, error);
+		async_failed (loader, error);
+		return;
 	}
-	else
-	{
-		/* try again to open the file for reading */
-		open_async_read (async);
-	}
+
+	/* try again to open the file for reading */
+	open_async_read (loader);
 }
 
 static void
-recover_not_mounted (AsyncData *async)
+recover_not_mounted (GeditGioDocumentLoader *loader)
 {
 	GeditDocument *doc;
 	GMountOperation *mount_operation;
 
 	gedit_debug (DEBUG_LOADER);
 
-	doc = gedit_document_loader_get_document (GEDIT_DOCUMENT_LOADER (async->loader));
+	doc = gedit_document_loader_get_document (GEDIT_DOCUMENT_LOADER (loader));
 	mount_operation = _gedit_document_create_mount_operation (doc);
 
-	async->tried_mount = TRUE;
-	g_file_mount_enclosing_volume (async->loader->priv->gfile,
+	loader->priv->tried_mount = TRUE;
+	g_file_mount_enclosing_volume (loader->priv->gfile,
 				       G_MOUNT_MOUNT_NONE,
 				       mount_operation,
-				       async->cancellable,
+				       loader->priv->cancellable,
 				       (GAsyncReadyCallback) mount_ready_callback,
-				       async);
+				       loader);
 
 	g_object_unref (mount_operation);
 }
 
 static void
-async_read_ready_callback (GObject      *source,
-			   GAsyncResult *res,
-		           AsyncData    *async)
+async_read_ready_callback (GObject                *source,
+			   GAsyncResult           *res,
+		           GeditGioDocumentLoader *loader)
 {
 	GError *error = NULL;
-	GeditGioDocumentLoader *gvloader;
 	
 	gedit_debug (DEBUG_LOADER);
 
 	/* manual check for cancelled state */
-	if (g_cancellable_is_cancelled (async->cancellable))
+	if (g_cancellable_is_cancelled (loader->priv->cancellable))
 	{
-		async_data_free (async);
 		return;
 	}
 	
-	gvloader = async->loader;
-	gvloader->priv->stream = g_file_read_finish (gvloader->priv->gfile, res, &error);
+	loader->priv->stream = g_file_read_finish (loader->priv->gfile,
+	                                           res,
+	                                           &error);
 
-	if (!gvloader->priv->stream)
-	{		
-		if (error->code == G_IO_ERROR_NOT_MOUNTED && !async->tried_mount)
+	if (!loader->priv->stream)
+	{
+		if (error->code == G_IO_ERROR_NOT_MOUNTED && !loader->priv->tried_mount)
 		{
-			recover_not_mounted (async);
+			recover_not_mounted (loader);
 			g_error_free (error);
 			return;
 		}
-		
-		/* Propagate error */
-		g_propagate_error (&gvloader->priv->error, error);
-		gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (gvloader),
-					       TRUE,
-					       gvloader->priv->error);
 
-		async_data_free (async);
+		/* Propagate error */
+		g_propagate_error (&loader->priv->error, error);
+		gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (loader),
+					       TRUE,
+					       loader->priv->error);
 	}
 	else
 	{
 		/* get the file info from the input stream */
-		g_file_input_stream_query_info_async (gvloader->priv->stream,
+		g_file_input_stream_query_info_async (loader->priv->stream,
 						      REMOTE_QUERY_ATTRIBUTES,
 						      G_PRIORITY_HIGH,
-						      gvloader->priv->cancellable,
+						      loader->priv->cancellable,
 						      (GAsyncReadyCallback) remote_get_info_cb,
-						      async);
+						      loader);
 	}
 }
 
 static void
-open_async_read (AsyncData *async)
+open_async_read (GeditGioDocumentLoader *loader)
 {
-	g_file_read_async (async->loader->priv->gfile, 
+	g_file_read_async (loader->priv->gfile, 
 	                   G_PRIORITY_HIGH,
-	                   async->cancellable,
+	                   loader->priv->cancellable,
 	                   (GAsyncReadyCallback) async_read_ready_callback,
-	                   async);
+	                   loader);
 }
 
 static void
 gedit_gio_document_loader_load (GeditDocumentLoader *loader)
 {
 	GeditGioDocumentLoader *gvloader = GEDIT_GIO_DOCUMENT_LOADER (loader);
-	AsyncData *async;
-	
+
 	gedit_debug (DEBUG_LOADER);
 
 	/* make sure no load operation is currently running */
@@ -519,9 +474,8 @@ gedit_gio_document_loader_load (GeditDocumentLoader *loader)
 				       NULL);
 
 	gvloader->priv->cancellable = g_cancellable_new ();
-	async = async_data_new (gvloader);
-	
-	open_async_read (async);
+
+	open_async_read (gvloader);
 }
 
 static const gchar *
@@ -595,7 +549,7 @@ gedit_gio_document_loader_cancel (GeditDocumentLoader *loader)
 		     G_IO_ERROR_CANCELLED,
 		     "Operation cancelled");
 
-	remote_load_completed_or_failed (gvloader, NULL);
+	remote_load_completed_or_failed (gvloader);
 
 	return TRUE;
 }
