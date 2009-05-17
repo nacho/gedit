@@ -23,8 +23,8 @@ SUBDIRS = 		\
 	$(SPELL_PLUGIN_DIR)
 
 if ENABLE_PYTHON
-DIST_SUBDIRS += externaltools pythonconsole snippets
-SUBDIRS      += externaltools pythonconsole snippets
+DIST_SUBDIRS += externaltools pythonconsole snippets quickopen
+SUBDIRS      += externaltools pythonconsole snippets quickopen
 endif
 
 
