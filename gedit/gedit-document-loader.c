@@ -354,6 +354,9 @@ get_metadata_encoding (const gchar *uri)
 	return enc;
 }
 
+/* This is a factory method that returns an appopriate loader
+ * for the given uri.
+ */
 GeditDocumentLoader *
 gedit_document_loader_new (GeditDocument       *doc,
 			   const gchar         *uri,
@@ -364,12 +367,10 @@ gedit_document_loader_new (GeditDocument       *doc,
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 
-#ifndef G_OS_WIN32
-	if (gedit_utils_uri_has_file_scheme (uri))
-		loader_type = GEDIT_TYPE_MMAP_DOCUMENT_LOADER;
-	else
-#endif
-		loader_type = GEDIT_TYPE_GIO_DOCUMENT_LOADER;
+	/* At the moment we just use gio loader in all cases...
+	 * In the future it would be great to have a PolicyKit
+	 * loader to get permission to save systen files etc */
+	loader_type = GEDIT_TYPE_GIO_DOCUMENT_LOADER;
 
 	loader = GEDIT_DOCUMENT_LOADER (g_object_new (loader_type,
 						      "document", doc,
