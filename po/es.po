@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
-"POT-Creation-Date: 2009-04-17 14:36+0000\n"
-"PO-Revision-Date: 2009-05-03 16:28+0200\n"
+"POT-Creation-Date: 2009-05-17 11:55+0000\n"
+"PO-Revision-Date: 2009-05-18 20:19+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -885,7 +885,7 @@ msgid "_Autosave files every"
 msgstr "_Autoguardar archivos cada"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:28
-#: ../gedit/gedit-view.c:1994
+#: ../gedit/gedit-view.c:2032
 msgid "_Display line numbers"
 msgstr "_Mostrar números de línea"
 
@@ -951,11 +951,11 @@ msgstr "_Buscar: "
 msgid "_Wrap around"
 msgstr "A_justar aproximadamente"
 
-#: ../gedit/gedit.c:99
+#: ../gedit/gedit.c:115
 msgid "Show the application's version"
 msgstr "Mostrar la versión de la aplicación"
 
-#: ../gedit/gedit.c:102
+#: ../gedit/gedit.c:118
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -963,35 +963,40 @@ msgstr ""
 "Establecer la codificación de caracteres que usar al abrir los archivos "
 "listados en la línea de comandos"
 
-#: ../gedit/gedit.c:102
+#: ../gedit/gedit.c:118
 msgid "ENCODING"
 msgstr "CODIFICACIÓN"
 
-#: ../gedit/gedit.c:105
+#: ../gedit/gedit.c:121
+msgid "Display list of possible values for the encoding option"
+msgstr ""
+"Mostrar una lista de los valores posibles para la opción de codificación"
+
+#: ../gedit/gedit.c:124
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr ""
 "Crea una ventana nueva en el nivel superior de una instancia existente de "
 "gedit"
 
-#: ../gedit/gedit.c:108
+#: ../gedit/gedit.c:127
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Crea un documento nuevo en una instancia existente de gedit"
 
-#: ../gedit/gedit.c:111
+#: ../gedit/gedit.c:130
 msgid "[FILE...]"
 msgstr "[ARCHIVO…]"
 
-#: ../gedit/gedit.c:149
+#: ../gedit/gedit.c:168
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: codificación inválida.\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:540
+#: ../gedit/gedit.c:559
 msgid "- Edit text files"
 msgstr "- Edite archivos de texto"
 
-#: ../gedit/gedit.c:553
+#: ../gedit/gedit.c:572
 #, c-format
 msgid ""
 "%s\n"
@@ -2254,11 +2259,11 @@ msgstr "Coincidir sólo con palabras compl_etas"
 msgid "_Match Case"
 msgstr "Coi_ncidir con capitalización"
 
-#: ../gedit/gedit-view.c:1372 ../gedit/gedit-view.c:1397
+#: ../gedit/gedit-view.c:1386 ../gedit/gedit-view.c:1411
 msgid "String you want to search for"
 msgstr "La cadena que quiere buscar"
 
-#: ../gedit/gedit-view.c:1380 ../gedit/gedit-view.c:1406
+#: ../gedit/gedit-view.c:1394 ../gedit/gedit-view.c:1420
 msgid "Line you want to move the cursor to"
 msgstr "Línea a la que quiere mover el cursor"
 
@@ -2810,7 +2815,7 @@ msgstr "Si borra un elemento, se pierde permanentemente."
 msgid "(Empty)"
 msgstr "(Vacío)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3296
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3298
 msgid ""
 "The renamed file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2818,11 +2823,11 @@ msgstr ""
 "El archivo renombrado está actualmente filtrado. Necesita ajustar los "
 "filtros para hacerlo visible."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3534
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3536
 msgid "file"
 msgstr "archivo"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3558
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3560
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2830,11 +2835,11 @@ msgstr ""
 "El archivo nuevo esta actualmente filtrado. Necesita ajustar los filtros "
 "para hacerlo visible"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3586
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3588
 msgid "directory"
 msgstr "directorio"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3606
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3608
 msgid ""
 "The new directory is currently filtered out. You need to adjust your filter "
 "settings to make the directory visible"
@@ -3036,6 +3041,19 @@ msgstr "Color del c_omando:"
 #: ../plugins/pythonconsole/pythonconsole/config.ui.h:2
 msgid "_Error color:"
 msgstr "Color del _error:"
+
+#: ../plugins/quickopen/quickopen/popup.py:42
+msgid "Quick Open"
+msgstr "Apertura rápida"
+
+#: ../plugins/quickopen/quickopen/windowhelper.py:76
+msgid "Quick open"
+msgstr "Apertura rápida"
+
+#: ../plugins/quickopen/quickopen/windowhelper.py:77
+#| msgid "Close document"
+msgid "Quickly open documents"
+msgstr "Abrir documentos rápidamente"
 
 #: ../plugins/sample/gedit-sample-plugin.c:63
 msgid "Insert User Na_me"
