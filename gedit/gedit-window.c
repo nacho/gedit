@@ -1453,6 +1453,8 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	/* set short labels to use in the toolbar */
 	action = gtk_action_group_get_action (action_group, "FileSave");
 	g_object_set (action, "short_label", _("Save"), NULL);
+	action = gtk_action_group_get_action (action_group, "FilePrint");
+	g_object_set (action, "short_label", _("Print"), NULL);
 	action = gtk_action_group_get_action (action_group, "SearchFind");
 	g_object_set (action, "short_label", _("Find"), NULL);
 	action = gtk_action_group_get_action (action_group, "SearchReplace");
