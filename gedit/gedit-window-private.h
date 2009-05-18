@@ -93,19 +93,19 @@ struct _GeditWindowPrivate
 	gint            height;	
 	GdkWindowState  window_state;
 
-	gint		side_panel_size;
-	gint		bottom_panel_size;
+	gint            side_panel_size;
+	gint            bottom_panel_size;
 
 	GeditWindowState state;
 
-	gint		bottom_panel_item_removed_handler_id;
+	gint            bottom_panel_item_removed_handler_id;
 
 	GtkWindowGroup *window_group;
 
-	gchar          *default_path;
+	GFile          *default_location;
 
-	gboolean	removing_tabs : 1;
-	gboolean	dispose_has_run : 1;
+	gboolean        removing_tabs : 1;
+	gboolean        dispose_has_run : 1;
 };
 
 G_END_DECLS

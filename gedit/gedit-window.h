@@ -169,11 +169,10 @@ GeditWindow	*_gedit_window_move_tab_to_new_window	(GeditWindow         *window,
 							 GeditTab            *tab);
 gboolean	 _gedit_window_is_removing_tabs		(GeditWindow         *window);
 
-G_CONST_RETURN gchar
-		*_gedit_window_get_default_path 	(GeditWindow         *window);
+GFile		*_gedit_window_get_default_location 	(GeditWindow         *window);
 
-void		 _gedit_window_set_default_path 	(GeditWindow         *window,
-							 const gchar         *uri);
+void		 _gedit_window_set_default_location 	(GeditWindow         *window,
+							 GFile               *location);
 
 void		 _gedit_window_set_saving_session_state	(GeditWindow         *window,
 							 gboolean             saving_session);

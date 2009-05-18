@@ -343,13 +343,30 @@ gedit_commands_load_uris (GeditWindow         *window,
 			  const GSList        *uris,
 			  const GeditEncoding *encoding,
 			  gint                 line_pos)
-{	
+{
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), 0);
 	g_return_val_if_fail ((uris != NULL) && (uris->data != NULL), 0);
-	
+
 	gedit_debug (DEBUG_COMMANDS);
-	
+
 	return load_uri_list (window, uris, encoding, line_pos, FALSE);
+}
+
+/*
+ * This should become public once we convert all api to GFile:
+ */
+static gint
+gedit_commands_load_files (GeditWindow         *window,
+			   GSList              *files,
+			   const GeditEncoding *encoding,
+			   gint                 line_pos)
+{
+	g_return_val_if_fail (GEDIT_IS_WINDOW (window), 0);
+	g_return_val_if_fail ((files != NULL) && (files->data != NULL), 0);
+
+	gedit_debug (DEBUG_COMMANDS);
+
+	return load_file_list (window, files, encoding, line_pos, FALSE);
 }
 
 /*
@@ -384,7 +401,7 @@ open_dialog_response_cb (GeditFileChooserDialog *dialog,
                          gint                    response_id,
                          GeditWindow            *window)
 {
-	GSList              *uris;
+	GSList *files;
 	const GeditEncoding *encoding;
 
 	gedit_debug (DEBUG_COMMANDS);
@@ -396,33 +413,33 @@ open_dialog_response_cb (GeditFileChooserDialog *dialog,
 		return;
 	}
 
-	uris = gtk_file_chooser_get_uris (GTK_FILE_CHOOSER (dialog));
-	g_return_if_fail (uris != NULL);
+	files = gtk_file_chooser_get_files (GTK_FILE_CHOOSER (dialog));
+	g_return_if_fail (files != NULL);
 
 	encoding = gedit_file_chooser_dialog_get_encoding (dialog);
 
 	gtk_widget_destroy (GTK_WIDGET (dialog));
 
 	/* Remember the folder we navigated to */
-	 _gedit_window_set_default_path (window, uris->data);
+	 _gedit_window_set_default_location (window, files->data);
 
-	gedit_commands_load_uris (window,
-				  uris,
-				  encoding,
-				  0);
+	gedit_commands_load_files (window,
+				   files,
+				   encoding,
+				   0);
 
-	g_slist_foreach (uris, (GFunc) g_free, NULL);
-	g_slist_free (uris);
+	g_slist_foreach (files, (GFunc) g_object_unref, NULL);
+	g_slist_free (files);
 }
 
 void
 _gedit_cmd_file_open (GtkAction   *action,
 		      GeditWindow *window)
 {
-	GtkWidget     *open_dialog;
-	gpointer       data;
+	GtkWidget *open_dialog;
+	gpointer data;
 	GeditDocument *doc;
-	gchar         *default_path = NULL;
+	GFile *default_path = NULL;
 
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -458,35 +475,33 @@ _gedit_cmd_file_open (GtkAction   *action,
 	doc = gedit_window_get_active_document (window);
 	if (doc != NULL)
 	{
-		gchar *uri;
+		GFile *file;
 
-		uri = gedit_document_get_uri (doc);
+		file = gedit_document_get_location (doc);
 
-		if ((uri != NULL) &&
-		    gedit_utils_uri_has_file_scheme (uri))
+		if (file != NULL)
 		{
-			default_path = g_path_get_dirname (uri);
+			default_path = g_file_get_parent (file);
+			g_return_if_fail (default_path != NULL); /* file cannot be / */
 
-			g_return_if_fail (strlen (default_path) >= 5 /* strlen ("file:") */);
-			if (strcmp (default_path, "file:") == 0)
-			{
-				g_free (default_path);
-
-				default_path = g_strdup ("file:///");
-			}
+			g_object_unref (file);
 		}
-
-		g_free (uri);
 	}
 
 	if (default_path == NULL)
-		default_path = g_strdup (_gedit_window_get_default_path (window));
+		default_path = _gedit_window_get_default_location (window);
 
 	if (default_path != NULL)
-		gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (open_dialog),
-							 default_path);
+	{
+		gchar *uri;
 
-	g_free (default_path);
+		uri = g_file_get_uri (default_path);
+		gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (open_dialog),
+							 uri);
+
+		g_free (uri);
+		g_object_unref (default_path);
+	}
 
 	g_signal_connect (open_dialog,
 			  "response",
@@ -587,11 +602,11 @@ save_dialog_response_cb (GeditFileChooserDialog *dialog,
                          gint                    response_id,
                          GeditWindow            *window)
 {
-	gchar               *uri;
+	GFile *file;
 	const GeditEncoding *encoding;
-	GeditTab            *tab;
-	gpointer	     data;
-	GSList		    *tabs_to_save_as;
+	GeditTab *tab;
+	gpointer data;
+	GSList *tabs_to_save_as;
 
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -605,8 +620,8 @@ save_dialog_response_cb (GeditFileChooserDialog *dialog,
 		goto save_next_tab;
 	}
 
-	uri = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog));
-	g_return_if_fail (uri != NULL);
+	file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (dialog));
+	g_return_if_fail (file != NULL);
 
 	encoding = gedit_file_chooser_dialog_get_encoding (dialog);
 
@@ -615,28 +630,32 @@ save_dialog_response_cb (GeditFileChooserDialog *dialog,
 	if (tab != NULL)
 	{
 		GeditDocument *doc;
-		gchar         *uri_for_display;
+		gchar *parse_name;
+		gchar *uri;
 
 		doc = gedit_tab_get_document (tab);
 		g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 
-		uri_for_display = gedit_utils_uri_for_display (uri);
+		parse_name = g_file_get_parse_name (file);
 
 		gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
 					        window->priv->generic_message_cid,
 					       _("Saving file '%s'\342\200\246"),
-					       uri_for_display);
+					       parse_name);
 
-		g_free (uri_for_display);
+		g_free (parse_name);
 
 		/* let's remember the dir we navigated too,
 		 * even if the saving fails... */
-		 _gedit_window_set_default_path (window, uri);
+		 _gedit_window_set_default_location (window, file);
 
+		// FIXME: pass the GFile to tab when api is there
+		uri = g_file_get_uri (file);
 		_gedit_tab_save_as (tab, uri, encoding);
+		g_free (uri);
 	}
 
-	g_free (uri);
+	g_object_unref (file);
 
 save_next_tab:
 
@@ -719,7 +738,7 @@ file_save_as (GeditTab    *tab,
 	GtkWidget *save_dialog;
 	GtkWindowGroup *wg;
 	GeditDocument *doc;
-	gchar *uri;
+	GFile *file;
 	gboolean uri_set = FALSE;
 	const GeditEncoding *encoding;
 
@@ -753,28 +772,37 @@ file_save_as (GeditTab    *tab,
 
 	/* Set the suggested file name */
 	doc = gedit_tab_get_document (tab);
-	uri = gedit_document_get_uri (doc);
+	file = gedit_document_get_location (doc);
 
-	if ((uri != NULL) &&
-	    gedit_utils_uri_has_file_scheme (uri))
+	if (file != NULL)
 	{
-		uri_set = gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (save_dialog),
-						    uri);
+		uri_set = gtk_file_chooser_set_file (GTK_FILE_CHOOSER (save_dialog),
+						     file,
+						     NULL);
+
+		g_object_unref (file);
 	}
 
-	g_free (uri);
 
 	if (!uri_set)
 	{
-		const gchar *default_path;
+		GFile *default_path;
 		gchar *docname;
 
-		default_path = _gedit_window_get_default_path (window);
+		default_path = _gedit_window_get_default_location (window);
 		docname = gedit_document_get_short_name_for_display (doc);
 
 		if (default_path != NULL)
+		{
+			gchar *uri;
+
+			uri = g_file_get_uri (default_path);
 			gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (save_dialog),
-								 default_path);
+								 uri);
+
+			g_free (uri);
+			g_object_unref (default_path);
+		}
 
 		gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (save_dialog),
 						   docname);
@@ -788,7 +816,6 @@ file_save_as (GeditTab    *tab,
 
 	gedit_file_chooser_dialog_set_encoding (GEDIT_FILE_CHOOSER_DIALOG (save_dialog),
 						encoding);
-
 
 	g_object_set_data (G_OBJECT (save_dialog),
 			   GEDIT_TAB_TO_SAVE_AS,

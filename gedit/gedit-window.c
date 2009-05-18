@@ -244,7 +244,8 @@ gedit_window_finalize (GObject *object)
 
 	window = GEDIT_WINDOW (object);
 
-	g_free (window->priv->default_path);
+	if (window->priv->default_location != NULL)
+		g_object_unref (window->priv->default_location);
 
 	G_OBJECT_CLASS (gedit_window_parent_class)->finalize (object);
 }
@@ -4298,42 +4299,31 @@ gedit_window_get_state (GeditWindow *window)
 	return window->priv->state;
 }
 
-G_CONST_RETURN gchar *
-_gedit_window_get_default_path (GeditWindow *window)
+GFile *
+_gedit_window_get_default_location (GeditWindow *window)
 {
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
-	
-	return window->priv->default_path;
+
+	return window->priv->default_location != NULL ?
+		g_object_ref (window->priv->default_location) : NULL;
 }
 
 void
-_gedit_window_set_default_path (GeditWindow *window,
-				const gchar *uri)
+_gedit_window_set_default_location (GeditWindow *window,
+				    GFile       *location)
 {
-	g_return_if_fail (uri != NULL);
+	GFile *dir;
 
-	if (gedit_utils_uri_has_file_scheme (uri))
-	{
-		gchar *default_path;
+	g_return_if_fail (GEDIT_IS_WINDOW (window));
+	g_return_if_fail (G_IS_FILE (location));
 
-		// CHECK: does it work with uri chaining? - Paolo
-		default_path = g_path_get_dirname (uri);
+	dir = g_file_get_parent (location);
+	g_return_if_fail (dir != NULL);
 
-		g_return_if_fail (strlen (default_path) >= 5 /* strlen ("file:") */);
-		if (strcmp (default_path, "file:") == 0)
-		{
-			g_free (default_path);
-		
-			default_path = g_strdup ("file:///");
-		}
+	if (window->priv->default_location != NULL)
+		g_object_unref (window->priv->default_location);
 
-		g_free (window->priv->default_path);
-
-		window->priv->default_path = default_path;
-
-		gedit_debug_message (DEBUG_WINDOW, 
-				     "New default path: %s", default_path);
-	}
+	window->priv->default_location = dir;
 }
 
 /**
