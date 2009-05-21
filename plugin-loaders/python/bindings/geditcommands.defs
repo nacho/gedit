@@ -26,3 +26,20 @@
     '("gint" "line_pos")
   )
 )
+
+(define-function save_document
+  (c-name "gedit_commands_save_document")
+  (return-type "none")
+  (parameters
+    '("GeditWindow*" "window")
+    '("GeditDocument*" "document")
+  )
+)
+
+(define-function save_all_documents
+  (c-name "gedit_commands_save_all_documents")
+  (return-type "none")
+  (parameters
+    '("GeditWindow*" "window")
+  )
+)

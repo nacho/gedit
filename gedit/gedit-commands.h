@@ -51,6 +51,11 @@ gint		 gedit_commands_load_uris		(GeditWindow         *window,
 							 const GeditEncoding *encoding,
 							 gint                 line_pos);
 
+void		 gedit_commands_save_document		(GeditWindow         *window,
+                                                         GeditDocument       *document);
+
+void		 gedit_commands_save_all_documents 	(GeditWindow         *window);
+
 /*
  * Non-exported functions
  */

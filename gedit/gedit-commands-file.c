@@ -1019,10 +1019,11 @@ _gedit_cmd_file_save_documents_list (GeditWindow *window,
 }
 
 void
-_gedit_cmd_file_save_all (GtkAction   *action,
-			 GeditWindow *window)
+gedit_commands_save_all_documents (GeditWindow *window)
 {
 	GList *docs;
+	
+	g_return_if_fail (GEDIT_IS_WINDOW (window));
 
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -1031,6 +1032,28 @@ _gedit_cmd_file_save_all (GtkAction   *action,
 	_gedit_cmd_file_save_documents_list (window, docs);
 
 	g_list_free (docs);
+}
+
+void
+_gedit_cmd_file_save_all (GtkAction   *action,
+			 GeditWindow *window)
+{
+	gedit_commands_save_all_documents (window);
+}
+
+void
+gedit_commands_save_document (GeditWindow   *window,
+                              GeditDocument *document)
+{
+	GeditTab *tab;
+
+	g_return_if_fail (GEDIT_IS_WINDOW (window));
+	g_return_if_fail (GEDIT_IS_DOCUMENT (document));
+	
+	gedit_debug (DEBUG_COMMANDS);
+	
+	tab = gedit_tab_get_from_document (document);
+	file_save (tab, window);
 }
 
 /* File revert */
