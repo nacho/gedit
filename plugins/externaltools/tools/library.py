@@ -95,7 +95,8 @@ class ToolLibrary(Singleton):
             tool.shortcut = xtool.get('accelerator')
             tool.applicability = xtool.get('applicability')
             tool.output = xtool.get('output')
-            tool.input = xtool.get('input')                    
+            tool.input = xtool.get('input')
+
             tool.save_with_script(xtool.text)
 
     def get_full_path(self, path, mode='r', system = True, local = True):
@@ -312,6 +313,14 @@ class Tool(object):
     def set_output(self, value):
         self._set_property_if_changed('Output', value)
     output = property(get_output, set_output)
+
+    def get_save_files(self):
+        save_files = self._properties.get('Save-files')
+        if save_files: return save_files
+        return 'nothing'
+    def set_save_files(self, value):
+        self._set_property_if_changed('Save-files', value)
+    save_files = property(get_save_files, set_save_files)
 
     # There is no property for this one because this function is quite
     # expensive to perform

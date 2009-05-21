@@ -84,6 +84,10 @@ class OutputPanel(UniqueById):
 
     def clear(self):
         self['view'].get_buffer().set_text("")
+    
+    def visible(self):
+        panel = self.window.get_bottom_panel()
+        return panel.props.visible and panel.item_is_active(self.panel)
 
     def write(self, text, tag = None):
         buffer = self['view'].get_buffer()

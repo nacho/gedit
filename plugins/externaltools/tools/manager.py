@@ -25,29 +25,19 @@ import os.path
 from library import *
 from functions import *
 import hashlib
+from xml.sax import saxutils
 
-class Singleton(object):
-    _instance = None
-
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(Singleton, cls).__new__(
-                             cls, *args, **kwargs)
-            cls._instance.__init_once__()
-
-        return cls._instance
-
-class Manager(Singleton):
+class Manager:
     LABEL_COLUMN = 0 # For Combo and Tree
-    NODE_COLUMN  = 1 # For Tree only
+    NODE_COLUMN = 1 # For Tree only
     NAME_COLUMN = 1  # For Combo only
 
     def __init__(self, datadir):
         self.datadir = datadir
-
-    def __init_once__(self):
         self.default_size = None
         self.dialog = None
+        
+        self.build()
     
     def build(self):
         callbacks = {
@@ -70,10 +60,14 @@ class Manager(Singleton):
             self.dialog.set_default_size(*self.default_size)
         
         self.view = self.ui.get_object('view')
-        for name in ['input', 'output', 'applicability']:
+        
+        for name in ['input', 'output', 'applicability', 'save-files']:
             self.__init_combobox(name)
+
         self.__init_tools_model()
         self.__init_tools_view()
+        
+        self.do_update()
     
     def run(self):
         if self.dialog == None:
@@ -101,11 +95,14 @@ class Manager(Singleton):
         column = gtk.TreeViewColumn('Tools')
         renderer = gtk.CellRendererText()
         column.pack_start(renderer, False)
-        column.set_attributes(renderer, text = self.LABEL_COLUMN)
         renderer.set_property('editable', True)
         self.view.append_column(column)
+        
+        column.set_cell_data_func(renderer, self.get_cell_data_cb)
 
         renderer.connect('edited', self.on_view_label_cell_edited)
+        renderer.connect('editing-started', self.on_view_label_cell_editing_started)
+        
         self.selection_changed_id = self.view.get_selection().connect('changed', self.on_view_selection_changed, None)
 
     def __init_combobox(self, name):
@@ -152,7 +149,7 @@ class Manager(Singleton):
         self.current_node.input = combo_value(self, 'input')
         self.current_node.output = combo_value(self, 'output')
         self.current_node.applicability = combo_value(self, 'applicability')
-        self.current_node.comment = self['description'].get_text()
+        self.current_node.save_files = combo_value(self, 'save-files')
 
         buf = self['commands'].get_buffer()
         script  = buf.get_text(*buf.get_bounds())
@@ -165,18 +162,14 @@ class Manager(Singleton):
             self.current_node.save()
 
     def clear_fields(self):
-        self['description'].set_text('')
         self['accelerator'].set_text('')
         self['commands'].get_buffer().set_text('')
 
-        for nm in ('input', 'output', 'applicability'):
+        for nm in ('input', 'output', 'applicability', 'save-files'):
             self[nm].set_active(0)
-
-        self['title'].set_label(_('Edit tool <i>%s</i>:') % '') # a bit ugly, but we're string frozen
     
     def fill_fields(self):
         node = self.current_node
-        self['description'].set_text(default(node.comment, _('A Brand New Tool')))
         self['accelerator'].set_text(default(node.shortcut, ''))
 
         buf = self['commands'].get_buffer()
@@ -193,15 +186,36 @@ class Manager(Singleton):
         else:
             buf.set_highlight_syntax(False)
 
-        for nm in ('input', 'output', 'applicability'):
+        for nm in ('input', 'output', 'applicability', 'save-files'):
             model = self[nm].get_model()
             piter = model.get_iter_first()
             
             self.set_active_by_name(nm,
-                                    default(node.__getattribute__(nm),
+                                    default(node.__getattribute__(nm.replace('-', '_')),
                                     model.get_value(piter, self.NAME_COLUMN)))
 
-        self['title'].set_label(_('Edit tool <i>%s</i>:') % node.name)
+    def do_update(self):
+        piter, node = self.get_selected_tool()
+
+        removable = piter is not None and node is not None and node.is_local()
+
+        self['remove-tool-button'].set_sensitive(removable)
+        self['revert-tool-button'].set_sensitive(removable)
+
+        if node is not None and node.is_global():
+            self['remove-tool-button'].hide()
+            self['revert-tool-button'].show()
+        else:
+            self['remove-tool-button'].show()
+            self['revert-tool-button'].hide()
+
+        if node is not None:
+            self.current_node = node
+            self.fill_fields()
+            self['tool-table'].set_sensitive(True)
+        else:
+            self.clear_fields()
+            self['tool-table'].set_sensitive(False)       
 
     def on_new_tool_button_clicked(self, button):
         self.save_current_tool()
@@ -249,30 +263,19 @@ class Manager(Singleton):
             node = self.model.get_value(piter, self.NODE_COLUMN)
             node.name = new_text
             self.model.set(piter, self.LABEL_COLUMN, new_text)
-            self['title'].set_label(_('Edit tool <i>%s</i>:') % new_text)
+            self.save_current_tool()
 
+    def on_view_label_cell_editing_started(self, renderer, editable, path):
+            piter = self.model.get_iter(path)
+            label = self.model.get_value(piter, self.LABEL_COLUMN)
+
+            if isinstance(editable, gtk.Entry):
+                editable.set_text(label)
+                editable.grab_focus()
+    
     def on_view_selection_changed(self, selection, userdata):
-        print 'saving current tool'
         self.save_current_tool()
-        piter, node = self.get_selected_tool()
-
-        removable = piter is not None and node is not None and node.is_local()
-        self['remove-tool-button'].set_sensitive(removable)
-        self['revert-tool-button'].set_sensitive(removable)
-        if node is not None and node.is_global():
-            self['remove-tool-button'].hide()
-            self['revert-tool-button'].show()
-        else:
-            self['remove-tool-button'].show()
-            self['revert-tool-button'].hide()
-
-        if node is not None:
-            self.current_node = node
-            self.fill_fields()
-            self['tool-table'].set_sensitive(True)
-        else:
-            self.clear_fields()
-            self['tool-table'].set_sensitive(False)
+        self.do_update()
 
     def set_accelerator(self, keyval, mod):
         # Check whether accelerator already exists
@@ -357,5 +360,18 @@ class Manager(Singleton):
         for window in gedit.app_get_default().get_windows():
             helper = window.get_data("ExternalToolsPluginWindowData")
             helper.menu.update()
+   
+    def get_cell_data_cb(self, column, cell, model, iter):
+        lbl = model.get_value(iter, self.LABEL_COLUMN)
+        node = model.get_value(iter, self.NODE_COLUMN)
+
+        escaped = saxutils.escape(lbl)
+
+        if node.shortcut:
+            markup = '%s (<b>%s</b>)' % (escaped, saxutils.escape(node.shortcut))
+        else:
+            markup = escaped
+            
+        cell.set_property('markup', markup)
 
 # ex:et:ts=4:

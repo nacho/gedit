@@ -32,13 +32,7 @@ def default(val, d):
         return d
 
 # ==== Capture related functions ====
-def capture_menu_action(action, window, node):
-
-    # Get the panel
-    panel = window.get_data("ExternalToolsPluginWindowData")._output_buffer
-    panel.show()
-    panel.clear()
-
+def run_external_tool(window, node):
     # Configure capture environment
     try:
         cwd = os.getcwd()
@@ -79,12 +73,19 @@ def capture_menu_action(action, window, node):
 
     capture.set_flags(capture.CAPTURE_BOTH)
 
-    # Assign the error output to the output panel
-    panel.process = capture
-
     # Get input text
     input_type = node.input
     output_type = node.output
+
+    # Get the panel
+    panel = window.get_data("ExternalToolsPluginWindowData")._output_buffer
+    panel.clear()
+
+    if output_type == 'output-panel':
+        panel.show()
+
+    # Assign the error output to the output panel
+    panel.process = capture
 
     if input_type != 'nothing' and view is not None:
         if input_type == 'document':
@@ -128,7 +129,7 @@ def capture_menu_action(action, window, node):
         document.begin_user_action()
         view.set_editable(False)
         view.set_cursor_visible(False)
-    elif output_type != 'output-panel' and view is not None:
+    elif output_type != 'output-panel' and output_type != 'nothing' and view is not None:
         document.begin_user_action()
         view.set_editable(False)
         view.set_cursor_visible(False)
@@ -144,33 +145,81 @@ def capture_menu_action(action, window, node):
         else:
             pos = document.get_end_iter()
         capture.connect('stdout-line', capture_stdout_line_document, document, pos)
-    else:
+    elif output_type != 'nothing':
         capture.connect('stdout-line', capture_stdout_line_panel, panel)
         document.begin_user_action()
 
-    capture.connect('stderr-line',   capture_stderr_line_panel,   panel)
-    capture.connect('begin-execute', capture_begin_execute_panel, panel, node.name)
-    capture.connect('end-execute',   capture_end_execute_panel,   panel, view,
-                    output_type in ('new-document','replace-document'))
+    capture.connect('stderr-line', capture_stderr_line_panel, panel)
+    capture.connect('begin-execute', capture_begin_execute_panel, panel, view, node.name)    
+    capture.connect('end-execute', capture_end_execute_panel, panel, view, output_type)
 
     # Run the command
-    view.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(gdk.Cursor(gdk.WATCH))
     capture.execute()
-    document.end_user_action()
+    
+    if output_type != 'nothing':
+        document.end_user_action()
+
+class MultipleDocumentsSaver:
+    def __init__(self, window, docs, node):
+        self._window = window
+        self._node = node
+        self._error = False
+
+        self._counter = len(docs)
+        self._signal_ids = {}
+        self._counter = 0
+
+        signals = {}
+
+        for doc in docs:
+            signals[doc] = doc.connect('saving', self.on_document_saving)
+            gedit.commands.save_document(window, doc)
+            doc.disconnect(signals[doc])
+    
+    def on_document_saving(self, doc, size, total_size):
+        self._counter += 1
+        self._signal_ids[doc] = doc.connect('saved', self.on_document_saved)
+
+    def on_document_saved(self, doc, error):
+        if error:
+            self._error = True
+        
+        doc.disconnect(self._signal_ids[doc])
+        del self._signal_ids[doc]
+        
+        self._counter -= 1
+        
+        if self._counter == 0 and not self._error:
+            run_external_tool(self._window, self._node)
+
+def capture_menu_action(action, window, node):
+    if node.save_files == 'document' and window.get_active_document():
+        MultipleDocumentsSaver(window, [window.get_active_document()], node)
+        return
+    elif node.save_files == 'all':
+        MultipleDocumentsSaver(window, window.get_documents(), node)
+        return
+
+    run_external_tool(window, node)
 
 def capture_stderr_line_panel(capture, line, panel):
+    if not panel.visible():
+        panel.show()
+
     panel.write(line, panel.error_tag)
 
-def capture_begin_execute_panel(capture, panel, label):
+def capture_begin_execute_panel(capture, panel, view, label):
+    view.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(gdk.Cursor(gdk.WATCH))
+
     panel['stop'].set_sensitive(True)
     panel.clear()
     panel.write(_("Running tool:"), panel.italic_tag);
     panel.write(" %s\n\n" % label, panel.bold_tag);
 
-def capture_end_execute_panel(capture, exit_code, panel, view, update_type):
+def capture_end_execute_panel(capture, exit_code, panel, view, output_type):
     panel['stop'].set_sensitive(False)
 
-    if update_type:
+    if output_type in ('new-document','replace-document'):
         doc = view.get_buffer()
         start = doc.get_start_iter()
         end = start.copy()

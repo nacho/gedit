@@ -186,6 +186,8 @@ class ExternalToolsPlugin(gedit.Plugin):
     def __init__(self):
         super(ExternalToolsPlugin, self).__init__()
         
+        self._manager = None
+
         ToolLibrary().set_locations(self.get_data_dir())
 
     def activate(self, window):
@@ -203,13 +205,20 @@ class ExternalToolsPlugin(gedit.Plugin):
         return self.open_dialog()
 
     def open_dialog(self):
-        m = Manager(self.get_data_dir())
+        if not self._manager:
+            self._manager = Manager(self.get_data_dir())
+            self._manager.dialog.connect('destroy', self.on_manager_destroy)
 
-        m.run()
+        self._manager.run()
+        
         window = gedit.app_get_default().get_active_window()
-        if window:
-            m.dialog.set_transient_for(window)
 
-        return m.dialog
+        if window:
+            self._manager.dialog.set_transient_for(window)
+
+        return self._manager.dialog
+
+    def on_manager_destroy(self, dialog):
+        self._manager = None
 
 # ex:ts=4:et:
