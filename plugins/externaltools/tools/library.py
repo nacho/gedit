@@ -317,11 +317,11 @@ class Tool(object):
     # expensive to perform
     def get_script(self):
         if self.filename is None:
-            return []
+            return ["#!/bin/sh\n"]
 
         filename = self.library.get_full_path(self.get_path())
         if filename is None:
-            return []
+            return ["#!/bin/sh\n"]
 
         fp = open(filename, 'r', 1)
         lines = list()
