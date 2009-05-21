@@ -123,10 +123,16 @@ class ExternalToolsWindowHelper(object):
         self._action_group.set_translation_domain('gedit')
         self._action_group.add_actions([('ExternalToolManager',
                                          None,
-                                         _('_External Tools...'),
+                                         _('Manage _External Tools...'),
                                          None,
                                          _("Opens the External Tools Manager"),
-                                         lambda action: plugin.open_dialog())])
+                                         lambda action: plugin.open_dialog()),
+                                        ('ExternalTools',
+                                        None,
+                                        _('External Tools'),
+                                        None,
+                                        _("External tools"),
+                                        None)])
         manager.insert_action_group(self._action_group, -1)
 
         ui_string = """
@@ -135,7 +141,9 @@ class ExternalToolsWindowHelper(object):
                 <menu name="ToolsMenu" action="Tools">
                   <placeholder name="ToolsOps_4">
                     <separator/>
-                    <placeholder name="ExternalToolPlaceholder"/>
+                    <menu name="ExternalToolsMenu" action="ExternalTools">
+                        <placeholder name="ExternalToolPlaceholder"/>
+                    </menu>
                     <separator/>
                   </placeholder>
                   <placeholder name="ToolsOps_5">
@@ -148,7 +156,7 @@ class ExternalToolsWindowHelper(object):
         self._merge_id = manager.add_ui_from_string(ui_string)
 
         self.menu = ToolMenu(self._library, self._window,
-                             "/MenuBar/ToolsMenu/ToolsOps_4/ExternalToolPlaceholder")
+                             "/MenuBar/ToolsMenu/ToolsOps_4/ExternalToolsMenu/ExternalToolPlaceholder")
         manager.ensure_update()
 
         # Create output console
