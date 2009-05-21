@@ -356,35 +356,36 @@ class Tool(object):
         filename = self.library.get_full_path(self.filename, 'w')
         fp = open(filename, 'w', 1)
 
-        try:
-            script = iter(script)
-            line = script.next()
+        # Make sure to first print header (shebang, modeline), then
+        # properties, and then actual content
+        header = []
+        content = []
+        inheader = True
 
-            # Shebang (should be always present)
-            if line.startswith('#!'):
-                fp.write(line)
-                line = script.next()
-            # Emacs modeline (might or might not be there)
-            if '-*-' in line:
-                fp.write(line)
-                line = script.next()
-            # Vim modeline
-            if 'ex:' in line or 'vi:' in line or 'vim:' in line:
-                fp.write(line)
-                line = script.next()
-            # We put a white line before the info block if there is one available
-            if line.strip() == '':
-                fp.write(line)
-                line = script.next()
-            # Write the info block
-            fp.write(self._dump_properties())
-            fp.write("\n")
-            # And write the remaining part of the script
-            while True:
-                fp.write(line)
-                line = script.next()
-        except StopIteration:
-            pass
+        # Parse
+        for line in script:
+            line = line.rstrip("\n")
+            
+            if not inheader:
+                content.append(line)
+            elif line.startswith('#!'):
+                # Shebang (should be always present)
+                header.append(line)
+            elif line.strip().startswith('#') and ('-*-' in line or 'ex:' in line or 'vi:' in line or 'vim:' in line):
+                header.append(line)
+            else:
+                content.append(line)
+                inheader = False
+
+        # Write out header
+        for line in header:
+            fp.write(line + "\n")
+        
+        fp.write(self._dump_properties())
+        fp.write("\n")
+        
+        for line in content:
+            fp.write(line + "\n")
 
         fp.close()
         os.chmod(filename, 0750)
