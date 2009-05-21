@@ -227,7 +227,7 @@ class Manager(Singleton):
         if node.is_global():
             if node.parent.revert_tool(node):
                 if self.current_node.shortcut and \
-                   self.current_node.shortcut in self.accelerator:
+                   self.current_node.shortcut in self.accelerators:
                     del self.accelerators[self.current_node.shortcut]                
                 self['revert-tool-button'].set_sensitive(False)
                 self.fill_fields()
