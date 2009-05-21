@@ -66,19 +66,29 @@ class Capture(gobject.GObject):
         # Initialize pipe
         popen_args = {
             'cwd'  : self.cwd,
-            'shell': True,
+            'shell': False,
             'env'  : self.env
         }
-
+        
         if self.input_text is not None:
             popen_args['stdin'] = subprocess.PIPE
         if self.flags & self.CAPTURE_STDOUT:
             popen_args['stdout'] = subprocess.PIPE
         if self.flags & self.CAPTURE_STDERR:
-            popen_args['stderr'] = subprocess.PIPE
+            if self.flags & self.CAPTURE_STDOUT:
+                popen_args['stderr'] = subprocess.STDOUT
+            else:
+                popen_args['stderr'] = subprocess.PIPE
 
-        self.pipe = subprocess.Popen(self.command, **popen_args)
-
+        self.tried_killing = False
+        
+        try:
+            self.pipe = subprocess.Popen(self.command, **popen_args)
+        except OSError, e:
+            self.pipe = None
+            self.emit('stderr-line', _('Could not execute command: %s') % (e, ))
+            return
+        
         # Signal
         self.emit('begin-execute')
 
@@ -90,7 +100,7 @@ class Capture(gobject.GObject):
             gobject.io_add_watch(self.pipe.stdout,
                                  gobject.IO_IN | gobject.IO_HUP,
                                  self.on_output)
-        if self.flags & self.CAPTURE_STDERR:
+        elif self.flags & self.CAPTURE_STDERR:
             gobject.io_add_watch(self.pipe.stderr,
                                  gobject.IO_IN | gobject.IO_HUP,
                                  self.on_output)
@@ -101,7 +111,7 @@ class Capture(gobject.GObject):
     def on_output(self, source, condition):
         line = source.readline()
 
-        if len(line) > 0:
+        if self.pipe and len(line) > 0:
             try:
                 line = unicode(line, 'utf-8')
             except:
@@ -119,12 +129,16 @@ class Capture(gobject.GObject):
 
     def stop(self, error_code = -1):
         if self.pipe is not None:
-            os.kill(self.pipe.pid, signal.SIGTERM)
-            self.pipe = None
+            if not self.tried_killing:
+                os.kill(self.pipe.pid, signal.SIGTERM)
+                self.tried_killing = True
+            else:
+                os.killpg(self.pipe.pid, sigal.SIGKILL)
 
     def on_child_end(self, pid, error_code):
         # In an idle, so it is emitted after all the std*-line signals
         # have been intercepted
         gobject.idle_add(self.emit, 'end-execute', error_code)
+        self.pipe = None
 
 # ex:ts=4:et:
