@@ -39,23 +39,36 @@ class ToolMenu(object):
 
         self._merge_id = 0
         self._action_group = gtk.ActionGroup("ExternalToolsPluginToolActions")
-        self._window.get_ui_manager().insert_action_group(self._action_group, -1)
+        self._signals = []
+
         self.update()
 
     def deactivate(self):
         self.remove()
-        self._window.get_ui_manager().remove_action_group(self._action_group)
 
     def remove(self):
         if self._merge_id != 0:
             self._window.get_ui_manager().remove_ui(self._merge_id)
+            self._window.get_ui_manager().remove_action_group(self._action_group)
             self._merge_id = 0
 
         for action in self._action_group.list_actions():
             handler = action.get_data(self.ACTION_HANDLER_DATA_KEY)
+
             if handler is not None:
                 action.disconnect(handler)
+
+            action.set_data(self.ACTION_ITEM_DATA_KEY, None)
+            action.set_data(self.ACTION_HANDLER_DATA_KEY, None)
+
             self._action_group.remove_action(action)
+        
+        accelmap = gtk.accel_map_get()
+
+        for s in self._signals:
+            accelmap.disconnect(s)
+        
+        self._signals = []
 
     def _insert_directory(self, directory, path):
         manager = self._window.get_ui_manager()
@@ -68,6 +81,7 @@ class ToolMenu(object):
             manager.add_ui(self._merge_id, path,
                            action_name, action_name,
                            gtk.UI_MANAGER_MENU, False)
+                           
             self._insert_directory(item, path + '/' + action_name)
 
         for item in directory.tools:
@@ -77,16 +91,33 @@ class ToolMenu(object):
 
             action.set_data(self.ACTION_ITEM_DATA_KEY, item)
             action.set_data(self.ACTION_HANDLER_DATA_KEY, handler)
+            
+            # Make sure to replace accel
+            accelpath = '<Actions>/ExternalToolsPluginToolActions/%s' % (action_name, )
+            
+            if item.shortcut:
+                key, mod = gtk.accelerator_parse(item.shortcut)
+                gtk.accel_map_change_entry(accelpath, key, mod, True)
+                
+                self._signals.append(gtk.accel_map_get().connect('changed::%s' % (accelpath,), self.on_accelmap_changed, item))
+                
             self._action_group.add_action_with_accel(action, item.shortcut)
 
             manager.add_ui(self._merge_id, path,
                            action_name, action_name,
                            gtk.UI_MANAGER_MENUITEM, False)
 
+    def on_accelmap_changed(self, accelmap, path, key, mod, tool):
+        tool.shortcut = gtk.accelerator_name(key, mod)
+        tool.save()
+        
+        self._window.get_data("ExternalToolsPluginWindowData").update_manager(tool)
+
     def update(self):
         self.remove()
         self._merge_id = self._window.get_ui_manager().new_merge_id()
         self._insert_directory(self._library.tree, self._menupath)
+        self._window.get_ui_manager().insert_action_group(self._action_group, -1)
         self.filter(self._window.get_active_document())
 
     def filter_language(self, language, item):
@@ -195,6 +226,9 @@ class ExternalToolsWindowHelper(object):
         bottom = self._window.get_bottom_panel()
         bottom.remove_item(self._output_buffer.panel)
 
+    def update_manager(self, tool):
+        self._plugin.update_manager(tool)
+
 class ExternalToolsPlugin(gedit.Plugin):
     WINDOW_DATA_KEY = "ExternalToolsPluginWindowData"
 
@@ -227,6 +261,12 @@ class ExternalToolsPlugin(gedit.Plugin):
         self._manager.run(window)
 
         return self._manager.dialog
+
+    def update_manager(self, tool):
+        if not self._manager:
+            return
+
+        self._manager.tool_changed(tool, True)
 
     def on_manager_destroy(self, dialog):
         self._manager = None

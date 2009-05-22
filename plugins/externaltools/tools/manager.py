@@ -637,9 +637,12 @@ class Manager:
         self['tool-table'].set_sensitive(True)
         self.view.get_selection().handler_unblock(self.selection_changed_id)
 
-    def tool_changed(self, tool):
+    def tool_changed(self, tool, refresh=False):
         for row in self._tool_rows[tool]:
             self.model.row_changed(row.get_path(), self.model.get_iter(row.get_path()))
+        
+        if refresh and tool == self.current_node:
+            self.fill_fields()
 
     def on_remove_tool_button_clicked(self, button):
         piter, node = self.get_selected_tool()
@@ -818,6 +821,7 @@ class Manager:
 
     def on_tool_manager_dialog_focus_out(self, dialog, event):
         self.save_current_tool()
+
         for window in gedit.app_get_default().get_windows():
             helper = window.get_data("ExternalToolsPluginWindowData")
             helper.menu.update()
