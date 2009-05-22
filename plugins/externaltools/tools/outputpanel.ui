@@ -21,6 +21,9 @@
         <property name="wrap_mode">GTK_WRAP_WORD</property>
         <property name="cursor_visible">False</property>
         <property name="accepts_tab">False</property>
+        <signal name="button_press_event" handler="on_view_button_press_event"/>
+        <signal name="motion_notify_event" handler="on_view_motion_notify_event"/>
+        <signal name="visibility_notify_event" handler="on_view_visibility_notify_event"/>
       </object>
     </child>
       </object>

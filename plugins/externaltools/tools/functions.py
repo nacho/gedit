@@ -85,7 +85,7 @@ def run_external_tool(window, node):
         panel.show()
 
     # Assign the error output to the output panel
-    panel.process = capture
+    panel.set_process(capture)
 
     if input_type != 'nothing' and view is not None:
         if input_type == 'document':
