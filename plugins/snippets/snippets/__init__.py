@@ -54,7 +54,7 @@ class SnippetsPlugin(gedit.Plugin):
 		        
 		        dirs = []
 		        
-		        for d in dirs.split(os.pathsep)
+		        for d in datadirs.split(os.pathsep):
 		                d = os.path.join(d, 'gedit-2', 'plugins', 'snippets')
 		                
 		                if os.path.isdir(d):
