@@ -3068,6 +3068,8 @@ sync_languages_menu (GeditDocument *doc,
 		     GeditWindow   *window)
 {
 	update_languages_menu (window);
+	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
+						 window);
 }
 
 static void
