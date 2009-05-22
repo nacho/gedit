@@ -205,7 +205,25 @@ class Tool(object):
         self.filename = filename
         self.changed = False
         self._properties = dict()
+        self._transform = {
+            'Languages': [self._to_list, self._from_list]
+        }
         self._load()
+
+    def _to_list(self, value):
+        if value.strip() == '':
+            return []
+        else:
+            return map(lambda x: x.strip(), value.split(','))
+    
+    def _from_list(self, value):
+        return ','.join(value)
+
+    def _parse_value(self, key, value):
+        if key in self._transform:
+            return self._transform[key][0](value)
+        else:
+            return value
 
     def _load(self):
         if self.filename is None:
@@ -230,18 +248,18 @@ class Tool(object):
                 (key, value) = [i.strip() for i in line[2:].split('=', 1)]
                 m = self.RE_KEY.match(key)
                 if m.group(3) is None:
-                    if m.group(0) not in self._properties:
-                        self._properties[m.group(1)] = value
+                    self._properties[m.group(1)] = self._parse_value(m.group(1), value)
                 elif lang is not None and lang.startswith(m.group(3)):
-                    self._properties[m.group(1)] = value
+                    self._properties[m.group(1)] = self._parse_value(m.group(1), value)
             except ValueError:
                 break
         fp.close()
         self.changed = False
-
+        
     def _set_property_if_changed(self, key, value):
         if value != self._properties.get(key):
             self._properties[key] = value
+
             self.changed = True
 
     def is_global(self):
@@ -321,6 +339,14 @@ class Tool(object):
     def set_save_files(self, value):
         self._set_property_if_changed('Save-files', value)
     save_files = property(get_save_files, set_save_files)
+    
+    def get_languages(self):
+        languages = self._properties.get('Languages')
+        if languages: return languages
+        return []
+    def set_languages(self, value):
+        self._set_property_if_changed('Languages', value)
+    languages = property(get_languages, set_languages)
 
     # There is no property for this one because this function is quite
     # expensive to perform
@@ -357,12 +383,15 @@ class Tool(object):
     def _dump_properties(self):
         lines = ['# [Gedit Tool]']
         for item in self._properties.iteritems():
-            if item[1] is not None:
+            if item[0] in self._transform:
+                lines.append('# %s=%s' % (item[0], self._transform[item[0]][1](item[1])))
+            elif item[1] is not None:
                 lines.append('# %s=%s' % item)
         return '\n'.join(lines) + '\n'
 
     def save_with_script(self, script):
         filename = self.library.get_full_path(self.filename, 'w')
+        
         fp = open(filename, 'w', 1)
 
         # Make sure to first print header (shebang, modeline), then

@@ -26,6 +26,229 @@ from library import *
 from functions import *
 import hashlib
 from xml.sax import saxutils
+import gobject
+
+class LanguagesPopup(gtk.Window):
+    COLUMN_NAME = 0
+    COLUMN_ID = 1
+    COLUMN_ENABLED = 2
+
+    def __init__(self, languages):
+        gtk.Window.__init__(self, gtk.WINDOW_POPUP)
+        
+        self.set_default_size(200, 200)
+        self.props.can_focus = True
+
+        self.build()
+        self.init_languages(languages)
+
+        self.show()
+        self.map()
+        
+        self.grab_add()
+        
+        gtk.gdk.keyboard_grab(self.window, False, 0L)
+        gtk.gdk.pointer_grab(self.window, False, gtk.gdk.BUTTON_PRESS_MASK |
+                                                 gtk.gdk.BUTTON_RELEASE_MASK |
+                                                 gtk.gdk.POINTER_MOTION_MASK |
+                                                 gtk.gdk.ENTER_NOTIFY_MASK |
+                                                 gtk.gdk.LEAVE_NOTIFY_MASK |
+                                                 gtk.gdk.PROXIMITY_IN_MASK |
+                                                 gtk.gdk.PROXIMITY_OUT_MASK, None, None, 0L)
+
+        self.view.get_selection().select_path((0,))
+
+    def build(self):
+        self.model = gtk.ListStore(str, str, bool)
+        
+        self.sw = gtk.ScrolledWindow()
+        self.sw.show()
+        
+        self.sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        self.sw.set_shadow_type(gtk.SHADOW_ETCHED_IN)
+        
+        self.view = gtk.TreeView(self.model)
+        self.view.show()
+        
+        self.view.set_headers_visible(False)
+        
+        column = gtk.TreeViewColumn()
+        
+        renderer = gtk.CellRendererToggle()
+        column.pack_start(renderer, False)
+        column.set_attributes(renderer, active=self.COLUMN_ENABLED)
+        
+        renderer.connect('toggled', self.on_language_toggled)
+        
+        renderer = gtk.CellRendererText()
+        column.pack_start(renderer, True)
+        column.set_attributes(renderer, text=self.COLUMN_NAME)
+        
+        self.view.append_column(column)
+        self.view.set_row_separator_func(self.on_separator)
+        
+        self.sw.add(self.view)
+        
+        self.add(self.sw)
+    
+    def enabled_languages(self, model, path, piter, ret):
+        enabled = model.get_value(piter, self.COLUMN_ENABLED)
+        
+        if path == (0,) and enabled:
+            return True
+
+        if enabled:
+            ret.append(model.get_value(piter, self.COLUMN_ID))
+
+        return False
+    
+    def languages(self):
+        ret = []
+        
+        self.model.foreach(self.enabled_languages, ret)
+        return ret
+    
+    def on_separator(self, model, piter):
+        val = model.get_value(piter, self.COLUMN_NAME)
+        return val == '-'
+    
+    def init_languages(self, languages):
+        manager = gsv.LanguageManager()
+        langs = gedit.language_manager_list_languages_sorted(manager, True)
+        
+        self.model.append([_('All languages'), None, not languages])
+        self.model.append(['-', None, False])
+        self.model.append([_('Plain Text'), 'plain', 'plain' in languages])
+        self.model.append(['-', None, False])
+        
+        for lang in langs:
+            self.model.append([lang.get_name(), lang.get_id(), lang.get_id() in languages])
+
+    def correct_all(self, model, path, piter, enabled):
+        if path == (0,):
+            return False
+        
+        model.set_value(piter, self.COLUMN_ENABLED, enabled)
+
+    def on_language_toggled(self, renderer, path):
+        piter = self.model.get_iter(path)
+        
+        enabled = self.model.get_value(piter, self.COLUMN_ENABLED)
+        self.model.set_value(piter, self.COLUMN_ENABLED, not enabled)
+        
+        if path == '0':
+            self.model.foreach(self.correct_all, False)
+        else:
+            self.model.set_value(self.model.get_iter_first(), self.COLUMN_ENABLED, False)
+
+    def do_key_press_event(self, event):
+        if event.keyval == gtk.keysyms.Escape:
+            self.destroy()
+            return True
+        else:
+            event.window = self.view.get_bin_window()
+            return self.view.event(event)
+    
+    def do_key_release_event(self, event):
+        event.window = self.view.get_bin_window()
+        return self.view.event(event)
+    
+    def in_window(self, event, window=None):
+        if not window:
+            window = self.window
+
+        geometry = window.get_geometry()
+        origin = window.get_origin()
+        
+        return event.x_root >= origin[0] and \
+               event.x_root <= origin[0] + geometry[2] and \
+               event.y_root >= origin[1] and \
+               event.y_root <= origin[1] + geometry[3]
+    
+    def do_destroy(self):
+        gtk.gdk.keyboard_ungrab(0L)
+        gtk.gdk.pointer_ungrab(0L)
+        
+        return gtk.Window.do_destroy(self)
+    
+    def setup_event(self, event, window):
+        fr = event.window.get_origin()
+        to = window.get_origin()
+        
+        event.window = window
+        event.x += fr[0] - to[0]
+        event.y += fr[1] - to[1]
+    
+    def resolve_widgets(self, root):
+        res = [root]
+        
+        if isinstance(root, gtk.Container):
+            root.forall(lambda x, y: res.extend(self.resolve_widgets(x)), None)
+        
+        return res
+    
+    def resolve_windows(self, window):
+        if not window:
+            return []
+
+        res = [window]
+        res.extend(window.get_children())
+        
+        return res
+    
+    def propagate_mouse_event(self, event):
+        allwidgets = self.resolve_widgets(self.get_child())
+        allwidgets.reverse()
+        
+        orig = [event.x, event.y]
+
+        for widget in allwidgets:
+            windows = self.resolve_windows(widget.window)
+            windows.reverse()
+            
+            for window in windows:
+                if not (window.get_events() & event.type):
+                    continue
+
+                if self.in_window(event, window):                    
+                    self.setup_event(event, window)
+
+                    if widget.event(event):
+                        return True
+        
+        return False
+    
+    def do_button_press_event(self, event):
+        if not self.in_window(event):
+            self.destroy()
+        else:
+            return self.propagate_mouse_event(event)
+
+    def do_button_release_event(self, event):
+        if not self.in_window(event):
+            self.destroy()
+        else:
+            return self.propagate_mouse_event(event)
+
+    def do_scroll_event(self, event):
+        return self.propagate_mouse_event(event)
+    
+    def do_motion_notify_event(self, event):
+        return self.propagate_mouse_event(event)
+    
+    def do_enter_notify_event(self, event):
+        return self.propagate_mouse_event(event)
+
+    def do_leave_notify_event(self, event):
+        return self.propagate_mouse_event(event)
+    
+    def do_proximity_in_event(self, event):
+        return self.propagate_mouse_event(event)
+    
+    def do_proximity_out_event(self, event):
+        return self.propagate_mouse_event(event)
+
+gobject.type_register(LanguagesPopup)
 
 class Manager:
     LABEL_COLUMN = 0 # For Combo and Tree
@@ -47,7 +270,8 @@ class Manager:
             'on_tool_manager_dialog_focus_out': self.on_tool_manager_dialog_focus_out,
             'on_accelerator_key_press'        : self.on_accelerator_key_press,
             'on_accelerator_focus_in'         : self.on_accelerator_focus_in,
-            'on_accelerator_focus_out'        : self.on_accelerator_focus_out
+            'on_accelerator_focus_out'        : self.on_accelerator_focus_out,
+            'on_languages_button_clicked'     : self.on_languages_button_clicked
         }
 
         # Load the "main-window" widget from the ui file.
@@ -61,11 +285,11 @@ class Manager:
         
         self.view = self.ui.get_object('view')
         
-        for name in ['input', 'output', 'applicability', 'save-files']:
-            self.__init_combobox(name)
-
         self.__init_tools_model()
         self.__init_tools_view()
+
+        for name in ['input', 'output', 'applicability', 'save-files']:
+            self.__init_combobox(name)
         
         self.do_update()
     
@@ -75,6 +299,27 @@ class Manager:
             self.dialog.show()
         else:
             self.dialog.present()
+
+    def add_accelerator(self, item):
+        if not item.shortcut:
+            return
+        
+        if item.shortcut in self.accelerators:
+            self.accelerators[item.shortcut].append(item)
+        else:
+            self.accelerators[item.shortcut] = [item]
+
+    def remove_accelerator(self, item, shortcut=None):
+        if not shortcut:
+            shortcut = item.shortcut
+            
+        if not item.shortcut in self.accelerators:
+            return
+        
+        self.accelerators[item.shortcut].remove(item)
+        
+        if not self.accelerators[item.shortcut]:
+            del self.accelerators[item.shortcut]
         
     def __init_tools_model(self):
         self.tools = ToolLibrary()
@@ -87,8 +332,7 @@ class Manager:
 
         for item in self.tools.tree.tools:
             self.model.append([item.name, item])
-            if item.shortcut:
-                self.accelerators[item.shortcut] = item
+            self.add_accelerator(item)
 
     def __init_tools_view(self):
         # Tools column
@@ -161,12 +405,34 @@ class Manager:
         else:
             self.current_node.save()
 
+        self.update_remove_revert()
+
     def clear_fields(self):
         self['accelerator'].set_text('')
         self['commands'].get_buffer().set_text('')
 
         for nm in ('input', 'output', 'applicability', 'save-files'):
             self[nm].set_active(0)
+        
+        self['languages_label'].set_text(_('All Languages'))
+    
+    def fill_languages_button(self):
+        if not self.current_node or not self.current_node.languages:
+            self['languages_label'].set_text(_('All Languages'))
+        else:
+            manager = gsv.LanguageManager()
+            langs = []
+            
+            for lang in self.current_node.languages:
+                if lang == 'plain':
+                    langs.append(_('Plain Text'))
+                else:
+                    l = manager.get_language(lang)
+                    
+                    if l:
+                        langs.append(l.get_name())
+            
+            self['languages_label'].set_text(', '.join(langs))
     
     def fill_fields(self):
         node = self.current_node
@@ -194,10 +460,12 @@ class Manager:
                                     default(node.__getattribute__(nm.replace('-', '_')),
                                     model.get_value(piter, self.NAME_COLUMN)))
 
-    def do_update(self):
+        self.fill_languages_button()
+
+    def update_remove_revert(self):
         piter, node = self.get_selected_tool()
 
-        removable = piter is not None and node is not None and node.is_local()
+        removable = node is not None and node.is_local()
 
         self['remove-tool-button'].set_sensitive(removable)
         self['revert-tool-button'].set_sensitive(removable)
@@ -208,6 +476,11 @@ class Manager:
         else:
             self['remove-tool-button'].show()
             self['revert-tool-button'].hide()
+
+    def do_update(self):
+        self.update_remove_revert()
+
+        piter, node = self.get_selected_tool()
 
         if node is not None:
             self.current_node = node
@@ -239,16 +512,19 @@ class Manager:
         piter, node = self.get_selected_tool()
 
         if node.is_global():
+            shortcut = node.shortcut
+            
             if node.parent.revert_tool(node):
-                if self.current_node.shortcut and \
-                   self.current_node.shortcut in self.accelerators:
-                    del self.accelerators[self.current_node.shortcut]                
+                self.remove_accelerator(node, shortcut)
+                self.add_accelerator(node)
+
                 self['revert-tool-button'].set_sensitive(False)
                 self.fill_fields()
+                
+                self.model.row_changed(self.model.get_path(piter), piter)
         else:
             if node.parent.delete_tool(node):
-                if self.current_node.shortcut:
-                    del self.accelerators[self.current_node.shortcut]
+                self.remove_accelerator(node)
                 self.current_node = None
                 self.script_hash = None
                 if self.model.remove(piter):
@@ -277,26 +553,50 @@ class Manager:
         self.save_current_tool()
         self.do_update()
 
+    def accelerator_collision(self, name, node):
+        if not name in self.accelerators:
+            return []
+            
+        ret = []
+        
+        for other in self.accelerators[name]:
+            if not other.languages or not node.languages:
+                ret.append(other)
+                continue
+            
+            for lang in other.languages:
+                if lang in node.languages:
+                    ret.append(other)
+                    continue
+        
+        return ret
+
     def set_accelerator(self, keyval, mod):
         # Check whether accelerator already exists
+        self.remove_accelerator(self.current_node)
 
-        if self.current_node.shortcut:
-            del self.accelerators[self.current_node.shortcut]
         name = gtk.accelerator_name(keyval, mod)
-        if name != '':
-            if name in self.accelerators:
-                dialog = gtk.MessageDialog(self.dialog,
-                                           gtk.DIALOG_MODAL,
-                                           gtk.MESSAGE_ERROR,
-                                           gtk.BUTTONS_OK,
-                                           _('This accelerator is already bound to %s') % self.accelerators[name].name)
-                dialog.run()
-                dialog.destroy()
-                return False
-            self.current_node.shortcut = name
-            self.accelerators[name] = self.current_node
-        else:
-            self.current_node.shortcut = None
+
+        if name == '':
+            self.current_node.shorcut = None
+            return True
+            
+        col = self.accelerator_collision(name, self.current_node)
+        
+        if col:
+            dialog = gtk.MessageDialog(self.dialog,
+                                       gtk.DIALOG_MODAL,
+                                       gtk.MESSAGE_ERROR,
+                                       gtk.BUTTONS_OK,
+                                       _('This accelerator is already bound to %s') % (', '.join(map(lambda x: x.name, col)),))
+
+            dialog.run()
+            dialog.destroy()
+            return False
+
+        self.current_node.shortcut = name
+        self.add_accelerator(self.current_node)
+
         return True
 
     def on_accelerator_key_press(self, entry, event):
@@ -314,24 +614,24 @@ class Manager:
             return True
         elif event.keyval in range(gtk.keysyms.F1, gtk.keysyms.F12 + 1):
             # New accelerator
-            self.set_accelerator(event.keyval, mask)
-            entry.set_text(default(self.current_node.shortcut, ''))
-            self['commands'].grab_focus()
+            if self.set_accelerator(event.keyval, mask):
+                entry.set_text(default(self.current_node.shortcut, ''))
+                self['commands'].grab_focus()
+    
             # Capture all `normal characters`
             return True
         elif gtk.gdk.keyval_to_unicode(event.keyval):
             if mask:
                 # New accelerator
-                self.set_accelerator(event.keyval, mask)
-                entry.set_text(default(self.current_node.shortcut, ''))
-                self['commands'].grab_focus()
+                if self.set_accelerator(event.keyval, mask):
+                    entry.set_text(default(self.current_node.shortcut, ''))
+                    self['commands'].grab_focus()
             # Capture all `normal characters`
             return True
         else:
             return False
 
     def on_accelerator_focus_in(self, entry, event):
-        pass
         if self.current_node is None:
             return
         if self.current_node.shortcut:
@@ -342,6 +642,9 @@ class Manager:
     def on_accelerator_focus_out(self, entry, event):
         if self.current_node is not None:
             entry.set_text(default(self.current_node.shortcut, ''))
+            
+            piter, node = self.get_selected_tool()
+            self.model.row_changed(self.model.get_path(piter), piter)
 
     def on_tool_manager_dialog_response(self, dialog, response):
         if response == gtk.RESPONSE_HELP:
@@ -373,5 +676,20 @@ class Manager:
             markup = escaped
             
         cell.set_property('markup', markup)
+
+    def update_languages(self, popup):
+        self.current_node.languages = popup.languages()
+        self.g()
+        
+        self.fill_languages_button()
+
+    def on_languages_button_clicked(self, button):
+        popup = LanguagesPopup(self.current_node.languages)
+        popup.set_transient_for(self.dialog)
+        
+        origin = button.window.get_origin()
+        popup.move(origin[0], origin[1] - popup.allocation.height)
+        
+        popup.connect('destroy', self.update_languages)
 
 # ex:et:ts=4:

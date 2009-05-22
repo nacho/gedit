@@ -26,9 +26,7 @@
   </object>
   <object class="GtkListStore" id="model_input">
     <columns>
-      <!-- column-name gchararray -->
       <column type="gchararray"/>
-      <!-- column-name gchararray1 -->
       <column type="gchararray"/>
     </columns>
     <data>
@@ -319,14 +317,50 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBox" id="applicability">
+                          <object class="GtkHBox" id="hbox1">
                             <property name="visible">True</property>
-                            <property name="model">model_applicability</property>
                             <child>
-                              <object class="GtkCellRendererText" id="input_renderer"/>
-                              <attributes>
-                                <attribute name="text">0</attribute>
-                              </attributes>
+		                      <object class="GtkComboBox" id="applicability">
+		                        <property name="visible">True</property>
+		                        <property name="model">model_applicability</property>
+		                        <child>
+		                          <object class="GtkCellRendererText" id="applicability_renderer"/>
+		                          <attributes>
+		                            <attribute name="text">0</attribute>
+		                          </attributes>
+		                        </child>
+		                      </object>
+                              <packing>
+                                <property name="position">0</property>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkEventBox" id="languages_event_box">
+                              	<property name="visible">True</property>
+                              	<property name="visible-window">True</property>
+                              	<child>
+		                          <object class="GtkButton" id="languages_button">
+		                            <property name="visible">True</property>
+		                            <signal name="clicked" handler="on_languages_button_clicked"/>
+		                            <child>
+		                              <object class="GtkLabel" id="languages_label">
+		                                <property name="visible">True</property>
+		                                <property name="label" translatable="yes">All Languages</property>
+		                                <property name="xalign">0</property>
+		                                <property name="yalign">0.5</property>
+		                                <property name="ellipsize">PANGO_ELLIPSIZE_MIDDLE</property>
+		                              </object>
+		                            </child>
+		                          </object>
+		                        </child>
+		                      </object>
+                              <packing>
+                                <property name="position">1</property>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                              </packing>
                             </child>
                           </object>
                           <packing>
@@ -343,7 +377,7 @@
                             <property name="visible">True</property>
                             <property name="model">model_output</property>
                             <child>
-                              <object class="GtkCellRendererText" id="input_renderer1"/>
+                              <object class="GtkCellRendererText" id="output_renderer"/>
                               <attributes>
                                 <attribute name="text">0</attribute>
                               </attributes>
@@ -363,7 +397,7 @@
                             <property name="visible">True</property>
                             <property name="model">model_input</property>
                             <child>
-                              <object class="GtkCellRendererText" id="input_renderer2"/>
+                              <object class="GtkCellRendererText" id="input_renderer"/>
                               <attributes>
                                 <attribute name="text">0</attribute>
                               </attributes>

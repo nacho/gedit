@@ -89,6 +89,18 @@ class ToolMenu(object):
         self._insert_directory(self._library.tree, self._menupath)
         self.filter(self._window.get_active_document())
 
+    def filter_language(self, language, item):
+        if not item.languages:
+            return True
+        
+        if not language and 'plain' in item.languages:
+            return True
+        
+        if language and (language.get_id() in item.languages):
+            return True
+        else:
+            return False
+
     def filter(self, document):
         if document is None:
             return
@@ -103,11 +115,14 @@ class ToolMenu(object):
             'titled': titled,
             'untitled': not titled,
         }
+        
+        language = document.get_language()
 
         for action in self._action_group.list_actions():
             item = action.get_data(self.ACTION_ITEM_DATA_KEY)
+
             if item is not None:
-                action.set_sensitive(states[item.applicability])
+                action.set_visible(states[item.applicability] and self.filter_language(language, item))
 
 class ExternalToolsWindowHelper(object):
     def __init__(self, plugin, window):
