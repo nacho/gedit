@@ -344,22 +344,77 @@ class Document:
                 start, end = buffer_line_boundary(buf)
                 
                 return buf.get_text(start, end)
+
+        def env_get_current_line_number(self, buf):
+                start, end = buffer_line_boundary(buf)
                 
-        def env_get_filename(self, buf):
+                return str(start.get_line() + 1)
+                
+        def env_get_document_uri(self, buf):
                 uri = buf.get_uri()
                 
                 if uri:
-                        return buf.get_uri_for_display()
+                        return uri
                 else:
                         return ''
         
-        def env_get_basename(self, buf):
+        def env_get_document_name(self, buf):
                 uri = buf.get_uri()
                 
                 if uri:
-                        return os.path.basename(buf.get_uri_for_display())
+                        return os.path.basename(uri)
                 else:
                         return ''
+
+        def env_get_document_scheme(self, buf):
+                uri = buf.get_uri()
+                
+                if uri:
+                        return gio.File(uri).get_uri_scheme()
+                else:
+                        return ''
+
+        def env_get_document_path(self, buf):
+                uri = buf.get_uri()
+                
+                if uri and gedit.utils.uri_has_file_scheme(uri):
+                        return gio.File(uri).get_path()
+                else:
+                        return ''
+
+        def env_get_document_dir(self, buf):
+                uri = buf.get_uri()
+                
+                if uri and gedit.utils.uri_has_file_scheme(uri):
+                        return os.path.dirname(gio.File(uri).get_path())
+                else:
+                        return ''
+
+        def env_get_document_type(self, buf):
+                typ = buf.get_mime_type()
+                
+                if typ:
+                        return typ
+                else:
+                        return ''
+
+        def env_get_documents_uri(self, buf):
+                documents_uri = [doc.get_uri()
+                                 for doc in self.view.get_toplevel().get_documents()
+                                 if doc.get_uri() is not None]
+                
+                return ' '.join(documents_uri)
+
+        def env_get_documents_path(self, buf):
+                documents_uri = [doc.get_uri()
+                                 for doc in self.view.get_toplevel().get_documents()
+                                 if doc.get_uri() is not None]
+
+                documents_path = [gio.File(uri).get_path()
+                                 for uri in documents_uri
+                                 if gedit.utils.uri_has_file_scheme(uri)]
+                
+                return ' '.join(documents_path)
 
         def update_environment(self):
                 buf = self.view.get_buffer()
@@ -367,8 +422,16 @@ class Document:
                 variables = {'GEDIT_SELECTED_TEXT': self.env_get_selected_text, 
                              'GEDIT_CURRENT_WORD': self.env_get_current_word, 
                              'GEDIT_CURRENT_LINE': self.env_get_current_line,
-                             'GEDIT_FILENAME': self.env_get_filename, 
-                             'GEDIT_BASENAME': self.env_get_basename}
+                             'GEDIT_CURRENT_LINE_NUMBER': self.env_get_current_line_number,
+                             'GEDIT_CURRENT_DOCUMENT_URI': self.env_get_document_uri, 
+                             'GEDIT_CURRENT_DOCUMENT_NAME': self.env_get_document_name,
+                             'GEDIT_CURRENT_DOCUMENT_SCHEME': self.env_get_document_scheme,
+                             'GEDIT_CURRENT_DOCUMENT_PATH': self.env_get_document_path,
+                             'GEDIT_CURRENT_DOCUMENT_DIR': self.env_get_document_dir,
+                             'GEDIT_CURRENT_DOCUMENT_TYPE': self.env_get_document_type,
+                             'GEDIT_DOCUMENTS_URI': self.env_get_documents_uri,
+                             'GEDIT_DOCUMENTS_PATH': self.env_get_documents_path,
+                             }
                 
                 for var in variables:
                         os.environ[var] = variables[var](buf)
