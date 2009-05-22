@@ -223,12 +223,8 @@ class ExternalToolsPlugin(gedit.Plugin):
             self._manager = Manager(self.get_data_dir())
             self._manager.dialog.connect('destroy', self.on_manager_destroy)
 
-        self._manager.run()
-        
         window = gedit.app_get_default().get_active_window()
-
-        if window:
-            self._manager.dialog.set_transient_for(window)
+        self._manager.run(window)
 
         return self._manager.dialog
 
