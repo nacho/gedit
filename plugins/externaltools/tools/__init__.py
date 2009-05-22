@@ -187,8 +187,7 @@ class ExternalToolsPlugin(gedit.Plugin):
         super(ExternalToolsPlugin, self).__init__()
         
         self._manager = None
-
-        ToolLibrary().set_locations(self.get_data_dir())
+        ToolLibrary().set_locations(os.path.join(self.get_data_dir(), 'tools'))
 
     def activate(self, window):
         helper = ExternalToolsWindowHelper(self, window)

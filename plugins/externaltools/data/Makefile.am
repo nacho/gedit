@@ -9,7 +9,7 @@ tools_in_files = \
 desktop_in_files = $(tools_in_files:.tool.in=.desktop.in)
 desktop_files    = $(tools_in_files:.tool.in=.desktop)
 tools_SCRIPTS    = $(tools_in_files:.tool.in=)
-toolsdir = $(GEDIT_PLUGINS_DATA_DIR)/tools
+toolsdir = $(GEDIT_PLUGINS_DATA_DIR)/externaltools/tools
 
 @INTLTOOL_DESKTOP_RULE@
 

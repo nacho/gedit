@@ -41,7 +41,7 @@ class ToolLibrary(Singleton):
 
         if platform.platform() != 'Windows':
             for d in self.get_xdg_data_dirs():
-                self.locations.append(os.path.join(d, 'gedit-2/plugins/tools'))
+                self.locations.append(os.path.join(d, 'gedit-2', 'plugins', 'externaltools', 'tools'))
 
         self.locations.append(datadir)
 
