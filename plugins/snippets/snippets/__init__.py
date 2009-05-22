@@ -50,11 +50,11 @@ class SnippetsPlugin(gedit.Plugin):
 		        if 'XDG_DATA_DIRS' in os.environ:
 		                datadirs = os.environ['XDG_DATA_DIRS']
 		        else:
-		                datadirs = '/usr/local/share:/usr/share'
+		                datadirs = '/usr/local/share' + os.pathsep + '/usr/share'
 		        
 		        dirs = []
 		        
-		        for d in datadirs.split(':'):
+		        for d in dirs.split(os.pathsep)
 		                d = os.path.join(d, 'gedit-2', 'plugins', 'snippets')
 		                
 		                if os.path.isdir(d):
