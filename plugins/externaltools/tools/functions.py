@@ -90,13 +90,21 @@ def run_external_tool(window, node):
     if input_type != 'nothing' and view is not None:
         if input_type == 'document':
             start, end = document.get_bounds()
-        elif input_type == 'selection':
+        elif input_type == 'selection' or input_type == 'selection-document':
             try:
                 start, end = document.get_selection_bounds()
+                
+                print start, end
             except ValueError:
-                start, end = document.get_bounds()
-                if output_type == 'replace-selection':
-                    document.select_range(start, end)
+                if input_type == 'selection-document':
+                    start, end = document.get_bounds()
+
+                    if output_type == 'replace-selection':
+                        document.select_range(start, end)
+                else:
+                    start = document.get_iter_at_mark(document.get_insert())
+                    end = start.copy()
+                    
         elif input_type == 'line':
             start = document.get_iter_at_mark(document.get_insert())
             end = start.copy()
