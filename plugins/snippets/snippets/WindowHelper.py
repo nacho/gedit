@@ -99,6 +99,9 @@ class WindowHelper:
                 return hasattr(view, '_snippet_controller') and view._snippet_controller
 
         def update_language(self):
+                if not self.window:
+                        return
+
                 if self.current_language:
                         accel_group = Library().get_accel_group( \
                                         self.current_language)
