@@ -111,7 +111,7 @@ class Capture(gobject.GObject):
     def on_output(self, source, condition):
         line = source.readline()
 
-        if self.pipe and len(line) > 0:
+        if len(line) > 0:
             try:
                 line = unicode(line, 'utf-8')
             except:
@@ -119,11 +119,13 @@ class Capture(gobject.GObject):
                                locale.getdefaultlocale()[1],
                                'replace')
 
-            if source == self.pipe.stdout:
+            if not self.pipe or source == self.pipe.stdout:
                 self.emit('stdout-line', line)
             else:
                 self.emit('stderr-line', line)
             return True
+        else:
+            self.pipe = None
 
         return False
 
@@ -139,6 +141,5 @@ class Capture(gobject.GObject):
         # In an idle, so it is emitted after all the std*-line signals
         # have been intercepted
         gobject.idle_add(self.emit, 'end-execute', error_code)
-        self.pipe = None
 
 # ex:ts=4:et:
