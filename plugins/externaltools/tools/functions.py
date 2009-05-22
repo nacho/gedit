@@ -31,6 +31,18 @@ def default(val, d):
     else:
         return d
 
+def current_word(document):
+    piter = document.get_iter_at_mark(document.get_insert())
+    start = piter.copy()
+    
+    if not start.starts_word():
+        start.backward_word_start()
+    
+    if not piter.ends_word():
+        piter.forward_word_end()
+            
+    return (start, piter)
+
 # ==== Capture related functions ====
 def run_external_tool(window, node):
     # Configure capture environment
@@ -48,6 +60,32 @@ def run_external_tool(window, node):
         # Environment vars relative to current document
         document = view.get_buffer()
         uri = document.get_uri()
+        
+        # Current line number
+        piter = document.get_iter_at_mark(document.get_insert())
+        capture.set_env(GEDIT_CURRENT_LINE_NUMBER=str(piter.get_line() + 1))
+        
+        # Current line text
+        piter.set_line_offset(0)
+        end = piter.copy()
+        
+        if not end.ends_line():
+            end.forward_to_line_end()
+        
+        capture.set_env(GEDIT_CURRENT_LINE=piter.get_text(end))
+        
+        # Selected text (only if input is not selection)
+        if node.input != 'selection' and node.input != 'selection-document':
+            bounds = document.get_selection_bounds()
+            
+            if bounds:
+                capture.set_env(GEDIT_SELECTED_TEXT=bounds[0].get_text(bounds[1]))
+        
+        bounds = current_word(document)
+        capture.set_env(GEDIT_CURRENT_WORD=bounds[0].get_text(bounds[1]))
+        
+        capture.set_env(GEDIT_CURRENT_DOCUMENT_TYPE=document.get_mime_type())
+        
         if uri is not None:
             gfile = gio.File(uri)
             scheme = gfile.get_uri_scheme()
@@ -235,7 +273,11 @@ def capture_end_execute_panel(capture, exit_code, panel, view, output_type):
 
         mtype = gio.content_type_guess(data=doc.get_text(start, end))
         lmanager = gedit.get_language_manager()
-        language = gedit.language_manager_get_language_from_mime_type(lmanager, mtype)
+        
+        print doc.get_uri()
+        print mtype
+        language = lmanager.guess_language(doc.get_uri(), mtype)
+        
         if language is not None:
             doc.set_language(language)
 
