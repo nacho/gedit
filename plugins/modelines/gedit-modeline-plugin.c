@@ -37,6 +37,7 @@
 typedef struct
 {
 	gulong tab_added_handler_id;
+	gulong tab_removed_handler_id;
 } WindowData;
 
 typedef struct
@@ -170,6 +171,14 @@ on_window_tab_added (GeditWindow *window,
 }
 
 static void
+on_window_tab_removed (GeditWindow *window,
+		       GeditTab *tab,
+		       gpointer user_data)
+{
+	disconnect_handlers (gedit_tab_get_view (tab));
+}
+
+static void
 gedit_modeline_plugin_activate (GeditPlugin *plugin,
 				GeditWindow *window)
 {
@@ -188,9 +197,14 @@ gedit_modeline_plugin_activate (GeditPlugin *plugin,
 	g_list_free (views);
 
 	wdata = g_slice_new (WindowData);
+
 	wdata->tab_added_handler_id =
 		g_signal_connect (window, "tab-added",
 				  G_CALLBACK (on_window_tab_added), NULL);
+
+	wdata->tab_removed_handler_id =
+		g_signal_connect (window, "tab-removed",
+				  G_CALLBACK (on_window_tab_removed), NULL);
 
 	g_object_set_data_full (G_OBJECT (window), WINDOW_DATA_KEY,
 				wdata, (GDestroyNotify) window_data_free);
