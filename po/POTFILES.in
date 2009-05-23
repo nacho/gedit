@@ -6,8 +6,6 @@ data/gedit.schemas.in
 gedit/dialogs/gedit-close-confirmation-dialog.c
 gedit/dialogs/gedit-encodings-dialog.c
 [type: gettext/glade]gedit/dialogs/gedit-encodings-dialog.ui
-gedit/dialogs/gedit-open-location-dialog.c
-[type: gettext/glade]gedit/dialogs/gedit-open-location-dialog.ui
 gedit/dialogs/gedit-preferences-dialog.c
 [type: gettext/glade]gedit/dialogs/gedit-preferences-dialog.ui
 gedit/dialogs/gedit-search-dialog.c
@@ -29,7 +27,6 @@ gedit/gedit-gio-document-saver.c
 gedit/gedit-help.c
 gedit/gedit-io-error-message-area.c
 gedit/gedit-local-document-saver.c
-gedit/gedit-mmap-document-loader.c
 gedit/gedit-notebook.c
 gedit/gedit-panel.c
 gedit/gedit-plugin-manager.c
@@ -53,6 +50,7 @@ plugins/docinfo/docinfo.gedit-plugin.desktop.in
 plugins/docinfo/gedit-docinfo-plugin.c
 plugins/externaltools/externaltools.gedit-plugin.desktop.in
 plugins/externaltools/tools/__init__.py
+plugins/externaltools/tools/capture.py
 plugins/externaltools/tools/functions.py
 plugins/externaltools/tools/manager.py
 plugins/externaltools/tools/outputpanel.py
@@ -76,8 +74,7 @@ plugins/pythonconsole/pythonconsole/__init__.py
 [type: gettext/glade]plugins/pythonconsole/pythonconsole/config.ui
 plugins/quickopen/quickopen/popup.py
 plugins/quickopen/quickopen/windowhelper.py
-plugins/sample/gedit-sample-plugin.c
-plugins/sample/sample.gedit-plugin.desktop.in
+plugins/quickopen/quickopen.gedit-plugin.desktop.in
 plugins/snippets/snippets.gedit-plugin.desktop.in
 [type: gettext/glade]plugins/snippets/snippets/snippets.ui
 plugins/snippets/snippets/WindowHelper.py
