@@ -37,6 +37,18 @@ static GHashTable *vim_languages;
 static GHashTable *emacs_languages;
 static GHashTable *kate_languages;
 
+typedef enum
+{
+	MODELINE_SET_NONE = 0,
+	MODELINE_SET_TAB_WIDTH = 1 << 0,
+	MODELINE_SET_INDENT_WIDTH = 1 << 1,
+	MODELINE_SET_WRAP_MODE = 1 << 2,
+	MODELINE_SET_SHOW_RIGHT_MARGIN = 1 << 3,
+	MODELINE_SET_RIGHT_MARGIN_POSITION = 1 << 4,
+	MODELINE_SET_LANGUAGE = 1 << 5,
+	MODELINE_SET_INSERT_SPACES = 1 << 6
+} ModelineSet;
+
 typedef struct _ModelineOptions
 {
 	gchar		*language_id;
@@ -50,7 +62,18 @@ typedef struct _ModelineOptions
 	GtkWrapMode	wrap_mode;
 	gboolean	display_right_margin;
 	guint		right_margin_position;
+	
+	ModelineSet	set;
 } ModelineOptions;
+
+#define MODELINE_OPTIONS_DATA_KEY "ModelineOptionsDataKey"
+
+static gboolean
+has_option (ModelineOptions *options,
+            ModelineSet      set)
+{
+	return options->set & set;
+}
 
 void
 modeline_parser_init (const gchar *data_dir)
@@ -264,34 +287,56 @@ parse_vim_modeline (gchar           *s,
 		{
 			g_free (options->language_id);
 			options->language_id = get_language_id_vim (value->str);
+			
+			options->set |= MODELINE_SET_LANGUAGE;
 		}
 		else if (strcmp (key->str, "et") == 0 ||
 		    strcmp (key->str, "expandtab") == 0)
 		{
 			options->insert_spaces = !neg;
+			options->set |= MODELINE_SET_INSERT_SPACES;
 		}
 		else if (strcmp (key->str, "ts") == 0 ||
 			 strcmp (key->str, "tabstop") == 0)
 		{
 			intval = atoi (value->str);
-			if (intval) options->tab_width = intval;
+			
+			if (intval)
+			{
+				options->tab_width = intval;
+				options->set |= MODELINE_SET_TAB_WIDTH;
+			}
 		}
 		else if (strcmp (key->str, "sw") == 0 ||
 			 strcmp (key->str, "shiftwidth") == 0)
 		{
 			intval = atoi (value->str);
-			if (intval) options->indent_width = intval;
+			
+			if (intval)
+			{
+				options->indent_width = intval;
+				options->set |= MODELINE_SET_INDENT_WIDTH;
+			}
 		}
 		else if (strcmp (key->str, "wrap") == 0)
 		{
-			options->wrap_mode = neg ? GTK_WRAP_NONE
-						 : GTK_WRAP_WORD;
+			options->wrap_mode = neg ? GTK_WRAP_NONE : GTK_WRAP_WORD;
+
+			options->set |= MODELINE_SET_WRAP_MODE;
 		}
 		else if (strcmp (key->str, "textwidth") == 0)
 		{
 			intval = atoi (value->str);
-			if (intval) options->right_margin_position = intval;
-			options->display_right_margin = intval != 0;
+			
+			if (intval)
+			{
+				options->right_margin_position = intval;
+				options->display_right_margin = TRUE;
+				
+				options->set |= MODELINE_SET_SHOW_RIGHT_MARGIN |
+				                MODELINE_SET_RIGHT_MARGIN_POSITION;
+				
+			}
 		}
 	}
 
@@ -358,27 +403,42 @@ parse_emacs_modeline (gchar           *s,
 		{
 			g_free (options->language_id);
 			options->language_id = get_language_id_emacs (value->str);
+			
+			options->set |= MODELINE_SET_LANGUAGE;
 		}
 		else if (strcmp (key->str, "tab-width") == 0)
 		{
 			intval = atoi (value->str);
-			if (intval) options->tab_width = intval;
+			
+			if (intval)
+			{
+				options->tab_width = intval;
+				options->set |= MODELINE_SET_TAB_WIDTH;
+			}
 		}
 		else if (strcmp (key->str, "indent-offset") == 0)
 		{
 			intval = atoi (value->str);
-			if (intval) options->indent_width = intval;
+			
+			if (intval)
+			{
+				options->indent_width = intval;
+				options->set |= MODELINE_SET_INDENT_WIDTH;
+			}
 		}
 		else if (strcmp (key->str, "indent-tabs-mode") == 0)
 		{
 			intval = strcmp (value->str, "nil") == 0;
 			options->insert_spaces = intval;
+			
+			options->set |= MODELINE_SET_INSERT_SPACES;
 		}
 		else if (strcmp (key->str, "autowrap") == 0)
 		{
 			intval = strcmp (value->str, "nil") != 0;
-			options->wrap_mode = intval ? GTK_WRAP_WORD
-						    : GTK_WRAP_NONE;
+			options->wrap_mode = intval ? GTK_WRAP_WORD : GTK_WRAP_NONE;
+			
+			options->set |= MODELINE_SET_WRAP_MODE;
 		}
 	}
 
@@ -441,11 +501,18 @@ parse_kate_modeline (gchar           *s,
 		{
 			g_free (options->language_id);
 			options->language_id = get_language_id_kate (value->str);
+			
+			options->set |= MODELINE_SET_LANGUAGE;
 		}
 		else if (strcmp (key->str, "tab-width") == 0)
 		{
 			intval = atoi (value->str);
-			if (intval) options->tab_width = intval;
+			
+			if (intval)
+			{
+				options->tab_width = intval;
+				options->set |= MODELINE_SET_TAB_WIDTH;
+			}
 		}
 		else if (strcmp (key->str, "indent-width") == 0)
 		{
@@ -457,21 +524,32 @@ parse_kate_modeline (gchar           *s,
 			intval = strcmp (value->str, "on") == 0 ||
 			         strcmp (value->str, "true") == 0 ||
 			         strcmp (value->str, "1") == 0;
+
 			options->insert_spaces = intval;
+			options->set |= MODELINE_SET_INSERT_SPACES;
 		}
 		else if (strcmp (key->str, "word-wrap") == 0)
 		{
 			intval = strcmp (value->str, "on") == 0 ||
 			         strcmp (value->str, "true") == 0 ||
 			         strcmp (value->str, "1") == 0;
-			options->wrap_mode = intval ? GTK_WRAP_WORD
-						    : GTK_WRAP_NONE;
+
+			options->wrap_mode = intval ? GTK_WRAP_WORD : GTK_WRAP_NONE;
+
+			options->set |= MODELINE_SET_WRAP_MODE;			
 		}
 		else if (strcmp (key->str, "word-wrap-column") == 0)
 		{
 			intval = atoi (value->str);
-			if (intval) options->right_margin_position = intval;
-			options->display_right_margin = intval != 0;
+			
+			if (intval)
+			{
+				options->right_margin_position = intval;
+				options->display_right_margin = TRUE;
+				
+				options->set |= MODELINE_SET_RIGHT_MARGIN_POSITION |
+				                MODELINE_SET_SHOW_RIGHT_MARGIN;
+			}
 		}
 	}
 
@@ -524,6 +602,68 @@ parse_modeline (gchar           *s,
 	}
 }
 
+static gboolean
+check_previous (GtkSourceView   *view,
+                ModelineOptions *previous,
+                ModelineSet      set)
+{
+	GtkSourceBuffer *buffer = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+	   
+	/* Do not restore default when this is the first time */
+	if (!previous)
+		return FALSE;
+
+	/* Do not restore default when previous was not set */
+	if (!(previous->set & set))
+		return FALSE;
+
+	/* Only restore default when setting has not changed */
+	switch (set)
+	{
+		case MODELINE_SET_INSERT_SPACES:
+			return gtk_source_view_get_insert_spaces_instead_of_tabs (view) ==
+			       previous->insert_spaces;
+		break;
+		case MODELINE_SET_TAB_WIDTH:
+			return gtk_source_view_get_tab_width (view) == previous->tab_width;
+		break;
+		case MODELINE_SET_INDENT_WIDTH:
+			return gtk_source_view_get_indent_width (view) == previous->indent_width;
+		break;
+		case MODELINE_SET_WRAP_MODE:
+			return gtk_text_view_get_wrap_mode (GTK_TEXT_VIEW (view)) ==
+			       previous->wrap_mode;
+		break;
+		case MODELINE_SET_RIGHT_MARGIN_POSITION:
+			return gtk_source_view_get_right_margin_position (view) ==
+			       previous->right_margin_position;
+		break;
+		case MODELINE_SET_SHOW_RIGHT_MARGIN:
+			return gtk_source_view_get_show_right_margin (view) ==
+			       previous->display_right_margin;
+		break;
+		case MODELINE_SET_LANGUAGE:
+		{
+			GtkSourceLanguage *language = gtk_source_buffer_get_language (buffer);
+			
+			return (language == NULL && previous->language_id == NULL) ||
+			       (language != NULL && g_strcmp0 (gtk_source_language_get_id (language),
+			                                       previous->language_id) == 0);
+		}
+		break;
+		default:
+			return FALSE;
+		break;
+	}
+}
+
+static void
+free_modeline_options (ModelineOptions *options)
+{
+	g_free (options->language_id);
+	g_slice_free (ModelineOptions, options);
+}
+
 void
 modeline_parser_apply_modeline (GtkSourceView *view)
 {
@@ -531,17 +671,9 @@ modeline_parser_apply_modeline (GtkSourceView *view)
 	GtkTextBuffer *buffer;
 	GtkTextIter iter, liter;
 	gint line_count;
-
-	/* Default values for modeline options */
+	
 	options.language_id = NULL;
-	options.insert_spaces = gedit_prefs_manager_get_insert_spaces ();
-	options.tab_width = gedit_prefs_manager_get_tabs_size ();
-	options.indent_width = -1; /* not set by default */
-	options.wrap_mode = gedit_prefs_manager_get_wrap_mode ();
-	options.display_right_margin =
-			gedit_prefs_manager_get_display_right_margin ();
-	options.right_margin_position =
-			gedit_prefs_manager_get_right_margin_position ();
+	options.set = MODELINE_SET_NONE;
 
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 	gtk_text_buffer_get_start_iter (buffer, &iter);
@@ -606,7 +738,7 @@ modeline_parser_apply_modeline (GtkSourceView *view)
 	}
 
 	/* Try to set language */
-	if (options.language_id != NULL)
+	if (has_option (&options, MODELINE_SET_LANGUAGE) && options.language_id)
 	{
 		GtkSourceLanguageManager *manager;
 		GtkSourceLanguage *language;
@@ -620,16 +752,100 @@ modeline_parser_apply_modeline (GtkSourceView *view)
 			gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (buffer),
 							language);
 		}
-
-		g_free (options.language_id);
 	}
 
-	/* Apply the options we got from modelines */
-	gtk_source_view_set_insert_spaces_instead_of_tabs
-						(view, options.insert_spaces);
-	gtk_source_view_set_tab_width (view, options.tab_width);
-	gtk_source_view_set_indent_width (view, options.indent_width);
-	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), options.wrap_mode);
-	gtk_source_view_set_right_margin_position (view, options.right_margin_position);
-	gtk_source_view_set_show_right_margin (view, options.display_right_margin);
+	ModelineOptions *previous = g_object_get_data (G_OBJECT (buffer), 
+	                                               MODELINE_OPTIONS_DATA_KEY);
+
+	/* Apply the options we got from modelines and restore defaults if
+	   we set them before */
+	if (has_option (&options, MODELINE_SET_INSERT_SPACES))
+	{
+		gtk_source_view_set_insert_spaces_instead_of_tabs
+							(view, options.insert_spaces);
+	}
+	else if (check_previous (view, previous, MODELINE_SET_INSERT_SPACES))
+	{
+		gtk_source_view_set_insert_spaces_instead_of_tabs
+							(view,
+							 gedit_prefs_manager_get_insert_spaces ());
+	}
+	
+	if (has_option (&options, MODELINE_SET_TAB_WIDTH))
+	{
+		gtk_source_view_set_tab_width (view, options.tab_width);
+	}
+	else if (check_previous (view, previous, MODELINE_SET_TAB_WIDTH))
+	{
+		gtk_source_view_set_tab_width (view, 
+		                               gedit_prefs_manager_get_tabs_size ());
+	}
+	
+	if (has_option (&options, MODELINE_SET_INDENT_WIDTH))
+	{
+		gtk_source_view_set_indent_width (view, options.indent_width);
+	}
+	else if (check_previous (view, previous, MODELINE_SET_INDENT_WIDTH))
+	{
+		gtk_source_view_set_indent_width (view, -1);
+	}
+	
+	if (has_option (&options, MODELINE_SET_WRAP_MODE))
+	{
+		gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), options.wrap_mode);
+	}
+	else if (check_previous (view, previous, MODELINE_SET_WRAP_MODE))
+	{
+		gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), 
+		                             gedit_prefs_manager_get_wrap_mode ());
+	}
+	
+	if (has_option (&options, MODELINE_SET_RIGHT_MARGIN_POSITION))
+	{
+		gtk_source_view_set_right_margin_position (view, options.right_margin_position);
+	}
+	else if (check_previous (view, previous, MODELINE_SET_RIGHT_MARGIN_POSITION))
+	{
+		gtk_source_view_set_right_margin_position (view, 
+		                                           gedit_prefs_manager_get_right_margin_position ());
+	}
+	
+	if (has_option (&options, MODELINE_SET_SHOW_RIGHT_MARGIN))
+	{
+		gtk_source_view_set_show_right_margin (view, options.display_right_margin);
+	}
+	else if (check_previous (view, previous, MODELINE_SET_SHOW_RIGHT_MARGIN))
+	{
+		gtk_source_view_set_show_right_margin (view, 
+		                                       gedit_prefs_manager_get_display_right_margin ());
+	}
+	
+	if (previous)
+	{
+		*previous = options;
+		previous->language_id = g_strdup (options.language_id);
+	}
+	else
+	{
+		previous = g_slice_new (ModelineOptions);
+		*previous = options;
+		previous->language_id = g_strdup (options.language_id);
+		
+		g_object_set_data_full (G_OBJECT (buffer), 
+		                        MODELINE_OPTIONS_DATA_KEY, 
+		                        previous,
+		                        (GDestroyNotify)free_modeline_options);
+	}
+	
+	g_free (options.language_id);
 }
+
+void
+modeline_parser_deactivate (GtkSourceView *view)
+{
+	g_object_set_data (G_OBJECT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view))),
+	                   MODELINE_OPTIONS_DATA_KEY,
+	                   NULL);
+}
+
+/* vi:ts=8 */

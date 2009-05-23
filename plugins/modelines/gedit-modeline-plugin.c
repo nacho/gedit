@@ -211,8 +211,14 @@ gedit_modeline_plugin_deactivate (GeditPlugin *plugin,
 	window_data_free (wdata);
 
 	views = gedit_window_get_views (window);
+
 	for (l = views; l != NULL; l = l->next)
+	{
 		disconnect_handlers (GEDIT_VIEW (l->data));
+		
+		modeline_parser_deactivate (GTK_SOURCE_VIEW (l->data));
+	}
+	
 	g_list_free (views);
 }
 
