@@ -37,14 +37,6 @@ ui_str = """<ui>
 </ui>
 """
 
-from gpdefs import *
-
-try:
-    gettext.bindtextdomain(GETTEXT_PACKAGE, GP_LOCALEDIR)
-    _ = lambda s: gettext.dgettext(GETTEXT_PACKAGE, s);
-except:
-    _ = lambda s: s
-
 class WindowHelper:
         def __init__(self, window, plugin):
                 self._window = window

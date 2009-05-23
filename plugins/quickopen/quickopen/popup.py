@@ -28,14 +28,6 @@ import gedit
 import xml
 from virtualdirs import VirtualDirectory
 
-from gpdefs import *
-
-try:
-    gettext.bindtextdomain(GETTEXT_PACKAGE, GP_LOCALEDIR)
-    _ = lambda s: gettext.dgettext(GETTEXT_PACKAGE, s);
-except:
-    _ = lambda s: s
-
 class Popup(gtk.Dialog):
         def __init__(self, window, paths, handler):
                 gtk.Dialog.__init__(self,
