@@ -274,8 +274,6 @@ def capture_end_execute_panel(capture, exit_code, panel, view, output_type):
         mtype = gio.content_type_guess(data=doc.get_text(start, end))
         lmanager = gedit.get_language_manager()
         
-        print doc.get_uri()
-        print mtype
         language = lmanager.guess_language(doc.get_uri(), mtype)
         
         if language is not None:
