@@ -25,7 +25,7 @@ import gio
 import pango
 import fnmatch
 import gedit
-import xml
+import xml.sax
 from virtualdirs import VirtualDirectory
 
 class Popup(gtk.Dialog):
