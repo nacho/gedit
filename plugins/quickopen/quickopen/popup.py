@@ -202,7 +202,7 @@ class Popup(gtk.Dialog):
                 last = 0
 
                 if len(find) == 0:
-                        return s
+                        return xml.sax.saxutils.escape(s)
 
                 while True:
                         m = l.find(find, last)
