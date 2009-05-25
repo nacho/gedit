@@ -44,6 +44,7 @@ class Popup(gtk.Dialog):
                 self._dirs = []
                 self._cache = {}
                 self._theme = None
+                self._cursor = None
 
                 accel_group = gtk.AccelGroup()
                 accel_group.connect_group(gtk.keysyms.l, gtk.gdk.CONTROL_MASK, 0, self.on_focus_entry)
@@ -88,10 +89,14 @@ class Popup(gtk.Dialog):
                 column.pack_start(renderer, True)
                 column.set_attributes(renderer, markup=1)
 
+                column.set_cell_data_func(renderer, self.on_cell_data_cb)
+
                 tv.append_column(column)
                 sw.add(tv)
-
-                tv.get_selection().connect('changed', self.on_selection_changed)
+                
+                selection = tv.get_selection()
+                selection.connect('changed', self.on_selection_changed)
+                selection.set_mode(gtk.SELECTION_MULTIPLE)
 
                 vbox.pack_start(self._entry, False, False, 0)
                 vbox.pack_start(sw, True, True, 0)
@@ -107,6 +112,18 @@ class Popup(gtk.Dialog):
                 self.on_selection_changed(tv.get_selection())
                 vbox.show_all()
 
+        def on_cell_data_cb(self, column, cell, model, piter):
+                path = model.get_path(piter)
+                
+                if self._cursor and path == self._cursor.get_path():
+                        style = self._treeview.get_style()
+                        bg = style.bg[gtk.STATE_PRELIGHT]
+                        
+                        cell.set_property('cell-background-gdk', bg)
+                        cell.set_property('style', pango.STYLE_ITALIC)
+                else:
+                        cell.set_property('cell-background-set', False)
+                        cell.set_property('style-set', False)
 
         def _icon_from_stock(self, stock):
                 theme = gtk.icon_theme_get_default()
@@ -280,24 +297,30 @@ class Popup(gtk.Dialog):
                                 for entry in d.enumerate_children("standard::*"):
                                         self._append_to_store((entry[1].get_icon(), xml.sax.saxutils.escape(entry[1].get_name()), entry[0], entry[1].get_file_type()))
 
+        def _remove_cursor(self):
+                if self._cursor:
+                        path = self._cursor.get_path()
+                        self._cursor = None
+
+                        self._store.row_changed(path, self._store.get_iter(path))
+
         def do_search(self):
                 self.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
+                self._remove_cursor()
 
                 text = self._entry.get_text().strip()
                 self._clear_store()
 
                 if text == '':
                         self._show_virtuals()
-                        self.window.set_cursor(None)
-                        return
+                else:
+                        parts = self.normalize_relative(text.split(os.sep))
+                        files = []
 
-                parts = self.normalize_relative(text.split(os.sep))
-                files = []
-
-                for d in self._dirs:
-                        for entry in self.do_search_dir(parts, d):
-                                pathparts = self._make_parts(d, entry[0], parts)
-                                self._append_to_store((entry[3], self.make_markup(parts, pathparts), entry[0], entry[2]))
+                        for d in self._dirs:
+                                for entry in self.do_search_dir(parts, d):
+                                        pathparts = self._make_parts(d, entry[0], parts)
+                                        self._append_to_store((entry[3], self.make_markup(parts, pathparts), entry[0], entry[2]))
 
                 piter = self._store.get_iter_first()
 
@@ -318,33 +341,58 @@ class Popup(gtk.Dialog):
                 self.do_search()
                 self.on_selection_changed(self._treeview.get_selection())
 
-        def _select_index(self, idx):
-                self._treeview.get_selection().select_path((idx,))
+        def _select_index(self, idx, hasctrl, hasshift):
+                path = (idx,)
+                
+                if not (hasctrl or hasshift):
+                        self._treeview.get_selection().unselect_all()
+                
+                if (not hasctrl) or hasshift:
+                        if self._cursor:
+                                self._treeview.get_selection().select_path(self._cursor.get_path())
+                        else:
+                                self._treeview.get_selection().select_path(path)
 
-                self._treeview.scroll_to_cell((idx,), None, True, 0.5, 0)
+                self._treeview.scroll_to_cell(path, None, True, 0.5, 0)
+                self._remove_cursor()
 
-        def _move_selection(self, howmany):
-                model, s = self._treeview.get_selection().get_selected()
-                num = model.iter_n_children(None)
+                if hasctrl:
+                        self._cursor = gtk.TreeRowReference(self._store, path)
+                        
+                        piter = self._store.get_iter(path)
+                        self._store.row_changed(path, piter)
+
+        def _move_selection(self, howmany, hasctrl, hasshift):
+                num = self._store.iter_n_children(None)
 
                 if num == 0:
                         return True
 
-                if not s:
-                        if howmany > 0:
-                                self._select_index(0)
-                        else:
-                                self._select_index(num - 1)
+                # Test for cursor
+                path = None
+                
+                if self._cursor:
+                        path = self._cursor.get_path()
                 else:
-                        path = model.get_path(s)
+                        model, rows = self._treeview.get_selection().get_selected_rows()
+                        
+                        if len(rows) == 1:
+                                path = rows[0]
+
+                if not path:
+                        if howmany > 0:
+                                self._select_index(0, hasctrl, hasshift)
+                        else:
+                                self._select_index(num - 1, hasctrl, hasshift)
+                else:
                         idx = path[0]
 
                         if idx + howmany < 0:
-                                self._select_index(0)
+                                self._select_index(0, hasctrl, hasshift)
                         elif idx + howmany >= num:
-                                self._select_index(num - 1)
+                                self._select_index(num - 1, hasctrl, hasshift)
                         else:
-                                self._select_index(idx + howmany)
+                                self._select_index(idx + howmany, hasctrl, hasshift)
 
                 return True
 
@@ -363,17 +411,15 @@ class Popup(gtk.Dialog):
                 return gfile
 
         def _activate(self):
-                model, s = self._treeview.get_selection().get_selected()
-
-                if s:
+                model, rows = self._treeview.get_selection().get_selected_rows()
+                ret = True
+                
+                for row in rows:
+                        s = model.get_iter(row)
                         info = model.get(s, 2, 3)
 
                         if info[1] != gio.FILE_TYPE_DIRECTORY:
-                                if self._handler(info[0]):
-                                        self.destroy()
-                                        return True
-                                else:
-                                        return False
+                                ret = ret and self._handler(info[0])
                         else:
                                 text = self._entry.get_text()
 
@@ -385,29 +431,51 @@ class Popup(gtk.Dialog):
                                 self._entry.set_position(-1)
                                 self._entry.grab_focus()
                                 return True
-                else:
+
+                if rows and ret:
+                        self.destroy()
+
+                if not rows:
                         gfile = self._direct_file()
 
                         if gfile and self._handler(gfile):
                                 self.destroy()
-                                return True
+                        else:
+                                ret = False
+                else:
+                        ret = False
 
-                return False
+                return ret
+
+        def toggle_cursor(self):
+                if not self._cursor:
+                        return
+                
+                path = self._cursor.get_path()
+                selection = self._treeview.get_selection()
+                
+                if selection.path_is_selected(path):
+                        selection.unselect_path(path)
+                else:
+                        selection.select_path(path)
 
         def on_key_press_event(self, widget, event):
+                move_mapping = {
+                        gtk.keysyms.Down: 1,
+                        gtk.keysyms.Up: -1,
+                        gtk.keysyms.Page_Down: 5,
+                        gtk.keysyms.Page_Up: -5
+                }
+                
                 if event.keyval == gtk.keysyms.Escape:
                         self.destroy()
                         return True
-                elif event.keyval == gtk.keysyms.Down:
-                        return self._move_selection(1)
-                elif event.keyval == gtk.keysyms.Up:
-                        return self._move_selection(-1)
-                elif event.keyval == gtk.keysyms.Page_Down:
-                        return self._move_selection(5)
-                elif event.keyval == gtk.keysyms.Page_Up:
-                        return self._move_selection(-5)
+                elif event.keyval in move_mapping:
+                        return self._move_selection(move_mapping[event.keyval], event.state & gtk.gdk.CONTROL_MASK, event.state & gtk.gdk.SHIFT_MASK)
                 elif event.keyval in [gtk.keysyms.Return, gtk.keysyms.KP_Enter, gtk.keysyms.Tab, gtk.keysyms.ISO_Left_Tab]:
                         return self._activate()
+                elif event.keyval == gtk.keysyms.space and event.state & gtk.gdk.CONTROL_MASK:
+                        self.toggle_cursor()
 
                 return False
 
@@ -419,23 +487,26 @@ class Popup(gtk.Dialog):
                         self.destroy()
 
         def on_selection_changed(self, selection):
-                model, piter = selection.get_selected()
+                model, rows = selection.get_selected_rows()
+                
+                gfile = None
+                fname = None
 
-                if not piter:
+                if not rows:
                         gfile = self._direct_file()
+                elif len(rows) == 1:
+                        gfile = model.get(model.get_iter(rows[0]), 2)[0]
                 else:
-                        gfile = model.get(piter, 2)[0]
+                        fname = ''
 
                 if gfile:
                         if gfile.is_native():
                                 fname = xml.sax.saxutils.escape(gfile.get_path())
                         else:
                                 fname = xml.sax.saxutils.escape(gfile.get_uri())
-                else:
-                        fname = ''
 
-                self._open_button.set_sensitive(fname != '')
-                self._info_label.set_markup(fname)
+                self._open_button.set_sensitive(fname != None)
+                self._info_label.set_markup(fname or '')
 
         def on_focus_entry(self, group, accel, keyval, modifier):
                 self._entry.grab_focus()
