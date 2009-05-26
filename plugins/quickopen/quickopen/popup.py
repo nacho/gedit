@@ -45,6 +45,7 @@ class Popup(gtk.Dialog):
                 self._cache = {}
                 self._theme = None
                 self._cursor = None
+                self._shift_start = None
 
                 accel_group = gtk.AccelGroup()
                 accel_group.connect_group(gtk.keysyms.l, gtk.gdk.CONTROL_MASK, 0, self.on_focus_entry)
@@ -341,22 +342,38 @@ class Popup(gtk.Dialog):
                 self.do_search()
                 self.on_selection_changed(self._treeview.get_selection())
 
+        def _shift_extend(self, towhere):
+                selection = self._treeview.get_selection()
+                
+                if not self._shift_start:
+                        model, rows = selection.get_selected_rows()
+                        start = rows[0]
+
+                        self._shift_start = gtk.TreeRowReference(self._store, start)
+                else:
+                        start = self._shift_start.get_path()
+
+                selection.unselect_all()
+                selection.select_range(start, towhere)
+
         def _select_index(self, idx, hasctrl, hasshift):
                 path = (idx,)
                 
                 if not (hasctrl or hasshift):
                         self._treeview.get_selection().unselect_all()
                 
-                if (not hasctrl) or hasshift:
-                        if self._cursor:
-                                self._treeview.get_selection().select_path(self._cursor.get_path())
-                        else:
+                if hasshift:
+                        self._shift_extend(path)
+                else:
+                        self._shift_start = None
+                        
+                        if not hasctrl:
                                 self._treeview.get_selection().select_path(path)
 
                 self._treeview.scroll_to_cell(path, None, True, 0.5, 0)
                 self._remove_cursor()
 
-                if hasctrl:
+                if hasctrl or hasshift:
                         self._cursor = gtk.TreeRowReference(self._store, path)
                         
                         piter = self._store.get_iter(path)
