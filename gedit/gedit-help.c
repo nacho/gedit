@@ -58,10 +58,18 @@ gedit_help_display (GtkWindow   *parent,
 		name = "gedit";
 	}
 
+#ifndef G_OS_WIN32
 	if (link_id)
 		link = g_strdup_printf ("ghelp:%s?%s", name, link_id);
 	else
 		link = g_strdup_printf ("ghelp:%s", name);
+#else
+	if (link_id)
+		link = g_strdup_printf ("http://library.gnome.org/users/gedit/stable/%s",
+					link_id);
+	else
+		link = g_strdup ("http://library.gnome.org/users/gedit/stable/");
+#endif
 
 	ret = gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (parent)),
 	                    link, 
