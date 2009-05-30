@@ -527,8 +527,11 @@ class Manager:
                         sens = False
 
                         self['entry_tab_trigger'].set_text('')
-                        self['entry_accelerator'].set_text('')                        
-                        self['source_view_snippet'].get_buffer().set_text('')
+                        self['entry_accelerator'].set_text('')
+                        buf = self['source_view_snippet'].get_buffer()
+                        buf.begin_not_undoable_action()
+                        buf.set_text('')
+                        buf.end_not_undoable_action()
                         self['combo_drop_targets'].child.set_text('')
 
                 else:
@@ -540,7 +543,9 @@ class Manager:
                         self['combo_drop_targets'].child.set_text(', '.join(self.snippet['drop-targets']))
                         
                         buf = self['source_view_snippet'].get_buffer()
+                        buf.begin_not_undoable_action()
                         buf.set_text(self.snippet['text'])
+                        buf.end_not_undoable_action()
 
 
                 for name in ['source_view_snippet', 'label_tab_trigger',
