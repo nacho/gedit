@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.gnome-2-16\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-15 00:26+0100\n"
-"PO-Revision-Date: 2009-02-15 00:25+0100\n"
+"POT-Creation-Date: 2009-05-30 18:17+0200\n"
+"PO-Revision-Date: 2009-05-15 00:26+0200\n"
 "Last-Translator: Kenneth Nielsen <k.nielsen81@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -685,19 +685,6 @@ msgstr "Tegnkodninger"
 msgid "E_ncodings shown in menu:"
 msgstr "_Kodninger der vises i menu:"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.c:138
-#: ../gedit/dialogs/gedit-open-location-dialog.ui.h:3
-msgid "Open Location"
-msgstr "Åbn sted"
-
-#: ../gedit/dialogs/gedit-open-location-dialog.ui.h:1
-msgid "Ch_aracter coding:"
-msgstr "_Tegnkodning:"
-
-#: ../gedit/dialogs/gedit-open-location-dialog.ui.h:2
-msgid "Enter the _location (URI) of the file you would like to open:"
-msgstr "Indtast _stedet (URI'en) af den fil du ønsker at åbne:"
-
 #: ../gedit/dialogs/gedit-preferences-dialog.c:571
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
@@ -857,7 +844,7 @@ msgid "_Autosave files every"
 msgstr "_Gem automatisk filer hver"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:28
-#: ../gedit/gedit-view.c:1994
+#: ../gedit/gedit-view.c:2032
 msgid "_Display line numbers"
 msgstr "Vis linje_numre"
 
@@ -877,21 +864,21 @@ msgstr "_Tabulatorbredde:"
 msgid "_minutes"
 msgstr "_minutter"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:302
-#: ../gedit/dialogs/gedit-search-dialog.ui.h:2 ../gedit/gedit-window.c:1459
+#: ../gedit/dialogs/gedit-search-dialog.c:300
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:2 ../gedit/gedit-window.c:1462
 msgid "Replace"
 msgstr "Erstat"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:313 ../gedit/gedit-window.c:1457
+#: ../gedit/dialogs/gedit-search-dialog.c:311 ../gedit/gedit-window.c:1460
 msgid "Find"
 msgstr "Find"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:412
+#: ../gedit/dialogs/gedit-search-dialog.c:410
 msgid "Replace _All"
 msgstr "Erstat _alle"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:413
-#: ../gedit/gedit-commands-file.c:657
+#: ../gedit/dialogs/gedit-search-dialog.c:411
+#: ../gedit/gedit-commands-file.c:584
 msgid "_Replace"
 msgstr "_Erstat"
 
@@ -923,49 +910,48 @@ msgstr "_Søg efter: "
 msgid "_Wrap around"
 msgstr "_Begynd forfra ved slut"
 
-#: ../gedit/gedit.c:99
+#: ../gedit/gedit.c:115
 msgid "Show the application's version"
 msgstr "Vis programmets version"
 
-#: ../gedit/gedit.c:102
+#: ../gedit/gedit.c:118
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr ""
 "Sæt tegnsættet som skal bruges til at åbne filerne angivet på kommandolinjen"
 
-#: ../gedit/gedit.c:102
+#: ../gedit/gedit.c:118
 msgid "ENCODING"
 msgstr "KODNING"
 
-#: ../gedit/gedit.c:105
+#: ../gedit/gedit.c:121
+msgid "Display list of possible values for the encoding option"
+msgstr ""
+
+#: ../gedit/gedit.c:124
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Opret et nyt vindue i en eksisterende instans"
 
-#: ../gedit/gedit.c:108
+#: ../gedit/gedit.c:127
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Opret et nyt dokument i en eksisterende instans"
 
-#: ../gedit/gedit.c:111
+#: ../gedit/gedit.c:130
 msgid "[FILE...]"
 msgstr "[FIL....]"
 
-#: ../gedit/gedit.c:143
-#, c-format
-msgid "%s: malformed file name or URI.\n"
-msgstr "%s: forkert udformet filnavn eller URI.\n"
-
-#: ../gedit/gedit.c:155
+#: ../gedit/gedit.c:168
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: ugyldig kodning.\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:535
+#: ../gedit/gedit.c:559
 msgid "- Edit text files"
 msgstr "- Redigér tekstfiler"
 
-#: ../gedit/gedit.c:548
+#: ../gedit/gedit.c:572
 #, c-format
 msgid ""
 "%s\n"
@@ -975,12 +961,12 @@ msgstr ""
 "Kør \"%s --help\" for at se den fulde liste over tilgængelige "
 "kommandolinjetilvalg.\n"
 
-#: ../gedit/gedit-commands-file.c:257
+#: ../gedit/gedit-commands-file.c:255
 #, c-format
 msgid "Loading file '%s'…"
 msgstr "Indlæser filen \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:266
+#: ../gedit/gedit-commands-file.c:264
 #, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
@@ -988,39 +974,39 @@ msgstr[0] "Indlæser %d fil…"
 msgstr[1] "Indlæser %d filer…"
 
 #. Translators: "Open Files" is the title of the file chooser window
-#: ../gedit/gedit-commands-file.c:438
+#: ../gedit/gedit-commands-file.c:458
 msgid "Open Files"
 msgstr "Åbn filer"
 
-#: ../gedit/gedit-commands-file.c:644
+#: ../gedit/gedit-commands-file.c:571
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "Filen \"%s\" er skrivebeskyttet."
 
-#: ../gedit/gedit-commands-file.c:649
+#: ../gedit/gedit-commands-file.c:576
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Vil du forsøge at erstatte den med den du er ved at gemme?"
 
-#: ../gedit/gedit-commands-file.c:715 ../gedit/gedit-commands-file.c:921
+#: ../gedit/gedit-commands-file.c:643 ../gedit/gedit-commands-file.c:860
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Gemmer filen \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:819
+#: ../gedit/gedit-commands-file.c:750
 msgid "Save As…"
 msgstr "Gem som…"
 
-#: ../gedit/gedit-commands-file.c:1112
+#: ../gedit/gedit-commands-file.c:1074
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Forkaster ændringer i dokumentet \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:1157
+#: ../gedit/gedit-commands-file.c:1119
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Forkast ugemte ændringer i dokumentet \"%s\"?"
 
-#: ../gedit/gedit-commands-file.c:1166
+#: ../gedit/gedit-commands-file.c:1128
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1033,13 +1019,13 @@ msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for de sidste %ld sekunder vil gå "
 "tabt."
 
-#: ../gedit/gedit-commands-file.c:1175
+#: ../gedit/gedit-commands-file.c:1137
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Ændringer foretaget i dokumentet inden for det sidste minut vil gå tabt."
 
-#: ../gedit/gedit-commands-file.c:1181
+#: ../gedit/gedit-commands-file.c:1143
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1054,7 +1040,7 @@ msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for det sidste minut og %ld sekunder "
 "gå tabt."
 
-#: ../gedit/gedit-commands-file.c:1191
+#: ../gedit/gedit-commands-file.c:1153
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1067,12 +1053,12 @@ msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for de sidste %ld minutter vil gå "
 "tabt."
 
-#: ../gedit/gedit-commands-file.c:1206
+#: ../gedit/gedit-commands-file.c:1168
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Ændringer foretaget i dokumentet inden for den sidste time vil gå tabt."
 
-#: ../gedit/gedit-commands-file.c:1212
+#: ../gedit/gedit-commands-file.c:1174
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1087,7 +1073,7 @@ msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for den sidste time og %d minutter gå "
 "tabt."
 
-#: ../gedit/gedit-commands-file.c:1227
+#: ../gedit/gedit-commands-file.c:1189
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1098,7 +1084,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for de sidste %d timer vil gå tabt."
 
-#: ../gedit/gedit-commands-file.c:1253
+#: ../gedit/gedit-commands-file.c:1215
 msgid "_Revert"
 msgstr "_Forkast"
 
@@ -1142,11 +1128,11 @@ msgid "Unsaved Document %d"
 msgstr "Ugemt dokument %d"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:2164 ../gedit/gedit-window.c:2169
+#: ../gedit/gedit-window.c:2168 ../gedit/gedit-window.c:2173
 msgid "Read Only"
 msgstr "Skrivebeskyttet"
 
-#: ../gedit/gedit-documents-panel.c:774 ../gedit/gedit-window.c:3524
+#: ../gedit/gedit-documents-panel.c:774 ../gedit/gedit-window.c:3525
 msgid "Documents"
 msgstr "Dokumenter"
 
@@ -1289,7 +1275,7 @@ msgstr "Alle tekstfiler"
 msgid "C_haracter Coding:"
 msgstr "_Tegnkodning:"
 
-#: ../gedit/gedit-help.c:81
+#: ../gedit/gedit-help.c:89
 msgid "There was an error displaying help."
 msgstr "Der opstod en fejl ved visning af hjælp."
 
@@ -1464,12 +1450,12 @@ msgstr ""
 "at redigere den alligevel?"
 
 #: ../gedit/gedit-io-error-message-area.c:820
-#: ../gedit/gedit-io-error-message-area.c:915
+#: ../gedit/gedit-io-error-message-area.c:917
 msgid "S_ave Anyway"
 msgstr "_Gem alligevel"
 
 #: ../gedit/gedit-io-error-message-area.c:824
-#: ../gedit/gedit-io-error-message-area.c:919
+#: ../gedit/gedit-io-error-message-area.c:921
 msgid "D_on't Save"
 msgstr "Gem _ikke"
 
@@ -1485,17 +1471,17 @@ msgstr "Filen \"%s\" er blevet ændret siden den blev læst sidst."
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr "Hvis du gemmer den, går alle eksterne ændringer tabt. Gem alligevel?"
 
-#: ../gedit/gedit-io-error-message-area.c:937
+#: ../gedit/gedit-io-error-message-area.c:939
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "Kunne ikke oprette en sikkerhedskopi ved gemning af %s"
 
-#: ../gedit/gedit-io-error-message-area.c:940
+#: ../gedit/gedit-io-error-message-area.c:942
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "Kunne ikke oprette en midlertidig sikkerhedskopi ved gemning af %s"
 
-#: ../gedit/gedit-io-error-message-area.c:957
+#: ../gedit/gedit-io-error-message-area.c:959
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1506,7 +1492,7 @@ msgstr ""
 "ved gemningen, kan du miste den gamle kopi af filen. Gem alligevel?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1018
+#: ../gedit/gedit-io-error-message-area.c:1020
 #, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
@@ -1515,7 +1501,7 @@ msgstr ""
 "Kan ikke håndtere \"%s\"-steder i skrivetilstand. Kontrollér at du har "
 "indtastet stedet korrekt og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1026
+#: ../gedit/gedit-io-error-message-area.c:1028
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1523,7 +1509,7 @@ msgstr ""
 "Kan ikke håndtere dette sted i skrivetilstand. Kontrollér at du har "
 "indtastet stedet korrekt og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1035
+#: ../gedit/gedit-io-error-message-area.c:1037
 #, c-format
 msgid ""
 "%s is not a valid location. Please check that you typed the location "
@@ -1532,7 +1518,7 @@ msgstr ""
 "\"%s\" er ikke et gyldigt sted. Kontrollér at du har indtastet stedet "
 "korrekt og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1041
+#: ../gedit/gedit-io-error-message-area.c:1043
 msgid ""
 "You do not have the permissions necessary to save the file. Please check "
 "that you typed the location correctly and try again."
@@ -1540,7 +1526,7 @@ msgstr ""
 "Du har ikke de nødvendige rettigheder til at gemme filen. Kontrollér at du "
 "har indtastet stedet korrekt og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1047
+#: ../gedit/gedit-io-error-message-area.c:1049
 msgid ""
 "There is not enough disk space to save the file. Please free some disk space "
 "and try again."
@@ -1548,7 +1534,7 @@ msgstr ""
 "Der er ikke tilstrækkelig ledig plads på disken til at gemme filen. Frigør "
 "noget diskplads og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1052
+#: ../gedit/gedit-io-error-message-area.c:1054
 msgid ""
 "You are trying to save the file on a read-only disk. Please check that you "
 "typed the location correctly and try again."
@@ -1556,12 +1542,12 @@ msgstr ""
 "Du prøver at gemme filen på en skrivebeskyttet disk. Kontrollér at du har "
 "indtastet stedet korrekt og prøv igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1058
+#: ../gedit/gedit-io-error-message-area.c:1060
 msgid "A file with the same name already exists. Please use a different name."
 msgstr ""
 "En fil med det samme navn eksisterer allerede. Vælg venligst et andet navn."
 
-#: ../gedit/gedit-io-error-message-area.c:1063
+#: ../gedit/gedit-io-error-message-area.c:1065
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please use a shorter name."
@@ -1569,7 +1555,7 @@ msgstr ""
 "Den disk du forsøger at gemme filen på, har en begrænsning på længden af "
 "filnavne. Vælg et kortere navn."
 
-#: ../gedit/gedit-io-error-message-area.c:1070
+#: ../gedit/gedit-io-error-message-area.c:1072
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1579,7 +1565,7 @@ msgstr ""
 "filstørrelserne. Forsøg at gemme en mindre fil eller gem den på en disk uden "
 "denne begrænsning."
 
-#: ../gedit/gedit-io-error-message-area.c:1085
+#: ../gedit/gedit-io-error-message-area.c:1087
 #, c-format
 msgid "Could not save the file %s."
 msgstr "Kunne ikke gemme filen \"%s\"."
@@ -1587,25 +1573,25 @@ msgstr "Kunne ikke gemme filen \"%s\"."
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1127
+#: ../gedit/gedit-io-error-message-area.c:1129
 #, c-format
 msgid "The file %s changed on disk."
 msgstr "Filen %s er ændret på disken."
 
-#: ../gedit/gedit-io-error-message-area.c:1132
+#: ../gedit/gedit-io-error-message-area.c:1134
 msgid "Do you want to drop your changes and reload the file?"
 msgstr "Vil du forkaste dine ændringer og genindlæse filen?"
 
-#: ../gedit/gedit-io-error-message-area.c:1134
+#: ../gedit/gedit-io-error-message-area.c:1136
 msgid "Do you want to reload the file?"
 msgstr "Vil du genindlæse filen?"
 
-#: ../gedit/gedit-io-error-message-area.c:1144
+#: ../gedit/gedit-io-error-message-area.c:1146
 msgid "_Reload"
 msgstr "_Genindlæs"
 
 #. bad bad luck...
-#: ../gedit/gedit-local-document-saver.c:360
+#: ../gedit/gedit-local-document-saver.c:375
 msgid "Could not obtain backup filename"
 msgstr "Kunne ikke konstruere filnavn til sikkerhedskopi"
 
@@ -1822,74 +1808,74 @@ msgstr ""
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:665
+#: ../gedit/gedit-tab.c:666
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "Forkaster %s fra %s"
 
-#: ../gedit/gedit-tab.c:672
+#: ../gedit/gedit-tab.c:673
 #, c-format
 msgid "Reverting %s"
 msgstr "Forkaster %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:688
+#: ../gedit/gedit-tab.c:689
 #, c-format
 msgid "Loading %s from %s"
 msgstr "Indlæser %s fra %s"
 
-#: ../gedit/gedit-tab.c:695
+#: ../gedit/gedit-tab.c:696
 #, c-format
 msgid "Loading %s"
 msgstr "Indlæser %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:778
+#: ../gedit/gedit-tab.c:779
 #, c-format
 msgid "Saving %s to %s"
 msgstr "Gemmer %s i %s"
 
-#: ../gedit/gedit-tab.c:785
+#: ../gedit/gedit-tab.c:786
 #, c-format
 msgid "Saving %s"
 msgstr "Gemmer %s"
 
 # skrivebeskyttet
 #. Read only
-#: ../gedit/gedit-tab.c:1682
+#: ../gedit/gedit-tab.c:1685
 msgid "RO"
 msgstr "SB"
 
-#: ../gedit/gedit-tab.c:1729
+#: ../gedit/gedit-tab.c:1732
 #, c-format
 msgid "Error opening file %s"
 msgstr "Fejl ved åbning af filen \"%s\""
 
-#: ../gedit/gedit-tab.c:1734
+#: ../gedit/gedit-tab.c:1737
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Fejl ved forkastning af filen \"%s\""
 
-#: ../gedit/gedit-tab.c:1739
+#: ../gedit/gedit-tab.c:1742
 #, c-format
 msgid "Error saving file %s"
 msgstr "Fejl ved gemning af filen \"%s\""
 
-#: ../gedit/gedit-tab.c:1760
+#: ../gedit/gedit-tab.c:1763
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1767
+#: ../gedit/gedit-tab.c:1770
 msgid "Name:"
 msgstr "Navn:"
 
-#: ../gedit/gedit-tab.c:1768
+#: ../gedit/gedit-tab.c:1771
 msgid "MIME Type:"
 msgstr "MIME-type:"
 
-#: ../gedit/gedit-tab.c:1769
+#: ../gedit/gedit-tab.c:1772
 msgid "Encoding:"
 msgstr "Kodning:"
 
@@ -1930,279 +1916,271 @@ msgstr "Opret et nyt dokument"
 msgid "_Open..."
 msgstr "_Åbn..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1383
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1384
 msgid "Open a file"
 msgstr "Åbn en fil"
 
-#: ../gedit/gedit-ui.h:60
-msgid "Open _Location..."
-msgstr "Å_bn sted..."
-
-#: ../gedit/gedit-ui.h:61
-msgid "Open a file from a specified location"
-msgstr "Åbn en fil fra et angivet sted"
-
 #. Edit menu
-#: ../gedit/gedit-ui.h:64
+#: ../gedit/gedit-ui.h:62
 msgid "Pr_eferences"
 msgstr "_Indstillinger"
 
-#: ../gedit/gedit-ui.h:65
+#: ../gedit/gedit-ui.h:63
 msgid "Configure the application"
 msgstr "Konfigurér programmet"
 
 #. Help menu
-#: ../gedit/gedit-ui.h:68
+#: ../gedit/gedit-ui.h:66
 msgid "_Contents"
 msgstr "_Indhold"
 
-#: ../gedit/gedit-ui.h:69
+#: ../gedit/gedit-ui.h:67
 msgid "Open the gedit manual"
 msgstr "Vis brugervejledningen"
 
-#: ../gedit/gedit-ui.h:71
+#: ../gedit/gedit-ui.h:69
 msgid "About this application"
 msgstr "Om dette program"
 
-#: ../gedit/gedit-ui.h:75
+#: ../gedit/gedit-ui.h:73
 msgid "Leave fullscreen mode"
 msgstr "Forlad fuldskærmstilstand"
 
-#: ../gedit/gedit-ui.h:83
+#: ../gedit/gedit-ui.h:81
 msgid "Save the current file"
 msgstr "Gem den aktuelle fil"
 
-#: ../gedit/gedit-ui.h:84
+#: ../gedit/gedit-ui.h:82
 msgid "Save _As..."
 msgstr "Gem _som..."
 
-#: ../gedit/gedit-ui.h:85
+#: ../gedit/gedit-ui.h:83
 msgid "Save the current file with a different name"
 msgstr "Gem den aktuelle fil under et andet navn"
 
-#: ../gedit/gedit-ui.h:87
+#: ../gedit/gedit-ui.h:85
 msgid "Revert to a saved version of the file"
 msgstr "Gå tilbage til en gemt version af filen"
 
-#: ../gedit/gedit-ui.h:88
+#: ../gedit/gedit-ui.h:86
 msgid "Page Set_up..."
 msgstr "Side_opsætning..."
 
-#: ../gedit/gedit-ui.h:89
+#: ../gedit/gedit-ui.h:87
 msgid "Setup the page settings"
 msgstr "Konfigurér sideindstillingerne"
 
-#: ../gedit/gedit-ui.h:90
+#: ../gedit/gedit-ui.h:88
 msgid "Print Previe_w"
 msgstr "_Vis udskrift"
 
-#: ../gedit/gedit-ui.h:91
+#: ../gedit/gedit-ui.h:89
 msgid "Print preview"
 msgstr "Vis udskrift"
 
-#: ../gedit/gedit-ui.h:92
+#: ../gedit/gedit-ui.h:90
 msgid "_Print..."
 msgstr "_Udskriv..."
 
-#: ../gedit/gedit-ui.h:93
+#: ../gedit/gedit-ui.h:91
 msgid "Print the current page"
 msgstr "Udskriv den aktuelle side"
 
-#: ../gedit/gedit-ui.h:95
+#: ../gedit/gedit-ui.h:93
 msgid "Close the current file"
 msgstr "Luk den aktuelle fil"
 
-#: ../gedit/gedit-ui.h:99
+#: ../gedit/gedit-ui.h:97
 msgid "Undo the last action"
 msgstr "Fortryd den sidste handling"
 
-#: ../gedit/gedit-ui.h:101
+#: ../gedit/gedit-ui.h:99
 msgid "Redo the last undone action"
 msgstr "Omgør den sidste fortrudte handling"
 
-#: ../gedit/gedit-ui.h:103
+#: ../gedit/gedit-ui.h:101
 msgid "Cut the selection"
 msgstr "Klip det markerede"
 
-#: ../gedit/gedit-ui.h:105
+#: ../gedit/gedit-ui.h:103
 msgid "Copy the selection"
 msgstr "Kopiér det markerede"
 
-#: ../gedit/gedit-ui.h:107
+#: ../gedit/gedit-ui.h:105
 msgid "Paste the clipboard"
-msgstr "Indsæt indholdet af klippebordet"
+msgstr "Indsæt indholdet af udklipsholderen"
 
-#: ../gedit/gedit-ui.h:109
+#: ../gedit/gedit-ui.h:107
 msgid "Delete the selected text"
 msgstr "Slet det markerede tekst"
 
-#: ../gedit/gedit-ui.h:110
+#: ../gedit/gedit-ui.h:108
 msgid "Select _All"
 msgstr "Markér _alt"
 
-#: ../gedit/gedit-ui.h:111
+#: ../gedit/gedit-ui.h:109
 msgid "Select the entire document"
 msgstr "Markér hele dokumentet"
 
 #. View menu
-#: ../gedit/gedit-ui.h:114
+#: ../gedit/gedit-ui.h:112
 msgid "_Highlight Mode"
 msgstr "_Fremhævningstilstand"
 
 #. Search menu
-#: ../gedit/gedit-ui.h:117
+#: ../gedit/gedit-ui.h:115
 msgid "_Find..."
 msgstr "_Find..."
 
-#: ../gedit/gedit-ui.h:118
+#: ../gedit/gedit-ui.h:116
 msgid "Search for text"
 msgstr "Søg efter tekst"
 
-#: ../gedit/gedit-ui.h:119
+#: ../gedit/gedit-ui.h:117
 msgid "Find Ne_xt"
 msgstr "Find _næste"
 
-#: ../gedit/gedit-ui.h:120
+#: ../gedit/gedit-ui.h:118
 msgid "Search forwards for the same text"
 msgstr "Søg fremad efter den samme tekst"
 
-#: ../gedit/gedit-ui.h:121
+#: ../gedit/gedit-ui.h:119
 msgid "Find Pre_vious"
 msgstr "Find f_orrige"
 
-#: ../gedit/gedit-ui.h:122
+#: ../gedit/gedit-ui.h:120
 msgid "Search backwards for the same text"
 msgstr "Søg bagud efter den samme tekst"
 
-#: ../gedit/gedit-ui.h:123
+#: ../gedit/gedit-ui.h:121
 msgid "_Replace..."
 msgstr "_Erstat..."
 
-#: ../gedit/gedit-ui.h:124
+#: ../gedit/gedit-ui.h:122
 msgid "Search for and replace text"
 msgstr "Søg efter og erstat tekst"
 
-#: ../gedit/gedit-ui.h:125
+#: ../gedit/gedit-ui.h:123
 msgid "_Clear Highlight"
 msgstr "_Ryd fremhævning"
 
-#: ../gedit/gedit-ui.h:126
+#: ../gedit/gedit-ui.h:124
 msgid "Clear highlighting of search matches"
 msgstr "Ryd fremhævning af fundne ord"
 
-#: ../gedit/gedit-ui.h:127
+#: ../gedit/gedit-ui.h:125
 msgid "Go to _Line..."
 msgstr "Gå til _linje..."
 
-#: ../gedit/gedit-ui.h:128
+#: ../gedit/gedit-ui.h:126
 msgid "Go to a specific line"
 msgstr "Gå til en bestemt linje"
 
-#: ../gedit/gedit-ui.h:129
+#: ../gedit/gedit-ui.h:127
 msgid "_Incremental Search..."
 msgstr "_Løbende søgning..."
 
-#: ../gedit/gedit-ui.h:130
+#: ../gedit/gedit-ui.h:128
 msgid "Incrementally search for text"
 msgstr "Søg efter tekst løbende"
 
 #. Documents menu
-#: ../gedit/gedit-ui.h:133
+#: ../gedit/gedit-ui.h:131
 msgid "_Save All"
 msgstr "Gem _alle"
 
-#: ../gedit/gedit-ui.h:134
+#: ../gedit/gedit-ui.h:132
 msgid "Save all open files"
 msgstr "Gem alle åbne filer"
 
-#: ../gedit/gedit-ui.h:135
+#: ../gedit/gedit-ui.h:133
 msgid "_Close All"
 msgstr "Luk a_lle"
 
-#: ../gedit/gedit-ui.h:136
+#: ../gedit/gedit-ui.h:134
 msgid "Close all open files"
 msgstr "Luk alle åbne filer"
 
-#: ../gedit/gedit-ui.h:137
+#: ../gedit/gedit-ui.h:135
 msgid "_Previous Document"
 msgstr "F_orrige dokument"
 
-#: ../gedit/gedit-ui.h:138
+#: ../gedit/gedit-ui.h:136
 msgid "Activate previous document"
 msgstr "Aktivér forrige dokument"
 
-#: ../gedit/gedit-ui.h:139
+#: ../gedit/gedit-ui.h:137
 msgid "_Next Document"
 msgstr "_Næste dokument"
 
-#: ../gedit/gedit-ui.h:140
+#: ../gedit/gedit-ui.h:138
 msgid "Activate next document"
 msgstr "Aktivér næste dokument"
 
-#: ../gedit/gedit-ui.h:141
+#: ../gedit/gedit-ui.h:139
 msgid "_Move to New Window"
 msgstr "_Flyt til nyt vindue"
 
-#: ../gedit/gedit-ui.h:142
+#: ../gedit/gedit-ui.h:140
 msgid "Move the current document to a new window"
 msgstr "Flyt det aktuelle dokument til et nyt vindue"
 
-#: ../gedit/gedit-ui.h:149
+#: ../gedit/gedit-ui.h:147
 msgid "Quit the program"
 msgstr "Afslut programmet"
 
-#: ../gedit/gedit-ui.h:154
+#: ../gedit/gedit-ui.h:152
 msgid "_Toolbar"
 msgstr "_Værktøjslinje"
 
-#: ../gedit/gedit-ui.h:155
+#: ../gedit/gedit-ui.h:153
 msgid "Show or hide the toolbar in the current window"
 msgstr "Vis eller skjul værktøjslinjen i det aktuelle vindue"
 
-#: ../gedit/gedit-ui.h:157
+#: ../gedit/gedit-ui.h:155
 msgid "_Statusbar"
 msgstr "_Statuslinje"
 
-#: ../gedit/gedit-ui.h:158
+#: ../gedit/gedit-ui.h:156
 msgid "Show or hide the statusbar in the current window"
 msgstr "Vis eller skjul statuslinjen i det aktuelle vindue"
 
-#: ../gedit/gedit-ui.h:160
+#: ../gedit/gedit-ui.h:158
 msgid "Side _Pane"
 msgstr "S_idepanel"
 
-#: ../gedit/gedit-ui.h:161
+#: ../gedit/gedit-ui.h:159
 msgid "Show or hide the side pane in the current window"
 msgstr "Vis eller skjul sidepanelet i det aktuelle vindue"
 
-#: ../gedit/gedit-ui.h:164
+#: ../gedit/gedit-ui.h:162
 msgid "Edit text at fullscreen"
 msgstr "Redigér tekst i fuldskærmstilstand"
 
-#: ../gedit/gedit-ui.h:170
+#: ../gedit/gedit-ui.h:168
 msgid "_Bottom Pane"
 msgstr "_Bundpanel"
 
-#: ../gedit/gedit-ui.h:171
+#: ../gedit/gedit-ui.h:169
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Vis eller skjul bundpanelet i det aktuelle vindue"
 
-#: ../gedit/gedit-utils.c:964
+#: ../gedit/gedit-utils.c:1035
 msgid "Please check your installation."
 msgstr "Kontrollér din installation."
 
-#: ../gedit/gedit-utils.c:1030
+#: ../gedit/gedit-utils.c:1100
 #, c-format
 msgid "Unable to open ui file %s. Error: %s"
 msgstr "Kunne ikke åbne grænsefladefil %s. Fejl: %s"
 
-#: ../gedit/gedit-utils.c:1049
+#: ../gedit/gedit-utils.c:1119
 #, c-format
 msgid "Unable to find the object '%s' inside file %s."
 msgstr "Kan ikke finde objektet \"%s\" inden i filen %s."
 
 #. Translators: '/ on <remote-share>'
-#: ../gedit/gedit-utils.c:1204
+#: ../gedit/gedit-utils.c:1279
 #, c-format
 msgid "/ on %s"
 msgstr "/ på %s"
@@ -2222,15 +2200,15 @@ msgstr "Søg kun efter _hele ord"
 msgid "_Match Case"
 msgstr "_Forskel på små/store bogstaver"
 
-#: ../gedit/gedit-view.c:1372 ../gedit/gedit-view.c:1397
+#: ../gedit/gedit-view.c:1386 ../gedit/gedit-view.c:1411
 msgid "String you want to search for"
 msgstr "Tekst der skal søges efter"
 
-#: ../gedit/gedit-view.c:1380 ../gedit/gedit-view.c:1406
+#: ../gedit/gedit-view.c:1394 ../gedit/gedit-view.c:1420
 msgid "Line you want to move the cursor to"
 msgstr "Linje som markøren skal flyttes til"
 
-#: ../gedit/gedit-window.c:936
+#: ../gedit/gedit-window.c:937
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Benyt fremhævningstilstanden %s"
@@ -2238,43 +2216,51 @@ msgstr "Benyt fremhævningstilstanden %s"
 #. add the "Plain Text" item before all the others
 #. Translators: "Plain Text" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:993 ../gedit/gedit-window.c:1870
+#: ../gedit/gedit-window.c:994 ../gedit/gedit-window.c:1873
+#: ../plugins/externaltools/tools/manager.py:121
+#: ../plugins/externaltools/tools/manager.py:423
+#: ../plugins/externaltools/tools/manager.py:529
+#: ../plugins/externaltools/tools/manager.py:836
 msgid "Plain Text"
 msgstr "Almindelig tekst"
 
-#: ../gedit/gedit-window.c:994
+#: ../gedit/gedit-window.c:995
 msgid "Disable syntax highlighting"
 msgstr "Deaktivér syntaksfremhævning"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1280
+#: ../gedit/gedit-window.c:1281
 #, c-format
 msgid "Open '%s'"
 msgstr "Åbn \"%s\""
 
-#: ../gedit/gedit-window.c:1385
+#: ../gedit/gedit-window.c:1386
 msgid "Open a recently used file"
 msgstr "Åbn en senest benyttet fil"
 
-#: ../gedit/gedit-window.c:1391
+#: ../gedit/gedit-window.c:1392
 msgid "Open"
 msgstr "Åbn"
 
-#: ../gedit/gedit-window.c:1455
+#: ../gedit/gedit-window.c:1456
 msgid "Save"
 msgstr "Gem"
 
+#: ../gedit/gedit-window.c:1458
+msgid "Print"
+msgstr "Udskriv"
+
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1595
+#: ../gedit/gedit-window.c:1598
 #, c-format
 msgid "Activate '%s'"
 msgstr "Aktivér \"%s\""
 
-#: ../gedit/gedit-window.c:1848
+#: ../gedit/gedit-window.c:1851
 msgid "Use Spaces"
 msgstr "Brug mellemrum"
 
-#: ../gedit/gedit-window.c:1919
+#: ../gedit/gedit-window.c:1922
 msgid "Tab Width"
 msgstr "Tabulatorbredde"
 
@@ -2388,85 +2374,95 @@ msgid "Execute external commands and shell scripts."
 msgstr "Udfør eksterne kommandoer og script."
 
 #: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:2
+#: ../plugins/externaltools/tools/__init__.py:178
 msgid "External Tools"
 msgstr "Eksterne værktøjer"
 
-#: ../plugins/externaltools/tools/__init__.py:126
-msgid "_External Tools..."
+#: ../plugins/externaltools/tools/__init__.py:172
+#, fuzzy
+msgid "Manage _External Tools..."
 msgstr "_Eksterne værktøjer..."
 
-#: ../plugins/externaltools/tools/__init__.py:128
+#: ../plugins/externaltools/tools/__init__.py:174
 msgid "Opens the External Tools Manager"
 msgstr "Åbner håndtering af eksterne værktøjer"
 
-#: ../plugins/externaltools/tools/__init__.py:158
+#: ../plugins/externaltools/tools/__init__.py:180
+#, fuzzy
+msgid "External tools"
+msgstr "Eksterne værktøjer"
+
+#: ../plugins/externaltools/tools/__init__.py:212
 msgid "Shell Output"
 msgstr "Uddata fra terminal"
 
-#: ../plugins/externaltools/tools/functions.py:110
+#: ../plugins/externaltools/tools/capture.py:94
+#, fuzzy, python-format
+msgid "Could not execute command: %s"
+msgstr "Kunne ikke åbne dataenhed: %s"
+
+#: ../plugins/externaltools/tools/functions.py:157
 msgid "You must be inside a word to run this command"
 msgstr "Du skal være inden i et ord for at udføre denne kommando"
 
-#: ../plugins/externaltools/tools/functions.py:167
+#: ../plugins/externaltools/tools/functions.py:262
 msgid "Running tool:"
 msgstr "Kørende værktøj:"
 
-#: ../plugins/externaltools/tools/functions.py:190
+#: ../plugins/externaltools/tools/functions.py:287
 msgid "Done."
 msgstr "Færdig."
 
-#: ../plugins/externaltools/tools/functions.py:192
+#: ../plugins/externaltools/tools/functions.py:289
 msgid "Exited"
 msgstr "Afsluttet"
 
-#: ../plugins/externaltools/tools/manager.py:175
-#: ../plugins/externaltools/tools/manager.py:204
-#: ../plugins/externaltools/tools/manager.py:252
-#, python-format
-msgid "Edit tool <i>%s</i>:"
-msgstr "Redigeringsværktøj <i>%s</i>:"
+#: ../plugins/externaltools/tools/manager.py:119
+#, fuzzy
+msgid "All languages"
+msgstr "Sprog"
 
-#: ../plugins/externaltools/tools/manager.py:179
-msgid "A Brand New Tool"
-msgstr "Et splinternyt værktøj"
+#: ../plugins/externaltools/tools/manager.py:518
+#: ../plugins/externaltools/tools/manager.py:522
+#: ../plugins/externaltools/tools/manager.py:834
+#: ../plugins/externaltools/tools/tools.ui.h:2
+#, fuzzy
+msgid "All Languages"
+msgstr "Sprog"
 
-#: ../plugins/externaltools/tools/manager.py:213
+#: ../plugins/externaltools/tools/manager.py:624
 msgid "New tool"
 msgstr "Nyt værktøj"
 
-#: ../plugins/externaltools/tools/manager.py:289
+#: ../plugins/externaltools/tools/manager.py:752
 #, python-format
 msgid "This accelerator is already bound to %s"
 msgstr "Denne genvej er allerede bundet til %s"
 
-#: ../plugins/externaltools/tools/manager.py:335
+#: ../plugins/externaltools/tools/manager.py:801
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr ""
 "Indtast en ny genvej eller tryk på \"slet tilbage\"-knappen for at rydde"
 
-#: ../plugins/externaltools/tools/manager.py:337
+#: ../plugins/externaltools/tools/manager.py:803
 msgid "Type a new accelerator"
 msgstr "Indtast en ny genvej"
 
-#: ../plugins/externaltools/tools/outputpanel.py:76
+#: ../plugins/externaltools/tools/outputpanel.py:100
 msgid "Stopped."
 msgstr "Stoppet."
 
-#: ../plugins/externaltools/tools/tools.ui.h:2
+#: ../plugins/externaltools/tools/tools.ui.h:3
 msgid "All documents"
 msgstr "Alle dokumenter"
 
-#: ../plugins/externaltools/tools/tools.ui.h:3
+#: ../plugins/externaltools/tools/tools.ui.h:4
 msgid "All documents except untitled ones"
 msgstr "Alle dokumenter på nær unavngivne"
 
-#: ../plugins/externaltools/tools/tools.ui.h:4
+#: ../plugins/externaltools/tools/tools.ui.h:5
 msgid "Append to current document"
 msgstr "Tilføj til aktuelt dokument"
-
-#: ../plugins/externaltools/tools/tools.ui.h:5
-msgid "Co_mmand(s):"
-msgstr "Ko_mmandoer:"
 
 #: ../plugins/externaltools/tools/tools.ui.h:6
 msgid "Create new document"
@@ -2485,16 +2481,17 @@ msgid "Current selection"
 msgstr "Aktuel markering"
 
 #: ../plugins/externaltools/tools/tools.ui.h:10
+#, fuzzy
+msgid "Current selection (default to document)"
+msgstr "Aktuel markering"
+
+#: ../plugins/externaltools/tools/tools.ui.h:11
 msgid "Current word"
 msgstr "Aktuelt ord"
 
-#: ../plugins/externaltools/tools/tools.ui.h:11
+#: ../plugins/externaltools/tools/tools.ui.h:12
 msgid "Display in bottom pane"
 msgstr "Vis i bundpanelet"
-
-#: ../plugins/externaltools/tools/tools.ui.h:12
-msgid "Edit tool <i>make</i>:"
-msgstr "Redigeringsværktøj <i>make</i>:"
 
 #: ../plugins/externaltools/tools/tools.ui.h:13
 msgid "External Tools Manager"
@@ -2533,8 +2530,9 @@ msgid "_Applicability:"
 msgstr "_Anvendelsesområde:"
 
 #: ../plugins/externaltools/tools/tools.ui.h:22
-msgid "_Description:"
-msgstr "_Beskrivelse:"
+#: ../plugins/snippets/snippets/snippets.ui.h:12
+msgid "_Edit:"
+msgstr "_Redigér:"
 
 #: ../plugins/externaltools/tools/tools.ui.h:23
 msgid "_Input:"
@@ -2776,7 +2774,7 @@ msgstr "Hvis du sletter et objekt, vil det gå permanent tabt."
 msgid "(Empty)"
 msgstr "(Tom)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3296
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3298
 msgid ""
 "The renamed file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2784,11 +2782,11 @@ msgstr ""
 "Den omdøbte fil er på nuværende tidspunkt filtreret fra. Du skal ændre dine "
 "filterindstillinger for at gøre filen synlig"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3534
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3536
 msgid "file"
 msgstr "fil"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3558
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3560
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2796,11 +2794,11 @@ msgstr ""
 "Den nye fil er på nuværende tidspunkt filtreret fra. Du skal ændre dine "
 "filterindstillinger for at gøre filen synlig"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3586
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3588
 msgid "directory"
 msgstr "mappe"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3606
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3608
 msgid ""
 "The new directory is currently filtered out. You need to adjust your filter "
 "settings to make the directory visible"
@@ -3003,21 +3001,25 @@ msgstr "K_ommandofarve:"
 msgid "_Error color:"
 msgstr "Farve for _fejl:"
 
-#: ../plugins/sample/gedit-sample-plugin.c:63
-msgid "Insert User Na_me"
-msgstr "Indsæt bruger_navn"
+#. ex:ts=8:et:
+#: ../plugins/quickopen/quickopen/popup.py:34
+#: ../plugins/quickopen/quickopen.gedit-plugin.desktop.in.h:1
+msgid "Quick Open"
+msgstr ""
 
-#: ../plugins/sample/gedit-sample-plugin.c:65
-msgid "Insert the user name at the cursor position"
-msgstr "Indsæt brugernavnet ved markørpositionen"
+#: ../plugins/quickopen/quickopen/windowhelper.py:68
+msgid "Quick open"
+msgstr ""
 
-#: ../plugins/sample/sample.gedit-plugin.desktop.in.h:1
-msgid "Inserts the user name at the cursor position."
-msgstr "Indsætter brugernavnet ved markørpositionen."
+#: ../plugins/quickopen/quickopen/windowhelper.py:69
+#, fuzzy
+msgid "Quickly open documents"
+msgstr "Luk dokument"
 
-#: ../plugins/sample/sample.gedit-plugin.desktop.in.h:2
-msgid "User name"
-msgstr "Brugernavn"
+#: ../plugins/quickopen/quickopen.gedit-plugin.desktop.in.h:2
+#, fuzzy
+msgid "Quickly open files"
+msgstr "Gem alle åbne filer"
 
 #: ../plugins/snippets/snippets.gedit-plugin.desktop.in.h:1
 msgid "Insert often used pieces of text in a fast way"
@@ -3071,10 +3073,6 @@ msgstr "Tekststumper"
 #: ../plugins/snippets/snippets/snippets.ui.h:11
 msgid "_Drop targets:"
 msgstr "_Slip mål:"
-
-#: ../plugins/snippets/snippets/snippets.ui.h:12
-msgid "_Edit:"
-msgstr "_Redigér:"
 
 #: ../plugins/snippets/snippets/snippets.ui.h:13
 msgid "_Snippets:"
@@ -3329,6 +3327,34 @@ msgstr "(korrekt stavning)"
 #: ../plugins/spell/gedit-spell-checker-dialog.c:742
 msgid "Completed spell checking"
 msgstr "Stavekontrol færdig"
+
+#. Translators: the first %s is the language name, and
+#. * the second %s is the locale name. Example:
+#. * "French (France)"
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:285
+#: ../plugins/spell/gedit-spell-checker-language.c:291
+#, c-format
+msgctxt "language"
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#. Translators: this refers to an unknown language code
+#. * (one which isn't in our built-in list).
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:300
+#, c-format
+msgctxt "language"
+msgid "Unknown (%s)"
+msgstr "Ukendt (%s)"
+
+#. Translators: this refers the Default language used by the
+#. * spell checker
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:406
+msgctxt "language"
+msgid "Default"
+msgstr "Forvalgt"
 
 #: ../plugins/spell/gedit-spell-language-dialog.c:141
 #: ../plugins/spell/languages-dialog.ui.h:2
@@ -5075,20 +5101,50 @@ msgstr "_Spørg efter et format"
 msgid "_Use custom format"
 msgstr "Benyt _brugerdefineret format"
 
-#~| msgid "language|%s (%s)"
-#~ msgctxt "language"
-#~ msgid "%s (%s)"
-#~ msgstr "%s (%s)"
+#~ msgid "Open Location"
+#~ msgstr "Åbn sted"
 
-#~| msgid "Unknown"
-#~ msgctxt "language"
-#~ msgid "Unknown (%s)"
-#~ msgstr "Ukendt (%s)"
+#~ msgid "Ch_aracter coding:"
+#~ msgstr "_Tegnkodning:"
 
-#~| msgid "Use Default Font"
-#~ msgctxt "language"
-#~ msgid "Default"
-#~ msgstr "Forvalgt"
+#~ msgid "Enter the _location (URI) of the file you would like to open:"
+#~ msgstr "Indtast _stedet (URI'en) af den fil du ønsker at åbne:"
+
+#~ msgid "Open _Location..."
+#~ msgstr "Å_bn sted..."
+
+#~ msgid "Open a file from a specified location"
+#~ msgstr "Åbn en fil fra et angivet sted"
+
+#~ msgid "Edit tool <i>%s</i>:"
+#~ msgstr "Redigeringsværktøj <i>%s</i>:"
+
+#~ msgid "A Brand New Tool"
+#~ msgstr "Et splinternyt værktøj"
+
+#~ msgid "Co_mmand(s):"
+#~ msgstr "Ko_mmandoer:"
+
+#~ msgid "Edit tool <i>make</i>:"
+#~ msgstr "Redigeringsværktøj <i>make</i>:"
+
+#~ msgid "_Description:"
+#~ msgstr "_Beskrivelse:"
+
+#~ msgid "Insert User Na_me"
+#~ msgstr "Indsæt bruger_navn"
+
+#~ msgid "Insert the user name at the cursor position"
+#~ msgstr "Indsæt brugernavnet ved markørpositionen"
+
+#~ msgid "Inserts the user name at the cursor position."
+#~ msgstr "Indsætter brugernavnet ved markørpositionen."
+
+#~ msgid "User name"
+#~ msgstr "Brugernavn"
+
+#~ msgid "%s: malformed file name or URI.\n"
+#~ msgstr "%s: forkert udformet filnavn eller URI.\n"
 
 #~ msgid "None"
 #~ msgstr "Ingen"
@@ -5230,9 +5286,6 @@ msgstr "Benyt _brugerdefineret format"
 
 #~ msgid "General"
 #~ msgstr "Generelt"
-
-#~ msgid "Print"
-#~ msgstr "Udskriv"
 
 #~ msgid "Other"
 #~ msgstr "Anden"
