@@ -56,7 +56,6 @@ class Manager:
                 self.default_size = None
 
                 self.key_press_id = 0
-                self.tooltips = gtk.Tooltips()
                 self.run()
         
         def get_language_snippets(self, path, name = None):
@@ -420,7 +419,7 @@ class Manager:
                                 image_remove.set_from_stock(gtk.STOCK_DELETE, gtk.ICON_SIZE_BUTTON)
                                 tooltip = _('Delete selected snippet')
                         
-                        self.tooltips.set_tip(button_remove, tooltip)
+                        button_remove.set_tooltip_text(tooltip)
 
         def snippet_changed(self, piter = None):
                 if piter:
@@ -532,7 +531,6 @@ class Manager:
                         self['source_view_snippet'].get_buffer().set_text('')
                         self['combo_drop_targets'].child.set_text('')
 
-                        self.tooltips.disable()
                 else:
                         sens = True
 
@@ -543,8 +541,7 @@ class Manager:
                         
                         buf = self['source_view_snippet'].get_buffer()
                         buf.set_text(self.snippet['text'])
-                        
-                        self.tooltips.enable()
+
 
                 for name in ['source_view_snippet', 'label_tab_trigger',
                                 'entry_tab_trigger', 'label_accelerator', 
@@ -687,12 +684,12 @@ class Manager:
                         #self['hbox_tab_trigger'].set_spacing(3)
                         tip = _('This is not a valid tab trigger. Triggers can either contain letters or a single, non alphanumeric, character like {, [, etcetera.')
                         
-                        self.tooltips.set_tip(entry, tip)
-                        self.tooltips.set_tip(img, tip)
+                        entry.set_tooltip_text(tip)
+                        img.set_tooltip_text(tip)
                 else:
                         self['image_tab_trigger'].hide()
                         #self['hbox_tab_trigger'].set_spacing(0)
-                        self.tooltips.set_tip(entry, _('Single word with which the snippet is activated after pressing tab'))
+                        entry.set_tooltip_text(_('Single word with which the snippet is activated after pressing tab'))
                 
                 return False
 
