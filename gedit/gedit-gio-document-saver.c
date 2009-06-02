@@ -534,13 +534,13 @@ begin_write (AsyncData *async)
 	 */
 	gvsaver = async->saver;
 	gchar *buffer = gedit_document_saver_get_document_contents (GEDIT_DOCUMENT_SAVER (gvsaver), &len, &error);
-	
-	if (buffer)
+
+	if (buffer != NULL && len > 0)
 	{
 		/* Append new line to buffer */
 		buffer = append_new_line (gvsaver, buffer, &len, &error);
 	}
-	
+
 	if (!buffer)
 	{
 		async_failed (async, error);

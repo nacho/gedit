@@ -341,47 +341,50 @@ gedit_document_saver_write_document_contents (GeditDocumentSaver  *saver,
 	}
 
 	/* Save the file content */
-	if (res)
+	if (len > 0)
 	{
-		const gchar *write_buffer = contents;
-		gssize to_write = len;
-
-		do
+		if (res)
 		{
-			written = write (fd, write_buffer, to_write);
-			if (written == -1)
+			const gchar *write_buffer = contents;
+			gssize to_write = len;
+
+			do
 			{
-				if (errno == EINTR)
-					continue;
+				written = write (fd, write_buffer, to_write);
+				if (written == -1)
+				{
+					if (errno == EINTR)
+						continue;
 
-				res = FALSE;
+					res = FALSE;
 
-				break;
+					break;
+				}
+
+				to_write -= written;
+				write_buffer += written;
 			}
-
-			to_write -= written;
-			write_buffer += written;
+			while (to_write > 0);
 		}
-		while (to_write > 0);
-	}
 
-	/* make sure files are always terminated with \n (see bug #95676). Note
-	   that we strip the trailing \n when loading the file */
-	if (res)
-	{
-		gchar *n_buf;
-		gsize n_len;
+		/* make sure files are always terminated with \n (see bug #95676). Note
+		   that we strip the trailing \n when loading the file */
+		if (res)
+		{
+			gchar *n_buf;
+			gsize n_len;
 
-		n_buf = gedit_document_saver_get_end_newline (saver, &n_len);
-		if (n_buf != NULL)
-		{
-			written = write (fd, n_buf, n_len);
-			res = (written != -1 && (gsize) written == n_len);
-			g_free (n_buf);
-		}
-		else
-		{
-			g_warning ("Cannot add '\\n' at the end of the file.");
+			n_buf = gedit_document_saver_get_end_newline (saver, &n_len);
+			if (n_buf != NULL)
+			{
+				written = write (fd, n_buf, n_len);
+				res = (written != -1 && (gsize) written == n_len);
+				g_free (n_buf);
+			}
+			else
+			{
+				g_warning ("Cannot add '\\n' at the end of the file.");
+			}
 		}
 	}
 
