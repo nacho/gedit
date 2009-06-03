@@ -2,21 +2,22 @@
 # Estonian translation of Gedit.
 #
 # Copyright (C) 2002, 2003, 2005, 2006 Free Software Foundation, Inc.
-# Copyright (C) 2007, 2008 The GNOME Project.
+# Copyright (C) 2007-2009 The GNOME Project.
 # This file is distributed under the same license as the gedit package.
 #
 # Ilmar Kerm <ikerm hot ee>, 2002.
 # Tõivo Leedjärv <toivo linux ee>, 2002, 2003.
 # Priit Laes <plaes plaes org>, 2005, 2009.
-# Ivar Smolin <okul linux ee>, 2005-2008.
+# Ivar Smolin <okul linux ee>, 2005-2009.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit2 HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
-"POT-Creation-Date: 2009-02-18 09:46+0000\n"
-"PO-Revision-Date: 2009-04-28 02:33+0300\n"
-"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
+"POT-Creation-Date: 2009-05-23 11:01+0000\n"
+"PO-Revision-Date: 2009-06-03 15:40+0300\n"
+"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -572,15 +573,6 @@ msgstr "Kooditabelid"
 msgid "E_ncodings shown in menu:"
 msgstr "_Menüüs näidatavad kooditabelid:"
 
-msgid "Open Location"
-msgstr "Asukoha avamine"
-
-msgid "Ch_aracter coding:"
-msgstr "_Kooditabel:"
-
-msgid "Enter the _location (URI) of the file you would like to open:"
-msgstr "Sisesta avatava faili _asukoht (URI):"
-
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Redaktoris kasutatava kirjatüübi valimiseks klõpsa sellel nupul"
 
@@ -751,6 +743,9 @@ msgstr "Käsurealt avatavate failidele kooditabeli seadmine"
 msgid "ENCODING"
 msgstr "KOODITABEL"
 
+msgid "Display list of possible values for the encoding option"
+msgstr "Kodeerimisvaliku võimalike väärtuste nimekirja kuvamine"
+
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Ülemise taseme akna loomine olemasolevale gedit'i instantsile"
 
@@ -759,10 +754,6 @@ msgstr "Uue dokumendi loomine olemasolevas gedit'i instantsis"
 
 msgid "[FILE...]"
 msgstr "[FAIL...]"
-
-#, c-format
-msgid "%s: malformed file name or URI.\n"
-msgstr "%s: vigaselt vormindatud failinimi või URI.\n"
 
 #, c-format
 msgid "%s: invalid encoding.\n"
@@ -902,7 +893,7 @@ msgstr ""
 "Ilmar Kerm <ikerm@hot.ee>, 2002.\n"
 "Tõivo Leedjärv <toivo@linux.ee>, 2002, 2003.\n"
 "Priit Laes <plaes@plaes.org>, 2005, 2009.\n"
-"Ivar Smolin <okul@linux.ee>, 2005-2008."
+"Ivar Smolin <okul@linux.ee>, 2005-2009."
 
 #, c-format
 msgid "Found and replaced %d occurrence"
@@ -1524,12 +1515,6 @@ msgstr "_Ava..."
 msgid "Open a file"
 msgstr "Faili avamine"
 
-msgid "Open _Location..."
-msgstr "Ava asuk_oht ..."
-
-msgid "Open a file from a specified location"
-msgstr "Faili avamine määratud asukohast"
-
 #. Edit menu
 msgid "Pr_eferences"
 msgstr "Eelistuse_d"
@@ -1776,6 +1761,9 @@ msgstr "Ava"
 msgid "Save"
 msgstr "Salvesta"
 
+msgid "Print"
+msgstr "Prindi"
+
 #. Translators: %s is a URI
 #, c-format
 msgid "Activate '%s'"
@@ -1872,14 +1860,21 @@ msgstr "Väliste käskude ja skriptide käivitamine."
 msgid "External Tools"
 msgstr "Välised tööriistad"
 
-msgid "_External Tools..."
-msgstr "_Välised tööriistad..."
+msgid "Manage _External Tools..."
+msgstr "Halda _väliseid tööriistu..."
 
 msgid "Opens the External Tools Manager"
 msgstr "Väliste tööriistade halduri avamine"
 
+msgid "External tools"
+msgstr "Välised tööriistad"
+
 msgid "Shell Output"
 msgstr "Kestprogrammi väljund"
+
+#, python-format
+msgid "Could not execute command: %s"
+msgstr "Käsku pole võimalik täita: %s"
 
 msgid "You must be inside a word to run this command"
 msgstr "Selle käsu käivitamiseks peab kursor olema sõna peal"
@@ -1893,12 +1888,11 @@ msgstr "Valmis."
 msgid "Exited"
 msgstr "Lõpetas"
 
-#, python-format
-msgid "Edit tool <i>%s</i>:"
-msgstr "Tööriista <i>%s</i> redigeerimine:"
+msgid "All languages"
+msgstr "Kõik keeled"
 
-msgid "A Brand New Tool"
-msgstr "Täiesti uus tööriist"
+msgid "All Languages"
+msgstr "Kõik keeled"
 
 msgid "New tool"
 msgstr "Uus tööriist"
@@ -1925,9 +1919,6 @@ msgstr "Kõik, välja arvatud nimetud dokumendid"
 msgid "Append to current document"
 msgstr "Lisatakse käesoleva dokumendi lõppu"
 
-msgid "Co_mmand(s):"
-msgstr "_Käsk/käsud:"
-
 msgid "Create new document"
 msgstr "Luuakse uus dokument"
 
@@ -1940,14 +1931,14 @@ msgstr "Käesolev rida"
 msgid "Current selection"
 msgstr "Käesolev valik"
 
+msgid "Current selection (default to document)"
+msgstr ""
+
 msgid "Current word"
 msgstr "Käesolev sõna"
 
 msgid "Display in bottom pane"
 msgstr "Kuvatakse alumisel paanil"
-
-msgid "Edit tool <i>make</i>:"
-msgstr "Tööriista <i>make</i> redigeerimine:"
 
 msgid "External Tools Manager"
 msgstr "Väliste tööriistade haldur"
@@ -1976,8 +1967,8 @@ msgstr "Ainult pealkirjata dokumendid"
 msgid "_Applicability:"
 msgstr "_Rakendumine:"
 
-msgid "_Description:"
-msgstr "K_irjeldus:"
+msgid "_Edit:"
+msgstr "_Redaktor:"
 
 msgid "_Input:"
 msgstr "S_isend:"
@@ -2336,22 +2327,23 @@ msgid "Python Console"
 msgstr "Pythoni konsool"
 
 msgid "C_ommand color:"
-msgstr ""
+msgstr "_Käsu värvus:"
 
 msgid "_Error color:"
 msgstr "_Vea värvus:"
 
-msgid "Insert User Na_me"
-msgstr "Lisa kasutaja _nimi"
+#. ex:ts=8:et:
+msgid "Quick Open"
+msgstr "Kiiravamine"
 
-msgid "Insert the user name at the cursor position"
-msgstr "Kasutaja nime lisamine kursori asukohale"
+msgid "Quick open"
+msgstr "Kiiravamine"
 
-msgid "Inserts the user name at the cursor position."
-msgstr "Kasutaja nime lisamine kursori asukohale."
+msgid "Quickly open documents"
+msgstr "Dokumendi kiiravamine"
 
-msgid "User name"
-msgstr "Kasutaja nimi"
+msgid "Quickly open files"
+msgstr "Failide kiiravamine"
 
 msgid "Insert often used pieces of text in a fast way"
 msgstr "Sagedasti kasutatavate tükkide kiire lisamine tekstile"
@@ -2391,9 +2383,6 @@ msgstr "Tekstijuppide haldur"
 
 msgid "_Drop targets:"
 msgstr ""
-
-msgid "_Edit:"
-msgstr "_Redaktor:"
 
 msgid "_Snippets:"
 msgstr "_Tekstijupid:"
@@ -2702,7 +2691,7 @@ msgid "Available Tag Lists"
 msgstr "Saadaolevate siltide loetelu"
 
 msgid "Abbreviated form"
-msgstr ""
+msgstr "Lühendatud vorm"
 
 msgid "Abbreviation"
 msgstr "Lühend"
@@ -3906,6 +3895,36 @@ msgstr "_Küsitakse vormingut"
 
 msgid "_Use custom format"
 msgstr "Kasutatakse o_ma vormingut"
+
+#~ msgid "Open Location"
+#~ msgstr "Asukoha avamine"
+
+#~ msgid "Ch_aracter coding:"
+#~ msgstr "_Kooditabel:"
+
+#~ msgid "Enter the _location (URI) of the file you would like to open:"
+#~ msgstr "Sisesta avatava faili _asukoht (URI):"
+
+#~ msgid "%s: malformed file name or URI.\n"
+#~ msgstr "%s: vigaselt vormindatud failinimi või URI.\n"
+
+#~ msgid "Open _Location..."
+#~ msgstr "Ava asuk_oht ..."
+
+#~ msgid "Open a file from a specified location"
+#~ msgstr "Faili avamine määratud asukohast"
+
+#~ msgid "Edit tool <i>%s</i>:"
+#~ msgstr "Tööriista <i>%s</i> redigeerimine:"
+
+#~ msgid "A Brand New Tool"
+#~ msgstr "Täiesti uus tööriist"
+
+#~ msgid "Insert the user name at the cursor position"
+#~ msgstr "Kasutaja nime lisamine kursori asukohale"
+
+#~ msgid "Inserts the user name at the cursor position."
+#~ msgstr "Kasutaja nime lisamine kursori asukohale."
 
 #~ msgid "None"
 #~ msgstr "Puudub"
