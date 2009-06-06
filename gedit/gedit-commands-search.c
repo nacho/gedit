@@ -191,6 +191,8 @@ text_not_found (GeditWindow *window,
 
 	gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
 				       window->priv->generic_message_cid,
+				       /* Translators: %s is replaced by the text
+				          entered by the user in the search box */
 				       _("\"%s\" not found"), searched);
 	g_free (searched);
 }
