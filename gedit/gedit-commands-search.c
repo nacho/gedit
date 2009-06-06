@@ -155,8 +155,8 @@ restore_last_searched_data (GeditSearchDialog *dialog,
 
 /* Use occurences only for Replace All */
 static void
-phrase_found (GeditWindow *window,
-	      gint         occurrences)
+text_found (GeditWindow *window,
+	    gint         occurrences)
 {
 	if (occurrences > 1)
 	{
@@ -180,12 +180,19 @@ phrase_found (GeditWindow *window,
 	}
 }
 
+#define MAX_MSG_LENGTH 40
 static void
-phrase_not_found (GeditWindow *window)
+text_not_found (GeditWindow *window,
+		const gchar *text)
 {
+	gchar *searched;
+	
+	searched = gedit_utils_str_end_truncate (text, MAX_MSG_LENGTH);
+
 	gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
 				       window->priv->generic_message_cid,
-				       _("Phrase not found"));
+				       _("\"%s\" not found"), searched);
+	g_free (searched);
 }
 
 static gboolean
@@ -312,9 +319,9 @@ do_find (GeditSearchDialog *dialog,
 			    search_backwards);
 
 	if (found)
-		phrase_found (window, 0);
+		text_found (window, 0);
 	else
-		phrase_not_found (window);
+		text_not_found (window, entry_text);
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
 					   GEDIT_SEARCH_DIALOG_REPLACE_RESPONSE,
@@ -464,11 +471,11 @@ do_replace_all (GeditSearchDialog *dialog,
 
 	if (count > 0)
 	{
-		phrase_found (window, count);
+		text_found (window, count);
 	}
 	else
 	{
-		phrase_not_found (window);
+		text_not_found (window, search_entry_text);
 	}
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),

@@ -80,6 +80,9 @@ gchar		*gedit_utils_escape_underscores		(const gchar *text,
 gchar		*gedit_utils_str_middle_truncate	(const gchar *string, 
 							 guint        truncate_length);
 
+gchar		*gedit_utils_str_end_truncate		(const gchar *string,
+							 guint        truncate_length);
+
 gboolean	 g_utf8_caselessnmatch			(const char *s1,
 							 const char *s2,
 							 gssize n1,
@@ -102,9 +105,6 @@ gchar		*gedit_utils_unescape_search_text	(const gchar *text);
 void		 gedit_warning				(GtkWindow  *parent,
 							 const gchar *format,
 							 ...) G_GNUC_PRINTF(2, 3);
-
-gchar		*gedit_utils_str_middle_truncate	(const char *string,
-							 guint truncate_length);
 
 gchar		*gedit_utils_make_valid_utf8		(const char *name);
 

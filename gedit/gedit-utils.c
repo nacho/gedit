@@ -567,9 +567,10 @@ gedit_utils_escape_underscores (const gchar* text,
 
 /* the following functions are taken from eel */
 
-gchar *
-gedit_utils_str_middle_truncate (const gchar *string,
-				 guint        truncate_length)
+static gchar *
+gedit_utils_str_truncate (const gchar *string,
+			  guint        truncate_length,
+			  gboolean middle)
 {
 	GString     *truncated;
 	guint        length;
@@ -602,15 +603,39 @@ gedit_utils_str_middle_truncate (const gchar *string,
 	}
 
 	/* Find the 'middle' where the truncation will occur. */
-	num_left_chars = (truncate_length - delimiter_length) / 2;
-	right_offset = n_chars - truncate_length + num_left_chars + delimiter_length;
+	if (middle)
+	{
+		num_left_chars = (truncate_length - delimiter_length) / 2;
+		right_offset = n_chars - truncate_length + num_left_chars + delimiter_length;
 
-	truncated = g_string_new_len (string,
-				      g_utf8_offset_to_pointer (string, num_left_chars) - string);
-	g_string_append (truncated, delimiter);
-	g_string_append (truncated, g_utf8_offset_to_pointer (string, right_offset));
-		
+		truncated = g_string_new_len (string,
+					      g_utf8_offset_to_pointer (string, num_left_chars) - string);
+		g_string_append (truncated, delimiter);
+		g_string_append (truncated, g_utf8_offset_to_pointer (string, right_offset));
+	}
+	else
+	{
+		num_left_chars = truncate_length - delimiter_length;
+		truncated = g_string_new_len (string,
+					      g_utf8_offset_to_pointer (string, num_left_chars) - string);
+		g_string_append (truncated, delimiter);
+	}
+	
 	return g_string_free (truncated, FALSE);
+}
+
+gchar *
+gedit_utils_str_middle_truncate (const gchar *string,
+				 guint        truncate_length)
+{
+	return gedit_utils_str_truncate (string, truncate_length, TRUE);
+}
+
+gchar *
+gedit_utils_str_end_truncate (const gchar *string,
+			      guint        truncate_length)
+{
+	return gedit_utils_str_truncate (string, truncate_length, FALSE);
 }
 
 gchar *
