@@ -37,7 +37,6 @@
 #include "gedit-notebook.h"
 #include "gedit-tab.h"
 #include "gedit-utils.h"
-#include "gedit-message-area.h"
 #include "gedit-io-error-message-area.h"
 #include "gedit-print-job.h"
 #include "gedit-print-preview.h"
@@ -46,6 +45,10 @@
 #include "gedit-prefs-manager-app.h"
 #include "gedit-convert.h"
 #include "gedit-enum-types.h"
+
+#if !GTK_CHECK_VERSION (2, 17, 1)
+#include "gedit-message-area.h"
+#endif
 
 #define GEDIT_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_TAB, GeditTabPrivate))
 
@@ -462,7 +465,7 @@ remove_tab (GeditTab *tab)
 }
 
 static void 
-io_loading_error_message_area_response (GeditMessageArea *message_area,
+io_loading_error_message_area_response (GtkWidget        *message_area,
 					gint              response_id,
 					GeditTab         *tab)
 {
@@ -495,7 +498,7 @@ io_loading_error_message_area_response (GeditMessageArea *message_area,
 }
 
 static void 
-conversion_loading_error_message_area_response (GeditMessageArea *message_area,
+conversion_loading_error_message_area_response (GtkWidget        *message_area,
 						gint              response_id,
 						GeditTab         *tab)
 {
@@ -563,7 +566,7 @@ file_already_open_warning_message_area_response (GtkWidget   *message_area,
 }
 
 static void
-load_cancelled (GeditMessageArea *area,
+load_cancelled (GtkWidget        *area,
                 gint              response_id,
                 GeditTab         *tab)
 {
@@ -575,7 +578,7 @@ load_cancelled (GeditMessageArea *area,
 }
 
 static void 
-unrecoverable_reverting_error_message_area_response (GeditMessageArea *message_area,
+unrecoverable_reverting_error_message_area_response (GtkWidget        *message_area,
 						     gint              response_id,
 						     GeditTab         *tab)
 {
@@ -993,8 +996,13 @@ document_loaded (GeditDocument *document,
 					  tab);
 		}
 
+#if !GTK_CHECK_VERSION (2, 17, 1)
 		gedit_message_area_set_default_response (GEDIT_MESSAGE_AREA (emsg),
 							 GTK_RESPONSE_CANCEL);
+#else
+		gtk_info_bar_set_default_response (GTK_INFO_BAR (emsg),
+						   GTK_RESPONSE_CANCEL);
+#endif
 
 		gtk_widget_show (emsg);
 
@@ -1043,8 +1051,13 @@ document_loaded (GeditDocument *document,
 
 					set_message_area (tab, w);
 
+#if !GTK_CHECK_VERSION (2, 17, 1)
 					gedit_message_area_set_default_response (GEDIT_MESSAGE_AREA (w),
-							 GTK_RESPONSE_CANCEL);
+										 GTK_RESPONSE_CANCEL);
+#else
+					gtk_info_bar_set_default_response (GTK_INFO_BAR (w),
+									   GTK_RESPONSE_CANCEL);
+#endif
 
 					gtk_widget_show (w);
 
@@ -1147,7 +1160,7 @@ end_saving (GeditTab *tab)
 }
 
 static void 
-unrecoverable_saving_error_message_area_response (GeditMessageArea *message_area,
+unrecoverable_saving_error_message_area_response (GtkWidget        *message_area,
 						  gint              response_id,
 						  GeditTab         *tab)
 {
@@ -1168,7 +1181,7 @@ unrecoverable_saving_error_message_area_response (GeditMessageArea *message_area
 }
 
 static void 
-no_backup_error_message_area_response (GeditMessageArea *message_area,
+no_backup_error_message_area_response (GtkWidget        *message_area,
 				       gint              response_id,
 				       GeditTab         *tab)
 {
@@ -1203,7 +1216,7 @@ no_backup_error_message_area_response (GeditMessageArea *message_area,
 }
 
 static void
-externally_modified_error_message_area_response (GeditMessageArea *message_area,
+externally_modified_error_message_area_response (GtkWidget        *message_area,
 						 gint              response_id,
 						 GeditTab         *tab)
 {
@@ -1237,7 +1250,7 @@ externally_modified_error_message_area_response (GeditMessageArea *message_area,
 }
 
 static void 
-recoverable_saving_error_message_area_response (GeditMessageArea *message_area,
+recoverable_saving_error_message_area_response (GtkWidget        *message_area,
 						gint              response_id,
 						GeditTab         *tab)
 {
@@ -1372,9 +1385,14 @@ document_saved (GeditDocument *document,
 					  G_CALLBACK (recoverable_saving_error_message_area_response),
 					  tab);
 		}
-		
+
+#if !GTK_CHECK_VERSION (2, 17, 1)
 		gedit_message_area_set_default_response (GEDIT_MESSAGE_AREA (emsg),
 							 GTK_RESPONSE_CANCEL);
+#else
+		gtk_info_bar_set_default_response (GTK_INFO_BAR (emsg),
+						   GTK_RESPONSE_CANCEL);
+#endif
 
 		gtk_widget_show (emsg);
 	}
@@ -1399,7 +1417,7 @@ document_saved (GeditDocument *document,
 }
 
 static void 
-externally_modified_notification_message_area_response (GeditMessageArea *message_area,
+externally_modified_notification_message_area_response (GtkWidget        *message_area,
 							gint              response_id,
 							GeditTab         *tab)
 {
@@ -2453,7 +2471,7 @@ preview_finished_cb (GtkSourcePrintJob *pjob, GeditTab *tab)
 #endif
 
 static void
-print_cancelled (GeditMessageArea *area,
+print_cancelled (GtkWidget        *area,
                  gint              response_id,
                  GeditTab         *tab)
 {

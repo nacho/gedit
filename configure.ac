@@ -235,6 +235,16 @@ fi
 
 AM_CONDITIONAL(BUILD_SEXY, test "$gtkatleast" = "no")
 
+dnl FIXME: Remove this when removing gedit-message-area
+
+if $PKG_CONFIG --atleast-version 2.17.1 gtk+-2.0; then
+       gtkatleast=
+else
+       gtkatleast=no
+fi
+
+AM_CONDITIONAL(BUILD_MESSAGE_AREA, test "$gtkatleast" = "no")
+
 if test "$platform_osx" = "no" &&
    test "$os_win32" = no; then
 	PKG_CHECK_MODULES(EGG_SMCLIENT, [

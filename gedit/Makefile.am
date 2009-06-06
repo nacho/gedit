@@ -88,7 +88,6 @@ INST_H_FILES =				\
 	gedit-encodings-option-menu.h	\
 	gedit-file-chooser-dialog.h	\
 	gedit-help.h 			\
-	gedit-message-area.h		\
 	gedit-message-bus.h		\
 	gedit-message-type.h		\
 	gedit-message.h			\
@@ -148,7 +147,6 @@ libgedit_la_SOURCES = 			\
 	gedit-history-entry.c		\
 	gedit-io-error-message-area.c	\
 	gedit-language-manager.c	\
-	gedit-message-area.c		\
 	gedit-message-bus.c		\
 	gedit-message-type.c		\
 	gedit-message.c			\
@@ -231,6 +229,10 @@ endif
 
 if BUILD_SEXY
 libgedit_la_SOURCES += sexy-icon-entry.c sexy-icon-entry.h
+endif
+
+if BUILD_MESSAGE_AREA
+libgedit_la_SOURCES += gedit-message-area.h gedit-message-area.c
 endif
 
 -include $(top_srcdir)/git.mk

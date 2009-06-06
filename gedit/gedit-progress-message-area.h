@@ -31,7 +31,11 @@
 #ifndef __GEDIT_PROGRESS_MESSAGE_AREA_H__
 #define __GEDIT_PROGRESS_MESSAGE_AREA_H__
 
+#if !GTK_CHECK_VERSION (2, 17, 1)
 #include <gedit/gedit-message-area.h>
+#else
+#include <gtk/gtk.h>
+#endif
 
 G_BEGIN_DECLS
 
@@ -55,7 +59,11 @@ typedef struct _GeditProgressMessageArea GeditProgressMessageArea;
 
 struct _GeditProgressMessageArea 
 {
+#if !GTK_CHECK_VERSION (2, 17, 1)
 	GeditMessageArea parent;
+#else
+	GtkInfoBar parent;
+#endif
 
 	/*< private > */
 	GeditProgressMessageAreaPrivate *priv;
@@ -68,7 +76,11 @@ typedef struct _GeditProgressMessageAreaClass GeditProgressMessageAreaClass;
 
 struct _GeditProgressMessageAreaClass 
 {
+#if !GTK_CHECK_VERSION (2, 17, 1)
 	GeditMessageAreaClass parent_class;
+#else
+	GtkInfoBarClass parent_class;
+#endif
 };
 
 /*

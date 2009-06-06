@@ -46,9 +46,12 @@
 #include "gedit-convert.h"
 #include "gedit-document.h"
 #include "gedit-io-error-message-area.h"
-#include "gedit-message-area.h"
 #include "gedit-prefs-manager.h"
 #include <gedit/gedit-encodings-option-menu.h>
+
+#if !GTK_CHECK_VERSION (2, 17, 1)
+#include "gedit-message-area.h"
+#endif
 
 #define MAX_URI_IN_DIALOG_LENGTH 50
 
@@ -82,7 +85,40 @@ is_gio_error (const GError *error,
 }
 
 static void
-set_message_area_text_and_icon (GeditMessageArea *message_area,
+set_contents (GtkWidget *area,
+	      GtkWidget *contents)
+{
+#if !GTK_CHECK_VERSION (2, 17, 1)
+	gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (area),
+					 contents);
+#else
+	GtkWidget *content_area;
+	
+	content_area = gtk_info_bar_get_content_area (GTK_INFO_BAR (area));
+	gtk_container_add (GTK_CONTAINER (content_area), contents);
+#endif
+}
+
+#if GTK_CHECK_VERSION (2, 17, 1)
+static void
+info_bar_add_stock_button_with_text (GtkInfoBar  *infobar,
+				     const gchar *text,
+				     const gchar *stock_id,
+				     gint         response_id)
+{
+	GtkWidget *button;
+	
+	button = gedit_gtk_button_new_with_stock_icon (text, stock_id);
+	gtk_widget_show (button);
+
+	gtk_info_bar_add_action_widget (infobar,
+					button,
+					response_id);
+}
+#endif
+
+static void
+set_message_area_text_and_icon (GtkWidget        *message_area,
 				const gchar      *icon_stock_id,
 				const gchar      *primary_text,
 				const gchar      *secondary_text)
@@ -133,8 +169,7 @@ set_message_area_text_and_icon (GeditMessageArea *message_area,
 		gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
 	}
 
-	gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (message_area),
-					 hbox_content);
+	set_contents (message_area, hbox_content);
 }
 
 static GtkWidget *
@@ -143,11 +178,19 @@ create_io_loading_error_message_area (const gchar *primary_text,
 {
 	GtkWidget *message_area;
 
+#if !GTK_CHECK_VERSION (2, 17, 1)
 	message_area = gedit_message_area_new_with_buttons (
 					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					NULL);
+#else
+	message_area = gtk_info_bar_new_with_buttons (
+					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					NULL);
+	gtk_info_bar_set_message_type (GTK_INFO_BAR (message_area),
+				       GTK_MESSAGE_ERROR);
+#endif
 
-	set_message_area_text_and_icon (GEDIT_MESSAGE_AREA (message_area),
+	set_message_area_text_and_icon (message_area,
 					"gtk-dialog-error",
 					primary_text,
 					secondary_text);
@@ -386,10 +429,17 @@ gedit_io_loading_error_message_area_new (const gchar  *uri,
 
 	if (is_recoverable_error (error))
 	{
+#if !GTK_CHECK_VERSION (2, 17, 1)
 		gedit_message_area_add_stock_button_with_text (GEDIT_MESSAGE_AREA (message_area),
 							       _("_Retry"),
 							       GTK_STOCK_REFRESH,
 							       GTK_RESPONSE_OK);
+#else
+		info_bar_add_stock_button_with_text (GTK_INFO_BAR (message_area),
+						     _("_Retry"),
+						     GTK_STOCK_REFRESH,
+						     GTK_RESPONSE_OK);
+#endif
 	}
 
 	g_free (uri_for_display);
@@ -502,17 +552,31 @@ create_conversion_error_message_area (const gchar *primary_text,
 	gchar *secondary_markup;
 	GtkWidget *primary_label;
 	GtkWidget *secondary_label;
-	
+
+#if !GTK_CHECK_VERSION (2, 17, 1)
 	message_area = gedit_message_area_new ();
 
-	gedit_message_area_add_stock_button_with_text (GEDIT_MESSAGE_AREA (message_area),						        
+	gedit_message_area_add_stock_button_with_text (GEDIT_MESSAGE_AREA (message_area),
 						       _("_Retry"),
 						       GTK_STOCK_REDO,
 						       GTK_RESPONSE_OK);
 	gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
 				       GTK_STOCK_CANCEL,
 				       GTK_RESPONSE_CANCEL);
-				      
+#else
+	message_area = gtk_info_bar_new ();
+	info_bar_add_stock_button_with_text (GTK_INFO_BAR (message_area),
+					     _("_Retry"),
+					     GTK_STOCK_REDO,
+					     GTK_RESPONSE_OK);
+
+	gtk_info_bar_add_button (GTK_INFO_BAR (message_area),
+				 GTK_STOCK_CANCEL,
+				 GTK_RESPONSE_CANCEL);
+	gtk_info_bar_set_message_type (GTK_INFO_BAR (message_area),
+				       GTK_MESSAGE_ERROR);
+#endif
+
 	hbox_content = gtk_hbox_new (FALSE, 8);
 	gtk_widget_show (hbox_content);				
 	
@@ -552,9 +616,9 @@ create_conversion_error_message_area (const gchar *primary_text,
 	}
 
 	create_option_menu (message_area, vbox);
-	
-	gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (message_area),
-					 hbox_content);
+
+	set_contents (message_area, hbox_content);
+
 	return message_area;
 }
 
@@ -683,8 +747,12 @@ const GeditEncoding *
 gedit_conversion_error_message_area_get_encoding (GtkWidget *message_area)
 {
 	gpointer menu;
-	
+
+#if !GTK_CHECK_VERSION (2, 17, 1)
 	g_return_val_if_fail (GEDIT_IS_MESSAGE_AREA (message_area), NULL);
+#else
+	g_return_val_if_fail (GTK_IS_INFO_BAR (message_area), NULL);
+#endif
 
 	menu = g_object_get_data (G_OBJECT (message_area), 
 				  "gedit-message-area-encoding-menu");	
@@ -723,7 +791,8 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
 	
 	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
-	
+
+#if !GTK_CHECK_VERSION (2, 17, 1)
 	message_area = gedit_message_area_new ();
 	gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
 				       _("_Edit Anyway"),
@@ -731,7 +800,18 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
 	gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
 				       _("_Don't Edit"),
 				       GTK_RESPONSE_CANCEL);
-				       
+#else
+	message_area = gtk_info_bar_new ();
+	gtk_info_bar_add_button (GTK_INFO_BAR (message_area),
+				 _("_Edit Anyway"),
+				 GTK_RESPONSE_YES);
+	gtk_info_bar_add_button (GTK_INFO_BAR (message_area),
+				 _("_Don't Edit"),
+				 GTK_RESPONSE_CANCEL);
+	gtk_info_bar_set_message_type (GTK_INFO_BAR (message_area),
+				       GTK_MESSAGE_WARNING);
+#endif
+
 	hbox_content = gtk_hbox_new (FALSE, 8);
 	gtk_widget_show (hbox_content);				
 	
@@ -773,8 +853,8 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
 	gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
 
-	gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (message_area),
-					 hbox_content);
+	set_contents (message_area, hbox_content);
+
 	return message_area;
 }
 
@@ -815,6 +895,7 @@ gedit_externally_modified_saving_error_message_area_new (
 	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 
+#if !GTK_CHECK_VERSION (2, 17, 1)
 	message_area = gedit_message_area_new ();
 	gedit_message_area_add_stock_button_with_text (GEDIT_MESSAGE_AREA (message_area),
 						       _("S_ave Anyway"),
@@ -823,6 +904,19 @@ gedit_externally_modified_saving_error_message_area_new (
 	gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
 				       _("D_on't Save"),
 				       GTK_RESPONSE_CANCEL);
+#else
+	message_area = gtk_info_bar_new ();
+	
+	info_bar_add_stock_button_with_text (GTK_INFO_BAR (message_area),
+					     _("S_ave Anyway"),
+					     GTK_STOCK_SAVE,
+					     GTK_RESPONSE_YES);
+	gtk_info_bar_add_button (GTK_INFO_BAR (message_area),
+				 _("D_on't Save"),
+				 GTK_RESPONSE_CANCEL);
+	gtk_info_bar_set_message_type (GTK_INFO_BAR (message_area),
+				       GTK_MESSAGE_WARNING);
+#endif
 
 	hbox_content = gtk_hbox_new (FALSE, 8);
 	gtk_widget_show (hbox_content);				
@@ -868,8 +962,7 @@ gedit_externally_modified_saving_error_message_area_new (
 	gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
 
-	gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (message_area),
-					 hbox_content);
+	set_contents (message_area, hbox_content);
 
 	return message_area;
 }
@@ -912,6 +1005,7 @@ gedit_no_backup_saving_error_message_area_new (const gchar  *uri,
 	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 
+#if !GTK_CHECK_VERSION (2, 17, 1)
 	message_area = gedit_message_area_new ();
 	gedit_message_area_add_stock_button_with_text (GEDIT_MESSAGE_AREA (message_area),
 						       _("S_ave Anyway"),
@@ -920,6 +1014,19 @@ gedit_no_backup_saving_error_message_area_new (const gchar  *uri,
 	gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
 				       _("D_on't Save"),
 				       GTK_RESPONSE_CANCEL);
+#else
+	message_area = gtk_info_bar_new ();
+	
+	info_bar_add_stock_button_with_text (GTK_INFO_BAR (message_area),
+					     _("S_ave Anyway"),
+					     GTK_STOCK_SAVE,
+					     GTK_RESPONSE_YES);
+	gtk_info_bar_add_button (GTK_INFO_BAR (message_area),
+				 _("D_on't Save"),
+				 GTK_RESPONSE_CANCEL);
+	gtk_info_bar_set_message_type (GTK_INFO_BAR (message_area),
+				       GTK_MESSAGE_WARNING);
+#endif
 
 	hbox_content = gtk_hbox_new (FALSE, 8);
 	gtk_widget_show (hbox_content);
@@ -971,8 +1078,7 @@ gedit_no_backup_saving_error_message_area_new (const gchar  *uri,
 	gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
 
-	gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (message_area),
-					 hbox_content);
+	set_contents (message_area, hbox_content);
 
 	return message_area;
 }
@@ -1135,13 +1241,9 @@ gedit_externally_modified_message_area_new (const gchar *uri,
 	else
 		secondary_text = _("Do you want to reload the file?");
 
+#if !GTK_CHECK_VERSION (2, 17, 1)
 	message_area = gedit_message_area_new ();
-
-	set_message_area_text_and_icon (GEDIT_MESSAGE_AREA (message_area),
-					"gtk-dialog-warning",
-					primary_text,
-					secondary_text);
-
+	
 	gedit_message_area_add_stock_button_with_text (GEDIT_MESSAGE_AREA (message_area),
 						       _("_Reload"),
 						       GTK_STOCK_REFRESH,
@@ -1150,6 +1252,24 @@ gedit_externally_modified_message_area_new (const gchar *uri,
 	gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
 				       GTK_STOCK_CANCEL,
 				       GTK_RESPONSE_CANCEL);
+#else
+	message_area = gtk_info_bar_new ();
+	
+	info_bar_add_stock_button_with_text (GTK_INFO_BAR (message_area),
+					     _("_Reload"),
+					     GTK_STOCK_REFRESH,
+					     GTK_RESPONSE_OK);
+	gtk_info_bar_add_button (GTK_INFO_BAR (message_area),
+				 GTK_STOCK_CANCEL,
+				 GTK_RESPONSE_CANCEL);
+	gtk_info_bar_set_message_type (GTK_INFO_BAR (message_area),
+				       GTK_MESSAGE_WARNING);
+#endif
+
+	set_message_area_text_and_icon (message_area,
+					"gtk-dialog-warning",
+					primary_text,
+					secondary_text);
 
 	return message_area;
 }
