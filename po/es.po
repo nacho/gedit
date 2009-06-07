@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
-"POT-Creation-Date: 2009-05-23 11:01+0000\n"
-"PO-Revision-Date: 2009-05-23 19:48+0200\n"
+"POT-Creation-Date: 2009-06-06 14:01+0000\n"
+"PO-Revision-Date: 2009-06-07 14:03+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1150,9 +1150,11 @@ msgstr[1] "Se encontraron y reemplazaron %d apariciones"
 msgid "Found and replaced one occurrence"
 msgstr "Se encontró y reemplazó una aparición"
 
-#: ../gedit/gedit-commands-search.c:188
-msgid "Phrase not found"
-msgstr "Frase no encontrada "
+#: ../gedit/gedit-commands-search.c:194
+#, c-format
+#| msgid "Phrase not found"
+msgid "\"%s\" not found"
+msgstr "No se encontró «%s»"
 
 #: ../gedit/gedit-document.c:889 ../gedit/gedit-document.c:902
 #, c-format
@@ -1307,7 +1309,7 @@ msgstr "Todos los archivos de texto"
 msgid "C_haracter Coding:"
 msgstr "Codificación de c_aracteres:"
 
-#: ../gedit/gedit-help.c:81
+#: ../gedit/gedit-help.c:89
 msgid "There was an error displaying help."
 msgstr "Hubo un error al mostrar la ayuda."
 
@@ -2203,22 +2205,22 @@ msgstr "Panel _inferior"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Muestra u oculta el panel inferior en la ventana actual"
 
-#: ../gedit/gedit-utils.c:1035
+#: ../gedit/gedit-utils.c:1060
 msgid "Please check your installation."
 msgstr "Compruebe su instalación."
 
-#: ../gedit/gedit-utils.c:1100
+#: ../gedit/gedit-utils.c:1125
 #, c-format
 msgid "Unable to open ui file %s. Error: %s"
 msgstr "No se pudo abrir el archivo de IU %s. Error: %s"
 
-#: ../gedit/gedit-utils.c:1119
+#: ../gedit/gedit-utils.c:1144
 #, c-format
 msgid "Unable to find the object '%s' inside file %s."
 msgstr "No se pudo encontrar el objeto «%s» en el archivo %s."
 
 #. Translators: '/ on <remote-share>'
-#: ../gedit/gedit-utils.c:1279
+#: ../gedit/gedit-utils.c:1304
 #, c-format
 msgid "/ on %s"
 msgstr "/ en %s"
@@ -2285,7 +2287,6 @@ msgid "Save"
 msgstr "Guardar"
 
 #: ../gedit/gedit-window.c:1458
-#| msgid "_Print..."
 msgid "Print"
 msgstr "Imprimir"
 
@@ -2418,7 +2419,6 @@ msgid "External Tools"
 msgstr "Herramientas externas"
 
 #: ../plugins/externaltools/tools/__init__.py:172
-#| msgid "_External Tools..."
 msgid "Manage _External Tools..."
 msgstr "Gestionar herramientas _externas…"
 
@@ -2427,7 +2427,6 @@ msgid "Opens the External Tools Manager"
 msgstr "Abre el gestor de herramientas externas"
 
 #: ../plugins/externaltools/tools/__init__.py:180
-#| msgid "External Tools"
 msgid "External tools"
 msgstr "Herramientas externas"
 
@@ -2437,7 +2436,6 @@ msgstr "Salida de shell"
 
 #: ../plugins/externaltools/tools/capture.py:94
 #, python-format
-#| msgid "Could not mount volume: %s"
 msgid "Could not execute command: %s"
 msgstr "No se pudo ejecutar el comando: %s"
 
@@ -2449,16 +2447,15 @@ msgstr "Debe estar dentro de una palabra para ejecutar este comando"
 msgid "Running tool:"
 msgstr "Ejecutando herramienta:"
 
-#: ../plugins/externaltools/tools/functions.py:289
+#: ../plugins/externaltools/tools/functions.py:287
 msgid "Done."
 msgstr "Hecho."
 
-#: ../plugins/externaltools/tools/functions.py:291
+#: ../plugins/externaltools/tools/functions.py:289
 msgid "Exited"
 msgstr "Salió"
 
 #: ../plugins/externaltools/tools/manager.py:119
-#| msgid "Languages"
 msgid "All languages"
 msgstr "Todos los idiomas"
 
@@ -2466,7 +2463,6 @@ msgstr "Todos los idiomas"
 #: ../plugins/externaltools/tools/manager.py:522
 #: ../plugins/externaltools/tools/manager.py:834
 #: ../plugins/externaltools/tools/tools.ui.h:2
-#| msgid "Languages"
 msgid "All Languages"
 msgstr "Todos los idiomas"
 
@@ -2520,7 +2516,6 @@ msgid "Current selection"
 msgstr "Selección actual"
 
 #: ../plugins/externaltools/tools/tools.ui.h:10
-#| msgid "Current selection"
 msgid "Current selection (default to document)"
 msgstr "Selección actual (predeterminada del documento)"
 
@@ -3044,21 +3039,20 @@ msgid "_Error color:"
 msgstr "Color del _error:"
 
 #. ex:ts=8:et:
-#: ../plugins/quickopen/quickopen/popup.py:42
+#: ../plugins/quickopen/quickopen/popup.py:34
 #: ../plugins/quickopen/quickopen.gedit-plugin.desktop.in.h:1
 msgid "Quick Open"
 msgstr "Apertura rápida"
 
-#: ../plugins/quickopen/quickopen/windowhelper.py:76
+#: ../plugins/quickopen/quickopen/windowhelper.py:68
 msgid "Quick open"
 msgstr "Apertura rápida"
 
-#: ../plugins/quickopen/quickopen/windowhelper.py:77
+#: ../plugins/quickopen/quickopen/windowhelper.py:69
 msgid "Quickly open documents"
 msgstr "Abrir documentos rápidamente"
 
 #: ../plugins/quickopen/quickopen.gedit-plugin.desktop.in.h:2
-#| msgid "Quickly open documents"
 msgid "Quickly open files"
 msgstr "Abrir documentos rápidamente"
 
@@ -3079,7 +3073,7 @@ msgid "Create new snippet"
 msgstr "Crear un recorte nuevo"
 
 #: ../plugins/snippets/snippets/snippets.ui.h:4
-#: ../plugins/snippets/snippets/Manager.py:421
+#: ../plugins/snippets/snippets/Manager.py:420
 msgid "Delete selected snippet"
 msgstr "Borrar el recorte seleccionado"
 
@@ -3088,7 +3082,7 @@ msgid "Export selected snippets"
 msgstr "Exportar el recorte seleccionado"
 
 #: ../plugins/snippets/snippets/snippets.ui.h:6
-#: ../plugins/snippets/snippets/Manager.py:806
+#: ../plugins/snippets/snippets/Manager.py:808
 msgid "Import snippets"
 msgstr "Importar recortes"
 
@@ -3102,7 +3096,7 @@ msgstr "Atajo de teclado con el que se activa el recorte"
 
 #. self['hbox_tab_trigger'].set_spacing(0)
 #: ../plugins/snippets/snippets/snippets.ui.h:9
-#: ../plugins/snippets/snippets/Manager.py:695
+#: ../plugins/snippets/snippets/Manager.py:697
 msgid "Single word with which the snippet is activated after pressing tab"
 msgstr "Palabra con la que se activa el recorte después de pulsar el tabulador"
 
@@ -3134,20 +3128,20 @@ msgstr "Administre recortes"
 msgid "Snippets archive"
 msgstr "Archivo de recortes"
 
-#: ../plugins/snippets/snippets/Manager.py:71
+#: ../plugins/snippets/snippets/Manager.py:70
 msgid "Add a new snippet..."
 msgstr "Añadir un nuevo recorte…"
 
-#: ../plugins/snippets/snippets/Manager.py:121
+#: ../plugins/snippets/snippets/Manager.py:120
 msgid "Global"
 msgstr "Global"
 
-#: ../plugins/snippets/snippets/Manager.py:418
+#: ../plugins/snippets/snippets/Manager.py:417
 msgid "Revert selected snippet"
 msgstr "Revertir el recorte seleccionado"
 
 #. self['hbox_tab_trigger'].set_spacing(3)
-#: ../plugins/snippets/snippets/Manager.py:688
+#: ../plugins/snippets/snippets/Manager.py:690
 msgid ""
 "This is not a valid tab trigger. Triggers can either contain letters or a "
 "single, non alphanumeric, character like {, [, etcetera."
@@ -3155,75 +3149,75 @@ msgstr ""
 "Este no es un disparador válido. Los disparadores pueden contener letras o "
 "un solo carácter alfanumérico como {,[, etcétera."
 
-#: ../plugins/snippets/snippets/Manager.py:785
+#: ../plugins/snippets/snippets/Manager.py:787
 #, python-format
 msgid "The following error occurred while importing: %s"
 msgstr "Ocurrió el siguiente error al importar: %s"
 
-#: ../plugins/snippets/snippets/Manager.py:792
+#: ../plugins/snippets/snippets/Manager.py:794
 msgid "Import successfully completed"
 msgstr "Importación completada satisfactoriamente"
-
-#: ../plugins/snippets/snippets/Manager.py:811
-#: ../plugins/snippets/snippets/Manager.py:897
-#: ../plugins/snippets/snippets/Manager.py:960
-msgid "All supported archives"
-msgstr "Todos los archivos soportados"
-
-#: ../plugins/snippets/snippets/Manager.py:812
-#: ../plugins/snippets/snippets/Manager.py:898
-#: ../plugins/snippets/snippets/Manager.py:961
-msgid "Gzip compressed archive"
-msgstr "Archivo comprimido con Gzip"
 
 #: ../plugins/snippets/snippets/Manager.py:813
 #: ../plugins/snippets/snippets/Manager.py:899
 #: ../plugins/snippets/snippets/Manager.py:962
-msgid "Bzip2 compressed archive"
-msgstr "Archivador comprimido con Bzip"
+msgid "All supported archives"
+msgstr "Todos los archivos soportados"
 
 #: ../plugins/snippets/snippets/Manager.py:814
-msgid "Single snippets file"
-msgstr "Archivo individual de recortes"
+#: ../plugins/snippets/snippets/Manager.py:900
+#: ../plugins/snippets/snippets/Manager.py:963
+msgid "Gzip compressed archive"
+msgstr "Archivo comprimido con Gzip"
 
 #: ../plugins/snippets/snippets/Manager.py:815
 #: ../plugins/snippets/snippets/Manager.py:901
 #: ../plugins/snippets/snippets/Manager.py:964
+msgid "Bzip2 compressed archive"
+msgstr "Archivador comprimido con Bzip"
+
+#: ../plugins/snippets/snippets/Manager.py:816
+msgid "Single snippets file"
+msgstr "Archivo individual de recortes"
+
+#: ../plugins/snippets/snippets/Manager.py:817
+#: ../plugins/snippets/snippets/Manager.py:903
+#: ../plugins/snippets/snippets/Manager.py:966
 msgid "All files"
 msgstr "Todos los archivos"
 
-#: ../plugins/snippets/snippets/Manager.py:827
+#: ../plugins/snippets/snippets/Manager.py:829
 #, python-format
 msgid "The following error occurred while exporting: %s"
 msgstr "Ocurrió el siguiente error al exportar: %s"
 
-#: ../plugins/snippets/snippets/Manager.py:831
+#: ../plugins/snippets/snippets/Manager.py:833
 msgid "Export successfully completed"
 msgstr "Exportación completada satisfactoriamente"
 
 #. Ask if system snippets should also be exported
-#: ../plugins/snippets/snippets/Manager.py:871
-#: ../plugins/snippets/snippets/Manager.py:938
+#: ../plugins/snippets/snippets/Manager.py:873
+#: ../plugins/snippets/snippets/Manager.py:940
 msgid "Do you want to include selected <b>system</b> snippets in your export?"
 msgstr ""
 "¿Quiere incluir los recortes del <b>sistema</b> seleccionados en su "
 "exportación?"
 
-#: ../plugins/snippets/snippets/Manager.py:886
-#: ../plugins/snippets/snippets/Manager.py:956
+#: ../plugins/snippets/snippets/Manager.py:888
+#: ../plugins/snippets/snippets/Manager.py:958
 msgid "There are no snippets selected to be exported"
 msgstr "No hay recortes seleccionados para exportar"
 
-#: ../plugins/snippets/snippets/Manager.py:891
-#: ../plugins/snippets/snippets/Manager.py:929
+#: ../plugins/snippets/snippets/Manager.py:893
+#: ../plugins/snippets/snippets/Manager.py:931
 msgid "Export snippets"
 msgstr "Exportar recortes"
 
-#: ../plugins/snippets/snippets/Manager.py:1068
+#: ../plugins/snippets/snippets/Manager.py:1070
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "Teclee un acelerador nuevo o pulse Retroceso para limpiar"
 
-#: ../plugins/snippets/snippets/Manager.py:1070
+#: ../plugins/snippets/snippets/Manager.py:1072
 msgid "Type a new shortcut"
 msgstr "Teclee un acelerador nuevo"
 
