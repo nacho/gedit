@@ -152,7 +152,12 @@ add_file (GeditFileBookmarksStore *model,
 		pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("drive-harddisk", GTK_ICON_SIZE_MENU);
 
 	if (pixbuf == NULL) {
-		pixbuf = gedit_file_browser_utils_pixbuf_from_file (file, GTK_ICON_SIZE_MENU);
+		/* getting the icon is a sync get_info call, so we just do it for local files */
+		if (native) {
+			pixbuf = gedit_file_browser_utils_pixbuf_from_file (file, GTK_ICON_SIZE_MENU);
+		} else {
+			pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("folder", GTK_ICON_SIZE_MENU);
+		}
 	}
 
 	if (name == NULL) {
@@ -468,7 +473,6 @@ add_bookmark (GeditFileBookmarksStore * model,
 	gboolean ret;
 	guint flags = GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK;
 	GtkTreeIter iter;
-	GdkPixbuf * pixbuf;
 	
 	file = g_file_new_for_uri (uri);
 	
@@ -479,32 +483,7 @@ add_bookmark (GeditFileBookmarksStore * model,
 	}
 
 	ret = add_file (model, file, name, flags, &iter);
-	
-	if (!g_file_is_native (file)) {
-		/* Check icon */
-		gtk_tree_model_get (GTK_TREE_MODEL (model), 
-				    &iter, 
-				    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_ICON, 
-				    &pixbuf, 
-				    -1);
 
-		if (!pixbuf) {
-			pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("folder", GTK_ICON_SIZE_MENU);
-
-			if (pixbuf) {			
-				gtk_tree_store_set (GTK_TREE_STORE (model), 
-						    &iter, 
-						    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_ICON,
-						    pixbuf,
-						    -1);
-						    
-				g_object_unref (pixbuf);
-			}
-		} else {
-			g_object_unref (pixbuf);
-		}
-	}
-	
 	g_object_unref (file);
 	
 	return ret;
