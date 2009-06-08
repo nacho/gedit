@@ -53,7 +53,6 @@ gedit_LDADD += gedit-res.o
 endif
 
 NOINST_H_FILES =			\
-	gedit-commands.h		\
 	gedit-language-manager.h	\
 	gedit-style-scheme-manager.h	\
 	gedit-plugin-info.h		\
@@ -81,6 +80,7 @@ NOINST_H_FILES =			\
 
 INST_H_FILES =				\
 	gedit-app.h			\
+	gedit-commands.h		\
 	gedit-convert.h			\
 	gedit-debug.h			\
 	gedit-document.h 		\
