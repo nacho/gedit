@@ -363,7 +363,8 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 
 		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dlg)->vbox),
 					     error_widget);
-		gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);					     
+		gtk_container_set_border_width (GTK_CONTAINER (error_widget),
+						5);
 
 		dlg->priv->ui_error = TRUE;
 
@@ -473,9 +474,14 @@ gedit_search_dialog_new (GtkWindow *parent,
 			    NULL);
 
 	if (parent != NULL)
+	{
 		gtk_window_set_transient_for (GTK_WINDOW (dlg),
 					      parent);
-
+	
+		gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg),
+						    TRUE);
+	}
+	
 	return GTK_WIDGET (dlg);
 }
 

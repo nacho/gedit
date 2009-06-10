@@ -46,111 +46,60 @@
 #include "gedit-utils.h"
 #include "dialogs/gedit-search-dialog.h"
 
-
 #define GEDIT_SEARCH_DIALOG_KEY		"gedit-search-dialog-key"
 #define GEDIT_LAST_SEARCH_DATA_KEY	"gedit-last-search-data-key"
 
-/* data stored in the document
- * to persist the last searched
- * words and options
- */
 typedef struct _LastSearchData LastSearchData;
 struct _LastSearchData
 {
-	gchar *find_text;
-	gchar *replace_text;
-
-	gint match_case :1;
-	gint entire_word :1;
-	gint backwards :1;
-	gint wrap_around :1;
+	gint x;
+	gint y;
 };
 
 static void
 last_search_data_free (LastSearchData *data)
 {
-	g_free (data->find_text);
-	g_free (data->replace_text);
 	g_slice_free (LastSearchData, data);
 }
 
 static void
-last_search_data_set (LastSearchData    *data,
-		      GeditSearchDialog *dialog)
-{
-	const gchar *str;
-
-	str = gedit_search_dialog_get_search_text (dialog);
-	if (str != NULL && *str != '\0')
-	{
-		g_free (data->find_text);
-		data->find_text = gedit_utils_unescape_search_text (str);
-	}
-
-	str = gedit_search_dialog_get_replace_text (dialog);
-	if (str != NULL && *str != '\0')
-	{
-		g_free (data->replace_text);
-		data->replace_text = gedit_utils_unescape_search_text (str);
-	}
-
-	data->match_case = gedit_search_dialog_get_match_case (dialog);
-	data->entire_word = gedit_search_dialog_get_entire_word (dialog);
-	data->backwards = gedit_search_dialog_get_backwards (dialog);
-	data->wrap_around = gedit_search_dialog_get_wrap_around (dialog);
-}
-
-static void
-search_dialog_set_last_find_text (GeditSearchDialog *dialog,
-				  LastSearchData    *data)
-{
-	if (data->find_text)
-		gedit_search_dialog_set_search_text (dialog, data->find_text);
-}
-
-static void
-search_dialog_set_last_replace_text (GeditSearchDialog *dialog,
-				     LastSearchData    *data)
-{
-	if (data->replace_text)
-		gedit_search_dialog_set_replace_text (dialog, data->replace_text);
-}
-
-static void
-search_dialog_set_last_options (GeditSearchDialog *dialog,
-			        LastSearchData    *data)
-{
-	gedit_search_dialog_set_match_case (dialog, data->match_case);
-	gedit_search_dialog_set_entire_word (dialog, data->entire_word);
-	gedit_search_dialog_set_backwards (dialog, data->backwards);
-	gedit_search_dialog_set_wrap_around (dialog, data->wrap_around);
-}
-
-static void
-restore_last_searched_data (GeditSearchDialog *dialog,
-			    GeditDocument     *doc)
+last_search_data_restore_position (GeditSearchDialog *dlg)
 {
 	LastSearchData *data;
+	
+	data = g_object_get_data (G_OBJECT (dlg), GEDIT_LAST_SEARCH_DATA_KEY);
+	
+	if (data != NULL)
+	{
+		gtk_window_move (GTK_WINDOW (dlg),
+				 data->x,
+				 data->y);
+		
+		gedit_search_dialog_present_with_time (dlg,
+						       GDK_CURRENT_TIME);
+	}
+}
 
-	data = g_object_get_data (G_OBJECT (doc), GEDIT_LAST_SEARCH_DATA_KEY);
-
+static void
+last_search_data_store_position (GeditSearchDialog *dlg)
+{
+	LastSearchData *data;
+	
+	data = g_object_get_data (G_OBJECT (dlg), GEDIT_LAST_SEARCH_DATA_KEY);
+	
 	if (data == NULL)
 	{
-		data = g_slice_new0 (LastSearchData);
-		last_search_data_set (data, dialog);
-
-		g_object_set_data (G_OBJECT (doc),
-				   GEDIT_LAST_SEARCH_DATA_KEY,
-				   data);
-
-		g_object_weak_ref (G_OBJECT (doc),
-				   (GWeakNotify) last_search_data_free,
-				   data);
+		data = g_slice_new (LastSearchData);
+		
+		g_object_set_data_full (G_OBJECT (dlg),
+					GEDIT_LAST_SEARCH_DATA_KEY,
+					data,
+					(GDestroyNotify) last_search_data_free);
 	}
-	else
-	{
-		last_search_data_set (data, dialog);
-	}
+	
+	gtk_window_get_position (GTK_WINDOW (dlg),
+				 &data->x,
+				 &data->y);
 }
 
 /* Use occurences only for Replace All */
@@ -282,7 +231,7 @@ do_find (GeditSearchDialog *dialog,
 	gboolean match_case;
 	gboolean entire_word;
 	gboolean wrap_around;
-	gboolean search_backwards;	
+	gboolean search_backwards;
 	guint flags = 0;
 	guint old_flags = 0;
 	gboolean found;
@@ -328,8 +277,6 @@ do_find (GeditSearchDialog *dialog,
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
 					   GEDIT_SEARCH_DIALOG_REPLACE_RESPONSE,
 					   found);
-
-	restore_last_searched_data (dialog, doc);
 }
 
 /* FIXME: move in gedit-document.c and share it with gedit-view */
@@ -381,7 +328,7 @@ do_replace (GeditSearchDialog *dialog,
 {
 	GeditDocument *doc;
 	const gchar *search_entry_text;
-	const gchar *replace_entry_text;	
+	const gchar *replace_entry_text;
 	gchar *unescaped_search_text;
 	gchar *unescaped_replace_text;
 	gchar *selected_text = NULL;
@@ -440,7 +387,7 @@ do_replace_all (GeditSearchDialog *dialog,
 	GeditView *active_view;
 	GeditDocument *doc;
 	const gchar *search_entry_text;
-	const gchar *replace_entry_text;	
+	const gchar *replace_entry_text;
 	gboolean match_case;
 	gboolean entire_word;
 	guint flags = 0;
@@ -483,8 +430,6 @@ do_replace_all (GeditSearchDialog *dialog,
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
 					   GEDIT_SEARCH_DIALOG_REPLACE_RESPONSE,
 					   FALSE);
-
-	restore_last_searched_data (dialog, doc);
 }
 
 static void
@@ -506,7 +451,8 @@ search_dialog_response_cb (GeditSearchDialog *dialog,
 			do_replace_all (dialog, window);
 			break;
 		default:
-			gtk_widget_destroy (GTK_WIDGET (dialog));
+			last_search_data_store_position (dialog);
+			gtk_widget_hide (GTK_WIDGET (dialog));
 	}
 }
 
@@ -519,11 +465,14 @@ search_dialog_destroyed (GeditWindow       *window,
 	g_object_set_data (G_OBJECT (window),
 			   GEDIT_SEARCH_DIALOG_KEY,
 			   NULL);
+	g_object_set_data (G_OBJECT (dialog),
+			   GEDIT_LAST_SEARCH_DATA_KEY,
+			   NULL);
 }
 
 void
 _gedit_cmd_search_find (GtkAction   *action,
-		       GeditWindow *window)
+			GeditWindow *window)
 {
 	gpointer data;
 	GtkWidget *search_dialog;
@@ -531,42 +480,43 @@ _gedit_cmd_search_find (GtkAction   *action,
 	gboolean selection_exists;
 	gchar *find_text = NULL;
 	gint sel_len;
-	LastSearchData *last_search_data;
 
 	gedit_debug (DEBUG_COMMANDS);
 
 	data = g_object_get_data (G_OBJECT (window), GEDIT_SEARCH_DIALOG_KEY);
 
-	if (data != NULL)
+	if (data == NULL)
+	{
+		search_dialog = gedit_search_dialog_new (GTK_WINDOW (window),
+							 FALSE);
+		
+		g_signal_connect (search_dialog,
+				  "response",
+				  G_CALLBACK (search_dialog_response_cb),
+				  window);
+		
+		g_object_set_data (G_OBJECT (window),
+				   GEDIT_SEARCH_DIALOG_KEY,
+				   search_dialog);
+		
+		g_object_weak_ref (G_OBJECT (search_dialog),
+				   (GWeakNotify) search_dialog_destroyed,
+				   window);
+	}
+	else
 	{
 		g_return_if_fail (GEDIT_IS_SEARCH_DIALOG (data));
-
-		/* note that we rise a search&replace dialog if
-		 * it is already open
-		 */
-
-		gedit_search_dialog_present_with_time (GEDIT_SEARCH_DIALOG (data),
-						       GDK_CURRENT_TIME);
-
-		return;
+		
+		search_dialog = GTK_WIDGET (data);
+		
+		/* turn the dialog into a find dialog if needed */
+		if (gedit_search_dialog_get_show_replace (GEDIT_SEARCH_DIALOG (search_dialog)))
+			gedit_search_dialog_set_show_replace (GEDIT_SEARCH_DIALOG (search_dialog),
+							      FALSE);
 	}
-
-	search_dialog = gedit_search_dialog_new (GTK_WINDOW (window),
-						 FALSE);
-
-	g_object_set_data (G_OBJECT (window),
-			   GEDIT_SEARCH_DIALOG_KEY,
-			   search_dialog);
-
-	g_object_weak_ref (G_OBJECT (search_dialog),
-			   (GWeakNotify) search_dialog_destroyed,
-			   window);
 
 	doc = gedit_window_get_active_document (window);
 	g_return_if_fail (doc != NULL);
-
-	last_search_data = g_object_get_data (G_OBJECT (doc),
-					      GEDIT_LAST_SEARCH_DATA_KEY);
 
 	selection_exists = get_selected_text (GTK_TEXT_BUFFER (doc),
 					      &find_text,
@@ -581,31 +531,15 @@ _gedit_cmd_search_find (GtkAction   *action,
 	else
 	{
 		g_free (find_text);
-
-		if (last_search_data != NULL)
-			search_dialog_set_last_find_text (GEDIT_SEARCH_DIALOG (search_dialog),
-							  last_search_data);
 	}
 
-	if (last_search_data != NULL)
-		search_dialog_set_last_replace_text (GEDIT_SEARCH_DIALOG (search_dialog),
-						     last_search_data);
-
-	if (last_search_data != NULL)
-		search_dialog_set_last_options (GEDIT_SEARCH_DIALOG (search_dialog),
-						last_search_data);
-
-	g_signal_connect (search_dialog,
-			  "response",
-			  G_CALLBACK (search_dialog_response_cb),
-			  window);
-
 	gtk_widget_show (search_dialog);
+	last_search_data_restore_position (GEDIT_SEARCH_DIALOG (search_dialog));
 }
 
 void
 _gedit_cmd_search_replace (GtkAction   *action,
-			  GeditWindow *window)
+			   GeditWindow *window)
 {
 	gpointer data;
 	GtkWidget *replace_dialog;
@@ -613,44 +547,43 @@ _gedit_cmd_search_replace (GtkAction   *action,
 	gboolean selection_exists;
 	gchar *find_text = NULL;
 	gint sel_len;
-	LastSearchData *last_search_data;
 
 	gedit_debug (DEBUG_COMMANDS);
 
 	data = g_object_get_data (G_OBJECT (window), GEDIT_SEARCH_DIALOG_KEY);
-
-	if (data != NULL)
+	
+	if (data == NULL)
+	{
+		replace_dialog = gedit_search_dialog_new (GTK_WINDOW (window),
+							  TRUE);
+		
+		g_signal_connect (replace_dialog,
+				  "response",
+				  G_CALLBACK (search_dialog_response_cb),
+				  window);
+		
+		g_object_set_data (G_OBJECT (window),
+				   GEDIT_SEARCH_DIALOG_KEY,
+				   replace_dialog);
+		
+		g_object_weak_ref (G_OBJECT (replace_dialog),
+				   (GWeakNotify) search_dialog_destroyed,
+				   window);
+	}
+	else
 	{
 		g_return_if_fail (GEDIT_IS_SEARCH_DIALOG (data));
-
-		/* turn the dialog into a replace dialog if needed */
-		if (!gedit_search_dialog_get_show_replace (GEDIT_SEARCH_DIALOG (data)))
-			gedit_search_dialog_set_show_replace (GEDIT_SEARCH_DIALOG (data),
+		
+		replace_dialog = GTK_WIDGET (data);
+		
+		/* turn the dialog into a find dialog if needed */
+		if (!gedit_search_dialog_get_show_replace (GEDIT_SEARCH_DIALOG (replace_dialog)))
+			gedit_search_dialog_set_show_replace (GEDIT_SEARCH_DIALOG (replace_dialog),
 							      TRUE);
-
-		gedit_search_dialog_present_with_time (GEDIT_SEARCH_DIALOG (data),
-						       GDK_CURRENT_TIME);
-
-		return;
 	}
-
-	replace_dialog = gedit_search_dialog_new (GTK_WINDOW (window),
-						  TRUE);
-
-	g_object_set_data (G_OBJECT (window),
-			   GEDIT_SEARCH_DIALOG_KEY,
-			   replace_dialog);
-
-	g_object_weak_ref (G_OBJECT (replace_dialog),
-			   (GWeakNotify) search_dialog_destroyed,
-			   window);
 
 	doc = gedit_window_get_active_document (window);
 	g_return_if_fail (doc != NULL);
-
-	last_search_data = g_object_get_data (G_OBJECT (doc),
-					      GEDIT_LAST_SEARCH_DATA_KEY);
-
 
 	selection_exists = get_selected_text (GTK_TEXT_BUFFER (doc),
 					      &find_text,
@@ -665,26 +598,10 @@ _gedit_cmd_search_replace (GtkAction   *action,
 	else
 	{
 		g_free (find_text);
-
-		if (last_search_data != NULL)
-			search_dialog_set_last_find_text (GEDIT_SEARCH_DIALOG (replace_dialog),
-							  last_search_data);
 	}
 
-	if (last_search_data != NULL)
-		search_dialog_set_last_replace_text (GEDIT_SEARCH_DIALOG (replace_dialog),
-						     last_search_data);
-
-	if (last_search_data != NULL)
-		search_dialog_set_last_options (GEDIT_SEARCH_DIALOG (replace_dialog),
-						last_search_data);
-
-	g_signal_connect (replace_dialog,
-			  "response",
-			  G_CALLBACK (search_dialog_response_cb),
-			  window);
-
 	gtk_widget_show (replace_dialog);
+	last_search_data_restore_position (GEDIT_SEARCH_DIALOG (replace_dialog));
 }
 
 static void
@@ -694,27 +611,26 @@ do_find_again (GeditWindow *window,
 	GeditView *active_view;
 	GtkTextBuffer *buffer;
 	gboolean wrap_around = TRUE;
-	LastSearchData *data;
+	gpointer data;
 	
 	active_view = gedit_window_get_active_view (window);
 	g_return_if_fail (active_view != NULL);
 
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view));
 
-	data = g_object_get_data (G_OBJECT (buffer), 
-				  GEDIT_LAST_SEARCH_DATA_KEY);
-
+	data = g_object_get_data (G_OBJECT (window), GEDIT_SEARCH_DIALOG_KEY);
+	
 	if (data != NULL)
-		wrap_around = data->wrap_around;					    
-
+		wrap_around = gedit_search_dialog_get_wrap_around (GEDIT_SEARCH_DIALOG (data));
+	
 	run_search (active_view,
-	   	    wrap_around,
-	   	    backward);
-}				 
+		    wrap_around,
+		    backward);
+}
 
 void
 _gedit_cmd_search_find_next (GtkAction   *action,
-			    GeditWindow *window)
+			     GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -723,7 +639,7 @@ _gedit_cmd_search_find_next (GtkAction   *action,
 
 void
 _gedit_cmd_search_find_prev (GtkAction   *action,
-			    GeditWindow *window)
+			     GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -732,7 +648,7 @@ _gedit_cmd_search_find_prev (GtkAction   *action,
 
 void
 _gedit_cmd_search_clear_highlight (GtkAction   *action,
-				  GeditWindow *window)
+				   GeditWindow *window)
 {
 	GeditDocument *doc;
 
@@ -746,7 +662,7 @@ _gedit_cmd_search_clear_highlight (GtkAction   *action,
 
 void
 _gedit_cmd_search_goto_line (GtkAction   *action,
-			    GeditWindow *window)
+			     GeditWindow *window)
 {
 	GeditView *active_view;
 
