@@ -20,7 +20,15 @@
  * Boston, MA 02111-1307, USA. 
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "gedit-dirs.h"
+
+#ifdef PLATFORM_OSX
+#include <ige-mac-bundle.h>
+#endif
 
 gchar *
 gedit_dirs_get_user_config_dir (void)
@@ -119,11 +127,7 @@ gedit_dirs_get_gedit_data_dir (void)
 {
 	gchar *data_dir;
 
-#ifndef G_OS_WIN32
-	data_dir = g_build_filename (DATADIR,
-				     "gedit-2",
-				     NULL);
-#else
+#ifdef G_OS_WIN32
 	gchar *win32_dir;
 	
 	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
@@ -134,6 +138,27 @@ gedit_dirs_get_gedit_data_dir (void)
 				     NULL);
 	
 	g_free (win32_dir);
+#else
+#ifdef PLATFORM_OSX
+	IgeMacBundle *bundle = ige_mac_bundle_get_default ();
+
+	if (ige_mac_bundle_get_is_app_bundle (bundle))
+	{
+		const gchar *bundle_data_dir = ige_mac_bundle_get_datadir (bundle);
+
+		data_dir = g_build_filename (bundle_data_dir,
+		                             "gedit-2",
+	                                     NULL);
+	}
+	else
+	{
+		data_dir = g_build_filename (DATADIR, "gedit-2", NULL);
+	}
+#else
+	data_dir = g_build_filename (DATADIR,
+	                             "gedit-2",
+	                             NULL);
+#endif
 #endif
 
 	return data_dir;
@@ -144,11 +169,7 @@ gedit_dirs_get_gedit_locale_dir (void)
 {
 	gchar *locale_dir;
 
-#ifndef G_OS_WIN32
-	locale_dir = g_build_filename (DATADIR,
-				       "locale",
-				       NULL);
-#else
+#ifdef G_OS_WIN32
 	gchar *win32_dir;
 	
 	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
@@ -159,6 +180,31 @@ gedit_dirs_get_gedit_locale_dir (void)
 				       NULL);
 	
 	g_free (win32_dir);
+#else
+#ifdef PLATFORM_OSX
+	IgeMacBundle *bundle = ige_mac_bundle_get_default ();
+
+	if (ige_mac_bundle_get_is_app_bundle (bundle))
+	{
+		locale_dir = g_strdup (ige_mac_bundle_get_localedir (bundle));
+	}
+	else
+	{
+		gchar *data_dir = gedit_dirs_get_gedit_data_dir ();
+		locale_dir = g_build_filename (data_dir,
+		                               "locale",
+		                               NULL);
+		g_free (data_dir);
+	}
+#else
+	gchar *data_dir;
+
+	data_dir = gedit_dirs_get_data_dir ();
+	locale_dir = g_build_filename (data_dir,
+				       "locale",
+				       NULL);
+	g_free (data_dir);
+#endif
 #endif
 
 	return locale_dir;
@@ -169,11 +215,7 @@ gedit_dirs_get_gedit_lib_dir (void)
 {
 	gchar *lib_dir;
 
-#ifndef G_OS_WIN32
-	lib_dir = g_build_filename (LIBDIR,
-				    "gedit-2",
-				    NULL);
-#else
+#ifdef G_OS_WIN32
 	gchar *win32_dir;
 	
 	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
@@ -184,6 +226,29 @@ gedit_dirs_get_gedit_lib_dir (void)
 				    NULL);
 	
 	g_free (win32_dir);
+#else
+#ifdef PLATFORM_OSX
+	IgeMacBundle *bundle = ige_mac_bundle_get_default ();
+
+	if (ige_mac_bundle_get_is_app_bundle (bundle))
+	{
+ 		const gchar *path = ige_mac_bundle_get_resourcesdir (bundle);
+		lib_dir = g_build_filename (path,
+	                            	"lib",
+	                            	"gedit-2",
+	                            	NULL);
+	}
+	else
+	{
+		lib_dir = g_build_filename (LIBDIR,
+					    "gedit-2",
+					    NULL);
+	}
+#else
+	lib_dir = g_build_filename (LIBDIR,
+				    "gedit-2",
+				    NULL);
+#endif
 #endif
 
 	return lib_dir;

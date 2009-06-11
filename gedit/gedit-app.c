@@ -46,6 +46,9 @@
 #include "gedit-enum-types.h"
 #include "gedit-dirs.h"
 
+#ifdef PLATFORM_OSX
+#include <ige-mac-integration.h>
+#endif
 
 #define GEDIT_PAGE_SETUP_FILE		"gedit-page-setup"
 #define GEDIT_PRINT_SETTINGS_FILE	"gedit-print-settings"
@@ -372,6 +375,60 @@ gedit_app_get_default (void)
 	return app;
 }
 
+#ifdef PLATFORM_OSX
+static GtkMenuItem *
+ui_manager_menu_item (GtkUIManager *uimanager,
+                      const gchar  *path)
+{
+	return GTK_MENU_ITEM (gtk_ui_manager_get_widget (uimanager, path));
+}
+
+static void
+osx_switch_menubar (GeditApp    *app,
+                    GeditWindow *window)
+{
+	GtkWidget *menubar;
+
+	if (window != NULL && app->priv->active_window != window)
+	{
+		GtkUIManager *uimanager;
+		IgeMacMenuGroup *group;
+		GtkAction *action;
+
+		menubar = _gedit_window_get_menu_bar (window);
+		uimanager = gedit_window_get_ui_manager (window);
+
+		gtk_widget_hide (menubar);
+		action = gtk_ui_manager_get_action (uimanager, "/ui/MenuBar/HelpMenu/HelpAboutMenu");
+
+		gtk_action_set_label (action, _("About gedit"));
+
+		ige_mac_menu_set_menu_bar (GTK_MENU_SHELL (menubar));
+
+		ige_mac_menu_set_quit_menu_item (ui_manager_menu_item (uimanager, "/ui/MenuBar/FileMenu/FileQuitMenu"));
+
+		group = ige_mac_menu_add_app_menu_group ();
+
+		ige_mac_menu_add_app_menu_item (group,
+		                                ui_manager_menu_item (uimanager, "/ui/MenuBar/HelpMenu/HelpAboutMenu"),
+		                                NULL);
+
+		ige_mac_menu_set_preferences_menu_item (ui_manager_menu_item (uimanager, "/ui/MenuBar/EditMenu/EditPreferencesMenu"));
+	}
+}
+#endif
+
+static void
+set_active_window (GeditApp    *app,
+                   GeditWindow *window)
+{
+#ifdef PLATFORM_OSX
+	osx_switch_menubar (app, window);
+#endif
+
+	app->priv->active_window = window;
+}
+
 static gboolean
 window_focus_in_event (GeditWindow   *window, 
 		       GdkEventFocus *event, 
@@ -380,7 +437,7 @@ window_focus_in_event (GeditWindow   *window,
 	/* updates active_view and active_child when a new toplevel receives focus */
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), FALSE);
 
-	app->priv->active_window = window;
+	set_active_window (app, window);
 
 	return FALSE;
 }
@@ -415,8 +472,7 @@ window_destroy (GeditWindow *window,
 
 	if (window == app->priv->active_window)
 	{
-		app->priv->active_window = app->priv->windows != NULL ?
-					   app->priv->windows->data : NULL;
+		set_active_window (app, app->priv->windows != NULL ? app->priv->windows->data : NULL);
 	}
 
 /* CHECK: I don't think we have to disconnect this function, since windows
@@ -428,11 +484,20 @@ window_destroy (GeditWindow *window,
 	g_signal_handlers_disconnect_by_func (window, 
 					      G_CALLBACK (window_destroy),
 					      app);
-*/					      
+*/
 	if (app->priv->windows == NULL)
 	{
-		/* Last window is gone... save some settings and exit */
+#ifdef PLATFORM_OSX
+		if (!GPOINTER_TO_INT (g_object_get_data (G_OBJECT (window), "gedit-is-quitting-all")))
+		{
+			GeditWindow *hidden;
 
+			/* create new hidden window */
+			hidden = gedit_app_create_window (app, NULL);
+			return;
+		}
+#endif
+		/* Last window is gone... save some settings and exit */
 		ensure_user_config_dir ();
 
 		save_accels ();
@@ -476,8 +541,8 @@ gedit_app_create_window_real (GeditApp    *app,
 	 */
 	if (app->priv->windows == NULL)
 	{
-		app->priv->active_window = window = g_object_new (GEDIT_TYPE_WINDOW,
-								  NULL);
+		window = g_object_new (GEDIT_TYPE_WINDOW, NULL);
+		set_active_window (app, window);
 	}
 	else
 	{
@@ -540,6 +605,10 @@ gedit_app_create_window_real (GeditApp    *app,
 			  "destroy",
 			  G_CALLBACK (window_destroy),
 			  app);
+
+#ifdef PLATFORM_OSX
+	gtk_widget_hide (_gedit_window_get_menu_bar (window));
+#endif
 
 	return window;
 }

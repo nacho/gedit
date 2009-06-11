@@ -57,6 +57,10 @@
 #include "gedit-dirs.h"
 #include "gedit-status-combo-box.h"
 
+#ifdef PLATFORM_OSX
+#include "osx/gedit-osx.h"
+#endif
+
 #define LANGUAGE_NONE (const gchar *)"LangNone"
 #define GEDIT_UIFILE "gedit-ui.xml"
 #define TAB_WIDTH_DATA "GeditWindowTabWidthData"
@@ -718,7 +722,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 				  (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW)) &&
 				  !(lockdown & GEDIT_LOCKDOWN_PRINTING));
 				  
-	action = gtk_action_group_get_action (window->priv->action_group,
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "FileClose");
 
 	gtk_action_set_sensitive (action,
@@ -1408,7 +1412,6 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	GtkActionGroup *action_group;
 	GtkAction *action;
 	GtkUIManager *manager;
-	GtkWidget *menubar;
 	GtkRecentManager *recent_manager;
 	GError *error = NULL;
 	gchar *ui_file;
@@ -1557,9 +1560,9 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	g_object_unref (action_group);
 
-	menubar = gtk_ui_manager_get_widget (manager, "/MenuBar");
+	window->priv->menubar = gtk_ui_manager_get_widget (manager, "/MenuBar");
 	gtk_box_pack_start (GTK_BOX (main_box), 
-			    menubar, 
+			    window->priv->menubar,
 			    FALSE, 
 			    FALSE, 
 			    0);
@@ -2126,7 +2129,11 @@ set_title (GeditWindow *window)
 
 	if (window->priv->active_tab == NULL)
 	{
+#ifdef PLATFORM_OSX
+		gedit_osx_set_window_title (window, "gedit", NULL);
+#else
 		gtk_window_set_title (GTK_WINDOW (window), "gedit");
+#endif
 		return;
 	}
 
@@ -2206,7 +2213,11 @@ set_title (GeditWindow *window)
 						 name);
 	}
 
+#ifdef PLATFORM_OSX
+	gedit_osx_set_window_title (window, title, doc);
+#else
 	gtk_window_set_title (GTK_WINDOW (window), title);
+#endif
 
 	g_free (dirname);
 	g_free (name);
@@ -3113,13 +3124,35 @@ editable_changed (GeditView  *view,
 }
 
 static void
+update_sensitivity (GeditWindow *window)
+{
+	GtkAction *action;
+
+	/* Set sensitivity */
+	gtk_action_group_set_sensitive (window->priv->action_group,
+					window->priv->num_tabs != 0);
+
+	action = gtk_action_group_get_action (window->priv->action_group,
+					     "DocumentsMoveToNewWindow");
+	gtk_action_set_sensitive (action,
+				  window->priv->num_tabs > 1);
+
+	/* Set sensitivity */
+	if (window->priv->num_tabs == 0)
+	{
+		action = gtk_action_group_get_action (window->priv->action_group,
+						      "ViewHighlightMode");
+		gtk_action_set_sensitive (action, FALSE);
+	}
+}
+
+static void
 notebook_tab_added (GeditNotebook *notebook,
 		    GeditTab      *tab,
 		    GeditWindow   *window)
 {
 	GeditView *view;
 	GeditDocument *doc;
-	GtkAction *action;
 
 	gedit_debug (DEBUG_WINDOW);
 
@@ -3127,15 +3160,7 @@ notebook_tab_added (GeditNotebook *notebook,
 	
 	++window->priv->num_tabs;
 
-	/* Set sensitivity */
-	if (!gtk_action_group_get_sensitive (window->priv->action_group))
-		gtk_action_group_set_sensitive (window->priv->action_group,
-						TRUE);
-
-	action = gtk_action_group_get_action (window->priv->action_group,
-					     "DocumentsMoveToNewWindow");
-	gtk_action_set_sensitive (action,
-				  window->priv->num_tabs > 1);
+	update_sensitivity (window);
 
 	view = gedit_tab_get_view (tab);
 	doc = gedit_tab_get_document (tab);
@@ -3204,7 +3229,6 @@ notebook_tab_removed (GeditNotebook *notebook,
 {
 	GeditView     *view;
 	GeditDocument *doc;
-	GtkAction     *action;
 
 	gedit_debug (DEBUG_WINDOW);
 
@@ -3302,27 +3326,12 @@ notebook_tab_removed (GeditNotebook *notebook,
 		}
 	}
 
-	/* Set sensitivity */
+	update_sensitivity (window);
+
 	if (window->priv->num_tabs == 0)
 	{
-		if (gtk_action_group_get_sensitive (window->priv->action_group))
-			gtk_action_group_set_sensitive (window->priv->action_group,
-							FALSE);
-
-		action = gtk_action_group_get_action (window->priv->action_group,
-						      "ViewHighlightMode");
-		gtk_action_set_sensitive (action, FALSE);
-
 		gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
 							 window);
-	}
-
-	if (window->priv->num_tabs <= 1)
-	{
-		action = gtk_action_group_get_action (window->priv->action_group,
-						     "DocumentsMoveToNewWindow");
-		gtk_action_set_sensitive (action,
-					  FALSE);
 	}
 
 	update_window_state (window);
@@ -3913,6 +3922,8 @@ gedit_window_init (GeditWindow *window)
 	 * This needs to be done after plugins activatation */
 	init_panels_visibility (window);
 
+	update_sensitivity (window);
+
 	gedit_debug_message (DEBUG_WINDOW, "END");
 }
 
@@ -3995,6 +4006,11 @@ gedit_window_create_tab (GeditWindow *window,
 				-1,
 				jump_to);
 
+	if (!GTK_WIDGET_VISIBLE (window))
+	{
+		gtk_window_present (GTK_WINDOW (window));
+	}
+
 	return tab;
 }
 
@@ -4040,7 +4056,13 @@ gedit_window_create_tab_from_uri (GeditWindow         *window,
 				GEDIT_TAB (tab),
 				-1,
 				jump_to);
-				
+
+
+	if (!GTK_WIDGET_VISIBLE (window))
+	{
+		gtk_window_present (GTK_WINDOW (window));
+	}
+
 	return GEDIT_TAB (tab);
 }				  
 
@@ -4470,8 +4492,7 @@ _gedit_window_fullscreen (GeditWindow *window)
 	g_signal_connect (window->priv->notebook, "notify::show-tabs",
 			  G_CALLBACK (hide_notebook_tabs_on_fullscreen), window);
 	
-	gtk_widget_hide (gtk_ui_manager_get_widget (window->priv->manager,
-			 "/MenuBar"));
+	gtk_widget_hide (window->priv->menubar);
 	
 	g_signal_handlers_block_by_func (window->priv->toolbar,
 					 toolbar_visibility_changed,
@@ -4504,7 +4525,7 @@ _gedit_window_unfullscreen (GeditWindow *window)
 					      hide_notebook_tabs_on_fullscreen,
 					      window);
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->priv->notebook), TRUE);
-	gtk_widget_show (gtk_ui_manager_get_widget (window->priv->manager, "/MenuBar"));
+	gtk_widget_show (window->priv->menubar);
 	
 	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewToolbar");
@@ -4632,3 +4653,8 @@ gedit_window_get_tab_from_uri (GeditWindow *window,
 	return tab;
 }
 
+GtkWidget *
+_gedit_window_get_menu_bar (GeditWindow *window)
+{
+	return window->priv->menubar;
+}

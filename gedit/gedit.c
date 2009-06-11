@@ -71,6 +71,10 @@
 #undef SAVE_DATADIR
 #endif
 
+#ifdef PLATFORM_OSX
+#include <ige-mac-dock.h>
+#endif
+
 static guint32 startup_timestamp = 0;
 
 #ifndef G_OS_WIN32
@@ -547,6 +551,9 @@ main (int argc, char *argv[])
 	GError *error = NULL;
 	gchar *dir;
 	gchar *icon_dir;
+
+	/* Init type system as soon as possible */
+	g_type_init ();
 
 	/* Init glib threads asap */
 	g_thread_init (NULL);

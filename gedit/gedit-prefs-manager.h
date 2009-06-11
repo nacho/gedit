@@ -145,8 +145,14 @@
 /* Fallback default values. Keep in sync with gedit.schemas */
 
 #define GPM_DEFAULT_USE_DEFAULT_FONT 	1 /* TRUE */
+
+#ifndef PLATFORM_OSX
 #define GPM_DEFAULT_EDITOR_FONT 	(const gchar*) "Monospace 12"
 #define GPM_DEFAULT_SYSTEM_FONT 	(const gchar*) "Monospace 10"
+#else
+#define GPM_DEFAULT_EDITOR_FONT		(const gchar*) "Monaco 12"
+#define GPM_DEFAULT_SYSTEM_FONT		(const gchar*) "Monaco 12"
+#endif
 
 #define GPM_DEFAULT_CREATE_BACKUP_COPY	1 /* TRUE */
 #define GPM_DEFAULT_BACKUP_COPY_EXTENSION (const gchar*) "~"
@@ -180,7 +186,12 @@
 #define GPM_DEFAULT_PRINT_WRAP_MODE	"GTK_WRAP_WORD"
 #define GPM_DEFAULT_PRINT_LINE_NUMBERS	0 /* No numbers */
 
+#ifndef PLATFORM_OSX
 #define GPM_DEFAULT_PRINT_FONT_BODY 	(const gchar*) "Monospace 9"
+#else
+#define GPM_DEFAULT_PRINT_FONT_BODY	(const gchar*) "Monaco 10"
+#endif
+
 #define GPM_DEFAULT_PRINT_FONT_HEADER	(const gchar*) "Sans 11"
 #define GPM_DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Sans 8"
 

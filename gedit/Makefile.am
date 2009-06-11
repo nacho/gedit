@@ -1,6 +1,10 @@
 ## Process this file with automake to produce Makefile.in
 SUBDIRS = dialogs smclient
 
+if PLATFORM_OSX
+SUBDIRS += osx
+endif
+
 bin_PROGRAMS = gedit
 
 noinst_LTLIBRARIES = libgedit.la
@@ -10,6 +14,7 @@ INCLUDES =								\
 	-I$(srcdir)							\
 	-I$(srcdir)/smclient						\
 	$(GEDIT_CFLAGS)							\
+	$(OSX_CFLAGS)							\
 	$(WARN_CFLAGS)							\
 	$(DISABLE_DEPRECATED_CFLAGS)					\
 	-DDATADIR=\""$(datadir)"\"					\
@@ -18,16 +23,12 @@ INCLUDES =								\
 gedit_SOURCES = \
 	gedit.c
 
-gedit_LDADD = libgedit.la $(GEDIT_LIBS) $(EGG_SMCLIENT_LIBS)
+gedit_LDADD = libgedit.la $(GEDIT_LIBS) $(OSX_LIBS) $(EGG_SMCLIENT_LIBS)
  
 if PLATFORM_WIN32
 gedit_LDFLAGS = -Wl,--export-all-symbols -mwindows -Wl,--out-implib,libgedit-$(GEDIT_API_VERSION).a
 else
 gedit_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
-endif
-
-if PLATFORM_OSX
-gedit_LDFLAGS += -framework Carbon
 endif
 
 libgedit_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
@@ -38,6 +39,12 @@ libgedit_la_LIBADD = \
 
 # GEDIT_LIBS must be the last to ensure correct order on some platforms
 libgedit_la_LIBADD += $(GEDIT_LIBS)
+
+if PLATFORM_OSX
+gedit_LDFLAGS += -framework Carbon
+
+libgedit_la_LIBADD += osx/libosx.la
+endif
 
 BUILT_SOURCES = 			\
 	gedit-enum-types.c		\

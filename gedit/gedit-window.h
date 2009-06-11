@@ -190,6 +190,8 @@ void		 _gedit_recent_add			(GeditWindow	     *window,
 void		 _gedit_recent_remove			(GeditWindow         *window,
 							 const gchar         *uri);
 
+GtkWidget 	*_gedit_window_get_menu_bar		(GeditWindow         *window);
+
 G_END_DECLS
 
 #endif  /* __GEDIT_WINDOW_H__  */

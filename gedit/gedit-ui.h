@@ -57,6 +57,11 @@ static const GtkActionEntry gedit_always_sensitive_menu_entries[] =
 	  N_("Create a new document"), G_CALLBACK (_gedit_cmd_file_new) },
 	{ "FileOpen", GTK_STOCK_OPEN, N_("_Open..."), "<control>O",
 	  N_("Open a file"), G_CALLBACK (_gedit_cmd_file_open) },
+
+#ifdef PLATFORM_OSX
+	{ "FileClose", GTK_STOCK_CLOSE, NULL, "<control>W",
+	  N_("Close the current file"), G_CALLBACK (_gedit_cmd_file_close) },
+#endif
 	
 	/* Edit menu */
 	{ "EditPreferences", GTK_STOCK_PREFERENCES, N_("Pr_eferences"), NULL,
@@ -91,9 +96,10 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Print preview"), G_CALLBACK (_gedit_cmd_file_print_preview) },
 	 { "FilePrint", GTK_STOCK_PRINT, N_("_Print..."), "<control>P",
 	  N_("Print the current page"), G_CALLBACK (_gedit_cmd_file_print) },
+#ifndef PLATFORM_OSX
 	{ "FileClose", GTK_STOCK_CLOSE, NULL, "<control>W",
 	  N_("Close the current file"), G_CALLBACK (_gedit_cmd_file_close) },
-
+#endif
 	/* Edit menu */
 	{ "EditUndo", GTK_STOCK_UNDO, NULL, "<control>Z",
 	  N_("Undo the last action"), G_CALLBACK (_gedit_cmd_edit_undo) },
@@ -120,8 +126,13 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Search forwards for the same text"), G_CALLBACK (_gedit_cmd_search_find_next) },
 	{ "SearchFindPrevious", NULL, N_("Find Pre_vious"), "<shift><control>G",
 	  N_("Search backwards for the same text"), G_CALLBACK (_gedit_cmd_search_find_prev) },
+#ifndef PLATFORM_OSX
 	{ "SearchReplace", GTK_STOCK_FIND_AND_REPLACE, N_("_Replace..."), "<control>H",
 	  N_("Search for and replace text"), G_CALLBACK (_gedit_cmd_search_replace) },
+#else
+	{ "SearchReplace", GTK_STOCK_FIND_AND_REPLACE, N_("_Replace..."), "<control><alt>F",
+	  N_("Search for and replace text"), G_CALLBACK (_gedit_cmd_search_replace) },
+#endif
 	{ "SearchClearHighlight", NULL, N_("_Clear Highlight"), "<shift><control>K",
 	  N_("Clear highlighting of search matches"), G_CALLBACK (_gedit_cmd_search_clear_highlight) },
 	{ "SearchGoToLine", GTK_STOCK_JUMP_TO, N_("Go to _Line..."), "<control>I",

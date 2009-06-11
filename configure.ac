@@ -102,7 +102,21 @@ AM_CONDITIONAL(PLATFORM_OSX, test "$platform_osx" = "yes")
 
 if test "$platform_osx" = "yes"; then
 	AC_DEFINE([PLATFORM_OSX],[1],[Defined if platform is Mac OSX])
+
+	PKG_CHECK_MODULES(OSX, ige-mac-integration)
+
+	AC_SUBST(OSX_CFLAGS)
+	AC_SUBST(OSX_LIBS)
+
+	DEFAULT_FONT="Monaco 12"
+	DEFAULT_PRINT_FONT="Monaco 10"
+else
+	DEFAULT_FONT="Monospace 12"
+	DEFAULT_PRINT_FONT="Monospace 9"
 fi
+
+AC_SUBST(DEFAULT_FONT)
+AC_SUBST(DEFAULT_PRINT_FONT)
 
 dnl ===============================================================
 dnl Expanded dirs
@@ -463,6 +477,7 @@ docs/Makefile
 docs/reference/Makefile
 gedit/dialogs/Makefile
 gedit/smclient/Makefile
+gedit/osx/Makefile
 gedit/Makefile
 help/Makefile
 pixmaps/Makefile

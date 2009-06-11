@@ -78,6 +78,7 @@ struct _GeditWindowPrivate
 	guint           documents_list_menu_ui_id;
 	GtkWidget      *toolbar;
 	GtkWidget      *toolbar_recent_menu;
+	GtkWidget      *menubar;
 	GeditToolbarSetting toolbar_style;
 
 	/* recent files */
