@@ -232,7 +232,8 @@ libgedit_la_SOURCES += sexy-icon-entry.c sexy-icon-entry.h
 endif
 
 if BUILD_MESSAGE_AREA
-libgedit_la_SOURCES += gedit-message-area.h gedit-message-area.c
+libgedit_la_SOURCES += gedit-message-area.c
+INST_H_FILES += gedit-message-area.h
 endif
 
 -include $(top_srcdir)/git.mk
