@@ -33,6 +33,7 @@ endif
 EXTRA_DIST = 				\
 	$(desktop_in_files)		\
 	$(schemas_in_files)		\
+	gedit.schemas.in.in		\
 	$(man_MANS)			\
 	gedit.pc.in			\
 	gedit-bugreport.sh.in

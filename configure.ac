@@ -50,12 +50,17 @@ AC_CHECK_FUNCS(fsync)
 dnl make sure we keep ACLOCAL_FLAGS around for maintainer builds to work
 AC_SUBST(ACLOCAL_AMFLAGS, "$ACLOCAL_FLAGS -I m4")
 
+dnl active plugins for gedit.schemas
+ACTIVE_PLUGINS="docinfo,modelines,filebrowser,spell,time"
+AC_SUBST(ACTIVE_PLUGINS)
+
 dnl check for win32 platform
 AC_MSG_CHECKING([for Win32 platform])
 case "$host" in
   *-*-mingw*|*-*-cygwin*)
     platform_win32=yes
     AC_CHECK_TOOL(WINDRES, windres)
+    ACTIVE_PLUGINS += ",checkupdate"
     ;;
   *)
     platform_win32=no
@@ -81,6 +86,7 @@ AC_MSG_CHECKING([for Mac OS X platform])
 case "$host" in
   *-*-darwin*)
     platform_osx=yes
+    ACTIVE_PLUGINS += ",checkupdate"
     ;;
   *)
     platform_osx=no
@@ -124,6 +130,35 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
 
 AM_GLIB_GNU_GETTEXT
 
+dnl ================================================================
+dnl check update plugin
+dnl ================================================================
+
+AC_ARG_ENABLE([updater],
+	AS_HELP_STRING([--disable-updater],[Disable check update plugin (default: enabled)]),
+	[enable_updater=$enableval],
+	[enable_updater=yes])
+
+if test "x$enable_updater" != "xno"; then
+	PKG_CHECK_MODULES(LIBSOUP, \
+		libsoup-2.4,
+		have_libsoup=yes,
+		have_libsoup=no)
+	
+	if test x"have_libsoup" = "xyes"; then
+		if test "x$platform_win32" = "xyes"; then
+			enable_updater=yes
+		elif test "x$platform_osx" = "xyes"; then
+			enable_updater=yes
+		else
+			enable_updater=no
+		fi
+	else
+		enable_updater=no
+	fi
+fi
+
+AM_CONDITIONAL(ENABLE_UPDATER, test x"$enable_updater" = "xyes")
 
 dnl ================================================================
 dnl spell plugins checks: enchant and iso-codes
@@ -424,6 +459,7 @@ Makefile
 data/gedit.desktop.in
 data/gedit-bugreport.sh
 data/gedit.pc
+data/gedit.schemas.in
 data/Makefile
 docs/Makefile
 docs/reference/Makefile
@@ -438,6 +474,7 @@ plugin-loaders/python/Makefile
 plugin-loaders/python/bindings/Makefile
 plugins/Makefile
 plugins/changecase/Makefile
+plugins/checkupdate/Makefile
 plugins/docinfo/Makefile
 plugins/externaltools/data/Makefile
 plugins/externaltools/Makefile

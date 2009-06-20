@@ -25,5 +25,9 @@ DIST_SUBDIRS += externaltools pythonconsole snippets quickopen
 SUBDIRS      += externaltools pythonconsole snippets quickopen
 endif
 
+if ENABLE_UPDATER
+DIST_SUBDIRS += checkupdate
+SUBDIRS      += checkupdate
+endif
 
 -include $(top_srcdir)/git.mk
