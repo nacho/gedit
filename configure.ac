@@ -60,7 +60,7 @@ case "$host" in
   *-*-mingw*|*-*-cygwin*)
     platform_win32=yes
     AC_CHECK_TOOL(WINDRES, windres)
-    ACTIVE_PLUGINS += ",checkupdate"
+    ACTIVE_PLUGINS="${ACTIVE_PLUGINS},checkupdate"
     ;;
   *)
     platform_win32=no
@@ -86,7 +86,7 @@ AC_MSG_CHECKING([for Mac OS X platform])
 case "$host" in
   *-*-darwin*)
     platform_osx=yes
-    ACTIVE_PLUGINS += ",checkupdate"
+    ACTIVE_PLUGINS="${ACTIVE_PLUGINS},checkupdate"
     ;;
   *)
     platform_osx=no
@@ -145,7 +145,7 @@ if test "x$enable_updater" != "xno"; then
 		have_libsoup=yes,
 		have_libsoup=no)
 	
-	if test x"have_libsoup" = "xyes"; then
+	if test "x$have_libsoup" = "xyes"; then
 		if test "x$platform_win32" = "xyes"; then
 			enable_updater=yes
 		elif test "x$platform_osx" = "xyes"; then

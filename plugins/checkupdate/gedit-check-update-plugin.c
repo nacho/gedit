@@ -214,7 +214,6 @@ static GtkWidget *
 create_infobar (GeditWindow *window)
 {
 	GtkWidget *infobar;
-	GtkWidget *button;
 
 #if !GTK_CHECK_VERSION (2, 17, 1)
 	infobar = gedit_message_area_new ();
@@ -227,6 +226,8 @@ create_infobar (GeditWindow *window)
 				       GTK_STOCK_CANCEL,
 				       GTK_RESPONSE_CANCEL);
 #else
+	GtkWidget *button;
+
 	infobar = gtk_info_bar_new ();
 	
 	button = gedit_gtk_button_new_with_stock_icon (_("_Download"),
