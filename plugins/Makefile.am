@@ -1,9 +1,14 @@
 DIST_SUBDIRS =		\
 	changecase 	\
+	checkupdate	\
 	docinfo 	\
+	externaltools	\
 	filebrowser 	\
 	indent 		\
 	modelines	\
+	pythonconsole	\
+	quickopen	\
+	snippets	\
 	sort 		\
 	spell 		\
 	taglist 	\
@@ -17,16 +22,17 @@ SUBDIRS = 		\
 	modelines	\
 	sort		\
 	taglist		\
-	time		\
-	$(SPELL_PLUGIN_DIR)
+	time
 
 if ENABLE_PYTHON
-DIST_SUBDIRS += externaltools pythonconsole snippets quickopen
 SUBDIRS      += externaltools pythonconsole snippets quickopen
 endif
 
+if ENABLE_ENCHANT
+SUBDIRS      += spell
+endif
+
 if ENABLE_UPDATER
-DIST_SUBDIRS += checkupdate
 SUBDIRS      += checkupdate
 endif
 

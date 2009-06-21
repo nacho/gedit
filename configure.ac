@@ -200,24 +200,13 @@ if test "x$enable_enchant" = "xyes" ; then
 		else
 			AC_MSG_ERROR([iso-codes is required to build the spell plugin. Use --disable-spell to build without spell plugin.])
 		fi
-	
-		enable_enchant=yes
-		ENCHANT_CFLAGS="${ENCHANT_CFLAGS}"
-		ENCHANT_LIBS="${ENCHANT_LIBS}"
-		SPELL_PLUGIN_DIR="spell"
 	else
+		enable_enchant=no
 		AC_MSG_ERROR([Enchant library not found or too old. Use --disable-spell to build without spell plugin.])
 	fi
-else
-	enable_enchant=no
-	ENCHANT_CFLAGS=
-	ENCHANT_LIBS=
-	SPELL_PLUGIN_DIR=
 fi
 
-AC_SUBST(ENCHANT_CFLAGS)
-AC_SUBST(ENCHANT_LIBS)
-AC_SUBST(SPELL_PLUGIN_DIR)
+AM_CONDITIONAL(ENABLE_ENCHANT, test x"$enable_enchant" = "xyes")
 
 dnl ================================================================
 dnl libsocket checks - needed for bacon-connection on solaris.
