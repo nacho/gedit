@@ -1442,11 +1442,6 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 				      gedit_menu_entries,
 				      G_N_ELEMENTS (gedit_menu_entries),
 				      window);
-	gtk_action_group_add_toggle_actions (action_group,
-					     gedit_toggle_menu_entries,
-					     G_N_ELEMENTS (gedit_toggle_menu_entries),
-					     window);
-
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	g_object_unref (action_group);
 	window->priv->action_group = action_group;
@@ -1477,6 +1472,17 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	g_object_unref (action_group);
 	window->priv->quit_action_group = action_group;
+
+	action_group = gtk_action_group_new ("GeditWindowPanesActions");
+	gtk_action_group_set_translation_domain (action_group, NULL);
+	gtk_action_group_add_toggle_actions (action_group,
+					     gedit_panes_toggle_menu_entries,
+					     G_N_ELEMENTS (gedit_panes_toggle_menu_entries),
+					     window);
+
+	gtk_ui_manager_insert_action_group (manager, action_group, 0);
+	g_object_unref (action_group);
+	window->priv->panes_action_group = action_group;
 
 	/* now load the UI definition */
 	ui_file = gedit_dirs_get_ui_file (GEDIT_UIFILE);
@@ -3484,7 +3490,7 @@ side_panel_visibility_changed (GtkWidget   *side_panel,
 	if (gedit_prefs_manager_side_pane_visible_can_set ())
 		gedit_prefs_manager_set_side_pane_visible (visible);
 
-	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
+	action = gtk_action_group_get_action (window->priv->panes_action_group,
 	                                      "ViewSidePane");
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
@@ -3538,7 +3544,7 @@ bottom_panel_visibility_changed (GeditPanel  *bottom_panel,
 	if (gedit_prefs_manager_bottom_panel_visible_can_set ())
 		gedit_prefs_manager_set_bottom_panel_visible (visible);
 
-	action = gtk_action_group_get_action (window->priv->action_group,
+	action = gtk_action_group_get_action (window->priv->panes_action_group,
 					      "ViewBottomPane");
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
@@ -3561,7 +3567,7 @@ bottom_panel_item_removed (GeditPanel  *panel,
 
 		gtk_widget_hide (GTK_WIDGET (panel));
 
-		action = gtk_action_group_get_action (window->priv->action_group,
+		action = gtk_action_group_get_action (window->priv->panes_action_group,
 						      "ViewBottomPane");
 		gtk_action_set_sensitive (action, FALSE);
 	}
@@ -3579,7 +3585,7 @@ bottom_panel_item_added (GeditPanel  *panel,
 		GtkAction *action;
 		gboolean show;
 
-		action = gtk_action_group_get_action (window->priv->action_group,
+		action = gtk_action_group_get_action (window->priv->panes_action_group,
 						      "ViewBottomPane");
 		gtk_action_set_sensitive (action, TRUE);
 
@@ -3637,25 +3643,25 @@ init_panels_visibility (GeditWindow *window)
 
 		if (gedit_prefs_manager_get_bottom_panel_visible ())
 		{
-  			gtk_widget_show (window->priv->bottom_panel);
+			gtk_widget_show (window->priv->bottom_panel);
 		}
 	}
 	else
 	{
 		GtkAction *action;
-		action = gtk_action_group_get_action (window->priv->action_group,
+		action = gtk_action_group_get_action (window->priv->panes_action_group,
 						      "ViewBottomPane");
 		gtk_action_set_sensitive (action, FALSE);
 	}
 
 	/* start track sensitivity after the initial state is set */
-  	window->priv->bottom_panel_item_removed_handler_id =
+	window->priv->bottom_panel_item_removed_handler_id =
 		g_signal_connect (window->priv->bottom_panel,
 				  "item_removed",
 				  G_CALLBACK (bottom_panel_item_removed),
 				  window);
 
-  	g_signal_connect (window->priv->bottom_panel,
+	g_signal_connect (window->priv->bottom_panel,
 			  "item_added",
 			  G_CALLBACK (bottom_panel_item_added),
 			  window);
