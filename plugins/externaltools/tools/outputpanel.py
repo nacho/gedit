@@ -168,10 +168,10 @@ class OutputPanel(UniqueById):
             self.update_cursor_style(view, event.x, event.y)
 
         return False
-    
+
     def on_view_visibility_notify_event(self, view, event):
         if event.window == view.get_window(gtk.TEXT_WINDOW_TEXT):
-            x, y = event.window.get_pointer()
+            x, y, m = event.window.get_pointer()
             self.update_cursor_style(view, x, y)
 
         return False
