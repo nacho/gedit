@@ -482,8 +482,6 @@ _gedit_cmd_file_open (GtkAction   *action,
 		if (file != NULL)
 		{
 			default_path = g_file_get_parent (file);
-			g_return_if_fail (default_path != NULL); /* file cannot be / */
-
 			g_object_unref (file);
 		}
 	}
