@@ -693,6 +693,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 					      "FileSaveAs");
 	gtk_action_set_sensitive (action,
 				  (state_normal ||
+				   (state == GEDIT_TAB_STATE_SAVING_ERROR) ||
 				   (state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION) ||
 				   (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW)) &&
 				  !(lockdown & GEDIT_LOCKDOWN_SAVE_TO_DISK));
