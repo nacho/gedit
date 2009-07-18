@@ -223,12 +223,18 @@ create_dialog (GeditSpellCheckerDialog *dlg,
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *cell;
 	GtkTreeSelection *selection;
-	gboolean ret;
-	gchar *ui_file;
 	gchar *root_objects[] = {
 		"content",
+		"check_word_image",
+		"add_word_image",
+                "ignore_image",
+                "change_image",
+                "ignore_all_image",
+                "change_all_image",
 		NULL
 	};
+	gboolean ret;
+	gchar *ui_file;
 	
 	g_return_if_fail (dlg != NULL);
 
