@@ -175,7 +175,7 @@ class ExternalToolsWindowHelper(object):
                                          lambda action: plugin.open_dialog()),
                                         ('ExternalTools',
                                         None,
-                                        _('External Tools'),
+                                        _('External _Tools'),
                                         None,
                                         _("External tools"),
                                         None)])
