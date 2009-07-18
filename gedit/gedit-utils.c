@@ -107,6 +107,16 @@ gedit_utils_uri_has_writable_scheme (const gchar *uri)
 	return res;
 }
 
+static void
+widget_get_origin (GtkWidget *widget, gint *x, gint *y)
+
+{
+	GdkWindow *window;
+
+	window = gtk_widget_get_window (widget);
+	gdk_window_get_origin (window, x, y);
+}
+
 void
 gedit_utils_menu_position_under_widget (GtkMenu  *menu,
 					gint     *x,
@@ -114,22 +124,24 @@ gedit_utils_menu_position_under_widget (GtkMenu  *menu,
 					gboolean *push_in,
 					gpointer  user_data)
 {
-	GtkWidget *w = GTK_WIDGET (user_data);
+	GtkWidget *widget;
 	GtkRequisition requisition;
 
-	gdk_window_get_origin (w->window, x, y);
+	widget = GTK_WIDGET (user_data);
+	widget_get_origin (widget, x, y);
+
 	gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
 
-	if (gtk_widget_get_direction (w) == GTK_TEXT_DIR_RTL)
+	if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL)
 	{
-		*x += w->allocation.x + w->allocation.width - requisition.width;
+		*x += widget->allocation.x + widget->allocation.width - requisition.width;
 	}
 	else
 	{
-		*x += w->allocation.x;
+		*x += widget->allocation.x;
 	}
 
-	*y += w->allocation.y + w->allocation.height;
+	*y += widget->allocation.y + widget->allocation.height;
 
 	*push_in = TRUE;
 }
@@ -157,7 +169,7 @@ gedit_utils_menu_position_under_tree_view (GtkMenu  *menu,
 		GtkTreePath *path;
 		GdkRectangle rect;
 
-		gdk_window_get_origin (GTK_WIDGET (tree)->window, x, y);
+		widget_get_origin (GTK_WIDGET (tree), x, y);
 			
 		path = gtk_tree_model_get_path (model, &iter);
 		gtk_tree_view_get_cell_area (tree, path,
@@ -891,7 +903,7 @@ gedit_utils_get_window_workspace (GtkWindow *gtkwindow)
 	g_return_val_if_fail (GTK_IS_WINDOW (gtkwindow), 0);
 	g_return_val_if_fail (GTK_WIDGET_REALIZED (GTK_WIDGET (gtkwindow)), 0);
 
-	window = GTK_WIDGET (gtkwindow)->window;
+	window = gtk_widget_get_window (GTK_WIDGET (gtkwindow));
 	display = gdk_drawable_get_display (window);
 
 	gdk_error_trap_push ();
