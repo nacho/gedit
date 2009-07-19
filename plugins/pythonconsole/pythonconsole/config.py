@@ -38,7 +38,7 @@ GCONF_KEY_ERROR_COLOR = GCONF_KEY_BASE + '/error-color'
 DEFAULT_COMMAND_COLOR = '#314e6c' # Blue Shadow
 DEFAULT_ERROR_COLOR = '#990000' # Accent Red Dark
 
-class PythonConsoleConfig (object):
+class PythonConsoleConfig(object):
 
     def __init__(self):
         pass
@@ -69,7 +69,7 @@ class PythonConsoleConfig (object):
         v.set_string(value)
         gconf.client_get_default().set(key, v)
 
-class PythonConsoleConfigDialog (object):
+class PythonConsoleConfigDialog(object):
 
     def __init__(self, datadir):
         object.__init__(self)
@@ -118,3 +118,4 @@ class PythonConsoleConfigDialog (object):
     def on_colorbutton_error_color_set(self, colorbutton):
         self.config.color_error = colorbutton.get_color().to_string()
 
+# ex:et:ts=4:

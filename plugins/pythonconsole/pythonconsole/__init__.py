@@ -30,42 +30,44 @@ import gedit
 from console import PythonConsole
 from config import PythonConsoleConfigDialog
 
+PYTHON_ICON = 'gnome-mime-text-x-python'
+
 class PythonConsolePlugin(gedit.Plugin):
-	def __init__(self):
-		gedit.Plugin.__init__(self)
-		self.dlg = None
-		
-	def activate(self, window):
-		console = PythonConsole(namespace = {'__builtins__' : __builtins__,
-		                                     'gedit' : gedit,
-		                                     'window' : window})
-		console.eval('print "You can access the main window through ' \
-		             '\'window\' :\\n%s" % window', False)
-		bottom = window.get_bottom_panel()
-		image = gtk.Image()
-		image.set_from_icon_name('gnome-mime-text-x-python',
-		                         gtk.ICON_SIZE_MENU)
-		bottom.add_item(console, _('Python Console'), image)
-		window.set_data('PythonConsolePluginInfo', console)
+    def __init__(self):
+        gedit.Plugin.__init__(self)
+        self.dlg = None
 
-	def deactivate(self, window):
-		console = window.get_data("PythonConsolePluginInfo")
-		console.stop()
-		window.set_data("PythonConsolePluginInfo", None)
-		bottom = window.get_bottom_panel()
-		bottom.remove_item(console)
+    def activate(self, window):
+        console = PythonConsole(namespace = {'__builtins__' : __builtins__,
+                                             'gedit' : gedit,
+                                             'window' : window})
+        console.eval('print "You can access the main window through ' \
+                     '\'window\' :\\n%s" % window', False)
+        bottom = window.get_bottom_panel()
+        image = gtk.Image()
+        image.set_from_icon_name(PYTHON_ICON, gtk.ICON_SIZE_MENU)
+        bottom.add_item(console, _('Python Console'), image)
+        window.set_data('PythonConsolePluginInfo', console)
 
-	def is_configurable(self):
-		return True
+    def deactivate(self, window):
+        console = window.get_data("PythonConsolePluginInfo")
+        console.stop()
+        window.set_data("PythonConsolePluginInfo", None)
+        bottom = window.get_bottom_panel()
+        bottom.remove_item(console)
 
-	def create_configure_dialog(self):
-		if not self.dlg:
-			self.dlg = PythonConsoleConfigDialog(self.get_data_dir())
-		
-		dialog = self.dlg.dialog()
-		window = gedit.app_get_default().get_active_window()
-		if window:
-			dialog.set_transient_for(window)
+    def is_configurable(self):
+        return True
 
-		return dialog
+    def create_configure_dialog(self):
+        if not self.dlg:
+            self.dlg = PythonConsoleConfigDialog(self.get_data_dir())
 
+        dialog = self.dlg.dialog()
+        window = gedit.app_get_default().get_active_window()
+        if window:
+            dialog.set_transient_for(window)
+
+        return dialog
+
+# ex:et:ts=4:
