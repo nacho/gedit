@@ -780,7 +780,7 @@ get_configure_dialog (GeditTimePlugin *plugin)
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
 
 	data_dir = gedit_plugin_get_data_dir (GEDIT_PLUGIN (plugin));
-	ui_file = g_build_filename (data_dir, "time.ui", NULL);
+	ui_file = g_build_filename (data_dir, "gedit-time-setup-dialog.ui", NULL);
 	ret = gedit_utils_get_ui_objects (ui_file,
 					  root_objects,
 					  &error_widget,
@@ -939,7 +939,7 @@ get_choose_format_dialog (GtkWindow                 *parent,
 	dialog = g_new0 (ChooseFormatDialog, 1);
 
 	data_dir = gedit_plugin_get_data_dir (GEDIT_PLUGIN (plugin));
-	ui_file = g_build_filename (data_dir, "time.ui", NULL);
+	ui_file = g_build_filename (data_dir, "gedit-time-dialog.ui", NULL);
 	ret = gedit_utils_get_ui_objects (ui_file,
 					  NULL,
 					  &error_widget,

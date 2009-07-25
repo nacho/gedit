@@ -17,7 +17,9 @@ libtime_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libtime_la_LIBADD  = $(GEDIT_LIBS)
 
 uidir = $(GEDIT_PLUGINS_DATA_DIR)/time
-ui_DATA = time.ui
+ui_DATA = \
+	gedit-time-dialog.ui				\
+	gedit-time-setup-dialog.ui
 
 plugin_in_files = time.gedit-plugin.desktop.in
 
