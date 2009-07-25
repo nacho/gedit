@@ -1123,14 +1123,18 @@ gedit_utils_get_ui_objects (const gchar  *filename,
 	builder = gtk_builder_new ();
 	
 	if (root_objects != NULL)
+	{
 		gtk_builder_add_objects_from_file (builder, 
 						   filename, 
 						   root_objects, 
 						   &error);
+	}
 	else
+	{
 		gtk_builder_add_from_file (builder,
 					   filename,
 					   &error);
+	}
 
 	if (error != NULL)
 	{
@@ -1139,6 +1143,7 @@ gedit_utils_get_ui_objects (const gchar  *filename,
 						      error->message);
 		g_error_free (error);
 		g_free (filename_markup);
+		g_object_unref (builder);
 
 		return FALSE;
 	}
