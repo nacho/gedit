@@ -503,5 +503,6 @@ Configuration:
 	Spell Plugin enabled:	$enable_enchant
 "
 
-dnl uncomment this in developement releases
-cat $srcdir/message-of-doom
+if test $(( ${GEDIT_MINOR_VERSION} % 2 )) -eq 1; then
+	cat $srcdir/message-of-doom
+fi
