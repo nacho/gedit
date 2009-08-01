@@ -283,17 +283,22 @@ update_ui_real (GeditWindow  *window,
 		WindowData   *data)
 {
 	GtkTextView *view;
+	GtkTextBuffer *buffer;
+	gboolean sensitive;
 	GtkAction *action;
 
 	gedit_debug (DEBUG_PLUGINS);
 
 	view = GTK_TEXT_VIEW (gedit_window_get_active_view (window));
+	buffer = gtk_text_view_get_buffer (view);
+
+	sensitive = ((view != NULL) &&
+		     gtk_text_view_get_editable (view) &&
+		     gtk_text_buffer_get_has_selection (buffer));
 
 	action = gtk_action_group_get_action (data->action_group,
 					      "ChangeCase");
-	gtk_action_set_sensitive (action,
-				  (view != NULL) &&
-				  gtk_text_view_get_editable (view));
+	gtk_action_set_sensitive (action, sensitive);
 }
 
 static void
