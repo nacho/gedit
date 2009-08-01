@@ -37,6 +37,11 @@ from config import PythonConsoleConfig
 __all__ = ('PythonConsole', 'OutFile')
 
 class PythonConsole(gtk.ScrolledWindow):
+
+    __gsignals__ = {
+        'grab-focus' : 'override',
+    }
+
     def __init__(self, namespace = {}):
         gtk.ScrolledWindow.__init__(self)
 
@@ -80,6 +85,9 @@ class PythonConsole(gtk.ScrolledWindow):
         # Signals
         self.view.connect("key-press-event", self.__key_press_event_cb)
         buffer.connect("mark-set", self.__mark_set_cb)
+
+    def do_grab_focus(self):
+        self.view.grab_focus()
 
     def apply_preferences(self, *args):
         config = PythonConsoleConfig()
