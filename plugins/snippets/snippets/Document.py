@@ -501,10 +501,13 @@ class Document:
                 self.active_snippets.append(sn)
 
                 # Put cursor at first tab placeholder
-                keys = filter(lambda x: x >= 0, sn.placeholders.keys())
-                
+                keys = filter(lambda x: x > 0, sn.placeholders.keys())
+
                 if len(keys) == 0:
-                        buf.place_cursor(sn.begin_iter())
+                        if 0 in sn.placeholders:
+                                self.goto_placeholder(self.active_placeholder, sn.placeholders[0])
+                        else:
+                                buf.place_cursor(sn.begin_iter())
                 else:
                         self.goto_placeholder(self.active_placeholder, sn.placeholders[keys[0]])
                 
