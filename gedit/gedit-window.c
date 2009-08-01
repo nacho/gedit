@@ -3067,6 +3067,9 @@ selection_changed (GeditDocument *doc,
 				  state_normal &&
 				  editable &&
 				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
+
+	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
+						 window);
 }
 
 static void
