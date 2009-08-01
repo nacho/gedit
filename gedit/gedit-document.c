@@ -1946,15 +1946,12 @@ sync_found_tag (GeditDocument *doc,
 				 &fg_set, &fg,
 				 &bg_set, &bg);
 
-	if (fg_set)
-		g_object_set (doc->priv->found_tag,
-			      "foreground-gdk", &fg,
-			      NULL);
-
-	if (bg_set)
-		g_object_set (doc->priv->found_tag,
-			      "background-gdk", &bg,
-			      NULL);
+	g_object_set (doc->priv->found_tag,
+		      "foreground-gdk", fg_set ? &fg : NULL,
+		      NULL);
+	g_object_set (doc->priv->found_tag,
+		      "background-gdk", bg_set ? &bg : NULL,
+		      NULL);
 }
 
 static void
