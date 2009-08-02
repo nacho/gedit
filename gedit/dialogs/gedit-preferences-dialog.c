@@ -1069,9 +1069,10 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 		"adjustment1",
 		"adjustment2",
 		"adjustment3",
+		"install_scheme_image",
 		NULL
 	};
-	
+
 	gedit_debug (DEBUG_PREFS);
 
 	dlg->priv = GEDIT_PREFERENCES_DIALOG_GET_PRIVATE (dlg);
