@@ -2539,12 +2539,15 @@ set_virtual_root_from_node (GeditFileBrowserStore * model,
 
 	/* Now finally, set the virtual root, and load it up! */
 	model->priv->virtual_root = node;
+
+	/* Notify that the virtual-root has changed before loading up new nodes so that the
+	   "root_changed" signal can be emitted before any "inserted" signals */
+	g_object_notify (G_OBJECT (model), "virtual-root");
+
 	model_fill (model, NULL, &empty);
 
 	if (!NODE_LOADED (node))
 		model_load_directory (model, node);
-
-	g_object_notify (G_OBJECT (model), "virtual-root");
 }
 
 static void
