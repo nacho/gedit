@@ -134,6 +134,7 @@ struct _GeditFileBrowserWidgetPrivate
 	GtkActionGroup *action_group_single_selection;
 	GtkActionGroup *action_group_single_most_selection;
 	GtkActionGroup *action_group_sensitive;
+	GtkActionGroup *bookmark_action_group;
 
 	GSList *signal_pool;
 
@@ -226,6 +227,8 @@ static void on_action_directory_open           (GtkAction * action,
 static void on_action_filter_hidden            (GtkAction * action,
 						GeditFileBrowserWidget * obj);
 static void on_action_filter_binary            (GtkAction * action,
+						GeditFileBrowserWidget * obj);
+static void on_action_bookmark_open            (GtkAction * action,
 						GeditFileBrowserWidget * obj);
 
 GEDIT_PLUGIN_DEFINE_TYPE (GeditFileBrowserWidget, gedit_file_browser_widget,
@@ -837,6 +840,12 @@ static const GtkToggleActionEntry tree_actions_toggle[] =
 	 FALSE}
 };
 
+static const GtkActionEntry bookmark_actions[] =
+{
+	{"BookmarkOpen", GTK_STOCK_OPEN, N_("_View Folder"), NULL,
+	 N_("View folder in file manager"), G_CALLBACK (on_action_bookmark_open)}
+};
+
 static void
 create_toolbar (GeditFileBrowserWidget * obj,
 		const gchar *data_dir)
@@ -920,6 +929,15 @@ create_toolbar (GeditFileBrowserWidget * obj,
 				      obj);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	obj->priv->action_group_sensitive = action_group;
+
+	action_group = gtk_action_group_new ("FileBrowserWidgetBookmarkActionGroup");
+	gtk_action_group_set_translation_domain (action_group, NULL);
+	gtk_action_group_add_actions (action_group,
+				      bookmark_actions,
+				      G_N_ELEMENTS (bookmark_actions),
+				      obj);
+	gtk_ui_manager_insert_action_group (manager, action_group, 0);
+	obj->priv->bookmark_action_group = action_group;
 
 	action = gtk_action_group_get_action (obj->priv->action_group_sensitive,
 					      "DirectoryPrevious");
@@ -1228,6 +1246,9 @@ update_sensitivity (GeditFileBrowserWidget * obj)
 	if (GEDIT_IS_FILE_BROWSER_STORE (model)) {
 		gtk_action_group_set_sensitive (obj->priv->action_group,
 						TRUE);
+		gtk_action_group_set_sensitive (obj->priv->bookmark_action_group,
+						FALSE);
+
 		mode =
 		    gedit_file_browser_store_get_filter_mode
 		    (GEDIT_FILE_BROWSER_STORE (model));
@@ -1241,8 +1262,8 @@ update_sensitivity (GeditFileBrowserWidget * obj)
 	} else if (GEDIT_IS_FILE_BOOKMARKS_STORE (model)) {
 		gtk_action_group_set_sensitive (obj->priv->action_group,
 						FALSE);
-		gtk_action_group_set_sensitive (obj->priv->action_group,
-						FALSE);
+		gtk_action_group_set_sensitive (obj->priv->bookmark_action_group,
+						TRUE);
 
 		/* Set the filter toggle to normal up state, just for visual pleasure */
 		action =
@@ -1277,11 +1298,17 @@ gedit_file_browser_widget_get_first_selected (GeditFileBrowserWidget *obj,
 }
 
 static gboolean
-popup_menu (GeditFileBrowserWidget * obj, GdkEventButton * event)
+popup_menu (GeditFileBrowserWidget * obj, GdkEventButton * event, GtkTreeModel * model)
 {
 	GtkWidget *menu;
 
-	menu = gtk_ui_manager_get_widget (obj->priv->manager, "/Popup");
+	if (GEDIT_IS_FILE_BROWSER_STORE (model))
+		menu = gtk_ui_manager_get_widget (obj->priv->manager, "/FilePopup");
+	else if (GEDIT_IS_FILE_BOOKMARKS_STORE (model))
+		menu = gtk_ui_manager_get_widget (obj->priv->manager, "/BookmarkPopup");
+	else
+		return FALSE;
+
 	g_return_val_if_fail (menu != NULL, FALSE);
 
 	if (event != NULL) {
@@ -2285,13 +2312,11 @@ gedit_file_browser_widget_history_forward (GeditFileBrowserWidget *obj)
 				  FALSE);
 }
 
-/* Callbacks */
 static void
-on_bookmark_activated (GeditFileBrowserView   *tree_view,
-		       GtkTreeIter            *iter,
-		       GeditFileBrowserWidget *obj)
+bookmark_open (GtkTreeModel           *model, 
+	       GtkTreeIter            *iter,
+	       GeditFileBrowserWidget *obj)
 {
-	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
 	gchar *uri;
 	gint flags;
 
@@ -2340,6 +2365,16 @@ on_bookmark_activated (GeditFileBrowserView   *tree_view,
 	}
 
 	g_free (uri);
+}
+
+static void
+on_bookmark_activated (GeditFileBrowserView   *tree_view,
+		       GtkTreeIter            *iter,
+		       GeditFileBrowserWidget *obj)
+{
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (tree_view));
+
+	bookmark_open (model, iter, obj);
 }
 
 static void
@@ -2599,11 +2634,7 @@ static gboolean
 on_treeview_popup_menu (GeditFileBrowserView * treeview,
 			GeditFileBrowserWidget * obj)
 {
-	if (!GEDIT_IS_FILE_BROWSER_STORE
-	    (gtk_tree_view_get_model (GTK_TREE_VIEW (treeview))))
-		return FALSE;
-
-	return popup_menu (obj, NULL);
+	return popup_menu (obj, NULL, gtk_tree_view_get_model (GTK_TREE_VIEW (treeview)));
 }
 
 static gboolean
@@ -2611,12 +2642,10 @@ on_treeview_button_press_event (GeditFileBrowserView * treeview,
 				GdkEventButton * event,
 				GeditFileBrowserWidget * obj)
 {
-	if (!GEDIT_IS_FILE_BROWSER_STORE
-	    (gtk_tree_view_get_model (GTK_TREE_VIEW (treeview))))
-		return FALSE;
-
-	if (event->type == GDK_BUTTON_PRESS && event->button == 3)
-		popup_menu (obj, event);
+	if (event->type == GDK_BUTTON_PRESS && event->button == 3) {
+		return popup_menu (obj, event,
+				   gtk_tree_view_get_model (GTK_TREE_VIEW (treeview)));
+	}
 
 	return FALSE;
 }
@@ -2986,6 +3015,20 @@ on_action_filter_binary (GtkAction * action, GeditFileBrowserWidget * obj)
 	update_filter_mode (obj, 
 	                    action, 
 	                    GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY);
+}
+
+static void
+on_action_bookmark_open (GtkAction * action, GeditFileBrowserWidget * obj)
+{
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (obj->priv->treeview));
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (obj->priv->treeview));
+	GtkTreeIter iter;
+
+	if (!GEDIT_IS_FILE_BOOKMARKS_STORE (model))
+		return;
+
+	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+		bookmark_open (model, &iter, obj);
 }
 
 // ex:ts=8:noet:

@@ -575,16 +575,21 @@ on_selection_changed_cb (GtkTreeSelection *selection,
 		sensitive);
 }
 
-#define POPUP_UI ""                          \
-"<ui>"                                       \
-"  <popup name=\"Popup\">"                   \
-"    <placeholder name=\"Popup_Opt1\">"      \
-"      <menuitem action=\"SetActiveRoot\"/>" \
-"    </placeholder>"                         \
-"    <placeholder name=\"Popup_Opt4\">"      \
-"      <menuitem action=\"OpenTerminal\"/>"  \
-"    </placeholder>"                         \
-"  </popup>"                                 \
+#define POPUP_UI ""                             \
+"<ui>"                                          \
+"  <popup name=\"FilePopup\">"                  \
+"    <placeholder name=\"FilePopup_Opt1\">"     \
+"      <menuitem action=\"SetActiveRoot\"/>"    \
+"    </placeholder>"                            \
+"    <placeholder name=\"FilePopup_Opt4\">"     \
+"      <menuitem action=\"OpenTerminal\"/>"     \
+"    </placeholder>"                            \
+"  </popup>"                                    \
+"  <popup name=\"BookmarkPopup\">"              \
+"    <placeholder name=\"BookmarkPopup_Opt1\">" \
+"      <menuitem action=\"SetActiveRoot\"/>"    \
+"    </placeholder>"                            \
+"  </popup>"                                    \
 "</ui>"
 
 static GtkActionEntry extra_actions[] = 
