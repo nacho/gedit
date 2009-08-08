@@ -69,6 +69,9 @@ G_DEFINE_TYPE(GeditNotebook, gedit_notebook, GTK_TYPE_NOTEBOOK)
 
 static void gedit_notebook_finalize (GObject *object);
 
+static gboolean gedit_notebook_change_current_page (GtkNotebook *notebook,
+						    gint         offset);
+
 static void move_current_tab_to_another_notebook  (GeditNotebook  *src,
 						   GeditNotebook  *dest,
 						   GdkEventMotion *event,
@@ -94,8 +97,11 @@ static void
 gedit_notebook_class_init (GeditNotebookClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GtkNotebookClass *notebook_class = GTK_NOTEBOOK_CLASS (klass);
 
 	object_class->finalize = gedit_notebook_finalize;
+	
+	notebook_class->change_current_page = gedit_notebook_change_current_page;
 
 	signals[TAB_ADDED] =
 		g_signal_new ("tab_added",
@@ -717,6 +723,49 @@ gedit_notebook_finalize (GObject *object)
 		g_list_free (notebook->priv->focused_pages);
 
 	G_OBJECT_CLASS (gedit_notebook_parent_class)->finalize (object);
+}
+
+/*
+ * We need to override this because when we don't show the tabs, like in
+ * fullscreen we need to have wrap around too
+ */
+static gboolean
+gedit_notebook_change_current_page (GtkNotebook *notebook,
+				    gint         offset)
+{
+	gboolean wrap_around;
+	gint current;
+	
+	current = gtk_notebook_get_current_page (notebook);
+
+	if (current != -1)
+	{
+		current = current + offset;
+		
+		g_object_get (gtk_widget_get_settings (GTK_WIDGET (notebook)),
+			      "gtk-keynav-wrap-around", &wrap_around,
+			      NULL);
+		
+		if (wrap_around)
+		{
+			if (current < 0)
+			{
+				current = gtk_notebook_get_n_pages (notebook) - 1;
+			}
+			else if (current >= gtk_notebook_get_n_pages (notebook))
+			{
+				current = 0;
+			}
+		}
+		
+		gtk_notebook_set_current_page (notebook, current);
+	}
+	else
+	{
+		gtk_widget_error_bell (GTK_WIDGET (notebook));
+	}
+
+	return TRUE;
 }
 
 static void
