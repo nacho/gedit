@@ -670,8 +670,9 @@ register_methods (GeditWindow            *window,
 	gedit_message_bus_register (bus,
 				    MESSAGE_OBJECT_PATH, "add_context_item",
 				    1,
-    				    "action", GTK_TYPE_ACTION,
-    				    "id", G_TYPE_UINT,
+				    "action", GTK_TYPE_ACTION,
+				    "path", G_TYPE_STRING,
+				    "id", G_TYPE_UINT,
 				    NULL);
 
 	gedit_message_bus_register (bus,
