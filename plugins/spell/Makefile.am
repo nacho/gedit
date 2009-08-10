@@ -37,10 +37,10 @@ uidir = $(GEDIT_PLUGINS_DATA_DIR)/spell
 ui_DATA = spell-checker.ui languages-dialog.ui
 
 gedit-spell-checker-dialog-marshal.h: gedit-spell-checker-dialog-marshal.list $(GLIB_GENMARSHAL)
-	$(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@
+	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@
 
 gedit-spell-checker-dialog-marshal.c: gedit-spell-checker-dialog-marshal.list $(GLIB_GENMARSHAL)
-	echo "#include \"gedit-spell-checker-dialog-marshal.h\"" > $@ && \
+	$(AM_V_GEN) echo "#include \"gedit-spell-checker-dialog-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_marshal >> $@
 
 plugin_in_files = spell.gedit-plugin.desktop.in
