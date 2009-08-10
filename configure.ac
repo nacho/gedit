@@ -502,6 +502,31 @@ Configuration:
 	Spell Plugin enabled:	$enable_enchant
 "
 
-if test $(( ${GEDIT_MINOR_VERSION} % 2 )) -eq 1; then
-	cat $srcdir/message-of-doom
+if expr ${GEDIT_MINOR_VERSION} % 2 > /dev/null; then
+	stable_version=`expr ${GEDIT_MINOR_VERSION} - 1`
+
+cat << EOF
+ *** IMPORTANT *** 
+
+This is an unstable version of gedit. 
+It is for test purposes only.
+
+Please, DO NOT use it in a production environment.
+It will probably crash and you will lose your data.
+
+If you are looking for a stable release of gedit, either download
+it from:
+
+  http://ftp.gnome.org/pub/gnome/sources/gedit/2.${stable_version}/
+
+Or checkout the gnome-${stable_version} branch of the gedit module from:
+
+  git://git.gnome.org/gedit
+
+Thanks,
+The gedit team
+
+ *** END OF WARNING ***
+EOF
+
 fi
