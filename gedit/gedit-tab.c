@@ -2504,6 +2504,8 @@ show_printing_message_area (GeditTab *tab, gboolean preview)
 	set_message_area (tab, area);
 }
 
+#if !GTK_CHECK_VERSION (2, 17, 4)
+
 static void
 page_setup_done_cb (GtkPageSetup *setup,
 		    GeditTab     *tab)
@@ -2545,6 +2547,8 @@ _gedit_tab_page_setup (GeditTab *tab)
 
 	/* CHECK: should we unref setup and settings? */
 }
+
+#endif
 
 static void
 gedit_tab_print_or_print_preview (GeditTab                *tab,

@@ -80,8 +80,6 @@ void		_gedit_cmd_file_revert			(GtkAction   *action,
 							 GeditWindow *window);
 void		_gedit_cmd_file_open_uri		(GtkAction   *action,
 							 GeditWindow *window);
-void		_gedit_cmd_file_page_setup		(GtkAction   *action,
-							 GeditWindow *window);
 void		_gedit_cmd_file_print_preview		(GtkAction   *action,
 							 GeditWindow *window);
 void		_gedit_cmd_file_print			(GtkAction   *action,
@@ -155,6 +153,13 @@ void		_gedit_cmd_file_close_tab 		(GeditTab    *tab,
 
 void		_gedit_cmd_file_save_documents_list	(GeditWindow *window,
 							 GList       *docs);
+
+
+#if !GTK_CHECK_VERSION (2, 17, 4)
+void		_gedit_cmd_file_page_setup		(GtkAction   *action,
+							 GeditWindow *window);
+#endif
+
 
 G_END_DECLS
 
