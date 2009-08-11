@@ -626,6 +626,17 @@ message_remove_context_item_cb (GeditMessageBus *bus,
 }
 
 static void
+message_get_view_cb (GeditMessageBus *bus,
+		     GeditMessage    *message,
+		     WindowData      *data)
+{
+	GeditFileBrowserView *view;
+	view = gedit_file_browser_widget_get_browser_view (data->widget);
+
+	gedit_message_set (message, "view", view, NULL);
+}
+
+static void
 register_methods (GeditWindow            *window,
 		  GeditFileBrowserWidget *widget)
 {
@@ -702,6 +713,12 @@ register_methods (GeditWindow            *window,
 	gedit_message_bus_register (bus, MESSAGE_OBJECT_PATH, "show_bookmarks", 0, NULL);
 	gedit_message_bus_register (bus, MESSAGE_OBJECT_PATH, "show_files", 0, NULL);
 
+	gedit_message_bus_register (bus,
+				    MESSAGE_OBJECT_PATH, "get_view",
+				    1,
+				    "view", GEDIT_TYPE_FILE_BROWSER_VIEW,
+				    NULL);
+
 	BUS_CONNECT (bus, get_root, data);
 	BUS_CONNECT (bus, set_root, data);
 	BUS_CONNECT (bus, set_emblem, data);
@@ -722,6 +739,8 @@ register_methods (GeditWindow            *window,
 	
 	BUS_CONNECT (bus, show_bookmarks, data);
 	BUS_CONNECT (bus, show_files, data);
+
+	BUS_CONNECT (bus, get_view, data);
 }
 
 static void
