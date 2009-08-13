@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-22 23:50+0200\n"
-"PO-Revision-Date: 2009-07-22 23:50+0100\n"
+"POT-Creation-Date: 2009-08-13 09:42+0200\n"
+"PO-Revision-Date: 2009-08-13 09:42+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgid "Edit text files"
 msgstr "Redigera textfiler"
 
 #: ../data/gedit.desktop.in.in.h:2
-#: ../gedit/gedit-print-job.c:755
+#: ../gedit/gedit-print-job.c:759
 msgid "Text Editor"
 msgstr "Textredigerare"
 
@@ -33,7 +33,6 @@ msgid "A custom font that will be used for the editing area. This will only take
 msgstr "Ett anpassat typsnitt som används för redigeringsytan. Detta kommer endast att ha effekt om alternativet \"Använd standardtypsnitt\" är frånslaget."
 
 #: ../data/gedit.schemas.in.in.h:2
-#: ../gedit/gedit-plugin-manager.c:804
 msgid "Active plugins"
 msgstr "Aktiva insticksmoduler"
 
@@ -549,7 +548,7 @@ msgstr "Alla filer"
 msgid "Could not remove color scheme \"%s\"."
 msgstr "Kunde inte ta bort färgschemat \"%s\"."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1086
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1087
 msgid "gedit Preferences"
 msgstr "Inställningar för gedit"
 
@@ -558,7 +557,8 @@ msgstr "Inställningar för gedit"
 #: ../plugins/docinfo/docinfo.ui.h:1
 #: ../plugins/externaltools/tools/tools.ui.h:1
 #: ../plugins/snippets/snippets/snippets.ui.h:1
-#: ../plugins/time/time.ui.h:1
+#: ../plugins/time/gedit-time-dialog.ui.h:1
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:1
 msgid "    "
 msgstr "    "
 
@@ -694,12 +694,12 @@ msgstr "_minut"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:300
 #: ../gedit/dialogs/gedit-search-dialog.ui.h:2
-#: ../gedit/gedit-window.c:1458
+#: ../gedit/gedit-window.c:1457
 msgid "Replace"
 msgstr "Ersätt"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:311
-#: ../gedit/gedit-window.c:1456
+#: ../gedit/gedit-window.c:1455
 msgid "Find"
 msgstr "Sök"
 
@@ -922,13 +922,13 @@ msgstr "Osparat dokument %d"
 
 #: ../gedit/gedit-documents-panel.c:89
 #: ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:2175
-#: ../gedit/gedit-window.c:2180
+#: ../gedit/gedit-window.c:2191
+#: ../gedit/gedit-window.c:2196
 msgid "Read Only"
 msgstr "Skrivskyddad"
 
 #: ../gedit/gedit-documents-panel.c:774
-#: ../gedit/gedit-window.c:3532
+#: ../gedit/gedit-window.c:3553
 msgid "Documents"
 msgstr "Dokument"
 
@@ -1360,7 +1360,7 @@ msgstr "_Läs om"
 msgid "Could not obtain backup filename"
 msgstr "Kunde inte få tag på filnamn för säkerhetskopia"
 
-#: ../gedit/gedit-notebook.c:854
+#: ../gedit/gedit-notebook.c:903
 msgid "Close document"
 msgstr "Stäng dokument"
 
@@ -1402,11 +1402,15 @@ msgstr "Ak_tivera alla"
 msgid "_Deactivate All"
 msgstr "_Inaktivera alla"
 
-#: ../gedit/gedit-plugin-manager.c:833
+#: ../gedit/gedit-plugin-manager.c:800
+msgid "Active _Plugins:"
+msgstr "Aktiva ins_ticksmoduler:"
+
+#: ../gedit/gedit-plugin-manager.c:825
 msgid "_About Plugin"
 msgstr "_Om insticksmodul"
 
-#: ../gedit/gedit-plugin-manager.c:837
+#: ../gedit/gedit-plugin-manager.c:829
 msgid "C_onfigure Plugin"
 msgstr "K_onfigurera insticksmodul"
 
@@ -1428,7 +1432,7 @@ msgstr "Fil: %s"
 msgid "Page %N of %Q"
 msgstr "Sida %N av %Q"
 
-#: ../gedit/gedit-print-job.c:805
+#: ../gedit/gedit-print-job.c:809
 msgid "Preparing..."
 msgstr "Förbereder..."
 
@@ -1730,206 +1734,206 @@ msgstr "Spara den aktuella filen med ett annat namn"
 msgid "Revert to a saved version of the file"
 msgstr "Återgå till en sparad version av filen"
 
-#: ../gedit/gedit-ui.h:86
+#: ../gedit/gedit-ui.h:87
 msgid "Page Set_up..."
 msgstr "Sid_konfiguration..."
 
-#: ../gedit/gedit-ui.h:87
+#: ../gedit/gedit-ui.h:88
 msgid "Setup the page settings"
 msgstr "Konfigurera sidinställningarna"
 
-#: ../gedit/gedit-ui.h:88
+#: ../gedit/gedit-ui.h:90
 msgid "Print Previe_w"
 msgstr "Förhands_granska utskrift"
 
-#: ../gedit/gedit-ui.h:89
+#: ../gedit/gedit-ui.h:91
 msgid "Print preview"
 msgstr "Förhandsgranskning"
 
-#: ../gedit/gedit-ui.h:90
+#: ../gedit/gedit-ui.h:92
 msgid "_Print..."
 msgstr "Skriv _ut..."
 
-#: ../gedit/gedit-ui.h:91
+#: ../gedit/gedit-ui.h:93
 msgid "Print the current page"
 msgstr "Skriv ut aktuell sida"
 
-#: ../gedit/gedit-ui.h:93
+#: ../gedit/gedit-ui.h:95
 msgid "Close the current file"
 msgstr "Stäng den aktiva filen"
 
-#: ../gedit/gedit-ui.h:97
+#: ../gedit/gedit-ui.h:99
 msgid "Undo the last action"
 msgstr "Ångra den senaste åtgärden"
 
-#: ../gedit/gedit-ui.h:99
+#: ../gedit/gedit-ui.h:101
 msgid "Redo the last undone action"
 msgstr "Gör om den senaste ångrade åtgärden"
 
-#: ../gedit/gedit-ui.h:101
+#: ../gedit/gedit-ui.h:103
 msgid "Cut the selection"
 msgstr "Klipp ut markeringen"
 
-#: ../gedit/gedit-ui.h:103
+#: ../gedit/gedit-ui.h:105
 msgid "Copy the selection"
 msgstr "Kopiera markeringen"
 
-#: ../gedit/gedit-ui.h:105
+#: ../gedit/gedit-ui.h:107
 msgid "Paste the clipboard"
 msgstr "Klistra in från urklipp"
 
-#: ../gedit/gedit-ui.h:107
+#: ../gedit/gedit-ui.h:109
 msgid "Delete the selected text"
 msgstr "Ta bort den markerade texten"
 
-#: ../gedit/gedit-ui.h:108
+#: ../gedit/gedit-ui.h:110
 msgid "Select _All"
 msgstr "Markera _allt"
 
-#: ../gedit/gedit-ui.h:109
+#: ../gedit/gedit-ui.h:111
 msgid "Select the entire document"
 msgstr "Markera hela dokumentet"
 
 #. View menu
-#: ../gedit/gedit-ui.h:112
+#: ../gedit/gedit-ui.h:114
 msgid "_Highlight Mode"
 msgstr "_Färgmarkeringsläge"
 
 #. Search menu
-#: ../gedit/gedit-ui.h:115
+#: ../gedit/gedit-ui.h:117
 msgid "_Find..."
 msgstr "_Sök..."
 
-#: ../gedit/gedit-ui.h:116
+#: ../gedit/gedit-ui.h:118
 msgid "Search for text"
 msgstr "Sök efter text"
 
-#: ../gedit/gedit-ui.h:117
+#: ../gedit/gedit-ui.h:119
 msgid "Find Ne_xt"
 msgstr "Sök n_ästa"
 
-#: ../gedit/gedit-ui.h:118
+#: ../gedit/gedit-ui.h:120
 msgid "Search forwards for the same text"
 msgstr "Sök framlänges efter samma text"
 
-#: ../gedit/gedit-ui.h:119
+#: ../gedit/gedit-ui.h:121
 msgid "Find Pre_vious"
 msgstr "Sök före_gående"
 
-#: ../gedit/gedit-ui.h:120
+#: ../gedit/gedit-ui.h:122
 msgid "Search backwards for the same text"
 msgstr "Sök baklänges efter samma text"
 
-#: ../gedit/gedit-ui.h:121
+#: ../gedit/gedit-ui.h:123
 msgid "_Replace..."
 msgstr "_Ersätt..."
 
-#: ../gedit/gedit-ui.h:122
+#: ../gedit/gedit-ui.h:124
 msgid "Search for and replace text"
 msgstr "Sök efter och ersätt text"
 
-#: ../gedit/gedit-ui.h:123
+#: ../gedit/gedit-ui.h:125
 msgid "_Clear Highlight"
 msgstr "_Rensa färgmarkeringsläge"
 
-#: ../gedit/gedit-ui.h:124
+#: ../gedit/gedit-ui.h:126
 msgid "Clear highlighting of search matches"
 msgstr "Rensa färgmarkering på sökträffar"
 
-#: ../gedit/gedit-ui.h:125
+#: ../gedit/gedit-ui.h:127
 msgid "Go to _Line..."
 msgstr "Gå till _rad..."
 
-#: ../gedit/gedit-ui.h:126
+#: ../gedit/gedit-ui.h:128
 msgid "Go to a specific line"
 msgstr "Gå till en specifik rad"
 
-#: ../gedit/gedit-ui.h:127
+#: ../gedit/gedit-ui.h:129
 msgid "_Incremental Search..."
 msgstr "_Inkrementiell sökning..."
 
-#: ../gedit/gedit-ui.h:128
+#: ../gedit/gedit-ui.h:130
 msgid "Incrementally search for text"
 msgstr "Interaktiv sökning efter text"
 
 #. Documents menu
-#: ../gedit/gedit-ui.h:131
+#: ../gedit/gedit-ui.h:133
 msgid "_Save All"
 msgstr "_Spara alla"
 
-#: ../gedit/gedit-ui.h:132
+#: ../gedit/gedit-ui.h:134
 msgid "Save all open files"
 msgstr "Spara alla öppna filer"
 
-#: ../gedit/gedit-ui.h:133
+#: ../gedit/gedit-ui.h:135
 msgid "_Close All"
 msgstr "S_täng alla"
 
-#: ../gedit/gedit-ui.h:134
+#: ../gedit/gedit-ui.h:136
 msgid "Close all open files"
 msgstr "Stäng alla öppna filer"
 
-#: ../gedit/gedit-ui.h:135
+#: ../gedit/gedit-ui.h:137
 msgid "_Previous Document"
 msgstr "_Föregående dokument"
 
-#: ../gedit/gedit-ui.h:136
+#: ../gedit/gedit-ui.h:138
 msgid "Activate previous document"
 msgstr "Aktivera föregående dokument"
 
-#: ../gedit/gedit-ui.h:137
+#: ../gedit/gedit-ui.h:139
 msgid "_Next Document"
 msgstr "_Nästa dokument"
 
-#: ../gedit/gedit-ui.h:138
+#: ../gedit/gedit-ui.h:140
 msgid "Activate next document"
 msgstr "Aktivera nästa dokument"
 
-#: ../gedit/gedit-ui.h:139
+#: ../gedit/gedit-ui.h:141
 msgid "_Move to New Window"
 msgstr "_Flytta till nytt fönster"
 
-#: ../gedit/gedit-ui.h:140
+#: ../gedit/gedit-ui.h:142
 msgid "Move the current document to a new window"
 msgstr "Flytta det aktuella dokument till ett nytt fönster"
 
-#: ../gedit/gedit-ui.h:147
+#: ../gedit/gedit-ui.h:149
 msgid "Quit the program"
 msgstr "Avsluta programmet"
 
-#: ../gedit/gedit-ui.h:152
+#: ../gedit/gedit-ui.h:154
 msgid "_Toolbar"
 msgstr "_Verktygsrad"
 
-#: ../gedit/gedit-ui.h:153
+#: ../gedit/gedit-ui.h:155
 msgid "Show or hide the toolbar in the current window"
 msgstr "Visa eller dölj verktygsraden i det aktuella fönstret"
 
-#: ../gedit/gedit-ui.h:155
+#: ../gedit/gedit-ui.h:157
 msgid "_Statusbar"
 msgstr "_Statusrad"
 
-#: ../gedit/gedit-ui.h:156
+#: ../gedit/gedit-ui.h:158
 msgid "Show or hide the statusbar in the current window"
 msgstr "Visa eller dölj statusraden i det aktuella fönstret"
 
-#: ../gedit/gedit-ui.h:159
+#: ../gedit/gedit-ui.h:161
 msgid "Edit text at fullscreen"
 msgstr "Redigera text i helskärmsläge"
 
-#: ../gedit/gedit-ui.h:166
+#: ../gedit/gedit-ui.h:168
 msgid "Side _Pane"
 msgstr "Sido_panel"
 
-#: ../gedit/gedit-ui.h:167
+#: ../gedit/gedit-ui.h:169
 msgid "Show or hide the side pane in the current window"
 msgstr "Visa eller dölj sidopanelen i det aktuella fönstret"
 
-#: ../gedit/gedit-ui.h:169
+#: ../gedit/gedit-ui.h:171
 msgid "_Bottom Pane"
 msgstr "_Underpanel"
 
-#: ../gedit/gedit-ui.h:170
+#: ../gedit/gedit-ui.h:172
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Visa eller dölj underpanelen i det aktuella fönstret"
 
@@ -1937,18 +1941,18 @@ msgstr "Visa eller dölj underpanelen i det aktuella fönstret"
 msgid "Please check your installation."
 msgstr "Kontrollera din installation."
 
-#: ../gedit/gedit-utils.c:1137
+#: ../gedit/gedit-utils.c:1141
 #, c-format
 msgid "Unable to open ui file %s. Error: %s"
 msgstr "Kunde inte öppna gränssnittsfilen %s. Fel: %s"
 
-#: ../gedit/gedit-utils.c:1156
+#: ../gedit/gedit-utils.c:1161
 #, c-format
 msgid "Unable to find the object '%s' inside file %s."
 msgstr "Kunde inte hitta objektet \"%s\" inne i filen %s."
 
 #. Translators: '/ on <remote-share>'
-#: ../gedit/gedit-utils.c:1316
+#: ../gedit/gedit-utils.c:1321
 #, c-format
 msgid "/ on %s"
 msgstr "/ på %s"
@@ -1987,7 +1991,7 @@ msgstr "Använd färgmarkeringsläge för %s"
 #. Translators: "Plain Text" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
 #: ../gedit/gedit-window.c:995
-#: ../gedit/gedit-window.c:1880
+#: ../gedit/gedit-window.c:1896
 #: ../plugins/externaltools/tools/manager.py:121
 #: ../plugins/externaltools/tools/manager.py:423
 #: ../plugins/externaltools/tools/manager.py:533
@@ -2013,25 +2017,25 @@ msgstr "Öppna en nyligen använd fil"
 msgid "Open"
 msgstr "Öppna"
 
-#: ../gedit/gedit-window.c:1452
+#: ../gedit/gedit-window.c:1451
 msgid "Save"
 msgstr "Spara"
 
-#: ../gedit/gedit-window.c:1454
+#: ../gedit/gedit-window.c:1453
 msgid "Print"
 msgstr "Skriv ut"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1605
+#: ../gedit/gedit-window.c:1621
 #, c-format
 msgid "Activate '%s'"
 msgstr "Aktivera \"%s\""
 
-#: ../gedit/gedit-window.c:1858
+#: ../gedit/gedit-window.c:1874
 msgid "Use Spaces"
 msgstr "Använd blanksteg"
 
-#: ../gedit/gedit-window.c:1929
+#: ../gedit/gedit-window.c:1945
 msgid "Tab Width"
 msgstr "Tabulatorbredd"
 
@@ -2448,59 +2452,59 @@ msgstr "Filtermönstret att filtrera med i filbläddraren. Detta filter fungerar
 msgid "This value determines what files get filtered from the file browser. Valid values are: none (filter nothing), hidden (filter hidden files), binary (filter binary files) and hidden_and_binary (filter both hidden and binary files)."
 msgstr "Detta värde fastställer vilka filer som blir filtrerade från filbläddraren. Giltiga värden är: none (filtrera ingenting), hidden (filtrera dolda filer), binary (filtrera binära filer) och hidden_and_binary (filtrera både dolda och binära filer)."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:592
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:597
 msgid "_Set root to active document"
 msgstr "_Ställ in rot till aktivt dokument"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:594
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:599
 msgid "Set the root to the active document location"
 msgstr "Ställ in roten till platsen för det aktiva dokumentet"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:599
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:604
 msgid "_Open terminal here"
 msgstr "_Öppna en terminal här"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:601
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:606
 msgid "Open a terminal at the currently opened directory"
 msgstr "Öppna en terminal vid för närvarande öppnad katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:737
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:742
 msgid "File Browser"
 msgstr "Filbläddrare"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:868
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:873
 msgid "An error occurred while creating a new directory"
 msgstr "Ett fel uppstod vid skapandet av en ny katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:871
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:876
 msgid "An error occurred while creating a new file"
 msgstr "Ett fel uppstod vid skapandet av en ny fil"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:876
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:881
 msgid "An error occurred while renaming a file or directory"
 msgstr "Ett fel uppstod vid namnbyte av en fil eller katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:881
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:886
 msgid "An error occurred while deleting a file or directory"
 msgstr "Ett fel uppstod vid borttagning av en fil eller katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:886
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:891
 msgid "An error occurred while opening a directory in the file manager"
 msgstr "Ett fel uppstod vid öppnandet av en katalog i filhanteraren"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:890
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:895
 msgid "An error occurred while setting a root directory"
 msgstr "Ett fel uppstod vid inställning av en rotkatalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:894
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:899
 msgid "An error occurred while loading a directory"
 msgstr "Ett fel uppstod vid inläsning av en katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:897
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:902
 msgid "An error occurred"
 msgstr "Ett fel inträffade"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1192
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1197
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
@@ -2508,25 +2512,25 @@ msgstr ""
 "Kan inte flytta filen till papperskorgen.\n"
 "Vill du ta bort den permanent?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1196
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1201
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "Filen (%s) kan inte flyttas till papperskorgen."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1199
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1204
 msgid "The selected files cannot be moved to the trash."
 msgstr "De markerade filerna kan inte flyttas till papperskorgen."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1232
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1237
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Är du säker på att du vill ta bort \"%s\" permanent?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1235
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1240
 msgid "Are you sure you want to permanently delete the selected files?"
 msgstr "Är du säker på att du vill ta bort de markerade filerna permanent?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1238
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1243
 msgid "If you delete an item, it is permanently lost."
 msgstr "Om du tar bort ett objekt är det borta för alltid."
 
@@ -2534,168 +2538,170 @@ msgstr "Om du tar bort ett objekt är det borta för alltid."
 msgid "(Empty)"
 msgstr "(Tom)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3298
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3301
 msgid "The renamed file is currently filtered out. You need to adjust your filter settings to make the file visible"
 msgstr "Filen med det nya namnet är för närvarande bortfiltrerad. Du behöver justera dina filterinställningar för att göra filen synlig"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3536
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3539
 msgid "file"
 msgstr "fil"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3560
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3563
 msgid "The new file is currently filtered out. You need to adjust your filter settings to make the file visible"
 msgstr "Den nya filen är för närvarande bortfiltrerad. Du behöver justera dina filterinställningar för att göra filen synlig"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3588
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3591
 msgid "directory"
 msgstr "katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3608
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3611
 msgid "The new directory is currently filtered out. You need to adjust your filter settings to make the directory visible"
 msgstr "Den nya katalogen är för närvarande bortfiltrerad. Du behöver justera dina filterinställningar för att göra katalogen synlig"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:698
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:701
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:779
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:782
 msgid "_Filter"
 msgstr "_Filter"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:784
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:787
 msgid "_Move To Trash"
 msgstr "_Flytta till papperskorg"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:785
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:788
 msgid "Move selected file or folder to trash"
 msgstr "Flytta markerad fil eller mapp till papperskorgen"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:787
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:790
 msgid "_Delete"
 msgstr "_Ta bort"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:788
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:791
 msgid "Delete selected file or folder"
 msgstr "Ta bort markerad fil eller mapp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:794
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:797
 msgid "Up"
 msgstr "Upp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:795
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:798
 msgid "Open the parent folder"
 msgstr "Öppna föräldramappen"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:800
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
 msgid "_New Folder"
 msgstr "_Ny mapp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:801
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
 msgid "Add new empty folder"
 msgstr "Lägg till ny tom mapp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
 msgid "New F_ile"
 msgstr "Ny f_il"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
 msgid "Add new empty file"
 msgstr "Lägg till en ny tom fil"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:812
 msgid "_Rename"
 msgstr "_Byt namn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:810
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:813
 msgid "Rename selected file or folder"
 msgstr "Byt namn på markerad fil eller mapp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:816
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
 msgid "_Previous Location"
 msgstr "_Föregående plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:818
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
 msgid "Go to the previous visited location"
 msgstr "Gå till föregående besökt plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
 msgid "_Next Location"
 msgstr "_Nästa plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:824
 msgid "Go to the next visited location"
 msgstr "Gå till nästa besökta plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:825
 msgid "Re_fresh View"
 msgstr "Upp_datera vy"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:826
 msgid "Refresh the view"
 msgstr "Uppdatera vyn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:824
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:827
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:845
 msgid "_View Folder"
 msgstr "_Visa mapp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:825
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:828
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:846
 msgid "View folder in file manager"
 msgstr "Visa mapp i filhanterare"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
 msgid "Show _Hidden"
 msgstr "Visa _dolda"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
 msgid "Show hidden files and folders"
 msgstr "Visa dolda filer och mappar"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:838
 msgid "Show _Binary"
 msgstr "Visa _binära"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:839
 msgid "Show binary files"
 msgstr "Visa binära filer"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:944
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:953
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:974
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:962
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:971
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:992
 msgid "Previous location"
 msgstr "Föregående plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:946
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:964
 msgid "Go to previous location"
 msgstr "Gå till föregående plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:948
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:969
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:966
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:987
 msgid "Go to a previously opened location"
 msgstr "Gå till en tidigare öppnad plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:965
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:983
 msgid "Next location"
 msgstr "Nästa plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:967
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:985
 msgid "Go to next location"
 msgstr "Gå till nästa plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1178
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1196
 msgid "_Match Filename"
 msgstr "_Matcha filnamn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2044
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2071
 #, c-format
 msgid "No mount object for mounted volume: %s"
 msgstr "Inga monteringsobjekt för monterad volym: %s"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2124
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2151
 #, c-format
 msgid "Could not open media: %s"
 msgstr "Kunde inte öppna media: %s"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2171
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2198
 #, c-format
 msgid "Could not mount volume: %s"
 msgstr "Kunde inte montera volym: %s"
@@ -3138,7 +3144,8 @@ msgid "Select the _language of the current document."
 msgstr "Välj _språket i det aktuella dokumentet."
 
 #: ../plugins/spell/spell-checker.ui.h:1
-#: ../plugins/time/time.ui.h:2
+#: ../plugins/time/gedit-time-dialog.ui.h:2
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:2
 msgid "*"
 msgstr "*"
 
@@ -4785,37 +4792,40 @@ msgstr "Infoga datum/tid"
 msgid "Inserts current date and time at the cursor position."
 msgstr "Infogar aktuellt datum och tid vid markörpositionen."
 
-#: ../plugins/time/time.ui.h:3
+#: ../plugins/time/gedit-time-dialog.ui.h:3
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:3
 msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
 msgstr "<span size=\"small\">2002-11-01 17.52.00</span>"
 
-#: ../plugins/time/time.ui.h:4
-msgid "<span weight=\"bold\"> When inserting date/time...</span>"
-msgstr "<span weight=\"bold\"> Vid infogande av datum/tid...</span>"
-
-#: ../plugins/time/time.ui.h:5
-msgid "Configure date/time plugin"
-msgstr "Konfigurera insticksmodulen Infoga datum/tid"
-
-#: ../plugins/time/time.ui.h:6
+#: ../plugins/time/gedit-time-dialog.ui.h:4
 msgid "Insert Date and Time"
 msgstr "Infoga datum och tid"
 
-#: ../plugins/time/time.ui.h:7
+#: ../plugins/time/gedit-time-dialog.ui.h:5
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:6
 msgid "Use the _selected format"
 msgstr "Använd det _valda formatet"
 
-#: ../plugins/time/time.ui.h:8
+#: ../plugins/time/gedit-time-dialog.ui.h:6
 msgid "_Insert"
 msgstr "_Infoga"
 
-#: ../plugins/time/time.ui.h:9
-msgid "_Prompt for a format"
-msgstr "_Fråga efter ett format"
-
-#: ../plugins/time/time.ui.h:10
+#: ../plugins/time/gedit-time-dialog.ui.h:7
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:8
 msgid "_Use custom format"
 msgstr "_Använd anpassat format"
+
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:4
+msgid "<span weight=\"bold\"> When inserting date/time...</span>"
+msgstr "<span weight=\"bold\"> Vid infogande av datum/tid...</span>"
+
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:5
+msgid "Configure date/time plugin"
+msgstr "Konfigurera insticksmodulen Infoga datum/tid"
+
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:7
+msgid "_Prompt for a format"
+msgstr "_Fråga efter ett format"
 
 #~ msgid "Open Location"
 #~ msgstr "Öppna plats"
