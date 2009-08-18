@@ -309,47 +309,13 @@ finish_query_info (AsyncData *async)
 }
 
 static void
-remote_get_file_info_cb (GFile        *source,
-			 GAsyncResult *res,
-			 AsyncData    *async)
+query_info_cb (GFile        *source,
+	       GAsyncResult *res,
+	       AsyncData    *async)
 {
 	GeditGioDocumentLoader *gvloader;
 	GError *error = NULL;
-	
-	gedit_debug (DEBUG_LOADER);
-	
-	/* manually check the cancelled state */
-	if (g_cancellable_is_cancelled (async->cancellable))
-	{
-		async_data_free (async);
-		return;
-	}
 
-	gvloader = async->loader;
-	
-	/* finish the info query */
-	gvloader->priv->info = g_file_query_info_finish (gvloader->priv->gfile,
-	                                                 res, 
-	                                                 &error);
-
-	if (!gvloader->priv->info)
-	{
-		/* propagate the error and clean up */
-		async_failed (async, error);
-		return;
-	}
-
-	finish_query_info (async);
-}
-
-static void
-remote_get_info_cb (GFileInputStream *source,
-		    GAsyncResult     *res,
-		    AsyncData        *async)
-{
-	GeditGioDocumentLoader *gvloader;
-	GError *error = NULL;
-	
 	gedit_debug (DEBUG_LOADER);
 
 	/* manually check the cancelled state */
@@ -360,29 +326,14 @@ remote_get_info_cb (GFileInputStream *source,
 	}	
 
 	gvloader = async->loader;
-	
+
 	/* finish the info query */
-	gvloader->priv->info = g_file_input_stream_query_info_finish (gvloader->priv->stream,
-	                                                              res, 
-	                                                              &error);
+	gvloader->priv->info = g_file_query_info_finish (gvloader->priv->gfile,
+	                                                 res, 
+	                                                 &error);
 
 	if (gvloader->priv->info == NULL)
 	{
-		if (error->code == G_IO_ERROR_NOT_SUPPORTED)
-		{
-			gedit_debug_message (DEBUG_LOADER, "Query info not supported on stream, trying on file");
-
-			/* then try to query the info using g_file_query_info */
-			g_file_query_info_async (gvloader->priv->gfile,
-						 REMOTE_QUERY_ATTRIBUTES,
-						 G_FILE_QUERY_INFO_NONE,
-						 G_PRIORITY_HIGH,
-						 async->cancellable,
-						 (GAsyncReadyCallback)remote_get_file_info_cb,
-						 async);
-			return;
-		}
-		
 		/* propagate the error and clean up */
 		async_failed (async, error);
 		return;
@@ -477,17 +428,22 @@ async_read_ready_callback (GObject      *source,
 					       gvloader->priv->error);
 
 		async_data_free (async);
+		return;
 	}
-	else
-	{
-		/* get the file info from the input stream */
-		g_file_input_stream_query_info_async (gvloader->priv->stream,
-						      REMOTE_QUERY_ATTRIBUTES,
-						      G_PRIORITY_HIGH,
-						      gvloader->priv->cancellable,
-						      (GAsyncReadyCallback) remote_get_info_cb,
-						      async);
-	}
+
+	/* get the file info: note we cannot use 
+	 * g_file_input_stream_query_info_async since it is not able to get the
+	 * content type etc, beside it is not supported by gvfs.
+	 * Using the file instead of the stream is slightly racy, but for
+	 * loading this is not too bad...
+	 */
+	g_file_query_info_async (gvloader->priv->gfile,
+				 REMOTE_QUERY_ATTRIBUTES,
+                                 G_FILE_QUERY_INFO_NONE,
+				 G_PRIORITY_HIGH,
+				 async->cancellable,
+				 (GAsyncReadyCallback) query_info_cb,
+				 async);
 }
 
 static void
