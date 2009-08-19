@@ -1325,6 +1325,7 @@ search_entry_insert_text (GtkEditable *editable,
 
 			if (!g_unichar_isdigit (c)) {
 				g_signal_stop_emission_by_name (editable, "insert_text");
+				gtk_widget_error_bell (view->priv->search_entry);
 				break;
 			}
 
