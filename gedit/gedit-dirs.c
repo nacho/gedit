@@ -23,7 +23,7 @@
 #include "gedit-dirs.h"
 
 gchar *
-gedit_dirs_get_user_config_dir ()
+gedit_dirs_get_user_config_dir (void)
 {
 	gchar *config_dir = NULL;
 
@@ -49,7 +49,7 @@ gedit_dirs_get_user_config_dir ()
 }
 
 gchar *
-gedit_dirs_get_user_cache_dir ()
+gedit_dirs_get_user_cache_dir (void)
 {
 	const gchar *cache_dir;
 
@@ -77,7 +77,7 @@ gedit_dirs_get_user_plugins_dir (void)
 }
 
 gchar *
-gedit_dirs_get_user_accels_file ()
+gedit_dirs_get_user_accels_file (void)
 {
 	gchar *accels = NULL;
 
