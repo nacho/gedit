@@ -702,7 +702,7 @@ gedit_utils_uri_get_dirname (const gchar *uri)
 
 	/* CHECK: does it work with uri chaining? - Paolo */
 	str = g_path_get_dirname (uri);
-	g_return_val_if_fail (str != NULL, ".");
+	g_return_val_if_fail (str != NULL, g_strdup ("."));
 
 	if ((strlen (str) == 1) && (*str == '.'))
 	{
