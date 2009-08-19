@@ -177,7 +177,7 @@ gedit_get_command_line_data (void)
 }
 
 static guint32
-get_startup_timestamp ()
+get_startup_timestamp (void)
 {
 	const gchar *startup_id_env;
 	gchar *startup_id = NULL;
@@ -300,7 +300,8 @@ on_message_received (const char *message,
 			gchar **uris;
 
 			line_position = atoi (params[1]);
-			if (params[2] != '\0');
+
+			if (params[2] != '\0')
 				encoding = gedit_encoding_get_from_charset (params[2]);
 
 			n_uris = atoi (params[3]);
