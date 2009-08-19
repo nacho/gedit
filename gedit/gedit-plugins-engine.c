@@ -591,13 +591,17 @@ static void
 gedit_plugins_engine_activate_plugin_real (GeditPluginsEngine *engine,
 					   GeditPluginInfo *info)
 {
+	const GList *wins;
+
 	if (!load_plugin (engine, info))
 		return;
 
-	/* activate plugin for all windows */
-	const GList *wins = gedit_app_get_windows (gedit_app_get_default ());
-	for (; wins != NULL; wins = wins->next)
+	for (wins = gedit_app_get_windows (gedit_app_get_default ());
+	     wins != NULL;
+	     wins = wins->next)
+	{
 		gedit_plugin_activate (info->plugin, GEDIT_WINDOW (wins->data));
+	}
 }
 
 gboolean
@@ -646,9 +650,12 @@ gedit_plugins_engine_deactivate_plugin_real (GeditPluginsEngine *engine,
 	    !gedit_plugin_info_is_available (info))
 		return;
 
-	wins = gedit_app_get_windows (gedit_app_get_default ());
-	for (; wins != NULL; wins = wins->next)
+	for (wins = gedit_app_get_windows (gedit_app_get_default ());
+	     wins != NULL;
+	     wins = wins->next)
+	{
 		call_plugin_deactivate (info->plugin, GEDIT_WINDOW (wins->data));
+	}
 
 	/* first unref the plugin (the loader still has one) */
 	g_object_unref (info->plugin);

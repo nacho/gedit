@@ -201,9 +201,9 @@ async_read_cb (GInputStream *stream,
 	       AsyncData    *async)
 {
 	gedit_debug (DEBUG_LOADER);
-	GError *error = NULL;
 	GeditGioDocumentLoader *gvloader;
 	gssize bytes_read;
+	GError *error = NULL;
 	
 	/* manually check cancelled state */
 	if (g_cancellable_is_cancelled (async->cancellable))

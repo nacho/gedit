@@ -56,17 +56,6 @@ enum
 
 static guint signals[NUM_SIGNALS] = { 0 };
 
-static void menu_position_func 		(GtkMenu	     *menu,
-	            			 gint		     *x,
-		    			 gint		     *y,
-		    			 gboolean	     *push_in,
-					 GeditStatusComboBox *combo);
-static void button_press_event	 	(GtkWidget           *widget,
-					 GdkEventButton      *event,
-					 GeditStatusComboBox *combo);
-static void item_activated 		(GtkMenuItem         *item,
-					 GeditStatusComboBox *combo);
-
 G_DEFINE_TYPE(GeditStatusComboBox, gedit_status_combo_box, GTK_TYPE_EVENT_BOX)
 
 static void
@@ -177,11 +166,86 @@ menu_deactivate (GtkMenu             *menu,
 }
 
 static void
-gedit_status_combo_box_init (GeditStatusComboBox *self)
+menu_position_func (GtkMenu		*menu,
+	            gint		*x,
+		    gint		*y,
+		    gboolean		*push_in,
+		    GeditStatusComboBox *combo)
+{
+	GtkRequisition request;
+	
+	*push_in = FALSE;
+	
+	gtk_widget_size_request (gtk_widget_get_toplevel (GTK_WIDGET (menu)), &request);
+	
+	/* get the origin... */
+	gdk_window_get_origin (GTK_WIDGET (combo)->window, x, y);
+	
+	/* make the menu as wide as the widget */
+	if (request.width < GTK_WIDGET (combo)->allocation.width)
+	{
+		gtk_widget_set_size_request (GTK_WIDGET (menu), GTK_WIDGET (combo)->allocation.width, -1);
+	}
+	
+	/* position it above the widget */
+	*y -= request.height;
+}
+
+static void
+button_press_event (GtkWidget           *widget,
+		    GdkEventButton      *event,
+		    GeditStatusComboBox *combo)
+{
+	GtkRequisition request;
+	gint max_height;
+	
+	gtk_widget_size_request (combo->priv->menu, &request);
+
+	/* do something relative to our own height here, maybe we can do better */
+	max_height = GTK_WIDGET (combo)->allocation.height * 20;
+	
+	if (request.height > max_height)
+	{
+		gtk_widget_set_size_request (combo->priv->menu, -1, max_height);
+		gtk_widget_set_size_request (gtk_widget_get_toplevel (combo->priv->menu), -1, max_height);
+	}
+	
+	gtk_menu_popup (GTK_MENU (combo->priv->menu), 
+			NULL, 
+			NULL, 
+			(GtkMenuPositionFunc)menu_position_func, 
+			combo, 
+			event->button, 
+			event->time);
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (combo->priv->button), TRUE);
+
+	if (combo->priv->current_item)
+	{
+		gtk_menu_shell_select_item (GTK_MENU_SHELL (combo->priv->menu), 
+					    combo->priv->current_item);
+	}
+}
+
+static void
+set_shadow_type (GeditStatusComboBox *combo)
 {
 	GtkShadowType shadow_type;
 	GtkWidget *statusbar;
 
+	/* This is a hack needed to use the shadow type of a statusbar */
+	statusbar = gtk_statusbar_new ();
+	gtk_widget_ensure_style (statusbar);
+
+	gtk_widget_style_get (statusbar, "shadow-type", &shadow_type, NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (combo->priv->frame), shadow_type);
+
+	gtk_widget_destroy (statusbar);
+}
+
+static void
+gedit_status_combo_box_init (GeditStatusComboBox *self)
+{
 	self->priv = GEDIT_STATUS_COMBO_BOX_GET_PRIVATE (self);
 	
 	gtk_event_box_set_visible_window (GTK_EVENT_BOX (self), TRUE);
@@ -193,16 +257,9 @@ gedit_status_combo_box_init (GeditStatusComboBox *self)
 	gtk_widget_set_name (self->priv->button, "gedit-status-combo-button");
 	gtk_button_set_relief (GTK_BUTTON (self->priv->button), GTK_RELIEF_NONE);
 	gtk_widget_show (self->priv->button);
-	
-	/* This is a hack needed to use the shadow type of a statusbar */
-	statusbar = gtk_statusbar_new ();
-	gtk_widget_ensure_style (statusbar);
 
-	gtk_widget_style_get (statusbar, "shadow-type", &shadow_type, NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (self->priv->frame), shadow_type);
+	set_shadow_type (self);
 
-	gtk_widget_destroy (statusbar);
-	
 	self->priv->hbox = gtk_hbox_new (FALSE, 3);
 	gtk_widget_show (self->priv->hbox);
 	
@@ -234,12 +291,11 @@ gedit_status_combo_box_init (GeditStatusComboBox *self)
 	
 	self->priv->menu = gtk_menu_new ();
 	g_object_ref_sink (self->priv->menu);
-	
+
 	g_signal_connect (self->priv->button, 
 			  "button-press-event", 
 			  G_CALLBACK (button_press_event), 
 			  self);
-
 	g_signal_connect (self->priv->menu,
 			  "deactivate",
 			  G_CALLBACK (menu_deactivate),
@@ -257,8 +313,9 @@ void
 gedit_status_combo_box_set_label (GeditStatusComboBox *combo, 
 				  const gchar         *label)
 {
-	g_return_if_fail (GEDIT_IS_STATUS_COMBO_BOX (combo));
 	gchar *text;
+
+	g_return_if_fail (GEDIT_IS_STATUS_COMBO_BOX (combo));
 	
 	text = g_strconcat ("  ", label, ": ", NULL);
 	gtk_label_set_markup (GTK_LABEL (combo->priv->label), text);
@@ -271,6 +328,13 @@ gedit_status_combo_box_get_label (GeditStatusComboBox *combo)
 	g_return_val_if_fail (GEDIT_IS_STATUS_COMBO_BOX (combo), NULL);
 
 	return gtk_label_get_label (GTK_LABEL (combo->priv->label));
+}
+
+static void
+item_activated (GtkMenuItem         *item,
+		GeditStatusComboBox *combo)
+{
+	gedit_status_combo_box_set_item (combo, item);
 }
 
 void
@@ -341,72 +405,3 @@ gedit_status_combo_box_get_item_label (GeditStatusComboBox *combo)
 	return GTK_LABEL (combo->priv->item);
 }
 
-/* callbacks */
-static void
-button_press_event (GtkWidget           *widget,
-		    GdkEventButton      *event,
-		    GeditStatusComboBox *combo)
-{
-	GtkRequisition request;
-	gint max_height;
-	
-	gtk_widget_size_request (combo->priv->menu, &request);
-
-	/* do something relative to our own height here, maybe we can do better */
-	max_height = GTK_WIDGET (combo)->allocation.height * 20;
-	
-	if (request.height > max_height)
-	{
-		gtk_widget_set_size_request (combo->priv->menu, -1, max_height);
-		gtk_widget_set_size_request (gtk_widget_get_toplevel (combo->priv->menu), -1, max_height);
-	}
-	
-	gtk_menu_popup (GTK_MENU (combo->priv->menu), 
-			NULL, 
-			NULL, 
-			(GtkMenuPositionFunc)menu_position_func, 
-			combo, 
-			event->button, 
-			event->time);
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (combo->priv->button), TRUE);
-
-	if (combo->priv->current_item)
-	{
-		gtk_menu_shell_select_item (GTK_MENU_SHELL (combo->priv->menu), 
-					    combo->priv->current_item);
-	}
-}
-
-static void
-menu_position_func (GtkMenu		*menu,
-	            gint		*x,
-		    gint		*y,
-		    gboolean		*push_in,
-		    GeditStatusComboBox *combo)
-{
-	GtkRequisition request;
-	
-	*push_in = FALSE;
-	
-	gtk_widget_size_request (gtk_widget_get_toplevel (GTK_WIDGET (menu)), &request);
-	
-	/* get the origin... */
-	gdk_window_get_origin (GTK_WIDGET (combo)->window, x, y);
-	
-	/* make the menu as wide as the widget */
-	if (request.width < GTK_WIDGET (combo)->allocation.width)
-	{
-		gtk_widget_set_size_request (GTK_WIDGET (menu), GTK_WIDGET (combo)->allocation.width, -1);
-	}
-	
-	/* position it above the widget */
-	*y -= request.height;
-}
-
-static void
-item_activated (GtkMenuItem         *item,
-		GeditStatusComboBox *combo)
-{
-	gedit_status_combo_box_set_item (combo, item);
-}

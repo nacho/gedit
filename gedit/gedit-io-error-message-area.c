@@ -275,10 +275,13 @@ parse_gio_error (gint          code,
 			{
 				if (hn != NULL)
 				{
-					gchar *host_name = gedit_utils_make_valid_utf8 (hn);
+					gchar *host_markup;
+					gchar *host_name;
+
+					host_name = gedit_utils_make_valid_utf8 (hn);
 					g_free (hn);
 
-					gchar *host_markup = g_markup_printf_escaped ("<i>%s</i>", host_name);
+					host_markup = g_markup_printf_escaped ("<i>%s</i>", host_name);
 					g_free (host_name);
 
 					/* Translators: %s is a host name */
