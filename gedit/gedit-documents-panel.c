@@ -114,12 +114,11 @@ tab_get_name (GeditTab *tab)
 	return tab_name;
 }
 
-static GtkTreeIter
-get_iter_from_tab (GeditDocumentsPanel *panel, GeditTab *tab)
+static void
+get_iter_from_tab (GeditDocumentsPanel *panel, GeditTab *tab, GtkTreeIter *iter)
 {
 	gint num;
 	GtkWidget *nb;
-	GtkTreeIter iter;
 	GtkTreePath *path;
 
 	nb = _gedit_window_get_notebook (panel->priv->window);
@@ -128,11 +127,9 @@ get_iter_from_tab (GeditDocumentsPanel *panel, GeditTab *tab)
 
 	path = gtk_tree_path_new_from_indices (num, -1);
 	gtk_tree_model_get_iter (panel->priv->model,
-        	                 &iter,
+        	                 iter,
         	                 path);
 	gtk_tree_path_free (path);
-
-	return iter;
 }
 
 static void
@@ -147,7 +144,7 @@ window_active_tab_changed (GeditWindow         *window,
 		GtkTreeIter iter;
 		GtkTreeSelection *selection;
 
-		iter = get_iter_from_tab (panel, tab);
+		get_iter_from_tab (panel, tab, &iter);
 
 		if (gtk_list_store_iter_is_valid (GTK_LIST_STORE (panel->priv->model),
 						  &iter))
@@ -235,7 +232,7 @@ sync_name_and_icon (GeditTab            *tab,
 	gchar *name;
 	GtkTreeIter iter;
 
-	iter = 	get_iter_from_tab (panel, tab);
+	get_iter_from_tab (panel, tab, &iter);
 	
 	name = tab_get_name (tab);
 	pixbuf = _gedit_tab_get_icon (tab);
@@ -287,7 +284,7 @@ window_tab_added (GeditWindow         *window,
 			  G_CALLBACK (sync_name_and_icon),
 			  panel);
 
-	sibling = get_iter_from_tab (panel, tab);
+	get_iter_from_tab (panel, tab, &sibling);
 
 	panel->priv->adding_tab = TRUE;
 	
