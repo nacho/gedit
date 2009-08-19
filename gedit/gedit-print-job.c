@@ -516,7 +516,7 @@ create_compositor (GeditPrintJob *job)
 						     "tab-width", gtk_source_view_get_tab_width (GTK_SOURCE_VIEW (job->priv->view)),
 						     "highlight-syntax", gtk_source_buffer_get_highlight_syntax (GTK_SOURCE_BUFFER (job->priv->doc)) &&
 					   				 gedit_prefs_manager_get_print_syntax_hl (),
-						     "wrap-mode", gtk_text_view_get_wrap_mode (GTK_TEXT_VIEW (job->priv->view)),
+						     "wrap-mode", gedit_prefs_manager_get_print_wrap_mode (),
 						     "print-line-numbers", gedit_prefs_manager_get_print_line_numbers (),
 						     "print-header", gedit_prefs_manager_get_print_header (),
 						     "print-footer", FALSE,
@@ -524,7 +524,7 @@ create_compositor (GeditPrintJob *job)
 						     "line-numbers-font-name", print_font_numbers,
 						     "header-font-name", print_font_header,
 						     NULL));
-	
+
 	g_free (print_font_body);
 	g_free (print_font_header);
 	g_free (print_font_numbers);
