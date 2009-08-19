@@ -2745,7 +2745,7 @@ drag_data_received_cb (GtkWidget        *widget,
 		       gint              y,
 		       GtkSelectionData *selection_data,
 		       guint             info,
-		       guint             time,
+		       guint             timestamp,
 		       gpointer          data)
 {
 	GeditWindow *window;

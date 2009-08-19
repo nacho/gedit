@@ -79,15 +79,6 @@ enum {
 
 static guint signals[LAST_SIGNAL];
 
-static void	 gedit_panel_set_property	(GObject         *object,
-						 guint            prop_id,
-						 const GValue    *value,
-						 GParamSpec      *pspec);
-
-static void	 gedit_panel_class_init		(GeditPanelClass *klass);
-
-static void	 gedit_panel_init 		(GeditPanel *panel);
-
 static GObject	*gedit_panel_constructor	(GType type,
 						 guint n_construct_properties,
 						 GObjectConstructParam *construct_properties);

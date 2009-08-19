@@ -524,6 +524,7 @@ static void
 begin_write (AsyncData *async)
 {
 	GeditGioDocumentSaver *gvsaver;
+	gchar *buffer;
 	gsize len;
 	GError *error = NULL;
 
@@ -533,8 +534,7 @@ begin_write (AsyncData *async)
 	 * backup as of yet
 	 */
 	gvsaver = async->saver;
-	gchar *buffer = gedit_document_saver_get_document_contents (GEDIT_DOCUMENT_SAVER (gvsaver), &len, &error);
-
+	buffer = gedit_document_saver_get_document_contents (GEDIT_DOCUMENT_SAVER (gvsaver), &len, &error);
 	if (buffer != NULL && len > 0)
 	{
 		/* Append new line to buffer */

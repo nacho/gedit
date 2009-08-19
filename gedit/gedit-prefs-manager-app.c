@@ -190,7 +190,7 @@ get_state_filename (void)
 }
 
 static GKeyFile *
-get_gedit_state_file ()
+get_gedit_state_file (void)
 {
 	static GKeyFile *state_file = NULL;
 
@@ -276,7 +276,7 @@ gedit_state_set_int (const gchar *group,
 }
 
 static gboolean
-gedit_state_file_sync ()
+gedit_state_file_sync (void)
 {
 	GKeyFile *state_file;
 	gchar *config_dir;
@@ -738,7 +738,7 @@ gedit_prefs_manager_app_init (void)
 
 /* This function must be called before exiting gedit */
 void
-gedit_prefs_manager_app_shutdown ()
+gedit_prefs_manager_app_shutdown (void)
 {
 	gedit_debug (DEBUG_PREFS);
 

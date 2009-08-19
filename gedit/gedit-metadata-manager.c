@@ -236,7 +236,7 @@ get_metadata_filename (void)
 }
 
 static gboolean
-load_values ()
+load_values (void)
 {
 	xmlDocPtr doc;
 	xmlNodePtr cur;
@@ -491,7 +491,7 @@ get_oldest (const gchar *key, const gpointer value, const gchar ** key_to_remove
 }
 
 static void
-resize_items ()
+resize_items (void)
 {
 	while (g_hash_table_size (gedit_metadata_manager->items) > MAX_ITEMS)
 	{

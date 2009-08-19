@@ -47,7 +47,7 @@ static gdouble last = 0.0;
 static GeditDebugSection debug = GEDIT_NO_DEBUG;
 
 void
-gedit_debug_init ()
+gedit_debug_init (void)
 {
 	if (g_getenv ("GEDIT_DEBUG") != NULL)
 	{

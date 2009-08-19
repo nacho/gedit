@@ -386,7 +386,7 @@ gedit_history_entry_load_history (GeditHistoryEntry *entry)
 	GtkListStore *store;
 	GtkTreeIter iter;
 	gchar *key;
-	gint i;
+	guint i;
 
 	g_return_if_fail (GEDIT_IS_HISTORY_ENTRY (entry));
 

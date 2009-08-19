@@ -187,7 +187,7 @@ gedit_prefs_manager_init (void)
 }
 
 void
-gedit_prefs_manager_shutdown ()
+gedit_prefs_manager_shutdown (void)
 {
 	gedit_debug (DEBUG_PREFS);
 

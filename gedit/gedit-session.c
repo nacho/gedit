@@ -116,7 +116,7 @@ save_window_session (GKeyFile    *state_file,
 
 	if (doc_array->len)
 	{
-	        int i;
+	        guint i;
  
 		g_key_file_set_string_list (state_file, group_name,
 					    "documents",
@@ -316,7 +316,7 @@ show_confirmation_dialog (GeditWindow *window)
 }
 
 static void
-ask_next_confirmation ()
+ask_next_confirmation (void)
 {
 	g_return_if_fail (window_dirty_list != NULL);
 

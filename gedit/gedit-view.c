@@ -114,19 +114,19 @@ static gboolean gedit_view_drag_motion		(GtkWidget        *widget,
 						 GdkDragContext   *context,
 						 gint              x,
 						 gint              y,
-						 guint             time);
+						 guint             timestamp);
 static void     gedit_view_drag_data_received   (GtkWidget        *widget,
 						 GdkDragContext   *context,
 						 gint              x,
 						 gint              y,
 						 GtkSelectionData *selection_data,
 						 guint             info,
-						 guint             time);
+						 guint             timestamp);
 static gboolean gedit_view_drag_drop		(GtkWidget        *widget,
 	      					 GdkDragContext   *context,
 	      					 gint              x,
 	      					 gint              y,
-	      					 guint             time);
+	      					 guint             timestamp);
 static gboolean	gedit_view_button_press_event	(GtkWidget        *widget,
 						 GdkEventButton   *event);
 
@@ -1935,19 +1935,19 @@ gedit_view_drag_motion (GtkWidget      *widget,
 			GdkDragContext *context,
 			gint            x,
 			gint            y,
-			guint           time)
+			guint           timestamp)
 {
 	gboolean result;
 
 	/* Chain up to allow textview to scroll and position dnd mark, note 
 	 * that this needs to be checked if gtksourceview or gtktextview
 	 * changes drag_motion behaviour */
-	result = GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_motion (widget, context, x, y, time);
+	result = GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_motion (widget, context, x, y, timestamp);
 
 	/* If this is a URL, deal with it here */
 	if (drag_get_uri_target (widget, context) != GDK_NONE) 
 	{
-		gdk_drag_status (context, context->suggested_action, time);
+		gdk_drag_status (context, context->suggested_action, timestamp);
 		result = TRUE;
 	}
 
@@ -1961,7 +1961,7 @@ gedit_view_drag_data_received (GtkWidget        *widget,
 			       gint              y,
 			       GtkSelectionData *selection_data,
 			       guint             info,
-			       guint             time)
+			       guint             timestamp)
 {
 	gchar **uri_list;
 	
@@ -1975,12 +1975,12 @@ gedit_view_drag_data_received (GtkWidget        *widget,
 			g_signal_emit (widget, view_signals[DROP_URIS], 0, uri_list);
 			g_strfreev (uri_list);
 			
-			gtk_drag_finish (context, TRUE, FALSE, time);
+			gtk_drag_finish (context, TRUE, FALSE, timestamp);
 		}
 	}
 	else
 	{
-		GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_data_received (widget, context, x, y, selection_data, info, time);
+		GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_data_received (widget, context, x, y, selection_data, info, timestamp);
 	}
 }
 
@@ -1989,7 +1989,7 @@ gedit_view_drag_drop (GtkWidget      *widget,
 		      GdkDragContext *context,
 		      gint            x,
 		      gint            y,
-		      guint           time)
+		      guint           timestamp)
 {
 	gboolean result;
 	GdkAtom target;
@@ -1999,13 +1999,13 @@ gedit_view_drag_drop (GtkWidget      *widget,
 
 	if (target != GDK_NONE)
 	{
-		gtk_drag_get_data (widget, context, target, time);
+		gtk_drag_get_data (widget, context, target, timestamp);
 		result = TRUE;
 	}
 	else
 	{
 		/* Chain up */
-		result = GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_drop (widget, context, x, y, time);
+		result = GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_drop (widget, context, x, y, timestamp);
 	}
 
 	return result;

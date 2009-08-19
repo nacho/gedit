@@ -337,16 +337,16 @@ gedit_encoding_get_from_charset (const gchar *charset)
 }
 
 const GeditEncoding *
-gedit_encoding_get_from_index (gint index)
+gedit_encoding_get_from_index (gint idx)
 {
-	g_return_val_if_fail (index >= 0, NULL);
+	g_return_val_if_fail (idx >= 0, NULL);
 
-	if (index >= GEDIT_ENCODING_LAST)
+	if (idx >= GEDIT_ENCODING_LAST)
 		return NULL;
 
 	gedit_encoding_lazy_init ();
 
-	return &encodings [index];
+	return &encodings[idx];
 }
 
 const GeditEncoding *
