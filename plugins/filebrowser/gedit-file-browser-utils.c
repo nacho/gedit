@@ -1,3 +1,24 @@
+/*
+ * gedit-file-bookmarks-store.c - Gedit plugin providing easy file access 
+ * from the sidepanel
+ *
+ * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
+
 #include "gedit-file-browser-utils.h"
 #include <gedit/gedit-utils.h>
 
@@ -139,11 +160,11 @@ gedit_file_browser_utils_confirmation_dialog (GeditWindow * window,
 				      GTK_DIALOG_MODAL |
 				      GTK_DIALOG_DESTROY_WITH_PARENT,
 				      type,
-				      GTK_BUTTONS_NONE, message, NULL);
+				      GTK_BUTTONS_NONE, "%s", message);
 
 	if (secondary)
 		gtk_message_dialog_format_secondary_text
-		    (GTK_MESSAGE_DIALOG (dlg), secondary, NULL);
+		    (GTK_MESSAGE_DIALOG (dlg), "%s", secondary);
 
 	/* Add a cancel button */
 	button = gtk_button_new_from_stock (GTK_STOCK_CANCEL);

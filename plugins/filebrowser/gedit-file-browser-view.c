@@ -993,7 +993,7 @@ bookmarks_separator_func (GtkTreeModel * model, GtkTreeIter * iter,
 
 /* Public */
 GtkWidget *
-gedit_file_browser_view_new ()
+gedit_file_browser_view_new (void)
 {
 	GeditFileBrowserView *obj =
 	    GEDIT_FILE_BROWSER_VIEW (g_object_new

@@ -754,7 +754,7 @@ initialize_fill (GeditFileBookmarksStore * model)
 
 /* Public */
 GeditFileBookmarksStore *
-gedit_file_bookmarks_store_new ()
+gedit_file_bookmarks_store_new (void)
 {
 	GeditFileBookmarksStore *model;
 	GType column_types[] = {

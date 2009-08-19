@@ -538,16 +538,14 @@ gedit_file_browser_store_get_n_columns (GtkTreeModel * tree_model)
 }
 
 static GType
-gedit_file_browser_store_get_column_type (GtkTreeModel * tree_model,
-					  gint index)
+gedit_file_browser_store_get_column_type (GtkTreeModel * tree_model, gint idx)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model),
 			      G_TYPE_INVALID);
-	g_return_val_if_fail (index < GEDIT_FILE_BROWSER_STORE_COLUMN_NUM
-			      && index >= 0, G_TYPE_INVALID);
+	g_return_val_if_fail (idx < GEDIT_FILE_BROWSER_STORE_COLUMN_NUM &&
+			      idx >= 0, G_TYPE_INVALID);
 
-	return GEDIT_FILE_BROWSER_STORE (tree_model)->priv->
-	    column_types[index];
+	return GEDIT_FILE_BROWSER_STORE (tree_model)->priv->column_types[idx];
 }
 
 static gboolean
@@ -697,6 +695,8 @@ gedit_file_browser_store_get_value (GtkTreeModel * tree_model,
 	case GEDIT_FILE_BROWSER_STORE_COLUMN_EMBLEM:
 		g_value_set_object (value, node->emblem);
 		break;
+	default:
+		g_return_if_reached ();
 	}
 }
 
@@ -1338,13 +1338,15 @@ static void
 file_browser_node_free (GeditFileBrowserStore * model,
 			FileBrowserNode * node)
 {
-	FileBrowserNodeDir * dir;
-	gchar * uri;
+	gchar *uri;
 
 	if (node == NULL)
 		return;
 
-	if (NODE_IS_DIR (node)) {
+	if (NODE_IS_DIR (node))
+	{
+		FileBrowserNodeDir *dir;
+
 		dir = FILE_BROWSER_NODE_DIR (node);
 
 		if (dir->cancellable) {
@@ -2351,6 +2353,7 @@ model_load_directory (GeditFileBrowserStore * model,
 		      FileBrowserNode * node)
 {
 	FileBrowserNodeDir *dir;
+	AsyncNode *async;
 
 	g_return_if_fail (NODE_IS_DIR (node));
 
@@ -2369,7 +2372,7 @@ model_load_directory (GeditFileBrowserStore * model,
 	
 	dir->cancellable = g_cancellable_new ();
 	
-	AsyncNode *async = g_new (AsyncNode, 1);
+	async = g_new (AsyncNode, 1);
 	async->dir = dir;
 	async->cancellable = g_object_ref (dir->cancellable);
 	async->original_children = g_slist_copy (dir->children);
