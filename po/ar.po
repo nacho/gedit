@@ -15,23 +15,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-28 00:32+0300\n"
-"PO-Revision-Date: 2009-07-28 00:31+0300\n"
+"POT-Creation-Date: 2009-08-21 07:25+0300\n"
+"PO-Revision-Date: 2009-08-21 07:26+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Virtaal 0.4.0-rc1\n"
+"X-Generator: Virtaal 0.4.0\n"
 
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
 msgstr "حرّر الملفات النصية"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit-print-job.c:755
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit-print-job.c:759
 msgid "Text Editor"
 msgstr "محرّر نصوص"
 
@@ -43,7 +43,7 @@ msgstr ""
 "خطّ خاص للاستخدام في منطقة التحرير. لن تظهر التأثيرات ما لم تلغي خيار \"Use "
 "Default Font\""
 
-#: ../data/gedit.schemas.in.in.h:2 ../gedit/gedit-plugin-manager.c:804
+#: ../data/gedit.schemas.in.in.h:2
 msgid "Active plugins"
 msgstr "الملحقات النشِطة"
 
@@ -726,7 +726,7 @@ msgstr "جميع الملفات"
 msgid "Could not remove color scheme \"%s\"."
 msgstr "لا يمكن حذف مخطط الألوان %s."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1086
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1087
 msgid "gedit Preferences"
 msgstr "تفضيلات محرر النصوص"
 
@@ -849,7 +849,7 @@ msgid "_Autosave files every"
 msgstr "ا_حفظ الملفات آليّا كلّ"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:28
-#: ../gedit/gedit-view.c:2032
+#: ../gedit/gedit-view.c:2033
 msgid "_Display line numbers"
 msgstr "ا_عرض أرقام السطور"
 
@@ -870,11 +870,11 @@ msgid "_minutes"
 msgstr "_دقائق"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:300
-#: ../gedit/dialogs/gedit-search-dialog.ui.h:2 ../gedit/gedit-window.c:1458
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:2 ../gedit/gedit-window.c:1457
 msgid "Replace"
 msgstr "استبدل"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:311 ../gedit/gedit-window.c:1456
+#: ../gedit/dialogs/gedit-search-dialog.c:311 ../gedit/gedit-window.c:1455
 msgid "Find"
 msgstr "ابحث"
 
@@ -951,11 +951,11 @@ msgid "%s: invalid encoding.\n"
 msgstr "‏%s: ترميز غير سليم. \n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:562
+#: ../gedit/gedit.c:563
 msgid "- Edit text files"
 msgstr "- حرّر الملفات النصية"
 
-#: ../gedit/gedit.c:598
+#: ../gedit/gedit.c:599
 #, c-format
 msgid ""
 "%s\n"
@@ -1164,11 +1164,11 @@ msgid "Unsaved Document %d"
 msgstr "مستند غير محفوظ %Id"
 
 #: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:2175 ../gedit/gedit-window.c:2180
+#: ../gedit/gedit-window.c:2191 ../gedit/gedit-window.c:2196
 msgid "Read Only"
 msgstr "للقراءة فقط"
 
-#: ../gedit/gedit-documents-panel.c:774 ../gedit/gedit-window.c:3532
+#: ../gedit/gedit-documents-panel.c:771 ../gedit/gedit-window.c:3553
 msgid "Documents"
 msgstr "مستندات"
 
@@ -1354,7 +1354,7 @@ msgstr "‏%s دليل"
 msgid "%s is not a valid location."
 msgstr "ليس %s موقعاً سليماً."
 
-#: ../gedit/gedit-io-error-message-area.c:286
+#: ../gedit/gedit-io-error-message-area.c:289
 #, c-format
 msgid ""
 "Host %s could not be found. Please check that your proxy settings are "
@@ -1363,32 +1363,32 @@ msgstr ""
 "تعذّر العثور على المستضيف %s. تأكد من صحّة إعدادات  الوسيط (بروكسي) وحاول "
 "مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:299
+#: ../gedit/gedit-io-error-message-area.c:302
 #, c-format
 msgid ""
 "Host name was invalid. Please check that you typed the location correctly "
 "and try again."
 msgstr "اسم المستضيف غير صحيح. تأكد من صحة الموقع المكتوب وجرب ثانية."
 
-#: ../gedit/gedit-io-error-message-area.c:307
+#: ../gedit/gedit-io-error-message-area.c:310
 #, c-format
 msgid "%s is not a regular file."
 msgstr "‏%s ليس ملفا عاديا"
 
-#: ../gedit/gedit-io-error-message-area.c:312
+#: ../gedit/gedit-io-error-message-area.c:315
 msgid "Connection timed out. Please try again."
 msgstr "انتهت مهلة الاتصال. أعد المحاولة."
 
-#: ../gedit/gedit-io-error-message-area.c:335
+#: ../gedit/gedit-io-error-message-area.c:338
 msgid "The file is too big."
 msgstr "الملف كبير جدا."
 
-#: ../gedit/gedit-io-error-message-area.c:376
+#: ../gedit/gedit-io-error-message-area.c:379
 #, c-format
 msgid "Unexpected error: %s"
 msgstr "خطأ غير متوقع: %s"
 
-#: ../gedit/gedit-io-error-message-area.c:412
+#: ../gedit/gedit-io-error-message-area.c:415
 msgid ""
 "The number of followed links is limited and the actual file could not be "
 "found within this limit."
@@ -1396,87 +1396,87 @@ msgstr ""
 "إن عدد الارتباطات المتبوعة محدود ولم يتم العثور على الملف الفعلي ضمن هذه "
 "الحدود."
 
-#: ../gedit/gedit-io-error-message-area.c:416
+#: ../gedit/gedit-io-error-message-area.c:419
 msgid "You do not have the permissions necessary to open the file."
 msgstr "لا تملك الصلاحيات المطلوبة لفتح هذا الملف."
 
-#: ../gedit/gedit-io-error-message-area.c:424
-#: ../gedit/gedit-io-error-message-area.c:666
+#: ../gedit/gedit-io-error-message-area.c:427
+#: ../gedit/gedit-io-error-message-area.c:669
 #, c-format
 msgid "Could not open the file %s."
 msgstr "تعذّر فتح الملف %s."
 
-#: ../gedit/gedit-io-error-message-area.c:434
-#: ../gedit/gedit-io-error-message-area.c:439
-#: ../gedit/gedit-io-error-message-area.c:560
-#: ../gedit/gedit-io-error-message-area.c:569
+#: ../gedit/gedit-io-error-message-area.c:437
+#: ../gedit/gedit-io-error-message-area.c:442
+#: ../gedit/gedit-io-error-message-area.c:563
+#: ../gedit/gedit-io-error-message-area.c:572
 msgid "_Retry"
 msgstr "أ_عد المحاولة"
 
-#: ../gedit/gedit-io-error-message-area.c:483
+#: ../gedit/gedit-io-error-message-area.c:486
 msgid "gedit cannot find the file. Perhaps it has recently been deleted."
 msgstr "لم يستطيع محرر النصوص إيجاد الملف. ربما يكون قد حُذفَ مؤخراً."
 
-#: ../gedit/gedit-io-error-message-area.c:492
+#: ../gedit/gedit-io-error-message-area.c:495
 #, c-format
 msgid "Could not revert the file %s."
 msgstr "لا يمكن استعادة الملف %s."
 
-#: ../gedit/gedit-io-error-message-area.c:516
+#: ../gedit/gedit-io-error-message-area.c:519
 msgid "Ch_aracter Coding:"
 msgstr "ترميز المحا_رف:"
 
-#: ../gedit/gedit-io-error-message-area.c:668
+#: ../gedit/gedit-io-error-message-area.c:671
 msgid "gedit has not been able to detect the character coding."
 msgstr "لم يتمكن محرر النصوص من كشف ترميز المحارف."
 
-#: ../gedit/gedit-io-error-message-area.c:670
-#: ../gedit/gedit-io-error-message-area.c:679
+#: ../gedit/gedit-io-error-message-area.c:673
+#: ../gedit/gedit-io-error-message-area.c:682
 msgid "Please check that you are not trying to open a binary file."
 msgstr "الرجاء التأكد من أنك لا تحاول فتح ملف ثنائي."
 
-#: ../gedit/gedit-io-error-message-area.c:671
+#: ../gedit/gedit-io-error-message-area.c:674
 msgid "Select a character coding from the menu and try again."
 msgstr "اختر ترميز محارف من القائمة وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:676
+#: ../gedit/gedit-io-error-message-area.c:679
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
 msgstr "لا يمكن فتح الملف %s باستعمال ترميزالمحارف %s."
 
-#: ../gedit/gedit-io-error-message-area.c:680
-#: ../gedit/gedit-io-error-message-area.c:732
+#: ../gedit/gedit-io-error-message-area.c:683
+#: ../gedit/gedit-io-error-message-area.c:735
 msgid "Select a different character coding from the menu and try again."
 msgstr "اختر ترميز محارف مختلف من القائمة وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:727
+#: ../gedit/gedit-io-error-message-area.c:730
 #, c-format
 msgid "Could not save the file %s using the %s character coding."
 msgstr "تعذّر حفظ الملف %s باستعمال ترميز المحارف %s."
 
-#: ../gedit/gedit-io-error-message-area.c:730
+#: ../gedit/gedit-io-error-message-area.c:733
 msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
 msgstr ""
 "يحوي المستند محرفًا أو محارف لا يمكن ترميزها باستعمال ترميز المحارف المحدد."
 
-#: ../gedit/gedit-io-error-message-area.c:798
-#: ../gedit/gedit-io-error-message-area.c:806
+#: ../gedit/gedit-io-error-message-area.c:801
+#: ../gedit/gedit-io-error-message-area.c:809
 msgid "_Edit Anyway"
 msgstr "_حرّر على أي حال  "
 
-#: ../gedit/gedit-io-error-message-area.c:801
-#: ../gedit/gedit-io-error-message-area.c:809
+#: ../gedit/gedit-io-error-message-area.c:804
+#: ../gedit/gedit-io-error-message-area.c:812
 msgid "_Don't Edit"
 msgstr "_لا تحرّر"
 
-#: ../gedit/gedit-io-error-message-area.c:827
+#: ../gedit/gedit-io-error-message-area.c:830
 #, c-format
 msgid "This file (%s) is already open in another gedit window."
 msgstr "هذا الملف (%s) مفتوح مسبقا في نافذة محرر نصوص أخرى."
 
-#: ../gedit/gedit-io-error-message-area.c:842
+#: ../gedit/gedit-io-error-message-area.c:845
 msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
@@ -1484,43 +1484,43 @@ msgstr ""
 "فتح محرر النصوص سيرورة الملف هذه بشكل غير قابل للتحرير. هل تريد أن تحرره على "
 "أي حال؟"
 
-#: ../gedit/gedit-io-error-message-area.c:901
-#: ../gedit/gedit-io-error-message-area.c:911
-#: ../gedit/gedit-io-error-message-area.c:1011
-#: ../gedit/gedit-io-error-message-area.c:1021
+#: ../gedit/gedit-io-error-message-area.c:904
+#: ../gedit/gedit-io-error-message-area.c:914
+#: ../gedit/gedit-io-error-message-area.c:1014
+#: ../gedit/gedit-io-error-message-area.c:1024
 msgid "S_ave Anyway"
 msgstr "احفظ على أي حال"
 
-#: ../gedit/gedit-io-error-message-area.c:905
-#: ../gedit/gedit-io-error-message-area.c:915
-#: ../gedit/gedit-io-error-message-area.c:1015
-#: ../gedit/gedit-io-error-message-area.c:1025
+#: ../gedit/gedit-io-error-message-area.c:908
+#: ../gedit/gedit-io-error-message-area.c:918
+#: ../gedit/gedit-io-error-message-area.c:1018
+#: ../gedit/gedit-io-error-message-area.c:1028
 msgid "D_on't Save"
 msgstr "لا تحفظ"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:936
+#: ../gedit/gedit-io-error-message-area.c:939
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "تم تعديل الملف %s منذ قراءته."
 
-#: ../gedit/gedit-io-error-message-area.c:952
+#: ../gedit/gedit-io-error-message-area.c:955
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr "إذا حفظت، ستضيع كل التغييرات الخارجية. أأحفظ رغم ذلك؟"
 
-#: ../gedit/gedit-io-error-message-area.c:1046
+#: ../gedit/gedit-io-error-message-area.c:1049
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "تعذّر إنشاء ملف احتياطي عند حفظ %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1049
+#: ../gedit/gedit-io-error-message-area.c:1052
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "تعذّر إنشاء ملف احتياطي مؤقت عند حفظ %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1066
+#: ../gedit/gedit-io-error-message-area.c:1069
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1531,7 +1531,7 @@ msgstr ""
 "النسخة القديمة للملف. أأحفظ على أي حال؟"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1126
+#: ../gedit/gedit-io-error-message-area.c:1129
 #, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
@@ -1540,7 +1540,7 @@ msgstr ""
 "لا يمكن لمحرر النصوص التعامل مع مواقع %s في نمط الكتابة. تأكد من صحة كتابتك "
 "الموقع وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:1134
+#: ../gedit/gedit-io-error-message-area.c:1137
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1548,45 +1548,45 @@ msgstr ""
 "لا يمكن لمحرر النصوص التعامل مع هذا الموقع في نمط الكتابة. رجاء، تأكد من صحة "
 "كتابتك الموقع وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:1143
+#: ../gedit/gedit-io-error-message-area.c:1146
 #, c-format
 msgid ""
 "%s is not a valid location. Please check that you typed the location "
 "correctly and try again."
 msgstr "‏%s موقع غير سليم. تأكد من صحة كتابتك الموقع وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:1149
+#: ../gedit/gedit-io-error-message-area.c:1152
 msgid ""
 "You do not have the permissions necessary to save the file. Please check "
 "that you typed the location correctly and try again."
 msgstr ""
 "ليس لديك الصلاحيات اللازمة لحفظ الملف. تأكد من صحة كتابتك الموقع وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:1155
+#: ../gedit/gedit-io-error-message-area.c:1158
 msgid ""
 "There is not enough disk space to save the file. Please free some disk space "
 "and try again."
 msgstr "لا يوجد حيز قرص كاف لحفظ الملف. أخل بعض الحيز من القرص وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:1160
+#: ../gedit/gedit-io-error-message-area.c:1163
 msgid ""
 "You are trying to save the file on a read-only disk. Please check that you "
 "typed the location correctly and try again."
 msgstr ""
 "تحاول حفظ الملف في قرص للقراءة فقط. تأكد من صحة كتابتك الموقع وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:1166
+#: ../gedit/gedit-io-error-message-area.c:1169
 msgid "A file with the same name already exists. Please use a different name."
 msgstr "يوجد ملف له نفس الاسم. استعمل اسما مختلفا."
 
-#: ../gedit/gedit-io-error-message-area.c:1171
+#: ../gedit/gedit-io-error-message-area.c:1174
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please use a shorter name."
 msgstr ""
 "القرص الذي تحاول حفظ الملف فيه له يحدد طول أسماء الملفات. استعمل اسما أقصر."
 
-#: ../gedit/gedit-io-error-message-area.c:1178
+#: ../gedit/gedit-io-error-message-area.c:1181
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1595,7 +1595,7 @@ msgstr ""
 "القرص الذي تحاول حفظ الملف فيه له قيود غلى أحجام الملفات. رجاء حاول حفظ ملف "
 "اصغر أو احفظ الملف في قرص لا توجد به هذه القيود."
 
-#: ../gedit/gedit-io-error-message-area.c:1193
+#: ../gedit/gedit-io-error-message-area.c:1196
 #, c-format
 msgid "Could not save the file %s."
 msgstr "لا يمكن حفظ الملف %s."
@@ -1603,21 +1603,21 @@ msgstr "لا يمكن حفظ الملف %s."
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1235
+#: ../gedit/gedit-io-error-message-area.c:1238
 #, c-format
 msgid "The file %s changed on disk."
 msgstr "لقد تغيَّر الملف %s على القرص."
 
-#: ../gedit/gedit-io-error-message-area.c:1240
+#: ../gedit/gedit-io-error-message-area.c:1243
 msgid "Do you want to drop your changes and reload the file?"
 msgstr "أتريد إلغاء تعديلاتك وإعادة تحميل الملف؟"
 
-#: ../gedit/gedit-io-error-message-area.c:1242
+#: ../gedit/gedit-io-error-message-area.c:1245
 msgid "Do you want to reload the file?"
 msgstr "أترغب بإعادة تحميل لملف؟"
 
-#: ../gedit/gedit-io-error-message-area.c:1248
-#: ../gedit/gedit-io-error-message-area.c:1259
+#: ../gedit/gedit-io-error-message-area.c:1251
+#: ../gedit/gedit-io-error-message-area.c:1262
 msgid "_Reload"
 msgstr "أعِد ال_تحميل"
 
@@ -1626,15 +1626,15 @@ msgstr "أعِد ال_تحميل"
 msgid "Could not obtain backup filename"
 msgstr "لا يمكن الحصول على اسم ملف الاحتياط"
 
-#: ../gedit/gedit-notebook.c:854
+#: ../gedit/gedit-notebook.c:903
 msgid "Close document"
 msgstr "أغلق المستند"
 
-#: ../gedit/gedit-panel.c:364 ../gedit/gedit-panel.c:572
+#: ../gedit/gedit-panel.c:355 ../gedit/gedit-panel.c:563
 msgid "Empty"
 msgstr "فارغ"
 
-#: ../gedit/gedit-panel.c:517 ../gedit/gedit-panel.c:591
+#: ../gedit/gedit-panel.c:508 ../gedit/gedit-panel.c:582
 msgid "Hide panel"
 msgstr "اخف اللوحة"
 
@@ -1666,11 +1666,15 @@ msgstr "ن_شط الكل"
 msgid "_Deactivate All"
 msgstr "_عطّل الكل"
 
-#: ../gedit/gedit-plugin-manager.c:833
+#: ../gedit/gedit-plugin-manager.c:800
+msgid "Active _Plugins:"
+msgstr "الملحقات ال_نشِطة"
+
+#: ../gedit/gedit-plugin-manager.c:825
 msgid "_About Plugin"
 msgstr "_عنْ الملحق"
 
-#: ../gedit/gedit-plugin-manager.c:837
+#: ../gedit/gedit-plugin-manager.c:829
 msgid "C_onfigure Plugin"
 msgstr "ا_ضبط الملحق"
 
@@ -1692,7 +1696,7 @@ msgstr "الملف: %s"
 msgid "Page %N of %Q"
 msgstr "الصفحة %N من %Q"
 
-#: ../gedit/gedit-print-job.c:805
+#: ../gedit/gedit-print-job.c:809
 msgid "Preparing..."
 msgstr "يجري التحضير..."
 
@@ -1995,206 +1999,206 @@ msgstr "احفظ الملف الحالي باسم مختلف"
 msgid "Revert to a saved version of the file"
 msgstr "استرجع النسخة محفوظة من الملف"
 
-#: ../gedit/gedit-ui.h:86
+#: ../gedit/gedit-ui.h:87
 msgid "Page Set_up..."
 msgstr "إ_عداد الصفحة.."
 
-#: ../gedit/gedit-ui.h:87
+#: ../gedit/gedit-ui.h:88
 msgid "Setup the page settings"
 msgstr "اضبط إعدادات الصفحة"
 
-#: ../gedit/gedit-ui.h:88
+#: ../gedit/gedit-ui.h:90
 msgid "Print Previe_w"
 msgstr "م_عاينة الطباعة"
 
-#: ../gedit/gedit-ui.h:89
+#: ../gedit/gedit-ui.h:91
 msgid "Print preview"
 msgstr "معاينة الطباعة"
 
-#: ../gedit/gedit-ui.h:90
+#: ../gedit/gedit-ui.h:92
 msgid "_Print..."
 msgstr "ا_طبع..."
 
-#: ../gedit/gedit-ui.h:91
+#: ../gedit/gedit-ui.h:93
 msgid "Print the current page"
 msgstr "اطبع الصفحة الحالية"
 
-#: ../gedit/gedit-ui.h:93
+#: ../gedit/gedit-ui.h:95
 msgid "Close the current file"
 msgstr "أغلق الملف الحالي"
 
-#: ../gedit/gedit-ui.h:97
+#: ../gedit/gedit-ui.h:99
 msgid "Undo the last action"
 msgstr "تراجع عن الفعل الأخير"
 
-#: ../gedit/gedit-ui.h:99
+#: ../gedit/gedit-ui.h:101
 msgid "Redo the last undone action"
 msgstr "أعِد آخر عملية متراجع عنها"
 
-#: ../gedit/gedit-ui.h:101
+#: ../gedit/gedit-ui.h:103
 msgid "Cut the selection"
 msgstr "قص الاختيار"
 
-#: ../gedit/gedit-ui.h:103
+#: ../gedit/gedit-ui.h:105
 msgid "Copy the selection"
 msgstr "انسخ الاختيار"
 
-#: ../gedit/gedit-ui.h:105
+#: ../gedit/gedit-ui.h:107
 msgid "Paste the clipboard"
 msgstr "الصق محتويات الحافظة"
 
-#: ../gedit/gedit-ui.h:107
+#: ../gedit/gedit-ui.h:109
 msgid "Delete the selected text"
 msgstr "احذف النصّ المحدد"
 
-#: ../gedit/gedit-ui.h:108
+#: ../gedit/gedit-ui.h:110
 msgid "Select _All"
 msgstr "اختر الك_ل"
 
-#: ../gedit/gedit-ui.h:109
+#: ../gedit/gedit-ui.h:111
 msgid "Select the entire document"
 msgstr "اختر كل المستند"
 
 #. View menu
-#: ../gedit/gedit-ui.h:112
+#: ../gedit/gedit-ui.h:114
 msgid "_Highlight Mode"
 msgstr "_نمط الإبراز"
 
 #. Search menu
-#: ../gedit/gedit-ui.h:115
+#: ../gedit/gedit-ui.h:117
 msgid "_Find..."
 msgstr "ا_بحث..."
 
-#: ../gedit/gedit-ui.h:116
+#: ../gedit/gedit-ui.h:118
 msgid "Search for text"
 msgstr "ابحث عن نص"
 
-#: ../gedit/gedit-ui.h:117
+#: ../gedit/gedit-ui.h:119
 msgid "Find Ne_xt"
 msgstr "ابحث عن الت_الي"
 
-#: ../gedit/gedit-ui.h:118
+#: ../gedit/gedit-ui.h:120
 msgid "Search forwards for the same text"
 msgstr "ابحث للأمام عن نفس النص"
 
-#: ../gedit/gedit-ui.h:119
+#: ../gedit/gedit-ui.h:121
 msgid "Find Pre_vious"
 msgstr "ابحث عن ال_سابق"
 
-#: ../gedit/gedit-ui.h:120
+#: ../gedit/gedit-ui.h:122
 msgid "Search backwards for the same text"
 msgstr "ابحث للخلف عن نفس النص"
 
-#: ../gedit/gedit-ui.h:121
+#: ../gedit/gedit-ui.h:123
 msgid "_Replace..."
 msgstr "ا_ستبدل..."
 
-#: ../gedit/gedit-ui.h:122
+#: ../gedit/gedit-ui.h:124
 msgid "Search for and replace text"
 msgstr "ابحث و استبدل نص"
 
-#: ../gedit/gedit-ui.h:123
+#: ../gedit/gedit-ui.h:125
 msgid "_Clear Highlight"
 msgstr "ا_مسح الإبراز"
 
-#: ../gedit/gedit-ui.h:124
+#: ../gedit/gedit-ui.h:126
 msgid "Clear highlighting of search matches"
 msgstr "امسح إبراز موافقات البحث"
 
-#: ../gedit/gedit-ui.h:125
+#: ../gedit/gedit-ui.h:127
 msgid "Go to _Line..."
 msgstr "اذهب إلى الس_طر..."
 
-#: ../gedit/gedit-ui.h:126
+#: ../gedit/gedit-ui.h:128
 msgid "Go to a specific line"
 msgstr "اذهب إلى سطر معيّن"
 
-#: ../gedit/gedit-ui.h:127
+#: ../gedit/gedit-ui.h:129
 msgid "_Incremental Search..."
 msgstr "بحث _تزايدي..."
 
-#: ../gedit/gedit-ui.h:128
+#: ../gedit/gedit-ui.h:130
 msgid "Incrementally search for text"
 msgstr "ابحث عن النص تزايديا"
 
 #. Documents menu
-#: ../gedit/gedit-ui.h:131
+#: ../gedit/gedit-ui.h:133
 msgid "_Save All"
 msgstr "ا_حفظ الكل"
 
-#: ../gedit/gedit-ui.h:132
+#: ../gedit/gedit-ui.h:134
 msgid "Save all open files"
 msgstr "احفظ جميع الملفات المفتوحة"
 
-#: ../gedit/gedit-ui.h:133
+#: ../gedit/gedit-ui.h:135
 msgid "_Close All"
 msgstr "أ_غلق الكلّ"
 
-#: ../gedit/gedit-ui.h:134
+#: ../gedit/gedit-ui.h:136
 msgid "Close all open files"
 msgstr "أغلق جميع الملفات المفتوحة"
 
-#: ../gedit/gedit-ui.h:135
+#: ../gedit/gedit-ui.h:137
 msgid "_Previous Document"
 msgstr "ال_مستند السابق"
 
-#: ../gedit/gedit-ui.h:136
+#: ../gedit/gedit-ui.h:138
 msgid "Activate previous document"
 msgstr "نشّط المستند السابق"
 
-#: ../gedit/gedit-ui.h:137
+#: ../gedit/gedit-ui.h:139
 msgid "_Next Document"
 msgstr "المستند ال_تالي"
 
-#: ../gedit/gedit-ui.h:138
+#: ../gedit/gedit-ui.h:140
 msgid "Activate next document"
 msgstr "نشّط المستند التالي"
 
-#: ../gedit/gedit-ui.h:139
+#: ../gedit/gedit-ui.h:141
 msgid "_Move to New Window"
 msgstr "ان_قل إلى نافذةٍ جديدة"
 
-#: ../gedit/gedit-ui.h:140
+#: ../gedit/gedit-ui.h:142
 msgid "Move the current document to a new window"
 msgstr "انقل المستند الحالي إلى نافذة جديدة"
 
-#: ../gedit/gedit-ui.h:147
+#: ../gedit/gedit-ui.h:149
 msgid "Quit the program"
 msgstr "اخرج من البرنامج"
 
-#: ../gedit/gedit-ui.h:152
+#: ../gedit/gedit-ui.h:154
 msgid "_Toolbar"
 msgstr "_شريط الأدوات"
 
-#: ../gedit/gedit-ui.h:153
+#: ../gedit/gedit-ui.h:155
 msgid "Show or hide the toolbar in the current window"
 msgstr "أظهر أو اخف شريط الأدوات في النافذة الحالية "
 
-#: ../gedit/gedit-ui.h:155
+#: ../gedit/gedit-ui.h:157
 msgid "_Statusbar"
 msgstr "_شريط الحالة"
 
-#: ../gedit/gedit-ui.h:156
+#: ../gedit/gedit-ui.h:158
 msgid "Show or hide the statusbar in the current window"
 msgstr "أظهر أو اخف شريط الحالة في النافذة الحالية"
 
-#: ../gedit/gedit-ui.h:159
+#: ../gedit/gedit-ui.h:161
 msgid "Edit text at fullscreen"
 msgstr "حرّر الملفات بملء الشاشة"
 
-#: ../gedit/gedit-ui.h:166
+#: ../gedit/gedit-ui.h:168
 msgid "Side _Pane"
 msgstr "ال_لوحة الجانبية"
 
-#: ../gedit/gedit-ui.h:167
+#: ../gedit/gedit-ui.h:169
 msgid "Show or hide the side pane in the current window"
 msgstr "أظهر أو اخف اللوحة الجانبية في النافذة الحالية "
 
-#: ../gedit/gedit-ui.h:169
+#: ../gedit/gedit-ui.h:171
 msgid "_Bottom Pane"
 msgstr "اللوحة ال_سفلية"
 
-#: ../gedit/gedit-ui.h:170
+#: ../gedit/gedit-ui.h:172
 msgid "Show or hide the bottom pane in the current window"
 msgstr "أظهر أو اخف اللوحة السفلية في النافذة الحالية "
 
@@ -2233,11 +2237,11 @@ msgstr "طابِق _كل الكلمة فقط"
 msgid "_Match Case"
 msgstr "_طابِق الحالة"
 
-#: ../gedit/gedit-view.c:1386 ../gedit/gedit-view.c:1411
+#: ../gedit/gedit-view.c:1387 ../gedit/gedit-view.c:1412
 msgid "String you want to search for"
 msgstr "السلسة التي تريد البحث عنها"
 
-#: ../gedit/gedit-view.c:1394 ../gedit/gedit-view.c:1420
+#: ../gedit/gedit-view.c:1395 ../gedit/gedit-view.c:1421
 msgid "Line you want to move the cursor to"
 msgstr "السطر الذي تريد تحريك المؤشّر إليه"
 
@@ -2249,7 +2253,7 @@ msgstr "استخدم نمط الإبراز %s"
 #. add the "Plain Text" item before all the others
 #. Translators: "Plain Text" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:995 ../gedit/gedit-window.c:1880
+#: ../gedit/gedit-window.c:995 ../gedit/gedit-window.c:1896
 #: ../plugins/externaltools/tools/manager.py:121
 #: ../plugins/externaltools/tools/manager.py:423
 #: ../plugins/externaltools/tools/manager.py:533
@@ -2275,25 +2279,25 @@ msgstr "افتح ملفا استخدم مؤخرا"
 msgid "Open"
 msgstr "افتح"
 
-#: ../gedit/gedit-window.c:1452
+#: ../gedit/gedit-window.c:1451
 msgid "Save"
 msgstr "احفظ"
 
-#: ../gedit/gedit-window.c:1454
+#: ../gedit/gedit-window.c:1453
 msgid "Print"
 msgstr "اطبع"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1605
+#: ../gedit/gedit-window.c:1621
 #, c-format
 msgid "Activate '%s'"
 msgstr "نشّط '%s'"
 
-#: ../gedit/gedit-window.c:1858
+#: ../gedit/gedit-window.c:1874
 msgid "Use Spaces"
 msgstr "استخدم المسافات"
 
-#: ../gedit/gedit-window.c:1929
+#: ../gedit/gedit-window.c:1945
 msgid "Tab Width"
 msgstr "عرض التبويب"
 
@@ -2739,59 +2743,59 @@ msgstr ""
 "none (لا شيء)، hidden (الملفات المخفية)، binary (الملفات الثنائية) و "
 "hidden_and_binary (الملفات المخفية و الثنائية)."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:592
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:597
 msgid "_Set root to active document"
 msgstr "_حدد جذر المستند النشِط"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:594
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:599
 msgid "Set the root to the active document location"
 msgstr "حدد جذر موقع المستند النشِط"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:599
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:604
 msgid "_Open terminal here"
 msgstr "ا_فتح طرفية هنا"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:601
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:606
 msgid "Open a terminal at the currently opened directory"
 msgstr "افتح طرفية عند الدليل المفتوح حاليا"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:737
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:742
 msgid "File Browser"
 msgstr "متصفح الملفات"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:868
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:873
 msgid "An error occurred while creating a new directory"
 msgstr "حدث خطأ أثناء إنشاء دليل جديد"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:871
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:876
 msgid "An error occurred while creating a new file"
 msgstr "حدث خطأ أثناء إنشاء ملف جديد"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:876
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:881
 msgid "An error occurred while renaming a file or directory"
 msgstr "حدث خطأ أثناء تغيير اسم دليل أو ملف"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:881
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:886
 msgid "An error occurred while deleting a file or directory"
 msgstr "حدث خطأ أثناء حذف دليل أو ملف"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:886
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:891
 msgid "An error occurred while opening a directory in the file manager"
 msgstr "حدث خطأ أثناء فتح دليل في مدير الملفات"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:890
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:895
 msgid "An error occurred while setting a root directory"
 msgstr "حدث خطأ أثناء تحديد الدليل الجذر"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:894
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:899
 msgid "An error occurred while loading a directory"
 msgstr "حدث خطأ أثناء تحميل دليل"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:897
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:902
 msgid "An error occurred"
 msgstr "حدث خطأ"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1192
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1197
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
@@ -2799,33 +2803,33 @@ msgstr ""
 "لا يمكن نقل الملف إلى المهملات،\n"
 "أتريد حذفه نهائيا؟"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1196
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1201
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "لا يمكن نقل الملف \"%s\" إلى سلة المهملات."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1199
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1204
 msgid "The selected files cannot be moved to the trash."
 msgstr "لا يمكن نقل الملف المختار إلى المهملات."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1232
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1237
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "أمتأكّدٌ أنّك تريد حذف \"%s\" نهائيا؟"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1235
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1240
 msgid "Are you sure you want to permanently delete the selected files?"
 msgstr "أمتأكّدٌ أنّك تريد حذف الملفات المختارة نهائيا؟"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1238
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1243
 msgid "If you delete an item, it is permanently lost."
 msgstr "سيضيع كل عنصر تحذفه نهائيا."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1664
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1666
 msgid "(Empty)"
 msgstr "(فارغ)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3298
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3304
 msgid ""
 "The renamed file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2833,21 +2837,21 @@ msgstr ""
 "الملف المغيّر اسمه لا يظهر حاليا بسبب الترشيح. يجب تغيير إعدادات الترشيح "
 "لإظهار الملف"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3536
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3542
 msgid "file"
 msgstr "ملفّ"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3560
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3566
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
 msgstr "الملف الجديد يتم ترشيحه حاليا. يجب تغيير إعدادات الترشيح لإظهار الملف"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3588
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3594
 msgid "directory"
 msgstr "دليل"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3608
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3614
 msgid ""
 "The new directory is currently filtered out. You need to adjust your filter "
 "settings to make the directory visible"
@@ -2855,148 +2859,150 @@ msgstr ""
 "المجلد الجديد لا يظهر حاليا بسبب الترشيح. يجب تغيير إعدادات الترشيح لإظهار "
 "الملف"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:698
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:701
 msgid "Bookmarks"
 msgstr "العلامات"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:779
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:782
 msgid "_Filter"
 msgstr "_مرشّح"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:784
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:787
 msgid "_Move To Trash"
 msgstr "ان_قل إلى سلّة المهملات"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:785
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:788
 msgid "Move selected file or folder to trash"
 msgstr "انقل الملف أو الدليل المختار إلى سلة المهملات"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:787
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:790
 msgid "_Delete"
 msgstr "اح_ذف"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:788
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:791
 msgid "Delete selected file or folder"
 msgstr "احذف الملف أو المجلد المختار"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:794
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:797
 msgid "Up"
 msgstr "أعلى"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:795
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:798
 msgid "Open the parent folder"
 msgstr "افتح المجلد الأب"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:800
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
 msgid "_New Folder"
 msgstr "مجلّد جديد"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:801
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
 msgid "Add new empty folder"
 msgstr "أضف مجلّدا جديدا فارغا"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
 msgid "New F_ile"
 msgstr "م_لف جديد"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
 msgid "Add new empty file"
 msgstr "أضف ملفا جديدا فارغا"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:812
 msgid "_Rename"
 msgstr "_غيّر الاسم"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:810
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:813
 msgid "Rename selected file or folder"
 msgstr "غيّر اسم الملف أو المجلد المختار"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:816
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
 msgid "_Previous Location"
 msgstr "الموقع ال_سابق"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:818
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
 msgid "Go to the previous visited location"
 msgstr "اذهب إلى الموقع المزار سابقا"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
 msgid "_Next Location"
 msgstr "الموقع التالي"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:824
 msgid "Go to the next visited location"
 msgstr "اذهب إلى الموقع المزار تاليًا"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:825
 msgid "Re_fresh View"
 msgstr "ج_دّد المظهر"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:826
 msgid "Refresh the view"
 msgstr "جدّد المظهر"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:824
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:827
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:845
 msgid "_View Folder"
 msgstr "ا_عرض المجلد"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:825
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:828
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:846
 msgid "View folder in file manager"
 msgstr "اعرض المجلد في مدير الملفات"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
 msgid "Show _Hidden"
 msgstr "أظهر ال_مخفي"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
 msgid "Show hidden files and folders"
 msgstr "أظهر الملفّات والمجلّدات المخفية"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:838
 msgid "Show _Binary"
 msgstr "أظهر الملفات ال_ثنائية"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:839
 msgid "Show binary files"
 msgstr "أظهر الملفات ال_ثنائية"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:944
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:953
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:974
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:962
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:971
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:992
 msgid "Previous location"
 msgstr "الموقع السابق"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:946
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:964
 msgid "Go to previous location"
 msgstr "اذهب إلى الموقع السابق"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:948
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:969
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:966
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:987
 msgid "Go to a previously opened location"
 msgstr "اذهب إلى الموقع المفتوح سابقًا"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:965
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:983
 msgid "Next location"
 msgstr "الموقع التالي"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:967
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:985
 msgid "Go to next location"
 msgstr "اذهب إلى الموقع التالي"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1178
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1196
 msgid "_Match Filename"
 msgstr "_طابِق اسم الملف"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2044
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2071
 #, c-format
 msgid "No mount object for mounted volume: %s"
 msgstr "لا يوجد كائن وصل للقرص الموصول: %s"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2124
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2151
 #, c-format
 msgid "Could not open media: %s"
 msgstr "تعذّر فتح الوسيط: %s"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2171
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2198
 #, c-format
 msgid "Could not mount volume: %s"
 msgstr "تعذّر وصل القرص: %s"
