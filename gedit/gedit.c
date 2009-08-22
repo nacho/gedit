@@ -82,7 +82,6 @@ static BaconMessageConnection *connection;
 /* command line */
 static gint line_position = 0;
 static gchar *encoding_charset = NULL;
-static const GeditEncoding *encoding;
 static gboolean new_window_option = FALSE;
 static gboolean new_document_option = FALSE;
 static gchar **remaining_args = NULL;
@@ -136,6 +135,24 @@ static const GOptionEntry options [] =
 };
 
 static void
+free_command_line_data (void)
+{
+	g_slist_foreach (file_list, (GFunc) g_object_unref, NULL);
+	g_slist_free (file_list);
+	file_list = NULL;
+
+	g_strfreev (remaining_args);
+	remaining_args = NULL;
+
+	g_free (encoding_charset);
+	encoding_charset = NULL;
+	
+	new_window_option = FALSE;
+	new_document_option = FALSE;
+	line_position = 0;
+}
+
+static void
 gedit_get_command_line_data (void)
 {
 	if (remaining_args)
@@ -162,17 +179,6 @@ gedit_get_command_line_data (void)
 		}
 
 		file_list = g_slist_reverse (file_list);
-	}
-
-	if (encoding_charset)
-	{
-		encoding = gedit_encoding_get_from_charset (encoding_charset);
-		if (encoding == NULL)
-			g_print (_("%s: invalid encoding.\n"),
-				 encoding_charset);
-
-		g_free (encoding_charset);
-		encoding_charset = NULL;
 	}
 }
 
@@ -241,6 +247,7 @@ static void
 on_message_received (const char *message,
 		     gpointer    data)
 {
+	const GeditEncoding *encoding = NULL;
 	gchar **commands;
 	gchar **params;
 	gint workspace;
@@ -387,18 +394,10 @@ on_message_received (const char *message,
 
 	gtk_window_present (GTK_WINDOW (window));
 
-	/* free the file list and reset to default */
-	g_slist_foreach (file_list, (GFunc) g_object_unref, NULL);
-	g_slist_free (file_list);
-	file_list = NULL;
-
  out:
 	g_strfreev (commands);
-
-	new_window_option = FALSE;
-	new_document_option = FALSE;
-	encoding = NULL;
-	line_position = 0;
+	
+	free_command_line_data ();
 }
 
 /* clientside */
@@ -618,7 +617,9 @@ main (int argc, char *argv[])
 			gedit_get_command_line_data ();
 
 			send_bacon_message ();
-
+			
+			free_command_line_data ();
+			
 			/* we never popup a window... tell startup-notification
 			 * that we are done.
 			 */
@@ -694,6 +695,16 @@ main (int argc, char *argv[])
 
 		if (file_list != NULL)
 		{
+			const GeditEncoding *encoding = NULL;
+		
+			if (encoding_charset)
+			{
+				encoding = gedit_encoding_get_from_charset (encoding_charset);
+				if (encoding == NULL)
+					g_print (_("%s: invalid encoding.\n"),
+						 encoding_charset);
+			}
+		
 			gedit_debug_message (DEBUG_APP, "Load files");
 			_gedit_cmd_load_files_from_prompt (window, 
 							   file_list, 
@@ -709,16 +720,7 @@ main (int argc, char *argv[])
 		gedit_debug_message (DEBUG_APP, "Show window");
 		gtk_widget_show (GTK_WIDGET (window));
 
-		g_slist_foreach (file_list, (GFunc) g_object_unref, NULL);
-		g_slist_free (file_list);
-		file_list = NULL;
-
-		g_free (encoding_charset);
-
-		new_window_option = FALSE;
-		new_document_option = FALSE;
-		encoding = NULL;
-		line_position = 0;
+		free_command_line_data ();
 	}
 
 	gedit_debug_message (DEBUG_APP, "Start gtk-main");		
