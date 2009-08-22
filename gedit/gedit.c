@@ -180,6 +180,13 @@ gedit_get_command_line_data (void)
 
 		file_list = g_slist_reverse (file_list);
 	}
+	
+	if (encoding_charset &&
+	    (gedit_encoding_get_from_charset (encoding_charset) == NULL))
+	{
+		g_print (_("%s: invalid encoding.\n"),
+			 encoding_charset);
+	}
 }
 
 static guint32
@@ -698,12 +705,7 @@ main (int argc, char *argv[])
 			const GeditEncoding *encoding = NULL;
 		
 			if (encoding_charset)
-			{
 				encoding = gedit_encoding_get_from_charset (encoding_charset);
-				if (encoding == NULL)
-					g_print (_("%s: invalid encoding.\n"),
-						 encoding_charset);
-			}
 		
 			gedit_debug_message (DEBUG_APP, "Load files");
 			_gedit_cmd_load_files_from_prompt (window, 
