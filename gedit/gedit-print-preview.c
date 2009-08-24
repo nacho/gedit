@@ -250,6 +250,7 @@ set_zoom_fit_to_size (GeditPrintPreview *preview)
 {
 	GeditPrintPreviewPrivate *priv;	
 	double width, height;
+	double p_width, p_height;
 	double zoomx, zoomy;
 
 	priv = preview->priv;
@@ -267,24 +268,27 @@ set_zoom_fit_to_size (GeditPrintPreview *preview)
 	if ((priv->orientation == GTK_PAGE_ORIENTATION_LANDSCAPE) ||
 	    (priv->orientation == GTK_PAGE_ORIENTATION_REVERSE_LANDSCAPE))
 	{
-		zoomx = MAX (1, width - 2 * PAGE_PAD) / get_paper_height (preview);
-		zoomy = MAX (1, height - 2 * PAGE_PAD) / get_paper_width (preview);
+		p_width = get_paper_height (preview);
+		p_height = get_paper_width (preview);
 	}
 	else
 	{
-		zoomx = MAX (1, width - 2 * PAGE_PAD) / get_paper_width (preview);
-		zoomy = MAX (1, height - 2 * PAGE_PAD) / get_paper_height (preview);
+		p_width = get_paper_width (preview);
+		p_height = get_paper_height (preview);
 	}
+
+	zoomx = MAX (1, width - 2 * PAGE_PAD) / p_width;
+	zoomy = MAX (1, height - 2 * PAGE_PAD) / p_height;
 
 	if (zoomx <= zoomy)
 	{
 		priv->tile_w = width;
-		priv->tile_h = floor (0.5 + width * (priv->paper_h / priv->paper_w));
+		priv->tile_h = floor (0.5 + width * (p_height / p_width));
 		priv->scale = zoomx;
 	}
 	else
 	{
-		priv->tile_w = floor (0.5 + height * (priv->paper_w / priv->paper_h));
+		priv->tile_w = floor (0.5 + height * (p_width / p_height));
 		priv->tile_h = height;
 		priv->scale = zoomy;
 	}
