@@ -110,7 +110,7 @@ GeditPrintJob		*gedit_print_job_new			(GeditView                *view);
 
 void			 gedit_print_job_set_export_filename	(GeditPrintJob            *job,
 								 const gchar              *filename);
-								 
+
 GtkPrintOperationResult	 gedit_print_job_print			(GeditPrintJob            *job,
 								 GtkPrintOperationAction   action,
 								 GtkPageSetup             *page_setup,
@@ -118,15 +118,15 @@ GtkPrintOperationResult	 gedit_print_job_print			(GeditPrintJob            *job,
 								 GtkWindow                *parent,
 								 GError                  **error);
 
-void			 gedit_print_job_cancel                 (GeditPrintJob            *job);
+void			 gedit_print_job_cancel			(GeditPrintJob            *job);
 
-// GeditView		*gedit_print_job_get_view		(GeditPrintJob            *job);
-								 
-const gchar		*gedit_print_job_get_status_string      (GeditPrintJob            *job);
+const gchar		*gedit_print_job_get_status_string	(GeditPrintJob            *job);
 
-gdouble                  gedit_print_job_get_progress           (GeditPrintJob            *job);
+gdouble			 gedit_print_job_get_progress		(GeditPrintJob            *job);
 
-GtkPrintSettings        *gedit_print_job_get_print_settings     (GeditPrintJob            *job);
+GtkPrintSettings	*gedit_print_job_get_print_settings	(GeditPrintJob            *job);
+
+GtkPageSetup		*gedit_print_job_get_page_setup		(GeditPrintJob            *job);
 
 G_END_DECLS
 

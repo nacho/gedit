@@ -856,3 +856,10 @@ gedit_print_job_get_print_settings (GeditPrintJob *job)
 	return gtk_print_operation_get_print_settings (job->priv->operation);
 }
 
+GtkPageSetup *
+gedit_print_job_get_page_setup (GeditPrintJob *job)
+{
+	g_return_val_if_fail (GEDIT_IS_PRINT_JOB (job), NULL);
+
+	return gtk_print_operation_get_default_page_setup (job->priv->operation);
+}

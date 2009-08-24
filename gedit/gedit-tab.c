@@ -2321,17 +2321,18 @@ done_printing_cb (GeditPrintJob       *job,
 
 	// TODO: check status and error
 
-	/* Save the print settings */ 
+	/* Save the print settings and the page setup */ 
 	if (result ==  GEDIT_PRINT_JOB_RESULT_OK)
 	{
 		GeditDocument *doc;
 		GtkPrintSettings *settings;
+		GtkPageSetup *page_setup;
 
 		doc = gedit_tab_get_document (tab);
 
 		settings = gedit_print_job_get_print_settings (job);
 
-		/* remember them for this document */
+		/* remember settings for this document */
 		g_object_set_data_full (G_OBJECT (doc),
 					GEDIT_PRINT_SETTINGS_KEY,
 					g_object_ref (settings),
@@ -2340,6 +2341,18 @@ done_printing_cb (GeditPrintJob       *job,
 		/* make them the default */
 		_gedit_app_set_default_print_settings (gedit_app_get_default (),
 						       settings);
+
+		page_setup = gedit_print_job_get_page_setup (job);
+
+		/* remember page setup for this document */
+		g_object_set_data_full (G_OBJECT (doc),
+					GEDIT_PAGE_SETUP_KEY,
+					g_object_ref (page_setup),
+					(GDestroyNotify)g_object_unref);
+
+		/* make it the default */
+		_gedit_app_set_default_page_setup (gedit_app_get_default (),
+						   page_setup);
 	}
 
 #if 0
