@@ -246,19 +246,10 @@ PKG_CHECK_MODULES(GEDIT, [
 	glib-2.0 >= 2.18.0
 	gthread-2.0 >= 2.13.0
 	gio-2.0 >= 2.16.0
-	gtk+-2.0 >= 2.13.0
+	gtk+-2.0 >= 2.16.0
 	gtksourceview-2.0 >= 2.4.0
 	gconf-2.0 >= 1.1.11
 ])
-
-dnl FIXME: Remove this when removing sexy-icon-entry
-if $PKG_CONFIG --atleast-version 2.15.0 gtk+-2.0; then
-       gtkatleast=
-else
-       gtkatleast=no
-fi
-
-AM_CONDITIONAL(BUILD_SEXY, test "$gtkatleast" = "no")
 
 dnl FIXME: Remove this when removing gedit-message-area
 

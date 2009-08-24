@@ -47,10 +47,7 @@
 #include "gedit-prefs-manager-app.h"
 #include "gedit-marshal.h"
 #include "gedit-utils.h"
-/* FIXME: Remove this when using for more things gtk+ >= 2.15.0 */
-#if !GTK_CHECK_VERSION (2, 15, 0)
-#include "sexy-icon-entry.h"
-#endif
+
 
 #define GEDIT_VIEW_SCROLL_MARGIN 0.02
 #define GEDIT_VIEW_SEARCH_DIALOG_TIMEOUT (30*1000) /* 30 seconds */
@@ -1372,36 +1369,6 @@ search_entry_insert_text (GtkEditable *editable,
 static void
 customize_for_search_mode (GeditView *view)
 {
-/*
- * FIXME: Remove all this ifdef once we require gtk+ >= 2.15.0 for other things
- */
-#if !GTK_CHECK_VERSION (2, 15, 0)
-	GtkWidget *icon;
-	
-	if (view->priv->search_mode == SEARCH)
-	{
-		icon = gtk_image_new_from_stock (GTK_STOCK_FIND,
-						 GTK_ICON_SIZE_MENU);
-
-		gtk_widget_set_tooltip_text (view->priv->search_entry,
-					     _("String you want to search for"));
-	}
-	else
-	{
-		icon = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO,
-						 GTK_ICON_SIZE_MENU);
-
-		gtk_widget_set_tooltip_text (view->priv->search_entry,
-					     _("Line you want to move the cursor to"));
-	}
-	
-	gtk_widget_show (icon);
-	sexy_icon_entry_set_icon (SEXY_ICON_ENTRY(view->priv->search_entry),
-				  SEXY_ICON_ENTRY_PRIMARY,
-				  GTK_IMAGE (icon));
-
-	g_object_unref (icon);
-#else
 	if (view->priv->search_mode == SEARCH)
 	{
 		gtk_entry_set_icon_from_stock (GTK_ENTRY (view->priv->search_entry),
@@ -1420,7 +1387,6 @@ customize_for_search_mode (GeditView *view)
 		gtk_widget_set_tooltip_text (view->priv->search_entry,
 					     _("Line you want to move the cursor to"));
 	}
-#endif
 }
 
 static gboolean
@@ -1538,11 +1504,7 @@ ensure_search_window (GeditView *view)
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 3);
 
 	/* add entry */
-#if GTK_CHECK_VERSION (2, 15, 0)
 	view->priv->search_entry = gtk_entry_new ();
-#else
-	view->priv->search_entry = sexy_icon_entry_new ();
-#endif
 	gtk_widget_show (view->priv->search_entry);
 	
 	g_signal_connect (view->priv->search_entry, "populate_popup",
