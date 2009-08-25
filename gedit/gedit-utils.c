@@ -1378,7 +1378,7 @@ gedit_utils_drop_get_uris (GtkSelectionData *selection_data)
 	for (i = 0; uris[i] != NULL; i++)
 	{
 		gchar *uri;
-		
+		g_warning (uris[i]);
 		uri = gedit_utils_make_canonical_uri_from_shell_arg (uris[i]);
 		
 		/* Silently ignore malformed URI/filename */
@@ -1544,4 +1544,32 @@ gedit_utils_decode_uri (const gchar *uri,
 		*path = g_uri_unescape_segment (hier_part_start, hier_part_end, "/");
 	
 	return TRUE;
+}
+
+/* Copied from nautilus */
+gchar *
+gedit_utils_get_direct_save_filename (GdkDragContext *context)
+{
+	guchar *prop_text;
+	gint prop_len;
+	
+	if (!gdk_property_get (context->source_window, gdk_atom_intern ("XdndDirectSave0", FALSE),
+			       gdk_atom_intern ("text/plain", FALSE), 0, 1024, FALSE, NULL, NULL,
+			       &prop_len, &prop_text) && prop_text != NULL) {
+		return NULL;
+	}
+	
+	/* Zero-terminate the string */
+	prop_text = g_realloc (prop_text, prop_len + 1);
+	prop_text[prop_len] = '\0';
+	
+	/* Verify that the file name provided by the source is valid */
+	if (*prop_text == '\0' ||
+	    strchr ((const gchar *) prop_text, G_DIR_SEPARATOR) != NULL) {
+		gedit_debug_message (DEBUG_UTILS, "Invalid filename provided by XDS drag site");
+		g_free (prop_text);
+		return NULL;
+	}
+	
+	return (gchar *)prop_text;
 }

@@ -88,7 +88,13 @@ enum
 
 enum
 {
-	TARGET_URI_LIST = 100
+	TARGET_URI_LIST = 100,
+	TARGET_XDNDDIRECTSAVE
+};
+
+static const GtkTargetEntry drop_types [] = {
+	{ "text/uri-list", 0, TARGET_URI_LIST},
+	{ "XdndDirectSave0", 0, TARGET_XDNDDIRECTSAVE } /* XDS Protocol Type */
 };
 
 G_DEFINE_TYPE(GeditWindow, gedit_window, GTK_TYPE_WINDOW)
@@ -2762,6 +2768,27 @@ drag_data_received_cb (GtkWidget        *widget,
 		load_uris_from_drop (window, uri_list);
 		g_strfreev (uri_list);
 	}
+	else if (info == TARGET_XDNDDIRECTSAVE)
+	{
+		gchar *uri;
+	
+		uri = g_build_filename ("/tmp", gedit_utils_get_direct_save_filename (context),
+					NULL);
+	
+		uri_list = g_new (gchar *, 2);
+		uri_list[0] = uri;
+		uri_list[1] = NULL;
+		
+		/* Change the uri property */
+		gdk_property_change (GDK_DRAWABLE (context->source_window),
+				     gdk_atom_intern ("XdndDirectSave0", FALSE),
+				     gdk_atom_intern ("text/plain", FALSE), 8,
+				     GDK_PROP_MODE_REPLACE, (const guchar *) uri,
+				     strlen (uri));
+		
+		load_uris_from_drop (window, uri_list);
+		g_strfreev (uri_list);
+	}
 }
 
 /* Handle drops on the GeditView */
@@ -3827,8 +3854,8 @@ gedit_window_init (GeditWindow *window)
 			   GTK_DEST_DEFAULT_MOTION |
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
 			   GTK_DEST_DEFAULT_DROP,
-			   NULL,
-			   0,
+			   drop_types,
+			   G_N_ELEMENTS (drop_types),
 			   GDK_ACTION_COPY);
 
 	/* Add uri targets */
@@ -3882,6 +3909,10 @@ gedit_window_init (GeditWindow *window)
 	g_signal_connect (window,
 			  "drag_data_received",
 	                  G_CALLBACK (drag_data_received_cb), 
+	                  NULL);
+	g_signal_connect (window,
+			  "drag_drop",
+	                  G_CALLBACK (drag_drop_cb), 
 	                  NULL);
 
 	/* we can get the clipboard only after the widget

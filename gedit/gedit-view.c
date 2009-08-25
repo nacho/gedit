@@ -1883,11 +1883,15 @@ drag_get_uri_target (GtkWidget      *widget,
 	GdkAtom target;
 	GtkTargetList *tl;
 	
+	target = gdk_drag_get_selection (context);
+	g_warning (gdk_atom_name (target));
+	
 	tl = gtk_target_list_new (NULL, 0);
 	gtk_target_list_add_uri_targets (tl, 0);
 	
 	target = gtk_drag_dest_find_target (widget, context, tl);
 	gtk_target_list_unref (tl);
+	g_warning (gdk_atom_name (target));
 	
 	return target;	
 }
