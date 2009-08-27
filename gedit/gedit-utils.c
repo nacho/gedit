@@ -1378,7 +1378,7 @@ gedit_utils_drop_get_uris (GtkSelectionData *selection_data)
 	for (i = 0; uris[i] != NULL; i++)
 	{
 		gchar *uri;
-		g_warning (uris[i]);
+		
 		uri = gedit_utils_make_canonical_uri_from_shell_arg (uris[i]);
 		
 		/* Silently ignore malformed URI/filename */

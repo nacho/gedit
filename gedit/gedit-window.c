@@ -253,6 +253,8 @@ gedit_window_finalize (GObject *object)
 	if (window->priv->default_location != NULL)
 		g_object_unref (window->priv->default_location);
 
+	g_free (window->priv->direct_save_uri);
+
 	G_OBJECT_CLASS (gedit_window_parent_class)->finalize (object);
 }
 
@@ -2762,32 +2764,107 @@ drag_data_received_cb (GtkWidget        *widget,
 	if (window == NULL)
 		return;
 
-	if (info == TARGET_URI_LIST)
+	switch (info)
 	{
-		uri_list = gedit_utils_drop_get_uris(selection_data);
-		load_uris_from_drop (window, uri_list);
-		g_strfreev (uri_list);
+		case TARGET_URI_LIST:
+			uri_list = gedit_utils_drop_get_uris(selection_data);
+			load_uris_from_drop (window, uri_list);
+			g_strfreev (uri_list);
+			break;
+		case TARGET_XDNDDIRECTSAVE:
+			/* Indicate that we don't provide "F" fallback */
+			if (selection_data->format == 8 &&
+			    selection_data->length == 1 &&
+			    selection_data->data[0] == 'F')
+			{
+				gdk_property_change (GDK_DRAWABLE (context->source_window),
+						     gdk_atom_intern ("XdndDirectSave0", FALSE),
+						     gdk_atom_intern ("text/plain", FALSE), 8,
+						     GDK_PROP_MODE_REPLACE, (const guchar *) "", 0);
+			}
+			else if (selection_data->format == 8 &&
+				 selection_data->length == 1 &&
+				 selection_data->data[0] == 'S' &&
+				 window->priv->direct_save_uri != NULL)
+			{
+				gchar **uris;
+				
+				uris = g_new (gchar *, 2);
+				uris[0] = window->priv->direct_save_uri;
+				uris[1] = NULL;
+				
+				load_uris_from_drop (window, uris);
+				g_free (uris);
+			}
+			break;
 	}
-	else if (info == TARGET_XDNDDIRECTSAVE)
+}
+
+static void
+set_direct_save_uri (GeditWindow *window,
+		     GdkDragContext *context)
+{
+	gchar *filename;
+	
+	filename = gedit_utils_get_direct_save_filename (context);
+	
+	if (filename != NULL)
 	{
+		gchar *path;
 		gchar *uri;
 	
-		uri = g_build_filename ("/tmp", gedit_utils_get_direct_save_filename (context),
+		path = g_build_filename (g_get_tmp_dir (),
+					filename,
 					NULL);
-	
-		uri_list = g_new (gchar *, 2);
-		uri_list[0] = uri;
-		uri_list[1] = NULL;
 		
-		/* Change the uri property */
+		uri = g_filename_to_uri (path, NULL, NULL);
+		g_free (path);
+		
+		/* Change the property */
 		gdk_property_change (GDK_DRAWABLE (context->source_window),
 				     gdk_atom_intern ("XdndDirectSave0", FALSE),
 				     gdk_atom_intern ("text/plain", FALSE), 8,
 				     GDK_PROP_MODE_REPLACE, (const guchar *) uri,
 				     strlen (uri));
 		
-		load_uris_from_drop (window, uri_list);
-		g_strfreev (uri_list);
+		g_free (window->priv->direct_save_uri);
+		window->priv->direct_save_uri = uri;
+	}
+	g_free (filename);
+}
+
+static void
+drag_drop_cb (GtkWidget      *widget,
+	      GdkDragContext *context,
+	      gint            x,
+	      gint            y,
+	      guint           time,
+	      gpointer        user_data)
+{
+	GeditWindow *window;
+	GtkTargetList *target_list;
+	GdkAtom target;
+	
+	window = get_drop_window (widget);
+	
+	target_list = gtk_drag_dest_get_target_list (widget);
+	target = gtk_drag_dest_find_target (widget, context, target_list);
+	
+	if (target != GDK_NONE)
+	{
+		guint info;
+		gboolean found;
+		
+		found = gtk_target_list_find (target_list, target, &info);
+		g_assert (found);
+		
+		if (info == TARGET_XDNDDIRECTSAVE)
+		{
+			set_direct_save_uri (window, context);
+		}
+		
+		gtk_drag_get_data (GTK_WIDGET (widget), context,
+				   target, time);
 	}
 }
 
@@ -3788,6 +3865,7 @@ gedit_window_init (GeditWindow *window)
 	window->priv->dispose_has_run = FALSE;
 	window->priv->fullscreen_controls = NULL;
 	window->priv->fullscreen_animation_timeout_id = 0;
+	window->priv->direct_save_uri = NULL;
 
 	window->priv->message_bus = gedit_message_bus_new ();
 
@@ -3863,7 +3941,7 @@ gedit_window_init (GeditWindow *window)
 	
 	if (tl == NULL)
 	{
-		tl = gtk_target_list_new (NULL, 0);
+		tl = gtk_target_list_new (drop_types, G_N_ELEMENTS (drop_types));
 		gtk_drag_dest_set_target_list (GTK_WIDGET (window), tl);
 		gtk_target_list_unref (tl);
 	}

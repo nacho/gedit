@@ -105,6 +105,8 @@ struct _GeditWindowPrivate
 
 	GFile          *default_location;
 
+	gchar          *direct_save_uri;
+
 	gboolean        removing_tabs : 1;
 	gboolean        dispose_has_run : 1;
 };
