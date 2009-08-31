@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.master.gu\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gedit&component=general\n"
-"POT-Creation-Date: 2009-08-24 18:29+0000\n"
-"PO-Revision-Date: 2009-08-31 13:58+0530\n"
+"POT-Creation-Date: 2009-08-31 09:09+0000\n"
+"PO-Revision-Date: 2009-08-31 15:29+0530\n"
 "Last-Translator: Sweta Kothari <swkothar@redhat.com>\n"
 "Language-Team: Gujarati\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,6 @@ msgid "Text Editor"
 msgstr "લખાણ સંપાદક"
 
 #: ../data/gedit.desktop.in.in.h:3
-#| msgid "_Edit"
 msgid "gedit"
 msgstr "gedit"
 
@@ -1047,7 +1046,6 @@ msgstr "એક વખત શબ્દ મળ્યો અને બદલાય�
 #. entered by the user in the search box
 #: ../gedit/gedit-commands-search.c:145
 #, c-format
-#| msgid "Phrase not found"
 msgid "\"%s\" not found"
 msgstr "\"%s\" શોધાયુ નથી"
 
@@ -1355,22 +1353,28 @@ msgstr ""
 "દસ્તાવેજ એક અથવા વધુ અક્ષરો સમાવે છે કે જે ચોક્કસ અક્ષર કોડીંગની મદદથી એનકોડ કરી શકાતી "
 "નથી."
 
+#. Translators: the access key chosen for this string should be
+#. different from other main menu access keys (Open, Edit, View...)
 #: ../gedit/gedit-io-error-message-area.c:801
-#: ../gedit/gedit-io-error-message-area.c:809
-msgid "_Edit Anyway"
-msgstr "કોઈપણ રીતે ફેરફાર કરો (_E)"
+#: ../gedit/gedit-io-error-message-area.c:811
+#| msgid "_Edit Anyway"
+msgid "Edit Any_way"
+msgstr "કોઈપણ રીતે ફેરફાર કરો (_w)"
 
+#. Translators: the access key chosen for this string should be
+#. different from other main menu access keys (Open, Edit, View...)
 #: ../gedit/gedit-io-error-message-area.c:804
-#: ../gedit/gedit-io-error-message-area.c:812
-msgid "_Don't Edit"
-msgstr "ફેરફાર કરો નહિં (_D)"
+#: ../gedit/gedit-io-error-message-area.c:816
+#| msgid "_Don't Edit"
+msgid "D_on't Edit"
+msgstr "ફેરફાર કરો નહિં (_o)"
 
-#: ../gedit/gedit-io-error-message-area.c:830
+#: ../gedit/gedit-io-error-message-area.c:834
 #, c-format
 msgid "This file (%s) is already open in another gedit window."
 msgstr "આ ફાઈલ (%s) gedit ની અન્ય વિન્ડોમાં પહેલાથી જ ખૂલેલી છે."
 
-#: ../gedit/gedit-io-error-message-area.c:845
+#: ../gedit/gedit-io-error-message-area.c:849
 msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
@@ -1378,43 +1382,43 @@ msgstr ""
 "gedit એ આ ફાઈલનો ઘટક બિન-સંપાદનીય રીતે ખોલેલ છે. શું તમે તેમાં કોઈપણ રીતે ફેરફાર કરવા "
 "માંગો છો?"
 
-#: ../gedit/gedit-io-error-message-area.c:904
-#: ../gedit/gedit-io-error-message-area.c:914
-#: ../gedit/gedit-io-error-message-area.c:1014
-#: ../gedit/gedit-io-error-message-area.c:1024
-msgid "S_ave Anyway"
-msgstr "કોઈપણ રીતે સંગ્રહો (_S)"
-
 #: ../gedit/gedit-io-error-message-area.c:908
 #: ../gedit/gedit-io-error-message-area.c:918
 #: ../gedit/gedit-io-error-message-area.c:1018
 #: ../gedit/gedit-io-error-message-area.c:1028
+msgid "S_ave Anyway"
+msgstr "કોઈપણ રીતે સંગ્રહો (_S)"
+
+#: ../gedit/gedit-io-error-message-area.c:912
+#: ../gedit/gedit-io-error-message-area.c:922
+#: ../gedit/gedit-io-error-message-area.c:1022
+#: ../gedit/gedit-io-error-message-area.c:1032
 msgid "D_on't Save"
 msgstr "સંગ્રહો નહિં (_o)"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:939
+#: ../gedit/gedit-io-error-message-area.c:943
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "ફાઈલ %s એ તે વંચાઈ હતી ત્યારથી સુધારાઈ ગયેલ છે."
 
-#: ../gedit/gedit-io-error-message-area.c:955
+#: ../gedit/gedit-io-error-message-area.c:959
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr "જો તમે તેને સંગ્રહો, તો બધા બાહ્ય ફેરફારો ગુમ થઈ જશે. શું તેને ગમે તે રીતે સંગ્રહવા માંગો છો?"
 
-#: ../gedit/gedit-io-error-message-area.c:1049
+#: ../gedit/gedit-io-error-message-area.c:1053
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "%s સંગ્રહતી વખતે બેકઅપ ફાઈલ બનાવી શક્યા નહિં"
 
-#: ../gedit/gedit-io-error-message-area.c:1052
+#: ../gedit/gedit-io-error-message-area.c:1056
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "%s સંગ્રહતી વખતે કામચલાઉ બેકઅપ ફાઈલ બનાવી શક્યા નહિં"
 
-#: ../gedit/gedit-io-error-message-area.c:1069
+#: ../gedit/gedit-io-error-message-area.c:1073
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1425,7 +1429,7 @@ msgstr ""
 "તો તમે ફાઈલની જૂની નકલ ગુમાવી શક્યા હશો. શું ગમે તે રીતે સંગ્રહવા માંગો છો?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1129
+#: ../gedit/gedit-io-error-message-area.c:1133
 #, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
@@ -1434,7 +1438,7 @@ msgstr ""
 "gedit લેખન સ્થિતિમાં %s સ્થાનો સંભાળી શકતું નથી. મહેરબાની કરીને ચકાસો કે તમે સ્થાન બરાબર "
 "રીતે લખેલું છે અને ફરીથી પ્રયત્ન કરો."
 
-#: ../gedit/gedit-io-error-message-area.c:1137
+#: ../gedit/gedit-io-error-message-area.c:1141
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1442,7 +1446,7 @@ msgstr ""
 "gedit આ સ્થાનને લેખન સ્થિતિમાં સંભાળી શકતું નથી. મહેરબાની કરીને ચકાસો કે તમે સ્થાન યોગ્ય "
 "રીતે લખેલું છે અને ફરીથી પ્રયાસ કરો."
 
-#: ../gedit/gedit-io-error-message-area.c:1146
+#: ../gedit/gedit-io-error-message-area.c:1150
 #, c-format
 msgid ""
 "%s is not a valid location. Please check that you typed the location "
@@ -1451,7 +1455,7 @@ msgstr ""
 "%s એ માન્ય સ્થાન નથી. મહેરબાની કરીને ચકાસો કે તમે સ્થાન બરાબર રીતે લખેલું છે અને ફરીથી "
 "પ્રયત્ન કરો."
 
-#: ../gedit/gedit-io-error-message-area.c:1152
+#: ../gedit/gedit-io-error-message-area.c:1156
 msgid ""
 "You do not have the permissions necessary to save the file. Please check "
 "that you typed the location correctly and try again."
@@ -1459,7 +1463,7 @@ msgstr ""
 "તમારી પાસે ફાઈલ સંગ્રહવા માટે જરૂરી પરવાનગીઓ નથી. મહેરબાની કરીને ચકાસો કે તમે સ્થાન "
 "બરાબર રીતે લખેલું છે અને ફરીથી પ્રયાસ કરો."
 
-#: ../gedit/gedit-io-error-message-area.c:1158
+#: ../gedit/gedit-io-error-message-area.c:1162
 msgid ""
 "There is not enough disk space to save the file. Please free some disk space "
 "and try again."
@@ -1467,7 +1471,7 @@ msgstr ""
 "ફાઈલ સંગ્રહવા માટે ત્યાં પૂરતી ડિસ્ક જગ્યા નથી. મહેરબાની કરીને અમુક ડિસ્ક જગ્યા મુક્ત કરો "
 "અને ફરીથી પ્રયત્ન કરો."
 
-#: ../gedit/gedit-io-error-message-area.c:1163
+#: ../gedit/gedit-io-error-message-area.c:1167
 msgid ""
 "You are trying to save the file on a read-only disk. Please check that you "
 "typed the location correctly and try again."
@@ -1475,11 +1479,11 @@ msgstr ""
 "તમે ફાઈલને માત્ર-વાંચી શકાય તેવી ડિસ્ક પર સંગ્રહવાનો પ્રયાસ કરી રહ્યા છો. મહેરબાની કરીને "
 "ચકાસો કે તમે સ્થાન યોગ્ય રીતે લખેલું છે અને ફરીથી પ્રયાસ કરો."
 
-#: ../gedit/gedit-io-error-message-area.c:1169
+#: ../gedit/gedit-io-error-message-area.c:1173
 msgid "A file with the same name already exists. Please use a different name."
 msgstr "આ નામવાળી ફાઈલ પહેલાથી જ હાજર છે. મહેરબાની કરીને અલગ નામ વાપરો."
 
-#: ../gedit/gedit-io-error-message-area.c:1174
+#: ../gedit/gedit-io-error-message-area.c:1178
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please use a shorter name."
@@ -1487,7 +1491,7 @@ msgstr ""
 "ડિસ્ક કે જ્યાં તમે ફાઈલ સંગ્રહવાનો પ્રયાસ કરી રહ્યા છો તેને ફાઈલ નામોની લંબાઈ પર મર્યાદાઓ "
 "છે. મહેરબાની કરીને ટૂંકુ નામ વાપરો."
 
-#: ../gedit/gedit-io-error-message-area.c:1181
+#: ../gedit/gedit-io-error-message-area.c:1185
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1497,7 +1501,7 @@ msgstr ""
 "કરીને નાની ફાઇલ સંગ્રહ કરવાનો પ્રયત્ન કરો અથવા જે ડિસ્ક આવી મર્યાદા ધરાવતી નથી તેના "
 "પર સંગ્રહ કરો."
 
-#: ../gedit/gedit-io-error-message-area.c:1196
+#: ../gedit/gedit-io-error-message-area.c:1200
 #, c-format
 msgid "Could not save the file %s."
 msgstr "ફાઈલ %s નો સંગ્રહ કરી શક્યા નહિં."
@@ -1505,21 +1509,21 @@ msgstr "ફાઈલ %s નો સંગ્રહ કરી શક્યા ન�
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1238
+#: ../gedit/gedit-io-error-message-area.c:1242
 #, c-format
 msgid "The file %s changed on disk."
 msgstr "ફાઈલ %s ડિસ્ક પર બદલાઈ ગયેલ છે."
 
-#: ../gedit/gedit-io-error-message-area.c:1243
+#: ../gedit/gedit-io-error-message-area.c:1247
 msgid "Do you want to drop your changes and reload the file?"
 msgstr "શું તમે તમારા ફેરફારો અવગણવા માંગો છો અને ફાઈલ પુનઃલોડ કરવા માંગો છો?"
 
-#: ../gedit/gedit-io-error-message-area.c:1245
+#: ../gedit/gedit-io-error-message-area.c:1249
 msgid "Do you want to reload the file?"
 msgstr "શું તમે ફાઈલ પુનઃલોડ કરવા માંગો છો?"
 
-#: ../gedit/gedit-io-error-message-area.c:1251
-#: ../gedit/gedit-io-error-message-area.c:1262
+#: ../gedit/gedit-io-error-message-area.c:1255
+#: ../gedit/gedit-io-error-message-area.c:1266
 msgid "_Reload"
 msgstr "પુનઃલાવો (_R)"
 
@@ -1569,7 +1573,6 @@ msgid "_Deactivate All"
 msgstr "બધું અસક્રિય કરો (_D)"
 
 #: ../gedit/gedit-plugin-manager.c:800
-#| msgid "Active plugins"
 msgid "Active _Plugins:"
 msgstr "સક્રિય પ્લગઈનો (_P):"
 
@@ -2183,7 +2186,6 @@ msgid "Save"
 msgstr "સંગ્રહ કરો"
 
 #: ../gedit/gedit-window.c:1453
-#| msgid "_Print..."
 msgid "Print"
 msgstr "છાપો"
 
@@ -2250,23 +2252,19 @@ msgid "Check for latest version of gedit"
 msgstr "gedit ની તાજેતરની આવૃત્તિ માટે ચકાસો"
 
 #: ../plugins/checkupdate/checkupdate.gedit-plugin.desktop.in.h:2
-#| msgid "Checked state"
 msgid "Check update"
 msgstr "સુધારો ચકાસો"
 
 #: ../plugins/checkupdate/gedit-check-update-plugin.c:192
-#| msgid "There was an error displaying help."
 msgid "There was an error displaying the url."
 msgstr "url ને દર્શાવતી વખતે ભૂલ હતી."
 
 #: ../plugins/checkupdate/gedit-check-update-plugin.c:222
 #: ../plugins/checkupdate/gedit-check-update-plugin.c:233
-#| msgid "_Reload"
 msgid "_Download"
 msgstr "ડાઉનલોડ કરો (_D)"
 
 #: ../plugins/checkupdate/gedit-check-update-plugin.c:250
-#| msgid "Revert to a saved version of the file"
 msgid "There is a new version of gedit"
 msgstr "gedit ની નવી આવૃત્તિ છે"
 
@@ -2344,7 +2342,6 @@ msgid "External Tools"
 msgstr "બાહ્ય સાધનો"
 
 #: ../plugins/externaltools/tools/__init__.py:172
-#| msgid "_External Tools..."
 msgid "Manage _External Tools..."
 msgstr "બાહ્ય સાધનો ને સંચાલિત કરો (_E)..."
 
@@ -2353,12 +2350,10 @@ msgid "Opens the External Tools Manager"
 msgstr "બાહ્ય સાધનો વ્યવસ્થાપક ખોલે છે"
 
 #: ../plugins/externaltools/tools/__init__.py:178
-#| msgid "External Tools"
 msgid "External _Tools"
 msgstr "બાહ્ય સાધનો (_T)"
 
 #: ../plugins/externaltools/tools/__init__.py:180
-#| msgid "External Tools"
 msgid "External tools"
 msgstr "બાહ્ય સાધનો"
 
@@ -2368,7 +2363,6 @@ msgstr "શેલ આઉટપુટ"
 
 #: ../plugins/externaltools/tools/capture.py:94
 #, python-format
-#| msgid "Could not mount volume: %s"
 msgid "Could not execute command: %s"
 msgstr "આદેશને ચલાવી શક્યા નહિં: %s"
 
@@ -2389,7 +2383,6 @@ msgid "Exited"
 msgstr "બહાર નીકળી ગયેલ"
 
 #: ../plugins/externaltools/tools/manager.py:119
-#| msgid "Languages"
 msgid "All languages"
 msgstr "બધી ભાષાઓ"
 
@@ -2397,7 +2390,6 @@ msgstr "બધી ભાષાઓ"
 #: ../plugins/externaltools/tools/manager.py:526
 #: ../plugins/externaltools/tools/manager.py:842
 #: ../plugins/externaltools/tools/tools.ui.h:2
-#| msgid "Languages"
 msgid "All Languages"
 msgstr "બધી ભાષાઓ"
 
@@ -2451,7 +2443,6 @@ msgid "Current selection"
 msgstr "વર્તમાન પસંદગી"
 
 #: ../plugins/externaltools/tools/tools.ui.h:10
-#| msgid "Current selection"
 msgid "Current selection (default to document)"
 msgstr "વર્તમાન પસંદગી (દસ્તાવેજમાં મૂળભૂત)"
 
@@ -2980,12 +2971,10 @@ msgid "Quick open"
 msgstr "ઝડપી ખોલો"
 
 #: ../plugins/quickopen/quickopen/windowhelper.py:69
-#| msgid "Close document"
 msgid "Quickly open documents"
 msgstr "દસ્તાવેજોને ઝડપથી ખોલો"
 
 #: ../plugins/quickopen/quickopen.gedit-plugin.desktop.in.h:2
-#| msgid "Save all open files"
 msgid "Quickly open files"
 msgstr "ફાઇલોને ઝડપથી ખોલો"
 
