@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
-"POT-Creation-Date: 2009-08-24 18:29+0000\n"
-"PO-Revision-Date: 2009-08-28 23:06+0200\n"
+"POT-Creation-Date: 2009-08-31 09:09+0000\n"
+"PO-Revision-Date: 2009-08-31 21:34+0200\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -1501,22 +1501,26 @@ msgstr ""
 "Le document contient un ou plusieurs caractères qui ne peuvent pas être "
 "représentés en utilisant le codage des caractères indiqué."
 
+#. Translators: the access key chosen for this string should be
+#. different from other main menu access keys (Open, Edit, View...)
 #: ../gedit/gedit-io-error-message-area.c:801
-#: ../gedit/gedit-io-error-message-area.c:809
-msgid "_Edit Anyway"
-msgstr "_Ouvrir quand même"
+#: ../gedit/gedit-io-error-message-area.c:811
+msgid "Edit Any_way"
+msgstr "Ou_vrir quand même"
 
+#. Translators: the access key chosen for this string should be
+#. different from other main menu access keys (Open, Edit, View...)
 #: ../gedit/gedit-io-error-message-area.c:804
-#: ../gedit/gedit-io-error-message-area.c:812
-msgid "_Don't Edit"
+#: ../gedit/gedit-io-error-message-area.c:816
+msgid "D_on't Edit"
 msgstr "Ne _pas éditer"
 
-#: ../gedit/gedit-io-error-message-area.c:830
+#: ../gedit/gedit-io-error-message-area.c:834
 #, c-format
 msgid "This file (%s) is already open in another gedit window."
 msgstr "Ce fichier (%s) est déjà ouvert dans une autre fenêtre gedit."
 
-#: ../gedit/gedit-io-error-message-area.c:845
+#: ../gedit/gedit-io-error-message-area.c:849
 msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
@@ -1524,48 +1528,48 @@ msgstr ""
 "gedit a ouvert cette instance du fichier en lecture seule. Souhaitez-vous "
 "l'éditer quand même ?"
 
-#: ../gedit/gedit-io-error-message-area.c:904
-#: ../gedit/gedit-io-error-message-area.c:914
-#: ../gedit/gedit-io-error-message-area.c:1014
-#: ../gedit/gedit-io-error-message-area.c:1024
-msgid "S_ave Anyway"
-msgstr "_Enregistrer quand même"
-
 #: ../gedit/gedit-io-error-message-area.c:908
 #: ../gedit/gedit-io-error-message-area.c:918
 #: ../gedit/gedit-io-error-message-area.c:1018
 #: ../gedit/gedit-io-error-message-area.c:1028
+msgid "S_ave Anyway"
+msgstr "_Enregistrer quand même"
+
+#: ../gedit/gedit-io-error-message-area.c:912
+#: ../gedit/gedit-io-error-message-area.c:922
+#: ../gedit/gedit-io-error-message-area.c:1022
+#: ../gedit/gedit-io-error-message-area.c:1032
 msgid "D_on't Save"
 msgstr "Ne _pas enregistrer"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:939
+#: ../gedit/gedit-io-error-message-area.c:943
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "Le fichier %s a été modifié depuis sa dernière lecture."
 
-#: ../gedit/gedit-io-error-message-area.c:955
+#: ../gedit/gedit-io-error-message-area.c:959
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
 "Si vous l'enregistrez, toutes les modifications externes pourraient être "
 "perdues. Souhaitez-vous enregistrer quand même ?"
 
-#: ../gedit/gedit-io-error-message-area.c:1049
+#: ../gedit/gedit-io-error-message-area.c:1053
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr ""
 "Impossible de créer un fichier de sauvegarde lors de l'enregistrement de %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1052
+#: ../gedit/gedit-io-error-message-area.c:1056
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr ""
 "Impossible de créer un fichier de sauvegarde temporaire lors de "
 "l'enregistrement de %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1069
+#: ../gedit/gedit-io-error-message-area.c:1073
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1578,7 +1582,7 @@ msgstr ""
 "quand même ?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1129
+#: ../gedit/gedit-io-error-message-area.c:1133
 #, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
@@ -1587,7 +1591,7 @@ msgstr ""
 "gedit ne peut pas gérer les emplacements %s en mode écriture. Vérifiez que "
 "vous avez saisi l'emplacement correctement et réessayez."
 
-#: ../gedit/gedit-io-error-message-area.c:1137
+#: ../gedit/gedit-io-error-message-area.c:1141
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1595,7 +1599,7 @@ msgstr ""
 "gedit ne peut pas gérer cet emplacement en mode écriture. Vérifiez que vous "
 "avez saisi l'emplacement correctement et réessayez."
 
-#: ../gedit/gedit-io-error-message-area.c:1146
+#: ../gedit/gedit-io-error-message-area.c:1150
 #, c-format
 msgid ""
 "%s is not a valid location. Please check that you typed the location "
@@ -1604,7 +1608,7 @@ msgstr ""
 "%s n'est pas un emplacement valide. Vérifiez que vous avez saisi "
 "l'emplacement correctement et réessayez."
 
-#: ../gedit/gedit-io-error-message-area.c:1152
+#: ../gedit/gedit-io-error-message-area.c:1156
 msgid ""
 "You do not have the permissions necessary to save the file. Please check "
 "that you typed the location correctly and try again."
@@ -1612,7 +1616,7 @@ msgstr ""
 "Vous n'avez pas les permissions nécessaires pour enregistrer ce fichier. "
 "Vérifiez que vous avez saisi l'emplacement correctement et réessayez."
 
-#: ../gedit/gedit-io-error-message-area.c:1158
+#: ../gedit/gedit-io-error-message-area.c:1162
 msgid ""
 "There is not enough disk space to save the file. Please free some disk space "
 "and try again."
@@ -1620,7 +1624,7 @@ msgstr ""
 "Il n'y a pas assez d'espace disque pour enregistrer le fichier. Libérez de "
 "l'espace disque et réessayez."
 
-#: ../gedit/gedit-io-error-message-area.c:1163
+#: ../gedit/gedit-io-error-message-area.c:1167
 msgid ""
 "You are trying to save the file on a read-only disk. Please check that you "
 "typed the location correctly and try again."
@@ -1628,12 +1632,12 @@ msgstr ""
 "Vous essayez d'enregistrer le fichier vers un disque en lecture seule. "
 "Vérifiez que vous avez saisi l'emplacement correctement et réessayez."
 
-#: ../gedit/gedit-io-error-message-area.c:1169
+#: ../gedit/gedit-io-error-message-area.c:1173
 msgid "A file with the same name already exists. Please use a different name."
 msgstr ""
 "Un fichier possédant le même nom existe déjà. Veuillez utiliser un autre nom."
 
-#: ../gedit/gedit-io-error-message-area.c:1174
+#: ../gedit/gedit-io-error-message-area.c:1178
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please use a shorter name."
@@ -1641,7 +1645,7 @@ msgstr ""
 "Le disque sur lequel vous essayez d'enregistrer votre fichier limite la "
 "taille des noms de fichiers. Veuillez utiliser un nom plus court."
 
-#: ../gedit/gedit-io-error-message-area.c:1181
+#: ../gedit/gedit-io-error-message-area.c:1185
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1651,7 +1655,7 @@ msgstr ""
 "taille des fichiers. Essayez d'enregistrer un fichier plus petit ou "
 "d'enregistrer ce fichier sur un disque n'ayant pas de limitation."
 
-#: ../gedit/gedit-io-error-message-area.c:1196
+#: ../gedit/gedit-io-error-message-area.c:1200
 #, c-format
 msgid "Could not save the file %s."
 msgstr "Impossible d'enregistrer le fichier %s."
@@ -1659,21 +1663,21 @@ msgstr "Impossible d'enregistrer le fichier %s."
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1238
+#: ../gedit/gedit-io-error-message-area.c:1242
 #, c-format
 msgid "The file %s changed on disk."
 msgstr "Le fichier %s a été modifié sur le disque."
 
-#: ../gedit/gedit-io-error-message-area.c:1243
+#: ../gedit/gedit-io-error-message-area.c:1247
 msgid "Do you want to drop your changes and reload the file?"
 msgstr "Voulez-vous abandonner vos modifications et recharger le fichier ?"
 
-#: ../gedit/gedit-io-error-message-area.c:1245
+#: ../gedit/gedit-io-error-message-area.c:1249
 msgid "Do you want to reload the file?"
 msgstr "Voulez-vous recharger le fichier ?"
 
-#: ../gedit/gedit-io-error-message-area.c:1251
-#: ../gedit/gedit-io-error-message-area.c:1262
+#: ../gedit/gedit-io-error-message-area.c:1255
+#: ../gedit/gedit-io-error-message-area.c:1266
 msgid "_Reload"
 msgstr "Rec_harger"
 
