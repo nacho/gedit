@@ -798,18 +798,22 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
 #if !GTK_CHECK_VERSION (2, 17, 1)
 	message_area = gedit_message_area_new ();
 	gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
-				       _("_Edit Anyway"),
+				       _("Edit Any_way"),
 				       GTK_RESPONSE_YES);
 	gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
-				       _("_Don't Edit"),
+				       _("D_on't Edit"),
 				       GTK_RESPONSE_CANCEL);
 #else
 	message_area = gtk_info_bar_new ();
 	gtk_info_bar_add_button (GTK_INFO_BAR (message_area),
-				 _("_Edit Anyway"),
+	/* Translators: the access key chosen for this string should be
+	 different from other main menu access keys (Open, Edit, View...) */
+				 _("Edit Any_way"),
 				 GTK_RESPONSE_YES);
 	gtk_info_bar_add_button (GTK_INFO_BAR (message_area),
-				 _("_Don't Edit"),
+	/* Translators: the access key chosen for this string should be
+	 different from other main menu access keys (Open, Edit, View...) */
+				 _("D_on't Edit"),
 				 GTK_RESPONSE_CANCEL);
 	gtk_info_bar_set_message_type (GTK_INFO_BAR (message_area),
 				       GTK_MESSAGE_WARNING);
