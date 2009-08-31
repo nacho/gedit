@@ -15,14 +15,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-21 07:25+0300\n"
-"PO-Revision-Date: 2009-08-21 07:26+0300\n"
+"POT-Creation-Date: 2009-08-31 18:07+0200\n"
+"PO-Revision-Date: 2009-08-31 18:07+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
-"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Virtaal 0.4.0\n"
@@ -34,6 +34,10 @@ msgstr "حرّر الملفات النصية"
 #: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit-print-job.c:759
 msgid "Text Editor"
 msgstr "محرّر نصوص"
+
+#: ../data/gedit.desktop.in.in.h:3
+msgid "gedit"
+msgstr "محرر جنوم"
 
 #: ../data/gedit.schemas.in.in.h:1
 msgid ""
@@ -849,7 +853,7 @@ msgid "_Autosave files every"
 msgstr "ا_حفظ الملفات آليّا كلّ"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:28
-#: ../gedit/gedit-view.c:2033
+#: ../gedit/gedit-view.c:1995
 msgid "_Display line numbers"
 msgstr "ا_عرض أرقام السطور"
 
@@ -915,47 +919,47 @@ msgstr "ا_بحث عن:"
 msgid "_Wrap around"
 msgstr "_لف حول"
 
-#: ../gedit/gedit.c:118
+#: ../gedit/gedit.c:117
 msgid "Show the application's version"
 msgstr "أظهر نسخة التطبيق"
 
-#: ../gedit/gedit.c:121
+#: ../gedit/gedit.c:120
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr "عيّن التّرميز الذي سيستخدم لفتح الملفّات المسردة على سطر الأوامر"
 
-#: ../gedit/gedit.c:121
+#: ../gedit/gedit.c:120
 msgid "ENCODING"
 msgstr "الترميز"
 
-#: ../gedit/gedit.c:124
+#: ../gedit/gedit.c:123
 msgid "Display list of possible values for the encoding option"
 msgstr "اعرض قائمة بالقيم الممكنة لخيار الترميز"
 
-#: ../gedit/gedit.c:127
+#: ../gedit/gedit.c:126
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "أنشئ نافذة مستوى أعلى جديدة في سيرورة موجودة من محرر النصوص"
 
-#: ../gedit/gedit.c:130
+#: ../gedit/gedit.c:129
 msgid "Create a new document in an existing instance of gedit"
 msgstr "أنشئ مستندا جديدا في سيرورة موجودة من محرر النصوص"
 
-#: ../gedit/gedit.c:133
+#: ../gedit/gedit.c:132
 msgid "[FILE...]"
 msgstr "[ملف...]"
 
-#: ../gedit/gedit.c:171
+#: ../gedit/gedit.c:187
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "‏%s: ترميز غير سليم. \n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:563
+#: ../gedit/gedit.c:569
 msgid "- Edit text files"
 msgstr "- حرّر الملفات النصية"
 
-#: ../gedit/gedit.c:599
+#: ../gedit/gedit.c:605
 #, c-format
 msgid ""
 "%s\n"
@@ -1461,22 +1465,26 @@ msgid ""
 msgstr ""
 "يحوي المستند محرفًا أو محارف لا يمكن ترميزها باستعمال ترميز المحارف المحدد."
 
+#. Translators: the access key chosen for this string should be
+#. different from other main menu access keys (Open, Edit, View...)
 #: ../gedit/gedit-io-error-message-area.c:801
-#: ../gedit/gedit-io-error-message-area.c:809
-msgid "_Edit Anyway"
-msgstr "_حرّر على أي حال  "
+#: ../gedit/gedit-io-error-message-area.c:811
+msgid "Edit Any_way"
+msgstr "_حرّر على أي حال"
 
+#. Translators: the access key chosen for this string should be
+#. different from other main menu access keys (Open, Edit, View...)
 #: ../gedit/gedit-io-error-message-area.c:804
-#: ../gedit/gedit-io-error-message-area.c:812
-msgid "_Don't Edit"
-msgstr "_لا تحرّر"
+#: ../gedit/gedit-io-error-message-area.c:816
+msgid "D_on't Edit"
+msgstr "لا _تحرّر"
 
-#: ../gedit/gedit-io-error-message-area.c:830
+#: ../gedit/gedit-io-error-message-area.c:834
 #, c-format
 msgid "This file (%s) is already open in another gedit window."
 msgstr "هذا الملف (%s) مفتوح مسبقا في نافذة محرر نصوص أخرى."
 
-#: ../gedit/gedit-io-error-message-area.c:845
+#: ../gedit/gedit-io-error-message-area.c:849
 msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
@@ -1484,43 +1492,43 @@ msgstr ""
 "فتح محرر النصوص سيرورة الملف هذه بشكل غير قابل للتحرير. هل تريد أن تحرره على "
 "أي حال؟"
 
-#: ../gedit/gedit-io-error-message-area.c:904
-#: ../gedit/gedit-io-error-message-area.c:914
-#: ../gedit/gedit-io-error-message-area.c:1014
-#: ../gedit/gedit-io-error-message-area.c:1024
-msgid "S_ave Anyway"
-msgstr "احفظ على أي حال"
-
 #: ../gedit/gedit-io-error-message-area.c:908
 #: ../gedit/gedit-io-error-message-area.c:918
 #: ../gedit/gedit-io-error-message-area.c:1018
 #: ../gedit/gedit-io-error-message-area.c:1028
+msgid "S_ave Anyway"
+msgstr "احفظ على أي حال"
+
+#: ../gedit/gedit-io-error-message-area.c:912
+#: ../gedit/gedit-io-error-message-area.c:922
+#: ../gedit/gedit-io-error-message-area.c:1022
+#: ../gedit/gedit-io-error-message-area.c:1032
 msgid "D_on't Save"
 msgstr "لا تحفظ"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:939
+#: ../gedit/gedit-io-error-message-area.c:943
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "تم تعديل الملف %s منذ قراءته."
 
-#: ../gedit/gedit-io-error-message-area.c:955
+#: ../gedit/gedit-io-error-message-area.c:959
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr "إذا حفظت، ستضيع كل التغييرات الخارجية. أأحفظ رغم ذلك؟"
 
-#: ../gedit/gedit-io-error-message-area.c:1049
+#: ../gedit/gedit-io-error-message-area.c:1053
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "تعذّر إنشاء ملف احتياطي عند حفظ %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1052
+#: ../gedit/gedit-io-error-message-area.c:1056
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "تعذّر إنشاء ملف احتياطي مؤقت عند حفظ %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1069
+#: ../gedit/gedit-io-error-message-area.c:1073
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1531,7 +1539,7 @@ msgstr ""
 "النسخة القديمة للملف. أأحفظ على أي حال؟"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1129
+#: ../gedit/gedit-io-error-message-area.c:1133
 #, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
@@ -1540,7 +1548,7 @@ msgstr ""
 "لا يمكن لمحرر النصوص التعامل مع مواقع %s في نمط الكتابة. تأكد من صحة كتابتك "
 "الموقع وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:1137
+#: ../gedit/gedit-io-error-message-area.c:1141
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1548,45 +1556,45 @@ msgstr ""
 "لا يمكن لمحرر النصوص التعامل مع هذا الموقع في نمط الكتابة. رجاء، تأكد من صحة "
 "كتابتك الموقع وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:1146
+#: ../gedit/gedit-io-error-message-area.c:1150
 #, c-format
 msgid ""
 "%s is not a valid location. Please check that you typed the location "
 "correctly and try again."
 msgstr "‏%s موقع غير سليم. تأكد من صحة كتابتك الموقع وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:1152
+#: ../gedit/gedit-io-error-message-area.c:1156
 msgid ""
 "You do not have the permissions necessary to save the file. Please check "
 "that you typed the location correctly and try again."
 msgstr ""
 "ليس لديك الصلاحيات اللازمة لحفظ الملف. تأكد من صحة كتابتك الموقع وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:1158
+#: ../gedit/gedit-io-error-message-area.c:1162
 msgid ""
 "There is not enough disk space to save the file. Please free some disk space "
 "and try again."
 msgstr "لا يوجد حيز قرص كاف لحفظ الملف. أخل بعض الحيز من القرص وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:1163
+#: ../gedit/gedit-io-error-message-area.c:1167
 msgid ""
 "You are trying to save the file on a read-only disk. Please check that you "
 "typed the location correctly and try again."
 msgstr ""
 "تحاول حفظ الملف في قرص للقراءة فقط. تأكد من صحة كتابتك الموقع وحاول مجددا."
 
-#: ../gedit/gedit-io-error-message-area.c:1169
+#: ../gedit/gedit-io-error-message-area.c:1173
 msgid "A file with the same name already exists. Please use a different name."
 msgstr "يوجد ملف له نفس الاسم. استعمل اسما مختلفا."
 
-#: ../gedit/gedit-io-error-message-area.c:1174
+#: ../gedit/gedit-io-error-message-area.c:1178
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please use a shorter name."
 msgstr ""
 "القرص الذي تحاول حفظ الملف فيه له يحدد طول أسماء الملفات. استعمل اسما أقصر."
 
-#: ../gedit/gedit-io-error-message-area.c:1181
+#: ../gedit/gedit-io-error-message-area.c:1185
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1595,7 +1603,7 @@ msgstr ""
 "القرص الذي تحاول حفظ الملف فيه له قيود غلى أحجام الملفات. رجاء حاول حفظ ملف "
 "اصغر أو احفظ الملف في قرص لا توجد به هذه القيود."
 
-#: ../gedit/gedit-io-error-message-area.c:1196
+#: ../gedit/gedit-io-error-message-area.c:1200
 #, c-format
 msgid "Could not save the file %s."
 msgstr "لا يمكن حفظ الملف %s."
@@ -1603,21 +1611,21 @@ msgstr "لا يمكن حفظ الملف %s."
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1238
+#: ../gedit/gedit-io-error-message-area.c:1242
 #, c-format
 msgid "The file %s changed on disk."
 msgstr "لقد تغيَّر الملف %s على القرص."
 
-#: ../gedit/gedit-io-error-message-area.c:1243
+#: ../gedit/gedit-io-error-message-area.c:1247
 msgid "Do you want to drop your changes and reload the file?"
 msgstr "أتريد إلغاء تعديلاتك وإعادة تحميل الملف؟"
 
-#: ../gedit/gedit-io-error-message-area.c:1245
+#: ../gedit/gedit-io-error-message-area.c:1249
 msgid "Do you want to reload the file?"
 msgstr "أترغب بإعادة تحميل لملف؟"
 
-#: ../gedit/gedit-io-error-message-area.c:1251
-#: ../gedit/gedit-io-error-message-area.c:1262
+#: ../gedit/gedit-io-error-message-area.c:1255
+#: ../gedit/gedit-io-error-message-area.c:1266
 msgid "_Reload"
 msgstr "أعِد ال_تحميل"
 
@@ -1748,68 +1756,68 @@ msgstr "اس_ترجع الخطوط المبدئية"
 msgid "lines"
 msgstr "سطور"
 
-#: ../gedit/gedit-print-preview.c:561
+#: ../gedit/gedit-print-preview.c:565
 msgid "Show the previous page"
 msgstr "أظهر الصفحة السابقة"
 
-#: ../gedit/gedit-print-preview.c:573
+#: ../gedit/gedit-print-preview.c:577
 msgid "Show the next page"
 msgstr "أظهر الصفحة التالية"
 
-#: ../gedit/gedit-print-preview.c:589
+#: ../gedit/gedit-print-preview.c:593
 msgid "Current page (Alt+P)"
 msgstr "الصفحة الحالية (Alt+P)"
 
-#: ../gedit/gedit-print-preview.c:611
+#: ../gedit/gedit-print-preview.c:615
 msgid "of"
 msgstr "مِن"
 
-#: ../gedit/gedit-print-preview.c:619
+#: ../gedit/gedit-print-preview.c:623
 msgid "Page total"
 msgstr "مجموع الصفحات"
 
-#: ../gedit/gedit-print-preview.c:620
+#: ../gedit/gedit-print-preview.c:624
 msgid "The total number of pages in the document"
 msgstr "مجموع الصفحات في المستند"
 
-#: ../gedit/gedit-print-preview.c:637
+#: ../gedit/gedit-print-preview.c:641
 msgid "Show multiple pages"
 msgstr "أظهر صفحات متعددة"
 
-#: ../gedit/gedit-print-preview.c:650
+#: ../gedit/gedit-print-preview.c:654
 msgid "Zoom 1:1"
 msgstr "تقريب 1:1"
 
-#: ../gedit/gedit-print-preview.c:659
+#: ../gedit/gedit-print-preview.c:663
 msgid "Zoom to fit the whole page"
 msgstr "اضبط الحجم لملائمة الصفحة بكاملها"
 
-#: ../gedit/gedit-print-preview.c:668
+#: ../gedit/gedit-print-preview.c:672
 msgid "Zoom the page in"
 msgstr "قرّب الصفحة"
 
-#: ../gedit/gedit-print-preview.c:677
+#: ../gedit/gedit-print-preview.c:681
 msgid "Zoom the page out"
 msgstr "بعّد الصفحة"
 
-#: ../gedit/gedit-print-preview.c:689
+#: ../gedit/gedit-print-preview.c:693
 msgid "_Close Preview"
 msgstr "أ_غلق المعاينة"
 
-#: ../gedit/gedit-print-preview.c:692
+#: ../gedit/gedit-print-preview.c:696
 msgid "Close print preview"
 msgstr "أغلق معيانة الطباعة"
 
-#: ../gedit/gedit-print-preview.c:758
+#: ../gedit/gedit-print-preview.c:762
 #, c-format
 msgid "Page %d of %d"
 msgstr "الصفحة %Id من %Id"
 
-#: ../gedit/gedit-print-preview.c:942
+#: ../gedit/gedit-print-preview.c:946
 msgid "Page Preview"
 msgstr "معاينة الصفحة"
 
-#: ../gedit/gedit-print-preview.c:943
+#: ../gedit/gedit-print-preview.c:947
 msgid "The preview of a page in the document to be printed"
 msgstr "معاينة صفحة من المستند الذي ستتم طباعته"
 
@@ -2223,25 +2231,25 @@ msgid "/ on %s"
 msgstr "/ على %s"
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1248
+#: ../gedit/gedit-view.c:1245
 msgid "_Wrap Around"
 msgstr "_لف حول"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1258
+#: ../gedit/gedit-view.c:1255
 msgid "Match _Entire Word Only"
 msgstr "طابِق _كل الكلمة فقط"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1268
+#: ../gedit/gedit-view.c:1265
 msgid "_Match Case"
 msgstr "_طابِق الحالة"
 
-#: ../gedit/gedit-view.c:1387 ../gedit/gedit-view.c:1412
+#: ../gedit/gedit-view.c:1379
 msgid "String you want to search for"
 msgstr "السلسة التي تريد البحث عنها"
 
-#: ../gedit/gedit-view.c:1395 ../gedit/gedit-view.c:1421
+#: ../gedit/gedit-view.c:1388
 msgid "Line you want to move the cursor to"
 msgstr "السطر الذي تريد تحريك المؤشّر إليه"
 
