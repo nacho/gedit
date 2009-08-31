@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
-"POT-Creation-Date: 2009-08-22 20:04+0000\n"
-"PO-Revision-Date: 2009-08-23 23:02+0200\n"
+"POT-Creation-Date: 2009-08-31 09:09+0000\n"
+"PO-Revision-Date: 2009-08-31 20:37+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: UTF-8\n"
 "X-Generator: Gtranslator 1.9.3\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
@@ -37,7 +37,6 @@ msgid "Text Editor"
 msgstr "Editor de textos"
 
 #: ../data/gedit.desktop.in.in.h:3
-#| msgid "_Edit"
 msgid "gedit"
 msgstr "gedit"
 
@@ -879,7 +878,7 @@ msgid "_Autosave files every"
 msgstr "_Autoguardar archivos cada"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:28
-#: ../gedit/gedit-view.c:2033
+#: ../gedit/gedit-view.c:1995
 msgid "_Display line numbers"
 msgstr "_Mostrar números de línea"
 
@@ -1478,22 +1477,28 @@ msgstr ""
 "El documento contiene uno o más caracteres que no se pueden codificar usando "
 "el código de caracteres especificado."
 
+#. Translators: the access key chosen for this string should be
+#. different from other main menu access keys (Open, Edit, View...)
 #: ../gedit/gedit-io-error-message-area.c:801
-#: ../gedit/gedit-io-error-message-area.c:809
-msgid "_Edit Anyway"
-msgstr "_Editar de todos modos"
+#: ../gedit/gedit-io-error-message-area.c:811
+#| msgid "_Edit Anyway"
+msgid "Edit Any_way"
+msgstr "Editar de todos _modos"
 
+#. Translators: the access key chosen for this string should be
+#. different from other main menu access keys (Open, Edit, View...)
 #: ../gedit/gedit-io-error-message-area.c:804
-#: ../gedit/gedit-io-error-message-area.c:812
-msgid "_Don't Edit"
-msgstr "_No editar"
+#: ../gedit/gedit-io-error-message-area.c:816
+#| msgid "_Don't Edit"
+msgid "D_on't Edit"
+msgstr "N_o editar"
 
-#: ../gedit/gedit-io-error-message-area.c:830
+#: ../gedit/gedit-io-error-message-area.c:834
 #, c-format
 msgid "This file (%s) is already open in another gedit window."
 msgstr "El archivo (%s) ya está abierto en otra ventana de gedit."
 
-#: ../gedit/gedit-io-error-message-area.c:845
+#: ../gedit/gedit-io-error-message-area.c:849
 msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
@@ -1501,45 +1506,45 @@ msgstr ""
 "Se ha abierto esta instancia del archivo en una forma no editable. ¿Quiere "
 "editarlo de todas formas?"
 
-#: ../gedit/gedit-io-error-message-area.c:904
-#: ../gedit/gedit-io-error-message-area.c:914
-#: ../gedit/gedit-io-error-message-area.c:1014
-#: ../gedit/gedit-io-error-message-area.c:1024
-msgid "S_ave Anyway"
-msgstr "_Guardar de todos modos"
-
 #: ../gedit/gedit-io-error-message-area.c:908
 #: ../gedit/gedit-io-error-message-area.c:918
 #: ../gedit/gedit-io-error-message-area.c:1018
 #: ../gedit/gedit-io-error-message-area.c:1028
+msgid "S_ave Anyway"
+msgstr "_Guardar de todos modos"
+
+#: ../gedit/gedit-io-error-message-area.c:912
+#: ../gedit/gedit-io-error-message-area.c:922
+#: ../gedit/gedit-io-error-message-area.c:1022
+#: ../gedit/gedit-io-error-message-area.c:1032
 msgid "D_on't Save"
 msgstr "_No guardar"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:939
+#: ../gedit/gedit-io-error-message-area.c:943
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "El archivo %s ha sido modificado desde que lo leyó."
 
-#: ../gedit/gedit-io-error-message-area.c:955
+#: ../gedit/gedit-io-error-message-area.c:959
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
 "Si lo guarda, todos los cambios externos podrían perderse. ¿Quiere guardarlo "
 "de todas formas?"
 
-#: ../gedit/gedit-io-error-message-area.c:1049
+#: ../gedit/gedit-io-error-message-area.c:1053
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "No se ha podido crear un archivo de respaldo al guardar %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1052
+#: ../gedit/gedit-io-error-message-area.c:1056
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "No se ha podido crear un archivo de respaldo temporal al guardar %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1069
+#: ../gedit/gedit-io-error-message-area.c:1073
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1551,7 +1556,7 @@ msgstr ""
 "antigua del archivo. ¿Quiere guardar de todas formas?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1129
+#: ../gedit/gedit-io-error-message-area.c:1133
 #, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
@@ -1560,7 +1565,7 @@ msgstr ""
 "No se pueden manipular lugares %s en modo escritura. Compruebe que ha "
 "tecleado el lugar correctamente y pruebe de nuevo."
 
-#: ../gedit/gedit-io-error-message-area.c:1137
+#: ../gedit/gedit-io-error-message-area.c:1141
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1568,7 +1573,7 @@ msgstr ""
 "No se puede manipular este lugar en modo escritura. Compruebe que ha "
 "tecleado el lugar correctamente y pruebe de nuevo."
 
-#: ../gedit/gedit-io-error-message-area.c:1146
+#: ../gedit/gedit-io-error-message-area.c:1150
 #, c-format
 msgid ""
 "%s is not a valid location. Please check that you typed the location "
@@ -1577,7 +1582,7 @@ msgstr ""
 "%s no es un lugar válido. Compruebe que ha tecleado el lugar correctamente y "
 "pruebe de nuevo."
 
-#: ../gedit/gedit-io-error-message-area.c:1152
+#: ../gedit/gedit-io-error-message-area.c:1156
 msgid ""
 "You do not have the permissions necessary to save the file. Please check "
 "that you typed the location correctly and try again."
@@ -1585,7 +1590,7 @@ msgstr ""
 "No tiene los permisos necesarios para guardar el archivo. Compruebe que ha "
 "tecleado el lugar correctamente y pruebe de nuevo."
 
-#: ../gedit/gedit-io-error-message-area.c:1158
+#: ../gedit/gedit-io-error-message-area.c:1162
 msgid ""
 "There is not enough disk space to save the file. Please free some disk space "
 "and try again."
@@ -1593,7 +1598,7 @@ msgstr ""
 "No hay suficiente espacio en el disco para guardar el archivo. Libere un "
 "poco de espacio y pruebe de nuevo."
 
-#: ../gedit/gedit-io-error-message-area.c:1163
+#: ../gedit/gedit-io-error-message-area.c:1167
 msgid ""
 "You are trying to save the file on a read-only disk. Please check that you "
 "typed the location correctly and try again."
@@ -1601,11 +1606,11 @@ msgstr ""
 "Está intentando guardar el archivo en un disco de sólo lectura. Compruebe "
 "que ha escrito el lugar correctamente y pruebe de nuevo."
 
-#: ../gedit/gedit-io-error-message-area.c:1169
+#: ../gedit/gedit-io-error-message-area.c:1173
 msgid "A file with the same name already exists. Please use a different name."
 msgstr "Ya existe un archivo con el mismo nombre. Use un nombre diferente."
 
-#: ../gedit/gedit-io-error-message-area.c:1174
+#: ../gedit/gedit-io-error-message-area.c:1178
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please use a shorter name."
@@ -1613,7 +1618,7 @@ msgstr ""
 "El disco en donde está intentando guardar el archivo tiene una limitación en "
 "la longitud de los nombres de archivo. Use un nombre de archivo más corto."
 
-#: ../gedit/gedit-io-error-message-area.c:1181
+#: ../gedit/gedit-io-error-message-area.c:1185
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1623,7 +1628,7 @@ msgstr ""
 "el tamaño del archivo. Intente guardar un archivo más pequeño o guardarlo en "
 "un disco que no tenga esta limitación."
 
-#: ../gedit/gedit-io-error-message-area.c:1196
+#: ../gedit/gedit-io-error-message-area.c:1200
 #, c-format
 msgid "Could not save the file %s."
 msgstr "No se puede guardar el archivo %s."
@@ -1631,21 +1636,21 @@ msgstr "No se puede guardar el archivo %s."
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1238
+#: ../gedit/gedit-io-error-message-area.c:1242
 #, c-format
 msgid "The file %s changed on disk."
 msgstr "El archivo %s ha cambiado en el disco."
 
-#: ../gedit/gedit-io-error-message-area.c:1243
+#: ../gedit/gedit-io-error-message-area.c:1247
 msgid "Do you want to drop your changes and reload the file?"
 msgstr "¿Quiere perder sus cambios y volver a cargar el archivo?"
 
-#: ../gedit/gedit-io-error-message-area.c:1245
+#: ../gedit/gedit-io-error-message-area.c:1249
 msgid "Do you want to reload the file?"
 msgstr "¿Quiere volver a cargar el archivo?"
 
-#: ../gedit/gedit-io-error-message-area.c:1251
-#: ../gedit/gedit-io-error-message-area.c:1262
+#: ../gedit/gedit-io-error-message-area.c:1255
+#: ../gedit/gedit-io-error-message-area.c:1266
 msgid "_Reload"
 msgstr "_Recargar"
 
@@ -1776,68 +1781,68 @@ msgstr "_Restaurar tipografías predeterminadas"
 msgid "lines"
 msgstr "líneas"
 
-#: ../gedit/gedit-print-preview.c:561
+#: ../gedit/gedit-print-preview.c:565
 msgid "Show the previous page"
 msgstr "Muestra la página anterior"
 
-#: ../gedit/gedit-print-preview.c:573
+#: ../gedit/gedit-print-preview.c:577
 msgid "Show the next page"
 msgstr "Muestra la página siguiente"
 
-#: ../gedit/gedit-print-preview.c:589
+#: ../gedit/gedit-print-preview.c:593
 msgid "Current page (Alt+P)"
 msgstr "Página actual (Alt+P)"
 
-#: ../gedit/gedit-print-preview.c:611
+#: ../gedit/gedit-print-preview.c:615
 msgid "of"
 msgstr "de"
 
-#: ../gedit/gedit-print-preview.c:619
+#: ../gedit/gedit-print-preview.c:623
 msgid "Page total"
 msgstr "Total de páginas"
 
-#: ../gedit/gedit-print-preview.c:620
+#: ../gedit/gedit-print-preview.c:624
 msgid "The total number of pages in the document"
 msgstr "El número total de páginas del documento"
 
-#: ../gedit/gedit-print-preview.c:637
+#: ../gedit/gedit-print-preview.c:641
 msgid "Show multiple pages"
 msgstr "Mostrar varias páginas"
 
-#: ../gedit/gedit-print-preview.c:650
+#: ../gedit/gedit-print-preview.c:654
 msgid "Zoom 1:1"
 msgstr "Ampliación 1:1"
 
-#: ../gedit/gedit-print-preview.c:659
+#: ../gedit/gedit-print-preview.c:663
 msgid "Zoom to fit the whole page"
 msgstr "Ampliar hasta ajustar toda la página"
 
-#: ../gedit/gedit-print-preview.c:668
+#: ../gedit/gedit-print-preview.c:672
 msgid "Zoom the page in"
 msgstr "Ampliar la página"
 
-#: ../gedit/gedit-print-preview.c:677
+#: ../gedit/gedit-print-preview.c:681
 msgid "Zoom the page out"
 msgstr "Reducir la página"
 
-#: ../gedit/gedit-print-preview.c:689
+#: ../gedit/gedit-print-preview.c:693
 msgid "_Close Preview"
 msgstr "_Cerrar vista previa"
 
-#: ../gedit/gedit-print-preview.c:692
+#: ../gedit/gedit-print-preview.c:696
 msgid "Close print preview"
 msgstr "Cerrar vista previa de impresión"
 
-#: ../gedit/gedit-print-preview.c:758
+#: ../gedit/gedit-print-preview.c:762
 #, c-format
 msgid "Page %d of %d"
 msgstr "Página %d de %d"
 
-#: ../gedit/gedit-print-preview.c:942
+#: ../gedit/gedit-print-preview.c:946
 msgid "Page Preview"
 msgstr "Vista previa de la página"
 
-#: ../gedit/gedit-print-preview.c:943
+#: ../gedit/gedit-print-preview.c:947
 msgid "The preview of a page in the document to be printed"
 msgstr "Vista previa de una página en el documento que se va a imprimir"
 
@@ -2247,25 +2252,25 @@ msgid "/ on %s"
 msgstr "/ en %s"
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1248
+#: ../gedit/gedit-view.c:1245
 msgid "_Wrap Around"
 msgstr "_Volver al principio"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1258
+#: ../gedit/gedit-view.c:1255
 msgid "Match _Entire Word Only"
 msgstr "Coincidir sólo con palabras compl_etas"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1268
+#: ../gedit/gedit-view.c:1265
 msgid "_Match Case"
 msgstr "Coi_ncidir con capitalización"
 
-#: ../gedit/gedit-view.c:1387 ../gedit/gedit-view.c:1412
+#: ../gedit/gedit-view.c:1379
 msgid "String you want to search for"
 msgstr "La cadena que quiere buscar"
 
-#: ../gedit/gedit-view.c:1395 ../gedit/gedit-view.c:1421
+#: ../gedit/gedit-view.c:1388
 msgid "Line you want to move the cursor to"
 msgstr "Línea a la que quiere mover el cursor"
 
