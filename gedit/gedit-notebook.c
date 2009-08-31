@@ -388,7 +388,7 @@ drag_start (GeditNotebook *notebook,
 	/* FIXME multi-head */
 	if (!gdk_pointer_is_grabbed ())
 	{
-		gdk_pointer_grab (GTK_WIDGET (notebook)->window,
+		gdk_pointer_grab (gtk_widget_get_window (GTK_WIDGET (notebook)),
 				  FALSE,
 				  GDK_BUTTON1_MOTION_MASK | GDK_BUTTON_RELEASE_MASK,
 				  NULL, 

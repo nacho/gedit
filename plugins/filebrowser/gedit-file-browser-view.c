@@ -256,7 +256,8 @@ enter_notify_event (GtkWidget *widget,
 					       NULL, NULL, NULL);
 
 		if (view->priv->hover_path != NULL)
-			gdk_window_set_cursor (widget->window, view->priv->hand_cursor);
+			gdk_window_set_cursor (gtk_widget_get_window (widget),
+					       view->priv->hand_cursor);
 	}
 
 	// Chainup
@@ -279,9 +280,11 @@ motion_notify_event (GtkWidget * widget,
 
 		if ((old_hover_path != NULL) != (view->priv->hover_path != NULL)) {
 			if (view->priv->hover_path != NULL)
-				gdk_window_set_cursor (widget->window, view->priv->hand_cursor);
+				gdk_window_set_cursor (gtk_widget_get_window (widget),
+						       view->priv->hand_cursor);
 			else
-				gdk_window_set_cursor (widget->window, NULL);
+				gdk_window_set_cursor (gtk_widget_get_window (widget),
+						       NULL);
 		}
 
 		if (old_hover_path != NULL)
@@ -317,7 +320,7 @@ set_click_policy_property (GeditFileBrowserView            *obj,
 		}
 
 		if (GTK_WIDGET_REALIZED (GTK_WIDGET (obj))) {
-			win = GTK_WIDGET (obj)->window;
+			win = gtk_widget_get_window (GTK_WIDGET (obj));
 			gdk_window_set_cursor (win, NULL);
 			
 			display = gtk_widget_get_display (GTK_WIDGET (obj));

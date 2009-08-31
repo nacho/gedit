@@ -125,10 +125,12 @@ set_statusbar_width_chars (GtkWidget *statusbar,
 	PangoContext *context;
 	PangoFontMetrics *metrics;
 	gint char_width, digit_width, width;
+	GtkStyle *style;
 
 	context = gtk_widget_get_pango_context (statusbar);
+	style = gtk_widget_get_style (GTK_WIDGET (statusbar));
 	metrics = pango_context_get_metrics (context,
-					     GTK_WIDGET (statusbar)->style->font_desc, 
+					     style->font_desc,
 					     pango_context_get_language (context));
 
 	char_width = pango_font_metrics_get_approximate_digit_width (metrics);

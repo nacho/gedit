@@ -717,6 +717,7 @@ get_page_at_coords (GeditPrintPreview *preview,
 		    gint               y)
 {
 	GeditPrintPreviewPrivate *priv;
+	GtkAdjustment *hadj, *vadj;
 	gint r, c, pg;
 
 	priv = preview->priv;
@@ -724,8 +725,11 @@ get_page_at_coords (GeditPrintPreview *preview,
 	if (priv->tile_h <= 0 || priv->tile_h <= 0)
 		return -1;
 
-	x += gtk_layout_get_hadjustment (GTK_LAYOUT (priv->layout))->value;
-	y += gtk_layout_get_vadjustment (GTK_LAYOUT (priv->layout))->value;
+	hadj = gtk_layout_get_hadjustment (GTK_LAYOUT (priv->layout));
+	vadj = gtk_layout_get_vadjustment (GTK_LAYOUT (priv->layout));
+
+	x += gtk_adjustment_get_value (hadj);
+	y += gtk_adjustment_get_value (vadj);
 
 	r = 1 + y / (priv->tile_h);
 	c = 1 + x / (priv->tile_w);
@@ -786,8 +790,8 @@ preview_layout_key_press (GtkWidget         *widget,
 	hadj = gtk_layout_get_hadjustment (GTK_LAYOUT (priv->layout));
 	vadj = gtk_layout_get_vadjustment (GTK_LAYOUT (priv->layout));
 
-	x = hadj->value;
-	y = vadj->value;
+	x = gtk_adjustment_get_value (hadj);
+	y = gtk_adjustment_get_value (vadj);
 
 	g_object_get (hadj,
 		      "lower", &hlower,
@@ -1103,17 +1107,19 @@ preview_expose (GtkWidget         *widget,
 		GdkEventExpose    *event,
 		GeditPrintPreview *preview)
 {
-	GeditPrintPreviewPrivate *priv;	
+	GeditPrintPreviewPrivate *priv;
+	GdkWindow *bin_window;
 	cairo_t *cr;
 	gint pg;
 	gint i, j;
 
 	priv = preview->priv;
 
-	if (event->window != GTK_LAYOUT (priv->layout)->bin_window)
+	bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (priv->layout));
+	if (event->window != bin_window)
 		return FALSE;
 
-	cr = gdk_cairo_create (GTK_LAYOUT (priv->layout)->bin_window);
+	cr = gdk_cairo_create (bin_window);
 
 	gdk_cairo_rectangle (cr, &event->area);
 	cairo_clip (cr);

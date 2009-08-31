@@ -324,9 +324,11 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 	
 	/* HIG defaults */
 	gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2); /* 2 * 5 + 2 = 12 */
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);	
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
+			     2); /* 2 * 5 + 2 = 12 */
+	gtk_container_set_border_width (GTK_CONTAINER (gtk_dialog_get_action_area (GTK_DIALOG (dlg))),
+					5);
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_action_area (GTK_DIALOG (dlg))), 6);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dlg),
 					 GTK_RESPONSE_OK);
@@ -352,14 +354,14 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 	{
 		gtk_widget_show (error_widget);
 
-		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dlg)->vbox),
+		gtk_box_pack_start_defaults (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
 					     error_widget);
 		gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);			     
 
 		return;
 	}
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
 			    content, TRUE, TRUE, 0);
 	g_object_unref (content);
 	gtk_container_set_border_width (GTK_CONTAINER (content), 5);			     

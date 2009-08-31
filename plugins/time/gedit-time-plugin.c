@@ -773,9 +773,11 @@ get_configure_dialog (GeditTimePlugin *plugin)
 
 	/* HIG defaults */
 	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog->dialog)), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox), 2); /* 2 * 5 + 2 = 12 */
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog->dialog)->action_area), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog->dialog)->action_area), 6);
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog->dialog))),
+			     2); /* 2 * 5 + 2 = 12 */
+	gtk_container_set_border_width (GTK_CONTAINER (gtk_dialog_get_action_area (GTK_DIALOG (dialog->dialog))),
+					5);
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_action_area (GTK_DIALOG (dialog->dialog))), 6);
 
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
 
@@ -799,7 +801,7 @@ get_configure_dialog (GeditTimePlugin *plugin)
 
 	if (!ret)
 	{
-		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
+		gtk_box_pack_start_defaults (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog->dialog))),
 					     error_widget);
 		gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);
 
@@ -852,7 +854,7 @@ get_configure_dialog (GeditTimePlugin *plugin)
 	/* setup a window of a sane size. */
 	gtk_widget_set_size_request (GTK_WIDGET (viewport), 10, 200);
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog->dialog))),
 			    content, FALSE, FALSE, 0);
 	g_object_unref (content);
 	gtk_container_set_border_width (GTK_CONTAINER (content), 5);
@@ -934,7 +936,7 @@ get_choose_format_dialog (GtkWindow                 *parent,
 	GtkWindowGroup *wg = NULL;
 	
 	if (parent != NULL)
-		wg = parent->group;
+		wg = gtk_window_get_group (parent);
 
 	dialog = g_new0 (ChooseFormatDialog, 1);
 

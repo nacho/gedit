@@ -393,9 +393,9 @@ on_message_received (const char *message,
 
 #ifdef GDK_WINDOWING_X11
 	if (startup_timestamp <= 0)
-		startup_timestamp = gdk_x11_get_server_time (GTK_WIDGET (window)->window);
+		startup_timestamp = gdk_x11_get_server_time (gtk_widget_get_window (GTK_WIDGET (window)));
 
-	gdk_x11_window_set_user_time (GTK_WIDGET (window)->window,
+	gdk_x11_window_set_user_time (gtk_widget_get_window (GTK_WIDGET (window)),
 				      startup_timestamp);
 #endif
 

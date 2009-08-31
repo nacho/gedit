@@ -1091,9 +1091,9 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 
 	/* HIG defaults */
 	gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 2); /* 2 * 5 + 2 = 12 */
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dlg)->action_area), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->action_area), 6);
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))), 2); /* 2 * 5 + 2 = 12 */
+	gtk_container_set_border_width (GTK_CONTAINER (gtk_dialog_get_action_area (GTK_DIALOG (dlg))), 5);
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_action_area (GTK_DIALOG (dlg))), 6);
 	
 	g_signal_connect (dlg,
 			  "response",
@@ -1145,13 +1145,13 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	{
 		gtk_widget_show (error_widget);
 			
-		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dlg)->vbox),
+		gtk_box_pack_start_defaults (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
 					     error_widget);
 		
 		return;
 	}
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
 			    dlg->priv->notebook, FALSE, FALSE, 0);
 	g_object_unref (dlg->priv->notebook);
 	gtk_container_set_border_width (GTK_CONTAINER (dlg->priv->notebook), 5);

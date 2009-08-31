@@ -1102,10 +1102,11 @@ on_begin_loading (GeditFileBrowserStore  *model,
 		  GtkTreeIter            *iter,
 		  GeditFileBrowserWidget *obj)
 {
-	if (!GDK_IS_WINDOW (GTK_WIDGET (obj->priv->treeview)->window))
+	if (!GDK_IS_WINDOW (gtk_widget_get_window (GTK_WIDGET (obj->priv->treeview))))
 		return;
 
-	gdk_window_set_cursor (GTK_WIDGET (obj)->window, obj->priv->busy_cursor);
+	gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (obj)),
+			       obj->priv->busy_cursor);
 }
 
 static void
@@ -1113,10 +1114,10 @@ on_end_loading (GeditFileBrowserStore  *model,
 		GtkTreeIter            *iter,
 		GeditFileBrowserWidget *obj)
 {
-	if (!GDK_IS_WINDOW (GTK_WIDGET (obj->priv->treeview)->window))
+	if (!GDK_IS_WINDOW (gtk_widget_get_window (GTK_WIDGET (obj->priv->treeview))))
 		return;
 
-	gdk_window_set_cursor (GTK_WIDGET (obj)->window, NULL);
+	gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (obj)), NULL);
 }
 
 static void
@@ -2035,7 +2036,7 @@ set_busy (GeditFileBrowserWidget *obj, gboolean busy)
 	GdkCursor *cursor;
 	GdkWindow *window;
 	
-	window = GTK_WIDGET (obj->priv->treeview)->window;
+	window = gtk_widget_get_window (GTK_WIDGET (obj->priv->treeview));
 	
 	if (!GDK_IS_WINDOW (window))
 		return;

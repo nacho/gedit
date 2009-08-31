@@ -505,7 +505,7 @@ gedit_warning (GtkWindow *parent, const gchar *format, ...)
 	g_return_if_fail (format != NULL);
 
 	if (parent != NULL)
-		wg = parent->group;
+		wg = gtk_window_get_group (parent);
 		
 	va_start (args, format);
 	str = g_strdup_vprintf (format, args);
@@ -1372,7 +1372,7 @@ gedit_utils_drop_get_uris (GtkSelectionData *selection_data)
 	gint p = 0;
 	gchar **uri_list;
 
-	uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
+	uris = g_uri_list_extract_uris ((gchar *) gtk_selection_data_get_data (selection_data));
 	uri_list = g_new0(gchar *, g_strv_length (uris) + 1);
 
 	for (i = 0; uris[i] != NULL; i++)

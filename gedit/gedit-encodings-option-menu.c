@@ -173,7 +173,7 @@ add_or_remove (GtkMenuItem              *menu_item,
 			gtk_window_set_transient_for (GTK_WINDOW (dialog),
 						      GTK_WINDOW (toplevel));
 
-			wg = GTK_WINDOW (toplevel)->group;		      
+			wg = gtk_window_get_group (GTK_WINDOW (toplevel));
 			if (wg == NULL)
 			{
 				wg = gtk_window_group_new ();
@@ -384,6 +384,7 @@ gedit_encodings_option_menu_set_selected_encoding (GeditEncodingsOptionMenu *men
 {
 	GtkOptionMenu *option_menu;
 	GList *list;
+	GList *l;
 	gint i;
 
 	g_return_if_fail (GEDIT_IS_ENCODINGS_OPTION_MENU (menu));
@@ -391,14 +392,14 @@ gedit_encodings_option_menu_set_selected_encoding (GeditEncodingsOptionMenu *men
 	option_menu = GTK_OPTION_MENU (menu);
 	g_return_if_fail (option_menu != NULL);
 
-	list = GTK_MENU_SHELL (option_menu->menu)->children;
+	list = gtk_container_get_children (GTK_CONTAINER (option_menu->menu));
 	i = 0;
-	while (list != NULL)
+	for (l = list; l != NULL; l = g_list_next (l))
 	{
 		GtkWidget *menu_item;
 		const GeditEncoding *enc;
 
-		menu_item = GTK_WIDGET (list->data);
+		menu_item = GTK_WIDGET (l->data);
 
 		enc = (const GeditEncoding *)g_object_get_data (G_OBJECT (menu_item), 
 								ENCODING_KEY);
@@ -406,14 +407,12 @@ gedit_encodings_option_menu_set_selected_encoding (GeditEncodingsOptionMenu *men
 		if (enc == encoding)
 		{
 			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), TRUE);
-
 			gtk_option_menu_set_history (GTK_OPTION_MENU (menu), i);
-
-			return;
+			break;
 		}
 
 		++i;
-
-		list = g_list_next (list);
 	}
+
+	g_list_free (list);
 }

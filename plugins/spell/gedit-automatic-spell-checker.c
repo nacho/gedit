@@ -693,7 +693,7 @@ gedit_automatic_spell_checker_new (GeditDocument     *doc,
 				   GeditSpellChecker *checker)
 {
 	GeditAutomaticSpellChecker *spell;
-
+	GtkTextTagTable *tag_table;
 	GtkTextIter start, end;
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
@@ -707,11 +707,13 @@ gedit_automatic_spell_checker_new (GeditDocument     *doc,
 	spell->doc = doc;
 	spell->spell_checker = g_object_ref (checker);
 
-	if (automatic_spell_checker_id == 0) {
+	if (automatic_spell_checker_id == 0)
+	{
 		automatic_spell_checker_id = 
 			g_quark_from_string ("GeditAutomaticSpellCheckerID");
 	}
-	if (suggestion_id == 0) {
+	if (suggestion_id == 0)
+	{
 		suggestion_id = g_quark_from_string ("GeditAutoSuggestionID");
 	}
 
@@ -760,20 +762,20 @@ gedit_automatic_spell_checker_new (GeditDocument     *doc,
 				"underline", PANGO_UNDERLINE_ERROR,
 				NULL);
 
-	g_return_val_if_fail (GTK_TEXT_BUFFER (doc)->tag_table != NULL, NULL);
+	tag_table = gtk_text_buffer_get_tag_table (GTK_TEXT_BUFFER (doc));
 
 	gtk_text_tag_set_priority (spell->tag_highlight, 
-				   gtk_text_tag_table_get_size (GTK_TEXT_BUFFER (doc)->tag_table) - 1);
+				   gtk_text_tag_table_get_size (tag_table) - 1);
 
-	g_signal_connect (GTK_TEXT_BUFFER (doc)->tag_table,
+	g_signal_connect (tag_table,
 			  "tag-added",
 			  G_CALLBACK (tag_added_or_removed),
 			  spell);
-	g_signal_connect (GTK_TEXT_BUFFER (doc)->tag_table,
+	g_signal_connect (tag_table,
 			  "tag-removed",
 			  G_CALLBACK (tag_added_or_removed),
 			  spell);
-	g_signal_connect (GTK_TEXT_BUFFER (doc)->tag_table,
+	g_signal_connect (tag_table,
 			  "tag-changed",
 			  G_CALLBACK (tag_changed),
 			  spell);
@@ -786,44 +788,55 @@ gedit_automatic_spell_checker_new (GeditDocument     *doc,
 					"gedit-automatic-spell-checker-insert-start");
 
 	if (spell->mark_insert_start == NULL)
+	{
 		spell->mark_insert_start = 
 			gtk_text_buffer_create_mark (GTK_TEXT_BUFFER (doc),
 						     "gedit-automatic-spell-checker-insert-start",
 						     &start, 
 						     TRUE);
+	}
 	else
+	{
 		gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc),
 					   spell->mark_insert_start,
 					   &start);
+	}
 
 	spell->mark_insert_end = gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
 					"gedit-automatic-spell-checker-insert-end");
 
 	if (spell->mark_insert_end == NULL)
+	{
 		spell->mark_insert_end = 
 			gtk_text_buffer_create_mark (GTK_TEXT_BUFFER (doc),
 						     "gedit-automatic-spell-checker-insert-end",
 						     &start, 
 						     TRUE);
+	}
 	else
+	{
 		gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc),
 					   spell->mark_insert_end,
 					   &start);
-
+	}
 
 	spell->mark_click = gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
 					"gedit-automatic-spell-checker-click");
 
 	if (spell->mark_click == NULL)
+	{
 		spell->mark_click = 
 			gtk_text_buffer_create_mark (GTK_TEXT_BUFFER (doc),
 						     "gedit-automatic-spell-checker-click",
 						     &start, 
 						     TRUE);
+	}
 	else
+	{
 		gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc),
 					   spell->mark_click,
 					   &start);
+	}
 
 	spell->deferred_check = FALSE;
 
@@ -862,7 +875,7 @@ gedit_automatic_spell_checker_free_internal (GeditAutomaticSpellChecker *spell)
 	
 	g_return_if_fail (spell != NULL);
 
-	table = GTK_TEXT_BUFFER (spell->doc)->tag_table;
+	table = gtk_text_buffer_get_tag_table (GTK_TEXT_BUFFER (spell->doc));
 
 	if (table != NULL)
 	{

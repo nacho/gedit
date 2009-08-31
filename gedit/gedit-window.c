@@ -2788,7 +2788,8 @@ fullscreen_controls_show (GeditWindow *window)
 
 	screen = gtk_window_get_screen (GTK_WINDOW (window));
 	gdk_screen_get_monitor_geometry (screen,
-					 gdk_screen_get_monitor_at_window (screen, GTK_WIDGET (window)->window),
+					 gdk_screen_get_monitor_at_window (screen,
+									   gtk_widget_get_window (GTK_WIDGET (window))),
 					 &fs_rect);
 
 	gtk_window_get_size (GTK_WINDOW (window->priv->fullscreen_controls), &w, &h);
@@ -2812,7 +2813,8 @@ run_fullscreen_animation (gpointer data)
 	
 	screen = gtk_window_get_screen (GTK_WINDOW (window));
 	gdk_screen_get_monitor_geometry (screen,
-					 gdk_screen_get_monitor_at_window (screen, GTK_WIDGET (window)->window),
+					 gdk_screen_get_monitor_at_window (screen,
+									   gtk_widget_get_window (GTK_WIDGET (window))),
 					 &fs_rect);
 					 
 	gtk_window_get_position (GTK_WINDOW (window->priv->fullscreen_controls),
@@ -2886,7 +2888,8 @@ show_hide_fullscreen_toolbar (GeditWindow *window,
 
 		screen = gtk_window_get_screen (GTK_WINDOW (window));
 		gdk_screen_get_monitor_geometry (screen,
-						 gdk_screen_get_monitor_at_window (screen, GTK_WIDGET (window)->window),
+						 gdk_screen_get_monitor_at_window (screen,
+										   gtk_widget_get_window (GTK_WIDGET (window))),
 						 &fs_rect);
 
 		if (show)
