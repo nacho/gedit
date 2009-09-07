@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-02 18:42+0200\n"
-"PO-Revision-Date: 2009-09-02 18:42+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gedit&component=general\n"
+"POT-Creation-Date: 2009-09-03 22:29+0000\n"
+"PO-Revision-Date: 2009-09-07 11:14+0200\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,6 +31,12 @@ msgstr "Testu-editorea"
 #: ../data/gedit.desktop.in.in.h:3
 msgid "gedit"
 msgstr "gedit"
+
+#
+#: ../data/gedit.desktop.in.in.h:4
+#| msgid "Text Editor"
+msgid "gedit Text Editor"
+msgstr "gedit testu-editorea"
 
 #: ../data/gedit.schemas.in.in.h:1
 msgid ""
@@ -3463,6 +3469,37 @@ msgstr "(ortografia zuzena)"
 #: ../plugins/spell/gedit-spell-checker-dialog.c:748
 msgid "Completed spell checking"
 msgstr "Ortografia-egiaztapena bukatuta"
+
+#. Translators: the first %s is the language name, and
+#. * the second %s is the locale name. Example:
+#. * "French (France)"
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:285
+#: ../plugins/spell/gedit-spell-checker-language.c:291
+#, c-format
+msgctxt "language"
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#. Translators: this refers to an unknown language code
+#. * (one which isn't in our built-in list).
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:300
+#, c-format
+#| msgid "Unknown"
+msgctxt "language"
+msgid "Unknown (%s)"
+msgstr "Ezezaguna (%s)"
+
+#
+#. Translators: this refers the Default language used by the
+#. * spell checker
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:406
+#| msgid "Use Default Font"
+msgctxt "language"
+msgid "Default"
+msgstr "Lehenetsia"
 
 #: ../plugins/spell/gedit-spell-language-dialog.c:141
 #: ../plugins/spell/languages-dialog.ui.h:2
