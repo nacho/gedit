@@ -732,7 +732,6 @@ spell_cb (GtkAction   *action,
 	gint start, end;
 	GtkTextIter sel_start, sel_end;
 	gchar *word;
-	gboolean sel = FALSE;
 	gchar *data_dir;
 
 	gedit_debug (DEBUG_PLUGINS);
@@ -771,7 +770,6 @@ spell_cb (GtkAction   *action,
 		start = gtk_text_iter_get_offset (&sel_start);
 		end = gtk_text_iter_get_offset (&sel_end);
 		set_check_range (doc, start, end);
-		sel = TRUE;
 	}
 	else
 	{

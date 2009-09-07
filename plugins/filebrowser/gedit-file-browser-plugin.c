@@ -1190,9 +1190,6 @@ on_confirm_no_trash_cb (GeditFileBrowserWidget * widget,
 	gchar *message;
 	gchar *secondary;
 	gboolean result;
-	GeditFileBrowserPluginData *data;
-
-	data = get_plugin_data (window);
 
 	message = _("Cannot move file to trash, do you\nwant to delete permanently?");
 

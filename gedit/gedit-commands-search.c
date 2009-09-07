@@ -333,7 +333,6 @@ do_replace (GeditSearchDialog *dialog,
 	gchar *unescaped_replace_text;
 	gchar *selected_text = NULL;
 	gboolean match_case;
-	gboolean search_backwards;
 
 	doc = gedit_window_get_active_document (window);
 	if (doc == NULL)
@@ -354,7 +353,6 @@ do_replace (GeditSearchDialog *dialog,
 			   NULL);
 
 	match_case = gedit_search_dialog_get_match_case (dialog);
-	search_backwards = gedit_search_dialog_get_backwards (dialog);
 
 	if ((selected_text == NULL) ||
 	    (match_case && (strcmp (selected_text, unescaped_search_text) != 0)) || 
@@ -609,14 +607,11 @@ do_find_again (GeditWindow *window,
 	       gboolean     backward)
 {
 	GeditView *active_view;
-	GtkTextBuffer *buffer;
 	gboolean wrap_around = TRUE;
 	gpointer data;
 	
 	active_view = gedit_window_get_active_view (window);
 	g_return_if_fail (active_view != NULL);
-
-	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view));
 
 	data = g_object_get_data (G_OBJECT (window), GEDIT_SEARCH_DIALOG_KEY);
 	

@@ -680,7 +680,6 @@ build_tab_label (GeditPanel  *panel,
 
 	g_object_set_data (G_OBJECT (item), "label", label);
 	g_object_set_data (G_OBJECT (item), "hbox", hbox);
-	g_object_set_data (G_OBJECT (item), "label-ebox", label_ebox);
 
 	return hbox;
 }
@@ -790,7 +789,6 @@ gedit_panel_remove_item (GeditPanel *panel,
 {
 	GeditPanelItem *data;
 	gint page_num;
-	GtkWidget *ebox;
 	
 	g_return_val_if_fail (GEDIT_IS_PANEL (panel), FALSE);
 	g_return_val_if_fail (GTK_IS_WIDGET (item), FALSE);
@@ -812,8 +810,6 @@ gedit_panel_remove_item (GeditPanel *panel,
 		           PANEL_ITEM_KEY,
 		           NULL);
 
-	ebox = g_object_get_data (G_OBJECT (item), "label-ebox");
-	
 	/* ref the item to keep it alive during signal emission */
 	g_object_ref (G_OBJECT (item));
 

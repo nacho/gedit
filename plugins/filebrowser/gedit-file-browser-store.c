@@ -887,15 +887,14 @@ gedit_file_browser_store_iter_parent (GtkTreeModel * tree_model,
 	FileBrowserNode *node;
 	GeditFileBrowserStore *model;
 
-	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model),
-			      FALSE);
+	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model), FALSE);
 	g_return_val_if_fail (child != NULL, FALSE);
 	g_return_val_if_fail (child->user_data != NULL, FALSE);
 
 	node = (FileBrowserNode *) (child->user_data);
 	model = GEDIT_FILE_BROWSER_STORE (tree_model);
 
-	if (!node_in_tree (GEDIT_FILE_BROWSER_STORE (tree_model), node))
+	if (!node_in_tree (model, node))
 		return FALSE;
 
 	if (node->parent == NULL)
@@ -1590,7 +1589,6 @@ model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
 			     FileBrowserNode * node,
 			     GFileInfo * info)
 {
-	GtkIconTheme *theme;
 	GdkPixbuf *icon;
 
 	g_return_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model));
@@ -1599,8 +1597,6 @@ model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
 	if (node->file == NULL)
 		return;
 
-	theme = gtk_icon_theme_get_default ();
-	
 	if (info) {
 		GIcon *gicon = g_file_info_get_icon (info);
 		if (gicon != NULL)
@@ -1621,12 +1617,10 @@ model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
 
 		if (icon == NULL) {
 			node->icon =
-			    gdk_pixbuf_new (gdk_pixbuf_get_colorspace
-					    (node->emblem),
-					    gdk_pixbuf_get_has_alpha
-					    (node->emblem),
-					    gdk_pixbuf_get_bits_per_sample
-					    (node->emblem), icon_size,
+			    gdk_pixbuf_new (gdk_pixbuf_get_colorspace (node->emblem),
+					    gdk_pixbuf_get_has_alpha (node->emblem),
+					    gdk_pixbuf_get_bits_per_sample (node->emblem),
+					    icon_size,
 					    icon_size);
 		} else {
 			node->icon = gdk_pixbuf_copy (icon);
@@ -1651,8 +1645,7 @@ model_recomposite_icon (GeditFileBrowserStore * tree_model,
 	g_return_if_fail (iter->user_data != NULL);
 
 	model_recomposite_icon_real (tree_model,
-				     (FileBrowserNode *) (iter->
-							  user_data),
+				     (FileBrowserNode *) (iter->user_data),
 				     NULL);
 }
 
