@@ -663,7 +663,7 @@ main (int argc, char *argv[])
 					   icon_dir);
 	g_free (icon_dir);
 
-#if !defined PLATFORM_OSX && !defined G_OS_WIN32
+#ifdef GDK_WINDOWING_X11
 	/* Set the associated .desktop file */
 	egg_set_desktop_file (DATADIR "/applications/gedit.desktop");
 #else
