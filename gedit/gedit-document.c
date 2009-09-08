@@ -883,7 +883,7 @@ gedit_document_set_uri (GeditDocument *doc,
 gchar *
 gedit_document_get_uri_for_display (GeditDocument *doc)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), "");
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), g_strdup (""));
 
 	if (doc->priv->uri == NULL)
 		return g_strdup_printf (_("Unsaved Document %d"),
@@ -896,7 +896,7 @@ gedit_document_get_uri_for_display (GeditDocument *doc)
 gchar *
 gedit_document_get_short_name_for_display (GeditDocument *doc)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), "");
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), g_strdup (""));
 
 	if (doc->priv->uri == NULL)
 		return g_strdup_printf (_("Unsaved Document %d"),
@@ -919,7 +919,7 @@ gedit_document_get_mime_type (GeditDocument *doc)
 {
 	gchar *mime_type = NULL;
 
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), "text/plain");
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), g_strdup ("text/plain"));
 
 	if ((doc->priv->content_type != NULL) &&
 	    (!g_content_type_is_unknown (doc->priv->content_type)))
