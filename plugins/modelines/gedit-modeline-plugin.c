@@ -156,10 +156,17 @@ disconnect_handlers (GeditView *view)
 
 	data = g_object_steal_data (G_OBJECT (doc), DOCUMENT_DATA_KEY);
 
-	g_signal_handler_disconnect (doc, data->document_loaded_handler_id);
-	g_signal_handler_disconnect (doc, data->document_saved_handler_id);
+	if (data)
+	{
+		g_signal_handler_disconnect (doc, data->document_loaded_handler_id);
+		g_signal_handler_disconnect (doc, data->document_saved_handler_id);
 
-	document_data_free (data);
+		document_data_free (data);
+	}
+	else
+	{
+		g_warning ("Modeline handlers not found");
+	}
 }
 
 static void
