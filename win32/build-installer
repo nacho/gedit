@@ -119,7 +119,7 @@ strip installer/gedit/bin/*.dll || exit
 # stripping libxml2.dll renders it unusable (although not changing it in size).
 # We therefore copy it after having stripped the rest. Same with the other DLLs
 # here. Perhaps those were built with MSVC.
-cp "${_misc_prefix}/bin/libxml2-2.dll" installer/gedit/bin || exit
+cp "${_misc_prefix}/bin/libxml2.dll" installer/gedit/bin || exit
 cp "${_misc_prefix}/bin/intl.dll" installer/gedit/bin || exit
 cp "${_misc_prefix}/bin/iconv.dll" installer/gedit/bin || exit
 
@@ -207,10 +207,10 @@ echo "Copying locales..."
 
 # We need to keep the locale files from share/locale in share/locale and those
 # from lib/locale in lib/locale:
-mkdir -p installer/locale || exit
-cp "${_gtk_prefix}/share/locale" installer/locale/share -R || exit
-cp "${_gedit_prefix}/share/locale" installer/locale/share -R || exit
-cp "${_misc_prefix}/share/locale" installer/locale/share -R || exit
+mkdir -p installer/locale/share/ || exit
+cp "${_gtk_prefix}/share/locale" installer/locale/share/ -R || exit
+cp "${_gedit_prefix}/share/locale" installer/locale/share/ -R || exit
+cp "${_misc_prefix}/share/locale" installer/locale/share/ -R || exit
 
 find installer/locale/share/locale/ -type f | grep -v atk10.mo | grep -v gtk20.mo | grep -v GConf2.mo | grep -v glib20.mo | grep -v gedit.mo | grep -v gtk20.mo | grep -v gtk20-properties.mo | grep -v gtksourceview-2.0.mo | grep -v iso_*.mo | xargs rm
 find installer/locale/share/locale -type d | xargs rmdir -p --ignore-fail-on-non-empty
