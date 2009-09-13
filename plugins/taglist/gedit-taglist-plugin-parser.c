@@ -588,8 +588,6 @@ parse_taglist_dir (const gchar *dir)
 
 TagList* create_taglist (const gchar *data_dir)
 {
-	const gchar *home;
-
 	gedit_debug_message (DEBUG_PLUGINS, "ref_count: %d", taglist_ref_count);
 
 	if (taglist_ref_count > 0)
@@ -600,6 +598,8 @@ TagList* create_taglist (const gchar *data_dir)
 	}
 
 #ifndef G_OS_WIN32
+	const gchar *home;
+
 	/* load user's taglists */
 	home = g_get_home_dir ();
 	if (home != NULL)
