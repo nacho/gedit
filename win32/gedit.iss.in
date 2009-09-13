@@ -9,15 +9,15 @@ AppPublisher=GNOME
 AppPublisherURL=http:\\www.gedit.org\
 AppVersion=@VERSION@
 OutputBaseFilename=gedit-setup-@VERSION@-INSTALLERREVISION
-LicenseFile=share\doc\COPYING
+LicenseFile=gedit\share\doc\COPYING
 
 [Components]
 Name: "gtk"; Description: "GTK+ runtime environment"; Types: full compact custom; Flags: fixed
-Name: "python"; Description: "Python runtime and modules"; Types: full compact custom; Flags: fixed
 Name: "main"; Description: "Gedit"; Types: full compact custom; Flags: fixed
-Name: "locale"; Description: "Translations"; Types: full compact custom; Flags: fixed
 
-; TODO: Enable languages separately
+; TODO: Add python support and Enable languages separately
+Name: "python"; Description: "Python runtime and modules"; Types: full compact custom; Flags: fixed
+Name: "locale"; Description: "Translations"; Types: full compact custom; Flags: fixed
 
 [Tasks]
 Name: common; Description: "For all users"; Components: main; Flags: exclusive
@@ -38,142 +38,16 @@ Name: "{userprograms}\{groupname}\Uninstall gedit"; Filename: "{uninstallexe}"; 
 
 [Files]
 
-; Docs
-Source: "share\doc\COPYING"; DestDir: "{app}\share\doc"; Components: main
-Source: "share\doc\README"; DestDir: "{app}\share\doc"; Components: main
-Source: "share\doc\AUTHORS"; DestDir: "{app}\share\doc"; Components: main
-
-; GTK+
-Source: "bin\intl.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\iconv.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\zlib1.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libpng12-0.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\jpeg62.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libtiff3.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libxml2.dll"; DestDir: "{app}\bin"; Components: gtk
-;Source: "bin\libxslt-1.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libglib-2.0-0.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libgobject-2.0-0.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libgio-2.0-0.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libgmodule-2.0-0.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libgthread-2.0-0.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\gspawn-win32-helper.exe"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\gspawn-win32-helper-console.exe"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libatk-1.0-0.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libpango-1.0-0.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libpangocairo-1.0-0.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libpangowin32-1.0-0.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libcairo-2.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libgdk-win32-2.0-0.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libgdk_pixbuf-2.0-0.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libgtk-win32-2.0-0.dll"; DestDir: "{app}\bin"; Components: gtk
-Source: "bin\libgailutil-18.dll"; DestDir: "{app}\bin"; Components: gtk
-
-; Other gedit dependency DLLs
-Source: "bin\libORBit-2-0.dll"; DestDir: "{app}\bin"; Components: main
-Source: "bin\libORBit-imodule-2-0.dll"; DestDir: "{app}\bin"; Components: main
-Source: "bin\libORBitCosNaming-2-0.dll"; DestDir: "{app}\bin"; Components: main
-Source: "bin\libgconf-2-4.dll"; DestDir: "{app}\bin"; Components: main
-Source: "bin\libgettextpo-0.dll"; DestDir: "{app}\bin"; Components: main
-Source: "bin\libgtksourceview-2.0-0.dll"; DestDir: "{app}\bin"; Components: main
-Source: "lib\GConf\2\*.dll"; DestDir: "{app}\lib\GConf\2"; Components: main
-Source: "bin\libenchant.dll"; DestDir: "{app}\bin"; Components: main
-Source: "bin\libsoup-2.4-1.dll"; DestDir: "{app}\bin"; Components: main
-
-; Python modules
-;Source: "bin\python25.dll"; DestDir: "{app}\bin"; Components: python
-; TODO: I would like to install these into python\ instead of \bin, but I
-; could not get python to locate them there (setting PYTHONPATH with setenv()
-; in Glom's main() does not work).
-; TODO: Change component of gda.pyd and glom.pyd to main instead of python
-; since we also need these when the user installed python and pygtk on its own.
-;Source: "python\*.py"; DestDir: "{app}\bin"; Components: python; Flags: recursesubdirs
-;Source: "python\*.pyd"; DestDir: "{app}\bin"; Components: python; Flags: recursesubdirs
-
-; gedit executables
-Source: "bin\gedit.exe"; DestDir: "{app}\bin"; Components: main
-
-; Modules
-Source: "lib\gtk-2.0\2.10.0\immodules\*"; DestDir: "{app}\lib\gtk-2.0\2.10.0\immodules"; Components: gtk
-Source: "bin\gtk-query-immodules-2.0.exe"; DestDir: "{app}\bin"; Components: gtk; Flags: deleteafterinstall;
-Source: "etc\gtk-2.0\gdk-pixbuf.loaders"; DestDir: "{app}\etc\gtk-2.0"; Components: gtk;
-
-Source: "lib\gtk-2.0\2.10.0\engines\*"; DestDir: "{app}\lib\gtk-2.0\2.10.0\engines"; Components: gtk
-
-Source: "lib\gtk-2.0\2.10.0\loaders\*"; DestDir: "{app}\lib\gtk-2.0\2.10.0\loaders"; Components: gtk
-Source: "bin\gdk-pixbuf-query-loaders.exe"; DestDir: "{app}\bin"; Components: gtk; Flags: deleteafterinstall;
-Source: "etc\gtk-2.0\gdk-pixbuf.loaders"; DestDir: "{app}\etc\gtk-2.0"; Components: gtk;
-
-Source: "lib\gtk-2.0\modules\*"; DestDir: "{app}\lib\gtk-2.0\modules"; Components: gtk
-
-;Source: "lib\pango\1.6.0\modules\*"; DestDir: "{app}\lib\pango\1.6.0\modules"; Components: gtk;
-;Source: "pango-querymodules.exe"; DestDir: "{app}\bin"; Components: gtk; Flags: deleteafterinstall;
-
-Source: "share\themes\MS-Windows\*"; DestDir: "{app}\share\themes\MS-Windows"; Flags: recursesubdirs; Components: gtk
-Source: "etc\gtk-2.0\gtkrc"; DestDir: "{app}\etc\gtk-2.0"; Components: gtk
-;Source: "querymodules.bat"; DestDir: "{app}\bin"; Components: gtk; Flags: deleteafterinstall;
-
-; Enchant
-Source: "lib\enchant\*"; DestDir: "{app}\lib\enchant"; Components: main
-Source: "share\enchant\*"; DestDir: "{app}\share\enchant"; Components: main
-
-; Iso codes
-Source: "share\iso-codes\*"; DestDir: "{app}\share\iso-codes"; Components: main
-Source: "share\xml\iso-codes\*"; DestDir: "{app}\share\xml\iso-codes"; Components: main
-
-; GtkSourceView
-Source: "share\gtksourceview-2.0\language-specs\*"; DestDir: "{app}\share\gtksourceview-2.0\language-specs"; Components: main
-Source: "share\gtksourceview-2.0\styles\*"; DestDir: "{app}\share\gtksourceview-2.0\styles"; Components: main
-
-; Icons
-;Source: "share\icons\*"; DestDir: "{app}\share\icons"; Components: main; Flags: recursesubdirs
-
-; Other shared gedit files
-Source: "share\gedit-2\ui\*"; DestDir: "{app}\share\gedit-2\ui"; Components: main
-Source: "share\gedit-2\icons\gedit-plugin.png"; DestDir: "{app}\share\gedit-2\icons"; Components: main
-Source: "share\gedit-2\logo\gedit-logo.png"; Destdir: "{app}\share\gedit-2\logo\"; Components: main
-
-; Plugins
-Source: "share\gedit-2\plugins\*"; DestDir: "{app}\share\gedit-2\plugins"; Components: main; Flags: recursesubdirs
-Source: "lib\gedit-2\plugins\*"; DestDir: "{app}\lib\gedit-2\plugins"; Components: main; Flags: recursesubdirs
-Source: "lib\gedit-2\plugin-loaders\*"; DestDir: "{app}\lib\gedit-2\plugin-loaders"; Components: main; Flags: recursesubdirs
-
-; GConf
-Source: "etc\gconf\*"; DestDir: "{app}\etc\gconf"; Components: main; Flags: recursesubdirs
-Source: "libexec\gconfd-2.exe"; DestDir: "{app}\libexec"; Components: main
-
-; Locales
-;Source: "lib\locale\*"; DestDir: "{app}\lib\locale\"; Flags: recursesubdirs; Components: locale
-Source: "share\locale\*"; DestDir: "{app}\share\locale\"; Flags: recursesubdirs; Components: locale
-
-[Dirs]
-;Name: "{app}\etc\pango";
-;Name: "{app}\etc\gtk-2.0";
+; All files
+Source: "gtk\*"; DestDir: "{app}\"; Components: gtk; Flags: recursesubdirs
+Source: "gedit\*"; DestDir: "{app}\"; Components: main; Flags: recursesubdirs
+Source: "locale\*"; DestDir: "{app}\"; Components: locale; Flags: recursesubdirs
 
 [Run]
 Filename: "{app}\bin\querymodules.bat"; StatusMsg: "Querying modules..."; Flags: runhidden
 
 [Code]
 { Remove generated files not generated by the installer }
-
-//procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
-//begin
-//	if CurUninstallStep = usUninstall then
-//	begin
-//		DeleteFile(ExpandConstant('{app}') + '\etc\gtk-2.0\gtk.immodules');
-//		DeleteFile(ExpandConstant('{app}') + '\etc\gtk-2.0\gdk-pixbuf.loaders');
-//		DeleteFile(ExpandConstant('{app}') + '\etc\pango\pango.modules');
-//	end;
-//end;
-
-//procedure DeinitializeUninstall();
-//begin
-//	{ Remove main dir and etc\ which are not removed automatically,
-//          probably because of the querymodule files not installed by the
-//          installer }
-//	DelTree(ExpandConstant('{app}') + '\etc', TRUE, TRUE, TRUE);
-//	DelTree(ExpandConstant('{app}'), TRUE, FALSE, FALSE);
-//end;
 
 // Skip Components selection, all components are required anyway
 function ShouldSkipPage(CurPageID: Integer): Boolean;
