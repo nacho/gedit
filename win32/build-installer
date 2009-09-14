@@ -4,23 +4,25 @@ echo "You also need InnoSetup (http://www.innosetup.org) with iscc in your PATH"
 echo "You need to have python, pygobject, pycairo and pygtk installed into C:\\Python25"
 echo "Make sure gedit and all its dependencies have been installed correctly to /local"
 echo "You can specify the paths by yourself:"
-echo "./build-installer.sh VERSION GTK_PREFIX GEDIT_PREFIX GTKSOURCEVIEW_PREFIX PYTHON_PREFIX MISC_PREFIX"
+echo "./build-installer.sh VERSION GTK_PREFIX GEDIT_PREFIX GTKSOURCEVIEW_PREFIX PYTHON_PREFIX MISC_PREFIX ASPELL_PREFIX"
 
 # we assume glib, gtk etc were installed in the root while gedit and gtksourceview
 # in /local
 #FIXME we need to figure out a way for autodetecting this
-if test "$#" = 6; then
+if test "$#" = 7; then
   _gtk_prefix="$2"
   _gtksourceview_prefix="$3"
   _gedit_prefix="$4"
   _python_prefix="$5"
   _misc_prefix="$6"
+  _aspell_prefix="$7"
 else
   _gtk_prefix="/c/gtk"
   _gtksourceview_prefix="/usr/local"
   _gedit_prefix="/usr/local"
   _python_prefix="/c/Python25"
   _misc_prefix="/usr"
+  _aspell_prefix="/c/Aspell"
 fi
 
 if test "$1" = '--help'; then
@@ -30,6 +32,7 @@ if test "$1" = '--help'; then
   echo "GTKSOURCEVIEW_PREFIX: The path for gtksourceview, by default /usr/local"
   echo "PYTHON_PREFIX: The path for python, by default /c/Python25"
   echo "MISC_PREFIX: The path for the rest of dependencies: i.e: enchant: by default /usr"
+  echo "ASPELL_PREFIX: The path for Aspell: by default /c/Aspell"
   exit
 fi
 
@@ -119,7 +122,9 @@ strip installer/gedit/bin/*.dll || exit
 # stripping libxml2.dll renders it unusable (although not changing it in size).
 # We therefore copy it after having stripped the rest. Same with the other DLLs
 # here. Perhaps those were built with MSVC.
+# We need libxml2 for gedit/gsv/gconf and libxml2-2 for libsoup
 cp "${_misc_prefix}/bin/libxml2.dll" installer/gedit/bin || exit
+cp "${_misc_prefix}/bin/libxml2-2.dll" installer/gedit/bin || exit
 cp "${_misc_prefix}/bin/intl.dll" installer/gedit/bin || exit
 cp "${_misc_prefix}/bin/iconv.dll" installer/gedit/bin || exit
 
@@ -247,13 +252,17 @@ cp -R "${_gedit_prefix}/lib/gedit-2/plugin-loaders/"* installer/gedit/lib/gedit-
 #GConf
 mkdir -p installer/gedit/etc/gconf/schemas || exit
 cp "${_gedit_prefix}/etc/gconf/schemas/"* installer/gedit/etc/gconf/schemas || exit
-mkdir -p installer/gedit/etc/gconf/2 || exit
-cp -R /etc/gconf/2/* installer/gedit/etc/gconf/2 || exit
+cp -R "${_misc_prefix}/etc/gconf/"* installer/gedit/etc/gconf/ || exit
 mkdir -p installer/gedit/lib/GConf/2
 cp "${_misc_prefix}/lib/GConf/2/"* installer/gedit/lib/GConf/2 || exit
 strip installer/gedit/lib/GConf/2/*.dll || exit
 mkdir -p installer/gedit/libexec || exit
 cp "${_misc_prefix}/libexec/gconfd-2.exe" installer/gedit/libexec || exit
+
+#Aspell
+mkdir -p installer/gedit/data || exit
+cp "${_aspell_prefix}/data/"* installer/gedit/data || exit
+cp "${_aspell_prefix}/bin/aspell-15.dll" installer/gedit/bin/libaspell-15.dll || exit
 
 echo "Creating installer..."
 
