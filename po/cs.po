@@ -17,9 +17,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-29 23:42+0200\n"
-"PO-Revision-Date: 2009-08-28 22:26-0500\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gedit&component=general\n"
+"POT-Creation-Date: 2009-09-19 16:28+0000\n"
+"PO-Revision-Date: 2009-09-19 22:25-0330\n"
 "Last-Translator: Jiri Eischmann <jiri@eischmann.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -38,6 +39,10 @@ msgstr "Textový editor"
 #: ../data/gedit.desktop.in.in.h:3
 msgid "gedit"
 msgstr "gedit"
+
+#: ../data/gedit.desktop.in.in.h:4
+msgid "gedit Text Editor"
+msgstr "Textový editor gedit"
 
 #: ../data/gedit.schemas.in.in.h:1
 msgid ""
@@ -544,11 +549,11 @@ msgstr "Zr_ušit odhlášení"
 msgid "Close _without Saving"
 msgstr "Zavřít _bez uložení"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:211
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:212
 msgid "Question"
 msgstr "Otázka"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:411
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:412
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be permanently lost."
@@ -565,13 +570,13 @@ msgstr[2] ""
 "Pokud je neuložíte, budou změny provedené za posledních %ld sekund navždy "
 "ztraceny."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:420
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:421
 msgid ""
 "If you don't save, changes from the last minute will be permanently lost."
 msgstr ""
 "Pokud je neuložíte, budou změny provedené za poslední minutu navždy ztraceny."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:426
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:427
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -589,7 +594,7 @@ msgstr[2] ""
 "Pokud je neuložíte, budou změny provedené za poslední minutu a %ld sekund "
 "navždy ztraceny."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:436
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:437
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be permanently lost."
@@ -606,12 +611,12 @@ msgstr[2] ""
 "Pokud je neuložíte, budou změny provedené za posledních %ld minut navždy "
 "ztraceny."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:451
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:452
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgstr ""
 "Pokud je neuložíte, budou změny provedené za poslední hodinu navždy ztraceny."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:457
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:458
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -629,7 +634,7 @@ msgstr[2] ""
 "Pokud je neuložíte, budou změny provedené za poslední hodinu a %d minut "
 "navždy ztraceny."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:473
 #, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be permanently lost."
@@ -645,22 +650,22 @@ msgstr[2] ""
 "Pokud je neuložíte, budou změny provedené za posledních %d hodin navždy "
 "ztraceny."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:515
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:516
 #, c-format
 msgid "Changes to document \"%s\" will be permanently lost."
 msgstr "Změny v dokumentu \"%s\" budou navždy ztraceny."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:520
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:521
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
 msgstr "Uložit před zavřením změny v dokumentu \"%s\"?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:534
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:745
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:535
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:746
 msgid "Saving has been disabled by the system administrator."
 msgstr "Ukládání bylo administrátorem systému zakázáno."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:700
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:701
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
@@ -668,7 +673,7 @@ msgstr[0] "Změny v %d dokumentu budou navždy ztraceny."
 msgstr[1] "Změny ve %d dokumentech budou navždy ztraceny."
 msgstr[2] "Změny v %d dokumentech budou navždy ztraceny."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:706
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:707
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -677,15 +682,15 @@ msgstr[0] "V %d dokumentu jsou neuložené změny. Uložit změny před zavřen�
 msgstr[1] "V %d dokumentech jsou neuložené změny. Uložit změny před zavřením?"
 msgstr[2] "V %d dokumentech jsou neuložené změny. Uložit změny před zavřením?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:724
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:725
 msgid "Docum_ents with unsaved changes:"
 msgstr "Dokum_enty s neuloženými změnami:"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:726
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:727
 msgid "S_elect the documents you want to save:"
 msgstr "_Vyberte dokumenty, které chcete uložit:"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:747
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:748
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Pokud je neuložíte, budou všechny vaše změny navždy ztraceny."
 
@@ -693,13 +698,13 @@ msgstr "Pokud je neuložíte, budou všechny vaše změny navždy ztraceny."
 msgid "Character Codings"
 msgstr "Kódování znaku"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:382
-#: ../gedit/dialogs/gedit-encodings-dialog.c:443
+#: ../gedit/dialogs/gedit-encodings-dialog.c:384
+#: ../gedit/dialogs/gedit-encodings-dialog.c:445
 msgid "_Description"
 msgstr "_Popis"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:391
-#: ../gedit/dialogs/gedit-encodings-dialog.c:452
+#: ../gedit/dialogs/gedit-encodings-dialog.c:393
+#: ../gedit/dialogs/gedit-encodings-dialog.c:454
 msgid "_Encoding"
 msgstr "_Kódování"
 
@@ -903,11 +908,11 @@ msgstr "Nahradit"
 msgid "Find"
 msgstr "Hledat"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:411
+#: ../gedit/dialogs/gedit-search-dialog.c:414
 msgid "Replace _All"
 msgstr "Nahradit _vše"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:412
+#: ../gedit/dialogs/gedit-search-dialog.c:415
 #: ../gedit/gedit-commands-file.c:582
 msgid "_Replace"
 msgstr "Nah_radit"
@@ -1174,7 +1179,7 @@ msgstr "Neuložený dokument %d"
 msgid "Read Only"
 msgstr "Pouze pro čtení"
 
-#: ../gedit/gedit-documents-panel.c:771 ../gedit/gedit-window.c:3553
+#: ../gedit/gedit-documents-panel.c:771 ../gedit/gedit-window.c:3556
 msgid "Documents"
 msgstr "Dokumenty"
 
@@ -1470,67 +1475,71 @@ msgstr ""
 "Dokument obsahuje jeden nebo více znaků, které nelze zakódovat pomocí "
 "zadaného kódování znaků."
 
+#. Translators: the access key chosen for this string should be
+#. different from other main menu access keys (Open, Edit, View...)
 #: ../gedit/gedit-io-error-message-area.c:801
-#: ../gedit/gedit-io-error-message-area.c:809
-msgid "_Edit Anyway"
+#: ../gedit/gedit-io-error-message-area.c:811
+msgid "Edit Any_way"
 msgstr "_Přesto upravovat"
 
+#. Translators: the access key chosen for this string should be
+#. different from other main menu access keys (Open, Edit, View...)
 #: ../gedit/gedit-io-error-message-area.c:804
-#: ../gedit/gedit-io-error-message-area.c:812
-msgid "_Don't Edit"
+#: ../gedit/gedit-io-error-message-area.c:816
+msgid "D_on't Edit"
 msgstr "Ne_upravovat"
 
-#: ../gedit/gedit-io-error-message-area.c:830
+#: ../gedit/gedit-io-error-message-area.c:834
 #, c-format
 msgid "This file (%s) is already open in another gedit window."
 msgstr "Tento soubor (%s) je již otevřen v jiném okně geditu."
 
-#: ../gedit/gedit-io-error-message-area.c:845
+#: ../gedit/gedit-io-error-message-area.c:849
 msgid ""
 "gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
 msgstr ""
 "gedit otevřel tento soubor pouze pro čtení. Chcete jej přesto upravovat?"
 
-#: ../gedit/gedit-io-error-message-area.c:904
-#: ../gedit/gedit-io-error-message-area.c:914
-#: ../gedit/gedit-io-error-message-area.c:1014
-#: ../gedit/gedit-io-error-message-area.c:1024
-msgid "S_ave Anyway"
-msgstr "_Přesto uložit"
-
 #: ../gedit/gedit-io-error-message-area.c:908
 #: ../gedit/gedit-io-error-message-area.c:918
 #: ../gedit/gedit-io-error-message-area.c:1018
 #: ../gedit/gedit-io-error-message-area.c:1028
+msgid "S_ave Anyway"
+msgstr "_Přesto uložit"
+
+#: ../gedit/gedit-io-error-message-area.c:912
+#: ../gedit/gedit-io-error-message-area.c:922
+#: ../gedit/gedit-io-error-message-area.c:1022
+#: ../gedit/gedit-io-error-message-area.c:1032
 msgid "D_on't Save"
 msgstr "Neuklá_dat"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:939
+#: ../gedit/gedit-io-error-message-area.c:943
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "Soubor %s byl od jeho načtení změněn."
 
-#: ../gedit/gedit-io-error-message-area.c:955
+#: ../gedit/gedit-io-error-message-area.c:959
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
 "Pokud jej uložíte, všechny externí změny by mohly být ztraceny. Přesto jej "
 "uložit?"
 
-#: ../gedit/gedit-io-error-message-area.c:1049
+#: ../gedit/gedit-io-error-message-area.c:1053
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "Nelze vytvořit záložní soubor při ukládání souboru %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1052
+#: ../gedit/gedit-io-error-message-area.c:1056
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "Nelze vytvořit dočasný záložní soubor při ukládání souboru %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1069
+#: ../gedit/gedit-io-error-message-area.c:1073
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1541,7 +1550,7 @@ msgstr ""
 "chybě, mohli byste ztratit starou kopii souboru. Přesto uložit?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1129
+#: ../gedit/gedit-io-error-message-area.c:1133
 #, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
@@ -1550,7 +1559,7 @@ msgstr ""
 "gedit neumí používat umístění %s v režimu zápisu. Zkontrolujte prosím, že "
 "jste zadali umístění správně, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1137
+#: ../gedit/gedit-io-error-message-area.c:1141
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1558,7 +1567,7 @@ msgstr ""
 "gedit nemůže zpracovat umístění  v režimu pro zápis. Zkontrolujte prosím, že "
 "jste umístění napsali správně, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1146
+#: ../gedit/gedit-io-error-message-area.c:1150
 #, c-format
 msgid ""
 "%s is not a valid location. Please check that you typed the location "
@@ -1567,7 +1576,7 @@ msgstr ""
 "%s není platné umístění. Zkontrolujte prosím, že jste umístění napsali "
 "správně, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1152
+#: ../gedit/gedit-io-error-message-area.c:1156
 msgid ""
 "You do not have the permissions necessary to save the file. Please check "
 "that you typed the location correctly and try again."
@@ -1575,7 +1584,7 @@ msgstr ""
 "Nemáte oprávnění pro uložení souboru. Zkontrolujte prosím, že jste umístění "
 "napsali správně, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1158
+#: ../gedit/gedit-io-error-message-area.c:1162
 msgid ""
 "There is not enough disk space to save the file. Please free some disk space "
 "and try again."
@@ -1583,7 +1592,7 @@ msgstr ""
 "Pro uložení souboru není dostatek místa na disku. Uvolněte prosím nějaké "
 "místo a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1163
+#: ../gedit/gedit-io-error-message-area.c:1167
 msgid ""
 "You are trying to save the file on a read-only disk. Please check that you "
 "typed the location correctly and try again."
@@ -1591,11 +1600,11 @@ msgstr ""
 "Pokoušíte se soubor uložit na disk určený pouze pro čtení. Zkontrolujte "
 "prosím, že jste umístění napsali správně, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1169
+#: ../gedit/gedit-io-error-message-area.c:1173
 msgid "A file with the same name already exists. Please use a different name."
 msgstr "Soubor se stejným jménem již existuje. Použijte prosím jiné jméno."
 
-#: ../gedit/gedit-io-error-message-area.c:1174
+#: ../gedit/gedit-io-error-message-area.c:1178
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please use a shorter name."
@@ -1603,7 +1612,7 @@ msgstr ""
 "Disk, na který se snažíte uložit tento soubor, má nastaven limit délky názvu "
 "souboru. Použijte prosím kratší název."
 
-#: ../gedit/gedit-io-error-message-area.c:1181
+#: ../gedit/gedit-io-error-message-area.c:1185
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1613,7 +1622,7 @@ msgstr ""
 "souboru.  Zkuste prosím uložit menší soubor, nebo uložit tento soubor na "
 "disk, který nemá toto omezení."
 
-#: ../gedit/gedit-io-error-message-area.c:1196
+#: ../gedit/gedit-io-error-message-area.c:1200
 #, c-format
 msgid "Could not save the file %s."
 msgstr "Nelze uložit soubor %s."
@@ -1621,21 +1630,21 @@ msgstr "Nelze uložit soubor %s."
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:1238
+#: ../gedit/gedit-io-error-message-area.c:1242
 #, c-format
 msgid "The file %s changed on disk."
 msgstr "Soubor %s byl změněn na disku."
 
-#: ../gedit/gedit-io-error-message-area.c:1243
+#: ../gedit/gedit-io-error-message-area.c:1247
 msgid "Do you want to drop your changes and reload the file?"
 msgstr "Chcete zahodit provedené změny a soubor načíst znovu?"
 
-#: ../gedit/gedit-io-error-message-area.c:1245
+#: ../gedit/gedit-io-error-message-area.c:1249
 msgid "Do you want to reload the file?"
 msgstr "Chcete soubor znovu načíst?"
 
-#: ../gedit/gedit-io-error-message-area.c:1251
-#: ../gedit/gedit-io-error-message-area.c:1262
+#: ../gedit/gedit-io-error-message-area.c:1255
+#: ../gedit/gedit-io-error-message-area.c:1266
 msgid "_Reload"
 msgstr "_Znovu načíst"
 
@@ -1818,16 +1827,16 @@ msgstr "_Zavřít náhled"
 msgid "Close print preview"
 msgstr "Zavřít náhled tisku"
 
-#: ../gedit/gedit-print-preview.c:762
+#: ../gedit/gedit-print-preview.c:766
 #, c-format
 msgid "Page %d of %d"
 msgstr "Stránka %d z %d"
 
-#: ../gedit/gedit-print-preview.c:946
+#: ../gedit/gedit-print-preview.c:950
 msgid "Page Preview"
 msgstr "Náhled stránky"
 
-#: ../gedit/gedit-print-preview.c:947
+#: ../gedit/gedit-print-preview.c:951
 msgid "The preview of a page in the document to be printed"
 msgstr "Náhled stránky dokumentu, který se má tisknout"
 
@@ -1841,12 +1850,12 @@ msgstr "VLO"
 
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-statusbar.c:330
+#: ../gedit/gedit-statusbar.c:332
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ř %d, Slo %d"
 
-#: ../gedit/gedit-statusbar.c:429
+#: ../gedit/gedit-statusbar.c:431
 #, c-format
 msgid "There is a tab with errors"
 msgid_plural "There are %d tabs with errors"
@@ -2816,7 +2825,7 @@ msgstr "Během načítání adresáře došlo k chybě"
 msgid "An error occurred"
 msgstr "Vyskytla se chyba"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1197
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1194
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
@@ -2824,33 +2833,33 @@ msgstr ""
 "Soubor nelze přesunout do koše,\n"
 "chcete ho trvale smazat?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1201
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1198
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "Soubor \"%s\" nelze přesunout do koše."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1204
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1201
 msgid "The selected files cannot be moved to the trash."
 msgstr "Vybrané soubory nelze přesunout do koše."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1237
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1234
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
 msgstr "Opravdu chcete trvale smazat \"%s\"?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1240
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1237
 msgid "Are you sure you want to permanently delete the selected files?"
 msgstr "Opravdu chcete trvale smazat vybrané soubory?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1243
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1240
 msgid "If you delete an item, it is permanently lost."
 msgstr "Pokud položku smažete, bude nenávratně ztracena."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1666
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1659
 msgid "(Empty)"
 msgstr "(Prázdné)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3304
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3297
 msgid ""
 "The renamed file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2858,11 +2867,11 @@ msgstr ""
 "Přejmenovaný soubor je nyní odfiltrován. Aby byl viditelný, musíte upravit "
 "své nastavení filtrování."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3542
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3535
 msgid "file"
 msgstr "soubor"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3566
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3559
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2870,11 +2879,11 @@ msgstr ""
 "Nový soubor je nyní odfiltrován. Aby byl viditelný, musíte upravit své "
 "nastavení filtrování."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3594
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3587
 msgid "directory"
 msgstr "adresář"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3614
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3607
 msgid ""
 "The new directory is currently filtered out. You need to adjust your filter "
 "settings to make the directory visible"
@@ -3011,21 +3020,21 @@ msgstr "Další umístění"
 msgid "Go to next location"
 msgstr "Přejít na další umístění"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1196
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1197
 msgid "_Match Filename"
 msgstr "_Zadejte název souboru"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2071
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2072
 #, c-format
 msgid "No mount object for mounted volume: %s"
 msgstr "Žádný objekt připojení pro připojený svazek: %s"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2151
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2152
 #, c-format
 msgid "Could not open media: %s"
 msgstr "Nelze otevřít médium: %s"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2198
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2199
 #, c-format
 msgid "Could not mount volume: %s"
 msgstr "Nelze připojit svazek: %s"
@@ -3436,7 +3445,7 @@ msgstr "Výchozí"
 msgid "Set language"
 msgstr "Nastavit jazyk"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:192
+#: ../plugins/spell/gedit-spell-language-dialog.c:195
 msgid "Languages"
 msgstr "Jazyky"
 
@@ -3464,11 +3473,11 @@ msgstr "_Automaticky kontrolovat pravopis"
 msgid "Automatically spell-check the current document"
 msgstr "Automatická kontrola pravopisu v aktuálním dokumentu"
 
-#: ../plugins/spell/gedit-spell-plugin.c:761
+#: ../plugins/spell/gedit-spell-plugin.c:760
 msgid "The document is empty."
 msgstr "Dokument je prázdný."
 
-#: ../plugins/spell/gedit-spell-plugin.c:794
+#: ../plugins/spell/gedit-spell-plugin.c:792
 msgid "No misspelled words"
 msgstr "Žádná chybná slova"
 
@@ -5116,7 +5125,7 @@ msgstr "Vloží aktuální datum a čas na aktuální pozici kurzoru"
 msgid "Available formats"
 msgstr "Dostupné formáty"
 
-#: ../plugins/time/gedit-time-plugin.c:763
+#: ../plugins/time/gedit-time-plugin.c:766
 msgid "Configure insert date/time plugin..."
 msgstr "Nastavit zásuvný modul pro vložení data a času..."
 
@@ -5162,3 +5171,4 @@ msgstr "Nastavit zásuvný modul pro vložení data a času"
 #: ../plugins/time/gedit-time-setup-dialog.ui.h:7
 msgid "_Prompt for a format"
 msgstr "Ze_ptat se na formát"
+
