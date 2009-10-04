@@ -73,7 +73,7 @@ class Provider(gobject.GObject, gsv.CompletionProvider):
                 return self.mark.get_buffer().get_iter_at_mark(self.mark)
                 
         def do_match(self, context):
-                return self.get_word(context) or context.get_default()
+                return self.get_word(context) or (context.get_activation() & gsv.COMPLETION_ACTIVATION_USER_REQUESTED)
 
         def get_proposals(self, word):
                 if self.proposals:
@@ -93,7 +93,7 @@ class Provider(gobject.GObject, gsv.CompletionProvider):
         def do_populate(self, context):
                 word = self.get_word(context)
                 
-                if word or context.get_default():
+                if word or (context.get_activation() & gsv.COMPLETION_ACTIVATION_USER_REQUESTED):
                         proposals = self.get_proposals(word)
                 else:
                         proposals = []
