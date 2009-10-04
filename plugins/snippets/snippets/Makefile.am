@@ -11,11 +11,12 @@ plugin_PYTHON = \
 	Parser.py \
 	Placeholder.py \
 	Manager.py \
-	SnippetComplete.py \
 	Helper.py \
 	SubstitutionParser.py \
 	Importer.py \
-	Exporter.py
+	Exporter.py \
+	LanguageManager.py \
+	Completion.py
 
 uidir = $(GEDIT_PLUGINS_DATA_DIR)/snippets/ui
 ui_DATA = snippets.ui

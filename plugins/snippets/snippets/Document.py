@@ -22,11 +22,13 @@ import gtk
 from gtk import gdk
 import gio
 import gedit
+import gtksourceview2 as gsv
+import gobject
 
 from Library import Library
 from Snippet import Snippet
 from Placeholder import *
-from SnippetComplete import SnippetComplete
+import Completion
 
 class Document:
         TAB_KEY_VAL = (gtk.keysyms.Tab, \
@@ -47,6 +49,9 @@ class Document:
                 self.jump_placeholders = []
                 self.language_id = 0
                 self.timeout_update_id = 0
+                
+                self.provider = Completion.Provider(_('Snippets'), self.language_id, self.on_proposal_activated)
+                self.defaults_provider = Completion.Defaults(self.on_default_activated)
                 
                 # Always have a reference to the global snippets
                 Library().ref(None)
@@ -92,7 +97,8 @@ class Document:
                         # Remove signals
                         signals = {self.view: ('key-press-event', 'destroy', 
                                                'notify::editable', 'drag-data-received'),
-                                   buf:       ('notify::language', 'changed', 'cursor-moved', 'insert-text')}
+                                   buf:       ('notify::language', 'changed', 'cursor-moved', 'insert-text'),
+                                   self.view.get_completion(): ('hide',)}
                         
                         for obj, sig in signals.items():
                                 for s in sig:
@@ -101,6 +107,10 @@ class Document:
                         # Remove all active snippets
                         for snippet in list(self.active_snippets):
                                 self.deactivate_snippet(snippet, True)
+                        
+                        completion = self.view.get_completion()
+                        completion.remove_provider(self.provider)
+                        completion.remove_provider(self.defaults_provider)                        
 
                 self.view = view
                 
@@ -117,10 +127,18 @@ class Document:
                         self.connect_signal(view, 'drag-data-received', self.on_drag_data_received)
 
                         self.update_language()
+
+                        completion = view.get_completion()
+                        completion.add_provider(self.provider)
+                        
+                        completion.add_provider(self.defaults_provider)
+                        
+                        self.connect_signal(completion, 'hide', self.on_completion_hide)
                 elif self.language_id != 0:
                         langid = self.language_id
                         
                         self.language_id = None;
+                        self.provider.language_id = self.language_id
                         
                         if self.instance:
                                 self.instance.language_changed(self)
@@ -157,6 +175,7 @@ class Document:
                         Library().unref(langid)
 
                 Library().ref(self.language_id)
+                self.provider.language_id = self.language_id
 
         def accelerator_activate(self, keyval, mod):
                 if not self.view or not self.view.get_editable():
@@ -174,7 +193,8 @@ class Document:
                         self.apply_snippet(snippets[0])
                 else:
                         # Do the fancy completion dialog
-                        return self.show_completion(snippets)
+                        self.provider.set_proposals(snippets)
+                        self.view.show_completion((self,))
 
                 return True
 
@@ -295,6 +315,7 @@ class Document:
 
                 if current:
                         # Signal this placeholder to end action
+                        self.view.get_completion().hide()
                         current.leave()
                         
                         if current.__class__ == PlaceholderEnd:
@@ -307,6 +328,11 @@ class Document:
                         
                         if next.__class__ == PlaceholderEnd:
                                 last = next
+                        elif len(next.defaults) > 1 and next.get_text() == next.default:
+                                self.defaults_provider.set_defaults(next.defaults)
+                                
+                                cm = self.view.get_completion()
+                                cm.show([self.defaults_provider], cm.create_context())
 
                 if last:
                         # This is the end of the placeholder, remove the snippet etc
@@ -515,8 +541,10 @@ class Document:
 
                 return True
 
-        def get_tab_tag(self, buf):
-                end = buf.get_iter_at_mark(buf.get_insert())
+        def get_tab_tag(self, buf, end = None):
+                if not end:
+                        end = buf.get_iter_at_mark(buf.get_insert())
+
                 start = end.copy()
                 
                 word = None
@@ -563,7 +591,11 @@ class Document:
                                 return self.apply_snippet(snippets[0], start, end)
                         else:
                                 # Do the fancy completion dialog
-                                return self.show_completion(snippets)
+                                self.provider.set_proposals(snippets)
+                                cm = self.view.get_completion()
+                                
+                                cm.show([self.provider], cm.create_context())
+                                return True
 
                 return self.skip_to_next_placeholder()
         
@@ -603,87 +635,6 @@ class Document:
                 if len(self.active_snippets) == 0:
                         self.last_snippet_removed()
 
-        # Moves the completion window to a suitable place honoring the hint given
-        # by x and y. It tries to position the window so it's always visible on the
-        # screen.
-        def move_completion_window(self, complete, x, y):
-                MARGIN = 15
-                screen = self.view.get_screen()
-                
-                width = screen.get_width()
-                height = screen.get_height()
-                
-                cw, ch = complete.get_size()
-                
-                if x + cw > width:
-                        x = width - cw - MARGIN
-                elif x < MARGIN:
-                        x = MARGIN
-                
-                if y + ch > height:
-                        y = height - ch - MARGIN
-                elif y < MARGIN:
-                        y = MARGIN
-
-                complete.move(x, y)
-
-        # Show completion, shows a completion dialog in the view.
-        # If preset is not None then a completion dialog is shown with the snippets
-        # in the preset list. Otherwise it will try to find the word preceding the
-        # current cursor position. If such a word is found, it is taken as a 
-        # tab trigger prefix so that only snippets with a tab trigger prefixed with
-        # the word are in the list. If no such word can be found than all snippets
-        # are shown.
-        def show_completion(self, preset = None):
-                buf = self.view.get_buffer()
-                bounds = buf.get_selection_bounds()
-                prefix = None
-                
-                if not bounds and not preset:
-                        # When there is no text selected and no preset present, find the
-                        # prefix
-                        (prefix, start, end) = self.get_tab_tag(buf)
-                
-                if not prefix:
-                        # If there is no prefix, than take the insertion point as the end
-                        end = buf.get_iter_at_mark(buf.get_insert())
-                
-                if not preset or len(preset) == 0:
-                        # There is no preset, find all the global snippets and the language
-                        # specific snippets
-                        
-                        nodes = Library().get_snippets(None)
-                        
-                        if self.language_id:
-                                nodes += Library().get_snippets(self.language_id)
-                        
-                        if prefix and len(prefix) == 1 and not prefix.isalnum():
-                                hasnodes = False
-                                
-                                for node in nodes:
-                                        if node['tag'] and node['tag'].startswith(prefix):
-                                                hasnodes = True
-                                                break
-                                
-                                if not hasnodes:
-                                        prefix = None
-                        
-                        complete = SnippetComplete(nodes, prefix, False)        
-                else:
-                        # There is a preset, so show that preset
-                        complete = SnippetComplete(preset, None, True)
-                
-                complete.connect('snippet-activated', self.on_complete_row_activated)
-                
-                rect = self.view.get_iter_location(end)
-                win = self.view.get_window(gtk.TEXT_WINDOW_TEXT)
-                (x, y) = self.view.buffer_to_window_coords( \
-                                gtk.TEXT_WINDOW_TEXT, rect.x + rect.width, rect.y)
-                (xor, yor) = win.get_origin()
-                
-                self.move_completion_window(complete, x + xor, y + yor)                
-                return complete.run()
-
         def update_snippet_contents(self):
                 self.timeout_update_id = 0
                 
@@ -702,16 +653,6 @@ class Document:
         def on_view_destroy(self, view):
                 self.stop()
                 return
-
-        def on_complete_row_activated(self, complete, snippet):
-                buf = self.view.get_buffer()
-                bounds = buf.get_selection_bounds()
-                
-                if bounds:
-                        self.apply_snippet(snippet.data, None, None)
-                else:
-                        (word, start, end) = self.get_tab_tag(buf)
-                        self.apply_snippet(snippet.data, start, end)
 
         def on_buffer_cursor_moved(self, buf):
                 piter = buf.get_iter_at_mark(buf.get_insert())
@@ -806,11 +747,6 @@ class Document:
                                 return self.run_snippet()
                         else:
                                 return self.skip_to_previous_placeholder()
-                elif (event.state & gdk.CONTROL_MASK) and \
-                                not (event.state & gdk.MOD1_MASK) and \
-                                not (event.state & gdk.SHIFT_MASK) and \
-                                event.keyval in self.SPACE_KEY_VAL:
-                        return self.show_completion()
                 elif not library.loaded and \
                                 library.valid_accelerator(event.keyval, event.state):
                         library.ensure_files()
@@ -934,4 +870,34 @@ class Document:
                 lst = gtk.target_list_add_uri_targets((), 0)
                 
                 return self.view.drag_dest_find_target(context, lst)
+        
+        def on_completion_hide(self, completion):
+                self.provider.set_proposals(None)
+
+        def on_proposal_activated(self, proposal, piter):
+                buf = self.view.get_buffer()
+                bounds = buf.get_selection_bounds()
+                
+                if bounds:
+                        self.apply_snippet(proposal.snippet(), None, None)
+                else:
+                        (word, start, end) = self.get_tab_tag(buf, piter)
+                        self.apply_snippet(proposal.snippet(), start, end)
+
+                return True
+        
+        def on_default_activated(self, proposal, piter):
+                buf = self.view.get_buffer()
+                bounds = buf.get_selection_bounds()
+
+                if bounds:
+                        buf.begin_user_action()
+                        buf.delete(bounds[0], bounds[1])
+                        buf.insert(bounds[0], proposal.props.label)
+                        buf.end_user_action()
+
+                        return True
+                else:
+                        return False
+
 # ex:ts=8:et:

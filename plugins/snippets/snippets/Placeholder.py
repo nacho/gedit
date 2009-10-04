@@ -57,18 +57,24 @@ class Placeholder:
                 self.mark_gravity = [True, False]
 
         def set_default(self, defaults):
+                self.default = None
+                self.defaults = []
+
                 if not defaults:
-                        self.default = None
                         return
 
                 for d in defaults:
-                        d = self.expand_environment(d)
+                        dm = self.expand_environment(d)
                         
-                        if d != '':
-                                self.default = d
-                                return
+                        if dm:
+                                self.defaults.append(dm)
 
-                self.default = None
+                                if not self.default:
+                                        self.default = dm
+                                
+                                if dm != d:
+                                        break
+
         
         def literal(self, s):
                 return repr(s)

@@ -33,6 +33,7 @@ from Library import *
 from Importer import *
 from Exporter import *
 from Document import Document
+from LanguageManager import get_language_manager
 
 class Manager:
         NAME_COLUMN = 0
@@ -114,7 +115,7 @@ class Manager:
                 if not self.model or force_reload:
                         self.model = gtk.TreeStore(str, str, object)
                         self.model.set_sort_column_id(self.SORT_COLUMN, gtk.SORT_ASCENDING)
-                        manager = self.get_language_manager()
+                        manager = get_language_manager()
                         langs = gedit.language_manager_list_languages_sorted(manager, True)
                         
                         piter = self.model.append(None, (_('Global'), '', None))
@@ -282,18 +283,6 @@ class Manager:
                 
                 self.build_dnd()
         
-        def get_language_manager(self):
-                if not self.manager:
-                        dirs = []
-                
-                        for d in Library().systemdirs:
-                                dirs.append(os.path.join(d, 'lang'))
-                
-                        self.manager = gsv.LanguageManager()
-                        self.manager.set_search_path(dirs + self.manager.get_search_path())
-                
-                return self.manager
-                
         def build(self):
                 self.builder = gtk.Builder()
                 self.builder.add_from_file(os.path.join(self.datadir, 'ui', 'snippets.ui'))
@@ -323,7 +312,7 @@ class Manager:
                 image.set_from_stock(gtk.STOCK_REMOVE, gtk.ICON_SIZE_SMALL_TOOLBAR)
 
                 source_view = self['source_view_snippet']
-                manager = self.get_language_manager()
+                manager = get_language_manager()
                 lang = manager.get_language('snippets')
 
                 if lang:
