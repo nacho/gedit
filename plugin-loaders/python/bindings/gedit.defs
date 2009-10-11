@@ -254,6 +254,15 @@
   (return-type "gchar*")
 )
 
+(define-method set_uri
+  (of-object "GeditDocument")
+  (c-name "gedit_document_set_uri")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "uri")
+  )
+)
+
 (define-method get_uri_for_display
   (of-object "GeditDocument")
   (c-name "gedit_document_get_uri_for_display")
