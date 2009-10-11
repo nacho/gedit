@@ -431,20 +431,30 @@ class Document:
                         return ''
 
         def env_get_documents_uri(self, buf):
-                documents_uri = [doc.get_uri()
-                                 for doc in self.view.get_toplevel().get_documents()
-                                 if doc.get_uri() is not None]
+                toplevel = self.view.get_toplevel()
+                
+                if isinstance(toplevel, gedit.Window):
+                        documents_uri = [doc.get_uri()
+                                         for doc in toplevel.get_documents()
+                                         if doc.get_uri() is not None]
+                else:
+                        documents_uri = []
                 
                 return ' '.join(documents_uri)
 
         def env_get_documents_path(self, buf):
-                documents_uri = [doc.get_uri()
-                                 for doc in self.view.get_toplevel().get_documents()
-                                 if doc.get_uri() is not None]
+                toplevel = self.view.get_toplevel()
+                
+                if isinstance(toplevel, gedit.Window):
+                        documents_uri = [doc.get_uri()
+                                         for doc in toplevel.get_documents()
+                                         if doc.get_uri() is not None]
 
-                documents_path = [gio.File(uri).get_path()
-                                 for uri in documents_uri
-                                 if gedit.utils.uri_has_file_scheme(uri)]
+                        documents_path = [gio.File(uri).get_path()
+                                         for uri in documents_uri
+                                         if gedit.utils.uri_has_file_scheme(uri)]
+                else:
+                        documents_path = []
                 
                 return ' '.join(documents_path)
 
