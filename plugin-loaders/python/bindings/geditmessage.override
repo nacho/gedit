@@ -494,3 +494,63 @@ _wrap_gedit_message_bus_send_sync(PyGObject *self, PyObject *args, PyObject *kwa
     return pygobject_new((GObject *)message);
 }
 %%
+override-slot GeditMessage.tp_getattro
+static PyObject *
+_wrap_gedit_message_tp_getattro(PyObject *self, PyObject *attrname)
+{
+	GeditMessage *message = GEDIT_MESSAGE(((PyGObject *)self)->obj);
+	GeditMessageType *type;
+
+	gchar *name = _helper_wrap_get_string (attrname);
+	gboolean exists;
+	gboolean intype;
+	PyObject *ret;
+	
+	if (name == NULL)
+	{
+		PyErr_SetString(PyExc_TypeError, "attr name somehow not a string");
+		return NULL;
+	}
+	
+	g_object_get (message, "type", &type, NULL);
+	intype = gedit_message_type_lookup (type, name) != G_TYPE_INVALID;
+	gedit_message_type_unref (type);
+	
+	exists = gedit_message_has_key (message, name);
+	
+	if (!intype)
+	{
+		ret = PyObject_GenericGetAttr(self, attrname);
+	}
+	else if (exists)
+	{
+		GValue value = { 0, };
+		gedit_message_get_value (message, name, &value);
+		ret = pyg_value_as_pyobject(&value, TRUE);
+		g_value_unset (&value);
+	}
+	else
+	{
+		Py_INCREF(Py_None);
+		ret = Py_None;
+	}
+
+	g_free (name);
+	return ret;
+}
+%%
+override-slot GeditMessage.tp_setattro
+static int
+_wrap_gedit_message_tp_setattro(PyObject *self, PyObject *attrname, PyObject *value)
+{
+	GeditMessage *message = GEDIT_MESSAGE(((PyGObject *)self)->obj);
+
+	if (!_helper_wrap_message_set_value(message, attrname, value))
+	{
+		return PyObject_GenericSetAttr(self, attrname, value);
+	}
+	else
+	{
+		return 1;
+	}
+}
