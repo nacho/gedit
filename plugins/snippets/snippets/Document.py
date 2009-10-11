@@ -93,13 +93,13 @@ class Document:
         def _set_view(self, view):
                 if self.view:
                         buf = self.view.get_buffer()
-                        
+
                         # Remove signals
                         signals = {self.view: ('key-press-event', 'destroy', 
-                                               'notify::editable', 'drag-data-received'),
+                                               'notify::editable', 'drag-data-received', 'expose-event'),
                                    buf:       ('notify::language', 'changed', 'cursor-moved', 'insert-text'),
                                    self.view.get_completion(): ('hide',)}
-                        
+
                         for obj, sig in signals.items():
                                 for s in sig:
                                         self.disconnect_signal(obj, s)
@@ -125,6 +125,7 @@ class Document:
                         self.connect_signal(buf, 'notify::language', self.on_notify_language)
                         self.connect_signal(view, 'notify::editable', self.on_notify_editable)
                         self.connect_signal(view, 'drag-data-received', self.on_drag_data_received)
+                        self.connect_signal_after(view, 'expose-event', self.on_expose_event)
 
                         self.update_language()
 
@@ -635,18 +636,20 @@ class Document:
                 if len(self.active_snippets) == 0:
                         self.last_snippet_removed()
 
+                self.view.queue_draw()
+
         def update_snippet_contents(self):
                 self.timeout_update_id = 0
-                
+
                 for placeholder in self.update_placeholders:
                         placeholder.update_contents()
-                
+
                 for placeholder in self.jump_placeholders:
                         self.goto_placeholder(placeholder[0], placeholder[1])
-                
+
                 del self.update_placeholders[:]
                 del self.jump_placeholders[:]
-                
+
                 return False
 
         # Callbacks
@@ -899,5 +902,120 @@ class Document:
                         return True
                 else:
                         return False
+
+        def iter_coords(self, piter):
+                rect = self.view.get_iter_location(piter)
+                rect.x, rect.y = self.view.buffer_to_window_coords(gtk.TEXT_WINDOW_TEXT, rect.x, rect.y)
+
+                return rect
+
+        def placeholder_in_area(self, placeholder, area):
+                start = placeholder.begin_iter()
+                end = placeholder.end_iter()
+
+                # Test if start is before bottom, and end is after top
+                start_rect = self.iter_coords(start)
+                end_rect = self.iter_coords(end)
+
+                return start_rect.y <= area.y + area.height and \
+                       end_rect.y + end_rect.height >= area.y
+
+        def draw_placeholder_rect(self, ctx, placeholder, col):
+                start = placeholder.begin_iter()
+                start_rect = self.iter_coords(start)
+                start_line = start.get_line()
+
+                end = placeholder.end_iter()
+                end_rect = self.iter_coords(end)
+                end_line = end.get_line()
+
+                line = start.copy()
+                line.set_line_offset(0)
+                geom = self.view.get_window(gtk.TEXT_WINDOW_TEXT).get_geometry()
+                
+                ctx.translate(0.5, 0.5)
+                
+                while line.get_line() <= end_line:
+                        ypos, height = self.view.get_line_yrange(line)
+                        x_, ypos = self.view.window_to_buffer_coords(gtk.TEXT_WINDOW_TEXT, 0, ypos)
+
+                        if line.get_line() == start_line and line.get_line() == end_line:
+                                # Simply draw a box, both are on the same line
+                                ctx.rectangle(start_rect.x, start_rect.y, end_rect.x - start_rect.x, start_rect.height - 1)
+                                ctx.stroke()
+                        elif line.get_line() == start_line or line.get_line() == end_line:
+                                if line.get_line() == start_line:
+                                        rect = start_rect
+                                else:
+                                        rect = end_rect
+
+                                ctx.move_to(0, rect.y + rect.height - 1)
+                                ctx.rel_line_to(rect.x, 0)
+                                ctx.rel_line_to(0, -rect.height + 1)
+                                ctx.rel_line_to(geom[2], 0)
+                                ctx.stroke()
+
+                        if not line.forward_line():
+                                break
+
+        def draw_placeholder_bar(self, ctx, placeholder, col):
+                start = placeholder.begin_iter()
+                start_rect = self.iter_coords(start)
+                
+                ctx.translate(0.5, 0.5)
+                extend_width = 2.5
+
+                ctx.move_to(start_rect.x - extend_width, start_rect.y)
+                ctx.rel_line_to(extend_width * 2, 0)
+
+                ctx.move_to(start_rect.x, start_rect.y)
+                ctx.rel_line_to(0, start_rect.height - 1)
+                
+                ctx.rel_move_to(-extend_width, 0)
+                ctx.rel_line_to(extend_width * 2, 0)
+                ctx.stroke()
+
+        def draw_placeholder(self, ctx, placeholder):
+                if isinstance(placeholder, PlaceholderEnd):
+                        return
+
+                buf = self.view.get_buffer()
+
+                col = self.view.get_style().text[gtk.STATE_INSENSITIVE]
+                ctx.set_source_rgba(col.red_float, col.green_float, col.blue_float, 0.5)
+                
+                if placeholder.tabstop > 0:
+                        ctx.set_dash([], 0)
+                else:
+                        ctx.set_dash([2], 0)
+
+                start = placeholder.begin_iter()
+                end = placeholder.end_iter()
+
+                if start.equal(end):
+                        self.draw_placeholder_bar(ctx, placeholder, col)
+                else:
+                        self.draw_placeholder_rect(ctx, placeholder, col)
+
+        def on_expose_event(self, view, event):
+                if event.window != view.get_window(gtk.TEXT_WINDOW_TEXT):
+                        return False
+
+                # Draw something
+                ctx = event.window.cairo_create()
+                ctx.rectangle(event.area)
+                ctx.clip()
+
+                ctx.set_line_width(1.0)
+
+                for placeholder in self.ordered_placeholders:
+                        if not self.placeholder_in_area(placeholder, event.area):
+                                continue
+
+                        ctx.save()
+                        self.draw_placeholder(ctx, placeholder)
+                        ctx.restore()
+
+                return False
 
 # ex:ts=8:et:
