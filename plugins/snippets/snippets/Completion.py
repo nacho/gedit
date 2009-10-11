@@ -73,7 +73,7 @@ class Provider(gobject.GObject, gsv.CompletionProvider):
                 return self.mark.get_buffer().get_iter_at_mark(self.mark)
                 
         def do_match(self, context):
-                return self.get_word(context) or (context.get_activation() & gsv.COMPLETION_ACTIVATION_USER_REQUESTED)
+                return True
 
         def get_proposals(self, word):
                 if self.proposals:
@@ -91,13 +91,7 @@ class Provider(gobject.GObject, gsv.CompletionProvider):
                 return map(lambda x: Proposal(x), proposals)
 
         def do_populate(self, context):
-                word = self.get_word(context)
-                
-                if word or (context.get_activation() & gsv.COMPLETION_ACTIVATION_USER_REQUESTED):
-                        proposals = self.get_proposals(word)
-                else:
-                        proposals = []
-
+                proposals = self.get_proposals(self.get_word(context))
                 context.add_proposals(self, proposals, True)
 
         def do_get_name(self):
@@ -135,6 +129,9 @@ class Provider(gobject.GObject, gsv.CompletionProvider):
         
         def do_get_icon(self):
                 return self.icon
+
+        def do_get_activation(self):
+                return gsv.COMPLETION_ACTIVATION_USER_REQUESTED
 
 class Defaults(gobject.GObject, gsv.CompletionProvider):
         def __init__(self, handler):
