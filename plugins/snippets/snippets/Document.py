@@ -542,8 +542,9 @@ class Document:
                                 buf.place_cursor(sn.begin_iter())
                 else:
                         self.goto_placeholder(self.active_placeholder, sn.placeholders[keys[0]])
-                
+
                 buf.end_user_action()
+                self.view.grab_focus()
 
                 return True
 
