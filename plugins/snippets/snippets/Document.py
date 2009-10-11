@@ -603,7 +603,8 @@ class Document:
         def deactivate_snippet(self, snippet, force = False):
                 buf = self.view.get_buffer()
                 remove = []
-                
+                ordered_remove = []
+
                 for tabstop in snippet.placeholders:
                         if tabstop == -1:
                                 placeholders = snippet.placeholders[-1]
@@ -618,8 +619,10 @@ class Document:
                                                 self.update_placeholders.remove(placeholder)
                                         elif placeholder in self.jump_placeholders:
                                                 placeholder[0].leave()
-                                                
+
                                         remove.append(placeholder)
+                                elif placeholder in self.ordered_placeholders:
+                                        ordered_remove.append(placeholder)
 
                 for placeholder in remove:
                         if placeholder == self.active_placeholder:
@@ -630,9 +633,13 @@ class Document:
 
                         placeholder.remove(force)
 
+                for placeholder in ordered_remove:
+                        self.ordered_placeholders.remove(placeholder)
+                        placeholder.remove(force)
+
                 snippet.deactivate()
                 self.active_snippets.remove(snippet)
-                
+
                 if len(self.active_snippets) == 0:
                         self.last_snippet_removed()
 
@@ -671,22 +678,19 @@ class Document:
                                 if piter.compare(begin) < 0 or piter.compare(end) > 0:
                                         # Oh no! Remove the snippet this instant!!
                                         self.deactivate_snippet(snippet)
-                
-                current = self.current_placeholder()
-                
-                if current != self.active_placeholder:
-                        if self.active_placeholder:
-                                self.jump_placeholders.append((self.active_placeholder, current))
-                                
-                                if self.timeout_update_id == 0:
-                                        self.timeout_update_id = gobject.timeout_add(0, 
-                                                        self.update_snippet_contents)
 
-                        self.set_active_placeholder(current)
-        
+                current = self.current_placeholder()
+
+                if current != self.active_placeholder:
+                        self.jump_placeholders.append((self.active_placeholder, current))
+
+                        if self.timeout_update_id == 0:
+                                self.timeout_update_id = gobject.timeout_add(0, 
+                                                self.update_snippet_contents)
+
         def on_buffer_changed(self, buf):
                 current = self.current_placeholder()
-                
+
                 if current:
                         if not current in self.update_placeholders:
                                 self.update_placeholders.append(current)
