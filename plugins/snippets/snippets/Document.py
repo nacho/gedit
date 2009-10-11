@@ -30,6 +30,11 @@ from Snippet import Snippet
 from Placeholder import *
 import Completion
 
+class DynamicSnippet(dict):
+        def __init__(self, text):
+                self['text'] = text
+                self.valid = True
+
 class Document:
         TAB_KEY_VAL = (gtk.keysyms.Tab, \
                         gtk.keysyms.ISO_Left_Tab)
@@ -570,26 +575,22 @@ class Document:
                                         return (None, None, None)
                         else:
                                 return (None, None, None)
-                
+
                 return (word, start, end)
 
-        def run_snippet(self):        
+        def parse_and_run_snippet(self, data, iter):
+                self.apply_snippet(DynamicSnippet(data), iter, iter)
+
+        def run_snippet_trigger(self, trigger, bounds):
                 if not self.view:
                         return False
-                
+
+                snippets = Library().from_tag(trigger, self.language_id)
                 buf = self.view.get_buffer()
-                
-                # get the word preceding the current insertion position
-                (word, start, end) = self.get_tab_tag(buf)
-                
-                if not word:
-                        return self.skip_to_next_placeholder()
-                
-                snippets = Library().from_tag(word, self.language_id)
-                
+
                 if snippets:
                         if len(snippets) == 1:
-                                return self.apply_snippet(snippets[0], start, end)
+                                return self.apply_snippet(snippets[0], bounds[0], bounds[1])
                         else:
                                 # Do the fancy completion dialog
                                 self.provider.set_proposals(snippets)
@@ -598,8 +599,25 @@ class Document:
                                 cm.show([self.provider], cm.create_context())
                                 return True
 
-                return self.skip_to_next_placeholder()
-        
+                return False
+                
+        def run_snippet(self):
+                if not self.view:
+                        return False
+
+                buf = self.view.get_buffer()
+
+                # get the word preceding the current insertion position
+                (word, start, end) = self.get_tab_tag(buf)
+
+                if not word:
+                        return self.skip_to_next_placeholder()
+
+                if not self.run_snippet_trigger(word, (start, end)):
+                        return self.skip_to_next_placeholder()
+                else:
+                        return True
+
         def deactivate_snippet(self, snippet, force = False):
                 buf = self.view.get_buffer()
                 remove = []
