@@ -69,9 +69,6 @@ enum
 
 struct _GeditViewPrivate
 {
-	/* idle hack to make open-at-line work */
-	guint        scroll_idle;
-	
 	SearchMode   search_mode;
 	
 	GtkTextIter  start_search_iter;
@@ -289,15 +286,6 @@ gedit_view_class_init (GeditViewClass *klass)
 				      G_TYPE_INT, 1);
 }
 
-static gboolean
-scroll_to_cursor_on_init (GeditView *view)
-{
-	gedit_view_scroll_to_cursor (view);
-
-	view->priv->scroll_idle = 0;
-	return FALSE;
-}
-
 static void
 current_buffer_removed (GeditView *view)
 {
@@ -384,16 +372,7 @@ gedit_view_init (GeditView *view)
 		      "indent_on_tab", TRUE,
 		      NULL);
 
-	/* Make sure that the view is scrolled to the cursor so
-	 * that "gedit +100 foo.txt" works.
-	 * We would like to this on the first expose handler so that
-	 * it would look instantaneous, but this isn't currently
-	 * possible: see bug #172277 and bug #311728.
-	 * So we need to do this in an idle handler.
-	 */
-	view->priv->scroll_idle = g_idle_add ((GSourceFunc) scroll_to_cursor_on_init, view);
-	
-	view->priv->typeselect_flush_timeout = 0;	
+	view->priv->typeselect_flush_timeout = 0;
 	view->priv->wrap_around = TRUE;
 
 	/* Drag and drop support */	
@@ -415,12 +394,6 @@ gedit_view_destroy (GtkObject *object)
 	GeditView *view;
 
 	view = GEDIT_VIEW (object);
-
-	if (view->priv->scroll_idle > 0)
-	{
-		g_source_remove (view->priv->scroll_idle);
-		view->priv->scroll_idle = 0;
-	}
 
 	if (view->priv->search_window != NULL)
 	{

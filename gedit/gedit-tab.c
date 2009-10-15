@@ -1025,6 +1025,9 @@ document_loaded (GeditDocument *document,
 				   mime);
 		g_free (mime);
 
+		/* Scroll to the cursor when the document is loaded */
+		gedit_view_scroll_to_cursor (GEDIT_VIEW (tab->priv->view));
+
 		all_documents = gedit_app_get_documents (gedit_app_get_default ());
 
 		for (l = all_documents; l != NULL; l = g_list_next (l))
