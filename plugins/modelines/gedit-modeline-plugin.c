@@ -228,7 +228,10 @@ gedit_modeline_plugin_deactivate (GeditPlugin *plugin,
 	gedit_debug (DEBUG_PLUGINS);
 
 	wdata = g_object_steal_data (G_OBJECT (window), WINDOW_DATA_KEY);
+
 	g_signal_handler_disconnect (window, wdata->tab_added_handler_id);
+	g_signal_handler_disconnect (window, wdata->tab_removed_handler_id);
+
 	window_data_free (wdata);
 
 	views = gedit_window_get_views (window);
