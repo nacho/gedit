@@ -48,7 +48,6 @@
 #include "gedit-utils.h"
 
 #include "gedit-document.h"
-#include "gedit-prefs-manager.h"
 #include "gedit-debug.h"
 
 /* For the workspace/viewport stuff */
@@ -1525,4 +1524,5 @@ gedit_utils_decode_uri (const gchar *uri,
 	
 	return TRUE;
 }
+
 /* ex:ts=8:noet: */

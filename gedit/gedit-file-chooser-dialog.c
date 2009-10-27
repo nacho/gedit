@@ -43,9 +43,9 @@
 #include "gedit-file-chooser-dialog.h"
 #include "gedit-encodings-combo-box.h"
 #include "gedit-language-manager.h"
-#include "gedit-prefs-manager-app.h"
 #include "gedit-debug.h"
 #include "gedit-enum-types.h"
+#include "gedit-settings.h"
 
 #define GEDIT_FILE_CHOOSER_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_FILE_CHOOSER_DIALOG, GeditFileChooserDialogPrivate))
 
@@ -54,6 +54,8 @@
 
 struct _GeditFileChooserDialogPrivate
 {
+	GSettings *filter_settings;
+
 	GtkWidget *option_menu;
 	GtkWidget *extra_widget;
 
@@ -65,9 +67,25 @@ struct _GeditFileChooserDialogPrivate
 G_DEFINE_TYPE(GeditFileChooserDialog, gedit_file_chooser_dialog, GTK_TYPE_FILE_CHOOSER_DIALOG)
 
 static void
+gedit_file_chooser_dialog_dispose (GObject *object)
+{
+	GeditFileChooserDialog *dialog = GEDIT_FILE_CHOOSER_DIALOG (object);
+
+	if (dialog->priv->filter_settings != NULL)
+	{
+		g_object_unref (dialog->priv->filter_settings);
+		dialog->priv->filter_settings = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_file_chooser_dialog_parent_class)->dispose (object);
+}
+
+static void
 gedit_file_chooser_dialog_class_init (GeditFileChooserDialogClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	object_class->dispose = gedit_file_chooser_dialog_dispose;
 
 	g_type_class_add_private (object_class, sizeof(GeditFileChooserDialogPrivate));
 }
@@ -250,9 +268,6 @@ filter_changed (GeditFileChooserDialog *dialog,
 {
 	GtkFileFilter *filter;
 
-	if (!gedit_prefs_manager_active_file_filter_can_set ())
-		return;
-
 	filter = gtk_file_chooser_get_filter (GTK_FILE_CHOOSER (dialog));
 	if (filter != NULL)
 	{
@@ -267,7 +282,8 @@ filter_changed (GeditFileChooserDialog *dialog,
 
 		gedit_debug_message (DEBUG_COMMANDS, "Active filter: %s (%d)", name, id);
 
-		gedit_prefs_manager_set_active_file_filter (id);
+		g_settings_set_int (dialog->priv->filter_settings,
+				    GEDIT_SETTINGS_ACTIVE_FILE_FILTER, id);
 	}
 }
 
@@ -353,6 +369,8 @@ static void
 gedit_file_chooser_dialog_init (GeditFileChooserDialog *dialog)
 {
 	dialog->priv = GEDIT_FILE_CHOOSER_DIALOG_GET_PRIVATE (dialog);
+	
+	dialog->priv->filter_settings = g_settings_new ("org.gnome.gedit.state.file-filter");
 }
 
 static GtkWidget *
@@ -391,7 +409,8 @@ gedit_file_chooser_dialog_new_valist (const gchar          *title,
 				GEDIT_ENCODINGS_COMBO_BOX (GEDIT_FILE_CHOOSER_DIALOG (result)->priv->option_menu),
 				encoding);
 
-	active_filter = gedit_prefs_manager_get_active_file_filter ();
+	active_filter = g_settings_get_int (GEDIT_FILE_CHOOSER_DIALOG (result)->priv->filter_settings,
+					    GEDIT_SETTINGS_ACTIVE_FILE_FILTER);
 	gedit_debug_message (DEBUG_COMMANDS, "Active filter: %d", active_filter);
 
 	/* Filters */

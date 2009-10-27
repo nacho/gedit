@@ -35,7 +35,6 @@
 #include <glib/gstdio.h>
 
 #include "gedit-style-scheme-manager.h"
-#include "gedit-prefs-manager.h"
 #include "gedit-dirs.h"
 
 static GtkSourceStyleSchemeManager *style_scheme_manager = NULL;

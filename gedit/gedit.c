@@ -51,7 +51,6 @@
 #include "gedit-dirs.h"
 #include "gedit-encodings.h"
 #include "gedit-plugins-engine.h"
-#include "gedit-prefs-manager-app.h"
 #include "gedit-session.h"
 #include "gedit-utils.h"
 #include "gedit-window.h"
@@ -591,7 +590,10 @@ main (int argc, char *argv[])
 	/* Setup debugging */
 	gedit_debug_init ();
 	gedit_debug_message (DEBUG_APP, "Startup");
-	
+
+	/* FIXME: Remove when gconf not needed anymore */
+	g_setenv ("GSETTINGS_BACKEND", "gconf", FALSE);
+
 	setlocale (LC_ALL, "");
 
 	dir = gedit_dirs_get_gedit_locale_dir ();
@@ -709,10 +711,6 @@ main (int argc, char *argv[])
 	gtk_window_set_default_icon_name ("accessories-text-editor");
 #endif
 
-	/* Load user preferences */
-	gedit_debug_message (DEBUG_APP, "Init prefs manager");
-	gedit_prefs_manager_app_init ();
-
 	/* Init plugins engine */
 	gedit_debug_message (DEBUG_APP, "Init plugins");
 	engine = gedit_plugins_engine_get_default ();
@@ -782,7 +780,6 @@ main (int argc, char *argv[])
 	 * finalize it properly. 
 	 */
 	g_object_unref (engine);
-	gedit_prefs_manager_app_shutdown ();
 
 #ifndef ENABLE_GVFS_METADATA
 	gedit_metadata_manager_shutdown ();

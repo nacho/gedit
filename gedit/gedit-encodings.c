@@ -471,4 +471,73 @@ gedit_encoding_get_type (void)
 	return our_type;
 } 
 
+static gboolean
+data_exists (GSList         *list,
+	     const gpointer  data)
+{
+	while (list != NULL)
+	{
+		if (list->data == data)
+			return TRUE;
+
+		list = g_slist_next (list);
+	}
+
+	return FALSE;
+}
+
+GSList *
+_gedit_encoding_strv_to_list (const gchar * const *enc_str)
+{
+	GSList *res = NULL;
+	gchar **p;
+	const GeditEncoding *enc;
+	
+	for (p = (gchar **)enc_str; p != NULL && *p != NULL; p++)
+	{
+		const gchar *charset = *p;
+
+		if (strcmp (charset, "CURRENT") == 0)
+			g_get_charset (&charset);
+
+		g_return_val_if_fail (charset != NULL, NULL);
+		enc = gedit_encoding_get_from_charset (charset);
+
+		if (enc != NULL)
+		{
+			if (!data_exists (res, (gpointer)enc))
+				res = g_slist_prepend (res, (gpointer)enc);
+
+		}
+	}
+
+	return g_slist_reverse (res);
+}
+
+gchar **
+_gedit_encoding_list_to_strv (const GSList *enc_list)
+{
+	GSList *l;
+	GPtrArray *array;
+
+	array = g_ptr_array_sized_new (g_slist_length ((GSList *)enc_list) + 1);
+
+	for (l = (GSList *)enc_list; l != NULL; l = g_slist_next (l))
+	{
+		const GeditEncoding *enc;
+		const gchar *charset;
+		
+		enc = (const GeditEncoding *)l->data;
+
+		charset = gedit_encoding_get_charset (enc);
+		g_return_val_if_fail (charset != NULL, NULL);
+
+		g_ptr_array_add (array, g_strdup (charset));
+	}
+
+	g_ptr_array_add (array, NULL);
+
+	return (gchar **)g_ptr_array_free (array, FALSE);
+}
+
 /* ex:ts=8:noet: */

@@ -41,12 +41,12 @@
 #include "gedit-document-loader.h"
 #include "gedit-document-output-stream.h"
 #include "gedit-smart-charset-converter.h"
-#include "gedit-prefs-manager.h"
 #include "gedit-debug.h"
 #include "gedit-metadata-manager.h"
 #include "gedit-utils.h"
 #include "gedit-marshal.h"
 #include "gedit-enum-types.h"
+#include "gedit-settings.h"
 
 #ifndef ENABLE_GVFS_METADATA
 #include "gedit-metadata-manager.h"
@@ -97,7 +97,10 @@ enum
 static void open_async_read (AsyncData *async);
 
 struct _GeditDocumentLoaderPrivate
-{	GeditDocument		 *document;
+{
+	GSettings		 *enc_settings;
+
+	GeditDocument		 *document;
 	gboolean		  used;
 
 	/* Info on the current file */
@@ -230,6 +233,12 @@ gedit_document_loader_dispose (GObject *object)
 		g_object_unref (priv->location);
 		priv->location = NULL;
 	}
+	
+	if (priv->enc_settings != NULL)
+	{
+		g_object_unref (priv->enc_settings);
+		priv->enc_settings = NULL;
+	}
 
 	G_OBJECT_CLASS (gedit_document_loader_parent_class)->dispose (object);
 }
@@ -306,6 +315,7 @@ gedit_document_loader_init (GeditDocumentLoader *loader)
 	loader->priv->auto_detected_newline_type = GEDIT_DOCUMENT_NEWLINE_TYPE_DEFAULT;
 	loader->priv->converter = NULL;
 	loader->priv->error = NULL;
+	loader->priv->enc_settings = g_settings_new ("org.gnome.gedit.preferences.encodings");
 }
 
 GeditDocumentLoader *
@@ -585,9 +595,16 @@ static GSList *
 get_candidate_encodings (GeditDocumentLoader *loader)
 {
 	const GeditEncoding *metadata;
-	GSList *encodings = NULL;
+	GSList *encodings;
+	gchar **enc_strv;
+	gsize len;
 
-	encodings = gedit_prefs_manager_get_auto_detected_encodings ();
+	enc_strv = g_settings_get_strv (loader->priv->enc_settings,
+					GEDIT_SETTINGS_ENCODING_AUTO_DETECTED,
+					&len);
+
+	encodings = _gedit_encoding_strv_to_list ((const gchar * const *)enc_strv);
+	g_strfreev (enc_strv);
 
 	metadata = get_metadata_encoding (loader);
 	if (metadata != NULL)

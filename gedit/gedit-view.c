@@ -43,11 +43,11 @@
 
 #include "gedit-view.h"
 #include "gedit-debug.h"
-#include "gedit-prefs-manager.h"
-#include "gedit-prefs-manager-app.h"
 #include "gedit-marshal.h"
 #include "gedit-utils.h"
 #include "gseal-gtk-compat.h"
+#include "gedit-settings.h"
+#include "gedit-app.h"
 
 
 #define GEDIT_VIEW_SCROLL_MARGIN 0.02
@@ -70,6 +70,8 @@ enum
 
 struct _GeditViewPrivate
 {
+	GSettings   *editor_settings;
+
 	SearchMode   search_mode;
 	
 	GtkTextIter  start_search_iter;
@@ -335,21 +337,40 @@ on_notify_buffer_cb (GeditView  *view,
 static void 
 gedit_view_init (GeditView *view)
 {
+	GSettings *gs;
 	GtkTargetList *tl;
+	gboolean use_default_font;
+	gboolean display_line_numbers;
+	gboolean auto_indent;
+	gboolean insert_spaces;
+	gboolean display_right_margin;
+	gboolean hl_current_line;
+	guint tabs_size;
+	guint right_margin_position;
+	GtkWrapMode wrap_mode;
+	GtkSourceSmartHomeEndType smart_home_end;
 	
 	gedit_debug (DEBUG_VIEW);
 	
 	view->priv = GEDIT_VIEW_GET_PRIVATE (view);
 
+	gs = _gedit_app_get_settings (gedit_app_get_default ());
+	view->priv->editor_settings = g_settings_new ("org.gnome.gedit.preferences.editor");
+
+	/* Get setting values */
+	use_default_font = g_settings_get_boolean (view->priv->editor_settings,
+						   GEDIT_SETTINGS_USE_DEFAULT_FONT);
+
 	/*
 	 *  Set tab, fonts, wrap mode, colors, etc. according
 	 *  to preferences 
 	 */
-	if (!gedit_prefs_manager_get_use_default_font ())
+	if (!use_default_font)
 	{
 		gchar *editor_font;
 
-		editor_font = gedit_prefs_manager_get_editor_font ();
+		editor_font = g_settings_get_string (view->priv->editor_settings,
+						     GEDIT_SETTINGS_EDITOR_FONT);
 
 		gedit_view_set_font (view, FALSE, editor_font);
 
@@ -359,17 +380,37 @@ gedit_view_init (GeditView *view)
 	{
 		gedit_view_set_font (view, TRUE, NULL);
 	}
+ 
+	display_line_numbers = g_settings_get_boolean (view->priv->editor_settings,
+						       GEDIT_SETTINGS_DISPLAY_LINE_NUMBERS);
+	auto_indent = g_settings_get_boolean (view->priv->editor_settings,
+					      GEDIT_SETTINGS_AUTO_INDENT);
+	g_settings_get (view->priv->editor_settings, GEDIT_SETTINGS_TABS_SIZE,
+			"u", &tabs_size);
+	insert_spaces = g_settings_get_boolean (view->priv->editor_settings,
+						GEDIT_SETTINGS_INSERT_SPACES);
+	display_right_margin = g_settings_get_boolean (view->priv->editor_settings,
+						       GEDIT_SETTINGS_DISPLAY_RIGHT_MARGIN);
+	g_settings_get (view->priv->editor_settings, GEDIT_SETTINGS_RIGHT_MARGIN_POSITION,
+			"u", &right_margin_position);
+	hl_current_line = g_settings_get_boolean (view->priv->editor_settings,
+						  GEDIT_SETTINGS_HIGHLIGHT_CURRENT_LINE);
+
+	wrap_mode = gedit_settings_get_wrap_mode (view->priv->editor_settings,
+						  GEDIT_SETTINGS_WRAP_MODE);
+	
+	smart_home_end = gedit_settings_get_smart_home_end (GEDIT_SETTINGS (gs));
 
 	g_object_set (G_OBJECT (view), 
-		      "wrap_mode", gedit_prefs_manager_get_wrap_mode (),
-		      "show_line_numbers", gedit_prefs_manager_get_display_line_numbers (),
-		      "auto_indent", gedit_prefs_manager_get_auto_indent (),
-		      "tab_width", gedit_prefs_manager_get_tabs_size (),
-		      "insert_spaces_instead_of_tabs", gedit_prefs_manager_get_insert_spaces (),
-		      "show_right_margin", gedit_prefs_manager_get_display_right_margin (), 
-		      "right_margin_position", gedit_prefs_manager_get_right_margin_position (),
-		      "highlight_current_line", gedit_prefs_manager_get_highlight_current_line (),
-		      "smart_home_end", gedit_prefs_manager_get_smart_home_end (),
+		      "wrap_mode", wrap_mode,
+		      "show_line_numbers", display_line_numbers,
+		      "auto_indent", auto_indent,
+		      "tab_width", tabs_size,
+		      "insert_spaces_instead_of_tabs", insert_spaces,
+		      "show_right_margin", display_right_margin,
+		      "right_margin_position", right_margin_position,
+		      "highlight_current_line", hl_current_line,
+		      "smart_home_end", smart_home_end,
 		      "indent_on_tab", TRUE,
 		      NULL);
 
@@ -414,6 +455,12 @@ gedit_view_destroy (GtkObject *object)
 	   would reinstate a GtkTextBuffer which we don't want */
 	current_buffer_removed (view);
 	g_signal_handlers_disconnect_by_func (view, on_notify_buffer_cb, NULL);
+	
+	if (view->priv->editor_settings != NULL)
+	{
+		g_object_unref (view->priv->editor_settings);
+		view->priv->editor_settings = NULL;
+	}
 	
 	(* GTK_OBJECT_CLASS (gedit_view_parent_class)->destroy) (object);
 }
@@ -661,9 +708,12 @@ gedit_view_set_font (GeditView   *view,
 
 	if (def)
 	{
+		GSettings *settings;
 		gchar *font;
 
-		font = gedit_prefs_manager_get_system_font ();
+		settings = _gedit_app_get_settings (gedit_app_get_default ());
+		font = gedit_settings_get_system_font (GEDIT_SETTINGS (settings));
+		
 		font_desc = pango_font_description_from_string (font);
 		g_free (font);
 	}
@@ -678,7 +728,7 @@ gedit_view_set_font (GeditView   *view,
 
 	gtk_widget_modify_font (GTK_WIDGET (view), font_desc);
 
-	pango_font_description_free (font_desc);		
+	pango_font_description_free (font_desc);
 }
 
 static void
@@ -1953,17 +2003,6 @@ gedit_view_drag_drop (GtkWidget      *widget,
 	return result;
 }
 
-static void
-show_line_numbers_toggled (GtkMenu   *menu,
-			   GeditView *view)
-{
-	gboolean show;
-
-	show = gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM (menu));
-
-	gedit_prefs_manager_set_display_line_numbers (show);
-}
-
 static GtkWidget *
 create_line_numbers_menu (GtkWidget *view)
 {
@@ -1975,8 +2014,13 @@ create_line_numbers_menu (GtkWidget *view)
 	item = gtk_check_menu_item_new_with_mnemonic (_("_Display line numbers"));
 	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item),
 					gtk_source_view_get_show_line_numbers (GTK_SOURCE_VIEW (view)));
-	g_signal_connect (item, "toggled",
-			  G_CALLBACK (show_line_numbers_toggled), view);
+
+	g_settings_bind (GEDIT_VIEW (view)->priv->editor_settings,
+			 "active",
+			 item,
+			 GEDIT_SETTINGS_DISPLAY_LINE_NUMBERS,
+			 G_SETTINGS_BIND_SET);
+	
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 	
 	gtk_widget_show_all (menu);

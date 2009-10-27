@@ -161,6 +161,8 @@ GtkPrintSettings	*_gedit_app_get_default_print_settings	(GeditApp         *app);
 void			 _gedit_app_set_default_print_settings	(GeditApp         *app,
 								 GtkPrintSettings *settings);
 
+GSettings		*_gedit_app_get_settings		(GeditApp    *app);
+
 G_END_DECLS
 
 #endif  /* __GEDIT_APP_H__  */

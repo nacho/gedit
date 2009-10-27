@@ -37,6 +37,7 @@
 #include <gtk/gtk.h>
 #include <atk/atk.h>
 #include <gedit/gedit-encodings.h>
+#include <gtksourceview/gtksourceview.h>
 
 G_BEGIN_DECLS
 
@@ -157,6 +158,5 @@ gchar 	       **gedit_utils_drop_get_uris		(GtkSelectionData *selection_data);
 G_END_DECLS
 
 #endif /* __GEDIT_UTILS_H__ */
-
 
 /* ex:ts=8:noet: */

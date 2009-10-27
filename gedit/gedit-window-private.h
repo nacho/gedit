@@ -32,8 +32,8 @@
 #define __GEDIT_WINDOW_PRIVATE_H__
 
 #include "gedit/gedit-window.h"
-#include "gedit-prefs-manager.h"
 #include "gedit-message-bus.h"
+#include "gedit-settings.h"
 
 #ifdef OS_OSX
 #include <ige-mac-integration.h>
@@ -45,6 +45,10 @@ G_BEGIN_DECLS
 
 struct _GeditWindowPrivate
 {
+	GSettings      *editor_settings;
+	GSettings      *ui_settings;
+	GSettings      *window_settings;
+
 	GtkWidget      *notebook;
 
 	GtkWidget      *side_panel;

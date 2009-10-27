@@ -51,7 +51,7 @@ dnl make sure we keep ACLOCAL_FLAGS around for maintainer builds to work
 AC_SUBST(ACLOCAL_AMFLAGS, "$ACLOCAL_FLAGS -I m4")
 
 dnl active plugins for gedit.schemas
-ACTIVE_PLUGINS="docinfo,modelines,filebrowser,spell,time"
+ACTIVE_PLUGINS="'docinfo', 'modelines', 'filebrowser', 'spell', 'time'"
 AC_SUBST(ACTIVE_PLUGINS)
 
 dnl toolbar style for gedit schemas
@@ -63,7 +63,7 @@ AC_MSG_CHECKING([for Win32 platform])
 case "$host" in
   *-*-mingw*|*-*-cygwin*)
     platform_win32=yes
-    TOOLBAR_STYLE="GEDIT_TOOLBAR_ICONS"
+    TOOLBAR_STYLE="'GEDIT_TOOLBAR_ICONS'"
     ;;
   *)
     platform_win32=no
@@ -77,7 +77,7 @@ case "$host" in
   *-*-mingw*)
     os_win32=yes
     AC_CHECK_TOOL(WINDRES, windres)
-    ACTIVE_PLUGINS="${ACTIVE_PLUGINS},checkupdate"
+    ACTIVE_PLUGINS="${ACTIVE_PLUGINS}, 'checkupdate'"
     ;;
   *)
     os_win32=no
@@ -105,7 +105,7 @@ gdk_windowing=`$PKG_CONFIG --variable=target gdk-2.0`
 AC_MSG_CHECKING([for native Mac OS X])
 if test "$gdk_windowing" = "quartz"; then
 	os_osx=yes
-	ACTIVE_PLUGINS="${ACTIVE_PLUGINS},checkupdate"
+	ACTIVE_PLUGINS="${ACTIVE_PLUGINS}, 'checkupdate'"
 else
 	os_osx=no
 fi
@@ -273,7 +273,7 @@ PKG_CHECK_MODULES(GEDIT, [
 	libxml-2.0 >= 2.5.0
 	glib-2.0 >= 2.22.0
 	gthread-2.0 >= 2.13.0
-	gio-2.0 >= 2.23.1
+	gio-2.0 >= 2.25.4
 	gtk+-2.0 >= 2.16.0
 	gtksourceview-2.0 >= 2.9.7
 	gconf-2.0 >= 1.1.11
@@ -332,10 +332,10 @@ AC_SUBST(EGG_SMCLIENT_CFLAGS)
 AC_SUBST(EGG_SMCLIENT_LIBS)
 
 dnl ================================================================
-dnl GConf related settings
+dnl GSettings stuff
 dnl ================================================================
 
-AM_GCONF_SOURCE_2
+GLIB_GSETTINGS
 
 dnl ================================================================
 dnl Python
@@ -516,7 +516,7 @@ Makefile
 data/gedit.desktop.in
 data/gedit-bugreport.sh
 data/gedit.pc
-data/gedit.schemas.in
+data/org.gnome.gedit.gschema.in
 data/Makefile
 docs/Makefile
 docs/reference/Makefile

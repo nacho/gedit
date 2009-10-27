@@ -40,10 +40,10 @@
 
 #include "gedit-encodings-dialog.h"
 #include "gedit-encodings.h"
-#include "gedit-prefs-manager.h"
 #include "gedit-utils.h"
 #include "gedit-debug.h"
 #include "gedit-dirs.h"
+#include "gedit-settings.h"
 
 #define GEDIT_ENCODINGS_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
 						   GEDIT_TYPE_ENCODINGS_DIALOG,           \
@@ -51,6 +51,8 @@
 
 struct _GeditEncodingsDialogPrivate
 {
+	GSettings	*enc_settings;
+
 	GtkListStore	*available_liststore;
 	GtkListStore	*displayed_liststore;
 	GtkWidget	*available_treeview;
@@ -74,11 +76,26 @@ gedit_encodings_dialog_finalize (GObject *object)
 }
 
 static void
+gedit_encodings_dialog_dispose (GObject *object)
+{
+	GeditEncodingsDialogPrivate *priv = GEDIT_ENCODINGS_DIALOG (object)->priv;
+
+	if (priv->enc_settings != NULL)
+	{
+		g_object_unref (priv->enc_settings);
+		priv->enc_settings = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_encodings_dialog_parent_class)->dispose (object);
+}
+
+static void
 gedit_encodings_dialog_class_init (GeditEncodingsDialogClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->finalize = gedit_encodings_dialog_finalize;
+	object_class->dispose = gedit_encodings_dialog_dispose;
 
 	g_type_class_add_private (object_class, sizeof (GeditEncodingsDialogPrivate));
 }
@@ -237,14 +254,18 @@ static void
 init_shown_in_menu_tree_model (GeditEncodingsDialog *dialog)
 {
 	GtkTreeIter iter;
+	gchar **enc_strv;
+	gsize len;
 	GSList *list, *tmp;
 
 	/* add data to the list store */
-	list = gedit_prefs_manager_get_shown_in_menu_encodings ();
+	enc_strv = g_settings_get_strv (dialog->priv->enc_settings,
+					GEDIT_SETTINGS_ENCODING_SHOWN_IN_MENU,
+					&len);
 
-	tmp = list;
+	list = _gedit_encoding_strv_to_list ((const gchar * const *)enc_strv);
 
-	while (tmp != NULL)
+	for (tmp = list; tmp != NULL; tmp = g_slist_next (tmp))
 	{
 		const GeditEncoding *enc;
 
@@ -261,8 +282,6 @@ init_shown_in_menu_tree_model (GeditEncodingsDialog *dialog)
 				    gedit_encoding_get_charset (enc),
 				    COLUMN_NAME,
 				    gedit_encoding_get_name (enc), -1);
-
-		tmp = g_slist_next (tmp);
 	}
 
 	g_slist_free (list);
@@ -286,8 +305,17 @@ response_handler (GtkDialog            *dialog,
 
 	if (response_id == GTK_RESPONSE_OK)
 	{
-		g_return_if_fail (gedit_prefs_manager_shown_in_menu_encodings_can_set ());
-		gedit_prefs_manager_set_shown_in_menu_encodings (dlg->priv->show_in_menu_list);
+		gchar **encs;
+		gint len;
+
+		encs = _gedit_encoding_list_to_strv (dlg->priv->show_in_menu_list);
+		len = g_slist_length (dlg->priv->show_in_menu_list);
+	
+		g_settings_set_strv (dlg->priv->enc_settings,
+				     GEDIT_SETTINGS_ENCODING_SHOWN_IN_MENU,
+				     (const gchar * const *)encs, len);
+
+		g_strfreev (encs);
 	}
 }
 
@@ -311,6 +339,8 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 	};
 
 	dlg->priv = GEDIT_ENCODINGS_DIALOG_GET_PRIVATE (dlg);
+	
+	dlg->priv->enc_settings = g_settings_new ("org.gnome.gedit.preferences.encodings");
 	
 	gtk_dialog_add_buttons (GTK_DIALOG (dlg),
 				GTK_STOCK_CANCEL, 

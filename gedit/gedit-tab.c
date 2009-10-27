@@ -42,8 +42,8 @@
 #include "gedit-print-preview.h"
 #include "gedit-progress-message-area.h"
 #include "gedit-debug.h"
-#include "gedit-prefs-manager-app.h"
 #include "gedit-enum-types.h"
+#include "gedit-settings.h"
 
 #if !GTK_CHECK_VERSION (2, 17, 1)
 #include "gedit-message-area.h"
@@ -55,6 +55,7 @@
 
 struct _GeditTabPrivate
 {
+	GSettings	       *editor;
 	GeditTabState	        state;
 	
 	GtkWidget	       *view;
@@ -236,6 +237,12 @@ gedit_tab_dispose (GObject *object)
 		tab->priv->tmp_save_location = NULL;
 	}
 
+	if (tab->priv->editor != NULL)
+	{
+		g_object_unref (tab->priv->editor);
+		tab->priv->editor = NULL;
+	}
+
 	G_OBJECT_CLASS (gedit_tab_parent_class)->dispose (object);
 }
 
@@ -260,6 +267,7 @@ gedit_tab_class_init (GeditTabClass *klass)
 
 	object_class->dispose = gedit_tab_dispose;
 	object_class->finalize = gedit_tab_finalize;
+	object_class->dispose = gedit_tab_dispose;
 	object_class->get_property = gedit_tab_get_property;
 	object_class->set_property = gedit_tab_set_property;
 	
@@ -377,6 +385,10 @@ set_view_properties_according_to_state (GeditTab      *tab,
 					GeditTabState  state)
 {
 	gboolean val;
+	gboolean hl_current_line;
+	
+	hl_current_line = g_settings_get_boolean (tab->priv->editor,
+						  GEDIT_SETTINGS_HIGHLIGHT_CURRENT_LINE);
 
 	val = ((state == GEDIT_TAB_STATE_NORMAL) &&
 	       (tab->priv->print_preview == NULL) &&
@@ -389,7 +401,7 @@ set_view_properties_according_to_state (GeditTab      *tab,
 
 	val = ((state != GEDIT_TAB_STATE_LOADING) &&
 	       (state != GEDIT_TAB_STATE_CLOSING) &&
-	       (gedit_prefs_manager_get_highlight_current_line ()));
+	       (hl_current_line));
 	gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (tab->priv->view), val);
 }
 
@@ -1512,8 +1524,12 @@ gedit_tab_init (GeditTab *tab)
 	GtkWidget *sw;
 	GeditDocument *doc;
 	GeditLockdownMask lockdown;
+	gboolean auto_save;
+	gint auto_save_interval;
 
 	tab->priv = GEDIT_TAB_GET_PRIVATE (tab);
+
+	tab->priv->editor = g_settings_new ("org.gnome.gedit.preferences.editor");
 
 	tab->priv->state = GEDIT_TAB_STATE_NORMAL;
 
@@ -1532,14 +1548,20 @@ gedit_tab_init (GeditTab *tab)
 					GTK_POLICY_AUTOMATIC);
 
 	/* Manage auto save data */
+	auto_save = g_settings_get_boolean (tab->priv->editor,
+					    GEDIT_SETTINGS_AUTO_SAVE);
+	g_settings_get (tab->priv->editor, GEDIT_SETTINGS_AUTO_SAVE_INTERVAL,
+			"u", &auto_save_interval);
+	
 	lockdown = gedit_app_get_lockdown (gedit_app_get_default ());
-	tab->priv->auto_save = gedit_prefs_manager_get_auto_save () &&
+	tab->priv->auto_save = auto_save &&
 			       !(lockdown & GEDIT_LOCKDOWN_SAVE_TO_DISK);
 	tab->priv->auto_save = (tab->priv->auto_save != FALSE);
 
-	tab->priv->auto_save_interval = gedit_prefs_manager_get_auto_save_interval ();
+	tab->priv->auto_save_interval = auto_save_interval;
+	/*FIXME
 	if (tab->priv->auto_save_interval <= 0)
-		tab->priv->auto_save_interval = GPM_DEFAULT_AUTO_SAVE_INTERVAL;
+		tab->priv->auto_save_interval = GPM_DEFAULT_AUTO_SAVE_INTERVAL;*/
 
 	/* Create the view */
 	doc = gedit_document_new ();

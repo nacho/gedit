@@ -57,6 +57,9 @@ const GeditEncoding 	*gedit_encoding_get_current	 (void);
 GeditEncoding		*gedit_encoding_copy		 (const GeditEncoding *enc);
 void               	 gedit_encoding_free		 (GeditEncoding       *enc);
 
+GSList			*_gedit_encoding_strv_to_list    (const gchar * const *enc_str);
+gchar		       **_gedit_encoding_list_to_strv	 (const GSList *enc);
+
 G_END_DECLS
 
 #endif  /* __GEDIT_ENCODINGS_H__ */

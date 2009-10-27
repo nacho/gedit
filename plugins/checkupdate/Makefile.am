@@ -24,26 +24,10 @@ plugin_in_files = checkupdate.gedit-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-schemasdir	 = $(GCONF_SCHEMA_FILE_DIR)
-schemas_in_files = gedit-check-update.schemas.in
-schemas_DATA 	 = $(schemas_in_files:.schemas.in=.schemas)
-@INTLTOOL_SCHEMAS_RULE@
+EXTRA_DIST = $(plugin_in_files)
 
-if GCONF_SCHEMAS_INSTALL
-install-data-local:
-	        if test -z "$(DESTDIR)" ; then \
-	                for p in $(schemas_DATA) ; do \
-	                        GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_builddir)/plugins/checkupdate/$$p ; \
-	                done \
-	        fi
-else
-install-data-local:
-endif
+CLEANFILES = $(plugin_DATA)
 
-EXTRA_DIST = $(plugin_in_files) $(schemas_in_files)
-
-CLEANFILES = $(plugin_DATA) $(schemas_DATA)
-
-DISTCLEANFILES = $(plugin_DATA) $(schemas_DATA)
+DISTCLEANFILES = $(plugin_DATA)
 
 -include $(top_srcdir)/git.mk

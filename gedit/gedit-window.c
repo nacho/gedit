@@ -49,7 +49,6 @@
 #include "gedit-commands.h"
 #include "gedit-debug.h"
 #include "gedit-language-manager.h"
-#include "gedit-prefs-manager-app.h"
 #include "gedit-panel.h"
 #include "gedit-documents-panel.h"
 #include "gedit-plugins-engine.h"
@@ -57,6 +56,7 @@
 #include "gedit-dirs.h"
 #include "gedit-status-combo-box.h"
 #include "gseal-gtk-compat.h"
+#include "gedit-settings.h"
 
 #ifdef OS_OSX
 #include "osx/gedit-osx.h"
@@ -67,6 +67,9 @@
 #define TAB_WIDTH_DATA "GeditWindowTabWidthData"
 #define LANGUAGE_DATA "GeditWindowLanguageData"
 #define FULLSCREEN_ANIMATION_SPEED 4
+
+#define GEDIT_WINDOW_DEFAULT_WIDTH       650
+#define GEDIT_WINDOW_DEFAULT_HEIGHT      500
 
 #define GEDIT_WINDOW_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),\
 					 GEDIT_TYPE_WINDOW,                    \
@@ -128,32 +131,32 @@ save_panes_state (GeditWindow *window)
 
 	gedit_debug (DEBUG_WINDOW);
 
-	if (gedit_prefs_manager_window_size_can_set ())
-		gedit_prefs_manager_set_window_size (window->priv->width,
-						     window->priv->height);
+	g_settings_set (window->priv->window_settings, GEDIT_SETTINGS_WINDOW_SIZE,
+			"(ii)",	window->priv->width, window->priv->height);
 
-	if (gedit_prefs_manager_window_state_can_set ())
-		gedit_prefs_manager_set_window_state (window->priv->window_state);
+	g_settings_set_int (window->priv->window_settings, GEDIT_SETTINGS_WINDOW_STATE,
+			    window->priv->window_state);
 
-	if ((window->priv->side_panel_size > 0) &&
-	    gedit_prefs_manager_side_panel_size_can_set ())
-		gedit_prefs_manager_set_side_panel_size	(
-					window->priv->side_panel_size);
+	if (window->priv->side_panel_size > 0)
+		g_settings_set_int (window->priv->window_settings,
+				    GEDIT_SETTINGS_SIDE_PANEL_SIZE,
+				    window->priv->side_panel_size);
 
 	pane_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->side_panel));
-	if (pane_page != 0 &&
-	    gedit_prefs_manager_side_panel_active_page_can_set ())
-		gedit_prefs_manager_set_side_panel_active_page (pane_page);
+	if (pane_page != 0)
+		g_settings_set_int (window->priv->window_settings,
+				    GEDIT_SETTINGS_SIDE_PANEL_ACTIVE_PAGE,
+				    pane_page);
 
-	if ((window->priv->bottom_panel_size > 0) && 
-	    gedit_prefs_manager_bottom_panel_size_can_set ())
-		gedit_prefs_manager_set_bottom_panel_size (
-					window->priv->bottom_panel_size);
+	if (window->priv->bottom_panel_size > 0)
+		g_settings_set_int (window->priv->window_settings,
+				    GEDIT_SETTINGS_BOTTOM_PANEL_SIZE,
+				    window->priv->bottom_panel_size);
 
 	pane_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->bottom_panel));
-	if (pane_page != 0 &&
-	    gedit_prefs_manager_bottom_panel_active_page_can_set ())
-		gedit_prefs_manager_set_bottom_panel_active_page (pane_page);
+	if (pane_page != 0)
+		g_settings_set_int (window->priv->window_settings,
+				    GEDIT_SETTINGS_BOTTOM_PANEL_ACTIVE_PAGE, pane_page);
 }
 
 #ifdef OS_OSX
@@ -283,7 +286,26 @@ gedit_window_dispose (GObject *object)
 		g_object_unref (window->priv->window_group);
 		window->priv->window_group = NULL;
 	}
+
+	/* We must free the settings after saving the panels */
+	if (window->priv->editor_settings != NULL)
+	{
+		g_object_unref (window->priv->editor_settings);
+		window->priv->editor_settings = NULL;
+	}
 	
+	if (window->priv->ui_settings != NULL)
+	{
+		g_object_unref (window->priv->ui_settings);
+		window->priv->ui_settings = NULL;
+	}
+
+	if (window->priv->window_settings != NULL)
+	{
+		g_object_unref (window->priv->window_settings);
+		window->priv->window_settings = NULL;
+	}
+
 	/* Now that there have broken some reference loops,
 	 * force collection again.
 	 */
@@ -570,9 +592,13 @@ set_toolbar_style (GeditWindow *window,
 	gboolean visible;
 	GeditToolbarSetting style;
 	GtkAction *action;
-	
+	gboolean toolbar_visible;
+
+	toolbar_visible = g_settings_get_boolean (window->priv->ui_settings,
+						  GEDIT_SETTINGS_TOOLBAR_VISIBLE);
+
 	if (origin == NULL)
-		visible = gedit_prefs_manager_get_toolbar_visible ();
+		visible = toolbar_visible;
 	else
 		visible = gtk_widget_get_visible (origin->priv->toolbar);
 	
@@ -590,9 +616,16 @@ set_toolbar_style (GeditWindow *window,
 
 	/* Set style */
 	if (origin == NULL)
-		style = gedit_prefs_manager_get_toolbar_buttons_style ();
+	{
+		GSettings *settings;
+
+		settings = _gedit_app_get_settings (gedit_app_get_default ());
+		style = gedit_settings_get_toolbar_style (GEDIT_SETTINGS (settings));
+	}
 	else
+	{
 		style = origin->priv->toolbar_style;
+	}
 	
 	window->priv->toolbar_style = style;
 	
@@ -728,10 +761,14 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	GeditTabState  state;
 	GtkClipboard  *clipboard;
 	GeditLockdownMask lockdown;
+	gboolean       enable_syntax_highlighting;
 
 	g_return_if_fail (GEDIT_TAB (tab));
 
 	gedit_debug (DEBUG_WINDOW);
+	
+	enable_syntax_highlighting = g_settings_get_boolean (window->priv->editor_settings,
+							     GEDIT_SETTINGS_SYNTAX_HIGHLIGHTING);
 
 	lockdown = gedit_app_get_lockdown (gedit_app_get_default ());
 
@@ -887,7 +924,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 					      "ViewHighlightMode");
 	gtk_action_set_sensitive (action, 
 				  (state != GEDIT_TAB_STATE_CLOSING) &&
-				  gedit_prefs_manager_get_enable_syntax_highlighting ());
+				  enable_syntax_highlighting);
 
 	update_next_prev_doc_sensitivity (window, tab);
 
@@ -1286,7 +1323,8 @@ update_recent_files_menu (GeditWindow *window)
 
 	gedit_debug (DEBUG_WINDOW);
 
-	max_recents = gedit_prefs_manager_get_max_recents ();
+	g_settings_get (window->priv->ui_settings, GEDIT_SETTINGS_MAX_RECENTS,
+			"u", &max_recents);
 
 	g_return_if_fail (p->recents_action_group != NULL);
 
@@ -1424,8 +1462,8 @@ toolbar_visibility_changed (GtkWidget   *toolbar,
 
 	visible = gtk_widget_get_visible (toolbar);
 
-	if (gedit_prefs_manager_toolbar_visible_can_set ())
-		gedit_prefs_manager_set_toolbar_visible (visible);
+	g_settings_set_boolean (window->priv->ui_settings,
+				GEDIT_SETTINGS_TOOLBAR_VISIBLE, visible);
 
 	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewToolbar");
@@ -1443,8 +1481,12 @@ setup_toolbar_open_button (GeditWindow *window,
 	GtkWidget *toolbar_recent_menu;
 	GtkToolItem *open_button;
 	GtkAction *action;
+	gint max_recents;
 
 	recent_manager = gtk_recent_manager_get_default ();
+	
+	g_settings_get (window->priv->ui_settings, GEDIT_SETTINGS_MAX_RECENTS,
+			"u", &max_recents);
 
 	/* recent files menu tool button */
 	toolbar_recent_menu = gtk_recent_chooser_menu_new_for_manager (recent_manager);
@@ -1454,7 +1496,7 @@ setup_toolbar_open_button (GeditWindow *window,
 	gtk_recent_chooser_set_sort_type (GTK_RECENT_CHOOSER (toolbar_recent_menu),
 					  GTK_RECENT_SORT_MRU);
 	gtk_recent_chooser_set_limit (GTK_RECENT_CHOOSER (toolbar_recent_menu),
-				      gedit_prefs_manager_get_max_recents ());
+				      max_recents);
 
 	filter = gtk_recent_filter_new ();
 	gtk_recent_filter_add_group (filter, "gedit");
@@ -1832,11 +1874,11 @@ set_statusbar_style (GeditWindow *window,
 		     GeditWindow *origin)
 {
 	GtkAction *action;
-	
 	gboolean visible;
 
 	if (origin == NULL)
-		visible = gedit_prefs_manager_get_statusbar_visible ();
+		visible = g_settings_get_boolean (window->priv->ui_settings,
+						  GEDIT_SETTINGS_STATUSBAR_VISIBLE);
 	else
 		visible = gtk_widget_get_visible (origin->priv->statusbar);
 
@@ -1863,8 +1905,8 @@ statusbar_visibility_changed (GtkWidget   *statusbar,
 
 	visible = gtk_widget_get_visible (statusbar);
 
-	if (gedit_prefs_manager_statusbar_visible_can_set ())
-		gedit_prefs_manager_set_statusbar_visible (visible);
+	g_settings_set_boolean (window->priv->ui_settings,
+				GEDIT_SETTINGS_STATUSBAR_VISIBLE, visible);
 
 	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewStatusbar");
@@ -2103,7 +2145,7 @@ clone_window (GeditWindow *origin)
 	{
 		gint w, h;
 
-		gedit_prefs_manager_get_default_window_size (&w, &h);
+		_gedit_window_get_default_size (&w, &h);
 		gtk_window_set_default_size (GTK_WINDOW (window), w, h);
 		gtk_window_maximize (GTK_WINDOW (window));
 	}
@@ -2646,7 +2688,8 @@ _gedit_window_set_lockdown (GeditWindow       *window,
 	gboolean autosave;
 
 	/* start/stop autosave in each existing tab */
-	autosave = gedit_prefs_manager_get_auto_save ();
+	autosave = g_settings_get_boolean (window->priv->editor_settings,
+					   GEDIT_SETTINGS_AUTO_SAVE);
 	gtk_container_foreach (GTK_CONTAINER (window->priv->notebook),
 			       update_tab_autosave,
 			       &autosave);
@@ -3643,8 +3686,9 @@ side_panel_visibility_changed (GtkWidget   *side_panel,
 
 	visible = gtk_widget_get_visible (side_panel);
 
-	if (gedit_prefs_manager_side_pane_visible_can_set ())
-		gedit_prefs_manager_set_side_pane_visible (visible);
+	g_settings_set_boolean (window->priv->ui_settings,
+				GEDIT_SETTINGS_SIDE_PANE_VISIBLE,
+				visible);
 
 	action = gtk_action_group_get_action (window->priv->panes_action_group,
 	                                      "ViewSidePane");
@@ -3698,8 +3742,9 @@ bottom_panel_visibility_changed (GeditPanel  *bottom_panel,
 
 	visible = gtk_widget_get_visible (GTK_WIDGET (bottom_panel));
 
-	if (gedit_prefs_manager_bottom_panel_visible_can_set ())
-		gedit_prefs_manager_set_bottom_panel_visible (visible);
+	g_settings_set_boolean (window->priv->ui_settings,
+				GEDIT_SETTINGS_BOTTOM_PANE_VISIBLE,
+				visible);
 
 	action = gtk_action_group_get_action (window->priv->panes_action_group,
 					      "ViewBottomPane");
@@ -3778,15 +3823,23 @@ static void
 init_panels_visibility (GeditWindow *window)
 {
 	gint active_page;
+	gboolean side_pane_visible;
+	gboolean bottom_pane_visible;
 
 	gedit_debug (DEBUG_WINDOW);
 
 	/* side pane */
-	active_page = gedit_prefs_manager_get_side_panel_active_page ();
+	active_page = g_settings_get_int (window->priv->window_settings,
+					  GEDIT_SETTINGS_SIDE_PANEL_ACTIVE_PAGE);
 	_gedit_panel_set_active_item_by_id (GEDIT_PANEL (window->priv->side_panel),
 					    active_page);
 
-	if (gedit_prefs_manager_get_side_pane_visible ())
+	side_pane_visible = g_settings_get_boolean (window->priv->ui_settings,
+						    GEDIT_SETTINGS_SIDE_PANE_VISIBLE);
+	bottom_pane_visible = g_settings_get_boolean (window->priv->ui_settings,
+						      GEDIT_SETTINGS_BOTTOM_PANE_VISIBLE);
+
+	if (side_pane_visible)
 	{
 		gtk_widget_show (window->priv->side_panel);
 	}
@@ -3794,11 +3847,12 @@ init_panels_visibility (GeditWindow *window)
 	/* bottom pane, it can be empty */
 	if (gedit_panel_get_n_items (GEDIT_PANEL (window->priv->bottom_panel)) > 0)
 	{
-		active_page = gedit_prefs_manager_get_bottom_panel_active_page ();
+		active_page = g_settings_get_int (window->priv->window_settings,
+						  GEDIT_SETTINGS_BOTTOM_PANEL_ACTIVE_PAGE);
 		_gedit_panel_set_active_item_by_id (GEDIT_PANEL (window->priv->bottom_panel),
 						    active_page);
 
-		if (gedit_prefs_manager_get_bottom_panel_visible ())
+		if (bottom_pane_visible)
 		{
 			gtk_widget_show (window->priv->bottom_panel);
 		}
@@ -3969,6 +4023,9 @@ gedit_window_init (GeditWindow *window)
 	window->priv->dispose_has_run = FALSE;
 	window->priv->fullscreen_controls = NULL;
 	window->priv->fullscreen_animation_timeout_id = 0;
+	window->priv->editor_settings = g_settings_new ("org.gnome.gedit.preferences.editor");
+	window->priv->ui_settings = g_settings_new ("org.gnome.gedit.preferences.ui");
+	window->priv->window_settings = g_settings_new ("org.gnome.gedit.state.window");
 
 	window->priv->message_bus = gedit_message_bus_new ();
 
@@ -4010,8 +4067,10 @@ gedit_window_init (GeditWindow *window)
 
 	/* panes' state must be restored after panels have been mapped,
 	 * since the bottom pane position depends on the size of the vpaned. */
-	window->priv->side_panel_size = gedit_prefs_manager_get_side_panel_size ();
-	window->priv->bottom_panel_size = gedit_prefs_manager_get_bottom_panel_size ();
+	window->priv->side_panel_size = g_settings_get_int (window->priv->window_settings,
+							    GEDIT_SETTINGS_SIDE_PANEL_SIZE);
+	window->priv->bottom_panel_size = g_settings_get_int (window->priv->window_settings,
+							      GEDIT_SETTINGS_BOTTOM_PANEL_SIZE);
 
 	g_signal_connect_after (window->priv->hpaned,
 				"map",
@@ -4791,4 +4850,14 @@ gedit_window_get_message_bus (GeditWindow *window)
 	
 	return window->priv->message_bus;
 }
+
+void
+_gedit_window_get_default_size (gint *width, gint *height)
+{
+	g_return_if_fail (width != NULL && height != NULL);
+
+	*width = GEDIT_WINDOW_DEFAULT_WIDTH;
+	*height = GEDIT_WINDOW_DEFAULT_HEIGHT;
+}
+
 /* ex:ts=8:noet: */

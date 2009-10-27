@@ -35,7 +35,6 @@
 #include <string.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <gconf/gconf-client.h>
 
 #include "gedit-history-entry.h"
 
@@ -60,7 +59,7 @@ struct _GeditHistoryEntryPrivate
 	
 	GtkEntryCompletion *completion;
 	
-	GConfClient        *gconf_client;
+	GSettings          *settings;
 };
 
 G_DEFINE_TYPE(GeditHistoryEntry, gedit_history_entry, GTK_TYPE_COMBO_BOX_ENTRY)
@@ -132,10 +131,10 @@ gedit_history_entry_finalize (GObject *object)
 	
 	g_free (priv->history_id);
 
-	if (priv->gconf_client != NULL)
+	if (priv->settings != NULL)
 	{
-		g_object_unref (G_OBJECT (priv->gconf_client));
-		priv->gconf_client = NULL;
+		g_object_unref (G_OBJECT (priv->settings));
+		priv->settings = NULL;
 	}
 
 	G_OBJECT_CLASS (gedit_history_entry_parent_class)->finalize (object);
@@ -188,42 +187,24 @@ get_history_store (GeditHistoryEntry *entry)
 	return (GtkListStore *) store;
 }
 
-static char *
-get_history_key (GeditHistoryEntry *entry)
-{
-	gchar *tmp;
-	gchar *key;
-
-	/*
-	 * We store the data under /apps/gnome-settings/
-	 * like the old GnomeEntry did. Maybe we should
-	 * consider moving it to the /gedit GConf prefix...
-	 * Or maybe we should just switch away from GConf.
-	 */
-
-	tmp = gconf_escape_key (entry->priv->history_id, -1);
-	key = g_strconcat ("/apps/gnome-settings/",
-			   "gedit",
-			   "/history-",
-			   tmp,
-			   NULL);
-	g_free (tmp);
-
-	return key;
-}
-
-static GSList *
-get_history_list (GeditHistoryEntry *entry)
+static GVariant *
+get_history_variant (GeditHistoryEntry *entry)
 {
 	GtkListStore *store;
 	GtkTreeIter iter;
+	GVariant *variant;
 	gboolean valid;
-	GSList *list = NULL;
+	gchar **items;
+	gint n_children;
+	gint i = 0;
 
 	store = get_history_store (entry);
 
 	valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store),
 					       &iter);
+	n_children = gtk_tree_model_iter_n_children (GTK_TREE_MODEL (store),
+						     &iter);
+	items = g_new (gchar *, n_children + 1);
 
 	while (valid)
 	{
@@ -234,35 +215,34 @@ get_history_list (GeditHistoryEntry *entry)
 				    0, &str,
 				    -1);
 
-		list = g_slist_prepend (list, str);
+		items[i] = str;
 
 		valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (store),
 						  &iter);
+		i++;
 	}
+	
+	items[i] = NULL;
+	
+	variant = g_variant_new_strv ((const gchar * const *)items, n_children);
+	g_strfreev (items);
 
-	return g_slist_reverse (list);
+	return variant;;
 }
 
 static void
 gedit_history_entry_save_history (GeditHistoryEntry *entry)
 {
-	GSList *gconf_items;
-	gchar *key;
+	GVariant *items;
 
 	g_return_if_fail (GEDIT_IS_HISTORY_ENTRY (entry));
 
-	gconf_items = get_history_list (entry);
-	key = get_history_key (entry);
+	items = get_history_variant (entry);
 
-	gconf_client_set_list (entry->priv->gconf_client,
-			      key,
-			      GCONF_VALUE_STRING,
-			      gconf_items,
-			      NULL);
+	g_settings_set_value (entry->priv->settings,
+			      entry->priv->history_id, items);
 
-	g_slist_foreach (gconf_items, (GFunc) g_free, NULL);
-	g_slist_free (gconf_items);
-	g_free (key);
+	g_variant_unref (items);
 }
 
 static gboolean
@@ -382,39 +362,35 @@ gedit_history_entry_append_text (GeditHistoryEntry *entry,
 static void
 gedit_history_entry_load_history (GeditHistoryEntry *entry)
 {
-	GSList *gconf_items, *l;
+	GVariant *variant;
+	const gchar **items;
 	GtkListStore *store;
 	GtkTreeIter iter;
-	gchar *key;
-	guint i;
+	gsize i;
 
 	g_return_if_fail (GEDIT_IS_HISTORY_ENTRY (entry));
 
 	store = get_history_store (entry);
-	key = get_history_key (entry);
 
-	gconf_items = gconf_client_get_list (entry->priv->gconf_client,
-					     key,
-					     GCONF_VALUE_STRING,
-					     NULL);
+	variant = g_settings_get_value (entry->priv->settings,
+					entry->priv->history_id);
+	items = g_variant_get_strv (variant, &i);
 
 	gtk_list_store_clear (store);
 
-	for (l = gconf_items, i = 0;
-	     l != NULL && i < entry->priv->history_length;
-	     l = l->next, i++)
+	for (i = 0;
+	     items[i] != NULL && i < entry->priv->history_length;
+	     i++)
 	{
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store, 
 				    &iter,
 				    0,
-				    l->data,
+				    items[i],
 				    -1);
 	}
 
-	g_slist_foreach (gconf_items, (GFunc) g_free, NULL);
-	g_slist_free (gconf_items);
-	g_free (key);
+	g_variant_unref (variant);
 }
 
 void
@@ -443,7 +419,7 @@ gedit_history_entry_init (GeditHistoryEntry *entry)
 
 	priv->completion = NULL;
 	
-	priv->gconf_client = gconf_client_get_default ();
+	priv->settings = g_settings_new ("org.gnome.gedit.state.history-entry");
 }
 
 void

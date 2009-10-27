@@ -41,10 +41,11 @@
 #include "gedit-plugin.h"
 #include "gedit-debug.h"
 #include "gedit-app.h"
-#include "gedit-prefs-manager.h"
 #include "gedit-plugin-loader.h"
 #include "gedit-object-module.h"
 #include "gedit-dirs.h"
+#include "gedit-settings.h"
+#include "gedit-utils.h"
 
 #define GEDIT_PLUGINS_ENGINE_BASE_KEY "/apps/gedit-2/plugins"
 #define GEDIT_PLUGINS_ENGINE_KEY GEDIT_PLUGINS_ENGINE_BASE_KEY "/active-plugins"
@@ -72,6 +73,8 @@ G_DEFINE_TYPE(GeditPluginsEngine, gedit_plugins_engine, G_TYPE_OBJECT)
 
 struct _GeditPluginsEnginePrivate
 {
+	GSettings *plugin_settings;
+
 	GList *plugin_list;
 	GHashTable *loaders;
 
@@ -282,6 +285,8 @@ gedit_plugins_engine_init (GeditPluginsEngine *engine)
 						    GEDIT_TYPE_PLUGINS_ENGINE,
 						    GeditPluginsEnginePrivate);
 
+	engine->priv->plugin_settings = g_settings_new ("org.gnome.gedit.plugins");
+
 	load_all_plugins (engine);
 
 	/* make sure that the first reactivation will read active plugins
@@ -344,12 +349,27 @@ gedit_plugins_engine_finalize (GObject *object)
 }
 
 static void
+gedit_plugins_engine_dispose (GObject *object)
+{
+	GeditPluginsEngine *engine = GEDIT_PLUGINS_ENGINE (object);
+	
+	if (engine->priv->plugin_settings != NULL)
+	{
+		g_object_unref (engine->priv->plugin_settings);
+		engine->priv->plugin_settings = NULL;
+	}
+	
+	G_OBJECT_CLASS (gedit_plugins_engine_parent_class)->dispose (object);
+}
+
+static void
 gedit_plugins_engine_class_init (GeditPluginsEngineClass *klass)
 {
 	GType the_type = G_TYPE_FROM_CLASS (klass);
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->finalize = gedit_plugins_engine_finalize;
+	object_class->dispose = gedit_plugins_engine_dispose;
 	klass->activate_plugin = gedit_plugins_engine_activate_plugin_real;
 	klass->deactivate_plugin = gedit_plugins_engine_deactivate_plugin_real;
 
@@ -543,7 +563,9 @@ save_active_plugin_list (GeditPluginsEngine *engine)
 		}
 	}
 
-	gedit_prefs_manager_set_active_plugins (active_plugins);
+	gedit_settings_set_list (engine->priv->plugin_settings,
+				 GEDIT_SETTINGS_ACTIVE_PLUGINS,
+				 active_plugins);
 
 	g_slist_free (active_plugins);
 }
@@ -702,7 +724,8 @@ gedit_plugins_engine_activate_plugins (GeditPluginsEngine *engine,
 	/* the first time, we get the 'active' plugins from gconf */
 	if (engine->priv->activate_from_prefs)
 	{
-		active_plugins = gedit_prefs_manager_get_active_plugins ();
+		active_plugins = gedit_settings_get_list (engine->priv->plugin_settings,
+							  GEDIT_SETTINGS_ACTIVE_PLUGINS);
 	}
 
 	for (pl = engine->priv->plugin_list; pl; pl = pl->next)
@@ -829,7 +852,8 @@ gedit_plugins_engine_active_plugins_changed (GeditPluginsEngine *engine)
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	active_plugins = gedit_prefs_manager_get_active_plugins ();
+	active_plugins = gedit_settings_get_list (engine->priv->plugin_settings,
+						  GEDIT_SETTINGS_ACTIVE_PLUGINS);
 
 	for (pl = engine->priv->plugin_list; pl; pl = pl->next)
 	{

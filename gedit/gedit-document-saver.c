@@ -39,11 +39,11 @@
 
 #include "gedit-document-saver.h"
 #include "gedit-document-input-stream.h"
-#include "gedit-prefs-manager.h"
 #include "gedit-debug.h"
 #include "gedit-marshal.h"
 #include "gedit-utils.h"
 #include "gedit-enum-types.h"
+#include "gedit-settings.h"
 
 #define WRITE_CHUNK_SIZE 8192
 
@@ -89,6 +89,8 @@ static void check_modified_async (AsyncData          *async);
 
 struct _GeditDocumentSaverPrivate
 {
+	GSettings		 *editor_settings;
+
 	GFileInfo		 *info;
 	GeditDocument		 *document;
 	gboolean		  used;
@@ -222,6 +224,12 @@ gedit_document_saver_dispose (GObject *object)
 		priv->location = NULL;
 	}
 
+	if (priv->editor_settings != NULL)
+	{
+		g_object_unref (priv->editor_settings);
+		priv->editor_settings = NULL;
+	}
+
 	G_OBJECT_CLASS (gedit_document_saver_parent_class)->dispose (object);
 }
 
@@ -340,6 +348,7 @@ gedit_document_saver_init (GeditDocumentSaver *saver)
 	saver->priv->cancellable = g_cancellable_new ();
 	saver->priv->error = NULL;
 	saver->priv->used = FALSE;
+	saver->priv->editor_settings = g_settings_new ("org.gnome.gedit.preferences.editor");
 }
 
 GeditDocumentSaver *
@@ -942,7 +951,8 @@ gedit_document_saver_save (GeditDocumentSaver *saver,
 	if ((saver->priv->flags & GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP) != 0)
 		saver->priv->keep_backup = FALSE;
 	else
-		saver->priv->keep_backup = gedit_prefs_manager_get_create_backup_copy ();
+		saver->priv->keep_backup = g_settings_get_boolean (saver->priv->editor_settings,
+								   GEDIT_SETTINGS_CREATE_BACKUP_COPY);
 
 	saver->priv->old_mtime = *old_mtime;
 

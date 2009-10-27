@@ -65,27 +65,9 @@ gedit-file-browser-marshal.c: gedit-file-browser-marshal.list $(GLIB_GENMARSHAL)
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-schemasdir	 = $(GCONF_SCHEMA_FILE_DIR)
-schemas_in_files = gedit-file-browser.schemas.in
-schemas_DATA 	 = $(schemas_in_files:.schemas.in=.schemas)
-@INTLTOOL_SCHEMAS_RULE@
-
-if GCONF_SCHEMAS_INSTALL
-install-data-local:
-	        if test -z "$(DESTDIR)" ; then \
-	                for p in $(schemas_DATA) ; do \
-	                        GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_builddir)/plugins/filebrowser/$$p ; \
-	                done \
-	        fi
-else
-install-data-local:
-endif
-
-
 EXTRA_DIST = \
 	$(ui_DATA)					\
 	$(plugin_in_files)				\
-	$(schemas_in_files)				\
 	gedit-file-browser-enum-types.h.template	\
 	gedit-file-browser-enum-types.c.template	\
 	gedit-file-browser-enum-register.c.template	\
@@ -93,12 +75,10 @@ EXTRA_DIST = \
 
 CLEANFILES = \
 	$(plugin_DATA)		\
-	$(schemas_DATA)		\
 	$(BUILT_SOURCES)
 
 DISTCLEANFILES = \
 	$(plugin_DATA)		\
-	$(schemas_DATA)		\
 	$(BUILT_SOURCES)
 
 -include $(top_srcdir)/git.mk

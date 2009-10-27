@@ -32,7 +32,6 @@
 #include <string.h>
 
 #include "gedit-language-manager.h"
-#include "gedit-prefs-manager.h"
 #include "gedit-utils.h"
 #include "gedit-debug.h"
 

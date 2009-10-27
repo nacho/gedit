@@ -1,0 +1,80 @@
+schema org.gnome.gedit:
+  path /apps/gedit/
+  
+  child preferences:
+    child editor:
+      key use-default-font = @b true
+      key editor-font = @s 'Monospace 12'
+      key scheme = @s 'classic'
+      key create-backup-copy = @b true
+      key auto-save = @b false
+      key auto-save-interval = @u 10
+      key undo-actions-limit = @u 25
+      key max-undo-actions = @u 2000
+      key wrap-mode = @s 'GTK_WRAP_WORD'
+      key tabs-size = @u 8
+      key insert-spaces = @b false
+      key auto-indent = @b false
+      key display-line-numbers = @b false
+      key highlight-current-line = @b false
+      key bracket-matching = @b false
+      key display-right-margin = @b false
+      key right-margin-position = @u 80
+      key smart-home-end = @s 'after'
+      key writable-vfs-schemes = @as ['dav', 'davs', 'ftp', 'sftp', 'smb', 'ssh']
+      key restore-cursor-position = @b true
+      key syntax-highlighting = @b true
+      key search-highlighting = @b true
+
+    child ui:
+      key toolbar-visible = @b true
+      key toolbar-buttons-style = @s '@TOOLBAR_STYLE@'
+      key statusbar-visible = @b true
+      key side-pane-visible = @b false
+      key bottom-pane-visible = @b false
+      key max-recents = @u 5
+
+    child print:
+      key print-syntax-highlighting = @b true
+      key print-header = @b true
+      key print-wrap-mode = @s 'GTK_WRAP_WORD'
+      key print-line-numbers = @u 0
+      key print-font-body-pango = @s 'Monospace 9'
+      key print-font-header-pango = @s 'Sans 11'
+      key print-font-numbers-pango = @s 'Sans 8'
+
+    child encodings:
+      key auto-detected = @as ['UTF-8', 'CURRENT', 'ISO-8859-15', 'UTF-16']
+      key shown-in-menu = @as ['ISO-8859-15']
+
+  child state:
+    child window:
+      key state = @i 0
+      key size = @(ii) (650, 500)
+      key side-panel-size = @i 200
+      key side-panel-active-page = @i 0
+      key bottom-panel-size = @i 140
+      key bottom-panel-active-page = @i 0
+
+    child file-filter:
+      key filter-id = @i 0
+    
+    child history-entry:
+      key search-for-entry = @as ['']
+      key replace-with-entry = @as ['']
+
+  child plugins:
+    key active-plugins = @as [@ACTIVE_PLUGINS@]
+
+schema org.gnome.Desktop.Lockdown:
+  path /desktop/gnome/lockdown/
+  
+  key disable-command-line = @b false
+  key disable-printing = @b false
+  key disable-print-setup = @b false
+  key disable-save-to-disk = @b false
+
+schema org.gnome.Desktop.Interface:
+  path /desktop/gnome/interface/
+  
+  key monospace-font-name = @s 'Monospace 10'

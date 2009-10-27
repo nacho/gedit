@@ -38,11 +38,11 @@
 
 #include "gedit-print-job.h"
 #include "gedit-debug.h"
-#include "gedit-prefs-manager.h"
 #include "gedit-print-preview.h"
 #include "gedit-marshal.h"
 #include "gedit-utils.h"
 #include "gedit-dirs.h"
+#include "gedit-settings.h"
 
 
 #define GEDIT_PRINT_JOB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
@@ -51,6 +51,8 @@
 
 struct _GeditPrintJobPrivate
 {
+	GSettings                *print_settings;
+
 	GeditView                *view;
 	GeditDocument            *doc;
 
@@ -167,6 +169,20 @@ gedit_print_job_finalize (GObject *object)
 	G_OBJECT_CLASS (gedit_print_job_parent_class)->finalize (object);
 }
 
+static void
+gedit_print_job_dispose (GObject *object)
+{
+	GeditPrintJob *job = GEDIT_PRINT_JOB (object);
+	
+	if (job->priv->print_settings != NULL)
+	{
+		g_object_unref (job->priv->print_settings);
+		job->priv->print_settings = NULL;
+	}
+	
+	G_OBJECT_CLASS (gedit_print_job_parent_class)->dispose (object);
+}
+
 static void 
 gedit_print_job_class_init (GeditPrintJobClass *klass)
 {
@@ -177,6 +193,7 @@ gedit_print_job_class_init (GeditPrintJobClass *klass)
 	object_class->get_property = gedit_print_job_get_property;
 	object_class->set_property = gedit_print_job_set_property;
 	object_class->finalize = gedit_print_job_finalize;
+	object_class->finalize = gedit_print_job_dispose;
 
 	g_object_class_install_property (object_class,
 					 PROP_VIEW,
@@ -229,15 +246,8 @@ static void
 line_numbers_checkbutton_toggled (GtkToggleButton *button,
 				  GeditPrintJob   *job)
 {
-	if (gtk_toggle_button_get_active (button))
-	{
-		gtk_widget_set_sensitive (job->priv->line_numbers_hbox, 
-					  gedit_prefs_manager_print_line_numbers_can_set ());
-	}
-	else
-	{
-		gtk_widget_set_sensitive (job->priv->line_numbers_hbox, FALSE);
-	}
+	gtk_widget_set_sensitive (job->priv->line_numbers_hbox,
+				  gtk_toggle_button_get_active (button));
 }
 
 static void
@@ -267,38 +277,30 @@ restore_button_clicked (GtkButton     *button,
 			GeditPrintJob *job)
 
 {
-	if (gedit_prefs_manager_print_font_body_can_set ())
-	{
-		const gchar *font;
-
-		font = gedit_prefs_manager_get_default_print_font_body ();
-
-		gtk_font_button_set_font_name (
-				GTK_FONT_BUTTON (job->priv->body_fontbutton),
-				font);
-	}
+	gchar *body, *header, *numbers;
 	
-	if (gedit_prefs_manager_print_font_header_can_set ())
-	{
-		const gchar *font;
+	body = g_settings_get_string (job->priv->print_settings,
+				      GEDIT_SETTINGS_PRINT_FONT_BODY_PANGO);
+	header = g_settings_get_string (job->priv->print_settings,
+					GEDIT_SETTINGS_PRINT_FONT_HEADER_PANGO);
+	numbers = g_settings_get_string (job->priv->print_settings,
+					 GEDIT_SETTINGS_PRINT_FONT_NUMBERS_PANGO);
 
-		font = gedit_prefs_manager_get_default_print_font_header ();
+	gtk_font_button_set_font_name (
+			GTK_FONT_BUTTON (job->priv->body_fontbutton),
+			body);
 
-		gtk_font_button_set_font_name (
-				GTK_FONT_BUTTON (job->priv->headers_fontbutton),
-				font);
-	}
+	gtk_font_button_set_font_name (
+			GTK_FONT_BUTTON (job->priv->headers_fontbutton),
+			header);
 
-	if (gedit_prefs_manager_print_font_numbers_can_set ())
-	{
-		const gchar *font;
-
-		font = gedit_prefs_manager_get_default_print_font_numbers ();
-
-		gtk_font_button_set_font_name (
-				GTK_FONT_BUTTON (job->priv->numbers_fontbutton),
-				font);
-	}
+	gtk_font_button_set_font_name (
+			GTK_FONT_BUTTON (job->priv->numbers_fontbutton),
+			numbers);
+	
+	g_free (body);
+	g_free (header);
+	g_free (numbers);
 }
 
 static GObject *
@@ -308,11 +310,12 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 	gboolean ret;
 	GtkWidget *widget;
 	GtkWidget *error_widget;
-	gchar *font;
 	gint line_numbers;
-	gboolean can_set;
 	GtkWrapMode wrap_mode;
 	gchar *file;
+	gboolean syntax_hl;
+	gboolean print_header;
+	gchar *font_body, *font_header, *font_numbers;
 	gchar *root_objects[] = {
 		"adjustment1",
 		"contents",
@@ -347,31 +350,37 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 		return G_OBJECT (error_widget);
 	}
 
+	/* Get all settings values */
+	syntax_hl = g_settings_get_boolean (job->priv->print_settings,
+					    GEDIT_SETTINGS_PRINT_SYNTAX_HIGHLIGHTING);
+	print_header = g_settings_get_boolean (job->priv->print_settings,
+					       GEDIT_SETTINGS_PRINT_HEADER);
+	g_settings_get (job->priv->print_settings, GEDIT_SETTINGS_PRINT_LINE_NUMBERS,
+			"u", &line_numbers);
+	font_body = g_settings_get_string (job->priv->print_settings,
+					   GEDIT_SETTINGS_PRINT_FONT_BODY_PANGO);
+	font_header = g_settings_get_string (job->priv->print_settings,
+					     GEDIT_SETTINGS_PRINT_FONT_HEADER_PANGO);
+	font_numbers = g_settings_get_string (job->priv->print_settings,
+					      GEDIT_SETTINGS_PRINT_FONT_NUMBERS_PANGO);
+
 	/* Print syntax */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (job->priv->syntax_checkbutton),
-				      gedit_prefs_manager_get_print_syntax_hl ());
-	gtk_widget_set_sensitive (job->priv->syntax_checkbutton,
-				  gedit_prefs_manager_print_syntax_hl_can_set ());
+				      syntax_hl);
 
 	/* Print page headers */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (job->priv->page_header_checkbutton),
-				      gedit_prefs_manager_get_print_header ());
-	gtk_widget_set_sensitive (job->priv->page_header_checkbutton,
-				  gedit_prefs_manager_print_header_can_set ());
+				      print_header);
 
 	/* Line numbers */
-	line_numbers =  gedit_prefs_manager_get_print_line_numbers ();
-	can_set = gedit_prefs_manager_print_line_numbers_can_set ();
-
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (job->priv->line_numbers_checkbutton),
 				      line_numbers > 0);
-	gtk_widget_set_sensitive (job->priv->line_numbers_checkbutton, can_set);
 
 	if (line_numbers > 0)
 	{
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (job->priv->line_numbers_spinbutton),
 					   (guint) line_numbers);
-		gtk_widget_set_sensitive (job->priv->line_numbers_hbox, can_set);	
+		gtk_widget_set_sensitive (job->priv->line_numbers_hbox, TRUE);
 	}
 	else
 	{
@@ -381,8 +390,9 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 	}
 
 	/* Text wrapping */
-	wrap_mode = gedit_prefs_manager_get_print_wrap_mode ();
-
+	wrap_mode = gedit_settings_get_wrap_mode (job->priv->print_settings,
+						  GEDIT_SETTINGS_WRAP_MODE);
+	
 	switch (wrap_mode)
 	{
 		case GTK_WRAP_WORD:
@@ -404,39 +414,21 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 				GTK_TOGGLE_BUTTON (job->priv->do_not_split_checkbutton), TRUE);
 	}
 
-	can_set = gedit_prefs_manager_print_wrap_mode_can_set ();
-
-	gtk_widget_set_sensitive (job->priv->text_wrapping_checkbutton, can_set);
 	gtk_widget_set_sensitive (job->priv->do_not_split_checkbutton, 
-				  can_set && (wrap_mode != GTK_WRAP_NONE));
+				  wrap_mode != GTK_WRAP_NONE);
 
 	/* Set initial values */
-	font = gedit_prefs_manager_get_print_font_body ();
 	gtk_font_button_set_font_name (GTK_FONT_BUTTON (job->priv->body_fontbutton),
-				       font);
-	g_free (font);
+				       font_body);
+	g_free (font_body);
 
-	font = gedit_prefs_manager_get_print_font_header ();
 	gtk_font_button_set_font_name (GTK_FONT_BUTTON (job->priv->headers_fontbutton),
-				       font);
-	g_free (font);
+				       font_header);
+	g_free (font_header);
 
-	font = gedit_prefs_manager_get_print_font_numbers ();
 	gtk_font_button_set_font_name (GTK_FONT_BUTTON (job->priv->numbers_fontbutton),
-				       font);
-	g_free (font);
-
-	can_set = gedit_prefs_manager_print_font_body_can_set ();
-	gtk_widget_set_sensitive (job->priv->body_fontbutton, can_set);
-	gtk_widget_set_sensitive (job->priv->body_font_label, can_set);
-
-	can_set = gedit_prefs_manager_print_font_header_can_set ();
-	gtk_widget_set_sensitive (job->priv->headers_fontbutton, can_set);
-	gtk_widget_set_sensitive (job->priv->headers_font_label, can_set);
-
-	can_set = gedit_prefs_manager_print_font_numbers_can_set ();
-	gtk_widget_set_sensitive (job->priv->numbers_fontbutton, can_set);
-	gtk_widget_set_sensitive (job->priv->numbers_font_label, can_set);
+				       font_numbers);
+	g_free (font_numbers);
 
 	g_signal_connect (job->priv->line_numbers_checkbutton,
 			  "toggled",
@@ -463,39 +455,59 @@ custom_widget_apply_cb (GtkPrintOperation *operation,
 			GtkWidget         *widget,
 			GeditPrintJob     *job)
 {
-	gedit_prefs_manager_set_print_syntax_hl (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->syntax_checkbutton)));
+	gboolean syntax, page_header;
+	const gchar *body, *header, *numbers;
 
-	gedit_prefs_manager_set_print_header (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->page_header_checkbutton)));
+	syntax = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->syntax_checkbutton));
+	page_header = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->page_header_checkbutton));
+	body = gtk_font_button_get_font_name (GTK_FONT_BUTTON (job->priv->body_fontbutton));
+	header = gtk_font_button_get_font_name (GTK_FONT_BUTTON (job->priv->headers_fontbutton));
+	numbers = gtk_font_button_get_font_name (GTK_FONT_BUTTON (job->priv->numbers_fontbutton));
+
+	g_settings_set_boolean (job->priv->print_settings,
+				GEDIT_SETTINGS_PRINT_SYNTAX_HIGHLIGHTING, syntax);
+	g_settings_set_boolean (job->priv->print_settings, GEDIT_SETTINGS_PRINT_HEADER,
+				page_header);
+	g_settings_set_string (job->priv->print_settings, GEDIT_SETTINGS_PRINT_FONT_BODY_PANGO,
+			       body);
+	g_settings_set_string (job->priv->print_settings, GEDIT_SETTINGS_PRINT_FONT_HEADER_PANGO,
+			       header);
+	g_settings_set_string (job->priv->print_settings, GEDIT_SETTINGS_PRINT_FONT_NUMBERS_PANGO,
+			       numbers);
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->line_numbers_checkbutton)))
 	{
-		gedit_prefs_manager_set_print_line_numbers (
-			MAX (1, gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (job->priv->line_numbers_spinbutton))));
+		g_settings_set (job->priv->print_settings,
+				GEDIT_SETTINGS_PRINT_LINE_NUMBERS,
+			"u", MAX (1, gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (job->priv->line_numbers_spinbutton))));
 	}
 	else
 	{
-		gedit_prefs_manager_set_print_line_numbers (0);
+		g_settings_set (job->priv->print_settings,
+				GEDIT_SETTINGS_PRINT_LINE_NUMBERS, "u", 0);
 	}
 
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->text_wrapping_checkbutton)))
 	{
-		gedit_prefs_manager_set_print_wrap_mode (GTK_WRAP_NONE);
+		gedit_settings_set_wrap_mode (job->priv->print_settings,
+					      GEDIT_SETTINGS_PRINT_WRAP_MODE,
+					      GTK_WRAP_NONE);
 	}
 	else
 	{
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->do_not_split_checkbutton)))
 		{
-			gedit_prefs_manager_set_print_wrap_mode (GTK_WRAP_WORD);
+			gedit_settings_set_wrap_mode (job->priv->print_settings,
+						      GEDIT_SETTINGS_PRINT_WRAP_MODE,
+						      GTK_WRAP_WORD);
 		}
 		else
 		{
-			gedit_prefs_manager_set_print_wrap_mode (GTK_WRAP_CHAR);
-		}	
+			gedit_settings_set_wrap_mode (job->priv->print_settings,
+						      GEDIT_SETTINGS_PRINT_WRAP_MODE,
+						      GTK_WRAP_CHAR);
+		}
 	}
-
-	gedit_prefs_manager_set_print_font_body (gtk_font_button_get_font_name (GTK_FONT_BUTTON (job->priv->body_fontbutton)));
-	gedit_prefs_manager_set_print_font_header (gtk_font_button_get_font_name (GTK_FONT_BUTTON (job->priv->headers_fontbutton)));
-	gedit_prefs_manager_set_print_font_numbers (gtk_font_button_get_font_name (GTK_FONT_BUTTON (job->priv->numbers_fontbutton)));
 }
 
 static void
@@ -504,21 +516,37 @@ create_compositor (GeditPrintJob *job)
 	gchar *print_font_body;
 	gchar *print_font_header;
 	gchar *print_font_numbers;
+	gboolean syntax_hl;
+	GtkWrapMode wrap_mode;
+	guint print_line_numbers;
+	gboolean print_header;
 	
 	/* Create and initialize print compositor */
-	print_font_body = gedit_prefs_manager_get_print_font_body ();
-	print_font_header = gedit_prefs_manager_get_print_font_header ();
-	print_font_numbers = gedit_prefs_manager_get_print_font_numbers ();
+	print_font_body = g_settings_get_string (job->priv->print_settings,
+						 GEDIT_SETTINGS_PRINT_FONT_BODY_PANGO);
+	print_font_header = g_settings_get_string (job->priv->print_settings,
+						   GEDIT_SETTINGS_PRINT_FONT_HEADER_PANGO);
+	print_font_numbers = g_settings_get_string (job->priv->print_settings,
+						    GEDIT_SETTINGS_PRINT_FONT_NUMBERS_PANGO);
+	syntax_hl = g_settings_get_boolean (job->priv->print_settings,
+					    GEDIT_SETTINGS_PRINT_SYNTAX_HIGHLIGHTING);
+	g_settings_get (job->priv->print_settings, GEDIT_SETTINGS_PRINT_LINE_NUMBERS,
+			"u", &print_line_numbers);
+	print_header = g_settings_get_boolean (job->priv->print_settings,
+					       GEDIT_SETTINGS_PRINT_HEADER);
+	
+	wrap_mode = gedit_settings_get_wrap_mode (job->priv->print_settings,
+						  GEDIT_SETTINGS_WRAP_MODE);
 	
 	job->priv->compositor = GTK_SOURCE_PRINT_COMPOSITOR (
 					g_object_new (GTK_TYPE_SOURCE_PRINT_COMPOSITOR,
 						     "buffer", GTK_SOURCE_BUFFER (job->priv->doc),
 						     "tab-width", gtk_source_view_get_tab_width (GTK_SOURCE_VIEW (job->priv->view)),
 						     "highlight-syntax", gtk_source_buffer_get_highlight_syntax (GTK_SOURCE_BUFFER (job->priv->doc)) &&
-					   				 gedit_prefs_manager_get_print_syntax_hl (),
-						     "wrap-mode", gedit_prefs_manager_get_print_wrap_mode (),
-						     "print-line-numbers", gedit_prefs_manager_get_print_line_numbers (),
-						     "print-header", gedit_prefs_manager_get_print_header (),
+									 syntax_hl,
+						     "wrap-mode", wrap_mode,
+						     "print-line-numbers", print_line_numbers,
+						     "print-header", print_header,
 						     "print-footer", FALSE,
 						     "body-font-name", print_font_body,
 						     "line-numbers-font-name", print_font_numbers,
@@ -529,7 +557,7 @@ create_compositor (GeditPrintJob *job)
 	g_free (print_font_header);
 	g_free (print_font_numbers);
 	
-	if (gedit_prefs_manager_get_print_header ())
+	if (print_header)
 	{
 		gchar *doc_name;
 		gchar *name_to_display;
@@ -552,7 +580,7 @@ create_compositor (GeditPrintJob *job)
 		g_free (doc_name);
 		g_free (name_to_display);
 		g_free (left);
-	}		
+	}
 }
 
 static void
@@ -803,6 +831,8 @@ static void
 gedit_print_job_init (GeditPrintJob *job)
 {
 	job->priv = GEDIT_PRINT_JOB_GET_PRIVATE (job);
+	
+	job->priv->print_settings = g_settings_new ("org.gnome.gedit.preferences.print");
 	
 	job->priv->status = GEDIT_PRINT_JOB_STATUS_INIT;
 	

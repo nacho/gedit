@@ -38,7 +38,6 @@
 #include <glib/gi18n.h>
 
 #include "gedit-app.h"
-#include "gedit-prefs-manager-app.h"
 #include "gedit-commands.h"
 #include "gedit-notebook.h"
 #include "gedit-debug.h"
@@ -46,6 +45,7 @@
 #include "gedit-enum-types.h"
 #include "gedit-dirs.h"
 #include "gseal-gtk-compat.h"
+#include "gedit-settings.h"
 
 #ifdef OS_OSX
 #include "gedit-app-osx.h"
@@ -78,6 +78,9 @@ struct _GeditAppPrivate
 
 	GtkPageSetup      *page_setup;
 	GtkPrintSettings  *print_settings;
+	
+	GSettings         *settings;
+	GSettings         *window_settings;
 };
 
 G_DEFINE_ABSTRACT_TYPE(GeditApp, gedit_app, G_TYPE_INITIALLY_UNOWNED)
@@ -95,6 +98,26 @@ gedit_app_finalize (GObject *object)
 		g_object_unref (app->priv->print_settings);
 
 	G_OBJECT_CLASS (gedit_app_parent_class)->finalize (object);
+}
+
+static void
+gedit_app_dispose (GObject *object)
+{
+	GeditApp *app = GEDIT_APP (object); 
+
+	if (app->priv->window_settings != NULL)
+	{
+		g_object_unref (app->priv->window_settings);
+		app->priv->window_settings = NULL;
+	}
+
+	if (app->priv->settings != NULL)
+	{
+		g_object_unref (app->priv->settings);
+		app->priv->settings = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_app_parent_class)->dispose (object);
 }
 
 static void
@@ -229,6 +252,7 @@ gedit_app_class_init (GeditAppClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->finalize = gedit_app_finalize;
+	object_class->dispose = gedit_app_dispose;
 	object_class->get_property = gedit_app_get_property;
 	object_class->constructor = gedit_app_constructor;
 
@@ -456,9 +480,13 @@ gedit_app_init (GeditApp *app)
 	app->priv = GEDIT_APP_GET_PRIVATE (app);
 
 	load_accels ();
+	
+	/* Load settings */
+	app->priv->settings = gedit_settings_new ();
+	app->priv->window_settings = g_settings_new ("org.gnome.gedit.state.window");
 
 	/* initial lockdown state */
-	app->priv->lockdown = gedit_prefs_manager_get_lockdown ();
+	app->priv->lockdown = gedit_settings_get_lockdown (GEDIT_SETTINGS (app->priv->settings));
 }
 
 /**
@@ -644,17 +672,20 @@ gedit_app_create_window_real (GeditApp    *app,
 		GdkWindowState state;
 		gint w, h;
 
-		state = gedit_prefs_manager_get_window_state ();
+		state = g_settings_get_int (app->priv->window_settings,
+					    GEDIT_SETTINGS_WINDOW_STATE);
 
 		if ((state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
 		{
-			gedit_prefs_manager_get_default_window_size (&w, &h);
+			_gedit_window_get_default_size (&w, &h);
 			gtk_window_set_default_size (GTK_WINDOW (window), w, h);
 			gtk_window_maximize (GTK_WINDOW (window));
 		}
 		else
 		{
-			gedit_prefs_manager_get_window_size (&w, &h);
+			g_settings_get (app->priv->window_settings,
+					GEDIT_SETTINGS_WINDOW_SIZE,
+					"(ii)", &w, &h);
 			gtk_window_set_default_size (GTK_WINDOW (window), w, h);
 			gtk_window_unmaximize (GTK_WINDOW (window));
 		}
@@ -1041,6 +1072,14 @@ _gedit_app_set_default_print_settings (GeditApp         *app,
 		g_object_unref (app->priv->print_settings);
 
 	app->priv->print_settings = g_object_ref (settings);
+}
+
+GSettings *
+_gedit_app_get_settings (GeditApp *app)
+{
+	g_return_val_if_fail (GEDIT_IS_APP (app), NULL);
+
+	return app->priv->settings;
 }
 
 /* ex:ts=8:noet: */

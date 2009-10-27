@@ -375,7 +375,7 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 		return;
 	}
 
-	dlg->priv->search_entry = gedit_history_entry_new ("gedit2_search_for_entry",
+	dlg->priv->search_entry = gedit_history_entry_new ("search-for-entry",
 							   TRUE);
 	gtk_widget_set_size_request (dlg->priv->search_entry, 300, -1);
 	gedit_history_entry_set_escape_func
@@ -391,7 +391,7 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 				   dlg->priv->search_entry,
 				   1, 2, 0, 1);
 
-	dlg->priv->replace_entry = gedit_history_entry_new ("gedit2_replace_with_entry",
+	dlg->priv->replace_entry = gedit_history_entry_new ("replace-with-entry",
 							    TRUE);
 	gedit_history_entry_set_escape_func
 			(GEDIT_HISTORY_ENTRY (dlg->priv->replace_entry),

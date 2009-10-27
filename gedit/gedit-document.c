@@ -40,7 +40,7 @@
 #include <glib/gi18n.h>
 #include <gtksourceview/gtksourceiter.h>
 
-#include "gedit-prefs-manager-app.h"
+#include "gedit-settings.h"
 #include "gedit-document.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
@@ -103,7 +103,10 @@ static void	delete_range_cb 		(GeditDocument *doc,
 			     
 struct _GeditDocumentPrivate
 {
+	GSettings   *editor_settings;
+
 	GFile       *location;
+
 	gint 	     untitled_number;
 	gchar       *short_name;
 
@@ -287,6 +290,12 @@ gedit_document_dispose (GObject *object)
 	{
 		g_object_unref (doc->priv->loader);
 		doc->priv->loader = NULL;
+	}
+	
+	if (doc->priv->editor_settings)
+	{
+		g_object_unref (doc->priv->editor_settings);
+		doc->priv->editor_settings = NULL;
 	}
 
 	if (doc->priv->metadata_info != NULL)
@@ -689,8 +698,15 @@ set_language (GeditDocument     *doc,
 	gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (doc), lang);
 
 	if (lang != NULL)
+	{
+		gboolean syntax_hl;
+		
+		syntax_hl = g_settings_get_boolean (doc->priv->editor_settings,
+						    GEDIT_SETTINGS_SYNTAX_HIGHLIGHTING);
+		
 		gtk_source_buffer_set_highlight_syntax (GTK_SOURCE_BUFFER (doc),
-				 gedit_prefs_manager_get_enable_syntax_highlighting ());
+							syntax_hl);
+	}
 	else
 		gtk_source_buffer_set_highlight_syntax (GTK_SOURCE_BUFFER (doc), 
 				 FALSE);
@@ -733,14 +749,14 @@ set_encoding (GeditDocument       *doc,
 }
 
 static GtkSourceStyleScheme *
-get_default_style_scheme (void)
+get_default_style_scheme (GSettings *editor_settings)
 {
 	gchar *scheme_id;
 	GtkSourceStyleScheme *def_style;
 	GtkSourceStyleSchemeManager *manager;
 
 	manager = gedit_get_style_scheme_manager ();
-	scheme_id = gedit_prefs_manager_get_source_style_scheme ();
+	scheme_id = g_settings_get_string (editor_settings, GEDIT_SETTINGS_SCHEME);
 	def_style = gtk_source_style_scheme_manager_get_scheme (manager,
 								scheme_id);
 
@@ -887,10 +903,15 @@ static void
 gedit_document_init (GeditDocument *doc)
 {
 	GtkSourceStyleScheme *style_scheme;
+	gint undo_actions;
+	gboolean bracket_matching;
+	gboolean search_hl;
 
 	gedit_debug (DEBUG_DOCUMENT);
 
 	doc->priv = GEDIT_DOCUMENT_GET_PRIVATE (doc);
+	
+	doc->priv->editor_settings = g_settings_new ("org.gnome.gedit.preferences.editor");
 
 	doc->priv->location = NULL;
 	doc->priv->untitled_number = get_untitled_number ();
@@ -917,16 +938,23 @@ gedit_document_init (GeditDocument *doc)
 
 	doc->priv->newline_type = GEDIT_DOCUMENT_NEWLINE_TYPE_DEFAULT;
 
+	g_settings_get (doc->priv->editor_settings, GEDIT_SETTINGS_MAX_UNDO_ACTIONS,
+			"u", &undo_actions);
+	bracket_matching = g_settings_get_boolean (doc->priv->editor_settings,
+						   GEDIT_SETTINGS_BRACKET_MATCHING);
+	search_hl = g_settings_get_boolean (doc->priv->editor_settings,
+					    GEDIT_SETTINGS_SEARCH_HIGHLIGHTING);
+
 	gtk_source_buffer_set_max_undo_levels (GTK_SOURCE_BUFFER (doc), 
-					       gedit_prefs_manager_get_undo_actions_limit ());
+					       undo_actions);
 
 	gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (doc), 
-							   gedit_prefs_manager_get_bracket_matching ());
+							   bracket_matching);
 
 	gedit_document_set_enable_search_highlighting (doc,
-						       gedit_prefs_manager_get_enable_search_highlighting ());
+						       search_hl);
 
-	style_scheme = get_default_style_scheme ();
+	style_scheme = get_default_style_scheme (doc->priv->editor_settings);
 	if (style_scheme != NULL)
 		gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (doc),
 						    style_scheme);
@@ -1256,6 +1284,7 @@ document_loader_loaded (GeditDocumentLoader *loader,
 	{
 		GtkTextIter iter;
 		GFileInfo *info;
+		gboolean restore_cursor;
 		const gchar *content_type = NULL;
 		gboolean read_only = FALSE;
 		GTimeVal mtime = {0, 0};
@@ -1291,6 +1320,9 @@ document_loader_loaded (GeditDocumentLoader *loader,
 		set_newline_type (doc,
 		                  gedit_document_loader_get_newline_type (loader));
 
+		restore_cursor = g_settings_get_boolean (doc->priv->editor_settings,
+							 GEDIT_SETTINGS_RESTORE_CURSOR_POSITION);
+
 		/* move the cursor at the requested line if any */
 		if (doc->priv->requested_line_pos > 0)
 		{
@@ -1305,7 +1337,7 @@ document_loader_loaded (GeditDocumentLoader *loader,
 								 column);
 		}
 		/* else, if enabled, to the position stored in the metadata */
-		else if (gedit_prefs_manager_get_restore_cursor_position ())
+		else if (restore_cursor)
 		{
 			gchar *pos;
 			gint offset;
