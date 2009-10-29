@@ -46,7 +46,10 @@
 #include "gedit-notebook.h"
 #include "gedit-marshal.h"
 #include "gedit-window.h"
+
+#ifdef BUILD_SPINNER
 #include "gedit-spinner.h"
+#endif
 
 #define AFTER_ALL_TABS -1
 #define NOT_IN_APP_WINDOWS -2
@@ -823,7 +826,11 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GtkWidget *hbox)
 		gtk_widget_hide (GTK_WIDGET (icon));
 		
 		gtk_widget_show (spinner);
+#ifdef BUILD_SPINNER
 		gedit_spinner_start (GEDIT_SPINNER (spinner));
+#else
+		gtk_spinner_start (GTK_SPINNER (spinner));
+#endif
 	}
 	else
 	{
@@ -838,7 +845,11 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GtkWidget *hbox)
 		gtk_widget_show (GTK_WIDGET (icon));
 		
 		gtk_widget_hide (spinner);
+#ifdef BUILD_SPINNER
 		gedit_spinner_stop (GEDIT_SPINNER (spinner));
+#else
+		gtk_spinner_stop (GTK_SPINNER (spinner));
+#endif
 	}
 }
 
@@ -908,8 +919,12 @@ build_tab_label (GeditNotebook *nb,
 			  tab);
 
 	/* setup spinner */
+#ifdef BUILD_SPINNER
 	spinner = gedit_spinner_new ();
 	gedit_spinner_set_size (GEDIT_SPINNER (spinner), GTK_ICON_SIZE_MENU);
+#else
+	spinner = gtk_spinner_new ();
+#endif
 	gtk_box_pack_start (GTK_BOX (label_hbox), spinner, FALSE, FALSE, 0);
 
 	/* setup site icon, empty by default */

@@ -261,6 +261,16 @@ fi
 
 AM_CONDITIONAL(BUILD_MESSAGE_AREA, test "$gtkatleast" = "no")
 
+dnl FIXME: Remove this when removing gedit-spinner
+
+if $PKG_CONFIG --atleast-version 2.19.0 gtk+-2.0; then
+       gtkatleast=
+else
+       gtkatleast=no
+fi
+
+AM_CONDITIONAL(BUILD_SPINNER, test "$gtkatleast" = "no")
+
 if test "$platform_osx" = "no" &&
    test "$os_win32" = no; then
 	PKG_CHECK_MODULES(EGG_SMCLIENT, [

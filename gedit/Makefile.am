@@ -72,7 +72,6 @@ NOINST_H_FILES =			\
 	gedit-print-job.h		\
 	gedit-print-preview.h		\
 	gedit-io-error-message-area.h	\
-	gedit-spinner.h			\
 	gedit-prefs-manager-private.h	\
 	gedittextregion.h		\
 	gedit-session.h			\
@@ -166,7 +165,6 @@ libgedit_la_SOURCES = 			\
 	gedit-print-preview.c		\
 	gedit-progress-message-area.c	\
 	gedit-session.c			\
-	gedit-spinner.c			\
 	gedit-statusbar.c		\
 	gedit-status-combo-box.c	\
 	gedit-style-scheme-manager.c	\
@@ -230,6 +228,11 @@ endif
 if BUILD_MESSAGE_AREA
 libgedit_la_SOURCES += gedit-message-area.c
 INST_H_FILES += gedit-message-area.h
+endif
+
+if BUILD_SPINNER
+libgedit_la_SOURCES += gedit-spinner.c
+NOINST_H_FILES += gedit-spinner.h
 endif
 
 -include $(top_srcdir)/git.mk
