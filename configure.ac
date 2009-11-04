@@ -274,6 +274,9 @@ else
 fi
 
 AM_CONDITIONAL(BUILD_SPINNER, test "$gtkatleast" = "no")
+if test "$gtkatleast" = "no"; then
+	AC_DEFINE([BUILD_SPINNER],[1],[Whether to use GeditSpinner instead of GtkSpinner])
+fi
 
 if test "$platform_osx" = "no" &&
    test "$os_win32" = no; then
