@@ -75,7 +75,7 @@ class ToolMenu(object):
 
         for item in directory.subdirs:
             action_name = 'ExternalToolDirectory%X' % id(item)
-            action = gtk.Action(action_name, item.name, None, None)
+            action = gtk.Action(action_name, item.name.replace('_', '__'), None, None)
             self._action_group.add_action(action)
 
             manager.add_ui(self._merge_id, path,
@@ -86,7 +86,7 @@ class ToolMenu(object):
 
         for item in directory.tools:
             action_name = 'ExternalToolTool%X' % id(item)
-            action = gtk.Action(action_name, item.name, item.comment, None)
+            action = gtk.Action(action_name, item.name.replace('_', '__'), item.comment, None)
             handler = action.connect("activate", capture_menu_action, self._window, item)
 
             action.set_data(self.ACTION_ITEM_DATA_KEY, item)
