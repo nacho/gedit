@@ -151,10 +151,10 @@ def buffer_word_boundary(buf):
         iter = buf.get_iter_at_mark(buf.get_insert())
         start = iter.copy()
         
-        if not iter.starts_word():
+        if not iter.starts_word() and (iter.inside_word() or iter.ends_word()):
                 start.backward_word_start()
         
-        if not iter.ends_word():
+        if not iter.ends_word() and iter.inside_word():
                 iter.forward_word_end()
                 
         return (start, iter)
