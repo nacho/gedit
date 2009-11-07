@@ -78,10 +78,7 @@ class Capture(gobject.GObject):
         if self.flags & self.CAPTURE_STDOUT:
             popen_args['stdout'] = subprocess.PIPE
         if self.flags & self.CAPTURE_STDERR:
-            if self.flags & self.CAPTURE_STDOUT:
-                popen_args['stderr'] = subprocess.STDOUT
-            else:
-                popen_args['stderr'] = subprocess.PIPE
+            popen_args['stderr'] = subprocess.PIPE
 
         self.tried_killing = False
         self.idle_write_id = 0
@@ -106,7 +103,7 @@ class Capture(gobject.GObject):
                                  gobject.IO_IN | gobject.IO_HUP,
                                  self.on_output)
 
-        elif self.flags & self.CAPTURE_STDERR:
+        if self.flags & self.CAPTURE_STDERR:
             # Set non blocking
             flags = fcntl.fcntl(self.pipe.stderr.fileno(), fcntl.F_GETFL) | os.O_NONBLOCK
             fcntl.fcntl(self.pipe.stderr.fileno(), fcntl.F_SETFL, flags)
