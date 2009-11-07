@@ -38,7 +38,7 @@
 #ifndef GEDIT_NOTEBOOK_H
 #define GEDIT_NOTEBOOK_H
 
-#include <gedit/gedit-tab.h>
+#include <gedit/gedit-page.h>
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -81,16 +81,18 @@ struct _GeditNotebookClass
         GtkNotebookClass parent_class;
 
 	/* Signals */
-	void	 (* tab_added)      (GeditNotebook *notebook,
-				     GeditTab      *tab);
-	void	 (* tab_removed)    (GeditNotebook *notebook,
-				     GeditTab      *tab);
-	void	 (* tab_detached)   (GeditNotebook *notebook,
-				     GeditTab      *tab);
-	void	 (* tabs_reordered) (GeditNotebook *notebook);
-	void	 (* tab_close_request)
-				    (GeditNotebook *notebook,
-				     GeditTab      *tab);
+	void	 (* gedit_page_added)
+				     (GeditNotebook *notebook,
+				      GeditPage     *page);
+	void	 (* gedit_page_removed)
+				     (GeditNotebook *notebook,
+				      GeditPage     *page);
+	void	 (* page_detached)   (GeditNotebook *notebook,
+				      GeditPage     *page);
+	void	 (* pages_reordered) (GeditNotebook *notebook);
+	void	 (* page_close_request)
+				     (GeditNotebook *notebook,
+				      GeditPage     *tab);
 };
 
 /*
@@ -100,29 +102,29 @@ GType		gedit_notebook_get_type		(void) G_GNUC_CONST;
 
 GtkWidget      *gedit_notebook_new		(void);
 
-void		gedit_notebook_add_tab		(GeditNotebook *nb,
-						 GeditTab      *tab,
+void		gedit_notebook_add_page		(GeditNotebook *nb,
+						 GeditPage     *page,
 						 gint           position,
 						 gboolean       jump_to);
 
-void		gedit_notebook_remove_tab	(GeditNotebook *nb,
-						 GeditTab      *tab);
+void		gedit_notebook_remove_page	(GeditNotebook *nb,
+						 GeditPage     *page);
 
-void		gedit_notebook_remove_all_tabs 	(GeditNotebook *nb);
+void		gedit_notebook_remove_all_pages	(GeditNotebook *nb);
 
-void		gedit_notebook_reorder_tab	(GeditNotebook *src,
-			    			 GeditTab      *tab,
+void		gedit_notebook_reorder_page	(GeditNotebook *src,
+			    			 GeditPage     *page,
 			    			 gint           dest_position);
 			    			 
-void            gedit_notebook_move_tab		(GeditNotebook *src,
+void            gedit_notebook_move_page	(GeditNotebook *src,
 						 GeditNotebook *dest,
-						 GeditTab      *tab,
+						 GeditPage     *tab,
 						 gint           dest_position);
 
 /* FIXME: do we really need this function ? */
-void		gedit_notebook_set_always_show_tabs	
+void		gedit_notebook_set_always_show_tabs
 						(GeditNotebook *nb,
-						 gboolean       show_tabs);
+						 gboolean       show_pages);
 
 void		gedit_notebook_set_close_buttons_sensitive
 						(GeditNotebook *nb,
@@ -131,11 +133,11 @@ void		gedit_notebook_set_close_buttons_sensitive
 gboolean	gedit_notebook_get_close_buttons_sensitive
 						(GeditNotebook *nb);
 
-void		gedit_notebook_set_tab_drag_and_drop_enabled
+void		gedit_notebook_set_page_drag_and_drop_enabled
 						(GeditNotebook *nb,
 						 gboolean       enable);
 
-gboolean	gedit_notebook_get_tab_drag_and_drop_enabled
+gboolean	gedit_notebook_get_page_drag_and_drop_enabled
 						(GeditNotebook *nb);
 
 G_END_DECLS

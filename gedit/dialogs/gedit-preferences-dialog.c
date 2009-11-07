@@ -44,7 +44,7 @@
 #include "gedit-preferences-dialog.h"
 #include "gedit-utils.h"
 #include "gedit-debug.h"
-#include "gedit-document.h"
+#include "gedit-document-interface.h"
 #include "gedit-style-scheme-manager.h"
 #include "gedit-plugin-manager.h"
 #include "gedit-help.h"

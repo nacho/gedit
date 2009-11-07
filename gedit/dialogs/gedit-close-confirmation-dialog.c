@@ -404,7 +404,7 @@ get_text_secondary_label (GeditDocument *doc)
 	glong  seconds;
 	gchar *secondary_msg;
 	
-	seconds = MAX (1, _gedit_document_get_seconds_since_last_save_or_load (doc));
+	seconds = MAX (1, gedit_document_get_seconds_since_last_save_or_load (doc));
 
 	if (seconds < 55)	
 	{

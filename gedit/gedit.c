@@ -369,7 +369,7 @@ on_message_received (const char *message,
 						   line_position);
 
 		if (new_document_option)
-			gedit_window_create_tab (window, TRUE);
+			gedit_window_create_page (window, TRUE);
 	}
 	else
 	{
@@ -379,7 +379,7 @@ on_message_received (const char *message,
 		if (doc == NULL ||
 		    !gedit_document_is_untouched (doc) ||
 		    new_document_option)
-			gedit_window_create_tab (window, TRUE);
+			gedit_window_create_page (window, TRUE);
 	}
 
 	/* set the proper interaction time on the window.
@@ -715,8 +715,8 @@ main (int argc, char *argv[])
 		}
 		else
 		{
-			gedit_debug_message (DEBUG_APP, "Create tab");
-			gedit_window_create_tab (window, TRUE);
+			gedit_debug_message (DEBUG_APP, "Create page");
+			gedit_window_create_page (window, TRUE);
 		}
 		
 		gedit_debug_message (DEBUG_APP, "Show window");
@@ -725,7 +725,7 @@ main (int argc, char *argv[])
 		free_command_line_data ();
 	}
 
-	gedit_debug_message (DEBUG_APP, "Start gtk-main");		
+	gedit_debug_message (DEBUG_APP, "Start gtk-main");
 	gtk_main();
 
 #ifndef G_OS_WIN32

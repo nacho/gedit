@@ -33,7 +33,7 @@
 #define __GEDIT_PRINT_JOB_H__
 
 #include <gtk/gtk.h>
-#include <gedit/gedit-view.h>
+#include <gedit/gedit-view-interface.h>
 
 G_BEGIN_DECLS
 

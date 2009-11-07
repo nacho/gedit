@@ -283,15 +283,18 @@ show_confirmation_dialog (GeditWindow *window)
 	if (unsaved_docs->next == NULL)
 	{
 		/* There is only one unsaved document */
-		GeditTab *tab;
+		GeditPage *page;
+		GeditViewContainer *container;
 		GeditDocument *doc;
 
 		doc = GEDIT_DOCUMENT (unsaved_docs->data);
 
-		tab = gedit_tab_get_from_document (doc);
-		g_return_if_fail (tab != NULL);
+		container = gedit_view_container_get_from_document (doc);
+		g_return_if_fail (container != NULL);
 
-		gedit_window_set_active_tab (window, tab);
+		page = gedit_page_get_from_container (container);
+
+		gedit_window_set_active_page (window, page);
 
 		dlg = gedit_close_confirmation_dialog_new_single (
 						GTK_WINDOW (window),
@@ -550,12 +553,12 @@ parse_window (GKeyFile *state_file, const char *group_name)
 					     "URI: %s (%s)",
 					     documents[i],
 					     jump_to ? "active" : "not active");
-			gedit_window_create_tab_from_uri (window,
-							  documents[i],
-							  NULL,
-							  0,
-							  FALSE,
-							  jump_to);
+			gedit_window_create_page_from_uri (window,
+							   documents[i],
+							   NULL,
+							   0,
+							   FALSE,
+							   jump_to);
 		}
 		g_strfreev (documents);
 	}

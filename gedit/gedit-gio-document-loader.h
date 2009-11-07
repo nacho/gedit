@@ -33,7 +33,7 @@
 #ifndef __GEDIT_GIO_DOCUMENT_LOADER_H__
 #define __GEDIT_GIO_DOCUMENT_LOADER_H__
 
-#include <gedit/gedit-document.h>
+#include <gedit/gedit-document-interface.h>
 #include "gedit-document-loader.h"
 
 G_BEGIN_DECLS

@@ -253,6 +253,7 @@ PKG_CHECK_MODULES(GEDIT, [
 	gtk+-2.0 >= 2.16.0
 	gtksourceview-2.0 >= 2.4.0
 	gconf-2.0 >= 1.1.11
+	webkit-1.0
 ])
 
 dnl FIXME: Remove this when removing gedit-message-area

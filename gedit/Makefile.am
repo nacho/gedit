@@ -75,14 +75,16 @@ NOINST_H_FILES =			\
 	gedit-prefs-manager-private.h	\
 	gedittextregion.h		\
 	gedit-session.h			\
-	gedit-dirs.h
+	gedit-dirs.h			\
+	gedit-web-view.h		\
+	gedit-data-binding.h
 
 INST_H_FILES =				\
 	gedit-app.h			\
 	gedit-commands.h		\
 	gedit-convert.h			\
 	gedit-debug.h			\
-	gedit-document.h 		\
+	gedit-document-interface.h	\
 	gedit-encodings.h		\
 	gedit-encodings-option-menu.h	\
 	gedit-file-chooser-dialog.h	\
@@ -100,9 +102,12 @@ INST_H_FILES =				\
 	gedit-progress-message-area.h	\
 	gedit-statusbar.h		\
 	gedit-status-combo-box.h	\
-	gedit-tab.h 			\
+	gedit-view-container.h 		\
 	gedit-utils.h 			\
-	gedit-view.h 			\
+	gedit-view-interface.h 		\
+	gedit-text-view.h		\
+	gedit-text-buffer.h		\
+	gedit-page.h			\
 	gedit-window.h
 
 headerdir = $(prefix)/include/gedit-@GEDIT_API_VERSION@/gedit
@@ -133,7 +138,7 @@ libgedit_la_SOURCES = 			\
 	gedit-convert.c			\
 	gedit-debug.c			\
 	gedit-dirs.c			\
-	gedit-document.c 		\
+	gedit-document-interface.c	\
 	gedit-document-loader.c		\
 	gedit-gio-document-loader.c	\
 	gedit-document-saver.c		\
@@ -168,11 +173,16 @@ libgedit_la_SOURCES = 			\
 	gedit-statusbar.c		\
 	gedit-status-combo-box.c	\
 	gedit-style-scheme-manager.c	\
-	gedit-tab.c 			\
+	gedit-view-container.c 		\
 	gedit-utils.c 			\
-	gedit-view.c 			\
+	gedit-view-interface.c 		\
+	gedit-text-view.c 		\
+	gedit-text-buffer.c		\
+	gedit-web-view.c		\
+	gedit-page.c			\
 	gedit-window.c			\
 	gedittextregion.c		\
+	gedit-data-binding.c		\
 	$(NOINST_H_FILES)		\
 	$(INST_H_FILES)
 

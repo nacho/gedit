@@ -39,24 +39,26 @@
 #include "gedit-commands.h"
 #include "gedit-window.h"
 #include "gedit-debug.h"
-#include "gedit-view.h"
+#include "gedit-view-interface.h"
 #include "dialogs/gedit-preferences-dialog.h"
 
 void
 _gedit_cmd_edit_undo (GtkAction   *action,
-		     GeditWindow *window)
+		      GeditWindow *window)
 {
+	GeditViewContainer *container;
+	GeditDocument *active_document;
 	GeditView *active_view;
-	GtkSourceBuffer *active_document;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	active_view = gedit_window_get_active_view (window);
-	g_return_if_fail (active_view);
+	container = gedit_window_get_active_view_container (window);
+	g_return_if_fail (container);
 
-	active_document = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view)));
+	active_document = gedit_view_container_get_document (container);
+	active_view = gedit_view_container_get_view (container);
 
-	gtk_source_buffer_undo (active_document);
+	gedit_document_undo (active_document);
 
 	gedit_view_scroll_to_cursor (active_view);
 
@@ -65,19 +67,21 @@ _gedit_cmd_edit_undo (GtkAction   *action,
 
 void
 _gedit_cmd_edit_redo (GtkAction   *action,
-		     GeditWindow *window)
+		      GeditWindow *window)
 {
+	GeditViewContainer *container;
+	GeditDocument *active_document;
 	GeditView *active_view;
-	GtkSourceBuffer *active_document;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	active_view = gedit_window_get_active_view (window);
-	g_return_if_fail (active_view);
+	container = gedit_window_get_active_view_container (window);
+	g_return_if_fail (container);
 
-	active_document = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view)));
+	active_document = gedit_view_container_get_document (container);
+	active_view = gedit_view_container_get_view (container);
 
-	gtk_source_buffer_redo (active_document);
+	gedit_document_redo (active_document);
 
 	gedit_view_scroll_to_cursor (active_view);
 

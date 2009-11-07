@@ -52,7 +52,7 @@ struct _GeditWindowPrivate
 	GtkWidget      *tab_width_combo;
 	GtkWidget      *language_combo;
 	
-	GeditMessageBus *message_bus;	
+	GeditMessageBus *message_bus;
 
 	/* Widgets for fullscreen mode */
 	GtkWidget      *fullscreen_controls;
@@ -60,7 +60,7 @@ struct _GeditWindowPrivate
 	gboolean        fullscreen_animation_enter;
 
 	/* statusbar and context ids for statusbar messages */
-	GtkWidget      *statusbar;	
+	GtkWidget      *statusbar;
 	guint           generic_message_cid;
 	guint           tip_message_cid;
 	guint 		tab_width_id;
@@ -85,13 +85,14 @@ struct _GeditWindowPrivate
 	guint           recents_menu_ui_id;
 	gulong          recents_handler_id;
 
-	GeditTab       *active_tab;
-	gint            num_tabs;
+	GeditPage      *active_page;
+	GeditViewContainer *active_container;
+	gint            num_pages;
 
-	gint            num_tabs_with_error;
+	gint            num_pages_with_error;
 
 	gint            width;
-	gint            height;	
+	gint            height;
 	GdkWindowState  window_state;
 
 	gint            side_panel_size;
@@ -105,7 +106,7 @@ struct _GeditWindowPrivate
 
 	GFile          *default_location;
 
-	gboolean        removing_tabs : 1;
+	gboolean        removing_pages : 1;
 	gboolean        dispose_has_run : 1;
 };
 

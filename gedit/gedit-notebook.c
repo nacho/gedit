@@ -65,7 +65,7 @@ struct _GeditNotebookPrivate
 	gint           drag_in_progress : 1;
 	gint	       always_show_tabs : 1;
 	gint           close_buttons_sensitive : 1;
-	gint           tab_drag_and_drop_enabled : 1;
+	gint           page_drag_and_drop_enabled : 1;
 };
 
 G_DEFINE_TYPE(GeditNotebook, gedit_notebook, GTK_TYPE_NOTEBOOK)
@@ -75,10 +75,10 @@ static void gedit_notebook_finalize (GObject *object);
 static gboolean gedit_notebook_change_current_page (GtkNotebook *notebook,
 						    gint         offset);
 
-static void move_current_tab_to_another_notebook  (GeditNotebook  *src,
-						   GeditNotebook  *dest,
-						   GdkEventMotion *event,
-						   gint            dest_position);
+static void move_current_page_to_another_notebook  (GeditNotebook  *src,
+						    GeditNotebook  *dest,
+						    GdkEventMotion *event,
+						    gint            dest_position);
 
 /* Local variables */
 static GdkCursor *cursor = NULL;
@@ -86,11 +86,11 @@ static GdkCursor *cursor = NULL;
 /* Signals */
 enum
 {
-	TAB_ADDED,
-	TAB_REMOVED,
-	TABS_REORDERED,
-	TAB_DETACHED,
-	TAB_CLOSE_REQUEST,
+	PAGE_ADDED,
+	PAGE_REMOVED,
+	PAGES_REORDERED,
+	PAGE_DETACHED,
+	PAGE_CLOSE_REQUEST,
 	LAST_SIGNAL
 };
 
@@ -106,57 +106,57 @@ gedit_notebook_class_init (GeditNotebookClass *klass)
 	
 	notebook_class->change_current_page = gedit_notebook_change_current_page;
 
-	signals[TAB_ADDED] =
-		g_signal_new ("tab_added",
+	signals[PAGE_ADDED] =
+		g_signal_new ("gedit-page-added",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (GeditNotebookClass, tab_added),
+			      G_STRUCT_OFFSET (GeditNotebookClass, gedit_page_added),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__OBJECT,
 			      G_TYPE_NONE,
 			      1,
-			      GEDIT_TYPE_TAB);
-	signals[TAB_REMOVED] =
-		g_signal_new ("tab_removed",
+			      GEDIT_TYPE_PAGE);
+	signals[PAGE_REMOVED] =
+		g_signal_new ("gedit-page_removed",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (GeditNotebookClass, tab_removed),
+			      G_STRUCT_OFFSET (GeditNotebookClass, gedit_page_removed),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__OBJECT,
 			      G_TYPE_NONE,
 			      1,
-			      GEDIT_TYPE_TAB);
-	signals[TAB_DETACHED] =
-		g_signal_new ("tab_detached",
+			      GEDIT_TYPE_PAGE);
+	signals[PAGE_DETACHED] =
+		g_signal_new ("page_detached",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (GeditNotebookClass, tab_detached),
+			      G_STRUCT_OFFSET (GeditNotebookClass, page_detached),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__OBJECT,
 			      G_TYPE_NONE,
 			      1,
-			      GEDIT_TYPE_TAB);
-	signals[TABS_REORDERED] =
-		g_signal_new ("tabs_reordered",
+			      GEDIT_TYPE_PAGE);
+	signals[PAGES_REORDERED] =
+		g_signal_new ("pages_reordered",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (GeditNotebookClass, tabs_reordered),
+			      G_STRUCT_OFFSET (GeditNotebookClass, pages_reordered),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
-	signals[TAB_CLOSE_REQUEST] =
-		g_signal_new ("tab-close-request",
+	signals[PAGE_CLOSE_REQUEST] =
+		g_signal_new ("page-close-request",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GeditNotebookClass, tab_close_request),
+			      G_STRUCT_OFFSET (GeditNotebookClass, page_close_request),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__OBJECT,
 			      G_TYPE_NONE,
 			      1,
-			      GEDIT_TYPE_TAB);
+			      GEDIT_TYPE_PAGE);
 
-	g_type_class_add_private (object_class, sizeof(GeditNotebookPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditNotebookPrivate));
 	
 	/* Set up a style for the close button with no focus padding. */
 	gtk_rc_parse_string (
@@ -218,9 +218,9 @@ is_in_notebook_window (GeditNotebook *notebook,
 }
 
 static gint
-find_tab_num_at_pos (GeditNotebook *notebook, 
-		     gint           abs_x, 
-		     gint           abs_y)
+find_page_num_at_pos (GeditNotebook *notebook, 
+		      gint           abs_x, 
+		      gint           abs_y)
 {
 	GtkPositionType tab_pos;
 	int page_num = 0;
@@ -282,10 +282,10 @@ find_tab_num_at_pos (GeditNotebook *notebook,
 }
 
 static gint 
-find_notebook_and_tab_at_pos (gint            abs_x, 
-			      gint            abs_y,
-			      GeditNotebook **notebook,
-			      gint           *page_num)
+find_notebook_and_page_at_pos (gint            abs_x, 
+			       gint            abs_y,
+			       GeditNotebook **notebook,
+			       gint           *page_num)
 {
 	*notebook = find_notebook_at_pointer (abs_x, abs_y);
 	if (*notebook == NULL)
@@ -293,7 +293,7 @@ find_notebook_and_tab_at_pos (gint            abs_x,
 		return NOT_IN_APP_WINDOWS;
 	}
 	
-	*page_num = find_tab_num_at_pos (*notebook, abs_x, abs_y);
+	*page_num = find_page_num_at_pos (*notebook, abs_x, abs_y);
 
 	if (*page_num < 0)
 	{
@@ -306,70 +306,70 @@ find_notebook_and_tab_at_pos (gint            abs_x,
 }
 
 /**
- * gedit_notebook_move_tab:
+ * gedit_notebook_move_page:
  * @src: a #GeditNotebook
  * @dest: a #GeditNotebook
- * @tab: a #GeditTab
+ * @page: a #GeditPage
  * @dest_position: the position for @tab
  *
- * Moves @tab from @src to @dest.
- * If dest_position is greater than or equal to the number of tabs 
- * of the destination nootebook or negative, tab will be moved to the 
- * end of the tabs.
+ * Moves @page from @src to @dest.
+ * If dest_position is greater than or equal to the number of pages 
+ * of the destination notebook or negative, page will be moved to the 
+ * end of the pages.
  */
 void
-gedit_notebook_move_tab (GeditNotebook *src,
-			 GeditNotebook *dest,
-			 GeditTab      *tab,
-			 gint           dest_position)
+gedit_notebook_move_page (GeditNotebook *src,
+			  GeditNotebook *dest,
+			  GeditPage     *page,
+			  gint           dest_position)
 {
-	g_return_if_fail (GEDIT_IS_NOTEBOOK (src));	
+	g_return_if_fail (GEDIT_IS_NOTEBOOK (src));
 	g_return_if_fail (GEDIT_IS_NOTEBOOK (dest));
 	g_return_if_fail (src != dest);
-	g_return_if_fail (GEDIT_IS_TAB (tab));
+	g_return_if_fail (GEDIT_IS_PAGE (page));
 
 	/* make sure the tab isn't destroyed while we move it */
-	g_object_ref (tab);
-	gedit_notebook_remove_tab (src, tab);
-	gedit_notebook_add_tab (dest, tab, dest_position, TRUE);
-	g_object_unref (tab);
+	g_object_ref (page);
+	gedit_notebook_remove_page (src, page);
+	gedit_notebook_add_page (dest, page, dest_position, TRUE);
+	g_object_unref (page);
 }
 
 /**
- * gedit_notebook_reorder_tab:
+ * gedit_notebook_reorder_page:
  * @src: a #GeditNotebook
- * @tab: a #GeditTab
- * @dest_position: the position for @tab
+ * @page: a #GeditPage
+ * @dest_position: the position for @page
  *
- * Reorders the page containing @tab, so that it appears in @dest_position position.
- * If dest_position is greater than or equal to the number of tabs 
+ * Reorders the page containing @page, so that it appears in @dest_position position.
+ * If dest_position is greater than or equal to the number of pages 
  * of the destination notebook or negative, tab will be moved to the 
- * end of the tabs.
+ * end of the pages.
  */
 void
-gedit_notebook_reorder_tab (GeditNotebook *src,
-			    GeditTab      *tab,
-			    gint           dest_position)
+gedit_notebook_reorder_page (GeditNotebook *src,
+			     GeditPage     *page,
+			     gint           dest_position)
 {
 	gint old_position;
 	
-	g_return_if_fail (GEDIT_IS_NOTEBOOK (src));	
-	g_return_if_fail (GEDIT_IS_TAB (tab));
+	g_return_if_fail (GEDIT_IS_NOTEBOOK (src));
+	g_return_if_fail (GEDIT_IS_PAGE (page));
 
-	old_position = gtk_notebook_page_num (GTK_NOTEBOOK (src), 
-				    	      GTK_WIDGET (tab));
-				    	      
+	old_position = gtk_notebook_page_num (GTK_NOTEBOOK (src),
+				    	      GTK_WIDGET (page));
+
 	if (old_position == dest_position)
 		return;
 
 	gtk_notebook_reorder_child (GTK_NOTEBOOK (src), 
-				    GTK_WIDGET (tab),
+				    GTK_WIDGET (page),
 				    dest_position);
 		
 	if (!src->priv->drag_in_progress)
 	{
 		g_signal_emit (G_OBJECT (src), 
-			       signals[TABS_REORDERED], 
+			       signals[PAGES_REORDERED], 
 			       0);
 	}
 }
@@ -394,8 +394,8 @@ drag_start (GeditNotebook *notebook,
 		gdk_pointer_grab (gtk_widget_get_window (GTK_WIDGET (notebook)),
 				  FALSE,
 				  GDK_BUTTON1_MOTION_MASK | GDK_BUTTON_RELEASE_MASK,
-				  NULL, 
-				  cursor, 
+				  NULL,
+				  cursor,
 				  time);
 	}
 }
@@ -405,8 +405,8 @@ drag_stop (GeditNotebook *notebook)
 {
 	if (notebook->priv->drag_in_progress)
 	{
-		g_signal_emit (G_OBJECT (notebook), 
-			       signals[TABS_REORDERED], 
+		g_signal_emit (G_OBJECT (notebook),
+			       signals[PAGES_REORDERED],
 			       0);
 	}
 
@@ -423,8 +423,8 @@ drag_stop (GeditNotebook *notebook)
  * here, instead we do it on drag_stop
  */
 static void
-move_current_tab (GeditNotebook *notebook,
-	          gint           dest_position)
+move_current_page (GeditNotebook *notebook,
+		   gint           dest_position)
 {
 	gint cur_page_num;
 
@@ -432,14 +432,14 @@ move_current_tab (GeditNotebook *notebook,
 
 	if (dest_position != cur_page_num)
 	{
-		GtkWidget *cur_tab;
+		GtkWidget *cur_page;
 		
-		cur_tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook),
-						     cur_page_num);
-						     
-		gedit_notebook_reorder_tab (GEDIT_NOTEBOOK (notebook),
-					    GEDIT_TAB (cur_tab),
-					    dest_position);
+		cur_page = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook),
+						      cur_page_num);
+		
+		gedit_notebook_reorder_page (GEDIT_NOTEBOOK (notebook),
+					     GEDIT_PAGE (cur_page),
+					     dest_position);
 	}
 }
 
@@ -454,7 +454,7 @@ motion_notify_cb (GeditNotebook  *notebook,
 
 	if (notebook->priv->drag_in_progress == FALSE)
 	{
-		if (notebook->priv->tab_drag_and_drop_enabled == FALSE)
+		if (notebook->priv->page_drag_and_drop_enabled == FALSE)
 			return FALSE;
 			
 		if (gtk_drag_check_threshold (GTK_WIDGET (notebook),
@@ -470,24 +470,24 @@ motion_notify_cb (GeditNotebook  *notebook,
 		return FALSE;
 	}
 
-	result = find_notebook_and_tab_at_pos ((gint)event->x_root,
-					       (gint)event->y_root,
-					       &dest, 
-					       &page_num);
+	result = find_notebook_and_page_at_pos ((gint)event->x_root,
+						(gint)event->y_root,
+						&dest, 
+						&page_num);
 
 	if (result != NOT_IN_APP_WINDOWS)
 	{
 		if (dest != notebook)
 		{
-			move_current_tab_to_another_notebook (notebook, 
-							      dest,
-						      	      event, 
-						      	      page_num);
+			move_current_page_to_another_notebook (notebook,
+							       dest,
+							       event,
+							       page_num);
 		}
 		else
 		{
 			g_return_val_if_fail (page_num >= -1, FALSE);
-			move_current_tab (notebook, page_num);
+			move_current_page (notebook, page_num);
 		}
 	}
 
@@ -495,16 +495,16 @@ motion_notify_cb (GeditNotebook  *notebook,
 }
 
 static void
-move_current_tab_to_another_notebook (GeditNotebook  *src,
-				      GeditNotebook  *dest,
-				      GdkEventMotion *event,
-				      gint            dest_position)
+move_current_page_to_another_notebook (GeditNotebook  *src,
+				       GeditNotebook  *dest,
+				       GdkEventMotion *event,
+				       gint            dest_position)
 {
-	GeditTab *tab;
+	GeditPage *page;
 	gint cur_page;
 
-	/* This is getting tricky, the tab was dragged in a notebook
-	 * in another window of the same app, we move the tab
+	/* This is getting tricky, the page was dragged in a notebook
+	 * in another window of the same app, we move the page
 	 * to that new notebook, and let this notebook handle the
 	 * drag
 	 */
@@ -512,8 +512,8 @@ move_current_tab_to_another_notebook (GeditNotebook  *src,
 	g_return_if_fail (dest != src);
 
 	cur_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (src));
-	tab = GEDIT_TAB (gtk_notebook_get_nth_page (GTK_NOTEBOOK (src), 
-						    cur_page));
+	page = GEDIT_PAGE (gtk_notebook_get_nth_page (GTK_NOTEBOOK (src),
+						      cur_page));
 
 	/* stop drag in origin window */
 	/* ungrab the pointer if it's grabbed */
@@ -524,7 +524,7 @@ move_current_tab_to_another_notebook (GeditNotebook  *src,
 	}
 	gtk_grab_remove (GTK_WIDGET (src));
 
-	gedit_notebook_move_tab (src, dest, tab, dest_position);
+	gedit_notebook_move_page (src, dest, page, dest_position);
 
 	/* start drag handling in dest notebook */
 	dest->priv->motion_notify_handler_id =
@@ -556,7 +556,7 @@ button_release_cb (GeditNotebook  *notebook,
 		{
 			/* Tab was detached */
 			g_signal_emit (G_OBJECT (notebook),
-				       signals[TAB_DETACHED], 
+				       signals[PAGE_DETACHED],
 				       0, 
 				       cur_page);
 		}
@@ -585,10 +585,10 @@ button_press_cb (GeditNotebook  *notebook,
 	if (notebook->priv->drag_in_progress)
 		return TRUE;
 
-	tab_clicked = find_tab_num_at_pos (notebook,
-					   event->x_root,
-					   event->y_root);
-					   
+	tab_clicked = find_page_num_at_pos (notebook,
+					    event->x_root,
+					    event->y_root);
+
 	if ((event->button == 1) && 
 	    (event->type == GDK_BUTTON_PRESS) && 
 	    (tab_clicked >= 0))
@@ -646,6 +646,7 @@ gedit_notebook_switch_page_cb (GtkNotebook     *notebook,
 {
 	GeditNotebook *nb = GEDIT_NOTEBOOK (notebook);
 	GtkWidget *child;
+	GeditViewContainer *container;
 	GeditView *view;
 
 	child = gtk_notebook_get_nth_page (notebook, page_num);
@@ -662,7 +663,8 @@ gedit_notebook_switch_page_cb (GtkNotebook     *notebook,
 						 child);
 
 	/* give focus to the view */
-	view = gedit_tab_get_view (GEDIT_TAB (child));
+	container = gedit_page_get_active_view_container (GEDIT_PAGE (child));
+	view = gedit_view_container_get_view (GEDIT_VIEW_CONTAINER (container));
 	gtk_widget_grab_focus (GTK_WIDGET (view));
 }
 
@@ -692,7 +694,7 @@ gedit_notebook_init (GeditNotebook *notebook)
 	notebook->priv = GEDIT_NOTEBOOK_GET_PRIVATE (notebook);
 
 	notebook->priv->close_buttons_sensitive = TRUE;
-	notebook->priv->tab_drag_and_drop_enabled = TRUE;
+	notebook->priv->page_drag_and_drop_enabled = TRUE;
 	
 	gtk_notebook_set_scrollable (GTK_NOTEBOOK (notebook), TRUE);
 	gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
@@ -729,7 +731,7 @@ gedit_notebook_finalize (GObject *object)
 }
 
 /*
- * We need to override this because when we don't show the tabs, like in
+ * We need to override this because when we don't show the pages, like in
  * fullscreen we need to have wrap around too
  */
 static gboolean
@@ -772,7 +774,9 @@ gedit_notebook_change_current_page (GtkNotebook *notebook,
 }
 
 static void
-sync_name (GeditTab *tab, GParamSpec *pspec, GtkWidget *hbox)
+sync_name (GeditPage *page,
+	   GeditViewContainer *container,
+	   GtkWidget *hbox)
 {
 	GeditNotebook *nb;
 	GtkWidget *label;
@@ -781,7 +785,7 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GtkWidget *hbox)
 	GtkWidget *spinner;
 	gchar *str;
 	GtkImage *icon;
-	GeditTabState  state;
+	GeditViewContainerState state;
 	
 	label = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label"));
 	ebox = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "label-ebox"));
@@ -789,39 +793,41 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GtkWidget *hbox)
 	button = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "close-button"));
 	spinner = GTK_WIDGET (g_object_get_data (G_OBJECT (hbox), "spinner"));
 
-	nb = GEDIT_NOTEBOOK (gtk_widget_get_parent (GTK_WIDGET (tab)));
+	nb = GEDIT_NOTEBOOK (gtk_widget_get_parent (GTK_WIDGET (page)));
+	container = gedit_page_get_active_view_container (page);
 
 	g_return_if_fail ((label   != NULL) &&
 			  (ebox    != NULL) &&
 			  (button  != NULL) &&
 			  (icon    != NULL) &&
 			  (spinner != NULL) &&
-			  (nb      != NULL));
+			  (nb      != NULL) &&
+			  (page    != NULL));
 
-	str = _gedit_tab_get_name (tab);
+	str = _gedit_view_container_get_name (container);
 	g_return_if_fail (str != NULL);
 	
 	gtk_label_set_text (GTK_LABEL (label), str);
 	g_free (str);
 	
-	str = _gedit_tab_get_tooltips (tab);
+	str = _gedit_view_container_get_tooltips (container);
 	g_return_if_fail (str != NULL);
 	
 	gtk_widget_set_tooltip_markup (ebox, str);
 	g_free (str);
-		
-	state = gedit_tab_get_state (tab);
+	
+	state = gedit_view_container_get_state (container);
 	
 	gtk_widget_set_sensitive (button,
-				  nb->priv->close_buttons_sensitive &&  
-				  (state != GEDIT_TAB_STATE_CLOSING) &&
-				  (state != GEDIT_TAB_STATE_SAVING)  &&
-				  (state != GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW) &&
-				  (state != GEDIT_TAB_STATE_SAVING_ERROR));
+				  nb->priv->close_buttons_sensitive &&
+				  (state != GEDIT_VIEW_CONTAINER_STATE_CLOSING) &&
+				  (state != GEDIT_VIEW_CONTAINER_STATE_SAVING)  &&
+				  (state != GEDIT_VIEW_CONTAINER_STATE_SHOWING_PRINT_PREVIEW) &&
+				  (state != GEDIT_VIEW_CONTAINER_STATE_SAVING_ERROR));
 				  
-	if ((state == GEDIT_TAB_STATE_LOADING)   ||
-	    (state == GEDIT_TAB_STATE_SAVING)    ||
-	    (state == GEDIT_TAB_STATE_REVERTING))
+	if ((state == GEDIT_VIEW_CONTAINER_STATE_LOADING)   ||
+	    (state == GEDIT_VIEW_CONTAINER_STATE_SAVING)    ||
+	    (state == GEDIT_VIEW_CONTAINER_STATE_REVERTING))
 	{
 		gtk_widget_hide (GTK_WIDGET (icon));
 		
@@ -836,7 +842,7 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GtkWidget *hbox)
 	{
 		GdkPixbuf *pixbuf;
 		
-		pixbuf = _gedit_tab_get_icon (tab);
+		pixbuf = _gedit_view_container_get_icon (container);
 		gtk_image_set_from_pixbuf (icon, pixbuf);
 
 		if (pixbuf != NULL)
@@ -854,13 +860,25 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GtkWidget *hbox)
 }
 
 static void
-close_button_clicked_cb (GtkWidget *widget, 
-			 GtkWidget *tab)
+on_notify_name_cb (GeditViewContainer *container,
+		   GParamSpec *pspec,
+		   GtkWidget *hbox)
+{
+	GeditPage *page;
+	
+	page = gedit_page_get_from_container (container);
+
+	sync_name (page, container, hbox);
+}
+
+static void
+close_button_clicked_cb (GtkWidget *widget,
+			 GtkWidget *page)
 {
 	GeditNotebook *notebook;
 
-	notebook = GEDIT_NOTEBOOK (gtk_widget_get_parent (tab));
-	g_signal_emit (notebook, signals[TAB_CLOSE_REQUEST], 0, tab);
+	notebook = GEDIT_NOTEBOOK (gtk_widget_get_parent (page));
+	g_signal_emit (notebook, signals[PAGE_CLOSE_REQUEST], 0, page);
 }
 
 static void
@@ -878,7 +896,7 @@ close_button_style_set_cb (GtkWidget *button,
 
 static GtkWidget *
 build_tab_label (GeditNotebook *nb, 
-		 GeditTab      *tab)
+		 GeditPage     *page)
 {
 	GtkWidget *hbox, *label_hbox, *label_ebox;
 	GtkWidget *label, *dummy_label;
@@ -916,7 +934,7 @@ build_tab_label (GeditNotebook *nb,
 	g_signal_connect (close_button,
 			  "clicked",
 			  G_CALLBACK (close_button_clicked_cb),
-			  tab);
+			  page);
 
 	/* setup spinner */
 #ifdef BUILD_SPINNER
@@ -948,7 +966,7 @@ build_tab_label (GeditNotebook *nb,
 	gtk_widget_show (label_ebox);
 	gtk_widget_show (label_hbox);
 	gtk_widget_show (label);
-	gtk_widget_show (dummy_label);	
+	gtk_widget_show (dummy_label);
 	gtk_widget_show (image);
 	gtk_widget_show (close_button);
 	gtk_widget_show (icon);
@@ -958,7 +976,7 @@ build_tab_label (GeditNotebook *nb,
 	g_object_set_data (G_OBJECT (hbox), "spinner", spinner);
 	g_object_set_data (G_OBJECT (hbox), "icon", icon);
 	g_object_set_data (G_OBJECT (hbox), "close-button", close_button);
-	g_object_set_data (G_OBJECT (tab), "close-button", close_button);
+	g_object_set_data (G_OBJECT (page), "close-button", close_button);
 
 	return hbox;
 }
@@ -966,13 +984,13 @@ build_tab_label (GeditNotebook *nb,
 /**
  * gedit_notebook_set_always_show_tabs:
  * @nb: a #GeditNotebook
- * @show_tabs: %TRUE to always show the tabs
+ * @show_pages: %TRUE to always show the tabs
  *
  * Sets the visibility of the tabs in the @nb.
  */
 void
 gedit_notebook_set_always_show_tabs (GeditNotebook *nb, 
-				     gboolean       show_tabs)
+				      gboolean       show_tabs)
 {
 	g_return_if_fail (GEDIT_IS_NOTEBOOK (nb));
 
@@ -982,75 +1000,88 @@ gedit_notebook_set_always_show_tabs (GeditNotebook *nb,
 }
 
 /**
- * gedit_notebook_add_tab:
+ * gedit_notebook_add_page:
  * @nb: a #GeditNotebook
- * @tab: a #GeditTab
- * @position: the position where the @tab should be added
- * @jump_to: %TRUE to set the @tab as active
+ * @page: a #GeditPage
+ * @position: the position where the @page should be added
+ * @jump_to: %TRUE to set the @page as active
  *
- * Adds the specified @tab to the @nb.
+ * Adds the specified @page to the @nb.
  */
 void
-gedit_notebook_add_tab (GeditNotebook *nb,
-		        GeditTab      *tab,
-		        gint           position,
-		        gboolean       jump_to)
+gedit_notebook_add_page (GeditNotebook *nb,
+			 GeditPage     *page,
+			 gint           position,
+			 gboolean       jump_to)
 {
 	GtkWidget *label;
+	GList *containers, *l;
 
 	g_return_if_fail (GEDIT_IS_NOTEBOOK (nb));
-	g_return_if_fail (GEDIT_IS_TAB (tab));
+	g_return_if_fail (GEDIT_IS_PAGE (page));
 
-	label = build_tab_label (nb, tab);
+	label = build_tab_label (nb, page);
 
 	update_tabs_visibility (nb, TRUE);
 
 	gtk_notebook_insert_page (GTK_NOTEBOOK (nb), 
-				  GTK_WIDGET (tab),
+				  GTK_WIDGET (page),
 				  label, 
 				  position);
 
-	sync_name (tab, NULL, label);
-		         
-	g_signal_connect_object (tab, 
-				 "notify::name",
-			         G_CALLBACK (sync_name), 
-			         label, 
-			         0);
-	g_signal_connect_object (tab, 
-				 "notify::state",
-			         G_CALLBACK (sync_name), 
-			         label, 
-			         0);			         
+	sync_name (page, NULL, label);
+	
+	containers = gedit_page_get_view_containers (page);
+	for (l = containers; l != NULL; l = g_list_next (l))
+	{
+		g_signal_connect_object (l->data,
+					 "notify::name",
+					 G_CALLBACK (on_notify_name_cb),
+					 label,
+					 0);
+		g_signal_connect_object (l->data,
+					 "notify::state",
+					 G_CALLBACK (on_notify_name_cb),
+					 label,
+					 0);
+	}
+	
+	g_signal_connect_object (page,
+				 "active-container-changed",
+				 G_CALLBACK (sync_name),
+				 label,
+				 0);
 
-	g_signal_emit (G_OBJECT (nb), signals[TAB_ADDED], 0, tab);
+	g_signal_emit (G_OBJECT (nb), signals[PAGE_ADDED], 0, page);
 
 	/* The signal handler may have reordered the tabs */
 	position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), 
-					  GTK_WIDGET (tab));
+					  GTK_WIDGET (page));
 
 	if (jump_to)
 	{
+		GeditViewContainer *container;
 		GeditView *view;
 		
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (nb), position);
-		g_object_set_data (G_OBJECT (tab), 
+		g_object_set_data (G_OBJECT (page), 
 				   "jump_to",
 				   GINT_TO_POINTER (jump_to));
-		view = gedit_tab_get_view (tab);
+		container = gedit_page_get_active_view_container (page);
+		view = gedit_view_container_get_view (container);
 		
 		gtk_widget_grab_focus (GTK_WIDGET (view));
 	}
 }
 
 static void
-smart_tab_switching_on_closure (GeditNotebook *nb,
-				GeditTab      *tab)
+smart_page_switching_on_closure (GeditNotebook *nb,
+				 GeditPage     *page)
 {
 	gboolean jump_to;
 
 	jump_to = GPOINTER_TO_INT (g_object_get_data
-				   (G_OBJECT (tab), "jump_to"));
+				   (G_OBJECT (page), "jump_to"));
 
 	if (!jump_to || !nb->priv->focused_pages)
 	{
@@ -1073,74 +1104,74 @@ smart_tab_switching_on_closure (GeditNotebook *nb,
 }
 
 static void
-remove_tab (GeditTab      *tab,
-	    GeditNotebook *nb)
+remove_page (GeditPage     *page,
+	     GeditNotebook *nb)
 {
 	GtkWidget *label, *ebox;
 	gint position;
 
-	position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), GTK_WIDGET (tab));
+	position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), GTK_WIDGET (page));
 
-	label = gtk_notebook_get_tab_label (GTK_NOTEBOOK (nb), GTK_WIDGET (tab));
+	label = gtk_notebook_get_tab_label (GTK_NOTEBOOK (nb), GTK_WIDGET (page));
 	ebox = GTK_WIDGET (g_object_get_data (G_OBJECT (label), "label-ebox"));
 
-	g_signal_handlers_disconnect_by_func (tab,
-					      G_CALLBACK (sync_name), 
+	g_signal_handlers_disconnect_by_func (page,
+					      G_CALLBACK (sync_name),
 					      label);
 
-	/* we ref the tab so that it's still alive while the tabs_removed
+	/* we ref the page so that it's still alive while the page_removed
 	 * signal is processed.
 	 */
-	g_object_ref (tab);
+	g_object_ref (page);
 
 	gtk_notebook_remove_page (GTK_NOTEBOOK (nb), position);
 
 	update_tabs_visibility (nb, FALSE);
 
-	g_signal_emit (G_OBJECT (nb), signals[TAB_REMOVED], 0, tab);
+	g_signal_emit (G_OBJECT (nb), signals[PAGE_REMOVED], 0, page);
 
-	g_object_unref (tab);	
+	g_object_unref (page);
 }
 
 /**
  * gedit_notebook_remove_tab:
  * @nb: a #GeditNotebook
- * @tab: a #GeditTab
+ * @page: a #GeditPage
  *
- * Removes @tab from @nb.
+ * Removes @page from @nb.
  */
 void
-gedit_notebook_remove_tab (GeditNotebook *nb,
-			   GeditTab      *tab)
+gedit_notebook_remove_page (GeditNotebook *nb,
+			    GeditPage     *page)
 {
 	gint position, curr;
 
 	g_return_if_fail (GEDIT_IS_NOTEBOOK (nb));
-	g_return_if_fail (GEDIT_IS_TAB (tab));
+	g_return_if_fail (GEDIT_IS_PAGE (page));
 
 	/* Remove the page from the focused pages list */
 	nb->priv->focused_pages =  g_list_remove (nb->priv->focused_pages,
-						  tab);
+						  page);
 
-	position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), GTK_WIDGET (tab));
+	position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), GTK_WIDGET (page));
 	curr = gtk_notebook_get_current_page (GTK_NOTEBOOK (nb));
 
 	if (position == curr)
 	{
-		smart_tab_switching_on_closure (nb, tab);
+		smart_page_switching_on_closure (nb, page);
 	}
 
-	remove_tab (tab, nb);
+	remove_page (page, nb);
 }
 
 /**
- * gedit_notebook_remove_all_tabs:
+ * gedit_notebook_remove_all_pages:
  * @nb: a #GeditNotebook
  *
- * Removes all #GeditTab from @nb.
+ * Removes all #GeditPage from @nb.
  */
 void
-gedit_notebook_remove_all_tabs (GeditNotebook *nb)
+gedit_notebook_remove_all_pages (GeditNotebook *nb)
 {	
 	g_return_if_fail (GEDIT_IS_NOTEBOOK (nb));
 	
@@ -1148,31 +1179,33 @@ gedit_notebook_remove_all_tabs (GeditNotebook *nb)
 	nb->priv->focused_pages = NULL;
 
 	gtk_container_foreach (GTK_CONTAINER (nb),
-			       (GtkCallback)remove_tab,
+			       (GtkCallback)remove_page,
 			       nb);
 }
 
 static void
-set_close_buttons_sensitivity (GeditTab      *tab,
+set_close_buttons_sensitivity (GeditPage     *page,
                                GeditNotebook *nb)
 {
-	GtkWidget     *button;
-	GeditTabState  state;
+	GtkWidget *button;
+	GeditViewContainerState state;
+	GeditViewContainer *container;
 	
-	button = GTK_WIDGET (g_object_get_data (G_OBJECT (tab), 
-						"close-button"));	
+	button = GTK_WIDGET (g_object_get_data (G_OBJECT (page),
+						"close-button"));
 	g_return_if_fail (button != NULL);
 	
-	state = gedit_tab_get_state (tab);
+	container = gedit_page_get_active_view_container (page);
+	state = gedit_view_container_get_state (container);
 	
-	gtk_widget_set_sensitive (button, 
+	gtk_widget_set_sensitive (button,
 				  nb->priv->close_buttons_sensitive &&
-				  (state != GEDIT_TAB_STATE_CLOSING) &&
-				  (state != GEDIT_TAB_STATE_SAVING)  &&
-				  (state != GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW) &&
-				  (state != GEDIT_TAB_STATE_PRINTING) &&
-				  (state != GEDIT_TAB_STATE_PRINT_PREVIEWING) &&				  
-				  (state != GEDIT_TAB_STATE_SAVING_ERROR));
+				  (state != GEDIT_VIEW_CONTAINER_STATE_CLOSING) &&
+				  (state != GEDIT_VIEW_CONTAINER_STATE_SAVING)  &&
+				  (state != GEDIT_VIEW_CONTAINER_STATE_SHOWING_PRINT_PREVIEW) &&
+				  (state != GEDIT_VIEW_CONTAINER_STATE_PRINTING) &&
+				  (state != GEDIT_VIEW_CONTAINER_STATE_PRINT_PREVIEWING) &&
+				  (state != GEDIT_VIEW_CONTAINER_STATE_SAVING_ERROR));
 }
 
 /**
@@ -1180,7 +1213,7 @@ set_close_buttons_sensitivity (GeditTab      *tab,
  * @nb: a #GeditNotebook
  * @sensitive: %TRUE to make the buttons sensitive
  *
- * Sets whether the close buttons in the tabs of @nb are sensitive.
+ * Sets whether the close buttons in the pages of @nb are sensitive.
  */
 void
 gedit_notebook_set_close_buttons_sensitive (GeditNotebook *nb,
@@ -1217,28 +1250,28 @@ gedit_notebook_get_close_buttons_sensitive (GeditNotebook *nb)
 }
 
 /**
- * gedit_notebook_set_tab_drag_and_drop_enabled:
+ * gedit_notebook_set_page_drag_and_drop_enabled:
  * @nb: a #GeditNotebook
  * @enable: %TRUE to enable the drag and drop
  *
- * Sets whether drag and drop of tabs in the @nb is enabled.
+ * Sets whether drag and drop of pages in the @nb is enabled.
  */
 void
-gedit_notebook_set_tab_drag_and_drop_enabled (GeditNotebook *nb,
-					      gboolean       enable)
+gedit_notebook_set_page_drag_and_drop_enabled (GeditNotebook *nb,
+					       gboolean       enable)
 {
 	g_return_if_fail (GEDIT_IS_NOTEBOOK (nb));
 	
 	enable = (enable != FALSE);
 	
-	if (enable == nb->priv->tab_drag_and_drop_enabled)
+	if (enable == nb->priv->page_drag_and_drop_enabled)
 		return;
 		
-	nb->priv->tab_drag_and_drop_enabled = enable;		
+	nb->priv->page_drag_and_drop_enabled = enable;
 }
 
 /**
- * gedit_notebook_get_tab_drag_and_drop_enabled:
+ * gedit_notebook_get_page_drag_and_drop_enabled:
  * @nb: a #GeditNotebook
  *
  * Whether the drag and drop is enabled in the @nb.
@@ -1246,10 +1279,10 @@ gedit_notebook_set_tab_drag_and_drop_enabled (GeditNotebook *nb,
  * Returns: %TRUE if the drag and drop is enabled.
  */
 gboolean	
-gedit_notebook_get_tab_drag_and_drop_enabled (GeditNotebook *nb)
+gedit_notebook_get_page_drag_and_drop_enabled (GeditNotebook *nb)
 {
 	g_return_val_if_fail (GEDIT_IS_NOTEBOOK (nb), TRUE);
 	
-	return nb->priv->tab_drag_and_drop_enabled;
+	return nb->priv->page_drag_and_drop_enabled;
 }
 

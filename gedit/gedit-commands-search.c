@@ -45,6 +45,7 @@
 #include "gedit-window-private.h"
 #include "gedit-utils.h"
 #include "dialogs/gedit-search-dialog.h"
+#include "gedit-text-buffer.h"
 
 #define GEDIT_SEARCH_DIALOG_KEY		"gedit-search-dialog-key"
 #define GEDIT_LAST_SEARCH_DATA_KEY	"gedit-last-search-data-key"
@@ -157,7 +158,11 @@ run_search (GeditView   *view,
 	GtkTextIter match_end;
 	gboolean found = FALSE;
 
-	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+	doc = gedit_view_get_document (view);
+	
+	/* FIXME */
+	if (!GEDIT_IS_TEXT_BUFFER (doc))
+		return FALSE;
 
 	if (!search_backwards)
 	{
@@ -165,11 +170,11 @@ run_search (GeditView   *view,
 						      NULL,
 						      &start_iter);
 
-		found = gedit_document_search_forward (doc,
-						       &start_iter,
-						       NULL,
-						       &match_start,
-						       &match_end);
+		found = gedit_text_buffer_search_forward (GEDIT_TEXT_BUFFER (doc),
+							  &start_iter,
+							  NULL,
+							  &match_start,
+							  &match_end);
 	}
 	else
 	{
@@ -177,27 +182,27 @@ run_search (GeditView   *view,
 						      &start_iter,
 						      NULL);
 
-		found = gedit_document_search_backward (doc,
-						        NULL,
-						        &start_iter,
-						        &match_start,
-						        &match_end);
+		found = gedit_text_buffer_search_backward (GEDIT_TEXT_BUFFER (doc),
+							   NULL,
+							   &start_iter,
+							   &match_start,
+							   &match_end);
 	}
 
 	if (!found && wrap_around)
 	{
 		if (!search_backwards)
-			found = gedit_document_search_forward (doc,
-							       NULL,
-							       NULL, /* FIXME: set the end_inter */
-							       &match_start,
-							       &match_end);
+			found = gedit_text_buffer_search_forward (GEDIT_TEXT_BUFFER (doc),
+								  NULL,
+								  NULL, /* FIXME: set the end_inter */
+								  &match_start,
+								  &match_end);
 		else
-			found = gedit_document_search_backward (doc,
-							        NULL, /* FIXME: set the start_inter */
-							        NULL, 
-							        &match_start,
-							        &match_end);
+			found = gedit_text_buffer_search_backward (GEDIT_TEXT_BUFFER (doc),
+								   NULL, /* FIXME: set the start_inter */
+								   NULL, 
+								   &match_start,
+								   &match_end);
 	}
 	
 	if (found)
@@ -242,7 +247,11 @@ do_find (GeditSearchDialog *dialog,
 	if (active_view == NULL)
 		return;
 
-	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view)));
+	doc = gedit_view_get_document (active_view);
+	
+	/* FIXME */
+	if (!GEDIT_IS_TEXT_BUFFER (doc))
+		return;
 
 	entry_text = gedit_search_dialog_get_search_text (dialog);
 
@@ -254,13 +263,15 @@ do_find (GeditSearchDialog *dialog,
 	GEDIT_SEARCH_SET_CASE_SENSITIVE (flags, match_case);
 	GEDIT_SEARCH_SET_ENTIRE_WORD (flags, entire_word);
 
-	search_text = gedit_document_get_search_text (doc, &old_flags);
+	search_text = gedit_text_buffer_get_search_text (GEDIT_TEXT_BUFFER (doc),
+							 &old_flags);
 
 	if ((search_text == NULL) ||
 	    (strcmp (search_text, entry_text) != 0) ||
 	    (flags != old_flags))
 	{
-		gedit_document_set_search_text (doc, entry_text, flags);
+		gedit_text_buffer_set_search_text (GEDIT_TEXT_BUFFER (doc),
+						   entry_text, flags);
 	}
 
 	g_free (search_text);
@@ -335,7 +346,7 @@ do_replace (GeditSearchDialog *dialog,
 	gboolean match_case;
 
 	doc = gedit_window_get_active_document (window);
-	if (doc == NULL)
+	if (doc == NULL || !GEDIT_IS_TEXT_BUFFER (doc))
 		return;
 
 	search_entry_text = gedit_search_dialog_get_search_text (dialog);
@@ -395,7 +406,11 @@ do_replace_all (GeditSearchDialog *dialog,
 	if (active_view == NULL)
 		return;
 
-	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view)));
+	doc = gedit_view_get_document (active_view);
+	
+	/* FIXME */
+	if (!GEDIT_IS_TEXT_BUFFER (doc))
+		return;
 
 	search_entry_text = gedit_search_dialog_get_search_text (dialog);
 	g_return_if_fail ((search_entry_text) != NULL);
@@ -411,10 +426,10 @@ do_replace_all (GeditSearchDialog *dialog,
 	GEDIT_SEARCH_SET_CASE_SENSITIVE (flags, match_case);
 	GEDIT_SEARCH_SET_ENTIRE_WORD (flags, entire_word);
 
-	count = gedit_document_replace_all (doc, 
-					    search_entry_text,
-					    replace_entry_text,
-					    flags);
+	count = gedit_text_buffer_replace_all (GEDIT_TEXT_BUFFER (doc),
+					       search_entry_text,
+					       replace_entry_text,
+					       flags);
 
 	if (count > 0)
 	{
@@ -516,6 +531,10 @@ _gedit_cmd_search_find (GtkAction   *action,
 	doc = gedit_window_get_active_document (window);
 	g_return_if_fail (doc != NULL);
 
+	/* FIXME */
+	if (!GEDIT_IS_TEXT_BUFFER (doc))
+		return;
+
 	selection_exists = get_selected_text (GTK_TEXT_BUFFER (doc),
 					      &find_text,
 					      &sel_len);
@@ -582,6 +601,10 @@ _gedit_cmd_search_replace (GtkAction   *action,
 
 	doc = gedit_window_get_active_document (window);
 	g_return_if_fail (doc != NULL);
+	
+	/* FIXME */
+	if (!GEDIT_IS_TEXT_BUFFER (doc))
+		return;
 
 	selection_exists = get_selected_text (GTK_TEXT_BUFFER (doc),
 					      &find_text,
@@ -650,9 +673,14 @@ _gedit_cmd_search_clear_highlight (GtkAction   *action,
 	gedit_debug (DEBUG_COMMANDS);
 
 	doc = gedit_window_get_active_document (window);
-	gedit_document_set_search_text (GEDIT_DOCUMENT (doc),
-					"",
-					GEDIT_SEARCH_DONT_SET_FLAGS);
+	
+	/* FIXME */
+	if (!GEDIT_IS_TEXT_BUFFER (doc))
+		return;
+	
+	gedit_text_buffer_set_search_text (GEDIT_TEXT_BUFFER (doc),
+					   "",
+					   GEDIT_SEARCH_DONT_SET_FLAGS);
 }
 
 void

@@ -47,7 +47,7 @@
 
 #include "gedit-utils.h"
 
-#include "gedit-document.h"
+#include "gedit-document-interface.h"
 #include "gedit-prefs-manager.h"
 #include "gedit-debug.h"
 #include "gedit-convert.h"

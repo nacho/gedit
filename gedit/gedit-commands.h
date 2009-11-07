@@ -120,6 +120,18 @@ void		_gedit_cmd_view_toggle_fullscreen_mode	(GtkAction   *action,
 							 GeditWindow *window);
 void		_gedit_cmd_view_leave_fullscreen_mode	(GtkAction   *action,
 							 GeditWindow *window);
+void		_gedit_cmd_view_split_horizontally	(GtkAction *action,
+							 GeditWindow *window);
+void		_gedit_cmd_view_split_vertically	(GtkAction *action,
+							 GeditWindow *window);
+void		_gedit_cmd_view_clone_horizontally	(GtkAction *action,
+							 GeditWindow *window);
+void		_gedit_cmd_view_clone_vertically	(GtkAction *action,
+							 GeditWindow *window);
+void		_gedit_cmd_view_unsplit			(GtkAction *action,
+							 GeditWindow *window);
+void		_gedit_cmd_view_switch_split		(GtkAction *action,
+							 GeditWindow *window);
 
 void		_gedit_cmd_search_find			(GtkAction   *action,
 							 GeditWindow *window);
@@ -134,7 +146,7 @@ void		_gedit_cmd_search_clear_highlight	(GtkAction   *action,
 void		_gedit_cmd_search_goto_line		(GtkAction   *action,
 							 GeditWindow *window);
 void		_gedit_cmd_search_incremental_search	(GtkAction   *action,
-							 GeditWindow *window);							 
+							 GeditWindow *window);
 							 
 void		_gedit_cmd_documents_previous_document	(GtkAction   *action,
 							 GeditWindow *window);
@@ -148,7 +160,7 @@ void		_gedit_cmd_help_contents		(GtkAction   *action,
 void		_gedit_cmd_help_about			(GtkAction   *action,
 							 GeditWindow *window);
 
-void		_gedit_cmd_file_close_tab 		(GeditTab    *tab,
+void		_gedit_cmd_file_close_page 		(GeditPage   *page,
 							 GeditWindow *window);
 
 void		_gedit_cmd_file_save_documents_list	(GeditWindow *window,

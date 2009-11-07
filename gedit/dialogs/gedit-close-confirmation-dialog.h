@@ -32,7 +32,7 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
-#include <gedit/gedit-document.h>
+#include <gedit/gedit-document-interface.h>
 
 #define GEDIT_TYPE_CLOSE_CONFIRMATION_DIALOG		(gedit_close_confirmation_dialog_get_type ())
 #define GEDIT_CLOSE_CONFIRMATION_DIALOG(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GEDIT_TYPE_CLOSE_CONFIRMATION_DIALOG, GeditCloseConfirmationDialog))

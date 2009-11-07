@@ -40,12 +40,13 @@
 #include "gedit-prefs-manager-app.h"
 #include "gedit-app.h"
 #include "gedit-debug.h"
-#include "gedit-view.h"
+#include "gedit-view-interface.h"
 #include "gedit-window.h"
 #include "gedit-window-private.h"
 #include "gedit-plugins-engine.h"
 #include "gedit-style-scheme-manager.h"
 #include "gedit-dirs.h"
+#include "gedit-text-buffer.h"
 
 static void gedit_prefs_manager_editor_font_changed	(GConfClient *client,
 							 guint        cnxn_id,
@@ -800,7 +801,9 @@ gedit_prefs_manager_editor_font_changed (GConfClient *client,
 	{
 		/* Note: we use def=FALSE to avoid GeditView to query gconf */
 		gedit_view_set_font (GEDIT_VIEW (l->data), FALSE,  font);
-		gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (l->data), ts);
+		
+		if (GTK_IS_SOURCE_VIEW (l->data))
+			gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (l->data), ts);
 
 		l = l->next;
 	}
@@ -846,7 +849,8 @@ gedit_prefs_manager_system_font_changed (GConfClient *client,
 		/* Note: we use def=FALSE to avoid GeditView to query gconf */
 		gedit_view_set_font (GEDIT_VIEW (l->data), FALSE, font);
 
-		gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (l->data), ts);
+		if (GTK_IS_SOURCE_VIEW (l->data))
+			gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (l->data), ts);
 		l = l->next;
 	}
 
@@ -883,8 +887,9 @@ gedit_prefs_manager_tabs_size_changed (GConfClient *client,
 
 		while (l != NULL)
 		{
-			gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (l->data), 
-						       tab_width);
+			if (GTK_IS_SOURCE_VIEW (l->data))
+				gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (l->data), 
+							       tab_width);
 
 			l = l->next;
 		}
@@ -907,9 +912,10 @@ gedit_prefs_manager_tabs_size_changed (GConfClient *client,
 
 		while (l != NULL)
 		{
-			gtk_source_view_set_insert_spaces_instead_of_tabs (
-					GTK_SOURCE_VIEW (l->data), 
-					enable);
+			if (GTK_IS_SOURCE_VIEW (l->data))
+				gtk_source_view_set_insert_spaces_instead_of_tabs (
+						GTK_SOURCE_VIEW (l->data), 
+						enable);
 
 			l = l->next;
 		}
@@ -964,7 +970,7 @@ gedit_prefs_manager_wrap_mode_changed (GConfClient *client,
 		views = gedit_app_get_views (gedit_app_get_default ());
 		l = views;
 
-		while (l != NULL)
+		while (l != NULL && GTK_IS_TEXT_VIEW (l->data))
 		{
 			gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (l->data),
 						     wrap_mode);
@@ -1003,8 +1009,9 @@ gedit_prefs_manager_line_numbers_changed (GConfClient *client,
 
 		while (l != NULL)
 		{
-			gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (l->data), 
-							       dln);
+			if (GTK_IS_SOURCE_VIEW (l->data))
+				gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (l->data), 
+								       dln);
 
 			l = l->next;
 		}
@@ -1040,8 +1047,9 @@ gedit_prefs_manager_hl_current_line_changed (GConfClient *client,
 
 		while (l != NULL)
 		{
-			gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (l->data), 
-								    hl);
+			if (GTK_IS_SOURCE_VIEW (l->data))
+				gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (l->data), 
+									    hl);
 
 			l = l->next;
 		}
@@ -1077,8 +1085,9 @@ gedit_prefs_manager_bracket_matching_changed (GConfClient *client,
 
 		while (l != NULL)
 		{
-			gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (l->data),
-									   enable);
+			if (GTK_IS_SOURCE_VIEW (l->data))
+				gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (l->data),
+										   enable);
 
 			l = l->next;
 		}
@@ -1113,9 +1122,10 @@ gedit_prefs_manager_auto_indent_changed (GConfClient *client,
 		l = views;
 
 		while (l != NULL)
-		{		
-			gtk_source_view_set_auto_indent (GTK_SOURCE_VIEW (l->data), 
-							 enable);
+		{
+			if (GTK_IS_SOURCE_VIEW (l->data))
+				gtk_source_view_set_auto_indent (GTK_SOURCE_VIEW (l->data), 
+								 enable);
 			
 			l = l->next;
 		}
@@ -1153,8 +1163,9 @@ gedit_prefs_manager_undo_changed (GConfClient *client,
 		
 		while (l != NULL)
 		{
-			gtk_source_buffer_set_max_undo_levels (GTK_SOURCE_BUFFER (l->data), 
-							       ul);
+			if (GTK_IS_SOURCE_BUFFER (l->data))
+				gtk_source_buffer_set_max_undo_levels (GTK_SOURCE_BUFFER (l->data), 
+								       ul);
 
 			l = l->next;
 		}
@@ -1192,8 +1203,9 @@ gedit_prefs_manager_right_margin_changed (GConfClient *client,
 
 		while (l != NULL)
 		{
-			gtk_source_view_set_right_margin_position (GTK_SOURCE_VIEW (l->data),
-								   pos);
+			if (GTK_IS_SOURCE_VIEW (l->data))
+				gtk_source_view_set_right_margin_position (GTK_SOURCE_VIEW (l->data),
+									   pos);
 
 			l = l->next;
 		}
@@ -1216,8 +1228,9 @@ gedit_prefs_manager_right_margin_changed (GConfClient *client,
 
 		while (l != NULL)
 		{
-			gtk_source_view_set_show_right_margin (GTK_SOURCE_VIEW (l->data),
-							       display);
+			if (GTK_IS_SOURCE_VIEW (l->data))
+				gtk_source_view_set_show_right_margin (GTK_SOURCE_VIEW (l->data),
+								       display);
 
 			l = l->next;
 		}
@@ -1273,8 +1286,9 @@ gedit_prefs_manager_smart_home_end_changed (GConfClient *client,
 
 		while (l != NULL)
 		{
-			gtk_source_view_set_smart_home_end (GTK_SOURCE_VIEW (l->data),
-							    smart_he);
+			if (GTK_IS_SOURCE_VIEW (l->data))
+				gtk_source_view_set_smart_home_end (GTK_SOURCE_VIEW (l->data),
+								    smart_he);
 
 			l = l->next;
 		}
@@ -1311,10 +1325,9 @@ gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
 
 		while (l != NULL)
 		{
-			g_return_if_fail (GTK_IS_SOURCE_BUFFER (l->data));
-
-			gtk_source_buffer_set_highlight_syntax (GTK_SOURCE_BUFFER (l->data),
-								enable);
+			if (GTK_IS_SOURCE_BUFFER (l->data))
+				gtk_source_buffer_set_highlight_syntax (GTK_SOURCE_BUFFER (l->data),
+									enable);
 
 			l = l->next;
 		}
@@ -1369,8 +1382,9 @@ gedit_prefs_manager_search_hl_enable_changed (GConfClient *client,
 		{
 			g_return_if_fail (GEDIT_IS_DOCUMENT (l->data));
 
-			gedit_document_set_enable_search_highlighting  (GEDIT_DOCUMENT (l->data),
-									enable);
+			if (GEDIT_IS_TEXT_BUFFER (l->data))
+				gedit_text_buffer_set_enable_search_highlighting  (GEDIT_TEXT_BUFFER (l->data),
+										   enable);
 
 			l = l->next;
 		}
@@ -1431,10 +1445,11 @@ gedit_prefs_manager_source_style_scheme_changed (GConfClient *client,
 		docs = gedit_app_get_documents (gedit_app_get_default ());
 		for (l = docs; l != NULL; l = l->next)
 		{
-			g_return_if_fail (GTK_IS_SOURCE_BUFFER (l->data));
-
-			gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (l->data),
-							    style);
+			if (GTK_IS_SOURCE_BUFFER (l->data))
+			{
+				gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (l->data),
+								    style);
+			}
 		}
 
 		g_list_free (docs);
@@ -1512,9 +1527,9 @@ gedit_prefs_manager_auto_save_changed (GConfClient *client,
 		while (l != NULL)
 		{
 			GeditDocument *doc = GEDIT_DOCUMENT (l->data);
-			GeditTab *tab = gedit_tab_get_from_document (doc);
+			GeditViewContainer *tab = gedit_view_container_get_from_document (doc);
 
-			gedit_tab_set_auto_save_enabled (tab, auto_save);
+			gedit_view_container_set_auto_save_enabled (tab, auto_save);
 
 			l = l->next;
 		}
@@ -1541,9 +1556,9 @@ gedit_prefs_manager_auto_save_changed (GConfClient *client,
 		while (l != NULL)
 		{
 			GeditDocument *doc = GEDIT_DOCUMENT (l->data);
-			GeditTab *tab = gedit_tab_get_from_document (doc);
+			GeditViewContainer *tab = gedit_view_container_get_from_document (doc);
 
-			gedit_tab_set_auto_save_interval (tab, auto_save_interval);
+			gedit_view_container_set_auto_save_interval (tab, auto_save_interval);
 
 			l = l->next;
 		}

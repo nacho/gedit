@@ -41,7 +41,8 @@
 #include <gtksourceview/gtksourceiter.h>
 
 #include "gedit-prefs-manager-app.h"
-#include "gedit-document.h"
+#include "gedit-document-interface.h"
+#include "gedit-text-buffer.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
 #include "gedit-metadata-manager.h"
@@ -71,35 +72,37 @@ PROFILE (static GTimer *timer = NULL)
 #define GEDIT_MAX_PATH_LEN  2048
 #endif
 
-#define GEDIT_DOCUMENT_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_DOCUMENT, GeditDocumentPrivate))
+#define GEDIT_TEXT_BUFFER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_TEXT_BUFFER, GeditTextBufferPrivate))
 
-static void	gedit_document_load_real	(GeditDocument          *doc,
+static void	gedit_text_buffer_load_real	(GeditDocument          *doc,
 						 const gchar            *uri,
 						 const GeditEncoding    *encoding,
 						 gint                    line_pos,
 						 gboolean                create);
-static void	gedit_document_save_real	(GeditDocument          *doc,
+static void	gedit_text_buffer_save_real	(GeditDocument          *doc,
 						 const gchar            *uri,
 						 const GeditEncoding    *encoding,
 						 GeditDocumentSaveFlags  flags);
-static void	gedit_document_set_readonly	(GeditDocument *doc,
+static void	gedit_text_buffer_set_readonly	(GeditTextBuffer *doc,
 						 gboolean       readonly);
-static void	to_search_region_range 		(GeditDocument *doc,
-						 GtkTextIter   *start, 
+static void	to_search_region_range 		(GeditTextBuffer *doc,
+						 GtkTextIter     *start, 
 						 GtkTextIter   *end);
-static void 	insert_text_cb		 	(GeditDocument *doc, 
-						 GtkTextIter   *pos,
-						 const gchar   *text, 
+static void 	insert_text_cb		 	(GeditTextBuffer *doc, 
+						 GtkTextIter     *pos,
+						 const gchar     *text, 
 						 gint           length);
 						 
-static void	delete_range_cb 		(GeditDocument *doc, 
-						 GtkTextIter   *start,
-						 GtkTextIter   *end);
+static void	delete_range_cb 		(GeditTextBuffer *doc, 
+						 GtkTextIter     *start,
+						 GtkTextIter     *end);
 			     
-struct _GeditDocumentPrivate
+static void	gedit_text_buffer_iface_init	(GeditDocumentIface  *iface);
+
+struct _GeditTextBufferPrivate
 {
 	gint	     readonly : 1;
-	gint	     last_save_was_manually : 1; 	
+	gint	     last_save_was_manually : 1;
 	gint	     language_set_by_user : 1;
 	gint         stop_cursor_moved_emission : 1;
 	gint         dispose_has_run : 1;
@@ -129,13 +132,13 @@ struct _GeditDocumentPrivate
 	/* Saving stuff */
 	GeditDocumentSaver *saver;
 
-	/* Search highlighting support variables */	
+	/* Search highlighting support variables */
 	GeditTextRegion *to_search_region;
 	GtkTextTag      *found_tag;
 	
 	/* Mount operation factory */
-	GeditMountOperationFactory  mount_operation_factory;
-	gpointer		    mount_operation_userdata;
+	/*GeditMountOperationFactory  mount_operation_factory;
+	gpointer		    mount_operation_userdata;*/
 };
 
 enum {
@@ -144,7 +147,6 @@ enum {
 	PROP_URI,
 	PROP_SHORTNAME,
 	PROP_CONTENT_TYPE,
-	PROP_MIME_TYPE,
 	PROP_READ_ONLY,
 	PROP_ENCODING,
 	PROP_CAN_SEARCH_AGAIN,
@@ -153,30 +155,17 @@ enum {
 
 enum {
 	CURSOR_MOVED,
-	LOAD,
-	LOADING,
-	LOADED,
-	SAVE,
-	SAVING,
-	SAVED,
 	SEARCH_HIGHLIGHT_UPDATED,
 	LAST_SIGNAL
 };
 
 static guint document_signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE(GeditDocument, gedit_document, GTK_TYPE_SOURCE_BUFFER)
-
-GQuark
-gedit_document_error_quark (void)
-{
-	static GQuark quark = 0;
-
-	if (G_UNLIKELY (quark == 0))
-		quark = g_quark_from_static_string ("gedit_io_load_error");
-
-	return quark;
-}
+G_DEFINE_TYPE_WITH_CODE (GeditTextBuffer,
+			 gedit_text_buffer,
+			 GTK_TYPE_SOURCE_BUFFER,
+			 G_IMPLEMENT_INTERFACE (GEDIT_TYPE_DOCUMENT,
+			 			gedit_text_buffer_iface_init))
 
 static GHashTable *allocated_untitled_numbers = NULL;
 
@@ -214,9 +203,9 @@ release_untitled_number (gint n)
 }
 
 static void
-gedit_document_dispose (GObject *object)
+gedit_text_buffer_dispose (GObject *object)
 {
-	GeditDocument *doc = GEDIT_DOCUMENT (object); 
+	GeditTextBuffer *doc = GEDIT_TEXT_BUFFER (object); 
 
 	gedit_debug (DEBUG_DOCUMENT);
 
@@ -230,7 +219,7 @@ gedit_document_dispose (GObject *object)
 		gchar *position;
 
 		gtk_text_buffer_get_iter_at_mark (
-				GTK_TEXT_BUFFER (doc),			
+				GTK_TEXT_BUFFER (doc),
 				&iter,
 				gtk_text_buffer_get_insert (GTK_TEXT_BUFFER (doc)));
 
@@ -246,7 +235,7 @@ gedit_document_dispose (GObject *object)
 		{
 			GtkSourceLanguage *lang;
 
-			lang = gedit_document_get_language (doc);
+			lang = gedit_text_buffer_get_language (doc);
 
 			gedit_metadata_manager_set (doc->priv->uri,
 				    "language",
@@ -262,13 +251,13 @@ gedit_document_dispose (GObject *object)
 
 	doc->priv->dispose_has_run = TRUE;
 
-	G_OBJECT_CLASS (gedit_document_parent_class)->dispose (object);
+	G_OBJECT_CLASS (gedit_text_buffer_parent_class)->dispose (object);
 }
 
 static void
-gedit_document_finalize (GObject *object)
+gedit_text_buffer_finalize (GObject *object)
 {
-	GeditDocument *doc = GEDIT_DOCUMENT (object); 
+	GeditTextBuffer *doc = GEDIT_TEXT_BUFFER (object); 
 
 	gedit_debug (DEBUG_DOCUMENT);
 
@@ -288,21 +277,22 @@ gedit_document_finalize (GObject *object)
 		gedit_text_region_destroy (doc->priv->to_search_region, FALSE);
 	}
 
-	G_OBJECT_CLASS (gedit_document_parent_class)->finalize (object);
+	G_OBJECT_CLASS (gedit_text_buffer_parent_class)->finalize (object);
 }
 
 static void
-gedit_document_get_property (GObject    *object,
-			     guint       prop_id,
-			     GValue     *value,
-			     GParamSpec *pspec)
+gedit_text_buffer_get_property (GObject    *object,
+				guint       prop_id,
+				GValue     *value,
+				GParamSpec *pspec)
 {
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (object);
 	GeditDocument *doc = GEDIT_DOCUMENT (object);
 
 	switch (prop_id)
 	{
 		case PROP_URI:
-			g_value_set_string (value, doc->priv->uri);
+			g_value_set_string (value, buf->priv->uri);
 			break;
 		case PROP_SHORTNAME:
 			g_value_take_string (value, gedit_document_get_short_name_for_display (doc));
@@ -310,20 +300,17 @@ gedit_document_get_property (GObject    *object,
 		case PROP_CONTENT_TYPE:
 			g_value_take_string (value, gedit_document_get_content_type (doc));
 			break;
-		case PROP_MIME_TYPE:
-			g_value_take_string (value, gedit_document_get_mime_type (doc));
-			break;
 		case PROP_READ_ONLY:
-			g_value_set_boolean (value, doc->priv->readonly);
+			g_value_set_boolean (value, buf->priv->readonly);
 			break;
 		case PROP_ENCODING:
-			g_value_set_boxed (value, doc->priv->encoding);
+			g_value_set_boxed (value, buf->priv->encoding);
 			break;
 		case PROP_CAN_SEARCH_AGAIN:
-			g_value_set_boolean (value, gedit_document_get_can_search_again (doc));
+			g_value_set_boolean (value, gedit_text_buffer_get_can_search_again (buf));
 			break;
 		case PROP_ENABLE_SEARCH_HIGHLIGHTING:
-			g_value_set_boolean (value, gedit_document_get_enable_search_highlighting (doc));
+			g_value_set_boolean (value, gedit_text_buffer_get_enable_search_highlighting (buf));
 			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -332,18 +319,18 @@ gedit_document_get_property (GObject    *object,
 }
 
 static void
-gedit_document_set_property (GObject      *object,
-			     guint         prop_id,
-			     const GValue *value,
-			     GParamSpec   *pspec)
+gedit_text_buffer_set_property (GObject      *object,
+				guint         prop_id,
+				const GValue *value,
+				GParamSpec   *pspec)
 {
-	GeditDocument *doc = GEDIT_DOCUMENT (object);
+	GeditTextBuffer *doc = GEDIT_TEXT_BUFFER (object);
 
 	switch (prop_id)
 	{
 		case PROP_ENABLE_SEARCH_HIGHLIGHTING:
-			gedit_document_set_enable_search_highlighting (doc,
-								       g_value_get_boolean (value));
+			gedit_text_buffer_set_enable_search_highlighting (doc,
+									  g_value_get_boolean (value));
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -351,7 +338,7 @@ gedit_document_set_property (GObject      *object,
 }
 
 static void
-emit_cursor_moved (GeditDocument *doc)
+emit_cursor_moved (GeditTextBuffer *doc)
 {
 	if (!doc->priv->stop_cursor_moved_emission)
 	{
@@ -362,16 +349,16 @@ emit_cursor_moved (GeditDocument *doc)
 }
 
 static void
-gedit_document_mark_set (GtkTextBuffer     *buffer,
-                         const GtkTextIter *iter,
-                         GtkTextMark       *mark)
+gedit_text_buffer_mark_set (GtkTextBuffer     *buffer,
+                            const GtkTextIter *iter,
+                            GtkTextMark       *mark)
 {
-	GeditDocument *doc = GEDIT_DOCUMENT (buffer);
+	GeditTextBuffer *doc = GEDIT_TEXT_BUFFER (buffer);
 
-	if (GTK_TEXT_BUFFER_CLASS (gedit_document_parent_class)->mark_set)
-		GTK_TEXT_BUFFER_CLASS (gedit_document_parent_class)->mark_set (buffer,
-									       iter,
-									       mark);
+	if (GTK_TEXT_BUFFER_CLASS (gedit_text_buffer_parent_class)->mark_set)
+		GTK_TEXT_BUFFER_CLASS (gedit_text_buffer_parent_class)->mark_set (buffer,
+										  iter,
+										  mark);
 
 	if (mark == gtk_text_buffer_get_insert (buffer))
 	{
@@ -380,69 +367,42 @@ gedit_document_mark_set (GtkTextBuffer     *buffer,
 }
 
 static void
-gedit_document_changed (GtkTextBuffer *buffer)
+gedit_text_buffer_changed (GtkTextBuffer *buffer)
 {
-	emit_cursor_moved (GEDIT_DOCUMENT (buffer));
+	emit_cursor_moved (GEDIT_TEXT_BUFFER (buffer));
 
-	GTK_TEXT_BUFFER_CLASS (gedit_document_parent_class)->changed (buffer);
+	GTK_TEXT_BUFFER_CLASS (gedit_text_buffer_parent_class)->changed (buffer);
 }
 
 static void 
-gedit_document_class_init (GeditDocumentClass *klass)
+gedit_text_buffer_class_init (GeditTextBufferClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GtkTextBufferClass *buf_class = GTK_TEXT_BUFFER_CLASS (klass);
 
-	object_class->dispose = gedit_document_dispose;
-	object_class->finalize = gedit_document_finalize;
-	object_class->get_property = gedit_document_get_property;
-	object_class->set_property = gedit_document_set_property;	
+	object_class->dispose = gedit_text_buffer_dispose;
+	object_class->finalize = gedit_text_buffer_finalize;
+	object_class->get_property = gedit_text_buffer_get_property;
+	object_class->set_property = gedit_text_buffer_set_property;
 
-	buf_class->mark_set = gedit_document_mark_set;
-	buf_class->changed = gedit_document_changed;
+	buf_class->mark_set = gedit_text_buffer_mark_set;
+	buf_class->changed = gedit_text_buffer_changed;
 
-	klass->load = gedit_document_load_real;
-	klass->save = gedit_document_save_real;
+	g_object_class_override_property (object_class,
+					  PROP_URI,
+					  "uri");
 
-	g_object_class_install_property (object_class, PROP_URI,
-					 g_param_spec_string ("uri",
-							      "URI",
-							      "The document's URI",
-							      NULL,
-							      G_PARAM_READABLE |
-							      G_PARAM_STATIC_STRINGS));
+	g_object_class_override_property (object_class,
+					  PROP_SHORTNAME,
+					  "shortname");
 
-	g_object_class_install_property (object_class, PROP_SHORTNAME,
-					 g_param_spec_string ("shortname",
-							      "Short Name",
-							      "The document's short name",
-							      NULL,
-							      G_PARAM_READABLE |
-							      G_PARAM_STATIC_STRINGS));
+	g_object_class_override_property (object_class,
+					  PROP_CONTENT_TYPE,
+					  "content-type");
 
-	g_object_class_install_property (object_class, PROP_CONTENT_TYPE,
-					 g_param_spec_string ("content-type",
-							      "Content Type",
-							      "The document's Content Type",
-							      NULL,
-							      G_PARAM_READABLE |
-							      G_PARAM_STATIC_STRINGS));
-
-	g_object_class_install_property (object_class, PROP_MIME_TYPE,
-					 g_param_spec_string ("mime-type",
-							      "MIME Type",
-							      "The document's MIME Type",
-							      "text/plain",
-							      G_PARAM_READABLE |
-							      G_PARAM_STATIC_STRINGS));
-
-	g_object_class_install_property (object_class, PROP_READ_ONLY,
-					 g_param_spec_boolean ("read-only",
-							       "Read Only",
-							       "Whether the document is read only or not",
-							       FALSE,
-							       G_PARAM_READABLE |
-							       G_PARAM_STATIC_STRINGS));
+	g_object_class_override_property (object_class,
+					  PROP_READ_ONLY,
+					  "read-only");
 
 	g_object_class_install_property (object_class, PROP_ENCODING,
 					 g_param_spec_boxed ("encoding",
@@ -475,121 +435,20 @@ gedit_document_class_init (GeditDocumentClass *klass)
 	 * improve performance.
 	 */
 	document_signals[CURSOR_MOVED] =
-   		g_signal_new ("cursor-moved",
+		g_signal_new ("cursor-moved",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GeditDocumentClass, cursor_moved),
+			      G_STRUCT_OFFSET (GeditTextBufferClass, cursor_moved),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
 
-	/**
-	 * GeditDocument::load:
-	 * @document: the #GeditDocument.
-	 * @uri: the uri where to load the document from.
-	 * @encoding: the #GeditEncoding to encode the document.
-	 * @line_pos: the line to show.
-	 * @create: whether the document should be created if it doesn't exist.
-	 *
-	 * The "load" signal is emitted when a document is loaded.
-	 *
-	 * Since: 2.22
-	 */
-	document_signals[LOAD] =
-		g_signal_new ("load",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GeditDocumentClass, load),
-			      NULL, NULL,
-			      gedit_marshal_VOID__STRING_BOXED_INT_BOOLEAN,
-			      G_TYPE_NONE,
-			      4,
-			      G_TYPE_STRING,
-			      /* we rely on the fact that the GeditEncoding pointer stays
-			       * the same forever */
-			      GEDIT_TYPE_ENCODING | G_SIGNAL_TYPE_STATIC_SCOPE,
-			      G_TYPE_INT,
-			      G_TYPE_BOOLEAN);
-
-
-	document_signals[LOADING] =
-   		g_signal_new ("loading",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GeditDocumentClass, loading),
-			      NULL, NULL,
-			      gedit_marshal_VOID__UINT64_UINT64,
-			      G_TYPE_NONE,
-			      2,
-			      G_TYPE_UINT64,
-			      G_TYPE_UINT64);
-
-	document_signals[LOADED] =
-   		g_signal_new ("loaded",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GeditDocumentClass, loaded),
-			      NULL, NULL,
-			      g_cclosure_marshal_VOID__POINTER,
-			      G_TYPE_NONE,
-			      1,
-			      G_TYPE_POINTER);
-
-	/**
-	 * GeditDocument::save:
-	 * @document: the #GeditDocument.
-	 * @uri: the uri where the document is about to be saved.
-	 * @encoding: the #GeditEncoding used to save the document.
-	 * @flags: the #GeditDocumentSaveFlags for the save operation.
-	 *
-	 * The "save" signal is emitted when the document is saved.
-	 *
-	 * Since: 2.20
-	 */
-	document_signals[SAVE] =
-		g_signal_new ("save",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GeditDocumentClass, save),
-			      NULL, NULL,
-			      gedit_marshal_VOID__STRING_BOXED_FLAGS,
-			      G_TYPE_NONE,
-			      3,
-			      G_TYPE_STRING,
-			      /* we rely on the fact that the GeditEncoding pointer stays
-			       * the same forever */
-			      GEDIT_TYPE_ENCODING | G_SIGNAL_TYPE_STATIC_SCOPE,
-			      GEDIT_TYPE_DOCUMENT_SAVE_FLAGS);
-
-	document_signals[SAVING] =
-   		g_signal_new ("saving",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GeditDocumentClass, saving),
-			      NULL, NULL,
-			      gedit_marshal_VOID__UINT64_UINT64,
-			      G_TYPE_NONE,
-			      2,
-			      G_TYPE_UINT64,
-			      G_TYPE_UINT64);
-
-	document_signals[SAVED] =
-   		g_signal_new ("saved",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GeditDocumentClass, saved),
-			      NULL, NULL,
-			      g_cclosure_marshal_VOID__POINTER,
-			      G_TYPE_NONE,
-			      1,
-			      G_TYPE_POINTER);
-
 	document_signals[SEARCH_HIGHLIGHT_UPDATED] =
-	    	g_signal_new ("search_highlight_updated",
+		g_signal_new ("search_highlight_updated",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GeditDocumentClass, search_highlight_updated),
+			      G_STRUCT_OFFSET (GeditTextBufferClass, search_highlight_updated),
 			      NULL, NULL,
 			      gedit_marshal_VOID__BOXED_BOXED,
 			      G_TYPE_NONE, 
@@ -597,11 +456,11 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      GTK_TYPE_TEXT_ITER | G_SIGNAL_TYPE_STATIC_SCOPE,
 			      GTK_TYPE_TEXT_ITER | G_SIGNAL_TYPE_STATIC_SCOPE);
 
-	g_type_class_add_private (object_class, sizeof(GeditDocumentPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditTextBufferPrivate));
 }
 
 static void
-set_language (GeditDocument     *doc, 
+set_language (GeditTextBuffer   *doc, 
               GtkSourceLanguage *lang,
               gboolean           set_by_user)
 {
@@ -631,124 +490,6 @@ set_language (GeditDocument     *doc,
 	}
 
 	doc->priv->language_set_by_user = set_by_user;
-}
-
-static void
-set_encoding (GeditDocument       *doc, 
-	      const GeditEncoding *encoding,
-	      gboolean             set_by_user)
-{
-	g_return_if_fail (encoding != NULL);
-
-	gedit_debug (DEBUG_DOCUMENT);
-
-	if (doc->priv->encoding == encoding)
-		return;
-
-	doc->priv->encoding = encoding;
-
-	if (set_by_user)
-	{
-		const gchar *charset;
-
-		charset = gedit_encoding_get_charset (encoding);
-
-		gedit_metadata_manager_set (doc->priv->uri,
-					    "encoding",
-					    charset);
-	}
-
-	g_object_notify (G_OBJECT (doc), "encoding");
-}
-
-static GtkSourceStyleScheme *
-get_default_style_scheme (void)
-{
-	gchar *scheme_id;
-	GtkSourceStyleScheme *def_style;
-	GtkSourceStyleSchemeManager *manager;
-
-	manager = gedit_get_style_scheme_manager ();
-	scheme_id = gedit_prefs_manager_get_source_style_scheme ();
-	def_style = gtk_source_style_scheme_manager_get_scheme (manager,
-								scheme_id);
-
-	if (def_style == NULL)
-	{
-		g_warning ("Default style scheme '%s' cannot be found, falling back to 'classic' style scheme ", scheme_id);
-
-		def_style = gtk_source_style_scheme_manager_get_scheme (manager, "classic");
-		if (def_style == NULL) 
-		{
-			g_warning ("Style scheme 'classic' cannot be found, check your GtkSourceView installation.");			
-		}
-	}
-
-	g_free (scheme_id);
-
-	return def_style;
-}
-
-static void
-gedit_document_init (GeditDocument *doc)
-{
-	GtkSourceStyleScheme *style_scheme;
-
-	gedit_debug (DEBUG_DOCUMENT);
-
-	doc->priv = GEDIT_DOCUMENT_GET_PRIVATE (doc);
-
-	doc->priv->uri = NULL;
-	doc->priv->untitled_number = get_untitled_number ();
-
-	doc->priv->content_type = g_content_type_from_mime_type ("text/plain");
-
-	doc->priv->readonly = FALSE;
-
-	doc->priv->stop_cursor_moved_emission = FALSE;
-
-	doc->priv->last_save_was_manually = TRUE;
-	doc->priv->language_set_by_user = FALSE;
-
-	doc->priv->dispose_has_run = FALSE;
-
-	doc->priv->mtime = 0;
-
-	g_get_current_time (&doc->priv->time_of_last_save_or_load);
-
-	doc->priv->encoding = gedit_encoding_get_utf8 ();
-
-	gtk_source_buffer_set_max_undo_levels (GTK_SOURCE_BUFFER (doc), 
-					       gedit_prefs_manager_get_undo_actions_limit ());
-
-	gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (doc), 
-							   gedit_prefs_manager_get_bracket_matching ());
-
-	gedit_document_set_enable_search_highlighting (doc,
-						       gedit_prefs_manager_get_enable_search_highlighting ());
-
-	style_scheme = get_default_style_scheme ();
-	if (style_scheme != NULL)
-		gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (doc),
-						    style_scheme);
-
-	g_signal_connect_after (doc, 
-			  	"insert-text",
-			  	G_CALLBACK (insert_text_cb),
-			  	NULL);
-
-	g_signal_connect_after (doc, 
-			  	"delete-range",
-			  	G_CALLBACK (delete_range_cb),
-			  	NULL);		
-}
-
-GeditDocument *
-gedit_document_new (void)
-{
-	gedit_debug (DEBUG_DOCUMENT);
-
-	return GEDIT_DOCUMENT (g_object_new (GEDIT_TYPE_DOCUMENT, NULL));
 }
 
 static GtkSourceLanguage *
@@ -799,9 +540,9 @@ guess_language (const gchar *uri,
 /* If content type is null, we guess from the filename */
 /* If uri is null, we only set the content-type */
 static void
-set_uri (GeditDocument *doc,
-	 const gchar   *uri,
-	 const gchar   *content_type)
+set_uri (GeditTextBuffer *doc,
+	 const gchar     *uri,
+	 const gchar     *content_type)
 {
 	gedit_debug (DEBUG_DOCUMENT);
 
@@ -856,131 +597,240 @@ set_uri (GeditDocument *doc,
 	g_object_notify (G_OBJECT (doc), "shortname");
 }
 
-GFile *
-gedit_document_get_location (GeditDocument *doc)
+static GFile *
+gedit_text_buffer_get_location_impl (GeditDocument *doc)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+	GeditTextBuffer *buf;
 
-	return doc->priv->uri == NULL ? NULL : g_file_new_for_uri (doc->priv->uri);
+	g_return_val_if_fail (GEDIT_IS_TEXT_BUFFER (doc), NULL);
+	
+	buf = GEDIT_TEXT_BUFFER (doc);
+
+	return buf->priv->uri == NULL ? NULL : g_file_new_for_uri (buf->priv->uri);
 }
 
-gchar *
-gedit_document_get_uri (GeditDocument *doc)
+static gchar *
+gedit_text_buffer_get_uri_impl (GeditDocument *doc)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
 
-	return g_strdup (doc->priv->uri);
+	return g_strdup (buf->priv->uri);
 }
 
-void
-gedit_document_set_uri (GeditDocument *doc,
-			const gchar   *uri)
+static void
+gedit_text_buffer_set_uri_impl (GeditDocument *doc,
+				const gchar   *uri)
 {
-	set_uri (doc, uri, doc->priv->content_type);
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
+
+	set_uri (buf, uri, buf->priv->content_type);
 }
 
 /* Never returns NULL */
-gchar *
-gedit_document_get_uri_for_display (GeditDocument *doc)
+static gchar *
+gedit_text_buffer_get_uri_for_display_impl (GeditDocument *doc)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), g_strdup (""));
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
 
-	if (doc->priv->uri == NULL)
+	if (buf->priv->uri == NULL)
 		return g_strdup_printf (_("Unsaved Document %d"),
-					doc->priv->untitled_number);
+					buf->priv->untitled_number);
 	else
-		return gedit_utils_uri_for_display (doc->priv->uri);
+		return gedit_utils_uri_for_display (buf->priv->uri);
 }
 
 /* Never returns NULL */
-gchar *
-gedit_document_get_short_name_for_display (GeditDocument *doc)
+static gchar *
+gedit_text_buffer_get_short_name_for_display_impl (GeditDocument *doc)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), g_strdup (""));
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
 
-	if (doc->priv->uri == NULL)
+	if (buf->priv->uri == NULL)
 		return g_strdup_printf (_("Unsaved Document %d"),
-					doc->priv->untitled_number);
+					buf->priv->untitled_number);
 	else
-		return gedit_utils_basename_for_display (doc->priv->uri);
+		return gedit_utils_basename_for_display (buf->priv->uri);
 }
 
-gchar *
-gedit_document_get_content_type (GeditDocument *doc)
+static gchar *
+gedit_text_buffer_get_content_type_impl (GeditDocument *doc)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
 
- 	return g_strdup (doc->priv->content_type);
+	return g_strdup (buf->priv->content_type);
 }
 
 /* Never returns NULL */
-gchar *
-gedit_document_get_mime_type (GeditDocument *doc)
+static gchar *
+gedit_text_buffer_get_mime_type_impl (GeditDocument *doc)
 {
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
 	gchar *mime_type = NULL;
 
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), g_strdup ("text/plain"));
-
-	if ((doc->priv->content_type != NULL) &&
-	    (!g_content_type_is_unknown (doc->priv->content_type)))
+	if ((buf->priv->content_type != NULL) &&
+	    (!g_content_type_is_unknown (buf->priv->content_type)))
 	{
-		mime_type = g_content_type_get_mime_type (doc->priv->content_type);
+		mime_type = g_content_type_get_mime_type (buf->priv->content_type);
 	}
 
  	return mime_type != NULL ? mime_type : g_strdup ("text/plain");
 }
 
-/* Note: do not emit the notify::read-only signal */
-static void
-set_readonly (GeditDocument *doc,
-	      gboolean       readonly)
+static gboolean
+gedit_text_buffer_get_readonly_impl (GeditDocument *doc)
 {
-	gedit_debug (DEBUG_DOCUMENT);
-	
-	readonly = (readonly != FALSE);
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
 
-	if (doc->priv->readonly == readonly) 
-		return;
-
-	doc->priv->readonly = readonly;
+	return buf->priv->readonly;
 }
 
-static void
-gedit_document_set_readonly (GeditDocument *doc,
-			     gboolean       readonly)
+static gboolean
+gedit_text_buffer_load_cancel_impl (GeditDocument *doc)
 {
-	gedit_debug (DEBUG_DOCUMENT);
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
 
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	if (buf->priv->loader == NULL)
+		return FALSE;
 
-	set_readonly (doc, readonly);
-
-	g_object_notify (G_OBJECT (doc), "read-only");
+	return gedit_document_loader_cancel (buf->priv->loader);
 }
 
-gboolean
-gedit_document_get_readonly (GeditDocument *doc)
+static gboolean
+gedit_text_buffer_is_untouched_impl (GeditDocument *doc)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), TRUE);
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
 
-	return doc->priv->readonly;
+	return (buf->priv->uri == NULL) && 
+		(!gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc)));
 }
 
-gboolean
-_gedit_document_check_externally_modified (GeditDocument *doc)
+static gboolean
+gedit_text_buffer_is_untitled_impl (GeditDocument *doc)
 {
-	GFile *gfile;
-	GFileInfo *info;
-	GTimeVal timeval;
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
 
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	return (buf->priv->uri == NULL);
+}
 
-	if (doc->priv->uri == NULL)
+static gboolean
+gedit_text_buffer_is_local_impl (GeditDocument *doc)
+{
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
+
+	if (buf->priv->uri == NULL)
 	{
 		return FALSE;
 	}
 
-	gfile = g_file_new_for_uri (doc->priv->uri);
+	return gedit_utils_uri_has_file_scheme (buf->priv->uri);
+}
+
+static gboolean
+gedit_text_buffer_get_deleted_impl (GeditDocument *doc)
+{
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
+
+	return buf->priv->uri && !gedit_utils_uri_exists (buf->priv->uri);
+}
+
+/*
+ * If @line is bigger than the lines of the document, the cursor is moved
+ * to the last line and FALSE is returned.
+ */
+static gboolean
+gedit_text_buffer_goto_line_impl (GeditDocument *doc, 
+				  gint           line)
+{
+	gboolean ret = TRUE;
+	guint line_count;
+	GtkTextIter iter;
+
+	gedit_debug (DEBUG_DOCUMENT);
+
+	line_count = gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc));
+
+	if (line >= line_count)
+	{
+		ret = FALSE;
+		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc),
+					      &iter);
+	}
+	else
+	{
+		gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (doc),
+						  &iter,
+						  line);
+	}
+
+	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
+
+	return ret;
+}
+
+static gboolean
+gedit_text_buffer_goto_line_offset_impl (GeditDocument *doc,
+					 gint           line,
+					 gint           line_offset)
+{
+	gboolean ret = TRUE;
+	guint offset_count;
+	GtkTextIter iter;
+	
+	gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (doc),
+					  &iter,
+					  line);
+
+	offset_count = gtk_text_iter_get_chars_in_line (&iter);
+	if (line_offset > offset_count)
+	{
+		ret = FALSE;
+	}
+	else
+	{
+		gtk_text_iter_set_line_offset (&iter, line_offset);
+	}
+	
+	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
+
+	return ret;
+}
+
+static const GeditEncoding *
+gedit_text_buffer_get_encoding_impl (GeditDocument *doc)
+{
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
+
+	return buf->priv->encoding;
+}
+
+static glong
+gedit_text_buffer_get_seconds_since_last_save_or_load_impl (GeditDocument *doc)
+{
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
+
+	GTimeVal current_time;
+
+	gedit_debug (DEBUG_DOCUMENT);
+
+	g_get_current_time (&current_time);
+
+	return (current_time.tv_sec - buf->priv->time_of_last_save_or_load.tv_sec);
+}
+
+static gboolean
+gedit_text_buffer_check_externally_modified_impl (GeditDocument *doc)
+{
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
+	GFile *gfile;
+	GFileInfo *info;
+	GTimeVal timeval;
+
+	if (buf->priv->uri == NULL)
+	{
+		return FALSE;
+	}
+
+	gfile = g_file_new_for_uri (buf->priv->uri);
 	info = g_file_query_info (gfile,
 				  G_FILE_ATTRIBUTE_TIME_MODIFIED,
 				  G_FILE_QUERY_INFO_NONE,
@@ -996,11 +846,257 @@ _gedit_document_check_externally_modified (GeditDocument *doc)
 	g_file_info_get_modification_time (info, &timeval);
 	g_object_unref (info);
 	
-	return timeval.tv_sec > doc->priv->mtime;
+	return timeval.tv_sec > buf->priv->mtime;
 }
 
 static void
-reset_temp_loading_data (GeditDocument       *doc)
+gedit_text_buffer_undo_impl (GeditDocument *doc)
+{
+	gtk_source_buffer_undo (GTK_SOURCE_BUFFER (doc));
+}
+
+static void
+gedit_text_buffer_redo_impl (GeditDocument *doc)
+{
+	gtk_source_buffer_redo (GTK_SOURCE_BUFFER (doc));
+}
+
+static gboolean
+gedit_text_buffer_can_undo_impl (GeditDocument *doc)
+{
+	return gtk_source_buffer_can_undo (GTK_SOURCE_BUFFER (doc));
+}
+
+static gboolean
+gedit_text_buffer_can_redo_impl (GeditDocument *doc)
+{
+	return gtk_source_buffer_can_redo (GTK_SOURCE_BUFFER (doc));
+}
+
+static void
+gedit_text_buffer_begin_not_undoable_action_impl (GeditDocument *doc)
+{
+	gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (doc));
+}
+
+static void
+gedit_text_buffer_end_not_undoable_action_impl (GeditDocument *doc)
+{
+	gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (doc));
+}
+
+static void
+gedit_text_buffer_set_text_impl (GeditDocument *doc,
+				 const gchar   *text,
+				 gint           len)
+{
+	gtk_text_buffer_set_text (GTK_TEXT_BUFFER (doc), text, len);
+}
+
+static void
+gedit_text_buffer_set_modified_impl (GeditDocument *doc,
+				     gboolean       setting)
+{
+	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), setting);
+}
+
+static gboolean
+gedit_text_buffer_get_modified_impl (GeditDocument *doc)
+{
+	return gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc));
+}
+
+static gboolean
+gedit_text_buffer_get_has_selection_impl (GeditDocument *doc)
+{
+	return gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc));
+}
+
+static void
+gedit_text_buffer_iface_init (GeditDocumentIface  *iface)
+{
+	iface->get_location = gedit_text_buffer_get_location_impl;
+	iface->get_uri = gedit_text_buffer_get_uri_impl;
+	iface->set_uri = gedit_text_buffer_set_uri_impl;
+	iface->get_uri_for_display = gedit_text_buffer_get_uri_for_display_impl;
+	iface->get_short_name_for_display = gedit_text_buffer_get_short_name_for_display_impl;
+	iface->get_content_type = gedit_text_buffer_get_content_type_impl;
+	iface->get_mime_type = gedit_text_buffer_get_mime_type_impl;
+	iface->get_readonly = gedit_text_buffer_get_readonly_impl;
+	iface->load_cancel = gedit_text_buffer_load_cancel_impl;
+	iface->is_untouched = gedit_text_buffer_is_untouched_impl;
+	iface->is_untitled = gedit_text_buffer_is_untitled_impl;
+	iface->is_local = gedit_text_buffer_is_local_impl;
+	iface->get_deleted = gedit_text_buffer_get_deleted_impl;
+	iface->goto_line = gedit_text_buffer_goto_line_impl;
+	iface->goto_line_offset = gedit_text_buffer_goto_line_offset_impl;
+	iface->get_encoding = gedit_text_buffer_get_encoding_impl;
+	iface->get_seconds_since_last_save_or_load = gedit_text_buffer_get_seconds_since_last_save_or_load_impl;
+	iface->check_externally_modified = gedit_text_buffer_check_externally_modified_impl;
+	iface->undo = gedit_text_buffer_undo_impl;
+	iface->redo = gedit_text_buffer_redo_impl;
+	iface->can_undo = gedit_text_buffer_can_undo_impl;
+	iface->can_redo = gedit_text_buffer_can_redo_impl;
+	iface->begin_not_undoable_action = gedit_text_buffer_begin_not_undoable_action_impl;
+	iface->end_not_undoable_action = gedit_text_buffer_end_not_undoable_action_impl;
+	iface->set_text = gedit_text_buffer_set_text_impl;
+	iface->set_modified = gedit_text_buffer_set_modified_impl;
+	iface->get_modified = gedit_text_buffer_get_modified_impl;
+	iface->get_has_selection = gedit_text_buffer_get_has_selection_impl;
+	
+	/* signals */
+	iface->load = gedit_text_buffer_load_real;
+	iface->save = gedit_text_buffer_save_real;
+}
+
+static void
+set_encoding (GeditTextBuffer     *doc, 
+	      const GeditEncoding *encoding,
+	      gboolean             set_by_user)
+{
+	g_return_if_fail (encoding != NULL);
+
+	gedit_debug (DEBUG_DOCUMENT);
+
+	if (doc->priv->encoding == encoding)
+		return;
+
+	doc->priv->encoding = encoding;
+
+	if (set_by_user)
+	{
+		const gchar *charset;
+
+		charset = gedit_encoding_get_charset (encoding);
+
+		gedit_metadata_manager_set (doc->priv->uri,
+					    "encoding",
+					    charset);
+	}
+
+	g_object_notify (G_OBJECT (doc), "encoding");
+}
+
+static GtkSourceStyleScheme *
+get_default_style_scheme (void)
+{
+	gchar *scheme_id;
+	GtkSourceStyleScheme *def_style;
+	GtkSourceStyleSchemeManager *manager;
+
+	manager = gedit_get_style_scheme_manager ();
+	scheme_id = gedit_prefs_manager_get_source_style_scheme ();
+	def_style = gtk_source_style_scheme_manager_get_scheme (manager,
+								scheme_id);
+
+	if (def_style == NULL)
+	{
+		g_warning ("Default style scheme '%s' cannot be found, falling back to 'classic' style scheme ", scheme_id);
+
+		def_style = gtk_source_style_scheme_manager_get_scheme (manager, "classic");
+		if (def_style == NULL) 
+		{
+			g_warning ("Style scheme 'classic' cannot be found, check your GtkSourceView installation.");
+		}
+	}
+
+	g_free (scheme_id);
+
+	return def_style;
+}
+
+static void
+gedit_text_buffer_init (GeditTextBuffer *doc)
+{
+	GtkSourceStyleScheme *style_scheme;
+
+	gedit_debug (DEBUG_DOCUMENT);
+
+	doc->priv = GEDIT_TEXT_BUFFER_GET_PRIVATE (doc);
+
+	doc->priv->uri = NULL;
+	doc->priv->untitled_number = get_untitled_number ();
+
+	doc->priv->content_type = g_content_type_from_mime_type ("text/plain");
+
+	doc->priv->readonly = FALSE;
+
+	doc->priv->stop_cursor_moved_emission = FALSE;
+
+	doc->priv->last_save_was_manually = TRUE;
+	doc->priv->language_set_by_user = FALSE;
+
+	doc->priv->dispose_has_run = FALSE;
+
+	doc->priv->mtime = 0;
+
+	g_get_current_time (&doc->priv->time_of_last_save_or_load);
+
+	doc->priv->encoding = gedit_encoding_get_utf8 ();
+
+	gtk_source_buffer_set_max_undo_levels (GTK_SOURCE_BUFFER (doc), 
+					       gedit_prefs_manager_get_undo_actions_limit ());
+
+	gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (doc), 
+							   gedit_prefs_manager_get_bracket_matching ());
+
+	gedit_text_buffer_set_enable_search_highlighting (doc,
+						          gedit_prefs_manager_get_enable_search_highlighting ());
+
+	style_scheme = get_default_style_scheme ();
+	if (style_scheme != NULL)
+		gtk_source_buffer_set_style_scheme (GTK_SOURCE_BUFFER (doc),
+						    style_scheme);
+
+	g_signal_connect_after (doc, 
+			  	"insert-text",
+			  	G_CALLBACK (insert_text_cb),
+			  	NULL);
+
+	g_signal_connect_after (doc, 
+			  	"delete-range",
+			  	G_CALLBACK (delete_range_cb),
+			  	NULL);		
+}
+
+GeditDocument *
+gedit_text_buffer_new (void)
+{
+	gedit_debug (DEBUG_DOCUMENT);
+
+	return GEDIT_DOCUMENT (g_object_new (GEDIT_TYPE_TEXT_BUFFER, NULL));
+}
+
+/* Note: do not emit the notify::read-only signal */
+static void
+set_readonly (GeditTextBuffer *doc,
+	      gboolean         readonly)
+{
+	gedit_debug (DEBUG_DOCUMENT);
+	
+	readonly = (readonly != FALSE);
+
+	if (doc->priv->readonly == readonly) 
+		return;
+
+	doc->priv->readonly = readonly;
+}
+
+static void
+gedit_text_buffer_set_readonly (GeditTextBuffer *doc,
+				gboolean       readonly)
+{
+	gedit_debug (DEBUG_DOCUMENT);
+
+	g_return_if_fail (GEDIT_IS_TEXT_BUFFER (doc));
+
+	set_readonly (doc, readonly);
+
+	g_object_notify (G_OBJECT (doc), "read-only");
+}
+
+static void
+reset_temp_loading_data (GeditTextBuffer *doc)
 {
 	/* the loader has been used, throw it away */
 	g_object_unref (doc->priv->loader);
@@ -1013,7 +1109,7 @@ reset_temp_loading_data (GeditDocument       *doc)
 static void
 document_loader_loaded (GeditDocumentLoader *loader,
 			const GError        *error,
-			GeditDocument       *doc)
+			GeditTextBuffer     *doc)
 {
 	/* load was successful */
 	if (error == NULL)
@@ -1087,18 +1183,16 @@ document_loader_loaded (GeditDocumentLoader *loader,
 	{
 		reset_temp_loading_data (doc);
 
-		g_signal_emit (doc,
-			       document_signals[LOADED],
-			       0,
-			       NULL);
+		g_signal_emit_by_name (GEDIT_DOCUMENT (doc),
+				       "loaded",
+				       NULL);
 
 		return;
 	}
 	
-	g_signal_emit (doc,
-		       document_signals[LOADED],
-		       0,
-		       error);
+	g_signal_emit_by_name (GEDIT_DOCUMENT (doc),
+			       "loaded",
+			       error);
 
 	reset_temp_loading_data (doc);
 }
@@ -1107,7 +1201,7 @@ static void
 document_loader_loading (GeditDocumentLoader *loader,
 			 gboolean             completed,
 			 const GError        *error,
-			 GeditDocument       *doc)
+			 GeditTextBuffer     *doc)
 {
 	if (completed)
 	{
@@ -1121,88 +1215,48 @@ document_loader_loading (GeditDocumentLoader *loader,
 		size = gedit_document_loader_get_file_size (loader);
 		read = gedit_document_loader_get_bytes_read (loader);
 
-		g_signal_emit (doc, 
-			       document_signals[LOADING],
-			       0,
-			       read,
-			       size);
+		g_signal_emit_by_name (GEDIT_DOCUMENT (doc),
+				       "loading",
+				       read,
+				       size);
 	}
 }
 
 static void
-gedit_document_load_real (GeditDocument       *doc,
-			  const gchar         *uri,
-			  const GeditEncoding *encoding,
-			  gint                 line_pos,
-			  gboolean             create)
+gedit_text_buffer_load_real (GeditDocument       *doc,
+			     const gchar         *uri,
+			     const GeditEncoding *encoding,
+			     gint                 line_pos,
+			     gboolean             create)
 {
-	g_return_if_fail (doc->priv->loader == NULL);
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
+
+	g_return_if_fail (buf->priv->loader == NULL);
 
 	gedit_debug_message (DEBUG_DOCUMENT, "load_real: uri = %s", uri);
 
 	/* create a loader. It will be destroyed when loading is completed */
-	doc->priv->loader = gedit_document_loader_new (doc, uri, encoding);
+	buf->priv->loader = gedit_document_loader_new (doc, uri, encoding);
 
-	g_signal_connect (doc->priv->loader,
+	g_signal_connect (buf->priv->loader,
 			  "loading",
 			  G_CALLBACK (document_loader_loading),
 			  doc);
 
-	doc->priv->create = create;
-	doc->priv->requested_encoding = encoding;
-	doc->priv->requested_line_pos = line_pos;
+	buf->priv->create = create;
+	buf->priv->requested_encoding = encoding;
+	buf->priv->requested_line_pos = line_pos;
 
-	set_uri (doc, uri, NULL);
+	set_uri (buf, uri, NULL);
 
-	gedit_document_loader_load (doc->priv->loader);
-}
-
-/**
- * gedit_document_load:
- * @doc: the #GeditDocument.
- * @uri: the uri where to load the document from.
- * @encoding: the #GeditEncoding to encode the document.
- * @line_pos: the line to show.
- * @create: whether the document should be created if it doesn't exist.
- *
- * Load a document. This results in the "load" signal to be emitted.
- */
-void
-gedit_document_load (GeditDocument       *doc,
-		     const gchar         *uri,
-		     const GeditEncoding *encoding,
-		     gint                 line_pos,
-		     gboolean             create)
-{
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (uri != NULL);
-	g_return_if_fail (gedit_utils_is_valid_uri (uri));
-
-	g_signal_emit (doc, document_signals[LOAD], 0, uri, encoding, line_pos, create);
-}
-
-/**
- * gedit_document_load_cancel:
- * @doc: the #GeditDocument.
- *
- * Cancel load of a document.
- */
-gboolean
-gedit_document_load_cancel (GeditDocument *doc)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-
-	if (doc->priv->loader == NULL)
-		return FALSE;
-
-	return gedit_document_loader_cancel (doc->priv->loader);
+	gedit_document_loader_load (buf->priv->loader);
 }
 
 static void
 document_saver_saving (GeditDocumentSaver *saver,
 		       gboolean            completed,
 		       const GError       *error,
-		       GeditDocument      *doc)
+		       GeditTextBuffer    *doc)
 {
 	gedit_debug (DEBUG_DOCUMENT);
 
@@ -1222,7 +1276,7 @@ document_saver_saving (GeditDocumentSaver *saver,
 
 			g_get_current_time (&doc->priv->time_of_last_save_or_load);
 
-			gedit_document_set_readonly (doc, FALSE);
+			gedit_text_buffer_set_readonly (doc, FALSE);
 
 			gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc),
 						      FALSE);
@@ -1234,10 +1288,9 @@ document_saver_saving (GeditDocumentSaver *saver,
 				      TRUE);
 		}
 
-		g_signal_emit (doc,
-			       document_signals[SAVED],
-			       0,
-			       error);
+		g_signal_emit_by_name (GEDIT_DOCUMENT (doc),
+				       "saved",
+				       error);
 
 		/* the saver has been used, throw it away */
 		g_object_unref (doc->priv->saver);
@@ -1253,210 +1306,35 @@ document_saver_saving (GeditDocumentSaver *saver,
 
 		gedit_debug_message (DEBUG_DOCUMENT, "save progress: %" G_GINT64_FORMAT " of %" G_GINT64_FORMAT, written, size);
 
-		g_signal_emit (doc,
-			       document_signals[SAVING],
-			       0,
-			       written,
-			       size);
+		g_signal_emit_by_name (GEDIT_DOCUMENT (doc),
+				       "saving",
+				       written,
+				       size);
 	}
 }
 
 static void
-gedit_document_save_real (GeditDocument          *doc,
-			  const gchar            *uri,
-			  const GeditEncoding    *encoding,
-			  GeditDocumentSaveFlags  flags)
+gedit_text_buffer_save_real (GeditDocument          *doc,
+			     const gchar            *uri,
+			     const GeditEncoding    *encoding,
+			     GeditDocumentSaveFlags  flags)
 {
-	g_return_if_fail (doc->priv->saver == NULL);
+	GeditTextBuffer *buf = GEDIT_TEXT_BUFFER (doc);
+
+	g_return_if_fail (buf->priv->saver == NULL);
 
 	/* create a saver, it will be destroyed once saving is complete */
-	doc->priv->saver = gedit_document_saver_new (doc, uri, encoding, flags);
+	buf->priv->saver = gedit_document_saver_new (doc, uri, encoding, flags);
 
-	g_signal_connect (doc->priv->saver,
+	g_signal_connect (buf->priv->saver,
 			  "saving",
 			  G_CALLBACK (document_saver_saving),
 			  doc);
 
-	doc->priv->requested_encoding = encoding;
+	buf->priv->requested_encoding = encoding;
 
-	gedit_document_saver_save (doc->priv->saver,
-				   doc->priv->mtime);
-}
-
-/**
- * gedit_document_save:
- * @doc: the #GeditDocument.
- * @flags: optionnal #GeditDocumentSaveFlags.
- *
- * Save the document to its previous location. This results in the "save"
- * signal to be emitted.
- */
-void
-gedit_document_save (GeditDocument          *doc,
-		     GeditDocumentSaveFlags  flags)
-{
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (doc->priv->uri != NULL);
-
-	g_signal_emit (doc,
-		       document_signals[SAVE],
-		       0,
-		       doc->priv->uri,
-		       doc->priv->encoding,
-		       flags);
-}
-
-/**
- * gedit_document_save_as:
- * @doc: the #GeditDocument.
- * @uri: the uri where to save the document.
- * @encoding: the #GeditEncoding to encode the document.
- * @flags: optionnal #GeditDocumentSaveFlags.
- *
- * Save the document to a new location. This results in the "save" signal
- * to be emitted.
- */
-void
-gedit_document_save_as (GeditDocument          *doc,
-			const gchar            *uri,
-			const GeditEncoding    *encoding,
-			GeditDocumentSaveFlags  flags)
-{
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (uri != NULL);
-	g_return_if_fail (encoding != NULL);
-
-	/* priv->mtime refers to the the old uri (if any). Thus, it should be
-	 * ignored when saving as. */
-	g_signal_emit (doc,
-		       document_signals[SAVE],
-		       0,
-		       uri,
-		       encoding,
-		       flags | GEDIT_DOCUMENT_SAVE_IGNORE_MTIME);
-}
-
-gboolean
-gedit_document_insert_file (GeditDocument       *doc,
-			    GtkTextIter         *iter,
-			    const gchar         *uri,
-			    const GeditEncoding *encoding)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-	g_return_val_if_fail (iter != NULL, FALSE);
-	g_return_val_if_fail (gtk_text_iter_get_buffer (iter) == 
-				GTK_TEXT_BUFFER (doc), FALSE);
-
-	/* TODO */
-
-	return FALSE;
-}
-
-gboolean	 
-gedit_document_is_untouched (GeditDocument *doc)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), TRUE);
-
-	return (doc->priv->uri == NULL) && 
-		(!gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc)));
-}
-
-gboolean 
-gedit_document_is_untitled (GeditDocument *doc)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), TRUE);
-
-	return (doc->priv->uri == NULL);
-}
-
-gboolean
-gedit_document_is_local (GeditDocument *doc)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-
-	if (doc->priv->uri == NULL)
-	{
-		return FALSE;
-	}
-
-	return gedit_utils_uri_has_file_scheme (doc->priv->uri);
-}
-
-gboolean
-gedit_document_get_deleted (GeditDocument *doc)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-
-	return doc->priv->uri && !gedit_utils_uri_exists (doc->priv->uri);
-}
-
-/*
- * If @line is bigger than the lines of the document, the cursor is moved
- * to the last line and FALSE is returned.
- */
-gboolean
-gedit_document_goto_line (GeditDocument *doc, 
-			  gint           line)
-{
-	gboolean ret = TRUE;
-	guint line_count;
-	GtkTextIter iter;
-
-	gedit_debug (DEBUG_DOCUMENT);
-
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-	g_return_val_if_fail (line >= -1, FALSE);
-
-	line_count = gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc));
-
-	if (line >= line_count)
-	{
-		ret = FALSE;
-		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc),
-					      &iter);
-	}
-	else
-	{
-		gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (doc),
-						  &iter,
-						  line);
-	}
-
-	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
-
-	return ret;
-}
-
-gboolean
-gedit_document_goto_line_offset (GeditDocument *doc,
-				 gint           line,
-				 gint           line_offset)
-{
-	gboolean ret = TRUE;
-	guint offset_count;
-	GtkTextIter iter;
-	
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-	g_return_val_if_fail (line >= -1, FALSE);
-	g_return_val_if_fail (line_offset >= -1, FALSE);
-	
-	gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (doc),
-					  &iter,
-					  line);
-
-	offset_count = gtk_text_iter_get_chars_in_line (&iter);
-	if (line_offset > offset_count)
-	{
-		ret = FALSE;
-	}
-	else
-	{
-		gtk_text_iter_set_line_offset (&iter, line_offset);
-	}
-	
-	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
-
-	return ret;
+	gedit_document_saver_save (buf->priv->saver,
+				   buf->priv->mtime);
 }
 
 static gint
@@ -1489,15 +1367,15 @@ compute_num_of_lines (const gchar *text)
 }
 
 void
-gedit_document_set_search_text (GeditDocument *doc,
-				const gchar   *text,
-				guint          flags)
+gedit_text_buffer_set_search_text (GeditTextBuffer *doc,
+				   const gchar     *text,
+				   guint            flags)
 {
 	gchar *converted_text;
 	gboolean notify = FALSE;
 	gboolean update_to_search_region = FALSE;
 	
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (GEDIT_IS_TEXT_BUFFER (doc));
 	g_return_if_fail ((text == NULL) || (doc->priv->search_text != text));
 	g_return_if_fail ((text == NULL) || g_utf8_validate (text, -1, NULL));
 
@@ -1508,12 +1386,12 @@ gedit_document_set_search_text (GeditDocument *doc,
 		if (*text != '\0')
 		{
 			converted_text = gedit_utils_unescape_search_text (text);
-			notify = !gedit_document_get_can_search_again (doc);
+			notify = !gedit_text_buffer_get_can_search_again (doc);
 		}
 		else
 		{
-			converted_text = g_strdup("");
-			notify = gedit_document_get_can_search_again (doc);
+			converted_text = g_strdup ("");
+			notify = gedit_text_buffer_get_can_search_again (doc);
 		}
 		
 		g_free (doc->priv->search_text);
@@ -1551,10 +1429,10 @@ gedit_document_set_search_text (GeditDocument *doc,
 }
 
 gchar *
-gedit_document_get_search_text (GeditDocument *doc,
-				guint         *flags)
+gedit_text_buffer_get_search_text (GeditTextBuffer *doc,
+				   guint           *flags)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (GEDIT_IS_TEXT_BUFFER (doc), NULL);
 
 	if (flags != NULL)
 		*flags = doc->priv->search_flags;
@@ -1563,20 +1441,20 @@ gedit_document_get_search_text (GeditDocument *doc,
 }
 
 gboolean
-gedit_document_get_can_search_again (GeditDocument *doc)
+gedit_text_buffer_get_can_search_again (GeditTextBuffer *doc)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	g_return_val_if_fail (GEDIT_IS_TEXT_BUFFER (doc), FALSE);
 
 	return ((doc->priv->search_text != NULL) && 
 	        (*doc->priv->search_text != '\0'));
 }
 
 gboolean
-gedit_document_search_forward (GeditDocument     *doc,
-			       const GtkTextIter *start,
-			       const GtkTextIter *end,
-			       GtkTextIter       *match_start,
-			       GtkTextIter       *match_end)
+gedit_text_buffer_search_forward (GeditTextBuffer   *doc,
+				  const GtkTextIter *start,
+				  const GtkTextIter *end,
+				  GtkTextIter       *match_start,
+				  GtkTextIter       *match_end)
 {
 	GtkTextIter iter;
 	GtkSourceSearchFlags search_flags;
@@ -1584,7 +1462,7 @@ gedit_document_search_forward (GeditDocument     *doc,
 	GtkTextIter m_start;
 	GtkTextIter m_end;
 	
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	g_return_val_if_fail (GEDIT_IS_TEXT_BUFFER (doc), FALSE);
 	g_return_val_if_fail ((start == NULL) || 
 			      (gtk_text_iter_get_buffer (start) ==  GTK_TEXT_BUFFER (doc)), FALSE);
 	g_return_val_if_fail ((end == NULL) || 
@@ -1637,15 +1515,15 @@ gedit_document_search_forward (GeditDocument     *doc,
 	if (found && (match_end != NULL))
 		*match_end = m_end;
 	
-	return found;			    
+	return found;
 }
-						 
+
 gboolean
-gedit_document_search_backward (GeditDocument     *doc,
-				const GtkTextIter *start,
-				const GtkTextIter *end,
-				GtkTextIter       *match_start,
-				GtkTextIter       *match_end)
+gedit_text_buffer_search_backward (GeditTextBuffer   *doc,
+				   const GtkTextIter *start,
+				   const GtkTextIter *end,
+				   GtkTextIter       *match_start,
+				   GtkTextIter       *match_end)
 {
 	GtkTextIter iter;
 	GtkSourceSearchFlags search_flags;
@@ -1653,7 +1531,7 @@ gedit_document_search_backward (GeditDocument     *doc,
 	GtkTextIter m_start;
 	GtkTextIter m_end;
 	
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	g_return_val_if_fail (GEDIT_IS_TEXT_BUFFER (doc), FALSE);
 	g_return_val_if_fail ((start == NULL) || 
 			      (gtk_text_iter_get_buffer (start) ==  GTK_TEXT_BUFFER (doc)), FALSE);
 	g_return_val_if_fail ((end == NULL) || 
@@ -1710,10 +1588,10 @@ gedit_document_search_backward (GeditDocument     *doc,
 }
 
 gint 
-gedit_document_replace_all (GeditDocument       *doc,
-			    const gchar         *find, 
-			    const gchar         *replace, 
-			    guint                flags)
+gedit_text_buffer_replace_all (GeditTextBuffer     *doc,
+			       const gchar         *find, 
+			       const gchar         *replace, 
+			       guint                flags)
 {
 	GtkTextIter iter;
 	GtkTextIter m_start;
@@ -1728,7 +1606,7 @@ gedit_document_replace_all (GeditDocument       *doc,
 	gboolean brackets_highlighting;
 	gboolean search_highliting;
 
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), 0);
+	g_return_val_if_fail (GEDIT_IS_TEXT_BUFFER (doc), 0);
 	g_return_val_if_fail (replace != NULL, 0);
 	g_return_val_if_fail ((find != NULL) || (doc->priv->search_text != NULL), 0);
 
@@ -1763,8 +1641,8 @@ gedit_document_replace_all (GeditDocument       *doc,
 	gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (buffer), FALSE);
 
 	/* and do search highliting later */
-	search_highliting = gedit_document_get_enable_search_highlighting (doc);
-	gedit_document_set_enable_search_highlighting (doc, FALSE);
+	search_highliting = gedit_text_buffer_get_enable_search_highlighting (doc);
+	gedit_text_buffer_set_enable_search_highlighting (doc, FALSE);
 
 	gtk_text_buffer_begin_user_action (buffer);
 
@@ -1818,7 +1696,7 @@ gedit_document_replace_all (GeditDocument       *doc,
 
 	gtk_source_buffer_set_highlight_matching_brackets (GTK_SOURCE_BUFFER (buffer),
 							   brackets_highlighting);
-	gedit_document_set_enable_search_highlighting (doc, search_highliting);
+	gedit_text_buffer_set_enable_search_highlighting (doc, search_highliting);
 
 	g_free (search_text);
 	g_free (replace_text);
@@ -1827,50 +1705,28 @@ gedit_document_replace_all (GeditDocument       *doc,
 }
 
 void
-gedit_document_set_language (GeditDocument     *doc, 
-			     GtkSourceLanguage *lang)
+gedit_text_buffer_set_language (GeditTextBuffer   *doc, 
+				GtkSourceLanguage *lang)
 {
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (GEDIT_IS_TEXT_BUFFER (doc));
 
 	set_language (doc, lang, TRUE);
 }
 
 GtkSourceLanguage *
-gedit_document_get_language (GeditDocument *doc)
+gedit_text_buffer_get_language (GeditTextBuffer *doc)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (GEDIT_IS_TEXT_BUFFER (doc), NULL);
 
 	return gtk_source_buffer_get_language (GTK_SOURCE_BUFFER (doc));
 }
 
-const GeditEncoding *
-gedit_document_get_encoding (GeditDocument *doc)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
-
-	return doc->priv->encoding;
-}
-
-glong
-_gedit_document_get_seconds_since_last_save_or_load (GeditDocument *doc)
-{
-	GTimeVal current_time;
-
-	gedit_debug (DEBUG_DOCUMENT);
-	
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), -1);
-
-	g_get_current_time (&current_time);
-
-	return (current_time.tv_sec - doc->priv->time_of_last_save_or_load.tv_sec);
-}
-
 static void
-get_search_match_colors (GeditDocument *doc,
-			 gboolean      *foreground_set,
-			 GdkColor      *foreground,
-			 gboolean      *background_set,
-			 GdkColor      *background)
+get_search_match_colors (GeditTextBuffer *doc,
+			 gboolean        *foreground_set,
+			 GdkColor        *foreground,
+			 gboolean        *background_set,
+			 GdkColor        *background)
 {
 	GtkSourceStyleScheme *style_scheme;
 	GtkSourceStyle *style;
@@ -1929,9 +1785,9 @@ get_search_match_colors (GeditDocument *doc,
 }
 
 static void
-sync_found_tag (GeditDocument *doc,
-		GParamSpec    *pspec,
-		gpointer       data)
+sync_found_tag (GeditTextBuffer *doc,
+		GParamSpec      *pspec,
+		gpointer         data)
 {
 	GdkColor fg;
 	GdkColor bg;
@@ -1967,9 +1823,9 @@ text_tag_set_highest_priority (GtkTextTag    *tag,
 }
 
 static void
-search_region (GeditDocument *doc,
-	       GtkTextIter   *start,
-	       GtkTextIter   *end)
+search_region (GeditTextBuffer *doc,
+	       GtkTextIter     *start,
+	       GtkTextIter     *end)
 {
 	GtkTextIter iter;
 	GtkTextIter m_start;
@@ -2078,9 +1934,9 @@ search_region (GeditDocument *doc,
 }
 
 static void
-to_search_region_range (GeditDocument *doc,
-			GtkTextIter   *start, 
-			GtkTextIter   *end)
+to_search_region_range (GeditTextBuffer *doc,
+			GtkTextIter     *start, 
+			GtkTextIter     *end)
 {
 	gedit_debug (DEBUG_DOCUMENT);
 	
@@ -2106,15 +1962,15 @@ to_search_region_range (GeditDocument *doc,
 }
 
 void
-_gedit_document_search_region (GeditDocument     *doc,
-			       const GtkTextIter *start,
-			       const GtkTextIter *end)
+_gedit_text_buffer_search_region (GeditTextBuffer    *doc,
+				  const GtkTextIter  *start,
+				  const GtkTextIter  *end)
 {
 	GeditTextRegion *region;
 
 	gedit_debug (DEBUG_DOCUMENT);
 		
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (GEDIT_IS_TEXT_BUFFER (doc));
 	g_return_if_fail (start != NULL);
 	g_return_if_fail (end != NULL);
 	
@@ -2161,10 +2017,10 @@ _gedit_document_search_region (GeditDocument     *doc,
 }
 
 static void
-insert_text_cb (GeditDocument *doc, 
-		GtkTextIter   *pos,
-		const gchar   *text, 
-		gint           length)
+insert_text_cb (GeditTextBuffer *doc, 
+		GtkTextIter     *pos,
+		const gchar     *text, 
+		gint             length)
 {
 	GtkTextIter start;
 	GtkTextIter end;
@@ -2186,9 +2042,9 @@ insert_text_cb (GeditDocument *doc,
 }
 						 
 static void	
-delete_range_cb (GeditDocument *doc, 
-		 GtkTextIter   *start,
-		 GtkTextIter   *end)
+delete_range_cb (GeditTextBuffer *doc, 
+		 GtkTextIter     *start,
+		 GtkTextIter     *end)
 {
 	GtkTextIter d_start;
 	GtkTextIter d_end;
@@ -2202,10 +2058,10 @@ delete_range_cb (GeditDocument *doc,
 }
 
 void
-gedit_document_set_enable_search_highlighting (GeditDocument *doc,
-					       gboolean       enable)
+gedit_text_buffer_set_enable_search_highlighting (GeditTextBuffer *doc,
+						  gboolean       enable)
 {
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (GEDIT_IS_TEXT_BUFFER (doc));
 	
 	enable = enable != FALSE;
 	
@@ -2238,7 +2094,7 @@ gedit_document_set_enable_search_highlighting (GeditDocument *doc,
 	else
 	{
 		doc->priv->to_search_region = gedit_text_region_new (GTK_TEXT_BUFFER (doc));
-		if (gedit_document_get_can_search_again (doc))
+		if (gedit_text_buffer_get_can_search_again (doc))
 		{
 			/* If search_text is not empty, highligth all its occurrences */
 			GtkTextIter begin;
@@ -2256,32 +2112,65 @@ gedit_document_set_enable_search_highlighting (GeditDocument *doc,
 }
 
 gboolean
-gedit_document_get_enable_search_highlighting (GeditDocument *doc)
+gedit_text_buffer_get_enable_search_highlighting (GeditTextBuffer *doc)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	g_return_val_if_fail (GEDIT_IS_TEXT_BUFFER (doc), FALSE);
 	
 	return (doc->priv->to_search_region != NULL);
 }
 
+/* FIXME
 void
-_gedit_document_set_mount_operation_factory (GeditDocument 	       *doc,
-					    GeditMountOperationFactory	callback,
-					    gpointer	                userdata)
+_gedit_text_buffer_set_mount_operation_factory (GeditTextBuffer		       *doc,
+						GeditMountOperationFactory	callback,
+						gpointer	                userdata)
 {
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (GEDIT_IS_TEXT_BUFFER (doc));
 	
 	doc->priv->mount_operation_factory = callback;
 	doc->priv->mount_operation_userdata = userdata;
 }
 
 GMountOperation *
-_gedit_document_create_mount_operation (GeditDocument *doc)
+_gedit_text_buffer_create_mount_operation (GeditTextBuffer *doc)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (GEDIT_IS_TEXT_BUFFER (doc), NULL);
 	
 	if (doc->priv->mount_operation_factory == NULL)
 		return g_mount_operation_new ();
 	else
 		return doc->priv->mount_operation_factory (doc, 
 						           doc->priv->mount_operation_userdata);
+}*/
+
+void
+gedit_text_buffer_get_cursor_position (GeditTextBuffer *buffer,
+				       gint  tab_size,
+				       gint *row,
+				       gint *col)
+{
+	GtkTextIter iter;
+	GtkTextIter start;
+
+	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (buffer),
+					  &iter,
+					  gtk_text_buffer_get_insert (GTK_TEXT_BUFFER (buffer)));
+	
+	*row = gtk_text_iter_get_line (&iter);
+	
+	start = iter;
+	gtk_text_iter_set_line_offset (&start, 0);
+	*col = 0;
+
+	while (!gtk_text_iter_equal (&start, &iter))
+	{
+		/* FIXME: Are we Unicode compliant here? */
+		if (gtk_text_iter_get_char (&start) == '\t')
+					
+			*col += (tab_size - (*col  % tab_size));
+		else
+			++(*col);
+
+		gtk_text_iter_forward_char (&start);
+	}
 }

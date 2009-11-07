@@ -34,7 +34,8 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
-#include <gedit/gedit-tab.h>
+#include <gedit/gedit-view-container.h>
+#include <gedit/gedit-page.h>
 #include <gedit/gedit-panel.h>
 #include <gedit/gedit-message-bus.h>
 
@@ -86,14 +87,14 @@ struct _GeditWindowClass
 	GtkWindowClass parent_class;
 	
 	/* Signals */
-	void	 (* tab_added)      	(GeditWindow *window,
-				     	 GeditTab    *tab);
-	void	 (* tab_removed)    	(GeditWindow *window,
-				     	 GeditTab    *tab);
-	void	 (* tabs_reordered) 	(GeditWindow *window);
-	void	 (* active_tab_changed)	(GeditWindow *window,
-				     	 GeditTab    *tab);
-	void	 (* active_tab_state_changed)	
+	void	 (* page_added)		(GeditWindow *window,
+					 GeditPage   *page);
+	void	 (* page_removed)	(GeditWindow *window,
+					 GeditPage   *page);
+	void	 (* pages_reordered)	(GeditWindow *window);
+	void	 (* active_page_changed)(GeditWindow *window,
+					 GeditPage   *page);
+	void	 (* active_page_state_changed)
 					(GeditWindow *window);
 };
 
@@ -102,30 +103,35 @@ struct _GeditWindowClass
  */
 GType 		 gedit_window_get_type 			(void) G_GNUC_CONST;
 
-GeditTab	*gedit_window_create_tab		(GeditWindow         *window,
+GeditPage	*gedit_window_create_page
+							(GeditWindow         *window,
 							 gboolean             jump_to);
-							 
-GeditTab	*gedit_window_create_tab_from_uri	(GeditWindow         *window,
+
+GeditPage	*gedit_window_create_page_from_uri
+							(GeditWindow         *window,
 							 const gchar         *uri,
 							 const GeditEncoding *encoding,
 							 gint                 line_pos,
 							 gboolean             create,
 							 gboolean             jump_to);
 							 
-void		 gedit_window_close_tab			(GeditWindow         *window,
-							 GeditTab            *tab);
+void		 gedit_window_close_page		(GeditWindow         *window,
+							 GeditPage           *page);
 							 
-void		 gedit_window_close_all_tabs		(GeditWindow         *window);
+void		 gedit_window_close_all_pages		(GeditWindow         *window);
 
-void		 gedit_window_close_tabs		(GeditWindow         *window,
+void		 gedit_window_close_pages		(GeditWindow         *window,
 							 const GList         *tabs);
 							 
-GeditTab	*gedit_window_get_active_tab		(GeditWindow         *window);
+GeditPage	*gedit_window_get_active_page
+							(GeditWindow         *window);
 
-void		 gedit_window_set_active_tab		(GeditWindow         *window,
-							 GeditTab            *tab);
+void		 gedit_window_set_active_page		(GeditWindow         *window,
+							 GeditPage           *page);
 
 /* Helper functions */
+GeditViewContainer *gedit_window_get_active_view_container
+							(GeditWindow *window);
 GeditView	*gedit_window_get_active_view		(GeditWindow         *window);
 GeditDocument	*gedit_window_get_active_document	(GeditWindow         *window);
 
@@ -151,10 +157,12 @@ GtkUIManager	*gedit_window_get_ui_manager		(GeditWindow         *window);
 
 GeditWindowState gedit_window_get_state 		(GeditWindow         *window);
 
-GeditTab        *gedit_window_get_tab_from_location	(GeditWindow         *window,
+GeditViewContainer	*gedit_window_get_view_container_from_location
+							(GeditWindow         *window,
 							 GFile               *location);
 
-GeditTab        *gedit_window_get_tab_from_uri		(GeditWindow         *window,
+GeditViewContainer	*gedit_window_get_view_container_from_uri
+							(GeditWindow         *window,
 							 const gchar         *uri);
 
 /* Message bus */
@@ -165,9 +173,9 @@ GeditMessageBus	*gedit_window_get_message_bus		(GeditWindow         *window);
  */
 GtkWidget	*_gedit_window_get_notebook		(GeditWindow         *window);
 
-GeditWindow	*_gedit_window_move_tab_to_new_window	(GeditWindow         *window,
-							 GeditTab            *tab);
-gboolean	 _gedit_window_is_removing_tabs		(GeditWindow         *window);
+GeditWindow	*_gedit_window_move_page_to_new_window	(GeditWindow         *window,
+							 GeditPage           *page);
+gboolean	 _gedit_window_is_removing_pages	(GeditWindow         *window);
 
 GFile		*_gedit_window_get_default_location 	(GeditWindow         *window);
 

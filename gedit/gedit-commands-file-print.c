@@ -39,7 +39,7 @@
 
 #include "gedit-commands.h"
 #include "gedit-window.h"
-#include "gedit-tab.h"
+#include "gedit-view-container.h"
 #include "gedit-debug.h"
 
 #if !GTK_CHECK_VERSION (2, 17, 4)
@@ -47,15 +47,15 @@ void
 _gedit_cmd_file_page_setup (GtkAction   *action,
 			    GeditWindow *window)
 {
-	GeditTab *tab;
+	GeditViewContainer *container;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	tab = gedit_window_get_active_tab (window);
-	if (tab == NULL)
+	container = gedit_window_get_active_view_container (window);
+	if (container == NULL)
 		return;
 
-	_gedit_tab_page_setup (tab);
+	_gedit_view_container_page_setup (container);
 }
 #endif
 
@@ -63,29 +63,35 @@ void
 _gedit_cmd_file_print_preview (GtkAction   *action,
 			       GeditWindow *window)
 {
-	GeditTab *tab;
+	GeditPage *page;
+	GeditViewContainer *container;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	tab = gedit_window_get_active_tab (window);
-	if (tab == NULL)
+	page = gedit_window_get_active_page (window);
+	if (page == NULL)
 		return;
 
-	_gedit_tab_print_preview (tab);
+	container = gedit_page_get_active_view_container (page);
+
+	_gedit_view_container_print_preview (container);
 }
 
 void
 _gedit_cmd_file_print (GtkAction   *action,
 		       GeditWindow *window)
 {
-	GeditTab *tab;
+	GeditPage *page;
+	GeditViewContainer *container;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	tab = gedit_window_get_active_tab (window);
-	if (tab == NULL)
+	page = gedit_window_get_active_page (window);
+	if (page == NULL)
 		return;
 
-	_gedit_tab_print (tab);
+	container = gedit_page_get_active_view_container (page);
+
+	_gedit_view_container_print (container);
 }
 

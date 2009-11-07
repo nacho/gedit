@@ -195,7 +195,7 @@ insert_text_in_document (GeditDocumentLoader *loader,
 
 	g_return_if_fail (text != NULL);
 
-	gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (doc));
+	gedit_document_begin_not_undoable_action (doc);
 
 	/* If the last char is a newline, don't add it to the buffer (otherwise
 	   GtkTextView shows it as an empty line). See bug #324942. */
@@ -203,11 +203,11 @@ insert_text_in_document (GeditDocumentLoader *loader,
 		len--;
 
 	/* Insert text in the buffer */
-	gtk_text_buffer_set_text (GTK_TEXT_BUFFER (doc), text, len);
+	gedit_document_set_text (doc, text, len);
 
-	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), FALSE);
+	gedit_document_set_modified (doc, FALSE);
 
-	gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (doc));
+	gedit_document_end_not_undoable_action (doc);
 }
 
 /* This function is only meant to be called by child classes */

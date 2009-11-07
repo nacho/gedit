@@ -49,7 +49,7 @@ struct _GeditDocumentsPanelPrivate
 	GtkWidget    *treeview;
 	GtkTreeModel *model;
 	
-	gboolean      adding_tab;
+	gboolean      adding_page;
 	gboolean      is_reodering;
 };
 
@@ -64,58 +64,62 @@ enum
 #define MAX_DOC_NAME_LENGTH 60
 
 static gchar *
-tab_get_name (GeditTab *tab)
+page_get_name (GeditPage *page)
 {
+	GeditViewContainer *container;
 	GeditDocument *doc;
 	gchar *name;
 	gchar *docname;
-	gchar *tab_name;
+	gchar *page_name;
 
-	g_return_val_if_fail (GEDIT_IS_TAB (tab), NULL);
+	g_return_val_if_fail (GEDIT_IS_PAGE (page), NULL);
 
-	doc = gedit_tab_get_document (tab);
+	container = gedit_page_get_active_view_container (page);
+	
+	/* FIXME: check container == NULL? */
+	doc = gedit_view_container_get_document (container);
 
 	name = gedit_document_get_short_name_for_display (doc);
 
 	/* Truncate the name so it doesn't get insanely wide. */
 	docname = gedit_utils_str_middle_truncate (name, MAX_DOC_NAME_LENGTH);
 
-	if (gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc)))
+	if (gedit_document_get_modified (doc))
 	{
 		if (gedit_document_get_readonly (doc))
 		{
-			tab_name = g_markup_printf_escaped ("<i>%s</i> [<i>%s</i>]",
-							    docname,
-							    _("Read Only"));
+			page_name = g_markup_printf_escaped ("<i>%s</i> [<i>%s</i>]",
+							     docname,
+							     _("Read Only"));
 		}
 		else
 		{
-			tab_name = g_markup_printf_escaped ("<i>%s</i>", 
-							    docname);
+			page_name = g_markup_printf_escaped ("<i>%s</i>", 
+							     docname);
 		}
 	}
 	else
 	{
 		if (gedit_document_get_readonly (doc))
 		{
-			tab_name = g_markup_printf_escaped ("%s [<i>%s</i>]",
-							    docname,
-							    _("Read Only"));
+			page_name = g_markup_printf_escaped ("%s [<i>%s</i>]",
+							     docname,
+							     _("Read Only"));
 		}
 		else
 		{
-			tab_name = g_markup_escape_text (docname, -1);
+			page_name = g_markup_escape_text (docname, -1);
 		}
 	}
 
 	g_free (docname);
 	g_free (name);
 
-	return tab_name;
+	return page_name;
 }
 
 static void
-get_iter_from_tab (GeditDocumentsPanel *panel, GeditTab *tab, GtkTreeIter *iter)
+get_iter_from_page (GeditDocumentsPanel *panel, GeditPage *page, GtkTreeIter *iter)
 {
 	gint num;
 	GtkWidget *nb;
@@ -123,7 +127,7 @@ get_iter_from_tab (GeditDocumentsPanel *panel, GeditTab *tab, GtkTreeIter *iter)
 
 	nb = _gedit_window_get_notebook (panel->priv->window);
 	num = gtk_notebook_page_num (GTK_NOTEBOOK (nb),
-				     GTK_WIDGET (tab));
+				     GTK_WIDGET (page));
 
 	path = gtk_tree_path_new_from_indices (num, -1);
 	gtk_tree_model_get_iter (panel->priv->model,
@@ -133,22 +137,22 @@ get_iter_from_tab (GeditDocumentsPanel *panel, GeditTab *tab, GtkTreeIter *iter)
 }
 
 static void
-window_active_tab_changed (GeditWindow         *window,
-		  	   GeditTab            *tab,
-		  	   GeditDocumentsPanel *panel)
+window_active_page_changed (GeditWindow         *window,
+			    GeditPage           *page,
+			    GeditDocumentsPanel *panel)
 {	
-	g_return_if_fail (tab != NULL);
+	g_return_if_fail (page != NULL);
 
-	if (!_gedit_window_is_removing_tabs (window))
+	if (!_gedit_window_is_removing_pages (window))
 	{
 		GtkTreeIter iter;
 		GtkTreeSelection *selection;
 
-		get_iter_from_tab (panel, tab, &iter);
+		get_iter_from_page (panel, page, &iter);
 
 		if (gtk_list_store_iter_is_valid (GTK_LIST_STORE (panel->priv->model),
 						  &iter))
-		{						  
+		{
 			selection = gtk_tree_view_get_selection (
 					GTK_TREE_VIEW (panel->priv->treeview));
 
@@ -162,11 +166,11 @@ refresh_list (GeditDocumentsPanel *panel)
 {
 	/* TODO: refresh the list only if the panel is visible */
 
-	GList *tabs;
+	GList *pages;
 	GList *l;
 	GtkWidget *nb;
 	GtkListStore *list_store;
-	GeditTab *active_tab;
+	GeditPage *active_page;
 
 	/* g_debug ("refresh_list"); */
 	
@@ -174,23 +178,26 @@ refresh_list (GeditDocumentsPanel *panel)
 
 	gtk_list_store_clear (list_store);
 
-	active_tab = gedit_window_get_active_tab (panel->priv->window);
+	active_page = gedit_window_get_active_page (panel->priv->window);
 
 	nb = _gedit_window_get_notebook (panel->priv->window);
 
-	tabs = gtk_container_get_children (GTK_CONTAINER (nb));
-	l = tabs;
+	pages = gtk_container_get_children (GTK_CONTAINER (nb));
+	l = pages;
 
-	panel->priv->adding_tab = TRUE;
+	panel->priv->adding_page = TRUE;
 	
 	while (l != NULL)
 	{	
 		GdkPixbuf *pixbuf;
 		gchar *name;
 		GtkTreeIter iter;
+		GeditViewContainer *container;
 
-		name = tab_get_name (GEDIT_TAB (l->data));
-		pixbuf = _gedit_tab_get_icon (GEDIT_TAB (l->data));
+		container = gedit_page_get_active_view_container (GEDIT_PAGE (l->data));
+
+		name = page_get_name (GEDIT_PAGE (l->data));
+		pixbuf = _gedit_view_container_get_icon (container);
 
 		/* Add a new row to the model */
 		gtk_list_store_append (list_store, &iter);
@@ -205,7 +212,7 @@ refresh_list (GeditDocumentsPanel *panel)
 		if (pixbuf != NULL)
 			g_object_unref (pixbuf);
 
-		if (l->data == active_tab)
+		if (l->data == active_page)
 		{
 			GtkTreeSelection *selection;
 
@@ -218,31 +225,31 @@ refresh_list (GeditDocumentsPanel *panel)
 		l = g_list_next (l);
 	}
 	
-	panel->priv->adding_tab = FALSE;
+	panel->priv->adding_page = FALSE;
 
-	g_list_free (tabs);
+	g_list_free (pages);
 }
 
 static void
-sync_name_and_icon (GeditTab            *tab,
-		    GParamSpec          *pspec,
+sync_name_and_icon (GeditPage           *page,
+		    GeditViewContainer  *container,
 		    GeditDocumentsPanel *panel)
 {
 	GdkPixbuf *pixbuf;
 	gchar *name;
 	GtkTreeIter iter;
 
-	get_iter_from_tab (panel, tab, &iter);
+	get_iter_from_page (panel, page, &iter);
 	
-	name = tab_get_name (tab);
-	pixbuf = _gedit_tab_get_icon (tab);
+	name = page_get_name (page);
+	pixbuf = _gedit_view_container_get_icon (container);
 
-	gtk_list_store_set (GTK_LIST_STORE (panel->priv->model), 
+	gtk_list_store_set (GTK_LIST_STORE (panel->priv->model),
 			    &iter,
-        	            0, pixbuf,
-        	            1, name,
-        	            2, tab,
-        	            -1);
+			    0, pixbuf,
+			    1, name,
+			    2, page,
+			    -1);
 
 	g_free (name);
 	if (pixbuf != NULL)
@@ -250,43 +257,69 @@ sync_name_and_icon (GeditTab            *tab,
 }
 
 static void
-window_tab_removed (GeditWindow         *window,
-		    GeditTab            *tab,
-		    GeditDocumentsPanel *panel)
+on_notify_name_changed (GeditViewContainer  *container,
+			GParamSpec          *pspec,
+			GeditDocumentsPanel *panel)
 {
-	g_signal_handlers_disconnect_by_func (tab,
-					      G_CALLBACK (sync_name_and_icon), 
-					      panel);	
+	GeditPage *page;
 
-	if (_gedit_window_is_removing_tabs (window))
+	page = gedit_page_get_from_container (container);
+
+	sync_name_and_icon (page, container, panel);
+}
+
+static void
+window_page_removed (GeditWindow         *window,
+		     GeditPage           *page,
+		     GeditDocumentsPanel *panel)
+{
+	g_signal_handlers_disconnect_by_func (page,
+					      G_CALLBACK (sync_name_and_icon),
+					      panel);
+
+	if (_gedit_window_is_removing_pages (window))
 		gtk_list_store_clear (GTK_LIST_STORE (panel->priv->model));
 	else
 		refresh_list (panel);
 }
 
 static void
-window_tab_added (GeditWindow         *window,
-		  GeditTab            *tab,
-		  GeditDocumentsPanel *panel)
+window_page_added (GeditWindow         *window,
+		   GeditPage           *page,
+		   GeditDocumentsPanel *panel)
 {
 	GtkTreeIter iter;
 	GtkTreeIter sibling;
 	GdkPixbuf *pixbuf;
 	gchar *name;
+	GList *containers, *l;
+	GeditViewContainer *container;
+	
+	/* FIXME: split-added instead ? */
+	
+	containers = gedit_page_get_view_containers (page);
 
-	g_signal_connect (tab,
-			 "notify::name",
+	for (l = containers; l != NULL; l = g_list_next (l))
+	{
+		g_signal_connect (l->data,
+				 "notify::name",
+				  G_CALLBACK (on_notify_name_changed),
+				  panel);
+
+		g_signal_connect (l->data, 
+				 "notify::state",
+				  G_CALLBACK (on_notify_name_changed),
+				  panel);
+	}
+	
+	g_signal_connect (page,
+			  "active-container-changed",
 			  G_CALLBACK (sync_name_and_icon),
 			  panel);
 
-	g_signal_connect (tab, 
-			 "notify::state",
-			  G_CALLBACK (sync_name_and_icon),
-			  panel);
+	get_iter_from_page (panel, page, &sibling);
 
-	get_iter_from_tab (panel, tab, &sibling);
-
-	panel->priv->adding_tab = TRUE;
+	panel->priv->adding_page = TRUE;
 	
 	if (gtk_list_store_iter_is_valid (GTK_LIST_STORE (panel->priv->model), 
 					  &sibling)) 
@@ -297,14 +330,14 @@ window_tab_added (GeditWindow         *window,
 	}
 	else
 	{
-		GeditTab *active_tab;
+		GeditPage *active_page;
 
 		gtk_list_store_append (GTK_LIST_STORE (panel->priv->model), 
 				       &iter);
 
-		active_tab = gedit_window_get_active_tab (panel->priv->window);
+		active_page = gedit_window_get_active_page (panel->priv->window);
 
-		if (tab == active_tab)
+		if (page == active_page)
 		{
 			GtkTreeSelection *selection;
 
@@ -315,30 +348,32 @@ window_tab_added (GeditWindow         *window,
 		}
 	}
 
-	name = tab_get_name (tab);
-	pixbuf = _gedit_tab_get_icon (tab);
+	container = gedit_page_get_active_view_container (page);
 
-	gtk_list_store_set (GTK_LIST_STORE (panel->priv->model), 
+	name = page_get_name (page);
+	pixbuf = _gedit_view_container_get_icon (container);
+
+	gtk_list_store_set (GTK_LIST_STORE (panel->priv->model),
 			    &iter,
-        	            0, pixbuf,
-        	            1, name,
-        	            2, tab,
-        	            -1);
+			    0, pixbuf,
+			    1, name,
+			    2, page,
+			    -1);
 
 	g_free (name);
 	if (pixbuf != NULL)
 		g_object_unref (pixbuf);
 
-	panel->priv->adding_tab = FALSE;		
-}			    
- 
+	panel->priv->adding_page = FALSE;
+}
+
 static void
-window_tabs_reordered (GeditWindow         *window,
-		       GeditDocumentsPanel *panel)
+window_pages_reordered (GeditWindow         *window,
+			GeditDocumentsPanel *panel)
 {
 	if (panel->priv->is_reodering)
 		return;
-		
+
 	refresh_list (panel);
 }
 
@@ -352,21 +387,21 @@ set_window (GeditDocumentsPanel *panel,
 	panel->priv->window = g_object_ref (window);
 
 	g_signal_connect (window,
-			  "tab_added",
-			  G_CALLBACK (window_tab_added),
+			  "page_added",
+			  G_CALLBACK (window_page_added),
 			  panel);
 	g_signal_connect (window,
-			  "tab_removed",
-			  G_CALLBACK (window_tab_removed),
+			  "page_removed",
+			  G_CALLBACK (window_page_removed),
 			  panel);
 	g_signal_connect (window,
-			  "tabs_reordered",
-			  G_CALLBACK (window_tabs_reordered),
+			  "pages_reordered",
+			  G_CALLBACK (window_pages_reordered),
 			  panel);
 	g_signal_connect (window,
-			  "active_tab_changed",
-			  G_CALLBACK (window_active_tab_changed),
-			  panel);		  
+			  "active_page_changed",
+			  G_CALLBACK (window_active_page_changed),
+			  panel);
 }
 
 static void
@@ -375,32 +410,32 @@ treeview_cursor_changed (GtkTreeView         *view,
 {
 	GtkTreeIter iter;
 	GtkTreeSelection *selection;
-	gpointer tab;
+	gpointer page;
 
 	selection = gtk_tree_view_get_selection (
 				GTK_TREE_VIEW (panel->priv->treeview));
 
 	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
 	{
-		gtk_tree_model_get (panel->priv->model, 
-				    &iter, 
-				    2, 
-				    &tab, 
+		gtk_tree_model_get (panel->priv->model,
+				    &iter,
+				    2,
+				    &page,
 				    -1);
 
-		if (gedit_window_get_active_tab (panel->priv->window) != tab)
+		if (gedit_window_get_active_page (panel->priv->window) != page)
 		{
-			gedit_window_set_active_tab (panel->priv->window,
-						     GEDIT_TAB (tab));
-		}				    
-	}	
+			gedit_window_set_active_page (panel->priv->window,
+						      GEDIT_PAGE (page));
+		}
+	}
 }
 
 static void
 gedit_documents_panel_set_property (GObject      *object,
-		        	    guint         prop_id,
-		        	    const GValue *value,
-		        	    GParamSpec   *pspec)
+				    guint         prop_id,
+				    const GValue *value,
+				    GParamSpec   *pspec)
 {
 	GeditDocumentsPanel *panel = GEDIT_DOCUMENTS_PANEL (object);
 
@@ -432,7 +467,7 @@ gedit_documents_panel_get_property (GObject    *object,
 			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-			break;			
+			break;
 	}
 }
 
@@ -641,7 +676,8 @@ treeview_query_tooltip (GtkWidget  *widget,
 	GtkTreeView *tree_view = GTK_TREE_VIEW (widget);
 	GtkTreeModel *model = gtk_tree_view_get_model (tree_view);
 	GtkTreePath *path = NULL;
-	gpointer *tab;
+	gpointer *page;
+	GeditViewContainer *container;
 	gchar *tip;
 
 	if (keyboard_tip)
@@ -674,10 +710,11 @@ treeview_query_tooltip (GtkWidget  *widget,
 	gtk_tree_model_get (model, 
 			    &iter, 
 			    2, 
-			    &tab, 
+			    &page, 
 			    -1);
 
-	tip = _gedit_tab_get_tooltips (GEDIT_TAB (tab));
+	container = gedit_page_get_active_view_container (GEDIT_PAGE (page));
+	tip = _gedit_view_container_get_tooltips (container);
 	gtk_tooltip_set_markup (tooltip, tip);
 
 	g_free (tip);
@@ -692,17 +729,17 @@ treeview_row_inserted (GtkTreeModel        *tree_model,
 		       GtkTreeIter         *iter,
 		       GeditDocumentsPanel *panel)
 {
-	GeditTab *tab;
+	GeditPage *page;
 	gint *indeces;
 	GtkWidget *nb;
 	gint old_position;
 	gint new_position;
 	
-	if (panel->priv->adding_tab)
+	if (panel->priv->adding_page)
 		return;
 		
-	tab = gedit_window_get_active_tab (panel->priv->window);
-	g_return_if_fail (tab != NULL);
+	page = gedit_window_get_active_page (panel->priv->window);
+	g_return_if_fail (page != NULL);
 
 	panel->priv->is_reodering = TRUE;
 	
@@ -714,15 +751,15 @@ treeview_row_inserted (GtkTreeModel        *tree_model,
 
 	new_position = indeces[0];
 	old_position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), 
-				    	      GTK_WIDGET (tab));
+				    	      GTK_WIDGET (page));
 	if (new_position > old_position)
 		new_position = MAX (0, new_position - 1);
 		
-	gedit_notebook_reorder_tab (GEDIT_NOTEBOOK (nb),
-				    tab,
-				    new_position);
+	gedit_notebook_reorder_page (GEDIT_NOTEBOOK (nb),
+				     page,
+				     new_position);
 
-	panel->priv->is_reodering = FALSE;				    
+	panel->priv->is_reodering = FALSE;
 }
 
 static void
@@ -735,7 +772,7 @@ gedit_documents_panel_init (GeditDocumentsPanel *panel)
 
 	panel->priv = GEDIT_DOCUMENTS_PANEL_GET_PRIVATE (panel);
 	
-	panel->priv->adding_tab = FALSE;
+	panel->priv->adding_page = FALSE;
 	panel->priv->is_reodering = FALSE;
 	
 	/* Create the scrolled window */
@@ -746,8 +783,8 @@ gedit_documents_panel_init (GeditDocumentsPanel *panel)
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
-                                             GTK_SHADOW_IN);	
-	gtk_widget_show (sw);				
+                                             GTK_SHADOW_IN);
+	gtk_widget_show (sw);
 	gtk_box_pack_start (GTK_BOX (panel), sw, TRUE, TRUE, 0);
 	
 	/* Create the empty model */

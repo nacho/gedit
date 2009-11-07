@@ -152,3 +152,47 @@ _gedit_cmd_view_leave_fullscreen_mode (GtkAction *action,
 		(view_action, G_CALLBACK (_gedit_cmd_view_toggle_fullscreen_mode),
 		 window);
 }
+
+void
+_gedit_cmd_view_split_horizontally (GtkAction *action,
+				    GeditWindow *window)
+{
+	GeditPage *page;
+	
+	page = gedit_window_get_active_page (window);
+	
+	_gedit_page_split_horizontally (page);
+}
+
+void
+_gedit_cmd_view_split_vertically (GtkAction *action,
+				  GeditWindow *window)
+{
+	GeditPage *page;
+	
+	page = gedit_window_get_active_page (window);
+	
+	_gedit_page_split_vertically (page);
+}
+
+void
+_gedit_cmd_view_unsplit (GtkAction *action,
+			 GeditWindow *window)
+{
+	GeditPage *page;
+	
+	page = gedit_window_get_active_page (window);
+	
+	_gedit_page_unsplit (page);
+}
+
+void
+_gedit_cmd_view_switch_split (GtkAction *action,
+			      GeditWindow *window)
+{
+	GeditPage *page;
+	
+	page = gedit_window_get_active_page (window);
+	
+	_gedit_page_switch_between_splits (page);
+}

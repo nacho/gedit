@@ -562,7 +562,7 @@ begin_write (AsyncData *async)
 			      (GAsyncReadyCallback) async_replace_ready_callback,
 			      async);
 }
-
+#if 0
 static void
 mount_ready_callback (GFile        *file,
 		      GAsyncResult *res,
@@ -590,11 +590,13 @@ mount_ready_callback (GFile        *file,
 		check_modified_async (async);
 	}
 }
+#endif
 
+/* FIXME */
 static void
 recover_not_mounted (AsyncData *async)
 {
-	GeditDocument *doc;
+	/*GeditDocument *doc;
 	GMountOperation *mount_operation;
 	
 	gedit_debug (DEBUG_LOADER);
@@ -608,9 +610,9 @@ recover_not_mounted (AsyncData *async)
 				       mount_operation,
 				       async->cancellable,
 				       (GAsyncReadyCallback) mount_ready_callback,
-				       async);	
+				       async);
 
-	g_object_unref (mount_operation);			
+	g_object_unref (mount_operation);*/
 }
 
 static void

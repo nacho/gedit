@@ -66,8 +66,8 @@ gedit_debug_init (void)
 		debug = debug | GEDIT_DEBUG_PRINT;
 	if (g_getenv ("GEDIT_DEBUG_PLUGINS") != NULL)
 		debug = debug | GEDIT_DEBUG_PLUGINS;
-	if (g_getenv ("GEDIT_DEBUG_TAB") != NULL)
-		debug = debug | GEDIT_DEBUG_TAB;
+	if (g_getenv ("GEDIT_DEBUG_VIEW_CONTAINER") != NULL)
+		debug = debug | GEDIT_DEBUG_VIEW_CONTAINER;
 	if (g_getenv ("GEDIT_DEBUG_DOCUMENT") != NULL)
 		debug = debug | GEDIT_DEBUG_DOCUMENT;
 	if (g_getenv ("GEDIT_DEBUG_COMMANDS") != NULL)
