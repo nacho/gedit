@@ -348,6 +348,21 @@ class Tool(object):
         self._set_property_if_changed('Languages', value)
     languages = property(get_languages, set_languages)
 
+    def has_hash_bang(self):
+        if self.filename is None:
+            return True
+
+        filename = self.library.get_full_path(self.get_path())
+        if filename is None:
+            return True
+
+        fp = open(filename, 'r', 1)
+        for line in fp:
+            if line.strip() == '':
+                continue
+            
+            return line.startswith('#!')
+
     # There is no property for this one because this function is quite
     # expensive to perform
     def get_script(self):

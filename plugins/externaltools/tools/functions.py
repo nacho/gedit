@@ -109,7 +109,12 @@ def run_external_tool(window, node):
         capture.set_env(GEDIT_DOCUMENTS_URI  = ' '.join(documents_uri),
                         GEDIT_DOCUMENTS_PATH = ' '.join(documents_path))
 
-    capture.set_flags(capture.CAPTURE_BOTH)
+    flags = capture.CAPTURE_BOTH
+    
+    if not node.has_hash_bang():
+        flags |= capture.CAPTURE_NEEDS_SHELL
+
+    capture.set_flags(flags)
 
     # Get input text
     input_type = node.input

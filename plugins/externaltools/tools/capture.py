@@ -28,6 +28,7 @@ class Capture(gobject.GObject):
     CAPTURE_STDOUT = 0x01
     CAPTURE_STDERR = 0x02
     CAPTURE_BOTH   = 0x03
+    CAPTURE_NEEDS_SHELL = 0x04
     
     WRITE_BUFFER_SIZE = 0x4000
 
@@ -43,7 +44,7 @@ class Capture(gobject.GObject):
         self.pipe = None
         self.env = env
         self.cwd = cwd
-        self.flags = self.CAPTURE_BOTH
+        self.flags = self.CAPTURE_BOTH | self.CAPTURE_NEEDS_SHELL
         self.command = command
         self.input_text = None
 
@@ -69,7 +70,7 @@ class Capture(gobject.GObject):
         # Initialize pipe
         popen_args = {
             'cwd'  : self.cwd,
-            'shell': False,
+            'shell': self.flags & self.CAPTURE_NEEDS_SHELL,
             'env'  : self.env
         }
         
@@ -199,7 +200,7 @@ class Capture(gobject.GObject):
                 os.kill(self.pipe.pid, signal.SIGTERM)
                 self.tried_killing = True
             else:
-                os.killpg(self.pipe.pid, sigal.SIGKILL)
+                os.kill(self.pipe.pid, signal.SIGKILL)
 
     def on_child_end(self, pid, error_code):
         # In an idle, so it is emitted after all the std*-line signals
