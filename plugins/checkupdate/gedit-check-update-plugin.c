@@ -218,9 +218,11 @@ on_response_cb (GtkWidget   *infobar,
 }
 
 static GtkWidget *
-create_infobar (GeditWindow *window)
+create_infobar (GeditWindow *window,
+                const gchar *version)
 {
 	GtkWidget *infobar;
+	gchar *message;
 
 #if !GTK_CHECK_VERSION (2, 17, 1)
 	infobar = gedit_message_area_new ();
@@ -252,11 +254,14 @@ create_infobar (GeditWindow *window)
 				       GTK_MESSAGE_INFO);
 #endif
 
+	message = g_strdup_printf ("%s (%s)", _("There is a new version of gedit"), version);
 	set_message_area_text_and_icon (infobar,
 					"gtk-dialog-info",
-					_("There is a new version of gedit"),
+					message,
 					_("You can download the new version of gedit"
 					  " by pressing on the download button"));
+
+	g_free (message);
 
 	g_signal_connect (infobar, "response",
 			  G_CALLBACK (on_response_cb),
@@ -409,7 +414,7 @@ parse_page_file (SoupSession *session,
 						file_url,
 						g_free);
 		
-			infobar = create_infobar (window);
+			infobar = create_infobar (window, file_version);
 			pack_infobar (GTK_WIDGET (window), infobar);
 			gtk_widget_show (infobar);
 		}
