@@ -132,6 +132,8 @@ if test "$os_osx" = "yes"; then
 
 	AC_SUBST(IGE_MAC_CFLAGS)
 	AC_SUBST(IGE_MAC_LIBS)
+	
+	AC_PROG_OBJC
 fi
 
 dnl ===============================================================

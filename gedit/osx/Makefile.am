@@ -10,12 +10,14 @@ INCLUDES = 							\
 
 noinst_LTLIBRARIES = libosx.la
 
-libosx_la_LDFLAGS = -framework Carbon -framework ApplicationServices
+libosx_la_LDFLAGS = -framework Carbon -framework ApplicationServices -framework Cocoa
 libosx_la_LIBADD = -lobjc
 libosx_la_CFLAGS = -xobjective-c
 
-libosx_la_SOURCES = 	\
-	gedit-osx.c 	\
-	gedit-osx.h
+libosx_la_SOURCES = 		\
+	gedit-osx.c 		\
+	gedit-osx.h		\
+	gedit-osx-delegate.m 	\
+	gedit-osx-delegate.h
 
 -include $(top_srcdir)/git.mk

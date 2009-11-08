@@ -3,6 +3,9 @@
 
 #include <gtk/gtk.h>
 #include <gedit/gedit-window.h>
+#include <gedit/gedit-app.h>
+
+void	gedit_osx_init (GeditApp *app);
 
 void 	gedit_osx_set_window_title 	(GeditWindow   *window, 
 					 gchar const   *title,

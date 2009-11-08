@@ -2,6 +2,8 @@
 #include <gdk/gdkquartz.h>
 #include <Carbon/Carbon.h>
 
+#import "gedit-osx-delegate.h"
+
 void
 gedit_osx_set_window_title (GeditWindow   *window, 
 			    gchar const   *title,
@@ -72,4 +74,21 @@ gedit_osx_show_help (const gchar *link_id)
 	g_free (link);
 
 	return ret;
+}
+
+static void
+destroy_delegate (GeditOSXDelegate *delegate)
+{
+	[delegate dealloc];
+}
+
+void
+gedit_osx_init(GeditApp *app)
+{
+	GeditOSXDelegate *delegate = [[GeditOSXDelegate alloc] init];
+	
+	g_object_set_data_full (G_OBJECT (app),
+	                        "GeditOSXDelegate",
+	                        delegate,
+							(GDestroyNotify)destroy_delegate);
 }

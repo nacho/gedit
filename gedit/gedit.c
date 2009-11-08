@@ -73,6 +73,7 @@
 
 #ifdef OS_OSX
 #include <ige-mac-dock.h>
+#include "osx/gedit-osx.h"
 #endif
 
 static guint32 startup_timestamp = 0;
@@ -732,7 +733,11 @@ main (int argc, char *argv[])
 		free_command_line_data ();
 	}
 
-	gedit_debug_message (DEBUG_APP, "Start gtk-main");		
+	gedit_debug_message (DEBUG_APP, "Start gtk-main");
+	
+#ifdef OS_OSX
+	gedit_osx_init(gedit_app_get_default ());
+#endif
 	gtk_main();
 
 #ifndef G_OS_WIN32
