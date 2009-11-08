@@ -45,6 +45,10 @@
 #define FILE_REGEX "gedit\\-[0-9]+\\.[0-9]+\\.[0-9]+(\\-[0-9]+)?\\.dmg"
 #endif
 
+#ifdef OS_OSX
+#include "gedit/osx/gedit-osx.h"
+#endif
+
 #define GEDIT_CHECK_UPDATE_PLUGIN_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\
 				GEDIT_TYPE_CHECK_UPDATE_PLUGIN,		\
@@ -175,12 +179,15 @@ on_response_cb (GtkWidget   *infobar,
 		gchar *url;
 		
 		url = g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
-	
+
+#ifdef OS_OSX
+		gedit_osx_show_url (url);
+#else
 		gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (window)),
 			      url, 
 			      GDK_CURRENT_TIME,
 			      &error);
-
+#endif
 		if (error != NULL)
 		{
 			GtkWidget *dialog;
