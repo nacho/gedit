@@ -2,7 +2,7 @@ if OS_WIN32
 platform_sources = eggsmclient-win32.c
 platform_logout_test_ldflags = -mwindows
 else
-if PLATFORM_OSX
+if OS_OSX
 platform_defines = -xobjective-c
 platform_ldflags = -framework Carbon
 platform_sources = eggsmclient-osx.c

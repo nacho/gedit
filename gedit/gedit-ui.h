@@ -58,7 +58,7 @@ static const GtkActionEntry gedit_always_sensitive_menu_entries[] =
 	{ "FileOpen", GTK_STOCK_OPEN, N_("_Open..."), "<control>O",
 	  N_("Open a file"), G_CALLBACK (_gedit_cmd_file_open) },
 
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 	{ "FileClose", GTK_STOCK_CLOSE, NULL, "<control>W",
 	  N_("Close the current file"), G_CALLBACK (_gedit_cmd_file_close) },
 #endif
@@ -96,7 +96,7 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Print preview"), G_CALLBACK (_gedit_cmd_file_print_preview) },
 	 { "FilePrint", GTK_STOCK_PRINT, N_("_Print..."), "<control>P",
 	  N_("Print the current page"), G_CALLBACK (_gedit_cmd_file_print) },
-#ifndef PLATFORM_OSX
+#ifndef OS_OSX
 	{ "FileClose", GTK_STOCK_CLOSE, NULL, "<control>W",
 	  N_("Close the current file"), G_CALLBACK (_gedit_cmd_file_close) },
 #endif
@@ -126,7 +126,7 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Search forwards for the same text"), G_CALLBACK (_gedit_cmd_search_find_next) },
 	{ "SearchFindPrevious", NULL, N_("Find Pre_vious"), "<shift><control>G",
 	  N_("Search backwards for the same text"), G_CALLBACK (_gedit_cmd_search_find_prev) },
-#ifndef PLATFORM_OSX
+#ifndef OS_OSX
 	{ "SearchReplace", GTK_STOCK_FIND_AND_REPLACE, N_("_Replace..."), "<control>H",
 	  N_("Search for and replace text"), G_CALLBACK (_gedit_cmd_search_replace) },
 #else

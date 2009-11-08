@@ -1644,7 +1644,7 @@ close_confirmation_dialog_response_handler (GeditCloseConfirmationDialog *dlg,
 					   GEDIT_IS_QUITTING,
 					   GBOOLEAN_TO_POINTER (FALSE));
 
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 			g_object_set_data (G_OBJECT (window),
 			                   GEDIT_IS_QUITTING_ALL,
 			                   GINT_TO_POINTER (FALSE));
@@ -1731,7 +1731,7 @@ _gedit_cmd_file_close (GtkAction   *action,
 
 	if (active_tab == NULL)
 	{
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 		/* Close the window on OS X */
 		gtk_widget_destroy (GTK_WIDGET (window));
 #endif
@@ -1827,7 +1827,7 @@ _gedit_cmd_file_close_all (GtkAction   *action,
 }
 
 /* Quit */
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 static void
 quit_all ()
 {
@@ -1863,7 +1863,7 @@ _gedit_cmd_file_quit (GtkAction   *action,
 {
 	gedit_debug (DEBUG_COMMANDS);
 
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 	if (action != NULL)
 	{
 		quit_all ();

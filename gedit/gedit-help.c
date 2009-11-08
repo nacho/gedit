@@ -38,7 +38,7 @@
 #include <string.h>
 #include <gtk/gtk.h>
 
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 #include "osx/gedit-osx.h"
 #endif
 
@@ -53,7 +53,7 @@ gedit_help_display (GtkWindow   *parent,
 	
 	g_return_val_if_fail ((parent == NULL) || GTK_IS_WINDOW (parent), FALSE);
 
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 	if (name == NULL || strcmp(name, "gedit.xml") == NULL || strcmp(name, "gedit") == 0)
 	{
 		return gedit_osx_show_help (link_id);

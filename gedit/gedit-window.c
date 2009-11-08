@@ -57,7 +57,7 @@
 #include "gedit-dirs.h"
 #include "gedit-status-combo-box.h"
 
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 #include "osx/gedit-osx.h"
 #endif
 
@@ -2129,7 +2129,7 @@ set_title (GeditWindow *window)
 
 	if (window->priv->active_tab == NULL)
 	{
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 		gedit_osx_set_window_title (window, "gedit", NULL);
 #else
 		gtk_window_set_title (GTK_WINDOW (window), "gedit");
@@ -2213,7 +2213,7 @@ set_title (GeditWindow *window)
 						 name);
 	}
 
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 	gedit_osx_set_window_title (window, title, doc);
 #else
 	gtk_window_set_title (GTK_WINDOW (window), title);

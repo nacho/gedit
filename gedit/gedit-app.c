@@ -46,7 +46,7 @@
 #include "gedit-enum-types.h"
 #include "gedit-dirs.h"
 
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 #include <ige-mac-integration.h>
 #endif
 
@@ -375,7 +375,7 @@ gedit_app_get_default (void)
 	return app;
 }
 
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 static GtkMenuItem *
 ui_manager_menu_item (GtkUIManager *uimanager,
                       const gchar  *path)
@@ -422,7 +422,7 @@ static void
 set_active_window (GeditApp    *app,
                    GeditWindow *window)
 {
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 	osx_switch_menubar (app, window);
 #endif
 
@@ -487,7 +487,7 @@ window_destroy (GeditWindow *window,
 */
 	if (app->priv->windows == NULL)
 	{
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 		if (!GPOINTER_TO_INT (g_object_get_data (G_OBJECT (window), "gedit-is-quitting-all")))
 		{
 			GeditWindow *hidden;
@@ -606,7 +606,7 @@ gedit_app_create_window_real (GeditApp    *app,
 			  G_CALLBACK (window_destroy),
 			  app);
 
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 	gtk_widget_hide (_gedit_window_get_menu_bar (window));
 #endif
 

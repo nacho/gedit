@@ -4,6 +4,7 @@ INCLUDES = 							\
 	-I$(top_srcdir)/gedit 					\
 	-I$(top_builddir)/gedit					\
 	$(GEDIT_CFLAGS) 					\
+	$(IGE_MAC_CFLAGS)					\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED_CFLAGS)
 

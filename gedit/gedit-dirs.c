@@ -26,7 +26,7 @@
 
 #include "gedit-dirs.h"
 
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 #include <ige-mac-bundle.h>
 #endif
 
@@ -139,7 +139,7 @@ gedit_dirs_get_gedit_data_dir (void)
 	
 	g_free (win32_dir);
 #else
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 	IgeMacBundle *bundle = ige_mac_bundle_get_default ();
 
 	if (ige_mac_bundle_get_is_app_bundle (bundle))
@@ -181,7 +181,7 @@ gedit_dirs_get_gedit_locale_dir (void)
 	
 	g_free (win32_dir);
 #else
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 	IgeMacBundle *bundle = ige_mac_bundle_get_default ();
 
 	if (ige_mac_bundle_get_is_app_bundle (bundle))
@@ -227,7 +227,7 @@ gedit_dirs_get_gedit_lib_dir (void)
 	
 	g_free (win32_dir);
 #else
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 	IgeMacBundle *bundle = ige_mac_bundle_get_default ();
 
 	if (ige_mac_bundle_get_is_app_bundle (bundle))

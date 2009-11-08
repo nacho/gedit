@@ -91,7 +91,6 @@ AC_MSG_CHECKING([for Mac OS X platform])
 case "$host" in
   *-*-darwin*)
     platform_osx=yes
-    ACTIVE_PLUGINS="${ACTIVE_PLUGINS},checkupdate"
     ;;
   *)
     platform_osx=no
@@ -100,13 +99,21 @@ esac
 AC_MSG_RESULT([$platform_osx])
 AM_CONDITIONAL(PLATFORM_OSX, test "$platform_osx" = "yes")
 
+dnl check for native osx
+gdk_windowing=`$PKG_CONFIG --variable=target gdk-2.0`
+
+AC_MSG_CHECKING([for native Mac OS X])
+if test "$gdk_windowing" = "quartz"; then
+	os_osx=yes
+	ACTIVE_PLUGINS="${ACTIVE_PLUGINS},checkupdate"
+else
+	os_osx=no
+fi
+AC_MSG_RESULT([$os_osx])
+AM_CONDITIONAL(OS_OSX, test "$os_osx" = "yes")
+
 if test "$platform_osx" = "yes"; then
 	AC_DEFINE([PLATFORM_OSX],[1],[Defined if platform is Mac OSX])
-
-	PKG_CHECK_MODULES(OSX, ige-mac-integration)
-
-	AC_SUBST(OSX_CFLAGS)
-	AC_SUBST(OSX_LIBS)
 
 	DEFAULT_FONT="Monaco 12"
 	DEFAULT_PRINT_FONT="Monaco 10"
@@ -117,6 +124,15 @@ fi
 
 AC_SUBST(DEFAULT_FONT)
 AC_SUBST(DEFAULT_PRINT_FONT)
+
+if test "$os_osx" = "yes"; then
+	AC_DEFINE([OS_OSX],[1],[Defined if os is Mac OSX])
+
+	PKG_CHECK_MODULES(IGE_MAC, ige-mac-integration)
+
+	AC_SUBST(IGE_MAC_CFLAGS)
+	AC_SUBST(IGE_MAC_LIBS)
+fi
 
 dnl ===============================================================
 dnl Expanded dirs
@@ -167,7 +183,7 @@ if test "x$enable_updater" != "xno"; then
 	if test "x$have_libsoup" = "xyes"; then
 		if test "x$platform_win32" = "xyes"; then
 			enable_updater=yes
-		elif test "x$platform_osx" = "xyes"; then
+		elif test "x$os_osx" = "xyes"; then
 			enable_updater=yes
 		else
 			enable_updater=no
@@ -292,7 +308,7 @@ if test "$gtkatleast" = "no"; then
 	AC_DEFINE([BUILD_SPINNER],[1],[Whether to use GeditSpinner instead of GtkSpinner])
 fi
 
-if test "$platform_osx" = "no" &&
+if test "$os_osx" = "no" &&
    test "$os_win32" = no; then
 	PKG_CHECK_MODULES(EGG_SMCLIENT, [
 		sm >= 1.0.0

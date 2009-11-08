@@ -71,7 +71,7 @@
 #undef SAVE_DATADIR
 #endif
 
-#ifdef PLATFORM_OSX
+#ifdef OS_OSX
 #include <ige-mac-dock.h>
 #endif
 

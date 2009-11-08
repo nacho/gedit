@@ -1,7 +1,11 @@
 ## Process this file with automake to produce Makefile.in
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = gedit pixmaps po help data plugin-loaders plugins docs win32
+SUBDIRS = gedit pixmaps po data plugin-loaders plugins docs win32
+
+if !OS_OSX
+SUBDIRS += help
+endif
 
 distuninstallcheck_listfiles = find . -type f -print | grep -v scrollkeeper
 
