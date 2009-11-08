@@ -138,8 +138,7 @@ gedit_dirs_get_gedit_data_dir (void)
 				     NULL);
 	
 	g_free (win32_dir);
-#else
-#ifdef OS_OSX
+#elif defined (OS_OSX)
 	IgeMacBundle *bundle = ige_mac_bundle_get_default ();
 
 	if (ige_mac_bundle_get_is_app_bundle (bundle))
@@ -158,7 +157,6 @@ gedit_dirs_get_gedit_data_dir (void)
 	data_dir = g_build_filename (DATADIR,
 	                             "gedit-2",
 	                             NULL);
-#endif
 #endif
 
 	return data_dir;
@@ -180,8 +178,7 @@ gedit_dirs_get_gedit_locale_dir (void)
 				       NULL);
 	
 	g_free (win32_dir);
-#else
-#ifdef OS_OSX
+#elif defined (OS_OSX)
 	IgeMacBundle *bundle = ige_mac_bundle_get_default ();
 
 	if (ige_mac_bundle_get_is_app_bundle (bundle))
@@ -190,21 +187,14 @@ gedit_dirs_get_gedit_locale_dir (void)
 	}
 	else
 	{
-		gchar *data_dir = gedit_dirs_get_gedit_data_dir ();
-		locale_dir = g_build_filename (data_dir,
+		locale_dir = g_build_filename (DATADIR,
 		                               "locale",
 		                               NULL);
-		g_free (data_dir);
 	}
 #else
-	gchar *data_dir;
-
-	data_dir = gedit_dirs_get_data_dir ();
-	locale_dir = g_build_filename (data_dir,
+	locale_dir = g_build_filename (DATADIR,
 				       "locale",
 				       NULL);
-	g_free (data_dir);
-#endif
 #endif
 
 	return locale_dir;
@@ -226,8 +216,7 @@ gedit_dirs_get_gedit_lib_dir (void)
 				    NULL);
 	
 	g_free (win32_dir);
-#else
-#ifdef OS_OSX
+#elif defined (OS_OSX)
 	IgeMacBundle *bundle = ige_mac_bundle_get_default ();
 
 	if (ige_mac_bundle_get_is_app_bundle (bundle))
@@ -248,7 +237,6 @@ gedit_dirs_get_gedit_lib_dir (void)
 	lib_dir = g_build_filename (LIBDIR,
 				    "gedit-2",
 				    NULL);
-#endif
 #endif
 
 	return lib_dir;
