@@ -37,7 +37,7 @@
 
 #define VERSION_PLACE "<a href=\"[0-9]\\.[0-9]+/\">"
 
-#ifndef G_OS_WIN32
+#ifdef G_OS_WIN32
 #define GEDIT_URL "http://ftp.acc.umu.se/pub/gnome/binaries/win32/gedit/"
 #define FILE_REGEX "gedit\\-setup\\-[0-9]+\\.[0-9]+\\.[0-9]+(\\-[0-9]+)?\\.exe"
 #else
