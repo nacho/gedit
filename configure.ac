@@ -44,6 +44,9 @@ AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
 
+# needed on osx
+AC_PROG_OBJC
+
 AC_SYS_LARGEFILE
 
 AC_CHECK_FUNCS(fsync)
@@ -132,8 +135,6 @@ if test "$os_osx" = "yes"; then
 
 	AC_SUBST(IGE_MAC_CFLAGS)
 	AC_SUBST(IGE_MAC_LIBS)
-	
-	AC_PROG_OBJC
 fi
 
 dnl ===============================================================
