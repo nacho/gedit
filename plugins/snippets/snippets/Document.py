@@ -1018,14 +1018,17 @@ class Document:
                 ctx.rel_line_to(extend_width * 2, 0)
                 ctx.stroke()
 
+        def from_color(self, col):
+                return [col.red / 0x10000, col.green / 0x10000, col.blue / 0x10000]
+
         def draw_placeholder(self, ctx, placeholder):
                 if isinstance(placeholder, PlaceholderEnd):
                         return
 
                 buf = self.view.get_buffer()
 
-                col = self.view.get_style().text[gtk.STATE_INSENSITIVE]
-                ctx.set_source_rgba(col.red_float, col.green_float, col.blue_float, 0.5)
+                col = self.from_color(self.view.get_style().text[gtk.STATE_INSENSITIVE])
+                ctx.set_source_rgba(col[0], col[1], col[2], 0.5)
                 
                 if placeholder.tabstop > 0:
                         ctx.set_dash([], 0)
