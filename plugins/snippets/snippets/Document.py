@@ -802,7 +802,7 @@ class Document:
                 else:
                         return components
         
-        def relative_filename(self, first, second, mime):
+        def relative_path(self, first, second, mime):
                 prot1 = re.match('(^[a-z]+:\/\/|\/)(.*)', first)
                 prot2 = re.match('(^[a-z]+:\/\/|\/)(.*)', second)
                 
@@ -852,11 +852,21 @@ class Document:
                         uri = gfile.get_path()
                 
                 # Set environmental variables
-                filename = self.env_get_filename(self.view.get_buffer())
+                buf = self.view.get_buffer()
+                filename = self.env_get_document_path(buf)
                 
-                os.environ['GEDIT_DROP_FILENAME'] = uri
-                os.environ['GEDIT_DROP_MIME_TYPE'] = mime
-                os.environ['GEDIT_DROP_REL_FILENAME'] = self.relative_filename(filename, uri, mime)
+                variables = {
+                        'GEDIT_DROP_DOCUMENT_URI': self.env_get_document_uri,
+                        'GEDIT_DROP_DOCUMENT_NAME': self.env_get_document_name,
+                        'GEDIT_DROP_DOCUMENT_SCHEME': self.env_get_document_scheme,
+                        'GEDIT_DROP_DOCUMENT_PATH': self.env_get_document_path,
+                        'GEDIT_DROP_DOCUMENT_DIR': self.env_get_document_dir,
+                        'GEDIT_DROP_DOCUMENT_TYPE': self.env_get_document_type}
+                
+                for var in variables:
+                        os.environ[var] = variables[var](buf)
+
+                os.environ['GEDIT_DROP_DOCUMENT_RELATIVE_PATH'] = self.relative_path(filename, uri, mime)
 
                 buf = self.view.get_buffer()
                 mark = buf.get_mark('gtk_drag_target')
