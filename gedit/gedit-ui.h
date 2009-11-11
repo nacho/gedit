@@ -58,11 +58,6 @@ static const GtkActionEntry gedit_always_sensitive_menu_entries[] =
 	{ "FileOpen", GTK_STOCK_OPEN, N_("_Open..."), "<control>O",
 	  N_("Open a file"), G_CALLBACK (_gedit_cmd_file_open) },
 
-#ifdef OS_OSX
-	{ "FileClose", GTK_STOCK_CLOSE, NULL, "<control>W",
-	  N_("Close the current file"), G_CALLBACK (_gedit_cmd_file_close) },
-#endif
-	
 	/* Edit menu */
 	{ "EditPreferences", GTK_STOCK_PREFERENCES, N_("Pr_eferences"), NULL,
 	  N_("Configure the application"), G_CALLBACK (_gedit_cmd_edit_preferences) },
@@ -96,10 +91,9 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Print preview"), G_CALLBACK (_gedit_cmd_file_print_preview) },
 	 { "FilePrint", GTK_STOCK_PRINT, N_("_Print..."), "<control>P",
 	  N_("Print the current page"), G_CALLBACK (_gedit_cmd_file_print) },
-#ifndef OS_OSX
 	{ "FileClose", GTK_STOCK_CLOSE, NULL, "<control>W",
 	  N_("Close the current file"), G_CALLBACK (_gedit_cmd_file_close) },
-#endif
+
 	/* Edit menu */
 	{ "EditUndo", GTK_STOCK_UNDO, NULL, "<control>Z",
 	  N_("Undo the last action"), G_CALLBACK (_gedit_cmd_edit_undo) },

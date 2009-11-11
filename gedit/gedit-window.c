@@ -722,7 +722,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 				  (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW)) &&
 				  !(lockdown & GEDIT_LOCKDOWN_PRINTING));
 				  
-	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
+	action = gtk_action_group_get_action (window->priv->action_group,
 					      "FileClose");
 
 	gtk_action_set_sensitive (action,
@@ -3124,7 +3124,7 @@ editable_changed (GeditView  *view,
 }
 
 static void
-update_sensitivity (GeditWindow *window)
+update_sensitivity_according_to_tabs (GeditWindow *window)
 {
 	GtkAction *action;
 
@@ -3143,6 +3143,15 @@ update_sensitivity (GeditWindow *window)
 		action = gtk_action_group_get_action (window->priv->action_group,
 						      "ViewHighlightMode");
 		gtk_action_set_sensitive (action, FALSE);
+
+#ifdef OS_OSX
+		/* On OS X we keep the Close action sensitive when there are
+		   no tabs because when there are no active documents it
+		   closes the window (OS X style) */
+		action = gtk_action_group_get_action (window->priv->action_group,
+		                                      "FileClose");
+		gtk_action_set_sensitive (action, TRUE);
+#endif
 	}
 }
 
@@ -3160,7 +3169,7 @@ notebook_tab_added (GeditNotebook *notebook,
 	
 	++window->priv->num_tabs;
 
-	update_sensitivity (window);
+	update_sensitivity_according_to_tabs (window);
 
 	view = gedit_tab_get_view (tab);
 	doc = gedit_tab_get_document (tab);
@@ -3326,7 +3335,7 @@ notebook_tab_removed (GeditNotebook *notebook,
 		}
 	}
 
-	update_sensitivity (window);
+	update_sensitivity_according_to_tabs (window);
 
 	if (window->priv->num_tabs == 0)
 	{
@@ -3922,7 +3931,7 @@ gedit_window_init (GeditWindow *window)
 	 * This needs to be done after plugins activatation */
 	init_panels_visibility (window);
 
-	update_sensitivity (window);
+	update_sensitivity_according_to_tabs (window);
 
 	gedit_debug_message (DEBUG_WINDOW, "END");
 }
