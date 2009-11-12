@@ -66,8 +66,6 @@ AC_MSG_CHECKING([for Win32 platform])
 case "$host" in
   *-*-mingw*|*-*-cygwin*)
     platform_win32=yes
-    AC_CHECK_TOOL(WINDRES, windres)
-    ACTIVE_PLUGINS="${ACTIVE_PLUGINS},checkupdate"
     TOOLBAR_STYLE="GEDIT_TOOLBAR_ICONS"
     ;;
   *)
@@ -81,6 +79,8 @@ AC_MSG_CHECKING([for native Win32])
 case "$host" in
   *-*-mingw*)
     os_win32=yes
+    AC_CHECK_TOOL(WINDRES, windres)
+    ACTIVE_PLUGINS="${ACTIVE_PLUGINS},checkupdate"
     ;;
   *)
     os_win32=no
@@ -184,7 +184,7 @@ if test "x$enable_updater" != "xno"; then
 		have_libsoup=no)
 	
 	if test "x$have_libsoup" = "xyes"; then
-		if test "x$platform_win32" = "xyes"; then
+		if test "x$os_win32" = "xyes"; then
 			enable_updater=yes
 		elif test "x$os_osx" = "xyes"; then
 			enable_updater=yes
@@ -468,8 +468,12 @@ fi
 # so we create a lib
 if test "$platform_win32" = yes; then
 	GEDIT_IMPLIB="-lgedit-$GEDIT_API_VERSION"
-	PLUGIN_LIBTOOL_FLAGS="-module -avoid-version -no-undefined -mwindows -Wl,\$(top_builddir)/gedit/libgedit-\$(GEDIT_API_VERSION).a"
-	LOADER_LIBTOOL_FLAGS="-module -avoid-version -no-undefined -mwindows -Wl,\$(top_builddir)/gedit/libgedit-\$(GEDIT_API_VERSION).a"
+	PLUGIN_LIBTOOL_FLAGS="-module -avoid-version -no-undefined -Wl,\$(top_builddir)/gedit/libgedit-\$(GEDIT_API_VERSION).a"
+	LOADER_LIBTOOL_FLAGS="-module -avoid-version -no-undefined -Wl,\$(top_builddir)/gedit/libgedit-\$(GEDIT_API_VERSION).a"
+	if test "$os_win32" = yes; then
+		PLUGIN_LIBTOOL_FLAGS="${PLUGIN_LIBTOOL_FLAGS} -mwindows"
+		LOADER_LIBTOOL_FLAGS="${LOADER_LIBTOOL_FLAGS} -mwindows"
+	fi
 else
 	GEDIT_IMPLIB=""
 	PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"

@@ -26,7 +26,10 @@ gedit_SOURCES = \
 gedit_LDADD = libgedit.la $(GEDIT_LIBS) $(IGE_MAC_LIBS) $(EGG_SMCLIENT_LIBS)
  
 if PLATFORM_WIN32
-gedit_LDFLAGS = -Wl,--export-all-symbols -mwindows -Wl,--out-implib,libgedit-$(GEDIT_API_VERSION).a
+gedit_LDFLAGS = -Wl,--export-all-symbols -Wl,--out-implib,libgedit-$(GEDIT_API_VERSION).a
+if OS_WIN32
+gedit_LDFLAGS += -mwindows
+endif
 else
 gedit_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 endif
@@ -52,7 +55,7 @@ BUILT_SOURCES = 			\
 	gedit-marshal.c			\
 	gedit-marshal.h
 
-if PLATFORM_WIN32
+if OS_WIN32
 gedit-res.o: gedit.rc
 	$(WINDRES) -i gedit.rc --input-format=rc -o gedit-res.o -O coff
 
@@ -117,7 +120,7 @@ headerdir = $(prefix)/include/gedit-@GEDIT_API_VERSION@/gedit
 header_DATA = 				\
 	$(INST_H_FILES)	
 
-if !PLATFORM_WIN32
+if !OS_WIN32
 POSIXIO_FILES = 			\
 	gedit-local-document-saver.c	
 else
@@ -222,7 +225,7 @@ else
 	ln -s gedit $(DESTDIR)$(bindir)/gnome-text-editor
 endif
 
-if !PLATFORM_WIN32
+if !OS_WIN32
 BACON_DIR=$(srcdir)/../../libbacon/src/
 BACON_FILES=bacon-message-connection.h bacon-message-connection.c
 
