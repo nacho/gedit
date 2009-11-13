@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gedit&component=general\n"
-"POT-Creation-Date: 2009-11-05 16:58+0000\n"
-"PO-Revision-Date: 2009-11-06 08:10+0100\n"
+"POT-Creation-Date: 2009-11-12 15:49+0000\n"
+"PO-Revision-Date: 2009-11-13 07:43+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -715,12 +715,12 @@ msgstr "_minut"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:300
 #: ../gedit/dialogs/gedit-search-dialog.ui.h:2
-#: ../gedit/gedit-window.c:1457
+#: ../gedit/gedit-window.c:1460
 msgid "Replace"
 msgstr "Zamenjaj"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:311
-#: ../gedit/gedit-window.c:1455
+#: ../gedit/gedit-window.c:1458
 msgid "Find"
 msgstr "Poišči"
 
@@ -761,45 +761,45 @@ msgstr "_Išči za: "
 msgid "_Wrap around"
 msgstr "_Prelomi"
 
-#: ../gedit/gedit.c:117
+#: ../gedit/gedit.c:122
 msgid "Show the application's version"
 msgstr "Pokaži različico programa"
 
-#: ../gedit/gedit.c:120
+#: ../gedit/gedit.c:125
 msgid "Set the character encoding to be used to open the files listed on the command line"
 msgstr "Nastavi kodiranje znakov, ki naj bo uporabljeno za odpiranje datotek, naštetih v ukazni vrstici"
 
-#: ../gedit/gedit.c:120
+#: ../gedit/gedit.c:125
 msgid "ENCODING"
 msgstr "KODIRANJE"
 
-#: ../gedit/gedit.c:123
+#: ../gedit/gedit.c:128
 msgid "Display list of possible values for the encoding option"
 msgstr "Prikaži seznam mogočih vrednosti kodiranja"
 
-#: ../gedit/gedit.c:126
+#: ../gedit/gedit.c:131
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Ustvari novo vrhnje okno v obstoječem primerku gedit"
 
-#: ../gedit/gedit.c:129
+#: ../gedit/gedit.c:134
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Ustvari nov dokument v obstoječem primerku gedit"
 
-#: ../gedit/gedit.c:132
+#: ../gedit/gedit.c:137
 msgid "[FILE...]"
 msgstr "[DATOTEKA ...]"
 
-#: ../gedit/gedit.c:187
+#: ../gedit/gedit.c:192
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: neveljavno kodiranje.\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:569
+#: ../gedit/gedit.c:577
 msgid "- Edit text files"
 msgstr "- Urejanje datotek z besedili"
 
-#: ../gedit/gedit.c:605
+#: ../gedit/gedit.c:613
 #, c-format
 msgid ""
 "%s\n"
@@ -807,6 +807,10 @@ msgid ""
 msgstr ""
 "%s\n"
 "Zaženite '%s --help' za podroben pregled celotnega seznama možnosti ukazne vrstice.\n"
+
+#: ../gedit/gedit-app.c:404
+msgid "About gedit"
+msgstr "O programu"
 
 #: ../gedit/gedit-commands-file.c:255
 #, c-format
@@ -951,13 +955,13 @@ msgstr "Neshranjen dokument %d"
 
 #: ../gedit/gedit-documents-panel.c:89
 #: ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:2191
-#: ../gedit/gedit-window.c:2196
+#: ../gedit/gedit-window.c:2198
+#: ../gedit/gedit-window.c:2203
 msgid "Read Only"
 msgstr "Le berljivo"
 
 #: ../gedit/gedit-documents-panel.c:771
-#: ../gedit/gedit-window.c:3556
+#: ../gedit/gedit-window.c:3574
 msgid "Documents"
 msgstr "Dokumenti"
 
@@ -1123,7 +1127,7 @@ msgstr "Vse datoteke z besedilom"
 msgid "C_haracter Coding:"
 msgstr "_Kodiranje znakov:"
 
-#: ../gedit/gedit-help.c:89
+#: ../gedit/gedit-help.c:104
 msgid "There was an error displaying help."
 msgstr "Ob prikazovanju pomoči je prišlo do napake."
 
@@ -1723,7 +1727,7 @@ msgid "_Open..."
 msgstr "_Odpri ..."
 
 #: ../gedit/gedit-ui.h:59
-#: ../gedit/gedit-window.c:1385
+#: ../gedit/gedit-window.c:1389
 msgid "Open a file"
 msgstr "Odpri datoteko"
 
@@ -1859,116 +1863,118 @@ msgstr "Poišči _prejšnjega"
 msgid "Search backwards for the same text"
 msgstr "Niz poišči nazaj po besedilu"
 
-#: ../gedit/gedit-ui.h:123
+#: ../gedit/gedit-ui.h:124
+#: ../gedit/gedit-ui.h:127
 msgid "_Replace..."
 msgstr "_Zamenjaj ..."
 
-#: ../gedit/gedit-ui.h:124
+#: ../gedit/gedit-ui.h:125
+#: ../gedit/gedit-ui.h:128
 msgid "Search for and replace text"
 msgstr "Išči in zamenjaj besedilo"
 
-#: ../gedit/gedit-ui.h:125
+#: ../gedit/gedit-ui.h:130
 msgid "_Clear Highlight"
 msgstr "_Počisti poudarjanje"
 
-#: ../gedit/gedit-ui.h:126
+#: ../gedit/gedit-ui.h:131
 msgid "Clear highlighting of search matches"
 msgstr "Počisti poudarjanje iskanih zadetkov"
 
-#: ../gedit/gedit-ui.h:127
+#: ../gedit/gedit-ui.h:132
 msgid "Go to _Line..."
 msgstr "Skoči v _vrstico ..."
 
-#: ../gedit/gedit-ui.h:128
+#: ../gedit/gedit-ui.h:133
 msgid "Go to a specific line"
 msgstr "Pojdi na določeno vrstico"
 
-#: ../gedit/gedit-ui.h:129
+#: ../gedit/gedit-ui.h:134
 msgid "_Incremental Search..."
 msgstr "_Postopno iskanje ..."
 
-#: ../gedit/gedit-ui.h:130
+#: ../gedit/gedit-ui.h:135
 msgid "Incrementally search for text"
 msgstr "Postopno iskanje besedila"
 
 #. Documents menu
-#: ../gedit/gedit-ui.h:133
+#: ../gedit/gedit-ui.h:138
 msgid "_Save All"
 msgstr "Shrani _vse"
 
-#: ../gedit/gedit-ui.h:134
+#: ../gedit/gedit-ui.h:139
 msgid "Save all open files"
 msgstr "Shrani vse odprte datoteke"
 
-#: ../gedit/gedit-ui.h:135
+#: ../gedit/gedit-ui.h:140
 msgid "_Close All"
 msgstr "_Zapri vse"
 
-#: ../gedit/gedit-ui.h:136
+#: ../gedit/gedit-ui.h:141
 msgid "Close all open files"
 msgstr "Zapri vse odprte datoteke"
 
-#: ../gedit/gedit-ui.h:137
+#: ../gedit/gedit-ui.h:142
 msgid "_Previous Document"
 msgstr "P_rejšnji Dokument"
 
-#: ../gedit/gedit-ui.h:138
+#: ../gedit/gedit-ui.h:143
 msgid "Activate previous document"
 msgstr "Aktiviraj prejšnji dokument"
 
-#: ../gedit/gedit-ui.h:139
+#: ../gedit/gedit-ui.h:144
 msgid "_Next Document"
 msgstr "N_aslednji dokument"
 
-#: ../gedit/gedit-ui.h:140
+#: ../gedit/gedit-ui.h:145
 msgid "Activate next document"
 msgstr "Aktiviraj naslednji dokument"
 
-#: ../gedit/gedit-ui.h:141
+#: ../gedit/gedit-ui.h:146
 msgid "_Move to New Window"
 msgstr "_Prestavi na naslednje okno"
 
-#: ../gedit/gedit-ui.h:142
+#: ../gedit/gedit-ui.h:147
 msgid "Move the current document to a new window"
 msgstr "Prestavi trenuti dokument v novo okno"
 
-#: ../gedit/gedit-ui.h:149
+#: ../gedit/gedit-ui.h:154
 msgid "Quit the program"
 msgstr "Končaj program"
 
-#: ../gedit/gedit-ui.h:154
+#: ../gedit/gedit-ui.h:159
 msgid "_Toolbar"
 msgstr "_Orodna vrstica"
 
-#: ../gedit/gedit-ui.h:155
+#: ../gedit/gedit-ui.h:160
 msgid "Show or hide the toolbar in the current window"
 msgstr "Prikaži ali skrij orodno vrstico v trenutnem oknu"
 
-#: ../gedit/gedit-ui.h:157
+#: ../gedit/gedit-ui.h:162
 msgid "_Statusbar"
 msgstr "Vrstica _stanja"
 
-#: ../gedit/gedit-ui.h:158
+#: ../gedit/gedit-ui.h:163
 msgid "Show or hide the statusbar in the current window"
 msgstr "Prikaži ali skrij vrstico stanja v trenutnem oknu"
 
-#: ../gedit/gedit-ui.h:161
+#: ../gedit/gedit-ui.h:166
 msgid "Edit text at fullscreen"
 msgstr "Urejaj v celozaslonskem načinu"
 
-#: ../gedit/gedit-ui.h:168
+#: ../gedit/gedit-ui.h:173
 msgid "Side _Pane"
 msgstr "Stranski _pladenj"
 
-#: ../gedit/gedit-ui.h:169
+#: ../gedit/gedit-ui.h:174
 msgid "Show or hide the side pane in the current window"
 msgstr "Prikaži ali skrij stranski pladenj v trenutnem oknu"
 
-#: ../gedit/gedit-ui.h:171
+#: ../gedit/gedit-ui.h:176
 msgid "_Bottom Pane"
 msgstr "_Spodnji pladenj"
 
-#: ../gedit/gedit-ui.h:172
+#: ../gedit/gedit-ui.h:177
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Prikaži ali skrij spodnji pladenj v trenutnem oknu"
 
@@ -2015,7 +2021,7 @@ msgstr "Niz, ki ga želite poiskati"
 msgid "Line you want to move the cursor to"
 msgstr "Vrstica, na katero želite premakniti kazalec"
 
-#: ../gedit/gedit-window.c:938
+#: ../gedit/gedit-window.c:942
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Uporabi način poudarjanje %s"
@@ -2023,8 +2029,8 @@ msgstr "Uporabi način poudarjanje %s"
 #. add the "Plain Text" item before all the others
 #. Translators: "Plain Text" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:995
-#: ../gedit/gedit-window.c:1896
+#: ../gedit/gedit-window.c:999
+#: ../gedit/gedit-window.c:1899
 #: ../plugins/externaltools/tools/manager.py:121
 #: ../plugins/externaltools/tools/manager.py:423
 #: ../plugins/externaltools/tools/manager.py:533
@@ -2032,43 +2038,43 @@ msgstr "Uporabi način poudarjanje %s"
 msgid "Plain Text"
 msgstr "Običajno besedilo"
 
-#: ../gedit/gedit-window.c:996
+#: ../gedit/gedit-window.c:1000
 msgid "Disable syntax highlighting"
 msgstr "Onemogoči poudarjanje skladnje"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1282
+#: ../gedit/gedit-window.c:1286
 #, c-format
 msgid "Open '%s'"
 msgstr "Odpri '%s'"
 
-#: ../gedit/gedit-window.c:1387
+#: ../gedit/gedit-window.c:1391
 msgid "Open a recently used file"
 msgstr "Odpri nedavno uporabljeno datoteko"
 
-#: ../gedit/gedit-window.c:1393
+#: ../gedit/gedit-window.c:1397
 msgid "Open"
 msgstr "Odpri"
 
-#: ../gedit/gedit-window.c:1451
+#: ../gedit/gedit-window.c:1454
 msgid "Save"
 msgstr "Shrani"
 
-#: ../gedit/gedit-window.c:1453
+#: ../gedit/gedit-window.c:1456
 msgid "Print"
 msgstr "Natisni"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1621
+#: ../gedit/gedit-window.c:1624
 #, c-format
 msgid "Activate '%s'"
 msgstr "Zaženi \"%s\""
 
-#: ../gedit/gedit-window.c:1874
+#: ../gedit/gedit-window.c:1877
 msgid "Use Spaces"
 msgstr "Uporabi presledke"
 
-#: ../gedit/gedit-window.c:1945
+#: ../gedit/gedit-window.c:1948
 msgid "Tab Width"
 msgstr "Širina tabulatorja"
 
@@ -2124,20 +2130,20 @@ msgstr "Preveri za najnovejšo različico programa gedit"
 msgid "Check update"
 msgstr "Preveri za posodobitve"
 
-#: ../plugins/checkupdate/gedit-check-update-plugin.c:192
+#: ../plugins/checkupdate/gedit-check-update-plugin.c:199
 msgid "There was an error displaying the url."
 msgstr "Ob prikazovanju naslova url je prišlo do napake."
 
-#: ../plugins/checkupdate/gedit-check-update-plugin.c:222
-#: ../plugins/checkupdate/gedit-check-update-plugin.c:233
+#: ../plugins/checkupdate/gedit-check-update-plugin.c:231
+#: ../plugins/checkupdate/gedit-check-update-plugin.c:242
 msgid "_Download"
 msgstr "_Prenesi"
 
-#: ../plugins/checkupdate/gedit-check-update-plugin.c:250
+#: ../plugins/checkupdate/gedit-check-update-plugin.c:257
 msgid "There is a new version of gedit"
 msgstr "Na voljo je nova različica programa gedit"
 
-#: ../plugins/checkupdate/gedit-check-update-plugin.c:251
+#: ../plugins/checkupdate/gedit-check-update-plugin.c:261
 msgid "You can download the new version of gedit by pressing on the download button"
 msgstr "Novejšo različico programa gedit je mogoče prenesti s klikom na gumb za prenos."
 
@@ -2226,24 +2232,24 @@ msgstr "Zunanja orodja"
 msgid "Shell Output"
 msgstr "Izpis v lupini"
 
-#: ../plugins/externaltools/tools/capture.py:94
+#: ../plugins/externaltools/tools/capture.py:92
 #, python-format
 msgid "Could not execute command: %s"
 msgstr "Ni mogoče izvesti ukaza: %s"
 
-#: ../plugins/externaltools/tools/functions.py:157
+#: ../plugins/externaltools/tools/functions.py:162
 msgid "You must be inside a word to run this command"
 msgstr "Za zagon tega ukaza morate biti znotraj besede"
 
-#: ../plugins/externaltools/tools/functions.py:262
+#: ../plugins/externaltools/tools/functions.py:267
 msgid "Running tool:"
 msgstr "Zagnano orodje:"
 
-#: ../plugins/externaltools/tools/functions.py:287
+#: ../plugins/externaltools/tools/functions.py:292
 msgid "Done."
 msgstr "Končano."
 
-#: ../plugins/externaltools/tools/functions.py:289
+#: ../plugins/externaltools/tools/functions.py:294
 msgid "Exited"
 msgstr "Končal"
 
@@ -2808,9 +2814,70 @@ msgid "Insert often used pieces of text in a fast way"
 msgstr "Vstavi na hiter način pogosto uporabljene dele besedila"
 
 #: ../plugins/snippets/snippets.gedit-plugin.desktop.in.h:2
+#: ../plugins/snippets/data/lang/snippets.lang.h:15
 #: ../plugins/snippets/snippets/Document.py:58
 msgid "Snippets"
 msgstr "Odseki"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:1
+msgid "Default Value"
+msgstr "Privzeta vrednost"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:2
+msgid "Environmental Variable"
+msgstr "Okoljska spremenljivka"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:3
+msgid "Escape"
+msgstr "Ubežni znak"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:4
+msgid "Modifier"
+msgstr "Pomožna tipka"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:5
+msgid "Placeholder Default"
+msgstr "Privzeto držalo"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:6
+msgid "Placeholder Reference"
+msgstr "Nastavitve držala"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:7
+msgid "Placeholder begin and end"
+msgstr "Začektek in konec držala"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:8
+msgid "Python Placeholder"
+msgstr "Držalo python"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:9
+msgid "Regular Expression Pattern"
+msgstr "Vzorec logičnega izraza"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:10
+msgid "Regular Expression Placeholder"
+msgstr "Držalo logičnega držala"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:11
+msgid "Regular Expression Replace Pattern"
+msgstr "Vzorec logičnega izraza zamenjave "
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:12
+msgid "Seperator"
+msgstr "Ločilnik"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:13
+msgid "Shell Placeholder"
+msgstr "Lupinsko držalo"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:14
+msgid "Single Placeholder"
+msgstr "Enojno držalo"
+
+#: ../plugins/snippets/data/lang/snippets.lang.h:16
+msgid "Tabstop"
+msgstr "Mesta tabulatorjev"
 
 #: ../plugins/snippets/snippets/snippets.ui.h:2
 msgid "<b>Activation</b>"
