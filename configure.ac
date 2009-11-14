@@ -342,7 +342,7 @@ AC_ARG_ENABLE([python],
 AC_MSG_RESULT([$enable_python])
 
 if test "x$have_python" != "xno"; then
-	AM_PATH_PYTHON([2.3],[],[no])
+	AM_PATH_PYTHON([2.5],[],[no])
 	if test "x$PYTHON" = "x:"; then
 		have_python=no
 	fi
