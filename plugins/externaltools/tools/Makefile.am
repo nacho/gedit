@@ -4,7 +4,6 @@ plugindir = $(GEDIT_PLUGINS_LIBS_DIR)/externaltools
 plugin_PYTHON =		\
 	__init__.py	\
 	capture.py	\
-	ElementTree.py	\
 	library.py	\
 	functions.py	\
 	manager.py	\

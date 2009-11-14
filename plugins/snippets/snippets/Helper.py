@@ -17,7 +17,7 @@
 
 import string
 from xml.sax import saxutils
-from ElementTree import *
+from xml.etree.ElementTree import *
 import re
 
 import gtk

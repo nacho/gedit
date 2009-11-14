@@ -4,7 +4,7 @@ import sys
 import shutil
 
 from snippets.Library import *
-import ElementTree as et
+import xml.etree.ElementTree as et
 from Helper import *
 
 class Exporter:

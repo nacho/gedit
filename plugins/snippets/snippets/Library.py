@@ -23,7 +23,7 @@ import re
 
 import gtk
 
-import ElementTree as et
+import xml.etree.ElementTree as et
 from Helper import *
 
 class NamespacedId:

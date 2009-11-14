@@ -71,7 +71,7 @@ class ToolLibrary(Singleton):
     # created. It imports eventual tools that have been saved in the old XML
     # storage file.
     def import_old_xml_store(self):
-        import ElementTree as et
+        import xml.etree.ElementTree as et
         filename = os.path.expanduser('~/.gnome2/gedit/gedit-tools.xml')
         if not os.path.isfile(filename):
             return

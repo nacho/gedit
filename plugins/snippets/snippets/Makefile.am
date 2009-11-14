@@ -6,7 +6,6 @@ plugin_PYTHON = \
 	WindowHelper.py \
 	Document.py \
 	Library.py \
-	ElementTree.py \
 	Snippet.py \
 	Parser.py \
 	Placeholder.py \
