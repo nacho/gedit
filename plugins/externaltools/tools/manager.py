@@ -256,7 +256,6 @@ class Manager:
 
     def __init__(self, datadir):
         self.datadir = datadir
-        self.default_size = None
         self.dialog = None
         self._languages = {}
         self._tool_rows = {}
@@ -280,9 +279,6 @@ class Manager:
         self.ui.add_from_file(os.path.join(self.datadir, 'ui', 'tools.ui'))
         self.ui.connect_signals(callbacks)
         self.dialog = self.ui.get_object('tool-manager-dialog')
-        
-        if self.default_size != None:
-            self.dialog.set_default_size(*self.default_size)
         
         self.view = self.ui.get_object('view')
         
@@ -826,7 +822,6 @@ class Manager:
             return
 
         self.on_tool_manager_dialog_focus_out(dialog, None)
-        self.default_size = [self.dialog.allocation.width, self.dialog.allocation.height]
         
         self.dialog.destroy()
         self.dialog = None

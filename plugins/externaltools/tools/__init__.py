@@ -236,6 +236,8 @@ class ExternalToolsPlugin(gedit.Plugin):
         super(ExternalToolsPlugin, self).__init__()
         
         self._manager = None
+        self._manager_default_size = None
+
         ToolLibrary().set_locations(os.path.join(self.get_data_dir(), 'tools'))
 
     def activate(self, window):
@@ -255,6 +257,10 @@ class ExternalToolsPlugin(gedit.Plugin):
     def open_dialog(self):
         if not self._manager:
             self._manager = Manager(self.get_data_dir())
+
+            if self._manager_default_size:
+                self._manager.dialog.set_default_size(*self._manager_default_size)
+
             self._manager.dialog.connect('destroy', self.on_manager_destroy)
 
         window = gedit.app_get_default().get_active_window()
@@ -269,6 +275,7 @@ class ExternalToolsPlugin(gedit.Plugin):
         self._manager.tool_changed(tool, True)
 
     def on_manager_destroy(self, dialog):
+        self._manager_default_size = [dialog.allocation.width, dialog.allocation.height]
         self._manager = None
 
 # ex:ts=4:et:
