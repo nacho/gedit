@@ -553,6 +553,19 @@ class Document:
                 else:
                         self.goto_placeholder(self.active_placeholder, sn.placeholders[keys[0]])
 
+                if sn in self.active_snippets:
+                        # Check if we can get end_iter in view without moving the
+                        # current cursor position out of view
+                        cur = buf.get_iter_at_mark(buf.get_insert())
+                        last = sn.end_iter()
+
+                        curloc = self.view.get_iter_location(cur)
+                        lastloc = self.view.get_iter_location(last)
+
+                        if (lastloc.y + lastloc.height) - curloc.y <= \
+                           self.view.get_visible_rect().height:
+                                self.view.scroll_mark_onscreen(sn.end_mark)
+
                 buf.end_user_action()
                 self.view.grab_focus()
 
