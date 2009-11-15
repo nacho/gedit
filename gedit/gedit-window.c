@@ -722,7 +722,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 				  (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW)) &&
 				  !(lockdown & GEDIT_LOCKDOWN_PRINTING));
 				  
-	action = gtk_action_group_get_action (window->priv->action_group,
+	action = gtk_action_group_get_action (window->priv->close_action_group,
 					      "FileClose");
 
 	gtk_action_set_sensitive (action,
@@ -1475,6 +1475,17 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	g_object_unref (action_group);
 	window->priv->quit_action_group = action_group;
+
+	action_group = gtk_action_group_new ("GeditCloseWindowActions");
+	gtk_action_group_set_translation_domain (action_group, NULL);
+	gtk_action_group_add_actions (action_group,
+	                              gedit_close_menu_entries,
+	                              G_N_ELEMENTS (gedit_close_menu_entries),
+	                              window);
+
+	gtk_ui_manager_insert_action_group (manager, action_group, 0);
+	g_object_unref (action_group);
+	window->priv->close_action_group = action_group;
 
 	action_group = gtk_action_group_new ("GeditWindowPanesActions");
 	gtk_action_group_set_translation_domain (action_group, NULL);
@@ -2515,6 +2526,9 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 		if (gtk_action_group_get_sensitive (window->priv->quit_action_group))
 			gtk_action_group_set_sensitive (window->priv->quit_action_group,
 							FALSE);
+		if (gtk_action_group_get_sensitive (window->priv->close_action_group))
+			gtk_action_group_set_sensitive (window->priv->close_action_group,
+							FALSE);
 	}
 	else
 	{
@@ -2524,6 +2538,17 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 		if (!gtk_action_group_get_sensitive (window->priv->quit_action_group))
 			gtk_action_group_set_sensitive (window->priv->quit_action_group,
 							window->priv->num_tabs > 0);
+		if (!gtk_action_group_get_sensitive (window->priv->close_action_group))
+		{
+#ifdef OS_OSX
+			/* On OS X, File Close is always sensitive */
+			gtk_action_group_set_sensitive (window->priv->close_action_group,
+							TRUE);
+#else
+			gtk_action_group_set_sensitive (window->priv->close_action_group,
+							window->priv->num_tabs > 0);
+#endif
+		}
 	}
 }
 
@@ -3124,7 +3149,7 @@ editable_changed (GeditView  *view,
 }
 
 static void
-update_sensitivity_according_to_tabs (GeditWindow *window)
+update_sensitivity_according_to_open_tabs (GeditWindow *window)
 {
 	GtkAction *action;
 
@@ -3137,22 +3162,11 @@ update_sensitivity_according_to_tabs (GeditWindow *window)
 	gtk_action_set_sensitive (action,
 				  window->priv->num_tabs > 1);
 
-	/* Set sensitivity */
-	if (window->priv->num_tabs == 0)
-	{
-		action = gtk_action_group_get_action (window->priv->action_group,
-						      "ViewHighlightMode");
-		gtk_action_set_sensitive (action, FALSE);
-
-#ifdef OS_OSX
-		/* On OS X we keep the Close action sensitive when there are
-		   no tabs because when there are no active documents it
-		   closes the window (OS X style) */
-		action = gtk_action_group_get_action (window->priv->action_group,
-		                                      "FileClose");
-		gtk_action_set_sensitive (action, TRUE);
+	/* Do not set close action insensitive on OS X */
+#ifndef OS_OSX
+	gtk_action_group_set_sensitive (window->priv->close_action_group,
+	                                window->priv->num_tabs != 0);
 #endif
-	}
 }
 
 static void
@@ -3169,7 +3183,7 @@ notebook_tab_added (GeditNotebook *notebook,
 	
 	++window->priv->num_tabs;
 
-	update_sensitivity_according_to_tabs (window);
+	update_sensitivity_according_to_open_tabs (window);
 
 	view = gedit_tab_get_view (tab);
 	doc = gedit_tab_get_document (tab);
@@ -3335,7 +3349,7 @@ notebook_tab_removed (GeditNotebook *notebook,
 		}
 	}
 
-	update_sensitivity_according_to_tabs (window);
+	update_sensitivity_according_to_open_tabs (window);
 
 	if (window->priv->num_tabs == 0)
 	{
@@ -3931,7 +3945,7 @@ gedit_window_init (GeditWindow *window)
 	 * This needs to be done after plugins activatation */
 	init_panels_visibility (window);
 
-	update_sensitivity_according_to_tabs (window);
+	update_sensitivity_according_to_open_tabs (window);
 
 	gedit_debug_message (DEBUG_WINDOW, "END");
 }

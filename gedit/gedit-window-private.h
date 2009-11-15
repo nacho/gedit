@@ -71,6 +71,7 @@ struct _GeditWindowPrivate
 	GtkUIManager   *manager;
 	GtkActionGroup *action_group;
 	GtkActionGroup *always_sensitive_action_group;
+	GtkActionGroup *close_action_group;
 	GtkActionGroup *quit_action_group;
 	GtkActionGroup *panes_action_group;
 	GtkActionGroup *languages_action_group;
