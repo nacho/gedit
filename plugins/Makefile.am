@@ -4,7 +4,6 @@ DIST_SUBDIRS =		\
 	docinfo 	\
 	externaltools	\
 	filebrowser 	\
-	indent 		\
 	modelines	\
 	pythonconsole	\
 	quickopen	\
@@ -18,7 +17,6 @@ SUBDIRS = 		\
 	changecase	\
 	docinfo		\
 	filebrowser	\
-	indent		\
 	modelines	\
 	sort		\
 	taglist		\

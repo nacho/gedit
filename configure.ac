@@ -517,7 +517,6 @@ plugins/externaltools/Makefile
 plugins/externaltools/scripts/Makefile
 plugins/externaltools/tools/Makefile
 plugins/filebrowser/Makefile
-plugins/indent/Makefile
 plugins/modelines/Makefile
 plugins/pythonconsole/Makefile
 plugins/pythonconsole/pythonconsole/Makefile
