@@ -442,8 +442,11 @@ class PlaceholderShell(PlaceholderExpand):
                 self.process_close()
                 return False
         
+        def literal_replace(self, match):
+                return "\\%s" % (match.group(0))
+
         def literal(self, text):
-                return '"' + re.sub('[\\\\"]', '\\\\\\1', text) + '"'
+                return '"' + re.sub('([\\\\"])', self.literal_replace, text) + '"'
         
         def expand(self, text):
                 self.remove_timeout()
