@@ -576,7 +576,7 @@ button_press_event (GtkWidget      *widget,
 
 				if (selected) {
 					call_parent = on_expander || gtk_tree_selection_count_selected_rows (selection) == 1;
-					view->priv->ignore_release = call_parent;
+					view->priv->ignore_release = call_parent && view->priv->click_policy != GEDIT_FILE_BROWSER_VIEW_CLICK_POLICY_SINGLE;
 				} else if  ((event->state & GDK_CONTROL_MASK) != 0) {
 					call_parent = FALSE;
 					gtk_tree_selection_select_path (selection, path);
