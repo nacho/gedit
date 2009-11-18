@@ -60,6 +60,7 @@ AC_SUBST(ACTIVE_PLUGINS)
 
 dnl toolbar style for gedit schemas
 TOOLBAR_STYLE="GEDIT_TOOLBAR_SYSTEM"
+AC_SUBST(TOOLBAR_STYLE)
 
 dnl check for win32 platform
 AC_MSG_CHECKING([for Win32 platform])
