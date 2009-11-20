@@ -354,16 +354,24 @@ if test "x$have_python" != "xno"; then
 fi
 
 if test "x$have_python" != "xno"; then
-	PY_PREFIX=`$PYTHON -c 'import sys ; print sys.prefix'`
 	PY_EXEC_PREFIX=`$PYTHON -c 'import sys ; print sys.exec_prefix'`
 	PYTHON_LIBS="-lpython$PYTHON_VERSION"
-	PYTHON_LIB_LOC="-L$PY_EXEC_PREFIX/lib/python$PYTHON_VERSION/config"
-	PYTHON_CFLAGS="-I$PY_PREFIX/include/python$PYTHON_VERSION"
-	PYTHON_MAKEFILE="$PY_EXEC_PREFIX/lib/python$PYTHON_VERSION/config/Makefile"
-	PYTHON_LOCALMODLIBS=`sed -n -e 's/^LOCALMODLIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
-	PYTHON_BASEMODLIBS=`sed -n -e 's/^BASEMODLIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
-	PYTHON_OTHER_LIBS=`sed -n -e 's/^LIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
-	PYTHON_EXTRA_LIBS="$PYTHON_LOCALMODLIBS $PYTHON_BASEMODLIBS $PYTHON_OTHER_LIBS"
+
+	if test "$os_win32" = yes; then
+		PYTHON_LIBS=`echo $PYTHON_LIBS | sed 's/\.//g'`
+		PYTHON_LIB_LOC="-I$PY_EXEC_PREFIX/libs"
+		PYTHON_CFLAGS="-I$PY_EXEC_PREFIX/include"
+		PYTHON_EXTRA_LIBS=
+	else
+		PY_PREFIX=`$PYTHON -c 'import sys ; print sys.prefix'`
+		PYTHON_LIB_LOC="-L$PY_EXEC_PREFIX/lib/python$PYTHON_VERSION/config"
+		PYTHON_CFLAGS="-I$PY_PREFIX/include/python$PYTHON_VERSION"
+		PYTHON_MAKEFILE="$PY_EXEC_PREFIX/lib/python$PYTHON_VERSION/config/Makefile"
+		PYTHON_LOCALMODLIBS=`sed -n -e 's/^LOCALMODLIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
+		PYTHON_BASEMODLIBS=`sed -n -e 's/^BASEMODLIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
+		PYTHON_OTHER_LIBS=`sed -n -e 's/^LIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
+		PYTHON_EXTRA_LIBS="$PYTHON_LOCALMODLIBS $PYTHON_BASEMODLIBS $PYTHON_OTHER_LIBS"
+	fi
 	AC_SUBST([PYTHON_LIBS])
 	AC_SUBST([PYTHON_LIB_LOC])
 	AC_SUBST([PYTHON_CFLAGS])

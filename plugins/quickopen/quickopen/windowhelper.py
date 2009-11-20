@@ -70,7 +70,7 @@ class WindowHelper:
                          self.on_quick_open_activate)
                 ])
 
-                manager.insert_action_group(self._action_group)
+                manager.insert_action_group(self._action_group, -1)
                 self._ui_id = manager.add_ui_from_string(ui_str)
 
         def _create_popup(self):
