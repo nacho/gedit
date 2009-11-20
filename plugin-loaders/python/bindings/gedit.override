@@ -260,8 +260,8 @@ _wrap_gedit_document_get_search_text(PyGObject *self)
     if (ret) {
         string = PyString_FromString(ret);
         PyTuple_SetItem(tuple, 0, string);
-        Py_DECREF(string);
     } else {
+        Py_INCREF(Py_None);
         PyTuple_SetItem(tuple, 0, Py_None);
     }
     PyTuple_SetItem(tuple, 1, PyInt_FromLong(flags));
