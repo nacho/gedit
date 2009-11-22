@@ -487,7 +487,7 @@ gedit_python_init (GeditPluginLoaderPython *loader)
 	PyObject *gedit, *geditutils, *geditcommands, *geditplugins;
 	PyObject *gettext, *install, *gettext_args;
 	char *argv[] = { "gedit", NULL };
-#ifndef G_OS_WIN32
+#ifdef HAVE_SIGACTION
 	gint res;
 	struct sigaction old_sigint;
 #endif
@@ -516,7 +516,7 @@ gedit_python_init (GeditPluginLoaderPython *loader)
 	/* CHECK: can't we use Py_InitializeEx instead of Py_Initialize in order
           to avoid to manage signal handlers ? - Paolo (Dec. 31, 2006) */
 
-#ifndef G_OS_WIN32
+#ifdef HAVE_SIGACTION
 	/* Save old handler */
 	res = sigaction (SIGINT, NULL, &old_sigint);  
 	if (res != 0)
@@ -532,7 +532,7 @@ gedit_python_init (GeditPluginLoaderPython *loader)
 	/* Python initialization */
 	Py_Initialize ();
 
-#ifndef G_OS_WIN32
+#ifdef HAVE_SIGACTION
 	/* Restore old handler */
 	res = sigaction (SIGINT, &old_sigint, NULL);
 	if (res != 0)
