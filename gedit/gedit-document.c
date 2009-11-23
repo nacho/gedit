@@ -799,28 +799,10 @@ guess_language (const gchar *uri,
 /* If content type is null, we guess from the filename */
 /* If uri is null, we only set the content-type */
 static void
-set_uri (GeditDocument *doc,
-	 const gchar   *uri,
-	 const gchar   *content_type)
+set_content_type (GeditDocument *doc,
+		  const gchar   *content_type)
 {
 	gedit_debug (DEBUG_DOCUMENT);
-
-	g_return_if_fail ((uri == NULL) || gedit_utils_is_valid_uri (uri));
-
-	if (uri != NULL)
-	{
-		if (doc->priv->uri == uri)
-			return;
-
-		g_free (doc->priv->uri);
-		doc->priv->uri = g_strdup (uri);
-
-		if (doc->priv->untitled_number > 0)
-		{
-			release_untitled_number (doc->priv->untitled_number);
-			doc->priv->untitled_number = 0;
-		}
-	}
 
 	g_free (doc->priv->content_type);
 
@@ -852,6 +834,32 @@ set_uri (GeditDocument *doc,
 		set_language (doc, language, FALSE);
 	}
 
+	g_object_notify (G_OBJECT (doc), "content-type");
+}
+
+static void
+set_uri (GeditDocument *doc,
+	 const gchar   *uri)
+{
+	gedit_debug (DEBUG_DOCUMENT);
+
+	g_return_if_fail ((uri == NULL) || gedit_utils_is_valid_uri (uri));
+
+	if (uri != NULL)
+	{
+		if (doc->priv->uri == uri)
+			return;
+
+		g_free (doc->priv->uri);
+		doc->priv->uri = g_strdup (uri);
+
+		if (doc->priv->untitled_number > 0)
+		{
+			release_untitled_number (doc->priv->untitled_number);
+			doc->priv->untitled_number = 0;
+		}
+	}
+
 	g_object_notify (G_OBJECT (doc), "uri");
 	g_object_notify (G_OBJECT (doc), "shortname");
 }
@@ -876,7 +884,7 @@ void
 gedit_document_set_uri (GeditDocument *doc,
 			const gchar   *uri)
 {
-	set_uri (doc, uri, doc->priv->content_type);
+	set_uri (doc, uri);
 }
 
 /* Never returns NULL */
@@ -1033,9 +1041,8 @@ document_loader_loaded (GeditDocumentLoader *loader,
 		set_encoding (doc, 
 			      gedit_document_loader_get_encoding (loader),
 			      (doc->priv->requested_encoding != NULL));
-		      
-		/* We already set the uri */
-		set_uri (doc, NULL, content_type);
+		
+		set_content_type (doc, content_type);
 
 		/* move the cursor at the requested line if any */
 		if (doc->priv->requested_line_pos > 0)
@@ -1152,7 +1159,8 @@ gedit_document_load_real (GeditDocument       *doc,
 	doc->priv->requested_encoding = encoding;
 	doc->priv->requested_line_pos = line_pos;
 
-	set_uri (doc, uri, NULL);
+	set_uri (doc, uri);
+	set_content_type (doc, NULL);
 
 	gedit_document_loader_load (doc->priv->loader);
 }
@@ -1215,8 +1223,10 @@ document_saver_saving (GeditDocumentSaver *saver,
 			const gchar *content_type;
 
 			uri = gedit_document_saver_get_uri (saver);
+			set_uri (doc, uri);
 
 			content_type = gedit_document_saver_get_content_type (saver);
+			set_content_type (doc, content_type);
 
 			doc->priv->mtime = gedit_document_saver_get_mtime (saver);
 
@@ -1226,8 +1236,6 @@ document_saver_saving (GeditDocumentSaver *saver,
 
 			gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc),
 						      FALSE);
-
-			set_uri (doc, uri, content_type);
 
 			set_encoding (doc, 
 				      doc->priv->requested_encoding, 
