@@ -896,6 +896,7 @@ gedit_document_set_uri (GeditDocument *doc,
 			const gchar   *uri)
 {
 	set_uri (doc, uri);
+	set_content_type (doc, NULL);
 }
 
 /* Never returns NULL */
