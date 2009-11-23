@@ -689,6 +689,69 @@ get_default_style_scheme (void)
 	return def_style;
 }
 
+static GtkSourceLanguage *
+guess_language (const gchar *uri,
+		const gchar *content_type)
+
+{
+	gchar *data;
+	GtkSourceLanguage *language = NULL;
+
+	data = gedit_metadata_manager_get (uri, "language");
+
+	if (data != NULL)
+	{
+		gedit_debug_message (DEBUG_DOCUMENT, "Language from metadata: %s", data);
+
+		if (strcmp (data, "_NORMAL_") != 0)
+		{
+			language = gtk_source_language_manager_get_language (
+						gedit_get_language_manager (),
+						data);
+		}
+
+		g_free (data);
+	}
+	else
+	{
+		GFile *file;
+		gchar *basename;
+
+		gedit_debug_message (DEBUG_DOCUMENT, "Sniffing Language");
+
+		file = g_file_new_for_uri (uri);
+		basename = g_file_get_basename (file);
+
+		language = gtk_source_language_manager_guess_language (
+					gedit_get_language_manager (),
+					basename,
+					content_type);
+
+		g_free (basename);
+		g_object_unref (file);
+	}
+
+	return language;
+}
+
+static void
+on_content_type_changed (GeditDocument *doc,
+			 GParamSpec    *pspec,
+			 gpointer       useless)
+{
+	if (!doc->priv->language_set_by_user)
+	{
+		GtkSourceLanguage *language;
+
+		language = guess_language (doc->priv->uri, doc->priv->content_type);
+
+		gedit_debug_message (DEBUG_DOCUMENT, "Language: %s",
+				     language != NULL ? gtk_source_language_get_name (language) : "None");
+
+		set_language (doc, language, FALSE);
+	}
+}
+
 static void
 gedit_document_init (GeditDocument *doc)
 {
@@ -740,7 +803,12 @@ gedit_document_init (GeditDocument *doc)
 	g_signal_connect_after (doc, 
 			  	"delete-range",
 			  	G_CALLBACK (delete_range_cb),
-			  	NULL);		
+			  	NULL);
+
+	g_signal_connect (doc,
+			  "notify::content-type",
+			  G_CALLBACK (on_content_type_changed),
+			  NULL);
 }
 
 GeditDocument *
@@ -749,51 +817,6 @@ gedit_document_new (void)
 	gedit_debug (DEBUG_DOCUMENT);
 
 	return GEDIT_DOCUMENT (g_object_new (GEDIT_TYPE_DOCUMENT, NULL));
-}
-
-static GtkSourceLanguage *
-guess_language (const gchar *uri,
-		const gchar *content_type)
-
-{
-	gchar *data;
-	GtkSourceLanguage *language = NULL;
-
-	data = gedit_metadata_manager_get (uri, "language");
-
-	if (data != NULL)
-	{
-		gedit_debug_message (DEBUG_DOCUMENT, "Language from metadata: %s", data);
-
-		if (strcmp (data, "_NORMAL_") != 0)
-		{
-			language = gtk_source_language_manager_get_language (
-						gedit_get_language_manager (),
-						data);
-		}
-
-		g_free (data);
-	}
-	else
-	{
-		GFile *file;
-		gchar *basename;
-
-		gedit_debug_message (DEBUG_DOCUMENT, "Sniffing Language");
-
-		file = g_file_new_for_uri (uri);
-		basename = g_file_get_basename (file);
-
-		language = gtk_source_language_manager_guess_language (
-					gedit_get_language_manager (),
-					basename,
-					content_type);
-
-		g_free (basename);
-		g_object_unref (file);
-	}
-
-	return language;
 }
 
 /* If content type is null, we guess from the filename */
@@ -820,18 +843,6 @@ set_content_type (GeditDocument *doc,
 		{
 			doc->priv->content_type = g_content_type_from_mime_type ("text/plain");
 		}
-	}
-
-	if (!doc->priv->language_set_by_user)
-	{
-		GtkSourceLanguage *language;
-
-		language = guess_language (doc->priv->uri, doc->priv->content_type);
-
-		gedit_debug_message (DEBUG_DOCUMENT, "Language: %s",
-				     language != NULL ? gtk_source_language_get_name (language) : "None");
-
-		set_language (doc, language, FALSE);
 	}
 
 	g_object_notify (G_OBJECT (doc), "content-type");
