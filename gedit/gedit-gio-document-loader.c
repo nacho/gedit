@@ -64,11 +64,7 @@ typedef struct
 
 static void	    gedit_gio_document_loader_load		(GeditDocumentLoader *loader);
 static gboolean     gedit_gio_document_loader_cancel		(GeditDocumentLoader *loader);
-static const gchar *gedit_gio_document_loader_get_content_type	(GeditDocumentLoader *loader);
-static time_t	    gedit_gio_document_loader_get_mtime		(GeditDocumentLoader *loader);
-static goffset	    gedit_gio_document_loader_get_file_size	(GeditDocumentLoader *loader);
-static goffset	    gedit_gio_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
-static gboolean	    gedit_gio_document_loader_get_readonly	(GeditDocumentLoader *loader);
+static goffset      gedit_gio_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
 
 static void open_async_read (AsyncData *async);
 
@@ -77,7 +73,6 @@ struct _GeditGioDocumentLoaderPrivate
 	/* Info on the current file */
 	GFile            *gfile;
 
-	GFileInfo        *info;
 	goffset           bytes_read;
 
 	/* Handle for remote files */
@@ -103,9 +98,6 @@ gedit_gio_document_loader_finalize (GObject *object)
 		g_cancellable_cancel (priv->cancellable);
 		g_object_unref (priv->cancellable);
 	}
-
-	if (priv->info)
-		g_object_unref (priv->info);
 	
 	if (priv->stream)
 		g_object_unref (priv->stream);
@@ -131,11 +123,7 @@ gedit_gio_document_loader_class_init (GeditGioDocumentLoaderClass *klass)
 
 	loader_class->load = gedit_gio_document_loader_load;
 	loader_class->cancel = gedit_gio_document_loader_cancel;
-	loader_class->get_content_type = gedit_gio_document_loader_get_content_type;
-	loader_class->get_mtime = gedit_gio_document_loader_get_mtime;
-	loader_class->get_file_size = gedit_gio_document_loader_get_file_size;
 	loader_class->get_bytes_read = gedit_gio_document_loader_get_bytes_read;
-	loader_class->get_readonly = gedit_gio_document_loader_get_readonly;
 
 	g_type_class_add_private (object_class, sizeof(GeditGioDocumentLoaderPrivate));
 }
@@ -287,12 +275,14 @@ static void
 finish_query_info (AsyncData *async)
 {
 	GeditGioDocumentLoader *gvloader;
+	GFileInfo *info;
 	
 	gvloader = async->loader;
+	info = GEDIT_DOCUMENT_LOADER (gvloader)->info;
 
 	/* if it's not a regular file, error out... */
-	if (g_file_info_has_attribute (gvloader->priv->info, G_FILE_ATTRIBUTE_STANDARD_TYPE) &&
-	    g_file_info_get_file_type (gvloader->priv->info) != G_FILE_TYPE_REGULAR)
+	if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_STANDARD_TYPE) &&
+	    g_file_info_get_file_type (info) != G_FILE_TYPE_REGULAR)
 	{
 		g_set_error (&gvloader->priv->error,
 			     G_IO_ERROR,
@@ -314,6 +304,7 @@ query_info_cb (GFile        *source,
 	       AsyncData    *async)
 {
 	GeditGioDocumentLoader *gvloader;
+	GFileInfo *info;
 	GError *error = NULL;
 
 	gedit_debug (DEBUG_LOADER);
@@ -328,16 +319,18 @@ query_info_cb (GFile        *source,
 	gvloader = async->loader;
 
 	/* finish the info query */
-	gvloader->priv->info = g_file_query_info_finish (gvloader->priv->gfile,
-	                                                 res, 
-	                                                 &error);
+	info = g_file_query_info_finish (gvloader->priv->gfile,
+	                                 res,
+	                                 &error);
 
-	if (gvloader->priv->info == NULL)
+	if (info == NULL)
 	{
 		/* propagate the error and clean up */
 		async_failed (async, error);
 		return;
 	}
+
+	GEDIT_DOCUMENT_LOADER (gvloader)->info = info;
 	
 	finish_query_info (async);
 }
@@ -480,56 +473,6 @@ gedit_gio_document_loader_load (GeditDocumentLoader *loader)
 	open_async_read (async);
 }
 
-static const gchar *
-gedit_gio_document_loader_get_content_type (GeditDocumentLoader *loader)
-{
-	GeditGioDocumentLoader *gvloader = GEDIT_GIO_DOCUMENT_LOADER (loader);
-
-	if (gvloader->priv->info != NULL &&
-	    g_file_info_has_attribute (gvloader->priv->info,
-				       G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE))
-	{
-		return g_file_info_get_content_type (gvloader->priv->info);
-	}
-
-	return NULL;
-}
-
-static time_t
-gedit_gio_document_loader_get_mtime (GeditDocumentLoader *loader)
-{
-	GeditGioDocumentLoader *gvloader = GEDIT_GIO_DOCUMENT_LOADER (loader);
-
-	if (gvloader->priv->info != NULL &&
-	    g_file_info_has_attribute (gvloader->priv->info,
-				       G_FILE_ATTRIBUTE_TIME_MODIFIED))
-	{
-		GTimeVal timeval;
-
-		g_file_info_get_modification_time (gvloader->priv->info, &timeval);
-
-		return timeval.tv_sec;
-	}
-
-	return 0;
-}
-
-/* Returns 0 if file size is unknown */
-static goffset
-gedit_gio_document_loader_get_file_size (GeditDocumentLoader *loader)
-{
-	GeditGioDocumentLoader *gvloader = GEDIT_GIO_DOCUMENT_LOADER (loader);
-
-	if (gvloader->priv->info != NULL &&
-	    g_file_info_has_attribute (gvloader->priv->info,
-				       G_FILE_ATTRIBUTE_STANDARD_SIZE))
-	{
-		return g_file_info_get_size (gvloader->priv->info);
-	}
-
-	return 0;
-}
-
 static goffset
 gedit_gio_document_loader_get_bytes_read (GeditDocumentLoader *loader)
 {
@@ -554,23 +497,4 @@ gedit_gio_document_loader_cancel (GeditDocumentLoader *loader)
 	remote_load_completed_or_failed (gvloader, NULL);
 
 	return TRUE;
-}
-
-/* In the case the loader does not know if the file is readonly, for example 
-   for most remote files, the function returns FALSE, so that we can try writing
-   and if needed handle the error. */
-static gboolean
-gedit_gio_document_loader_get_readonly (GeditDocumentLoader *loader)
-{
-	GeditGioDocumentLoader *gvloader = GEDIT_GIO_DOCUMENT_LOADER (loader);
-
-	if (gvloader->priv->info != NULL &&
-	    g_file_info_has_attribute (gvloader->priv->info,
-				       G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE))
-	{
-		return !g_file_info_get_attribute_boolean (gvloader->priv->info,
-							   G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
-	}
-
-	return FALSE;
 }

@@ -62,6 +62,7 @@ struct _GeditDocumentLoader
 	gboolean		  used;
 
 	/* Info on the current file */
+	GFileInfo		 *info;
 	gchar			 *uri;
 	const GeditEncoding	 *encoding;
 	const GeditEncoding	 *metadata_encoding;
@@ -85,11 +86,7 @@ struct _GeditDocumentLoaderClass
 	/* VTable */
 	void			(* load)		(GeditDocumentLoader *loader);
 	gboolean		(* cancel)		(GeditDocumentLoader *loader);
-	const gchar *		(* get_content_type)	(GeditDocumentLoader *loader);
-	time_t			(* get_mtime)		(GeditDocumentLoader *loader);
-	goffset			(* get_file_size)	(GeditDocumentLoader *loader);
 	goffset			(* get_bytes_read)	(GeditDocumentLoader *loader);
-	gboolean		(* get_readonly)	(GeditDocumentLoader *loader);
 };
 
 /*
@@ -123,20 +120,13 @@ GeditDocument		*gedit_document_loader_get_document	(GeditDocumentLoader *loader)
 #define STDIN_URI "stdin:" 
 const gchar		*gedit_document_loader_get_uri		(GeditDocumentLoader *loader);
 
-const gchar		*gedit_document_loader_get_content_type	(GeditDocumentLoader *loader);
-
-time_t 			 gedit_document_loader_get_mtime 	(GeditDocumentLoader *loader);
-
-/* In the case the loader does not know if the file is readonly, for example for most
-remote files, the function returns FALSE */
-gboolean		 gedit_document_loader_get_readonly	(GeditDocumentLoader *loader);
-
 const GeditEncoding	*gedit_document_loader_get_encoding	(GeditDocumentLoader *loader);
 
-/* Returns 0 if file size is unknown */
-goffset			 gedit_document_loader_get_file_size	(GeditDocumentLoader *loader);
-
 goffset			 gedit_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
+
+/* You can get from the info: content_type, time_modified, standard_size, access_can_write 
+   and also the metadata*/
+GFileInfo		*gedit_document_loader_get_info		(GeditDocumentLoader *loader);
 
 G_END_DECLS
 

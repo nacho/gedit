@@ -1039,16 +1039,30 @@ document_loader_loaded (GeditDocumentLoader *loader,
 	if (error == NULL)
 	{
 		GtkTextIter iter;
-		const gchar *content_type;
+		GFileInfo *info;
+		const gchar *content_type = NULL;
+		gboolean read_only = FALSE;
 
-		content_type = gedit_document_loader_get_content_type (loader);
+		info = gedit_document_loader_get_info (loader);
 
-		doc->priv->mtime = gedit_document_loader_get_mtime (loader);
+		if (info)
+		{
+			if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE))
+				content_type = g_file_info_get_attribute_string (info,
+										 G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE);
+
+			if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_TIME_MODIFIED))
+				doc->priv->mtime = g_file_info_get_attribute_uint64 (info,
+										     G_FILE_ATTRIBUTE_TIME_MODIFIED);
+
+			if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE))
+				read_only = !g_file_info_get_attribute_boolean (info,
+										G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
+		}
+
+		set_readonly (doc, read_only);
 
 		g_get_current_time (&doc->priv->time_of_last_save_or_load);
-
-		set_readonly (doc,
-		      gedit_document_loader_get_readonly (loader));
 
 		set_encoding (doc, 
 			      gedit_document_loader_get_encoding (loader),
@@ -1134,10 +1148,16 @@ document_loader_loading (GeditDocumentLoader *loader,
 	}
 	else
 	{
-		goffset size;
+		goffset size = 0;
 		goffset read;
+		GFileInfo *info;
 
-		size = gedit_document_loader_get_file_size (loader);
+		info = gedit_document_loader_get_info (loader);
+
+		if (info && g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_STANDARD_SIZE))
+			size = g_file_info_get_attribute_uint64 (info,
+								 G_FILE_ATTRIBUTE_STANDARD_SIZE);
+
 		read = gedit_document_loader_get_bytes_read (loader);
 
 		g_signal_emit (doc, 

@@ -126,7 +126,24 @@ gedit_document_loader_finalize (GObject *object)
 
 	g_free (loader->uri);
 
+	if (loader->info)
+		g_object_unref (loader->info);
+
 	G_OBJECT_CLASS (gedit_document_loader_parent_class)->finalize (object);
+}
+
+static void
+gedit_document_loader_dispose (GObject *object)
+{
+	GeditDocumentLoader *loader = GEDIT_DOCUMENT_LOADER (object);
+
+	if (loader->info != NULL)
+	{
+		g_object_unref (loader->info);
+		loader->info = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_document_loader_parent_class)->dispose (object);
 }
 
 static void
@@ -135,6 +152,7 @@ gedit_document_loader_class_init (GeditDocumentLoaderClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->finalize = gedit_document_loader_finalize;
+	object_class->dispose = gedit_document_loader_dispose;
 	object_class->get_property = gedit_document_loader_get_property;
 	object_class->set_property = gedit_document_loader_set_property;
 
@@ -425,54 +443,12 @@ gedit_document_loader_get_uri (GeditDocumentLoader *loader)
 	return loader->uri;
 }
 
-/* it may return NULL, it's up to gedit-document handle it */
-const gchar *
-gedit_document_loader_get_content_type (GeditDocumentLoader *loader)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), NULL);
-
-	return GEDIT_DOCUMENT_LOADER_GET_CLASS (loader)->get_content_type (loader);
-}
-
-time_t
-gedit_document_loader_get_mtime (GeditDocumentLoader *loader)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), 0);
-
-	return GEDIT_DOCUMENT_LOADER_GET_CLASS (loader)->get_mtime (loader);
-}
-
-/* Returns 0 if file size is unknown */
-goffset
-gedit_document_loader_get_file_size (GeditDocumentLoader *loader)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), 0);
-
-	return GEDIT_DOCUMENT_LOADER_GET_CLASS (loader)->get_file_size (loader);
-}
-
 goffset
 gedit_document_loader_get_bytes_read (GeditDocumentLoader *loader)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), 0);
 
 	return GEDIT_DOCUMENT_LOADER_GET_CLASS (loader)->get_bytes_read (loader);
-}
-
-/* In the case the loader does not know if the file is readonly, for example 
-   for most remote files, the function returns FALSE, so that we can try writing
-   and if needed handle the error. */
-gboolean
-gedit_document_loader_get_readonly (GeditDocumentLoader *loader)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), FALSE);
-
-	/* if configuration says the scheme is not writable, do not query the
-	   actual loader object, and return TRUE */
-	if (!gedit_utils_uri_has_writable_scheme (loader->uri))
-		return TRUE;
-
-	return GEDIT_DOCUMENT_LOADER_GET_CLASS (loader)->get_readonly (loader);
 }
 
 const GeditEncoding *
@@ -487,4 +463,12 @@ gedit_document_loader_get_encoding (GeditDocumentLoader *loader)
 			      gedit_encoding_get_current ());
 
 	return loader->auto_detected_encoding;
+}
+
+GFileInfo *
+gedit_document_loader_get_info (GeditDocumentLoader *loader)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), NULL);
+
+	return loader->info;
 }
