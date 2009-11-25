@@ -59,15 +59,12 @@
 
 static void		 gedit_local_document_saver_save		(GeditDocumentSaver *saver,
 									 time_t              old_mtime);
-static const gchar 	*gedit_local_document_saver_get_content_type	(GeditDocumentSaver *saver);
-static time_t		 gedit_local_document_saver_get_mtime		(GeditDocumentSaver *saver);
 static goffset		 gedit_local_document_saver_get_file_size	(GeditDocumentSaver *saver);
 static goffset		 gedit_local_document_saver_get_bytes_written	(GeditDocumentSaver *saver);
 
 
 struct _GeditLocalDocumentSaverPrivate
 {
-	goffset	  size;
 	goffset	  bytes_written;
 
 	/* temp data for local files */
@@ -104,8 +101,6 @@ gedit_local_document_saver_class_init (GeditDocumentSaverClass *klass)
 	object_class->finalize = gedit_local_document_saver_finalize;
 
 	saver_class->save = gedit_local_document_saver_save;
-	saver_class->get_content_type = gedit_local_document_saver_get_content_type;
-	saver_class->get_mtime = gedit_local_document_saver_get_mtime;
 	saver_class->get_file_size = gedit_local_document_saver_get_file_size;
 	saver_class->get_bytes_written = gedit_local_document_saver_get_bytes_written;
 
@@ -296,6 +291,21 @@ all_xattrs (const char *xattr G_GNUC_UNUSED,
 	return 1;
 }
 #endif
+
+static void
+set_saver_info (GeditLocalDocumentSaver *lsaver)
+{
+	GeditDocumentSaver *saver = GEDIT_DOCUMENT_SAVER (lsaver);
+
+	if (saver->info != NULL)
+		g_object_unref (saver->info);
+
+	saver->info = g_file_info_new ();
+	g_file_info_set_content_type (saver->info, lsaver->priv->content_type);
+	g_file_info_set_attribute_uint64 (saver->info,
+					  G_FILE_ATTRIBUTE_TIME_MODIFIED,
+					  lsaver->priv->doc_mtime);
+}
 
 static gboolean
 save_existing_local_file (GeditLocalDocumentSaver *lsaver)
@@ -727,6 +737,8 @@ save_existing_local_file (GeditLocalDocumentSaver *lsaver)
 
 	g_free (backup_filename);
 
+	set_saver_info (lsaver);
+
 	gedit_document_saver_saving (saver, TRUE, lsaver->priv->error);
 
 	/* stop the timeout */
@@ -771,6 +783,8 @@ save_new_local_file (GeditLocalDocumentSaver *lsaver)
 			   g_strerror (errno));
 
 	lsaver->priv->fd = -1;
+
+	set_saver_info (lsaver);
 
 	gedit_document_saver_saving (GEDIT_DOCUMENT_SAVER (lsaver),
 				     TRUE,
@@ -875,22 +889,10 @@ gedit_local_document_saver_save (GeditDocumentSaver *saver,
 	}
 }
 
-static const gchar *
-gedit_local_document_saver_get_content_type (GeditDocumentSaver *saver)
-{
-	return GEDIT_LOCAL_DOCUMENT_SAVER (saver)->priv->content_type;
-}
-
-static time_t
-gedit_local_document_saver_get_mtime (GeditDocumentSaver *saver)
-{
-	return GEDIT_LOCAL_DOCUMENT_SAVER (saver)->priv->doc_mtime;
-}
-
 static goffset
 gedit_local_document_saver_get_file_size (GeditDocumentSaver *saver)
 {
-	return GEDIT_LOCAL_DOCUMENT_SAVER (saver)->priv->size;
+	return 0;
 }
 
 static goffset

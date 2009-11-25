@@ -59,8 +59,6 @@ typedef struct
 
 static void	     gedit_gio_document_saver_save		    (GeditDocumentSaver *saver,
 								     time_t              old_mtime);
-static const gchar *gedit_gio_document_saver_get_content_type	    (GeditDocumentSaver *saver);
-static time_t       gedit_gio_document_saver_get_mtime		    (GeditDocumentSaver *saver);
 static goffset	     gedit_gio_document_saver_get_file_size	    (GeditDocumentSaver *saver);
 static goffset	     gedit_gio_document_saver_get_bytes_written	    (GeditDocumentSaver *saver);
 
@@ -69,8 +67,7 @@ static void 	    check_modified_async 			    (AsyncData          *async);
 
 struct _GeditGioDocumentSaverPrivate
 {
-	time_t                    doc_mtime;
-	gchar                    *content_type;
+	time_t			  old_mtime;
 
 	goffset			  size;
 	goffset			  bytes_written;
@@ -97,8 +94,6 @@ gedit_gio_document_saver_finalize (GObject *object)
 
 	if (priv->gfile)
 		g_object_unref (priv->gfile);
-
-	g_free (priv->content_type);
 
 	if (priv->error)
 		g_error_free (priv->error);
@@ -140,8 +135,6 @@ gedit_gio_document_saver_class_init (GeditGioDocumentSaverClass *klass)
 	object_class->finalize = gedit_gio_document_saver_finalize;
 
 	saver_class->save = gedit_gio_document_saver_save;
-	saver_class->get_content_type = gedit_gio_document_saver_get_content_type;
-	saver_class->get_mtime = gedit_gio_document_saver_get_mtime;
 	saver_class->get_file_size = gedit_gio_document_saver_get_file_size;
 	saver_class->get_bytes_written = gedit_gio_document_saver_get_bytes_written;
 
@@ -182,31 +175,6 @@ async_failed (AsyncData *async,
 static void write_file_chunk (AsyncData *async);
 
 static void
-handle_file_info (AsyncData *async,
-		  GFileInfo *info)
-{
-	GeditGioDocumentSaver *saver;
-	GTimeVal mtime;
-
-	saver = async->saver;
-
-	gedit_debug_message (DEBUG_SAVER, "Query info finished");
-
-	if (g_file_info_has_attribute (info,
-				       G_FILE_ATTRIBUTE_TIME_MODIFIED))
-	{
-		g_file_info_get_modification_time (info, &mtime);
-		saver->priv->doc_mtime = mtime.tv_sec;
-	}
-
-	if (g_file_info_has_attribute (info,
-				       G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE))
-	{
-		saver->priv->content_type = g_strdup (g_file_info_get_content_type (info));
-	}
-}
-
-static void
 remote_reget_info_cb (GFile        *source,
 		      GAsyncResult *res,
 		      AsyncData    *async)
@@ -229,8 +197,10 @@ remote_reget_info_cb (GFile        *source,
 
 	if (info != NULL)
 	{
-		handle_file_info (async, info);
-		g_object_unref (info);
+		if (GEDIT_DOCUMENT_SAVER (saver)->info != NULL)
+			g_object_unref (GEDIT_DOCUMENT_SAVER (saver)->info);
+
+		GEDIT_DOCUMENT_SAVER (saver)->info = info;
 	}
 	else
 	{
@@ -343,8 +313,10 @@ remote_get_info_cb (GFileOutputStream *stream,
 	}
 	else
 	{
-		handle_file_info (async, info);
-		g_object_unref (info);
+		if (GEDIT_DOCUMENT_SAVER (saver)->info != NULL)
+			g_object_unref (GEDIT_DOCUMENT_SAVER (saver)->info);
+
+		GEDIT_DOCUMENT_SAVER (saver)->info = info;
 
 		next_callback = (GAsyncReadyCallback) close_async_ready_cb;
 	}
@@ -658,8 +630,8 @@ check_modification_callback (GFile        *source,
 
 		g_file_info_get_modification_time (info, &mtime);
 
-		if (gvsaver->priv->doc_mtime > 0 &&
-		    mtime.tv_sec != gvsaver->priv->doc_mtime &&
+		if (gvsaver->priv->old_mtime > 0 &&
+		    mtime.tv_sec != gvsaver->priv->old_mtime &&
 		    (GEDIT_DOCUMENT_SAVER (gvsaver)->flags & GEDIT_DOCUMENT_SAVE_IGNORE_MTIME) == 0)
 		{
 			gedit_debug_message (DEBUG_SAVER, "File is externally modified");
@@ -720,7 +692,7 @@ gedit_gio_document_saver_save (GeditDocumentSaver *saver,
 {
 	GeditGioDocumentSaver *gvsaver = GEDIT_GIO_DOCUMENT_SAVER (saver);
 
-	gvsaver->priv->doc_mtime = old_mtime;
+	gvsaver->priv->old_mtime = old_mtime;
 	gvsaver->priv->gfile = g_file_new_for_uri (saver->uri);
 
 	/* saving start */
@@ -731,18 +703,6 @@ gedit_gio_document_saver_save (GeditDocumentSaver *saver,
 			    (GSourceFunc) save_remote_file_real,
 			    gvsaver,
 			    NULL);
-}
-
-static const gchar *
-gedit_gio_document_saver_get_content_type (GeditDocumentSaver *saver)
-{
-	return GEDIT_GIO_DOCUMENT_SAVER (saver)->priv->content_type;
-}
-
-static time_t
-gedit_gio_document_saver_get_mtime (GeditDocumentSaver *saver)
-{
-	return GEDIT_GIO_DOCUMENT_SAVER (saver)->priv->doc_mtime;
 }
 
 static goffset

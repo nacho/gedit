@@ -139,12 +139,27 @@ gedit_document_saver_finalize (GObject *object)
 	G_OBJECT_CLASS (gedit_document_saver_parent_class)->finalize (object);
 }
 
+static void
+gedit_document_saver_dispose (GObject *object)
+{
+	GeditDocumentSaver *saver = GEDIT_DOCUMENT_SAVER (object);
+
+	if (saver->info != NULL)
+	{
+		g_object_unref (saver->info);
+		saver->info = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_document_saver_parent_class)->dispose (object);
+}
+
 static void 
 gedit_document_saver_class_init (GeditDocumentSaverClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->finalize = gedit_document_saver_finalize;
+	object_class->dispose = gedit_document_saver_dispose;
 	object_class->set_property = gedit_document_saver_set_property;
 	object_class->get_property = gedit_document_saver_get_property;
 
@@ -487,22 +502,6 @@ gedit_document_saver_get_uri (GeditDocumentSaver *saver)
 	return saver->uri;
 }
 
-const gchar *
-gedit_document_saver_get_content_type (GeditDocumentSaver *saver)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), NULL);
-
-	return GEDIT_DOCUMENT_SAVER_GET_CLASS (saver)->get_content_type (saver);
-}
-
-time_t
-gedit_document_saver_get_mtime (GeditDocumentSaver *saver)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), 0);
-
-	return GEDIT_DOCUMENT_SAVER_GET_CLASS (saver)->get_mtime (saver);
-}
-
 /* Returns 0 if file size is unknown */
 goffset
 gedit_document_saver_get_file_size (GeditDocumentSaver *saver)
@@ -518,4 +517,12 @@ gedit_document_saver_get_bytes_written (GeditDocumentSaver *saver)
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), 0);
 
 	return GEDIT_DOCUMENT_SAVER_GET_CLASS (saver)->get_bytes_written (saver);
+}
+
+GFileInfo *
+gedit_document_saver_get_info (GeditDocumentSaver *saver)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), NULL);
+
+	return saver->info;
 }

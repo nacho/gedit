@@ -1252,15 +1252,28 @@ document_saver_saving (GeditDocumentSaver *saver,
 		if (error == NULL)
 		{
 			const gchar *uri;
-			const gchar *content_type;
+			const gchar *content_type = NULL;
+			goffset mtime = 0;
+			GFileInfo *info;
 
 			uri = gedit_document_saver_get_uri (saver);
 			set_uri (doc, uri);
 
-			content_type = gedit_document_saver_get_content_type (saver);
-			set_content_type (doc, content_type);
+			info = gedit_document_saver_get_info (saver);
 
-			doc->priv->mtime = gedit_document_saver_get_mtime (saver);
+			if (info != NULL)
+			{
+				if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE))
+					content_type = g_file_info_get_attribute_string (info,
+											 G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE);
+
+				if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_TIME_MODIFIED))
+					mtime = g_file_info_get_attribute_uint64 (info,
+										  G_FILE_ATTRIBUTE_TIME_MODIFIED);
+			}
+
+			set_content_type (doc, content_type);
+			doc->priv->mtime = mtime;
 
 			g_get_current_time (&doc->priv->time_of_last_save_or_load);
 

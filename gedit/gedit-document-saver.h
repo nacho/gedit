@@ -56,6 +56,7 @@ struct _GeditDocumentSaver
 	GObject object;
 
 	/*< private >*/
+	GFileInfo		 *info;
 	GeditDocument		 *document;
 	gboolean		  used;
 
@@ -86,8 +87,6 @@ struct _GeditDocumentSaverClass
 	/* VTable */
 	void			(* save)		(GeditDocumentSaver *saver,
 							 time_t              old_mtime);
-	const gchar *		(* get_content_type)	(GeditDocumentSaver *saver);
-	time_t			(* get_mtime)		(GeditDocumentSaver *saver);
 	goffset			(* get_file_size)	(GeditDocumentSaver *saver);
 	goffset			(* get_bytes_written)	(GeditDocumentSaver *saver);
 };
@@ -135,14 +134,12 @@ const gchar		*gedit_document_saver_get_backup_uri	(GeditDocumentSaver  *saver);
 void			*gedit_document_saver_set_backup_uri	(GeditDocumentSaver  *saver,
 							 	 const gchar         *backup_uri);
 
-const gchar		*gedit_document_saver_get_content_type	(GeditDocumentSaver  *saver);
-
-time_t			 gedit_document_saver_get_mtime		(GeditDocumentSaver  *saver);
-
 /* Returns 0 if file size is unknown */
 goffset			 gedit_document_saver_get_file_size	(GeditDocumentSaver  *saver);
 
 goffset			 gedit_document_saver_get_bytes_written	(GeditDocumentSaver  *saver);
+
+GFileInfo		*gedit_document_saver_get_info		(GeditDocumentSaver  *saver);
 
 G_END_DECLS
 
