@@ -456,7 +456,7 @@ gedit_document_saver_saving (GeditDocumentSaver *saver,
 
 void
 gedit_document_saver_save (GeditDocumentSaver     *saver,
-			   time_t                  old_mtime)
+			   GTimeVal               *old_mtime)
 {
 	gedit_debug (DEBUG_SAVER);
 

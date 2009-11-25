@@ -86,7 +86,7 @@ struct _GeditDocumentSaverClass
 
 	/* VTable */
 	void			(* save)		(GeditDocumentSaver *saver,
-							 time_t              old_mtime);
+							 GTimeVal           *old_mtime);
 	goffset			(* get_file_size)	(GeditDocumentSaver *saver);
 	goffset			(* get_bytes_written)	(GeditDocumentSaver *saver);
 };
@@ -119,7 +119,7 @@ void			 gedit_document_saver_saving		(GeditDocumentSaver *saver,
 								 gboolean            completed,
 								 GError             *error);
 void			 gedit_document_saver_save		(GeditDocumentSaver  *saver,
-								 time_t               old_mtime);
+								 GTimeVal            *old_mtime);
 
 #if 0
 void			 gedit_document_saver_cancel		(GeditDocumentSaver  *saver);

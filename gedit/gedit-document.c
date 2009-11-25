@@ -111,7 +111,7 @@ struct _GeditDocumentPrivate
 
 	gchar	    *content_type;
 
-	time_t       mtime;
+	GTimeVal     mtime;
 
 	GTimeVal     time_of_last_save_or_load;
 
@@ -775,7 +775,8 @@ gedit_document_init (GeditDocument *doc)
 
 	doc->priv->dispose_has_run = FALSE;
 
-	doc->priv->mtime = 0;
+	doc->priv->mtime.tv_sec = 0;
+	doc->priv->mtime.tv_usec = 0;
 
 	g_get_current_time (&doc->priv->time_of_last_save_or_load);
 
@@ -1016,7 +1017,9 @@ _gedit_document_check_externally_modified (GeditDocument *doc)
 	g_file_info_get_modification_time (info, &timeval);
 	g_object_unref (info);
 	
-	return timeval.tv_sec > doc->priv->mtime;
+	return (timeval.tv_sec > doc->priv->mtime.tv_sec) ||
+	       (timeval.tv_sec == doc->priv->mtime.tv_sec && 
+	       timeval.tv_usec > doc->priv->mtime.tv_usec);
 }
 
 static void
@@ -1042,6 +1045,7 @@ document_loader_loaded (GeditDocumentLoader *loader,
 		GFileInfo *info;
 		const gchar *content_type = NULL;
 		gboolean read_only = FALSE;
+		GTimeVal mtime = {0, 0};
 
 		info = gedit_document_loader_get_info (loader);
 
@@ -1052,13 +1056,14 @@ document_loader_loaded (GeditDocumentLoader *loader,
 										 G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE);
 
 			if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_TIME_MODIFIED))
-				doc->priv->mtime = g_file_info_get_attribute_uint64 (info,
-										     G_FILE_ATTRIBUTE_TIME_MODIFIED);
+				g_file_info_get_modification_time (info, &mtime);
 
 			if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE))
 				read_only = !g_file_info_get_attribute_boolean (info,
 										G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
 		}
+
+		doc->priv->mtime = mtime;
 
 		set_readonly (doc, read_only);
 
@@ -1253,7 +1258,7 @@ document_saver_saving (GeditDocumentSaver *saver,
 		{
 			const gchar *uri;
 			const gchar *content_type = NULL;
-			goffset mtime = 0;
+			GTimeVal mtime = {0, 0};
 			GFileInfo *info;
 
 			uri = gedit_document_saver_get_uri (saver);
@@ -1268,8 +1273,7 @@ document_saver_saving (GeditDocumentSaver *saver,
 											 G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE);
 
 				if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_TIME_MODIFIED))
-					mtime = g_file_info_get_attribute_uint64 (info,
-										  G_FILE_ATTRIBUTE_TIME_MODIFIED);
+					g_file_info_get_modification_time (info, &mtime);
 			}
 
 			set_content_type (doc, content_type);
@@ -1333,7 +1337,7 @@ gedit_document_save_real (GeditDocument          *doc,
 	doc->priv->requested_encoding = encoding;
 
 	gedit_document_saver_save (doc->priv->saver,
-				   doc->priv->mtime);
+				   &doc->priv->mtime);
 }
 
 /**

@@ -58,7 +58,7 @@ typedef struct
 							  GeditGioDocumentSaverPrivate))
 
 static void	     gedit_gio_document_saver_save		    (GeditDocumentSaver *saver,
-								     time_t              old_mtime);
+								     GTimeVal           *old_mtime);
 static goffset	     gedit_gio_document_saver_get_file_size	    (GeditDocumentSaver *saver);
 static goffset	     gedit_gio_document_saver_get_bytes_written	    (GeditDocumentSaver *saver);
 
@@ -67,7 +67,7 @@ static void 	    check_modified_async 			    (AsyncData          *async);
 
 struct _GeditGioDocumentSaverPrivate
 {
-	time_t			  old_mtime;
+	GTimeVal		  old_mtime;
 
 	goffset			  size;
 	goffset			  bytes_written;
@@ -627,11 +627,13 @@ check_modification_callback (GFile        *source,
 				       G_FILE_ATTRIBUTE_TIME_MODIFIED))
 	{
 		GTimeVal mtime;
+		GTimeVal old_mtime;
 
 		g_file_info_get_modification_time (info, &mtime);
+		old_mtime = gvsaver->priv->old_mtime;
 
-		if (gvsaver->priv->old_mtime > 0 &&
-		    mtime.tv_sec != gvsaver->priv->old_mtime &&
+		if ((old_mtime.tv_sec > 0 || old_mtime.tv_usec > 0) &&
+		    (mtime.tv_sec != old_mtime.tv_sec || mtime.tv_usec != old_mtime.tv_usec) &&
 		    (GEDIT_DOCUMENT_SAVER (gvsaver)->flags & GEDIT_DOCUMENT_SAVE_IGNORE_MTIME) == 0)
 		{
 			gedit_debug_message (DEBUG_SAVER, "File is externally modified");
@@ -688,11 +690,11 @@ save_remote_file_real (GeditGioDocumentSaver *gvsaver)
 
 static void
 gedit_gio_document_saver_save (GeditDocumentSaver *saver,
-			       time_t              old_mtime)
+			       GTimeVal           *old_mtime)
 {
 	GeditGioDocumentSaver *gvsaver = GEDIT_GIO_DOCUMENT_SAVER (saver);
 
-	gvsaver->priv->old_mtime = old_mtime;
+	gvsaver->priv->old_mtime = *old_mtime;
 	gvsaver->priv->gfile = g_file_new_for_uri (saver->uri);
 
 	/* saving start */
