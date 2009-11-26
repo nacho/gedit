@@ -65,7 +65,6 @@ struct _GeditDocumentLoader
 	GFileInfo		 *info;
 	gchar			 *uri;
 	const GeditEncoding	 *encoding;
-	const GeditEncoding	 *metadata_encoding;
 	const GeditEncoding	 *auto_detected_encoding;
 };
 

@@ -228,6 +228,23 @@ insert_text_in_document (GeditDocumentLoader *loader,
 	gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (doc));
 }
 
+static const GeditEncoding *
+get_metadata_encoding (const gchar *uri)
+{
+	gchar *charset;
+
+	charset = gedit_metadata_manager_get (uri, "encoding");
+
+	if (charset == NULL)
+		return NULL;
+
+	enc = gedit_encoding_get_from_charset (charset);
+
+	g_free (charset);
+
+	return enc;
+}
+
 /* This function is only meant to be called by child classes */
 gboolean
 gedit_document_loader_update_document_contents (GeditDocumentLoader  *loader,
@@ -273,22 +290,27 @@ gedit_document_loader_update_document_contents (GeditDocumentLoader  *loader,
 		gchar *converted_text = NULL;
 		gsize new_len = file_size;
 
+		/* Autodetecting the encoding */
 		if (loader->encoding == NULL)
 		{
-			/* Autodetecting the encoding: first try with the encoding
-			stored in the metadata, if any */
+			const gchar *uri;
+			const GeditEncoding *metadata_encoding;
 
-			if (loader->metadata_encoding != NULL)
+			/* first try with the encoding stored in the metadata, if any */
+			uri = gedit_document_loader_get_uri (loader);
+			metadata_encoding = get_metadata_encoding (uri);
+
+			if (metadata_encoding != NULL)
 			{
 				converted_text = gedit_convert_to_utf8 (
 								file_contents,
 								file_size,
-								&loader->metadata_encoding,
+								&metadata_encoding,
 								&new_len,
 								NULL);
 
 				if (converted_text != NULL)
-					loader->auto_detected_encoding = loader->metadata_encoding;
+					loader->auto_detected_encoding = metadata_encoding;
 			}
 		}
 
@@ -353,24 +375,6 @@ gedit_document_loader_loading (GeditDocumentLoader *loader,
 	}
 }
 
-static const GeditEncoding *
-get_metadata_encoding (const gchar *uri)
-{
-	const GeditEncoding *enc;
-	gchar *charset;
-
-	charset = gedit_metadata_manager_get (uri, "encoding");
-
-	if (charset == NULL)
-		return NULL;
-
-	enc = gedit_encoding_get_from_charset (charset);
-
-	g_free (charset);
-
-	return enc;
-}
-
 /* This is a factory method that returns an appopriate loader
  * for the given uri.
  */
@@ -409,9 +413,6 @@ gedit_document_loader_load (GeditDocumentLoader *loader)
 	/* the loader can be used just once, then it must be thrown away */
 	g_return_if_fail (loader->used == FALSE);
 	loader->used = TRUE;
-
-	if (loader->encoding == NULL)
-		loader->metadata_encoding = get_metadata_encoding (loader->uri);
 
 	GEDIT_DOCUMENT_LOADER_GET_CLASS (loader)->load (loader);
 }
