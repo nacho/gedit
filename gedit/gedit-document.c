@@ -690,14 +690,15 @@ get_default_style_scheme (void)
 }
 
 static GtkSourceLanguage *
-guess_language (const gchar *uri,
+guess_language (GeditDocument *doc,
 		const gchar *content_type)
 
 {
-	gchar *data;
+	gchar *data = NULL;
 	GtkSourceLanguage *language = NULL;
 
-	data = gedit_metadata_manager_get (uri, "language");
+	if (doc->priv->uri != NULL)
+		data = gedit_metadata_manager_get (doc->priv->uri, "language");
 
 	if (data != NULL)
 	{
@@ -717,18 +718,22 @@ guess_language (const gchar *uri,
 		GFile *file;
 		gchar *basename;
 
-		gedit_debug_message (DEBUG_DOCUMENT, "Sniffing Language");
+		file = gedit_document_get_location (doc);
 
-		file = g_file_new_for_uri (uri);
-		basename = g_file_get_basename (file);
+		if (file)
+		{
+			gedit_debug_message (DEBUG_DOCUMENT, "Sniffing Language");
 
-		language = gtk_source_language_manager_guess_language (
-					gedit_get_language_manager (),
-					basename,
-					content_type);
+			basename = g_file_get_basename (file);
 
-		g_free (basename);
-		g_object_unref (file);
+			language = gtk_source_language_manager_guess_language (
+						gedit_get_language_manager (),
+						basename,
+						content_type);
+
+			g_free (basename);
+			g_object_unref (file);
+		}
 	}
 
 	return language;
@@ -743,7 +748,7 @@ on_content_type_changed (GeditDocument *doc,
 	{
 		GtkSourceLanguage *language;
 
-		language = guess_language (doc->priv->uri, doc->priv->content_type);
+		language = guess_language (doc, doc->priv->content_type);
 
 		gedit_debug_message (DEBUG_DOCUMENT, "Language: %s",
 				     language != NULL ? gtk_source_language_get_name (language) : "None");

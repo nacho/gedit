@@ -231,8 +231,8 @@ insert_text_in_document (GeditDocumentLoader *loader,
 static const GeditEncoding *
 get_metadata_encoding (const gchar *uri)
 {
-	const GeditEncoding *enc;
 	gchar *charset;
+	const GeditEncoding *enc;
 
 	charset = gedit_metadata_manager_get (uri, "encoding");
 
