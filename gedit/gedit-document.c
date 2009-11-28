@@ -98,12 +98,6 @@ static void	delete_range_cb 		(GeditDocument *doc,
 			     
 struct _GeditDocumentPrivate
 {
-	gint	     readonly : 1;
-	gint	     last_save_was_manually : 1; 	
-	gint	     language_set_by_user : 1;
-	gint         stop_cursor_moved_emission : 1;
-	gint         dispose_has_run : 1;
-
 	gchar	    *uri;
 	gint 	     untitled_number;
 
@@ -112,7 +106,6 @@ struct _GeditDocumentPrivate
 	gchar	    *content_type;
 
 	GTimeVal     mtime;
-
 	GTimeVal     time_of_last_save_or_load;
 
 	guint        search_flags;
@@ -129,13 +122,19 @@ struct _GeditDocumentPrivate
 	/* Saving stuff */
 	GeditDocumentSaver *saver;
 
-	/* Search highlighting support variables */	
+	/* Search highlighting support variables */
 	GeditTextRegion *to_search_region;
 	GtkTextTag      *found_tag;
-	
+
 	/* Mount operation factory */
 	GeditMountOperationFactory  mount_operation_factory;
 	gpointer		    mount_operation_userdata;
+
+	gint readonly : 1;
+	gint last_save_was_manually : 1; 
+	gint language_set_by_user : 1;
+	gint stop_cursor_moved_emission : 1;
+	gint dispose_has_run : 1;
 };
 
 enum {
