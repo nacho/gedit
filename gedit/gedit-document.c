@@ -824,8 +824,6 @@ gedit_document_new (void)
 	return GEDIT_DOCUMENT (g_object_new (GEDIT_TYPE_DOCUMENT, NULL));
 }
 
-/* If content type is null, we guess from the filename */
-/* If uri is null, we only set the content-type */
 static void
 set_content_type (GeditDocument *doc,
 		  const gchar   *content_type)
@@ -840,14 +838,29 @@ set_content_type (GeditDocument *doc,
 	}
 	else
 	{
-		if (doc->priv->uri != NULL)
+		GFile *file;
+		gchar *guessed_type = NULL;
+
+		/* If content type is null, we guess from the filename */
+		file = gedit_document_get_location (doc);
+		if (file != NULL)
 		{
-			doc->priv->content_type = g_content_type_guess (doc->priv->uri, NULL, 0, NULL);
+			gchar *basename;
+
+			basename = g_file_get_basename (file);
+			guessed_type = g_content_type_guess (basename, NULL, 0, NULL);
+
+			g_free (basename);
+			g_object_unref (file);
 		}
-		else
+
+		if (guessed_type == NULL || g_content_type_is_unknown (guessed_type))
 		{
-			doc->priv->content_type = g_content_type_from_mime_type ("text/plain");
+			g_free (guessed_type);
+			guessed_type = g_content_type_from_mime_type ("text/plain");
 		}
+
+		doc->priv->content_type = guessed_type;
 	}
 
 	g_object_notify (G_OBJECT (doc), "content-type");
