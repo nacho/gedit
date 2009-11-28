@@ -51,6 +51,16 @@ G_BEGIN_DECLS
 #define GEDIT_IS_DOCUMENT_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_DOCUMENT))
 #define GEDIT_DOCUMENT_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GEDIT_TYPE_DOCUMENT, GeditDocumentClass))
 
+#ifdef G_OS_WIN32
+#define GEDIT_METADATA_ATTRIBUTE_POSITION "position"
+#define GEDIT_METADATA_ATTRIBUTE_ENCODING "encoding"
+#define GEDIT_METADATA_ATTRIBUTE_LANGUAGE "language"
+#else
+#define GEDIT_METADATA_ATTRIBUTE_POSITION "metadata::gedit-position"
+#define GEDIT_METADATA_ATTRIBUTE_ENCODING "metadata::gedit-encoding"
+#define GEDIT_METADATA_ATTRIBUTE_LANGUAGE "metadata::gedit-language"
+#endif
+
 typedef enum
 {
 	GEDIT_SEARCH_DONT_SET_FLAGS	= 1 << 0, 

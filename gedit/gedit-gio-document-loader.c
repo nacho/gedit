@@ -40,7 +40,6 @@
 
 #include "gedit-gio-document-loader.h"
 #include "gedit-debug.h"
-#include "gedit-metadata-manager.h"
 #include "gedit-utils.h"
 
 typedef struct
@@ -55,7 +54,8 @@ typedef struct
 				G_FILE_ATTRIBUTE_STANDARD_TYPE "," \
 				G_FILE_ATTRIBUTE_TIME_MODIFIED "," \
 				G_FILE_ATTRIBUTE_STANDARD_SIZE "," \
-				G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE
+				G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE "," \
+				GEDIT_METADATA_ATTRIBUTE_ENCODING
 
 #define GEDIT_GIO_DOCUMENT_LOADER_GET_PRIVATE(object) \
 				(G_TYPE_INSTANCE_GET_PRIVATE ((object), \

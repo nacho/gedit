@@ -50,7 +50,6 @@
 #include "gedit-debug.h"
 #include "gedit-dirs.h"
 #include "gedit-encodings.h"
-#include "gedit-metadata-manager.h"
 #include "gedit-plugins-engine.h"
 #include "gedit-prefs-manager-app.h"
 #include "gedit-session.h"
@@ -67,6 +66,7 @@
 #include <conio.h>
 #define _WIN32_WINNT 0x0500
 #include <windows.h>
+#include "gedit-metadata-manager.h"
 #define DATADIR SAVE_DATADIR
 #undef SAVE_DATADIR
 #endif
@@ -749,7 +749,10 @@ main (int argc, char *argv[])
 	 */
 	g_object_unref (engine);
 	gedit_prefs_manager_app_shutdown ();
+
+#ifdef G_OS_WIN32
 	gedit_metadata_manager_shutdown ();
+#endif
 
 	return 0;
 }

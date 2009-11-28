@@ -229,10 +229,15 @@ insert_text_in_document (GeditDocumentLoader *loader,
 }
 
 static const GeditEncoding *
-get_metadata_encoding (const gchar *uri)
+get_metadata_encoding (GeditDocumentLoader *loader)
 {
+	const GeditEncoding *enc = NULL;
+
+#ifdef G_OS_WIN32
 	gchar *charset;
-	const GeditEncoding *enc;
+	const gchar *uri;
+
+	uri = gedit_document_loader_get_uri (loader);
 
 	charset = gedit_metadata_manager_get (uri, "encoding");
 
@@ -242,6 +247,25 @@ get_metadata_encoding (const gchar *uri)
 	enc = gedit_encoding_get_from_charset (charset);
 
 	g_free (charset);
+#else
+	GFileInfo *info;
+
+	info = gedit_document_loader_get_info (loader);
+
+	/* check if the encoding was set in the metadata */
+	if (g_file_info_has_attribute (info, GEDIT_METADATA_ATTRIBUTE_ENCODING))
+	{
+		const gchar *charset;
+
+		charset = g_file_info_get_attribute_string (info,
+							    GEDIT_METADATA_ATTRIBUTE_ENCODING);
+
+		if (charset == NULL)
+			return NULL;
+		
+		enc = gedit_encoding_get_from_charset (charset);
+	}
+#endif
 
 	return enc;
 }
@@ -294,12 +318,10 @@ gedit_document_loader_update_document_contents (GeditDocumentLoader  *loader,
 		/* Autodetecting the encoding */
 		if (loader->encoding == NULL)
 		{
-			const gchar *uri;
 			const GeditEncoding *metadata_encoding;
 
 			/* first try with the encoding stored in the metadata, if any */
-			uri = gedit_document_loader_get_uri (loader);
-			metadata_encoding = get_metadata_encoding (uri);
+			metadata_encoding = get_metadata_encoding (loader);
 
 			if (metadata_encoding != NULL)
 			{
