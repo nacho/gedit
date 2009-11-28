@@ -11,7 +11,9 @@ else
 fi
 
 name=$(basename "$0")
-bundle=$(cd $(dirname "$0")/../../ && pwd)
+dirn=$(dirname "$0")
+
+bundle=$(cd "$dirn/../../" && pwd)
 bundle_contents="$bundle"/Contents
 bundle_res="$bundle_contents"/Resources
 bundle_lib="$bundle_res"/lib
@@ -51,6 +53,6 @@ if [ x`echo "x$1" | sed -e "s/^x-psn_.*//"` == x ]; then
 fi
 
 # Start gconf first
-$bundle_res/libexec/gconfd-2 &
+"$bundle_res/libexec/gconfd-2" &
 
 $EXEC "$bundle_contents/MacOS/$name-bin" $* $EXTRA_ARGS
