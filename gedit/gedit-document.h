@@ -256,7 +256,11 @@ void		 gedit_document_set_enable_search_highlighting
 gboolean	 gedit_document_get_enable_search_highlighting
 						(GeditDocument       *doc);
 
-		
+GFileInfo	*gedit_document_get_metadata	(GeditDocument *doc);
+
+void		 gedit_document_set_metadata	(GeditDocument *doc,
+						 GFileInfo     *info);
+
 /* 
  * Non exported functions
  */

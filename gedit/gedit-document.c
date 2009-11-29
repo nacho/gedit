@@ -55,9 +55,7 @@
 #ifdef G_OS_WIN32
 #include "gedit-metadata-manager.h"
 #else
-#define METADATA_QUERY GEDIT_METADATA_ATTRIBUTE_POSITION "," \
-		       GEDIT_METADATA_ATTRIBUTE_ENCODING "," \
-		       GEDIT_METADATA_ATTRIBUTE_LANGUAGE
+#define METADATA_QUERY "metadata::*"
 #endif
 
 #undef ENABLE_PROFILE 
@@ -296,10 +294,9 @@ set_metadata (GeditDocument *doc,
 	const gchar *key;
 	const gchar *value;
 	va_list var_args;
-	GFile *location;
+	GFileInfo *info;
 
-	if (doc->priv->metadata_info == NULL)
-		return;
+	info = g_file_info_new ();
 
 	va_start (var_args, first_key);
 
@@ -309,13 +306,13 @@ set_metadata (GeditDocument *doc,
 		
 		if (value != NULL)
 		{
-			g_file_info_set_attribute_string (doc->priv->metadata_info,
+			g_file_info_set_attribute_string (info,
 							  key, value);
 		}
 		else
 		{
 			/* Unset the key */
-			g_file_info_set_attribute (doc->priv->metadata_info, key,
+			g_file_info_set_attribute (info, key,
 						   G_FILE_ATTRIBUTE_TYPE_INVALID,
 						   NULL);
 		}
@@ -323,17 +320,9 @@ set_metadata (GeditDocument *doc,
 
 	va_end (var_args);
 
-	location = gedit_document_get_location (doc);
-
-	g_file_set_attributes_async (location,
-				     doc->priv->metadata_info,
-				     G_FILE_QUERY_INFO_NONE,
-				     G_PRIORITY_DEFAULT,
-				     NULL,
-				     set_attributes_cb,
-				     NULL);
-
-	g_object_unref (location);
+	gedit_document_set_metadata (doc, info);
+	
+	g_object_unref (info);
 }
 #endif
 
@@ -2537,4 +2526,95 @@ _gedit_document_create_mount_operation (GeditDocument *doc)
 	else
 		return doc->priv->mount_operation_factory (doc, 
 						           doc->priv->mount_operation_userdata);
+}
+
+/**
+ * gedit_document_get_metadata:
+ * @doc: a #GeditDocument
+ *
+ * Returns a #GFileInfo with all the metadata attributes stored in @doc.
+ *
+ * Returns: a #GFileInfo
+ */
+GFileInfo *
+gedit_document_get_metadata (GeditDocument *doc)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+
+	return g_file_info_dup (doc->priv->metadata_info);
+}
+
+static GFileInfo *
+filter_metadata_attributes (GeditDocument *doc,
+			    GFileInfo *info)
+{
+	GFileInfo *metadata_info;
+	gchar **attributes, **ptr;
+
+	if (g_file_info_has_namespace (info, "metadata"))
+		attributes = g_file_info_list_attributes (info, "metadata");
+	else
+		return NULL;
+	
+	if (attributes == NULL)
+		return NULL;
+
+	metadata_info = g_file_info_new ();
+
+	for (ptr = attributes; *ptr != NULL; ptr++)
+	{
+		gpointer value;
+		GFileAttributeType type;
+
+		g_file_info_get_attribute_data (info, *ptr,
+						&type, &value, NULL);
+
+		g_file_info_set_attribute (metadata_info, *ptr,
+					   type, value);
+
+		/* Update the internal metadata info */
+		g_file_info_set_attribute (doc->priv->metadata_info, *ptr,
+					   type, value);
+	}
+
+	return metadata_info;
+}
+
+/**
+ * gedit_document_set_metadata:
+ * @doc: a #GeditDocument
+ * @info: a #GFileInfo
+ *
+ * Stores metadata in @doc. Usually you should create a new #GFileInfo with
+ * g_file_info_new() and store only the metadata you are interested in,
+ * to avoid overwriting other metadata. For naming attributes we are using
+ * metadata::gedit-XXX where XXX is the name of the attribute.
+ */
+void
+gedit_document_set_metadata (GeditDocument *doc,
+			     GFileInfo     *info)
+{
+	GFile *location;
+	GFileInfo *metadata_info;
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (info != NULL);
+
+	metadata_info = filter_metadata_attributes (doc, info);
+
+	if (metadata_info == NULL)
+		return;
+
+	location = gedit_document_get_location (doc);
+
+	g_file_set_attributes_async (location,
+				     metadata_info,
+				     G_FILE_QUERY_INFO_NONE,
+				     G_PRIORITY_DEFAULT,
+				     NULL,
+				     set_attributes_cb,
+				     NULL);
+
+	g_object_unref (location);
+	g_object_unref (metadata_info);
 }
