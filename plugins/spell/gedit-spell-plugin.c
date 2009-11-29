@@ -32,7 +32,6 @@
 #include <gmodule.h>
 
 #include <gedit/gedit-debug.h>
-#include <gedit/gedit-metadata-manager.h>
 #include <gedit/gedit-prefs-manager.h>
 #include <gedit/gedit-statusbar.h>
 
@@ -40,6 +39,12 @@
 #include "gedit-spell-checker-dialog.h"
 #include "gedit-spell-language-dialog.h"
 #include "gedit-automatic-spell-checker.h"
+
+#ifdef G_OS_WIN32
+#include <gedit/gedit-metadata-manager.h>
+#else
+#define GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE "metadata::gedit-spell-language"
+#endif
 
 #define WINDOW_DATA_KEY "GeditSpellPluginWindowData"
 #define MENU_PATH "/MenuBar/ToolsMenu/ToolsOps_1"
@@ -134,10 +139,11 @@ set_spell_language_cb (GeditSpellChecker   *spell,
 		       const GeditSpellCheckerLanguage *lang,
 		       GeditDocument 	   *doc)
 {
-	gchar *uri;
-
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 	g_return_if_fail (lang != NULL);
+
+#ifdef G_OS_WIN32
+	gchar *uri;
 
 	uri = gedit_document_get_uri (doc);
 
@@ -154,6 +160,21 @@ set_spell_language_cb (GeditSpellChecker   *spell,
 
 		g_free (uri);
 	}
+#else
+	GFileInfo *info;
+	const gchar *key;
+
+	key = gedit_spell_checker_language_to_key (lang);
+	g_return_if_fail (key != NULL);
+
+	info = g_file_info_new ();
+
+	g_file_info_set_attribute_string (info, GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE,
+					  key);
+
+	gedit_document_set_metadata (doc, info);
+	g_object_unref (info);
+#endif
 }
 
 static GeditSpellChecker *
@@ -170,9 +191,10 @@ get_spell_checker_from_document (GeditDocument *doc)
 
 	if (data == NULL)
 	{
-		gchar *uri;
-
 		spell = gedit_spell_checker_new ();
+
+#ifdef G_OS_WIN32
+		gchar *uri;
 
 		uri = gedit_document_get_uri (doc);
 
@@ -194,8 +216,33 @@ get_spell_checker_from_document (GeditDocument *doc)
 				gedit_spell_checker_set_language (spell,
 								  lang);
 
-			g_free (uri);	
+			g_free (uri);
 		}
+#else
+		GFileInfo *info;
+
+		info = gedit_document_get_metadata (doc);
+
+		if (info != NULL)
+		{
+			const GeditSpellCheckerLanguage *lang = NULL;
+			const gchar *value = NULL;
+
+			if (g_file_info_has_attribute (info,
+						       GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE))
+			{
+				value = g_file_info_get_attribute_string (info,
+									  GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE);
+
+				lang = gedit_spell_checker_language_from_key (value);
+			}
+
+			if (lang != NULL)
+			{
+				gedit_spell_checker_set_language (spell, lang);
+			}
+		}
+#endif
 
 		g_object_set_qdata_full (G_OBJECT (doc), 
 					 spell_checker_id, 
