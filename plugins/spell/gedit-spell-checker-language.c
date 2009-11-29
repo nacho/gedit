@@ -429,7 +429,7 @@ gedit_spell_checker_language_from_key (const gchar *key)
 	{
 		const GeditSpellCheckerLanguage *l = (const GeditSpellCheckerLanguage *)langs->data;
 
-		if (g_ascii_strncasecmp (key, l->abrev, strlen (l->abrev)) == 0)
+		if (g_ascii_strcasecmp (key, l->abrev) == 0)
 			return l;
 
 		langs = g_slist_next (langs);
