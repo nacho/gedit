@@ -2541,7 +2541,10 @@ gedit_document_get_metadata (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 
-	return g_file_info_dup (doc->priv->metadata_info);
+	if (doc->priv->metadata_info)
+		return g_file_info_dup (doc->priv->metadata_info);
+	else
+		return NULL;
 }
 
 static GFileInfo *
