@@ -161,19 +161,13 @@ set_spell_language_cb (GeditSpellChecker   *spell,
 		g_free (uri);
 	}
 #else
-	GFileInfo *info;
 	const gchar *key;
 
 	key = gedit_spell_checker_language_to_key (lang);
 	g_return_if_fail (key != NULL);
 
-	info = g_file_info_new ();
-
-	g_file_info_set_attribute_string (info, GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE,
-					  key);
-
-	gedit_document_set_metadata (doc, info);
-	g_object_unref (info);
+	gedit_document_set_metadata (doc, GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE,
+				     key, NULL);
 #endif
 }
 
@@ -219,28 +213,20 @@ get_spell_checker_from_document (GeditDocument *doc)
 			g_free (uri);
 		}
 #else
-		GFileInfo *info;
+		const GeditSpellCheckerLanguage *lang = NULL;
+		gchar *value = NULL;
 
-		info = gedit_document_get_metadata (doc);
+		value = gedit_document_get_metadata (doc, GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE);
 
-		if (info != NULL)
+		if (value != NULL)
 		{
-			const GeditSpellCheckerLanguage *lang = NULL;
-			const gchar *value = NULL;
+			lang = gedit_spell_checker_language_from_key (value);
+			g_free (value);
+		}
 
-			if (g_file_info_has_attribute (info,
-						       GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE))
-			{
-				value = g_file_info_get_attribute_string (info,
-									  GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE);
-
-				lang = gedit_spell_checker_language_from_key (value);
-			}
-
-			if (lang != NULL)
-			{
-				gedit_spell_checker_set_language (spell, lang);
-			}
+		if (lang != NULL)
+		{
+			gedit_spell_checker_set_language (spell, lang);
 		}
 #endif
 

@@ -219,113 +219,6 @@ release_untitled_number (gint n)
 	g_hash_table_remove (allocated_untitled_numbers, GINT_TO_POINTER (n));
 }
 
-#ifdef G_OS_WIN32
-static gchar *
-get_metadata (GeditDocument *doc,
-	      const gchar   *key)
-{
-	gchar *value = NULL;
-
-	if (doc->priv->uri != NULL)
-		value = gedit_metadata_manager_get (doc->priv->uri, key);
-
-	return value;
-}
-
-static void
-set_metadata (GeditDocument *doc,
-	      const gchar   *first_key,
-	      ...)
-{
-	const gchar *key;
-	const gchar *value;
-	va_list var_args;
-
-	va_start (var_args, first_key);
-
-	for (key = first_key; key; key = va_arg (var_args, const gchar *))
-	{
-		value = va_arg (var_args, const gchar *);
-		
-		gedit_metadata_manager_set (doc->priv->uri,
-					    key,
-					    value);
-	}
-
-	va_end (var_args);
-}
-
-#else
-
-static gchar *
-get_metadata (GeditDocument *doc,
-	      const gchar   *key)
-{
-	gchar *value = NULL;
-
-	if (doc->priv->metadata_info && g_file_info_has_attribute (doc->priv->metadata_info,
-								   key))
-	{
-		/* FIXME: Remove g_strdup when supported on win32 */
-		value = g_strdup (g_file_info_get_attribute_string (doc->priv->metadata_info,
-								    key));
-	}
-
-	return value;
-}
-
-static void
-set_attributes_cb (GObject      *source,
-		   GAsyncResult *res,
-		   gpointer      useless)
-{
-	g_file_set_attributes_finish (G_FILE (source),
-				      res,
-				      NULL,
-				      NULL);
-}
-
-/* pairs of key/value */
-static void
-set_metadata (GeditDocument *doc,
-	      const gchar   *first_key,
-	      ...)
-{
-	const gchar *key;
-	const gchar *value;
-	va_list var_args;
-	GFileInfo *info;
-
-	info = g_file_info_new ();
-
-	va_start (var_args, first_key);
-
-	for (key = first_key; key; key = va_arg (var_args, const gchar *))
-	{
-		value = va_arg (var_args, const gchar *);
-		
-		if (value != NULL)
-		{
-			g_file_info_set_attribute_string (info,
-							  key, value);
-		}
-		else
-		{
-			/* Unset the key */
-			g_file_info_set_attribute (info, key,
-						   G_FILE_ATTRIBUTE_TYPE_INVALID,
-						   NULL);
-		}
-	}
-
-	va_end (var_args);
-
-	gedit_document_set_metadata (doc, info);
-	
-	g_object_unref (info);
-}
-#endif
-
 static void
 gedit_document_dispose (GObject *object)
 {
@@ -364,12 +257,12 @@ gedit_document_dispose (GObject *object)
 					    gtk_text_iter_get_offset (&iter));
 
 		if (language == NULL)
-			set_metadata (doc, GEDIT_METADATA_ATTRIBUTE_POSITION,
-				      position, NULL);
+			gedit_document_set_metadata (doc, GEDIT_METADATA_ATTRIBUTE_POSITION,
+						     position, NULL);
 		else
-			set_metadata (doc, GEDIT_METADATA_ATTRIBUTE_POSITION,
-				      position, GEDIT_METADATA_ATTRIBUTE_LANGUAGE,
-				      language, NULL);
+			gedit_document_set_metadata (doc, GEDIT_METADATA_ATTRIBUTE_POSITION,
+						     position, GEDIT_METADATA_ATTRIBUTE_LANGUAGE,
+						     language, NULL);
 		g_free (position);
 	}
 
@@ -750,9 +643,9 @@ set_language (GeditDocument     *doc,
 
 	if (set_by_user && (doc->priv->uri != NULL))
 	{
-		set_metadata (doc, GEDIT_METADATA_ATTRIBUTE_LANGUAGE,
-			      (lang == NULL) ? "_NORMAL_" : gtk_source_language_get_id (lang),
-			      NULL);
+		gedit_document_set_metadata (doc, GEDIT_METADATA_ATTRIBUTE_LANGUAGE,
+			(lang == NULL) ? "_NORMAL_" : gtk_source_language_get_id (lang),
+			NULL);
 	}
 
 	doc->priv->language_set_by_user = set_by_user;
@@ -778,7 +671,8 @@ set_encoding (GeditDocument       *doc,
 
 		charset = gedit_encoding_get_charset (encoding);
 
-		set_metadata (doc, GEDIT_METADATA_ATTRIBUTE_ENCODING, charset, NULL);
+		gedit_document_set_metadata (doc, GEDIT_METADATA_ATTRIBUTE_ENCODING,
+					     charset, NULL);
 	}
 
 	g_object_notify (G_OBJECT (doc), "encoding");
@@ -819,7 +713,7 @@ guess_language (GeditDocument *doc,
 	gchar *data;
 	GtkSourceLanguage *language = NULL;
 
-	data = get_metadata (doc, GEDIT_METADATA_ATTRIBUTE_LANGUAGE);
+	data = gedit_document_get_metadata (doc, GEDIT_METADATA_ATTRIBUTE_LANGUAGE);
 
 	if (data != NULL)
 	{
@@ -1275,7 +1169,7 @@ document_loader_loaded (GeditDocumentLoader *loader,
 			gchar *pos;
 			gint offset;
 
-			pos = get_metadata (doc, GEDIT_METADATA_ATTRIBUTE_POSITION);
+			pos = gedit_document_get_metadata (doc, GEDIT_METADATA_ATTRIBUTE_POSITION);
 
 			offset = pos ? atoi (pos) : 0;
 			g_free (pos);
@@ -2528,93 +2422,145 @@ _gedit_document_create_mount_operation (GeditDocument *doc)
 						           doc->priv->mount_operation_userdata);
 }
 
+#ifdef G_OS_WIN32
+gchar *
+gedit_document_get_metadata (GeditDocument *doc,
+			     const gchar   *key)
+{
+	gchar *value = NULL;
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (key != NULL, NULL);
+
+	if (doc->priv->uri != NULL)
+		value = gedit_metadata_manager_get (doc->priv->uri, key);
+
+	return value;
+}
+
+void
+gedit_document_set_metadata (GeditDocument *doc,
+			     const gchar   *first_key,
+			     ...)
+{
+	const gchar *key;
+	const gchar *value;
+	va_list var_args;
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (first_key != NULL);
+
+	va_start (var_args, first_key);
+
+	for (key = first_key; key; key = va_arg (var_args, const gchar *))
+	{
+		value = va_arg (var_args, const gchar *);
+		
+		gedit_metadata_manager_set (doc->priv->uri,
+					    key,
+					    value);
+	}
+
+	va_end (var_args);
+}
+
+#else
+
 /**
  * gedit_document_get_metadata:
  * @doc: a #GeditDocument
+ * @key: name of the key
  *
- * Returns a #GFileInfo with all the metadata attributes stored in @doc.
+ * Gets the metadata assigned to @key.
  *
- * Returns: a #GFileInfo
+ * Returns: the value assigned to @key.
  */
-GFileInfo *
-gedit_document_get_metadata (GeditDocument *doc)
+gchar *
+gedit_document_get_metadata (GeditDocument *doc,
+			     const gchar   *key)
 {
+	gchar *value = NULL;
+
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (key != NULL, NULL);
 
-	if (doc->priv->metadata_info)
-		return g_file_info_dup (doc->priv->metadata_info);
-	else
-		return NULL;
-}
-
-static GFileInfo *
-filter_metadata_attributes (GeditDocument *doc,
-			    GFileInfo *info)
-{
-	GFileInfo *metadata_info;
-	gchar **attributes, **ptr;
-
-	if (g_file_info_has_namespace (info, "metadata"))
-		attributes = g_file_info_list_attributes (info, "metadata");
-	else
-		return NULL;
-	
-	if (attributes == NULL)
-		return NULL;
-
-	metadata_info = g_file_info_new ();
-
-	for (ptr = attributes; *ptr != NULL; ptr++)
+	if (doc->priv->metadata_info && g_file_info_has_attribute (doc->priv->metadata_info,
+								   key))
 	{
-		gpointer value;
-		GFileAttributeType type;
-
-		g_file_info_get_attribute_data (info, *ptr,
-						&type, &value, NULL);
-
-		g_file_info_set_attribute (metadata_info, *ptr,
-					   type, value);
-
-		/* Update the internal metadata info */
-		if (doc->priv->metadata_info != NULL)
-			g_file_info_set_attribute (doc->priv->metadata_info, *ptr,
-						   type, value);
+		value = g_strdup (g_file_info_get_attribute_string (doc->priv->metadata_info,
+								    key));
 	}
 
-	return metadata_info;
+	return value;
+}
+
+static void
+set_attributes_cb (GObject      *source,
+		   GAsyncResult *res,
+		   gpointer      useless)
+{
+	g_file_set_attributes_finish (G_FILE (source),
+				      res,
+				      NULL,
+				      NULL);
 }
 
 /**
  * gedit_document_set_metadata:
  * @doc: a #GeditDocument
- * @info: a #GFileInfo
+ * @first_key: name of the first key to set
+ * @...: value for the first key, followed optionally by more key/value pairs,
+ * followed by %NULL.
  *
- * Stores metadata in @doc. Usually you should create a new #GFileInfo with
- * g_file_info_new() and store only the metadata you are interested in,
- * to avoid overwriting other metadata. For naming attributes we are using
- * metadata::gedit-XXX where XXX is the name of the attribute.
+ * Sets metadata on a document.
  */
 void
 gedit_document_set_metadata (GeditDocument *doc,
-			     GFileInfo     *info)
+			     const gchar   *first_key,
+			     ...)
 {
+	const gchar *key;
+	const gchar *value;
+	va_list var_args;
+	GFileInfo *info;
 	GFile *location;
-	GFileInfo *metadata_info;
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (info != NULL);
+	g_return_if_fail (first_key != NULL);
 
-	metadata_info = filter_metadata_attributes (doc, info);
+	info = g_file_info_new ();
 
-	if (metadata_info == NULL)
-		return;
+	va_start (var_args, first_key);
+
+	for (key = first_key; key; key = va_arg (var_args, const gchar *))
+	{
+		value = va_arg (var_args, const gchar *);
+		
+		if (value != NULL)
+		{
+			g_file_info_set_attribute_string (info,
+							  key, value);
+		}
+		else
+		{
+			/* Unset the key */
+			g_file_info_set_attribute (info, key,
+						   G_FILE_ATTRIBUTE_TYPE_INVALID,
+						   NULL);
+		}
+	}
+
+	va_end (var_args);
+
+	if (doc->priv->metadata_info != NULL)
+		g_file_info_copy_into (info, doc->priv->metadata_info);
 
 	location = gedit_document_get_location (doc);
 
 	if (location != NULL)
 	{
 		g_file_set_attributes_async (location,
-					     metadata_info,
+					     info,
 					     G_FILE_QUERY_INFO_NONE,
 					     G_PRIORITY_DEFAULT,
 					     NULL,
@@ -2624,5 +2570,6 @@ gedit_document_set_metadata (GeditDocument *doc,
 		g_object_unref (location);
 	}
 	
-	g_object_unref (metadata_info);
+	g_object_unref (info);
 }
+#endif
