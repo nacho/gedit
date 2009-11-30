@@ -2554,9 +2554,6 @@ filter_metadata_attributes (GeditDocument *doc,
 	GFileInfo *metadata_info;
 	gchar **attributes, **ptr;
 
-	if (doc->priv->metadata_info == NULL)
-		return NULL;
-
 	if (g_file_info_has_namespace (info, "metadata"))
 		attributes = g_file_info_list_attributes (info, "metadata");
 	else
@@ -2579,8 +2576,9 @@ filter_metadata_attributes (GeditDocument *doc,
 					   type, value);
 
 		/* Update the internal metadata info */
-		g_file_info_set_attribute (doc->priv->metadata_info, *ptr,
-					   type, value);
+		if (doc->priv->metadata_info != NULL)
+			g_file_info_set_attribute (doc->priv->metadata_info, *ptr,
+						   type, value);
 	}
 
 	return metadata_info;
@@ -2613,14 +2611,18 @@ gedit_document_set_metadata (GeditDocument *doc,
 
 	location = gedit_document_get_location (doc);
 
-	g_file_set_attributes_async (location,
-				     metadata_info,
-				     G_FILE_QUERY_INFO_NONE,
-				     G_PRIORITY_DEFAULT,
-				     NULL,
-				     set_attributes_cb,
-				     NULL);
+	if (location != NULL)
+	{
+		g_file_set_attributes_async (location,
+					     metadata_info,
+					     G_FILE_QUERY_INFO_NONE,
+					     G_PRIORITY_DEFAULT,
+					     NULL,
+					     set_attributes_cb,
+					     NULL);
 
-	g_object_unref (location);
+		g_object_unref (location);
+	}
+	
 	g_object_unref (metadata_info);
 }
