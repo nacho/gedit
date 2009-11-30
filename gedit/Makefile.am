@@ -100,7 +100,6 @@ INST_H_FILES =				\
 	gedit-message-bus.h		\
 	gedit-message-type.h		\
 	gedit-message.h			\
-	gedit-metadata-manager.h	\
 	gedit-notebook.h		\
 	gedit-panel.h			\
 	gedit-plugin.h			\
@@ -114,6 +113,10 @@ INST_H_FILES =				\
 	gedit-utils.h 			\
 	gedit-view.h 			\
 	gedit-window.h
+
+if OS_WIN32
+INST_H_FILES += gedit-metadata-manager.h
+endif
 
 headerdir = $(prefix)/include/gedit-@GEDIT_API_VERSION@/gedit
 
@@ -159,7 +162,6 @@ libgedit_la_SOURCES = 			\
 	gedit-message-bus.c		\
 	gedit-message-type.c		\
 	gedit-message.c			\
-	gedit-metadata-manager.c	\
 	gedit-object-module.c		\
 	gedit-notebook.c		\
 	gedit-panel.c			\
@@ -185,6 +187,10 @@ libgedit_la_SOURCES = 			\
 	gedittextregion.c		\
 	$(NOINST_H_FILES)		\
 	$(INST_H_FILES)
+
+if OS_WIN32
+libgedit_la_SOURCES += gedit-metadata-manager.c 
+endif
 
 gedit-enum-types.h: gedit-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
 	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-enum-types.h.template $(INST_H_FILES)) > $@
