@@ -2554,6 +2554,9 @@ filter_metadata_attributes (GeditDocument *doc,
 	GFileInfo *metadata_info;
 	gchar **attributes, **ptr;
 
+	if (doc->priv->metadata_info == NULL)
+		return NULL;
+
 	if (g_file_info_has_namespace (info, "metadata"))
 		attributes = g_file_info_list_attributes (info, "metadata");
 	else
