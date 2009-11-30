@@ -42,6 +42,7 @@
 
 #ifdef G_OS_WIN32
 #include <gedit/gedit-metadata-manager.h>
+#define GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE "spell-language"
 #else
 #define GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE "metadata::gedit-spell-language"
 #endif
@@ -139,36 +140,16 @@ set_spell_language_cb (GeditSpellChecker   *spell,
 		       const GeditSpellCheckerLanguage *lang,
 		       GeditDocument 	   *doc)
 {
+	const gchar *key;
+
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 	g_return_if_fail (lang != NULL);
-
-#ifdef G_OS_WIN32
-	gchar *uri;
-
-	uri = gedit_document_get_uri (doc);
-
-	if (uri != NULL)
-	{
-		const gchar *key;
-
-		key = gedit_spell_checker_language_to_key (lang);
-		g_return_if_fail (key != NULL);
-
-		gedit_metadata_manager_set (uri, 
-					    "spell-language",
-					    key);
-
-		g_free (uri);
-	}
-#else
-	const gchar *key;
 
 	key = gedit_spell_checker_language_to_key (lang);
 	g_return_if_fail (key != NULL);
 
 	gedit_document_set_metadata (doc, GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE,
 				     key, NULL);
-#endif
 }
 
 static GeditSpellChecker *
@@ -185,36 +166,10 @@ get_spell_checker_from_document (GeditDocument *doc)
 
 	if (data == NULL)
 	{
-		spell = gedit_spell_checker_new ();
-
-#ifdef G_OS_WIN32
-		gchar *uri;
-
-		uri = gedit_document_get_uri (doc);
-
-		if (uri != NULL)
-		{
-			gchar *key;
-			const GeditSpellCheckerLanguage *lang = NULL;
-
-			key = gedit_metadata_manager_get (uri,
-							  "spell-language");
-
-			if (key != NULL)
-			{
-				lang = gedit_spell_checker_language_from_key (key);
-				g_free (key);
-			}
-
-			if (lang != NULL)
-				gedit_spell_checker_set_language (spell,
-								  lang);
-
-			g_free (uri);
-		}
-#else
 		const GeditSpellCheckerLanguage *lang = NULL;
 		gchar *value = NULL;
+
+		spell = gedit_spell_checker_new ();
 
 		value = gedit_document_get_metadata (doc, GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE);
 
@@ -228,7 +183,6 @@ get_spell_checker_from_document (GeditDocument *doc)
 		{
 			gedit_spell_checker_set_language (spell, lang);
 		}
-#endif
 
 		g_object_set_qdata_full (G_OBJECT (doc), 
 					 spell_checker_id, 
