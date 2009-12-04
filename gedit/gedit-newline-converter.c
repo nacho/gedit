@@ -29,6 +29,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
+#include <pango/pango.h>
 #include <string.h>
 
 #define GEDIT_NEWLINE_CONVERTER_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ((object),\
@@ -165,30 +166,6 @@ gedit_newline_converter_reset (GConverter *converter)
 {
 }
 
-static void
-scan_newline (const gchar *buf,
-              gsize        size,
-              gint        *paragraph_delimiter_index,
-              gboolean    *end_buf)
-{
-	gint i;
-
-	i = 0;
-	*end_buf = FALSE;
-
-	while (i < size)
-	{
-		if (buf[i] == '\r' || buf[i] == '\n')
-		{
-			*paragraph_delimiter_index = i;
-			return;
-		}
-		i++;
-	}
-
-	*end_buf = TRUE;
-}
-
 static GConverterResult
 gedit_newline_converter_convert (GConverter *converter,
 				 const void *inbuf,
@@ -206,7 +183,7 @@ gedit_newline_converter_convert (GConverter *converter,
 	gsize pos_in, pos_out;
 	gsize size;
 	gint paragraph_delimiter_index;
-	gboolean end_buf;
+	gint next_paragraph_start;
 
 	newline = GEDIT_NEWLINE_CONVERTER (converter);
 
@@ -240,12 +217,13 @@ gedit_newline_converter_convert (GConverter *converter,
 
 	while (in_left > 0 && out_left > 0)
 	{
-		scan_newline (inbufp + *bytes_read,
-			      in_left, &paragraph_delimiter_index,
-			      &end_buf);
+		pango_find_paragraph_boundary (inbufp + *bytes_read,
+					       in_left, &paragraph_delimiter_index,
+					       &next_paragraph_start);
 
 		/* No boundaries */
-		if (end_buf)
+		if ((in_left == paragraph_delimiter_index) == TRUE &&
+		    (in_left == next_paragraph_start) == TRUE)
 		{
 			size = MIN (out_left, in_left);
 
@@ -300,6 +278,7 @@ gedit_newline_converter_convert (GConverter *converter,
 				*bytes_read += 1;
 				out_left -= 1;
 				in_left -= 1;
+				g_print ("cr\n\n");
 
 				if (inbufp[pos_in + 1] == 10) /* LF */
 				{
