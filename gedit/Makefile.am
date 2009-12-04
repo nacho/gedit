@@ -79,6 +79,7 @@ NOINST_H_FILES =			\
 	gedit-local-document-saver.h	\
 	gedit-gio-document-saver.h	\
 	gedit-history-entry.h		\
+	gedit-newline-converter.h	\
 	gedit-print-job.h		\
 	gedit-print-preview.h		\
 	gedit-io-error-message-area.h	\
@@ -162,6 +163,7 @@ libgedit_la_SOURCES = 			\
 	gedit-message-bus.c		\
 	gedit-message-type.c		\
 	gedit-message.c			\
+	gedit-newline-converter.c	\
 	gedit-object-module.c		\
 	gedit-notebook.c		\
 	gedit-panel.c			\
@@ -192,11 +194,11 @@ if OS_WIN32
 libgedit_la_SOURCES += gedit-metadata-manager.c 
 endif
 
-gedit-enum-types.h: gedit-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
-	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-enum-types.h.template $(INST_H_FILES)) > $@
+gedit-enum-types.h: gedit-enum-types.h.template $(INST_H_FILES) gedit-newline-converter.h $(GLIB_MKENUMS)
+	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-enum-types.h.template $(INST_H_FILES) gedit-newline-converter.h) > $@
 
-gedit-enum-types.c: gedit-enum-types.c.template $(INST_H_FILES) $(GLIB_MKENUMS)
-	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-enum-types.c.template $(INST_H_FILES)) > $@
+gedit-enum-types.c: gedit-enum-types.c.template $(INST_H_FILES) gedit-newline-converter.h $(GLIB_MKENUMS)
+	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-enum-types.c.template $(INST_H_FILES) gedit-newline-converter.h) > $@
 
 gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)
 	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@

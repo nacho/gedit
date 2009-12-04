@@ -541,6 +541,7 @@ plugins/spell/Makefile
 plugins/taglist/Makefile
 plugins/time/Makefile
 po/Makefile.in
+tests/Makefile
 win32/gedit.iss
 win32/Makefile])
 
