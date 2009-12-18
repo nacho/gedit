@@ -122,8 +122,6 @@ strip installer/gedit/bin/*.dll || exit
 # stripping libxml2.dll renders it unusable (although not changing it in size).
 # We therefore copy it after having stripped the rest. Same with the other DLLs
 # here. Perhaps those were built with MSVC.
-# We need libxml2 for gedit/gsv/gconf and libxml2-2 for libsoup
-cp "${_misc_prefix}/bin/libxml2.dll" installer/gedit/bin || exit
 cp "${_misc_prefix}/bin/libxml2-2.dll" installer/gedit/bin || exit
 cp "${_misc_prefix}/bin/intl.dll" installer/gedit/bin || exit
 cp "${_misc_prefix}/bin/iconv.dll" installer/gedit/bin || exit
