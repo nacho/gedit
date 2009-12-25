@@ -41,6 +41,18 @@
     <description>HTML — 4.0 Transitional</description>
     <tag>doctype</tag>
   </snippet>
+  <snippet id="author">
+    <text><![CDATA[<meta name="author" content="${1:author}" />
+$0]]></text>
+    <tag>author</tag>
+    <description>Author</description>
+  </snippet>
+  <snippet id="date">
+    <text><![CDATA[<meta name="date" content="$<1: import time; return time.strftime("%Y-%m-%d") >" />
+$0]]></text>
+    <tag>date</tag>
+    <description>Date</description>
+  </snippet>
   <snippet id="ref">
     <text><![CDATA[<a href="${1:http://somesite.com/}">${2:$GEDIT_SELECTED_TEXT}</a>
 ]]></text>
@@ -76,12 +88,24 @@ $0]]></text>
     <accelerator><![CDATA[<Shift><Control>space]]></accelerator>
     <description>Br</description>
   </snippet>
+  <snippet id="button">
+    <text><![CDATA[<button type="button" name="${1:name}" value="${2:caption}" onclick="$3" />$4
+]]></text>
+    <tag>button</tag>
+    <description>Button</description>
+  </snippet>
   <snippet id="div">
     <text><![CDATA[<div ${1}>
 	${0:$GEDIT_SELECTED_TEXT}
 </div>]]></text>
     <description>Div</description>
     <tag>div</tag>
+  </snippet>
+  <snippet id="file">
+    <text><![CDATA[<input type="file" name="${1:name}" size="$2" accept="$3" />$0
+]]></text>
+    <tag>file</tag>
+    <description>File</description>
   </snippet>
   <snippet id="form">
     <text><![CDATA[<form action="${1}" method="${2:get}">
@@ -107,10 +131,20 @@ $0]]></text>
     <description>Head</description>
     <tag>head</tag>
   </snippet>
+  <snippet id="image">
+    <text><![CDATA[<img src="${1:path/to/file}" alt="${2:description}" title="${3:description}" width="$4" height="$5" />$0]]></text>
+    <tag>img</tag>
+    <description>Image</description>
+  </snippet>
   <snippet id="input">
-    <text><![CDATA[<input type="${1:text/submit/hidden/button}" name="${2:some_name}" value="$3" id="${5}" />]]></text>
+    <text><![CDATA[<input type="${1:text/submit/hidden/button/checkbox/radio}" name="${2:some_name}" value="$3" id="${5}" />]]></text>
     <description>Input</description>
     <tag>input</tag>
+  </snippet>
+  <snippet id="li">
+    <text><![CDATA[<li>$1</li>$0]]></text>
+    <tag>li</tag>
+    <description>List Element</description>
   </snippet>
   <snippet id="link">
     <text><![CDATA[<link rel="${1:stylesheet}" href="${2:/css/master.css}" type="text/css" media="${3:screen}" title="${4:no title}" charset="${5:utf-8}" />]]></text>
@@ -127,6 +161,16 @@ $0]]></text>
     <accelerator><![CDATA[<Control><Alt>space]]></accelerator>
     <description>Non-Breaking Space</description>
   </snippet>
+  <snippet id="noscript">
+    <text><![CDATA[<noscript>$1</noscript>$0]]></text>
+    <tag>noscript</tag>
+    <description>Noscript</description>
+  </snippet>
+  <snippet id="option">
+    <text><![CDATA[<option value="${1:value}">$2</option>$0]]></text>
+    <tag>option</tag>
+    <description>Option</description>
+  </snippet>
   <snippet id="script">
     <text><![CDATA[<script type="text/javascript" language="javascript" charset="utf-8">
 // <![CDATA[
@@ -140,6 +184,20 @@ $0]]></text>
     <text><![CDATA[<script src="$1" type="text/javascript" language="${2:javascript}" charset="${3:utf-8}" />]]></text>
     <description>Script With External Source</description>
     <tag>scriptsrc</tag>
+  </snippet>
+  <snippet id="select">
+    <text><![CDATA[<select name="${1:name}">
+	<option value="${2:value}">$3</option>
+	$4
+</select>$0
+]]></text>
+    <tag>select</tag>
+    <description>Select</description>
+  </snippet>
+  <snippet id="span">
+    <text><![CDATA[<span ${1}>$2</span>$0]]></text>
+    <tag>span</tag>
+    <description>Span</description>
   </snippet>
   <snippet id="style">
     <text><![CDATA[<style type="text/css" media="screen">
@@ -175,5 +233,14 @@ $0]]></text>
 $0]]></text>
     <tag>tr</tag>
     <description>Table Row</description>
+  </snippet>
+  <snippet id="ul">
+    <text><![CDATA[<ul>
+	<li>$1</li>
+	$2
+</ul>
+$0]]></text>
+    <tag>ul</tag>
+    <description>Unordered List</description>
   </snippet>
 </snippets>
