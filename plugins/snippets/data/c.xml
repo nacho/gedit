@@ -27,8 +27,8 @@ except KeyError:
  * Foundation, Inc., 51 Franklin St, Fifth Floor, 
  * Boston, MA  02110-1301  USA
  */
- 
- $0]]></text>
+
+$0]]></text>
     <tag>gpl</tag>
     <description>GPL License</description>
   </snippet>
@@ -58,8 +58,8 @@ except KeyError:
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
- $0]]></text>
+
+$0]]></text>
     <tag>lgpl</tag>
     <description>LGPL License</description>
   </snippet>
@@ -153,7 +153,7 @@ $0]]></text>
     <tag>td</tag>
     <description>typedef</description>
   </snippet>
-  <snippet id="gobject">>
+  <snippet id="gobject">
     <text><![CDATA[#include "$1.h"
 $<
 global camel_str,low_str, type_str, is_str, up_str
@@ -189,7 +189,7 @@ $<[1]: return low_str >_class_init ($<[1]: return camel_str >Class *klass)
 	
 	object_class->finalize = $<[1]: return low_str >_finalize;
 
-	g_type_class_add_private (object_class, sizeof($<[1]: return camel_str >Private));
+	g_type_class_add_private (object_class, sizeof ($<[1]: return camel_str >Private));
 }
 
 static void
@@ -198,7 +198,7 @@ $<[1]: return low_str >_init ($<[1]: return camel_str> *self)
 	self->priv = $<[1]: return up_str >_GET_PRIVATE (self);
 }
 
-$<[1]: return camel_str >*
+$<[1]: return camel_str > *
 $<[1]: return low_str >_new ()
 {
 	return g_object_new ($<[1]: return type_str >, NULL);
@@ -218,16 +218,6 @@ camel_str = ''
 for t in components:
   camel_str += t.capitalize()
 >
-/*
- * This is an method example for an interface
- */
-const gchar *
-$<[1]: return low_str>_example_method ($<[1]: return camel_str > *self)
-{
-	g_return_val_if_fail ($<[1]: return up_str> (self), NULL);
-	return $<[1]: return up_str>_GET_INTERFACE (self)->example_method (self);
-}
-
 /* Default implementation */
 static const gchar *
 $<[1]: return low_str>_example_method_default ($<[1]: return camel_str > *self)
@@ -246,6 +236,16 @@ $<[1]: return low_str>_init ($<[1]: return camel_str >Iface *iface)
 	{
 		initialized = TRUE;
 	}
+}
+
+/*
+ * This is an method example for an interface
+ */
+const gchar *
+$<[1]: return low_str>_example_method ($<[1]: return camel_str > *self)
+{
+	g_return_val_if_fail ($<[1]: return up_str> (self), NULL);
+	return $<[1]: return up_str>_GET_INTERFACE (self)->example_method (self);
 }
 
 GType 
