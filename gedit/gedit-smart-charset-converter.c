@@ -131,9 +131,16 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 	while (TRUE)
 	{
 		const GeditEncoding *enc;
-		gchar *conv_text;
-		gsize written;
+		gchar outbuf[inbuf_size];
+		GConverterResult ret;
+		gsize read, written;
 		GError *err = NULL;
+
+		if (conv != NULL)
+		{
+			g_object_unref (conv);
+			conv = NULL;
+		}
 
 		/* We get the first encoding we have in the list */
 		enc = get_encoding (smart);
@@ -146,29 +153,39 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 
 		if (enc == gedit_encoding_get_utf8 ())
 		{
-			if (g_utf8_validate (inbuf, inbuf_size, NULL))
+			gsize remainder;
+			const gchar *end;
+		
+			if (g_utf8_validate (inbuf, inbuf_size, &end))
 			{
 				smart->priv->is_utf8 = TRUE;
 				break;
 			}
-			else
-			{
-				continue;
-			}
-		}
-		
-		/* Let's try converting the input to one encoding, if there
-		   was no error or the error was because of needed more input
-		   we create the charset converter for that encoding */
-		conv_text = g_convert (inbuf,
-				       inbuf_size,
-				       "UTF-8",
-				       gedit_encoding_get_charset (enc),
-				       NULL,
-				       &written,
-				       &err);
 
-		g_free (conv_text);
+			/* Check if the end is just less than one char */
+			remainder = inbuf_size - (end - (gchar *)inbuf);
+			if (remainder < 6)
+			{
+				smart->priv->is_utf8 = TRUE;
+				break;
+			}
+
+			continue;
+		}
+
+		conv = g_charset_converter_new ("UTF-8",
+						gedit_encoding_get_charset (enc),
+						NULL);
+
+		ret = g_converter_convert (G_CONVERTER (conv),
+					   inbuf,
+					   inbuf_size,
+					   outbuf,
+					   inbuf_size,
+					   0,
+					   &read,
+					   &written,
+					   &err);
 
 		if (err != NULL)
 		{
@@ -176,10 +193,6 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 			if (err->code == G_CONVERT_ERROR_PARTIAL_INPUT)
 			{
 				g_error_free (err);
-
-				conv = g_charset_converter_new ("UTF-8",
-								gedit_encoding_get_charset (enc),
-								NULL);
 				break;
 			}
 
@@ -187,9 +200,6 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 		}
 		else
 		{
-			conv = g_charset_converter_new ("UTF-8",
-							gedit_encoding_get_charset (enc),
-							NULL);
 			break;
 		}
 	}
