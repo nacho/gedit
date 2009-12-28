@@ -98,11 +98,6 @@ GeditDocumentLoader 	*gedit_document_loader_new 		(GeditDocument       *doc,
 								 const gchar         *uri,
 								 const GeditEncoding *encoding);
 
-gboolean		 gedit_document_loader_update_document_contents
-								(GeditDocumentLoader  *loader,
-								 const gchar          *file_contents,
-								 gint                  file_size,
-								 GError              **error);
 void			 gedit_document_loader_loading		(GeditDocumentLoader *loader,
 								 gboolean             completed,
 								 GError              *error);

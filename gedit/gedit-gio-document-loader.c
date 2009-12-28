@@ -39,6 +39,8 @@
 #include <gio/gio.h>
 
 #include "gedit-gio-document-loader.h"
+#include "gedit-smart-charset-converter.h"
+#include "gedit-prefs-manager.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
 
@@ -77,17 +79,20 @@ struct _GeditGioDocumentLoaderPrivate
 
 	/* Handle for remote files */
 	GCancellable 	 *cancellable;
-	GFileInputStream *stream;
+	GInputStream	 *stream;
+	GeditSmartCharsetConverter *converter;
 
-	gchar            *buffer;
+	gchar             buffer[READ_CHUNK_SIZE];
 
 	GError           *error;
+
+	guint		  started_insert : 1;
 };
 
 G_DEFINE_TYPE(GeditGioDocumentLoader, gedit_gio_document_loader, GEDIT_TYPE_DOCUMENT_LOADER)
 
 static void
-gedit_gio_document_loader_finalize (GObject *object)
+gedit_gio_document_loader_dispose (GObject *object)
 {
 	GeditGioDocumentLoaderPrivate *priv;
 
@@ -97,19 +102,39 @@ gedit_gio_document_loader_finalize (GObject *object)
 	{
 		g_cancellable_cancel (priv->cancellable);
 		g_object_unref (priv->cancellable);
+		priv->cancellable = NULL;
 	}
-	
-	if (priv->stream)
+
+	if (priv->stream != NULL)
+	{
 		g_object_unref (priv->stream);
+		priv->stream = NULL;
+	}
 
-	g_free (priv->buffer);
+	if (priv->converter != NULL)
+	{
+		g_object_unref (priv->converter);
+		priv->converter = NULL;
+	}
 
-	if (priv->gfile)
+	if (priv->gfile != NULL)
+	{
 		g_object_unref (priv->gfile);
+		priv->gfile = NULL;
+	}
 
-	if (priv->error)
+	if (priv->error != NULL)
+	{
 		g_error_free (priv->error);
+		priv->error = NULL;
+	}
 
+	G_OBJECT_CLASS (gedit_gio_document_loader_parent_class)->dispose (object);
+}
+
+static void
+gedit_gio_document_loader_finalize (GObject *object)
+{
 	G_OBJECT_CLASS (gedit_gio_document_loader_parent_class)->finalize (object);
 }
 
@@ -119,6 +144,7 @@ gedit_gio_document_loader_class_init (GeditGioDocumentLoaderClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GeditDocumentLoaderClass *loader_class = GEDIT_DOCUMENT_LOADER_CLASS (klass);
 
+	object_class->dispose = gedit_gio_document_loader_dispose;
 	object_class->finalize = gedit_gio_document_loader_finalize;
 
 	loader_class->load = gedit_gio_document_loader_load;
@@ -132,7 +158,10 @@ static void
 gedit_gio_document_loader_init (GeditGioDocumentLoader *gvloader)
 {
 	gvloader->priv = GEDIT_GIO_DOCUMENT_LOADER_GET_PRIVATE (gvloader);
+
+	gvloader->priv->converter = NULL;
 	gvloader->priv->error = NULL;
+	gvloader->priv->started_insert = FALSE;
 }
 
 static AsyncData *
@@ -140,7 +169,7 @@ async_data_new (GeditGioDocumentLoader *gvloader)
 {
 	AsyncData *async;
 	
-	async = g_new (AsyncData, 1);
+	async = g_slice_new (AsyncData);
 	async->loader = gvloader;
 	async->cancellable = g_object_ref (gvloader->priv->cancellable);
 	async->tried_mount = FALSE;
@@ -152,21 +181,64 @@ static void
 async_data_free (AsyncData *async)
 {
 	g_object_unref (async->cancellable);
-	g_free (async);
+	g_slice_free (AsyncData, async);
+}
+
+static const GeditEncoding *
+get_metadata_encoding (GeditDocumentLoader *loader)
+{
+	const GeditEncoding *enc = NULL;
+
+#ifdef G_OS_WIN32
+	gchar *charset;
+	const gchar *uri;
+
+	uri = gedit_document_loader_get_uri (loader);
+
+	charset = gedit_metadata_manager_get (uri, "encoding");
+
+	if (charset == NULL)
+		return NULL;
+
+	enc = gedit_encoding_get_from_charset (charset);
+
+	g_free (charset);
+#else
+	GFileInfo *info;
+
+	info = gedit_document_loader_get_info (loader);
+
+	/* check if the encoding was set in the metadata */
+	if (g_file_info_has_attribute (info, GEDIT_METADATA_ATTRIBUTE_ENCODING))
+	{
+		const gchar *charset;
+
+		charset = g_file_info_get_attribute_string (info,
+							    GEDIT_METADATA_ATTRIBUTE_ENCODING);
+
+		if (charset == NULL)
+			return NULL;
+		
+		enc = gedit_encoding_get_from_charset (charset);
+	}
+#endif
+
+	return enc;
 }
 
 static void
 remote_load_completed_or_failed (GeditGioDocumentLoader *gvloader, AsyncData *async)
 {
-	/* free the buffer */
-	g_free (gvloader->priv->buffer);
-	gvloader->priv->buffer = NULL;
+	GeditDocumentLoader *loader;
+
+	loader = GEDIT_DOCUMENT_LOADER (gvloader);
 
 	if (async)
 		async_data_free (async);
 		
 	if (gvloader->priv->stream)
-		g_input_stream_close_async (G_INPUT_STREAM (gvloader->priv->stream), G_PRIORITY_HIGH, NULL, NULL, NULL);
+		g_input_stream_close_async (G_INPUT_STREAM (gvloader->priv->stream),
+					    G_PRIORITY_HIGH, NULL, NULL, NULL);
 
 	gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (gvloader),
 				       TRUE,
@@ -184,6 +256,48 @@ async_failed (AsyncData *async, GError *error)
 }
 
 static void
+append_text_to_document (GeditDocumentLoader *loader,
+			 const gchar         *text,
+			 gint                 len)
+{
+	GeditDocument *doc = loader->document;
+	GtkTextIter end;
+
+	/* Insert text in the buffer */
+	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end);
+	
+	gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &end, text, len);
+}
+
+static void
+end_append_text_to_document (GeditDocumentLoader *loader)
+{
+	GtkTextIter start, end;
+
+	/* If the last char is a newline, remove it from the buffer (otherwise
+	   GtkTextView shows it as an empty line). See bug #324942. */
+	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (loader->document), &end);
+	start = end;
+
+	if (gtk_text_iter_backward_char (&start))
+	{
+		gunichar c;
+
+		c = gtk_text_iter_get_char (&start);
+
+		if (g_unichar_break_type (c) == G_UNICODE_BREAK_LINE_FEED)
+			gtk_text_buffer_delete (GTK_TEXT_BUFFER (loader->document),
+						&start, &end);
+	}
+
+	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (loader->document), FALSE);
+
+	gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (loader->document));
+
+	GEDIT_GIO_DOCUMENT_LOADER (loader)->priv->started_insert = FALSE;
+}
+
+static void
 async_read_cb (GInputStream *stream,
 	       GAsyncResult *res,
 	       AsyncData    *async)
@@ -192,16 +306,17 @@ async_read_cb (GInputStream *stream,
 	GeditGioDocumentLoader *gvloader;
 	gssize bytes_read;
 	GError *error = NULL;
-	
+
+	gvloader = async->loader;
+
 	/* manually check cancelled state */
 	if (g_cancellable_is_cancelled (async->cancellable))
 	{
-		g_input_stream_close_async (stream, G_PRIORITY_HIGH, NULL, NULL, NULL);
-		async_data_free (async);
+		end_append_text_to_document (GEDIT_DOCUMENT_LOADER (gvloader));
+		remote_load_completed_or_failed (gvloader, async);
 		return;
 	}
 
-	gvloader = async->loader;
 	bytes_read = g_input_stream_read_finish (stream, res, &error);
 	
 	/* error occurred */
@@ -219,6 +334,7 @@ async_read_cb (GInputStream *stream,
 			     GEDIT_DOCUMENT_ERROR_TOO_BIG,
 			     "File too big");
 
+		end_append_text_to_document (GEDIT_DOCUMENT_LOADER (gvloader));
 		remote_load_completed_or_failed (gvloader, async);
 
 		return;
@@ -230,16 +346,18 @@ async_read_cb (GInputStream *stream,
 	/* end of the file, we are done! */
 	if (bytes_read == 0)
 	{
-		gedit_document_loader_update_document_contents (
-						GEDIT_DOCUMENT_LOADER (gvloader),
-						gvloader->priv->buffer,
-						gvloader->priv->bytes_read,
-						&gvloader->priv->error);
-		
+		GEDIT_DOCUMENT_LOADER (gvloader)->auto_detected_encoding =
+			gedit_smart_charset_converter_get_guessed (gvloader->priv->converter);
+
+		end_append_text_to_document (GEDIT_DOCUMENT_LOADER (gvloader));
 		remote_load_completed_or_failed (gvloader, async);
 
 		return;
 	}
+
+	append_text_to_document (GEDIT_DOCUMENT_LOADER (gvloader),
+				 gvloader->priv->buffer,
+				 bytes_read);
 
 	/* otherwise emit progress and read some more */
 
@@ -259,11 +377,20 @@ read_file_chunk (AsyncData *async)
 	GeditGioDocumentLoader *gvloader;
 	
 	gvloader = async->loader;
-	gvloader->priv->buffer = g_realloc (gvloader->priv->buffer,
-					    gvloader->priv->bytes_read + READ_CHUNK_SIZE);
+
+	if (!gvloader->priv->started_insert)
+	{
+		GeditDocumentLoader *loader;
+
+		loader = GEDIT_DOCUMENT_LOADER (gvloader);
+
+		/* Init the undoable action */
+		gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (loader->document));
+		gvloader->priv->started_insert = TRUE;
+	}
 
 	g_input_stream_read_async (G_INPUT_STREAM (gvloader->priv->stream),
-				   gvloader->priv->buffer + gvloader->priv->bytes_read,
+				   gvloader->priv->buffer,
 				   READ_CHUNK_SIZE,
 				   G_PRIORITY_HIGH,
 				   async->cancellable,
@@ -271,14 +398,36 @@ read_file_chunk (AsyncData *async)
 				   async);
 }
 
+static GSList *
+get_candidate_encodings (GeditGioDocumentLoader *gvloader)
+{
+	const GeditEncoding *metadata;
+	GSList *encodings = NULL;
+
+	encodings = gedit_prefs_manager_get_auto_detected_encodings ();
+
+	metadata = get_metadata_encoding (GEDIT_DOCUMENT_LOADER (gvloader));
+	if (metadata != NULL)
+	{
+		encodings = g_slist_prepend (encodings, (gpointer)metadata);
+	}
+
+	return encodings;
+}
+
 static void
 finish_query_info (AsyncData *async)
 {
 	GeditGioDocumentLoader *gvloader;
+	GeditDocumentLoader *loader;
+	GInputStream *utf8_stream;
+	GInputStream *conv_stream;
 	GFileInfo *info;
+	GSList *candidate_encodings;
 	
 	gvloader = async->loader;
-	info = GEDIT_DOCUMENT_LOADER (gvloader)->info;
+	loader = GEDIT_DOCUMENT_LOADER (gvloader);
+	info = loader->info;
 
 	/* if it's not a regular file, error out... */
 	if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_STANDARD_TYPE) &&
@@ -293,6 +442,29 @@ finish_query_info (AsyncData *async)
 
 		return;
 	}
+
+	/* Get the candidate encodings */
+	if (loader->encoding == NULL)
+	{
+		candidate_encodings = get_candidate_encodings (gvloader);
+	}
+	else
+	{
+		candidate_encodings = g_slist_prepend (candidate_encodings,
+						       (gpointer)loader->encoding);
+	}
+
+	gvloader->priv->converter = gedit_smart_charset_converter_new (candidate_encodings);
+	g_slist_free (candidate_encodings);
+	
+	conv_stream = g_converter_input_stream_new (gvloader->priv->stream,
+						    G_CONVERTER (gvloader->priv->converter));
+	g_object_unref (gvloader->priv->stream);
+
+	utf8_stream = g_utf8_input_stream_new (conv_stream);
+	g_object_unref (conv_stream);
+
+	gvloader->priv->stream = utf8_stream;
 
 	/* start reading */
 	read_file_chunk (async);
@@ -401,9 +573,11 @@ async_read_ready_callback (GObject      *source,
 		async_data_free (async);
 		return;
 	}
-	
+
 	gvloader = async->loader;
-	gvloader->priv->stream = g_file_read_finish (gvloader->priv->gfile, res, &error);
+	
+	gvloader->priv->stream = G_INPUT_STREAM (g_file_read_finish (gvloader->priv->gfile,
+								     res, &error));
 
 	if (!gvloader->priv->stream)
 	{		

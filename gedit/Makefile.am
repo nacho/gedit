@@ -83,6 +83,7 @@ NOINST_H_FILES =			\
 	gedit-print-job.h		\
 	gedit-print-preview.h		\
 	gedit-session.h			\
+	gedit-smart-charset-converter.h	\
 	gedit-style-scheme-manager.h	\
 	gedit-tab-label.h		\
 	gedittextregion.h		\
@@ -180,6 +181,7 @@ libgedit_la_SOURCES = 			\
 	gedit-print-preview.c		\
 	gedit-progress-message-area.c	\
 	gedit-session.c			\
+	gedit-smart-charset-converter.c	\
 	gedit-statusbar.c		\
 	gedit-status-combo-box.c	\
 	gedit-style-scheme-manager.c	\
