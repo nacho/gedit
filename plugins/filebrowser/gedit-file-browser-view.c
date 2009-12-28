@@ -1149,9 +1149,15 @@ on_cell_edited (GtkCellRendererText * cell, gchar * path, gchar * new_text,
 	gtk_tree_path_free (treepath);
 
 	if (ret) {
-		if (!gedit_file_browser_store_rename
-		    (GEDIT_FILE_BROWSER_STORE (tree_view->priv->model), &iter,
-		     new_text, &error)) {
+		if (gedit_file_browser_store_rename (GEDIT_FILE_BROWSER_STORE (tree_view->priv->model),
+		    &iter, new_text, &error)) {
+			treepath = gtk_tree_model_get_path (GTK_TREE_MODEL (tree_view->priv->model), &iter);
+			gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (tree_view),
+						      treepath, NULL,
+						      FALSE, 0.0, 0.0);
+			gtk_tree_path_free (treepath);
+		}
+		else {
 			if (error) {
 				g_signal_emit (tree_view, signals[ERROR], 0,
 					       error->code, error->message);
