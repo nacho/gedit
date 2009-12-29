@@ -2299,6 +2299,46 @@ printing_cb (GeditPrintJob       *job,
 }
 
 static void
+store_print_settings (GeditTab      *tab,
+		      GeditPrintJob *job)
+{
+	GeditDocument *doc;
+	GtkPrintSettings *settings;
+	GtkPageSetup *page_setup;
+
+	doc = gedit_tab_get_document (tab);
+
+	settings = gedit_print_job_get_print_settings (job);
+
+	/* clear n-copies settings since we do not want to
+	 * persist that one */
+	gtk_print_settings_unset (settings,
+				  GTK_PRINT_SETTINGS_N_COPIES);
+
+	/* remember settings for this document */
+	g_object_set_data_full (G_OBJECT (doc),
+				GEDIT_PRINT_SETTINGS_KEY,
+				g_object_ref (settings),
+				(GDestroyNotify)g_object_unref);
+
+	/* make them the default */
+	_gedit_app_set_default_print_settings (gedit_app_get_default (),
+					       settings);
+
+	page_setup = gedit_print_job_get_page_setup (job);
+
+	/* remember page setup for this document */
+	g_object_set_data_full (G_OBJECT (doc),
+				GEDIT_PAGE_SETUP_KEY,
+				g_object_ref (page_setup),
+				(GDestroyNotify)g_object_unref);
+
+	/* make it the default */
+	_gedit_app_set_default_page_setup (gedit_app_get_default (),
+					   page_setup);
+}
+
+static void
 done_printing_cb (GeditPrintJob       *job,
 		  GeditPrintJobResult  result,
 		  const GError        *error,
@@ -2324,38 +2364,9 @@ done_printing_cb (GeditPrintJob       *job,
 
 	// TODO: check status and error
 
-	/* Save the print settings and the page setup */ 
 	if (result ==  GEDIT_PRINT_JOB_RESULT_OK)
 	{
-		GeditDocument *doc;
-		GtkPrintSettings *settings;
-		GtkPageSetup *page_setup;
-
-		doc = gedit_tab_get_document (tab);
-
-		settings = gedit_print_job_get_print_settings (job);
-
-		/* remember settings for this document */
-		g_object_set_data_full (G_OBJECT (doc),
-					GEDIT_PRINT_SETTINGS_KEY,
-					g_object_ref (settings),
-					(GDestroyNotify)g_object_unref);
-
-		/* make them the default */
-		_gedit_app_set_default_print_settings (gedit_app_get_default (),
-						       settings);
-
-		page_setup = gedit_print_job_get_page_setup (job);
-
-		/* remember page setup for this document */
-		g_object_set_data_full (G_OBJECT (doc),
-					GEDIT_PAGE_SETUP_KEY,
-					g_object_ref (page_setup),
-					(GDestroyNotify)g_object_unref);
-
-		/* make it the default */
-		_gedit_app_set_default_page_setup (gedit_app_get_default (),
-						   page_setup);
+		store_print_settings (tab, job);
 	}
 
 #if 0
