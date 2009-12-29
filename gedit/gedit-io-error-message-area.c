@@ -118,10 +118,10 @@ info_bar_add_stock_button_with_text (GtkInfoBar  *infobar,
 #endif
 
 static void
-set_message_area_text_and_icon (GtkWidget        *message_area,
-				const gchar      *icon_stock_id,
-				const gchar      *primary_text,
-				const gchar      *secondary_text)
+set_message_area_text_and_icon (GtkWidget   *message_area,
+				const gchar *icon_stock_id,
+				const gchar *primary_text,
+				const gchar *secondary_text)
 {
 	GtkWidget *hbox_content;
 	GtkWidget *image;
@@ -132,21 +132,17 @@ set_message_area_text_and_icon (GtkWidget        *message_area,
 	GtkWidget *secondary_label;
 
 	hbox_content = gtk_hbox_new (FALSE, 8);
-	gtk_widget_show (hbox_content);
 
 	image = gtk_image_new_from_stock (icon_stock_id, GTK_ICON_SIZE_DIALOG);
-	gtk_widget_show (image);
 	gtk_box_pack_start (GTK_BOX (hbox_content), image, FALSE, FALSE, 0);
 	gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0);
 
 	vbox = gtk_vbox_new (FALSE, 6);
-	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (hbox_content), vbox, TRUE, TRUE, 0);
 
 	primary_markup = g_strdup_printf ("<b>%s</b>", primary_text);
 	primary_label = gtk_label_new (primary_markup);
 	g_free (primary_markup);
-	gtk_widget_show (primary_label);
 	gtk_box_pack_start (GTK_BOX (vbox), primary_label, TRUE, TRUE, 0);
 	gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
 	gtk_label_set_line_wrap (GTK_LABEL (primary_label), TRUE);
@@ -154,13 +150,12 @@ set_message_area_text_and_icon (GtkWidget        *message_area,
 	GTK_WIDGET_SET_FLAGS (primary_label, GTK_CAN_FOCUS);
 	gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
 
-  	if (secondary_text != NULL)
-  	{
-  		secondary_markup = g_strdup_printf ("<small>%s</small>",
-  						    secondary_text);
+	if (secondary_text != NULL)
+	{
+		secondary_markup = g_strdup_printf ("<small>%s</small>",
+						    secondary_text);
 		secondary_label = gtk_label_new (secondary_markup);
 		g_free (secondary_markup);
-		gtk_widget_show (secondary_label);
 		gtk_box_pack_start (GTK_BOX (vbox), secondary_label, TRUE, TRUE, 0);
 		GTK_WIDGET_SET_FLAGS (secondary_label, GTK_CAN_FOCUS);
 		gtk_label_set_use_markup (GTK_LABEL (secondary_label), TRUE);
@@ -169,6 +164,7 @@ set_message_area_text_and_icon (GtkWidget        *message_area,
 		gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
 	}
 
+	gtk_widget_show_all (hbox_content);
 	set_contents (message_area, hbox_content);
 }
 
@@ -224,7 +220,7 @@ parse_gio_error (gint          code,
 
 			if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
 			{
-	  			scheme_markup = g_markup_printf_escaped ("<i>%s:</i>", scheme_string);
+				scheme_markup = g_markup_printf_escaped ("<i>%s:</i>", scheme_string);
 
 				/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
 				*message_details = g_strdup_printf (_("gedit cannot handle %s locations."),
@@ -287,9 +283,9 @@ parse_gio_error (gint          code,
 					/* Translators: %s is a host name */
 					*message_details = g_strdup_printf (
 						_("Host %s could not be found. "
-	        		  	  	"Please check that your proxy settings "
-				  	  	"are correct and try again."),
-					  	host_markup);
+						"Please check that your proxy settings "
+						"are correct and try again."),
+						host_markup);
 
 					g_free (host_markup);
 				}
@@ -314,12 +310,12 @@ parse_gio_error (gint          code,
 	case G_IO_ERROR_TIMED_OUT:
 		*message_details = g_strdup (_("Connection timed out. Please try again."));
 		break;
-	
+
 	default:
 		ret = FALSE;
 		break;
 	}
-	
+
 	return ret;
 }
 
@@ -331,18 +327,18 @@ parse_gedit_error (gint          code,
 	           const gchar  *uri_for_display)
 {
 	gboolean ret = TRUE;
-	
+
 	switch (code)
 	{
 	case GEDIT_DOCUMENT_ERROR_TOO_BIG:
 		*message_details = g_strdup (_("The file is too big."));
 		break;
-		
+
 	default:
 		ret = FALSE;
 		break;
 	}
-	
+
 	return ret;
 }
 
@@ -354,7 +350,7 @@ parse_error (const GError *error,
 	     const gchar  *uri_for_display)
 {
 	gboolean ret = FALSE;
-	
+
 	if (error->domain == G_IO_ERROR)
 	{
 		ret = parse_gio_error (error->code, 
@@ -367,9 +363,9 @@ parse_error (const GError *error,
 	{
 		ret = parse_gedit_error (error->code,
 					 error_message, 
-				         message_details,
-  				         uri,
-				         uri_for_display);
+					 message_details,
+					 uri,
+					 uri_for_display);
 	}
 	
 	if (!ret)
@@ -388,8 +384,8 @@ gedit_io_loading_error_message_area_new (const gchar  *uri,
 	gchar *error_message = NULL;
 	gchar *message_details = NULL;
 	gchar *full_formatted_uri;
-       	gchar *uri_for_display;
-       	gchar *temp_uri_for_display;
+	gchar *uri_for_display;
+	gchar *temp_uri_for_display;
 	GtkWidget *message_area;
 
 	g_return_val_if_fail (uri != NULL, NULL);
@@ -459,8 +455,8 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 	gchar *error_message = NULL;
 	gchar *message_details = NULL;
 	gchar *full_formatted_uri;
-       	gchar *uri_for_display;
-       	gchar *temp_uri_for_display;
+	gchar *uri_for_display;
+	gchar *temp_uri_for_display;
 	GtkWidget *message_area;
 
 	g_return_val_if_fail (uri != NULL, NULL);
@@ -512,7 +508,7 @@ create_option_menu (GtkWidget *message_area, GtkWidget *vbox)
 	GtkWidget *label;
 	GtkWidget *menu;
 	gchar *label_markup;
-	
+
 	hbox = gtk_hbox_new (FALSE, 6);
 
 	label_markup = g_strdup_printf ("<small>%s</small>",
@@ -524,22 +520,21 @@ create_option_menu (GtkWidget *message_area, GtkWidget *vbox)
 	g_object_set_data (G_OBJECT (message_area), 
 			   "gedit-message-area-encoding-menu", 
 			   menu);
-	
-	gtk_label_set_mnemonic_widget (GTK_LABEL (label), menu);				       		
-	gtk_box_pack_start (GTK_BOX (hbox), 
+
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), menu);
+	gtk_box_pack_start (GTK_BOX (hbox),
 			    label,
 			    FALSE,
 			    FALSE,
 			    0);
 
-	gtk_box_pack_end (GTK_BOX (hbox), 
-			  menu,
-			  TRUE,
-			  TRUE,
-			  0);
+	gtk_box_pack_start (GTK_BOX (hbox),
+			    menu,
+			    FALSE,
+			    FALSE,
+			    0);
 
 	gtk_widget_show_all (hbox);
-
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
 }
 
@@ -581,35 +576,30 @@ create_conversion_error_message_area (const gchar *primary_text,
 #endif
 
 	hbox_content = gtk_hbox_new (FALSE, 8);
-	gtk_widget_show (hbox_content);				
-	
+
 	image = gtk_image_new_from_stock ("gtk-dialog-error", GTK_ICON_SIZE_DIALOG);
-	gtk_widget_show (image);
 	gtk_box_pack_start (GTK_BOX (hbox_content), image, FALSE, FALSE, 0);
 	gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0);
   
 	vbox = gtk_vbox_new (FALSE, 6);
-	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (hbox_content), vbox, TRUE, TRUE, 0);
 	
 	primary_markup = g_strdup_printf ("<b>%s</b>", primary_text);
 	primary_label = gtk_label_new (primary_markup);
 	g_free (primary_markup);
-	gtk_widget_show (primary_label);
 	gtk_box_pack_start (GTK_BOX (vbox), primary_label, TRUE, TRUE, 0);
 	gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
 	gtk_label_set_line_wrap (GTK_LABEL (primary_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (primary_label), 0, 0.5);
 	GTK_WIDGET_SET_FLAGS (primary_label, GTK_CAN_FOCUS);
 	gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
-  
-  	if (secondary_text != NULL)
-  	{
-  		secondary_markup = g_strdup_printf ("<small>%s</small>",
-  						    secondary_text);
+
+	if (secondary_text != NULL)
+	{
+		secondary_markup = g_strdup_printf ("<small>%s</small>",
+						    secondary_text);
 		secondary_label = gtk_label_new (secondary_markup);
 		g_free (secondary_markup);
-		gtk_widget_show (secondary_label);
 		gtk_box_pack_start (GTK_BOX (vbox), secondary_label, TRUE, TRUE, 0);
 		GTK_WIDGET_SET_FLAGS (secondary_label, GTK_CAN_FOCUS);
 		gtk_label_set_use_markup (GTK_LABEL (secondary_label), TRUE);
@@ -619,7 +609,7 @@ create_conversion_error_message_area (const gchar *primary_text,
 	}
 
 	create_option_menu (message_area, vbox);
-
+	gtk_widget_show_all (hbox_content);
 	set_contents (message_area, hbox_content);
 
 	return message_area;
@@ -635,8 +625,8 @@ gedit_conversion_error_while_loading_message_area_new (
 	gchar *message_details = NULL;
 	gchar *full_formatted_uri;
 	gchar *encoding_name;
-       	gchar *uri_for_display;
-       	gchar *temp_uri_for_display;
+	gchar *uri_for_display;
+	gchar *temp_uri_for_display;
 	GtkWidget *message_area;
 	
 	g_return_val_if_fail (uri != NULL, NULL);
@@ -703,8 +693,8 @@ gedit_conversion_error_while_saving_message_area_new (
 	gchar *message_details = NULL;
 	gchar *full_formatted_uri;
 	gchar *encoding_name;
-       	gchar *uri_for_display;
-       	gchar *temp_uri_for_display;
+	gchar *uri_for_display;
+	gchar *temp_uri_for_display;
 	GtkWidget *message_area;
 	
 	g_return_val_if_fail (uri != NULL, NULL);
@@ -779,8 +769,8 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
 	gchar *primary_text;
 	const gchar *secondary_text;
 	gchar *full_formatted_uri;
-       	gchar *uri_for_display;
-       	gchar *temp_uri_for_display;
+	gchar *uri_for_display;
+	gchar *temp_uri_for_display;
 	
 	full_formatted_uri = gedit_utils_uri_for_display (uri);
 
@@ -820,15 +810,12 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
 #endif
 
 	hbox_content = gtk_hbox_new (FALSE, 8);
-	gtk_widget_show (hbox_content);				
-	
+
 	image = gtk_image_new_from_stock ("gtk-dialog-warning", GTK_ICON_SIZE_DIALOG);
-	gtk_widget_show (image);
 	gtk_box_pack_start (GTK_BOX (hbox_content), image, FALSE, FALSE, 0);
 	gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0);
-  
+
 	vbox = gtk_vbox_new (FALSE, 6);
-	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (hbox_content), vbox, TRUE, TRUE, 0);
 
 	primary_text = g_strdup_printf (_("This file (%s) is already open in another gedit window."), uri_for_display);
@@ -838,7 +825,6 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
 	g_free (primary_text);
 	primary_label = gtk_label_new (primary_markup);
 	g_free (primary_markup);
-	gtk_widget_show (primary_label);
 	gtk_box_pack_start (GTK_BOX (vbox), primary_label, TRUE, TRUE, 0);
 	gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
 	gtk_label_set_line_wrap (GTK_LABEL (primary_label), TRUE);
@@ -848,11 +834,10 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
 
 	secondary_text = _("gedit opened this instance of the file in a non-editable way. "
 			   "Do you want to edit it anyway?");
-  	secondary_markup = g_strdup_printf ("<small>%s</small>",
-  					    secondary_text);
+	secondary_markup = g_strdup_printf ("<small>%s</small>",
+					    secondary_text);
 	secondary_label = gtk_label_new (secondary_markup);
 	g_free (secondary_markup);
-	gtk_widget_show (secondary_label);
 	gtk_box_pack_start (GTK_BOX (vbox), secondary_label, TRUE, TRUE, 0);
 	GTK_WIDGET_SET_FLAGS (secondary_label, GTK_CAN_FOCUS);
 	gtk_label_set_use_markup (GTK_LABEL (secondary_label), TRUE);
@@ -860,6 +845,7 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
 	gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
 
+	gtk_widget_show_all (hbox_content);
 	set_contents (message_area, hbox_content);
 
 	return message_area;
@@ -926,15 +912,12 @@ gedit_externally_modified_saving_error_message_area_new (
 #endif
 
 	hbox_content = gtk_hbox_new (FALSE, 8);
-	gtk_widget_show (hbox_content);				
 
 	image = gtk_image_new_from_stock ("gtk-dialog-warning", GTK_ICON_SIZE_DIALOG);
-	gtk_widget_show (image);
 	gtk_box_pack_start (GTK_BOX (hbox_content), image, FALSE, FALSE, 0);
 	gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0);
 
 	vbox = gtk_vbox_new (FALSE, 6);
-	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (hbox_content), vbox, TRUE, TRUE, 0);
 
 	// FIXME: review this message, it's not clear since for the user the "modification"
@@ -948,7 +931,6 @@ gedit_externally_modified_saving_error_message_area_new (
 	g_free (primary_text);
 	primary_label = gtk_label_new (primary_markup);
 	g_free (primary_markup);
-	gtk_widget_show (primary_label);
 	gtk_box_pack_start (GTK_BOX (vbox), primary_label, TRUE, TRUE, 0);
 	gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
 	gtk_label_set_line_wrap (GTK_LABEL (primary_label), TRUE);
@@ -957,11 +939,10 @@ gedit_externally_modified_saving_error_message_area_new (
 	gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
 
 	secondary_text = _("If you save it, all the external changes could be lost. Save it anyway?");
-  	secondary_markup = g_strdup_printf ("<small>%s</small>",
+	secondary_markup = g_strdup_printf ("<small>%s</small>",
 					    secondary_text);
 	secondary_label = gtk_label_new (secondary_markup);
 	g_free (secondary_markup);
-	gtk_widget_show (secondary_label);
 	gtk_box_pack_start (GTK_BOX (vbox), secondary_label, TRUE, TRUE, 0);
 	GTK_WIDGET_SET_FLAGS (secondary_label, GTK_CAN_FOCUS);
 	gtk_label_set_use_markup (GTK_LABEL (secondary_label), TRUE);
@@ -969,6 +950,7 @@ gedit_externally_modified_saving_error_message_area_new (
 	gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
 
+	gtk_widget_show_all (hbox_content);
 	set_contents (message_area, hbox_content);
 
 	return message_area;
@@ -1036,15 +1018,12 @@ gedit_no_backup_saving_error_message_area_new (const gchar  *uri,
 #endif
 
 	hbox_content = gtk_hbox_new (FALSE, 8);
-	gtk_widget_show (hbox_content);
 
 	image = gtk_image_new_from_stock ("gtk-dialog-warning", GTK_ICON_SIZE_DIALOG);
-	gtk_widget_show (image);
 	gtk_box_pack_start (GTK_BOX (hbox_content), image, FALSE, FALSE, 0);
 	gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0);
 
 	vbox = gtk_vbox_new (FALSE, 6);
-	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (hbox_content), vbox, TRUE, TRUE, 0);
 
 	// FIXME: review this messages
@@ -1062,7 +1041,6 @@ gedit_no_backup_saving_error_message_area_new (const gchar  *uri,
 	g_free (primary_text);
 	primary_label = gtk_label_new (primary_markup);
 	g_free (primary_markup);
-	gtk_widget_show (primary_label);
 	gtk_box_pack_start (GTK_BOX (vbox), primary_label, TRUE, TRUE, 0);
 	gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
 	gtk_label_set_line_wrap (GTK_LABEL (primary_label), TRUE);
@@ -1073,11 +1051,10 @@ gedit_no_backup_saving_error_message_area_new (const gchar  *uri,
 	secondary_text = _("gedit could not backup the old copy of the file before saving the new one. "
 			   "You can ignore this warning and save the file anyway, but if an error "
 			   "occurs while saving, you could lose the old copy of the file. Save anyway?");
-  	secondary_markup = g_strdup_printf ("<small>%s</small>",
+	secondary_markup = g_strdup_printf ("<small>%s</small>",
 					    secondary_text);
 	secondary_label = gtk_label_new (secondary_markup);
 	g_free (secondary_markup);
-	gtk_widget_show (secondary_label);
 	gtk_box_pack_start (GTK_BOX (vbox), secondary_label, TRUE, TRUE, 0);
 	GTK_WIDGET_SET_FLAGS (secondary_label, GTK_CAN_FOCUS);
 	gtk_label_set_use_markup (GTK_LABEL (secondary_label), TRUE);
@@ -1085,6 +1062,7 @@ gedit_no_backup_saving_error_message_area_new (const gchar  *uri,
 	gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
 
+	gtk_widget_show_all (hbox_content);
 	set_contents (message_area, hbox_content);
 
 	return message_area;
@@ -1099,8 +1077,8 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 	gchar *full_formatted_uri;
 	gchar *scheme_string;
 	gchar *scheme_markup;
-       	gchar *uri_for_display;
-       	gchar *temp_uri_for_display;
+	gchar *uri_for_display;
+	gchar *temp_uri_for_display;
 	GtkWidget *message_area;
 
 	g_return_val_if_fail (uri != NULL, NULL);
@@ -1115,7 +1093,7 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 	 * white space then the text-wrapping code is too stupid to wrap it.
 	 */
 	temp_uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
-								MAX_URI_IN_DIALOG_LENGTH);								
+								MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
 
 	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
@@ -1214,9 +1192,9 @@ GtkWidget *
 gedit_externally_modified_message_area_new (const gchar *uri,
 					    gboolean     document_modified)
 {
-       	gchar *full_formatted_uri;
-       	gchar *uri_for_display;
-       	gchar *temp_uri_for_display;
+	gchar *full_formatted_uri;
+	gchar *uri_for_display;
+	gchar *temp_uri_for_display;
 	const gchar *primary_text;
 	const gchar *secondary_text;
 	GtkWidget *message_area;
@@ -1230,7 +1208,7 @@ gedit_externally_modified_message_area_new (const gchar *uri,
 	 * white space then the text-wrapping code is too stupid to wrap it.
 	 */
 	temp_uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
-								MAX_URI_IN_DIALOG_LENGTH);								
+								MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
 
 	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
