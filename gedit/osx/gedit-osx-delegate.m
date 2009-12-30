@@ -4,6 +4,7 @@
 #import <Foundation/NSData.h>
 #include <glib.h>
 #include <gedit/gedit-app.h>
+#include <gedit/gedit-commands.h>
 
 @implementation GeditOSXDelegate
 -(id)init
