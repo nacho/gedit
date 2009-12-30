@@ -694,6 +694,10 @@ main (int argc, char *argv[])
 	gedit_debug_message (DEBUG_APP, "Init session manager");		
 	gedit_session_init ();
 
+#ifdef OS_OSX
+	ige_mac_menu_set_global_key_handler_enabled (FALSE);
+#endif
+
 	if (gedit_session_is_restored ())
 		restored = gedit_session_load ();
 

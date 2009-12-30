@@ -3858,6 +3858,7 @@ setup_mac_menu (GeditWindow *window)
 	ige_mac_menu_set_preferences_menu_item (ui_manager_menu_item (window->priv->manager, "/ui/MenuBar/EditMenu/EditPreferencesMenu"));
 	
 	add_mac_root_menu (window);
+	ige_mac_menu_connect_window_key_handler (GTK_WINDOW (window));
 }
 #endif
 
