@@ -35,6 +35,10 @@
 #include "gedit-prefs-manager.h"
 #include "gedit-message-bus.h"
 
+#ifdef OS_OSX
+#include <ige-mac-integration.h>
+#endif
+
 G_BEGIN_DECLS
 
 /* WindowPrivate is in a separate .h so that we can access it from gedit-commands */
@@ -109,6 +113,10 @@ struct _GeditWindowPrivate
 
 	gboolean        removing_tabs : 1;
 	gboolean        dispose_has_run : 1;
+
+#ifdef OS_OSX
+	IgeMacMenuGroup *mac_menu_group;
+#endif
 };
 
 G_END_DECLS

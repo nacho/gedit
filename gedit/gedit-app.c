@@ -375,57 +375,10 @@ gedit_app_get_default (void)
 	return app;
 }
 
-#ifdef OS_OSX
-static GtkMenuItem *
-ui_manager_menu_item (GtkUIManager *uimanager,
-                      const gchar  *path)
-{
-	return GTK_MENU_ITEM (gtk_ui_manager_get_widget (uimanager, path));
-}
-
-static void
-osx_switch_menubar (GeditApp    *app,
-                    GeditWindow *window)
-{
-	GtkWidget *menubar;
-
-	if (window != NULL && app->priv->active_window != window)
-	{
-		GtkUIManager *uimanager;
-		IgeMacMenuGroup *group;
-		GtkAction *action;
-
-		menubar = _gedit_window_get_menu_bar (window);
-		uimanager = gedit_window_get_ui_manager (window);
-
-		gtk_widget_hide (menubar);
-		action = gtk_ui_manager_get_action (uimanager, "/ui/MenuBar/HelpMenu/HelpAboutMenu");
-
-		gtk_action_set_label (action, _("About gedit"));
-
-		ige_mac_menu_set_menu_bar (GTK_MENU_SHELL (menubar));
-
-		ige_mac_menu_set_quit_menu_item (ui_manager_menu_item (uimanager, "/ui/MenuBar/FileMenu/FileQuitMenu"));
-
-		group = ige_mac_menu_add_app_menu_group ();
-
-		ige_mac_menu_add_app_menu_item (group,
-		                                ui_manager_menu_item (uimanager, "/ui/MenuBar/HelpMenu/HelpAboutMenu"),
-		                                NULL);
-
-		ige_mac_menu_set_preferences_menu_item (ui_manager_menu_item (uimanager, "/ui/MenuBar/EditMenu/EditPreferencesMenu"));
-	}
-}
-#endif
-
 static void
 set_active_window (GeditApp    *app,
                    GeditWindow *window)
 {
-#ifdef OS_OSX
-	osx_switch_menubar (app, window);
-#endif
-
 	app->priv->active_window = window;
 }
 
@@ -490,10 +443,8 @@ window_destroy (GeditWindow *window,
 #ifdef OS_OSX
 		if (!GPOINTER_TO_INT (g_object_get_data (G_OBJECT (window), "gedit-is-quitting-all")))
 		{
-			GeditWindow *hidden;
-
-			/* create new hidden window */
-			hidden = gedit_app_create_window (app, NULL);
+			/* Create hidden proxy window on OS X to handle the menu */
+			gedit_app_create_window (app, NULL);
 			return;
 		}
 #endif
@@ -523,7 +474,7 @@ gen_role (void)
 				serial++,
 				g_get_host_name ());
 }
-	     
+
 static GeditWindow *
 gedit_app_create_window_real (GeditApp    *app,
 			      gboolean     set_geometry,
@@ -605,10 +556,6 @@ gedit_app_create_window_real (GeditApp    *app,
 			  "destroy",
 			  G_CALLBACK (window_destroy),
 			  app);
-
-#ifdef OS_OSX
-	gtk_widget_hide (_gedit_window_get_menu_bar (window));
-#endif
 
 	return window;
 }
