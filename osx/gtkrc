@@ -4,6 +4,7 @@
 gtk-color-scheme = "base_color:#ffffff\nfg_color:#000000\ntooltip_fg_color:#000000\nselected_bg_color:#86ABD9\nselected_fg_color:#ffffff\ntext_color:#1A1A1A\nbg_color:#EDECEB\ntooltip_bg_color:#F5F5B5"
 
 gtk-icon-theme-name = "Tango"
+gtk-key-theme-name = "GeditOSX"
 
 gtk-toolbar-style = GTK_TOOLBAR_ICONS
 
@@ -426,29 +427,3 @@ widget_class "*<EelEditableLabel>" style "fg_is_text_color_workaround"
 
 # See the documentation of the style.
 widget_class "EShellWindow.GtkVBox.BonoboDock.BonoboDockBand.BonoboDockItem*" style "evo_new_button_workaround"
-
-# Custom bindings
-binding "gedit-view-mac-bindings"
-{
-	bind "<super>d" {
-		"delete-from-cursor" (GTK_DELETE_PARAGRAPHS, 1)
-	}
-	bind "<super>k" {
-		"start-interactive-search" ()
-	}
-	bind "<super>i" {
-		"start-interactive-goto-line" ()
-	}
-	bind "<super><shift>k" {
-		"reset-searched-text" ()
-	}
-
- 	unbind "<ctrl>d"
-
-# Unbinding these somehow makes the others not work, very strange
-#	unbind "<ctrl>k"
-#	unbind "<ctrl>i"
-#	unbind "<ctrl><shift>k"
-}
-
-widget "*GeditView" binding "gedit-view-mac-bindings"
