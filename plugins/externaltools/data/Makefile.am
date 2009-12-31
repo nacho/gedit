@@ -1,15 +1,45 @@
 TOOL_MERGE=$(top_srcdir)/plugins/externaltools/scripts/gedit-tool-merge.pl
 
 tools_in_files = \
-	open-terminal-here.tool.in \
 	build.tool.in \
-	remove-trailing-spaces.tool.in \
+	remove-trailing-spaces.tool.in
+
+tools_in_linux = \
+	open-terminal-here.tool.in \
 	run-command.tool.in
 
-desktop_in_files = $(tools_in_files:.tool.in=.desktop.in)
-desktop_files    = $(tools_in_files:.tool.in=.desktop)
-tools_SCRIPTS    = $(tools_in_files:.tool.in=)
+tools_in_osx = \
+	open-terminal-here-osx.tool.in
+
+tools_in_win32 =
+
+install_tools_in_files = $(tools_in_files)
+
+if PLATFORM_OSX
+install_tools_in_files += $(tools_in_osx)
+else
+if PLATFORM_WIN32
+install_tools_in_files += $(tools_in_win32) 
+else
+install_tools_in_files += $(tools_in_linux)
+endif
+endif
+
+desktop_in_files = $(install_tools_in_files:.tool.in=.desktop.in)
+desktop_files    = $(install_tools_in_files:.tool.in=.desktop)
+
+tools_SCRIPTS = $(install_tools_in_files:.tool.in=)
 toolsdir = $(GEDIT_PLUGINS_DATA_DIR)/externaltools/tools
+
+all_tools_in_files = \
+	$(tools_in_files) \
+	$(tools_in_linux) \
+	$(tools_in_osx) \
+	$(tools_in_win32)
+
+all_desktop_in_files = $(all_tools_in_files:.tool.in=.desktop.in)
+all_desktop_files = $(all_tools_in_files:.tool.in=.desktop)
+all_tools_files = $(all_tools_in_files:.tool.in=)
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -20,16 +50,16 @@ $(tools_SCRIPTS): %: %.tool.in %.desktop $(TOOL_MERGE)
 	chmod 755 $@
 
 EXTRA_DIST = \
-	$(desktop_in_files) \
-	$(tools_in_files)
+	$(all_desktop_in_files) \
+	$(all_tools_in_files)
 
 CLEANFILES = \
-	$(desktop_files) \
-	$(tools_SCRIPTS)
+	$(all_desktop_files) \
+	$(all_tools_files)
 
 DISTCLEANFILES = \
-	$(desktop_files) \
-	$(tools_SCRIPTS)
+	$(all_desktop_files) \
+	$(all_tools_files)
 
 
 -include $(top_srcdir)/git.mk
