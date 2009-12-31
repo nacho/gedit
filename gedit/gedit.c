@@ -73,6 +73,7 @@
 
 #ifdef OS_OSX
 #include <ige-mac-dock.h>
+#include <ige-mac-integration.h>
 #include "osx/gedit-osx.h"
 #endif
 
