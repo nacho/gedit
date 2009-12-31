@@ -542,7 +542,9 @@ plugins/taglist/Makefile
 plugins/time/Makefile
 po/Makefile.in
 win32/gedit.iss
-win32/Makefile])
+win32/Makefile
+osx/Info.plist
+osx/Makefile])
 
 AC_OUTPUT
 
