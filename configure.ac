@@ -119,12 +119,6 @@ AM_CONDITIONAL(OS_OSX, test "$os_osx" = "yes")
 
 if test "$platform_osx" = "yes"; then
 	AC_DEFINE([PLATFORM_OSX],[1],[Defined if platform is Mac OSX])
-
-	DEFAULT_FONT="Monaco 12"
-	DEFAULT_PRINT_FONT="Monaco 10"
-else
-	DEFAULT_FONT="Monospace 12"
-	DEFAULT_PRINT_FONT="Monospace 9"
 fi
 
 AC_SUBST(DEFAULT_FONT)
