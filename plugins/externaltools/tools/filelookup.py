@@ -112,9 +112,9 @@ class OpenDocumentRelPathFileLookupProvider(FileLookupProvider):
 
         for doc in gedit.app_get_default().get_documents():
             if doc.is_local():
-                uri = doc.get_uri()
-                if uri:
-                    rel_path = gio.File(doc.get_uri()).get_parent().get_path()
+                location = doc.get_location()
+                if location:
+                    rel_path = location.get_parent().get_path()
                     joined_path = os.path.join(rel_path, path)
                     if os.path.isfile(joined_path):
                         return gio.File(joined_path)
@@ -137,10 +137,9 @@ class OpenDocumentFileLookupProvider(FileLookupProvider):
 
         for doc in gedit.app_get_default().get_documents():
             if doc.is_local():
-                uri = doc.get_uri()
-                if uri:
-                    if uri.endswith(path):
-                        return gio.File(doc.get_uri())
+                location = doc.get_location()
+                if location and location.get_uri().endswith(path):
+                    return location
         return None
 
 # ex:ts=4:et:
