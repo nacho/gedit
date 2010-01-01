@@ -39,6 +39,7 @@ gedit.c: gedit.defs gedit.override geditplugin.override geditmessage.override $(
 		--register $(PYGTK_DEFSDIR)/gdk-types.defs \
 		--register $(PYGTK_DEFSDIR)/gtk-types.defs \
 		--register $(PYGTK_DEFSDIR)/gtksourceview2.defs \
+		--register $(PYGOBJECT_DEFSDIR)/gio-types.defs \
 		--override $*.override \
 		--prefix py$* $(<F) ) > $@ 
 

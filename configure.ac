@@ -409,6 +409,10 @@ if test "x$have_python" != "xno"; then
 	PYGTK_DEFSDIR=`$PKG_CONFIG --variable=defsdir pygtk-2.0`
 	AC_MSG_RESULT([$PYGTK_DEFSDIR])
 
+	AC_MSG_CHECKING([for pygobject defs])
+	PYGOBJECT_DEFSDIR=`$PKG_CONFIG --variable=defsdir pygobject-2.0`
+	AC_MSG_RESULT([$PYGOBJECT_DEFSDIR])
+
 	AC_MSG_CHECKING([for pygtk codegen])
 	PYGTK_CODEGEN="$PYTHON `$PKG_CONFIG --variable=codegendir pygtk-2.0`/codegen.py"
 	AC_MSG_RESULT([$PYGTK_CODEGEN])
@@ -418,6 +422,7 @@ if test "x$have_python" != "xno"; then
 	AC_MSG_RESULT([$PYGTK_H2DEF])
 
 	AC_SUBST([PYGTK_DEFSDIR])
+	AC_SUBST([PYGOBJECT_DEFSDIR])
 	AC_SUBST([PYGTK_CODEGEN])
 	AC_SUBST([PYGTK_H2DEF])
 
