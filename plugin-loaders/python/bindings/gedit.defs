@@ -248,6 +248,12 @@
   (return-type "GeditDocument*")
 )
 
+(define-method get_location
+  (of-object "GeditDocument")
+  (c-name "gedit_document_get_location")
+  (return-type "GFile*")
+)
+
 (define-method get_uri
   (of-object "GeditDocument")
   (c-name "gedit_document_get_uri")
