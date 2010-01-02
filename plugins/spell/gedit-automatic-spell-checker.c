@@ -72,7 +72,14 @@ static void
 check_word (GeditAutomaticSpellChecker *spell, GtkTextIter *start, GtkTextIter *end) 
 {
 	gchar *word;
-	
+
+	if (gtk_source_buffer_iter_has_context_class (GTK_SOURCE_BUFFER (spell->doc),
+	                                              start,
+	                                              "no-spell-check"))
+	{
+		return;
+	}
+
 	word = gtk_text_buffer_get_text (GTK_TEXT_BUFFER (spell->doc), start, end, FALSE);
 
 	/*

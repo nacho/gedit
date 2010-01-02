@@ -409,6 +409,7 @@ goto_next_word (GeditDocument *doc)
 	GtkTextIter current_iter;
 	GtkTextIter old_current_iter;
 	GtkTextIter end_iter;
+	gboolean wasatend;
 
 	gedit_debug (DEBUG_PLUGINS);
 
@@ -422,13 +423,17 @@ goto_next_word (GeditDocument *doc)
 					  range->current_mark);
 	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end_iter);
 
-	if (gtk_text_iter_compare (&current_iter, &end_iter) >= 0)
-		return FALSE;
-
 	old_current_iter = current_iter;
 
-	gtk_text_iter_forward_word_ends (&current_iter, 2);
-	gtk_text_iter_backward_word_start (&current_iter);
+	do
+	{
+		gtk_text_iter_forward_word_ends (&current_iter, 2);
+		wasatend = gtk_text_iter_compare (&current_iter, &end_iter) >= 0;
+
+		gtk_text_iter_backward_word_start (&current_iter);
+	} while (gtk_source_buffer_iter_has_context_class (GTK_SOURCE_BUFFER (doc),
+		                                               &current_iter,
+		                                               "no-spell-check") && !wasatend);
 
 	if ((gtk_text_iter_compare (&old_current_iter, &current_iter) < 0) &&
 	    (gtk_text_iter_compare (&current_iter, &end_iter) < 0))
