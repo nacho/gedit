@@ -25,6 +25,7 @@
 #endif
 
 #include "gedit-spell-plugin.h"
+#include "gedit-spell-utils.h"
 
 #include <string.h> /* For strlen */
 
@@ -409,7 +410,6 @@ goto_next_word (GeditDocument *doc)
 	GtkTextIter current_iter;
 	GtkTextIter old_current_iter;
 	GtkTextIter end_iter;
-	gboolean wasatend;
 
 	gedit_debug (DEBUG_PLUGINS);
 
@@ -425,17 +425,11 @@ goto_next_word (GeditDocument *doc)
 
 	old_current_iter = current_iter;
 
-	do
-	{
-		gtk_text_iter_forward_word_ends (&current_iter, 2);
-		wasatend = gtk_text_iter_compare (&current_iter, &end_iter) >= 0;
+	gtk_text_iter_forward_word_ends (&current_iter, 2);
+	gtk_text_iter_backward_word_start (&current_iter);
 
-		gtk_text_iter_backward_word_start (&current_iter);
-	} while (gtk_source_buffer_iter_has_context_class (GTK_SOURCE_BUFFER (doc),
-		                                               &current_iter,
-		                                               "no-spell-check") && !wasatend);
-
-	if ((gtk_text_iter_compare (&old_current_iter, &current_iter) < 0) &&
+	if (gedit_spell_utils_skip_no_spell_check (&current_iter, &end_iter) &&
+	    (gtk_text_iter_compare (&old_current_iter, &current_iter) < 0) &&
 	    (gtk_text_iter_compare (&current_iter, &end_iter) < 0))
 	{
 		update_current (doc, gtk_text_iter_get_offset (&current_iter));

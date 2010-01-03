@@ -41,7 +41,7 @@
 #include <glib/gi18n.h>
 
 #include "gedit-automatic-spell-checker.h"
-
+#include "gedit-spell-utils.h"
 
 struct _GeditAutomaticSpellChecker {
 	GeditDocument		*doc;
@@ -72,13 +72,6 @@ static void
 check_word (GeditAutomaticSpellChecker *spell, GtkTextIter *start, GtkTextIter *end) 
 {
 	gchar *word;
-
-	if (gtk_source_buffer_iter_has_context_class (GTK_SOURCE_BUFFER (spell->doc),
-	                                              start,
-	                                              "no-spell-check"))
-	{
-		return;
-	}
 
 	word = gtk_text_buffer_get_text (GTK_TEXT_BUFFER (spell->doc), start, end, FALSE);
 
@@ -167,11 +160,12 @@ check_range (GeditAutomaticSpellChecker *spell,
 	{
 		gtk_text_iter_forward_word_end(&start);
 		gtk_text_iter_backward_word_start(&start);
-	}	
+	}
 
 	wstart = start;
 	
-	while (gtk_text_iter_compare (&wstart, &end) < 0) 
+	while (gedit_spell_utils_skip_no_spell_check (&wstart, &end) &&
+	       gtk_text_iter_compare (&wstart, &end) < 0) 
 	{
 		gboolean inword; 
 
