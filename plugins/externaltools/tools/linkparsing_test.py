@@ -18,13 +18,22 @@
 
 import unittest
 from linkparsing import LinkParser
-from linkparsing import GccLinkParserProvider
-from linkparsing import PythonLinkParserProvider
 
 class LinkParserTest(unittest.TestCase):
 
     def setUp(self):
         self.p = LinkParser()
+
+    def assert_link_count(self, links, expected_count):
+        self.assertEquals(len(links), expected_count, 'incorrect nr of links')
+
+    def assert_link(self, actual, path, line_nr):
+        self.assertEquals(actual.path, path, "incorrect path")
+        self.assertEquals(actual.line_nr, line_nr, "incorrect line nr")
+
+    def assert_link_text(self, text, link, link_text):
+        self.assertEquals(text[link.start:link.end], link_text,
+           "the expected link text does not match the text within the string")
 
     def test_parse_gcc_simple_test_with_real_output(self):
         gcc_output = """
@@ -38,35 +47,32 @@ test.c:13: error: too few arguments to function 'f'
 test.c:14: error: expected ';' before 'return'
 """
         links = self.p.parse(gcc_output)
-        self.assertEquals(len(links), 6, 'incorrect nr of links')
+        self.assert_link_count(links, 6)
         lnk = links[2]
-        self.assertEquals(lnk.path, 'test.c', 'incorrect path')
-        self.assertEquals(lnk.line_nr, 11, 'incorrect line nr')
-        self.assertEquals(gcc_output[lnk.start:lnk.end], 'test.c:11',
-                            'the link positions are incorrect')
+        self.assert_link(lnk, "test.c", 11)
+        self.assert_link_text(gcc_output, lnk, "test.c:11")
 
     def test_parse_gcc_one_line(self):
-        links = self.p.parse("/tmp/myfile.c:1212: error: ...")
-        self.assertEquals(len(links), 1, 'incorrect nr of links')
+        line = "/tmp/myfile.c:1212: error: ..."
+        links = self.p.parse(line)
+        self.assert_link_count(links, 1)
         lnk = links[0]
-        self.assertEquals(lnk.path, '/tmp/myfile.c', 'incorrect path')
-        self.assertEquals(lnk.line_nr, 1212, 'incorrect line nr')
-        self.assertEquals(lnk.start, 0, 'incorrect start point')
-        self.assertEquals(lnk.end, 18, 'incorrect end point')
+        self.assert_link(lnk, "/tmp/myfile.c", 1212)
+        self.assert_link_text(line, lnk, "/tmp/myfile.c:1212")
 
     def test_parse_gcc_empty_string(self):
         links = self.p.parse("")
-        self.assertEquals(len(links), 0, 'incorrect nr of links')
+        self.assert_link_count(links, 0)
 
     def test_parse_gcc_no_files_in_text(self):
         links = self.p.parse("no file links in this string")
-        self.assertEquals(len(links), 0, 'incorrect nr of links')
+        self.assert_link_count(links, 0)
 
     def test_parse_gcc_none_as_argument(self):
         self.assertRaises(ValueError, self.p.parse, None)
 
     def test_parse_python_simple_test_with_real_output(self):
-        python_output = """
+        output = """
 Traceback (most recent call last):
   File "test.py", line 10, in <module>
     err()
@@ -76,30 +82,88 @@ Traceback (most recent call last):
     int('xxx')
 ValueError: invalid literal for int() with base 10: 'xxx'
 """
-        links = self.p.parse(python_output)
-        self.assertEquals(len(links), 3, 'incorrect nr of links')
+        links = self.p.parse(output)
+        self.assert_link_count(links, 3)
         lnk = links[2]
-        self.assertEquals(lnk.path, 'test.py', 'incorrect path')
-        self.assertEquals(lnk.line_nr, 4, 'incorrect line nr')
-        link_string = python_output[lnk.start:lnk.end]
-        self.assertEquals(link_string, '"test.py", line 4',
-                            'the link positions are incorrect')
-        lnk = links[1]
-        self.assertEquals(lnk.path, 'test.py', 'incorrect path')
-        self.assertEquals(lnk.line_nr, 7, 'incorrect line nr')
-        link_string = python_output[lnk.start:lnk.end]
-        self.assertEquals(link_string, '"test.py", line 7',
-                            'the link positions are incorrect')
+        self.assert_link(lnk, "test.py", 4)
+        self.assert_link_text(output, lnk, '"test.py", line 4')
 
     def test_parse_python_one_line(self):
-        links = self.p.parse("  File \"test.py\", line 10, in <module>")
-        self.assertEquals(len(links), 1, 'incorrect nr of links')
+        line = "  File \"test.py\", line 10, in <module>"
+        links = self.p.parse(line)
+        self.assert_link_count(links, 1)
         lnk = links[0]
-        self.assertEquals(lnk.path, 'test.py', 'incorrect path')
-        self.assertEquals(lnk.line_nr, 10, 'incorrect line nr')
-        self.assertEquals(lnk.start, 7, 'incorrect start point')
-        self.assertEquals(lnk.end, 25, 'incorrect end point')
-        
+        self.assert_link(lnk, "test.py", 10)
+        self.assert_link_text(line, lnk, '"test.py", line 10')
+
+    def test_parse_javac_one_line(self):
+        line = "/tmp/Test.java:10: incompatible types"
+        links = self.p.parse(line)
+        self.assert_link_count(links, 1)
+        lnk = links[0]
+        self.assert_link(lnk, "/tmp/Test.java", 10)
+        self.assert_link_text(line, lnk, '/tmp/Test.java:10')
+
+    def test_parse_valac_simple_test_with_real_output(self):
+        output = """
+Test.vala:14.13-14.21: error: Assignment: Cannot convert from `string' to `int'
+        int a = "xxx";
+            ^^^^^^^^^
+"""
+        links = self.p.parse(output)
+        self.assert_link_count(links, 1)
+        lnk = links[0]
+        self.assert_link(lnk, "Test.vala", 14)
+        self.assert_link_text(output, lnk, 'Test.vala:14.13-14.21')
+
+    def test_parse_ruby_simple_test_with_real_output(self):
+        output = """
+test.rb:5: undefined method `fake_method' for main:Object (NoMethodError)
+	from test.rb:3:in `each'
+	from test.rb:3
+"""
+        links = self.p.parse(output)
+        self.assert_link_count(links, 3)
+        lnk = links[0]
+        self.assert_link(lnk, "test.rb", 5)
+        self.assert_link_text(output, lnk, 'test.rb:5')
+        lnk = links[1]
+        self.assert_link(lnk, "test.rb", 3)
+        self.assert_link_text(output, lnk, 'test.rb:3')
+
+
+    def test_parse_scalac_one_line(self):
+        line = "Test.scala:7: error: not found: value fakeMethod"
+        links = self.p.parse(line)
+        self.assert_link_count(links, 1)
+        lnk = links[0]
+        self.assert_link(lnk, "Test.scala", 7)
+        self.assert_link_text(line, lnk, 'Test.scala:7')
+
+    def test_parse_go_6g_one_line(self):
+        line = "test.go:9: undefined: FakeMethod"
+        links = self.p.parse(line)
+        self.assert_link_count(links, 1)
+        lnk = links[0]
+        self.assert_link(lnk, "test.go", 9)
+        self.assert_link_text(line, lnk, 'test.go:9')
+
+    def test_parse_perl_one_line(self):
+        line = 'syntax error at test.pl line 889, near "$fake_var'
+        links = self.p.parse(line)
+        self.assert_link_count(links, 1)
+        lnk = links[0]
+        self.assert_link(lnk, "test.pl", 889)
+        self.assert_link_text(line, lnk, 'test.pl line 889')
+
+    def test_parse_mcs_one_line(self):
+        line = 'Test.cs(12,7): error CS0103: The name `fakeMethod'
+        links = self.p.parse(line)
+        self.assert_link_count(links, 1)
+        lnk = links[0]
+        self.assert_link(lnk, "Test.cs", 12)
+        self.assert_link_text(line, lnk, 'Test.cs(12,7)')
+
 if __name__ == '__main__':
     unittest.main()
 

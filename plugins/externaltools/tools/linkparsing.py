@@ -21,7 +21,9 @@ import re
 class Link:
     """
     This class represents a file link from within a string given by the
-    output of some software tool.
+    output of some software tool. A link contains a reference to a file, the
+    line number within the file and the boundaries within the given output
+    string that should be marked as a link.
     """
 
     def __init__(self, path, line_nr, start, end):
@@ -37,28 +39,47 @@ class Link:
         self.end     = end
 
     def __repr__(self):
-        return "%s[%s](%s:%s)" % (self.path, self.line_nr, 
+        return "%s[%s](%s:%s)" % (self.path, self.line_nr,
                                   self.start, self.end)
 
 class LinkParser:
     """
     Parses a text using different parsing providers with the goal of finding one
-    or more file links within the text. A typicak example could be the output
+    or more file links within the text. A typical example could be the output
     from a compiler that specifies an error in a specific file. The path of the
     file, the line nr and some more info is then returned so that it can be used
     to be able to navigate from the error output in to the specific file.
 
     The actual work of parsing the text is done by instances of classes that
-    inherits from LinkParserProvider. To add a new parser just create a class
-    that inherits from LinkParserProvider and override the parse method. Then
-    you need to register the class in the _provider list of this class wich is
-    done in the class constructor.
+    inherits from AbstractLinkParser or by regular expressions. To add a new
+    parser just create a class that inherits from AbstractLinkParser and then
+    register in this class cunstructor using the method add_parser. If you want
+    to add a regular expression then just call add_regexp in this class
+    constructor and provide your regexp string as argument.
     """
 
     def __init__(self):
         self._providers = []
-        self._providers.append(GccLinkParserProvider())
-        self._providers.append(PythonLinkParserProvider())
+        self.add_regexp(REGEXP_STANDARD)
+        self.add_regexp(REGEXP_PYTHON)
+        self.add_regexp(REGEXP_VALAC)
+        self.add_regexp(REGEXP_RUBY)
+        self.add_regexp(REGEXP_PERL)
+        self.add_regexp(REGEXP_MCS)
+
+    def add_parser(self, parser):
+        self._providers.append(parser)
+
+    def add_regexp(self, regexp):
+        """
+        Adds a regular expression string that should match a link using
+        re.MULTILINE and re.VERBOSE regexp. The area marked as a link should
+        be captured by a group named lnk. The path of the link should be
+        captured by a group named pth. The line number should be captured by
+        a group named ln. To read more about this look at the documentation
+        for the RegexpLinkParser constructor.
+        """
+        self.add_parser(RegexpLinkParser(regexp))
 
     def parse(self, text):
         """
@@ -79,7 +100,7 @@ class LinkParser:
 
         return links
 
-class LinkParserProvider:
+class AbstractLinkParser(object):
     """The "abstract" base class for link parses"""
 
     def parse(self, text):
@@ -88,46 +109,114 @@ class LinkParserProvider:
         argument (never None) and then returns a list of Link objects. If no
         links are found then an empty list is expected. The Link class is
         defined in this module. If you do not override this method then a
-        NotImplementedError will be thrown. 
+        NotImplementedError will be thrown.
 
         text -- the text to parse. This argument is never None.
         """
         raise NotImplementedError("need to implement a parse method")
 
-class GccLinkParserProvider(LinkParserProvider):
+class RegexpLinkParser(AbstractLinkParser):
+    """
+    A class that represents parsers that only use one single regular expression.
+    It can be used by subclasses or by itself. See the constructor documentation
+    for details about the rules surrouning the regexp.
+    """
 
-    def __init__(self):
-        self.fm = re.compile("^(.*)\:(\d+)\:", re.MULTILINE)
+    def __init__(self, regex):
+        """
+        Creates a new RegexpLinkParser based on the given regular expression.
+        The regular expression is multiline and verbose (se python docs on
+        compilation flags). The regular expression should contain three named
+        capturing groups 'lnk', 'pth' and 'ln'. 'lnk' represents the area wich
+        should be marked as a link in the text. 'pth' is the path that should
+        be looked for and 'ln' is the line number in that file.
+        """
+        self.re = re.compile(regex, re.MULTILINE | re.VERBOSE)
 
     def parse(self, text):
         links = []
-        for m in re.finditer(self.fm, text):
-            path = m.group(1)
-            line_nr = m.group(2)
-            start = m.start(1)
-            end = m.end(2)
+        for m in re.finditer(self.re, text):
+            path = m.group("pth")
+            line_nr = m.group("ln")
+            start = m.start("lnk")
+            end = m.end("lnk")
             link = Link(path, line_nr, start, end)
             links.append(link)
 
         return links
 
-class PythonLinkParserProvider(LinkParserProvider):
+# gcc 'test.c:13: warning: ...'
+# javac 'Test.java:13: ...'
+# ruby 'test.rb:5: ...'
+# scalac 'Test.scala:5: ...'
+# 6g (go) 'test.go:9: ...'
+REGEXP_STANDARD = r"""
+^
+(?P<lnk>
+    (?P<pth> .*[a-z0-9] )
+    \:
+    (?P<ln> \d+)
+)
+\:\s"""
 
-    def __init__(self):
-        # example:
-        #  File "test.py", line 10, in <module>
-        self.fm = re.compile("^  File \"([^\"]+)\", line (\d+),", re.MULTILINE)
+# python '  File "test.py", line 13'
+REGEXP_PYTHON = r"""
+^\s\sFile\s
+(?P<lnk>
+    \"
+    (?P<pth> [^\"]+ )
+    \",\sline\s
+    (?P<ln> \d+ )
+),"""
 
-    def parse(self, text):
-        links = []
-        for m in re.finditer(self.fm, text):
-            path = m.group(1)
-            line_nr = m.group(2)
-            start = m.start(1) - 1
-            end = m.end(2)
-            link = Link(path, line_nr, start, end)
-            links.append(link)
+# valac 'Test.vala:13.1-13.3: ...'
+REGEXP_VALAC = r"""
+^(?P<lnk>
+    (?P<pth>
+        .*vala
+    )
+    \:
+    (?P<ln>
+        \d+
+    )
+    \.\d+-\d+\.\d+
+ )\: """
 
-        return links
+#ruby
+#test.rb:5: ...
+#	from test.rb:3:in `each'
+# fist line parsed by REGEXP_STANDARD
+REGEXP_RUBY = r"""
+^\s+from\s
+(?P<lnk>
+    (?P<pth>
+        .*
+    )
+    \:
+    (?P<ln>
+        \d+
+    )
+ )"""
+
+# perl 'syntax error at test.pl line 88, near "$fake_var'
+REGEXP_PERL = r"""
+\sat\s
+(?P<lnk>
+    (?P<pth> .* )
+    \sline\s
+    (?P<ln> \d+ )
+)"""
+
+# mcs (C#) 'Test.cs(12,7): error CS0103: The name `fakeMethod'
+REGEXP_MCS = r"""
+^
+(?P<lnk>
+    (?P<pth> .*\.[cC][sS] )
+    \(
+    (?P<ln> \d+ )
+    ,\d+\)
+)
+\:\s
+"""
 
 # ex:ts=4:et:
