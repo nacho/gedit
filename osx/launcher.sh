@@ -55,4 +55,4 @@ fi
 # Start gconf first
 "$bundle_res/libexec/gconfd-2" &
 
-$EXEC "$bundle_contents/MacOS/$name-bin" "$*" $EXTRA_ARGS
+$EXEC "$bundle_contents/MacOS/$name-bin" "$@" $EXTRA_ARGS
