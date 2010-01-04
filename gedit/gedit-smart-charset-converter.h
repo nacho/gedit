@@ -59,6 +59,8 @@ GeditSmartCharsetConverter	*gedit_smart_charset_converter_new		(GSList *candidat
 
 const GeditEncoding		*gedit_smart_charset_converter_get_guessed	(GeditSmartCharsetConverter *smart);
 
+guint				 gedit_smart_charset_converter_get_num_fallbacks(GeditSmartCharsetConverter *smart);
+
 G_END_DECLS
 
 #endif /* __GEDIT_SMART_CHARSET_CONVERTER_H__ */

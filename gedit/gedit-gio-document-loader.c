@@ -349,6 +349,18 @@ async_read_cb (GInputStream *stream,
 		GEDIT_DOCUMENT_LOADER (gvloader)->auto_detected_encoding =
 			gedit_smart_charset_converter_get_guessed (gvloader->priv->converter);
 
+		/* Check if we needed some fallback char, if so, check if there was
+		   a previous error and if not set a fallback used error */
+		if ((gedit_smart_charset_converter_get_num_fallbacks (gvloader->priv->converter) != 0) &&
+		    gvloader->priv->error == NULL)
+		{
+			/* FIXME: Maybe check for some specific error ? */
+			g_set_error_literal (&gvloader->priv->error,
+					     GEDIT_DOCUMENT_ERROR,
+					     GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK,
+					     _("There was a problem blah blah")); /* FIXME */
+		}
+
 		end_append_text_to_document (GEDIT_DOCUMENT_LOADER (gvloader));
 		remote_load_completed_or_failed (gvloader, async);
 

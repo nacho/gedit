@@ -86,14 +86,15 @@ gedit_smart_charset_converter_class_init (GeditSmartCharsetConverterClass *klass
 }
 
 static void
-gedit_smart_charset_converter_init (GeditSmartCharsetConverter *self)
+gedit_smart_charset_converter_init (GeditSmartCharsetConverter *smart)
 {
-	self->priv = GEDIT_SMART_CHARSET_CONVERTER_GET_PRIVATE (self);
+	smart->priv = GEDIT_SMART_CHARSET_CONVERTER_GET_PRIVATE (smart);
 
-	self->priv->charset_conv = NULL;
-	self->priv->encodings = NULL;
-	self->priv->current_encoding = NULL;
-	self->priv->is_utf8 = FALSE;
+	smart->priv->charset_conv = NULL;
+	smart->priv->encodings = NULL;
+	smart->priv->current_encoding = NULL;
+	smart->priv->is_utf8 = FALSE;
+	smart->priv->use_first = FALSE;
 
 	gedit_debug_message (DEBUG_UTILS, "initializing smart charset converter");
 }
@@ -127,6 +128,10 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 {
 	GCharsetConverter *conv = NULL;
 
+	if (smart->priv->encodings != NULL &&
+	    smart->priv->encodings->next == NULL)
+		smart->priv->use_first = TRUE;
+
 	/* We just check the first block */
 	while (TRUE)
 	{
@@ -155,8 +160,9 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 		{
 			gsize remainder;
 			const gchar *end;
-		
-			if (g_utf8_validate (inbuf, inbuf_size, &end))
+			
+			if (g_utf8_validate (inbuf, inbuf_size, &end) ||
+			    smart->priv->use_first)
 			{
 				smart->priv->is_utf8 = TRUE;
 				break;
@@ -177,6 +183,12 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 						gedit_encoding_get_charset (enc),
 						NULL);
 
+		/* If we tried all encodings we use the first one */
+		if (smart->priv->use_first)
+		{
+			break;
+		}
+
 		ret = g_converter_convert (G_CONVERTER (conv),
 					   inbuf,
 					   inbuf_size,
@@ -189,7 +201,7 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 
 		if (err != NULL)
 		{
-			/* FIXME: Is this ok or we should just skip it? */
+			/* FIXME: Is this ok or should we just skip it? */
 			if (err->code == G_CONVERT_ERROR_PARTIAL_INPUT)
 			{
 				g_error_free (err);
@@ -202,6 +214,11 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 		{
 			break;
 		}
+	}
+
+	if (conv != NULL)
+	{
+		g_charset_converter_set_use_fallback (conv, TRUE);
 	}
 
 	return conv;
@@ -319,4 +336,12 @@ gedit_smart_charset_converter_get_guessed (GeditSmartCharsetConverter *smart)
 	}
 
 	return NULL;
+}
+
+guint
+gedit_smart_charset_converter_get_num_fallbacks (GeditSmartCharsetConverter *smart)
+{
+	g_return_val_if_fail (GEDIT_IS_SMART_CHARSET_CONVERTER (smart), FALSE);
+
+	return g_charset_converter_get_num_fallbacks (smart->priv->charset_conv) != 0;
 }

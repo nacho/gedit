@@ -50,7 +50,7 @@ get_text_with_encoding (const gchar *text,
 				   strlen (text),
 				   conv_text,
 				   200,
-				   0,
+				   G_CONVERTER_INPUT_AT_END,
 				   &read,
 				   &written,
 				   &err);
@@ -85,7 +85,41 @@ get_all_encodings ()
 
 static void
 do_test (const gchar *test_in,
-         GSList      *encodings)
+         GSList      *encodings,
+         gsize        nread,
+         const gchar *test_out)
+{
+	GeditSmartCharsetConverter *converter;
+	gchar *out;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError *err;
+
+	converter = gedit_smart_charset_converter_new (encodings);
+
+	out = g_malloc (200);
+	err = NULL;
+
+	g_converter_convert (G_CONVERTER (converter),
+	                     test_in,
+	                     nread,
+	                     out,
+	                     200,
+	                     G_CONVERTER_INPUT_AT_END,
+	                     &bytes_read,
+	                     &bytes_written,
+	                     &err);
+
+	g_assert (err == NULL);
+	out[bytes_written] = '\0';
+
+	g_assert_cmpstr (out, ==, test_out);
+}
+
+static void
+do_test_with_error (const gchar *test_in,
+                    GSList      *encodings,
+                    gint         error_code)
 {
 	GeditSmartCharsetConverter *converter;
 	gchar *out;
@@ -105,14 +139,12 @@ do_test (const gchar *test_in,
 	                     len,
 	                     out,
 	                     200,
-	                     0,
+	                     G_CONVERTER_INPUT_AT_END,
 	                     &bytes_read,
 	                     &bytes_written,
 	                     &err);
 
-	g_assert (err == NULL);
-	out[bytes_written] = '\0';
-	g_assert_cmpstr (out, ==, TEXT_TO_CONVERT);
+	g_assert (err->code == error_code);
 }
 #if 0
 static void
@@ -174,8 +206,13 @@ test_utf8_utf8 ()
 
 	encs = g_slist_prepend (encs, (gpointer)gedit_encoding_get_utf8 ());
 
-	do_test (TEXT_TO_CONVERT, encs);
-	/* Missing malformed utf8 string and string with last char cut */
+	do_test (TEXT_TO_CONVERT, encs, strlen (TEXT_TO_CONVERT), TEXT_TO_CONVERT);
+
+	do_test ("foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz", encs, 18, "foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz");
+	do_test ("foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz", encs, 9, "foobar\xc3\xa8\xc3");
+
+	/* FIXME: Use the utf8 stream for a fallback? */
+	//do_test_with_error ("\xef\xbf\xbezzzzzz", encs, G_IO_ERROR_FAILED);
 
 	g_slist_free (encs);
 }
@@ -197,7 +234,7 @@ test_xxx_xxx ()
 		text = get_text_with_encoding (TEXT_TO_CONVERT, (const GeditEncoding *)l->data);
 		test_enc = g_slist_prepend (test_enc, l->data);
 
-		do_test (text, test_enc);
+		//do_test (text, test_enc, TEXT_TO_CONVERT);
 		g_slist_free (test_enc);
 		g_free (text);
 	}
@@ -210,7 +247,7 @@ int main (int   argc,
 	g_test_init (&argc, &argv, NULL);
 
 	g_test_add_func ("/smart-converter/utf8-utf8", test_utf8_utf8);
-	g_test_add_func ("/smart-converter/xxx-xxx", test_xxx_xxx);
+	//g_test_add_func ("/smart-converter/xxx-xxx", test_xxx_xxx);
 
 	return g_test_run ();
 }
