@@ -96,6 +96,14 @@ ValueError: invalid literal for int() with base 10: 'xxx'
         self.assert_link(lnk, "test.py", 10)
         self.assert_link_text(line, lnk, '"test.py", line 10')
 
+    def test_parse_bash_one_line(self):
+        line = "test.sh: line 5: gerp: command not found"
+        links = self.p.parse(line)
+        self.assert_link_count(links, 1)
+        lnk = links[0]
+        self.assert_link(lnk, "test.sh", 5)
+        self.assert_link_text(line, lnk, 'test.sh: line 5')
+
     def test_parse_javac_one_line(self):
         line = "/tmp/Test.java:10: incompatible types"
         links = self.p.parse(line)
@@ -130,7 +138,6 @@ test.rb:5: undefined method `fake_method' for main:Object (NoMethodError)
         lnk = links[1]
         self.assert_link(lnk, "test.rb", 3)
         self.assert_link_text(output, lnk, 'test.rb:3')
-
 
     def test_parse_scalac_one_line(self):
         line = "Test.scala:7: error: not found: value fakeMethod"

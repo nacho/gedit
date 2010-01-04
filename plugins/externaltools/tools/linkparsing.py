@@ -63,6 +63,7 @@ class LinkParser:
         self.add_regexp(REGEXP_STANDARD)
         self.add_regexp(REGEXP_PYTHON)
         self.add_regexp(REGEXP_VALAC)
+        self.add_regexp(REGEXP_BASH)
         self.add_regexp(REGEXP_RUBY)
         self.add_regexp(REGEXP_PERL)
         self.add_regexp(REGEXP_MCS)
@@ -168,6 +169,14 @@ REGEXP_PYTHON = r"""
     \",\sline\s
     (?P<ln> \d+ )
 ),"""
+
+# python 'test.sh: line 5:'
+REGEXP_BASH = r"""
+^(?P<lnk>
+    (?P<pth> .* )
+    \:\sline\s
+    (?P<ln> \d+ )
+)\:"""
 
 # valac 'Test.vala:13.1-13.3: ...'
 REGEXP_VALAC = r"""
