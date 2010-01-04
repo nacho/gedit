@@ -220,19 +220,6 @@ gedit_smart_charset_converter_convert (GConverter *converter,
 {
 	GeditSmartCharsetConverter *smart = GEDIT_SMART_CHARSET_CONVERTER (converter);
 
-	if (inbuf_size == 0)
-	{
-		if (flags & G_CONVERTER_INPUT_AT_END)
-			return G_CONVERTER_FINISHED;
-
-		if (flags & G_CONVERTER_FLUSH)
-			return G_CONVERTER_FLUSHED;
-
-		g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_PARTIAL_INPUT,
-				     _("Incomplete multibyte sequence in input"));
-		return G_CONVERTER_ERROR;
-	}
-
 	/* Guess the encoding if we didn't make it yet */
 	if (smart->priv->charset_conv == NULL &&
 	    !smart->priv->is_utf8)
@@ -254,6 +241,7 @@ gedit_smart_charset_converter_convert (GConverter *converter,
 	if (smart->priv->is_utf8)
 	{
 		gsize size;
+		GConverterResult ret;
 
 		size = MIN (inbuf_size, outbuf_size);
 
@@ -261,7 +249,14 @@ gedit_smart_charset_converter_convert (GConverter *converter,
 		*bytes_read = size;
 		*bytes_written = size;
 
-		return G_CONVERTER_CONVERTED;
+		ret = G_CONVERTER_CONVERTED;
+
+		if (flags & G_CONVERTER_INPUT_AT_END)
+			ret = G_CONVERTER_FINISHED;
+		else if (flags & G_CONVERTER_FLUSH)
+			ret = G_CONVERTER_FLUSHED;
+
+		return ret;
 	}
 
 	/* If we reached here is because we need to convert the text so, we
