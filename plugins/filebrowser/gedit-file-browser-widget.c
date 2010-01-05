@@ -2545,8 +2545,9 @@ static void
 on_model_set (GObject * gobject, GParamSpec * arg1,
 	      GeditFileBrowserWidget * obj)
 {
-	GtkTreeModel *model =
-	    gtk_tree_view_get_model (GTK_TREE_VIEW (gobject));
+	GtkTreeModel *model;
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (gobject));
 
 	clear_signals (obj);
 
@@ -2555,25 +2556,21 @@ on_model_set (GObject * gobject, GParamSpec * arg1,
 
 		/* Add the current location to the back menu */
 		if (obj->priv->current_location) {
-			gtk_menu_shell_prepend (GTK_MENU_SHELL
-						(obj->priv->
-						 location_previous_menu),
-						obj->priv->
-						current_location_menu_item);
+			GtkAction *action;
 
-			gtk_widget_unref (obj->priv->
-					  current_location_menu_item);
+			gtk_menu_shell_prepend (GTK_MENU_SHELL (obj->priv->location_previous_menu),
+						obj->priv->current_location_menu_item);
+
+			g_object_unref (obj->priv->current_location_menu_item);
 			obj->priv->current_location = NULL;
 			obj->priv->current_location_menu_item = NULL;
 
-			gtk_action_set_sensitive
-			    (gtk_action_group_get_action
-			     (obj->priv->action_group_sensitive,
-			      "DirectoryPrevious"), TRUE);
+			action = gtk_action_group_get_action (obj->priv->action_group_sensitive,
+							      "DirectoryPrevious");
+			gtk_action_set_sensitive (action, TRUE);
 		}
 
 		gtk_widget_set_sensitive (obj->priv->filter_expander, FALSE);
-
 
 		add_signal (obj, gobject,
 			    g_signal_connect (gobject, "bookmark-activated",
