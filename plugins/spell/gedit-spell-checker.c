@@ -39,6 +39,7 @@
 #include <glib.h>
 
 #include "gedit-spell-checker.h"
+#include "gedit-spell-utils.h"
 
 /* FIXME - Rename the marshal file - Paolo */
 #include "gedit-spell-checker-dialog-marshal.h"
@@ -68,13 +69,9 @@ enum {
 	LAST_SIGNAL
 };
 
-static gboolean is_digit 			(const char             *text,
-						 gssize                  length);
-
 static guint signals[LAST_SIGNAL] = { 0 };
 
 G_DEFINE_TYPE(GeditSpellChecker, gedit_spell_checker, G_TYPE_OBJECT)
-
 
 static void
 gedit_spell_checker_set_property (GObject *object,
@@ -347,7 +344,7 @@ gedit_spell_checker_check_word (GeditSpellChecker *spell,
 	if (strcmp (word, "gedit") == 0)
 		return TRUE;
 
-	if (is_digit (word, len))
+	if (gedit_spell_utils_is_digit (word, len))
 		return TRUE;
 
 	g_return_val_if_fail (spell->dict != NULL, FALSE);
@@ -523,32 +520,3 @@ gedit_spell_checker_set_correction (GeditSpellChecker *spell,
 	return TRUE;
 }
 
-static gboolean
-is_digit (const char *text, gssize length)
-{
-	gunichar c;
-	const gchar *p;
- 	const gchar *end;
-
-	g_return_val_if_fail (text != NULL, FALSE);
-
-	if (length < 0)
-		length = strlen (text);
-
-	p = text;
-	end = text + length;
-
-	while (p != end) {
-		const gchar *next;
-		next = g_utf8_next_char (p);
-
-		c = g_utf8_get_char (p);
-
-		if (!g_unichar_isdigit (c) && c != '.' && c != ',')
-			return FALSE;
-
-		p = next;
-	}
-
-	return TRUE;
-}
