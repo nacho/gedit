@@ -426,7 +426,7 @@ create_small_button (GtkWidget *image)
 {
 	GtkWidget *button;
 	GtkRcStyle *rcstyle;
-	
+
 	button = gtk_button_new ();
 	gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
 
@@ -437,7 +437,7 @@ create_small_button (GtkWidget *image)
 	rcstyle = gtk_rc_style_new ();
 	rcstyle->xthickness = rcstyle->ythickness = 0;
 	gtk_widget_modify_style (button, rcstyle);
-	gtk_rc_style_unref (rcstyle);
+	g_object_unref (rcstyle);
 
 	gtk_widget_show (image);
 
