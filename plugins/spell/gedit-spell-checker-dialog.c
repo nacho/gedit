@@ -77,12 +77,6 @@ enum
 	NUM_COLUMNS
 };
 
-static void	gedit_spell_checker_dialog_class_init 		(GeditSpellCheckerDialogClass * klass);
-static void	gedit_spell_checker_dialog_init 		(GeditSpellCheckerDialog *spell_checker);
-static void	gedit_spell_checker_dialog_destroy 		(GtkObject *object);
-/*
-static void 	gedit_spell_checker_dialog_finalize 		(GObject *object);
-*/
 static void	update_suggestions_list_model 			(GeditSpellCheckerDialog *dlg, 
 								 GSList *suggestions);
 
@@ -110,35 +104,28 @@ static void	suggestions_list_row_activated_handler		(GtkTreeView *view,
 								 GeditSpellCheckerDialog *dlg);
 
 
-static GtkWindowClass *parent_class = NULL;
 static guint signals [LAST_SIGNAL] = { 0 };
 
-GType
-gedit_spell_checker_dialog_get_type (void)
+G_DEFINE_TYPE(GeditSpellCheckerDialog, gedit_spell_checker_dialog, GTK_TYPE_WINDOW)
+
+static void
+gedit_spell_checker_dialog_destroy (GtkObject *object)
 {
-	static GType gedit_spell_checker_dialog_type = 0;
+	GeditSpellCheckerDialog *dlg = GEDIT_SPELL_CHECKER_DIALOG (object);
 
-	if(!gedit_spell_checker_dialog_type) 
+	if (dlg->spell_checker != NULL)
 	{
-		static const GTypeInfo gedit_spell_checker_dialog_info = 
-		{
-			sizeof (GeditSpellCheckerDialogClass),
-			NULL, /* base init */
-			NULL, /* base finalize */
-			(GClassInitFunc) gedit_spell_checker_dialog_class_init, /* class init */
-			NULL, /* class finalize */
-			NULL, /* class data */
-			sizeof (GeditSpellCheckerDialog),
-			0,
-			(GInstanceInitFunc) gedit_spell_checker_dialog_init
-		};
-
-		gedit_spell_checker_dialog_type = g_type_register_static (GTK_TYPE_WINDOW,
-							"GeditSpellCheckerDialog",
-							&gedit_spell_checker_dialog_info, 0);
+		g_object_unref (dlg->spell_checker);
+		dlg->spell_checker = NULL;
 	}
 
-	return gedit_spell_checker_dialog_type;
+	if (dlg->misspelled_word != NULL)
+	{
+		g_free (dlg->misspelled_word);
+		dlg->misspelled_word = NULL;
+	}
+
+	GTK_OBJECT_CLASS (gedit_spell_checker_dialog_parent_class)->destroy (object);
 }
 
 static void
@@ -148,15 +135,9 @@ gedit_spell_checker_dialog_class_init (GeditSpellCheckerDialogClass * klass)
 
 	object_class = G_OBJECT_CLASS (klass);
 
-	parent_class = g_type_class_peek_parent (klass);
-
-	/*
-	object_class->finalize = gedit_spell_checker_dialog_finalize;
-	*/
-
 	GTK_OBJECT_CLASS (object_class)->destroy = gedit_spell_checker_dialog_destroy;
 
-	signals [IGNORE] = 
+	signals[IGNORE] = 
 		g_signal_new ("ignore",
  			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
@@ -167,7 +148,7 @@ gedit_spell_checker_dialog_class_init (GeditSpellCheckerDialogClass * klass)
 			      1, 
 			      G_TYPE_STRING);
 
-	signals [IGNORE_ALL] = 
+	signals[IGNORE_ALL] = 
 		g_signal_new ("ignore_all",
  			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
@@ -178,7 +159,7 @@ gedit_spell_checker_dialog_class_init (GeditSpellCheckerDialogClass * klass)
 			      1, 
 			      G_TYPE_STRING);
 
-	signals [CHANGE] = 
+	signals[CHANGE] = 
 		g_signal_new ("change",
  			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
@@ -190,7 +171,7 @@ gedit_spell_checker_dialog_class_init (GeditSpellCheckerDialogClass * klass)
 			      G_TYPE_STRING,
 			      G_TYPE_STRING);
 	
-	signals [CHANGE_ALL] = 
+	signals[CHANGE_ALL] = 
 		g_signal_new ("change_all",
  			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
@@ -202,7 +183,7 @@ gedit_spell_checker_dialog_class_init (GeditSpellCheckerDialogClass * klass)
 			      G_TYPE_STRING,
 			      G_TYPE_STRING);
 
-	signals [ADD_WORD_TO_PERSONAL] = 
+	signals[ADD_WORD_TO_PERSONAL] = 
 		g_signal_new ("add_word_to_personal",
  			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
@@ -260,14 +241,14 @@ create_dialog (GeditSpellCheckerDialog *dlg,
 		"language_label", &dlg->language_label,
 		NULL);
 	g_free (ui_file);
-	
+
 	if (!ret)
 	{
 		gtk_widget_show (error_widget);
-			
-		gtk_box_pack_start_defaults (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
-					     error_widget);
-		
+
+		gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
+				    error_widget, TRUE, TRUE, 0);
+
 		return;
 	}
 
@@ -343,33 +324,6 @@ static void
 gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 {
 }
-
-static void
-gedit_spell_checker_dialog_destroy (GtkObject *object)
-{
-	GeditSpellCheckerDialog *dlg = GEDIT_SPELL_CHECKER_DIALOG (object);
-
-	if (dlg->spell_checker != NULL)
-	{
-		g_object_unref (dlg->spell_checker);
-		dlg->spell_checker = NULL;
-	}
-
-	if (dlg->misspelled_word != NULL)
-	{
-		g_free (dlg->misspelled_word);
-		dlg->misspelled_word = NULL;
-	}
-
-	GTK_OBJECT_CLASS (parent_class)->destroy (object);
-}
-
-/*
-static void 
-gedit_spell_checker_dialog_finalize (GObject *object)
-{
-}
-*/
 
 GtkWidget *
 gedit_spell_checker_dialog_new (const gchar *data_dir)
