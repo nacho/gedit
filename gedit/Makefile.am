@@ -84,6 +84,7 @@ NOINST_H_FILES =			\
 	gedit-print-preview.h		\
 	gedit-session.h			\
 	gedit-style-scheme-manager.h	\
+	gedit-tab-label.h		\
 	gedittextregion.h		\
 	gedit-ui.h			\
 	gedit-window-private.h
@@ -183,6 +184,7 @@ libgedit_la_SOURCES = 			\
 	gedit-status-combo-box.c	\
 	gedit-style-scheme-manager.c	\
 	gedit-tab.c 			\
+	gedit-tab-label.c		\
 	gedit-utils.c 			\
 	gedit-view.c 			\
 	gedit-window.c			\
