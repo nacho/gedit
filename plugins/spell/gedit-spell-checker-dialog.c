@@ -36,7 +36,7 @@
 #include <gtk/gtk.h>
 #include <gedit/gedit-utils.h>
 #include "gedit-spell-checker-dialog.h"
-#include "gedit-spell-checker-dialog-marshal.h"
+#include "gedit-spell-marshal.h"
 
 struct _GeditSpellCheckerDialog 
 {

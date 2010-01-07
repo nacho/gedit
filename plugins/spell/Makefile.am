@@ -1,17 +1,16 @@
 # Spell checker plugin
 plugindir = $(GEDIT_PLUGINS_LIBS_DIR)
 
-BUILT_SOURCES = 						\
-	gedit-spell-checker-dialog-marshal.c			\
-	gedit-spell-checker-dialog-marshal.h
-
-
 INCLUDES = 							\
 	-I$(top_srcdir)						\
 	$(GEDIT_CFLAGS) 					\
 	$(ENCHANT_CFLAGS)					\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED_CFLAGS)	
+
+BUILT_SOURCES = 					\
+	gedit-spell-marshal.c				\
+	gedit-spell-marshal.h
 
 plugin_LTLIBRARIES = libspell.la
 
@@ -38,11 +37,11 @@ libspell_la_LIBADD  = $(GEDIT_LIBS) $(ENCHANT_LIBS)
 uidir = $(GEDIT_PLUGINS_DATA_DIR)/spell
 ui_DATA = spell-checker.ui languages-dialog.ui
 
-gedit-spell-checker-dialog-marshal.h: gedit-spell-checker-dialog-marshal.list $(GLIB_GENMARSHAL)
+gedit-spell-marshal.h: gedit-spell-marshal.list $(GLIB_GENMARSHAL)
 	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@
 
-gedit-spell-checker-dialog-marshal.c: gedit-spell-checker-dialog-marshal.list $(GLIB_GENMARSHAL)
-	$(AM_V_GEN) echo "#include \"gedit-spell-checker-dialog-marshal.h\"" > $@ && \
+gedit-spell-marshal.c: gedit-spell-marshal.list $(GLIB_GENMARSHAL)
+	$(AM_V_GEN) echo "#include \"gedit-spell-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_marshal >> $@
 
 plugin_in_files = spell.gedit-plugin.desktop.in
@@ -60,7 +59,5 @@ CLEANFILES = $(BUILT_SOURCES) $(plugin_DATA)
 
 dist-hook:
 	cd $(distdir); rm -f $(BUILT_SOURCES)
-
-
 
 -include $(top_srcdir)/git.mk

@@ -40,9 +40,7 @@
 
 #include "gedit-spell-checker.h"
 #include "gedit-spell-utils.h"
-
-/* FIXME - Rename the marshal file - Paolo */
-#include "gedit-spell-checker-dialog-marshal.h"
+#include "gedit-spell-marshal.h"
 
 struct _GeditSpellChecker
 {
