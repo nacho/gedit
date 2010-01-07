@@ -35,6 +35,7 @@
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
 
+#include "gedit-close-button.h"
 #include "gedit-window.h"
 #include "gedit-debug.h"
 
@@ -239,7 +240,7 @@ gedit_panel_class_init (GeditPanelClass *klass)
 		  	      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);					
 	binding_set = gtk_binding_set_by_class (klass);
-  
+
 	gtk_binding_entry_add_signal (binding_set, 
 				      GDK_Escape, 
 				      0, 
@@ -395,57 +396,31 @@ panel_show (GeditPanel *panel,
 }
 
 static void
+gedit_panel_init (GeditPanel *panel)
+{
+	panel->priv = GEDIT_PANEL_GET_PRIVATE (panel);
+}
+
+static void
 close_button_clicked_cb (GtkWidget *widget,
 			 GtkWidget *panel)
 {
 	gtk_widget_hide (panel);
 }
 
-static void
-gedit_panel_init (GeditPanel *panel)
-{
-	panel->priv = GEDIT_PANEL_GET_PRIVATE (panel);
-	g_return_if_fail (panel->priv != NULL);	
-}
-
-static void
-button_style_set_cb (GtkWidget *button,
-		     GtkStyle *previous_style,
-		     gpointer user_data)
-{
-	gint h, w;
-
-	gtk_icon_size_lookup_for_settings (gtk_widget_get_settings (button),
-					   GTK_ICON_SIZE_MENU, &w, &h);
-
-	gtk_widget_set_size_request (button, w + 2, h + 2);
-}
-
 static GtkWidget *
-create_small_button (GtkWidget *image)
+create_close_button (GeditPanel *panel)
 {
 	GtkWidget *button;
-	GtkRcStyle *rcstyle;
 
-	button = gtk_button_new ();
-	gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+	button = gedit_close_button_new ();
 
-	/* don't allow focus on the close button */
-	gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+	gtk_widget_set_tooltip_text (button, _("Hide panel"));
 
-	/* make it as small as possible */
-	rcstyle = gtk_rc_style_new ();
-	rcstyle->xthickness = rcstyle->ythickness = 0;
-	gtk_widget_modify_style (button, rcstyle);
-	g_object_unref (rcstyle);
-
-	gtk_widget_show (image);
-
-	gtk_container_add (GTK_CONTAINER (button), image);
-
-	/* Set minimal size */
-	g_signal_connect (button, "style-set",
-			  G_CALLBACK (button_style_set_cb), NULL);
+	g_signal_connect (button,
+			  "clicked",
+			  G_CALLBACK (close_button_clicked_cb),
+			  panel);
 
 	return button;
 }
@@ -458,16 +433,16 @@ build_notebook_for_panel (GeditPanel *panel)
 
 	gtk_notebook_set_tab_pos (GTK_NOTEBOOK (panel->priv->notebook),
 				  GTK_POS_BOTTOM);
-  	gtk_notebook_set_scrollable (GTK_NOTEBOOK (panel->priv->notebook),
-  				     TRUE);
-  	gtk_notebook_popup_enable (GTK_NOTEBOOK (panel->priv->notebook));
-  
-  	gtk_widget_show (GTK_WIDGET (panel->priv->notebook));
-  
-  	g_signal_connect (panel->priv->notebook,
-  			  "switch-page",
-  			  G_CALLBACK (notebook_page_changed),
-  			  panel);  
+	gtk_notebook_set_scrollable (GTK_NOTEBOOK (panel->priv->notebook),
+				     TRUE);
+	gtk_notebook_popup_enable (GTK_NOTEBOOK (panel->priv->notebook));
+
+	gtk_widget_show (GTK_WIDGET (panel->priv->notebook));
+
+	g_signal_connect (panel->priv->notebook,
+			  "switch-page",
+			  G_CALLBACK (notebook_page_changed),
+			  panel);
 }
 
 static void
@@ -476,8 +451,7 @@ build_horizontal_panel (GeditPanel *panel)
 	GtkWidget *box;
 	GtkWidget *sidebar;
 	GtkWidget *close_button;
-	GtkWidget *image;
-	
+
 	box = gtk_hbox_new(FALSE, 0);
 
 	gtk_box_pack_start (GTK_BOX (box), 
@@ -496,21 +470,13 @@ build_horizontal_panel (GeditPanel *panel)
 			    FALSE, 
 			    0);
 
-	image = gtk_image_new_from_stock (GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);
-	close_button = create_small_button (image);
+	close_button = create_close_button (panel);
 
 	gtk_box_pack_start (GTK_BOX (sidebar),
 			    close_button,
 			    FALSE, 
 			    FALSE, 
 			    0);
-
-	gtk_widget_set_tooltip_text (close_button, _("Hide panel"));
-
-	g_signal_connect (close_button,
-			  "clicked",
-                          G_CALLBACK (close_button_clicked_cb),
-                          panel);
 
 	gtk_widget_show_all (box);
 
@@ -527,9 +493,8 @@ build_vertical_panel (GeditPanel *panel)
 	GtkWidget *close_button;
 	GtkWidget *title_hbox;
 	GtkWidget *icon_name_hbox;
-	GtkWidget *image;
 	GtkWidget *dummy_label;
-	
+
 	/* Create title hbox */
 	title_hbox = gtk_hbox_new (FALSE, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (title_hbox), 5);
@@ -545,7 +510,7 @@ build_vertical_panel (GeditPanel *panel)
 		
 	panel->priv->title_image = 
 				gtk_image_new_from_stock (GTK_STOCK_FILE,
-							  GTK_ICON_SIZE_MENU); 							     
+							  GTK_ICON_SIZE_MENU);
 	gtk_box_pack_start (GTK_BOX (icon_name_hbox), 
 			    panel->priv->title_image, 
 			    FALSE, 
@@ -553,13 +518,13 @@ build_vertical_panel (GeditPanel *panel)
 			    0);
 
 	dummy_label = gtk_label_new (" ");
-		
+
 	gtk_box_pack_start (GTK_BOX (icon_name_hbox), 
 			    dummy_label, 
 			    FALSE, 
 			    FALSE, 
 			    0);	
-				    
+
 	panel->priv->title_label = gtk_label_new (_("Empty"));
 	gtk_misc_set_alignment (GTK_MISC (panel->priv->title_label), 0, 0.5);
 	gtk_label_set_ellipsize(GTK_LABEL (panel->priv->title_label), PANGO_ELLIPSIZE_END);
@@ -570,21 +535,13 @@ build_vertical_panel (GeditPanel *panel)
 			    TRUE,
 			    0);
 
-	image = gtk_image_new_from_stock (GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);
-	close_button = create_small_button (image);
-				       
+	close_button = create_close_button (panel);
+
 	gtk_box_pack_start (GTK_BOX (title_hbox),
 			    close_button, 
 			    FALSE, 
 			    FALSE, 
 			    0);
-
-	gtk_widget_set_tooltip_text (close_button, _("Hide panel"));
-
-	g_signal_connect (close_button,
-			  "clicked",
-                          G_CALLBACK (close_button_clicked_cb),
-                          panel);
 
 	gtk_widget_show_all (title_hbox);
 

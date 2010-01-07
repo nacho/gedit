@@ -43,6 +43,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
+#include "gedit-close-button.h"
 #include "gedit-notebook.h"
 #include "gedit-marshal.h"
 #include "gedit-window.h"
@@ -157,17 +158,6 @@ gedit_notebook_class_init (GeditNotebookClass *klass)
 			      GEDIT_TYPE_TAB);
 
 	g_type_class_add_private (object_class, sizeof(GeditNotebookPrivate));
-	
-	/* Set up a style for the close button with no focus padding. */
-	gtk_rc_parse_string (
-		"style \"gedit-close-button-style\"\n"
-		"{\n"
-		"  GtkWidget::focus-padding = 0\n"
-		"  GtkWidget::focus-line-width = 0\n"
-		"  xthickness = 0\n"
-		"  ythickness = 0\n"
-		"}\n"
-		"widget \"*.gedit-close-button\" style \"gedit-close-button-style\"");
 }
 
 static GeditNotebook *
@@ -863,19 +853,6 @@ close_button_clicked_cb (GtkWidget *widget,
 	g_signal_emit (notebook, signals[TAB_CLOSE_REQUEST], 0, tab);
 }
 
-static void
-close_button_style_set_cb (GtkWidget *button,
-			   GtkStyle *previous_style,
-			   gpointer user_data)
-{
-	gint h, w;
-
-	gtk_icon_size_lookup_for_settings (gtk_widget_get_settings (button),
-					   GTK_ICON_SIZE_MENU, &w, &h);
-
-	gtk_widget_set_size_request (button, w + 2, h + 2);
-}
-
 static GtkWidget *
 build_tab_label (GeditNotebook *nb, 
 		 GeditTab      *tab)
@@ -883,7 +860,6 @@ build_tab_label (GeditNotebook *nb,
 	GtkWidget *hbox, *label_hbox, *label_ebox;
 	GtkWidget *label, *dummy_label;
 	GtkWidget *close_button;
-	GtkWidget *image;
 	GtkWidget *spinner;
 	GtkWidget *icon;
 
@@ -896,22 +872,11 @@ build_tab_label (GeditNotebook *nb,
 	label_hbox = gtk_hbox_new (FALSE, 4);
 	gtk_container_add (GTK_CONTAINER (label_ebox), label_hbox);
 
-	/* setup close button */
-	close_button = gtk_button_new ();
-	gtk_button_set_relief (GTK_BUTTON (close_button),
-			       GTK_RELIEF_NONE);
-	/* don't allow focus on the close button */
-	gtk_button_set_focus_on_click (GTK_BUTTON (close_button), FALSE);
-
-	/* make it as small as possible */
-	gtk_widget_set_name (close_button, "gedit-close-button");
-
-	image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
-					  GTK_ICON_SIZE_MENU);
-	gtk_container_add (GTK_CONTAINER (close_button), image);
-	gtk_box_pack_start (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
+	close_button = gedit_close_button_new ();
 
 	gtk_widget_set_tooltip_text (close_button, _("Close document"));
+
+	gtk_box_pack_start (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
 
 	g_signal_connect (close_button,
 			  "clicked",
@@ -939,17 +904,12 @@ build_tab_label (GeditNotebook *nb,
 
 	dummy_label = gtk_label_new ("");
 	gtk_box_pack_start (GTK_BOX (label_hbox), dummy_label, TRUE, TRUE, 0);
-	
-	/* Set minimal size */
-	g_signal_connect (close_button, "style-set",
-			  G_CALLBACK (close_button_style_set_cb), NULL);
-	
+
 	gtk_widget_show (hbox);
 	gtk_widget_show (label_ebox);
 	gtk_widget_show (label_hbox);
 	gtk_widget_show (label);
 	gtk_widget_show (dummy_label);	
-	gtk_widget_show (image);
 	gtk_widget_show (close_button);
 	gtk_widget_show (icon);
 	
