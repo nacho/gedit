@@ -29,6 +29,10 @@
 #include "gedit-tab-label.h"
 #include "gedit-close-button.h"
 
+#ifdef BUILD_SPINNER
+#include "gedit-spinner.h"
+#endif
+
 #define GEDIT_TAB_LABEL_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_TAB_LABEL, GeditTabLabelPrivate))
 
 struct _GeditTabLabelPrivate
