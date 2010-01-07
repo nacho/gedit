@@ -278,18 +278,13 @@ update_current (GeditDocument *doc,
 
 static void
 set_check_range (GeditDocument *doc,
-		 gint           start,
-		 gint           end)
+		 GtkTextIter   *start,
+		 GtkTextIter   *end)
 {
 	CheckRange *range;
 	GtkTextIter iter;
-	
-	gedit_debug (DEBUG_PLUGINS);
 
-	g_return_if_fail (doc != NULL);
-	g_return_if_fail (start >= 0);
-	g_return_if_fail (start < gtk_text_buffer_get_char_count (GTK_TEXT_BUFFER (doc)));
-	g_return_if_fail ((end >= start) || (end < 0));
+	gedit_debug (DEBUG_PLUGINS);
 
 	range = get_check_range (doc);
 
@@ -298,7 +293,7 @@ set_check_range (GeditDocument *doc,
 		gedit_debug_message (DEBUG_PLUGINS, "There was not a previous check range");
 
 		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &iter);
-		
+
 		range = g_new0 (CheckRange, 1);
 
 		range->start_mark = gtk_text_buffer_create_mark (GTK_TEXT_BUFFER (doc),
@@ -309,50 +304,40 @@ set_check_range (GeditDocument *doc,
 
 		range->current_mark = gtk_text_buffer_create_mark (GTK_TEXT_BUFFER (doc),
 				"check_range_current_mark", &iter, TRUE);
-		
+
 		g_object_set_qdata_full (G_OBJECT (doc), 
 				 check_range_id, 
 				 range, 
 				 (GDestroyNotify)g_free);
 	}
-	
-	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), 
-			&iter, start);
 
 	gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc),
 				   range->start_mark,
-				   &iter);
-	
-	if (end < 0)
-		end = gtk_text_buffer_get_char_count (GTK_TEXT_BUFFER (doc));
-	g_return_if_fail (end >= start);
-	
-	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), 
-			&iter, end);
+				   start);
 
-	if (!gtk_text_iter_inside_word (&iter))
-	{	
+	if (!gtk_text_iter_inside_word (end))
+	{
 		/* if we're neither inside a word,
 		 * we must be in some spaces.
 		 * skip backward to the end of the previous word. */
-		if (!gtk_text_iter_is_end (&iter))
+		if (!gtk_text_iter_is_end (end))
 		{
-			gtk_text_iter_backward_word_start (&iter);	
-			gtk_text_iter_forward_word_end (&iter);
+			gtk_text_iter_backward_word_start (end);
+			gtk_text_iter_forward_word_end (end);
 		}
 	}
 	else
 	{
-		if (!gtk_text_iter_ends_word (&iter))
-			gtk_text_iter_forward_word_end (&iter);
+		if (!gtk_text_iter_ends_word (end))
+			gtk_text_iter_forward_word_end (end);
 	}
 
-	gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc), range->end_mark, &iter);
-			
+	gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc), range->end_mark, end);
+
 	range->mw_start = -1;
 	range->mw_end = -1;
-		
-	update_current (doc, start);
+
+	update_current (doc, gtk_text_iter_get_offset (start));
 }
 
 static gchar *
@@ -719,8 +704,7 @@ spell_cb (GtkAction   *action,
 	GeditDocument *doc;
 	GeditSpellChecker *spell;
 	GtkWidget *dlg;
-	gint start, end;
-	GtkTextIter sel_start, sel_end;
+	GtkTextIter start, end;
 	gchar *word;
 	gchar *data_dir;
 
@@ -752,19 +736,17 @@ spell_cb (GtkAction   *action,
 		return;
 	}
 
-	if (gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
-						  &sel_start,
-						  &sel_end))
+	if (!gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
+						   &start,
+						   &end))
 	{
-		/* get selection points */
-		start = gtk_text_iter_get_offset (&sel_start);
-		end = gtk_text_iter_get_offset (&sel_end);
-		set_check_range (doc, start, end);
+		/* no selection, get the whole doc */
+		gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (doc),
+					    &start,
+					    &end);
 	}
-	else
-	{
-		set_check_range (doc, 0, -1);
-	}
+
+	set_check_range (doc, &start, &end);
 
 	word = get_next_misspelled_word (view);
 	if (word == NULL)
