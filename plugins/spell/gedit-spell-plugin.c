@@ -311,28 +311,37 @@ set_check_range (GeditDocument *doc,
 				 (GDestroyNotify)g_free);
 	}
 
-	gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc),
-				   range->start_mark,
-				   start);
-
-	if (!gtk_text_iter_inside_word (end))
-	{
-		/* if we're neither inside a word,
-		 * we must be in some spaces.
-		 * skip backward to the end of the previous word. */
-		if (!gtk_text_iter_is_end (end))
+	if (gedit_spell_utils_skip_no_spell_check (start, end))
+	 {
+		if (!gtk_text_iter_inside_word (end))
 		{
-			gtk_text_iter_backward_word_start (end);
-			gtk_text_iter_forward_word_end (end);
+			/* if we're neither inside a word,
+			 * we must be in some spaces.
+			 * skip backward to the end of the previous word. */
+			if (!gtk_text_iter_is_end (end))
+			{
+				gtk_text_iter_backward_word_start (end);
+				gtk_text_iter_forward_word_end (end);
+			}
+		}
+		else
+		{
+			if (!gtk_text_iter_ends_word (end))
+				gtk_text_iter_forward_word_end (end);
 		}
 	}
 	else
 	{
-		if (!gtk_text_iter_ends_word (end))
-			gtk_text_iter_forward_word_end (end);
+		/* no spell checking in the specified range */
+		start = end;
 	}
 
-	gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc), range->end_mark, end);
+	gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc),
+				   range->start_mark,
+				   start);
+	gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc),
+				   range->end_mark,
+				   end);
 
 	range->mw_start = -1;
 	range->mw_end = -1;
