@@ -354,8 +354,9 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 	{
 		gtk_widget_show (error_widget);
 
-		gtk_box_pack_start_defaults (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
-					     error_widget);
+		gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
+		                    error_widget,
+		                    TRUE, TRUE, 0);
 		gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);			     
 
 		return;

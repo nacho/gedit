@@ -804,8 +804,9 @@ get_configure_dialog (GeditTimePlugin *plugin)
 
 	if (!ret)
 	{
-		gtk_box_pack_start_defaults (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog->dialog))),
-					     error_widget);
+		gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog->dialog))),
+		                    error_widget,
+		                    TRUE, TRUE, 0);
 		gtk_container_set_border_width (GTK_CONTAINER (error_widget), 5);
 
 		gtk_widget_show (error_widget);
