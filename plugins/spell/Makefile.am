@@ -53,7 +53,7 @@ plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 EXTRA_DIST = 					\
 	$(ui_DATA)				\
 	$(plugin_in_files)			\
-	gedit-spell-checker-dialog-marshal.list 
+	gedit-spell-marshal.list 
 
 CLEANFILES = $(BUILT_SOURCES) $(plugin_DATA)
 
