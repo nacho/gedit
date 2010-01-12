@@ -63,7 +63,6 @@ typedef enum
   GEDIT_ENCODING_ISO_8859_6,
   GEDIT_ENCODING_ISO_8859_7,
   GEDIT_ENCODING_ISO_8859_8,
-  GEDIT_ENCODING_ISO_8859_8_I,
   GEDIT_ENCODING_ISO_8859_9,
   GEDIT_ENCODING_ISO_8859_10,
   GEDIT_ENCODING_ISO_8859_13,
@@ -75,7 +74,7 @@ typedef enum
   GEDIT_ENCODING_UTF_16,
   GEDIT_ENCODING_UTF_16_BE,
   GEDIT_ENCODING_UTF_16_LE,
-  GEDIT_ENCODING_UTF_32,  
+  GEDIT_ENCODING_UTF_32,
   GEDIT_ENCODING_UCS_2,
   GEDIT_ENCODING_UCS_4,
 
@@ -94,7 +93,6 @@ typedef enum
   GEDIT_ENCODING_GB2312,
   GEDIT_ENCODING_GBK,
   GEDIT_ENCODING_GEOSTD8,
-  GEDIT_ENCODING_HZ,
 
   GEDIT_ENCODING_IBM_850,
   GEDIT_ENCODING_IBM_852,
@@ -165,8 +163,6 @@ static const GeditEncoding encodings [] = {
     "ISO-8859-7", N_("Greek") },
   { GEDIT_ENCODING_ISO_8859_8,
     "ISO-8859-8", N_("Hebrew Visual") },
-  { GEDIT_ENCODING_ISO_8859_8_I,
-    "ISO-8859-8-I", N_("Hebrew") },
   { GEDIT_ENCODING_ISO_8859_9,
     "ISO-8859-9", N_("Turkish") },
   { GEDIT_ENCODING_ISO_8859_10,
@@ -224,8 +220,6 @@ static const GeditEncoding encodings [] = {
     "GBK", N_("Chinese Simplified") },
   { GEDIT_ENCODING_GEOSTD8,
     "GEORGIAN-ACADEMY", N_("Georgian") }, /* FIXME GEOSTD8 ? */
-  { GEDIT_ENCODING_HZ,
-    "HZ", N_("Chinese Simplified") },
 
   { GEDIT_ENCODING_IBM_850,
     "IBM850", N_("Western") },
