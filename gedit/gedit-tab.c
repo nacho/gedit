@@ -981,6 +981,9 @@ document_loaded (GeditDocument *document,
 			g_return_if_fail ((error->domain == G_CONVERT_ERROR) ||
 			      		  (error->domain == GEDIT_CONVERT_ERROR));
 
+			/* FIXME: Check for GEDIT_CONVERT_ERROR_FALLBACK_USED
+			  and set the right message area */
+
 			// TODO: different error messages if tab->priv->state == GEDIT_TAB_STATE_REVERTING?
 			// note that while reverting encoding should be ok, so this is unlikely to happen
 			emsg = gedit_conversion_error_while_loading_message_area_new (
