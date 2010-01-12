@@ -28,6 +28,94 @@
 #include <string.h>
 
 #define TEXT_TO_CONVERT "this is some text to make the tests"
+#define TEXT_TO_GUESS "hello \xe6\x96\x87 world"
+
+static void
+print_hex (gchar *ptr, gint len)
+{
+	gint i;
+
+	for (i = 0; i < len; ++i)
+	{
+		g_printf ("\\x%02x", (unsigned char)ptr[i]);
+	}
+
+	g_printf ("\n");
+}
+
+static gchar *
+get_encoded_text (const gchar         *text,
+                  gsize                nread,
+		  const GeditEncoding *to,
+		  const GeditEncoding *from,
+		  gsize               *bytes_written_aux,
+		  gboolean             care_about_error)
+{
+	GCharsetConverter *converter;
+	gchar *out, *out_aux;
+	gsize bytes_read, bytes_read_aux;
+	gsize bytes_written;
+	GConverterResult res;
+	GError *err;
+
+	converter = g_charset_converter_new (gedit_encoding_get_charset (to),
+					     gedit_encoding_get_charset (from),
+					     NULL);
+
+	out = g_malloc (200);
+	out_aux = g_malloc (200);
+	err = NULL;
+	bytes_read_aux = 0;
+	*bytes_written_aux = 0;
+
+	if (nread == -1)
+	{
+		nread = strlen (text);
+	}
+
+	do
+	{
+		res = g_converter_convert (G_CONVERTER (converter),
+		                           text + bytes_read_aux,
+		                           nread,
+		                           out_aux,
+		                           200,
+		                           G_CONVERTER_INPUT_AT_END,
+		                           &bytes_read,
+		                           &bytes_written,
+		                           &err);
+		memcpy (out + *bytes_written_aux, out_aux, bytes_written);
+		bytes_read_aux += bytes_read;
+		*bytes_written_aux += bytes_written;
+		nread -= bytes_read;
+	} while (res != G_CONVERTER_FINISHED && res != G_CONVERTER_ERROR);
+
+	if (care_about_error)
+	{
+		g_assert_no_error (err);
+	}
+	else if (err)
+	{
+		g_printf ("** You don't care, but there was an error: %s", err->message);
+		return NULL;
+	}
+
+	out[*bytes_written_aux] = '\0';
+
+	if (!g_utf8_validate (out, *bytes_written_aux, NULL) && !care_about_error)
+	{
+		if (!care_about_error)
+		{
+			return NULL;
+		}
+		else
+		{
+			g_assert_not_reached ();
+		}
+	}
+
+	return out;
+}
 
 static GSList *
 get_all_encodings ()
@@ -51,12 +139,12 @@ get_all_encodings ()
 	return encs;
 }
 
-static void
+static gchar *
 do_test (const gchar *test_in,
          const gchar *enc,
          GSList      *encodings,
          gsize        nread,
-         const gchar *test_out)
+         const GeditEncoding **guessed)
 {
 	GeditSmartCharsetConverter *converter;
 	gchar *out, *out_aux;
@@ -99,7 +187,10 @@ do_test (const gchar *test_in,
 	g_assert_no_error (err);
 	out[bytes_written_aux] = '\0';
 
-	g_assert_cmpstr (out, ==, test_out);
+	if (guessed != NULL)
+		*guessed = gedit_smart_charset_converter_get_guessed (converter);
+
+	return out;
 }
 
 static void
@@ -163,10 +254,16 @@ do_test_roundtrip (const char *str, const char *charset)
 static void
 test_utf8_utf8 ()
 {
-	do_test (TEXT_TO_CONVERT, "UTF-8", NULL, strlen (TEXT_TO_CONVERT), TEXT_TO_CONVERT);
+	gchar *aux;
 
-	do_test ("foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz", "UTF-8", NULL, 18, "foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz");
-	do_test ("foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz", "UTF-8", NULL, 9, "foobar\xc3\xa8\xc3");
+	aux = do_test (TEXT_TO_CONVERT, "UTF-8", NULL, strlen (TEXT_TO_CONVERT), NULL);
+	g_assert_cmpstr (aux, ==, TEXT_TO_CONVERT);
+
+	aux = do_test ("foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz", "UTF-8", NULL, 18, NULL);
+	g_assert_cmpstr (aux, ==, "foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz");
+
+	aux = do_test ("foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz", "UTF-8", NULL, 9, NULL);
+	g_assert_cmpstr (aux, ==, "foobar\xc3\xa8\xc3");
 
 	/* FIXME: Use the utf8 stream for a fallback? */
 	//do_test_with_error ("\xef\xbf\xbezzzzzz", encs, G_IO_ERROR_FAILED);
@@ -189,6 +286,37 @@ test_xxx_xxx ()
 	g_slist_free (encs);
 }
 
+static void
+test_guessed ()
+{
+	GSList *encs = NULL;
+	gchar *aux, *aux2, *fail;
+	gsize aux_len, fail_len;
+	const GeditEncoding *guessed;
+
+	aux = get_encoded_text (TEXT_TO_GUESS, -1,
+	                        gedit_encoding_get_from_charset ("UTF-16"),
+	                        gedit_encoding_get_from_charset ("UTF-8"),
+	                        &aux_len,
+	                        TRUE);
+
+	fail = get_encoded_text (aux, aux_len,
+	                         gedit_encoding_get_from_charset ("UTF-8"),
+	                         gedit_encoding_get_from_charset ("ISO-8859-15"),
+	                         &fail_len,
+	                         FALSE);
+
+	g_assert (fail == NULL);
+
+	/* ISO-8859-15 should fail */
+	encs = g_slist_append (encs, (gpointer)gedit_encoding_get_from_charset ("ISO-8859-15"));
+	encs = g_slist_append (encs, (gpointer)gedit_encoding_get_from_charset ("UTF-16"));
+
+	aux2 = do_test (aux, NULL, encs, aux_len, &guessed);
+
+	g_assert (guessed == gedit_encoding_get_from_charset ("UTF-16"));
+}
+
 int main (int   argc,
           char *argv[])
 {
@@ -196,7 +324,8 @@ int main (int   argc,
 	g_test_init (&argc, &argv, NULL);
 
 	g_test_add_func ("/smart-converter/utf8-utf8", test_utf8_utf8);
-	g_test_add_func ("/smart-converter/xxx-xxx", test_xxx_xxx);
+	//g_test_add_func ("/smart-converter/xxx-xxx", test_xxx_xxx);
+	g_test_add_func ("/smart-converter/guessed", test_guessed);
 
 	return g_test_run ();
 }

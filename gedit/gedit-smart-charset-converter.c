@@ -121,6 +121,73 @@ get_encoding (GeditSmartCharsetConverter *smart)
 	return (const GeditEncoding *)smart->priv->current_encoding->data;
 }
 
+static gboolean
+try_convert (GCharsetConverter *converter,
+             const void        *inbuf,
+             gsize              inbuf_size)
+{
+	GError *err;
+	gsize bytes_read, nread;
+	gsize bytes_written, nwritten;
+	GConverterResult res;
+	gchar *out;
+	gboolean ret;
+	gsize out_size;
+
+	err = NULL;
+	nread = 0;
+	nwritten = 0;
+	out_size = inbuf_size * 4;
+	out = g_malloc (out_size);
+
+	do
+	{
+		res = g_converter_convert (G_CONVERTER (converter),
+		                           inbuf + nread,
+		                           inbuf_size - nread,
+		                           out + nwritten,
+		                           out_size - nwritten,
+		                           G_CONVERTER_INPUT_AT_END,
+		                           &bytes_read,
+		                           &bytes_written,
+		                           &err);
+
+		nread += bytes_read;
+		nwritten += bytes_written;
+	} while (res != G_CONVERTER_FINISHED && res != G_CONVERTER_ERROR && err == NULL);
+
+	if (err != NULL)
+	{
+		if (err->code == G_CONVERT_ERROR_PARTIAL_INPUT)
+		{
+			/* FIXME We can get partial input while guessing the
+			   encoding because we just take some amount of text
+			   to guess from. */
+			ret = TRUE;
+		}
+		else
+		{
+			ret = FALSE;
+		}
+
+		g_error_free (err);
+	}
+	else
+	{
+		ret = TRUE;
+	}
+
+	/* FIXME: Check the remainder? */
+	if (ret == TRUE && !g_utf8_validate (out, nwritten, NULL))
+	{
+		ret = FALSE;
+	}
+
+	g_free (out);
+
+	return ret;
+}
+
 static GCharsetConverter *
 guess_encoding (GeditSmartCharsetConverter *smart,
 		const void                 *inbuf,
@@ -136,10 +203,6 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 	while (TRUE)
 	{
 		const GeditEncoding *enc;
-		gchar outbuf[inbuf_size];
-		GConverterResult ret;
-		gsize read, written;
-		GError *err = NULL;
 
 		if (conv != NULL)
 		{
@@ -147,7 +210,7 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 			conv = NULL;
 		}
 
-		/* We get the first encoding we have in the list */
+		/* We get an encoding from the list */
 		enc = get_encoding (smart);
 
 		/* if it is NULL we didn't guess anything */
@@ -168,7 +231,7 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 				break;
 			}
 
-			/* Check if the end is just less than one char */
+			/* Check if the end is less than one char */
 			remainder = inbuf_size - (end - (gchar *)inbuf);
 			if (remainder < 6)
 			{
@@ -189,28 +252,8 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 			break;
 		}
 
-		ret = g_converter_convert (G_CONVERTER (conv),
-					   inbuf,
-					   inbuf_size,
-					   outbuf,
-					   inbuf_size,
-					   0,
-					   &read,
-					   &written,
-					   &err);
-
-		if (err != NULL)
-		{
-			/* FIXME: Is this ok or should we just skip it? */
-			if (err->code == G_CONVERT_ERROR_PARTIAL_INPUT)
-			{
-				g_error_free (err);
-				break;
-			}
-
-			g_error_free (err);
-		}
-		else
+		/* Try to convert */
+		if (try_convert (conv, inbuf, inbuf_size))
 		{
 			break;
 		}
@@ -218,6 +261,7 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 
 	if (conv != NULL)
 	{
+		g_converter_reset (G_CONVERTER (conv));
 		g_charset_converter_set_use_fallback (conv, TRUE);
 	}
 
@@ -343,5 +387,9 @@ gedit_smart_charset_converter_get_num_fallbacks (GeditSmartCharsetConverter *sma
 {
 	g_return_val_if_fail (GEDIT_IS_SMART_CHARSET_CONVERTER (smart), FALSE);
 
+	if (smart->priv->charset_conv == NULL)
+		return FALSE;
+
 	return g_charset_converter_get_num_fallbacks (smart->priv->charset_conv) != 0;
 }
+

@@ -42,6 +42,7 @@
 
 #include "gedit-prefs-manager-app.h"
 #include "gedit-document.h"
+#include "gedit-convert.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
 #include "gedit-language-manager.h"
@@ -87,8 +88,6 @@ static void	gedit_document_save_real	(GeditDocument          *doc,
 						 const gchar            *uri,
 						 const GeditEncoding    *encoding,
 						 GeditDocumentSaveFlags  flags);
-static void	gedit_document_set_readonly	(GeditDocument *doc,
-						 gboolean       readonly);
 static void	to_search_region_range 		(GeditDocument *doc,
 						 GtkTextIter   *start, 
 						 GtkTextIter   *end);
@@ -1046,9 +1045,16 @@ set_readonly (GeditDocument *doc,
 	doc->priv->readonly = readonly;
 }
 
-static void
-gedit_document_set_readonly (GeditDocument *doc,
-			     gboolean       readonly)
+/**
+ * gedit_document_set_readonly:
+ * @doc: a #GeditDocument
+ * @readonly: %TRUE to se the document as read-only
+ *
+ * If @readonly is %TRUE sets @doc as read-only.
+ */
+void
+_gedit_document_set_readonly (GeditDocument *doc,
+			      gboolean       readonly)
 {
 	gedit_debug (DEBUG_DOCUMENT);
 
@@ -1119,7 +1125,7 @@ document_loader_loaded (GeditDocumentLoader *loader,
 			GeditDocument       *doc)
 {
 	/* load was successful */
-	if (error == NULL)
+	if (error == NULL || error->code == GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK)
 	{
 		GtkTextIter iter;
 		GFileInfo *info;
@@ -1360,7 +1366,7 @@ document_saver_saving (GeditDocumentSaver *saver,
 
 			g_get_current_time (&doc->priv->time_of_last_save_or_load);
 
-			gedit_document_set_readonly (doc, FALSE);
+			_gedit_document_set_readonly (doc, FALSE);
 
 			gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc),
 						      FALSE);

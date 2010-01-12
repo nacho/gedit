@@ -540,7 +540,8 @@ create_option_menu (GtkWidget *message_area, GtkWidget *vbox)
 
 static GtkWidget *
 create_conversion_error_message_area (const gchar *primary_text,
-				      const gchar *secondary_text)
+				      const gchar *secondary_text,
+				      gboolean     edit_anyway)
 {
 	GtkWidget *message_area;
 	GtkWidget *hbox_content;
@@ -558,21 +559,53 @@ create_conversion_error_message_area (const gchar *primary_text,
 						       _("_Retry"),
 						       GTK_STOCK_REDO,
 						       GTK_RESPONSE_OK);
-	gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
-				       GTK_STOCK_CANCEL,
-				       GTK_RESPONSE_CANCEL);
+
+	if (edit_anyway)
+	{
+		gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
+					       _("Edit Any_way"),
+					       GTK_RESPONSE_YES);
+		gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
+					       _("D_on't Edit"),
+					       GTK_RESPONSE_CANCEL);
+	}
+	else
+	{
+		gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
+					       GTK_STOCK_CANCEL,
+					       GTK_RESPONSE_CANCEL);
+	}
 #else
 	message_area = gtk_info_bar_new ();
+
 	info_bar_add_stock_button_with_text (GTK_INFO_BAR (message_area),
 					     _("_Retry"),
 					     GTK_STOCK_REDO,
 					     GTK_RESPONSE_OK);
 
-	gtk_info_bar_add_button (GTK_INFO_BAR (message_area),
-				 GTK_STOCK_CANCEL,
-				 GTK_RESPONSE_CANCEL);
-	gtk_info_bar_set_message_type (GTK_INFO_BAR (message_area),
-				       GTK_MESSAGE_ERROR);
+	if (edit_anyway)
+	{
+		gtk_info_bar_add_button (GTK_INFO_BAR (message_area),
+		/* Translators: the access key chosen for this string should be
+		 different from other main menu access keys (Open, Edit, View...) */
+					 _("Edit Any_way"),
+					 GTK_RESPONSE_YES);
+		gtk_info_bar_add_button (GTK_INFO_BAR (message_area),
+		/* Translators: the access key chosen for this string should be
+		 different from other main menu access keys (Open, Edit, View...) */
+					 _("D_on't Edit"),
+					 GTK_RESPONSE_CANCEL);
+		gtk_info_bar_set_message_type (GTK_INFO_BAR (message_area),
+					       GTK_MESSAGE_WARNING);
+	}
+	else
+	{
+		gtk_info_bar_add_button (GTK_INFO_BAR (message_area),
+					 GTK_STOCK_CANCEL,
+					 GTK_RESPONSE_CANCEL);
+		gtk_info_bar_set_message_type (GTK_INFO_BAR (message_area),
+					       GTK_MESSAGE_ERROR);
+	}
 #endif
 
 	hbox_content = gtk_hbox_new (FALSE, 8);
@@ -628,6 +661,7 @@ gedit_conversion_error_while_loading_message_area_new (
 	gchar *uri_for_display;
 	gchar *temp_uri_for_display;
 	GtkWidget *message_area;
+	gboolean edit_anyway = FALSE;
 	
 	g_return_val_if_fail (uri != NULL, NULL);
 	g_return_val_if_fail (error != NULL, NULL);
@@ -640,8 +674,8 @@ gedit_conversion_error_while_loading_message_area_new (
 	 * though the dialog uses wrapped text, if the URI doesn't contain
 	 * white space then the text-wrapping code is too stupid to wrap it.
 	 */
-	temp_uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
-								MAX_URI_IN_DIALOG_LENGTH);								
+	temp_uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri,
+								MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
 	
 	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
@@ -652,18 +686,29 @@ gedit_conversion_error_while_loading_message_area_new (
 	else
 		encoding_name = g_strdup ("UTF-8");
 
-	if (error->domain == GEDIT_CONVERT_ERROR)
+	if (error->domain == GEDIT_CONVERT_ERROR &&
+	    error->code == GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED)
 	{
-		g_return_val_if_fail (error->code == GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED, NULL);
-		
 		error_message = g_strdup_printf (_("Could not open the file %s."),
-							 uri_for_display);
+						 uri_for_display);
 		message_details = g_strconcat (_("gedit has not been able to detect "
 				               "the character coding."), "\n", 
 				               _("Please check that you are not trying to open a binary file."), "\n",
 					       _("Select a character coding from the menu and try again."), NULL);
 	}
-	else 
+	else if (error->domain == GEDIT_DOCUMENT_ERROR &&
+	         error->code == GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK)
+	{
+		error_message = g_strdup_printf (_("There was a problem opening the file %s."),
+						 uri_for_display);
+		message_details = g_strconcat (_("The file you opened has some invalid characters, "
+					       "if you continue editing this file you could make this "
+					       "document useless."), "\n",
+					       _("You can also choose another character encoding and try again."),
+					       NULL);
+		edit_anyway = TRUE;
+	}
+	else
 	{
 		
 		error_message = g_strdup_printf (_("Could not open the file %s using the %s character coding."),
@@ -673,7 +718,9 @@ gedit_conversion_error_while_loading_message_area_new (
 					       _("Select a different character coding from the menu and try again."), NULL);
 	}
 	
-	message_area = create_conversion_error_message_area (error_message, message_details);
+	message_area = create_conversion_error_message_area (error_message,
+							     message_details,
+							     edit_anyway);
 
 	g_free (uri_for_display);
 	g_free (encoding_name);
@@ -726,7 +773,8 @@ gedit_conversion_error_while_saving_message_area_new (
 	
 	message_area = create_conversion_error_message_area (
 								error_message,
-								message_details);
+								message_details,
+								FALSE);
 
 	g_free (uri_for_display);
 	g_free (encoding_name);

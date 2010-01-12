@@ -503,41 +503,57 @@ conversion_loading_error_message_area_response (GtkWidget        *message_area,
 						GeditTab         *tab)
 {
 	GeditDocument *doc;
+	GeditView *view;
 	gchar *uri;
+	const GeditEncoding *encoding;
 
 	doc = gedit_tab_get_document (tab);
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 
+	view = gedit_tab_get_view (tab);
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+
 	uri = gedit_document_get_uri (doc);
 	g_return_if_fail (uri != NULL);
 
-	if (response_id == GTK_RESPONSE_OK)
+	switch (response_id)
 	{
-		const GeditEncoding *encoding;
+		case GTK_RESPONSE_OK:
+			encoding = gedit_conversion_error_message_area_get_encoding (
+					GTK_WIDGET (message_area));
 
-		encoding = gedit_conversion_error_message_area_get_encoding (
-				GTK_WIDGET (message_area));
+			g_return_if_fail (encoding != NULL);
 
-		g_return_if_fail (encoding != NULL);
+			set_message_area (tab, NULL);
+			gedit_tab_set_state (tab, GEDIT_TAB_STATE_LOADING);
 
-		set_message_area (tab, NULL);
-		gedit_tab_set_state (tab, GEDIT_TAB_STATE_LOADING);
+			tab->priv->tmp_encoding = encoding;
 
-		tab->priv->tmp_encoding = encoding;
+			if (tab->priv->auto_save_timeout > 0)
+				remove_auto_save_timeout (tab);
 
-		g_return_if_fail (tab->priv->auto_save_timeout <= 0);
+			gedit_document_load (doc,
+					     uri,
+					     encoding,
+					     tab->priv->tmp_line_pos,
+					     FALSE);
+			break;
+		case GTK_RESPONSE_YES:
+			/* This means that we want to edit the document anyway */
+			set_message_area (tab, NULL);
+			tab->priv->not_editable = FALSE;
+			gtk_text_view_set_editable (GTK_TEXT_VIEW (view),
+						    TRUE);
+			break;
+		case GTK_RESPONSE_CANCEL:
+			/* We don't want to edit the document just show it */
+			set_message_area (tab, NULL);
+			break;
+		default:
+			_gedit_recent_remove (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))), uri);
 
-		gedit_document_load (doc,
-				     uri,
-				     encoding,
-				     tab->priv->tmp_line_pos,
-				     FALSE);
-	}
-	else
-	{
-		_gedit_recent_remove (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))), uri);
-
-		remove_tab (tab);
+			remove_tab (tab);
+			break;
 	}
 
 	g_free (uri);
@@ -927,7 +943,8 @@ document_loaded (GeditDocument *document,
 	location = gedit_document_get_location (document);
 	uri = gedit_document_get_uri (document);
 
-	if (error != NULL)
+	/* if the error is CONVERSION FALLBACK don't treat it as a normal error */
+	if (error != NULL && error->code != GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK)
 	{
 		if (tab->priv->state == GEDIT_TAB_STATE_LOADING)
 			gedit_tab_set_state (tab, GEDIT_TAB_STATE_LOADING_ERROR);
@@ -979,10 +996,7 @@ document_loaded (GeditDocument *document,
 		else
 		{
 			g_return_if_fail ((error->domain == G_CONVERT_ERROR) ||
-			      		  (error->domain == GEDIT_CONVERT_ERROR));
-
-			/* FIXME: Check for GEDIT_CONVERT_ERROR_FALLBACK_USED
-			  and set the right message area */
+					  (error->domain == GEDIT_CONVERT_ERROR));
 
 			// TODO: different error messages if tab->priv->state == GEDIT_TAB_STATE_REVERTING?
 			// note that while reverting encoding should be ok, so this is unlikely to happen
@@ -1027,6 +1041,36 @@ document_loaded (GeditDocument *document,
 				   uri,
 				   mime);
 		g_free (mime);
+
+		if (error && error->code == GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK)
+		{
+			GtkWidget *emsg;
+
+			//_gedit_document_set_readonly (document, TRUE);
+			tab->priv->not_editable = TRUE;
+
+			emsg = gedit_conversion_error_while_loading_message_area_new (
+									uri,
+									tab->priv->tmp_encoding,
+									error);
+
+			set_message_area (tab, emsg);
+
+			g_signal_connect (emsg,
+					  "response",
+					  G_CALLBACK (conversion_loading_error_message_area_response),
+					  tab);
+
+#if !GTK_CHECK_VERSION (2, 17, 1)
+			gedit_message_area_set_default_response (GEDIT_MESSAGE_AREA (emsg),
+								 GTK_RESPONSE_CANCEL);
+#else
+			gtk_info_bar_set_default_response (GTK_INFO_BAR (emsg),
+							   GTK_RESPONSE_CANCEL);
+#endif
+
+			gtk_widget_show (emsg);
+		}
 
 		/* Scroll to the cursor when the document is loaded */
 		gedit_view_scroll_to_cursor (GEDIT_VIEW (tab->priv->view));

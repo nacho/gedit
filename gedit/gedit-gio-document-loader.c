@@ -236,7 +236,7 @@ remote_load_completed_or_failed (GeditGioDocumentLoader *gvloader, AsyncData *as
 
 	if (async)
 		async_data_free (async);
-		
+
 	if (gvloader->priv->stream)
 		g_input_stream_close_async (G_INPUT_STREAM (gvloader->priv->stream),
 					    G_PRIORITY_HIGH, NULL, NULL, NULL);
@@ -359,11 +359,11 @@ async_read_cb (GInputStream *stream,
 		if ((gedit_smart_charset_converter_get_num_fallbacks (gvloader->priv->converter) != 0) &&
 		    gvloader->priv->error == NULL)
 		{
-			/* FIXME: Maybe check for some specific error ? */
 			g_set_error_literal (&gvloader->priv->error,
 					     GEDIT_DOCUMENT_ERROR,
 					     GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK,
-					     _("There was a problem blah blah")); /* FIXME */
+					     "There was a conversion error and it was "
+					     "needed to use a fallback char");
 		}
 
 		end_append_text_to_document (GEDIT_DOCUMENT_LOADER (gvloader));
