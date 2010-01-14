@@ -3201,6 +3201,19 @@ sync_languages_menu (GeditDocument *doc,
 }
 
 static void
+readonly_changed (GeditDocument *doc,
+		  GParamSpec    *pspec,
+		  GeditWindow   *window)
+{
+	set_sensitivity_according_to_tab (window, window->priv->active_tab);
+
+	sync_name (window->priv->active_tab, NULL, window);
+
+	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
+						 window);
+}
+
+static void
 editable_changed (GeditView  *view,
                   GParamSpec  *arg1,
                   GeditWindow *window)
@@ -3285,6 +3298,10 @@ notebook_tab_added (GeditNotebook *notebook,
 			  "notify::language",
 			  G_CALLBACK (sync_languages_menu),
 			  window);
+	g_signal_connect (doc,
+			  "notify::read-only",
+			  G_CALLBACK (readonly_changed),
+			  window);
 	g_signal_connect (view,
 			  "toggle_overwrite",
 			  G_CALLBACK (update_overwrite_mode_statusbar),
@@ -3346,6 +3363,9 @@ notebook_tab_removed (GeditNotebook *notebook,
 					      window);
 	g_signal_handlers_disconnect_by_func (doc,
 					      G_CALLBACK (sync_languages_menu),
+					      window);
+	g_signal_handlers_disconnect_by_func (doc,
+					      G_CALLBACK (readonly_changed),
 					      window);
 	g_signal_handlers_disconnect_by_func (view, 
 					      G_CALLBACK (update_overwrite_mode_statusbar),

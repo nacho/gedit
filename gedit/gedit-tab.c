@@ -529,8 +529,7 @@ conversion_loading_error_message_area_response (GtkWidget        *message_area,
 
 			tab->priv->tmp_encoding = encoding;
 
-			if (tab->priv->auto_save_timeout > 0)
-				remove_auto_save_timeout (tab);
+			g_return_if_fail (tab->priv->auto_save_timeout <= 0);
 
 			gedit_document_load (doc,
 					     uri,
@@ -541,9 +540,7 @@ conversion_loading_error_message_area_response (GtkWidget        *message_area,
 		case GTK_RESPONSE_YES:
 			/* This means that we want to edit the document anyway */
 			set_message_area (tab, NULL);
-			tab->priv->not_editable = FALSE;
-			gtk_text_view_set_editable (GTK_TEXT_VIEW (view),
-						    TRUE);
+			_gedit_document_set_readonly (doc, FALSE);
 			break;
 		case GTK_RESPONSE_CANCEL:
 			/* We don't want to edit the document just show it */
@@ -1046,8 +1043,7 @@ document_loaded (GeditDocument *document,
 		{
 			GtkWidget *emsg;
 
-			//_gedit_document_set_readonly (document, TRUE);
-			tab->priv->not_editable = TRUE;
+			_gedit_document_set_readonly (document, TRUE);
 
 			emsg = gedit_conversion_error_while_loading_message_area_new (
 									uri,
