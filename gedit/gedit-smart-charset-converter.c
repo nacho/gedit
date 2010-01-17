@@ -26,6 +26,8 @@
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 
+#include "gedit-convert.h"
+
 #define GEDIT_SMART_CHARSET_CONVERTER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_SMART_CHARSET_CONVERTER, GeditSmartCharsetConverterPrivate))
 
 struct _GeditSmartCharsetConverterPrivate
@@ -114,11 +116,15 @@ get_encoding (GeditSmartCharsetConverter *smart)
 	if (smart->priv->current_encoding != NULL)
 		return (const GeditEncoding *)smart->priv->current_encoding->data;
 
+#if 0
+	FIXME: uncomment this when using fallback
 	/* If we tried all encodings, we return the first encoding */
 	smart->priv->use_first = TRUE;
 	smart->priv->current_encoding = smart->priv->encodings;
 
 	return (const GeditEncoding *)smart->priv->current_encoding->data;
+#endif
+	return NULL;
 }
 
 static gboolean
@@ -219,6 +225,9 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 			break;
 		}
 
+		gedit_debug_message (DEBUG_UTILS, "trying charset: %s",
+				     gedit_encoding_get_charset (smart->priv->current_encoding->data));
+
 		if (enc == gedit_encoding_get_utf8 ())
 		{
 			gsize remainder;
@@ -262,7 +271,9 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 	if (conv != NULL)
 	{
 		g_converter_reset (G_CONVERTER (conv));
-		g_charset_converter_set_use_fallback (conv, TRUE);
+
+		/* FIXME: uncomment this when we want to use the fallback
+		g_charset_converter_set_use_fallback (conv, TRUE);*/
 	}
 
 	return conv;
@@ -292,7 +303,8 @@ gedit_smart_charset_converter_convert (GConverter *converter,
 		if (smart->priv->charset_conv == NULL &&
 		    !smart->priv->is_utf8)
 		{
-			g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_FAILED,
+			/* FIXME: Add a different domain when we kill gedit_convert */
+			g_set_error_literal (error, GEDIT_CONVERT_ERROR, GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED,
 					     _("It is not possible to detect the encoding automatically"));
 			return G_CONVERTER_ERROR;
 		}

@@ -356,7 +356,8 @@ async_read_cb (GInputStream *stream,
 
 		/* Check if we needed some fallback char, if so, check if there was
 		   a previous error and if not set a fallback used error */
-		if ((gedit_smart_charset_converter_get_num_fallbacks (gvloader->priv->converter) != 0) &&
+		/* FIXME Uncomment this when we want to manage conversion fallback */
+		/*if ((gedit_smart_charset_converter_get_num_fallbacks (gvloader->priv->converter) != 0) &&
 		    gvloader->priv->error == NULL)
 		{
 			g_set_error_literal (&gvloader->priv->error,
@@ -364,7 +365,7 @@ async_read_cb (GInputStream *stream,
 					     GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK,
 					     "There was a conversion error and it was "
 					     "needed to use a fallback char");
-		}
+		}*/
 
 		end_append_text_to_document (GEDIT_DOCUMENT_LOADER (gvloader));
 
