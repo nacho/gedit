@@ -36,13 +36,10 @@
 G_BEGIN_DECLS
 
 GtkWidget	*gedit_io_loading_error_message_area_new		 (const gchar         *uri,
-				    					  const GError        *error);
-
-GtkWidget	*gedit_unrecoverable_reverting_error_message_area_new	 (const gchar         *uri,
+									  const GeditEncoding *encoding,
 									  const GError        *error);
 
-GtkWidget	*gedit_conversion_error_while_loading_message_area_new	 (const gchar         *uri,
-									  const GeditEncoding *encoding,
+GtkWidget	*gedit_unrecoverable_reverting_error_message_area_new	 (const gchar         *uri,
 									  const GError        *error);
 
 GtkWidget	*gedit_conversion_error_while_saving_message_area_new	 (const gchar         *uri,

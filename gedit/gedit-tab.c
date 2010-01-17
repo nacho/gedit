@@ -469,39 +469,6 @@ io_loading_error_message_area_response (GtkWidget        *message_area,
 					gint              response_id,
 					GeditTab         *tab)
 {
-	if (response_id == GTK_RESPONSE_OK)
-	{
-		GeditDocument *doc;
-		gchar *uri;
-
-		doc = gedit_tab_get_document (tab);
-		g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-
-		uri = gedit_document_get_uri (doc);
-		g_return_if_fail (uri != NULL);
-
-		set_message_area (tab, NULL);
-		gedit_tab_set_state (tab, GEDIT_TAB_STATE_LOADING);
-
-		g_return_if_fail (tab->priv->auto_save_timeout <= 0);
-
-		gedit_document_load (doc,
-				     uri,
-				     tab->priv->tmp_encoding,
-				     tab->priv->tmp_line_pos,
-				     FALSE);
-	}
-	else
-	{
-		remove_tab (tab);
-	}
-}
-
-static void 
-conversion_loading_error_message_area_response (GtkWidget        *message_area,
-						gint              response_id,
-						GeditTab         *tab)
-{
 	GeditDocument *doc;
 	GeditView *view;
 	gchar *uri;
@@ -522,18 +489,19 @@ conversion_loading_error_message_area_response (GtkWidget        *message_area,
 			encoding = gedit_conversion_error_message_area_get_encoding (
 					GTK_WIDGET (message_area));
 
-			g_return_if_fail (encoding != NULL);
+			if (encoding != NULL)
+			{
+				tab->priv->tmp_encoding = encoding;
+			}
 
 			set_message_area (tab, NULL);
 			gedit_tab_set_state (tab, GEDIT_TAB_STATE_LOADING);
-
-			tab->priv->tmp_encoding = encoding;
 
 			g_return_if_fail (tab->priv->auto_save_timeout <= 0);
 
 			gedit_document_load (doc,
 					     uri,
-					     encoding,
+					     tab->priv->tmp_encoding,
 					     tab->priv->tmp_line_pos,
 					     FALSE);
 			break;
@@ -542,7 +510,7 @@ conversion_loading_error_message_area_response (GtkWidget        *message_area,
 			set_message_area (tab, NULL);
 			_gedit_document_set_readonly (doc, FALSE);
 			break;
-		case GTK_RESPONSE_CANCEL:
+		case GTK_RESPONSE_NO:
 			/* We don't want to edit the document just show it */
 			set_message_area (tab, NULL);
 			break;
@@ -961,14 +929,14 @@ document_loaded (GeditDocument *document,
 
 			goto end;
 		}
-		else if (error->domain == G_IO_ERROR || 
-			 error->domain == GEDIT_DOCUMENT_ERROR)
+		else
 		{
 			_gedit_recent_remove (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))), uri);
 
 			if (tab->priv->state == GEDIT_TAB_STATE_LOADING_ERROR)
 			{
-				emsg = gedit_io_loading_error_message_area_new (uri, 
+				emsg = gedit_io_loading_error_message_area_new (uri,
+										tab->priv->tmp_encoding,
 										error);
 				g_signal_connect (emsg,
 						  "response",
@@ -979,7 +947,7 @@ document_loaded (GeditDocument *document,
 			{
 				g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_REVERTING_ERROR);
 				
-				emsg = gedit_unrecoverable_reverting_error_message_area_new (uri, 
+				emsg = gedit_unrecoverable_reverting_error_message_area_new (uri,
 											     error);
 
 				g_signal_connect (emsg,
@@ -989,25 +957,6 @@ document_loaded (GeditDocument *document,
 			}
 
 			set_message_area (tab, emsg);
-		}
-		else
-		{
-			g_return_if_fail ((error->domain == G_CONVERT_ERROR) ||
-					  (error->domain == GEDIT_CONVERT_ERROR));
-
-			// TODO: different error messages if tab->priv->state == GEDIT_TAB_STATE_REVERTING?
-			// note that while reverting encoding should be ok, so this is unlikely to happen
-			emsg = gedit_conversion_error_while_loading_message_area_new (
-									uri,
-									tab->priv->tmp_encoding,
-									error);
-
-			set_message_area (tab, emsg);
-
-			g_signal_connect (emsg,
-					  "response",
-					  G_CALLBACK (conversion_loading_error_message_area_response),
-					  tab);
 		}
 
 #if !GTK_CHECK_VERSION (2, 17, 1)
@@ -1045,8 +994,7 @@ document_loaded (GeditDocument *document,
 
 			_gedit_document_set_readonly (document, TRUE);
 
-			emsg = gedit_conversion_error_while_loading_message_area_new (
-									uri,
+			emsg = gedit_io_loading_error_message_area_new (uri,
 									tab->priv->tmp_encoding,
 									error);
 
@@ -1054,7 +1002,7 @@ document_loaded (GeditDocument *document,
 
 			g_signal_connect (emsg,
 					  "response",
-					  G_CALLBACK (conversion_loading_error_message_area_response),
+					  G_CALLBACK (io_loading_error_message_area_response),
 					  tab);
 
 #if !GTK_CHECK_VERSION (2, 17, 1)

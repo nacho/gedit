@@ -170,7 +170,8 @@ set_message_area_text_and_icon (GtkWidget   *message_area,
 
 static GtkWidget *
 create_io_loading_error_message_area (const gchar *primary_text,
-				      const gchar *secondary_text)
+				      const gchar *secondary_text,
+				      gboolean     recoverable_error)
 {
 	GtkWidget *message_area;
 
@@ -190,6 +191,21 @@ create_io_loading_error_message_area (const gchar *primary_text,
 					"gtk-dialog-error",
 					primary_text,
 					secondary_text);
+
+	if (recoverable_error)
+	{
+#if !GTK_CHECK_VERSION (2, 17, 1)
+		gedit_message_area_add_stock_button_with_text (GEDIT_MESSAGE_AREA (message_area),
+							       _("_Retry"),
+							       GTK_STOCK_REFRESH,
+							       GTK_RESPONSE_OK);
+#else
+		info_bar_add_stock_button_with_text (GTK_INFO_BAR (message_area),
+						     _("_Retry"),
+						     GTK_STOCK_REFRESH,
+						     GTK_RESPONSE_OK);
+#endif
+	}
 
 	return message_area;
 }
@@ -378,77 +394,6 @@ parse_error (const GError *error,
 }
 
 GtkWidget *
-gedit_io_loading_error_message_area_new (const gchar  *uri,
-					 const GError *error)
-{
-	gchar *error_message = NULL;
-	gchar *message_details = NULL;
-	gchar *full_formatted_uri;
-	gchar *uri_for_display;
-	gchar *temp_uri_for_display;
-	GtkWidget *message_area;
-
-	g_return_val_if_fail (uri != NULL, NULL);
-	g_return_val_if_fail (error != NULL, NULL);
-	g_return_val_if_fail ((error->domain == GEDIT_DOCUMENT_ERROR) || 
-			      (error->domain == G_IO_ERROR), NULL);
-
-	full_formatted_uri = gedit_utils_uri_for_display (uri);
-
-	/* Truncate the URI so it doesn't get insanely wide. Note that even
-	 * though the dialog uses wrapped text, if the URI doesn't contain
-	 * white space then the text-wrapping code is too stupid to wrap it.
-	 */
-	temp_uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
-								MAX_URI_IN_DIALOG_LENGTH);								
-	g_free (full_formatted_uri);
-
-	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
-	g_free (temp_uri_for_display);
-
-	if (is_gio_error (error, G_IO_ERROR_TOO_MANY_LINKS))
-	{
-		message_details = g_strdup (_("The number of followed links is limited and the actual file could not be found within this limit."));
-	}
-	else if (is_gio_error (error, G_IO_ERROR_PERMISSION_DENIED))
-	{
-		message_details = g_strdup (_("You do not have the permissions necessary to open the file."));
-	}
-	else
-	{
-		parse_error (error, &error_message, &message_details, uri, uri_for_display);
-	}
-
-	if (error_message == NULL)
-		error_message = g_strdup_printf (_("Could not open the file %s."),
-						 uri_for_display);
-
-	message_area = create_io_loading_error_message_area (error_message,
-							     message_details);
-
-	if (is_recoverable_error (error))
-	{
-#if !GTK_CHECK_VERSION (2, 17, 1)
-		gedit_message_area_add_stock_button_with_text (GEDIT_MESSAGE_AREA (message_area),
-							       _("_Retry"),
-							       GTK_STOCK_REFRESH,
-							       GTK_RESPONSE_OK);
-#else
-		info_bar_add_stock_button_with_text (GTK_INFO_BAR (message_area),
-						     _("_Retry"),
-						     GTK_STOCK_REFRESH,
-						     GTK_RESPONSE_OK);
-#endif
-	}
-
-	g_free (uri_for_display);
-	g_free (error_message);
-	g_free (message_details);
-
-	return message_area;
-}
-
-GtkWidget *
 gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 						      const GError *error)
 {
@@ -492,7 +437,8 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 						 uri_for_display);
 
 	message_area = create_io_loading_error_message_area (error_message,
-							     message_details);
+							     message_details,
+							     FALSE);
 
 	g_free (uri_for_display);
 	g_free (error_message);
@@ -567,7 +513,7 @@ create_conversion_error_message_area (const gchar *primary_text,
 					       GTK_RESPONSE_YES);
 		gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
 					       _("D_on't Edit"),
-					       GTK_RESPONSE_CANCEL);
+					       GTK_RESPONSE_NO);
 	}
 	else
 	{
@@ -594,7 +540,7 @@ create_conversion_error_message_area (const gchar *primary_text,
 		/* Translators: the access key chosen for this string should be
 		 different from other main menu access keys (Open, Edit, View...) */
 					 _("D_on't Edit"),
-					 GTK_RESPONSE_CANCEL);
+					 GTK_RESPONSE_NO);
 		gtk_info_bar_set_message_type (GTK_INFO_BAR (message_area),
 					       GTK_MESSAGE_WARNING);
 	}
@@ -649,10 +595,9 @@ create_conversion_error_message_area (const gchar *primary_text,
 }
 
 GtkWidget *
-gedit_conversion_error_while_loading_message_area_new (
-						const gchar         *uri,
-						const GeditEncoding *encoding,
-				    		const GError        *error)
+gedit_io_loading_error_message_area_new (const gchar         *uri,
+					 const GeditEncoding *encoding,
+					 const GError        *error)
 {
 	gchar *error_message = NULL;
 	gchar *message_details = NULL;
@@ -662,11 +607,14 @@ gedit_conversion_error_while_loading_message_area_new (
 	gchar *temp_uri_for_display;
 	GtkWidget *message_area;
 	gboolean edit_anyway = FALSE;
+	gboolean convert_error = FALSE;
 	
 	g_return_val_if_fail (uri != NULL, NULL);
 	g_return_val_if_fail (error != NULL, NULL);
 	g_return_val_if_fail ((error->domain == G_CONVERT_ERROR) ||
-			      (error->domain == GEDIT_CONVERT_ERROR), NULL);
+			      (error->domain == GEDIT_CONVERT_ERROR) ||
+			      (error->domain == GEDIT_DOCUMENT_ERROR) || 
+			      (error->domain == G_IO_ERROR), NULL);
 	
 	full_formatted_uri = gedit_utils_uri_for_display (uri);
 
@@ -686,8 +634,21 @@ gedit_conversion_error_while_loading_message_area_new (
 	else
 		encoding_name = g_strdup ("UTF-8");
 
-	if (error->domain == GEDIT_CONVERT_ERROR &&
-	    error->code == GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED)
+	if (is_gio_error (error, G_IO_ERROR_TOO_MANY_LINKS))
+	{
+		message_details = g_strdup (_("The number of followed links is limited and the actual file could not be found within this limit."));
+	}
+	else if (is_gio_error (error, G_IO_ERROR_PERMISSION_DENIED))
+	{
+		message_details = g_strdup (_("You do not have the permissions necessary to open the file."));
+	}
+	else if (is_gio_error (error, G_IO_ERROR_INVALID_DATA))
+	{
+		message_details = g_strdup (_("Please check that you are not trying to open a binary file."));
+	}
+	else if ((is_gio_error (error, G_IO_ERROR_INVALID_DATA) && encoding == NULL) ||
+	         (error->domain == GEDIT_CONVERT_ERROR &&
+	         error->code == GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED))
 	{
 		error_message = g_strdup_printf (_("Could not open the file %s."),
 						 uri_for_display);
@@ -695,6 +656,7 @@ gedit_conversion_error_while_loading_message_area_new (
 				               "the character coding."), "\n", 
 				               _("Please check that you are not trying to open a binary file."), "\n",
 					       _("Select a character coding from the menu and try again."), NULL);
+		convert_error = TRUE;
 	}
 	else if (error->domain == GEDIT_DOCUMENT_ERROR &&
 	         error->code == GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK)
@@ -707,20 +669,34 @@ gedit_conversion_error_while_loading_message_area_new (
 					       _("You can also choose another character encoding and try again."),
 					       NULL);
 		edit_anyway = TRUE;
+		convert_error = TRUE;
 	}
-	else
+	else if (is_gio_error (error, G_IO_ERROR_INVALID_DATA) && encoding != NULL)
 	{
-		
 		error_message = g_strdup_printf (_("Could not open the file %s using the %s character coding."),
 						 uri_for_display, 
 						 encoding_name);
 		message_details = g_strconcat (_("Please check that you are not trying to open a binary file."), "\n",
 					       _("Select a different character coding from the menu and try again."), NULL);
+		convert_error = TRUE;
 	}
-	
-	message_area = create_conversion_error_message_area (error_message,
-							     message_details,
-							     edit_anyway);
+	else
+	{
+		parse_error (error, &error_message, &message_details, uri, uri_for_display);
+	}
+
+	if (convert_error)
+	{
+		message_area = create_conversion_error_message_area (error_message,
+								     message_details,
+								     edit_anyway);
+	}
+	else
+	{
+		message_area = create_io_loading_error_message_area (error_message,
+								     message_details,
+								     is_recoverable_error (error));
+	}
 
 	g_free (uri_for_display);
 	g_free (encoding_name);
@@ -1227,7 +1203,8 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 						 uri_for_display);
 
 	message_area = create_io_loading_error_message_area (error_message,
-							     message_details);
+							     message_details,
+							     FALSE);
 
 	g_free (uri_for_display);
 	g_free (error_message);
