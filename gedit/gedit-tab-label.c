@@ -93,6 +93,18 @@ close_button_clicked_cb (GtkWidget     *widget,
 }
 
 static void
+sync_tip (GeditTab *tab, GeditTabLabel *tab_label)
+{
+	gchar *str;
+
+	str = _gedit_tab_get_tooltips (tab);
+	g_return_if_fail (str != NULL);
+
+	gtk_widget_set_tooltip_markup (tab_label->priv->ebox, str);
+	g_free (str);
+}
+
+static void
 sync_name (GeditTab *tab, GParamSpec *pspec, GeditTabLabel *tab_label)
 {
 	gchar *str;
@@ -105,11 +117,7 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GeditTabLabel *tab_label)
 	gtk_label_set_text (GTK_LABEL (tab_label->priv->label), str);
 	g_free (str);
 
-	str = _gedit_tab_get_tooltips (tab);
-	g_return_if_fail (str != NULL);
-
-	gtk_widget_set_tooltip_markup (tab_label->priv->ebox, str);
-	g_free (str);
+	sync_tip (tab, tab_label);
 }
 
 static void
@@ -160,6 +168,9 @@ sync_state (GeditTab *tab, GParamSpec *pspec, GeditTabLabel *tab_label)
 		gtk_spinner_stop (GTK_SPINNER (tab_label->priv->spinner));
 #endif
 	}
+
+	/* sync tip since encoding is known only after load/save end */
+	sync_tip (tab, tab_label);
 }
 
 static void
