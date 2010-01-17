@@ -642,10 +642,6 @@ gedit_io_loading_error_message_area_new (const gchar         *uri,
 	{
 		message_details = g_strdup (_("You do not have the permissions necessary to open the file."));
 	}
-	else if (is_gio_error (error, G_IO_ERROR_INVALID_DATA))
-	{
-		message_details = g_strdup (_("Please check that you are not trying to open a binary file."));
-	}
 	else if ((is_gio_error (error, G_IO_ERROR_INVALID_DATA) && encoding == NULL) ||
 	         (error->domain == GEDIT_CONVERT_ERROR &&
 	         error->code == GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED))
