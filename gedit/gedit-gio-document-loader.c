@@ -406,6 +406,9 @@ read_file_chunk (AsyncData *async)
 		/* Init the undoable action */
 		gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (loader->document));
 		gvloader->priv->started_insert = TRUE;
+
+		/* clear the buffer */
+		gtk_text_buffer_set_text (GTK_TEXT_BUFFER (loader->document), "", 0);
 	}
 
 	g_input_stream_read_async (G_INPUT_STREAM (gvloader->priv->stream),
