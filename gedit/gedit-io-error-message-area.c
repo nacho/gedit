@@ -47,7 +47,7 @@
 #include "gedit-document.h"
 #include "gedit-io-error-message-area.h"
 #include "gedit-prefs-manager.h"
-#include <gedit/gedit-encodings-option-menu.h>
+#include <gedit/gedit-encodings-combo-box.h>
 
 #if !GTK_CHECK_VERSION (2, 17, 1)
 #include "gedit-message-area.h"
@@ -448,7 +448,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 }
 
 static void
-create_option_menu (GtkWidget *message_area, GtkWidget *vbox)
+create_combo_box (GtkWidget *message_area, GtkWidget *vbox)
 {
 	GtkWidget *hbox;
 	GtkWidget *label;
@@ -462,7 +462,7 @@ create_option_menu (GtkWidget *message_area, GtkWidget *vbox)
 	label = gtk_label_new_with_mnemonic (label_markup);
 	g_free (label_markup);
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-	menu = gedit_encodings_option_menu_new (TRUE);
+	menu = gedit_encodings_combo_box_new (TRUE);
 	g_object_set_data (G_OBJECT (message_area), 
 			   "gedit-message-area-encoding-menu", 
 			   menu);
@@ -587,7 +587,7 @@ create_conversion_error_message_area (const gchar *primary_text,
 		gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
 	}
 
-	create_option_menu (message_area, vbox);
+	create_combo_box (message_area, vbox);
 	gtk_widget_show_all (hbox_content);
 	set_contents (message_area, hbox_content);
 
@@ -771,8 +771,8 @@ gedit_conversion_error_message_area_get_encoding (GtkWidget *message_area)
 				  "gedit-message-area-encoding-menu");	
 	g_return_val_if_fail (menu, NULL);
 	
-	return gedit_encodings_option_menu_get_selected_encoding
-					(GEDIT_ENCODINGS_OPTION_MENU (menu));
+	return gedit_encodings_combo_box_get_selected_encoding
+					(GEDIT_ENCODINGS_COMBO_BOX (menu));
 }
 
 GtkWidget *

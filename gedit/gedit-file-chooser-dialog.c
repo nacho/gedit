@@ -41,7 +41,7 @@
 #include <gtk/gtk.h>
 
 #include "gedit-file-chooser-dialog.h"
-#include "gedit-encodings-option-menu.h"
+#include "gedit-encodings-combo-box.h"
 #include "gedit-language-manager.h"
 #include "gedit-prefs-manager-app.h"
 #include "gedit-debug.h"
@@ -76,7 +76,7 @@ create_option_menu (GeditFileChooserDialog *dialog)
 	hbox = gtk_hbox_new (FALSE, 6);
 
 	label = gtk_label_new_with_mnemonic (_("C_haracter Coding:"));
-	menu = gedit_encodings_option_menu_new (
+	menu = gedit_encodings_combo_box_new (
 		gtk_file_chooser_get_action (GTK_FILE_CHOOSER (dialog)) == GTK_FILE_CHOOSER_ACTION_SAVE);
 
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), menu);
@@ -271,8 +271,8 @@ gedit_file_chooser_dialog_new_valist (const gchar          *title,
 			  NULL);
 
 	if (encoding != NULL)
-		gedit_encodings_option_menu_set_selected_encoding (
-				GEDIT_ENCODINGS_OPTION_MENU (GEDIT_FILE_CHOOSER_DIALOG (result)->priv->option_menu),
+		gedit_encodings_combo_box_set_selected_encoding (
+				GEDIT_ENCODINGS_COMBO_BOX (GEDIT_FILE_CHOOSER_DIALOG (result)->priv->option_menu),
 				encoding);
 
 	active_filter = gedit_prefs_manager_get_active_file_filter ();
@@ -370,10 +370,10 @@ gedit_file_chooser_dialog_set_encoding (GeditFileChooserDialog *dialog,
 					const GeditEncoding    *encoding)
 {
 	g_return_if_fail (GEDIT_IS_FILE_CHOOSER_DIALOG (dialog));
-	g_return_if_fail (GEDIT_IS_ENCODINGS_OPTION_MENU (dialog->priv->option_menu));
+	g_return_if_fail (GEDIT_IS_ENCODINGS_COMBO_BOX (dialog->priv->option_menu));
 
-	gedit_encodings_option_menu_set_selected_encoding (
-				GEDIT_ENCODINGS_OPTION_MENU (dialog->priv->option_menu),
+	gedit_encodings_combo_box_set_selected_encoding (
+				GEDIT_ENCODINGS_COMBO_BOX (dialog->priv->option_menu),
 				encoding);
 }
 
@@ -381,10 +381,10 @@ const GeditEncoding *
 gedit_file_chooser_dialog_get_encoding (GeditFileChooserDialog *dialog)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_CHOOSER_DIALOG (dialog), NULL);
-	g_return_val_if_fail (GEDIT_IS_ENCODINGS_OPTION_MENU (dialog->priv->option_menu), NULL);
+	g_return_val_if_fail (GEDIT_IS_ENCODINGS_COMBO_BOX (dialog->priv->option_menu), NULL);
 	g_return_val_if_fail ((gtk_file_chooser_get_action (GTK_FILE_CHOOSER (dialog)) == GTK_FILE_CHOOSER_ACTION_OPEN ||
 			       gtk_file_chooser_get_action (GTK_FILE_CHOOSER (dialog)) == GTK_FILE_CHOOSER_ACTION_SAVE), NULL);
 
-	return gedit_encodings_option_menu_get_selected_encoding (
-				GEDIT_ENCODINGS_OPTION_MENU (dialog->priv->option_menu));
+	return gedit_encodings_combo_box_get_selected_encoding (
+				GEDIT_ENCODINGS_COMBO_BOX (dialog->priv->option_menu));
 }

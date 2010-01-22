@@ -97,7 +97,7 @@ INST_H_FILES =				\
 	gedit-debug.h			\
 	gedit-document.h 		\
 	gedit-encodings.h		\
-	gedit-encodings-option-menu.h	\
+	gedit-encodings-combo-box.h	\
 	gedit-file-chooser-dialog.h	\
 	gedit-help.h 			\
 	gedit-message-bus.h		\
@@ -157,7 +157,7 @@ libgedit_la_SOURCES = 			\
 	gedit-gio-document-saver.c	\
 	gedit-documents-panel.c		\
 	gedit-encodings.c		\
-	gedit-encodings-option-menu.c	\
+	gedit-encodings-combo-box.c	\
 	gedit-file-chooser-dialog.c	\
 	gedit-help.c			\
 	gedit-history-entry.c		\
