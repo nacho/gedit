@@ -1,10 +1,10 @@
 #!/bin/sh
 echo "You need to execute this on a Windows machine within msys (http://www.mingw.org)"
 echo "You also need InnoSetup (http://www.innosetup.org) with iscc in your PATH"
-echo "You need to have python, pygobject, pycairo and pygtk installed into C:\\Python25"
+echo "You need to have python, pygobject, pycairo and pygtk installed into C:\\Python26"
 echo "Make sure gedit and all its dependencies have been installed correctly to /local"
 echo "You can specify the paths by yourself:"
-echo "./build-installer.sh VERSION GTK_PREFIX GEDIT_PREFIX GTKSOURCEVIEW_PREFIX PYTHON_PREFIX MISC_PREFIX ASPELL_PREFIX"
+echo "./build-installer.sh VERSION GTK_PREFIX GEDIT_PREFIX GTKSOURCEVIEW_PREFIX PYTHON_PREFIX MISC_PREFIX ASPELL_PREFIX WINDOWS_PREFIX"
 
 # we assume glib, gtk etc were installed in the root while gedit and gtksourceview
 # in /local
@@ -16,13 +16,15 @@ if test "$#" = 7; then
   _python_prefix="$5"
   _misc_prefix="$6"
   _aspell_prefix="$7"
+  _windows_prefix="$8"
 else
   _gtk_prefix="/c/gtk"
   _gtksourceview_prefix="/usr/local"
   _gedit_prefix="/usr/local"
-  _python_prefix="/c/Python25"
+  _python_prefix="/c/Python26"
   _misc_prefix="/usr"
   _aspell_prefix="/c/Aspell"
+  _windows_prefix="/c/WINDOWS/system32"
 fi
 
 if test "$1" = '--help'; then
@@ -126,46 +128,33 @@ cp "${_misc_prefix}/bin/libxml2-2.dll" installer/gedit/bin || exit
 cp "${_misc_prefix}/bin/intl.dll" installer/gedit/bin || exit
 cp "${_misc_prefix}/bin/iconv.dll" installer/gedit/bin || exit
 
-#FIXME: We have to build with Python
-#echo "Copying Python..."
 
-# TODO: Find out Windows directory somehow, perhaps by looking at PATH?
-#cp /c/WINDOWS/system32/python25.dll installer/bin || exit
+echo "Copying Python..."
 
-# We through all python modules into python/. Glom sets PYTHONPATH accordingly.
-#mkdir -p installer/python || exit
+# TODO: Find out Windows directory somehow, we should use WINDIR substuting c:\?
+cp ${_windows_prefix}/python26.dll installer/gedit/bin || exit
+
+# We through all python modules into python/. gedit sets PYTHONPATH accordingly.
+mkdir -p installer/python || exit
+
+# Copy the dlls needed to run python
+cp -R ${_python_prefix}/DLLs installer/python || exit
 
 # TODO: Perhaps some scripts need more python modules.
-#cp ${_python_prefix}/Lib/*.py installer/python || exit
+mkdir -p installer/python/Lib || exit
+cp ${_python_prefix}/Lib/*.py installer/python/Lib || exit
 
-#mkdir -p installer/python/encodings || exit
-#cp ${_python_prefix}/Lib/encodings/*.py installer/python/encodings || exit
+mkdir -p installer/python/Lib/encodings || exit
+cp ${_python_prefix}/Lib/encodings/*.py installer/python/Lib/encodings || exit
 
-#cp ${_python_prefix}/Lib/site-packages/glom.pyd installer/python || exit
-#strip installer/python/glom.pyd || exit
-#cp ${_python_prefix}/Lib/site-packages/gtk-2.0/gda.pyd installer/python || exit
-#strip installer/python/gda.pyd || exit
+cp -R ${_python_prefix}/Lib/site-packages installer/python/Lib || exit
 
-#cp ${_python_prefix}/Lib/site-packages/pygtk.py installer/python || exit
-#cp ${_python_prefix}/Lib/site-packages/gtk-2.0/*.pyd installer/python || exit
+cp -R ${_python_prefix}/Lib/xml installer/python/Lib || exit
 
-#mkdir -p installer/python/gobject || exit
-#cp ${_python_prefix}/Lib/site-packages/gtk-2.0/gobject/*.py installer/python/gobject || exit
-#cp ${_python_prefix}/Lib/site-packages/gtk-2.0/gobject/*.pyd installer/python/gobject || exit
-
-#mkdir -p installer/python/cairo || exit
-#cp ${_python_prefix}/Lib/site-packages/cairo/*.py installer/python/cairo || exit
-#cp ${_python_prefix}/Lib/site-packages/cairo/*.pyd installer/python/cairo || exit
-
-#mkdir -p installer/python/gtk || exit
-#cp ${_python_prefix}/Lib/site-packages/gtk-2.0/gtk/*.py installer/python/gtk || exit
-#cp ${_python_prefix}/Lib/site-packages/gtk-2.0/gtk/*.pyd installer/python/gtk || exit
+mkdir -p installer/python/Lib/sqlite3 || exit
+cp ${_python_prefix}/Lib/sqlite3/*.py installer/python/Lib/sqlite3 || exit
 
 echo "Copying modules..."
-
-#cp ${_python_prefix}/Lib/site-packages/glom.pyd installer/bin || exit
-#cp ${_python_prefix}/Lib/site-packages/gtk-2.0/gda.pyd installer/bin || exit
-#strip installer/bin/*.pyd || exit
 
 cp "${_gtk_prefix}/bin/gtk-query-immodules-2.0.exe" installer/gtk/bin || exit
 

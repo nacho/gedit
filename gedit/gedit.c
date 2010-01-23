@@ -516,28 +516,26 @@ send_bacon_message (void)
 static void
 setup_path (void)
 {
-	/* Set PATH to include the gedit executable's folder */
-	wchar_t exe_filename[MAX_PATH];
-	wchar_t *p;
-	gchar *exe_folder_utf8;
 	gchar *path;
-	
-	GetModuleFileNameW (NULL, exe_filename, G_N_ELEMENTS (exe_filename)); 
-	
-	p = wcsrchr (exe_filename, L'\\');
-	g_assert (p != NULL);
-	
-	*p = L'\0';
-	exe_folder_utf8 = g_utf16_to_utf8 (exe_filename, -1, NULL, NULL, NULL);
-	
+	gchar *installdir;
+	gchar *bin;
+
+	installdir = g_win32_get_package_installation_directory_of_module (NULL);
+
+	bin = g_build_filename (installdir,
+				"bin", NULL);
+	g_free (installdir);
+
+	/* Set PATH to include the gedit executable's folder */
 	path = g_build_path (";",
-			     exe_folder_utf8,
+			     bin,
 			     g_getenv ("PATH"),
 			     NULL);
+	g_free (bin);
+
 	if (!g_setenv ("PATH", path, TRUE))
 		g_warning ("Could not set PATH for gedit");
-	
-	g_free (exe_folder_utf8);
+
 	g_free (path);
 }
 #endif

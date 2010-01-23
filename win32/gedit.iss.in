@@ -15,7 +15,7 @@ LicenseFile=gedit\share\doc\COPYING
 Name: "gtk"; Description: "GTK+ runtime environment"; Types: full compact custom; Flags: fixed
 Name: "main"; Description: "Gedit"; Types: full compact custom; Flags: fixed
 
-; TODO: Add python support and Enable languages separately
+; TODO: Enable languages separately
 Name: "python"; Description: "Python runtime and modules"; Types: full compact custom; Flags: fixed
 Name: "locale"; Description: "Translations"; Types: full compact custom; Flags: fixed
 
@@ -41,6 +41,7 @@ Name: "{userprograms}\{groupname}\Uninstall gedit"; Filename: "{uninstallexe}"; 
 ; All files
 Source: "gtk\*"; DestDir: "{app}\"; Components: gtk; Flags: recursesubdirs
 Source: "gedit\*"; DestDir: "{app}\"; Components: main; Flags: recursesubdirs
+Source: "python\*"; DestDir: "{app}\python"; Components: python; Flags: recursesubdirs
 Source: "locale\*"; DestDir: "{app}\"; Components: locale; Flags: recursesubdirs
 
 [Run]
