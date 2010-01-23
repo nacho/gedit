@@ -2177,9 +2177,10 @@ gedit_tab_auto_save (GeditTab *tab)
 }
 
 void
-_gedit_tab_save_as (GeditTab            *tab,
-		    const gchar         *uri,
-		    const GeditEncoding *encoding)
+_gedit_tab_save_as (GeditTab                 *tab,
+                    const gchar              *uri,
+                    const GeditEncoding      *encoding,
+                    GeditDocumentNewlineType  newline_type)
 {
 	GeditDocument *doc;
 	GeditDocumentSaveFlags save_flags;
@@ -2224,6 +2225,11 @@ _gedit_tab_save_as (GeditTab            *tab,
 	if (tab->priv->auto_save_timeout > 0)
 		remove_auto_save_timeout (tab);
 
+	/* FIXME: this should behave the same as encoding, setting it here
+	   makes it persistent (if save fails, it's remembered). It's not
+	   a very big deal, but would be nice to have them follow the
+	   same pattern. This can be changed once we break API for 3.0 */
+	gedit_document_set_newline_type (doc, newline_type);
 	gedit_document_save_as (doc, uri, encoding, tab->priv->save_flags);
 }
 

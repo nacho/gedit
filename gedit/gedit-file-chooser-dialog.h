@@ -34,6 +34,8 @@
 #include <gtk/gtk.h>
 
 #include <gedit/gedit-encodings.h>
+#include <gedit/gedit-enum-types.h>
+#include <gedit/gedit-document.h>
 
 G_BEGIN_DECLS
 
@@ -69,13 +71,18 @@ GtkWidget	*gedit_file_chooser_dialog_new		(const gchar            *title,
 							 const GeditEncoding    *encoding,
 							 const gchar            *first_button_text,
 							 ...);
- 
+
 void		 gedit_file_chooser_dialog_set_encoding (GeditFileChooserDialog *dialog,
 							 const GeditEncoding    *encoding);
-							 
-const GeditEncoding 
-		*gedit_file_chooser_dialog_get_encoding (GeditFileChooserDialog *dialog);						 
-							 
+
+const GeditEncoding
+		*gedit_file_chooser_dialog_get_encoding (GeditFileChooserDialog *dialog);
+
+void		 gedit_file_chooser_dialog_set_newline_type (GeditFileChooserDialog  *dialog,
+							     GeditDocumentNewlineType newline_type);
+
+GeditDocumentNewlineType
+		 gedit_file_chooser_dialog_get_newline_type (GeditFileChooserDialog *dialog);
 
 G_END_DECLS
 
