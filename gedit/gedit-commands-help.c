@@ -59,7 +59,8 @@ _gedit_cmd_help_about (GtkAction   *action,
 		"Paolo Maggi <paolo@gnome.org>",
 		"Paolo Borelli <pborelli@katamail.com>",
 		"Steve Fr\303\251cinaux  <steve@istique.net>",
-		"Jesse van den Kieboom  <jesse@icecrew.nl>",
+		"Jesse van den Kieboom  <jessevdk@gnome.org>",
+		"Ignacio Casal Quinteiro <icq@gnome.org>",
 		"James Willcox <jwillcox@gnome.org>",
 		"Chema Celorio",
 		"Federico Mena Quintero <federico@novell.com>",
@@ -75,7 +76,8 @@ _gedit_cmd_help_about (GtkAction   *action,
 	static const gchar copyright[] = \
 		"Copyright \xc2\xa9 1998-2000 Evan Lawrence, Alex Robert\n"
 		"Copyright \xc2\xa9 2000-2002 Chema Celorio, Paolo Maggi\n"
-		"Copyright \xc2\xa9 2003-2006 Paolo Maggi";
+		"Copyright \xc2\xa9 2003-2006 Paolo Maggi\n"
+		"Copyright \xc2\xa9 2004-2010 Paolo Borelli, Jesse van den Kieboom\nSteve Fr\303\251cinaux, Ignacio Casal Quinteiro";
 
 	static const gchar comments[] = \
 		N_("gedit is a small and lightweight text editor for the "
