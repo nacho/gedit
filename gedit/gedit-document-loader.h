@@ -66,6 +66,7 @@ struct _GeditDocumentLoader
 	gchar			 *uri;
 	const GeditEncoding	 *encoding;
 	const GeditEncoding	 *auto_detected_encoding;
+	GeditDocumentNewlineType  auto_detected_newline_type;
 };
 
 /*
@@ -115,6 +116,8 @@ GeditDocument		*gedit_document_loader_get_document	(GeditDocumentLoader *loader)
 const gchar		*gedit_document_loader_get_uri		(GeditDocumentLoader *loader);
 
 const GeditEncoding	*gedit_document_loader_get_encoding	(GeditDocumentLoader *loader);
+
+GeditDocumentNewlineType gedit_document_loader_get_newline_type (GeditDocumentLoader *loader);
 
 goffset			 gedit_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
 

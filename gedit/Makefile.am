@@ -65,6 +65,7 @@ endif
 NOINST_H_FILES =			\
 	gedit-close-button.h		\
 	gedit-dirs.h			\
+	gedit-document-input-stream.h	\
 	gedit-document-loader.h		\
 	gedit-document-saver.h		\
 	gedit-documents-panel.h		\
@@ -151,6 +152,7 @@ libgedit_la_SOURCES = 			\
 	gedit-debug.c			\
 	gedit-dirs.c			\
 	gedit-document.c 		\
+	gedit-document-input-stream.c	\
 	gedit-document-loader.c		\
 	gedit-gio-document-loader.c	\
 	gedit-document-saver.c		\

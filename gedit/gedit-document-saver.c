@@ -66,6 +66,7 @@ enum {
 	PROP_DOCUMENT,
 	PROP_URI,
 	PROP_ENCODING,
+	PROP_NEWLINE_TYPE,
 	PROP_FLAGS
 };
 
@@ -90,6 +91,9 @@ gedit_document_saver_set_property (GObject      *object,
 		case PROP_ENCODING:
 			g_return_if_fail (saver->encoding == NULL);
 			saver->encoding = g_value_get_boxed (value);
+			break;
+		case PROP_NEWLINE_TYPE:
+			saver->newline_type = g_value_get_enum (value);
 			break;
 		case PROP_FLAGS:
 			saver->flags = g_value_get_flags (value);
@@ -118,6 +122,9 @@ gedit_document_saver_get_property (GObject    *object,
 			break;
 		case PROP_ENCODING:
 			g_value_set_boxed (value, saver->encoding);
+			break;
+		case PROP_NEWLINE_TYPE:
+			g_value_set_enum (value, saver->newline_type);
 			break;
 		case PROP_FLAGS:
 			g_value_set_flags (value, saver->flags);
@@ -194,6 +201,18 @@ gedit_document_saver_class_init (GeditDocumentSaverClass *klass)
 							     G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class,
+					 PROP_NEWLINE_TYPE,
+					 g_param_spec_enum ("newline-type",
+					                    "Newline type",
+					                    "The accepted types of line ending",
+					                    GEDIT_TYPE_DOCUMENT_NEWLINE_TYPE,
+					                    GEDIT_DOCUMENT_NEWLINE_TYPE_LF,
+					                    G_PARAM_READWRITE |
+					                    G_PARAM_STATIC_NAME |
+					                    G_PARAM_STATIC_BLURB |
+					                    G_PARAM_CONSTRUCT_ONLY));
+
+	g_object_class_install_property (object_class,
 					 PROP_FLAGS,
 					 g_param_spec_flags ("flags",
 							     "Flags",
@@ -223,22 +242,18 @@ gedit_document_saver_init (GeditDocumentSaver *saver)
 }
 
 GeditDocumentSaver *
-gedit_document_saver_new (GeditDocument       *doc,
-			  const gchar         *uri,
-			  const GeditEncoding *encoding,
-			  GeditDocumentSaveFlags flags)
+gedit_document_saver_new (GeditDocument           *doc,
+			  const gchar             *uri,
+			  const GeditEncoding     *encoding,
+			  GeditDocumentNewlineType newline_type,
+			  GeditDocumentSaveFlags   flags)
 {
 	GeditDocumentSaver *saver;
 	GType saver_type;
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 
-#ifndef G_OS_WIN32
-	if (gedit_utils_uri_has_file_scheme (uri))
-		saver_type = GEDIT_TYPE_LOCAL_DOCUMENT_SAVER;
-	else
-#endif
-		saver_type = GEDIT_TYPE_GIO_DOCUMENT_SAVER;
+	saver_type = GEDIT_TYPE_GIO_DOCUMENT_SAVER;
 
 	if (encoding == NULL)
 		encoding = gedit_encoding_get_utf8 ();
@@ -247,6 +262,7 @@ gedit_document_saver_new (GeditDocument       *doc,
 						    "document", doc,
 						    "uri", uri,
 						    "encoding", encoding,
+						    "newline_type", newline_type,
 						    "flags", flags,
 						    NULL));
 

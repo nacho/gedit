@@ -41,6 +41,7 @@
 #include "gedit-utils.h"
 #include "gedit-convert.h"
 #include "gedit-marshal.h"
+#include "gedit-enum-types.h"
 
 /* Those are for the the gedit_document_loader_new() factory */
 #include "gedit-gio-document-loader.h"
@@ -64,6 +65,7 @@ enum
 	PROP_DOCUMENT,
 	PROP_URI,
 	PROP_ENCODING,
+	PROP_NEWLINE_TYPE
 };
 
 static void
@@ -87,6 +89,9 @@ gedit_document_loader_set_property (GObject      *object,
 		case PROP_ENCODING:
 			g_return_if_fail (loader->encoding == NULL);
 			loader->encoding = g_value_get_boxed (value);
+			break;
+		case PROP_NEWLINE_TYPE:
+			loader->auto_detected_newline_type = g_value_get_enum (value);
 			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -112,6 +117,9 @@ gedit_document_loader_get_property (GObject    *object,
 			break;
 		case PROP_ENCODING:
 			g_value_set_boxed (value, gedit_document_loader_get_encoding (loader));
+			break;
+		case PROP_NEWLINE_TYPE:
+			g_value_set_enum (value, loader->auto_detected_newline_type);
 			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -185,6 +193,16 @@ gedit_document_loader_class_init (GeditDocumentLoaderClass *klass)
 							     G_PARAM_CONSTRUCT_ONLY |
 							     G_PARAM_STATIC_STRINGS));
 
+	g_object_class_install_property (object_class, PROP_NEWLINE_TYPE,
+	                                 g_param_spec_enum ("newline-type",
+	                                                    "Newline type",
+	                                                    "The accepted types of line ending",
+	                                                    GEDIT_TYPE_DOCUMENT_NEWLINE_TYPE,
+	                                                    GEDIT_DOCUMENT_NEWLINE_TYPE_LF,
+	                                                    G_PARAM_READWRITE |
+	                                                    G_PARAM_STATIC_NAME |
+	                                                    G_PARAM_STATIC_BLURB));
+
 	signals[LOADING] =
 		g_signal_new ("loading",
 			      G_OBJECT_CLASS_TYPE (object_class),
@@ -202,6 +220,7 @@ static void
 gedit_document_loader_init (GeditDocumentLoader *loader)
 {
 	loader->used = FALSE;
+	loader->auto_detected_newline_type = GEDIT_DOCUMENT_NEWLINE_TYPE_DEFAULT;
 }
 
 void
@@ -319,6 +338,15 @@ gedit_document_loader_get_encoding (GeditDocumentLoader *loader)
 			      gedit_encoding_get_current ());
 
 	return loader->auto_detected_encoding;
+}
+
+GeditDocumentNewlineType
+gedit_document_loader_get_newline_type (GeditDocumentLoader *loader)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader),
+			      GEDIT_DOCUMENT_NEWLINE_TYPE_LF);
+
+	return loader->auto_detected_newline_type;
 }
 
 GFileInfo *

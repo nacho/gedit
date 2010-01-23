@@ -63,6 +63,19 @@ G_BEGIN_DECLS
 
 typedef enum
 {
+	GEDIT_DOCUMENT_NEWLINE_TYPE_LF,
+	GEDIT_DOCUMENT_NEWLINE_TYPE_CR,
+	GEDIT_DOCUMENT_NEWLINE_TYPE_CR_LF
+} GeditDocumentNewlineType;
+
+#ifdef G_OS_WIN32
+#define GEDIT_DOCUMENT_NEWLINE_TYPE_DEFAULT GEDIT_DOCUMENT_NEWLINE_TYPE_CR_LF
+#else
+#define GEDIT_DOCUMENT_NEWLINE_TYPE_DEFAULT GEDIT_DOCUMENT_NEWLINE_TYPE_LF
+#endif
+
+typedef enum
+{
 	GEDIT_SEARCH_DONT_SET_FLAGS	= 1 << 0, 
 	GEDIT_SEARCH_ENTIRE_WORD	= 1 << 1,
 	GEDIT_SEARCH_CASE_SENSITIVE	= 1 << 2
@@ -256,6 +269,12 @@ void		 gedit_document_set_enable_search_highlighting
 
 gboolean	 gedit_document_get_enable_search_highlighting
 						(GeditDocument       *doc);
+
+void		 gedit_document_set_newline_type (GeditDocument           *doc,
+						  GeditDocumentNewlineType newline_type);
+
+GeditDocumentNewlineType
+		 gedit_document_get_newline_type (GeditDocument *doc);
 
 gchar		*gedit_document_get_metadata	(GeditDocument *doc,
 						 const gchar   *key);

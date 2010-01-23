@@ -37,19 +37,22 @@
 #include <gio/gio.h>
 #include <string.h>
 
-#include "gedit-convert.h"
 #include "gedit-gio-document-saver.h"
+#include "gedit-document-input-stream.h"
 #include "gedit-debug.h"
+
+#define WRITE_CHUNK_SIZE 8192
 
 typedef struct
 {
 	GeditGioDocumentSaver *saver;
-	gchar 		      *buffer;
+	gchar 		       buffer[WRITE_CHUNK_SIZE];
 	GCancellable 	      *cancellable;
 	gboolean	       tried_mount;
+	gsize		       written;
+	gsize		       read;
 } AsyncData;
 
-#define WRITE_CHUNK_SIZE 8192
 #define REMOTE_QUERY_ATTRIBUTES G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE "," \
 				G_FILE_ATTRIBUTE_TIME_MODIFIED
 				
@@ -74,7 +77,8 @@ struct _GeditGioDocumentSaverPrivate
 
 	GFile			 *gfile;
 	GCancellable		 *cancellable;
-	GFileOutputStream	 *stream;
+	GOutputStream		 *stream;
+	GInputStream		 *input;
 	
 	GError                   *error;
 };
@@ -82,26 +86,36 @@ struct _GeditGioDocumentSaverPrivate
 G_DEFINE_TYPE(GeditGioDocumentSaver, gedit_gio_document_saver, GEDIT_TYPE_DOCUMENT_SAVER)
 
 static void
-gedit_gio_document_saver_finalize (GObject *object)
+gedit_gio_document_saver_dispose (GObject *object)
 {
 	GeditGioDocumentSaverPrivate *priv = GEDIT_GIO_DOCUMENT_SAVER (object)->priv;
 
-	if (priv->cancellable)
+	if (priv->cancellable != NULL)
 	{
 		g_cancellable_cancel (priv->cancellable);
 		g_object_unref (priv->cancellable);
+		priv->cancellable = NULL;
 	}
 
-	if (priv->gfile)
+	if (priv->gfile != NULL)
+	{
 		g_object_unref (priv->gfile);
+		priv->gfile = NULL;
+	}
 
-	if (priv->error)
+	if (priv->error != NULL)
+	{
 		g_error_free (priv->error);
-		
-	if (priv->stream)
-		g_object_unref (priv->stream);
+		priv->error = NULL;
+	}
 
-	G_OBJECT_CLASS (gedit_gio_document_saver_parent_class)->finalize (object);
+	if (priv->stream != NULL)
+	{
+		g_object_unref (priv->stream);
+		priv->stream = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_gio_document_saver_parent_class)->dispose (object);
 }
 
 static AsyncData *
@@ -111,9 +125,10 @@ async_data_new (GeditGioDocumentSaver *gvsaver)
 	
 	async = g_slice_new (AsyncData);
 	async->saver = gvsaver;
-	async->buffer = NULL;
 	async->cancellable = g_object_ref (gvsaver->priv->cancellable);
 	async->tried_mount = FALSE;
+	async->written = 0;
+	async->read = 0;
 	
 	return async;
 }
@@ -122,7 +137,6 @@ static void
 async_data_free (AsyncData *async)
 {
 	g_object_unref (async->cancellable);
-	g_free (async->buffer);
 	g_slice_free (AsyncData, async);
 }
 
@@ -132,7 +146,7 @@ gedit_gio_document_saver_class_init (GeditGioDocumentSaverClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GeditDocumentSaverClass *saver_class = GEDIT_DOCUMENT_SAVER_CLASS (klass);
 
-	object_class->finalize = gedit_gio_document_saver_finalize;
+	object_class->finalize = gedit_gio_document_saver_dispose;
 
 	saver_class->save = gedit_gio_document_saver_save;
 	saver_class->get_file_size = gedit_gio_document_saver_get_file_size;
@@ -170,9 +184,6 @@ async_failed (AsyncData *async,
 	
 	remote_save_completed_or_failed (async->saver, async);
 }
-
-/* prototype, because they call each other... isn't C lovely */
-static void write_file_chunk (AsyncData *async);
 
 static void
 remote_reget_info_cb (GFile        *source,
@@ -321,6 +332,7 @@ remote_get_info_cb (GFileOutputStream *stream,
 		next_callback = (GAsyncReadyCallback) close_async_ready_cb;
 	}
 
+	/* Close the main stream so the file stream is also closed */
 	g_output_stream_close_async (G_OUTPUT_STREAM (saver->priv->stream),
 				     G_PRIORITY_HIGH,
 				     async->cancellable,
@@ -328,17 +340,28 @@ remote_get_info_cb (GFileOutputStream *stream,
 				     async);
 }
 
+/* prototype, because they call each other... isn't C lovely */
+static void read_file_chunk (AsyncData *async);
+static void write_file_chunk (AsyncData *async);
+
 static void
 write_complete (AsyncData *async)
 {
+	GOutputStream *file_stream;
+
 	/* document is succesfully saved. we know requery for the mime type and
 	 * the mtime. I'm not sure this is actually necessary, can't we just use
 	 * g_content_type_guess (since we have the file name and the data)
 	 */
 	gedit_debug_message (DEBUG_SAVER, "Write complete, query info on stream");
+
+	if (G_IS_FILE_OUTPUT_STREAM (async->saver->priv->stream))
+		file_stream = async->saver->priv->stream;
+	else
+		file_stream = g_filter_output_stream_get_base_stream (G_FILTER_OUTPUT_STREAM (async->saver->priv->stream));
 	
 	/* query info on the stream */
-	g_file_output_stream_query_info_async (async->saver->priv->stream, 
+	g_file_output_stream_query_info_async (G_FILE_OUTPUT_STREAM (file_stream),
 					       REMOTE_QUERY_ATTRIBUTES,
 					       G_PRIORITY_HIGH,
 					       async->cancellable,
@@ -348,23 +371,20 @@ write_complete (AsyncData *async)
 
 static void
 async_write_cb (GOutputStream *stream,
-	        GAsyncResult  *res,
-	        AsyncData     *async)
+		GAsyncResult  *res,
+		AsyncData     *async)
 {
-	GError *error = NULL;
 	GeditGioDocumentSaver *gvsaver;
 	gssize bytes_written;
-	
-	gedit_debug (DEBUG_SAVER);
-	
-	/* manually check cancelled state */
+	GError *error = NULL;
+
+	/* Check cancelled state manually */
 	if (g_cancellable_is_cancelled (async->cancellable))
 	{
 		async_data_free (async);
 		return;
 	}
 
-	gvsaver = async->saver;
 	bytes_written = g_output_stream_write_finish (stream, res, &error);
 
 	gedit_debug_message (DEBUG_SAVER, "Written: %" G_GSSIZE_FORMAT, bytes_written);
@@ -375,17 +395,15 @@ async_write_cb (GOutputStream *stream,
 		async_failed (async, error);
 		return;
 	}
-	
-	gvsaver->priv->bytes_written += bytes_written;
-	
-	/* if nothing is written we're done */
-	if (gvsaver->priv->bytes_written == gvsaver->priv->size)
+
+	gvsaver = async->saver;
+	async->written += bytes_written;
+
+	/* write again */
+	if (async->written != async->read)
 	{
-		write_complete (async);
-		return;
+		write_file_chunk (async);
 	}
-	
-	/* otherwise emit progress and write some more */
 
 	/* note that this signal blocks the write... check if it isn't
 	 * a performance problem
@@ -394,7 +412,7 @@ async_write_cb (GOutputStream *stream,
 				     FALSE,
 				     NULL);
 
-	write_file_chunk (async);
+	read_file_chunk (async);
 }
 
 static void
@@ -404,18 +422,69 @@ write_file_chunk (AsyncData *async)
 
 	gvsaver = async->saver;
 
-	gedit_debug_message (DEBUG_SAVER,
-			     "Writing next chunk: %" G_GINT64_FORMAT "/%" G_GINT64_FORMAT,
-			     gvsaver->priv->bytes_written, gvsaver->priv->size);
-
 	g_output_stream_write_async (G_OUTPUT_STREAM (gvsaver->priv->stream),
-				     async->buffer + gvsaver->priv->bytes_written,
-				     MIN (WRITE_CHUNK_SIZE, gvsaver->priv->size - 
-				     			    gvsaver->priv->bytes_written),
+				     async->buffer + async->written,
+				     async->read - async->written,
 				     G_PRIORITY_HIGH,
 				     async->cancellable,
 				     (GAsyncReadyCallback) async_write_cb,
 				     async);
+}
+
+static void
+async_read_cb (GInputStream *stream,
+	       GAsyncResult *res,
+	       AsyncData    *async)
+{
+	GeditGioDocumentSaver *gvsaver;
+	GeditDocumentInputStream *dstream;
+	GError *error = NULL;
+
+	if (g_cancellable_is_cancelled (async->cancellable))
+	{
+		async_data_free (async);
+		return;
+	}
+
+	gvsaver = async->saver;
+
+	async->read = g_input_stream_read_finish (stream, res, &error);
+
+	if (error != NULL)
+	{
+		async_failed (async, error);
+		return;
+	}
+
+	/* Check if we finished reading and writing */
+	if (async->read == 0)
+	{
+		write_complete (async);
+		return;
+	}
+
+	/* Get how many chars have been read */
+	dstream = GEDIT_DOCUMENT_INPUT_STREAM (stream);
+	gvsaver->priv->bytes_written += gedit_document_input_stream_tell (dstream);
+
+	write_file_chunk (async);
+}
+
+static void
+read_file_chunk (AsyncData *async)
+{
+	GeditGioDocumentSaver *gvsaver;
+
+	gvsaver = async->saver;
+	async->written = 0;
+
+	g_input_stream_read_async (gvsaver->priv->input,
+				   async->buffer,
+				   WRITE_CHUNK_SIZE,
+				   G_PRIORITY_HIGH,
+				   async->cancellable,
+				   (GAsyncReadyCallback) async_read_cb,
+				   async);
 }
 
 static void
@@ -424,6 +493,9 @@ async_replace_ready_callback (GFile        *source,
 			      AsyncData    *async)
 {
 	GeditGioDocumentSaver *gvsaver;
+	GeditDocumentSaver *saver;
+	GCharsetConverter *converter;
+	GFileOutputStream *file_stream;
 	GError *error = NULL;
 
 	/* Check cancelled state manually */
@@ -434,71 +506,49 @@ async_replace_ready_callback (GFile        *source,
 	}
 	
 	gvsaver = async->saver;
-	gvsaver->priv->stream = g_file_replace_finish (source, res, &error);
+	saver = GEDIT_DOCUMENT_SAVER (gvsaver);
+	file_stream = g_file_replace_finish (source, res, &error);
 	
 	/* handle any error that might occur */
-	if (!gvsaver->priv->stream)
+	if (!file_stream)
 	{
 		gedit_debug_message (DEBUG_SAVER, "Opening file failed: %s", error->message);
 		async_failed (async, error);
 		return;
 	}
 
-	/* now that we have the stream, start writing async to it */
-	write_file_chunk (async);
-}
+	/* FIXME: manage converter error? */
+	gedit_debug_message (DEBUG_SAVER, "Encoding charset: %s",
+			     gedit_encoding_get_charset (saver->encoding));
 
-/* returns a pointer to the reallocated buffer */
-static gchar *
-append_new_line (GeditGioDocumentSaver  *gvsaver, 
-		 gchar 		        *buffer, 
-		 gsize 		        *len, 
-		 GError 	       **error)
-{
-	GeditDocumentSaver *saver = GEDIT_DOCUMENT_SAVER (gvsaver);
-	gsize n_len;
-	gchar *n_buffer;
-	gchar *res;
-
-	res = buffer;
-
-	n_buffer = gedit_document_saver_get_end_newline (saver, &n_len);
-	if (n_buffer != NULL)
+	if (saver->encoding != gedit_encoding_get_utf8 ())
 	{
-		gchar *new_buffer;
+		converter = g_charset_converter_new (gedit_encoding_get_charset (saver->encoding),
+						     "UTF-8",
+						     NULL);
+		gvsaver->priv->stream = g_converter_output_stream_new (G_OUTPUT_STREAM (file_stream),
+								       G_CONVERTER (converter));
 
-		new_buffer = g_try_realloc (buffer, *len + n_len + 1);
-
-		if (new_buffer == NULL)
-		{
-			/* we do not error out, just use the buffer
-			   without the ending newline */
-			g_free (n_buffer);
-			g_warning ("Cannot add '\\n' at the end of the file.");
-
-			return res;
-		}
-
-		/* Copy newline */
-		memcpy (new_buffer + *len, n_buffer, n_len);
-		g_free (n_buffer);
-		*len += n_len;
-
-		new_buffer[*len] = '\0';
-
-		res = new_buffer;
+		g_object_unref (file_stream);
+		g_object_unref (converter);
 	}
+	else
+	{
+		gvsaver->priv->stream = G_OUTPUT_STREAM (file_stream);
+	}
+	
+	gvsaver->priv->input = gedit_document_input_stream_new (GTK_TEXT_BUFFER (saver->document),
+								saver->newline_type);
 
-	return res;
+	gvsaver->priv->size = gedit_document_input_stream_get_total_size (GEDIT_DOCUMENT_INPUT_STREAM (gvsaver->priv->input));
+
+	read_file_chunk (async);
 }
 
 static void
 begin_write (AsyncData *async)
 {
 	GeditGioDocumentSaver *gvsaver;
-	gchar *buffer;
-	gsize len;
-	GError *error = NULL;
 
 	gedit_debug_message (DEBUG_SAVER, "Start replacing file contents");
 
@@ -506,25 +556,11 @@ begin_write (AsyncData *async)
 	 * backup as of yet
 	 */
 	gvsaver = async->saver;
-	buffer = gedit_document_saver_get_document_contents (GEDIT_DOCUMENT_SAVER (gvsaver), &len, &error);
-	if (buffer != NULL && len > 0)
-	{
-		/* Append new line to buffer */
-		buffer = append_new_line (gvsaver, buffer, &len, &error);
-	}
-
-	if (!buffer)
-	{
-		async_failed (async, error);
-		return;
-	}
-
-	async->buffer = buffer;
-	gvsaver->priv->size = len;
 
 	gedit_debug_message (DEBUG_SAVER, "File contents size: %" G_GINT64_FORMAT, gvsaver->priv->size);
 	gedit_debug_message (DEBUG_SAVER, "Calling replace_async");
 
+	/* FIXME: when do we want to make a backup? */
 	g_file_replace_async (gvsaver->priv->gfile, 
 			      NULL,
 			      FALSE,
@@ -580,9 +616,9 @@ recover_not_mounted (AsyncData *async)
 				       mount_operation,
 				       async->cancellable,
 				       (GAsyncReadyCallback) mount_ready_callback,
-				       async);	
+				       async);
 
-	g_object_unref (mount_operation);			
+	g_object_unref (mount_operation);
 }
 
 static void

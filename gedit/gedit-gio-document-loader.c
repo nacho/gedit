@@ -270,26 +270,91 @@ append_text_to_document (GeditDocumentLoader *loader,
 	gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &end, text, len);
 }
 
-static void
-end_append_text_to_document (GeditDocumentLoader *loader)
+static GeditDocumentNewlineType
+get_newline_type (GtkTextIter *end)
 {
-	GtkTextIter start, end;
+	GeditDocumentNewlineType res;
+	GtkTextIter copy;
+	gunichar c;
 
-	/* If the last char is a newline, remove it from the buffer (otherwise
-	   GtkTextView shows it as an empty line). See bug #324942. */
+	copy = *end;
+	c = gtk_text_iter_get_char (&copy);
+
+	GtkTextIter tt = copy;
+	gtk_text_iter_forward_chars (&tt, 2);
+
+	if (g_unichar_break_type (c) == G_UNICODE_BREAK_CARRIAGE_RETURN)
+	{
+		if (gtk_text_iter_forward_char (&copy) &&
+		    g_unichar_break_type (gtk_text_iter_get_char (&copy)) == G_UNICODE_BREAK_LINE_FEED)
+		{
+			res = GEDIT_DOCUMENT_NEWLINE_TYPE_CR_LF;
+		}
+		else
+		{
+			res = GEDIT_DOCUMENT_NEWLINE_TYPE_CR;
+		}
+	}
+	else
+	{
+		res = GEDIT_DOCUMENT_NEWLINE_TYPE_LF;
+	}
+
+	return res;
+}
+
+static void
+detect_newline_type (GeditDocumentLoader *loader)
+{
+	GtkTextIter iter;
+
+	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (loader->document), &iter);
+
+	if (!gtk_text_iter_backward_line (&iter))
+	{
+		gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (loader->document), &iter);
+	}
+
+	if (gtk_text_iter_ends_line (&iter) || gtk_text_iter_forward_to_line_end (&iter))
+	{
+		loader->auto_detected_newline_type = get_newline_type (&iter);
+	}
+}
+
+static void
+remove_ending_newline (GeditDocumentLoader *loader)
+{
+	GtkTextIter end;
+	GtkTextIter start;
+
 	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (loader->document), &end);
 	start = end;
 
-	if (gtk_text_iter_backward_char (&start))
+	gtk_text_iter_set_line_offset (&start, 0);
+
+	if (gtk_text_iter_ends_line (&start) &&
+	    gtk_text_iter_backward_line (&start))
 	{
-		gunichar c;
+		if (!gtk_text_iter_ends_line (&start))
+		{
+			gtk_text_iter_forward_to_line_end (&start);
+		}
 
-		c = gtk_text_iter_get_char (&start);
-
-		if (g_unichar_break_type (c) == G_UNICODE_BREAK_LINE_FEED)
-			gtk_text_buffer_delete (GTK_TEXT_BUFFER (loader->document),
-						&start, &end);
+		/* Delete the empty line which is from 'start' to 'end' */
+		gtk_text_buffer_delete (GTK_TEXT_BUFFER (loader->document),
+		                        &start,
+		                        &end);
 	}
+}
+
+static void
+end_append_text_to_document (GeditDocumentLoader *loader)
+{
+	detect_newline_type (loader);
+
+	/* If the last char is a newline, remove it from the buffer (otherwise
+		GtkTextView shows it as an empty line). See bug #324942. */
+	remove_ending_newline (loader);
 
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (loader->document), FALSE);
 

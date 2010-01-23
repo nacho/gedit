@@ -62,6 +62,7 @@ struct _GeditDocumentSaver
 
 	gchar			 *uri;
 	const GeditEncoding      *encoding;
+	GeditDocumentNewlineType  newline_type;
 
 	GeditDocumentSaveFlags    flags;
 
@@ -97,10 +98,11 @@ struct _GeditDocumentSaverClass
 GType 		 	 gedit_document_saver_get_type		(void) G_GNUC_CONST;
 
 /* If enconding == NULL, the encoding will be autodetected */
-GeditDocumentSaver 	*gedit_document_saver_new 		(GeditDocument        *doc,
-								 const gchar          *uri,
-								 const GeditEncoding  *encoding,
-								 GeditDocumentSaveFlags flags);
+GeditDocumentSaver 	*gedit_document_saver_new 		(GeditDocument           *doc,
+								 const gchar             *uri,
+								 const GeditEncoding     *encoding,
+								 GeditDocumentNewlineType newline_type,
+								 GeditDocumentSaveFlags   flags);
 
 gchar			*gedit_document_saver_get_document_contents (
 								 GeditDocumentSaver  *saver,

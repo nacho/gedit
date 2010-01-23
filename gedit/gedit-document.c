@@ -118,6 +118,8 @@ struct _GeditDocumentPrivate
 	gchar       *search_text;
 	gint	     num_of_lines_search_text;
 
+	GeditDocumentNewlineType newline_type;
+
 	/* Temp data while loading */
 	GeditDocumentLoader *loader;
 	gboolean             create; /* Create file if uri points 
@@ -153,7 +155,8 @@ enum {
 	PROP_READ_ONLY,
 	PROP_ENCODING,
 	PROP_CAN_SEARCH_AGAIN,
-	PROP_ENABLE_SEARCH_HIGHLIGHTING
+	PROP_ENABLE_SEARCH_HIGHLIGHTING,
+	PROP_NEWLINE_TYPE
 };
 
 enum {
@@ -342,6 +345,9 @@ gedit_document_get_property (GObject    *object,
 		case PROP_ENABLE_SEARCH_HIGHLIGHTING:
 			g_value_set_boolean (value, gedit_document_get_enable_search_highlighting (doc));
 			break;
+		case PROP_NEWLINE_TYPE:
+			g_value_set_enum (value, doc->priv->newline_type);
+			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -361,6 +367,11 @@ gedit_document_set_property (GObject      *object,
 		case PROP_ENABLE_SEARCH_HIGHLIGHTING:
 			gedit_document_set_enable_search_highlighting (doc,
 								       g_value_get_boolean (value));
+			break;
+		case PROP_NEWLINE_TYPE:
+			gedit_document_set_newline_type (doc,
+							 g_value_get_enum (value));
+			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -484,6 +495,22 @@ gedit_document_class_init (GeditDocumentClass *klass)
 							       FALSE,
 							       G_PARAM_READWRITE |
 							       G_PARAM_STATIC_STRINGS));
+
+	/**
+	 * GeditDocument:newline-type:
+	 *
+	 * The :newline-type property determines what is considered
+	 * as a line ending when saving the document
+	 */
+	g_object_class_install_property (object_class, PROP_NEWLINE_TYPE,
+	                                 g_param_spec_enum ("newline-type",
+	                                                    "Newline type",
+	                                                    "The accepted types of line ending",
+	                                                    GEDIT_TYPE_DOCUMENT_NEWLINE_TYPE,
+	                                                    GEDIT_DOCUMENT_NEWLINE_TYPE_LF,
+	                                                    G_PARAM_READWRITE |
+	                                                    G_PARAM_STATIC_NAME |
+	                                                    G_PARAM_STATIC_BLURB));
 
 	/* This signal is used to update the cursor position is the statusbar,
 	 * it's emitted either when the insert mark is moved explicitely or
@@ -802,6 +829,8 @@ gedit_document_init (GeditDocument *doc)
 	g_get_current_time (&doc->priv->time_of_last_save_or_load);
 
 	doc->priv->encoding = gedit_encoding_get_utf8 ();
+
+	doc->priv->newline_type = GEDIT_DOCUMENT_NEWLINE_TYPE_DEFAULT;
 
 	gtk_source_buffer_set_max_undo_levels (GTK_SOURCE_BUFFER (doc), 
 					       gedit_prefs_manager_get_undo_actions_limit ());
@@ -1158,8 +1187,12 @@ document_loader_loaded (GeditDocumentLoader *loader,
 		set_encoding (doc, 
 			      gedit_document_loader_get_encoding (loader),
 			      (doc->priv->requested_encoding != NULL));
-		
+
+
 		set_content_type (doc, content_type);
+
+		gedit_document_set_newline_type (doc,
+		                                 gedit_document_loader_get_newline_type (loader));
 
 		/* move the cursor at the requested line if any */
 		if (doc->priv->requested_line_pos > 0)
@@ -1412,7 +1445,9 @@ gedit_document_save_real (GeditDocument          *doc,
 	g_return_if_fail (doc->priv->saver == NULL);
 
 	/* create a saver, it will be destroyed once saving is complete */
-	doc->priv->saver = gedit_document_saver_new (doc, uri, encoding, flags);
+	doc->priv->saver = gedit_document_saver_new (doc, uri, encoding,
+						     doc->priv->newline_type,
+						     flags);
 
 	g_signal_connect (doc->priv->saver,
 			  "saving",
@@ -2403,6 +2438,28 @@ gedit_document_get_enable_search_highlighting (GeditDocument *doc)
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 	
 	return (doc->priv->to_search_region != NULL);
+}
+
+void
+gedit_document_set_newline_type (GeditDocument           *doc,
+				 GeditDocumentNewlineType newline_type)
+{
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	if (doc->priv->newline_type != newline_type)
+	{
+		doc->priv->newline_type = newline_type;
+
+		g_object_notify (G_OBJECT (doc), "newline-type");
+	}
+}
+
+GeditDocumentNewlineType
+gedit_document_get_newline_type (GeditDocument *doc)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), 0);
+
+	return doc->priv->newline_type;
 }
 
 void
