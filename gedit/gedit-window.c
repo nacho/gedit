@@ -1457,7 +1457,8 @@ setup_toolbar_open_button (GeditWindow *window,
 		      "is_important", TRUE,
 		      "short_label", _("Open"),
 		      NULL);
-	gtk_action_connect_proxy (action, GTK_WIDGET (open_button));
+	gtk_activatable_set_related_action (GTK_ACTIVATABLE (open_button),
+					    action);
 
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar),
 			    open_button,
