@@ -23,6 +23,7 @@ import gobject
 import os
 import gio
 import pango
+import glib
 import fnmatch
 import gedit
 import xml.sax.saxutils
@@ -138,7 +139,7 @@ class Popup(gtk.Dialog):
 
                 try:
                         entries = gfile.enumerate_children("standard::*")
-                except gio.Error:
+                except glib.GError:
                         pass
 
                 children = []

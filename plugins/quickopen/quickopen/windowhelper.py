@@ -23,6 +23,7 @@ from popup import Popup
 import os
 import gedit.commands
 import gio
+import glib
 from virtualdirs import RecentDocumentsDirectory
 from virtualdirs import CurrentDocumentsDirectory
 
@@ -149,7 +150,7 @@ class WindowHelper:
 
                                         if info and info.get_file_type() == gio.FILE_TYPE_DIRECTORY:
                                                 paths.append(f)
-                                except gio.Error:
+                                except glib.GError:
                                         pass
 
                 return paths
