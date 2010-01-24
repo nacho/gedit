@@ -29,6 +29,7 @@ import gedit
 
 from console import PythonConsole
 from config import PythonConsoleConfigDialog
+from config import PythonConsoleConfig
 
 PYTHON_ICON = 'gnome-mime-text-x-python'
 
@@ -56,18 +57,22 @@ class PythonConsolePlugin(gedit.Plugin):
         bottom = window.get_bottom_panel()
         bottom.remove_item(console)
 
-    def is_configurable(self):
-        return True
+def create_configure_dialog(self):
 
-    def create_configure_dialog(self):
-        if not self.dlg:
-            self.dlg = PythonConsoleConfigDialog(self.get_data_dir())
+    if not self.dlg:
+        self.dlg = PythonConsoleConfigDialog(self.get_data_dir())
 
-        dialog = self.dlg.dialog()
-        window = gedit.app_get_default().get_active_window()
-        if window:
-            dialog.set_transient_for(window)
+    dialog = self.dlg.dialog()
+    window = gedit.app_get_default().get_active_window()
+    if window:
+        dialog.set_transient_for(window)
 
-        return dialog
+    return dialog
+
+# Here we dynamically insert create_configure_dialog based on if configuration
+# is enabled. This has to be done like this because gedit checks if a plugin
+# is configurable solely on the fact that it has this member defined or not
+if PythonConsoleConfig.enabled():
+    PythonConsolePlugin.create_configure_dialog = create_configure_dialog
 
 # ex:et:ts=4:

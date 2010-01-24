@@ -25,9 +25,7 @@
 #     Copyrignt (C), 2005 Raphaël Slinckx
 
 import os
-
 import gtk
-import gconf
 
 __all__ = ('PythonConsoleConfig', 'PythonConsoleConfigDialog')
 
@@ -39,25 +37,37 @@ DEFAULT_COMMAND_COLOR = '#314e6c' # Blue Shadow
 DEFAULT_ERROR_COLOR = '#990000' # Accent Red Dark
 
 class PythonConsoleConfig(object):
+    try:
+        import gconf
+    except ImportError:
+        gconf = None
 
     def __init__(self):
         pass
-    
+
+    @staticmethod
+    def enabled():
+        return PythonConsoleConfig.gconf != None
+
     @staticmethod
     def add_handler(handler):
-        gconf.client_get_default().notify_add(GCONF_KEY_BASE, handler)
+        if PythonConsoleConfig.gconf:
+            PythonConsoleConfig.gconf.client_get_default().notify_add(GCONF_KEY_BASE, handler)
 
     color_command = property(
-        lambda self:  self.gconf_get_str(GCONF_KEY_COMMAND_COLOR, DEFAULT_COMMAND_COLOR),
-        lambda self, value:  self.gconf_set_str(GCONF_KEY_COMMAND_COLOR, value))
+        lambda self: self.gconf_get_str(GCONF_KEY_COMMAND_COLOR, DEFAULT_COMMAND_COLOR),
+        lambda self, value: self.gconf_set_str(GCONF_KEY_COMMAND_COLOR, value))
 
     color_error = property(
-        lambda self:  self.gconf_get_str(GCONF_KEY_ERROR_COLOR, DEFAULT_ERROR_COLOR),
-        lambda self, value:  self.gconf_set_str(GCONF_KEY_ERROR_COLOR, value))
-    
+        lambda self: self.gconf_get_str(GCONF_KEY_ERROR_COLOR, DEFAULT_ERROR_COLOR),
+        lambda self, value: self.gconf_set_str(GCONF_KEY_ERROR_COLOR, value))
+
     @staticmethod
     def gconf_get_str(key, default=''):
-        val = gconf.client_get_default().get(key)
+        if not PythonConsoleConfig.gconf:
+            return default
+
+        val = PythonConsoleConfig.gconf.client_get_default().get(key)
         if val is not None and val.type == gconf.VALUE_STRING:
             return val.get_string()
         else:
@@ -65,9 +75,12 @@ class PythonConsoleConfig(object):
 
     @staticmethod
     def gconf_set_str(key, value):
-        v = gconf.Value(gconf.VALUE_STRING)
+        if not PythonConsoleConfig.gconf:
+            return
+
+        v = PythonConsoleConfig.gconf.Value(gconf.VALUE_STRING)
         v.set_string(value)
-        gconf.client_get_default().set(key, v)
+        PythonConsoleConfig.gconf.client_get_default().set(key, v)
 
 class PythonConsoleConfigDialog(object):
 
