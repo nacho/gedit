@@ -522,10 +522,21 @@ class PlaceholderEval(PlaceholderExpand):
 
                 return mirrors
 
+        # SIGALRM is not supported on all platforms (e.g. windows). Timeout
+        # with SIGALRM will not be used on those platforms. This will
+        # potentially block gedit if you have a placeholder which gets stuck,
+        # but it's better than not supporting them at all. At some point we
+        # might have proper thread support and we can fix this in a better way
+        def timeout_supported(self):
+                return hasattr(signal, 'SIGALRM')
+
         def timeout_cb(self, signum = 0, frame = 0):
                 raise TimeoutError, "Operation timed out (>2 seconds)"
         
         def install_timeout(self):
+                if not self.timeout_supported():
+                        return
+
                 if self.timeout_id != None:
                         self.remove_timeout()
                 
@@ -533,6 +544,9 @@ class PlaceholderEval(PlaceholderExpand):
                 signal.alarm(2)
                 
         def remove_timeout(self):
+                if not self.timeout_supported():
+                        return
+
                 if self.timeout_id != None:
                         signal.alarm(0)
                         
