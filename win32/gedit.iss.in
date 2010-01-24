@@ -41,7 +41,7 @@ Name: "{userprograms}\{groupname}\Uninstall gedit"; Filename: "{uninstallexe}"; 
 ; All files
 Source: "gtk\*"; DestDir: "{app}\"; Components: gtk; Flags: recursesubdirs
 Source: "gedit\*"; DestDir: "{app}\"; Components: main; Flags: recursesubdirs
-Source: "python\*"; DestDir: "{app}\python"; Components: python; Flags: recursesubdirs
+Source: "python\*"; DestDir: "{app}\bin"; Components: python; Flags: recursesubdirs
 Source: "locale\*"; DestDir: "{app}\"; Components: locale; Flags: recursesubdirs
 
 [Run]
