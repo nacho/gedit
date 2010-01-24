@@ -31,35 +31,45 @@ static void
 test_consecutive_read (const gchar *inbuf,
 		       const gchar *outbuf,
 		       GeditDocumentNewlineType type,
-		       gsize mem)
+		       gsize read_chunk_len)
 {
 	GtkTextBuffer *buf;
 	GInputStream *in;
-	gsize r, n;
+	gsize outlen;
+	gssize n, r;
 	GError *err = NULL;
 	gchar *b;
 
 	buf = gtk_text_buffer_new (NULL);
-
 	gtk_text_buffer_set_text (buf, inbuf, -1);
 
 	b = g_malloc (200);
 	in = gedit_document_input_stream_new (buf, type);
 
+	outlen = strlen (outbuf);
 	n = 0;
 
 	do
 	{
-		r = g_input_stream_read (in, b + n, mem, NULL, &err);
-		n += r;
+		r = g_input_stream_read (in, b + n, read_chunk_len, NULL, &err);
+		g_assert_cmpint (r, >=, 0);
 		g_assert_no_error (err);
+
+		n += r;
 	} while (r != 0);
 
-	g_assert_cmpint (n, >, 0);
+	g_assert_cmpint (n, ==, outlen);
 
 	b[n] = '\0';
 
 	g_assert_cmpstr (b, ==, outbuf);
+}
+
+static void
+test_empty ()
+{
+	/* empty file should not have a trailing newline */
+	test_consecutive_read ("", "", GEDIT_DOCUMENT_NEWLINE_TYPE_CR_LF, 10);
 }
 
 static void
@@ -123,6 +133,8 @@ int main (int   argc,
 {
 	g_type_init ();
 	g_test_init (&argc, &argv, NULL);
+
+	g_test_add_func ("/document-input-stream/empty", test_empty);
 
 	g_test_add_func ("/document-input-stream/consecutive_cut_char", test_consecutive_cut_char);
 	g_test_add_func ("/document-input-stream/consecutive_big_read", test_consecutive_big_read);

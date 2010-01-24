@@ -360,7 +360,7 @@ gedit_document_input_stream_read (GInputStream  *stream,
 				  GError       **error)
 {
 	GeditDocumentInputStream *dstream;
-	gssize space_left, read, n, newline_size;
+	gssize space_left, read, n;
 
 	dstream = GEDIT_DOCUMENT_INPUT_STREAM (stream);
 
@@ -391,22 +391,27 @@ gedit_document_input_stream_read (GInputStream  *stream,
 		space_left -= n;
 	} while (space_left > 0 && n != 0 && dstream->priv->bytes_partial == 0);
 
-	/* make sure files are always terminated with \n (see bug #95676). Note
-	   that we strip the trailing \n when loading the file */
-	newline_size = get_new_line_size (dstream);
-
+	/* Make sure that non-empty files are always terminated with \n (see bug #95676).
+	 * Note that we strip the trailing \n when loading the file */
 	if (gtk_text_iter_is_end (&dstream->priv->pos) &&
-	    space_left >= newline_size &&
-	    !dstream->priv->newline_added)
+	    !gtk_text_iter_is_start (&dstream->priv->pos))
 	{
-		const gchar *newline;
+		gssize newline_size;
 
-		newline = get_new_line (dstream);
+		newline_size = get_new_line_size (dstream);
 
-		memcpy (buffer + read, newline, newline_size);
+		if (space_left >= newline_size &&
+		    !dstream->priv->newline_added)
+		{
+			const gchar *newline;
 
-		read += newline_size;
-		dstream->priv->newline_added = TRUE;
+			newline = get_new_line (dstream);
+
+			memcpy (buffer + read, newline, newline_size);
+
+			read += newline_size;
+			dstream->priv->newline_added = TRUE;
+		}
 	}
 
 	return read;
