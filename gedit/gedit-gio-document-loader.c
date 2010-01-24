@@ -537,8 +537,7 @@ finish_query_info (AsyncData *async)
 	}
 	else
 	{
-		candidate_encodings = g_slist_prepend (candidate_encodings,
-						       (gpointer)loader->encoding);
+		candidate_encodings = g_slist_prepend (NULL, (gpointer) loader->encoding);
 	}
 
 	gvloader->priv->converter = gedit_smart_charset_converter_new (candidate_encodings);

@@ -49,7 +49,7 @@ typedef struct
 	gchar 		       buffer[WRITE_CHUNK_SIZE];
 	GCancellable 	      *cancellable;
 	gboolean	       tried_mount;
-	gsize		       written;
+	gssize		       written;
 	gssize		       read;
 } AsyncData;
 
