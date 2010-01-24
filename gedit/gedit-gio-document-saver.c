@@ -50,7 +50,7 @@ typedef struct
 	GCancellable 	      *cancellable;
 	gboolean	       tried_mount;
 	gsize		       written;
-	gsize		       read;
+	gssize		       read;
 } AsyncData;
 
 #define REMOTE_QUERY_ATTRIBUTES G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE "," \
