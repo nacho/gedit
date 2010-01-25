@@ -1,13 +1,15 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.59)
+AC_PREREQ(2.63.2)
 
 m4_define(gedit_major_version,  2)
 m4_define(gedit_minor_version, 29)
 m4_define(gedit_micro_version,  5)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
-AC_INIT(gedit, gedit_version, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
+AC_INIT([gedit],[gedit_version],[http://bugzilla.gnome.org/enter_bug.cgi?product=gedit],[gedit],[http://projects.gnome.org/gedit/])
+
+AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_SRCDIR(gedit/gedit.c)
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -18,36 +20,29 @@ AC_SUBST(GEDIT_MINOR_VERSION, gedit_minor_version)
 AC_DEFINE(GEDIT_MICRO_VERSION, gedit_micro_version, [Gedit micro version])
 AC_SUBST(GEDIT_MICRO_VERSION, gedit_micro_version)
 
-GEDIT_API_VERSION=2.20
-AC_SUBST(GEDIT_API_VERSION)
-
-AM_INIT_AUTOMAKE([1.8 dist-bzip2 no-dist-gzip -Wno-portability])
-
+AM_INIT_AUTOMAKE([1.10 dist-bzip2 no-dist-gzip -Wno-portability])
 AM_MAINTAINER_MODE
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
-AC_CONFIG_HEADERS(config.h)
-AC_DISABLE_STATIC
-
-AC_PATH_PROG(GCONFTOOL, gconftool-2)
-IT_PROG_INTLTOOL([0.40.0])
-
-PKG_PROG_PKG_CONFIG
-
-AC_PROG_LIBTOOL
-
-GNOME_DOC_INIT
-GTK_DOC_CHECK([1.0])
-
-AC_ISC_POSIX
+# Checks for programs
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
-
+AC_SYS_LARGEFILE
+PKG_PROG_PKG_CONFIG
 # needed on osx
 AC_PROG_OBJC
 
-AC_SYS_LARGEFILE
+# Initialize libtool
+LT_PREREQ([2.2.6])
+LT_INIT(disable-static)
+
+GEDIT_API_VERSION=2.20
+AC_SUBST(GEDIT_API_VERSION)
+
+AC_PATH_PROG(GCONFTOOL, gconftool-2)
+
+GTK_DOC_CHECK([1.0])
 
 AC_CHECK_FUNCS(fsync)
 AC_CHECK_FUNC(sigaction)
@@ -158,11 +153,11 @@ dnl ================================================================
 dnl Gettext stuff.
 dnl ================================================================
 
-GETTEXT_PACKAGE=gedit
-AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
-
+IT_PROG_INTLTOOL([0.40.0])
+AC_SUBST([GETTEXT_PACKAGE], [gedit])
+AM_GNU_GETTEXT_VERSION([0.17])
 AM_GLIB_GNU_GETTEXT
+AC_DEFINE([GETTEXT_PACKAGE],[PACKAGE_TARNAME], [Define to the gettext package name.])
 
 dnl ================================================================
 dnl check update plugin
@@ -431,7 +426,7 @@ if test "x$have_python" != "xno"; then
 	save_CFLAGS="$CFLAGS"
 	CFLAGS="$CFLAGS $FLAGS"
 	AC_MSG_CHECKING([whether [$]CC understands $FLAGS])
-	AC_TRY_COMPILE([], [], [compiler_has_option=yes], [compiler_has_option=no])
+	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[]])],[compiler_has_option=yes],[compiler_has_option=no])
 	CFLAGS="$save_CFLAGS"
 	AC_MSG_RESULT($compiler_has_option)
 	if test $compiler_has_option = yes; then
@@ -497,6 +492,9 @@ AC_SUBST(GEDIT_PLUGINS_DATA_DIR)
 
 GEDIT_PLUGINS_LIBS_DIR="$libdir/gedit-2/plugins"
 AC_SUBST(GEDIT_PLUGINS_LIBS_DIR)
+
+GNOME_DOC_INIT([0.9.0],,
+  [AC_MSG_WARN([[gnome-doc-utils not found: documentation will not be built.]])])
 
 AC_CONFIG_FILES([
 Makefile
