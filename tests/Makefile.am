@@ -20,3 +20,5 @@ document_saver_SOURCES		= document-saver.c
 document_saver_LDADD		= $(progs_ldadd)
 
 TESTS = $(TEST_PROGS)
+
+EXTRA_DIST = setup-document-saver.sh

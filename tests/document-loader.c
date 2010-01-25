@@ -32,21 +32,37 @@ typedef struct
 {
 	const gchar   *in_buffer;
 	gint           newline_type;
+	GFile         *file;
 } LoaderTestData;
 
-static void
+static GFile *
 create_document (const gchar *filename,
                  const gchar *contents)
 {
 	GError *error = NULL;
 	GeditDocument *document;
-	GFile *file;
 	gchar *uri;
 
 	if (!g_file_set_contents (filename, contents, -1, &error))
 	{
 		g_assert_no_error (error);
 	}
+
+	return g_file_new_for_path (filename);
+}
+
+static void
+delete_document (GFile *location)
+{
+	if (g_file_query_exists (location, NULL))
+	{
+		GError *err = NULL;
+
+		g_file_delete (location, NULL, &err);
+		g_assert_no_error (err);
+	}
+
+	test_completed = TRUE;
 }
 
 static void
@@ -56,8 +72,6 @@ on_document_loaded (GeditDocument  *document,
 {
 	GtkTextIter start, end;
 	gchar *text;
-
-	test_completed = TRUE;
 
 	g_assert_no_error (error);
 
@@ -75,6 +89,8 @@ on_document_loaded (GeditDocument  *document,
 		                 ==,
 		                 data->newline_type);
 	}
+
+	delete_document (data->file);
 }
 
 static void
@@ -87,13 +103,14 @@ test_loader (const gchar *filename,
 	gchar *uri;
 	GeditDocument *document;
 
-	create_document (filename, contents);
+	file = create_document (filename, contents);
 
 	document = gedit_document_new ();
 
 	LoaderTestData *data = g_slice_new (LoaderTestData);
 	data->in_buffer = in_buffer;
 	data->newline_type = newline_type;
+	data->file = file;
 
 	test_completed = FALSE;
 
@@ -102,13 +119,11 @@ test_loader (const gchar *filename,
 	                  G_CALLBACK (on_document_loaded),
 	                  data);
 
-	file = g_file_new_for_path (filename);
 	uri = g_file_get_uri (file);
 
 	gedit_document_load (document, uri, gedit_encoding_get_utf8 (), 0, FALSE);
 
 	g_free (uri);
-	g_object_unref (file);
 
 	while (!test_completed)
 	{
@@ -116,6 +131,7 @@ test_loader (const gchar *filename,
 	}
 
 	g_slice_free (LoaderTestData, data);
+	g_object_unref (file);
 	g_object_unref (document);
 }
 
