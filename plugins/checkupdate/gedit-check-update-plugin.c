@@ -39,7 +39,6 @@
 #define GCONF_KEY_IGNORE_VERSION   GCONF_KEY_BASE "/ignore_version"
 
 #define WINDOW_DATA_KEY "GeditCheckUpdatePluginWindowData"
-#define ACTION_DATA_KEY "GeditCheckUpdatePluginActionData"
 
 #define VERSION_PLACE "<a href=\"[0-9]\\.[0-9]+/\">"
 
