@@ -29,11 +29,17 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 
+#include <gconf/gconf-client.h>
+
 #if !GTK_CHECK_VERSION(2, 17, 1)
 #include <gedit/gedit-message-area.h>
 #endif
 
+#define GCONF_KEY_BASE "/apps/gedit-2/plugins/checkupdate"
+#define GCONF_KEY_IGNORE_VERSION   GCONF_KEY_BASE "/ignore_version"
+
 #define WINDOW_DATA_KEY "GeditCheckUpdatePluginWindowData"
+#define ACTION_DATA_KEY "GeditCheckUpdatePluginActionData"
 
 #define VERSION_PLACE "<a href=\"[0-9]\\.[0-9]+/\">"
 
@@ -59,7 +65,32 @@ GEDIT_PLUGIN_REGISTER_TYPE (GeditCheckUpdatePlugin, gedit_check_update_plugin)
 struct _GeditCheckUpdatePluginPrivate
 {
 	SoupSession *session;
+
+	GConfClient *gconf_client;
 };
+
+typedef struct
+{
+	GeditCheckUpdatePlugin *plugin;
+
+	gchar *url;
+	gchar *version;
+} WindowData;
+
+static void
+free_window_data (gpointer data)
+{
+	WindowData *window_data;
+
+	if (data == NULL)
+		return;
+
+	window_data = (WindowData *)data;
+
+	g_free (window_data->url);
+	g_free (window_data->version);
+	g_slice_free (WindowData, data);
+}
 
 static void
 gedit_check_update_plugin_init (GeditCheckUpdatePlugin *plugin)
@@ -70,6 +101,13 @@ gedit_check_update_plugin_init (GeditCheckUpdatePlugin *plugin)
 			     "GeditCheckUpdatePlugin initializing");
 
 	plugin->priv->session = soup_session_async_new ();
+
+	plugin->priv->gconf_client = gconf_client_get_default ();
+
+	gconf_client_add_dir (plugin->priv->gconf_client,
+			      GCONF_KEY_BASE,
+			      GCONF_CLIENT_PRELOAD_ONELEVEL,
+			      NULL);
 }
 
 static void
@@ -82,7 +120,16 @@ gedit_check_update_plugin_dispose (GObject *object)
 		g_object_unref (plugin->priv->session);
 		plugin->priv->session = NULL;
 	}
-	
+
+	if (plugin->priv->gconf_client != NULL)
+	{
+		gconf_client_suggest_sync (plugin->priv->gconf_client, NULL);
+
+		g_object_unref (G_OBJECT (plugin->priv->gconf_client));
+		
+		plugin->priv->gconf_client = NULL;
+	}
+
 	gedit_debug_message (DEBUG_PLUGINS,
 			     "GeditCheckUpdatePlugin disposing");
 	
@@ -150,10 +197,10 @@ set_message_area_text_and_icon (GtkWidget        *message_area,
 	GTK_WIDGET_SET_FLAGS (primary_label, GTK_CAN_FOCUS);
 	gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
 
-  	if (secondary_text != NULL)
-  	{
-  		secondary_markup = g_strdup_printf ("<small>%s</small>",
-  						    secondary_text);
+	if (secondary_text != NULL)
+	{
+		secondary_markup = g_strdup_printf ("<small>%s</small>",
+						    secondary_text);
 		secondary_label = gtk_label_new (secondary_markup);
 		g_free (secondary_markup);
 		gtk_widget_show (secondary_label);
@@ -176,15 +223,16 @@ on_response_cb (GtkWidget   *infobar,
 	if (response_id == GTK_RESPONSE_YES)
 	{
 		GError *error = NULL;
-		gchar *url;
+		WindowData *data;
 		
-		url = g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
+		data = g_object_get_data (G_OBJECT (window),
+					  WINDOW_DATA_KEY);
 
 #ifdef OS_OSX
-		gedit_osx_show_url (url);
+		gedit_osx_show_url (data->url);
 #else
 		gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (window)),
-			      url, 
+			      data->url,
 			      GDK_CURRENT_TIME,
 			      &error);
 #endif
@@ -213,7 +261,22 @@ on_response_cb (GtkWidget   *infobar,
 			g_error_free (error);
 		}
 	}
-	
+	else if (response_id == GTK_RESPONSE_NO)
+	{
+		WindowData *data;
+		
+		data = g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
+
+		gconf_client_set_string (data->plugin->priv->gconf_client,
+					 GCONF_KEY_IGNORE_VERSION,
+					 data->version,
+					 NULL);
+	}
+
+	g_object_set_data (G_OBJECT (window),
+			   WINDOW_DATA_KEY,
+			   NULL);
+
 	gtk_widget_destroy (infobar);
 }
 
@@ -231,6 +294,10 @@ create_infobar (GeditWindow *window,
 						       _("_Download"),
 						       GTK_STOCK_SAVE,
 						       GTK_RESPONSE_YES);
+	gedit_message_area_add_stock_button_with_text (GEDIT_MESSAGE_AREA (infobar),
+						       _("_Ignore Version"),
+						       GTK_STOCK_DISCARD,
+						       GTK_RESPONSE_NO);
 	gedit_message_area_add_button (GEDIT_MESSAGE_AREA (infobar),
 				       GTK_STOCK_CANCEL,
 				       GTK_RESPONSE_CANCEL);
@@ -246,6 +313,15 @@ create_infobar (GeditWindow *window,
 	gtk_info_bar_add_action_widget (GTK_INFO_BAR (infobar),
 					button,
 					GTK_RESPONSE_YES);
+
+	button = gedit_gtk_button_new_with_stock_icon (_("_Ignore Version"),
+						       GTK_STOCK_DISCARD);
+	gtk_widget_show (button);
+
+	gtk_info_bar_add_action_widget (GTK_INFO_BAR (infobar),
+					button,
+					GTK_RESPONSE_NO);
+
 	gtk_info_bar_add_button (GTK_INFO_BAR (infobar),
 				 GTK_STOCK_CANCEL,
 				 GTK_RESPONSE_CANCEL);
@@ -259,7 +335,8 @@ create_infobar (GeditWindow *window,
 					"gtk-dialog-info",
 					message,
 					_("You can download the new version of gedit"
-					  " by pressing on the download button"));
+					  " by pressing on the download button or"
+					  " ignore that version and wait for a new one"));
 
 	g_free (message);
 
@@ -388,6 +465,14 @@ parse_file_version (const gchar *file)
 	return g_strndup (p, aux - p);
 }
 
+static gchar *
+get_ignore_version (GeditCheckUpdatePlugin *plugin)
+{
+	return gconf_client_get_string (plugin->priv->gconf_client,
+					GCONF_KEY_IGNORE_VERSION,
+					NULL);
+}
+
 static void
 parse_page_file (SoupSession *session,
 		 SoupMessage *msg,
@@ -397,30 +482,46 @@ parse_page_file (SoupSession *session,
 	{
 		gchar *file;
 		gchar *file_version;
-		
+		gchar *ignore_version;
+		WindowData *data;
+
+		data = g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
+
 		file = get_file (msg->response_body->data, FILE_REGEX);
 		file_version = parse_file_version (file);
-		
-		if (newer_version (file_version, VERSION, TRUE))
+		ignore_version = get_ignore_version (data->plugin);
+
+		if (newer_version (file_version, VERSION, TRUE) &&
+		    (ignore_version == NULL || *ignore_version == '\0' ||
+		     newer_version (file_version, ignore_version, TRUE)))
 		{
 			GtkWidget *infobar;
+			WindowData *data;
 			gchar *file_url;
+
+			data = g_object_get_data (G_OBJECT (window),
+						  WINDOW_DATA_KEY);
 			
-			file_url = g_strconcat (g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY),
-						file, NULL);
-		
-			g_object_set_data_full (G_OBJECT (window),
-						WINDOW_DATA_KEY,
-						file_url,
-						g_free);
+			file_url = g_strconcat (data->url, file, NULL);
+
+			g_free (data->url);
+			data->url = file_url;
+			data->version = g_strdup (file_version);
 		
 			infobar = create_infobar (window, file_version);
 			pack_infobar (GTK_WIDGET (window), infobar);
 			gtk_widget_show (infobar);
 		}
-		
+
+		g_free (ignore_version);
 		g_free (file_version);
 		g_free (file);
+	}
+	else
+	{
+		g_object_set_data (G_OBJECT (window),
+				   WINDOW_DATA_KEY,
+				   NULL);
 	}
 }
 
@@ -517,24 +618,27 @@ parse_page_version (SoupSession *session,
 	if (msg->status_code == SOUP_STATUS_OK)
 	{
 		gchar *version;
-		gchar *new_url;
 		SoupMessage *msg2;
+		WindowData *data;
+
+		data = g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
 		
 		version = get_file_page_version (msg->response_body->data,
 						 VERSION_PLACE);
 		
-		new_url = g_strconcat (GEDIT_URL, version, "/", NULL);
+		data->url = g_strconcat (GEDIT_URL, version, "/", NULL);
 		g_free (version);
-		msg2 = soup_message_new ("GET", new_url);
-		
-		g_object_set_data_full (G_OBJECT (window),
-					WINDOW_DATA_KEY,
-					new_url,
-					g_free);
+		msg2 = soup_message_new ("GET", data->url);
 	
 		soup_session_queue_message (session, msg2,
 					    (SoupSessionCallback)parse_page_file,
 					    window);
+	}
+	else
+	{
+		g_object_set_data (G_OBJECT (window),
+				   WINDOW_DATA_KEY,
+				   NULL);
 	}
 }
 
@@ -543,8 +647,19 @@ impl_activate (GeditPlugin *plugin,
 	       GeditWindow *window)
 {
 	SoupMessage *msg;
+	WindowData *data;
 	
 	gedit_debug (DEBUG_PLUGINS);
+
+	data = g_slice_new (WindowData);
+	data->plugin = GEDIT_CHECK_UPDATE_PLUGIN (plugin);
+	data->url = NULL;
+	data->version = NULL;
+
+	g_object_set_data_full (G_OBJECT (window),
+				WINDOW_DATA_KEY,
+				data,
+				free_window_data);
 
 	msg = soup_message_new ("GET", GEDIT_URL);
 	
