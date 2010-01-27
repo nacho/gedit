@@ -42,8 +42,7 @@ AC_SUBST(GEDIT_API_VERSION)
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 
-GTK_DOC_CHECK([1.0])
-
+GTK_DOC_CHECK([1.0],[--flavour=no-tmpl])
 AC_CHECK_FUNCS(fsync)
 AC_CHECK_FUNC(sigaction)
 
