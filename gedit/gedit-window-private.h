@@ -111,12 +111,12 @@ struct _GeditWindowPrivate
 
 	GFile          *default_location;
 
-	gboolean        removing_tabs : 1;
-	gboolean        dispose_has_run : 1;
-
 #ifdef OS_OSX
 	IgeMacMenuGroup *mac_menu_group;
 #endif
+
+	gboolean        removing_tabs : 1;
+	gboolean        dispose_has_run : 1;
 };
 
 G_END_DECLS
