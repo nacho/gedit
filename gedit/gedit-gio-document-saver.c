@@ -465,7 +465,7 @@ async_read_cb (GInputStream *stream,
 
 	/* Get how many chars have been read */
 	dstream = GEDIT_DOCUMENT_INPUT_STREAM (stream);
-	gvsaver->priv->bytes_written += gedit_document_input_stream_tell (dstream);
+	gvsaver->priv->bytes_written = gedit_document_input_stream_tell (dstream);
 
 	write_file_chunk (async);
 }
