@@ -186,9 +186,9 @@ async_failed (AsyncData *async,
 }
 
 static void
-remote_reget_info_cb (GFile        *source,
-		      GAsyncResult *res,
-		      AsyncData    *async)
+remote_get_info_cb (GFile        *source,
+		    GAsyncResult *res,
+		    AsyncData    *async)
 {
 	GeditGioDocumentSaver *saver;
 	GFileInfo *info;
@@ -245,51 +245,30 @@ close_async_ready_get_info_cb (GOutputStream *stream,
 		async_failed (async, error);
 		return;
 	}
-	
+
+	/* get the file info: note we cannot use 
+	 * g_file_output_stream_query_info_async since it is not able to get the
+	 * content type etc, beside it is not supported by gvfs.
+	 * I'm not sure this is actually necessary, can't we just use
+	 * g_content_type_guess (since we have the file name and the data)
+	 */
 	gedit_debug_message (DEBUG_SAVER, "Query info on file");
 	g_file_query_info_async (async->saver->priv->gfile,
 			         REMOTE_QUERY_ATTRIBUTES,
 			         G_FILE_QUERY_INFO_NONE,
 			         G_PRIORITY_HIGH,
 			         async->cancellable,
-			         (GAsyncReadyCallback) remote_reget_info_cb,
+			         (GAsyncReadyCallback) remote_get_info_cb,
 			         async);
 }
 
 static void
-close_async_ready_cb (GOutputStream *stream,
-		      GAsyncResult  *res,
-		      AsyncData     *async)
+close_input_stream_ready_cb (GInputStream *stream,
+			     GAsyncResult  *res,
+			     AsyncData     *async)
 {
 	GError *error = NULL;
-
-	/* check cancelled state manually */
-	if (g_cancellable_is_cancelled (async->cancellable))
-	{
-		async_data_free (async);
-		return;
-	}
-
-	if (!g_output_stream_close_finish (stream, res, &error))
-	{
-		g_propagate_error (&async->saver->priv->error, error);
-	}
-
-	remote_save_completed_or_failed (async->saver, async);
-}
-
-static void
-remote_get_info_cb (GFileOutputStream *stream,
-		    GAsyncResult      *res,
-		    AsyncData         *async)
-{
-	GeditGioDocumentSaver *saver;
-	GFileInfo *info;
-	GError *error = NULL;
-	GAsyncReadyCallback next_callback;
-
-	saver = async->saver;
-
+	
 	/* check cancelled state manually */
 	if (g_cancellable_is_cancelled (async->cancellable))
 	{
@@ -297,77 +276,40 @@ remote_get_info_cb (GFileOutputStream *stream,
 		return;
 	}
 	
-	gedit_debug_message (DEBUG_SAVER, "Finishing info query");
-	info = g_file_output_stream_query_info_finish (stream, res, &error);
-	gedit_debug_message (DEBUG_SAVER, "Query info result: %s", info ? "ok" : "fail");
-
-	if (info == NULL)
+	gedit_debug_message (DEBUG_SAVER, "Finished closing input stream");
+	
+	if (!g_input_stream_close_finish (stream, res, &error))
 	{
-		if (error->code == G_IO_ERROR_NOT_SUPPORTED || error->code == G_IO_ERROR_CLOSED)
-		{
-			gedit_debug_message (DEBUG_SAVER, "Query info not supported on stream, trying on file");
+		gedit_debug_message (DEBUG_SAVER, "Closing input stream error: %s", error->message);
 
-			/* apparently the output stream does not support query info.
-			 * we're forced to restat on the file. But first we make sure
-			 * to close the stream
-			 */
-			g_error_free (error);
-			next_callback = (GAsyncReadyCallback) close_async_ready_get_info_cb;
-		}
-		else
-		{
-			gedit_debug_message (DEBUG_SAVER, "Query info failed: %s", error->message);
-			g_propagate_error (&saver->priv->error, error);
-
-			next_callback = (GAsyncReadyCallback) close_async_ready_cb;
-		}
-	}
-	else
-	{
-		if (GEDIT_DOCUMENT_SAVER (saver)->info != NULL)
-			g_object_unref (GEDIT_DOCUMENT_SAVER (saver)->info);
-
-		GEDIT_DOCUMENT_SAVER (saver)->info = info;
-
-		next_callback = (GAsyncReadyCallback) close_async_ready_cb;
+		async_failed (async, error);
+		return;
 	}
 
-	/* Close the main stream so the file stream is also closed */
-	g_output_stream_close_async (G_OUTPUT_STREAM (saver->priv->stream),
+	/* now we close the output stream */
+	gedit_debug_message (DEBUG_SAVER, "Close output stream");
+	g_output_stream_close_async (async->saver->priv->stream,
 				     G_PRIORITY_HIGH,
 				     async->cancellable,
-				     next_callback,
+				     (GAsyncReadyCallback)close_async_ready_get_info_cb,
 				     async);
+}
+
+static void
+write_complete (AsyncData *async)
+{
+	/* first we close the input stream */
+	gedit_debug_message (DEBUG_SAVER, "Close input stream");
+	g_input_stream_close_async (async->saver->priv->input,
+				    G_PRIORITY_HIGH,
+				    async->cancellable,
+				    (GAsyncReadyCallback)close_input_stream_ready_cb,
+				    async);
 }
 
 /* prototype, because they call each other... isn't C lovely */
 static void read_file_chunk (AsyncData *async);
 static void write_file_chunk (AsyncData *async);
-
-static void
-write_complete (AsyncData *async)
-{
-	GOutputStream *file_stream;
-
-	/* document is succesfully saved. we know requery for the mime type and
-	 * the mtime. I'm not sure this is actually necessary, can't we just use
-	 * g_content_type_guess (since we have the file name and the data)
-	 */
-	gedit_debug_message (DEBUG_SAVER, "Write complete, query info on stream");
-
-	if (G_IS_FILE_OUTPUT_STREAM (async->saver->priv->stream))
-		file_stream = async->saver->priv->stream;
-	else
-		file_stream = g_filter_output_stream_get_base_stream (G_FILTER_OUTPUT_STREAM (async->saver->priv->stream));
-	
-	/* query info on the stream */
-	g_file_output_stream_query_info_async (G_FILE_OUTPUT_STREAM (file_stream),
-					       REMOTE_QUERY_ATTRIBUTES,
-					       G_PRIORITY_HIGH,
-					       async->cancellable,
-					       (GAsyncReadyCallback) remote_get_info_cb,
-					       async);
-}
 
 static void
 async_write_cb (GOutputStream *stream,
