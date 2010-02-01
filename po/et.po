@@ -9,15 +9,15 @@
 # Tõivo Leedjärv <toivo linux ee>, 2002, 2003.
 # Priit Laes <plaes plaes org>, 2005, 2009.
 # Ivar Smolin <okul linux ee>, 2005-2009.
-# Mattias Põldaru <mahfiaz gmail com>, 2009.
+# Mattias Põldaru <mahfiaz gmail com>, 2009-2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit2 MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
-"POT-Creation-Date: 2009-11-15 17:53+0000\n"
-"PO-Revision-Date: 2009-09-20 09:37+0300\n"
+"POT-Creation-Date: 2010-01-30 15:47+0000\n"
+"PO-Revision-Date: 2010-01-31 21:55+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
 "Language-Team: Estonian <gnome-et linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -778,9 +778,6 @@ msgstr ""
 "%s\n"
 "Kõigi saadaolevate käsureavõtmete vaatamiseks käivita '%s --help'.\n"
 
-msgid "About gedit"
-msgstr "Geditist lähemalt"
-
 #, c-format
 msgid "Loading file '%s'…"
 msgstr "Faili '%s' laadimine…"
@@ -904,7 +901,7 @@ msgstr ""
 "Tõivo Leedjärv <toivo linux ee>, 2002, 2003.\n"
 "Priit Laes <plaes plaes org>, 2005, 2009.\n"
 "Ivar Smolin <okul linux ee>, 2005-2009.\n"
-"Mattias Põldaru <mahfiaz gmail com>, 2009."
+"Mattias Põldaru <mahfiaz gmail com>, 2009-2010."
 
 #, c-format
 msgid "Found and replaced %d occurrence"
@@ -958,9 +955,6 @@ msgstr "Kreeka"
 msgid "Hebrew Visual"
 msgstr "Heebrea visuaalne"
 
-msgid "Hebrew"
-msgstr "Heebrea"
-
 msgid "Turkish"
 msgstr "Türgi"
 
@@ -994,6 +988,9 @@ msgstr "Hiina lihtsustatud"
 msgid "Georgian"
 msgstr "Gruusia"
 
+msgid "Hebrew"
+msgstr "Heebrea"
+
 msgid "Cyrillic/Ukrainian"
 msgstr "Kirillits/Ukraina"
 
@@ -1013,8 +1010,8 @@ msgstr "Tuvastatakse automaatselt"
 msgid "Current Locale (%s)"
 msgstr "Käesolev lokaat (%s)"
 
-msgid "Add or _Remove..."
-msgstr "_Lisa või eemalda..."
+msgid "Add or Remove..."
+msgstr "Lisa või eemalda..."
 
 msgid "All Text Files"
 msgstr "Kõik tekstifailid"
@@ -1022,8 +1019,23 @@ msgstr "Kõik tekstifailid"
 msgid "C_haracter Coding:"
 msgstr "_Kooditabel:"
 
+msgid "L_ine Ending:"
+msgstr "_Realõpp:"
+
+msgid "Unix/Linux"
+msgstr "Unix/Linux"
+
+msgid "Mac OS Classic"
+msgstr "Mac OS Classic"
+
+msgid "Windows"
+msgstr "Windows"
+
 msgid "There was an error displaying help."
 msgstr "Abiteabe kuvamisel tekkis viga."
+
+msgid "_Retry"
+msgstr "_Proovi uuesti"
 
 #, c-format
 msgid "Could not find the file %s."
@@ -1084,6 +1096,27 @@ msgstr "Fail on liiga suur."
 msgid "Unexpected error: %s"
 msgstr "Ootamatu viga: %s"
 
+msgid "gedit cannot find the file. Perhaps it has recently been deleted."
+msgstr ""
+"gedit'il pole võimalik faili leida. Võib-olla on see fail hiljuti kustutatud."
+
+#, c-format
+msgid "Could not revert the file %s."
+msgstr "Faili %s pole võimalik taastada."
+
+msgid "Ch_aracter Coding:"
+msgstr "_Kooditabel:"
+
+#. Translators: the access key chosen for this string should be
+#. different from other main menu access keys (Open, Edit, View...)
+msgid "Edit Any_way"
+msgstr "_Redigeeri ikka"
+
+#. Translators: the access key chosen for this string should be
+#. different from other main menu access keys (Open, Edit, View...)
+msgid "D_on't Edit"
+msgstr "Ära r_edigeeri"
+
 msgid ""
 "The number of followed links is limited and the actual file could not be "
 "found within this limit."
@@ -1097,20 +1130,6 @@ msgstr "Sul pole piisavalt õiguseid selle faili avamiseks."
 msgid "Could not open the file %s."
 msgstr "Faili %s pole võimalik avada."
 
-msgid "_Retry"
-msgstr "_Proovi uuesti"
-
-msgid "gedit cannot find the file. Perhaps it has recently been deleted."
-msgstr ""
-"gedit'il pole võimalik faili leida. Võib-olla on see fail hiljuti kustutatud."
-
-#, c-format
-msgid "Could not revert the file %s."
-msgstr "Faili %s pole võimalik taastada."
-
-msgid "Ch_aracter Coding:"
-msgstr "_Kooditabel:"
-
 msgid "gedit has not been able to detect the character coding."
 msgstr "gedit ei suuda märkide kooditabelit tuvastada."
 
@@ -1119,6 +1138,20 @@ msgstr "Palun kontrolli, ega sa ei proovi binaarfaili avada."
 
 msgid "Select a character coding from the menu and try again."
 msgstr "Vali menüüst kooditabel ja proovi uuesti."
+
+#, c-format
+msgid "There was a problem opening the file %s."
+msgstr "Faili %s avamisel esines viga."
+
+msgid ""
+"The file you opened has some invalid characters, if you continue editing "
+"this file you could make this document useless."
+msgstr ""
+"Fail, mille sa avasid, sisaldab sobimatuid märke. Kui sa jätkad selle "
+"redigeerimist, võid selle muuta kasutamatuks."
+
+msgid "You can also choose another character encoding and try again."
+msgstr "Võid valida järgmise märgikodeeringu ja proovida uuesti."
 
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
@@ -1137,16 +1170,6 @@ msgid ""
 msgstr ""
 "Dokument sisaldab ühe või mitu sümbolit, mida pole võimalik määratud "
 "kooditabeliga kodeerida."
-
-#. Translators: the access key chosen for this string should be
-#. different from other main menu access keys (Open, Edit, View...)
-msgid "Edit Any_way"
-msgstr "_Redigeeri ikka"
-
-#. Translators: the access key chosen for this string should be
-#. different from other main menu access keys (Open, Edit, View...)
-msgid "D_on't Edit"
-msgstr "Ära r_edigeeri"
 
 #, c-format
 msgid "This file (%s) is already open in another gedit window."
@@ -1281,9 +1304,6 @@ msgstr "Laa_di uuesti"
 #. bad bad luck...
 msgid "Could not obtain backup filename"
 msgstr "Varukoopia failinime pole võimalik hankida"
-
-msgid "Close document"
-msgstr "Dokumendi sulgemine"
 
 msgid "Empty"
 msgstr "Tühi"
@@ -1423,6 +1443,9 @@ msgstr "Lehekülje eelvaade"
 msgid "The preview of a page in the document to be printed"
 msgstr "Prinditava dokumendi eelvaade"
 
+msgid "It is not possible to detect the encoding automatically"
+msgstr "Kodeerimise automaatne tuvastamine pole võimalik"
+
 msgid "OVR"
 msgstr "  ÜLE"
 
@@ -1504,6 +1527,9 @@ msgstr "MIME tüüp:"
 
 msgid "Encoding:"
 msgstr "Kodeering:"
+
+msgid "Close document"
+msgstr "Dokumendi sulgemine"
 
 #. Toplevel
 msgid "_File"
@@ -1796,6 +1822,9 @@ msgstr "Kasutatakse tühikuid"
 msgid "Tab Width"
 msgstr "Tabulaatori laius:"
 
+msgid "About gedit"
+msgstr "Geditist lähemalt"
+
 msgid "Change Case"
 msgstr "Suur- ja väiketähtede muutmine"
 
@@ -1841,13 +1870,18 @@ msgstr "URL-i kuvamisel tekkis viga."
 msgid "_Download"
 msgstr "Laa_di alla"
 
+msgid "_Ignore Version"
+msgstr "_Eira versiooni"
+
 msgid "There is a new version of gedit"
 msgstr "Geditist on uus versioon saadaval"
 
 msgid ""
-"You can download the new version of gedit by pressing on the download button"
+"You can download the new version of gedit by pressing on the download button "
+"or ignore that version and wait for a new one"
 msgstr ""
-"Allalaadimise nupule vajutades on võimalik Gediti uus versioon alla laadida"
+"Allalaadimise nupule vajutades on võimalik Gediti uus versioon alla laadida, "
+"kuid seda võib ka eirata ja oodata järgmist"
 
 msgid ""
 "Analyzes the current document and reports the number of words, lines, "
@@ -1894,6 +1928,12 @@ msgstr "_Dokumendi statistika"
 
 msgid "Get statistic info on current document"
 msgstr "Käesoleva dokumendi kohta statistiliste andmete hankimine"
+
+msgid "Open a terminal in the document location"
+msgstr "Terminali avamine dokumendi kataloogis"
+
+msgid "Open terminal here"
+msgstr "Terminali avamine siin"
 
 msgid "Execute external commands and shell scripts."
 msgstr "Väliste käskude ja skriptide käivitamine."
@@ -2034,12 +2074,6 @@ msgstr "Ehitamine"
 
 msgid "Run \"make\" in the document directory"
 msgstr "\"make\" käivitamine dokumendikataloogis"
-
-msgid "Open a terminal in the document location"
-msgstr "Terminali avamine dokumendi kataloogis"
-
-msgid "Open terminal here"
-msgstr "Terminali avamine siin"
 
 msgid "Remove trailing spaces"
 msgstr "Eemalda realõputühikud"
@@ -3926,42 +3960,3 @@ msgstr "\"Kuupäeva/kellaaja\" plugina seadistamine"
 
 msgid "_Prompt for a format"
 msgstr "_Küsitakse vormingut"
-
-#~ msgid "<b>Current Line</b>"
-#~ msgstr "<b>Käesolev rida</b>"
-
-#~ msgid "<b>Font</b>"
-#~ msgstr "<b>Kirjatüüp</b>"
-
-#~ msgid "<b>Line Numbers</b>"
-#~ msgstr "<b>Reanumbrid</b>"
-
-#~ msgid "<span weight=\"bold\">Color Scheme</span>"
-#~ msgstr "<span weight=\"bold\">Värviskeem</span>"
-
-#~ msgid "<b>Fonts</b>"
-#~ msgstr "<b>Kirjatüübid</b>"
-
-#~ msgid "<b>Page header</b>"
-#~ msgstr "<b>Lehekülje päis</b>"
-
-#~ msgid "<b>Syntax Highlighting</b>"
-#~ msgstr "<b>Süntaksi esiletõstmine</b>"
-
-#~ msgid "_Indent"
-#~ msgstr "_Taane"
-
-#~ msgid "Indent selected lines"
-#~ msgstr "Valitud ridade taandamine"
-
-#~ msgid "U_nindent"
-#~ msgstr "Taane _maha"
-
-#~ msgid "Unindent selected lines"
-#~ msgstr "Taande eemaldamine valitud ridadelt"
-
-#~ msgid "Indent Lines"
-#~ msgstr "Ridade taandamine"
-
-#~ msgid "Indents or un-indents selected lines."
-#~ msgstr "Valitud ridade taandamine või taande kaotamine."
