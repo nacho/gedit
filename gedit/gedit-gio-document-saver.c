@@ -345,6 +345,7 @@ async_write_cb (GOutputStream *stream,
 	if (async->written != async->read)
 	{
 		write_file_chunk (async);
+		return;
 	}
 
 	/* note that this signal blocks the write... check if it isn't
