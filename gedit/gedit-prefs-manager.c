@@ -318,16 +318,6 @@ DEFINE_BOOL_PREF (create_backup_copy,
 		  GPM_CREATE_BACKUP_COPY,
 		  GPM_DEFAULT_CREATE_BACKUP_COPY)
 
-/* Backup extension. This is configurable only using gconftool or gconf-editor */
-gchar *
-gedit_prefs_manager_get_backup_extension (void)
-{
-	gedit_debug (DEBUG_PREFS);
-
-	return gedit_prefs_manager_get_string (GPM_BACKUP_COPY_EXTENSION,	
-					       GPM_DEFAULT_BACKUP_COPY_EXTENSION);
-}
-
 /* Auto save */
 DEFINE_BOOL_PREF (auto_save,
 		  GPM_AUTO_SAVE,

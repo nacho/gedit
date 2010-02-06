@@ -139,7 +139,6 @@ gedit_document_saver_finalize (GObject *object)
 	GeditDocumentSaver *saver = GEDIT_DOCUMENT_SAVER (object);
 
 	g_free (saver->uri);
-	g_free (saver->backup_ext);
 
 	G_OBJECT_CLASS (gedit_document_saver_parent_class)->finalize (object);
 }
@@ -485,17 +484,11 @@ gedit_document_saver_save (GeditDocumentSaver     *saver,
 	// report async (in an idle handler) or sync (bool ret)
 	// async is extra work here, sync is special casing in the caller
 
-	/* fetch saving options */
-	saver->backup_ext = gedit_prefs_manager_get_backup_extension ();
-
 	/* never keep backup of autosaves */
 	if ((saver->flags & GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP) != 0)
 		saver->keep_backup = FALSE;
 	else
 		saver->keep_backup = gedit_prefs_manager_get_create_backup_copy ();
-
-	/* TODO: add support for configurable backup dir */
-	saver->backups_in_curr_dir = TRUE;
 
 	GEDIT_DOCUMENT_SAVER_GET_CLASS (saver)->save (saver, old_mtime);
 }

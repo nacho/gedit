@@ -47,7 +47,6 @@
 
 #define GPM_SAVE_DIR			GPM_PREFS_DIR  "/editor/save"
 #define GPM_CREATE_BACKUP_COPY  	GPM_SAVE_DIR "/create_backup_copy"
-#define GPM_BACKUP_COPY_EXTENSION	GPM_SAVE_DIR "/backup_copy_extension"
 
 #define GPM_AUTO_SAVE			GPM_SAVE_DIR "/auto_save"
 #define GPM_AUTO_SAVE_INTERVAL		GPM_SAVE_DIR "/auto_save_interval"
@@ -154,8 +153,7 @@
 #define GPM_DEFAULT_SYSTEM_FONT		(const gchar*) "Monaco 12"
 #endif
 
-#define GPM_DEFAULT_CREATE_BACKUP_COPY	1 /* TRUE */
-#define GPM_DEFAULT_BACKUP_COPY_EXTENSION (const gchar*) "~"
+#define GPM_DEFAULT_CREATE_BACKUP_COPY	0 /* FALSE */
 
 #define GPM_DEFAULT_AUTO_SAVE		0 /* FALSE */
 #define GPM_DEFAULT_AUTO_SAVE_INTERVAL	10 /* minutes */
@@ -250,9 +248,6 @@ gchar 			*gedit_prefs_manager_get_system_font		(void);
 gboolean		 gedit_prefs_manager_get_create_backup_copy	(void);
 void			 gedit_prefs_manager_set_create_backup_copy	(gboolean cbc);
 gboolean		 gedit_prefs_manager_create_backup_copy_can_set	(void);
-
-/* Backup extension. This is configurable only using gconftool or gconf-editor */
-gchar			*gedit_prefs_manager_get_backup_extension	(void);
 
 /* Auto save */
 gboolean		 gedit_prefs_manager_get_auto_save		(void);

@@ -67,8 +67,6 @@ struct _GeditDocumentSaver
 	GeditDocumentSaveFlags    flags;
 
 	gboolean		  keep_backup;
-	gchar			 *backup_ext;
-	gboolean                  backups_in_curr_dir;
 };
 
 /*
