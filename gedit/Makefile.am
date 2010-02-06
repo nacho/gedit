@@ -74,7 +74,6 @@ NOINST_H_FILES =			\
 	gedit-history-entry.h		\
 	gedit-io-error-message-area.h	\
 	gedit-language-manager.h	\
-	gedit-local-document-saver.h	\
 	gedit-object-module.h		\
 	gedit-plugin-info.h		\
 	gedit-plugin-info-priv.h	\
@@ -125,14 +124,7 @@ endif
 headerdir = $(prefix)/include/gedit-@GEDIT_API_VERSION@/gedit
 
 header_DATA = 				\
-	$(INST_H_FILES)	
-
-if !OS_WIN32
-POSIXIO_FILES = 			\
-	gedit-local-document-saver.c	
-else
-POSIXIO_FILES =
-endif
+	$(INST_H_FILES)
 
 
 libgedit_la_SOURCES = 			\

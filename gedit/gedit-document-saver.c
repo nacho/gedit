@@ -44,8 +44,6 @@
 #include "gedit-marshal.h"
 #include "gedit-utils.h"
 #include "gedit-enum-types.h"
-
-#include "gedit-local-document-saver.h"
 #include "gedit-gio-document-saver.h"
 
 G_DEFINE_ABSTRACT_TYPE(GeditDocumentSaver, gedit_document_saver, G_TYPE_OBJECT)
