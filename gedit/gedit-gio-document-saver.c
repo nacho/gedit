@@ -492,6 +492,8 @@ static void
 begin_write (AsyncData *async)
 {
 	GeditGioDocumentSaver *gvsaver;
+	GeditDocumentSaver *saver;
+	gboolean backup;
 
 	gedit_debug_message (DEBUG_SAVER, "Start replacing file contents");
 
@@ -499,14 +501,18 @@ begin_write (AsyncData *async)
 	 * backup as of yet
 	 */
 	gvsaver = async->saver;
+	saver = GEDIT_DOCUMENT_SAVER (gvsaver);
+
+	/* Do not make backups for remote files so they do not clutter remote systems */
+	backup = (saver->keep_backup && gedit_document_is_local (saver->document));
 
 	gedit_debug_message (DEBUG_SAVER, "File contents size: %" G_GINT64_FORMAT, gvsaver->priv->size);
 	gedit_debug_message (DEBUG_SAVER, "Calling replace_async");
+	gedit_debug_message (DEBUG_SAVER, backup ? "Keep backup" : "Discard backup");
 
-	/* FIXME: when do we want to make a backup? */
-	g_file_replace_async (gvsaver->priv->gfile, 
+	g_file_replace_async (gvsaver->priv->gfile,
 			      NULL,
-			      FALSE,
+			      backup,
 			      G_FILE_CREATE_NONE,
 			      G_PRIORITY_HIGH,
 			      async->cancellable,
