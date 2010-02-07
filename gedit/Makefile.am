@@ -77,6 +77,7 @@ NOINST_H_FILES =			\
 	gedit-object-module.h		\
 	gedit-plugin-info.h		\
 	gedit-plugin-info-priv.h	\
+	gedit-plugin-loader.h		\
 	gedit-plugin-manager.h		\
 	gedit-plugins-engine.h		\
 	gedit-prefs-manager-private.h	\
@@ -106,7 +107,6 @@ INST_H_FILES =				\
 	gedit-notebook.h		\
 	gedit-panel.h			\
 	gedit-plugin.h			\
-	gedit-plugin-loader.h		\
 	gedit-prefs-manager-app.h	\
 	gedit-prefs-manager.h		\
 	gedit-progress-message-area.h	\
