@@ -40,7 +40,6 @@
 
 #include "gedit-gio-document-loader.h"
 #include "gedit-smart-charset-converter.h"
-#include "gedit-convert.h"
 #include "gedit-prefs-manager.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"

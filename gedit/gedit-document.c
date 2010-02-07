@@ -42,7 +42,6 @@
 
 #include "gedit-prefs-manager-app.h"
 #include "gedit-document.h"
-#include "gedit-convert.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
 #include "gedit-language-manager.h"

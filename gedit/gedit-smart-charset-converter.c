@@ -22,11 +22,10 @@
 
 #include "gedit-smart-charset-converter.h"
 #include "gedit-debug.h"
+#include "gedit-document.h"
 
 #include <gio/gio.h>
 #include <glib/gi18n.h>
-
-#include "gedit-convert.h"
 
 #define GEDIT_SMART_CHARSET_CONVERTER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_SMART_CHARSET_CONVERTER, GeditSmartCharsetConverterPrivate))
 
@@ -304,7 +303,8 @@ gedit_smart_charset_converter_convert (GConverter *converter,
 		    !smart->priv->is_utf8)
 		{
 			/* FIXME: Add a different domain when we kill gedit_convert */
-			g_set_error_literal (error, GEDIT_CONVERT_ERROR, GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED,
+			g_set_error_literal (error, GEDIT_DOCUMENT_ERROR,
+					     GEDIT_DOCUMENT_ERROR_ENCODING_AUTO_DETECTION_FAILED,
 					     _("It is not possible to detect the encoding automatically"));
 			return G_CONVERTER_ERROR;
 		}

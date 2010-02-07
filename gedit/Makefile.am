@@ -94,7 +94,6 @@ NOINST_H_FILES =			\
 INST_H_FILES =				\
 	gedit-app.h			\
 	gedit-commands.h		\
-	gedit-convert.h			\
 	gedit-debug.h			\
 	gedit-document.h 		\
 	gedit-encodings.h		\
@@ -140,7 +139,6 @@ libgedit_la_SOURCES = 			\
 	gedit-commands-help.c		\
 	gedit-commands-search.c		\
 	gedit-commands-view.c		\
-	gedit-convert.c			\
 	gedit-debug.c			\
 	gedit-dirs.c			\
 	gedit-document.c 		\

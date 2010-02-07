@@ -39,7 +39,6 @@
 #include "gedit-debug.h"
 #include "gedit-metadata-manager.h"
 #include "gedit-utils.h"
-#include "gedit-convert.h"
 #include "gedit-marshal.h"
 #include "gedit-enum-types.h"
 

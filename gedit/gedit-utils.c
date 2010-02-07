@@ -50,7 +50,6 @@
 #include "gedit-document.h"
 #include "gedit-prefs-manager.h"
 #include "gedit-debug.h"
-#include "gedit-convert.h"
 
 /* For the workspace/viewport stuff */
 #ifdef GDK_WINDOWING_X11

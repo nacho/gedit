@@ -43,7 +43,6 @@
 #include "gedit-progress-message-area.h"
 #include "gedit-debug.h"
 #include "gedit-prefs-manager-app.h"
-#include "gedit-convert.h"
 #include "gedit-enum-types.h"
 
 #if !GTK_CHECK_VERSION (2, 17, 1)

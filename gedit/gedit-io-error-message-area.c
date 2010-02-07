@@ -43,7 +43,6 @@
 #include <gio/gio.h>
 
 #include "gedit-utils.h"
-#include "gedit-convert.h"
 #include "gedit-document.h"
 #include "gedit-io-error-message-area.h"
 #include "gedit-prefs-manager.h"
@@ -612,8 +611,7 @@ gedit_io_loading_error_message_area_new (const gchar         *uri,
 	g_return_val_if_fail (uri != NULL, NULL);
 	g_return_val_if_fail (error != NULL, NULL);
 	g_return_val_if_fail ((error->domain == G_CONVERT_ERROR) ||
-			      (error->domain == GEDIT_CONVERT_ERROR) ||
-			      (error->domain == GEDIT_DOCUMENT_ERROR) || 
+			      (error->domain == GEDIT_DOCUMENT_ERROR) ||
 			      (error->domain == G_IO_ERROR), NULL);
 	
 	full_formatted_uri = gedit_utils_uri_for_display (uri);
@@ -643,8 +641,8 @@ gedit_io_loading_error_message_area_new (const gchar         *uri,
 		message_details = g_strdup (_("You do not have the permissions necessary to open the file."));
 	}
 	else if ((is_gio_error (error, G_IO_ERROR_INVALID_DATA) && encoding == NULL) ||
-	         (error->domain == GEDIT_CONVERT_ERROR &&
-	         error->code == GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED))
+	         (error->domain == GEDIT_DOCUMENT_ERROR &&
+	         error->code == GEDIT_DOCUMENT_ERROR_ENCODING_AUTO_DETECTION_FAILED))
 	{
 		error_message = g_strdup_printf (_("Could not open the file %s."),
 						 uri_for_display);

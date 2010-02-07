@@ -102,19 +102,6 @@ GeditDocumentSaver 	*gedit_document_saver_new 		(GeditDocument           *doc,
 								 GeditDocumentNewlineType newline_type,
 								 GeditDocumentSaveFlags   flags);
 
-gchar			*gedit_document_saver_get_document_contents (
-								 GeditDocumentSaver  *saver,
-								 gsize		     *len,
-								 GError             **error);
-
-gchar			*gedit_document_saver_get_end_newline	(GeditDocumentSaver *saver,
-								 gsize              *len);
-
-gboolean		 gedit_document_saver_write_document_contents (
-								 GeditDocumentSaver  *saver,
-								 gint                 fd,
-								 GError             **error);
-
 void			 gedit_document_saver_saving		(GeditDocumentSaver *saver,
 								 gboolean            completed,
 								 GError             *error);
