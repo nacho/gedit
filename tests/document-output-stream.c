@@ -30,7 +30,8 @@
 static void
 test_consecutive_write (const gchar *inbuf,
 			const gchar *outbuf,
-			gsize write_chunk_len)
+			gsize write_chunk_len,
+			GeditDocumentNewlineType newline_type)
 {
 	GeditDocument *doc;
 	GOutputStream *out;
@@ -38,6 +39,7 @@ test_consecutive_write (const gchar *inbuf,
 	gssize n, w;
 	GError *err = NULL;
 	gchar *b;
+	GeditDocumentNewlineType type;
 
 	doc = gedit_document_new ();
 	out = gedit_document_output_stream_new (doc);
@@ -59,6 +61,9 @@ test_consecutive_write (const gchar *inbuf,
 	g_assert_cmpstr (inbuf, ==, b);
 	g_free (b);
 
+	type = gedit_document_output_stream_detect_newline_type (GEDIT_DOCUMENT_OUTPUT_STREAM (out));
+	g_assert (type == newline_type);
+
 	g_output_stream_close (out, NULL, &err);
 	g_assert_no_error (err);
 
@@ -73,20 +78,32 @@ test_consecutive_write (const gchar *inbuf,
 static void
 test_empty ()
 {
-	test_consecutive_write ("", "", 10);
+	test_consecutive_write ("", "", 10, GEDIT_DOCUMENT_NEWLINE_TYPE_DEFAULT);
+	test_consecutive_write ("\r\n", "", 10, GEDIT_DOCUMENT_NEWLINE_TYPE_CR_LF);
+	test_consecutive_write ("\r", "", 10, GEDIT_DOCUMENT_NEWLINE_TYPE_CR);
+	test_consecutive_write ("\n", "", 10, GEDIT_DOCUMENT_NEWLINE_TYPE_LF);
 }
 
 static void
 test_consecutive ()
 {
-	test_consecutive_write ("hello\nhow\nare\nyou", "hello\nhow\nare\nyou", 2);
+	test_consecutive_write ("hello\nhow\nare\nyou", "hello\nhow\nare\nyou", 2,
+				GEDIT_DOCUMENT_NEWLINE_TYPE_LF);
+	test_consecutive_write ("hello\rhow\rare\ryou", "hello\rhow\rare\ryou", 2,
+				GEDIT_DOCUMENT_NEWLINE_TYPE_CR);
+	test_consecutive_write ("hello\r\nhow\r\nare\r\nyou", "hello\r\nhow\r\nare\r\nyou", 2,
+				GEDIT_DOCUMENT_NEWLINE_TYPE_CR_LF);
 }
 
 static void
 test_consecutive_tnewline ()
 {
-	test_consecutive_write ("hello\nhow\nare\nyou\n", "hello\nhow\nare\nyou", 2);
-	test_consecutive_write ("hello\r\nhow\r\nare\r\nyou\r\n", "hello\r\nhow\r\nare\r\nyou", 2);
+	test_consecutive_write ("hello\nhow\nare\nyou\n", "hello\nhow\nare\nyou", 2,
+				GEDIT_DOCUMENT_NEWLINE_TYPE_LF);
+	test_consecutive_write ("hello\rhow\rare\ryou\r", "hello\rhow\rare\ryou", 2,
+				GEDIT_DOCUMENT_NEWLINE_TYPE_CR);
+	test_consecutive_write ("hello\r\nhow\r\nare\r\nyou\r\n", "hello\r\nhow\r\nare\r\nyou", 2,
+				GEDIT_DOCUMENT_NEWLINE_TYPE_CR_LF);
 }
 
 int main (int   argc,

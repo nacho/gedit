@@ -136,9 +136,6 @@ get_newline_type (GtkTextIter *end)
 	copy = *end;
 	c = gtk_text_iter_get_char (&copy);
 
-	GtkTextIter tt = copy;
-	gtk_text_iter_forward_chars (&tt, 2);
-
 	if (g_unichar_break_type (c) == G_UNICODE_BREAK_CARRIAGE_RETURN)
 	{
 		if (gtk_text_iter_forward_char (&copy) &&
@@ -177,13 +174,8 @@ gedit_document_output_stream_detect_newline_type (GeditDocumentOutputStream *str
 
 	type = GEDIT_DOCUMENT_NEWLINE_TYPE_DEFAULT;
 
-	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (stream->priv->doc), &iter);
-
-	if (!gtk_text_iter_backward_line (&iter))
-	{
-		gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (stream->priv->doc),
-						&iter);
-	}
+	gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (stream->priv->doc),
+					&iter);
 
 	if (gtk_text_iter_ends_line (&iter) || gtk_text_iter_forward_to_line_end (&iter))
 	{
