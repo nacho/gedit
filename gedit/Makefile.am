@@ -67,6 +67,7 @@ NOINST_H_FILES =			\
 	gedit-dirs.h			\
 	gedit-document-input-stream.h	\
 	gedit-document-loader.h		\
+	gedit-document-output-stream.h	\
 	gedit-document-saver.h		\
 	gedit-documents-panel.h		\
 	gedit-gio-document-loader.h	\
@@ -144,6 +145,7 @@ libgedit_la_SOURCES = 			\
 	gedit-document.c 		\
 	gedit-document-input-stream.c	\
 	gedit-document-loader.c		\
+	gedit-document-output-stream.c	\
 	gedit-gio-document-loader.c	\
 	gedit-document-saver.c		\
 	gedit-gio-document-saver.c	\

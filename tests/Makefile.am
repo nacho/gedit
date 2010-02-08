@@ -11,6 +11,10 @@ TEST_PROGS			+= document-input-stream
 document_input_stream_SOURCES	= document-input-stream.c
 document_input_stream_LDADD	= $(progs_ldadd)
 
+TEST_PROGS			+= document-output-stream
+document_output_stream_SOURCES	= document-output-stream.c
+document_output_stream_LDADD	= $(progs_ldadd)
+
 TEST_PROGS			+= document-loader
 document_loader_SOURCES		= document-loader.c
 document_loader_LDADD		= $(progs_ldadd)

@@ -39,6 +39,7 @@
 #include <gio/gio.h>
 
 #include "gedit-gio-document-loader.h"
+#include "gedit-document-output-stream.h"
 #include "gedit-smart-charset-converter.h"
 #include "gedit-prefs-manager.h"
 #include "gedit-debug.h"
@@ -48,6 +49,9 @@ typedef struct
 {
 	GeditGioDocumentLoader *loader;
 	GCancellable 	       *cancellable;
+
+	gssize			read;
+	gssize			written;
 	gboolean		tried_mount;
 } AsyncData;
 
@@ -80,13 +84,12 @@ struct _GeditGioDocumentLoaderPrivate
 	/* Handle for remote files */
 	GCancellable 	 *cancellable;
 	GInputStream	 *stream;
+	GOutputStream    *output;
 	GeditSmartCharsetConverter *converter;
 
 	gchar             buffer[READ_CHUNK_SIZE];
 
 	GError           *error;
-
-	guint		  started_insert : 1;
 };
 
 G_DEFINE_TYPE(GeditGioDocumentLoader, gedit_gio_document_loader, GEDIT_TYPE_DOCUMENT_LOADER)
@@ -109,6 +112,12 @@ gedit_gio_document_loader_dispose (GObject *object)
 	{
 		g_object_unref (priv->stream);
 		priv->stream = NULL;
+	}
+
+	if (priv->output != NULL)
+	{
+		g_object_unref (priv->output);
+		priv->output = NULL;
 	}
 
 	if (priv->converter != NULL)
@@ -161,7 +170,6 @@ gedit_gio_document_loader_init (GeditGioDocumentLoader *gvloader)
 
 	gvloader->priv->converter = NULL;
 	gvloader->priv->error = NULL;
-	gvloader->priv->started_insert = FALSE;
 }
 
 static AsyncData *
@@ -229,24 +237,10 @@ get_metadata_encoding (GeditDocumentLoader *loader)
 static void
 remote_load_completed_or_failed (GeditGioDocumentLoader *gvloader, AsyncData *async)
 {
-	GeditDocumentLoader *loader;
-
-	loader = GEDIT_DOCUMENT_LOADER (gvloader);
-
-	if (async)
-		async_data_free (async);
-
-	if (gvloader->priv->stream)
-		g_input_stream_close_async (G_INPUT_STREAM (gvloader->priv->stream),
-					    G_PRIORITY_HIGH, NULL, NULL, NULL);
-
-	gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (gvloader),
+	gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (async->loader),
 				       TRUE,
-				       gvloader->priv->error);
+				       async->loader->priv->error);
 }
-
-/* prototype, because they call each other... isn't C lovely */
-static void	read_file_chunk		(AsyncData *async);
 
 static void
 async_failed (AsyncData *async, GError *error)
@@ -256,110 +250,145 @@ async_failed (AsyncData *async, GError *error)
 }
 
 static void
-append_text_to_document (GeditDocumentLoader *loader,
-			 const gchar         *text,
-			 gint                 len)
+close_output_stream_ready_cb (GOutputStream *stream,
+			      GAsyncResult  *res,
+			      AsyncData     *async)
 {
-	GeditDocument *doc = loader->document;
-	GtkTextIter end;
-
-	/* Insert text in the buffer */
-	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end);
+	GError *error = NULL;
 	
-	gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &end, text, len);
-}
-
-static GeditDocumentNewlineType
-get_newline_type (GtkTextIter *end)
-{
-	GeditDocumentNewlineType res;
-	GtkTextIter copy;
-	gunichar c;
-
-	copy = *end;
-	c = gtk_text_iter_get_char (&copy);
-
-	GtkTextIter tt = copy;
-	gtk_text_iter_forward_chars (&tt, 2);
-
-	if (g_unichar_break_type (c) == G_UNICODE_BREAK_CARRIAGE_RETURN)
+	/* check cancelled state manually */
+	if (g_cancellable_is_cancelled (async->cancellable))
 	{
-		if (gtk_text_iter_forward_char (&copy) &&
-		    g_unichar_break_type (gtk_text_iter_get_char (&copy)) == G_UNICODE_BREAK_LINE_FEED)
-		{
-			res = GEDIT_DOCUMENT_NEWLINE_TYPE_CR_LF;
-		}
-		else
-		{
-			res = GEDIT_DOCUMENT_NEWLINE_TYPE_CR;
-		}
+		async_data_free (async);
+		return;
 	}
-	else
+	
+	gedit_debug_message (DEBUG_SAVER, "Finished closing stream");
+	
+	if (!g_output_stream_close_finish (stream, res, &error))
 	{
-		res = GEDIT_DOCUMENT_NEWLINE_TYPE_LF;
+		gedit_debug_message (DEBUG_SAVER, "Closing stream error: %s", error->message);
+
+		async_failed (async, error);
+		return;
 	}
 
-	return res;
+	remote_load_completed_or_failed (async->loader, async);
 }
 
 static void
-detect_newline_type (GeditDocumentLoader *loader)
+close_input_stream_ready_cb (GInputStream *stream,
+			     GAsyncResult  *res,
+			     AsyncData     *async)
 {
-	GtkTextIter iter;
-
-	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (loader->document), &iter);
-
-	if (!gtk_text_iter_backward_line (&iter))
+	GError *error = NULL;
+	
+	/* check cancelled state manually */
+	if (g_cancellable_is_cancelled (async->cancellable))
 	{
-		gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (loader->document), &iter);
+		async_data_free (async);
+		return;
+	}
+	
+	gedit_debug_message (DEBUG_SAVER, "Finished closing input stream");
+	
+	if (!g_input_stream_close_finish (stream, res, &error))
+	{
+		gedit_debug_message (DEBUG_SAVER, "Closing input stream error: %s", error->message);
+
+		async_failed (async, error);
+		return;
 	}
 
-	if (gtk_text_iter_ends_line (&iter) || gtk_text_iter_forward_to_line_end (&iter))
-	{
-		loader->auto_detected_newline_type = get_newline_type (&iter);
-	}
+	/* now we close the output stream */
+	gedit_debug_message (DEBUG_SAVER, "Close output stream");
+	g_output_stream_close_async (async->loader->priv->output,
+				     G_PRIORITY_HIGH,
+				     async->cancellable,
+				     (GAsyncReadyCallback)close_output_stream_ready_cb,
+				     async);
 }
 
 static void
-remove_ending_newline (GeditDocumentLoader *loader)
+write_complete (AsyncData *async)
 {
-	GtkTextIter end;
-	GtkTextIter start;
+	GeditDocumentLoader *loader;
 
-	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (loader->document), &end);
-	start = end;
+	loader = GEDIT_DOCUMENT_LOADER (async->loader);
 
-	gtk_text_iter_set_line_offset (&start, 0);
+	if (async->loader->priv->stream)
+		g_input_stream_close_async (G_INPUT_STREAM (async->loader->priv->stream),
+					    G_PRIORITY_HIGH,
+					    async->cancellable,
+					    (GAsyncReadyCallback)close_input_stream_ready_cb,
+					    async);
+}
 
-	if (gtk_text_iter_ends_line (&start) &&
-	    gtk_text_iter_backward_line (&start))
+/* prototype, because they call each other... isn't C lovely */
+static void	read_file_chunk		(AsyncData *async);
+static void	write_file_chunk	(AsyncData *async);
+
+static void
+async_write_cb (GOutputStream *stream,
+		GAsyncResult  *res,
+		AsyncData     *async)
+{
+	GeditGioDocumentLoader *gvloader;
+	gssize bytes_written;
+	GError *error = NULL;
+
+	/* Check cancelled state manually */
+	if (g_cancellable_is_cancelled (async->cancellable))
 	{
-		if (!gtk_text_iter_ends_line (&start))
-		{
-			gtk_text_iter_forward_to_line_end (&start);
-		}
-
-		/* Delete the empty line which is from 'start' to 'end' */
-		gtk_text_buffer_delete (GTK_TEXT_BUFFER (loader->document),
-		                        &start,
-		                        &end);
+		async_data_free (async);
+		return;
 	}
+
+	bytes_written = g_output_stream_write_finish (stream, res, &error);
+
+	gedit_debug_message (DEBUG_SAVER, "Written: %" G_GSSIZE_FORMAT, bytes_written);
+
+	if (bytes_written == -1)
+	{
+		gedit_debug_message (DEBUG_SAVER, "Write error: %s", error->message);
+		async_failed (async, error);
+		return;
+	}
+
+	gvloader = async->loader;
+	async->written += bytes_written;
+
+	/* write again */
+	if (async->written != async->read)
+	{
+		write_file_chunk (async);
+		return;
+	}
+
+	/* note that this signal blocks the read... check if it isn't
+	 * a performance problem
+	 */
+	gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (gvloader),
+				       FALSE,
+				       NULL);
+
+	read_file_chunk (async);
 }
 
 static void
-end_append_text_to_document (GeditDocumentLoader *loader)
+write_file_chunk (AsyncData *async)
 {
-	detect_newline_type (loader);
+	GeditGioDocumentLoader *gvloader;
 
-	/* If the last char is a newline, remove it from the buffer (otherwise
-		GtkTextView shows it as an empty line). See bug #324942. */
-	remove_ending_newline (loader);
+	gvloader = async->loader;
 
-	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (loader->document), FALSE);
-
-	gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (loader->document));
-
-	GEDIT_GIO_DOCUMENT_LOADER (loader)->priv->started_insert = FALSE;
+	g_output_stream_write_async (G_OUTPUT_STREAM (gvloader->priv->output),
+				     gvloader->priv->buffer + async->written,
+				     async->read - async->written,
+				     G_PRIORITY_HIGH,
+				     async->cancellable,
+				     (GAsyncReadyCallback) async_write_cb,
+				     async);
 }
 
 static void
@@ -370,7 +399,6 @@ async_read_cb (GInputStream *stream,
 	gedit_debug (DEBUG_LOADER);
 	GeditGioDocumentLoader *gvloader;
 	GeditDocumentLoader *loader;
-	gssize bytes_read;
 	GError *error = NULL;
 
 	gvloader = async->loader;
@@ -379,44 +407,44 @@ async_read_cb (GInputStream *stream,
 	/* manually check cancelled state */
 	if (g_cancellable_is_cancelled (async->cancellable))
 	{
-		end_append_text_to_document (GEDIT_DOCUMENT_LOADER (gvloader));
 		remote_load_completed_or_failed (gvloader, async);
 		return;
 	}
 
-	bytes_read = g_input_stream_read_finish (stream, res, &error);
+	async->read = g_input_stream_read_finish (stream, res, &error);
+	async->written = 0;
 	
 	/* error occurred */
-	if (bytes_read == -1)
+	if (async->read == -1)
 	{
 		async_failed (async, error);
 		return;
 	}
 
 	/* Check for the extremely unlikely case where the file size overflows. */
-	if (gvloader->priv->bytes_read + bytes_read < gvloader->priv->bytes_read)
+	if (gvloader->priv->bytes_read + async->read < gvloader->priv->bytes_read)
 	{
 		g_set_error (&gvloader->priv->error,
 			     GEDIT_DOCUMENT_ERROR,
 			     GEDIT_DOCUMENT_ERROR_TOO_BIG,
 			     "File too big");
 
-		end_append_text_to_document (GEDIT_DOCUMENT_LOADER (gvloader));
-		remote_load_completed_or_failed (gvloader, async);
-
+		async_failed (async, gvloader->priv->error);
 		return;
 	}
 
 	/* Bump the size. */
-	gvloader->priv->bytes_read += bytes_read;
+	gvloader->priv->bytes_read += async->read;
 
 	/* end of the file, we are done! */
-	if (bytes_read == 0)
+	if (async->read == 0)
 	{
 		GEDIT_DOCUMENT_LOADER (gvloader)->auto_detected_encoding =
 			gedit_smart_charset_converter_get_guessed (gvloader->priv->converter);
 
 		loader->auto_detected_encoding = gedit_smart_charset_converter_get_guessed (gvloader->priv->converter);
+		loader->auto_detected_newline_type =
+			gedit_document_output_stream_detect_newline_type (GEDIT_DOCUMENT_OUTPUT_STREAM (gvloader->priv->output));
 
 		/* Check if we needed some fallback char, if so, check if there was
 		   a previous error and if not set a fallback used error */
@@ -431,27 +459,12 @@ async_read_cb (GInputStream *stream,
 					     "needed to use a fallback char");
 		}*/
 
-		end_append_text_to_document (GEDIT_DOCUMENT_LOADER (gvloader));
-
-		remote_load_completed_or_failed (gvloader, async);
+		write_complete (async);
 
 		return;
 	}
 
-	append_text_to_document (GEDIT_DOCUMENT_LOADER (gvloader),
-				 gvloader->priv->buffer,
-				 bytes_read);
-
-	/* otherwise emit progress and read some more */
-
-	/* note that this signal blocks the read... check if it isn't
-	 * a performance problem
-	 */
-	gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (gvloader),
-				       FALSE,
-				       NULL);
-
-	read_file_chunk (async);
+	write_file_chunk (async);
 }
 
 static void
@@ -460,20 +473,6 @@ read_file_chunk (AsyncData *async)
 	GeditGioDocumentLoader *gvloader;
 	
 	gvloader = async->loader;
-
-	if (!gvloader->priv->started_insert)
-	{
-		GeditDocumentLoader *loader;
-
-		loader = GEDIT_DOCUMENT_LOADER (gvloader);
-
-		/* Init the undoable action */
-		gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (loader->document));
-		gvloader->priv->started_insert = TRUE;
-
-		/* clear the buffer */
-		gtk_text_buffer_set_text (GTK_TEXT_BUFFER (loader->document), "", 0);
-	}
 
 	g_input_stream_read_async (G_INPUT_STREAM (gvloader->priv->stream),
 				   gvloader->priv->buffer,
@@ -550,6 +549,9 @@ finish_query_info (AsyncData *async)
 	g_object_unref (conv_stream);
 
 	gvloader->priv->stream = utf8_stream;
+
+	/* Output stream */
+	gvloader->priv->output = gedit_document_output_stream_new (loader->document);
 
 	/* start reading */
 	read_file_chunk (async);
