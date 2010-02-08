@@ -51,7 +51,6 @@ typedef struct
 	GCancellable 	       *cancellable;
 
 	gssize			read;
-	gssize			written;
 	gboolean		tried_mount;
 } AsyncData;
 
@@ -250,33 +249,6 @@ async_failed (AsyncData *async, GError *error)
 }
 
 static void
-close_output_stream_ready_cb (GOutputStream *stream,
-			      GAsyncResult  *res,
-			      AsyncData     *async)
-{
-	GError *error = NULL;
-	
-	/* check cancelled state manually */
-	if (g_cancellable_is_cancelled (async->cancellable))
-	{
-		async_data_free (async);
-		return;
-	}
-	
-	gedit_debug_message (DEBUG_SAVER, "Finished closing stream");
-	
-	if (!g_output_stream_close_finish (stream, res, &error))
-	{
-		gedit_debug_message (DEBUG_SAVER, "Closing stream error: %s", error->message);
-
-		async_failed (async, error);
-		return;
-	}
-
-	remote_load_completed_or_failed (async->loader, async);
-}
-
-static void
 close_input_stream_ready_cb (GInputStream *stream,
 			     GAsyncResult  *res,
 			     AsyncData     *async)
@@ -300,13 +272,15 @@ close_input_stream_ready_cb (GInputStream *stream,
 		return;
 	}
 
-	/* now we close the output stream */
 	gedit_debug_message (DEBUG_SAVER, "Close output stream");
-	g_output_stream_close_async (async->loader->priv->output,
-				     G_PRIORITY_HIGH,
-				     async->cancellable,
-				     (GAsyncReadyCallback)close_output_stream_ready_cb,
-				     async);
+	if (!g_output_stream_close (async->loader->priv->output,
+				    async->cancellable, &error))
+	{
+		async_failed (async, error);
+		return;
+	}
+
+	remote_load_completed_or_failed (async->loader, async);
 }
 
 static void
@@ -326,42 +300,29 @@ write_complete (AsyncData *async)
 
 /* prototype, because they call each other... isn't C lovely */
 static void	read_file_chunk		(AsyncData *async);
-static void	write_file_chunk	(AsyncData *async);
 
 static void
-async_write_cb (GOutputStream *stream,
-		GAsyncResult  *res,
-		AsyncData     *async)
+write_file_chunk (AsyncData *async)
 {
 	GeditGioDocumentLoader *gvloader;
 	gssize bytes_written;
 	GError *error = NULL;
 
-	/* Check cancelled state manually */
-	if (g_cancellable_is_cancelled (async->cancellable))
-	{
-		async_data_free (async);
-		return;
-	}
+	gvloader = async->loader;
 
-	bytes_written = g_output_stream_write_finish (stream, res, &error);
+	/* we use sync methods on doc stream since it is in memory. Using async
+	   would be racy and we can endup with invalidated iters */
+	bytes_written = g_output_stream_write (G_OUTPUT_STREAM (gvloader->priv->output),
+					       gvloader->priv->buffer,
+					       async->read,
+					       async->cancellable,
+					       &error);
 
 	gedit_debug_message (DEBUG_SAVER, "Written: %" G_GSSIZE_FORMAT, bytes_written);
-
 	if (bytes_written == -1)
 	{
 		gedit_debug_message (DEBUG_SAVER, "Write error: %s", error->message);
 		async_failed (async, error);
-		return;
-	}
-
-	gvloader = async->loader;
-	async->written += bytes_written;
-
-	/* write again */
-	if (async->written != async->read)
-	{
-		write_file_chunk (async);
 		return;
 	}
 
@@ -373,22 +334,6 @@ async_write_cb (GOutputStream *stream,
 				       NULL);
 
 	read_file_chunk (async);
-}
-
-static void
-write_file_chunk (AsyncData *async)
-{
-	GeditGioDocumentLoader *gvloader;
-
-	gvloader = async->loader;
-
-	g_output_stream_write_async (G_OUTPUT_STREAM (gvloader->priv->output),
-				     gvloader->priv->buffer + async->written,
-				     async->read - async->written,
-				     G_PRIORITY_HIGH,
-				     async->cancellable,
-				     (GAsyncReadyCallback) async_write_cb,
-				     async);
 }
 
 static void
@@ -412,7 +357,6 @@ async_read_cb (GInputStream *stream,
 	}
 
 	async->read = g_input_stream_read_finish (stream, res, &error);
-	async->written = 0;
 	
 	/* error occurred */
 	if (async->read == -1)
