@@ -263,25 +263,16 @@ close_async_ready_get_info_cb (GOutputStream *stream,
 }
 
 static void
-close_input_stream_ready_cb (GInputStream *stream,
-			     GAsyncResult  *res,
-			     AsyncData     *async)
+write_complete (AsyncData *async)
 {
 	GError *error = NULL;
-	
-	/* check cancelled state manually */
-	if (g_cancellable_is_cancelled (async->cancellable))
-	{
-		async_data_free (async);
-		return;
-	}
-	
-	gedit_debug_message (DEBUG_SAVER, "Finished closing input stream");
-	
-	if (!g_input_stream_close_finish (stream, res, &error))
+
+	/* first we close the input stream */
+	gedit_debug_message (DEBUG_SAVER, "Close input stream");
+	if (!g_input_stream_close (async->saver->priv->input,
+				   async->cancellable, &error))
 	{
 		gedit_debug_message (DEBUG_SAVER, "Closing input stream error: %s", error->message);
-
 		async_failed (async, error);
 		return;
 	}
@@ -293,18 +284,6 @@ close_input_stream_ready_cb (GInputStream *stream,
 				     async->cancellable,
 				     (GAsyncReadyCallback)close_async_ready_get_info_cb,
 				     async);
-}
-
-static void
-write_complete (AsyncData *async)
-{
-	/* first we close the input stream */
-	gedit_debug_message (DEBUG_SAVER, "Close input stream");
-	g_input_stream_close_async (async->saver->priv->input,
-				    G_PRIORITY_HIGH,
-				    async->cancellable,
-				    (GAsyncReadyCallback)close_input_stream_ready_cb,
-				    async);
 }
 
 /* prototype, because they call each other... isn't C lovely */
