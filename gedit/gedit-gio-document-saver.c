@@ -375,23 +375,22 @@ write_file_chunk (AsyncData *async)
 }
 
 static void
-async_read_cb (GInputStream *stream,
-	       GAsyncResult *res,
-	       AsyncData    *async)
+read_file_chunk (AsyncData *async)
 {
 	GeditGioDocumentSaver *gvsaver;
 	GeditDocumentInputStream *dstream;
 	GError *error = NULL;
 
-	if (g_cancellable_is_cancelled (async->cancellable))
-	{
-		async_data_free (async);
-		return;
-	}
-
 	gvsaver = async->saver;
+	async->written = 0;
 
-	async->read = g_input_stream_read_finish (stream, res, &error);
+	/* we use sync methods on doc stream since it is in memory. Using async
+	   would be racy and we can endup with invalidated iters */
+	async->read = g_input_stream_read (gvsaver->priv->input,
+					   async->buffer,
+					   WRITE_CHUNK_SIZE,
+					   async->cancellable,
+					   &error);
 
 	if (error != NULL)
 	{
@@ -407,27 +406,10 @@ async_read_cb (GInputStream *stream,
 	}
 
 	/* Get how many chars have been read */
-	dstream = GEDIT_DOCUMENT_INPUT_STREAM (stream);
+	dstream = GEDIT_DOCUMENT_INPUT_STREAM (gvsaver->priv->input);
 	gvsaver->priv->bytes_written = gedit_document_input_stream_tell (dstream);
 
 	write_file_chunk (async);
-}
-
-static void
-read_file_chunk (AsyncData *async)
-{
-	GeditGioDocumentSaver *gvsaver;
-
-	gvsaver = async->saver;
-	async->written = 0;
-
-	g_input_stream_read_async (gvsaver->priv->input,
-				   async->buffer,
-				   WRITE_CHUNK_SIZE,
-				   G_PRIORITY_HIGH,
-				   async->cancellable,
-				   (GAsyncReadyCallback) async_read_cb,
-				   async);
 }
 
 static void
