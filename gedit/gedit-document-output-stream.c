@@ -20,9 +20,17 @@
  * Boston, MA  02110-1301  USA
  */
 
+#include "config.h"
 
+#include <glib.h>
+#include <gio/gio.h>
 #include "gedit-document-output-stream.h"
 
+/* NOTE: never use async methods on this stream, the stream is just
+ * a wrapper around GtkTextBuffer api so that we can use GIO Stream
+ * methods, but the undelying code operates on a GtkTextBuffer, so
+ * there is no I/O involved and should be accessed only by the main
+ * thread */
 
 #define GEDIT_DOCUMENT_OUTPUT_STREAM_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_DOCUMENT_OUTPUT_STREAM, GeditDocumentOutputStreamPrivate))
 

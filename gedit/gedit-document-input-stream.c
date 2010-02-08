@@ -20,15 +20,20 @@
  * Boston, MA  02110-1301  USA
  */
 
-
 #include "config.h"
 
 #include <glib.h>
 #include <gio/gio.h>
 #include <string.h>
-
 #include "gedit-document-input-stream.h"
 #include "gedit-enum-types.h"
+
+/* NOTE: never use async methods on this stream, the stream is just
+ * a wrapper around GtkTextBuffer api so that we can use GIO Stream
+ * methods, but the undelying code operates on a GtkTextBuffer, so
+ * there is no I/O involved and should be accessed only by the main
+ * thread */
+
 
 G_DEFINE_TYPE (GeditDocumentInputStream, gedit_document_input_stream, G_TYPE_INPUT_STREAM);
 
