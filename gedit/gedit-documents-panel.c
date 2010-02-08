@@ -48,9 +48,9 @@ struct _GeditDocumentsPanelPrivate
 
 	GtkWidget    *treeview;
 	GtkTreeModel *model;
-	
-	gboolean      adding_tab;
-	gboolean      is_reodering;
+
+	guint         adding_tab : 1;
+	guint         is_reodering : 1;
 };
 
 G_DEFINE_TYPE(GeditDocumentsPanel, gedit_documents_panel, GTK_TYPE_VBOX)
@@ -58,7 +58,15 @@ G_DEFINE_TYPE(GeditDocumentsPanel, gedit_documents_panel, GTK_TYPE_VBOX)
 enum
 {
 	PROP_0,
-	PROP_WINDOW,
+	PROP_WINDOW
+};
+
+enum
+{
+	PIXBUF_COLUMN,
+	NAME_COLUMN,
+	TAB_COLUMN,
+	N_COLUMNS
 };
 
 #define MAX_DOC_NAME_LENGTH 60
@@ -127,15 +135,15 @@ get_iter_from_tab (GeditDocumentsPanel *panel, GeditTab *tab, GtkTreeIter *iter)
 
 	path = gtk_tree_path_new_from_indices (num, -1);
 	gtk_tree_model_get_iter (panel->priv->model,
-        	                 iter,
-        	                 path);
+		                 iter,
+		                 path);
 	gtk_tree_path_free (path);
 }
 
 static void
 window_active_tab_changed (GeditWindow         *window,
-		  	   GeditTab            *tab,
-		  	   GeditDocumentsPanel *panel)
+			   GeditTab            *tab,
+			   GeditDocumentsPanel *panel)
 {	
 	g_return_if_fail (tab != NULL);
 
@@ -148,7 +156,7 @@ window_active_tab_changed (GeditWindow         *window,
 
 		if (gtk_list_store_iter_is_valid (GTK_LIST_STORE (panel->priv->model),
 						  &iter))
-		{						  
+		{
 			selection = gtk_tree_view_get_selection (
 					GTK_TREE_VIEW (panel->priv->treeview));
 
@@ -194,11 +202,11 @@ refresh_list (GeditDocumentsPanel *panel)
 
 		/* Add a new row to the model */
 		gtk_list_store_append (list_store, &iter);
-		gtk_list_store_set (list_store, 
+		gtk_list_store_set (list_store,
 				    &iter,
-				    0, pixbuf,
-				    1, name,
-				    2, l->data,
+				    PIXBUF_COLUMN, pixbuf,
+				    NAME_COLUMN, name,
+				    TAB_COLUMN, l->data,
 				    -1);
 
 		g_free (name);
@@ -233,16 +241,16 @@ sync_name_and_icon (GeditTab            *tab,
 	GtkTreeIter iter;
 
 	get_iter_from_tab (panel, tab, &iter);
-	
+
 	name = tab_get_name (tab);
 	pixbuf = _gedit_tab_get_icon (tab);
 
-	gtk_list_store_set (GTK_LIST_STORE (panel->priv->model), 
+	gtk_list_store_set (GTK_LIST_STORE (panel->priv->model),
 			    &iter,
-        	            0, pixbuf,
-        	            1, name,
-        	            2, tab,
-        	            -1);
+			    PIXBUF_COLUMN, pixbuf,
+			    NAME_COLUMN, name,
+			    TAB_COLUMN, tab,
+			    -1);
 
 	g_free (name);
 	if (pixbuf != NULL)
@@ -255,8 +263,8 @@ window_tab_removed (GeditWindow         *window,
 		    GeditDocumentsPanel *panel)
 {
 	g_signal_handlers_disconnect_by_func (tab,
-					      G_CALLBACK (sync_name_and_icon), 
-					      panel);	
+					      G_CALLBACK (sync_name_and_icon),
+					      panel);
 
 	if (_gedit_window_is_removing_tabs (window))
 		gtk_list_store_clear (GTK_LIST_STORE (panel->priv->model));
@@ -279,7 +287,7 @@ window_tab_added (GeditWindow         *window,
 			  G_CALLBACK (sync_name_and_icon),
 			  panel);
 
-	g_signal_connect (tab, 
+	g_signal_connect (tab,
 			 "notify::state",
 			  G_CALLBACK (sync_name_and_icon),
 			  panel);
@@ -289,7 +297,7 @@ window_tab_added (GeditWindow         *window,
 	panel->priv->adding_tab = TRUE;
 	
 	if (gtk_list_store_iter_is_valid (GTK_LIST_STORE (panel->priv->model), 
-					  &sibling)) 
+					  &sibling))
 	{
 		gtk_list_store_insert_after (GTK_LIST_STORE (panel->priv->model),
 					     &iter,
@@ -318,27 +326,27 @@ window_tab_added (GeditWindow         *window,
 	name = tab_get_name (tab);
 	pixbuf = _gedit_tab_get_icon (tab);
 
-	gtk_list_store_set (GTK_LIST_STORE (panel->priv->model), 
+	gtk_list_store_set (GTK_LIST_STORE (panel->priv->model),
 			    &iter,
-        	            0, pixbuf,
-        	            1, name,
-        	            2, tab,
-        	            -1);
+		            PIXBUF_COLUMN, pixbuf,
+		            NAME_COLUMN, name,
+		            TAB_COLUMN, tab,
+		            -1);
 
 	g_free (name);
 	if (pixbuf != NULL)
 		g_object_unref (pixbuf);
 
-	panel->priv->adding_tab = FALSE;		
-}			    
- 
+	panel->priv->adding_tab = FALSE;
+}
+
 static void
 window_tabs_reordered (GeditWindow         *window,
 		       GeditDocumentsPanel *panel)
 {
 	if (panel->priv->is_reodering)
 		return;
-		
+
 	refresh_list (panel);
 }
 
@@ -366,7 +374,7 @@ set_window (GeditDocumentsPanel *panel,
 	g_signal_connect (window,
 			  "active_tab_changed",
 			  G_CALLBACK (window_active_tab_changed),
-			  panel);		  
+			  panel);
 }
 
 static void
@@ -382,25 +390,25 @@ treeview_cursor_changed (GtkTreeView         *view,
 
 	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
 	{
-		gtk_tree_model_get (panel->priv->model, 
-				    &iter, 
-				    2, 
-				    &tab, 
+		gtk_tree_model_get (panel->priv->model,
+				    &iter,
+				    TAB_COLUMN,
+				    &tab,
 				    -1);
 
 		if (gedit_window_get_active_tab (panel->priv->window) != tab)
 		{
 			gedit_window_set_active_tab (panel->priv->window,
 						     GEDIT_TAB (tab));
-		}				    
-	}	
+		}
+	}
 }
 
 static void
 gedit_documents_panel_set_property (GObject      *object,
-		        	    guint         prop_id,
-		        	    const GValue *value,
-		        	    GParamSpec   *pspec)
+				    guint         prop_id,
+				    const GValue *value,
+				    GParamSpec   *pspec)
 {
 	GeditDocumentsPanel *panel = GEDIT_DOCUMENTS_PANEL (object);
 
@@ -432,7 +440,7 @@ gedit_documents_panel_get_property (GObject    *object,
 			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-			break;			
+			break;
 	}
 }
 
@@ -441,7 +449,7 @@ gedit_documents_panel_finalize (GObject *object)
 {
 	/* GeditDocumentsPanel *tab = GEDIT_DOCUMENTS_PANEL (object); */
 	
-	// TODO: disconnect signal with window
+	/* TODO: disconnect signal with window */
 
 	G_OBJECT_CLASS (gedit_documents_panel_parent_class)->finalize (object);
 }
@@ -451,7 +459,8 @@ gedit_documents_panel_dispose (GObject *object)
 {
 	GeditDocumentsPanel *panel = GEDIT_DOCUMENTS_PANEL (object);
 
-	if (panel->priv->window != NULL) {
+	if (panel->priv->window != NULL)
+	{
 		g_object_unref (panel->priv->window);
 		panel->priv->window = NULL;
 	}
@@ -472,14 +481,14 @@ gedit_documents_panel_class_init (GeditDocumentsPanelClass *klass)
 	g_object_class_install_property (object_class,
 					 PROP_WINDOW,
 					 g_param_spec_object ("window",
-							 "Window",
-							 "The GeditWindow this GeditDocumentsPanel is associated with",
-							 GEDIT_TYPE_WINDOW,
-							 G_PARAM_READWRITE |
-							 G_PARAM_CONSTRUCT_ONLY |
-							 G_PARAM_STATIC_STRINGS));
+							      "Window",
+							      "The GeditWindow this GeditDocumentsPanel is associated with",
+							      GEDIT_TYPE_WINDOW,
+							      G_PARAM_READWRITE |
+							      G_PARAM_CONSTRUCT_ONLY |
+							      G_PARAM_STATIC_STRINGS));
 
-	g_type_class_add_private (object_class, sizeof(GeditDocumentsPanelPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditDocumentsPanelPrivate));
 }
 
 static GtkTreePath *
@@ -532,7 +541,7 @@ menu_position (GtkMenu             *menu,
 	}
 	else
 	{
-		*x += w->allocation.x + 10 ;
+		*x += w->allocation.x + 10;
 	}
 
 	wy = MAX (*y + 5, *y + wy + 5);
@@ -555,22 +564,22 @@ show_popup_menu (GeditDocumentsPanel *panel,
 
 	if (event != NULL)
 	{
-		gtk_menu_popup (GTK_MENU (menu), 
-				NULL, 
+		gtk_menu_popup (GTK_MENU (menu),
 				NULL,
-				NULL, 
 				NULL,
-				event->button, 
+				NULL,
+				NULL,
+				event->button,
 				event->time);
 	}
 	else
 	{
-		gtk_menu_popup (GTK_MENU (menu), 
-				NULL, 
+		gtk_menu_popup (GTK_MENU (menu),
 				NULL,
-				(GtkMenuPositionFunc) menu_position, 
+				NULL,
+				(GtkMenuPositionFunc) menu_position,
 				panel,
-				0, 
+				0,
 				gtk_get_current_event_time ());
 
 		gtk_menu_shell_select_first (GTK_MENU_SHELL (menu), FALSE);
@@ -587,7 +596,7 @@ panel_button_press_event (GtkTreeView         *treeview,
 	if ((GDK_BUTTON_PRESS == event->type) && (3 == event->button))
 	{
 		GtkTreePath* path = NULL;
-		
+
 		if (event->window == gtk_tree_view_get_bin_window (treeview))
 		{
 			/* Change the cursor position */
@@ -599,20 +608,20 @@ panel_button_press_event (GtkTreeView         *treeview,
 							   NULL,
 							   NULL))
 			{				
-			
+
 				gtk_tree_view_set_cursor (treeview,
 							  path,
 							  NULL,
 							  FALSE);
-					
+
 				gtk_tree_path_free (path);
-							   
+
 				/* A row exists at mouse position */
 				return show_popup_menu (panel, event);
 			}
 		}
 	}
-	
+
 	return FALSE;
 }
 
@@ -660,7 +669,7 @@ treeview_query_tooltip (GtkWidget  *widget,
 		gtk_tree_view_convert_widget_to_bin_window_coords (tree_view,
 								   x, y,
 								   &bin_x, &bin_y);
-      
+
 		if (!gtk_tree_view_get_path_at_pos (tree_view,
 						    bin_x, bin_y,
 						    &path,
@@ -671,10 +680,10 @@ treeview_query_tooltip (GtkWidget  *widget,
 	}
 
 	gtk_tree_model_get_iter (model, &iter, path);
-	gtk_tree_model_get (model, 
-			    &iter, 
-			    2, 
-			    &tab, 
+	gtk_tree_model_get (model,
+			    &iter,
+			    TAB_COLUMN,
+			    &tab,
 			    -1);
 
 	tip = _gedit_tab_get_tooltips (GEDIT_TAB (tab));
@@ -713,7 +722,7 @@ treeview_row_inserted (GtkTreeModel        *tree_model,
 	nb = _gedit_window_get_notebook (panel->priv->window);
 
 	new_position = indeces[0];
-	old_position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), 
+	old_position = gtk_notebook_page_num (GTK_NOTEBOOK (nb),
 				    	      GTK_WIDGET (tab));
 	if (new_position > old_position)
 		new_position = MAX (0, new_position - 1);
@@ -722,7 +731,7 @@ treeview_row_inserted (GtkTreeModel        *tree_model,
 				    tab,
 				    new_position);
 
-	panel->priv->is_reodering = FALSE;				    
+	panel->priv->is_reodering = FALSE;
 }
 
 static void
@@ -746,20 +755,20 @@ gedit_documents_panel_init (GeditDocumentsPanel *panel)
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
-                                             GTK_SHADOW_IN);	
-	gtk_widget_show (sw);				
+                                             GTK_SHADOW_IN);
+	gtk_widget_show (sw);
 	gtk_box_pack_start (GTK_BOX (panel), sw, TRUE, TRUE, 0);
 	
 	/* Create the empty model */
-	panel->priv->model = GTK_TREE_MODEL (gtk_list_store_new (3, 
-								 GDK_TYPE_PIXBUF, 
-								 G_TYPE_STRING, 
+	panel->priv->model = GTK_TREE_MODEL (gtk_list_store_new (N_COLUMNS,
+								 GDK_TYPE_PIXBUF,
+								 G_TYPE_STRING,
 								 G_TYPE_POINTER));
 
 	/* Create the treeview */
 	panel->priv->treeview = gtk_tree_view_new_with_model (panel->priv->model);
 	g_object_unref (G_OBJECT (panel->priv->model));
-  	gtk_container_add (GTK_CONTAINER (sw), panel->priv->treeview);
+	gtk_container_add (GTK_CONTAINER (sw), panel->priv->treeview);
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (panel->priv->treeview), FALSE);
 	gtk_tree_view_set_reorderable (GTK_TREE_VIEW (panel->priv->treeview), TRUE);
 
@@ -772,20 +781,20 @@ gedit_documents_panel_init (GeditDocumentsPanel *panel)
 
 	cell = gtk_cell_renderer_pixbuf_new ();
 	gtk_tree_view_column_pack_start (column, cell, FALSE);
-	gtk_tree_view_column_add_attribute (column, cell, "pixbuf", 0);
+	gtk_tree_view_column_add_attribute (column, cell, "pixbuf", PIXBUF_COLUMN);
 	cell = gtk_cell_renderer_text_new ();
-      	gtk_tree_view_column_pack_start (column, cell, TRUE);	
-	gtk_tree_view_column_add_attribute (column, cell, "markup", 1);
+	gtk_tree_view_column_pack_start (column, cell, TRUE);
+	gtk_tree_view_column_add_attribute (column, cell, "markup", NAME_COLUMN);
 
 	gtk_tree_view_append_column (GTK_TREE_VIEW (panel->priv->treeview),
 				     column);
 				     
-     	selection = gtk_tree_view_get_selection (
+	selection = gtk_tree_view_get_selection (
 			GTK_TREE_VIEW (panel->priv->treeview));
 
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
 	
-	g_signal_connect (panel->priv->treeview, 
+	g_signal_connect (panel->priv->treeview,
 			  "cursor_changed",
 			  G_CALLBACK (treeview_cursor_changed),
 			  panel);
@@ -793,16 +802,16 @@ gedit_documents_panel_init (GeditDocumentsPanel *panel)
 			  "button-press-event",
 			  G_CALLBACK (panel_button_press_event),
 			  panel);
-	g_signal_connect (panel->priv->treeview, 
+	g_signal_connect (panel->priv->treeview,
 			  "popup-menu",
 			  G_CALLBACK (panel_popup_menu),
 			  panel);
-  	g_signal_connect (panel->priv->treeview,
+	g_signal_connect (panel->priv->treeview,
 			  "query-tooltip",
 			  G_CALLBACK (treeview_query_tooltip),
 			  NULL);
 
-	g_signal_connect (panel->priv->model, 
+	g_signal_connect (panel->priv->model,
 			  "row-inserted",
 			  G_CALLBACK (treeview_row_inserted),
 			  panel);
@@ -813,7 +822,7 @@ gedit_documents_panel_new (GeditWindow *window)
 {
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 
-	return GTK_WIDGET (g_object_new (GEDIT_TYPE_DOCUMENTS_PANEL, 
+	return GTK_WIDGET (g_object_new (GEDIT_TYPE_DOCUMENTS_PANEL,
 					 "window", window,
 					 NULL));
 }
