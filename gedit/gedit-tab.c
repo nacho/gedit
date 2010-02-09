@@ -421,6 +421,17 @@ document_uri_notify_handler (GeditDocument *document,
 	g_object_notify (G_OBJECT (tab), "name");
 }
 
+static void 
+document_shortname_notify_handler (GeditDocument *document,
+				   GParamSpec    *pspec,
+				   GeditTab      *tab)
+{
+	gedit_debug (DEBUG_TAB);
+	
+	/* Notify the change in the shortname */
+	g_object_notify (G_OBJECT (tab), "name");
+}
+
 static void
 document_modified_changed (GtkTextBuffer *document,
 			   GeditTab      *tab)
@@ -1573,6 +1584,10 @@ gedit_tab_init (GeditTab *tab)
 	g_signal_connect (doc,
 			  "notify::uri",
 			  G_CALLBACK (document_uri_notify_handler),
+			  tab);
+	g_signal_connect (doc,
+			  "notify::shortname",
+			  G_CALLBACK (document_shortname_notify_handler),
 			  tab);
 	g_signal_connect (doc,
 			  "modified_changed",

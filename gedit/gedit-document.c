@@ -103,6 +103,7 @@ struct _GeditDocumentPrivate
 {
 	gchar	    *uri;
 	gint 	     untitled_number;
+	gchar       *short_name;
 
 	GFileInfo   *metadata_info;
 
@@ -371,6 +372,10 @@ gedit_document_set_property (GObject      *object,
 			gedit_document_set_newline_type (doc,
 							 g_value_get_enum (value));
 			break;
+		case PROP_SHORTNAME:
+			gedit_document_set_short_name_for_display (doc,
+			                                           g_value_get_string (value));
+			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -423,7 +428,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 	object_class->dispose = gedit_document_dispose;
 	object_class->finalize = gedit_document_finalize;
 	object_class->get_property = gedit_document_get_property;
-	object_class->set_property = gedit_document_set_property;	
+	object_class->set_property = gedit_document_set_property;
 
 	buf_class->mark_set = gedit_document_mark_set;
 	buf_class->changed = gedit_document_changed;
@@ -444,7 +449,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 							      "Short Name",
 							      "The document's short name",
 							      NULL,
-							      G_PARAM_READABLE |
+							      G_PARAM_READWRITE |
 							      G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class, PROP_CONTENT_TYPE,
@@ -980,7 +985,11 @@ set_uri (GeditDocument *doc,
 #endif
 
 	g_object_notify (G_OBJECT (doc), "uri");
-	g_object_notify (G_OBJECT (doc), "shortname");
+
+	if (doc->priv->short_name == NULL)
+	{
+		g_object_notify (G_OBJECT (doc), "shortname");
+	}
 }
 
 GFile *
@@ -1026,11 +1035,25 @@ gedit_document_get_short_name_for_display (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), g_strdup (""));
 
-	if (doc->priv->uri == NULL)
+	if (doc->priv->short_name != NULL)
+		return g_strdup (doc->priv->short_name);
+	else if (doc->priv->uri == NULL)
 		return g_strdup_printf (_("Unsaved Document %d"),
 					doc->priv->untitled_number);
 	else
 		return gedit_utils_basename_for_display (doc->priv->uri);
+}
+
+void
+gedit_document_set_short_name_for_display (GeditDocument *doc,
+                                           const gchar   *short_name)
+{
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	g_free (doc->priv->short_name);
+	doc->priv->short_name = g_strdup (short_name);
+
+	g_object_notify (G_OBJECT (doc), "shortname");
 }
 
 gchar *

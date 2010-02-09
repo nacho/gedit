@@ -187,6 +187,10 @@ gchar		*gedit_document_get_uri_for_display
 gchar		*gedit_document_get_short_name_for_display
 					 	(GeditDocument       *doc);
 
+void		 gedit_document_set_short_name_for_display
+						(GeditDocument       *doc,
+						 const gchar         *name);
+
 gchar		*gedit_document_get_content_type
 					 	(GeditDocument       *doc);
 
