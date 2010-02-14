@@ -2857,3 +2857,14 @@ gedit_tab_set_auto_save_interval (GeditTab *tab,
 		install_auto_save_timeout (tab);
 	}
 }
+
+void
+gedit_tab_set_info_bar (GeditTab  *tab,
+                        GtkWidget *info_bar)
+{
+	g_return_if_fail (GEDIT_IS_TAB (tab));
+	g_return_if_fail (info_bar == NULL || GTK_IS_WIDGET (info_bar));
+
+	/* FIXME: this can cause problems with the tab state machine */
+	set_message_area (tab, info_bar);
+}

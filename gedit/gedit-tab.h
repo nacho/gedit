@@ -121,6 +121,8 @@ void		 gedit_tab_set_auto_save_interval
 						(GeditTab            *tab, 
 						 gint                interval);
 
+void		 gedit_tab_set_info_bar		(GeditTab            *tab,
+						 GtkWidget           *info_bar);
 /*
  * Non exported methods
  */
