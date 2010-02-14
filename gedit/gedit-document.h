@@ -194,6 +194,10 @@ void		 gedit_document_set_short_name_for_display
 gchar		*gedit_document_get_content_type
 					 	(GeditDocument       *doc);
 
+void		 gedit_document_set_content_type
+					 	(GeditDocument       *doc,
+					 	 const gchar         *content_type);
+
 gchar		*gedit_document_get_mime_type 	(GeditDocument       *doc);
 
 gboolean	 gedit_document_get_readonly 	(GeditDocument       *doc);

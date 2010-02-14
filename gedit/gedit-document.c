@@ -376,6 +376,10 @@ gedit_document_set_property (GObject      *object,
 			gedit_document_set_short_name_for_display (doc,
 			                                           g_value_get_string (value));
 			break;
+		case PROP_CONTENT_TYPE:
+			gedit_document_set_content_type (doc,
+			                                 g_value_get_string (value));
+			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -457,7 +461,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 							      "Content Type",
 							      "The document's Content Type",
 							      NULL,
-							      G_PARAM_READABLE |
+							      G_PARAM_READWRITE |
 							      G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class, PROP_MIME_TYPE,
@@ -761,22 +765,29 @@ guess_language (GeditDocument *doc,
 	else
 	{
 		GFile *file;
-		gchar *basename;
+		gchar *basename = NULL;
 
 		file = gedit_document_get_location (doc);
+		gedit_debug_message (DEBUG_DOCUMENT, "Sniffing Language");
 
 		if (file)
 		{
-			gedit_debug_message (DEBUG_DOCUMENT, "Sniffing Language");
-
 			basename = g_file_get_basename (file);
+		}
+		else if (doc->priv->short_name != NULL)
+		{
+			basename = g_strdup (doc->priv->short_name);
+		}
 
-			language = gtk_source_language_manager_guess_language (
-						gedit_get_language_manager (),
-						basename,
-						content_type);
+		language = gtk_source_language_manager_guess_language (
+					gedit_get_language_manager (),
+					basename,
+					content_type);
 
-			g_free (basename);
+		g_free (basename);
+
+		if (file != NULL)
+		{
 			g_object_unref (file);
 		}
 	}
@@ -914,6 +925,15 @@ set_content_type (GeditDocument *doc,
 	}
 
 	g_object_notify (G_OBJECT (doc), "content-type");
+}
+
+void
+gedit_document_set_content_type (GeditDocument *doc,
+                                 const gchar   *content_type)
+{
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	set_content_type (doc, content_type);
 }
 
 #ifndef G_OS_WIN32
