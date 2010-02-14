@@ -68,6 +68,7 @@ struct _GeditNotebookPrivate
 	gint	       always_show_tabs : 1;
 	gint           close_buttons_sensitive : 1;
 	gint           tab_drag_and_drop_enabled : 1;
+	guint          destroy_has_run : 1;
 };
 
 G_DEFINE_TYPE(GeditNotebook, gedit_notebook, GTK_TYPE_NOTEBOOK)
@@ -99,12 +100,38 @@ enum
 static guint signals[LAST_SIGNAL] = { 0 };
 
 static void
+gedit_notebook_destroy (GtkObject *object)
+{
+	GeditNotebook *notebook = GEDIT_NOTEBOOK (object);
+
+	if (!notebook->priv->destroy_has_run)
+	{
+		GList *children, *l;
+
+		children = gtk_container_get_children (GTK_CONTAINER (notebook));
+
+		for (l = children; l != NULL; l = g_list_next (l))
+		{
+			gedit_notebook_remove_tab (notebook,
+						   GEDIT_TAB (l->data));
+		}
+
+		g_list_free (children);
+		notebook->priv->destroy_has_run = TRUE;
+	}
+
+	GTK_OBJECT_CLASS (gedit_notebook_parent_class)->destroy (object);
+}
+
+static void
 gedit_notebook_class_init (GeditNotebookClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GtkObjectClass *gtkobject_class = GTK_OBJECT_CLASS (klass);
 	GtkNotebookClass *notebook_class = GTK_NOTEBOOK_CLASS (klass);
 
 	object_class->finalize = gedit_notebook_finalize;
+	gtkobject_class->destroy = gedit_notebook_destroy;
 	
 	notebook_class->change_current_page = gedit_notebook_change_current_page;
 
@@ -713,8 +740,7 @@ gedit_notebook_finalize (GObject *object)
 {
 	GeditNotebook *notebook = GEDIT_NOTEBOOK (object);
 
-	if (notebook->priv->focused_pages)
-		g_list_free (notebook->priv->focused_pages);
+	g_list_free (notebook->priv->focused_pages);
 
 	G_OBJECT_CLASS (gedit_notebook_parent_class)->finalize (object);
 }
