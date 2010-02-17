@@ -78,7 +78,7 @@ create_option_menu (GeditFileChooserDialog *dialog)
 	GtkWidget *label;
 	GtkWidget *menu;
 
-	label = gtk_label_new_with_mnemonic (_("C_haracter Coding:"));
+	label = gtk_label_new_with_mnemonic (_("C_haracter Encoding:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 
 	menu = gedit_encodings_combo_box_new (

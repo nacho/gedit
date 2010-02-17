@@ -318,7 +318,7 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 				GTK_RESPONSE_HELP,
 				NULL);
 
-	gtk_window_set_title (GTK_WINDOW (dlg), _("Character Codings"));
+	gtk_window_set_title (GTK_WINDOW (dlg), _("Character Encodings"));
 	gtk_window_set_default_size (GTK_WINDOW (dlg), 650, 400);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
 	

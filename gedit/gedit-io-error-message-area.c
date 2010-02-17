@@ -457,7 +457,7 @@ create_combo_box (GtkWidget *message_area, GtkWidget *vbox)
 	hbox = gtk_hbox_new (FALSE, 6);
 
 	label_markup = g_strdup_printf ("<small>%s</small>",
-					_("Ch_aracter Coding:"));
+					_("Ch_aracter Encoding:"));
 	label = gtk_label_new_with_mnemonic (label_markup);
 	g_free (label_markup);
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
@@ -647,9 +647,9 @@ gedit_io_loading_error_message_area_new (const gchar         *uri,
 		error_message = g_strdup_printf (_("Could not open the file %s."),
 						 uri_for_display);
 		message_details = g_strconcat (_("gedit has not been able to detect "
-				               "the character coding."), "\n", 
+				               "the character encoding."), "\n", 
 				               _("Please check that you are not trying to open a binary file."), "\n",
-					       _("Select a character coding from the menu and try again."), NULL);
+					       _("Select a character encoding from the menu and try again."), NULL);
 		convert_error = TRUE;
 	}
 	else if (error->domain == GEDIT_DOCUMENT_ERROR &&
@@ -667,11 +667,11 @@ gedit_io_loading_error_message_area_new (const gchar         *uri,
 	}
 	else if (is_gio_error (error, G_IO_ERROR_INVALID_DATA) && encoding != NULL)
 	{
-		error_message = g_strdup_printf (_("Could not open the file %s using the %s character coding."),
+		error_message = g_strdup_printf (_("Could not open the file %s using the %s character encoding."),
 						 uri_for_display, 
 						 encoding_name);
 		message_details = g_strconcat (_("Please check that you are not trying to open a binary file."), "\n",
-					       _("Select a different character coding from the menu and try again."), NULL);
+					       _("Select a different character encoding from the menu and try again."), NULL);
 		convert_error = TRUE;
 	}
 	else
@@ -734,12 +734,12 @@ gedit_conversion_error_while_saving_message_area_new (
 
 	encoding_name = gedit_encoding_to_string (encoding);
 	
-	error_message = g_strdup_printf (_("Could not save the file %s using the %s character coding."),
+	error_message = g_strdup_printf (_("Could not save the file %s using the %s character encoding."),
 					 uri_for_display, 
 					 encoding_name);
 	message_details = g_strconcat (_("The document contains one or more characters that cannot be encoded "
-					 "using the specified character coding."), "\n",
-				       _("Select a different character coding from the menu and try again."), NULL);
+					 "using the specified character encoding."), "\n",
+				       _("Select a different character encoding from the menu and try again."), NULL);
 	
 	message_area = create_conversion_error_message_area (
 								error_message,
