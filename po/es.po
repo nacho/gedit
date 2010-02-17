@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
-"POT-Creation-Date: 2010-02-09 23:19+0000\n"
-"PO-Revision-Date: 2010-02-10 07:52+0100\n"
+"POT-Creation-Date: 2010-02-17 15:59+0000\n"
+"PO-Revision-Date: 2010-02-17 20:59+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -159,13 +159,16 @@ msgstr ""
 "complemento dado."
 
 #: ../data/gedit.schemas.in.in.h:25
+#| msgid ""
+#| "List of encodings shown in Character Coding menu in open/save file "
+#| "selector. Only recognized encodings are used."
 msgid ""
-"List of encodings shown in Character Coding menu in open/save file selector. "
-"Only recognized encodings are used."
+"List of encodings shown in the Character Encoding menu in open/save file "
+"selector. Only recognized encodings are used."
 msgstr ""
-"Lista de codificaciones que se muestran en el menú de codificación de "
-"caracteres del selector de archivos para guardar/abrir. Sólo se usan las "
-"codificaciones reconocidas."
+"Lista de codificaciones que se muestran en el menú Códigos de caracteres del "
+"selector de archivos para abrir/guardar. Sólo se usan las codificaciones "
+"reconocidas."
 
 #: ../data/gedit.schemas.in.in.h:26
 msgid "Max Number of Undo Actions"
@@ -524,7 +527,7 @@ msgstr ""
 msgid "Writable VFS schemes"
 msgstr "Esquemas VFS escribibles"
 
-#. Translators: This is the list of encodings shown by default in the Character Coding
+#. Translators: This is the list of encodings shown by default in the Character Encoding
 #. menu in open/save file selector. Only recognized encodings are displayed.
 #: ../data/gedit.schemas.in.in.h:91
 msgid "[ISO-8859-15]"
@@ -685,7 +688,8 @@ msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Si no guarda, todos sus cambios se perderán para siempre."
 
 #: ../gedit/dialogs/gedit-encodings-dialog.c:321
-msgid "Character Codings"
+#| msgid "Character codings"
+msgid "Character Encodings"
 msgstr "Códigos de caracteres"
 
 #: ../gedit/dialogs/gedit-encodings-dialog.c:385
@@ -703,7 +707,8 @@ msgid "A_vailable encodings:"
 msgstr "Codificaciones dispo_nibles:"
 
 #: ../gedit/dialogs/gedit-encodings-dialog.ui.h:2
-msgid "Character codings"
+#| msgid "Character codings"
+msgid "Character encodings"
 msgstr "Códigos de caracteres"
 
 #: ../gedit/dialogs/gedit-encodings-dialog.ui.h:3
@@ -1154,7 +1159,7 @@ msgstr "Se encontró y reemplazó una aparición"
 msgid "\"%s\" not found"
 msgstr "No se encontró «%s»"
 
-#: ../gedit/gedit-document.c:1017 ../gedit/gedit-document.c:1030
+#: ../gedit/gedit-document.c:1046 ../gedit/gedit-document.c:1061
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Documento no guardado %d"
@@ -1303,8 +1308,9 @@ msgid "All Text Files"
 msgstr "Todos los archivos de texto"
 
 #: ../gedit/gedit-file-chooser-dialog.c:81
-msgid "C_haracter Coding:"
-msgstr "Codificación de c_aracteres:"
+#| msgid "C_haracter Coding:"
+msgid "C_haracter Encoding:"
+msgstr "Codificación de ca_racteres:"
 
 #: ../gedit/gedit-file-chooser-dialog.c:141
 msgid "L_ine Ending:"
@@ -1420,7 +1426,8 @@ msgid "Could not revert the file %s."
 msgstr "No se ha podido revertir el archivo %s."
 
 #: ../gedit/gedit-io-error-message-area.c:460
-msgid "Ch_aracter Coding:"
+#| msgid "Ch_aracter coding:"
+msgid "Ch_aracter Encoding:"
 msgstr "Codificación de c_aracteres:"
 
 #. Translators: the access key chosen for this string should be
@@ -1459,8 +1466,9 @@ msgid "Could not open the file %s."
 msgstr "No se pudo abrir el archivo %s."
 
 #: ../gedit/gedit-io-error-message-area.c:649
-msgid "gedit has not been able to detect the character coding."
-msgstr "No se ha podido detectar la codificación de caracteres."
+#| msgid "gedit has not been able to detect the character coding."
+msgid "gedit has not been able to detect the character encoding."
+msgstr "gedit no pudo detectar la codificación de caracteres."
 
 #: ../gedit/gedit-io-error-message-area.c:651
 #: ../gedit/gedit-io-error-message-area.c:673
@@ -1468,9 +1476,10 @@ msgid "Please check that you are not trying to open a binary file."
 msgstr "Compruebe que no está intentando abrir un archivo binario."
 
 #: ../gedit/gedit-io-error-message-area.c:652
-msgid "Select a character coding from the menu and try again."
+#| msgid "Select a character coding from the menu and try again."
+msgid "Select a character encoding from the menu and try again."
 msgstr ""
-"Seleccione una codificación de caracteres desde el menú e intente de nuevo."
+"Seleccione una codificación de caracteres desde el menú e inténtelo de nuevo."
 
 #: ../gedit/gedit-io-error-message-area.c:658
 #, c-format
@@ -1493,28 +1502,33 @@ msgstr ""
 
 #: ../gedit/gedit-io-error-message-area.c:670
 #, c-format
-msgid "Could not open the file %s using the %s character coding."
+#| msgid "Could not open the file %s using the %s character coding."
+msgid "Could not open the file %s using the %s character encoding."
 msgstr ""
-"No se ha podido abrir el archivo «%s» usando la codificación de caracteres %s."
+"No se pudo abrir el archivo %s usando la codificación de caracteres %s."
 
 #: ../gedit/gedit-io-error-message-area.c:674
 #: ../gedit/gedit-io-error-message-area.c:742
-msgid "Select a different character coding from the menu and try again."
+#| msgid "Select a different character coding from the menu and try again."
+msgid "Select a different character encoding from the menu and try again."
 msgstr ""
-"Seleccione una codificación de caracteres diferente desde el menú e pruebe "
-"de nuevo."
+"Seleccione una codificación de caracteres diferente desde el menú e "
+"inténtelo de nuevo."
 
 #: ../gedit/gedit-io-error-message-area.c:737
 #, c-format
-msgid "Could not save the file %s using the %s character coding."
+#| msgid "Could not save the file %s using the %s character coding."
+msgid "Could not save the file %s using the %s character encoding."
 msgstr ""
-"No se ha podido guardar el archivo %s usando la codificación de caracteres %"
-"s."
+"No se pudo guardar el archivo %s usando la codificación de caracteres %s."
 
 #: ../gedit/gedit-io-error-message-area.c:740
+#| msgid ""
+#| "The document contains one or more characters that cannot be encoded using "
+#| "the specified character coding."
 msgid ""
 "The document contains one or more characters that cannot be encoded using "
-"the specified character coding."
+"the specified character encoding."
 msgstr ""
 "El documento contiene uno o más caracteres que no se pueden codificar usando "
 "el código de caracteres especificado."
@@ -1786,15 +1800,17 @@ msgstr "C_uerpo:"
 msgid "_Line numbers:"
 msgstr "Números de _línea:"
 
-#: ../gedit/gedit-print-preferences.ui.h:14
+#. 'Number every' from 'Number every 3 lines' in the 'Text Editor' tab of the print preferences.
+#: ../gedit/gedit-print-preferences.ui.h:15
 msgid "_Number every"
 msgstr "_Numerar cada"
 
-#: ../gedit/gedit-print-preferences.ui.h:15
+#: ../gedit/gedit-print-preferences.ui.h:16
 msgid "_Restore Default Fonts"
 msgstr "_Restaurar tipografías predeterminadas"
 
-#: ../gedit/gedit-print-preferences.ui.h:16
+#. 'lines' from 'Number every 3 lines' in the 'Text Editor' tab of the print preferences.
+#: ../gedit/gedit-print-preferences.ui.h:18
 msgid "lines"
 msgstr "líneas"
 
@@ -1810,56 +1826,57 @@ msgstr "Muestra la página siguiente"
 msgid "Current page (Alt+P)"
 msgstr "Página actual (Alt+P)"
 
-#: ../gedit/gedit-print-preview.c:615
+#. Translators: the "of" from "1 of 19" in print preview.
+#: ../gedit/gedit-print-preview.c:616
 msgid "of"
 msgstr "de"
 
-#: ../gedit/gedit-print-preview.c:623
+#: ../gedit/gedit-print-preview.c:624
 msgid "Page total"
 msgstr "Total de páginas"
 
-#: ../gedit/gedit-print-preview.c:624
+#: ../gedit/gedit-print-preview.c:625
 msgid "The total number of pages in the document"
 msgstr "El número total de páginas del documento"
 
-#: ../gedit/gedit-print-preview.c:641
+#: ../gedit/gedit-print-preview.c:642
 msgid "Show multiple pages"
 msgstr "Mostrar varias páginas"
 
-#: ../gedit/gedit-print-preview.c:654
+#: ../gedit/gedit-print-preview.c:655
 msgid "Zoom 1:1"
 msgstr "Ampliación 1:1"
 
-#: ../gedit/gedit-print-preview.c:663
+#: ../gedit/gedit-print-preview.c:664
 msgid "Zoom to fit the whole page"
 msgstr "Ampliar hasta ajustar toda la página"
 
-#: ../gedit/gedit-print-preview.c:672
+#: ../gedit/gedit-print-preview.c:673
 msgid "Zoom the page in"
 msgstr "Ampliar la página"
 
-#: ../gedit/gedit-print-preview.c:681
+#: ../gedit/gedit-print-preview.c:682
 msgid "Zoom the page out"
 msgstr "Reducir la página"
 
-#: ../gedit/gedit-print-preview.c:693
+#: ../gedit/gedit-print-preview.c:694
 msgid "_Close Preview"
 msgstr "_Cerrar vista previa"
 
-#: ../gedit/gedit-print-preview.c:696
+#: ../gedit/gedit-print-preview.c:697
 msgid "Close print preview"
 msgstr "Cerrar vista previa de impresión"
 
-#: ../gedit/gedit-print-preview.c:766
+#: ../gedit/gedit-print-preview.c:767
 #, c-format
 msgid "Page %d of %d"
 msgstr "Página %d de %d"
 
-#: ../gedit/gedit-print-preview.c:950
+#: ../gedit/gedit-print-preview.c:951
 msgid "Page Preview"
 msgstr "Vista previa de la página"
 
-#: ../gedit/gedit-print-preview.c:951
+#: ../gedit/gedit-print-preview.c:952
 msgid "The preview of a page in the document to be printed"
 msgstr "Vista previa de una página en el documento que se va a imprimir"
 
@@ -1896,73 +1913,73 @@ msgstr "No se pudo crear el directorio «%s»: falló g_mkdir_with_parents(): %s
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:649
+#: ../gedit/gedit-tab.c:660
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "Revertiendo %s en %s"
 
-#: ../gedit/gedit-tab.c:656
+#: ../gedit/gedit-tab.c:667
 #, c-format
 msgid "Reverting %s"
 msgstr "Revertiendo %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:672
+#: ../gedit/gedit-tab.c:683
 #, c-format
 msgid "Loading %s from %s"
 msgstr "Cargando %s en %s"
 
-#: ../gedit/gedit-tab.c:679
+#: ../gedit/gedit-tab.c:690
 #, c-format
 msgid "Loading %s"
 msgstr "Cargando %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:762
+#: ../gedit/gedit-tab.c:773
 #, c-format
 msgid "Saving %s to %s"
 msgstr "Guardando %s en %s"
 
-#: ../gedit/gedit-tab.c:769
+#: ../gedit/gedit-tab.c:780
 #, c-format
 msgid "Saving %s"
 msgstr "Guardando %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1696
+#: ../gedit/gedit-tab.c:1711
 msgid "RO"
 msgstr "SL"
 
-#: ../gedit/gedit-tab.c:1743
+#: ../gedit/gedit-tab.c:1758
 #, c-format
 msgid "Error opening file %s"
 msgstr "Error al abrir el archivo %s"
 
-#: ../gedit/gedit-tab.c:1748
+#: ../gedit/gedit-tab.c:1763
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Error al revertir el archivo %s"
 
-#: ../gedit/gedit-tab.c:1753
+#: ../gedit/gedit-tab.c:1768
 #, c-format
 msgid "Error saving file %s"
 msgstr "Error al guardar el archivo %s"
 
-#: ../gedit/gedit-tab.c:1774
+#: ../gedit/gedit-tab.c:1789
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1781
+#: ../gedit/gedit-tab.c:1796
 msgid "Name:"
 msgstr "Nombre:"
 
-#: ../gedit/gedit-tab.c:1782
+#: ../gedit/gedit-tab.c:1797
 msgid "MIME Type:"
 msgstr "Tipo MIME:"
 
-#: ../gedit/gedit-tab.c:1783
+#: ../gedit/gedit-tab.c:1798
 msgid "Encoding:"
 msgstr "Codificación:"
 
@@ -2450,47 +2467,44 @@ msgstr ""
 "caracteres y caracteres que no son espacios en él."
 
 #: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
-#: ../plugins/docinfo/docinfo.ui.h:8
+#: ../plugins/docinfo/docinfo.ui.h:6
 msgid "Document Statistics"
 msgstr "Estadísticas del documento"
 
 #: ../plugins/docinfo/docinfo.ui.h:2
-msgid "0"
-msgstr "0"
-
-#: ../plugins/docinfo/docinfo.ui.h:3
-msgid "<span weight=\"bold\">File Name</span>"
-msgstr "<span weight=\"bold\">Nombre del archivo</span>"
-
-#: ../plugins/docinfo/docinfo.ui.h:4
 msgid "Bytes"
 msgstr "Bytes"
 
-#: ../plugins/docinfo/docinfo.ui.h:5
+#: ../plugins/docinfo/docinfo.ui.h:3
 msgid "Characters (no spaces)"
 msgstr "Caracteres (sin espacios)"
 
-#: ../plugins/docinfo/docinfo.ui.h:6
+#: ../plugins/docinfo/docinfo.ui.h:4
 msgid "Characters (with spaces)"
 msgstr "Caracteres (con espacios)"
 
-#: ../plugins/docinfo/docinfo.ui.h:7
+#: ../plugins/docinfo/docinfo.ui.h:5
 msgid "Document"
 msgstr "Documento"
 
-#: ../plugins/docinfo/docinfo.ui.h:9
+#: ../plugins/docinfo/docinfo.ui.h:7
+#| msgid "Name"
+msgid "File Name"
+msgstr "Nombre del archivo"
+
+#: ../plugins/docinfo/docinfo.ui.h:8
 msgid "Lines"
 msgstr "Líneas"
 
-#: ../plugins/docinfo/docinfo.ui.h:10
+#: ../plugins/docinfo/docinfo.ui.h:9
 msgid "Selection"
 msgstr "Selección"
 
-#: ../plugins/docinfo/docinfo.ui.h:11
+#: ../plugins/docinfo/docinfo.ui.h:10
 msgid "Words"
 msgstr "Palabras"
 
-#: ../plugins/docinfo/docinfo.ui.h:12
+#: ../plugins/docinfo/docinfo.ui.h:11
 msgid "_Update"
 msgstr "_Actualizar"
 
@@ -2917,11 +2931,12 @@ msgstr ""
 "El archivo renombrado está actualmente filtrado. Necesita ajustar los "
 "filtros para hacerlo visible."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3543
+#. Translators: This is the default name of new files created by the file browser pane.
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3544
 msgid "file"
 msgstr "archivo"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3567
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3568
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2929,11 +2944,12 @@ msgstr ""
 "El archivo nuevo esta actualmente filtrado. Necesita ajustar los filtros "
 "para hacerlo visible"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3595
+#. Translators: This is the default name of new directories created by the file browser pane.
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3597
 msgid "directory"
 msgstr "directorio"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3615
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3617
 msgid ""
 "The new directory is currently filtered out. You need to adjust your filter "
 "settings to make the directory visible"
@@ -2966,7 +2982,6 @@ msgid "Delete selected file or folder"
 msgstr "Borra el archivo o carpeta seleccionado"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:801
-#| msgid "Indent selected lines"
 msgid "Open selected file"
 msgstr "Abrir el archivo seleccionado"
 
@@ -3149,8 +3164,9 @@ msgid "Snippets"
 msgstr "Recortes"
 
 #: ../plugins/snippets/snippets/snippets.ui.h:2
-msgid "<b>Activation</b>"
-msgstr "<b>Activación</b>"
+#| msgid "<b>Activation</b>"
+msgid "Activation"
+msgstr "Activación"
 
 #: ../plugins/snippets/snippets/snippets.ui.h:3
 msgid "Create new snippet"
@@ -3407,26 +3423,29 @@ msgstr "O_rden inverso"
 msgid "_Sort"
 msgstr "_Ordenar"
 
-#: ../plugins/spell/gedit-automatic-spell-checker.c:419
-#: ../plugins/spell/gedit-spell-checker-dialog.c:453
+#. Translators: Displayed in the "Check Spelling" dialog if there are no suggestions for the current misspelled word
+#. Translators: Displayed in the "Check Spelling" dialog if there are no suggestions
+#. * for the current misspelled word
+#: ../plugins/spell/gedit-automatic-spell-checker.c:420
+#: ../plugins/spell/gedit-spell-checker-dialog.c:455
 msgid "(no suggested words)"
 msgstr "(no hay palabras sugeridas)"
 
-#: ../plugins/spell/gedit-automatic-spell-checker.c:443
+#: ../plugins/spell/gedit-automatic-spell-checker.c:444
 msgid "_More..."
 msgstr "_Más…"
 
 #. Ignore all
-#: ../plugins/spell/gedit-automatic-spell-checker.c:498
+#: ../plugins/spell/gedit-automatic-spell-checker.c:499
 msgid "_Ignore All"
 msgstr "_Ignorar todo"
 
 #. + Add to Dictionary
-#: ../plugins/spell/gedit-automatic-spell-checker.c:513
+#: ../plugins/spell/gedit-automatic-spell-checker.c:514
 msgid "_Add"
 msgstr "_Añadir"
 
-#: ../plugins/spell/gedit-automatic-spell-checker.c:552
+#: ../plugins/spell/gedit-automatic-spell-checker.c:553
 msgid "_Spelling Suggestions..."
 msgstr "_Sugerencias de ortografía…"
 
@@ -3438,11 +3457,12 @@ msgstr "Comprobar ortografía"
 msgid "Suggestions"
 msgstr "Sugerencias"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:559
+#. Translators: Displayed in the "Check Spelling" dialog if the current word isn't misspelled
+#: ../plugins/spell/gedit-spell-checker-dialog.c:562
 msgid "(correct spelling)"
 msgstr "(ortografía correcta)"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:702
+#: ../plugins/spell/gedit-spell-checker-dialog.c:705
 msgid "Completed spell checking"
 msgstr "Comprobación de ortografía finalizada"
 
@@ -3527,60 +3547,62 @@ msgid "*"
 msgstr "*"
 
 #: ../plugins/spell/spell-checker.ui.h:2
-msgid "<b>Language</b>"
-msgstr "<b>Idioma</b>"
-
-#: ../plugins/spell/spell-checker.ui.h:3
-msgid "<b>word</b>"
-msgstr "<b>palabra</b>"
-
-#: ../plugins/spell/spell-checker.ui.h:4
 msgid "Add w_ord"
 msgstr "Añadir pa_labra"
 
-#: ../plugins/spell/spell-checker.ui.h:5
+#: ../plugins/spell/spell-checker.ui.h:3
 msgid "Cha_nge"
 msgstr "Ca_mbiar"
 
-#: ../plugins/spell/spell-checker.ui.h:6
+#: ../plugins/spell/spell-checker.ui.h:4
 msgid "Change A_ll"
 msgstr "Cambiar _todo"
 
-#: ../plugins/spell/spell-checker.ui.h:7
+#: ../plugins/spell/spell-checker.ui.h:5
 msgid "Change _to:"
 msgstr "Cambiar _por:"
 
-#: ../plugins/spell/spell-checker.ui.h:8
+#: ../plugins/spell/spell-checker.ui.h:6
 msgid "Check _Word"
 msgstr "Comprobar pa_labra"
 
-#: ../plugins/spell/spell-checker.ui.h:9
+#: ../plugins/spell/spell-checker.ui.h:7
 msgid "Check spelling"
 msgstr "Comprobar ortografía"
 
-#: ../plugins/spell/spell-checker.ui.h:10
+#: ../plugins/spell/spell-checker.ui.h:8
 msgid "Ignore _All"
 msgstr "Ignorar _todo"
 
-#: ../plugins/spell/spell-checker.ui.h:11
+#: ../plugins/spell/spell-checker.ui.h:9
+#| msgid "Languages"
+msgid "Language"
+msgstr "Idioma"
+
+#: ../plugins/spell/spell-checker.ui.h:10
 msgid "Language:"
 msgstr "Idioma:"
 
-#: ../plugins/spell/spell-checker.ui.h:12
+#: ../plugins/spell/spell-checker.ui.h:11
 msgid "Misspelled word:"
 msgstr "Palabra mal escrita:"
 
-#: ../plugins/spell/spell-checker.ui.h:13
+#: ../plugins/spell/spell-checker.ui.h:12
 msgid "User dictionary:"
 msgstr "Diccionario de usuario:"
 
-#: ../plugins/spell/spell-checker.ui.h:14
+#: ../plugins/spell/spell-checker.ui.h:13
 msgid "_Ignore"
 msgstr "_Ignorar"
 
-#: ../plugins/spell/spell-checker.ui.h:15
+#: ../plugins/spell/spell-checker.ui.h:14
 msgid "_Suggestions:"
 msgstr "_Sugerencias:"
+
+#: ../plugins/spell/spell-checker.ui.h:15
+#| msgid "Words"
+msgid "word"
+msgstr "palabra"
 
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:1
 msgid "Checks the spelling of the current document."
@@ -5173,7 +5195,6 @@ msgid "Inserts current date and time at the cursor position."
 msgstr "Inserta la fecha y hora actual en la posición del cursor."
 
 #: ../plugins/time/gedit-time-dialog.ui.h:3
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:3
 msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
 msgstr "<span size=\"small\">01/11/2002 17:52:00</span>"
 
@@ -5195,6 +5216,10 @@ msgstr "_Insertar"
 msgid "_Use custom format"
 msgstr "_Usar el formato personalizado"
 
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:3
+msgid "01/11/2002 17:52:00"
+msgstr "01/11/2002 17:52:00"
+
 #: ../plugins/time/gedit-time-setup-dialog.ui.h:4
 msgid "<span weight=\"bold\"> When inserting date/time...</span>"
 msgstr "<span weight=\"bold\"> Al insertar fecha/hora…</span>"
@@ -5206,6 +5231,24 @@ msgstr "Configurar el complemento  de fecha/hora"
 #: ../plugins/time/gedit-time-setup-dialog.ui.h:7
 msgid "_Prompt for a format"
 msgstr "_Pedir un formato"
+
+#~ msgid "Character Codings"
+#~ msgstr "Códigos de caracteres"
+
+#~ msgid "Ch_aracter Coding:"
+#~ msgstr "Codificación de c_aracteres:"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "<span weight=\"bold\">File Name</span>"
+#~ msgstr "<span weight=\"bold\">Nombre del archivo</span>"
+
+#~ msgid "<b>Language</b>"
+#~ msgstr "<b>Idioma</b>"
+
+#~ msgid "<b>word</b>"
+#~ msgstr "<b>palabra</b>"
 
 #~ msgid "Backup Copy Extension"
 #~ msgstr "Extensión de la copia de resguardo"
@@ -5294,9 +5337,6 @@ msgstr "_Pedir un formato"
 
 #~ msgid "Open Location"
 #~ msgstr "Abrir dirección"
-
-#~ msgid "Ch_aracter coding:"
-#~ msgstr "Codificación de c_aracteres:"
 
 #~ msgid "Enter the _location (URI) of the file you would like to open:"
 #~ msgstr "Proporcione la _ruta (URI) del archivo que desea abrir:"
