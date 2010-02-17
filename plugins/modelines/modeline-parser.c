@@ -399,7 +399,8 @@ parse_emacs_modeline (gchar           *s,
 				     "Emacs modeline bit: %s = %s",
 				     key->str, value->str);
 
-		if (strcmp (key->str, "Mode") == 0)
+		/* "Mode" key is case insenstive */
+		if (g_ascii_strcasecmp (key->str, "Mode") == 0)
 		{
 			g_free (options->language_id);
 			options->language_id = get_language_id_emacs (value->str);
