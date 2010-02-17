@@ -450,6 +450,8 @@ update_suggestions_list_model (GeditSpellCheckerDialog *dlg, GSList *suggestions
 	{
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store, &iter,
+		                    /* Translators: Displayed in the "Check Spelling" dialog if there are no suggestions
+		                     * for the current misspelled word */
 				    COLUMN_SUGGESTIONS, _("(no suggested words)"),
 				    -1);
 
@@ -556,6 +558,7 @@ check_word_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store, &iter,
+		                    /* Translators: Displayed in the "Check Spelling" dialog if the current word isn't misspelled */
 				    COLUMN_SUGGESTIONS, _("(correct spelling)"),
 				    -1);
 

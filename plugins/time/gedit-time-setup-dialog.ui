@@ -270,7 +270,7 @@
                         <child>
                           <object class="GtkLabel" id="custom_format_example">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">&lt;span size="small"&gt;01/11/2002 17:52:00&lt;/span&gt;</property>
+                            <property name="label" translatable="yes">01/11/2002 17:52:00</property>
                             <property name="use_underline">False</property>
                             <property name="use_markup">True</property>
                             <property name="justify">GTK_JUSTIFY_RIGHT</property>
@@ -280,6 +280,9 @@
                             <property name="yalign">0.5</property>
                             <property name="xpad">0</property>
                             <property name="ypad">0</property>
+                            <attributes>
+                              <attribute name="scale" value="0.8"/><!-- PANGO_SCALE_SMALL -->
+                            </attributes>
                           </object>
                           <packing>
                             <property name="padding">0</property>

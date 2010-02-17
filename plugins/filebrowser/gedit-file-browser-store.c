@@ -3540,6 +3540,7 @@ gedit_file_browser_store_new_file (GeditFileBrowserStore * model,
 	g_return_val_if_fail (iter != NULL, FALSE);
 
 	parent_node = FILE_BROWSER_NODE_DIR (parent->user_data);
+	/* Translators: This is the default name of new files created by the file browser pane. */
 	file = unique_new_name (((FileBrowserNode *) parent_node)->file, _("file"));
 
 	stream = g_file_create (file, G_FILE_CREATE_NONE, NULL, &error);
@@ -3592,6 +3593,7 @@ gedit_file_browser_store_new_directory (GeditFileBrowserStore * model,
 	g_return_val_if_fail (iter != NULL, FALSE);
 
 	parent_node = FILE_BROWSER_NODE_DIR (parent->user_data);
+	/* Translators: This is the default name of new directories created by the file browser pane. */
 	file = unique_new_name (((FileBrowserNode *) parent_node)->file, _("directory"));
 
 	if (!g_file_make_directory (file, NULL, &error)) {

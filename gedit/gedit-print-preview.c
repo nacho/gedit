@@ -612,6 +612,7 @@ create_bar (GeditPrintPreview *preview)
 
 	/* We are displaying 'XXX of XXX'. */
 	gtk_box_pack_start (GTK_BOX (status),
+	                    /* Translators: the "of" from "1 of 19" in print preview. */
 			    gtk_label_new (_("of")),
 			    FALSE, FALSE, 0);
 

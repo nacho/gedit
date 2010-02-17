@@ -416,6 +416,7 @@ build_suggestion_menu (GeditAutomaticSpellChecker *spell, const gchar *word)
 	{		
 		/* no suggestions.  put something in the menu anyway... */
 		GtkWidget *label;
+		/* Translators: Displayed in the "Check Spelling" dialog if there are no suggestions for the current misspelled word */
 		label = gtk_label_new (_("(no suggested words)"));
 		
 		mi = gtk_menu_item_new ();
