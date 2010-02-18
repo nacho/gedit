@@ -269,7 +269,7 @@ update_menu (GeditEncodingsComboBox *menu)
 	{
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store, &iter,
-				    NAME_COLUMN, _("Auto Detected"),
+				    NAME_COLUMN, _("Automatically Detected"),
 				    ENCODING_COLUMN, NULL,
 				    ADD_COLUMN, FALSE,
 				    -1);
