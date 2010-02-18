@@ -351,6 +351,17 @@ gedit_status_combo_box_add_item (GeditStatusComboBox *combo,
 	g_signal_connect (item, "activate", G_CALLBACK (item_activated), combo);
 }
 
+void
+gedit_status_combo_box_remove_item (GeditStatusComboBox *combo,
+				    GtkMenuItem         *item)
+{
+	g_return_if_fail (GEDIT_IS_STATUS_COMBO_BOX (combo));
+	g_return_if_fail (GTK_IS_MENU_ITEM (item));
+
+	gtk_container_remove (GTK_CONTAINER (combo->priv->menu),
+			      GTK_WIDGET (item));
+}
+
 GList *
 gedit_status_combo_box_get_items (GeditStatusComboBox *combo)
 {
