@@ -1137,7 +1137,7 @@ gedit_utils_get_ui_objects (const gchar  *filename,
 
 	if (error != NULL)
 	{
-		*error_widget = handle_builder_error (_("Unable to open ui file %s. Error: %s"),
+		*error_widget = handle_builder_error (_("Unable to open UI file %s. Error: %s"),
 						      filename_markup,
 						      error->message);
 		g_error_free (error);

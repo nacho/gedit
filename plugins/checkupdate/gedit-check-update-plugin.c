@@ -243,7 +243,7 @@ on_response_cb (GtkWidget   *infobar,
 							 GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_ERROR,
 							 GTK_BUTTONS_CLOSE, 
-							 _("There was an error displaying the url."));
+							 _("There was an error displaying the URI."));
 
 			gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 								  "%s", error->message);
@@ -334,7 +334,7 @@ create_infobar (GeditWindow *window,
 					"gtk-dialog-info",
 					message,
 					_("You can download the new version of gedit"
-					  " by pressing on the download button or"
+					  " by clicking on the download button or"
 					  " ignore that version and wait for a new one"));
 
 	g_free (message);

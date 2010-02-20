@@ -676,14 +676,14 @@ class Manager:
                         img.show()
 
                         #self['hbox_tab_trigger'].set_spacing(3)
-                        tip = _('This is not a valid tab trigger. Triggers can either contain letters or a single, non alphanumeric, character like {, [, etcetera.')
+                        tip = _('This is not a valid Tab trigger. Triggers can either contain letters or a single (non-alphanumeric) character like: {, [, etc.')
                         
                         entry.set_tooltip_text(tip)
                         img.set_tooltip_text(tip)
                 else:
                         self['image_tab_trigger'].hide()
                         #self['hbox_tab_trigger'].set_spacing(0)
-                        entry.set_tooltip_text(_('Single word with which the snippet is activated after pressing tab'))
+                        entry.set_tooltip_text(_('Single word the snippet is activated with after pressing Tab'))
                 
                 return False
 

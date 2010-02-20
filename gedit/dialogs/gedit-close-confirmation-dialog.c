@@ -137,7 +137,7 @@ set_logout_mode (GeditCloseConfirmationDialog *dlg,
 	if (logout_mode)
 	{
 		gtk_dialog_add_button (GTK_DIALOG (dlg),
-				       _("Logout _without Saving"),
+				       _("Log Out _without Saving"),
 				       GTK_RESPONSE_NO);
 
 		gedit_dialog_add_button (GTK_DIALOG (dlg),

@@ -129,7 +129,7 @@ static const GOptionEntry options [] =
 	  list_encodings_and_quit, N_("Display list of possible values for the encoding option"), NULL},
 
 	{ "new-window", '\0', 0, G_OPTION_ARG_NONE, &new_window_option,
-	  N_("Create a new toplevel window in an existing instance of gedit"), NULL },
+	  N_("Create a new top-level window in an existing instance of gedit"), NULL },
 
 	{ "new-document", '\0', 0, G_OPTION_ARG_NONE, &new_document_option,
 	  N_("Create a new document in an existing instance of gedit"), NULL },

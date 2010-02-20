@@ -101,7 +101,7 @@ gedit_help_display (GtkWindow   *parent,
 						 GTK_DIALOG_DESTROY_WITH_PARENT,
 						 GTK_MESSAGE_ERROR,
 						 GTK_BUTTONS_CLOSE, 
-						 _("There was an error displaying help."));
+						 _("There was an error displaying the help."));
 
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 							  "%s", error->message);

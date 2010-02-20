@@ -1129,13 +1129,13 @@ check_type (const gchar* key, GConfValue* val, GConfValueType t, GError** err)
     {
       /*
       gconf_set_error(err, GCONF_ERROR_TYPE_MISMATCH,
-                      _("Expected `%s' got `%s' for key %s"),
+                      _("Expected `%s' got, `%s' for key %s"),
                       gconf_value_type_to_string(t),
                       gconf_value_type_to_string(val->type),
                       key);
       */
       g_set_error (err, GCONF_ERROR, GCONF_ERROR_TYPE_MISMATCH,
-	  	   _("Expected `%s' got `%s' for key %s"),
+	  	   _("Expected `%s', got `%s' for key %s"),
                    gconf_value_type_to_string(t),
                    gconf_value_type_to_string(val->type),
                    key);

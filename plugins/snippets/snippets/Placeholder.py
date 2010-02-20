@@ -405,7 +405,7 @@ class PlaceholderShell(PlaceholderExpand):
                         PlaceholderExpand.remove(self)
 
                 message_dialog(None, gtk.MESSAGE_ERROR, 'Execution of the shell ' \
-                                'command (%s) exceeds the maximum time, ' \
+                                'command (%s) exceeded the maximum time; ' \
                                 'execution aborted.' % self.command)
                 
                 return False
@@ -591,7 +591,7 @@ class PlaceholderEval(PlaceholderExpand):
                                 self.remove_timeout()
 
                                 message_dialog(None, gtk.MESSAGE_ERROR, \
-                                _('Execution of the python command (%s) exceeds the maximum ' \
+                                _('Execution of the Python command (%s) exceeds the maximum ' \
                                 'time, execution aborted.') % self.command)
                                 
                                 return False
@@ -599,7 +599,7 @@ class PlaceholderEval(PlaceholderExpand):
                                 self.remove_timeout()
                                 
                                 message_dialog(None, gtk.MESSAGE_ERROR, 
-                                _('Execution of the python command (%s) failed: %s') % 
+                                _('Execution of the Python command (%s) failed: %s') % 
                                 (self.command, detail))
 
                                 return False

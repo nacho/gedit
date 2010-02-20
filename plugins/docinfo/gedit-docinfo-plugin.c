@@ -421,7 +421,7 @@ static const GtkActionEntry action_entries[] =
 	  NULL,
 	  N_("_Document Statistics"),
 	  NULL,
-	  N_("Get statistic info on current document"),
+	  N_("Get statistical information on the current document"),
 	  G_CALLBACK (docinfo_cb) }
 };
 

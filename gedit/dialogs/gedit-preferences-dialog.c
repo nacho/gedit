@@ -568,7 +568,7 @@ setup_font_colors_page_font_section (GeditPreferencesDialog *dlg)
 	gedit_debug (DEBUG_PREFS);
 
 	gtk_widget_set_tooltip_text (dlg->priv->font_button,
-			 _("Push this button to select the font to be used by the editor"));
+			 _("Click on this button to select the font to be used by the editor"));
 
 	gedit_utils_set_atk_relation (dlg->priv->font_button,
 				      dlg->priv->default_font_checkbutton,

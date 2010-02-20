@@ -310,7 +310,7 @@ parse_gio_error (gint          code,
 			{
 				/* use the same string as INVALID_HOST */
 				*message_details = g_strdup_printf (
-					_("Host name was invalid. "
+					_("Hostname was invalid. "
 					  "Please check that you typed the location "
 					  "correctly and try again."));
 			}
@@ -657,8 +657,8 @@ gedit_io_loading_error_message_area_new (const gchar         *uri,
 	{
 		error_message = g_strdup_printf (_("There was a problem opening the file %s."),
 						 uri_for_display);
-		message_details = g_strconcat (_("The file you opened has some invalid characters, "
-					       "if you continue editing this file you could make this "
+		message_details = g_strconcat (_("The file you opened has some invalid characters. "
+					       "If you continue editing this file you could make this "
 					       "document useless."), "\n",
 					       _("You can also choose another character encoding and try again."),
 					       NULL);
@@ -1066,7 +1066,7 @@ gedit_no_backup_saving_error_message_area_new (const gchar  *uri,
 	GTK_WIDGET_SET_FLAGS (primary_label, GTK_CAN_FOCUS);
 	gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
 
-	secondary_text = _("gedit could not backup the old copy of the file before saving the new one. "
+	secondary_text = _("gedit could not back up the old copy of the file before saving the new one. "
 			   "You can ignore this warning and save the file anyway, but if an error "
 			   "occurs while saving, you could lose the old copy of the file. Save anyway?");
 	secondary_markup = g_strdup_printf ("<small>%s</small>",
@@ -1179,7 +1179,7 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 		 error->code == GEDIT_DOCUMENT_ERROR_TOO_BIG)
 	{
 		message_details = g_strdup (_("The disk where you are trying to save the file has "
-					      "a limitation on file sizes.  Please try saving "
+					      "a limitation on file sizes. Please try saving "
 					      "a smaller file or saving it to a disk that does not "
 					      "have this limitation."));
 	}

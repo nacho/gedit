@@ -94,7 +94,7 @@ tab_get_name (GeditTab *tab)
 		{
 			tab_name = g_markup_printf_escaped ("<i>%s</i> [<i>%s</i>]",
 							    docname,
-							    _("Read Only"));
+							    _("Read-Only"));
 		}
 		else
 		{
@@ -108,7 +108,7 @@ tab_get_name (GeditTab *tab)
 		{
 			tab_name = g_markup_printf_escaped ("%s [<i>%s</i>]",
 							    docname,
-							    _("Read Only"));
+							    _("Read-Only"));
 		}
 		else
 		{

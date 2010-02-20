@@ -2268,12 +2268,12 @@ set_title (GeditWindow *window)
 		if (dirname != NULL)
 			title = g_strdup_printf ("%s [%s] (%s) - gedit", 
 						 name, 
-						 _("Read Only"), 
+						 _("Read-Only"), 
 						 dirname);
 		else
 			title = g_strdup_printf ("%s [%s] - gedit", 
 						 name, 
-						 _("Read Only"));
+						 _("Read-Only"));
 	} 
 	else 
 	{

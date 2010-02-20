@@ -85,7 +85,7 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Revert to a saved version of the file"), G_CALLBACK (_gedit_cmd_file_revert) },
 #if !GTK_CHECK_VERSION (2, 17, 4)
 	{ "FilePageSetup", GTK_STOCK_PAGE_SETUP, N_("Page Set_up..."), NULL,
-	  N_("Setup the page settings"), G_CALLBACK (_gedit_cmd_file_page_setup) },
+	  N_("Set up the page settings"), G_CALLBACK (_gedit_cmd_file_page_setup) },
 #endif
 	{ "FilePrintPreview", GTK_STOCK_PRINT_PREVIEW, N_("Print Previe_w"),"<control><shift>P",
 	  N_("Print preview"), G_CALLBACK (_gedit_cmd_file_print_preview) },
@@ -168,7 +168,7 @@ static const GtkToggleActionEntry gedit_always_sensitive_toggle_menu_entries[] =
 	  N_("Show or hide the statusbar in the current window"),
 	  G_CALLBACK (_gedit_cmd_view_show_statusbar), TRUE },
 	{ "ViewFullscreen", GTK_STOCK_FULLSCREEN, NULL, "F11",
-	  N_("Edit text at fullscreen"),
+	  N_("Edit text in fullscreen"),
 	  G_CALLBACK (_gedit_cmd_view_toggle_fullscreen_mode), FALSE }
 };
 
