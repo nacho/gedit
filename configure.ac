@@ -4,7 +4,7 @@ AC_PREREQ(2.63.2)
 
 m4_define(gedit_major_version,  2)
 m4_define(gedit_minor_version, 29)
-m4_define(gedit_micro_version,  6)
+m4_define(gedit_micro_version,  7)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
 AC_INIT([gedit],[gedit_version],[http://bugzilla.gnome.org/enter_bug.cgi?product=gedit],[gedit],[http://projects.gnome.org/gedit/])
@@ -251,7 +251,7 @@ PKG_CHECK_MODULES(GEDIT, [
 	gthread-2.0 >= 2.13.0
 	gio-2.0 >= 2.23.1
 	gtk+-2.0 >= 2.16.0
-	gtksourceview-2.0 >= 2.9.4
+	gtksourceview-2.0 >= 2.9.7
 	gconf-2.0 >= 1.1.11
 ])
 
@@ -356,7 +356,7 @@ fi
 if test "x$have_python" != "xno"; then
 	PYGOBJECT_REQUIRED=2.15.4
 	PYGTK_REQUIRED=2.12.0
-	PYGTKSOURCEVIEW_REQUIRED=2.8.0
+	PYGTKSOURCEVIEW_REQUIRED=2.9.2
 
 	PKG_CHECK_MODULES([PYGTK], [
 		pygobject-2.0 >= $PYGOBJECT_REQUIRED
