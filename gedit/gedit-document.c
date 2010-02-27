@@ -953,12 +953,13 @@ query_info_cb (GFile         *source,
 		if (error->code != G_FILE_ERROR_ISDIR)
 			g_warning ("%s", error->message);
 		g_error_free (error);
-		
-		return;
+	}
+	else
+	{
+		on_content_type_changed (doc, NULL, NULL);
 	}
 
-	
-	on_content_type_changed (doc, NULL, NULL);
+	g_object_unref (doc);
 }
 #endif
 
@@ -990,16 +991,18 @@ set_uri (GeditDocument *doc,
 
 	/* Get the GFileInfo async so we can set the language from the metadata */
 	location = gedit_document_get_location (doc);
-	
+
 	if (location != NULL)
 	{
+		/* ref the doc so that is not finalized before the
+		 * query info callback runs */
 		g_file_query_info_async (location,
 					 METADATA_QUERY,
 					 G_FILE_QUERY_INFO_NONE,
 					 G_PRIORITY_DEFAULT,
 					 NULL,
 					 (GAsyncReadyCallback) query_info_cb,
-					 doc);
+					 g_object_ref (doc));
 		g_object_unref (location);
 	}
 #endif
