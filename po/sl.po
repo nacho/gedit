@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gedit&component=general\n"
-"POT-Creation-Date: 2010-02-21 08:49+0000\n"
-"PO-Revision-Date: 2010-02-22 08:24+0100\n"
+"POT-Creation-Date: 2010-02-27 11:35+0000\n"
+"PO-Revision-Date: 2010-02-27 12:59+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -937,8 +937,8 @@ msgstr "Najden in zamenjan en niz"
 msgid "\"%s\" not found"
 msgstr "\"%s\" ni mogoče najti"
 
-#: ../gedit/gedit-document.c:1046
-#: ../gedit/gedit-document.c:1061
+#: ../gedit/gedit-document.c:1067
+#: ../gedit/gedit-document.c:1082
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "dokument %d"
@@ -3199,64 +3199,58 @@ msgid "Select the _language of the current document."
 msgstr "Izbor _jezika trenutnega dokumenta."
 
 #: ../plugins/spell/spell-checker.ui.h:1
-#: ../plugins/time/gedit-time-dialog.ui.h:2
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:2
-msgid "*"
-msgstr "*"
-
-#: ../plugins/spell/spell-checker.ui.h:2
 msgid "Add w_ord"
 msgstr "Dodaj _besedo"
 
-#: ../plugins/spell/spell-checker.ui.h:3
+#: ../plugins/spell/spell-checker.ui.h:2
 msgid "Cha_nge"
 msgstr "Spreme_ni"
 
-#: ../plugins/spell/spell-checker.ui.h:4
+#: ../plugins/spell/spell-checker.ui.h:3
 msgid "Change A_ll"
 msgstr "Spremeni v_se"
 
-#: ../plugins/spell/spell-checker.ui.h:5
+#: ../plugins/spell/spell-checker.ui.h:4
 msgid "Change _to:"
 msgstr "Spremeni _v:"
 
-#: ../plugins/spell/spell-checker.ui.h:6
+#: ../plugins/spell/spell-checker.ui.h:5
 msgid "Check _Word"
 msgstr "Preveri _besedo"
 
-#: ../plugins/spell/spell-checker.ui.h:7
+#: ../plugins/spell/spell-checker.ui.h:6
 msgid "Check spelling"
 msgstr "Preveri črkovanje"
 
-#: ../plugins/spell/spell-checker.ui.h:8
+#: ../plugins/spell/spell-checker.ui.h:7
 msgid "Ignore _All"
 msgstr "Prezri _vse"
 
-#: ../plugins/spell/spell-checker.ui.h:9
+#: ../plugins/spell/spell-checker.ui.h:8
 msgid "Language"
 msgstr "Jezik"
 
-#: ../plugins/spell/spell-checker.ui.h:10
+#: ../plugins/spell/spell-checker.ui.h:9
 msgid "Language:"
 msgstr "Jezik:"
 
-#: ../plugins/spell/spell-checker.ui.h:11
+#: ../plugins/spell/spell-checker.ui.h:10
 msgid "Misspelled word:"
 msgstr "Napačno črkovana beseda:"
 
-#: ../plugins/spell/spell-checker.ui.h:12
+#: ../plugins/spell/spell-checker.ui.h:11
 msgid "User dictionary:"
 msgstr "Uporabniški slovar:"
 
-#: ../plugins/spell/spell-checker.ui.h:13
+#: ../plugins/spell/spell-checker.ui.h:12
 msgid "_Ignore"
 msgstr "_Prezri"
 
-#: ../plugins/spell/spell-checker.ui.h:14
+#: ../plugins/spell/spell-checker.ui.h:13
 msgid "_Suggestions:"
 msgstr "P_redlogi:"
 
-#: ../plugins/spell/spell-checker.ui.h:15
+#: ../plugins/spell/spell-checker.ui.h:14
 msgid "word"
 msgstr "beseda"
 
@@ -4850,44 +4844,55 @@ msgstr "Vstavi datum/uro"
 msgid "Inserts current date and time at the cursor position."
 msgstr "Vstavi trenutna datum in uro na položaju kazalca."
 
+#. Translators: Use the more common date format in your locale
 #: ../plugins/time/gedit-time-dialog.ui.h:3
-msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
-msgstr "<span size=\"small\">01/11/2002 17:52:00</span>"
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:4
+#, no-c-format
+msgid "%d/%m/%Y %H:%M:%S"
+msgstr "%d.%m.%Y, %H:%M:%S"
 
+#. Translators: This example should follow the date format defined in the entry above
 #: ../plugins/time/gedit-time-dialog.ui.h:4
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:6
+msgid "01/11/2009 17:52:00"
+msgstr "23.11.2010, 17:52:00"
+
+#: ../plugins/time/gedit-time-dialog.ui.h:5
 msgid "Insert Date and Time"
 msgstr "Vstavi datum in uro"
 
-#: ../plugins/time/gedit-time-dialog.ui.h:5
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:6
+#: ../plugins/time/gedit-time-dialog.ui.h:6
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:8
 msgid "Use the _selected format"
 msgstr "Uporabi _izbrano obliko"
 
-#: ../plugins/time/gedit-time-dialog.ui.h:6
+#: ../plugins/time/gedit-time-dialog.ui.h:7
 msgid "_Insert"
 msgstr "_Vstavi"
 
-#: ../plugins/time/gedit-time-dialog.ui.h:7
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:8
+#: ../plugins/time/gedit-time-dialog.ui.h:8
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:11
 msgid "_Use custom format"
 msgstr "_Uporabi prikrojeno obliko"
 
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:3
-msgid "01/11/2002 17:52:00"
-msgstr "01/11/2002 17:52:00"
-
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:4
-msgid "<span weight=\"bold\"> When inserting date/time...</span>"
-msgstr "<span weight=\"bold\"> Ko se vstavlja datum/ura ...</span>"
-
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:5
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:7
 msgid "Configure date/time plugin"
 msgstr "Nastavi vstavek datum/ura"
 
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:7
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:9
+msgid "When inserting date/time..."
+msgstr "Vstavljanje datuma in časa ..."
+
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:10
 msgid "_Prompt for a format"
 msgstr "_Vprašaj za zapis"
 
+#~ msgid "*"
+#~ msgstr "*"
+#~ msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
+#~ msgstr "<span size=\"small\">01/11/2002 17:52:00</span>"
+#~ msgid "<span weight=\"bold\"> When inserting date/time...</span>"
+#~ msgstr "<span weight=\"bold\"> Ko se vstavlja datum/ura ...</span>"
 #~ msgid "Whether gedit should highlight matching bracket."
 #~ msgstr "Ali naj gedit poudari pripadajoča uklepaj in zaklepaj."
 #~ msgid "HttP header name"
