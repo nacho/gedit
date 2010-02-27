@@ -943,7 +943,7 @@ set_content_type_no_guess (GeditDocument *doc,
 
 	if (doc->priv->content_type != NULL && content_type != NULL &&
 	    (0 == strcmp (doc->priv->content_type, content_type)))
-		return
+		return;
 
 	g_free (doc->priv->content_type);
 
