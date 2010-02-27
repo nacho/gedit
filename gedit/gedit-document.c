@@ -756,7 +756,7 @@ on_uri_changed (GeditDocument *doc,
 	 */
 	if (location != NULL)
 	{
-		GError *error;
+		GError *error = NULL;
 
 		if (doc->priv->metadata_info != NULL)
 			g_object_unref (doc->priv->metadata_info);
