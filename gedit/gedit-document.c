@@ -813,6 +813,12 @@ on_content_type_changed (GeditDocument *doc,
 	}
 }
 
+static gchar *
+get_default_content_type (void)
+{
+	return g_content_type_from_mime_type ("text/plain");
+}
+
 static void
 gedit_document_init (GeditDocument *doc)
 {
@@ -827,7 +833,7 @@ gedit_document_init (GeditDocument *doc)
 
 	doc->priv->metadata_info = NULL;
 
-	doc->priv->content_type = g_content_type_from_mime_type ("text/plain");
+	doc->priv->content_type = get_default_content_type ();
 
 	doc->priv->readonly = FALSE;
 
@@ -886,18 +892,32 @@ gedit_document_new (void)
 }
 
 static void
+set_content_type_no_guess (GeditDocument *doc,
+			   const gchar   *content_type)
+{
+	gedit_debug (DEBUG_DOCUMENT);
+
+	if (doc->priv->content_type != NULL && content_type != NULL &&
+	    (0 == strcmp (doc->priv->content_type, content_type)))
+		return
+
+	g_free (doc->priv->content_type);
+
+	if (content_type == NULL || g_content_type_is_unknown (content_type))
+		doc->priv->content_type = get_default_content_type ();
+	else
+		doc->priv->content_type = g_strdup (content_type);
+
+	g_object_notify (G_OBJECT (doc), "content-type");
+}
+
+static void
 set_content_type (GeditDocument *doc,
 		  const gchar   *content_type)
 {
 	gedit_debug (DEBUG_DOCUMENT);
 
-	g_free (doc->priv->content_type);
-
-	if (content_type != NULL)
-	{
-		doc->priv->content_type = g_strdup (content_type);
-	}
-	else
+	if (content_type == NULL)
 	{
 		GFile *file;
 		gchar *guessed_type = NULL;
@@ -915,16 +935,14 @@ set_content_type (GeditDocument *doc,
 			g_object_unref (file);
 		}
 
-		if (guessed_type == NULL || g_content_type_is_unknown (guessed_type))
-		{
-			g_free (guessed_type);
-			guessed_type = g_content_type_from_mime_type ("text/plain");
-		}
+		set_content_type_no_guess (doc, guessed_type);
 
-		doc->priv->content_type = guessed_type;
+		g_free (guessed_type);
 	}
-
-	g_object_notify (G_OBJECT (doc), "content-type");
+	else
+	{
+		set_content_type_no_guess (doc, content_type);
+	}
 }
 
 void
@@ -1232,7 +1250,6 @@ document_loader_loaded (GeditDocumentLoader *loader,
 		set_encoding (doc, 
 			      gedit_document_loader_get_encoding (loader),
 			      (doc->priv->requested_encoding != NULL));
-
 
 		set_content_type (doc, content_type);
 
