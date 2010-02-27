@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <!--*- mode: xml -*-->
 <interface>
+  <requires lib="gtk+" version="2.16"/>
   <object class="GtkDialog" id="time_dialog">
     <property name="title" translatable="yes">Configure date/time plugin</property>
     <property name="type">GTK_WINDOW_TOPLEVEL</property>
@@ -65,16 +66,18 @@
             <child>
               <object class="GtkLabel" id="label1">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">&lt;span weight="bold"&gt; When inserting date/time...&lt;/span&gt;</property>
+                <property name="label" translatable="yes">When inserting date/time...</property>
                 <property name="use_underline">False</property>
-                <property name="use_markup">True</property>
                 <property name="justify">GTK_JUSTIFY_LEFT</property>
                 <property name="wrap">False</property>
                 <property name="selectable">False</property>
-                <property name="xalign">7.45058e-09</property>
+                <property name="xalign">0</property>
                 <property name="yalign">0.5</property>
                 <property name="xpad">0</property>
                 <property name="ypad">0</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
               </object>
               <packing>
                 <property name="padding">0</property>
@@ -249,9 +252,8 @@
                                 <property name="editable">True</property>
                                 <property name="visibility">True</property>
                                 <property name="max_length">0</property>
-                                <property name="text" translatable="no">%d/%m/%Y %H:%M:%S</property>
+                                <property name="text" translatable="yes" comments="Translators: Use the more common date format in your locale">%d/%m/%Y %H:%M:%S</property>
                                 <property name="has_frame">True</property>
-                                <property name="invisible_char" translatable="yes">*</property>
                                 <property name="activates_default">False</property>
                               </object>
                               <packing>
@@ -270,9 +272,8 @@
                         <child>
                           <object class="GtkLabel" id="custom_format_example">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">01/11/2002 17:52:00</property>
+                            <property name="label" translatable="yes" comments="Translators: This example should follow the date format defined in the entry above">01/11/2009 17:52:00</property>
                             <property name="use_underline">False</property>
-                            <property name="use_markup">True</property>
                             <property name="justify">GTK_JUSTIFY_RIGHT</property>
                             <property name="wrap">False</property>
                             <property name="selectable">False</property>
