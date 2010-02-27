@@ -566,7 +566,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 
 
 	document_signals[LOADING] =
-   		g_signal_new ("loading",
+		g_signal_new ("loading",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, loading),
@@ -740,6 +740,45 @@ get_default_style_scheme (void)
 	return def_style;
 }
 
+static void
+on_uri_changed (GeditDocument *doc,
+		GParamSpec    *pspec,
+		gpointer       useless)
+{
+#ifndef G_OS_WIN32
+	GFile *location;
+
+	location = gedit_document_get_location (doc);
+
+	/* load metadata for this uri: we load sync since metadata is
+	 * always local so it should be fast and we need the information
+	 * right after the uri was set.
+	 */
+	if (location != NULL)
+	{
+		GError *error;
+
+		if (doc->priv->metadata_info != NULL)
+			g_object_unref (doc->priv->metadata_info);
+
+		doc->priv->metadata_info = g_file_query_info (location,
+							      METADATA_QUERY,
+							      G_FILE_QUERY_INFO_NONE,
+							      NULL,
+							      &error);
+
+		if (error != NULL)
+		{
+			if (error->code != G_FILE_ERROR_ISDIR)
+				g_warning ("%s", error->message);
+			g_error_free (error);
+		}
+
+		g_object_unref (location);
+	}
+#endif
+}
+
 static GtkSourceLanguage *
 guess_language (GeditDocument *doc,
 		const gchar   *content_type)
@@ -881,6 +920,11 @@ gedit_document_init (GeditDocument *doc)
 			  "notify::content-type",
 			  G_CALLBACK (on_content_type_changed),
 			  NULL);
+
+	g_signal_connect (doc,
+			  "notify::uri",
+			  G_CALLBACK (on_uri_changed),
+			  NULL);
 }
 
 GeditDocument *
@@ -954,33 +998,6 @@ gedit_document_set_content_type (GeditDocument *doc,
 	set_content_type (doc, content_type);
 }
 
-#ifndef G_OS_WIN32
-static void
-query_info_cb (GFile         *source,
-	       GAsyncResult  *res,
-	       GeditDocument *doc)
-{
-	GError *error = NULL;
-
-	doc->priv->metadata_info = g_file_query_info_finish (source,
-							     res,
-							     &error);
-
-	if (error != NULL)
-	{
-		if (error->code != G_FILE_ERROR_ISDIR)
-			g_warning ("%s", error->message);
-		g_error_free (error);
-	}
-	else
-	{
-		on_content_type_changed (doc, NULL, NULL);
-	}
-
-	g_object_unref (doc);
-}
-#endif
-
 static void
 set_uri (GeditDocument *doc,
 	 const gchar   *uri)
@@ -1003,27 +1020,6 @@ set_uri (GeditDocument *doc,
 			doc->priv->untitled_number = 0;
 		}
 	}
-
-#ifndef G_OS_WIN32
-	GFile *location;
-
-	/* Get the GFileInfo async so we can set the language from the metadata */
-	location = gedit_document_get_location (doc);
-
-	if (location != NULL)
-	{
-		/* ref the doc so that is not finalized before the
-		 * query info callback runs */
-		g_file_query_info_async (location,
-					 METADATA_QUERY,
-					 G_FILE_QUERY_INFO_NONE,
-					 G_PRIORITY_DEFAULT,
-					 NULL,
-					 (GAsyncReadyCallback) query_info_cb,
-					 g_object_ref (doc));
-		g_object_unref (location);
-	}
-#endif
 
 	g_object_notify (G_OBJECT (doc), "uri");
 
@@ -1053,6 +1049,9 @@ void
 gedit_document_set_uri (GeditDocument *doc,
 			const gchar   *uri)
 {
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (uri != NULL);
+
 	set_uri (doc, uri);
 	set_content_type (doc, NULL);
 }
