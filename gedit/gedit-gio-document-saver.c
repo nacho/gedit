@@ -168,12 +168,12 @@ static void
 remote_save_completed_or_failed (GeditGioDocumentSaver *gvsaver, 
 				 AsyncData 	       *async)
 {
-	if (async)
-		async_data_free (async);
-
 	gedit_document_saver_saving (GEDIT_DOCUMENT_SAVER (gvsaver),
 				     TRUE,
 				     gvsaver->priv->error);
+
+	if (async)
+		async_data_free (async);
 }
 
 static void
@@ -194,7 +194,7 @@ remote_get_info_cb (GFile        *source,
 	GFileInfo *info;
 	GError *error = NULL;
 
-	saver = async->saver;
+	gedit_debug (DEBUG_SAVER);
 
 	/* check cancelled state manually */
 	if (g_cancellable_is_cancelled (async->cancellable))
@@ -203,6 +203,8 @@ remote_get_info_cb (GFile        *source,
 		return;
 	}
 	
+	saver = async->saver;
+
 	gedit_debug_message (DEBUG_SAVER, "Finished query info on file");
 	info = g_file_query_info_finish (source, res, &error);
 
@@ -228,7 +230,9 @@ close_async_ready_get_info_cb (GOutputStream *stream,
 			       AsyncData     *async)
 {
 	GError *error = NULL;
-	
+
+	gedit_debug (DEBUG_SAVER);
+
 	/* check cancelled state manually */
 	if (g_cancellable_is_cancelled (async->cancellable))
 	{
@@ -298,6 +302,8 @@ async_write_cb (GOutputStream *stream,
 	GeditGioDocumentSaver *gvsaver;
 	gssize bytes_written;
 	GError *error = NULL;
+
+	gedit_debug (DEBUG_SAVER);
 
 	/* Check cancelled state manually */
 	if (g_cancellable_is_cancelled (async->cancellable))
@@ -402,6 +408,8 @@ async_replace_ready_callback (GFile        *source,
 	GFileOutputStream *file_stream;
 	GError *error = NULL;
 
+	gedit_debug (DEBUG_SAVER);
+
 	/* Check cancelled state manually */
 	if (g_cancellable_is_cancelled (async->cancellable))
 	{
@@ -488,7 +496,9 @@ mount_ready_callback (GFile        *file,
 {
 	GError *error = NULL;
 	gboolean mounted;
-	
+
+	gedit_debug (DEBUG_SAVER);
+
 	/* manual check for cancelled state */
 	if (g_cancellable_is_cancelled (async->cancellable))
 	{
@@ -539,7 +549,9 @@ check_modification_callback (GFile        *source,
 	GeditGioDocumentSaver *gvsaver;
 	GError *error = NULL;
 	GFileInfo *info;
-	
+
+	gedit_debug (DEBUG_SAVER);
+
 	/* manually check cancelled state */
 	if (g_cancellable_is_cancelled (async->cancellable))
 	{

@@ -234,11 +234,14 @@ get_metadata_encoding (GeditDocumentLoader *loader)
 }
 
 static void
-remote_load_completed_or_failed (GeditGioDocumentLoader *gvloader, AsyncData *async)
+remote_load_completed_or_failed (GeditGioDocumentLoader *loader, AsyncData *async)
 {
-	gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (async->loader),
+	gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (loader),
 				       TRUE,
-				       async->loader->priv->error);
+				       loader->priv->error);
+
+	if (async)
+		async_data_free (async);
 }
 
 static void
@@ -254,7 +257,9 @@ close_input_stream_ready_cb (GInputStream *stream,
 			     AsyncData     *async)
 {
 	GError *error = NULL;
-	
+
+	gedit_debug (DEBUG_LOADER);
+
 	/* check cancelled state manually */
 	if (g_cancellable_is_cancelled (async->cancellable))
 	{
@@ -343,21 +348,21 @@ async_read_cb (GInputStream *stream,
 {
 	gedit_debug (DEBUG_LOADER);
 	GeditGioDocumentLoader *gvloader;
-	GeditDocumentLoader *loader;
 	GError *error = NULL;
 
-	gvloader = async->loader;
-	loader = GEDIT_DOCUMENT_LOADER (gvloader);
+	gedit_debug (DEBUG_LOADER);
 
 	/* manually check cancelled state */
 	if (g_cancellable_is_cancelled (async->cancellable))
 	{
-		remote_load_completed_or_failed (gvloader, async);
+		async_data_free (async);
 		return;
 	}
 
+	gvloader = async->loader;
+
 	async->read = g_input_stream_read_finish (stream, res, &error);
-	
+
 	/* error occurred */
 	if (async->read == -1)
 	{
@@ -383,7 +388,11 @@ async_read_cb (GInputStream *stream,
 	/* end of the file, we are done! */
 	if (async->read == 0)
 	{
-		GEDIT_DOCUMENT_LOADER (gvloader)->auto_detected_encoding =
+		GeditDocumentLoader *loader;
+
+		loader = GEDIT_DOCUMENT_LOADER (gvloader);
+
+		loader->auto_detected_encoding =
 			gedit_smart_charset_converter_get_guessed (gvloader->priv->converter);
 
 		loader->auto_detected_encoding = gedit_smart_charset_converter_get_guessed (gvloader->priv->converter);
@@ -541,7 +550,9 @@ mount_ready_callback (GFile        *file,
 {
 	GError *error = NULL;
 	gboolean mounted;
-	
+
+	gedit_debug (DEBUG_LOADER);
+
 	/* manual check for cancelled state */
 	if (g_cancellable_is_cancelled (async->cancellable))
 	{
