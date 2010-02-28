@@ -326,6 +326,9 @@ read_line (GeditDocumentInputStream *stream,
 
 			if (read == to_write)
 			{
+				/* Make sure offset is still one past what we
+				   wrote... */
+				++offset;
 				break;
 			}
 
