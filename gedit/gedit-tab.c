@@ -834,7 +834,8 @@ document_loading (GeditDocument *document,
 		  goffset        total_size,
 		  GeditTab      *tab)
 {
-	double et;
+	gdouble et;
+	gdouble total_time;
 
 	g_return_if_fail ((tab->priv->state == GEDIT_TAB_STATE_LOADING) ||
 		 	  (tab->priv->state == GEDIT_TAB_STATE_REVERTING));
@@ -849,39 +850,15 @@ document_loading (GeditDocument *document,
 
 	et = g_timer_elapsed (tab->priv->timer, NULL);
 
-	if (tab->priv->times_called == 1)
-	{
-		if ((total_size == 0) || (total_size > 51200UL) /* 50 KB */)
-		{
-			show_loading_message_area (tab);
-		}
-	}
-	else
-	{
-		if ((tab->priv->times_called == 3) && (total_size != 0))
-		{
-			gdouble total_time;
+	/* et : total_time = size : total_size */
+	total_time = (et * total_size) / size;
 
-			/* et : total_time = size : total_size */
-			total_time = (et * total_size)/size;
-
-			if ((total_time - et) > 3.0)
-			{
-				show_loading_message_area (tab);
-			}
-		}
-		else
-		{
-			if (et > 3.0)
-			{
-				show_loading_message_area (tab);
-			}
-		}
+	if ((total_time - et) > 3.0)
+	{
+		show_loading_message_area (tab);
 	}
-	
+
 	message_area_set_progress (tab, size, total_size);
-
-	tab->priv->times_called++;
 }
 
 static gboolean
@@ -1102,7 +1079,8 @@ document_saving (GeditDocument    *document,
 		 goffset  total_size,
 		 GeditTab         *tab)
 {
-	double et;
+	gdouble et;
+	gdouble total_time;
 
 	g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_SAVING);
 
@@ -1117,36 +1095,14 @@ document_saving (GeditDocument    *document,
 
 	et = g_timer_elapsed (tab->priv->timer, NULL);
 
-	if (tab->priv->times_called == 1)
-	{
-		if ((total_size == 0) || (total_size > 51200UL) /* 50 KB */)
-		{
-			show_saving_message_area (tab);
-		}
-	}
-	else
-	{
-		if ((tab->priv->times_called == 3) && (total_size != 0))
-		{
-			gdouble total_time;
+	/* et : total_time = size : total_size */
+	total_time = (et * total_size)/size;
 
-			/* et : total_time = size : total_size */
-			total_time = (et * total_size)/size;
-
-			if ((total_time - et) > 3.0)
-			{
-				show_saving_message_area (tab);
-			}
-		}
-		else
-		{
-			if (et > 3.0)
-			{
-				show_saving_message_area (tab);
-			}
-		}
+	if ((total_time - et) > 3.0)
+	{
+		show_saving_message_area (tab);
 	}
-	
+
 	message_area_set_progress (tab, size, total_size);
 
 	tab->priv->times_called++;
