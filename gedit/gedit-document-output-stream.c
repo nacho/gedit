@@ -22,7 +22,9 @@
 
 #include "config.h"
 
+#include <string.h>
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <gio/gio.h>
 #include "gedit-document-output-stream.h"
 
@@ -32,12 +34,19 @@
  * there is no I/O involved and should be accessed only by the main
  * thread */
 
-#define GEDIT_DOCUMENT_OUTPUT_STREAM_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_DOCUMENT_OUTPUT_STREAM, GeditDocumentOutputStreamPrivate))
+#define GEDIT_DOCUMENT_OUTPUT_STREAM_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object),\
+							 GEDIT_TYPE_DOCUMENT_OUTPUT_STREAM,\
+							 GeditDocumentOutputStreamPrivate))
+
+#define MAX_UNICHAR_LEN 6
 
 struct _GeditDocumentOutputStreamPrivate
 {
 	GeditDocument *doc;
 	GtkTextIter    pos;
+
+	gchar *buffer;
+	gsize buflen;
 
 	guint is_initialized : 1;
 	guint is_closed : 1;
@@ -102,6 +111,16 @@ gedit_document_output_stream_get_property (GObject    *object,
 }
 
 static void
+gedit_document_output_stream_finalize (GObject *object)
+{
+	GeditDocumentOutputStream *stream = GEDIT_DOCUMENT_OUTPUT_STREAM (object);
+
+	g_free (stream->priv->buffer);
+
+	G_OBJECT_CLASS (gedit_document_output_stream_parent_class)->finalize (object);
+}
+
+static void
 gedit_document_output_stream_class_init (GeditDocumentOutputStreamClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -109,6 +128,7 @@ gedit_document_output_stream_class_init (GeditDocumentOutputStreamClass *klass)
 
 	object_class->get_property = gedit_document_output_stream_get_property;
 	object_class->set_property = gedit_document_output_stream_set_property;
+	object_class->finalize = gedit_document_output_stream_finalize;
 
 	stream_class->write_fn = gedit_document_output_stream_write;
 	stream_class->close_fn = gedit_document_output_stream_close;
@@ -129,6 +149,9 @@ static void
 gedit_document_output_stream_init (GeditDocumentOutputStream *stream)
 {
 	stream->priv = GEDIT_DOCUMENT_OUTPUT_STREAM_GET_PRIVATE (stream);
+
+	stream->priv->buffer = NULL;
+	stream->priv->buflen = 0;
 
 	stream->priv->is_initialized = FALSE;
 	stream->priv->is_closed = FALSE;
@@ -239,10 +262,18 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 				    GCancellable             *cancellable,
 				    GError                  **error)
 {
-	GeditDocumentOutputStream *ostream = GEDIT_DOCUMENT_OUTPUT_STREAM (stream);
+	GeditDocumentOutputStream *ostream;
+	gchar *text;
+	gsize len;
+	gboolean freetext = FALSE;
+	const gchar *end;
+	gsize nvalid;
+	gboolean valid;
 
 	if (g_cancellable_set_error_if_cancelled (cancellable, error))
 		return -1;
+
+	ostream = GEDIT_DOCUMENT_OUTPUT_STREAM (stream);
 
 	if (!ostream->priv->is_initialized)
 	{
@@ -258,10 +289,63 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 		ostream->priv->is_initialized = TRUE;
 	}
 
-	gtk_text_buffer_insert (GTK_TEXT_BUFFER (ostream->priv->doc),
-				&ostream->priv->pos, buffer, count);
+	if (ostream->priv->buflen > 0)
+	{
+		len = ostream->priv->buflen + count;
+		text = g_new (gchar , len + 1);
+		memcpy (text, ostream->priv->buffer, ostream->priv->buflen);
+		memcpy (text + ostream->priv->buflen, buffer, count);
+		text[len] = '\0';
+		g_free (ostream->priv->buffer);
+		ostream->priv->buffer = NULL;
+		ostream->priv->buflen = 0;
+		freetext = TRUE;
+	}
+	else
+	{
+		text = (gchar *) buffer;
+		len = count;
+	}
 
-	return count;
+	/* validate */
+	valid = g_utf8_validate (text, len, &end);
+	nvalid = end - text;
+
+	if (!valid)
+	{
+		gsize remainder;
+
+		remainder = len - nvalid;
+
+		if ((remainder < MAX_UNICHAR_LEN) &&
+		    (g_utf8_get_char_validated (text + nvalid, remainder) == (gunichar)-2))
+		{
+			ostream->priv->buffer = g_strndup (end, remainder);
+			ostream->priv->buflen = remainder;
+			len -= remainder;
+		}
+		else
+		{
+			/* TODO: we cuould escape invalid text and tag it in red
+			 * and make the doc readonly.
+			 */
+			g_set_error (error, G_IO_ERROR, G_IO_ERROR_INVALID_DATA,
+				     _("Invalid UTF-8 sequence in input"));
+
+			if (freetext)
+				g_free (text);
+
+			return -1;
+		}
+	}
+
+	gtk_text_buffer_insert (GTK_TEXT_BUFFER (ostream->priv->doc),
+				&ostream->priv->pos, text, len);
+
+	if (freetext)
+		g_free (text);
+
+	return len;
 }
 
 static gboolean
@@ -275,6 +359,13 @@ gedit_document_output_stream_close (GOutputStream     *stream,
 	{
 		end_append_text_to_document (ostream);
 		ostream->priv->is_closed = TRUE;
+	}
+
+	if (ostream->priv->buflen > 0)
+	{
+		g_set_error (error, G_IO_ERROR, G_IO_ERROR_INVALID_DATA,
+			     _("Incomplete UTF-8 sequence in input"));
+		return FALSE;
 	}
 
 	return TRUE;

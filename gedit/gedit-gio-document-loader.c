@@ -449,7 +449,6 @@ finish_query_info (AsyncData *async)
 {
 	GeditGioDocumentLoader *gvloader;
 	GeditDocumentLoader *loader;
-	GInputStream *utf8_stream;
 	GInputStream *conv_stream;
 	GFileInfo *info;
 	GSList *candidate_encodings;
@@ -489,10 +488,7 @@ finish_query_info (AsyncData *async)
 						    G_CONVERTER (gvloader->priv->converter));
 	g_object_unref (gvloader->priv->stream);
 
-	utf8_stream = g_utf8_input_stream_new (conv_stream);
-	g_object_unref (conv_stream);
-
-	gvloader->priv->stream = utf8_stream;
+	gvloader->priv->stream = conv_stream;
 
 	/* Output stream */
 	gvloader->priv->output = gedit_document_output_stream_new (loader->document);
