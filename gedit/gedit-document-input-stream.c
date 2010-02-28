@@ -323,6 +323,12 @@ read_line (GeditDocumentInputStream *stream,
 		do
 		{
 			read = next_size;
+
+			if (read == to_write)
+			{
+				break;
+			}
+
 			ptr = g_utf8_next_char (ptr);
 			next_size = ptr - buf;
 
