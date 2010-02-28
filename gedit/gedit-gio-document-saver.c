@@ -115,6 +115,12 @@ gedit_gio_document_saver_dispose (GObject *object)
 		priv->stream = NULL;
 	}
 
+	if (priv->input != NULL)
+	{
+		g_object_unref (priv->input);
+		priv->input = NULL;
+	}
+
 	G_OBJECT_CLASS (gedit_gio_document_saver_parent_class)->dispose (object);
 }
 
