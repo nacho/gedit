@@ -146,7 +146,7 @@ gedit_gio_document_saver_class_init (GeditGioDocumentSaverClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GeditDocumentSaverClass *saver_class = GEDIT_DOCUMENT_SAVER_CLASS (klass);
 
-	object_class->finalize = gedit_gio_document_saver_dispose;
+	object_class->dispose = gedit_gio_document_saver_dispose;
 
 	saver_class->save = gedit_gio_document_saver_save;
 	saver_class->get_file_size = gedit_gio_document_saver_get_file_size;

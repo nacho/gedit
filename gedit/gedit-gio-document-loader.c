@@ -141,19 +141,12 @@ gedit_gio_document_loader_dispose (GObject *object)
 }
 
 static void
-gedit_gio_document_loader_finalize (GObject *object)
-{
-	G_OBJECT_CLASS (gedit_gio_document_loader_parent_class)->finalize (object);
-}
-
-static void
 gedit_gio_document_loader_class_init (GeditGioDocumentLoaderClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GeditDocumentLoaderClass *loader_class = GEDIT_DOCUMENT_LOADER_CLASS (klass);
 
 	object_class->dispose = gedit_gio_document_loader_dispose;
-	object_class->finalize = gedit_gio_document_loader_finalize;
 
 	loader_class->load = gedit_gio_document_loader_load;
 	loader_class->cancel = gedit_gio_document_loader_cancel;
