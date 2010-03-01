@@ -109,7 +109,7 @@ test_consecutive_tnewline ()
 static void
 test_big_char ()
 {
-	test_consecutive_write ("ダダ", "ダダ", 2,
+	test_consecutive_write ("\343\203\200\343\203\200", "\343\203\200\343\203\200", 2,
 				GEDIT_DOCUMENT_NEWLINE_TYPE_LF);
 }
 
