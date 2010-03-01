@@ -106,6 +106,13 @@ test_consecutive_tnewline ()
 				GEDIT_DOCUMENT_NEWLINE_TYPE_CR_LF);
 }
 
+static void
+test_big_char ()
+{
+	test_consecutive_write ("ダダ", "ダダ", 2,
+				GEDIT_DOCUMENT_NEWLINE_TYPE_LF);
+}
+
 int main (int   argc,
           char *argv[])
 {
@@ -118,6 +125,7 @@ int main (int   argc,
 
 	g_test_add_func ("/document-output-stream/consecutive", test_consecutive);
 	g_test_add_func ("/document-output-stream/consecutive_tnewline", test_consecutive_tnewline);
+	g_test_add_func ("/document-output-stream/big-char", test_big_char);
 
 	return g_test_run ();
 }

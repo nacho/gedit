@@ -345,7 +345,7 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 	if (freetext)
 		g_free (text);
 
-	return len;
+	return count;
 }
 
 static gboolean
