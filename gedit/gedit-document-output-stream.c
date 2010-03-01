@@ -255,12 +255,39 @@ void
 gedit_document_output_stream_insert_fallback (GeditDocumentOutputStream *stream,
                                               const gchar               *buffer)
 {
+	GtkSourceStyleScheme *scheme;
+	GtkSourceStyle *style;
+	GtkTextTag *tag;
 	guint8 out[4];
 	guint8 v;
+	gchar *background;
+	gchar *foreground;
 	const gchar hex[] = "0123456789ABCDEF";
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT_OUTPUT_STREAM (stream));
 	g_return_if_fail (buffer != NULL);
+
+	scheme = gtk_source_buffer_get_style_scheme (GTK_SOURCE_BUFFER (stream->priv->doc));
+	style = gtk_source_style_scheme_get_style (scheme,
+	                                           "def:error");
+
+	tag = NULL;
+
+	if (style != NULL)
+	{
+		/* FIXME: Get attributes */
+		g_object_get (G_OBJECT (style), "background", &background,
+			      "foreground", &foreground, NULL);
+
+		tag = gtk_text_buffer_create_tag (GTK_TEXT_BUFFER (stream->priv->doc),
+			                          NULL,
+			                          "background", background,
+			                          "foreground", foreground,
+			                          NULL);
+
+		g_free (background);
+		g_free (foreground);
+	}
 
 	/* if we are here is because we are pointing to an invalid char
 	 * so we substitute it by an hex value */
@@ -270,8 +297,21 @@ gedit_document_output_stream_insert_fallback (GeditDocumentOutputStream *stream,
 	out[2] = hex[(v & 0x0f) >> 0];
 	out[3] = '\0';
 
-	gtk_text_buffer_insert (GTK_TEXT_BUFFER (stream->priv->doc),
-	                        &stream->priv->pos, (const gchar *)out, 3);
+	if (tag != NULL)
+	{
+		gtk_text_buffer_insert_with_tags (GTK_TEXT_BUFFER (stream->priv->doc),
+		                                  &stream->priv->pos,
+		                                  (const gchar *)out, 3,
+		                                  tag, NULL);
+
+		g_object_unref (tag);
+	}
+	else
+	{
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (stream->priv->doc),
+		                        &stream->priv->pos,
+		                       (const gchar *)out, 3);
+	}
 
 	stream->priv->n_fallback_errors++;
 }
