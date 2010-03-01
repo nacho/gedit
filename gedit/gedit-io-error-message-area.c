@@ -221,6 +221,7 @@ parse_gio_error (gint          code,
 	switch (code)
 	{
 	case G_IO_ERROR_NOT_FOUND:
+	case G_IO_ERROR_NOT_DIRECTORY:
 		*error_message = g_strdup_printf (_("Could not find the file %s."),
 						  uri_for_display);
 		*message_details = g_strdup (_("Please check that you typed the "
@@ -368,8 +369,8 @@ parse_error (const GError *error,
 
 	if (error->domain == G_IO_ERROR)
 	{
-		ret = parse_gio_error (error->code, 
-				       error_message, 
+		ret = parse_gio_error (error->code,
+				       error_message,
 				       message_details,
 				       uri,
 				       uri_for_display);
@@ -377,7 +378,7 @@ parse_error (const GError *error,
 	else if (error->domain == GEDIT_DOCUMENT_ERROR)
 	{
 		ret = parse_gedit_error (error->code,
-					 error_message, 
+					 error_message,
 					 message_details,
 					 uri,
 					 uri_for_display);
