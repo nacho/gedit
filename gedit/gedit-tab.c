@@ -896,7 +896,8 @@ document_loaded (GeditDocument *document,
 	uri = gedit_document_get_uri (document);
 
 	/* if the error is CONVERSION FALLBACK don't treat it as a normal error */
-	if (error != NULL && error->code != GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK)
+	if (error != NULL &&
+	    (error->domain != GEDIT_DOCUMENT_ERROR || error->code != GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK))
 	{
 		if (tab->priv->state == GEDIT_TAB_STATE_LOADING)
 			gedit_tab_set_state (tab, GEDIT_TAB_STATE_LOADING_ERROR);
@@ -905,7 +906,7 @@ document_loaded (GeditDocument *document,
 
 		encoding = gedit_document_get_encoding (document);
 
-		if (error->domain == G_IO_ERROR && 
+		if (error->domain == G_IO_ERROR &&
 		    error->code == G_IO_ERROR_CANCELLED)
 		{
 			/* remove the tab, but in an idle handler, since
@@ -975,7 +976,9 @@ document_loaded (GeditDocument *document,
 				   mime);
 		g_free (mime);
 
-		if (error && error->code == GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK)
+		if (error &&
+		    error->domain == GEDIT_DOCUMENT_ERROR &&
+		    error->code == GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK)
 		{
 			GtkWidget *emsg;
 

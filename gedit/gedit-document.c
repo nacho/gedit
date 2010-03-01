@@ -1216,7 +1216,9 @@ document_loader_loaded (GeditDocumentLoader *loader,
 			GeditDocument       *doc)
 {
 	/* load was successful */
-	if (error == NULL || error->code == GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK)
+	if (error == NULL ||
+	    (error->domain == GEDIT_DOCUMENT_ERROR &&
+	     error->code == GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK))
 	{
 		GtkTextIter iter;
 		GFileInfo *info;
