@@ -769,8 +769,13 @@ on_uri_changed (GeditDocument *doc,
 
 		if (error != NULL)
 		{
-			if (error->code != G_FILE_ERROR_ISDIR)
+			if (error->code != G_FILE_ERROR_ISDIR &&
+			    error->code != G_FILE_ERROR_NOTDIR &&
+			    error->code != G_FILE_ERROR_NOENT)
+			{
 				g_warning ("%s", error->message);
+			}
+
 			g_error_free (error);
 		}
 
