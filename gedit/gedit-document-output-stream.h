@@ -59,6 +59,11 @@ GOutputStream		*gedit_document_output_stream_new		(GeditDocument *doc);
 
 GeditDocumentNewlineType gedit_document_output_stream_detect_newline_type (GeditDocumentOutputStream *stream);
 
+guint                    gedit_document_output_stream_get_num_fallbacks (GeditDocumentOutputStream *stream);
+
+void                     gedit_document_output_stream_insert_fallback   (GeditDocumentOutputStream *stream,
+                                                                         const gchar               *buffer);
+
 G_END_DECLS
 
 #endif /* __GEDIT_DOCUMENT_OUTPUT_STREAM_H__ */
