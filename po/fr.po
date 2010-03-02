@@ -24,9 +24,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-26 22:01+0100\n"
-"PO-Revision-Date: 2010-02-26 22:10+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gedit&component=general\n"
+"POT-Creation-Date: 2010-02-27 11:19+0000\n"
+"PO-Revision-Date: 2010-03-02 17:58+0100\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -3570,64 +3571,58 @@ msgid "Select the _language of the current document."
 msgstr "Sélectionnez la _langue du document actuel."
 
 #: ../plugins/spell/spell-checker.ui.h:1
-#: ../plugins/time/gedit-time-dialog.ui.h:2
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:2
-msgid "*"
-msgstr "*"
-
-#: ../plugins/spell/spell-checker.ui.h:2
 msgid "Add w_ord"
 msgstr "A_jouter le mot"
 
-#: ../plugins/spell/spell-checker.ui.h:3
+#: ../plugins/spell/spell-checker.ui.h:2
 msgid "Cha_nge"
 msgstr "Re_mplacer"
 
-#: ../plugins/spell/spell-checker.ui.h:4
+#: ../plugins/spell/spell-checker.ui.h:3
 msgid "Change A_ll"
 msgstr "_Tout remplacer"
 
-#: ../plugins/spell/spell-checker.ui.h:5
+#: ../plugins/spell/spell-checker.ui.h:4
 msgid "Change _to:"
 msgstr "Remplacer _par :"
 
-#: ../plugins/spell/spell-checker.ui.h:6
+#: ../plugins/spell/spell-checker.ui.h:5
 msgid "Check _Word"
 msgstr "_Vérifier le mot"
 
-#: ../plugins/spell/spell-checker.ui.h:7
+#: ../plugins/spell/spell-checker.ui.h:6
 msgid "Check spelling"
 msgstr "Vérifier l'orthographe"
 
-#: ../plugins/spell/spell-checker.ui.h:8
+#: ../plugins/spell/spell-checker.ui.h:7
 msgid "Ignore _All"
 msgstr "Tou_jours ignorer"
 
-#: ../plugins/spell/spell-checker.ui.h:9
+#: ../plugins/spell/spell-checker.ui.h:8
 msgid "Language"
 msgstr "Langue"
 
-#: ../plugins/spell/spell-checker.ui.h:10
+#: ../plugins/spell/spell-checker.ui.h:9
 msgid "Language:"
 msgstr "Langue :"
 
-#: ../plugins/spell/spell-checker.ui.h:11
+#: ../plugins/spell/spell-checker.ui.h:10
 msgid "Misspelled word:"
 msgstr "Mot mal orthographié :"
 
-#: ../plugins/spell/spell-checker.ui.h:12
+#: ../plugins/spell/spell-checker.ui.h:11
 msgid "User dictionary:"
 msgstr "Dictionnaire de l'utilisateur :"
 
-#: ../plugins/spell/spell-checker.ui.h:13
+#: ../plugins/spell/spell-checker.ui.h:12
 msgid "_Ignore"
 msgstr "_Ignorer"
 
-#: ../plugins/spell/spell-checker.ui.h:14
+#: ../plugins/spell/spell-checker.ui.h:13
 msgid "_Suggestions:"
 msgstr "_Suggestions :"
 
-#: ../plugins/spell/spell-checker.ui.h:15
+#: ../plugins/spell/spell-checker.ui.h:14
 msgid "word"
 msgstr "mot"
 
@@ -5225,41 +5220,45 @@ msgstr "Insérer la date et l'heure"
 msgid "Inserts current date and time at the cursor position."
 msgstr "Insère la date et l'heure actuelle à l'emplacement du curseur."
 
+#. Translators: Use the more common date format in your locale
 #: ../plugins/time/gedit-time-dialog.ui.h:3
-msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
-msgstr "<span size=\"small\">01/11/2002 17:52:00</span>"
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:4
+#, no-c-format
+msgid "%d/%m/%Y %H:%M:%S"
+msgstr "%d/%m/%Y %H:%M:%S"
 
+#. Translators: This example should follow the date format defined in the entry above
 #: ../plugins/time/gedit-time-dialog.ui.h:4
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:6
+msgid "01/11/2009 17:52:00"
+msgstr "01/11/2009 17:52:00"
+
+#: ../plugins/time/gedit-time-dialog.ui.h:5
 msgid "Insert Date and Time"
 msgstr "Insérer la date et l'heure"
 
-#: ../plugins/time/gedit-time-dialog.ui.h:5
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:6
+#: ../plugins/time/gedit-time-dialog.ui.h:6
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:8
 msgid "Use the _selected format"
 msgstr "Utiliser le format _sélectionné"
 
-#: ../plugins/time/gedit-time-dialog.ui.h:6
+#: ../plugins/time/gedit-time-dialog.ui.h:7
 msgid "_Insert"
 msgstr "_Insertion"
 
-#: ../plugins/time/gedit-time-dialog.ui.h:7
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:8
+#: ../plugins/time/gedit-time-dialog.ui.h:8
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:11
 msgid "_Use custom format"
 msgstr "_Utiliser un format personnalisé"
 
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:3
-msgid "01/11/2002 17:52:00"
-msgstr "01/11/2002 17:52:00"
-
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:4
-msgid "<span weight=\"bold\"> When inserting date/time...</span>"
-msgstr ""
-"<span weight=\"bold\"> Lors de l'insertion de la date et l'heure...</span>"
-
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:5
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:7
 msgid "Configure date/time plugin"
 msgstr "Configurer le greffon d'insertion de date et d'heure"
 
-#: ../plugins/time/gedit-time-setup-dialog.ui.h:7
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:9
+msgid "When inserting date/time..."
+msgstr "Lors de l'insertion de la date et de l'heure..."
+
+#: ../plugins/time/gedit-time-setup-dialog.ui.h:10
 msgid "_Prompt for a format"
 msgstr "_Demander un format"
