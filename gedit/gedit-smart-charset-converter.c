@@ -115,15 +115,11 @@ get_encoding (GeditSmartCharsetConverter *smart)
 	if (smart->priv->current_encoding != NULL)
 		return (const GeditEncoding *)smart->priv->current_encoding->data;
 
-#if 0
-	FIXME: uncomment this when using fallback
 	/* If we tried all encodings, we return the first encoding */
 	smart->priv->use_first = TRUE;
 	smart->priv->current_encoding = smart->priv->encodings;
 
 	return (const GeditEncoding *)smart->priv->current_encoding->data;
-#endif
-	return NULL;
 }
 
 static gboolean
@@ -270,9 +266,6 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 	if (conv != NULL)
 	{
 		g_converter_reset (G_CONVERTER (conv));
-
-		/* FIXME: uncomment this when we want to use the fallback
-		g_charset_converter_set_use_fallback (conv, TRUE);*/
 	}
 
 	return conv;
