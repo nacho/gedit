@@ -63,6 +63,10 @@ test_consecutive_read (const gchar *inbuf,
 	b[n] = '\0';
 
 	g_assert_cmpstr (b, ==, outbuf);
+
+	g_object_unref (buf);
+	g_object_unref (in);
+	g_free (b);
 }
 
 static void

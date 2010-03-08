@@ -71,16 +71,19 @@ on_document_loaded (GeditDocument  *document,
                     LoaderTestData *data)
 {
 	GtkTextIter start, end;
-	gchar *text;
 
 	g_assert_no_error (error);
 
 	if (data->in_buffer != NULL)
 	{
+		gchar *text;
+
 		gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (document), &start, &end);
 		text = gtk_text_iter_get_slice (&start, &end);
 
 		g_assert_cmpstr (text, ==, data->in_buffer);
+
+		g_free (text);
 	}
 
 	if (data->newline_type != -1)

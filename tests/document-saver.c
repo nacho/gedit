@@ -376,6 +376,7 @@ check_permissions (GFile *file,
 	                 ==,
 	                 g_file_info_get_attribute_uint32 (info, G_FILE_ATTRIBUTE_UNIX_MODE) & ACCESSPERMS);
 
+	g_object_unref (info);
 }
 
 static void
