@@ -433,8 +433,10 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 	}
 
 	if (error_message == NULL)
+	{
 		error_message = g_strdup_printf (_("Could not revert the file %s."),
 						 uri_for_display);
+	}
 
 	message_area = create_io_loading_error_message_area (error_message,
 							     message_details,
@@ -645,11 +647,9 @@ gedit_io_loading_error_message_area_new (const gchar         *uri,
 	         (error->domain == GEDIT_DOCUMENT_ERROR &&
 	         error->code == GEDIT_DOCUMENT_ERROR_ENCODING_AUTO_DETECTION_FAILED))
 	{
-		error_message = g_strdup_printf (_("Could not open the file %s."),
-						 uri_for_display);
 		message_details = g_strconcat (_("gedit has not been able to detect "
-				               "the character encoding."), "\n", 
-				               _("Please check that you are not trying to open a binary file."), "\n",
+					         "the character encoding."), "\n",
+					       _("Please check that you are not trying to open a binary file."), "\n",
 					       _("Select a character encoding from the menu and try again."), NULL);
 		convert_error = TRUE;
 	}
@@ -678,6 +678,12 @@ gedit_io_loading_error_message_area_new (const gchar         *uri,
 	else
 	{
 		parse_error (error, &error_message, &message_details, uri, uri_for_display);
+	}
+
+	if (error_message == NULL)
+	{
+		error_message = g_strdup_printf (_("Could not open the file %s."),
+						 uri_for_display);
 	}
 
 	if (convert_error)
@@ -1194,8 +1200,10 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 	}
 
 	if (error_message == NULL)
+	{
 		error_message = g_strdup_printf (_("Could not save the file %s."),
 						 uri_for_display);
+	}
 
 	message_area = create_io_loading_error_message_area (error_message,
 							     message_details,
