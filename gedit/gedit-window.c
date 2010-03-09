@@ -3884,6 +3884,58 @@ setup_mac_menu (GeditWindow *window)
 #endif
 
 static void
+connect_notebook_signals (GeditWindow *window,
+			  GtkWidget   *notebook)
+{
+	g_signal_connect (notebook,
+			  "switch-page",
+			  G_CALLBACK (notebook_switch_page),
+			  window);
+	g_signal_connect (notebook,
+			  "tab-added",
+			  G_CALLBACK (notebook_tab_added),
+			  window);
+	g_signal_connect (notebook,
+			  "tab-removed",
+			  G_CALLBACK (notebook_tab_removed),
+			  window);
+	g_signal_connect (notebook,
+			  "tabs-reordered",
+			  G_CALLBACK (notebook_tabs_reordered),
+			  window);
+	g_signal_connect (notebook,
+			  "tab-detached",
+			  G_CALLBACK (notebook_tab_detached),
+			  window);
+	g_signal_connect (notebook,
+			  "tab-close-request",
+			  G_CALLBACK (notebook_tab_close_request),
+			  window);
+	g_signal_connect (notebook,
+			  "button-press-event",
+			  G_CALLBACK (notebook_button_press_event),
+			  window);
+	g_signal_connect (notebook,
+			  "popup-menu",
+			  G_CALLBACK (notebook_popup_menu),
+			  window);
+}
+
+static void
+add_notebook (GeditWindow *window,
+	      GtkWidget   *notebook)
+{
+	gtk_paned_pack1 (GTK_PANED (window->priv->vpaned),
+	                 notebook,
+	                 TRUE,
+	                 TRUE);
+
+	gtk_widget_show (notebook);
+
+	connect_notebook_signals (window, notebook);
+}
+
+static void
 gedit_window_init (GeditWindow *window)
 {
 	GtkWidget *main_box;
@@ -3932,11 +3984,7 @@ gedit_window_init (GeditWindow *window)
   	
 	gedit_debug_message (DEBUG_WINDOW, "Create gedit notebook");
 	window->priv->notebook = gedit_notebook_new ();
-  	gtk_paned_pack1 (GTK_PANED (window->priv->vpaned), 
-  			 window->priv->notebook,
-  			 TRUE, 
-  			 TRUE);
-  	gtk_widget_show (window->priv->notebook);  			 
+	add_notebook (window, window->priv->notebook);
 
 	/* side and bottom panels */
   	create_side_panel (window);
@@ -3980,40 +4028,6 @@ gedit_window_init (GeditWindow *window)
 	}
 	
 	gtk_target_list_add_uri_targets (tl, TARGET_URI_LIST);
-
-	/* Connect signals */
-	g_signal_connect (window->priv->notebook,
-			  "switch_page",
-			  G_CALLBACK (notebook_switch_page),
-			  window);
-	g_signal_connect (window->priv->notebook,
-			  "tab_added",
-			  G_CALLBACK (notebook_tab_added),
-			  window);
-	g_signal_connect (window->priv->notebook,
-			  "tab_removed",
-			  G_CALLBACK (notebook_tab_removed),
-			  window);
-	g_signal_connect (window->priv->notebook,
-			  "tabs_reordered",
-			  G_CALLBACK (notebook_tabs_reordered),
-			  window);			  
-	g_signal_connect (window->priv->notebook,
-			  "tab_detached",
-			  G_CALLBACK (notebook_tab_detached),
-			  window);
-	g_signal_connect (window->priv->notebook,
-			  "tab_close_request",
-			  G_CALLBACK (notebook_tab_close_request),
-			  window);
-	g_signal_connect (window->priv->notebook,
-			  "button-press-event",
-			  G_CALLBACK (notebook_button_press_event),
-			  window);
-	g_signal_connect (window->priv->notebook,
-			  "popup-menu",
-			  G_CALLBACK (notebook_popup_menu),
-			  window);
 
 	/* connect instead of override, so that we can
 	 * share the cb code with the view */
