@@ -235,13 +235,13 @@ static gboolean
 separator_func (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 {
 	gchar *str;
+	gboolean ret;
 
 	gtk_tree_model_get (model, iter, NAME_COLUMN, &str, -1);
+	ret = (str == NULL || *str == '\0');
+	g_free (str);
 
-	if (str != NULL && *str != '\0')
-		return FALSE;
-
-	return TRUE;
+	return ret;
 }
 
 static void
