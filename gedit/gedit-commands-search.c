@@ -66,17 +66,14 @@ static void
 last_search_data_restore_position (GeditSearchDialog *dlg)
 {
 	LastSearchData *data;
-	
+
 	data = g_object_get_data (G_OBJECT (dlg), GEDIT_LAST_SEARCH_DATA_KEY);
-	
+
 	if (data != NULL)
 	{
 		gtk_window_move (GTK_WINDOW (dlg),
 				 data->x,
 				 data->y);
-		
-		gedit_search_dialog_present_with_time (dlg,
-						       GDK_CURRENT_TIME);
 	}
 }
 
@@ -454,6 +451,17 @@ search_dialog_response_cb (GeditSearchDialog *dialog,
 	}
 }
 
+static gboolean
+search_dialog_delete_event_cb (GtkWidget   *widget,
+			       GdkEventAny *event,
+			       gpointer     user_data)
+{
+	gedit_debug (DEBUG_COMMANDS);
+
+	/* prevent destruction */
+	return TRUE;
+}
+
 static void
 search_dialog_destroyed (GeditWindow       *window,
 			 GeditSearchDialog *dialog)
@@ -466,6 +474,33 @@ search_dialog_destroyed (GeditWindow       *window,
 	g_object_set_data (G_OBJECT (dialog),
 			   GEDIT_LAST_SEARCH_DATA_KEY,
 			   NULL);
+}
+
+static GtkWidget *
+create_dialog (GeditWindow *window, gboolean show_replace)
+{
+	GtkWidget *dialog;
+
+	dialog = gedit_search_dialog_new (GTK_WINDOW (window), show_replace);
+
+	g_signal_connect (dialog,
+			  "response",
+			  G_CALLBACK (search_dialog_response_cb),
+			  window);
+	g_signal_connect (dialog,
+			 "delete-event",
+			 G_CALLBACK (search_dialog_delete_event_cb),
+			 NULL);
+
+	g_object_set_data (G_OBJECT (window),
+			   GEDIT_SEARCH_DIALOG_KEY,
+			   dialog);
+
+	g_object_weak_ref (G_OBJECT (dialog),
+			   (GWeakNotify) search_dialog_destroyed,
+			   window);
+
+	return dialog;
 }
 
 void
@@ -485,21 +520,7 @@ _gedit_cmd_search_find (GtkAction   *action,
 
 	if (data == NULL)
 	{
-		search_dialog = gedit_search_dialog_new (GTK_WINDOW (window),
-							 FALSE);
-		
-		g_signal_connect (search_dialog,
-				  "response",
-				  G_CALLBACK (search_dialog_response_cb),
-				  window);
-		
-		g_object_set_data (G_OBJECT (window),
-				   GEDIT_SEARCH_DIALOG_KEY,
-				   search_dialog);
-		
-		g_object_weak_ref (G_OBJECT (search_dialog),
-				   (GWeakNotify) search_dialog_destroyed,
-				   window);
+		search_dialog = create_dialog (window, FALSE);
 	}
 	else
 	{
@@ -533,6 +554,8 @@ _gedit_cmd_search_find (GtkAction   *action,
 
 	gtk_widget_show (search_dialog);
 	last_search_data_restore_position (GEDIT_SEARCH_DIALOG (search_dialog));
+	gedit_search_dialog_present_with_time (GEDIT_SEARCH_DIALOG (search_dialog),
+					       GDK_CURRENT_TIME);
 }
 
 void
@@ -549,24 +572,10 @@ _gedit_cmd_search_replace (GtkAction   *action,
 	gedit_debug (DEBUG_COMMANDS);
 
 	data = g_object_get_data (G_OBJECT (window), GEDIT_SEARCH_DIALOG_KEY);
-	
+
 	if (data == NULL)
 	{
-		replace_dialog = gedit_search_dialog_new (GTK_WINDOW (window),
-							  TRUE);
-		
-		g_signal_connect (replace_dialog,
-				  "response",
-				  G_CALLBACK (search_dialog_response_cb),
-				  window);
-		
-		g_object_set_data (G_OBJECT (window),
-				   GEDIT_SEARCH_DIALOG_KEY,
-				   replace_dialog);
-		
-		g_object_weak_ref (G_OBJECT (replace_dialog),
-				   (GWeakNotify) search_dialog_destroyed,
-				   window);
+		replace_dialog = create_dialog (window, TRUE);
 	}
 	else
 	{
@@ -600,6 +609,8 @@ _gedit_cmd_search_replace (GtkAction   *action,
 
 	gtk_widget_show (replace_dialog);
 	last_search_data_restore_position (GEDIT_SEARCH_DIALOG (replace_dialog));
+	gedit_search_dialog_present_with_time (GEDIT_SEARCH_DIALOG (replace_dialog),
+					       GDK_CURRENT_TIME);
 }
 
 static void
