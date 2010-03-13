@@ -199,15 +199,49 @@ class PythonConsole(gtk.ScrolledWindow):
                 return True
             return False
 
+        # For the console we enable smart/home end behavior incoditionally
+        # since it is useful when editing python
+
         elif (event.keyval == gtk.keysyms.KP_Home or event.keyval == gtk.keysyms.Home) and \
              event_state == event_state & (gtk.gdk.SHIFT_MASK|gtk.gdk.CONTROL_MASK):
             # Go to the begin of the command instead of the begin of the line
             buffer = view.get_buffer()
-            inp = buffer.get_iter_at_mark(buffer.get_mark("input"))
+            iter = buffer.get_iter_at_mark(buffer.get_mark("input"))
+            ins = buffer.get_iter_at_mark(buffer.get_insert())
+
+            while iter.get_char().isspace():
+                iter.forward_char()
+
+            if iter.equal(ins):
+                iter = buffer.get_iter_at_mark(buffer.get_mark("input"))
+
             if event_state & gtk.gdk.SHIFT_MASK:
-                buffer.move_mark_by_name("insert", inp)
+                buffer.move_mark_by_name("insert", iter)
             else:
-                buffer.place_cursor(inp)
+                buffer.place_cursor(iter)
+            return True
+
+        elif (event.keyval == gtk.keysyms.KP_End or event.keyval == gtk.keysyms.End) and \
+             event_state == event_state & (gtk.gdk.SHIFT_MASK|gtk.gdk.CONTROL_MASK):
+
+            buffer = view.get_buffer()
+            iter = buffer.get_end_iter()
+            ins = buffer.get_iter_at_mark(buffer.get_insert())
+
+            iter.backward_char()
+
+            while iter.get_char().isspace():
+                iter.backward_char()
+
+            iter.forward_char()
+
+            if iter.equal(ins):
+                iter = buffer.get_end_iter()
+
+            if event_state & gtk.gdk.SHIFT_MASK:
+                buffer.move_mark_by_name("insert", iter)
+            else:
+                buffer.place_cursor(iter)
             return True
 
     def __mark_set_cb(self, buffer, iter, name):
