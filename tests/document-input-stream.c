@@ -39,6 +39,7 @@ test_consecutive_read (const gchar *inbuf,
 	gssize n, r;
 	GError *err = NULL;
 	gchar *b;
+	gboolean close;
 
 	buf = gtk_text_buffer_new (NULL);
 	gtk_text_buffer_set_text (buf, inbuf, -1);
@@ -63,6 +64,10 @@ test_consecutive_read (const gchar *inbuf,
 	b[n] = '\0';
 
 	g_assert_cmpstr (b, ==, outbuf);
+
+	close = g_input_stream_close (in, NULL, &err);
+	g_assert (close);
+	g_assert_no_error (err);
 
 	g_object_unref (buf);
 	g_object_unref (in);

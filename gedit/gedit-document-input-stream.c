@@ -40,8 +40,8 @@ G_DEFINE_TYPE (GeditDocumentInputStream, gedit_document_input_stream, G_TYPE_INP
 struct _GeditDocumentInputStreamPrivate
 {
 	GtkTextBuffer *buffer;
-	GtkTextIter    pos;
-	guint          bytes_partial;
+	GtkTextMark   *pos;
+	gint           bytes_partial;
 
 	GeditDocumentNewlineType newline_type;
 
@@ -229,7 +229,12 @@ gedit_document_input_stream_tell (GeditDocumentInputStream *stream)
 	}
 	else
 	{
-		return gtk_text_iter_get_offset (&stream->priv->pos);
+		GtkTextIter iter;
+
+		gtk_text_buffer_get_iter_at_mark (stream->priv->buffer,
+						  &iter,
+						  stream->priv->pos);
+		return gtk_text_iter_get_offset (&iter);
 	}
 }
 
@@ -261,20 +266,22 @@ read_line (GeditDocumentInputStream *stream,
 	   gchar                    *outbuf,
 	   gsize                     space_left)
 {
-	GtkTextIter *start, next, end;
+	GtkTextIter start, next, end;
 	gchar *buf;
-	gsize read, bytes, newline_size, bytes_to_write;
+	gint bytes; /* int since it's what iter_get_offset returns */
+	gsize bytes_to_write, newline_size, read;
 	const gchar *newline;
 	gboolean is_last;
 
-	start = &stream->priv->pos;
+	gtk_text_buffer_get_iter_at_mark (stream->priv->buffer,
+					  &start,
+					  stream->priv->pos);
 
-	end = next = *start;
-	newline = get_new_line (stream);
-	newline_size = get_new_line_size (stream);
-
-	if (gtk_text_iter_is_end (start))
+	if (gtk_text_iter_is_end (&start))
 		return 0;
+
+	end = next = start;
+	newline = get_new_line (stream);
 
 	/* Check needed for empty lines */
 	if (!gtk_text_iter_ends_line (&end))
@@ -282,11 +289,11 @@ read_line (GeditDocumentInputStream *stream,
 
 	gtk_text_iter_forward_line (&next);
 
-	buf = gtk_text_iter_get_slice (start, &end);
+	buf = gtk_text_iter_get_slice (&start, &end);
 
 	/* the bytes of a line includes also the newline, so with the
 	   offsets we remove the newline and we add the new newline size */
-	bytes = gtk_text_iter_get_bytes_in_line (start) - stream->priv->bytes_partial;
+	bytes = gtk_text_iter_get_bytes_in_line (&start) - stream->priv->bytes_partial;
 
 	/* bytes_in_line includes the newlines, so we remove that assuming that
 	   they are single byte characters */
@@ -300,15 +307,16 @@ read_line (GeditDocumentInputStream *stream,
 	bytes_to_write = bytes;
 
 	/* do not add the new newline_size for the last line */
+	newline_size = get_new_line_size (stream);
 	if (!is_last)
 		bytes_to_write += newline_size;
 
 	if (bytes_to_write > space_left)
 	{
 		gchar *ptr;
-		gint offset;
+		gint char_offset;
+		gint written;
 		gsize to_write;
-		gsize next_size;
 
 		/* Here the line does not fit in the buffer, we thus write
 		   the amount of bytes we can still fit, storing the position
@@ -317,33 +325,22 @@ read_line (GeditDocumentInputStream *stream,
 		   iteration */
 		to_write = MIN (space_left, bytes);
 		ptr = buf;
-		next_size = 0;
-		offset = 0;
+		written = 0;
+		char_offset = 0;
 
-		do
+		while (written < to_write)
 		{
-			read = next_size;
-
-			if (read == to_write)
-			{
-				/* Make sure offset is still one past what we
-				   wrote... */
-				++offset;
-				break;
-			}
-
 			ptr = g_utf8_next_char (ptr);
-			next_size = ptr - buf;
+			written = (ptr - buf);
+			++char_offset;
+		}
 
-			++offset;
-		} while (next_size <= to_write);
-
-		memcpy (outbuf, buf, read);
+		memcpy (outbuf, buf, written);
 
 		/* Note: offset is one past what we wrote */
-		gtk_text_iter_forward_chars (start, offset - 1);
-
-		stream->priv->bytes_partial += read;
+		gtk_text_iter_forward_chars (&start, char_offset);
+		stream->priv->bytes_partial += written;
+		read = written;
 	}
 	else
 	{
@@ -356,11 +353,14 @@ read_line (GeditDocumentInputStream *stream,
 			memcpy (outbuf + bytes, newline, newline_size);
 		}
 
-		read = bytes_to_write;
-		*start = next;
-
+		start = next;
 		stream->priv->bytes_partial = 0;
+		read = bytes_to_write;
 	}
+
+	gtk_text_buffer_move_mark (stream->priv->buffer,
+				   stream->priv->pos,
+				   &start);
 
 	g_free (buf);
 	return read;
@@ -374,6 +374,7 @@ gedit_document_input_stream_read (GInputStream  *stream,
 				  GError       **error)
 {
 	GeditDocumentInputStream *dstream;
+	GtkTextIter iter;
 	gssize space_left, read, n;
 
 	dstream = GEDIT_DOCUMENT_INPUT_STREAM (stream);
@@ -391,7 +392,12 @@ gedit_document_input_stream_read (GInputStream  *stream,
 	/* Initialize the mark to the first char in the text buffer */
 	if (!dstream->priv->is_initialized)
 	{
-		gtk_text_buffer_get_start_iter (dstream->priv->buffer, &dstream->priv->pos);
+		gtk_text_buffer_get_start_iter (dstream->priv->buffer, &iter);
+		dstream->priv->pos = gtk_text_buffer_create_mark (dstream->priv->buffer,
+								 NULL,
+								 &iter,
+								 FALSE);
+
 		dstream->priv->is_initialized = TRUE;
 	}
 
@@ -407,8 +413,12 @@ gedit_document_input_stream_read (GInputStream  *stream,
 
 	/* Make sure that non-empty files are always terminated with \n (see bug #95676).
 	 * Note that we strip the trailing \n when loading the file */
-	if (gtk_text_iter_is_end (&dstream->priv->pos) &&
-	    !gtk_text_iter_is_start (&dstream->priv->pos))
+	gtk_text_buffer_get_iter_at_mark (dstream->priv->buffer,
+					  &iter,
+					  dstream->priv->pos);
+
+	if (gtk_text_iter_is_end (&iter) &&
+	    !gtk_text_iter_is_start (&iter))
 	{
 		gssize newline_size;
 
@@ -439,6 +449,11 @@ gedit_document_input_stream_close (GInputStream  *stream,
 	GeditDocumentInputStream *dstream = GEDIT_DOCUMENT_INPUT_STREAM (stream);
 
 	dstream->priv->newline_added = FALSE;
+
+	if (dstream->priv->is_initialized)
+	{
+		gtk_text_buffer_delete_mark (dstream->priv->buffer, dstream->priv->pos);
+	}
 
 	return TRUE;
 }
