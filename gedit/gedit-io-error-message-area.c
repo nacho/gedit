@@ -106,13 +106,11 @@ info_bar_add_stock_button_with_text (GtkInfoBar  *infobar,
 				     gint         response_id)
 {
 	GtkWidget *button;
-	
-	button = gedit_gtk_button_new_with_stock_icon (text, stock_id);
-	gtk_widget_show (button);
+	GtkWidget *image;
 
-	gtk_info_bar_add_action_widget (infobar,
-					button,
-					response_id);
+	button = gtk_info_bar_add_button (infobar, text, response_id);
+	image = gtk_image_new_from_stock (stock_id, GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (button), image);
 }
 #endif
 
