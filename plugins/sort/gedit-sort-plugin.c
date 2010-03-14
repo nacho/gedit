@@ -54,6 +54,8 @@ typedef struct
 	GtkWidget *remove_dups_checkbutton;
 
 	GeditDocument *doc;
+
+	GtkTextIter start, end; /* selection */
 } SortDialog;
 
 typedef struct
@@ -124,6 +126,29 @@ sort_dialog_response_handler (GtkDialog  *widget,
 	}
 }
 
+/* NOTE: we store the current selection in the dialog since focusing
+ * the text field (like the combo box) looses the documnent selection.
+ * Storing the selection ONLY works because the dialog is modal */
+static void
+get_current_selection (GeditWindow *window, SortDialog *dialog)
+{
+	GeditDocument *doc;
+
+	gedit_debug (DEBUG_PLUGINS);
+
+	doc = gedit_window_get_active_document (window);
+
+	if (!gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
+						   &dialog->start,
+						   &dialog->end))
+	{
+		/* No selection, get the whole document. */
+		gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (doc),
+					    &dialog->start,
+					    &dialog->end);
+	}
+}
+
 static SortDialog *
 get_sort_dialog (ActionData *action_data)
 {
@@ -150,7 +175,7 @@ get_sort_dialog (ActionData *action_data)
 					  "remove_dups_checkbutton", &dialog->remove_dups_checkbutton,
 					  NULL);
 	g_free (ui_file);
-	
+
 	if (!ret)
 	{
 		const gchar *err_message;
@@ -177,6 +202,8 @@ get_sort_dialog (ActionData *action_data)
 			  "response",
 			  G_CALLBACK (sort_dialog_response_handler),
 			  dialog);
+
+	get_current_selection (action_data->window, dialog);
 
 	return dialog;
 }
@@ -343,16 +370,8 @@ sort_real (SortDialog *dialog)
 	sort_info->remove_duplicates = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->remove_dups_checkbutton));
 	sort_info->starting_column = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (dialog->col_num_spinbutton)) - 1;
 
-	if (!gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
-						   &start,
-						   &end))
-	{
-		/* No selection, get the whole document. */
-		gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (doc),
-					    &start,
-					    &end);
-	}
-
+	start = dialog->start;
+	end = dialog->end;
 	start_line = gtk_text_iter_get_line (&start);
 	end_line = gtk_text_iter_get_line (&end);
 
