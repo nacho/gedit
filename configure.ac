@@ -43,8 +43,9 @@ AC_SUBST(GEDIT_API_VERSION)
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 
 GTK_DOC_CHECK([1.0],[--flavour=no-tmpl])
-AC_CHECK_FUNCS(fsync)
+
 AC_CHECK_FUNC(sigaction)
+AC_CHECK_LIB(m, floor)
 
 dnl make sure we keep ACLOCAL_FLAGS around for maintainer builds to work
 AC_SUBST(ACLOCAL_AMFLAGS, "$ACLOCAL_FLAGS -I m4")
@@ -255,6 +256,22 @@ PKG_CHECK_MODULES(GEDIT, [
 	gconf-2.0 >= 1.1.11
 ])
 
+if test "$os_osx" = "no" &&
+   test "$os_win32" = "no"; then
+	PKG_CHECK_MODULES(X11, [
+		x11
+	])
+else
+	X11_CFLAGS=
+	X11_LIBS=
+fi
+
+GEDIT_CFLAGS="$GEDIT_CFLAGS $X11_CFLAGS"
+GEDIT_LIBS="$GEDIT_LIBS $X11_LIBS"
+
+AC_SUBST(GEDIT_CFLAGS)
+AC_SUBST(GEDIT_LIBS)
+
 dnl FIXME: Remove this when removing gedit-message-area
 
 if $PKG_CONFIG --atleast-version 2.17.1 gtk+-2.0; then
@@ -279,7 +296,7 @@ if test "$gtkatleast" = "no"; then
 fi
 
 if test "$os_osx" = "no" &&
-   test "$os_win32" = no; then
+   test "$os_win32" = "no"; then
 	PKG_CHECK_MODULES(EGG_SMCLIENT, [
 		sm >= 1.0.0
 	])
