@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-10 21:18+0100\n"
-"PO-Revision-Date: 2010-03-10 22:02+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gedit&component=general\n"
+"POT-Creation-Date: 2010-03-10 20:58+0000\n"
+"PO-Revision-Date: 2010-03-16 18:42+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -412,8 +412,8 @@ msgid ""
 "option."
 msgstr ""
 "Gedit-ek aldatutako fitxategiak denbora-tarte baten ondoren automatikoki "
-"gorde behar dituen ala ez. Denbora-tartea ezar dezakezu \"Automatikoki gordetzeko "
-"bitartea\" aukeraren bidez."
+"gorde behar dituen ala ez. Denbora-tartea ezar dezakezu \"Automatikoki "
+"gordetzeko bitartea\" aukeraren bidez."
 
 #: ../data/gedit.schemas.in.in.h:71
 msgid ""
@@ -448,7 +448,9 @@ msgstr ""
 
 #: ../data/gedit.schemas.in.in.h:77
 msgid "Whether gedit should highlight the bracket matching the selected one."
-msgstr "Gedit-ek hautatutako parentesiari dagokion bikotea nabarmendu behar duen ala ez."
+msgstr ""
+"Gedit-ek hautatutako parentesiari dagokion bikotea nabarmendu behar duen ala "
+"ez."
 
 #: ../data/gedit.schemas.in.in.h:78
 msgid "Whether gedit should highlight the current line."
@@ -1441,8 +1443,8 @@ msgid ""
 "The file you opened has some invalid characters. If you continue editing "
 "this file you could make this document useless."
 msgstr ""
-"Ireki duzun fitxategiak zenbait karaktere baliogabe ditu. Fitxategi hau editatzen "
-"jarraitzen baduzu, dokumentua erabilkaitz egin dezake."
+"Ireki duzun fitxategiak zenbait karaktere baliogabe ditu. Fitxategi hau "
+"editatzen jarraitzen baduzu, dokumentua erabilkaitz egin dezake."
 
 #: ../gedit/gedit-io-error-message-area.c:664
 msgid "You can also choose another character encoding and try again."
@@ -1473,8 +1475,8 @@ msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character encoding."
 msgstr ""
-"Zehaztutako karaktere-kodeketarekin kodetu ezin den "
-"karaktere bat (edo gehiago) du dokumentuak."
+"Zehaztutako karaktere-kodeketarekin kodetu ezin den karaktere bat (edo "
+"gehiago) du dokumentuak."
 
 #: ../gedit/gedit-io-error-message-area.c:846
 #, c-format
@@ -1610,8 +1612,8 @@ msgid ""
 "have this limitation."
 msgstr ""
 "Fitxategia gordetzeko erabili nahi duzun diskoak fitxategi-tamainaren muga "
-"du. Saiatu fitxategia tamaina txikiagoan gordetzen edo muga hori ez duen disko batean "
-"gordetzen."
+"du. Saiatu fitxategia tamaina txikiagoan gordetzen edo muga hori ez duen "
+"disko batean gordetzen."
 
 #: ../gedit/gedit-io-error-message-area.c:1204
 #, c-format
@@ -2787,8 +2789,8 @@ msgid ""
 "generally applies to opening a document from the command line or opening it "
 "with Nautilus, etc.)"
 msgstr ""
-"TRUE (egia) gisa ezartzen bada, fitxategi-arakatzaileak oraindik erabili ez duen "
-"irekitako aurreneko dokumentuaren direktorioa bistaratuko du fitxategi-"
+"TRUE (egia) gisa ezartzen bada, fitxategi-arakatzaileak oraindik erabili ez "
+"duen irekitako aurreneko dokumentuaren direktorioa bistaratuko du fitxategi-"
 "arakatzailearen osagaiak. Kasu hau dokumentua komando lerrotik edo Nautilus-"
 "etik irekitzen denean gertatu ohi da."
 
@@ -3270,8 +3272,9 @@ msgid ""
 "This is not a valid Tab trigger. Triggers can either contain letters or a "
 "single (non-alphanumeric) character like: {, [, etc."
 msgstr ""
-"Hau ez da Tabuladorearen baliozko abiarazlea. Abiarazleek letrak edo karaktere bakarra (ez "
-"alfanumerikoa, {, [ bezalako karaktereak) eduki dezakete."
+"Hau ez da Tabuladorearen baliozko abiarazlea. Abiarazleek letrak edo "
+"karaktere bakarra (ez alfanumerikoa, {, [ bezalako karaktereak) eduki "
+"dezakete."
 
 #: ../plugins/snippets/snippets/Manager.py:776
 #, python-format
@@ -3497,6 +3500,37 @@ msgstr "(ortografia zuzena)"
 #: ../plugins/spell/gedit-spell-checker-dialog.c:705
 msgid "Completed spell checking"
 msgstr "Ortografia-egiaztapena bukatuta"
+
+#. Translators: the first %s is the language name, and
+#. * the second %s is the locale name. Example:
+#. * "French (France)"
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:285
+#: ../plugins/spell/gedit-spell-checker-language.c:291
+#, c-format
+msgctxt "language"
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#. Translators: this refers to an unknown language code
+#. * (one which isn't in our built-in list).
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:300
+#, c-format
+#| msgid "Unknown"
+msgctxt "language"
+msgid "Unknown (%s)"
+msgstr "Ezezaguna (%s)"
+
+#
+#. Translators: this refers the Default language used by the
+#. * spell checker
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:406
+#| msgid "Use Default Font"
+msgctxt "language"
+msgid "Default"
+msgstr "Lehenetsia"
 
 #: ../plugins/spell/gedit-spell-language-dialog.c:141
 #: ../plugins/spell/languages-dialog.ui.h:2
