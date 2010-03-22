@@ -45,7 +45,7 @@
 
 /* we screwed up so we still look here for compatibility */
 #define USER_GEDIT_TAGLIST_PLUGIN_LOCATION_LEGACY ".gedit-2/plugins/taglist/"
-#define USER_GEDIT_TAGLIST_PLUGIN_LOCATION ".gnome2/gedit/taglist/"
+#define USER_GEDIT_TAGLIST_PLUGIN_LOCATION "gedit/taglist/"
 
 TagList *taglist = NULL;
 static gint taglist_ref_count = 0;
@@ -588,6 +588,8 @@ parse_taglist_dir (const gchar *dir)
 
 TagList* create_taglist (const gchar *data_dir)
 {
+	gchar *pdir;
+
 	gedit_debug_message (DEBUG_PLUGINS, "ref_count: %d", taglist_ref_count);
 
 	if (taglist_ref_count > 0)
@@ -599,28 +601,42 @@ TagList* create_taglist (const gchar *data_dir)
 
 #ifndef G_OS_WIN32
 	const gchar *home;
+	const gchar *envvar;
 
 	/* load user's taglists */
+
+	/* legacy dir */
 	home = g_get_home_dir ();
 	if (home != NULL)
 	{
-		gchar *pdir;
-
 		pdir = g_build_filename (home,
 					 USER_GEDIT_TAGLIST_PLUGIN_LOCATION_LEGACY,
 					 NULL);
 		parse_taglist_dir (pdir);
 		g_free (pdir);
+	}
 
-		pdir = g_build_filename (home,
+	/* Support old libgnome env var */
+	envvar = g_getenv ("GNOME22_USER_DIR");
+	if (envvar != NULL)
+	{
+		pdir = g_build_filename (envvar,
 					 USER_GEDIT_TAGLIST_PLUGIN_LOCATION,
 					 NULL);
 		parse_taglist_dir (pdir);
 		g_free (pdir);
 	}
-#else
-	gchar *pdir;
-	
+	else if (home != NULL)
+	{
+		pdir = g_build_filename (home,
+					 ".gnome2",
+					 USER_GEDIT_TAGLIST_PLUGIN_LOCATION,
+					 NULL);
+		parse_taglist_dir (pdir);
+		g_free (pdir);
+	}
+
+#else	
 	pdir = g_build_filename (g_get_user_config_dir (),
 				 "gedit",
 				 "taglist",

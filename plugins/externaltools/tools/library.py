@@ -47,9 +47,15 @@ class ToolLibrary(Singleton):
 
         # self.locations[0] is where we save the custom scripts
         if platform.platform() == 'Windows':
-            self.locations.insert(0, os.path.expanduser('~/gedit/tools'))
+            toolsdir = os.path.expanduser('~/gedit/tools')
         else:
-            self.locations.insert(0, os.path.expanduser('~/.gnome2/gedit/tools'))
+            userdir = os.getenv('GNOME22_USER_DIR')
+            if userdir:
+                toolsdir = os.path.join(userdir, 'gedit/tools')
+            else:
+                toolsdir = os.path.expanduser('~/.gnome2/gedit/tools')
+
+        self.locations.insert(0, toolsdir);
 
         if not os.path.isdir(self.locations[0]):
             os.makedirs(self.locations[0])
@@ -72,7 +78,12 @@ class ToolLibrary(Singleton):
     # storage file.
     def import_old_xml_store(self):
         import xml.etree.ElementTree as et
-        filename = os.path.expanduser('~/.gnome2/gedit/gedit-tools.xml')
+        userdir = os.getenv('GNOME22_USER_DIR')
+        if userdir:
+            filename = os.path.join(userdir, 'gedit/gedit-tools.xml')
+        else:
+            filename = os.path.expanduser('~/.gnome2/gedit/gedit-tools.xml')
+
         if not os.path.isfile(filename):
             return
 

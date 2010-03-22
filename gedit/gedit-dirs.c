@@ -36,16 +36,29 @@ gedit_dirs_get_user_config_dir (void)
 	gchar *config_dir = NULL;
 
 #ifndef G_OS_WIN32
+	const gchar *envvar;
 	const gchar *home;
-	
-	home = g_get_home_dir ();
 
-	if (home != NULL)
+	/* Support old libgnome env var */
+	envvar = g_getenv ("GNOME22_USER_DIR");
+	if (envvar != NULL)
 	{
-		config_dir = g_build_filename (home,
-					       ".gnome2",
+		config_dir = g_build_filename (envvar,
 					       "gedit",
 					       NULL);
+
+	}
+	else
+	{
+		home = g_get_home_dir ();
+
+		if (home != NULL)
+		{
+			config_dir = g_build_filename (home,
+						       ".gnome2",
+						       "gedit",
+						       NULL);
+		}
 	}
 #else
 	config_dir = g_build_filename (g_get_user_config_dir (),
@@ -90,20 +103,34 @@ gedit_dirs_get_user_accels_file (void)
 	gchar *accels = NULL;
 
 #ifndef G_OS_WIN32
+	const gchar *envvar;
 	const gchar *home;
-	
-	home = g_get_home_dir ();
 
-	if (home != NULL)
+	/* on linux accels are stored in .gnome2/accels
+	 * for historic reasons (backward compat with the
+	 * old libgnome that took care of saving them */
+
+	/* Support old libgnome env var */
+	envvar = g_getenv ("GNOME22_USER_DIR");
+	if (envvar != NULL)
 	{
-		/* on linux accels are stored in .gnome2/accels
-		 * for historic reasons (backward compat with the
-		 * old libgnome that took care of saving them */
-		accels = g_build_filename (home,
-					   ".gnome2",
+		accels = g_build_filename (envvar,
 					   "accels",
 					   "gedit",
 					   NULL);
+	}
+	else
+	{
+		home = g_get_home_dir ();
+
+		if (home != NULL)
+		{
+			accels = g_build_filename (home,
+						   ".gnome2",
+						   "accels",
+						   "gedit",
+						   NULL);
+		}
 	}
 #else
 	{

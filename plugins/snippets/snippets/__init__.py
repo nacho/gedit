@@ -37,14 +37,18 @@ class SnippetsPlugin(gedit.Plugin):
                 
                 library = Library()
                 library.set_accelerator_callback(self.accelerator_activated)
-                
-                if platform.platform() == 'Windows':
-	                userdir = os.path.expanduser('~/gedit/snippets')
-	        else:
-	        	userdir = os.path.expanduser('~/.gnome2/gedit/snippets')
 
-                library.set_dirs(userdir, self.system_dirs())
-        
+                if platform.platform() == 'Windows':
+                        snippetsdir = os.path.expanduser('~/gedit/snippets')
+                else:
+                        userdir = os.getenv('GNOME22_USER_DIR')
+                        if userdir:
+                                snippetsdir = os.path.join(userdir, 'gedit/snippets')
+                        else:
+                                snippetsdir = os.path.expanduser('~/.gnome2/gedit/snippets')
+
+                library.set_dirs(snippetsdir, self.system_dirs())
+
         def system_dirs(self):
         	if platform.platform() != 'Windows':
 		        if 'XDG_DATA_DIRS' in os.environ:
