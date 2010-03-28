@@ -198,6 +198,8 @@ class WindowHelper:
                 if isinstance(view, gedit.View) and not self.has_controller(view):
                         view._snippet_controller = Document(self, view)
 
+                self.update()
+
         def on_action_snippets_activate(self, item):
                 self.plugin.create_configure_dialog()
 
