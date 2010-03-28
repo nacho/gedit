@@ -89,5 +89,9 @@ class SnippetsPlugin(gedit.Plugin):
                 return self.dlg.dlg
         
         def accelerator_activated(self, group, obj, keyval, mod):
+                ret = False
+
                 if hasattr(obj, '_snippets_plugin_data'):
-                        obj._snippets_plugin_data.accelerator_activated(keyval, mod)
+                        ret = obj._snippets_plugin_data.accelerator_activated(keyval, mod)
+
+                return ret

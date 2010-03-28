@@ -660,8 +660,12 @@ class Library(Singleton):
                 self._accelerator_activated_cb = cb
         
         def accelerator_activated(self, group, obj, keyval, mod):
+                ret = False
+
                 if self._accelerator_activated_cb:
-                        self._accelerator_activated_cb(group, obj, keyval, mod)
+                        ret = self._accelerator_activated_cb(group, obj, keyval, mod)
+
+                return ret
 
         def add_snippet(self, library, element):
                 container = self.container(library.language)

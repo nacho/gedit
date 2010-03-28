@@ -185,7 +185,7 @@ class Document:
 
         def accelerator_activate(self, keyval, mod):
                 if not self.view or not self.view.get_editable():
-                        return
+                        return False
 
                 accelerator = gtk.accelerator_name(keyval, mod)
                 snippets = Library().from_accelerator(accelerator, \
