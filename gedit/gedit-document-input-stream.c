@@ -330,9 +330,19 @@ read_line (GeditDocumentInputStream *stream,
 
 		while (written < to_write)
 		{
+			gint w;
+
 			ptr = g_utf8_next_char (ptr);
-			written = (ptr - buf);
-			++char_offset;
+			w = (ptr - buf);
+			if (w > to_write)
+			{
+				break;
+			}
+			else
+			{
+				written = w;
+				++char_offset;
+			}
 		}
 
 		memcpy (outbuf, buf, written);

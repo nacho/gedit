@@ -354,6 +354,8 @@ write_file_chunk (AsyncData *async)
 {
 	GeditGioDocumentSaver *gvsaver;
 
+	gedit_debug (DEBUG_SAVER);
+
 	gvsaver = async->saver;
 
 	g_output_stream_write_async (G_OUTPUT_STREAM (gvsaver->priv->stream),
@@ -371,6 +373,8 @@ read_file_chunk (AsyncData *async)
 	GeditGioDocumentSaver *gvsaver;
 	GeditDocumentInputStream *dstream;
 	GError *error = NULL;
+
+	gedit_debug (DEBUG_SAVER);
 
 	gvsaver = async->saver;
 	async->written = 0;
