@@ -39,9 +39,9 @@ G_BEGIN_DECLS
 void		 gedit_metadata_manager_shutdown 	(void);
 
 
-gchar		*gedit_metadata_manager_get 		(const gchar *uri,
+gchar		*gedit_metadata_manager_get 		(GFile       *location,
 					     		 const gchar *key);
-void		 gedit_metadata_manager_set		(const gchar *uri,
+void		 gedit_metadata_manager_set		(GFile       *location,
 							 const gchar *key,
 							 const gchar *value);
 

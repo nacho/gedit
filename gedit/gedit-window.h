@@ -105,8 +105,8 @@ GType 		 gedit_window_get_type 			(void) G_GNUC_CONST;
 GeditTab	*gedit_window_create_tab		(GeditWindow         *window,
 							 gboolean             jump_to);
 							 
-GeditTab	*gedit_window_create_tab_from_uri	(GeditWindow         *window,
-							 const gchar         *uri,
+GeditTab	*gedit_window_create_tab_from_location	(GeditWindow         *window,
+							 GFile               *location,
 							 const GeditEncoding *encoding,
 							 gint                 line_pos,
 							 gboolean             create,
@@ -185,10 +185,10 @@ gboolean	 _gedit_window_is_fullscreen		(GeditWindow         *window);
 
 /* these are in gedit-window because of screen safety */
 void		 _gedit_recent_add			(GeditWindow	     *window,
-							 const gchar         *uri,
+							 GFile               *location,
 							 const gchar         *mime);
 void		 _gedit_recent_remove			(GeditWindow         *window,
-							 const gchar         *uri);
+							 GFile               *location);
 
 G_END_DECLS
 

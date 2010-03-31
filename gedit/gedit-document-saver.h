@@ -60,7 +60,7 @@ struct _GeditDocumentSaver
 	GeditDocument		 *document;
 	gboolean		  used;
 
-	gchar			 *uri;
+	GFile			 *location;
 	const GeditEncoding      *encoding;
 	GeditDocumentNewlineType  newline_type;
 
@@ -97,7 +97,7 @@ GType 		 	 gedit_document_saver_get_type		(void) G_GNUC_CONST;
 
 /* If enconding == NULL, the encoding will be autodetected */
 GeditDocumentSaver 	*gedit_document_saver_new 		(GeditDocument           *doc,
-								 const gchar             *uri,
+								 GFile                   *location,
 								 const GeditEncoding     *encoding,
 								 GeditDocumentNewlineType newline_type,
 								 GeditDocumentSaveFlags   flags);
@@ -114,7 +114,7 @@ void			 gedit_document_saver_cancel		(GeditDocumentSaver  *saver);
 
 GeditDocument		*gedit_document_saver_get_document	(GeditDocumentSaver  *saver);
 
-const gchar		*gedit_document_saver_get_uri		(GeditDocumentSaver  *saver);
+GFile			*gedit_document_saver_get_location	(GeditDocumentSaver  *saver);
 
 /* If backup_uri is NULL no backup will be made */
 const gchar		*gedit_document_saver_get_backup_uri	(GeditDocumentSaver  *saver);

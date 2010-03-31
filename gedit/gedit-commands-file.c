@@ -120,7 +120,7 @@ is_duplicated_file (GSList *files, GFile *file)
 /* File loading */
 static gint
 load_file_list (GeditWindow         *window,
-		GSList              *files,
+		const GSList        *files,
 		const GeditEncoding *encoding,
 		gint                 line_pos,
 		gboolean             create)
@@ -130,7 +130,7 @@ load_file_list (GeditWindow         *window,
 	gboolean       jump_to = TRUE; /* Whether to jump to the new tab */
 	GList         *win_docs;
 	GSList        *files_to_load = NULL;
-	GSList        *l;
+	const GSList  *l;
 
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -192,16 +192,11 @@ load_file_list (GeditWindow         *window,
 		if (gedit_document_is_untouched (doc) &&
 		    (gedit_tab_get_state (tab) == GEDIT_TAB_STATE_NORMAL))
 		{
-			gchar *uri;
-
-			// FIXME: pass the GFile to tab when api is there
-			uri = g_file_get_uri (l->data);
 			_gedit_tab_load (tab,
-					 uri,
+					 l->data,
 					 encoding,
 					 line_pos,
 					 create);
-			g_free (uri);
 
 			l = g_slist_next (l);
 			jump_to = FALSE;
@@ -212,19 +207,14 @@ load_file_list (GeditWindow         *window,
 
 	while (l != NULL)
 	{
-		gchar *uri;
-
 		g_return_val_if_fail (l->data != NULL, 0);
 
-		// FIXME: pass the GFile to tab when api is there
-		uri = g_file_get_uri (l->data);
-		tab = gedit_window_create_tab_from_uri (window,
-							uri,
-							encoding,
-							line_pos,
-							create,
-							jump_to);
-		g_free (uri);
+		tab = gedit_window_create_tab_from_location (window,
+							     l->data,
+							     encoding,
+							     line_pos,
+							     create,
+							     jump_to);
 
 		if (tab != NULL)
 		{
@@ -268,100 +258,52 @@ load_file_list (GeditWindow         *window,
 	return loaded_files;
 }
 
-
-// FIXME: we should expose API with GFile and just make the uri
-// variants backward compat wrappers
-
-static gint
-load_uri_list (GeditWindow         *window,
-	       const GSList        *uris,
-	       const GeditEncoding *encoding,
-	       gint                 line_pos,
-	       gboolean             create)
-{
-	GSList *files = NULL;
-	const GSList *u;
-	gint ret;
-
-	for (u = uris; u != NULL; u = u->next)
-	{
-		gchar *uri = u->data;
-
-		if (gedit_utils_is_valid_uri (uri))
-			files = g_slist_prepend (files, g_file_new_for_uri (uri));
-		else
-			g_warning ("invalid uri: %s", uri);
-	}
-	files = g_slist_reverse (files);
-
-	ret = load_file_list (window, files, encoding, line_pos, create);
-
-	g_slist_foreach (files, (GFunc) g_object_unref, NULL);
-	g_slist_free (files);
-
-	return ret;
-}
-
 /**
  * gedit_commands_load_uri:
  *
- * Do nothing if URI does not exist
+ * Do nothing if location does not exist
  */
 void
-gedit_commands_load_uri (GeditWindow         *window,
-			 const gchar         *uri,
-			 const GeditEncoding *encoding,
-			 gint                 line_pos)
+gedit_commands_load_location (GeditWindow         *window,
+			      GFile               *location,
+			      const GeditEncoding *encoding,
+			      gint                 line_pos)
 {
-	GSList *uris = NULL;
+	GSList *locations = NULL;
+	gchar *uri;
 
 	g_return_if_fail (GEDIT_IS_WINDOW (window));
-	g_return_if_fail (uri != NULL);
-	g_return_if_fail (gedit_utils_is_valid_uri (uri));
+	g_return_if_fail (G_IS_FILE (location));
+	g_return_if_fail (gedit_utils_is_valid_location (location));
 
+	uri = g_file_get_uri (location);
 	gedit_debug_message (DEBUG_COMMANDS, "Loading URI '%s'", uri);
+	g_free (uri);
 
-	uris = g_slist_prepend (uris, (gchar *)uri);
+	locations = g_slist_prepend (locations, location);
 
-	load_uri_list (window, uris, encoding, line_pos, FALSE);
+	load_file_list (window, locations, encoding, line_pos, FALSE);
 
-	g_slist_free (uris);
+	g_slist_free (locations);
 }
 
 /**
  * gedit_commands_load_uris:
  *
- * Ignore non-existing URIs 
+ * Ignore non-existing locations 
  */
 gint
-gedit_commands_load_uris (GeditWindow         *window,
-			  const GSList        *uris,
-			  const GeditEncoding *encoding,
-			  gint                 line_pos)
+gedit_commands_load_locations (GeditWindow         *window,
+			       const GSList        *locations,
+			       const GeditEncoding *encoding,
+			       gint                 line_pos)
 {
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), 0);
-	g_return_val_if_fail ((uris != NULL) && (uris->data != NULL), 0);
+	g_return_val_if_fail ((locations != NULL) && (locations->data != NULL), 0);
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	return load_uri_list (window, uris, encoding, line_pos, FALSE);
-}
-
-/*
- * This should become public once we convert all api to GFile:
- */
-static gint
-gedit_commands_load_files (GeditWindow         *window,
-			   GSList              *files,
-			   const GeditEncoding *encoding,
-			   gint                 line_pos)
-{
-	g_return_val_if_fail (GEDIT_IS_WINDOW (window), 0);
-	g_return_val_if_fail ((files != NULL) && (files->data != NULL), 0);
-
-	gedit_debug (DEBUG_COMMANDS);
-
-	return load_file_list (window, files, encoding, line_pos, FALSE);
+	return load_file_list (window, locations, encoding, line_pos, FALSE);
 }
 
 /*
@@ -418,10 +360,10 @@ open_dialog_response_cb (GeditFileChooserDialog *dialog,
 	/* Remember the folder we navigated to */
 	 _gedit_window_set_default_location (window, files->data);
 
-	gedit_commands_load_files (window,
-				   files,
-				   encoding,
-				   0);
+	gedit_commands_load_locations (window,
+				       files,
+				       encoding,
+				       0);
 
 	g_slist_foreach (files, (GFunc) g_object_unref, NULL);
 	g_slist_free (files);
@@ -626,7 +568,6 @@ save_dialog_response_cb (GeditFileChooserDialog *dialog,
 	{
 		GeditDocument *doc;
 		gchar *parse_name;
-		gchar *uri;
 
 		doc = gedit_tab_get_document (tab);
 		g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
@@ -644,10 +585,7 @@ save_dialog_response_cb (GeditFileChooserDialog *dialog,
 		 * even if the saving fails... */
 		 _gedit_window_set_default_location (window, file);
 
-		// FIXME: pass the GFile to tab when api is there
-		uri = g_file_get_uri (file);
-		_gedit_tab_save_as (tab, uri, encoding, newline_type);
-		g_free (uri);
+		_gedit_tab_save_as (tab, file, encoding, newline_type);
 	}
 
 	g_object_unref (file);

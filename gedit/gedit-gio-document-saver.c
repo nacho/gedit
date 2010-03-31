@@ -76,7 +76,6 @@ struct _GeditGioDocumentSaverPrivate
 	goffset			  size;
 	goffset			  bytes_written;
 
-	GFile			 *gfile;
 	GCancellable		 *cancellable;
 	GOutputStream		 *stream;
 	GInputStream		 *input;
@@ -96,12 +95,6 @@ gedit_gio_document_saver_dispose (GObject *object)
 		g_cancellable_cancel (priv->cancellable);
 		g_object_unref (priv->cancellable);
 		priv->cancellable = NULL;
-	}
-
-	if (priv->gfile != NULL)
-	{
-		g_object_unref (priv->gfile);
-		priv->gfile = NULL;
 	}
 
 	if (priv->error != NULL)
@@ -350,7 +343,7 @@ close_async_ready_get_info_cb (GOutputStream *stream,
 	 * g_content_type_guess (since we have the file name and the data)
 	 */
 	gedit_debug_message (DEBUG_SAVER, "Query info on file");
-	g_file_query_info_async (async->saver->priv->gfile,
+	g_file_query_info_async (GEDIT_DOCUMENT_SAVER (async->saver)->location,
 			         REMOTE_QUERY_ATTRIBUTES,
 			         G_FILE_QUERY_INFO_NONE,
 			         G_PRIORITY_HIGH,
@@ -576,7 +569,7 @@ begin_write (AsyncData *async)
 	gedit_debug_message (DEBUG_SAVER, "Calling replace_async");
 	gedit_debug_message (DEBUG_SAVER, backup ? "Keep backup" : "Discard backup");
 
-	g_file_replace_async (gvsaver->priv->gfile,
+	g_file_replace_async (saver->location,
 			      NULL,
 			      backup,
 			      G_FILE_CREATE_NONE,
@@ -619,16 +612,18 @@ mount_ready_callback (GFile        *file,
 static void
 recover_not_mounted (AsyncData *async)
 {
+	GeditDocumentSaver *saver;
 	GeditDocument *doc;
 	GMountOperation *mount_operation;
 	
 	gedit_debug (DEBUG_LOADER);
 
-	doc = gedit_document_saver_get_document (GEDIT_DOCUMENT_SAVER (async->saver));
+	saver = GEDIT_DOCUMENT_SAVER (async->saver);
+	doc = gedit_document_saver_get_document (saver);
 	mount_operation = _gedit_document_create_mount_operation (doc);
 
 	async->tried_mount = TRUE;
-	g_file_mount_enclosing_volume (async->saver->priv->gfile,
+	g_file_mount_enclosing_volume (saver->location,
 				       G_MOUNT_MOUNT_NONE,
 				       mount_operation,
 				       async->cancellable,
@@ -716,7 +711,7 @@ check_modified_async (AsyncData *async)
 {
 	gedit_debug_message (DEBUG_SAVER, "Check externally modified");
 
-	g_file_query_info_async (async->saver->priv->gfile, 
+	g_file_query_info_async (GEDIT_DOCUMENT_SAVER (async->saver)->location, 
 				 G_FILE_ATTRIBUTE_TIME_MODIFIED,
 				 G_FILE_QUERY_INFO_NONE,
 				 G_PRIORITY_HIGH,
@@ -750,7 +745,6 @@ gedit_gio_document_saver_save (GeditDocumentSaver *saver,
 	GeditGioDocumentSaver *gvsaver = GEDIT_GIO_DOCUMENT_SAVER (saver);
 
 	gvsaver->priv->old_mtime = *old_mtime;
-	gvsaver->priv->gfile = g_file_new_for_uri (saver->uri);
 
 	/* saving start */
 	gedit_document_saver_saving (saver, FALSE, NULL);

@@ -126,7 +126,7 @@ struct _GeditDocumentClass
 
 	/* Document load */
 	void (* load)			(GeditDocument       *document,
-					 const gchar         *uri,
+					 GFile               *location,
 					 const GeditEncoding *encoding,
 					 gint                 line_pos,
 					 gboolean             create);
@@ -140,7 +140,7 @@ struct _GeditDocumentClass
 
 	/* Document save */
 	void (* save)			(GeditDocument          *document,
-					 const gchar            *uri,
+					 GFile                  *location,
 					 const GeditEncoding    *encoding,
 					 GeditDocumentSaveFlags  flags);
 
@@ -177,10 +177,8 @@ GType		 gedit_document_get_type      	(void) G_GNUC_CONST;
 GeditDocument   *gedit_document_new 		(void);
 
 GFile		*gedit_document_get_location	(GeditDocument       *doc);
-
-gchar		*gedit_document_get_uri 	(GeditDocument       *doc);
-void		 gedit_document_set_uri		(GeditDocument       *doc,
-						 const gchar 	     *uri);
+void		 gedit_document_set_location	(GeditDocument       *doc,
+						 GFile               *location);
 
 gchar		*gedit_document_get_uri_for_display
 						(GeditDocument       *doc);
@@ -203,15 +201,10 @@ gchar		*gedit_document_get_mime_type 	(GeditDocument       *doc);
 gboolean	 gedit_document_get_readonly 	(GeditDocument       *doc);
 
 void		 gedit_document_load 		(GeditDocument       *doc,
-						 const gchar         *uri,
+						 GFile               *location,
 						 const GeditEncoding *encoding,
 						 gint                 line_pos,
-						 gboolean             create); 
-
-gboolean	 gedit_document_insert_file	(GeditDocument       *doc,
-						 GtkTextIter         *iter, 
-						 const gchar         *uri, 
-						 const GeditEncoding *encoding);
+						 gboolean             create);
 
 gboolean	 gedit_document_load_cancel	(GeditDocument       *doc);
 
@@ -219,7 +212,7 @@ void		 gedit_document_save 		(GeditDocument       *doc,
 						 GeditDocumentSaveFlags flags);
 
 void		 gedit_document_save_as 	(GeditDocument       *doc,	
-						 const gchar         *uri, 
+						 GFile               *location, 
 						 const GeditEncoding *encoding,
 						 GeditDocumentSaveFlags flags);
 

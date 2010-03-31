@@ -79,12 +79,12 @@ PROFILE (static GTimer *timer = NULL)
 #define GEDIT_DOCUMENT_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_DOCUMENT, GeditDocumentPrivate))
 
 static void	gedit_document_load_real	(GeditDocument          *doc,
-						 const gchar            *uri,
+						 GFile                  *location,
 						 const GeditEncoding    *encoding,
 						 gint                    line_pos,
 						 gboolean                create);
 static void	gedit_document_save_real	(GeditDocument          *doc,
-						 const gchar            *uri,
+						 GFile                  *location,
 						 const GeditEncoding    *encoding,
 						 GeditDocumentSaveFlags  flags);
 static void	to_search_region_range 		(GeditDocument *doc,
@@ -101,7 +101,7 @@ static void	delete_range_cb 		(GeditDocument *doc,
 			     
 struct _GeditDocumentPrivate
 {
-	gchar	    *uri;
+	GFile       *location;
 	gint 	     untitled_number;
 	gchar       *short_name;
 
@@ -148,7 +148,7 @@ struct _GeditDocumentPrivate
 enum {
 	PROP_0,
 
-	PROP_URI,
+	PROP_LOCATION,
 	PROP_SHORTNAME,
 	PROP_CONTENT_TYPE,
 	PROP_MIME_TYPE,
@@ -232,7 +232,7 @@ gedit_document_dispose (GObject *object)
 	 * because the language is gone by the time finalize runs.
 	 * beside if some plugin prevents proper finalization by
 	 * holding a ref to the doc, we still save the metadata */
-	if ((!doc->priv->dispose_has_run) && (doc->priv->uri != NULL))
+	if ((!doc->priv->dispose_has_run) && (doc->priv->location != NULL))
 	{
 		GtkTextIter iter;
 		gchar *position;
@@ -280,6 +280,12 @@ gedit_document_dispose (GObject *object)
 		doc->priv->metadata_info = NULL;
 	}
 
+	if (doc->priv->location != NULL)
+	{
+		g_object_unref (doc->priv->location);
+		doc->priv->location = NULL;
+	}
+
 	doc->priv->dispose_has_run = TRUE;
 
 	G_OBJECT_CLASS (gedit_document_parent_class)->dispose (object);
@@ -294,11 +300,9 @@ gedit_document_finalize (GObject *object)
 
 	if (doc->priv->untitled_number > 0)
 	{
-		g_return_if_fail (doc->priv->uri == NULL);
 		release_untitled_number (doc->priv->untitled_number);
 	}
 
-	g_free (doc->priv->uri);
 	g_free (doc->priv->content_type);
 	g_free (doc->priv->search_text);
 
@@ -321,8 +325,8 @@ gedit_document_get_property (GObject    *object,
 
 	switch (prop_id)
 	{
-		case PROP_URI:
-			g_value_set_string (value, doc->priv->uri);
+		case PROP_LOCATION:
+			g_value_set_object (value, doc->priv->location);
 			break;
 		case PROP_SHORTNAME:
 			g_value_take_string (value, gedit_document_get_short_name_for_display (doc));
@@ -440,11 +444,11 @@ gedit_document_class_init (GeditDocumentClass *klass)
 	klass->load = gedit_document_load_real;
 	klass->save = gedit_document_save_real;
 
-	g_object_class_install_property (object_class, PROP_URI,
-					 g_param_spec_string ("uri",
-							      "URI",
-							      "The document's URI",
-							      NULL,
+	g_object_class_install_property (object_class, PROP_LOCATION,
+					 g_param_spec_object ("location",
+							      "LOCATION",
+							      "The document's location",
+							      G_TYPE_FILE,
 							      G_PARAM_READABLE |
 							      G_PARAM_STATIC_STRINGS));
 
@@ -539,7 +543,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 	/**
 	 * GeditDocument::load:
 	 * @document: the #GeditDocument.
-	 * @uri: the uri where to load the document from.
+	 * @location: the location where to load the document from.
 	 * @encoding: the #GeditEncoding to encode the document.
 	 * @line_pos: the line to show.
 	 * @create: whether the document should be created if it doesn't exist.
@@ -554,10 +558,10 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, load),
 			      NULL, NULL,
-			      gedit_marshal_VOID__STRING_BOXED_INT_BOOLEAN,
+			      gedit_marshal_VOID__OBJECT_BOXED_INT_BOOLEAN,
 			      G_TYPE_NONE,
 			      4,
-			      G_TYPE_STRING,
+			      G_TYPE_FILE,
 			      /* we rely on the fact that the GeditEncoding pointer stays
 			       * the same forever */
 			      GEDIT_TYPE_ENCODING | G_SIGNAL_TYPE_STATIC_SCOPE,
@@ -591,7 +595,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 	/**
 	 * GeditDocument::save:
 	 * @document: the #GeditDocument.
-	 * @uri: the uri where the document is about to be saved.
+	 * @location: the location where the document is about to be saved.
 	 * @encoding: the #GeditEncoding used to save the document.
 	 * @flags: the #GeditDocumentSaveFlags for the save operation.
 	 *
@@ -605,10 +609,10 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, save),
 			      NULL, NULL,
-			      gedit_marshal_VOID__STRING_BOXED_FLAGS,
+			      gedit_marshal_VOID__OBJECT_BOXED_FLAGS,
 			      G_TYPE_NONE,
 			      3,
-			      G_TYPE_STRING,
+			      G_TYPE_FILE,
 			      /* we rely on the fact that the GeditEncoding pointer stays
 			       * the same forever */
 			      GEDIT_TYPE_ENCODING | G_SIGNAL_TYPE_STATIC_SCOPE,
@@ -675,7 +679,7 @@ set_language (GeditDocument     *doc,
 		gtk_source_buffer_set_highlight_syntax (GTK_SOURCE_BUFFER (doc), 
 				 FALSE);
 
-	if (set_by_user && (doc->priv->uri != NULL))
+	if (set_by_user)
 	{
 		gedit_document_set_metadata (doc, GEDIT_METADATA_ATTRIBUTE_LANGUAGE,
 			(lang == NULL) ? "_NORMAL_" : gtk_source_language_get_id (lang),
@@ -741,18 +745,18 @@ get_default_style_scheme (void)
 }
 
 static void
-on_uri_changed (GeditDocument *doc,
-		GParamSpec    *pspec,
-		gpointer       useless)
+on_location_changed (GeditDocument *doc,
+		     GParamSpec    *pspec,
+		     gpointer       useless)
 {
 #ifdef ENABLE_GVFS_METADATA
 	GFile *location;
 
 	location = gedit_document_get_location (doc);
 
-	/* load metadata for this uri: we load sync since metadata is
+	/* load metadata for this location: we load sync since metadata is
 	 * always local so it should be fast and we need the information
-	 * right after the uri was set.
+	 * right after the location was set.
 	 */
 	if (location != NULL)
 	{
@@ -808,15 +812,15 @@ guess_language (GeditDocument *doc,
 	}
 	else
 	{
-		GFile *file;
+		GFile *location;
 		gchar *basename = NULL;
 
-		file = gedit_document_get_location (doc);
+		location = gedit_document_get_location (doc);
 		gedit_debug_message (DEBUG_DOCUMENT, "Sniffing Language");
 
-		if (file)
+		if (location)
 		{
-			basename = g_file_get_basename (file);
+			basename = g_file_get_basename (location);
 		}
 		else if (doc->priv->short_name != NULL)
 		{
@@ -830,9 +834,9 @@ guess_language (GeditDocument *doc,
 
 		g_free (basename);
 
-		if (file != NULL)
+		if (location != NULL)
 		{
-			g_object_unref (file);
+			g_object_unref (location);
 		}
 	}
 
@@ -872,7 +876,7 @@ gedit_document_init (GeditDocument *doc)
 
 	doc->priv = GEDIT_DOCUMENT_GET_PRIVATE (doc);
 
-	doc->priv->uri = NULL;
+	doc->priv->location = NULL;
 	doc->priv->untitled_number = get_untitled_number ();
 
 	doc->priv->metadata_info = NULL;
@@ -927,8 +931,8 @@ gedit_document_init (GeditDocument *doc)
 			  NULL);
 
 	g_signal_connect (doc,
-			  "notify::uri",
-			  G_CALLBACK (on_uri_changed),
+			  "notify::location",
+			  G_CALLBACK (on_location_changed),
 			  NULL);
 }
 
@@ -968,20 +972,20 @@ set_content_type (GeditDocument *doc,
 
 	if (content_type == NULL)
 	{
-		GFile *file;
+		GFile *location;
 		gchar *guessed_type = NULL;
 
 		/* If content type is null, we guess from the filename */
-		file = gedit_document_get_location (doc);
-		if (file != NULL)
+		location = gedit_document_get_location (doc);
+		if (location != NULL)
 		{
 			gchar *basename;
 
-			basename = g_file_get_basename (file);
+			basename = g_file_get_basename (location);
 			guessed_type = g_content_type_guess (basename, NULL, 0, NULL);
 
 			g_free (basename);
-			g_object_unref (file);
+			g_object_unref (location);
 		}
 
 		set_content_type_no_guess (doc, guessed_type);
@@ -1004,20 +1008,21 @@ gedit_document_set_content_type (GeditDocument *doc,
 }
 
 static void
-set_uri (GeditDocument *doc,
-	 const gchar   *uri)
+set_location (GeditDocument *doc,
+              GFile         *location)
 {
 	gedit_debug (DEBUG_DOCUMENT);
 
-	g_return_if_fail ((uri == NULL) || gedit_utils_is_valid_uri (uri));
+	g_return_if_fail ((location == NULL) || gedit_utils_is_valid_location (location));
 
-	if (uri != NULL)
+	if (location != NULL)
 	{
-		if (doc->priv->uri == uri)
+		if (doc->priv->location == location)
 			return;
 
-		g_free (doc->priv->uri);
-		doc->priv->uri = g_strdup (uri);
+		if (doc->priv->location != NULL)
+			g_object_unref (doc->priv->location);
+		doc->priv->location = g_file_dup (location);
 
 		if (doc->priv->untitled_number > 0)
 		{
@@ -1026,7 +1031,7 @@ set_uri (GeditDocument *doc,
 		}
 	}
 
-	g_object_notify (G_OBJECT (doc), "uri");
+	g_object_notify (G_OBJECT (doc), "location");
 
 	if (doc->priv->short_name == NULL)
 	{
@@ -1039,25 +1044,17 @@ gedit_document_get_location (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 
-	return doc->priv->uri == NULL ? NULL : g_file_new_for_uri (doc->priv->uri);
-}
-
-gchar *
-gedit_document_get_uri (GeditDocument *doc)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
-
-	return g_strdup (doc->priv->uri);
+	return doc->priv->location == NULL ? NULL : g_file_dup (doc->priv->location);
 }
 
 void
-gedit_document_set_uri (GeditDocument *doc,
-			const gchar   *uri)
+gedit_document_set_location (GeditDocument *doc,
+			     GFile         *location)
 {
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (uri != NULL);
+	g_return_if_fail (G_IS_FILE (location));
 
-	set_uri (doc, uri);
+	set_location (doc, location);
 	set_content_type (doc, NULL);
 }
 
@@ -1067,11 +1064,11 @@ gedit_document_get_uri_for_display (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), g_strdup (""));
 
-	if (doc->priv->uri == NULL)
+	if (doc->priv->location == NULL)
 		return g_strdup_printf (_("Unsaved Document %d"),
 					doc->priv->untitled_number);
 	else
-		return gedit_utils_uri_for_display (doc->priv->uri);
+		return gedit_utils_uri_for_display (doc->priv->location);
 }
 
 /* Never returns NULL */
@@ -1082,11 +1079,11 @@ gedit_document_get_short_name_for_display (GeditDocument *doc)
 
 	if (doc->priv->short_name != NULL)
 		return g_strdup (doc->priv->short_name);
-	else if (doc->priv->uri == NULL)
+	else if (doc->priv->location == NULL)
 		return g_strdup_printf (_("Unsaved Document %d"),
 					doc->priv->untitled_number);
 	else
-		return gedit_utils_basename_for_display (doc->priv->uri);
+		return gedit_utils_basename_for_display (doc->priv->location);
 }
 
 void
@@ -1175,23 +1172,20 @@ gedit_document_get_readonly (GeditDocument *doc)
 gboolean
 _gedit_document_check_externally_modified (GeditDocument *doc)
 {
-	GFile *gfile;
 	GFileInfo *info;
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 
-	if (doc->priv->uri == NULL)
+	if (doc->priv->location == NULL)
 	{
 		return FALSE;
 	}
 
-	gfile = g_file_new_for_uri (doc->priv->uri);
-	info = g_file_query_info (gfile,
+	info = g_file_query_info (doc->priv->location,
 				  G_FILE_ATTRIBUTE_TIME_MODIFIED "," \
 				  G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE,
 				  G_FILE_QUERY_INFO_NONE,
 				  NULL, NULL);
-	g_object_unref (gfile);
 
 	if (info != NULL)
 	{
@@ -1325,7 +1319,7 @@ document_loader_loaded (GeditDocumentLoader *loader,
 	/* special case creating a named new doc */
 	else if (doc->priv->create &&
 	         (error->domain == G_IO_ERROR && error->code == G_IO_ERROR_NOT_FOUND) &&
-	         (gedit_utils_uri_has_file_scheme (doc->priv->uri)))
+	         (gedit_utils_location_has_file_scheme (doc->priv->location)))
 	{
 		reset_temp_loading_data (doc);
 
@@ -1379,17 +1373,21 @@ document_loader_loading (GeditDocumentLoader *loader,
 
 static void
 gedit_document_load_real (GeditDocument       *doc,
-			  const gchar         *uri,
+			  GFile               *location,
 			  const GeditEncoding *encoding,
 			  gint                 line_pos,
 			  gboolean             create)
 {
+	gchar *uri;
+
 	g_return_if_fail (doc->priv->loader == NULL);
 
+	uri = g_file_get_uri (location);
 	gedit_debug_message (DEBUG_DOCUMENT, "load_real: uri = %s", uri);
+	g_free (uri);
 
 	/* create a loader. It will be destroyed when loading is completed */
-	doc->priv->loader = gedit_document_loader_new (doc, uri, encoding);
+	doc->priv->loader = gedit_document_loader_new (doc, location, encoding);
 
 	g_signal_connect (doc->priv->loader,
 			  "loading",
@@ -1400,7 +1398,7 @@ gedit_document_load_real (GeditDocument       *doc,
 	doc->priv->requested_encoding = encoding;
 	doc->priv->requested_line_pos = line_pos;
 
-	set_uri (doc, uri);
+	set_location (doc, location);
 	set_content_type (doc, NULL);
 
 	gedit_document_loader_load (doc->priv->loader);
@@ -1409,7 +1407,7 @@ gedit_document_load_real (GeditDocument       *doc,
 /**
  * gedit_document_load:
  * @doc: the #GeditDocument.
- * @uri: the uri where to load the document from.
+ * @location: the location where to load the document from.
  * @encoding: the #GeditEncoding to encode the document.
  * @line_pos: the line to show.
  * @create: whether the document should be created if it doesn't exist.
@@ -1418,16 +1416,17 @@ gedit_document_load_real (GeditDocument       *doc,
  */
 void
 gedit_document_load (GeditDocument       *doc,
-		     const gchar         *uri,
+		     GFile               *location,
 		     const GeditEncoding *encoding,
 		     gint                 line_pos,
 		     gboolean             create)
 {
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (uri != NULL);
-	g_return_if_fail (gedit_utils_is_valid_uri (uri));
+	g_return_if_fail (location != NULL);
+	g_return_if_fail (gedit_utils_is_valid_location (location));
 
-	g_signal_emit (doc, document_signals[LOAD], 0, uri, encoding, line_pos, create);
+	g_signal_emit (doc, document_signals[LOAD], 0, location, encoding,
+	               line_pos, create);
 }
 
 /**
@@ -1460,13 +1459,14 @@ document_saver_saving (GeditDocumentSaver *saver,
 		/* save was successful */
 		if (error == NULL)
 		{
-			const gchar *uri;
+			GFile *location;
 			const gchar *content_type = NULL;
 			GTimeVal mtime = {0, 0};
 			GFileInfo *info;
 
-			uri = gedit_document_saver_get_uri (saver);
-			set_uri (doc, uri);
+			location = gedit_document_saver_get_location (saver);
+			set_location (doc, location);
+			g_object_unref (location);
 
 			info = gedit_document_saver_get_info (saver);
 
@@ -1524,14 +1524,14 @@ document_saver_saving (GeditDocumentSaver *saver,
 
 static void
 gedit_document_save_real (GeditDocument          *doc,
-			  const gchar            *uri,
+			  GFile                  *location,
 			  const GeditEncoding    *encoding,
 			  GeditDocumentSaveFlags  flags)
 {
 	g_return_if_fail (doc->priv->saver == NULL);
 
 	/* create a saver, it will be destroyed once saving is complete */
-	doc->priv->saver = gedit_document_saver_new (doc, uri, encoding,
+	doc->priv->saver = gedit_document_saver_new (doc, location, encoding,
 						     doc->priv->newline_type,
 						     flags);
 
@@ -1559,12 +1559,12 @@ gedit_document_save (GeditDocument          *doc,
 		     GeditDocumentSaveFlags  flags)
 {
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (doc->priv->uri != NULL);
+	g_return_if_fail (G_IS_FILE (doc->priv->location));
 
 	g_signal_emit (doc,
 		       document_signals[SAVE],
 		       0,
-		       doc->priv->uri,
+		       doc->priv->location,
 		       doc->priv->encoding,
 		       flags);
 }
@@ -1572,7 +1572,7 @@ gedit_document_save (GeditDocument          *doc,
 /**
  * gedit_document_save_as:
  * @doc: the #GeditDocument.
- * @uri: the uri where to save the document.
+ * @location: the location where to save the document.
  * @encoding: the #GeditEncoding to encode the document.
  * @flags: optionnal #GeditDocumentSaveFlags.
  *
@@ -1581,38 +1581,22 @@ gedit_document_save (GeditDocument          *doc,
  */
 void
 gedit_document_save_as (GeditDocument          *doc,
-			const gchar            *uri,
+			GFile                  *location,
 			const GeditEncoding    *encoding,
 			GeditDocumentSaveFlags  flags)
 {
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (uri != NULL);
+	g_return_if_fail (G_IS_FILE (location));
 	g_return_if_fail (encoding != NULL);
 
-	/* priv->mtime refers to the the old uri (if any). Thus, it should be
+	/* priv->mtime refers to the the old location (if any). Thus, it should be
 	 * ignored when saving as. */
 	g_signal_emit (doc,
 		       document_signals[SAVE],
 		       0,
-		       uri,
+		       location,
 		       encoding,
 		       flags | GEDIT_DOCUMENT_SAVE_IGNORE_MTIME);
-}
-
-gboolean
-gedit_document_insert_file (GeditDocument       *doc,
-			    GtkTextIter         *iter,
-			    const gchar         *uri,
-			    const GeditEncoding *encoding)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-	g_return_val_if_fail (iter != NULL, FALSE);
-	g_return_val_if_fail (gtk_text_iter_get_buffer (iter) == 
-				GTK_TEXT_BUFFER (doc), FALSE);
-
-	/* TODO */
-
-	return FALSE;
 }
 
 gboolean	 
@@ -1620,7 +1604,7 @@ gedit_document_is_untouched (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), TRUE);
 
-	return (doc->priv->uri == NULL) && 
+	return (doc->priv->location == NULL) && 
 		(!gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc)));
 }
 
@@ -1629,7 +1613,7 @@ gedit_document_is_untitled (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), TRUE);
 
-	return (doc->priv->uri == NULL);
+	return (doc->priv->location == NULL);
 }
 
 gboolean
@@ -1637,12 +1621,12 @@ gedit_document_is_local (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 
-	if (doc->priv->uri == NULL)
+	if (doc->priv->location == NULL)
 	{
 		return FALSE;
 	}
 
-	return gedit_utils_uri_has_file_scheme (doc->priv->uri);
+	return gedit_utils_location_has_file_scheme (doc->priv->location);
 }
 
 gboolean
@@ -1650,7 +1634,8 @@ gedit_document_get_deleted (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 
-	return doc->priv->uri && !gedit_utils_uri_exists (doc->priv->uri);
+	/* This is done sync, maybe we should do it async? */
+	return doc->priv->location && !gedit_utils_location_exists (doc->priv->location);
 }
 
 /*
@@ -2577,13 +2562,14 @@ gedit_document_get_metadata (GeditDocument *doc,
 			     const gchar   *key)
 {
 	gchar *value = NULL;
+	gchar *uri;
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 	g_return_val_if_fail (key != NULL, NULL);
 
 	if (!gedit_document_is_untitled (doc))
 	{
-		value = gedit_metadata_manager_get (doc->priv->uri, key);
+		value = gedit_metadata_manager_get (doc->priv->location, key);
 	}
 
 	return value;
@@ -2612,10 +2598,11 @@ gedit_document_set_metadata (GeditDocument *doc,
 	for (key = first_key; key; key = va_arg (var_args, const gchar *))
 	{
 		value = va_arg (var_args, const gchar *);
-		
-		gedit_metadata_manager_set (doc->priv->uri,
-					    key,
-					    value);
+
+		if (doc->priv->location != NULL)
+		{
+			gedit_metadata_manager_set (location, key, value);
+		}
 	}
 
 	va_end (var_args);

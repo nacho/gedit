@@ -79,9 +79,6 @@ static void open_async_read (AsyncData *async);
 
 struct _GeditGioDocumentLoaderPrivate
 {
-	/* Info on the current file */
-	GFile            *gfile;
-
 	goffset           bytes_read;
 
 	/* Handle for remote files */
@@ -127,12 +124,6 @@ gedit_gio_document_loader_dispose (GObject *object)
 	{
 		g_object_unref (priv->converter);
 		priv->converter = NULL;
-	}
-
-	if (priv->gfile != NULL)
-	{
-		g_object_unref (priv->gfile);
-		priv->gfile = NULL;
 	}
 
 	if (priv->error != NULL)
@@ -195,11 +186,15 @@ get_metadata_encoding (GeditDocumentLoader *loader)
 
 #ifndef ENABLE_GVFS_METADATA
 	gchar *charset;
-	const gchar *uri;
+	GFile *location;
+	gchar *uri;
 
-	uri = gedit_document_loader_get_uri (loader);
+	location = gedit_document_loader_get_location (loader);
+	uri = g_file_get_uri (location);
+	g_object_unref (location);
 
 	charset = gedit_metadata_manager_get (uri, "encoding");
+	g_free (uri);
 
 	if (charset == NULL)
 		return NULL;
@@ -507,7 +502,7 @@ query_info_cb (GFile        *source,
 	       GAsyncResult *res,
 	       AsyncData    *async)
 {
-	GeditGioDocumentLoader *gvloader;
+	GeditDocumentLoader *loader;
 	GFileInfo *info;
 	GError *error = NULL;
 
@@ -520,10 +515,10 @@ query_info_cb (GFile        *source,
 		return;
 	}	
 
-	gvloader = async->loader;
+	loader = GEDIT_DOCUMENT_LOADER (async->loader);
 
 	/* finish the info query */
-	info = g_file_query_info_finish (gvloader->priv->gfile,
+	info = g_file_query_info_finish (loader->location,
 	                                 res,
 	                                 &error);
 
@@ -534,7 +529,7 @@ query_info_cb (GFile        *source,
 		return;
 	}
 
-	GEDIT_DOCUMENT_LOADER (gvloader)->info = info;
+	loader->info = info;
 	
 	finish_query_info (async);
 }
@@ -574,14 +569,16 @@ recover_not_mounted (AsyncData *async)
 {
 	GeditDocument *doc;
 	GMountOperation *mount_operation;
+	GeditDocumentLoader *loader;
 
 	gedit_debug (DEBUG_LOADER);
 
-	doc = gedit_document_loader_get_document (GEDIT_DOCUMENT_LOADER (async->loader));
+	loader = GEDIT_DOCUMENT_LOADER (async->loader);
+	doc = gedit_document_loader_get_document (loader);
 	mount_operation = _gedit_document_create_mount_operation (doc);
 
 	async->tried_mount = TRUE;
-	g_file_mount_enclosing_volume (async->loader->priv->gfile,
+	g_file_mount_enclosing_volume (loader->location,
 				       G_MOUNT_MOUNT_NONE,
 				       mount_operation,
 				       async->cancellable,
@@ -610,7 +607,7 @@ async_read_ready_callback (GObject      *source,
 
 	gvloader = async->loader;
 	
-	gvloader->priv->stream = G_INPUT_STREAM (g_file_read_finish (gvloader->priv->gfile,
+	gvloader->priv->stream = G_INPUT_STREAM (g_file_read_finish (GEDIT_DOCUMENT_LOADER (gvloader)->location,
 								     res, &error));
 
 	if (!gvloader->priv->stream)
@@ -638,7 +635,7 @@ async_read_ready_callback (GObject      *source,
 	 * Using the file instead of the stream is slightly racy, but for
 	 * loading this is not too bad...
 	 */
-	g_file_query_info_async (gvloader->priv->gfile,
+	g_file_query_info_async (GEDIT_DOCUMENT_LOADER (gvloader)->location,
 				 REMOTE_QUERY_ATTRIBUTES,
                                  G_FILE_QUERY_INFO_NONE,
 				 G_PRIORITY_HIGH,
@@ -650,7 +647,7 @@ async_read_ready_callback (GObject      *source,
 static void
 open_async_read (AsyncData *async)
 {
-	g_file_read_async (async->loader->priv->gfile, 
+	g_file_read_async (GEDIT_DOCUMENT_LOADER (async->loader)->location, 
 	                   G_PRIORITY_HIGH,
 	                   async->cancellable,
 	                   (GAsyncReadyCallback) async_read_ready_callback,
@@ -667,8 +664,6 @@ gedit_gio_document_loader_load (GeditDocumentLoader *loader)
 
 	/* make sure no load operation is currently running */
 	g_return_if_fail (gvloader->priv->cancellable == NULL);
-
-	gvloader->priv->gfile = g_file_new_for_uri (loader->uri);
 
 	/* loading start */
 	gedit_document_loader_loading (GEDIT_DOCUMENT_LOADER (gvloader),

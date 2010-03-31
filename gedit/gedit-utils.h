@@ -48,8 +48,7 @@ G_BEGIN_DECLS
 
 enum { GEDIT_ALL_WORKSPACES = 0xffffffff };
 
-gboolean	 gedit_utils_uri_has_writable_scheme	(const gchar *uri);
-gboolean	 gedit_utils_uri_has_file_scheme	(const gchar *uri);
+gboolean	 gedit_utils_location_has_file_scheme	(GFile       *location);
 
 void		 gedit_utils_menu_position_under_widget (GtkMenu  *menu,
 							 gint     *x,
@@ -96,7 +95,7 @@ void		 gedit_utils_set_atk_relation		(GtkWidget       *obj1,
 							 GtkWidget       *obj2,
 							 AtkRelationType  rel_type);
 
-gboolean	 gedit_utils_uri_exists			(const gchar* text_uri);
+gboolean	 gedit_utils_location_exists		(GFile       *location);
 
 gchar		*gedit_utils_escape_search_text		(const gchar *text);
 
@@ -128,7 +127,7 @@ void		 gedit_utils_activate_url		(GtkAboutDialog *about,
 							 const gchar    *url,
 							 gpointer        data);
 
-gboolean	 gedit_utils_is_valid_uri		(const gchar *uri);
+gboolean	 gedit_utils_is_valid_location		(GFile *location);
 
 gboolean	 gedit_utils_get_ui_objects		(const gchar  *filename,
                                                          gchar       **root_objects,
@@ -142,8 +141,8 @@ gboolean         gedit_utils_file_has_parent            (GFile *gfile);
 gchar		*gedit_utils_make_canonical_uri_from_shell_arg
 							(const gchar *str);
 		
-gchar		*gedit_utils_uri_for_display 	        (const gchar *uri);
-gchar           *gedit_utils_basename_for_display	(const gchar *uri);
+gchar		*gedit_utils_uri_for_display 	        (GFile       *location);
+gchar           *gedit_utils_basename_for_display	(GFile       *location);
 gboolean	 gedit_utils_decode_uri 		(const gchar *uri,
 							 gchar **scheme,
 							 gchar **user,

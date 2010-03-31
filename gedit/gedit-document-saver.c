@@ -61,7 +61,7 @@ static guint signals[LAST_SIGNAL] = { 0 };
 enum {
 	PROP_0,
 	PROP_DOCUMENT,
-	PROP_URI,
+	PROP_LOCATION,
 	PROP_ENCODING,
 	PROP_NEWLINE_TYPE,
 	PROP_FLAGS
@@ -81,9 +81,9 @@ gedit_document_saver_set_property (GObject      *object,
 			g_return_if_fail (saver->document == NULL);
 			saver->document = g_value_get_object (value);
 			break;
-		case PROP_URI:
-			g_return_if_fail (saver->uri == NULL);
-			saver->uri = g_value_dup_string (value);
+		case PROP_LOCATION:
+			g_return_if_fail (saver->location == NULL);
+			saver->location = g_value_dup_object (value);
 			break;
 		case PROP_ENCODING:
 			g_return_if_fail (saver->encoding == NULL);
@@ -114,8 +114,8 @@ gedit_document_saver_get_property (GObject    *object,
 		case PROP_DOCUMENT:
 			g_value_set_object (value, saver->document);
 			break;
-		case PROP_URI:
-			g_value_set_string (value, saver->uri);
+		case PROP_LOCATION:
+			g_value_set_object (value, saver->location);
 			break;
 		case PROP_ENCODING:
 			g_value_set_boxed (value, saver->encoding);
@@ -133,16 +133,6 @@ gedit_document_saver_get_property (GObject    *object,
 }
 
 static void
-gedit_document_saver_finalize (GObject *object)
-{
-	GeditDocumentSaver *saver = GEDIT_DOCUMENT_SAVER (object);
-
-	g_free (saver->uri);
-
-	G_OBJECT_CLASS (gedit_document_saver_parent_class)->finalize (object);
-}
-
-static void
 gedit_document_saver_dispose (GObject *object)
 {
 	GeditDocumentSaver *saver = GEDIT_DOCUMENT_SAVER (object);
@@ -151,6 +141,12 @@ gedit_document_saver_dispose (GObject *object)
 	{
 		g_object_unref (saver->info);
 		saver->info = NULL;
+	}
+	
+	if (saver->location != NULL)
+	{
+		g_object_unref (saver->location);
+		saver->location = NULL;
 	}
 
 	G_OBJECT_CLASS (gedit_document_saver_parent_class)->dispose (object);
@@ -161,7 +157,6 @@ gedit_document_saver_class_init (GeditDocumentSaverClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	object_class->finalize = gedit_document_saver_finalize;
 	object_class->dispose = gedit_document_saver_dispose;
 	object_class->set_property = gedit_document_saver_set_property;
 	object_class->get_property = gedit_document_saver_get_property;
@@ -177,11 +172,11 @@ gedit_document_saver_class_init (GeditDocumentSaverClass *klass)
 							      G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class,
-					 PROP_URI,
-					 g_param_spec_string ("uri",
-							      "URI",
-							      "The URI this GeditDocumentSaver saves the document to",
-							      "",
+					 PROP_LOCATION,
+					 g_param_spec_object ("location",
+							      "LOCATION",
+							      "The LOCATION this GeditDocumentSaver saves the document to",
+							      G_TYPE_FILE,
 							      G_PARAM_READWRITE |
 							      G_PARAM_CONSTRUCT_ONLY |
 							      G_PARAM_STATIC_STRINGS));
@@ -189,7 +184,7 @@ gedit_document_saver_class_init (GeditDocumentSaverClass *klass)
 	g_object_class_install_property (object_class,
 					 PROP_ENCODING,
 					 g_param_spec_boxed ("encoding",
-							     "URI",
+							     "ENCODING",
 							     "The encoding of the saved file",
 							     GEDIT_TYPE_ENCODING,
 							     G_PARAM_READWRITE |
@@ -239,7 +234,7 @@ gedit_document_saver_init (GeditDocumentSaver *saver)
 
 GeditDocumentSaver *
 gedit_document_saver_new (GeditDocument           *doc,
-			  const gchar             *uri,
+			  GFile                   *location,
 			  const GeditEncoding     *encoding,
 			  GeditDocumentNewlineType newline_type,
 			  GeditDocumentSaveFlags   flags)
@@ -256,7 +251,7 @@ gedit_document_saver_new (GeditDocument           *doc,
 
 	saver = GEDIT_DOCUMENT_SAVER (g_object_new (saver_type,
 						    "document", doc,
-						    "uri", uri,
+						    "location", location,
 						    "encoding", encoding,
 						    "newline_type", newline_type,
 						    "flags", flags,
@@ -298,15 +293,14 @@ gedit_document_saver_save (GeditDocumentSaver     *saver,
 	gedit_debug (DEBUG_SAVER);
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver));
-	g_return_if_fail (saver->uri != NULL && strlen (saver->uri) > 0);
+	g_return_if_fail (saver->location != NULL);
 
 	g_return_if_fail (saver->used == FALSE);
 	saver->used = TRUE;
 
-	// CHECK:
-	// - sanity check a max len for the uri?
-	// report async (in an idle handler) or sync (bool ret)
-	// async is extra work here, sync is special casing in the caller
+	/* CHECK:
+	 report async (in an idle handler) or sync (bool ret)
+	 async is extra work here, sync is special casing in the caller */
 
 	/* never keep backup of autosaves */
 	if ((saver->flags & GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP) != 0)
@@ -325,12 +319,12 @@ gedit_document_saver_get_document (GeditDocumentSaver *saver)
 	return saver->document;
 }
 
-const gchar *
-gedit_document_saver_get_uri (GeditDocumentSaver *saver)
+GFile *
+gedit_document_saver_get_location (GeditDocumentSaver *saver)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), NULL);
 
-	return saver->uri;
+	return g_file_dup (saver->location);
 }
 
 /* Returns 0 if file size is unknown */

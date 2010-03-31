@@ -75,7 +75,7 @@ save_window_session (GKeyFile    *state_file,
 	GList *docs, *l;
 	GPtrArray *doc_array;
 	GeditDocument *active_document;
-	gchar *uri;
+	gchar *uri = NULL;
 
 	gedit_debug (DEBUG_SESSION);
 
@@ -96,9 +96,18 @@ save_window_session (GKeyFile    *state_file,
 	active_document = gedit_window_get_active_document (window);
 	if (active_document)
 	{
-	        uri = gedit_document_get_uri (active_document);
-	        g_key_file_set_string (state_file, group_name,
+		GFile *location;
+
+		location = gedit_document_get_location (active_document);
+		if (location)
+		{
+			uri = g_file_get_uri (location);
+			g_object_unref (location);
+		}
+
+		g_key_file_set_string (state_file, group_name,
 				       "active-document", uri);
+		g_free (uri);
 	}
 
 	docs = gedit_window_get_documents (window);
@@ -106,24 +115,28 @@ save_window_session (GKeyFile    *state_file,
 	doc_array = g_ptr_array_new ();
 	for (l = docs; l != NULL; l = g_list_next (l))
 	{
-		uri = gedit_document_get_uri (GEDIT_DOCUMENT (l->data));
+		GFile *location;
+
+		location = gedit_document_get_location (GEDIT_DOCUMENT (l->data));
+		if (location)
+		{
+			uri = g_file_get_uri (location);
+			g_object_unref (location);
+		}
 
 		if (uri != NULL)
-		        g_ptr_array_add (doc_array, uri);
-			  
+			g_ptr_array_add (doc_array, uri);
 	}
-	g_list_free (docs);	
+	g_list_free (docs);
 
 	if (doc_array->len)
 	{
-	        guint i;
- 
 		g_key_file_set_string_list (state_file, group_name,
 					    "documents",
 					    (const char **)doc_array->pdata,
 					    doc_array->len);
-		for (i = 0; i < doc_array->len; i++)
-		        g_free (doc_array->pdata[i]);
+
+		g_ptr_array_foreach (doc_array, (GFunc) g_free, NULL);
 	}
 	g_ptr_array_free (doc_array, TRUE);
 }
@@ -537,29 +550,35 @@ parse_window (GKeyFile *state_file, const char *group_name)
 						"documents", NULL, NULL);
 	if (documents)
 	{
-	        int i;
+		gint i;
 		gboolean jump_to = FALSE;
-  
+
 		for (i = 0; documents[i]; i++)
 		{
-		        if (active_document != NULL)
-			        jump_to = strcmp (active_document,
+			GFile *location;
+
+			if (active_document != NULL)
+				jump_to = strcmp (active_document,
 						  documents[i]) == 0;
-  
+
 			gedit_debug_message (DEBUG_SESSION,
 					     "URI: %s (%s)",
 					     documents[i],
 					     jump_to ? "active" : "not active");
-			gedit_window_create_tab_from_uri (window,
-							  documents[i],
-							  NULL,
-							  0,
-							  FALSE,
-							  jump_to);
+
+			location = g_file_new_for_uri (documents[i]);
+			gedit_window_create_tab_from_location (window,
+							       location,
+							       NULL,
+							       0,
+							       FALSE,
+							       jump_to);
+			if (location)
+				g_object_unref (location);
 		}
 		g_strfreev (documents);
 	}
- 
+
 	g_free (active_document);
 	
 	gtk_widget_show (GTK_WIDGET (window));

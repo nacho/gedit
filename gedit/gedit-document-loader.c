@@ -62,7 +62,7 @@ enum
 {
 	PROP_0,
 	PROP_DOCUMENT,
-	PROP_URI,
+	PROP_LOCATION,
 	PROP_ENCODING,
 	PROP_NEWLINE_TYPE
 };
@@ -81,9 +81,9 @@ gedit_document_loader_set_property (GObject      *object,
 			g_return_if_fail (loader->document == NULL);
 			loader->document = g_value_get_object (value);
 			break;
-		case PROP_URI:
-			g_return_if_fail (loader->uri == NULL);
-			loader->uri = g_value_dup_string (value);
+		case PROP_LOCATION:
+			g_return_if_fail (loader->location == NULL);
+			loader->location = g_value_dup_object (value);
 			break;
 		case PROP_ENCODING:
 			g_return_if_fail (loader->encoding == NULL);
@@ -111,8 +111,8 @@ gedit_document_loader_get_property (GObject    *object,
 		case PROP_DOCUMENT:
 			g_value_set_object (value, loader->document);
 			break;
-		case PROP_URI:
-			g_value_set_string (value, loader->uri);
+		case PROP_LOCATION:
+			g_value_set_object (value, loader->location);
 			break;
 		case PROP_ENCODING:
 			g_value_set_boxed (value, gedit_document_loader_get_encoding (loader));
@@ -129,13 +129,6 @@ gedit_document_loader_get_property (GObject    *object,
 static void
 gedit_document_loader_finalize (GObject *object)
 {
-	GeditDocumentLoader *loader = GEDIT_DOCUMENT_LOADER (object);
-
-	g_free (loader->uri);
-
-	if (loader->info)
-		g_object_unref (loader->info);
-
 	G_OBJECT_CLASS (gedit_document_loader_parent_class)->finalize (object);
 }
 
@@ -148,6 +141,12 @@ gedit_document_loader_dispose (GObject *object)
 	{
 		g_object_unref (loader->info);
 		loader->info = NULL;
+	}
+	
+	if (loader->location != NULL)
+	{
+		g_object_unref (loader->location);
+		loader->location = NULL;
 	}
 
 	G_OBJECT_CLASS (gedit_document_loader_parent_class)->dispose (object);
@@ -174,11 +173,11 @@ gedit_document_loader_class_init (GeditDocumentLoaderClass *klass)
 							      G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class,
-					 PROP_URI,
-					 g_param_spec_string ("uri",
-							      "URI",
-							      "The URI this GeditDocumentLoader loads the document from",
-							      "",
+					 PROP_LOCATION,
+					 g_param_spec_object ("location",
+							      "LOCATION",
+							      "The LOCATION this GeditDocumentLoader loads the document from",
+							      G_TYPE_FILE,
 							      G_PARAM_READWRITE |
 							      G_PARAM_CONSTRUCT_ONLY));
 
@@ -249,11 +248,11 @@ gedit_document_loader_loading (GeditDocumentLoader *loader,
 }
 
 /* This is a factory method that returns an appopriate loader
- * for the given uri.
+ * for the given location.
  */
 GeditDocumentLoader *
 gedit_document_loader_new (GeditDocument       *doc,
-			   const gchar         *uri,
+			   GFile               *location,
 			   const GeditEncoding *encoding)
 {
 	GeditDocumentLoader *loader;
@@ -268,7 +267,7 @@ gedit_document_loader_new (GeditDocument       *doc,
 
 	loader = GEDIT_DOCUMENT_LOADER (g_object_new (loader_type,
 						      "document", doc,
-						      "uri", uri,
+						      "location", location,
 						      "encoding", encoding,
 						      NULL));
 
@@ -309,12 +308,12 @@ gedit_document_loader_get_document (GeditDocumentLoader *loader)
 }
 
 /* Returns STDIN_URI if loading from stdin */
-const gchar *
-gedit_document_loader_get_uri (GeditDocumentLoader *loader)
+GFile *
+gedit_document_loader_get_location (GeditDocumentLoader *loader)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), NULL);
 
-	return loader->uri;
+	return g_file_dup (loader->location);
 }
 
 goffset

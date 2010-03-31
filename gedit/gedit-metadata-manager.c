@@ -301,14 +301,17 @@ load_values (void)
 }
 
 gchar *
-gedit_metadata_manager_get (const gchar *uri,
+gedit_metadata_manager_get (GFile       *location,
 			    const gchar *key)
 {
 	Item *item;
 	gchar *value;
+	gchar *uri;
 
-	g_return_val_if_fail (uri != NULL, NULL);
+	g_return_val_if_fail (G_IS_FILE (location), NULL);
 	g_return_val_if_fail (key != NULL, NULL);
+
+	uri = g_file_get_uri (location);
 
 	gedit_debug_message (DEBUG_METADATA, "URI: %s --- key: %s", uri, key );
 
@@ -327,6 +330,8 @@ gedit_metadata_manager_get (const gchar *uri,
 	item = (Item *)g_hash_table_lookup (gedit_metadata_manager->items,
 					    uri);
 
+	g_free (uri);
+
 	if (item == NULL)
 		return NULL;
 
@@ -344,14 +349,17 @@ gedit_metadata_manager_get (const gchar *uri,
 }
 
 void
-gedit_metadata_manager_set (const gchar *uri,
+gedit_metadata_manager_set (GFile       *location,
 			    const gchar *key,
 			    const gchar *value)
 {
 	Item *item;
+	gchar *uri;
 
-	g_return_if_fail (uri != NULL);
+	g_return_if_fail (G_IS_FILE (location));
 	g_return_if_fail (key != NULL);
+
+	uri = g_file_get_uri (location);
 
 	gedit_debug_message (DEBUG_METADATA, "URI: %s --- key: %s --- value: %s", uri, key, value);
 	
@@ -393,6 +401,8 @@ gedit_metadata_manager_set (const gchar *uri,
 				     key);
 
 	item->atime = time (NULL);
+
+	g_free (uri);
 
 	gedit_metadata_manager_arm_timeout ();
 }

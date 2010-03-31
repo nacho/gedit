@@ -129,8 +129,8 @@ void		 gedit_tab_set_info_bar		(GeditTab            *tab,
 GtkWidget 	*_gedit_tab_new 		(void);
 
 /* Whether create is TRUE, creates a new empty document if location does 
-   not refer to an existing file */
-GtkWidget	*_gedit_tab_new_from_uri	(const gchar         *uri,
+   not refer to an existing location */
+GtkWidget	*_gedit_tab_new_from_location	(GFile               *location,
 						 const GeditEncoding *encoding,
 						 gint                 line_pos,
 						 gboolean             create);
@@ -138,14 +138,14 @@ gchar 		*_gedit_tab_get_name		(GeditTab            *tab);
 gchar 		*_gedit_tab_get_tooltips	(GeditTab            *tab);
 GdkPixbuf 	*_gedit_tab_get_icon		(GeditTab            *tab);
 void		 _gedit_tab_load		(GeditTab            *tab,
-						 const gchar         *uri,
+						 GFile               *location,
 						 const GeditEncoding *encoding,
 						 gint                 line_pos,
 						 gboolean             create);
 void		 _gedit_tab_revert		(GeditTab            *tab);
 void		 _gedit_tab_save		(GeditTab            *tab);
 void		 _gedit_tab_save_as		(GeditTab            *tab,
-						 const gchar         *uri,
+						 GFile               *location,
 						 const GeditEncoding *encoding,
 						 GeditDocumentNewlineType newline_type);
 

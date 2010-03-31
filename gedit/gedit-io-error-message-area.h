@@ -35,32 +35,32 @@
 
 G_BEGIN_DECLS
 
-GtkWidget	*gedit_io_loading_error_message_area_new		 (const gchar         *uri,
+GtkWidget	*gedit_io_loading_error_message_area_new		 (GFile               *location,
 									  const GeditEncoding *encoding,
 									  const GError        *error);
 
-GtkWidget	*gedit_unrecoverable_reverting_error_message_area_new	 (const gchar         *uri,
+GtkWidget	*gedit_unrecoverable_reverting_error_message_area_new	 (GFile               *location,
 									  const GError        *error);
 
-GtkWidget	*gedit_conversion_error_while_saving_message_area_new	 (const gchar         *uri,
+GtkWidget	*gedit_conversion_error_while_saving_message_area_new	 (GFile               *location,
 									  const GeditEncoding *encoding,
 									  const GError        *error);
 
 const GeditEncoding 
 		*gedit_conversion_error_message_area_get_encoding	 (GtkWidget           *message_area);
 
-GtkWidget	*gedit_file_already_open_warning_message_area_new	 (const gchar         *uri);
+GtkWidget	*gedit_file_already_open_warning_message_area_new	 (GFile               *location);
 
-GtkWidget	*gedit_externally_modified_saving_error_message_area_new (const gchar         *uri,
+GtkWidget	*gedit_externally_modified_saving_error_message_area_new (GFile               *location,
 									  const GError        *error);
 
-GtkWidget	*gedit_no_backup_saving_error_message_area_new		 (const gchar         *uri,
+GtkWidget	*gedit_no_backup_saving_error_message_area_new		 (GFile               *location,
 									  const GError        *error);
 
-GtkWidget	*gedit_unrecoverable_saving_error_message_area_new	 (const gchar         *uri,
+GtkWidget	*gedit_unrecoverable_saving_error_message_area_new	 (GFile               *location,
 									  const GError        *error);
 
-GtkWidget	*gedit_externally_modified_message_area_new		 (const gchar         *uri,
+GtkWidget	*gedit_externally_modified_message_area_new		 (GFile               *location,
 									  gboolean             document_modified);
 
 G_END_DECLS

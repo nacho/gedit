@@ -40,14 +40,14 @@
 G_BEGIN_DECLS
 
 /* Do nothing if URI does not exist */
-void		 gedit_commands_load_uri		(GeditWindow         *window,
-							 const gchar         *uri,
+void		 gedit_commands_load_location		(GeditWindow         *window,
+							 GFile               *location,
 							 const GeditEncoding *encoding,
 							 gint                 line_pos);
 
 /* Ignore non-existing URIs */
-gint		 gedit_commands_load_uris		(GeditWindow         *window,
-							 const GSList        *uris,
+gint		 gedit_commands_load_locations		(GeditWindow         *window,
+							 const GSList        *locations,
 							 const GeditEncoding *encoding,
 							 gint                 line_pos);
 

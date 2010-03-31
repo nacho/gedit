@@ -63,7 +63,7 @@ struct _GeditDocumentLoader
 
 	/* Info on the current file */
 	GFileInfo		 *info;
-	gchar			 *uri;
+	GFile			 *location;
 	const GeditEncoding	 *encoding;
 	const GeditEncoding	 *auto_detected_encoding;
 	GeditDocumentNewlineType  auto_detected_newline_type;
@@ -96,7 +96,7 @@ GType 		 	 gedit_document_loader_get_type		(void) G_GNUC_CONST;
 
 /* If enconding == NULL, the encoding will be autodetected */
 GeditDocumentLoader 	*gedit_document_loader_new 		(GeditDocument       *doc,
-								 const gchar         *uri,
+								 GFile               *location,
 								 const GeditEncoding *encoding);
 
 void			 gedit_document_loader_loading		(GeditDocumentLoader *loader,
@@ -113,7 +113,7 @@ GeditDocument		*gedit_document_loader_get_document	(GeditDocumentLoader *loader)
 
 /* Returns STDIN_URI if loading from stdin */
 #define STDIN_URI "stdin:" 
-const gchar		*gedit_document_loader_get_uri		(GeditDocumentLoader *loader);
+GFile			*gedit_document_loader_get_location	(GeditDocumentLoader *loader);
 
 const GeditEncoding	*gedit_document_loader_get_encoding	(GeditDocumentLoader *loader);
 
