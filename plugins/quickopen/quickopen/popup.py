@@ -416,17 +416,13 @@ class Popup(gtk.Dialog):
 
         def _direct_file(self):
                 uri = self._entry.get_text()
-                gfile = None
+                gfile = gio.File(uri)
 
-                if gedit.utils.uri_is_valid(uri):
-                        gfile = gio.File(uri)
-                elif os.path.isabs(uri):
-                        f = gio.File(uri)
-
-                        if f.query_exists():
-                                gfile = f
-
-                return gfile
+                if gedit.utils.location_is_valid(gfile) or \
+                   (os.path.isabs(uri) and gfile.query_exists()):
+                        return gfile
+                else:
+                        return None
 
         def _activate(self):
                 model, rows = self._treeview.get_selection().get_selected_rows()
