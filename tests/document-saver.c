@@ -214,12 +214,11 @@ test_saver (const gchar              *filename_or_uri,
 	test_completed = FALSE;
 
 	file = g_file_new_for_commandline_arg (filename_or_uri);
-	uri = g_file_get_uri (file);
 	existed = g_file_query_exists (file, NULL);
 
 	ensure_mounted (file);
 
-	gedit_document_save_as (document, uri, gedit_encoding_get_utf8 (), save_flags);
+	gedit_document_save_as (document, file, gedit_encoding_get_utf8 (), save_flags);
 
 	while (!test_completed)
 	{
@@ -231,7 +230,6 @@ test_saver (const gchar              *filename_or_uri,
 		g_file_delete (file, NULL, NULL);
 	}
 
-	g_free (uri);
 	g_object_unref (file);
 
 	saver_test_data_free (data);
