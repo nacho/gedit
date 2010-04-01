@@ -5,23 +5,23 @@
 
 ;; From ../../gedit/gedit-commands.h
 
-(define-function load_uri
-  (c-name "gedit_commands_load_uri")
+(define-function load_location
+  (c-name "gedit_commands_load_location")
   (return-type "none")
   (parameters
     '("GeditWindow*" "window")
-    '("const-gchar*" "uri")
+    '("GFile*" "location")
     '("const-GeditEncoding*" "encoding")
     '("gint" "line_pos")
   )
 )
 
-(define-function load_uris
-  (c-name "gedit_commands_load_uris")
+(define-function load_locations
+  (c-name "gedit_commands_load_locations")
   (return-type "gint")
   (parameters
     '("GeditWindow*" "window")
-    '("const-GSList*" "uris")
+    '("const-GSList*" "locations")
     '("const-GeditEncoding*" "encoding")
     '("gint" "line_pos")
   )

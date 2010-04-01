@@ -16,52 +16,53 @@ modulename gedit.commands
 %%
 import gedit.Window as PyGeditWindow_Type
 import gedit.Document as PyGeditDocument_Type
+import gio.File as PyGFile_Type
 %%
 ignore-glob
   _*
 %%
-override gedit_commands_load_uri kwargs 
+override gedit_commands_load_location kwargs 
 static PyObject *
-_wrap_gedit_commands_load_uri (PyObject *self, PyObject *args, PyObject *kwargs)
+_wrap_gedit_commands_load_location (PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	static char *kwlist[] = { "window", "uri", "encoding", "line_pos", NULL };
+	static char *kwlist[] = { "window", "location", "encoding", "line_pos", NULL };
 	PyGObject *window;
-	char *uri;
+	PyGObject *location;
 	int line_pos = 0;
 	PyObject *py_encoding = NULL;
 	GeditEncoding *encoding = NULL;
 
-	if (!PyArg_ParseTupleAndKeywords (args, kwargs, "O!s|Oi:load_uri", 
-	                                  kwlist, &PyGeditWindow_Type, 
-	                                  &window, &uri, &py_encoding, 
-	                                  &line_pos))
+	if (!PyArg_ParseTupleAndKeywords (args, kwargs, "O!O!|Oi:load_location", 
+	                                  kwlist, &PyGeditWindow_Type,
+	                                  &window, &PyGFile_Type, &location,
+	                                  &py_encoding, &line_pos))
 		return NULL;
-    
+
 	if (py_encoding != NULL && py_encoding != Py_None)
 	{
 		if (pyg_boxed_check (py_encoding, GEDIT_TYPE_ENCODING))
 			encoding = pyg_boxed_get (py_encoding, GeditEncoding);
 		else
 		{
-			PyErr_SetString (PyExc_TypeError, 
+			PyErr_SetString (PyExc_TypeError,
 			                 "encoding should be a GeditEncoding");
 			return NULL;
 		}
 	}
 
-	gedit_commands_load_uri (GEDIT_WINDOW (window->obj), uri, encoding, 
-	                        line_pos);
+	gedit_commands_load_location (GEDIT_WINDOW (window->obj), G_FILE (location->obj),
+	                              encoding, line_pos);
 	Py_INCREF (Py_None);
 	return Py_None;
 }
 %%
-override gedit_commands_load_uris kwargs 
+override gedit_commands_load_locations kwargs 
 static PyObject *
-_wrap_gedit_commands_load_uris (PyObject *self, PyObject *args, PyObject *kwargs)
+_wrap_gedit_commands_load_locations (PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	static char *kwlist[] = { "window", "uris", "encoding", "line_pos", NULL };
+	static char *kwlist[] = { "window", "locations", "encoding", "line_pos", NULL };
 	PyGObject *window;
-	GSList *uris = NULL;
+	GSList *locations = NULL;
 	int line_pos = 0;
 	PyObject *py_encoding = NULL;
 	PyObject *list;
@@ -70,12 +71,12 @@ _wrap_gedit_commands_load_uris (PyObject *self, PyObject *args, PyObject *kwargs
 	int len;
 	int i;
 
-	if (!PyArg_ParseTupleAndKeywords (args, kwargs, "O!O|Oi:load_uri", 
-	                                  kwlist, &PyGeditWindow_Type, 
-	                                  &window, &list, &py_encoding, 
+	if (!PyArg_ParseTupleAndKeywords (args, kwargs, "O!O|Oi:load_locations",
+	                                  kwlist, &PyGeditWindow_Type,
+	                                  &window, &list, &py_encoding,
 	                                  &line_pos))
 		return NULL;
-    
+
 	if (py_encoding != NULL && py_encoding != Py_None)
 	{
 		if (pyg_boxed_check (py_encoding, GEDIT_TYPE_ENCODING))
@@ -101,21 +102,21 @@ _wrap_gedit_commands_load_uris (PyObject *self, PyObject *args, PyObject *kwargs
 		item = PySequence_GetItem (list, i);
 		Py_DECREF (item);
 
-		if (!PyString_Check (item))
+		if (!pygobject_check (item, &PyGFile_Type))
 		{
 			PyErr_SetString (PyExc_TypeError,
-					 "sequence item not a string");
-			g_slist_free (uris);
+					 "sequence item not a GFile");
+			g_slist_free (locations);
 			return NULL;
 		}
 
-		uris = g_slist_prepend (uris, PyString_AsString (item));
+		locations = g_slist_prepend (locations, pygobject_get (item));
 	}
 
-	uris = g_slist_reverse (uris);
-	gedit_commands_load_uris (GEDIT_WINDOW (window->obj), uris, 
-	                          encoding, line_pos);
-	g_slist_free (uris);
+	locations = g_slist_reverse (locations);
+	gedit_commands_load_locations (GEDIT_WINDOW (window->obj), locations,
+	                               encoding, line_pos);
+	g_slist_free (locations);
 
 	Py_INCREF (Py_None);
 	return Py_None;

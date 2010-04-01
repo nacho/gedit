@@ -45,6 +45,7 @@ gedit.c: gedit.defs gedit.override geditplugin.override geditmessage.override $(
 
 geditutils.c: geditutils.defs geditutils.override
 	( cd $(srcdir) && $(PYGTK_CODEGEN) \
+		--register $(PYGOBJECT_DEFSDIR)/gio-types.defs \
 		--override $*.override \
 		--prefix py$* $(<F) ) > $@ 
 
@@ -52,6 +53,7 @@ geditcommands.c: geditcommands.defs geditcommands.override gedit.defs
 	( cd $(srcdir) && $(PYGTK_CODEGEN) \
 		--register gedit.defs \
 		--register $(PYGTK_DEFSDIR)/gtk-types.defs \
+		--register $(PYGOBJECT_DEFSDIR)/gio-types.defs \
 		--override $*.override \
 		--prefix py$* $(<F) ) > $@ 
 

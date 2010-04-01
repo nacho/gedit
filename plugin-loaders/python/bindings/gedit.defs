@@ -254,18 +254,12 @@
   (return-type "GFile*")
 )
 
-(define-method get_uri
+(define-method set_location
   (of-object "GeditDocument")
-  (c-name "gedit_document_get_uri")
-  (return-type "gchar*")
-)
-
-(define-method set_uri
-  (of-object "GeditDocument")
-  (c-name "gedit_document_set_uri")
+  (c-name "gedit_document_set_location")
   (return-type "none")
   (parameters
-    '("const-gchar*" "uri")
+    '("GFile*" "location")
   )
 )
 
@@ -304,21 +298,10 @@
   (c-name "gedit_document_load")
   (return-type "none")
   (parameters
-    '("const-gchar*" "uri")
+    '("GFile*" "location")
     '("const-GeditEncoding*" "encoding")
     '("gint" "line_pos")
     '("gboolean" "create")
-  )
-)
-
-(define-method insert_file
-  (of-object "GeditDocument")
-  (c-name "gedit_document_insert_file")
-  (return-type "gboolean")
-  (parameters
-    '("GtkTextIter*" "iter")
-    '("const-gchar*" "uri")
-    '("const-GeditEncoding*" "encoding")
   )
 )
 
@@ -342,7 +325,7 @@
   (c-name "gedit_document_save_as")
   (return-type "none")
   (parameters
-    '("const-gchar*" "uri")
+    '("GFile*" "location")
     '("const-GeditEncoding*" "encoding")
     '("GeditDocumentSaveFlags" "flags")
   )
@@ -894,12 +877,12 @@
   )
 )
 
-(define-method create_tab_from_uri
+(define-method create_tab_from_location
   (of-object "GeditWindow")
-  (c-name "gedit_window_create_tab_from_uri")
+  (c-name "gedit_window_create_tab_from_location")
   (return-type "GeditTab*")
   (parameters
-    '("const-gchar*" "uri")
+    '("GFile*" "location")
     '("const-GeditEncoding*" "encoding" (null-ok))
     '("gint" "line_pos")
     '("gboolean" "create")
@@ -1018,12 +1001,12 @@
   (return-type "GeditMessageBus*")
 )
 
-(define-method get_tab_from_uri
+(define-method get_tab_from_location
   (of-object "GeditWindow")
-  (c-name "gedit_window_get_tab_from_uri")
+  (c-name "gedit_window_get_tab_from_location")
   (return-type "GeditTab*")
   (parameters
-    '("const-gchar*" "uri")
+    '("GFile*" "location")
   )
 )
 

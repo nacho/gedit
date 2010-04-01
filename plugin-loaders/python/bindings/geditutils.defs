@@ -14,23 +14,23 @@
   (c-name "gedit_utils_uri_has_file_scheme")
   (return-type "gboolean")
   (parameters
-    '("const-gchar*" "uri")
+    '("GFile*" "location")
   )
 )
 
-(define-function uri_exists
-  (c-name "gedit_utils_uri_exists")
+(define-function location_exists
+  (c-name "gedit_utils_location_exists")
   (return-type "gboolean")
   (parameters
-    '("const-gchar*" "text_uri")
+    '("GFile*" "location")
   )
 )
 
-(define-function uri_is_valid
-  (c-name "gedit_utils_is_valid_uri")
+(define-function location_is_valid
+  (c-name "gedit_utils_is_valid_location")
   (return-type "gboolean")
   (parameters
-    '("const-gchar*" "uri")
+    '("GFile*" "location")
   )
 )
 
