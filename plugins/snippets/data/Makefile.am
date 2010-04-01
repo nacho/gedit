@@ -22,8 +22,9 @@ snippets_DATA = \
 	sh.xml \
 	snippets.xml \
 	tcl.xml \
-	xml.xml
-	
+	xml.xml \
+	xslt.xml
+
 snippetsdir = $(GEDIT_PLUGINS_DATA_DIR)/snippets
 
 EXTRA_DIST = $(snippets_DATA)
