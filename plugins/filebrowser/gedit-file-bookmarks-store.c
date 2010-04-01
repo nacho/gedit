@@ -509,6 +509,7 @@ init_bookmarks (GeditFileBookmarksStore * model)
 
 		for (line = lines; *line; ++line) {
 			if (**line) {
+				GFile *location;
 				gchar *pos;
 				gchar *name;
 
@@ -524,9 +525,11 @@ init_bookmarks (GeditFileBookmarksStore * model)
 
 				/* the bookmarks file should contain valid
 				 * URIs, but paranoia is good */
-				if (gedit_utils_is_valid_uri (*line)) {
+				location = g_file_new_for_uri (*line);
+				if (gedit_utils_is_valid_location (location)) {
 					added |= add_bookmark (model, name, *line);
 				}
+				g_object_unref (location);
 			}
 		}
 
@@ -781,14 +784,14 @@ gedit_file_bookmarks_store_new (void)
 	return model;
 }
 
-gchar *
-gedit_file_bookmarks_store_get_uri (GeditFileBookmarksStore * model,
-				    GtkTreeIter * iter)
+GFile *
+gedit_file_bookmarks_store_get_location (GeditFileBookmarksStore * model,
+					 GtkTreeIter * iter)
 {
 	GObject * obj;
 	GFile * file = NULL;
 	guint flags;
-	gchar * ret = NULL;
+	GFile * ret = NULL;
 	gboolean isfs;
 	
 	g_return_val_if_fail (GEDIT_IS_FILE_BOOKMARKS_STORE (model), NULL);
@@ -819,7 +822,7 @@ gedit_file_bookmarks_store_get_uri (GeditFileBookmarksStore * model,
 	
 	if (file)
 	{
-		ret = g_file_get_uri (file);
+		ret = g_file_dup (file);
 		g_object_unref (file);
 	}
 	

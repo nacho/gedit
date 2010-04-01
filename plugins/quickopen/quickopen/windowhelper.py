@@ -95,13 +95,10 @@ class WindowHelper:
                                 msg = bus.send_sync('/plugins/filebrowser', 'get_root')
 
                                 if msg:
-                                        uri = msg.get_value('uri')
+                                        gfile = msg.get_value('location')
 
-                                        if uri:
-                                                gfile = gio.File(uri)
-
-                                                if gfile.is_native():
-                                                        paths.append(gfile)
+                                        if gfile and gfile.is_native():
+                                                paths.append(gfile)
 
                         except StandardError:
                                 pass

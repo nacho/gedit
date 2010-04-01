@@ -128,20 +128,7 @@ gedit_file_browser_utils_pixbuf_from_file (GFile * file,
 gchar *
 gedit_file_browser_utils_file_basename (GFile * file)
 {
-	gchar *uri;
-	gchar *ret;
-	
-	uri = g_file_get_uri (file);
-	ret = gedit_file_browser_utils_uri_basename (uri);
-	g_free (uri);
-	
-	return ret;
-}
-
-gchar *
-gedit_file_browser_utils_uri_basename (gchar const * uri)
-{
-	return gedit_utils_basename_for_display (uri);
+	return gedit_utils_basename_for_display (file);
 }
 
 gboolean

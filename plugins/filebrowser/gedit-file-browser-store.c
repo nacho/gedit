@@ -83,7 +83,7 @@ struct _AsyncNode
 
 typedef struct {
 	GeditFileBrowserStore * model;
-	gchar * virtual_root;
+	GFile * virtual_root;
 	GMountOperation * operation;
 	GCancellable * cancellable;
 } MountInfo;
@@ -270,13 +270,10 @@ static void
 set_gvalue_from_node (GValue          *value,
                       FileBrowserNode *node)
 {
-	gchar * uri;
-
-	if (node == NULL || !node->file) {
-		g_value_set_string (value, NULL);
+	if (node == NULL) {
+		g_value_set_object (value, NULL);
 	} else {
-		uri = g_file_get_uri (node->file);
-		g_value_take_string (value, uri);
+		g_value_set_object (value, node->file);
 	}
 }
 
@@ -336,17 +333,17 @@ gedit_file_browser_store_class_init (GeditFileBrowserStoreClass * klass)
 	object_class->set_property = gedit_file_browser_store_set_property;
 
 	g_object_class_install_property (object_class, PROP_ROOT,
-					 g_param_spec_string ("root",
+					 g_param_spec_object ("root",
 					 		      "Root",
-					 		      "The root uri",
-					 		      NULL,
+					 		      "The root location",
+					 		      G_TYPE_FILE,
 					 		      G_PARAM_READABLE));
 
 	g_object_class_install_property (object_class, PROP_VIRTUAL_ROOT,
-					 g_param_spec_string ("virtual-root",
+					 g_param_spec_object ("virtual-root",
 					 		      "Virtual Root",
-					 		      "The virtual root uri",
-					 		      NULL,
+					 		      "The virtual root location",
+					 		      G_TYPE_FILE,
 					 		      G_PARAM_READABLE));
 
 	g_object_class_install_property (object_class, PROP_FILTER_MODE,
@@ -393,10 +390,10 @@ gedit_file_browser_store_class_init (GeditFileBrowserStoreClass * klass)
 			  G_SIGNAL_RUN_LAST,
 			  G_STRUCT_OFFSET (GeditFileBrowserStoreClass,
 					   rename), NULL, NULL,
-			  gedit_file_browser_marshal_VOID__STRING_STRING, 
+			  gedit_file_browser_marshal_VOID__OBJECT_OBJECT,
 			  G_TYPE_NONE, 2,
-			  G_TYPE_STRING,
-			  G_TYPE_STRING);
+			  G_TYPE_FILE,
+			  G_TYPE_FILE);
 	model_signals[BEGIN_REFRESH] =
 	    g_signal_new ("begin-refresh",
 	    		  G_OBJECT_CLASS_TYPE (object_class),
@@ -419,9 +416,9 @@ gedit_file_browser_store_class_init (GeditFileBrowserStoreClass * klass)
 	    		  G_SIGNAL_RUN_LAST,
 	    		  G_STRUCT_OFFSET (GeditFileBrowserStoreClass,
 	    		  		   unload), NULL, NULL,
-	    		  g_cclosure_marshal_VOID__STRING,
+	    		  g_cclosure_marshal_VOID__OBJECT,
 	    		  G_TYPE_NONE, 1,
-	    		  G_TYPE_STRING);
+	    		  G_TYPE_FILE);
 
 	g_type_class_add_private (object_class,
 				  sizeof (GeditFileBrowserStorePrivate));
@@ -458,8 +455,8 @@ gedit_file_browser_store_init (GeditFileBrowserStore * obj)
 {
 	obj->priv = GEDIT_FILE_BROWSER_STORE_GET_PRIVATE (obj);
 
-	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_URI] =
-	    G_TYPE_STRING;
+	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION] =
+	    G_TYPE_FILE;
 	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_NAME] =
 	    G_TYPE_STRING;
 	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS] =
@@ -680,7 +677,7 @@ gedit_file_browser_store_get_value (GtkTreeModel * tree_model,
 	g_value_init (value, GEDIT_FILE_BROWSER_STORE (tree_model)->priv->column_types[column]);
 
 	switch (column) {
-	case GEDIT_FILE_BROWSER_STORE_COLUMN_URI:
+	case GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION:
 		set_gvalue_from_node (value, node);
 		break;
 	case GEDIT_FILE_BROWSER_STORE_COLUMN_NAME:
@@ -947,7 +944,7 @@ gedit_file_browser_store_drag_data_get (GtkTreeDragSource * drag_source,
 					GtkSelectionData  * selection_data)
 {
 	GtkTreeIter iter;
-	gchar *uri;
+	GFile *location;
 	gchar *uris[2] = {0, };
 	gboolean ret;
 
@@ -958,15 +955,15 @@ gedit_file_browser_store_drag_data_get (GtkTreeDragSource * drag_source,
 	}
 
 	gtk_tree_model_get (GTK_TREE_MODEL (drag_source), &iter,
-			    GEDIT_FILE_BROWSER_STORE_COLUMN_URI, &uri,
+			    GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION, &location,
 			    -1);
 
-	g_assert (uri);
+	g_assert (location);
 
-	uris[0] = uri;
+	uris[0] = g_file_get_uri (location);
 	ret = gtk_selection_data_set_uris (selection_data, uris);
 
-	g_free (uri);
+	g_free (uris[0]);
 
 	return ret;
 }
@@ -1345,8 +1342,6 @@ static void
 file_browser_node_free (GeditFileBrowserStore * model,
 			FileBrowserNode * node)
 {
-	gchar *uri;
-
 	if (node == NULL)
 		return;
 
@@ -1376,10 +1371,8 @@ file_browser_node_free (GeditFileBrowserStore * model,
 	
 	if (node->file)
 	{
-		uri = g_file_get_uri (node->file);
-		g_signal_emit (model, model_signals[UNLOAD], 0, uri);
+		g_signal_emit (model, model_signals[UNLOAD], 0, node->file);
 
-		g_free (uri);
 		g_object_unref (node->file);
 	}
 
@@ -2663,14 +2656,14 @@ unique_new_name (GFile * directory, gchar const * name)
 }
 
 static GeditFileBrowserStoreResult
-model_root_mounted (GeditFileBrowserStore * model, gchar const * virtual_root)
+model_root_mounted (GeditFileBrowserStore * model, GFile * virtual_root)
 {
 	model_check_dummy (model, model->priv->root);
 	g_object_notify (G_OBJECT (model), "root");
 
 	if (virtual_root != NULL)
 		return
-		    gedit_file_browser_store_set_virtual_root_from_string
+		    gedit_file_browser_store_set_virtual_root_from_location
 		    (model, virtual_root);
 	else
 		set_virtual_root_from_node (model,
@@ -2746,7 +2739,7 @@ mount_cb (GFile * file,
 }
 
 static GeditFileBrowserStoreResult
-model_mount_root (GeditFileBrowserStore * model, gchar const * virtual_root)
+model_mount_root (GeditFileBrowserStore * model, GFile * virtual_root)
 {
 	GFileInfo * info;
 	GError * error = NULL;
@@ -2765,7 +2758,7 @@ model_mount_root (GeditFileBrowserStore * model, gchar const * virtual_root)
 			
 			mount_info = g_new(MountInfo, 1);
 			mount_info->model = model;
-			mount_info->virtual_root = g_strdup (virtual_root);
+			mount_info->virtual_root = g_file_dup (virtual_root);
 			
 			/* FIXME: we should be setting the correct window */
 			mount_info->operation = gtk_mount_operation_new (NULL);
@@ -2799,7 +2792,7 @@ model_mount_root (GeditFileBrowserStore * model, gchar const * virtual_root)
 
 /* Public */
 GeditFileBrowserStore *
-gedit_file_browser_store_new (gchar const *root)
+gedit_file_browser_store_new (GFile *root)
 {
 	GeditFileBrowserStore *obj =
 	    GEDIT_FILE_BROWSER_STORE (g_object_new
@@ -2870,29 +2863,29 @@ gedit_file_browser_store_set_virtual_root (GeditFileBrowserStore * model,
 }
 
 GeditFileBrowserStoreResult
-gedit_file_browser_store_set_virtual_root_from_string
-    (GeditFileBrowserStore * model, gchar const *root) {
-	GFile *file;
+gedit_file_browser_store_set_virtual_root_from_location
+    (GeditFileBrowserStore * model, GFile *root) {
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model),
 			      GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
 
-	file = g_file_new_for_uri (root);
-	if (file == NULL) {
-		g_warning ("Invalid uri (%s)", root);
+	if (root == NULL) {
+		gchar *uri;
+
+		uri = g_file_get_uri (root);
+		g_warning ("Invalid uri (%s)", uri);
+		g_free (uri);
 		return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 	}
 
 	/* Check if uri is already the virtual root */
 	if (model->priv->virtual_root &&
-	    g_file_equal (model->priv->virtual_root->file, file)) {
-		g_object_unref (file);
+	    g_file_equal (model->priv->virtual_root->file, root)) {
 		return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 	}
 
 	/* Check if uri is the root itself */
-	if (g_file_equal (model->priv->root->file, file)) {
-		g_object_unref (file);
+	if (g_file_equal (model->priv->root->file, root)) {
 
 		/* Always clear the model before altering the nodes */
 		model_clear (model, FALSE);
@@ -2900,11 +2893,11 @@ gedit_file_browser_store_set_virtual_root_from_string
 		return GEDIT_FILE_BROWSER_STORE_RESULT_OK;
 	}
 
-	if (!g_file_has_prefix (file, model->priv->root->file)) {
+	if (!g_file_has_prefix (root, model->priv->root->file)) {
 		gchar *str, *str1;
 
 		str = g_file_get_parse_name (model->priv->root->file);
-		str1 = g_file_get_parse_name (file);
+		str1 = g_file_get_parse_name (root);
 
 		g_warning
 		    ("Virtual root (%s) is not below actual root (%s)",
@@ -2913,12 +2906,10 @@ gedit_file_browser_store_set_virtual_root_from_string
 		g_free (str);
 		g_free (str1);
 
-		g_object_unref (file);
 		return GEDIT_FILE_BROWSER_STORE_RESULT_ERROR;
 	}
 
-	set_virtual_root_from_file (model, file);
-	g_object_unref (file);
+	set_virtual_root_from_file (model, root);
 
 	return GEDIT_FILE_BROWSER_STORE_RESULT_OK;
 }
@@ -3009,11 +3000,9 @@ gedit_file_browser_store_cancel_mount_operation (GeditFileBrowserStore *store)
 GeditFileBrowserStoreResult
 gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 						    model,
-						    gchar const *root,
-						    gchar const *virtual_root)
+						    GFile *root,
+						    GFile *virtual_root)
 {
-	GFile * file = NULL;
-	GFile * vfile = NULL;
 	FileBrowserNode * node;
 	gboolean equal = FALSE;
 
@@ -3023,31 +3012,18 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 	if (root == NULL && model->priv->root == NULL)
 		return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 
-	if (root != NULL) {
-		file = g_file_new_for_uri (root);
-	}
-
 	if (root != NULL && model->priv->root != NULL) {
-		equal = g_file_equal (file, model->priv->root->file);
+		equal = g_file_equal (root, model->priv->root->file);
 
 		if (equal && virtual_root == NULL) {
-			g_object_unref (file);
 			return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 		}
 	}
 
 	if (virtual_root) {
-		vfile = g_file_new_for_uri (virtual_root);
-
-		if (equal && g_file_equal (vfile, model->priv->virtual_root->file)) {
-			if (file)
-				g_object_unref (file);
-
-			g_object_unref (vfile);
+		if (equal && g_file_equal (virtual_root, model->priv->virtual_root->file)) {
 			return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 		}
-
-		g_object_unref (vfile);
 	}
 	
 	/* make sure to cancel any previous mount operations */
@@ -3060,11 +3036,9 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 	model->priv->root = NULL;
 	model->priv->virtual_root = NULL;
 
-	if (file != NULL) {
+	if (root != NULL) {
 		/* Create the root node */
-		node = file_browser_node_dir_new (model, file, NULL);
-		
-		g_object_unref (file);
+		node = file_browser_node_dir_new (model, root, NULL);
 
 		model->priv->root = node;
 		return model_mount_root (model, virtual_root);
@@ -3078,7 +3052,7 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 
 GeditFileBrowserStoreResult
 gedit_file_browser_store_set_root (GeditFileBrowserStore * model,
-				   gchar const *root)
+				   GFile *root)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model),
 			      GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
@@ -3087,7 +3061,7 @@ gedit_file_browser_store_set_root (GeditFileBrowserStore * model,
 								   NULL);
 }
 
-gchar *
+GFile *
 gedit_file_browser_store_get_root (GeditFileBrowserStore * model)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), NULL);
@@ -3095,10 +3069,10 @@ gedit_file_browser_store_get_root (GeditFileBrowserStore * model)
 	if (model->priv->root == NULL || model->priv->root->file == NULL)
 		return NULL;
 	else
-		return g_file_get_uri (model->priv->root->file);
+		return g_file_dup (model->priv->root->file);
 }
 
-gchar * 
+GFile *
 gedit_file_browser_store_get_virtual_root (GeditFileBrowserStore * model)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), NULL);
@@ -3106,7 +3080,7 @@ gedit_file_browser_store_get_virtual_root (GeditFileBrowserStore * model)
 	if (model->priv->virtual_root == NULL || model->priv->virtual_root->file == NULL)
 		return NULL;
 	else
-		return g_file_get_uri (model->priv->virtual_root->file);
+		return g_file_dup (model->priv->virtual_root->file);
 }
 
 void
@@ -3258,8 +3232,6 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 	GFile * parent;
 	GFile * previous;
 	GError * err = NULL;
-	gchar * olduri;
-	gchar * newuri;
 	GtkTreePath *path;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), FALSE);
@@ -3306,14 +3278,9 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 			return FALSE;
 		}
 
-		olduri = g_file_get_uri (previous);
-		newuri = g_file_get_uri (node->file);
-
-		g_signal_emit (model, model_signals[RENAME], 0, olduri, newuri);
+		g_signal_emit (model, model_signals[RENAME], 0, previous, node->file);
 
 		g_object_unref (previous);
-		g_free (olduri);
-		g_free (newuri);
 
 		return TRUE;
 	} else {

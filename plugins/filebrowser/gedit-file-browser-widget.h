@@ -58,8 +58,8 @@ struct _GeditFileBrowserWidgetClass
 	GtkVBoxClass parent_class;
 
 	/* Signals */
-	void (*uri_activated)        (GeditFileBrowserWidget * widget,
-			              gchar const *uri);
+	void (*location_activated)   (GeditFileBrowserWidget * widget,
+			              GFile *location);
 	void (*error)                (GeditFileBrowserWidget * widget, 
 	                              guint code,
 		                      gchar const *message);
@@ -79,12 +79,12 @@ void gedit_file_browser_widget_show_bookmarks       (GeditFileBrowserWidget * ob
 void gedit_file_browser_widget_show_files           (GeditFileBrowserWidget * obj);
 
 void gedit_file_browser_widget_set_root             (GeditFileBrowserWidget * obj,
-                                                     gchar const *root,
+                                                     GFile *root,
                                                      gboolean virtual_root);
 void
 gedit_file_browser_widget_set_root_and_virtual_root (GeditFileBrowserWidget * obj,
-						     gchar const *root,
-						     gchar const *virtual_root);
+						     GFile *root,
+						     GFile *virtual_root);
 
 gboolean
 gedit_file_browser_widget_get_selected_directory    (GeditFileBrowserWidget * obj, 

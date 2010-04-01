@@ -80,7 +80,7 @@ GType gedit_file_bookmarks_store_get_type               (void) G_GNUC_CONST;
 GType gedit_file_bookmarks_store_register_type          (GTypeModule * module);
 
 GeditFileBookmarksStore *gedit_file_bookmarks_store_new (void);
-gchar *gedit_file_bookmarks_store_get_uri               (GeditFileBookmarksStore * model,
+GFile *gedit_file_bookmarks_store_get_location          (GeditFileBookmarksStore * model,
 					                 GtkTreeIter * iter);
 void gedit_file_bookmarks_store_refresh                 (GeditFileBookmarksStore * model);
 

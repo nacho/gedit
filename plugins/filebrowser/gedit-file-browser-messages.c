@@ -178,13 +178,16 @@ message_get_root_cb (GeditMessageBus *bus,
 		     WindowData      *data)
 {
 	GeditFileBrowserStore *store;
-	gchar *uri;
+	GFile *location;
 	
 	store = gedit_file_browser_widget_get_browser_store (data->widget);
-	uri = gedit_file_browser_store_get_virtual_root (store);
-	
-	gedit_message_set (message, "uri", uri, NULL);
-	g_free (uri);
+	location = gedit_file_browser_store_get_virtual_root (store);
+
+	if (location)
+	{
+		gedit_message_set (message, "location", location, NULL);
+		g_object_unref (location);
+	}
 }
 
 static void
@@ -192,10 +195,10 @@ message_set_root_cb (GeditMessageBus *bus,
 		     GeditMessage    *message,
 		     WindowData      *data)
 {
-	gchar *root = NULL;
-	gchar *virtual = NULL;
+	GFile *root;
+	GFile *virtual = NULL;
 	
-	gedit_message_get (message, "uri", &root, NULL);
+	gedit_message_get (message, "location", &root, NULL);
 	
 	if (!root)
 		return;
@@ -207,9 +210,6 @@ message_set_root_cb (GeditMessageBus *bus,
 		gedit_file_browser_widget_set_root_and_virtual_root (data->widget, root, virtual);
 	else
 		gedit_file_browser_widget_set_root (data->widget, root, TRUE);
-	
-	g_free (root);
-	g_free (virtual);
 }
 
 static void
@@ -278,23 +278,30 @@ message_set_emblem_cb (GeditMessageBus *bus,
 
 static gchar *
 item_id (const gchar *path,
-	 const gchar *uri)
+	 GFile *location)
 {
-	return g_strconcat (path, "::", uri, NULL);
+	gchar *uri;
+	gchar *id;
+
+	uri = g_file_get_uri (location);
+	id = g_strconcat (path, "::", uri, NULL);
+	g_free (uri);
+
+	return id;
 }
 
 static gchar *
 track_row (WindowData            *data,
 	   GeditFileBrowserStore *store,
 	   GtkTreePath           *path,
-	   const gchar		 *uri)
+	   GFile		 *location)
 {
 	GtkTreeRowReference *ref;
 	gchar *id;
 	gchar *pathstr;
 	
 	pathstr = gtk_tree_path_to_string (path);
-	id = item_id (pathstr, uri);
+	id = item_id (pathstr, location);
 	
 	ref = gtk_tree_row_reference_new (GTK_TREE_MODEL (store), path);
 	g_hash_table_insert (data->row_tracking, g_strdup (id), ref);
@@ -311,28 +318,28 @@ set_item_message (WindowData   *data,
 		  GeditMessage *message)
 {
 	GeditFileBrowserStore *store;
-	gchar *uri = NULL;
+	GFile *location;
 	guint flags = 0;
 	gchar *track_id;
 	
 	store = gedit_file_browser_widget_get_browser_store (data->widget);
 	
 	gtk_tree_model_get (GTK_TREE_MODEL (store), iter,
-			    GEDIT_FILE_BROWSER_STORE_COLUMN_URI, &uri,
+			    GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION, &location,
 			    GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS, &flags,
 			    -1);
 	
-	if (!uri)
+	if (!location)
 		return;
 
 	if (path && gtk_tree_path_get_depth (path) != 0)
-		track_id = track_row (data, store, path, uri);
+		track_id = track_row (data, store, path, location);
 	else
 		track_id = NULL;
 
 	gedit_message_set (message,
 			   "id", track_id,
-			   "uri", uri,
+			   "location", location,
 			   NULL);
 	
 	if (gedit_message_has_key (message, "is_directory"))
@@ -342,7 +349,6 @@ set_item_message (WindowData   *data,
 				   NULL);
 	}			   
 
-	g_free (uri);
 	g_free (track_id);
 }
 
@@ -353,19 +359,18 @@ custom_message_filter_func (GeditFileBrowserWidget *widget,
 			    FilterData             *data)
 {
 	WindowData *wdata = get_window_data (data->window);
-	gchar *uri = NULL;
+	GFile *location;
 	guint flags = 0;
 	gboolean filter = FALSE;
 	GtkTreePath *path;
 	
 	gtk_tree_model_get (GTK_TREE_MODEL (store), iter, 
-			    GEDIT_FILE_BROWSER_STORE_COLUMN_URI, &uri,
+			    GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION, &location,
 			    GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS, &flags,
 			    -1);
 	
-	if (!uri || FILE_IS_DUMMY (flags))
+	if (!location || FILE_IS_DUMMY (flags))
 	{
-		g_free (uri);
 		return FALSE;
 	}
 	
@@ -420,7 +425,7 @@ message_add_filter_cb (GeditMessageBus *bus,
 	
 	// Check if the message type has the correct arguments
 	if (gedit_message_type_lookup (message_type, "id") != G_TYPE_STRING ||
-	    gedit_message_type_lookup (message_type, "uri") != G_TYPE_STRING ||
+	    gedit_message_type_lookup (message_type, "location") != G_TYPE_FILE ||
 	    gedit_message_type_lookup (message_type, "is_directory") != G_TYPE_BOOLEAN ||
 	    gedit_message_type_lookup (message_type, "filter") != G_TYPE_BOOLEAN)
 	{
@@ -429,7 +434,7 @@ message_add_filter_cb (GeditMessageBus *bus,
 	
 	cbmessage = gedit_message_type_instantiate (message_type,
 						    "id", NULL,
-						    "uri", NULL,
+						    "location", NULL,
 						    "is_directory", FALSE,
 						    "filter", FALSE,
 						    NULL);
@@ -647,13 +652,13 @@ register_methods (GeditWindow            *window,
 	gedit_message_bus_register (bus, 
 				    MESSAGE_OBJECT_PATH, "get_root", 
 				    1,
-				    "uri", G_TYPE_STRING,
+				    "location", G_TYPE_FILE,
 				    NULL);
  
 	gedit_message_bus_register (bus, 
 				    MESSAGE_OBJECT_PATH, "set_root", 
 				    1, 
-				    "uri", G_TYPE_STRING,
+				    "location", G_TYPE_FILE,
 				    "virtual", G_TYPE_STRING,
 				    NULL);
 				    
@@ -749,11 +754,9 @@ store_row_inserted (GeditFileBrowserStore *store,
 		    GtkTreeIter           *iter,
 		    MessageCacheData      *data)
 {
-	gchar *uri = NULL;
 	guint flags = 0;
 
 	gtk_tree_model_get (GTK_TREE_MODEL (store), iter, 
-			    GEDIT_FILE_BROWSER_STORE_COLUMN_URI, &uri,
 			    GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS, &flags,
 			    -1);
 	
@@ -764,8 +767,6 @@ store_row_inserted (GeditFileBrowserStore *store,
 		set_item_message (wdata, iter, path, data->message);
 		gedit_message_bus_send_message_sync (wdata->bus, data->message);
 	}
-	
-	g_free (uri);
 }
 
 static void
@@ -774,14 +775,12 @@ store_row_deleted (GeditFileBrowserStore *store,
 		   MessageCacheData      *data)
 {
 	GtkTreeIter iter;
-	gchar *uri = NULL;
 	guint flags = 0;
 	
 	if (!gtk_tree_model_get_iter (GTK_TREE_MODEL (store), &iter, path))
 		return;
 	
-	gtk_tree_model_get (GTK_TREE_MODEL (store), &iter, 
-			    GEDIT_FILE_BROWSER_STORE_COLUMN_URI, &uri,
+	gtk_tree_model_get (GTK_TREE_MODEL (store), &iter,
 			    GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS, &flags,
 			    -1);
 	
@@ -792,8 +791,6 @@ store_row_deleted (GeditFileBrowserStore *store,
 		set_item_message (wdata, &iter, path, data->message);
 		gedit_message_bus_send_message_sync (wdata->bus, data->message);
 	}
-	
-	g_free (uri);
 }
 
 static void
@@ -802,20 +799,20 @@ store_virtual_root_changed (GeditFileBrowserStore *store,
 			    MessageCacheData      *data)
 {
 	WindowData *wdata = get_window_data (data->window);
-	gchar *uri;
+	GFile *vroot;
 	
-	uri = gedit_file_browser_store_get_virtual_root (store);
+	vroot = gedit_file_browser_store_get_virtual_root (store);
 	
-	if (!uri)
+	if (!vroot)
 		return;
 	
 	gedit_message_set (data->message,
-			   "uri", uri,
+			   "location", vroot,
 			   NULL);
 			   
 	gedit_message_bus_send_message_sync (wdata->bus, data->message);
 	
-	g_free (uri);
+	g_object_unref (vroot);
 }
 
 static void
@@ -870,28 +867,28 @@ register_signals (GeditWindow            *window,
 				    MESSAGE_OBJECT_PATH, "root_changed",
 				    0,
 				    "id", G_TYPE_STRING,
-				    "uri", G_TYPE_STRING,
+				    "location", G_TYPE_FILE,
 				    NULL);
 	
 	begin_loading_type = gedit_message_bus_register (bus,
 				    MESSAGE_OBJECT_PATH, "begin_loading",
 				    0,
 				    "id", G_TYPE_STRING,
-				    "uri", G_TYPE_STRING,
+				    "location", G_TYPE_FILE,
 				    NULL);
 
 	end_loading_type = gedit_message_bus_register (bus,
 				    MESSAGE_OBJECT_PATH, "end_loading",
 				    0,
 				    "id", G_TYPE_STRING,
-				    "uri", G_TYPE_STRING,
+				    "location", G_TYPE_FILE,
 				    NULL);
 
 	inserted_type = gedit_message_bus_register (bus,
 						    MESSAGE_OBJECT_PATH, "inserted",
 						    0,
 						    "id", G_TYPE_STRING,
-						    "uri", G_TYPE_STRING,
+						    "location", G_TYPE_FILE,
 						    "is_directory", G_TYPE_BOOLEAN,
 						    NULL);
 
@@ -899,7 +896,7 @@ register_signals (GeditWindow            *window,
 						   MESSAGE_OBJECT_PATH, "deleted",
 						   0,
 						   "id", G_TYPE_STRING,
-						   "uri", G_TYPE_STRING,
+						   "location", G_TYPE_FILE,
 						   "is_directory", G_TYPE_BOOLEAN,
 						   NULL);
 
@@ -907,7 +904,7 @@ register_signals (GeditWindow            *window,
 	
 	message = gedit_message_type_instantiate (inserted_type, 
 						  "id", NULL,
-						  "uri", NULL, 
+						  "location", NULL,
 						  "is_directory", FALSE, 
 						  NULL);
 
@@ -923,7 +920,7 @@ register_signals (GeditWindow            *window,
 
 	message = gedit_message_type_instantiate (deleted_type, 
 						  "id", NULL, 
-						  "uri", NULL,
+						  "location", NULL,
 						  "is_directory", FALSE, 
 						  NULL);
 	data->row_deleted_id = 
@@ -936,7 +933,7 @@ register_signals (GeditWindow            *window,
 	
 	message = gedit_message_type_instantiate (root_changed_type,
 						  "id", NULL,
-						  "uri", NULL,
+						  "location", NULL,
 						  NULL);
 	data->root_changed_id = 
 		g_signal_connect_data (store,
@@ -948,8 +945,8 @@ register_signals (GeditWindow            *window,
 
 	message = gedit_message_type_instantiate (begin_loading_type,
 						  "id", NULL,
-						  "uri", NULL,
-						  NULL);	
+						  "location", NULL,
+						  NULL);
 	data->begin_loading_id = 
 		g_signal_connect_data (store,
 				      "begin_loading",
@@ -960,7 +957,7 @@ register_signals (GeditWindow            *window,
 
 	message = gedit_message_type_instantiate (end_loading_type,
 						  "id", NULL,
-						  "uri", NULL,
+						  "location", NULL,
 						  NULL);
 	data->end_loading_id = 
 		g_signal_connect_data (store,

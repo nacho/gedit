@@ -79,7 +79,7 @@ enum
 /* Signals */
 enum 
 {
-	URI_ACTIVATED,
+	LOCATION_ACTIVATED,
 	ERROR,
 	CONFIRM_DELETE,
 	CONFIRM_NO_TRASH,
@@ -432,14 +432,14 @@ gedit_file_browser_widget_class_init (GeditFileBrowserWidgetClass * klass)
 					 		       G_PARAM_READWRITE |
 					 		       G_PARAM_CONSTRUCT));
 
-	signals[URI_ACTIVATED] =
-	    g_signal_new ("uri-activated",
+	signals[LOCATION_ACTIVATED] =
+	    g_signal_new ("location-activated",
 			  G_OBJECT_CLASS_TYPE (object_class),
 			  G_SIGNAL_RUN_LAST,
 			  G_STRUCT_OFFSET (GeditFileBrowserWidgetClass,
-					   uri_activated), NULL, NULL,
-			  g_cclosure_marshal_VOID__STRING, G_TYPE_NONE, 1,
-			  G_TYPE_STRING);
+					   location_activated), NULL, NULL,
+			  g_cclosure_marshal_VOID__OBJECT, G_TYPE_NONE, 1,
+			  G_TYPE_FILE);
 	signals[ERROR] =
 	    g_signal_new ("error", G_OBJECT_CLASS_TYPE (object_class),
 			  G_SIGNAL_RUN_LAST,
@@ -1059,21 +1059,17 @@ add_bookmark_hash (GeditFileBrowserWidget * obj,
 	GtkTreeModel *model;
 	GdkPixbuf * pixbuf;
 	gchar * name;
-	gchar * uri;
-	GFile * file;
+	GFile * location;
 	NameIcon * item;
 
 	model = GTK_TREE_MODEL (obj->priv->bookmarks_store);
 
-	uri = gedit_file_bookmarks_store_get_uri (obj->priv->
-						  bookmarks_store,
-						  iter);
+	location = gedit_file_bookmarks_store_get_location (obj->priv->
+							    bookmarks_store,
+							    iter);
 
-	if (uri == NULL)
+	if (location == NULL)
 		return;
-	
-	file = g_file_new_for_uri (uri);
-	g_free (uri);
 
 	gtk_tree_model_get (model, iter,
 			    GEDIT_FILE_BOOKMARKS_STORE_COLUMN_ICON,
@@ -1086,7 +1082,7 @@ add_bookmark_hash (GeditFileBrowserWidget * obj,
 	item->icon = pixbuf;
 
 	g_hash_table_insert (obj->priv->bookmarks_hash,
-			     file,
+			     location,
 			     item);
 }
 
@@ -1578,8 +1574,6 @@ jump_to_location (GeditFileBrowserWidget * obj, GList * item,
 	GList *(*iter_func) (GList *);
 	GtkWidget *menu_from;
 	GtkWidget *menu_to;
-	gchar *root;
-	gchar *virtual_root;
 
 	if (!obj->priv->locations)
 		return;
@@ -1638,15 +1632,9 @@ jump_to_location (GeditFileBrowserWidget * obj, GList * item,
 	loc = (Location *) (obj->priv->current_location->data);
 
 	/* Set the new root + virtual root */
-	root = g_file_get_uri (loc->root);
-	virtual_root = g_file_get_uri (loc->virtual_root);
-	
 	gedit_file_browser_widget_set_root_and_virtual_root (obj,
-							     root,
-							     virtual_root);
-
-	g_free (root);
-	g_free (virtual_root);
+							     loc->root,
+							     loc->virtual_root);
 
 	obj->priv->changing_location = FALSE;
 }
@@ -1835,8 +1823,8 @@ gedit_file_browser_widget_show_files (GeditFileBrowserWidget * obj)
 
 void
 gedit_file_browser_widget_set_root_and_virtual_root (GeditFileBrowserWidget *obj,
-						     gchar const *root,
-						     gchar const *virtual_root)
+						     GFile *root,
+						     GFile *virtual_root)
 {
 	GeditFileBrowserStoreResult result;
 
@@ -1855,12 +1843,10 @@ gedit_file_browser_widget_set_root_and_virtual_root (GeditFileBrowserWidget *obj
 
 void
 gedit_file_browser_widget_set_root (GeditFileBrowserWidget * obj,
-				    gchar const *root, 
+				    GFile *root,
 				    gboolean virtual_root)
 {
-	GFile *file;
 	GFile *parent;
-	gchar *str;
 
 	if (!virtual_root) {
 		gedit_file_browser_widget_set_root_and_virtual_root (obj,
@@ -1872,16 +1858,11 @@ gedit_file_browser_widget_set_root (GeditFileBrowserWidget * obj,
 	if (!root)
 		return;
 
-	file = g_file_new_for_uri (root);
-	parent = get_topmost_file (file);
-	str = g_file_get_uri (parent);
+	parent = get_topmost_file (root);
 
 	gedit_file_browser_widget_set_root_and_virtual_root
-	    (obj, str, root);
+	    (obj, parent, root);
 
-	g_free (str);
-	
-	g_object_unref (file);
 	g_object_unref (parent);
 }
 
@@ -2107,7 +2088,6 @@ activate_mount (GeditFileBrowserWidget *widget,
 		GMount		       *mount)
 {
 	GFile *root;
-	gchar *uri;
 	
 	if (!mount)
 	{
@@ -2129,11 +2109,9 @@ activate_mount (GeditFileBrowserWidget *widget,
 	}
 	
 	root = g_mount_get_root (mount);
-	uri = g_file_get_uri (root);
 	
-	gedit_file_browser_widget_set_root (widget, uri, FALSE);
+	gedit_file_browser_widget_set_root (widget, root, FALSE);
 	
-	g_free (uri);
 	g_object_unref (root);
 }
 
@@ -2364,7 +2342,7 @@ bookmark_open (GeditFileBrowserWidget *obj,
 	       GtkTreeModel           *model,
 	       GtkTreeIter            *iter)
 {
-	gchar *uri;
+	GFile *location;
 	gint flags;
 
 	gtk_tree_model_get (model, iter,
@@ -2386,11 +2364,11 @@ bookmark_open (GeditFileBrowserWidget *obj,
 		return;
 	}
 
-	uri =
-	    gedit_file_bookmarks_store_get_uri
+	location =
+	    gedit_file_bookmarks_store_get_location
 	    (GEDIT_FILE_BOOKMARKS_STORE (model), iter);
 
-	if (uri) {
+	if (location) {
 		/* here we check if the bookmark is a mount point, or if it
 		   is a remote bookmark. If that's the case, we will set the
 		   root to the uri of the bookmark and not try to set the
@@ -2399,18 +2377,18 @@ bookmark_open (GeditFileBrowserWidget *obj,
 		if ((flags & GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT) ||
 		    (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_BOOKMARK)) {
 			gedit_file_browser_widget_set_root (obj,
-							    uri,
+							    location,
 							    FALSE);
 		} else {
 			gedit_file_browser_widget_set_root (obj,
-							    uri,
+							    location,
 							    TRUE);
 		}
+
+		g_object_unref (location);
 	} else {
 		g_warning ("No uri!");
 	}
-
-	g_free (uri);
 }
 
 static void
@@ -2418,19 +2396,17 @@ file_open  (GeditFileBrowserWidget *obj,
 	    GtkTreeModel           *model,
 	    GtkTreeIter            *iter)
 {
-	gchar *uri;
+	GFile *location;
 	gint flags;
 
 	gtk_tree_model_get (model, iter,
 			    GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS, &flags,
-			    GEDIT_FILE_BROWSER_STORE_COLUMN_URI, &uri,
+			    GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION, &location,
 			    -1);
 
 	if (!FILE_IS_DIR (flags) && !FILE_IS_DUMMY (flags)) {
-		g_signal_emit (obj, signals[URI_ACTIVATED], 0, uri);
+		g_signal_emit (obj, signals[LOCATION_ACTIVATED], 0, location);
 	}
-
-	g_free (uri);
 }
 
 static gboolean
@@ -2440,16 +2416,19 @@ directory_open (GeditFileBrowserWidget *obj,
 {
 	gboolean result = FALSE;
 	GError *error = NULL;
-	gchar *uri = NULL;
+	GFile *location;
 	GeditFileBrowserStoreFlag flags;
 
 	gtk_tree_model_get (model, iter,
 			    GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS, &flags,
-			    GEDIT_FILE_BROWSER_STORE_COLUMN_URI, &uri,
+			    GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION, &location,
 			    -1);
 
-	if (FILE_IS_DIR (flags)) {
+	if (FILE_IS_DIR (flags) && location) {
+		gchar *uri;
 		result = TRUE;
+
+		uri = g_file_get_uri (location);
 
 		if (!gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (obj)), uri, GDK_CURRENT_TIME, &error)) {
 			g_signal_emit (obj, signals[ERROR], 0,
@@ -2459,9 +2438,9 @@ directory_open (GeditFileBrowserWidget *obj,
 			g_error_free (error);
 			error = NULL;
 		}
-	}
 
-	g_free (uri);
+		g_free (uri);
+	}
 
 	return result;
 }
@@ -2508,8 +2487,7 @@ on_virtual_root_changed (GeditFileBrowserStore * model,
 			 GeditFileBrowserWidget * obj)
 {
 	GtkTreeIter iter;
-	gchar *uri;
-	gchar *root_uri;
+	GFile *location;
 	GtkTreeIter root;
 	GtkAction *action;
 	Location *loc;
@@ -2523,8 +2501,8 @@ on_virtual_root_changed (GeditFileBrowserStore * model,
 
 	if (gedit_file_browser_store_get_iter_virtual_root (model, &iter)) {
 		gtk_tree_model_get (GTK_TREE_MODEL (model), &iter,
-				    GEDIT_FILE_BROWSER_STORE_COLUMN_URI,
-				    &uri, -1);
+				    GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION,
+				    &location, -1);
 
 		if (gedit_file_browser_store_get_iter_root (model, &root)) {
 			if (!obj->priv->changing_location) {
@@ -2532,14 +2510,9 @@ on_virtual_root_changed (GeditFileBrowserStore * model,
 				if (obj->priv->current_location)
 					clear_next_locations (obj);
 
-				root_uri =
-				    gedit_file_browser_store_get_root
-				    (model);
-
 				loc = g_new (Location, 1);
-				loc->root = g_file_new_for_uri (root_uri);
-				loc->virtual_root = g_file_new_for_uri (uri);
-				g_free (root_uri);
+				loc->root = gedit_file_browser_store_get_root (model);
+				loc->virtual_root = g_object_ref (location);
 
 				if (obj->priv->current_location) {
 					/* Add current location to the menu so we can go back
@@ -2608,7 +2581,6 @@ on_virtual_root_changed (GeditFileBrowserStore * model,
 		}
 
 		check_current_item (obj, TRUE);
-		g_free (uri);
 	} else {
 		g_message ("NO!");
 	}
@@ -2688,7 +2660,6 @@ on_combo_changed (GtkComboBox * combo, GeditFileBrowserWidget * obj)
 {
 	GtkTreeIter iter;
 	guint id;
-	gchar * uri;
 	GFile * file;
 
 	if (!gtk_combo_box_get_active_iter (combo, &iter))
@@ -2706,12 +2677,10 @@ on_combo_changed (GtkComboBox * combo, GeditFileBrowserWidget * obj)
 		gtk_tree_model_get (GTK_TREE_MODEL
 				    (obj->priv->combo_model), &iter,
 				    COLUMN_FILE, &file, -1);
+
+		gedit_file_browser_store_set_virtual_root_from_location
+		    (obj->priv->file_store, file);
 		
-		uri = g_file_get_uri (file);
-		gedit_file_browser_store_set_virtual_root_from_string
-		    (obj->priv->file_store, uri);
-		
-		g_free (uri);
 		g_object_unref (file);
 		break;
 	}
@@ -2896,22 +2865,20 @@ on_bookmarks_row_deleted (GtkTreeModel * model,
                           GeditFileBrowserWidget *obj)
 {
 	GtkTreeIter iter;
-	gchar * uri;
-	GFile * file;
+	GFile * location;
 	
 	if (!gtk_tree_model_get_iter (model, &iter, path))
 		return;
 
-	uri = gedit_file_bookmarks_store_get_uri (obj->priv->bookmarks_store, &iter);
+	location = gedit_file_bookmarks_store_get_location (obj->priv->bookmarks_store,
+	                                                    &iter);
 	
-	if (!uri)
+	if (!location)
 		return;
 
-	file = g_file_new_for_uri (uri);
-	g_hash_table_remove (obj->priv->bookmarks_hash, file);
+	g_hash_table_remove (obj->priv->bookmarks_hash, location);
 
-	g_object_unref (file);
-	g_free (uri);
+	g_object_unref (location);
 }
 
 static void 

@@ -37,7 +37,7 @@ typedef enum
 {
 	GEDIT_FILE_BROWSER_STORE_COLUMN_ICON = 0,
 	GEDIT_FILE_BROWSER_STORE_COLUMN_NAME,
-	GEDIT_FILE_BROWSER_STORE_COLUMN_URI,
+	GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION,
 	GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS,
 	GEDIT_FILE_BROWSER_STORE_COLUMN_EMBLEM,
 	GEDIT_FILE_BROWSER_STORE_COLUMN_NUM
@@ -107,32 +107,32 @@ struct _GeditFileBrowserStoreClass {
 	gboolean (*no_trash)	     (GeditFileBrowserStore * model,
 				      GList * files);
 	void (*rename)		     (GeditFileBrowserStore * model,
-				      const gchar * olduri,
-				      const gchar * newuri);
+				      GFile * oldfile,
+				      GFile * newfile);
 	void (*begin_refresh)	     (GeditFileBrowserStore * model);
 	void (*end_refresh)	     (GeditFileBrowserStore * model);
 	void (*unload)		     (GeditFileBrowserStore * model,
-				      const gchar * uri);
+				      GFile * location);
 };
 
 GType gedit_file_browser_store_get_type               (void) G_GNUC_CONST;
 GType gedit_file_browser_store_register_type          (GTypeModule * module);
 
-GeditFileBrowserStore *gedit_file_browser_store_new   (gchar const *root);
+GeditFileBrowserStore *gedit_file_browser_store_new   (GFile *root);
 
 GeditFileBrowserStoreResult
 gedit_file_browser_store_set_root_and_virtual_root    (GeditFileBrowserStore * model,
-						       gchar const *root,
-			  			       gchar const *virtual_root);
+						       GFile *root,
+			  			       GFile *virtual_root);
 GeditFileBrowserStoreResult
 gedit_file_browser_store_set_root                     (GeditFileBrowserStore * model,
-				                       gchar const *root);
+				                       GFile *root);
 GeditFileBrowserStoreResult
 gedit_file_browser_store_set_virtual_root             (GeditFileBrowserStore * model,
 					               GtkTreeIter * iter);
 GeditFileBrowserStoreResult
-gedit_file_browser_store_set_virtual_root_from_string (GeditFileBrowserStore * model, 
-                                                       gchar const *root);
+gedit_file_browser_store_set_virtual_root_from_location (GeditFileBrowserStore * model, 
+                                                       GFile *root);
 GeditFileBrowserStoreResult
 gedit_file_browser_store_set_virtual_root_up          (GeditFileBrowserStore * model);
 GeditFileBrowserStoreResult
@@ -143,8 +143,8 @@ gedit_file_browser_store_get_iter_virtual_root        (GeditFileBrowserStore * m
                                                        GtkTreeIter * iter);
 gboolean gedit_file_browser_store_get_iter_root       (GeditFileBrowserStore * model,
 						       GtkTreeIter * iter);
-gchar * gedit_file_browser_store_get_root             (GeditFileBrowserStore * model);
-gchar * gedit_file_browser_store_get_virtual_root     (GeditFileBrowserStore * model);
+GFile * gedit_file_browser_store_get_root             (GeditFileBrowserStore * model);
+GFile * gedit_file_browser_store_get_virtual_root     (GeditFileBrowserStore * model);
 
 gboolean gedit_file_browser_store_iter_equal          (GeditFileBrowserStore * model, 
                                                        GtkTreeIter * iter1,
