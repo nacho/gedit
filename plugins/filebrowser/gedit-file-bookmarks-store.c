@@ -412,7 +412,7 @@ process_mount_novolume_cb (GMount 		   *mount,
 	{
 		g_object_unref (volume);
 	}
-	else
+	else if (!g_mount_is_shadowed (mount))
 	{
 		/* Add the mount */
 		add_fs (model, mount, GEDIT_FILE_BOOKMARKS_STORE_NONE, NULL);
