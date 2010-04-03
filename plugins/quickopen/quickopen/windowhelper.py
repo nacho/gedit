@@ -84,7 +84,7 @@ class WindowHelper:
 
                 # Current document directory
                 if doc and doc.is_local():
-                        gfile = gio.File(doc.get_uri())
+                        gfile = doc.get_location()
                         paths.append(gfile.get_parent())
 
                 # File browser root directory

@@ -80,7 +80,8 @@ class CurrentDocumentsDirectory(VirtualDirectory):
 
         def fill(self, window):
                 for doc in window.get_documents():
-                        if doc.get_uri():
-                                self.append(gio.File(doc.get_uri()))
+                        location = doc.get_location()
+                        if location:
+                                self.append(location)
 
 # ex:ts=8:et:
