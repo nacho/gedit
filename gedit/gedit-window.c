@@ -4792,31 +4792,3 @@ gedit_window_get_message_bus (GeditWindow *window)
 	
 	return window->priv->message_bus;
 }
-
-/**
- * gedit_window_get_tab_from_uri:
- * @window: a #GeditWindow
- * @uri: the uri to get the #GeditTab
- *
- * Gets the #GeditTab that matches @uri.
- *
- * Returns: the #GeditTab associated with @uri.
- *
- * Deprecated: 2.24: Use gedit_window_get_tab_from_location() instead.
- */
-GeditTab *
-gedit_window_get_tab_from_uri (GeditWindow *window,
-			       const gchar *uri)
-{
-	GFile *f;
-	GeditTab *tab;
-
-	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
-	g_return_val_if_fail (uri != NULL, NULL);
-
-	f = g_file_new_for_uri (uri);
-	tab = gedit_window_get_tab_from_location (window, f);
-	g_object_unref (f);
-
-	return tab;
-}
