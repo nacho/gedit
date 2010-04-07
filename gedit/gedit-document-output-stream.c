@@ -121,6 +121,28 @@ gedit_document_output_stream_finalize (GObject *object)
 }
 
 static void
+gedit_document_output_stream_constructed (GObject *object)
+{
+	GeditDocumentOutputStream *stream = GEDIT_DOCUMENT_OUTPUT_STREAM (object);
+
+	if (!stream->priv->doc)
+	{
+		g_critical ("This should never happen, a problem happened constructing the Document Output Stream!");
+		return;
+	}
+
+	/* Init the undoable action */
+	gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (stream->priv->doc));
+	/* clear the buffer */
+	gtk_text_buffer_set_text (GTK_TEXT_BUFFER (stream->priv->doc),
+				  "", 0);
+	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (stream->priv->doc),
+				      FALSE);
+
+	gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (stream->priv->doc));
+}
+
+static void
 gedit_document_output_stream_class_init (GeditDocumentOutputStreamClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -129,6 +151,7 @@ gedit_document_output_stream_class_init (GeditDocumentOutputStreamClass *klass)
 	object_class->get_property = gedit_document_output_stream_get_property;
 	object_class->set_property = gedit_document_output_stream_set_property;
 	object_class->finalize = gedit_document_output_stream_finalize;
+	object_class->constructed = gedit_document_output_stream_constructed;
 
 	stream_class->write_fn = gedit_document_output_stream_write;
 	stream_class->close_fn = gedit_document_output_stream_close;
@@ -279,10 +302,6 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 	{
 		/* Init the undoable action */
 		gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (ostream->priv->doc));
-
-		/* clear the buffer */
-		gtk_text_buffer_set_text (GTK_TEXT_BUFFER (ostream->priv->doc),
-					  "", 0);
 
 		gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (ostream->priv->doc),
 						&ostream->priv->pos);
