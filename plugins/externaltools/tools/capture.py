@@ -23,6 +23,7 @@ import locale
 import subprocess
 import gobject
 import fcntl
+import glib
 
 class Capture(gobject.GObject):
     CAPTURE_STDOUT = 0x01
@@ -113,7 +114,7 @@ class Capture(gobject.GObject):
                                  gobject.IO_IN | gobject.IO_HUP,
                                  self.on_output)
 
-        # IO        
+        # IO
         if self.input_text is not None:
             # Write async, in chunks of something
             self.write_buffer = str(self.input_text)
@@ -140,6 +141,7 @@ class Capture(gobject.GObject):
                 self.pipe.stdin.close()
                 
                 self.idle_write_id = 0
+
                 return False
             else:
                 self.write_buffer = self.write_buffer[m:]
@@ -151,44 +153,46 @@ class Capture(gobject.GObject):
             return False
 
     def on_output(self, source, condition):
-        line = source.read()
+        if condition & (glib.IO_IN | glib.IO_PRI):
+            line = source.read()
 
-        if len(line) > 0:
-            try:
-                line = unicode(line, 'utf-8')
-            except:
-                line = unicode(line,
-                               locale.getdefaultlocale()[1],
-                               'replace')
+            if len(line) > 0:
+                try:
+                    line = unicode(line, 'utf-8')
+                except:
+                    line = unicode(line,
+                                   locale.getdefaultlocale()[1],
+                                   'replace')
 
-            self.read_buffer += line
-            lines = self.read_buffer.splitlines(True)
-            
-            if not lines[-1].endswith("\n"):
-                self.read_buffer = lines[-1]
-                lines = lines[0:-1]
-            else:
-                self.read_buffer = ''
-
-            for line in lines:
-                if not self.pipe or source == self.pipe.stdout:
-                    self.emit('stdout-line', line)
+                self.read_buffer += line
+                lines = self.read_buffer.splitlines(True)
+                
+                if not lines[-1].endswith("\n"):
+                    self.read_buffer = lines[-1]
+                    lines = lines[0:-1]
                 else:
-                    self.emit('stderr-line', line)
+                    self.read_buffer = ''
 
-            return True
-        else:
+                for line in lines:
+                    if not self.pipe or source == self.pipe.stdout:
+                        self.emit('stdout-line', line)
+                    else:
+                        self.emit('stderr-line', line)
+
+        if condition & ~(glib.IO_IN | glib.IO_PRI):
             if self.read_buffer:
                 if source == self.pipe.stdout:
                     self.emit('stdout-line', self.read_buffer)
                 else:
                     self.emit('stderr-line', self.read_buffer)
-                
+
                 self.read_buffer = ''
-            
+
             self.pipe = None
 
-        return False
+            return False
+        else:
+            return True
 
     def stop(self, error_code = -1):
         if self.pipe is not None:
