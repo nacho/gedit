@@ -139,10 +139,11 @@ struct _GeditDocumentClass
 					 const GError     *error);
 
 	/* Document save */
-	void (* save)			(GeditDocument          *document,
-					 GFile                  *location,
-					 const GeditEncoding    *encoding,
-					 GeditDocumentSaveFlags  flags);
+	void (* save)			(GeditDocument           *document,
+					 GFile                   *location,
+					 const GeditEncoding     *encoding,
+					 GeditDocumentNewlineType newline_type,
+					 GeditDocumentSaveFlags   flags);
 
 	void (* saving)			(GeditDocument    *document,
 					 goffset	   size,
@@ -211,10 +212,11 @@ gboolean	 gedit_document_load_cancel	(GeditDocument       *doc);
 void		 gedit_document_save 		(GeditDocument       *doc,
 						 GeditDocumentSaveFlags flags);
 
-void		 gedit_document_save_as 	(GeditDocument       *doc,	
-						 GFile               *location, 
-						 const GeditEncoding *encoding,
-						 GeditDocumentSaveFlags flags);
+void		 gedit_document_save_as 	(GeditDocument           *doc,	
+						 GFile                   *location, 
+						 const GeditEncoding     *encoding,
+						 GeditDocumentNewlineType newline_type,
+						 GeditDocumentSaveFlags   flags);
 
 gboolean	 gedit_document_is_untouched 	(GeditDocument       *doc);
 gboolean	 gedit_document_is_untitled 	(GeditDocument       *doc);
@@ -271,9 +273,6 @@ void		 gedit_document_set_enable_search_highlighting
 
 gboolean	 gedit_document_get_enable_search_highlighting
 						(GeditDocument       *doc);
-
-void		 gedit_document_set_newline_type (GeditDocument           *doc,
-						  GeditDocumentNewlineType newline_type);
 
 GeditDocumentNewlineType
 		 gedit_document_get_newline_type (GeditDocument *doc);

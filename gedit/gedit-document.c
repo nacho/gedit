@@ -83,10 +83,11 @@ static void	gedit_document_load_real	(GeditDocument          *doc,
 						 const GeditEncoding    *encoding,
 						 gint                    line_pos,
 						 gboolean                create);
-static void	gedit_document_save_real	(GeditDocument          *doc,
-						 GFile                  *location,
-						 const GeditEncoding    *encoding,
-						 GeditDocumentSaveFlags  flags);
+static void	gedit_document_save_real	(GeditDocument           *doc,
+						 GFile                   *location,
+						 const GeditEncoding     *encoding,
+						 GeditDocumentNewlineType newline_type,
+						 GeditDocumentSaveFlags   flags);
 static void	to_search_region_range 		(GeditDocument *doc,
 						 GtkTextIter   *start, 
 						 GtkTextIter   *end);
@@ -219,6 +220,18 @@ release_untitled_number (gint n)
 	g_return_if_fail (allocated_untitled_numbers != NULL);
 
 	g_hash_table_remove (allocated_untitled_numbers, GINT_TO_POINTER (n));
+}
+
+static void
+set_newline_type (GeditDocument           *doc,
+		  GeditDocumentNewlineType newline_type)
+{
+	if (doc->priv->newline_type != newline_type)
+	{
+		doc->priv->newline_type = newline_type;
+
+		g_object_notify (G_OBJECT (doc), "newline-type");
+	}
 }
 
 static void
@@ -373,8 +386,8 @@ gedit_document_set_property (GObject      *object,
 								       g_value_get_boolean (value));
 			break;
 		case PROP_NEWLINE_TYPE:
-			gedit_document_set_newline_type (doc,
-							 g_value_get_enum (value));
+			set_newline_type (doc,
+					  g_value_get_enum (value));
 			break;
 		case PROP_SHORTNAME:
 			gedit_document_set_short_name_for_display (doc,
@@ -609,13 +622,14 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, save),
 			      NULL, NULL,
-			      gedit_marshal_VOID__OBJECT_BOXED_FLAGS,
+			      gedit_marshal_VOID__OBJECT_BOXED_ENUM_FLAGS,
 			      G_TYPE_NONE,
-			      3,
+			      4,
 			      G_TYPE_FILE,
 			      /* we rely on the fact that the GeditEncoding pointer stays
 			       * the same forever */
 			      GEDIT_TYPE_ENCODING | G_SIGNAL_TYPE_STATIC_SCOPE,
+			      GEDIT_TYPE_DOCUMENT_NEWLINE_TYPE,
 			      GEDIT_TYPE_DOCUMENT_SAVE_FLAGS);
 
 	document_signals[SAVING] =
@@ -1271,8 +1285,8 @@ document_loader_loaded (GeditDocumentLoader *loader,
 
 		set_content_type (doc, content_type);
 
-		gedit_document_set_newline_type (doc,
-		                                 gedit_document_loader_get_newline_type (loader));
+		set_newline_type (doc,
+		                  gedit_document_loader_get_newline_type (loader));
 
 		/* move the cursor at the requested line if any */
 		if (doc->priv->requested_line_pos > 0)
@@ -1523,16 +1537,17 @@ document_saver_saving (GeditDocumentSaver *saver,
 }
 
 static void
-gedit_document_save_real (GeditDocument          *doc,
-			  GFile                  *location,
-			  const GeditEncoding    *encoding,
-			  GeditDocumentSaveFlags  flags)
+gedit_document_save_real (GeditDocument           *doc,
+			  GFile                   *location,
+			  const GeditEncoding     *encoding,
+			  GeditDocumentNewlineType newline_type,
+			  GeditDocumentSaveFlags   flags)
 {
 	g_return_if_fail (doc->priv->saver == NULL);
 
 	/* create a saver, it will be destroyed once saving is complete */
 	doc->priv->saver = gedit_document_saver_new (doc, location, encoding,
-						     doc->priv->newline_type,
+						     newline_type,
 						     flags);
 
 	g_signal_connect (doc->priv->saver,
@@ -1541,6 +1556,7 @@ gedit_document_save_real (GeditDocument          *doc,
 			  doc);
 
 	doc->priv->requested_encoding = encoding;
+	doc->priv->newline_type = newline_type;
 
 	gedit_document_saver_save (doc->priv->saver,
 				   &doc->priv->mtime);
@@ -1566,6 +1582,7 @@ gedit_document_save (GeditDocument          *doc,
 		       0,
 		       doc->priv->location,
 		       doc->priv->encoding,
+		       doc->priv->newline_type,
 		       flags);
 }
 
@@ -1574,16 +1591,18 @@ gedit_document_save (GeditDocument          *doc,
  * @doc: the #GeditDocument.
  * @location: the location where to save the document.
  * @encoding: the #GeditEncoding to encode the document.
+ * @newline_type: the #GeditDocumentNewlineType for the document.
  * @flags: optionnal #GeditDocumentSaveFlags.
  *
  * Save the document to a new location. This results in the "save" signal
  * to be emitted.
  */
 void
-gedit_document_save_as (GeditDocument          *doc,
-			GFile                  *location,
-			const GeditEncoding    *encoding,
-			GeditDocumentSaveFlags  flags)
+gedit_document_save_as (GeditDocument           *doc,
+			GFile                   *location,
+			const GeditEncoding     *encoding,
+			GeditDocumentNewlineType newline_type,
+			GeditDocumentSaveFlags   flags)
 {
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 	g_return_if_fail (G_IS_FILE (location));
@@ -1596,6 +1615,7 @@ gedit_document_save_as (GeditDocument          *doc,
 		       0,
 		       location,
 		       encoding,
+		       newline_type,
 		       flags | GEDIT_DOCUMENT_SAVE_IGNORE_MTIME);
 }
 
@@ -2509,20 +2529,6 @@ gedit_document_get_enable_search_highlighting (GeditDocument *doc)
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 	
 	return (doc->priv->to_search_region != NULL);
-}
-
-void
-gedit_document_set_newline_type (GeditDocument           *doc,
-				 GeditDocumentNewlineType newline_type)
-{
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-
-	if (doc->priv->newline_type != newline_type)
-	{
-		doc->priv->newline_type = newline_type;
-
-		g_object_notify (G_OBJECT (doc), "newline-type");
-	}
 }
 
 GeditDocumentNewlineType

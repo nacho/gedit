@@ -1261,6 +1261,7 @@ recoverable_saving_error_message_area_response (GtkWidget *message_area,
 		gedit_document_save_as (doc,
 					tab->priv->tmp_save_location,
 					tab->priv->tmp_encoding,
+					gedit_document_get_newline_type (doc),
 					tab->priv->save_flags);
 	}
 	else
@@ -2217,12 +2218,8 @@ _gedit_tab_save_as (GeditTab                 *tab,
 	if (tab->priv->auto_save_timeout > 0)
 		remove_auto_save_timeout (tab);
 
-	/* FIXME: this should behave the same as encoding, setting it here
-	   makes it persistent (if save fails, it's remembered). It's not
-	   a very big deal, but would be nice to have them follow the
-	   same pattern. This can be changed once we break API for 3.0 */
-	gedit_document_set_newline_type (doc, newline_type);
-	gedit_document_save_as (doc, location, encoding, tab->priv->save_flags);
+	gedit_document_save_as (doc, location, encoding, newline_type,
+				tab->priv->save_flags);
 }
 
 #define GEDIT_PAGE_SETUP_KEY "gedit-page-setup-key"
