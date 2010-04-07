@@ -969,6 +969,9 @@ class Document:
                 start = placeholder.begin_iter()
                 end = placeholder.end_iter()
 
+                if not start or not end:
+                        return False
+
                 # Test if start is before bottom, and end is after top
                 start_rect = self.iter_coords(start)
                 end_rect = self.iter_coords(end)
