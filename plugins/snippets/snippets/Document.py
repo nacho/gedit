@@ -860,28 +860,28 @@ class Document:
         
         def apply_uri_snippet(self, snippet, mime, uri):
                 # Remove file scheme
+                gfile = gio.File(uri)
+                pathname = ''
+                dirname = ''
+
                 if gedit.utils.uri_has_file_scheme(uri):
-                        gfile = gio.File(uri)
-                        uri = gfile.get_path()
+                        pathname = gfile.get_path()
+                        dirname = gfile.get_parent().get_path()
+
+                name = os.path.basename(uri)
+                scheme = gfile.get_uri_scheme()
+
+                os.environ['GEDIT_DROP_DOCUMENT_URI'] = uri
+                os.environ['GEDIT_DROP_DOCUMENT_NAME'] = name
+                os.environ['GEDIT_DROP_DOCUMENT_SCHEME'] = scheme
+                os.environ['GEDIT_DROP_DOCUMENT_PATH'] = pathname
+                os.environ['GEDIT_DROP_DOCUMENT_DIR'] = dirname
+                os.environ['GEDIT_DROP_DOCUMENT_TYPE'] = mime
                 
-                # Set environmental variables
                 buf = self.view.get_buffer()
                 filename = self.env_get_document_path(buf)
-                
-                variables = {
-                        'GEDIT_DROP_DOCUMENT_URI': self.env_get_document_uri,
-                        'GEDIT_DROP_DOCUMENT_NAME': self.env_get_document_name,
-                        'GEDIT_DROP_DOCUMENT_SCHEME': self.env_get_document_scheme,
-                        'GEDIT_DROP_DOCUMENT_PATH': self.env_get_document_path,
-                        'GEDIT_DROP_DOCUMENT_DIR': self.env_get_document_dir,
-                        'GEDIT_DROP_DOCUMENT_TYPE': self.env_get_document_type}
-                
-                for var in variables:
-                        os.environ[var] = variables[var](buf)
-
                 os.environ['GEDIT_DROP_DOCUMENT_RELATIVE_PATH'] = self.relative_path(filename, uri, mime)
 
-                buf = self.view.get_buffer()
                 mark = buf.get_mark('gtk_drag_target')
                 
                 if not mark:
