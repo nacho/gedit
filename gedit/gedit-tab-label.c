@@ -35,6 +35,26 @@
 
 #define GEDIT_TAB_LABEL_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_TAB_LABEL, GeditTabLabelPrivate))
 
+/* Signals */
+enum
+{
+	CLOSE_CLICKED,
+	LAST_SIGNAL
+};
+
+enum
+{
+	PROP_0,
+	PROP_TAB
+};
+
+enum
+{
+	NOTIFY_NAME,
+	NOTIFY_STATE,
+	N_SIGNALS
+};
+
 struct _GeditTabLabelPrivate
 {
 	GeditTab *tab;
@@ -46,13 +66,8 @@ struct _GeditTabLabelPrivate
 	GtkWidget *label;
 
 	gboolean close_button_sensitive;
-};
 
-/* Signals */
-enum
-{
-	CLOSE_CLICKED,
-	LAST_SIGNAL
+	glong signal_ids[N_SIGNALS];
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
@@ -66,23 +81,63 @@ gedit_tab_label_finalize (GObject *object)
 }
 
 static void
-gedit_tab_label_class_init (GeditTabLabelClass *klass)
+gedit_tab_label_dispose (GObject *object)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	
-	object_class->finalize = gedit_tab_label_finalize;
+	GeditTabLabel *tab_label = GEDIT_TAB_LABEL (object);
 
-	signals[CLOSE_CLICKED] =
-		g_signal_new ("close-clicked",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GeditTabLabelClass, close_clicked),
-			      NULL, NULL,
-			      g_cclosure_marshal_VOID__VOID,
-			      G_TYPE_NONE,
-			      0);
+	if (tab_label->priv->tab != NULL)
+	{
+		g_signal_handler_disconnect (tab_label->priv->tab,
+					     tab_label->priv->signal_ids[NOTIFY_NAME]);
 
-	g_type_class_add_private (object_class, sizeof(GeditTabLabelPrivate));
+		g_signal_handler_disconnect (tab_label->priv->tab,
+					     tab_label->priv->signal_ids[NOTIFY_STATE]);
+
+		g_object_unref (tab_label->priv->tab);
+		tab_label->priv->tab = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_tab_label_parent_class)->dispose (object);
+}
+
+static void
+gedit_tab_label_set_property (GObject      *object,
+			      guint         prop_id,
+			      const GValue *value,
+			      GParamSpec   *pspec)
+{
+	GeditTabLabel *tab_label = GEDIT_TAB_LABEL (object);
+
+	switch (prop_id)
+	{
+		case PROP_TAB:
+			tab_label->priv->tab = GEDIT_TAB (g_value_dup_object (value));
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_tab_label_get_property (GObject    *object,
+			      guint       prop_id,
+			      GValue     *value,
+			      GParamSpec *pspec)
+{
+	GeditTabLabel *tab_label = GEDIT_TAB_LABEL (object);
+
+	switch (prop_id)
+	{
+		case PROP_TAB:
+			g_value_set_object (value, tab_label->priv->tab);
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
 }
 
 static void
@@ -171,6 +226,68 @@ sync_state (GeditTab *tab, GParamSpec *pspec, GeditTabLabel *tab_label)
 
 	/* sync tip since encoding is known only after load/save end */
 	sync_tip (tab, tab_label);
+}
+
+static void
+gedit_tab_label_constructed (GObject *object)
+{
+	GeditTabLabel *tab_label = GEDIT_TAB_LABEL (object);
+
+	if (!tab_label->priv->tab)
+	{
+		g_critical ("The tab label was not properly constructed");
+		return;
+	}
+
+	sync_name (tab_label->priv->tab, NULL, tab_label);
+	sync_state (tab_label->priv->tab, NULL, tab_label);
+
+	tab_label->priv->signal_ids[NOTIFY_NAME] =
+		g_signal_connect_object (tab_label->priv->tab,
+					 "notify::name",
+					 G_CALLBACK (sync_name),
+					 tab_label,
+					 0);
+
+	tab_label->priv->signal_ids[NOTIFY_STATE] =
+		g_signal_connect_object (tab_label->priv->tab,
+					 "notify::state",
+					 G_CALLBACK (sync_state),
+					 tab_label,
+					 0);
+}
+
+static void
+gedit_tab_label_class_init (GeditTabLabelClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	
+	object_class->finalize = gedit_tab_label_finalize;
+	object_class->dispose = gedit_tab_label_dispose;
+	object_class->set_property = gedit_tab_label_set_property;
+	object_class->get_property = gedit_tab_label_get_property;
+	object_class->constructed = gedit_tab_label_constructed;
+
+	signals[CLOSE_CLICKED] =
+		g_signal_new ("close-clicked",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditTabLabelClass, close_clicked),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
+
+	g_object_class_install_property (object_class,
+					 PROP_TAB,
+					 g_param_spec_object ("tab",
+							      "Tab",
+							      "The GeditTab",
+							      GEDIT_TYPE_TAB,
+							      G_PARAM_READWRITE |
+							      G_PARAM_CONSTRUCT_ONLY));
+
+	g_type_class_add_private (object_class, sizeof(GeditTabLabelPrivate));
 }
 
 static void
@@ -279,24 +396,8 @@ gedit_tab_label_new (GeditTab *tab)
 
 	tab_label = g_object_new (GEDIT_TYPE_TAB_LABEL,
 				  "homogeneous", FALSE,
+				  "tab", tab,
 				  NULL);
-
-	/* FIXME: should turn tab in a property */
-	tab_label->priv->tab = tab;
-
-	sync_name (tab, NULL, tab_label);
-	sync_state (tab, NULL, tab_label);
-
-	g_signal_connect_object (tab, 
-				 "notify::name",
-			         G_CALLBACK (sync_name), 
-			         tab_label, 
-			         0);
-	g_signal_connect_object (tab, 
-				 "notify::state",
-			         G_CALLBACK (sync_state), 
-			         tab_label, 
-			         0);
 
 	return GTK_WIDGET (tab_label);
 }
