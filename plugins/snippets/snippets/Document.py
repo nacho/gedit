@@ -879,8 +879,9 @@ class Document:
                 os.environ['GEDIT_DROP_DOCUMENT_TYPE'] = mime
                 
                 buf = self.view.get_buffer()
-                filename = self.env_get_document_path(buf)
-                os.environ['GEDIT_DROP_DOCUMENT_RELATIVE_PATH'] = self.relative_path(filename, uri, mime)
+                relpath = self.relative_path(buf.get_uri() or "", uri, mime)
+
+                os.environ['GEDIT_DROP_DOCUMENT_RELATIVE_PATH'] = relpath
 
                 mark = buf.get_mark('gtk_drag_target')
                 
