@@ -721,7 +721,8 @@ gedit_conversion_error_while_saving_message_area_new (
 	
 	g_return_val_if_fail (uri != NULL, NULL);
 	g_return_val_if_fail (error != NULL, NULL);
-	g_return_val_if_fail (error->domain == G_CONVERT_ERROR, NULL);
+	g_return_val_if_fail (error->domain == G_CONVERT_ERROR ||
+	                      error->domain == G_IO_ERROR, NULL);
 	g_return_val_if_fail (encoding != NULL, NULL);
 	
 	full_formatted_uri = gedit_utils_uri_for_display (uri);

@@ -1313,8 +1313,10 @@ document_saved (GeditDocument *document,
 					  G_CALLBACK (no_backup_error_message_area_response),
 					  tab);
 		}
-		else if (error->domain == GEDIT_DOCUMENT_ERROR || 
-			 error->domain == G_IO_ERROR)
+		else if (error->domain == GEDIT_DOCUMENT_ERROR ||
+			 (error->domain == G_IO_ERROR &&
+			  error->code != G_IO_ERROR_INVALID_DATA &&
+			  error->code != G_IO_ERROR_PARTIAL_INPUT))
 		{
 			/* These errors are _NOT_ recoverable */
 			_gedit_recent_remove  (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))),
@@ -1334,7 +1336,8 @@ document_saved (GeditDocument *document,
 		else
 		{
 			/* This error is recoverable */
-			g_return_if_fail (error->domain == G_CONVERT_ERROR);
+			g_return_if_fail (error->domain == G_CONVERT_ERROR ||
+			                  error->domain == G_IO_ERROR);
 
 			emsg = gedit_conversion_error_while_saving_message_area_new (
 									tab->priv->tmp_save_uri,
