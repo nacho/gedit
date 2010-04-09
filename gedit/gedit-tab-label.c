@@ -48,13 +48,6 @@ enum
 	PROP_TAB
 };
 
-enum
-{
-	NOTIFY_NAME,
-	NOTIFY_STATE,
-	N_SIGNALS
-};
-
 struct _GeditTabLabelPrivate
 {
 	GeditTab *tab;
@@ -66,8 +59,6 @@ struct _GeditTabLabelPrivate
 	GtkWidget *label;
 
 	gboolean close_button_sensitive;
-
-	glong signal_ids[N_SIGNALS];
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
@@ -81,26 +72,6 @@ gedit_tab_label_finalize (GObject *object)
 }
 
 static void
-gedit_tab_label_dispose (GObject *object)
-{
-	GeditTabLabel *tab_label = GEDIT_TAB_LABEL (object);
-
-	if (tab_label->priv->tab != NULL)
-	{
-		g_signal_handler_disconnect (tab_label->priv->tab,
-					     tab_label->priv->signal_ids[NOTIFY_NAME]);
-
-		g_signal_handler_disconnect (tab_label->priv->tab,
-					     tab_label->priv->signal_ids[NOTIFY_STATE]);
-
-		g_object_unref (tab_label->priv->tab);
-		tab_label->priv->tab = NULL;
-	}
-
-	G_OBJECT_CLASS (gedit_tab_label_parent_class)->dispose (object);
-}
-
-static void
 gedit_tab_label_set_property (GObject      *object,
 			      guint         prop_id,
 			      const GValue *value,
@@ -111,7 +82,7 @@ gedit_tab_label_set_property (GObject      *object,
 	switch (prop_id)
 	{
 		case PROP_TAB:
-			tab_label->priv->tab = GEDIT_TAB (g_value_dup_object (value));
+			tab_label->priv->tab = GEDIT_TAB (g_value_get_object (value));
 			break;
 
 		default:
@@ -242,19 +213,17 @@ gedit_tab_label_constructed (GObject *object)
 	sync_name (tab_label->priv->tab, NULL, tab_label);
 	sync_state (tab_label->priv->tab, NULL, tab_label);
 
-	tab_label->priv->signal_ids[NOTIFY_NAME] =
-		g_signal_connect_object (tab_label->priv->tab,
-					 "notify::name",
-					 G_CALLBACK (sync_name),
-					 tab_label,
-					 0);
+	g_signal_connect_object (tab_label->priv->tab,
+				 "notify::name",
+				 G_CALLBACK (sync_name),
+				 tab_label,
+				 0);
 
-	tab_label->priv->signal_ids[NOTIFY_STATE] =
-		g_signal_connect_object (tab_label->priv->tab,
-					 "notify::state",
-					 G_CALLBACK (sync_state),
-					 tab_label,
-					 0);
+	g_signal_connect_object (tab_label->priv->tab,
+				 "notify::state",
+				 G_CALLBACK (sync_state),
+				 tab_label,
+				 0);
 }
 
 static void
@@ -263,7 +232,6 @@ gedit_tab_label_class_init (GeditTabLabelClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	
 	object_class->finalize = gedit_tab_label_finalize;
-	object_class->dispose = gedit_tab_label_dispose;
 	object_class->set_property = gedit_tab_label_set_property;
 	object_class->get_property = gedit_tab_label_get_property;
 	object_class->constructed = gedit_tab_label_constructed;
