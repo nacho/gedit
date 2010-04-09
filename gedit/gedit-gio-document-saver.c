@@ -51,6 +51,7 @@ typedef struct
 	gboolean	       tried_mount;
 	gssize		       written;
 	gssize		       read;
+	GError                *error;
 } AsyncData;
 
 #define REMOTE_QUERY_ATTRIBUTES G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE "," \
@@ -132,10 +133,13 @@ async_data_new (GeditGioDocumentSaver *gvsaver)
 	async = g_slice_new (AsyncData);
 	async->saver = gvsaver;
 	async->cancellable = g_object_ref (gvsaver->priv->cancellable);
+
 	async->tried_mount = FALSE;
 	async->written = 0;
 	async->read = 0;
-	
+
+	async->error = NULL;
+
 	return async;
 }
 
@@ -143,6 +147,12 @@ static void
 async_data_free (AsyncData *async)
 {
 	g_object_unref (async->cancellable);
+
+	if (async->error)
+	{
+		g_error_free (async->error);
+	}
+
 	g_slice_free (AsyncData, async);
 }
 
@@ -187,9 +197,86 @@ async_failed (AsyncData *async,
 	      GError    *error)
 {
 	g_propagate_error (&async->saver->priv->error, error);
-	
 	remote_save_completed_or_failed (async->saver, async);
 }
+
+/* BEGIN NOTE:
+ *
+ * This fixes an issue in GOutputStream that applies the atomic replace
+ * save strategy. The stream moves the written file to the original file
+ * when the stream is closed. However, there is no way currently to tell
+ * the stream that the save should be aborted (there could be a
+ * conversion error). The patch explicitly closes the output stream
+ * in all these cases with a GCancellable in the cancelled state, causing
+ * the output stream to close, but not move the file. This makes use
+ * of an implementation detail in the local gio file stream and should be
+ * properly fixed by adding the appropriate API in gio. Until then, at least
+ * we prevent data corruption for now.
+ *
+ * Relevant bug reports:
+ *
+ * Bug 615110 - write file ignore encoding errors (gedit)
+ * https://bugzilla.gnome.org/show_bug.cgi?id=615110
+ *
+ * Bug 602412 - g_file_replace does not restore original file when there is
+ *              errors while writing (glib/gio)
+ * https://bugzilla.gnome.org/show_bug.cgi?id=602412
+ */
+static void
+cancel_output_stream_ready_cb (GOutputStream *stream,
+                               GAsyncResult  *result,
+                               AsyncData     *async)
+{
+	GError *error;
+
+	g_output_stream_close_finish (stream, result, NULL);
+
+	/* check cancelled state manually */
+	if (g_cancellable_is_cancelled (async->cancellable) || async->error == NULL)
+	{
+		async_data_free (async);
+		return;
+	}
+
+	error = async->error;
+	async->error = NULL;
+
+	async_failed (async, error);
+}
+
+static void
+cancel_output_stream (AsyncData *async)
+{
+	GCancellable *cancellable;
+
+	gedit_debug_message (DEBUG_SAVER, "Cancel output stream");
+
+	cancellable = g_cancellable_new ();
+	g_cancellable_cancel (cancellable);
+
+	g_output_stream_close_async (async->saver->priv->stream,
+				     G_PRIORITY_HIGH,
+				     cancellable,
+				     (GAsyncReadyCallback)cancel_output_stream_ready_cb,
+				     async);
+
+	g_object_unref (cancellable);
+}
+
+static void
+cancel_output_stream_and_fail (AsyncData *async,
+                               GError    *error)
+{
+
+	gedit_debug_message (DEBUG_SAVER, "Cancel output stream and fail");
+
+	g_propagate_error (&async->error, error);
+	cancel_output_stream (async);
+}
+
+/*
+ * END NOTE
+ */
 
 static void
 remote_get_info_cb (GFile        *source,
@@ -283,7 +370,7 @@ write_complete (AsyncData *async)
 				   async->cancellable, &error))
 	{
 		gedit_debug_message (DEBUG_SAVER, "Closing input stream error: %s", error->message);
-		async_failed (async, error);
+		cancel_output_stream_and_fail (async, error);
 		return;
 	}
 
@@ -314,7 +401,7 @@ async_write_cb (GOutputStream *stream,
 	/* Check cancelled state manually */
 	if (g_cancellable_is_cancelled (async->cancellable))
 	{
-		async_data_free (async);
+		cancel_output_stream (async);
 		return;
 	}
 
@@ -325,7 +412,7 @@ async_write_cb (GOutputStream *stream,
 	if (bytes_written == -1)
 	{
 		gedit_debug_message (DEBUG_SAVER, "Write error: %s", error->message);
-		async_failed (async, error);
+		cancel_output_stream_and_fail (async, error);
 		return;
 	}
 
@@ -389,7 +476,7 @@ read_file_chunk (AsyncData *async)
 
 	if (error != NULL)
 	{
-		async_failed (async, error);
+		cancel_output_stream_and_fail (async, error);
 		return;
 	}
 
