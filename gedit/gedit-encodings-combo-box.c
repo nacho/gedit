@@ -191,7 +191,11 @@ add_or_remove (GeditEncodingsComboBox *menu,
 
 		GtkWidget *toplevel = gtk_widget_get_toplevel (GTK_WIDGET (menu));
 
+#if !GTK_CHECK_VERSION (2, 18, 0)
 		if (!GTK_WIDGET_TOPLEVEL (toplevel))
+#else
+		if (!gtk_widget_is_toplevel (toplevel))
+#endif
 			toplevel = NULL;
 
 		g_signal_handler_block (menu, menu->priv->changed_id);

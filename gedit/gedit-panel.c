@@ -142,14 +142,18 @@ static void
 gedit_panel_focus_document (GeditPanel *panel)
 {
 	GtkWidget *toplevel = gtk_widget_get_toplevel (GTK_WIDGET (panel));
+#if !GTK_CHECK_VERSION (2, 18, 0)
 	if (GTK_WIDGET_TOPLEVEL (toplevel) && GEDIT_IS_WINDOW (toplevel))
-   	{
+#else
+	if (gtk_widget_is_toplevel (toplevel) && GEDIT_IS_WINDOW (toplevel))
+#endif
+	{
 		GeditView *view;
 
 		view = gedit_window_get_active_view (GEDIT_WINDOW (toplevel));
 		if (view != NULL)
 			gtk_widget_grab_focus (GTK_WIDGET (view));
-   	}
+	}
 }
 
 static void
