@@ -319,8 +319,11 @@ class Manager:
                         source_view.get_buffer().set_highlight_syntax(True)
                         source_view.get_buffer().set_language(lang)
                         self.snippets_doc = Document(None, source_view)
-                                
-                entry = self['combo_drop_targets'].child
+
+                combo = self['combo_drop_targets']
+                combo.set_text_column(0)
+
+                entry = combo.child
                 entry.connect('focus-out-event', self.on_entry_drop_targets_focus_out)
                 entry.connect('drag-data-received', self.on_entry_drop_targets_drag_data_received)
                 
