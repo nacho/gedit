@@ -383,42 +383,42 @@ class Document:
                 return str(start.get_line() + 1)
                 
         def env_get_document_uri(self, buf):
-                uri = buf.get_uri()
+                location = buf.get_location()
                 
-                if uri:
-                        return uri
+                if location:
+                        return location.get_uri()
                 else:
                         return ''
         
         def env_get_document_name(self, buf):
-                uri = buf.get_uri()
+                location = buf.get_location()
                 
-                if uri:
-                        return os.path.basename(uri)
+                if location:
+                        return location.get_basename()
                 else:
                         return ''
 
         def env_get_document_scheme(self, buf):
-                uri = buf.get_uri()
+                location = buf.get_location()
                 
-                if uri:
-                        return gio.File(uri).get_uri_scheme()
+                if location:
+                        return location.get_uri_scheme()
                 else:
                         return ''
 
         def env_get_document_path(self, buf):
-                uri = buf.get_uri()
+                location = buf.get_location()
                 
-                if uri and gedit.utils.uri_has_file_scheme(uri):
-                        return gio.File(uri).get_path()
+                if location:
+                        return location.get_path()
                 else:
                         return ''
 
         def env_get_document_dir(self, buf):
-                uri = buf.get_uri()
-                
-                if uri and gedit.utils.uri_has_file_scheme(uri):
-                        return os.path.dirname(gio.File(uri).get_path())
+                location = buf.get_location()
+
+                if location:
+                        return location.get_parent().get_path() or ''
                 else:
                         return ''
 
@@ -434,9 +434,9 @@ class Document:
                 toplevel = self.view.get_toplevel()
                 
                 if isinstance(toplevel, gedit.Window):
-                        documents_uri = [doc.get_uri()
+                        documents_uri = [doc.get_location().get_uri()
                                          for doc in toplevel.get_documents()
-                                         if doc.get_uri() is not None]
+                                         if doc.get_location() is not None]
                 else:
                         documents_uri = []
                 
@@ -446,13 +446,13 @@ class Document:
                 toplevel = self.view.get_toplevel()
                 
                 if isinstance(toplevel, gedit.Window):
-                        documents_uri = [doc.get_uri()
-                                         for doc in toplevel.get_documents()
-                                         if doc.get_uri() is not None]
+                        documents_location = [doc.get_location()
+                                              for doc in toplevel.get_documents()
+                                              if doc.get_location() is not None]
 
-                        documents_path = [gio.File(uri).get_path()
-                                         for uri in documents_uri
-                                         if gedit.utils.uri_has_file_scheme(uri)]
+                        documents_path = [location.get_path()
+                                          for location in documents_location
+                                          if gedit.utils.uri_has_file_scheme(location.get_uri())]
                 else:
                         documents_path = []
                 
@@ -814,55 +814,56 @@ class Document:
                         return self.path_split(head, [tail] + components)
                 else:
                         return components
-        
+
         def relative_path(self, first, second, mime):
                 prot1 = re.match('(^[a-z]+:\/\/|\/)(.*)', first)
                 prot2 = re.match('(^[a-z]+:\/\/|\/)(.*)', second)
-                
+
                 if not prot1 or not prot2:
                         return second
-                
+
                 # Different protocols
                 if prot1.group(1) != prot2.group(1):
                         return second
-                
+
                 # Split on backslash
                 path1 = self.path_split(prot1.group(2))
                 path2 = self.path_split(prot2.group(2))
-                
+
                 # Remove as long as common
                 while path1 and path2 and path1[0] == path2[0]:
                         path1.pop(0)
                         path2.pop(0)
-                
+
                 # If we need to ../ more than 3 times, then just return
                 # the absolute path
                 if len(path1) - 1 > 3:
                         return second
-                
+
                 if mime.startswith('x-directory'):
                         # directory, special case
                         if not path2:
                                 result = './'
                         else:
-                                result = '../' * (len(path1) - 1)       
-                else:   
+                                result = '../' * (len(path1) - 1)
+                else:
                         # Insert ../
                         result = '../' * (len(path1) - 1)
-                
+
                         if not path2:
                                 result = os.path.basename(second)
                 
                 if path2:
                         result += os.path.join(*path2)
-                        
+
                 return result
-        
+
         def apply_uri_snippet(self, snippet, mime, uri):
                 # Remove file scheme
                 gfile = gio.File(uri)
                 pathname = ''
                 dirname = ''
+                ruri = ''
 
                 if gedit.utils.uri_has_file_scheme(uri):
                         pathname = gfile.get_path()
@@ -877,9 +878,13 @@ class Document:
                 os.environ['GEDIT_DROP_DOCUMENT_PATH'] = pathname
                 os.environ['GEDIT_DROP_DOCUMENT_DIR'] = dirname
                 os.environ['GEDIT_DROP_DOCUMENT_TYPE'] = mime
-                
+
                 buf = self.view.get_buffer()
-                relpath = self.relative_path(buf.get_uri() or "", uri, mime)
+                location = buf.get_location()
+                if location:
+                        ruri = location.get_uri()
+
+                relpath = self.relative_path(ruri, uri, mime)
 
                 os.environ['GEDIT_DROP_DOCUMENT_RELATIVE_PATH'] = relpath
 
