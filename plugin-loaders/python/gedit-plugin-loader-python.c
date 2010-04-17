@@ -52,6 +52,7 @@ struct _GeditPluginLoaderPythonPrivate
 	GHashTable *loaded_plugins;
 	guint idle_gc;
 	GeditPythonStatusType status;
+	PyThreadState *py_thread_state;
 };
 
 typedef struct
@@ -214,6 +215,7 @@ gedit_plugin_loader_iface_load (GeditPluginLoader *loader,
 	PyObject *pymodule, *fromlist;
 	gchar *module_name;
 	GeditPlugin *result;
+	PyGILState_STATE state;
 	
 	if (pyloader->priv->status != GEDIT_PYTHON_STATUS_SUCCESS)
 	{
@@ -222,16 +224,22 @@ gedit_plugin_loader_iface_load (GeditPluginLoader *loader,
 		           gedit_plugin_info_get_name (info));
 		return NULL;
 	}
-	
+
+	state = pyg_gil_state_ensure ();
+
 	/* see if py definition for the plugin is already loaded */
 	result = new_plugin_from_info (pyloader, info);
 	
 	if (result != NULL)
+	{
+		pyg_gil_state_release (state);
 		return result;
+	}
 	
 	main_module = PyImport_AddModule ("gedit.plugins");
 	if (main_module == NULL)
 	{
+		pyg_gil_state_release (state);
 		g_warning ("Could not get gedit.plugins.");
 		return NULL;
 	}
@@ -266,6 +274,9 @@ gedit_plugin_loader_iface_load (GeditPluginLoader *loader,
 	{
 		g_free (module_name);
 		PyErr_Print ();
+
+		pyg_gil_state_release (state);
+
 		return NULL;
 	}
 
@@ -275,8 +286,14 @@ gedit_plugin_loader_iface_load (GeditPluginLoader *loader,
 	pytype = find_python_plugin_type (info, pymodule);
 	
 	if (pytype)
-		return add_python_info (pyloader, info, pymodule, path, pytype);
+	{
+		GeditPlugin *plugin = add_python_info (pyloader, info, pymodule, path, pytype);
+		pyg_gil_state_release (state);
 
+		return plugin;
+	}
+
+	pyg_gil_state_release (state);
 	return NULL;
 }
 
@@ -300,11 +317,21 @@ gedit_plugin_loader_iface_unload (GeditPluginLoader *loader,
 	pyinfo->instance = NULL;
 }
 
+static void
+run_gc_protected (void)
+{
+	PyGILState_STATE state = pyg_gil_state_ensure ();
+
+	while (PyGC_Collect ())
+		;
+
+	pyg_gil_state_release (state);
+}
+
 static gboolean
 run_gc (GeditPluginLoaderPython *loader)
 {
-	while (PyGC_Collect ())
-		;
+	run_gc_protected ();
 
 	loader->priv->idle_gc = 0;
 	return FALSE;
@@ -323,8 +350,7 @@ gedit_plugin_loader_iface_garbage_collect (GeditPluginLoader *loader)
 	 * a further collection in the main loop.
 	 */
 
-	while (PyGC_Collect ())
-		;
+	run_gc_protected ();
 
 	if (pyloader->priv->idle_gc == 0)
 		pyloader->priv->idle_gc = g_idle_add ((GSourceFunc)run_gc, pyloader);
@@ -348,7 +374,15 @@ gedit_python_shutdown (GeditPluginLoaderPython *loader)
 	GeditPluginLoaderPython *pyloader = GEDIT_PLUGIN_LOADER_PYTHON (loader);
 
 	if (pyloader->priv->status != GEDIT_PYTHON_STATUS_SUCCESS)
+	{
+		if (loader->priv->py_thread_state)
+		{
+			PyEval_RestoreThread (loader->priv->py_thread_state);
+			loader->priv->py_thread_state = NULL;
+		}
+
 		return;
+	}
 
 	if (loader->priv->idle_gc != 0)
 	{
@@ -356,9 +390,9 @@ gedit_python_shutdown (GeditPluginLoaderPython *loader)
 		loader->priv->idle_gc = 0;
 	}
 
-	while (PyGC_Collect ())
-		;	
+	run_gc_protected ();
 
+	pyg_gil_state_ensure ();
 	Py_Finalize ();
 }
 
@@ -411,6 +445,9 @@ gedit_init_pygtk (void)
 	PyObject *gtk, *mdict, *version, *required_version;
 
 	init_pygtk ();
+
+	/* Initialize support for threads */
+	pyg_enable_threads ();
 
 	/* there isn't init_pygtk_check(), do the version
 	 * check ourselves */
@@ -648,7 +685,9 @@ gedit_python_init (GeditPluginLoaderPython *loader)
 	
 	/* Python has been successfully initialized */
 	loader->priv->status = GEDIT_PYTHON_STATUS_SUCCESS;
-	
+
+	loader->priv->py_thread_state = PyEval_SaveThread();
+
 	return TRUE;
 	
 python_init_error:
