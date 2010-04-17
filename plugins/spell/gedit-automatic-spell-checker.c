@@ -690,6 +690,15 @@ tag_changed (GtkTextTagTable            *table,
 	tag_table_changed (table, spell);
 }
 
+static void
+highlight_updated (GtkSourceBuffer            *buffer,
+                   GtkTextIter                *start,
+                   GtkTextIter                *end,
+                   GeditAutomaticSpellChecker *spell)
+{
+	check_range (spell, *start, *end, FALSE);
+}
+
 GeditAutomaticSpellChecker *
 gedit_automatic_spell_checker_new (GeditDocument     *doc,
 				   GeditSpellChecker *checker)
@@ -740,6 +749,11 @@ gedit_automatic_spell_checker_new (GeditDocument     *doc,
 			  "mark-set",
 			  G_CALLBACK (mark_set), 
 			  spell);
+
+	g_signal_connect (doc,
+	                  "highlight-updated",
+	                  G_CALLBACK (highlight_updated),
+	                  spell);
 
 	g_signal_connect (spell->spell_checker,
 			  "add_word_to_session",
