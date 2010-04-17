@@ -699,6 +699,13 @@ highlight_updated (GtkSourceBuffer            *buffer,
 	check_range (spell, *start, *end, FALSE);
 }
 
+static void
+spell_tag_destroyed (GeditAutomaticSpellChecker *spell,
+                     GObject                    *where_the_object_was)
+{
+	spell->tag_highlight = NULL;
+}
+
 GeditAutomaticSpellChecker *
 gedit_automatic_spell_checker_new (GeditDocument     *doc,
 				   GeditSpellChecker *checker)
@@ -777,6 +784,10 @@ gedit_automatic_spell_checker_new (GeditDocument     *doc,
 				"gtkspell-misspelled",
 				"underline", PANGO_UNDERLINE_ERROR,
 				NULL);
+
+	g_object_weak_ref (G_OBJECT (spell->tag_highlight),
+	                   (GWeakNotify)spell_tag_destroyed,
+	                   spell);
 
 	tag_table = gtk_text_buffer_get_tag_table (GTK_TEXT_BUFFER (doc));
 
@@ -893,7 +904,7 @@ gedit_automatic_spell_checker_free_internal (GeditAutomaticSpellChecker *spell)
 
 	table = gtk_text_buffer_get_tag_table (GTK_TEXT_BUFFER (spell->doc));
 
-	if (table != NULL)
+	if (table != NULL && spell->tag_highlight != NULL)
 	{
 		gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (spell->doc), 
 					    &start, 
