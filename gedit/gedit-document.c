@@ -2581,8 +2581,10 @@ gedit_document_get_metadata (GeditDocument *doc,
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 	g_return_val_if_fail (key != NULL, NULL);
 
-	if (doc->priv->uri != NULL)
+	if (!gedit_document_is_untitled (doc))
+	{
 		value = gedit_metadata_manager_get (doc->priv->uri, key);
+	}
 
 	return value;
 }
@@ -2598,6 +2600,12 @@ gedit_document_set_metadata (GeditDocument *doc,
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 	g_return_if_fail (first_key != NULL);
+
+	if (gedit_document_is_untitled (doc))
+	{
+		/* Can't set metadata for untitled documents */
+		return;
+	}
 
 	va_start (var_args, first_key);
 
