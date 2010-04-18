@@ -1138,8 +1138,18 @@ impl_activate (GeditPlugin *plugin,
 	docs = gedit_window_get_documents (window);
 	for (l = docs; l != NULL; l = g_list_next (l))
 	{
-		set_auto_spell_from_metadata (window, GEDIT_DOCUMENT (l->data),
+		GeditDocument *doc = GEDIT_DOCUMENT (l->data);
+
+		set_auto_spell_from_metadata (window, doc,
 					      data->action_group);
+
+		g_signal_handlers_disconnect_by_func (doc,
+		                                      on_document_loaded,
+		                                      window);
+
+		g_signal_handlers_disconnect_by_func (doc,
+		                                      on_document_saved,
+		                                      window);
 	}
 
 	data->tab_added_id =
