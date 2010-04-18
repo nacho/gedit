@@ -178,6 +178,11 @@ get_new_line_size (GeditDocumentInputStream *stream)
 		case GEDIT_DOCUMENT_NEWLINE_TYPE_CR_LF:
 			ret = 2;
 			break;
+
+		default:
+			g_warn_if_reached ();
+			ret = 1;
+			break;
 	}
 
 	return ret;
@@ -255,6 +260,11 @@ get_new_line (GeditDocumentInputStream *stream)
 
 		case GEDIT_DOCUMENT_NEWLINE_TYPE_CR_LF:
 			ret = "\r\n";
+			break;
+
+		default:
+			g_warn_if_reached ();
+			ret = "\n";
 			break;
 	}
 
