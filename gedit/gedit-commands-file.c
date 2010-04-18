@@ -79,27 +79,22 @@ get_tab_from_file (GList *docs, GFile *file)
 
 	while (docs != NULL)
 	{
-		gchar *u;
 		GeditDocument *d;
+		GFile *l;
 
 		d = GEDIT_DOCUMENT (docs->data);
 
-		u = gedit_document_get_uri (d);
-		if (u != NULL)
+		l = gedit_document_get_location (d);
+		if (l != NULL)
 		{
-			GFile *f;
-
-			f = g_file_new_for_uri (u);
-			g_free (u);
-
-			if (g_file_equal (f, file))
+			if (g_file_equal (l, file))
 			{
 				tab = gedit_tab_get_from_document (d);
-				g_object_unref (f);
+				g_object_unref (l);
 				break;
 			}
 
-			g_object_unref (f);
+			g_object_unref (l);
 		}
 
 		docs = g_list_next (docs);
