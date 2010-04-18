@@ -1025,7 +1025,7 @@ on_document_saved (GeditDocument *doc,
 	gedit_document_set_metadata (doc,
 	                             GEDIT_METADATA_ATTRIBUTE_SPELL_ENABLED,
 	                             autospell != NULL ? "1" : NULL,
-	                             GEDIT_METADATA_ATTRIBUTE_LANGUAGE,
+	                             GEDIT_METADATA_ATTRIBUTE_SPELL_LANGUAGE,
 	                             key,
 	                             NULL);
 }
