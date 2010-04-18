@@ -52,7 +52,7 @@
 #include "gedit-enum-types.h"
 #include "gedittextregion.h"
 
-#ifndef ENABLE_FILE_METADATA
+#ifndef ENABLE_GVFS_METADATA
 #include "gedit-metadata-manager.h"
 #else
 #define METADATA_QUERY "metadata::*"
@@ -745,7 +745,7 @@ on_uri_changed (GeditDocument *doc,
 		GParamSpec    *pspec,
 		gpointer       useless)
 {
-#ifdef ENABLE_FILE_METADATA
+#ifdef ENABLE_GVFS_METADATA
 	GFile *location;
 
 	location = gedit_document_get_location (doc);
@@ -2571,7 +2571,7 @@ _gedit_document_create_mount_operation (GeditDocument *doc)
 						           doc->priv->mount_operation_userdata);
 }
 
-#ifndef ENABLE_FILE_METADATA
+#ifndef ENABLE_GVFS_METADATA
 gchar *
 gedit_document_get_metadata (GeditDocument *doc,
 			     const gchar   *key)

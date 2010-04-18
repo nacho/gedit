@@ -45,6 +45,10 @@
 #include "gedit-debug.h"
 #include "gedit-utils.h"
 
+#ifndef ENABLE_GVFS_METADATA
+#include "gedit-metadata-manager.h"
+#endif
+
 typedef struct
 {
 	GeditGioDocumentLoader *loader;
@@ -189,7 +193,7 @@ get_metadata_encoding (GeditDocumentLoader *loader)
 {
 	const GeditEncoding *enc = NULL;
 
-#ifdef G_OS_WIN32
+#ifndef ENABLE_GVFS_METADATA
 	gchar *charset;
 	const gchar *uri;
 

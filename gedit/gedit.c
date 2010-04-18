@@ -66,7 +66,6 @@
 #include <conio.h>
 #define _WIN32_WINNT 0x0500
 #include <windows.h>
-#include "gedit-metadata-manager.h"
 #define DATADIR SAVE_DATADIR
 #undef SAVE_DATADIR
 #endif
@@ -75,6 +74,10 @@
 #include <ige-mac-dock.h>
 #include <ige-mac-integration.h>
 #include "osx/gedit-osx.h"
+#endif
+
+#ifndef ENABLE_GVFS_METADATA
+#include "gedit-metadata-manager.h"
 #endif
 
 static guint32 startup_timestamp = 0;
@@ -753,7 +756,7 @@ main (int argc, char *argv[])
 	g_object_unref (engine);
 	gedit_prefs_manager_app_shutdown ();
 
-#ifdef G_OS_WIN32
+#ifndef ENABLE_GVFS_METADATA
 	gedit_metadata_manager_shutdown ();
 #endif
 

@@ -159,21 +159,25 @@ AM_GNU_GETTEXT_VERSION([0.17])
 AM_GLIB_GNU_GETTEXT
 AC_DEFINE([GETTEXT_PACKAGE],[PACKAGE_TARNAME], [Define to the gettext package name.])
 
+dnl ================================================================
+dnl Use gvfs metadata or the old xml file store.
+dnl ================================================================
+
 if test "x$os_osx" != "xno" || test "x$os_win32" != "xno"; then
-	file_metadata_default="no"
+	gvfs_metadata_default="no"
 else
-	file_metadata_default="yes"
+	gvfs_metadata_default="yes"
 fi
 
-AC_ARG_ENABLE([file-metadata],
-	AS_HELP_STRING([--enable-file-metadata], [Enable file metadata]),
-	[enable_file_metadata=$enableval],
-	[enable_file_metadata=$file_metadata_default])
+AC_ARG_ENABLE([gvfs-metadata],
+	AS_HELP_STRING([--enable-gvfs-metadata], [Enable using gvfs to store metadata]),
+	[enable_gvfs_metadata=$enableval],
+	[enable_gvfs_metadata=$file_metadata_default])
 
-AM_CONDITIONAL(ENABLE_FILE_METADATA, test "x$enable_file_metadata" != "xno")
+AM_CONDITIONAL(ENABLE_GVFS_METADATA, test "x$enable_gvfs_metadata" != "xno")
 
-if test "x$enable_file_metadata" != "xno"; then
-	AC_DEFINE([ENABLE_FILE_METADATA], [1], [Define to enable file metadata])
+if test "x$enable_gvfs_metadata" != "xno"; then
+	AC_DEFINE([ENABLE_GVFS_METADATA], [1], [Define to enable using gvfs metadata])
 fi
 
 dnl ================================================================
@@ -563,6 +567,7 @@ Configuration:
 	Compiler:		${CC}
 	Python Plugins Support: $enable_python
 	Spell Plugin enabled:	$enable_enchant
+	Gvfs metadata enabled:	$enable_gvfs_metadata
 "
 
 if expr ${GEDIT_MINOR_VERSION} % 2 > /dev/null; then
