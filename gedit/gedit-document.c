@@ -1127,18 +1127,20 @@ gedit_document_get_mime_type (GeditDocument *doc)
 }
 
 /* Note: do not emit the notify::read-only signal */
-static void
+static gboolean
 set_readonly (GeditDocument *doc,
 	      gboolean       readonly)
 {
 	gedit_debug (DEBUG_DOCUMENT);
-	
+
 	readonly = (readonly != FALSE);
 
 	if (doc->priv->readonly == readonly) 
-		return;
+		return FALSE;
 
 	doc->priv->readonly = readonly;
+
+	return TRUE;
 }
 
 /**
@@ -1156,9 +1158,10 @@ _gedit_document_set_readonly (GeditDocument *doc,
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 
-	set_readonly (doc, readonly);
-
-	g_object_notify (G_OBJECT (doc), "read-only");
+	if (set_readonly (doc, readonly))
+	{
+		g_object_notify (G_OBJECT (doc), "read-only");
+	}
 }
 
 gboolean
@@ -1174,7 +1177,6 @@ _gedit_document_check_externally_modified (GeditDocument *doc)
 {
 	GFile *gfile;
 	GFileInfo *info;
-	GTimeVal timeval;
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 
@@ -1185,23 +1187,39 @@ _gedit_document_check_externally_modified (GeditDocument *doc)
 
 	gfile = g_file_new_for_uri (doc->priv->uri);
 	info = g_file_query_info (gfile,
-				  G_FILE_ATTRIBUTE_TIME_MODIFIED,
+				  G_FILE_ATTRIBUTE_TIME_MODIFIED "," \
+				  G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE,
 				  G_FILE_QUERY_INFO_NONE,
 				  NULL, NULL);
 	g_object_unref (gfile);
 
-	if (info == NULL ||
-	    !g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_TIME_MODIFIED))
+	if (info != NULL)
 	{
-		return FALSE;
+		/* While at it also check if permissions changed */
+		if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE))
+		{
+			gboolean read_only;
+
+			read_only = !g_file_info_get_attribute_boolean (info,
+									G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
+
+			_gedit_document_set_readonly (doc, read_only);
+		}
+
+		if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_TIME_MODIFIED))
+		{
+			GTimeVal timeval;
+
+			g_file_info_get_modification_time (info, &timeval);
+			g_object_unref (info);
+	
+			return (timeval.tv_sec > doc->priv->mtime.tv_sec) ||
+			       (timeval.tv_sec == doc->priv->mtime.tv_sec && 
+			       timeval.tv_usec > doc->priv->mtime.tv_usec);
+		}
 	}
 
-	g_file_info_get_modification_time (info, &timeval);
-	g_object_unref (info);
-	
-	return (timeval.tv_sec > doc->priv->mtime.tv_sec) ||
-	       (timeval.tv_sec == doc->priv->mtime.tv_sec && 
-	       timeval.tv_usec > doc->priv->mtime.tv_usec);
+	return FALSE;
 }
 
 static void
