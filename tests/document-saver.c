@@ -357,6 +357,7 @@ test_remote ()
 	            saver_test_data_new (DEFAULT_REMOTE_URI, "hello world\n\n", NULL));
 }
 
+#ifndef G_OS_WIN32
 static void
 check_permissions (GFile *file,
                    guint  permissions)
@@ -452,6 +453,7 @@ test_local_permissions ()
 	test_permissions (DEFAULT_LOCAL_URI, 0666);
 	test_permissions (DEFAULT_LOCAL_URI, 0760);
 }
+#endif
 
 static void
 test_local_unowned_directory ()
@@ -467,15 +469,6 @@ test_local_unowned_directory ()
 }
 
 static void
-test_remote_permissions ()
-{
-	test_permissions (DEFAULT_REMOTE_URI, 0600);
-	test_permissions (DEFAULT_REMOTE_URI, 0660);
-	test_permissions (DEFAULT_REMOTE_URI, 0666);
-	test_permissions (DEFAULT_REMOTE_URI, 0760);
-}
-
-static void
 test_remote_unowned_directory ()
 {
 	test_saver (UNOWNED_REMOTE_URI,
@@ -486,6 +479,16 @@ test_remote_unowned_directory ()
 	            saver_test_data_new (UNOWNED_REMOTE_URI,
 	                                 DEFAULT_CONTENT_RESULT,
 	                                 NULL));
+}
+
+#ifndef G_OS_WIN32
+static void
+test_remote_permissions ()
+{
+	test_permissions (DEFAULT_REMOTE_URI, 0600);
+	test_permissions (DEFAULT_REMOTE_URI, 0660);
+	test_permissions (DEFAULT_REMOTE_URI, 0666);
+	test_permissions (DEFAULT_REMOTE_URI, 0760);
 }
 
 static void
@@ -542,6 +545,8 @@ test_remote_unowned_group ()
 {
 	test_unowned_group (UNOWNED_GROUP_REMOTE_URI);
 }
+
+#endif
 
 static gboolean
 check_unowned_directory ()
@@ -658,6 +663,7 @@ check_unowned_group ()
 		return FALSE;
 	}
 
+#ifndef G_OS_WIN32
 	if ((g_file_info_get_attribute_uint32 (info, G_FILE_ATTRIBUTE_UNIX_MODE) & ACCESSPERMS) != 0660)
 	{
 		g_object_unref (unowned);
@@ -666,6 +672,7 @@ check_unowned_group ()
 		g_object_unref (info);
 		return FALSE;
 	}
+#endif
 
 	g_object_unref (info);
 	g_object_unref (unowned);
@@ -692,21 +699,15 @@ int main (int   argc,
 
 	g_test_add_func ("/document-saver/local", test_local);
 	g_test_add_func ("/document-saver/local-new-line", test_local_newline);
-	g_test_add_func ("/document-saver/local-permissions", test_local_permissions);
 
 	if (have_unowned)
 	{
 		g_test_add_func ("/document-saver/local-unowned-directory", test_local_unowned_directory);
 	}
 
-	if (have_unowned_group)
-	{
-		g_test_add_func ("/document-saver/local-unowned-group", test_local_unowned_group);
-	}
-
 	g_test_add_func ("/document-saver/remote", test_remote);
 	g_test_add_func ("/document-saver/remote-new-line", test_remote_newline);
-	g_test_add_func ("/document-saver/remote-permissions", test_remote_permissions);
+	
 
 	if (have_unowned)
 	{
@@ -718,6 +719,17 @@ int main (int   argc,
 		/* FIXME: there is a bug in gvfs sftp which doesn't pass this test */
 		/* g_test_add_func ("/document-saver/remote-unowned-group", test_remote_unowned_group); */
 	}
+
+#ifndef G_OS_WIN32
+	g_test_add_func ("/document-saver/local-permissions", test_local_permissions);
+
+	if (have_unowned_group)
+	{
+		g_test_add_func ("/document-saver/local-unowned-group", test_local_unowned_group);
+	}
+
+	g_test_add_func ("/document-saver/remote-permissions", test_remote_permissions);
+#endif
 
 	return g_test_run ();
 }
