@@ -23,7 +23,12 @@ SUBDIRS = 		\
 	time
 
 if ENABLE_PYTHON
-SUBDIRS      += externaltools pythonconsole snippets quickopen
+SUBDIRS      += pythonconsole snippets quickopen
+
+if !OS_WIN32
+SUBDIRS      += externaltools
+endif
+
 endif
 
 if ENABLE_ENCHANT
