@@ -996,6 +996,41 @@ on_document_loaded (GeditDocument *doc,
 }
 
 static void
+on_document_saved (GeditDocument *doc,
+		   const GError  *error,
+		   GeditWindow   *window)
+{
+	GeditAutomaticSpellChecker *autospell;
+	GeditSpellChecker *spell;
+	const gchar *key;
+
+	if (error != NULL)
+	{
+		return;
+	}
+
+	/* Make sure to save the metadata here too */
+	autospell = gedit_automatic_spell_checker_get_from_document (doc);
+	spell = GEDIT_SPELL_CHECKER (g_object_get_qdata (G_OBJECT (doc), spell_checker_id));
+
+	if (spell != NULL)
+	{
+		key = gedit_spell_checker_language_to_key (gedit_spell_checker_get_language (spell));
+	}
+	else
+	{
+		key = NULL;
+	}
+
+	gedit_document_set_metadata (doc,
+	                             GEDIT_METADATA_ATTRIBUTE_SPELL_ENABLED,
+	                             autospell != NULL ? "1" : NULL,
+	                             GEDIT_METADATA_ATTRIBUTE_LANGUAGE,
+	                             key,
+	                             NULL);
+}
+
+static void
 tab_added_cb (GeditWindow *window,
 	      GeditTab    *tab,
 	      gpointer     useless)
@@ -1008,6 +1043,10 @@ tab_added_cb (GeditWindow *window,
 
 	g_signal_connect (doc, "loaded",
 			  G_CALLBACK (on_document_loaded),
+			  window);
+
+	g_signal_connect (doc, "saved",
+			  G_CALLBACK (on_document_saved),
 			  window);
 }
 
@@ -1023,6 +1062,7 @@ tab_removed_cb (GeditWindow *window,
 	view = gedit_tab_get_view (tab);
 	
 	g_signal_handlers_disconnect_by_func (doc, on_document_loaded, window);
+	g_signal_handlers_disconnect_by_func (doc, on_document_saved, window);
 }
 
 static void
