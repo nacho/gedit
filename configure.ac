@@ -159,6 +159,23 @@ AM_GNU_GETTEXT_VERSION([0.17])
 AM_GLIB_GNU_GETTEXT
 AC_DEFINE([GETTEXT_PACKAGE],[PACKAGE_TARNAME], [Define to the gettext package name.])
 
+if test "x$os_osx" != "xno" || test "x$os_win32" != "xno"; then
+	file_metadata_default="no"
+else
+	file_metadata_default="yes"
+fi
+
+AC_ARG_ENABLE([file-metadata],
+	AS_HELP_STRING([--enable-file-metadata], [Enable file metadata]),
+	[enable_file_metadata=$enableval],
+	[enable_file_metadata=$file_metadata_default])
+
+AM_CONDITIONAL(ENABLE_FILE_METADATA, test "x$enable_file_metadata" != "xno")
+
+if test "x$enable_file_metadata" != "xno"; then
+	AC_DEFINE([ENABLE_FILE_METADATA], [1], [Define to enable file metadata])
+fi
+
 dnl ================================================================
 dnl check update plugin
 dnl ================================================================

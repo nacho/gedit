@@ -117,7 +117,7 @@ INST_H_FILES =				\
 	gedit-view.h 			\
 	gedit-window.h
 
-if OS_WIN32
+if !ENABLE_FILE_METADATA
 INST_H_FILES += gedit-metadata-manager.h
 endif
 
@@ -188,7 +188,7 @@ libgedit_la_SOURCES = 			\
 	$(NOINST_H_FILES)		\
 	$(INST_H_FILES)
 
-if OS_WIN32
+if !ENABLE_FILE_METADATA
 libgedit_la_SOURCES += gedit-metadata-manager.c 
 endif
 
