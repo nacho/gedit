@@ -103,6 +103,17 @@
   )
 )
 
+(define-enum NewlineType
+  (in-module "Gedit")
+  (c-name "GeditDocumentNewlineType")
+  (gtype-id "GEDIT_TYPE_DOCUMENT_NEWLINE_TYPE")
+  (values
+    '("lf" "GEDIT_DOCUMENT_NEWLINE_TYPE_LF")
+    '("cr" "GEDIT_DOCUMENT_NEWLINE_TYPE_CR")
+    '("cr-lf" "GEDIT_DOCUMENT_NEWLINE_TYPE_CR_LF")
+  )
+)
+
 (define-flags DocumentSaveFlags
   (in-module "Gedit")
   (c-name "GeditDocumentSaveFlags")
@@ -327,6 +338,7 @@
   (parameters
     '("GFile*" "location")
     '("const-GeditEncoding*" "encoding")
+    '("GeditDocumentNewlineType" "newline_type")
     '("GeditDocumentSaveFlags" "flags")
   )
 )
