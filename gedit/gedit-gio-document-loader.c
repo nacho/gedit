@@ -392,7 +392,6 @@ async_read_cb (GInputStream *stream,
 		loader->auto_detected_encoding =
 			gedit_smart_charset_converter_get_guessed (gvloader->priv->converter);
 
-		loader->auto_detected_encoding = gedit_smart_charset_converter_get_guessed (gvloader->priv->converter);
 		loader->auto_detected_newline_type =
 			gedit_document_output_stream_detect_newline_type (GEDIT_DOCUMENT_OUTPUT_STREAM (gvloader->priv->output));
 
