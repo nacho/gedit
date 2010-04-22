@@ -276,7 +276,7 @@ PKG_CHECK_MODULES(GEDIT, [
 	gio-2.0 >= 2.25.4
 	gtk+-2.0 >= 2.16.0
 	gtksourceview-2.0 >= 2.9.7
-	gconf-2.0 >= 1.1.11
+	gconf-2.0 >= 2.31.1
 ])
 
 if test "$os_osx" = "no" &&
