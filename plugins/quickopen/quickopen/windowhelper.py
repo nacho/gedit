@@ -88,7 +88,7 @@ class WindowHelper:
                         paths.append(gfile.get_parent())
 
                 # File browser root directory
-                if gedit.version[0] >= 2 and gedit.version[1] >= 26 and gedit.version[2] >= 2:
+                if gedit.version[0] > 2 or (gedit.version[0] == 2 and (gedit.version[1] > 26 or (gedit.version[1] == 26 and gedit.version[2] >= 2))):
                         bus = self._window.get_message_bus()
 
                         try:
