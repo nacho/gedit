@@ -133,6 +133,7 @@ GtkWidget 	*_gedit_tab_new 		(void);
 GtkWidget	*_gedit_tab_new_from_location	(GFile               *location,
 						 const GeditEncoding *encoding,
 						 gint                 line_pos,
+						 gint                 column_pos,
 						 gboolean             create);
 gchar 		*_gedit_tab_get_name		(GeditTab            *tab);
 gchar 		*_gedit_tab_get_tooltips	(GeditTab            *tab);
@@ -141,6 +142,7 @@ void		 _gedit_tab_load		(GeditTab            *tab,
 						 GFile               *location,
 						 const GeditEncoding *encoding,
 						 gint                 line_pos,
+						 gint                 column_pos,
 						 gboolean             create);
 void		 _gedit_tab_revert		(GeditTab            *tab);
 void		 _gedit_tab_save		(GeditTab            *tab);

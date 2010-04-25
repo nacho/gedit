@@ -839,7 +839,7 @@ static void
 on_location_activated_cb (GeditFileBrowserWidget * tree_widget,
 			  GFile *location, GeditWindow * window)
 {
-	gedit_commands_load_location (window, location, NULL, 0);
+	gedit_commands_load_location (window, location, NULL, 0, 0);
 }
 
 static void

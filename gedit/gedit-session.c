@@ -571,6 +571,7 @@ parse_window (GKeyFile *state_file, const char *group_name)
 							       location,
 							       NULL,
 							       0,
+							       0,
 							       FALSE,
 							       jump_to);
 			if (location)

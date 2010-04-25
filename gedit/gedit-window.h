@@ -109,6 +109,7 @@ GeditTab	*gedit_window_create_tab_from_location	(GeditWindow         *window,
 							 GFile               *location,
 							 const GeditEncoding *encoding,
 							 gint                 line_pos,
+							 gint                 column_pos,
 							 gboolean             create,
 							 gboolean             jump_to);
 							 

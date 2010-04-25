@@ -90,6 +90,8 @@ static BaconMessageConnection *connection;
 
 /* command line */
 static gint line_position = 0;
+static gint column_position = 0;
+static gchar *line_column_position = NULL;
 static gchar *encoding_charset = NULL;
 static gboolean new_window_option = FALSE;
 static gboolean new_document_option = FALSE;
@@ -137,6 +139,9 @@ static const GOptionEntry options [] =
 	{ "new-document", '\0', 0, G_OPTION_ARG_NONE, &new_document_option,
 	  N_("Create a new document in an existing instance of gedit"), NULL },
 
+	{ "+LINE[:COLUMN]", '\0', 0, G_OPTION_ARG_NONE, &line_column_position,
+	  N_("Move cursor to LINE, COLUMN"), NULL },
+
 	{ G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &remaining_args,
 	  NULL, N_("[FILE...]") }, /* collects file arguments */
 
@@ -159,6 +164,26 @@ free_command_line_data (void)
 	new_window_option = FALSE;
 	new_document_option = FALSE;
 	line_position = 0;
+	column_position = 0;
+}
+
+static void
+get_line_column_position (const gchar *arg)
+{
+	gchar **split;
+
+	split = g_strsplit (arg, ":", 2);
+
+	if (split != NULL)
+	{
+		if (split[0] != NULL)
+			line_position = atoi (split[0]);
+
+		if (split[1] != NULL)
+			column_position = atoi (split[1]);
+	}
+
+	g_strfreev (split);
 }
 
 static void
@@ -173,10 +198,13 @@ gedit_get_command_line_data (void)
 			if (*remaining_args[i] == '+')
 			{
 				if (*(remaining_args[i] + 1) == '\0')
+				{
 					/* goto the last line of the document */
 					line_position = G_MAXINT;
+					column_position = 0;
+				}
 				else
-					line_position = atoi (remaining_args[i] + 1);
+					get_line_column_position (remaining_args[i] + 1);
 			}
 			else
 			{
@@ -322,7 +350,7 @@ on_message_received (const char *message,
 			gint n_uris, j;
 			gchar **uris;
 
-			line_position = atoi (params[1]);
+			get_line_column_position (params[1]);
 
 			if (params[2] != '\0')
 				encoding = gedit_encoding_get_from_charset (params[2]);
@@ -375,7 +403,8 @@ on_message_received (const char *message,
 		_gedit_cmd_load_files_from_prompt (window,
 						   file_list,
 						   encoding,
-						   line_position);
+						   line_position,
+						   column_position);
 
 		if (new_document_option)
 			gedit_window_create_tab (window, TRUE);
@@ -488,8 +517,8 @@ send_bacon_message (void)
 		command = g_string_append (command, "OPEN-URIS");
 
 		g_string_append_printf (command,
-					"\t%d\t%s\t%u\t",
-					line_position,
+					"\t%d:%d\t%s\t%u\t",
+					line_position, column_position,
 					encoding_charset ? encoding_charset : "",
 					g_slist_length (file_list));
 
@@ -725,7 +754,8 @@ main (int argc, char *argv[])
 			_gedit_cmd_load_files_from_prompt (window, 
 							   file_list, 
 							   encoding, 
-							   line_position);
+							   line_position,
+							   column_position);
 		}
 		else
 		{

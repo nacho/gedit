@@ -82,6 +82,7 @@ static void	gedit_document_load_real	(GeditDocument          *doc,
 						 GFile                  *location,
 						 const GeditEncoding    *encoding,
 						 gint                    line_pos,
+						 gint                    column_pos,
 						 gboolean                create);
 static void	gedit_document_save_real	(GeditDocument           *doc,
 						 GFile                   *location,
@@ -127,6 +128,7 @@ struct _GeditDocumentPrivate
 	                              * to a non existing file */
 	const GeditEncoding *requested_encoding;
 	gint                 requested_line_pos;
+	gint                 requested_column_pos;
 
 	/* Saving stuff */
 	GeditDocumentSaver *saver;
@@ -1239,6 +1241,7 @@ reset_temp_loading_data (GeditDocument       *doc)
 
 	doc->priv->requested_encoding = NULL;
 	doc->priv->requested_line_pos = 0;
+	doc->priv->requested_column_pos = 0;
 }
 
 static void
@@ -1291,10 +1294,15 @@ document_loader_loaded (GeditDocumentLoader *loader,
 		/* move the cursor at the requested line if any */
 		if (doc->priv->requested_line_pos > 0)
 		{
+			gint column;
+
+			column = (doc->priv->requested_column_pos < 1) ? 0 : doc->priv->requested_column_pos - 1;
+
 			/* line_pos - 1 because get_iter_at_line counts from 0 */
-			gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (doc),
-							  &iter,
-							  doc->priv->requested_line_pos - 1);
+			gtk_text_buffer_get_iter_at_line_offset (GTK_TEXT_BUFFER (doc),
+								 &iter,
+								 doc->priv->requested_line_pos - 1,
+								 column);
 		}
 		/* else, if enabled, to the position stored in the metadata */
 		else if (gedit_prefs_manager_get_restore_cursor_position ())
@@ -1390,6 +1398,7 @@ gedit_document_load_real (GeditDocument       *doc,
 			  GFile               *location,
 			  const GeditEncoding *encoding,
 			  gint                 line_pos,
+			  gint                 column_pos,
 			  gboolean             create)
 {
 	gchar *uri;
@@ -1411,6 +1420,7 @@ gedit_document_load_real (GeditDocument       *doc,
 	doc->priv->create = create;
 	doc->priv->requested_encoding = encoding;
 	doc->priv->requested_line_pos = line_pos;
+	doc->priv->requested_column_pos = column_pos;
 
 	set_location (doc, location);
 	set_content_type (doc, NULL);
@@ -1433,6 +1443,7 @@ gedit_document_load (GeditDocument       *doc,
 		     GFile               *location,
 		     const GeditEncoding *encoding,
 		     gint                 line_pos,
+		     gint                 column_pos,
 		     gboolean             create)
 {
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
@@ -1440,7 +1451,7 @@ gedit_document_load (GeditDocument       *doc,
 	g_return_if_fail (gedit_utils_is_valid_location (location));
 
 	g_signal_emit (doc, document_signals[LOAD], 0, location, encoding,
-	               line_pos, create);
+	               line_pos, column_pos, create);
 }
 
 /**

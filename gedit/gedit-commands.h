@@ -43,13 +43,15 @@ G_BEGIN_DECLS
 void		 gedit_commands_load_location		(GeditWindow         *window,
 							 GFile               *location,
 							 const GeditEncoding *encoding,
-							 gint                 line_pos);
+							 gint                 line_pos,
+							 gint                 column_pos);
 
 /* Ignore non-existing URIs */
 gint		 gedit_commands_load_locations		(GeditWindow         *window,
 							 const GSList        *locations,
 							 const GeditEncoding *encoding,
-							 gint                 line_pos);
+							 gint                 line_pos,
+							 gint                 column_pos);
 
 void		 gedit_commands_save_document		(GeditWindow         *window,
                                                          GeditDocument       *document);
@@ -64,7 +66,8 @@ void		 gedit_commands_save_all_documents 	(GeditWindow         *window);
 gint		_gedit_cmd_load_files_from_prompt	(GeditWindow         *window,
 							 GSList              *files,
 							 const GeditEncoding *encoding,
-							 gint                 line_pos);
+							 gint                 line_pos,
+							 gint                 column_pos);
 
 void		_gedit_cmd_file_new			(GtkAction   *action,
 							 GeditWindow *window);

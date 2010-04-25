@@ -123,6 +123,7 @@ load_file_list (GeditWindow         *window,
 		const GSList        *files,
 		const GeditEncoding *encoding,
 		gint                 line_pos,
+		gint                 column_pos,
 		gboolean             create)
 {
 	GeditTab      *tab;
@@ -196,6 +197,7 @@ load_file_list (GeditWindow         *window,
 					 l->data,
 					 encoding,
 					 line_pos,
+					 column_pos,
 					 create);
 
 			l = g_slist_next (l);
@@ -213,6 +215,7 @@ load_file_list (GeditWindow         *window,
 							     l->data,
 							     encoding,
 							     line_pos,
+							     column_pos,
 							     create,
 							     jump_to);
 
@@ -267,7 +270,8 @@ void
 gedit_commands_load_location (GeditWindow         *window,
 			      GFile               *location,
 			      const GeditEncoding *encoding,
-			      gint                 line_pos)
+			      gint                 line_pos,
+			      gint                 column_pos)
 {
 	GSList *locations = NULL;
 	gchar *uri;
@@ -282,7 +286,7 @@ gedit_commands_load_location (GeditWindow         *window,
 
 	locations = g_slist_prepend (locations, location);
 
-	load_file_list (window, locations, encoding, line_pos, FALSE);
+	load_file_list (window, locations, encoding, line_pos, column_pos, FALSE);
 
 	g_slist_free (locations);
 }
@@ -296,14 +300,15 @@ gint
 gedit_commands_load_locations (GeditWindow         *window,
 			       const GSList        *locations,
 			       const GeditEncoding *encoding,
-			       gint                 line_pos)
+			       gint                 line_pos,
+			       gint                 column_pos)
 {
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), 0);
 	g_return_val_if_fail ((locations != NULL) && (locations->data != NULL), 0);
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	return load_file_list (window, locations, encoding, line_pos, FALSE);
+	return load_file_list (window, locations, encoding, line_pos, column_pos, FALSE);
 }
 
 /*
@@ -315,11 +320,12 @@ gint
 _gedit_cmd_load_files_from_prompt (GeditWindow         *window,
 				   GSList              *files,
 				   const GeditEncoding *encoding,
-				   gint                 line_pos)
+				   gint                 line_pos,
+				   gint                 column_pos)
 {
 	gedit_debug (DEBUG_COMMANDS);
 
-	return load_file_list (window, files, encoding, line_pos, TRUE);
+	return load_file_list (window, files, encoding, line_pos, column_pos, TRUE);
 }
 
 static void
@@ -363,6 +369,7 @@ open_dialog_response_cb (GeditFileChooserDialog *dialog,
 	gedit_commands_load_locations (window,
 				       files,
 				       encoding,
+				       0,
 				       0);
 
 	g_slist_foreach (files, (GFunc) g_object_unref, NULL);

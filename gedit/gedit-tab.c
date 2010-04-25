@@ -70,6 +70,7 @@ struct _GeditTabPrivate
 
 	/* tmp data for loading */
 	gint                    tmp_line_pos;
+	gint                    tmp_column_pos;
 	const GeditEncoding    *tmp_encoding;
 	
 	GTimer 		       *timer;
@@ -526,6 +527,7 @@ io_loading_error_message_area_response (GtkWidget *message_area,
 					     location,
 					     tab->priv->tmp_encoding,
 					     tab->priv->tmp_line_pos,
+					     tab->priv->tmp_column_pos,
 					     FALSE);
 			break;
 		case GTK_RESPONSE_YES:
@@ -1610,6 +1612,7 @@ GtkWidget *
 _gedit_tab_new_from_location (GFile               *location,
 			      const GeditEncoding *encoding,
 			      gint                 line_pos,
+			      gint                 column_pos,
 			      gboolean             create)
 {
 	GeditTab *tab;
@@ -1622,6 +1625,7 @@ _gedit_tab_new_from_location (GFile               *location,
 			 location,
 			 encoding,
 			 line_pos,
+			 column_pos,
 			 create);
 
 	return GTK_WIDGET (tab);
@@ -1994,6 +1998,7 @@ _gedit_tab_load (GeditTab            *tab,
 		 GFile               *location,
 		 const GeditEncoding *encoding,
 		 gint                 line_pos,
+		 gint                 column_pos,
 		 gboolean             create)
 {
 	GeditDocument *doc;
@@ -2008,6 +2013,7 @@ _gedit_tab_load (GeditTab            *tab,
 	gedit_tab_set_state (tab, GEDIT_TAB_STATE_LOADING);
 
 	tab->priv->tmp_line_pos = line_pos;
+	tab->priv->tmp_column_pos = column_pos;
 	tab->priv->tmp_encoding = encoding;
 
 	if (tab->priv->auto_save_timeout > 0)
@@ -2017,6 +2023,7 @@ _gedit_tab_load (GeditTab            *tab,
 			     location,
 			     encoding,
 			     line_pos,
+			     column_pos,
 			     create);
 }
 
@@ -2052,6 +2059,7 @@ _gedit_tab_revert (GeditTab *tab)
 	gedit_document_load (doc,
 			     location,
 			     tab->priv->tmp_encoding,
+			     0,
 			     0,
 			     FALSE);
 

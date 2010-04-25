@@ -122,7 +122,7 @@ test_loader (const gchar *filename,
 	                  G_CALLBACK (on_document_loaded),
 	                  data);
 
-	gedit_document_load (document, file, gedit_encoding_get_utf8 (), 0, FALSE);
+	gedit_document_load (document, file, gedit_encoding_get_utf8 (), 0, 0, FALSE);
 
 	while (!test_completed)
 	{

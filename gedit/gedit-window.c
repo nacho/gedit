@@ -1203,7 +1203,7 @@ open_recent_file (GFile       *location,
 
 	locations = g_slist_prepend (locations, (gpointer) location);
 
-	if (gedit_commands_load_locations (window, locations, NULL, 0) != 1)
+	if (gedit_commands_load_locations (window, locations, NULL, 0, 0) != 1)
 	{
 		_gedit_recent_remove (window, location);
 	}
@@ -2853,6 +2853,7 @@ load_uris_from_drop (GeditWindow  *window,
 	gedit_commands_load_locations (window,
 				       locations,
 				       NULL,
+				       0,
 				       0);
 
 	g_slist_foreach (locations, (GFunc) g_object_unref, NULL);
@@ -4203,6 +4204,7 @@ gedit_window_create_tab_from_location (GeditWindow         *window,
 				       GFile               *location,
 				       const GeditEncoding *encoding,
 				       gint                 line_pos,
+				       gint                 column_pos,
 				       gboolean             create,
 				       gboolean             jump_to)
 {
@@ -4214,6 +4216,7 @@ gedit_window_create_tab_from_location (GeditWindow         *window,
 	tab = _gedit_tab_new_from_location (location,
 					    encoding,
 					    line_pos,
+					    column_pos,
 					    create);
 	if (tab == NULL)
 		return NULL;

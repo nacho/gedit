@@ -129,6 +129,7 @@ struct _GeditDocumentClass
 					 GFile               *location,
 					 const GeditEncoding *encoding,
 					 gint                 line_pos,
+					 gint                 column_pos,
 					 gboolean             create);
 
 	void (* loading)		(GeditDocument    *document,
@@ -205,6 +206,7 @@ void		 gedit_document_load 		(GeditDocument       *doc,
 						 GFile               *location,
 						 const GeditEncoding *encoding,
 						 gint                 line_pos,
+						 gint                 column_pos,
 						 gboolean             create);
 
 gboolean	 gedit_document_load_cancel	(GeditDocument       *doc);
