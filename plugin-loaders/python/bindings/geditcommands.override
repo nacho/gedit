@@ -25,17 +25,18 @@ override gedit_commands_load_location kwargs
 static PyObject *
 _wrap_gedit_commands_load_location (PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	static char *kwlist[] = { "window", "location", "encoding", "line_pos", NULL };
+	static char *kwlist[] = { "window", "location", "encoding", "line_pos", "column_pos", NULL };
 	PyGObject *window;
 	PyGObject *location;
 	int line_pos = 0;
+	int column_pos = 0;
 	PyObject *py_encoding = NULL;
 	GeditEncoding *encoding = NULL;
 
-	if (!PyArg_ParseTupleAndKeywords (args, kwargs, "O!O!|Oi:load_location", 
+	if (!PyArg_ParseTupleAndKeywords (args, kwargs, "O!O!|Oii:load_location", 
 	                                  kwlist, &PyGeditWindow_Type,
 	                                  &window, &PyGFile_Type, &location,
-	                                  &py_encoding, &line_pos))
+	                                  &py_encoding, &line_pos, &column_pos))
 		return NULL;
 
 	if (py_encoding != NULL && py_encoding != Py_None)
@@ -51,7 +52,7 @@ _wrap_gedit_commands_load_location (PyObject *self, PyObject *args, PyObject *kw
 	}
 
 	gedit_commands_load_location (GEDIT_WINDOW (window->obj), G_FILE (location->obj),
-	                              encoding, line_pos);
+	                              encoding, line_pos, column_pos);
 	Py_INCREF (Py_None);
 	return Py_None;
 }
@@ -60,10 +61,11 @@ override gedit_commands_load_locations kwargs
 static PyObject *
 _wrap_gedit_commands_load_locations (PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	static char *kwlist[] = { "window", "locations", "encoding", "line_pos", NULL };
+	static char *kwlist[] = { "window", "locations", "encoding", "line_pos", "column_pos", NULL };
 	PyGObject *window;
 	GSList *locations = NULL;
 	int line_pos = 0;
+	int column_pos = 0;
 	PyObject *py_encoding = NULL;
 	PyObject *list;
 	PyObject *item;
@@ -71,10 +73,10 @@ _wrap_gedit_commands_load_locations (PyObject *self, PyObject *args, PyObject *k
 	int len;
 	int i;
 
-	if (!PyArg_ParseTupleAndKeywords (args, kwargs, "O!O|Oi:load_locations",
+	if (!PyArg_ParseTupleAndKeywords (args, kwargs, "O!O|Oii:load_locations",
 	                                  kwlist, &PyGeditWindow_Type,
 	                                  &window, &list, &py_encoding,
-	                                  &line_pos))
+	                                  &line_pos, &column_pos))
 		return NULL;
 
 	if (py_encoding != NULL && py_encoding != Py_None)
@@ -115,7 +117,7 @@ _wrap_gedit_commands_load_locations (PyObject *self, PyObject *args, PyObject *k
 
 	locations = g_slist_reverse (locations);
 	gedit_commands_load_locations (GEDIT_WINDOW (window->obj), locations,
-	                               encoding, line_pos);
+	                               encoding, line_pos, column_pos);
 	g_slist_free (locations);
 
 	Py_INCREF (Py_None);

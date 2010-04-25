@@ -189,7 +189,7 @@ class WindowHelper:
                 self._popup = None
 
         def on_activated(self, gfile):
-                gedit.commands.load_location(self._window, gfile, None, -1)
+                gedit.commands.load_location(self._window, gfile, None, -1, -1)
                 return True
 
 # ex:ts=8:et:
