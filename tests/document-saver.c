@@ -200,7 +200,6 @@ test_saver (const gchar              *filename_or_uri,
 	gboolean existed;
 
 	document = create_document (contents);
-	gedit_document_set_newline_type (document, newline_type);
 
 	g_signal_connect (document, "saved", G_CALLBACK (complete_test_error), data);
 
@@ -218,7 +217,8 @@ test_saver (const gchar              *filename_or_uri,
 
 	ensure_mounted (file);
 
-	gedit_document_save_as (document, file, gedit_encoding_get_utf8 (), save_flags);
+	gedit_document_save_as (document, file, gedit_encoding_get_utf8 (),
+			        newline_type, save_flags);
 
 	while (!test_completed)
 	{
