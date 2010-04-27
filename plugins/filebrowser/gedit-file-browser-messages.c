@@ -1,3 +1,23 @@
+/*
+ * gedit-file-browser-messages.c
+ * 
+ * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2, or (at your option)
+ * any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
+
 #include "gedit-file-browser-messages.h"
 #include "gedit-file-browser-store.h"
 #include <gedit/gedit-message.h>
@@ -9,7 +29,7 @@
 
 typedef struct
 {
-	GeditWindow *window;	
+	GeditWindow  *window;	
 	GeditMessage *message;
 } MessageCacheData;
 
@@ -35,7 +55,7 @@ typedef struct
 {
 	gulong id;
 	
-	GeditWindow *window;
+	GeditWindow  *window;
 	GeditMessage *message;
 } FilterData;
 
@@ -73,7 +93,7 @@ window_data_new (GeditWindow            *window,
 }
 
 static WindowData *
-get_window_data (GeditWindow * window)
+get_window_data (GeditWindow *window)
 {
 	return (WindowData *) (g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY));
 }
@@ -161,8 +181,8 @@ message_cache_data_free (MessageCacheData *data)
 }
 
 static MessageCacheData *
-message_cache_data_new (GeditWindow            *window,
-			GeditMessage           *message)
+message_cache_data_new (GeditWindow  *window,
+			GeditMessage *message)
 {
 	MessageCacheData *data = g_slice_new (MessageCacheData);
 	
@@ -343,11 +363,9 @@ set_item_message (WindowData   *data,
 			   NULL);
 	
 	if (gedit_message_has_key (message, "is_directory"))
-	{
 		gedit_message_set (message, 
 				   "is_directory", FILE_IS_DIR (flags),
 				   NULL);
-	}			   
 
 	g_free (track_id);
 }
@@ -404,7 +422,7 @@ message_add_filter_cb (GeditMessageBus *bus,
 			   "method", &method,
 			   NULL);
 	
-	// Check if there exists such a 'callback' message
+	/* Check if there exists such a 'callback' message */
 	if (!object_path || !method)
 	{
 		g_free (object_path);
@@ -423,14 +441,12 @@ message_add_filter_cb (GeditMessageBus *bus,
 		return;
 	}
 	
-	// Check if the message type has the correct arguments
+	/* Check if the message type has the correct arguments */
 	if (gedit_message_type_lookup (message_type, "id") != G_TYPE_STRING ||
 	    gedit_message_type_lookup (message_type, "location") != G_TYPE_FILE ||
 	    gedit_message_type_lookup (message_type, "is_directory") != G_TYPE_BOOLEAN ||
 	    gedit_message_type_lookup (message_type, "filter") != G_TYPE_BOOLEAN)
-	{
 		return;
-	}
 	
 	cbmessage = gedit_message_type_instantiate (message_type,
 						    "id", NULL,
@@ -439,7 +455,7 @@ message_add_filter_cb (GeditMessageBus *bus,
 						    "filter", FALSE,
 						    NULL);
 
-	// Register the custom filter on the widget
+	/* Register the custom filter on the widget */
 	filter_data = filter_data_new (window, cbmessage);
 	id = gedit_file_browser_widget_add_filter (data->widget, 
 						   (GeditFileBrowserWidgetFilterFunc)custom_message_filter_func,
@@ -582,7 +598,7 @@ message_add_context_item_cb (GeditMessageBus *bus,
 		g_free (path);
 		return;
 	}
-	
+
 	gtk_action_group_add_action (data->merged_actions, action);
 	manager = gedit_file_browser_widget_get_ui_manager (data->widget);
 	name = g_strconcat (gtk_action_get_name (action), "MenuItem", NULL);

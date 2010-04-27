@@ -46,11 +46,9 @@ struct _GeditFileBrowserPlugin
 {
 	GeditPlugin parent_instance;
 
-	/*< private > */
+	/* < private > */
 	GeditFileBrowserPluginPrivate *priv;
 };
-
-
 
 struct _GeditFileBrowserPluginClass 
 {
@@ -60,12 +58,11 @@ struct _GeditFileBrowserPluginClass
 /*
  * Public methods
  */
-GType filetree_plugin_get_type              (void) G_GNUC_CONST;
+GType			filetree_plugin_get_type	(void) G_GNUC_CONST;
 
 /* All the plugins must implement this function */
-G_MODULE_EXPORT GType register_gedit_plugin (GTypeModule * module);
+G_MODULE_EXPORT GType	register_gedit_plugin		(GTypeModule *module);
 
 G_END_DECLS
-#endif /* __GEDIT_FILE_BROWSER_PLUGIN_H__ */
 
-// ex:ts=8:noet:
+#endif /* __GEDIT_FILE_BROWSER_PLUGIN_H__ */

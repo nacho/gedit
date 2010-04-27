@@ -1,19 +1,19 @@
 /*
  * gedit-file-browser-view.h - Gedit plugin providing easy file access 
  * from the sidepanel
- *
+ * 
  * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
- *
+ * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
@@ -54,31 +54,30 @@ struct _GeditFileBrowserViewClass
 	GtkTreeViewClass parent_class;
 
 	/* Signals */
-	void (*error) (GeditFileBrowserView * filetree, 
-	               guint code,
-		       gchar const *message);
-	void (*file_activated) (GeditFileBrowserView * filetree,
-				    GtkTreeIter *iter);
-	void (*directory_activated) (GeditFileBrowserView * filetree,
-				    GtkTreeIter *iter);
-	void (*bookmark_activated) (GeditFileBrowserView * filetree,
-				    GtkTreeIter *iter);
+	void (* error)			(GeditFileBrowserView *filetree,
+					 guint                 code,
+					 gchar const          *message);
+	void (* file_activated)		(GeditFileBrowserView *filetree,
+					 GtkTreeIter          *iter);
+	void (* directory_activated)	(GeditFileBrowserView *filetree,
+					 GtkTreeIter          *iter);
+	void (* bookmark_activated)	(GeditFileBrowserView *filetree,
+					 GtkTreeIter          *iter);
 };
 
-GType gedit_file_browser_view_get_type			(void) G_GNUC_CONST;
-GType gedit_file_browser_view_register_type		(GTypeModule 			* module);
+GType		 gedit_file_browser_view_get_type			(void) G_GNUC_CONST;
+GType		 gedit_file_browser_view_register_type			(GTypeModule                     *module);
 
-GtkWidget *gedit_file_browser_view_new			(void);
-void gedit_file_browser_view_set_model			(GeditFileBrowserView 		* tree_view,
-							 GtkTreeModel 			* model);
-void gedit_file_browser_view_start_rename		(GeditFileBrowserView 		* tree_view, 
-							 GtkTreeIter 			* iter);
-void gedit_file_browser_view_set_click_policy		(GeditFileBrowserView 		* tree_view,
-							 GeditFileBrowserViewClickPolicy  policy);
-void gedit_file_browser_view_set_restore_expand_state	(GeditFileBrowserView 		* tree_view,
-							 gboolean 			  restore_expand_state);
+GtkWidget	*gedit_file_browser_view_new				(void);
+void		 gedit_file_browser_view_set_model			(GeditFileBrowserView            *tree_view,
+									 GtkTreeModel                    *model);
+void		 gedit_file_browser_view_start_rename			(GeditFileBrowserView            *tree_view,
+									 GtkTreeIter                     *iter);
+void		 gedit_file_browser_view_set_click_policy		(GeditFileBrowserView            *tree_view,
+							 		 GeditFileBrowserViewClickPolicy  policy);
+void		 gedit_file_browser_view_set_restore_expand_state	(GeditFileBrowserView            *tree_view,
+									 gboolean                         restore_expand_state);
 
 G_END_DECLS
-#endif				/* __GEDIT_FILE_BROWSER_VIEW_H__ */
 
-// ex:ts=8:noet:
+#endif /* __GEDIT_FILE_BROWSER_VIEW_H__ */

@@ -1,19 +1,19 @@
 /*
- * gedit-file-bookmarks-store.c - Gedit plugin providing easy file access 
+ * gedit-file-bookmarks-utils.c - Gedit plugin providing easy file access 
  * from the sidepanel
- *
+ * 
  * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
- *
+ * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
@@ -23,21 +23,23 @@
 #include <gedit/gedit-utils.h>
 
 static GdkPixbuf *
-process_icon_pixbuf (GdkPixbuf * pixbuf,
-		     gchar const * name, 
-		     gint size, 
-		     GError * error)
+process_icon_pixbuf (GdkPixbuf   *pixbuf,
+		     gchar const *name, 
+		     gint         size, 
+		     GError      *error)
 {
-	GdkPixbuf * scale;
+	GdkPixbuf *scale;
 
-	if (error != NULL) {
+	if (error != NULL)
+	{
 		g_warning ("Could not load theme icon %s: %s",
 			   name,
 			   error->message);
 		g_error_free (error);
 	}
 	
-	if (pixbuf && gdk_pixbuf_get_width (pixbuf) > size) {
+	if (pixbuf && gdk_pixbuf_get_width (pixbuf) > size)
+	{
 		scale = gdk_pixbuf_scale_simple (pixbuf, 
 		                                 size, 
 		                                 size, 
@@ -50,8 +52,8 @@ process_icon_pixbuf (GdkPixbuf * pixbuf,
 }
 
 GdkPixbuf *
-gedit_file_browser_utils_pixbuf_from_theme (gchar const * name,
-                                            GtkIconSize size)
+gedit_file_browser_utils_pixbuf_from_theme (gchar const *name,
+                                            GtkIconSize  size)
 {
 	gint width;
 	GError *error = NULL;
@@ -71,10 +73,10 @@ gedit_file_browser_utils_pixbuf_from_theme (gchar const * name,
 }
 
 GdkPixbuf *
-gedit_file_browser_utils_pixbuf_from_icon (GIcon * icon,
-                                           GtkIconSize size)
+gedit_file_browser_utils_pixbuf_from_icon (GIcon       *icon,
+                                           GtkIconSize  size)
 {
-	GdkPixbuf * ret = NULL;
+	GdkPixbuf *ret = NULL;
 	GtkIconTheme *theme;
 	GtkIconInfo *info;
 	gint width;
@@ -100,12 +102,12 @@ gedit_file_browser_utils_pixbuf_from_icon (GIcon * icon,
 }
 
 GdkPixbuf *
-gedit_file_browser_utils_pixbuf_from_file (GFile * file,
-                                           GtkIconSize size)
+gedit_file_browser_utils_pixbuf_from_file (GFile       *file,
+                                           GtkIconSize  size)
 {
-	GIcon * icon;
-	GFileInfo * info;
-	GdkPixbuf * ret = NULL;
+	GIcon *icon;
+	GFileInfo *info;
+	GdkPixbuf *ret = NULL;
 
 	info = g_file_query_info (file, 
 				  G_FILE_ATTRIBUTE_STANDARD_ICON, 
@@ -126,18 +128,18 @@ gedit_file_browser_utils_pixbuf_from_file (GFile * file,
 }
 
 gchar *
-gedit_file_browser_utils_file_basename (GFile * file)
+gedit_file_browser_utils_file_basename (GFile *file)
 {
 	return gedit_utils_basename_for_display (file);
 }
 
 gboolean
-gedit_file_browser_utils_confirmation_dialog (GeditWindow * window,
-                                              GtkMessageType type,
-                                              gchar const *message,
-		                              gchar const *secondary, 
-		                              gchar const * button_stock, 
-		                              gchar const * button_label)
+gedit_file_browser_utils_confirmation_dialog (GeditWindow    *window,
+                                              GtkMessageType  type,
+                                              gchar const    *message,
+		                              gchar const    *secondary, 
+		                              gchar const    *button_stock, 
+		                              gchar const    *button_label)
 {
 	GtkWidget *dlg;
 	gint ret;
@@ -165,7 +167,8 @@ gedit_file_browser_utils_confirmation_dialog (GeditWindow * window,
 	/* Add custom button */
 	button = gtk_button_new_from_stock (button_stock);
 	
-	if (button_label) {
+	if (button_label)
+	{
 		gtk_button_set_use_stock (GTK_BUTTON (button), FALSE);
 		gtk_button_set_label (GTK_BUTTON (button), button_label);
 	}
@@ -181,5 +184,3 @@ gedit_file_browser_utils_confirmation_dialog (GeditWindow * window,
 
 	return (ret == GTK_RESPONSE_OK);
 }
-
-// ex:ts=8:noet:

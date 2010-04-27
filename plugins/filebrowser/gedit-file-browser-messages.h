@@ -26,10 +26,8 @@
 #include <gedit/gedit-message-bus.h>
 #include "gedit-file-browser-widget.h"
 
-void gedit_file_browser_messages_register   (GeditWindow *window,
+void gedit_file_browser_messages_register   (GeditWindow            *window,
 					     GeditFileBrowserWidget *widget);
-void gedit_file_browser_messages_unregister (GeditWindow *window);
+void gedit_file_browser_messages_unregister (GeditWindow            *window);
 
 #endif /* __GEDIT_FILE_BROWSER_MESSAGES_H__ */
-
-// ex:ts=8:noet:

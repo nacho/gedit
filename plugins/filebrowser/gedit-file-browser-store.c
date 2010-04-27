@@ -1,19 +1,19 @@
 /*
  * gedit-file-browser-store.c - Gedit plugin providing easy file access 
  * from the sidepanel
- *
+ * 
  * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
- *
+ * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
@@ -61,16 +61,16 @@ typedef struct _FileBrowserNodeDir FileBrowserNodeDir;
 typedef struct _AsyncData	   AsyncData;
 typedef struct _AsyncNode	   AsyncNode;
 
-typedef gint (*SortFunc) (FileBrowserNode * node1,
-			  FileBrowserNode * node2);
+typedef gint (*SortFunc) (FileBrowserNode *node1,
+			  FileBrowserNode *node2);
 
 struct _AsyncData
 {
-	GeditFileBrowserStore * model;
-	GCancellable * cancellable;
+	GeditFileBrowserStore *model;
+	GCancellable *cancellable;
 	gboolean trash;
-	GList * files;
-	GList * iter;
+	GList *files;
+	GList *iter;
 	gboolean removed;
 };
 
@@ -82,10 +82,10 @@ struct _AsyncNode
 };
 
 typedef struct {
-	GeditFileBrowserStore * model;
-	GFile * virtual_root;
-	GMountOperation * operation;
-	GCancellable * cancellable;
+	GeditFileBrowserStore *model;
+	GFile *virtual_root;
+	GMountOperation *operation;
+	GCancellable *cancellable;
 } MountInfo;
 
 struct _FileBrowserNode 
@@ -129,73 +129,73 @@ struct _GeditFileBrowserStorePrivate
 	MountInfo *mount_info;
 };
 
-static FileBrowserNode *model_find_node 		    (GeditFileBrowserStore *model,
-							     FileBrowserNode *node,
-							     GFile *uri);
-static void model_remove_node                               (GeditFileBrowserStore * model,
-							     FileBrowserNode * node, 
-							     GtkTreePath * path,
-							     gboolean free_nodes);
+static FileBrowserNode *model_find_node 		    (GeditFileBrowserStore  *model,
+							     FileBrowserNode        *node,
+							     GFile                  *uri);
+static void model_remove_node                               (GeditFileBrowserStore  *model,
+							     FileBrowserNode        *node, 
+							     GtkTreePath            *path,
+							     gboolean                free_nodes);
 
-static void set_virtual_root_from_node                      (GeditFileBrowserStore * model,
-				                             FileBrowserNode * node);
+static void set_virtual_root_from_node                      (GeditFileBrowserStore  *model,
+				                             FileBrowserNode        *node);
 
-static void gedit_file_browser_store_iface_init             (GtkTreeModelIface * iface);
-static GtkTreeModelFlags gedit_file_browser_store_get_flags (GtkTreeModel * tree_model);
-static gint gedit_file_browser_store_get_n_columns          (GtkTreeModel * tree_model);
-static GType gedit_file_browser_store_get_column_type       (GtkTreeModel * tree_model,
-							     gint index);
-static gboolean gedit_file_browser_store_get_iter           (GtkTreeModel * tree_model,
-							     GtkTreeIter * iter,
-							     GtkTreePath * path);
-static GtkTreePath *gedit_file_browser_store_get_path       (GtkTreeModel * tree_model,
-							     GtkTreeIter * iter);
-static void gedit_file_browser_store_get_value              (GtkTreeModel * tree_model,
-							     GtkTreeIter * iter,
-							     gint column,
-							     GValue * value);
-static gboolean gedit_file_browser_store_iter_next          (GtkTreeModel * tree_model,
-							     GtkTreeIter * iter);
-static gboolean gedit_file_browser_store_iter_children      (GtkTreeModel * tree_model,
-							     GtkTreeIter * iter,
-							     GtkTreeIter * parent);
-static gboolean gedit_file_browser_store_iter_has_child     (GtkTreeModel * tree_model,
-							     GtkTreeIter * iter);
-static gint gedit_file_browser_store_iter_n_children        (GtkTreeModel * tree_model,
-							     GtkTreeIter * iter);
-static gboolean gedit_file_browser_store_iter_nth_child     (GtkTreeModel * tree_model,
-							     GtkTreeIter * iter,
-							     GtkTreeIter * parent, 
-							     gint n);
-static gboolean gedit_file_browser_store_iter_parent        (GtkTreeModel * tree_model,
-							     GtkTreeIter * iter,
-							     GtkTreeIter * child);
-static void gedit_file_browser_store_row_inserted	    (GtkTreeModel * tree_model,
-							     GtkTreePath * path,
-							     GtkTreeIter * iter);
+static void gedit_file_browser_store_iface_init             (GtkTreeModelIface      *iface);
+static GtkTreeModelFlags gedit_file_browser_store_get_flags (GtkTreeModel           *tree_model);
+static gint gedit_file_browser_store_get_n_columns          (GtkTreeModel           *tree_model);
+static GType gedit_file_browser_store_get_column_type       (GtkTreeModel           *tree_model,
+							     gint                    index);
+static gboolean gedit_file_browser_store_get_iter           (GtkTreeModel           *tree_model,
+							     GtkTreeIter            *iter,
+							     GtkTreePath            *path);
+static GtkTreePath *gedit_file_browser_store_get_path       (GtkTreeModel           *tree_model,
+							     GtkTreeIter            *iter);
+static void gedit_file_browser_store_get_value              (GtkTreeModel           *tree_model,
+							     GtkTreeIter            *iter,
+							     gint                    column,
+							     GValue                 *value);
+static gboolean gedit_file_browser_store_iter_next          (GtkTreeModel           *tree_model,
+							     GtkTreeIter            *iter);
+static gboolean gedit_file_browser_store_iter_children      (GtkTreeModel           *tree_model,
+							     GtkTreeIter            *iter,
+							     GtkTreeIter            *parent);
+static gboolean gedit_file_browser_store_iter_has_child     (GtkTreeModel           *tree_model,
+							     GtkTreeIter            *iter);
+static gint gedit_file_browser_store_iter_n_children        (GtkTreeModel           *tree_model,
+							     GtkTreeIter            *iter);
+static gboolean gedit_file_browser_store_iter_nth_child     (GtkTreeModel           *tree_model,
+							     GtkTreeIter            *iter,
+							     GtkTreeIter            *parent, 
+							     gint                    n);
+static gboolean gedit_file_browser_store_iter_parent        (GtkTreeModel           *tree_model,
+							     GtkTreeIter            *iter,
+							     GtkTreeIter            *child);
+static void gedit_file_browser_store_row_inserted	    (GtkTreeModel           *tree_model,
+							     GtkTreePath            *path,
+							     GtkTreeIter            *iter);
 
-static void gedit_file_browser_store_drag_source_init       (GtkTreeDragSourceIface * iface);
-static gboolean gedit_file_browser_store_row_draggable      (GtkTreeDragSource * drag_source,
-							     GtkTreePath       * path);
-static gboolean gedit_file_browser_store_drag_data_delete   (GtkTreeDragSource * drag_source,
-							     GtkTreePath       * path);
-static gboolean gedit_file_browser_store_drag_data_get      (GtkTreeDragSource * drag_source,
-							     GtkTreePath       * path,
-							     GtkSelectionData  * selection_data);
+static void gedit_file_browser_store_drag_source_init       (GtkTreeDragSourceIface *iface);
+static gboolean gedit_file_browser_store_row_draggable      (GtkTreeDragSource      *drag_source,
+							     GtkTreePath            *path);
+static gboolean gedit_file_browser_store_drag_data_delete   (GtkTreeDragSource      *drag_source,
+							     GtkTreePath            *path);
+static gboolean gedit_file_browser_store_drag_data_get      (GtkTreeDragSource      *drag_source,
+							     GtkTreePath            *path,
+							     GtkSelectionData       *selection_data);
 
-static void file_browser_node_free                          (GeditFileBrowserStore * model,
-							     FileBrowserNode * node);
-static void model_add_node                                  (GeditFileBrowserStore * model,
-							     FileBrowserNode * child,
-							     FileBrowserNode * parent);
-static void model_clear                                     (GeditFileBrowserStore * model,
-							     gboolean free_nodes);
-static gint model_sort_default                              (FileBrowserNode * node1,
-							     FileBrowserNode * node2);
-static void model_check_dummy                               (GeditFileBrowserStore * model,
-							     FileBrowserNode * node);
-static void next_files_async 				    (GFileEnumerator * enumerator,
-							     AsyncNode * async);
+static void file_browser_node_free                          (GeditFileBrowserStore  *model,
+							     FileBrowserNode        *node);
+static void model_add_node                                  (GeditFileBrowserStore  *model,
+							     FileBrowserNode        *child,
+							     FileBrowserNode        *parent);
+static void model_clear                                     (GeditFileBrowserStore  *model,
+							     gboolean                free_nodes);
+static gint model_sort_default                              (FileBrowserNode        *node1,
+							     FileBrowserNode        *node2);
+static void model_check_dummy                               (GeditFileBrowserStore  *model,
+							     FileBrowserNode        *node);
+static void next_files_async 				    (GFileEnumerator        *enumerator,
+							     AsyncNode              *async);
 
 GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE (GeditFileBrowserStore, gedit_file_browser_store,
 			G_TYPE_OBJECT,
@@ -243,7 +243,7 @@ cancel_mount_operation (GeditFileBrowserStore *obj)
 }
 
 static void
-gedit_file_browser_store_finalize (GObject * object)
+gedit_file_browser_store_finalize (GObject *object)
 {
 	GeditFileBrowserStore *obj = GEDIT_FILE_BROWSER_STORE (object);
 	GSList *item;
@@ -270,9 +270,12 @@ static void
 set_gvalue_from_node (GValue          *value,
                       FileBrowserNode *node)
 {
-	if (node == NULL) {
+	if (node == NULL)
+	{
 		g_value_set_object (value, NULL);
-	} else {
+	}
+	else
+	{
 		g_value_set_object (value, node->file);
 	}
 }
@@ -323,7 +326,7 @@ gedit_file_browser_store_set_property (GObject      *object,
 }
 
 static void
-gedit_file_browser_store_class_init (GeditFileBrowserStoreClass * klass)
+gedit_file_browser_store_class_init (GeditFileBrowserStoreClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
@@ -425,7 +428,7 @@ gedit_file_browser_store_class_init (GeditFileBrowserStoreClass * klass)
 }
 
 static void
-gedit_file_browser_store_iface_init (GtkTreeModelIface * iface)
+gedit_file_browser_store_iface_init (GtkTreeModelIface *iface)
 {
 	iface->get_flags = gedit_file_browser_store_get_flags;
 	iface->get_n_columns = gedit_file_browser_store_get_n_columns;
@@ -443,7 +446,7 @@ gedit_file_browser_store_iface_init (GtkTreeModelIface * iface)
 }
 
 static void
-gedit_file_browser_store_drag_source_init (GtkTreeDragSourceIface * iface)
+gedit_file_browser_store_drag_source_init (GtkTreeDragSourceIface *iface)
 {
 	iface->row_draggable = gedit_file_browser_store_row_draggable;
 	iface->drag_data_delete = gedit_file_browser_store_drag_data_delete;
@@ -451,28 +454,24 @@ gedit_file_browser_store_drag_source_init (GtkTreeDragSourceIface * iface)
 }
 
 static void
-gedit_file_browser_store_init (GeditFileBrowserStore * obj)
+gedit_file_browser_store_init (GeditFileBrowserStore *obj)
 {
 	obj->priv = GEDIT_FILE_BROWSER_STORE_GET_PRIVATE (obj);
 
-	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION] =
-	    G_TYPE_FILE;
-	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_NAME] =
-	    G_TYPE_STRING;
-	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS] =
-	    G_TYPE_UINT;
-	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_ICON] =
-	    GDK_TYPE_PIXBUF;
-	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_EMBLEM] =
-	    GDK_TYPE_PIXBUF;
+	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION] = G_TYPE_FILE;
+	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_NAME] = G_TYPE_STRING;
+	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS] = G_TYPE_UINT;
+	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_ICON] = GDK_TYPE_PIXBUF;
+	obj->priv->column_types[GEDIT_FILE_BROWSER_STORE_COLUMN_EMBLEM] = GDK_TYPE_PIXBUF;
 
-	// Default filter mode is hiding the hidden files
+	/* Default filter mode is hiding the hidden files */
 	obj->priv->filter_mode = gedit_file_browser_store_filter_mode_get_default ();
 	obj->priv->sort_func = model_sort_default;
 }
 
 static gboolean
-node_has_parent (FileBrowserNode * node, FileBrowserNode * parent)
+node_has_parent (FileBrowserNode *node,
+		 FileBrowserNode *parent)
 {
 	if (node->parent == NULL)
 		return FALSE;
@@ -484,14 +483,15 @@ node_has_parent (FileBrowserNode * node, FileBrowserNode * parent)
 }
 
 static gboolean
-node_in_tree (GeditFileBrowserStore * model, FileBrowserNode * node)
+node_in_tree (GeditFileBrowserStore *model,
+	      FileBrowserNode       *node)
 {
 	return node_has_parent (node, model->priv->virtual_root);
 }
 
 static gboolean
-model_node_visibility (GeditFileBrowserStore * model,
-		       FileBrowserNode * node)
+model_node_visibility (GeditFileBrowserStore *model,
+		       FileBrowserNode       *node)
 {
 	if (node == NULL)
 		return FALSE;
@@ -509,16 +509,17 @@ model_node_visibility (GeditFileBrowserStore * model,
 }
 
 static gboolean
-model_node_inserted (GeditFileBrowserStore * model,
-		     FileBrowserNode * node)
+model_node_inserted (GeditFileBrowserStore *model,
+		     FileBrowserNode        *node)
 {
-	return node == model->priv->virtual_root || (model_node_visibility (model, node) && node->inserted);
+	return node == model->priv->virtual_root ||
+	       (model_node_visibility (model, node) && node->inserted);
 }
 
 /* Interface implementation */
 
 static GtkTreeModelFlags
-gedit_file_browser_store_get_flags (GtkTreeModel * tree_model)
+gedit_file_browser_store_get_flags (GtkTreeModel *tree_model)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model),
 			      (GtkTreeModelFlags) 0);
@@ -527,7 +528,7 @@ gedit_file_browser_store_get_flags (GtkTreeModel * tree_model)
 }
 
 static gint
-gedit_file_browser_store_get_n_columns (GtkTreeModel * tree_model)
+gedit_file_browser_store_get_n_columns (GtkTreeModel *tree_model)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model), 0);
 
@@ -535,7 +536,8 @@ gedit_file_browser_store_get_n_columns (GtkTreeModel * tree_model)
 }
 
 static GType
-gedit_file_browser_store_get_column_type (GtkTreeModel * tree_model, gint idx)
+gedit_file_browser_store_get_column_type (GtkTreeModel *tree_model,
+					  gint          idx)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model),
 			      G_TYPE_INVALID);
@@ -546,12 +548,13 @@ gedit_file_browser_store_get_column_type (GtkTreeModel * tree_model, gint idx)
 }
 
 static gboolean
-gedit_file_browser_store_get_iter (GtkTreeModel * tree_model,
-				   GtkTreeIter * iter, GtkTreePath * path)
+gedit_file_browser_store_get_iter (GtkTreeModel *tree_model,
+				   GtkTreeIter  *iter,
+				   GtkTreePath  *path)
 {
-	gint * indices, depth, i;
-	FileBrowserNode * node;
-	GeditFileBrowserStore * model;
+	gint *indices, depth, i;
+	FileBrowserNode *node;
+	GeditFileBrowserStore *model;
 	gint num;
 
 	g_assert (GEDIT_IS_FILE_BROWSER_STORE (tree_model));
@@ -562,8 +565,9 @@ gedit_file_browser_store_get_iter (GtkTreeModel * tree_model,
 	depth = gtk_tree_path_get_depth (path);
 	node = model->priv->virtual_root;
 
-	for (i = 0; i < depth; ++i) {
-		GSList * item;
+	for (i = 0; i < depth; ++i)
+	{
+		GSList *item;
 
 		if (node == NULL)
 			return FALSE;
@@ -573,13 +577,16 @@ gedit_file_browser_store_get_iter (GtkTreeModel * tree_model,
 		if (!NODE_IS_DIR (node))
 			return FALSE;
 
-		for (item = FILE_BROWSER_NODE_DIR (node)->children; item; item = item->next) {
-			FileBrowserNode * child;
+		for (item = FILE_BROWSER_NODE_DIR (node)->children; item; item = item->next)
+		{
+			FileBrowserNode *child;
 
 			child = (FileBrowserNode *) (item->data);
 
-			if (model_node_inserted (model, child)) {
-				if (num == indices[i]) {
+			if (model_node_inserted (model, child))
+			{
+				if (num == indices[i])
+				{
 					node = child;
 					break;
 				}
@@ -602,15 +609,16 @@ gedit_file_browser_store_get_iter (GtkTreeModel * tree_model,
 }
 
 static GtkTreePath *
-gedit_file_browser_store_get_path_real (GeditFileBrowserStore * model,
-					FileBrowserNode * node)
+gedit_file_browser_store_get_path_real (GeditFileBrowserStore *model,
+					FileBrowserNode       *node)
 {
 	GtkTreePath *path;
 	gint num = 0;
 
 	path = gtk_tree_path_new ();
 
-	while (node != model->priv->virtual_root) {
+	while (node != model->priv->virtual_root)
+	{
 		GSList *item;
 
 		if (node->parent == NULL) {
@@ -620,20 +628,25 @@ gedit_file_browser_store_get_path_real (GeditFileBrowserStore * model,
 
 		num = 0;
 
-		for (item = FILE_BROWSER_NODE_DIR (node->parent)->children; item; item = item->next) {
+		for (item = FILE_BROWSER_NODE_DIR (node->parent)->children; item; item = item->next)
+		{
 			FileBrowserNode *check;
 
 			check = (FileBrowserNode *) (item->data);
 
-			if (model_node_visibility (model, check) && (check == node || check->inserted)) {
-				if (check == node) {
+			if (model_node_visibility (model, check) && (check == node || check->inserted))
+			{
+				if (check == node)
+				{
 					gtk_tree_path_prepend_index (path,
 								     num);
 					break;
 				}
 
 				++num;
-			} else if (check == node) {
+			}
+			else if (check == node)
+			{
 				if (NODE_IS_DUMMY (node))
 					g_warning ("Dummy not visible???");
 
@@ -649,8 +662,8 @@ gedit_file_browser_store_get_path_real (GeditFileBrowserStore * model,
 }
 
 static GtkTreePath *
-gedit_file_browser_store_get_path (GtkTreeModel * tree_model,
-				   GtkTreeIter * iter)
+gedit_file_browser_store_get_path (GtkTreeModel *tree_model,
+				   GtkTreeIter  *iter)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model), NULL);
 	g_return_val_if_fail (iter != NULL, NULL);
@@ -661,10 +674,10 @@ gedit_file_browser_store_get_path (GtkTreeModel * tree_model,
 }
 
 static void
-gedit_file_browser_store_get_value (GtkTreeModel * tree_model,
-				    GtkTreeIter * iter, 
-				    gint column,
-				    GValue * value)
+gedit_file_browser_store_get_value (GtkTreeModel *tree_model,
+				    GtkTreeIter  *iter, 
+				    gint          column,
+				    GValue       *value)
 {
 	FileBrowserNode *node;
 
@@ -676,35 +689,36 @@ gedit_file_browser_store_get_value (GtkTreeModel * tree_model,
 
 	g_value_init (value, GEDIT_FILE_BROWSER_STORE (tree_model)->priv->column_types[column]);
 
-	switch (column) {
-	case GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION:
-		set_gvalue_from_node (value, node);
-		break;
-	case GEDIT_FILE_BROWSER_STORE_COLUMN_NAME:
-		g_value_set_string (value, node->name);
-		break;
-	case GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS:
-		g_value_set_uint (value, node->flags);
-		break;
-	case GEDIT_FILE_BROWSER_STORE_COLUMN_ICON:
-		g_value_set_object (value, node->icon);
-		break;
-	case GEDIT_FILE_BROWSER_STORE_COLUMN_EMBLEM:
-		g_value_set_object (value, node->emblem);
-		break;
-	default:
-		g_return_if_reached ();
+	switch (column)
+	{
+		case GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION:
+			set_gvalue_from_node (value, node);
+			break;
+		case GEDIT_FILE_BROWSER_STORE_COLUMN_NAME:
+			g_value_set_string (value, node->name);
+			break;
+		case GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS:
+			g_value_set_uint (value, node->flags);
+			break;
+		case GEDIT_FILE_BROWSER_STORE_COLUMN_ICON:
+			g_value_set_object (value, node->icon);
+			break;
+		case GEDIT_FILE_BROWSER_STORE_COLUMN_EMBLEM:
+			g_value_set_object (value, node->emblem);
+			break;
+		default:
+			g_return_if_reached ();
 	}
 }
 
 static gboolean
-gedit_file_browser_store_iter_next (GtkTreeModel * tree_model,
-				    GtkTreeIter * iter)
+gedit_file_browser_store_iter_next (GtkTreeModel *tree_model,
+				    GtkTreeIter  *iter)
 {
-	GeditFileBrowserStore * model;
-	FileBrowserNode * node;
-	GSList * item;
-	GSList * first;
+	GeditFileBrowserStore *model;
+	FileBrowserNode *node;
+	GSList *item;
+	GSList *first;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model),
 			      FALSE);
@@ -719,8 +733,10 @@ gedit_file_browser_store_iter_next (GtkTreeModel * tree_model,
 
 	first = g_slist_next (g_slist_find (FILE_BROWSER_NODE_DIR (node->parent)->children, node));
 
-	for (item = first; item; item = item->next) {
-		if (model_node_inserted (model, (FileBrowserNode *) (item->data))) {
+	for (item = first; item; item = item->next)
+	{
+		if (model_node_inserted (model, (FileBrowserNode *) (item->data)))
+		{
 			iter->user_data = item->data;
 			return TRUE;
 		}
@@ -730,18 +746,16 @@ gedit_file_browser_store_iter_next (GtkTreeModel * tree_model,
 }
 
 static gboolean
-gedit_file_browser_store_iter_children (GtkTreeModel * tree_model,
-					GtkTreeIter * iter,
-					GtkTreeIter * parent)
+gedit_file_browser_store_iter_children (GtkTreeModel *tree_model,
+					GtkTreeIter  *iter,
+					GtkTreeIter  *parent)
 {
-	FileBrowserNode * node;
-	GeditFileBrowserStore * model;
-	GSList * item;
+	FileBrowserNode *node;
+	GeditFileBrowserStore *model;
+	GSList *item;
 
-	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model),
-			      FALSE);
-	g_return_val_if_fail (parent == NULL
-			      || parent->user_data != NULL, FALSE);
+	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model), FALSE);
+	g_return_val_if_fail (parent == NULL || parent->user_data != NULL, FALSE);
 
 	model = GEDIT_FILE_BROWSER_STORE (tree_model);
 
@@ -756,8 +770,10 @@ gedit_file_browser_store_iter_children (GtkTreeModel * tree_model,
 	if (!NODE_IS_DIR (node))
 		return FALSE;
 
-	for (item = FILE_BROWSER_NODE_DIR (node)->children; item; item = item->next) {
-		if (model_node_inserted (model, (FileBrowserNode *) (item->data))) {
+	for (item = FILE_BROWSER_NODE_DIR (node)->children; item; item = item->next)
+	{
+		if (model_node_inserted (model, (FileBrowserNode *) (item->data)))
+		{
 			iter->user_data = item->data;
 			return TRUE;
 		}
@@ -767,15 +783,16 @@ gedit_file_browser_store_iter_children (GtkTreeModel * tree_model,
 }
 
 static gboolean
-filter_tree_model_iter_has_child_real (GeditFileBrowserStore * model,
-				       FileBrowserNode * node)
+filter_tree_model_iter_has_child_real (GeditFileBrowserStore *model,
+				       FileBrowserNode       *node)
 {
 	GSList *item;
 	
 	if (!NODE_IS_DIR (node))
 		return FALSE;
 
-	for (item = FILE_BROWSER_NODE_DIR (node)->children; item; item = item->next) {
+	for (item = FILE_BROWSER_NODE_DIR (node)->children; item; item = item->next)
+	{
 		if (model_node_inserted (model, (FileBrowserNode *) (item->data)))
 			return TRUE;
 	}
@@ -784,8 +801,8 @@ filter_tree_model_iter_has_child_real (GeditFileBrowserStore * model,
 }
 
 static gboolean
-gedit_file_browser_store_iter_has_child (GtkTreeModel * tree_model,
-					 GtkTreeIter * iter)
+gedit_file_browser_store_iter_has_child (GtkTreeModel *tree_model,
+					 GtkTreeIter  *iter)
 {
 	FileBrowserNode *node;
 	GeditFileBrowserStore *model;
@@ -806,8 +823,8 @@ gedit_file_browser_store_iter_has_child (GtkTreeModel * tree_model,
 }
 
 static gint
-gedit_file_browser_store_iter_n_children (GtkTreeModel * tree_model,
-					  GtkTreeIter * iter)
+gedit_file_browser_store_iter_n_children (GtkTreeModel *tree_model,
+					  GtkTreeIter  *iter)
 {
 	FileBrowserNode *node;
 	GeditFileBrowserStore *model;
@@ -837,19 +854,18 @@ gedit_file_browser_store_iter_n_children (GtkTreeModel * tree_model,
 }
 
 static gboolean
-gedit_file_browser_store_iter_nth_child (GtkTreeModel * tree_model,
-					 GtkTreeIter * iter,
-					 GtkTreeIter * parent, gint n)
+gedit_file_browser_store_iter_nth_child (GtkTreeModel *tree_model,
+					 GtkTreeIter  *iter,
+					 GtkTreeIter  *parent,
+					 gint          n)
 {
 	FileBrowserNode *node;
 	GeditFileBrowserStore *model;
 	GSList *item;
 	gint num = 0;
 
-	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model),
-			      FALSE);
-	g_return_val_if_fail (parent == NULL
-			      || parent->user_data != NULL, FALSE);
+	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model), FALSE);
+	g_return_val_if_fail (parent == NULL || parent->user_data != NULL, FALSE);
 
 	model = GEDIT_FILE_BROWSER_STORE (tree_model);
 
@@ -862,9 +878,12 @@ gedit_file_browser_store_iter_nth_child (GtkTreeModel * tree_model,
 		return FALSE;
 
 	for (item = FILE_BROWSER_NODE_DIR (node)->children; item;
-	     item = item->next) {
-		if (model_node_inserted (model, (FileBrowserNode *) (item->data))) {
-			if (num == n) {
+	     item = item->next)
+	{
+		if (model_node_inserted (model, (FileBrowserNode *) (item->data)))
+		{
+			if (num == n)
+			{
 				iter->user_data = item->data;
 				return TRUE;
 			}
@@ -877,9 +896,9 @@ gedit_file_browser_store_iter_nth_child (GtkTreeModel * tree_model,
 }
 
 static gboolean
-gedit_file_browser_store_iter_parent (GtkTreeModel * tree_model,
-				      GtkTreeIter * iter,
-				      GtkTreeIter * child)
+gedit_file_browser_store_iter_parent (GtkTreeModel *tree_model,
+				      GtkTreeIter  *iter,
+				      GtkTreeIter  *child)
 {
 	FileBrowserNode *node;
 	GeditFileBrowserStore *model;
@@ -902,18 +921,18 @@ gedit_file_browser_store_iter_parent (GtkTreeModel * tree_model,
 }
 
 static void
-gedit_file_browser_store_row_inserted (GtkTreeModel * tree_model,
-				       GtkTreePath * path,
-				       GtkTreeIter * iter)
+gedit_file_browser_store_row_inserted (GtkTreeModel *tree_model,
+				       GtkTreePath  *path,
+				       GtkTreeIter  *iter)
 {
-	FileBrowserNode * node = (FileBrowserNode *)(iter->user_data);
+	FileBrowserNode *node = (FileBrowserNode *)(iter->user_data);
 	
 	node->inserted = TRUE;
 }
 
 static gboolean
-gedit_file_browser_store_row_draggable (GtkTreeDragSource * drag_source,
-					GtkTreePath       * path)
+gedit_file_browser_store_row_draggable (GtkTreeDragSource *drag_source,
+					GtkTreePath       *path)
 {
 	GtkTreeIter iter;
 	GeditFileBrowserStoreFlag flags;
@@ -932,16 +951,16 @@ gedit_file_browser_store_row_draggable (GtkTreeDragSource * drag_source,
 }
 
 static gboolean
-gedit_file_browser_store_drag_data_delete (GtkTreeDragSource * drag_source,
-					   GtkTreePath       * path)
+gedit_file_browser_store_drag_data_delete (GtkTreeDragSource *drag_source,
+					   GtkTreePath       *path)
 {
 	return FALSE;
 }
 
 static gboolean
-gedit_file_browser_store_drag_data_get (GtkTreeDragSource * drag_source,
-					GtkTreePath       * path,
-					GtkSelectionData  * selection_data)
+gedit_file_browser_store_drag_data_get (GtkTreeDragSource *drag_source,
+					GtkTreePath       *path,
+					GtkSelectionData  *selection_data)
 {
 	GtkTreeIter iter;
 	GFile *location;
@@ -973,7 +992,8 @@ gedit_file_browser_store_drag_data_get (GtkTreeDragSource * drag_source,
 
 /* Private */
 static void
-model_begin_loading (GeditFileBrowserStore * model, FileBrowserNode * node)
+model_begin_loading (GeditFileBrowserStore *model,
+		     FileBrowserNode       *node)
 {
 	GtkTreeIter iter;
 
@@ -982,7 +1002,8 @@ model_begin_loading (GeditFileBrowserStore * model, FileBrowserNode * node)
 }
 
 static void
-model_end_loading (GeditFileBrowserStore * model, FileBrowserNode * node)
+model_end_loading (GeditFileBrowserStore *model,
+		   FileBrowserNode       *node)
 {
 	GtkTreeIter iter;
 
@@ -991,8 +1012,8 @@ model_end_loading (GeditFileBrowserStore * model, FileBrowserNode * node)
 }
 
 static void
-model_node_update_visibility (GeditFileBrowserStore * model,
-			      FileBrowserNode * node)
+model_node_update_visibility (GeditFileBrowserStore *model,
+			      FileBrowserNode       *node)
 {
 	GtkTreeIter iter;
 
@@ -1000,29 +1021,38 @@ model_node_update_visibility (GeditFileBrowserStore * model,
 
 	if (FILTER_HIDDEN (model->priv->filter_mode) &&
 	    NODE_IS_HIDDEN (node))
+	{
 		node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_FILTERED;
+	}
 	else if (FILTER_BINARY (model->priv->filter_mode) &&
 		 (!NODE_IS_TEXT (node) && !NODE_IS_DIR (node)))
+	{
 		node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_FILTERED;
-	else if (model->priv->filter_func) {
+	}
+	else if (model->priv->filter_func)
+	{
 		iter.user_data = node;
 
-		if (!model->priv->
-		    filter_func (model, &iter,
-				 model->priv->filter_user_data))
-			node->flags |=
-			    GEDIT_FILE_BROWSER_STORE_FLAG_IS_FILTERED;
+		if (!model->priv->filter_func (model, &iter,
+					       model->priv->filter_user_data))
+			node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_FILTERED;
 	}
 }
 
 static gint
-collate_nodes (FileBrowserNode * node1, FileBrowserNode * node2)
+collate_nodes (FileBrowserNode *node1,
+	       FileBrowserNode *node2)
 {
 	if (node1->name == NULL)
+	{
 		return -1;
+	}
 	else if (node2->name == NULL)
+	{
 		return 1;
-	else {
+	}
+	else
+	{
 		gchar *k1, *k2;
 		gint result;
 
@@ -1039,7 +1069,8 @@ collate_nodes (FileBrowserNode * node1, FileBrowserNode * node2)
 }
 
 static gint
-model_sort_default (FileBrowserNode * node1, FileBrowserNode * node2)
+model_sort_default (FileBrowserNode *node1,
+		    FileBrowserNode *node2)
 {
 	gint f1;
 	gint f2;
@@ -1048,35 +1079,28 @@ model_sort_default (FileBrowserNode * node1, FileBrowserNode * node2)
 	f2 = NODE_IS_DUMMY (node2);
 
 	if (f1 && f2)
-	{
 		return 0;
-	}
 	else if (f1 || f2)
-	{
 		return f1 ? -1 : 1;
-	}
 
 	f1 = NODE_IS_DIR (node1);
 	f2 = NODE_IS_DIR (node2);
 
 	if (f1 != f2)
-	{
 		return f1 ? -1 : 1;
-	}
 
 	f1 = NODE_IS_HIDDEN (node1);
 	f2 = NODE_IS_HIDDEN (node2);
 
 	if (f1 != f2)
-	{
 		return f2 ? -1 : 1;
-	}
 
 	return collate_nodes (node1, node2);
 }
 
 static void
-model_resort_node (GeditFileBrowserStore * model, FileBrowserNode * node)
+model_resort_node (GeditFileBrowserStore *model,
+		   FileBrowserNode       *node)
 {
 	FileBrowserNodeDir *dir;
 	GSList *item;
@@ -1088,14 +1112,18 @@ model_resort_node (GeditFileBrowserStore * model, FileBrowserNode * node)
 
 	dir = FILE_BROWSER_NODE_DIR (node->parent);
 
-	if (!model_node_visibility (model, node->parent)) {
+	if (!model_node_visibility (model, node->parent))
+	{
 		/* Just sort the children of the parent */
 		dir->children = g_slist_sort (dir->children,
 					      (GCompareFunc) (model->priv->
 							      sort_func));
-	} else {
+	}
+	else
+	{
 		/* Store current positions */
-		for (item = dir->children; item; item = item->next) {
+		for (item = dir->children; item; item = item->next)
+		{
 			child = (FileBrowserNode *) (item->data);
 
 			if (model_node_visibility (model, child))
@@ -1109,7 +1137,8 @@ model_resort_node (GeditFileBrowserStore * model, FileBrowserNode * node)
 		pos = 0;
 
 		/* Store the new positions */
-		for (item = dir->children; item; item = item->next) {
+		for (item = dir->children; item; item = item->next)
+		{
 			child = (FileBrowserNode *) (item->data);
 
 			if (model_node_visibility (model, child))
@@ -1117,9 +1146,7 @@ model_resort_node (GeditFileBrowserStore * model, FileBrowserNode * node)
 		}
 
 		iter.user_data = node->parent;
-		path =
-		    gedit_file_browser_store_get_path_real (model,
-							    node->parent);
+		path = gedit_file_browser_store_get_path_real (model, node->parent);
 
 		gtk_tree_model_rows_reordered (GTK_TREE_MODEL (model),
 					       path, &iter, neworder);
@@ -1130,9 +1157,9 @@ model_resort_node (GeditFileBrowserStore * model, FileBrowserNode * node)
 }
 
 static void
-row_changed (GeditFileBrowserStore * model,
-	     GtkTreePath ** path,
-	     GtkTreeIter * iter)
+row_changed (GeditFileBrowserStore  *model,
+	     GtkTreePath           **path,
+	     GtkTreeIter            *iter)
 {
 	GtkTreeRowReference *ref = gtk_tree_row_reference_new (GTK_TREE_MODEL (model), *path);
 
@@ -1146,9 +1173,9 @@ row_changed (GeditFileBrowserStore * model,
 }
 
 static void
-row_inserted (GeditFileBrowserStore * model,
-	      GtkTreePath ** path,
-	      GtkTreeIter * iter)
+row_inserted (GeditFileBrowserStore  *model,
+	      GtkTreePath           **path,
+	      GtkTreeIter            *iter)
 {
 	/* This function creates a row reference for the path because it's
 	   uncertain what might change the actual model/view when we insert
@@ -1157,7 +1184,7 @@ row_inserted (GeditFileBrowserStore * model,
 	   the path remains pointed towards the inserted node, we use the
 	   reference to keep track. */
 	GtkTreeRowReference *ref = gtk_tree_row_reference_new (GTK_TREE_MODEL (model), *path);
-	GtkTreePath * copy = gtk_tree_path_copy (*path);
+	GtkTreePath *copy = gtk_tree_path_copy (*path);
 
 	gtk_tree_model_row_inserted (GTK_TREE_MODEL(model), copy, iter);
 	gtk_tree_path_free (copy);
@@ -1177,8 +1204,8 @@ row_inserted (GeditFileBrowserStore * model,
 }
 
 static void
-row_deleted (GeditFileBrowserStore * model,
-	     const GtkTreePath * path)
+row_deleted (GeditFileBrowserStore *model,
+	     const GtkTreePath     *path)
 {
 	GtkTreePath *copy = gtk_tree_path_copy (path);
 	
@@ -1189,9 +1216,9 @@ row_deleted (GeditFileBrowserStore * model,
 }
 
 static void
-model_refilter_node (GeditFileBrowserStore * model,
-		     FileBrowserNode * node,
-		     GtkTreePath ** path)
+model_refilter_node (GeditFileBrowserStore  *model,
+		     FileBrowserNode        *node,
+		     GtkTreePath           **path)
 {
 	gboolean old_visible;
 	gboolean new_visible;
@@ -1220,13 +1247,15 @@ model_refilter_node (GeditFileBrowserStore * model,
 		path = &tmppath;
 	}
 
-	if (NODE_IS_DIR (node)) {
+	if (NODE_IS_DIR (node))
+	{
 		if (in_tree)
 			gtk_tree_path_down (*path);
 
 		dir = FILE_BROWSER_NODE_DIR (node);
 
-		for (item = dir->children; item; item = item->next) {
+		for (item = dir->children; item; item = item->next)
+		{
 			model_refilter_node (model,
 					     (FileBrowserNode *) (item->data),
 					     path);
@@ -1236,19 +1265,26 @@ model_refilter_node (GeditFileBrowserStore * model,
 			gtk_tree_path_up (*path);
 	}
 
-	if (in_tree) {
+	if (in_tree)
+	{
 		new_visible = model_node_visibility (model, node);
 
-		if (old_visible != new_visible) {
-			if (old_visible) {
+		if (old_visible != new_visible)
+		{
+			if (old_visible)
+			{
 				node->inserted = FALSE;
 				row_deleted (model, *path);
-			} else {
+			}
+			else
+			{
 				iter.user_data = node;
 				row_inserted (model, path, &iter);
 				gtk_tree_path_next (*path);
 			}
-		} else if (old_visible) {
+		}
+		else if (old_visible)
+		{
 			gtk_tree_path_next (*path);
 		}
 	}
@@ -1260,28 +1296,29 @@ model_refilter_node (GeditFileBrowserStore * model,
 }
 
 static void
-model_refilter (GeditFileBrowserStore * model)
+model_refilter (GeditFileBrowserStore *model)
 {
 	model_refilter_node (model, model->priv->root, NULL);
 }
 
 static void
-file_browser_node_set_name (FileBrowserNode * node)
+file_browser_node_set_name (FileBrowserNode *node)
 {
 	g_free (node->name);
 
-	if (node->file) {
+	if (node->file)
 		node->name = gedit_file_browser_utils_file_basename (node->file);
-	} else {
+	else
 		node->name = NULL;
-	}
 }
 
 static void
-file_browser_node_init (FileBrowserNode * node, GFile * file,
-			FileBrowserNode * parent)
+file_browser_node_init (FileBrowserNode *node,
+			GFile           *file,
+			FileBrowserNode *parent)
 {
-	if (file != NULL) {
+	if (file != NULL)
+	{
 		node->file = g_object_ref (file);
 		file_browser_node_set_name (node);
 	}
@@ -1290,7 +1327,8 @@ file_browser_node_init (FileBrowserNode * node, GFile * file,
 }
 
 static FileBrowserNode *
-file_browser_node_new (GFile * file, FileBrowserNode * parent)
+file_browser_node_new (GFile           *file,
+		       FileBrowserNode *parent)
 {
 	FileBrowserNode *node = g_slice_new0 (FileBrowserNode);
 
@@ -1299,8 +1337,9 @@ file_browser_node_new (GFile * file, FileBrowserNode * parent)
 }
 
 static FileBrowserNode *
-file_browser_node_dir_new (GeditFileBrowserStore * model,
-			   GFile * file, FileBrowserNode * parent)
+file_browser_node_dir_new (GeditFileBrowserStore *model,
+			   GFile                 *file,
+			   FileBrowserNode       *parent)
 {
 	FileBrowserNode *node =
 	    (FileBrowserNode *) g_slice_new0 (FileBrowserNodeDir);
@@ -1315,20 +1354,20 @@ file_browser_node_dir_new (GeditFileBrowserStore * model,
 }
 
 static void
-file_browser_node_free_children (GeditFileBrowserStore * model,
-				 FileBrowserNode * node)
+file_browser_node_free_children (GeditFileBrowserStore *model,
+				 FileBrowserNode       *node)
 {
 	GSList *item;
 
 	if (node == NULL)
 		return;
 
-	if (NODE_IS_DIR (node)) {
+	if (NODE_IS_DIR (node))
+	{
 		for (item = FILE_BROWSER_NODE_DIR (node)->children; item;
 		     item = item->next)
 			file_browser_node_free (model,
-						(FileBrowserNode *) (item->
-								     data));
+						(FileBrowserNode *) (item->data));
 
 		g_slist_free (FILE_BROWSER_NODE_DIR (node)->children);
 		FILE_BROWSER_NODE_DIR (node)->children = NULL;
@@ -1339,8 +1378,8 @@ file_browser_node_free_children (GeditFileBrowserStore * model,
 }
 
 static void
-file_browser_node_free (GeditFileBrowserStore * model,
-			FileBrowserNode * node)
+file_browser_node_free (GeditFileBrowserStore *model,
+			FileBrowserNode       *node)
 {
 	if (node == NULL)
 		return;
@@ -1351,7 +1390,8 @@ file_browser_node_free (GeditFileBrowserStore * model,
 
 		dir = FILE_BROWSER_NODE_DIR (node);
 
-		if (dir->cancellable) {
+		if (dir->cancellable)
+		{
 			g_cancellable_cancel (dir->cancellable);
 			g_object_unref (dir->cancellable);
 
@@ -1360,7 +1400,8 @@ file_browser_node_free (GeditFileBrowserStore * model,
 
 		file_browser_node_free_children (model, node);
 
-		if (dir->monitor) {
+		if (dir->monitor)
+		{
 			g_file_monitor_cancel (dir->monitor);
 			g_object_unref (dir->monitor);
 		}
@@ -1396,16 +1437,16 @@ file_browser_node_free (GeditFileBrowserStore * model,
  * @node: the FileBrowserNode to remove
  * @path: the path of the node, or NULL to let the path be calculated
  * @free_nodes: whether to also remove the nodes from memory
- *
+ * 
  * Removes all the children of node from the model. This function is used
  * to remove the child nodes from the _model_. Don't use it to just free
  * a node.
- **/
+ */
 static void
-model_remove_node_children (GeditFileBrowserStore * model,
-			    FileBrowserNode * node,
-			    GtkTreePath * path,
-			    gboolean free_nodes)
+model_remove_node_children (GeditFileBrowserStore *model,
+			    FileBrowserNode       *node,
+			    GtkTreePath           *path,
+			    gboolean               free_nodes)
 {
 	FileBrowserNodeDir *dir;
 	GtkTreePath *path_child;
@@ -1420,9 +1461,10 @@ model_remove_node_children (GeditFileBrowserStore * model,
 	if (dir->children == NULL)
 		return;
 
-	if (!model_node_visibility (model, node)) {
-		// Node is invisible and therefore the children can just
-		// be freed
+	if (!model_node_visibility (model, node))
+	{
+		/* Node is invisible and therefore the children can just
+		   be freed */
 		if (free_nodes)
 			file_browser_node_free_children (model, node);
 		
@@ -1430,8 +1472,7 @@ model_remove_node_children (GeditFileBrowserStore * model,
 	}
 	
 	if (path == NULL)
-		path_child =
-		    gedit_file_browser_store_get_path_real (model, node);
+		path_child = gedit_file_browser_store_get_path_real (model, node);
 	else
 		path_child = gtk_tree_path_copy (path);
 
@@ -1439,10 +1480,9 @@ model_remove_node_children (GeditFileBrowserStore * model,
 
 	list = g_slist_copy (dir->children);
 
-	for (item = list; item; item = item->next) {
+	for (item = list; item; item = item->next)
 		model_remove_node (model, (FileBrowserNode *) (item->data),
 				   path_child, free_nodes);
-	}
 
 	g_slist_free (list);
 	gtk_tree_path_free (path_child);
@@ -1459,19 +1499,19 @@ model_remove_node_children (GeditFileBrowserStore * model,
  * Removes this node and all its children from the model. This function is used
  * to remove the node from the _model_. Don't use it to just free
  * a node.
- **/
+ */
 static void
-model_remove_node (GeditFileBrowserStore * model,
-		   FileBrowserNode * node,
-		   GtkTreePath * path,
-		   gboolean free_nodes)
+model_remove_node (GeditFileBrowserStore *model,
+		   FileBrowserNode       *node,
+		   GtkTreePath           *path,
+		   gboolean               free_nodes)
 {
 	gboolean free_path = FALSE;
 	FileBrowserNode *parent;
 
-	if (path == NULL) {
-		path =
-		    gedit_file_browser_store_get_path_real (model, node);
+	if (path == NULL)
+	{
+		path = gedit_file_browser_store_get_path_real (model, node);
 		free_path = TRUE;
 	}
 
@@ -1490,7 +1530,8 @@ model_remove_node (GeditFileBrowserStore * model,
 
 	parent = node->parent;
 
-	if (free_nodes) {
+	if (free_nodes)
+	{
 		/* Remove the node from the parents children list */
 		if (parent)
 			FILE_BROWSER_NODE_DIR (node->parent)->children =
@@ -1514,13 +1555,14 @@ model_remove_node (GeditFileBrowserStore * model,
  * model_clear:
  * @model: the #GeditFileBrowserStore
  * @free_nodes: whether to also remove the nodes from memory
- *
+ * 
  * Removes all nodes from the model. This function is used
  * to remove all the nodes from the _model_. Don't use it to just free the
  * nodes in the model.
- **/
+ */
 static void
-model_clear (GeditFileBrowserStore * model, gboolean free_nodes)
+model_clear (GeditFileBrowserStore *model,
+	     gboolean               free_nodes)
 {
 	GtkTreePath *path;
 	FileBrowserNodeDir *dir;
@@ -1532,14 +1574,17 @@ model_clear (GeditFileBrowserStore * model, gboolean free_nodes)
 	gtk_tree_path_free (path);
 
 	/* Remove the dummy if there is one */
-	if (model->priv->virtual_root) {
+	if (model->priv->virtual_root)
+	{
 		dir = FILE_BROWSER_NODE_DIR (model->priv->virtual_root);
 
-		if (dir->children != NULL) {
+		if (dir->children != NULL)
+		{
 			dummy = (FileBrowserNode *) (dir->children->data);
 
-			if (NODE_IS_DUMMY (dummy)
-			    && model_node_visibility (model, dummy)) {
+			if (NODE_IS_DUMMY (dummy) &&
+			    model_node_visibility (model, dummy))
+			{
 				path = gtk_tree_path_new_first ();
 				
 				dummy->inserted = FALSE;
@@ -1551,8 +1596,9 @@ model_clear (GeditFileBrowserStore * model, gboolean free_nodes)
 }
 
 static void
-file_browser_node_unload (GeditFileBrowserStore * model,
-			  FileBrowserNode * node, gboolean remove_children)
+file_browser_node_unload (GeditFileBrowserStore *model,
+			  FileBrowserNode       *node,
+			  gboolean               remove_children)
 {
 	FileBrowserNodeDir *dir;
 	
@@ -1567,7 +1613,8 @@ file_browser_node_unload (GeditFileBrowserStore * model,
 	if (remove_children)
 		model_remove_node_children (model, node, NULL, TRUE);
 
-	if (dir->cancellable) {
+	if (dir->cancellable)
+	{
 		g_cancellable_cancel (dir->cancellable);
 		g_object_unref (dir->cancellable);
 
@@ -1575,7 +1622,8 @@ file_browser_node_unload (GeditFileBrowserStore * model,
 		dir->cancellable = NULL;
 	}
 
-	if (dir->monitor) {
+	if (dir->monitor)
+	{
 		g_file_monitor_cancel (dir->monitor);
 		g_object_unref (dir->monitor);
 		
@@ -1586,9 +1634,9 @@ file_browser_node_unload (GeditFileBrowserStore * model,
 }
 
 static void
-model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
-			     FileBrowserNode * node,
-			     GFileInfo * info)
+model_recomposite_icon_real (GeditFileBrowserStore *tree_model,
+			     FileBrowserNode       *node,
+			     GFileInfo             *info)
 {
 	GdkPixbuf *icon;
 
@@ -1598,32 +1646,40 @@ model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
 	if (node->file == NULL)
 		return;
 
-	if (info) {
+	if (info)
+	{
 		GIcon *gicon = g_file_info_get_icon (info);
+		
 		if (gicon != NULL)
 			icon = gedit_file_browser_utils_pixbuf_from_icon (gicon, GTK_ICON_SIZE_MENU);
 		else
 			icon = NULL;
-	} else {
+	}
+	else
+	{
 		icon = gedit_file_browser_utils_pixbuf_from_file (node->file, GTK_ICON_SIZE_MENU);
 	}
 
 	if (node->icon)
 		g_object_unref (node->icon);
 
-	if (node->emblem) {
+	if (node->emblem)
+	{
 		gint icon_size;
 
 		gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, NULL, &icon_size);
 
-		if (icon == NULL) {
+		if (icon == NULL)
+		{
 			node->icon =
 			    gdk_pixbuf_new (gdk_pixbuf_get_colorspace (node->emblem),
 					    gdk_pixbuf_get_has_alpha (node->emblem),
 					    gdk_pixbuf_get_bits_per_sample (node->emblem),
 					    icon_size,
 					    icon_size);
-		} else {
+		}
+		else
+		{
 			node->icon = gdk_pixbuf_copy (icon);
 			g_object_unref (icon);
 		}
@@ -1632,14 +1688,16 @@ model_recomposite_icon_real (GeditFileBrowserStore * tree_model,
 				      icon_size - 10, icon_size - 10, 10,
 				      10, icon_size - 10, icon_size - 10,
 				      1, 1, GDK_INTERP_NEAREST, 255);
-	} else {
+	}
+	else
+	{
 		node->icon = icon;
 	}
 }
 
 static void
-model_recomposite_icon (GeditFileBrowserStore * tree_model,
-			GtkTreeIter * iter)
+model_recomposite_icon (GeditFileBrowserStore *tree_model,
+			GtkTreeIter           *iter)
 {
 	g_return_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model));
 	g_return_if_fail (iter != NULL);
@@ -1651,8 +1709,8 @@ model_recomposite_icon (GeditFileBrowserStore * tree_model,
 }
 
 static FileBrowserNode *
-model_create_dummy_node (GeditFileBrowserStore * model,
-			 FileBrowserNode * parent)
+model_create_dummy_node (GeditFileBrowserStore *model,
+			 FileBrowserNode       *parent)
 {
 	FileBrowserNode *dummy;
 
@@ -1666,8 +1724,8 @@ model_create_dummy_node (GeditFileBrowserStore * model,
 }
 
 static FileBrowserNode *
-model_add_dummy_node (GeditFileBrowserStore * model,
-		      FileBrowserNode * parent)
+model_add_dummy_node (GeditFileBrowserStore *model,
+		      FileBrowserNode       *parent)
 {
 	FileBrowserNode *dummy;
 
@@ -1682,10 +1740,12 @@ model_add_dummy_node (GeditFileBrowserStore * model,
 }
 
 static void
-model_check_dummy (GeditFileBrowserStore * model, FileBrowserNode * node)
+model_check_dummy (GeditFileBrowserStore *model,
+		   FileBrowserNode       *node)
 {
-	// Hide the dummy child if needed
-	if (NODE_IS_DIR (node)) {
+	/* Hide the dummy child if needed */
+	if (NODE_IS_DIR (node))
+	{
 		FileBrowserNode *dummy;
 		GtkTreeIter iter;
 		GtkTreePath *path;
@@ -1694,35 +1754,39 @@ model_check_dummy (GeditFileBrowserStore * model, FileBrowserNode * node)
 
 		dir = FILE_BROWSER_NODE_DIR (node);
 
-		if (dir->children == NULL) {
+		if (dir->children == NULL)
+		{
 			model_add_dummy_node (model, node);
 			return;
 		}
 
 		dummy = (FileBrowserNode *) (dir->children->data);
 
-		if (!NODE_IS_DUMMY (dummy)) {
+		if (!NODE_IS_DUMMY (dummy))
+		{
 			dummy = model_create_dummy_node (model, node);
 			dir->children = g_slist_prepend (dir->children, dummy);
 		}
 
-		if (!model_node_visibility (model, node)) {
-			dummy->flags |=
-			    GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
+		if (!model_node_visibility (model, node))
+		{
+			dummy->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
 			return;
 		}
 
 		/* Temporarily set the node to invisible to check
-		 * for real children */
+		   for real children */
 		flags = dummy->flags;
 		dummy->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
 
-		if (!filter_tree_model_iter_has_child_real (model, node)) {
+		if (!filter_tree_model_iter_has_child_real (model, node))
+		{
 			dummy->flags &=
 			    ~GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
 
-			if (FILE_IS_HIDDEN (flags)) {
-				// Was hidden, needs to be inserted
+			if (FILE_IS_HIDDEN (flags))
+			{
+				/* Was hidden, needs to be inserted */
 				iter.user_data = dummy;
 				path =
 				    gedit_file_browser_store_get_path_real
@@ -1731,18 +1795,17 @@ model_check_dummy (GeditFileBrowserStore * model, FileBrowserNode * node)
 				row_inserted (model, &path, &iter);
 				gtk_tree_path_free (path);
 			}
-		} else {
-			if (!FILE_IS_HIDDEN (flags)) {
-				// Was shown, needs to be removed
+		}
+		else
+		{
+			if (!FILE_IS_HIDDEN (flags))
+			{
+				/* Was shown, needs to be removed */
 
-				// To get the path we need to set it to visible temporarily
-				dummy->flags &=
-				    ~GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
-				path =
-				    gedit_file_browser_store_get_path_real
-				    (model, dummy);
-				dummy->flags |=
-				    GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
+				/* To get the path we need to set it to visible temporarily */
+				dummy->flags &= ~GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
+				path = gedit_file_browser_store_get_path_real (model, dummy);
+				dummy->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
 				    
 				dummy->inserted = FALSE;
 				row_deleted (model, path);
@@ -1753,33 +1816,33 @@ model_check_dummy (GeditFileBrowserStore * model, FileBrowserNode * node)
 }
 
 static void
-insert_node_sorted (GeditFileBrowserStore * model,
-		    FileBrowserNode * child,
-		    FileBrowserNode * parent)
+insert_node_sorted (GeditFileBrowserStore *model,
+		    FileBrowserNode       *child,
+		    FileBrowserNode       *parent)
 {
 	FileBrowserNodeDir *dir;
 
 	dir = FILE_BROWSER_NODE_DIR (parent);
 
-	if (model->priv->sort_func == NULL) {
+	if (model->priv->sort_func == NULL)
 		dir->children = g_slist_append (dir->children, child);
-	} else {
+	else
 		dir->children =
 		    g_slist_insert_sorted (dir->children, child,
-					   (GCompareFunc) (model->priv->
-							   sort_func));
-	}
+					   (GCompareFunc) (model->priv->sort_func));
 }
 
 static void
-model_add_node (GeditFileBrowserStore * model, FileBrowserNode * child,
-		FileBrowserNode * parent)
+model_add_node (GeditFileBrowserStore *model,
+		FileBrowserNode       *child,
+		FileBrowserNode       *parent)
 {
 	/* Add child to parents children */
 	insert_node_sorted (model, child, parent);
 
 	if (model_node_visibility (model, parent) &&
-	    model_node_visibility (model, child)) {
+	    model_node_visibility (model, child))
+	{
 		GtkTreeIter iter;
 		GtkTreePath *path;
 
@@ -1796,9 +1859,9 @@ model_add_node (GeditFileBrowserStore * model, FileBrowserNode * child,
 }
 
 static void
-model_add_nodes_batch (GeditFileBrowserStore * model,
-		       GSList * children,
-		       FileBrowserNode * parent)
+model_add_nodes_batch (GeditFileBrowserStore *model,
+		       GSList                *children,
+		       FileBrowserNode       *parent)
 {
 	GSList *sorted_children;
 	GSList *child;
@@ -1816,23 +1879,26 @@ model_add_nodes_batch (GeditFileBrowserStore * model,
 
 	model_check_dummy (model, parent);
 
-	while (child) {
+	while (child)
+	{
 		FileBrowserNode *node = child->data;
 		GtkTreeIter iter;
 		GtkTreePath *path;
 
-		/* reached the end of the first list, just append the second */
-		if (l == NULL) {
-
+		/* Reached the end of the first list, just append the second */
+		if (l == NULL)
+		{
 			dir->children = g_slist_concat (dir->children, child);
 
-			for (l = child; l; l = l->next) {
+			for (l = child; l; l = l->next)
+			{
 				if (model_node_visibility (model, parent) &&
-				    model_node_visibility (model, l->data)) {
+				    model_node_visibility (model, l->data))
+				{
 					iter.user_data = l->data;
 					path = gedit_file_browser_store_get_path_real (model, l->data);
 
-					// Emit row inserted
+					/* Emit row inserted */
 					row_inserted (model, &path, &iter);
 					gtk_tree_path_free (path);
 				}
@@ -1843,13 +1909,17 @@ model_add_nodes_batch (GeditFileBrowserStore * model,
 			break;
 		}
 
-		if (model->priv->sort_func (l->data, node) > 0) {
+		if (model->priv->sort_func (l->data, node) > 0)
+		{
 			GSList *next_child;
 
-			if (prev == NULL) {
-				/* prepend to the list */
+			if (prev == NULL)
+			{
+				/* Prepend to the list */
 				dir->children = g_slist_prepend (dir->children, child);
-			} else {
+			}
+			else
+			{
 				prev->next = child;
 			}
 
@@ -1859,20 +1929,23 @@ model_add_nodes_batch (GeditFileBrowserStore * model,
 			child = next_child;
 
 			if (model_node_visibility (model, parent) &&
-			    model_node_visibility (model, node)) {
+			    model_node_visibility (model, node))
+			{
 				iter.user_data = node;
 				path = gedit_file_browser_store_get_path_real (model, node);
 
-				// Emit row inserted
+				/* Emit row inserted */
 				row_inserted (model, &path, &iter);
 				gtk_tree_path_free (path);
 			}
 
 			model_check_dummy (model, node);
 
-			/* try again at the same l position with the
-			 * next child */
-		} else {
+			/* Try again at the same l position with the
+			   next child */
+		}
+		else
+		{
 
 			/* Move to the next item in the list */
 			prev = l;
@@ -1882,9 +1955,9 @@ model_add_nodes_batch (GeditFileBrowserStore * model,
 }
 
 static gchar const *
-backup_content_type (GFileInfo * info)
+backup_content_type (GFileInfo *info)
 {
-	gchar const * content;
+	gchar const *content;
 	
 	if (!g_file_info_get_is_backup (info))
 		return NULL;
@@ -1898,28 +1971,31 @@ backup_content_type (GFileInfo * info)
 }
 
 static void
-file_browser_node_set_from_info (GeditFileBrowserStore * model,
-				 FileBrowserNode * node,
-				 GFileInfo * info,
-				 gboolean isadded)
+file_browser_node_set_from_info (GeditFileBrowserStore *model,
+				 FileBrowserNode       *node,
+				 GFileInfo             *info,
+				 gboolean               isadded)
 {
-	FileBrowserNodeDir * dir;
-	gchar const * content;
-	gchar const * name;
+	FileBrowserNodeDir *dir;
+	gchar const *content;
+	gchar const *name;
 	gboolean free_info = FALSE;
-	GtkTreePath * path;
-	gchar * uri;
-	GError * error = NULL;
+	GtkTreePath *path;
+	gchar *uri;
+	GError *error = NULL;
 
-	if (info == NULL) {
+	if (info == NULL)
+	{
 		info = g_file_query_info (node->file,  
 					  STANDARD_ATTRIBUTE_TYPES,
 					  G_FILE_QUERY_INFO_NONE,
 					  NULL,
 					  &error);
 					  
-		if (!info) {
-			if (!(error->domain == G_IO_ERROR && error->code == G_IO_ERROR_NOT_FOUND)) {
+		if (!info)
+		{
+			if (!(error->domain == G_IO_ERROR && error->code == G_IO_ERROR_NOT_FOUND))
+			{
 				uri = g_file_get_uri (node->file);
 				g_warning ("Could not get info for %s: %s", uri, error->message);
 				g_free (uri);
@@ -1942,8 +2018,11 @@ file_browser_node_set_from_info (GeditFileBrowserStore * model,
 		node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
 
 	if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY)
+	{
 		node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_DIRECTORY;
-	else {
+	}
+	else
+	{
 		if (!(content = backup_content_type (info)))
 			content = g_file_info_get_content_type (info);
 		
@@ -1958,29 +2037,34 @@ file_browser_node_set_from_info (GeditFileBrowserStore * model,
 	if (free_info)
 		g_object_unref (info);
 
-	if (isadded) {
+	if (isadded)
+	{
 		path = gedit_file_browser_store_get_path_real (model, node);
 		model_refilter_node (model, node, &path);
 		gtk_tree_path_free (path);
 		
 		model_check_dummy (model, node->parent);
-	} else {
+	}
+	else
+	{
 		model_node_update_visibility (model, node);
 	}
 }
 
 static FileBrowserNode *
-node_list_contains_file (GSList *children, GFile * file)
+node_list_contains_file (GSList *children,
+			 GFile  *file)
 {
 	GSList *item;
 
-	for (item = children; item; item = item->next) {
+	for (item = children; item; item = item->next)
+	{
 		FileBrowserNode *node;
 
 		node = (FileBrowserNode *) (item->data);
 
-		if (node->file != NULL
-		    && g_file_equal (node->file, file))
+		if (node->file != NULL &&
+		    g_file_equal (node->file, file))
 			return node;
 	}
 
@@ -1988,17 +2072,19 @@ node_list_contains_file (GSList *children, GFile * file)
 }
 
 static FileBrowserNode *
-model_add_node_from_file (GeditFileBrowserStore * model,
-			  FileBrowserNode * parent,
-			  GFile * file,
-			  GFileInfo * info)
+model_add_node_from_file (GeditFileBrowserStore *model,
+			  FileBrowserNode       *parent,
+			  GFile                 *file,
+			  GFileInfo             *info)
 {
 	FileBrowserNode *node;
 	gboolean free_info = FALSE;
-	GError * error = NULL;
+	GError *error = NULL;
 
-	if ((node = node_list_contains_file (FILE_BROWSER_NODE_DIR (parent)->children, file)) == NULL) {
-		if (info == NULL) {
+	if ((node = node_list_contains_file (FILE_BROWSER_NODE_DIR (parent)->children, file)) == NULL)
+	{
+		if (info == NULL)
+		{
 			info = g_file_query_info (file,
 						  STANDARD_ATTRIBUTE_TYPES,
 						  G_FILE_QUERY_INFO_NONE,
@@ -2007,15 +2093,20 @@ model_add_node_from_file (GeditFileBrowserStore * model,
 			free_info = TRUE;
 		}
 	
-		if (!info) {
+		if (!info)
+		{
 			g_warning ("Error querying file info: %s", error->message);
 			g_error_free (error);
 		
 			/* FIXME: What to do now then... */
 			node = file_browser_node_new (file, parent);
-		} else if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
+		}
+		else if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY)
+		{
 			node = file_browser_node_dir_new (model, file, parent);
-		} else {
+		}
+		else
+		{
 			node = file_browser_node_new (file, parent);
 		}
 
@@ -2033,19 +2124,20 @@ model_add_node_from_file (GeditFileBrowserStore * model,
  * not have to check if a file already exists among the ones we just
  * added */
 static void
-model_add_nodes_from_files (GeditFileBrowserStore * model,
-			    FileBrowserNode * parent,
-			    GSList * original_children,
-			    GList * files)
+model_add_nodes_from_files (GeditFileBrowserStore *model,
+			    FileBrowserNode       *parent,
+			    GSList                *original_children,
+			    GList                 *files)
 {
 	GList *item;
 	GSList *nodes = NULL;
 
-	for (item = files; item; item = item->next) {
+	for (item = files; item; item = item->next)
+	{
 		GFileInfo *info = G_FILE_INFO (item->data);
 		GFileType type;
-		gchar const * name;
-		GFile * file;
+		gchar const *name;
+		GFile *file;
 		FileBrowserNode *node;
 
 		type = g_file_info_get_file_type (info);
@@ -2053,7 +2145,8 @@ model_add_nodes_from_files (GeditFileBrowserStore * model,
 		/* Skip all non regular, non directory files */
 		if (type != G_FILE_TYPE_REGULAR &&
 		    type != G_FILE_TYPE_DIRECTORY &&
-		    type != G_FILE_TYPE_SYMBOLIC_LINK) {
+		    type != G_FILE_TYPE_SYMBOLIC_LINK)
+		{
 			g_object_unref (info);
 			continue;
 		}		
@@ -2063,19 +2156,20 @@ model_add_nodes_from_files (GeditFileBrowserStore * model,
 		/* Skip '.' and '..' directories */
 		if (type == G_FILE_TYPE_DIRECTORY &&
 		    (strcmp (name, ".") == 0 ||
-		     strcmp (name, "..") == 0)) {
+		     strcmp (name, "..") == 0))
+		{
 			continue;
 		}
 
 		file = g_file_get_child (parent->file, name);
 
-		if ((node = node_list_contains_file (original_children, file)) == NULL) {
+		if ((node = node_list_contains_file (original_children, file)) == NULL)
+		{
 
-			if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY) {
+			if (g_file_info_get_file_type (info) == G_FILE_TYPE_DIRECTORY)
 				node = file_browser_node_dir_new (model, file, parent);
-			} else {
+			else
 				node = file_browser_node_new (file, parent);
-			}
 
 			file_browser_node_set_from_info (model, node, info, FALSE);
 
@@ -2091,24 +2185,23 @@ model_add_nodes_from_files (GeditFileBrowserStore * model,
 }
 
 static FileBrowserNode *
-model_add_node_from_dir (GeditFileBrowserStore * model,
-			 FileBrowserNode * parent,
-			 GFile * file)
+model_add_node_from_dir (GeditFileBrowserStore *model,
+			 FileBrowserNode       *parent,
+			 GFile                 *file)
 {
 	FileBrowserNode *node;
 
 	/* Check if it already exists */
-	if ((node = node_list_contains_file (FILE_BROWSER_NODE_DIR (parent)->children, file)) == NULL) {	
+	if ((node = node_list_contains_file (FILE_BROWSER_NODE_DIR (parent)->children, file)) == NULL)
+	{	
 		node = file_browser_node_dir_new (model, file, parent);
 		file_browser_node_set_from_info (model, node, NULL, FALSE);
 
-		if (node->name == NULL) {
+		if (node->name == NULL)
 			file_browser_node_set_name (node);
-		}
 
-		if (node->icon == NULL) {
+		if (node->icon == NULL)
 			node->icon = gedit_file_browser_utils_pixbuf_from_theme ("folder", GTK_ICON_SIZE_MENU);
-		}
 
 		model_add_node (model, node, parent);
 	}
@@ -2126,7 +2219,7 @@ parse_dot_hidden_file (FileBrowserNode *directory)
 	GFileInfo *info;
 	GFileType type;
 	int i;
-	FileBrowserNodeDir * dir = FILE_BROWSER_NODE_DIR (directory);
+	FileBrowserNodeDir *dir = FILE_BROWSER_NODE_DIR (directory);
 
 	/* FIXME: We only support .hidden on file: uri's for the moment.
 	 * Need to figure out if we should do this async or sync to extend
@@ -2144,33 +2237,33 @@ parse_dot_hidden_file (FileBrowserNode *directory)
 	if (info)
 		g_object_unref (info);
 	
-	if (type != G_FILE_TYPE_REGULAR) {
+	if (type != G_FILE_TYPE_REGULAR)
+	{
 		g_object_unref (child);
-
 		return;
 	}
 
-	if (!g_file_load_contents (child, NULL, &file_contents, &file_size, NULL, NULL)) {
+	if (!g_file_load_contents (child, NULL, &file_contents, &file_size, NULL, NULL))
+	{
 		g_object_unref (child);
 		return;
 	}
 
 	g_object_unref (child);
 
-	if (dir->hidden_file_hash == NULL) {
+	if (dir->hidden_file_hash == NULL)
 		dir->hidden_file_hash =
 			g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-	}
 	
 	/* Now parse the data */
 	i = 0;
-	while (i < file_size) {
+	while (i < file_size)
+	{
 		int start;
 
 		start = i;
-		while (i < file_size && file_contents[i] != '\n') {
+		while (i < file_size && file_contents[i] != '\n')
 			i++;
-		}
 
 		if (i > start) {
 			char *hidden_filename;
@@ -2188,31 +2281,30 @@ parse_dot_hidden_file (FileBrowserNode *directory)
 }
 
 static void
-on_directory_monitor_event (GFileMonitor * monitor,
-			    GFile * file,
-			    GFile * other_file,
-			    GFileMonitorEvent event_type,
-			    FileBrowserNode * parent)
+on_directory_monitor_event (GFileMonitor      *monitor,
+			    GFile             *file,
+			    GFile             *other_file,
+			    GFileMonitorEvent  event_type,
+			    FileBrowserNode   *parent)
 {
 	FileBrowserNode *node;
 	FileBrowserNodeDir *dir = FILE_BROWSER_NODE_DIR (parent);
 
-	switch (event_type) {
-	case G_FILE_MONITOR_EVENT_DELETED:
-		node = node_list_contains_file (dir->children, file);
+	switch (event_type)
+	{
+		case G_FILE_MONITOR_EVENT_DELETED:
+			node = node_list_contains_file (dir->children, file);
 
-		if (node != NULL) {
-			model_remove_node (dir->model, node, NULL, TRUE);
-		}
-		break;
-	case G_FILE_MONITOR_EVENT_CREATED:
-		if (g_file_query_exists (file, NULL)) {
-			model_add_node_from_file (dir->model, parent, file, NULL);
-		}
+			if (node != NULL)
+				model_remove_node (dir->model, node, NULL, TRUE);
+			break;
+		case G_FILE_MONITOR_EVENT_CREATED:
+			if (g_file_query_exists (file, NULL))
+				model_add_node_from_file (dir->model, parent, file, NULL);
 		
-		break;
-	default:
-		break;
+			break;
+		default:
+			break;
 	}
 }
 
@@ -2225,18 +2317,19 @@ async_node_free (AsyncNode *async)
 }
 
 static void
-model_iterate_next_files_cb (GFileEnumerator * enumerator, 
-			     GAsyncResult * result, 
-			     AsyncNode * async)
+model_iterate_next_files_cb (GFileEnumerator *enumerator, 
+			     GAsyncResult    *result, 
+			     AsyncNode       *async)
 {
-	GList * files;
-	GError * error = NULL;
-	FileBrowserNodeDir * dir = async->dir;
-	FileBrowserNode * parent = (FileBrowserNode *)dir;
+	GList *files;
+	GError *error = NULL;
+	FileBrowserNodeDir *dir = async->dir;
+	FileBrowserNode *parent = (FileBrowserNode *)dir;
 	
 	files = g_file_enumerator_next_files_finish (enumerator, result, &error);
 
-	if (files == NULL) {
+	if (files == NULL)
+	{
 		g_file_enumerator_close (enumerator, NULL, NULL);
 		async_node_free (async);
 		
@@ -2251,24 +2344,25 @@ model_iterate_next_files_cb (GFileEnumerator * enumerator,
  * http://bugzilla.gnome.org/show_bug.cgi?id=565924
  */
 #ifndef G_OS_WIN32
-			if (g_file_is_native (parent->file) && dir->monitor == NULL) {
+			if (g_file_is_native (parent->file) && dir->monitor == NULL)
+			{
 				dir->monitor = g_file_monitor_directory (parent->file, 
 									 G_FILE_MONITOR_NONE,
 									 NULL,
 									 NULL);
 				if (dir->monitor != NULL)
-				{
 					g_signal_connect (dir->monitor,
 							  "changed",
 							  G_CALLBACK (on_directory_monitor_event),
 							  parent);
-				}
 			}
 #endif
 
 			model_check_dummy (dir->model, parent);
 			model_end_loading (dir->model, parent);
-		} else {
+		}
+		else
+		{
 			/* Simply return if we were cancelled */
 			if (error->domain == G_IO_ERROR && error->code == G_IO_ERROR_CANCELLED)
 				return;
@@ -2283,11 +2377,15 @@ model_iterate_next_files_cb (GFileEnumerator * enumerator,
 			file_browser_node_unload (dir->model, (FileBrowserNode *)parent, TRUE);
 			g_error_free (error);
 		}
-	} else if (g_cancellable_is_cancelled (async->cancellable)) {
+	}
+	else if (g_cancellable_is_cancelled (async->cancellable))
+	{
 		/* Check cancel state manually */
 		g_file_enumerator_close (enumerator, NULL, NULL);
 		async_node_free (async);
-	} else {
+	}
+	else
+	{
 		model_add_nodes_from_files (dir->model, parent, async->original_children, files);
 		
 		g_list_free (files);
@@ -2296,8 +2394,8 @@ model_iterate_next_files_cb (GFileEnumerator * enumerator,
 }
 
 static void
-next_files_async (GFileEnumerator * enumerator,
-		  AsyncNode * async)
+next_files_async (GFileEnumerator *enumerator,
+		  AsyncNode       *async)
 {
 	g_file_enumerator_next_files_async (enumerator,
 					    DIRECTORY_LOAD_ITEMS_PER_CALLBACK,
@@ -2308,12 +2406,12 @@ next_files_async (GFileEnumerator * enumerator,
 }
 
 static void
-model_iterate_children_cb (GFile * file, 
-			   GAsyncResult * result,
-			   AsyncNode * async)
+model_iterate_children_cb (GFile        *file, 
+			   GAsyncResult *result,
+			   AsyncNode    *async)
 {
-	GError * error = NULL;
-	GFileEnumerator * enumerator;
+	GError *error = NULL;
+	GFileEnumerator *enumerator;
 
 	if (g_cancellable_is_cancelled (async->cancellable))
 	{
@@ -2323,7 +2421,8 @@ model_iterate_children_cb (GFile * file,
 	
 	enumerator = g_file_enumerate_children_finish (file, result, &error);
 
-	if (enumerator == NULL) {
+	if (enumerator == NULL)
+	{
 		/* Simply return if we were cancelled or if the dir is not there */
 		FileBrowserNodeDir *dir = async->dir;
 		
@@ -2337,14 +2436,16 @@ model_iterate_children_cb (GFile * file,
 		file_browser_node_unload (dir->model, (FileBrowserNode *)dir, TRUE);
 		g_error_free (error);
 		async_node_free (async);
-	} else {
+	}
+	else
+	{
 		next_files_async (enumerator, async);
 	}
 }
 
 static void
-model_load_directory (GeditFileBrowserStore * model,
-		      FileBrowserNode * node)
+model_load_directory (GeditFileBrowserStore *model,
+		      FileBrowserNode       *node)
 {
 	FileBrowserNodeDir *dir;
 	AsyncNode *async;
@@ -2354,9 +2455,8 @@ model_load_directory (GeditFileBrowserStore * model,
 	dir = FILE_BROWSER_NODE_DIR (node);
 
 	/* Cancel a previous load */
-	if (dir->cancellable != NULL) {
+	if (dir->cancellable != NULL)
 		file_browser_node_unload (dir->model, node, TRUE);
-	}
 
 	node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_LOADED;
 	model_begin_loading (model, node);
@@ -2382,14 +2482,17 @@ model_load_directory (GeditFileBrowserStore * model,
 }
 
 static GList *
-get_parent_files (GeditFileBrowserStore * model, GFile * file)
+get_parent_files (GeditFileBrowserStore *model,
+		  GFile                 *file)
 {
-	GList * result = NULL;
+	GList *result = NULL;
 	
 	result = g_list_prepend (result, g_object_ref (file));
 
-	while ((file = g_file_get_parent (file))) {
-		if (g_file_equal (file, model->priv->root->file)) {
+	while ((file = g_file_get_parent (file)))
+	{
+		if (g_file_equal (file, model->priv->root->file))
+		{
 			g_object_unref (file);
 			break;
 		}
@@ -2401,49 +2504,55 @@ get_parent_files (GeditFileBrowserStore * model, GFile * file)
 }
 
 static void
-model_fill (GeditFileBrowserStore * model, FileBrowserNode * node,
-	    GtkTreePath ** path)
+model_fill (GeditFileBrowserStore  *model,
+	    FileBrowserNode        *node,
+	    GtkTreePath           **path)
 {
 	gboolean free_path = FALSE;
 	GtkTreeIter iter = {0,};
 	GSList *item;
 	FileBrowserNode *child;
 
-	if (node == NULL) {
+	if (node == NULL)
+	{
 		node = model->priv->virtual_root;
 		*path = gtk_tree_path_new ();
 		free_path = TRUE;
 	}
 
-	if (*path == NULL) {
-		*path =
-		    gedit_file_browser_store_get_path_real (model, node);
+	if (*path == NULL)
+	{
+		*path = gedit_file_browser_store_get_path_real (model, node);
 		free_path = TRUE;
 	}
 
-	if (!model_node_visibility (model, node)) {
+	if (!model_node_visibility (model, node))
+	{
 		if (free_path)
 			gtk_tree_path_free (*path);
 
 		return;
 	}
 
-	if (node != model->priv->virtual_root) {
+	if (node != model->priv->virtual_root)
+	{
 		/* Insert node */
 		iter.user_data = node;
-		
 		row_inserted(model, path, &iter);
 	}
 
-	if (NODE_IS_DIR (node)) {
+	if (NODE_IS_DIR (node))
+	{
 		/* Go to the first child */
 		gtk_tree_path_down (*path);
 
 		for (item = FILE_BROWSER_NODE_DIR (node)->children; item;
-		     item = item->next) {
+		     item = item->next)
+		{
 			child = (FileBrowserNode *) (item->data);
 
-			if (model_node_visibility (model, child)) {
+			if (model_node_visibility (model, child))
+			{
 				model_fill (model, child, path);
 
 				/* Increase path for next child */
@@ -2462,8 +2571,8 @@ model_fill (GeditFileBrowserStore * model, FileBrowserNode * node,
 }
 
 static void
-set_virtual_root_from_node (GeditFileBrowserStore * model,
-			    FileBrowserNode * node)
+set_virtual_root_from_node (GeditFileBrowserStore *model,
+			    FileBrowserNode       *node)
 {
 	FileBrowserNode *next;
 	FileBrowserNode *prev;
@@ -2477,23 +2586,28 @@ set_virtual_root_from_node (GeditFileBrowserStore * model,
 	next = prev->parent;
 
 	/* Free all the nodes below that we don't need in cache */
-	while (prev != model->priv->root) {
+	while (prev != model->priv->root)
+	{
 		dir = FILE_BROWSER_NODE_DIR (next);
 		copy = g_slist_copy (dir->children);
 
-		for (item = copy; item; item = item->next) {
+		for (item = copy; item; item = item->next)
+		{
 			check = (FileBrowserNode *) (item->data);
 
-			if (prev == node) {
+			if (prev == node)
+			{
 				/* Only free the children, keeping this depth in cache */
-				if (check != node) {
-					file_browser_node_free_children
-					    (model, check);
+				if (check != node)
+				{
+					file_browser_node_free_children (model, check);
 					file_browser_node_unload (model,
 								  check,
 								  FALSE);
 				}
-			} else if (check != prev) {
+			}
+			else if (check != prev)
+			{
 				/* Only free when the node is not in the chain */
 				dir->children =
 				    g_slist_remove (dir->children, check);
@@ -2511,26 +2625,25 @@ set_virtual_root_from_node (GeditFileBrowserStore * model,
 
 	/* Free all the nodes up that we don't need in cache */
 	for (item = FILE_BROWSER_NODE_DIR (node)->children; item;
-	     item = item->next) {
+	     item = item->next)
+	{
 		check = (FileBrowserNode *) (item->data);
 			
-		if (NODE_IS_DIR (check)) {		
-			for (copy =
-			     FILE_BROWSER_NODE_DIR (check)->children; copy;
-			     copy = copy->next) {
+		if (NODE_IS_DIR (check))
+		{		
+			for (copy = FILE_BROWSER_NODE_DIR (check)->children;
+			     copy; copy = copy->next)
+			{
 				file_browser_node_free_children (model,
-								 (FileBrowserNode
-								  *)
-								 (copy->
-								  data));
+								 (FileBrowserNode*) (copy->data));
 				file_browser_node_unload (model,
-							  (FileBrowserNode
-							   *) (copy->data),
+							  (FileBrowserNode*) (copy->data),
 							  FALSE);
 			}
-		} else if (NODE_IS_DUMMY (check)) {
-			check->flags |=
-			    GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
+		}
+		else if (NODE_IS_DUMMY (check))
+		{
+			check->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
 		}
 	}
 
@@ -2548,13 +2661,13 @@ set_virtual_root_from_node (GeditFileBrowserStore * model,
 }
 
 static void
-set_virtual_root_from_file (GeditFileBrowserStore * model,
-			    GFile * file)
+set_virtual_root_from_file (GeditFileBrowserStore *model,
+			    GFile                 *file)
 {
-	GList * files;
-	GList * item;
-	FileBrowserNode * parent;
-	GFile * check;
+	GList *files;
+	GList *item;
+	FileBrowserNode *parent;
+	GFile *check;
 
 	/* Always clear the model before altering the nodes */
 	model_clear (model, FALSE);
@@ -2563,7 +2676,8 @@ set_virtual_root_from_file (GeditFileBrowserStore * model,
 	files = get_parent_files (model, file);
 	parent = model->priv->root;
 
-	for (item = files; item; item = item->next) {
+	for (item = files; item; item = item->next)
+	{
 		check = G_FILE (item->data);
 		
 		parent = model_add_node_from_dir (model, parent, check);
@@ -2575,9 +2689,9 @@ set_virtual_root_from_file (GeditFileBrowserStore * model,
 }
 
 static FileBrowserNode *
-model_find_node_children (GeditFileBrowserStore * model,
-			  FileBrowserNode * parent,
-			  GFile * file)
+model_find_node_children (GeditFileBrowserStore *model,
+			  FileBrowserNode       *parent,
+			  GFile                 *file)
 {
 	FileBrowserNodeDir *dir;
 	FileBrowserNode *child;
@@ -2589,7 +2703,8 @@ model_find_node_children (GeditFileBrowserStore * model,
 	
 	dir = FILE_BROWSER_NODE_DIR (parent);
 	
-	for (children = dir->children; children; children = children->next) {
+	for (children = dir->children; children; children = children->next)
+	{
 		child = (FileBrowserNode *)(children->data);
 		
 		result = model_find_node (model, child, file);
@@ -2602,9 +2717,9 @@ model_find_node_children (GeditFileBrowserStore * model,
 }
 
 static FileBrowserNode *
-model_find_node (GeditFileBrowserStore * model,
-		 FileBrowserNode * node,
-		 GFile * file)
+model_find_node (GeditFileBrowserStore *model,
+		 FileBrowserNode       *node,
+		 GFile                 *file)
 {
 	if (node == NULL)
 		node = model->priv->root;
@@ -2623,21 +2738,22 @@ gedit_file_browser_store_error_quark (void)
 {
 	static GQuark quark = 0;
 
-	if (G_UNLIKELY (quark == 0)) {
+	if (G_UNLIKELY (quark == 0))
 		quark = g_quark_from_string ("gedit_file_browser_store_error");
-	}
 
 	return quark;
 }
 
 static GFile *
-unique_new_name (GFile * directory, gchar const * name)
+unique_new_name (GFile       *directory,
+		 gchar const *name)
 {
-	GFile * newuri = NULL;
+	GFile *newuri = NULL;
 	guint num = 0;
-	gchar * newname;
+	gchar *newname;
 
-	while (newuri == NULL || g_file_query_exists (newuri, NULL)) {
+	while (newuri == NULL || g_file_query_exists (newuri, NULL))
+	{
 		if (newuri != NULL)
 			g_object_unref (newuri);
 
@@ -2656,15 +2772,15 @@ unique_new_name (GFile * directory, gchar const * name)
 }
 
 static GeditFileBrowserStoreResult
-model_root_mounted (GeditFileBrowserStore * model, GFile * virtual_root)
+model_root_mounted (GeditFileBrowserStore *model,
+		    GFile                 *virtual_root)
 {
 	model_check_dummy (model, model->priv->root);
 	g_object_notify (G_OBJECT (model), "root");
 
 	if (virtual_root != NULL)
-		return
-		    gedit_file_browser_store_set_virtual_root_from_location
-		    (model, virtual_root);
+		return gedit_file_browser_store_set_virtual_root_from_location
+				(model, virtual_root);
 	else
 		set_virtual_root_from_node (model,
 					    model->priv->root);
@@ -2673,9 +2789,10 @@ model_root_mounted (GeditFileBrowserStore * model, GFile * virtual_root)
 }
 
 static void
-handle_root_error (GeditFileBrowserStore * model, GError *error)
+handle_root_error (GeditFileBrowserStore *model,
+		   GError *error)
 {
-	FileBrowserNode * root;
+	FileBrowserNode *root;
 
 	g_signal_emit (model, 
 		       model_signals[ERROR], 
@@ -2698,13 +2815,13 @@ handle_root_error (GeditFileBrowserStore * model, GError *error)
 }
 
 static void
-mount_cb (GFile * file, 
-	  GAsyncResult * res, 
-	  MountInfo * mount_info)
+mount_cb (GFile        *file, 
+	  GAsyncResult *res, 
+	  MountInfo    *mount_info)
 {
 	gboolean mounted;
-	GError * error = NULL;
-	GeditFileBrowserStore * model = mount_info->model;
+	GError *error = NULL;
+	GeditFileBrowserStore *model = mount_info->model;
 	
 	mounted = g_file_mount_enclosing_volume_finish (file, res, &error);
 
@@ -2716,7 +2833,7 @@ mount_cb (GFile * file,
 
 	if (!mount_info->model || g_cancellable_is_cancelled (mount_info->cancellable))
 	{
-		// Reset because it might be reused?
+		/* Reset because it might be reused? */
 		g_cancellable_reset (mount_info->cancellable);
 	}
 	else if (mounted)
@@ -2739,11 +2856,12 @@ mount_cb (GFile * file,
 }
 
 static GeditFileBrowserStoreResult
-model_mount_root (GeditFileBrowserStore * model, GFile * virtual_root)
+model_mount_root (GeditFileBrowserStore *model,
+		  GFile                 *virtual_root)
 {
-	GFileInfo * info;
-	GError * error = NULL;
-	MountInfo * mount_info;
+	GFileInfo *info;
+	GError *error = NULL;
+	MountInfo *mount_info;
 	
 	info = g_file_query_info (model->priv->root->file, 
 				  G_FILE_ATTRIBUTE_STANDARD_TYPE, 
@@ -2751,8 +2869,10 @@ model_mount_root (GeditFileBrowserStore * model, GFile * virtual_root)
 				  NULL,
 				  &error);
 
-	if (!info) {
-		if (error->code == G_IO_ERROR_NOT_MOUNTED) {
+	if (!info)
+	{
+		if (error->code == G_IO_ERROR_NOT_MOUNTED)
+		{
 			/* Try to mount it */
 			FILE_BROWSER_NODE_DIR (model->priv->root)->cancellable = g_cancellable_new ();
 			
@@ -2781,7 +2901,9 @@ model_mount_root (GeditFileBrowserStore * model, GFile * virtual_root)
 		}
 		
 		g_error_free (error);
-	} else {
+	}
+	else
+	{
 		g_object_unref (info);
 		
 		return model_root_mounted (model, virtual_root);
@@ -2804,17 +2926,17 @@ gedit_file_browser_store_new (GFile *root)
 }
 
 void
-gedit_file_browser_store_set_value (GeditFileBrowserStore * tree_model,
-				    GtkTreeIter * iter, gint column,
-				    GValue * value)
+gedit_file_browser_store_set_value (GeditFileBrowserStore *tree_model,
+				    GtkTreeIter           *iter,
+				    gint                   column,
+				    GValue                *value)
 {
 	gpointer data;
 	FileBrowserNode *node;
 	GtkTreePath *path;
 
 	g_return_if_fail (GEDIT_IS_FILE_BROWSER_STORE (tree_model));
-	g_return_if_fail (column ==
-			  GEDIT_FILE_BROWSER_STORE_COLUMN_EMBLEM);
+	g_return_if_fail (column == GEDIT_FILE_BROWSER_STORE_COLUMN_EMBLEM);
 	g_return_if_fail (G_VALUE_HOLDS_OBJECT (value));
 	g_return_if_fail (iter != NULL);
 	g_return_if_fail (iter->user_data != NULL);
@@ -2836,7 +2958,8 @@ gedit_file_browser_store_set_value (GeditFileBrowserStore * tree_model,
 
 	model_recomposite_icon (tree_model, iter);
 
-	if (model_node_visibility (tree_model, node)) {
+	if (model_node_visibility (tree_model, node))
+	{
 		path = gedit_file_browser_store_get_path (GTK_TREE_MODEL (tree_model), 
 							  iter);
 		row_changed (tree_model, &path, iter);
@@ -2845,8 +2968,8 @@ gedit_file_browser_store_set_value (GeditFileBrowserStore * tree_model,
 }
 
 GeditFileBrowserStoreResult
-gedit_file_browser_store_set_virtual_root (GeditFileBrowserStore * model,
-					   GtkTreeIter * iter)
+gedit_file_browser_store_set_virtual_root (GeditFileBrowserStore *model,
+					   GtkTreeIter           *iter)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model),
 			      GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
@@ -2863,13 +2986,14 @@ gedit_file_browser_store_set_virtual_root (GeditFileBrowserStore * model,
 }
 
 GeditFileBrowserStoreResult
-gedit_file_browser_store_set_virtual_root_from_location
-    (GeditFileBrowserStore * model, GFile *root) {
-
+gedit_file_browser_store_set_virtual_root_from_location (GeditFileBrowserStore *model,
+							 GFile                 *root)
+{
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model),
 			      GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
 
-	if (root == NULL) {
+	if (root == NULL)
+	{
 		gchar *uri;
 
 		uri = g_file_get_uri (root);
@@ -2880,28 +3004,29 @@ gedit_file_browser_store_set_virtual_root_from_location
 
 	/* Check if uri is already the virtual root */
 	if (model->priv->virtual_root &&
-	    g_file_equal (model->priv->virtual_root->file, root)) {
+	    g_file_equal (model->priv->virtual_root->file, root))
+	{
 		return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 	}
 
 	/* Check if uri is the root itself */
-	if (g_file_equal (model->priv->root->file, root)) {
-
+	if (g_file_equal (model->priv->root->file, root))
+	{
 		/* Always clear the model before altering the nodes */
 		model_clear (model, FALSE);
 		set_virtual_root_from_node (model, model->priv->root);
 		return GEDIT_FILE_BROWSER_STORE_RESULT_OK;
 	}
 
-	if (!g_file_has_prefix (root, model->priv->root->file)) {
+	if (!g_file_has_prefix (root, model->priv->root->file))
+	{
 		gchar *str, *str1;
 
 		str = g_file_get_parse_name (model->priv->root->file);
 		str1 = g_file_get_parse_name (root);
 
-		g_warning
-		    ("Virtual root (%s) is not below actual root (%s)",
-		     str1, str);
+		g_warning ("Virtual root (%s) is not below actual root (%s)",
+			   str1, str);
 
 		g_free (str);
 		g_free (str1);
@@ -2915,8 +3040,7 @@ gedit_file_browser_store_set_virtual_root_from_location
 }
 
 GeditFileBrowserStoreResult
-gedit_file_browser_store_set_virtual_root_top (GeditFileBrowserStore *
-					       model)
+gedit_file_browser_store_set_virtual_root_top (GeditFileBrowserStore *model)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model),
 			      GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
@@ -2931,8 +3055,7 @@ gedit_file_browser_store_set_virtual_root_top (GeditFileBrowserStore *
 }
 
 GeditFileBrowserStoreResult
-gedit_file_browser_store_set_virtual_root_up (GeditFileBrowserStore *
-					      model)
+gedit_file_browser_store_set_virtual_root_up (GeditFileBrowserStore *model)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model),
 			      GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
@@ -2948,8 +3071,8 @@ gedit_file_browser_store_set_virtual_root_up (GeditFileBrowserStore *
 }
 
 gboolean
-gedit_file_browser_store_get_iter_virtual_root (GeditFileBrowserStore *
-						model, GtkTreeIter * iter)
+gedit_file_browser_store_get_iter_virtual_root (GeditFileBrowserStore *model,
+						GtkTreeIter           *iter)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), FALSE);
 	g_return_val_if_fail (iter != NULL, FALSE);
@@ -2962,8 +3085,8 @@ gedit_file_browser_store_get_iter_virtual_root (GeditFileBrowserStore *
 }
 
 gboolean
-gedit_file_browser_store_get_iter_root (GeditFileBrowserStore * model,
-					GtkTreeIter * iter)
+gedit_file_browser_store_get_iter_root (GeditFileBrowserStore *model,
+					GtkTreeIter           *iter)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), FALSE);
 	g_return_val_if_fail (iter != NULL, FALSE);
@@ -2976,9 +3099,9 @@ gedit_file_browser_store_get_iter_root (GeditFileBrowserStore * model,
 }
 
 gboolean
-gedit_file_browser_store_iter_equal (GeditFileBrowserStore * model,
-				     GtkTreeIter * iter1,
-				     GtkTreeIter * iter2)
+gedit_file_browser_store_iter_equal (GeditFileBrowserStore *model,
+				     GtkTreeIter           *iter1,
+				     GtkTreeIter           *iter2)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), FALSE);
 	g_return_val_if_fail (iter1 != NULL, FALSE);
@@ -2998,12 +3121,11 @@ gedit_file_browser_store_cancel_mount_operation (GeditFileBrowserStore *store)
 }
 
 GeditFileBrowserStoreResult
-gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
-						    model,
-						    GFile *root,
-						    GFile *virtual_root)
+gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *model,
+						    GFile                 *root,
+						    GFile                 *virtual_root)
 {
-	FileBrowserNode * node;
+	FileBrowserNode *node;
 	gboolean equal = FALSE;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model),
@@ -3012,7 +3134,8 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 	if (root == NULL && model->priv->root == NULL)
 		return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 
-	if (root != NULL && model->priv->root != NULL) {
+	if (root != NULL && model->priv->root != NULL)
+	{
 		equal = g_file_equal (root, model->priv->root->file);
 
 		if (equal && virtual_root == NULL) {
@@ -3020,13 +3143,15 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 		}
 	}
 
-	if (virtual_root) {
-		if (equal && g_file_equal (virtual_root, model->priv->virtual_root->file)) {
+	if (virtual_root)
+	{
+		if (equal && g_file_equal (virtual_root, model->priv->virtual_root->file))
+		{
 			return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 		}
 	}
 	
-	/* make sure to cancel any previous mount operations */
+	/* Make sure to cancel any previous mount operations */
 	cancel_mount_operation (model);
 
 	/* Always clear the model before altering the nodes */
@@ -3036,13 +3161,16 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 	model->priv->root = NULL;
 	model->priv->virtual_root = NULL;
 
-	if (root != NULL) {
+	if (root != NULL)
+	{
 		/* Create the root node */
 		node = file_browser_node_dir_new (model, root, NULL);
 
 		model->priv->root = node;
 		return model_mount_root (model, virtual_root);
-	} else {
+	}
+	else
+	{
 		g_object_notify (G_OBJECT (model), "root");
 		g_object_notify (G_OBJECT (model), "virtual-root");
 	}
@@ -3051,8 +3179,8 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 }
 
 GeditFileBrowserStoreResult
-gedit_file_browser_store_set_root (GeditFileBrowserStore * model,
-				   GFile *root)
+gedit_file_browser_store_set_root (GeditFileBrowserStore *model,
+				   GFile                *root)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model),
 			      GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
@@ -3062,7 +3190,7 @@ gedit_file_browser_store_set_root (GeditFileBrowserStore * model,
 }
 
 GFile *
-gedit_file_browser_store_get_root (GeditFileBrowserStore * model)
+gedit_file_browser_store_get_root (GeditFileBrowserStore *model)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), NULL);
 	
@@ -3073,7 +3201,7 @@ gedit_file_browser_store_get_root (GeditFileBrowserStore * model)
 }
 
 GFile *
-gedit_file_browser_store_get_virtual_root (GeditFileBrowserStore * model)
+gedit_file_browser_store_get_virtual_root (GeditFileBrowserStore *model)
 {
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), NULL);
 	
@@ -3084,8 +3212,8 @@ gedit_file_browser_store_get_virtual_root (GeditFileBrowserStore * model)
 }
 
 void
-_gedit_file_browser_store_iter_expanded (GeditFileBrowserStore * model,
-					 GtkTreeIter * iter)
+_gedit_file_browser_store_iter_expanded (GeditFileBrowserStore *model,
+					 GtkTreeIter           *iter)
 {
 	FileBrowserNode *node;
 
@@ -3095,15 +3223,14 @@ _gedit_file_browser_store_iter_expanded (GeditFileBrowserStore * model,
 
 	node = (FileBrowserNode *) (iter->user_data);
 
-	if (NODE_IS_DIR (node) && !NODE_LOADED (node)) {
+	if (NODE_IS_DIR (node) && !NODE_LOADED (node))
 		/* Load it now */
 		model_load_directory (model, node);
-	}
 }
 
 void
-_gedit_file_browser_store_iter_collapsed (GeditFileBrowserStore * model,
-					  GtkTreeIter * iter)
+_gedit_file_browser_store_iter_collapsed (GeditFileBrowserStore *model,
+					  GtkTreeIter           *iter)
 {
 	FileBrowserNode *node;
 	GSList *item;
@@ -3114,14 +3241,16 @@ _gedit_file_browser_store_iter_collapsed (GeditFileBrowserStore * model,
 
 	node = (FileBrowserNode *) (iter->user_data);
 
-	if (NODE_IS_DIR (node) && NODE_LOADED (node)) {
+	if (NODE_IS_DIR (node) && NODE_LOADED (node))
+	{
 		/* Unload children of the children, keeping 1 depth in cache */
 
-		for (item = FILE_BROWSER_NODE_DIR (node)->children; item;
-		     item = item->next) {
+		for (item = FILE_BROWSER_NODE_DIR (node)->children; item; item = item->next)
+		{
 			node = (FileBrowserNode *) (item->data);
 
-			if (NODE_IS_DIR (node) && NODE_LOADED (node)) {
+			if (NODE_IS_DIR (node) && NODE_LOADED (node))
+			{
 				file_browser_node_unload (model, node,
 							  TRUE);
 				model_check_dummy (model, node);
@@ -3131,15 +3260,14 @@ _gedit_file_browser_store_iter_collapsed (GeditFileBrowserStore * model,
 }
 
 GeditFileBrowserStoreFilterMode
-gedit_file_browser_store_get_filter_mode (GeditFileBrowserStore * model)
+gedit_file_browser_store_get_filter_mode (GeditFileBrowserStore *model)
 {
 	return model->priv->filter_mode;
 }
 
 void
-gedit_file_browser_store_set_filter_mode (GeditFileBrowserStore * model,
-					  GeditFileBrowserStoreFilterMode
-					  mode)
+gedit_file_browser_store_set_filter_mode (GeditFileBrowserStore           *model,
+					  GeditFileBrowserStoreFilterMode  mode)
 {
 	g_return_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model));
 
@@ -3153,9 +3281,9 @@ gedit_file_browser_store_set_filter_mode (GeditFileBrowserStore * model,
 }
 
 void
-gedit_file_browser_store_set_filter_func (GeditFileBrowserStore * model,
-					  GeditFileBrowserStoreFilterFunc
-					  func, gpointer user_data)
+gedit_file_browser_store_set_filter_func (GeditFileBrowserStore           *model,
+					  GeditFileBrowserStoreFilterFunc  func,
+					  gpointer                         user_data)
 {
 	g_return_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model));
 
@@ -3165,7 +3293,7 @@ gedit_file_browser_store_set_filter_func (GeditFileBrowserStore * model,
 }
 
 void
-gedit_file_browser_store_refilter (GeditFileBrowserStore * model)
+gedit_file_browser_store_refilter (GeditFileBrowserStore *model)
 {
 	model_refilter (model);
 }
@@ -3177,7 +3305,7 @@ gedit_file_browser_store_filter_mode_get_default (void)
 }
 
 void
-gedit_file_browser_store_refresh (GeditFileBrowserStore * model)
+gedit_file_browser_store_refresh (GeditFileBrowserStore *model)
 {
 	g_return_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model));
 
@@ -3192,18 +3320,19 @@ gedit_file_browser_store_refresh (GeditFileBrowserStore * model)
 }
 
 static void
-reparent_node (FileBrowserNode * node, gboolean reparent)
+reparent_node (FileBrowserNode *node,
+	       gboolean         reparent)
 {
-	FileBrowserNodeDir * dir;
-	GSList * child;
-	GFile * parent;
-	gchar * base;
+	FileBrowserNodeDir *dir;
+	GSList *child;
+	GFile *parent;
+	gchar *base;
 
-	if (!node->file) {
+	if (!node->file)
 		return;
-	}
 	
-	if (reparent) {
+	if (reparent)
+	{
 		parent = node->parent->file;
 		base = g_file_get_basename (node->file);
 		g_object_unref (node->file);
@@ -3212,26 +3341,26 @@ reparent_node (FileBrowserNode * node, gboolean reparent)
 		g_free (base);
 	}
 	
-	if (NODE_IS_DIR (node)) {
+	if (NODE_IS_DIR (node))
+	{
 		dir = FILE_BROWSER_NODE_DIR (node);
 		
-		for (child = dir->children; child; child = child->next) {
+		for (child = dir->children; child; child = child->next)
 			reparent_node ((FileBrowserNode *)child->data, TRUE);
-		}
 	}
 }
 
 gboolean
-gedit_file_browser_store_rename (GeditFileBrowserStore * model,
-				 GtkTreeIter * iter,
-				 const gchar * new_name,
-				 GError ** error)
+gedit_file_browser_store_rename (GeditFileBrowserStore  *model,
+				 GtkTreeIter            *iter,
+				 const gchar            *new_name,
+				 GError                **error)
 {
 	FileBrowserNode *node;
-	GFile * file;
-	GFile * parent;
-	GFile * previous;
-	GError * err = NULL;
+	GFile *file;
+	GFile *parent;
+	GFile *previous;
+	GError *err = NULL;
 	GtkTreePath *path;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), FALSE);
@@ -3246,12 +3375,14 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 	file = g_file_get_child (parent, new_name);
 	g_object_unref (parent);
 
-	if (g_file_equal (node->file, file)) {
+	if (g_file_equal (node->file, file))
+	{
 		g_object_unref (file);
 		return TRUE;
 	}
 
-	if (g_file_move (node->file, file, G_FILE_COPY_NONE, NULL, NULL, NULL, &err)) {
+	if (g_file_move (node->file, file, G_FILE_COPY_NONE, NULL, NULL, NULL, &err))
+	{
 		previous = node->file;
 		node->file = file;
 
@@ -3261,20 +3392,25 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 		
 		reparent_node (node, FALSE);
 
-		if (model_node_visibility (model, node)) {
+		if (model_node_visibility (model, node))
+		{
 			path = gedit_file_browser_store_get_path_real (model, node);
 			row_changed (model, &path, iter);
 			gtk_tree_path_free (path);
 
 			/* Reorder this item */
 			model_resort_node (model, node);
-		} else {
+		}
+		else
+		{
 			g_object_unref (previous);
 			
 			if (error != NULL)
 				*error = g_error_new_literal (gedit_file_browser_store_error_quark (),
 							      GEDIT_FILE_BROWSER_ERROR_RENAME,
-				       			      _("The renamed file is currently filtered out. You need to adjust your filter settings to make the file visible"));
+				       			      _("The renamed file is currently filtered out."
+				       			        "You need to adjust your filter settings to "
+				       			        "make the file visible"));
 			return FALSE;
 		}
 
@@ -3283,16 +3419,19 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 		g_object_unref (previous);
 
 		return TRUE;
-	} else {
+	}
+	else
+	{
 		g_object_unref (file);
 
-		if (err) {
-			if (error != NULL) {
-				*error =
-				    g_error_new_literal
-				    (gedit_file_browser_store_error_quark (),
-				     GEDIT_FILE_BROWSER_ERROR_RENAME,
-				     err->message);
+		if (err)
+		{
+			if (error != NULL)
+			{
+				*error = g_error_new_literal
+					(gedit_file_browser_store_error_quark (),
+					 GEDIT_FILE_BROWSER_ERROR_RENAME,
+					 err->message);
 			}
 		
 			g_error_free (err);
@@ -3303,7 +3442,7 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 }
 
 static void
-async_data_free (AsyncData * data)
+async_data_free (AsyncData *data)
 {
 	g_object_unref (data->cancellable);
 	
@@ -3317,7 +3456,7 @@ async_data_free (AsyncData * data)
 }
 
 static gboolean
-emit_no_trash (AsyncData * data)
+emit_no_trash (AsyncData *data)
 {
 	/* Emit the no trash error */
 	gboolean ret;
@@ -3327,14 +3466,14 @@ emit_no_trash (AsyncData * data)
 }
 
 typedef struct {
-	GeditFileBrowserStore * model;
-	GFile * file;
+	GeditFileBrowserStore *model;
+	GFile *file;
 } IdleDelete;
 
 static gboolean
-file_deleted (IdleDelete * data)
+file_deleted (IdleDelete *data)
 {
-	FileBrowserNode * node;
+	FileBrowserNode *node;
 	node = model_find_node (data->model, NULL, data->file);
 
 	if (node != NULL)
@@ -3344,12 +3483,12 @@ file_deleted (IdleDelete * data)
 }
 
 static gboolean
-delete_files (GIOSchedulerJob * job,
-	      GCancellable * cancellable,
-	      AsyncData * data)
+delete_files (GIOSchedulerJob *job,
+	      GCancellable    *cancellable,
+	      AsyncData       *data)
 {
-	GFile * file;
-	GError * error = NULL;
+	GFile *file;
+	GError *error = NULL;
 	gboolean ret;
 	gint code;
 	IdleDelete delete;
@@ -3366,17 +3505,21 @@ delete_files (GIOSchedulerJob * job,
 	else
 		ret = g_file_delete (file, cancellable, &error);
 
-	if (ret) {
+	if (ret)
+	{
 		delete.model = data->model;
 		delete.file = file;
 
 		/* Remove the file from the model in the main loop */
 		g_io_scheduler_job_send_to_mainloop (job, (GSourceFunc)file_deleted, &delete, NULL);
-	} else if (!ret && error) {
+	}
+	else if (!ret && error)
+	{
 		code = error->code;
 		g_error_free (error);
 
-		if (data->trash && code == G_IO_ERROR_NOT_SUPPORTED) {
+		if (data->trash && code == G_IO_ERROR_NOT_SUPPORTED)
+		{
 			/* Trash is not supported on this system ... */
 			if (g_io_scheduler_job_send_to_mainloop (job, (GSourceFunc)emit_no_trash, data, NULL))
 			{
@@ -3389,7 +3532,9 @@ delete_files (GIOSchedulerJob * job,
 			
 			/* End the job */
 			return FALSE;
-		} else if (code == G_IO_ERROR_CANCELLED) {
+		}
+		else if (code == G_IO_ERROR_CANCELLED)
+		{
 			/* Job has been cancelled, just let the job end */
 			return FALSE;
 		}
@@ -3402,15 +3547,16 @@ delete_files (GIOSchedulerJob * job,
 
 GeditFileBrowserStoreResult
 gedit_file_browser_store_delete_all (GeditFileBrowserStore *model,
-				     GList *rows, gboolean trash)
+				     GList                 *rows,
+				     gboolean               trash)
 {
-	FileBrowserNode * node;
-	AsyncData * data;
-	GList * files = NULL;
-	GList * row;
+	FileBrowserNode *node;
+	AsyncData *data;
+	GList *files = NULL;
+	GList *row;
 	GtkTreeIter iter;
-	GtkTreePath * prev = NULL;
-	GtkTreePath * path;
+	GtkTreePath *prev = NULL;
+	GtkTreePath *path;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
 	
@@ -3422,7 +3568,8 @@ gedit_file_browser_store_delete_all (GeditFileBrowserStore *model,
 	   a directory that's also deleted */
 	rows = g_list_sort (g_list_copy (rows), (GCompareFunc)gtk_tree_path_compare);
 
-	for (row = rows; row; row = row->next) {
+	for (row = rows; row; row = row->next)
+	{
 		path = (GtkTreePath *)(row->data);
 
 		if (!gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path))
@@ -3447,8 +3594,7 @@ gedit_file_browser_store_delete_all (GeditFileBrowserStore *model,
 	data->iter = files;
 	data->removed = FALSE;
 	
-	model->priv->async_handles =
-	    g_slist_prepend (model->priv->async_handles, data);
+	model->priv->async_handles = g_slist_prepend (model->priv->async_handles, data);
 
 	g_io_scheduler_push_job ((GIOSchedulerJobFunc)delete_files, 
 				 data,
@@ -3461,8 +3607,9 @@ gedit_file_browser_store_delete_all (GeditFileBrowserStore *model,
 }
 
 GeditFileBrowserStoreResult
-gedit_file_browser_store_delete (GeditFileBrowserStore * model,
-				 GtkTreeIter * iter, gboolean trash)
+gedit_file_browser_store_delete (GeditFileBrowserStore *model,
+				 GtkTreeIter           *iter,
+				 gboolean               trash)
 {
 	FileBrowserNode *node;
 	GList *rows = NULL;
@@ -3487,16 +3634,16 @@ gedit_file_browser_store_delete (GeditFileBrowserStore * model,
 }
 
 gboolean
-gedit_file_browser_store_new_file (GeditFileBrowserStore * model,
-				   GtkTreeIter * parent,
-				   GtkTreeIter * iter)
+gedit_file_browser_store_new_file (GeditFileBrowserStore *model,
+				   GtkTreeIter           *parent,
+				   GtkTreeIter           *iter)
 {
-	GFile * file;
-	GFileOutputStream * stream;
+	GFile *file;
+	GFileOutputStream *stream;
 	FileBrowserNodeDir *parent_node;
 	gboolean result = FALSE;
 	FileBrowserNode *node;
-	GError * error = NULL;
+	GError *error = NULL;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), FALSE);
 	g_return_val_if_fail (parent != NULL, FALSE);
@@ -3507,7 +3654,7 @@ gedit_file_browser_store_new_file (GeditFileBrowserStore * model,
 	g_return_val_if_fail (iter != NULL, FALSE);
 
 	parent_node = FILE_BROWSER_NODE_DIR (parent->user_data);
-	/* Translators: This is the default name of new files created by the file browser pane. */
+	/*vTranslators: This is the default name of new files created by the file browser pane. */
 	file = unique_new_name (((FileBrowserNode *) parent_node)->file, _("file"));
 
 	stream = g_file_create (file, G_FILE_CREATE_NONE, NULL, &error);
@@ -3518,21 +3665,27 @@ gedit_file_browser_store_new_file (GeditFileBrowserStore * model,
 			       GEDIT_FILE_BROWSER_ERROR_NEW_FILE,
 			       error->message);
 		g_error_free (error);
-	} else {
+	}
+	else
+	{
 		g_object_unref (stream);
 		node = model_add_node_from_file (model, 
 						 (FileBrowserNode *)parent_node, 
 						 file, 
 						 NULL);
 
-		if (model_node_visibility (model, node)) {
+		if (model_node_visibility (model, node))
+		{
 			iter->user_data = node;
 			result = TRUE;
-		} else {
+		}
+		else
+		{
 			g_signal_emit (model, model_signals[ERROR], 0,
 				       GEDIT_FILE_BROWSER_ERROR_NEW_FILE,
-				       _
-				       ("The new file is currently filtered out. You need to adjust your filter settings to make the file visible"));
+				       _("The new file is currently filtered out. "
+				         "You need to adjust your filter "
+				         "settings to make the file visible"));
 		}
 	}
 
@@ -3541,13 +3694,13 @@ gedit_file_browser_store_new_file (GeditFileBrowserStore * model,
 }
 
 gboolean
-gedit_file_browser_store_new_directory (GeditFileBrowserStore * model,
-					GtkTreeIter * parent,
-					GtkTreeIter * iter)
+gedit_file_browser_store_new_directory (GeditFileBrowserStore *model,
+					GtkTreeIter           *parent,
+					GtkTreeIter           *iter)
 {
-	GFile * file;
+	GFile *file;
 	FileBrowserNodeDir *parent_node;
-	GError * error = NULL;
+	GError *error = NULL;
 	FileBrowserNode *node;
 	gboolean result = FALSE;
 
@@ -3563,30 +3716,35 @@ gedit_file_browser_store_new_directory (GeditFileBrowserStore * model,
 	/* Translators: This is the default name of new directories created by the file browser pane. */
 	file = unique_new_name (((FileBrowserNode *) parent_node)->file, _("directory"));
 
-	if (!g_file_make_directory (file, NULL, &error)) {
+	if (!g_file_make_directory (file, NULL, &error))
+	{
 		g_signal_emit (model, model_signals[ERROR], 0,
 			       GEDIT_FILE_BROWSER_ERROR_NEW_DIRECTORY,
 			       error->message);
 		g_error_free (error);
-	} else {
+	}
+	else
+	{
 		node = model_add_node_from_file (model, 
 						 (FileBrowserNode *)parent_node, 
 						 file, 
 						 NULL);
 
-		if (model_node_visibility (model, node)) {
+		if (model_node_visibility (model, node))
+		{
 			iter->user_data = node;
 			result = TRUE;
-		} else {
+		}
+		else
+		{
 			g_signal_emit (model, model_signals[ERROR], 0,
 				       GEDIT_FILE_BROWSER_ERROR_NEW_FILE,
-				       _
-				       ("The new directory is currently filtered out. You need to adjust your filter settings to make the directory visible"));
+				       _("The new directory is currently filtered "
+				         "out. You need to adjust your filter "
+				         "settings to make the directory visible"));
 		}
 	}
 
 	g_object_unref (file);
 	return result;
 }
-
-// ex:ts=8:noet:

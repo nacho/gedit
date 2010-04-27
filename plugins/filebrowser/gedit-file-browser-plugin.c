@@ -1,24 +1,23 @@
 /*
  * gedit-file-browser-plugin.c - Gedit plugin providing easy file access 
  * from the sidepanel
- *
+ * 
  * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
- *
+ * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -56,52 +55,52 @@ struct _GeditFileBrowserPluginPrivate
 
 typedef struct _GeditFileBrowserPluginData 
 {
-	GeditFileBrowserWidget * tree_widget;
-	gulong                   merge_id;
-	GtkActionGroup         * action_group;
-	GtkActionGroup	       * single_selection_action_group;
-	gboolean	         auto_root;
-	gulong                   end_loading_handle;
-	gboolean		 confirm_trash;
+	GeditFileBrowserWidget *tree_widget;
+	gulong                  merge_id;
+	GtkActionGroup         *action_group;
+	GtkActionGroup	       *single_selection_action_group;
+	gboolean	        auto_root;
+	gulong                  end_loading_handle;
+	gboolean		confirm_trash;
 
-	guint			 click_policy_handle;
-	guint			 enable_delete_handle;
-	guint			 confirm_trash_handle;
+	guint			click_policy_handle;
+	guint			enable_delete_handle;
+	guint			confirm_trash_handle;
 } GeditFileBrowserPluginData;
 
-static void on_location_activated_cb     (GeditFileBrowserWidget * widget,
-                                          GFile       *location,
-                                          GeditWindow * window);
-static void on_error_cb                  (GeditFileBrowserWidget * widget,
-                                          guint code,
-                                          gchar const *message, 
-                                          GeditWindow * window);
-static void on_model_set_cb              (GeditFileBrowserView * widget,
-                                          GParamSpec *arg1,
-                                          GeditWindow * window);
-static void on_virtual_root_changed_cb   (GeditFileBrowserStore * model,
-                                          GParamSpec * param,
-                                          GeditWindow * window);
-static void on_filter_mode_changed_cb    (GeditFileBrowserStore * model,
-                                          GParamSpec * param,
-                                          GeditWindow * window);
-static void on_rename_cb		 (GeditFileBrowserStore * model,
-					  GFile * oldfile,
-					  GFile * newfile,
-					  GeditWindow * window);
-static void on_filter_pattern_changed_cb (GeditFileBrowserWidget * widget,
-                                          GParamSpec * param,
-                                          GeditWindow * window);
-static void on_tab_added_cb              (GeditWindow * window,
-                                          GeditTab * tab,
-                                          GeditFileBrowserPluginData * data);
-static gboolean on_confirm_delete_cb     (GeditFileBrowserWidget * widget,
-                                          GeditFileBrowserStore * store,
-                                          GList * rows,
-                                          GeditWindow * window);
-static gboolean on_confirm_no_trash_cb   (GeditFileBrowserWidget * widget,
-                                          GList * files,
-                                          GeditWindow * window);
+static void on_location_activated_cb     (GeditFileBrowserWidget     *widget,
+                                          GFile                      *location,
+                                          GeditWindow                *window);
+static void on_error_cb                  (GeditFileBrowserWidget     *widget,
+                                          guint                       code,
+                                          gchar const                *message, 
+                                          GeditWindow                *window);
+static void on_model_set_cb              (GeditFileBrowserView       *widget,
+                                          GParamSpec                 *arg1,
+                                          GeditWindow                *window);
+static void on_virtual_root_changed_cb   (GeditFileBrowserStore      *model,
+                                          GParamSpec                 *param,
+                                          GeditWindow                *window);
+static void on_filter_mode_changed_cb    (GeditFileBrowserStore      *model,
+                                          GParamSpec                 *param,
+                                          GeditWindow                *window);
+static void on_rename_cb		 (GeditFileBrowserStore      *model,
+					  GFile                      *oldfile,
+					  GFile                      *newfile,
+					  GeditWindow                *window);
+static void on_filter_pattern_changed_cb (GeditFileBrowserWidget     *widget,
+                                          GParamSpec                 *param,
+                                          GeditWindow                *window);
+static void on_tab_added_cb              (GeditWindow                *window,
+                                          GeditTab                   *tab,
+                                          GeditFileBrowserPluginData *data);
+static gboolean on_confirm_delete_cb     (GeditFileBrowserWidget     *widget,
+                                          GeditFileBrowserStore      *store,
+                                          GList                      *rows,
+                                          GeditWindow                *window);
+static gboolean on_confirm_no_trash_cb   (GeditFileBrowserWidget     *widget,
+                                          GList                      *files,
+                                          GeditWindow                *window);
 
 GEDIT_PLUGIN_REGISTER_TYPE_WITH_CODE (GeditFileBrowserPlugin, filetree_plugin, 	\
 	gedit_file_browser_enum_and_flag_register_type (type_module);		\
@@ -113,29 +112,29 @@ GEDIT_PLUGIN_REGISTER_TYPE_WITH_CODE (GeditFileBrowserPlugin, filetree_plugin, 	
 
 
 static void
-filetree_plugin_init (GeditFileBrowserPlugin * plugin)
+filetree_plugin_init (GeditFileBrowserPlugin *plugin)
 {
 	plugin->priv = GEDIT_FILE_BROWSER_PLUGIN_GET_PRIVATE (plugin);
 }
 
 static void
-filetree_plugin_finalize (GObject * object)
+filetree_plugin_finalize (GObject *object)
 {
-	//GeditFileBrowserPlugin * plugin = GEDIT_FILE_BROWSER_PLUGIN (object);
+	/* GeditFileBrowserPlugin *plugin = GEDIT_FILE_BROWSER_PLUGIN (object); */
 	
 	G_OBJECT_CLASS (filetree_plugin_parent_class)->finalize (object);
 }
 
 static GeditFileBrowserPluginData *
-get_plugin_data (GeditWindow * window)
+get_plugin_data (GeditWindow *window)
 {
 	return (GeditFileBrowserPluginData *) (g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY));
 }
 
 static void 
-on_end_loading_cb (GeditFileBrowserStore      * store,
-                   GtkTreeIter                * iter,
-                   GeditFileBrowserPluginData * data)
+on_end_loading_cb (GeditFileBrowserStore      *store,
+                   GtkTreeIter                *iter,
+                   GeditFileBrowserPluginData *data)
 {
 	/* Disconnect the signal */
 	g_signal_handler_disconnect (store, data->end_loading_handle);
@@ -152,7 +151,8 @@ prepare_auto_root (GeditFileBrowserPluginData *data)
 
 	store = gedit_file_browser_widget_get_browser_store (data->tree_widget);
 
-	if (data->end_loading_handle != 0) {
+	if (data->end_loading_handle != 0)
+	{
 		g_signal_handler_disconnect (store, data->end_loading_handle);
 		data->end_loading_handle = 0;
 	}
@@ -166,11 +166,11 @@ prepare_auto_root (GeditFileBrowserPluginData *data)
 static void 
 restore_default_location (GeditFileBrowserPluginData *data)
 {
-	gchar * root;
-	gchar * virtual_root;
+	gchar *root;
+	gchar *virtual_root;
 	gboolean bookmarks;
 	gboolean remote;
-	GConfClient * client;
+	GConfClient *client;
 
 	client = gconf_client_get_default ();
 	if (!client)
@@ -180,7 +180,8 @@ restore_default_location (GeditFileBrowserPluginData *data)
 	                                    FILE_BROWSER_BASE_KEY "/on_load/tree_view",
 	                                    NULL);
 
-	if (bookmarks) {
+	if (bookmarks)
+	{
 		g_object_unref (client);
 		gedit_file_browser_widget_show_bookmarks (data->tree_widget);
 		return;
@@ -189,28 +190,33 @@ restore_default_location (GeditFileBrowserPluginData *data)
 	root = gconf_client_get_string (client, 
 	                                FILE_BROWSER_BASE_KEY "/on_load/root", 
 	                                NULL);
-	virtual_root = gconf_client_get_string (client, 
-	                                   FILE_BROWSER_BASE_KEY "/on_load/virtual_root", 
-	                                   NULL);
+	virtual_root = gconf_client_get_string (client,
+						FILE_BROWSER_BASE_KEY "/on_load/virtual_root",
+						NULL);
 
 	remote = gconf_client_get_bool (client,
 	                                FILE_BROWSER_BASE_KEY "/on_load/enable_remote",
 	                                NULL);
 
-	if (root != NULL && *root != '\0') {
+	if (root != NULL && *root != '\0')
+	{
 		GFile *rootfile;
 		GFile *vrootfile;
 
 		rootfile = g_file_new_for_uri (root);
 		vrootfile = g_file_new_for_uri (virtual_root);
 
-		if (remote || g_file_is_native (rootfile)) {
-			if (virtual_root != NULL && *virtual_root != '\0') {
+		if (remote || g_file_is_native (rootfile))
+		{
+			if (virtual_root != NULL && *virtual_root != '\0')
+			{
 				prepare_auto_root (data);
 				gedit_file_browser_widget_set_root_and_virtual_root (data->tree_widget, 
 					                                             rootfile,
 					                                             vrootfile);
-			} else {
+			}
+			else
+			{
 				prepare_auto_root (data);
 				gedit_file_browser_widget_set_root (data->tree_widget,
 					                            rootfile,
@@ -228,9 +234,9 @@ restore_default_location (GeditFileBrowserPluginData *data)
 }
 
 static void
-restore_filter (GeditFileBrowserPluginData * data) 
+restore_filter (GeditFileBrowserPluginData *data) 
 {
-	GConfClient * client;
+	GConfClient *client;
 	gchar *filter_mode;
 	GeditFileBrowserStoreFilterMode mode;
 	gchar *pattern;
@@ -247,25 +253,25 @@ restore_filter (GeditFileBrowserPluginData * data)
 	/* Filter mode */
 	mode = gedit_file_browser_store_filter_mode_get_default ();
 	
-	if (filter_mode != NULL) {
-		if (strcmp (filter_mode, "hidden") == 0) {
+	if (filter_mode != NULL)
+	{
+		if (strcmp (filter_mode, "hidden") == 0)
 			mode = GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN;
-		} else if (strcmp (filter_mode, "binary") == 0) {
+		else if (strcmp (filter_mode, "binary") == 0)
 			mode = GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY;
-		} else if (strcmp (filter_mode, "hidden_and_binary") == 0 ||
-		         strcmp (filter_mode, "binary_and_hidden") == 0) {
+		else if (strcmp (filter_mode, "hidden_and_binary") == 0 ||
+		         strcmp (filter_mode, "binary_and_hidden") == 0)
 			mode = GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN |
 			       GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY;
-		} else if (strcmp (filter_mode, "none") == 0 || 
-		           *filter_mode == '\0') {
+		else if (strcmp (filter_mode, "none") == 0 ||
+			 *filter_mode == '\0')
 			mode = GEDIT_FILE_BROWSER_STORE_FILTER_MODE_NONE;
-		}
 	}
 	
 	/* Set the filter mode */
 	gedit_file_browser_store_set_filter_mode (
-	    gedit_file_browser_widget_get_browser_store (data->tree_widget),
-	    mode);
+		gedit_file_browser_widget_get_browser_store (data->tree_widget),
+		mode);
 
 	pattern = gconf_client_get_string (client,
 	                                   FILE_BROWSER_BASE_KEY "/filter_pattern",
@@ -290,12 +296,12 @@ click_policy_from_string (gchar const *click_policy)
 
 static void
 on_click_policy_changed (GConfClient *client,
-			 guint cnxn_id,
-			 GConfEntry *entry,
-			 gpointer user_data)
+			 guint        cnxn_id,
+			 GConfEntry  *entry,
+			 gpointer     user_data)
 {
 	GConfValue *value;
-	GeditFileBrowserPluginData * data;
+	GeditFileBrowserPluginData *data;
 	gchar const *click_policy;
 	GeditFileBrowserViewClickPolicy policy = GEDIT_FILE_BROWSER_VIEW_CLICK_POLICY_DOUBLE;
 	GeditFileBrowserView *view;
@@ -303,9 +309,9 @@ on_click_policy_changed (GConfClient *client,
 	data = (GeditFileBrowserPluginData *)(user_data);	
 	value = gconf_entry_get_value (entry);
 	
-	if (value && value->type == GCONF_VALUE_STRING) {
+	if (value && value->type == GCONF_VALUE_STRING)
+	{
 		click_policy = gconf_value_get_string (value);
-		
 		policy = click_policy_from_string (click_policy);
 	}
 	
@@ -315,9 +321,9 @@ on_click_policy_changed (GConfClient *client,
 
 static void
 on_enable_delete_changed (GConfClient *client,
-		 	  guint cnxn_id,
-			  GConfEntry *entry,
-			  gpointer user_data)
+		 	  guint        cnxn_id,
+			  GConfEntry  *entry,
+			  gpointer     user_data)
 {
 	GConfValue *value;
 	GeditFileBrowserPluginData *data;
@@ -334,9 +340,9 @@ on_enable_delete_changed (GConfClient *client,
 
 static void
 on_confirm_trash_changed (GConfClient *client,
-		 	  guint cnxn_id,
-			  GConfEntry *entry,
-			  gpointer user_data)
+		 	  guint        cnxn_id,
+			  GConfEntry  *entry,
+			  gpointer     user_data)
 {
 	GConfValue *value;
 	GeditFileBrowserPluginData *data;
@@ -379,7 +385,8 @@ install_nautilus_prefs (GeditFileBrowserPluginData *data)
 	view = gedit_file_browser_widget_get_browser_view (data->tree_widget);
 	gedit_file_browser_view_set_click_policy (view, policy);
 
-	if (pref) {
+	if (pref)
+	{
 		data->click_policy_handle = 
 			gconf_client_notify_add (client, 
 						 NAUTILUS_CLICK_POLICY_BASE_KEY "/" NAUTILUS_CLICK_POLICY_KEY,
@@ -423,8 +430,8 @@ install_nautilus_prefs (GeditFileBrowserPluginData *data)
 }
 
 static void
-set_root_from_doc (GeditFileBrowserPluginData * data,
-                   GeditDocument * doc)
+set_root_from_doc (GeditFileBrowserPluginData *data,
+                   GeditDocument              *doc)
 {
 	GFile *file;
 	GFile *parent;
@@ -438,8 +445,8 @@ set_root_from_doc (GeditFileBrowserPluginData * data,
 
 	parent = g_file_get_parent (file);
 
-	if (parent != NULL) {
-
+	if (parent != NULL)
+	{
 		gedit_file_browser_widget_set_root (data->tree_widget,
 				                    parent,
 				                    TRUE);
@@ -451,8 +458,8 @@ set_root_from_doc (GeditFileBrowserPluginData * data,
 }
 
 static void
-on_action_set_active_root (GtkAction * action,
-                           GeditWindow * window)
+on_action_set_active_root (GtkAction   *action,
+                           GeditWindow *window)
 {
 	GeditFileBrowserPluginData *data;
 
@@ -464,8 +471,8 @@ on_action_set_active_root (GtkAction * action,
 static gchar *
 get_terminal (void)
 {
-	GConfClient * client;
-	gchar * terminal;
+	GConfClient *client;
+	gchar *terminal;
 
 	client = gconf_client_get_default ();
 	terminal = gconf_client_get_string (client,
@@ -473,7 +480,8 @@ get_terminal (void)
 					    NULL);
 	g_object_unref (client);
 
-	if (terminal == NULL) {
+	if (terminal == NULL)
+	{
 		const gchar *term = g_getenv ("TERM");
 
 		if (term != NULL)
@@ -486,17 +494,17 @@ get_terminal (void)
 }
 
 static void
-on_action_open_terminal (GtkAction * action,
-                         GeditWindow * window)
+on_action_open_terminal (GtkAction   *action,
+                         GeditWindow *window)
 {
-	GeditFileBrowserPluginData * data;
-	gchar * terminal;
-	gchar * local;
-	gchar * argv[2];
-	GFile * file;
+	GeditFileBrowserPluginData *data;
+	gchar *terminal;
+	gchar *local;
+	gchar *argv[2];
+	GFile *file;
 
 	GtkTreeIter iter;
-	GeditFileBrowserStore * store;
+	GeditFileBrowserStore *store;
 	
 	data = get_plugin_data (window);
 
@@ -538,12 +546,12 @@ static void
 on_selection_changed_cb (GtkTreeSelection *selection,
 			 GeditWindow      *window)
 {
-	GeditFileBrowserPluginData * data;
-	GtkTreeView * tree_view;
-	GtkTreeModel * model;
+	GeditFileBrowserPluginData *data;
+	GtkTreeView *tree_view;
+	GtkTreeModel *model;
 	GtkTreeIter iter;
 	gboolean sensitive;
-	GFile * location;
+	GFile *location;
 
 	data = get_plugin_data (window);
 	
@@ -555,7 +563,8 @@ on_selection_changed_cb (GtkTreeSelection *selection,
 	
 	sensitive = gedit_file_browser_widget_get_selected_directory (data->tree_widget, &iter);
 
-	if (sensitive) {
+	if (sensitive)
+	{
 		gtk_tree_model_get (model, &iter, 
 				    GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION,
 				    &location, -1);
@@ -564,8 +573,8 @@ on_selection_changed_cb (GtkTreeSelection *selection,
 	}
 
 	gtk_action_set_sensitive (
-		gtk_action_group_get_action (data->single_selection_action_group, 
-                                            "OpenTerminal"),
+		gtk_action_group_get_action (data->single_selection_action_group,
+					     "OpenTerminal"),
 		sensitive);
 }
 
@@ -602,12 +611,12 @@ static GtkActionEntry extra_single_selection_actions[] = {
 };
 
 static void
-add_popup_ui (GeditWindow * window)
+add_popup_ui (GeditWindow *window)
 {
-	GeditFileBrowserPluginData * data;
-	GtkUIManager * manager;
-	GtkActionGroup * action_group;
-	GError * error = NULL;
+	GeditFileBrowserPluginData *data;
+	GtkUIManager *manager;
+	GtkActionGroup *action_group;
+	GError *error = NULL;
 
 	data = get_plugin_data (window);
 	manager = gedit_file_browser_widget_get_ui_manager (data->tree_widget);
@@ -635,17 +644,18 @@ add_popup_ui (GeditWindow * window)
 	                                                    -1, 
 	                                                    &error);
 
-	if (data->merge_id == 0) {
+	if (data->merge_id == 0)
+	{
 		g_warning("Unable to merge UI: %s", error->message);
 		g_error_free(error);
 	}
 }
 
 static void
-remove_popup_ui (GeditWindow * window)
+remove_popup_ui (GeditWindow *window)
 {
-	GeditFileBrowserPluginData * data;
-	GtkUIManager * manager;
+	GeditFileBrowserPluginData *data;
+	GtkUIManager *manager;
 	
 	data = get_plugin_data (window);
 	manager = gedit_file_browser_widget_get_ui_manager (data->tree_widget);
@@ -659,10 +669,11 @@ remove_popup_ui (GeditWindow * window)
 }
 
 static void
-impl_updateui (GeditPlugin * plugin, GeditWindow * window) 
+impl_updateui (GeditPlugin *plugin,
+	       GeditWindow *window) 
 {
-	GeditFileBrowserPluginData * data;
-	GeditDocument * doc;
+	GeditFileBrowserPluginData *data;
+	GeditDocument *doc;
 	
 	data = get_plugin_data (window);
 	
@@ -670,18 +681,18 @@ impl_updateui (GeditPlugin * plugin, GeditWindow * window)
 	
 	gtk_action_set_sensitive (gtk_action_group_get_action (data->action_group, 
 	                                                       "SetActiveRoot"),
-	                          doc != NULL && 
-	                          !gedit_document_is_untitled (doc));
+	                          doc != NULL && !gedit_document_is_untitled (doc));
 }
 
 static void
-impl_activate (GeditPlugin * plugin, GeditWindow * window)
+impl_activate (GeditPlugin *plugin,
+	       GeditWindow *window)
 {
-	GeditPanel * panel;
-	GeditFileBrowserPluginData * data;
-	GtkWidget * image;
-	GdkPixbuf * pixbuf;
-	GeditFileBrowserStore * store;
+	GeditPanel *panel;
+	GeditFileBrowserPluginData *data;
+	GtkWidget *image;
+	GdkPixbuf *pixbuf;
+	GeditFileBrowserStore *store;
 	gchar *data_dir;
 
 	data = g_new0 (GeditFileBrowserPluginData, 1);
@@ -723,10 +734,13 @@ impl_activate (GeditPlugin * plugin, GeditWindow * window)
 	pixbuf = gedit_file_browser_utils_pixbuf_from_theme("system-file-manager",  
 	                                                    GTK_ICON_SIZE_MENU);
 	
-	if (pixbuf) {
+	if (pixbuf)
+	{
 		image = gtk_image_new_from_pixbuf(pixbuf);
 		g_object_unref(pixbuf);
-	} else {
+	}
+	else
+	{
 		image = gtk_image_new_from_stock(GTK_STOCK_INDEX, GTK_ICON_SIZE_MENU);
 	}
 
@@ -780,10 +794,11 @@ impl_activate (GeditPlugin * plugin, GeditWindow * window)
 }
 
 static void
-impl_deactivate (GeditPlugin * plugin, GeditWindow * window)
+impl_deactivate (GeditPlugin *plugin,
+		 GeditWindow *window)
 {
-	GeditFileBrowserPluginData * data;
-	GeditPanel * panel;
+	GeditFileBrowserPluginData *data;
+	GeditPanel *panel;
 	GConfClient *client;
 
 	data = get_plugin_data (window);
@@ -819,10 +834,10 @@ impl_deactivate (GeditPlugin * plugin, GeditWindow * window)
 }
 
 static void
-filetree_plugin_class_init (GeditFileBrowserPluginClass * klass)
+filetree_plugin_class_init (GeditFileBrowserPluginClass *klass)
 {
 	GObjectClass  *object_class = G_OBJECT_CLASS (klass);
-	GeditPluginClass * plugin_class = GEDIT_PLUGIN_CLASS (klass);
+	GeditPluginClass *plugin_class = GEDIT_PLUGIN_CLASS (klass);
 
 	object_class->finalize = filetree_plugin_finalize;
 
@@ -836,19 +851,22 @@ filetree_plugin_class_init (GeditFileBrowserPluginClass * klass)
 
 /* Callbacks */
 static void
-on_location_activated_cb (GeditFileBrowserWidget * tree_widget,
-			  GFile *location, GeditWindow * window)
+on_location_activated_cb (GeditFileBrowserWidget *tree_widget,
+		          GFile                  *location,
+		          GeditWindow            *window)
 {
 	gedit_commands_load_location (window, location, NULL, 0, 0);
 }
 
 static void
-on_error_cb (GeditFileBrowserWidget * tree_widget,
-	     guint code, gchar const *message, GeditWindow * window)
+on_error_cb (GeditFileBrowserWidget *tree_widget,
+	     guint                   code,
+	     gchar const            *message,
+	     GeditWindow            *window)
 {
-	gchar * title;
-	GtkWidget * dlg;
-	GeditFileBrowserPluginData * data;
+	gchar *title;
+	GtkWidget *dlg;
+	GeditFileBrowserPluginData *data;
 	
 	data = get_plugin_data (window);
 	
@@ -861,40 +879,32 @@ on_error_cb (GeditFileBrowserWidget * tree_widget,
 		return;
 	}
 
-	switch (code) {
-	case GEDIT_FILE_BROWSER_ERROR_NEW_DIRECTORY:
-		title =
-		    _("An error occurred while creating a new directory");
-		break;
-	case GEDIT_FILE_BROWSER_ERROR_NEW_FILE:
-		title = _("An error occurred while creating a new file");
-		break;
-	case GEDIT_FILE_BROWSER_ERROR_RENAME:
-		title =
-		    _
-		    ("An error occurred while renaming a file or directory");
-		break;
-	case GEDIT_FILE_BROWSER_ERROR_DELETE:
-		title =
-		    _
-		    ("An error occurred while deleting a file or directory");
-		break;
-	case GEDIT_FILE_BROWSER_ERROR_OPEN_DIRECTORY:
-		title =
-		    _
-		    ("An error occurred while opening a directory in the file manager");
-		break;
-	case GEDIT_FILE_BROWSER_ERROR_SET_ROOT:
-		title =
-		    _("An error occurred while setting a root directory");
-		break;
-	case GEDIT_FILE_BROWSER_ERROR_LOAD_DIRECTORY:
-		title = 
-		    _("An error occurred while loading a directory");
-		break;
-	default:
-		title = _("An error occurred");
-		break;
+	switch (code)
+	{
+		case GEDIT_FILE_BROWSER_ERROR_NEW_DIRECTORY:
+			title = _("An error occurred while creating a new directory");
+			break;
+		case GEDIT_FILE_BROWSER_ERROR_NEW_FILE:
+			title = _("An error occurred while creating a new file");
+			break;
+		case GEDIT_FILE_BROWSER_ERROR_RENAME:
+			title = _("An error occurred while renaming a file or directory");
+			break;
+		case GEDIT_FILE_BROWSER_ERROR_DELETE:
+			title = _("An error occurred while deleting a file or directory");
+			break;
+		case GEDIT_FILE_BROWSER_ERROR_OPEN_DIRECTORY:
+			title = _("An error occurred while opening a directory in the file manager");
+			break;
+		case GEDIT_FILE_BROWSER_ERROR_SET_ROOT:
+			title = _("An error occurred while setting a root directory");
+			break;
+		case GEDIT_FILE_BROWSER_ERROR_LOAD_DIRECTORY:
+			title = _("An error occurred while loading a directory");
+			break;
+		default:
+			title = _("An error occurred");
+			break;
 	}
 
 	dlg = gtk_message_dialog_new (GTK_WINDOW (window),
@@ -910,13 +920,13 @@ on_error_cb (GeditFileBrowserWidget * tree_widget,
 }
 
 static void 
-on_model_set_cb (GeditFileBrowserView * widget,
-                 GParamSpec *arg1,
-                 GeditWindow * window)
+on_model_set_cb (GeditFileBrowserView *widget,
+                 GParamSpec           *arg1,
+                 GeditWindow          *window)
 {
-	GeditFileBrowserPluginData * data = get_plugin_data (window);
-	GtkTreeModel * model;
-	GConfClient * client;
+	GeditFileBrowserPluginData *data = get_plugin_data (window);
+	GtkTreeModel *model;
+	GConfClient *client;
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (gedit_file_browser_widget_get_browser_view (data->tree_widget)));
 	
@@ -932,11 +942,11 @@ on_model_set_cb (GeditFileBrowserView * widget,
 }
 
 static void 
-on_filter_mode_changed_cb (GeditFileBrowserStore * model,
-                           GParamSpec * param,
-                           GeditWindow * window)
+on_filter_mode_changed_cb (GeditFileBrowserStore *model,
+                           GParamSpec            *param,
+                           GeditWindow           *window)
 {
-	GConfClient * client;
+	GConfClient *client;
 	GeditFileBrowserStoreFilterMode mode;
 
 	client = gconf_client_get_default ();
@@ -947,64 +957,68 @@ on_filter_mode_changed_cb (GeditFileBrowserStore * model,
 	mode = gedit_file_browser_store_get_filter_mode (model);
 	
 	if ((mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN) &&
-	    (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY)) {
+	    (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY))
 		gconf_client_set_string (client,
 		                         FILE_BROWSER_BASE_KEY "/filter_mode",
 		                         "hidden_and_binary",
 		                         NULL);
-	} else if (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN) {
+	else if (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN)
 		gconf_client_set_string (client,
 		                         FILE_BROWSER_BASE_KEY "/filter_mode",
 		                         "hidden",
 		                         NULL);	
-	} else if (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY) {
+	else if (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY)
 		gconf_client_set_string (client,
 		                         FILE_BROWSER_BASE_KEY "/filter_mode",
 		                         "binary",
 		                         NULL);
-	} else {
+	else
 		gconf_client_set_string (client,
 		                         FILE_BROWSER_BASE_KEY "/filter_mode",
 		                         "none",
 		                         NULL);
-	}
 	
 	g_object_unref (client);
 	
 }
 
 static void
-on_rename_cb (GeditFileBrowserStore * store,
-	      GFile       * oldfile,
-	      GFile       * newfile,
-	      GeditWindow * window)
+on_rename_cb (GeditFileBrowserStore *store,
+	      GFile                 *oldfile,
+	      GFile                 *newfile,
+	      GeditWindow           *window)
 {
-	GeditApp * app;
-	GList * documents;
-	GList * item;
-	GeditDocument * doc;
-	GFile * docfile;
+	GeditApp *app;
+	GList *documents;
+	GList *item;
+	GeditDocument *doc;
+	GFile *docfile;
 	
 	/* Find all documents and set its uri to newuri where it matches olduri */
 	app = gedit_app_get_default ();
 	documents = gedit_app_get_documents (app);
 	
-	for (item = documents; item; item = item->next) {
+	for (item = documents; item; item = item->next)
+	{
 		doc = GEDIT_DOCUMENT (item->data);
 		docfile = gedit_document_get_location (doc);
 		
 		if (!docfile)
 			continue;
 
-		if (g_file_equal (docfile, oldfile)) {
+		if (g_file_equal (docfile, oldfile))
+		{
 			gedit_document_set_location (doc, newfile);
-		} else {
+		}
+		else
+		{
 			gchar *relative;
 
 			relative = g_file_get_relative_path (oldfile, docfile);
 
-			if (relative) {
-				/* relative now contains the part in docfile without
+			if (relative)
+			{
+				/* Relative now contains the part in docfile without
 				   the prefix oldfile */
 
 				g_object_unref (docfile);
@@ -1023,12 +1037,12 @@ on_rename_cb (GeditFileBrowserStore * store,
 }
 
 static void 
-on_filter_pattern_changed_cb (GeditFileBrowserWidget * widget,
-                              GParamSpec * param,
-                              GeditWindow * window)
+on_filter_pattern_changed_cb (GeditFileBrowserWidget *widget,
+                              GParamSpec             *param,
+                              GeditWindow            *window)
 {
-	GConfClient * client;
-	gchar * pattern;
+	GConfClient *client;
+	gchar *pattern;
 
 	client = gconf_client_get_default ();
 	
@@ -1052,20 +1066,22 @@ on_filter_pattern_changed_cb (GeditFileBrowserWidget * widget,
 }
 
 static void 
-on_virtual_root_changed_cb (GeditFileBrowserStore * store,
-                            GParamSpec * param,
-                            GeditWindow * window) 
+on_virtual_root_changed_cb (GeditFileBrowserStore *store,
+                            GParamSpec            *param,
+                            GeditWindow           *window) 
 {
-	GeditFileBrowserPluginData * data = get_plugin_data (window);
-	GFile * root;
-	GFile * virtual_root;
+	GeditFileBrowserPluginData *data = get_plugin_data (window);
+	GFile *root;
+	GFile *virtual_root;
 	gchar *uri_root = NULL;
-	GConfClient * client;
+	GConfClient *client;
 
 	root = gedit_file_browser_store_get_root (store);
 	
 	if (!root)
+	{
 		return;
+	}
 	else
 	{
 		uri_root = g_file_get_uri (root);
@@ -1085,13 +1101,16 @@ on_virtual_root_changed_cb (GeditFileBrowserStore * store,
 	
 	virtual_root = gedit_file_browser_store_get_virtual_root (store);
 
-	if (!virtual_root) {
+	if (!virtual_root)
+	{
 		/* Set virtual to same as root then */
 		gconf_client_set_string (client,
 	                                 FILE_BROWSER_BASE_KEY "/on_load/virtual_root",
 	                                 uri_root,
 	                                 NULL);
-	} else {
+	}
+	else
+	{
 		gchar *uri_vroot;
 
 		uri_vroot = g_file_get_uri (virtual_root);
@@ -1112,9 +1131,9 @@ on_virtual_root_changed_cb (GeditFileBrowserStore * store,
 }
 
 static void 
-on_tab_added_cb (GeditWindow * window,
-                 GeditTab * tab,
-                 GeditFileBrowserPluginData * data)
+on_tab_added_cb (GeditWindow                *window,
+                 GeditTab                   *tab,
+                 GeditFileBrowserPluginData *data)
 {
 	GConfClient *client;
 	gboolean open;
@@ -1129,7 +1148,8 @@ on_tab_added_cb (GeditWindow * window,
 	                              FILE_BROWSER_BASE_KEY "/open_at_first_doc",
 	                              NULL);
 
-	if (open) {
+	if (open)
+	{
 		GeditDocument *doc;
 		GFile *location;
 
@@ -1161,7 +1181,8 @@ on_tab_added_cb (GeditWindow * window,
 }
 
 static gchar *
-get_filename_from_path (GtkTreeModel *model, GtkTreePath *path)
+get_filename_from_path (GtkTreeModel *model,
+			GtkTreePath  *path)
 {
 	GtkTreeIter iter;
 	GFile *location;
@@ -1175,9 +1196,9 @@ get_filename_from_path (GtkTreeModel *model, GtkTreePath *path)
 }
 
 static gboolean
-on_confirm_no_trash_cb (GeditFileBrowserWidget * widget,
-                        GList * files,
-                        GeditWindow * window)
+on_confirm_no_trash_cb (GeditFileBrowserWidget *widget,
+                        GList                  *files,
+                        GeditWindow            *window)
 {
 	gchar *normal;
 	gchar *message;
@@ -1186,11 +1207,14 @@ on_confirm_no_trash_cb (GeditFileBrowserWidget * widget,
 
 	message = _("Cannot move file to trash, do you\nwant to delete permanently?");
 
-	if (files->next == NULL) {
+	if (files->next == NULL)
+	{
 		normal = gedit_file_browser_utils_file_basename (G_FILE (files->data));
 	    	secondary = g_strdup_printf (_("The file \"%s\" cannot be moved to the trash."), normal);
 		g_free (normal);
-	} else {
+	}
+	else
+	{
 		secondary = g_strdup (_("The selected files cannot be moved to the trash."));
 	}
 
@@ -1207,9 +1231,9 @@ on_confirm_no_trash_cb (GeditFileBrowserWidget * widget,
 
 static gboolean
 on_confirm_delete_cb (GeditFileBrowserWidget *widget,
-                      GeditFileBrowserStore *store,
-                      GList *paths,
-                      GeditWindow *window)
+                      GeditFileBrowserStore  *store,
+                      GList                  *paths,
+                      GeditWindow            *window)
 {
 	gchar *normal;
 	gchar *message;
@@ -1222,11 +1246,14 @@ on_confirm_delete_cb (GeditFileBrowserWidget *widget,
 	if (!data->confirm_trash)
 		return TRUE;
 
-	if (paths->next == NULL) {
+	if (paths->next == NULL)
+	{
 		normal = get_filename_from_path (GTK_TREE_MODEL (store), (GtkTreePath *)(paths->data));
 		message = g_strdup_printf (_("Are you sure you want to permanently delete \"%s\"?"), normal);
 		g_free (normal);
-	} else {
+	}
+	else
+	{
 		message = g_strdup (_("Are you sure you want to permanently delete the selected files?"));
 	}
 
@@ -1243,5 +1270,3 @@ on_confirm_delete_cb (GeditFileBrowserWidget *widget,
 
 	return result;
 }
-
-// ex:ts=8:noet:
