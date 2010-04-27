@@ -136,7 +136,7 @@ class ToolMenu(object):
         if document is None:
             return
 
-        titled = document.get_uri() is not None
+        titled = document.get_location() is not None
         remote = not document.is_local()
 
         states = {

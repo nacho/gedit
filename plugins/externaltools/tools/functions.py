@@ -59,7 +59,7 @@ def run_external_tool(window, node):
     if view is not None:
         # Environment vars relative to current document
         document = view.get_buffer()
-        uri = document.get_uri()
+        location = document.get_location()
         
         # Current line number
         piter = document.get_iter_at_mark(document.get_insert())
@@ -86,26 +86,28 @@ def run_external_tool(window, node):
         
         capture.set_env(GEDIT_CURRENT_DOCUMENT_TYPE=document.get_mime_type())
         
-        if uri is not None:
-            gfile = gio.File(uri)
-            scheme = gfile.get_uri_scheme()
-            name = os.path.basename(uri)
-            capture.set_env(GEDIT_CURRENT_DOCUMENT_URI    = uri,
+        if location is not None:
+            scheme = location.get_uri_scheme()
+            name = location.get_basename()
+            capture.set_env(GEDIT_CURRENT_DOCUMENT_URI    = location.get_uri(),
                             GEDIT_CURRENT_DOCUMENT_NAME   = name,
                             GEDIT_CURRENT_DOCUMENT_SCHEME = scheme)
-            if gedit.utils.uri_has_file_scheme(uri):
-                path = gfile.get_path()
+            if gedit.utils.location_has_file_scheme(location):
+                path = location.get_path()
                 cwd = os.path.dirname(path)
                 capture.set_cwd(cwd)
                 capture.set_env(GEDIT_CURRENT_DOCUMENT_PATH = path,
                                 GEDIT_CURRENT_DOCUMENT_DIR  = cwd)
 
-        documents_uri = [doc.get_uri()
-                                 for doc in window.get_documents()
-                                 if doc.get_uri() is not None]
-        documents_path = [gio.File(uri).get_path()
-                                 for uri in documents_uri
-                                 if gedit.utils.uri_has_file_scheme(uri)]
+        documents_location = [doc.get_location()
+                              for doc in window.get_documents()
+                              if doc.get_location() is not None]
+        documents_uri = [location.get_uri()
+                         for location in documents_location
+                         if location.get_uri() is not None]
+        documents_path = [location.get_path()
+                          for location in documents_location
+                          if gedit.utils.location_has_file_scheme(location)]
         capture.set_env(GEDIT_DOCUMENTS_URI  = ' '.join(documents_uri),
                         GEDIT_DOCUMENTS_PATH = ' '.join(documents_path))
 
@@ -275,11 +277,15 @@ def capture_end_execute_panel(capture, exit_code, panel, view, output_type):
         start = doc.get_start_iter()
         end = start.copy()
         end.forward_chars(300)
+        uri = ''
 
         mtype = gio.content_type_guess(data=doc.get_text(start, end))
         lmanager = gedit.get_language_manager()
         
-        language = lmanager.guess_language(doc.get_uri(), mtype)
+        location = doc.get_location()
+        if location:
+            uri = location.get_uri()
+        language = lmanager.guess_language(uri, mtype)
         
         if language is not None:
             doc.set_language(language)
