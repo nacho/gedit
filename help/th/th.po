@@ -1,5 +1,5 @@
 # Thai translation of gedit help.
-# Copyright (C) 2008-2009 Free Software Foundation, Inc.
+# Copyright (C) 2008-2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gedit package.
 #
 # Tosaporn Kijosoth <naneng@gmail.com>, 2008.
@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2010-03-23 18:37+0000\n"
-"PO-Revision-Date: 2010-04-01 16:02+0700\n"
+"POT-Creation-Date: 2010-04-26 05:11+0000\n"
+"PO-Revision-Date: 2010-04-27 15:40+0700\n"
 "Last-Translator: Kittiphong Meesawat <ktphong@yahoo.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -758,6 +758,9 @@ msgid ""
 "literal>, <literal>ftp:</literal>, <literal>file:</literal>, and all of the "
 "methods supported by <literal>gnome-vfs</literal>."
 msgstr ""
+"ชนิดของ <replaceable>URI</replaceable> ที่ใช้ได้ มี <literal>http:</literal>, "
+"<literal>ftp:</literal>, <literal>file:</literal> และอื่น ๆ ที่รองรับโดย "
+"<literal>gnome-vfs</literal>"
 
 #: C/gedit.xml:389(para)
 msgid ""
@@ -766,6 +769,10 @@ msgid ""
 "read. Files opened from FTP are read-only because because not all FTP "
 "servers may correctly work with saving remote files."
 msgstr ""
+"แฟ้มเอกสารจาก URI บางชนิดจะสามารถเปิดได้แบบอ่านอย่างเดียวเท่านั้น การเปลี่ยนแปลงใด ๆ "
+"จะต้องบันทึกลงในตำแหน่งอื่น HTTP จะให้อ่านแฟ้มอย่างเดียวเท่านั้น แฟ้มที่เปิดจาก FTP "
+"จะเป็นแบบอ่านอย่างเดียวเท่านั้น เพราะเซิร์ฟเวอร์ FTP ต่าง ๆ "
+"ไม่ได้รองรับการบันทึกแฟ้มระยะไกลได้ถูกต้องไปเสียทั้งหมด"
 
 #: C/gedit.xml:390(para)
 msgid ""
@@ -785,12 +792,17 @@ msgid ""
 "<firstterm>tab</firstterm> for each document above the display area. To "
 "switch to another document, click on its tab."
 msgstr ""
+"เมื่อเปิดแฟ้มมากกว่าหนึ่งแฟ้ม <application>gedit</application> จะแสดง "
+"<firstterm>แท็บ</firstterm> สำหรับแต่ละเอกสารที่ด้านบนของพื้นที่แสดงผล "
+"เมื่อต้องการสลับไปที่เอกสารอื่น ให้คลิกที่แท็บของเอกสารนั้น ๆ"
 
 #: C/gedit.xml:398(para)
 msgid ""
 "To move a document to another <application> gedit</application> window, drag "
 "the tab corresponding to the file to the window you want to move it to."
 msgstr ""
+"เมื่อต้องการย้ายเอกสารไปที่หน้าต่างอื่นของ <application>gedit</application> "
+"ให้ลากแท็บของแฟ้มนั้น ๆ ไปยังหน้าต่างที่คุณต้องการ"
 
 #: C/gedit.xml:399(para)
 msgid ""
@@ -798,6 +810,9 @@ msgid ""
 "drag its tab to the desktop, or choose <menuchoice><guimenu>Documents</"
 "guimenu><guimenuitem>Move to New Window</guimenuitem></menuchoice>."
 msgstr ""
+"เมื่อต้องการย้ายเอกสารออกไปเป็นหน้าต่างใหม่ของ <application>gedit</application> "
+"ทำได้โดยลากแท็บเอกสารไปยังพื้นโต๊ะ หรือเลือก <menuchoice><guimenu>เอกสาร</"
+"guimenu><guimenuitem>ย้ายไปหน้าต่างใหม่</guimenuitem></menuchoice>"
 
 #: C/gedit.xml:405(title)
 msgid "Working with Text"
@@ -817,6 +832,9 @@ msgid ""
 "firstterm> marks the point where new text appears. To change this, use the "
 "arrow keys on the keyboard or click with the mouse."
 msgstr ""
+"พิมพ์ข้อความใหม่จากแป้นพิมพ์ <firstterm>เคอร์เซอร์แทรก</firstterm> "
+"ที่กะพริบอยู่นั้นจะระบุตำแหน่งที่ข้อความจะปรากฏขึ้น หากต้องการเปลี่ยนตำแหน่ง "
+"ให้ใช้ปุ่มลูกศรบนแป้นพิมพ์หรือคลิกด้วยเมาส์"
 
 #: C/gedit.xml:414(para)
 msgid ""
@@ -824,6 +842,8 @@ msgid ""
 "<menuchoice><guimenu>Edit</guimenu><guimenuitem>Copy</guimenuitem></"
 "menuchoice>."
 msgstr ""
+"การคัดลอกข้อความที่เลือกไว้ไปที่คลิปบอร์ด ทำได้โดยเลือก <mynuchoice><guimenu>แก้ไข</"
+"guimenu><guimenuitem>คัดลอก</guimenuitem></menuchoice>"
 
 #: C/gedit.xml:416(para)
 msgid ""
@@ -831,6 +851,8 @@ msgid ""
 "clipboard, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Cut</"
 "guimenuitem></menuchoice>."
 msgstr ""
+"การลบข้อความที่เลือกออกจากแฟ้ม พร้อมกับย้ายข้อความไปยังคลิปบอร์ด ทำได้โดยเลือก "
+"<menuchoice><guimenu>แก้ไข</guimenu><guimenuitem>ตัด</guimenuitem></menuchoice>"
 
 #: C/gedit.xml:418(para)
 msgid ""
@@ -838,6 +860,8 @@ msgid ""
 "<menuchoice><guimenu>Edit</guimenu><guimenuitem>Delete</guimenuitem></"
 "menuchoice>."
 msgstr ""
+"การลบข้อความที่เลือกออกจากแฟ้มอย่างถาวร ทำได้โดยเลือก <menuchoice><guimenu>แก้ไข</"
+"guimenu><guimenuitem>ลบ</guimenuitem></menuchoice>"
 
 #: C/gedit.xml:420(para)
 msgid ""
@@ -846,12 +870,18 @@ msgid ""
 "menuchoice>. You must cut or copy text before you can paste text into the "
 "file, either from gedit or another application."
 msgstr ""
+"การแทรกเนื้อหาจากคลิปบอร์ดไปยังตำแหน่งของเคอร์เซอร์ ทำได้โดยเลือก "
+"<menuchoice><guimenu>แก้ไข</guimenu><guimenuitem>แปะ</guimenuitem></"
+"menuchoice> คุณจะต้องตัดหรือคัดลอกข้อความก่อน ไม่ว่าจะจาก gedit หรือจากโปรแกรมอื่น "
+"ก่อนที่คุณจะสามารถแปะข้อความดังกล่าวลงในแฟ้มได้"
 
 #: C/gedit.xml:422(para)
 msgid ""
 "To select all of the text in a file, choose <menuchoice><guimenu>Edit</"
 "guimenu><guimenuitem>Select All</guimenuitem></menuchoice>."
 msgstr ""
+"การเลือกข้อความทั้งหมดในแฟ้ม ทำได้โดยเลือก <menuchoice><guimenu>แก้ไข</"
+"guimenu><guimenuitem>เลือกทั้งหมด</guimenuitem></menuchoice>"
 
 #: C/gedit.xml:428(title)
 msgid "Undoing and Redoing Changes"
@@ -864,6 +894,10 @@ msgid ""
 "action, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Redo</"
 "guimenuitem></menuchoice>."
 msgstr ""
+"การเรียกคืนการเปลี่ยนแปลงที่คุณทำไว้ ทำได้โดยเลือก <menuchoice><guimenu>แก้ไข</"
+"guimenu><guimenuitem>เรียกคืน</guimenuitem></menuchoice> "
+"หากต้องการยกเลิกการเรียกคืนนี้ ก็เลือก <menuchoice><guimenu>แก้ไข</"
+"guimenu><guimenuitem>ทำซ้ำ</guimenuitem></menuchoice>"
 
 #: C/gedit.xml:434(title)
 msgid "Finding and Replacing"
@@ -876,6 +910,9 @@ msgid ""
 "specific piece of text, or <guilabel>Incremental Search</guilabel> to "
 "highlight matching text as you type it."
 msgstr ""
+"ใน <application>gedit</application> การค้นหาข้อความทำได้สองวิธีด้วยกัน "
+"คุณสามารถใช้กล่องโต้ตอบ <guilabel>หา</guilabel> เพื่อค้นหาข้อความที่เจาะจง หรือจะใช้ "
+"<guilabel>ค้นหาแบบคืบหน้าทีละส่วน</guilabel> เพื่อเน้นข้อความที่ตรงกันขณะที่คุณพิมพ์ก็ได้"
 
 #: C/gedit.xml:441(title)
 msgid "Finding Text"
@@ -890,6 +927,8 @@ msgid ""
 "Choose <menuchoice><guimenu>Search</guimenu><guimenuitem>Find</guimenuitem></"
 "menuchoice> to display the <guilabel>Find</guilabel> dialog."
 msgstr ""
+"เลือก <menuchoice><guimenu>ค้นหา</guimenu><guimenuitem>หา</guimenuitem></"
+"menuchoice> เพื่อแสดงกล่องโต้ตอบ <guilabel>หา</guilabel>"
 
 #: C/gedit.xml:446(para)
 msgid ""
@@ -918,6 +957,10 @@ msgid ""
 "choose <menuchoice><guimenu>Search</guimenu><guimenuitem>Find Previous</"
 "guimenuitem></menuchoice>."
 msgstr ""
+"การหาคำเดิมที่ปรากฏถัดไป ทำได้โดยคลิก <guibutton>หา</guibutton> หรือเลือก "
+"<menuchoice><guimenu>ค้นหา</guimenu><guimenuitem>หาต่อ</guimenuitem></"
+"menuchoice> การหาคำเดิมที่ปรากฏก่อนหน้า ทำได้โดยเลือก <menuchoice><guimenu>ค้นหา</"
+"guimenu><guimenuitem>หาก่อนหน้า</guimenuitem></menuchoice>"
 
 #: C/gedit.xml:453(para)
 msgid ""
@@ -927,6 +970,11 @@ msgid ""
 "menuchoice> and <menuchoice><guimenu>Search</guimenu><guimenuitem>Find "
 "Previous</guimenuitem></menuchoice>."
 msgstr ""
+"หลังจากที่คุณปิดกล่องโต้ตอบ <guilabel>หา</guilabel> ไปแล้ว "
+"คุณยังสามารถหาและเลือกคำค้นที่ปรากฏในตำแหน่งอื่น ๆ ได้ โดยเลือก "
+"<menuchoice><guimenu>ค้นหา</guimenu><guimenuitem>หาต่อ</guimenuitem></"
+"menuchoice> และ <menuchoice><guimenu>ค้นหา</guimenu><guimenuitem>หาก่อนหน้า</"
+"guimenuitem></menuchoice>"
 
 #: C/gedit.xml:454(para)
 msgid ""
@@ -934,10 +982,12 @@ msgid ""
 "<menuchoice><guimenu>Search</guimenu><guimenuitem>Clear Highlight</"
 "guimenuitem></menuchoice>."
 msgstr ""
+"การยกเลิกการเน้นข้อความ ทำได้โดยเลือก <menuchoice><guimenu>ค้นหา</"
+"guimenu><guimenuitem>เลิกเน้นคำค้น</guimenuitem></menuchoice>"
 
 #: C/gedit.xml:458(title)
 msgid "Incremental Search"
-msgstr ""
+msgstr "การค้นหาแบบคืบหน้าทีละส่วน"
 
 #: C/gedit.xml:460(para)
 msgid ""
@@ -945,6 +995,9 @@ msgid ""
 "letter by letter. (This is similar to the search feature in several web "
 "browsers.)"
 msgstr ""
+"การค้นหาแบบคืบหน้าทีละส่วนจะเน้นข้อความในเอกสารที่ตรงกับคำค้นไปพร้อม ๆ "
+"กับที่คุณพิมพ์คำค้นแต่ละตัวอักษร "
+"(ซึ่งคล้ายกับความสามารถในการค้นหาคำในเว็บเบราว์เซอร์หลายโปรแกรม)"
 
 #: C/gedit.xml:461(para)
 msgid ""
@@ -952,12 +1005,16 @@ msgid ""
 "guimenu><guimenuitem>Incremental Search</guimenuitem></menuchoice>. The "
 "search box appears at the top of the display area."
 msgstr ""
+"การเริ่มค้นหาแบบคืบหน้าทีละส่วน ทำได้โดยเลือก <menuchoice><guimenu>ค้นหา</"
+"guimenu><guimenuitem>ค้นหาแบบคืบหน้าทีละส่วน</guimenuitem></menuchoice> "
+"กล่องค้นหาจะปรากฏขึ้นที่ด้านบนของพื้นที่แสดงผล"
 
 #: C/gedit.xml:462(para)
 msgid ""
 "Begin typing, and text that matches will be highlighted in the document. The "
 "first instance after the cursor position is also selected."
 msgstr ""
+"เมื่อเริ่มพิมพ์ ข้อความในเอกสารที่ตรงกับคำค้นจะถูกเน้น และข้อความแรกที่ตรงกับคำค้นจะถูกเลือกด้วย"
 
 #: C/gedit.xml:463(para)
 msgid ""
@@ -966,6 +1023,10 @@ msgid ""
 "keycombo>. Press <keycombo><keycap>Ctrl</keycap><keycap>Shift</"
 "keycap><keycap>G</keycap></keycombo> to go back to the previous match."
 msgstr ""
+"การเลื่อนการเลือกข้อความไปยังตำแหน่งปรากฏถัดไปทั้งที่ยังเปิดกล่องค้นหาแบบคืบหน้าทีละส่วนอยู่ "
+"ทำได้โดยกดปุ่ม <keycombo><keycap>Ctrl</keycap><keycap>G</keycap></keycombo> "
+"ถ้าจะกลับไปยังตำแหน่งปรากฏก่อนหน้า ก็กดปุ่ม <keycombo><keycap>Ctrl</"
+"keycap><keycap>Shift</keycap><keycap>G</keycap></keycombo>"
 
 #: C/gedit.xml:464(para)
 msgid ""
@@ -981,13 +1042,15 @@ msgstr "การแทนที่ข้อความ"
 msgid ""
 "To search a file for a string, and replace the string with an alternative "
 "string, perform the following steps:"
-msgstr ""
+msgstr "การค้นหาข้อความในแฟ้มและแทนที่ด้วยอีกข้อความหนึ่ง ทำได้โดยขั้นตอนต่อไปนี้:"
 
 #: C/gedit.xml:473(para)
 msgid ""
 "Choose <menuchoice><guimenu>Search</guimenu><guimenuitem>Replace</"
 "guimenuitem></menuchoice> to display the <guilabel>Replace</guilabel> dialog."
 msgstr ""
+"เลือก <menuchoice><guimenu>ค้นหา</guimenu><guimenuitem>แทนที่</guimenuitem></"
+"menuchoice> เพื่อแสดงกล่องโต้ตอบ <guilabel>แทนที่</guilabel>"
 
 #: C/gedit.xml:475(para)
 msgid ""
@@ -1001,6 +1064,7 @@ msgid ""
 "Type the string that you want to use to replace the string that you find, in "
 "the <guilabel>Replace with</guilabel> field."
 msgstr ""
+"พิมพ์ข้อความที่คุณต้องการใช้แทนข้อความที่คุณค้นหาลงในช่องข้อมูล <guilabel>แทนที่ด้วย</guilabel>"
 
 #: C/gedit.xml:480(para)
 msgid ""
@@ -1010,12 +1074,19 @@ msgid ""
 "guibutton> to replace the selected occurrence of the string. To find the "
 "next occurrence of the string, click <guibutton>Find</guibutton> again."
 msgstr ""
+"การตรวจสอบข้อความที่ตรงกับคำค้นในแต่ละที่ที่ปรากฏก่อนจะแทนที่ ทำได้โดยคลิก <guibutton>หา</"
+"guibutton> หาก <application>gedit</application> พบข้อความที่ตรงกับคำค้น "
+"ก็จะเลือกข้อความนั้น ๆ ให้ ถ้าต้องการแทนที่ข้อความที่เลือกอยู่นั้น ก็คลิก <guibutton>แทนที่</"
+"guibutton> ถ้าต้องการหาข้อความที่ตรงกับคำค้นในตำแหน่งถัดไป ก็คลิก "
+"<guibutton>หา</guibutton> อีกครั้ง"
 
 #: C/gedit.xml:481(para)
 msgid ""
 "To replace all occurrences of the string throughout the document, click "
 "<guibutton>Replace All</guibutton>."
 msgstr ""
+"หากต้องการแทนที่ข้อความทั้งหมดในเอกสารที่ตรงกับคำค้น ให้คลิก <guibutton>แทนที่ทั้งหมด</"
+"guibutton>"
 
 #: C/gedit.xml:486(title)
 msgid "Find and Replace Options"
@@ -1026,6 +1097,8 @@ msgid ""
 "The <guilabel>Find</guilabel> dialog and the <guilabel>Replace</guilabel> "
 "dialog both have the following options:"
 msgstr ""
+"กล่องโต้ตอบ <guilabel>หา</guilabel> และกล่องโต้ตอบ <guilabel>แทนที่</guilabel> "
+"มีตัวเลือกที่เหมือนกันดังต่อไปนี้:"
 
 #: C/gedit.xml:489(para)
 msgid ""
@@ -1034,6 +1107,10 @@ msgid ""
 "with <guilabel>Match case</guilabel> selected, \"TEXT\" will not match \"text"
 "\"."
 msgstr ""
+"เลือกตัวเลือก <guilabel>ตัวพิมพ์ใหญ่-เล็กตรงกัน</guilabel> "
+"ถ้าต้องการหาข้อความที่ตรงกับคำค้นแบบตัวพิมพ์ใหญ่-เล็กตรงกันเท่านั้น ตัวอย่างเช่น เมื่อเลือกตัวเลือก "
+"<guilabel>ตัวพิมพ์ใหญ่-เล็กตรงกัน</guilabel> ข้อความ \"TEXT\" จะถือว่าไม่ตรงกันกับ \"text"
+"\""
 
 #: C/gedit.xml:491(para)
 msgid ""
@@ -1127,7 +1204,7 @@ msgstr ""
 
 #: C/gedit.xml:548(title)
 msgid "Printing"
-msgstr ""
+msgstr "การพิมพ์"
 
 #: C/gedit.xml:552(title)
 msgid "Setting the Page Options"
@@ -1172,7 +1249,7 @@ msgstr ""
 
 #: C/gedit.xml:571(guilabel) C/gedit.xml:1175(guilabel)
 msgid "Line Numbers"
-msgstr ""
+msgstr "เลขบรรทัด"
 
 #: C/gedit.xml:574(para)
 msgid ""
@@ -1220,7 +1297,7 @@ msgstr ""
 
 #: C/gedit.xml:597(guilabel)
 msgid "Line numbers"
-msgstr ""
+msgstr "เลขบรรทัด"
 
 #: C/gedit.xml:600(para)
 msgid "Click on this button to select the font to use to print line numbers."
