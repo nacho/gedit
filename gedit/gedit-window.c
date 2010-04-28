@@ -56,6 +56,7 @@
 #include "gedit-enum-types.h"
 #include "gedit-dirs.h"
 #include "gedit-status-combo-box.h"
+#include "gseal-gtk-compat.h"
 
 #ifdef OS_OSX
 #include "osx/gedit-osx.h"
@@ -573,7 +574,7 @@ set_toolbar_style (GeditWindow *window,
 	if (origin == NULL)
 		visible = gedit_prefs_manager_get_toolbar_visible ();
 	else
-		visible = GTK_WIDGET_VISIBLE (origin->priv->toolbar);
+		visible = gtk_widget_get_visible (origin->priv->toolbar);
 	
 	/* Set visibility */
 	if (visible)
@@ -1421,7 +1422,7 @@ toolbar_visibility_changed (GtkWidget   *toolbar,
 	gboolean visible;
 	GtkAction *action;
 
-	visible = GTK_WIDGET_VISIBLE (toolbar);
+	visible = gtk_widget_get_visible (toolbar);
 
 	if (gedit_prefs_manager_toolbar_visible_can_set ())
 		gedit_prefs_manager_set_toolbar_visible (visible);
@@ -1837,7 +1838,7 @@ set_statusbar_style (GeditWindow *window,
 	if (origin == NULL)
 		visible = gedit_prefs_manager_get_statusbar_visible ();
 	else
-		visible = GTK_WIDGET_VISIBLE (origin->priv->statusbar);
+		visible = gtk_widget_get_visible (origin->priv->statusbar);
 
 	if (visible)
 		gtk_widget_show (window->priv->statusbar);
@@ -1860,7 +1861,7 @@ statusbar_visibility_changed (GtkWidget   *statusbar,
 	gboolean visible;
 	GtkAction *action;
 
-	visible = GTK_WIDGET_VISIBLE (statusbar);
+	visible = gtk_widget_get_visible (statusbar);
 
 	if (gedit_prefs_manager_statusbar_visible_can_set ())
 		gedit_prefs_manager_set_statusbar_visible (visible);
@@ -2133,15 +2134,10 @@ clone_window (GeditWindow *origin)
 	_gedit_panel_set_active_item_by_id (GEDIT_PANEL (window->priv->bottom_panel),
 					    panel_page);
 
-	if (GTK_WIDGET_VISIBLE (origin->priv->side_panel))
-		gtk_widget_show (window->priv->side_panel);
-	else
-		gtk_widget_hide (window->priv->side_panel);
-
-	if (GTK_WIDGET_VISIBLE (origin->priv->bottom_panel))
-		gtk_widget_show (window->priv->bottom_panel);
-	else
-		gtk_widget_hide (window->priv->bottom_panel);
+	gtk_widget_set_visible (window->priv->side_panel,
+				gtk_widget_get_visible (origin->priv->side_panel));
+	gtk_widget_set_visible (window->priv->bottom_panel,
+                                gtk_widget_get_visible (origin->priv->bottom_panel));
 
 	set_statusbar_style (window, origin);
 	set_toolbar_style (window, origin);
@@ -3623,12 +3619,14 @@ vpaned_restore_position (GtkWidget   *widget,
 			 GeditWindow *window)
 {
 	gint pos;
+	GtkAllocation allocation;
 
 	gedit_debug_message (DEBUG_WINDOW,
 			     "Restoring vpaned position: bottom panel size %d",
 			     window->priv->bottom_panel_size);
 
-	pos = widget->allocation.height -
+	gtk_widget_get_allocation (widget, &allocation);
+	pos = allocation.height -
 	      MAX (50, window->priv->bottom_panel_size);
 	gtk_paned_set_position (GTK_PANED (window->priv->vpaned), pos);
 
@@ -3649,7 +3647,7 @@ side_panel_visibility_changed (GtkWidget   *side_panel,
 	gboolean visible;
 	GtkAction *action;
 
-	visible = GTK_WIDGET_VISIBLE (side_panel);
+	visible = gtk_widget_get_visible (side_panel);
 
 	if (gedit_prefs_manager_side_pane_visible_can_set ())
 		gedit_prefs_manager_set_side_pane_visible (visible);
@@ -3703,7 +3701,7 @@ bottom_panel_visibility_changed (GeditPanel  *bottom_panel,
 	gboolean visible;
 	GtkAction *action;
 
-	visible = GTK_WIDGET_VISIBLE (bottom_panel);
+	visible = gtk_widget_get_visible (GTK_WIDGET (bottom_panel));
 
 	if (gedit_prefs_manager_bottom_panel_visible_can_set ())
 		gedit_prefs_manager_set_bottom_panel_visible (visible);
@@ -4175,7 +4173,7 @@ gedit_window_create_tab (GeditWindow *window,
 				-1,
 				jump_to);
 
-	if (!GTK_WIDGET_VISIBLE (window))
+	if (!gtk_widget_get_visible (GTK_WIDGET (window)))
 	{
 		gtk_window_present (GTK_WINDOW (window));
 	}
@@ -4229,7 +4227,7 @@ gedit_window_create_tab_from_location (GeditWindow         *window,
 				jump_to);
 
 
-	if (!GTK_WIDGET_VISIBLE (window))
+	if (!gtk_widget_get_visible (GTK_WIDGET (window)))
 	{
 		gtk_window_present (GTK_WINDOW (window));
 	}

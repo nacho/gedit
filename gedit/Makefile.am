@@ -90,7 +90,8 @@ NOINST_H_FILES =			\
 	gedit-tab-label.h		\
 	gedittextregion.h		\
 	gedit-ui.h			\
-	gedit-window-private.h
+	gedit-window-private.h		\
+	gseal-gtk-compat.h
 
 INST_H_FILES =				\
 	gedit-app.h			\

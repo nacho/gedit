@@ -53,6 +53,7 @@
 #include "gedit-commands.h"
 #include "dialogs/gedit-close-confirmation-dialog.h"
 #include "smclient/eggsmclient.h"
+#include "gseal-gtk-compat.h"
 
 /* The master client we use for SM */
 static EggSMClient *master_client = NULL;
@@ -87,11 +88,11 @@ save_window_session (GKeyFile    *state_file,
 
 	panel = gedit_window_get_side_panel (window);
 	g_key_file_set_boolean (state_file, group_name, "side-panel-visible",
-				GTK_WIDGET_VISIBLE (panel));
+				gtk_widget_get_visible (GTK_WIDGET (panel)));
 
 	panel = gedit_window_get_bottom_panel (window);
 	g_key_file_set_boolean (state_file, group_name, "bottom-panel-visible",
-				GTK_WIDGET_VISIBLE (panel));
+				gtk_widget_get_visible (GTK_WIDGET (panel)));
 
 	active_document = gedit_window_get_active_document (window);
 	if (active_document)

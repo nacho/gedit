@@ -39,6 +39,7 @@
 #include <gedit/gedit-utils.h>
 #include <gedit/gedit-window.h>
 
+#include <gedit/gseal-gtk-compat.h>
 
 /* Properties */
 enum 
@@ -508,7 +509,7 @@ build_single_doc_dialog (GeditCloseConfirmationDialog *dlg)
 	gtk_label_set_use_markup (GTK_LABEL (primary_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (primary_label), 0.0, 0.5);
 	gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
-	GTK_WIDGET_UNSET_FLAGS (primary_label, GTK_CAN_FOCUS);
+	gtk_widget_set_can_focus (primary_label, FALSE);
 
 	doc_name = gedit_document_get_short_name_for_display (doc);
 
@@ -541,7 +542,7 @@ build_single_doc_dialog (GeditCloseConfirmationDialog *dlg)
 	gtk_label_set_line_wrap (GTK_LABEL (secondary_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (secondary_label), 0.0, 0.5);
 	gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
-	GTK_WIDGET_UNSET_FLAGS (secondary_label, GTK_CAN_FOCUS);
+	gtk_widget_set_can_focus (secondary_label, FALSE);
 
 	hbox = gtk_hbox_new (FALSE, 12);
 	gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);

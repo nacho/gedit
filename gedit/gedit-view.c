@@ -47,6 +47,7 @@
 #include "gedit-prefs-manager-app.h"
 #include "gedit-marshal.h"
 #include "gedit-utils.h"
+#include "gseal-gtk-compat.h"
 
 
 #define GEDIT_VIEW_SCROLL_MARGIN 0.02
@@ -900,21 +901,27 @@ send_focus_change (GtkWidget *widget,
 	GdkEvent *fevent = gdk_event_new (GDK_FOCUS_CHANGE);
 
 	g_object_ref (widget);
-   
+#if !GTK_CHECK_VERSION (2, 21, 0)
 	if (in)
 		GTK_WIDGET_SET_FLAGS (widget, GTK_HAS_FOCUS);
 	else
 		GTK_WIDGET_UNSET_FLAGS (widget, GTK_HAS_FOCUS);
+#endif
 
 	fevent->focus_change.type = GDK_FOCUS_CHANGE;
-	fevent->focus_change.window = g_object_ref (widget->window);
+	fevent->focus_change.window = g_object_ref (gtk_widget_get_window (widget));
 	fevent->focus_change.in = in;
-  
+
+#if !GTK_CHECK_VERSION (2, 21, 0)
 	gtk_widget_event (widget, fevent);
   
 	g_object_notify (G_OBJECT (widget), "has-focus");
 
 	g_object_unref (widget);
+#else
+	gtk_widget_send_focus_change (widget, fevent);
+#endif
+
 	gdk_event_free (fevent);
 }
 
@@ -974,7 +981,7 @@ update_search_window_position (GeditView *view)
 {
 	gint x, y;
 	gint view_x, view_y;
-	GdkWindow *view_window = GTK_WIDGET (view)->window;
+	GdkWindow *view_window = gtk_widget_get_window (GTK_WIDGET (view));
 
 	gtk_widget_realize (view->priv->search_window);
 
@@ -1433,12 +1440,12 @@ ensure_search_window (GeditView *view)
 
 	if (view->priv->search_window != NULL)
 	{
-		if (GTK_WINDOW (toplevel)->group)
-			gtk_window_group_add_window (GTK_WINDOW (toplevel)->group,
+		if (gtk_window_get_group (GTK_WINDOW (toplevel)))
+			gtk_window_group_add_window (gtk_window_get_group (GTK_WINDOW (toplevel)),
 						     GTK_WINDOW (view->priv->search_window));
-		else if (GTK_WINDOW (view->priv->search_window)->group)
-	 		gtk_window_group_remove_window (GTK_WINDOW (view->priv->search_window)->group,
-					 		GTK_WINDOW (view->priv->search_window));
+		else if (gtk_window_get_group (GTK_WINDOW (view->priv->search_window)))
+			gtk_window_group_remove_window (gtk_window_get_group (GTK_WINDOW (view->priv->search_window)),
+							GTK_WINDOW (view->priv->search_window));
 					 		
 		customize_for_search_mode (view);
 		
@@ -1447,8 +1454,8 @@ ensure_search_window (GeditView *view)
    
 	view->priv->search_window = gtk_window_new (GTK_WINDOW_POPUP);
 
-	if (GTK_WINDOW (toplevel)->group)
-		gtk_window_group_add_window (GTK_WINDOW (toplevel)->group,
+	if (gtk_window_get_group (GTK_WINDOW (toplevel)))
+		gtk_window_group_add_window (gtk_window_get_group (GTK_WINDOW (toplevel)),
 					     GTK_WINDOW (view->priv->search_window));
 					     
 	gtk_window_set_modal (GTK_WINDOW (view->priv->search_window), TRUE);
@@ -1743,10 +1750,10 @@ start_interactive_search_real (GeditView *view)
 	GtkTextBuffer *buffer;
 	
 	if ((view->priv->search_window != NULL) &&
-	    GTK_WIDGET_VISIBLE (view->priv->search_window))
+	    gtk_widget_get_visible (view->priv->search_window))
 		return TRUE;
 
-	if (!GTK_WIDGET_HAS_FOCUS (view))
+	if (!gtk_widget_has_focus (GTK_WIDGET (view)))
 		return FALSE;
 
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));

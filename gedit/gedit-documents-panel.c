@@ -35,6 +35,7 @@
 #include "gedit-documents-panel.h"
 #include "gedit-utils.h"
 #include "gedit-notebook.h"
+#include "gseal-gtk-compat.h"
 
 #include <glib/gi18n.h>
 
@@ -518,6 +519,7 @@ menu_position (GtkMenu             *menu,
 	gint wx, wy;
 	GtkRequisition requisition;
 	GtkWidget *w;
+	GtkAllocation allocation;
 
 	w = panel->priv->treeview;
 
@@ -531,21 +533,23 @@ menu_position (GtkMenu             *menu,
 	wx = rect.x;
 	wy = rect.y;
 
-	gdk_window_get_origin (w->window, x, y);
+	gdk_window_get_origin (gtk_widget_get_window (w), x, y);
 	
 	gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
 
+	gtk_widget_get_allocation (w, &allocation);
+
 	if (gtk_widget_get_direction (w) == GTK_TEXT_DIR_RTL)
 	{
-		*x += w->allocation.x + w->allocation.width - requisition.width - 10;
+		*x += allocation.x + allocation.width - requisition.width - 10;
 	}
 	else
 	{
-		*x += w->allocation.x + 10;
+		*x += allocation.x + 10;
 	}
 
 	wy = MAX (*y + 5, *y + wy + 5);
-	wy = MIN (wy, *y + w->allocation.height - requisition.height - 5);
+	wy = MIN (wy, *y + allocation.height - requisition.height - 5);
 	
 	*y = wy;
 

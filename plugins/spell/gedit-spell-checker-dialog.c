@@ -32,9 +32,13 @@
 #endif
 
 #include <string.h>
+
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+
 #include <gedit/gedit-utils.h>
+#include <gedit/gseal-gtk-compat.h>
+
 #include "gedit-spell-checker-dialog.h"
 #include "gedit-spell-marshal.h"
 
@@ -291,7 +295,7 @@ create_dialog (GeditSpellCheckerDialog *dlg,
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
 
 	/* Set default button */
-	GTK_WIDGET_SET_FLAGS (dlg->change_button, GTK_CAN_DEFAULT);
+	gtk_widget_set_can_default (dlg->change_button, TRUE);
 	gtk_widget_grab_default (dlg->change_button);
 
 	gtk_entry_set_activates_default (GTK_ENTRY (dlg->word_entry), TRUE);

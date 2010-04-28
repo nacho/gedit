@@ -53,6 +53,8 @@
 #include "gedit-spinner.h"
 #endif
 
+#include "gseal-gtk-compat.h"
+
 #define AFTER_ALL_TABS -1
 #define NOT_IN_APP_WINDOWS -2
 
@@ -247,11 +249,6 @@ find_tab_num_at_pos (GeditNotebook *notebook,
 
 	tab_pos = gtk_notebook_get_tab_pos (GTK_NOTEBOOK (notebook));
 
-	if (GTK_NOTEBOOK (notebook)->first_tab == NULL)
-	{
-		return AFTER_ALL_TABS;
-	}
-
 	/* For some reason unfullscreen + quick click can
 	   cause a wrong click event to be reported to the tab */
 	if (!is_in_notebook_window (notebook, abs_x, abs_y))
@@ -264,21 +261,23 @@ find_tab_num_at_pos (GeditNotebook *notebook,
 		GtkWidget *tab;
 		gint max_x, max_y;
 		gint x_root, y_root;
+		GtkAllocation allocation;
 
 		tab = gtk_notebook_get_tab_label (nb, page);
 		g_return_val_if_fail (tab != NULL, AFTER_ALL_TABS);
 
-		if (!GTK_WIDGET_MAPPED (GTK_WIDGET (tab)))
+		if (!gtk_widget_get_mapped (tab))
 		{
 			++page_num;
 			continue;
 		}
 
-		gdk_window_get_origin (GDK_WINDOW (tab->window),
+		gdk_window_get_origin (GDK_WINDOW (gtk_widget_get_window (tab)),
 				       &x_root, &y_root);
 
-		max_x = x_root + tab->allocation.x + tab->allocation.width;
-		max_y = y_root + tab->allocation.y + tab->allocation.height;
+		gtk_widget_get_allocation (tab, &allocation);
+		max_x = x_root + allocation.x + allocation.width;
+		max_y = y_root + allocation.y + allocation.height;
 
 		if (((tab_pos == GTK_POS_TOP) || 
 		     (tab_pos == GTK_POS_BOTTOM)) &&

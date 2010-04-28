@@ -59,6 +59,8 @@
 #include <X11/Xatom.h>
 #endif
 
+#include "gseal-gtk-compat.h"
+
 #define STDIN_DELAY_MICROSECONDS 100000
 
 /* Returns true if location is a file: uri and is not a chained uri */
@@ -87,22 +89,25 @@ gedit_utils_menu_position_under_widget (GtkMenu  *menu,
 {
 	GtkWidget *widget;
 	GtkRequisition requisition;
+	GtkAllocation allocation;
 
 	widget = GTK_WIDGET (user_data);
 	widget_get_origin (widget, x, y);
 
 	gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
 
+	gtk_widget_get_allocation (widget, &allocation);
+
 	if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL)
 	{
-		*x += widget->allocation.x + widget->allocation.width - requisition.width;
+		*x += allocation.x + allocation.width - requisition.width;
 	}
 	else
 	{
-		*x += widget->allocation.x;
+		*x += allocation.x;
 	}
 
-	*y += widget->allocation.y + widget->allocation.height;
+	*y += allocation.y + allocation.height;
 
 	*push_in = TRUE;
 }
@@ -196,7 +201,7 @@ gedit_dialog_add_button (GtkDialog   *dialog,
 	button = gedit_gtk_button_new_with_stock_icon (text, stock_id);
 	g_return_val_if_fail (button != NULL, NULL);
 
-	GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
+	gtk_widget_set_can_default (button, TRUE);
 
 	gtk_widget_show (button);
 
@@ -861,7 +866,7 @@ gedit_utils_get_window_workspace (GtkWindow *gtkwindow)
 	guint ret = GEDIT_ALL_WORKSPACES;
 
 	g_return_val_if_fail (GTK_IS_WINDOW (gtkwindow), 0);
-	g_return_val_if_fail (GTK_WIDGET_REALIZED (GTK_WIDGET (gtkwindow)), 0);
+	g_return_val_if_fail (gtk_widget_get_realized (GTK_WIDGET (gtkwindow)), 0);
 
 	window = gtk_widget_get_window (GTK_WIDGET (gtkwindow));
 	display = gdk_drawable_get_display (window);

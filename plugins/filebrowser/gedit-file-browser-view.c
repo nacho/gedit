@@ -20,9 +20,12 @@
  */
 
 #include <string.h>
+
 #include <gio/gio.h>
-#include <gedit/gedit-plugin.h>
 #include <gdk/gdkkeysyms.h>
+
+#include <gedit/gedit-plugin.h>
+#include <gedit/gseal-gtk-compat.h>
 
 #include "gedit-file-browser-store.h"
 #include "gedit-file-bookmarks-store.h"
@@ -313,7 +316,7 @@ set_click_policy_property (GeditFileBrowserView            *obj,
 			obj->priv->hover_path = NULL;
 		}
 
-		if (GTK_WIDGET_REALIZED (GTK_WIDGET (obj)))
+		if (gtk_widget_get_realized (GTK_WIDGET (obj)))
 		{
 			win = gtk_widget_get_window (GTK_WIDGET (obj));
 			gdk_window_set_cursor (win, NULL);
@@ -658,7 +661,7 @@ key_press_event (GtkWidget   *widget,
 				handled = FALSE;
 				break;
 			}
-			if (!GTK_WIDGET_HAS_FOCUS (widget))
+			if (!gtk_widget_has_focus (widget))
 			{
 				handled = FALSE;
 				break;

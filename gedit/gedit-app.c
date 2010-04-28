@@ -45,6 +45,7 @@
 #include "gedit-utils.h"
 #include "gedit-enum-types.h"
 #include "gedit-dirs.h"
+#include "gseal-gtk-compat.h"
 
 #ifdef OS_OSX
 #include <ige-mac-integration.h>
@@ -632,7 +633,7 @@ gedit_app_get_active_window (GeditApp *app)
 	 * enough that the second instance comes up before the
 	 * first one shows its window.
 	 */
-	if (!GTK_WIDGET_REALIZED (GTK_WIDGET (app->priv->active_window)))
+	if (!gtk_widget_get_realized (GTK_WIDGET (app->priv->active_window)))
 		gtk_widget_realize (GTK_WIDGET (app->priv->active_window));
 
 	return app->priv->active_window;

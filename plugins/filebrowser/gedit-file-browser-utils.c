@@ -22,6 +22,8 @@
 #include "gedit-file-browser-utils.h"
 #include <gedit/gedit-utils.h>
 
+#include <gedit/gseal-gtk-compat.h>
+
 static GdkPixbuf *
 process_icon_pixbuf (GdkPixbuf   *pixbuf,
 		     gchar const *name, 
@@ -158,8 +160,8 @@ gedit_file_browser_utils_confirmation_dialog (GeditWindow    *window,
 	/* Add a cancel button */
 	button = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
 	gtk_widget_show (button);
-	
-	GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
+
+	gtk_widget_set_can_default (button, TRUE);
 	gtk_dialog_add_action_widget (GTK_DIALOG (dlg),
                                       button,
                                       GTK_RESPONSE_CANCEL);
@@ -174,7 +176,7 @@ gedit_file_browser_utils_confirmation_dialog (GeditWindow    *window,
 	}
 	
 	gtk_widget_show (button);
-	GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
+	gtk_widget_set_can_default (button, TRUE);
 	gtk_dialog_add_action_widget (GTK_DIALOG (dlg),
                                       button,
                                       GTK_RESPONSE_OK);

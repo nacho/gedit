@@ -40,6 +40,7 @@
 #include <cairo-pdf.h>
 
 #include "gedit-print-preview.h"
+#include "gseal-gtk-compat.h"
 
 #define PRINTER_DPI (72.)
 
@@ -956,7 +957,7 @@ create_preview_layout (GeditPrintPreview *preview)
 			       GDK_BUTTON_PRESS_MASK |
 			       GDK_KEY_PRESS_MASK);
 
-	GTK_WIDGET_SET_FLAGS (priv->layout, GTK_CAN_FOCUS);
+	gtk_widget_set_can_focus (priv->layout, TRUE);
 
   	g_signal_connect (priv->layout,
 			  "key-press-event",

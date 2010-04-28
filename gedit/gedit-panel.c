@@ -38,6 +38,7 @@
 #include "gedit-close-button.h"
 #include "gedit-window.h"
 #include "gedit-debug.h"
+#include "gseal-gtk-compat.h"
 
 #define PANEL_ITEM_KEY "GeditPanelItemKey"
 
@@ -142,11 +143,7 @@ static void
 gedit_panel_focus_document (GeditPanel *panel)
 {
 	GtkWidget *toplevel = gtk_widget_get_toplevel (GTK_WIDGET (panel));
-#if !GTK_CHECK_VERSION (2, 18, 0)
-	if (GTK_WIDGET_TOPLEVEL (toplevel) && GEDIT_IS_WINDOW (toplevel))
-#else
 	if (gtk_widget_is_toplevel (toplevel) && GEDIT_IS_WINDOW (toplevel))
-#endif
 	{
 		GeditView *view;
 
@@ -697,7 +694,7 @@ gedit_panel_add_item (GeditPanel  *panel,
 	menu_label = gtk_label_new (name);
 	gtk_misc_set_alignment (GTK_MISC (menu_label), 0.0, 0.5);
 
-	if (!GTK_WIDGET_VISIBLE (item))
+	if (!gtk_widget_get_visible (item))
 		gtk_widget_show (item);
 
 	gtk_notebook_append_page_menu (GTK_NOTEBOOK (panel->priv->notebook),

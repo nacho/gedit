@@ -21,6 +21,7 @@
  */
 
 #include "gedit-status-combo-box.h"
+#include "gseal-gtk-compat.h"
 
 #define COMBO_BOX_TEXT_DATA "GeditStatusComboBoxTextData"
 
@@ -173,18 +174,20 @@ menu_position_func (GtkMenu		*menu,
 		    GeditStatusComboBox *combo)
 {
 	GtkRequisition request;
+	GtkAllocation allocation;
 	
 	*push_in = FALSE;
 	
 	gtk_widget_size_request (gtk_widget_get_toplevel (GTK_WIDGET (menu)), &request);
 	
 	/* get the origin... */
-	gdk_window_get_origin (GTK_WIDGET (combo)->window, x, y);
+	gdk_window_get_origin (gtk_widget_get_window (GTK_WIDGET (combo)), x, y);
 	
 	/* make the menu as wide as the widget */
-	if (request.width < GTK_WIDGET (combo)->allocation.width)
+	gtk_widget_get_allocation (GTK_WIDGET (combo), &allocation);
+	if (request.width < allocation.width)
 	{
-		gtk_widget_set_size_request (GTK_WIDGET (menu), GTK_WIDGET (combo)->allocation.width, -1);
+		gtk_widget_set_size_request (GTK_WIDGET (menu), allocation.width, -1);
 	}
 	
 	/* position it above the widget */
@@ -198,11 +201,13 @@ button_press_event (GtkWidget           *widget,
 {
 	GtkRequisition request;
 	gint max_height;
+	GtkAllocation allocation;
 	
 	gtk_widget_size_request (combo->priv->menu, &request);
 
 	/* do something relative to our own height here, maybe we can do better */
-	max_height = GTK_WIDGET (combo)->allocation.height * 20;
+	gtk_widget_get_allocation (GTK_WIDGET (combo), &allocation);
+	max_height = allocation.height * 20;
 	
 	if (request.height > max_height)
 	{
