@@ -1133,9 +1133,7 @@ gedit_file_browser_view_start_rename (GeditFileBrowserView *tree_view,
 	gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (tree_view),
 				      gtk_tree_row_reference_get_path (tree_view->priv->editable),
 				      tree_view->priv->column,
-				      TRUE,
-				      0.5,
-				      1);
+				      FALSE, 0.0, 0.0);
 }
 
 void
