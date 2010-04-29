@@ -452,7 +452,7 @@ class Document:
 
                         documents_path = [location.get_path()
                                           for location in documents_location
-                                          if gedit.utils.uri_has_file_scheme(location.get_uri())]
+                                          if gedit.utils.location_has_file_scheme(location)]
                 else:
                         documents_path = []
                 
@@ -865,11 +865,11 @@ class Document:
                 dirname = ''
                 ruri = ''
 
-                if gedit.utils.uri_has_file_scheme(uri):
+                if gedit.utils.location_has_file_scheme(gfile):
                         pathname = gfile.get_path()
                         dirname = gfile.get_parent().get_path()
 
-                name = os.path.basename(uri)
+                name = gfile.get_basename()
                 scheme = gfile.get_uri_scheme()
 
                 os.environ['GEDIT_DROP_DOCUMENT_URI'] = uri

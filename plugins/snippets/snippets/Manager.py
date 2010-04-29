@@ -765,11 +765,12 @@ class Manager:
                 success = True
                 
                 for filename in filenames:
-                        if not gedit.utils.uri_has_file_scheme(filename):
+                        gfile = gio.File(filename)
+
+                        if not gedit.utils.location_has_file_scheme(gfile):
                                 continue
 
                         # Remove file://
-                        gfile = gio.File(filename)
                         filename = gfile.get_path()
 
                         importer = Importer(filename)
