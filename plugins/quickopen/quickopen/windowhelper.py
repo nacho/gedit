@@ -88,20 +88,19 @@ class WindowHelper:
                         paths.append(gfile.get_parent())
 
                 # File browser root directory
-                if gedit.version[0] > 2 or (gedit.version[0] == 2 and (gedit.version[1] > 26 or (gedit.version[1] == 26 and gedit.version[2] >= 2))):
-                        bus = self._window.get_message_bus()
+                bus = self._window.get_message_bus()
 
-                        try:
-                                msg = bus.send_sync('/plugins/filebrowser', 'get_root')
+                try:
+                        msg = bus.send_sync('/plugins/filebrowser', 'get_root')
 
-                                if msg:
-                                        gfile = msg.get_value('location')
+                        if msg:
+                                gfile = msg.get_value('location')
 
-                                        if gfile and gfile.is_native():
-                                                paths.append(gfile)
+                                if gfile and gfile.is_native():
+                                        paths.append(gfile)
 
-                        except StandardError:
-                                pass
+                except StandardError:
+                        pass
 
                 # Recent documents
                 paths.append(RecentDocumentsDirectory(screen=self._window.get_screen()))
