@@ -4441,6 +4441,9 @@ gedit_window_set_active_tab (GeditWindow *window,
 	
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (window->priv->notebook),
 				       page_num);
+
+	/* Make sure to grab focus if the page didn't change */
+	gtk_widget_grab_focus (GTK_WIDGET (gedit_tab_get_view (tab)));
 }
 
 /**

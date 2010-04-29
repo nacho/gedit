@@ -199,6 +199,9 @@ load_file_list (GeditWindow         *window,
 					 line_pos,
 					 column_pos,
 					 create);
+			
+			/* make sure the view has focus */
+			gtk_widget_grab_focus (GTK_WIDGET (gedit_tab_get_view (tab)));
 
 			l = g_slist_next (l);
 			jump_to = FALSE;
