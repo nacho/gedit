@@ -186,3 +186,4 @@ static const GtkToggleActionEntry gedit_panes_toggle_menu_entries[] =
 G_END_DECLS
 
 #endif  /* __GEDIT_UI_H__  */
+/* ex:ts=8:noet: */

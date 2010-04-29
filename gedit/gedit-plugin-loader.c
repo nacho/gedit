@@ -129,3 +129,4 @@ gedit_plugin_loader_garbage_collect (GeditPluginLoader *loader)
 	if (iface->garbage_collect != NULL)
 		iface->garbage_collect (loader);
 }
+/* ex:ts=8:noet: */

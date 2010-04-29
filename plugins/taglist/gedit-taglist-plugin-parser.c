@@ -653,3 +653,4 @@ TagList* create_taglist (const gchar *data_dir)
 	
 	return taglist;
 }
+/* ex:ts=8:noet: */

@@ -90,5 +90,7 @@ gedit_osx_init(GeditApp *app)
 	g_object_set_data_full (G_OBJECT (app),
 	                        "GeditOSXDelegate",
 	                        delegate,
-							(GDestroyNotify)destroy_delegate);
+	                        (GDestroyNotify)destroy_delegate);
 }
+
+/* ex:ts=8:noet: */

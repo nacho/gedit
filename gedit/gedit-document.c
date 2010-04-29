@@ -2734,3 +2734,4 @@ gedit_document_set_metadata (GeditDocument *doc,
 	g_object_unref (info);
 }
 #endif
+/* ex:ts=8:noet: */

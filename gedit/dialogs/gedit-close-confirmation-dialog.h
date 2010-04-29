@@ -73,3 +73,4 @@ GList		*gedit_close_confirmation_dialog_get_selected_documents	(GeditCloseConfir
 
 #endif /* __GEDIT_CLOSE_CONFIRMATION_DIALOG_H__ */
 
+/* ex:ts=8:noet: */

@@ -172,3 +172,4 @@ _gedit_cmd_edit_preferences (GtkAction   *action,
 
 	gedit_show_preferences_dialog (window);
 }
+/* ex:ts=8:noet: */

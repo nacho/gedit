@@ -620,3 +620,4 @@ gedit_session_load (void)
 
 	return TRUE;
 }
+/* ex:ts=8:noet: */

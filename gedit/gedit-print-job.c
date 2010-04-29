@@ -863,3 +863,4 @@ gedit_print_job_get_page_setup (GeditPrintJob *job)
 
 	return gtk_print_operation_get_default_page_setup (job->priv->operation);
 }
+/* ex:ts=8:noet: */

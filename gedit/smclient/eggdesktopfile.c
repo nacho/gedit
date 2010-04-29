@@ -1508,3 +1508,4 @@ egg_get_desktop_file (void)
 
   return retval;
 }
+/* ex:ts=8:noet: */

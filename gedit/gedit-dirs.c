@@ -318,3 +318,4 @@ gedit_dirs_get_ui_file (const gchar *file)
 	
 	return ui_file;
 }
+/* ex:ts=8:noet: */

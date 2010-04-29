@@ -87,3 +87,4 @@ GtkWidget	*gedit_taglist_plugin_panel_new 		(GeditWindow *window,
 G_END_DECLS
 
 #endif  /* __GEDIT_TAGLIST_PLUGIN_PANEL_H__  */
+/* ex:ts=8:noet: */

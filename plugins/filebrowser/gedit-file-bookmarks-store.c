@@ -891,3 +891,4 @@ on_bookmarks_file_changed (GFileMonitor            *monitor,
 			break;
 	}
 }
+/* ex:ts=8:noet: */

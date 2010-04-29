@@ -140,3 +140,4 @@ void			 _gedit_app_set_default_print_settings	(GeditApp         *app,
 G_END_DECLS
 
 #endif  /* __GEDIT_APP_H__  */
+/* ex:ts=8:noet: */

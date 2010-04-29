@@ -127,3 +127,4 @@ void		 gedit_message_area_response           	(GeditMessageArea *message_area,
 G_END_DECLS
 
 #endif  /* __GEDIT_MESSAGE_AREA_H__  */
+/* ex:ts=8:noet: */

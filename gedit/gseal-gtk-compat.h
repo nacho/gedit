@@ -50,3 +50,4 @@ G_BEGIN_DECLS
 G_END_DECLS
 
 #endif /* GSEAL_GTK_COMPAT_H */
+/* ex:ts=8:noet: */

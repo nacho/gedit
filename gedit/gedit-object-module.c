@@ -341,3 +341,4 @@ gedit_object_module_get_object_type (GeditObjectModule *module)
 	
 	return module->priv->type;
 }
+/* ex:ts=8:noet: */

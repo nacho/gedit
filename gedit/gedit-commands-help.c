@@ -113,3 +113,4 @@ _gedit_cmd_help_about (GtkAction   *action,
 	if (logo)
 		g_object_unref (logo);
 }
+/* ex:ts=8:noet: */

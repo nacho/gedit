@@ -92,3 +92,4 @@ const gchar 	*gedit_object_module_get_type_registration 	(GeditObjectModule *mod
 G_END_DECLS
 
 #endif
+/* ex:ts=8:noet: */

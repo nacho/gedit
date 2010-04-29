@@ -126,3 +126,4 @@ gboolean	 gedit_search_dialog_get_wrap_around	(GeditSearchDialog *dialog);
 G_END_DECLS
 
 #endif  /* __GEDIT_SEARCH_DIALOG_H__  */
+/* ex:ts=8:noet: */

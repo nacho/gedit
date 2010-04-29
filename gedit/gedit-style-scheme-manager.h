@@ -54,3 +54,4 @@ gboolean	 _gedit_style_scheme_manager_uninstall_scheme
 G_END_DECLS
 
 #endif /* __GEDIT_STYLE_SCHEME_MANAGER_H__ */
+/* ex:ts=8:noet: */

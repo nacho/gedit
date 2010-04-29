@@ -152,3 +152,4 @@ _gedit_cmd_view_leave_fullscreen_mode (GtkAction *action,
 		(view_action, G_CALLBACK (_gedit_cmd_view_toggle_fullscreen_mode),
 		 window);
 }
+/* ex:ts=8:noet: */

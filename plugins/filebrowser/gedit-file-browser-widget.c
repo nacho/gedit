@@ -3168,3 +3168,4 @@ on_action_bookmark_open (GtkAction              *action,
 	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
 		bookmark_open (obj, model, &iter);
 }
+/* ex:ts=8:noet: */

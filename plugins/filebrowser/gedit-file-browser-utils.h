@@ -43,3 +43,4 @@ gboolean	 gedit_file_browser_utils_confirmation_dialog	(GeditWindow    *window,
 								 gchar const    *button_label);
 
 #endif /* __GEDIT_FILE_BROWSER_UTILS_H__ */
+/* ex:ts=8:noet: */

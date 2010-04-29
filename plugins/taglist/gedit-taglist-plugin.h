@@ -83,3 +83,4 @@ G_MODULE_EXPORT GType register_gedit_plugin (GTypeModule *module);
 G_END_DECLS
 
 #endif /* __GEDIT_TAGLIST_PLUGIN_H__ */
+/* ex:ts=8:noet: */

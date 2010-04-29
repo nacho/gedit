@@ -632,3 +632,4 @@ gedit_search_dialog_get_wrap_around (GeditSearchDialog *dialog)
 
 	return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->priv->wrap_around_checkbutton));
 }
+/* ex:ts=8:noet: */

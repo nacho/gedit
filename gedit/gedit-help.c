@@ -120,3 +120,4 @@ gedit_help_display (GtkWindow   *parent,
 
 	return ret;
 }
+/* ex:ts=8:noet: */

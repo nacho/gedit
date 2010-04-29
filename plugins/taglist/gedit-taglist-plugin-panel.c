@@ -774,3 +774,4 @@ gedit_taglist_plugin_panel_new (GeditWindow *window,
 	
 	return GTK_WIDGET (panel);
 }
+/* ex:ts=8:noet: */

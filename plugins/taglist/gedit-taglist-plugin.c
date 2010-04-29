@@ -158,3 +158,4 @@ gedit_taglist_plugin_class_init (GeditTaglistPluginClass *klass)
 
 	g_type_class_add_private (object_class, sizeof (GeditTaglistPluginPrivate));
 }
+/* ex:ts=8:noet: */

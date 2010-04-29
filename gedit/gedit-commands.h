@@ -167,3 +167,4 @@ void		_gedit_cmd_file_page_setup		(GtkAction   *action,
 G_END_DECLS
 
 #endif /* __GEDIT_COMMANDS_H__ */ 
+/* ex:ts=8:noet: */

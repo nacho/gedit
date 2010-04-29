@@ -392,3 +392,4 @@ gedit_plugin_info_get_version (GeditPluginInfo *info)
 
 	return info->version;
 }
+/* ex:ts=8:noet: */

@@ -2851,3 +2851,4 @@ gedit_tab_set_info_bar (GeditTab  *tab,
 	/* FIXME: this can cause problems with the tab state machine */
 	set_message_area (tab, info_bar);
 }
+/* ex:ts=8:noet: */

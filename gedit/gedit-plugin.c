@@ -332,3 +332,4 @@ gedit_plugin_create_configure_dialog (GeditPlugin *plugin)
 	
 	return GEDIT_PLUGIN_GET_CLASS (plugin)->create_configure_dialog (plugin);
 }
+/* ex:ts=8:noet: */

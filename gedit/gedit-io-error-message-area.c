@@ -1295,3 +1295,4 @@ gedit_externally_modified_message_area_new (GFile   *location,
 	return message_area;
 }
 
+/* ex:ts=8:noet: */

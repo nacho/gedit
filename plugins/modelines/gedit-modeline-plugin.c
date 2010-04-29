@@ -246,3 +246,4 @@ gedit_modeline_plugin_deactivate (GeditPlugin *plugin,
 	g_list_free (views);
 }
 
+/* ex:ts=8:noet: */

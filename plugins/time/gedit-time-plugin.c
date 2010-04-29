@@ -1270,3 +1270,4 @@ gedit_time_plugin_class_init (GeditTimePluginClass *klass)
 
 	g_type_class_add_private (object_class, sizeof (GeditTimePluginPrivate));
 }
+/* ex:ts=8:noet: */

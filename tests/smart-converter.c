@@ -329,3 +329,4 @@ int main (int   argc,
 
 	return g_test_run ();
 }
+/* ex:ts=8:noet: */

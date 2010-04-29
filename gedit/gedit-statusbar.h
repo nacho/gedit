@@ -97,3 +97,4 @@ void		_gedit_statusbar_set_has_resize_grip	(GeditStatusbar   *statusbar,
 G_END_DECLS
 
 #endif
+/* ex:ts=8:noet: */

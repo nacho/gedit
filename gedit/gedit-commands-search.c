@@ -714,3 +714,4 @@ _gedit_cmd_search_incremental_search (GtkAction   *action,
 			       GDK_k,
 			       GDK_CONTROL_MASK);
 }
+/* ex:ts=8:noet: */

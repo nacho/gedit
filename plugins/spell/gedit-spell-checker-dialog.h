@@ -90,3 +90,4 @@ G_END_DECLS
 
 #endif  /* __GEDIT_SPELL_CHECKER_DIALOG_H__ */
 
+/* ex:ts=8:noet: */

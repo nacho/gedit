@@ -115,3 +115,4 @@ G_END_DECLS
 
 
 #endif /* __EGG_SM_CLIENT_H__ */
+/* ex:ts=8:noet: */

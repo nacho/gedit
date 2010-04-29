@@ -128,3 +128,4 @@ void		 _gedit_panel_set_active_item_by_id	(GeditPanel	*panel,
 G_END_DECLS
 
 #endif  /* __GEDIT_PANEL_H__  */
+/* ex:ts=8:noet: */

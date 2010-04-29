@@ -421,3 +421,4 @@ GeditLockdownMask	 gedit_prefs_manager_get_lockdown			(void);
 #endif  /* __GEDIT_PREFS_MANAGER_H__ */
 
 
+/* ex:ts=8:noet: */

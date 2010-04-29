@@ -351,3 +351,4 @@ sm_client_thread (gpointer smclient)
   while (GetMessage (&msg, NULL, 0, 0))
     DispatchMessage (&msg);
 }
+/* ex:ts=8:noet: */

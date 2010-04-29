@@ -77,3 +77,4 @@ GType 		 	 gedit_gio_document_loader_get_type	(void) G_GNUC_CONST;
 G_END_DECLS
 
 #endif  /* __GEDIT_GIO_DOCUMENT_LOADER_H__  */
+/* ex:ts=8:noet: */

@@ -87,3 +87,4 @@ GeditDocumentNewlineType
 G_END_DECLS
 
 #endif /* __GEDIT_FILE_CHOOSER_DIALOG_H__ */
+/* ex:ts=8:noet: */

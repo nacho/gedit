@@ -1270,3 +1270,4 @@ on_confirm_delete_cb (GeditFileBrowserWidget *widget,
 
 	return result;
 }
+/* ex:ts=8:noet: */

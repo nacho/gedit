@@ -464,3 +464,4 @@ gedit_style_scheme_generator_set_search_hl_text_color (GeditStyleSchemeGenerator
 	set_background_color (style, color);
 }
 
+/* ex:ts=8:noet: */

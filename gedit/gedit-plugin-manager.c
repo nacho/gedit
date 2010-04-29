@@ -887,3 +887,4 @@ GtkWidget *gedit_plugin_manager_new (void)
 {
 	return g_object_new (GEDIT_TYPE_PLUGIN_MANAGER,0);
 }
+/* ex:ts=8:noet: */

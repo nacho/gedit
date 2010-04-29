@@ -903,3 +903,4 @@ _gedit_app_set_default_print_settings (GeditApp         *app,
 	app->priv->print_settings = g_object_ref (settings);
 }
 
+/* ex:ts=8:noet: */

@@ -66,3 +66,4 @@ void free_taglist (void);
 
 #endif /* __GEDIT_TAGLIST_PLUGIN_PARSER_H__ */
 
+/* ex:ts=8:noet: */

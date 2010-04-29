@@ -106,3 +106,4 @@ void 		 gedit_view_set_font		(GeditView       *view,
 G_END_DECLS
 
 #endif /* __GEDIT_VIEW_H__ */
+/* ex:ts=8:noet: */

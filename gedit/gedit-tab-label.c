@@ -369,3 +369,4 @@ gedit_tab_label_new (GeditTab *tab)
 
 	return GTK_WIDGET (tab_label);
 }
+/* ex:ts=8:noet: */

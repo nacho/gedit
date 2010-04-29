@@ -165,3 +165,4 @@ void		 _gedit_tab_page_setup		(GeditTab            *tab);
 G_END_DECLS
 
 #endif  /* __GEDIT_TAB_H__  */
+/* ex:ts=8:noet: */

@@ -64,3 +64,4 @@ void		gedit_tab_label_set_close_button_sensitive (GeditTabLabel *tab_label,
 G_END_DECLS
 
 #endif /* __GEDIT_TAB_LABEL_H__ */
+/* ex:ts=8:noet: */

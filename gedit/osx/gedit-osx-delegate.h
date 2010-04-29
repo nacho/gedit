@@ -14,3 +14,4 @@
 @end
 
 #endif /* GEDIT_OSX_DELEGATE_H_ */
+/* ex:ts=8:noet: */

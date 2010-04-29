@@ -279,3 +279,4 @@ gedit_plugin_python_class_init (GeditPluginPythonClass *klass)
 	plugin_class->is_configurable = impl_is_configurable;
 }
 
+/* ex:ts=8:noet: */

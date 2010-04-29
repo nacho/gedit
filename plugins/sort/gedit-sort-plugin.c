@@ -586,3 +586,4 @@ gedit_sort_plugin_class_init (GeditSortPluginClass *klass)
 	plugin_class->deactivate = impl_deactivate;
 	plugin_class->update_ui = impl_update_ui;
 }
+/* ex:ts=8:noet: */

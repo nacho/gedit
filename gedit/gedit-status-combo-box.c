@@ -421,3 +421,4 @@ gedit_status_combo_box_get_item_label (GeditStatusComboBox *combo)
 	return GTK_LABEL (combo->priv->item);
 }
 
+/* ex:ts=8:noet: */

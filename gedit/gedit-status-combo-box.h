@@ -80,3 +80,4 @@ GtkLabel *gedit_status_combo_box_get_item_label		(GeditStatusComboBox	*combo);
 G_END_DECLS
 
 #endif /* __GEDIT_STATUS_COMBO_BOX_H__ */
+/* ex:ts=8:noet: */

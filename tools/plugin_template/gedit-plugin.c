@@ -182,3 +182,4 @@ static void
 	g_type_class_add_private (object_class, 
 				  sizeof (##(PLUGIN_ID.camel)PluginPrivate));
 }
+/* ex:ts=8:noet: */

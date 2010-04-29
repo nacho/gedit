@@ -2186,3 +2186,4 @@ gedit_view_delete_from_cursor (GtkTextView   *text_view,
 			break;
 	}
 }
+/* ex:ts=8:noet: */

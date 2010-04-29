@@ -194,3 +194,4 @@ void		 _gedit_recent_remove			(GeditWindow         *window,
 G_END_DECLS
 
 #endif  /* __GEDIT_WINDOW_H__  */
+/* ex:ts=8:noet: */

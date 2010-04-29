@@ -1283,3 +1283,4 @@ on_row_inserted (GeditFileBrowserStore *model,
 
 	gtk_tree_path_free (copy);
 }
+/* ex:ts=8:noet: */

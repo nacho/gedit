@@ -1155,4 +1155,4 @@ gedit_message_bus_send_sync (GeditMessageBus *bus,
 	return message;
 }
 
-// ex:ts=8:noet:
+/* ex:ts=8:noet: */

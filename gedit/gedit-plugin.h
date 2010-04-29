@@ -238,3 +238,4 @@ object_name##_register_type (GTypeModule *type_module)				\
 G_END_DECLS
 
 #endif  /* __GEDIT_PLUGIN_H__ */
+/* ex:ts=8:noet: */

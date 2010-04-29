@@ -85,3 +85,4 @@ _gedit_cmd_documents_move_to_new_window (GtkAction   *action,
 
 	_gedit_window_move_tab_to_new_window (window, tab);
 }
+/* ex:ts=8:noet: */

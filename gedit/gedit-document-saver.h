@@ -131,3 +131,4 @@ GFileInfo		*gedit_document_saver_get_info		(GeditDocumentSaver  *saver);
 G_END_DECLS
 
 #endif  /* __GEDIT_DOCUMENT_SAVER_H__  */
+/* ex:ts=8:noet: */

@@ -464,3 +464,4 @@ gedit_encodings_combo_box_set_selected_encoding (GeditEncodingsComboBox *menu,
 		b = gtk_tree_model_iter_next (model, &iter);
 	}
 }
+/* ex:ts=8:noet: */

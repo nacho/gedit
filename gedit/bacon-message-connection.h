@@ -41,3 +41,4 @@ gboolean bacon_message_connection_get_is_server		(BaconMessageConnection *conn);
 G_END_DECLS
 
 #endif /* BACON_MESSAGE_CONNECTION_H */
+/* ex:ts=8:noet: */

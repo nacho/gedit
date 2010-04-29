@@ -180,3 +180,4 @@ gedit_plugin_loader_c_new ()
 
 	return GEDIT_PLUGIN_LOADER_C (loader);
 }
+/* ex:ts=8:noet: */

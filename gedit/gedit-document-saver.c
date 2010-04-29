@@ -351,3 +351,4 @@ gedit_document_saver_get_info (GeditDocumentSaver *saver)
 
 	return saver->info;
 }
+/* ex:ts=8:noet: */

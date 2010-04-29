@@ -389,3 +389,4 @@ gedit_document_output_stream_close (GOutputStream     *stream,
 
 	return TRUE;
 }
+/* ex:ts=8:noet: */

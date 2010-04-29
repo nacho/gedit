@@ -66,3 +66,4 @@ gsize				 gedit_document_input_stream_tell		(GeditDocumentInputStream *stream);
 G_END_DECLS
 
 #endif /* __GEDIT_DOCUMENT_INPUT_STREAM_H__ */
+/* ex:ts=8:noet: */

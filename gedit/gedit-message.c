@@ -590,4 +590,4 @@ gedit_message_validate (GeditMessage *message)
 	return message->priv->valid;
 }
 
-// ex:ts=8:noet:
+/* ex:ts=8:noet: */

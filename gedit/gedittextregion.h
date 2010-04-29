@@ -86,3 +86,4 @@ void           gedit_text_region_debug_print                  (GeditTextRegion *
 G_END_DECLS
 
 #endif /* __GEDIT_TEXT_REGION_H__ */
+/* ex:ts=8:noet: */

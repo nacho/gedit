@@ -81,3 +81,4 @@ void		 gedit_file_browser_view_set_restore_expand_state	(GeditFileBrowserView   
 G_END_DECLS
 
 #endif /* __GEDIT_FILE_BROWSER_VIEW_H__ */
+/* ex:ts=8:noet: */

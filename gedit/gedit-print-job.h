@@ -131,3 +131,4 @@ GtkPageSetup		*gedit_print_job_get_page_setup		(GeditPrintJob            *job);
 G_END_DECLS
 
 #endif /* __GEDIT_PRINT_JOB_H__ */
+/* ex:ts=8:noet: */

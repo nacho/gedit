@@ -394,3 +394,4 @@ bacon_message_connection_get_is_server (BaconMessageConnection *conn)
 	return conn->is_server;
 }
 
+/* ex:ts=8:noet: */

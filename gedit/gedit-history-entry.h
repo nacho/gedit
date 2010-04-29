@@ -94,3 +94,4 @@ void		gedit_history_entry_set_escape_func	(GeditHistoryEntry *entry,
 G_END_DECLS
 
 #endif /* __GEDIT_HISTORY_ENTRY_H__ */
+/* ex:ts=8:noet: */

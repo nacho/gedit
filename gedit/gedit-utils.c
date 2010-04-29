@@ -1525,3 +1525,4 @@ gedit_utils_decode_uri (const gchar *uri,
 	
 	return TRUE;
 }
+/* ex:ts=8:noet: */

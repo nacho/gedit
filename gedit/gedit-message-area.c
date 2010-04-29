@@ -624,3 +624,4 @@ gedit_message_area_add_stock_button_with_text (GeditMessageArea *message_area,
 	return button;
 }
 
+/* ex:ts=8:noet: */

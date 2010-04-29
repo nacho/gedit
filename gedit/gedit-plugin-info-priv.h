@@ -66,3 +66,4 @@ void			 _gedit_plugin_info_unref	(GeditPluginInfo *info);
 
 
 #endif /* __GEDIT_PLUGIN_INFO_PRIV_H__ */
+/* ex:ts=8:noet: */

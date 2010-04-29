@@ -1368,3 +1368,4 @@ smc_error_handler (SmcConn       smc_conn,
 {
   /* Do nothing */
 }
+/* ex:ts=8:noet: */

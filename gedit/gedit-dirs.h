@@ -52,3 +52,4 @@ gchar		*gedit_dirs_get_ui_file			(const gchar *file);
 G_END_DECLS
 
 #endif /* __GEDIT_DIRS_H__ */
+/* ex:ts=8:noet: */

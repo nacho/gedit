@@ -697,3 +697,4 @@ gedit_check_update_plugin_class_init (GeditCheckUpdatePluginClass *klass)
 	plugin_class->activate = impl_activate;
 	plugin_class->deactivate = impl_deactivate;
 }
+/* ex:ts=8:noet: */

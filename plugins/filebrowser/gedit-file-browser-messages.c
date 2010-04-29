@@ -1044,3 +1044,4 @@ gedit_file_browser_messages_unregister (GeditWindow *window)
 
 	window_data_free (window);
 }
+/* ex:ts=8:noet: */

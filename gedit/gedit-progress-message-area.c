@@ -259,3 +259,4 @@ gedit_progress_message_area_pulse (GeditProgressMessageArea *area)
 
 	gtk_progress_bar_pulse (GTK_PROGRESS_BAR (area->priv->progress));
 }
+/* ex:ts=8:noet: */

@@ -1096,3 +1096,4 @@ gedit_notebook_get_tab_drag_and_drop_enabled (GeditNotebook *nb)
 	return nb->priv->tab_drag_and_drop_enabled;
 }
 
+/* ex:ts=8:noet: */

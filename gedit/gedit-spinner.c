@@ -990,3 +990,4 @@ gedit_spinner_new (void)
 {
 	return GTK_WIDGET (g_object_new (GEDIT_TYPE_SPINNER, NULL));
 }
+/* ex:ts=8:noet: */

@@ -35,3 +35,4 @@ void	modeline_parser_deactivate	(GtkSourceView *view);
 G_END_DECLS
 
 #endif /* __MODELINE_PARSER_H__ */
+/* ex:ts=8:noet: */

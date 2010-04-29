@@ -1239,3 +1239,4 @@ gconf_client_get_int_with_default (GConfClient* client, const gchar* key,
     }
 }
 
+/* ex:ts=8:noet: */

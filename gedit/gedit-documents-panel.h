@@ -83,3 +83,4 @@ GtkWidget	*gedit_documents_panel_new 	(GeditWindow *window);
 G_END_DECLS
 
 #endif  /* __GEDIT_DOCUMENTS_PANEL_H__  */
+/* ex:ts=8:noet: */

@@ -558,3 +558,4 @@ gedit_file_chooser_dialog_get_newline_type (GeditFileChooserDialog *dialog)
 
 	return newline_type;
 }
+/* ex:ts=8:noet: */

@@ -571,3 +571,4 @@ gedit_metadata_manager_save (gpointer data)
 	return FALSE;
 }
 
+/* ex:ts=8:noet: */

@@ -471,3 +471,4 @@ gedit_encoding_get_type (void)
 	return our_type;
 } 
 
+/* ex:ts=8:noet: */

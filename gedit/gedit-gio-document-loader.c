@@ -701,3 +701,4 @@ gedit_gio_document_loader_cancel (GeditDocumentLoader *loader)
 
 	return TRUE;
 }
+/* ex:ts=8:noet: */

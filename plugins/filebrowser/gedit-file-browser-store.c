@@ -3748,3 +3748,4 @@ gedit_file_browser_store_new_directory (GeditFileBrowserStore *model,
 	g_object_unref (file);
 	return result;
 }
+/* ex:ts=8:noet: */

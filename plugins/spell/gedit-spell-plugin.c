@@ -1215,3 +1215,4 @@ gedit_spell_plugin_class_init (GeditSpellPluginClass *klass)
 	if (check_range_id == 0)
 		check_range_id = g_quark_from_string ("CheckRangeID");
 }
+/* ex:ts=8:noet: */

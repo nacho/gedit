@@ -767,3 +767,4 @@ gedit_gio_document_saver_get_bytes_written (GeditDocumentSaver *saver)
 {
 	return GEDIT_GIO_DOCUMENT_SAVER (saver)->priv->bytes_written;
 }
+/* ex:ts=8:noet: */

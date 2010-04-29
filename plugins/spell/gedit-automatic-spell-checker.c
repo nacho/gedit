@@ -1013,3 +1013,4 @@ gedit_automatic_spell_checker_detach_view (
 	spell->views = g_slist_remove (spell->views, view);
 }
 
+/* ex:ts=8:noet: */

@@ -716,3 +716,4 @@ gedit_plugin_loader_python_new ()
 	return GEDIT_PLUGIN_LOADER_PYTHON (loader);
 }
 
+/* ex:ts=8:noet: */

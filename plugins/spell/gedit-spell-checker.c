@@ -518,3 +518,4 @@ gedit_spell_checker_set_correction (GeditSpellChecker *spell,
 	return TRUE;
 }
 
+/* ex:ts=8:noet: */

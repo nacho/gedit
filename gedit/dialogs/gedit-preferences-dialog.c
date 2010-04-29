@@ -1187,3 +1187,4 @@ gedit_show_preferences_dialog (GeditWindow *parent)
 
 	gtk_window_present (GTK_WINDOW (preferences_dialog));
 }
+/* ex:ts=8:noet: */

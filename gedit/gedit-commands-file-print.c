@@ -89,3 +89,4 @@ _gedit_cmd_file_print (GtkAction   *action,
 	_gedit_tab_print (tab);
 }
 
+/* ex:ts=8:noet: */

@@ -859,3 +859,4 @@ gedit_plugins_engine_rescan_plugins (GeditPluginsEngine *engine)
 	
 	load_all_plugins (engine);
 }
+/* ex:ts=8:noet: */

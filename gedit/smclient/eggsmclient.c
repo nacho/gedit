@@ -587,3 +587,4 @@ egg_sm_client_debug_handler (const char *log_domain,
   if (debug)
     g_log_default_handler (log_domain, log_level, message, NULL);
 }
+/* ex:ts=8:noet: */

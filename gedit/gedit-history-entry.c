@@ -630,3 +630,4 @@ gedit_history_entry_set_escape_func (GeditHistoryEntry           *entry,
 
 	g_list_free (cells);
 }
+/* ex:ts=8:noet: */

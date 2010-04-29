@@ -141,3 +141,4 @@ gboolean	gedit_notebook_get_tab_drag_and_drop_enabled
 G_END_DECLS
 
 #endif /* GEDIT_NOTEBOOK_H */
+/* ex:ts=8:noet: */

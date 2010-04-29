@@ -128,3 +128,4 @@ GFileInfo		*gedit_document_loader_get_info		(GeditDocumentLoader *loader);
 G_END_DECLS
 
 #endif  /* __GEDIT_DOCUMENT_LOADER_H__  */
+/* ex:ts=8:noet: */

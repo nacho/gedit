@@ -1618,3 +1618,4 @@ gedit_prefs_manager_lockdown_changed (GConfClient *client,
 					     GEDIT_LOCKDOWN_SAVE_TO_DISK,
 					     locked);
 }
+/* ex:ts=8:noet: */

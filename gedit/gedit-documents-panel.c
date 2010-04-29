@@ -830,3 +830,4 @@ gedit_documents_panel_new (GeditWindow *window)
 					 "window", window,
 					 NULL));
 }
+/* ex:ts=8:noet: */

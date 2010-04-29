@@ -1826,3 +1826,4 @@ _gedit_cmd_file_quit (GtkAction   *action,
 
 	file_close_all (window, TRUE);
 }
+/* ex:ts=8:noet: */

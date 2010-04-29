@@ -82,3 +82,4 @@ gboolean	 gedit_prefs_manager_active_file_filter_can_set	(void);
 
 
 #endif /* __GEDIT_PREFS_MANAGER_APP_H__ */
+/* ex:ts=8:noet: */

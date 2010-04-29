@@ -93,3 +93,4 @@ void		gedit_spinner_set_size	(GeditSpinner *spinner,
 G_END_DECLS
 
 #endif /* __GEDIT_SPINNER_H__ */
+/* ex:ts=8:noet: */

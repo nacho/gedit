@@ -791,3 +791,4 @@ gedit_close_confirmation_dialog_get_unsaved_documents (GeditCloseConfirmationDia
 
 	return dlg->priv->unsaved_documents;
 }
+/* ex:ts=8:noet: */

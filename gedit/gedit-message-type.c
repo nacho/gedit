@@ -523,4 +523,4 @@ gedit_message_type_foreach (GeditMessageType 	    *message_type,
 	g_hash_table_foreach (message_type->arguments, (GHFunc)foreach_gtype, &info);
 }
 
-// ex:ts=8:noet:
+/* ex:ts=8:noet: */

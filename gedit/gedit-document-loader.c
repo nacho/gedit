@@ -354,3 +354,4 @@ gedit_document_loader_get_info (GeditDocumentLoader *loader)
 
 	return loader->info;
 }
+/* ex:ts=8:noet: */
