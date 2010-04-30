@@ -4,6 +4,7 @@
  *
  * Copyright (C) 2005 - Paolo Maggi
  * Copyright (C) 2007 - Paolo Maggi, Steve Frécinaux
+ * Copyright (C) 2008 - Jesse van den Kieboom
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +23,7 @@
  */
  
 /*
- * Modified by the gedit Team, 2005-2007. See the AUTHORS file for a
+ * Modified by the gedit Team, 2005-2008. See the AUTHORS file for a
  * list of people on the gedit Team.
  * See the ChangeLog files for a list of changes.
  *
@@ -54,19 +55,12 @@ typedef struct _GeditDocumentLoaderPrivate GeditDocumentLoaderPrivate;
  */
 typedef struct _GeditDocumentLoader GeditDocumentLoader;
 
-struct _GeditDocumentLoader 
+struct _GeditDocumentLoader
 {
 	GObject object;
 
-	GeditDocument		 *document;
-	gboolean		  used;
-
-	/* Info on the current file */
-	GFileInfo		 *info;
-	GFile			 *location;
-	const GeditEncoding	 *encoding;
-	const GeditEncoding	 *auto_detected_encoding;
-	GeditDocumentNewlineType  auto_detected_newline_type;
+	/*< private > */
+	GeditDocumentLoaderPrivate *priv;
 };
 
 /*
@@ -82,11 +76,6 @@ struct _GeditDocumentLoaderClass
 	void (* loading) (GeditDocumentLoader *loader,
 			  gboolean             completed,
 			  const GError        *error);
-
-	/* VTable */
-	void			(* load)		(GeditDocumentLoader *loader);
-	gboolean		(* cancel)		(GeditDocumentLoader *loader);
-	goffset			(* get_bytes_read)	(GeditDocumentLoader *loader);
 };
 
 /*

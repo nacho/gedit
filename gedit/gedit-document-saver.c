@@ -4,6 +4,7 @@
  *
  * Copyright (C) 2005-2006 - Paolo Borelli and Paolo Maggi
  * Copyright (C) 2007 - Paolo Borelli, Paolo Maggi, Steve Frécinaux
+ * Copyright (C) 2008 - Jesse van den Kieboom
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,21 +32,20 @@
 #include <config.h>
 #endif
 
-#include <string.h>
-#include <errno.h>
-#include <unistd.h>
-
 #include <glib/gi18n.h>
+#include <glib.h>
+#include <gio/gio.h>
+#include <string.h>
 
 #include "gedit-document-saver.h"
-#include "gedit-debug.h"
+#include "gedit-document-input-stream.h"
 #include "gedit-prefs-manager.h"
+#include "gedit-debug.h"
 #include "gedit-marshal.h"
 #include "gedit-utils.h"
 #include "gedit-enum-types.h"
-#include "gedit-gio-document-saver.h"
 
-G_DEFINE_ABSTRACT_TYPE(GeditDocumentSaver, gedit_document_saver, G_TYPE_OBJECT)
+#define WRITE_CHUNK_SIZE 8192
 
 /* Signals */
 
@@ -67,6 +67,54 @@ enum {
 	PROP_FLAGS
 };
 
+typedef struct
+{
+	GeditDocumentSaver    *saver;
+	gchar 		       buffer[WRITE_CHUNK_SIZE];
+	GCancellable 	      *cancellable;
+	gboolean	       tried_mount;
+	gssize		       written;
+	gssize		       read;
+	GError                *error;
+} AsyncData;
+
+#define REMOTE_QUERY_ATTRIBUTES G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE "," \
+				G_FILE_ATTRIBUTE_TIME_MODIFIED
+				
+#define GEDIT_DOCUMENT_SAVER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
+							  GEDIT_TYPE_DOCUMENT_SAVER, \
+							  GeditDocumentSaverPrivate))
+
+static void check_modified_async (AsyncData          *async);
+
+struct _GeditDocumentSaverPrivate
+{
+	GFileInfo		 *info;
+	GeditDocument		 *document;
+	gboolean		  used;
+
+	GFile			 *location;
+	const GeditEncoding      *encoding;
+	GeditDocumentNewlineType  newline_type;
+
+	GeditDocumentSaveFlags    flags;
+
+	gboolean		  keep_backup;
+
+	GTimeVal		  old_mtime;
+
+	goffset			  size;
+	goffset			  bytes_written;
+
+	GCancellable		 *cancellable;
+	GOutputStream		 *stream;
+	GInputStream		 *input;
+	
+	GError                   *error;
+};
+
+G_DEFINE_TYPE(GeditDocumentSaver, gedit_document_saver, G_TYPE_OBJECT)
+
 static void
 gedit_document_saver_set_property (GObject      *object,
 				   guint         prop_id,
@@ -78,22 +126,22 @@ gedit_document_saver_set_property (GObject      *object,
 	switch (prop_id)
 	{
 		case PROP_DOCUMENT:
-			g_return_if_fail (saver->document == NULL);
-			saver->document = g_value_get_object (value);
+			g_return_if_fail (saver->priv->document == NULL);
+			saver->priv->document = g_value_get_object (value);
 			break;
 		case PROP_LOCATION:
-			g_return_if_fail (saver->location == NULL);
-			saver->location = g_value_dup_object (value);
+			g_return_if_fail (saver->priv->location == NULL);
+			saver->priv->location = g_value_dup_object (value);
 			break;
 		case PROP_ENCODING:
-			g_return_if_fail (saver->encoding == NULL);
-			saver->encoding = g_value_get_boxed (value);
+			g_return_if_fail (saver->priv->encoding == NULL);
+			saver->priv->encoding = g_value_get_boxed (value);
 			break;
 		case PROP_NEWLINE_TYPE:
-			saver->newline_type = g_value_get_enum (value);
+			saver->priv->newline_type = g_value_get_enum (value);
 			break;
 		case PROP_FLAGS:
-			saver->flags = g_value_get_flags (value);
+			saver->priv->flags = g_value_get_flags (value);
 			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -112,19 +160,19 @@ gedit_document_saver_get_property (GObject    *object,
 	switch (prop_id)
 	{
 		case PROP_DOCUMENT:
-			g_value_set_object (value, saver->document);
+			g_value_set_object (value, saver->priv->document);
 			break;
 		case PROP_LOCATION:
-			g_value_set_object (value, saver->location);
+			g_value_set_object (value, saver->priv->location);
 			break;
 		case PROP_ENCODING:
-			g_value_set_boxed (value, saver->encoding);
+			g_value_set_boxed (value, saver->priv->encoding);
 			break;
 		case PROP_NEWLINE_TYPE:
-			g_value_set_enum (value, saver->newline_type);
+			g_value_set_enum (value, saver->priv->newline_type);
 			break;
 		case PROP_FLAGS:
-			g_value_set_flags (value, saver->flags);
+			g_value_set_flags (value, saver->priv->flags);
 			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -135,21 +183,77 @@ gedit_document_saver_get_property (GObject    *object,
 static void
 gedit_document_saver_dispose (GObject *object)
 {
-	GeditDocumentSaver *saver = GEDIT_DOCUMENT_SAVER (object);
+	GeditDocumentSaverPrivate *priv = GEDIT_DOCUMENT_SAVER (object)->priv;
 
-	if (saver->info != NULL)
+	if (priv->cancellable != NULL)
 	{
-		g_object_unref (saver->info);
-		saver->info = NULL;
+		g_cancellable_cancel (priv->cancellable);
+		g_object_unref (priv->cancellable);
+		priv->cancellable = NULL;
+	}
+
+	if (priv->error != NULL)
+	{
+		g_error_free (priv->error);
+		priv->error = NULL;
+	}
+
+	if (priv->stream != NULL)
+	{
+		g_object_unref (priv->stream);
+		priv->stream = NULL;
+	}
+
+	if (priv->input != NULL)
+	{
+		g_object_unref (priv->input);
+		priv->input = NULL;
+	}
+
+	if (priv->info != NULL)
+	{
+		g_object_unref (priv->info);
+		priv->info = NULL;
 	}
 	
-	if (saver->location != NULL)
+	if (priv->location != NULL)
 	{
-		g_object_unref (saver->location);
-		saver->location = NULL;
+		g_object_unref (priv->location);
+		priv->location = NULL;
 	}
 
 	G_OBJECT_CLASS (gedit_document_saver_parent_class)->dispose (object);
+}
+
+static AsyncData *
+async_data_new (GeditDocumentSaver *saver)
+{
+	AsyncData *async;
+	
+	async = g_slice_new (AsyncData);
+	async->saver = saver;
+	async->cancellable = g_object_ref (saver->priv->cancellable);
+
+	async->tried_mount = FALSE;
+	async->written = 0;
+	async->read = 0;
+
+	async->error = NULL;
+
+	return async;
+}
+
+static void
+async_data_free (AsyncData *async)
+{
+	g_object_unref (async->cancellable);
+
+	if (async->error)
+	{
+		g_error_free (async->error);
+	}
+
+	g_slice_free (AsyncData, async);
 }
 
 static void 
@@ -224,12 +328,18 @@ gedit_document_saver_class_init (GeditDocumentSaverClass *klass)
 			      2,
 			      G_TYPE_BOOLEAN,
 			      G_TYPE_POINTER);
+
+	g_type_class_add_private (object_class, sizeof (GeditDocumentSaverPrivate));
 }
 
 static void
 gedit_document_saver_init (GeditDocumentSaver *saver)
 {
-	saver->used = FALSE;
+	saver->priv = GEDIT_DOCUMENT_SAVER_GET_PRIVATE (saver);
+
+	saver->priv->cancellable = g_cancellable_new ();
+	saver->priv->error = NULL;
+	saver->priv->used = FALSE;
 }
 
 GeditDocumentSaver *
@@ -239,25 +349,611 @@ gedit_document_saver_new (GeditDocument           *doc,
 			  GeditDocumentNewlineType newline_type,
 			  GeditDocumentSaveFlags   flags)
 {
-	GeditDocumentSaver *saver;
-	GType saver_type;
-
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
-
-	saver_type = GEDIT_TYPE_GIO_DOCUMENT_SAVER;
 
 	if (encoding == NULL)
 		encoding = gedit_encoding_get_utf8 ();
 
-	saver = GEDIT_DOCUMENT_SAVER (g_object_new (saver_type,
-						    "document", doc,
-						    "location", location,
-						    "encoding", encoding,
-						    "newline_type", newline_type,
-						    "flags", flags,
-						    NULL));
+	return GEDIT_DOCUMENT_SAVER (g_object_new (GEDIT_TYPE_DOCUMENT_SAVER,
+						   "document", doc,
+						   "location", location,
+						   "encoding", encoding,
+						   "newline_type", newline_type,
+						   "flags", flags,
+						   NULL));
+}
 
-	return saver;
+static void
+remote_save_completed_or_failed (GeditDocumentSaver *saver, 
+				 AsyncData 	    *async)
+{
+	gedit_document_saver_saving (saver,
+				     TRUE,
+				     saver->priv->error);
+
+	if (async)
+		async_data_free (async);
+}
+
+static void
+async_failed (AsyncData *async,
+	      GError    *error)
+{
+	g_propagate_error (&async->saver->priv->error, error);
+	remote_save_completed_or_failed (async->saver, async);
+}
+
+/* BEGIN NOTE:
+ *
+ * This fixes an issue in GOutputStream that applies the atomic replace
+ * save strategy. The stream moves the written file to the original file
+ * when the stream is closed. However, there is no way currently to tell
+ * the stream that the save should be aborted (there could be a
+ * conversion error). The patch explicitly closes the output stream
+ * in all these cases with a GCancellable in the cancelled state, causing
+ * the output stream to close, but not move the file. This makes use
+ * of an implementation detail in the local  file stream and should be
+ * properly fixed by adding the appropriate API in . Until then, at least
+ * we prevent data corruption for now.
+ *
+ * Relevant bug reports:
+ *
+ * Bug 615110 - write file ignore encoding errors (gedit)
+ * https://bugzilla.gnome.org/show_bug.cgi?id=615110
+ *
+ * Bug 602412 - g_file_replace does not restore original file when there is
+ *              errors while writing (glib/)
+ * https://bugzilla.gnome.org/show_bug.cgi?id=602412
+ */
+static void
+cancel_output_stream_ready_cb (GOutputStream *stream,
+                               GAsyncResult  *result,
+                               AsyncData     *async)
+{
+	GError *error;
+
+	g_output_stream_close_finish (stream, result, NULL);
+
+	/* check cancelled state manually */
+	if (g_cancellable_is_cancelled (async->cancellable) || async->error == NULL)
+	{
+		async_data_free (async);
+		return;
+	}
+
+	error = async->error;
+	async->error = NULL;
+
+	async_failed (async, error);
+}
+
+static void
+cancel_output_stream (AsyncData *async)
+{
+	GCancellable *cancellable;
+
+	gedit_debug_message (DEBUG_SAVER, "Cancel output stream");
+
+	cancellable = g_cancellable_new ();
+	g_cancellable_cancel (cancellable);
+
+	g_output_stream_close_async (async->saver->priv->stream,
+				     G_PRIORITY_HIGH,
+				     cancellable,
+				     (GAsyncReadyCallback)cancel_output_stream_ready_cb,
+				     async);
+
+	g_object_unref (cancellable);
+}
+
+static void
+cancel_output_stream_and_fail (AsyncData *async,
+                               GError    *error)
+{
+
+	gedit_debug_message (DEBUG_SAVER, "Cancel output stream and fail");
+
+	g_propagate_error (&async->error, error);
+	cancel_output_stream (async);
+}
+
+/*
+ * END NOTE
+ */
+
+static void
+remote_get_info_cb (GFile        *source,
+		    GAsyncResult *res,
+		    AsyncData    *async)
+{
+	GeditDocumentSaver *saver;
+	GFileInfo *info;
+	GError *error = NULL;
+
+	gedit_debug (DEBUG_SAVER);
+
+	/* check cancelled state manually */
+	if (g_cancellable_is_cancelled (async->cancellable))
+	{
+		async_data_free (async);
+		return;
+	}
+	
+	saver = async->saver;
+
+	gedit_debug_message (DEBUG_SAVER, "Finished query info on file");
+	info = g_file_query_info_finish (source, res, &error);
+
+	if (info != NULL)
+	{
+		if (saver->priv->info != NULL)
+			g_object_unref (saver->priv->info);
+
+		saver->priv->info = info;
+	}
+	else
+	{
+		gedit_debug_message (DEBUG_SAVER, "Query info failed: %s", error->message);
+		g_propagate_error (&saver->priv->error, error);
+	}
+
+	remote_save_completed_or_failed (saver, async);
+}
+
+static void
+close_async_ready_get_info_cb (GOutputStream *stream,
+			       GAsyncResult  *res,
+			       AsyncData     *async)
+{
+	GError *error = NULL;
+
+	gedit_debug (DEBUG_SAVER);
+
+	/* check cancelled state manually */
+	if (g_cancellable_is_cancelled (async->cancellable))
+	{
+		async_data_free (async);
+		return;
+	}
+	
+	gedit_debug_message (DEBUG_SAVER, "Finished closing stream");
+	
+	if (!g_output_stream_close_finish (stream, res, &error))
+	{
+		gedit_debug_message (DEBUG_SAVER, "Closing stream error: %s", error->message);
+
+		async_failed (async, error);
+		return;
+	}
+
+	/* get the file info: note we cannot use 
+	 * g_file_output_stream_query_info_async since it is not able to get the
+	 * content type etc, beside it is not supported by gvfs.
+	 * I'm not sure this is actually necessary, can't we just use
+	 * g_content_type_guess (since we have the file name and the data)
+	 */
+	gedit_debug_message (DEBUG_SAVER, "Query info on file");
+	g_file_query_info_async (async->saver->priv->location,
+			         REMOTE_QUERY_ATTRIBUTES,
+			         G_FILE_QUERY_INFO_NONE,
+			         G_PRIORITY_HIGH,
+			         async->cancellable,
+			         (GAsyncReadyCallback) remote_get_info_cb,
+			         async);
+}
+
+static void
+write_complete (AsyncData *async)
+{
+	GError *error = NULL;
+
+	/* first we close the input stream */
+	gedit_debug_message (DEBUG_SAVER, "Close input stream");
+	if (!g_input_stream_close (async->saver->priv->input,
+				   async->cancellable, &error))
+	{
+		gedit_debug_message (DEBUG_SAVER, "Closing input stream error: %s", error->message);
+		cancel_output_stream_and_fail (async, error);
+		return;
+	}
+
+	/* now we close the output stream */
+	gedit_debug_message (DEBUG_SAVER, "Close output stream");
+	g_output_stream_close_async (async->saver->priv->stream,
+				     G_PRIORITY_HIGH,
+				     async->cancellable,
+				     (GAsyncReadyCallback)close_async_ready_get_info_cb,
+				     async);
+}
+
+/* prototype, because they call each other... isn't C lovely */
+static void read_file_chunk (AsyncData *async);
+static void write_file_chunk (AsyncData *async);
+
+static void
+async_write_cb (GOutputStream *stream,
+		GAsyncResult  *res,
+		AsyncData     *async)
+{
+	GeditDocumentSaver *saver;
+	gssize bytes_written;
+	GError *error = NULL;
+
+	gedit_debug (DEBUG_SAVER);
+
+	/* Check cancelled state manually */
+	if (g_cancellable_is_cancelled (async->cancellable))
+	{
+		cancel_output_stream (async);
+		return;
+	}
+
+	bytes_written = g_output_stream_write_finish (stream, res, &error);
+
+	gedit_debug_message (DEBUG_SAVER, "Written: %" G_GSSIZE_FORMAT, bytes_written);
+
+	if (bytes_written == -1)
+	{
+		gedit_debug_message (DEBUG_SAVER, "Write error: %s", error->message);
+		cancel_output_stream_and_fail (async, error);
+		return;
+	}
+
+	saver = async->saver;
+	async->written += bytes_written;
+
+	/* write again */
+	if (async->written != async->read)
+	{
+		write_file_chunk (async);
+		return;
+	}
+
+	/* note that this signal blocks the write... check if it isn't
+	 * a performance problem
+	 */
+	gedit_document_saver_saving (saver,
+				     FALSE,
+				     NULL);
+
+	read_file_chunk (async);
+}
+
+static void
+write_file_chunk (AsyncData *async)
+{
+	GeditDocumentSaver *saver;
+
+	gedit_debug (DEBUG_SAVER);
+
+	saver = async->saver;
+
+	g_output_stream_write_async (G_OUTPUT_STREAM (saver->priv->stream),
+				     async->buffer + async->written,
+				     async->read - async->written,
+				     G_PRIORITY_HIGH,
+				     async->cancellable,
+				     (GAsyncReadyCallback) async_write_cb,
+				     async);
+}
+
+static void
+read_file_chunk (AsyncData *async)
+{
+	GeditDocumentSaver *saver;
+	GeditDocumentInputStream *dstream;
+	GError *error = NULL;
+
+	gedit_debug (DEBUG_SAVER);
+
+	saver = async->saver;
+	async->written = 0;
+
+	/* we use sync methods on doc stream since it is in memory. Using async
+	   would be racy and we can endup with invalidated iters */
+	async->read = g_input_stream_read (saver->priv->input,
+					   async->buffer,
+					   WRITE_CHUNK_SIZE,
+					   async->cancellable,
+					   &error);
+
+	if (error != NULL)
+	{
+		cancel_output_stream_and_fail (async, error);
+		return;
+	}
+
+	/* Check if we finished reading and writing */
+	if (async->read == 0)
+	{
+		write_complete (async);
+		return;
+	}
+
+	/* Get how many chars have been read */
+	dstream = GEDIT_DOCUMENT_INPUT_STREAM (saver->priv->input);
+	saver->priv->bytes_written = gedit_document_input_stream_tell (dstream);
+
+	write_file_chunk (async);
+}
+
+static void
+async_replace_ready_callback (GFile        *source,
+			      GAsyncResult *res,
+			      AsyncData    *async)
+{
+	GeditDocumentSaver *saver;
+	GCharsetConverter *converter;
+	GFileOutputStream *file_stream;
+	GError *error = NULL;
+
+	gedit_debug (DEBUG_SAVER);
+
+	/* Check cancelled state manually */
+	if (g_cancellable_is_cancelled (async->cancellable))
+	{
+		async_data_free (async);
+		return;
+	}
+	
+	saver = async->saver;
+	file_stream = g_file_replace_finish (source, res, &error);
+	
+	/* handle any error that might occur */
+	if (!file_stream)
+	{
+		gedit_debug_message (DEBUG_SAVER, "Opening file failed: %s", error->message);
+		async_failed (async, error);
+		return;
+	}
+
+	/* FIXME: manage converter error? */
+	gedit_debug_message (DEBUG_SAVER, "Encoding charset: %s",
+			     gedit_encoding_get_charset (saver->priv->encoding));
+
+	if (saver->priv->encoding != gedit_encoding_get_utf8 ())
+	{
+		converter = g_charset_converter_new (gedit_encoding_get_charset (saver->priv->encoding),
+						     "UTF-8",
+						     NULL);
+		saver->priv->stream = g_converter_output_stream_new (G_OUTPUT_STREAM (file_stream),
+								       G_CONVERTER (converter));
+
+		g_object_unref (file_stream);
+		g_object_unref (converter);
+	}
+	else
+	{
+		saver->priv->stream = G_OUTPUT_STREAM (file_stream);
+	}
+	
+	saver->priv->input = gedit_document_input_stream_new (GTK_TEXT_BUFFER (saver->priv->document),
+								saver->priv->newline_type);
+
+	saver->priv->size = gedit_document_input_stream_get_total_size (GEDIT_DOCUMENT_INPUT_STREAM (saver->priv->input));
+
+	read_file_chunk (async);
+}
+
+static void
+begin_write (AsyncData *async)
+{
+	GeditDocumentSaver *saver;
+	gboolean backup;
+
+	gedit_debug_message (DEBUG_SAVER, "Start replacing file contents");
+
+	/* For remote files we simply use g_file_replace_async. There is no
+	 * backup as of yet
+	 */
+	saver = async->saver;
+
+	/* Do not make backups for remote files so they do not clutter remote systems */
+	backup = (saver->priv->keep_backup && gedit_document_is_local (saver->priv->document));
+
+	gedit_debug_message (DEBUG_SAVER, "File contents size: %" G_GINT64_FORMAT, saver->priv->size);
+	gedit_debug_message (DEBUG_SAVER, "Calling replace_async");
+	gedit_debug_message (DEBUG_SAVER, backup ? "Keep backup" : "Discard backup");
+
+	g_file_replace_async (saver->priv->location,
+			      NULL,
+			      backup,
+			      G_FILE_CREATE_NONE,
+			      G_PRIORITY_HIGH,
+			      async->cancellable,
+			      (GAsyncReadyCallback) async_replace_ready_callback,
+			      async);
+}
+
+static void
+mount_ready_callback (GFile        *file,
+		      GAsyncResult *res,
+		      AsyncData    *async)
+{
+	GError *error = NULL;
+	gboolean mounted;
+
+	gedit_debug (DEBUG_SAVER);
+
+	/* manual check for cancelled state */
+	if (g_cancellable_is_cancelled (async->cancellable))
+	{
+		async_data_free (async);
+		return;
+	}
+
+	mounted = g_file_mount_enclosing_volume_finish (file, res, &error);
+	
+	if (!mounted)
+	{
+		async_failed (async, error);
+	}
+	else
+	{
+		/* try again to get the modified state */
+		check_modified_async (async);
+	}
+}
+
+static void
+recover_not_mounted (AsyncData *async)
+{
+	GeditDocument *doc;
+	GMountOperation *mount_operation;
+	
+	gedit_debug (DEBUG_LOADER);
+
+	doc = gedit_document_saver_get_document (async->saver);
+	mount_operation = _gedit_document_create_mount_operation (doc);
+
+	async->tried_mount = TRUE;
+	g_file_mount_enclosing_volume (async->saver->priv->location,
+				       G_MOUNT_MOUNT_NONE,
+				       mount_operation,
+				       async->cancellable,
+				       (GAsyncReadyCallback) mount_ready_callback,
+				       async);
+
+	g_object_unref (mount_operation);
+}
+
+static void
+check_modification_callback (GFile        *source,
+			     GAsyncResult *res,
+			     AsyncData    *async)
+{
+	GeditDocumentSaver *saver;
+	GError *error = NULL;
+	GFileInfo *info;
+
+	gedit_debug (DEBUG_SAVER);
+
+	/* manually check cancelled state */
+	if (g_cancellable_is_cancelled (async->cancellable))
+	{
+		async_data_free (async);
+		return;
+	}
+	
+	saver = async->saver;
+	info = g_file_query_info_finish (source, res, &error);
+	if (info == NULL)
+	{
+		if (error->code == G_IO_ERROR_NOT_MOUNTED && !async->tried_mount)
+		{
+			recover_not_mounted (async);
+			g_error_free (error);
+			return;
+		}
+		
+		/* it's perfectly fine if the file doesn't exist yet */
+		if (error->code != G_IO_ERROR_NOT_FOUND)
+		{
+			gedit_debug_message (DEBUG_SAVER, "Error getting modification: %s", error->message);
+
+			async_failed (async, error);
+			return;
+		}
+	}
+
+	/* check if the mtime is > what we know about it (if we have it) */
+	if (info != NULL && g_file_info_has_attribute (info,
+				       G_FILE_ATTRIBUTE_TIME_MODIFIED))
+	{
+		GTimeVal mtime;
+		GTimeVal old_mtime;
+
+		g_file_info_get_modification_time (info, &mtime);
+		old_mtime = saver->priv->old_mtime;
+
+		if ((old_mtime.tv_sec > 0 || old_mtime.tv_usec > 0) &&
+		    (mtime.tv_sec != old_mtime.tv_sec || mtime.tv_usec != old_mtime.tv_usec) &&
+		    (saver->priv->flags & GEDIT_DOCUMENT_SAVE_IGNORE_MTIME) == 0)
+		{
+			gedit_debug_message (DEBUG_SAVER, "File is externally modified");
+			g_set_error (&saver->priv->error,
+				     GEDIT_DOCUMENT_ERROR,
+				     GEDIT_DOCUMENT_ERROR_EXTERNALLY_MODIFIED,
+				     "Externally modified");
+
+			remote_save_completed_or_failed (saver, async);
+			g_object_unref (info);
+
+			return;
+		}
+	}
+
+	if (info != NULL)
+		g_object_unref (info);
+
+	/* modification check passed, start write */
+	begin_write (async);
+}
+
+static void
+check_modified_async (AsyncData *async)
+{
+	gedit_debug_message (DEBUG_SAVER, "Check externally modified");
+
+	g_file_query_info_async (async->saver->priv->location, 
+				 G_FILE_ATTRIBUTE_TIME_MODIFIED,
+				 G_FILE_QUERY_INFO_NONE,
+				 G_PRIORITY_HIGH,
+				 async->cancellable,
+				 (GAsyncReadyCallback) check_modification_callback,
+				 async);
+}
+
+static gboolean
+save_remote_file_real (GeditDocumentSaver *saver)
+{
+	AsyncData *async;
+
+	gedit_debug_message (DEBUG_SAVER, "Starting  save");
+	
+	/* First find out if the file is modified externally. This requires
+	 * a stat, but I don't think we can do this any other way
+	 */
+	async = async_data_new (saver);
+	
+	check_modified_async (async);
+	
+	/* return false to stop timeout */
+	return FALSE;
+}
+
+void
+gedit_document_saver_save (GeditDocumentSaver *saver,
+			   GTimeVal           *old_mtime)
+{
+	gedit_debug (DEBUG_SAVER);
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver));
+	g_return_if_fail (saver->priv->location != NULL);
+
+	g_return_if_fail (saver->priv->used == FALSE);
+	saver->priv->used = TRUE;
+
+	/* CHECK:
+	 report async (in an idle handler) or sync (bool ret)
+	 async is extra work here, sync is special casing in the caller */
+
+	/* never keep backup of autosaves */
+	if ((saver->priv->flags & GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP) != 0)
+		saver->priv->keep_backup = FALSE;
+	else
+		saver->priv->keep_backup = gedit_prefs_manager_get_create_backup_copy ();
+
+	saver->priv->old_mtime = *old_mtime;
+
+	/* saving start */
+	gedit_document_saver_saving (saver, FALSE, NULL);
+
+	g_timeout_add_full (G_PRIORITY_HIGH,
+			    0,
+			    (GSourceFunc) save_remote_file_real,
+			    saver,
+			    NULL);
 }
 
 void
@@ -286,37 +982,12 @@ gedit_document_saver_saving (GeditDocumentSaver *saver,
 	}
 }
 
-void
-gedit_document_saver_save (GeditDocumentSaver     *saver,
-			   GTimeVal               *old_mtime)
-{
-	gedit_debug (DEBUG_SAVER);
-
-	g_return_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver));
-	g_return_if_fail (saver->location != NULL);
-
-	g_return_if_fail (saver->used == FALSE);
-	saver->used = TRUE;
-
-	/* CHECK:
-	 report async (in an idle handler) or sync (bool ret)
-	 async is extra work here, sync is special casing in the caller */
-
-	/* never keep backup of autosaves */
-	if ((saver->flags & GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP) != 0)
-		saver->keep_backup = FALSE;
-	else
-		saver->keep_backup = gedit_prefs_manager_get_create_backup_copy ();
-
-	GEDIT_DOCUMENT_SAVER_GET_CLASS (saver)->save (saver, old_mtime);
-}
-
 GeditDocument *
 gedit_document_saver_get_document (GeditDocumentSaver *saver)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), NULL);
 
-	return saver->document;
+	return saver->priv->document;
 }
 
 GFile *
@@ -324,7 +995,7 @@ gedit_document_saver_get_location (GeditDocumentSaver *saver)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), NULL);
 
-	return g_file_dup (saver->location);
+	return g_file_dup (saver->priv->location);
 }
 
 /* Returns 0 if file size is unknown */
@@ -333,7 +1004,7 @@ gedit_document_saver_get_file_size (GeditDocumentSaver *saver)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), 0);
 
-	return GEDIT_DOCUMENT_SAVER_GET_CLASS (saver)->get_file_size (saver);
+	return saver->priv->size;
 }
 
 goffset
@@ -341,7 +1012,7 @@ gedit_document_saver_get_bytes_written (GeditDocumentSaver *saver)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), 0);
 
-	return GEDIT_DOCUMENT_SAVER_GET_CLASS (saver)->get_bytes_written (saver);
+	return saver->priv->bytes_written;
 }
 
 GFileInfo *
@@ -349,6 +1020,6 @@ gedit_document_saver_get_info (GeditDocumentSaver *saver)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver), NULL);
 
-	return saver->info;
+	return saver->priv->info;
 }
 /* ex:ts=8:noet: */

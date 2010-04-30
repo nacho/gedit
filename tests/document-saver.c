@@ -20,7 +20,7 @@
  * Boston, MA  02110-1301  USA
  */
 
-#include "gedit-gio-document-loader.h"
+#include "gedit-document-loader.h"
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <glib.h>

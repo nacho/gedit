@@ -70,8 +70,6 @@ NOINST_H_FILES =			\
 	gedit-document-output-stream.h	\
 	gedit-document-saver.h		\
 	gedit-documents-panel.h		\
-	gedit-gio-document-loader.h	\
-	gedit-gio-document-saver.h	\
 	gedit-history-entry.h		\
 	gedit-io-error-message-area.h	\
 	gedit-language-manager.h	\
@@ -147,9 +145,7 @@ libgedit_la_SOURCES = 			\
 	gedit-document-input-stream.c	\
 	gedit-document-loader.c		\
 	gedit-document-output-stream.c	\
-	gedit-gio-document-loader.c	\
 	gedit-document-saver.c		\
-	gedit-gio-document-saver.c	\
 	gedit-documents-panel.c		\
 	gedit-encodings.c		\
 	gedit-encodings-combo-box.c	\

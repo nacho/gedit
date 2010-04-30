@@ -4,6 +4,7 @@
  *
  * Copyright (C) 2005 - Paolo Maggi
  * Copyrhing (C) 2007 - Paolo Maggi, Steve Frécinaux
+ * Copyright (C) 2008 - Jesse van den Kieboom
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,13 +21,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307, USA.
  */
-
+ 
 /*
- * Modified by the gedit Team, 2005. See the AUTHORS file for a
+ * Modified by the gedit Team, 2005-2007. See the AUTHORS file for a
  * list of people on the gedit Team.
  * See the ChangeLog files for a list of changes.
- *
- * $Id$
  */
 
 #ifndef __GEDIT_DOCUMENT_SAVER_H__
@@ -46,6 +45,9 @@ G_BEGIN_DECLS
 #define GEDIT_IS_DOCUMENT_SAVER_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_DOCUMENT_SAVER))
 #define GEDIT_DOCUMENT_SAVER_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GEDIT_TYPE_DOCUMENT_SAVER, GeditDocumentSaverClass))
 
+/* Private structure type */
+typedef struct _GeditDocumentSaverPrivate GeditDocumentSaverPrivate;
+
 /*
  * Main object structure
  */
@@ -56,17 +58,7 @@ struct _GeditDocumentSaver
 	GObject object;
 
 	/*< private >*/
-	GFileInfo		 *info;
-	GeditDocument		 *document;
-	gboolean		  used;
-
-	GFile			 *location;
-	const GeditEncoding      *encoding;
-	GeditDocumentNewlineType  newline_type;
-
-	GeditDocumentSaveFlags    flags;
-
-	gboolean		  keep_backup;
+	GeditDocumentSaverPrivate *priv;
 };
 
 /*
@@ -79,15 +71,9 @@ struct _GeditDocumentSaverClass
 	GObjectClass parent_class;
 
 	/* Signals */
-	void (* saving) (GeditDocumentSaver *saver,
+	void (* saving) (GeditDocumentSaver  *saver,
 			 gboolean             completed,
 			 const GError        *error);
-
-	/* VTable */
-	void			(* save)		(GeditDocumentSaver *saver,
-							 GTimeVal           *old_mtime);
-	goffset			(* get_file_size)	(GeditDocumentSaver *saver);
-	goffset			(* get_bytes_written)	(GeditDocumentSaver *saver);
 };
 
 /*
