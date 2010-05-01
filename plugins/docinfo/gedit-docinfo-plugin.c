@@ -49,7 +49,7 @@ typedef struct
 	GtkWidget *chars_label;
 	GtkWidget *chars_ns_label;
 	GtkWidget *bytes_label;
-	GtkWidget *selection_vbox;
+	GtkWidget *selection_label;
 	GtkWidget *selected_lines_label;
 	GtkWidget *selected_words_label;
 	GtkWidget *selected_chars_label;
@@ -112,7 +112,7 @@ get_docinfo_dialog (GeditWindow *window,
 					  "lines_label", &dialog->lines_label,
 					  "chars_label", &dialog->chars_label,
 					  "chars_ns_label", &dialog->chars_ns_label,
-					  "selection_vbox", &dialog->selection_vbox,
+					  "selection_label", &dialog->selection_label,
 					  "selected_words_label", &dialog->selected_words_label,
 					  "selected_bytes_label", &dialog->selected_bytes_label,
 					  "selected_lines_label", &dialog->selected_lines_label,
@@ -291,7 +291,7 @@ selectioninfo_real (GeditDocument *doc,
 	if (sel)
 	{
 		lines = gtk_text_iter_get_line (&end) - gtk_text_iter_get_line (&start) + 1;
-	
+
 		calculate_info (doc,
 				&start, &end,
 				&chars, &words, &white_chars, &bytes);
@@ -302,13 +302,23 @@ selectioninfo_real (GeditDocument *doc,
 		gedit_debug_message (DEBUG_PLUGINS, "Selected chars non-space: %d", chars - white_chars);
 		gedit_debug_message (DEBUG_PLUGINS, "Selected bytes: %d", bytes);
 
-		gtk_widget_set_sensitive (dialog->selection_vbox, TRUE);
+		gtk_widget_set_sensitive (dialog->selection_label, TRUE);
+		gtk_widget_set_sensitive (dialog->selected_words_label, TRUE);
+		gtk_widget_set_sensitive (dialog->selected_bytes_label, TRUE);
+		gtk_widget_set_sensitive (dialog->selected_lines_label, TRUE);
+		gtk_widget_set_sensitive (dialog->selected_chars_label, TRUE);
+		gtk_widget_set_sensitive (dialog->selected_chars_ns_label, TRUE);
 	}
 	else
 	{
-		gtk_widget_set_sensitive (dialog->selection_vbox, FALSE);
-
 		gedit_debug_message (DEBUG_PLUGINS, "Selection empty");
+
+		gtk_widget_set_sensitive (dialog->selection_label, FALSE);
+		gtk_widget_set_sensitive (dialog->selected_words_label, FALSE);
+		gtk_widget_set_sensitive (dialog->selected_bytes_label, FALSE);
+		gtk_widget_set_sensitive (dialog->selected_lines_label, FALSE);
+		gtk_widget_set_sensitive (dialog->selected_chars_label, FALSE);
+		gtk_widget_set_sensitive (dialog->selected_chars_ns_label, FALSE);
 	}
 
 	if (chars == 0)
