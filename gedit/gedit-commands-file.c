@@ -691,7 +691,7 @@ file_save_as (GeditTab    *tab,
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	save_dialog = gedit_file_chooser_dialog_new (_("Save As\342\200\246"),
+	save_dialog = gedit_file_chooser_dialog_new (_("Save As"),
 						     GTK_WINDOW (window),
 						     GTK_FILE_CHOOSER_ACTION_SAVE,
 						     NULL,
@@ -726,7 +726,6 @@ file_save_as (GeditTab    *tab,
 
 		g_object_unref (file);
 	}
-
 
 	if (!uri_set)
 	{
