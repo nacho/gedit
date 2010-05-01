@@ -172,7 +172,7 @@ fi
 AC_ARG_ENABLE([gvfs-metadata],
 	AS_HELP_STRING([--enable-gvfs-metadata], [Enable using gvfs to store metadata]),
 	[enable_gvfs_metadata=$enableval],
-	[enable_gvfs_metadata=$file_metadata_default])
+	[enable_gvfs_metadata=$gvfs_metadata_default])
 
 AM_CONDITIONAL(ENABLE_GVFS_METADATA, test "x$enable_gvfs_metadata" != "xno")
 
