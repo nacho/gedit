@@ -35,6 +35,8 @@
 #include <gedit/gedit-debug.h>
 #include <gedit/gedit-utils.h>
 
+#include <gedit/gseal-gtk-compat.h>
+
 #define WINDOW_DATA_KEY "GeditDocInfoWindowData"
 #define MENU_PATH "/MenuBar/ToolsMenu/ToolsOps_2"
 
@@ -49,6 +51,12 @@ typedef struct
 	GtkWidget *chars_label;
 	GtkWidget *chars_ns_label;
 	GtkWidget *bytes_label;
+	GtkWidget *document_label;
+	GtkWidget *document_lines_label;
+	GtkWidget *document_words_label;
+	GtkWidget *document_chars_label;
+	GtkWidget *document_chars_ns_label;
+	GtkWidget *document_bytes_label;
 	GtkWidget *selection_label;
 	GtkWidget *selected_lines_label;
 	GtkWidget *selected_words_label;
@@ -112,6 +120,12 @@ get_docinfo_dialog (GeditWindow *window,
 					  "lines_label", &dialog->lines_label,
 					  "chars_label", &dialog->chars_label,
 					  "chars_ns_label", &dialog->chars_ns_label,
+					  "document_label", &dialog->document_label,
+					  "document_words_label", &dialog->document_words_label,
+					  "document_bytes_label", &dialog->document_bytes_label,
+					  "document_lines_label", &dialog->document_lines_label,
+					  "document_chars_label", &dialog->document_chars_label,
+					  "document_chars_ns_label", &dialog->document_chars_ns_label,
 					  "selection_label", &dialog->selection_label,
 					  "selected_words_label", &dialog->selected_words_label,
 					  "selected_bytes_label", &dialog->selected_bytes_label,
@@ -149,6 +163,31 @@ get_docinfo_dialog (GeditWindow *window,
 			  "response",
 			  G_CALLBACK (docinfo_dialog_response_cb),
 			  window);
+
+	/* We set this explictely with code since glade does not
+	 * save the can_focus property when set to false :(
+	 * Making sure the labels are not focusable is needed to
+	 * prevent loosing the selection in the document when
+	 * creating the dialog.
+	 */
+	gtk_widget_set_can_focus (dialog->file_name_label, FALSE);
+	gtk_widget_set_can_focus (dialog->words_label, FALSE);
+	gtk_widget_set_can_focus (dialog->bytes_label, FALSE);
+	gtk_widget_set_can_focus (dialog->lines_label, FALSE);
+	gtk_widget_set_can_focus (dialog->chars_label, FALSE);
+	gtk_widget_set_can_focus (dialog->chars_ns_label, FALSE);
+	gtk_widget_set_can_focus (dialog->document_label, FALSE);
+	gtk_widget_set_can_focus (dialog->document_words_label, FALSE);
+	gtk_widget_set_can_focus (dialog->document_bytes_label, FALSE);
+	gtk_widget_set_can_focus (dialog->document_lines_label, FALSE);
+	gtk_widget_set_can_focus (dialog->document_chars_label, FALSE);
+	gtk_widget_set_can_focus (dialog->document_chars_ns_label, FALSE);
+	gtk_widget_set_can_focus (dialog->selection_label, FALSE);
+	gtk_widget_set_can_focus (dialog->selected_words_label, FALSE);
+	gtk_widget_set_can_focus (dialog->selected_bytes_label, FALSE);
+	gtk_widget_set_can_focus (dialog->selected_lines_label, FALSE);
+	gtk_widget_set_can_focus (dialog->selected_chars_label, FALSE);
+	gtk_widget_set_can_focus (dialog->selected_chars_ns_label, FALSE);
 
 	return dialog;
 }
@@ -249,23 +288,23 @@ docinfo_real (GeditDocument *doc,
 	g_free (tmp_str);
 
 	tmp_str = g_strdup_printf("%d", lines);
-	gtk_label_set_text (GTK_LABEL (dialog->lines_label), tmp_str);
+	gtk_label_set_text (GTK_LABEL (dialog->document_lines_label), tmp_str);
 	g_free (tmp_str);
 
 	tmp_str = g_strdup_printf("%d", words);
-	gtk_label_set_text (GTK_LABEL (dialog->words_label), tmp_str);
+	gtk_label_set_text (GTK_LABEL (dialog->document_words_label), tmp_str);
 	g_free (tmp_str);
 
 	tmp_str = g_strdup_printf("%d", chars);
-	gtk_label_set_text (GTK_LABEL (dialog->chars_label), tmp_str);
+	gtk_label_set_text (GTK_LABEL (dialog->document_chars_label), tmp_str);
 	g_free (tmp_str);
 
 	tmp_str = g_strdup_printf("%d", chars - white_chars);
-	gtk_label_set_text (GTK_LABEL (dialog->chars_ns_label), tmp_str);
+	gtk_label_set_text (GTK_LABEL (dialog->document_chars_ns_label), tmp_str);
 	g_free (tmp_str);
 
 	tmp_str = g_strdup_printf("%d", bytes);
-	gtk_label_set_text (GTK_LABEL (dialog->bytes_label), tmp_str);
+	gtk_label_set_text (GTK_LABEL (dialog->document_bytes_label), tmp_str);
 	g_free (tmp_str);
 }
 
