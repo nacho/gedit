@@ -274,6 +274,12 @@
   )
 )
 
+(define-method get_newline_type
+  (of-object "GeditDocument")
+  (c-name "gedit_document_get_newline_type")
+  (return-type "GeditDocumentNewlineType")
+)
+
 (define-method get_uri_for_display
   (of-object "GeditDocument")
   (c-name "gedit_document_get_uri_for_display")
