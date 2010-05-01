@@ -93,14 +93,16 @@ GType 		 gedit_panel_get_type 			(void) G_GNUC_CONST;
 
 GtkWidget 	*gedit_panel_new 			(GtkOrientation	 orientation);
 
-void		 gedit_panel_add_item			(GeditPanel     *panel,
-						      	 GtkWidget      *item,
-						      	 const gchar    *name,
+gboolean	 gedit_panel_add_item			(GeditPanel     *panel,
+							 GtkWidget      *item,
+							 const gchar    *id,
+							 const gchar    *display_name,
 							 GtkWidget      *image);
 
-void		 gedit_panel_add_item_with_stock_icon	(GeditPanel     *panel,
+gboolean	 gedit_panel_add_item_with_stock_icon	(GeditPanel     *panel,
 							 GtkWidget      *item,
-						      	 const gchar    *name,
+							 const gchar    *id,
+						      	 const gchar    *display_name,
 						      	 const gchar    *stock_id);
 
 gboolean	 gedit_panel_remove_item	(GeditPanel     *panel,

@@ -47,7 +47,8 @@ class PythonConsolePlugin(gedit.Plugin):
         bottom = window.get_bottom_panel()
         image = gtk.Image()
         image.set_from_icon_name(PYTHON_ICON, gtk.ICON_SIZE_MENU)
-        bottom.add_item(console, _('Python Console'), image)
+        bottom.add_item(console, "GeditPythonConsolePanel",
+                        _('Python Console'), image)
         window.set_data('PythonConsolePluginInfo', console)
 
     def deactivate(self, window):

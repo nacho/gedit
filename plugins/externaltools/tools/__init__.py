@@ -209,6 +209,7 @@ class ExternalToolsWindowHelper(object):
         self._output_buffer = OutputPanel(self._plugin.get_data_dir(), window)
         bottom = window.get_bottom_panel()
         bottom.add_item(self._output_buffer.panel,
+                        "GeditExternalToolsShellOutput",
                         _("Shell Output"),
                         gtk.STOCK_EXECUTE)
 

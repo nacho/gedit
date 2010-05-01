@@ -60,7 +60,8 @@ typedef struct _GeditPanelItem GeditPanelItem;
 
 struct _GeditPanelItem 
 {
-	gchar *name;
+	gchar *id;
+	gchar *display_name;
 	GtkWidget *icon;
 };
 
@@ -346,7 +347,7 @@ sync_title (GeditPanel     *panel,
 	if (item != NULL)
 	{
 		gtk_label_set_text (GTK_LABEL (panel->priv->title_label), 
-				    item->name);
+				    item->display_name);
 
 		set_gtk_image_from_gtk_image (GTK_IMAGE (panel->priv->title_image),
 					      GTK_IMAGE (item->icon));
@@ -642,19 +643,51 @@ build_tab_label (GeditPanel  *panel,
 	return hbox;
 }
 
+static gboolean
+item_exists (GeditPanel  *panel,
+	     const gchar *id)
+{
+	GeditPanelItem *data;
+	GList *items, *l;
+	gboolean exists = FALSE;
+
+	items = gtk_container_get_children (GTK_CONTAINER (panel->priv->notebook));
+
+	for (l = items; l != NULL; l = g_list_next (l))
+	{
+		data = (GeditPanelItem *)g_object_get_data (G_OBJECT (l->data),
+						            PANEL_ITEM_KEY);
+		g_return_val_if_fail (data != NULL, FALSE);
+
+		if (strcmp (data->id, id) == 0)
+		{
+			exists = TRUE;
+			break;
+		}
+	}
+
+	g_list_free (items);
+
+	return exists;
+}
+
 /**
  * gedit_panel_add_item:
  * @panel: a #GeditPanel
  * @item: the #GtkWidget to add to the @panel
- * @name: the name to be shown in the @panel
+ * @id: unique name for the new item
+ * @display_name: the name to be shown in the @panel
  * @image: the image to be shown in the @panel
  *
  * Adds a new item to the @panel.
+ *
+ * Returns: %TRUE is the item was successfully added.
  */
-void
-gedit_panel_add_item (GeditPanel  *panel, 
-		      GtkWidget   *item, 
-		      const gchar *name,
+gboolean
+gedit_panel_add_item (GeditPanel  *panel,
+		      GtkWidget   *item,
+		      const gchar *id,
+		      const gchar *display_name,
 		      GtkWidget   *image)
 {
 	GeditPanelItem *data;
@@ -662,14 +695,21 @@ gedit_panel_add_item (GeditPanel  *panel,
 	GtkWidget *menu_label;
 	gint w, h;
 	
-	g_return_if_fail (GEDIT_IS_PANEL (panel));
-	g_return_if_fail (GTK_IS_WIDGET (item));
-	g_return_if_fail (name != NULL);
-	g_return_if_fail (image == NULL || GTK_IS_IMAGE (image));
+	g_return_val_if_fail (GEDIT_IS_PANEL (panel), FALSE);
+	g_return_val_if_fail (GTK_IS_WIDGET (item), FALSE);
+	g_return_val_if_fail (id != NULL, FALSE);
+	g_return_val_if_fail (display_name != NULL, FALSE);
+	g_return_val_if_fail (image == NULL || GTK_IS_IMAGE (image), FALSE);
 
-	data = g_new (GeditPanelItem, 1);
+	if (item_exists (panel, id))
+	{
+		g_critical ("You are trying to add an item with an id that already exists");
+		return FALSE;
+	}
 
-	data->name = g_strdup (name);
+	data = g_slice_new (GeditPanelItem);
+	data->id = g_strdup (id);
+	data->display_name = g_strdup (display_name);
 
 	if (image == NULL)
 	{
@@ -689,9 +729,9 @@ gedit_panel_add_item (GeditPanel  *panel,
 		           PANEL_ITEM_KEY,
 		           data);
 
-	tab_label = build_tab_label (panel, item, data->name, data->icon);
+	tab_label = build_tab_label (panel, item, data->display_name, data->icon);
 
-	menu_label = gtk_label_new (name);
+	menu_label = gtk_label_new (display_name);
 	gtk_misc_set_alignment (GTK_MISC (menu_label), 0.0, 0.5);
 
 	if (!gtk_widget_get_visible (item))
@@ -703,21 +743,27 @@ gedit_panel_add_item (GeditPanel  *panel,
 				       menu_label);
 
 	g_signal_emit (G_OBJECT (panel), signals[ITEM_ADDED], 0, item);
+
+	return TRUE;
 }
 
 /**
  * gedit_panel_add_item_with_stock_icon:
  * @panel: a #GeditPanel
  * @item: the #GtkWidget to add to the @panel
- * @name: the name to be shown in the @panel
+ * @id: unique name for the new item
+ * @display_name: the name to be shown in the @panel
  * @stock_id: a stock id
  *
  * Same as gedit_panel_add_item() but using an image from stock.
+ *
+ * Returns: %TRUE is the item was successfully added.
  */
-void
-gedit_panel_add_item_with_stock_icon (GeditPanel  *panel, 
-				      GtkWidget   *item, 
-				      const gchar *name,
+gboolean
+gedit_panel_add_item_with_stock_icon (GeditPanel  *panel,
+				      GtkWidget   *item,
+				      const gchar *id,
+				      const gchar *display_name,
 				      const gchar *stock_id)
 {
 	GtkWidget *icon = NULL;
@@ -728,7 +774,7 @@ gedit_panel_add_item_with_stock_icon (GeditPanel  *panel,
 						 GTK_ICON_SIZE_MENU);
 	}
 
-	gedit_panel_add_item (panel, item, name, icon);
+	return gedit_panel_add_item (panel, item, id, display_name, icon);
 }
 
 /**
@@ -753,16 +799,17 @@ gedit_panel_remove_item (GeditPanel *panel,
 
 	page_num = gtk_notebook_page_num (GTK_NOTEBOOK (panel->priv->notebook),
 					  item);
-					  
+
 	if (page_num == -1)
 		return FALSE;
 		
 	data = (GeditPanelItem *)g_object_get_data (G_OBJECT (item),
 					            PANEL_ITEM_KEY);
 	g_return_val_if_fail (data != NULL, FALSE);
-	
-	g_free (data->name);
-	g_free (data);
+
+	g_free (data->id);
+	g_free (data->display_name);
+	g_slice_free (GeditPanelItem, data);
 
 	g_object_set_data (G_OBJECT (item),
 		           PANEL_ITEM_KEY,
@@ -896,18 +943,11 @@ _gedit_panel_get_active_item_id (GeditPanel *panel)
 				GTK_NOTEBOOK (panel->priv->notebook),
 				cur_page);
 
-	/* FIXME: for now we use as the hash of the name as id.
-	 * However the name is not guaranteed to be unique and
-	 * it is a translated string, so it's subotimal, but should
-	 * be good enough for now since we don't want to add an
-	 * ad hoc id argument.
-	 */
-
 	data = (GeditPanelItem *)g_object_get_data (G_OBJECT (item),
 					            PANEL_ITEM_KEY);
 	g_return_val_if_fail (data != NULL, 0);
 
-	return g_str_hash (data->name);
+	return g_str_hash (data->id);
 }
 
 void
@@ -936,7 +976,7 @@ _gedit_panel_set_active_item_by_id (GeditPanel *panel,
 						            PANEL_ITEM_KEY);
 		g_return_if_fail (data != NULL);
 
-		if (g_str_hash (data->name) == id)
+		if (g_str_hash (data->id) == id)
 		{
 			gtk_notebook_set_current_page (
 				GTK_NOTEBOOK (panel->priv->notebook), i);

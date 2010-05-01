@@ -747,6 +747,7 @@ impl_activate (GeditPlugin *plugin,
 	gtk_widget_show(image);
 	gedit_panel_add_item (panel,
 	                      GTK_WIDGET (data->tree_widget),
+	                      "GeditFileBrowserPanel",
 	                      _("File Browser"),
 	                      image);
 	gtk_widget_show (GTK_WIDGET (data->tree_widget));

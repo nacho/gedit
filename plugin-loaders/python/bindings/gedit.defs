@@ -596,10 +596,11 @@
 (define-method add_item
   (of-object "GeditPanel")
   (c-name "gedit_panel_add_item")
-  (return-type "none")
+  (return-type "gboolean")
   (parameters
     '("GtkWidget*" "item")
-    '("const-gchar*" "name")
+    '("const-gchar*" "id")
+    '("const-gchar*" "display_name")
     '("GtkWidget*" "image")
   )
 )
@@ -607,10 +608,11 @@
 (define-method add_item_with_stock_icon
   (of-object "GeditPanel")
   (c-name "gedit_panel_add_item_with_stock_icon")
-  (return-type "none")
+  (return-type "gboolean")
   (parameters
     '("GtkWidget*" "item")
-    '("const-gchar*" "name")
+    '("const-gchar*" "id")
+    '("const-gchar*" "display_name")
     '("const-gchar*" "stock_id")
   )
 )

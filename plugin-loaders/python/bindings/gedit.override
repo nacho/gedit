@@ -276,29 +276,29 @@ override gedit_panel_add_item kwargs
 static PyObject *
 _wrap_gedit_panel_add_item(PyGObject *self, PyObject *args, PyObject *kwargs)
 {
-    static char *kwlist1[] = { "item", "name", "image", NULL };
-    static char *kwlist2[] = { "item", "name", "stock_id", NULL };
+    static char *kwlist1[] = { "item", "id", "display_name", "image", NULL };
+    static char *kwlist2[] = { "item", "id", "display_name", "stock_id", NULL };
     PyGObject *item, *image;
-    char *name = NULL;
+    char *id = NULL;
+    char *display_name = NULL;
     char *stock_id = NULL;
+    int ret = 0;
 
-    if (PyArg_ParseTupleAndKeywords(args, kwargs, "O!sO!:GeditPanel.add_item", kwlist1, &PyGtkWidget_Type, &item, &name, &PyGtkImage_Type, &image)) {
-        gedit_panel_add_item(GEDIT_PANEL(self->obj), GTK_WIDGET(item->obj), name, GTK_WIDGET(image->obj));
-        Py_INCREF(Py_None);
-        return Py_None;
+    if (PyArg_ParseTupleAndKeywords(args, kwargs, "O!ssO!:GeditPanel.add_item", kwlist1, &PyGtkWidget_Type, &item, &id, &display_name, &PyGtkImage_Type, &image)) {
+        ret = gedit_panel_add_item(GEDIT_PANEL(self->obj), GTK_WIDGET(item->obj), id, display_name, GTK_WIDGET(image->obj));
+        return PyBool_FromLong(ret);
     }
 
     PyErr_Clear();
 
-    if (PyArg_ParseTupleAndKeywords(args, kwargs, "O!ss:GeditPanel.add_item", kwlist2, &PyGtkWidget_Type, &item, &name, &stock_id)) {
-        gedit_panel_add_item_with_stock_icon(GEDIT_PANEL(self->obj), GTK_WIDGET(item->obj), name, stock_id);
-        Py_INCREF(Py_None);
-        return Py_None;
+    if (PyArg_ParseTupleAndKeywords(args, kwargs, "O!sss:GeditPanel.add_item", kwlist2, &PyGtkWidget_Type, &item, &id, &display_name, &stock_id)) {
+        ret = gedit_panel_add_item_with_stock_icon(GEDIT_PANEL(self->obj), GTK_WIDGET(item->obj), id, display_name, stock_id);
+        return PyBool_FromLong(ret);
     }
 
     PyErr_Clear();
     PyErr_SetString(PyExc_TypeError, "the last arg should be either a gtk.Image or a stock_id string");
-    return NULL;
+    return PyBool_FromLong(ret);
 }
 %%
 override gedit_app_get_default_deprecated
