@@ -497,7 +497,6 @@ async_read_cb (GInputStream *stream,
 	       GAsyncResult *res,
 	       AsyncData    *async)
 {
-	gedit_debug (DEBUG_LOADER);
 	GeditDocumentLoader *loader;
 	GError *error = NULL;
 
@@ -570,7 +569,7 @@ static void
 read_file_chunk (AsyncData *async)
 {
 	GeditDocumentLoader *loader;
-	
+
 	loader = async->loader;
 
 	g_input_stream_read_async (G_INPUT_STREAM (loader->priv->stream),
