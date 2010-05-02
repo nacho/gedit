@@ -155,9 +155,6 @@ GeditWindowState gedit_window_get_state 		(GeditWindow         *window);
 GeditTab        *gedit_window_get_tab_from_location	(GeditWindow         *window,
 							 GFile               *location);
 
-GeditTab        *gedit_window_get_tab_from_uri		(GeditWindow         *window,
-							 const gchar         *uri);
-
 /* Message bus */
 GeditMessageBus	*gedit_window_get_message_bus		(GeditWindow         *window);
 
