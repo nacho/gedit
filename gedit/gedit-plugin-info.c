@@ -42,6 +42,8 @@
 #include "gedit-debug.h"
 #include "gedit-plugin.h"
 
+#define GEDIT_PLUGIN_IAGE 3
+
 void
 _gedit_plugin_info_ref (GeditPluginInfo *info)
 {
@@ -145,11 +147,11 @@ _gedit_plugin_info_new (const gchar *file)
 		goto error;
 	}
 	
-	/* Check IAge=2 */
+	/* Check IAge=GEDIT_PLUGIN_IAGE */
 	if (g_key_file_get_integer (plugin_file,
 				    "Gedit Plugin",
 				    "IAge",
-				    NULL) != 2)
+				    NULL) != GEDIT_PLUGIN_IAGE)
 	{
 		gedit_debug_message (DEBUG_PLUGINS,
 				     "Wrong IAge in file: %s", file);
