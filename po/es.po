@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
-"POT-Creation-Date: 2010-04-29 15:39+0000\n"
-"PO-Revision-Date: 2010-04-29 19:57+0200\n"
+"POT-Creation-Date: 2010-05-01 18:41+0000\n"
+"PO-Revision-Date: 2010-05-02 10:54+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -701,6 +701,7 @@ msgstr "_Descripción"
 msgid "_Encoding"
 msgstr "_Codificación"
 
+#. ex:ts=8:noet:
 #: ../gedit/dialogs/gedit-encodings-dialog.ui.h:1
 msgid "A_vailable encodings:"
 msgstr "Codificaciones dispo_nibles:"
@@ -753,6 +754,7 @@ msgstr "No se pudo quitar el estilo «%s»."
 msgid "gedit Preferences"
 msgstr "Preferencias de gedit"
 
+#. ex:ts=8:noet:
 #. ex:ts=4:et:
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:1
 #: ../plugins/docinfo/docinfo.ui.h:1
@@ -787,6 +789,7 @@ msgstr "Línea actual"
 msgid "Display right _margin"
 msgstr "Mostrar margen _derecho"
 
+#. ex:ts=8:noet:
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:8
 #: ../gedit/gedit-print-preferences.ui.h:1
 msgid "Do not _split words over two lines"
@@ -906,10 +909,11 @@ msgid "Replace _All"
 msgstr "Reemplazar _todo"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:416
-#: ../gedit/gedit-commands-file.c:526
+#: ../gedit/gedit-commands-file.c:529
 msgid "_Replace"
 msgstr "_Reemplazar"
 
+#. ex:ts=8:noet:
 #: ../gedit/dialogs/gedit-search-dialog.ui.h:1
 msgid "Match _entire word only"
 msgstr "Coincidir sólo con la palabra compl_eta"
@@ -997,12 +1001,12 @@ msgstr ""
 "Ejecute «%s --help» para ver una lista completa de las opciones disponibles "
 "de los comandos en línea.\n"
 
-#: ../gedit/gedit-commands-file.c:243
+#: ../gedit/gedit-commands-file.c:246
 #, c-format
 msgid "Loading file '%s'…"
 msgstr "Cargando archivo «%s»…"
 
-#: ../gedit/gedit-commands-file.c:252
+#: ../gedit/gedit-commands-file.c:255
 #, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
@@ -1010,39 +1014,40 @@ msgstr[0] "Cargando %d archivo…"
 msgstr[1] "Cargando %d archivos…"
 
 #. Translators: "Open Files" is the title of the file chooser window
-#: ../gedit/gedit-commands-file.c:402
+#: ../gedit/gedit-commands-file.c:405
 msgid "Open Files"
 msgstr "Abrir archivos"
 
-#: ../gedit/gedit-commands-file.c:513
+#: ../gedit/gedit-commands-file.c:516
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "El archivo «%s» es de sólo lectura."
 
-#: ../gedit/gedit-commands-file.c:518
+#: ../gedit/gedit-commands-file.c:521
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "¿Desea intentar reemplazarlo por el que está guardando ahora?"
 
-#: ../gedit/gedit-commands-file.c:586 ../gedit/gedit-commands-file.c:806
+#: ../gedit/gedit-commands-file.c:589 ../gedit/gedit-commands-file.c:808
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Guardando el archivo «%s»…"
 
-#: ../gedit/gedit-commands-file.c:691
-msgid "Save As…"
-msgstr "Guardar como…"
+#: ../gedit/gedit-commands-file.c:694
+#| msgid "Save As…"
+msgid "Save As"
+msgstr "Guardar como"
 
-#: ../gedit/gedit-commands-file.c:1020
+#: ../gedit/gedit-commands-file.c:1022
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Revirtiendo el documento «%s»…"
 
-#: ../gedit/gedit-commands-file.c:1065
+#: ../gedit/gedit-commands-file.c:1067
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "¿Revertir los cambios no guardados en el documento «%s»?"
 
-#: ../gedit/gedit-commands-file.c:1074
+#: ../gedit/gedit-commands-file.c:1076
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1056,14 +1061,14 @@ msgstr[1] ""
 "Los cambios realizados al documento en los últimos %ld segundos se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1083
+#: ../gedit/gedit-commands-file.c:1085
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Los cambios realizados al documento en el último minuto se perderán para "
 "siempre."
 
-#: ../gedit/gedit-commands-file.c:1089
+#: ../gedit/gedit-commands-file.c:1091
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1078,7 +1083,7 @@ msgstr[1] ""
 "Los cambios realizados al documento en el último minuto y %ld se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1099
+#: ../gedit/gedit-commands-file.c:1101
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1092,13 +1097,13 @@ msgstr[1] ""
 "Los cambios realizados al documento en los últimos %ld minutos se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1114
+#: ../gedit/gedit-commands-file.c:1116
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Los cambios realizados al documento en la última hora se perderán para "
 "siempre."
 
-#: ../gedit/gedit-commands-file.c:1120
+#: ../gedit/gedit-commands-file.c:1122
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1113,7 +1118,7 @@ msgstr[1] ""
 "Los cambios realizados al documento en la última hora y %d minutos se "
 "perderán para siempre."
 
-#: ../gedit/gedit-commands-file.c:1135
+#: ../gedit/gedit-commands-file.c:1137
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1126,7 +1131,7 @@ msgstr[1] ""
 "Los cambios realizados en el documento en las últimas %d horas se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1161
+#: ../gedit/gedit-commands-file.c:1163
 msgid "_Revert"
 msgstr "Re_vertir"
 
@@ -1171,7 +1176,7 @@ msgstr "Documento no guardado %d"
 msgid "Read-Only"
 msgstr "Sólo lectura"
 
-#: ../gedit/gedit-documents-panel.c:784 ../gedit/gedit-window.c:3693
+#: ../gedit/gedit-documents-panel.c:792 ../gedit/gedit-window.c:3693
 msgid "Documents"
 msgstr "Documentos"
 
@@ -2368,6 +2373,7 @@ msgstr "Ancho de la tabulación"
 msgid "About gedit"
 msgstr "Acerca de gedit"
 
+#. ex:ts=8:noet:
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
 msgid "Change Case"
 msgstr "Cambiar capitalización"
@@ -2412,6 +2418,7 @@ msgstr "Capitalización de _titular"
 msgid "Capitalize the first letter of each selected word"
 msgstr "Poner en mayúscula la primera letra de cada palabra seleccionada"
 
+#. ex:ts=8:noet:
 #: ../plugins/checkupdate/checkupdate.gedit-plugin.desktop.in.h:1
 msgid "Check for latest version of gedit"
 msgstr "Comprobar la última versión de gedit"
@@ -2446,6 +2453,7 @@ msgstr ""
 "Puede descargar la nueva versión de gedit pulsando el botón de descarga o "
 "ignorar la versión y esperar a que salga una nueva"
 
+#. ex:ts=8:noet:
 #: ../plugins/checkupdate/gedit-check-update.schemas.in.h:1
 msgid "Version to ignore until the next version is released"
 msgstr "Versión que ignorar hasta que la próxima versión se publique"
@@ -2499,14 +2507,15 @@ msgstr "Palabras"
 msgid "_Update"
 msgstr "_Actualizar"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:422
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:471
 msgid "_Document Statistics"
 msgstr "Estadísticas del _documento"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:424
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:473
 msgid "Get statistical information on the current document"
 msgstr "Obtener información estadística del documento actual"
 
+#. ex:ts=8:noet:
 #: ../plugins/externaltools/data/open-terminal-here-osx.desktop.in.h:1
 #: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:1
 msgid "Open a terminal in the document location"
@@ -2736,6 +2745,7 @@ msgstr "Panel del examinador de archivos"
 msgid "File System"
 msgstr "Sistema de archivos"
 
+#. ex:ts=8:noet:
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:1
 msgid "Enable Restore of Remote Locations"
 msgstr "Activar la restauración de lugares remotos"
@@ -2914,9 +2924,6 @@ msgid "(Empty)"
 msgstr "(Vacío)"
 
 #: ../plugins/filebrowser/gedit-file-browser-store.c:3411
-#| msgid ""
-#| "The renamed file is currently filtered out. You need to adjust your "
-#| "filter settings to make the file visible"
 msgid ""
 "The renamed file is currently filtered out.You need to adjust your filter "
 "settings to make the file visible"
@@ -3102,6 +3109,7 @@ msgstr "No se pudo abrir el soporte: %s"
 msgid "Could not mount volume: %s"
 msgstr "No se pudo abrir el volumen: %s"
 
+#. ex:ts=8:noet:
 #: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:1
 msgid "Emacs, Kate and Vim-style modelines support for gedit."
 msgstr "Soporte para los modos de línea Emacs, Kate y Vim para gedit."
@@ -3174,7 +3182,7 @@ msgid "Export selected snippets"
 msgstr "Exportar el recorte seleccionado"
 
 #: ../plugins/snippets/snippets/snippets.ui.h:6
-#: ../plugins/snippets/snippets/Manager.py:800
+#: ../plugins/snippets/snippets/Manager.py:801
 msgid "Import snippets"
 msgstr "Importar recortes"
 
@@ -3241,75 +3249,75 @@ msgstr ""
 "Este no es un disparador válido. Los disparadores pueden contener letras o "
 "un solo carácter no alfanumérico como {,[, etcétera."
 
-#: ../plugins/snippets/snippets/Manager.py:779
+#: ../plugins/snippets/snippets/Manager.py:780
 #, python-format
 msgid "The following error occurred while importing: %s"
 msgstr "Ocurrió el siguiente error al importar: %s"
 
-#: ../plugins/snippets/snippets/Manager.py:786
+#: ../plugins/snippets/snippets/Manager.py:787
 msgid "Import successfully completed"
 msgstr "Importación completada satisfactoriamente"
-
-#: ../plugins/snippets/snippets/Manager.py:805
-#: ../plugins/snippets/snippets/Manager.py:891
-#: ../plugins/snippets/snippets/Manager.py:954
-msgid "All supported archives"
-msgstr "Todos los archivos soportados"
 
 #: ../plugins/snippets/snippets/Manager.py:806
 #: ../plugins/snippets/snippets/Manager.py:892
 #: ../plugins/snippets/snippets/Manager.py:955
-msgid "Gzip compressed archive"
-msgstr "Archivo comprimido con Gzip"
+msgid "All supported archives"
+msgstr "Todos los archivos soportados"
 
 #: ../plugins/snippets/snippets/Manager.py:807
 #: ../plugins/snippets/snippets/Manager.py:893
 #: ../plugins/snippets/snippets/Manager.py:956
+msgid "Gzip compressed archive"
+msgstr "Archivo comprimido con Gzip"
+
+#: ../plugins/snippets/snippets/Manager.py:808
+#: ../plugins/snippets/snippets/Manager.py:894
+#: ../plugins/snippets/snippets/Manager.py:957
 msgid "Bzip2 compressed archive"
 msgstr "Archivador comprimido con Bzip"
 
-#: ../plugins/snippets/snippets/Manager.py:808
+#: ../plugins/snippets/snippets/Manager.py:809
 msgid "Single snippets file"
 msgstr "Archivo individual de recortes"
 
-#: ../plugins/snippets/snippets/Manager.py:809
-#: ../plugins/snippets/snippets/Manager.py:895
-#: ../plugins/snippets/snippets/Manager.py:958
+#: ../plugins/snippets/snippets/Manager.py:810
+#: ../plugins/snippets/snippets/Manager.py:896
+#: ../plugins/snippets/snippets/Manager.py:959
 msgid "All files"
 msgstr "Todos los archivos"
 
-#: ../plugins/snippets/snippets/Manager.py:821
+#: ../plugins/snippets/snippets/Manager.py:822
 #, python-format
 msgid "The following error occurred while exporting: %s"
 msgstr "Ocurrió el siguiente error al exportar: %s"
 
-#: ../plugins/snippets/snippets/Manager.py:825
+#: ../plugins/snippets/snippets/Manager.py:826
 msgid "Export successfully completed"
 msgstr "Exportación completada satisfactoriamente"
 
 #. Ask if system snippets should also be exported
-#: ../plugins/snippets/snippets/Manager.py:865
-#: ../plugins/snippets/snippets/Manager.py:932
+#: ../plugins/snippets/snippets/Manager.py:866
+#: ../plugins/snippets/snippets/Manager.py:933
 msgid "Do you want to include selected <b>system</b> snippets in your export?"
 msgstr ""
 "¿Quiere incluir los recortes del <b>sistema</b> seleccionados en su "
 "exportación?"
 
-#: ../plugins/snippets/snippets/Manager.py:880
-#: ../plugins/snippets/snippets/Manager.py:950
+#: ../plugins/snippets/snippets/Manager.py:881
+#: ../plugins/snippets/snippets/Manager.py:951
 msgid "There are no snippets selected to be exported"
 msgstr "No hay recortes seleccionados para exportar"
 
-#: ../plugins/snippets/snippets/Manager.py:885
-#: ../plugins/snippets/snippets/Manager.py:923
+#: ../plugins/snippets/snippets/Manager.py:886
+#: ../plugins/snippets/snippets/Manager.py:924
 msgid "Export snippets"
 msgstr "Exportar recortes"
 
-#: ../plugins/snippets/snippets/Manager.py:1062
+#: ../plugins/snippets/snippets/Manager.py:1063
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "Teclee un acelerador nuevo o pulse Retroceso para limpiar"
 
-#: ../plugins/snippets/snippets/Manager.py:1064
+#: ../plugins/snippets/snippets/Manager.py:1065
 msgid "Type a new shortcut"
 msgstr "Teclee un acelerador nuevo"
 
@@ -3382,6 +3390,7 @@ msgstr "O_rdenar…"
 msgid "Sort the current document or selection"
 msgstr "Ordena el documento actual o la selección"
 
+#. ex:ts=8:noet:
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:1
 #: ../plugins/sort/sort.ui.h:3
 msgid "Sort"
@@ -3528,6 +3537,7 @@ msgstr "El documento está vacío."
 msgid "No misspelled words"
 msgstr "Sin palabras mal escritas"
 
+#. ex:ts=8:noet:
 #: ../plugins/spell/languages-dialog.ui.h:1
 msgid "Select the _language of the current document."
 msgstr "Seleccione el _idioma del documento actual."
@@ -3614,6 +3624,7 @@ msgstr "Vista _previa"
 msgid "Available Tag Lists"
 msgstr "Listas de etiquetas disponibles"
 
+#. ex:ts=8:noet:
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
 msgstr "Formulario abreviado"
@@ -5174,6 +5185,7 @@ msgstr "Formatos disponibles"
 msgid "Configure insert date/time plugin..."
 msgstr "Configurar el complemento de inserción de fecha/hora…"
 
+#. ex:ts=8:noet:
 #: ../plugins/time/time.gedit-plugin.desktop.in.h:1
 msgid "Insert Date/Time"
 msgstr "Insertar fecha/hora"
