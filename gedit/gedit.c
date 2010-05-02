@@ -93,7 +93,6 @@ static BaconMessageConnection *connection;
 /* command line */
 static gint line_position = 0;
 static gint column_position = 0;
-static gchar *line_column_position = NULL;
 static gchar *encoding_charset = NULL;
 static gboolean new_window_option = FALSE;
 static gboolean new_document_option = FALSE;
@@ -141,11 +140,8 @@ static const GOptionEntry options [] =
 	{ "new-document", '\0', 0, G_OPTION_ARG_NONE, &new_document_option,
 	  N_("Create a new document in an existing instance of gedit"), NULL },
 
-	{ "+LINE[:COLUMN]", '\0', 0, G_OPTION_ARG_NONE, &line_column_position,
-	  N_("Move cursor to LINE, COLUMN"), NULL },
-
 	{ G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &remaining_args,
-	  NULL, N_("[FILE...]") }, /* collects file arguments */
+	  NULL, N_("[FILE...] [+LINE[:COLUMN]]") }, /* collects file arguments */
 
 	{NULL}
 };
