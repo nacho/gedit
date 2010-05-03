@@ -34,7 +34,7 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gedit/gedit-utils.h>
-#include <gedit/gedit-help.h>
+#include <gedit/gedit-app.h>
 #include "gedit-spell-language-dialog.h"
 #include "gedit-spell-checker-language.h"
 
@@ -70,9 +70,10 @@ dialog_response_handler (GtkDialog *dlg,
 {
 	if (res_id == GTK_RESPONSE_HELP)
 	{
-		gedit_help_display (GTK_WINDOW (dlg),
-				    NULL,
-				    "gedit-spell-checker-plugin");
+		gedit_app_show_help (gedit_app_get_default (),
+				     GTK_WINDOW (dlg),
+				     NULL,
+				     "gedit-spell-checker-plugin");
 
 		g_signal_stop_emission_by_name (dlg, "response");
 	}

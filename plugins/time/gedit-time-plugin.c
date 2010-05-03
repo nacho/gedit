@@ -36,7 +36,7 @@
 #include <gconf/gconf-client.h>
 
 #include "gedit-time-plugin.h"
-#include <gedit/gedit-help.h>
+#include <gedit/gedit-app.h>
 
 #include <glib/gi18n-lib.h>
 #include <glib.h>
@@ -1069,9 +1069,10 @@ choose_format_dialog_response_cb (GtkWidget          *widget,
 		case GTK_RESPONSE_HELP:
 		{
 			gedit_debug_message (DEBUG_PLUGINS, "GTK_RESPONSE_HELP");
-			gedit_help_display (GTK_WINDOW (widget),
-					    NULL,
-					    "gedit-insert-date-time-plugin");
+			gedit_app_show_help (gedit_app_get_default (),
+					     GTK_WINDOW (widget),
+					     NULL,
+					     "gedit-insert-date-time-plugin");
 			break;
 		}
 		case GTK_RESPONSE_OK:
@@ -1215,9 +1216,10 @@ configure_dialog_response_cb (GtkWidget           *widget,
 		{
 			gedit_debug_message (DEBUG_PLUGINS, "GTK_RESPONSE_HELP");
 
-			gedit_help_display (GTK_WINDOW (dialog),
-					    NULL,
-					    "gedit-date-time-configure");
+			gedit_app_show_help (gedit_app_get_default (),
+					     GTK_WINDOW (dialog),
+					     NULL,
+					     "gedit-date-time-configure");
 			break;
 		}
 		case GTK_RESPONSE_OK:

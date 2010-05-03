@@ -33,7 +33,7 @@
 
 #include <gedit/gedit-debug.h>
 #include <gedit/gedit-utils.h>
-#include <gedit/gedit-help.h>
+#include <gedit/gedit-app.h>
 
 #define GEDIT_SORT_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_SORT_PLUGIN, GeditSortPluginPrivate))
 
@@ -115,9 +115,10 @@ sort_dialog_response_handler (GtkDialog  *widget,
 			break;
 
 		case GTK_RESPONSE_HELP:
-			gedit_help_display (GTK_WINDOW (widget),
-					    NULL,
-					    "gedit-sort-plugin");
+			gedit_app_show_help (gedit_app_get_default (),
+					     GTK_WINDOW (widget),
+					     NULL,
+					     "gedit-sort-plugin");
 			break;
 
 		case GTK_RESPONSE_CANCEL:
