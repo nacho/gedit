@@ -155,7 +155,6 @@ header_DATA = 				\
 libgedit_la_SOURCES = 			\
 	$(BUILT_SOURCES)		\
 	$(BACON_FILES)			\
-	$(POSIXIO_FILES)		\
 	gedit-app.c			\
 	gedit-close-button.c		\
 	gedit-commands-documents.c	\
