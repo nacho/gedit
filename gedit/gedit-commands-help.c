@@ -39,7 +39,7 @@
 
 #include "gedit-commands.h"
 #include "gedit-debug.h"
-#include "gedit-help.h"
+#include "gedit-app.h"
 #include "gedit-dirs.h"
 
 void
@@ -48,7 +48,10 @@ _gedit_cmd_help_contents (GtkAction   *action,
 {
 	gedit_debug (DEBUG_COMMANDS);
 
-	gedit_help_display (GTK_WINDOW (window), NULL, NULL);
+	gedit_app_show_help (gedit_app_get_default (),
+	                     GTK_WINDOW (window),
+	                     NULL,
+	                     NULL);
 }
 
 void

@@ -47,7 +47,6 @@
 #include "gedit-document.h"
 #include "gedit-style-scheme-manager.h"
 #include "gedit-plugin-manager.h"
-#include "gedit-help.h"
 #include "gedit-dirs.h"
 
 /*
@@ -152,9 +151,10 @@ dialog_response_handler (GtkDialog *dlg,
 	switch (res_id)
 	{
 		case GTK_RESPONSE_HELP:
-			gedit_help_display (GTK_WINDOW (dlg),
-					    NULL,
-					    "gedit-prefs");
+			gedit_app_show_help (gedit_app_get_default (),
+			                     GTK_WINDOW (dlg),
+			                     NULL,
+			                     "gedit-prefs");
 
 			g_signal_stop_emission_by_name (dlg, "response");
 

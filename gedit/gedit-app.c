@@ -48,7 +48,13 @@
 #include "gseal-gtk-compat.h"
 
 #ifdef OS_OSX
-#include <ige-mac-integration.h>
+#include "gedit-app-osx.h"
+#else
+#ifdef OS_WIN32
+#include "gedit-app-win32.h"
+#else
+#include "gedit-app-x11.h"
+#endif
 #endif
 
 #define GEDIT_PAGE_SETUP_FILE		"gedit-page-setup"
@@ -74,7 +80,7 @@ struct _GeditAppPrivate
 	GtkPrintSettings  *print_settings;
 };
 
-G_DEFINE_TYPE(GeditApp, gedit_app, G_TYPE_OBJECT)
+G_DEFINE_ABSTRACT_TYPE(GeditApp, gedit_app, G_TYPE_INITIALLY_UNOWNED)
 
 static void
 gedit_app_finalize (GObject *object)
@@ -110,14 +116,135 @@ gedit_app_get_property (GObject    *object,
 	}
 }
 
-static void 
+static void
+app_weak_notify (gpointer  data,
+                 GObject  *where_the_app_was)
+{
+	gtk_main_quit ();
+}
+
+static GObject *
+gedit_app_constructor (GType                  gtype,
+                       guint                  n_construct_params,
+                       GObjectConstructParam *construct_params)
+{
+	static GObject *app = NULL;
+
+	if (!app)
+	{
+		app = G_OBJECT_CLASS (gedit_app_parent_class)->constructor (gtype,
+		                                                            n_construct_params,
+		                                                            construct_params);
+
+		g_object_add_weak_pointer (app, (gpointer *) &app);
+		g_object_weak_ref (app, app_weak_notify, NULL);
+
+		return app;
+	}
+
+	return g_object_ref (app);
+}
+
+static gboolean
+gedit_app_last_window_destroyed_impl (GeditApp *app)
+{
+	return TRUE;
+}
+
+static gchar *
+gedit_app_help_link_id_impl (GeditApp    *app,
+                             const gchar *name,
+                             const gchar *link_id)
+{
+	if (link_id)
+	{
+		return g_strdup_printf ("ghelp:%s?%s", name, link_id);
+	}
+	else
+	{
+		return g_strdup_printf ("ghelp:%s", name);
+	}
+}
+
+static gboolean
+gedit_app_show_help_impl (GeditApp    *app,
+                          GtkWindow   *parent,
+                          const gchar *name,
+                          const gchar *link_id)
+{
+	GError *error = NULL;
+	gboolean ret;
+	gchar *link;
+
+	if (name == NULL)
+	{
+		name = "gedit";
+	}
+	else if (strcmp (name, "gedit.xml") == 0)
+	{
+		g_warning ("%s: Using \"gedit.xml\" for the help name is deprecated, use \"gedit\" or simply NULL instead", G_STRFUNC);
+		name = "gedit";
+	}
+
+	link = GEDIT_APP_GET_CLASS (app)->help_link_id (app, name, link_id);
+
+	ret = gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (parent)),
+	                    link,
+	                    GDK_CURRENT_TIME,
+	                    &error);
+
+	g_free (link);
+
+	if (error != NULL)
+	{
+		GtkWidget *dialog;
+
+		dialog = gtk_message_dialog_new (parent,
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_CLOSE, 
+						 _("There was an error displaying the help."));
+
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+							  "%s", error->message);
+
+		g_signal_connect (G_OBJECT (dialog),
+				  "response",
+				  G_CALLBACK (gtk_widget_destroy),
+				  NULL);
+
+		gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+		gtk_widget_show (dialog);
+
+		g_error_free (error);
+	}
+
+	return ret;
+}
+
+static void
+gedit_app_set_window_title_impl (GeditApp    *app,
+                                 GeditWindow *window,
+                                 const gchar *title)
+{
+	gtk_window_set_title (GTK_WINDOW (window), title);
+}
+
+static void
 gedit_app_class_init (GeditAppClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->finalize = gedit_app_finalize;
 	object_class->get_property = gedit_app_get_property;
-	
+	object_class->constructor = gedit_app_constructor;
+
+	klass->last_window_destroyed = gedit_app_last_window_destroyed_impl;
+	klass->show_help = gedit_app_show_help_impl;
+	klass->help_link_id = gedit_app_help_link_id_impl;
+	klass->set_window_title = gedit_app_set_window_title_impl;
+
 	g_object_class_install_property (object_class,
 					 PROP_LOCKDOWN,
 					 g_param_spec_flags ("lockdown",
@@ -165,7 +292,7 @@ load_accels (void)
 	filename = gedit_dirs_get_user_accels_file ();
 	if (filename != NULL)
 	{
-		gedit_debug_message (DEBUG_APP, "Loading keybindings from %s\n", filename);		
+		gedit_debug_message (DEBUG_APP, "Loading keybindings from %s\n", filename);
 		gtk_accel_map_load (filename);
 		g_free (filename);
 	}
@@ -179,7 +306,7 @@ save_accels (void)
 	filename = gedit_dirs_get_user_accels_file ();
 	if (filename != NULL)
 	{
-		gedit_debug_message (DEBUG_APP, "Saving keybindings in %s\n", filename);		
+		gedit_debug_message (DEBUG_APP, "Saving keybindings in %s\n", filename);
 		gtk_accel_map_save (filename);
 		g_free (filename);
 	}
@@ -342,13 +469,6 @@ gedit_app_init (GeditApp *app)
 	app->priv->lockdown = gedit_prefs_manager_get_lockdown ();
 }
 
-static void
-app_weak_notify (gpointer data,
-		 GObject *where_the_app_was)
-{
-	gtk_main_quit ();
-}
-
 /**
  * gedit_app_get_default:
  *
@@ -360,18 +480,29 @@ app_weak_notify (gpointer data,
 GeditApp *
 gedit_app_get_default (void)
 {
-	static GeditApp *app = NULL;
+	GeditApp *app;
+	GType type;
 
-	if (app != NULL)
-		return app;
+#ifdef OS_OSX
+	type = GEDIT_TYPE_APP_OSX;
+#else
+#ifdef OS_WIN32
+	type = GEDIT_TYPE_APP_WIN32;
+#else
+	type = GEDIT_TYPE_APP_X11;
+#endif
+#endif
 
-	app = GEDIT_APP (g_object_new (GEDIT_TYPE_APP, NULL));	
+	app = GEDIT_APP (g_object_new (type, NULL));
 
-	g_object_add_weak_pointer (G_OBJECT (app),
-				   (gpointer) &app);
-	g_object_weak_ref (G_OBJECT (app),
-			   app_weak_notify,
-			   NULL);
+	if (g_object_is_floating (app))
+	{
+		g_object_ref_sink (app);
+	}
+	else
+	{
+		g_object_unref (app);
+	}
 
 	return app;
 }
@@ -441,14 +572,11 @@ window_destroy (GeditWindow *window,
 */
 	if (app->priv->windows == NULL)
 	{
-#ifdef OS_OSX
-		if (!GPOINTER_TO_INT (g_object_get_data (G_OBJECT (window), "gedit-is-quitting-all")))
+		if (!GEDIT_APP_GET_CLASS (app)->last_window_destroyed (app))
 		{
-			/* Create hidden proxy window on OS X to handle the menu */
-			gedit_app_create_window (app, NULL);
 			return;
 		}
-#endif
+
 		/* Last window is gone... save some settings and exit */
 		ensure_user_config_dir ();
 
@@ -813,6 +941,26 @@ gedit_app_get_lockdown (GeditApp *app)
 	g_return_val_if_fail (GEDIT_IS_APP (app), GEDIT_LOCKDOWN_ALL);
 
 	return app->priv->lockdown;
+}
+
+gboolean
+gedit_app_show_help (GeditApp    *app,
+                     GtkWindow   *parent,
+                     const gchar *name,
+                     const gchar *link_id)
+{
+	g_return_val_if_fail (GEDIT_IS_APP (app), FALSE);
+	g_return_val_if_fail (parent == NULL || GTK_IS_WINDOW (parent), FALSE);
+
+	return GEDIT_APP_GET_CLASS (app)->show_help (app, parent, name, link_id);
+}
+
+void
+gedit_app_set_window_title (GeditApp    *app,
+                            GeditWindow *window,
+                            const gchar *title)
+{
+	GEDIT_APP_GET_CLASS (app)->set_window_title (app, window, title);
 }
 
 static void

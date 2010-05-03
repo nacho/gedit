@@ -2221,11 +2221,9 @@ set_title (GeditWindow *window)
 
 	if (window->priv->active_tab == NULL)
 	{
-#ifdef OS_OSX
-		gedit_osx_set_window_title (window, "gedit", NULL);
-#else
-		gtk_window_set_title (GTK_WINDOW (window), "gedit");
-#endif
+		gedit_app_set_window_title (gedit_app_get_default (),
+		                            window,
+		                            "gedit");
 		return;
 	}
 
@@ -2305,11 +2303,7 @@ set_title (GeditWindow *window)
 						 name);
 	}
 
-#ifdef OS_OSX
-	gedit_osx_set_window_title (window, title, doc);
-#else
-	gtk_window_set_title (GTK_WINDOW (window), title);
-#endif
+	gedit_app_set_window_title (gedit_app_get_default (), window, title);
 
 	g_free (dirname);
 	g_free (name);

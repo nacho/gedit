@@ -43,7 +43,6 @@
 #include "gedit-prefs-manager.h"
 #include "gedit-utils.h"
 #include "gedit-debug.h"
-#include "gedit-help.h"
 #include "gedit-dirs.h"
 
 #define GEDIT_ENCODINGS_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
@@ -276,7 +275,11 @@ response_handler (GtkDialog            *dialog,
 {
 	if (response_id == GTK_RESPONSE_HELP)
 	{
-		gedit_help_display (GTK_WINDOW (dialog), "gedit", NULL);
+		gedit_app_show_help (gedit_app_get_default(),
+		                     GTK_WINDOW (dialog),
+		                     "gedit",
+		                     NULL);
+
 		g_signal_stop_emission_by_name (dialog, "response");
 		return;
 	}

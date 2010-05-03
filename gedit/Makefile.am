@@ -1,10 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 SUBDIRS = dialogs smclient
 
-if OS_OSX
-SUBDIRS += osx
-endif
-
 bin_PROGRAMS = gedit
 
 noinst_LTLIBRARIES = libgedit.la
@@ -18,18 +14,15 @@ INCLUDES =								\
 	$(WARN_CFLAGS)							\
 	$(DISABLE_DEPRECATED_CFLAGS)					\
 	-DDATADIR=\""$(datadir)"\"					\
-	-DLIBDIR=\""$(libdir)"\"					
+	-DLIBDIR=\""$(libdir)"\"
 
 gedit_SOURCES = \
 	gedit.c
 
 gedit_LDADD = libgedit.la $(GEDIT_LIBS) $(IGE_MAC_LIBS) $(EGG_SMCLIENT_LIBS)
- 
+
 if PLATFORM_WIN32
 gedit_LDFLAGS = -Wl,--export-all-symbols -Wl,--out-implib,libgedit-$(GEDIT_API_VERSION).a
-if OS_WIN32
-gedit_LDFLAGS += -mwindows
-endif
 else
 gedit_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 endif
@@ -43,10 +36,52 @@ libgedit_la_LIBADD = \
 # GEDIT_LIBS must be the last to ensure correct order on some platforms
 libgedit_la_LIBADD += $(GEDIT_LIBS)
 
+# Mac OSX convenience library and ldflags
 if OS_OSX
 gedit_LDFLAGS += -framework Carbon
 
-libgedit_la_LIBADD += osx/libosx.la
+noinst_LTLIBRARIES += libosx.la
+
+libosx_la_LDFLAGS = -framework Carbon -framework ApplicationServices -framework Cocoa
+libosx_la_LIBADD = -lobjc
+libosx_la_CFLAGS = -xobjective-c
+
+libosx_la_SOURCES = 		\
+	gedit-app-osx.c		\
+	gedit-app-osx.h		\
+	gedit-osx-delegate.m 	\
+	gedit-osx-delegate.h
+
+libgedit_la_LIBADD += libosx.la
+endif
+
+# Win32 convenience library and ldflags
+if OS_WIN32
+gedit_LDFLAGS += -mwindows
+
+noinst_LTLIBRARIES += libwin32.la
+
+libwin32_la_SOURCES =		\
+	gedit-app-win32.c	\
+	gedit-app-win32.h
+
+libgedit_la_LIBADD += libwin32.la
+
+gedit-res.o: gedit.rc
+	$(WINDRES) -i gedit.rc --input-format=rc -o gedit-res.o -O coff
+
+gedit_LDADD += gedit-res.o
+endif
+
+# X11 convenience library
+if GDK_WINDOWING_X11
+noinst_LTLIBRARIES += libx11.la
+
+libx11_la_SOURCES =		\
+	gedit-app-x11.c		\
+	gedit-app-x11.h
+
+libgedit_la_LIBADD += libx11.la
 endif
 
 BUILT_SOURCES = 			\
@@ -54,13 +89,6 @@ BUILT_SOURCES = 			\
 	gedit-enum-types.h		\
 	gedit-marshal.c			\
 	gedit-marshal.h
-
-if OS_WIN32
-gedit-res.o: gedit.rc
-	$(WINDRES) -i gedit.rc --input-format=rc -o gedit-res.o -O coff
-
-gedit_LDADD += gedit-res.o
-endif
 
 NOINST_H_FILES =			\
 	gedit-close-button.h		\
@@ -99,7 +127,6 @@ INST_H_FILES =				\
 	gedit-encodings.h		\
 	gedit-encodings-combo-box.h	\
 	gedit-file-chooser-dialog.h	\
-	gedit-help.h 			\
 	gedit-message-bus.h		\
 	gedit-message-type.h		\
 	gedit-message.h			\
@@ -125,7 +152,6 @@ headerdir = $(prefix)/include/gedit-@GEDIT_API_VERSION@/gedit
 header_DATA = 				\
 	$(INST_H_FILES)
 
-
 libgedit_la_SOURCES = 			\
 	$(BUILT_SOURCES)		\
 	$(BACON_FILES)			\
@@ -150,7 +176,6 @@ libgedit_la_SOURCES = 			\
 	gedit-encodings.c		\
 	gedit-encodings-combo-box.c	\
 	gedit-file-chooser-dialog.c	\
-	gedit-help.c			\
 	gedit-history-entry.c		\
 	gedit-io-error-message-area.c	\
 	gedit-language-manager.c	\
@@ -186,7 +211,7 @@ libgedit_la_SOURCES = 			\
 	$(INST_H_FILES)
 
 if !ENABLE_GVFS_METADATA
-libgedit_la_SOURCES += gedit-metadata-manager.c 
+libgedit_la_SOURCES += gedit-metadata-manager.c
 endif
 
 gedit-enum-types.h: gedit-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)

@@ -57,7 +57,7 @@ typedef struct _GeditApp GeditApp;
 
 struct _GeditApp 
 {
-	GObject object;
+	GInitiallyUnowned parent;
 
 	/*< private > */
 	GeditAppPrivate *priv;
@@ -71,6 +71,21 @@ typedef struct _GeditAppClass GeditAppClass;
 struct _GeditAppClass 
 {
 	GObjectClass parent_class;
+
+	gboolean (*last_window_destroyed)	(GeditApp *app);
+
+	gboolean (*show_help)			(GeditApp    *app,
+	                                         GtkWindow   *parent,
+	                                         const gchar *name,
+	                                         const gchar *link_id);
+
+	gchar *(*help_link_id)			(GeditApp    *app,
+	                                         const gchar *name,
+	                                         const gchar *link_id);
+
+	void (*set_window_title)		(GeditApp    *app,
+	                                         GeditWindow *window,
+	                                         const gchar *title);
 };
 
 /*
@@ -106,6 +121,15 @@ GList		*gedit_app_get_views			(GeditApp *app);
 
 /* Lockdown state */
 GeditLockdownMask gedit_app_get_lockdown		(GeditApp *app);
+
+gboolean	 gedit_app_show_help			(GeditApp    *app,
+                                                         GtkWindow   *parent,
+                                                         const gchar *name,
+                                                         const gchar *link_id);
+
+void		 gedit_app_set_window_title		(GeditApp    *app,
+                                                         GeditWindow *window,
+                                                         const gchar *title);
 
 /*
  * Non exported functions

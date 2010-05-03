@@ -112,6 +112,8 @@ fi
 AC_MSG_RESULT([$os_osx])
 AM_CONDITIONAL(OS_OSX, test "$os_osx" = "yes")
 
+AM_CONDITIONAL(GDK_WINDOWING_X11, test "$gdk_windowing" = "x11")
+
 if test "$platform_osx" = "yes"; then
 	AC_DEFINE([PLATFORM_OSX],[1],[Defined if platform is Mac OSX])
 fi
@@ -520,7 +522,6 @@ docs/Makefile
 docs/reference/Makefile
 gedit/dialogs/Makefile
 gedit/smclient/Makefile
-gedit/osx/Makefile
 gedit/Makefile
 help/Makefile
 pixmaps/Makefile
