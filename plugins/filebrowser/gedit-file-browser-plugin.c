@@ -959,25 +959,33 @@ on_filter_mode_changed_cb (GeditFileBrowserStore *model,
 	
 	if ((mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN) &&
 	    (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY))
+	{
 		gconf_client_set_string (client,
 		                         FILE_BROWSER_BASE_KEY "/filter_mode",
 		                         "hidden_and_binary",
 		                         NULL);
+	}
 	else if (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN)
+	{
 		gconf_client_set_string (client,
 		                         FILE_BROWSER_BASE_KEY "/filter_mode",
 		                         "hidden",
 		                         NULL);	
+	}
 	else if (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY)
+	{
 		gconf_client_set_string (client,
 		                         FILE_BROWSER_BASE_KEY "/filter_mode",
 		                         "binary",
 		                         NULL);
+	}
 	else
+	{
 		gconf_client_set_string (client,
 		                         FILE_BROWSER_BASE_KEY "/filter_mode",
 		                         "none",
 		                         NULL);
+	}
 	
 	g_object_unref (client);
 	
@@ -1053,15 +1061,19 @@ on_filter_pattern_changed_cb (GeditFileBrowserWidget *widget,
 	g_object_get (G_OBJECT (widget), "filter-pattern", &pattern, NULL);
 	
 	if (pattern == NULL)
+	{
 		gconf_client_set_string (client,
 		                         FILE_BROWSER_BASE_KEY "/filter_pattern",
 		                         "",
 		                         NULL);
+	}
 	else
+	{
 		gconf_client_set_string (client,
 		                         FILE_BROWSER_BASE_KEY "/filter_pattern",
 		                         pattern,
 		                         NULL);
+	}
 
 	g_free (pattern);
 }

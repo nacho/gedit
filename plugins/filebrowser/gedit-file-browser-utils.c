@@ -154,8 +154,10 @@ gedit_file_browser_utils_confirmation_dialog (GeditWindow    *window,
 				      GTK_BUTTONS_NONE, "%s", message);
 
 	if (secondary)
+	{
 		gtk_message_dialog_format_secondary_text
 		    (GTK_MESSAGE_DIALOG (dlg), "%s", secondary);
+	}
 
 	/* Add a cancel button */
 	button = gtk_button_new_from_stock (GTK_STOCK_CANCEL);

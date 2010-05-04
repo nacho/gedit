@@ -1413,10 +1413,14 @@ filter_glob (GeditFileBrowserWidget *obj,
 			    -1);
 
 	if (FILE_IS_DIR (flags) || FILE_IS_DUMMY (flags))
+	{
 		result = TRUE;
+	}
 	else
+	{
 		result = g_pattern_match_string (obj->priv->filter_pattern,
 						 name);
+	}
 
 	g_free (name);
 
@@ -1435,8 +1439,10 @@ rename_selected_file (GeditFileBrowserWidget *obj)
 		return;
 
 	if (gedit_file_browser_widget_get_first_selected (obj, &iter))
+	{
 		gedit_file_browser_view_start_rename (obj->priv->treeview,
 						      &iter);
+	}
 }
 
 static GList *
@@ -1716,9 +1722,11 @@ clear_next_locations (GeditFileBrowserWidget *obj)
 					       (obj->priv->location_next_menu));
 
 	for (item = children; item; item = item->next)
+	{
 		gtk_container_remove (GTK_CONTAINER
 				      (obj->priv->location_next_menu),
 				      GTK_WIDGET (item->data));
+	}
 
 	g_list_free (children);
 
@@ -1772,7 +1780,9 @@ set_filter_pattern_real (GeditFileBrowserWidget *obj,
 	
 	if (pattern != NULL && obj->priv->filter_pattern_str != NULL && 
 	    strcmp (pattern, obj->priv->filter_pattern_str) == 0)
+	{
 		return;
+	}
 
 	/* Free the old pattern */
 	g_free (obj->priv->filter_pattern_str);
@@ -1808,8 +1818,10 @@ set_filter_pattern_real (GeditFileBrowserWidget *obj,
 	if (update_entry)
 	{
 		if (obj->priv->filter_pattern_str == NULL)
+		{
 			gtk_entry_set_text (GTK_ENTRY (obj->priv->filter_entry),
 			                    "");
+		}
 		else
 		{
 			gtk_entry_set_text (GTK_ENTRY (obj->priv->filter_entry),
@@ -1821,8 +1833,10 @@ set_filter_pattern_real (GeditFileBrowserWidget *obj,
 	}
 
 	if (GEDIT_IS_FILE_BROWSER_STORE (model))
+	{
 		gedit_file_browser_store_refilter (GEDIT_FILE_BROWSER_STORE
 						   (model));
+	}
 
 	g_object_notify (G_OBJECT (obj), "filter-pattern");
 }
@@ -1887,11 +1901,15 @@ gedit_file_browser_widget_set_root_and_virtual_root (GeditFileBrowserWidget *obj
 	GeditFileBrowserStoreResult result;
 
 	if (!virtual_root)
+	{
 		result = gedit_file_browser_store_set_root_and_virtual_root
 				(obj->priv->file_store, root, root);
+	}
 	else
+	{
 		result = gedit_file_browser_store_set_root_and_virtual_root
 				(obj->priv->file_store, root, virtual_root);
+	}
 
 	if (result == GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE)
 		show_files_real (obj, TRUE);
@@ -2019,7 +2037,9 @@ gedit_file_browser_widget_get_selected_directory (GeditFileBrowserWidget *obj,
 	if (!gedit_file_browser_widget_get_first_selected (obj, iter) &&
 	    !gedit_file_browser_store_get_iter_virtual_root
 	    		(GEDIT_FILE_BROWSER_STORE (model), iter))
+	{
 		return FALSE;
+	}
 
 	gtk_tree_model_get (model, iter,
 			    GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS, &flags,
@@ -2382,11 +2402,15 @@ gedit_file_browser_widget_history_back (GeditFileBrowserWidget *obj)
 	if (obj->priv->locations)
 	{
 		if (obj->priv->current_location)
+		{
 			jump_to_location (obj,
 					  obj->priv->current_location->next,
 					  TRUE);
+		}
 		else
+		{
 			jump_to_location (obj, obj->priv->locations, TRUE);
+		}
 	}
 }
 
@@ -2394,8 +2418,10 @@ void
 gedit_file_browser_widget_history_forward (GeditFileBrowserWidget *obj)
 {
 	if (obj->priv->locations)
+	{
 		jump_to_location (obj, obj->priv->current_location->prev,
 				  FALSE);
+	}
 }
 
 static void
@@ -2437,13 +2463,17 @@ bookmark_open (GeditFileBrowserWidget *obj,
 		   mount point anymore) */
 		if ((flags & GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT) ||
 		    (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_BOOKMARK))
+		{
 			gedit_file_browser_widget_set_root (obj,
 							    location,
 							    FALSE);
+		}
 		else
+		{
 			gedit_file_browser_widget_set_root (obj,
 							    location,
 							    TRUE);
+		}
 
 		g_object_unref (location);
 	}
@@ -2467,9 +2497,7 @@ file_open  (GeditFileBrowserWidget *obj,
 			    -1);
 
 	if (!FILE_IS_DIR (flags) && !FILE_IS_DUMMY (flags))
-	{
 		g_signal_emit (obj, signals[LOCATION_ACTIVATED], 0, location);
-	}
 }
 
 static gboolean
@@ -2560,7 +2588,9 @@ on_virtual_root_changed (GeditFileBrowserStore  *model,
 
 	if (gtk_tree_view_get_model (GTK_TREE_VIEW (obj->priv->treeview)) !=
 	    GTK_TREE_MODEL (obj->priv->file_store))
+	{
 		show_files_real (obj, FALSE);
+	}
 
 	if (gedit_file_browser_store_get_iter_virtual_root (model, &iter))
 	{
@@ -2777,11 +2807,15 @@ do_change_directory (GeditFileBrowserWidget *obj,
 	if ((event->state & 
 	    (~GDK_CONTROL_MASK & ~GDK_SHIFT_MASK & ~GDK_MOD1_MASK)) == 
 	     event->state && event->keyval == GDK_BackSpace)
+	{
 		action = gtk_action_group_get_action (obj->priv->action_group_sensitive,
 		                                      "DirectoryPrevious");
+	}
 	else if (!((event->state & GDK_MOD1_MASK) && 
 	    (event->state & (~GDK_CONTROL_MASK & ~GDK_SHIFT_MASK)) == event->state))
+	{
 		return FALSE;
+	}
 
 	switch (event->keyval)
 	{
@@ -2822,7 +2856,9 @@ on_treeview_key_press_event (GeditFileBrowserView   *treeview,
 
 	if (!GEDIT_IS_FILE_BROWSER_STORE
 	    (gtk_tree_view_get_model (GTK_TREE_VIEW (treeview))))
+	{
 		return FALSE;
+	}
 
 	modifiers = gtk_accelerator_get_default_mod_mask ();
 
@@ -2863,9 +2899,11 @@ on_selection_changed (GtkTreeSelection       *selection,
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (obj->priv->treeview));
 
 	if (GEDIT_IS_FILE_BROWSER_STORE (model))
+	{
 		selected = gedit_file_browser_widget_get_num_selected_files_or_directories (obj,
 											    &files,
 											    &dirs);
+	}
 
 	gtk_action_group_set_sensitive (obj->priv->action_group_selection,
 					selected > 0);
@@ -2897,14 +2935,17 @@ on_location_jump_activate (GtkMenuItem            *item,
 	location = g_object_get_data (G_OBJECT (item), LOCATION_DATA_KEY);
 
 	if (obj->priv->current_location)
+	{
 		jump_to_location (obj, location,
 				  g_list_position (obj->priv->locations,
 						   location) >
 				  g_list_position (obj->priv->locations,
-						   obj->priv->
-						   current_location));
+						   obj->priv->current_location));
+	}
 	else
+	{
 		jump_to_location (obj, location, TRUE);
+	}
 }
 
 static void
@@ -3010,8 +3051,10 @@ on_action_directory_new (GtkAction              *action,
 
 	if (gedit_file_browser_store_new_directory
 	    (GEDIT_FILE_BROWSER_STORE (model), &parent, &iter))
+	{
 		gedit_file_browser_view_start_rename (obj->priv->treeview,
 						      &iter);
+	}
 }
 
 static void
@@ -3064,8 +3107,10 @@ on_action_file_new (GtkAction              *action,
 
 	if (gedit_file_browser_store_new_file
 	    (GEDIT_FILE_BROWSER_STORE (model), &parent, &iter))
+	{
 		gedit_file_browser_view_start_rename (obj->priv->treeview,
 						      &iter);
+	}
 }
 
 static void
@@ -3128,7 +3173,9 @@ on_action_directory_open (GtkAction              *action,
 	
 	if (!directory_opened &&
 	    gedit_file_browser_widget_get_selected_directory (obj, &iter))
+	{
 			directory_open (obj, model, &iter);
+	}
 
 	g_list_free (rows);
 }

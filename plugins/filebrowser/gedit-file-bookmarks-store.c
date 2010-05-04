@@ -143,9 +143,7 @@ add_file (GeditFileBookmarksStore *model,
 	native = g_file_is_native (file);
 
 	if (native && !g_file_query_exists (file, NULL))
-	{
 		return FALSE;
-	}
 
 	if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_HOME)
 		pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("user-home", GTK_ICON_SIZE_MENU);
@@ -188,16 +186,20 @@ check_mount_separator (GeditFileBookmarksStore *model,
 
 	found =
 	    find_with_flags (GTK_TREE_MODEL (model), &iter, NULL,
-			     flags |
-			     GEDIT_FILE_BOOKMARKS_STORE_IS_SEPARATOR, 0);
+			     flags | GEDIT_FILE_BOOKMARKS_STORE_IS_SEPARATOR,
+			     0);
 
 	if (added && !found)
+	{
 		/* Add the separator */
 		add_node (model, NULL, NULL, NULL,
 			  flags | GEDIT_FILE_BOOKMARKS_STORE_IS_SEPARATOR,
 			  NULL);
+	}
 	else if (!added && found)
+	{
 		remove_node (GTK_TREE_MODEL (model), &iter);
+	}
 }
 
 static void
@@ -444,9 +446,11 @@ init_fs (GeditFileBookmarksStore *model)
 
 		/* Connect signals */
 		for (ptr = signals; *ptr; ptr++)
+		{
 			g_signal_connect (model->priv->volume_monitor,
 					  *ptr,
 					  G_CALLBACK (on_fs_changed), model);
+		}
 	}
 
 	/* First go through all the connected drives */
@@ -722,10 +726,12 @@ find_with_flags (GtkTreeModel *model,
 			g_object_unref (childobj);
 
 		if ((obj == NULL || fequal) &&
-		    (childflags & flags) == flags
-		    && !(childflags & notflags))
+		    (childflags & flags) == flags &&
+		    !(childflags & notflags))
+		{
 			*iter = child;
 			return TRUE;
+		}
 	}
 	while (gtk_tree_model_iter_next (model, &child));
 
@@ -743,9 +749,11 @@ remove_node (GtkTreeModel *model, GtkTreeIter *iter)
 
 	if (!(flags & GEDIT_FILE_BOOKMARKS_STORE_IS_SEPARATOR) &&
 	    flags & GEDIT_FILE_BOOKMARKS_STORE_IS_FS)
+	{
 		check_mount_separator (GEDIT_FILE_BOOKMARKS_STORE (model),
 				       flags & GEDIT_FILE_BOOKMARKS_STORE_IS_FS,
 				       FALSE);
+	}
 
 	gtk_tree_store_remove (GTK_TREE_STORE (model), iter);
 }
@@ -757,7 +765,8 @@ remove_bookmarks (GeditFileBookmarksStore *model)
 
 	while (find_with_flags (GTK_TREE_MODEL (model), &iter, NULL,
 				GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK,
-				0)) {
+				0))
+	{
 		remove_node (GTK_TREE_MODEL (model), &iter);
 	}
 }

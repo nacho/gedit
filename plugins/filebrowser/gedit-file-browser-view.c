@@ -247,8 +247,10 @@ enter_notify_event (GtkWidget        *widget,
 					       NULL, NULL, NULL);
 
 		if (view->priv->hover_path != NULL)
+		{
 			gdk_window_set_cursor (gtk_widget_get_window (widget),
 					       view->priv->hand_cursor);
+		}
 	}
 
 	/* Chainup */
@@ -273,11 +275,15 @@ motion_notify_event (GtkWidget *widget,
 		if ((old_hover_path != NULL) != (view->priv->hover_path != NULL))
 		{
 			if (view->priv->hover_path != NULL)
+			{
 				gdk_window_set_cursor (gtk_widget_get_window (widget),
 						       view->priv->hand_cursor);
+			}
 			else
+			{
 				gdk_window_set_cursor (gtk_widget_get_window (widget),
 						       NULL);
+			}
 		}
 
 		if (old_hover_path != NULL)
@@ -301,7 +307,7 @@ set_click_policy_property (GeditFileBrowserView            *obj,
 	if (click_policy == GEDIT_FILE_BROWSER_VIEW_CLICK_POLICY_SINGLE)
 	{
 		if (obj->priv->hand_cursor == NULL)
-			obj->priv->hand_cursor = gdk_cursor_new(GDK_HAND2);
+			obj->priv->hand_cursor = gdk_cursor_new (GDK_HAND2);
 	}
 	else if (click_policy == GEDIT_FILE_BROWSER_VIEW_CLICK_POLICY_DOUBLE)
 	{
@@ -309,8 +315,10 @@ set_click_policy_property (GeditFileBrowserView            *obj,
 		{
 			if (gtk_tree_model_get_iter (GTK_TREE_MODEL (obj->priv->model),
 						     &iter, obj->priv->hover_path))
+			{
 				gtk_tree_model_row_changed (GTK_TREE_MODEL (obj->priv->model),
 							    obj->priv->hover_path, &iter);
+			}
 
 			gtk_tree_path_free (obj->priv->hover_path);
 			obj->priv->hover_path = NULL;
@@ -529,7 +537,9 @@ button_press_event (GtkWidget      *widget,
 	/* Ignore double click if we are in single click mode */
 	if (view->priv->click_policy == GEDIT_FILE_BROWSER_VIEW_CLICK_POLICY_SINGLE && 
 	    click_count >= 2)
+	{
 		return TRUE;
+	}
 
 	view->priv->ignore_release = FALSE;
 	call_parent = TRUE;
@@ -557,7 +567,9 @@ button_press_event (GtkWidget      *widget,
 			
 			if (view->priv->double_click_path[1] &&
 			    gtk_tree_path_compare (view->priv->double_click_path[0], view->priv->double_click_path[1]) == 0)
+			{
 				activate_selected_items (view);
+			}
 		}
 		else
 		{
@@ -724,7 +736,8 @@ fill_expand_state (GeditFileBrowserView *view,
 	
 	if (gtk_tree_model_iter_children (view->priv->model, &child, iter))
 	{
-		do {
+		do
+		{
 			fill_expand_state (view, &child);
 		}
 		while (gtk_tree_model_iter_next (view->priv->model, &child));
@@ -953,7 +966,9 @@ cell_data_cb (GtkTreeViewColumn    *tree_column,
 	if (obj->priv->click_policy == GEDIT_FILE_BROWSER_VIEW_CLICK_POLICY_SINGLE &&
 	    obj->priv->hover_path != NULL &&
 	    gtk_tree_path_compare (path, obj->priv->hover_path) == 0)
-		underline = PANGO_UNDERLINE_SINGLE;	
+	{
+		underline = PANGO_UNDERLINE_SINGLE;
+	}	
 
 	if (GEDIT_IS_FILE_BROWSER_STORE (tree_model) &&
 	    obj->priv->editable != NULL &&

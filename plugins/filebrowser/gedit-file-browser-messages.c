@@ -388,9 +388,7 @@ custom_message_filter_func (GeditFileBrowserWidget *widget,
 			    -1);
 	
 	if (!location || FILE_IS_DUMMY (flags))
-	{
 		return FALSE;
-	}
 	
 	path = gtk_tree_model_get_path (GTK_TREE_MODEL (store), iter);
 	set_item_message (wdata, iter, path, data->message);
