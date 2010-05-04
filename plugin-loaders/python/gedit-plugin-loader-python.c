@@ -41,11 +41,17 @@ typedef int Py_ssize_t;
 
 #define GEDIT_PLUGIN_LOADER_PYTHON_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_PLUGIN_LOADER_PYTHON, GeditPluginLoaderPythonPrivate))
 
+typedef enum {
+	GEDIT_PYTHON_STATUS_NOT_RUN,
+	GEDIT_PYTHON_STATUS_FAILED,
+	GEDIT_PYTHON_STATUS_SUCCESS
+} GeditPythonStatusType;
+
 struct _GeditPluginLoaderPythonPrivate
 {
 	GHashTable *loaded_plugins;
 	guint idle_gc;
-	gboolean init_failed;
+	GeditPythonStatusType status;
 };
 
 typedef struct
@@ -209,7 +215,7 @@ gedit_plugin_loader_iface_load (GeditPluginLoader *loader,
 	gchar *module_name;
 	GeditPlugin *result;
 	
-	if (pyloader->priv->init_failed)
+	if (pyloader->priv->status != GEDIT_PYTHON_STATUS_SUCCESS)
 	{
 		g_warning ("Cannot load python plugin Python '%s' since gedit was"
 		           "not able to initialize the Python interpreter.",
@@ -307,12 +313,10 @@ run_gc (GeditPluginLoaderPython *loader)
 static void
 gedit_plugin_loader_iface_garbage_collect (GeditPluginLoader *loader)
 {
-	GeditPluginLoaderPython *pyloader;
+	GeditPluginLoaderPython *pyloader = GEDIT_PLUGIN_LOADER_PYTHON (loader);
 	
-	if (!Py_IsInitialized())
+	if (pyloader->priv->status != GEDIT_PYTHON_STATUS_SUCCESS)
 		return;
-
-	pyloader = GEDIT_PLUGIN_LOADER_PYTHON (loader);
 
 	/*
 	 * We both run the GC right now and we schedule
@@ -341,7 +345,9 @@ gedit_plugin_loader_iface_init (gpointer g_iface,
 static void
 gedit_python_shutdown (GeditPluginLoaderPython *loader)
 {
-	if (!Py_IsInitialized ())
+	GeditPluginLoaderPython *pyloader = GEDIT_PLUGIN_LOADER_PYTHON (loader);
+
+	if (pyloader->priv->status != GEDIT_PYTHON_STATUS_SUCCESS)
 		return;
 
 	if (loader->priv->idle_gc != 0)
@@ -492,23 +498,23 @@ gedit_python_init (GeditPluginLoaderPython *loader)
 	struct sigaction old_sigint;
 #endif
 
-	if (loader->priv->init_failed)
+	if (loader->priv->status == GEDIT_PYTHON_STATUS_FAILED)
 	{
 		/* We already failed to initialized Python, don't need to
 		 * retry again */
 		return FALSE;
 	}
 	
-	if (Py_IsInitialized ())
+	if (loader->priv->status == GEDIT_PYTHON_STATUS_SUCCESS)
 	{
 		/* Python has already been successfully initialized */
 		return TRUE;
 	}
 
 	/* We are trying to initialize Python for the first time,
-	   set init_failed to FALSE only if the entire initialization process
+	   set status to GEDIT_PYTHON_STATUS_SUCCESS only if the entire initialization process
 	   ends with success */
-	loader->priv->init_failed = TRUE;
+	loader->priv->status = GEDIT_PYTHON_STATUS_FAILED;
 
 	/* Hack to make python not overwrite SIGINT: this is needed to avoid
 	 * the crash reported on bug #326191 */
@@ -530,7 +536,8 @@ gedit_python_init (GeditPluginLoaderPython *loader)
 #endif
 
 	/* Python initialization */
-	Py_Initialize ();
+	if (!Py_IsInitialized ())
+		Py_Initialize ();
 
 #ifdef HAVE_SIGACTION
 	/* Restore old handler */
@@ -640,7 +647,7 @@ gedit_python_init (GeditPluginLoaderPython *loader)
 	Py_DECREF (gettext_args);
 	
 	/* Python has been successfully initialized */
-	loader->priv->init_failed = FALSE;
+	loader->priv->status = GEDIT_PYTHON_STATUS_SUCCESS;
 	
 	return TRUE;
 	
