@@ -240,6 +240,16 @@
   (return-type "GeditLockdownMask")
 )
 
+(define-method show_help
+  (of-object "GeditApp")
+  (c-name "gedit_app_show_help")
+  (return-type "gboolean")
+  (parameters
+    '("GtkWindow*" "parent")
+    '("const-gchar*" "name")
+    '("const-gchar*" "link_id")
+  )
+)
 
 ;; From ../../gedit/gedit-document.h
 
@@ -571,19 +581,6 @@
   (c-name "gedit_encoding_get_current_deprecated")
   (return-type "const-GeditEncoding*")
 )
-
-;; From ../../gedit/gedit-help.h
-
-(define-function help_display
-  (c-name "gedit_help_display")
-  (return-type "gboolean")
-  (parameters
-    '("GtkWindow*" "parent")
-    '("const-gchar*" "name")
-    '("const-gchar*" "link_id")
-  )
-)
-
 
 
 ;; From ../../gedit/gedit-panel.h

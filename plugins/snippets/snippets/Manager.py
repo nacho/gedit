@@ -618,7 +618,7 @@ class Manager:
         
         def on_dialog_snippets_response(self, dlg, resp):                                
                 if resp == gtk.RESPONSE_HELP:
-                        gedit.help_display(self.dlg, 'gedit', 'gedit-snippets-plugin')
+                        gedit.app_get_default().show_help(self.dlg, 'gedit', 'gedit-snippets-plugin')
                         return
 
                 self.dlg.destroy()
