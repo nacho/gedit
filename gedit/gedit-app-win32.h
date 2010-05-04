@@ -1,5 +1,5 @@
 /*
- * gedit-win32.h
+ * gedit-app-win32.h
  * This file is part of gedit
  *
  * Copyright (C) 2010 - Jesse van den Kieboom
