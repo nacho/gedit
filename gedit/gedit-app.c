@@ -116,13 +116,6 @@ gedit_app_get_property (GObject    *object,
 	}
 }
 
-static void
-app_weak_notify (gpointer  data,
-                 GObject  *where_the_app_was)
-{
-	gtk_main_quit ();
-}
-
 static GObject *
 gedit_app_constructor (GType                  gtype,
                        guint                  n_construct_params,
@@ -137,7 +130,6 @@ gedit_app_constructor (GType                  gtype,
 		                                                            construct_params);
 
 		g_object_add_weak_pointer (app, (gpointer *) &app);
-		g_object_weak_ref (app, app_weak_notify, NULL);
 
 		return app;
 	}
@@ -584,7 +576,7 @@ window_destroy (GeditWindow *window,
 		save_page_setup (app);
 		save_print_settings (app);
 
-		g_object_unref (app);
+		gtk_main_quit ();
 	}
 }
 
