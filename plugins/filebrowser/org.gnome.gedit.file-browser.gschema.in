@@ -1,0 +1,22 @@
+schema org.gnome.gedit.plugins.filebrowser:
+  path /apps/gedit/plugins/filebrowser
+
+  key tree-view = @b true
+  key root = @s ''
+  key virtual-root = @s ''
+  key enable-remote = @b false
+  key open-at-first-doc = @b true
+  key filter-mode = @s 'hidden-and-binary'
+  key filter-pattern = @s ''
+
+schema org.gnome.Desktop.Applications.Terminal:
+  path /desktop/gnome/applications/terminal
+
+  key exec = @s 'gnome-terminal'
+
+schema org.gnome.Nautilus.preferences:
+  path /apps/nautilus/preferences
+
+  key click-policy = @s 'double'
+  key enable-delete = @b false
+  key confirm-trash = @b true
