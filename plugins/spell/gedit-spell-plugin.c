@@ -102,7 +102,7 @@ static const GtkToggleActionEntry toggle_action_entries[] =
 {
 	{ "AutoSpell",
 	  NULL,
-	  N_("_Autocheck Spelling"),
+	  N_("_Highlight Misspelled Words"),
 	  NULL,
 	  N_("Automatically spell-check the current document"),
 	  G_CALLBACK (auto_spell_cb),
