@@ -33,7 +33,6 @@
 #include <gmodule.h>
 
 #include <gedit/gedit-debug.h>
-#include <gedit/gedit-prefs-manager.h>
 #include <gedit/gedit-statusbar.h>
 
 #include "gedit-spell-checker.h"
