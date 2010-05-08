@@ -33,8 +33,6 @@
 #include <string.h>
 #include <time.h>
 
-#include <gconf/gconf-client.h>
-
 #include "gedit-time-plugin.h"
 #include <gedit/gedit-app.h>
 
@@ -52,11 +50,11 @@
 #define WINDOW_DATA_KEY "GeditTimePluginWindowData"
 #define MENU_PATH "/MenuBar/EditMenu/EditOps_4"
 
-/* gconf keys */
-#define TIME_BASE_KEY		"/apps/gedit-2/plugins/time"
-#define PROMPT_TYPE_KEY		TIME_BASE_KEY "/prompt_type"
-#define SELECTED_FORMAT_KEY	TIME_BASE_KEY "/selected_format"
-#define CUSTOM_FORMAT_KEY	TIME_BASE_KEY "/custom_format"
+/* gsettings keys */
+#define TIME_BASE_SETTINGS	"org.gnome.gedit.plugins.time"
+#define PROMPT_TYPE_KEY		"prompt-type"
+#define SELECTED_FORMAT_KEY	"selected-format"
+#define CUSTOM_FORMAT_KEY	"custom-format"
 
 #define DEFAULT_CUSTOM_FORMAT "%d/%m/%Y %H:%M:%S"
 
@@ -155,7 +153,7 @@ typedef enum
 
 struct _GeditTimePluginPrivate
 {
-	GConfClient *gconf_client;
+	GSettings *settings;
 };
 
 GEDIT_PLUGIN_REGISTER_TYPE(GeditTimePlugin, gedit_time_plugin)
@@ -193,26 +191,23 @@ gedit_time_plugin_init (GeditTimePlugin *plugin)
 
 	plugin->priv = GEDIT_TIME_PLUGIN_GET_PRIVATE (plugin);
 
-	plugin->priv->gconf_client = gconf_client_get_default ();
-
-	gconf_client_add_dir (plugin->priv->gconf_client,
-			      TIME_BASE_KEY,
-			      GCONF_CLIENT_PRELOAD_ONELEVEL,
-			      NULL);
+	plugin->priv->settings = g_settings_new (TIME_BASE_SETTINGS);
 }
 
 static void
-gedit_time_plugin_finalize (GObject *object)
+gedit_time_plugin_dispose (GObject *object)
 {
 	GeditTimePlugin *plugin = GEDIT_TIME_PLUGIN (object);
 
-	gedit_debug_message (DEBUG_PLUGINS, "GeditTimePlugin finalizing");
+	gedit_debug_message (DEBUG_PLUGINS, "GeditTimePlugin disposing");
 
-	gconf_client_suggest_sync (plugin->priv->gconf_client, NULL);
+	if (plugin->priv->settings != NULL)
+	{
+		g_object_unref (plugin->priv->settings);
+		plugin->priv->settings = NULL;
+	}
 
-	g_object_unref (G_OBJECT (plugin->priv->gconf_client));
-
-	G_OBJECT_CLASS (gedit_time_plugin_parent_class)->finalize (object);
+	G_OBJECT_CLASS (gedit_time_plugin_parent_class)->dispose (object);
 }
 
 static void
@@ -221,7 +216,15 @@ free_window_data (WindowData *data)
 	g_return_if_fail (data != NULL);
 
 	g_object_unref (data->action_group);
-	g_free (data);
+	g_slice_free (WindowData, data);
+}
+
+static void
+free_action_data (ActionData *data)
+{
+	g_return_if_fail (data != NULL);
+
+	g_slice_free (ActionData, data);
 }
 
 static void
@@ -254,8 +257,8 @@ impl_activate (GeditPlugin *plugin,
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	data = g_new (WindowData, 1);
-	action_data = g_new (ActionData, 1);
+	data = g_slice_new (WindowData);
+	action_data = g_slice_new (ActionData);
 
 	action_data->plugin = GEDIT_TIME_PLUGIN (plugin);
 	action_data->window = window;
@@ -269,7 +272,7 @@ impl_activate (GeditPlugin *plugin,
 				      	   action_entries,
 				      	   G_N_ELEMENTS (action_entries),
 				      	   action_data,
-				      	   (GDestroyNotify) g_free);
+				      	   (GDestroyNotify) free_action_data);
 
 	gtk_ui_manager_insert_action_group (manager, data->action_group, -1);
 
@@ -332,9 +335,8 @@ get_prompt_type (GeditTimePlugin *plugin)
 	gchar *prompt_type;
 	GeditTimePluginPromptType res;
 
-	prompt_type = gconf_client_get_string (plugin->priv->gconf_client,
-			        	       PROMPT_TYPE_KEY,
-					       NULL);
+	prompt_type = g_settings_get_string (plugin->priv->settings,
+			        	     PROMPT_TYPE_KEY);
 
 	if (prompt_type == NULL)
 		return PROMPT_SELECTED_FORMAT;
@@ -359,13 +361,6 @@ set_prompt_type (GeditTimePlugin           *plugin,
 {
 	const gchar * str;
 
-	if (!gconf_client_key_is_writable (plugin->priv->gconf_client,
-					   PROMPT_TYPE_KEY,
-					   NULL))
-	{
-		return;
-	}
-
 	switch (prompt_type)
 	{
 		case USE_SELECTED_FORMAT:
@@ -381,10 +376,9 @@ set_prompt_type (GeditTimePlugin           *plugin,
 			str = "PROMPT_SELECTED_FORMAT";
 	}
 
-	gconf_client_set_string (plugin->priv->gconf_client,
-				 PROMPT_TYPE_KEY,
-		       		 str,
-		       		 NULL);
+	g_settings_set_string (plugin->priv->settings,
+			       PROMPT_TYPE_KEY,
+		       	       str);
 }
 
 /* The selected format in the list */
@@ -393,9 +387,8 @@ get_selected_format (GeditTimePlugin *plugin)
 {
 	gchar *sel_format;
 
-	sel_format = gconf_client_get_string (plugin->priv->gconf_client,
-					      SELECTED_FORMAT_KEY,
-					      NULL);
+	sel_format = g_settings_get_string (plugin->priv->settings,
+					    SELECTED_FORMAT_KEY);
 
 	return sel_format ? sel_format : g_strdup (formats [0]);
 }
@@ -406,17 +399,9 @@ set_selected_format (GeditTimePlugin *plugin,
 {
 	g_return_if_fail (format != NULL);
 
-	if (!gconf_client_key_is_writable (plugin->priv->gconf_client,
-					   SELECTED_FORMAT_KEY,
-					   NULL))
-	{
-		return;
-	}
-
-	gconf_client_set_string (plugin->priv->gconf_client,
-				 SELECTED_FORMAT_KEY,
-		       		 format,
-		       		 NULL);
+	g_settings_set_string (plugin->priv->settings,
+			       SELECTED_FORMAT_KEY,
+		       	       format);
 }
 
 /* the custom format in the entry */
@@ -425,9 +410,8 @@ get_custom_format (GeditTimePlugin *plugin)
 {
 	gchar *format;
 
-	format = gconf_client_get_string (plugin->priv->gconf_client,
-					  CUSTOM_FORMAT_KEY,
-					  NULL);
+	format = g_settings_get_string (plugin->priv->settings,
+					CUSTOM_FORMAT_KEY);
 
 	return format ? format : g_strdup (DEFAULT_CUSTOM_FORMAT);
 }
@@ -438,15 +422,9 @@ set_custom_format (GeditTimePlugin *plugin,
 {
 	g_return_if_fail (format != NULL);
 
-	if (!gconf_client_key_is_writable (plugin->priv->gconf_client,
-					   CUSTOM_FORMAT_KEY,
-					   NULL))
-		return;
-
-	gconf_client_set_string (plugin->priv->gconf_client,
-				 CUSTOM_FORMAT_KEY,
-		       		 format,
-		       		 NULL);
+	g_settings_set_string (plugin->priv->settings,
+			       CUSTOM_FORMAT_KEY,
+		       	       format);
 }
 
 static gchar *
@@ -1262,7 +1240,7 @@ gedit_time_plugin_class_init (GeditTimePluginClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GeditPluginClass *plugin_class = GEDIT_PLUGIN_CLASS (klass);
 
-	object_class->finalize = gedit_time_plugin_finalize;
+	object_class->dispose = gedit_time_plugin_dispose;
 
 	plugin_class->activate = impl_activate;
 	plugin_class->deactivate = impl_deactivate;

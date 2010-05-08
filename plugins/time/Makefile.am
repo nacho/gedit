@@ -16,6 +16,11 @@ libtime_la_SOURCES = \
 libtime_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libtime_la_LIBADD  = $(GEDIT_LIBS)
 
+gsettingsschema_in_files = org.gnome.gedit.time.gschema.in
+gsettingsschema_DATA = $(gsettingsschema_in_files:.gschema.in=.gschema.xml)
+org.gnome.gedit.time.gschema.xml: org.gnome.gedit.time.gschema.in
+	gsettings-schema-convert -f $< -o $@
+
 uidir = $(GEDIT_PLUGINS_DATA_DIR)/time
 ui_DATA = \
 	gedit-time-dialog.ui				\
@@ -26,6 +31,11 @@ plugin_in_files = time.gedit-plugin.desktop.in
 %.gedit-plugin: %.gedit-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
+
+if GSETTINGS_SCHEMAS_INSTALL
+install-data-hook:
+	$(GLIB_COMPILE_SCHEMAS) $(gsettingsschemadir)
+endif
 
 EXTRA_DIST = $(ui_DATA) $(plugin_in_files)
 
