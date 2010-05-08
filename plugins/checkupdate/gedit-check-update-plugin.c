@@ -31,14 +31,12 @@
 
 #include <gedit/gseal-gtk-compat.h>
 
-#include <gconf/gconf-client.h>
-
 #if !GTK_CHECK_VERSION(2, 17, 1)
 #include <gedit/gedit-message-area.h>
 #endif
 
-#define GCONF_KEY_BASE "/apps/gedit-2/plugins/checkupdate"
-#define GCONF_KEY_IGNORE_VERSION   GCONF_KEY_BASE "/ignore_version"
+#define CHECKUPDATE_BASE_SETTINGS	"org.gnome.gedit.plugins.checkupdate"
+#define CHECKUPDATE_KEY_IGNORE_VERSION	"ignore-version"
 
 #define WINDOW_DATA_KEY "GeditCheckUpdatePluginWindowData"
 
@@ -67,7 +65,7 @@ struct _GeditCheckUpdatePluginPrivate
 {
 	SoupSession *session;
 
-	GConfClient *gconf_client;
+	GSettings *settings;
 };
 
 typedef struct
@@ -103,12 +101,7 @@ gedit_check_update_plugin_init (GeditCheckUpdatePlugin *plugin)
 
 	plugin->priv->session = soup_session_async_new ();
 
-	plugin->priv->gconf_client = gconf_client_get_default ();
-
-	gconf_client_add_dir (plugin->priv->gconf_client,
-			      GCONF_KEY_BASE,
-			      GCONF_CLIENT_PRELOAD_ONELEVEL,
-			      NULL);
+	plugin->priv->settings = g_settings_new (CHECKUPDATE_BASE_SETTINGS);
 }
 
 static void
@@ -122,13 +115,10 @@ gedit_check_update_plugin_dispose (GObject *object)
 		plugin->priv->session = NULL;
 	}
 
-	if (plugin->priv->gconf_client != NULL)
+	if (plugin->priv->settings != NULL)
 	{
-		gconf_client_suggest_sync (plugin->priv->gconf_client, NULL);
-
-		g_object_unref (G_OBJECT (plugin->priv->gconf_client));
-		
-		plugin->priv->gconf_client = NULL;
+		g_object_unref (plugin->priv->settings);
+		plugin->priv->settings = NULL;
 	}
 
 	gedit_debug_message (DEBUG_PLUGINS,
@@ -268,10 +258,9 @@ on_response_cb (GtkWidget   *infobar,
 		
 		data = g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
 
-		gconf_client_set_string (data->plugin->priv->gconf_client,
-					 GCONF_KEY_IGNORE_VERSION,
-					 data->version,
-					 NULL);
+		g_settings_set_string (data->plugin->priv->settings,
+				       CHECKUPDATE_KEY_IGNORE_VERSION,
+				       data->version);
 	}
 
 	g_object_set_data (G_OBJECT (window),
@@ -469,9 +458,8 @@ parse_file_version (const gchar *file)
 static gchar *
 get_ignore_version (GeditCheckUpdatePlugin *plugin)
 {
-	return gconf_client_get_string (plugin->priv->gconf_client,
-					GCONF_KEY_IGNORE_VERSION,
-					NULL);
+	return g_settings_get_string (plugin->priv->settings,
+				      CHECKUPDATE_KEY_IGNORE_VERSION);
 }
 
 static void
