@@ -688,8 +688,6 @@ int main (int   argc,
 	g_type_init ();
 	g_test_init (&argc, &argv, NULL);
 
-	gedit_prefs_manager_app_init ();
-
 	g_printf ("\n***\n");
 	have_unowned = check_unowned_directory ();
 	have_unowned_group = check_unowned_group ();

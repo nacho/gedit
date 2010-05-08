@@ -237,8 +237,6 @@ int main (int   argc,
 	g_type_init ();
 	g_test_init (&argc, &argv, NULL);
 
-	gedit_prefs_manager_app_init ();
-
 	g_test_add_func ("/document-loader/end-line-stripping", test_end_line_stripping);
 	g_test_add_func ("/document-loader/end-new-line-detection", test_end_new_line_detection);
 	g_test_add_func ("/document-loader/begin-new-line-detection", test_begin_new_line_detection);

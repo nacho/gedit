@@ -122,8 +122,6 @@ int main (int   argc,
 	g_type_init ();
 	g_test_init (&argc, &argv, NULL);
 
-	gedit_prefs_manager_app_init ();
-
 	g_test_add_func ("/document-output-stream/empty", test_empty);
 
 	g_test_add_func ("/document-output-stream/consecutive", test_consecutive);
