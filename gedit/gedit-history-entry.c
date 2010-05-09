@@ -204,8 +204,8 @@ get_history_items (GeditHistoryEntry *entry,
 	n_children = gtk_tree_model_iter_n_children (GTK_TREE_MODEL (store),
 						     &iter);
 
-	*len = n_children + 1;
-	array = g_ptr_array_sized_new (*len);
+	*len = n_children;
+	array = g_ptr_array_sized_new (*len + 1);
 
 	while (valid)
 	{
