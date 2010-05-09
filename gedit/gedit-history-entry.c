@@ -202,7 +202,7 @@ get_history_items (GeditHistoryEntry *entry,
 	valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store),
 					       &iter);
 	n_children = gtk_tree_model_iter_n_children (GTK_TREE_MODEL (store),
-						     &iter);
+						     NULL);
 
 	*len = n_children;
 	array = g_ptr_array_sized_new (*len + 1);
@@ -373,19 +373,22 @@ gedit_history_entry_load_history (GeditHistoryEntry *entry)
 	items = g_settings_get_strv (entry->priv->settings,
 				     entry->priv->history_id,
 				     &i);
+	i = 0;
 
 	gtk_list_store_clear (store);
 
-	for (i = 0;
-	     items[i] != NULL && i < entry->priv->history_length;
-	     i++)
+	/* Now the default value is an empty string so we have to take care
+	   of it to not add the empty string in the search list */
+	while (items[i] != NULL && *items[i] != '\0' &&
+	       i < entry->priv->history_length)
 	{
 		gtk_list_store_append (store, &iter);
-		gtk_list_store_set (store, 
+		gtk_list_store_set (store,
 				    &iter,
 				    0,
 				    items[i],
 				    -1);
+		i++;
 	}
 
 	g_strfreev (items);
