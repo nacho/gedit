@@ -414,7 +414,7 @@ on_use_default_font_changed (GSettings              *settings,
 
 	value = g_settings_get_boolean (settings, key);
 
-	gtk_widget_set_sensitive (dlg->priv->font_hbox, value);
+	gtk_widget_set_sensitive (dlg->priv->font_hbox, !value);
 }
 
 static void
@@ -454,6 +454,9 @@ setup_font_colors_page_font_section (GeditPreferencesDialog *dlg)
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->default_font_checkbutton),
 				      use_default_font);
 
+	/* Set initial widget sensitivity */
+	gtk_widget_set_sensitive (dlg->priv->font_hbox, !use_default_font);
+
 	/* Connect signals */
 	g_signal_connect (dlg->priv->editor,
 			  "changed::use-default-font",
@@ -469,9 +472,6 @@ setup_font_colors_page_font_section (GeditPreferencesDialog *dlg)
 			 dlg->priv->font_button,
 			 "font-name",
 			 G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
-
-	/* Set initial widget sensitivity */
-	gtk_widget_set_sensitive (dlg->priv->font_hbox, use_default_font);
 }
 
 static void
