@@ -3484,7 +3484,7 @@ async_data_free (AsyncData *data)
 	if (!data->removed)
 		data->model->priv->async_handles = g_slist_remove (data->model->priv->async_handles, data);
 	
-	g_free (data);
+	g_slice_free (AsyncData, data);
 }
 
 static gboolean
