@@ -2876,7 +2876,11 @@ mount_cb (GFile        *file,
 
 	g_object_unref (mount_info->operation);
 	g_object_unref (mount_info->cancellable);
-	g_free (mount_info->virtual_root);
+
+	if (mount_info->virtual_root)
+	{
+		g_object_unref (mount_info->virtual_root);
+	}
 
 	g_free (mount_info);
 }
