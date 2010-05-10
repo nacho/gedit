@@ -554,10 +554,9 @@ gedit_python_init (GeditPluginLoaderPython *loader)
 	loader->priv->status = GEDIT_PYTHON_STATUS_FAILED;
 
 	/* Hack to make python not overwrite SIGINT: this is needed to avoid
-	 * the crash reported on bug #326191 */
-
-	/* CHECK: can't we use Py_InitializeEx instead of Py_Initialize in order
-          to avoid to manage signal handlers ? - Paolo (Dec. 31, 2006) */
+	 * the crash reported on bug #326191. It's actually the signal
+	 * module that overrides SIGINT when it's set to the default,
+	 * so using Py_InitializeEx (0) also does not work */
 
 #ifdef HAVE_SIGACTION
 	/* Save old handler */
