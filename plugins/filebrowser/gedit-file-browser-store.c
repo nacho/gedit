@@ -2333,7 +2333,7 @@ async_node_free (AsyncNode *async)
 {
 	g_object_unref (async->cancellable);
 	g_slist_free (async->original_children);
-	g_free (async);
+	g_slice_free (AsyncNode, async);
 }
 
 static void
@@ -2488,7 +2488,7 @@ model_load_directory (GeditFileBrowserStore *model,
 	
 	dir->cancellable = g_cancellable_new ();
 	
-	async = g_new (AsyncNode, 1);
+	async = g_slice_new (AsyncNode);
 	async->dir = dir;
 	async->cancellable = g_object_ref (dir->cancellable);
 	async->original_children = g_slist_copy (dir->children);
@@ -2882,7 +2882,7 @@ mount_cb (GFile        *file,
 		g_object_unref (mount_info->virtual_root);
 	}
 
-	g_free (mount_info);
+	g_slice_free (MountInfo, mount_info);
 }
 
 static GeditFileBrowserStoreResult
@@ -2906,7 +2906,7 @@ model_mount_root (GeditFileBrowserStore *model,
 			/* Try to mount it */
 			FILE_BROWSER_NODE_DIR (model->priv->root)->cancellable = g_cancellable_new ();
 			
-			mount_info = g_new(MountInfo, 1);
+			mount_info = g_slice_new (MountInfo);
 			mount_info->model = model;
 			mount_info->virtual_root = g_file_dup (virtual_root);
 			
@@ -3617,7 +3617,7 @@ gedit_file_browser_store_delete_all (GeditFileBrowserStore *model,
 		files = g_list_prepend (files, g_object_ref (node->file));
 	}
 	
-	data = g_new (AsyncData, 1);
+	data = g_slice_new (AsyncData);
 
 	data->model = model;
 	data->cancellable = g_cancellable_new ();
