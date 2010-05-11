@@ -871,20 +871,24 @@ gedit_settings_set_list (GSettings    *settings,
 			 const gchar  *key,
 			 const GSList *list)
 {
-	gchar **values;
+	gchar **values = NULL;
 	const GSList *l;
-	gint i, len;
+	gint len = 0;
 
 	g_return_if_fail (G_IS_SETTINGS (settings));
 	g_return_if_fail (key != NULL);
-	g_return_if_fail (list != NULL);
 
-	len = g_slist_length ((GSList *)list);
-	values = g_new (gchar *, len);
-
-	for (l = list, i = 0; l != NULL; l = g_slist_next (l), i++)
+	if (list != NULL)
 	{
-		values[i] = l->data;
+		gint i;
+
+		len = g_slist_length ((GSList *)list);
+		values = g_new (gchar *, len);
+
+		for (l = list, i = 0; l != NULL; l = g_slist_next (l), i++)
+		{
+			values[i] = l->data;
+		}
 	}
 
 	g_settings_set_strv (settings, key, (const gchar * const *)values, len);
