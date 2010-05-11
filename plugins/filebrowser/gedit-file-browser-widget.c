@@ -1020,7 +1020,7 @@ create_toolbar (GeditFileBrowserWidget *obj,
 					      "DirectoryPrevious");
 	g_object_set (action, "is_important", TRUE, "short_label",
 		      _("Previous location"), NULL);
-	gtk_action_connect_proxy (action, widget);
+	gtk_activatable_set_related_action (GTK_ACTIVATABLE (widget), action);
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (widget), 0);
 
 	/* Next directory menu tool item */
@@ -1041,7 +1041,7 @@ create_toolbar (GeditFileBrowserWidget *obj,
 					      "DirectoryNext");
 	g_object_set (action, "is_important", TRUE, "short_label",
 		      _("Previous location"), NULL);
-	gtk_action_connect_proxy (action, widget);
+	gtk_activatable_set_related_action (GTK_ACTIVATABLE (widget), action);
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (widget), 1);
 
 	gtk_box_pack_start (GTK_BOX (obj), toolbar, FALSE, FALSE, 0);
