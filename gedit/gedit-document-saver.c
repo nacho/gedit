@@ -694,6 +694,8 @@ async_replace_ready_callback (GFile        *source,
 	GeditDocumentSaver *saver;
 	GCharsetConverter *converter;
 	GFileOutputStream *file_stream;
+	GOutputStream *base_stream;
+	gchar *content_type;
 	GError *error = NULL;
 
 	gedit_debug (DEBUG_SAVER);
@@ -707,7 +709,7 @@ async_replace_ready_callback (GFile        *source,
 	
 	saver = async->saver;
 	file_stream = g_file_replace_finish (source, res, &error);
-	
+
 	/* handle any error that might occur */
 	if (!file_stream)
 	{
@@ -715,6 +717,30 @@ async_replace_ready_callback (GFile        *source,
 		async_failed (async, error);
 		return;
 	}
+
+	content_type = gedit_document_get_content_type (saver->priv->document);
+
+	if (g_strcmp0 (content_type, "application/x-gzip") == 0)
+	{
+		GZlibCompressor *compressor;
+
+		gedit_debug_message (DEBUG_SAVER, "Use gzip compressor");
+
+		compressor = g_zlib_compressor_new (G_ZLIB_COMPRESSOR_FORMAT_GZIP,
+		                                    -1);
+
+		base_stream = g_converter_output_stream_new (G_OUTPUT_STREAM (file_stream),
+		                                             G_CONVERTER (compressor));
+
+		g_object_unref (compressor);
+		g_object_unref (file_stream);
+	}
+	else
+	{
+		base_stream = G_OUTPUT_STREAM (file_stream);
+	}
+
+	g_free (content_type);
 
 	/* FIXME: manage converter error? */
 	gedit_debug_message (DEBUG_SAVER, "Encoding charset: %s",
@@ -725,17 +751,18 @@ async_replace_ready_callback (GFile        *source,
 		converter = g_charset_converter_new (gedit_encoding_get_charset (saver->priv->encoding),
 						     "UTF-8",
 						     NULL);
-		saver->priv->stream = g_converter_output_stream_new (G_OUTPUT_STREAM (file_stream),
-								       G_CONVERTER (converter));
 
-		g_object_unref (file_stream);
+		saver->priv->stream = g_converter_output_stream_new (base_stream,
+		                                                     G_CONVERTER (converter));
+
 		g_object_unref (converter);
+		g_object_unref (base_stream);
 	}
 	else
 	{
-		saver->priv->stream = G_OUTPUT_STREAM (file_stream);
+		saver->priv->stream = G_OUTPUT_STREAM (base_stream);
 	}
-	
+
 	saver->priv->input = gedit_document_input_stream_new (GTK_TEXT_BUFFER (saver->priv->document),
 								saver->priv->newline_type);
 

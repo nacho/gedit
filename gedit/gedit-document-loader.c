@@ -619,9 +619,9 @@ static void
 finish_query_info (AsyncData *async)
 {
 	GeditDocumentLoader *loader;
-	GInputStream *conv_stream;
 	GFileInfo *info;
 	GSList *candidate_encodings;
+	GInputStream *base_stream;
 	
 	loader = async->loader;
 	info = loader->priv->info;
@@ -652,12 +652,28 @@ finish_query_info (AsyncData *async)
 
 	loader->priv->converter = gedit_smart_charset_converter_new (candidate_encodings);
 	g_slist_free (candidate_encodings);
-	
-	conv_stream = g_converter_input_stream_new (loader->priv->stream,
-						    G_CONVERTER (loader->priv->converter));
-	g_object_unref (loader->priv->stream);
 
-	loader->priv->stream = conv_stream;
+	if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE) &&
+	    g_strcmp0 (g_file_info_get_content_type (info), "application/x-gzip") == 0)
+	{
+		GZlibDecompressor *decompressor;
+
+		decompressor = g_zlib_decompressor_new (G_ZLIB_COMPRESSOR_FORMAT_GZIP);
+
+		base_stream = g_converter_input_stream_new (loader->priv->stream,
+		                                            G_CONVERTER (decompressor));
+
+		g_object_unref (decompressor);
+	}
+	else
+	{
+		base_stream = g_object_ref (loader->priv->stream);
+	}
+
+	g_object_unref (loader->priv->stream);
+	loader->priv->stream = g_converter_input_stream_new (base_stream,
+	                                                     G_CONVERTER (loader->priv->converter));
+	g_object_unref (base_stream);
 
 	/* Output stream */
 	loader->priv->output = gedit_document_output_stream_new (loader->priv->document);
