@@ -8,6 +8,7 @@ schema org.gnome.gedit:
         description = Whether to use the system's default fixed width font for editing text instead of a font specific to gedit. If this option is turned off, then the font named in the "Editor Font" option will be used instead of the system font.
 
       key editor-font = @s 'Monospace 12'
+        l10n = messages
         summary = Editor Font
         description = A custom font that will be used for the editing area. This will only take effect if the "Use Default Font" option is turned off.
 
@@ -132,24 +133,29 @@ schema org.gnome.gedit:
         description = If this value is 0, then no line numbers will be inserted when printing a document. Otherwise, gedit will print line numbers every such number of lines.
 
       key print-font-body-pango = @s 'Monospace 9'
+        l10n = messages
         summary = Body Font for Printing
         description = Specifies the font to use for a document's body when printing documents.
 
       key print-font-header-pango = @s 'Sans 11'
+        l10n = messages
         summary = Header Font for Printing
         description = Specifies the font to use for page headers when printing a document. This will only take effect if the "Print Header" option is turned on.
 
       key print-font-numbers-pango = @s 'Sans 8'
+        l10n = messages
         summary = Line Number Font for Printing
         description = Specifies the font to use for line numbers when printing. This will only take effect if the "Print Line Numbers" option is non-zero.
 
 
     child encodings:
       key auto-detected = @as ['UTF-8', 'CURRENT', 'ISO-8859-15', 'UTF-16']
+        l10n = messages
         summary = Automatically Detected Encodings
         description = Sorted list of encodings used by gedit for automatically detecting the encoding of a file. "CURRENT" represents the current locale encoding. Only recognized encodings are used.
 
       key shown-in-menu = @as ['ISO-8859-15']
+        l10n = messages
         summary = Encodings shown in menu
         description = List of encodings shown in the Character Encoding menu in open/save file selector. Only recognized encodings are used.
 
