@@ -78,28 +78,29 @@ PROFILE (static GTimer *timer = NULL)
 
 #define GEDIT_DOCUMENT_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_DOCUMENT, GeditDocumentPrivate))
 
-static void	gedit_document_load_real	(GeditDocument          *doc,
-						 GFile                  *location,
-						 const GeditEncoding    *encoding,
-						 gint                    line_pos,
-						 gint                    column_pos,
-						 gboolean                create);
-static void	gedit_document_save_real	(GeditDocument           *doc,
-						 GFile                   *location,
-						 const GeditEncoding     *encoding,
-						 GeditDocumentNewlineType newline_type,
-						 GeditDocumentSaveFlags   flags);
-static void	to_search_region_range 		(GeditDocument *doc,
-						 GtkTextIter   *start, 
-						 GtkTextIter   *end);
-static void 	insert_text_cb		 	(GeditDocument *doc, 
-						 GtkTextIter   *pos,
-						 const gchar   *text, 
-						 gint           length);
+static void	gedit_document_load_real	(GeditDocument                *doc,
+						 GFile                        *location,
+						 const GeditEncoding          *encoding,
+						 gint                          line_pos,
+						 gint                          column_pos,
+						 gboolean                      create);
+static void	gedit_document_save_real	(GeditDocument                *doc,
+						 GFile                        *location,
+						 const GeditEncoding          *encoding,
+						 GeditDocumentNewlineType      newline_type,
+						 GeditDocumentCompressionType  compression_type,
+						 GeditDocumentSaveFlags        flags);
+static void	to_search_region_range 		(GeditDocument                *doc,
+						 GtkTextIter                  *start,
+						 GtkTextIter                  *end);
+static void 	insert_text_cb		 	(GeditDocument                *doc,
+						 GtkTextIter                  *pos,
+						 const gchar                  *text,
+						 gint                          length);
 						 
-static void	delete_range_cb 		(GeditDocument *doc, 
-						 GtkTextIter   *start,
-						 GtkTextIter   *end);
+static void	delete_range_cb 		(GeditDocument                *doc,
+						 GtkTextIter                  *start,
+						 GtkTextIter                  *end);
 			     
 struct _GeditDocumentPrivate
 {
@@ -124,6 +125,7 @@ struct _GeditDocumentPrivate
 	gint	     num_of_lines_search_text;
 
 	GeditDocumentNewlineType newline_type;
+	GeditDocumentCompressionType compression_type;
 
 	/* Temp data while loading */
 	GeditDocumentLoader *loader;
@@ -162,7 +164,8 @@ enum {
 	PROP_ENCODING,
 	PROP_CAN_SEARCH_AGAIN,
 	PROP_ENABLE_SEARCH_HIGHLIGHTING,
-	PROP_NEWLINE_TYPE
+	PROP_NEWLINE_TYPE,
+	PROP_COMPRESSION_TYPE
 };
 
 enum {
@@ -236,6 +239,18 @@ set_newline_type (GeditDocument           *doc,
 		doc->priv->newline_type = newline_type;
 
 		g_object_notify (G_OBJECT (doc), "newline-type");
+	}
+}
+
+static void
+set_compression_type (GeditDocument *doc,
+                      GeditDocumentCompressionType compression_type)
+{
+	if (doc->priv->compression_type != compression_type)
+	{
+		doc->priv->compression_type = compression_type;
+
+		g_object_notify (G_OBJECT (doc), "compression-type");
 	}
 }
 
@@ -376,6 +391,9 @@ gedit_document_get_property (GObject    *object,
 		case PROP_NEWLINE_TYPE:
 			g_value_set_enum (value, doc->priv->newline_type);
 			break;
+		case PROP_COMPRESSION_TYPE:
+			g_value_set_enum (value, doc->priv->compression_type);
+			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -399,6 +417,10 @@ gedit_document_set_property (GObject      *object,
 		case PROP_NEWLINE_TYPE:
 			set_newline_type (doc,
 					  g_value_get_enum (value));
+			break;
+		case PROP_COMPRESSION_TYPE:
+			set_compression_type (doc,
+			                      g_value_get_enum (value));
 			break;
 		case PROP_SHORTNAME:
 			gedit_document_set_short_name_for_display (doc,
@@ -545,6 +567,24 @@ gedit_document_class_init (GeditDocumentClass *klass)
 	                                                    GEDIT_TYPE_DOCUMENT_NEWLINE_TYPE,
 	                                                    GEDIT_DOCUMENT_NEWLINE_TYPE_LF,
 	                                                    G_PARAM_READWRITE |
+	                                                    G_PARAM_CONSTRUCT |
+	                                                    G_PARAM_STATIC_NAME |
+	                                                    G_PARAM_STATIC_BLURB));
+
+	/**
+	 * GeditDocument:compression-type:
+	 *
+	 * The :compression-type property determines how to compress the
+	 * document when saving
+	 */
+	g_object_class_install_property (object_class, PROP_COMPRESSION_TYPE,
+	                                 g_param_spec_enum ("compression-type",
+	                                                    "Compression type",
+	                                                    "The save compression type",
+	                                                    GEDIT_TYPE_DOCUMENT_COMPRESSION_TYPE,
+	                                                    GEDIT_DOCUMENT_COMPRESSION_TYPE_NONE,
+	                                                    G_PARAM_READWRITE |
+	                                                    G_PARAM_CONSTRUCT |
 	                                                    G_PARAM_STATIC_NAME |
 	                                                    G_PARAM_STATIC_BLURB));
 
@@ -633,14 +673,15 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, save),
 			      NULL, NULL,
-			      gedit_marshal_VOID__OBJECT_BOXED_ENUM_FLAGS,
+			      gedit_marshal_VOID__OBJECT_BOXED_ENUM_ENUM_FLAGS,
 			      G_TYPE_NONE,
-			      4,
+			      5,
 			      G_TYPE_FILE,
 			      /* we rely on the fact that the GeditEncoding pointer stays
 			       * the same forever */
 			      GEDIT_TYPE_ENCODING | G_SIGNAL_TYPE_STATIC_SCOPE,
 			      GEDIT_TYPE_DOCUMENT_NEWLINE_TYPE,
+			      GEDIT_TYPE_DOCUMENT_COMPRESSION_TYPE,
 			      GEDIT_TYPE_DOCUMENT_SAVE_FLAGS);
 
 	document_signals[SAVING] =
@@ -936,8 +977,6 @@ gedit_document_init (GeditDocument *doc)
 
 	doc->priv->encoding = gedit_encoding_get_utf8 ();
 
-	doc->priv->newline_type = GEDIT_DOCUMENT_NEWLINE_TYPE_DEFAULT;
-
 	g_settings_get (doc->priv->editor_settings, GEDIT_SETTINGS_MAX_UNDO_ACTIONS,
 			"u", &undo_actions);
 	bracket_matching = g_settings_get_boolean (doc->priv->editor_settings,
@@ -988,10 +1027,40 @@ gedit_document_new (void)
 	return GEDIT_DOCUMENT (g_object_new (GEDIT_TYPE_DOCUMENT, NULL));
 }
 
+static gchar *
+get_content_type_from_content (GeditDocument *doc)
+{
+	gchar *content_type;
+	gchar *data;
+	gsize datalen;
+	GtkTextBuffer *buf;
+	GtkTextIter start, end;
+
+	buf = GTK_TEXT_BUFFER (doc);
+
+	gtk_text_buffer_get_start_iter (buf, &start);
+	end = start;
+	gtk_text_iter_forward_chars (&end, 255);
+
+	data = gtk_text_buffer_get_text (buf, &start, &end, TRUE);
+	datalen = strlen (data);
+
+	content_type = g_content_type_guess (NULL,
+	                                     (const guchar *)data,
+	                                     datalen,
+	                                     NULL);
+
+	g_free (data);
+
+	return content_type;
+}
+
 static void
 set_content_type_no_guess (GeditDocument *doc,
 			   const gchar   *content_type)
 {
+	gchar *dupped_content_type;
+
 	gedit_debug (DEBUG_DOCUMENT);
 
 	if (doc->priv->content_type != NULL && content_type != NULL &&
@@ -1000,10 +1069,27 @@ set_content_type_no_guess (GeditDocument *doc,
 
 	g_free (doc->priv->content_type);
 
-	if (content_type == NULL || g_content_type_is_unknown (content_type))
-		doc->priv->content_type = get_default_content_type ();
+	/* For compression types, we try to just guess from the content */
+	if (gedit_utils_get_compression_type_from_content_type (content_type) !=
+	    GEDIT_DOCUMENT_COMPRESSION_TYPE_NONE)
+	{
+		dupped_content_type = get_content_type_from_content (doc);
+	}
 	else
-		doc->priv->content_type = g_strdup (content_type);
+	{
+		dupped_content_type = g_strdup (content_type);
+	}
+
+	if (dupped_content_type == NULL ||
+	    g_content_type_is_unknown (dupped_content_type))
+	{
+		doc->priv->content_type = get_default_content_type ();
+		g_free (dupped_content_type);
+	}
+	else
+	{
+		doc->priv->content_type = dupped_content_type;
+	}
 
 	g_object_notify (G_OBJECT (doc), "content-type");
 }
@@ -1320,6 +1406,9 @@ document_loader_loaded (GeditDocumentLoader *loader,
 		set_newline_type (doc,
 		                  gedit_document_loader_get_newline_type (loader));
 
+		set_compression_type (doc,
+		                      gedit_document_loader_get_compression_type (loader));
+
 		restore_cursor = g_settings_get_boolean (doc->priv->editor_settings,
 							 GEDIT_SETTINGS_RESTORE_CURSOR_POSITION);
 
@@ -1612,18 +1701,22 @@ document_saver_saving (GeditDocumentSaver *saver,
 }
 
 static void
-gedit_document_save_real (GeditDocument           *doc,
-			  GFile                   *location,
-			  const GeditEncoding     *encoding,
-			  GeditDocumentNewlineType newline_type,
-			  GeditDocumentSaveFlags   flags)
+gedit_document_save_real (GeditDocument                *doc,
+			  GFile                        *location,
+			  const GeditEncoding          *encoding,
+			  GeditDocumentNewlineType      newline_type,
+			  GeditDocumentCompressionType  compression_type,
+			  GeditDocumentSaveFlags        flags)
 {
 	g_return_if_fail (doc->priv->saver == NULL);
 
 	/* create a saver, it will be destroyed once saving is complete */
-	doc->priv->saver = gedit_document_saver_new (doc, location, encoding,
-						     newline_type,
-						     flags);
+	doc->priv->saver = gedit_document_saver_new (doc,
+	                                             location,
+	                                             encoding,
+	                                             newline_type,
+	                                             compression_type,
+	                                             flags);
 
 	g_signal_connect (doc->priv->saver,
 			  "saving",
@@ -1632,6 +1725,7 @@ gedit_document_save_real (GeditDocument           *doc,
 
 	doc->priv->requested_encoding = encoding;
 	doc->priv->newline_type = newline_type;
+	doc->priv->compression_type = compression_type;
 
 	gedit_document_saver_save (doc->priv->saver,
 				   &doc->priv->mtime);
@@ -1658,6 +1752,7 @@ gedit_document_save (GeditDocument          *doc,
 		       doc->priv->location,
 		       doc->priv->encoding,
 		       doc->priv->newline_type,
+		       doc->priv->compression_type,
 		       flags);
 }
 
@@ -1673,11 +1768,12 @@ gedit_document_save (GeditDocument          *doc,
  * to be emitted.
  */
 void
-gedit_document_save_as (GeditDocument           *doc,
-			GFile                   *location,
-			const GeditEncoding     *encoding,
-			GeditDocumentNewlineType newline_type,
-			GeditDocumentSaveFlags   flags)
+gedit_document_save_as (GeditDocument                *doc,
+			GFile                        *location,
+			const GeditEncoding          *encoding,
+			GeditDocumentNewlineType      newline_type,
+			GeditDocumentCompressionType  compression_type,
+			GeditDocumentSaveFlags        flags)
 {
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 	g_return_if_fail (G_IS_FILE (location));
@@ -1691,6 +1787,7 @@ gedit_document_save_as (GeditDocument           *doc,
 		       location,
 		       encoding,
 		       newline_type,
+		       compression_type,
 		       flags | GEDIT_DOCUMENT_SAVE_IGNORE_MTIME);
 }
 
@@ -2614,6 +2711,14 @@ gedit_document_get_newline_type (GeditDocument *doc)
 	return doc->priv->newline_type;
 }
 
+GeditDocumentCompressionType
+gedit_document_get_compression_type (GeditDocument *doc)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), 0);
+
+	return doc->priv->compression_type;
+}
+
 void
 _gedit_document_set_mount_operation_factory (GeditDocument 	       *doc,
 					    GeditMountOperationFactory	callback,
@@ -2798,4 +2903,5 @@ gedit_document_set_metadata (GeditDocument *doc,
 	g_object_unref (info);
 }
 #endif
+
 /* ex:ts=8:noet: */

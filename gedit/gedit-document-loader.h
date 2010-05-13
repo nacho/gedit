@@ -110,6 +110,8 @@ const GeditEncoding	*gedit_document_loader_get_encoding	(GeditDocumentLoader *lo
 
 GeditDocumentNewlineType gedit_document_loader_get_newline_type (GeditDocumentLoader *loader);
 
+GeditDocumentCompressionType gedit_document_loader_get_compression_type (GeditDocumentLoader *loader);
+
 goffset			 gedit_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
 
 /* You can get from the info: content_type, time_modified, standard_size, access_can_write 

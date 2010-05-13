@@ -218,7 +218,7 @@ test_saver (const gchar              *filename_or_uri,
 	ensure_mounted (file);
 
 	gedit_document_save_as (document, file, gedit_encoding_get_utf8 (),
-			        newline_type, save_flags);
+			        newline_type, 0, save_flags);
 
 	while (!test_completed)
 	{

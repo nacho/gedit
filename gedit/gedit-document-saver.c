@@ -64,6 +64,7 @@ enum {
 	PROP_LOCATION,
 	PROP_ENCODING,
 	PROP_NEWLINE_TYPE,
+	PROP_COMPRESSION_TYPE,
 	PROP_FLAGS
 };
 
@@ -98,6 +99,7 @@ struct _GeditDocumentSaverPrivate
 	GFile			 *location;
 	const GeditEncoding      *encoding;
 	GeditDocumentNewlineType  newline_type;
+	GeditDocumentCompressionType compression_type;
 
 	GeditDocumentSaveFlags    flags;
 
@@ -142,6 +144,9 @@ gedit_document_saver_set_property (GObject      *object,
 		case PROP_NEWLINE_TYPE:
 			saver->priv->newline_type = g_value_get_enum (value);
 			break;
+		case PROP_COMPRESSION_TYPE:
+			saver->priv->compression_type = g_value_get_enum (value);
+			break;
 		case PROP_FLAGS:
 			saver->priv->flags = g_value_get_flags (value);
 			break;
@@ -172,6 +177,9 @@ gedit_document_saver_get_property (GObject    *object,
 			break;
 		case PROP_NEWLINE_TYPE:
 			g_value_set_enum (value, saver->priv->newline_type);
+			break;
+		case PROP_COMPRESSION_TYPE:
+			g_value_set_enum (value, saver->priv->compression_type);
 			break;
 		case PROP_FLAGS:
 			g_value_set_flags (value, saver->priv->flags);
@@ -316,6 +324,18 @@ gedit_document_saver_class_init (GeditDocumentSaverClass *klass)
 					                    G_PARAM_CONSTRUCT_ONLY));
 
 	g_object_class_install_property (object_class,
+					 PROP_COMPRESSION_TYPE,
+					 g_param_spec_enum ("compression-type",
+					                    "Compression type",
+					                    "The compression type",
+					                    GEDIT_TYPE_DOCUMENT_COMPRESSION_TYPE,
+					                    GEDIT_DOCUMENT_COMPRESSION_TYPE_NONE,
+					                    G_PARAM_READWRITE |
+					                    G_PARAM_STATIC_NAME |
+					                    G_PARAM_STATIC_BLURB |
+					                    G_PARAM_CONSTRUCT_ONLY));
+
+	g_object_class_install_property (object_class,
 					 PROP_FLAGS,
 					 g_param_spec_flags ("flags",
 							     "Flags",
@@ -352,11 +372,12 @@ gedit_document_saver_init (GeditDocumentSaver *saver)
 }
 
 GeditDocumentSaver *
-gedit_document_saver_new (GeditDocument           *doc,
-			  GFile                   *location,
-			  const GeditEncoding     *encoding,
-			  GeditDocumentNewlineType newline_type,
-			  GeditDocumentSaveFlags   flags)
+gedit_document_saver_new (GeditDocument                *doc,
+			  GFile                        *location,
+			  const GeditEncoding          *encoding,
+			  GeditDocumentNewlineType      newline_type,
+			  GeditDocumentCompressionType  compression_type,
+			  GeditDocumentSaveFlags        flags)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 
@@ -368,6 +389,7 @@ gedit_document_saver_new (GeditDocument           *doc,
 						   "location", location,
 						   "encoding", encoding,
 						   "newline_type", newline_type,
+						   "compression_type", compression_type,
 						   "flags", flags,
 						   NULL));
 }
@@ -720,7 +742,7 @@ async_replace_ready_callback (GFile        *source,
 
 	content_type = gedit_document_get_content_type (saver->priv->document);
 
-	if (g_strcmp0 (content_type, "application/x-gzip") == 0)
+	if (saver->priv->compression_type == GEDIT_DOCUMENT_COMPRESSION_TYPE_GZIP)
 	{
 		GZlibCompressor *compressor;
 

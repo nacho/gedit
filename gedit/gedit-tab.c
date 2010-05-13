@@ -1294,6 +1294,7 @@ recoverable_saving_error_message_area_response (GtkWidget *message_area,
 					tab->priv->tmp_save_location,
 					tab->priv->tmp_encoding,
 					gedit_document_get_newline_type (doc),
+					gedit_document_get_compression_type (doc),
 					tab->priv->save_flags);
 	}
 	else
@@ -2274,10 +2275,11 @@ gedit_tab_auto_save (GeditTab *tab)
 }
 
 void
-_gedit_tab_save_as (GeditTab                 *tab,
-                    GFile                    *location,
-                    const GeditEncoding      *encoding,
-                    GeditDocumentNewlineType  newline_type)
+_gedit_tab_save_as (GeditTab                     *tab,
+                    GFile                        *location,
+                    const GeditEncoding          *encoding,
+                    GeditDocumentNewlineType      newline_type,
+                    GeditDocumentCompressionType  compression_type)
 {
 	GeditDocument *doc;
 	GeditDocumentSaveFlags save_flags;
@@ -2323,8 +2325,12 @@ _gedit_tab_save_as (GeditTab                 *tab,
 	if (tab->priv->auto_save_timeout > 0)
 		remove_auto_save_timeout (tab);
 
-	gedit_document_save_as (doc, location, encoding, newline_type,
-				tab->priv->save_flags);
+	gedit_document_save_as (doc,
+	                        location,
+	                        encoding,
+	                        newline_type,
+	                        compression_type,
+	                        tab->priv->save_flags);
 }
 
 #define GEDIT_PAGE_SETUP_KEY "gedit-page-setup-key"

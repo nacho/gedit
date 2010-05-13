@@ -114,6 +114,16 @@
   )
 )
 
+(define-enum CompressionType
+  (in-module "Gedit")
+  (c-name "GeditDocumentCompressionType")
+  (gtype-id "GEDIT_TYPE_DOCUMENT_COMPRESSION_TYPE")
+  (values
+    '("none" "GEDIT_DOCUMENT_COMPRESSION_TYPE_NONE")
+    '("gzip" "GEDIT_DOCUMENT_COMPRESSION_TYPE_GZIP")
+  )
+)
+
 (define-flags DocumentSaveFlags
   (in-module "Gedit")
   (c-name "GeditDocumentSaveFlags")
@@ -290,6 +300,12 @@
   (return-type "GeditDocumentNewlineType")
 )
 
+(define-method get_compression_type
+  (of-object "GeditDocument")
+  (c-name "gedit_document_get_compression_type")
+  (return-type "GeditDocumentCompressionType")
+)
+
 (define-method get_uri_for_display
   (of-object "GeditDocument")
   (c-name "gedit_document_get_uri_for_display")
@@ -356,6 +372,7 @@
     '("GFile*" "location")
     '("const-GeditEncoding*" "encoding" (default "NULL") (null-ok))
     '("GeditDocumentNewlineType" "newline_type" (default "0"))
+    '("GeditDocumentCompressionType" "compression_type" (default "0"))
     '("GeditDocumentSaveFlags" "flags" (default "0"))
   )
 )

@@ -37,6 +37,7 @@
 #include <gtk/gtk.h>
 #include <atk/atk.h>
 #include <gedit/gedit-encodings.h>
+#include <gedit/gedit-document.h>
 #include <gtksourceview/gtksourceview.h>
 
 G_BEGIN_DECLS
@@ -156,6 +157,9 @@ gboolean	 gedit_utils_decode_uri 		(const gchar *uri,
 gchar 	       **gedit_utils_drop_get_uris		(GtkSelectionData *selection_data);
 
 gboolean	 gedit_utils_can_read_from_stdin	(void);
+
+GeditDocumentCompressionType
+		 gedit_utils_get_compression_type_from_content_type (const gchar *content_type);
 
 G_END_DECLS
 

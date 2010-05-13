@@ -82,6 +82,23 @@ typedef enum
 
 } GeditSearchFlags;
 
+/*
+ * NOTE: when adding a new compression type, make sure to update:
+ *   1) The document loader to support it
+ *   2) gedit_document_compression_type_for_display
+ */
+
+/**
+ * GeditDocumentCompressionType:
+ * @GEDIT_DOCUMENT_COMPRESSION_TYPE_NONE: save file in plain text.
+ * @GEDIT_DOCUMENT_COMPRESSION_TYPE_GZIP: save file using gzip compression.
+ */
+typedef enum
+{
+	GEDIT_DOCUMENT_COMPRESSION_TYPE_NONE,
+	GEDIT_DOCUMENT_COMPRESSION_TYPE_GZIP
+} GeditDocumentCompressionType;
+
 /**
  * GeditDocumentSaveFlags:
  * @GEDIT_DOCUMENT_SAVE_IGNORE_MTIME: save file despite external modifications.
@@ -140,11 +157,12 @@ struct _GeditDocumentClass
 					 const GError     *error);
 
 	/* Document save */
-	void (* save)			(GeditDocument           *document,
-					 GFile                   *location,
-					 const GeditEncoding     *encoding,
-					 GeditDocumentNewlineType newline_type,
-					 GeditDocumentSaveFlags   flags);
+	void (* save)			(GeditDocument                *document,
+					 GFile                        *location,
+					 const GeditEncoding          *encoding,
+					 GeditDocumentNewlineType      newline_type,
+					 GeditDocumentCompressionType  compression_type,
+					 GeditDocumentSaveFlags        flags);
 
 	void (* saving)			(GeditDocument    *document,
 					 goffset	   size,
@@ -220,11 +238,12 @@ gboolean	 gedit_document_load_cancel	(GeditDocument       *doc);
 void		 gedit_document_save 		(GeditDocument       *doc,
 						 GeditDocumentSaveFlags flags);
 
-void		 gedit_document_save_as 	(GeditDocument           *doc,	
-						 GFile                   *location, 
-						 const GeditEncoding     *encoding,
-						 GeditDocumentNewlineType newline_type,
-						 GeditDocumentSaveFlags   flags);
+void		 gedit_document_save_as 	(GeditDocument                *doc,
+						 GFile                        *location,
+						 const GeditEncoding          *encoding,
+						 GeditDocumentNewlineType      newline_type,
+						 GeditDocumentCompressionType  compression_type,
+						 GeditDocumentSaveFlags        flags);
 
 gboolean	 gedit_document_is_untouched 	(GeditDocument       *doc);
 gboolean	 gedit_document_is_untitled 	(GeditDocument       *doc);
@@ -284,6 +303,9 @@ gboolean	 gedit_document_get_enable_search_highlighting
 
 GeditDocumentNewlineType
 		 gedit_document_get_newline_type (GeditDocument *doc);
+
+GeditDocumentCompressionType
+		 gedit_document_get_compression_type (GeditDocument *doc);
 
 gchar		*gedit_document_get_metadata	(GeditDocument *doc,
 						 const gchar   *key);

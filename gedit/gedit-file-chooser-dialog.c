@@ -524,17 +524,14 @@ gedit_file_chooser_dialog_get_encoding (GeditFileChooserDialog *dialog)
 				GEDIT_ENCODINGS_COMBO_BOX (dialog->priv->option_menu));
 }
 
-void
-gedit_file_chooser_dialog_set_newline_type (GeditFileChooserDialog  *dialog,
-					    GeditDocumentNewlineType newline_type)
+static void
+set_enum_combo (GtkComboBox *combo,
+                gint         value)
 {
 	GtkTreeIter iter;
 	GtkTreeModel *model;
 
-	g_return_if_fail (GEDIT_IS_FILE_CHOOSER_DIALOG (dialog));
-	g_return_if_fail (gtk_file_chooser_get_action (GTK_FILE_CHOOSER (dialog)) == GTK_FILE_CHOOSER_ACTION_SAVE);
-
-	model = GTK_TREE_MODEL (dialog->priv->newline_store);
+	model = gtk_combo_box_get_model (combo);
 
 	if (!gtk_tree_model_get_iter_first (model, &iter))
 	{
@@ -543,17 +540,27 @@ gedit_file_chooser_dialog_set_newline_type (GeditFileChooserDialog  *dialog,
 
 	do
 	{
-		GeditDocumentNewlineType nt;
+		gint nt;
 
 		gtk_tree_model_get (model, &iter, 1, &nt, -1);
 
-		if (newline_type == nt)
+		if (value == nt)
 		{
-			gtk_combo_box_set_active_iter (GTK_COMBO_BOX (dialog->priv->newline_combo),
-			                               &iter);
+			gtk_combo_box_set_active_iter (combo, &iter);
 			break;
 		}
 	} while (gtk_tree_model_iter_next (model, &iter));
+}
+
+void
+gedit_file_chooser_dialog_set_newline_type (GeditFileChooserDialog  *dialog,
+					    GeditDocumentNewlineType newline_type)
+{
+	g_return_if_fail (GEDIT_IS_FILE_CHOOSER_DIALOG (dialog));
+	g_return_if_fail (gtk_file_chooser_get_action (GTK_FILE_CHOOSER (dialog)) == GTK_FILE_CHOOSER_ACTION_SAVE);
+
+	set_enum_combo (GTK_COMBO_BOX (dialog->priv->newline_combo),
+	                newline_type);
 }
 
 GeditDocumentNewlineType
@@ -577,4 +584,5 @@ gedit_file_chooser_dialog_get_newline_type (GeditFileChooserDialog *dialog)
 
 	return newline_type;
 }
+
 /* ex:ts=8:noet: */

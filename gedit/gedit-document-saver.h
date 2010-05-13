@@ -82,11 +82,12 @@ struct _GeditDocumentSaverClass
 GType 		 	 gedit_document_saver_get_type		(void) G_GNUC_CONST;
 
 /* If enconding == NULL, the encoding will be autodetected */
-GeditDocumentSaver 	*gedit_document_saver_new 		(GeditDocument           *doc,
-								 GFile                   *location,
-								 const GeditEncoding     *encoding,
-								 GeditDocumentNewlineType newline_type,
-								 GeditDocumentSaveFlags   flags);
+GeditDocumentSaver 	*gedit_document_saver_new 		(GeditDocument                *doc,
+								 GFile                        *location,
+								 const GeditEncoding          *encoding,
+								 GeditDocumentNewlineType      newline_type,
+								 GeditDocumentCompressionType  compression_type,
+								 GeditDocumentSaveFlags        flags);
 
 void			 gedit_document_saver_saving		(GeditDocumentSaver *saver,
 								 gboolean            completed,

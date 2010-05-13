@@ -571,17 +571,106 @@ replace_read_only_file (GtkWindow *parent, GFile *file)
 	return (ret == GTK_RESPONSE_YES);
 }
 
+static gboolean
+change_compression (GtkWindow *parent,
+                    GFile     *file,
+                    gboolean   compressed)
+{
+	GtkWidget *dialog;
+	gint ret;
+	gchar *parse_name;
+	gchar *name_for_display;
+	const gchar *primary_message;
+	const gchar *secondary_message;
+	const gchar *button_label;
+
+	gedit_debug (DEBUG_COMMANDS);
+
+	parse_name = g_file_get_parse_name (file);
+
+	/* Truncate the name so it doesn't get insanely wide. Note that even
+	 * though the dialog uses wrapped text, if the name doesn't contain
+	 * white space then the text-wrapping code is too stupid to wrap it.
+	 */
+	name_for_display = gedit_utils_str_middle_truncate (parse_name, 50);
+	g_free (parse_name);
+
+	if (compressed)
+	{
+		primary_message = _("Save the file using compression?");
+		secondary_message = _("The file \"%s\" was previously saved as plain "
+		                      "text and will now be saved using compression.");
+		button_label = _("Save using compression");
+	}
+	else
+	{
+		primary_message = _("Save the file as plain text?");
+		secondary_message = _("The file \"%s\" was previously saved "
+		                      "using compression and will now be saved as plain text.");
+		button_label = _("Save as plain text");
+	}
+
+	dialog = gtk_message_dialog_new (parent,
+					 GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_QUESTION,
+					 GTK_BUTTONS_NONE,
+					 "%s",
+					 primary_message);
+
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						  secondary_message,
+						  name_for_display);
+
+	g_free (name_for_display);
+
+	gtk_dialog_add_button (GTK_DIALOG (dialog),
+			       GTK_STOCK_CANCEL,
+			       GTK_RESPONSE_CANCEL);
+
+	gedit_dialog_add_button (GTK_DIALOG (dialog),
+				 button_label,
+			  	 GTK_STOCK_SAVE_AS,
+			  	 GTK_RESPONSE_YES);
+
+	gtk_dialog_set_default_response	(GTK_DIALOG (dialog),
+					 GTK_RESPONSE_CANCEL);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+	ret = gtk_dialog_run (GTK_DIALOG (dialog));
+
+	gtk_widget_destroy (dialog);
+
+	return (ret == GTK_RESPONSE_YES);
+}
+
+static GeditDocumentCompressionType
+get_compression_type_from_file (GFile *file)
+{
+	gchar *name;
+	gchar *content_type;
+	GeditDocumentCompressionType type;
+
+	name = g_file_get_basename (file);
+	content_type = g_content_type_guess (name, NULL, 0, NULL);
+
+	type = gedit_utils_get_compression_type_from_content_type (content_type);
+
+	g_free (name);
+	g_free (content_type);
+
+	return type;
+}
+
 static void
 save_dialog_response_cb (GeditFileChooserDialog *dialog,
                          gint                    response_id,
                          GeditWindow            *window)
 {
 	GFile *file;
-	const GeditEncoding *encoding;
 	GeditTab *tab;
 	gpointer data;
 	GSList *tabs_to_save_as;
-	GeditDocumentNewlineType newline_type;
 
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -598,15 +687,36 @@ save_dialog_response_cb (GeditFileChooserDialog *dialog,
 	file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (dialog));
 	g_return_if_fail (file != NULL);
 
-	encoding = gedit_file_chooser_dialog_get_encoding (dialog);
-	newline_type = gedit_file_chooser_dialog_get_newline_type (dialog);
-
-	gtk_widget_destroy (GTK_WIDGET (dialog));
-
 	if (tab != NULL)
 	{
 		GeditDocument *doc;
 		gchar *parse_name;
+		GeditDocumentNewlineType newline_type;
+		GeditDocumentCompressionType compression_type;
+		GeditDocumentCompressionType current_compression_type;
+		const GeditEncoding *encoding;
+
+		doc = gedit_tab_get_document (tab);
+		compression_type = get_compression_type_from_file (file);
+		current_compression_type = gedit_document_get_compression_type (doc);
+
+		if ((compression_type == GEDIT_DOCUMENT_COMPRESSION_TYPE_NONE) !=
+		    (current_compression_type == GEDIT_DOCUMENT_COMPRESSION_TYPE_NONE))
+		{
+			if (!change_compression (GTK_WINDOW (dialog),
+			                         file,
+			                         compression_type != GEDIT_DOCUMENT_COMPRESSION_TYPE_NONE))
+			{
+				gtk_widget_destroy (GTK_WIDGET (dialog));
+
+				goto save_next_tab;
+			}
+		}
+
+		encoding = gedit_file_chooser_dialog_get_encoding (dialog);
+		newline_type = gedit_file_chooser_dialog_get_newline_type (dialog);
+
+		gtk_widget_destroy (GTK_WIDGET (dialog));
 
 		doc = gedit_tab_get_document (tab);
 		g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
@@ -624,7 +734,7 @@ save_dialog_response_cb (GeditFileChooserDialog *dialog,
 		 * even if the saving fails... */
 		 _gedit_window_set_default_location (window, file);
 
-		_gedit_tab_save_as (tab, file, encoding, newline_type);
+		_gedit_tab_save_as (tab, file, encoding, newline_type, compression_type);
 	}
 
 	g_object_unref (file);
