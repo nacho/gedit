@@ -82,7 +82,7 @@ enum
 };
 
 #define READ_CHUNK_SIZE 8192
-#define REMOTE_QUERY_ATTRIBUTES G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE "," \
+#define LOADER_QUERY_ATTRIBUTES G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE "," \
 				G_FILE_ATTRIBUTE_STANDARD_TYPE "," \
 				G_FILE_ATTRIBUTE_TIME_MODIFIED "," \
 				G_FILE_ATTRIBUTE_STANDARD_SIZE "," \
@@ -112,7 +112,6 @@ struct _GeditDocumentLoaderPrivate
 	
 	goffset                   bytes_read;
 
-	/* Handle for remote files */
 	GCancellable 	         *cancellable;
 	GInputStream	         *stream;
 	GOutputStream            *output;
@@ -399,7 +398,7 @@ get_metadata_encoding (GeditDocumentLoader *loader)
 }
 
 static void
-remote_load_completed_or_failed (GeditDocumentLoader *loader, AsyncData *async)
+loader_load_completed_or_failed (GeditDocumentLoader *loader, AsyncData *async)
 {
 	gedit_document_loader_loading (loader,
 				       TRUE,
@@ -413,7 +412,7 @@ static void
 async_failed (AsyncData *async, GError *error)
 {
 	g_propagate_error (&async->loader->priv->error, error);
-	remote_load_completed_or_failed (async->loader, async);
+	loader_load_completed_or_failed (async->loader, async);
 }
 
 static void
@@ -450,7 +449,7 @@ close_input_stream_ready_cb (GInputStream *stream,
 		return;
 	}
 
-	remote_load_completed_or_failed (async->loader, async);
+	loader_load_completed_or_failed (async->loader, async);
 }
 
 static void
@@ -635,7 +634,7 @@ finish_query_info (AsyncData *async)
 			     G_IO_ERROR_NOT_REGULAR_FILE,
 			     "Not a regular file");
 
-		remote_load_completed_or_failed (loader, async);
+		loader_load_completed_or_failed (loader, async);
 
 		return;
 	}
@@ -816,7 +815,7 @@ async_read_ready_callback (GObject      *source,
 	 * loading this is not too bad...
 	 */
 	g_file_query_info_async (loader->priv->location,
-				 REMOTE_QUERY_ATTRIBUTES,
+				 LOADER_QUERY_ATTRIBUTES,
                                  G_FILE_QUERY_INFO_NONE,
 				 G_PRIORITY_HIGH,
 				 async->cancellable,
@@ -904,7 +903,7 @@ gedit_document_loader_cancel (GeditDocumentLoader *loader)
 		     G_IO_ERROR_CANCELLED,
 		     "Operation cancelled");
 
-	remote_load_completed_or_failed (loader, NULL);
+	loader_load_completed_or_failed (loader, NULL);
 
 	return TRUE;
 }
