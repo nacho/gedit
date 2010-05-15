@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
-"POT-Creation-Date: 2010-05-11 18:19+0000\n"
-"PO-Revision-Date: 2010-05-11 20:41+0200\n"
+"POT-Creation-Date: 2010-05-15 17:20+0000\n"
+"PO-Revision-Date: 2010-05-15 20:21+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -393,11 +393,11 @@ msgid "_minutes"
 msgstr "_minutos"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:300
-#: ../gedit/dialogs/gedit-search-dialog.ui.h:2 ../gedit/gedit-window.c:1588
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:2 ../gedit/gedit-window.c:1591
 msgid "Replace"
 msgstr "Reemplazar"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:311 ../gedit/gedit-window.c:1586
+#: ../gedit/dialogs/gedit-search-dialog.c:311 ../gedit/gedit-window.c:1589
 msgid "Find"
 msgstr "Buscar"
 
@@ -406,7 +406,7 @@ msgid "Replace _All"
 msgstr "Reemplazar _todo"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:416
-#: ../gedit/gedit-commands-file.c:529
+#: ../gedit/gedit-commands-file.c:558
 msgid "_Replace"
 msgstr "_Reemplazar"
 
@@ -439,71 +439,16 @@ msgstr "_Buscar: "
 msgid "_Wrap around"
 msgstr "A_justar aproximadamente"
 
-#: ../gedit/gedit.c:128
-msgid "Show the application's version"
-msgstr "Mostrar la versión de la aplicación"
-
-#: ../gedit/gedit.c:131
-msgid ""
-"Set the character encoding to be used to open the files listed on the "
-"command line"
-msgstr ""
-"Establecer la codificación de caracteres que usar al abrir los archivos "
-"listados en la línea de comandos"
-
-#: ../gedit/gedit.c:131
-msgid "ENCODING"
-msgstr "CODIFICACIÓN"
-
-#: ../gedit/gedit.c:134
-msgid "Display list of possible values for the encoding option"
-msgstr ""
-"Mostrar una lista de los valores posibles para la opción de codificación"
-
-#: ../gedit/gedit.c:137
-msgid "Create a new top-level window in an existing instance of gedit"
-msgstr ""
-"Crea una ventana nueva en el nivel superior de una instancia existente de "
-"gedit"
-
-#: ../gedit/gedit.c:140
-msgid "Create a new document in an existing instance of gedit"
-msgstr "Crea un documento nuevo en una instancia existente de gedit"
-
-#: ../gedit/gedit.c:143
-msgid "[FILE...] [+LINE[:COLUMN]]"
-msgstr "[ARCHIVO...] [+LÍNEA[:COLUMNA]]"
-
-#: ../gedit/gedit.c:221
-#, c-format
-msgid "%s: invalid encoding.\n"
-msgstr "%s: codificación inválida.\n"
-
-#. Setup command line options
-#: ../gedit/gedit.c:608
-msgid "- Edit text files"
-msgstr "- Edite archivos de texto"
-
-#: ../gedit/gedit.c:644
-#, c-format
-msgid ""
-"%s\n"
-"Run '%s --help' to see a full list of available command line options.\n"
-msgstr ""
-"%s\n"
-"Ejecute «%s --help» para ver una lista completa de las opciones disponibles "
-"de los comandos en línea.\n"
-
 #: ../gedit/gedit-app.c:221
 msgid "There was an error displaying the help."
 msgstr "Hubo un error al mostrar la ayuda."
 
-#: ../gedit/gedit-commands-file.c:246
+#: ../gedit/gedit-commands-file.c:270
 #, c-format
 msgid "Loading file '%s'…"
 msgstr "Cargando archivo «%s»…"
 
-#: ../gedit/gedit-commands-file.c:255
+#: ../gedit/gedit-commands-file.c:279
 #, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
@@ -511,39 +456,39 @@ msgstr[0] "Cargando %d archivo…"
 msgstr[1] "Cargando %d archivos…"
 
 #. Translators: "Open Files" is the title of the file chooser window
-#: ../gedit/gedit-commands-file.c:405
+#: ../gedit/gedit-commands-file.c:434
 msgid "Open Files"
 msgstr "Abrir archivos"
 
-#: ../gedit/gedit-commands-file.c:516
+#: ../gedit/gedit-commands-file.c:545
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "El archivo «%s» es de sólo lectura."
 
-#: ../gedit/gedit-commands-file.c:521
+#: ../gedit/gedit-commands-file.c:550
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "¿Desea intentar reemplazarlo por el que está guardando ahora?"
 
-#: ../gedit/gedit-commands-file.c:589 ../gedit/gedit-commands-file.c:808
+#: ../gedit/gedit-commands-file.c:618 ../gedit/gedit-commands-file.c:837
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Guardando el archivo «%s»…"
 
-#: ../gedit/gedit-commands-file.c:694
+#: ../gedit/gedit-commands-file.c:723
 msgid "Save As"
 msgstr "Guardar como"
 
-#: ../gedit/gedit-commands-file.c:1022
+#: ../gedit/gedit-commands-file.c:1051
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Revirtiendo el documento «%s»…"
 
-#: ../gedit/gedit-commands-file.c:1067
+#: ../gedit/gedit-commands-file.c:1096
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "¿Revertir los cambios no guardados en el documento «%s»?"
 
-#: ../gedit/gedit-commands-file.c:1076
+#: ../gedit/gedit-commands-file.c:1105
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -557,14 +502,14 @@ msgstr[1] ""
 "Los cambios realizados al documento en los últimos %ld segundos se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1085
+#: ../gedit/gedit-commands-file.c:1114
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Los cambios realizados al documento en el último minuto se perderán para "
 "siempre."
 
-#: ../gedit/gedit-commands-file.c:1091
+#: ../gedit/gedit-commands-file.c:1120
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -579,7 +524,7 @@ msgstr[1] ""
 "Los cambios realizados al documento en el último minuto y %ld se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1101
+#: ../gedit/gedit-commands-file.c:1130
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -593,13 +538,13 @@ msgstr[1] ""
 "Los cambios realizados al documento en los últimos %ld minutos se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1116
+#: ../gedit/gedit-commands-file.c:1145
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Los cambios realizados al documento en la última hora se perderán para "
 "siempre."
 
-#: ../gedit/gedit-commands-file.c:1122
+#: ../gedit/gedit-commands-file.c:1151
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -614,7 +559,7 @@ msgstr[1] ""
 "Los cambios realizados al documento en la última hora y %d minutos se "
 "perderán para siempre."
 
-#: ../gedit/gedit-commands-file.c:1137
+#: ../gedit/gedit-commands-file.c:1166
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -627,7 +572,7 @@ msgstr[1] ""
 "Los cambios realizados en el documento en las últimas %d horas se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1163
+#: ../gedit/gedit-commands-file.c:1192
 msgid "_Revert"
 msgstr "Re_vertir"
 
@@ -668,11 +613,11 @@ msgid "Unsaved Document %d"
 msgstr "Documento no guardado %d"
 
 #: ../gedit/gedit-documents-panel.c:98 ../gedit/gedit-documents-panel.c:112
-#: ../gedit/gedit-window.c:2330 ../gedit/gedit-window.c:2335
+#: ../gedit/gedit-window.c:2371 ../gedit/gedit-window.c:2376
 msgid "Read-Only"
 msgstr "Sólo lectura"
 
-#: ../gedit/gedit-documents-panel.c:792 ../gedit/gedit-window.c:3732
+#: ../gedit/gedit-documents-panel.c:792 ../gedit/gedit-window.c:3780
 msgid "Documents"
 msgstr "Documentos"
 
@@ -1428,38 +1373,38 @@ msgid "Saving %s"
 msgstr "Guardando %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1714
+#: ../gedit/gedit-tab.c:1754
 msgid "RO"
 msgstr "SL"
 
-#: ../gedit/gedit-tab.c:1761
+#: ../gedit/gedit-tab.c:1801
 #, c-format
 msgid "Error opening file %s"
 msgstr "Error al abrir el archivo %s"
 
-#: ../gedit/gedit-tab.c:1766
+#: ../gedit/gedit-tab.c:1806
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Error al revertir el archivo %s"
 
-#: ../gedit/gedit-tab.c:1771
+#: ../gedit/gedit-tab.c:1811
 #, c-format
 msgid "Error saving file %s"
 msgstr "Error al guardar el archivo %s"
 
-#: ../gedit/gedit-tab.c:1792
+#: ../gedit/gedit-tab.c:1832
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1799
+#: ../gedit/gedit-tab.c:1839
 msgid "Name:"
 msgstr "Nombre:"
 
-#: ../gedit/gedit-tab.c:1800
+#: ../gedit/gedit-tab.c:1840
 msgid "MIME Type:"
 msgstr "Tipo MIME:"
 
-#: ../gedit/gedit-tab.c:1801
+#: ../gedit/gedit-tab.c:1841
 msgid "Encoding:"
 msgstr "Codificación:"
 
@@ -1504,7 +1449,7 @@ msgstr "Crear un documento nuevo"
 msgid "_Open..."
 msgstr "_Abrir…"
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1516
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1519
 msgid "Open a file"
 msgstr "Abrir un archivo"
 
@@ -1753,22 +1698,22 @@ msgstr "Panel _inferior"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Mostrar u ocultar el panel inferior en la ventana actual"
 
-#: ../gedit/gedit-utils.c:1056
+#: ../gedit/gedit-utils.c:1060
 msgid "Please check your installation."
 msgstr "Compruebe su instalación."
 
-#: ../gedit/gedit-utils.c:1125
+#: ../gedit/gedit-utils.c:1129
 #, c-format
 msgid "Unable to open UI file %s. Error: %s"
 msgstr "No se pudo abrir el archivo de IU %s. Error: %s"
 
-#: ../gedit/gedit-utils.c:1145
+#: ../gedit/gedit-utils.c:1149
 #, c-format
 msgid "Unable to find the object '%s' inside file %s."
 msgstr "No se pudo encontrar el objeto «%s» en el archivo %s."
 
 #. Translators: '/ on <remote-share>'
-#: ../gedit/gedit-utils.c:1307
+#: ../gedit/gedit-utils.c:1311
 #, c-format
 msgid "/ on %s"
 msgstr "/ en %s"
@@ -1804,7 +1749,7 @@ msgstr "Usar modo de resaltado %s"
 #. add the "Plain Text" item before all the others
 #. Translators: "Plain Text" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:1098 ../gedit/gedit-window.c:2038
+#: ../gedit/gedit-window.c:1098 ../gedit/gedit-window.c:2041
 #: ../plugins/externaltools/tools/manager.py:121
 #: ../plugins/externaltools/tools/manager.py:419
 #: ../plugins/externaltools/tools/manager.py:529
@@ -1817,42 +1762,57 @@ msgid "Disable syntax highlighting"
 msgstr "Desactivar resaltado de sintaxis"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1409
+#: ../gedit/gedit-window.c:1412
 #, c-format
 msgid "Open '%s'"
 msgstr "Abrir «%s»"
 
-#: ../gedit/gedit-window.c:1518
+#: ../gedit/gedit-window.c:1521
 msgid "Open a recently used file"
 msgstr "Abrir un archivo usado recientemente"
 
-#: ../gedit/gedit-window.c:1524
+#: ../gedit/gedit-window.c:1527
 msgid "Open"
 msgstr "Abrir"
 
-#: ../gedit/gedit-window.c:1582
+#: ../gedit/gedit-window.c:1585
 msgid "Save"
 msgstr "Guardar"
 
-#: ../gedit/gedit-window.c:1584
+#: ../gedit/gedit-window.c:1587
 msgid "Print"
 msgstr "Imprimir"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1763
+#: ../gedit/gedit-window.c:1766
 #, c-format
 msgid "Activate '%s'"
 msgstr "Activar «%s»"
 
-#: ../gedit/gedit-window.c:2016
+#: ../gedit/gedit-window.c:2019
 msgid "Use Spaces"
 msgstr "Usar espacios"
 
-#: ../gedit/gedit-window.c:2087
+#: ../gedit/gedit-window.c:2092
 msgid "Tab Width"
 msgstr "Ancho de la tabulación"
 
-#: ../gedit/gedit-window.c:3946
+#: ../gedit/gedit-window.c:2213
+#| msgid "Bracket Matching"
+msgid "Bracket match is out of range"
+msgstr "El corchete de coincidencia está fuera de rango"
+
+#: ../gedit/gedit-window.c:2218
+#| msgid "Bracket Matching"
+msgid "Bracket match not found"
+msgstr "No se encontró el corchete coincidente"
+
+#: ../gedit/gedit-window.c:2223
+#, c-format
+msgid "Bracket match found on line: %d"
+msgstr "Corchete coincidente encontrado en la línea: %d"
+
+#: ../gedit/gedit-window.c:3994
 msgid "About gedit"
 msgstr "Acerca de gedit"
 
@@ -3001,7 +2961,6 @@ msgid "Set the language of the current document"
 msgstr "Establece el idioma del documento actual"
 
 #: ../plugins/spell/gedit-spell-plugin.c:104
-#| msgid "_Highlight Mode"
 msgid "_Highlight Misspelled Words"
 msgstr "_Resaltar palabras mal escritas"
 
@@ -4716,6 +4675,48 @@ msgstr "Al insertar la fecha/hora…"
 #: ../plugins/time/gedit-time-setup-dialog.ui.h:10
 msgid "_Prompt for a format"
 msgstr "_Pedir un formato"
+
+#~ msgid "Show the application's version"
+#~ msgstr "Mostrar la versión de la aplicación"
+
+#~ msgid ""
+#~ "Set the character encoding to be used to open the files listed on the "
+#~ "command line"
+#~ msgstr ""
+#~ "Establecer la codificación de caracteres que usar al abrir los archivos "
+#~ "listados en la línea de comandos"
+
+#~ msgid "ENCODING"
+#~ msgstr "CODIFICACIÓN"
+
+#~ msgid "Display list of possible values for the encoding option"
+#~ msgstr ""
+#~ "Mostrar una lista de los valores posibles para la opción de codificación"
+
+#~ msgid "Create a new top-level window in an existing instance of gedit"
+#~ msgstr ""
+#~ "Crea una ventana nueva en el nivel superior de una instancia existente de "
+#~ "gedit"
+
+#~ msgid "Create a new document in an existing instance of gedit"
+#~ msgstr "Crea un documento nuevo en una instancia existente de gedit"
+
+#~ msgid "[FILE...] [+LINE[:COLUMN]]"
+#~ msgstr "[ARCHIVO...] [+LÍNEA[:COLUMNA]]"
+
+#~ msgid "%s: invalid encoding.\n"
+#~ msgstr "%s: codificación inválida.\n"
+
+#~ msgid "- Edit text files"
+#~ msgstr "- Edite archivos de texto"
+
+#~ msgid ""
+#~ "%s\n"
+#~ "Run '%s --help' to see a full list of available command line options.\n"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Ejecute «%s --help» para ver una lista completa de las opciones "
+#~ "disponibles de los comandos en línea.\n"
 
 #~ msgid ""
 #~ "A custom font that will be used for the editing area. This will only take "
