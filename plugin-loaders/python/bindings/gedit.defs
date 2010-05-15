@@ -343,7 +343,7 @@
   (of-object "GeditDocument")
   (c-name "gedit_document_save")
   (parameters
-    '("GeditDocumentSaveFlags" "flags")
+    '("GeditDocumentSaveFlags" "flags" (default "0"))
   )
   (return-type "none")
 )
@@ -354,9 +354,9 @@
   (return-type "none")
   (parameters
     '("GFile*" "location")
-    '("const-GeditEncoding*" "encoding")
-    '("GeditDocumentNewlineType" "newline_type")
-    '("GeditDocumentSaveFlags" "flags")
+    '("const-GeditEncoding*" "encoding" (default "NULL") (null-ok))
+    '("GeditDocumentNewlineType" "newline_type" (default "0"))
+    '("GeditDocumentSaveFlags" "flags" (default "0"))
   )
 )
 
