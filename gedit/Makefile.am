@@ -92,6 +92,8 @@ BUILT_SOURCES = 			\
 
 NOINST_H_FILES =			\
 	gedit-close-button.h		\
+	gedit-command-line.h		\
+	gedit-dbus.h			\
 	gedit-dirs.h			\
 	gedit-document-input-stream.h	\
 	gedit-document-loader.h		\
@@ -152,9 +154,9 @@ header_DATA = 				\
 
 libgedit_la_SOURCES = 			\
 	$(BUILT_SOURCES)		\
-	$(BACON_FILES)			\
 	gedit-app.c			\
 	gedit-close-button.c		\
+	gedit-command-line.c		\
 	gedit-commands-documents.c	\
 	gedit-commands-edit.c		\
 	gedit-commands-file.c		\
@@ -162,6 +164,7 @@ libgedit_la_SOURCES = 			\
 	gedit-commands-help.c		\
 	gedit-commands-search.c		\
 	gedit-commands-view.c		\
+	gedit-dbus.c			\
 	gedit-debug.c			\
 	gedit-dirs.c			\
 	gedit-document.c 		\
@@ -209,6 +212,11 @@ if !ENABLE_GVFS_METADATA
 libgedit_la_SOURCES += gedit-metadata-manager.c
 endif
 
+if !PLATFORM_WIN32
+libgedit_la_SOURCES += gedit-fifo.c
+NOINST_H_FILES += gedit-fifo.h
+endif
+
 gedit-enum-types.h: gedit-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
 	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-enum-types.h.template $(INST_H_FILES)) > $@
 
@@ -246,16 +254,6 @@ if PLATFORM_WIN32
 else
 	rm -f $(DESTDIR)$(bindir)/gnome-text-editor
 	ln -s gedit $(DESTDIR)$(bindir)/gnome-text-editor
-endif
-
-if !OS_WIN32
-BACON_DIR=$(srcdir)/../../libbacon/src/
-BACON_FILES=bacon-message-connection.h bacon-message-connection.c
-
-regenerate-built-sources:
-	BACONFILES="$(BACON_FILES)" BACONDIR="$(BACON_DIR)" $(top_srcdir)/gedit/update-from-bacon.sh
-else
-BACON_DIR=
 endif
 
 if BUILD_MESSAGE_AREA

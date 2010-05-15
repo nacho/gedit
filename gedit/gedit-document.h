@@ -209,6 +209,12 @@ void		 gedit_document_load 		(GeditDocument       *doc,
 						 gint                 column_pos,
 						 gboolean             create);
 
+void		 gedit_document_load_stream	(GeditDocument       *doc,
+						 GInputStream        *stream,
+						 const GeditEncoding *encoding,
+						 gint                 line_pos,
+						 gint                 column_pos);
+
 gboolean	 gedit_document_load_cancel	(GeditDocument       *doc);
 
 void		 gedit_document_save 		(GeditDocument       *doc,

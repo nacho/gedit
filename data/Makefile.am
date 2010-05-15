@@ -8,6 +8,13 @@ gsettingsschema_DATA = $(gsettingsschema_in_files:.gschema.in=.gschema.xml)
 org.gnome.gedit.gschema.xml: org.gnome.gedit.gschema.in
 	gsettings-schema-convert -f $< -o $@
 
+servicedir = $(datadir)/dbus-1/services
+service_in_files = org.gnome.gedit.service.in
+service_DATA = $(service_in_files:.service.in=.service)
+
+$(service_DATA): $(service_in_files) Makefile
+	@sed -e "s|\@bindir\@|$(bindir)|" $<> $@
+
 man_MANS = gedit.1
 
 pkgconfigdir = $(libdir)/pkgconfig
@@ -26,6 +33,7 @@ endif
 
 EXTRA_DIST = 				\
 	$(desktop_in_files)		\
+	$(service_in_files)		\
 	$(man_MANS)			\
 	gedit.pc.in			\
 	gedit-bugreport.sh.in		\
@@ -33,6 +41,7 @@ EXTRA_DIST = 				\
 
 CLEANFILES =	 			\
 	$(desktop_DATA)			\
+	$(service_DATA)			\
 	$(pkgconfig_DATA)
 
 

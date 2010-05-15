@@ -19,7 +19,7 @@
 
 (define-function load_locations
   (c-name "gedit_commands_load_locations")
-  (return-type "gint")
+  (return-type "GSList*")
   (parameters
     '("GeditWindow*" "window")
     '("const-GSList*" "locations")

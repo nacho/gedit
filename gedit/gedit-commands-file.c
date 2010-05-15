@@ -118,7 +118,7 @@ is_duplicated_file (GSList *files, GFile *file)
 }
 
 /* File loading */
-static gint
+static GSList *
 load_file_list (GeditWindow         *window,
 		const GSList        *files,
 		const GeditEncoding *encoding,
@@ -127,11 +127,12 @@ load_file_list (GeditWindow         *window,
 		gboolean             create)
 {
 	GeditTab      *tab;
-	gint           loaded_files = 0; /* Number of files to load */
+	GSList        *loaded_files = NULL; /* Number of files to load */
 	gboolean       jump_to = TRUE; /* Whether to jump to the new tab */
 	GList         *win_docs;
 	GSList        *files_to_load = NULL;
 	const GSList  *l;
+	gint num_loaded_files = 0;
 
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -148,24 +149,38 @@ load_file_list (GeditWindow         *window,
 			{
 				if (l == files)
 				{
+					GeditDocument *doc;
+
 					gedit_window_set_active_tab (window, tab);
 					jump_to = FALSE;
+					doc = gedit_tab_get_document (tab);
 
 					if (line_pos > 0)
 					{
-						GeditDocument *doc;
-						GeditView *view;
-
-						doc = gedit_tab_get_document (tab);
-						view = gedit_tab_get_view (tab);
-
 						/* document counts lines starting from 0 */
-						gedit_document_goto_line (doc, line_pos - 1);
-						gedit_view_scroll_to_cursor (view);
+						if (column_pos > 0)
+						{
+							GtkTextIter iter;
+
+							gtk_text_buffer_get_iter_at_line_offset (GTK_TEXT_BUFFER (doc),
+							                                         &iter,
+							                                         line_pos - 1,
+							                                         column_pos - 1);
+
+							gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
+						}
+						else
+						{
+							gedit_document_goto_line (doc, line_pos - 1);
+						}
+
+						gedit_view_scroll_to_cursor (gedit_tab_get_view (tab));
 					}
 				}
 
-				++loaded_files;
+				++num_loaded_files;
+				loaded_files = g_slist_prepend (loaded_files,
+				                                gedit_tab_get_document (tab));
 			}
 			else
 			{
@@ -178,8 +193,10 @@ load_file_list (GeditWindow         *window,
 	g_list_free (win_docs);
 
 	if (files_to_load == NULL)
-		return loaded_files;
-	
+	{
+		return g_slist_reverse (loaded_files);
+	}
+
 	files_to_load = g_slist_reverse (files_to_load);
 	l = files_to_load;
 
@@ -206,7 +223,9 @@ load_file_list (GeditWindow         *window,
 			l = g_slist_next (l);
 			jump_to = FALSE;
 
-			++loaded_files;
+			++num_loaded_files;
+			loaded_files = g_slist_prepend (loaded_files,
+			                                gedit_tab_get_document (tab));
 		}
 	}
 
@@ -225,13 +244,18 @@ load_file_list (GeditWindow         *window,
 		if (tab != NULL)
 		{
 			jump_to = FALSE;
-			++loaded_files;
+
+			++num_loaded_files;
+			loaded_files = g_slist_prepend (loaded_files,
+			                                gedit_tab_get_document (tab));
 		}
 
 		l = g_slist_next (l);
 	}
 
-	if (loaded_files == 1)
+	loaded_files = g_slist_reverse (loaded_files);
+
+	if (num_loaded_files == 1)
 	{
 		GeditDocument *doc;
 		gchar *uri_for_display;
@@ -254,8 +278,8 @@ load_file_list (GeditWindow         *window,
 					       window->priv->generic_message_cid,
 					       ngettext("Loading %d file\342\200\246",
 							"Loading %d files\342\200\246",
-							loaded_files),
-					       loaded_files);
+							num_loaded_files),
+					       num_loaded_files);
 	}
 
 	/* Free uris_to_load. Note that l points to the first element of uris_to_load */
@@ -278,6 +302,7 @@ gedit_commands_load_location (GeditWindow         *window,
 {
 	GSList *locations = NULL;
 	gchar *uri;
+	GSList *ret;
 
 	g_return_if_fail (GEDIT_IS_WINDOW (window));
 	g_return_if_fail (G_IS_FILE (location));
@@ -289,7 +314,8 @@ gedit_commands_load_location (GeditWindow         *window,
 
 	locations = g_slist_prepend (locations, location);
 
-	load_file_list (window, locations, encoding, line_pos, column_pos, FALSE);
+	ret = load_file_list (window, locations, encoding, line_pos, column_pos, FALSE);
+	g_slist_free (ret);
 
 	g_slist_free (locations);
 }
@@ -299,7 +325,7 @@ gedit_commands_load_location (GeditWindow         *window,
  *
  * Ignore non-existing locations 
  */
-gint
+GSList *
 gedit_commands_load_locations (GeditWindow         *window,
 			       const GSList        *locations,
 			       const GeditEncoding *encoding,
@@ -319,7 +345,7 @@ gedit_commands_load_locations (GeditWindow         *window,
  * first doc. Beside specifying a not existing uri creates a
  * titled document.
  */
-gint
+GSList *
 _gedit_cmd_load_files_from_prompt (GeditWindow         *window,
 				   GSList              *files,
 				   const GeditEncoding *encoding,
@@ -349,6 +375,7 @@ open_dialog_response_cb (GeditFileChooserDialog *dialog,
 {
 	GSList *files;
 	const GeditEncoding *encoding;
+	GSList *loaded;
 
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -369,11 +396,13 @@ open_dialog_response_cb (GeditFileChooserDialog *dialog,
 	/* Remember the folder we navigated to */
 	 _gedit_window_set_default_location (window, files->data);
 
-	gedit_commands_load_locations (window,
-				       files,
-				       encoding,
-				       0,
-				       0);
+	loaded = gedit_commands_load_locations (window,
+	                                        files,
+	                                        encoding,
+	                                        0,
+	                                        0);
+
+	g_slist_free (loaded);
 
 	g_slist_foreach (files, (GFunc) g_object_unref, NULL);
 	g_slist_free (files);

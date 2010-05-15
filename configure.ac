@@ -261,11 +261,6 @@ fi
 AM_CONDITIONAL(ENABLE_ENCHANT, test x"$enable_enchant" = "xyes")
 
 dnl ================================================================
-dnl libsocket checks - needed for bacon-connection on solaris.
-dnl ================================================================
-AC_SEARCH_LIBS(bind, socket)
-
-dnl ================================================================
 dnl Start of pkg-config checks
 dnl ================================================================
 
@@ -286,7 +281,7 @@ PKG_CHECK_MODULES(GEDIT, [
 	libxml-2.0 >= 2.5.0
 	glib-2.0 >= 2.25.0
 	gthread-2.0 >= 2.13.0
-	gio-2.0 >= 2.25.4
+	gio-2.0 >= 2.25.5
 	$GTK_REQUIRED >= $GTK_REQUIRED_VERSION
 	gtksourceview-2.0 >= 2.9.7
 	gconf-2.0 >= 2.31.1

@@ -135,6 +135,12 @@ GtkWidget	*_gedit_tab_new_from_location	(GFile               *location,
 						 gint                 line_pos,
 						 gint                 column_pos,
 						 gboolean             create);
+
+GtkWidget	*_gedit_tab_new_from_stream	(GInputStream        *stream,
+						 const GeditEncoding *encoding,
+						 gint                 line_pos,
+						 gint                 column_pos);
+
 gchar 		*_gedit_tab_get_name		(GeditTab            *tab);
 gchar 		*_gedit_tab_get_tooltips	(GeditTab            *tab);
 GdkPixbuf 	*_gedit_tab_get_icon		(GeditTab            *tab);
@@ -144,6 +150,13 @@ void		 _gedit_tab_load		(GeditTab            *tab,
 						 gint                 line_pos,
 						 gint                 column_pos,
 						 gboolean             create);
+
+void		 _gedit_tab_load_stream		(GeditTab            *tab,
+						 GInputStream        *location,
+						 const GeditEncoding *encoding,
+						 gint                 line_pos,
+						 gint                 column_pos);
+
 void		 _gedit_tab_revert		(GeditTab            *tab);
 void		 _gedit_tab_save		(GeditTab            *tab);
 void		 _gedit_tab_save_as		(GeditTab            *tab,

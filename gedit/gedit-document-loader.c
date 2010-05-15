@@ -78,7 +78,8 @@ enum
 	PROP_DOCUMENT,
 	PROP_LOCATION,
 	PROP_ENCODING,
-	PROP_NEWLINE_TYPE
+	PROP_NEWLINE_TYPE,
+	PROP_STREAM
 };
 
 #define READ_CHUNK_SIZE 8192
@@ -120,6 +121,7 @@ struct _GeditDocumentLoaderPrivate
 	gchar                     buffer[READ_CHUNK_SIZE];
 
 	GError                   *error;
+	gboolean                  guess_content_type_from_content;
 };
 
 G_DEFINE_TYPE(GeditDocumentLoader, gedit_document_loader, G_TYPE_OBJECT)
@@ -149,6 +151,9 @@ gedit_document_loader_set_property (GObject      *object,
 		case PROP_NEWLINE_TYPE:
 			loader->priv->auto_detected_newline_type = g_value_get_enum (value);
 			break;
+		case PROP_STREAM:
+			loader->priv->stream = g_value_dup_object (value);
+			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -176,6 +181,9 @@ gedit_document_loader_get_property (GObject    *object,
 			break;
 		case PROP_NEWLINE_TYPE:
 			g_value_set_enum (value, loader->priv->auto_detected_newline_type);
+			break;
+		case PROP_STREAM:
+			g_value_set_object (value, loader->priv->stream);
 			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -290,6 +298,15 @@ gedit_document_loader_class_init (GeditDocumentLoaderClass *klass)
 	                                                    G_PARAM_STATIC_NAME |
 	                                                    G_PARAM_STATIC_BLURB));
 
+	g_object_class_install_property (object_class,
+					 PROP_STREAM,
+					 g_param_spec_object ("stream",
+							      "STREAM",
+							      "The STREAM this GeditDocumentLoader loads the document from",
+							      G_TYPE_INPUT_STREAM,
+							      G_PARAM_READWRITE |
+							      G_PARAM_CONSTRUCT_ONLY));
+
 	signals[LOADING] =
 		g_signal_new ("loading",
 			      G_OBJECT_CLASS_TYPE (object_class),
@@ -315,6 +332,21 @@ gedit_document_loader_init (GeditDocumentLoader *loader)
 	loader->priv->converter = NULL;
 	loader->priv->error = NULL;
 	loader->priv->enc_settings = g_settings_new ("org.gnome.gedit.preferences.encodings");
+}
+
+GeditDocumentLoader *
+gedit_document_loader_new_from_stream (GeditDocument       *doc,
+                                       GInputStream        *stream,
+                                       const GeditEncoding *encoding)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (G_IS_INPUT_STREAM (stream), NULL);
+
+	return GEDIT_DOCUMENT_LOADER (g_object_new (GEDIT_TYPE_DOCUMENT_LOADER,
+						    "document", doc,
+						    "stream", stream,
+						    "encoding", encoding,
+						    NULL));
 }
 
 GeditDocumentLoader *
@@ -356,14 +388,18 @@ get_metadata_encoding (GeditDocumentLoader *loader)
 {
 	const GeditEncoding *enc = NULL;
 
+	if (loader->priv->location == NULL)
+	{
+		/* If we are reading from a stream directly, then there is
+		   nothing to do */
+		return NULL;
+	}
+
 #ifndef ENABLE_GVFS_METADATA
 	gchar *charset;
-	GFile *location;
 	gchar *uri;
 
-	location = gedit_document_loader_get_location (loader);
-	uri = g_file_get_uri (location);
-	g_object_unref (location);
+	uri = g_file_get_uri (loader->priv->location);
 
 	charset = gedit_metadata_manager_get (uri, "encoding");
 	g_free (uri);
@@ -541,6 +577,25 @@ async_read_cb (GInputStream *stream,
 		return;
 	}
 
+	if (loader->priv->guess_content_type_from_content &&
+	    async->read > 0 &&
+	    loader->priv->bytes_read == 0)
+	{
+		gchar *guessed;
+
+		guessed = g_content_type_guess (NULL,
+		                                (guchar *)loader->priv->buffer,
+		                                async->read,
+		                                NULL);
+
+		if (guessed != NULL)
+		{
+			g_file_info_set_attribute_string (loader->priv->info,
+			                                  G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+			                                  guessed);
+		}
+	}
+
 	/* Bump the size. */
 	loader->priv->bytes_read += async->read;
 
@@ -615,29 +670,15 @@ get_candidate_encodings (GeditDocumentLoader *loader)
 }
 
 static void
-finish_query_info (AsyncData *async)
+start_stream_read (AsyncData *async)
 {
-	GeditDocumentLoader *loader;
-	GFileInfo *info;
 	GSList *candidate_encodings;
+	GeditDocumentLoader *loader;
 	GInputStream *base_stream;
-	
+	GFileInfo *info;
+
 	loader = async->loader;
 	info = loader->priv->info;
-
-	/* if it's not a regular file, error out... */
-	if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_STANDARD_TYPE) &&
-	    g_file_info_get_file_type (info) != G_FILE_TYPE_REGULAR)
-	{
-		g_set_error (&loader->priv->error,
-			     G_IO_ERROR,
-			     G_IO_ERROR_NOT_REGULAR_FILE,
-			     "Not a regular file");
-
-		loader_load_completed_or_failed (loader, async);
-
-		return;
-	}
 
 	/* Get the candidate encodings */
 	if (loader->priv->encoding == NULL)
@@ -646,7 +687,7 @@ finish_query_info (AsyncData *async)
 	}
 	else
 	{
-		candidate_encodings = g_slist_prepend (NULL, (gpointer) loader->priv->encoding);
+		candidate_encodings = g_slist_prepend (NULL, (gpointer)loader->priv->encoding);
 	}
 
 	loader->priv->converter = gedit_smart_charset_converter_new (candidate_encodings);
@@ -679,6 +720,32 @@ finish_query_info (AsyncData *async)
 
 	/* start reading */
 	read_file_chunk (async);
+}
+
+static void
+finish_query_info (AsyncData *async)
+{
+	GeditDocumentLoader *loader;
+	GFileInfo *info;
+	
+	loader = async->loader;
+	info = loader->priv->info;
+
+	/* if it's not a regular file, error out... */
+	if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_STANDARD_TYPE) &&
+	    g_file_info_get_file_type (info) != G_FILE_TYPE_REGULAR)
+	{
+		g_set_error (&loader->priv->error,
+			     G_IO_ERROR,
+			     G_IO_ERROR_NOT_REGULAR_FILE,
+			     "Not a regular file");
+
+		loader_load_completed_or_failed (loader, async);
+
+		return;
+	}
+
+	start_stream_read (async);
 }
 
 static void
@@ -882,8 +949,18 @@ gedit_document_loader_load (GeditDocumentLoader *loader)
 
 	loader->priv->cancellable = g_cancellable_new ();
 	async = async_data_new (loader);
-	
-	open_async_read (async);
+
+	if (loader->priv->stream)
+	{
+		loader->priv->guess_content_type_from_content = TRUE;
+		loader->priv->info = g_file_info_new ();
+
+		start_stream_read (async);
+	}
+	else
+	{
+		open_async_read (async);
+	}
 }
 
 gboolean
@@ -916,13 +993,19 @@ gedit_document_loader_get_document (GeditDocumentLoader *loader)
 	return loader->priv->document;
 }
 
-/* Returns STDIN_URI if loading from stdin */
 GFile *
 gedit_document_loader_get_location (GeditDocumentLoader *loader)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), NULL);
 
-	return g_file_dup (loader->priv->location);
+	if (loader->priv->location)
+	{
+		return g_file_dup (loader->priv->location);
+	}
+	else
+	{
+		return NULL;
+	}
 }
 
 goffset

@@ -72,6 +72,8 @@ _wrap_gedit_commands_load_locations (PyObject *self, PyObject *args, PyObject *k
 	GeditEncoding *encoding = NULL;
 	int len;
 	int i;
+	GSList *loaded;
+	GSList *doc;
 
 	if (!PyArg_ParseTupleAndKeywords (args, kwargs, "O!O|Oii:load_locations",
 	                                  kwlist, &PyGeditWindow_Type,
@@ -116,10 +118,33 @@ _wrap_gedit_commands_load_locations (PyObject *self, PyObject *args, PyObject *k
 	}
 
 	locations = g_slist_reverse (locations);
-	gedit_commands_load_locations (GEDIT_WINDOW (window->obj), locations,
-	                               encoding, line_pos, column_pos);
+	loaded = gedit_commands_load_locations (GEDIT_WINDOW (window->obj), locations,
+	                                        encoding, line_pos, column_pos);
 	g_slist_free (locations);
 
-	Py_INCREF (Py_None);
-	return Py_None;
+	if ((list = PyList_New(0)) == NULL)
+	{
+		g_slist_free (loaded);
+		return NULL;
+	}
+
+	for (doc = loaded; doc; doc = g_slist_next (doc))
+	{
+		PyObject *py_obj = pygobject_new (G_OBJECT (doc->data));
+
+		if (py_obj == NULL)
+		{
+			g_slist_free (loaded);
+
+			Py_DECREF(list);
+			return NULL;
+		}
+
+		PyList_Append(list, py_obj);
+		Py_DECREF(py_obj);
+	}
+
+	g_slist_free (loaded);
+
+	return list;
 }

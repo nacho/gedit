@@ -93,9 +93,11 @@ void			 gedit_document_loader_loading		(GeditDocumentLoader *loader,
 								 GError              *error);
 
 void			 gedit_document_loader_load		(GeditDocumentLoader *loader);
-#if 0
-gboolean		 gedit_document_loader_load_from_stdin	(GeditDocumentLoader *loader);
-#endif		 
+
+GeditDocumentLoader	*gedit_document_loader_new_from_stream	(GeditDocument       *doc,
+								 GInputStream        *stream,
+								 const GeditEncoding *encoding);
+
 gboolean		 gedit_document_loader_cancel		(GeditDocumentLoader *loader);
 
 GeditDocument		*gedit_document_loader_get_document	(GeditDocumentLoader *loader);

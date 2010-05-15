@@ -944,7 +944,10 @@ document_loaded (GeditDocument *document,
 		}
 		else
 		{
-			_gedit_recent_remove (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))), location);
+			if (location)
+			{
+				_gedit_recent_remove (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))), location);
+			}
 
 			if (tab->priv->state == GEDIT_TAB_STATE_LOADING_ERROR)
 			{
@@ -982,23 +985,28 @@ document_loaded (GeditDocument *document,
 
 		gtk_widget_show (emsg);
 
-		g_object_unref (location);
+		if (location)
+		{
+			g_object_unref (location);
+		}
 
 		return;
 	}
 	else
 	{
-		gchar *mime;
 		GList *all_documents;
 		GList *l;
 
-		g_return_if_fail (location != NULL);
+		if (location != NULL)
+		{
+			gchar *mime;
+			mime = gedit_document_get_mime_type (document);
 
-		mime = gedit_document_get_mime_type (document);
-		_gedit_recent_add (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))),
-				   location,
-				   mime);
-		g_free (mime);
+			_gedit_recent_add (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))),
+					   location,
+					   mime);
+			g_free (mime);
+		}
 
 		if (error &&
 		    error->domain == GEDIT_DOCUMENT_ERROR &&
@@ -1045,7 +1053,7 @@ document_loaded (GeditDocument *document,
 
 				loc = gedit_document_get_location (d);
 
-				if ((loc != NULL) &&
+				if (loc != NULL && location != NULL &&
 			    	    g_file_equal (location, loc))
 			    	{
 			    		GtkWidget *w;
@@ -1086,14 +1094,24 @@ document_loaded (GeditDocument *document,
 		g_list_free (all_documents);
 
 		gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
-		
+
+		if (location == NULL)
+		{
+			/* FIXME: hackish */
+			gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (gedit_tab_get_document (tab)),
+			                              TRUE);
+		}
+
 		install_auto_save_timeout_if_needed (tab);
 
 		tab->priv->ask_if_externally_modified = TRUE;
 	}
 
  end:
-	g_object_unref (location);
+ 	if (location)
+ 	{
+		g_object_unref (location);
+	}
 
 	tab->priv->tmp_line_pos = 0;
 	tab->priv->tmp_encoding = NULL;
@@ -1653,6 +1671,28 @@ _gedit_tab_new_from_location (GFile               *location,
 	return GTK_WIDGET (tab);
 }
 
+GtkWidget *
+_gedit_tab_new_from_stream (GInputStream        *stream,
+                            const GeditEncoding *encoding,
+                            gint                 line_pos,
+                            gint                 column_pos)
+{
+	GeditTab *tab;
+
+	g_return_val_if_fail (G_IS_INPUT_STREAM (stream), NULL);
+
+	tab = GEDIT_TAB (_gedit_tab_new ());
+
+	_gedit_tab_load_stream (tab,
+	                        stream,
+	                        encoding,
+	                        line_pos,
+	                        column_pos);
+
+	return GTK_WIDGET (tab);
+
+}
+
 /**
  * gedit_tab_get_view:
  * @tab: a #GeditTab
@@ -2047,6 +2087,41 @@ _gedit_tab_load (GeditTab            *tab,
 			     line_pos,
 			     column_pos,
 			     create);
+}
+
+void
+_gedit_tab_load_stream (GeditTab            *tab,
+                        GInputStream        *stream,
+                        const GeditEncoding *encoding,
+                        gint                 line_pos,
+                        gint                 column_pos)
+{
+	GeditDocument *doc;
+
+	g_return_if_fail (GEDIT_IS_TAB (tab));
+	g_return_if_fail (G_IS_INPUT_STREAM (stream));
+	g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_NORMAL);
+
+	doc = gedit_tab_get_document (tab);
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	gedit_tab_set_state (tab, GEDIT_TAB_STATE_LOADING);
+
+	tab->priv->tmp_line_pos = line_pos;
+	tab->priv->tmp_column_pos = column_pos;
+	tab->priv->tmp_encoding = encoding;
+
+	if (tab->priv->auto_save_timeout > 0)
+	{
+		remove_auto_save_timeout (tab);
+	}
+
+	gedit_document_load_stream (doc,
+	                            stream,
+	                            encoding,
+	                            line_pos,
+	                            column_pos);
+
 }
 
 void

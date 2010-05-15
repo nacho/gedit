@@ -1460,6 +1460,38 @@ gedit_document_load_real (GeditDocument       *doc,
 	gedit_document_loader_load (doc->priv->loader);
 }
 
+void
+gedit_document_load_stream (GeditDocument       *doc,
+                            GInputStream        *stream,
+                            const GeditEncoding *encoding,
+                            gint                 line_pos,
+                            gint                 column_pos)
+{
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (G_IS_INPUT_STREAM (stream));
+	g_return_if_fail (doc->priv->loader == NULL);
+
+	gedit_debug_message (DEBUG_DOCUMENT, "load stream");
+
+	/* create a loader. It will be destroyed when loading is completed */
+	doc->priv->loader = gedit_document_loader_new_from_stream (doc, stream, encoding);
+
+	g_signal_connect (doc->priv->loader,
+			  "loading",
+			  G_CALLBACK (document_loader_loading),
+			  doc);
+
+	doc->priv->create = FALSE;
+	doc->priv->requested_encoding = encoding;
+	doc->priv->requested_line_pos = line_pos;
+	doc->priv->requested_column_pos = column_pos;
+
+	set_location (doc, NULL);
+	set_content_type (doc, NULL);
+
+	gedit_document_loader_load (doc->priv->loader);
+}
+
 /**
  * gedit_document_load:
  * @doc: the #GeditDocument.

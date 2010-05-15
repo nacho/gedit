@@ -123,6 +123,10 @@ gedit_app_win32_init (GeditAppWin32 *self)
 {
 	setup_path ();
 	prep_console ();
+
+	/* manually set name and icon */
+	g_set_application_name("gedit");
+	gtk_window_set_default_icon_name ("accessories-text-editor");
 }
 
 /* ex:ts=8:noet: */

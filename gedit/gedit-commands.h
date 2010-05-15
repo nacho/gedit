@@ -47,11 +47,11 @@ void		 gedit_commands_load_location		(GeditWindow         *window,
 							 gint                 column_pos);
 
 /* Ignore non-existing URIs */
-gint		 gedit_commands_load_locations		(GeditWindow         *window,
+GSList		*gedit_commands_load_locations		(GeditWindow         *window,
 							 const GSList        *locations,
 							 const GeditEncoding *encoding,
 							 gint                 line_pos,
-							 gint                 column_pos);
+							 gint                 column_pos) G_GNUC_WARN_UNUSED_RESULT;
 
 void		 gedit_commands_save_document		(GeditWindow         *window,
                                                          GeditDocument       *document);
@@ -63,11 +63,11 @@ void		 gedit_commands_save_all_documents 	(GeditWindow         *window);
  */
 
 /* Create titled documens for non-existing URIs */
-gint		_gedit_cmd_load_files_from_prompt	(GeditWindow         *window,
+GSList	        *_gedit_cmd_load_files_from_prompt	(GeditWindow         *window,
 							 GSList              *files,
 							 const GeditEncoding *encoding,
 							 gint                 line_pos,
-							 gint                 column_pos);
+							 gint                 column_pos) G_GNUC_WARN_UNUSED_RESULT;
 
 void		_gedit_cmd_file_new			(GtkAction   *action,
 							 GeditWindow *window);

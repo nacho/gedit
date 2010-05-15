@@ -58,6 +58,10 @@
 #include <X11/Xatom.h>
 #endif
 
+#ifdef G_OS_UNIX
+#include <unistd.h>
+#endif
+
 #include "gseal-gtk-compat.h"
 
 #define STDIN_DELAY_MICROSECONDS 100000
@@ -1523,6 +1527,16 @@ gedit_utils_decode_uri (const gchar *uri,
 		*path = g_uri_unescape_segment (hier_part_start, hier_part_end, "/");
 	
 	return TRUE;
+}
+
+gboolean
+gedit_utils_can_read_from_stdin (void)
+{
+#ifdef G_OS_UNIX
+	return !isatty (STDIN_FILENO);
+#else
+	return FALSE;
+#endif
 }
 
 /* ex:ts=8:noet: */

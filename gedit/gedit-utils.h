@@ -155,6 +155,8 @@ gboolean	 gedit_utils_decode_uri 		(const gchar *uri,
 /* Turns data from a drop into a list of well formatted uris */
 gchar 	       **gedit_utils_drop_get_uris		(GtkSelectionData *selection_data);
 
+gboolean	 gedit_utils_can_read_from_stdin	(void);
+
 G_END_DECLS
 
 #endif /* __GEDIT_UTILS_H__ */

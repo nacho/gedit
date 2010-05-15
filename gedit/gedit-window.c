@@ -1238,15 +1238,18 @@ open_recent_file (GFile       *location,
 		  GeditWindow *window)
 {
 	GSList *locations = NULL;
+	GSList *loaded = NULL;
 
 	locations = g_slist_prepend (locations, (gpointer) location);
-
-	if (gedit_commands_load_locations (window, locations, NULL, 0, 0) != 1)
+	loaded = gedit_commands_load_locations (window, locations, NULL, 0, 0);
+	
+	if (!loaded || loaded->next) /* if it doesn't contain just 1 element */
 	{
 		_gedit_recent_remove (window, location);
 	}
 
 	g_slist_free (locations);
+	g_slist_free (loaded);
 }
 
 static void
@@ -2873,7 +2876,8 @@ load_uris_from_drop (GeditWindow  *window,
 {
 	GSList *locations = NULL;
 	gint i;
-	
+	GSList *loaded;
+
 	if (uri_list == NULL)
 		return;
 	
@@ -2883,11 +2887,13 @@ load_uris_from_drop (GeditWindow  *window,
 	}
 
 	locations = g_slist_reverse (locations);
-	gedit_commands_load_locations (window,
-				       locations,
-				       NULL,
-				       0,
-				       0);
+	loaded = gedit_commands_load_locations (window,
+	                                        locations,
+	                                        NULL,
+	                                        0,
+	                                        0);
+
+	g_slist_free (loaded);
 
 	g_slist_foreach (locations, (GFunc) g_object_unref, NULL);
 	g_slist_free (locations);
@@ -4235,6 +4241,31 @@ gedit_window_create_tab (GeditWindow *window,
 	return tab;
 }
 
+static GeditTab *
+process_create_tab (GeditWindow *window,
+                    GeditTab    *tab,
+                    gboolean     jump_to)
+{
+	if (tab == NULL)
+	{
+		return NULL;
+	}
+
+	gtk_widget_show (GTK_WIDGET (tab));
+	
+	gedit_notebook_add_tab (GEDIT_NOTEBOOK (window->priv->notebook),
+	                        tab,
+	                        -1,
+	                        jump_to);
+
+	if (!gtk_widget_get_visible (GTK_WIDGET (window)))
+	{
+		gtk_window_present (GTK_WINDOW (window));
+	}
+
+	return tab;
+}
+
 /**
  * gedit_window_create_tab_from_location:
  * @window: a #GeditWindow
@@ -4266,28 +4297,35 @@ gedit_window_create_tab_from_location (GeditWindow         *window,
 	g_return_val_if_fail (G_IS_FILE (location), NULL);
 
 	tab = _gedit_tab_new_from_location (location,
-					    encoding,
-					    line_pos,
-					    column_pos,
-					    create);
-	if (tab == NULL)
-		return NULL;
+	                                    encoding,
+	                                    line_pos,
+	                                    column_pos,
+	                                    create);
 
-	gtk_widget_show (tab);	
-	
-	gedit_notebook_add_tab (GEDIT_NOTEBOOK (window->priv->notebook),
-				GEDIT_TAB (tab),
-				-1,
-				jump_to);
+	return process_create_tab (window, GEDIT_TAB (tab), jump_to);
+}
 
+GeditTab *
+gedit_window_create_tab_from_stream (GeditWindow         *window,
+                                     GInputStream        *stream,
+                                     const GeditEncoding *encoding,
+                                     gint                 line_pos,
+                                     gint                 column_pos,
+                                     gboolean             jump_to)
+{
+	GtkWidget *tab;
 
-	if (!gtk_widget_get_visible (GTK_WIDGET (window)))
-	{
-		gtk_window_present (GTK_WINDOW (window));
-	}
+	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
+	g_return_val_if_fail (G_IS_INPUT_STREAM (stream), NULL);
 
-	return GEDIT_TAB (tab);
-}				  
+	tab = _gedit_tab_new_from_stream (stream,
+	                                  encoding,
+	                                  line_pos,
+	                                  column_pos);
+
+	return process_create_tab (window, GEDIT_TAB (tab), jump_to);
+
+}
 
 /**
  * gedit_window_get_active_tab:

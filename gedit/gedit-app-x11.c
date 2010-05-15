@@ -21,6 +21,7 @@
  */
 
 #include "gedit-app-x11.h"
+#include "eggdesktopfile.h"
 
 #define GEDIT_APP_X11_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_APP_X11, GeditAppX11Private))
 
@@ -43,6 +44,7 @@ gedit_app_x11_class_init (GeditAppX11Class *klass)
 static void
 gedit_app_x11_init (GeditAppX11 *self)
 {
+	egg_set_desktop_file (DATADIR "/applications/gedit.desktop");
 }
 
 /* ex:ts=8:noet: */
