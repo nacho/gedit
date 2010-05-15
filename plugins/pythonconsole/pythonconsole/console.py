@@ -31,6 +31,7 @@ import traceback
 import gobject
 import gtk
 import pango
+import gconf
 
 from config import PythonConsoleConfig
 
@@ -42,13 +43,28 @@ class PythonConsole(gtk.ScrolledWindow):
         'grab-focus' : 'override',
     }
 
+    DEFAULT_FONT = "Monospace 10"
+
+    GCONF_INTERFACE_DIR = "/desktop/gnome/interface"
+    GCONF_PROFILE_DIR = "/apps/gnome-terminal/profiles/Default"
+
     def __init__(self, namespace = {}):
         gtk.ScrolledWindow.__init__(self)
+
+        gconf_client.add_dir(self.GCONF_INTERFACE_DIR,
+                             gconf.CLIENT_PRELOAD_NONE)
+        gconf_client.add_dir(self.GCONF_PROFILE_DIR,
+                             gconf.CLIENT_PRELOAD_NONE)
+
+        gconf_client.notify_add(self.GCONF_INTERFACE_DIR,
+                                self.on_gconf_notification)
+        gconf_client.notify_add(self.GCONF_PROFILE_DIR,
+                                self.on_gconf_notification)
 
         self.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
         self.set_shadow_type(gtk.SHADOW_IN)
         self.view = gtk.TextView()
-        self.view.modify_font(pango.FontDescription('Monospace'))
+        self.reconfigure()
         self.view.set_editable(True)
         self.view.set_wrap_mode(gtk.WRAP_WORD_CHAR)
         self.add(self.view)
@@ -88,6 +104,39 @@ class PythonConsole(gtk.ScrolledWindow):
 
     def do_grab_focus(self):
         self.view.grab_focus()
+
+    def reconfigure(self):
+        # Font
+        font_desc = None
+        system_font = gconf_get_str(self.GCONF_INTERFACE_DIR + "/monospace_font_name",
+                                    self.DEFAULT_FONT)
+
+        if gconf_get_bool(self.GCONF_PROFILE_DIR + "/use_system_font"):
+            font_name = system_font
+        else:
+            font_name = gconf_get_str(self.GCONF_PROFILE_DIR + "/font", system_font)
+
+        try:
+            font_desc = pango.FontDescription(font_name)
+        except:
+            if font_name != self.DEFAULT_FONT:
+                if font_name != system_font:
+                    try:
+                        font_desc = pango.FontDescription(system_font)
+                    except:
+                        pass
+
+                if font_desc == None:
+                    try:
+                        font_desc = pango.FontDescription(self.DEFAULT_FONT)
+                    except:
+                        pass
+
+        if font_desc != None:
+            self.view.modify_font(font_desc)
+
+    def on_gconf_notification(self, client, cnxn_id, entry, what):
+        self.reconfigure()
 
     def apply_preferences(self, *args):
         config = PythonConsoleConfig()
@@ -366,5 +415,22 @@ class OutFile:
     def seek(self, a):       raise IOError, (29, 'Illegal seek')
     def tell(self):          raise IOError, (29, 'Illegal seek')
     truncate = tell
+
+gconf_client = gconf.client_get_default()
+def gconf_get_bool(key, default = False):
+    val = gconf_client.get(key)
+
+    if val is not None and val.type == gconf.VALUE_BOOL:
+        return val.get_bool()
+    else:
+        return default
+
+def gconf_get_str(key, default = ""):
+    val = gconf_client.get(key)
+
+    if val is not None and val.type == gconf.VALUE_STRING:
+        return val.get_string()
+    else:
+        return default
 
 # ex:et:ts=4:
