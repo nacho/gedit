@@ -40,11 +40,6 @@ libfilebrowser_la_SOURCES = \
 libfilebrowser_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libfilebrowser_la_LIBADD = $(GEDIT_LIBS)
 
-gsettingsschema_in_files = org.gnome.gedit.file-browser.gschema.in
-gsettingsschema_DATA = $(gsettingsschema_in_files:.gschema.in=.gschema.xml)
-org.gnome.gedit.file-browser.gschema.xml: org.gnome.gedit.file-browser.gschema.in
-	gsettings-schema-convert -f $< -o $@
-
 # UI files (if you use ui for your plugin, list those files here)
 uidir = $(GEDIT_PLUGINS_DATA_DIR)/filebrowser
 ui_DATA = gedit-file-browser-widget-ui.xml
@@ -69,6 +64,8 @@ gedit-file-browser-marshal.c: gedit-file-browser-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_file_browser_marshal >> $@
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
+
+gsettingsschema_DATA = org.gnome.gedit.file-browser.gschema.xml
 
 if GSETTINGS_SCHEMAS_INSTALL
 install-data-hook:

@@ -3,11 +3,6 @@ desktop_in_files = gedit.desktop.in
 desktop_DATA 	 = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-gsettingsschema_in_files = org.gnome.gedit.gschema.in
-gsettingsschema_DATA = $(gsettingsschema_in_files:.gschema.in=.gschema.xml)
-org.gnome.gedit.gschema.xml: org.gnome.gedit.gschema.in
-	gsettings-schema-convert -f $< -o $@
-
 servicedir = $(datadir)/dbus-1/services
 service_in_files = org.gnome.gedit.service.in
 service_DATA = $(service_in_files:.service.in=.service)
@@ -25,6 +20,8 @@ gedit-@GEDIT_API_VERSION@.pc: gedit.pc
 
 bugreportdir = $(libexecdir)/gedit-2
 bugreport_SCRIPTS = gedit-bugreport.sh
+
+gsettingsschema_DATA = org.gnome.gedit.gschema.xml
 
 if GSETTINGS_SCHEMAS_INSTALL
 install-data-hook:
