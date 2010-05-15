@@ -22,6 +22,7 @@ bugreportdir = $(libexecdir)/gedit-2
 bugreport_SCRIPTS = gedit-bugreport.sh
 
 gsettingsschema_DATA = org.gnome.gedit.gschema.xml
+@INTLTOOL_XML_NOMERGE_RULE@
 
 if GSETTINGS_SCHEMAS_INSTALL
 install-data-hook:
