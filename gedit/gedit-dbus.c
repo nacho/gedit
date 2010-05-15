@@ -908,7 +908,7 @@ set_interaction_time_and_present (GeditWindow *window,
 	* has been realized otherwise it will not work. lame.
 	*/
 
-	if (!GTK_WIDGET_REALIZED (window))
+	if (!gtk_widget_get_realized (GTK_WIDGET (window)))
 	{
 		gtk_widget_realize (GTK_WIDGET (window));
 	}
