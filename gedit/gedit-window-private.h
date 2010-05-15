@@ -68,9 +68,12 @@ struct _GeditWindowPrivate
 	gboolean        fullscreen_animation_enter;
 
 	/* statusbar and context ids for statusbar messages */
-	GtkWidget      *statusbar;	
+	GtkWidget      *statusbar;
 	guint           generic_message_cid;
 	guint           tip_message_cid;
+	guint 		bracket_match_message_cid;
+
+	/* signal handler ids */
 	guint 		tab_width_id;
 	guint 		spaces_instead_of_tabs_id;
 	guint 		language_changed_id;

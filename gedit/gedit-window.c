@@ -2080,6 +2080,8 @@ create_statusbar (GeditWindow *window,
 		(GTK_STATUSBAR (window->priv->statusbar), "generic_message");
 	window->priv->tip_message_cid = gtk_statusbar_get_context_id
 		(GTK_STATUSBAR (window->priv->statusbar), "tip_message");
+	window->priv->bracket_match_message_cid = gtk_statusbar_get_context_id
+		(GTK_STATUSBAR (window->priv->statusbar), "bracket_match_message");
 
 	gtk_box_pack_end (GTK_BOX (main_box),
 			  window->priv->statusbar,
@@ -2188,6 +2190,42 @@ clone_window (GeditWindow *origin)
 	set_toolbar_style (window, origin);
 
 	return window;
+}
+
+static void
+bracket_matched_cb (GtkSourceBuffer           *buffer,
+		    GtkTextIter               *iter,
+		    GtkSourceBracketMatchType *result,
+		    GeditWindow               *window)
+{
+	if (buffer != GTK_SOURCE_BUFFER (gedit_window_get_active_document (window)))
+		return;
+
+	switch (*result)
+	{
+		case GTK_SOURCE_BRACKET_MATCH_NONE:
+			gtk_statusbar_pop (GTK_STATUSBAR (window->priv->statusbar),
+					   window->priv->bracket_match_message_cid);
+			break;
+		case GTK_SOURCE_BRACKET_MATCH_OUT_OF_RANGE:
+			gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
+						       window->priv->bracket_match_message_cid,
+						       _("Bracket match is out of range"));
+			break;
+		case GTK_SOURCE_BRACKET_MATCH_NOT_FOUND:
+			gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
+						       window->priv->bracket_match_message_cid,
+						       _("Bracket match not found"));
+			break;
+		case GTK_SOURCE_BRACKET_MATCH_FOUND:
+			gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
+						       window->priv->bracket_match_message_cid,
+						       _("Bracket match found on line: %d"),
+						       gtk_text_iter_get_line (iter) + 1);
+			break;
+		default:
+			g_assert_not_reached ();
+	}
 }
 
 static void
@@ -3339,6 +3377,10 @@ notebook_tab_added (GeditNotebook *notebook,
 			  G_CALLBACK (sync_state), 
 			  window);
 
+	g_signal_connect (doc,
+			  "bracket-matched",
+			  G_CALLBACK (bracket_matched_cb),
+			  window);
 	g_signal_connect (doc,
 			  "cursor-moved",
 			  G_CALLBACK (update_cursor_position_statusbar),
