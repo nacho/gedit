@@ -62,7 +62,7 @@
 #include <unistd.h>
 #endif
 
-static void
+static gboolean
 gedit_main_load_from_stdin (GeditWindow *window,
                             gboolean jump_to)
 {
@@ -89,6 +89,9 @@ gedit_main_load_from_stdin (GeditWindow *window,
 	                                     column_position,
 	                                     jump_to);
 	g_object_unref (stream);
+	return TRUE;
+#else
+	return FALSE;
 #endif
 }
 
@@ -134,8 +137,7 @@ gedit_main_window (void)
 
 	if (gedit_utils_can_read_from_stdin ())
 	{
-		gedit_main_load_from_stdin (window, !doc_created);
-		doc_created = TRUE;
+		doc_created = gedit_main_load_from_stdin (window, !doc_created);
 	}
 
 	if (!doc_created || gedit_command_line_get_new_document (command_line))

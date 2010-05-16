@@ -60,6 +60,7 @@
 
 #ifdef G_OS_UNIX
 #include <unistd.h>
+#include <sys/stat.h>
 #endif
 
 #include "gseal-gtk-compat.h"
@@ -1533,10 +1534,18 @@ gboolean
 gedit_utils_can_read_from_stdin (void)
 {
 #ifdef G_OS_UNIX
-	return !isatty (STDIN_FILENO);
-#else
-	return FALSE;
+	if (!isatty (STDIN_FILENO))
+	{
+		struct stat sbuffer;
+
+		if (fstat (STDIN_FILENO, &sbuffer) == 0 &&
+		    (S_ISREG (sbuffer.st_mode) || S_ISFIFO (sbuffer.st_mode) || S_ISLNK (sbuffer.st_mode)))
+		{
+			return TRUE;
+		}
+	}
 #endif
+	return FALSE;
 }
 
 GeditDocumentCompressionType
