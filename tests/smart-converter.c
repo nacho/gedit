@@ -287,6 +287,27 @@ test_xxx_xxx ()
 }
 
 static void
+test_empty ()
+{
+	const GeditEncoding *guessed;
+	gchar *out;
+	GSList *encodings = NULL;
+
+	/* testing the case of an empty file and list of encodings with no
+	   utf-8. In this case, the smart converter cannot determine the right
+	   encoding (because there is no input), but should still default to
+	   utf-8 for the detection */
+	encodings = g_slist_prepend (encodings, (gpointer)gedit_encoding_get_from_charset ("UTF-16"));
+	encodings = g_slist_prepend (encodings, (gpointer)gedit_encoding_get_from_charset ("ISO-8859-15"));
+
+	out = do_test ("", NULL, encodings, 0, &guessed);
+
+	g_assert_cmpstr (out, ==, "");
+
+	g_assert (guessed == gedit_encoding_get_utf8 ());
+}
+
+static void
 test_guessed ()
 {
 	GSList *encs = NULL;
@@ -326,6 +347,7 @@ int main (int   argc,
 	g_test_add_func ("/smart-converter/utf8-utf8", test_utf8_utf8);
 	//g_test_add_func ("/smart-converter/xxx-xxx", test_xxx_xxx);
 	g_test_add_func ("/smart-converter/guessed", test_guessed);
+	g_test_add_func ("/smart-converter/empty", test_empty);
 
 	return g_test_run ();
 }

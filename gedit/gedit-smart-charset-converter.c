@@ -139,6 +139,11 @@ try_convert (GCharsetConverter *converter,
 	gboolean ret;
 	gsize out_size;
 
+	if (inbuf == NULL || inbuf_size == 0)
+	{
+		return FALSE;
+	}
+
 	err = NULL;
 	nread = 0;
 	nwritten = 0;
@@ -199,6 +204,12 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 		gsize                       inbuf_size)
 {
 	GCharsetConverter *conv = NULL;
+
+	if (inbuf == NULL || inbuf_size == 0)
+	{
+		smart->priv->is_utf8 = TRUE;
+		return NULL;
+	}
 
 	if (smart->priv->encodings != NULL &&
 	    smart->priv->encodings->next == NULL)
@@ -389,6 +400,10 @@ gedit_smart_charset_converter_get_guessed (GeditSmartCharsetConverter *smart)
 	if (smart->priv->current_encoding != NULL)
 	{
 		return (const GeditEncoding *)smart->priv->current_encoding->data;
+	}
+	else if (smart->priv->is_utf8)
+	{
+		return gedit_encoding_get_utf8 ();
 	}
 
 	return NULL;
