@@ -2113,17 +2113,6 @@ search_highlight_updated_cb (GeditDocument *doc,
 	}
 }
 
-/* There is no "official" way to reset the im context in GtkTextView */
-static void
-reset_im_context (GtkTextView *text_view)
-{
-	if (text_view->need_im_reset)
-	{
-		text_view->need_im_reset = FALSE;
-		gtk_im_context_reset (text_view->im_context);
-	}
-}
-
 static void
 delete_line (GtkTextView *text_view,
 	     gint         count)
@@ -2134,7 +2123,7 @@ delete_line (GtkTextView *text_view,
 
 	buffer = gtk_text_view_get_buffer (text_view);
 
-	reset_im_context (text_view);
+	gtk_text_view_reset_im_context (text_view);
 
 	/* If there is a selection delete the selected lines and
 	 * ignore count */

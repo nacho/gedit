@@ -23,6 +23,15 @@
 
 G_BEGIN_DECLS
 
+#if !GTK_CHECK_VERSION (2, 22, 0)
+#define gtk_text_view_reset_im_context(view) \
+	if (GTK_TEXT_VIEW (view)->need_im_reset) \
+	{ \
+		GTK_TEXT_VIEW (view)->need_im_reset = FALSE; \
+		gtk_im_context_reset (GTK_TEXT_VIEW (view)->im_context); \
+	}
+#endif /* GTK < 2.22.0 */
+
 #if !GTK_CHECK_VERSION (2, 20, 0)
 #define gtk_widget_get_realized(widget)                         GTK_WIDGET_REALIZED(widget)
 #define gtk_widget_get_mapped(widget)                           GTK_WIDGET_MAPPED(widget)
