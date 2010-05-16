@@ -517,11 +517,12 @@ io_loading_error_message_area_response (GtkWidget *message_area,
 	g_return_if_fail (GEDIT_IS_VIEW (view));
 
 	location = gedit_document_get_location (doc);
-	g_return_if_fail (location != NULL);
 
 	switch (response_id)
 	{
 		case GTK_RESPONSE_OK:
+			g_return_if_fail (location != NULL);
+
 			encoding = gedit_conversion_error_message_area_get_encoding (
 					GTK_WIDGET (message_area));
 
@@ -552,13 +553,19 @@ io_loading_error_message_area_response (GtkWidget *message_area,
 			set_message_area (tab, NULL);
 			break;
 		default:
-			_gedit_recent_remove (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))), location);
+			if (location != NULL)
+			{
+				_gedit_recent_remove (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))), location);
+			}
 
 			remove_tab (tab);
 			break;
 	}
 
-	g_object_unref (location);
+	if (location != NULL)
+	{
+		g_object_unref (location);
+	}
 }
 
 static void 

@@ -229,10 +229,13 @@ parse_gio_error (gint          code,
 		break;
 	case G_IO_ERROR_NOT_SUPPORTED:
 		{
-			gchar *scheme_string;
+			gchar *scheme_string = NULL;
 			gchar *scheme_markup;
-			
-			scheme_string = g_file_get_uri_scheme (location);
+
+			if (location)
+			{
+				scheme_string = g_file_get_uri_scheme (location);
+			}
 
 			if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
 			{
@@ -282,9 +285,12 @@ parse_gio_error (gint          code,
 		 */
 		{
 			gchar *hn = NULL;
-			gchar *uri;
+			gchar *uri = NULL;
 
-			uri = g_file_get_uri (location);
+			if (location)
+			{
+				uri = g_file_get_uri (location);
+			}
 
 			if (uri && gedit_utils_decode_uri (uri, NULL, NULL, &hn, NULL, NULL))
 			{
@@ -616,13 +622,19 @@ gedit_io_loading_error_message_area_new (GFile               *location,
 	gboolean edit_anyway = FALSE;
 	gboolean convert_error = FALSE;
 	
-	g_return_val_if_fail (G_IS_FILE (location), NULL);
 	g_return_val_if_fail (error != NULL, NULL);
 	g_return_val_if_fail ((error->domain == G_CONVERT_ERROR) ||
 			      (error->domain == GEDIT_DOCUMENT_ERROR) ||
 			      (error->domain == G_IO_ERROR), NULL);
-	
-	full_formatted_uri = gedit_utils_uri_for_display (location);
+
+	if (location)
+	{
+		full_formatted_uri = gedit_utils_uri_for_display (location);
+	}
+	else
+	{
+		full_formatted_uri = g_strdup ("stdin");
+	}
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
