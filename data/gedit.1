@@ -1,10 +1,10 @@
-.TH GEDIT 1 "24 Apr 2006"
+.TH GEDIT 1 "17 May 2010"
 .SH NAME
 \fBgedit\fP \- text editor for the GNOME Desktop
 
 .SH SYNOPSIS
 .B gedit
-[\fIOPTION\fR]... [\fIFILE\fR]...
+[\fIOPTION\fR...] [\fIFILE\fR...] [+\fILINE\fR[:\fICOLUMN\fR]]
 .SH DESCRIPTION
 .B gedit
 is the official text editor of the GNOME desktop environment.
@@ -21,13 +21,21 @@ new advanced features to
 itself.
 .LP
 .SH OPTIONS
-
+        
 .TP
-\fB\-\-help\fR
-Prints the command line options.
+\fB\-b, \-\-background\fR
+Run
+.B gedit
+in the background.
 .TP
 \fB\-\-encoding\fR
-Set the character encoding to be used for opening the files listed on the command line".
+Set the character encoding to be used for opening the files listed on the command line.
+.TP
+\fB\-g, \-\-geometry=GEOMETRY\fR
+Set the X geometry window size (WIDTHxHEIGHT+X+Y).
+.TP
+\fB\-\-list-encodings\fR
+Display list of possible values for the encoding option and exit.
 .TP
 \fB\-\-new\-window\fR
 Create a new toplevel window in an existing instance of
@@ -37,29 +45,43 @@ Create a new toplevel window in an existing instance of
 Create a new document in an existing instance of
 .B gedit.
 .TP
-\fB+[num]\fR
-For the first file, go to the line specified by "num" (do not insert a space between the "+" sign and the number).
-If "num" is missing, go to the last line.
+\fB\-s, \-\-standalone\fR
+Run
+.B gedit
+in standalone mode.
 .TP
-\fBfilename(s)...\fR
-Specifies the file to open when 
+\fB\-w, \-\-wait\fR
+Open files and block the
 .B gedit
-starts. If this is not specified, 
-.B gedit
-will load a blank file with an "Unsaved Document" label. Multiple files can be loaded if they are
-separated by spaces.  
-.B gedit
-also supports handling of remote files.  For example, you can pass the location 
-of a webpage to
-.B gedit,
-like "http://www.gnome.org", or load a file from a FTP server,
-like "ftp://ftp.gnome.org/robots.txt".
+process.
 .TP
-\fB\-\-list-encodings\fR
-Display list of possible values for the encoding option and exit
+\fB\-\-help\fR
+Prints the command line options.
 .TP
 \fB\-\-version\fR
-Output version information and exit
+Output version information and exit.
+.TP
+\fBFILE\fR
+Specifies the file to open when
+.B gedit
+starts. If this is not specified,
+.B gedit
+will load a blank file with an "Unsaved Document" label. Multiple files can be loaded if they are
+separated by spaces.
+.B gedit
+also supports handling of remote files. For example, you can pass the location
+of a webpage to
+.B gedit
+, like "http://www.gnome.org", or load a file from a FTP server,
+like "ftp://ftp.gnome.org/robots.txt".
+.TP
+\fB+LINE\fR
+For the first file, go to the line specified by LINE (do not insert a space between the "+" sign and the number).
+If LINE is missing, go to the last line.
+.TP
+\fBCOLUMN\fR
+For the first file, go to the column specified by COLUMN.
+If COLUMN is missing, go to the first column.
 
 .SH BUGS
 If you find a bug, please report it at http://bugzilla.gnome.org/enter_bug.cgi?product=gedit.
@@ -67,6 +89,12 @@ If you find a bug, please report it at http://bugzilla.gnome.org/enter_bug.cgi?p
 Paolo Maggi (paolo@gnome.org)
 .TP
 Paolo Borelli (pborelli@katamail.com)
+.TP
+Steve Frécinaux (code@istique.net)
+.TP
+Jesse van den Kieboom (jessevdk@gnome.org)
+.TP
+Ignacio Casal Quinteiro <icq@gnome.org>
 .TP
 James Willcox (jwillcox@gnome.org)
 .TP
