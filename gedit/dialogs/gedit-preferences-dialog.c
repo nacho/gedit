@@ -110,19 +110,15 @@ struct _GeditPreferencesDialogPrivate
 	GtkWidget	*auto_save_spinbutton;
 	GtkWidget	*autosave_hbox;
 	
-	/* Line numbers */
 	GtkWidget	*display_line_numbers_checkbutton;
-
-	/* Highlight current line */
-	GtkWidget	*highlight_current_line_checkbutton;
-	
-	/* Highlight matching bracket */
-	GtkWidget	*bracket_matching_checkbutton;
 	
 	/* Right margin */
 	GtkWidget	*right_margin_checkbutton;
 	GtkWidget	*right_margin_position_spinbutton;
-	GtkWidget	*right_margin_position_hbox;
+
+	/* Highlighting */
+	GtkWidget	*highlight_current_line_checkbutton;
+	GtkWidget	*bracket_matching_checkbutton;
 
 	/* Plugins manager */
 	GtkWidget	*plugin_manager_place_holder;
@@ -311,7 +307,7 @@ right_margin_checkbutton_toggled (GtkToggleButton        *button,
 	g_settings_set_boolean (dlg->priv->editor, GEDIT_SETTINGS_DISPLAY_RIGHT_MARGIN,
 				active);
 
-	gtk_widget_set_sensitive (dlg->priv->right_margin_position_hbox,
+	gtk_widget_set_sensitive (dlg->priv->right_margin_position_spinbutton,
 				  active);
 }
 
@@ -363,11 +359,10 @@ setup_view_page (GeditPreferencesDialog *dlg)
 		display_right_margin);
 		
 	/* Set widgets sensitivity */
-	gtk_widget_set_sensitive (dlg->priv->split_checkbutton, 
+	gtk_widget_set_sensitive (dlg->priv->split_checkbutton,
 				  (wrap_mode != GTK_WRAP_NONE));
-	gtk_widget_set_sensitive (dlg->priv->right_margin_position_hbox,
+	gtk_widget_set_sensitive (dlg->priv->right_margin_position_spinbutton,
 				  display_right_margin);
-	
 	/* Connect signals */
 	g_settings_bind (dlg->priv->editor,
 			 GEDIT_SETTINGS_DISPLAY_LINE_NUMBERS,
@@ -973,19 +968,18 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 		"notebook", &dlg->priv->notebook,
 
 		"display_line_numbers_checkbutton", &dlg->priv->display_line_numbers_checkbutton,
-		"highlight_current_line_checkbutton", &dlg->priv->highlight_current_line_checkbutton,
-		"bracket_matching_checkbutton", &dlg->priv->bracket_matching_checkbutton,
-		"wrap_text_checkbutton", &dlg->priv->wrap_text_checkbutton,
-		"split_checkbutton", &dlg->priv->split_checkbutton,
-
 		"right_margin_checkbutton", &dlg->priv->right_margin_checkbutton,
 		"right_margin_position_spinbutton", &dlg->priv->right_margin_position_spinbutton,
-		"right_margin_position_hbox", &dlg->priv->right_margin_position_hbox,
+
+		"highlight_current_line_checkbutton", &dlg->priv->highlight_current_line_checkbutton,
+		"bracket_matching_checkbutton", &dlg->priv->bracket_matching_checkbutton,
+
+		"wrap_text_checkbutton", &dlg->priv->wrap_text_checkbutton,
+		"split_checkbutton", &dlg->priv->split_checkbutton,
 
 		"tabs_width_spinbutton", &dlg->priv->tabs_width_spinbutton,
 		"tabs_width_hbox", &dlg->priv->tabs_width_hbox,
 		"insert_spaces_checkbutton", &dlg->priv->insert_spaces_checkbutton,
-
 		"auto_indent_checkbutton", &dlg->priv->auto_indent_checkbutton,
 
 		"autosave_hbox", &dlg->priv->autosave_hbox,
@@ -1002,8 +996,8 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 		"uninstall_scheme_button", &dlg->priv->uninstall_scheme_button,
 
 		"plugin_manager_place_holder", &dlg->priv->plugin_manager_place_holder,
-
 		NULL);
+
 	g_free (file);
 
 	if (!ret)
