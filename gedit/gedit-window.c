@@ -68,9 +68,6 @@
 #define LANGUAGE_DATA "GeditWindowLanguageData"
 #define FULLSCREEN_ANIMATION_SPEED 4
 
-#define GEDIT_WINDOW_DEFAULT_WIDTH       650
-#define GEDIT_WINDOW_DEFAULT_HEIGHT      500
-
 #define GEDIT_WINDOW_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),\
 					 GEDIT_TYPE_WINDOW,                    \
 					 GeditWindowPrivate))
@@ -130,12 +127,6 @@ save_panes_state (GeditWindow *window)
 	gint pane_page;
 
 	gedit_debug (DEBUG_WINDOW);
-
-	g_settings_set (window->priv->window_settings, GEDIT_SETTINGS_WINDOW_SIZE,
-			"(ii)",	window->priv->width, window->priv->height);
-
-	g_settings_set_int (window->priv->window_settings, GEDIT_SETTINGS_WINDOW_STATE,
-			    window->priv->window_state);
 
 	if (window->priv->side_panel_size > 0)
 		g_settings_set_int (window->priv->window_settings,
@@ -212,6 +203,26 @@ gedit_window_focus_out_event (GtkWidget     *widget,
 #endif
 
 static void
+save_window_state (GtkWidget *widget)
+{
+	GeditWindow *window = GEDIT_WINDOW (widget);
+
+	if ((window->priv->window_state &
+	    (GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN)) == 0)
+	{
+		GtkAllocation allocation;
+
+		gtk_widget_get_allocation (widget, &allocation);
+
+		window->priv->width = allocation.width;
+		window->priv->height = allocation.height;
+
+		g_settings_set (window->priv->window_settings, GEDIT_SETTINGS_WINDOW_SIZE,
+				"(ii)", window->priv->width, window->priv->height);
+	}
+}
+
+static void
 gedit_window_dispose (GObject *object)
 {
 	GeditWindow *window;
@@ -219,6 +230,8 @@ gedit_window_dispose (GObject *object)
 	gedit_debug (DEBUG_WINDOW);
 
 	window = GEDIT_WINDOW (object);
+
+	save_window_state (GTK_WIDGET (window));
 
 	/* Stop tracking removal of panes otherwise we always
 	 * end up with thinking we had no pane active, since they
@@ -341,8 +354,11 @@ gedit_window_window_state_event (GtkWidget           *widget,
 
 	window->priv->window_state = event->new_window_state;
 
-	if (event->changed_mask &
-	    (GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN))
+	g_settings_set_int (window->priv->window_settings, GEDIT_SETTINGS_WINDOW_STATE,
+			    window->priv->window_state);
+
+	if ((event->changed_mask &
+	    (GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN)) != 0)
 	{
 		gboolean show;
 
@@ -353,17 +369,24 @@ gedit_window_window_state_event (GtkWidget           *widget,
 						      show);
 	}
 
+	if (GTK_WIDGET_CLASS (gedit_window_parent_class)->window_state_event)
+		return GTK_WIDGET_CLASS (gedit_window_parent_class)->window_state_event (widget, event);
+
 	return FALSE;
 }
 
-static gboolean 
+static gboolean
 gedit_window_configure_event (GtkWidget         *widget,
 			      GdkEventConfigure *event)
 {
 	GeditWindow *window = GEDIT_WINDOW (widget);
 
-	window->priv->width = event->width;
-	window->priv->height = event->height;
+	if (gtk_widget_get_realized (widget) &&
+	    (window->priv->window_state &
+	    (GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN)) == 0)
+	{
+		save_window_state (widget);
+	}
 
 	return GTK_WIDGET_CLASS (gedit_window_parent_class)->configure_event (widget, event);
 }
@@ -2146,22 +2169,14 @@ clone_window (GeditWindow *origin)
 	screen = gtk_window_get_screen (GTK_WINDOW (origin));
 	window = gedit_app_create_window (app, screen);
 
+	gtk_window_set_default_size (GTK_WINDOW (window),
+				     origin->priv->width,
+				     origin->priv->height);
+
 	if ((origin->priv->window_state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
-	{
-		gint w, h;
-
-		_gedit_window_get_default_size (&w, &h);
-		gtk_window_set_default_size (GTK_WINDOW (window), w, h);
 		gtk_window_maximize (GTK_WINDOW (window));
-	}
 	else
-	{
-		gtk_window_set_default_size (GTK_WINDOW (window),
-					     origin->priv->width,
-					     origin->priv->height);
-
 		gtk_window_unmaximize (GTK_WINDOW (window));
-	}		
 
 	if ((origin->priv->window_state & GDK_WINDOW_STATE_STICKY ) != 0)
 		gtk_window_stick (GTK_WINDOW (window));
@@ -4929,15 +4944,6 @@ gedit_window_get_message_bus (GeditWindow *window)
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 	
 	return window->priv->message_bus;
-}
-
-void
-_gedit_window_get_default_size (gint *width, gint *height)
-{
-	g_return_if_fail (width != NULL && height != NULL);
-
-	*width = GEDIT_WINDOW_DEFAULT_WIDTH;
-	*height = GEDIT_WINDOW_DEFAULT_HEIGHT;
 }
 
 /* ex:ts=8:noet: */

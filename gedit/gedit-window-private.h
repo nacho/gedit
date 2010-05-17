@@ -104,7 +104,7 @@ struct _GeditWindowPrivate
 	gint            num_tabs_with_error;
 
 	gint            width;
-	gint            height;	
+	gint            height;
 	GdkWindowState  window_state;
 
 	gint            side_panel_size;
