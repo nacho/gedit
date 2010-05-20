@@ -42,7 +42,4 @@ CLEANFILES =	 			\
 	$(service_DATA)			\
 	$(pkgconfig_DATA)
 
-
-
-
 -include $(top_srcdir)/git.mk

@@ -548,12 +548,14 @@ plugin-loaders/python/Makefile
 plugin-loaders/python/bindings/Makefile
 plugins/Makefile
 plugins/changecase/Makefile
+plugins/checkupdate/org.gnome.gedit.checkupdate.gschema.xml.in
 plugins/checkupdate/Makefile
 plugins/docinfo/Makefile
 plugins/externaltools/data/Makefile
 plugins/externaltools/Makefile
 plugins/externaltools/scripts/Makefile
 plugins/externaltools/tools/Makefile
+plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in
 plugins/filebrowser/Makefile
 plugins/modelines/Makefile
 plugins/pythonconsole/Makefile
@@ -567,6 +569,7 @@ plugins/snippets/snippets/Makefile
 plugins/sort/Makefile
 plugins/spell/Makefile
 plugins/taglist/Makefile
+plugins/time/org.gnome.gedit.time.gschema.xml.in
 plugins/time/Makefile
 po/Makefile.in
 tests/Makefile

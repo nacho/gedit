@@ -25,13 +25,16 @@ plugin_in_files = checkupdate.gedit-plugin.desktop.in
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
 gsettingsschema_DATA = org.gnome.gedit.checkupdate.gschema.xml
+@INTLTOOL_XML_NOMERGE_RULE@
 
 if GSETTINGS_SCHEMAS_INSTALL
 install-data-hook:
 	$(GLIB_COMPILE_SCHEMAS) $(gsettingsschemadir)
 endif
 
-EXTRA_DIST = $(plugin_in_files)
+EXTRA_DIST = \
+	$(plugin_in_files)	\
+	$(gsettingsschema_DATA)
 
 CLEANFILES = $(plugin_DATA)
 
