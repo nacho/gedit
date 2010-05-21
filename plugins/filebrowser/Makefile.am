@@ -66,12 +66,10 @@ gedit-file-browser-marshal.c: gedit-file-browser-marshal.list $(GLIB_GENMARSHAL)
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
 gsettingsschema_DATA = org.gnome.gedit.file-browser.gschema.xml
-@INTLTOOL_XML_NOMERGE_RULE@
+gsettingsschema_SCHEMAS = $(gsettingsschema_DATA)
 
-if GSETTINGS_SCHEMAS_INSTALL
-install-data-hook:
-	$(GLIB_COMPILE_SCHEMAS) $(gsettingsschemadir)
-endif
+@INTLTOOL_XML_NOMERGE_RULE@
+@GSETTINGS_RULES@
 
 EXTRA_DIST = \
 	$(ui_DATA)					\
@@ -80,7 +78,7 @@ EXTRA_DIST = \
 	gedit-file-browser-enum-types.c.template	\
 	gedit-file-browser-enum-register.c.template	\
 	gedit-file-browser-marshal.list			\
-	$(gsettingsschema_DATA)
+	$(gsettingsschema_SCHEMAS)
 
 CLEANFILES = \
 	$(plugin_DATA)		\

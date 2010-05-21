@@ -279,7 +279,7 @@ PKG_CHECK_EXISTS([gtk+-3.0 >= 2.90],
 
 PKG_CHECK_MODULES(GEDIT, [
 	libxml-2.0 >= 2.5.0
-	glib-2.0 >= 2.25.0
+	glib-2.0 >= 2.25.6
 	gthread-2.0 >= 2.13.0
 	gio-2.0 >= 2.25.5
 	$GTK_REQUIRED >= $GTK_REQUIRED_VERSION
