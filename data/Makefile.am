@@ -21,7 +21,8 @@ gedit-@GEDIT_API_VERSION@.pc: gedit.pc
 bugreportdir = $(libexecdir)/gedit-2
 bugreport_SCRIPTS = gedit-bugreport.sh
 
-gsettingsschema_SCHEMAS = org.gnome.gedit.gschema.xml
+gsettingsschema_DATA = org.gnome.gedit.gschema.xml
+gsettingsschema_SCHEMAS = $(gsettingsschema_DATA)
 
 @INTLTOOL_XML_NOMERGE_RULE@
 @GSETTINGS_RULES@
