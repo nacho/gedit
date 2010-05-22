@@ -2263,7 +2263,7 @@ update_cursor_position_statusbar (GtkTextBuffer *buffer,
 					  gtk_text_buffer_get_insert (buffer));
 	
 	row = gtk_text_iter_get_line (&iter);
-	col = gtk_source_view_get_visual_column (view, &iter);
+	col = gtk_source_view_get_visual_column (GTK_SOURCE_VIEW (view), &iter);
 
 	gedit_statusbar_set_cursor_position (
 				GEDIT_STATUSBAR (window->priv->statusbar),

@@ -1324,9 +1324,11 @@ _gedit_cmd_file_revert (GtkAction   *action,
 	g_return_if_fail (tab != NULL);
 
 	/* If we are already displaying a notification
-	 * reverting will drop local modifications, do
+	 * reverting will drop local modifications or
+	 * if the document has not been modified, do
 	 * not bug the user further */
-	if (gedit_tab_get_state (tab) == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION)
+	if (gedit_tab_get_state (tab) == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION ||
+	    _gedit_tab_can_close (tab))
 	{
 		do_revert (window, tab);
 		return;
