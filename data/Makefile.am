@@ -21,8 +21,7 @@ gedit-@GEDIT_API_VERSION@.pc: gedit.pc
 bugreportdir = $(libexecdir)/gedit-2
 bugreport_SCRIPTS = gedit-bugreport.sh
 
-gsettingsschema_DATA = org.gnome.gedit.gschema.xml
-gsettingsschema_SCHEMAS = $(gsettingsschema_DATA)
+gsettings_SCHEMAS = org.gnome.gedit.gschema.xml
 
 @INTLTOOL_XML_NOMERGE_RULE@
 @GSETTINGS_RULES@
@@ -33,7 +32,7 @@ EXTRA_DIST = 				\
 	$(man_MANS)			\
 	gedit.pc.in			\
 	gedit-bugreport.sh.in		\
-	$(gsettingsschema_SCHEMAS)
+	$(gsettings_SCHEMAS)
 
 CLEANFILES =	 			\
 	$(desktop_DATA)			\

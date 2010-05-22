@@ -27,13 +27,12 @@ plugin_in_files = time.gedit-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-gsettingsschema_DATA = org.gnome.gedit.time.gschema.xml
-gsettingsschema_SCHEMAS = $(gsettingsschema_DATA)
+gsettings_SCHEMAS = org.gnome.gedit.time.gschema.xml
 
 @INTLTOOL_XML_NOMERGE_RULE@
 @GSETTINGS_RULES@
 
-EXTRA_DIST = $(ui_DATA) $(plugin_in_files) $(gsettingsschema_SCHEMAS)
+EXTRA_DIST = $(ui_DATA) $(plugin_in_files) $(gsettings_SCHEMAS)
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)
