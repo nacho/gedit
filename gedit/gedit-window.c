@@ -2249,8 +2249,6 @@ update_cursor_position_statusbar (GtkTextBuffer *buffer,
 {
 	gint row, col;
 	GtkTextIter iter;
-	GtkTextIter start;
-	guint tab_size;
 	GeditView *view;
 
 	gedit_debug (DEBUG_WINDOW);
@@ -2265,25 +2263,8 @@ update_cursor_position_statusbar (GtkTextBuffer *buffer,
 					  gtk_text_buffer_get_insert (buffer));
 	
 	row = gtk_text_iter_get_line (&iter);
-	
-	start = iter;
-	gtk_text_iter_set_line_offset (&start, 0);
-	col = 0;
+	col = gtk_source_view_get_visual_column (view, &iter);
 
-	tab_size = gtk_source_view_get_tab_width (GTK_SOURCE_VIEW (view));
-
-	while (!gtk_text_iter_equal (&start, &iter))
-	{
-		/* FIXME: Are we Unicode compliant here? */
-		if (gtk_text_iter_get_char (&start) == '\t')
-					
-			col += (tab_size - (col  % tab_size));
-		else
-			++col;
-
-		gtk_text_iter_forward_char (&start);
-	}
-	
 	gedit_statusbar_set_cursor_position (
 				GEDIT_STATUSBAR (window->priv->statusbar),
 				row + 1,
