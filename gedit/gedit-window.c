@@ -2560,6 +2560,14 @@ notebook_switch_page (GtkNotebook     *book,
 		
 			window->priv->spaces_instead_of_tabs_id = 0;
 		}
+
+		if (window->priv->language_changed_id)
+		{
+			g_signal_handler_disconnect (gedit_tab_get_document (window->priv->active_tab),
+						     window->priv->language_changed_id);
+
+			window->priv->language_changed_id = 0;
+		}
 	}
 	
 	/* set the active tab */		
