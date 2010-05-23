@@ -536,7 +536,7 @@ create_compositor (GeditPrintJob *job)
 					       GEDIT_SETTINGS_PRINT_HEADER);
 	
 	wrap_mode = gedit_settings_get_wrap_mode (job->priv->print_settings,
-						  GEDIT_SETTINGS_WRAP_MODE);
+						  GEDIT_SETTINGS_PRINT_WRAP_MODE);
 	
 	job->priv->compositor = GTK_SOURCE_PRINT_COMPOSITOR (
 					g_object_new (GTK_TYPE_SOURCE_PRINT_COMPOSITOR,
