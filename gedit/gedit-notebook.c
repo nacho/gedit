@@ -49,10 +49,6 @@
 #include "gedit-marshal.h"
 #include "gedit-window.h"
 
-#ifdef BUILD_SPINNER
-#include "gedit-spinner.h"
-#endif
-
 #include "gseal-gtk-compat.h"
 
 #define AFTER_ALL_TABS -1
@@ -75,8 +71,6 @@ struct _GeditNotebookPrivate
 
 G_DEFINE_TYPE(GeditNotebook, gedit_notebook, GTK_TYPE_NOTEBOOK)
 
-static void gedit_notebook_finalize (GObject *object);
-
 static gboolean gedit_notebook_change_current_page (GtkNotebook   *notebook,
 						    gint           offset);
 
@@ -91,8 +85,6 @@ static GdkCursor *cursor = NULL;
 /* Signals */
 enum
 {
-	TAB_ADDED,
-	TAB_REMOVED,
 	TABS_REORDERED,
 	TAB_DETACHED,
 	TAB_CLOSE_REQUEST,
@@ -100,6 +92,16 @@ enum
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
+
+static void
+gedit_notebook_finalize (GObject *object)
+{
+	GeditNotebook *notebook = GEDIT_NOTEBOOK (object);
+
+	g_list_free (notebook->priv->focused_pages);
+
+	G_OBJECT_CLASS (gedit_notebook_parent_class)->finalize (object);
+}
 
 static void
 gedit_notebook_destroy (GtkObject *object)
@@ -154,26 +156,6 @@ gedit_notebook_class_init (GeditNotebookClass *klass)
 	
 	notebook_class->change_current_page = gedit_notebook_change_current_page;
 
-	signals[TAB_ADDED] =
-		g_signal_new ("tab_added",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (GeditNotebookClass, tab_added),
-			      NULL, NULL,
-			      g_cclosure_marshal_VOID__OBJECT,
-			      G_TYPE_NONE,
-			      1,
-			      GEDIT_TYPE_TAB);
-	signals[TAB_REMOVED] =
-		g_signal_new ("tab_removed",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (GeditNotebookClass, tab_removed),
-			      NULL, NULL,
-			      g_cclosure_marshal_VOID__OBJECT,
-			      G_TYPE_NONE,
-			      1,
-			      GEDIT_TYPE_TAB);
 	signals[TAB_DETACHED] =
 		g_signal_new ("tab_detached",
 			      G_OBJECT_CLASS_TYPE (object_class),
@@ -750,16 +732,6 @@ gedit_notebook_init (GeditNotebook *notebook)
                                 NULL);
 }
 
-static void
-gedit_notebook_finalize (GObject *object)
-{
-	GeditNotebook *notebook = GEDIT_NOTEBOOK (object);
-
-	g_list_free (notebook->priv->focused_pages);
-
-	G_OBJECT_CLASS (gedit_notebook_parent_class)->finalize (object);
-}
-
 /*
  * We need to override this because when we don't show the tabs, like in
  * fullscreen we need to have wrap around too
@@ -901,8 +873,6 @@ gedit_notebook_add_tab (GeditNotebook *nb,
 				  position);
 	update_tabs_visibility (nb, TRUE);
 
-	g_signal_emit (G_OBJECT (nb), signals[TAB_ADDED], 0, tab);
-
 	/* The signal handler may have reordered the tabs */
 	position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), 
 					  GTK_WIDGET (tab));
@@ -955,18 +925,9 @@ remove_tab (GeditTab      *tab,
 
 	position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), GTK_WIDGET (tab));
 
-	/* we ref the tab so that it's still alive while the tabs_removed
-	 * signal is processed.
-	 */
-	g_object_ref (tab);
-
 	remove_tab_label (nb, tab);
 	gtk_notebook_remove_page (GTK_NOTEBOOK (nb), position);
 	update_tabs_visibility (nb, FALSE);
-
-	g_signal_emit (G_OBJECT (nb), signals[TAB_REMOVED], 0, tab);
-
-	g_object_unref (tab);
 }
 
 /**

@@ -3405,9 +3405,10 @@ update_sensitivity_according_to_open_tabs (GeditWindow *window)
 }
 
 static void
-notebook_tab_added (GeditNotebook *notebook,
-		    GeditTab      *tab,
-		    GeditWindow   *window)
+notebook_page_added (GtkNotebook *notebook,
+		     GtkWidget   *child,
+		     guint        page_num,
+		     GeditWindow *window)
 {
 	GeditView *view;
 	GeditDocument *doc;
@@ -3420,19 +3421,19 @@ notebook_tab_added (GeditNotebook *notebook,
 
 	update_sensitivity_according_to_open_tabs (window);
 
-	view = gedit_tab_get_view (tab);
-	doc = gedit_tab_get_document (tab);
+	view = gedit_tab_get_view (GEDIT_TAB (child));
+	doc = gedit_tab_get_document (GEDIT_TAB (child));
 
 	/* IMPORTANT: remember to disconnect the signal in notebook_tab_removed
 	 * if a new signal is connected here */
 
-	g_signal_connect (tab, 
+	g_signal_connect (child,
 			 "notify::name",
-			  G_CALLBACK (sync_name), 
+			  G_CALLBACK (sync_name),
 			  window);
-	g_signal_connect (tab, 
+	g_signal_connect (child, 
 			 "notify::state",
-			  G_CALLBACK (sync_state), 
+			  G_CALLBACK (sync_state),
 			  window);
 
 	g_signal_connect (doc,
@@ -3485,14 +3486,16 @@ notebook_tab_added (GeditNotebook *notebook,
 
 	update_window_state (window);
 
-	g_signal_emit (G_OBJECT (window), signals[TAB_ADDED], 0, tab);
+	g_signal_emit (G_OBJECT (window), signals[TAB_ADDED], 0, child);
 }
 
 static void
-notebook_tab_removed (GeditNotebook *notebook,
-		      GeditTab      *tab,
-		      GeditWindow   *window)
+notebook_page_removed (GtkNotebook *notebook,
+		       GtkWidget   *child,
+		       guint        page_num,
+		       GeditWindow *window)
 {
+	GeditTab *tab = GEDIT_TAB (child);
 	GeditView     *view;
 	GeditDocument *doc;
 
@@ -3602,7 +3605,7 @@ notebook_tab_removed (GeditNotebook *notebook,
 
 	update_window_state (window);
 
-	g_signal_emit (G_OBJECT (window), signals[TAB_REMOVED], 0, tab);	
+	g_signal_emit (G_OBJECT (window), signals[TAB_REMOVED], 0, tab);
 }
 
 static void
@@ -4069,12 +4072,12 @@ connect_notebook_signals (GeditWindow *window,
 			  G_CALLBACK (notebook_switch_page),
 			  window);
 	g_signal_connect (notebook,
-			  "tab-added",
-			  G_CALLBACK (notebook_tab_added),
+			  "page-added",
+			  G_CALLBACK (notebook_page_added),
 			  window);
 	g_signal_connect (notebook,
-			  "tab-removed",
-			  G_CALLBACK (notebook_tab_removed),
+			  "page-removed",
+			  G_CALLBACK (notebook_page_removed),
 			  window);
 	g_signal_connect (notebook,
 			  "tabs-reordered",

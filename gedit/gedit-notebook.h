@@ -81,10 +81,6 @@ struct _GeditNotebookClass
         GtkNotebookClass parent_class;
 
 	/* Signals */
-	void	 (* tab_added)		(GeditNotebook *notebook,
-					 GeditTab      *tab);
-	void	 (* tab_removed)	(GeditNotebook *notebook,
-					 GeditTab      *tab);
 	void	 (* tab_detached)	(GeditNotebook *notebook,
 					 GeditTab      *tab);
 	void	 (* tabs_reordered)	(GeditNotebook *notebook);
