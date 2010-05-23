@@ -89,4 +89,6 @@ DISTCLEANFILES = \
 	$(BUILT_SOURCES)	\
 	$(gsettings_SCHEMAS)
 
+MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
+
 -include $(top_srcdir)/git.mk

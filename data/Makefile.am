@@ -40,4 +40,12 @@ CLEANFILES =	 			\
 	$(pkgconfig_DATA)		\
 	$(gsettings_SCHEMAS)
 
+DISTCLEANFILES =	 		\
+	$(desktop_DATA)			\
+	$(service_DATA)			\
+	$(pkgconfig_DATA)		\
+	$(gsettings_SCHEMAS)
+
+MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
+
 -include $(top_srcdir)/git.mk

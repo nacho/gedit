@@ -37,4 +37,6 @@ CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
 
 DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
 
+MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
+
 -include $(top_srcdir)/git.mk

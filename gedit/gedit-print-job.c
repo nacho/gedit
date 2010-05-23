@@ -391,7 +391,7 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 
 	/* Text wrapping */
 	wrap_mode = gedit_settings_get_wrap_mode (job->priv->print_settings,
-						  GEDIT_SETTINGS_WRAP_MODE);
+						  GEDIT_SETTINGS_PRINT_WRAP_MODE);
 	
 	switch (wrap_mode)
 	{
