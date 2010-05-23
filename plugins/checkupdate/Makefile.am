@@ -31,10 +31,10 @@ gsettings_SCHEMAS = org.gnome.gedit.checkupdate.gschema.xml
 
 EXTRA_DIST = \
 	$(plugin_in_files)	\
-	$(gsettings_SCHEMAS)
+	org.gnome.gedit.checkupdate.gschema.xml.in.in
 
-CLEANFILES = $(plugin_DATA)
+CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
 
-DISTCLEANFILES = $(plugin_DATA)
+DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
 
 -include $(top_srcdir)/git.mk

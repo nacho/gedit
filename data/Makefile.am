@@ -26,17 +26,18 @@ gsettings_SCHEMAS = org.gnome.gedit.gschema.xml
 @INTLTOOL_XML_NOMERGE_RULE@
 @GSETTINGS_RULES@
 
-EXTRA_DIST = 				\
-	$(desktop_in_files)		\
-	$(service_in_files)		\
-	$(man_MANS)			\
-	gedit.pc.in			\
-	gedit-bugreport.sh.in		\
-	$(gsettings_SCHEMAS)
+EXTRA_DIST = 					\
+	$(desktop_in_files)			\
+	$(service_in_files)			\
+	$(man_MANS)				\
+	gedit.pc.in				\
+	gedit-bugreport.sh.in			\
+	org.gnome.gedit.gschema.xml.in.in
 
 CLEANFILES =	 			\
 	$(desktop_DATA)			\
 	$(service_DATA)			\
-	$(pkgconfig_DATA)
+	$(pkgconfig_DATA)		\
+	$(gsettings_SCHEMAS)
 
 -include $(top_srcdir)/git.mk

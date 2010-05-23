@@ -77,14 +77,16 @@ EXTRA_DIST = \
 	gedit-file-browser-enum-types.c.template	\
 	gedit-file-browser-enum-register.c.template	\
 	gedit-file-browser-marshal.list			\
-	$(gsettings_SCHEMAS)
+	org.gnome.gedit.file-browser.gschema.xml.in.in
 
 CLEANFILES = \
 	$(plugin_DATA)		\
-	$(BUILT_SOURCES)
+	$(BUILT_SOURCES)	\
+	$(gsettings_SCHEMAS)
 
 DISTCLEANFILES = \
 	$(plugin_DATA)		\
-	$(BUILT_SOURCES)
+	$(BUILT_SOURCES)	\
+	$(gsettings_SCHEMAS)
 
 -include $(top_srcdir)/git.mk

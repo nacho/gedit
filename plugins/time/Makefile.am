@@ -32,9 +32,12 @@ gsettings_SCHEMAS = org.gnome.gedit.time.gschema.xml
 @INTLTOOL_XML_NOMERGE_RULE@
 @GSETTINGS_RULES@
 
-EXTRA_DIST = $(ui_DATA) $(plugin_in_files) $(gsettings_SCHEMAS)
+EXTRA_DIST =					\
+	$(ui_DATA)				\
+	$(plugin_in_files)			\
+	org.gnome.gedit.time.gschema.xml.in.in
 
-CLEANFILES = $(plugin_DATA)
-DISTCLEANFILES = $(plugin_DATA)
+CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
+DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
 
 -include $(top_srcdir)/git.mk
