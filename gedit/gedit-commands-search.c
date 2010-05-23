@@ -81,19 +81,19 @@ static void
 last_search_data_store_position (GeditSearchDialog *dlg)
 {
 	LastSearchData *data;
-	
+
 	data = g_object_get_data (G_OBJECT (dlg), GEDIT_LAST_SEARCH_DATA_KEY);
-	
+
 	if (data == NULL)
 	{
 		data = g_slice_new (LastSearchData);
-		
+
 		g_object_set_data_full (G_OBJECT (dlg),
 					GEDIT_LAST_SEARCH_DATA_KEY,
 					data,
 					(GDestroyNotify) last_search_data_free);
 	}
-	
+
 	gtk_window_get_position (GTK_WINDOW (dlg),
 				 &data->x,
 				 &data->y);
@@ -113,16 +113,17 @@ text_found (GeditWindow *window,
 					     	        occurrences),
 					       occurrences);
 	}
+	else if (occurrences == 1)
+	{
+		gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
+					       window->priv->generic_message_cid,
+					       _("Found and replaced one occurrence"));
+	}
 	else
 	{
-		if (occurrences == 1)
-			gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
-						       window->priv->generic_message_cid,
-						       _("Found and replaced one occurrence"));
-		else
-			gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
-						       window->priv->generic_message_cid,
-						       " ");
+		gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
+					       window->priv->generic_message_cid,
+					       " ");
 	}
 }
 
@@ -184,17 +185,21 @@ run_search (GeditView   *view,
 	if (!found && wrap_around)
 	{
 		if (!search_backwards)
+		{
 			found = gedit_document_search_forward (doc,
 							       NULL,
 							       NULL, /* FIXME: set the end_inter */
 							       &match_start,
 							       &match_end);
+		}
 		else
+		{
 			found = gedit_document_search_backward (doc,
 							        NULL, /* FIXME: set the start_inter */
 							        NULL, 
 							        &match_start,
 							        &match_end);
+		}
 	}
 	
 	if (found)
@@ -477,7 +482,8 @@ search_dialog_destroyed (GeditWindow       *window,
 }
 
 static GtkWidget *
-create_dialog (GeditWindow *window, gboolean show_replace)
+create_dialog (GeditWindow *window,
+	       gboolean     show_replace)
 {
 	GtkWidget *dialog;
 
@@ -530,8 +536,10 @@ _gedit_cmd_search_find (GtkAction   *action,
 		
 		/* turn the dialog into a find dialog if needed */
 		if (gedit_search_dialog_get_show_replace (GEDIT_SEARCH_DIALOG (search_dialog)))
+		{
 			gedit_search_dialog_set_show_replace (GEDIT_SEARCH_DIALOG (search_dialog),
 							      FALSE);
+		}
 	}
 
 	doc = gedit_window_get_active_document (window);
@@ -585,8 +593,10 @@ _gedit_cmd_search_replace (GtkAction   *action,
 		
 		/* turn the dialog into a find dialog if needed */
 		if (!gedit_search_dialog_get_show_replace (GEDIT_SEARCH_DIALOG (replace_dialog)))
+		{
 			gedit_search_dialog_set_show_replace (GEDIT_SEARCH_DIALOG (replace_dialog),
 							      TRUE);
+		}
 	}
 
 	doc = gedit_window_get_active_document (window);
@@ -714,4 +724,5 @@ _gedit_cmd_search_incremental_search (GtkAction   *action,
 			       GDK_k,
 			       GDK_CONTROL_MASK);
 }
+
 /* ex:ts=8:noet: */

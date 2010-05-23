@@ -110,7 +110,8 @@ const GeditEncoding	*gedit_document_loader_get_encoding	(GeditDocumentLoader *lo
 
 GeditDocumentNewlineType gedit_document_loader_get_newline_type (GeditDocumentLoader *loader);
 
-GeditDocumentCompressionType gedit_document_loader_get_compression_type (GeditDocumentLoader *loader);
+GeditDocumentCompressionType gedit_document_loader_get_compression_type
+								(GeditDocumentLoader *loader);
 
 goffset			 gedit_document_loader_get_bytes_read	(GeditDocumentLoader *loader);
 
@@ -121,4 +122,5 @@ GFileInfo		*gedit_document_loader_get_info		(GeditDocumentLoader *loader);
 G_END_DECLS
 
 #endif  /* __GEDIT_DOCUMENT_LOADER_H__  */
+
 /* ex:ts=8:noet: */

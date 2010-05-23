@@ -110,4 +110,5 @@ void		 gedit_progress_message_area_pulse		(GeditProgressMessageArea *area);
 G_END_DECLS
 
 #endif  /* __GEDIT_PROGRESS_MESSAGE_AREA_H__  */
+
 /* ex:ts=8:noet: */

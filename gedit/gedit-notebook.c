@@ -77,8 +77,8 @@ G_DEFINE_TYPE(GeditNotebook, gedit_notebook, GTK_TYPE_NOTEBOOK)
 
 static void gedit_notebook_finalize (GObject *object);
 
-static gboolean gedit_notebook_change_current_page (GtkNotebook *notebook,
-						    gint         offset);
+static gboolean gedit_notebook_change_current_page (GtkNotebook   *notebook,
+						    gint           offset);
 
 static void move_current_tab_to_another_notebook  (GeditNotebook  *src,
 						   GeditNotebook  *dest,
@@ -187,11 +187,12 @@ gedit_notebook_class_init (GeditNotebookClass *klass)
 			      1,
 			      GEDIT_TYPE_TAB);
 
-	g_type_class_add_private (object_class, sizeof(GeditNotebookPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditNotebookPrivate));
 }
 
 static GeditNotebook *
-find_notebook_at_pointer (gint abs_x, gint abs_y)
+find_notebook_at_pointer (gint abs_x,
+			  gint abs_y)
 {
 	GdkWindow *win_at_pointer;
 	GdkWindow *toplevel_win;

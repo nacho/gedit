@@ -119,7 +119,8 @@ close_button_clicked_cb (GtkWidget     *widget,
 }
 
 static void
-sync_tip (GeditTab *tab, GeditTabLabel *tab_label)
+sync_tip (GeditTab *tab,
+	  GeditTabLabel *tab_label)
 {
 	gchar *str;
 
@@ -131,7 +132,9 @@ sync_tip (GeditTab *tab, GeditTabLabel *tab_label)
 }
 
 static void
-sync_name (GeditTab *tab, GParamSpec *pspec, GeditTabLabel *tab_label)
+sync_name (GeditTab      *tab,
+	   GParamSpec    *pspec,
+	   GeditTabLabel *tab_label)
 {
 	gchar *str;
 
@@ -147,7 +150,9 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GeditTabLabel *tab_label)
 }
 
 static void
-sync_state (GeditTab *tab, GParamSpec *pspec, GeditTabLabel *tab_label)
+sync_state (GeditTab      *tab,
+	    GParamSpec    *pspec,
+	    GeditTabLabel *tab_label)
 {
 	GeditTabState  state;
 
@@ -255,7 +260,7 @@ gedit_tab_label_class_init (GeditTabLabelClass *klass)
 							      G_PARAM_READWRITE |
 							      G_PARAM_CONSTRUCT_ONLY));
 
-	g_type_class_add_private (object_class, sizeof(GeditTabLabelPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditTabLabelPrivate));
 }
 
 static void
@@ -369,4 +374,5 @@ gedit_tab_label_new (GeditTab *tab)
 
 	return GTK_WIDGET (tab_label);
 }
+
 /* ex:ts=8:noet: */

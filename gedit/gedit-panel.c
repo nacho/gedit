@@ -266,74 +266,74 @@ set_gtk_image_from_gtk_image (GtkImage *image,
 {
 	switch (gtk_image_get_storage_type (source))
 	{
-	case GTK_IMAGE_EMPTY:
-		gtk_image_clear (image);
-		break;
-	case GTK_IMAGE_PIXMAP:
-		{
-			GdkPixmap *pm;
-			GdkBitmap *bm;
+		case GTK_IMAGE_EMPTY:
+			gtk_image_clear (image);
+			break;
+		case GTK_IMAGE_PIXMAP:
+			{
+				GdkPixmap *pm;
+				GdkBitmap *bm;
 
-			gtk_image_get_pixmap (source, &pm, &bm);
-			gtk_image_set_from_pixmap (image, pm, bm);
-		}
-		break;
-	case GTK_IMAGE_IMAGE:
-		{
-			GdkImage *i;
-			GdkBitmap *bm;
+				gtk_image_get_pixmap (source, &pm, &bm);
+				gtk_image_set_from_pixmap (image, pm, bm);
+			}
+			break;
+		case GTK_IMAGE_IMAGE:
+			{
+				GdkImage *i;
+				GdkBitmap *bm;
 
-			gtk_image_get_image (source, &i, &bm);
-			gtk_image_set_from_image (image, i, bm);
-		}
-		break;
-	case GTK_IMAGE_PIXBUF:
-		{
-			GdkPixbuf *pb;
+				gtk_image_get_image (source, &i, &bm);
+				gtk_image_set_from_image (image, i, bm);
+			}
+			break;
+		case GTK_IMAGE_PIXBUF:
+			{
+				GdkPixbuf *pb;
 
-			pb = gtk_image_get_pixbuf (source);
-			gtk_image_set_from_pixbuf (image, pb);
-		}
-		break;
-	case GTK_IMAGE_STOCK:
-		{
-			gchar *s_id;
-			GtkIconSize s;
+				pb = gtk_image_get_pixbuf (source);
+				gtk_image_set_from_pixbuf (image, pb);
+			}
+			break;
+		case GTK_IMAGE_STOCK:
+			{
+				gchar *s_id;
+				GtkIconSize s;
 
-			gtk_image_get_stock (source, &s_id, &s);
-			gtk_image_set_from_stock (image, s_id, s);
-		}
-		break;
-	case GTK_IMAGE_ICON_SET:
-		{
-			GtkIconSet *is;
-			GtkIconSize s;
+				gtk_image_get_stock (source, &s_id, &s);
+				gtk_image_set_from_stock (image, s_id, s);
+			}
+			break;
+		case GTK_IMAGE_ICON_SET:
+			{
+				GtkIconSet *is;
+				GtkIconSize s;
 
-			gtk_image_get_icon_set (source, &is, &s);
-			gtk_image_set_from_icon_set (image, is, s);
-		}
-		break;
-	case GTK_IMAGE_ANIMATION:
-		{
-			GdkPixbufAnimation *a;
+				gtk_image_get_icon_set (source, &is, &s);
+				gtk_image_set_from_icon_set (image, is, s);
+			}
+			break;
+		case GTK_IMAGE_ANIMATION:
+			{
+				GdkPixbufAnimation *a;
 
-			a = gtk_image_get_animation (source);
-			gtk_image_set_from_animation (image, a);
-		}
-		break;
-	case GTK_IMAGE_ICON_NAME:
-		{
-			const gchar *n;
-			GtkIconSize s;
+				a = gtk_image_get_animation (source);
+				gtk_image_set_from_animation (image, a);
+			}
+			break;
+		case GTK_IMAGE_ICON_NAME:
+			{
+				const gchar *n;
+				GtkIconSize s;
 
-			gtk_image_get_icon_name (source, &n, &s);
-			gtk_image_set_from_icon_name (image, n, s);
-		}
-		break;
-	default:
-		gtk_image_set_from_stock (image,
-					  GTK_STOCK_FILE,
-					  GTK_ICON_SIZE_MENU);
+				gtk_image_get_icon_name (source, &n, &s);
+				gtk_image_set_from_icon_name (image, n, s);
+			}
+			break;
+		default:
+			gtk_image_set_from_stock (image,
+						  GTK_STOCK_FILE,
+						  GTK_ICON_SIZE_MENU);
 	}
 }
 
@@ -598,7 +598,9 @@ gedit_panel_constructor (GType type,
 GtkWidget *
 gedit_panel_new (GtkOrientation orientation)
 {
-	return GTK_WIDGET (g_object_new (GEDIT_TYPE_PANEL, "orientation", orientation, NULL));
+	return GTK_WIDGET (g_object_new (GEDIT_TYPE_PANEL,
+					 "orientation", orientation,
+					 NULL));
 }
 
 static GtkWidget *
@@ -985,4 +987,5 @@ _gedit_panel_set_active_item_by_id (GeditPanel *panel,
 		}
 	}
 }
+
 /* ex:ts=8:noet: */

@@ -171,7 +171,7 @@ gedit_message_area_class_init (GeditMessageAreaClass *klass)
 
 	klass->close = gedit_message_area_close;
 
-	g_type_class_add_private (object_class, sizeof(GeditMessageAreaPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditMessageAreaPrivate));
 
 	signals[RESPONSE] = g_signal_new ("response",
 					  G_OBJECT_CLASS_TYPE (klass),
@@ -276,7 +276,8 @@ get_response_for_widget (GeditMessageArea *message_area,
 }
 
 static void
-action_widget_activated (GtkWidget *widget, GeditMessageArea *message_area)
+action_widget_activated (GtkWidget        *widget,
+			 GeditMessageArea *message_area)
 {
 	gint response_id;
 
@@ -319,20 +320,26 @@ gedit_message_area_add_action_widget (GeditMessageArea *message_area,
 						FALSE);
 	}
 	else
+	{
 		g_warning ("Only 'activatable' widgets can be packed into the action area of a GeditMessageArea");
+	}
 
 	if (response_id != GTK_RESPONSE_HELP)
+	{
 		gtk_box_pack_start (GTK_BOX (message_area->priv->action_area),
 				    child,
 				    FALSE,
 				    FALSE,
 				    0);
+	}
 	else
+	{
 		gtk_box_pack_end (GTK_BOX (message_area->priv->action_area),
 				    child,
 				    FALSE,
 				    FALSE,
 				    0);
+	}
 }
 
 /**

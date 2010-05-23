@@ -189,7 +189,7 @@ gedit_dbus_class_init (GeditDBusClass *klass)
 
 	object_class->dispose = gedit_dbus_dispose;
 
-	g_type_class_add_private (object_class, sizeof(GeditDBusPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditDBusPrivate));
 }
 
 static void
@@ -359,7 +359,8 @@ compose_open_parameters (GeditDBus *dbus)
 	if (encoding)
 	{
 		g_variant_builder_add (&options,
-		                       "{sv}", "encoding",
+		                       "{sv}",
+		                       "encoding",
 		                       g_variant_new_string (gedit_encoding_get_charset (encoding)));
 	}
 
@@ -951,8 +952,8 @@ wait_handler_dbus (GObject  *object,
 	                               NULL);
 	g_object_unref (conn);
 
-	if (data->window && object != G_OBJECT (data->window) && data->close_window &&
-	    is_empty_window (data->window, FALSE))
+	if (data->window && object != G_OBJECT (data->window) &&
+	    data->close_window && is_empty_window (data->window, FALSE))
 	{
 		/* Close the window */
 		gtk_widget_destroy (GTK_WIDGET (data->window));
@@ -1644,18 +1645,18 @@ gedit_dbus_run (GeditDBus *dbus)
 		case GEDIT_DBUS_RESULT_PROCEED:
 			/* could not initialize dbus, gonna be standalone */
 			return GEDIT_DBUS_RESULT_PROCEED;
-		break;
+			break;
 		case GEDIT_DBUS_RESULT_FAILED:
 			/* there is already a gedit process */
 			return handle_slave (dbus);
-		break;
+			break;
 		case GEDIT_DBUS_RESULT_SUCCESS:
 			/* we are the main gedit process */
 			return handle_master (dbus);
-		break;
+			break;
 		default:
 			g_assert_not_reached ();
-		break;
+			break;
 	}
 }
 

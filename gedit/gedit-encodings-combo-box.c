@@ -237,7 +237,9 @@ add_or_remove (GeditEncodingsComboBox *menu,
 }
 
 static gboolean
-separator_func (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
+separator_func (GtkTreeModel *model,
+		GtkTreeIter  *iter,
+		gpointer      data)
 {
 	gchar *str;
 	gboolean ret;
@@ -290,10 +292,14 @@ update_menu (GeditEncodingsComboBox *menu)
 	}
 
 	if (current_encoding != utf8_encoding)
+	{
 		str = gedit_encoding_to_string (utf8_encoding);
+	}
 	else
+	{
 		str = g_strdup_printf (_("Current Locale (%s)"),
 				       gedit_encoding_get_charset (utf8_encoding));
+	}
 
 	gtk_list_store_append (store, &iter);
 	gtk_list_store_set (store, &iter,
@@ -473,4 +479,5 @@ gedit_encodings_combo_box_set_selected_encoding (GeditEncodingsComboBox *menu,
 		b = gtk_tree_model_iter_next (model, &iter);
 	}
 }
+
 /* ex:ts=8:noet: */

@@ -60,15 +60,15 @@ enum
 
 G_DEFINE_TYPE (GeditDocumentOutputStream, gedit_document_output_stream, G_TYPE_OUTPUT_STREAM)
 
-static gssize	gedit_document_output_stream_write (GOutputStream            *stream,
-						    const void               *buffer,
-						    gsize                     count,
-						    GCancellable             *cancellable,
-						    GError                  **error);
+static gssize	gedit_document_output_stream_write (GOutputStream    *stream,
+						    const void       *buffer,
+						    gsize             count,
+						    GCancellable     *cancellable,
+						    GError          **error);
 
-static gboolean	gedit_document_output_stream_close (GOutputStream     *stream,
-						    GCancellable      *cancellable,
-						    GError           **error);
+static gboolean	gedit_document_output_stream_close (GOutputStream    *stream,
+						    GCancellable     *cancellable,
+						    GError          **error);
 
 static void
 gedit_document_output_stream_set_property (GObject      *object,
@@ -389,4 +389,5 @@ gedit_document_output_stream_close (GOutputStream     *stream,
 
 	return TRUE;
 }
+
 /* ex:ts=8:noet: */

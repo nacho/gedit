@@ -39,19 +39,20 @@ typedef struct _GeditAppWin32		GeditAppWin32;
 typedef struct _GeditAppWin32Class	GeditAppWin32Class;
 typedef struct _GeditAppWin32Private	GeditAppWin32Private;
 
-struct _GeditAppWin32 {
+struct _GeditAppWin32
+{
 	GeditApp parent;
 };
 
-struct _GeditAppWin32Class {
+struct _GeditAppWin32Class
+{
 	GeditAppClass parent_class;
 };
 
-GType gedit_app_win32_get_type (void) G_GNUC_CONST;
+GType	 gedit_app_win32_get_type (void) G_GNUC_CONST;
 
 G_END_DECLS
 
 #endif /* __GEDIT_APP_WIN32_H__ */
-
 
 /* ex:ts=8:noet: */

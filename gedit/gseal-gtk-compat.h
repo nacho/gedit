@@ -25,24 +25,26 @@ G_BEGIN_DECLS
 
 #if !GTK_CHECK_VERSION (2, 22, 0)
 #define gtk_text_view_reset_im_context(view) \
-	if (GTK_TEXT_VIEW (view)->need_im_reset) \
-	{ \
-		GTK_TEXT_VIEW (view)->need_im_reset = FALSE; \
-		gtk_im_context_reset (GTK_TEXT_VIEW (view)->im_context); \
-	}
+	G_STMT_BEGIN \
+		if (GTK_TEXT_VIEW (view)->need_im_reset) \
+		{ \
+			GTK_TEXT_VIEW (view)->need_im_reset = FALSE; \
+			gtk_im_context_reset (GTK_TEXT_VIEW (view)->im_context); \
+		} \
+	G_STMT_END
 #endif /* GTK < 2.22.0 */
 
 #if !GTK_CHECK_VERSION (2, 20, 0)
-#define gtk_widget_get_realized(widget)                         GTK_WIDGET_REALIZED(widget)
-#define gtk_widget_get_mapped(widget)                           GTK_WIDGET_MAPPED(widget)
+#define gtk_widget_get_realized(widget)                         (GTK_WIDGET_REALIZED (widget))
+#define gtk_widget_get_mapped(widget)                           (GTK_WIDGET_MAPPED (widget))
 #endif /* GTK < 2.20.0 */
 
 #if !GTK_CHECK_VERSION (2, 18, 0)
 #define gtk_cell_renderer_get_alignment(cell, xalign, yalign)   g_object_get (cell, "xalign", xalign, "yalign", yalign, NULL);
 #define gtk_cell_renderer_get_padding(cell, xpad, ypad)         g_object_get (cell, "xpad", xpad, "ypad", ypad, NULL);
 #define gtk_cell_renderer_set_padding(cell, xpad, ypad)         g_object_set (cell, "xpad", xpad, "ypad", ypad, NULL);
-#define gtk_widget_get_allocation(widget, alloc)                (*(alloc)=(widget)->allocation)
-#define gtk_widget_set_allocation(widget, alloc)                ((widget)->allocation=*(alloc))
+#define gtk_widget_get_allocation(widget, alloc)                (*(alloc) = (widget)->allocation)
+#define gtk_widget_set_allocation(widget, alloc)                ((widget)->allocation = *(alloc))
 #define gtk_widget_get_app_paintable(widget)                    (GTK_WIDGET_APP_PAINTABLE (widget))
 #define gtk_widget_set_can_default(widget, can_default)         ((can_default) ? (GTK_WIDGET_SET_FLAGS (w, GTK_CAN_DEFAULT)) : (GTK_WIDGET_UNSET_FLAGS (w, GTK_CAN_DEFAULT)))
 #define gtk_widget_set_can_focus(widget, can_focus)             ((can_focus) ? (GTK_WIDGET_SET_FLAGS (w, GTK_CAN_FOCUS)) : (GTK_WIDGET_UNSET_FLAGS (w, GTK_CAN_FOCUS)))
@@ -52,11 +54,12 @@ G_BEGIN_DECLS
 #define gtk_widget_get_has_window(widget)                       (!GTK_WIDGET_NO_WINDOW (widget))
 #define gtk_widget_get_state(widget)                            ((widget)->state)
 #define gtk_widget_get_visible(widget)                          (GTK_WIDGET_VISIBLE (widget))
-#define gtk_widget_set_window(widget, _window)                  ((widget)->window=_window)
+#define gtk_widget_set_window(widget, _window)                  ((widget)->window = _window)
 #endif /* GTK+ < 2.18.0 */
 
 
 G_END_DECLS
 
 #endif /* GSEAL_GTK_COMPAT_H */
+
 /* ex:ts=8:noet: */

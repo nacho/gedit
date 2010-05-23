@@ -63,15 +63,19 @@ is_recoverable_error (const GError *error)
 
 	if (error->domain == G_IO_ERROR)
 	{
-		switch (error->code) {
-		case G_IO_ERROR_PERMISSION_DENIED:
-		case G_IO_ERROR_NOT_FOUND:
-		case G_IO_ERROR_HOST_NOT_FOUND:
-		case G_IO_ERROR_TIMED_OUT:
-		case G_IO_ERROR_NOT_MOUNTABLE_FILE:
-		case G_IO_ERROR_NOT_MOUNTED:
-		case G_IO_ERROR_BUSY:
-			is_recoverable = TRUE;
+		switch (error->code)
+		{
+			case G_IO_ERROR_PERMISSION_DENIED:
+			case G_IO_ERROR_NOT_FOUND:
+			case G_IO_ERROR_HOST_NOT_FOUND:
+			case G_IO_ERROR_TIMED_OUT:
+			case G_IO_ERROR_NOT_MOUNTABLE_FILE:
+			case G_IO_ERROR_NOT_MOUNTED:
+			case G_IO_ERROR_BUSY:
+				is_recoverable = TRUE;
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -220,127 +224,128 @@ parse_gio_error (gint          code,
 
 	switch (code)
 	{
-	case G_IO_ERROR_NOT_FOUND:
-	case G_IO_ERROR_NOT_DIRECTORY:
-		*error_message = g_strdup_printf (_("Could not find the file %s."),
-						  uri_for_display);
-		*message_details = g_strdup (_("Please check that you typed the "
-				      	       "location correctly and try again."));
-		break;
-	case G_IO_ERROR_NOT_SUPPORTED:
-		{
-			gchar *scheme_string = NULL;
-			gchar *scheme_markup;
+		case G_IO_ERROR_NOT_FOUND:
+		case G_IO_ERROR_NOT_DIRECTORY:
+			*error_message = g_strdup_printf (_("Could not find the file %s."),
+							  uri_for_display);
+			*message_details = g_strdup (_("Please check that you typed the "
+					      	       "location correctly and try again."));
+			break;
 
-			if (location)
+		case G_IO_ERROR_NOT_SUPPORTED:
 			{
-				scheme_string = g_file_get_uri_scheme (location);
-			}
+				gchar *scheme_string = NULL;
+				gchar *scheme_markup;
 
-			if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
-			{
-				scheme_markup = g_markup_printf_escaped ("<i>%s:</i>", scheme_string);
-
-				/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
-				*message_details = g_strdup_printf (_("gedit cannot handle %s locations."),
-								   scheme_markup);
-				g_free (scheme_markup);
-			}
-			else
-			{
-				*message_details = g_strdup (_("gedit cannot handle this location."));
-			}	
-
-			g_free (scheme_string);
-		}
-		break;
-
-	case G_IO_ERROR_NOT_MOUNTABLE_FILE:
-		*message_details = g_strdup (_("The location of the file cannot be mounted."));
-		break;
-	
-	case G_IO_ERROR_NOT_MOUNTED:
-		*message_details = g_strdup( _("The location of the file cannot be accessed because it is not mounted."));
-
-		break;	
-	case G_IO_ERROR_IS_DIRECTORY:
-		*error_message = g_strdup_printf (_("%s is a directory."),
-						 uri_for_display);
-		*message_details = g_strdup (_("Please check that you typed the "
-					      "location correctly and try again."));
-		break;
-		
-	case G_IO_ERROR_INVALID_FILENAME:
-		*error_message = g_strdup_printf (_("%s is not a valid location."),
-						 uri_for_display);
-		*message_details = g_strdup (_("Please check that you typed the "
-					      "location correctly and try again."));
-		break;
-		
-	case G_IO_ERROR_HOST_NOT_FOUND:
-		/* This case can be hit for user-typed strings like "foo" due to
-		 * the code that guesses web addresses when there's no initial "/".
-		 * But this case is also hit for legitimate web addresses when
-		 * the proxy is set up wrong.
-		 */
-		{
-			gchar *hn = NULL;
-			gchar *uri = NULL;
-
-			if (location)
-			{
-				uri = g_file_get_uri (location);
-			}
-
-			if (uri && gedit_utils_decode_uri (uri, NULL, NULL, &hn, NULL, NULL))
-			{
-				if (hn != NULL)
+				if (location)
 				{
-					gchar *host_markup;
-					gchar *host_name;
+					scheme_string = g_file_get_uri_scheme (location);
+				}
 
-					host_name = gedit_utils_make_valid_utf8 (hn);
-					g_free (hn);
+				if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
+				{
+					scheme_markup = g_markup_printf_escaped ("<i>%s:</i>", scheme_string);
 
-					host_markup = g_markup_printf_escaped ("<i>%s</i>", host_name);
-					g_free (host_name);
+					/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
+					*message_details = g_strdup_printf (_("gedit cannot handle %s locations."),
+									   scheme_markup);
+					g_free (scheme_markup);
+				}
+				else
+				{
+					*message_details = g_strdup (_("gedit cannot handle this location."));
+				}	
 
-					/* Translators: %s is a host name */
+				g_free (scheme_string);
+			}
+			break;
+
+		case G_IO_ERROR_NOT_MOUNTABLE_FILE:
+			*message_details = g_strdup (_("The location of the file cannot be mounted."));
+			break;
+	
+		case G_IO_ERROR_NOT_MOUNTED:
+			*message_details = g_strdup( _("The location of the file cannot be accessed because it is not mounted."));
+
+			break;	
+		case G_IO_ERROR_IS_DIRECTORY:
+			*error_message = g_strdup_printf (_("%s is a directory."),
+							 uri_for_display);
+			*message_details = g_strdup (_("Please check that you typed the "
+						      "location correctly and try again."));
+			break;
+		
+		case G_IO_ERROR_INVALID_FILENAME:
+			*error_message = g_strdup_printf (_("%s is not a valid location."),
+							 uri_for_display);
+			*message_details = g_strdup (_("Please check that you typed the "
+						      "location correctly and try again."));
+			break;
+		
+		case G_IO_ERROR_HOST_NOT_FOUND:
+			/* This case can be hit for user-typed strings like "foo" due to
+			 * the code that guesses web addresses when there's no initial "/".
+			 * But this case is also hit for legitimate web addresses when
+			 * the proxy is set up wrong.
+			 */
+			{
+				gchar *hn = NULL;
+				gchar *uri = NULL;
+
+				if (location)
+				{
+					uri = g_file_get_uri (location);
+				}
+
+				if (uri && gedit_utils_decode_uri (uri, NULL, NULL, &hn, NULL, NULL))
+				{
+					if (hn != NULL)
+					{
+						gchar *host_markup;
+						gchar *host_name;
+
+						host_name = gedit_utils_make_valid_utf8 (hn);
+						g_free (hn);
+
+						host_markup = g_markup_printf_escaped ("<i>%s</i>", host_name);
+						g_free (host_name);
+
+						/* Translators: %s is a host name */
+						*message_details = g_strdup_printf (
+							_("Host %s could not be found. "
+							"Please check that your proxy settings "
+							"are correct and try again."),
+							host_markup);
+
+						g_free (host_markup);
+					}
+				}
+
+				g_free (uri);
+			
+				if (!*message_details)
+				{
+					/* use the same string as INVALID_HOST */
 					*message_details = g_strdup_printf (
-						_("Host %s could not be found. "
-						"Please check that your proxy settings "
-						"are correct and try again."),
-						host_markup);
-
-					g_free (host_markup);
+						_("Hostname was invalid. "
+						  "Please check that you typed the location "
+						  "correctly and try again."));
 				}
 			}
+			break;
 
-			g_free (uri);
-			
-			if (!*message_details)
-			{
-				/* use the same string as INVALID_HOST */
-				*message_details = g_strdup_printf (
-					_("Hostname was invalid. "
-					  "Please check that you typed the location "
-					  "correctly and try again."));
-			}
-		}
-		break;
+		case G_IO_ERROR_NOT_REGULAR_FILE:
+			*message_details = g_strdup_printf (_("%s is not a regular file."),
+							   uri_for_display);
+			break;
 
-	case G_IO_ERROR_NOT_REGULAR_FILE:
-		*message_details = g_strdup_printf (_("%s is not a regular file."),
-						   uri_for_display);
-		break;
+		case G_IO_ERROR_TIMED_OUT:
+			*message_details = g_strdup (_("Connection timed out. Please try again."));
+			break;
 
-	case G_IO_ERROR_TIMED_OUT:
-		*message_details = g_strdup (_("Connection timed out. Please try again."));
-		break;
-
-	default:
-		ret = FALSE;
-		break;
+		default:
+			ret = FALSE;
+			break;
 	}
 
 	return ret;
@@ -357,13 +362,13 @@ parse_gedit_error (gint          code,
 
 	switch (code)
 	{
-	case GEDIT_DOCUMENT_ERROR_TOO_BIG:
-		*message_details = g_strdup (_("The file is too big."));
-		break;
+		case GEDIT_DOCUMENT_ERROR_TOO_BIG:
+			*message_details = g_strdup (_("The file is too big."));
+			break;
 
-	default:
-		ret = FALSE;
-		break;
+		default:
+			ret = FALSE;
+			break;
 	}
 
 	return ret;
@@ -426,8 +431,8 @@ gedit_unrecoverable_reverting_error_message_area_new (GFile        *location,
 	 * though the dialog uses wrapped text, if the URI doesn't contain
 	 * white space then the text-wrapping code is too stupid to wrap it.
 	 */
-	temp_uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
-								MAX_URI_IN_DIALOG_LENGTH);								
+	temp_uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri,
+								MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
 
 	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
@@ -461,7 +466,8 @@ gedit_unrecoverable_reverting_error_message_area_new (GFile        *location,
 }
 
 static void
-create_combo_box (GtkWidget *message_area, GtkWidget *vbox)
+create_combo_box (GtkWidget *message_area,
+		  GtkWidget *vbox)
 {
 	GtkWidget *hbox;
 	GtkWidget *label;
@@ -725,10 +731,9 @@ gedit_io_loading_error_message_area_new (GFile               *location,
 }
 
 GtkWidget *
-gedit_conversion_error_while_saving_message_area_new (
-						GFile               *location,
-						const GeditEncoding *encoding,
-						const GError        *error)
+gedit_conversion_error_while_saving_message_area_new (GFile               *location,
+						      const GeditEncoding *encoding,
+						      const GError        *error)
 {
 	gchar *error_message = NULL;
 	gchar *message_details = NULL;
@@ -897,9 +902,8 @@ gedit_file_already_open_warning_message_area_new (GFile *location)
 }
 
 GtkWidget *
-gedit_externally_modified_saving_error_message_area_new (
-						GFile        *location,
-						const GError *error)
+gedit_externally_modified_saving_error_message_area_new (GFile        *location,
+							 const GError *error)
 {
 	GtkWidget *message_area;
 	GtkWidget *hbox_content;
@@ -1079,13 +1083,17 @@ gedit_no_backup_saving_error_message_area_new (GFile        *location,
 						     GEDIT_SETTINGS_CREATE_BACKUP_COPY);
 	g_object_unref (editor_settings);
 
-	// FIXME: review this messages
+	/* FIXME: review this messages */
 	if (create_backup_copy)
+	{
 		primary_text = g_strdup_printf (_("Could not create a backup file while saving %s"),
 						uri_for_display);
+	}
 	else
+	{
 		primary_text = g_strdup_printf (_("Could not create a temporary backup file while saving %s"),
 						uri_for_display);
+	}
 
 	g_free (uri_for_display);
 
@@ -1244,8 +1252,8 @@ gedit_unrecoverable_saving_error_message_area_new (GFile        *location,
 }
 
 GtkWidget *
-gedit_externally_modified_message_area_new (GFile   *location,
-					    gboolean document_modified)
+gedit_externally_modified_message_area_new (GFile    *location,
+					    gboolean  document_modified)
 {
 	gchar *full_formatted_uri;
 	gchar *uri_for_display;
@@ -1269,9 +1277,10 @@ gedit_externally_modified_message_area_new (GFile   *location,
 	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 
-	// FIXME: review this message, it's not clear since for the user the "modification"
-	// could be interpreted as the changes he made in the document. beside "reading" is
-	// not accurate (since last load/save)
+	/* FIXME: review this message, it's not clear since for the user the "modification"
+	 * could be interpreted as the changes he made in the document. beside "reading" is
+	 * not accurate (since last load/save)
+	 */
 	primary_text = g_strdup_printf (_("The file %s changed on disk."),
 					uri_for_display);
 	g_free (uri_for_display);

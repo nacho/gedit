@@ -83,10 +83,10 @@ struct _GeditPluginsEnginePrivate
 
 GeditPluginsEngine *default_engine = NULL;
 
-static void	gedit_plugins_engine_activate_plugin_real (GeditPluginsEngine *engine,
-							   GeditPluginInfo    *info);
-static void	gedit_plugins_engine_deactivate_plugin_real (GeditPluginsEngine *engine,
-							     GeditPluginInfo    *info);
+static void	gedit_plugins_engine_activate_plugin_real	(GeditPluginsEngine *engine,
+								 GeditPluginInfo    *info);
+static void	gedit_plugins_engine_deactivate_plugin_real	(GeditPluginsEngine *engine,
+								 GeditPluginInfo    *info);
 
 typedef gboolean (*LoadDirCallback)(GeditPluginsEngine *engine, const gchar *filename, gpointer userdata);
 
@@ -466,7 +466,8 @@ ensure_loader (LoaderInfo *info)
 }
 
 static GeditPluginLoader *
-get_plugin_loader (GeditPluginsEngine *engine, GeditPluginInfo *info)
+get_plugin_loader (GeditPluginsEngine *engine,
+		   GeditPluginInfo    *info)
 {
 	const gchar *loader_id;
 	LoaderInfo *loader_info;
@@ -530,7 +531,7 @@ gedit_plugins_engine_get_plugin_list (GeditPluginsEngine *engine)
 
 static gint
 compare_plugin_info_and_name (GeditPluginInfo *info,
-			      const gchar *module_name)
+			      const gchar     *module_name)
 {
 	return strcmp (gedit_plugin_info_get_module_name (info), module_name);
 }
@@ -611,7 +612,7 @@ load_plugin (GeditPluginsEngine *engine,
 
 static void
 gedit_plugins_engine_activate_plugin_real (GeditPluginsEngine *engine,
-					   GeditPluginInfo *info)
+					   GeditPluginInfo    *info)
 {
 	const GList *wins;
 
@@ -663,7 +664,7 @@ call_plugin_deactivate (GeditPlugin *plugin,
 
 static void
 gedit_plugins_engine_deactivate_plugin_real (GeditPluginsEngine *engine,
-					     GeditPluginInfo *info)
+					     GeditPluginInfo    *info)
 {
 	const GList *wins;
 	GeditPluginLoader *loader;
@@ -711,7 +712,7 @@ gedit_plugins_engine_deactivate_plugin (GeditPluginsEngine *engine,
 
 void
 gedit_plugins_engine_activate_plugins (GeditPluginsEngine *engine,
-					GeditWindow        *window)
+					GeditWindow       *window)
 {
 	GSList *active_plugins = NULL;
 	GList *pl;
@@ -736,16 +737,22 @@ gedit_plugins_engine_activate_plugins (GeditPluginsEngine *engine,
 		    g_slist_find_custom (active_plugins,
 					 gedit_plugin_info_get_module_name (info),
 					 (GCompareFunc)strcmp) == NULL)
+		{
 			continue;
+		}
 		
 		/* If plugin is not active, don't try to activate/load it */
 		if (!engine->priv->activate_from_prefs && 
 		    !gedit_plugin_info_is_active (info))
+		{
 			continue;
+		}
 
 		if (load_plugin (engine, info))
+		{
 			gedit_plugin_activate (info->plugin,
 					       window);
+		}
 	}
 	
 	if (engine->priv->activate_from_prefs)
@@ -763,7 +770,7 @@ gedit_plugins_engine_activate_plugins (GeditPluginsEngine *engine,
 
 void
 gedit_plugins_engine_deactivate_plugins (GeditPluginsEngine *engine,
-					  GeditWindow        *window)
+					  GeditWindow       *window)
 {
 	GList *pl;
 	
@@ -789,7 +796,7 @@ gedit_plugins_engine_deactivate_plugins (GeditPluginsEngine *engine,
 
 void
 gedit_plugins_engine_update_plugins_ui (GeditPluginsEngine *engine,
-					 GeditWindow        *window)
+					 GeditWindow       *window)
 {
 	GList *pl;
 
@@ -883,4 +890,5 @@ gedit_plugins_engine_rescan_plugins (GeditPluginsEngine *engine)
 	
 	load_all_plugins (engine);
 }
+
 /* ex:ts=8:noet: */

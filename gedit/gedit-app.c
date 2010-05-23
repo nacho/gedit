@@ -271,7 +271,7 @@ gedit_app_class_init (GeditAppClass *klass)
 							     G_PARAM_READABLE |
 							     G_PARAM_STATIC_STRINGS));
 
-	g_type_class_add_private (object_class, sizeof(GeditAppPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditAppPrivate));
 }
 
 static gboolean
@@ -560,10 +560,12 @@ window_delete_event (GeditWindow *window,
 	    (GEDIT_WINDOW_STATE_SAVING |
 	     GEDIT_WINDOW_STATE_PRINTING |
 	     GEDIT_WINDOW_STATE_SAVING_SESSION))
-	    	return TRUE;
-	
+	{
+		return TRUE;
+	}
+
 	_gedit_cmd_file_quit (NULL, window);
-		
+
 	/* Do not destroy the window */
 	return TRUE;
 }

@@ -75,7 +75,7 @@ struct _GeditMessageType
 	guint num_arguments;
 	guint num_required;
 	
-	GHashTable *arguments; // mapping of key -> ArgumentInfo
+	GHashTable *arguments; /* mapping of key -> ArgumentInfo */
 };
 
 /**
@@ -254,7 +254,7 @@ gedit_message_type_is_supported (GType type)
  * @var_args: key/gtype pair variable argument list
  *
  * Create a new #GeditMessageType for @method at @object_path. Argument names
- * and values are supplied by the NULL terminated variable argument list.
+ * and values are supplied by the %NULL terminated variable argument list.
  * The last @num_optional provided arguments are considered optional.
  *
  * Return value: the newly constructed #GeditMessageType
@@ -272,11 +272,11 @@ gedit_message_type_new_valist (const gchar *object_path,
 	g_return_val_if_fail (method != NULL, NULL);
 	g_return_val_if_fail (gedit_message_type_is_valid_object_path (object_path), NULL);
 
-	message_type = g_new0(GeditMessageType, 1);
+	message_type = g_new0 (GeditMessageType, 1);
 	
 	message_type->ref_count = 1;
-	message_type->object_path = g_strdup(object_path);
-	message_type->method = g_strdup(method);
+	message_type->object_path = g_strdup (object_path);
+	message_type->method = g_strdup (method);
 	message_type->num_arguments = 0;
 	message_type->arguments = g_hash_table_new_full (g_str_hash,
 							 g_str_equal,
@@ -295,7 +295,7 @@ gedit_message_type_new_valist (const gchar *object_path,
  * @...: key/gtype pair variable argument list
  *
  * Create a new #GeditMessageType for @method at @object_path. Argument names
- * and values are supplied by the NULL terminated variable argument list.
+ * and values are supplied by the %NULL terminated variable argument list.
  * The last @num_optional provided arguments are considered optional.
  *
  * Return value: the newly constructed #GeditMessageType
@@ -309,10 +309,10 @@ gedit_message_type_new (const gchar *object_path,
 {
 	GeditMessageType *message_type;
 	va_list var_args;
-	
-	va_start(var_args, num_optional);
+
+	va_start (var_args, num_optional);
 	message_type = gedit_message_type_new_valist (object_path, method, num_optional, var_args);
-	va_end(var_args);
+	va_end (var_args);
 	
 	return message_type;
 }
@@ -323,7 +323,7 @@ gedit_message_type_new (const gchar *object_path,
  * @num_optional: number of optional arguments
  * @...: key/gtype pair variable argument list
  *
- * Sets argument names/types supplied by the NULL terminated variable
+ * Sets argument names/types supplied by the %NULL terminated variable
  * argument list. The last @num_optional provided arguments are considered
  * optional.
  *
@@ -334,7 +334,7 @@ gedit_message_type_set (GeditMessageType *message_type,
 			...)
 {
 	va_list va_args;
-	
+
 	va_start (va_args, num_optional);
 	gedit_message_type_set_valist (message_type, num_optional, va_args);
 	va_end (va_args);
@@ -346,7 +346,7 @@ gedit_message_type_set (GeditMessageType *message_type,
  * @num_optional: number of optional arguments
  * @var_args: key/gtype pair variable argument list
  *
- * Sets argument names/types supplied by the NULL terminated variable
+ * Sets argument names/types supplied by the %NULL terminated variable
  * argument list @var_args. The last @num_optional provided arguments are 
  * considered optional.
  *
@@ -400,7 +400,7 @@ gedit_message_type_set_valist (GeditMessageType *message_type,
 	
 	message_type->num_required += added;
 
-	// set required for last num_optional arguments
+	/* set required for last num_optional arguments */
 	for (i = 0; i < num_optional; ++i)
 	{
 		if (optional[i])
@@ -416,7 +416,7 @@ gedit_message_type_set_valist (GeditMessageType *message_type,
 /**
  * gedit_message_type_instantiate_valist:
  * @message_type: the #GeditMessageType
- * @va_args: NULL terminated variable list of key/value pairs
+ * @va_args: %NULL terminated variable list of key/value pairs
  *
  * Instantiate a new message from the message type with specific values
  * for the message arguments.
@@ -441,7 +441,7 @@ gedit_message_type_instantiate_valist (GeditMessageType *message_type,
 /**
  * gedit_message_type_instantiate:
  * @message_type: the #GeditMessageType
- * @...: NULL terminated variable list of key/value pairs
+ * @...: %NULL terminated variable list of key/value pairs
  *
  * Instantiate a new message from the message type with specific values
  * for the message arguments.
@@ -455,7 +455,7 @@ gedit_message_type_instantiate (GeditMessageType *message_type,
 {
 	GeditMessage *message;
 	va_list va_args;
-	
+
 	va_start (va_args, message_type);
 	message = gedit_message_type_instantiate_valist (message_type, va_args);
 	va_end (va_args);

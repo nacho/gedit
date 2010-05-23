@@ -201,4 +201,5 @@ void		 _gedit_window_get_default_size		(gint                *width,
 G_END_DECLS
 
 #endif  /* __GEDIT_WINDOW_H__  */
+
 /* ex:ts=8:noet: */

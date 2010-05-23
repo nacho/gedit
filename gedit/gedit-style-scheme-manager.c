@@ -85,7 +85,8 @@ gedit_get_style_scheme_manager (void)
 }
 
 static gint
-schemes_compare (gconstpointer a, gconstpointer b)
+schemes_compare (gconstpointer a,
+		 gconstpointer b)
 {
 	GtkSourceStyleScheme *scheme_a = (GtkSourceStyleScheme *)a;
 	GtkSourceStyleScheme *scheme_b = (GtkSourceStyleScheme *)b;
@@ -361,4 +362,5 @@ _gedit_style_scheme_manager_uninstall_scheme (GtkSourceStyleSchemeManager *manag
 	
 	return TRUE;	
 }
+
 /* ex:ts=8:noet: */

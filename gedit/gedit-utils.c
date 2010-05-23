@@ -75,7 +75,9 @@ gedit_utils_location_has_file_scheme (GFile *location)
 }
 
 static void
-widget_get_origin (GtkWidget *widget, gint *x, gint *y)
+widget_get_origin (GtkWidget *widget,
+		   gint      *x,
+		   gint      *y)
 
 {
 	GdkWindow *window;
@@ -218,7 +220,10 @@ gedit_dialog_add_button (GtkDialog   *dialog,
  * n: len of the string in bytes
  */
 gboolean 
-g_utf8_caselessnmatch (const char *s1, const char *s2, gssize n1, gssize n2)
+g_utf8_caselessnmatch (const char *s1,
+		       const char *s2,
+		       gssize      n1,
+		       gssize      n2)
 {
 	gchar *casefold;
 	gchar *normalized_s1;
@@ -264,7 +269,7 @@ finally_2:
  * for a specified gtk widget.
  */
 void
-gedit_utils_set_atk_name_description (GtkWidget *widget, 
+gedit_utils_set_atk_name_description (GtkWidget   *widget, 
 				      const gchar *name,
 				      const gchar *description)
 {
@@ -275,10 +280,10 @@ gedit_utils_set_atk_name_description (GtkWidget *widget,
 	if (!(GTK_IS_ACCESSIBLE (aobj)))
 		return;
 
-	if(name)
+	if (name)
 		atk_object_set_name (aobj, name);
 
-	if(description)
+	if (description)
 		atk_object_set_description (aobj, description);
 }
 
@@ -290,9 +295,9 @@ gedit_utils_set_atk_name_description (GtkWidget *widget,
  * between 2 specified widgets.
  */
 void
-gedit_utils_set_atk_relation (GtkWidget *obj1, 
-			      GtkWidget *obj2, 
-			      AtkRelationType rel_type )
+gedit_utils_set_atk_relation (GtkWidget       *obj1, 
+			      GtkWidget       *obj2, 
+			      AtkRelationType  rel_type)
 {
 	AtkObject *atk_obj1, *atk_obj2;
 	AtkRelationSet *relation_set;
@@ -421,21 +426,21 @@ gedit_utils_unescape_search_text (const gchar *text)
 			{
 				case 'n':
 					str = g_string_append (str, "\n");
-				break;
+					break;
 				case 'r':
 					str = g_string_append (str, "\r");
-				break;
+					break;
 				case 't':
 					str = g_string_append (str, "\t");
-				break;
+					break;
 				case '\\':
 					str = g_string_append (str, "\\");
 					drop_prev = TRUE;
-				break;
+					break;
 				default:
 					str = g_string_append (str, "\\");
 					str = g_string_append_len (str, cur, next - cur);
-				break;
+					break;
 			}
 		} 
 		else if (*cur != '\\') 
@@ -508,7 +513,7 @@ gedit_warning (GtkWindow *parent, const gchar *format, ...)
  * Doubles underscore to avoid spurious menu accels.
  */
 gchar * 
-gedit_utils_escape_underscores (const gchar* text,
+gedit_utils_escape_underscores (const gchar *text,
 				gssize       length)
 {
 	GString *str;
@@ -551,7 +556,7 @@ gedit_utils_escape_underscores (const gchar* text,
 static gchar *
 gedit_utils_str_truncate (const gchar *string,
 			  guint        truncate_length,
-			  gboolean middle)
+			  gboolean     middle)
 {
 	GString     *truncated;
 	guint        length;
@@ -572,14 +577,16 @@ gedit_utils_str_truncate (const gchar *string,
 	 * side)
 	 */
 	delimiter_length = g_utf8_strlen (delimiter, -1);
-	if (truncate_length < (delimiter_length + 2)) {
+	if (truncate_length < (delimiter_length + 2))
+	{
 		return g_strdup (string);
 	}
 
 	n_chars = g_utf8_strlen (string, length);
 
 	/* Make sure the string is not already small enough. */
-	if (n_chars <= truncate_length) {
+	if (n_chars <= truncate_length)
+	{
 		return g_strdup (string);
 	}
 
@@ -633,12 +640,14 @@ gedit_utils_make_valid_utf8 (const char *name)
 	remaining_bytes = strlen (name);
 
 	while (remaining_bytes != 0) {
-		if (g_utf8_validate (remainder, remaining_bytes, &invalid)) {
+		if (g_utf8_validate (remainder, remaining_bytes, &invalid))
+		{
 			break;
 		}
 		valid_bytes = invalid - remainder;
 
-		if (string == NULL) {
+		if (string == NULL)
+		{
 			string = g_string_sized_new (remaining_bytes);
 		}
 		g_string_append_len (string, remainder, valid_bytes);
@@ -649,7 +658,8 @@ gedit_utils_make_valid_utf8 (const char *name)
 		remainder = invalid + 1;
 	}
 
-	if (string == NULL) {
+	if (string == NULL)
+	{
 		return g_strdup (name);
 	}
 
@@ -986,11 +996,13 @@ has_valid_scheme (const gchar *uri)
 
 	p = uri;
 
-	if (!is_valid_scheme_character (*p)) {
+	if (!is_valid_scheme_character (*p))
+	{
 		return FALSE;
 	}
 
-	do {
+	do
+	{
 		p++;
 	} while (is_valid_scheme_character (*p));
 
@@ -1312,10 +1324,14 @@ gedit_utils_basename_for_display (GFile *location)
 		gchar *hn_utf8;
 
 		if  (hn != NULL)
+		{
 			hn_utf8 = gedit_utils_make_valid_utf8 (hn);
+		}
 		else
+		{
 			/* we should never get here */
 			hn_utf8 = g_strdup ("?");
+		}
 
 		/* Translators: '/ on <remote-share>' */
 		name = g_strdup_printf (_("/ on %s"), hn_utf8);
@@ -1458,7 +1474,9 @@ gedit_utils_decode_uri (const gchar *uri,
 		      c == '+' ||
 		      c == '-' ||
 		      c == '.'))
+		{
 			return FALSE;
+		}
 	}
 	
 	if (scheme)
@@ -1467,7 +1485,9 @@ gedit_utils_decode_uri (const gchar *uri,
 		out = *scheme;
 	
 		for (in = uri; in < p - 1; in++)
+		{
 			*out++ = g_ascii_tolower (*in);
+		}
 			
 		*out = '\0';
 	}
@@ -1513,7 +1533,9 @@ gedit_utils_decode_uri (const gchar *uri,
 			host_start = userinfo_end + 1;
 		}
 		else
+		{
 			host_start = authority_start;
+		}
 
 		port_start = memchr (host_start, ':', authority_end - host_start);
 
@@ -1525,7 +1547,9 @@ gedit_utils_decode_uri (const gchar *uri,
 				*port = g_strndup (port_start, authority_end - port_start);
 		}
 		else
+		{
 			host_end = authority_end;
+		}
 
 		if (host)
 			*host = g_strndup (host_start, host_end - host_start);

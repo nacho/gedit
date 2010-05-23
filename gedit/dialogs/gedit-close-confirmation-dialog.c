@@ -126,7 +126,9 @@ response_cb (GeditCloseConfirmationDialog *dlg,
 		}
 	}
 	else
+	{
 		priv->selected_documents = NULL;
+	}
 }
 
 static void
@@ -173,7 +175,9 @@ set_logout_mode (GeditCloseConfirmationDialog *dlg,
 			
 			if (gedit_document_get_readonly (doc) || 
 			    gedit_document_is_untitled (doc))
+			{
 				stock_id = GTK_STOCK_SAVE_AS;
+			}
 		}
 
 		gtk_dialog_add_button (GTK_DIALOG (dlg),
@@ -271,7 +275,7 @@ gedit_close_confirmation_dialog_get_property (GObject    *object,
 
 	priv = GEDIT_CLOSE_CONFIRMATION_DIALOG (object)->priv;
 
-	switch( prop_id )
+	switch (prop_id)
 	{
 		case PROP_UNSAVED_DOCUMENTS:
 			g_value_set_pointer (value, priv->unsaved_documents);
@@ -313,7 +317,7 @@ gedit_close_confirmation_dialog_class_init (GeditCloseConfirmationDialogClass *k
 							       "Whether the dialog is in logout mode",
 							       FALSE,
 							       (G_PARAM_READWRITE | 
-							        G_PARAM_CONSTRUCT_ONLY)));							        
+							        G_PARAM_CONSTRUCT_ONLY)));
 }
 
 static GList *
@@ -700,12 +704,15 @@ build_multiple_docs_dialog (GeditCloseConfirmationDialog *dlg)
 	gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
 
 	if (priv->disable_save_to_disk)
+	{
 		str = g_strdup_printf (
 				ngettext ("Changes to %d document will be permanently lost.",
 					  "Changes to %d documents will be permanently lost.",
 					  g_list_length (priv->unsaved_documents)),
 				g_list_length (priv->unsaved_documents));
+	}
 	else
+	{
 		str = g_strdup_printf (
 				ngettext ("There is %d document with unsaved changes. "
 					  "Save changes before closing?",
@@ -713,6 +720,7 @@ build_multiple_docs_dialog (GeditCloseConfirmationDialog *dlg)
 					  "Save changes before closing?",
 					  g_list_length (priv->unsaved_documents)),
 				g_list_length (priv->unsaved_documents));
+	}
 
 	markup_str = g_strconcat ("<span weight=\"bold\" size=\"larger\">", str, "</span>", NULL);
 	g_free (str);
@@ -746,10 +754,14 @@ build_multiple_docs_dialog (GeditCloseConfirmationDialog *dlg)
 
 	/* Secondary label */
 	if (priv->disable_save_to_disk)
+	{
 		secondary_label = gtk_label_new (_("Saving has been disabled by the system administrator."));
+	}
 	else
+	{
 		secondary_label = gtk_label_new (_("If you don't save, "
 						   "all your changes will be permanently lost."));
+	}
 
 	gtk_box_pack_start (GTK_BOX (vbox2), secondary_label, FALSE, FALSE, 0);
 	gtk_label_set_line_wrap (GTK_LABEL (secondary_label), TRUE);
@@ -791,4 +803,5 @@ gedit_close_confirmation_dialog_get_unsaved_documents (GeditCloseConfirmationDia
 
 	return dlg->priv->unsaved_documents;
 }
+
 /* ex:ts=8:noet: */

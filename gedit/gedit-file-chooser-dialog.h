@@ -46,10 +46,9 @@ G_BEGIN_DECLS
 #define GEDIT_IS_FILE_CHOOSER_DIALOG_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_FILE_CHOOSER_DIALOG))
 #define GEDIT_FILE_CHOOSER_DIALOG_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GEDIT_TYPE_FILE_CHOOSER_DIALOG, GeditFileChooserDialogClass))
 
-typedef struct _GeditFileChooserDialog      GeditFileChooserDialog;
-typedef struct _GeditFileChooserDialogClass GeditFileChooserDialogClass;
-
-typedef struct _GeditFileChooserDialogPrivate GeditFileChooserDialogPrivate;
+typedef struct _GeditFileChooserDialog		GeditFileChooserDialog;
+typedef struct _GeditFileChooserDialogClass	GeditFileChooserDialogClass;
+typedef struct _GeditFileChooserDialogPrivate	GeditFileChooserDialogPrivate;
 
 struct _GeditFileChooserDialogClass
 {
@@ -63,28 +62,29 @@ struct _GeditFileChooserDialog
 	GeditFileChooserDialogPrivate *priv;
 };
 
-GType		 gedit_file_chooser_dialog_get_type	(void) G_GNUC_CONST;
+GType		 gedit_file_chooser_dialog_get_type		(void) G_GNUC_CONST;
 
-GtkWidget	*gedit_file_chooser_dialog_new		(const gchar            *title,
-							 GtkWindow              *parent,
-							 GtkFileChooserAction    action,
-							 const GeditEncoding    *encoding,
-							 const gchar            *first_button_text,
-							 ...);
+GtkWidget	*gedit_file_chooser_dialog_new			(const gchar              *title,
+								 GtkWindow                *parent,
+								 GtkFileChooserAction      action,
+								 const GeditEncoding      *encoding,
+								 const gchar              *first_button_text,
+								 ...);
 
-void		 gedit_file_chooser_dialog_set_encoding (GeditFileChooserDialog *dialog,
-							 const GeditEncoding    *encoding);
+void		 gedit_file_chooser_dialog_set_encoding		(GeditFileChooserDialog   *dialog,
+								 const GeditEncoding      *encoding);
 
 const GeditEncoding
-		*gedit_file_chooser_dialog_get_encoding (GeditFileChooserDialog *dialog);
+		*gedit_file_chooser_dialog_get_encoding		(GeditFileChooserDialog   *dialog);
 
-void		 gedit_file_chooser_dialog_set_newline_type (GeditFileChooserDialog  *dialog,
-							     GeditDocumentNewlineType newline_type);
+void		 gedit_file_chooser_dialog_set_newline_type	(GeditFileChooserDialog   *dialog,
+								 GeditDocumentNewlineType  newline_type);
 
 GeditDocumentNewlineType
-		 gedit_file_chooser_dialog_get_newline_type (GeditFileChooserDialog *dialog);
+		 gedit_file_chooser_dialog_get_newline_type	(GeditFileChooserDialog   *dialog);
 
 G_END_DECLS
 
 #endif /* __GEDIT_FILE_CHOOSER_DIALOG_H__ */
+
 /* ex:ts=8:noet: */

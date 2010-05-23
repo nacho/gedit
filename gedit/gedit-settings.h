@@ -75,19 +75,19 @@ GtkSourceSmartHomeEndType gedit_settings_get_smart_home_end		(GeditSettings *gs)
 GeditToolbarSetting	 gedit_settings_get_toolbar_style		(GeditSettings *gs);
 
 /* Utility functions */
-GSList			*gedit_settings_get_list			(GSettings   *settings,
-									 const gchar *key);
+GSList			*gedit_settings_get_list			(GSettings     *settings,
+									 const gchar   *key);
 
-void			 gedit_settings_set_list			(GSettings    *settings,
-									 const gchar  *key,
-									 const GSList *list);
+void			 gedit_settings_set_list			(GSettings     *settings,
+									 const gchar   *key,
+									 const GSList  *list);
 
-GtkWrapMode		 gedit_settings_get_wrap_mode			(GSettings    *settings,
-									 const gchar  *key);
+GtkWrapMode		 gedit_settings_get_wrap_mode			(GSettings     *settings,
+									 const gchar   *key);
 
-void			 gedit_settings_set_wrap_mode			(GSettings    *settings,
-									 const gchar  *key,
-									 GtkWrapMode   mode);
+void			 gedit_settings_set_wrap_mode			(GSettings     *settings,
+									 const gchar   *key,
+									 GtkWrapMode    mode);
 
 /* key constants */
 #define GEDIT_SETTINGS_USE_DEFAULT_FONT			"use-default-font"
@@ -139,3 +139,5 @@ void			 gedit_settings_set_wrap_mode			(GSettings    *settings,
 G_END_DECLS
 
 #endif /* __GEDIT_SETTINGS_H__ */
+
+/* ex:ts=8:noet: */

@@ -53,7 +53,7 @@ struct _GeditStyleSchemeGeneratorClass
         GObjectClass base_class;        
 };
 
-GType                           gedit_style_scheme_generator_get_type (void)  G_GNUC_CONST;
+GType                           gedit_style_scheme_generator_get_type			(void)  G_GNUC_CONST;
 
 GeditStyleSchemeGenerator*      gedit_style_scheme_generator_new			(GtkSourceStyleScheme *scheme);
 

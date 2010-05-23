@@ -89,9 +89,9 @@ GeditDocumentSaver 	*gedit_document_saver_new 		(GeditDocument                *d
 								 GeditDocumentCompressionType  compression_type,
 								 GeditDocumentSaveFlags        flags);
 
-void			 gedit_document_saver_saving		(GeditDocumentSaver *saver,
-								 gboolean            completed,
-								 GError             *error);
+void			 gedit_document_saver_saving		(GeditDocumentSaver  *saver,
+								 gboolean             completed,
+								 GError              *error);
 void			 gedit_document_saver_save		(GeditDocumentSaver  *saver,
 								 GTimeVal            *old_mtime);
 

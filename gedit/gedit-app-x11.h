@@ -39,15 +39,17 @@ typedef struct _GeditAppX11		GeditAppX11;
 typedef struct _GeditAppX11Class	GeditAppX11Class;
 typedef struct _GeditAppX11Private	GeditAppX11Private;
 
-struct _GeditAppX11 {
+struct _GeditAppX11
+{
 	GeditApp parent;
 };
 
-struct _GeditAppX11Class {
+struct _GeditAppX11Class
+{
 	GeditAppClass parent_class;
 };
 
-GType gedit_app_x11_get_type (void) G_GNUC_CONST;
+GType	 gedit_app_x11_get_type (void) G_GNUC_CONST;
 
 G_END_DECLS
 

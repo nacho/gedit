@@ -189,7 +189,7 @@ gedit_message_class_init (GeditMessageClass *klass)
 					 		     G_PARAM_CONSTRUCT_ONLY |
 					 		     G_PARAM_STATIC_STRINGS));
 
-	g_type_class_add_private (object_class, sizeof(GeditMessagePrivate));
+	g_type_class_add_private (object_class, sizeof (GeditMessagePrivate));
 }
 
 static void
@@ -264,7 +264,7 @@ const gchar *
 gedit_message_get_method (GeditMessage *message)
 {
 	g_return_val_if_fail (GEDIT_IS_MESSAGE (message), NULL);
-	
+
 	return gedit_message_type_get_method (message->priv->type);
 }
 
@@ -281,7 +281,7 @@ const gchar *
 gedit_message_get_object_path (GeditMessage *message)
 {
 	g_return_val_if_fail (GEDIT_IS_MESSAGE (message), NULL);
-	
+
 	return gedit_message_type_get_object_path (message->priv->type);
 }
 
@@ -556,7 +556,7 @@ gedit_message_has_key (GeditMessage *message,
 		       const gchar  *key)
 {
 	g_return_val_if_fail (GEDIT_IS_MESSAGE (message), FALSE);
-	
+
 	return value_lookup (message, key, FALSE) != NULL;
 }
 
@@ -608,7 +608,7 @@ gedit_message_validate (GeditMessage *message)
 
 		message->priv->valid = info.valid;
 	}
-	
+
 	return message->priv->valid;
 }
 

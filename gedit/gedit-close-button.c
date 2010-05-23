@@ -26,7 +26,7 @@ G_DEFINE_TYPE (GeditCloseButton, gedit_close_button, GTK_TYPE_BUTTON)
 
 static void
 gedit_close_button_style_set (GtkWidget *button,
-			      GtkStyle *previous_style)
+			      GtkStyle  *previous_style)
 {
 	gint h, w;
 

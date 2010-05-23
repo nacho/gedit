@@ -86,7 +86,7 @@ typedef struct
 							  GEDIT_TYPE_DOCUMENT_SAVER, \
 							  GeditDocumentSaverPrivate))
 
-static void check_modified_async (AsyncData          *async);
+static void check_modified_async (AsyncData *async);
 
 struct _GeditDocumentSaverPrivate
 {
@@ -998,10 +998,14 @@ gedit_document_saver_save (GeditDocumentSaver *saver,
 
 	/* never keep backup of autosaves */
 	if ((saver->priv->flags & GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP) != 0)
+	{
 		saver->priv->keep_backup = FALSE;
+	}
 	else
+	{
 		saver->priv->keep_backup = g_settings_get_boolean (saver->priv->editor_settings,
 								   GEDIT_SETTINGS_CREATE_BACKUP_COPY);
+	}
 
 	saver->priv->old_mtime = *old_mtime;
 
@@ -1081,4 +1085,5 @@ gedit_document_saver_get_info (GeditDocumentSaver *saver)
 
 	return saver->priv->info;
 }
+
 /* ex:ts=8:noet: */

@@ -72,9 +72,11 @@ struct _GeditPluginManagerPrivate
 
 G_DEFINE_TYPE(GeditPluginManager, gedit_plugin_manager, GTK_TYPE_VBOX)
 
-static GeditPluginInfo *plugin_manager_get_selected_plugin (GeditPluginManager *pm); 
-static void plugin_manager_toggle_active (GeditPluginManager *pm, GtkTreeIter *iter, GtkTreeModel *model);
-static void gedit_plugin_manager_finalize (GObject *object);
+static GeditPluginInfo	*plugin_manager_get_selected_plugin	(GeditPluginManager *pm); 
+static void		 plugin_manager_toggle_active		(GeditPluginManager *pm,
+								 GtkTreeIter        *iter,
+								 GtkTreeModel       *model);
+static void		 gedit_plugin_manager_finalize		(GObject            *object);
 
 static void 
 gedit_plugin_manager_class_init (GeditPluginManagerClass *klass)
@@ -335,7 +337,8 @@ plugin_manager_set_active (GeditPluginManager *pm,
 	if (active)
 	{
 		/* activate the plugin */
-		if (!gedit_plugins_engine_activate_plugin (pm->priv->engine, info)) {
+		if (!gedit_plugins_engine_activate_plugin (pm->priv->engine, info))
+		{
 			gedit_debug_message (DEBUG_PLUGINS, "Could not activate %s.\n", 
 					     gedit_plugin_info_get_name (info));
 
@@ -345,7 +348,8 @@ plugin_manager_set_active (GeditPluginManager *pm,
 	else
 	{
 		/* deactivate the plugin */
-		if (!gedit_plugins_engine_deactivate_plugin (pm->priv->engine, info)) {
+		if (!gedit_plugins_engine_deactivate_plugin (pm->priv->engine, info))
+		{
 			gedit_debug_message (DEBUG_PLUGINS, "Could not deactivate %s.\n", 
 					     gedit_plugin_info_get_name (info));
 
@@ -411,10 +415,10 @@ plugin_manager_set_active_all (GeditPluginManager *pm,
 
 	gtk_tree_model_get_iter_first (model, &iter);
 
-	do {
+	do
+	{
 		plugin_manager_set_active (pm, &iter, model, active);
-	}
-	while (gtk_tree_model_iter_next (model, &iter));
+	} while (gtk_tree_model_iter_next (model, &iter));
 }
 
 /* Callback used as the interactive search comparison function */
@@ -765,8 +769,7 @@ plugin_toggled_cb (GeditPluginsEngine *engine,
 			GeditPluginInfo *tinfo;
 			gtk_tree_model_get (model, &iter, INFO_COLUMN, &tinfo, -1);
 			info_found = info == tinfo;
-		}
-		while (!info_found && gtk_tree_model_iter_next (model, &iter));
+		} while (!info_found && gtk_tree_model_iter_next (model, &iter));
 	}
 
 	if (!info_found)
@@ -887,4 +890,5 @@ GtkWidget *gedit_plugin_manager_new (void)
 {
 	return g_object_new (GEDIT_TYPE_PLUGIN_MANAGER,0);
 }
+
 /* ex:ts=8:noet: */

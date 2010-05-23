@@ -1535,7 +1535,7 @@ view_focused_in (GtkWidget     *widget,
 
 static GMountOperation *
 tab_mount_operation_factory (GeditDocument *doc,
-			     gpointer userdata)
+			     gpointer       userdata)
 {
 	GeditTab *tab = GEDIT_TAB (userdata);
 	GtkWidget *window;
@@ -1585,7 +1585,7 @@ gedit_tab_init (GeditTab *tab)
 	tab->priv->auto_save = (tab->priv->auto_save != FALSE);
 
 	tab->priv->auto_save_interval = auto_save_interval;
-	/*FIXME
+	/* FIXME
 	if (tab->priv->auto_save_interval <= 0)
 		tab->priv->auto_save_interval = GPM_DEFAULT_AUTO_SAVE_INTERVAL;*/
 
@@ -2466,7 +2466,7 @@ done_printing_cb (GeditPrintJob       *job,
 		set_message_area (tab, NULL); /* destroy the message area */
 	}
 
-	// TODO: check status and error
+	/* TODO: check status and error */
 
 	if (result ==  GEDIT_PRINT_JOB_RESULT_OK)
 	{
@@ -2525,7 +2525,7 @@ show_preview_cb (GeditPrintJob       *job,
 		 GeditPrintPreview   *preview,
 		 GeditTab            *tab)
 {
-//	g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_PRINT_PREVIEWING);
+	/* g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_PRINT_PREVIEWING); */
 	g_return_if_fail (tab->priv->print_preview == NULL);
 
 	set_message_area (tab, NULL); /* destroy the message area */
@@ -2619,13 +2619,17 @@ show_printing_message_area (GeditTab *tab, gboolean preview)
 	GtkWidget *area;
 
 	if (preview)
+	{
 		area = gedit_progress_message_area_new (GTK_STOCK_PRINT_PREVIEW,
 							"",
 							TRUE);
+	}
 	else
+	{
 		area = gedit_progress_message_area_new (GTK_STOCK_PRINT,
 							"",
 							TRUE);
+	}
 
 	g_signal_connect (area,
 			  "response",
@@ -2733,7 +2737,7 @@ gedit_tab_print_or_print_preview (GeditTab                *tab,
 				     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))),
 				     &error);
 
-	// TODO: manage res in the correct way
+	/* TODO: manage res in the correct way */
 	if (res == GTK_PRINT_OPERATION_RESULT_ERROR)
 	{
 		/* FIXME: go in error state */
@@ -2745,7 +2749,7 @@ gedit_tab_print_or_print_preview (GeditTab                *tab,
 }
 
 void 
-_gedit_tab_print (GeditTab     *tab)
+_gedit_tab_print (GeditTab *tab)
 {
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 
@@ -2762,7 +2766,7 @@ _gedit_tab_print (GeditTab     *tab)
 }
 
 void
-_gedit_tab_print_preview (GeditTab     *tab)
+_gedit_tab_print_preview (GeditTab *tab)
 {
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 
@@ -2794,7 +2798,9 @@ _gedit_tab_can_close (GeditTab *tab)
 	    (ts == GEDIT_TAB_STATE_LOADING_ERROR) ||
 	    (ts == GEDIT_TAB_STATE_REVERTING)     ||
 	    (ts == GEDIT_TAB_STATE_REVERTING_ERROR)) /* CHECK: I'm not sure this is the right behavior for REVERTING ERROR */
+	{
 		return TRUE;
+	}
 
 	/* Do not close tab with saving errors */
 	if (ts == GEDIT_TAB_STATE_SAVING_ERROR)
@@ -2961,4 +2967,5 @@ gedit_tab_set_info_bar (GeditTab  *tab,
 	/* FIXME: this can cause problems with the tab state machine */
 	set_message_area (tab, info_bar);
 }
+
 /* ex:ts=8:noet: */

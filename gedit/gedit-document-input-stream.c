@@ -197,8 +197,8 @@ get_new_line_size (GeditDocumentInputStream *stream)
  * Returns: a new #GInputStream to read @buffer
  */
 GInputStream *
-gedit_document_input_stream_new (GtkTextBuffer           *buffer,
-				 GeditDocumentNewlineType type)
+gedit_document_input_stream_new (GtkTextBuffer            *buffer,
+				 GeditDocumentNewlineType  type)
 {
 	GeditDocumentInputStream *stream;
 
@@ -477,4 +477,5 @@ gedit_document_input_stream_close (GInputStream  *stream,
 
 	return TRUE;
 }
+
 /* ex:ts=8:noet: */

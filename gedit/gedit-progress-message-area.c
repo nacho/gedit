@@ -91,13 +91,13 @@ gedit_progress_message_area_set_property (GObject      *object,
 
 	switch (prop_id)
 	{
-	case PROP_HAS_CANCEL_BUTTON:
-		gedit_progress_message_area_set_has_cancel_button (area,
-								   g_value_get_boolean (value));
-		break;
-	default:
-		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-		break;
+		case PROP_HAS_CANCEL_BUTTON:
+			gedit_progress_message_area_set_has_cancel_button (area,
+									   g_value_get_boolean (value));
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
 	}
 }
 
@@ -113,9 +113,9 @@ gedit_progress_message_area_get_property (GObject      *object,
 
 	switch (prop_id)
 	{
-	default:
-		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-		break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
 	}
 }
 
@@ -137,7 +137,7 @@ gedit_progress_message_area_class_init (GeditProgressMessageAreaClass *klass)
 							       G_PARAM_CONSTRUCT_ONLY |
 							       G_PARAM_STATIC_STRINGS));
 
-	g_type_class_add_private (gobject_class, sizeof(GeditProgressMessageAreaPrivate));
+	g_type_class_add_private (gobject_class, sizeof (GeditProgressMessageAreaPrivate));
 }
 
 static void
@@ -259,4 +259,5 @@ gedit_progress_message_area_pulse (GeditProgressMessageArea *area)
 
 	gtk_progress_bar_pulse (GTK_PROGRESS_BAR (area->priv->progress));
 }
+
 /* ex:ts=8:noet: */

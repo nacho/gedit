@@ -91,7 +91,7 @@ gedit_style_scheme_dialog_class_init (GeditStyleSchemeDialogClass *klass)
 
 	object_class->finalize = gedit_style_scheme_dialog_finalize;
 
-	g_type_class_add_private (object_class, sizeof(GeditStyleSchemeDialogPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditStyleSchemeDialogPrivate));
 }
 
 static void
@@ -105,7 +105,7 @@ dialog_response_handler (GtkDialog *dlg,
 		case GTK_RESPONSE_HELP:
 			gedit_help_display (GTK_WINDOW (dlg),
 					    NULL,
-					    "gedit-prefs"); // FIXME
+					    "gedit-prefs"); /* FIXME */
 
 			g_signal_stop_emission_by_name (dlg, "response");
 
@@ -219,4 +219,5 @@ gedit_style_scheme_dialog_new (GeditStyleSchemeGenerator *generator)
 
 	return GTK_WIDGET (dlg);
 }
+
 /* ex:ts=8:noet: */

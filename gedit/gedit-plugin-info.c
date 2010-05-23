@@ -358,9 +358,13 @@ gedit_plugin_info_get_icon_name (GeditPluginInfo *info)
 	if (info->icon_name != NULL && 
 	    gtk_icon_theme_has_icon (gtk_icon_theme_get_default (),
 				     info->icon_name))
+	{
 		return info->icon_name;
+	}
 	else
+	{
 		return "gedit-plugin";
+	}
 }
 
 const gchar **
@@ -394,4 +398,5 @@ gedit_plugin_info_get_version (GeditPluginInfo *info)
 
 	return info->version;
 }
+
 /* ex:ts=8:noet: */

@@ -197,9 +197,11 @@ parseItem (xmlDocPtr doc, xmlNodePtr cur)
 			value = xmlGetProp (cur, (const xmlChar *)"value");
 
 			if ((key != NULL) && (value != NULL))
+			{
 				g_hash_table_insert (item->values,
 						     g_strdup ((gchar *)key), 
 						     g_strdup ((gchar *)value));
+			}
 
 			if (key != NULL)
 				xmlFree (key);
@@ -388,17 +390,24 @@ gedit_metadata_manager_set (GFile       *location,
 	}
 	
 	if (item->values == NULL)
+	{
 		 item->values = g_hash_table_new_full (g_str_hash, 
 				 		       g_str_equal, 
 						       g_free, 
 						       g_free);
+	}
+	
 	if (value != NULL)
+	{
 		g_hash_table_insert (item->values,
 				     g_strdup (key),
 				     g_strdup (value));
+	}
 	else
+	{
 		g_hash_table_remove (item->values,
 				     key);
+	}
 
 	item->atime = time (NULL);
 

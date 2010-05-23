@@ -44,7 +44,7 @@
 
 void
 _gedit_cmd_view_show_toolbar (GtkAction   *action,
-			     GeditWindow *window)
+			      GeditWindow *window)
 {
 	gboolean visible;
 
@@ -60,7 +60,7 @@ _gedit_cmd_view_show_toolbar (GtkAction   *action,
 
 void
 _gedit_cmd_view_show_statusbar (GtkAction   *action,
-			       GeditWindow *window)
+			        GeditWindow *window)
 {
 	gboolean visible;
 
@@ -76,7 +76,7 @@ _gedit_cmd_view_show_statusbar (GtkAction   *action,
 
 void
 _gedit_cmd_view_show_side_pane (GtkAction   *action,
-			       GeditWindow *window)
+			        GeditWindow *window)
 {
 	gboolean visible;
 	GeditPanel *panel;
@@ -100,7 +100,7 @@ _gedit_cmd_view_show_side_pane (GtkAction   *action,
 
 void
 _gedit_cmd_view_show_bottom_pane (GtkAction   *action,
-				 GeditWindow *window)
+				  GeditWindow *window)
 {
 	gboolean visible;
 	GeditPanel *panel;
@@ -123,7 +123,7 @@ _gedit_cmd_view_show_bottom_pane (GtkAction   *action,
 }
 
 void
-_gedit_cmd_view_toggle_fullscreen_mode (GtkAction *action,
+_gedit_cmd_view_toggle_fullscreen_mode (GtkAction   *action,
 					GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
@@ -135,7 +135,7 @@ _gedit_cmd_view_toggle_fullscreen_mode (GtkAction *action,
 }
 
 void
-_gedit_cmd_view_leave_fullscreen_mode (GtkAction *action,
+_gedit_cmd_view_leave_fullscreen_mode (GtkAction   *action,
 				       GeditWindow *window)
 {
 	GtkAction *view_action;
@@ -148,8 +148,9 @@ _gedit_cmd_view_leave_fullscreen_mode (GtkAction *action,
 	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (view_action),
 				      FALSE);
 	_gedit_window_unfullscreen (window);
-	g_signal_handlers_unblock_by_func
-		(view_action, G_CALLBACK (_gedit_cmd_view_toggle_fullscreen_mode),
-		 window);
+	g_signal_handlers_unblock_by_func (view_action,
+					   G_CALLBACK (_gedit_cmd_view_toggle_fullscreen_mode),
+					   window);
 }
+
 /* ex:ts=8:noet: */

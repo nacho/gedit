@@ -116,21 +116,29 @@ on_lockdown_changed (GSettings   *settings,
 	app = gedit_app_get_default ();
 	
 	if (strcmp (key, GEDIT_SETTINGS_LOCKDOWN_COMMAND_LINE) == 0)
+	{
 		_gedit_app_set_lockdown_bit (app, 
 					     GEDIT_LOCKDOWN_COMMAND_LINE,
 					     locked);
+	}
 	else if (strcmp (key, GEDIT_SETTINGS_LOCKDOWN_PRINTING) == 0)
+	{
 		_gedit_app_set_lockdown_bit (app, 
 					     GEDIT_LOCKDOWN_PRINTING,
 					     locked);
+	}
 	else if (strcmp (key, GEDIT_SETTINGS_LOCKDOWN_PRINT_SETUP) == 0)
+	{
 		_gedit_app_set_lockdown_bit (app, 
 					     GEDIT_LOCKDOWN_PRINT_SETUP,
 					     locked);
+	}
 	else if (strcmp (key, GEDIT_SETTINGS_LOCKDOWN_SAVE_TO_DISK) == 0)
+	{
 		_gedit_app_set_lockdown_bit (app, 
 					     GEDIT_LOCKDOWN_SAVE_TO_DISK,
 					     locked);
+	}
 }
 
 static void
@@ -913,7 +921,9 @@ gedit_settings_get_toolbar_style (GeditSettings *gs)
 	else
 	{
 		if (strcmp (str, "GEDIT_TOOLBAR_ICONS_AND_TEXT") == 0)
+		{
 			res = GEDIT_TOOLBAR_ICONS_AND_TEXT;
+		}
 		else 
 		{
 			if (strcmp (str, "GEDIT_TOOLBAR_ICONS_BOTH_HORIZ") == 0)
@@ -991,7 +1001,9 @@ gedit_settings_get_wrap_mode (GSettings   *settings,
 	g_return_val_if_fail (str != NULL, GTK_WRAP_WORD);
 
 	if (strcmp (str, "GTK_WRAP_NONE") == 0)
+	{
 		res = GTK_WRAP_NONE;
+	}
 	else
 	{
 		if (strcmp (str, "GTK_WRAP_CHAR") == 0)

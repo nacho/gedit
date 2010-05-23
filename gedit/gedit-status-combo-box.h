@@ -39,13 +39,15 @@ typedef struct _GeditStatusComboBox		GeditStatusComboBox;
 typedef struct _GeditStatusComboBoxClass	GeditStatusComboBoxClass;
 typedef struct _GeditStatusComboBoxPrivate	GeditStatusComboBoxPrivate;
 
-struct _GeditStatusComboBox {
+struct _GeditStatusComboBox
+{
 	GtkEventBox parent;
 	
 	GeditStatusComboBoxPrivate *priv;
 };
 
-struct _GeditStatusComboBoxClass {
+struct _GeditStatusComboBoxClass
+{
 	GtkEventBoxClass parent_class;
 	
 	void (*changed) (GeditStatusComboBox *combo,
@@ -80,4 +82,5 @@ GtkLabel *gedit_status_combo_box_get_item_label		(GeditStatusComboBox	*combo);
 G_END_DECLS
 
 #endif /* __GEDIT_STATUS_COMBO_BOX_H__ */
+
 /* ex:ts=8:noet: */

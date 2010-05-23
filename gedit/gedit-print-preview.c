@@ -93,7 +93,7 @@ gedit_print_preview_get_property (GObject    *object,
 				  GValue     *value,
 				  GParamSpec *pspec)
 {
-	//GeditPrintPreview *preview = GEDIT_PRINT_PREVIEW (object);
+	/* GeditPrintPreview *preview = GEDIT_PRINT_PREVIEW (object); */
 	
 	switch (prop_id)
 	{
@@ -109,7 +109,7 @@ gedit_print_preview_set_property (GObject      *object,
 				  const GValue *value,
 				  GParamSpec   *pspec)
 {
-	//GeditPrintPreview *preview = GEDIT_PRINT_PREVIEW (object);
+	/* GeditPrintPreview *preview = GEDIT_PRINT_PREVIEW (object); */
 	
 	switch (prop_id)
 	{
@@ -122,7 +122,7 @@ gedit_print_preview_set_property (GObject      *object,
 static void
 gedit_print_preview_finalize (GObject *object)
 {
-	//GeditPrintPreview *preview = GEDIT_PRINT_PREVIEW (object);
+	/* GeditPrintPreview *preview = GEDIT_PRINT_PREVIEW (object); */
 
 	G_OBJECT_CLASS (gedit_print_preview_parent_class)->finalize (object);
 }
@@ -152,7 +152,7 @@ gedit_print_preview_class_init (GeditPrintPreviewClass *klass)
 
 	widget_class->grab_focus = gedit_print_preview_grab_focus;
 
-	g_type_class_add_private (object_class, sizeof(GeditPrintPreviewPrivate));	
+	g_type_class_add_private (object_class, sizeof (GeditPrintPreviewPrivate));	
 }
 
 static void
@@ -315,7 +315,8 @@ zoom_out (GeditPrintPreview *preview)
 }
 
 static void
-goto_page (GeditPrintPreview *preview, gint page)
+goto_page (GeditPrintPreview *preview,
+	   gint               page)
 {
 	gchar c[32];
 
@@ -444,31 +445,35 @@ page_entry_focus_out (GtkWidget         *widget,
 }
 
 static void
-on_1x1_clicked (GtkMenuItem *i, GeditPrintPreview *preview)
+on_1x1_clicked (GtkMenuItem       *i,
+		GeditPrintPreview *preview)
 {
 	set_rows_and_cols (preview, 1, 1);
 }
 
 static void
-on_1x2_clicked (GtkMenuItem *i, GeditPrintPreview *preview)
+on_1x2_clicked (GtkMenuItem       *i,
+		GeditPrintPreview *preview)
 {
 	set_rows_and_cols (preview, 1, 2);
 }
 
 static void
-on_2x1_clicked (GtkMenuItem *i, GeditPrintPreview *preview)
+on_2x1_clicked (GtkMenuItem       *i,
+		GeditPrintPreview *preview)
 {
 	set_rows_and_cols (preview, 2, 1);
 }
 
 static void
-on_2x2_clicked (GtkMenuItem *i, GeditPrintPreview *preview)
+on_2x2_clicked (GtkMenuItem       *i,
+		GeditPrintPreview *preview)
 {
 	set_rows_and_cols (preview, 2, 2);
 }
 
 static void
-multi_button_clicked (GtkWidget	 *button,
+multi_button_clicked (GtkWidget	        *button,
 		      GeditPrintPreview *preview)
 {
 	GtkWidget *m, *i;
@@ -811,118 +816,119 @@ preview_layout_key_press (GtkWidget         *widget,
 	hstep = 10;
 	vstep = 10;
 
-	switch (event->keyval) {
-	case '1':
-		set_zoom_fit_to_size (preview);
-		break;
-	case '+':
-	case '=':
-	case GDK_KP_Add:
-		zoom_in (preview);
-		break;
-	case '-':
-	case '_':
-	case GDK_KP_Subtract:
-		zoom_out (preview);
-		break;
-	case GDK_KP_Right:
-	case GDK_Right:
-		if (event->state & GDK_SHIFT_MASK)
-			x = hupper - hpage;
-		else
-			x = MIN (hupper - hpage, x + hstep);
-		domove = TRUE;
-		break;
-	case GDK_KP_Left:
-	case GDK_Left:
-		if (event->state & GDK_SHIFT_MASK)
-			x = hlower;
-		else
-			x = MAX (hlower, x - hstep);
-		domove = TRUE;
-		break;
-	case GDK_KP_Up:
-	case GDK_Up:
-		if (event->state & GDK_SHIFT_MASK)
-			goto page_up;
-		y = MAX (vlower, y - vstep);
-		domove = TRUE;
-		break;
-	case GDK_KP_Down:
-	case GDK_Down:
-		if (event->state & GDK_SHIFT_MASK)
-			goto page_down;
-		y = MIN (vupper - vpage, y + vstep);
-		domove = TRUE;
-		break;
-	case GDK_KP_Page_Up:
-	case GDK_Page_Up:
-	case GDK_Delete:
-	case GDK_KP_Delete:
-	case GDK_BackSpace:
-	page_up:
-		if (y <= vlower)
-		{
-			if (preview->priv->cur_page > 0)
+	switch (event->keyval)
+	{
+		case '1':
+			set_zoom_fit_to_size (preview);
+			break;
+		case '+':
+		case '=':
+		case GDK_KP_Add:
+			zoom_in (preview);
+			break;
+		case '-':
+		case '_':
+		case GDK_KP_Subtract:
+			zoom_out (preview);
+			break;
+		case GDK_KP_Right:
+		case GDK_Right:
+			if (event->state & GDK_SHIFT_MASK)
+				x = hupper - hpage;
+			else
+				x = MIN (hupper - hpage, x + hstep);
+			domove = TRUE;
+			break;
+		case GDK_KP_Left:
+		case GDK_Left:
+			if (event->state & GDK_SHIFT_MASK)
+				x = hlower;
+			else
+				x = MAX (hlower, x - hstep);
+			domove = TRUE;
+			break;
+		case GDK_KP_Up:
+		case GDK_Up:
+			if (event->state & GDK_SHIFT_MASK)
+				goto page_up;
+			y = MAX (vlower, y - vstep);
+			domove = TRUE;
+			break;
+		case GDK_KP_Down:
+		case GDK_Down:
+			if (event->state & GDK_SHIFT_MASK)
+				goto page_down;
+			y = MIN (vupper - vpage, y + vstep);
+			domove = TRUE;
+			break;
+		case GDK_KP_Page_Up:
+		case GDK_Page_Up:
+		case GDK_Delete:
+		case GDK_KP_Delete:
+		case GDK_BackSpace:
+		page_up:
+			if (y <= vlower)
 			{
-				goto_page (preview, preview->priv->cur_page - 1);
-				y = (vupper - vpage);
+				if (preview->priv->cur_page > 0)
+				{
+					goto_page (preview, preview->priv->cur_page - 1);
+					y = (vupper - vpage);
+				}
 			}
-		}
-		else
-		{
-			y = vlower;
-		}
-		domove = TRUE;
-		break;
-	case GDK_KP_Page_Down:
-	case GDK_Page_Down:
-	case ' ':
-	page_down:
-		if (y >= (vupper - vpage))
-		{
-			if (preview->priv->cur_page < preview->priv->n_pages - 1)
+			else
 			{
-				goto_page (preview, preview->priv->cur_page + 1);
 				y = vlower;
 			}
-		}
-		else
-		{
-			y = (vupper - vpage);
-		}
-		domove = TRUE;
-		break;
-	case GDK_KP_Home:
-	case GDK_Home:
-		goto_page (preview, 0);
-		y = 0;
-		domove = TRUE;
-		break;
-	case GDK_KP_End:
-	case GDK_End:
-		goto_page (preview, preview->priv->n_pages - 1);
-		y = 0;
-		domove = TRUE;
-		break;
-	case GDK_Escape:
-		gtk_widget_destroy (GTK_WIDGET (preview));
-		break;
-	case 'c':
-		if (event->state & GDK_MOD1_MASK)
-		{
+			domove = TRUE;
+			break;
+		case GDK_KP_Page_Down:
+		case GDK_Page_Down:
+		case ' ':
+		page_down:
+			if (y >= (vupper - vpage))
+			{
+				if (preview->priv->cur_page < preview->priv->n_pages - 1)
+				{
+					goto_page (preview, preview->priv->cur_page + 1);
+					y = vlower;
+				}
+			}
+			else
+			{
+				y = (vupper - vpage);
+			}
+			domove = TRUE;
+			break;
+		case GDK_KP_Home:
+		case GDK_Home:
+			goto_page (preview, 0);
+			y = 0;
+			domove = TRUE;
+			break;
+		case GDK_KP_End:
+		case GDK_End:
+			goto_page (preview, preview->priv->n_pages - 1);
+			y = 0;
+			domove = TRUE;
+			break;
+		case GDK_Escape:
 			gtk_widget_destroy (GTK_WIDGET (preview));
-		}
-		break;
-	case 'p':
-		if (event->state & GDK_MOD1_MASK)
-		{
-			gtk_widget_grab_focus (preview->priv->page_entry);
-		}
-		break;
-	default:
-		/* by default do not stop the default handler */
-		ret = FALSE;
+			break;
+		case 'c':
+			if (event->state & GDK_MOD1_MASK)
+			{
+				gtk_widget_destroy (GTK_WIDGET (preview));
+			}
+			break;
+		case 'p':
+			if (event->state & GDK_MOD1_MASK)
+			{
+				gtk_widget_grab_focus (preview->priv->page_entry);
+			}
+			break;
+		default:
+			/* by default do not stop the default handler */
+			ret = FALSE;
 	}
 
 	if (domove)
@@ -946,7 +952,7 @@ create_preview_layout (GeditPrintPreview *preview)
 	priv = preview->priv;
 
 	priv->layout = gtk_layout_new (NULL, NULL);
-//	gtk_widget_set_double_buffered (priv->layout, FALSE);
+	/* gtk_widget_set_double_buffered (priv->layout, FALSE); */
 
 	atko = gtk_widget_get_accessible (GTK_WIDGET (priv->layout));
 	atk_object_set_name (atko, _("Page Preview"));
@@ -1002,7 +1008,7 @@ gedit_print_preview_init (GeditPrintPreview *preview)
 	create_bar (preview);
 	create_preview_layout (preview);
 
-	// FIXME
+	/* FIXME */
 	priv->cur_page = 0;
 	priv->paper_w = 0;
 	priv->paper_h = 0;
@@ -1182,7 +1188,7 @@ set_n_pages (GeditPrintPreview *preview,
 
 	preview->priv->n_pages = n_pages;
 
-	// FIXME: count the visible pages
+	/* FIXME: count the visible pages */
 
 	str =  g_strdup_printf ("%d", n_pages);
 	gtk_label_set_markup (GTK_LABEL (preview->priv->last), str);

@@ -49,6 +49,7 @@ typedef struct _GeditPrintPreviewClass   GeditPrintPreviewClass;
 struct _GeditPrintPreview
 {
 	GtkVBox parent;
+
 	GeditPrintPreviewPrivate *priv;
 };
 
@@ -69,4 +70,5 @@ GtkWidget	*gedit_print_preview_new	(GtkPrintOperation		*op,
 G_END_DECLS
 
 #endif /* __GEDIT_PRINT_PREVIEW_H__ */
+
 /* ex:ts=8:noet: */

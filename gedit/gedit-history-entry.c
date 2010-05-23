@@ -76,16 +76,17 @@ gedit_history_entry_set_property (GObject      *object,
 
 	entry = GEDIT_HISTORY_ENTRY (object);
 
-	switch (prop_id) {
-	case PROP_HISTORY_ID:
-		entry->priv->history_id = g_value_dup_string (value);
-		break;
-	case PROP_HISTORY_LENGTH:
-		gedit_history_entry_set_history_length (entry,
-						     g_value_get_uint (value));
-		break;
-	default:
-		break;
+	switch (prop_id)
+	{
+		case PROP_HISTORY_ID:
+			entry->priv->history_id = g_value_dup_string (value);
+			break;
+		case PROP_HISTORY_LENGTH:
+			gedit_history_entry_set_history_length (entry,
+								g_value_get_uint (value));
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
 	}
 }
 
@@ -101,15 +102,16 @@ gedit_history_entry_get_property (GObject    *object,
 
 	priv = GEDIT_HISTORY_ENTRY (object)->priv;
 
-	switch (prop_id) {
-	case PROP_HISTORY_ID:
-		g_value_set_string (value, priv->history_id);
-		break;
-	case PROP_HISTORY_LENGTH:
-		g_value_set_uint (value, priv->history_length);
-		break;
-	default:
-		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
+	switch (prop_id)
+	{
+		case PROP_HISTORY_ID:
+			g_value_set_string (value, priv->history_id);
+			break;
+		case PROP_HISTORY_LENGTH:
+			g_value_set_uint (value, priv->history_length);
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
 	}
 }
 
@@ -173,7 +175,7 @@ gedit_history_entry_class_init (GeditHistoryEntryClass *klass)
 
 	/* TODO: Add enable-completion property */
 
-	g_type_class_add_private (object_class, sizeof(GeditHistoryEntryPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditHistoryEntryPrivate));
 }
 
 static GtkListStore *
@@ -292,7 +294,7 @@ clamp_list_store (GtkListStore *store,
 
 	if (gtk_tree_model_get_iter (GTK_TREE_MODEL (store), &iter, path))
 	{
-		while (1)
+		while (TRUE)
 		{
 			if (!gtk_list_store_remove (store, &iter))
 				break;
@@ -541,7 +543,7 @@ gedit_history_entry_new (const gchar *history_id,
 
 	gedit_history_entry_set_enable_completion (GEDIT_HISTORY_ENTRY (ret),
 						   enable_completion);
-						   
+
 	return ret;
 }
 
@@ -593,18 +595,23 @@ gedit_history_entry_set_escape_func (GeditHistoryEntry           *entry,
 	g_return_if_fail (cells->data != NULL && cells->next == NULL);
 
 	if (escape_func != NULL)
+	{
 		gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (entry),
 						    GTK_CELL_RENDERER (cells->data),
 						    (GtkCellLayoutDataFunc) escape_cell_data_func,
 						    escape_func,
 						    NULL);
+	}
 	else
+	{
 		gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (entry),
 						    GTK_CELL_RENDERER (cells->data),
 						    NULL,
 						    NULL,
 						    NULL);
+	}
 
 	g_list_free (cells);
 }
+
 /* ex:ts=8:noet: */

@@ -71,38 +71,39 @@ GType			 gedit_plugins_engine_get_type		(void) G_GNUC_CONST;
 
 GeditPluginsEngine	*gedit_plugins_engine_get_default	(void);
 
-void		 gedit_plugins_engine_garbage_collect	(GeditPluginsEngine *engine);
+void			 gedit_plugins_engine_garbage_collect	(GeditPluginsEngine *engine);
 
-const GList	*gedit_plugins_engine_get_plugin_list 	(GeditPluginsEngine *engine);
+const GList		*gedit_plugins_engine_get_plugin_list 	(GeditPluginsEngine *engine);
 
-GeditPluginInfo	*gedit_plugins_engine_get_plugin_info	(GeditPluginsEngine *engine,
-							 const gchar        *name);
+GeditPluginInfo		*gedit_plugins_engine_get_plugin_info	(GeditPluginsEngine *engine,
+								 const gchar        *name);
 
 /* plugin load and unloading (overall, for all windows) */
-gboolean 	 gedit_plugins_engine_activate_plugin 	(GeditPluginsEngine *engine,
-							 GeditPluginInfo    *info);
-gboolean 	 gedit_plugins_engine_deactivate_plugin	(GeditPluginsEngine *engine,
-							 GeditPluginInfo    *info);
+gboolean 		 gedit_plugins_engine_activate_plugin 	(GeditPluginsEngine *engine,
+								 GeditPluginInfo    *info);
+gboolean 		 gedit_plugins_engine_deactivate_plugin	(GeditPluginsEngine *engine,
+								 GeditPluginInfo    *info);
 
-void	 	 gedit_plugins_engine_configure_plugin	(GeditPluginsEngine *engine,
-							 GeditPluginInfo    *info,
-							 GtkWindow          *parent);
+void	 		 gedit_plugins_engine_configure_plugin	(GeditPluginsEngine *engine,
+								 GeditPluginInfo    *info,
+								 GtkWindow          *parent);
 
 /* plugin activation/deactivation per window, private to GeditWindow */
-void 		 gedit_plugins_engine_activate_plugins   (GeditPluginsEngine *engine,
-							  GeditWindow        *window);
-void 		 gedit_plugins_engine_deactivate_plugins (GeditPluginsEngine *engine,
-							  GeditWindow        *window);
-void		 gedit_plugins_engine_update_plugins_ui  (GeditPluginsEngine *engine,
-							  GeditWindow        *window);
+void 			 gedit_plugins_engine_activate_plugins	(GeditPluginsEngine *engine,
+								  GeditWindow        *window);
+void 			 gedit_plugins_engine_deactivate_plugins
+								(GeditPluginsEngine *engine,
+								  GeditWindow        *window);
+void			 gedit_plugins_engine_update_plugins_ui	(GeditPluginsEngine *engine,
+								  GeditWindow        *window);
 
 /* private for gconf notification */
-void		 gedit_plugins_engine_active_plugins_changed
-							(GeditPluginsEngine *engine);
+void		 gedit_plugins_engine_active_plugins_changed	(GeditPluginsEngine *engine);
 
-void		 gedit_plugins_engine_rescan_plugins	(GeditPluginsEngine *engine);
+void		 gedit_plugins_engine_rescan_plugins		(GeditPluginsEngine *engine);
 
 G_END_DECLS
 
 #endif  /* __GEDIT_PLUGINS_ENGINE_H__ */
+
 /* ex:ts=8:noet: */

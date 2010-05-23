@@ -40,7 +40,7 @@ typedef struct _GeditEncoding GeditEncoding;
 
 #define GEDIT_TYPE_ENCODING     (gedit_encoding_get_type ())
 
-GType              	 gedit_encoding_get_type (void) G_GNUC_CONST;
+GType              	 gedit_encoding_get_type	 (void) G_GNUC_CONST;
 
 const GeditEncoding	*gedit_encoding_get_from_charset (const gchar         *charset);
 const GeditEncoding	*gedit_encoding_get_from_index	 (gint                 index);
@@ -58,9 +58,10 @@ GeditEncoding		*gedit_encoding_copy		 (const GeditEncoding *enc);
 void               	 gedit_encoding_free		 (GeditEncoding       *enc);
 
 GSList			*_gedit_encoding_strv_to_list    (const gchar * const *enc_str);
-gchar		       **_gedit_encoding_list_to_strv	 (const GSList *enc);
+gchar		       **_gedit_encoding_list_to_strv	 (const GSList        *enc);
 
 G_END_DECLS
 
 #endif  /* __GEDIT_ENCODINGS_H__ */
+
 /* ex:ts=8:noet: */

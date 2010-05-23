@@ -54,16 +54,17 @@ struct _GeditDocumentInputStreamClass
 	GInputStreamClass parent_class;
 };
 
-GType				 gedit_document_input_stream_get_type		(void) G_GNUC_CONST;
+GType			 gedit_document_input_stream_get_type		(void) G_GNUC_CONST;
 
-GInputStream			*gedit_document_input_stream_new		(GtkTextBuffer           *buffer,
-										 GeditDocumentNewlineType type);
+GInputStream		*gedit_document_input_stream_new		(GtkTextBuffer           *buffer,
+									 GeditDocumentNewlineType type);
 
-gsize				 gedit_document_input_stream_get_total_size	(GeditDocumentInputStream *stream);
+gsize			 gedit_document_input_stream_get_total_size	(GeditDocumentInputStream *stream);
 
-gsize				 gedit_document_input_stream_tell		(GeditDocumentInputStream *stream);
+gsize			 gedit_document_input_stream_tell		(GeditDocumentInputStream *stream);
 
 G_END_DECLS
 
 #endif /* __GEDIT_DOCUMENT_INPUT_STREAM_H__ */
+
 /* ex:ts=8:noet: */

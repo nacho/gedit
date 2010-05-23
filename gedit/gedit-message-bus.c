@@ -30,7 +30,7 @@
  * GeditMessageCallback:
  * @bus: the #GeditMessageBus on which the message was sent
  * @message: the #GeditMessage which was sent
- * @userdata: the supplied user data when connecting the callback
+ * @user_data: the supplied user data when connecting the callback
  *
  * Callback signature used for connecting callback functions to be called
  * when a message is received (see gedit_message_bus_connect()).
@@ -80,7 +80,7 @@
  * static void
  * example_method_cb (GeditMessageBus *bus,
  *                    GeditMessage    *message,
- *                    gpointer         userdata)
+ *                    gpointer         user_data)
  * {
  * 	gchar *arg1 = NULL;
  *	
@@ -132,7 +132,7 @@ typedef struct
 
 	GDestroyNotify destroy_data;
 	GeditMessageCallback callback;
-	gpointer userdata;
+	gpointer user_data;
 } Listener;
 
 typedef struct
@@ -174,7 +174,7 @@ static void
 listener_free (Listener *listener)
 {
 	if (listener->destroy_data)
-		listener->destroy_data (listener->userdata);
+		listener->destroy_data (listener->user_data);
 
 	g_free (listener);
 }
@@ -286,7 +286,7 @@ gedit_message_bus_class_init (GeditMessageBusClass *klass)
 			      1,
 			      GEDIT_TYPE_MESSAGE_TYPE);
 
-	g_type_class_add_private (object_class, sizeof(GeditMessageBusPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditMessageBusPrivate));
 }
 
 static Message *
@@ -332,7 +332,7 @@ static guint
 add_listener (GeditMessageBus      *bus,
 	      Message		   *message,
 	      GeditMessageCallback  callback,
-	      gpointer		    userdata,
+	      gpointer		    user_data,
 	      GDestroyNotify        destroy_data)
 {
 	Listener *listener;
@@ -341,7 +341,7 @@ add_listener (GeditMessageBus      *bus,
 	listener = g_new (Listener, 1);
 	listener->id = ++bus->priv->next_id;
 	listener->callback = callback;
-	listener->userdata = userdata;
+	listener->user_data = user_data;
 	listener->blocked = FALSE;
 	listener->destroy_data = destroy_data;
 
@@ -412,7 +412,7 @@ dispatch_message_real (GeditMessageBus *bus,
 		Listener *listener = (Listener *)item->data;
 		
 		if (!listener->blocked)
-			listener->callback (bus, message, listener->userdata);
+			listener->callback (bus, message, listener->user_data);
 	}
 }
 
@@ -490,7 +490,7 @@ process_by_match (GeditMessageBus      *bus,
 	          const gchar          *object_path,
 	          const gchar          *method,
 	          GeditMessageCallback  callback,
-	          gpointer              userdata,
+	          gpointer              user_data,
 	          MatchCallback         processor)
 {
 	Message *message;
@@ -509,7 +509,7 @@ process_by_match (GeditMessageBus      *bus,
 		Listener *listener = (Listener *)item->data;
 		
 		if (listener->callback == callback && 
-		    listener->userdata == userdata)
+		    listener->user_data == user_data)
 		{
 			processor (bus, message, item);
 			return;
@@ -779,9 +779,9 @@ gedit_message_bus_unregister_all (GeditMessageBus *bus,
  *
  */
 gboolean
-gedit_message_bus_is_registered (GeditMessageBus	*bus,
-				 const gchar	*object_path,
-				 const gchar	*method)
+gedit_message_bus_is_registered (GeditMessageBus  *bus,
+				 const gchar	  *object_path,
+				 const gchar      *method)
 {
 	gchar *identifier;
 	gboolean ret;
@@ -800,7 +800,7 @@ gedit_message_bus_is_registered (GeditMessageBus	*bus,
 typedef struct
 {
 	GeditMessageBusForeach func;
-	gpointer userdata;
+	gpointer user_data;
 } ForeachInfo;
 
 static void
@@ -809,7 +809,7 @@ foreach_type (const gchar      *key,
 	      ForeachInfo      *info)
 {
 	gedit_message_type_ref (message_type);
-	info->func (message_type, info->userdata);
+	info->func (message_type, info->user_data);
 	gedit_message_type_unref (message_type);
 }
 
@@ -817,7 +817,7 @@ foreach_type (const gchar      *key,
  * gedit_message_bus_foreach:
  * @bus: the #GeditMessagebus
  * @func: the callback function
- * @userdata: the user data to supply to the callback function
+ * @user_data: the user data to supply to the callback function
  *
  * Calls @func for each message type registered on the bus
  *
@@ -825,9 +825,9 @@ foreach_type (const gchar      *key,
 void 
 gedit_message_bus_foreach (GeditMessageBus        *bus,
 			   GeditMessageBusForeach  func,
-			   gpointer		   userdata)
+			   gpointer		   user_data)
 {
-	ForeachInfo info = {func, userdata};
+	ForeachInfo info = {func, user_data};
 	
 	g_return_if_fail (GEDIT_IS_MESSAGE_BUS (bus));
 	g_return_if_fail (func != NULL);
@@ -841,8 +841,8 @@ gedit_message_bus_foreach (GeditMessageBus        *bus,
  * @object_path: the object path
  * @method: the method
  * @callback: function to be called when message @method at @object_path is sent
- * @userdata: userdata to use for the callback
- * @destroy_data: function to evoke with @userdata as argument when @userdata
+ * @user_data: user_data to use for the callback
+ * @destroy_data: function to evoke with @user_data as argument when @user_data
  *                needs to be freed
  *
  * Connect a callback handler to be evoked when message @method at @object_path
@@ -856,7 +856,7 @@ gedit_message_bus_connect (GeditMessageBus	*bus,
 		           const gchar		*object_path,
 		           const gchar		*method,
 		           GeditMessageCallback  callback,
-		           gpointer		 userdata,
+		           gpointer		 user_data,
 		           GDestroyNotify	 destroy_data)
 {
 	Message *message;
@@ -869,7 +869,7 @@ gedit_message_bus_connect (GeditMessageBus	*bus,
 	/* lookup the message and create if it does not exist yet */
 	message = lookup_message (bus, object_path, method, TRUE);
 	
-	return add_listener (bus, message, callback, userdata, destroy_data);
+	return add_listener (bus, message, callback, user_data, destroy_data);
 }
 
 /**
@@ -895,10 +895,10 @@ gedit_message_bus_disconnect (GeditMessageBus *bus,
  * @object_path: the object path
  * @method: the method
  * @callback: the connected callback
- * @userdata: the userdata with which the callback was connected
+ * @user_data: the user_data with which the callback was connected
  *
  * Disconnects a previously connected message callback by matching the 
- * provided callback function and userdata. See also 
+ * provided callback function and user_data. See also 
  * gedit_message_bus_disconnect().
  *
  */
@@ -907,11 +907,11 @@ gedit_message_bus_disconnect_by_func (GeditMessageBus      *bus,
 				      const gchar	   *object_path,
 				      const gchar	   *method,
 				      GeditMessageCallback  callback,
-				      gpointer		    userdata)
+				      gpointer		    user_data)
 {
 	g_return_if_fail (GEDIT_IS_MESSAGE_BUS (bus));
 	
-	process_by_match (bus, object_path, method, callback, userdata, remove_listener);
+	process_by_match (bus, object_path, method, callback, user_data, remove_listener);
 }
 
 /**
@@ -938,9 +938,9 @@ gedit_message_bus_block (GeditMessageBus *bus,
  * @object_path: the object path
  * @method: the method
  * @callback: the callback to block
- * @userdata: the userdata with which the callback was connected
+ * @user_data: the user_data with which the callback was connected
  *
- * Blocks evoking the callback that matches provided @callback and @userdata.
+ * Blocks evoking the callback that matches provided @callback and @user_data.
  * Unblock the callback using gedit_message_unblock_by_func().
  *
  */
@@ -949,11 +949,11 @@ gedit_message_bus_block_by_func (GeditMessageBus      *bus,
 				 const gchar	      *object_path,
 				 const gchar	      *method,
 				 GeditMessageCallback  callback,
-				 gpointer	       userdata)
+				 gpointer	       user_data)
 {
 	g_return_if_fail (GEDIT_IS_MESSAGE_BUS (bus));
 	
-	process_by_match (bus, object_path, method, callback, userdata, block_listener);
+	process_by_match (bus, object_path, method, callback, user_data, block_listener);
 }
 
 /**
@@ -979,9 +979,9 @@ gedit_message_bus_unblock (GeditMessageBus *bus,
  * @object_path: the object path
  * @method: the method
  * @callback: the callback to block
- * @userdata: the userdata with which the callback was connected
+ * @user_data: the user_data with which the callback was connected
  *
- * Unblocks the callback that matches provided @callback and @userdata.
+ * Unblocks the callback that matches provided @callback and @user_data.
  *
  */
 void
@@ -989,11 +989,11 @@ gedit_message_bus_unblock_by_func (GeditMessageBus      *bus,
 				   const gchar	        *object_path,
 				   const gchar	        *method,
 				   GeditMessageCallback  callback,
-				   gpointer	         userdata)
+				   gpointer	         user_data)
 {
 	g_return_if_fail (GEDIT_IS_MESSAGE_BUS (bus));
 	
-	process_by_match (bus, object_path, method, callback, userdata, unblock_listener);
+	process_by_match (bus, object_path, method, callback, user_data, unblock_listener);
 }
 
 static gboolean
@@ -1022,10 +1022,12 @@ send_message_real (GeditMessageBus *bus,
 						   g_object_ref (message));
 
 	if (bus->priv->idle_id == 0)
+	{
 		bus->priv->idle_id = g_idle_add_full (G_PRIORITY_HIGH,
 						      (GSourceFunc)idle_dispatch,
 						      bus,
 						      NULL);
+	}
 }
 
 /**

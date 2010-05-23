@@ -42,37 +42,42 @@ typedef struct _GeditCommandLinePrivate	GeditCommandLinePrivate;
 
 typedef struct _GeditCommandLineGeometry GeditCommandLineGeometry;
 
-struct _GeditCommandLine {
+struct _GeditCommandLine
+{
 	GInitiallyUnowned parent;
 
 	GeditCommandLinePrivate *priv;
 };
 
-struct _GeditCommandLineClass {
+struct _GeditCommandLineClass
+{
 	GObjectClass parent_class;
 };
 
-GType gedit_command_line_get_type (void) G_GNUC_CONST;
+GType			 gedit_command_line_get_type		(void) G_GNUC_CONST;
 
-GeditCommandLine *gedit_command_line_get_default (void);
+GeditCommandLine	*gedit_command_line_get_default		(void);
 
-gboolean gedit_command_line_parse (GeditCommandLine *command_line, int *argc, char ***argv);
+gboolean		 gedit_command_line_parse		(GeditCommandLine *command_line,
+								 int              *argc,
+								 char           ***argv);
 
-gboolean gedit_command_line_get_new_window (GeditCommandLine *command_line);
-void gedit_command_line_set_new_window (GeditCommandLine *command_line, gboolean new_window);
+gboolean		 gedit_command_line_get_new_window	(GeditCommandLine *command_line);
+void			 gedit_command_line_set_new_window	(GeditCommandLine *command_line,
+								 gboolean          new_window);
 
-gboolean gedit_command_line_get_new_document (GeditCommandLine *command_line);
-gint gedit_command_line_get_line_position (GeditCommandLine *command_line);
-gint gedit_command_line_get_column_position (GeditCommandLine *command_line);
+gboolean		 gedit_command_line_get_new_document	(GeditCommandLine *command_line);
+gint			 gedit_command_line_get_line_position	(GeditCommandLine *command_line);
+gint			 gedit_command_line_get_column_position	(GeditCommandLine *command_line);
 
-GSList *gedit_command_line_get_file_list (GeditCommandLine *command_line);
-const GeditEncoding *gedit_command_line_get_encoding (GeditCommandLine *command_line);
+GSList			*gedit_command_line_get_file_list	(GeditCommandLine *command_line);
+const GeditEncoding	*gedit_command_line_get_encoding	(GeditCommandLine *command_line);
 
-gboolean gedit_command_line_get_wait (GeditCommandLine *command_line);
-gboolean gedit_command_line_get_background (GeditCommandLine *command_line);
-gboolean gedit_command_line_get_standalone (GeditCommandLine *command_line);
+gboolean		 gedit_command_line_get_wait		(GeditCommandLine *command_line);
+gboolean		 gedit_command_line_get_background	(GeditCommandLine *command_line);
+gboolean		 gedit_command_line_get_standalone	(GeditCommandLine *command_line);
 
-const gchar *gedit_command_line_get_geometry (GeditCommandLine *command_line);
+const gchar		*gedit_command_line_get_geometry	(GeditCommandLine *command_line);
 
 G_END_DECLS
 

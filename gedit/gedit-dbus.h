@@ -47,20 +47,22 @@ typedef enum
 	GEDIT_DBUS_RESULT_PROCEED_SERVICE
 } GeditDBusResult;
 
-struct _GeditDBus {
+struct _GeditDBus
+{
 	GObject parent;
 
 	GeditDBusPrivate *priv;
 };
 
-struct _GeditDBusClass {
+struct _GeditDBusClass
+{
 	GObjectClass parent_class;
 };
 
-GType gedit_dbus_get_type (void) G_GNUC_CONST;
-GeditDBus *gedit_dbus_new (void);
+GType		 gedit_dbus_get_type	(void) G_GNUC_CONST;
+GeditDBus	*gedit_dbus_new		(void);
 
-GeditDBusResult gedit_dbus_run (GeditDBus *bus);
+GeditDBusResult	 gedit_dbus_run		(GeditDBus *bus);
 
 G_END_DECLS
 

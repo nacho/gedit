@@ -48,4 +48,5 @@ void		 gedit_metadata_manager_set		(GFile       *location,
 G_END_DECLS
 
 #endif /* __GEDIT_METADATA_MANAGER_H__ */
+
 /* ex:ts=8:noet: */

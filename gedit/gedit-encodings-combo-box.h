@@ -62,18 +62,17 @@ struct _GeditEncodingsComboBoxClass
 	GtkComboBoxClass		 parent_class;
 };
 
-GType		     gedit_encodings_combo_box_get_type		(void) G_GNUC_CONST;
+GType		     gedit_encodings_combo_box_get_type			(void) G_GNUC_CONST;
 
 /* Constructor */
 GtkWidget 	    *gedit_encodings_combo_box_new 			(gboolean save_mode);
 
 const GeditEncoding *gedit_encodings_combo_box_get_selected_encoding	(GeditEncodingsComboBox *menu);
 void		     gedit_encodings_combo_box_set_selected_encoding	(GeditEncodingsComboBox *menu,
-									 const GeditEncoding      *encoding);
+									 const GeditEncoding    *encoding);
 
 G_END_DECLS
 
 #endif /* __GEDIT_ENCODINGS_COMBO_BOX_H__ */
-
 
 /* ex:ts=8:noet: */

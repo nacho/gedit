@@ -40,18 +40,25 @@ typedef struct _GeditAppOSX		GeditAppOSX;
 typedef struct _GeditAppOSXClass	GeditAppOSXClass;
 typedef struct _GeditAppOSXPrivate	GeditAppOSXPrivate;
 
-struct _GeditAppOSX {
+struct _GeditAppOSX
+{
 	GeditApp parent;
 };
 
-struct _GeditAppOSXClass {
+struct _GeditAppOSXClass
+{
 	GeditAppClass parent_class;
 };
 
-GType gedit_app_osx_get_type (void) G_GNUC_CONST;
-void gedit_app_osx_set_window_title (GeditAppOSX *app, GeditWindow *window, const gchar *title, GeditDocument *document);
-gboolean gedit_app_osx_show_url (GeditAppOSX *app, const gchar *url);
-gboolean gedit_app_osx_show_help (GeditAppOSX *app, const gchar *link_id);
+GType		 gedit_app_osx_get_type		(void) G_GNUC_CONST;
+void		 gedit_app_osx_set_window_title	(GeditAppOSX   *app,
+						 GeditWindow   *window,
+						 const gchar   *title,
+						 GeditDocument *document);
+gboolean	 gedit_app_osx_show_url		(GeditAppOSX   *app,
+						 const gchar   *url);
+gboolean	 gedit_app_osx_show_help	(GeditAppOSX   *app,
+						 const gchar   *link_id);
 
 G_END_DECLS
 

@@ -90,15 +90,15 @@ struct _GeditPrintJobClass
 	GObjectClass parent_class;
 
         /* Signals */
-	void (* printing) (GeditPrintJob       *job,
-	                   GeditPrintJobStatus  status);
+	void (* printing)	(GeditPrintJob       *job,
+				 GeditPrintJobStatus  status);
 
-	void (* show_preview) (GeditPrintJob   *job,
-	                       GtkWidget       *preview);
+	void (* show_preview)	(GeditPrintJob       *job,
+				 GtkWidget           *preview);
 
-        void (*done)      (GeditPrintJob       *job,
-		           GeditPrintJobResult  result,
-                           const GError        *error);
+        void (*done)		(GeditPrintJob       *job,
+        			 GeditPrintJobResult  result,
+        			 const GError        *error);
 };
 
 /*
@@ -131,4 +131,5 @@ GtkPageSetup		*gedit_print_job_get_page_setup		(GeditPrintJob            *job);
 G_END_DECLS
 
 #endif /* __GEDIT_PRINT_JOB_H__ */
+
 /* ex:ts=8:noet: */

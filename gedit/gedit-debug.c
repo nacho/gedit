@@ -157,4 +157,5 @@ void gedit_debug (GeditDebugSection  section,
 		fflush (stdout);
 	}
 }
+
 /* ex:ts=8:noet: */

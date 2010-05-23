@@ -124,7 +124,9 @@ tab_get_name (GeditTab *tab)
 }
 
 static void
-get_iter_from_tab (GeditDocumentsPanel *panel, GeditTab *tab, GtkTreeIter *iter)
+get_iter_from_tab (GeditDocumentsPanel *panel,
+		   GeditTab            *tab,
+		   GtkTreeIter         *iter)
 {
 	gint num;
 	GtkWidget *nb;
@@ -838,4 +840,5 @@ gedit_documents_panel_new (GeditWindow *window)
 					 "window", window,
 					 NULL));
 }
+
 /* ex:ts=8:noet: */

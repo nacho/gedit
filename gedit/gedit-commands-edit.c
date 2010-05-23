@@ -44,7 +44,7 @@
 
 void
 _gedit_cmd_edit_undo (GtkAction   *action,
-		     GeditWindow *window)
+		      GeditWindow *window)
 {
 	GeditView *active_view;
 	GtkSourceBuffer *active_document;
@@ -65,7 +65,7 @@ _gedit_cmd_edit_undo (GtkAction   *action,
 
 void
 _gedit_cmd_edit_redo (GtkAction   *action,
-		     GeditWindow *window)
+		      GeditWindow *window)
 {
 	GeditView *active_view;
 	GtkSourceBuffer *active_document;
@@ -86,7 +86,7 @@ _gedit_cmd_edit_redo (GtkAction   *action,
 
 void
 _gedit_cmd_edit_cut (GtkAction   *action,
-		    GeditWindow *window)
+		     GeditWindow *window)
 {
 	GeditView *active_view;
 
@@ -102,7 +102,7 @@ _gedit_cmd_edit_cut (GtkAction   *action,
 
 void
 _gedit_cmd_edit_copy (GtkAction   *action,
-		     GeditWindow *window)
+		      GeditWindow *window)
 {
 	GeditView *active_view;
 
@@ -118,7 +118,7 @@ _gedit_cmd_edit_copy (GtkAction   *action,
 
 void
 _gedit_cmd_edit_paste (GtkAction   *action,
-		      GeditWindow *window)
+		       GeditWindow *window)
 {
 	GeditView *active_view;
 
@@ -134,7 +134,7 @@ _gedit_cmd_edit_paste (GtkAction   *action,
 
 void
 _gedit_cmd_edit_delete (GtkAction   *action,
-		       GeditWindow *window)
+			GeditWindow *window)
 {
 	GeditView *active_view;
 
@@ -150,7 +150,7 @@ _gedit_cmd_edit_delete (GtkAction   *action,
 
 void
 _gedit_cmd_edit_select_all (GtkAction   *action,
-			   GeditWindow *window)
+			    GeditWindow *window)
 {
 	GeditView *active_view;
 
@@ -166,10 +166,11 @@ _gedit_cmd_edit_select_all (GtkAction   *action,
 
 void
 _gedit_cmd_edit_preferences (GtkAction   *action,
-			    GeditWindow *window)
+			     GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
 
 	gedit_show_preferences_dialog (window);
 }
+
 /* ex:ts=8:noet: */

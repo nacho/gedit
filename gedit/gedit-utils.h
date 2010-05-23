@@ -50,107 +50,107 @@ G_BEGIN_DECLS
 
 enum { GEDIT_ALL_WORKSPACES = 0xffffffff };
 
-gboolean	 gedit_utils_location_has_file_scheme	(GFile       *location);
+gboolean	 gedit_utils_location_has_file_scheme	(GFile            *location);
 
-void		 gedit_utils_menu_position_under_widget (GtkMenu  *menu,
-							 gint     *x,
-							 gint     *y,
-							 gboolean *push_in,
-							 gpointer  user_data);
+void		 gedit_utils_menu_position_under_widget (GtkMenu          *menu,
+							 gint             *x,
+							 gint             *y,
+							 gboolean         *push_in,
+							 gpointer          user_data);
 
 void		 gedit_utils_menu_position_under_tree_view
-							(GtkMenu  *menu,
-							 gint     *x,
-							 gint     *y,
-							 gboolean *push_in,
-							 gpointer  user_data);
+							(GtkMenu          *menu,
+							 gint             *x,
+							 gint             *y,
+							 gboolean         *push_in,
+							 gpointer          user_data);
 
-gchar		*gedit_gdk_color_to_string		(GdkColor color);
+gchar		*gedit_gdk_color_to_string		(GdkColor          color);
 
-GtkWidget	*gedit_gtk_button_new_with_stock_icon	(const gchar *label,
-							 const gchar *stock_id);
+GtkWidget	*gedit_gtk_button_new_with_stock_icon	(const gchar      *label,
+							 const gchar      *stock_id);
 
-GtkWidget	*gedit_dialog_add_button		(GtkDialog   *dialog,
-							 const gchar *text,
-							 const gchar *stock_id, 
-							 gint         response_id);
+GtkWidget	*gedit_dialog_add_button		(GtkDialog        *dialog,
+							 const gchar      *text,
+							 const gchar      *stock_id, 
+							 gint              response_id);
 
-gchar		*gedit_utils_escape_underscores		(const gchar *text,
-							 gssize       length);
+gchar		*gedit_utils_escape_underscores		(const gchar      *text,
+							 gssize            length);
 
-gchar		*gedit_utils_str_middle_truncate	(const gchar *string, 
-							 guint        truncate_length);
+gchar		*gedit_utils_str_middle_truncate	(const gchar      *string, 
+							 guint             truncate_length);
 
-gchar		*gedit_utils_str_end_truncate		(const gchar *string,
-							 guint        truncate_length);
+gchar		*gedit_utils_str_end_truncate		(const gchar      *string,
+							 guint             truncate_length);
 
-gboolean	 g_utf8_caselessnmatch			(const char *s1,
-							 const char *s2,
-							 gssize n1,
-							 gssize n2);
+gboolean	 g_utf8_caselessnmatch			(const char       *s1,
+							 const char       *s2,
+							 gssize            n1,
+							 gssize            n2);
 
-void		 gedit_utils_set_atk_name_description	(GtkWidget  *widget,
-							 const gchar *name,
-							 const gchar *description);
+void		 gedit_utils_set_atk_name_description	(GtkWidget        *widget,
+							 const gchar      *name,
+							 const gchar      *description);
 
-void		 gedit_utils_set_atk_relation		(GtkWidget       *obj1,
-							 GtkWidget       *obj2,
-							 AtkRelationType  rel_type);
+void		 gedit_utils_set_atk_relation		(GtkWidget        *obj1,
+							 GtkWidget        *obj2,
+							 AtkRelationType   rel_type);
 
-gboolean	 gedit_utils_location_exists		(GFile       *location);
+gboolean	 gedit_utils_location_exists		(GFile            *location);
 
-gchar		*gedit_utils_escape_search_text		(const gchar *text);
+gchar		*gedit_utils_escape_search_text		(const gchar      *text);
 
-gchar		*gedit_utils_unescape_search_text	(const gchar *text);
+gchar		*gedit_utils_unescape_search_text	(const gchar      *text);
 
-void		 gedit_warning				(GtkWindow  *parent,
-							 const gchar *format,
+void		 gedit_warning				(GtkWindow        *parent,
+							 const gchar      *format,
 							 ...) G_GNUC_PRINTF(2, 3);
 
-gchar		*gedit_utils_make_valid_utf8		(const char *name);
+gchar		*gedit_utils_make_valid_utf8		(const char       *name);
 
 /* Note that this function replace home dir with ~ */
-gchar		*gedit_utils_uri_get_dirname		(const char *uri);
+gchar		*gedit_utils_uri_get_dirname		(const char       *uri);
 
 gchar		*gedit_utils_location_get_dirname_for_display
-							(GFile *location);
+							(GFile            *location);
 
-gchar		*gedit_utils_replace_home_dir_with_tilde (const gchar *uri);
+gchar		*gedit_utils_replace_home_dir_with_tilde(const gchar      *uri);
 
-guint		 gedit_utils_get_current_workspace	(GdkScreen *screen);
+guint		 gedit_utils_get_current_workspace	(GdkScreen        *screen);
 
-guint		 gedit_utils_get_window_workspace	(GtkWindow *gtkwindow);
+guint		 gedit_utils_get_window_workspace	(GtkWindow        *gtkwindow);
 
-void		 gedit_utils_get_current_viewport	(GdkScreen    *screen,
-							 gint         *x,
-							 gint         *y);
+void		 gedit_utils_get_current_viewport	(GdkScreen        *screen,
+							 gint             *x,
+							 gint             *y);
 
-void		 gedit_utils_activate_url		(GtkAboutDialog *about,
-							 const gchar    *url,
-							 gpointer        data);
+void		 gedit_utils_activate_url		(GtkAboutDialog   *about,
+							 const gchar      *url,
+							 gpointer          data);
 
-gboolean	 gedit_utils_is_valid_location		(GFile *location);
+gboolean	 gedit_utils_is_valid_location		(GFile            *location);
 
-gboolean	 gedit_utils_get_ui_objects		(const gchar  *filename,
-                                                         gchar       **root_objects,
-							 GtkWidget   **error_widget,
-							 const gchar  *object_name,
+gboolean	 gedit_utils_get_ui_objects		(const gchar      *filename,
+                                                         gchar           **root_objects,
+							 GtkWidget       **error_widget,
+							 const gchar      *object_name,
 							 ...) G_GNUC_NULL_TERMINATED;
 
-gboolean         gedit_utils_file_has_parent            (GFile *gfile);
+gboolean         gedit_utils_file_has_parent            (GFile            *gfile);
 
 /* Return NULL if str is not a valid URI and/or filename */
 gchar		*gedit_utils_make_canonical_uri_from_shell_arg
-							(const gchar *str);
+							(const gchar      *str);
 		
-gchar		*gedit_utils_uri_for_display 	        (GFile       *location);
-gchar           *gedit_utils_basename_for_display	(GFile       *location);
-gboolean	 gedit_utils_decode_uri 		(const gchar *uri,
-							 gchar **scheme,
-							 gchar **user,
-							 gchar **port,
-							 gchar **host,
-							 gchar **path);
+gchar		*gedit_utils_uri_for_display 	        (GFile            *location);
+gchar           *gedit_utils_basename_for_display	(GFile            *location);
+gboolean	 gedit_utils_decode_uri 		(const gchar      *uri,
+							 gchar           **scheme,
+							 gchar           **user,
+							 gchar           **port,
+							 gchar           **host,
+							 gchar           **path);
 
 
 /* Turns data from a drop into a list of well formatted uris */
@@ -159,7 +159,8 @@ gchar 	       **gedit_utils_drop_get_uris		(GtkSelectionData *selection_data);
 gboolean	 gedit_utils_can_read_from_stdin	(void);
 
 GeditDocumentCompressionType
-		 gedit_utils_get_compression_type_from_content_type (const gchar *content_type);
+		 gedit_utils_get_compression_type_from_content_type
+		 					(const gchar      *content_type);
 
 G_END_DECLS
 

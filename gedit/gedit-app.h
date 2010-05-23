@@ -72,7 +72,7 @@ struct _GeditAppClass
 {
 	GObjectClass parent_class;
 
-	gboolean (*last_window_destroyed)	(GeditApp *app);
+	gboolean (*last_window_destroyed)	(GeditApp    *app);
 
 	gboolean (*show_help)			(GeditApp    *app,
 	                                         GtkWindow   *parent,
@@ -107,20 +107,20 @@ GType 		 gedit_app_get_type 			(void) G_GNUC_CONST;
 
 GeditApp 	*gedit_app_get_default			(void);
 
-GeditWindow	*gedit_app_create_window		(GeditApp  *app,
-							 GdkScreen *screen);
+GeditWindow	*gedit_app_create_window		(GeditApp    *app,
+							 GdkScreen   *screen);
 
-const GList	*gedit_app_get_windows			(GeditApp *app);
-GeditWindow	*gedit_app_get_active_window		(GeditApp *app);
+const GList	*gedit_app_get_windows			(GeditApp    *app);
+GeditWindow	*gedit_app_get_active_window		(GeditApp    *app);
 
 /* Returns a newly allocated list with all the documents */
-GList		*gedit_app_get_documents		(GeditApp *app);
+GList		*gedit_app_get_documents		(GeditApp    *app);
 
 /* Returns a newly allocated list with all the views */
-GList		*gedit_app_get_views			(GeditApp *app);
+GList		*gedit_app_get_views			(GeditApp    *app);
 
 /* Lockdown state */
-GeditLockdownMask gedit_app_get_lockdown		(GeditApp *app);
+GeditLockdownMask gedit_app_get_lockdown		(GeditApp    *app);
 
 gboolean	 gedit_app_show_help			(GeditApp    *app,
                                                          GtkWindow   *parent,
@@ -137,10 +137,10 @@ void		 gedit_app_set_window_title		(GeditApp    *app,
 GeditWindow	*_gedit_app_restore_window		(GeditApp    *app,
 							 const gchar *role);
 GeditWindow	*_gedit_app_get_window_in_viewport	(GeditApp     *app,
-							 GdkScreen    *screen,
-							 gint          workspace,
-							 gint          viewport_x,
-							 gint          viewport_y);
+							 GdkScreen   *screen,
+							 gint         workspace,
+							 gint         viewport_x,
+							 gint         viewport_y);
 void		 _gedit_app_set_lockdown		(GeditApp          *app,
 							 GeditLockdownMask  lockdown);
 void		 _gedit_app_set_lockdown_bit		(GeditApp          *app,
@@ -150,8 +150,8 @@ void		 _gedit_app_set_lockdown_bit		(GeditApp          *app,
  * This one is a gedit-window function, but we declare it here to avoid
  * #include headaches since it needs the GeditLockdownMask declaration.
  */
-void		 _gedit_window_set_lockdown		(GeditWindow         *window,
-							 GeditLockdownMask    lockdown);
+void		 _gedit_window_set_lockdown		(GeditWindow       *window,
+							 GeditLockdownMask  lockdown);
 
 /* global print config */
 GtkPageSetup		*_gedit_app_get_default_page_setup	(GeditApp         *app);
@@ -161,7 +161,7 @@ GtkPrintSettings	*_gedit_app_get_default_print_settings	(GeditApp         *app);
 void			 _gedit_app_set_default_print_settings	(GeditApp         *app,
 								 GtkPrintSettings *settings);
 
-GSettings		*_gedit_app_get_settings		(GeditApp    *app);
+GSettings		*_gedit_app_get_settings		(GeditApp  *app);
 
 G_END_DECLS
 

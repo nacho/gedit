@@ -292,12 +292,17 @@ gedit_document_dispose (GObject *object)
 					    gtk_text_iter_get_offset (&iter));
 
 		if (language == NULL)
+		{
 			gedit_document_set_metadata (doc, GEDIT_METADATA_ATTRIBUTE_POSITION,
 						     position, NULL);
+		}
 		else
+		{
 			gedit_document_set_metadata (doc, GEDIT_METADATA_ATTRIBUTE_POSITION,
 						     position, GEDIT_METADATA_ATTRIBUTE_LANGUAGE,
 						     language, NULL);
+		}
+
 		g_free (position);
 	}
 
@@ -455,9 +460,11 @@ gedit_document_mark_set (GtkTextBuffer     *buffer,
 	GeditDocument *doc = GEDIT_DOCUMENT (buffer);
 
 	if (GTK_TEXT_BUFFER_CLASS (gedit_document_parent_class)->mark_set)
+	{
 		GTK_TEXT_BUFFER_CLASS (gedit_document_parent_class)->mark_set (buffer,
 									       iter,
 									       mark);
+	}
 
 	if (mark == gtk_text_buffer_get_insert (buffer))
 	{
@@ -749,8 +756,10 @@ set_language (GeditDocument     *doc,
 							syntax_hl);
 	}
 	else
-		gtk_source_buffer_set_highlight_syntax (GTK_SOURCE_BUFFER (doc), 
-				 FALSE);
+	{
+		gtk_source_buffer_set_highlight_syntax (GTK_SOURCE_BUFFER (doc),
+							FALSE);
+	}
 
 	if (set_by_user)
 	{
@@ -1065,7 +1074,9 @@ set_content_type_no_guess (GeditDocument *doc,
 
 	if (doc->priv->content_type != NULL && content_type != NULL &&
 	    (0 == strcmp (doc->priv->content_type, content_type)))
+	{
 		return;
+	}
 
 	g_free (doc->priv->content_type);
 
@@ -1145,13 +1156,17 @@ set_location (GeditDocument *doc,
 
 	g_return_if_fail ((location == NULL) || gedit_utils_is_valid_location (location));
 
+	if (doc->priv->location == location)
+		return;
+
+	if (doc->priv->location != NULL)
+	{
+		g_object_unref (doc->priv->location);
+		doc->priv->location = NULL;
+	}
+
 	if (location != NULL)
 	{
-		if (doc->priv->location == location)
-			return;
-
-		if (doc->priv->location != NULL)
-			g_object_unref (doc->priv->location);
 		doc->priv->location = g_file_dup (location);
 
 		if (doc->priv->untitled_number > 0)
@@ -1195,10 +1210,14 @@ gedit_document_get_uri_for_display (GeditDocument *doc)
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), g_strdup (""));
 
 	if (doc->priv->location == NULL)
+	{
 		return g_strdup_printf (_("Unsaved Document %d"),
 					doc->priv->untitled_number);
+	}
 	else
+	{
 		return gedit_utils_uri_for_display (doc->priv->location);
+	}
 }
 
 /* Never returns NULL */
@@ -1208,12 +1227,18 @@ gedit_document_get_short_name_for_display (GeditDocument *doc)
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), g_strdup (""));
 
 	if (doc->priv->short_name != NULL)
+	{
 		return g_strdup (doc->priv->short_name);
+	}
 	else if (doc->priv->location == NULL)
+	{
 		return g_strdup_printf (_("Unsaved Document %d"),
 					doc->priv->untitled_number);
+	}
 	else
+	{
 		return gedit_utils_basename_for_display (doc->priv->location);
+	}
 }
 
 void
@@ -1380,15 +1405,19 @@ document_loader_loaded (GeditDocumentLoader *loader,
 		if (info)
 		{
 			if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE))
+			{
 				content_type = g_file_info_get_attribute_string (info,
 										 G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE);
+			}
 
 			if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_TIME_MODIFIED))
 				g_file_info_get_modification_time (info, &mtime);
 
 			if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE))
+			{
 				read_only = !g_file_info_get_attribute_boolean (info,
 										G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
+			}
 		}
 
 		doc->priv->mtime = mtime;
@@ -1501,8 +1530,10 @@ document_loader_loading (GeditDocumentLoader *loader,
 		info = gedit_document_loader_get_info (loader);
 
 		if (info && g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_STANDARD_SIZE))
+		{
 			size = g_file_info_get_attribute_uint64 (info,
 								 G_FILE_ATTRIBUTE_STANDARD_SIZE);
+		}
 
 		read = gedit_document_loader_get_bytes_read (loader);
 
@@ -2036,7 +2067,9 @@ gedit_document_search_forward (GeditDocument     *doc,
 		return FALSE;
 	}
 	else
+	{
 		gedit_debug_message (DEBUG_DOCUMENT, "doc->priv->search_text == \"%s\"\n", doc->priv->search_text);
+	}
 				      
 	if (start == NULL)
 		gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (doc), &iter);
@@ -2068,7 +2101,9 @@ gedit_document_search_forward (GeditDocument     *doc,
 				iter = m_end;
 		}
 		else
+		{
 			break;
+		}
 	}
 	
 	if (found && (match_start != NULL))
@@ -2105,7 +2140,9 @@ gedit_document_search_backward (GeditDocument     *doc,
 		return FALSE;
 	}
 	else
+	{
 		gedit_debug_message (DEBUG_DOCUMENT, "doc->priv->search_text == \"%s\"\n", doc->priv->search_text);
+	}
 				      
 	if (end == NULL)
 		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &iter);
@@ -2137,7 +2174,9 @@ gedit_document_search_backward (GeditDocument     *doc,
 				iter = m_start;
 		}
 		else
+		{
 			break;
+		}
 	}
 	
 	if (found && (match_start != NULL))
@@ -2244,7 +2283,7 @@ gedit_document_replace_all (GeditDocument       *doc,
 						replace_text_len);
 
 			iter = m_start;
-		}		
+		}
 
 	} while (found);
 
@@ -2335,8 +2374,7 @@ get_search_match_colors (GeditDocument *doc,
 
 	if (*foreground_set)
 	{
-		if (fg == NULL ||
-		    !gdk_color_parse (fg, foreground))
+		if (fg == NULL || !gdk_color_parse (fg, foreground))
 		{
 			*foreground_set = FALSE;
 		}
@@ -2453,11 +2491,15 @@ search_region (GeditDocument *doc,
 
 	if (gtk_text_iter_has_tag (start, doc->priv->found_tag) &&
 	    !gtk_text_iter_begins_tag (start, doc->priv->found_tag))
+	{
 		gtk_text_iter_backward_to_tag_toggle (start, doc->priv->found_tag);
+	}
 
 	if (gtk_text_iter_has_tag (end, doc->priv->found_tag) &&
 	    !gtk_text_iter_ends_tag (end, doc->priv->found_tag))
+	{
 		gtk_text_iter_forward_to_tag_toggle (end, doc->priv->found_tag);
+	}
 
 	/*
 	g_print ("[%u (%u), %u (%u)]\n", gtk_text_iter_get_line (start), gtk_text_iter_get_offset (start),
@@ -2512,7 +2554,7 @@ search_region (GeditDocument *doc,
 						   doc->priv->found_tag,
 						   &m_start,
 						   &m_end);
-		}		
+		}
 
 	} while (found);
 }
@@ -2736,10 +2778,14 @@ _gedit_document_create_mount_operation (GeditDocument *doc)
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 	
 	if (doc->priv->mount_operation_factory == NULL)
+	{
 		return g_mount_operation_new ();
+	}
 	else
-		return doc->priv->mount_operation_factory (doc, 
+	{
+		return doc->priv->mount_operation_factory (doc,
 						           doc->priv->mount_operation_userdata);
+	}
 }
 
 #ifndef ENABLE_GVFS_METADATA

@@ -91,7 +91,7 @@ GtkWidget	*gedit_search_dialog_new		(GtkWindow         *parent,
 							 gboolean           show_replace);
 
 void		 gedit_search_dialog_present_with_time	(GeditSearchDialog *dialog,
-							 guint32 timestamp);
+							 guint32            timestamp);
 
 gboolean	 gedit_search_dialog_get_show_replace	(GeditSearchDialog *dialog);
 
@@ -126,4 +126,5 @@ gboolean	 gedit_search_dialog_get_wrap_around	(GeditSearchDialog *dialog);
 G_END_DECLS
 
 #endif  /* __GEDIT_SEARCH_DIALOG_H__  */
+
 /* ex:ts=8:noet: */

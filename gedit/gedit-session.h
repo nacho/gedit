@@ -45,4 +45,5 @@ gboolean 	gedit_session_load 		(void);
 G_END_DECLS
 
 #endif /* __GEDIT_SESSION_H__ */
+
 /* ex:ts=8:noet: */

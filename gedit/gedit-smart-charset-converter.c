@@ -213,7 +213,9 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 
 	if (smart->priv->encodings != NULL &&
 	    smart->priv->encodings->next == NULL)
+	{
 		smart->priv->use_first = TRUE;
+	}
 
 	/* We just check the first block */
 	while (TRUE)
@@ -290,15 +292,15 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 }
 
 static GConverterResult
-gedit_smart_charset_converter_convert (GConverter *converter,
-				       const void *inbuf,
-				       gsize       inbuf_size,
-				       void       *outbuf,
-				       gsize       outbuf_size,
-				       GConverterFlags flags,
-				       gsize      *bytes_read,
-				       gsize      *bytes_written,
-				       GError    **error)
+gedit_smart_charset_converter_convert (GConverter      *converter,
+				       const void      *inbuf,
+				       gsize            inbuf_size,
+				       void            *outbuf,
+				       gsize             outbuf_size,
+				       GConverterFlags   flags,
+				       gsize            *bytes_read,
+				       gsize            *bytes_written,
+				       GError          **error)
 {
 	GeditSmartCharsetConverter *smart = GEDIT_SMART_CHARSET_CONVERTER (converter);
 

@@ -255,9 +255,9 @@ gboolean	 gedit_document_get_deleted	(GeditDocument       *doc);
 gboolean	 gedit_document_goto_line 	(GeditDocument       *doc, 
 						 gint                 line);
 
-gboolean	 gedit_document_goto_line_offset(GeditDocument *doc,
-						 gint           line,
-						 gint           line_offset);
+gboolean	 gedit_document_goto_line_offset(GeditDocument       *doc,
+						 gint                 line,
+						 gint                 line_offset);
 
 void		 gedit_document_set_search_text	(GeditDocument       *doc,
 						 const gchar         *text,
@@ -302,16 +302,16 @@ gboolean	 gedit_document_get_enable_search_highlighting
 						(GeditDocument       *doc);
 
 GeditDocumentNewlineType
-		 gedit_document_get_newline_type (GeditDocument *doc);
+		 gedit_document_get_newline_type (GeditDocument      *doc);
 
 GeditDocumentCompressionType
-		 gedit_document_get_compression_type (GeditDocument *doc);
+		 gedit_document_get_compression_type (GeditDocument  *doc);
 
-gchar		*gedit_document_get_metadata	(GeditDocument *doc,
-						 const gchar   *key);
+gchar		*gedit_document_get_metadata	(GeditDocument       *doc,
+						 const gchar         *key);
 
-void		 gedit_document_set_metadata	(GeditDocument *doc,
-						 const gchar   *first_key,
+void		 gedit_document_set_metadata	(GeditDocument       *doc,
+						 const gchar         *first_key,
 						 ...);
 
 /* 
@@ -358,4 +358,5 @@ GMountOperation
 G_END_DECLS
 
 #endif /* __GEDIT_DOCUMENT_H__ */
+
 /* ex:ts=8:noet: */

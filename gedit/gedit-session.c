@@ -267,8 +267,10 @@ close_confirmation_dialog_response_handler (GeditCloseConfirmationDialog *dlg,
 		default:
 			/* disconnect window_state_changed where needed */
 			for (l = window_dirty_list; l != NULL; l = l->next)
+			{
 				g_signal_handlers_disconnect_by_func (window,
 						window_state_change, NULL);
+			}
 			g_slist_free (window_dirty_list);
 			window_dirty_list = NULL;
 
@@ -342,7 +344,8 @@ ask_next_confirmation (void)
 
 /* quit_requested handler for the master client */
 static void
-client_quit_requested_cb (EggSMClient *client, gpointer data)
+client_quit_requested_cb (EggSMClient *client,
+			  gpointer     data)
 {
 	GeditApp *app;
 	const GList *l;
@@ -380,7 +383,8 @@ client_quit_requested_cb (EggSMClient *client, gpointer data)
 
 /* quit handler for the master client */
 static void
-client_quit_cb (EggSMClient *client, gpointer data)
+client_quit_cb (EggSMClient *client,
+		gpointer     data)
 {
 #if 0
 	gedit_debug (DEBUG_SESSION);
@@ -420,7 +424,7 @@ gedit_session_init (void)
 	gedit_debug (DEBUG_SESSION);
 	
 	if (master_client)
-	  return;
+		return;
 
 	master_client = egg_sm_client_get ();
 	g_signal_connect (master_client,
@@ -464,7 +468,8 @@ gedit_session_is_restored (void)
 }
 
 static void
-parse_window (GKeyFile *state_file, const char *group_name)
+parse_window (GKeyFile  *state_file,
+	     const char *group_name)
 {
 	GeditWindow *window;
 	gchar *role, *active_document, **documents;
@@ -558,8 +563,10 @@ parse_window (GKeyFile *state_file, const char *group_name)
 			GFile *location;
 
 			if (active_document != NULL)
+			{
 				jump_to = strcmp (active_document,
 						  documents[i]) == 0;
+			}
 
 			gedit_debug_message (DEBUG_SESSION,
 					     "URI: %s (%s)",
@@ -619,4 +626,5 @@ gedit_session_load (void)
 
 	return TRUE;
 }
+
 /* ex:ts=8:noet: */

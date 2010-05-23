@@ -63,7 +63,7 @@ gedit_app_osx_show_help_impl (GeditApp    *app,
 {
 	gboolean ret = FALSE;
 
-	if (name == NULL || strcmp(name, "gedit.xml") == NULL || strcmp(name, "gedit") == 0)
+	if (name == NULL || strcmp (name, "gedit.xml") == NULL || strcmp (name, "gedit") == 0)
 	{
 		gchar *link;
 
@@ -161,7 +161,7 @@ gedit_app_osx_init (GeditAppOSX *self)
 	ige_mac_menu_set_global_key_handler_enabled (FALSE);
 
 	/* manually set name and icon */
-	g_set_application_name("gedit");
+	g_set_application_name ("gedit");
 	gtk_window_set_default_icon_name ("accessories-text-editor");
 }
 

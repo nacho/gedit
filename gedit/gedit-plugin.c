@@ -56,7 +56,8 @@ struct _GeditPluginPrivate
 G_DEFINE_TYPE(GeditPlugin, gedit_plugin, G_TYPE_OBJECT)
 
 static void
-dummy (GeditPlugin *plugin, GeditWindow *window)
+dummy (GeditPlugin *plugin,
+       GeditWindow *window)
 {
 	/* Empty */
 }
@@ -89,7 +90,8 @@ gedit_plugin_get_property (GObject    *object,
 			g_value_take_string (value, gedit_plugin_get_data_dir (GEDIT_PLUGIN (object)));
 			break;
 		default:
-			g_return_if_reached ();
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
 	}
 }
 
@@ -110,7 +112,8 @@ gedit_plugin_set_property (GObject      *object,
 			priv->data_dir_name = g_value_dup_string (value);
 			break;
 		default:
-			g_return_if_reached ();
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
 	}
 }
 
@@ -332,4 +335,5 @@ gedit_plugin_create_configure_dialog (GeditPlugin *plugin)
 	
 	return GEDIT_PLUGIN_GET_CLASS (plugin)->create_configure_dialog (plugin);
 }
+
 /* ex:ts=8:noet: */

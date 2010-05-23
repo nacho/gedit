@@ -187,7 +187,8 @@ gedit_object_module_get_property (GObject    *object,
 			g_value_set_boolean (value, module->priv->resident);
 			break;
 		default:
-			g_return_if_reached ();
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
 	}
 }
 
@@ -216,7 +217,8 @@ gedit_object_module_set_property (GObject      *object,
 			module->priv->resident = g_value_get_boolean (value);
 			break;
 		default:
-			g_return_if_reached ();
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
 	}
 }
 
@@ -341,4 +343,5 @@ gedit_object_module_get_object_type (GeditObjectModule *module)
 	
 	return module->priv->type;
 }
+
 /* ex:ts=8:noet: */

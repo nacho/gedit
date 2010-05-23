@@ -73,7 +73,8 @@ _gedit_cmd_file_new (GtkAction   *action,
 }
 
 static GeditTab *
-get_tab_from_file (GList *docs, GFile *file)
+get_tab_from_file (GList *docs,
+		   GFile *file)
 {
 	GeditTab *tab = NULL;
 
@@ -104,7 +105,8 @@ get_tab_from_file (GList *docs, GFile *file)
 }
 
 static gboolean
-is_duplicated_file (GSList *files, GFile *file)
+is_duplicated_file (GSList *files,
+		    GFile  *file)
 {
 	while (files != NULL)
 	{
@@ -486,7 +488,8 @@ _gedit_cmd_file_open (GtkAction   *action,
 }
 
 /* File saving */
-static void file_save_as (GeditTab *tab, GeditWindow *window);
+static void file_save_as (GeditTab    *tab,
+			  GeditWindow *window);
 
 static gboolean
 is_read_only (GFile *location)
@@ -520,7 +523,8 @@ is_read_only (GFile *location)
 /* FIXME: modify this dialog to be similar to the one provided by gtk+ for
  * already existing files - Paolo (Oct. 11, 2005) */
 static gboolean
-replace_read_only_file (GtkWindow *parent, GFile *file)
+replace_read_only_file (GtkWindow *parent,
+			GFile     *file)
 {
 	GtkWidget *dialog;
 	gint ret;
@@ -954,7 +958,7 @@ file_save (GeditTab    *tab,
 
 void
 _gedit_cmd_file_save (GtkAction   *action,
-		     GeditWindow *window)
+		      GeditWindow *window)
 {
 	GeditTab *tab;
 
@@ -969,7 +973,7 @@ _gedit_cmd_file_save (GtkAction   *action,
 
 void
 _gedit_cmd_file_save_as (GtkAction   *action,
-			GeditWindow *window)
+			 GeditWindow *window)
 {
 	GeditTab *tab;
 
@@ -1123,7 +1127,7 @@ gedit_commands_save_all_documents (GeditWindow *window)
 
 void
 _gedit_cmd_file_save_all (GtkAction   *action,
-			 GeditWindow *window)
+			  GeditWindow *window)
 {
 	gedit_commands_save_all_documents (window);
 }
@@ -1311,7 +1315,7 @@ revert_dialog (GeditWindow   *window,
 
 void
 _gedit_cmd_file_revert (GtkAction   *action,
-		       GeditWindow *window)
+		        GeditWindow *window)
 {
 	GeditTab       *tab;
 	GeditDocument  *doc;
@@ -1685,7 +1689,9 @@ close_confirmation_dialog_response_handler (GeditCloseConfirmationDialog *dlg,
 					return;
 				}
 				else
+				{
 					g_return_if_reached ();
+				}
 			}
 			else
 			{
@@ -1728,6 +1734,7 @@ close_confirmation_dialog_response_handler (GeditCloseConfirmationDialog *dlg,
 			}
 
 			break;
+
 		default: /* Do not close */
 
 			/* Reset is_quitting flag */
@@ -1761,10 +1768,9 @@ tab_can_close (GeditTab  *tab,
 	{
 		GtkWidget     *dlg;
 
-		dlg = gedit_close_confirmation_dialog_new_single (
-						window,
-						doc,
-						FALSE);
+		dlg = gedit_close_confirmation_dialog_new_single (window,
+								  doc,
+								  FALSE);
 
 		g_signal_connect (dlg,
 				  "response",
@@ -1812,7 +1818,7 @@ _gedit_cmd_file_close_tab (GeditTab    *tab,
 
 void
 _gedit_cmd_file_close (GtkAction   *action,
-		      GeditWindow *window)
+		       GeditWindow *window)
 {
 	GeditTab *active_tab;
 
@@ -1905,7 +1911,7 @@ file_close_all (GeditWindow *window,
 
 void
 _gedit_cmd_file_close_all (GtkAction   *action,
-			  GeditWindow *window)
+			   GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -1969,4 +1975,5 @@ _gedit_cmd_file_quit (GtkAction   *action,
 
 	file_close_all (window, TRUE);
 }
+
 /* ex:ts=8:noet: */

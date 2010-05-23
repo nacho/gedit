@@ -99,7 +99,7 @@ enum
 G_DEFINE_TYPE(GeditWindow, gedit_window, GTK_TYPE_WINDOW)
 
 static void	recent_manager_changed	(GtkRecentManager *manager,
-					 GeditWindow *window);
+					 GeditWindow      *window);
 
 static void
 gedit_window_get_property (GObject    *object,
@@ -129,25 +129,33 @@ save_panes_state (GeditWindow *window)
 	gedit_debug (DEBUG_WINDOW);
 
 	if (window->priv->side_panel_size > 0)
+	{
 		g_settings_set_int (window->priv->window_settings,
 				    GEDIT_SETTINGS_SIDE_PANEL_SIZE,
 				    window->priv->side_panel_size);
+	}
 
 	pane_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->side_panel));
 	if (pane_page != 0)
+	{
 		g_settings_set_int (window->priv->window_settings,
 				    GEDIT_SETTINGS_SIDE_PANEL_ACTIVE_PAGE,
 				    pane_page);
+	}
 
 	if (window->priv->bottom_panel_size > 0)
+	{
 		g_settings_set_int (window->priv->window_settings,
 				    GEDIT_SETTINGS_BOTTOM_PANEL_SIZE,
 				    window->priv->bottom_panel_size);
+	}
 
 	pane_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->bottom_panel));
 	if (pane_page != 0)
+	{
 		g_settings_set_int (window->priv->window_settings,
 				    GEDIT_SETTINGS_BOTTOM_PANEL_ACTIVE_PAGE, pane_page);
+	}
 }
 
 #ifdef OS_OSX
@@ -190,6 +198,7 @@ gedit_window_focus_in_event (GtkWidget     *widget,
                              GdkEventFocus *event)
 {
 	add_mac_root_menu (GEDIT_WINDOW (widget));
+
 	return GTK_WIDGET_CLASS (gedit_window_parent_class)->focus_in_event (widget, event);
 }
 
@@ -198,6 +207,7 @@ gedit_window_focus_out_event (GtkWidget     *widget,
                               GdkEventFocus *event)
 {
 	remove_mac_root_menu (GEDIT_WINDOW (widget));
+
 	return GTK_WIDGET_CLASS (gedit_window_parent_class)->focus_out_event (widget, event);
 }
 #endif
@@ -512,7 +522,7 @@ gedit_window_class_init (GeditWindowClass *klass)
 							     G_PARAM_READABLE |
 							     G_PARAM_STATIC_STRINGS));
 
-	g_type_class_add_private (object_class, sizeof(GeditWindowPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditWindowPrivate));
 }
 
 static void
@@ -559,9 +569,9 @@ connect_proxy_cb (GtkUIManager *manager,
 
 static void
 disconnect_proxy_cb (GtkUIManager *manager,
-                     GtkAction *action,
-                     GtkWidget *proxy,
-                     GeditWindow *window)
+                     GtkAction    *action,
+                     GtkWidget    *proxy,
+                     GeditWindow  *window)
 {
 	if (GTK_IS_MENU_ITEM (proxy))
 	{
@@ -603,6 +613,10 @@ apply_toolbar_style (GeditWindow *window,
 			gtk_toolbar_set_style (
 					GTK_TOOLBAR (toolbar),
 					GTK_TOOLBAR_BOTH_HORIZ);
+			break;
+
+		default:
+			g_assert_not_reached ();
 			break;
 	}
 }
@@ -1355,8 +1369,10 @@ update_recent_files_menu (GeditWindow *window)
 	g_return_if_fail (p->recents_action_group != NULL);
 
 	if (p->recents_menu_ui_id != 0)
+	{
 		gtk_ui_manager_remove_ui (p->manager,
 					  p->recents_menu_ui_id);
+	}
 
 	actions = gtk_action_group_list_actions (p->recents_action_group);
 	for (l = actions; l != NULL; l = l->next)
@@ -1414,13 +1430,18 @@ update_recent_files_menu (GeditWindow *window)
 		display_name = gtk_recent_info_get_display_name (info);
 		escaped = gedit_utils_escape_underscores (display_name, -1);
 		if (i >= 10)
+		{
 			label = g_strdup_printf ("%d.  %s",
 						 i, 
 						 escaped);
+		}
 		else
+		{
 			label = g_strdup_printf ("_%d.  %s",
 						 i, 
 						 escaped);
+		}
+
 		g_free (escaped);
 
 		/* gtk_recent_info_get_uri_display (info) is buggy and
@@ -1474,7 +1495,8 @@ update_recent_files_menu (GeditWindow *window)
 }
 
 static void
-set_non_homogeneus (GtkWidget *widget, gpointer data)
+set_non_homogeneus (GtkWidget *widget,
+		    gpointer   data)
 {
 	gtk_tool_item_set_homogeneous (GTK_TOOL_ITEM (widget), FALSE);
 }
@@ -1500,7 +1522,7 @@ toolbar_visibility_changed (GtkWidget   *toolbar,
 
 static GtkWidget *
 setup_toolbar_open_button (GeditWindow *window,
-			   GtkWidget *toolbar)
+			   GtkWidget   *toolbar)
 {
 	GtkRecentManager *recent_manager;
 	GtkRecentFilter *filter;
@@ -1806,8 +1828,10 @@ update_documents_list_menu (GeditWindow *window)
 	g_return_if_fail (p->documents_list_action_group != NULL);
 
 	if (p->documents_list_menu_ui_id != 0)
+	{
 		gtk_ui_manager_remove_ui (p->manager,
 					  p->documents_list_menu_ui_id);
+	}
 
 	actions = gtk_action_group_list_actions (p->documents_list_action_group);
 	for (l = actions; l != NULL; l = l->next)
@@ -1903,10 +1927,14 @@ set_statusbar_style (GeditWindow *window,
 	gboolean visible;
 
 	if (origin == NULL)
+	{
 		visible = g_settings_get_boolean (window->priv->ui_settings,
 						  GEDIT_SETTINGS_STATUSBAR_VISIBLE);
+	}
 	else
+	{
 		visible = gtk_widget_get_visible (origin->priv->statusbar);
+	}
 
 	if (visible)
 		gtk_widget_show (window->priv->statusbar);
@@ -2362,24 +2390,32 @@ set_title (GeditWindow *window)
 	if (gedit_document_get_readonly (doc)) 
 	{
 		if (dirname != NULL)
+		{
 			title = g_strdup_printf ("%s [%s] (%s) - gedit", 
 						 name, 
 						 _("Read-Only"), 
 						 dirname);
+		}
 		else
+		{
 			title = g_strdup_printf ("%s [%s] - gedit", 
 						 name, 
 						 _("Read-Only"));
+		}
 	} 
 	else 
 	{
 		if (dirname != NULL)
+		{
 			title = g_strdup_printf ("%s (%s) - gedit", 
 						 name, 
 						 dirname);
+		}
 		else
+		{
 			title = g_strdup_printf ("%s - gedit", 
 						 name);
+		}
 	}
 
 	gedit_app_set_window_title (gedit_app_get_default (), window, title);
@@ -2683,23 +2719,37 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 		 * when in SAVING_SESSION state */
 
 		if (gtk_action_group_get_sensitive (window->priv->action_group))
+		{
 			gtk_action_group_set_sensitive (window->priv->action_group,
 							FALSE);
+		}
+		
 		if (gtk_action_group_get_sensitive (window->priv->quit_action_group))
+		{
 			gtk_action_group_set_sensitive (window->priv->quit_action_group,
 							FALSE);
+		}
+		
 		if (gtk_action_group_get_sensitive (window->priv->close_action_group))
+		{
 			gtk_action_group_set_sensitive (window->priv->close_action_group,
 							FALSE);
+		}
 	}
 	else
 	{
 		if (!gtk_action_group_get_sensitive (window->priv->action_group))
+		{
 			gtk_action_group_set_sensitive (window->priv->action_group,
 							window->priv->num_tabs > 0);
+		}
+		
 		if (!gtk_action_group_get_sensitive (window->priv->quit_action_group))
+		{
 			gtk_action_group_set_sensitive (window->priv->quit_action_group,
 							window->priv->num_tabs > 0);
+		}
+		
 		if (!gtk_action_group_get_sensitive (window->priv->close_action_group))
 		{
 #ifdef OS_OSX
@@ -3097,11 +3147,15 @@ show_hide_fullscreen_toolbar (GeditWindow *window,
 						 &fs_rect);
 
 		if (show)
+		{
 			gtk_window_move (GTK_WINDOW (window->priv->fullscreen_controls),
 				 fs_rect.x, fs_rect.y);
+		}
 		else
+		{
 			gtk_window_move (GTK_WINDOW (window->priv->fullscreen_controls),
 					 fs_rect.x, fs_rect.y - height + 1);
+		}
 	}
 
 }
@@ -3532,13 +3586,10 @@ notebook_tab_removed (GeditNotebook *notebook,
 		update_documents_list_menu (window);
 		update_next_prev_doc_sensitivity_per_window (window);
 	}
-	else
+	else if (window->priv->num_tabs == 0)
 	{
-		if (window->priv->num_tabs == 0)
-		{
-			update_documents_list_menu (window);
-			update_next_prev_doc_sensitivity_per_window (window);
-		}
+		update_documents_list_menu (window);
+		update_next_prev_doc_sensitivity_per_window (window);
 	}
 
 	update_sensitivity_according_to_open_tabs (window);
@@ -3599,12 +3650,12 @@ show_notebook_popup_menu (GtkNotebook    *notebook,
 			  GdkEventButton *event)
 {
 	GtkWidget *menu;
-//	GtkAction *action;
+	/* GtkAction *action; */
 
 	menu = gtk_ui_manager_get_widget (window->priv->manager, "/NotebookPopup");
 	g_return_val_if_fail (menu != NULL, FALSE);
 
-// CHECK do we need this?
+	/* CHECK do we need this? */
 #if 0
 	/* allow extensions to sync when showing the popup */
 	action = gtk_action_group_get_action (window->priv->action_group,
@@ -3750,8 +3801,10 @@ side_panel_visibility_changed (GtkWidget   *side_panel,
 
 	/* focus the document */
 	if (!visible && window->priv->active_tab != NULL)
+	{
 		gtk_widget_grab_focus (GTK_WIDGET (
 				gedit_tab_get_view (GEDIT_TAB (window->priv->active_tab))));
+	}
 }
 
 static void
@@ -3806,8 +3859,10 @@ bottom_panel_visibility_changed (GeditPanel  *bottom_panel,
 
 	/* focus the document */
 	if (!visible && window->priv->active_tab != NULL)
+	{
 		gtk_widget_grab_focus (GTK_WIDGET (
 				gedit_tab_get_view (GEDIT_TAB (window->priv->active_tab))));
+	}
 }
 
 static void
@@ -4391,7 +4446,8 @@ gedit_window_get_active_tab (GeditWindow *window)
 }
 
 static void
-add_document (GeditTab *tab, GList **res)
+add_document (GeditTab  *tab,
+	      GList    **res)
 {
 	GeditDocument *doc;
 	
@@ -4426,7 +4482,8 @@ gedit_window_get_documents (GeditWindow *window)
 }
 
 static void
-add_view (GeditTab *tab, GList **res)
+add_view (GeditTab  *tab,
+	  GList    **res)
 {
 	GeditView *view;
 	

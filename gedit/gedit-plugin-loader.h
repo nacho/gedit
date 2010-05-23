@@ -49,7 +49,7 @@ struct _GeditPluginLoaderInterface {
 	void 	     (*unload)		(GeditPluginLoader 	*loader,
 					 GeditPluginInfo       	*info);
 
-	void         (*garbage_collect) 	(GeditPluginLoader	*loader);
+	void         (*garbage_collect)	(GeditPluginLoader	*loader);
 };
 
 GType gedit_plugin_loader_get_type (void);
@@ -104,4 +104,5 @@ register_gedit_plugin_loader (GTypeModule *type_module)				\
 G_END_DECLS
 
 #endif /* __GEDIT_PLUGIN_LOADER_H__ */
+
 /* ex:ts=8:noet: */

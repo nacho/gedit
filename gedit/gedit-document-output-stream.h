@@ -62,4 +62,5 @@ GeditDocumentNewlineType gedit_document_output_stream_detect_newline_type (Gedit
 G_END_DECLS
 
 #endif /* __GEDIT_DOCUMENT_OUTPUT_STREAM_H__ */
+
 /* ex:ts=8:noet: */

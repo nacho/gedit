@@ -388,7 +388,7 @@ async_data_new (GeditDocumentLoader *loader)
 	async->loader = loader;
 	async->cancellable = g_object_ref (loader->priv->cancellable);
 	async->tried_mount = FALSE;
-	
+
 	return async;
 }
 
@@ -450,7 +450,8 @@ get_metadata_encoding (GeditDocumentLoader *loader)
 }
 
 static void
-loader_load_completed_or_failed (GeditDocumentLoader *loader, AsyncData *async)
+loader_load_completed_or_failed (GeditDocumentLoader *loader,
+				 AsyncData           *async)
 {
 	gedit_document_loader_loading (loader,
 				       TRUE,
@@ -461,7 +462,8 @@ loader_load_completed_or_failed (GeditDocumentLoader *loader, AsyncData *async)
 }
 
 static void
-async_failed (AsyncData *async, GError *error)
+async_failed (AsyncData *async,
+	      GError    *error)
 {
 	g_propagate_error (&async->loader->priv->error, error);
 	loader_load_completed_or_failed (async->loader, async);
@@ -469,8 +471,8 @@ async_failed (AsyncData *async, GError *error)
 
 static void
 close_input_stream_ready_cb (GInputStream *stream,
-			     GAsyncResult  *res,
-			     AsyncData     *async)
+			     GAsyncResult *res,
+			     AsyncData    *async)
 {
 	GError *error = NULL;
 
@@ -508,11 +510,13 @@ static void
 write_complete (AsyncData *async)
 {
 	if (async->loader->priv->stream)
+	{
 		g_input_stream_close_async (G_INPUT_STREAM (async->loader->priv->stream),
 					    G_PRIORITY_HIGH,
 					    async->cancellable,
 					    (GAsyncReadyCallback)close_input_stream_ready_cb,
 					    async);
+	}
 }
 
 /* prototype, because they call each other... isn't C lovely */

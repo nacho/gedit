@@ -105,18 +105,18 @@ gboolean	 gedit_panel_add_item_with_stock_icon	(GeditPanel     *panel,
 						      	 const gchar    *display_name,
 						      	 const gchar    *stock_id);
 
-gboolean	 gedit_panel_remove_item	(GeditPanel     *panel,
-					  	 GtkWidget      *item);
+gboolean	 gedit_panel_remove_item		(GeditPanel     *panel,
+					  		 GtkWidget      *item);
 
-gboolean	 gedit_panel_activate_item 	(GeditPanel     *panel,
-					    	 GtkWidget      *item);
+gboolean	 gedit_panel_activate_item 		(GeditPanel     *panel,
+					    		 GtkWidget      *item);
 
-gboolean	 gedit_panel_item_is_active 	(GeditPanel     *panel,
-					    	 GtkWidget      *item);
+gboolean	 gedit_panel_item_is_active 		(GeditPanel     *panel,
+					    		 GtkWidget      *item);
 
-GtkOrientation	 gedit_panel_get_orientation	(GeditPanel	*panel);
+GtkOrientation	 gedit_panel_get_orientation		(GeditPanel	*panel);
 
-gint		 gedit_panel_get_n_items	(GeditPanel	*panel);
+gint		 gedit_panel_get_n_items		(GeditPanel	*panel);
 
 
 /*
@@ -130,4 +130,5 @@ void		 _gedit_panel_set_active_item_by_id	(GeditPanel	*panel,
 G_END_DECLS
 
 #endif  /* __GEDIT_PANEL_H__  */
+
 /* ex:ts=8:noet: */

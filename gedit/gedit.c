@@ -64,7 +64,7 @@
 
 static gboolean
 gedit_main_load_from_stdin (GeditWindow *window,
-                            gboolean jump_to)
+                            gboolean     jump_to)
 {
 #ifdef G_OS_UNIX
 	GInputStream *stream;

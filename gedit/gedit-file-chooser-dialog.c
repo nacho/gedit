@@ -87,7 +87,7 @@ gedit_file_chooser_dialog_class_init (GeditFileChooserDialogClass *klass)
 
 	object_class->dispose = gedit_file_chooser_dialog_dispose;
 
-	g_type_class_add_private (object_class, sizeof(GeditFileChooserDialogPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditFileChooserDialogPrivate));
 }
 
 static void
@@ -405,9 +405,11 @@ gedit_file_chooser_dialog_new_valist (const gchar          *title,
 			  NULL);
 
 	if (encoding != NULL)
+	{
 		gedit_encodings_combo_box_set_selected_encoding (
 				GEDIT_ENCODINGS_COMBO_BOX (GEDIT_FILE_CHOOSER_DIALOG (result)->priv->option_menu),
 				encoding);
+	}
 
 	active_filter = g_settings_get_int (GEDIT_FILE_CHOOSER_DIALOG (result)->priv->filter_settings,
 					    GEDIT_SETTINGS_ACTIVE_FILE_FILTER);
@@ -458,7 +460,9 @@ gedit_file_chooser_dialog_new_valist (const gchar          *title,
 		    (response_id == GTK_RESPONSE_ACCEPT) ||
 		    (response_id == GTK_RESPONSE_YES) ||
 		    (response_id == GTK_RESPONSE_APPLY))
+		{
 			gtk_dialog_set_default_response (GTK_DIALOG (result), response_id);
+		}
 
 		button_text = va_arg (varargs, const gchar *);
 	}
@@ -553,8 +557,8 @@ set_enum_combo (GtkComboBox *combo,
 }
 
 void
-gedit_file_chooser_dialog_set_newline_type (GeditFileChooserDialog  *dialog,
-					    GeditDocumentNewlineType newline_type)
+gedit_file_chooser_dialog_set_newline_type (GeditFileChooserDialog   *dialog,
+					    GeditDocumentNewlineType  newline_type)
 {
 	g_return_if_fail (GEDIT_IS_FILE_CHOOSER_DIALOG (dialog));
 	g_return_if_fail (gtk_file_chooser_get_action (GTK_FILE_CHOOSER (dialog)) == GTK_FILE_CHOOSER_ACTION_SAVE);

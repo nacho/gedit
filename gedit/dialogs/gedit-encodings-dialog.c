@@ -208,8 +208,10 @@ add_button_clicked_callback (GtkWidget            *button,
 	while (tmp != NULL)
 	{
 		if (g_slist_find (dialog->priv->show_in_menu_list, tmp->data) == NULL)
+		{
 			dialog->priv->show_in_menu_list = g_slist_prepend (dialog->priv->show_in_menu_list,
 									   tmp->data);
+		}
 
 		tmp = g_slist_next (tmp);
 	}

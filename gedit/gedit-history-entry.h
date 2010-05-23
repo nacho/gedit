@@ -58,7 +58,7 @@ struct _GeditHistoryEntry
 	GeditHistoryEntryPrivate *priv;
 };
 
-GType		 gedit_history_entry_get_type	(void) G_GNUC_CONST;
+GType		 gedit_history_entry_get_type		(void) G_GNUC_CONST;
 
 GtkWidget	*gedit_history_entry_new		(const gchar       *history_id,
 							 gboolean           enable_completion);
@@ -94,4 +94,5 @@ void		gedit_history_entry_set_escape_func	(GeditHistoryEntry *entry,
 G_END_DECLS
 
 #endif /* __GEDIT_HISTORY_ENTRY_H__ */
+
 /* ex:ts=8:noet: */

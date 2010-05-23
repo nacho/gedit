@@ -156,7 +156,7 @@ gedit_status_combo_box_class_init (GeditStatusComboBoxClass *klass)
 		"}\n"
 		"widget \"*.gedit-status-combo-button\" style \"gedit-status-combo-button-style\"");
 
-	g_type_class_add_private (object_class, sizeof(GeditStatusComboBoxPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditStatusComboBoxPrivate));
 }
 
 static void

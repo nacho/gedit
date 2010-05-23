@@ -43,7 +43,7 @@
 
 void
 _gedit_cmd_documents_previous_document (GtkAction   *action,
-				       GeditWindow *window)
+					GeditWindow *window)
 {
 	GtkNotebook *notebook;
 
@@ -55,7 +55,7 @@ _gedit_cmd_documents_previous_document (GtkAction   *action,
 
 void
 _gedit_cmd_documents_next_document (GtkAction   *action,
-				   GeditWindow *window)
+				    GeditWindow *window)
 {
 	GtkNotebook *notebook;
 
@@ -67,7 +67,7 @@ _gedit_cmd_documents_next_document (GtkAction   *action,
 
 void
 _gedit_cmd_documents_move_to_new_window (GtkAction   *action,
-					GeditWindow *window)
+					 GeditWindow *window)
 {
 	GeditNotebook *old_notebook;
 	GeditTab *tab;
@@ -85,4 +85,5 @@ _gedit_cmd_documents_move_to_new_window (GtkAction   *action,
 
 	_gedit_window_move_tab_to_new_window (window, tab);
 }
+
 /* ex:ts=8:noet: */

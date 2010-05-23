@@ -40,28 +40,31 @@ typedef struct _GeditTabLabel		GeditTabLabel;
 typedef struct _GeditTabLabelClass	GeditTabLabelClass;
 typedef struct _GeditTabLabelPrivate	GeditTabLabelPrivate;
 
-struct _GeditTabLabel {
+struct _GeditTabLabel
+{
 	GtkHBox parent;
 	
 	GeditTabLabelPrivate *priv;
 };
 
-struct _GeditTabLabelClass {
+struct _GeditTabLabelClass
+{
 	GtkHBoxClass parent_class;
 
 	void (* close_clicked)  (GeditTabLabel *tab_label);
 };
 
-GType		 gedit_tab_label_get_type (void) G_GNUC_CONST;
+GType		 gedit_tab_label_get_type			(void) G_GNUC_CONST;
 
-GtkWidget 	*gedit_tab_label_new (GeditTab *tab);
+GtkWidget 	*gedit_tab_label_new				(GeditTab *tab);
 
-GeditTab	*gedit_tab_label_get_tab (GeditTabLabel *tab_label);
+GeditTab	*gedit_tab_label_get_tab			(GeditTabLabel *tab_label);
 
-void		gedit_tab_label_set_close_button_sensitive (GeditTabLabel *tab_label,
-							    gboolean       sensitive);
+void		 gedit_tab_label_set_close_button_sensitive	(GeditTabLabel *tab_label,
+								 gboolean       sensitive);
 
 G_END_DECLS
 
 #endif /* __GEDIT_TAB_LABEL_H__ */
+
 /* ex:ts=8:noet: */

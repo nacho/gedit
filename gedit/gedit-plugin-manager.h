@@ -81,4 +81,5 @@ GtkWidget	*gedit_plugin_manager_new		(void);
 G_END_DECLS
 
 #endif  /* __GEDIT_PLUGIN_MANAGER_H__  */
+
 /* ex:ts=8:noet: */

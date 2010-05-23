@@ -654,7 +654,8 @@ install_scheme_clicked (GtkButton              *button,
 	GtkWidget      *chooser;
 	GtkFileFilter  *filter;
 	
-	if (dlg->priv->install_scheme_file_schooser != NULL) {
+	if (dlg->priv->install_scheme_file_schooser != NULL)
+	{
 		gtk_window_present (GTK_WINDOW (dlg->priv->install_scheme_file_schooser));
 		gtk_widget_grab_focus (dlg->priv->install_scheme_file_schooser);
 		return;
@@ -764,7 +765,9 @@ uninstall_scheme_clicked (GtkButton              *button,
 					new_iter_set = TRUE;
 			}
 			else
+			{
 				new_iter_set = TRUE;
+			}
 
 			gtk_tree_path_free (path);
 						
@@ -1046,4 +1049,5 @@ gedit_show_preferences_dialog (GeditWindow *parent)
 
 	gtk_window_present (GTK_WINDOW (preferences_dialog));
 }
+
 /* ex:ts=8:noet: */

@@ -142,9 +142,9 @@ static void 	search_highlight_updated_cb	(GeditDocument    *doc,
 						 GtkTextIter      *end,
 						 GeditView        *view);
 
-static void	gedit_view_delete_from_cursor 	(GtkTextView     *text_view,
-						 GtkDeleteType    type,
-						 gint             count);
+static void	gedit_view_delete_from_cursor 	(GtkTextView      *text_view,
+						 GtkDeleteType     type,
+						 gint              count);
 
 G_DEFINE_TYPE(GeditView, gedit_view, GTK_TYPE_SOURCE_VIEW)
 
@@ -890,17 +890,21 @@ run_search (GeditView        *view,
 		if (!found && wrap_around)
 		{
 			if (!search_backward)
+			{
 				found = gedit_document_search_forward (doc,
 								       NULL,
 								       NULL, /* FIXME: set the end_inter */
 								       &match_start,
 								       &match_end);
+			}
 			else
+			{
 				found = gedit_document_search_backward (doc,
 								        NULL, /* FIXME: set the start_inter */
 								        NULL, 
 								        &match_start,
 								        &match_end);
+			}
 		}
 	}
 	else
@@ -918,13 +922,10 @@ run_search (GeditView        *view,
 		gtk_text_buffer_move_mark_by_name (GTK_TEXT_BUFFER (doc),
 					"selection_bound", &match_end);
 	}
-	else
+	else if (typing)
 	{
-		if (typing)
-		{
-			gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc),
-						      &view->priv->start_search_iter);
-		}
+		gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc),
+					      &view->priv->start_search_iter);
 	}
 						      
 	if (found || (*entry_text == '\0'))
@@ -1350,7 +1351,8 @@ search_entry_insert_text (GtkEditable *editable,
 
 			c = g_utf8_get_char (p);
 
-			if (!g_unichar_isdigit (c)) {
+			if (!g_unichar_isdigit (c))
+			{
 				g_signal_stop_emission_by_name (editable, "insert_text");
 				gtk_widget_error_bell (view->priv->search_entry);
 				break;
@@ -1491,12 +1493,16 @@ ensure_search_window (GeditView *view)
 	if (view->priv->search_window != NULL)
 	{
 		if (gtk_window_get_group (GTK_WINDOW (toplevel)))
+		{
 			gtk_window_group_add_window (gtk_window_get_group (GTK_WINDOW (toplevel)),
 						     GTK_WINDOW (view->priv->search_window));
+		}
 		else if (gtk_window_get_group (GTK_WINDOW (view->priv->search_window)))
+		{
 			gtk_window_group_remove_window (gtk_window_get_group (GTK_WINDOW (view->priv->search_window)),
 							GTK_WINDOW (view->priv->search_window));
-					 		
+		}
+
 		customize_for_search_mode (view);
 		
 		return;
@@ -1505,8 +1511,10 @@ ensure_search_window (GeditView *view)
 	view->priv->search_window = gtk_window_new (GTK_WINDOW_POPUP);
 
 	if (gtk_window_get_group (GTK_WINDOW (toplevel)))
+	{
 		gtk_window_group_add_window (gtk_window_get_group (GTK_WINDOW (toplevel)),
 					     GTK_WINDOW (view->priv->search_window));
+	}
 					     
 	gtk_window_set_modal (GTK_WINDOW (view->priv->search_window), TRUE);
 	
@@ -1785,11 +1793,15 @@ search_init (GtkWidget *entry,
 			gedit_view_scroll_to_cursor (view);
 
 			if (!moved || !moved_offset)
+			{
 				set_entry_background (view->priv->search_entry,
 						      GEDIT_SEARCH_ENTRY_NOT_FOUND);
+			}
 			else
+			{
 				set_entry_background (view->priv->search_entry,
 						      GEDIT_SEARCH_ENTRY_NORMAL);
+			}
 		}
 	}
 }
@@ -1801,7 +1813,9 @@ start_interactive_search_real (GeditView *view)
 	
 	if ((view->priv->search_window != NULL) &&
 	    gtk_widget_get_visible (view->priv->search_window))
+	{
 		return TRUE;
+	}
 
 	if (!gtk_widget_has_focus (GTK_WIDGET (view)))
 		return FALSE;
@@ -1809,11 +1823,15 @@ start_interactive_search_real (GeditView *view)
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
 	if (view->priv->search_mode == SEARCH)
+	{
 		gtk_text_buffer_get_selection_bounds (buffer, &view->priv->start_search_iter, NULL);
+	}
 	else
+	{
 		gtk_text_buffer_get_iter_at_mark (buffer,
 						  &view->priv->start_search_iter,
 						  gtk_text_buffer_get_insert (buffer));
+	}
 
 	ensure_search_window (view);
 
@@ -1972,7 +1990,12 @@ gedit_view_drag_data_received (GtkWidget        *widget,
 	}
 	else
 	{
-		GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_data_received (widget, context, x, y, selection_data, info, timestamp);
+		GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_data_received (widget,
+										context,
+										x, y,
+										selection_data,
+										info,
+										timestamp);
 	}
 }
 
@@ -1997,7 +2020,10 @@ gedit_view_drag_drop (GtkWidget      *widget,
 	else
 	{
 		/* Chain up */
-		result = GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_drop (widget, context, x, y, timestamp);
+		result = GTK_WIDGET_CLASS (gedit_view_parent_class)->drag_drop (widget,
+										context,
+										x, y,
+										timestamp);
 	}
 
 	return result;
@@ -2137,8 +2163,10 @@ delete_line (GtkTextView *text_view,
 			 * is at the beginning of the line */
 			count = 0;
 		}
-		else	
+		else
+		{
 			count = 1;
+		}
 	}
 	
 	gtk_text_iter_set_line_offset (&start, 0);
@@ -2172,7 +2200,9 @@ delete_line (GtkTextView *text_view,
 				gtk_text_iter_forward_to_line_end (&start);
 		}
 		else
+		{
 			gtk_text_iter_forward_line (&end);
+		}
 	}
 
 	if (!gtk_text_iter_equal (&start, &end))
@@ -2219,4 +2249,5 @@ gedit_view_delete_from_cursor (GtkTextView   *text_view,
 			break;
 	}
 }
+
 /* ex:ts=8:noet: */

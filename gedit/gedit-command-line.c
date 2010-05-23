@@ -104,7 +104,7 @@ gedit_command_line_class_init (GeditCommandLineClass *klass)
 	object_class->finalize = gedit_command_line_finalize;
 	object_class->constructor = gedit_command_line_constructor;
 
-	g_type_class_add_private (object_class, sizeof(GeditCommandLinePrivate));
+	g_type_class_add_private (object_class, sizeof (GeditCommandLinePrivate));
 }
 
 static void
@@ -357,6 +357,7 @@ gboolean
 gedit_command_line_get_new_window (GeditCommandLine *command_line)
 {
 	g_return_val_if_fail (GEDIT_IS_COMMAND_LINE (command_line), FALSE);
+
 	return command_line->priv->new_window;
 }
 
@@ -373,6 +374,7 @@ gboolean
 gedit_command_line_get_new_document (GeditCommandLine *command_line)
 {
 	g_return_val_if_fail (GEDIT_IS_COMMAND_LINE (command_line), FALSE);
+
 	return command_line->priv->new_document;
 }
 
@@ -380,6 +382,7 @@ gint
 gedit_command_line_get_line_position (GeditCommandLine *command_line)
 {
 	g_return_val_if_fail (GEDIT_IS_COMMAND_LINE (command_line), 0);
+
 	return command_line->priv->line_position;
 }
 
@@ -387,6 +390,7 @@ gint
 gedit_command_line_get_column_position (GeditCommandLine *command_line)
 {
 	g_return_val_if_fail (GEDIT_IS_COMMAND_LINE (command_line), 0);
+
 	return command_line->priv->column_position;
 }
 
@@ -394,6 +398,7 @@ GSList *
 gedit_command_line_get_file_list (GeditCommandLine *command_line)
 {
 	g_return_val_if_fail (GEDIT_IS_COMMAND_LINE (command_line), NULL);
+
 	return command_line->priv->file_list;
 }
 
@@ -401,6 +406,7 @@ const GeditEncoding *
 gedit_command_line_get_encoding (GeditCommandLine *command_line)
 {
 	g_return_val_if_fail (GEDIT_IS_COMMAND_LINE (command_line), NULL);
+
 	return command_line->priv->encoding;
 }
 
@@ -408,6 +414,7 @@ gboolean
 gedit_command_line_get_wait (GeditCommandLine *command_line)
 {
 	g_return_val_if_fail (GEDIT_IS_COMMAND_LINE (command_line), FALSE);
+
 	return command_line->priv->wait;
 }
 
@@ -415,6 +422,7 @@ gboolean
 gedit_command_line_get_background (GeditCommandLine *command_line)
 {
 	g_return_val_if_fail (GEDIT_IS_COMMAND_LINE (command_line), FALSE);
+
 	return command_line->priv->background;
 }
 
@@ -422,6 +430,7 @@ gboolean
 gedit_command_line_get_standalone (GeditCommandLine *command_line)
 {
 	g_return_val_if_fail (GEDIT_IS_COMMAND_LINE (command_line), FALSE);
+
 	return command_line->priv->standalone;
 }
 
@@ -429,6 +438,7 @@ const gchar *
 gedit_command_line_get_geometry (GeditCommandLine *command_line)
 {
 	g_return_val_if_fail (GEDIT_IS_COMMAND_LINE (command_line), NULL);
+
 	return command_line->priv->geometry;
 }
 
