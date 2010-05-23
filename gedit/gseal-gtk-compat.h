@@ -25,7 +25,7 @@ G_BEGIN_DECLS
 
 #if !GTK_CHECK_VERSION (2, 22, 0)
 #define gtk_text_view_reset_im_context(view) \
-	G_STMT_BEGIN \
+	G_STMT_START \
 		if (GTK_TEXT_VIEW (view)->need_im_reset) \
 		{ \
 			GTK_TEXT_VIEW (view)->need_im_reset = FALSE; \
