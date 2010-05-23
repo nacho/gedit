@@ -3802,7 +3802,7 @@ side_panel_visibility_changed (GtkWidget   *side_panel,
 	/* focus the document */
 	if (!visible && window->priv->active_tab != NULL)
 	{
-		gtk_widget_grab_focus (window->priv->active_tab);
+		gtk_widget_grab_focus (GTK_WIDGET (window->priv->active_tab));
 	}
 }
 
@@ -3859,7 +3859,7 @@ bottom_panel_visibility_changed (GeditPanel  *bottom_panel,
 	/* focus the document */
 	if (!visible && window->priv->active_tab != NULL)
 	{
-		gtk_widget_grab_focus (window->priv->active_tab);
+		gtk_widget_grab_focus (GTK_WIDGET (window->priv->active_tab));
 	}
 }
 

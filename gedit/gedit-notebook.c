@@ -681,7 +681,6 @@ gedit_notebook_switch_page_cb (GtkNotebook     *notebook,
 {
 	GeditNotebook *nb = GEDIT_NOTEBOOK (notebook);
 	GtkWidget *child;
-	GeditView *view;
 
 	child = gtk_notebook_get_nth_page (notebook, page_num);
 
