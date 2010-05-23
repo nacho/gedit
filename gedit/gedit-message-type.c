@@ -357,14 +357,16 @@ gedit_message_type_set_valist (GeditMessageType *message_type,
 			       va_list	         var_args)
 {
 	const gchar *key;
-	ArgumentInfo **optional = g_new0(ArgumentInfo *, num_optional);
+	ArgumentInfo **optional = g_new0( ArgumentInfo *, num_optional);
 	guint i;
 	guint added = 0;
 
-	// parse key -> gtype pair arguments
+	g_return_if_fail (message_type != NULL);
+
+	/* parse key -> gtype pair arguments */
 	while ((key = va_arg (var_args, const gchar *)) != NULL)
 	{
-		// get corresponding GType
+		/* get corresponding GType */
 		GType gtype = va_arg (var_args, GType);
 		ArgumentInfo *info;
 		
@@ -473,6 +475,8 @@ gedit_message_type_instantiate (GeditMessageType *message_type,
 const gchar *
 gedit_message_type_get_object_path (GeditMessageType *message_type)
 {
+	g_return_val_if_fail (message_type != NULL, NULL);
+
 	return message_type->object_path;
 }
 
@@ -488,6 +492,8 @@ gedit_message_type_get_object_path (GeditMessageType *message_type)
 const gchar *
 gedit_message_type_get_method (GeditMessageType *message_type)
 {
+	g_return_val_if_fail (message_type != NULL, NULL);
+
 	return message_type->method;
 }
 
@@ -505,8 +511,12 @@ GType
 gedit_message_type_lookup (GeditMessageType *message_type,
 			   const gchar      *key)
 {
-	ArgumentInfo *info = g_hash_table_lookup (message_type->arguments, key);
-	
+	ArgumentInfo *info;
+
+	g_return_val_if_fail (message_type != NULL, G_TYPE_INVALID);
+
+	info = g_hash_table_lookup (message_type->arguments, key);
+
 	if (!info)
 		return G_TYPE_INVALID;
 	
@@ -542,6 +552,9 @@ gedit_message_type_foreach (GeditMessageType 	    *message_type,
 			    gpointer		     user_data)
 {
 	ForeachInfo info = {func, user_data};
+
+	g_return_if_fail (message_type != NULL);
+
 	g_hash_table_foreach (message_type->arguments, (GHFunc)foreach_gtype, &info);
 }
 
