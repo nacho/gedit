@@ -126,14 +126,31 @@ gedit_notebook_destroy (GtkObject *object)
 }
 
 static void
+gedit_notebook_grab_focus (GtkWidget *widget)
+{
+	GtkNotebook *nb = GTK_NOTEBOOK (widget);
+	GtkWidget *tab;
+	gint current_page;
+
+	GTK_WIDGET_CLASS (gedit_notebook_parent_class)->grab_focus (widget);
+
+	current_page = gtk_notebook_get_current_page (nb);
+	tab = gtk_notebook_get_nth_page (nb, current_page);
+
+	gtk_widget_grab_focus (tab);
+}
+
+static void
 gedit_notebook_class_init (GeditNotebookClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GtkObjectClass *gtkobject_class = GTK_OBJECT_CLASS (klass);
+	GtkWidgetClass *gtkwidget_class = GTK_WIDGET_CLASS (klass);
 	GtkNotebookClass *notebook_class = GTK_NOTEBOOK_CLASS (klass);
 
 	object_class->finalize = gedit_notebook_finalize;
 	gtkobject_class->destroy = gedit_notebook_destroy;
+	gtkwidget_class->grab_focus = gedit_notebook_grab_focus;
 	
 	notebook_class->change_current_page = gedit_notebook_change_current_page;
 
@@ -679,9 +696,8 @@ gedit_notebook_switch_page_cb (GtkNotebook     *notebook,
 	nb->priv->focused_pages = g_list_append (nb->priv->focused_pages,
 						 child);
 
-	/* give focus to the view */
-	view = gedit_tab_get_view (GEDIT_TAB (child));
-	gtk_widget_grab_focus (GTK_WIDGET (view));
+	/* give focus to the tab */
+	gtk_widget_grab_focus (child);
 }
 
 /*
@@ -894,15 +910,12 @@ gedit_notebook_add_tab (GeditNotebook *nb,
 
 	if (jump_to)
 	{
-		GeditView *view;
-		
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (nb), position);
 		g_object_set_data (G_OBJECT (tab), 
 				   "jump_to",
 				   GINT_TO_POINTER (jump_to));
-		view = gedit_tab_get_view (tab);
 		
-		gtk_widget_grab_focus (GTK_WIDGET (view));
+		gtk_widget_grab_focus (GTK_WIDGET (tab));
 	}
 }
 

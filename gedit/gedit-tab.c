@@ -260,16 +260,36 @@ gedit_tab_finalize (GObject *object)
 	G_OBJECT_CLASS (gedit_tab_parent_class)->finalize (object);
 }
 
+static void
+gedit_tab_grab_focus (GtkWidget *widget)
+{
+	GeditTab *tab = GEDIT_TAB (widget);
+	
+	GTK_WIDGET_CLASS (gedit_tab_parent_class)->grab_focus (widget);
+	
+	if (tab->priv->message_area != NULL)
+	{
+		gtk_widget_grab_focus (tab->priv->message_area);
+	}
+	else
+	{
+		gtk_widget_grab_focus (GTK_WIDGET (gedit_tab_get_view (tab)));
+	}
+}
+
 static void 
 gedit_tab_class_init (GeditTabClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GtkWidgetClass *gtkwidget_class = GTK_WIDGET_CLASS (klass);
 
 	object_class->dispose = gedit_tab_dispose;
 	object_class->finalize = gedit_tab_finalize;
 	object_class->dispose = gedit_tab_dispose;
 	object_class->get_property = gedit_tab_get_property;
 	object_class->set_property = gedit_tab_set_property;
+	
+	gtkwidget_class->grab_focus = gedit_tab_grab_focus;
 	
 	g_object_class_install_property (object_class,
 					 PROP_NAME,
