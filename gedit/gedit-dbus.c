@@ -265,6 +265,7 @@ activate_service (GeditDBus *dbus,
 	                                   "org.freedesktop.DBus",
 	                                   "StartServiceByName",
 	                                   g_variant_new ("(su)", "org.gnome.gedit", 0),
+					   G_VARIANT_TYPE ("(su)"),
 	                                   G_DBUS_CALL_FLAGS_NONE,
 	                                   -1,
 	                                   NULL,
@@ -1660,4 +1661,4 @@ gedit_dbus_run (GeditDBus *dbus)
 	}
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */
