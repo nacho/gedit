@@ -1951,6 +1951,8 @@ quit_all ()
 			file_close_all (window, TRUE);
 		}
 	}
+
+	g_list_free (windows);
 }
 #endif
 
