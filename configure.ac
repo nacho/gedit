@@ -4,7 +4,7 @@ AC_PREREQ(2.63.2)
 
 m4_define(gedit_major_version,  2)
 m4_define(gedit_minor_version, 31)
-m4_define(gedit_micro_version,  1)
+m4_define(gedit_micro_version,  2)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
 AC_INIT([gedit],[gedit_version],[http://bugzilla.gnome.org/enter_bug.cgi?product=gedit],[gedit],[http://projects.gnome.org/gedit/])
@@ -281,7 +281,7 @@ PKG_CHECK_MODULES(GEDIT, [
 	libxml-2.0 >= 2.5.0
 	glib-2.0 >= 2.25.6
 	gthread-2.0 >= 2.13.0
-	gio-2.0 >= 2.25.5
+	gio-2.0 >= 2.25.7
 	$GTK_REQUIRED >= $GTK_REQUIRED_VERSION
 	gtksourceview-2.0 >= 2.9.7
 	gconf-2.0 >= 2.31.1
