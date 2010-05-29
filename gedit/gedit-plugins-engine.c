@@ -836,8 +836,11 @@ gedit_plugins_engine_configure_plugin (GeditPluginsEngine *engine,
 	gtk_window_set_transient_for (GTK_WINDOW (conf_dlg),
 				      parent);
 
-	wg = gtk_window_get_group (parent);
-	if (wg == NULL)
+	if (gtk_window_has_group (parent))
+	{
+		wg = gtk_window_get_group (parent);
+	}
+	else
 	{
 		wg = gtk_window_group_new ();
 		gtk_window_group_add_window (wg, parent);

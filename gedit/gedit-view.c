@@ -1492,12 +1492,12 @@ ensure_search_window (GeditView *view)
 
 	if (view->priv->search_window != NULL)
 	{
-		if (gtk_window_get_group (GTK_WINDOW (toplevel)))
+		if (gtk_window_has_group (GTK_WINDOW (toplevel)))
 		{
 			gtk_window_group_add_window (gtk_window_get_group (GTK_WINDOW (toplevel)),
 						     GTK_WINDOW (view->priv->search_window));
 		}
-		else if (gtk_window_get_group (GTK_WINDOW (view->priv->search_window)))
+		else if (gtk_window_has_group (GTK_WINDOW (view->priv->search_window)))
 		{
 			gtk_window_group_remove_window (gtk_window_get_group (GTK_WINDOW (view->priv->search_window)),
 							GTK_WINDOW (view->priv->search_window));
@@ -1510,7 +1510,7 @@ ensure_search_window (GeditView *view)
    
 	view->priv->search_window = gtk_window_new (GTK_WINDOW_POPUP);
 
-	if (gtk_window_get_group (GTK_WINDOW (toplevel)))
+	if (gtk_window_has_group (GTK_WINDOW (toplevel)))
 	{
 		gtk_window_group_add_window (gtk_window_get_group (GTK_WINDOW (toplevel)),
 					     GTK_WINDOW (view->priv->search_window));

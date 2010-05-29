@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /*
- *  Copyright © 2009 Thomas H.P. Andersen <phomes@gmail.com>,
- *              2009 Javier Jardón <jjardon@gnome.org>
+ *  Copyright (C) 2009 Thomas H.P. Andersen <phomes@gmail.com>,
+ *                2009 Javier Jardón <jjardon@gnome.org>
  *
  *  This runtime is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
@@ -11,7 +11,7 @@
  *  This runtime is distributed in the hope runtime it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *  GNU Lesser General Public License for more details.
  *
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with this runtime; if not, write to the Free Software
@@ -24,14 +24,15 @@
 G_BEGIN_DECLS
 
 #if !GTK_CHECK_VERSION (2, 22, 0)
+#define gtk_window_has_group(window)				((window)->group != NULL)
 #define gtk_text_view_reset_im_context(view) \
-	G_STMT_START \
-		if (GTK_TEXT_VIEW (view)->need_im_reset) \
+	G_STMT_START { \
+		if (view->need_im_reset) \
 		{ \
-			GTK_TEXT_VIEW (view)->need_im_reset = FALSE; \
-			gtk_im_context_reset (GTK_TEXT_VIEW (view)->im_context); \
+			view->need_im_reset = FALSE; \
+			gtk_im_context_reset (view->im_context); \
 		} \
-	G_STMT_END
+	} G_STMT_END
 #endif /* GTK < 2.22.0 */
 
 #if !GTK_CHECK_VERSION (2, 20, 0)
@@ -56,7 +57,6 @@ G_BEGIN_DECLS
 #define gtk_widget_get_visible(widget)                          (GTK_WIDGET_VISIBLE (widget))
 #define gtk_widget_set_window(widget, _window)                  ((widget)->window = _window)
 #endif /* GTK+ < 2.18.0 */
-
 
 G_END_DECLS
 

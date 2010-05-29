@@ -213,8 +213,11 @@ add_or_remove (GeditEncodingsComboBox *menu,
 			gtk_window_set_transient_for (GTK_WINDOW (dialog),
 						      GTK_WINDOW (toplevel));
 
-			wg = gtk_window_get_group (GTK_WINDOW (toplevel));
-			if (wg == NULL)
+			if (gtk_window_has_group (GTK_WINDOW (toplevel)))
+			{
+				wg = gtk_window_get_group (GTK_WINDOW (toplevel));
+			}
+			else
 			{
 				wg = gtk_window_group_new ();
 				gtk_window_group_add_window (wg,
