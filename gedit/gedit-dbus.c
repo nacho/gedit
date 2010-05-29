@@ -920,10 +920,10 @@ set_interaction_time_and_present (GeditWindow *window,
 #ifdef GDK_WINDOWING_X11
 	if (startup_time <= 0)
 	{
-		startup_time = gdk_x11_get_server_time (GTK_WIDGET (window)->window);
+		startup_time = gdk_x11_get_server_time (gtk_widget_get_window (GTK_WIDGET (window)));
 	}
 
-	gdk_x11_window_set_user_time (GTK_WIDGET (window)->window, startup_time);
+	gdk_x11_window_set_user_time (gtk_widget_get_window (GTK_WIDGET (window)), startup_time);
 #endif
 
 	gtk_window_present (GTK_WINDOW (window));

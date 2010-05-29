@@ -1957,7 +1957,9 @@ gedit_view_drag_motion (GtkWidget      *widget,
 	/* If this is a URL, deal with it here */
 	if (drag_get_uri_target (widget, context) != GDK_NONE) 
 	{
-		gdk_drag_status (context, context->suggested_action, timestamp);
+		gdk_drag_status (context,
+				 gdk_drag_context_get_suggested_action (context),
+				 timestamp);
 		result = TRUE;
 	}
 
