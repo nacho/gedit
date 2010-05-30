@@ -23,7 +23,7 @@
 
 G_BEGIN_DECLS
 
-#if !GTK_CHECK_VERSION (2, 22, 0)
+#if !GTK_CHECK_VERSION (2, 21, 0)
 #define gtk_window_has_group(window)				((window)->group != NULL)
 #define gtk_text_view_reset_im_context(view) \
 	G_STMT_START { \

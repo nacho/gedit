@@ -485,13 +485,20 @@ AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
 
 GNOME_COMPILE_WARNINGS(yes)
 
+if test "$USE_MAINTAINER_MODE" = "yes"; then
+	enable_deprecations=yes
+else
+	enable_deprecations=no
+fi
+
 AC_ARG_ENABLE(deprecations,
               [AS_HELP_STRING([--enable-deprecations],
-                              [warn about deprecated usages [default=no]])],,
-              [enable_deprecations=no])
+                              [warn about deprecated usages [default=no]])],
+              [enable_deprecations=$enableval], [])
 
-if test "x$enable_deprecations" = "xyes"; then
+if test "$enable_deprecations" = "yes"; then
    DISABLE_DEPRECATED_CFLAGS="\
+-DGSEAL_ENABLE \
 -DG_DISABLE_DEPRECATED \
 -DGDK_DISABLE_DEPRECATED \
 -DGTK_DISABLE_DEPRECATED \
@@ -589,6 +596,7 @@ Configuration:
 	Python Plugins Support: $enable_python
 	Spell Plugin enabled:	$enable_enchant
 	Gvfs metadata enabled:	$enable_gvfs_metadata
+	Deprecations enabled:   $enable_deprecations
 "
 
 if expr ${GEDIT_MINOR_VERSION} % 2 > /dev/null; then
