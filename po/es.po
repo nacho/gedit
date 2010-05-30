@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
-"POT-Creation-Date: 2010-05-23 11:26+0000\n"
+"POT-Creation-Date: 2010-05-29 15:54+0000\n"
 "PO-Revision-Date: 2010-05-25 17:50+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
@@ -114,7 +114,6 @@ msgid "Highlight Current Line"
 msgstr "Resaltar la línea actual"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:17
-#| msgid "Highlight Matching Bracket"
 msgid "Highlight Matching Brackets"
 msgstr "Resaltar corchetes correspondientes"
 
@@ -428,7 +427,6 @@ msgid ""
 msgstr "Indica si gedit debe resaltar todas las apariciones del texto buscado."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:64
-#| msgid "Whether gedit should highlight matching bracket."
 msgid "Whether gedit should highlight matching brackets."
 msgstr "Indica si gedit debe resaltar los corchetes correspondientes."
 
@@ -759,7 +757,6 @@ msgid "Highlight current _line"
 msgstr "Resaltar la _línea actual"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:13
-#| msgid "Highlight matching _bracket"
 msgid "Highlight matching _brackets"
 msgstr "Resaltar parejas de _corchetes"
 
@@ -805,7 +802,7 @@ msgid "_Autosave files every"
 msgstr "_Autoguardar archivos cada"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:24
-#: ../gedit/gedit-view.c:2040
+#: ../gedit/gedit-view.c:2042
 msgid "_Display line numbers"
 msgstr "_Mostrar números de línea"
 
@@ -1157,7 +1154,7 @@ msgstr "Documento no guardado %d"
 msgid "Read-Only"
 msgstr "Sólo lectura"
 
-#: ../gedit/gedit-documents-panel.c:794 ../gedit/gedit-window.c:3837
+#: ../gedit/gedit-documents-panel.c:794 ../gedit/gedit-window.c:3839
 msgid "Documents"
 msgstr "Documentos"
 
@@ -1277,17 +1274,17 @@ msgstr "Tailandesa"
 msgid "Unknown"
 msgstr "Desconocida"
 
-#: ../gedit/gedit-encodings-combo-box.c:281
+#: ../gedit/gedit-encodings-combo-box.c:284
 msgid "Automatically Detected"
 msgstr "Detectado automáticamente"
 
-#: ../gedit/gedit-encodings-combo-box.c:300
-#: ../gedit/gedit-encodings-combo-box.c:316
+#: ../gedit/gedit-encodings-combo-box.c:303
+#: ../gedit/gedit-encodings-combo-box.c:319
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "Configuración regional actual (%s)"
 
-#: ../gedit/gedit-encodings-combo-box.c:369
+#: ../gedit/gedit-encodings-combo-box.c:372
 msgid "Add or Remove..."
 msgstr "A_ñadir o quitar…"
 
@@ -1883,73 +1880,73 @@ msgstr "No se pudo crear el directorio «%s»: falló g_mkdir_with_parents(): %s
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:694
+#: ../gedit/gedit-tab.c:714
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "Revertiendo %s en %s"
 
-#: ../gedit/gedit-tab.c:701
+#: ../gedit/gedit-tab.c:721
 #, c-format
 msgid "Reverting %s"
 msgstr "Revertiendo %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:717
+#: ../gedit/gedit-tab.c:737
 #, c-format
 msgid "Loading %s from %s"
 msgstr "Cargando %s en %s"
 
-#: ../gedit/gedit-tab.c:724
+#: ../gedit/gedit-tab.c:744
 #, c-format
 msgid "Loading %s"
 msgstr "Cargando %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:807
+#: ../gedit/gedit-tab.c:827
 #, c-format
 msgid "Saving %s to %s"
 msgstr "Guardando %s en %s"
 
-#: ../gedit/gedit-tab.c:814
+#: ../gedit/gedit-tab.c:834
 #, c-format
 msgid "Saving %s"
 msgstr "Guardando %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1762
+#: ../gedit/gedit-tab.c:1782
 msgid "RO"
 msgstr "SL"
 
-#: ../gedit/gedit-tab.c:1809
+#: ../gedit/gedit-tab.c:1829
 #, c-format
 msgid "Error opening file %s"
 msgstr "Error al abrir el archivo %s"
 
-#: ../gedit/gedit-tab.c:1814
+#: ../gedit/gedit-tab.c:1834
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Error al revertir el archivo %s"
 
-#: ../gedit/gedit-tab.c:1819
+#: ../gedit/gedit-tab.c:1839
 #, c-format
 msgid "Error saving file %s"
 msgstr "Error al guardar el archivo %s"
 
-#: ../gedit/gedit-tab.c:1840
+#: ../gedit/gedit-tab.c:1860
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1847
+#: ../gedit/gedit-tab.c:1867
 msgid "Name:"
 msgstr "Nombre:"
 
-#: ../gedit/gedit-tab.c:1848
+#: ../gedit/gedit-tab.c:1868
 msgid "MIME Type:"
 msgstr "Tipo MIME:"
 
-#: ../gedit/gedit-tab.c:1849
+#: ../gedit/gedit-tab.c:1869
 msgid "Encoding:"
 msgstr "Codificación:"
 
@@ -2355,7 +2352,7 @@ msgstr "No se encontró el corchete coincidente"
 msgid "Bracket match found on line: %d"
 msgstr "Corchete coincidente encontrado en la línea: %d"
 
-#: ../gedit/gedit-window.c:4053
+#: ../gedit/gedit-window.c:4054
 msgid "About gedit"
 msgstr "Acerca de gedit"
 
@@ -2446,7 +2443,6 @@ msgstr "Versión para ignorar"
 
 #. This is releated to the next gedit version to be released
 #: ../plugins/checkupdate/org.gnome.gedit.checkupdate.gschema.xml.in.in.h:3
-#| msgid "Version to ignore until the next version is released"
 msgid "Version to ignore until a newer version is released."
 msgstr "Versión para ignorar hasta que se publique la próxima versión."
 
@@ -2737,111 +2733,6 @@ msgstr "Panel del examinador de archivos"
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#. ex:ts=8:noet:
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:1
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:1
-msgid "Enable Restore of Remote Locations"
-msgstr "Activar la restauración de lugares remotos"
-
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:2
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:2
-msgid "File Browser Filter Mode"
-msgstr "Modo de filtro del examinador de archivos"
-
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:3
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:3
-msgid "File Browser Filter Pattern"
-msgstr "Patrón de filtro del examinador de archivos"
-
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:4
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:4
-msgid "File Browser Root Directory"
-msgstr "Directorio raíz del examinador de archivos"
-
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:5
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:5
-msgid "File Browser Virtual Root Directory"
-msgstr "Directorio raíz virtual del examinador de archivos"
-
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:6
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:6
-msgid ""
-"If TRUE the file browser plugin will view the directory of the first opened "
-"document given that the file browser hasn't been used yet. (Thus this "
-"generally applies to opening a document from the command line or opening it "
-"with Nautilus, etc.)"
-msgstr ""
-"Si es TRUE el complemento del examinador de archivos verá el directorio del "
-"primer documento abierto dado que el examinador de archivos no se ha usado "
-"aún. (Entonces esto generalmente se aplica a abrir un documento desde la "
-"línea de comandos o abriéndolo con Nautilus, etc.)"
-
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:7
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:7
-msgid "Open With Tree View"
-msgstr "Abrir con vista de árbol"
-
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:8
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:8
-msgid ""
-"Open the tree view when the file browser plugin gets loaded instead of the "
-"bookmarks view"
-msgstr ""
-"Abrir la vista de árbol cuando el complemento del examinador de archivos se "
-"carga en vez de la vista de marcadores"
-
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:9
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:9
-msgid "Set Location to First Document"
-msgstr "Establecer lugar para el primer documento"
-
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:10
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:10
-msgid "Sets whether to enable restoring of remote locations."
-msgstr "Establece si se debe activar la restauración desde lugares remotos."
-
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:11
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:11
-msgid ""
-"The file browser root directory to use when loading the file browser plugin "
-"and onload/tree_view is TRUE."
-msgstr ""
-"El directorio raíz del examinador de archivos que usar al cargar el "
-"complemento de examinador de archivos y cuando onload/tree_view es TRUE."
-
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:12
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:12
-msgid ""
-"The file browser virtual root directory to use when loading the file browser "
-"plugin when onload/tree_view is TRUE. The virtual root must always be below "
-"the actual root."
-msgstr ""
-"El directorio virtual del examinador de archivo para usar al cargar el "
-"complemento del examinador de archivos cuando onload/tree_view es TRUE. El "
-"directorio virtual debe ser la raíz actual."
-
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:13
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:13
-msgid ""
-"The filter pattern to filter the file browser with. This filter works on top "
-"of the filter_mode."
-msgstr ""
-"El patrón de filtros con el que filtrar el examinador de archivos. Este "
-"filtro funciona por encima del filter_mode."
-
-#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:14
-#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:14
-msgid ""
-"This value determines what files get filtered from the file browser. Valid "
-"values are: none (filter nothing), hidden (filter hidden files), binary "
-"(filter binary files) and hidden_and_binary (filter both hidden and binary "
-"files)."
-msgstr ""
-"Este valor determina qué archivos se filtran del examinador de archivos. Los "
-"valores válidos son: none (no filtrar), hidden (filtrar archivos ocultos), "
-"binary (filtrar archivos binarios), y hidden_and_binay (filtrar archivos "
-"ocultos y binarios)."
-
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:556
 msgid "_Set root to active document"
 msgstr "_Establecer raíz al documento activo"
@@ -3114,6 +3005,97 @@ msgstr "No se pudo abrir el soporte: %s"
 #, c-format
 msgid "Could not mount volume: %s"
 msgstr "No se pudo abrir el volumen: %s"
+
+#. ex:ts=8:noet:
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:1
+msgid "Enable Restore of Remote Locations"
+msgstr "Activar la restauración de lugares remotos"
+
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:2
+msgid "File Browser Filter Mode"
+msgstr "Modo de filtro del examinador de archivos"
+
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:3
+msgid "File Browser Filter Pattern"
+msgstr "Patrón de filtro del examinador de archivos"
+
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:4
+msgid "File Browser Root Directory"
+msgstr "Directorio raíz del examinador de archivos"
+
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:5
+msgid "File Browser Virtual Root Directory"
+msgstr "Directorio raíz virtual del examinador de archivos"
+
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:6
+msgid ""
+"If TRUE the file browser plugin will view the directory of the first opened "
+"document given that the file browser hasn't been used yet. (Thus this "
+"generally applies to opening a document from the command line or opening it "
+"with Nautilus, etc.)"
+msgstr ""
+"Si es TRUE el complemento del examinador de archivos verá el directorio del "
+"primer documento abierto dado que el examinador de archivos no se ha usado "
+"aún. (Entonces esto generalmente se aplica a abrir un documento desde la "
+"línea de comandos o abriéndolo con Nautilus, etc.)"
+
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:7
+msgid "Open With Tree View"
+msgstr "Abrir con vista de árbol"
+
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:8
+msgid ""
+"Open the tree view when the file browser plugin gets loaded instead of the "
+"bookmarks view"
+msgstr ""
+"Abrir la vista de árbol cuando el complemento del examinador de archivos se "
+"carga en vez de la vista de marcadores"
+
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:9
+msgid "Set Location to First Document"
+msgstr "Establecer lugar para el primer documento"
+
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:10
+msgid "Sets whether to enable restoring of remote locations."
+msgstr "Establece si se debe activar la restauración desde lugares remotos."
+
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:11
+msgid ""
+"The file browser root directory to use when loading the file browser plugin "
+"and onload/tree_view is TRUE."
+msgstr ""
+"El directorio raíz del examinador de archivos que usar al cargar el "
+"complemento de examinador de archivos y cuando onload/tree_view es TRUE."
+
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:12
+msgid ""
+"The file browser virtual root directory to use when loading the file browser "
+"plugin when onload/tree_view is TRUE. The virtual root must always be below "
+"the actual root."
+msgstr ""
+"El directorio virtual del examinador de archivo para usar al cargar el "
+"complemento del examinador de archivos cuando onload/tree_view es TRUE. El "
+"directorio virtual debe ser la raíz actual."
+
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:13
+msgid ""
+"The filter pattern to filter the file browser with. This filter works on top "
+"of the filter_mode."
+msgstr ""
+"El patrón de filtros con el que filtrar el examinador de archivos. Este "
+"filtro funciona por encima del filter_mode."
+
+#: ../plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in.in.h:14
+msgid ""
+"This value determines what files get filtered from the file browser. Valid "
+"values are: none (filter nothing), hidden (filter hidden files), binary "
+"(filter binary files) and hidden_and_binary (filter both hidden and binary "
+"files)."
+msgstr ""
+"Este valor determina qué archivos se filtran del examinador de archivos. Los "
+"valores válidos son: none (no filtrar), hidden (filtrar archivos ocultos), "
+"binary (filtrar archivos binarios), y hidden_and_binay (filtrar archivos "
+"ocultos y binarios)."
 
 #: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:1
 msgid "Emacs, Kate and Vim-style modelines support for gedit."
@@ -5200,30 +5182,30 @@ msgid "Inserts current date and time at the cursor position."
 msgstr "Inserta la fecha y hora actual en la posición del cursor."
 
 #: ../plugins/time/org.gnome.gedit.time.gschema.xml.in.in.h:1
-#| msgid "_Use custom format"
 msgid "Custom Format"
 msgstr "Formato personalizado"
 
 #: ../plugins/time/org.gnome.gedit.time.gschema.xml.in.in.h:2
+#, fuzzy
+#| msgid ""
+#| "If the user should be prompted for a format of if the selected or custom "
+#| "format should be used."
 msgid ""
-"If the user should be prompted for a format of if the selected or custom "
+"If the user should be prompted for a format or if the selected or custom "
 "format should be used."
 msgstr ""
 "Indica si se debería preguntar al usuario el formato o si se debería usar el "
 "formato seleccionado o personalizado."
 
 #: ../plugins/time/org.gnome.gedit.time.gschema.xml.in.in.h:3
-#| msgid "Prompt message"
 msgid "Prompt Type"
 msgstr "Tipo de mensaje en pantalla"
 
 #: ../plugins/time/org.gnome.gedit.time.gschema.xml.in.in.h:4
-#| msgid "Selected"
 msgid "Selected Format"
 msgstr "Formato seleccionado"
 
 #: ../plugins/time/org.gnome.gedit.time.gschema.xml.in.in.h:5
-#| msgid "When inserting date/time..."
 msgid "The custom format used when inserting the date/time."
 msgstr "El formato predeterminado usado al insertar la fecha/hora."
 
