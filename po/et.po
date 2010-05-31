@@ -16,9 +16,9 @@ msgstr ""
 "Project-Id-Version: gedit MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
-"POT-Creation-Date: 2010-03-18 09:38+0000\n"
-"PO-Revision-Date: 2010-04-23 21:52+0300\n"
-"Last-Translator: Mattias Põldaru <mahfiaz gmail com>\n"
+"POT-Creation-Date: 2010-05-29 15:54+0000\n"
+"PO-Revision-Date: 2010-05-31 12:18+0300\n"
+"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,9 +64,6 @@ msgstr "Automaatse salvestuse intervall"
 msgid "Body Font for Printing"
 msgstr "Sisu kirjatüüp printimisel"
 
-msgid "Bottom Panel is Visible"
-msgstr "Alumine paneel on nähtav"
-
 msgid "Create Backup Copies"
 msgstr "Varukoopiate loomine"
 
@@ -94,7 +91,7 @@ msgstr "Päise kirjatüüp printimisel"
 msgid "Highlight Current Line"
 msgstr "Käesolev rida tõstetakse esile"
 
-msgid "Highlight Matching Bracket"
+msgid "Highlight Matching Brackets"
 msgstr "Vastavate sulgude esiletõstmine"
 
 msgid ""
@@ -144,29 +141,19 @@ msgid "Maximum Recent Files"
 msgstr "Suurim hiljutiste failide arv"
 
 msgid ""
-"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
-"\" for unlimited number of actions."
+"Maximum number of actions that gedit will be able to undo or redo. Use "
+"\"-1\" for unlimited number of actions."
 msgstr ""
 "Suurim toimingute arv, mida gedit laseb unustada või uuesti täita. Piiramatu "
 "arvu toimingute jaoks kasuta väärtust \"-1\"."
 
 msgid ""
-"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
-"\" for unlimited number of actions. Deprecated since 2.12.0"
+"Maximum number of actions that gedit will be able to undo or redo. Use "
+"\"-1\" for unlimited number of actions. Deprecated since 2.12.0"
 msgstr ""
 "Suurim toimingute arv, mida gedit laseb unustada või uuesti täita. Piiramatu "
 "arvu toimingute jaoks kasuta väärtust \"-1\". Aegunud alates versioonist "
 "2.12.0."
-
-#. Translators: This is the Editor Font.
-#. This is a Pango font
-msgid "Monospace 12"
-msgstr "Monospace 12"
-
-#. Translators: This is the Body font for printing.
-#. This is a Pango font.
-msgid "Monospace 9"
-msgstr "Monospace 9"
 
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
@@ -192,16 +179,6 @@ msgstr "Kursori eelmise asukoha taastamine"
 
 msgid "Right Margin Position"
 msgstr "Paremveerise asukoht"
-
-#. Translators: This is the Header font for printing.
-#. This is a Pango font.
-msgid "Sans 11"
-msgstr "Sans 11"
-
-#. Translators: This is the Line Number font for printing.
-#. This is a Pango font.
-msgid "Sans 8"
-msgstr "Sans 8"
 
 msgid "Side Pane is Visible"
 msgstr "Külgpaan on nähtav"
@@ -361,7 +338,7 @@ msgid ""
 "Whether gedit should highlight all the occurrences of the searched text."
 msgstr "Kas gedit peab kõiki otsitava teksi vastavusi esile tõstma."
 
-msgid "Whether gedit should highlight the bracket matching the selected one."
+msgid "Whether gedit should highlight matching brackets."
 msgstr "Kas gedit peab vastavuses olevaid sulge esile tõstma."
 
 msgid "Whether gedit should highlight the current line."
@@ -380,10 +357,6 @@ msgid ""
 "Whether gedit should restore the previous cursor position when a file is "
 "loaded."
 msgstr "Kas gedit peab faili laadimisel taastama kursori eelmise asukoha."
-
-msgid ""
-"Whether the bottom panel at the bottom of editing windows should be visible."
-msgstr "Kas redaktoriaknast allpool olev alumine paneel peab olema nähtav."
 
 msgid "Whether the side pane at the left of editing windows should be visible."
 msgstr "Kas redaktoriaknast vasakul pool olev külgpaan peab olema nähtav."
@@ -407,25 +380,6 @@ msgstr ""
 
 msgid "Writable VFS schemes"
 msgstr "Kirjutatavad VFS-skeemid"
-
-#. Translators: This is the list of encodings shown by default in the Character Encoding
-#. menu in open/save file selector. Only recognized encodings are displayed.
-msgid "[ISO-8859-15]"
-msgstr "[ISO-8859-15]"
-
-#. Translators: This is the sorted list of encodings used by gedit
-#. for automatic detection of the file encoding. You may want to customize it adding
-#. encodings that are common in your country, for instance the GB18030 encoding
-#. for the Chinese	translation. You may also want to remove the ISO-8859-15 encoding
-#. (covering English and most Western European languages) if you think people
-#. in you country will rarely use it.
-#. "CURRENT" is a magic value used by gedit and it represents the encoding
-#. for the current locale, so please don't translate the "CURRENT" term.
-#. Only recognized encodings are used.
-#. See http://svn.gnome.org/viewcvs/gedit/trunk/gedit/gedit-encodings.c?view=markup for
-#. a list of supported encodings
-msgid "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
-msgstr "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
 
 msgid "Log Out _without Saving"
 msgstr "Logi välja _ilma salvestamata"
@@ -562,6 +516,7 @@ msgstr "K_irjeldus"
 msgid "_Encoding"
 msgstr "_Kodeering"
 
+#. ex:ts=8:noet:
 msgid "A_vailable encodings:"
 msgstr "_Saadaolevad kooditabelid:"
 
@@ -600,15 +555,10 @@ msgstr "Värviskeemi \"%s\" pole võimalik eemaldada."
 msgid "gedit Preferences"
 msgstr "gedit'i eelistused"
 
+#. ex:ts=8:noet:
 #. ex:ts=4:et:
 msgid "    "
 msgstr "    "
-
-msgid "Automatic Indentation"
-msgstr "Automaatne taandamine"
-
-msgid "Bracket Matching"
-msgstr "Sulgude vastavused"
 
 msgid "Color Scheme"
 msgstr "Värviskeem"
@@ -616,12 +566,10 @@ msgstr "Värviskeem"
 msgid "Create a _backup copy of files before saving"
 msgstr "Failist tehakse enne salvestamist _varukoopia"
 
-msgid "Current Line"
-msgstr "Käesolev rida"
+msgid "Display right _margin at column:"
+msgstr "_Paremveeris on nähtaval veerus:"
 
-msgid "Display right _margin"
-msgstr "_Paremveeris on nähtaval"
-
+#. ex:ts=8:noet:
 msgid "Do not _split words over two lines"
 msgstr "Üle _kahe rea sõnu ei murta"
 
@@ -646,14 +594,14 @@ msgstr "Kirjatüübid ja värvused"
 msgid "Highlight current _line"
 msgstr "Käesolev rida tõstetakse _esile"
 
-msgid "Highlight matching _bracket"
+msgid "Highlight matching _brackets"
 msgstr "Vastavuses olevate sul_gude esiletõstmine"
+
+msgid "Highlighting"
+msgstr "Esiletõstmine"
 
 msgid "Insert _spaces instead of tabs"
 msgstr "Tabulaatorite ase_mel lisatakse tühikud"
-
-msgid "Line Numbers"
-msgstr "Reanumbrid"
 
 msgid "Pick the editor font"
 msgstr "Redaktori kirjatüübi valimine"
@@ -663,9 +611,6 @@ msgstr "Pluginad"
 
 msgid "Preferences"
 msgstr "Eelistused"
-
-msgid "Right Margin"
-msgstr "Paremveeris"
 
 msgid "Tab Stops"
 msgstr "Tabelduse sammud"
@@ -688,9 +633,6 @@ msgstr "_Reanumbrid on nähtaval"
 msgid "_Enable automatic indentation"
 msgstr "Automaatne taa_ndamine on lubatud"
 
-msgid "_Right margin at column:"
-msgstr "Paremveeris _veerule:"
-
 msgid "_Tab width:"
 msgstr "_Tabulaatori laius:"
 
@@ -709,6 +651,7 @@ msgstr "Asenda _kõik"
 msgid "_Replace"
 msgstr "_Asenda"
 
+#. ex:ts=8:noet:
 msgid "Match _entire word only"
 msgstr "Kogu sõ_na peab vastavuses olema"
 
@@ -730,8 +673,18 @@ msgstr "_Otsitav tekst:"
 msgid "_Wrap around"
 msgstr "_Lõppu (või algusese) jõudmisel otsingut ei katkestata"
 
+msgid "There was an error displaying the help."
+msgstr "Abiteabe kuvamisel tekkis viga."
+
+#, c-format
+msgid "%s: invalid encoding.\n"
+msgstr "%s: vigane kodeering.\n"
+
 msgid "Show the application's version"
 msgstr "Näita rakenduse versiooni"
+
+msgid "Display list of possible values for the encoding option"
+msgstr "Kodeerimisvaliku võimalike väärtuste nimekirja kuvamine"
 
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
@@ -741,21 +694,29 @@ msgstr "Käsurealt avatavate failidele kooditabeli seadmine"
 msgid "ENCODING"
 msgstr "KOODITABEL"
 
-msgid "Display list of possible values for the encoding option"
-msgstr "Kodeerimisvaliku võimalike väärtuste nimekirja kuvamine"
-
 msgid "Create a new top-level window in an existing instance of gedit"
 msgstr "Uue ülemise taseme akna loomine olemasolevale gedit'i instantsile"
 
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Uue dokumendi loomine olemasolevas gedit'i instantsis"
 
-msgid "[FILE...]"
-msgstr "[FAIL...]"
+msgid "Set the X geometry window size (WIDTHxHEIGHT+X+Y)"
+msgstr "Akna suuruse määramine (X-geomeetria vormingus: LAIUSxKÕRGUS+X+Y)"
 
-#, c-format
-msgid "%s: invalid encoding.\n"
-msgstr "%s: vigane kodeering.\n"
+msgid "GEOMETRY"
+msgstr "GEOMEETRIA"
+
+msgid "Open files and block process until files are closed"
+msgstr "Failide avamine ka protsessi blokkimine kuni failide sulgemiseni"
+
+msgid "Run gedit in the background"
+msgstr "Gediti käivitamine taustal"
+
+msgid "Run gedit in standalone mode"
+msgstr "Gediti käivitamine iseseisvas režiimis"
+
+msgid "[FILE...] [+LINE[:COLUMN]]"
+msgstr "[FAIL...] [+RIDA[:VEERG]]"
 
 #. Setup command line options
 msgid "- Edit text files"
@@ -790,12 +751,40 @@ msgstr "Fail \"%s\" on kirjutuskaitsega."
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Kas tahad üritada seda salvestatava failiga asendada?"
 
+msgid "Save the file using compression?"
+msgstr "Kas salvestada fail pakituna?"
+
+#, c-format
+msgid ""
+"The file \"%s\" was previously saved as plain text and will now be saved "
+"using compression."
+msgstr ""
+"Fail \"%s\" on eelnevalt salvestatud lihttekstina ja salvestatakse nüüd "
+"pakituna."
+
+msgid "_Save Using Compression"
+msgstr "Salvesta _pakituna"
+
+msgid "Save the file as plain text?"
+msgstr "Kas salvestada fail lihttekstina?"
+
+#, c-format
+msgid ""
+"The file \"%s\" was previously saved using compression and will now be saved "
+"as plain text."
+msgstr ""
+"Fail \"%s\" on eelnevalt salvestatud pakituna ja salvestatakse nüüd "
+"lihttekstina."
+
+msgid "_Save As Plain Text"
+msgstr "Salvesta _lihttekstina"
+
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Faili '%s' salvestamine…"
 
-msgid "Save As…"
-msgstr "Salvesta kui…"
+msgid "Save As"
+msgstr "Salvestamine teise nimega"
 
 #, c-format
 msgid "Reverting the document '%s'…"
@@ -1021,9 +1010,6 @@ msgstr "Mac OS Classic"
 
 msgid "Windows"
 msgstr "Windows"
-
-msgid "There was an error displaying the help."
-msgstr "Abiteabe kuvamisel tekkis viga."
 
 msgid "_Retry"
 msgstr "_Proovi uuesti"
@@ -1277,8 +1263,9 @@ msgid "Could not save the file %s."
 msgstr "Faili %s pole võimalik salvestada."
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
-#. could be interpreted as the changes he made in the document. beside "reading" is
-#. not accurate (since last load/save)
+#. * could be interpreted as the changes he made in the document. beside "reading" is
+#. * not accurate (since last load/save)
+#.
 #, c-format
 msgid "The file %s changed on disk."
 msgstr "Faili %s on kettal muudetud."
@@ -1328,13 +1315,6 @@ msgstr "_Pluginast lähemalt"
 msgid "C_onfigure Plugin"
 msgstr "Sea_dista pluginat"
 
-msgid "Cannot initialize preferences manager."
-msgstr "Eelistuste haldurit pole võimalik lähtestada."
-
-#, c-format
-msgid "Expected `%s', got `%s' for key %s"
-msgstr "Võtmele %s$3 oodatava `%s$1' asemel saadi `%s$2'"
-
 #, c-format
 msgid "File: %s"
 msgstr "Fail: %s"
@@ -1350,6 +1330,9 @@ msgstr "Kirjatüübid"
 
 msgid "He_aders and footers:"
 msgstr "Päised ja _jalused:"
+
+msgid "Line Numbers"
+msgstr "Reanumbrid"
 
 msgid "Page header"
 msgstr "Lehekülje päis"
@@ -1812,9 +1795,20 @@ msgstr "Kasutatakse tühikuid"
 msgid "Tab Width"
 msgstr "Tabulaatori laius:"
 
+msgid "Bracket match is out of range"
+msgstr "Sulgude vastavus on väljaspool lubatud vahemikku"
+
+msgid "Bracket match not found"
+msgstr "Sulgude vastavusi ei leitud"
+
+#, c-format
+msgid "Bracket match found on line: %d"
+msgstr "Sulgude vastavus leitud real %d"
+
 msgid "About gedit"
 msgstr "Geditist lähemalt"
 
+#. ex:ts=8:noet:
 msgid "Change Case"
 msgstr "Suur- ja väiketähtede muutmine"
 
@@ -1848,6 +1842,7 @@ msgstr "_Kõik sõnad suurtähega"
 msgid "Capitalize the first letter of each selected word"
 msgstr "Iga valitud sõna esitähe muutmine suurtäheks"
 
+#. ex:ts=8:noet:
 msgid "Check for latest version of gedit"
 msgstr "Viimase Gediti versiooni kontrollimine"
 
@@ -1873,8 +1868,13 @@ msgstr ""
 "Allalaadimise nupule vajutades on võimalik Gediti uus versioon alla laadida, "
 "kuid seda võib ka eirata ja oodata järgmist"
 
-msgid "Version to ignore until the next version is released"
-msgstr "Kuni järgmise versiooni väljastamiseni eiratav versioon"
+#. ex:ts=8:noet:
+msgid "Version to Ignore"
+msgstr "Eiratav versioon"
+
+#. This is releated to the next gedit version to be released
+msgid "Version to ignore until a newer version is released."
+msgstr "Kuni uuema versiooni väljastamiseni eiratav versioon"
 
 msgid ""
 "Analyzes the current document and reports the number of words, lines, "
@@ -1919,6 +1919,7 @@ msgstr "_Dokumendi statistika"
 msgid "Get statistical information on the current document"
 msgstr "Käesoleva dokumendi kohta statistiliste andmete hankimine"
 
+#. ex:ts=8:noet:
 msgid "Open a terminal in the document location"
 msgstr "Terminali avamine dokumendi kataloogis"
 
@@ -2086,82 +2087,6 @@ msgstr "Failisirvimispaan"
 msgid "File System"
 msgstr "Failisüsteem"
 
-#. ex:ts=8:noet:
-msgid "Enable Restore of Remote Locations"
-msgstr "Võrgukohtadelt taastamise lubamine"
-
-msgid "File Browser Filter Mode"
-msgstr "Failisirvija filtreerimisrežiim"
-
-msgid "File Browser Filter Pattern"
-msgstr "Failisirvija filtrimuster"
-
-msgid "File Browser Root Directory"
-msgstr "Failisirvija juurkataloog"
-
-msgid "File Browser Virtual Root Directory"
-msgstr "Failisirvija virtuaalne juurkataloog"
-
-msgid ""
-"If TRUE the file browser plugin will view the directory of the first opened "
-"document given that the file browser hasn't been used yet. (Thus this "
-"generally applies to opening a document from the command line or opening it "
-"with Nautilus, etc.)"
-msgstr ""
-"Kui märgitud, siis failisirvija plugin avab esimesena kataloogi, kus asub "
-"esimene avatud dokument, mida failisirvija pole veel kasutanud. (See leiab "
-"kasutust tavaliselt juhul, kui dokument avatakse käsurealt, Nautiluse abil "
-"või muudel sarnastel juhtudel)"
-
-msgid "Open With Tree View"
-msgstr "Avamine koos puuvaatega"
-
-msgid ""
-"Open the tree view when the file browser plugin gets loaded instead of the "
-"bookmarks view"
-msgstr ""
-"Järjehoidjate vaate asemel puuvaate avamine failisirvija plugina laadimisel"
-
-msgid "Set Location to First Document"
-msgstr "Asukoha määramine esimese dokumendi järgi"
-
-msgid "Sets whether to enable restoring of remote locations."
-msgstr "Kas võrgus asuvatelt kohtadelt taastamine on lubatud või mitte."
-
-msgid ""
-"The file browser root directory to use when loading the file browser plugin "
-"and onload/tree_view is TRUE."
-msgstr ""
-"Failisirvija juurkataloog, mida kasutatakse failisirvija laadimise ajal "
-"juhul, kui võtmed onload/tree_view on märgitud."
-
-msgid ""
-"The file browser virtual root directory to use when loading the file browser "
-"plugin when onload/tree_view is TRUE. The virtual root must always be below "
-"the actual root."
-msgstr ""
-"Failisirvija virtuaalne juurkataloog, mida kasutatakse failisirvija "
-"laadimise ajal juhul, kui võtmed onload/tree_view on märgitud. Virtuaalne "
-"juurkataloog peab alati kuuluma tegeliku juurkataloogi alla."
-
-msgid ""
-"The filter pattern to filter the file browser with. This filter works on top "
-"of the filter_mode."
-msgstr ""
-"Failisirvija filtri muster. See seda filtrit kasutatakse koos filter_mode "
-"võtmes määratud režiimiga."
-
-msgid ""
-"This value determines what files get filtered from the file browser. Valid "
-"values are: none (filter nothing), hidden (filter hidden files), binary "
-"(filter binary files) and hidden_and_binary (filter both hidden and binary "
-"files)."
-msgstr ""
-"Selle väärtusega määratakse, millised failid sirvijas välja filtreeritakse. "
-"Võimalikud väärtused on: none (ei filtreerita midagi), hidden "
-"(filtreeritakse peidetud failid), binary (filtreeritakse binaarfailid) ja "
-"hidden_and_binary (filtreeritakse nii peidetud kui ka binaarfailid)."
-
 msgid "_Set root to active document"
 msgstr "_Määra juurikas aktiivseks kataloogiks"
 
@@ -2229,7 +2154,7 @@ msgid "(Empty)"
 msgstr "(Tühi)"
 
 msgid ""
-"The renamed file is currently filtered out. You need to adjust your filter "
+"The renamed file is currently filtered out.You need to adjust your filter "
 "settings to make the file visible"
 msgstr ""
 "Ümber nimetatud fail on hetkel välja filtreeritud. Selle nähtavaletoomiseks "
@@ -2370,6 +2295,81 @@ msgid "Could not mount volume: %s"
 msgstr "Ketast pole võimalik haakida: %s"
 
 #. ex:ts=8:noet:
+msgid "Enable Restore of Remote Locations"
+msgstr "Võrgukohtadelt taastamise lubamine"
+
+msgid "File Browser Filter Mode"
+msgstr "Failisirvija filtreerimisrežiim"
+
+msgid "File Browser Filter Pattern"
+msgstr "Failisirvija filtrimuster"
+
+msgid "File Browser Root Directory"
+msgstr "Failisirvija juurkataloog"
+
+msgid "File Browser Virtual Root Directory"
+msgstr "Failisirvija virtuaalne juurkataloog"
+
+msgid ""
+"If TRUE the file browser plugin will view the directory of the first opened "
+"document given that the file browser hasn't been used yet. (Thus this "
+"generally applies to opening a document from the command line or opening it "
+"with Nautilus, etc.)"
+msgstr ""
+"Kui märgitud, siis failisirvija plugin avab esimesena kataloogi, kus asub "
+"esimene avatud dokument, mida failisirvija pole veel kasutanud. (See leiab "
+"kasutust tavaliselt juhul, kui dokument avatakse käsurealt, Nautiluse abil "
+"või muudel sarnastel juhtudel)"
+
+msgid "Open With Tree View"
+msgstr "Avamine koos puuvaatega"
+
+msgid ""
+"Open the tree view when the file browser plugin gets loaded instead of the "
+"bookmarks view"
+msgstr ""
+"Järjehoidjate vaate asemel puuvaate avamine failisirvija plugina laadimisel"
+
+msgid "Set Location to First Document"
+msgstr "Asukoha määramine esimese dokumendi järgi"
+
+msgid "Sets whether to enable restoring of remote locations."
+msgstr "Kas võrgus asuvatelt kohtadelt taastamine on lubatud või mitte."
+
+msgid ""
+"The file browser root directory to use when loading the file browser plugin "
+"and onload/tree_view is TRUE."
+msgstr ""
+"Failisirvija juurkataloog, mida kasutatakse failisirvija laadimise ajal "
+"juhul, kui võtmed onload/tree_view on märgitud."
+
+msgid ""
+"The file browser virtual root directory to use when loading the file browser "
+"plugin when onload/tree_view is TRUE. The virtual root must always be below "
+"the actual root."
+msgstr ""
+"Failisirvija virtuaalne juurkataloog, mida kasutatakse failisirvija "
+"laadimise ajal juhul, kui võtmed onload/tree_view on märgitud. Virtuaalne "
+"juurkataloog peab alati kuuluma tegeliku juurkataloogi alla."
+
+msgid ""
+"The filter pattern to filter the file browser with. This filter works on top "
+"of the filter_mode."
+msgstr ""
+"Failisirvija filtri muster. See seda filtrit kasutatakse koos filter_mode "
+"võtmes määratud režiimiga."
+
+msgid ""
+"This value determines what files get filtered from the file browser. Valid "
+"values are: none (filter nothing), hidden (filter hidden files), binary "
+"(filter binary files) and hidden_and_binary (filter both hidden and binary "
+"files)."
+msgstr ""
+"Selle väärtusega määratakse, millised failid sirvijas välja filtreeritakse. "
+"Võimalikud väärtused on: none (ei filtreerita midagi), hidden "
+"(filtreeritakse peidetud failid), binary (filtreeritakse binaarfailid) ja "
+"hidden_and_binary (filtreeritakse nii peidetud kui ka binaarfailid)."
+
 msgid "Emacs, Kate and Vim-style modelines support for gedit."
 msgstr "Emacsi, Kate'i ja Vim'ilaadsed režiimiread geditile."
 
@@ -2573,6 +2573,7 @@ msgstr "S_ordi..."
 msgid "Sort the current document or selection"
 msgstr "Käesoleva dokumendi või valiku sortimine."
 
+#. ex:ts=8:noet:
 msgid "Sort"
 msgstr "Sortimine"
 
@@ -2672,8 +2673,8 @@ msgstr "_Määra keel..."
 msgid "Set the language of the current document"
 msgstr "Käesolevale dokumendile keele määramine"
 
-msgid "_Autocheck Spelling"
-msgstr "_Automaatne õigekirjakontroll"
+msgid "_Highlight Misspelled Words"
+msgstr "_Probleemsete sõnade esiletõstmine"
 
 msgid "Automatically spell-check the current document"
 msgstr "Käesoleva dokumendi automaatne õigekirjakontroll"
@@ -2684,6 +2685,7 @@ msgstr "Dokument on tühi."
 msgid "No misspelled words"
 msgstr "Probleemseid sõnu pole"
 
+#. ex:ts=8:noet:
 msgid "Select the _language of the current document."
 msgstr "_Vali käesoleva dokumendi keel."
 
@@ -2747,6 +2749,7 @@ msgstr "_Eelvaade"
 msgid "Available Tag Lists"
 msgstr "Saadaolevate siltide loetelu"
 
+#. ex:ts=8:noet:
 msgid "Abbreviated form"
 msgstr "Lühendatud vorm"
 
@@ -3065,17 +3068,17 @@ msgstr "Üldine ulatus"
 msgid "HREF URI"
 msgstr "HREF URI"
 
-msgid "HTML - Special Characters"
-msgstr "HTML - erimärgid"
-
-msgid "HTML - Tags"
-msgstr "HTML - sildid"
-
 msgid "HTML root element"
 msgstr "HTML juurelement"
 
 msgid "HTML version"
 msgstr "HTML versioon"
+
+msgid "HTML — Special Characters"
+msgstr "HTML — erimärgid"
+
+msgid "HTML — Tags"
+msgstr "HTML — sildid"
 
 msgid "HTTP header name"
 msgstr "HTTP päise nimi"
@@ -3117,7 +3120,6 @@ msgstr "Horisontaalne ruum"
 msgid "Horizontal space (deprecated)"
 msgstr "Horisontaalne ruum (aegunud)"
 
-#, fuzzy
 msgid "I18N BiDi override"
 msgstr "Teksti suuna kohalik muutus"
 
@@ -3560,17 +3562,17 @@ msgstr "Tabeli rida"
 msgid "Table summary"
 msgstr "Tabeli kokkuvõte"
 
-msgid "Target - Blank"
-msgstr "Sihtkoht - tühi"
+msgid "Target — Blank"
+msgstr "Sihtkoht — tühi"
 
-msgid "Target - Parent"
-msgstr "Sihtkoht - vanem"
+msgid "Target — Parent"
+msgstr "Sihtkoht — vanem"
 
-msgid "Target - Self"
-msgstr "Sihtkoht - ise"
+msgid "Target — Self"
+msgstr "Sihtkoht — ise"
 
-msgid "Target - Top"
-msgstr "Sihtkoht - kõige ülemine"
+msgid "Target — Top"
+msgstr "Sihtkoht — kõige ülemine"
 
 msgid "Teletype or monospace text style"
 msgstr "Fikseeritud laiusega tekst"
@@ -3635,8 +3637,8 @@ msgstr "Külastatud viida värvus (aegunud)"
 msgid "Width"
 msgstr "Kõrgus"
 
-msgid "XHTML 1.0 - Tags"
-msgstr "XHTML 1.0 - sildid"
+msgid "XHTML 1.0 — Tags"
+msgstr "XHTML 1.0 — sildid"
 
 msgid "Bibliography (cite)"
 msgstr "Bibliograafia (tsitaat)"
@@ -3743,8 +3745,8 @@ msgstr "Kirje"
 msgid "Item with label"
 msgstr "Kirje koos sildiga"
 
-msgid "Latex - Tags"
-msgstr "Latex - sildid"
+msgid "Latex — Tags"
+msgstr "Latex — sildid"
 
 msgid "List description"
 msgstr "Loendi kirjeldus"
@@ -3812,13 +3814,11 @@ msgstr "Teist järku osatuletis aja järgi"
 msgid "Symbol dagger"
 msgstr "Ristviite või allmärkuse tähistus"
 
-#, fuzzy
 msgid "Symbol em-dash ---"
-msgstr "M-kriips ---"
+msgstr "Pikk mõttekriips ---"
 
-#, fuzzy
 msgid "Symbol en-dash --"
-msgstr "N-kriips --"
+msgstr "Mõttekriips --"
 
 msgid "Symbol equiv"
 msgstr "Võrdusmärk"
@@ -3869,14 +3869,14 @@ msgstr ""
 msgid "Tag list"
 msgstr "Siltide loetelu"
 
-msgid "XSLT - Axes"
-msgstr "XSLT - sugulased"
+msgid "XSLT — Axes"
+msgstr "XSLT — sugulased"
 
-msgid "XSLT - Elements"
-msgstr "XSLT - elemendid"
+msgid "XSLT — Elements"
+msgstr "XSLT — elemendid"
 
-msgid "XSLT - Functions"
-msgstr "XSLT - funktsioonid"
+msgid "XSLT — Functions"
+msgstr "XSLT — funktsioonid"
 
 msgid "ancestor"
 msgstr "vanem"
@@ -3917,8 +3917,8 @@ msgstr "eelnev-järglane"
 msgid "self"
 msgstr "ise"
 
-msgid "XUL - Tags"
-msgstr "XUL - sildid"
+msgid "XUL — Tags"
+msgstr "XUL — sildid"
 
 msgid "In_sert Date and Time..."
 msgstr "Lisa kuupäev/kellaae_g..."
@@ -3932,16 +3932,39 @@ msgstr "Saadaval vormingud"
 msgid "Configure insert date/time plugin..."
 msgstr "\"Kuupäeva/kellaaja\" plugina seadistamine..."
 
+#. ex:ts=8:noet:
 msgid "Insert Date/Time"
 msgstr "Kuupäeva/kellaaja lisamine"
 
 msgid "Inserts current date and time at the cursor position."
 msgstr "Praeguse kuupäeva ja kellaaaja lisamine kursori asukohta."
 
+msgid "Custom Format"
+msgstr "Kohandatud vorming"
+
+msgid ""
+"If the user should be prompted for a format or if the selected or custom "
+"format should be used."
+msgstr ""
+"Kas kohandatud või valitud vormingu kasutamisel tuleb kasutaja käest "
+"kinnitust küsida."
+
+msgid "Prompt Type"
+msgstr "Viiba liik"
+
+msgid "Selected Format"
+msgstr "Valitud vorming"
+
+msgid "The custom format used when inserting the date/time."
+msgstr "Kuupäeva ja kellaaja sisestamisel kasutatav kohandatud vorming."
+
+msgid "The selected format used when inserting the date/time."
+msgstr "Kuupäeva ja kellaaja lisamiseks kasutatav valitud vorming."
+
 #. Translators: Use the more common date format in your locale
 #, no-c-format
 msgid "%d/%m/%Y %H:%M:%S"
-msgstr ""
+msgstr "%d.%m.%Y %H:%M:%S"
 
 #. Translators: This example should follow the date format defined in the entry above
 msgid "01/11/2009 17:52:00"
@@ -3967,3 +3990,36 @@ msgstr "\"Kuupäeva/kellaaja\" sisestamisel..."
 
 msgid "_Prompt for a format"
 msgstr "_Küsitakse vormingut"
+
+#~ msgid "Bottom Panel is Visible"
+#~ msgstr "Alumine paneel on nähtav"
+
+#~ msgid ""
+#~ "Whether gedit should highlight the bracket matching the selected one."
+#~ msgstr "Kas gedit peab vastavuses olevaid sulge esile tõstma."
+
+#~ msgid ""
+#~ "Whether the bottom panel at the bottom of editing windows should be "
+#~ "visible."
+#~ msgstr "Kas redaktoriaknast allpool olev alumine paneel peab olema nähtav."
+
+#~ msgid "Automatic Indentation"
+#~ msgstr "Automaatne taandamine"
+
+#~ msgid "Current Line"
+#~ msgstr "Käesolev rida"
+
+#~ msgid "Right Margin"
+#~ msgstr "Paremveeris"
+
+#~ msgid "_Right margin at column:"
+#~ msgstr "Paremveeris _veerule:"
+
+#~ msgid "Cannot initialize preferences manager."
+#~ msgstr "Eelistuste haldurit pole võimalik lähtestada."
+
+#~ msgid "Expected `%s', got `%s' for key %s"
+#~ msgstr "Võtmele %s$3 oodatava `%s$1' asemel saadi `%s$2'"
+
+#~ msgid "_Autocheck Spelling"
+#~ msgstr "_Automaatne õigekirjakontroll"
