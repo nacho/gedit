@@ -497,14 +497,18 @@ AC_ARG_ENABLE(deprecations,
               [enable_deprecations=$enableval], [])
 
 if test "$enable_deprecations" = "yes"; then
-   DISABLE_DEPRECATED_CFLAGS="\
--DGSEAL_ENABLE \
+	DISABLE_DEPRECATED_CFLAGS="\
 -DG_DISABLE_DEPRECATED \
 -DGDK_DISABLE_DEPRECATED \
 -DGTK_DISABLE_DEPRECATED \
 -DGDK_PIXBUF_DISABLE_DEPRECATED \
 -DGNOME_DISABLE_DEPRECATED"
-   AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
+
+	if $PKG_CONFIG --atleast-version 2.90 $GTK_REQUIRED; then
+		DISABLE_DEPRECATED_CFLAGS="$DISABLE_DEPRECATED_CFLAGS -DGSEAL_ENABLE"
+	fi
+
+	AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
 fi
 
 # on win32 plugins must be able to resolve all symbols at link time
