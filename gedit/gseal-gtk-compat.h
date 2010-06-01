@@ -33,6 +33,7 @@ G_BEGIN_DECLS
 			gtk_im_context_reset (view->im_context); \
 		} \
 	} G_STMT_END
+#define gdk_drag_context_get_suggested_action(context) ((context)->suggested_action)
 #endif /* GTK < 2.22.0 */
 
 #if !GTK_CHECK_VERSION (2, 20, 0)
