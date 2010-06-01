@@ -415,6 +415,18 @@ gedit_document_set_property (GObject      *object,
 
 	switch (prop_id)
 	{
+		case PROP_LOCATION:
+			gedit_document_set_location (doc,
+			                             g_value_get_object (value));
+			break;
+		case PROP_SHORTNAME:
+			gedit_document_set_short_name_for_display (doc,
+			                                           g_value_get_string (value));
+			break;
+		case PROP_CONTENT_TYPE:
+			gedit_document_set_content_type (doc,
+			                                 g_value_get_string (value));
+			break;
 		case PROP_ENABLE_SEARCH_HIGHLIGHTING:
 			gedit_document_set_enable_search_highlighting (doc,
 								       g_value_get_boolean (value));
@@ -426,14 +438,6 @@ gedit_document_set_property (GObject      *object,
 		case PROP_COMPRESSION_TYPE:
 			set_compression_type (doc,
 			                      g_value_get_enum (value));
-			break;
-		case PROP_SHORTNAME:
-			gedit_document_set_short_name_for_display (doc,
-			                                           g_value_get_string (value));
-			break;
-		case PROP_CONTENT_TYPE:
-			gedit_document_set_content_type (doc,
-			                                 g_value_get_string (value));
 			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -502,7 +506,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 							      "LOCATION",
 							      "The document's location",
 							      G_TYPE_FILE,
-							      G_PARAM_READABLE |
+							      G_PARAM_READWRITE |
 							      G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class, PROP_SHORTNAME,
