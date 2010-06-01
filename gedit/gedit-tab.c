@@ -1084,9 +1084,6 @@ document_loaded (GeditDocument *document,
 			    	    g_file_equal (location, loc))
 			    	{
 			    		GtkWidget *w;
-			    		GeditView *view;
-
-			    		view = gedit_tab_get_view (tab);
 
 			    		tab->priv->not_editable = TRUE;
 
