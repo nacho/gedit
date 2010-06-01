@@ -153,9 +153,9 @@ try_convert (GCharsetConverter *converter,
 	do
 	{
 		res = g_converter_convert (G_CONVERTER (converter),
-		                           inbuf + nread,
+		                           (gchar *)inbuf + nread,
 		                           inbuf_size - nread,
-		                           out + nwritten,
+		                           (gchar *)out + nwritten,
 		                           out_size - nwritten,
 		                           G_CONVERTER_INPUT_AT_END,
 		                           &bytes_read,
@@ -292,10 +292,10 @@ guess_encoding (GeditSmartCharsetConverter *smart,
 }
 
 static GConverterResult
-gedit_smart_charset_converter_convert (GConverter      *converter,
-				       const void      *inbuf,
-				       gsize            inbuf_size,
-				       void            *outbuf,
+gedit_smart_charset_converter_convert (GConverter       *converter,
+				       const void       *inbuf,
+				       gsize             inbuf_size,
+				       void             *outbuf,
 				       gsize             outbuf_size,
 				       GConverterFlags   flags,
 				       gsize            *bytes_read,

@@ -414,9 +414,9 @@ gedit_document_input_stream_read (GInputStream  *stream,
 	{
 		gtk_text_buffer_get_start_iter (dstream->priv->buffer, &iter);
 		dstream->priv->pos = gtk_text_buffer_create_mark (dstream->priv->buffer,
-								 NULL,
-								 &iter,
-								 FALSE);
+								  NULL,
+								  &iter,
+								  FALSE);
 
 		dstream->priv->is_initialized = TRUE;
 	}
@@ -426,7 +426,7 @@ gedit_document_input_stream_read (GInputStream  *stream,
 
 	do
 	{
-		n = read_line (dstream, buffer + read, space_left);
+		n = read_line (dstream, (gchar *)buffer + read, space_left);
 		read += n;
 		space_left -= n;
 	} while (space_left > 0 && n != 0 && dstream->priv->bytes_partial == 0);
@@ -451,7 +451,7 @@ gedit_document_input_stream_read (GInputStream  *stream,
 
 			newline = get_new_line (dstream);
 
-			memcpy (buffer + read, newline, newline_size);
+			memcpy ((gchar *)buffer + read, newline, newline_size);
 
 			read += newline_size;
 			dstream->priv->newline_added = TRUE;

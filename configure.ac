@@ -483,7 +483,7 @@ dnl ================================================================
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
 
-GNOME_COMPILE_WARNINGS(yes)
+GNOME_COMPILE_WARNINGS([maximum])
 
 if test "$USE_MAINTAINER_MODE" = "yes"; then
 	enable_deprecations=yes
