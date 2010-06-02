@@ -896,12 +896,17 @@ remove_tab (GeditTab      *tab,
 	    GeditNotebook *nb)
 {
 	gint position;
+	gint num_pages;
 
 	position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), GTK_WIDGET (tab));
 
 	remove_tab_label (nb, tab);
+	num_pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (nb));
 	gtk_notebook_remove_page (GTK_NOTEBOOK (nb), position);
-	update_tabs_visibility (nb, FALSE);
+
+	/* If there is no tabs, calling this is pointless */
+	if (--num_pages > 0)
+		update_tabs_visibility (nb, FALSE);
 }
 
 /**
