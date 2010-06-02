@@ -103,6 +103,7 @@ NOINST_H_FILES =			\
 	gedit-history-entry.h		\
 	gedit-io-error-message-area.h	\
 	gedit-language-manager.h	\
+	gedit-multi-notebook.h		\
 	gedit-object-module.h		\
 	gedit-plugin-info.h		\
 	gedit-plugin-info-priv.h	\
@@ -182,6 +183,7 @@ libgedit_la_SOURCES = 			\
 	gedit-message-bus.c		\
 	gedit-message-type.c		\
 	gedit-message.c			\
+	gedit-multi-notebook.c		\
 	gedit-object-module.c		\
 	gedit-notebook.c		\
 	gedit-panel.c			\

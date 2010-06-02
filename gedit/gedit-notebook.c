@@ -841,6 +841,7 @@ gedit_notebook_add_tab (GeditNotebook *nb,
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 
 	tab_label = create_tab_label (nb, tab);
+
 	gtk_notebook_insert_page (GTK_NOTEBOOK (nb), 
 				  GTK_WIDGET (tab),
 				  tab_label,

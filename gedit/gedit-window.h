@@ -87,9 +87,9 @@ struct _GeditWindowClass
 	
 	/* Signals */
 	void	 (* tab_added)      	(GeditWindow *window,
-				     	 GeditTab    *tab);
+					 GeditTab    *tab);
 	void	 (* tab_removed)    	(GeditWindow *window,
-				     	 GeditTab    *tab);
+					 GeditTab    *tab);
 	void	 (* tabs_reordered) 	(GeditWindow *window);
 	void	 (* active_tab_changed)	(GeditWindow *window,
 				     	 GeditTab    *tab);

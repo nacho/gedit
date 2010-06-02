@@ -38,7 +38,9 @@
 
 #include "gedit-commands.h"
 #include "gedit-window.h"
+#include "gedit-window-private.h"
 #include "gedit-notebook.h"
+#include "gedit-multi-notebook.h"
 #include "gedit-debug.h"
 
 void
@@ -84,6 +86,28 @@ _gedit_cmd_documents_move_to_new_window (GtkAction   *action,
 	g_return_if_fail (gtk_notebook_get_n_pages (GTK_NOTEBOOK (old_notebook)) > 1);
 
 	_gedit_window_move_tab_to_new_window (window, tab);
+}
+
+/* Methods releated with the tab groups */
+void
+_gedit_cmd_documents_new_tab_group (GtkAction   *action,
+				    GeditWindow *window)
+{
+	gedit_multi_notebook_add_new_notebook (window->priv->multi_notebook);
+}
+
+void
+_gedit_cmd_documents_previous_tab_group (GtkAction   *action,
+					 GeditWindow *window)
+{
+	gedit_multi_notebook_previous_notebook (window->priv->multi_notebook);
+}
+
+void
+_gedit_cmd_documents_next_tab_group (GtkAction   *action,
+				     GeditWindow *window)
+{
+	gedit_multi_notebook_next_notebook (window->priv->multi_notebook);
 }
 
 /* ex:ts=8:noet: */

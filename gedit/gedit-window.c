@@ -44,6 +44,7 @@
 #include "gedit-window-private.h"
 #include "gedit-app.h"
 #include "gedit-notebook.h"
+#include "gedit-multi-notebook.h"
 #include "gedit-statusbar.h"
 #include "gedit-utils.h"
 #include "gedit-commands.h"
@@ -57,6 +58,7 @@
 #include "gedit-status-combo-box.h"
 #include "gseal-gtk-compat.h"
 #include "gedit-settings.h"
+#include "gedit-marshal.h"
 
 #ifdef OS_OSX
 #include "osx/gedit-osx.h"
@@ -437,7 +439,7 @@ gedit_window_key_press_event (GtkWidget   *widget,
 
 static void
 gedit_window_tab_removed (GeditWindow *window,
-			  GeditTab    *tab) 
+			  GeditTab    *tab)
 {
 	gedit_plugins_engine_garbage_collect (gedit_plugins_engine_get_default ());
 }
@@ -464,7 +466,7 @@ gedit_window_class_init (GeditWindowClass *klass)
 #endif
 
 	signals[TAB_ADDED] =
-		g_signal_new ("tab_added",
+		g_signal_new ("tab-added",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_FIRST,
 			      G_STRUCT_OFFSET (GeditWindowClass, tab_added),
@@ -474,7 +476,7 @@ gedit_window_class_init (GeditWindowClass *klass)
 			      1,
 			      GEDIT_TYPE_TAB);
 	signals[TAB_REMOVED] =
-		g_signal_new ("tab_removed",
+		g_signal_new ("tab-removed",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_FIRST,
 			      G_STRUCT_OFFSET (GeditWindowClass, tab_removed),
@@ -484,7 +486,7 @@ gedit_window_class_init (GeditWindowClass *klass)
 			      1,
 			      GEDIT_TYPE_TAB);
 	signals[TABS_REORDERED] =
-		g_signal_new ("tabs_reordered",
+		g_signal_new ("tabs-reordered",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_FIRST,
 			      G_STRUCT_OFFSET (GeditWindowClass, tabs_reordered),
@@ -493,7 +495,7 @@ gedit_window_class_init (GeditWindowClass *klass)
 			      G_TYPE_NONE,
 			      0);
 	signals[ACTIVE_TAB_CHANGED] =
-		g_signal_new ("active_tab_changed",
+		g_signal_new ("active-tab-changed",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_FIRST,
 			      G_STRUCT_OFFSET (GeditWindowClass, active_tab_changed),
@@ -503,7 +505,7 @@ gedit_window_class_init (GeditWindowClass *klass)
 			      1,
 			      GEDIT_TYPE_TAB);
 	signals[ACTIVE_TAB_STATE_CHANGED] =
-		g_signal_new ("active_tab_state_changed",
+		g_signal_new ("active-tab-state-changed",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_FIRST,
 			      G_STRUCT_OFFSET (GeditWindowClass, active_tab_state_changed),
@@ -675,14 +677,15 @@ static void
 update_next_prev_doc_sensitivity (GeditWindow *window,
 				  GeditTab    *tab)
 {
+	GeditNotebook *notebook;
 	gint tab_number;
-	GtkWidget *notebook;
 	GtkAction *action;
 
 	gedit_debug (DEBUG_WINDOW);
 
-	notebook = _gedit_window_get_notebook (window);
+	notebook = gedit_multi_notebook_get_active_notebook (window->priv->multi_notebook);
 	tab_number = gtk_notebook_page_num (GTK_NOTEBOOK (notebook), GTK_WIDGET (tab));
+
 	g_return_if_fail (tab_number >= 0);
 
 	action = gtk_action_group_get_action (window->priv->action_group,
@@ -706,8 +709,7 @@ update_next_prev_doc_sensitivity_per_window (GeditWindow *window)
 	tab = gedit_window_get_active_tab (window);
 	if (tab != NULL)
 	{
-		update_next_prev_doc_sensitivity (window,
-						  tab);
+		update_next_prev_doc_sensitivity (window, tab);
 
 		return;
 	}
@@ -1789,7 +1791,7 @@ documents_list_menu_activate (GtkToggleAction *action,
 		return;
 
 	n = gtk_radio_action_get_current_value (GTK_RADIO_ACTION (action));
-	gtk_notebook_set_current_page (GTK_NOTEBOOK (window->priv->notebook), n);
+	gedit_multi_notebook_set_current_page (window->priv->multi_notebook, n);
 }
 
 static gchar *
@@ -1818,7 +1820,7 @@ update_documents_list_menu (GeditWindow *window)
 {
 	GeditWindowPrivate *p = window->priv;
 	GList *actions, *l;
-	gint n, i;
+	gint n_notebooks, n_nb, n, i;
 	guint id;
 	GSList *group = NULL;
 
@@ -1838,83 +1840,135 @@ update_documents_list_menu (GeditWindow *window)
 		g_signal_handlers_disconnect_by_func (GTK_ACTION (l->data),
 						      G_CALLBACK (documents_list_menu_activate),
 						      window);
- 		gtk_action_group_remove_action (p->documents_list_action_group,
+		gtk_action_group_remove_action (p->documents_list_action_group,
 						GTK_ACTION (l->data));
 	}
 	g_list_free (actions);
 
-	n = gtk_notebook_get_n_pages (GTK_NOTEBOOK (p->notebook));
+	n = gtk_notebook_get_n_pages (GTK_NOTEBOOK (
+		gedit_multi_notebook_get_active_notebook (p->multi_notebook)));
 
 	id = (n > 0) ? gtk_ui_manager_new_merge_id (p->manager) : 0;
 
-	for (i = 0; i < n; i++)
+	n_notebooks = gedit_multi_notebook_get_n_notebooks (p->multi_notebook);
+
+	i = 0;
+	n_nb = 0;
+	while (n_nb < n_notebooks)
 	{
-		GtkWidget *tab;
-		GtkRadioAction *action;
-		gchar *action_name;
-		gchar *tab_name;
-		gchar *name;
-		gchar *tip;
-		gchar *accel;
+		GeditNotebook *notebook = gedit_multi_notebook_get_nth_notebook (p->multi_notebook, n_nb);
+		gint j;
 
-		tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (p->notebook), i);
+		n = gtk_notebook_get_n_pages (GTK_NOTEBOOK (notebook));
 
-		/* NOTE: the action is associated to the position of the tab in
-		 * the notebook not to the tab itself! This is needed to work
-		 * around the gtk+ bug #170727: gtk leaves around the accels
-		 * of the action. Since the accel depends on the tab position
-		 * the problem is worked around, action with the same name always
-		 * get the same accel.
-		 */
-		action_name = g_strdup_printf ("Tab_%d", i);
-		tab_name = _gedit_tab_get_name (GEDIT_TAB (tab));
-		name = gedit_utils_escape_underscores (tab_name, -1);
-		tip =  get_menu_tip_for_tab (GEDIT_TAB (tab));
+		for (j = 0; j < n; j++, i++)
+		{
+			GtkWidget *tab;
+			GtkRadioAction *action;
+			gchar *action_name;
+			gchar *tab_name;
+			gchar *name;
+			gchar *tip;
 
-		/* alt + 1, 2, 3... 0 to switch to the first ten tabs */
-		accel = (i < 10) ? g_strdup_printf ("<alt>%d", (i + 1) % 10) : NULL;
+			tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), j);
 
-		action = gtk_radio_action_new (action_name,
-					       name,
-					       tip,
-					       NULL,
-					       i);
+			/* NOTE: the action is associated to the position of the tab in
+			 * the notebook not to the tab itself! This is needed to work
+			 * around the gtk+ bug #170727: gtk leaves around the accels
+			 * of the action. Since the accel depends on the tab position
+			 * the problem is worked around, action with the same name always
+			 * get the same accel.
+			 */
+			action_name = g_strdup_printf ("Tab_%d", i);
+			tab_name = _gedit_tab_get_name (GEDIT_TAB (tab));
+			name = gedit_utils_escape_underscores (tab_name, -1);
+			tip =  get_menu_tip_for_tab (GEDIT_TAB (tab));
 
-		if (group != NULL)
-			gtk_radio_action_set_group (action, group);
+			action = gtk_radio_action_new (action_name,
+						       name,
+						       tip,
+						       NULL,
+						       i);
 
-		/* note that group changes each time we add an action, so it must be updated */
-		group = gtk_radio_action_get_group (action);
+			if (group != NULL)
+				gtk_radio_action_set_group (action, group);
 
-		gtk_action_group_add_action_with_accel (p->documents_list_action_group,
-							GTK_ACTION (action),
-							accel);
+			/* note that group changes each time we add an action, so it must be updated */
+			group = gtk_radio_action_get_group (action);
 
-		g_signal_connect (action,
-				  "activate",
-				  G_CALLBACK (documents_list_menu_activate),
-				  window);
+			/* alt + 1, 2, 3... 0 to switch to the first ten tabs */
+			if (notebook == gedit_multi_notebook_get_active_notebook (p->multi_notebook))
+			{
+				gchar *accel;
 
-		gtk_ui_manager_add_ui (p->manager,
-				       id,
-				       "/MenuBar/DocumentsMenu/DocumentsListPlaceholder",
-				       action_name, action_name,
-				       GTK_UI_MANAGER_MENUITEM,
-				       FALSE);
+				accel = (j < 10) ? g_strdup_printf ("<alt>%d", (j + 1) % 10) : NULL;
 
-		if (GEDIT_TAB (tab) == p->active_tab)
-			gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
+				gtk_action_group_add_action_with_accel (p->documents_list_action_group,
+									GTK_ACTION (action),
+									accel);
+				g_free (accel);
+			}
+			else
+			{
+				gtk_action_group_add_action (p->documents_list_action_group,
+							     GTK_ACTION (action));
+			}
 
-		g_object_unref (action);
+			g_signal_connect (action,
+					  "activate",
+					  G_CALLBACK (documents_list_menu_activate),
+					  window);
 
-		g_free (action_name);
-		g_free (tab_name);
-		g_free (name);
-		g_free (tip);
-		g_free (accel);
+			gtk_ui_manager_add_ui (p->manager,
+					       id,
+					       "/MenuBar/DocumentsMenu/DocumentsListPlaceholder",
+					       action_name, action_name,
+					       GTK_UI_MANAGER_MENUITEM,
+					       FALSE);
+
+			if (GEDIT_TAB (tab) == p->active_tab)
+				gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
+
+			g_object_unref (action);
+
+			g_free (action_name);
+			g_free (tab_name);
+			g_free (name);
+			g_free (tip);
+		}
+
+		n_nb++;
 	}
 
 	p->documents_list_menu_ui_id = id;
+}
+
+static void
+activate_documents_list_item (GeditWindow *window,
+			      GeditTab    *tab)
+{
+	GtkAction *action;
+	gchar *action_name;
+	gint page_num;
+
+	page_num = gedit_multi_notebook_get_page_num (window->priv->multi_notebook,
+						      tab);
+
+	/* get the action name related with the page number */
+	action_name = g_strdup_printf ("Tab_%d", page_num);
+	action = gtk_action_group_get_action (window->priv->documents_list_action_group,
+					      action_name);
+
+	/* sometimes the action doesn't exist yet, and the proper action
+	 * is set active during the documents list menu creation
+	 * CHECK: would it be nicer if active_tab was a property and we monitored the notify signal?
+	 */
+	if (action != NULL)
+	{
+		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
+	}
+
+	g_free (action_name);
 }
 
 /* Returns TRUE if status bar is visible */
@@ -2561,24 +2615,13 @@ language_changed (GObject     *object,
 }
 
 static void 
-notebook_switch_page (GtkNotebook     *book, 
-		      GtkNotebookPage *pg,
-		      gint             page_num, 
-		      GeditWindow     *window)
+active_tab_changed (GeditMultiNotebook *multi,
+		    GParamSpec         *pspec,
+		    GeditWindow        *window)
 {
-	GeditView *view;
 	GeditDocument *doc;
-	GeditTab *tab;
-	GtkAction *action;
-	gchar *action_name;
-	
-	/* CHECK: I don't know why but it seems notebook_switch_page is called
-	two times every time the user change the active tab */
-	
-	tab = GEDIT_TAB (gtk_notebook_get_nth_page (book, page_num));
-	if (tab == window->priv->active_tab)
-		return;
-	
+	GeditView *view;
+
 	if (window->priv->active_tab)
 	{
 		if (window->priv->tab_width_id)
@@ -2606,35 +2649,28 @@ notebook_switch_page (GtkNotebook     *book,
 		}
 	}
 	
-	/* set the active tab */		
-	window->priv->active_tab = tab;
+	/* set the active tab */
+	window->priv->active_tab = gedit_multi_notebook_get_active_tab (multi);
+
+	if (window->priv->active_tab == NULL || window->priv->dispose_has_run)
+		return;
 
 	set_title (window);
-	set_sensitivity_according_to_tab (window, tab);
+	set_sensitivity_according_to_tab (window, window->priv->active_tab);
 
 	/* activate the right item in the documents menu */
-	action_name = g_strdup_printf ("Tab_%d", page_num);
-	action = gtk_action_group_get_action (window->priv->documents_list_action_group,
-					      action_name);
-
-	/* sometimes the action doesn't exist yet, and the proper action
-	 * is set active during the documents list menu creation
-	 * CHECK: would it be nicer if active_tab was a property and we monitored the notify signal?
-	 */
-	if (action != NULL)
-		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
-
-	g_free (action_name);
+	activate_documents_list_item (window, window->priv->active_tab);
 
 	/* update the syntax menu */
 	update_languages_menu (window);
 
-	view = gedit_tab_get_view (tab);
-	doc = gedit_tab_get_document (tab);
+	view = gedit_tab_get_view (window->priv->active_tab);
+	doc = gedit_tab_get_document (window->priv->active_tab);
 
 	/* sync the statusbar */
 	update_cursor_position_statusbar (GTK_TEXT_BUFFER (doc),
 					  window);
+
 	gedit_statusbar_set_overwrite (GEDIT_STATUSBAR (window->priv->statusbar),
 				       gtk_text_view_get_overwrite (GTK_TEXT_VIEW (view)));
 
@@ -2663,7 +2699,7 @@ notebook_switch_page (GtkNotebook     *book,
 	g_signal_emit (G_OBJECT (window), 
 		       signals[ACTIVE_TAB_CHANGED], 
 		       0, 
-		       window->priv->active_tab);				       
+		       window->priv->active_tab);
 }
 
 static void
@@ -2671,6 +2707,8 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 {
 	GtkAction *action;
 	GeditLockdownMask lockdown;
+	GeditNotebook *notebook;
+	gint i;
 
 	lockdown = gedit_app_get_lockdown (gedit_app_get_default ());
 
@@ -2708,11 +2746,18 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 	gtk_action_group_set_sensitive (window->priv->recents_action_group,
 					!(window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION));
 
-	gedit_notebook_set_close_buttons_sensitive (GEDIT_NOTEBOOK (window->priv->notebook),
-						    !(window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION));
-						    
-	gedit_notebook_set_tab_drag_and_drop_enabled (GEDIT_NOTEBOOK (window->priv->notebook),
-						      !(window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION));
+	i = 0;
+	notebook = gedit_multi_notebook_get_nth_notebook (window->priv->multi_notebook, i);
+	while (notebook != NULL)
+	{
+		gedit_notebook_set_close_buttons_sensitive (notebook,
+							    !(window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION));
+							    
+		gedit_notebook_set_tab_drag_and_drop_enabled (notebook,
+							      !(window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION));
+		notebook = gedit_multi_notebook_get_nth_notebook (window->priv->multi_notebook,
+								  ++i);
+	}
 
 	if ((window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION) != 0)
 	{
@@ -2739,16 +2784,20 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 	}
 	else
 	{
+		gint num_tabs;
+
+		num_tabs = gedit_multi_notebook_get_n_tabs (window->priv->multi_notebook);
+
 		if (!gtk_action_group_get_sensitive (window->priv->action_group))
 		{
 			gtk_action_group_set_sensitive (window->priv->action_group,
-							window->priv->num_tabs > 0);
+							num_tabs > 0);
 		}
 		
 		if (!gtk_action_group_get_sensitive (window->priv->quit_action_group))
 		{
 			gtk_action_group_set_sensitive (window->priv->quit_action_group,
-							window->priv->num_tabs > 0);
+							num_tabs > 0);
 		}
 		
 		if (!gtk_action_group_get_sensitive (window->priv->close_action_group))
@@ -2759,20 +2808,17 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 							TRUE);
 #else
 			gtk_action_group_set_sensitive (window->priv->close_action_group,
-							window->priv->num_tabs > 0);
+							num_tabs > 0);
 #endif
 		}
 	}
 }
 
 static void
-update_tab_autosave (GtkWidget *widget,
-		     gpointer   data)
+set_auto_save_enabled (GeditTab *tab,
+		       gpointer  autosave)
 {
-	GeditTab *tab = GEDIT_TAB (widget);
-	gboolean *enabled = (gboolean *) data;
-
-	gedit_tab_set_auto_save_enabled (tab, *enabled);
+	gedit_tab_set_auto_save_enabled (tab, GPOINTER_TO_BOOLEAN (autosave));
 }
 
 void
@@ -2786,11 +2832,12 @@ _gedit_window_set_lockdown (GeditWindow       *window,
 	/* start/stop autosave in each existing tab */
 	autosave = g_settings_get_boolean (window->priv->editor_settings,
 					   GEDIT_SETTINGS_AUTO_SAVE);
-	gtk_container_foreach (GTK_CONTAINER (window->priv->notebook),
-			       update_tab_autosave,
-			       &autosave);
 
-	/* update menues wrt the current active tab */	
+	gedit_multi_notebook_foreach_tab (window->priv->multi_notebook,
+					  (GtkCallback)set_auto_save_enabled,
+					  &autosave);
+
+	/* update menues wrt the current active tab */
 	tab = gedit_window_get_active_tab (window);
 
 	set_sensitivity_according_to_tab (window, tab);
@@ -2860,10 +2907,10 @@ update_window_state (GeditWindow *window)
 	
 	window->priv->num_tabs_with_error = 0;
 
-	gtk_container_foreach (GTK_CONTAINER (window->priv->notebook),
-	       		       (GtkCallback)analyze_tab_state,
-	       		       window);
-		
+	gedit_multi_notebook_foreach_tab (window->priv->multi_notebook,
+					  (GtkCallback)analyze_tab_state,
+					  window);
+
 	gedit_debug_message (DEBUG_WINDOW, "New state: %x", window->priv->state);		
 		
 	if (old_ws != window->priv->state)
@@ -2898,7 +2945,7 @@ sync_state (GeditTab    *tab,
 
 	set_sensitivity_according_to_tab (window, tab);
 
-	g_signal_emit (G_OBJECT (window), signals[ACTIVE_TAB_STATE_CHANGED], 0);		
+	g_signal_emit (G_OBJECT (window), signals[ACTIVE_TAB_STATE_CHANGED], 0);
 }
 
 static void
@@ -2914,7 +2961,7 @@ sync_name (GeditTab    *tab,
 	gint n;
 	GeditDocument *doc;
 
-	if (tab == window->priv->active_tab)
+	if (tab == gedit_window_get_active_tab (window))
 	{
 		set_title (window);
 
@@ -2926,8 +2973,7 @@ sync_name (GeditTab    *tab,
 	}
 
 	/* sync the item in the documents list menu */
-	n = gtk_notebook_page_num (GTK_NOTEBOOK (window->priv->notebook),
-				   GTK_WIDGET (tab));
+	n = gedit_multi_notebook_get_page_num (window->priv->multi_notebook, tab);
 	action_name = g_strdup_printf ("Tab_%d", n);
 	action = gtk_action_group_get_action (window->priv->documents_list_action_group,
 					      action_name);
@@ -3372,7 +3418,7 @@ readonly_changed (GeditDocument *doc,
 	sync_name (window->priv->active_tab, NULL, window);
 
 	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-						 window);
+						window);
 }
 
 static void
@@ -3385,54 +3431,67 @@ editable_changed (GeditView  *view,
 }
 
 static void
-update_sensitivity_according_to_open_tabs (GeditWindow *window)
+update_sensitivity_according_to_open_tabs (GeditWindow *window,
+					   gint         num_notebooks,
+					   gint         num_tabs)
 {
 	GtkAction *action;
 
 	/* Set sensitivity */
 	gtk_action_group_set_sensitive (window->priv->action_group,
-					window->priv->num_tabs != 0);
+					num_tabs != 0);
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					     "DocumentsMoveToNewWindow");
-	gtk_action_set_sensitive (action,
-				  window->priv->num_tabs > 1);
+	gtk_action_set_sensitive (action, num_tabs > 1);
+
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "DocumentsPreviousTabGroup");
+	gtk_action_set_sensitive (action, num_notebooks > 1);
+
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "DocumentsNextTabGroup");
+	gtk_action_set_sensitive (action, num_notebooks > 1);
 
 	/* Do not set close action insensitive on OS X */
 #ifndef OS_OSX
 	gtk_action_group_set_sensitive (window->priv->close_action_group,
-	                                window->priv->num_tabs != 0);
+	                                num_tabs != 0);
 #endif
 }
 
 static void
-notebook_page_added (GtkNotebook *notebook,
-		     GtkWidget   *child,
-		     guint        page_num,
-		     GeditWindow *window)
+on_tab_added (GeditMultiNotebook *multi,
+	      GeditNotebook      *notebook,
+	      GeditTab           *tab,
+	      GeditWindow        *window)
 {
 	GeditView *view;
 	GeditDocument *doc;
+	gint num_tabs;
+	gint num_notebooks;
 
 	gedit_debug (DEBUG_WINDOW);
 
 	g_return_if_fail ((window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION) == 0);
-	
-	++window->priv->num_tabs;
 
-	update_sensitivity_according_to_open_tabs (window);
+	num_notebooks = gedit_multi_notebook_get_n_notebooks (multi);
+	num_tabs = gedit_multi_notebook_get_n_tabs (multi);
 
-	view = gedit_tab_get_view (GEDIT_TAB (child));
-	doc = gedit_tab_get_document (GEDIT_TAB (child));
+	update_sensitivity_according_to_open_tabs (window, num_notebooks,
+						   num_tabs);
+
+	view = gedit_tab_get_view (tab);
+	doc = gedit_tab_get_document (tab);
 
 	/* IMPORTANT: remember to disconnect the signal in notebook_tab_removed
 	 * if a new signal is connected here */
 
-	g_signal_connect (child,
+	g_signal_connect (tab,
 			 "notify::name",
 			  G_CALLBACK (sync_name),
 			  window);
-	g_signal_connect (child, 
+	g_signal_connect (tab,
 			 "notify::state",
 			  G_CALLBACK (sync_state),
 			  window);
@@ -3482,29 +3541,31 @@ notebook_page_added (GtkNotebook *notebook,
 	
 	g_signal_connect (view,
 			  "drop_uris",
-			  G_CALLBACK (drop_uris_cb), 
+			  G_CALLBACK (drop_uris_cb),
 			  NULL);
 
 	update_window_state (window);
 
-	g_signal_emit (G_OBJECT (window), signals[TAB_ADDED], 0, child);
+	g_signal_emit (G_OBJECT (window), signals[TAB_ADDED], 0, tab);
 }
 
 static void
-notebook_page_removed (GtkNotebook *notebook,
-		       GtkWidget   *child,
-		       guint        page_num,
-		       GeditWindow *window)
+on_tab_removed (GeditMultiNotebook *multi,
+		GeditNotebook      *notebook,
+		GeditTab           *tab,
+		GeditWindow        *window)
 {
-	GeditTab *tab = GEDIT_TAB (child);
 	GeditView     *view;
 	GeditDocument *doc;
+	gint num_notebooks;
+	gint num_tabs;
 
 	gedit_debug (DEBUG_WINDOW);
 
 	g_return_if_fail ((window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION) == 0);
 
-	--window->priv->num_tabs;
+	num_notebooks = gedit_multi_notebook_get_n_notebooks (multi);
+	num_tabs = gedit_multi_notebook_get_n_tabs (multi);
 
 	view = gedit_tab_get_view (tab);
 	doc = gedit_tab_get_document (tab);
@@ -3546,31 +3607,29 @@ notebook_page_removed (GtkNotebook *notebook,
 					      G_CALLBACK (drop_uris_cb),
 					      NULL);
 
-	if (window->priv->tab_width_id && tab == gedit_window_get_active_tab (window))
+	if (window->priv->tab_width_id && tab == gedit_multi_notebook_get_active_tab (multi))
 	{
 		g_signal_handler_disconnect (view, window->priv->tab_width_id);
 		window->priv->tab_width_id = 0;
 	}
 	
-	if (window->priv->spaces_instead_of_tabs_id && tab == gedit_window_get_active_tab (window))
+	if (window->priv->spaces_instead_of_tabs_id && tab == gedit_multi_notebook_get_active_tab (multi))
 	{
 		g_signal_handler_disconnect (view, window->priv->spaces_instead_of_tabs_id);
 		window->priv->spaces_instead_of_tabs_id = 0;
 	}
 	
-	if (window->priv->language_changed_id && tab == gedit_window_get_active_tab (window))
+	if (window->priv->language_changed_id && tab == gedit_multi_notebook_get_active_tab (multi))
 	{
 		g_signal_handler_disconnect (doc, window->priv->language_changed_id);
 		window->priv->language_changed_id = 0;
 	}
 
-	g_return_if_fail (window->priv->num_tabs >= 0);
-	if (window->priv->num_tabs == 0)
+	g_return_if_fail (num_tabs >= 0);
+	if (num_tabs == 0)
 	{
-		window->priv->active_tab = NULL;
-			       
 		set_title (window);
-			
+
 		/* Remove line and col info */
 		gedit_statusbar_set_cursor_position (
 				GEDIT_STATUSBAR (window->priv->statusbar),
@@ -3585,23 +3644,21 @@ notebook_page_removed (GtkNotebook *notebook,
 		gtk_widget_hide (window->priv->language_combo);
 	}
 
-	if (!window->priv->removing_tabs)
+	if (!window->priv->dispose_has_run)
 	{
-		update_documents_list_menu (window);
-		update_next_prev_doc_sensitivity_per_window (window);
-	}
-	else if (window->priv->num_tabs == 0)
-	{
-		update_documents_list_menu (window);
-		update_next_prev_doc_sensitivity_per_window (window);
-	}
+		if (!window->priv->removing_tabs || num_tabs == 0)
+		{
+			update_documents_list_menu (window);
+			update_next_prev_doc_sensitivity_per_window (window);
+		}
 
-	update_sensitivity_according_to_open_tabs (window);
+		update_sensitivity_according_to_open_tabs (window, num_notebooks, num_tabs);
 
-	if (window->priv->num_tabs == 0)
-	{
-		gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-							 window);
+		if (num_tabs == 0)
+		{
+			gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
+								window);
+		}
 	}
 
 	update_window_state (window);
@@ -3610,8 +3667,8 @@ notebook_page_removed (GtkNotebook *notebook,
 }
 
 static void
-notebook_tabs_reordered (GeditNotebook *notebook,
-			 GeditWindow   *window)
+on_tabs_reordered (GeditMultiNotebook *multi,
+		   GeditWindow        *window)
 {
 	update_documents_list_menu (window);
 	update_next_prev_doc_sensitivity_per_window (window);
@@ -3620,103 +3677,64 @@ notebook_tabs_reordered (GeditNotebook *notebook,
 }
 
 static void
-notebook_tab_detached (GeditNotebook *notebook,
-		       GeditTab      *tab,
-		       GeditWindow   *window)
+on_tab_detached (GeditMultiNotebook *multi,
+		 GeditNotebook      *notebook,
+		 GeditTab           *tab,
+		 GeditWindow        *window)
 {
 	GeditWindow *new_window;
+	GeditNotebook *new_notebook;
+	
+	gedit_debug (DEBUG_WINDOW);
 	
 	new_window = clone_window (window);
-		
+	new_notebook = gedit_multi_notebook_get_active_notebook (new_window->priv->multi_notebook);
+
 	gedit_notebook_move_tab (notebook,
-				 GEDIT_NOTEBOOK (_gedit_window_get_notebook (new_window)),
+				 new_notebook,
 				 tab, 0);
-				 
+
 	gtk_window_set_position (GTK_WINDOW (new_window), 
 				 GTK_WIN_POS_MOUSE);
-					 
+
 	gtk_widget_show (GTK_WIDGET (new_window));
-}		      
+}
 
 static void 
-notebook_tab_close_request (GeditNotebook *notebook,
-			    GeditTab      *tab,
-			    GtkWindow     *window)
+on_tab_close_request (GeditMultiNotebook *multi,
+		      GeditNotebook      *notebook,
+		      GeditTab           *tab,
+		      GtkWindow          *window)
 {
 	/* Note: we are destroying the tab before the default handler
 	 * seems to be ok, but we need to keep an eye on this. */
 	_gedit_cmd_file_close_tab (tab, GEDIT_WINDOW (window));
 }
 
-static gboolean
-show_notebook_popup_menu (GtkNotebook    *notebook,
-			  GeditWindow    *window,
-			  GdkEventButton *event)
+static void
+on_show_popup_menu (GeditMultiNotebook *multi,
+		    GdkEventButton     *event,
+		    GeditWindow        *window)
 {
 	GtkWidget *menu;
-	/* GtkAction *action; */
+
+	if (event == NULL)
+		return;
 
 	menu = gtk_ui_manager_get_widget (window->priv->manager, "/NotebookPopup");
-	g_return_val_if_fail (menu != NULL, FALSE);
+	g_return_if_fail (menu != NULL);
 
-	/* CHECK do we need this? */
-#if 0
-	/* allow extensions to sync when showing the popup */
-	action = gtk_action_group_get_action (window->priv->action_group,
-					      "NotebookPopupAction");
-	g_return_val_if_fail (action != NULL, FALSE);
-	gtk_action_activate (action);
-#endif
-	if (event != NULL)
-	{
-		gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
-				NULL, NULL,
-				event->button, event->time);
-	}
-	else
-	{
-		GtkWidget *tab;
-		GtkWidget *tab_label;
-
-		tab = GTK_WIDGET (gedit_window_get_active_tab (window));
-		g_return_val_if_fail (tab != NULL, FALSE);
-
-		tab_label = gtk_notebook_get_tab_label (notebook, tab);
-
-		gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
-				gedit_utils_menu_position_under_widget, tab_label,
-				0, gtk_get_current_event_time ());
-
-		gtk_menu_shell_select_first (GTK_MENU_SHELL (menu), FALSE);
-	}
-
-	return TRUE;
+	gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
+			NULL, NULL,
+			event->button, event->time);
 }
 
-static gboolean
-notebook_button_press_event (GtkNotebook    *notebook,
-			     GdkEventButton *event,
-			     GeditWindow    *window)
+static void
+on_notebook_changed (GeditMultiNotebook *multi,
+		     GParamSpec         *pspec,
+		     GeditWindow        *window)
 {
-	if (GDK_BUTTON_PRESS == event->type && 3 == event->button)
-	{
-		return show_notebook_popup_menu (notebook, window, event);
-	}
-
-	return FALSE;
-}
-
-static gboolean
-notebook_popup_menu (GtkNotebook *notebook,
-		     GeditWindow *window)
-{
-	/* Only respond if the notebook is the actual focus */
-	if (GEDIT_IS_NOTEBOOK (gtk_window_get_focus (GTK_WINDOW (window))))
-	{
-		return show_notebook_popup_menu (notebook, window, NULL);
-	}
-
-	return FALSE;
+	update_documents_list_menu (window);
 }
 
 static void
@@ -3804,9 +3822,9 @@ side_panel_visibility_changed (GtkWidget   *side_panel,
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 
 	/* focus the document */
-	if (!visible && window->priv->active_tab != NULL)
+	if (!visible)
 	{
-		gtk_widget_grab_focus (GTK_WIDGET (window->priv->active_tab));
+		gtk_widget_grab_focus (GTK_WIDGET (window->priv->multi_notebook));
 	}
 }
 
@@ -3833,12 +3851,14 @@ create_side_panel (GeditWindow *window)
 				G_CALLBACK (side_panel_visibility_changed),
 				window);
 
+	/* TODO: implement a new revolutionary documents panel
+
 	documents_panel = gedit_documents_panel_new (window);
 	gedit_panel_add_item_with_stock_icon (GEDIT_PANEL (window->priv->side_panel),
 					      documents_panel,
 					      "GeditWindowDocumentsPanel",
 					      _("Documents"),
-					      GTK_STOCK_FILE);
+					      GTK_STOCK_FILE);*/
 }
 
 static void
@@ -4065,58 +4085,6 @@ setup_mac_menu (GeditWindow *window)
 #endif
 
 static void
-connect_notebook_signals (GeditWindow *window,
-			  GtkWidget   *notebook)
-{
-	g_signal_connect (notebook,
-			  "switch-page",
-			  G_CALLBACK (notebook_switch_page),
-			  window);
-	g_signal_connect (notebook,
-			  "page-added",
-			  G_CALLBACK (notebook_page_added),
-			  window);
-	g_signal_connect (notebook,
-			  "page-removed",
-			  G_CALLBACK (notebook_page_removed),
-			  window);
-	g_signal_connect (notebook,
-			  "tabs-reordered",
-			  G_CALLBACK (notebook_tabs_reordered),
-			  window);
-	g_signal_connect (notebook,
-			  "tab-detached",
-			  G_CALLBACK (notebook_tab_detached),
-			  window);
-	g_signal_connect (notebook,
-			  "tab-close-request",
-			  G_CALLBACK (notebook_tab_close_request),
-			  window);
-	g_signal_connect (notebook,
-			  "button-press-event",
-			  G_CALLBACK (notebook_button_press_event),
-			  window);
-	g_signal_connect (notebook,
-			  "popup-menu",
-			  G_CALLBACK (notebook_popup_menu),
-			  window);
-}
-
-static void
-add_notebook (GeditWindow *window,
-	      GtkWidget   *notebook)
-{
-	gtk_paned_pack1 (GTK_PANED (window->priv->vpaned),
-	                 notebook,
-	                 TRUE,
-	                 TRUE);
-
-	gtk_widget_show (notebook);
-
-	connect_notebook_signals (window, notebook);
-}
-
-static void
 gedit_window_init (GeditWindow *window)
 {
 	GtkWidget *main_box;
@@ -4126,7 +4094,6 @@ gedit_window_init (GeditWindow *window)
 
 	window->priv = GEDIT_WINDOW_GET_PRIVATE (window);
 	window->priv->active_tab = NULL;
-	window->priv->num_tabs = 0;
 	window->priv->removing_tabs = FALSE;
 	window->priv->state = GEDIT_WINDOW_STATE_NORMAL;
 	window->priv->dispose_has_run = FALSE;
@@ -4165,10 +4132,54 @@ gedit_window_init (GeditWindow *window)
   			 window->priv->vpaned, 
   			 TRUE, 
   			 FALSE);
-  	
-	gedit_debug_message (DEBUG_WINDOW, "Create gedit notebook");
-	window->priv->notebook = gedit_notebook_new ();
-	add_notebook (window, window->priv->notebook);
+
+	gedit_debug_message (DEBUG_WINDOW, "Create gedit notebook group");
+	window->priv->multi_notebook = gedit_multi_notebook_new ();
+	gtk_paned_pack1 (GTK_PANED (window->priv->vpaned),
+			 GTK_WIDGET (window->priv->multi_notebook),
+			 TRUE,
+			 TRUE);
+	gtk_widget_show (GTK_WIDGET (window->priv->multi_notebook));
+
+	g_signal_connect (window->priv->multi_notebook,
+			  "notify::active-notebook",
+			  G_CALLBACK (on_notebook_changed),
+			  window);
+
+	g_signal_connect (window->priv->multi_notebook,
+			  "tab-added",
+			  G_CALLBACK (on_tab_added),
+			  window);
+
+	g_signal_connect (window->priv->multi_notebook,
+			  "tab-removed",
+			  G_CALLBACK (on_tab_removed),
+			  window);
+
+	g_signal_connect (window->priv->multi_notebook,
+			  "notify::active-tab",
+			  G_CALLBACK (active_tab_changed),
+			  window);
+
+	g_signal_connect (window->priv->multi_notebook,
+			  "tab-close-request",
+			  G_CALLBACK (on_tab_close_request),
+			  window);
+
+	g_signal_connect (window->priv->multi_notebook,
+			  "tab-detached",
+			  G_CALLBACK (on_tab_detached),
+			  window);
+
+	g_signal_connect (window->priv->multi_notebook,
+			  "tabs-reordered",
+			  G_CALLBACK (on_tabs_reordered),
+			  window);
+
+	g_signal_connect (window->priv->multi_notebook,
+			  "show-popup-menu",
+			  G_CALLBACK (on_show_popup_menu),
+			  window);
 
 	/* side and bottom panels */
   	create_side_panel (window);
@@ -4248,7 +4259,8 @@ gedit_window_init (GeditWindow *window)
 	 * This needs to be done after plugins activatation */
 	init_panels_visibility (window);
 
-	update_sensitivity_according_to_open_tabs (window);
+	/* When we initiate we have 1 notebook and 1 tab */
+	update_sensitivity_according_to_open_tabs (window, 1, 1);
 
 #ifdef OS_OSX
 	setup_mac_menu (window);
@@ -4307,7 +4319,33 @@ _gedit_window_get_notebook (GeditWindow *window)
 {
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 
-	return window->priv->notebook;
+	return GTK_WIDGET (gedit_multi_notebook_get_active_notebook (window->priv->multi_notebook));
+}
+
+static GeditTab *
+process_create_tab (GeditWindow *window,
+                    GtkWidget   *notebook,
+                    GeditTab    *tab,
+                    gboolean     jump_to)
+{
+	if (tab == NULL)
+	{
+		return NULL;
+	}
+
+	gtk_widget_show (GTK_WIDGET (tab));
+	
+	gedit_notebook_add_tab (GEDIT_NOTEBOOK (notebook),
+	                        tab,
+	                        -1,
+	                        jump_to);
+
+	if (!gtk_widget_get_visible (GTK_WIDGET (window)))
+	{
+		gtk_window_present (GTK_WINDOW (window));
+	}
+
+	return tab;
 }
 
 /**
@@ -4324,49 +4362,16 @@ GeditTab *
 gedit_window_create_tab (GeditWindow *window,
 			 gboolean     jump_to)
 {
+	GtkWidget *notebook;
 	GeditTab *tab;
 
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 
-	tab = GEDIT_TAB (_gedit_tab_new ());	
-	gtk_widget_show (GTK_WIDGET (tab));	
-
-	gedit_notebook_add_tab (GEDIT_NOTEBOOK (window->priv->notebook),
-				tab,
-				-1,
-				jump_to);
-
-	if (!gtk_widget_get_visible (GTK_WIDGET (window)))
-	{
-		gtk_window_present (GTK_WINDOW (window));
-	}
-
-	return tab;
-}
-
-static GeditTab *
-process_create_tab (GeditWindow *window,
-                    GeditTab    *tab,
-                    gboolean     jump_to)
-{
-	if (tab == NULL)
-	{
-		return NULL;
-	}
-
+	notebook = _gedit_window_get_notebook (window);
+	tab = GEDIT_TAB (_gedit_tab_new ());
 	gtk_widget_show (GTK_WIDGET (tab));
-	
-	gedit_notebook_add_tab (GEDIT_NOTEBOOK (window->priv->notebook),
-	                        tab,
-	                        -1,
-	                        jump_to);
 
-	if (!gtk_widget_get_visible (GTK_WIDGET (window)))
-	{
-		gtk_window_present (GTK_WINDOW (window));
-	}
-
-	return tab;
+	return process_create_tab (window, notebook, tab, jump_to);
 }
 
 /**
@@ -4394,18 +4399,20 @@ gedit_window_create_tab_from_location (GeditWindow         *window,
 				       gboolean             create,
 				       gboolean             jump_to)
 {
+	GtkWidget *notebook;
 	GtkWidget *tab;
 
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 	g_return_val_if_fail (G_IS_FILE (location), NULL);
 
+	notebook = _gedit_window_get_notebook (window);
 	tab = _gedit_tab_new_from_location (location,
 	                                    encoding,
 	                                    line_pos,
 	                                    column_pos,
 	                                    create);
 
-	return process_create_tab (window, GEDIT_TAB (tab), jump_to);
+	return process_create_tab (window, notebook, GEDIT_TAB (tab), jump_to);
 }
 
 GeditTab *
@@ -4416,18 +4423,19 @@ gedit_window_create_tab_from_stream (GeditWindow         *window,
                                      gint                 column_pos,
                                      gboolean             jump_to)
 {
+	GtkWidget *notebook;
 	GtkWidget *tab;
 
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 	g_return_val_if_fail (G_IS_INPUT_STREAM (stream), NULL);
 
+	notebook = _gedit_window_get_notebook (window);
 	tab = _gedit_tab_new_from_stream (stream,
 	                                  encoding,
 	                                  line_pos,
 	                                  column_pos);
 
-	return process_create_tab (window, GEDIT_TAB (tab), jump_to);
-
+	return process_create_tab (window, notebook, GEDIT_TAB (tab), jump_to);
 }
 
 /**
@@ -4443,8 +4451,7 @@ gedit_window_get_active_tab (GeditWindow *window)
 {
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 	
-	return (window->priv->active_tab == NULL) ? 
-				NULL : GEDIT_TAB (window->priv->active_tab);
+	return gedit_multi_notebook_get_active_tab (window->priv->multi_notebook);
 }
 
 static void
@@ -4452,9 +4459,9 @@ add_document (GeditTab  *tab,
 	      GList    **res)
 {
 	GeditDocument *doc;
-	
+
 	doc = gedit_tab_get_document (tab);
-	
+
 	*res = g_list_prepend (*res, doc);
 }
 
@@ -4473,11 +4480,11 @@ gedit_window_get_documents (GeditWindow *window)
 	GList *res = NULL;
 
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
-	
-	gtk_container_foreach (GTK_CONTAINER (window->priv->notebook),
-			       (GtkCallback)add_document,
-			       &res);
-			       
+
+	gedit_multi_notebook_foreach_tab (window->priv->multi_notebook,
+					  (GtkCallback)add_document,
+					  &res);
+
 	res = g_list_reverse (res);
 	
 	return res;
@@ -4488,9 +4495,9 @@ add_view (GeditTab  *tab,
 	  GList    **res)
 {
 	GeditView *view;
-	
+
 	view = gedit_tab_get_view (tab);
-	
+
 	*res = g_list_prepend (*res, view);
 }
 
@@ -4508,11 +4515,11 @@ gedit_window_get_views (GeditWindow *window)
 	GList *res = NULL;
 
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
-	
-	gtk_container_foreach (GTK_CONTAINER (window->priv->notebook),
-			       (GtkCallback)add_view,
-			       &res);
-			       
+
+	gedit_multi_notebook_foreach_tab (window->priv->multi_notebook,
+					  (GtkCallback)add_view,
+					  &res);
+
 	res = g_list_reverse (res);
 	
 	return res;
@@ -4529,13 +4536,16 @@ void
 gedit_window_close_tab (GeditWindow *window,
 			GeditTab    *tab)
 {
+	GList *tabs = NULL;
+
 	g_return_if_fail (GEDIT_IS_WINDOW (window));
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 	g_return_if_fail ((gedit_tab_get_state (tab) != GEDIT_TAB_STATE_SAVING) &&
 			  (gedit_tab_get_state (tab) != GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW));
-	
-	gedit_notebook_remove_tab (GEDIT_NOTEBOOK (window->priv->notebook),
-				   tab);
+
+	tabs = g_list_append (tabs, tab);
+	gedit_multi_notebook_close_tabs (window->priv->multi_notebook, tabs);
+	g_list_free (tabs);
 }
 
 /**
@@ -4553,7 +4563,7 @@ gedit_window_close_all_tabs (GeditWindow *window)
 
 	window->priv->removing_tabs = TRUE;
 
-	gedit_notebook_remove_all_tabs (GEDIT_NOTEBOOK (window->priv->notebook));
+	gedit_multi_notebook_close_all_tabs (window->priv->multi_notebook);
 
 	window->priv->removing_tabs = FALSE;
 }
@@ -4573,23 +4583,11 @@ gedit_window_close_tabs (GeditWindow *window,
 	g_return_if_fail (!(window->priv->state & GEDIT_WINDOW_STATE_SAVING) &&
 			  !(window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION));
 
-	if (tabs == NULL)
-		return;
-
 	window->priv->removing_tabs = TRUE;
 
-	while (tabs != NULL)
-	{
-		if (tabs->next == NULL)
-			window->priv->removing_tabs = FALSE;
+	gedit_multi_notebook_close_tabs (window->priv->multi_notebook, tabs);
 
-		gedit_notebook_remove_tab (GEDIT_NOTEBOOK (window->priv->notebook),
-				   	   GEDIT_TAB (tabs->data));
-
-		tabs = g_list_next (tabs);
-	}
-
-	g_return_if_fail (window->priv->removing_tabs == FALSE);
+	window->priv->removing_tabs = FALSE;
 }
 
 GeditWindow *
@@ -4597,24 +4595,29 @@ _gedit_window_move_tab_to_new_window (GeditWindow *window,
 				      GeditTab    *tab)
 {
 	GeditWindow *new_window;
+	GeditNotebook *old_notebook;
+	GeditNotebook *new_notebook;
 
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 	g_return_val_if_fail (GEDIT_IS_TAB (tab), NULL);
-	g_return_val_if_fail (gtk_notebook_get_n_pages (
-				GTK_NOTEBOOK (window->priv->notebook)) > 1, 
+	g_return_val_if_fail (gedit_multi_notebook_get_n_tabs (
+				window->priv->multi_notebook) > 1,
 			      NULL);
-			      
+
 	new_window = clone_window (window);
 
-	gedit_notebook_move_tab (GEDIT_NOTEBOOK (window->priv->notebook),
-				 GEDIT_NOTEBOOK (new_window->priv->notebook),
+	old_notebook = gedit_multi_notebook_get_active_notebook (window->priv->multi_notebook);
+	new_notebook = gedit_multi_notebook_get_active_notebook (new_window->priv->multi_notebook);
+
+	gedit_notebook_move_tab (old_notebook,
+				 new_notebook,
 				 tab,
 				 -1);
-				 
+
 	gtk_widget_show (GTK_WIDGET (new_window));
 	
 	return new_window;
-}				      
+}
 
 /**
  * gedit_window_set_active_tab:
@@ -4627,20 +4630,10 @@ void
 gedit_window_set_active_tab (GeditWindow *window,
 			     GeditTab    *tab)
 {
-	gint page_num;
-	
 	g_return_if_fail (GEDIT_IS_WINDOW (window));
-	g_return_if_fail (GEDIT_IS_TAB (tab));
-	
-	page_num = gtk_notebook_page_num (GTK_NOTEBOOK (window->priv->notebook),
-					  GTK_WIDGET (tab));
-	g_return_if_fail (page_num != -1);
-	
-	gtk_notebook_set_current_page (GTK_NOTEBOOK (window->priv->notebook),
-				       page_num);
 
-	/* Make sure to grab focus if the page didn't change */
-	gtk_widget_grab_focus (GTK_WIDGET (tab));
+	gedit_multi_notebook_set_active_tab (window->priv->multi_notebook,
+					     tab);
 }
 
 /**
@@ -4774,6 +4767,19 @@ _gedit_window_set_default_location (GeditWindow *window,
 	window->priv->default_location = dir;
 }
 
+static void
+add_unsaved_doc (GeditTab *tab,
+		 GList   **res)
+{
+	if (!_gedit_tab_can_close (tab))
+	{
+		GeditDocument *doc;
+
+		doc = gedit_tab_get_document (tab);
+		*res = g_list_prepend (*res, doc);
+	}
+}
+
 /**
  * gedit_window_get_unsaved_documents:
  * @window: a #GeditWindow
@@ -4785,35 +4791,15 @@ _gedit_window_set_default_location (GeditWindow *window,
 GList *
 gedit_window_get_unsaved_documents (GeditWindow *window)
 {
-	GList *unsaved_docs = NULL;
-	GList *tabs;
-	GList *l;
+	GList *res = NULL;
 
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
-	
-	tabs = gtk_container_get_children (GTK_CONTAINER (window->priv->notebook));
-	
-	l = tabs;
-	while (l != NULL)
-	{
-		GeditTab *tab;
 
-		tab = GEDIT_TAB (l->data);
-		
-		if (!_gedit_tab_can_close (tab))
-		{
-			GeditDocument *doc;
-			
-			doc = gedit_tab_get_document (tab);
-			unsaved_docs = g_list_prepend (unsaved_docs, doc);
-		}	
-		
-		l = g_list_next (l);
-	}
-	
-	g_list_free (tabs);
+	gedit_multi_notebook_foreach_tab (window->priv->multi_notebook,
+					  (GtkCallback)add_unsaved_doc,
+					  &res);
 
-	return g_list_reverse (unsaved_docs);
+	return g_list_reverse (res);
 }
 
 GList *
@@ -4821,8 +4807,7 @@ _gedit_window_get_all_tabs (GeditWindow *window)
 {
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 
-	return gtk_container_get_children (
-			GTK_CONTAINER (_gedit_window_get_notebook (window)));
+	return gedit_multi_notebook_get_all_tabs (window->priv->multi_notebook);
 }
 
 void 
@@ -4856,6 +4841,16 @@ hide_notebook_tabs_on_fullscreen (GtkNotebook	*notebook,
 	gtk_notebook_set_show_tabs (notebook, FALSE);
 }
 
+static void
+hide_notebook_tabs (GtkNotebook *notebook,
+		    GeditWindow *window)
+{
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+	g_signal_connect (notebook, "notify::show-tabs",
+			  G_CALLBACK (hide_notebook_tabs_on_fullscreen),
+			  window);
+}
+
 void
 _gedit_window_fullscreen (GeditWindow *window)
 {
@@ -4866,9 +4861,10 @@ _gedit_window_fullscreen (GeditWindow *window)
 
 	/* Go to fullscreen mode and hide bars */
 	gtk_window_fullscreen (&window->window);
-	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->priv->notebook), FALSE);
-	g_signal_connect (window->priv->notebook, "notify::show-tabs",
-			  G_CALLBACK (hide_notebook_tabs_on_fullscreen), window);
+
+	gedit_multi_notebook_foreach_notebook (window->priv->multi_notebook,
+					       (GtkCallback)hide_notebook_tabs,
+					       window);
 	
 	gtk_widget_hide (window->priv->menubar);
 	
@@ -4886,6 +4882,16 @@ _gedit_window_fullscreen (GeditWindow *window)
 	fullscreen_controls_show (window);
 }
 
+static void
+show_notebook_tabs (GtkNotebook *notebook,
+		    GeditWindow *window)
+{
+	g_signal_handlers_disconnect_by_func (notebook,
+					      hide_notebook_tabs_on_fullscreen,
+					      window);
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
+}
+
 void
 _gedit_window_unfullscreen (GeditWindow *window)
 {
@@ -4899,10 +4905,11 @@ _gedit_window_unfullscreen (GeditWindow *window)
 
 	/* Unfullscreen and show bars */
 	gtk_window_unfullscreen (&window->window);
-	g_signal_handlers_disconnect_by_func (window->priv->notebook,
-					      hide_notebook_tabs_on_fullscreen,
-					      window);
-	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->priv->notebook), TRUE);
+
+	gedit_multi_notebook_foreach_notebook (window->priv->multi_notebook,
+					       (GtkCallback)show_notebook_tabs,
+					       window);
+
 	gtk_widget_show (window->priv->menubar);
 	
 	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
@@ -4954,7 +4961,7 @@ gedit_window_get_tab_from_location (GeditWindow *window,
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 	g_return_val_if_fail (G_IS_FILE (location), NULL);
 
-	tabs = gtk_container_get_children (GTK_CONTAINER (window->priv->notebook));
+	tabs = gedit_multi_notebook_get_all_tabs (window->priv->multi_notebook);
 	
 	for (l = tabs; l != NULL; l = g_list_next (l))
 	{

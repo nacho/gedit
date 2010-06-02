@@ -34,6 +34,7 @@
 #include "gedit/gedit-window.h"
 #include "gedit-message-bus.h"
 #include "gedit-settings.h"
+#include "gedit-multi-notebook.h"
 
 #ifdef OS_OSX
 #include <ige-mac-integration.h>
@@ -49,7 +50,7 @@ struct _GeditWindowPrivate
 	GSettings      *ui_settings;
 	GSettings      *window_settings;
 
-	GtkWidget      *notebook;
+	GeditMultiNotebook *multi_notebook;
 
 	GtkWidget      *side_panel;
 	GtkWidget      *bottom_panel;
@@ -99,7 +100,6 @@ struct _GeditWindowPrivate
 	gulong          recents_handler_id;
 
 	GeditTab       *active_tab;
-	gint            num_tabs;
 
 	gint            num_tabs_with_error;
 

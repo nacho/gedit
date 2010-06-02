@@ -145,6 +145,12 @@ void		_gedit_cmd_documents_next_document	(GtkAction   *action,
 							 GeditWindow *window);
 void		_gedit_cmd_documents_move_to_new_window	(GtkAction   *action,
 							 GeditWindow *window);
+void		_gedit_cmd_documents_new_tab_group	(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_documents_previous_tab_group	(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_documents_next_tab_group	(GtkAction   *action,
+							 GeditWindow *window);
 
 void		_gedit_cmd_help_contents		(GtkAction   *action,
 							 GeditWindow *window);
