@@ -195,9 +195,6 @@ void		 _gedit_recent_add			(GeditWindow	     *window,
 void		 _gedit_recent_remove			(GeditWindow         *window,
 							 GFile               *location);
 
-void		 _gedit_window_get_default_size		(gint                *width,
-							 gint                *height);
-
 G_END_DECLS
 
 #endif  /* __GEDIT_WINDOW_H__  */
