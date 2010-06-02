@@ -4816,6 +4816,15 @@ gedit_window_get_unsaved_documents (GeditWindow *window)
 	return g_list_reverse (unsaved_docs);
 }
 
+GList *
+_gedit_window_get_all_tabs (GeditWindow *window)
+{
+	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
+
+	return gtk_container_get_children (
+			GTK_CONTAINER (_gedit_window_get_notebook (window)));
+}
+
 void 
 _gedit_window_set_saving_session_state (GeditWindow *window,
 					gboolean     saving_session)

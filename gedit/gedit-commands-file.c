@@ -1471,19 +1471,18 @@ static void
 save_and_close_all_documents (const GList  *docs,
 			      GeditWindow  *window)
 {
-	GList  *tabs;
-	GList  *l;
+	GList *tabs;
+	GList *l;
 	GSList *sl;
 	GSList *tabs_to_save_as;
 	GSList *tabs_to_save_and_close;
-	GList  *tabs_to_close;
+	GList *tabs_to_close;
 
 	gedit_debug (DEBUG_COMMANDS);
 
 	g_return_if_fail (!(gedit_window_get_state (window) & GEDIT_WINDOW_STATE_PRINTING));
 
-	tabs = gtk_container_get_children (
-			GTK_CONTAINER (_gedit_window_get_notebook (window)));
+	tabs = _gedit_window_get_all_tabs (window);
 
 	tabs_to_save_as = NULL;
 	tabs_to_save_and_close = NULL;
