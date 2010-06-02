@@ -675,51 +675,50 @@ static void
 update_next_prev_doc_sensitivity (GeditWindow *window,
 				  GeditTab    *tab)
 {
-	gint	     tab_number;
-	GtkNotebook *notebook;
-	GtkAction   *action;
-	
+	gint tab_number;
+	GtkWidget *notebook;
+	GtkAction *action;
+
 	gedit_debug (DEBUG_WINDOW);
-	
-	notebook = GTK_NOTEBOOK (_gedit_window_get_notebook (window));
-	
-	tab_number = gtk_notebook_page_num (notebook, GTK_WIDGET (tab));
+
+	notebook = _gedit_window_get_notebook (window);
+	tab_number = gtk_notebook_page_num (GTK_NOTEBOOK (notebook), GTK_WIDGET (tab));
 	g_return_if_fail (tab_number >= 0);
-	
+
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "DocumentsPreviousDocument");
 	gtk_action_set_sensitive (action, tab_number != 0);
-	
+
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "DocumentsNextDocument");
 	gtk_action_set_sensitive (action, 
-				  tab_number < gtk_notebook_get_n_pages (notebook) - 1);
+				  tab_number < gtk_notebook_get_n_pages (GTK_NOTEBOOK (notebook)) - 1);
 }
 
 static void
 update_next_prev_doc_sensitivity_per_window (GeditWindow *window)
 {
-	GeditTab  *tab;
+	GeditTab *tab;
 	GtkAction *action;
-	
+
 	gedit_debug (DEBUG_WINDOW);
-	
+
 	tab = gedit_window_get_active_tab (window);
 	if (tab != NULL)
 	{
-		update_next_prev_doc_sensitivity (window, tab);
-		
+		update_next_prev_doc_sensitivity (window,
+						  tab);
+
 		return;
 	}
-	
+
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "DocumentsPreviousDocument");
 	gtk_action_set_sensitive (action, FALSE);
-	
+
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "DocumentsNextDocument");
 	gtk_action_set_sensitive (action, FALSE);
-	
 }
 
 static void
@@ -790,20 +789,20 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 				  GeditTab    *tab)
 {
 	GeditDocument *doc;
-	GeditView     *view;
-	GtkAction     *action;
-	gboolean       b;
-	gboolean       state_normal;
-	gboolean       editable;
-	GeditTabState  state;
-	GtkClipboard  *clipboard;
+	GeditView *view;
+	GtkAction *action;
+	gboolean b;
+	gboolean state_normal;
+	gboolean editable;
+	GeditTabState state;
+	GtkClipboard *clipboard;
 	GeditLockdownMask lockdown;
-	gboolean       enable_syntax_highlighting;
+	gboolean enable_syntax_highlighting;
 
 	g_return_if_fail (GEDIT_TAB (tab));
 
 	gedit_debug (DEBUG_WINDOW);
-	
+
 	enable_syntax_highlighting = g_settings_get_boolean (window->priv->editor_settings,
 							     GEDIT_SETTINGS_SYNTAX_HIGHLIGHTING);
 
@@ -966,7 +965,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	update_next_prev_doc_sensitivity (window, tab);
 
 	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-						 window);
+						window);
 }
 
 static void
@@ -2568,6 +2567,7 @@ notebook_switch_page (GtkNotebook     *book,
 		      GeditWindow     *window)
 {
 	GeditView *view;
+	GeditDocument *doc;
 	GeditTab *tab;
 	GtkAction *action;
 	gchar *action_name;
@@ -2630,9 +2630,10 @@ notebook_switch_page (GtkNotebook     *book,
 	update_languages_menu (window);
 
 	view = gedit_tab_get_view (tab);
+	doc = gedit_tab_get_document (tab);
 
 	/* sync the statusbar */
-	update_cursor_position_statusbar (GTK_TEXT_BUFFER (gedit_tab_get_document (tab)),
+	update_cursor_position_statusbar (GTK_TEXT_BUFFER (doc),
 					  window);
 	gedit_statusbar_set_overwrite (GEDIT_STATUSBAR (window->priv->statusbar),
 				       gtk_text_view_get_overwrite (GTK_TEXT_VIEW (view)));
@@ -2649,7 +2650,7 @@ notebook_switch_page (GtkNotebook     *book,
 								    G_CALLBACK (spaces_instead_of_tabs_changed),
 								    window);
 
-	window->priv->language_changed_id = g_signal_connect (gedit_tab_get_document (tab),
+	window->priv->language_changed_id = g_signal_connect (doc,
 							      "notify::language",
 							      G_CALLBACK (language_changed),
 							      window);
@@ -2657,7 +2658,7 @@ notebook_switch_page (GtkNotebook     *book,
 	/* call it for the first time */
 	tab_width_changed (G_OBJECT (view), NULL, window);
 	spaces_instead_of_tabs_changed (G_OBJECT (view), NULL, window);
-	language_changed (G_OBJECT (gedit_tab_get_document (tab)), NULL, window);
+	language_changed (G_OBJECT (doc), NULL, window);
 
 	g_signal_emit (G_OBJECT (window), 
 		       signals[ACTIVE_TAB_CHANGED], 
