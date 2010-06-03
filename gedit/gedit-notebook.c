@@ -48,6 +48,8 @@
 #include "gedit-tab-label.h"
 #include "gedit-marshal.h"
 #include "gedit-window.h"
+#include "gedit-enum-types.h"
+#include "gedit-settings.h"
 
 #include "gseal-gtk-compat.h"
 
@@ -58,14 +60,19 @@
 
 struct _GeditNotebookPrivate
 {
+	GSettings     *ui_settings;
+
 	GList         *focused_pages;
 	gulong         motion_notify_handler_id;
+
 	gint           x_start;
 	gint           y_start;
-	gint           drag_in_progress : 1;
-	gint	       always_show_tabs : 1;
-	gint           close_buttons_sensitive : 1;
-	gint           tab_drag_and_drop_enabled : 1;
+
+	GeditNotebookShowTabsModeType show_tabs_mode;
+
+	guint          drag_in_progress : 1;
+	guint          close_buttons_sensitive : 1;
+	guint          tab_drag_and_drop_enabled : 1;
 	guint          destroy_has_run : 1;
 };
 
@@ -82,6 +89,13 @@ static void move_current_tab_to_another_notebook  (GeditNotebook  *src,
 /* Local variables */
 static GdkCursor *cursor = NULL;
 
+/* Properties */
+enum
+{
+	PROP_0,
+	PROP_SHOW_TABS_MODE
+};
+
 /* Signals */
 enum
 {
@@ -92,6 +106,93 @@ enum
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
+
+
+static void
+update_tabs_visibility (GeditNotebook *notebook,
+			gboolean       before_inserting)
+{
+	gboolean show_tabs;
+
+	switch (notebook->priv->show_tabs_mode)
+	{
+		case GEDIT_NOTEBOOK_SHOW_TABS_NEVER:
+			show_tabs = FALSE;
+			break;
+		case GEDIT_NOTEBOOK_SHOW_TABS_AUTO:
+			{
+				guint num;
+
+				num = gtk_notebook_get_n_pages (GTK_NOTEBOOK (notebook));
+
+				if (before_inserting)
+					++num;
+
+				show_tabs = num > 1;
+			}
+			break;
+		case GEDIT_NOTEBOOK_SHOW_TABS_ALWAYS:
+		default:
+			show_tabs = TRUE;
+			break;
+	}
+
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), show_tabs);
+}
+
+static void
+gedit_notebook_get_property (GObject    *object,
+			     guint       prop_id,
+			     GValue     *value,
+			     GParamSpec *pspec)
+{
+	GeditNotebook *notebook = GEDIT_NOTEBOOK (object);
+
+	switch (prop_id)
+	{
+		case PROP_SHOW_TABS_MODE:
+			g_value_set_enum (value,
+					  notebook->priv->show_tabs_mode);
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_notebook_set_property (GObject      *object,
+			     guint         prop_id,
+			     const GValue *value,
+			     GParamSpec   *pspec)
+{
+	GeditNotebook *notebook = GEDIT_NOTEBOOK (object);
+
+	switch (prop_id)
+	{
+		case PROP_SHOW_TABS_MODE:
+			notebook->priv->show_tabs_mode = g_value_get_enum (value);
+			update_tabs_visibility (notebook, FALSE);
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_notebook_dispose (GObject *object)
+{
+	GeditNotebook *notebook = GEDIT_NOTEBOOK (object);
+
+	if (notebook->priv->ui_settings != NULL)
+	{
+		g_object_unref (notebook->priv->ui_settings);
+		notebook->priv->ui_settings = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_notebook_parent_class)->dispose (object);
+}
 
 static void
 gedit_notebook_finalize (GObject *object)
@@ -125,10 +226,22 @@ gedit_notebook_class_init (GeditNotebookClass *klass)
 	GtkWidgetClass *gtkwidget_class = GTK_WIDGET_CLASS (klass);
 	GtkNotebookClass *notebook_class = GTK_NOTEBOOK_CLASS (klass);
 
+	object_class->dispose = gedit_notebook_dispose;
 	object_class->finalize = gedit_notebook_finalize;
+	object_class->get_property = gedit_notebook_get_property;
+	object_class->set_property = gedit_notebook_set_property;
+
 	gtkwidget_class->grab_focus = gedit_notebook_grab_focus;
 	
 	notebook_class->change_current_page = gedit_notebook_change_current_page;
+
+	g_object_class_install_property (object_class, PROP_SHOW_TABS_MODE,
+					 g_param_spec_enum ("show-tabs-mode",
+							    "Show Tabs Mode",
+							    "When tabs should be shown",
+							    GEDIT_TYPE_NOTEBOOK_SHOW_TABS_MODE_TYPE,
+							    GEDIT_NOTEBOOK_SHOW_TABS_ALWAYS,
+							    G_PARAM_READWRITE));
 
 	signals[TAB_DETACHED] =
 		g_signal_new ("tab_detached",
@@ -655,24 +768,58 @@ gedit_notebook_switch_page_cb (GtkNotebook     *notebook,
 	gtk_widget_grab_focus (child);
 }
 
-/*
- * update_tabs_visibility: Hide tabs if there is only one tab
- * and the pref is not set.
- */
-static void
-update_tabs_visibility (GeditNotebook *nb, 
-			gboolean       before_inserting)
+static gboolean
+show_tabs_mode_get_mapping (GValue   *value,
+			    GVariant *variant,
+			    gpointer  user_data G_GNUC_UNUSED)
 {
-	gboolean show_tabs;
-	guint num;
+	const gchar *str;
+	GeditNotebookShowTabsModeType show_tabs_mode;
 
-	num = gtk_notebook_get_n_pages (GTK_NOTEBOOK (nb));
+	str = g_variant_get_string (variant, NULL);
 
-	if (before_inserting) num++;
+	if (g_strcmp0 (str, "NEVER") == 0)
+	{
+		show_tabs_mode = GEDIT_NOTEBOOK_SHOW_TABS_NEVER;
+	}
+	else if (g_strcmp0 (str, "AUTO") == 0)
+	{
+		show_tabs_mode = GEDIT_NOTEBOOK_SHOW_TABS_AUTO;
+	}
+	else /* ALWAYS */
+	{
+		show_tabs_mode = GEDIT_NOTEBOOK_SHOW_TABS_ALWAYS;
+	}
+	
+	g_value_set_enum (value, show_tabs_mode);
 
-	show_tabs = (nb->priv->always_show_tabs || num > 1);
+	return TRUE;
+}
 
-	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (nb), show_tabs);
+static GVariant *
+show_tabs_mode_set_mapping (const GValue       *value,
+			    const GVariantType *expected_type,
+			    gpointer            user_data G_GNUC_UNUSED)
+{
+	GVariant *result = NULL;
+
+	switch (g_value_get_enum (value))
+	{
+		case GEDIT_NOTEBOOK_SHOW_TABS_NEVER:
+			result = g_variant_new_string ("NEVER");
+			break;
+
+		case GEDIT_NOTEBOOK_SHOW_TABS_AUTO:
+			result = g_variant_new_string ("AUTO");
+			break;
+
+		case GEDIT_NOTEBOOK_SHOW_TABS_ALWAYS:
+		default:
+			result = g_variant_new_string ("ALWAYS");
+			break;
+	}
+
+	return result;
 }
 
 static void
@@ -680,27 +827,37 @@ gedit_notebook_init (GeditNotebook *notebook)
 {
 	notebook->priv = GEDIT_NOTEBOOK_GET_PRIVATE (notebook);
 
+	notebook->priv->ui_settings = g_settings_new ("org.gnome.gedit.preferences.ui");
+
+	notebook->priv->show_tabs_mode = GEDIT_NOTEBOOK_SHOW_TABS_ALWAYS;
 	notebook->priv->close_buttons_sensitive = TRUE;
 	notebook->priv->tab_drag_and_drop_enabled = TRUE;
 	
 	gtk_notebook_set_scrollable (GTK_NOTEBOOK (notebook), TRUE);
 	gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
-	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
 
-	notebook->priv->always_show_tabs = TRUE;
+	g_settings_bind_with_mapping (notebook->priv->ui_settings,
+				      GEDIT_SETTINGS_SHOW_TABS_MODE,
+				      notebook,
+				      "show-tabs-mode",
+				      G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET,
+				      show_tabs_mode_get_mapping,
+				      show_tabs_mode_set_mapping,
+				      NULL, NULL);
 
-	g_signal_connect (notebook, 
+	g_signal_connect (notebook,
 			  "button-press-event",
-			  (GCallback)button_press_cb, 
+			  (GCallback)button_press_cb,
 			  NULL);
-	g_signal_connect (notebook, 
+	g_signal_connect (notebook,
 			  "button-release-event",
 			  (GCallback)button_release_cb,
 			  NULL);
-	gtk_widget_add_events (GTK_WIDGET (notebook), 
+	gtk_widget_add_events (GTK_WIDGET (notebook),
 			       GDK_BUTTON1_MOTION_MASK);
 
-	g_signal_connect_after (G_OBJECT (notebook), 
+	g_signal_connect_after (G_OBJECT (notebook),
 				"switch_page",
                                 G_CALLBACK (gedit_notebook_switch_page_cb),
                                 NULL);
@@ -803,24 +960,6 @@ get_tab_label (GeditTab *tab)
 }
 
 /**
- * gedit_notebook_set_always_show_tabs:
- * @nb: a #GeditNotebook
- * @show_tabs: %TRUE to always show the tabs
- *
- * Sets the visibility of the tabs in the @nb.
- */
-void
-gedit_notebook_set_always_show_tabs (GeditNotebook *nb, 
-				     gboolean       show_tabs)
-{
-	g_return_if_fail (GEDIT_IS_NOTEBOOK (nb));
-
-	nb->priv->always_show_tabs = (show_tabs != FALSE);
-
-	update_tabs_visibility (nb, FALSE);
-}
-
-/**
  * gedit_notebook_add_tab:
  * @nb: a #GeditNotebook
  * @tab: a #GeditTab
@@ -846,10 +985,11 @@ gedit_notebook_add_tab (GeditNotebook *nb,
 				  GTK_WIDGET (tab),
 				  tab_label,
 				  position);
-	update_tabs_visibility (nb, TRUE);
+
+	update_tabs_visibility (nb, FALSE);
 
 	/* The signal handler may have reordered the tabs */
-	position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), 
+	position = gtk_notebook_page_num (GTK_NOTEBOOK (nb),
 					  GTK_WIDGET (tab));
 
 	if (jump_to)

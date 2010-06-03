@@ -55,6 +55,12 @@ G_BEGIN_DECLS
 #define GEDIT_IS_NOTEBOOK_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GEDIT_TYPE_NOTEBOOK))
 #define GEDIT_NOTEBOOK_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GEDIT_TYPE_NOTEBOOK, GeditNotebookClass))
 
+typedef enum {
+	GEDIT_NOTEBOOK_SHOW_TABS_NEVER,
+	GEDIT_NOTEBOOK_SHOW_TABS_AUTO,
+	GEDIT_NOTEBOOK_SHOW_TABS_ALWAYS
+} GeditNotebookShowTabsModeType;
+
 /* Private structure type */
 typedef struct _GeditNotebookPrivate	GeditNotebookPrivate;
 
@@ -113,11 +119,6 @@ void            gedit_notebook_move_tab		(GeditNotebook *src,
 						 GeditNotebook *dest,
 						 GeditTab      *tab,
 						 gint           dest_position);
-
-/* FIXME: do we really need this function ? */
-void		gedit_notebook_set_always_show_tabs	
-						(GeditNotebook *nb,
-						 gboolean       show_tabs);
 
 void		gedit_notebook_set_close_buttons_sensitive
 						(GeditNotebook *nb,

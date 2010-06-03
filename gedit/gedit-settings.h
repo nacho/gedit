@@ -130,6 +130,7 @@ void			 gedit_settings_set_wrap_mode			(GSettings     *settings,
 /* window state keys */
 #define GEDIT_SETTINGS_WINDOW_STATE			"state"
 #define GEDIT_SETTINGS_WINDOW_SIZE			"size"
+#define GEDIT_SETTINGS_SHOW_TABS_MODE			"notebook-show-tabs-mode"
 #define GEDIT_SETTINGS_SIDE_PANEL_SIZE			"side-panel-size"
 #define GEDIT_SETTINGS_SIDE_PANEL_ACTIVE_PAGE		"side-panel-active-page"
 #define GEDIT_SETTINGS_BOTTOM_PANEL_SIZE		"bottom-panel-size"
