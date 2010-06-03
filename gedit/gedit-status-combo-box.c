@@ -21,6 +21,8 @@
  */
 
 #include "gedit-status-combo-box.h"
+
+#include <gdk/gdkkeysyms.h>
 #include "gseal-gtk-compat.h"
 
 #define COMBO_BOX_TEXT_DATA "GeditStatusComboBoxTextData"
@@ -195,9 +197,9 @@ menu_position_func (GtkMenu		*menu,
 }
 
 static void
-button_press_event (GtkWidget           *widget,
-		    GdkEventButton      *event,
-		    GeditStatusComboBox *combo)
+show_menu (GeditStatusComboBox *combo,
+	   guint                button,
+	   guint32              time)
 {
 	GtkRequisition request;
 	gint max_height;
@@ -215,13 +217,13 @@ button_press_event (GtkWidget           *widget,
 		gtk_widget_set_size_request (gtk_widget_get_toplevel (combo->priv->menu), -1, max_height);
 	}
 	
-	gtk_menu_popup (GTK_MENU (combo->priv->menu), 
-			NULL, 
-			NULL, 
-			(GtkMenuPositionFunc)menu_position_func, 
-			combo, 
-			event->button, 
-			event->time);
+	gtk_menu_popup (GTK_MENU (combo->priv->menu),
+			NULL,
+			NULL,
+			(GtkMenuPositionFunc)menu_position_func,
+			combo,
+			button,
+			time);
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (combo->priv->button), TRUE);
 
@@ -230,6 +232,36 @@ button_press_event (GtkWidget           *widget,
 		gtk_menu_shell_select_item (GTK_MENU_SHELL (combo->priv->menu), 
 					    combo->priv->current_item);
 	}
+}
+
+static gboolean
+button_press_event (GtkWidget           *widget,
+		    GdkEventButton      *event,
+		    GeditStatusComboBox *combo)
+{
+	if (event->type == GDK_BUTTON_PRESS && event->button == 1)
+	{
+		show_menu (combo, event->button,event->time);
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static gboolean
+key_press_event (GtkWidget           *widget,
+		 GdkEventKey         *event,
+		 GeditStatusComboBox *combo)
+{
+	if (event->keyval == GDK_Return || event->keyval == GDK_ISO_Enter ||
+	    event->keyval == GDK_KP_Enter || event->keyval == GDK_space ||
+	    event->keyval == GDK_KP_Space)
+	{
+		show_menu (combo, 0, event->time);
+		return TRUE;
+	}
+
+	return FALSE;
 }
 
 static void
@@ -297,9 +329,13 @@ gedit_status_combo_box_init (GeditStatusComboBox *self)
 	self->priv->menu = gtk_menu_new ();
 	g_object_ref_sink (self->priv->menu);
 
-	g_signal_connect (self->priv->button, 
-			  "button-press-event", 
-			  G_CALLBACK (button_press_event), 
+	g_signal_connect (self->priv->button,
+			  "button-press-event",
+			  G_CALLBACK (button_press_event),
+			  self);
+	g_signal_connect (self->priv->button,
+			  "key-press-event",
+			  G_CALLBACK (key_press_event),
 			  self);
 	g_signal_connect (self->priv->menu,
 			  "deactivate",
