@@ -485,17 +485,17 @@ close_input_stream_ready_cb (GInputStream *stream,
 		return;
 	}
 	
-	gedit_debug_message (DEBUG_SAVER, "Finished closing input stream");
+	gedit_debug_message (DEBUG_LOADER, "Finished closing input stream");
 	
 	if (!g_input_stream_close_finish (stream, res, &error))
 	{
-		gedit_debug_message (DEBUG_SAVER, "Closing input stream error: %s", error->message);
+		gedit_debug_message (DEBUG_LOADER, "Closing input stream error: %s", error->message);
 
 		async_failed (async, error);
 		return;
 	}
 
-	gedit_debug_message (DEBUG_SAVER, "Close output stream");
+	gedit_debug_message (DEBUG_LOADER, "Close output stream");
 	if (!g_output_stream_close (async->loader->priv->output,
 				    async->cancellable, &error))
 	{
@@ -539,10 +539,10 @@ write_file_chunk (AsyncData *async)
 					       async->cancellable,
 					       &error);
 
-	gedit_debug_message (DEBUG_SAVER, "Written: %" G_GSSIZE_FORMAT, bytes_written);
+	gedit_debug_message (DEBUG_LOADER, "Written: %" G_GSSIZE_FORMAT, bytes_written);
 	if (bytes_written == -1)
 	{
-		gedit_debug_message (DEBUG_SAVER, "Write error: %s", error->message);
+		gedit_debug_message (DEBUG_LOADER, "Write error: %s", error->message);
 		async_failed (async, error);
 		return;
 	}
