@@ -468,8 +468,8 @@ gedit_session_is_restored (void)
 }
 
 static void
-parse_window (GKeyFile  *state_file,
-	     const char *group_name)
+parse_window (GKeyFile    *state_file,
+	      const gchar *group_name)
 {
 	GeditWindow *window;
 	gchar *role, *active_document, **documents;
@@ -477,7 +477,7 @@ parse_window (GKeyFile  *state_file,
 	gboolean visible;
 	GeditPanel *panel;
 	GError *error = NULL;
-  
+
 	role = g_key_file_get_string (state_file, group_name, "role", NULL);
 
 	gedit_debug_message (DEBUG_SESSION, "Window role: %s", role);
@@ -495,60 +495,51 @@ parse_window (GKeyFile  *state_file,
 					"width", &error);
 	if (error)
 	{
-	        g_clear_error (&error);
+		g_clear_error (&error);
 		width = -1;
 	}
 	height = g_key_file_get_integer (state_file, group_name,
 					 "height", &error);
 	if (error)
 	{
-	        g_clear_error (&error);
+		g_clear_error (&error);
 		height = -1;
 	}
 	gtk_window_set_default_size (GTK_WINDOW (window), width, height);
-  
- 
+
 	visible = g_key_file_get_boolean (state_file, group_name,
 					  "side-panel-visible", &error);
 	if (error)
 	{
-	        g_clear_error (&error);
+		g_clear_error (&error);
 		visible = FALSE;
 	}
-  
+
 	panel = gedit_window_get_side_panel (window);
-  
+	gtk_widget_set_visible (GTK_WIDGET (panel), visible);
+
 	if (visible)
 	{
-	        gedit_debug_message (DEBUG_SESSION, "Side panel visible");
-		gtk_widget_show (GTK_WIDGET (panel));
+		gedit_debug_message (DEBUG_SESSION, "Side panel visible");
 	}
 	else
 	{
-	      gedit_debug_message (DEBUG_SESSION, "Side panel _NOT_ visible");
-	      gtk_widget_hide (GTK_WIDGET (panel));
+		gedit_debug_message (DEBUG_SESSION, "Side panel _NOT_ visible");
 	}
-  
+
 	visible = g_key_file_get_boolean (state_file, group_name,
 					  "bottom-panel-visible", &error);
 	if (error)
 	{
-	        g_clear_error (&error);
+		g_clear_error (&error);
 		visible = FALSE;
 	}
-  
-	panel = gedit_window_get_bottom_panel (window);
-	if (visible)
-	{
-	        gedit_debug_message (DEBUG_SESSION, "Bottom panel visible");
-		gtk_widget_show (GTK_WIDGET (panel));
-	}
-	else
-	{
-	        gedit_debug_message (DEBUG_SESSION, "Bottom panel _NOT_ visible");
-		gtk_widget_hide (GTK_WIDGET (panel));
-	}
 
+	panel = gedit_window_get_bottom_panel (window);
+	gtk_widget_set_visible (GTK_WIDGET (panel), visible);
+	gedit_debug_message (DEBUG_SESSION, "Bottom panel %svisible",
+			     visible ? "" : "_NOT_ ");
+	
 	active_document = g_key_file_get_string (state_file, group_name,
 						 "active-document", NULL);
 	documents = g_key_file_get_string_list (state_file, group_name,
@@ -588,7 +579,7 @@ parse_window (GKeyFile  *state_file,
 	}
 
 	g_free (active_document);
-	
+
 	gtk_widget_show (GTK_WIDGET (window));
 }
 
@@ -605,7 +596,7 @@ gedit_session_load (void)
 {
 	GKeyFile *state_file;
 	gchar **groups;
-	int i;
+	gint i;
 
 	gedit_debug (DEBUG_SESSION);
 

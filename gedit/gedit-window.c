@@ -642,10 +642,7 @@ set_toolbar_style (GeditWindow *window,
 		visible = gtk_widget_get_visible (origin->priv->toolbar);
 	
 	/* Set visibility */
-	if (visible)
-		gtk_widget_show (window->priv->toolbar);
-	else
-		gtk_widget_hide (window->priv->toolbar);
+	gtk_widget_set_visible (window->priv->toolbar, visible);
 
 	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewToolbar");
@@ -1989,10 +1986,7 @@ set_statusbar_style (GeditWindow *window,
 		visible = gtk_widget_get_visible (origin->priv->statusbar);
 	}
 
-	if (visible)
-		gtk_widget_show (window->priv->statusbar);
-	else
-		gtk_widget_hide (window->priv->statusbar);
+	gtk_widget_set_visible (window->priv->statusbar, visible);
 
 	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewStatusbar");
@@ -4052,14 +4046,8 @@ check_window_is_active (GeditWindow *window,
 {
 	if (window->priv->window_state & GDK_WINDOW_STATE_FULLSCREEN)
 	{
-		if (gtk_window_is_active (GTK_WINDOW (window)))
-		{
-			gtk_widget_show (window->priv->fullscreen_controls);
-		}
-		else
-		{
-			gtk_widget_hide (window->priv->fullscreen_controls);
-		}
+		gtk_widget_set_visible (window->priv->fullscreen_controls,
+					gtk_window_is_active (GTK_WINDOW (window)));
 	}
 }
 

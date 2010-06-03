@@ -288,24 +288,19 @@ static void
 show_replace_widgets (GeditSearchDialog *dlg,
 		      gboolean           show_replace)
 {
+	gtk_widget_set_visible (dlg->priv->replace_label, show_replace);
+	gtk_widget_set_visible (dlg->priv->replace_entry, show_replace);
+	gtk_widget_set_visible (dlg->priv->replace_all_button, show_replace);
+	gtk_widget_set_visible (dlg->priv->replace_button, show_replace);
+
 	if (show_replace)
 	{
-		gtk_widget_show (dlg->priv->replace_label);
-		gtk_widget_show (dlg->priv->replace_entry);
-		gtk_widget_show (dlg->priv->replace_all_button);
-		gtk_widget_show (dlg->priv->replace_button);
-
 		gtk_table_set_row_spacings (GTK_TABLE (dlg->priv->table), 12);
 
 		gtk_window_set_title (GTK_WINDOW (dlg), _("Replace"));
 	}
 	else
 	{
-		gtk_widget_hide (dlg->priv->replace_label);
-		gtk_widget_hide (dlg->priv->replace_entry);
-		gtk_widget_hide (dlg->priv->replace_all_button);
-		gtk_widget_hide (dlg->priv->replace_button);
-
 		gtk_table_set_row_spacings (GTK_TABLE (dlg->priv->table), 0);
 
 		gtk_window_set_title (GTK_WINDOW (dlg), _("Find"));

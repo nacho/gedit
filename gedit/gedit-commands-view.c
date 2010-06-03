@@ -52,10 +52,7 @@ _gedit_cmd_view_show_toolbar (GtkAction   *action,
 
 	visible = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
 
-	if (visible)
-		gtk_widget_show (window->priv->toolbar);
-	else
-		gtk_widget_hide (window->priv->toolbar);
+	gtk_widget_set_visible (window->priv->toolbar, visible);
 }
 
 void
@@ -68,10 +65,7 @@ _gedit_cmd_view_show_statusbar (GtkAction   *action,
 
 	visible = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
 
-	if (visible)
-		gtk_widget_show (window->priv->statusbar);
-	else
-		gtk_widget_hide (window->priv->statusbar);
+	gtk_widget_set_visible (window->priv->statusbar, visible);
 }
 
 void
@@ -84,17 +78,13 @@ _gedit_cmd_view_show_side_pane (GtkAction   *action,
 	gedit_debug (DEBUG_COMMANDS);
 
 	visible = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
-
 	panel = gedit_window_get_side_panel (window);
+	
+	gtk_widget_set_visible (GTK_WIDGET (panel), visible);
 
 	if (visible)
 	{
-		gtk_widget_show (GTK_WIDGET (panel));
 		gtk_widget_grab_focus (GTK_WIDGET (panel));
-	}
-	else
-	{
-		gtk_widget_hide (GTK_WIDGET (panel));
 	}
 }
 
@@ -108,17 +98,13 @@ _gedit_cmd_view_show_bottom_pane (GtkAction   *action,
 	gedit_debug (DEBUG_COMMANDS);
 
 	visible = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
-
 	panel = gedit_window_get_bottom_panel (window);
+
+	gtk_widget_set_visible (GTK_WIDGET (panel), visible);
 
 	if (visible)
 	{
-		gtk_widget_show (GTK_WIDGET (panel));
 		gtk_widget_grab_focus (GTK_WIDGET (panel));
-	}
-	else
-	{
-		gtk_widget_hide (GTK_WIDGET (panel));
 	}
 }
 

@@ -125,16 +125,10 @@ create_option_menu (GeditFileChooserDialog *dialog)
 static void
 update_newline_visibility (GeditFileChooserDialog *dialog)
 {
-	if (gtk_file_chooser_get_action (GTK_FILE_CHOOSER (dialog)) == GTK_FILE_CHOOSER_ACTION_SAVE)
-	{
-		gtk_widget_show (dialog->priv->newline_label);
-		gtk_widget_show (dialog->priv->newline_combo);
-	}
-	else
-	{
-		gtk_widget_hide (dialog->priv->newline_label);
-		gtk_widget_hide (dialog->priv->newline_combo);
-	}
+	gboolean visible = gtk_file_chooser_get_action (GTK_FILE_CHOOSER (dialog)) == GTK_FILE_CHOOSER_ACTION_SAVE;
+
+	gtk_widget_set_visible (dialog->priv->newline_label, visible);
+	gtk_widget_set_visible (dialog->priv->newline_combo, visible);
 }
 
 static void
