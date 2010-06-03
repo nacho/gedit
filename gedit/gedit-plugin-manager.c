@@ -58,16 +58,16 @@ enum
 
 struct _GeditPluginManagerPrivate
 {
-	GtkWidget	*tree;
-
-	GtkWidget	*about_button;
-	GtkWidget	*configure_button;
-
 	GeditPluginsEngine *engine;
 
-	GtkWidget 	*about;
+	GtkWidget          *tree;
+
+	GtkWidget          *about_button;
+	GtkWidget          *configure_button;
+
+	GtkWidget          *about;
 	
-	GtkWidget	*popup_menu;
+	GtkWidget          *popup_menu;
 };
 
 G_DEFINE_TYPE(GeditPluginManager, gedit_plugin_manager, GTK_TYPE_VBOX)
@@ -127,7 +127,7 @@ about_button_cb (GtkWidget          *button,
 			  &pm->priv->about);
 
 	gtk_window_set_transient_for (GTK_WINDOW (pm->priv->about),
-				      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(pm))));
+				      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (pm))));
 	gtk_widget_show (pm->priv->about);
 }
 
@@ -233,10 +233,9 @@ active_toggled_cb (GtkCellRendererToggle *cell,
 }
 
 static void
-cursor_changed_cb (GtkTreeView *view,
-		   gpointer     data)
+cursor_changed_cb (GtkTreeView        *view,
+		   GeditPluginManager *pm)
 {
-	GeditPluginManager *pm = data;
 	GeditPluginInfo *info;
 
 	gedit_debug (DEBUG_PLUGINS);
@@ -251,12 +250,11 @@ cursor_changed_cb (GtkTreeView *view,
 }
 
 static void
-row_activated_cb (GtkTreeView       *tree_view,
-		  GtkTreePath       *path,
-		  GtkTreeViewColumn *column,
-		  gpointer           data)
+row_activated_cb (GtkTreeView        *tree_view,
+		  GtkTreePath        *path,
+		  GtkTreeViewColumn  *column,
+		  GeditPluginManager *pm)
 {
-	GeditPluginManager *pm = data;
 	GtkTreeIter iter;
 	GtkTreeModel *model;
 
@@ -356,6 +354,9 @@ plugin_manager_set_active (GeditPluginManager *pm,
 			res = FALSE;
 		}
 	}
+
+	/* cause the configure button sensitivity to be updated */
+	cursor_changed_cb (GTK_TREE_VIEW (pm->priv->tree), pm);
 
 	return res;
 }
@@ -721,11 +722,11 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 					     NULL);
 
 	g_signal_connect (pm->priv->tree,
-			  "cursor_changed",
+			  "cursor-changed",
 			  G_CALLBACK (cursor_changed_cb),
 			  pm);
 	g_signal_connect (pm->priv->tree,
-			  "row_activated",
+			  "row-activated",
 			  G_CALLBACK (row_activated_cb),
 			  pm);
 
@@ -779,10 +780,12 @@ plugin_toggled_cb (GeditPluginsEngine *engine,
 		return;
 	}
 
-	gtk_list_store_set (GTK_LIST_STORE (model), &iter, ACTIVE_COLUMN, gedit_plugin_info_is_active (info), -1);
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			    ACTIVE_COLUMN, gedit_plugin_info_is_active (info),
+			    -1);
 }
 
-static void 
+static void
 gedit_plugin_manager_init (GeditPluginManager *pm)
 {
 	GtkWidget *label;
@@ -793,9 +796,7 @@ gedit_plugin_manager_init (GeditPluginManager *pm)
 
 	pm->priv = GEDIT_PLUGIN_MANAGER_GET_PRIVATE (pm);
 
-	/*
-	 * Always we create the manager, firstly we rescan the plugins directory
-	 */
+	/* Before we create the manager, we rescan the plugins directory */
 	gedit_plugins_engine_rescan_plugins (gedit_plugins_engine_get_default ());
 
 	gtk_box_set_spacing (GTK_BOX (pm), 6);
@@ -833,7 +834,7 @@ gedit_plugin_manager_init (GeditPluginManager *pm)
 									   GTK_STOCK_PREFERENCES);
 	gtk_container_add (GTK_CONTAINER (hbuttonbox), pm->priv->configure_button);
 
-	/* setup a window of a sane size. */
+	/* Set a sane size for the window */
 	gtk_widget_set_size_request (GTK_WIDGET (viewport), 270, 100);
 
 	g_signal_connect (pm->priv->about_button,
