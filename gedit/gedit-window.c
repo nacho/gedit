@@ -1118,6 +1118,16 @@ create_language_menu_item (GtkSourceLanguage *lang,
 	g_free (escaped_section);
 }
 
+static gint
+language_section_compare (GtkSourceLanguage *a,
+			  GtkSourceLanguage *b)
+{
+	const gchar *section_a = gtk_source_language_get_section (a);
+	const gchar *section_b = gtk_source_language_get_section (b);
+	
+	return g_utf8_collate (section_a, section_b);
+}
+
 static void
 create_languages_menu (GeditWindow *window)
 {
@@ -1163,6 +1173,8 @@ create_languages_menu (GeditWindow *window)
 	languages = gedit_language_manager_list_languages_sorted (
 						gedit_get_language_manager (),
 						FALSE);
+
+	languages = g_slist_sort (languages, (GCompareFunc)language_section_compare);
 
 	for (l = languages, i = 0; l != NULL; l = l->next, ++i)
 	{

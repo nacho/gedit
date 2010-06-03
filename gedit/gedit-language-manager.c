@@ -49,12 +49,11 @@ gedit_get_language_manager (void)
 }
 
 static gint
-language_compare (gconstpointer a, gconstpointer b)
+language_compare (GtkSourceLanguage *a,
+		  GtkSourceLanguage *b)
 {
-	GtkSourceLanguage *lang_a = (GtkSourceLanguage *)a;
-	GtkSourceLanguage *lang_b = (GtkSourceLanguage *)b;
-	const gchar *name_a = gtk_source_language_get_name (lang_a);
-	const gchar *name_b = gtk_source_language_get_name (lang_b);
+	const gchar *name_a = gtk_source_language_get_name (a);
+	const gchar *name_b = gtk_source_language_get_name (b);
 
 	return g_utf8_collate (name_a, name_b);
 }
