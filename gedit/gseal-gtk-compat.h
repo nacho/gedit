@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 			gtk_im_context_reset (view->im_context); \
 		} \
 	} G_STMT_END
-#define gdk_drag_context_get_suggested_action(context) ((context)->suggested_action)
+#define gdk_drag_context_get_suggested_action(context)          ((context)->suggested_action)
 #endif /* GTK < 2.22.0 */
 
 #if !GTK_CHECK_VERSION (2, 20, 0)
@@ -57,6 +57,17 @@ G_BEGIN_DECLS
 #define gtk_widget_get_state(widget)                            ((widget)->state)
 #define gtk_widget_get_visible(widget)                          (GTK_WIDGET_VISIBLE (widget))
 #define gtk_widget_set_window(widget, _window)                  ((widget)->window = _window)
+#define gtk_widget_set_visible(widget, visible) \
+	G_STMT_START { \
+		if (visible) \
+		{ \
+			gtk_widget_show (widget); \
+		} \
+		else \
+		{ \
+			gtk_widget_hide (widget); \
+		} \
+	} G_STMT_END
 #endif /* GTK+ < 2.18.0 */
 
 G_END_DECLS
