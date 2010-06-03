@@ -68,7 +68,7 @@ typedef struct _GeditWindowPrivate GeditWindowPrivate;
  */
 typedef struct _GeditWindow GeditWindow;
 
-struct _GeditWindow 
+struct _GeditWindow
 {
 	GtkWindow window;
 
@@ -81,10 +81,10 @@ struct _GeditWindow
  */
 typedef struct _GeditWindowClass GeditWindowClass;
 
-struct _GeditWindowClass 
+struct _GeditWindowClass
 {
 	GtkWindowClass parent_class;
-	
+
 	/* Signals */
 	void	 (* tab_added)      	(GeditWindow *window,
 					 GeditTab    *tab);
@@ -104,7 +104,7 @@ GType 		 gedit_window_get_type 			(void) G_GNUC_CONST;
 
 GeditTab	*gedit_window_create_tab		(GeditWindow         *window,
 							 gboolean             jump_to);
-							 
+
 GeditTab	*gedit_window_create_tab_from_location	(GeditWindow         *window,
 							 GFile               *location,
 							 const GeditEncoding *encoding,
@@ -122,12 +122,12 @@ GeditTab	*gedit_window_create_tab_from_stream	(GeditWindow         *window,
 
 void		 gedit_window_close_tab			(GeditWindow         *window,
 							 GeditTab            *tab);
-							 
+
 void		 gedit_window_close_all_tabs		(GeditWindow         *window);
 
 void		 gedit_window_close_tabs		(GeditWindow         *window,
 							 const GList         *tabs);
-							 
+
 GeditTab	*gedit_window_get_active_tab		(GeditWindow         *window);
 
 void		 gedit_window_set_active_tab		(GeditWindow         *window,

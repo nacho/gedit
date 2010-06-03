@@ -386,29 +386,6 @@ static void
 client_quit_cb (EggSMClient *client,
 		gpointer     data)
 {
-#if 0
-	gedit_debug (DEBUG_SESSION);
-
-	if (!client->save_yourself_emitted)
-		gedit_file_close_all ();
-
-	gedit_debug_message (DEBUG_FILE, "All files closed.");
-	
-	bonobo_mdi_destroy (BONOBO_MDI (gedit_mdi));
-	
-	gedit_debug_message (DEBUG_FILE, "Unref gedit_mdi.");
-
-	g_object_unref (G_OBJECT (gedit_mdi));
-
-	gedit_debug_message (DEBUG_FILE, "Unref gedit_mdi: DONE");
-
-	gedit_debug_message (DEBUG_FILE, "Unref gedit_app_server.");
-
-	bonobo_object_unref (gedit_app_server);
-
-	gedit_debug_message (DEBUG_FILE, "Unref gedit_app_server: DONE");
-#endif
-
 	gtk_main_quit ();
 }
 

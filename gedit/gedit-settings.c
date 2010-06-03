@@ -918,20 +918,12 @@ gedit_settings_get_toolbar_style (GeditSettings *gs)
 
 	if (strcmp (str, "GEDIT_TOOLBAR_ICONS") == 0)
 		res = GEDIT_TOOLBAR_ICONS;
+	else if (strcmp (str, "GEDIT_TOOLBAR_ICONS_AND_TEXT") == 0)
+		res = GEDIT_TOOLBAR_ICONS_AND_TEXT;
+	else if (strcmp (str, "GEDIT_TOOLBAR_ICONS_BOTH_HORIZ") == 0)
+		res = GEDIT_TOOLBAR_ICONS_BOTH_HORIZ;
 	else
-	{
-		if (strcmp (str, "GEDIT_TOOLBAR_ICONS_AND_TEXT") == 0)
-		{
-			res = GEDIT_TOOLBAR_ICONS_AND_TEXT;
-		}
-		else 
-		{
-			if (strcmp (str, "GEDIT_TOOLBAR_ICONS_BOTH_HORIZ") == 0)
-				res = GEDIT_TOOLBAR_ICONS_BOTH_HORIZ;
-			else
-				res = GEDIT_TOOLBAR_SYSTEM;
-		}
-	}
+		res = GEDIT_TOOLBAR_SYSTEM;
 
 	g_free (str);
 
@@ -979,8 +971,10 @@ get_wrap_str (guint mode)
 			str = g_strdup ("GTK_WRAP_CHAR");
 			break;
 
-		default: /* GTK_WRAP_WORD */
+		case GTK_WRAP_WORD:
+		default:
 			str = g_strdup ("GTK_WRAP_WORD");
+			break;
 	}
 	
 	return str;
@@ -1004,12 +998,13 @@ gedit_settings_get_wrap_mode (GSettings   *settings,
 	{
 		res = GTK_WRAP_NONE;
 	}
+	else if (strcmp (str, "GTK_WRAP_CHAR") == 0)
+	{
+		res = GTK_WRAP_CHAR;
+	}
 	else
 	{
-		if (strcmp (str, "GTK_WRAP_CHAR") == 0)
-			res = GTK_WRAP_CHAR;
-		else
-			res = GTK_WRAP_WORD;
+		res = GTK_WRAP_WORD;
 	}
 
 	g_free (str);

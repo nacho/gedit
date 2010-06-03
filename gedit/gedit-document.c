@@ -503,7 +503,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 
 	g_object_class_install_property (object_class, PROP_LOCATION,
 					 g_param_spec_object ("location",
-							      "LOCATION",
+							      "Location",
 							      "The document's location",
 							      G_TYPE_FILE,
 							      G_PARAM_READWRITE |
