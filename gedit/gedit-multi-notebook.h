@@ -65,6 +65,9 @@ struct _GeditMultiNotebookClass
 	void	(* tab_removed)			(GeditMultiNotebook *mnb,
 						 GeditNotebook      *notebook,
 						 GeditTab           *tab);
+	void	(* switch_tab)			(GeditMultiNotebook *mnb,
+						 GeditTab           *old_tab,
+						 GeditTab           *new_tab);
 	void	(* tab_close_request)		(GeditMultiNotebook *mnb,
 						 GeditNotebook      *notebook,
 						 GeditTab           *tab);

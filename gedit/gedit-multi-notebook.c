@@ -52,6 +52,7 @@ enum
 	NOTEBOOK_REMOVED,
 	TAB_ADDED,
 	TAB_REMOVED,
+	SWITCH_TAB,
 	TAB_CLOSE_REQUEST,
 	TAB_DETACHED,
 	TABS_REORDERED,
@@ -151,6 +152,17 @@ gedit_multi_notebook_class_init (GeditMultiNotebookClass *klass)
 			      G_TYPE_NONE,
 			      2,
 			      GEDIT_TYPE_NOTEBOOK,
+			      GEDIT_TYPE_TAB);
+	signals[SWITCH_TAB] =
+		g_signal_new ("switch-tab",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GeditMultiNotebookClass, switch_tab),
+			      NULL, NULL,
+			      gedit_marshal_VOID__OBJECT_OBJECT,
+			      G_TYPE_NONE,
+			      2,
+			      GEDIT_TYPE_TAB,
 			      GEDIT_TYPE_TAB);
 	signals[TAB_CLOSE_REQUEST] =
 		g_signal_new ("tab-close-request",
@@ -302,19 +314,25 @@ static void
 notebook_switch_page (GtkNotebook        *book,
 		      GtkNotebookPage    *pg,
 		      gint                page_num,
-		      GeditMultiNotebook *multi)
+		      GeditMultiNotebook *mnb)
 {
 	GeditTab *tab;
 
 	/* CHECK: I don't know why but it seems notebook_switch_page is called
 	two times every time the user change the active tab */
 	tab = GEDIT_TAB (gtk_notebook_get_nth_page (book, page_num));
-	if (tab != multi->priv->active_tab)
+	if (tab != mnb->priv->active_tab)
 	{
-		/* set the active tab */
-		multi->priv->active_tab = tab;
+		GeditTab *old_tab;
 
-		g_object_notify (G_OBJECT (multi), "active-tab");
+		old_tab = mnb->priv->active_tab;
+
+		/* set the active tab */
+		mnb->priv->active_tab = tab;
+
+		g_object_notify (G_OBJECT (mnb), "active-tab");
+
+		g_signal_emit (G_OBJECT (mnb), signals[SWITCH_TAB], 0, old_tab, tab);
 	}
 }
 

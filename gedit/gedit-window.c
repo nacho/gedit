@@ -725,18 +725,21 @@ received_clipboard_contents (GtkClipboard     *clipboard,
 			     GtkSelectionData *selection_data,
 			     GeditWindow      *window)
 {
+	GeditTab *tab;
 	gboolean sens;
 	GtkAction *action;
 
 	/* getting clipboard contents is async, so we need to
 	 * get the current tab and its state */
 
-	if (window->priv->active_tab != NULL)
+	tab = gedit_window_get_active_tab (window);
+
+	if (tab != NULL)
 	{
 		GeditTabState state;
 		gboolean state_normal;
 
-		state = gedit_tab_get_state (window->priv->active_tab);
+		state = gedit_tab_get_state (tab);
 		state_normal = (state == GEDIT_TAB_STATE_NORMAL);
 
 		sens = state_normal &&
@@ -1923,7 +1926,7 @@ update_documents_list_menu (GeditWindow *window)
 					       GTK_UI_MANAGER_MENUITEM,
 					       FALSE);
 
-			if (GEDIT_TAB (tab) == p->active_tab)
+			if (GEDIT_TAB (tab) == gedit_window_get_active_tab (window))
 				gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
 
 			g_object_unref (action);
@@ -2367,13 +2370,16 @@ update_overwrite_mode_statusbar (GtkTextView *view,
 static void 
 set_title (GeditWindow *window)
 {
+	GeditTab *tab;
 	GeditDocument *doc = NULL;
 	gchar *name;
 	gchar *dirname = NULL;
 	gchar *title = NULL;
 	gint len;
 
-	if (window->priv->active_tab == NULL)
+	tab = gedit_window_get_active_tab (window);
+
+	if (tab == NULL)
 	{
 		gedit_app_set_window_title (gedit_app_get_default (),
 		                            window,
@@ -2381,7 +2387,7 @@ set_title (GeditWindow *window)
 		return;
 	}
 
-	doc = gedit_tab_get_document (window->priv->active_tab);
+	doc = gedit_tab_get_document (tab);
 	g_return_if_fail (doc != NULL);
 
 	name = gedit_document_get_short_name_for_display (doc);
@@ -2609,18 +2615,19 @@ language_changed (GObject     *object,
 }
 
 static void 
-active_tab_changed (GeditMultiNotebook *multi,
-		    GParamSpec         *pspec,
-		    GeditWindow        *window)
+tab_switched (GeditMultiNotebook *mnb,
+	      GeditTab           *old_tab,
+	      GeditTab           *new_tab,
+	      GeditWindow        *window)
 {
 	GeditDocument *doc;
 	GeditView *view;
 
-	if (window->priv->active_tab)
+	if (old_tab)
 	{
 		if (window->priv->tab_width_id)
 		{
-			g_signal_handler_disconnect (gedit_tab_get_view (window->priv->active_tab), 
+			g_signal_handler_disconnect (gedit_tab_get_view (old_tab),
 						     window->priv->tab_width_id);
 		
 			window->priv->tab_width_id = 0;
@@ -2628,7 +2635,7 @@ active_tab_changed (GeditMultiNotebook *multi,
 		
 		if (window->priv->spaces_instead_of_tabs_id)
 		{
-			g_signal_handler_disconnect (gedit_tab_get_view (window->priv->active_tab), 
+			g_signal_handler_disconnect (gedit_tab_get_view (old_tab),
 						     window->priv->spaces_instead_of_tabs_id);
 		
 			window->priv->spaces_instead_of_tabs_id = 0;
@@ -2636,30 +2643,27 @@ active_tab_changed (GeditMultiNotebook *multi,
 
 		if (window->priv->language_changed_id)
 		{
-			g_signal_handler_disconnect (gedit_tab_get_document (window->priv->active_tab),
+			g_signal_handler_disconnect (gedit_tab_get_document (old_tab),
 						     window->priv->language_changed_id);
 
 			window->priv->language_changed_id = 0;
 		}
 	}
-	
-	/* set the active tab */
-	window->priv->active_tab = gedit_multi_notebook_get_active_tab (multi);
 
-	if (window->priv->active_tab == NULL || window->priv->dispose_has_run)
+	if (new_tab == NULL || window->priv->dispose_has_run)
 		return;
 
 	set_title (window);
-	set_sensitivity_according_to_tab (window, window->priv->active_tab);
+	set_sensitivity_according_to_tab (window, new_tab);
 
 	/* activate the right item in the documents menu */
-	activate_documents_list_item (window, window->priv->active_tab);
+	activate_documents_list_item (window, new_tab);
 
 	/* update the syntax menu */
 	update_languages_menu (window);
 
-	view = gedit_tab_get_view (window->priv->active_tab);
-	doc = gedit_tab_get_document (window->priv->active_tab);
+	view = gedit_tab_get_view (new_tab);
+	doc = gedit_tab_get_document (new_tab);
 
 	/* sync the statusbar */
 	update_cursor_position_statusbar (GTK_TEXT_BUFFER (doc),
@@ -2693,7 +2697,7 @@ active_tab_changed (GeditMultiNotebook *multi,
 	g_signal_emit (G_OBJECT (window), 
 		       signals[ACTIVE_TAB_CHANGED], 
 		       0, 
-		       window->priv->active_tab);
+		       new_tab);
 }
 
 static void
@@ -2934,7 +2938,7 @@ sync_state (GeditTab    *tab,
 	
 	update_window_state (window);
 	
-	if (tab != window->priv->active_tab)
+	if (tab != gedit_window_get_active_tab (window))
 		return;
 
 	set_sensitivity_according_to_tab (window, tab);
@@ -3407,9 +3411,10 @@ readonly_changed (GeditDocument *doc,
 		  GParamSpec    *pspec,
 		  GeditWindow   *window)
 {
-	set_sensitivity_according_to_tab (window, window->priv->active_tab);
+	set_sensitivity_according_to_tab (window,
+					  gedit_window_get_active_tab (window));
 
-	sync_name (window->priv->active_tab, NULL, window);
+	sync_name (gedit_window_get_active_tab (window), NULL, window);
 
 	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
 						window);
@@ -3875,9 +3880,9 @@ bottom_panel_visibility_changed (GeditPanel  *bottom_panel,
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 
 	/* focus the document */
-	if (!visible && window->priv->active_tab != NULL)
+	if (!visible)
 	{
-		gtk_widget_grab_focus (GTK_WIDGET (window->priv->active_tab));
+		gtk_widget_grab_focus (GTK_WIDGET (window->priv->multi_notebook));
 	}
 }
 
@@ -4081,7 +4086,6 @@ gedit_window_init (GeditWindow *window)
 	gedit_debug (DEBUG_WINDOW);
 
 	window->priv = GEDIT_WINDOW_GET_PRIVATE (window);
-	window->priv->active_tab = NULL;
 	window->priv->removing_tabs = FALSE;
 	window->priv->state = GEDIT_WINDOW_STATE_NORMAL;
 	window->priv->dispose_has_run = FALSE;
@@ -4145,8 +4149,8 @@ gedit_window_init (GeditWindow *window)
 			  window);
 
 	g_signal_connect (window->priv->multi_notebook,
-			  "notify::active-tab",
-			  G_CALLBACK (active_tab_changed),
+			  "switch-tab",
+			  G_CALLBACK (tab_switched),
 			  window);
 
 	g_signal_connect (window->priv->multi_notebook,
@@ -4268,14 +4272,17 @@ gedit_window_init (GeditWindow *window)
 GeditView *
 gedit_window_get_active_view (GeditWindow *window)
 {
+	GeditTab *tab;
 	GeditView *view;
 
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 
-	if (window->priv->active_tab == NULL)
+	tab = gedit_window_get_active_tab (window);
+
+	if (tab == NULL)
 		return NULL;
 
-	view = gedit_tab_get_view (GEDIT_TAB (window->priv->active_tab));
+	view = gedit_tab_get_view (tab);
 
 	return view;
 }
@@ -4439,7 +4446,8 @@ gedit_window_get_active_tab (GeditWindow *window)
 {
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 	
-	return gedit_multi_notebook_get_active_tab (window->priv->multi_notebook);
+	return (window->priv->multi_notebook == NULL) ? NULL :
+			gedit_multi_notebook_get_active_tab (window->priv->multi_notebook);
 }
 
 static void
