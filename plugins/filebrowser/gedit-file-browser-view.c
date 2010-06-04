@@ -1,19 +1,19 @@
 /*
- * gedit-file-browser-view.c - Gedit plugin providing easy file access 
+ * gedit-file-browser-view.c - Gedit plugin providing easy file access
  * from the sidepanel
- * 
+ *
  * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
@@ -37,7 +37,7 @@
 		G_TYPE_INSTANCE_GET_PRIVATE((object), \
 		GEDIT_TYPE_FILE_BROWSER_VIEW, GeditFileBrowserViewPrivate))
 
-struct _GeditFileBrowserViewPrivate 
+struct _GeditFileBrowserViewPrivate
 {
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *pixbuf_renderer;
@@ -58,7 +58,7 @@ struct _GeditFileBrowserViewPrivate
 	gboolean selected_on_button_down;
 	gint drag_button;
 	gboolean drag_started;
-	
+
 	gboolean restore_expand_state;
 	gboolean is_refresh;
 	GHashTable *expand_state;
@@ -68,7 +68,7 @@ struct _GeditFileBrowserViewPrivate
 enum
 {
 	PROP_0,
-	
+
 	PROP_CLICK_POLICY,
 	PROP_RESTORE_EXPAND_STATE
 };
@@ -92,30 +92,30 @@ static const GtkTargetEntry drag_source_targets[] = {
 GEDIT_PLUGIN_DEFINE_TYPE (GeditFileBrowserView, gedit_file_browser_view,
 	                  GTK_TYPE_TREE_VIEW)
 
-static void on_cell_edited 		(GtkCellRendererText    *cell, 
+static void on_cell_edited 		(GtkCellRendererText    *cell,
 				 	 gchar                  *path,
 				 	 gchar                  *new_text,
 				 	GeditFileBrowserView    *tree_view);
 
-static void on_begin_refresh 		(GeditFileBrowserStore  *model, 
+static void on_begin_refresh 		(GeditFileBrowserStore  *model,
 					 GeditFileBrowserView   *view);
-static void on_end_refresh 		(GeditFileBrowserStore  *model, 
+static void on_end_refresh 		(GeditFileBrowserStore  *model,
 					 GeditFileBrowserView   *view);
 
-static void on_unload			(GeditFileBrowserStore  *model, 
+static void on_unload			(GeditFileBrowserStore  *model,
 					 GFile                  *location,
 					 GeditFileBrowserView   *view);
 
-static void on_row_inserted		(GeditFileBrowserStore  *model, 
+static void on_row_inserted		(GeditFileBrowserStore  *model,
 					 GtkTreePath            *path,
 					 GtkTreeIter            *iter,
 					 GeditFileBrowserView   *view);
-		 
+
 static void
 gedit_file_browser_view_finalize (GObject *object)
 {
 	GeditFileBrowserView *obj = GEDIT_FILE_BROWSER_VIEW (object);
-	
+
 	if (obj->priv->hand_cursor)
 		gdk_cursor_unref (obj->priv->hand_cursor);
 
@@ -139,7 +139,7 @@ add_expand_state (GeditFileBrowserView *view,
 {
 	if (!location)
 		return;
-	
+
 	if (view->priv->expand_state)
 		g_hash_table_insert (view->priv->expand_state, location, g_object_ref (location));
 }
@@ -172,7 +172,7 @@ row_expanded (GtkTreeView *tree_view,
 	if (view->priv->restore_expand_state)
 	{
 		gtk_tree_model_get (view->priv->model,
-				    iter, 
+				    iter,
 				    GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION,
 				    &location,
 				    -1);
@@ -197,11 +197,11 @@ row_collapsed (GtkTreeView *tree_view,
 
 	if (!GEDIT_IS_FILE_BROWSER_STORE (view->priv->model))
 		return;
-	
+
 	if (view->priv->restore_expand_state)
 	{
-		gtk_tree_model_get (view->priv->model, 
-				    iter, 
+		gtk_tree_model_get (view->priv->model,
+				    iter,
 				    GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION,
 				    &location,
 				    -1);
@@ -289,7 +289,7 @@ motion_notify_event (GtkWidget *widget,
 		if (old_hover_path != NULL)
 			gtk_tree_path_free (old_hover_path);
 	}
-	
+
 	/* Chainup */
 	return GTK_WIDGET_CLASS (gedit_file_browser_view_parent_class)->motion_notify_event (widget, event);
 }
@@ -328,7 +328,7 @@ set_click_policy_property (GeditFileBrowserView            *obj,
 		{
 			win = gtk_widget_get_window (GTK_WIDGET (obj));
 			gdk_window_set_cursor (win, NULL);
-			
+
 			display = gtk_widget_get_display (GTK_WIDGET (obj));
 
 			if (display != NULL)
@@ -344,7 +344,7 @@ set_click_policy_property (GeditFileBrowserView            *obj,
 }
 
 static void
-directory_activated (GeditFileBrowserView *view, 
+directory_activated (GeditFileBrowserView *view,
 		     GtkTreeIter          *iter)
 {
 	gedit_file_browser_store_set_virtual_root (GEDIT_FILE_BROWSER_STORE (view->priv->model), iter);
@@ -362,15 +362,15 @@ activate_selected_files (GeditFileBrowserView *view)
 	GeditFileBrowserStoreFlag flags;
 
 	rows = gtk_tree_selection_get_selected_rows (selection, &view->priv->model);
-	
+
 	for (row = rows; row; row = row->next)
 	{
 		path = (GtkTreePath *)(row->data);
-		
+
 		/* Get iter from path */
 		if (!gtk_tree_model_get_iter (view->priv->model, &iter, path))
 			continue;
-		
+
 		gtk_tree_model_get (view->priv->model, &iter, GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS, &flags, -1);
 
 		if (FILE_IS_DIR (flags) && directory == NULL)
@@ -378,10 +378,10 @@ activate_selected_files (GeditFileBrowserView *view)
 		else if (!FILE_IS_DUMMY (flags))
 			g_signal_emit (view, signals[FILE_ACTIVATED], 0, &iter);
 	}
-	
+
 	if (directory != NULL && gtk_tree_model_get_iter (view->priv->model, &iter, directory))
 		g_signal_emit (view, signals[DIRECTORY_ACTIVATED], 0, &iter);
-			
+
 	g_list_foreach (rows, (GFunc)gtk_tree_path_free, NULL);
 	g_list_free (rows);
 }
@@ -432,10 +432,10 @@ drag_begin (GtkWidget      *widget,
 	    GdkDragContext *context)
 {
 	GeditFileBrowserView *view = GEDIT_FILE_BROWSER_VIEW (widget);
-	
+
 	view->priv->drag_button = 0;
 	view->priv->drag_started = TRUE;
-	
+
 	/* Chain up */
 	GTK_WIDGET_CLASS (gedit_file_browser_view_parent_class)->drag_begin (widget, context);
 }
@@ -447,7 +447,7 @@ did_not_drag (GeditFileBrowserView *view,
 	GtkTreeView *tree_view;
 	GtkTreeSelection *selection;
 	GtkTreePath *path;
-	
+
 	tree_view = GTK_TREE_VIEW (view);
 	selection = gtk_tree_view_get_selection (tree_view);
 
@@ -494,9 +494,9 @@ button_release_event (GtkWidget      *widget,
 		if (!view->priv->drag_started && !view->priv->ignore_release)
 			did_not_drag (view, event);
 	}
-	
+
 	/* Chain up */
-	return GTK_WIDGET_CLASS (gedit_file_browser_view_parent_class)->button_release_event (widget, event);		
+	return GTK_WIDGET_CLASS (gedit_file_browser_view_parent_class)->button_release_event (widget, event);
 }
 
 static gboolean
@@ -522,7 +522,7 @@ button_press_event (GtkWidget      *widget,
 	selection = gtk_tree_view_get_selection (tree_view);
 
 	/* Get double click time */
-	g_object_get (G_OBJECT (gtk_widget_get_settings (widget)), 
+	g_object_get (G_OBJECT (gtk_widget_get_settings (widget)),
 		      "gtk-double-click-time", &double_click_time,
 		      NULL);
 
@@ -531,11 +531,11 @@ button_press_event (GtkWidget      *widget,
 		click_count++;
 	else
 		click_count = 0;
-	
+
 	last_click_time = event->time;
 
 	/* Ignore double click if we are in single click mode */
-	if (view->priv->click_policy == GEDIT_FILE_BROWSER_VIEW_CLICK_POLICY_SINGLE && 
+	if (view->priv->click_policy == GEDIT_FILE_BROWSER_VIEW_CLICK_POLICY_SINGLE &&
 	    click_count >= 2)
 	{
 		return TRUE;
@@ -549,7 +549,7 @@ button_press_event (GtkWidget      *widget,
 	{
 		/* Keep track of path of last click so double clicks only happen
 		 * on the same item */
-		if ((event->button == 1 || event->button == 2)  && 
+		if ((event->button == 1 || event->button == 2)  &&
 		    event->type == GDK_BUTTON_PRESS)
 		{
 			if (view->priv->double_click_path[1])
@@ -564,7 +564,7 @@ button_press_event (GtkWidget      *widget,
 			/* Chain up, must be before activating the selected
 			   items because this will cause the view to grab focus */
 			widget_parent->button_press_event (widget, event);
-			
+
 			if (view->priv->double_click_path[1] &&
 			    gtk_tree_path_compare (view->priv->double_click_path[0], view->priv->double_click_path[1]) == 0)
 			{
@@ -611,7 +611,7 @@ button_press_event (GtkWidget      *widget,
 					view->priv->ignore_release = on_expander;
 				}
 			}
-			
+
 			if (call_parent)
 			{
 				/* Chain up */
@@ -621,7 +621,7 @@ button_press_event (GtkWidget      *widget,
 			{
 				gtk_widget_grab_focus (widget);
 			}
-			
+
 			if ((event->button == 1 || event->button == 2) &&
 			    event->type == GDK_BUTTON_PRESS)
 			{
@@ -634,7 +634,7 @@ button_press_event (GtkWidget      *widget,
 	}
 	else
 	{
-		if ((event->button == 1 || event->button == 2)  && 
+		if ((event->button == 1 || event->button == 2)  &&
 		    event->type == GDK_BUTTON_PRESS)
 		{
 			if (view->priv->double_click_path[1])
@@ -706,7 +706,7 @@ key_press_event (GtkWidget   *widget,
 	/* Chain up */
 	if (!handled)
 		return GTK_WIDGET_CLASS (gedit_file_browser_view_parent_class)->key_press_event (widget, event);
-	
+
 	return TRUE;
 }
 
@@ -717,12 +717,12 @@ fill_expand_state (GeditFileBrowserView *view,
 	GtkTreePath *path;
 	GtkTreeIter child;
 	GFile *location;
-	
+
 	if (!gtk_tree_model_iter_has_child (view->priv->model, iter))
 		return;
-	
+
 	path = gtk_tree_model_get_path (view->priv->model, iter);
-	
+
 	if (gtk_tree_view_row_expanded (GTK_TREE_VIEW (view), path))
 	{
 		gtk_tree_model_get (view->priv->model,
@@ -733,7 +733,7 @@ fill_expand_state (GeditFileBrowserView *view,
 
 		add_expand_state (view, location);
 	}
-	
+
 	if (gtk_tree_model_iter_children (view->priv->model, &child, iter))
 	{
 		do
@@ -742,7 +742,7 @@ fill_expand_state (GeditFileBrowserView *view,
 		}
 		while (gtk_tree_model_iter_next (view->priv->model, &child));
 	}
-	
+
 	gtk_tree_path_free (path);
 }
 
@@ -750,20 +750,20 @@ static void
 uninstall_restore_signals (GeditFileBrowserView *tree_view,
 			   GtkTreeModel         *model)
 {
-	g_signal_handlers_disconnect_by_func (model, 
-					      on_begin_refresh, 
-					      tree_view);
-					      
-	g_signal_handlers_disconnect_by_func (model, 
-					      on_end_refresh, 
-					      tree_view);
-					      
-	g_signal_handlers_disconnect_by_func (model, 
-					      on_unload, 
+	g_signal_handlers_disconnect_by_func (model,
+					      on_begin_refresh,
 					      tree_view);
 
-	g_signal_handlers_disconnect_by_func (model, 
-					      on_row_inserted, 
+	g_signal_handlers_disconnect_by_func (model,
+					      on_end_refresh,
+					      tree_view);
+
+	g_signal_handlers_disconnect_by_func (model,
+					      on_unload,
+					      tree_view);
+
+	g_signal_handlers_disconnect_by_func (model,
+					      on_row_inserted,
 					      tree_view);
 }
 
@@ -771,24 +771,24 @@ static void
 install_restore_signals (GeditFileBrowserView *tree_view,
 			 GtkTreeModel         *model)
 {
-	g_signal_connect (model, 
+	g_signal_connect (model,
 			  "begin-refresh",
-			  G_CALLBACK (on_begin_refresh), 
+			  G_CALLBACK (on_begin_refresh),
 			  tree_view);
 
-	g_signal_connect (model, 
+	g_signal_connect (model,
 			  "end-refresh",
-			  G_CALLBACK (on_end_refresh), 
+			  G_CALLBACK (on_end_refresh),
 			  tree_view);
 
-	g_signal_connect (model, 
+	g_signal_connect (model,
 			  "unload",
-			  G_CALLBACK (on_unload), 
+			  G_CALLBACK (on_unload),
 			  tree_view);
 
-	g_signal_connect_after (model, 
+	g_signal_connect_after (model,
 			  "row-inserted",
-			  G_CALLBACK (on_row_inserted), 
+			  G_CALLBACK (on_row_inserted),
 			  tree_view);
 }
 
@@ -811,7 +811,7 @@ set_restore_expand_state (GeditFileBrowserView *view,
 								  (GEqualFunc)g_file_equal,
 								  g_object_unref,
 								  NULL);
-		
+
 		if (view->priv->model && GEDIT_IS_FILE_BROWSER_STORE (view->priv->model))
 		{
 			fill_expand_state (view, NULL);
@@ -877,11 +877,11 @@ gedit_file_browser_view_class_init (GeditFileBrowserViewClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GtkTreeViewClass *tree_view_class = GTK_TREE_VIEW_CLASS (klass);
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-	
+
 	object_class->finalize = gedit_file_browser_view_finalize;
 	object_class->get_property = get_property;
 	object_class->set_property = set_property;
-	
+
 	/* Event handlers */
 	widget_class->motion_notify_event = motion_notify_event;
 	widget_class->enter_notify_event = enter_notify_event;
@@ -894,7 +894,7 @@ gedit_file_browser_view_class_init (GeditFileBrowserViewClass *klass)
 	/* Tree view handlers */
 	tree_view_class->row_expanded = row_expanded;
 	tree_view_class->row_collapsed = row_collapsed;
-	
+
 	/* Default handlers */
 	klass->directory_activated = directory_activated;
 
@@ -968,7 +968,7 @@ cell_data_cb (GtkTreeViewColumn    *tree_column,
 	    gtk_tree_path_compare (path, obj->priv->hover_path) == 0)
 	{
 		underline = PANGO_UNDERLINE_SINGLE;
-	}	
+	}
 
 	if (GEDIT_IS_FILE_BROWSER_STORE (tree_model) &&
 	    obj->priv->editable != NULL &&
@@ -1060,7 +1060,7 @@ gedit_file_browser_view_set_model (GeditFileBrowserView *tree_view,
 
 	if (GEDIT_IS_FILE_BOOKMARKS_STORE (model))
 	{
-		gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);		
+		gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
 		gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW
 						      (tree_view),
 						      bookmarks_separator_func,
@@ -1089,7 +1089,7 @@ gedit_file_browser_view_set_model (GeditFileBrowserView *tree_view,
 
 		if (tree_view->priv->restore_expand_state)
 			install_restore_signals (tree_view, model);
-				  
+
 	}
 
 	if (tree_view->priv->hover_path != NULL)
@@ -1101,7 +1101,7 @@ gedit_file_browser_view_set_model (GeditFileBrowserView *tree_view,
 	if (GEDIT_IS_FILE_BROWSER_STORE (tree_view->priv->model))
 	{
 		if (tree_view->priv->restore_expand_state)
-			uninstall_restore_signals (tree_view, 
+			uninstall_restore_signals (tree_view,
 						   tree_view->priv->model);
 	}
 
@@ -1134,18 +1134,18 @@ gedit_file_browser_view_start_rename (GeditFileBrowserView *tree_view,
 
 	/* Start editing */
 	gtk_widget_grab_focus (GTK_WIDGET (tree_view));
-	
+
 	if (gtk_tree_path_up (path))
 		gtk_tree_view_expand_to_path (GTK_TREE_VIEW (tree_view),
 					      path);
-	
+
 	gtk_tree_path_free (path);
 	tree_view->priv->editable = rowref;
 
 	gtk_tree_view_set_cursor (GTK_TREE_VIEW (tree_view),
 				  gtk_tree_row_reference_get_path (tree_view->priv->editable),
 				  tree_view->priv->column, TRUE);
-	
+
 	gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (tree_view),
 				      gtk_tree_row_reference_get_path (tree_view->priv->editable),
 				      tree_view->priv->column,
@@ -1157,9 +1157,9 @@ gedit_file_browser_view_set_click_policy (GeditFileBrowserView            *tree_
 					  GeditFileBrowserViewClickPolicy  policy)
 {
 	g_return_if_fail (GEDIT_IS_FILE_BROWSER_VIEW (tree_view));
-	
+
 	set_click_policy_property (tree_view, policy);
-	
+
 	g_object_notify (G_OBJECT (tree_view), "click-policy");
 }
 
@@ -1184,13 +1184,13 @@ on_cell_edited (GtkCellRendererText  *cell,
 	GtkTreeIter iter;
 	gboolean ret;
 	GError *error = NULL;
-	
+
 	gtk_tree_row_reference_free (tree_view->priv->editable);
 	tree_view->priv->editable = NULL;
 
 	if (new_text == NULL || *new_text == '\0')
 		return;
-		
+
 	treepath = gtk_tree_path_new_from_string (path);
 	ret = gtk_tree_model_get_iter (GTK_TREE_MODEL (tree_view->priv->model), &iter, treepath);
 	gtk_tree_path_free (treepath);
@@ -1215,8 +1215,8 @@ on_cell_edited (GtkCellRendererText  *cell,
 	}
 }
 
-static void 
-on_begin_refresh (GeditFileBrowserStore *model, 
+static void
+on_begin_refresh (GeditFileBrowserStore *model,
 		  GeditFileBrowserView  *view)
 {
 	/* Store the refresh state, so we can handle unloading of nodes while
@@ -1224,8 +1224,8 @@ on_begin_refresh (GeditFileBrowserStore *model,
 	view->priv->is_refresh = TRUE;
 }
 
-static void 
-on_end_refresh (GeditFileBrowserStore *model, 
+static void
+on_end_refresh (GeditFileBrowserStore *model,
 		GeditFileBrowserView  *view)
 {
 	/* Store the refresh state, so we can handle unloading of nodes while
@@ -1241,7 +1241,7 @@ on_unload (GeditFileBrowserStore *model,
 	/* Don't remove the expand state if we are refreshing */
 	if (!view->priv->restore_expand_state || view->priv->is_refresh)
 		return;
-	
+
 	remove_expand_state (view, location);
 }
 
@@ -1253,8 +1253,8 @@ restore_expand_state (GeditFileBrowserView  *view,
 	GFile *location;
 	GtkTreePath *path;
 
-	gtk_tree_model_get (GTK_TREE_MODEL (model), 
-			    iter, 
+	gtk_tree_model_get (GTK_TREE_MODEL (model),
+			    iter,
 			    GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION,
 			    &location,
 			    -1);
@@ -1270,12 +1270,12 @@ restore_expand_state (GeditFileBrowserView  *view,
 					  path,
 					  FALSE);
 	}
-	
+
 	gtk_tree_path_free (path);
 }
 
-static void 
-on_row_inserted (GeditFileBrowserStore *model, 
+static void
+on_row_inserted (GeditFileBrowserStore *model,
 		 GtkTreePath           *path,
 		 GtkTreeIter           *iter,
 		 GeditFileBrowserView  *view)

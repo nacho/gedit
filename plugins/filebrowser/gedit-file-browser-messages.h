@@ -1,5 +1,5 @@
 /*
- * gedit-file-browser-messages.h - Gedit plugin providing easy file access 
+ * gedit-file-browser-messages.h - Gedit plugin providing easy file access
  * from the sidepanel
  *
  * Copyright (C) 2008 - Jesse van den Kieboom <jesse@icecrew.nl>

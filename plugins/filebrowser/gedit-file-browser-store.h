@@ -1,19 +1,19 @@
 /*
- * gedit-file-browser-store.h - Gedit plugin providing easy file access 
+ * gedit-file-browser-store.h - Gedit plugin providing easy file access
  * from the sidepanel
- * 
+ *
  * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 #define GEDIT_IS_FILE_BROWSER_STORE_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_FILE_BROWSER_STORE))
 #define GEDIT_FILE_BROWSER_STORE_GET_CLASS(obj)		(G_TYPE_INSTANCE_GET_CLASS ((obj), GEDIT_TYPE_FILE_BROWSER_STORE, GeditFileBrowserStoreClass))
 
-typedef enum 
+typedef enum
 {
 	GEDIT_FILE_BROWSER_STORE_COLUMN_ICON = 0,
 	GEDIT_FILE_BROWSER_STORE_COLUMN_NAME,
@@ -43,7 +43,7 @@ typedef enum
 	GEDIT_FILE_BROWSER_STORE_COLUMN_NUM
 } GeditFileBrowserStoreColumn;
 
-typedef enum 
+typedef enum
 {
 	GEDIT_FILE_BROWSER_STORE_FLAG_IS_DIRECTORY = 1 << 0,
 	GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN    = 1 << 1,
@@ -53,7 +53,7 @@ typedef enum
 	GEDIT_FILE_BROWSER_STORE_FLAG_IS_DUMMY     = 1 << 5
 } GeditFileBrowserStoreFlag;
 
-typedef enum 
+typedef enum
 {
 	GEDIT_FILE_BROWSER_STORE_RESULT_OK,
 	GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE,
@@ -63,7 +63,7 @@ typedef enum
 	GEDIT_FILE_BROWSER_STORE_RESULT_NUM
 } GeditFileBrowserStoreResult;
 
-typedef enum 
+typedef enum
 {
 	GEDIT_FILE_BROWSER_STORE_FILTER_MODE_NONE        = 0,
 	GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN = 1 << 0,
@@ -85,7 +85,7 @@ typedef gboolean (*GeditFileBrowserStoreFilterFunc) (GeditFileBrowserStore *mode
 						     GtkTreeIter           *iter,
 						     gpointer               user_data);
 
-struct _GeditFileBrowserStore 
+struct _GeditFileBrowserStore
 {
 	GObject parent;
 

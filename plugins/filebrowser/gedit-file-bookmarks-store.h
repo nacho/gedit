@@ -1,5 +1,5 @@
 /*
- * gedit-file-bookmarks-store.h - Gedit plugin providing easy file access 
+ * gedit-file-bookmarks-store.h - Gedit plugin providing easy file access
  * from the sidepanel
  *
  * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
@@ -37,7 +37,7 @@ typedef struct _GeditFileBookmarksStore        GeditFileBookmarksStore;
 typedef struct _GeditFileBookmarksStoreClass   GeditFileBookmarksStoreClass;
 typedef struct _GeditFileBookmarksStorePrivate GeditFileBookmarksStorePrivate;
 
-enum 
+enum
 {
 	GEDIT_FILE_BOOKMARKS_STORE_COLUMN_ICON = 0,
 	GEDIT_FILE_BOOKMARKS_STORE_COLUMN_NAME,
@@ -46,7 +46,7 @@ enum
 	GEDIT_FILE_BOOKMARKS_STORE_N_COLUMNS
 };
 
-enum 
+enum
 {
 	GEDIT_FILE_BOOKMARKS_STORE_NONE            	= 0,
 	GEDIT_FILE_BOOKMARKS_STORE_IS_SEPARATOR   	= 1 << 0,  /* Separator item */
@@ -64,14 +64,14 @@ enum
 	GEDIT_FILE_BOOKMARKS_STORE_IS_LOCAL_BOOKMARK	= 1 << 12  /* A local gtk bookmark */
 };
 
-struct _GeditFileBookmarksStore 
+struct _GeditFileBookmarksStore
 {
 	GtkTreeStore parent;
 
 	GeditFileBookmarksStorePrivate *priv;
 };
 
-struct _GeditFileBookmarksStoreClass 
+struct _GeditFileBookmarksStoreClass
 {
 	GtkTreeStoreClass parent_class;
 };

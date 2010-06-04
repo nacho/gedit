@@ -1,5 +1,5 @@
 /*
- * gedit-file-browser-error.h - Gedit plugin providing easy file access 
+ * gedit-file-browser-error.h - Gedit plugin providing easy file access
  * from the sidepanel
  *
  * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>

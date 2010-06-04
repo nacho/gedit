@@ -1,19 +1,19 @@
 /*
  * gedit-file-bookmarks-store.c - Gedit plugin providing easy file access
  * from the sidepanel
- * 
+ *
  * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
@@ -334,11 +334,13 @@ process_drive_novolumes (GeditFileBookmarksStore *model,
 	if (g_drive_is_media_removable (drive) &&
 	   !g_drive_is_media_check_automatic (drive) &&
 	    g_drive_can_poll_for_media (drive))
+	{
 		/* This can be the case for floppy drives or other
 		   drives where media detection fails. We show the
 		   drive and poll for media when the user activates
 		   it */
 		add_fs (model, drive, GEDIT_FILE_BOOKMARKS_STORE_NONE, NULL);
+	}
 }
 
 static void
@@ -411,10 +413,14 @@ process_mount_novolume_cb (GMount                  *mount,
 	volume = g_mount_get_volume (mount);
 
 	if (volume)
+	{
 		g_object_unref (volume);
+	}
 	else if (!g_mount_is_shadowed (mount))
+	{
 		/* Add the mount */
 		add_fs (model, mount, GEDIT_FILE_BOOKMARKS_STORE_NONE, NULL);
+	}
 }
 
 static void
@@ -445,7 +451,7 @@ init_fs (GeditFileBookmarksStore *model)
 		model->priv->volume_monitor = g_volume_monitor_get ();
 
 		/* Connect signals */
-		for (ptr = signals; *ptr; ptr++)
+		for (ptr = signals; *ptr != NULL; ++ptr)
 		{
 			g_signal_connect (model->priv->volume_monitor,
 					  *ptr,
@@ -625,15 +631,25 @@ bookmarks_compare_names (GtkTreeModel *model,
 	/* do not sort actual bookmarks to keep same order as in nautilus */
 	if ((f1 & GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK) &&
 	    (f2 & GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK))
+	{
 		result = 0;
+	}
 	else if (n1 == NULL && n2 == NULL)
+	{
 		result = 0;
+	}
 	else if (n1 == NULL)
+	{
 		result = -1;
+	}
 	else if (n2 == NULL)
+	{
 		result = 1;
+	}
 	else
+	{
 		result = utf8_casecmp (n1, n2);
+	}
 
 	g_free (n1);
 	g_free (n2);

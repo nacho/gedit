@@ -1,5 +1,5 @@
 /*
- * gedit-file-browser-plugin.h - Gedit plugin providing easy file access 
+ * gedit-file-browser-plugin.h - Gedit plugin providing easy file access
  * from the sidepanel
  *
  * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
@@ -42,7 +42,7 @@ typedef struct _GeditFileBrowserPluginPrivate GeditFileBrowserPluginPrivate;
 typedef struct _GeditFileBrowserPlugin        GeditFileBrowserPlugin;
 typedef struct _GeditFileBrowserPluginClass   GeditFileBrowserPluginClass;
 
-struct _GeditFileBrowserPlugin 
+struct _GeditFileBrowserPlugin
 {
 	GeditPlugin parent_instance;
 
@@ -50,7 +50,7 @@ struct _GeditFileBrowserPlugin
 	GeditFileBrowserPluginPrivate *priv;
 };
 
-struct _GeditFileBrowserPluginClass 
+struct _GeditFileBrowserPluginClass
 {
 	GeditPluginClass parent_class;
 };
