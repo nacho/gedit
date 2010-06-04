@@ -190,8 +190,7 @@ get_history_store (GeditHistoryEntry *entry)
 }
 
 static gchar **
-get_history_items (GeditHistoryEntry *entry,
-		   gsize             *len)
+get_history_items (GeditHistoryEntry *entry)
 {
 	GtkListStore *store;
 	GtkTreeIter iter;
@@ -206,8 +205,7 @@ get_history_items (GeditHistoryEntry *entry,
 	n_children = gtk_tree_model_iter_n_children (GTK_TREE_MODEL (store),
 						     NULL);
 
-	*len = n_children;
-	array = g_ptr_array_sized_new (*len + 1);
+	array = g_ptr_array_sized_new (n_children + 1);
 
 	while (valid)
 	{
@@ -233,15 +231,14 @@ static void
 gedit_history_entry_save_history (GeditHistoryEntry *entry)
 {
 	gchar **items;
-	gsize len;
 
 	g_return_if_fail (GEDIT_IS_HISTORY_ENTRY (entry));
 
-	items = get_history_items (entry, &len);
+	items = get_history_items (entry);
 
 	g_settings_set_strv (entry->priv->settings,
 			     entry->priv->history_id,
-			     (const gchar * const *)items, len);
+			     (const gchar * const *)items);
 
 	g_strfreev (items);
 }
@@ -373,8 +370,7 @@ gedit_history_entry_load_history (GeditHistoryEntry *entry)
 	store = get_history_store (entry);
 
 	items = g_settings_get_strv (entry->priv->settings,
-				     entry->priv->history_id,
-				     &i);
+				     entry->priv->history_id);
 	i = 0;
 
 	gtk_list_store_clear (store);

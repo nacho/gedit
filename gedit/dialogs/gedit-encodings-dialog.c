@@ -257,13 +257,11 @@ init_shown_in_menu_tree_model (GeditEncodingsDialog *dialog)
 {
 	GtkTreeIter iter;
 	gchar **enc_strv;
-	gsize len;
 	GSList *list, *tmp;
 
 	/* add data to the list store */
 	enc_strv = g_settings_get_strv (dialog->priv->enc_settings,
-					GEDIT_SETTINGS_ENCODING_SHOWN_IN_MENU,
-					&len);
+					GEDIT_SETTINGS_ENCODING_SHOWN_IN_MENU);
 
 	list = _gedit_encoding_strv_to_list ((const gchar * const *)enc_strv);
 
@@ -308,14 +306,11 @@ response_handler (GtkDialog            *dialog,
 	if (response_id == GTK_RESPONSE_OK)
 	{
 		gchar **encs;
-		gint len;
 
 		encs = _gedit_encoding_list_to_strv (dlg->priv->show_in_menu_list);
-		len = g_slist_length (dlg->priv->show_in_menu_list);
-	
 		g_settings_set_strv (dlg->priv->enc_settings,
 				     GEDIT_SETTINGS_ENCODING_SHOWN_IN_MENU,
-				     (const gchar * const *)encs, len);
+				     (const gchar * const *)encs);
 
 		g_strfreev (encs);
 	}

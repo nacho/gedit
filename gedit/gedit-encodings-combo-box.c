@@ -264,7 +264,6 @@ update_menu (GeditEncodingsComboBox *menu)
 	const GeditEncoding *utf8_encoding;
 	const GeditEncoding *current_encoding;
 	gchar **enc_strv;
-	gsize len;
 
 	store = menu->priv->store;
 
@@ -330,8 +329,7 @@ update_menu (GeditEncodingsComboBox *menu)
 	}
 
 	enc_strv = g_settings_get_strv (menu->priv->enc_settings,
-					GEDIT_SETTINGS_ENCODING_SHOWN_IN_MENU,
-					&len);
+					GEDIT_SETTINGS_ENCODING_SHOWN_IN_MENU);
 
 	encodings = _gedit_encoding_strv_to_list ((const gchar * const *)enc_strv);
 	g_strfreev (enc_strv);
