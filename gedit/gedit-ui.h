@@ -137,7 +137,7 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Save all open files"), G_CALLBACK (_gedit_cmd_file_save_all) },
 	{ "FileCloseAll", GTK_STOCK_CLOSE, N_("_Close All"), "<shift><control>W",
 	  N_("Close all open files"), G_CALLBACK (_gedit_cmd_file_close_all) },
-	{ "DocumentsNewTabGroup", NULL, N_("_New Tab Group"), NULL,
+	{ "DocumentsNewTabGroup", NULL, N_("_New Tab Group"), "<alt><control>N",
 	  N_("Create a new tab group"), G_CALLBACK (_gedit_cmd_documents_new_tab_group) },
 	{ "DocumentsPreviousTabGroup", NULL, N_("P_revious Tab Group"), "<shift><alt><control>Page_Up",
 	  N_("Switch to the previous tab group"), G_CALLBACK (_gedit_cmd_documents_previous_tab_group) },
