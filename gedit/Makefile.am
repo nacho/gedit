@@ -104,6 +104,7 @@ NOINST_H_FILES =			\
 	gedit-io-error-message-area.h	\
 	gedit-language-manager.h	\
 	gedit-multi-notebook.h		\
+	gedit-notebook.h		\
 	gedit-object-module.h		\
 	gedit-plugin-info.h		\
 	gedit-plugin-info-priv.h	\
@@ -133,7 +134,6 @@ INST_H_FILES =				\
 	gedit-message-bus.h		\
 	gedit-message-type.h		\
 	gedit-message.h			\
-	gedit-notebook.h		\
 	gedit-panel.h			\
 	gedit-plugin.h			\
 	gedit-progress-message-area.h	\
@@ -219,11 +219,15 @@ libgedit_la_SOURCES += gedit-fifo.c
 NOINST_H_FILES += gedit-fifo.h
 endif
 
-gedit-enum-types.h: gedit-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
-	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-enum-types.h.template $(INST_H_FILES)) > $@
+ENUM_TYPES = 			\
+	gedit-notebook.h	\
+	$(INST_H_FILES)
 
-gedit-enum-types.c: gedit-enum-types.c.template $(INST_H_FILES) $(GLIB_MKENUMS)
-	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-enum-types.c.template $(INST_H_FILES)) > $@
+gedit-enum-types.h: gedit-enum-types.h.template $(ENUM_TYPES) $(GLIB_MKENUMS)
+	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-enum-types.h.template $(ENUM_TYPES)) > $@
+
+gedit-enum-types.c: gedit-enum-types.c.template $(ENUM_TYPES) $(GLIB_MKENUMS)
+	$(AM_V_GEN) (cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-enum-types.c.template $(ENUM_TYPES)) > $@
 
 gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)
 	$(AM_V_GEN) $(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@
