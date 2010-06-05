@@ -51,7 +51,7 @@ struct _GeditCommandLine
 
 struct _GeditCommandLineClass
 {
-	GObjectClass parent_class;
+	GInitiallyUnownedClass parent_class;
 };
 
 GType			 gedit_command_line_get_type		(void) G_GNUC_CONST;
