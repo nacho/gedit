@@ -318,6 +318,12 @@ notebook_switch_page (GtkNotebook        *book,
 {
 	GeditTab *tab;
 
+	/* When we switch a tab from a notebook that it is not the active one
+	   the switch page is emitted before the set focus, so we do this check
+	   and we avoid to call switch page twice */
+	if (GTK_WIDGET (book) != mnb->priv->active_notebook)
+		return;
+
 	/* CHECK: I don't know why but it seems notebook_switch_page is called
 	two times every time the user change the active tab */
 	tab = GEDIT_TAB (gtk_notebook_get_nth_page (book, page_num));
