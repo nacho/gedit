@@ -1,5 +1,5 @@
 /*
- * gedit-notebook-multi.c
+ * gedit-multi-notebook.c
  * This file is part of gedit
  *
  * Copyright (C) 2010 - Ignacio Casal Quinteiro
@@ -64,7 +64,7 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 G_DEFINE_TYPE (GeditMultiNotebook, gedit_multi_notebook, GTK_TYPE_VBOX)
 
-static void	remove_notebook		(GeditMultiNotebook *multi,
+static void	remove_notebook		(GeditMultiNotebook *mnb,
 					 GtkWidget          *notebook);
 
 static void
@@ -73,17 +73,17 @@ gedit_multi_notebook_get_property (GObject    *object,
 				   GValue     *value,
 				   GParamSpec *pspec)
 {
-	GeditMultiNotebook *multi = GEDIT_MULTI_NOTEBOOK (object);
+	GeditMultiNotebook *mnb = GEDIT_MULTI_NOTEBOOK (object);
 
 	switch (prop_id)
 	{
 		case PROP_ACTIVE_NOTEBOOK:
 			g_value_set_object (value,
-					    multi->priv->active_notebook);
+					    mnb->priv->active_notebook);
 			break;
 		case PROP_ACTIVE_TAB:
 			g_value_set_object (value,
-					    multi->priv->active_tab);
+					    mnb->priv->active_tab);
 			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -94,9 +94,9 @@ gedit_multi_notebook_get_property (GObject    *object,
 static void
 gedit_multi_notebook_finalize (GObject *object)
 {
-	GeditMultiNotebook *multi = GEDIT_MULTI_NOTEBOOK (object);
+	GeditMultiNotebook *mnb = GEDIT_MULTI_NOTEBOOK (object);
 
-	g_list_free (multi->priv->notebooks);
+	g_list_free (mnb->priv->notebooks);
 
 	G_OBJECT_CLASS (gedit_multi_notebook_parent_class)->finalize (object);
 }
@@ -227,11 +227,11 @@ gedit_multi_notebook_class_init (GeditMultiNotebookClass *klass)
 static gboolean
 notebook_button_press_event (GtkNotebook        *notebook,
 			     GdkEventButton     *event,
-			     GeditMultiNotebook *multi)
+			     GeditMultiNotebook *mnb)
 {
 	if (GDK_BUTTON_PRESS == event->type && 3 == event->button)
 	{
-		g_signal_emit (G_OBJECT (multi), signals[SHOW_POPUP_MENU], 0,
+		g_signal_emit (G_OBJECT (mnb), signals[SHOW_POPUP_MENU], 0,
 			       event);
 
 		return TRUE;
@@ -243,71 +243,71 @@ notebook_button_press_event (GtkNotebook        *notebook,
 static void 
 notebook_tab_close_request (GeditNotebook      *notebook,
 			    GeditTab           *tab,
-			    GeditMultiNotebook *multi)
+			    GeditMultiNotebook *mnb)
 {
-	g_signal_emit (G_OBJECT (multi), signals[TAB_CLOSE_REQUEST], 0,
+	g_signal_emit (G_OBJECT (mnb), signals[TAB_CLOSE_REQUEST], 0,
 		       notebook, tab);
 }
 
 static void
 notebook_tab_detached (GeditNotebook      *notebook,
 		       GeditTab           *tab,
-		       GeditMultiNotebook *multi)
+		       GeditMultiNotebook *mnb)
 {
-	g_signal_emit (G_OBJECT (multi), signals[TAB_DETACHED], 0,
+	g_signal_emit (G_OBJECT (mnb), signals[TAB_DETACHED], 0,
 		       notebook, tab);
 }
 
 static void
 notebook_tabs_reordered (GeditNotebook      *notebook,
-			 GeditMultiNotebook *multi)
+			 GeditMultiNotebook *mnb)
 {
-	g_signal_emit (G_OBJECT (multi), signals[TABS_REORDERED], 0);
+	g_signal_emit (G_OBJECT (mnb), signals[TABS_REORDERED], 0);
 }
 
 static void
 notebook_page_removed (GtkNotebook        *notebook,
 		       GtkWidget          *child,
 		       guint               page_num,
-		       GeditMultiNotebook *multi)
+		       GeditMultiNotebook *mnb)
 {
 	GeditTab *tab = GEDIT_TAB (child);
 	guint num_tabs;
 	gboolean last_notebook;
 
-	--multi->priv->total_tabs;
+	--mnb->priv->total_tabs;
 	num_tabs = gtk_notebook_get_n_pages (notebook);
-	last_notebook = (multi->priv->notebooks->next == NULL);
+	last_notebook = (mnb->priv->notebooks->next == NULL);
 
-	if (multi->priv->total_tabs == 0)
+	if (mnb->priv->total_tabs == 0)
 	{
-		multi->priv->active_tab = NULL;
+		mnb->priv->active_tab = NULL;
 
-		g_object_notify (G_OBJECT (multi), "active-tab");
+		g_object_notify (G_OBJECT (mnb), "active-tab");
 	}
 
 	/* Not last notebook but last tab of the notebook, this means we have
 	   to remove the current notebook */
-	if (num_tabs == 0 && !multi->priv->removing_notebook &&
+	if (num_tabs == 0 && !mnb->priv->removing_notebook &&
 	    !last_notebook)
 	{
-		remove_notebook (multi, GTK_WIDGET (notebook));
+		remove_notebook (mnb, GTK_WIDGET (notebook));
 	}
 
-	g_signal_emit (G_OBJECT (multi), signals[TAB_REMOVED], 0, notebook, tab);
+	g_signal_emit (G_OBJECT (mnb), signals[TAB_REMOVED], 0, notebook, tab);
 }
 
 static void
 notebook_page_added (GtkNotebook        *notebook,
 		     GtkWidget          *child,
 		     guint               page_num,
-		     GeditMultiNotebook *multi)
+		     GeditMultiNotebook *mnb)
 {
 	GeditTab *tab = GEDIT_TAB (child);
 
-	++multi->priv->total_tabs;
+	++mnb->priv->total_tabs;
 
-	g_signal_emit (G_OBJECT (multi), signals[TAB_ADDED], 0, notebook, tab);
+	g_signal_emit (G_OBJECT (mnb), signals[TAB_ADDED], 0, notebook, tab);
 }
 
 static void 
@@ -341,98 +341,98 @@ notebook_switch_page (GtkNotebook        *book,
 static void
 notebook_set_focus (GtkContainer       *container,
 		    GtkWidget          *widget,
-		    GeditMultiNotebook *multi)
+		    GeditMultiNotebook *mnb)
 {
 	if (GEDIT_IS_NOTEBOOK (container) &&
-	    GTK_WIDGET (container) != multi->priv->active_notebook)
+	    GTK_WIDGET (container) != mnb->priv->active_notebook)
 	{
 		gint page_num;
 
-		multi->priv->active_notebook = GTK_WIDGET (container);
+		mnb->priv->active_notebook = GTK_WIDGET (container);
 
 		page_num = gtk_notebook_get_current_page (GTK_NOTEBOOK (container));
 		notebook_switch_page (GTK_NOTEBOOK (container), NULL,
-				      page_num, multi);
+				      page_num, mnb);
 
-		g_object_notify (G_OBJECT (multi), "active-notebook");
+		g_object_notify (G_OBJECT (mnb), "active-notebook");
 	}
 }
 
 static void
-connect_notebook_signals (GeditMultiNotebook *multi,
+connect_notebook_signals (GeditMultiNotebook *mnb,
 			  GtkWidget          *notebook)
 {
 	g_signal_connect (notebook,
 			  "set-focus-child",
 			  G_CALLBACK (notebook_set_focus),
-			  multi);
+			  mnb);
 	g_signal_connect (notebook,
 			  "page-added",
 			  G_CALLBACK (notebook_page_added),
-			  multi);
+			  mnb);
 	g_signal_connect (notebook,
 			  "page-removed",
 			  G_CALLBACK (notebook_page_removed),
-			  multi);
+			  mnb);
 	g_signal_connect (notebook,
 			  "switch-page",
 			  G_CALLBACK (notebook_switch_page),
-			  multi);
+			  mnb);
 	g_signal_connect (notebook,
 			  "tabs-reordered",
 			  G_CALLBACK (notebook_tabs_reordered),
-			  multi);
+			  mnb);
 	g_signal_connect (notebook,
 			  "tab-detached",
 			  G_CALLBACK (notebook_tab_detached),
-			  multi);
+			  mnb);
 	g_signal_connect (notebook,
 			  "tab-close-request",
 			  G_CALLBACK (notebook_tab_close_request),
-			  multi);
+			  mnb);
 	g_signal_connect (notebook,
 			  "button-press-event",
 			  G_CALLBACK (notebook_button_press_event),
-			  multi);
+			  mnb);
 }
 
 static void
-disconnect_notebook_signals (GeditMultiNotebook *multi,
+disconnect_notebook_signals (GeditMultiNotebook *mnb,
 			     GtkWidget          *notebook)
 {
 	g_signal_handlers_disconnect_by_func (notebook, notebook_set_focus,
-					      multi);
+					      mnb);
 	g_signal_handlers_disconnect_by_func (notebook, notebook_switch_page,
-					      multi);
+					      mnb);
 	g_signal_handlers_disconnect_by_func (notebook, notebook_page_added,
-					      multi);
+					      mnb);
 	g_signal_handlers_disconnect_by_func (notebook, notebook_page_removed,
-					      multi);
+					      mnb);
 	g_signal_handlers_disconnect_by_func (notebook, notebook_tabs_reordered,
-					      multi);
+					      mnb);
 	g_signal_handlers_disconnect_by_func (notebook, notebook_tab_detached,
-					      multi);
+					      mnb);
 	g_signal_handlers_disconnect_by_func (notebook, notebook_tab_close_request,
-					      multi);
+					      mnb);
 	g_signal_handlers_disconnect_by_func (notebook, notebook_button_press_event,
-					      multi);
+					      mnb);
 }
 
 static void
-add_notebook (GeditMultiNotebook *multi,
+add_notebook (GeditMultiNotebook *mnb,
 	      GtkWidget          *notebook,
 	      gboolean            main_container)
 {
 	if (main_container)
 	{
-		gtk_box_pack_start (GTK_BOX (multi), notebook, TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (mnb), notebook, TRUE, TRUE, 0);
 	}
 	else
 	{
 		GtkWidget *paned;
 		GtkWidget *parent;
 		GtkAllocation allocation;
-		GtkWidget *active_notebook = multi->priv->active_notebook;
+		GtkWidget *active_notebook = mnb->priv->active_notebook;
 
 		paned = gtk_hpaned_new ();
 		gtk_widget_show (paned);
@@ -456,18 +456,18 @@ add_notebook (GeditMultiNotebook *multi,
 		                        allocation.width / 2);
 	}
 
-	multi->priv->notebooks = g_list_append (multi->priv->notebooks,
-						notebook);
+	mnb->priv->notebooks = g_list_append (mnb->priv->notebooks,
+					      notebook);
 
 	gtk_widget_show (notebook);
 
-	connect_notebook_signals (multi, notebook);
+	connect_notebook_signals (mnb, notebook);
 
-	g_signal_emit (G_OBJECT (multi), signals[NOTEBOOK_ADDED], 0, notebook);
+	g_signal_emit (G_OBJECT (mnb), signals[NOTEBOOK_ADDED], 0, notebook);
 }
 
 static void
-remove_notebook (GeditMultiNotebook *multi,
+remove_notebook (GeditMultiNotebook *mnb,
 		 GtkWidget          *notebook)
 {
 	GtkWidget *parent;
@@ -476,19 +476,19 @@ remove_notebook (GeditMultiNotebook *multi,
 	GtkWidget *new_notebook;
 	GList *current;
 
-	if (multi->priv->notebooks->next == NULL)
+	if (mnb->priv->notebooks->next == NULL)
 	{
 		g_warning ("You are trying to remove the main notebook");
 		return;
 	}
 
-	current = g_list_find (multi->priv->notebooks,
+	current = g_list_find (mnb->priv->notebooks,
 			       notebook);
 
 	if (current->next != NULL)
 		new_notebook = GTK_WIDGET (current->next->data);
 	else
-		new_notebook = GTK_WIDGET (multi->priv->notebooks->data);
+		new_notebook = GTK_WIDGET (mnb->priv->notebooks->data);
 
 	parent = gtk_widget_get_parent (notebook);
 
@@ -496,14 +496,14 @@ remove_notebook (GeditMultiNotebook *multi,
 	  parent too as the parent is an useless paned. Finally we add the child
 	  into the grand parent */
 	g_object_ref (notebook);
-	multi->priv->removing_notebook = TRUE;
+	mnb->priv->removing_notebook = TRUE;
 
 	gtk_widget_destroy (notebook);
 	
-	multi->priv->notebooks = g_list_remove (multi->priv->notebooks,
-						notebook);
+	mnb->priv->notebooks = g_list_remove (mnb->priv->notebooks,
+					      notebook);
 
-	multi->priv->removing_notebook = FALSE;
+	mnb->priv->removing_notebook = FALSE;
 	
 	/* Let's make the active notebook grab the focus */
 	gtk_widget_grab_focus (new_notebook);
@@ -524,21 +524,21 @@ remove_notebook (GeditMultiNotebook *multi,
 			   GTK_WIDGET (children->data));
 	g_object_unref (children->data);
 
-	disconnect_notebook_signals (multi, notebook);
+	disconnect_notebook_signals (mnb, notebook);
 
-	g_signal_emit (G_OBJECT (multi), signals[NOTEBOOK_REMOVED], 0, notebook);
+	g_signal_emit (G_OBJECT (mnb), signals[NOTEBOOK_REMOVED], 0, notebook);
 	g_object_unref (notebook);
 }
 
 static void
-gedit_multi_notebook_init (GeditMultiNotebook *multi)
+gedit_multi_notebook_init (GeditMultiNotebook *mnb)
 {
-	multi->priv = GEDIT_MULTI_NOTEBOOK_GET_PRIVATE (multi);
+	mnb->priv = GEDIT_MULTI_NOTEBOOK_GET_PRIVATE (mnb);
 
-	multi->priv->removing_notebook = FALSE;
+	mnb->priv->removing_notebook = FALSE;
 
-	multi->priv->active_notebook = gedit_notebook_new ();
-	add_notebook (multi, multi->priv->active_notebook, TRUE);
+	mnb->priv->active_notebook = gedit_notebook_new ();
+	add_notebook (mnb, mnb->priv->active_notebook, TRUE);
 }
 
 GeditMultiNotebook *
@@ -548,46 +548,46 @@ gedit_multi_notebook_new ()
 }
 
 GeditNotebook *
-gedit_multi_notebook_get_active_notebook (GeditMultiNotebook *multi)
+gedit_multi_notebook_get_active_notebook (GeditMultiNotebook *mnb)
 {
-	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (multi), NULL);
+	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb), NULL);
 
-	return GEDIT_NOTEBOOK (multi->priv->active_notebook);
+	return GEDIT_NOTEBOOK (mnb->priv->active_notebook);
 }
 
 gint
-gedit_multi_notebook_get_n_notebooks (GeditMultiNotebook *multi)
+gedit_multi_notebook_get_n_notebooks (GeditMultiNotebook *mnb)
 {
-	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (multi), 0);
+	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb), 0);
 
-	return g_list_length (multi->priv->notebooks);
+	return g_list_length (mnb->priv->notebooks);
 }
 
 GeditNotebook *
-gedit_multi_notebook_get_nth_notebook (GeditMultiNotebook *multi,
+gedit_multi_notebook_get_nth_notebook (GeditMultiNotebook *mnb,
 				       gint                notebook_num)
 {
-	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (multi), NULL);
+	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb), NULL);
 
-	return g_list_nth_data (multi->priv->notebooks, notebook_num);
+	return g_list_nth_data (mnb->priv->notebooks, notebook_num);
 }
 
 gint
-gedit_multi_notebook_get_n_tabs (GeditMultiNotebook *multi)
+gedit_multi_notebook_get_n_tabs (GeditMultiNotebook *mnb)
 {
-	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (multi), 0);
+	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb), 0);
 
-	return multi->priv->total_tabs;
+	return mnb->priv->total_tabs;
 }
 
 gint
-gedit_multi_notebook_get_page_num (GeditMultiNotebook *multi,
+gedit_multi_notebook_get_page_num (GeditMultiNotebook *mnb,
 				   GeditTab           *tab)
 {
 	GList *l;
 	gint real_page_num = 0;
 
-	for (l = multi->priv->notebooks; l != NULL; l = g_list_next (l))
+	for (l = mnb->priv->notebooks; l != NULL; l = g_list_next (l))
 	{
 		gint page_num;
 
@@ -607,25 +607,25 @@ gedit_multi_notebook_get_page_num (GeditMultiNotebook *multi,
 }
 
 GeditTab *
-gedit_multi_notebook_get_active_tab (GeditMultiNotebook *multi)
+gedit_multi_notebook_get_active_tab (GeditMultiNotebook *mnb)
 {
-	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (multi), NULL);
+	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb), NULL);
 
-	return (multi->priv->active_tab == NULL) ? 
-				NULL : GEDIT_TAB (multi->priv->active_tab);
+	return (mnb->priv->active_tab == NULL) ? 
+				NULL : GEDIT_TAB (mnb->priv->active_tab);
 }
 
 void
-gedit_multi_notebook_set_active_tab (GeditMultiNotebook *multi,
+gedit_multi_notebook_set_active_tab (GeditMultiNotebook *mnb,
 				     GeditTab           *tab)
 {
 	GList *l;
 	gint page_num;
 	
-	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (multi));
+	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb));
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 
-	l = multi->priv->notebooks;
+	l = mnb->priv->notebooks;
 
 	do
 	{
@@ -642,23 +642,23 @@ gedit_multi_notebook_set_active_tab (GeditMultiNotebook *multi,
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (l->data),
 				       page_num);
 
-	if (GTK_WIDGET (l->data) != multi->priv->active_notebook)
+	if (GTK_WIDGET (l->data) != mnb->priv->active_notebook)
 	{
 		gtk_widget_grab_focus (GTK_WIDGET (l->data));
 	}
 }
 
 void
-gedit_multi_notebook_set_current_page (GeditMultiNotebook *multi,
+gedit_multi_notebook_set_current_page (GeditMultiNotebook *mnb,
 				       gint                page_num)
 {
 	GList *l;
 	gint pages = 0;
 	gint single_num = page_num;
 
-	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (multi));
+	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb));
 	
-	for (l = multi->priv->notebooks; l != NULL; l = g_list_next (l))
+	for (l = mnb->priv->notebooks; l != NULL; l = g_list_next (l))
 	{
 		gint p;
 		
@@ -671,7 +671,7 @@ gedit_multi_notebook_set_current_page (GeditMultiNotebook *multi,
 		single_num -= p;
 	}
 
-	if (GTK_WIDGET (l->data) != multi->priv->active_notebook)
+	if (GTK_WIDGET (l->data) != mnb->priv->active_notebook)
 	{
 		gtk_widget_grab_focus (GTK_WIDGET (l->data));
 	}
@@ -680,14 +680,14 @@ gedit_multi_notebook_set_current_page (GeditMultiNotebook *multi,
 }
 
 GList *
-gedit_multi_notebook_get_all_tabs (GeditMultiNotebook *multi)
+gedit_multi_notebook_get_all_tabs (GeditMultiNotebook *mnb)
 {
 	GList *nbs;
 	GList *ret = NULL;
 
-	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (multi), NULL);
+	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb), NULL);
 
-	for (nbs = multi->priv->notebooks; nbs != NULL; nbs = g_list_next (nbs))
+	for (nbs = mnb->priv->notebooks; nbs != NULL; nbs = g_list_next (nbs))
 	{
 		GList *l, *children;
 
@@ -705,18 +705,18 @@ gedit_multi_notebook_get_all_tabs (GeditMultiNotebook *multi)
 }
 
 void
-gedit_multi_notebook_close_tabs (GeditMultiNotebook *multi,
+gedit_multi_notebook_close_tabs (GeditMultiNotebook *mnb,
 				 const GList        *tabs)
 {
 	GList *l;
 
-	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (multi));
+	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb));
 
 	for (l = (GList *)tabs; l != NULL; l = g_list_next (l))
 	{
 		GList *nbs;
 
-		for (nbs = multi->priv->notebooks; nbs != NULL; nbs = g_list_next (nbs))
+		for (nbs = mnb->priv->notebooks; nbs != NULL; nbs = g_list_next (nbs))
 		{
 			gint n;
 
@@ -734,20 +734,20 @@ gedit_multi_notebook_close_tabs (GeditMultiNotebook *multi,
 
 /**
  * gedit_multi_notebook_close_all_tabs:
- * @multi: a #GeditMultiNotebook
+ * @mnb: a #GeditMultiNotebook
  *
  * Closes all opened tabs.
  */
 void
-gedit_multi_notebook_close_all_tabs (GeditMultiNotebook *multi)
+gedit_multi_notebook_close_all_tabs (GeditMultiNotebook *mnb)
 {
 	GList *nbs, *l;
 
-	g_return_if_fail (GEDIT_MULTI_NOTEBOOK (multi));
+	g_return_if_fail (GEDIT_MULTI_NOTEBOOK (mnb));
 
 	/* We copy the list because the main one is going to have the items
 	   removed */
-	nbs = g_list_copy (multi->priv->notebooks);
+	nbs = g_list_copy (mnb->priv->notebooks);
 
 	for (l = nbs; l != NULL; l = g_list_next (l))
 	{
@@ -758,15 +758,15 @@ gedit_multi_notebook_close_all_tabs (GeditMultiNotebook *multi)
 }
 
 void
-gedit_multi_notebook_add_new_notebook (GeditMultiNotebook *multi)
+gedit_multi_notebook_add_new_notebook (GeditMultiNotebook *mnb)
 {
 	GtkWidget *notebook;
 	GeditTab *tab;
 
-	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (multi));
+	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb));
 
 	notebook = gedit_notebook_new ();
-	add_notebook (multi, notebook, FALSE);
+	add_notebook (mnb, notebook, FALSE);
 
 	tab = GEDIT_TAB (_gedit_tab_new ());
 	gtk_widget_show (GTK_WIDGET (tab));
@@ -775,62 +775,62 @@ gedit_multi_notebook_add_new_notebook (GeditMultiNotebook *multi)
 	   the notebook, we don't want this to happen until the page is added.
 	   Also we don't want to call switch_page when we add the tab
 	   but when we switch the notebook. */
-	g_signal_handlers_block_by_func (notebook, notebook_set_focus, multi);
-	g_signal_handlers_block_by_func (notebook, notebook_switch_page, multi);
+	g_signal_handlers_block_by_func (notebook, notebook_set_focus, mnb);
+	g_signal_handlers_block_by_func (notebook, notebook_switch_page, mnb);
 
 	gedit_notebook_add_tab (GEDIT_NOTEBOOK (notebook),
 				tab,
 				-1,
 				TRUE);
 
-	g_signal_handlers_unblock_by_func (notebook, notebook_switch_page, multi);
-	g_signal_handlers_unblock_by_func (notebook, notebook_set_focus, multi);
+	g_signal_handlers_unblock_by_func (notebook, notebook_switch_page, mnb);
+	g_signal_handlers_unblock_by_func (notebook, notebook_set_focus, mnb);
 
-	notebook_set_focus (GTK_CONTAINER (notebook), NULL, multi);
+	notebook_set_focus (GTK_CONTAINER (notebook), NULL, mnb);
 }
 
 void
-gedit_multi_notebook_remove_active_notebook (GeditMultiNotebook *multi)
+gedit_multi_notebook_remove_active_notebook (GeditMultiNotebook *mnb)
 {
-	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (multi));
+	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb));
 
-	gedit_notebook_remove_all_tabs (GEDIT_NOTEBOOK (multi->priv->active_notebook));
+	gedit_notebook_remove_all_tabs (GEDIT_NOTEBOOK (mnb->priv->active_notebook));
 }
 
 void
-gedit_multi_notebook_previous_notebook (GeditMultiNotebook *multi)
+gedit_multi_notebook_previous_notebook (GeditMultiNotebook *mnb)
 {
 	GList *current;
 	GtkWidget *notebook;
 
-	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (multi));
+	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb));
 
-	current = g_list_find (multi->priv->notebooks,
-			       multi->priv->active_notebook);
+	current = g_list_find (mnb->priv->notebooks,
+			       mnb->priv->active_notebook);
 
 	if (current->prev != NULL)
 		notebook = GTK_WIDGET (current->prev->data);
 	else
-		notebook = GTK_WIDGET (g_list_last (multi->priv->notebooks)->data);
+		notebook = GTK_WIDGET (g_list_last (mnb->priv->notebooks)->data);
 
 	gtk_widget_grab_focus (notebook);
 }
 
 void
-gedit_multi_notebook_next_notebook (GeditMultiNotebook *multi)
+gedit_multi_notebook_next_notebook (GeditMultiNotebook *mnb)
 {
 	GList *current;
 	GtkWidget *notebook;
 
-	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (multi));
+	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb));
 
-	current = g_list_find (multi->priv->notebooks,
-			       multi->priv->active_notebook);
+	current = g_list_find (mnb->priv->notebooks,
+			       mnb->priv->active_notebook);
 
 	if (current->next != NULL)
 		notebook = GTK_WIDGET (current->next->data);
 	else
-		notebook = GTK_WIDGET (multi->priv->notebooks->data);
+		notebook = GTK_WIDGET (mnb->priv->notebooks->data);
 
 	gtk_widget_grab_focus (notebook);
 }
