@@ -4322,6 +4322,14 @@ gedit_window_get_active_document (GeditWindow *window)
 }
 
 GtkWidget *
+_gedit_window_get_multi_notebook (GeditWindow *window)
+{
+	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
+
+	return GTK_WIDGET (window->priv->multi_notebook);
+}
+
+GtkWidget *
 _gedit_window_get_notebook (GeditWindow *window)
 {
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);

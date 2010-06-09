@@ -168,6 +168,7 @@ GeditMessageBus	*gedit_window_get_message_bus		(GeditWindow         *window);
 /*
  * Non exported functions
  */
+GtkWidget	*_gedit_window_get_multi_notebook	(GeditWindow         *window);
 GtkWidget	*_gedit_window_get_notebook		(GeditWindow         *window);
 
 GeditWindow	*_gedit_window_move_tab_to_new_window	(GeditWindow         *window,
