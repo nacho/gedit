@@ -284,7 +284,7 @@ PKG_CHECK_MODULES(GEDIT, [
 	libxml-2.0 >= 2.5.0
 	glib-2.0 >= 2.25.6
 	gthread-2.0 >= 2.13.0
-	gio-2.0 >= 2.25.8
+	gio-2.0 >= 2.25.9
 	$GTK_REQUIRED >= $GTK_REQUIRED_VERSION
 	$GSV_REQUIRED >= 2.9.7
 	gconf-2.0 >= 2.31.1
