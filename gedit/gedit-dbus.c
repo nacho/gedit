@@ -658,14 +658,27 @@ open_command_add_stdin (GeditDBus       *dbus,
 }
 
 static void
-command_line_proxy_appeared (GDBusConnection *connection,
-                             const gchar     *name,
-                             const gchar     *owner_name,
-                             GDBusProxy      *proxy,
-                             GeditDBus       *dbus)
+command_line_proxy_ready (GDBusConnection *connection,
+			  GAsyncResult    *result,
+			  GeditDBus       *dbus)
 {
 	GeditCommandLine *command_line;
 	GDBusMessage *message;
+	GDBusProxy *proxy;
+	GError *error = NULL;
+
+	proxy = g_dbus_proxy_new_finish (result, &error);
+
+	if (error != NULL)
+	{
+		g_warning ("Could not create the command line proxy: %s",
+		           error->message);
+		g_error_free (error);
+
+		dbus->priv->result = GEDIT_DBUS_RESULT_FAILED;
+		g_main_loop_quit (dbus->priv->main_loop);
+		return;
+	}
 
 	command_line = gedit_command_line_get_default ();
 
@@ -677,7 +690,7 @@ command_line_proxy_appeared (GDBusConnection *connection,
 		                  dbus);
 	}
 
-	message = g_dbus_message_new_method_call (g_dbus_proxy_get_unique_bus_name (proxy),
+	message = g_dbus_message_new_method_call (g_dbus_proxy_get_name (proxy),
 	                                          "/org/gnome/gedit",
 	                                          "org.gnome.gedit.CommandLine",
 	                                          "Open");
@@ -694,15 +707,6 @@ command_line_proxy_appeared (GDBusConnection *connection,
 	                                           dbus);
 
 	g_object_unref (message);
-}
-
-static void
-command_line_proxy_vanished (GDBusConnection *connection,
-                             const gchar     *name,
-                             GeditDBus       *dbus)
-{
-	dbus->priv->result = GEDIT_DBUS_RESULT_FAILED;
-	g_main_loop_quit (dbus->priv->main_loop);
 }
 
 static GeditDBusResult
@@ -729,17 +733,15 @@ handle_slave (GeditDBus *dbus)
 		flags |= G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS;
 	}
 
-	g_bus_watch_proxy (G_BUS_TYPE_SESSION,
-	                   "org.gnome.gedit",
-	                   G_BUS_NAME_WATCHER_FLAGS_NONE,
-	                   "/org/gnome/gedit",
-	                   "org.gnome.gedit.CommandLine",
-	                   G_TYPE_DBUS_PROXY,
-	                   flags,
-	                   (GBusProxyAppearedCallback)command_line_proxy_appeared,
-	                   (GBusProxyVanishedCallback)command_line_proxy_vanished,
-	                   dbus,
-	                   NULL);
+	g_dbus_proxy_new (conn,
+	                  G_BUS_NAME_WATCHER_FLAGS_NONE,
+	                  NULL,
+	                  "org.gnome.gedit",
+	                  "/org/gnome/gedit",
+	                  "org.gnome.gedit.CommandLine",
+	                  NULL,
+	                  (GAsyncReadyCallback)command_line_proxy_ready,
+	                  dbus);
 
 	dbus->priv->main_loop = g_main_loop_new (NULL, FALSE);
 	g_main_loop_run (dbus->priv->main_loop);
