@@ -44,7 +44,7 @@ IGNORE_HFILES=		\
 	gedit-document-loader.h			\
 	gedit-document-saver.h			\
 	gedit-documents-panel.h			\
-	gedit-io-error-message-area.h		\
+	gedit-io-error-info-bar.h		\
 	gedit-languages-manager.h		\
 	gedit-message-area.h			\
 	gedit-object-module.h			\

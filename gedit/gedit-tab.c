@@ -37,10 +37,10 @@
 #include "gedit-notebook.h"
 #include "gedit-tab.h"
 #include "gedit-utils.h"
-#include "gedit-io-error-message-area.h"
+#include "gedit-io-error-info-bar.h"
 #include "gedit-print-job.h"
 #include "gedit-print-preview.h"
-#include "gedit-progress-message-area.h"
+#include "gedit-progress-info-bar.h"
 #include "gedit-debug.h"
 #include "gedit-enum-types.h"
 #include "gedit-settings.h"
@@ -57,7 +57,7 @@ struct _GeditTabPrivate
 	GtkWidget	       *view;
 	GtkWidget	       *view_scrolled_window;
 
-	GtkWidget	       *message_area;
+	GtkWidget	       *info_bar;
 	GtkWidget	       *print_preview;
 
 	GeditPrintJob          *print_job;
@@ -263,9 +263,9 @@ gedit_tab_grab_focus (GtkWidget *widget)
 	
 	GTK_WIDGET_CLASS (gedit_tab_parent_class)->grab_focus (widget);
 	
-	if (tab->priv->message_area != NULL)
+	if (tab->priv->info_bar != NULL)
 	{
-		gtk_widget_grab_focus (tab->priv->message_area);
+		gtk_widget_grab_focus (tab->priv->info_bar);
 	}
 	else
 	{
@@ -482,28 +482,28 @@ document_modified_changed (GtkTextBuffer *document,
 }
 
 static void
-set_message_area (GeditTab  *tab,
-		  GtkWidget *message_area)
+set_info_bar (GeditTab  *tab,
+	      GtkWidget *info_bar)
 {
-	if (tab->priv->message_area == message_area)
+	if (tab->priv->info_bar == info_bar)
 		return;
 
-	if (tab->priv->message_area != NULL)
-		gtk_widget_destroy (tab->priv->message_area);
+	if (tab->priv->info_bar != NULL)
+		gtk_widget_destroy (tab->priv->info_bar);
 
-	tab->priv->message_area = message_area;
+	tab->priv->info_bar = info_bar;
 
-	if (message_area == NULL)
+	if (info_bar == NULL)
 		return;
 
 	gtk_box_pack_start (GTK_BOX (tab),
-			    tab->priv->message_area,
+			    tab->priv->info_bar,
 			    FALSE,
 			    FALSE,
 			    0);		
 
-	g_object_add_weak_pointer (G_OBJECT (tab->priv->message_area), 
-				   (gpointer *)&tab->priv->message_area);
+	g_object_add_weak_pointer (G_OBJECT (tab->priv->info_bar), 
+				   (gpointer *)&tab->priv->info_bar);
 }
 
 static void
@@ -517,9 +517,9 @@ remove_tab (GeditTab *tab)
 }
 
 static void 
-io_loading_error_message_area_response (GtkWidget *message_area,
-					gint       response_id,
-					GeditTab  *tab)
+io_loading_error_info_bar_response (GtkWidget *info_bar,
+				    gint       response_id,
+				    GeditTab  *tab)
 {
 	GeditDocument *doc;
 	GeditView *view;
@@ -539,15 +539,15 @@ io_loading_error_message_area_response (GtkWidget *message_area,
 		case GTK_RESPONSE_OK:
 			g_return_if_fail (location != NULL);
 
-			encoding = gedit_conversion_error_message_area_get_encoding (
-					GTK_WIDGET (message_area));
+			encoding = gedit_conversion_error_info_bar_get_encoding (
+					GTK_WIDGET (info_bar));
 
 			if (encoding != NULL)
 			{
 				tab->priv->tmp_encoding = encoding;
 			}
 
-			set_message_area (tab, NULL);
+			set_info_bar (tab, NULL);
 			gedit_tab_set_state (tab, GEDIT_TAB_STATE_LOADING);
 
 			g_return_if_fail (tab->priv->auto_save_timeout <= 0);
@@ -561,12 +561,12 @@ io_loading_error_message_area_response (GtkWidget *message_area,
 			break;
 		case GTK_RESPONSE_YES:
 			/* This means that we want to edit the document anyway */
-			set_message_area (tab, NULL);
+			set_info_bar (tab, NULL);
 			_gedit_document_set_readonly (doc, FALSE);
 			break;
 		case GTK_RESPONSE_NO:
 			/* We don't want to edit the document just show it */
-			set_message_area (tab, NULL);
+			set_info_bar (tab, NULL);
 			break;
 		default:
 			if (location != NULL)
@@ -585,9 +585,9 @@ io_loading_error_message_area_response (GtkWidget *message_area,
 }
 
 static void 
-file_already_open_warning_message_area_response (GtkWidget   *message_area,
-						 gint         response_id,
-						 GeditTab    *tab)
+file_already_open_warning_info_bar_response (GtkWidget   *info_bar,
+					     gint         response_id,
+					     GeditTab    *tab)
 {
 	GeditView *view;
 	
@@ -601,17 +601,17 @@ file_already_open_warning_message_area_response (GtkWidget   *message_area,
 					    TRUE);
 	}
 
-	gtk_widget_destroy (message_area);
+	gtk_widget_destroy (info_bar);
 
 	gtk_widget_grab_focus (GTK_WIDGET (view));
 }
 
 static void
-load_cancelled (GtkWidget        *area,
+load_cancelled (GtkWidget        *bar,
                 gint              response_id,
                 GeditTab         *tab)
 {
-	g_return_if_fail (GEDIT_IS_PROGRESS_MESSAGE_AREA (tab->priv->message_area));
+	g_return_if_fail (GEDIT_IS_PROGRESS_INFO_BAR (tab->priv->info_bar));
 	
 	g_object_ref (tab);
 	gedit_document_load_cancel (gedit_tab_get_document (tab));
@@ -619,16 +619,16 @@ load_cancelled (GtkWidget        *area,
 }
 
 static void 
-unrecoverable_reverting_error_message_area_response (GtkWidget        *message_area,
-						     gint              response_id,
-						     GeditTab         *tab)
+unrecoverable_reverting_error_info_bar_response (GtkWidget        *info_bar,
+						 gint              response_id,
+						 GeditTab         *tab)
 {
 	GeditView *view;
 	
 	gedit_tab_set_state (tab,
 			     GEDIT_TAB_STATE_NORMAL);
 
-	set_message_area (tab, NULL);
+	set_info_bar (tab, NULL);
 
 	view = gedit_tab_get_view (tab);
 
@@ -640,9 +640,9 @@ unrecoverable_reverting_error_message_area_response (GtkWidget        *message_a
 #define MAX_MSG_LENGTH 100
 
 static void
-show_loading_message_area (GeditTab *tab)
+show_loading_info_bar (GeditTab *tab)
 {
-	GtkWidget *area;
+	GtkWidget *bar;
 	GeditDocument *doc = NULL;
 	gchar *name;
 	gchar *dirname = NULL;
@@ -651,7 +651,7 @@ show_loading_message_area (GeditTab *tab)
 	gchar *dirname_markup;
 	gint len;
 
-	if (tab->priv->message_area != NULL)
+	if (tab->priv->info_bar != NULL)
 		return;
 
 	gedit_debug (DEBUG_TAB);
@@ -718,9 +718,9 @@ show_loading_message_area (GeditTab *tab)
 					       name_markup);
 		}
 		
-		area = gedit_progress_message_area_new (GTK_STOCK_REVERT_TO_SAVED,
-							msg,
-							TRUE);
+		bar = gedit_progress_info_bar_new (GTK_STOCK_REVERT_TO_SAVED,
+						   msg,
+						   TRUE);
 	}
 	else
 	{
@@ -741,19 +741,19 @@ show_loading_message_area (GeditTab *tab)
 					       name_markup);
 		}
 
-		area = gedit_progress_message_area_new (GTK_STOCK_OPEN,
-							msg,
-							TRUE);
+		bar = gedit_progress_info_bar_new (GTK_STOCK_OPEN,
+						   msg,
+						   TRUE);
 	}
 
-	g_signal_connect (area,
+	g_signal_connect (bar,
 			  "response",
 			  G_CALLBACK (load_cancelled),
 			  tab);
 						 
-	gtk_widget_show (area);
+	gtk_widget_show (bar);
 
-	set_message_area (tab, area);
+	set_info_bar (tab, bar);
 
 	g_free (msg);
 	g_free (name);
@@ -762,9 +762,9 @@ show_loading_message_area (GeditTab *tab)
 }
 
 static void
-show_saving_message_area (GeditTab *tab)
+show_saving_info_bar (GeditTab *tab)
 {
-	GtkWidget *area;
+	GtkWidget *bar;
 	GeditDocument *doc = NULL;
 	gchar *short_name;
 	gchar *from;
@@ -776,7 +776,7 @@ show_saving_message_area (GeditTab *tab)
 
 	g_return_if_fail (tab->priv->tmp_save_location != NULL);
 	
-	if (tab->priv->message_area != NULL)
+	if (tab->priv->info_bar != NULL)
 		return;
 	
 	gedit_debug (DEBUG_TAB);
@@ -830,13 +830,13 @@ show_saving_message_area (GeditTab *tab)
 		msg = g_strdup_printf (_("Saving %s"), from_markup);
 	}
 
-	area = gedit_progress_message_area_new (GTK_STOCK_SAVE,
-						msg,
-						FALSE);
+	bar = gedit_progress_info_bar_new (GTK_STOCK_SAVE,
+					   msg,
+					   FALSE);
 
-	gtk_widget_show (area);
+	gtk_widget_show (bar);
 
-	set_message_area (tab, area);
+	set_info_bar (tab, bar);
 
 	g_free (msg);
 	g_free (to);
@@ -845,25 +845,25 @@ show_saving_message_area (GeditTab *tab)
 }
 
 static void
-message_area_set_progress (GeditTab *tab,
+info_bar_set_progress (GeditTab *tab,
 			   goffset   size,
 			   goffset   total_size)
 {
-	if (tab->priv->message_area == NULL)
+	if (tab->priv->info_bar == NULL)
 		return;
 
 	gedit_debug_message (DEBUG_TAB, "%" G_GUINT64_FORMAT "/%" G_GUINT64_FORMAT, size, total_size);
 
-	g_return_if_fail (GEDIT_IS_PROGRESS_MESSAGE_AREA (tab->priv->message_area));
+	g_return_if_fail (GEDIT_IS_PROGRESS_INFO_BAR (tab->priv->info_bar));
 	
 	if (total_size == 0)
 	{
 		if (size != 0)
-			gedit_progress_message_area_pulse (
-					GEDIT_PROGRESS_MESSAGE_AREA (tab->priv->message_area));	
+			gedit_progress_info_bar_pulse (
+					GEDIT_PROGRESS_INFO_BAR (tab->priv->info_bar));	
 		else
-			gedit_progress_message_area_set_fraction (
-				GEDIT_PROGRESS_MESSAGE_AREA (tab->priv->message_area),
+			gedit_progress_info_bar_set_fraction (
+				GEDIT_PROGRESS_INFO_BAR (tab->priv->info_bar),
 				0);
 	}
 	else
@@ -872,8 +872,8 @@ message_area_set_progress (GeditTab *tab,
 
 		frac = (gdouble)size / (gdouble)total_size;
 
-		gedit_progress_message_area_set_fraction (
-				GEDIT_PROGRESS_MESSAGE_AREA (tab->priv->message_area),
+		gedit_progress_info_bar_set_fraction (
+				GEDIT_PROGRESS_INFO_BAR (tab->priv->info_bar),
 				frac);		
 	}
 }
@@ -905,10 +905,10 @@ document_loading (GeditDocument *document,
 
 	if ((total_time - et) > 3.0)
 	{
-		show_loading_message_area (tab);
+		show_loading_info_bar (tab);
 	}
 
-	message_area_set_progress (tab, size, total_size);
+	info_bar_set_progress (tab, size, total_size);
 }
 
 static gboolean
@@ -939,7 +939,7 @@ document_loaded (GeditDocument *document,
 	}
 	tab->priv->times_called = 0;
 
-	set_message_area (tab, NULL);
+	set_info_bar (tab, NULL);
 
 	location = gedit_document_get_location (document);
 
@@ -974,28 +974,28 @@ document_loaded (GeditDocument *document,
 
 			if (tab->priv->state == GEDIT_TAB_STATE_LOADING_ERROR)
 			{
-				emsg = gedit_io_loading_error_message_area_new (location,
+				emsg = gedit_io_loading_error_info_bar_new (location,
 										tab->priv->tmp_encoding,
 										error);
 				g_signal_connect (emsg,
 						  "response",
-						  G_CALLBACK (io_loading_error_message_area_response),
+						  G_CALLBACK (io_loading_error_info_bar_response),
 						  tab);
 			}
 			else
 			{
 				g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_REVERTING_ERROR);
 				
-				emsg = gedit_unrecoverable_reverting_error_message_area_new (location,
+				emsg = gedit_unrecoverable_reverting_error_info_bar_new (location,
 											     error);
 
 				g_signal_connect (emsg,
 						  "response",
-						  G_CALLBACK (unrecoverable_reverting_error_message_area_response),
+						  G_CALLBACK (unrecoverable_reverting_error_info_bar_response),
 						  tab);
 			}
 
-			set_message_area (tab, emsg);
+			set_info_bar (tab, emsg);
 		}
 
 		gtk_info_bar_set_default_response (GTK_INFO_BAR (emsg),
@@ -1034,15 +1034,15 @@ document_loaded (GeditDocument *document,
 
 			_gedit_document_set_readonly (document, TRUE);
 
-			emsg = gedit_io_loading_error_message_area_new (location,
+			emsg = gedit_io_loading_error_info_bar_new (location,
 									tab->priv->tmp_encoding,
 									error);
 
-			set_message_area (tab, emsg);
+			set_info_bar (tab, emsg);
 
 			g_signal_connect (emsg,
 					  "response",
-					  G_CALLBACK (io_loading_error_message_area_response),
+					  G_CALLBACK (io_loading_error_info_bar_response),
 					  tab);
 
 			gtk_info_bar_set_default_response (GTK_INFO_BAR (emsg),
@@ -1073,9 +1073,9 @@ document_loaded (GeditDocument *document,
 
 			    		tab->priv->not_editable = TRUE;
 
-			    		w = gedit_file_already_open_warning_message_area_new (location);
+			    		w = gedit_file_already_open_warning_info_bar_new (location);
 
-					set_message_area (tab, w);
+					set_info_bar (tab, w);
 
 					gtk_info_bar_set_default_response (GTK_INFO_BAR (w),
 									   GTK_RESPONSE_CANCEL);
@@ -1084,7 +1084,7 @@ document_loaded (GeditDocument *document,
 
 					g_signal_connect (w,
 							  "response",
-							  G_CALLBACK (file_already_open_warning_message_area_response),
+							  G_CALLBACK (file_already_open_warning_info_bar_response),
 							  tab);
 
 			    		g_object_unref (loc);
@@ -1149,10 +1149,10 @@ document_saving (GeditDocument *document,
 
 	if ((total_time - et) > 3.0)
 	{
-		show_saving_message_area (tab);
+		show_saving_info_bar (tab);
 	}
 
-	message_area_set_progress (tab, size, total_size);
+	info_bar_set_progress (tab, size, total_size);
 
 	tab->priv->times_called++;
 }
@@ -1172,7 +1172,7 @@ end_saving (GeditTab *tab)
 }
 
 static void 
-unrecoverable_saving_error_message_area_response (GtkWidget        *message_area,
+unrecoverable_saving_error_info_bar_response (GtkWidget        *info_bar,
 						  gint              response_id,
 						  GeditTab         *tab)
 {
@@ -1185,7 +1185,7 @@ unrecoverable_saving_error_message_area_response (GtkWidget        *message_area
 
 	end_saving (tab);
 	
-	set_message_area (tab, NULL);
+	set_info_bar (tab, NULL);
 
 	view = gedit_tab_get_view (tab);
 
@@ -1193,7 +1193,7 @@ unrecoverable_saving_error_message_area_response (GtkWidget        *message_area
 }
 
 static void 
-no_backup_error_message_area_response (GtkWidget *message_area,
+no_backup_error_info_bar_response (GtkWidget *info_bar,
 				       gint       response_id,
 				       GeditTab  *tab)
 {
@@ -1204,7 +1204,7 @@ no_backup_error_message_area_response (GtkWidget *message_area,
 		doc = gedit_tab_get_document (tab);
 		g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 
-		set_message_area (tab, NULL);
+		set_info_bar (tab, NULL);
 
 		g_return_if_fail (tab->priv->tmp_save_location != NULL);
 		g_return_if_fail (tab->priv->tmp_encoding != NULL);
@@ -1221,14 +1221,14 @@ no_backup_error_message_area_response (GtkWidget *message_area,
 	}
 	else
 	{
-		unrecoverable_saving_error_message_area_response (message_area,
+		unrecoverable_saving_error_info_bar_response (info_bar,
 								  response_id,
 								  tab);
 	}
 }
 
 static void
-externally_modified_error_message_area_response (GtkWidget *message_area,
+externally_modified_error_info_bar_response (GtkWidget *info_bar,
 						 gint       response_id,
 						 GeditTab  *tab)
 {
@@ -1239,7 +1239,7 @@ externally_modified_error_message_area_response (GtkWidget *message_area,
 		doc = gedit_tab_get_document (tab);
 		g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 		
-		set_message_area (tab, NULL);
+		set_info_bar (tab, NULL);
 
 		g_return_if_fail (tab->priv->tmp_save_location != NULL);
 		g_return_if_fail (tab->priv->tmp_encoding != NULL);
@@ -1255,14 +1255,14 @@ externally_modified_error_message_area_response (GtkWidget *message_area,
 	}
 	else
 	{		
-		unrecoverable_saving_error_message_area_response (message_area,
+		unrecoverable_saving_error_info_bar_response (info_bar,
 								  response_id,
 								  tab);
 	}
 }
 
 static void 
-recoverable_saving_error_message_area_response (GtkWidget *message_area,
+recoverable_saving_error_info_bar_response (GtkWidget *info_bar,
 						gint       response_id,
 						GeditTab  *tab)
 {
@@ -1276,12 +1276,12 @@ recoverable_saving_error_message_area_response (GtkWidget *message_area,
 		const GeditEncoding *encoding;
 		gchar *tmp_uri;
 		
-		encoding = gedit_conversion_error_message_area_get_encoding (
-									GTK_WIDGET (message_area));
+		encoding = gedit_conversion_error_info_bar_get_encoding (
+									GTK_WIDGET (info_bar));
 
 		g_return_if_fail (encoding != NULL);
 
-		set_message_area (tab, NULL);
+		set_info_bar (tab, NULL);
 
 		g_return_if_fail (tab->priv->tmp_save_location != NULL);
 				
@@ -1304,7 +1304,7 @@ recoverable_saving_error_message_area_response (GtkWidget *message_area,
 	}
 	else
 	{		
-		unrecoverable_saving_error_message_area_response (message_area,
+		unrecoverable_saving_error_info_bar_response (info_bar,
 								  response_id,
 								  tab);
 	}
@@ -1327,7 +1327,7 @@ document_saved (GeditDocument *document,
 	tab->priv->timer = NULL;
 	tab->priv->times_called = 0;
 	
-	set_message_area (tab, NULL);
+	set_info_bar (tab, NULL);
 	
 	if (error != NULL)
 	{
@@ -1337,16 +1337,16 @@ document_saved (GeditDocument *document,
 		    error->code == GEDIT_DOCUMENT_ERROR_EXTERNALLY_MODIFIED)
 		{
 			/* This error is recoverable */
-			emsg = gedit_externally_modified_saving_error_message_area_new (
+			emsg = gedit_externally_modified_saving_error_info_bar_new (
 							tab->priv->tmp_save_location,
 							error);
 			g_return_if_fail (emsg != NULL);
 
-			set_message_area (tab, emsg);
+			set_info_bar (tab, emsg);
 
 			g_signal_connect (emsg,
 					  "response",
-					  G_CALLBACK (externally_modified_error_message_area_response),
+					  G_CALLBACK (externally_modified_error_info_bar_response),
 					  tab);
 		}
 		else if ((error->domain == GEDIT_DOCUMENT_ERROR &&
@@ -1355,16 +1355,16 @@ document_saved (GeditDocument *document,
 			  error->code == G_IO_ERROR_CANT_CREATE_BACKUP))
 		{
 			/* This error is recoverable */
-			emsg = gedit_no_backup_saving_error_message_area_new (
+			emsg = gedit_no_backup_saving_error_info_bar_new (
 							tab->priv->tmp_save_location,
 							error);
 			g_return_if_fail (emsg != NULL);
 
-			set_message_area (tab, emsg);
+			set_info_bar (tab, emsg);
 
 			g_signal_connect (emsg,
 					  "response",
-					  G_CALLBACK (no_backup_error_message_area_response),
+					  G_CALLBACK (no_backup_error_info_bar_response),
 					  tab);
 		}
 		else if (error->domain == GEDIT_DOCUMENT_ERROR ||
@@ -1376,15 +1376,15 @@ document_saved (GeditDocument *document,
 			_gedit_recent_remove  (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))),
 					       tab->priv->tmp_save_location);
 
-			emsg = gedit_unrecoverable_saving_error_message_area_new (tab->priv->tmp_save_location,
+			emsg = gedit_unrecoverable_saving_error_info_bar_new (tab->priv->tmp_save_location,
 								  error);
 			g_return_if_fail (emsg != NULL);
 	
-			set_message_area (tab, emsg);
+			set_info_bar (tab, emsg);
 
 			g_signal_connect (emsg,
 					  "response",
-					  G_CALLBACK (unrecoverable_saving_error_message_area_response),
+					  G_CALLBACK (unrecoverable_saving_error_info_bar_response),
 					  tab);
 		}
 		else
@@ -1393,16 +1393,16 @@ document_saved (GeditDocument *document,
 			g_return_if_fail (error->domain == G_CONVERT_ERROR ||
 			                  error->domain == G_IO_ERROR);
 
-			emsg = gedit_conversion_error_while_saving_message_area_new (
+			emsg = gedit_conversion_error_while_saving_info_bar_new (
 									tab->priv->tmp_save_location,
 									tab->priv->tmp_encoding,
 									error);
 
-			set_message_area (tab, emsg);
+			set_info_bar (tab, emsg);
 
 			g_signal_connect (emsg,
 					  "response",
-					  G_CALLBACK (recoverable_saving_error_message_area_response),
+					  G_CALLBACK (recoverable_saving_error_info_bar_response),
 					  tab);
 		}
 
@@ -1432,13 +1432,13 @@ document_saved (GeditDocument *document,
 }
 
 static void 
-externally_modified_notification_message_area_response (GtkWidget *message_area,
+externally_modified_notification_info_bar_response (GtkWidget *info_bar,
 							gint       response_id,
 							GeditTab  *tab)
 {
 	GeditView *view;
 
-	set_message_area (tab, NULL);
+	set_info_bar (tab, NULL);
 	view = gedit_tab_get_view (tab);
 
 	if (response_id == GTK_RESPONSE_OK)
@@ -1459,7 +1459,7 @@ externally_modified_notification_message_area_response (GtkWidget *message_area,
 static void
 display_externally_modified_notification (GeditTab *tab)
 {
-	GtkWidget *message_area;
+	GtkWidget *info_bar;
 	GeditDocument *doc;
 	GFile *location;
 	gboolean document_modified;
@@ -1472,16 +1472,16 @@ display_externally_modified_notification (GeditTab *tab)
 	g_return_if_fail (location != NULL);
 
 	document_modified = gtk_text_buffer_get_modified (GTK_TEXT_BUFFER(doc));
-	message_area = gedit_externally_modified_message_area_new (location, document_modified);
+	info_bar = gedit_externally_modified_info_bar_new (location, document_modified);
 	g_object_unref (location);
 
-	tab->priv->message_area = NULL;
-	set_message_area (tab, message_area);
-	gtk_widget_show (message_area);
+	tab->priv->info_bar = NULL;
+	set_info_bar (tab, info_bar);
+	gtk_widget_show (info_bar);
 
-	g_signal_connect (message_area,
+	g_signal_connect (info_bar,
 			  "response",
-			  G_CALLBACK (externally_modified_notification_message_area_response),
+			  G_CALLBACK (externally_modified_notification_info_bar_response),
 			  tab);
 }
 
@@ -2137,7 +2137,7 @@ _gedit_tab_revert (GeditTab *tab)
 
 	if (tab->priv->state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION)
 	{
-		set_message_area (tab, NULL);
+		set_info_bar (tab, NULL);
 	}
 
 	doc = gedit_tab_get_document (tab);
@@ -2184,11 +2184,11 @@ _gedit_tab_save (GeditTab *tab)
 	if (tab->priv->state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION)
 	{
 		/* We already told the user about the external
-		 * modification: hide the message area and set
+		 * modification: hide the message bar and set
 		 * the save flag.
 		 */
 
-		set_message_area (tab, NULL);
+		set_info_bar (tab, NULL);
 		save_flags = tab->priv->save_flags | GEDIT_DOCUMENT_SAVE_IGNORE_MTIME;
 	}
 	else
@@ -2303,11 +2303,11 @@ _gedit_tab_save_as (GeditTab                     *tab,
 	if (tab->priv->state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION)
 	{
 		/* We already told the user about the external
-		 * modification: hide the message area and set
+		 * modification: hide the message bar and set
 		 * the save flag.
 		 */
 
-		set_message_area (tab, NULL);
+		set_info_bar (tab, NULL);
 		save_flags = tab->priv->save_flags | GEDIT_DOCUMENT_SAVE_IGNORE_MTIME;
 	}
 	else
@@ -2378,20 +2378,20 @@ get_print_settings (GeditTab *tab)
 	}
 }
 
-/* FIXME: show the message area only if the operation will be "long" */
+/* FIXME: show the info bar only if the operation will be "long" */
 static void
 printing_cb (GeditPrintJob       *job,
 	     GeditPrintJobStatus  status,
 	     GeditTab            *tab)
 {
-	g_return_if_fail (GEDIT_IS_PROGRESS_MESSAGE_AREA (tab->priv->message_area));	
+	g_return_if_fail (GEDIT_IS_PROGRESS_INFO_BAR (tab->priv->info_bar));	
 
-	gtk_widget_show (tab->priv->message_area);
+	gtk_widget_show (tab->priv->info_bar);
 
-	gedit_progress_message_area_set_text (GEDIT_PROGRESS_MESSAGE_AREA (tab->priv->message_area),
+	gedit_progress_info_bar_set_text (GEDIT_PROGRESS_INFO_BAR (tab->priv->info_bar),
 					      gedit_print_job_get_status_string (job));
 
-	gedit_progress_message_area_set_fraction (GEDIT_PROGRESS_MESSAGE_AREA (tab->priv->message_area),
+	gedit_progress_info_bar_set_fraction (GEDIT_PROGRESS_INFO_BAR (tab->priv->info_bar),
 						  gedit_print_job_get_progress (job));
 }
 
@@ -2454,9 +2454,9 @@ done_printing_cb (GeditPrintJob       *job,
 	}
 	else
 	{
-		g_return_if_fail (GEDIT_IS_PROGRESS_MESSAGE_AREA (tab->priv->message_area));
+		g_return_if_fail (GEDIT_IS_PROGRESS_INFO_BAR (tab->priv->info_bar));
 
-		set_message_area (tab, NULL); /* destroy the message area */
+		set_info_bar (tab, NULL); /* destroy the info bar */
 	}
 
 	/* TODO: check status and error */
@@ -2521,7 +2521,7 @@ show_preview_cb (GeditPrintJob       *job,
 	/* g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_PRINT_PREVIEWING); */
 	g_return_if_fail (tab->priv->print_preview == NULL);
 
-	set_message_area (tab, NULL); /* destroy the message area */
+	set_info_bar (tab, NULL); /* destroy the info bar */
 
 	tab->priv->print_preview = GTK_WIDGET (preview);
 	gtk_box_pack_end (GTK_BOX (tab),
@@ -2575,8 +2575,8 @@ preview_finished_cb (GtkSourcePrintJob *pjob, GeditTab *tab)
 	GnomePrintJob *gjob;
 	GtkWidget *preview = NULL;
 
-	g_return_if_fail (GEDIT_IS_PROGRESS_MESSAGE_AREA (tab->priv->message_area));
-	set_message_area (tab, NULL); /* destroy the message area */
+	g_return_if_fail (GEDIT_IS_PROGRESS_INFO_BAR (tab->priv->info_bar));
+	set_info_bar (tab, NULL); /* destroy the info bar */
 	
 	gjob = gtk_source_print_job_get_print_job (pjob);
 
@@ -2595,11 +2595,11 @@ preview_finished_cb (GtkSourcePrintJob *pjob, GeditTab *tab)
 #endif
 
 static void
-print_cancelled (GtkWidget        *area,
+print_cancelled (GtkWidget        *bar,
                  gint              response_id,
                  GeditTab         *tab)
 {
-	g_return_if_fail (GEDIT_IS_PROGRESS_MESSAGE_AREA (tab->priv->message_area));
+	g_return_if_fail (GEDIT_IS_PROGRESS_INFO_BAR (tab->priv->info_bar));
 
 	gedit_print_job_cancel (tab->priv->print_job);
 
@@ -2607,76 +2607,30 @@ print_cancelled (GtkWidget        *area,
 }
 
 static void
-show_printing_message_area (GeditTab *tab, gboolean preview)
+show_printing_info_bar (GeditTab *tab, gboolean preview)
 {
-	GtkWidget *area;
+	GtkWidget *bar;
 
 	if (preview)
 	{
-		area = gedit_progress_message_area_new (GTK_STOCK_PRINT_PREVIEW,
+		bar = gedit_progress_info_bar_new (GTK_STOCK_PRINT_PREVIEW,
 							"",
 							TRUE);
 	}
 	else
 	{
-		area = gedit_progress_message_area_new (GTK_STOCK_PRINT,
+		bar = gedit_progress_info_bar_new (GTK_STOCK_PRINT,
 							"",
 							TRUE);
 	}
 
-	g_signal_connect (area,
+	g_signal_connect (bar,
 			  "response",
 			  G_CALLBACK (print_cancelled),
 			  tab);
 	  
-	set_message_area (tab, area);
+	set_info_bar (tab, bar);
 }
-
-#if !GTK_CHECK_VERSION (2, 17, 4)
-
-static void
-page_setup_done_cb (GtkPageSetup *setup,
-		    GeditTab     *tab)
-{
-	if (setup != NULL)
-	{
-		GeditDocument *doc;
-
-		doc = gedit_tab_get_document (tab);
-
-		/* remember it for this document */
-		g_object_set_data_full (G_OBJECT (doc),
-					GEDIT_PAGE_SETUP_KEY,
-					g_object_ref (setup),
-					(GDestroyNotify)g_object_unref);
-
-		/* make it the default */
-		_gedit_app_set_default_page_setup (gedit_app_get_default(),
-						   setup);
-	}
-}
-
-void 
-_gedit_tab_page_setup (GeditTab *tab)
-{
-	GtkPageSetup *setup;
-	GtkPrintSettings *settings;
-
-	g_return_if_fail (GEDIT_IS_TAB (tab));
-
-	setup = get_page_setup (tab);
-	settings = get_print_settings (tab);
-
-	gtk_print_run_page_setup_dialog_async (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))),
-		 			       setup,
-		 			       settings,
-					       (GtkPageSetupDoneFunc) page_setup_done_cb,
-					       tab);
-
-	/* CHECK: should we unref setup and settings? */
-}
-
-#endif
 
 static void
 gedit_tab_print_or_print_preview (GeditTab                *tab,
@@ -2700,7 +2654,7 @@ gedit_tab_print_or_print_preview (GeditTab                *tab,
 	g_object_add_weak_pointer (G_OBJECT (tab->priv->print_job), 
 				   (gpointer *) &tab->priv->print_job);
 
-	show_printing_message_area (tab, is_preview);
+	show_printing_info_bar (tab, is_preview);
 
 	g_signal_connect (tab->priv->print_job,
 			  "printing",
@@ -2958,7 +2912,7 @@ gedit_tab_set_info_bar (GeditTab  *tab,
 	g_return_if_fail (info_bar == NULL || GTK_IS_WIDGET (info_bar));
 
 	/* FIXME: this can cause problems with the tab state machine */
-	set_message_area (tab, info_bar);
+	set_info_bar (tab, info_bar);
 }
 
 /* ex:ts=8:noet: */

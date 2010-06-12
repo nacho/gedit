@@ -101,7 +101,7 @@ NOINST_H_FILES =			\
 	gedit-document-saver.h		\
 	gedit-documents-panel.h		\
 	gedit-history-entry.h		\
-	gedit-io-error-message-area.h	\
+	gedit-io-error-info-bar.h	\
 	gedit-language-manager.h	\
 	gedit-multi-notebook.h		\
 	gedit-notebook.h		\
@@ -135,7 +135,7 @@ INST_H_FILES =				\
 	gedit-message.h			\
 	gedit-panel.h			\
 	gedit-plugin.h			\
-	gedit-progress-message-area.h	\
+	gedit-progress-info-bar.h	\
 	gedit-statusbar.h		\
 	gedit-status-combo-box.h	\
 	gedit-tab.h 			\
@@ -177,7 +177,7 @@ libgedit_la_SOURCES = 			\
 	gedit-encodings-combo-box.c	\
 	gedit-file-chooser-dialog.c	\
 	gedit-history-entry.c		\
-	gedit-io-error-message-area.c	\
+	gedit-io-error-info-bar.c	\
 	gedit-language-manager.c	\
 	gedit-message-bus.c		\
 	gedit-message-type.c		\
@@ -193,7 +193,7 @@ libgedit_la_SOURCES = 			\
 	gedit-plugins-engine.c		\
 	gedit-print-job.c		\
 	gedit-print-preview.c		\
-	gedit-progress-message-area.c	\
+	gedit-progress-info-bar.c	\
 	gedit-session.c			\
 	gedit-settings.c		\
 	gedit-smart-charset-converter.c	\
