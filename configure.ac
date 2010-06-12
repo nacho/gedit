@@ -100,7 +100,7 @@ AC_MSG_RESULT([$platform_osx])
 AM_CONDITIONAL(PLATFORM_OSX, test "$platform_osx" = "yes")
 
 dnl check for native osx
-gdk_windowing=`$PKG_CONFIG --variable=target gdk-2.0`
+gdk_windowing=`$PKG_CONFIG --variable=target gdk-3.0`
 
 AC_MSG_CHECKING([for native Mac OS X])
 if test "$gdk_windowing" = "quartz"; then
@@ -271,8 +271,8 @@ PKG_CHECK_MODULES(GEDIT, [
 	glib-2.0 >= 2.25.6
 	gthread-2.0 >= 2.13.0
 	gio-2.0 >= 2.25.9
-	gtk+-2.0 >= 2.20.0
-	gtksourceview-2.0 >= 2.9.7
+	gtk+-3.0 >= 2.90.0
+	gtksourceview-3.0 >= 2.9.7
 	gconf-2.0 >= 2.31.1
 	libpeas-1.0 >= 0.5.0
 	libpeasui-1.0 >= 0.5.0
