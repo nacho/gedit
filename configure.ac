@@ -267,14 +267,17 @@ dnl ================================================================
 # Dependencies
 GTK_REQUIRED=
 GTK_REQUIRED_VERSION=
+GSV_REQUIRED=
 
 PKG_CHECK_EXISTS([gtk+-3.0 >= 2.90],
 		 [
 		 	GTK_REQUIRED=gtk+-3.0
 		 	GTK_REQUIRED_VERSION=2.90.0
+		 	GSV_REQUIRED=gtksourceview-3.0
 		 ],[
 		 	GTK_REQUIRED=gtk+-2.0
 		 	GTK_REQUIRED_VERSION=2.16.0
+		 	GSV_REQUIRED=gtksourceview-2.0
 		 ])
 
 PKG_CHECK_MODULES(GEDIT, [
@@ -283,7 +286,7 @@ PKG_CHECK_MODULES(GEDIT, [
 	gthread-2.0 >= 2.13.0
 	gio-2.0 >= 2.25.8
 	$GTK_REQUIRED >= $GTK_REQUIRED_VERSION
-	gtksourceview-2.0 >= 2.9.7
+	$GSV_REQUIRED >= 2.9.7
 	gconf-2.0 >= 2.31.1
 ])
 
