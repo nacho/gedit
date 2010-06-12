@@ -4487,7 +4487,8 @@ add_document (GeditTab  *tab,
  * Gets a newly allocated list with all the documents in the window.
  * This list must be freed.
  *
- * Returns: a newly allocated list with all the documents in the window
+ * Returns: (element-type Gedit.Document) (transfer container): a newly
+ * allocated list with all the documents in the window
  */
 GList *
 gedit_window_get_documents (GeditWindow *window)
@@ -4522,7 +4523,8 @@ add_view (GeditTab  *tab,
  *
  * Gets a list with all the views in the window. This list must be freed.
  *
- * Returns: a newly allocated list with all the views in the window
+ * Returns: (element-type Gedit.View) (transfer container): a newly allocated
+ * list with all the views in the window
  */
 GList *
 gedit_window_get_views (GeditWindow *window)
@@ -4586,7 +4588,7 @@ gedit_window_close_all_tabs (GeditWindow *window)
 /**
  * gedit_window_close_tabs:
  * @window: a #GeditWindow
- * @tabs: a list of #GeditTab
+ * @tabs: (element-type Gedit.Tab): a list of #GeditTab
  *
  * Closes all tabs specified by @tabs.
  */
@@ -4801,7 +4803,8 @@ add_unsaved_doc (GeditTab *tab,
  *
  * Gets the list of documents that need to be saved before closing the window.
  *
- * Returns: a list of #GeditDocument that need to be saved before closing the window
+ * Returns: (element-type Gedit.Document) (transfer container): a list of
+ * #GeditDocument that need to be saved before closing the window
  */
 GList *
 gedit_window_get_unsaved_documents (GeditWindow *window)
@@ -5015,7 +5018,7 @@ gedit_window_get_tab_from_location (GeditWindow *window,
  * Gets the #GeditMessageBus associated with @window. The returned reference
  * is owned by the window and should not be unreffed.
  *
- * Return value: the #GeditMessageBus associated with @window
+ * Return value: (transfer none): the #GeditMessageBus associated with @window
  */
 GeditMessageBus	*
 gedit_window_get_message_bus (GeditWindow *window)

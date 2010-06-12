@@ -678,7 +678,7 @@ item_exists (GeditPanel  *panel,
  * @item: the #GtkWidget to add to the @panel
  * @id: unique name for the new item
  * @display_name: the name to be shown in the @panel
- * @image: the image to be shown in the @panel
+ * @image: (allow-none): the image to be shown in the @panel, or %NULL
  *
  * Adds a new item to the @panel.
  *
@@ -754,7 +754,7 @@ gedit_panel_add_item (GeditPanel  *panel,
  * @item: the #GtkWidget to add to the @panel
  * @id: unique name for the new item
  * @display_name: the name to be shown in the @panel
- * @stock_id: a stock id
+ * @stock_id: (allow-none): a stock id, or %NULL
  *
  * Same as gedit_panel_add_item() but using an image from stock.
  *
@@ -784,9 +784,9 @@ gedit_panel_add_item_with_stock_icon (GeditPanel  *panel,
  * @item: the item to be removed from the panel
  *
  * Removes the widget @item from the panel if it is in the @panel and returns
- * TRUE if there was not any problem.
+ * %TRUE if there was not any problem.
  *
- * Returns: TRUE if it was well removed.
+ * Returns: %TRUE if it was well removed.
  */
 gboolean
 gedit_panel_remove_item (GeditPanel *panel,
@@ -840,7 +840,7 @@ gedit_panel_remove_item (GeditPanel *panel,
  *
  * Switches to the page that contains @item.
  *
- * Returns: TRUE if it was activated
+ * Returns: %TRUE if it was activated
  */
 gboolean
 gedit_panel_activate_item (GeditPanel *panel,
@@ -866,11 +866,11 @@ gedit_panel_activate_item (GeditPanel *panel,
 /**
  * gedit_panel_item_is_active:
  * @panel: a #GeditPanel
- * @item: a widget contained in #GeditPanel
+ * @item: a #GtkWidget
  *
- * Wheter @item is the one current active in @panel
+ * Returns whether @item is the active widget in @panel
  *
- * Returns: TRUE if the widget is active
+ * Returns: %TRUE if @item is the active widget
  */
 gboolean
 gedit_panel_item_is_active (GeditPanel *panel,

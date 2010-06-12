@@ -2790,7 +2790,7 @@ gedit_tab_get_auto_save_enabled	(GeditTab *tab)
  **/
 void
 gedit_tab_set_auto_save_enabled	(GeditTab *tab, 
-				 gboolean enable)
+				 gboolean  enable)
 {
 	GeditDocument *doc = NULL;
 	GeditLockdownMask lockdown;
@@ -2872,7 +2872,7 @@ gedit_tab_get_auto_save_interval (GeditTab *tab)
  **/
 void 
 gedit_tab_set_auto_save_interval (GeditTab *tab, 
-				  gint interval)
+				  gint      interval)
 {
 	GeditDocument *doc = NULL;
 	

@@ -60,6 +60,7 @@ typedef enum {
 } GeditDebugSection;
 
 
+/* FIXME this is an issue for introspection */
 #define	DEBUG_VIEW	GEDIT_DEBUG_VIEW,    __FILE__, __LINE__, G_STRFUNC
 #define	DEBUG_SEARCH	GEDIT_DEBUG_SEARCH,  __FILE__, __LINE__, G_STRFUNC
 #define	DEBUG_PRINT	GEDIT_DEBUG_PRINT,   __FILE__, __LINE__, G_STRFUNC

@@ -343,12 +343,22 @@ gedit_status_combo_box_init (GeditStatusComboBox *self)
 }
 
 /* public functions */
+
+/**
+ * gedit_status_combo_box_new:
+ * @label: (allow-none):
+ */
 GtkWidget *
 gedit_status_combo_box_new (const gchar *label)
 {
 	return g_object_new (GEDIT_TYPE_STATUS_COMBO_BOX, "label", label, NULL);
 }
 
+/**
+ * gedit_status_combo_box_set_label:
+ * @combo:
+ * @label: (allow-none):
+ */
 void
 gedit_status_combo_box_set_label (GeditStatusComboBox *combo, 
 				  const gchar         *label)
@@ -377,6 +387,12 @@ item_activated (GtkMenuItem         *item,
 	gedit_status_combo_box_set_item (combo, item);
 }
 
+/**
+ * gedit_status_combo_box_add_item:
+ * @combo:
+ * @item:
+ * @text: (allow-none):
+ */
 void
 gedit_status_combo_box_add_item (GeditStatusComboBox *combo,
 				 GtkMenuItem         *item,
@@ -424,6 +440,12 @@ gedit_status_combo_box_get_item_text (GeditStatusComboBox *combo,
 	return ret;
 }
 
+/**
+ * gedit_status_combo_box_set_item_text:
+ * @combo:
+ * @item:
+ * @text: (allow-none):
+ */
 void 
 gedit_status_combo_box_set_item_text (GeditStatusComboBox *combo,
 				      GtkMenuItem	  *item,

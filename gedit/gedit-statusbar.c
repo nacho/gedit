@@ -348,6 +348,7 @@ remove_message_timeout (GeditStatusbar *statusbar)
   	return FALSE;
 }
 
+/* FIXME this is an issue for introspection */
 /**
  * gedit_statusbar_flash_message:
  * @statusbar: a #GeditStatusbar

@@ -292,8 +292,15 @@ load_file_list (GeditWindow         *window,
 
 /**
  * gedit_commands_load_uri:
+ * @window:
+ * @location:
+ * @encoding: (allow-none):
+ * @line_pos:
+ * @column_pos:
  *
- * Do nothing if location does not exist
+ * Ignore non-existing locations
+ *
+ * Returns: (transfer container):
  */
 void
 gedit_commands_load_location (GeditWindow         *window,
@@ -324,8 +331,15 @@ gedit_commands_load_location (GeditWindow         *window,
 
 /**
  * gedit_commands_load_uris:
+ * @window:
+ * @locations: (element-type Glib.File) (transfer none):
+ * @encoding: (allow-none):
+ * @line_pos:
+ * @column_pos:
  *
- * Ignore non-existing locations 
+ * Ignore non-existing locations
+ *
+ * Returns: (transfer container):
  */
 GSList *
 gedit_commands_load_locations (GeditWindow         *window,

@@ -498,7 +498,7 @@ gedit_view_focus_out (GtkWidget *widget, GdkEventFocus *event)
  * @doc: a #GeditDocument
  * 
  * Creates a new #GeditView object displaying the @doc document. 
- * @doc cannot be NULL.
+ * @doc cannot be %NULL.
  *
  * Return value: a new #GeditView
  **/
@@ -684,6 +684,7 @@ gedit_view_scroll_to_cursor (GeditView *view)
 				      0.0);
 }
 
+/* FIXME this is an issue for introspection */
 /**
  * gedit_view_set_font:
  * @view: a #GeditView
@@ -950,26 +951,12 @@ send_focus_change (GtkWidget *widget,
 	GdkEvent *fevent = gdk_event_new (GDK_FOCUS_CHANGE);
 
 	g_object_ref (widget);
-#if !GTK_CHECK_VERSION (2, 21, 0)
-	if (in)
-		GTK_WIDGET_SET_FLAGS (widget, GTK_HAS_FOCUS);
-	else
-		GTK_WIDGET_UNSET_FLAGS (widget, GTK_HAS_FOCUS);
-#endif
 
 	fevent->focus_change.type = GDK_FOCUS_CHANGE;
 	fevent->focus_change.window = g_object_ref (gtk_widget_get_window (widget));
 	fevent->focus_change.in = in;
 
-#if !GTK_CHECK_VERSION (2, 21, 0)
-	gtk_widget_event (widget, fevent);
-  
-	g_object_notify (G_OBJECT (widget), "has-focus");
-
-	g_object_unref (widget);
-#else
 	gtk_widget_send_focus_change (widget, fevent);
-#endif
 
 	gdk_event_free (fevent);
 }

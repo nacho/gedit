@@ -1143,6 +1143,11 @@ set_content_type (GeditDocument *doc,
 	}
 }
 
+/**
+ * gedit_document_set_content_type:
+ * @doc:
+ * @content_type: (allow-none):
+ */
 void
 gedit_document_set_content_type (GeditDocument *doc,
                                  const gchar   *content_type)
@@ -1207,7 +1212,12 @@ gedit_document_set_location (GeditDocument *doc,
 	set_content_type (doc, NULL);
 }
 
-/* Never returns NULL */
+/**
+ * gedit_document_get_uri_for_display:
+ * @doc:
+ *
+ * Note: this never returns %NULL.
+ **/
 gchar *
 gedit_document_get_uri_for_display (GeditDocument *doc)
 {
@@ -1224,7 +1234,12 @@ gedit_document_get_uri_for_display (GeditDocument *doc)
 	}
 }
 
-/* Never returns NULL */
+/**
+ * gedit_document_get_short_name_for_display:
+ * @doc:
+ *
+ * Note: this never returns %NULL.
+ **/
 gchar *
 gedit_document_get_short_name_for_display (GeditDocument *doc)
 {
@@ -1245,6 +1260,11 @@ gedit_document_get_short_name_for_display (GeditDocument *doc)
 	}
 }
 
+/**
+ * gedit_document_set_short_name_for_display:
+ * @doc:
+ * @short_name: (allow-none):
+ */
 void
 gedit_document_set_short_name_for_display (GeditDocument *doc,
                                            const gchar   *short_name)
@@ -1265,7 +1285,12 @@ gedit_document_get_content_type (GeditDocument *doc)
  	return g_strdup (doc->priv->content_type);
 }
 
-/* Never returns NULL */
+/**
+ * gedit_document_get_mime_type:
+ * @doc:
+ *
+ * Note: this never returns %NULL.
+ **/
 gchar *
 gedit_document_get_mime_type (GeditDocument *doc)
 {
@@ -1584,6 +1609,14 @@ gedit_document_load_real (GeditDocument       *doc,
 	gedit_document_loader_load (doc->priv->loader);
 }
 
+/**
+ * gedit_document_load_stream:
+ * @doc:
+ * @stream:
+ * @encoding: (allow-none):
+ * @line_pop:
+ * @column_pos:
+ **/
 void
 gedit_document_load_stream (GeditDocument       *doc,
                             GInputStream        *stream,
@@ -1620,7 +1653,7 @@ gedit_document_load_stream (GeditDocument       *doc,
  * gedit_document_load:
  * @doc: the #GeditDocument.
  * @location: the location where to load the document from.
- * @encoding: the #GeditEncoding to encode the document.
+ * @encoding: (allow-none): the #GeditEncoding to encode the document, or %NULL.
  * @line_pos: the line to show.
  * @create: whether the document should be created if it doesn't exist.
  *
@@ -1963,6 +1996,12 @@ compute_num_of_lines (const gchar *text)
 	return n;
 }
 
+/**
+ * gedit_document_set_search_text"
+ * @doc:
+ * @text: (allow-none):
+ * @flags:
+ **/
 void
 gedit_document_set_search_text (GeditDocument *doc,
 				const gchar   *text,
@@ -2025,6 +2064,11 @@ gedit_document_set_search_text (GeditDocument *doc,
 		g_object_notify (G_OBJECT (doc), "can-search-again");
 }
 
+/**
+ * gedit_document_get_search_text:
+ * @doc:
+ * @flags: (allow-none):
+ */
 gchar *
 gedit_document_get_search_text (GeditDocument *doc,
 				guint         *flags)
@@ -2046,6 +2090,14 @@ gedit_document_get_can_search_again (GeditDocument *doc)
 	        (*doc->priv->search_text != '\0'));
 }
 
+/**
+ * gedit_document_search_forward:
+ * @doc:
+ * @start: (allow-none):
+ * @end: (allow-none):
+ * @match_start: (allow-none):
+ * @match_end: (allow=none):
+ **/
 gboolean
 gedit_document_search_forward (GeditDocument     *doc,
 			       const GtkTextIter *start,
@@ -2118,7 +2170,15 @@ gedit_document_search_forward (GeditDocument     *doc,
 	
 	return found;			    
 }
-						 
+
+/**
+ * gedit_document_search_backward:
+ * @doc:
+ * @start: (allow-none):
+ * @end: (allow-none):
+ * @match_start: (allow-none):
+ * @match_end: (allow=none):
+ **/
 gboolean
 gedit_document_search_backward (GeditDocument     *doc,
 				const GtkTextIter *start,
@@ -2192,6 +2252,7 @@ gedit_document_search_backward (GeditDocument     *doc,
 	return found;		      
 }
 
+/* FIXME this is an issue for introspection regardning @find */
 gint 
 gedit_document_replace_all (GeditDocument       *doc,
 			    const gchar         *find, 
@@ -2309,6 +2370,11 @@ gedit_document_replace_all (GeditDocument       *doc,
 	return cont;
 }
 
+/**
+ * gedit_document_set_language:
+ * @doc:
+ * @lang: (allow-none):
+ **/
 void
 gedit_document_set_language (GeditDocument     *doc, 
 			     GtkSourceLanguage *lang)

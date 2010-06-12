@@ -446,6 +446,11 @@ gedit_encodings_combo_box_get_selected_encoding (GeditEncodingsComboBox *menu)
 	return NULL;
 }
 
+/**
+ * gedit_encodings_combo_box_set_selected_encoding:
+ * @menu:
+ * @encoding: (allow-none):
+ **/
 void
 gedit_encodings_combo_box_set_selected_encoding (GeditEncodingsComboBox *menu,
 						 const GeditEncoding    *encoding)

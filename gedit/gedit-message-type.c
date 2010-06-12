@@ -67,6 +67,7 @@ typedef struct
 
 struct _GeditMessageType
 {
+	/* FIXME this is an issue for introspection */
 	gint ref_count;
 
 	gchar *object_path;
@@ -143,8 +144,8 @@ gedit_message_type_get_type (void)
 
 /**
  * gedit_message_type_identifier:
- * @object_path: the object path
- * @method: the method
+ * @object_path: (allow-none): the object path
+ * @method: (allow-none): the method
  *
  * Get the string identifier for @method at @object_path.
  *
@@ -160,7 +161,7 @@ gedit_message_type_identifier (const gchar *object_path,
 
 /**
  * gedit_message_type_is_valid_object_path:
- * @object_path: the object path
+ * @object_path: (allow-none): the object path
  *
  * Returns whether @object_path is a valid object path
  *
@@ -248,8 +249,8 @@ gedit_message_type_is_supported (GType type)
 
 /**
  * gedit_message_type_new_valist:
- * @object_path: the object path
- * @method: the method
+ * @object_path: (allow-none): the object path
+ * @method: (allow-none): the method
  * @num_optional: number of optional arguments
  * @var_args: key/gtype pair variable argument list
  *
@@ -289,8 +290,8 @@ gedit_message_type_new_valist (const gchar *object_path,
 
 /**
  * gedit_message_type_new:
- * @object_path: the object path
- * @method: the method
+ * @object_path: (allow-none): the object path
+ * @method: (allow-none): the method
  * @num_optional: number of optional arguments
  * @...: key/gtype pair variable argument list
  *

@@ -711,6 +711,7 @@ gedit_app_create_window_real (GeditApp    *app,
 /**
  * gedit_app_create_window:
  * @app: the #GeditApp
+ * @screen: (allow-none):
  *
  * Create a new #GeditWindow part of @app.
  *
@@ -751,8 +752,8 @@ _gedit_app_restore_window (GeditApp    *app,
  *
  * Returns all the windows currently present in #GeditApp.
  *
- * Return value: the list of #GeditWindows objects. The list
- * should not be freed
+ * Return value: (transfer none): the list of #GeditWindows objects.
+ * The list should not be freed
  */
 const GList *
 gedit_app_get_windows (GeditApp *app)
@@ -894,7 +895,8 @@ _gedit_app_get_window_in_viewport (GeditApp  *app,
  *
  * Returns all the documents currently open in #GeditApp.
  *
- * Return value: a newly allocated list of #GeditDocument objects
+ * Return value: (element-type Gedit.Document) (transfer container):
+ * a newly allocated list of #GeditDocument objects
  */
 GList *
 gedit_app_get_documents	(GeditApp *app)
@@ -923,7 +925,8 @@ gedit_app_get_documents	(GeditApp *app)
  *
  * Returns all the views currently present in #GeditApp.
  *
- * Return value: a newly allocated list of #GeditView objects
+ * Return value: (element-type Gedit.View) (transfer container):
+ * a newly allocated list of #GeditView objects
  */
 GList *
 gedit_app_get_views (GeditApp *app)
