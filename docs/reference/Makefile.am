@@ -52,7 +52,6 @@ IGNORE_HFILES=		\
 	gedit-plugins-engine.h			\
 	gedit-prefs-manager-private.h		\
 	gedit-session.h				\
-	gedit-spinner.h				\
 	gedit-ui.h				\
 	gedit-window-private.h			\
 	gedit-output-window.h			\

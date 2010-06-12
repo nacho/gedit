@@ -38,7 +38,6 @@
 #include "gedit-close-button.h"
 #include "gedit-window.h"
 #include "gedit-debug.h"
-#include "gseal-gtk-compat.h"
 
 #define PANEL_ITEM_KEY "GeditPanelItemKey"
 

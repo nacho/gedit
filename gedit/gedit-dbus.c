@@ -42,8 +42,6 @@
 #include "gedit-fifo.h"
 #endif
 
-#include "gseal-gtk-compat.h"
-
 typedef struct _WaitData WaitData;
 typedef void (*WaitHandlerFunc)(GObject *object, WaitData *data);
 

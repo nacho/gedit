@@ -43,7 +43,6 @@
 #include "gedit-app.h"
 #include "gedit-encodings.h"
 
-#include "gseal-gtk-compat.h"
 #include "gedit-commands.h"
 #include "gedit-debug.h"
 #include "gedit-dirs.h"

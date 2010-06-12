@@ -63,8 +63,6 @@
 #include <sys/stat.h>
 #endif
 
-#include "gseal-gtk-compat.h"
-
 #define STDIN_DELAY_MICROSECONDS 100000
 
 /* Returns true if location is a file: uri and is not a chained uri */

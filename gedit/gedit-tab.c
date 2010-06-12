@@ -45,10 +45,6 @@
 #include "gedit-enum-types.h"
 #include "gedit-settings.h"
 
-#if !GTK_CHECK_VERSION (2, 17, 1)
-#include "gedit-message-area.h"
-#endif
-
 #define GEDIT_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_TAB, GeditTabPrivate))
 
 #define GEDIT_TAB_KEY "GEDIT_TAB_KEY"
@@ -1002,13 +998,8 @@ document_loaded (GeditDocument *document,
 			set_message_area (tab, emsg);
 		}
 
-#if !GTK_CHECK_VERSION (2, 17, 1)
-		gedit_message_area_set_default_response (GEDIT_MESSAGE_AREA (emsg),
-							 GTK_RESPONSE_CANCEL);
-#else
 		gtk_info_bar_set_default_response (GTK_INFO_BAR (emsg),
 						   GTK_RESPONSE_CANCEL);
-#endif
 
 		gtk_widget_show (emsg);
 
@@ -1054,13 +1045,8 @@ document_loaded (GeditDocument *document,
 					  G_CALLBACK (io_loading_error_message_area_response),
 					  tab);
 
-#if !GTK_CHECK_VERSION (2, 17, 1)
-			gedit_message_area_set_default_response (GEDIT_MESSAGE_AREA (emsg),
-								 GTK_RESPONSE_CANCEL);
-#else
 			gtk_info_bar_set_default_response (GTK_INFO_BAR (emsg),
 							   GTK_RESPONSE_CANCEL);
-#endif
 
 			gtk_widget_show (emsg);
 		}
@@ -1091,13 +1077,8 @@ document_loaded (GeditDocument *document,
 
 					set_message_area (tab, w);
 
-#if !GTK_CHECK_VERSION (2, 17, 1)
-					gedit_message_area_set_default_response (GEDIT_MESSAGE_AREA (w),
-										 GTK_RESPONSE_CANCEL);
-#else
 					gtk_info_bar_set_default_response (GTK_INFO_BAR (w),
 									   GTK_RESPONSE_CANCEL);
-#endif
 
 					gtk_widget_show (w);
 
@@ -1425,13 +1406,8 @@ document_saved (GeditDocument *document,
 					  tab);
 		}
 
-#if !GTK_CHECK_VERSION (2, 17, 1)
-		gedit_message_area_set_default_response (GEDIT_MESSAGE_AREA (emsg),
-							 GTK_RESPONSE_CANCEL);
-#else
 		gtk_info_bar_set_default_response (GTK_INFO_BAR (emsg),
 						   GTK_RESPONSE_CANCEL);
-#endif
 
 		gtk_widget_show (emsg);
 	}

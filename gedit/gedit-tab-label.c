@@ -29,10 +29,6 @@
 #include "gedit-tab-label.h"
 #include "gedit-close-button.h"
 
-#ifdef BUILD_SPINNER
-#include "gedit-spinner.h"
-#endif
-
 #define GEDIT_TAB_LABEL_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_TAB_LABEL, GeditTabLabelPrivate))
 
 /* Signals */
@@ -174,11 +170,7 @@ sync_state (GeditTab      *tab,
 		gtk_widget_hide (tab_label->priv->icon);
 
 		gtk_widget_show (tab_label->priv->spinner);
-#ifdef BUILD_SPINNER
-		gedit_spinner_start (GEDIT_SPINNER (tab_label->priv->spinner));
-#else
 		gtk_spinner_start (GTK_SPINNER (tab_label->priv->spinner));
-#endif
 	}
 	else
 	{
@@ -193,11 +185,7 @@ sync_state (GeditTab      *tab,
 		gtk_widget_show (tab_label->priv->icon);
 
 		gtk_widget_hide (tab_label->priv->spinner);
-#ifdef BUILD_SPINNER
-		gedit_spinner_stop (GEDIT_SPINNER (tab_label->priv->spinner));
-#else
 		gtk_spinner_stop (GTK_SPINNER (tab_label->priv->spinner));
-#endif
 	}
 
 	/* sync tip since encoding is known only after load/save end */
@@ -296,12 +284,7 @@ gedit_tab_label_init (GeditTabLabel *tab_label)
 			  G_CALLBACK (close_button_clicked_cb),
 			  tab_label);
 
-#ifdef BUILD_SPINNER
-	spinner = gedit_spinner_new ();
-	gedit_spinner_set_size (GEDIT_SPINNER (spinner), GTK_ICON_SIZE_MENU);
-#else
 	spinner = gtk_spinner_new ();
-#endif
 	gtk_box_pack_start (GTK_BOX (hbox), spinner, FALSE, FALSE, 0);
 	tab_label->priv->spinner = spinner;
 

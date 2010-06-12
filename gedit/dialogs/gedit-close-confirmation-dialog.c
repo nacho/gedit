@@ -39,8 +39,6 @@
 #include <gedit/gedit-utils.h>
 #include <gedit/gedit-window.h>
 
-#include <gedit/gseal-gtk-compat.h>
-
 /* Properties */
 enum 
 {

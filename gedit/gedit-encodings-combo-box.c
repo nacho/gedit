@@ -41,8 +41,6 @@
 #include "gedit-settings.h"
 #include "gedit-utils.h"
 
-#include "gseal-gtk-compat.h"
-
 #define ENCODING_KEY "Enconding"
 
 #define GEDIT_ENCODINGS_COMBO_BOX_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),	\

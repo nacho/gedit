@@ -56,7 +56,6 @@
 #include "gedit-enum-types.h"
 #include "gedit-dirs.h"
 #include "gedit-status-combo-box.h"
-#include "gseal-gtk-compat.h"
 #include "gedit-settings.h"
 #include "gedit-marshal.h"
 

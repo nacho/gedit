@@ -40,7 +40,6 @@
 #include <cairo-pdf.h>
 
 #include "gedit-print-preview.h"
-#include "gseal-gtk-compat.h"
 
 #define PRINTER_DPI (72.)
 

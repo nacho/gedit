@@ -51,8 +51,6 @@
 #include "gedit-enum-types.h"
 #include "gedit-settings.h"
 
-#include "gseal-gtk-compat.h"
-
 #define AFTER_ALL_TABS -1
 #define NOT_IN_APP_WINDOWS -2
 

@@ -46,7 +46,6 @@
 #include "gedit-dirs.h"
 #include "gedit-settings.h"
 #include "gedit-utils.h"
-#include "gseal-gtk-compat.h"
 
 #define GEDIT_PLUGINS_ENGINE_BASE_KEY "/apps/gedit-2/plugins"
 #define GEDIT_PLUGINS_ENGINE_KEY GEDIT_PLUGINS_ENGINE_BASE_KEY "/active-plugins"

@@ -265,29 +265,17 @@ dnl Start of pkg-config checks
 dnl ================================================================
 
 # Dependencies
-GTK_REQUIRED=
-GTK_REQUIRED_VERSION=
-GSV_REQUIRED=
-
-PKG_CHECK_EXISTS([gtk+-3.0 >= 2.90],
-		 [
-		 	GTK_REQUIRED=gtk+-3.0
-		 	GTK_REQUIRED_VERSION=2.90.0
-		 	GSV_REQUIRED=gtksourceview-3.0
-		 ],[
-		 	GTK_REQUIRED=gtk+-2.0
-		 	GTK_REQUIRED_VERSION=2.16.0
-		 	GSV_REQUIRED=gtksourceview-2.0
-		 ])
 
 PKG_CHECK_MODULES(GEDIT, [
 	libxml-2.0 >= 2.5.0
 	glib-2.0 >= 2.25.6
 	gthread-2.0 >= 2.13.0
 	gio-2.0 >= 2.25.9
-	$GTK_REQUIRED >= $GTK_REQUIRED_VERSION
-	$GSV_REQUIRED >= 2.9.7
+	gtk+-2.0 >= 2.20.0
+	gtksourceview-2.0 >= 2.9.7
 	gconf-2.0 >= 2.31.1
+	libpeas-1.0 >= 0.5.0
+	libpeasui-1.0 >= 0.5.0
 ])
 
 if test "$os_osx" = "no" &&
@@ -314,29 +302,6 @@ GEDIT_LIBS="$GEDIT_LIBS $X11_LIBS $UNIX_LIBS"
 
 AC_SUBST(GEDIT_CFLAGS)
 AC_SUBST(GEDIT_LIBS)
-
-dnl FIXME: Remove this when removing gedit-message-area
-
-if $PKG_CONFIG --atleast-version 2.17.1 $GTK_REQUIRED; then
-       gtkatleast=
-else
-       gtkatleast=no
-fi
-
-AM_CONDITIONAL(BUILD_MESSAGE_AREA, test "$gtkatleast" = "no")
-
-dnl FIXME: Remove this when removing gedit-spinner
-
-if $PKG_CONFIG --atleast-version 2.19.0 $GTK_REQUIRED; then
-       gtkatleast=
-else
-       gtkatleast=no
-fi
-
-AM_CONDITIONAL(BUILD_SPINNER, test "$gtkatleast" = "no")
-if test "$gtkatleast" = "no"; then
-	AC_DEFINE([BUILD_SPINNER],[1],[Whether to use GeditSpinner instead of GtkSpinner])
-fi
 
 if test "$os_osx" = "no" &&
    test "$os_win32" = "no"; then

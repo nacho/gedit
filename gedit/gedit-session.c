@@ -52,7 +52,6 @@
 #include "gedit-commands.h"
 #include "dialogs/gedit-close-confirmation-dialog.h"
 #include "smclient/eggsmclient.h"
-#include "gseal-gtk-compat.h"
 
 /* The master client we use for SM */
 static EggSMClient *master_client = NULL;

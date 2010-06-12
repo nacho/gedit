@@ -120,8 +120,7 @@ NOINST_H_FILES =			\
 	gedit-tab-label.h		\
 	gedittextregion.h		\
 	gedit-ui.h			\
-	gedit-window-private.h		\
-	gseal-gtk-compat.h
+	gedit-window-private.h
 
 INST_H_FILES =				\
 	gedit-app.h			\
@@ -260,16 +259,6 @@ if PLATFORM_WIN32
 else
 	rm -f $(DESTDIR)$(bindir)/gnome-text-editor
 	ln -s gedit $(DESTDIR)$(bindir)/gnome-text-editor
-endif
-
-if BUILD_MESSAGE_AREA
-libgedit_la_SOURCES += gedit-message-area.c
-INST_H_FILES += gedit-message-area.h
-endif
-
-if BUILD_SPINNER
-libgedit_la_SOURCES += gedit-spinner.c
-NOINST_H_FILES += gedit-spinner.h
 endif
 
 -include $(top_srcdir)/git.mk

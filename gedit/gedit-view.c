@@ -45,10 +45,8 @@
 #include "gedit-debug.h"
 #include "gedit-marshal.h"
 #include "gedit-utils.h"
-#include "gseal-gtk-compat.h"
 #include "gedit-settings.h"
 #include "gedit-app.h"
-#include "gseal-gtk-compat.h"
 
 #define GEDIT_VIEW_SCROLL_MARGIN 0.02
 #define GEDIT_VIEW_SEARCH_DIALOG_TIMEOUT (30*1000) /* 30 seconds */

@@ -23,7 +23,6 @@
 #include "gedit-status-combo-box.h"
 
 #include <gdk/gdkkeysyms.h>
-#include "gseal-gtk-compat.h"
 
 #define COMBO_BOX_TEXT_DATA "GeditStatusComboBoxTextData"
 

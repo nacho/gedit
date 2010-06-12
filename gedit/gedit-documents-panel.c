@@ -35,7 +35,6 @@
 #include "gedit-documents-panel.h"
 #include "gedit-utils.h"
 #include "gedit-notebook.h"
-#include "gseal-gtk-compat.h"
 
 #include <glib/gi18n.h>
 

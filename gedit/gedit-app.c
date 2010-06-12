@@ -44,7 +44,6 @@
 #include "gedit-utils.h"
 #include "gedit-enum-types.h"
 #include "gedit-dirs.h"
-#include "gseal-gtk-compat.h"
 #include "gedit-settings.h"
 
 #ifdef OS_OSX
