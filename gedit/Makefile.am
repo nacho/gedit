@@ -105,11 +105,6 @@ NOINST_H_FILES =			\
 	gedit-language-manager.h	\
 	gedit-multi-notebook.h		\
 	gedit-notebook.h		\
-	gedit-object-module.h		\
-	gedit-plugin-info.h		\
-	gedit-plugin-info-priv.h	\
-	gedit-plugin-loader.h		\
-	gedit-plugin-manager.h		\
 	gedit-plugins-engine.h		\
 	gedit-print-job.h		\
 	gedit-print-preview.h		\
@@ -134,7 +129,6 @@ INST_H_FILES =				\
 	gedit-message-type.h		\
 	gedit-message.h			\
 	gedit-panel.h			\
-	gedit-plugin.h			\
 	gedit-progress-info-bar.h	\
 	gedit-statusbar.h		\
 	gedit-status-combo-box.h	\
@@ -186,10 +180,6 @@ libgedit_la_SOURCES = 			\
 	gedit-object-module.c		\
 	gedit-notebook.c		\
 	gedit-panel.c			\
-	gedit-plugin-info.c		\
-	gedit-plugin.c			\
-	gedit-plugin-loader.c		\
-	gedit-plugin-manager.c		\
 	gedit-plugins-engine.c		\
 	gedit-print-job.c		\
 	gedit-print-preview.c		\
