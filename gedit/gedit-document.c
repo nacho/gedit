@@ -90,9 +90,6 @@ static void	gedit_document_save_real	(GeditDocument                *doc,
 						 GeditDocumentNewlineType      newline_type,
 						 GeditDocumentCompressionType  compression_type,
 						 GeditDocumentSaveFlags        flags);
-static void	to_search_region_range 		(GeditDocument                *doc,
-						 GtkTextIter                  *start,
-						 GtkTextIter                  *end);
 static void 	insert_text_cb		 	(GeditDocument                *doc,
 						 GtkTextIter                  *pos,
 						 const gchar                  *text,
@@ -101,7 +98,7 @@ static void 	insert_text_cb		 	(GeditDocument                *doc,
 static void	delete_range_cb 		(GeditDocument                *doc,
 						 GtkTextIter                  *start,
 						 GtkTextIter                  *end);
-			     
+
 struct _GeditDocumentPrivate
 {
 	GSettings   *editor_settings;
@@ -734,7 +731,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 }
 
 static void
-set_language (GeditDocument     *doc, 
+set_language (GeditDocument     *doc,
               GtkSourceLanguage *lang,
               gboolean           set_by_user)
 {
@@ -1996,6 +1993,34 @@ compute_num_of_lines (const gchar *text)
 	return n;
 }
 
+static void
+to_search_region_range (GeditDocument *doc,
+			GtkTextIter   *start,
+			GtkTextIter   *end)
+{
+	gedit_debug (DEBUG_DOCUMENT);
+
+	if (doc->priv->to_search_region == NULL)
+		return;
+
+	gtk_text_iter_set_line_offset (start, 0);
+	gtk_text_iter_forward_to_line_end (end);
+
+	/*
+	g_print ("+ [%u (%u), %u (%u)]\n", gtk_text_iter_get_line (start), gtk_text_iter_get_offset (start),
+					   gtk_text_iter_get_line (end), gtk_text_iter_get_offset (end));
+	*/
+
+	/* Add the region to the refresh region */
+	gedit_text_region_add (doc->priv->to_search_region, start, end);
+
+	/* Notify views of the updated highlight region */
+	gtk_text_iter_backward_lines (start, doc->priv->num_of_lines_search_text);
+	gtk_text_iter_forward_lines (end, doc->priv->num_of_lines_search_text);
+
+	g_signal_emit (doc, document_signals [SEARCH_HIGHLIGHT_UPDATED], 0, start, end);
+}
+
 /**
  * gedit_document_set_search_text"
  * @doc:
@@ -2370,50 +2395,6 @@ gedit_document_replace_all (GeditDocument       *doc,
 	return cont;
 }
 
-/**
- * gedit_document_set_language:
- * @doc:
- * @lang: (allow-none):
- **/
-void
-gedit_document_set_language (GeditDocument     *doc, 
-			     GtkSourceLanguage *lang)
-{
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-
-	set_language (doc, lang, TRUE);
-}
-
-GtkSourceLanguage *
-gedit_document_get_language (GeditDocument *doc)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
-
-	return gtk_source_buffer_get_language (GTK_SOURCE_BUFFER (doc));
-}
-
-const GeditEncoding *
-gedit_document_get_encoding (GeditDocument *doc)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
-
-	return doc->priv->encoding;
-}
-
-glong
-_gedit_document_get_seconds_since_last_save_or_load (GeditDocument *doc)
-{
-	GTimeVal current_time;
-
-	gedit_debug (DEBUG_DOCUMENT);
-	
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), -1);
-
-	g_get_current_time (&current_time);
-
-	return (current_time.tv_sec - doc->priv->time_of_last_save_or_load.tv_sec);
-}
-
 static void
 get_search_match_colors (GeditDocument *doc,
 			 gboolean      *foreground_set,
@@ -2629,34 +2610,6 @@ search_region (GeditDocument *doc,
 	} while (found);
 }
 
-static void
-to_search_region_range (GeditDocument *doc,
-			GtkTextIter   *start, 
-			GtkTextIter   *end)
-{
-	gedit_debug (DEBUG_DOCUMENT);
-	
-	if (doc->priv->to_search_region == NULL)
-		return;
-		
-	gtk_text_iter_set_line_offset (start, 0);
-	gtk_text_iter_forward_to_line_end (end);
-	
-	/*
-	g_print ("+ [%u (%u), %u (%u)]\n", gtk_text_iter_get_line (start), gtk_text_iter_get_offset (start),
-					   gtk_text_iter_get_line (end), gtk_text_iter_get_offset (end));
-	*/
-
-	/* Add the region to the refresh region */
-	gedit_text_region_add (doc->priv->to_search_region, start, end);
-
-	/* Notify views of the updated highlight region */
-	gtk_text_iter_backward_lines (start, doc->priv->num_of_lines_search_text);
-	gtk_text_iter_forward_lines (end, doc->priv->num_of_lines_search_text);
-	
-	g_signal_emit (doc, document_signals [SEARCH_HIGHLIGHT_UPDATED], 0, start, end);
-}
-
 void
 _gedit_document_search_region (GeditDocument     *doc,
 			       const GtkTextIter *start,
@@ -2751,6 +2704,50 @@ delete_range_cb (GeditDocument *doc,
 	d_end = *end;
 	
 	to_search_region_range (doc, &d_start, &d_end);
+}
+
+/**
+ * gedit_document_set_language:
+ * @doc:
+ * @lang: (allow-none):
+ **/
+void
+gedit_document_set_language (GeditDocument     *doc,
+			     GtkSourceLanguage *lang)
+{
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	set_language (doc, lang, TRUE);
+}
+
+GtkSourceLanguage *
+gedit_document_get_language (GeditDocument *doc)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+
+	return gtk_source_buffer_get_language (GTK_SOURCE_BUFFER (doc));
+}
+
+const GeditEncoding *
+gedit_document_get_encoding (GeditDocument *doc)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+
+	return doc->priv->encoding;
+}
+
+glong
+_gedit_document_get_seconds_since_last_save_or_load (GeditDocument *doc)
+{
+	GTimeVal current_time;
+
+	gedit_debug (DEBUG_DOCUMENT);
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), -1);
+
+	g_get_current_time (&current_time);
+
+	return (current_time.tv_sec - doc->priv->time_of_last_save_or_load.tv_sec);
 }
 
 void
