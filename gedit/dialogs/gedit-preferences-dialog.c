@@ -39,15 +39,14 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include <libpeasui/peas-ui-plugin-manager.h>
 
 #include "gedit-preferences-dialog.h"
 #include "gedit-utils.h"
 #include "gedit-debug.h"
 #include "gedit-document.h"
 #include "gedit-style-scheme-manager.h"
+#include "gedit-plugin-manager.h"
 #include "gedit-dirs.h"
-#include "gedit-plugins-engine.h"
 #include "gedit-settings.h"
 #include "gedit-utils.h"
 
@@ -906,14 +905,11 @@ setup_font_colors_page (GeditPreferencesDialog *dlg)
 static void
 setup_plugins_page (GeditPreferencesDialog *dlg)
 {
-	GeditPluginsEngine *engine;
 	GtkWidget *page_content;
 
 	gedit_debug (DEBUG_PREFS);
 
-	engine = gedit_plugins_engine_get_default ();
-
-	page_content = peas_ui_plugin_manager_new (PEAS_ENGINE (engine));
+	page_content = gedit_plugin_manager_new ();
 	g_return_if_fail (page_content != NULL);
 
 	gtk_box_pack_start (GTK_BOX (dlg->priv->plugin_manager_place_holder),

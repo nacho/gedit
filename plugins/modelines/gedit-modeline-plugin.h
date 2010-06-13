@@ -24,8 +24,7 @@
 
 #include <glib.h>
 #include <glib-object.h>
-#include <libpeas/peas-extension-base.h>
-#include <libpeas/peas-object-module.h>
+#include <gedit/gedit-plugin.h>
 
 G_BEGIN_DECLS
 
@@ -36,24 +35,13 @@ G_BEGIN_DECLS
 #define GEDIT_IS_MODELINE_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GEDIT_TYPE_MODELINE_PLUGIN))
 #define GEDIT_MODELINE_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GEDIT_TYPE_MODELINE_PLUGIN, GeditModelinePluginClass))
 
-typedef struct _GeditModelinePlugin		GeditModelinePlugin;
-typedef struct _GeditModelinePluginClass	GeditModelinePluginClass;
-
-struct _GeditModelinePlugin {
-	PeasExtensionBase parent;
-
-	/*< private >*/
-	gulong tab_added_handler_id;
-	gulong tab_removed_handler_id;
-};
-
-struct _GeditModelinePluginClass {
-	PeasExtensionBaseClass parent_class;
-};
+/* Private structure type */
+typedef GeditPluginClass	GeditModelinePluginClass;
+typedef GeditPlugin		GeditModelinePlugin;
 
 GType	gedit_modeline_plugin_get_type		(void) G_GNUC_CONST;
 
-G_MODULE_EXPORT void peas_register_types (PeasObjectModule *module);
+G_MODULE_EXPORT GType register_gedit_plugin (GTypeModule *module);
 
 G_END_DECLS
 

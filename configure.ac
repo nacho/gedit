@@ -274,8 +274,6 @@ PKG_CHECK_MODULES(GEDIT, [
 	gtk+-3.0 >= 2.90.0
 	gtksourceview-3.0 >= 2.11.2
 	gconf-2.0 >= 2.31.1
-	libpeas-1.0
-	libpeasui-1.0
 ])
 
 if test "$os_osx" = "no" &&
@@ -372,8 +370,6 @@ AC_SUBST(GEDIT_IMPLIB)
 AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
 AC_SUBST(LOADER_LIBTOOL_FLAGS)
 
-AM_PATH_PYTHON(2.6)
-
 GEDIT_PLUGINS_DATA_DIR="$datadir/gedit-2/plugins"
 AC_SUBST(GEDIT_PLUGINS_DATA_DIR)
 
@@ -397,6 +393,8 @@ gedit/smclient/Makefile
 gedit/Makefile
 help/Makefile
 pixmaps/Makefile
+plugin-loaders/Makefile
+plugin-loaders/c/Makefile
 plugins/Makefile
 plugins/changecase/Makefile
 plugins/checkupdate/org.gnome.gedit.checkupdate.gschema.xml.in
@@ -405,7 +403,6 @@ plugins/docinfo/Makefile
 plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in
 plugins/filebrowser/Makefile
 plugins/modelines/Makefile
-plugins/pysample/Makefile
 plugins/sort/Makefile
 plugins/spell/Makefile
 plugins/taglist/Makefile

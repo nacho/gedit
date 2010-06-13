@@ -44,9 +44,8 @@ gchar		*gedit_dirs_get_gedit_lib_dir		(void);
 
 gchar		*gedit_dirs_get_gedit_plugins_dir	(void);
 
-gchar		*gedit_dirs_get_gedit_plugins_data_dir	(void);
-
-gchar		*gedit_dirs_get_binding_modules_dir	(void);
+gchar		*gedit_dirs_get_gedit_plugin_loaders_dir
+							(void);
 
 gchar		*gedit_dirs_get_ui_file			(const gchar *file);
 

@@ -1,30 +1,28 @@
-DIST_SUBDIRS = \
-	modelines
+DIST_SUBDIRS =		\
+	changecase 	\
+	checkupdate	\
+	docinfo 	\
+	filebrowser 	\
+	modelines	\
+	sort 		\
+	spell 		\
+	taglist 	\
+	time
 
-#	changecase 	\
-#	checkupdate	\
-#	docinfo 	\
-#	filebrowser 	\
-#	modelines	\
-#	sort 		\
-#	spell 		\
-#	taglist 	\
-#	time
 #	externaltools
 #	pythonconsole
 #	quickopen
 #	snippets
 
-SUBDIRS = \
-	modelines
+SUBDIRS = 		\
+	changecase	\
+	docinfo		\
+	filebrowser	\
+	modelines	\
+	sort		\
+	taglist		\
+	time
 
-#	changecase
-#	docinfo
-#	filebrowser
-#	modelines
-#	sort
-#	taglist
-#	time
 #	pythonconsole
 #	quickopen
 #	snippets
@@ -33,15 +31,12 @@ SUBDIRS = \
 #SUBDIRS      += externaltools
 #endif
 
-#if ENABLE_ENCHANT
-#SUBDIRS      += spell
-#endif
+if ENABLE_ENCHANT
+SUBDIRS      += spell
+endif
 
-#if ENABLE_UPDATER
-#SUBDIRS      += checkupdate
-#endif
-
-DIST_SUBDIRS += pysample
-SUBDIRS += pysample
+if ENABLE_UPDATER
+SUBDIRS      += checkupdate
+endif
 
 -include $(top_srcdir)/git.mk

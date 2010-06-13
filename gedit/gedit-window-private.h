@@ -31,8 +31,6 @@
 #ifndef __GEDIT_WINDOW_PRIVATE_H__
 #define __GEDIT_WINDOW_PRIVATE_H__
 
-#include <libpeas/peas-extension-set.h>
-
 #include "gedit/gedit-window.h"
 #include "gedit-message-bus.h"
 #include "gedit-settings.h"
@@ -64,7 +62,6 @@ struct _GeditWindowPrivate
 	GtkWidget      *language_combo;
 	
 	GeditMessageBus *message_bus;	
-	PeasExtensionSet *extensions;
 
 	/* Widgets for fullscreen mode */
 	GtkWidget      *fullscreen_controls;
