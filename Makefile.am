@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = gedit pixmaps po data docs tests win32 osx
+SUBDIRS = gedit pixmaps po plugins data docs tests win32 osx
 
 if !OS_OSX
 SUBDIRS += help

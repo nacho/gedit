@@ -2,7 +2,7 @@
  * gedit-modeline-plugin.c
  * Emacs, Kate and Vim-style modelines support for gedit.
  * 
- * Copyright (C) 2005-2007 - Steve Frécinaux <code@istique.net>
+ * Copyright (C) 2005-2010 - Steve Frécinaux <code@istique.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,16 +29,16 @@
 #include "modeline-parser.h"
 
 #include <gedit/gedit-debug.h>
+#include <gedit/gedit-window.h>
+#include <gedit/gedit-window-activatable.h>
 #include <gedit/gedit-utils.h>
 
-#define WINDOW_DATA_KEY "GeditModelinePluginWindowData"
 #define DOCUMENT_DATA_KEY "GeditModelinePluginDocumentData"
 
-typedef struct
-{
+struct _GeditModelinePluginPrivate {
 	gulong tab_added_handler_id;
 	gulong tab_removed_handler_id;
-} WindowData;
+};
 
 typedef struct
 {
@@ -46,18 +46,14 @@ typedef struct
 	gulong document_saved_handler_id;
 } DocumentData;
 
-static void	gedit_modeline_plugin_activate (GeditPlugin *plugin, GeditWindow *window);
-static void	gedit_modeline_plugin_deactivate (GeditPlugin *plugin, GeditWindow *window);
-static GObject	*gedit_modeline_plugin_constructor (GType type, guint n_construct_properties, GObjectConstructParam *construct_param);
-static void	gedit_modeline_plugin_finalize (GObject *object);
+static void	gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface);
 
-GEDIT_PLUGIN_REGISTER_TYPE(GeditModelinePlugin, gedit_modeline_plugin)
-
-static void
-window_data_free (WindowData *wdata)
-{
-	g_slice_free (WindowData, wdata);
-}
+G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditModelinePlugin,
+				gedit_modeline_plugin,
+				PEAS_TYPE_EXTENSION_BASE,
+				0,
+				G_IMPLEMENT_INTERFACE_DYNAMIC (GEDIT_TYPE_WINDOW_ACTIVATABLE,
+							       gedit_window_activatable_iface_init))
 
 static void
 document_data_free (DocumentData *ddata)
@@ -66,43 +62,26 @@ document_data_free (DocumentData *ddata)
 }
 
 static void
-gedit_modeline_plugin_class_init (GeditModelinePluginClass *klass)
+gedit_modeline_plugin_constructed (GObject *object)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	GeditPluginClass *plugin_class = GEDIT_PLUGIN_CLASS (klass);
-
-	object_class->constructor = gedit_modeline_plugin_constructor;
-	object_class->finalize = gedit_modeline_plugin_finalize;
-
-	plugin_class->activate = gedit_modeline_plugin_activate;
-	plugin_class->deactivate = gedit_modeline_plugin_deactivate;
-}
-
-static GObject *
-gedit_modeline_plugin_constructor (GType                  type,
-				   guint                  n_construct_properties,
-				   GObjectConstructParam *construct_param)
-{
-	GObject *object;
 	gchar *data_dir;
 
-	object = G_OBJECT_CLASS (gedit_modeline_plugin_parent_class)->constructor (type,
-										   n_construct_properties,
-										   construct_param);
-
-	data_dir = gedit_plugin_get_data_dir (GEDIT_PLUGIN (object));
+	data_dir = peas_extension_base_get_data_dir (PEAS_EXTENSION_BASE (object));
 
 	modeline_parser_init (data_dir);
 
 	g_free (data_dir);
-
-	return object;
 }
 
 static void
 gedit_modeline_plugin_init (GeditModelinePlugin *plugin)
 {
 	gedit_debug_message (DEBUG_PLUGINS, "GeditModelinePlugin initializing");
+
+	plugin->priv = G_TYPE_INSTANCE_GET_PRIVATE (plugin,
+						    GEDIT_TYPE_MODELINE_PLUGIN,
+						    GeditModelinePluginPrivate);
+
 }
 
 static void
@@ -186,14 +165,16 @@ on_window_tab_removed (GeditWindow *window,
 }
 
 static void
-gedit_modeline_plugin_activate (GeditPlugin *plugin,
-				GeditWindow *window)
+gedit_modeline_plugin_activate (GeditWindowActivatable *activatable,
+				GeditWindow            *window)
 {
-	WindowData *wdata;
+	GeditModelinePlugin *plugin;
 	GList *views;
 	GList *l;
 
 	gedit_debug (DEBUG_PLUGINS);
+
+	plugin = GEDIT_MODELINE_PLUGIN (activatable);
 
 	views = gedit_window_get_views (window);
 	for (l = views; l != NULL; l = l->next)
@@ -203,36 +184,29 @@ gedit_modeline_plugin_activate (GeditPlugin *plugin,
 	}
 	g_list_free (views);
 
-	wdata = g_slice_new (WindowData);
-
-	wdata->tab_added_handler_id =
+	plugin->priv->tab_added_handler_id =
 		g_signal_connect (window, "tab-added",
 				  G_CALLBACK (on_window_tab_added), NULL);
 
-	wdata->tab_removed_handler_id =
+	plugin->priv->tab_removed_handler_id =
 		g_signal_connect (window, "tab-removed",
 				  G_CALLBACK (on_window_tab_removed), NULL);
-
-	g_object_set_data_full (G_OBJECT (window), WINDOW_DATA_KEY,
-				wdata, (GDestroyNotify) window_data_free);
 }
 
 static void
-gedit_modeline_plugin_deactivate (GeditPlugin *plugin,
-				  GeditWindow *window)
+gedit_modeline_plugin_deactivate (GeditWindowActivatable *activatable,
+				  GeditWindow            *window)
 {
-	WindowData *wdata;
+	GeditModelinePlugin *plugin;
 	GList *views;
 	GList *l;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	wdata = g_object_steal_data (G_OBJECT (window), WINDOW_DATA_KEY);
+	plugin = GEDIT_MODELINE_PLUGIN (activatable);
 
-	g_signal_handler_disconnect (window, wdata->tab_added_handler_id);
-	g_signal_handler_disconnect (window, wdata->tab_removed_handler_id);
-
-	window_data_free (wdata);
+	g_signal_handler_disconnect (window, plugin->priv->tab_added_handler_id);
+	g_signal_handler_disconnect (window, plugin->priv->tab_removed_handler_id);
 
 	views = gedit_window_get_views (window);
 
@@ -246,4 +220,38 @@ gedit_modeline_plugin_deactivate (GeditPlugin *plugin,
 	g_list_free (views);
 }
 
-/* ex:ts=8:noet: */
+static void
+gedit_modeline_plugin_class_init (GeditModelinePluginClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	object_class->constructed = gedit_modeline_plugin_constructed;
+	object_class->finalize = gedit_modeline_plugin_finalize;
+
+	g_type_class_add_private (klass, sizeof (GeditModelinePluginPrivate));
+}
+
+static void
+gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface)
+{
+	iface->activate = gedit_modeline_plugin_activate;
+	iface->deactivate = gedit_modeline_plugin_deactivate;
+}
+
+static void
+gedit_modeline_plugin_class_finalize (GeditModelinePluginClass *klass)
+{
+}
+
+
+G_MODULE_EXPORT void
+peas_register_types (PeasObjectModule *module)
+{
+	gedit_modeline_plugin_register_type (G_TYPE_MODULE (module));
+
+	peas_object_module_register_extension_type (module,
+						    GEDIT_TYPE_WINDOW_ACTIVATABLE,
+						    GEDIT_TYPE_MODELINE_PLUGIN);
+}
+
+/* ex:set ts=8 noet: */
