@@ -172,9 +172,6 @@ void		 _gedit_tab_mark_for_closing	(GeditTab	     *tab);
 
 gboolean	 _gedit_tab_can_close		(GeditTab	     *tab);
 
-#if !GTK_CHECK_VERSION (2, 17, 4)
-void		 _gedit_tab_page_setup		(GeditTab            *tab);
-#endif
 
 G_END_DECLS
 

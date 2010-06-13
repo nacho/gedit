@@ -42,23 +42,6 @@
 #include "gedit-tab.h"
 #include "gedit-debug.h"
 
-#if !GTK_CHECK_VERSION (2, 17, 4)
-void
-_gedit_cmd_file_page_setup (GtkAction   *action,
-			    GeditWindow *window)
-{
-	GeditTab *tab;
-
-	gedit_debug (DEBUG_COMMANDS);
-
-	tab = gedit_window_get_active_tab (window);
-	if (tab == NULL)
-		return;
-
-	_gedit_tab_page_setup (tab);
-}
-#endif
-
 void
 _gedit_cmd_file_print_preview (GtkAction   *action,
 			       GeditWindow *window)

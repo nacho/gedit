@@ -1695,30 +1695,6 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	}
 	g_free (ui_file);
 
-#if !GTK_CHECK_VERSION (2, 17, 4)
-	/* merge page setup menu manually since we cannot have conditional
-	 * sections in gedit-ui.xml */
-	{
-		guint merge_id;
-		GeditLockdownMask lockdown;
-
-		merge_id = gtk_ui_manager_new_merge_id (manager);
-		gtk_ui_manager_add_ui (manager,
-				       merge_id,
-				       "/MenuBar/FileMenu/FileOps_5",
-				       "FilePageSetupMenu",
-				       "FilePageSetup",
-				       GTK_UI_MANAGER_MENUITEM,
-				       FALSE);
-
-		lockdown = gedit_app_get_lockdown (gedit_app_get_default ());
-		action = gtk_action_group_get_action (window->priv->action_group,
-						      "FilePageSetup");
-		gtk_action_set_sensitive (action, 
-					  !(lockdown & GEDIT_LOCKDOWN_PRINT_SETUP));
-	}
-#endif
-
 	/* show tooltips in the statusbar */
 	g_signal_connect (manager,
 			  "connect_proxy",
@@ -2855,13 +2831,6 @@ _gedit_window_set_lockdown (GeditWindow       *window,
 	gtk_action_set_sensitive (action, 
 				  !(window->priv->state & GEDIT_WINDOW_STATE_PRINTING) &&
 				  !(lockdown & GEDIT_LOCKDOWN_SAVE_TO_DISK));
-
-#if !GTK_CHECK_VERSION (2, 17, 4)
-	action = gtk_action_group_get_action (window->priv->action_group,
-				              "FilePageSetup");
-	gtk_action_set_sensitive (action, 
-				  !(lockdown & GEDIT_LOCKDOWN_PRINT_SETUP));
-#endif
 }
 
 static void

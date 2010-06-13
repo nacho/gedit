@@ -164,12 +164,6 @@ void		_gedit_cmd_file_save_documents_list	(GeditWindow *window,
 							 GList       *docs);
 
 
-#if !GTK_CHECK_VERSION (2, 17, 4)
-void		_gedit_cmd_file_page_setup		(GtkAction   *action,
-							 GeditWindow *window);
-#endif
-
-
 G_END_DECLS
 
 #endif /* __GEDIT_COMMANDS_H__ */ 
