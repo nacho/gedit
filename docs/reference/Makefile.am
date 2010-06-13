@@ -67,9 +67,7 @@ IGNORE_HFILES=		\
 # These files are not part of gedit but were copied into it for some reason.
 # Do not parse them to make the docs.
 IGNORE_HFILES +=	\
-	bacon-message-connection.h		\
-	gedittextregion.h			\
-	sexy-icon-entry.h
+	gedittextregion.h
 
 # Images to copy into HTML directory.
 HTML_IMAGES=
@@ -96,16 +94,6 @@ GTKDOC_CFLAGS=	\
 GTKDOC_LIBS=	\
 	$(top_builddir)/gedit/libgedit.la	\
 	$(GEDIT_LIBS)
-
-if ENABLE_PYTHON
-GTKDOC_CFLAGS += \
-        $(NO_STRICT_ALIASING_CFLAGS)    \
-        $(PYGTK_CFLAGS)                 \
-        $(PYTHON_CFLAGS)                \
-        $(AM_CFLAGS)
-GTKDOC_LIBS += \
-	$(top_builddir)/plugin-loaders/python/bindings/gedit.la
-endif
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.
 include $(top_srcdir)/gtk-doc.make

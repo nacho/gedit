@@ -2,16 +2,17 @@ DIST_SUBDIRS =		\
 	changecase 	\
 	checkupdate	\
 	docinfo 	\
-	externaltools	\
 	filebrowser 	\
 	modelines	\
-	pythonconsole	\
-	quickopen	\
-	snippets	\
 	sort 		\
 	spell 		\
 	taglist 	\
 	time
+
+#	externaltools
+#	pythonconsole
+#	quickopen
+#	snippets
 
 SUBDIRS = 		\
 	changecase	\
@@ -22,14 +23,13 @@ SUBDIRS = 		\
 	taglist		\
 	time
 
-if ENABLE_PYTHON
-SUBDIRS      += pythonconsole snippets quickopen
+#	pythonconsole
+#	quickopen
+#	snippets
 
-if !OS_WIN32
-SUBDIRS      += externaltools
-endif
-
-endif
+#if !OS_WIN32
+#SUBDIRS      += externaltools
+#endif
 
 if ENABLE_ENCHANT
 SUBDIRS      += spell
