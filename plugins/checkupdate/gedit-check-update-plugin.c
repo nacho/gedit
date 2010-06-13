@@ -5,7 +5,7 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
  * any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -28,12 +28,6 @@
 #include <libsoup/soup.h>
 #include <gtk/gtk.h>
 #include <stdlib.h>
-
-#include <gedit/gseal-gtk-compat.h>
-
-#if !GTK_CHECK_VERSION(2, 17, 1)
-#include <gedit/gedit-message-area.h>
-#endif
 
 #define CHECKUPDATE_BASE_SETTINGS	"org.gnome.gedit.plugins.checkupdate"
 #define CHECKUPDATE_KEY_IGNORE_VERSION	"ignore-version"
@@ -123,7 +117,7 @@ gedit_check_update_plugin_dispose (GObject *object)
 
 	gedit_debug_message (DEBUG_PLUGINS,
 			     "GeditCheckUpdatePlugin disposing");
-	
+
 	G_OBJECT_CLASS (gedit_check_update_plugin_parent_class)->dispose (object);
 }
 
@@ -140,15 +134,10 @@ static void
 set_contents (GtkWidget *infobar,
 	      GtkWidget *contents)
 {
-#if !GTK_CHECK_VERSION (2, 17, 1)
-	gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (infobar),
-					 contents);
-#else
 	GtkWidget *content_area;
-	
+
 	content_area = gtk_info_bar_get_content_area (GTK_INFO_BAR (infobar));
 	gtk_container_add (GTK_CONTAINER (content_area), contents);
-#endif
 }
 
 static void
@@ -202,7 +191,7 @@ set_message_area_text_and_icon (GtkWidget        *message_area,
 		gtk_label_set_selectable (GTK_LABEL (secondary_label), TRUE);
 		gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
 	}
-	
+
 	set_contents (message_area, hbox_content);
 }
 
@@ -215,7 +204,7 @@ on_response_cb (GtkWidget   *infobar,
 	{
 		GError *error = NULL;
 		WindowData *data;
-		
+
 		data = g_object_get_data (G_OBJECT (window),
 					  WINDOW_DATA_KEY);
 
@@ -234,7 +223,7 @@ on_response_cb (GtkWidget   *infobar,
 			dialog = gtk_message_dialog_new (GTK_WINDOW (window),
 							 GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_ERROR,
-							 GTK_BUTTONS_CLOSE, 
+							 GTK_BUTTONS_CLOSE,
 							 _("There was an error displaying the URI."));
 
 			gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
@@ -255,7 +244,7 @@ on_response_cb (GtkWidget   *infobar,
 	else if (response_id == GTK_RESPONSE_NO)
 	{
 		WindowData *data;
-		
+
 		data = g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
 
 		g_settings_set_string (data->plugin->priv->settings,
@@ -276,26 +265,10 @@ create_infobar (GeditWindow *window,
 {
 	GtkWidget *infobar;
 	gchar *message;
-
-#if !GTK_CHECK_VERSION (2, 17, 1)
-	infobar = gedit_message_area_new ();
-	
-	gedit_message_area_add_stock_button_with_text (GEDIT_MESSAGE_AREA (infobar),
-						       _("_Download"),
-						       GTK_STOCK_SAVE,
-						       GTK_RESPONSE_YES);
-	gedit_message_area_add_stock_button_with_text (GEDIT_MESSAGE_AREA (infobar),
-						       _("_Ignore Version"),
-						       GTK_STOCK_DISCARD,
-						       GTK_RESPONSE_NO);
-	gedit_message_area_add_button (GEDIT_MESSAGE_AREA (infobar),
-				       GTK_STOCK_CANCEL,
-				       GTK_RESPONSE_CANCEL);
-#else
 	GtkWidget *button;
 
 	infobar = gtk_info_bar_new ();
-	
+
 	button = gedit_gtk_button_new_with_stock_icon (_("_Download"),
 						       GTK_STOCK_SAVE);
 	gtk_widget_show (button);
@@ -315,10 +288,9 @@ create_infobar (GeditWindow *window,
 	gtk_info_bar_add_button (GTK_INFO_BAR (infobar),
 				 GTK_STOCK_CANCEL,
 				 GTK_RESPONSE_CANCEL);
-	
+
 	gtk_info_bar_set_message_type (GTK_INFO_BAR (infobar),
 				       GTK_MESSAGE_INFO);
-#endif
 
 	message = g_strdup_printf ("%s (%s)", _("There is a new version of gedit"), version);
 	set_message_area_text_and_icon (infobar,
@@ -333,7 +305,7 @@ create_infobar (GeditWindow *window,
 	g_signal_connect (infobar, "response",
 			  G_CALLBACK (on_response_cb),
 			  window);
-	
+
 	return infobar;
 }
 
@@ -342,9 +314,9 @@ pack_infobar (GtkWidget *window,
 	      GtkWidget *infobar)
 {
 	GtkWidget *vbox;
-	
+
 	vbox = gtk_bin_get_child (GTK_BIN (window));
-	
+
 	gtk_box_pack_start (GTK_BOX (vbox), infobar, FALSE, FALSE, 0);
 	gtk_box_reorder_child (GTK_BOX (vbox), infobar, 2);
 }
@@ -356,20 +328,20 @@ get_file (const gchar *text,
 	GRegex *regex;
 	GMatchInfo *match_info;
 	gchar *word = NULL;
-	
+
 	regex = g_regex_new (regex_place, 0, 0, NULL);
 	g_regex_match (regex, text, 0, &match_info);
 	while (g_match_info_matches (match_info))
 	{
 		g_free (word);
-		
+
 		word = g_match_info_fetch (match_info, 0);
-		
+
 		g_match_info_next (match_info, NULL);
 	}
 	g_match_info_free (match_info);
 	g_regex_unref (regex);
-	
+
 	return word;
 }
 
@@ -381,16 +353,16 @@ get_numbers (const gchar *version,
 {
 	gchar **split;
 	gint num = 2;
-	
+
 	if (micro != NULL)
 		num = 3;
-	
+
 	split = g_strsplit (version, ".", num);
 	*major = atoi (split[0]);
 	*minor = atoi (split[1]);
 	if (micro != NULL)
 		*micro = atoi (split[2]);
-	
+
 	g_strfreev (split);
 }
 
@@ -402,7 +374,7 @@ newer_version (const gchar *v1,
 	gboolean newer = FALSE;
 	gint major1, minor1, micro1;
 	gint major2, minor2, micro2;
-	
+
 	if (v1 == NULL || v2 == NULL)
 		return FALSE;
 
@@ -429,7 +401,7 @@ newer_version (const gchar *v1,
 	{
 		newer = TRUE;
 	}
-	
+
 	return newer;
 }
 
@@ -437,21 +409,21 @@ static gchar *
 parse_file_version (const gchar *file)
 {
 	gchar *p, *aux;
-	
+
 	p = (gchar *)file;
-	
+
 	while (*p != '\0' && !g_ascii_isdigit (*p))
 	{
 		p++;
 	}
-	
+
 	if (*p == '\0')
 		return NULL;
-	
+
 	aux = g_strrstr (p, "-");
 	if (aux == NULL)
 		aux = g_strrstr (p, ".");
-	
+
 	return g_strndup (p, aux - p);
 }
 
@@ -490,13 +462,13 @@ parse_page_file (SoupSession *session,
 
 			data = g_object_get_data (G_OBJECT (window),
 						  WINDOW_DATA_KEY);
-			
+
 			file_url = g_strconcat (data->url, file, NULL);
 
 			g_free (data->url);
 			data->url = file_url;
 			data->version = g_strdup (file_version);
-		
+
 			infobar = create_infobar (window, file_version);
 			pack_infobar (GTK_WIDGET (window), infobar);
 			gtk_widget_show (infobar);
@@ -520,14 +492,14 @@ is_unstable (const gchar *version)
 	gchar **split;
 	gint minor;
 	gboolean unstable = TRUE;;
-	
+
 	split = g_strsplit (version, ".", 2);
 	minor = atoi (split[1]);
 	g_strfreev (split);
-	
+
 	if ((minor % 2) == 0)
 		unstable = FALSE;
-	
+
 	return unstable;
 }
 
@@ -540,25 +512,25 @@ get_file_page_version (const gchar *text,
 	GString *string = NULL;
 	gchar *unstable = NULL;
 	gchar *stable = NULL;
-	
+
 	regex = g_regex_new (regex_place, 0, 0, NULL);
 	g_regex_match (regex, text, 0, &match_info);
 	while (g_match_info_matches (match_info))
 	{
 		gint end;
 		gint i;
-		
+
 		g_match_info_fetch_pos (match_info, 0, NULL, &end);
-		
+
 		string = g_string_new ("");
-		
+
 		i = end;
 		while (text[i] != '/')
 		{
 			string = g_string_append_c (string, text[i]);
 			i++;
 		}
-		
+
 		if (is_unstable (string->str))
 		{
 			g_free (unstable);
@@ -569,16 +541,16 @@ get_file_page_version (const gchar *text,
 			g_free (stable);
 			stable = g_string_free (string, FALSE);
 		}
-		
+
 		g_match_info_next (match_info, NULL);
 	}
 	g_match_info_free (match_info);
 	g_regex_unref (regex);
-	
+
 	if ((GEDIT_MINOR_VERSION % 2) == 0)
 	{
 		g_free (unstable);
-		
+
 		return stable;
 	}
 	else
@@ -587,13 +559,13 @@ get_file_page_version (const gchar *text,
 		if (newer_version (stable, unstable, FALSE))
 		{
 			g_free (unstable);
-			
+
 			return stable;
 		}
 		else
 		{
 			g_free (stable);
-		
+
 			return unstable;
 		}
 	}
@@ -611,14 +583,14 @@ parse_page_version (SoupSession *session,
 		WindowData *data;
 
 		data = g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
-		
+
 		version = get_file_page_version (msg->response_body->data,
 						 VERSION_PLACE);
-		
+
 		data->url = g_strconcat (GEDIT_URL, version, "/", NULL);
 		g_free (version);
 		msg2 = soup_message_new ("GET", data->url);
-	
+
 		soup_session_queue_message (session, msg2,
 					    (SoupSessionCallback)parse_page_file,
 					    window);
@@ -637,7 +609,7 @@ impl_activate (GeditPlugin *plugin,
 {
 	SoupMessage *msg;
 	WindowData *data;
-	
+
 	gedit_debug (DEBUG_PLUGINS);
 
 	data = g_slice_new (WindowData);
@@ -651,7 +623,7 @@ impl_activate (GeditPlugin *plugin,
 				free_window_data);
 
 	msg = soup_message_new ("GET", GEDIT_URL);
-	
+
 	soup_session_queue_message (GEDIT_CHECK_UPDATE_PLUGIN (plugin)->priv->session, msg,
 				    (SoupSessionCallback)parse_page_version,
 				    window);
@@ -663,9 +635,9 @@ impl_deactivate (GeditPlugin *plugin,
 {
 
 	gedit_debug (DEBUG_PLUGINS);
-	
+
 	soup_session_abort (GEDIT_CHECK_UPDATE_PLUGIN (plugin)->priv->session);
-	
+
 	g_object_set_data (G_OBJECT (window),
 			   WINDOW_DATA_KEY,
 			   NULL);
@@ -676,7 +648,7 @@ gedit_check_update_plugin_class_init (GeditCheckUpdatePluginClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GeditPluginClass *plugin_class = GEDIT_PLUGIN_CLASS (klass);
-	
+
 	g_type_class_add_private (object_class, sizeof (GeditCheckUpdatePluginPrivate));
 
 	object_class->finalize = gedit_check_update_plugin_finalize;
@@ -685,4 +657,5 @@ gedit_check_update_plugin_class_init (GeditCheckUpdatePluginClass *klass)
 	plugin_class->activate = impl_activate;
 	plugin_class->deactivate = impl_deactivate;
 }
+
 /* ex:ts=8:noet: */

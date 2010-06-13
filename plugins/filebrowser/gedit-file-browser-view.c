@@ -25,7 +25,6 @@
 #include <gdk/gdkkeysyms.h>
 
 #include <gedit/gedit-plugin.h>
-#include <gedit/gseal-gtk-compat.h>
 
 #include "gedit-file-browser-store.h"
 #include "gedit-file-bookmarks-store.h"

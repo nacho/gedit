@@ -22,8 +22,6 @@
 #include "gedit-file-browser-utils.h"
 #include <gedit/gedit-utils.h>
 
-#include <gedit/gseal-gtk-compat.h>
-
 static GdkPixbuf *
 process_icon_pixbuf (GdkPixbuf   *pixbuf,
 		     gchar const *name,

@@ -35,8 +35,6 @@
 #include <gedit/gedit-debug.h>
 #include <gedit/gedit-utils.h>
 
-#include <gedit/gseal-gtk-compat.h>
-
 #define WINDOW_DATA_KEY "GeditDocInfoWindowData"
 #define MENU_PATH "/MenuBar/ToolsMenu/ToolsOps_2"
 
