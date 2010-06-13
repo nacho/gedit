@@ -242,8 +242,6 @@ gedit_window_dispose (GObject *object)
 
 	window = GEDIT_WINDOW (object);
 
-	save_window_state (GTK_WIDGET (window));
-
 	/* Stop tracking removal of panes otherwise we always
 	 * end up with thinking we had no pane active, since they
 	 * should all be removed below */
@@ -263,6 +261,7 @@ gedit_window_dispose (GObject *object)
 	 * for this window, but only once */
 	if (!window->priv->dispose_has_run)
 	{
+		save_window_state (GTK_WIDGET (window));
 		save_panes_state (window);
 
 		gedit_plugins_engine_deactivate_plugins (gedit_plugins_engine_get_default (),
