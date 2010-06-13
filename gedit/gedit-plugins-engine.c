@@ -79,6 +79,8 @@ struct _GeditPluginsEnginePrivate
 	GHashTable *loaders;
 
 	gboolean activate_from_prefs;
+	
+	guint scanned : 1;
 };
 
 GeditPluginsEngine *default_engine = NULL;
@@ -478,7 +480,7 @@ get_plugin_loader (GeditPluginsEngine *engine,
 			engine->priv->loaders, 
 			loader_id);
 
-	if (loader_info == NULL)
+	if (loader_info == NULL && !engine->priv->scanned)
 	{
 		gchar *loader_dir;
 
@@ -496,6 +498,8 @@ get_plugin_loader (GeditPluginsEngine *engine,
 		loader_info = (LoaderInfo *)g_hash_table_lookup (
 				engine->priv->loaders, 
 				loader_id);
+
+		engine->priv->scanned = TRUE;
 	}
 
 	if (loader_info == NULL)
