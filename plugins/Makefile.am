@@ -41,4 +41,7 @@ SUBDIRS = \
 #SUBDIRS      += checkupdate
 #endif
 
+DIST_SUBDIRS += pysample
+SUBDIRS += pysample
+
 -include $(top_srcdir)/git.mk

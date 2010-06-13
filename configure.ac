@@ -372,6 +372,8 @@ AC_SUBST(GEDIT_IMPLIB)
 AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
 AC_SUBST(LOADER_LIBTOOL_FLAGS)
 
+AM_PATH_PYTHON(2.6)
+
 GEDIT_PLUGINS_DATA_DIR="$datadir/gedit-2/plugins"
 AC_SUBST(GEDIT_PLUGINS_DATA_DIR)
 
@@ -403,6 +405,7 @@ plugins/docinfo/Makefile
 plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in
 plugins/filebrowser/Makefile
 plugins/modelines/Makefile
+plugins/pysample/Makefile
 plugins/sort/Makefile
 plugins/spell/Makefile
 plugins/taglist/Makefile
