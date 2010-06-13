@@ -288,19 +288,25 @@ gedit_dirs_get_gedit_plugins_dir (void)
 }
 
 gchar *
-gedit_dirs_get_gedit_plugin_loaders_dir (void)
+gedit_dirs_get_gedit_plugins_data_dir (void)
 {
-	gchar *lib_dir;
-	gchar *loader_dir;
-	
-	lib_dir = gedit_dirs_get_gedit_lib_dir ();
-	
-	loader_dir = g_build_filename (lib_dir,
-				       "plugin-loaders",
-				       NULL);
-	g_free (lib_dir);
-	
-	return loader_dir;
+	gchar *data_dir;
+	gchar *plugin_data_dir;
+
+	data_dir = gedit_dirs_get_gedit_data_dir ();
+
+	plugin_data_dir = g_build_filename (data_dir,
+					    "plugins",
+					    NULL);
+	g_free (data_dir);
+
+	return plugin_data_dir;
+}
+
+gchar *
+gedit_dirs_get_binding_modules_dir (void)
+{
+	return gedit_dirs_get_gedit_lib_dir ();
 }
 
 gchar *

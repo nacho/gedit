@@ -271,6 +271,8 @@ PKG_CHECK_MODULES(GEDIT, [
 	gio-2.0 >= 2.25.10
 	gtk+-3.0 >= 2.90.0
 	gtksourceview-3.0 >= 2.11.2
+	libpeas-1.0
+	libpeasui-1.0
 ])
 
 if test "$os_osx" = "no" &&
@@ -400,8 +402,6 @@ gedit/smclient/Makefile
 gedit/Makefile
 help/Makefile
 pixmaps/Makefile
-plugin-loaders/Makefile
-plugin-loaders/c/Makefile
 plugins/Makefile
 plugins/changecase/Makefile
 plugins/checkupdate/org.gnome.gedit.checkupdate.gschema.xml.in

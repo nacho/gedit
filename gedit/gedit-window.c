@@ -38,6 +38,8 @@
 
 #include <glib/gi18n.h>
 #include <gio/gio.h>
+#include <libpeas/peas-activatable.h>
+#include <libpeas/peas-extension-set.h>
 
 #include "gedit-ui.h"
 #include "gedit-window.h"
@@ -255,7 +257,7 @@ gedit_window_dispose (GObject *object)
 	/* First of all, force collection so that plugins
 	 * really drop some of the references.
 	 */
-	gedit_plugins_engine_garbage_collect (gedit_plugins_engine_get_default ());
+	peas_engine_garbage_collect (PEAS_ENGINE (gedit_plugins_engine_get_default ()));
 
 	/* save the panes position and make sure to deactivate plugins
 	 * for this window, but only once */
@@ -264,8 +266,14 @@ gedit_window_dispose (GObject *object)
 		save_window_state (GTK_WIDGET (window));
 		save_panes_state (window);
 
-		gedit_plugins_engine_deactivate_plugins (gedit_plugins_engine_get_default (),
-					                  window);
+		peas_extension_set_call (window->priv->extensions,
+					 "deactivate",
+					 window);
+
+		g_object_unref (window->priv->extensions);
+
+		peas_engine_garbage_collect (PEAS_ENGINE (gedit_plugins_engine_get_default ()));
+
 		window->priv->dispose_has_run = TRUE;
 	}
 
@@ -332,7 +340,7 @@ gedit_window_dispose (GObject *object)
 	/* Now that there have broken some reference loops,
 	 * force collection again.
 	 */
-	gedit_plugins_engine_garbage_collect (gedit_plugins_engine_get_default ());
+	peas_engine_garbage_collect (PEAS_ENGINE (gedit_plugins_engine_get_default ()));
 
 #ifdef OS_OSX
 	remove_mac_root_menu (window);
@@ -439,7 +447,7 @@ static void
 gedit_window_tab_removed (GeditWindow *window,
 			  GeditTab    *tab)
 {
-	gedit_plugins_engine_garbage_collect (gedit_plugins_engine_get_default ());
+	peas_engine_garbage_collect (PEAS_ENGINE (gedit_plugins_engine_get_default ()));
 }
 
 static void
@@ -965,8 +973,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 
 	update_next_prev_doc_sensitivity (window, tab);
 
-	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-						window);
+	peas_extension_set_call (window->priv->extensions, "update_state", window);
 }
 
 static void
@@ -3014,8 +3021,7 @@ sync_name (GeditTab    *tab,
 	g_free (escaped_name);
 	g_free (tip);
 
-	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-						 window);
+	peas_extension_set_call (window->priv->extensions, "update_state", window);
 }
 
 static GeditWindow *
@@ -3417,8 +3423,7 @@ selection_changed (GeditDocument *doc,
 				  editable &&
 				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 
-	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-						 window);
+	peas_extension_set_call (window->priv->extensions, "update_state", window);
 }
 
 static void
@@ -3427,8 +3432,7 @@ sync_languages_menu (GeditDocument *doc,
 		     GeditWindow   *window)
 {
 	update_languages_menu (window);
-	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-						 window);
+	peas_extension_set_call (window->priv->extensions, "update_state", window);
 }
 
 static void
@@ -3441,8 +3445,7 @@ readonly_changed (GeditDocument *doc,
 
 	sync_name (gedit_window_get_active_tab (window), NULL, window);
 
-	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-						window);
+	peas_extension_set_call (window->priv->extensions, "update_state", window);
 }
 
 static void
@@ -3450,8 +3453,7 @@ editable_changed (GeditView  *view,
                   GParamSpec  *arg1,
                   GeditWindow *window)
 {
-	gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-						 window);
+	peas_extension_set_call (window->priv->extensions, "update_state", window);
 }
 
 static void
@@ -3683,8 +3685,7 @@ on_tab_removed (GeditMultiNotebook *multi,
 
 		if (num_tabs == 0)
 		{
-			gedit_plugins_engine_update_plugins_ui (gedit_plugins_engine_get_default (),
-								window);
+			peas_extension_set_call (window->priv->extensions, "update_state", window);
 		}
 	}
 
@@ -4118,6 +4119,30 @@ setup_mac_menu (GeditWindow *window)
 #endif
 
 static void
+extension_added (PeasExtensionSet *extensions,
+		 PeasPluginInfo   *info,
+		 PeasExtension    *exten,
+		 GeditWindow      *window)
+{
+	peas_extension_call (exten, "activate", window);
+}
+
+static void
+extension_removed (PeasExtensionSet *extensions,
+		   PeasPluginInfo   *info,
+		   PeasExtension    *exten,
+		   GeditWindow      *window)
+{
+	peas_extension_call (exten, "deactivate", window);
+
+	/* Ensure update of ui manager, because we suspect it does something
+	 * with expected static strings in the type module (when unloaded the
+	 * strings don't exist anymore, and ui manager updates in an idle
+	 * func) */
+	gtk_ui_manager_ensure_update (window->priv->manager);
+}
+
+static void
 gedit_window_init (GeditWindow *window)
 {
 	GtkWidget *main_box;
@@ -4288,8 +4313,18 @@ gedit_window_init (GeditWindow *window)
 
 	gedit_debug_message (DEBUG_WINDOW, "Update plugins ui");
 	
-	gedit_plugins_engine_activate_plugins (gedit_plugins_engine_get_default (),
-					        window);
+	window->priv->extensions = peas_extension_set_new (PEAS_ENGINE (gedit_plugins_engine_get_default ()),
+							   PEAS_TYPE_ACTIVATABLE);
+	g_signal_connect (window->priv->extensions,
+			  "extension-added",
+			  G_CALLBACK (extension_added),
+			  window);
+	g_signal_connect (window->priv->extensions,
+			  "extension-removed",
+			  G_CALLBACK (extension_removed),
+			  window);
+	peas_extension_set_call (window->priv->extensions, "activate", window);
+
 
 	/* set visibility of panes.
 	 * This needs to be done after plugins activatation */

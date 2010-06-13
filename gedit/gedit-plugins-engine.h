@@ -3,6 +3,7 @@
  * This file is part of gedit
  *
  * Copyright (C) 2002-2005 - Paolo Maggi 
+ * Copyright (C) 2010 - Steve Frécinaux
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,9 +33,7 @@
 #define __GEDIT_PLUGINS_ENGINE_H__
 
 #include <glib.h>
-#include "gedit-window.h"
-#include "gedit-plugin-info.h"
-#include "gedit-plugin.h"
+#include <libpeas/peas-engine.h>
 
 G_BEGIN_DECLS
 
@@ -50,7 +49,7 @@ typedef struct _GeditPluginsEnginePrivate	GeditPluginsEnginePrivate;
 
 struct _GeditPluginsEngine
 {
-	GObject parent;
+	PeasEngine parent;
 	GeditPluginsEnginePrivate *priv;
 };
 
@@ -58,49 +57,15 @@ typedef struct _GeditPluginsEngineClass		GeditPluginsEngineClass;
 
 struct _GeditPluginsEngineClass
 {
-	GObjectClass parent_class;
-
-	void	 (* activate_plugin)		(GeditPluginsEngine *engine,
-						 GeditPluginInfo    *info);
-
-	void	 (* deactivate_plugin)		(GeditPluginsEngine *engine,
-						 GeditPluginInfo    *info);
+	PeasEngineClass parent_class;
 };
 
 GType			 gedit_plugins_engine_get_type		(void) G_GNUC_CONST;
 
 GeditPluginsEngine	*gedit_plugins_engine_get_default	(void);
 
-void			 gedit_plugins_engine_garbage_collect	(GeditPluginsEngine *engine);
-
-const GList		*gedit_plugins_engine_get_plugin_list 	(GeditPluginsEngine *engine);
-
-GeditPluginInfo		*gedit_plugins_engine_get_plugin_info	(GeditPluginsEngine *engine,
-								 const gchar        *name);
-
-/* plugin load and unloading (overall, for all windows) */
-gboolean 		 gedit_plugins_engine_activate_plugin 	(GeditPluginsEngine *engine,
-								 GeditPluginInfo    *info);
-gboolean 		 gedit_plugins_engine_deactivate_plugin	(GeditPluginsEngine *engine,
-								 GeditPluginInfo    *info);
-
-void	 		 gedit_plugins_engine_configure_plugin	(GeditPluginsEngine *engine,
-								 GeditPluginInfo    *info,
-								 GtkWindow          *parent);
-
-/* plugin activation/deactivation per window, private to GeditWindow */
-void 			 gedit_plugins_engine_activate_plugins	(GeditPluginsEngine *engine,
-								  GeditWindow        *window);
-void 			 gedit_plugins_engine_deactivate_plugins
-								(GeditPluginsEngine *engine,
-								  GeditWindow        *window);
-void			 gedit_plugins_engine_update_plugins_ui	(GeditPluginsEngine *engine,
-								  GeditWindow        *window);
-
 /* private for gconf notification */
 void		 gedit_plugins_engine_active_plugins_changed	(GeditPluginsEngine *engine);
-
-void		 gedit_plugins_engine_rescan_plugins		(GeditPluginsEngine *engine);
 
 G_END_DECLS
 
