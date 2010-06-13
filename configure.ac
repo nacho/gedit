@@ -274,8 +274,6 @@ PKG_CHECK_MODULES(GEDIT, [
 	gtk+-3.0 >= 2.90.0
 	gtksourceview-3.0 >= 2.11.2
 	gconf-2.0 >= 2.31.1
-	libpeas-1.0 >= 0.5.0
-	libpeasui-1.0 >= 0.5.0
 ])
 
 if test "$os_osx" = "no" &&
