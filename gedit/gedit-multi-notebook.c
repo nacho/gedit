@@ -286,6 +286,8 @@ notebook_page_removed (GtkNotebook        *notebook,
 		g_object_notify (G_OBJECT (mnb), "active-tab");
 	}
 
+	g_signal_emit (G_OBJECT (mnb), signals[TAB_REMOVED], 0, notebook, tab);
+
 	/* Not last notebook but last tab of the notebook, this means we have
 	   to remove the current notebook */
 	if (num_tabs == 0 && !mnb->priv->removing_notebook &&
@@ -293,8 +295,6 @@ notebook_page_removed (GtkNotebook        *notebook,
 	{
 		remove_notebook (mnb, GTK_WIDGET (notebook));
 	}
-
-	g_signal_emit (G_OBJECT (mnb), signals[TAB_REMOVED], 0, notebook, tab);
 }
 
 static void
