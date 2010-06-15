@@ -2400,10 +2400,21 @@ get_search_match_colors (GeditDocument *doc,
 			 gboolean      *foreground_set,
 			 GdkColor      *foreground,
 			 gboolean      *background_set,
-			 GdkColor      *background)
+			 GdkColor      *background,
+			 gboolean      *line_background_set,
+			 GdkColor      *line_background,
+			 gboolean      *bold_set,
+			 gboolean      *bold,
+			 gboolean      *italic_set,
+			 gboolean      *italic,
+			 gboolean      *underline_set,
+			 gboolean      *underline,
+			 gboolean      *strikethrough_set,
+			 gboolean      *strikethrough)
 {
 	GtkSourceStyleScheme *style_scheme;
 	GtkSourceStyle *style;
+	gchar *line_bg;
 	gchar *bg;
 	gchar *fg;
 
@@ -2416,11 +2427,21 @@ get_search_match_colors (GeditDocument *doc,
 	if (style == NULL)
 		goto fallback;
 
-	g_object_get (style, 
+	g_object_get (style,
 		      "foreground-set", foreground_set, 
 		      "foreground", &fg,
-		      "background-set", background_set, 
+		      "background-set", background_set,
 		      "background", &bg,
+		      "line-background-set", line_background_set,
+		      "line-background", &line_bg,
+		      "bold-set", bold_set,
+		      "bold", bold,
+		      "italic-set", italic_set,
+		      "italic", italic,
+		      "underline-set", underline_set,
+		      "underline", underline,
+		      "strikethrough-set", strikethrough_set,
+		      "strikethrough", strikethrough,
 		      NULL);
 
 	if (*foreground_set)
@@ -2438,10 +2459,20 @@ get_search_match_colors (GeditDocument *doc,
 		{
 			*background_set = FALSE;
 		}
-	}	
+	}
+
+	if (*line_background_set)
+	{
+		if (line_bg == NULL ||
+		    !gdk_color_parse (line_bg, background))
+		{
+			*line_background_set = FALSE;
+		}
+	}
 
 	g_free (fg);
 	g_free (bg);
+	g_free (line_bg);
 
 	return;
 
@@ -2464,8 +2495,18 @@ sync_found_tag (GeditDocument *doc,
 {
 	GdkColor fg;
 	GdkColor bg;
+	GdkColor line_bg;
 	gboolean fg_set;
 	gboolean bg_set;
+	gboolean line_bg_set;
+	gboolean bold;
+	gboolean italic;
+	gboolean underline;
+	gboolean strikethrough;
+	gboolean bold_set;
+	gboolean italic_set;
+	gboolean underline_set;
+	gboolean strikethrough_set;
 
 	gedit_debug (DEBUG_DOCUMENT);
 
@@ -2473,14 +2514,26 @@ sync_found_tag (GeditDocument *doc,
 
 	get_search_match_colors (doc,
 				 &fg_set, &fg,
-				 &bg_set, &bg);
+				 &bg_set, &bg,
+				 &line_bg_set, &line_bg,
+				 &bold_set, &bold,
+				 &italic_set, &italic,
+				 &underline_set, &underline,
+				 &strikethrough_set, &strikethrough);
+
+	g_object_freeze_notify (G_OBJECT (doc->priv->found_tag));
 
 	g_object_set (doc->priv->found_tag,
 		      "foreground-gdk", fg_set ? &fg : NULL,
-		      NULL);
-	g_object_set (doc->priv->found_tag,
 		      "background-gdk", bg_set ? &bg : NULL,
+		      "paragraph-background-gdk", line_bg_set ? &line_bg : NULL,
+		      "weight", bold_set && bold ? PANGO_WEIGHT_BOLD : PANGO_WEIGHT_NORMAL,
+		      "style", italic_set && italic ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL,
+		      "underline", underline_set && underline ? PANGO_UNDERLINE_SINGLE : PANGO_UNDERLINE_NONE,
+		      "strikethrough", strikethrough_set && strikethrough,
 		      NULL);
+
+	g_object_thaw_notify (G_OBJECT (doc->priv->found_tag));
 }
 
 static void
