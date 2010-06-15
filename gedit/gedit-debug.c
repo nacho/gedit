@@ -86,8 +86,10 @@ gedit_debug_init (void)
 		debug = debug | GEDIT_DEBUG_LOADER;
 	if (g_getenv ("GEDIT_DEBUG_SAVER") != NULL)
 		debug = debug | GEDIT_DEBUG_SAVER;
+	if (g_getenv ("GEDIT_DEBUG_PANEL") != NULL)
+		debug = debug | GEDIT_DEBUG_PANEL;
 
-out:		
+out:
 
 #ifdef ENABLE_PROFILING
 	if (debug != GEDIT_NO_DEBUG)

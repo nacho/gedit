@@ -66,7 +66,9 @@ struct _GeditMultiNotebookClass
 						 GeditNotebook      *notebook,
 						 GeditTab           *tab);
 	void	(* switch_tab)			(GeditMultiNotebook *mnb,
+						 GeditNotebook      *old_notebook,
 						 GeditTab           *old_tab,
+						 GeditNotebook      *new_notebook,
 						 GeditTab           *new_tab);
 	void	(* tab_close_request)		(GeditMultiNotebook *mnb,
 						 GeditNotebook      *notebook,
@@ -89,6 +91,9 @@ gint			 gedit_multi_notebook_get_n_notebooks		(GeditMultiNotebook *mnb);
 
 GeditNotebook		*gedit_multi_notebook_get_nth_notebook		(GeditMultiNotebook *mnb,
 									 gint                notebook_num);
+
+gint			 gedit_multi_notebook_get_notebook_num		(GeditMultiNotebook *mnb,
+									 GeditNotebook      *notebook);
 
 gint			 gedit_multi_notebook_get_n_tabs		(GeditMultiNotebook *mnb);
 

@@ -159,10 +159,12 @@ gedit_multi_notebook_class_init (GeditMultiNotebookClass *klass)
 			      G_SIGNAL_RUN_FIRST,
 			      G_STRUCT_OFFSET (GeditMultiNotebookClass, switch_tab),
 			      NULL, NULL,
-			      gedit_marshal_VOID__OBJECT_OBJECT,
+			      gedit_marshal_VOID__OBJECT_OBJECT_OBJECT_OBJECT,
 			      G_TYPE_NONE,
-			      2,
+			      4,
+			      GEDIT_TYPE_NOTEBOOK,
 			      GEDIT_TYPE_TAB,
+			      GEDIT_TYPE_NOTEBOOK,
 			      GEDIT_TYPE_TAB);
 	signals[TAB_CLOSE_REQUEST] =
 		g_signal_new ("tab-close-request",
@@ -338,7 +340,9 @@ notebook_switch_page (GtkNotebook        *book,
 
 		g_object_notify (G_OBJECT (mnb), "active-tab");
 
-		g_signal_emit (G_OBJECT (mnb), signals[SWITCH_TAB], 0, old_tab, tab);
+		g_signal_emit (G_OBJECT (mnb), signals[SWITCH_TAB], 0,
+			       mnb->priv->active_notebook, old_tab,
+			       book, tab);
 	}
 }
 
@@ -579,6 +583,16 @@ gedit_multi_notebook_get_nth_notebook (GeditMultiNotebook *mnb,
 }
 
 gint
+gedit_multi_notebook_get_notebook_num (GeditMultiNotebook *mnb,
+				       GeditNotebook      *notebook)
+{
+	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb), -1);
+	g_return_val_if_fail (GEDIT_IS_NOTEBOOK (notebook), -1);
+
+	return g_list_index (mnb->priv->notebooks, notebook);
+}
+
+gint
 gedit_multi_notebook_get_n_tabs (GeditMultiNotebook *mnb)
 {
 	g_return_val_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb), 0);
@@ -630,6 +644,9 @@ gedit_multi_notebook_set_active_tab (GeditMultiNotebook *mnb,
 	
 	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb));
 	g_return_if_fail (GEDIT_IS_TAB (tab));
+
+	if (tab == GEDIT_TAB (mnb->priv->active_tab))
+		return;
 
 	l = mnb->priv->notebooks;
 

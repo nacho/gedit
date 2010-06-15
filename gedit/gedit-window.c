@@ -2600,9 +2600,11 @@ language_changed (GObject     *object,
 	g_list_free (items);
 }
 
-static void 
+static void
 tab_switched (GeditMultiNotebook *mnb,
+	      GeditNotebook      *old_notebook,
 	      GeditTab           *old_tab,
+	      GeditNotebook      *new_notebook,
 	      GeditTab           *new_tab,
 	      GeditWindow        *window)
 {
@@ -3829,14 +3831,12 @@ create_side_panel (GeditWindow *window)
 				G_CALLBACK (side_panel_visibility_changed),
 				window);
 
-	/* TODO: implement a new revolutionary documents panel
-
 	documents_panel = gedit_documents_panel_new (window);
 	gedit_panel_add_item_with_stock_icon (GEDIT_PANEL (window->priv->side_panel),
 					      documents_panel,
 					      "GeditWindowDocumentsPanel",
 					      _("Documents"),
-					      GTK_STOCK_FILE);*/
+					      GTK_STOCK_FILE);
 }
 
 static void
