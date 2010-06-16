@@ -385,7 +385,6 @@ gedit_file_chooser_dialog_new_valist (const gchar          *title,
 
 	result = g_object_new (GEDIT_TYPE_FILE_CHOOSER_DIALOG,
 			       "title", title,
-			       "file-system-backend", NULL,
 			       "local-only", FALSE,
 			       "action", action,
 			       "select-multiple", action == GTK_FILE_CHOOSER_ACTION_OPEN,
