@@ -24,6 +24,7 @@ bugreport_SCRIPTS = gedit-bugreport.sh
 gsettings_SCHEMAS = org.gnome.gedit.gschema.xml
 
 @INTLTOOL_XML_NOMERGE_RULE@
+
 @GSETTINGS_RULES@
 
 EXTRA_DIST = 					\
