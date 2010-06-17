@@ -229,9 +229,6 @@ main (int argc, char *argv[])
 	gedit_debug_init ();
 	gedit_debug_message (DEBUG_APP, "Startup");
 
-	/* FIXME: Remove when gconf not needed anymore */
-	g_setenv ("GSETTINGS_BACKEND", "gconf", FALSE);
-
 	/* Setup locale/gettext */
 	setlocale (LC_ALL, "");
 
