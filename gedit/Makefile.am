@@ -13,13 +13,19 @@ INCLUDES =								\
 	$(IGE_MAC_CFLAGS)						\
 	$(WARN_CFLAGS)							\
 	$(DISABLE_DEPRECATED_CFLAGS)					\
+	$(INTROSPECTION_CFLAGS)						\
 	-DDATADIR=\""$(datadir)"\"					\
 	-DLIBDIR=\""$(libdir)"\"
 
 gedit_SOURCES = \
 	gedit.c
 
-gedit_LDADD = libgedit.la $(GEDIT_LIBS) $(IGE_MAC_LIBS) $(EGG_SMCLIENT_LIBS)
+gedit_LDADD =			\
+	libgedit.la		\
+	$(GEDIT_LIBS)		\
+	$(IGE_MAC_LIBS)		\
+	$(EGG_SMCLIENT_LIBS)	\
+	$(INTROSPECTION_LIBS)
 
 if PLATFORM_WIN32
 gedit_LDFLAGS = -Wl,--export-all-symbols -Wl,--out-implib,libgedit-$(GEDIT_API_VERSION).a
@@ -152,8 +158,7 @@ headerdir = $(prefix)/include/gedit-@GEDIT_API_VERSION@/gedit
 header_DATA = 				\
 	$(INST_H_FILES)
 
-libgedit_la_SOURCES = 			\
-	$(BUILT_SOURCES)		\
+libgedit_c_files =			\
 	gedit-app.c			\
 	gedit-close-button.c		\
 	gedit-command-line.c		\
@@ -205,7 +210,11 @@ libgedit_la_SOURCES = 			\
 	gedit-utils.c 			\
 	gedit-view.c 			\
 	gedit-window.c			\
-	gedittextregion.c		\
+	gedittextregion.c
+
+libgedit_la_SOURCES = 			\
+	$(BUILT_SOURCES)		\
+	$(libgedit_c_files)		\
 	$(NOINST_H_FILES)		\
 	$(INST_H_FILES)
 
@@ -248,6 +257,29 @@ EXTRA_DIST = 				\
 	gedit.rc
 
 CLEANFILES = $(BUILT_SOURCES)
+
+if HAVE_INTROSPECTION
+-include $(INTROSPECTION_MAKEFILE)
+INTROSPECTION_GIRS = Gedit-3.0.gir
+
+Gedit-3.0.gir: libgedit.la
+INTROSPECTION_SCANNER_ARGS = -I$(top_srcdir) --warn-all
+Gedit_3_0_gir_NAMESPACE = Gedit
+Gedit_3_0_gir_VERSION = 3.0
+Gedit_3_0_gir_PROGRAM = $(builddir)/gedit
+Gedit_3_0_gir_FILES = $(INST_H_FILES) $(libgedit_c_files)
+Gedit_3_0_gir_INCLUDES = Gtk-3.0 GtkSource-3.0
+
+girdir = $(INTROSPECTION_GIRDIR)
+gir_DATA = $(INTROSPECTION_GIRS)
+
+typelibdir = $(INTROSPECTION_TYPELIBDIR)
+typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
+
+CLEANFILES +=			\
+	$(gir_DATA)	\
+	$(typelib_DATA)
+endif
 
 dist-hook:
 	cd $(distdir); rm -f $(BUILT_SOURCES)

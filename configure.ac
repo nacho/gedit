@@ -378,6 +378,16 @@ AC_SUBST(GEDIT_PLUGINS_LIBS_DIR)
 GNOME_DOC_INIT([0.9.0],,
   [AC_MSG_WARN([[gnome-doc-utils not found: documentation will not be built.]])])
 
+# Introspection
+GOBJECT_INTROSPECTION_CHECK([0.6.7])
+
+if test "$found_introspection" = "yes"; then
+	enable_introspection=yes
+	AC_DEFINE([ENABLE_INTROSPECTION], [1], [Define to enable GObject Introspection])
+else
+	enable_introspection=no
+fi
+
 AC_CONFIG_FILES([
 Makefile
 data/gedit.desktop.in
@@ -437,7 +447,8 @@ Configuration:
 	Compiler:		${CC}
 	Spell Plugin enabled:	$enable_enchant
 	Gvfs metadata enabled:	$enable_gvfs_metadata
-	Deprecations enabled:   $enable_deprecations
+	Deprecations enabled:	$enable_deprecations
+	GObject Introspection:	$enable_introspection
 "
 
 if expr ${GEDIT_MINOR_VERSION} % 2 > /dev/null; then
