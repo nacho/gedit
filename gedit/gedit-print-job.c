@@ -390,8 +390,8 @@ create_custom_widget_cb (GtkPrintOperation *operation,
 	}
 
 	/* Text wrapping */
-	wrap_mode = gedit_settings_get_wrap_mode (job->priv->print_settings,
-						  GEDIT_SETTINGS_PRINT_WRAP_MODE);
+	wrap_mode = g_settings_get_enum (job->priv->print_settings,
+					 GEDIT_SETTINGS_PRINT_WRAP_MODE);
 	
 	switch (wrap_mode)
 	{
@@ -457,6 +457,7 @@ custom_widget_apply_cb (GtkPrintOperation *operation,
 {
 	gboolean syntax, page_header;
 	const gchar *body, *header, *numbers;
+	GtkWrapMode wrap_mode;
 
 	syntax = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->syntax_checkbutton));
 	page_header = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->page_header_checkbutton));
@@ -489,25 +490,23 @@ custom_widget_apply_cb (GtkPrintOperation *operation,
 
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->text_wrapping_checkbutton)))
 	{
-		gedit_settings_set_wrap_mode (job->priv->print_settings,
-					      GEDIT_SETTINGS_PRINT_WRAP_MODE,
-					      GTK_WRAP_NONE);
+		wrap_mode = GTK_WRAP_NONE;
 	}
 	else
 	{
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (job->priv->do_not_split_checkbutton)))
 		{
-			gedit_settings_set_wrap_mode (job->priv->print_settings,
-						      GEDIT_SETTINGS_PRINT_WRAP_MODE,
-						      GTK_WRAP_WORD);
+			wrap_mode = GTK_WRAP_WORD;
 		}
 		else
 		{
-			gedit_settings_set_wrap_mode (job->priv->print_settings,
-						      GEDIT_SETTINGS_PRINT_WRAP_MODE,
-						      GTK_WRAP_CHAR);
+			wrap_mode = GTK_WRAP_CHAR;
 		}
 	}
+
+	g_settings_set_enum (job->priv->print_settings,
+			     GEDIT_SETTINGS_PRINT_WRAP_MODE,
+			     GTK_WRAP_NONE);
 }
 
 static void
@@ -535,8 +534,8 @@ create_compositor (GeditPrintJob *job)
 	print_header = g_settings_get_boolean (job->priv->print_settings,
 					       GEDIT_SETTINGS_PRINT_HEADER);
 	
-	wrap_mode = gedit_settings_get_wrap_mode (job->priv->print_settings,
-						  GEDIT_SETTINGS_PRINT_WRAP_MODE);
+	wrap_mode = g_settings_get_enum (job->priv->print_settings,
+					 GEDIT_SETTINGS_PRINT_WRAP_MODE);
 	
 	job->priv->compositor = GTK_SOURCE_PRINT_COMPOSITOR (
 					g_object_new (GTK_TYPE_SOURCE_PRINT_COMPOSITOR,

@@ -766,60 +766,6 @@ gedit_notebook_switch_page_cb (GtkNotebook     *notebook,
 	gtk_widget_grab_focus (child);
 }
 
-static gboolean
-show_tabs_mode_get_mapping (GValue   *value,
-			    GVariant *variant,
-			    gpointer  user_data G_GNUC_UNUSED)
-{
-	const gchar *str;
-	GeditNotebookShowTabsModeType show_tabs_mode;
-
-	str = g_variant_get_string (variant, NULL);
-
-	if (g_strcmp0 (str, "NEVER") == 0)
-	{
-		show_tabs_mode = GEDIT_NOTEBOOK_SHOW_TABS_NEVER;
-	}
-	else if (g_strcmp0 (str, "AUTO") == 0)
-	{
-		show_tabs_mode = GEDIT_NOTEBOOK_SHOW_TABS_AUTO;
-	}
-	else /* ALWAYS */
-	{
-		show_tabs_mode = GEDIT_NOTEBOOK_SHOW_TABS_ALWAYS;
-	}
-	
-	g_value_set_enum (value, show_tabs_mode);
-
-	return TRUE;
-}
-
-static GVariant *
-show_tabs_mode_set_mapping (const GValue       *value,
-			    const GVariantType *expected_type,
-			    gpointer            user_data G_GNUC_UNUSED)
-{
-	GVariant *result = NULL;
-
-	switch (g_value_get_enum (value))
-	{
-		case GEDIT_NOTEBOOK_SHOW_TABS_NEVER:
-			result = g_variant_new_string ("NEVER");
-			break;
-
-		case GEDIT_NOTEBOOK_SHOW_TABS_AUTO:
-			result = g_variant_new_string ("AUTO");
-			break;
-
-		case GEDIT_NOTEBOOK_SHOW_TABS_ALWAYS:
-		default:
-			result = g_variant_new_string ("ALWAYS");
-			break;
-	}
-
-	return result;
-}
-
 static void
 gedit_notebook_init (GeditNotebook *notebook)
 {
@@ -835,14 +781,11 @@ gedit_notebook_init (GeditNotebook *notebook)
 	gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
 
-	g_settings_bind_with_mapping (notebook->priv->ui_settings,
-				      GEDIT_SETTINGS_SHOW_TABS_MODE,
-				      notebook,
-				      "show-tabs-mode",
-				      G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET,
-				      show_tabs_mode_get_mapping,
-				      show_tabs_mode_set_mapping,
-				      NULL, NULL);
+	g_settings_bind (notebook->priv->ui_settings,
+			 GEDIT_SETTINGS_SHOW_TABS_MODE,
+			 notebook,
+			 "show-tabs-mode",
+			 G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
 	g_signal_connect (notebook,
 			  "button-press-event",

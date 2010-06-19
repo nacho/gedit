@@ -394,10 +394,11 @@ gedit_view_init (GeditView *view)
 	hl_current_line = g_settings_get_boolean (view->priv->editor_settings,
 						  GEDIT_SETTINGS_HIGHLIGHT_CURRENT_LINE);
 
-	wrap_mode = gedit_settings_get_wrap_mode (view->priv->editor_settings,
-						  GEDIT_SETTINGS_WRAP_MODE);
+	wrap_mode = g_settings_get_enum (view->priv->editor_settings,
+					 GEDIT_SETTINGS_WRAP_MODE);
 	
-	smart_home_end = gedit_settings_get_smart_home_end (GEDIT_SETTINGS (gs));
+	smart_home_end = g_settings_get_enum (view->priv->editor_settings,
+					      GEDIT_SETTINGS_SMART_HOME_END);
 
 	g_object_set (G_OBJECT (view), 
 		      "wrap_mode", wrap_mode,

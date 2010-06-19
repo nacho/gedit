@@ -354,7 +354,7 @@ on_wrap_mode_changed (GSettings     *settings,
 	GtkWrapMode wrap_mode;
 	GList *views, *l;
 
-	wrap_mode = gedit_settings_get_wrap_mode (settings, key);
+	wrap_mode = g_settings_get_enum (settings, key);
 
 	views = gedit_app_get_views (gedit_app_get_default ());
 	
@@ -550,7 +550,7 @@ on_smart_home_end_changed (GSettings     *settings,
 	GtkSourceSmartHomeEndType smart_he;
 	GList *views, *l;
 
-	smart_he = gedit_settings_get_smart_home_end (gs);
+	smart_he = g_settings_get_enum (settings, key);
 
 	views = gedit_app_get_views (gedit_app_get_default ());
 	
@@ -901,130 +901,6 @@ gedit_settings_set_list (GSettings    *settings,
 
 	g_settings_set_strv (settings, key, (const gchar * const *)values);
 	g_free (values);
-}
-
-GeditToolbarSetting
-gedit_settings_get_toolbar_style (GeditSettings *gs)
-{
-	GeditToolbarSetting res;
-	gchar *str;
-
-	g_return_val_if_fail (GEDIT_IS_SETTINGS (gs), 0);
-
-	str = g_settings_get_string (gs->priv->ui,
-				     "toolbar-buttons-style");
-
-	g_return_val_if_fail (str != NULL, 0);
-
-	if (strcmp (str, "GEDIT_TOOLBAR_ICONS") == 0)
-		res = GEDIT_TOOLBAR_ICONS;
-	else if (strcmp (str, "GEDIT_TOOLBAR_ICONS_AND_TEXT") == 0)
-		res = GEDIT_TOOLBAR_ICONS_AND_TEXT;
-	else if (strcmp (str, "GEDIT_TOOLBAR_ICONS_BOTH_HORIZ") == 0)
-		res = GEDIT_TOOLBAR_ICONS_BOTH_HORIZ;
-	else
-		res = GEDIT_TOOLBAR_SYSTEM;
-
-	g_free (str);
-
-	return res;
-}
-
-GtkSourceSmartHomeEndType
-gedit_settings_get_smart_home_end (GeditSettings *gs)
-{
-	GtkSourceSmartHomeEndType res;
-	gchar *str;
-	
-	g_return_val_if_fail (GEDIT_IS_SETTINGS (gs), GTK_SOURCE_SMART_HOME_END_AFTER);
-	
-	str = g_settings_get_string (gs->priv->editor, "smart-home-end");
-
-	g_return_val_if_fail (str != NULL, GTK_SOURCE_SMART_HOME_END_AFTER);
-
-	if (strcmp (str, "DISABLED") == 0)
-		res = GTK_SOURCE_SMART_HOME_END_DISABLED;
-	else if (strcmp (str, "BEFORE") == 0)
-		res = GTK_SOURCE_SMART_HOME_END_BEFORE;
-	else if (strcmp (str, "ALWAYS") == 0)
-		res = GTK_SOURCE_SMART_HOME_END_ALWAYS;
-	else
-		res = GTK_SOURCE_SMART_HOME_END_AFTER;
-
-	g_free (str);
-
-	return res;
-}
-
-static gchar *
-get_wrap_str (guint mode)
-{
-	gchar *str;
-
-	switch (mode)
-	{
-		case GTK_WRAP_NONE:
-			str = g_strdup ("GTK_WRAP_NONE");
-			break;
-
-		case GTK_WRAP_CHAR:
-			str = g_strdup ("GTK_WRAP_CHAR");
-			break;
-
-		case GTK_WRAP_WORD:
-		default:
-			str = g_strdup ("GTK_WRAP_WORD");
-			break;
-	}
-	
-	return str;
-}
-
-GtkWrapMode
-gedit_settings_get_wrap_mode (GSettings   *settings,
-			      const gchar *key)
-{
-	GtkWrapMode res;
-	gchar *str;
-
-	g_return_val_if_fail (G_IS_SETTINGS (settings), GTK_WRAP_WORD);
-	g_return_val_if_fail (key != NULL, GTK_WRAP_WORD);
-
-	str = g_settings_get_string (settings, key);
-
-	g_return_val_if_fail (str != NULL, GTK_WRAP_WORD);
-
-	if (strcmp (str, "GTK_WRAP_NONE") == 0)
-	{
-		res = GTK_WRAP_NONE;
-	}
-	else if (strcmp (str, "GTK_WRAP_CHAR") == 0)
-	{
-		res = GTK_WRAP_CHAR;
-	}
-	else
-	{
-		res = GTK_WRAP_WORD;
-	}
-
-	g_free (str);
-
-	return res;
-}
-
-void
-gedit_settings_set_wrap_mode (GSettings   *settings,
-			      const gchar *key,
-			      GtkWrapMode  mode)
-{
-	gchar *str;
-
-	g_return_if_fail (G_IS_SETTINGS (settings));
-	g_return_if_fail (key != NULL);
-
-	str = get_wrap_str (mode);
-
-	g_settings_set_string (settings, key, str);
 }
 
 /* ex:ts=8:noet: */

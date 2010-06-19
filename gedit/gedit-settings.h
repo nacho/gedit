@@ -70,10 +70,6 @@ GeditLockdownMask	 gedit_settings_get_lockdown			(GeditSettings *gs);
 
 gchar			*gedit_settings_get_system_font			(GeditSettings *gs);
 
-GtkSourceSmartHomeEndType gedit_settings_get_smart_home_end		(GeditSettings *gs);
-
-GeditToolbarSetting	 gedit_settings_get_toolbar_style		(GeditSettings *gs);
-
 /* Utility functions */
 GSList			*gedit_settings_get_list			(GSettings     *settings,
 									 const gchar   *key);
@@ -81,13 +77,6 @@ GSList			*gedit_settings_get_list			(GSettings     *settings,
 void			 gedit_settings_set_list			(GSettings     *settings,
 									 const gchar   *key,
 									 const GSList  *list);
-
-GtkWrapMode		 gedit_settings_get_wrap_mode			(GSettings     *settings,
-									 const gchar   *key);
-
-void			 gedit_settings_set_wrap_mode			(GSettings     *settings,
-									 const gchar   *key,
-									 GtkWrapMode    mode);
 
 /* key constants */
 #define GEDIT_SETTINGS_USE_DEFAULT_FONT			"use-default-font"
@@ -107,11 +96,13 @@ void			 gedit_settings_set_wrap_mode			(GSettings     *settings,
 #define GEDIT_SETTINGS_BRACKET_MATCHING			"bracket-matching"
 #define GEDIT_SETTINGS_DISPLAY_RIGHT_MARGIN		"display-right-margin"
 #define GEDIT_SETTINGS_RIGHT_MARGIN_POSITION		"right-margin-position"
+#define GEDIT_SETTINGS_SMART_HOME_END			"smart-home-end"
 #define GEDIT_SETTINGS_WRITABLE_VFS_SCHEMES		"writable-vfs-schemes"
 #define GEDIT_SETTINGS_RESTORE_CURSOR_POSITION		"restore-cursor-position"
 #define GEDIT_SETTINGS_SYNTAX_HIGHLIGHTING		"syntax-highlighting"
 #define GEDIT_SETTINGS_SEARCH_HIGHLIGHTING		"search-highlighting"
 #define GEDIT_SETTINGS_TOOLBAR_VISIBLE			"toolbar-visible"
+#define GEDIT_SETTINGS_TOOLBAR_BUTTONS_STYLE		"toolbar-buttons-style"
 #define GEDIT_SETTINGS_STATUSBAR_VISIBLE		"statusbar-visible"
 #define GEDIT_SETTINGS_SIDE_PANE_VISIBLE		"side-pane-visible"
 #define GEDIT_SETTINGS_BOTTOM_PANE_VISIBLE		"bottom-pane-visible"

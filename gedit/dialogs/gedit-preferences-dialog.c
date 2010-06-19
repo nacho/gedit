@@ -291,9 +291,9 @@ wrap_mode_checkbutton_toggled (GtkToggleButton        *button,
 		}
 	}
 
-	gedit_settings_set_wrap_mode (dlg->priv->editor,
-				      GEDIT_SETTINGS_WRAP_MODE,
-				      mode);
+	g_settings_set_enum (dlg->priv->editor,
+			     GEDIT_SETTINGS_WRAP_MODE,
+			     mode);
 }
 
 static void
@@ -329,8 +329,8 @@ setup_view_page (GeditPreferencesDialog *dlg)
 			"u", &right_margin_position);
 	
 	/* Set initial state */
-	wrap_mode = gedit_settings_get_wrap_mode (dlg->priv->editor,
-						  GEDIT_SETTINGS_WRAP_MODE);
+	wrap_mode = g_settings_get_enum (dlg->priv->editor,
+					 GEDIT_SETTINGS_WRAP_MODE);
 
 	switch (wrap_mode)
 	{

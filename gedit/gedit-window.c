@@ -654,7 +654,8 @@ set_toolbar_style (GeditWindow *window,
 		GSettings *settings;
 
 		settings = _gedit_app_get_settings (gedit_app_get_default ());
-		style = gedit_settings_get_toolbar_style (GEDIT_SETTINGS (settings));
+		style = g_settings_get_enum (window->priv->ui_settings,
+					     GEDIT_SETTINGS_TOOLBAR_BUTTONS_STYLE);
 	}
 	else
 	{
