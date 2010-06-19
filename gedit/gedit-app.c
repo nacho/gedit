@@ -752,7 +752,7 @@ _gedit_app_restore_window (GeditApp    *app,
  *
  * Returns all the windows currently present in #GeditApp.
  *
- * Return value: (transfer none): the list of #GeditWindows objects.
+ * Return value: (element-type Window) (transfer none): the list of #GeditWindows objects.
  * The list should not be freed
  */
 const GList *

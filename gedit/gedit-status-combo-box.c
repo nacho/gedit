@@ -418,6 +418,12 @@ gedit_status_combo_box_remove_item (GeditStatusComboBox *combo,
 			      GTK_WIDGET (item));
 }
 
+/**
+ * gedit_status_combo_box_get_items:
+ * @combo:
+ *
+ * Returns: (element-type Gtk.Widget) (transfer container):
+ */
 GList *
 gedit_status_combo_box_get_items (GeditStatusComboBox *combo)
 {
