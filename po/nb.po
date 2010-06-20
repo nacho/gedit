@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.31.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-14 00:19+0200\n"
-"PO-Revision-Date: 2010-06-14 00:31+0200\n"
+"POT-Creation-Date: 2010-06-20 13:21+0200\n"
+"PO-Revision-Date: 2010-06-20 13:23+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "Rediger tekstfiler"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit-print-job.c:785
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit-print-job.c:784
 msgid "Text Editor"
 msgstr "Tekstredigering"
 
@@ -229,13 +229,14 @@ msgstr ""
 "kodinger vil brukes."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:40
+#, fuzzy
 msgid ""
 "Specifies how the cursor moves when the HOME and END keys are pressed. Use "
-"\"DISABLED\" to always move at the start/end of the line, \"AFTER\" to move "
+"\"disabled\" to always move at the start/end of the line, \"after\" to move "
 "to the start/end of the line the first time the keys are pressed and to the "
 "start/end of the text ignoring whitespaces the second time the keys are "
-"pressed, \"BEFORE\" to move to the start/end of the text before moving to "
-"the start/end of the line and \"ALWAYS\" to always move to the start/end of "
+"pressed, \"before\" to move to the start/end of the text before moving to "
+"the start/end of the line and \"always\" to always move to the start/end of "
 "the text instead of the start/end of the line."
 msgstr ""
 "Spesifiserer hvordan markøren beveger seg når HOME og END tastene brukes. "
@@ -246,12 +247,12 @@ msgstr ""
 "av teksten i stedet for start/alutt av linjen."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:41
+#, fuzzy
 msgid ""
-"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
-"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
+"Specifies how to wrap long lines for printing. Use \"none\" for no wrapping, "
+"\"word\" for wrapping at word boundaries, and \"char\" for wrapping at "
+"individual character boundaries. Note that the values are case-sensitive, so "
+"make sure they appear exactly as mentioned here."
 msgstr ""
 "Spesifiserer hvordan linjer skal brytes ved utskrift. Bruk "
 "«GTK_WRAP_NONE» hvis du ikke ønsker bryting, «GTK_WRAP_WORD» hvis du ønsker "
@@ -259,12 +260,12 @@ msgstr ""
 "Merk at det skilles mellom store og små bokstaver."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:42
+#, fuzzy
 msgid ""
-"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
-"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
+"Specifies how to wrap long lines in the editing area. Use \"none\" for no "
+"wrapping, \"word\" for wrapping at word boundaries, and \"char\" for "
+"wrapping at individual character boundaries. Note that the values are case-"
+"sensitive, so make sure they appear exactly as mentioned here."
 msgstr ""
 "Spesifiserer hvordan lange linjer skal brytes i redigeringsområdet. Bruk "
 "«GTK_WRAP_NONE» hvis du ikke ønsker bryting, «GTK_WRAP_WORD» hvis du ønsker "
@@ -314,8 +315,8 @@ msgstr "Spesifiserer posisjonen for høyre marg."
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:49
 #, fuzzy
 msgid ""
-"Specifies when to show the notebook tabs. Use \"NEVER\" to never show the "
-"tabs, \"ALWAYS\" to always show the tabs, and \"AUTO\" to show the tabs only "
+"Specifies when to show the notebook tabs. Use \"never\" to never show the "
+"tabs, \"always\" to always show the tabs, and \"auto\" to show the tabs only "
 "when there is more than one tab. Note that the values are case-sensitive, so "
 "make sure they appear exactly as mentioned here."
 msgstr ""
@@ -333,13 +334,13 @@ msgid "Style Scheme"
 msgstr "Stilskjema"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:52
+#, fuzzy
 msgid ""
-"Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
-"to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
-"only, \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text, and "
-"\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" to display prioritized text beside icons. "
-"Note that the values are case-sensitive, so make sure they appear exactly as "
-"mentioned here."
+"Style for the toolbar buttons. Possible values are \"system\" to use the "
+"system's default style, \"icons\" to display icons only, \"icons-and-text\" "
+"to display both icons and text, and \"icons-both-horiz\" to display "
+"prioritized text beside icons. Note that the values are case-sensitive, so "
+"make sure they appear exactly as mentioned here."
 msgstr ""
 "Stil for verktøylinjeknapper. Mulige verdier er «GEDIT_TOOLBAR_SYSTEM» for å "
 "bruke systemets forvalgte stil, «GEDIT_TOOLBAR_ICONS» for å vise kun ikoner, "
@@ -762,7 +763,7 @@ msgid "_Autosave files every"
 msgstr "_Autolagre filer hver(t)"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:23
-#: ../gedit/gedit-view.c:2027
+#: ../gedit/gedit-view.c:2028
 msgid "_Display line numbers"
 msgstr "Vis _linjenummer"
 
@@ -779,11 +780,11 @@ msgid "_minutes"
 msgstr "_minutter"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:300
-#: ../gedit/dialogs/gedit-search-dialog.ui.h:2 ../gedit/gedit-window.c:1647
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:2 ../gedit/gedit-window.c:1648
 msgid "Replace"
 msgstr "Erstatt"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:306 ../gedit/gedit-window.c:1645
+#: ../gedit/dialogs/gedit-search-dialog.c:306 ../gedit/gedit-window.c:1646
 msgid "Find"
 msgstr "Finn"
 
@@ -829,69 +830,68 @@ msgstr "_Brytningsmodus"
 msgid "There was an error displaying the help."
 msgstr "Det oppsto en feil under visning av hjelp."
 
-#: ../gedit/gedit-command-line.c:230
+#: ../gedit/gedit-command-line.c:234
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: ugyldig koding.\n"
 
-#: ../gedit/gedit-command-line.c:254
+#: ../gedit/gedit-command-line.c:258
 msgid "Show the application's version"
 msgstr "Vis programmets versjon"
 
-#: ../gedit/gedit-command-line.c:260
+#: ../gedit/gedit-command-line.c:264
 msgid "Display list of possible values for the encoding option"
 msgstr "Vis liste med mulige verdier for kodingsalternativet"
 
-#: ../gedit/gedit-command-line.c:268
+#: ../gedit/gedit-command-line.c:272
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr ""
 "Sett tegnkoding som skal brukes for å åpne filer gitt via kommandolinjen"
 
-#: ../gedit/gedit-command-line.c:269
+#: ../gedit/gedit-command-line.c:273
 msgid "ENCODING"
 msgstr "KODING"
 
-#: ../gedit/gedit-command-line.c:276
+#: ../gedit/gedit-command-line.c:280
 msgid "Create a new top-level window in an existing instance of gedit"
 msgstr "Opprett et nytt toppvindu i en eksisterende instans av gedit"
 
-#: ../gedit/gedit-command-line.c:284
+#: ../gedit/gedit-command-line.c:288
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Opprett et nytt dokument i en eksisterende instans av gedit"
 
-#: ../gedit/gedit-command-line.c:292
+#: ../gedit/gedit-command-line.c:296
 msgid "Set the X geometry window size (WIDTHxHEIGHT+X+Y)"
-msgstr ""
+msgstr "Sett X-geometri for vindustørrelse (BREDDExHØYDE+X+Y)"
 
-#: ../gedit/gedit-command-line.c:293
+#: ../gedit/gedit-command-line.c:297
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: ../gedit/gedit-command-line.c:300
+#: ../gedit/gedit-command-line.c:304
 msgid "Open files and block process until files are closed"
 msgstr "Åpne filer og blokker prosessen til filene er lukket"
 
-#: ../gedit/gedit-command-line.c:308
+#: ../gedit/gedit-command-line.c:312
 msgid "Run gedit in the background"
 msgstr "Kjør gedit i bakgrunnen"
 
-#: ../gedit/gedit-command-line.c:316
-#, fuzzy
+#: ../gedit/gedit-command-line.c:320
 msgid "Run gedit in standalone mode"
-msgstr "Kjør gedit i"
+msgstr "Kjør gedit i frittstående modus"
 
-#: ../gedit/gedit-command-line.c:325
+#: ../gedit/gedit-command-line.c:329
 msgid "[FILE...] [+LINE[:COLUMN]]"
 msgstr "[FIL...] [+LINJE[:KOLONNE]]"
 
 #. Setup command line options
-#: ../gedit/gedit-command-line.c:332
+#: ../gedit/gedit-command-line.c:336
 msgid "- Edit text files"
 msgstr "- Rediger tekstfiler"
 
-#: ../gedit/gedit-command-line.c:341
+#: ../gedit/gedit-command-line.c:349
 #, c-format
 msgid ""
 "%s\n"
@@ -935,11 +935,11 @@ msgstr "Lagre filen med komprimering?"
 msgid ""
 "The file \"%s\" was previously saved as plain text and will now be saved "
 "using compression."
-msgstr ""
+msgstr "Filen «%s» var lagret som ren tekst og vil nå bli lagret med komprimering."
 
 #: ../gedit/gedit-commands-file.c:621
 msgid "_Save Using Compression"
-msgstr ""
+msgstr "_Lagre med komprimering"
 
 #: ../gedit/gedit-commands-file.c:625
 msgid "Save the file as plain text?"
@@ -950,7 +950,7 @@ msgstr "Lagre filen som ren tekst?"
 msgid ""
 "The file \"%s\" was previously saved using compression and will now be saved "
 "as plain text."
-msgstr ""
+msgstr "Filen «%s» var lagret med komprimering og vil nå bli lagret som ren tekst."
 
 #: ../gedit/gedit-commands-file.c:628
 msgid "_Save As Plain Text"
@@ -1074,12 +1074,12 @@ msgstr "«%s» ikke funnet"
 msgid "Unsaved Document %d"
 msgstr "Ikke-lagret dokument %d"
 
-#: ../gedit/gedit-documents-panel.c:97 ../gedit/gedit-documents-panel.c:111
-#: ../gedit/gedit-window.c:2435 ../gedit/gedit-window.c:2442
+#: ../gedit/gedit-documents-panel.c:119 ../gedit/gedit-documents-panel.c:133
+#: ../gedit/gedit-window.c:2436 ../gedit/gedit-window.c:2443
 msgid "Read-Only"
 msgstr "Skrivebeskyttet"
 
-#: ../gedit/gedit-documents-panel.c:793
+#: ../gedit/gedit-documents-panel.c:1208 ../gedit/gedit-window.c:3839
 msgid "Documents"
 msgstr "Dokumenter"
 
@@ -1621,16 +1621,16 @@ msgstr "_Om tillegg"
 msgid "C_onfigure Plugin"
 msgstr "K_onfigurer tillegg"
 
-#: ../gedit/gedit-print-job.c:569
+#: ../gedit/gedit-print-job.c:568
 #, c-format
 msgid "File: %s"
 msgstr "Fil: %s"
 
-#: ../gedit/gedit-print-job.c:578
+#: ../gedit/gedit-print-job.c:577
 msgid "Page %N of %Q"
 msgstr "Side %N av %Q"
 
-#: ../gedit/gedit-print-job.c:837
+#: ../gedit/gedit-print-job.c:836
 msgid "Preparing..."
 msgstr "Forbereder..."
 
@@ -1898,7 +1898,7 @@ msgstr "Opprett et nytt dokument"
 msgid "_Open..."
 msgstr "_Åpne..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1575
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1576
 msgid "Open a file"
 msgstr "Åpne en fil"
 
@@ -2184,29 +2184,29 @@ msgid "/ on %s"
 msgstr "/ på %s"
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1261
+#: ../gedit/gedit-view.c:1262
 msgid "_Wrap Around"
 msgstr "_Bryting"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1271
+#: ../gedit/gedit-view.c:1272
 msgid "Match _Entire Word Only"
 msgstr "Kun treff på _hele ord"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1281
+#: ../gedit/gedit-view.c:1282
 msgid "_Match Case"
 msgstr "_Skill mellom små/store bokstaver"
 
-#: ../gedit/gedit-view.c:1396
+#: ../gedit/gedit-view.c:1397
 msgid "String you want to search for"
 msgstr "Streng du vil søke etter"
 
-#: ../gedit/gedit-view.c:1405
+#: ../gedit/gedit-view.c:1406
 msgid "Line you want to move the cursor to"
 msgstr "Linje du vil flytte markøren til"
 
-#: ../gedit/gedit-window.c:1077
+#: ../gedit/gedit-window.c:1078
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Bruk uthevingsmodus %s"
@@ -2214,7 +2214,7 @@ msgstr "Bruk uthevingsmodus %s"
 #. add the "Plain Text" item before all the others
 #. Translators: "Plain Text" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:1144 ../gedit/gedit-window.c:2128
+#: ../gedit/gedit-window.c:1145 ../gedit/gedit-window.c:2129
 #: ../plugins/externaltools/tools/manager.py:121
 #: ../plugins/externaltools/tools/manager.py:419
 #: ../plugins/externaltools/tools/manager.py:529
@@ -2222,60 +2222,60 @@ msgstr "Bruk uthevingsmodus %s"
 msgid "Plain Text"
 msgstr "Vanlig tekst"
 
-#: ../gedit/gedit-window.c:1145
+#: ../gedit/gedit-window.c:1146
 msgid "Disable syntax highlighting"
 msgstr "Deaktiver syntaksutheving"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1467
+#: ../gedit/gedit-window.c:1468
 #, c-format
 msgid "Open '%s'"
 msgstr "Åpne «%s»"
 
-#: ../gedit/gedit-window.c:1577
+#: ../gedit/gedit-window.c:1578
 msgid "Open a recently used file"
 msgstr "Åpne nylig brukt fil"
 
-#: ../gedit/gedit-window.c:1583
+#: ../gedit/gedit-window.c:1584
 msgid "Open"
 msgstr "Åpne"
 
-#: ../gedit/gedit-window.c:1641
+#: ../gedit/gedit-window.c:1642
 msgid "Save"
 msgstr "Lagre"
 
-#: ../gedit/gedit-window.c:1643
+#: ../gedit/gedit-window.c:1644
 msgid "Print"
 msgstr "Skriv ut"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1798
+#: ../gedit/gedit-window.c:1799
 #, c-format
 msgid "Activate '%s'"
 msgstr "Aktiver «%s»"
 
-#: ../gedit/gedit-window.c:2106
+#: ../gedit/gedit-window.c:2107
 msgid "Use Spaces"
 msgstr "Bruk mellomrom"
 
-#: ../gedit/gedit-window.c:2179
+#: ../gedit/gedit-window.c:2180
 msgid "Tab Width"
 msgstr "Tabulatorbredde"
 
-#: ../gedit/gedit-window.c:2292
+#: ../gedit/gedit-window.c:2293
 msgid "Bracket match is out of range"
-msgstr ""
+msgstr "Søk etter sammenhørende hakeparantes utenfor gyldig område"
 
-#: ../gedit/gedit-window.c:2297
+#: ../gedit/gedit-window.c:2298
 msgid "Bracket match not found"
 msgstr "Fant ingen sammenhørende hakeparanteser"
 
-#: ../gedit/gedit-window.c:2302
+#: ../gedit/gedit-window.c:2303
 #, c-format
 msgid "Bracket match found on line: %d"
 msgstr "Sammenhørende hakeparantes funnet på linje: %d"
 
-#: ../gedit/gedit-window.c:4047
+#: ../gedit/gedit-window.c:4048
 msgid "About gedit"
 msgstr "Om gedit"
 
@@ -2782,154 +2782,154 @@ msgstr ""
 "Den nye katalogen er filtrert ut. Du må justere filterinnstillingene for å "
 "gjøre den synlig"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:732
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:737
 msgid "Bookmarks"
 msgstr "Bokmerker"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:816
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
 msgid "_Filter"
 msgstr "_Filter"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:826
 msgid "_Move to Trash"
 msgstr "_Flytt til papirkurven"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:827
 msgid "Move selected file or folder to trash"
 msgstr "Flytt valgt fil eller mappe til papirkurven"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:824
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:829
 msgid "_Delete"
 msgstr "_Slett"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:825
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:830
 msgid "Delete selected file or folder"
 msgstr "Slett valgt fil eller mappe"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
 msgid "Open selected file"
 msgstr "Åpne valgt fil"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:838
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:843
 msgid "Up"
 msgstr "Opp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:839
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:844
 msgid "Open the parent folder"
 msgstr "Lagre opphavsmappe"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:844
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
 msgid "_New Folder"
 msgstr "_Ny mappe"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:845
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:850
 msgid "Add new empty folder"
 msgstr "Legg til en ny tom mappe"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
 msgid "New F_ile"
 msgstr "Ny f_il"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:853
 msgid "Add new empty file"
 msgstr "Legg til ny tom fil"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:853
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:858
 msgid "_Rename"
 msgstr "End_re navn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:854
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:859
 msgid "Rename selected file or folder"
 msgstr "Endre navn på valgt fil eller mappe"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:860
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:865
 msgid "_Previous Location"
 msgstr "_Forrige lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:862
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:867
 msgid "Go to the previous visited location"
 msgstr "Gå til forrige lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:864
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:869
 msgid "_Next Location"
 msgstr "_Neste lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:865
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:870
 msgid "Go to the next visited location"
 msgstr "Gå til neste lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:866
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:871
 msgid "Re_fresh View"
 msgstr "Opp_dater visningen"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:867
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:872
 msgid "Refresh the view"
 msgstr "Oppdater visningen"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:868
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:886
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:873
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:891
 msgid "_View Folder"
 msgstr "_Vis mappe"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:869
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:887
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:874
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:892
 msgid "View folder in file manager"
 msgstr "Vis mappe i filhåndterer"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:876
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:881
 msgid "Show _Hidden"
 msgstr "Vis s_kjulte"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:877
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:882
 msgid "Show hidden files and folders"
 msgstr "Vis skjulte filer og mapper"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:879
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:884
 msgid "Show _Binary"
 msgstr "Vis _binære filer"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:880
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:885
 msgid "Show binary files"
 msgstr "Vis binære filer"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1013
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1022
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1043
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1018
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1027
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1048
 msgid "Previous location"
 msgstr "Forrige lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1015
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1020
 msgid "Go to previous location"
 msgstr "Gå til forrige lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1017
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1038
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1022
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1043
 msgid "Go to a previously opened location"
 msgstr "Gå til en tidligere åpnet lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1034
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1039
 msgid "Next location"
 msgstr "Neste lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1036
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1041
 msgid "Go to next location"
 msgstr "Gå til neste lokasjon"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1246
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1251
 msgid "_Match Filename"
 msgstr "_Treff på filnavn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2171
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2176
 #, c-format
 msgid "No mount object for mounted volume: %s"
 msgstr "Ingen monteringsobjekt for montert volum: %s"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2249
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2254
 #, c-format
 msgid "Could not open media: %s"
 msgstr "Kunne ikke åpne medie: %s"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2296
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2301
 #, c-format
 msgid "Could not mount volume: %s"
 msgstr "Kunne ikke montere volum: %s"
@@ -5116,9 +5116,8 @@ msgid ""
 msgstr ""
 
 #: ../plugins/time/org.gnome.gedit.time.gschema.xml.in.in.h:3
-#, fuzzy
 msgid "Prompt Type"
-msgstr "Ledetekstmelding"
+msgstr "Type ledetekst"
 
 #: ../plugins/time/org.gnome.gedit.time.gschema.xml.in.in.h:4
 msgid "Selected Format"
