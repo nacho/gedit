@@ -40,8 +40,6 @@ LT_INIT(disable-static)
 GEDIT_API_VERSION=3.0
 AC_SUBST(GEDIT_API_VERSION)
 
-AC_PATH_PROG(GCONFTOOL, gconftool-2)
-
 GTK_DOC_CHECK([1.0],[--flavour=no-tmpl])
 
 AC_CHECK_FUNC(sigaction)
