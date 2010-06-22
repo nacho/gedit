@@ -1856,8 +1856,11 @@ update_documents_list_menu (GeditWindow *window)
 			gchar *tab_name;
 			gchar *name;
 			gchar *tip;
+			gboolean active_notebook;
 
 			tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), j);
+
+			active_notebook = notebook == gedit_multi_notebook_get_active_notebook (p->multi_notebook);
 
 			/* NOTE: the action is associated to the position of the tab in
 			 * the notebook not to the tab itself! This is needed to work
@@ -1866,7 +1869,14 @@ update_documents_list_menu (GeditWindow *window)
 			 * the problem is worked around, action with the same name always
 			 * get the same accel.
 			 */
-			action_name = g_strdup_printf ("Tab_%d", i);
+			if (active_notebook)
+			{
+				action_name = g_strdup_printf ("Active_Tab_%d", i);
+			}
+			else
+			{
+				action_name = g_strdup_printf ("Inactive_Tab_%d", i);
+			}
 			tab_name = _gedit_tab_get_name (GEDIT_TAB (tab));
 			name = gedit_utils_escape_underscores (tab_name, -1);
 			tip =  get_menu_tip_for_tab (GEDIT_TAB (tab));
@@ -1884,7 +1894,7 @@ update_documents_list_menu (GeditWindow *window)
 			group = gtk_radio_action_get_group (action);
 
 			/* alt + 1, 2, 3... 0 to switch to the first ten tabs */
-			if (notebook == gedit_multi_notebook_get_active_notebook (p->multi_notebook))
+			if (active_notebook)
 			{
 				gchar *accel;
 
@@ -1937,12 +1947,27 @@ activate_documents_list_item (GeditWindow *window,
 	GtkAction *action;
 	gchar *action_name;
 	gint page_num;
+	GeditNotebook *active_notebook;
+	gboolean is_active;
+
+	active_notebook = gedit_multi_notebook_get_active_notebook (window->priv->multi_notebook);
+	page_num = gtk_notebook_page_num (GTK_NOTEBOOK (active_notebook),
+					  GTK_WIDGET (tab));
+
+	is_active = (page_num != -1);
 
 	page_num = gedit_multi_notebook_get_page_num (window->priv->multi_notebook,
 						      tab);
 
 	/* get the action name related with the page number */
-	action_name = g_strdup_printf ("Tab_%d", page_num);
+	if (is_active)
+	{
+		action_name = g_strdup_printf ("Active_Tab_%d", page_num);
+	}
+	else
+	{
+		action_name = g_strdup_printf ("Inactive_Tab_%d", page_num);
+	}
 	action = gtk_action_group_get_action (window->priv->documents_list_action_group,
 					      action_name);
 
