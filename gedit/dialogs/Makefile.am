@@ -1,4 +1,4 @@
-uidir = $(datadir)/gedit-2/ui/
+uidir = $(datadir)/gedit/ui/
 
 INCLUDES = 							\
 	-I$(top_srcdir)						\

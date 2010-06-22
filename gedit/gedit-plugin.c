@@ -220,7 +220,7 @@ gedit_plugin_get_data_dir (GeditPlugin *plugin)
 	/* If it's a "user" plugin the data dir is
 	 * install_dir/data_dir_name if instead it's a
 	 * "system" plugin the data dir is under gedit_data_dir,
-	 * so it's under $prefix/share/gedit-2/plugins/data_dir_name
+	 * so it's under $prefix/share/gedit/plugins/data_dir_name
 	 * where data_dir_name usually it's the name of the plugin
 	 */
 	gedit_lib_dir = gedit_dirs_get_gedit_lib_dir ();

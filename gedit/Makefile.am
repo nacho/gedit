@@ -28,7 +28,7 @@ gedit_LDADD =			\
 	$(INTROSPECTION_LIBS)
 
 if PLATFORM_WIN32
-gedit_LDFLAGS = -Wl,--export-all-symbols -Wl,--out-implib,libgedit-$(GEDIT_API_VERSION).a
+gedit_LDFLAGS = -Wl,--export-all-symbols -Wl,--out-implib,libgedit.a
 else
 gedit_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 endif
@@ -153,7 +153,7 @@ if !ENABLE_GVFS_METADATA
 INST_H_FILES += gedit-metadata-manager.h
 endif
 
-headerdir = $(prefix)/include/gedit-@GEDIT_API_VERSION@/gedit
+headerdir = $(prefix)/include/gedit/gedit
 
 header_DATA = 				\
 	$(INST_H_FILES)
@@ -244,7 +244,7 @@ gedit-marshal.c: gedit-marshal.list $(GLIB_GENMARSHAL)
 	$(AM_V_GEN) echo "#include \"gedit-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_marshal >> $@
 
-uidir = $(datadir)/gedit-2/ui/
+uidir = $(datadir)/gedit/ui/
 ui_DATA = 				\
 	gedit-ui.xml			\
 	gedit-print-preferences.ui
@@ -287,7 +287,7 @@ dist-hook:
 install-exec-hook:
 if PLATFORM_WIN32
 	$(mkinstalldirs) "$(DESTDIR)$(libdir)"
-	$(INSTALL_DATA) libgedit-$(GEDIT_API_VERSION).a "$(DESTDIR)$(libdir)"
+	$(INSTALL_DATA) libgedit.a "$(DESTDIR)$(libdir)"
 else
 	rm -f $(DESTDIR)$(bindir)/gnome-text-editor
 	ln -s gedit $(DESTDIR)$(bindir)/gnome-text-editor

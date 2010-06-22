@@ -13,12 +13,9 @@ $(service_DATA): $(service_in_files) Makefile
 man_MANS = gedit.1
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = gedit-@GEDIT_API_VERSION@.pc
+pkgconfig_DATA = gedit.pc
 
-gedit-@GEDIT_API_VERSION@.pc: gedit.pc
-	cp gedit.pc gedit-@GEDIT_API_VERSION@.pc
-
-bugreportdir = $(libexecdir)/gedit-2
+bugreportdir = $(libexecdir)/gedit
 bugreport_SCRIPTS = gedit-bugreport.sh
 
 gsettings_SCHEMAS = org.gnome.gedit.gschema.xml

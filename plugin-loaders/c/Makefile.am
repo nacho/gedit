@@ -1,6 +1,6 @@
 # C plugin loader
 
-loaderdir = $(libdir)/gedit-2/plugin-loaders
+loaderdir = $(libdir)/gedit/plugin-loaders
 
 INCLUDES = \
 	-I$(top_srcdir) 						\

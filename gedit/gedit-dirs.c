@@ -161,7 +161,7 @@ gedit_dirs_get_gedit_data_dir (void)
 
 	data_dir = g_build_filename (win32_dir,
 				     "share",
-				     "gedit-2",
+				     "gedit",
 				     NULL);
 	
 	g_free (win32_dir);
@@ -173,16 +173,18 @@ gedit_dirs_get_gedit_data_dir (void)
 		const gchar *bundle_data_dir = ige_mac_bundle_get_datadir (bundle);
 
 		data_dir = g_build_filename (bundle_data_dir,
-		                             "gedit-2",
-	                                     NULL);
+					     "gedit",
+					     NULL);
 	}
 	else
 	{
-		data_dir = g_build_filename (DATADIR, "gedit-2", NULL);
+		data_dir = g_build_filename (DATADIR,
+					     "gedit",
+					     NULL);
 	}
 #else
 	data_dir = g_build_filename (DATADIR,
-	                             "gedit-2",
+	                             "gedit",
 	                             NULL);
 #endif
 
@@ -239,7 +241,7 @@ gedit_dirs_get_gedit_lib_dir (void)
 
 	lib_dir = g_build_filename (win32_dir,
 				    "lib",
-				    "gedit-2",
+				    "gedit",
 				    NULL);
 	
 	g_free (win32_dir);
@@ -251,18 +253,18 @@ gedit_dirs_get_gedit_lib_dir (void)
  		const gchar *path = ige_mac_bundle_get_resourcesdir (bundle);
 		lib_dir = g_build_filename (path,
 	                            	"lib",
-	                            	"gedit-2",
+	                            	"gedit",
 	                            	NULL);
 	}
 	else
 	{
 		lib_dir = g_build_filename (LIBDIR,
-					    "gedit-2",
+					    "gedit",
 					    NULL);
 	}
 #else
 	lib_dir = g_build_filename (LIBDIR,
-				    "gedit-2",
+				    "gedit",
 				    NULL);
 #endif
 
