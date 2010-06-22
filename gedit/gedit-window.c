@@ -3627,13 +3627,16 @@ on_tab_removed (GeditMultiNotebook *multi,
 
 	if (!window->priv->dispose_has_run)
 	{
-		if (!window->priv->removing_tabs || num_tabs == 0)
+		if ((!window->priv->removing_tabs &&
+		    gtk_notebook_get_n_pages (GTK_NOTEBOOK (notebook)) > 0) ||
+		    num_tabs == 0)
 		{
 			update_documents_list_menu (window);
 			update_next_prev_doc_sensitivity_per_window (window);
+			update_sensitivity_according_to_open_tabs (window,
+								   num_notebooks,
+								   num_tabs);
 		}
-
-		update_sensitivity_according_to_open_tabs (window, num_notebooks, num_tabs);
 
 		if (num_tabs == 0)
 		{
@@ -3716,6 +3719,9 @@ on_notebook_changed (GeditMultiNotebook *multi,
 		     GeditWindow        *window)
 {
 	update_documents_list_menu (window);
+	update_sensitivity_according_to_open_tabs (window,
+						   gedit_multi_notebook_get_n_notebooks (multi),
+						   gedit_multi_notebook_get_n_tabs (multi));
 }
 
 static void
