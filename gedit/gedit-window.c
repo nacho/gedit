@@ -1832,8 +1832,7 @@ update_documents_list_menu (GeditWindow *window)
 	}
 	g_list_free (actions);
 
-	n = gtk_notebook_get_n_pages (GTK_NOTEBOOK (
-		gedit_multi_notebook_get_active_notebook (p->multi_notebook)));
+	n = gedit_multi_notebook_get_n_tabs (p->multi_notebook);
 
 	id = (n > 0) ? gtk_ui_manager_new_merge_id (p->manager) : 0;
 
@@ -3739,14 +3738,25 @@ on_show_popup_menu (GeditMultiNotebook *multi,
 }
 
 static void
-on_notebook_changed (GeditMultiNotebook *multi,
+on_notebook_changed (GeditMultiNotebook *mnb,
 		     GParamSpec         *pspec,
 		     GeditWindow        *window)
 {
 	update_documents_list_menu (window);
 	update_sensitivity_according_to_open_tabs (window,
-						   gedit_multi_notebook_get_n_notebooks (multi),
-						   gedit_multi_notebook_get_n_tabs (multi));
+						   gedit_multi_notebook_get_n_notebooks (mnb),
+						   gedit_multi_notebook_get_n_tabs (mnb));
+}
+
+static void
+on_notebook_removed (GeditMultiNotebook *mnb,
+		     GeditNotebook      *notebook,
+		     GeditWindow        *window)
+{
+	update_documents_list_menu (window);
+	update_sensitivity_according_to_open_tabs (window,
+						   gedit_multi_notebook_get_n_notebooks (mnb),
+						   gedit_multi_notebook_get_n_tabs (mnb));
 }
 
 static void
@@ -4144,6 +4154,10 @@ gedit_window_init (GeditWindow *window)
 			 TRUE);
 	gtk_widget_show (GTK_WIDGET (window->priv->multi_notebook));
 
+	g_signal_connect (window->priv->multi_notebook,
+			  "notebook-removed",
+			  G_CALLBACK (on_notebook_removed),
+			  window);
 	g_signal_connect (window->priv->multi_notebook,
 			  "notify::active-notebook",
 			  G_CALLBACK (on_notebook_changed),
