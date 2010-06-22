@@ -129,6 +129,47 @@ gedit_plugins_engine_class_init (GeditPluginsEngineClass *klass)
 	g_type_class_add_private (klass, sizeof (GeditPluginsEnginePrivate));
 }
 
+static void
+require_private_typelib (void)
+{
+	gchar *lib_dir;
+	gchar *filename;
+	GMappedFile *mfile;
+	GTypelib *typelib;
+	const gchar *ns;
+
+	lib_dir = gedit_dirs_get_gedit_lib_dir ();
+	filename = g_build_filename (lib_dir,
+				     "girepository-1.0",
+				     "Gedit-3.0.typelib",
+				     NULL);
+
+	mfile = g_mapped_file_new (filename, FALSE, NULL);
+
+	g_free (filename);
+	g_free (lib_dir);
+
+	if (mfile == NULL)
+	{
+		g_warning ("Private typelib 'Gedit-3.0' not found");
+		return;
+	}
+
+	typelib = g_typelib_new_from_mapped_file (mfile);
+	ns = g_irepository_load_typelib (g_irepository_get_default (),
+					 typelib,
+					 0,
+					 NULL);
+	if (!ns)
+	{
+		g_warning ("Typelib 'Gedit-3.0' could not be loaded");
+		g_typelib_free (typelib);
+		return;
+	}
+
+	gedit_debug_message (DEBUG_PLUGINS, "Namespace '%s' loaded.", ns);
+}
+
 GeditPluginsEngine *
 gedit_plugins_engine_get_default (void)
 {
@@ -145,6 +186,7 @@ gedit_plugins_engine_get_default (void)
 			       "Peas", "1.0", 0, NULL);
 	g_irepository_require (g_irepository_get_default (),
 			       "PeasUI", "1.0", 0, NULL);
+	require_private_typelib ();
 
 	modules_dir = gedit_dirs_get_binding_modules_dir ();
 	search_paths = g_new (gchar *, 5);

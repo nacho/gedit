@@ -5,6 +5,8 @@ bin_PROGRAMS = gedit
 
 noinst_LTLIBRARIES = libgedit.la
 
+lib_LTLIBRARIES = libgedit-private.la
+
 INCLUDES =								\
 	-I$(top_srcdir)							\
 	-I$(srcdir)							\
@@ -22,6 +24,7 @@ gedit_SOURCES = \
 
 gedit_LDADD =			\
 	libgedit.la		\
+	libgedit-private.la	\
 	$(GEDIT_LIBS)		\
 	$(IGE_MAC_LIBS)		\
 	$(EGG_SMCLIENT_LIBS)	\
@@ -141,7 +144,8 @@ INST_H_FILES =				\
 	gedit-tab.h 			\
 	gedit-utils.h 			\
 	gedit-view.h 			\
-	gedit-window.h
+	gedit-window.h			\
+	gedit-window-activatable.h
 
 if !ENABLE_GVFS_METADATA
 INST_H_FILES += gedit-metadata-manager.h
@@ -151,6 +155,9 @@ headerdir = $(prefix)/include/gedit/gedit
 
 header_DATA = 				\
 	$(INST_H_FILES)
+
+libgedit_private_la_SOURCES =		\
+	gedit-window-activatable.c
 
 libgedit_c_files =			\
 	gedit-app.c			\

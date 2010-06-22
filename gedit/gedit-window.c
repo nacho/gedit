@@ -38,7 +38,6 @@
 
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-#include <libpeas/peas-activatable.h>
 #include <libpeas/peas-extension-set.h>
 
 #include "gedit-ui.h"
@@ -55,6 +54,7 @@
 #include "gedit-panel.h"
 #include "gedit-documents-panel.h"
 #include "gedit-plugins-engine.h"
+#include "gedit-window-activatable.h"
 #include "gedit-enum-types.h"
 #include "gedit-dirs.h"
 #include "gedit-status-combo-box.h"
@@ -4314,7 +4314,7 @@ gedit_window_init (GeditWindow *window)
 	gedit_debug_message (DEBUG_WINDOW, "Update plugins ui");
 	
 	window->priv->extensions = peas_extension_set_new (PEAS_ENGINE (gedit_plugins_engine_get_default ()),
-							   PEAS_TYPE_ACTIVATABLE);
+							   GEDIT_TYPE_WINDOW_ACTIVATABLE);
 	g_signal_connect (window->priv->extensions,
 			  "extension-added",
 			  G_CALLBACK (extension_added),
