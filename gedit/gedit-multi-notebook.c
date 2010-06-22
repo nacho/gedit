@@ -514,9 +514,6 @@ remove_notebook (GeditMultiNotebook *mnb,
 					      notebook);
 
 	mnb->priv->removing_notebook = FALSE;
-	
-	/* Let's make the active notebook grab the focus */
-	gtk_widget_grab_focus (new_notebook);
 
 	children = gtk_container_get_children (GTK_CONTAINER (parent));
 	if (children->next != NULL)
@@ -538,6 +535,9 @@ remove_notebook (GeditMultiNotebook *mnb,
 
 	g_signal_emit (G_OBJECT (mnb), signals[NOTEBOOK_REMOVED], 0, notebook);
 	g_object_unref (notebook);
+
+	/* Let's make the active notebook grab the focus */
+	gtk_widget_grab_focus (new_notebook);
 }
 
 static void
