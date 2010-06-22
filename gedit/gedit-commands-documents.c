@@ -70,7 +70,6 @@ void
 _gedit_cmd_documents_move_to_new_window (GtkAction   *action,
 					 GeditWindow *window)
 {
-	GeditNotebook *old_notebook;
 	GeditTab *tab;
 
 	gedit_debug (DEBUG_COMMANDS);
@@ -79,10 +78,6 @@ _gedit_cmd_documents_move_to_new_window (GtkAction   *action,
 
 	if (tab == NULL)
 		return;
-
-	old_notebook = GEDIT_NOTEBOOK (_gedit_window_get_notebook (window));
-
-	g_return_if_fail (gtk_notebook_get_n_pages (GTK_NOTEBOOK (old_notebook)) > 1);
 
 	_gedit_window_move_tab_to_new_window (window, tab);
 }
