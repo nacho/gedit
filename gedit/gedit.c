@@ -56,6 +56,10 @@
 #include "gedit-metadata-manager.h"
 #endif
 
+#ifdef ENABLE_INTROSPECTION
+#include <girepository.h>
+#endif
+
 #ifdef G_OS_UNIX
 #include <gio/gunixinputstream.h>
 #include <unistd.h>
@@ -209,6 +213,23 @@ gedit_main (gboolean service)
 #endif
 }
 
+#ifdef ENABLE_INTROSPECTION
+static void
+setup_girepository (void)
+{
+	gchar *lib_dir;
+	gchar *typelib_dir;
+
+	lib_dir = gedit_dirs_get_gedit_lib_dir ();
+	typelib_dir = g_build_filename (lib_dir, "girepository-1.0", NULL);
+
+	g_irepository_prepend_search_path (typelib_dir);
+
+	g_free (typelib_dir);
+	g_free (lib_dir);
+}
+#endif
+
 int
 main (int argc, char *argv[])
 {
@@ -238,6 +259,10 @@ main (int argc, char *argv[])
 
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
+
+#ifdef ENABLE_INTROSPECTION
+	setup_girepository ();
+#endif
 
 	/* Parse command line arguments */
 	command_line = gedit_command_line_get_default ();

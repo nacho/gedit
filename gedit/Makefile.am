@@ -270,10 +270,10 @@ Gedit_3_0_gir_PROGRAM = $(builddir)/gedit
 Gedit_3_0_gir_FILES = $(INST_H_FILES) $(libgedit_c_files)
 Gedit_3_0_gir_INCLUDES = Gtk-3.0 GtkSource-3.0
 
-girdir = $(INTROSPECTION_GIRDIR)
+girdir = $(datadir)/gedit/gir-1.0
 gir_DATA = $(INTROSPECTION_GIRS)
 
-typelibdir = $(INTROSPECTION_TYPELIBDIR)
+typelibdir = $(libdir)/gedit/girepository-1.0
 typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 
 CLEANFILES +=			\
