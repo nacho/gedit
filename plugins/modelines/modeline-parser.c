@@ -808,8 +808,8 @@ modeline_parser_apply_modeline (GtkSourceView *view)
 	{
 		GtkWrapMode mode;
 		
-		mode = gedit_settings_get_wrap_mode (settings,
-						     GEDIT_SETTINGS_WRAP_MODE);
+		mode = g_settings_get_enum (settings,
+					    GEDIT_SETTINGS_WRAP_MODE);
 		gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view), mode);
 	}
 	
