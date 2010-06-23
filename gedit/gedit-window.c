@@ -2962,8 +2962,10 @@ sync_name (GeditTab    *tab,
 	gchar *tab_name;
 	gchar *escaped_name;
 	gchar *tip;
-	gint n;
 	GeditDocument *doc;
+	gint page_num;
+	GeditNotebook *active_notebook;
+	gboolean is_active;
 
 	if (tab == gedit_window_get_active_tab (window))
 	{
@@ -2977,8 +2979,25 @@ sync_name (GeditTab    *tab,
 	}
 
 	/* sync the item in the documents list menu */
-	n = gedit_multi_notebook_get_page_num (window->priv->multi_notebook, tab);
-	action_name = g_strdup_printf ("Tab_%d", n);
+	
+	active_notebook = gedit_multi_notebook_get_active_notebook (window->priv->multi_notebook);
+	page_num = gtk_notebook_page_num (GTK_NOTEBOOK (active_notebook),
+					  GTK_WIDGET (tab));
+
+	is_active = (page_num != -1);
+
+	page_num = gedit_multi_notebook_get_page_num (window->priv->multi_notebook,
+						      tab);
+
+	/* get the action name related with the page number */
+	if (is_active)
+	{
+		action_name = g_strdup_printf ("Active_Tab_%d", page_num);
+	}
+	else
+	{
+		action_name = g_strdup_printf ("Inactive_Tab_%d", page_num);
+	}
 	action = gtk_action_group_get_action (window->priv->documents_list_action_group,
 					      action_name);
 	g_return_if_fail (action != NULL);
