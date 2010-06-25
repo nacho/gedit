@@ -1,7 +1,7 @@
 DIST_SUBDIRS = \
-	modelines
+	modelines	\
+	changecase
 
-#	changecase 	\
 #	checkupdate	\
 #	docinfo 	\
 #	filebrowser 	\
@@ -16,9 +16,9 @@ DIST_SUBDIRS = \
 #	snippets
 
 SUBDIRS = \
-	modelines
+	modelines	\
+	changecase
 
-#	changecase
 #	docinfo
 #	filebrowser
 #	modelines
