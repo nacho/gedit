@@ -4651,7 +4651,7 @@ _gedit_window_move_tab_to_new_window (GeditWindow *window,
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 	g_return_val_if_fail (GEDIT_IS_TAB (tab), NULL);
 	g_return_val_if_fail (gedit_multi_notebook_get_n_notebooks (
-	                        window->priv->multi_notebook) > 1 &&
+	                        window->priv->multi_notebook) > 1 ||
 	                      gedit_multi_notebook_get_n_tabs (
 	                        window->priv->multi_notebook) > 1,
 	                      NULL);
