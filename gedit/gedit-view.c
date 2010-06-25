@@ -38,10 +38,13 @@
 #include <stdlib.h>
 
 #include <gdk/gdkkeysyms.h>
+#include <libpeas/peas-extension-set.h>
 
 #include <glib/gi18n.h>
 
 #include "gedit-view.h"
+#include "gedit-view-activatable.h"
+#include "gedit-plugins-engine.h"
 #include "gedit-debug.h"
 #include "gedit-marshal.h"
 #include "gedit-utils.h"
@@ -96,6 +99,8 @@ struct _GeditViewPrivate
 	gboolean     disable_popdown;
 	
 	GtkTextBuffer *current_buffer;
+
+	PeasExtensionSet *extensions;
 };
 
 /* The search entry completion is shared among all the views */
@@ -305,6 +310,24 @@ current_buffer_removed (GeditView *view)
 }
 
 static void
+extension_added (PeasExtensionSet *extensions,
+		 PeasPluginInfo   *info,
+		 PeasExtension    *exten,
+		 GeditView        *view)
+{
+	peas_extension_call (exten, "activate", view);
+}
+
+static void
+extension_removed (PeasExtensionSet *extensions,
+		   PeasPluginInfo   *info,
+		   PeasExtension    *exten,
+		   GeditView        *view)
+{
+	peas_extension_call (exten, "deactivate", view);
+}
+
+static void
 on_notify_buffer_cb (GeditView  *view,
 		     GParamSpec *arg1,
 		     gpointer    userdata)
@@ -330,6 +353,11 @@ on_notify_buffer_cb (GeditView  *view,
 			  "search_highlight_updated",
 			  G_CALLBACK (search_highlight_updated_cb),
 			  view);
+
+	/* We only activate the extensions when the right buffer is set,
+	 * because most plugins will expect this behaviour, and we won't
+	 * change the buffer later anyway. */
+	peas_extension_set_call (view->priv->extensions, "activate", view);
 }
 
 static void 
@@ -422,11 +450,23 @@ gedit_view_init (GeditView *view)
 	if (tl != NULL)
 		gtk_target_list_add_uri_targets (tl, TARGET_URI_LIST);
 		
+	view->priv->extensions = peas_extension_set_new (PEAS_ENGINE (gedit_plugins_engine_get_default ()),
+							 GEDIT_TYPE_VIEW_ACTIVATABLE);
+	g_signal_connect (view->priv->extensions,
+			  "extension-added",
+			  G_CALLBACK (extension_added),
+			  view);
+	g_signal_connect (view->priv->extensions,
+			  "extension-removed",
+			  G_CALLBACK (extension_removed),
+			  view);
+
 	/* Act on buffer change */
 	g_signal_connect (view, 
 			  "notify::buffer", 
 			  G_CALLBACK (on_notify_buffer_cb),
 			  NULL);
+
 }
 
 static void
@@ -435,6 +475,11 @@ gedit_view_destroy (GtkObject *object)
 	GeditView *view;
 
 	view = GEDIT_VIEW (object);
+
+	peas_extension_set_call (view->priv->extensions,
+				 "deactivate",
+				 view);
+	g_object_unref (view->priv->extensions);
 
 	if (view->priv->search_window != NULL)
 	{

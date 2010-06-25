@@ -144,6 +144,7 @@ INST_H_FILES =				\
 	gedit-tab.h 			\
 	gedit-utils.h 			\
 	gedit-view.h 			\
+	gedit-view-activatable.h	\
 	gedit-window.h			\
 	gedit-window-activatable.h
 
@@ -157,6 +158,7 @@ header_DATA = 				\
 	$(INST_H_FILES)
 
 libgedit_private_la_SOURCES =		\
+	gedit-view-activatable.c	\
 	gedit-window-activatable.c
 
 libgedit_c_files =			\
