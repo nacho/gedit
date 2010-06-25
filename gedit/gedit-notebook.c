@@ -273,12 +273,32 @@ gedit_notebook_class_init (GeditNotebookClass *klass)
 }
 
 static GeditNotebook *
+get_notebook_from_widget (GtkWidget *widget)
+{
+	if (widget == NULL)
+	{
+		return NULL;
+	}
+
+	while (!gtk_widget_is_toplevel (GTK_WIDGET (widget)))
+	{
+		if (GEDIT_IS_NOTEBOOK (widget))
+		{
+			return GEDIT_NOTEBOOK (widget);
+		}
+
+		widget = gtk_widget_get_parent (GTK_WIDGET (widget));
+	}
+
+	return NULL;
+}
+
+static GeditNotebook *
 find_notebook_at_pointer (gint abs_x,
 			  gint abs_y)
 {
 	GdkWindow *win_at_pointer;
-	GdkWindow *toplevel_win;
-	gpointer toplevel = NULL;
+	gpointer widget = NULL;
 	gint x, y;
 
 	/* FIXME multi-head */
@@ -289,21 +309,10 @@ find_notebook_at_pointer (gint abs_x,
 		return NULL;
 	}
 
-	toplevel_win = gdk_window_get_toplevel (win_at_pointer);
-
 	/* get the GtkWidget which owns the toplevel GdkWindow */
-	gdk_window_get_user_data (toplevel_win, &toplevel);
+	gdk_window_get_user_data (win_at_pointer, &widget);
 
-	/* toplevel should be an GeditWindow */
-	if ((toplevel != NULL) && 
-	    GEDIT_IS_WINDOW (toplevel))
-	{
-		return GEDIT_NOTEBOOK (_gedit_window_get_notebook
-						(GEDIT_WINDOW (toplevel)));
-	}
-
-	/* We are outside all windows containing a notebook */
-	return NULL;
+	return get_notebook_from_widget (widget);
 }
 
 static gboolean
@@ -423,7 +432,7 @@ gedit_notebook_move_tab (GeditNotebook *src,
 			 GeditTab      *tab,
 			 gint           dest_position)
 {
-	g_return_if_fail (GEDIT_IS_NOTEBOOK (src));	
+	g_return_if_fail (GEDIT_IS_NOTEBOOK (src));
 	g_return_if_fail (GEDIT_IS_NOTEBOOK (dest));
 	g_return_if_fail (src != dest);
 	g_return_if_fail (GEDIT_IS_TAB (tab));
