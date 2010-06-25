@@ -261,7 +261,7 @@ if HAVE_INTROSPECTION
 -include $(INTROSPECTION_MAKEFILE)
 INTROSPECTION_GIRS = Gedit-3.0.gir
 
-Gedit-3.0.gir: libgedit.la
+Gedit-3.0.gir: gedit
 INTROSPECTION_SCANNER_ARGS = -I$(top_srcdir) --warn-all
 Gedit_3_0_gir_NAMESPACE = Gedit
 Gedit_3_0_gir_VERSION = 3.0
