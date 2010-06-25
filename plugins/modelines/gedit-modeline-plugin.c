@@ -29,37 +29,21 @@
 #include "modeline-parser.h"
 
 #include <gedit/gedit-debug.h>
-#include <gedit/gedit-window.h>
-#include <gedit/gedit-window-activatable.h>
-#include <gedit/gedit-utils.h>
-
-#define DOCUMENT_DATA_KEY "GeditModelinePluginDocumentData"
+#include <gedit/gedit-view-activatable.h>
 
 struct _GeditModelinePluginPrivate {
-	gulong tab_added_handler_id;
-	gulong tab_removed_handler_id;
-};
-
-typedef struct
-{
 	gulong document_loaded_handler_id;
 	gulong document_saved_handler_id;
-} DocumentData;
+};
 
-static void	gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface);
+static void	gedit_view_activatable_iface_init (GeditViewActivatableInterface *iface);
 
 G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditModelinePlugin,
 				gedit_modeline_plugin,
 				PEAS_TYPE_EXTENSION_BASE,
 				0,
-				G_IMPLEMENT_INTERFACE_DYNAMIC (GEDIT_TYPE_WINDOW_ACTIVATABLE,
-							       gedit_window_activatable_iface_init))
-
-static void
-document_data_free (DocumentData *ddata)
-{
-	g_slice_free (DocumentData, ddata);
-}
+				G_IMPLEMENT_INTERFACE_DYNAMIC (GEDIT_TYPE_VIEW_ACTIVATABLE,
+							       gedit_view_activatable_iface_init))
 
 static void
 gedit_modeline_plugin_constructed (GObject *object)
@@ -103,121 +87,43 @@ on_document_loaded_or_saved (GeditDocument *document,
 }
 
 static void
-connect_handlers (GeditView *view)
+gedit_modeline_plugin_activate (GeditViewActivatable *activatable,
+				GeditView            *view)
 {
-	DocumentData *data;
+	GeditModelinePlugin *plugin;
         GtkTextBuffer *doc;
+
+	gedit_debug (DEBUG_PLUGINS);
+
+	plugin = GEDIT_MODELINE_PLUGIN (activatable);
 
         doc = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
-        data = g_slice_new (DocumentData);
-
-	data->document_loaded_handler_id =
+	plugin->priv->document_loaded_handler_id =
 		g_signal_connect (doc, "loaded",
 				  G_CALLBACK (on_document_loaded_or_saved),
 				  view);
-	data->document_saved_handler_id =
+	plugin->priv->document_saved_handler_id =
 		g_signal_connect (doc, "saved",
 				  G_CALLBACK (on_document_loaded_or_saved),
 				  view);
-
-	g_object_set_data_full (G_OBJECT (doc), DOCUMENT_DATA_KEY,
-				data, (GDestroyNotify) document_data_free);
 }
 
 static void
-disconnect_handlers (GeditView *view)
+gedit_modeline_plugin_deactivate (GeditViewActivatable *activatable,
+				  GeditView            *view)
 {
-	DocumentData *data;
+	GeditModelinePlugin *plugin;
 	GtkTextBuffer *doc;
+
+	gedit_debug (DEBUG_PLUGINS);
+
+	plugin = GEDIT_MODELINE_PLUGIN (activatable);
 
 	doc = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
-	data = g_object_steal_data (G_OBJECT (doc), DOCUMENT_DATA_KEY);
-
-	if (data)
-	{
-		g_signal_handler_disconnect (doc, data->document_loaded_handler_id);
-		g_signal_handler_disconnect (doc, data->document_saved_handler_id);
-
-		document_data_free (data);
-	}
-	else
-	{
-		g_warning ("Modeline handlers not found");
-	}
-}
-
-static void
-on_window_tab_added (GeditWindow *window,
-		     GeditTab *tab,
-		     gpointer user_data)
-{
-	connect_handlers (gedit_tab_get_view (tab));
-}
-
-static void
-on_window_tab_removed (GeditWindow *window,
-		       GeditTab *tab,
-		       gpointer user_data)
-{
-	disconnect_handlers (gedit_tab_get_view (tab));
-}
-
-static void
-gedit_modeline_plugin_activate (GeditWindowActivatable *activatable,
-				GeditWindow            *window)
-{
-	GeditModelinePlugin *plugin;
-	GList *views;
-	GList *l;
-
-	gedit_debug (DEBUG_PLUGINS);
-
-	plugin = GEDIT_MODELINE_PLUGIN (activatable);
-
-	views = gedit_window_get_views (window);
-	for (l = views; l != NULL; l = l->next)
-	{
-		connect_handlers (GEDIT_VIEW (l->data));
-		modeline_parser_apply_modeline (GTK_SOURCE_VIEW (l->data));
-	}
-	g_list_free (views);
-
-	plugin->priv->tab_added_handler_id =
-		g_signal_connect (window, "tab-added",
-				  G_CALLBACK (on_window_tab_added), NULL);
-
-	plugin->priv->tab_removed_handler_id =
-		g_signal_connect (window, "tab-removed",
-				  G_CALLBACK (on_window_tab_removed), NULL);
-}
-
-static void
-gedit_modeline_plugin_deactivate (GeditWindowActivatable *activatable,
-				  GeditWindow            *window)
-{
-	GeditModelinePlugin *plugin;
-	GList *views;
-	GList *l;
-
-	gedit_debug (DEBUG_PLUGINS);
-
-	plugin = GEDIT_MODELINE_PLUGIN (activatable);
-
-	g_signal_handler_disconnect (window, plugin->priv->tab_added_handler_id);
-	g_signal_handler_disconnect (window, plugin->priv->tab_removed_handler_id);
-
-	views = gedit_window_get_views (window);
-
-	for (l = views; l != NULL; l = l->next)
-	{
-		disconnect_handlers (GEDIT_VIEW (l->data));
-		
-		modeline_parser_deactivate (GTK_SOURCE_VIEW (l->data));
-	}
-	
-	g_list_free (views);
+	g_signal_handler_disconnect (doc, plugin->priv->document_loaded_handler_id);
+	g_signal_handler_disconnect (doc, plugin->priv->document_saved_handler_id);
 }
 
 static void
@@ -232,7 +138,7 @@ gedit_modeline_plugin_class_init (GeditModelinePluginClass *klass)
 }
 
 static void
-gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface)
+gedit_view_activatable_iface_init (GeditViewActivatableInterface *iface)
 {
 	iface->activate = gedit_modeline_plugin_activate;
 	iface->deactivate = gedit_modeline_plugin_deactivate;
@@ -250,7 +156,7 @@ peas_register_types (PeasObjectModule *module)
 	gedit_modeline_plugin_register_type (G_TYPE_MODULE (module));
 
 	peas_object_module_register_extension_type (module,
-						    GEDIT_TYPE_WINDOW_ACTIVATABLE,
+						    GEDIT_TYPE_VIEW_ACTIVATABLE,
 						    GEDIT_TYPE_MODELINE_PLUGIN);
 }
 
