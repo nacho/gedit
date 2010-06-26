@@ -1,9 +1,9 @@
 DIST_SUBDIRS = \
 	modelines	\
-	changecase
+	changecase	\
+	docinfo
 
 #	checkupdate	\
-#	docinfo 	\
 #	filebrowser 	\
 #	modelines	\
 #	sort 		\
@@ -17,9 +17,9 @@ DIST_SUBDIRS = \
 
 SUBDIRS = \
 	modelines	\
-	changecase
+	changecase	\
+	docinfo
 
-#	docinfo
 #	filebrowser
 #	modelines
 #	sort

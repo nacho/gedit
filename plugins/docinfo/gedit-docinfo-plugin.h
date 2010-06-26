@@ -17,7 +17,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  *
- * $Id$
  */
 
 #ifndef __GEDIT_DOCINFO_PLUGIN_H__
@@ -25,52 +24,41 @@
 
 #include <glib.h>
 #include <glib-object.h>
-#include <gedit/gedit-plugin.h>
+#include <libpeas/peas-extension-base.h>
+#include <libpeas/peas-object-module.h>
 
 G_BEGIN_DECLS
 
-/*
- * Type checking and casting macros
- */
 #define GEDIT_TYPE_DOCINFO_PLUGIN		(gedit_docinfo_plugin_get_type ())
-#define GEDIT_DOCINFO_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GEDIT_TYPE_DOCINFO_PLUGIN, GeditDocInfoPlugin))
-#define GEDIT_DOCINFO_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GEDIT_TYPE_DOCINFO_PLUGIN, GeditDocInfoPluginClass))
+#define GEDIT_DOCINFO_PLUGIN(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GEDIT_TYPE_DOCINFO_PLUGIN, GeditDocinfoPlugin))
+#define GEDIT_DOCINFO_PLUGIN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GEDIT_TYPE_DOCINFO_PLUGIN, GeditDocinfoPluginClass))
 #define GEDIT_IS_DOCINFO_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GEDIT_TYPE_DOCINFO_PLUGIN))
 #define GEDIT_IS_DOCINFO_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GEDIT_TYPE_DOCINFO_PLUGIN))
-#define GEDIT_DOCINFO_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GEDIT_TYPE_DOCINFO_PLUGIN, GeditDocInfoPluginClass))
+#define GEDIT_DOCINFO_PLUGIN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GEDIT_TYPE_DOCINFO_PLUGIN, GeditDocinfoPluginClass))
 
-/* Private structure type */
-typedef struct _GeditDocInfoPluginPrivate	GeditDocInfoPluginPrivate;
+typedef struct _GeditDocinfoPlugin	GeditDocinfoPlugin;
+typedef struct _GeditDocinfoPluginPrivate	GeditDocinfoPluginPrivate;
+typedef struct _GeditDocinfoPluginClass	GeditDocinfoPluginClass;
 
-/*
- * Main object structure
- */
-typedef struct _GeditDocInfoPlugin		GeditDocInfoPlugin;
-
-struct _GeditDocInfoPlugin
+struct _GeditDocinfoPlugin
 {
-	GeditPlugin parent_instance;
+	PeasExtensionBase parent;
+
+	/*< private >*/
+	GeditDocinfoPluginPrivate *priv;
 };
 
-/*
- * Class definition
- */
-typedef struct _GeditDocInfoPluginClass	GeditDocInfoPluginClass;
-
-struct _GeditDocInfoPluginClass
+struct _GeditDocinfoPluginClass
 {
-	GeditPluginClass parent_class;
+	PeasExtensionBaseClass parent_class;
 };
 
-/*
- * Public methods
- */
 GType	gedit_docinfo_plugin_get_type		(void) G_GNUC_CONST;
 
-/* All the plugins must implement this function */
-G_MODULE_EXPORT GType register_gedit_plugin (GTypeModule *module);
+G_MODULE_EXPORT void peas_register_types (PeasObjectModule *module);
 
 G_END_DECLS
 
 #endif /* __GEDIT_DOCINFO_PLUGIN_H__ */
+
 /* ex:ts=8:noet: */

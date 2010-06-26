@@ -17,7 +17,7 @@ libdocinfo_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libdocinfo_la_LIBADD  = $(GEDIT_LIBS)
 
 uidir = $(GEDIT_PLUGINS_DATA_DIR)/docinfo
-ui_DATA = docinfo.ui
+ui_DATA = gedit-docinfo-plugin.ui
 
 plugin_in_files = docinfo.gedit-plugin.desktop.in
 
