@@ -17,8 +17,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- *
- * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -28,58 +26,54 @@
 #include "gedit-sort-plugin.h"
 
 #include <string.h>
-#include <glib/gi18n-lib.h>
-#include <gmodule.h>
+#include <glib/gi18n.h>
 
 #include <gedit/gedit-debug.h>
 #include <gedit/gedit-utils.h>
 #include <gedit/gedit-app.h>
+#include <gedit/gedit-window.h>
+#include <gedit/gedit-window-activatable.h>
 
 #define GEDIT_SORT_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_SORT_PLUGIN, GeditSortPluginPrivate))
 
-/* Key in case the plugin ever needs any settings. */
-#define SORT_BASE_KEY "/apps/gedit-2/plugins/sort"
-
-#define WINDOW_DATA_KEY "GeditSortPluginWindowData"
 #define MENU_PATH "/MenuBar/EditMenu/EditOps_6"
 
-GEDIT_PLUGIN_REGISTER_TYPE(GeditSortPlugin, gedit_sort_plugin)
+static void gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface);
 
-typedef struct
+G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditSortPlugin,
+				gedit_sort_plugin,
+				PEAS_TYPE_EXTENSION_BASE,
+				0,
+				G_IMPLEMENT_INTERFACE_DYNAMIC (GEDIT_TYPE_WINDOW_ACTIVATABLE,
+							       gedit_window_activatable_iface_init))
+
+struct _GeditSortPluginPrivate
 {
+	GeditWindow *window;
+
+	GtkActionGroup *ui_action_group;
+	guint ui_id;
+
 	GtkWidget *dialog;
 	GtkWidget *col_num_spinbutton;
 	GtkWidget *reverse_order_checkbutton;
 	GtkWidget *ignore_case_checkbutton;
 	GtkWidget *remove_dups_checkbutton;
 
-	GeditDocument *doc;
-
 	GtkTextIter start, end; /* selection */
-} SortDialog;
+};
 
 typedef struct
 {
-	GtkActionGroup *ui_action_group;
-	guint ui_id;
-} WindowData;
-
-typedef struct
-{
-	GeditPlugin *plugin;
-	GeditWindow *window;
-} ActionData;
-
-typedef struct
-{
-	gboolean ignore_case;
-	gboolean reverse_order;
-	gboolean remove_duplicates;
 	gint starting_column;
+
+	guint ignore_case : 1;
+	guint reverse_order : 1;
+	guint remove_duplicates : 1;
 } SortInfo;
 
-static void sort_cb (GtkAction *action, ActionData *action_data);
-static void sort_real (SortDialog *dialog);
+static void sort_cb (GtkAction *action, GeditSortPlugin *plugin);
+static void sort_real (GeditSortPlugin *plugin);
 
 static const GtkActionEntry action_entries[] =
 {
@@ -92,37 +86,28 @@ static const GtkActionEntry action_entries[] =
 };
 
 static void
-sort_dialog_destroy (GtkObject *obj,
-		     gpointer  dialog_pointer)
-{
-	gedit_debug (DEBUG_PLUGINS);
-
-	g_slice_free (SortDialog, dialog_pointer);
-}
-
-static void
-sort_dialog_response_handler (GtkDialog  *widget,
-			      gint       res_id,
-			      SortDialog *dialog)
+sort_dialog_response_handler (GtkDialog       *dlg,
+			      gint             res_id,
+			      GeditSortPlugin *plugin)
 {
 	gedit_debug (DEBUG_PLUGINS);
 
 	switch (res_id)
 	{
 		case GTK_RESPONSE_OK:
-			sort_real (dialog);
-			gtk_widget_destroy (dialog->dialog);
+			sort_real (plugin);
+			gtk_widget_destroy (GTK_WIDGET (dlg));
 			break;
 
 		case GTK_RESPONSE_HELP:
 			gedit_app_show_help (gedit_app_get_default (),
-					     GTK_WINDOW (widget),
+					     GTK_WINDOW (dlg),
 					     NULL,
 					     "gedit-sort-plugin");
 			break;
 
 		case GTK_RESPONSE_CANCEL:
-			gtk_widget_destroy (dialog->dialog);
+			gtk_widget_destroy (GTK_WIDGET (dlg));
 			break;
 	}
 }
@@ -131,29 +116,32 @@ sort_dialog_response_handler (GtkDialog  *widget,
  * the text field (like the combo box) looses the documnent selection.
  * Storing the selection ONLY works because the dialog is modal */
 static void
-get_current_selection (GeditWindow *window, SortDialog *dialog)
+get_current_selection (GeditSortPlugin *plugin)
 {
+	GeditSortPluginPrivate *priv;
 	GeditDocument *doc;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	doc = gedit_window_get_active_document (window);
+	priv = plugin->priv;
+
+	doc = gedit_window_get_active_document (priv->window);
 
 	if (!gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
-						   &dialog->start,
-						   &dialog->end))
+						   &priv->start,
+						   &priv->end))
 	{
 		/* No selection, get the whole document. */
 		gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (doc),
-					    &dialog->start,
-					    &dialog->end);
+					    &priv->start,
+					    &priv->end);
 	}
 }
 
-static SortDialog *
-get_sort_dialog (ActionData *action_data)
+static void
+create_sort_dialog (GeditSortPlugin *plugin)
 {
-	SortDialog *dialog;
+	GeditSortPluginPrivate *priv;
 	GtkWidget *error_widget;
 	gboolean ret;
 	gchar *data_dir;
@@ -161,20 +149,21 @@ get_sort_dialog (ActionData *action_data)
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	dialog = g_slice_new (SortDialog);
+	priv = plugin->priv;
 
-	data_dir = gedit_plugin_get_data_dir (action_data->plugin);
-	ui_file = g_build_filename (data_dir, "sort.ui", NULL);
-	g_free (data_dir);
+	data_dir = peas_extension_base_get_data_dir (PEAS_EXTENSION_BASE (plugin));
+	ui_file = g_build_filename (data_dir, "gedit-sort-plugin.ui", NULL);
+
 	ret = gedit_utils_get_ui_objects (ui_file,
 					  NULL,
 					  &error_widget,
-					  "sort_dialog", &dialog->dialog,
-					  "reverse_order_checkbutton", &dialog->reverse_order_checkbutton,
-					  "col_num_spinbutton", &dialog->col_num_spinbutton,
-					  "ignore_case_checkbutton", &dialog->ignore_case_checkbutton,
-					  "remove_dups_checkbutton", &dialog->remove_dups_checkbutton,
+					  "sort_dialog", &priv->dialog,
+					  "reverse_order_checkbutton", &priv->reverse_order_checkbutton,
+					  "col_num_spinbutton", &priv->col_num_spinbutton,
+					  "ignore_case_checkbutton", &priv->ignore_case_checkbutton,
+					  "remove_dups_checkbutton", &priv->remove_dups_checkbutton,
 					  NULL);
+	g_free (data_dir);
 	g_free (ui_file);
 
 	if (!ret)
@@ -182,62 +171,54 @@ get_sort_dialog (ActionData *action_data)
 		const gchar *err_message;
 
 		err_message = gtk_label_get_label (GTK_LABEL (error_widget));
-		gedit_warning (GTK_WINDOW (action_data->window),
+		gedit_warning (GTK_WINDOW (priv->window),
 			       "%s", err_message);
 
-		g_free (dialog);
 		gtk_widget_destroy (error_widget);
 
-		return NULL;
+		return;
 	}
 
-	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
+	gtk_dialog_set_default_response (GTK_DIALOG (priv->dialog),
 					 GTK_RESPONSE_OK);
 
-	g_signal_connect (dialog->dialog,
+	g_signal_connect (priv->dialog,
 			  "destroy",
-			  G_CALLBACK (sort_dialog_destroy),
-			  dialog);
+			  G_CALLBACK (gtk_widget_destroyed),
+			  &priv->dialog);
 
-	g_signal_connect (dialog->dialog,
+	g_signal_connect (priv->dialog,
 			  "response",
 			  G_CALLBACK (sort_dialog_response_handler),
-			  dialog);
+			  plugin);
 
-	get_current_selection (action_data->window, dialog);
-
-	return dialog;
+	get_current_selection (plugin);
 }
 
 static void
-sort_cb (GtkAction  *action,
-	 ActionData *action_data)
+sort_cb (GtkAction       *action,
+	 GeditSortPlugin *plugin)
 {
-	GeditDocument *doc;
+	GeditSortPluginPrivate *priv;
 	GtkWindowGroup *wg;
-	SortDialog *dialog;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	doc = gedit_window_get_active_document (action_data->window);
-	g_return_if_fail (doc != NULL);
+	priv = plugin->priv;
 
-	dialog = get_sort_dialog (action_data);
-	g_return_if_fail (dialog != NULL);
+	create_sort_dialog (plugin);
 
-	wg = gedit_window_get_group (action_data->window);
+	wg = gedit_window_get_group (priv->window);
 	gtk_window_group_add_window (wg,
-				     GTK_WINDOW (dialog->dialog));
+				     GTK_WINDOW (priv->dialog));
 
-	dialog->doc = doc;
-
-	gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
-				      GTK_WINDOW (action_data->window));
+	gtk_window_set_transient_for (GTK_WINDOW (priv->dialog),
+				      GTK_WINDOW (priv->window));
 				      
-	gtk_window_set_modal (GTK_WINDOW (dialog->dialog),
+	gtk_window_set_modal (GTK_WINDOW (priv->dialog),
 			      TRUE);
 
-	gtk_widget_show (GTK_WIDGET (dialog->dialog));
+	gtk_widget_show (GTK_WIDGET (priv->dialog));
 }
 
 /* Compares two strings for the sorting algorithm. Uses the UTF-8 processing
@@ -245,7 +226,7 @@ sort_cb (GtkAction  *action,
 static gint
 compare_algorithm (gconstpointer s1,
 		   gconstpointer s2,
-		   gpointer	 data)
+		   gpointer      data)
 {
 	gint length1, length2;
 	gint ret;
@@ -339,9 +320,9 @@ get_line_slice (GtkTextBuffer *buf,
 		gtk_text_iter_forward_to_line_end (&end);
 
 	ret= gtk_text_buffer_get_slice (buf,
-					  &start,
-					  &end,
-					  TRUE);
+					&start,
+					&end,
+					TRUE);
 
 	g_assert (ret != NULL);
 
@@ -349,30 +330,33 @@ get_line_slice (GtkTextBuffer *buf,
 }
 
 static void
-sort_real (SortDialog *dialog)
+sort_real (GeditSortPlugin *plugin)
 {
+	GeditSortPluginPrivate *priv;
 	GeditDocument *doc;
 	GtkTextIter start, end;
 	gint start_line, end_line;
 	gint i;
-	gchar *last_row = NULL;
 	gint num_lines;
 	gchar **lines;
 	SortInfo *sort_info;
+	gchar *last_row = NULL;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	doc = dialog->doc;
+	priv = plugin->priv;
+
+	doc = gedit_window_get_active_document (priv->window);
 	g_return_if_fail (doc != NULL);
 
-	sort_info = g_new0 (SortInfo, 1);
-	sort_info->ignore_case = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->ignore_case_checkbutton));
-	sort_info->reverse_order = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->reverse_order_checkbutton));
-	sort_info->remove_duplicates = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->remove_dups_checkbutton));
-	sort_info->starting_column = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (dialog->col_num_spinbutton)) - 1;
+	sort_info = g_slice_new (SortInfo);
+	sort_info->ignore_case = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->ignore_case_checkbutton));
+	sort_info->reverse_order = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->reverse_order_checkbutton));
+	sort_info->remove_duplicates = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->remove_dups_checkbutton));
+	sort_info->starting_column = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (priv->col_num_spinbutton)) - 1;
 
-	start = dialog->start;
-	end = dialog->end;
+	start = priv->start;
+	end = priv->end;
 	start_line = gtk_text_iter_get_line (&start);
 	end_line = gtk_text_iter_get_line (&end);
 
@@ -380,9 +364,13 @@ sort_real (SortDialog *dialog)
 	 * Otherwise the last line is the current one but we try to
 	 * move the iter after the line terminator */
 	if (gtk_text_iter_get_line_offset (&end) == 0)
+	{
 		end_line = MAX (start_line, end_line - 1);
+	}
 	else
+	{
 		gtk_text_iter_forward_line (&end);
+	}
 
 	num_lines = end_line - start_line + 1;
 	lines = g_new0 (gchar *, num_lines + 1);
@@ -434,138 +422,118 @@ sort_real (SortDialog *dialog)
 	gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (doc));
 
 	g_strfreev (lines);
-	g_free (sort_info);
+	g_slice_free (SortInfo, sort_info);
 
 	gedit_debug_message (DEBUG_PLUGINS, "Done.");
 }
 
 static void
-free_window_data (WindowData *data)
-{
-	g_return_if_fail (data != NULL);
-
-	g_object_unref (data->ui_action_group);
-	g_slice_free (WindowData, data);
-}
-
-static void
-free_action_data (ActionData *data)
-{
-	g_return_if_fail (data != NULL);
-
-	g_slice_free (ActionData, data);
-}
-
-static void
-update_ui_real (GeditWindow  *window,
-		WindowData   *data)
+update_ui (GeditSortPlugin *plugin)
 {
 	GeditView *view;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	view = gedit_window_get_active_view (window);
+	view = gedit_window_get_active_view (plugin->priv->window);
 
-	gtk_action_group_set_sensitive (data->ui_action_group,
+	gtk_action_group_set_sensitive (plugin->priv->ui_action_group,
 					(view != NULL) &&
 					gtk_text_view_get_editable (GTK_TEXT_VIEW (view)));
 }
 
 static void
-impl_activate (GeditPlugin *plugin,
-	       GeditWindow *window)
+gedit_sort_plugin_activate (GeditWindowActivatable *activatable,
+			    GeditWindow            *window)
 {
+	GeditSortPluginPrivate *priv;
 	GtkUIManager *manager;
-	WindowData *data;
-	ActionData *action_data;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	data = g_slice_new (WindowData);
-	action_data = g_slice_new (ActionData);
-	action_data->window = window;
-	action_data->plugin = plugin;
+	priv = GEDIT_SORT_PLUGIN (activatable)->priv;
+	priv->window = window;
 
 	manager = gedit_window_get_ui_manager (window);
 
-	data->ui_action_group = gtk_action_group_new ("GeditSortPluginActions");
-	gtk_action_group_set_translation_domain (data->ui_action_group, 
+	priv->ui_action_group = gtk_action_group_new ("GeditSortPluginActions");
+	gtk_action_group_set_translation_domain (priv->ui_action_group,
 						 GETTEXT_PACKAGE);
-	gtk_action_group_add_actions_full (data->ui_action_group,
-					   action_entries,
-					   G_N_ELEMENTS (action_entries),
-					   action_data,
-					   (GDestroyNotify) free_action_data);
+	gtk_action_group_add_actions (priv->ui_action_group,
+				      action_entries,
+				      G_N_ELEMENTS (action_entries),
+				      activatable);
 
 	gtk_ui_manager_insert_action_group (manager,
-					    data->ui_action_group,
+					    priv->ui_action_group,
 					    -1);
 
-	data->ui_id = gtk_ui_manager_new_merge_id (manager);
+	priv->ui_id = gtk_ui_manager_new_merge_id (manager);
 
-	g_object_set_data_full (G_OBJECT (window), 
-				WINDOW_DATA_KEY, 
-				data,
-				(GDestroyNotify) free_window_data);
-
-	gtk_ui_manager_add_ui (manager, 
-			       data->ui_id, 
+	gtk_ui_manager_add_ui (manager,
+			       priv->ui_id,
 			       MENU_PATH,
-			       "Sort", 
 			       "Sort",
-			       GTK_UI_MANAGER_MENUITEM, 
+			       "Sort",
+			       GTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 
-	update_ui_real (window,
-			data);
+	update_ui (GEDIT_SORT_PLUGIN (activatable));
 }
 
 static void
-impl_deactivate	(GeditPlugin *plugin,
-		 GeditWindow *window)
+gedit_sort_plugin_deactivate (GeditWindowActivatable *activatable,
+			      GeditWindow            *window)
 {
+	GeditSortPluginPrivate *priv;
 	GtkUIManager *manager;
-	WindowData *data;
 
 	gedit_debug (DEBUG_PLUGINS);
+
+	priv = GEDIT_SORT_PLUGIN (activatable)->priv;
 
 	manager = gedit_window_get_ui_manager (window);
 
-	data = (WindowData *) g_object_get_data (G_OBJECT (window),
-						 WINDOW_DATA_KEY);
-	g_return_if_fail (data != NULL);
-
 	gtk_ui_manager_remove_ui (manager,
-				  data->ui_id);
+				  priv->ui_id);
 	gtk_ui_manager_remove_action_group (manager,
-					    data->ui_action_group);
-
-	g_object_set_data (G_OBJECT (window),
-			   WINDOW_DATA_KEY,
-			   NULL);
+					    priv->ui_action_group);
 }
 
 static void
-impl_update_ui (GeditPlugin *plugin,
-		GeditWindow *window)
+gedit_sort_plugin_update_state (GeditWindowActivatable *activatable,
+				GeditWindow            *window)
 {
-	WindowData *data;
-
 	gedit_debug (DEBUG_PLUGINS);
 
-	data = (WindowData *) g_object_get_data (G_OBJECT (window),
-						 WINDOW_DATA_KEY);
-	g_return_if_fail (data != NULL);
-
-	update_ui_real (window,
-			data);
+	update_ui (GEDIT_SORT_PLUGIN (activatable));
 }
 
 static void
 gedit_sort_plugin_init (GeditSortPlugin *plugin)
 {
 	gedit_debug_message (DEBUG_PLUGINS, "GeditSortPlugin initializing");
+
+	plugin->priv = G_TYPE_INSTANCE_GET_PRIVATE (plugin,
+						    GEDIT_TYPE_SORT_PLUGIN,
+						    GeditSortPluginPrivate);
 }
+
+static void
+gedit_sort_plugin_dispose (GObject *object)
+{
+	GeditSortPlugin *plugin = GEDIT_SORT_PLUGIN (object);
+
+	gedit_debug_message (DEBUG_PLUGINS, "GeditSortPlugin disposing");
+
+	if (plugin->priv->ui_action_group)
+	{
+		g_object_unref (plugin->priv->ui_action_group);
+		plugin->priv->ui_action_group = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_sort_plugin_parent_class)->dispose (object);
+}
+
 
 static void
 gedit_sort_plugin_finalize (GObject *object)
@@ -579,12 +547,34 @@ static void
 gedit_sort_plugin_class_init (GeditSortPluginClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	GeditPluginClass *plugin_class = GEDIT_PLUGIN_CLASS (klass);
 
+	object_class->dispose = gedit_sort_plugin_dispose;
 	object_class->finalize = gedit_sort_plugin_finalize;
 
-	plugin_class->activate = impl_activate;
-	plugin_class->deactivate = impl_deactivate;
-	plugin_class->update_ui = impl_update_ui;
+	g_type_class_add_private (klass, sizeof (GeditSortPluginPrivate));
 }
+
+static void
+gedit_sort_plugin_class_finalize (GeditSortPluginClass *klass)
+{
+}
+
+static void
+gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface)
+{
+	iface->activate = gedit_sort_plugin_activate;
+	iface->deactivate = gedit_sort_plugin_deactivate;
+	iface->update_state = gedit_sort_plugin_update_state;
+}
+
+G_MODULE_EXPORT void
+peas_register_types (PeasObjectModule *module)
+{
+	gedit_sort_plugin_register_type (G_TYPE_MODULE (module));
+
+	peas_object_module_register_extension_type (module,
+						    GEDIT_TYPE_WINDOW_ACTIVATABLE,
+						    GEDIT_TYPE_SORT_PLUGIN);
+}
+
 /* ex:ts=8:noet: */

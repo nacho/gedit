@@ -17,7 +17,7 @@ libsort_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libsort_la_LIBADD  = $(GEDIT_LIBS)
 
 uidir = $(GEDIT_PLUGINS_DATA_DIR)/sort
-ui_DATA = sort.ui
+ui_DATA = gedit-sort-plugin.ui
 
 plugin_in_files = sort.gedit-plugin.desktop.in
 
