@@ -1,12 +1,12 @@
 DIST_SUBDIRS = \
+	checkupdate	\
 	modelines	\
 	changecase	\
-	docinfo
+	docinfo		\
+	sort
 
-#	checkupdate	\
 #	filebrowser 	\
 #	modelines	\
-#	sort 		\
 #	spell 		\
 #	taglist 	\
 #	time
@@ -18,11 +18,11 @@ DIST_SUBDIRS = \
 SUBDIRS = \
 	modelines	\
 	changecase	\
-	docinfo
+	docinfo		\
+	sort
 
 #	filebrowser
 #	modelines
-#	sort
 #	taglist
 #	time
 #	pythonconsole
