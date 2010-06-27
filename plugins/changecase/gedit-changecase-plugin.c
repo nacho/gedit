@@ -25,7 +25,7 @@
 
 #include "gedit-changecase-plugin.h"
 
-#include <glib/gi18n-lib.h>
+#include <glib/gi18n.h>
 #include <gmodule.h>
 
 #include <gedit/gedit-window.h>
@@ -273,6 +273,22 @@ gedit_changecase_plugin_init (GeditChangecasePlugin *plugin)
 }
 
 static void
+gedit_changecase_plugin_dispose (GObject *object)
+{
+	GeditChangecasePlugin *plugin = GEDIT_CHANGECASE_PLUGIN (object);
+
+	gedit_debug_message (DEBUG_PLUGINS, "GeditChangecasePlugin disponsing");
+
+	if (plugin->priv->action_group != NULL)
+	{
+		g_object_unref (plugin->priv->action_group);
+		plugin->priv->action_group = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_changecase_plugin_parent_class)->dispose (object);
+}
+
+static void
 gedit_changecase_plugin_finalize (GObject *object)
 {
 	G_OBJECT_CLASS (gedit_changecase_plugin_parent_class)->finalize (object);
@@ -374,6 +390,7 @@ gedit_changecase_plugin_class_init (GeditChangecasePluginClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+	object_class->dispose = gedit_changecase_plugin_dispose;
 	object_class->finalize = gedit_changecase_plugin_finalize;
 
 	g_type_class_add_private (klass, sizeof (GeditChangecasePluginPrivate));
