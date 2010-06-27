@@ -27,7 +27,7 @@
 
 #include <string.h> /* For strlen (...) */
 
-#include <glib/gi18n-lib.h>
+#include <glib/gi18n.h>
 #include <pango/pango-break.h>
 #include <gmodule.h>
 
@@ -459,6 +459,23 @@ gedit_docinfo_plugin_init (GeditDocinfoPlugin *plugin)
 }
 
 static void
+gedit_docinfo_plugin_dispose (GObject *object)
+{
+	GeditDocinfoPlugin *plugin = GEDIT_DOCINFO_PLUGIN (object);
+
+	gedit_debug_message (DEBUG_PLUGINS, "GeditDocinfoPlugin dispose");
+
+	if (plugin->priv->action_group != NULL)
+	{
+		g_object_unref (plugin->priv->action_group);
+		plugin->priv->action_group = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_docinfo_plugin_parent_class)->dispose (object);
+}
+
+
+static void
 gedit_docinfo_plugin_finalize (GObject *object)
 {
 	gedit_debug_message (DEBUG_PLUGINS, "GeditDocinfoPlugin finalizing");
@@ -467,8 +484,7 @@ gedit_docinfo_plugin_finalize (GObject *object)
 }
 
 static void
-update_ui (GeditDocinfoPlugin *plugin,
-	   GeditWindow        *window)
+update_ui (GeditDocinfoPlugin *plugin)
 {
 	GeditDocinfoPluginPrivate *priv;
 	GeditView *view;
@@ -477,7 +493,7 @@ update_ui (GeditDocinfoPlugin *plugin,
 
 	priv = plugin->priv;
 
-	view = gedit_window_get_active_view (window);
+	view = gedit_window_get_active_view (priv->window);
 
 	gtk_action_group_set_sensitive (priv->action_group,
 					(view != NULL));
@@ -525,7 +541,7 @@ gedit_docinfo_plugin_activate (GeditWindowActivatable *activatable,
 			       GTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 
-	update_ui (GEDIT_DOCINFO_PLUGIN (activatable), window);
+	update_ui (GEDIT_DOCINFO_PLUGIN (activatable));
 }
 
 static void
@@ -551,7 +567,7 @@ gedit_docinfo_plugin_update_state (GeditWindowActivatable *activatable,
 {
 	gedit_debug (DEBUG_PLUGINS);
 
-	update_ui (GEDIT_DOCINFO_PLUGIN (activatable), window);
+	update_ui (GEDIT_DOCINFO_PLUGIN (activatable));
 }
 
 static void
@@ -559,6 +575,7 @@ gedit_docinfo_plugin_class_init (GeditDocinfoPluginClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+	object_class->dispose = gedit_docinfo_plugin_dispose;
 	object_class->finalize = gedit_docinfo_plugin_finalize;
 
 	g_type_class_add_private (klass, sizeof (GeditDocinfoPluginPrivate));
