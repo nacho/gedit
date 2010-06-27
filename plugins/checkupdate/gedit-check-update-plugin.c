@@ -22,7 +22,9 @@
 
 #include "gedit-check-update-plugin.h"
 
-#include <glib/gi18n-lib.h>
+#include <glib/gi18n.h>
+#include <gedit/gedit-window.h>
+#include <gedit/gedit-window-activatable.h>
 #include <gedit/gedit-debug.h>
 #include <gedit/gedit-utils.h>
 #include <libsoup/soup.h>
@@ -31,8 +33,6 @@
 
 #define CHECKUPDATE_BASE_SETTINGS	"org.gnome.gedit.plugins.checkupdate"
 #define CHECKUPDATE_KEY_IGNORE_VERSION	"ignore-version"
-
-#define WINDOW_DATA_KEY "GeditCheckUpdatePluginWindowData"
 
 #define VERSION_PLACE "<a href=\"[0-9]\\.[0-9]+/\">"
 
@@ -53,37 +53,27 @@
 				GEDIT_TYPE_CHECK_UPDATE_PLUGIN,		\
 				GeditCheckUpdatePluginPrivate))
 
-GEDIT_PLUGIN_REGISTER_TYPE (GeditCheckUpdatePlugin, gedit_check_update_plugin)
+static void gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface);
+
+G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditCheckUpdatePlugin,
+				gedit_check_update_plugin,
+				PEAS_TYPE_EXTENSION_BASE,
+				0,
+				G_IMPLEMENT_INTERFACE_DYNAMIC (GEDIT_TYPE_WINDOW_ACTIVATABLE,
+							       gedit_window_activatable_iface_init))
+
 
 struct _GeditCheckUpdatePluginPrivate
 {
 	SoupSession *session;
 
 	GSettings *settings;
-};
 
-typedef struct
-{
-	GeditCheckUpdatePlugin *plugin;
+	GeditWindow *window;
 
 	gchar *url;
 	gchar *version;
-} WindowData;
-
-static void
-free_window_data (gpointer data)
-{
-	WindowData *window_data;
-
-	if (data == NULL)
-		return;
-
-	window_data = (WindowData *)data;
-
-	g_free (window_data->url);
-	g_free (window_data->version);
-	g_slice_free (WindowData, data);
-}
+};
 
 static void
 gedit_check_update_plugin_init (GeditCheckUpdatePlugin *plugin)
@@ -124,8 +114,13 @@ gedit_check_update_plugin_dispose (GObject *object)
 static void
 gedit_check_update_plugin_finalize (GObject *object)
 {
+	GeditCheckUpdatePlugin *plugin = GEDIT_CHECK_UPDATE_PLUGIN (object);
+
 	gedit_debug_message (DEBUG_PLUGINS,
 			     "GeditCheckUpdatePlugin finalizing");
+
+	g_free (plugin->priv->url);
+	g_free (plugin->priv->version);
 
 	G_OBJECT_CLASS (gedit_check_update_plugin_parent_class)->finalize (object);
 }
@@ -196,23 +191,19 @@ set_message_area_text_and_icon (GtkWidget        *message_area,
 }
 
 static void
-on_response_cb (GtkWidget   *infobar,
-		gint         response_id,
-		GeditWindow *window)
+on_response_cb (GtkWidget              *infobar,
+		gint                    response_id,
+		GeditCheckUpdatePlugin *plugin)
 {
 	if (response_id == GTK_RESPONSE_YES)
 	{
 		GError *error = NULL;
-		WindowData *data;
-
-		data = g_object_get_data (G_OBJECT (window),
-					  WINDOW_DATA_KEY);
 
 #ifdef OS_OSX
-		gedit_osx_show_url (data->url);
+		gedit_osx_show_url (plugin->priv->url);
 #else
-		gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (window)),
-			      data->url,
+		gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (plugin->priv->window)),
+			      plugin->priv->url,
 			      GDK_CURRENT_TIME,
 			      &error);
 #endif
@@ -220,7 +211,7 @@ on_response_cb (GtkWidget   *infobar,
 		{
 			GtkWidget *dialog;
 
-			dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+			dialog = gtk_message_dialog_new (GTK_WINDOW (plugin->priv->window),
 							 GTK_DIALOG_DESTROY_WITH_PARENT,
 							 GTK_MESSAGE_ERROR,
 							 GTK_BUTTONS_CLOSE,
@@ -243,18 +234,10 @@ on_response_cb (GtkWidget   *infobar,
 	}
 	else if (response_id == GTK_RESPONSE_NO)
 	{
-		WindowData *data;
-
-		data = g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
-
-		g_settings_set_string (data->plugin->priv->settings,
+		g_settings_set_string (plugin->priv->settings,
 				       CHECKUPDATE_KEY_IGNORE_VERSION,
-				       data->version);
+				       plugin->priv->version);
 	}
-
-	g_object_set_data (G_OBJECT (window),
-			   WINDOW_DATA_KEY,
-			   NULL);
 
 	gtk_widget_destroy (infobar);
 }
@@ -435,54 +418,43 @@ get_ignore_version (GeditCheckUpdatePlugin *plugin)
 }
 
 static void
-parse_page_file (SoupSession *session,
-		 SoupMessage *msg,
-		 GeditWindow *window)
+parse_page_file (SoupSession            *session,
+		 SoupMessage            *msg,
+		 GeditCheckUpdatePlugin *plugin)
 {
 	if (msg->status_code == SOUP_STATUS_OK)
 	{
 		gchar *file;
 		gchar *file_version;
 		gchar *ignore_version;
-		WindowData *data;
-
-		data = g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
 
 		file = get_file (msg->response_body->data, FILE_REGEX);
 		file_version = parse_file_version (file);
-		ignore_version = get_ignore_version (data->plugin);
+		ignore_version = get_ignore_version (plugin);
 
 		if (newer_version (file_version, VERSION, TRUE) &&
 		    (ignore_version == NULL || *ignore_version == '\0' ||
 		     newer_version (file_version, ignore_version, TRUE)))
 		{
 			GtkWidget *infobar;
-			WindowData *data;
 			gchar *file_url;
 
-			data = g_object_get_data (G_OBJECT (window),
-						  WINDOW_DATA_KEY);
+			file_url = g_strconcat (plugin->priv->url, file, NULL);
 
-			file_url = g_strconcat (data->url, file, NULL);
+			g_free (plugin->priv->url);
+			plugin->priv->url = file_url;
+			plugin->priv->version = g_strdup (file_version);
 
-			g_free (data->url);
-			data->url = file_url;
-			data->version = g_strdup (file_version);
-
-			infobar = create_infobar (window, file_version);
-			pack_infobar (GTK_WIDGET (window), infobar);
+			infobar = create_infobar (plugin->priv->window,
+						  file_version);
+			pack_infobar (GTK_WIDGET (plugin->priv->window),
+						  infobar);
 			gtk_widget_show (infobar);
 		}
 
 		g_free (ignore_version);
 		g_free (file_version);
 		g_free (file);
-	}
-	else
-	{
-		g_object_set_data (G_OBJECT (window),
-				   WINDOW_DATA_KEY,
-				   NULL);
 	}
 }
 
@@ -572,90 +544,88 @@ get_file_page_version (const gchar *text,
 }
 
 static void
-parse_page_version (SoupSession *session,
-		    SoupMessage *msg,
-		    GeditWindow *window)
+parse_page_version (SoupSession            *session,
+		    SoupMessage            *msg,
+		    GeditCheckUpdatePlugin *plugin)
 {
 	if (msg->status_code == SOUP_STATUS_OK)
 	{
 		gchar *version;
 		SoupMessage *msg2;
-		WindowData *data;
-
-		data = g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
 
 		version = get_file_page_version (msg->response_body->data,
 						 VERSION_PLACE);
 
-		data->url = g_strconcat (GEDIT_URL, version, "/", NULL);
+		plugin->priv->url = g_strconcat (GEDIT_URL, version, "/", NULL);
 		g_free (version);
-		msg2 = soup_message_new ("GET", data->url);
+		msg2 = soup_message_new ("GET", plugin->priv->url);
 
 		soup_session_queue_message (session, msg2,
 					    (SoupSessionCallback)parse_page_file,
-					    window);
-	}
-	else
-	{
-		g_object_set_data (G_OBJECT (window),
-				   WINDOW_DATA_KEY,
-				   NULL);
+					    plugin);
 	}
 }
 
 static void
-impl_activate (GeditPlugin *plugin,
-	       GeditWindow *window)
+gedit_check_update_plugin_activate (GeditWindowActivatable *activatable,
+				    GeditWindow            *window)
 {
+	GeditCheckUpdatePluginPrivate *priv;
 	SoupMessage *msg;
-	WindowData *data;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	data = g_slice_new (WindowData);
-	data->plugin = GEDIT_CHECK_UPDATE_PLUGIN (plugin);
-	data->url = NULL;
-	data->version = NULL;
-
-	g_object_set_data_full (G_OBJECT (window),
-				WINDOW_DATA_KEY,
-				data,
-				free_window_data);
+	priv = GEDIT_CHECK_UPDATE_PLUGIN (activatable)->priv;
+	priv->window = window;
 
 	msg = soup_message_new ("GET", GEDIT_URL);
 
-	soup_session_queue_message (GEDIT_CHECK_UPDATE_PLUGIN (plugin)->priv->session, msg,
+	soup_session_queue_message (priv->session, msg,
 				    (SoupSessionCallback)parse_page_version,
-				    window);
+				    activatable);
 }
 
 static void
-impl_deactivate (GeditPlugin *plugin,
-		 GeditWindow *window)
+gedit_check_update_plugin_deactivate (GeditWindowActivatable *activatable,
+				      GeditWindow            *window)
 {
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	soup_session_abort (GEDIT_CHECK_UPDATE_PLUGIN (plugin)->priv->session);
-
-	g_object_set_data (G_OBJECT (window),
-			   WINDOW_DATA_KEY,
-			   NULL);
+	soup_session_abort (GEDIT_CHECK_UPDATE_PLUGIN (activatable)->priv->session);
 }
 
 static void
 gedit_check_update_plugin_class_init (GeditCheckUpdatePluginClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	GeditPluginClass *plugin_class = GEDIT_PLUGIN_CLASS (klass);
 
 	g_type_class_add_private (object_class, sizeof (GeditCheckUpdatePluginPrivate));
 
 	object_class->finalize = gedit_check_update_plugin_finalize;
 	object_class->dispose = gedit_check_update_plugin_dispose;
-
-	plugin_class->activate = impl_activate;
-	plugin_class->deactivate = impl_deactivate;
 }
 
-/* ex:ts=8:noet: */
+static void
+gedit_check_update_plugin_class_finalize (GeditCheckUpdatePluginClass *klass)
+{
+}
+
+static void
+gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface)
+{
+	iface->activate = gedit_check_update_plugin_activate;
+	iface->deactivate = gedit_check_update_plugin_deactivate;
+}
+
+G_MODULE_EXPORT void
+peas_register_types (PeasObjectModule *module)
+{
+	gedit_check_update_plugin_register_type (G_TYPE_MODULE (module));
+
+	peas_object_module_register_extension_type (module,
+						    GEDIT_TYPE_WINDOW_ACTIVATABLE,
+						    GEDIT_TYPE_CHECK_UPDATE_PLUGIN);
+}
+
+/* ex:set ts=8 noet: */

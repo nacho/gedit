@@ -37,8 +37,8 @@ SUBDIRS = \
 #SUBDIRS      += spell
 #endif
 
-#if ENABLE_UPDATER
-#SUBDIRS      += checkupdate
-#endif
+if ENABLE_UPDATER
+SUBDIRS      += checkupdate
+endif
 
 -include $(top_srcdir)/git.mk
