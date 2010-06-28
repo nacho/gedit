@@ -27,6 +27,11 @@
 #include <string.h>
 #include <sys/stat.h>
 
+/* linux/bsd has it. others such as Solaris, do not */
+#ifndef ACCESSPERMS
+#define ACCESSPERMS (S_IRWXU|S_IRWXG|S_IRWXO) 
+#endif
+
 #define DEFAULT_LOCAL_URI "/tmp/gedit-document-saver-test.txt"
 #define DEFAULT_REMOTE_URI "sftp://localhost/tmp/gedit-document-saver-test.txt"
 #define DEFAULT_CONTENT "hello world!"
