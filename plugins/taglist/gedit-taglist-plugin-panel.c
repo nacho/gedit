@@ -39,7 +39,6 @@
 
 #include <gedit/gedit-utils.h>
 #include <gedit/gedit-debug.h>
-#include <gedit/gedit-plugin.h>
 
 #include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
@@ -68,7 +67,7 @@ struct _GeditTaglistPluginPanelPrivate
 	gchar *data_dir;
 };
 
-GEDIT_PLUGIN_DEFINE_TYPE (GeditTaglistPluginPanel, gedit_taglist_plugin_panel, GTK_TYPE_VBOX)
+G_DEFINE_DYNAMIC_TYPE (GeditTaglistPluginPanel, gedit_taglist_plugin_panel, GTK_TYPE_VBOX)
 
 enum
 {
@@ -150,13 +149,18 @@ gedit_taglist_plugin_panel_class_init (GeditTaglistPluginPanelClass *klass)
 	g_object_class_install_property (object_class,
 					 PROP_WINDOW,
 					 g_param_spec_object ("window",
-							 "Window",
-							 "The GeditWindow this GeditTaglistPluginPanel is associated with",
-							 GEDIT_TYPE_WINDOW,
-							 G_PARAM_READWRITE |
-							 G_PARAM_CONSTRUCT_ONLY));
+							      "Window",
+							      "The GeditWindow this GeditTaglistPluginPanel is associated with",
+							      GEDIT_TYPE_WINDOW,
+							      G_PARAM_READWRITE |
+							      G_PARAM_CONSTRUCT_ONLY));
 
-	g_type_class_add_private (object_class, sizeof(GeditTaglistPluginPanelPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditTaglistPluginPanelPrivate));
+}
+
+static void
+gedit_taglist_plugin_panel_class_finalize (GeditTaglistPluginPanelClass *klass)
+{
 }
 
 static void
@@ -774,4 +778,11 @@ gedit_taglist_plugin_panel_new (GeditWindow *window,
 	
 	return GTK_WIDGET (panel);
 }
+
+void
+_gedit_taglist_plugin_panel_register_type (GTypeModule *type_module)
+{
+	gedit_taglist_plugin_panel_register_type (type_module);
+}
+
 /* ex:ts=8:noet: */

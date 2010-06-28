@@ -23,9 +23,7 @@
 /*
  * Modified by the gedit Team, 2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
- * See the ChangeLog files for a list of changes. 
- *
- * $Id$
+ * See the ChangeLog files for a list of changes.
  */
 
 #ifndef __GEDIT_TAGLIST_PLUGIN_PANEL_H__
@@ -37,9 +35,6 @@
 
 G_BEGIN_DECLS
 
-/*
- * Type checking and casting macros
- */
 #define GEDIT_TYPE_TAGLIST_PLUGIN_PANEL              (gedit_taglist_plugin_panel_get_type())
 #define GEDIT_TAGLIST_PLUGIN_PANEL(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_TAGLIST_PLUGIN_PANEL, GeditTaglistPluginPanel))
 #define GEDIT_TAGLIST_PLUGIN_PANEL_CONST(obj)        (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_TAGLIST_PLUGIN_PANEL, GeditTaglistPluginPanel const))
@@ -48,13 +43,9 @@ G_BEGIN_DECLS
 #define GEDIT_IS_TAGLIST_PLUGIN_PANEL_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_TAGLIST_PLUGIN_PANEL))
 #define GEDIT_TAGLIST_PLUGIN_PANEL_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GEDIT_TYPE_TAGLIST_PLUGIN_PANEL, GeditTaglistPluginPanelClass))
 
-/* Private structure type */
-typedef struct _GeditTaglistPluginPanelPrivate GeditTaglistPluginPanelPrivate;
-
-/*
- * Main object structure
- */
-typedef struct _GeditTaglistPluginPanel GeditTaglistPluginPanel;
+typedef struct _GeditTaglistPluginPanel		GeditTaglistPluginPanel;
+typedef struct _GeditTaglistPluginPanelPrivate	GeditTaglistPluginPanelPrivate;
+typedef struct _GeditTaglistPluginPanelClass	GeditTaglistPluginPanelClass;
 
 struct _GeditTaglistPluginPanel 
 {
@@ -64,25 +55,17 @@ struct _GeditTaglistPluginPanel
 	GeditTaglistPluginPanelPrivate *priv;
 };
 
-/*
- * Class definition
- */
-typedef struct _GeditTaglistPluginPanelClass GeditTaglistPluginPanelClass;
-
 struct _GeditTaglistPluginPanelClass 
 {
 	GtkVBoxClass parent_class;
 };
 
-/*
- * Public methods
- */
-GType		 gedit_taglist_plugin_panel_register_type	(GTypeModule *module);
-							
 GType 		 gedit_taglist_plugin_panel_get_type		(void) G_GNUC_CONST;
 
 GtkWidget	*gedit_taglist_plugin_panel_new 		(GeditWindow *window,
 								 const gchar *data_dir);
+
+void		_gedit_taglist_plugin_panel_register_type	(GTypeModule *type_module);
 
 G_END_DECLS
 

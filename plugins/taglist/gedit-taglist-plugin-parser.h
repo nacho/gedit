@@ -23,9 +23,7 @@
 /*
  * Modified by the gedit Team, 2002-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
- * See the ChangeLog files for a list of changes. 
- *
- * $Id$
+ * See the ChangeLog files for a list of changes.
  */
 
 #ifndef __GEDIT_TAGLIST_PLUGIN_PARSER_H__
