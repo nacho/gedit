@@ -132,7 +132,7 @@ gedit_plugins_engine_class_init (GeditPluginsEngineClass *klass)
 static void
 require_private_typelib (void)
 {
-	gchar *lib_dir;
+	const gchar *lib_dir;
 	gchar *filename;
 	GMappedFile *mfile;
 	GTypelib *typelib;
@@ -147,7 +147,6 @@ require_private_typelib (void)
 	mfile = g_mapped_file_new (filename, FALSE, NULL);
 
 	g_free (filename);
-	g_free (lib_dir);
 
 	if (mfile == NULL)
 	{
@@ -173,8 +172,8 @@ require_private_typelib (void)
 GeditPluginsEngine *
 gedit_plugins_engine_get_default (void)
 {
-	gchar *modules_dir;
-	gchar **search_paths;
+	const gchar *modules_dir;
+	const gchar **search_paths;
 
 	if (default_engine != NULL)
 	{
@@ -189,7 +188,7 @@ gedit_plugins_engine_get_default (void)
 	require_private_typelib ();
 
 	modules_dir = gedit_dirs_get_binding_modules_dir ();
-	search_paths = g_new (gchar *, 5);
+	search_paths = g_new (const gchar *, 5);
 	/* Add the user plugins dir in ~ */
 	search_paths[0] = gedit_dirs_get_user_plugins_dir ();
 	search_paths[1] = gedit_dirs_get_user_plugins_dir ();
@@ -205,8 +204,7 @@ gedit_plugins_engine_get_default (void)
 							     "search-paths", search_paths,
 							     NULL));
 
-	g_strfreev (search_paths);
-	g_free (modules_dir);
+	g_free (search_paths);
 
 	g_object_add_weak_pointer (G_OBJECT (default_engine),
 				   (gpointer) &default_engine);

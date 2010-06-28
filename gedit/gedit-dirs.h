@@ -28,25 +28,31 @@
 
 G_BEGIN_DECLS
 
-gchar		*gedit_dirs_get_user_config_dir		(void);
+/* This function must be called before starting gedit */
+void		 gedit_dirs_init			(void);
+/* This function must be called before exiting gedit */
+void		 gedit_dirs_shutdown 			(void);
 
-gchar		*gedit_dirs_get_user_cache_dir		(void);
 
-gchar		*gedit_dirs_get_user_plugins_dir	(void);
+const gchar	*gedit_dirs_get_user_config_dir		(void);
 
-gchar		*gedit_dirs_get_user_accels_file	(void);
+const gchar	*gedit_dirs_get_user_cache_dir		(void);
 
-gchar		*gedit_dirs_get_gedit_data_dir		(void);
+const gchar	*gedit_dirs_get_user_plugins_dir	(void);
 
-gchar		*gedit_dirs_get_gedit_locale_dir	(void);
+const gchar	*gedit_dirs_get_user_accels_file	(void);
 
-gchar		*gedit_dirs_get_gedit_lib_dir		(void);
+const gchar	*gedit_dirs_get_gedit_data_dir		(void);
 
-gchar		*gedit_dirs_get_gedit_plugins_dir	(void);
+const gchar	*gedit_dirs_get_gedit_locale_dir	(void);
 
-gchar		*gedit_dirs_get_gedit_plugins_data_dir	(void);
+const gchar	*gedit_dirs_get_gedit_lib_dir		(void);
 
-gchar		*gedit_dirs_get_binding_modules_dir	(void);
+const gchar	*gedit_dirs_get_gedit_plugins_dir	(void);
+
+const gchar	*gedit_dirs_get_gedit_plugins_data_dir	(void);
+
+const gchar	*gedit_dirs_get_binding_modules_dir	(void);
 
 gchar		*gedit_dirs_get_ui_file			(const gchar *file);
 

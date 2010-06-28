@@ -30,289 +30,213 @@
 #include <ige-mac-bundle.h>
 #endif
 
-gchar *
-gedit_dirs_get_user_config_dir (void)
+static gchar *user_config_dir        = NULL;
+static gchar *user_cache_dir         = NULL;
+static gchar *user_plugins_dir       = NULL;
+static gchar *user_accels_file       = NULL;
+static gchar *gedit_data_dir         = NULL;
+static gchar *gedit_locale_dir       = NULL;
+static gchar *gedit_lib_dir          = NULL;
+static gchar *gedit_plugins_dir      = NULL;
+static gchar *gedit_plugins_data_dir = NULL;
+
+void
+gedit_dirs_init ()
 {
-	gchar *config_dir = NULL;
+	const gchar *g_config_dir = NULL;
 
-#ifndef G_OS_WIN32
-	const gchar *envvar;
-	const gchar *home;
-
-	/* Support old libgnome env var */
-	envvar = g_getenv ("GNOME22_USER_DIR");
-	if (envvar != NULL)
-	{
-		config_dir = g_build_filename (envvar,
-					       "gedit",
-					       NULL);
-
-	}
-	else
-	{
-		home = g_get_home_dir ();
-
-		if (home != NULL)
-		{
-			config_dir = g_build_filename (home,
-						       ".gnome2",
-						       "gedit",
-						       NULL);
-		}
-	}
-#else
-	config_dir = g_build_filename (g_get_user_config_dir (),
-				       "gedit",
-				       NULL);
-#endif
-
-	return config_dir;
-}
-
-gchar *
-gedit_dirs_get_user_cache_dir (void)
-{
-	const gchar *cache_dir;
-
-	cache_dir = g_get_user_cache_dir ();
-
-	return g_build_filename (cache_dir,
-				 "gedit",
-				 NULL);
-}
-
-gchar *
-gedit_dirs_get_user_plugins_dir (void)
-{
-	gchar *config_dir;
-	gchar *plugin_dir;
-
-	config_dir = gedit_dirs_get_user_config_dir ();
-
-	plugin_dir = g_build_filename (config_dir,
-				       "plugins",
-				       NULL);
-	g_free (config_dir);
-	
-	return plugin_dir;
-}
-
-gchar *
-gedit_dirs_get_user_accels_file (void)
-{
-	gchar *accels = NULL;
-
-#ifndef G_OS_WIN32
-	const gchar *envvar;
-	const gchar *home;
-
-	/* on linux accels are stored in .gnome2/accels
-	 * for historic reasons (backward compat with the
-	 * old libgnome that took care of saving them */
-
-	/* Support old libgnome env var */
-	envvar = g_getenv ("GNOME22_USER_DIR");
-	if (envvar != NULL)
-	{
-		accels = g_build_filename (envvar,
-					   "accels",
-					   "gedit",
-					   NULL);
-	}
-	else
-	{
-		home = g_get_home_dir ();
-
-		if (home != NULL)
-		{
-			accels = g_build_filename (home,
-						   ".gnome2",
-						   "accels",
-						   "gedit",
-						   NULL);
-		}
-	}
-#else
-	{
-		gchar *config_dir = NULL;
-
-		config_dir = gedit_dirs_get_user_config_dir ();
-		accels = g_build_filename (config_dir,
-					   "accels",
-					   "gedit",
-					   NULL);
-
-		g_free (config_dir);
-	}
-#endif
-
-	return accels;
-}
-
-gchar *
-gedit_dirs_get_gedit_data_dir (void)
-{
-	gchar *data_dir;
+	g_config_dir = g_get_user_config_dir ();
 
 #ifdef G_OS_WIN32
 	gchar *win32_dir;
-	
+
 	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
 
-	data_dir = g_build_filename (win32_dir,
-				     "share",
-				     "gedit",
-				     NULL);
-	
+
+	user_config_dir = g_build_filename (g_config_dir,
+					    "gedit",
+					    NULL);
+	user_accels_file = g_build_filename (user_config_dir,
+					     "accels",
+					     "gedit",
+					     NULL);
+	gedit_data_dir = g_build_filename (win32_dir,
+					   "share",
+					   "gedit",
+					   NULL);
+	gedit_locale_dir = g_build_filename (win32_dir,
+					     "share",
+					     "locale",
+					     NULL);
+	gedit_lib_dir = g_build_filename (win32_dir,
+					  "lib",
+					  "gedit",
+					  NULL);
+
 	g_free (win32_dir);
-#elif defined (OS_OSX)
+#else /* !G_OS_WIN32 */
+#ifdef OS_OSX
 	IgeMacBundle *bundle = ige_mac_bundle_get_default ();
 
 	if (ige_mac_bundle_get_is_app_bundle (bundle))
 	{
 		const gchar *bundle_data_dir = ige_mac_bundle_get_datadir (bundle);
+		const gchar *bundle_resource_dir = ige_mac_bundle_get_resourcesdir (bundle);
 
-		data_dir = g_build_filename (bundle_data_dir,
-					     "gedit",
-					     NULL);
+		gedit_data_dir = g_build_filename (bundle_data_dir,
+						   "gedit",
+						   NULL);
+		gedit_locale_dir = g_strdup (ige_mac_bundle_get_localedir (bundle));
+		gedit_lib_dir = g_build_filename (bundle_resource_dir,
+						  "lib",
+						  "gedit",
+						  NULL);
+	}
+#endif /* !OS_OSX */
+	const gchar *envvar;
+	const gchar *home;
+
+	if (gedit_data_dir == NULL)
+	{
+		gedit_data_dir = g_build_filename (DATADIR,
+						   "gedit",
+						   NULL);
+		gedit_locale_dir = g_build_filename (DATADIR,
+						     "locale",
+						     NULL);
+		gedit_lib_dir = g_build_filename (LIBDIR,
+						  "gedit",
+						  NULL);
+	}
+
+	/* Support old libgnome env var */
+	envvar = g_getenv ("GNOME22_USER_DIR");
+	if (envvar != NULL)
+	{
+		user_config_dir = g_build_filename (envvar,
+						    "gedit",
+						    NULL);
+		user_accels_file = g_build_filename (envvar,
+						     "accels",
+						     "gedit",
+						     NULL);
+
 	}
 	else
 	{
-		data_dir = g_build_filename (DATADIR,
-					     "gedit",
-					     NULL);
-	}
-#else
-	data_dir = g_build_filename (DATADIR,
-	                             "gedit",
-	                             NULL);
-#endif
+		home = g_get_home_dir ();
 
-	return data_dir;
+		if (home != NULL)
+		{
+			user_config_dir = g_build_filename (home,
+							    ".gnome2",
+							    "gedit",
+							    NULL);
+
+			/* on linux accels are stored in .gnome2/accels
+			 * for historic reasons (backward compat with the
+			 * old libgnome that took care of saving them */
+			user_accels_file = g_build_filename (home,
+							     ".gnome2",
+							     "accels",
+							     "gedit",
+							     NULL);
+		}
+	}
+#endif /* !G_OS_WIN32 */
+
+	user_cache_dir = g_build_filename (g_config_dir,
+					   "gedit",
+					   NULL);
+	user_plugins_dir = g_build_filename (user_config_dir,
+					     "plugins",
+					     NULL);
+	gedit_plugins_dir = g_build_filename (gedit_lib_dir,
+					      "plugins",
+					      NULL);
+	gedit_plugins_data_dir = g_build_filename (gedit_data_dir,
+						   "plugins",
+						   NULL);
 }
 
-gchar *
+void
+gedit_dirs_shutdown ()
+{
+	g_free (user_config_dir);
+	g_free (user_cache_dir);
+	g_free (user_plugins_dir);
+	g_free (user_accels_file);
+	g_free (gedit_data_dir);
+	g_free (gedit_locale_dir);
+	g_free (gedit_lib_dir);
+	g_free (gedit_plugins_dir);
+	g_free (gedit_plugins_data_dir);
+}
+
+const gchar *
+gedit_dirs_get_user_config_dir (void)
+{
+	return user_config_dir;
+}
+
+const gchar *
+gedit_dirs_get_user_cache_dir (void)
+{
+	return user_cache_dir;
+}
+
+const gchar *
+gedit_dirs_get_user_plugins_dir (void)
+{
+	return user_plugins_dir;
+}
+
+const gchar *
+gedit_dirs_get_user_accels_file (void)
+{
+	return user_accels_file;
+}
+
+const gchar *
+gedit_dirs_get_gedit_data_dir (void)
+{
+	return gedit_data_dir;
+}
+
+const gchar *
 gedit_dirs_get_gedit_locale_dir (void)
 {
-	gchar *locale_dir;
-
-#ifdef G_OS_WIN32
-	gchar *win32_dir;
-	
-	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
-
-	locale_dir = g_build_filename (win32_dir,
-				       "share",
-				       "locale",
-				       NULL);
-	
-	g_free (win32_dir);
-#elif defined (OS_OSX)
-	IgeMacBundle *bundle = ige_mac_bundle_get_default ();
-
-	if (ige_mac_bundle_get_is_app_bundle (bundle))
-	{
-		locale_dir = g_strdup (ige_mac_bundle_get_localedir (bundle));
-	}
-	else
-	{
-		locale_dir = g_build_filename (DATADIR,
-		                               "locale",
-		                               NULL);
-	}
-#else
-	locale_dir = g_build_filename (DATADIR,
-				       "locale",
-				       NULL);
-#endif
-
-	return locale_dir;
+	return gedit_locale_dir;
 }
 
-gchar *
+const gchar *
 gedit_dirs_get_gedit_lib_dir (void)
 {
-	gchar *lib_dir;
-
-#ifdef G_OS_WIN32
-	gchar *win32_dir;
-	
-	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
-
-	lib_dir = g_build_filename (win32_dir,
-				    "lib",
-				    "gedit",
-				    NULL);
-	
-	g_free (win32_dir);
-#elif defined (OS_OSX)
-	IgeMacBundle *bundle = ige_mac_bundle_get_default ();
-
-	if (ige_mac_bundle_get_is_app_bundle (bundle))
-	{
- 		const gchar *path = ige_mac_bundle_get_resourcesdir (bundle);
-		lib_dir = g_build_filename (path,
-	                            	"lib",
-	                            	"gedit",
-	                            	NULL);
-	}
-	else
-	{
-		lib_dir = g_build_filename (LIBDIR,
-					    "gedit",
-					    NULL);
-	}
-#else
-	lib_dir = g_build_filename (LIBDIR,
-				    "gedit",
-				    NULL);
-#endif
-
-	return lib_dir;
+	return gedit_lib_dir;
 }
 
-gchar *
+const gchar *
 gedit_dirs_get_gedit_plugins_dir (void)
 {
-	gchar *lib_dir;
-	gchar *plugin_dir;
-	
-	lib_dir = gedit_dirs_get_gedit_lib_dir ();
-	
-	plugin_dir = g_build_filename (lib_dir,
-				       "plugins",
-				       NULL);
-	g_free (lib_dir);
-	
-	return plugin_dir;
+	return gedit_plugins_dir;
 }
 
-gchar *
+const gchar *
 gedit_dirs_get_gedit_plugins_data_dir (void)
 {
-	gchar *data_dir;
-	gchar *plugin_data_dir;
-
-	data_dir = gedit_dirs_get_gedit_data_dir ();
-
-	plugin_data_dir = g_build_filename (data_dir,
-					    "plugins",
-					    NULL);
-	g_free (data_dir);
-
-	return plugin_data_dir;
+	return gedit_plugins_data_dir;
 }
 
-gchar *
+const gchar *
 gedit_dirs_get_binding_modules_dir (void)
 {
-	return gedit_dirs_get_gedit_lib_dir ();
+	return gedit_lib_dir;
 }
 
 gchar *
 gedit_dirs_get_ui_file (const gchar *file)
 {
-	gchar *datadir;
+	const gchar *datadir;
 	gchar *ui_file;
 
 	g_return_val_if_fail (file != NULL, NULL);
@@ -322,7 +246,6 @@ gedit_dirs_get_ui_file (const gchar *file)
 				    "ui",
 				    file,
 				    NULL);
-	g_free (datadir);
 	
 	return ui_file;
 }

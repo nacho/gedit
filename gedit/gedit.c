@@ -163,14 +163,13 @@ gedit_main (gboolean service)
 	GeditPluginsEngine *engine;
 	GeditApp *app;
 	gboolean restored = FALSE;
-	gchar *dir;
+	const gchar *dir;
 	gchar *icon_dir;
 
 	gedit_debug_message (DEBUG_APP, "Set icon");
 
 	dir = gedit_dirs_get_gedit_data_dir ();
 	icon_dir = g_build_filename (dir, "icons", NULL);
-	g_free (dir);
 
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (), icon_dir);
 	g_free (icon_dir);
@@ -204,6 +203,8 @@ gedit_main (gboolean service)
 	g_object_unref (engine);
 	g_object_unref (app);
 
+	gedit_dirs_shutdown ();
+
 #ifndef ENABLE_GVFS_METADATA
 	gedit_metadata_manager_shutdown ();
 #endif
@@ -212,7 +213,7 @@ gedit_main (gboolean service)
 int
 main (int argc, char *argv[])
 {
-	gchar *dir;
+	const gchar *dir;
 	GeditCommandLine *command_line;
 	gboolean ret;
 	GeditDBus *dbus;
@@ -234,10 +235,11 @@ main (int argc, char *argv[])
 
 	dir = gedit_dirs_get_gedit_locale_dir ();
 	bindtextdomain (GETTEXT_PACKAGE, dir);
-	g_free (dir);
 
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
+
+	gedit_dirs_init ();
 
 	/* Parse command line arguments */
 	command_line = gedit_command_line_get_default ();

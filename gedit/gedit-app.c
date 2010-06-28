@@ -276,7 +276,7 @@ gedit_app_class_init (GeditAppClass *klass)
 static gboolean
 ensure_user_config_dir (void)
 {
-	gchar *config_dir;
+	const gchar *config_dir;
 	gboolean ret = TRUE;
 	gint res;
 
@@ -294,43 +294,39 @@ ensure_user_config_dir (void)
 		ret = FALSE;
 	}
 
-	g_free (config_dir);
-
 	return ret;
 }
 
 static void
 load_accels (void)
 {
-	gchar *filename;
+	const gchar *filename;
 
 	filename = gedit_dirs_get_user_accels_file ();
 	if (filename != NULL)
 	{
 		gedit_debug_message (DEBUG_APP, "Loading keybindings from %s\n", filename);
 		gtk_accel_map_load (filename);
-		g_free (filename);
 	}
 }
 
 static void
 save_accels (void)
 {
-	gchar *filename;
+	const gchar *filename;
 
 	filename = gedit_dirs_get_user_accels_file ();
 	if (filename != NULL)
 	{
 		gedit_debug_message (DEBUG_APP, "Saving keybindings in %s\n", filename);
 		gtk_accel_map_save (filename);
-		g_free (filename);
 	}
 }
 
 static gchar *
 get_page_setup_file (void)
 {
-	gchar *config_dir;
+	const gchar *config_dir;
 	gchar *setup = NULL;
 
 	config_dir = gedit_dirs_get_user_config_dir ();
@@ -340,7 +336,6 @@ get_page_setup_file (void)
 		setup = g_build_filename (config_dir,
 					  GEDIT_PAGE_SETUP_FILE,
 					  NULL);
-		g_free (config_dir);
 	}
 
 	return setup;
@@ -403,7 +398,7 @@ save_page_setup (GeditApp *app)
 static gchar *
 get_print_settings_file (void)
 {
-	gchar *config_dir;
+	const gchar *config_dir;
 	gchar *settings = NULL;
 
 	config_dir = gedit_dirs_get_user_config_dir ();
@@ -413,7 +408,6 @@ get_print_settings_file (void)
 		settings = g_build_filename (config_dir,
 					     GEDIT_PRINT_SETTINGS_FILE,
 					     NULL);
-		g_free (config_dir);
 	}
 
 	return settings;

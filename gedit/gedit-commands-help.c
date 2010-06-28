@@ -87,7 +87,7 @@ _gedit_cmd_help_about (GtkAction   *action,
 		   "GNOME Desktop");
 
 	GdkPixbuf *logo;
-	gchar *data_dir;
+	const gchar *data_dir;
 	gchar *logo_file;
 
 	gedit_debug (DEBUG_COMMANDS);
@@ -97,7 +97,6 @@ _gedit_cmd_help_about (GtkAction   *action,
 				      "logo",
 				      "gedit-logo.png",
 				      NULL);
-	g_free (data_dir);
 	logo = gdk_pixbuf_new_from_file (logo_file, NULL);
 	g_free (logo_file);
 

@@ -42,7 +42,7 @@ static GtkSourceStyleSchemeManager *style_scheme_manager = NULL;
 static gchar *
 get_gedit_styles_path (void)
 {
-	gchar *config_dir;
+	const gchar *config_dir;
 	gchar *dir = NULL;
 
 	config_dir = gedit_dirs_get_user_config_dir ();
@@ -52,7 +52,6 @@ get_gedit_styles_path (void)
 		dir = g_build_filename (config_dir,
 					"styles",
 					NULL);
-		g_free (config_dir);
 	}
 	
 	return dir;
