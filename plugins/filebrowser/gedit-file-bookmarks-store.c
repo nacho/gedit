@@ -23,7 +23,6 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <gedit/gedit-utils.h>
-#include <gedit/gedit-plugin.h>
 
 #include "gedit-file-bookmarks-store.h"
 #include "gedit-file-browser-utils.h"
@@ -56,7 +55,7 @@ static gboolean find_with_flags       (GtkTreeModel            *model,
                                        guint                    flags,
                                        guint                    notflags);
 
-GEDIT_PLUGIN_DEFINE_TYPE(GeditFileBookmarksStore, gedit_file_bookmarks_store, GTK_TYPE_TREE_STORE)
+G_DEFINE_DYNAMIC_TYPE (GeditFileBookmarksStore, gedit_file_bookmarks_store, GTK_TYPE_TREE_STORE)
 
 static void
 gedit_file_bookmarks_store_dispose (GObject *object)
@@ -97,6 +96,11 @@ gedit_file_bookmarks_store_class_init (GeditFileBookmarksStoreClass *klass)
 	object_class->finalize = gedit_file_bookmarks_store_finalize;
 
 	g_type_class_add_private (object_class, sizeof (GeditFileBookmarksStorePrivate));
+}
+
+static void
+gedit_file_bookmarks_store_class_finalize (GeditFileBookmarksStoreClass *klass)
+{
 }
 
 static void
@@ -916,4 +920,11 @@ on_bookmarks_file_changed (GFileMonitor            *monitor,
 			break;
 	}
 }
+
+void
+_gedit_file_bookmarks_store_register_type (GTypeModule *type_module)
+{
+	gedit_file_bookmarks_store_register_type (type_module);
+}
+
 /* ex:ts=8:noet: */

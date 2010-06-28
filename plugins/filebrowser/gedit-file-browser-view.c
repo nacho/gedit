@@ -21,10 +21,9 @@
 
 #include <string.h>
 
+#include <glib-object.h>
 #include <gio/gio.h>
 #include <gdk/gdkkeysyms.h>
-
-#include <gedit/gedit-plugin.h>
 
 #include "gedit-file-browser-store.h"
 #include "gedit-file-bookmarks-store.h"
@@ -88,13 +87,12 @@ static const GtkTargetEntry drag_source_targets[] = {
 	{ "text/uri-list", 0, 0 }
 };
 
-GEDIT_PLUGIN_DEFINE_TYPE (GeditFileBrowserView, gedit_file_browser_view,
-	                  GTK_TYPE_TREE_VIEW)
+G_DEFINE_DYNAMIC_TYPE (GeditFileBrowserView, gedit_file_browser_view, GTK_TYPE_TREE_VIEW)
 
 static void on_cell_edited 		(GtkCellRendererText    *cell,
 				 	 gchar                  *path,
 				 	 gchar                  *new_text,
-				 	GeditFileBrowserView    *tree_view);
+				 	 GeditFileBrowserView   *tree_view);
 
 static void on_begin_refresh 		(GeditFileBrowserStore  *model,
 					 GeditFileBrowserView   *view);
@@ -950,6 +948,11 @@ gedit_file_browser_view_class_init (GeditFileBrowserViewClass *klass)
 }
 
 static void
+gedit_file_browser_view_class_finalize (GeditFileBrowserViewClass *klass)
+{
+}
+
+static void
 cell_data_cb (GtkTreeViewColumn    *tree_column,
 	      GtkCellRenderer      *cell,
 	      GtkTreeModel         *tree_model,
@@ -1296,4 +1299,11 @@ on_row_inserted (GeditFileBrowserStore *model,
 
 	gtk_tree_path_free (copy);
 }
+
+void
+_gedit_file_browser_view_register_type (GTypeModule *type_module)
+{
+	gedit_file_browser_view_register_type (type_module);
+}
+
 /* ex:ts=8:noet: */

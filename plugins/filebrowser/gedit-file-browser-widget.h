@@ -71,7 +71,6 @@ struct _GeditFileBrowserWidgetClass
 };
 
 GType		 gedit_file_browser_widget_get_type            (void) G_GNUC_CONST;
-GType		 gedit_file_browser_widget_register_type       (GTypeModule             *module);
 
 GtkWidget	*gedit_file_browser_widget_new            	(const gchar            *data_dir);
 
@@ -114,6 +113,8 @@ void		 gedit_file_browser_widget_set_filter_pattern	(GeditFileBrowserWidget *obj
 void		 gedit_file_browser_widget_refresh		(GeditFileBrowserWidget *obj);
 void		 gedit_file_browser_widget_history_back		(GeditFileBrowserWidget *obj);
 void		 gedit_file_browser_widget_history_forward	(GeditFileBrowserWidget *obj);
+
+void		 _gedit_file_browser_widget_register_type      (GTypeModule            *type_module);
 
 G_END_DECLS
 

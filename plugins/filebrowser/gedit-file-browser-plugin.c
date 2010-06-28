@@ -23,12 +23,15 @@
 #include <config.h>
 #endif
 
-#include <gedit/gedit-commands.h>
-#include <gedit/gedit-utils.h>
-#include <gedit/gedit-app.h>
-#include <glib/gi18n-lib.h>
-#include <gedit/gedit-debug.h>
 #include <string.h>
+#include <glib/gi18n-lib.h>
+#include <gmodule.h>
+#include <gedit/gedit-app.h>
+#include <gedit/gedit-commands.h>
+#include <gedit/gedit-debug.h>
+#include <gedit/gedit-window.h>
+#include <gedit/gedit-window-activatable.h>
+#include <gedit/gedit-utils.h>
 
 #include "gedit-file-browser-enum-types.h"
 #include "gedit-file-browser-plugin.h"
@@ -37,7 +40,6 @@
 #include "gedit-file-browser-widget.h"
 #include "gedit-file-browser-messages.h"
 
-#define WINDOW_DATA_KEY	        	"GeditFileBrowserPluginWindowData"
 #define FILEBROWSER_BASE_SETTINGS	"org.gnome.gedit.plugins.filebrowser"
 #define FILEBROWSER_TREE_VIEW		"tree-view"
 #define FILEBROWSER_ROOT		"root"
@@ -59,14 +61,12 @@
 
 struct _GeditFileBrowserPluginPrivate
 {
-	GSettings *settings;
-	GSettings *nautilus_settings;
-	GSettings *terminal_settings;
-};
+	GSettings              *settings;
+	GSettings              *nautilus_settings;
+	GSettings              *terminal_settings;
 
-typedef struct _GeditFileBrowserPluginData
-{
-	GeditFileBrowserPlugin *plugin;
+	GeditWindow            *window;
+
 	GeditFileBrowserWidget *tree_widget;
 	gulong                  merge_id;
 	GtkActionGroup         *action_group;
@@ -78,51 +78,57 @@ typedef struct _GeditFileBrowserPluginData
 	guint			click_policy_handle;
 	guint			enable_delete_handle;
 	guint			confirm_trash_handle;
-} GeditFileBrowserPluginData;
+};
 
-static void on_location_activated_cb     (GeditFileBrowserWidget     *widget,
-                                          GFile                      *location,
-                                          GeditWindow                *window);
-static void on_error_cb                  (GeditFileBrowserWidget     *widget,
-                                          guint                       code,
-                                          gchar const                *message,
-                                          GeditWindow                *window);
-static void on_model_set_cb              (GeditFileBrowserView       *widget,
-                                          GParamSpec                 *arg1,
-                                          GeditWindow                *window);
-static void on_virtual_root_changed_cb   (GeditFileBrowserStore      *model,
-                                          GParamSpec                 *param,
-                                          GeditWindow                *window);
-static void on_filter_mode_changed_cb    (GeditFileBrowserStore      *model,
-                                          GParamSpec                 *param,
-                                          GeditWindow                *window);
-static void on_rename_cb		 (GeditFileBrowserStore      *model,
-					  GFile                      *oldfile,
-					  GFile                      *newfile,
-					  GeditWindow                *window);
-static void on_filter_pattern_changed_cb (GeditFileBrowserWidget     *widget,
-                                          GParamSpec                 *param,
-                                          GeditWindow                *window);
-static void on_tab_added_cb              (GeditWindow                *window,
-                                          GeditTab                   *tab,
-                                          GeditFileBrowserPluginData *data);
-static gboolean on_confirm_delete_cb     (GeditFileBrowserWidget     *widget,
-                                          GeditFileBrowserStore      *store,
-                                          GList                      *rows,
-                                          GeditWindow                *window);
-static gboolean on_confirm_no_trash_cb   (GeditFileBrowserWidget     *widget,
-                                          GList                      *files,
-                                          GeditWindow                *window);
+static void gedit_window_activatable_iface_init	(GeditWindowActivatableInterface *iface);
 
+static void on_location_activated_cb     (GeditFileBrowserWidget        *widget,
+                                          GFile                         *location,
+                                          GeditWindow                   *window);
+static void on_error_cb                  (GeditFileBrowserWidget        *widget,
+                                          guint                          code,
+                                          gchar const                   *message,
+                                          GeditFileBrowserPlugin        *plugin);
+static void on_model_set_cb              (GeditFileBrowserView          *widget,
+                                          GParamSpec                    *param,
+                                          GeditFileBrowserPlugin        *plugin);
+static void on_virtual_root_changed_cb   (GeditFileBrowserStore         *model,
+                                          GParamSpec                    *param,
+                                          GeditFileBrowserPlugin        *plugin);
+static void on_filter_mode_changed_cb    (GeditFileBrowserStore         *model,
+                                          GParamSpec                    *param,
+                                          GeditFileBrowserPlugin        *plugin);
+static void on_rename_cb		 (GeditFileBrowserStore         *model,
+					  GFile                         *oldfile,
+					  GFile                         *newfile,
+					  GeditWindow                   *window);
+static void on_filter_pattern_changed_cb (GeditFileBrowserWidget        *widget,
+                                          GParamSpec                    *param,
+                                          GeditFileBrowserPlugin        *plugin);
+static void on_tab_added_cb              (GeditWindow                   *window,
+                                          GeditTab                      *tab,
+                                          GeditFileBrowserPlugin        *plugin);
+static gboolean on_confirm_delete_cb     (GeditFileBrowserWidget        *widget,
+                                          GeditFileBrowserStore         *store,
+                                          GList                         *rows,
+                                          GeditFileBrowserPlugin        *plugin);
+static gboolean on_confirm_no_trash_cb   (GeditFileBrowserWidget        *widget,
+                                          GList                         *files,
+                                          GeditWindow                   *window);
 
-GEDIT_PLUGIN_REGISTER_TYPE_WITH_CODE (GeditFileBrowserPlugin, filetree_plugin, 	\
-	gedit_file_browser_enum_and_flag_register_type (type_module);		\
-	gedit_file_browser_store_register_type         (type_module);		\
-	gedit_file_bookmarks_store_register_type       (type_module);		\
-	gedit_file_browser_view_register_type	       (type_module);		\
-	gedit_file_browser_widget_register_type	       (type_module);		\
+G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditFileBrowserPlugin,
+				filetree_plugin,
+				PEAS_TYPE_EXTENSION_BASE,
+				0,
+				G_IMPLEMENT_INTERFACE_DYNAMIC (GEDIT_TYPE_WINDOW_ACTIVATABLE,
+							       gedit_window_activatable_iface_init)	\
+													\
+				_gedit_file_bookmarks_store_register_type	(type_module);		\
+				gedit_file_browser_enum_and_flag_register_type	(type_module);		\
+				_gedit_file_browser_store_register_type		(type_module);		\
+				_gedit_file_browser_view_register_type		(type_module);		\
+				_gedit_file_browser_widget_register_type	(type_module);		\
 )
-
 
 static void
 filetree_plugin_init (GeditFileBrowserPlugin *plugin)
@@ -160,67 +166,65 @@ filetree_plugin_dispose (GObject *object)
 	G_OBJECT_CLASS (filetree_plugin_parent_class)->dispose (object);
 }
 
-static GeditFileBrowserPluginData *
-get_plugin_data (GeditWindow *window)
-{
-	return (GeditFileBrowserPluginData *) (g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY));
-}
-
 static void
-on_end_loading_cb (GeditFileBrowserStore      *store,
-                   GtkTreeIter                *iter,
-                   GeditFileBrowserPluginData *data)
+on_end_loading_cb (GeditFileBrowserStore  *store,
+                   GtkTreeIter            *iter,
+                   GeditFileBrowserPlugin *plugin)
 {
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
+
 	/* Disconnect the signal */
-	g_signal_handler_disconnect (store, data->end_loading_handle);
-	data->end_loading_handle = 0;
-	data->auto_root = FALSE;
+	g_signal_handler_disconnect (store, priv->end_loading_handle);
+	priv->end_loading_handle = 0;
+	priv->auto_root = FALSE;
 }
 
 static void
-prepare_auto_root (GeditFileBrowserPluginData *data)
+prepare_auto_root (GeditFileBrowserPlugin *plugin)
 {
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	GeditFileBrowserStore *store;
 
-	data->auto_root = TRUE;
+	priv->auto_root = TRUE;
 
-	store = gedit_file_browser_widget_get_browser_store (data->tree_widget);
+	store = gedit_file_browser_widget_get_browser_store (priv->tree_widget);
 
-	if (data->end_loading_handle != 0)
+	if (priv->end_loading_handle != 0)
 	{
-		g_signal_handler_disconnect (store, data->end_loading_handle);
-		data->end_loading_handle = 0;
+		g_signal_handler_disconnect (store, priv->end_loading_handle);
+		priv->end_loading_handle = 0;
 	}
 
-	data->end_loading_handle = g_signal_connect (store,
-	                                             "end-loading",
-	                                             G_CALLBACK (on_end_loading_cb),
-	                                             data);
+	priv->end_loading_handle = g_signal_connect (store,
+	                                               "end-loading",
+	                                               G_CALLBACK (on_end_loading_cb),
+	                                               plugin);
 }
 
 static void
-restore_default_location (GeditFileBrowserPluginData *data)
+restore_default_location (GeditFileBrowserPlugin *plugin)
 {
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	gchar *root;
 	gchar *virtual_root;
 	gboolean bookmarks;
 	gboolean remote;
 
-	bookmarks = !g_settings_get_boolean (data->plugin->priv->settings,
+	bookmarks = !g_settings_get_boolean (priv->settings,
 					     FILEBROWSER_TREE_VIEW);
 
 	if (bookmarks)
 	{
-		gedit_file_browser_widget_show_bookmarks (data->tree_widget);
+		gedit_file_browser_widget_show_bookmarks (priv->tree_widget);
 		return;
 	}
 
-	root = g_settings_get_string (data->plugin->priv->settings,
+	root = g_settings_get_string (priv->settings,
 				      FILEBROWSER_ROOT);
-	virtual_root = g_settings_get_string (data->plugin->priv->settings,
+	virtual_root = g_settings_get_string (priv->settings,
 					      FILEBROWSER_VIRTUAL_ROOT);
 
-	remote = g_settings_get_boolean (data->plugin->priv->settings,
+	remote = g_settings_get_boolean (priv->settings,
 					 FILEBROWSER_ENABLE_REMOTE);
 
 	if (root != NULL && *root != '\0')
@@ -235,15 +239,15 @@ restore_default_location (GeditFileBrowserPluginData *data)
 		{
 			if (virtual_root != NULL && *virtual_root != '\0')
 			{
-				prepare_auto_root (data);
-				gedit_file_browser_widget_set_root_and_virtual_root (data->tree_widget,
+				prepare_auto_root (plugin);
+				gedit_file_browser_widget_set_root_and_virtual_root (priv->tree_widget,
 					                                             rootfile,
 					                                             vrootfile);
 			}
 			else
 			{
-				prepare_auto_root (data);
-				gedit_file_browser_widget_set_root (data->tree_widget,
+				prepare_auto_root (plugin);
+				gedit_file_browser_widget_set_root (priv->tree_widget,
 					                            rootfile,
 					                            TRUE);
 			}
@@ -258,14 +262,15 @@ restore_default_location (GeditFileBrowserPluginData *data)
 }
 
 static void
-restore_filter (GeditFileBrowserPluginData *data)
+restore_filter (GeditFileBrowserPlugin *plugin)
 {
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	gchar *filter_mode;
 	GeditFileBrowserStoreFilterMode mode;
 	gchar *pattern;
 
 	/* Get filter_mode */
-	filter_mode = g_settings_get_string (data->plugin->priv->settings,
+	filter_mode = g_settings_get_string (priv->settings,
 					     FILEBROWSER_FILTER_MODE);
 
 	/* Filter mode */
@@ -288,13 +293,13 @@ restore_filter (GeditFileBrowserPluginData *data)
 
 	/* Set the filter mode */
 	gedit_file_browser_store_set_filter_mode (
-		gedit_file_browser_widget_get_browser_store (data->tree_widget),
+		gedit_file_browser_widget_get_browser_store (priv->tree_widget),
 		mode);
 
-	pattern = g_settings_get_string (data->plugin->priv->settings,
+	pattern = g_settings_get_string (priv->settings,
 					 FILEBROWSER_FILTER_PATTERN);
 
-	gedit_file_browser_widget_set_filter_pattern (data->tree_widget,
+	gedit_file_browser_widget_set_filter_pattern (priv->tree_widget,
 	                                              pattern);
 
 	g_free (filter_mode);
@@ -311,88 +316,84 @@ click_policy_from_string (gchar const *click_policy)
 }
 
 static void
-on_click_policy_changed (GSettings   *settings,
-			 const gchar *key,
-			 gpointer     user_data)
+on_click_policy_changed (GSettings              *settings,
+			 const gchar            *key,
+			 GeditFileBrowserPlugin *plugin)
 {
-	GeditFileBrowserPluginData *data;
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	gchar *click_policy;
 	GeditFileBrowserViewClickPolicy policy = GEDIT_FILE_BROWSER_VIEW_CLICK_POLICY_DOUBLE;
 	GeditFileBrowserView *view;
-
-	data = (GeditFileBrowserPluginData *)(user_data);
 
 	click_policy = g_settings_get_string (settings, key);
 	policy = click_policy_from_string (click_policy);
 	g_free (click_policy);
 
-	view = gedit_file_browser_widget_get_browser_view (data->tree_widget);
+	view = gedit_file_browser_widget_get_browser_view (priv->tree_widget);
 	gedit_file_browser_view_set_click_policy (view, policy);
 }
 
 static void
-on_confirm_trash_changed (GSettings   *settings,
-		 	  const gchar *key,
-			  gpointer     user_data)
+on_confirm_trash_changed (GSettings              *settings,
+		 	  const gchar            *key,
+			  GeditFileBrowserPlugin *plugin)
 {
-	GeditFileBrowserPluginData *data;
-
-	data = (GeditFileBrowserPluginData *)(user_data);
-
-	data->confirm_trash = g_settings_get_boolean (settings, key);
+	plugin->priv->confirm_trash = g_settings_get_boolean (settings, key);
 }
 
 static void
-install_nautilus_prefs (GeditFileBrowserPluginData *data)
+install_nautilus_prefs (GeditFileBrowserPlugin *plugin)
 {
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	gchar *pref;
 	gboolean prefb;
 	GeditFileBrowserViewClickPolicy policy;
 	GeditFileBrowserView *view;
 
 	/* Get click_policy */
-	pref = g_settings_get_string (data->plugin->priv->nautilus_settings,
+	pref = g_settings_get_string (priv->nautilus_settings,
 				      NAUTILUS_CLICK_POLICY_KEY);
 
 	policy = click_policy_from_string (pref);
 
-	view = gedit_file_browser_widget_get_browser_view (data->tree_widget);
+	view = gedit_file_browser_widget_get_browser_view (priv->tree_widget);
 	gedit_file_browser_view_set_click_policy (view, policy);
 
 	if (pref)
 	{
-		data->click_policy_handle =
-			g_signal_connect (data->plugin->priv->nautilus_settings,
+		priv->click_policy_handle =
+			g_signal_connect (priv->nautilus_settings,
 					  "changed::" NAUTILUS_CLICK_POLICY_KEY,
 					  G_CALLBACK (on_click_policy_changed),
-					  data);
+					  plugin);
 		g_free (pref);
 	}
 
 	/* Bind enable-delete */
-	g_settings_bind (data->plugin->priv->nautilus_settings,
+	g_settings_bind (priv->nautilus_settings,
 			 NAUTILUS_ENABLE_DELETE_KEY,
-			 data->tree_widget,
+			 priv->tree_widget,
 			 "enable-delete",
 			 G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
 	/* Get confirm_trash */
-	prefb = g_settings_get_boolean (data->plugin->priv->nautilus_settings,
+	prefb = g_settings_get_boolean (priv->nautilus_settings,
 					NAUTILUS_CONFIRM_TRASH_KEY);
 
-	data->confirm_trash = prefb;
+	priv->confirm_trash = prefb;
 
-	data->confirm_trash_handle =
-		g_signal_connect (data->plugin->priv->nautilus_settings,
+	priv->confirm_trash_handle =
+		g_signal_connect (priv->nautilus_settings,
 				  "changed::" NAUTILUS_CONFIRM_TRASH_KEY,
 				  G_CALLBACK (on_confirm_trash_changed),
-				  data);
+				  plugin);
 }
 
 static void
-set_root_from_doc (GeditFileBrowserPluginData *data,
-                   GeditDocument              *doc)
+set_root_from_doc (GeditFileBrowserPlugin *plugin,
+                   GeditDocument          *doc)
 {
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	GFile *file;
 	GFile *parent;
 
@@ -407,7 +408,7 @@ set_root_from_doc (GeditFileBrowserPluginData *data,
 
 	if (parent != NULL)
 	{
-		gedit_file_browser_widget_set_root (data->tree_widget,
+		gedit_file_browser_widget_set_root (priv->tree_widget,
 				                    parent,
 				                    TRUE);
 
@@ -418,22 +419,20 @@ set_root_from_doc (GeditFileBrowserPluginData *data,
 }
 
 static void
-on_action_set_active_root (GtkAction   *action,
-                           GeditWindow *window)
+on_action_set_active_root (GtkAction              *action,
+                           GeditFileBrowserPlugin *plugin)
 {
-	GeditFileBrowserPluginData *data;
-
-	data = get_plugin_data (window);
-	set_root_from_doc (data,
-	                   gedit_window_get_active_document (window));
+	set_root_from_doc (plugin,
+	                   gedit_window_get_active_document (plugin->priv->window));
 }
 
 static gchar *
-get_terminal (GeditFileBrowserPluginData *data)
+get_terminal (GeditFileBrowserPlugin *plugin)
 {
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	gchar *terminal;
 
-	terminal = g_settings_get_string (data->plugin->priv->terminal_settings,
+	terminal = g_settings_get_string (priv->terminal_settings,
 					  TERMINAL_EXEC_KEY);
 
 	if (terminal == NULL)
@@ -450,10 +449,10 @@ get_terminal (GeditFileBrowserPluginData *data)
 }
 
 static void
-on_action_open_terminal (GtkAction   *action,
-                         GeditWindow *window)
+on_action_open_terminal (GtkAction              *action,
+                         GeditFileBrowserPlugin *plugin)
 {
-	GeditFileBrowserPluginData *data;
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	gchar *terminal;
 	gchar *local;
 	gchar *argv[2];
@@ -462,13 +461,11 @@ on_action_open_terminal (GtkAction   *action,
 	GtkTreeIter iter;
 	GeditFileBrowserStore *store;
 
-	data = get_plugin_data (window);
-
 	/* Get the current directory */
-	if (!gedit_file_browser_widget_get_selected_directory (data->tree_widget, &iter))
+	if (!gedit_file_browser_widget_get_selected_directory (priv->tree_widget, &iter))
 		return;
 
-	store = gedit_file_browser_widget_get_browser_store (data->tree_widget);
+	store = gedit_file_browser_widget_get_browser_store (priv->tree_widget);
 	gtk_tree_model_get (GTK_TREE_MODEL (store),
 	                    &iter,
 	                    GEDIT_FILE_BROWSER_STORE_COLUMN_LOCATION,
@@ -478,7 +475,7 @@ on_action_open_terminal (GtkAction   *action,
 	if (file == NULL)
 		return;
 
-	terminal = get_terminal (data);
+	terminal = get_terminal (plugin);
 
 	local = g_file_get_path (file);
 
@@ -499,25 +496,23 @@ on_action_open_terminal (GtkAction   *action,
 }
 
 static void
-on_selection_changed_cb (GtkTreeSelection *selection,
-			 GeditWindow      *window)
+on_selection_changed_cb (GtkTreeSelection       *selection,
+			 GeditFileBrowserPlugin *plugin)
 {
-	GeditFileBrowserPluginData *data;
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	GtkTreeView *tree_view;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	gboolean sensitive;
 	GFile *location;
 
-	data = get_plugin_data (window);
-
-	tree_view = GTK_TREE_VIEW (gedit_file_browser_widget_get_browser_view (data->tree_widget));
+	tree_view = GTK_TREE_VIEW (gedit_file_browser_widget_get_browser_view (priv->tree_widget));
 	model = gtk_tree_view_get_model (tree_view);
 
 	if (!GEDIT_IS_FILE_BROWSER_STORE (model))
 		return;
 
-	sensitive = gedit_file_browser_widget_get_selected_directory (data->tree_widget, &iter);
+	sensitive = gedit_file_browser_widget_get_selected_directory (priv->tree_widget, &iter);
 
 	if (sensitive)
 	{
@@ -529,7 +524,7 @@ on_selection_changed_cb (GtkTreeSelection *selection,
 	}
 
 	gtk_action_set_sensitive (
-		gtk_action_group_get_action (data->single_selection_action_group,
+		gtk_action_group_get_action (priv->single_selection_action_group,
 					     "OpenTerminal"),
 		sensitive);
 }
@@ -567,24 +562,24 @@ static GtkActionEntry extra_single_selection_actions[] = {
 };
 
 static void
-add_popup_ui (GeditWindow *window)
+add_popup_ui (GeditWindow            *window,
+	      GeditFileBrowserPlugin *plugin)
 {
-	GeditFileBrowserPluginData *data;
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	GtkUIManager *manager;
 	GtkActionGroup *action_group;
 	GError *error = NULL;
 
-	data = get_plugin_data (window);
-	manager = gedit_file_browser_widget_get_ui_manager (data->tree_widget);
+	manager = gedit_file_browser_widget_get_ui_manager (priv->tree_widget);
 
 	action_group = gtk_action_group_new ("FileBrowserPluginExtra");
 	gtk_action_group_set_translation_domain (action_group, NULL);
 	gtk_action_group_add_actions (action_group,
 				      extra_actions,
 				      G_N_ELEMENTS (extra_actions),
-				      window);
+				      plugin);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
-	data->action_group = action_group;
+	priv->action_group = action_group;
 
 	action_group = gtk_action_group_new ("FileBrowserPluginSingleSelectionExtra");
 	gtk_action_group_set_translation_domain (action_group, NULL);
@@ -593,14 +588,14 @@ add_popup_ui (GeditWindow *window)
 				      G_N_ELEMENTS (extra_single_selection_actions),
 				      window);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
-	data->single_selection_action_group = action_group;
+	priv->single_selection_action_group = action_group;
 
-	data->merge_id = gtk_ui_manager_add_ui_from_string (manager,
-	                                                    POPUP_UI,
-	                                                    -1,
-	                                                    &error);
+	priv->merge_id = gtk_ui_manager_add_ui_from_string (manager,
+							      POPUP_UI,
+							      -1,
+							      &error);
 
-	if (data->merge_id == 0)
+	if (priv->merge_id == 0)
 	{
 		g_warning("Unable to merge UI: %s", error->message);
 		g_error_free(error);
@@ -608,132 +603,129 @@ add_popup_ui (GeditWindow *window)
 }
 
 static void
-remove_popup_ui (GeditWindow *window)
+remove_popup_ui (GeditWindow            *window,
+		 GeditFileBrowserPlugin *plugin)
 {
-	GeditFileBrowserPluginData *data;
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	GtkUIManager *manager;
 
-	data = get_plugin_data (window);
-	manager = gedit_file_browser_widget_get_ui_manager (data->tree_widget);
-	gtk_ui_manager_remove_ui (manager, data->merge_id);
+	manager = gedit_file_browser_widget_get_ui_manager (priv->tree_widget);
+	gtk_ui_manager_remove_ui (manager, priv->merge_id);
 
-	gtk_ui_manager_remove_action_group (manager, data->action_group);
-	g_object_unref (data->action_group);
+	gtk_ui_manager_remove_action_group (manager, priv->action_group);
+	g_object_unref (priv->action_group);
 
-	gtk_ui_manager_remove_action_group (manager, data->single_selection_action_group);
-	g_object_unref (data->single_selection_action_group);
+	gtk_ui_manager_remove_action_group (manager, priv->single_selection_action_group);
+	g_object_unref (priv->single_selection_action_group);
 }
 
 static void
-impl_updateui (GeditPlugin *plugin,
-	       GeditWindow *window)
+gedit_file_browser_plugin_update_state (GeditWindowActivatable *activatable,
+					GeditWindow            *window)
 {
-	GeditFileBrowserPluginData *data;
+	GeditFileBrowserPluginPrivate *priv = GEDIT_FILE_BROWSER_PLUGIN (activatable)->priv;
 	GeditDocument *doc;
-
-	data = get_plugin_data (window);
 
 	doc = gedit_window_get_active_document (window);
 
-	gtk_action_set_sensitive (gtk_action_group_get_action (data->action_group,
+	gtk_action_set_sensitive (gtk_action_group_get_action (priv->action_group,
 	                                                       "SetActiveRoot"),
 	                          doc != NULL && !gedit_document_is_untitled (doc));
 }
 
 static void
-impl_activate (GeditPlugin *plugin,
-	       GeditWindow *window)
+gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
+				    GeditWindow            *window)
 {
+	GeditFileBrowserPlugin *plugin = GEDIT_FILE_BROWSER_PLUGIN (activatable);
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	GeditPanel *panel;
-	GeditFileBrowserPluginData *data;
 	GtkWidget *image;
 	GdkPixbuf *pixbuf;
 	GeditFileBrowserStore *store;
 	gchar *data_dir;
 
-	data = g_slice_new0 (GeditFileBrowserPluginData);
+	priv->window = window;
 
-	data_dir = gedit_plugin_get_data_dir (plugin);
-	data->tree_widget = GEDIT_FILE_BROWSER_WIDGET (gedit_file_browser_widget_new (data_dir));
-	data->plugin = GEDIT_FILE_BROWSER_PLUGIN (plugin);
+	data_dir = peas_extension_base_get_data_dir (PEAS_EXTENSION_BASE (activatable));
+	priv->tree_widget = GEDIT_FILE_BROWSER_WIDGET (gedit_file_browser_widget_new (data_dir));
 	g_free (data_dir);
 
-	g_signal_connect (data->tree_widget,
+	g_signal_connect (priv->tree_widget,
 			  "location-activated",
 			  G_CALLBACK (on_location_activated_cb), window);
 
-	g_signal_connect (data->tree_widget,
-			  "error", G_CALLBACK (on_error_cb), window);
+	g_signal_connect (priv->tree_widget,
+			  "error", G_CALLBACK (on_error_cb), plugin);
 
-	g_signal_connect (data->tree_widget,
+	g_signal_connect (priv->tree_widget,
 	                  "notify::filter-pattern",
 	                  G_CALLBACK (on_filter_pattern_changed_cb),
-	                  window);
+	                  plugin);
 
-	g_signal_connect (data->tree_widget,
+	g_signal_connect (priv->tree_widget,
 	                  "confirm-delete",
 	                  G_CALLBACK (on_confirm_delete_cb),
-	                  window);
+	                  plugin);
 
-	g_signal_connect (data->tree_widget,
+	g_signal_connect (priv->tree_widget,
 	                  "confirm-no-trash",
 	                  G_CALLBACK (on_confirm_no_trash_cb),
 	                  window);
 
 	g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW
 			  (gedit_file_browser_widget_get_browser_view
-			  (data->tree_widget))),
+			  (priv->tree_widget))),
 			  "changed",
 			  G_CALLBACK (on_selection_changed_cb),
-			  window);
+			  plugin);
 
 	panel = gedit_window_get_side_panel (window);
-	pixbuf = gedit_file_browser_utils_pixbuf_from_theme("system-file-manager",
-	                                                    GTK_ICON_SIZE_MENU);
+	pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("system-file-manager",
+	                                                     GTK_ICON_SIZE_MENU);
 
 	if (pixbuf)
 	{
-		image = gtk_image_new_from_pixbuf(pixbuf);
+		image = gtk_image_new_from_pixbuf (pixbuf);
 		g_object_unref(pixbuf);
 	}
 	else
 	{
-		image = gtk_image_new_from_stock(GTK_STOCK_INDEX, GTK_ICON_SIZE_MENU);
+		image = gtk_image_new_from_stock (GTK_STOCK_INDEX, GTK_ICON_SIZE_MENU);
 	}
 
-	gtk_widget_show(image);
+	gtk_widget_show (image);
 	gedit_panel_add_item (panel,
-	                      GTK_WIDGET (data->tree_widget),
+	                      GTK_WIDGET (priv->tree_widget),
 	                      "GeditFileBrowserPanel",
 	                      _("File Browser"),
 	                      image);
-	gtk_widget_show (GTK_WIDGET (data->tree_widget));
-	g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, data);
+	gtk_widget_show (GTK_WIDGET (priv->tree_widget));
 
-	add_popup_ui (window);
+	add_popup_ui (window, plugin);
 
 	/* Restore filter options */
-	restore_filter (data);
+	restore_filter (plugin);
 
 	/* Install nautilus preferences */
-	install_nautilus_prefs (data);
+	install_nautilus_prefs (plugin);
 
 	/* Connect signals to store the last visited location */
-	g_signal_connect (gedit_file_browser_widget_get_browser_view (data->tree_widget),
+	g_signal_connect (gedit_file_browser_widget_get_browser_view (priv->tree_widget),
 	                  "notify::model",
 	                  G_CALLBACK (on_model_set_cb),
-	                  window);
+	                  plugin);
 
-	store = gedit_file_browser_widget_get_browser_store (data->tree_widget);
+	store = gedit_file_browser_widget_get_browser_store (priv->tree_widget);
 	g_signal_connect (store,
 	                  "notify::virtual-root",
 	                  G_CALLBACK (on_virtual_root_changed_cb),
-	                  window);
+	                  plugin);
 
 	g_signal_connect (store,
 	                  "notify::filter-mode",
 	                  G_CALLBACK (on_filter_mode_changed_cb),
-	                  window);
+	                  plugin);
 
 	g_signal_connect (store,
 			  "rename",
@@ -743,22 +735,22 @@ impl_activate (GeditPlugin *plugin,
 	g_signal_connect (window,
 	                  "tab-added",
 	                  G_CALLBACK (on_tab_added_cb),
-	                  data);
+	                  plugin);
 
 	/* Register messages on the bus */
-	gedit_file_browser_messages_register (window, data->tree_widget);
+	gedit_file_browser_messages_register (window, priv->tree_widget);
 
-	impl_updateui (plugin, window);
+	gedit_file_browser_plugin_update_state (activatable, window);
 }
 
 static void
-impl_deactivate (GeditPlugin *plugin,
-		 GeditWindow *window)
+gedit_file_browser_plugin_deactivate (GeditWindowActivatable *activatable,
+				      GeditWindow            *window)
 {
-	GeditFileBrowserPluginData *data;
+	GeditFileBrowserPlugin *plugin = GEDIT_FILE_BROWSER_PLUGIN (activatable);
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	GeditPanel *panel;
 
-	data = get_plugin_data (window);
 
 	/* Unregister messages from the bus */
 	gedit_file_browser_messages_unregister (window);
@@ -766,43 +758,54 @@ impl_deactivate (GeditPlugin *plugin,
 	/* Disconnect signals */
 	g_signal_handlers_disconnect_by_func (window,
 	                                      G_CALLBACK (on_tab_added_cb),
-	                                      data);
+	                                      plugin);
 
-	if (data->click_policy_handle)
-		g_signal_handler_disconnect (data->plugin->priv->nautilus_settings,
-					     data->click_policy_handle);
+	if (priv->click_policy_handle)
+	{
+		g_signal_handler_disconnect (priv->nautilus_settings,
+					     priv->click_policy_handle);
+	}
 
-	if (data->enable_delete_handle)
-		g_signal_handler_disconnect (data->plugin->priv->nautilus_settings,
-					     data->enable_delete_handle);
+	if (priv->enable_delete_handle)
+	{
+		g_signal_handler_disconnect (priv->nautilus_settings,
+					     priv->enable_delete_handle);
+	}
 
-	if (data->confirm_trash_handle)
-		g_signal_handler_disconnect (data->plugin->priv->nautilus_settings,
-					     data->confirm_trash_handle);
+	if (priv->confirm_trash_handle)
+	{
+		g_signal_handler_disconnect (priv->nautilus_settings,
+					     priv->confirm_trash_handle);
+	}
 
-	remove_popup_ui (window);
+	remove_popup_ui (window, plugin);
 
 	panel = gedit_window_get_side_panel (window);
-	gedit_panel_remove_item (panel, GTK_WIDGET (data->tree_widget));
-
-	g_slice_free (GeditFileBrowserPluginData, data);
-	g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
+	gedit_panel_remove_item (panel, GTK_WIDGET (priv->tree_widget));
 }
 
 static void
 filetree_plugin_class_init (GeditFileBrowserPluginClass *klass)
 {
-	GObjectClass  *object_class = G_OBJECT_CLASS (klass);
-	GeditPluginClass *plugin_class = GEDIT_PLUGIN_CLASS (klass);
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->dispose = filetree_plugin_dispose;
 
-	plugin_class->activate = impl_activate;
-	plugin_class->deactivate = impl_deactivate;
-	plugin_class->update_ui = impl_updateui;
-
 	g_type_class_add_private (object_class,
-				  sizeof (GeditFileBrowserPluginPrivate));
+				  sizeof (GeditFileBrowserPlugin));
+}
+
+static void
+gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface)
+{
+	iface->activate = gedit_file_browser_plugin_activate;
+	iface->deactivate = gedit_file_browser_plugin_deactivate;
+	iface->update_state = gedit_file_browser_plugin_update_state;
+}
+
+static void
+filetree_plugin_class_finalize (GeditFileBrowserPluginClass *klass)
+{
 }
 
 /* Callbacks */
@@ -818,20 +821,18 @@ static void
 on_error_cb (GeditFileBrowserWidget *tree_widget,
 	     guint                   code,
 	     gchar const            *message,
-	     GeditWindow            *window)
+	     GeditFileBrowserPlugin *plugin)
 {
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	gchar *title;
 	GtkWidget *dlg;
-	GeditFileBrowserPluginData *data;
-
-	data = get_plugin_data (window);
 
 	/* Do not show the error when the root has been set automatically */
-	if (data->auto_root && (code == GEDIT_FILE_BROWSER_ERROR_SET_ROOT ||
-	                        code == GEDIT_FILE_BROWSER_ERROR_LOAD_DIRECTORY))
+	if (priv->auto_root && (code == GEDIT_FILE_BROWSER_ERROR_SET_ROOT ||
+	                          code == GEDIT_FILE_BROWSER_ERROR_LOAD_DIRECTORY))
 	{
 		/* Show bookmarks */
-		gedit_file_browser_widget_show_bookmarks (data->tree_widget);
+		gedit_file_browser_widget_show_bookmarks (priv->tree_widget);
 		return;
 	}
 
@@ -863,7 +864,7 @@ on_error_cb (GeditFileBrowserWidget *tree_widget,
 			break;
 	}
 
-	dlg = gtk_message_dialog_new (GTK_WINDOW (window),
+	dlg = gtk_message_dialog_new (GTK_WINDOW (priv->window),
 				      GTK_DIALOG_MODAL |
 				      GTK_DIALOG_DESTROY_WITH_PARENT,
 				      GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
@@ -876,55 +877,55 @@ on_error_cb (GeditFileBrowserWidget *tree_widget,
 }
 
 static void
-on_model_set_cb (GeditFileBrowserView *widget,
-                 GParamSpec           *arg1,
-                 GeditWindow          *window)
+on_model_set_cb (GeditFileBrowserView   *widget,
+                 GParamSpec             *param,
+                 GeditFileBrowserPlugin *plugin)
 {
-	GeditFileBrowserPluginData *data = get_plugin_data (window);
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	GtkTreeModel *model;
 
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (gedit_file_browser_widget_get_browser_view (data->tree_widget)));
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (gedit_file_browser_widget_get_browser_view (priv->tree_widget)));
 
 	if (model == NULL)
 		return;
 
-	g_settings_set_boolean (data->plugin->priv->settings,
+	g_settings_set_boolean (priv->settings,
 	                        FILEBROWSER_TREE_VIEW,
 	                        GEDIT_IS_FILE_BROWSER_STORE (model));
 }
 
 static void
-on_filter_mode_changed_cb (GeditFileBrowserStore *model,
-                           GParamSpec            *param,
-                           GeditWindow           *window)
+on_filter_mode_changed_cb (GeditFileBrowserStore  *model,
+                           GParamSpec             *param,
+                           GeditFileBrowserPlugin *plugin)
 {
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	GeditFileBrowserStoreFilterMode mode;
-	GeditFileBrowserPluginData *data = get_plugin_data (window);
 
 	mode = gedit_file_browser_store_get_filter_mode (model);
 
 	if ((mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN) &&
 	    (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY))
 	{
-		g_settings_set_string (data->plugin->priv->settings,
+		g_settings_set_string (priv->settings,
 		                       FILEBROWSER_FILTER_MODE,
 		                       "hidden-and-binary");
 	}
 	else if (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN)
 	{
-		g_settings_set_string (data->plugin->priv->settings,
+		g_settings_set_string (priv->settings,
 		                       FILEBROWSER_FILTER_MODE,
 		                       "hidden");
 	}
 	else if (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY)
 	{
-		g_settings_set_string (data->plugin->priv->settings,
+		g_settings_set_string (priv->settings,
 		                       FILEBROWSER_FILTER_MODE,
 		                       "binary");
 	}
 	else
 	{
-		g_settings_set_string (data->plugin->priv->settings,
+		g_settings_set_string (priv->settings,
 		                       FILEBROWSER_FILTER_MODE,
 		                       "none");
 	}
@@ -987,22 +988,22 @@ on_rename_cb (GeditFileBrowserStore *store,
 static void
 on_filter_pattern_changed_cb (GeditFileBrowserWidget *widget,
                               GParamSpec             *param,
-                              GeditWindow            *window)
+                              GeditFileBrowserPlugin *plugin)
 {
-	GeditFileBrowserPluginData *data = get_plugin_data (window);
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	gchar *pattern;
 
 	g_object_get (G_OBJECT (widget), "filter-pattern", &pattern, NULL);
 
 	if (pattern == NULL)
 	{
-		g_settings_set_string (data->plugin->priv->settings,
+		g_settings_set_string (priv->settings,
 		                       FILEBROWSER_FILTER_PATTERN,
 		                       "");
 	}
 	else
 	{
-		g_settings_set_string (data->plugin->priv->settings,
+		g_settings_set_string (priv->settings,
 		                       FILEBROWSER_FILTER_PATTERN,
 		                       pattern);
 	}
@@ -1011,11 +1012,11 @@ on_filter_pattern_changed_cb (GeditFileBrowserWidget *widget,
 }
 
 static void
-on_virtual_root_changed_cb (GeditFileBrowserStore *store,
-                            GParamSpec            *param,
-                            GeditWindow           *window)
+on_virtual_root_changed_cb (GeditFileBrowserStore  *store,
+                            GParamSpec             *param,
+                            GeditFileBrowserPlugin *plugin)
 {
-	GeditFileBrowserPluginData *data = get_plugin_data (window);
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	GFile *root;
 	GFile *virtual_root;
 	gchar *uri_root = NULL;
@@ -1032,7 +1033,7 @@ on_virtual_root_changed_cb (GeditFileBrowserStore *store,
 		g_object_unref (root);
 	}
 
-	g_settings_set_string (data->plugin->priv->settings,
+	g_settings_set_string (priv->settings,
 	                       FILEBROWSER_ROOT,
 	                       uri_root);
 	g_free (uri_root);
@@ -1042,7 +1043,7 @@ on_virtual_root_changed_cb (GeditFileBrowserStore *store,
 	if (!virtual_root)
 	{
 		/* Set virtual to same as root then */
-		g_settings_set_string (data->plugin->priv->settings,
+		g_settings_set_string (priv->settings,
 		                       FILEBROWSER_VIRTUAL_ROOT,
 		                       uri_root);
 	}
@@ -1052,27 +1053,28 @@ on_virtual_root_changed_cb (GeditFileBrowserStore *store,
 
 		uri_vroot = g_file_get_uri (virtual_root);
 
-		g_settings_set_string (data->plugin->priv->settings,
+		g_settings_set_string (priv->settings,
 		                       FILEBROWSER_VIRTUAL_ROOT,
 		                       uri_vroot);
 		g_free (uri_vroot);
 		g_object_unref (virtual_root);
 	}
 
-	g_signal_handlers_disconnect_by_func (window,
+	g_signal_handlers_disconnect_by_func (priv->window,
 	                                      G_CALLBACK (on_tab_added_cb),
-	                                      data);
+	                                      plugin);
 }
 
 static void
-on_tab_added_cb (GeditWindow                *window,
-                 GeditTab                   *tab,
-                 GeditFileBrowserPluginData *data)
+on_tab_added_cb (GeditWindow            *window,
+                 GeditTab               *tab,
+                 GeditFileBrowserPlugin *plugin)
 {
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	gboolean open;
 	gboolean load_default = TRUE;
 
-	open = g_settings_get_boolean (data->plugin->priv->settings,
+	open = g_settings_get_boolean (priv->settings,
 	                               FILEBROWSER_OPEN_AT_FIRST_DOC);
 
 	if (open)
@@ -1088,8 +1090,8 @@ on_tab_added_cb (GeditWindow                *window,
 		{
 			if (gedit_utils_location_has_file_scheme (location))
 			{
-				prepare_auto_root (data);
-				set_root_from_doc (data, doc);
+				prepare_auto_root (plugin);
+				set_root_from_doc (plugin, doc);
 				load_default = FALSE;
 			}
 			g_object_unref (location);
@@ -1097,12 +1099,12 @@ on_tab_added_cb (GeditWindow                *window,
 	}
 
 	if (load_default)
-		restore_default_location (data);
+		restore_default_location (plugin);
 
 	/* Disconnect this signal, it's only called once */
 	g_signal_handlers_disconnect_by_func (window,
 	                                      G_CALLBACK (on_tab_added_cb),
-	                                      data);
+	                                      plugin);
 }
 
 static gchar *
@@ -1158,17 +1160,15 @@ static gboolean
 on_confirm_delete_cb (GeditFileBrowserWidget *widget,
                       GeditFileBrowserStore  *store,
                       GList                  *paths,
-                      GeditWindow            *window)
+                      GeditFileBrowserPlugin *plugin)
 {
+	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	gchar *normal;
 	gchar *message;
 	gchar *secondary;
 	gboolean result;
-	GeditFileBrowserPluginData *data;
 
-	data = get_plugin_data (window);
-
-	if (!data->confirm_trash)
+	if (!priv->confirm_trash)
 		return TRUE;
 
 	if (paths->next == NULL)
@@ -1184,7 +1184,7 @@ on_confirm_delete_cb (GeditFileBrowserWidget *widget,
 
 	secondary = _("If you delete an item, it is permanently lost.");
 
-	result = gedit_file_browser_utils_confirmation_dialog (window,
+	result = gedit_file_browser_utils_confirmation_dialog (priv->window,
 	                                                       GTK_MESSAGE_QUESTION,
 	                                                       message,
 	                                                       secondary,
@@ -1195,4 +1195,15 @@ on_confirm_delete_cb (GeditFileBrowserWidget *widget,
 
 	return result;
 }
+
+G_MODULE_EXPORT void
+peas_register_types (PeasObjectModule *module)
+{
+	filetree_plugin_register_type (G_TYPE_MODULE (module));
+
+	peas_object_module_register_extension_type (module,
+						    GEDIT_TYPE_WINDOW_ACTIVATABLE,
+						    GEDIT_TYPE_FILE_BROWSER_PLUGIN);
+}
+
 /* ex:ts=8:noet: */

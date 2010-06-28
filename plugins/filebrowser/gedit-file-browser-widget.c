@@ -30,7 +30,6 @@
 #include <glib/gi18n-lib.h>
 #include <gdk/gdkkeysyms.h>
 #include <gedit/gedit-utils.h>
-#include <gedit/gedit-plugin.h>
 
 #include "gedit-file-browser-utils.h"
 #include "gedit-file-browser-error.h"
@@ -234,8 +233,7 @@ static void on_action_filter_binary            (GtkAction              *action,
 static void on_action_bookmark_open            (GtkAction              *action,
 						GeditFileBrowserWidget *obj);
 
-GEDIT_PLUGIN_DEFINE_TYPE (GeditFileBrowserWidget, gedit_file_browser_widget,
-	                  GTK_TYPE_VBOX)
+G_DEFINE_DYNAMIC_TYPE (GeditFileBrowserWidget, gedit_file_browser_widget, GTK_TYPE_VBOX)
 
 static void
 free_name_icon (gpointer data)
@@ -485,6 +483,11 @@ gedit_file_browser_widget_class_init (GeditFileBrowserWidgetClass *klass)
 
 	g_type_class_add_private (object_class,
 				  sizeof (GeditFileBrowserWidgetPrivate));
+}
+
+static void
+gedit_file_browser_widget_class_finalize (GeditFileBrowserWidgetClass *klass)
+{
 }
 
 static void
@@ -3214,6 +3217,12 @@ on_action_bookmark_open (GtkAction              *action,
 
 	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
 		bookmark_open (obj, model, &iter);
+}
+
+void
+_gedit_file_browser_widget_register_type (GTypeModule *type_module)
+{
+	gedit_file_browser_widget_register_type (type_module);
 }
 
 /* ex:ts=8:noet: */

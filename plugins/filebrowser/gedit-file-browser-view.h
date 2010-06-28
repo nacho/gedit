@@ -66,7 +66,6 @@ struct _GeditFileBrowserViewClass
 };
 
 GType		 gedit_file_browser_view_get_type			(void) G_GNUC_CONST;
-GType		 gedit_file_browser_view_register_type			(GTypeModule                     *module);
 
 GtkWidget	*gedit_file_browser_view_new				(void);
 void		 gedit_file_browser_view_set_model			(GeditFileBrowserView            *tree_view,
@@ -77,6 +76,8 @@ void		 gedit_file_browser_view_set_click_policy		(GeditFileBrowserView          
 							 		 GeditFileBrowserViewClickPolicy  policy);
 void		 gedit_file_browser_view_set_restore_expand_state	(GeditFileBrowserView            *tree_view,
 									 gboolean                         restore_expand_state);
+
+void		 _gedit_file_browser_view_register_type			(GTypeModule                     *type_module);
 
 G_END_DECLS
 
