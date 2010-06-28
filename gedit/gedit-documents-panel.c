@@ -1052,7 +1052,7 @@ treeview_query_tooltip (GtkWidget           *widget,
 
 	if (tab != NULL)
 	{
-		tip = _gedit_tab_get_tooltips (tab);
+		tip = _gedit_tab_get_tooltip (tab);
 	}
 	else
 	{

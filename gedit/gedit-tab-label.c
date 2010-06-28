@@ -120,7 +120,7 @@ sync_tip (GeditTab *tab,
 {
 	gchar *str;
 
-	str = _gedit_tab_get_tooltips (tab);
+	str = _gedit_tab_get_tooltip (tab);
 	g_return_if_fail (str != NULL);
 
 	gtk_widget_set_tooltip_markup (tab_label->priv->ebox, str);

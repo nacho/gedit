@@ -1769,7 +1769,7 @@ _gedit_tab_get_name (GeditTab *tab)
 }
 
 gchar *
-_gedit_tab_get_tooltips	(GeditTab *tab)
+_gedit_tab_get_tooltip (GeditTab *tab)
 {
 	GeditDocument *doc;
 	gchar *tip;
