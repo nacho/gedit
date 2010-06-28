@@ -125,9 +125,9 @@ gedit_window_get_property (GObject    *object,
 }
 
 static void
-save_panes_state (GeditWindow *window)
+save_panels_state (GeditWindow *window)
 {
-	gint pane_page;
+	gint panel_page;
 
 	gedit_debug (DEBUG_WINDOW);
 
@@ -138,12 +138,12 @@ save_panes_state (GeditWindow *window)
 				    window->priv->side_panel_size);
 	}
 
-	pane_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->side_panel));
-	if (pane_page != 0)
+	panel_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->side_panel));
+	if (panel_page != 0)
 	{
 		g_settings_set_int (window->priv->window_settings,
 				    GEDIT_SETTINGS_SIDE_PANEL_ACTIVE_PAGE,
-				    pane_page);
+				    panel_page);
 	}
 
 	if (window->priv->bottom_panel_size > 0)
@@ -153,11 +153,11 @@ save_panes_state (GeditWindow *window)
 				    window->priv->bottom_panel_size);
 	}
 
-	pane_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->bottom_panel));
-	if (pane_page != 0)
+	panel_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->bottom_panel));
+	if (panel_page != 0)
 	{
 		g_settings_set_int (window->priv->window_settings,
-				    GEDIT_SETTINGS_BOTTOM_PANEL_ACTIVE_PAGE, pane_page);
+				    GEDIT_SETTINGS_BOTTOM_PANEL_ACTIVE_PAGE, panel_page);
 	}
 }
 
@@ -244,8 +244,8 @@ gedit_window_dispose (GObject *object)
 
 	window = GEDIT_WINDOW (object);
 
-	/* Stop tracking removal of panes otherwise we always
-	 * end up with thinking we had no pane active, since they
+	/* Stop tracking removal of panels otherwise we always
+	 * end up with thinking we had no panel active, since they
 	 * should all be removed below */
 	if (window->priv->bottom_panel_item_removed_handler_id != 0)
 	{
@@ -259,12 +259,12 @@ gedit_window_dispose (GObject *object)
 	 */
 	peas_engine_garbage_collect (PEAS_ENGINE (gedit_plugins_engine_get_default ()));
 
-	/* save the panes position and make sure to deactivate plugins
+	/* save the panels position and make sure to deactivate plugins
 	 * for this window, but only once */
 	if (!window->priv->dispose_has_run)
 	{
 		save_window_state (GTK_WIDGET (window));
-		save_panes_state (window);
+		save_panels_state (window);
 
 		peas_extension_set_call (window->priv->extensions,
 					 "deactivate",
@@ -1682,16 +1682,16 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	g_object_unref (action_group);
 	window->priv->close_action_group = action_group;
 
-	action_group = gtk_action_group_new ("GeditWindowPanesActions");
+	action_group = gtk_action_group_new ("GeditWindowPanelsActions");
 	gtk_action_group_set_translation_domain (action_group, NULL);
 	gtk_action_group_add_toggle_actions (action_group,
-					     gedit_panes_toggle_menu_entries,
-					     G_N_ELEMENTS (gedit_panes_toggle_menu_entries),
+					     gedit_panels_toggle_menu_entries,
+					     G_N_ELEMENTS (gedit_panels_toggle_menu_entries),
 					     window);
 
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	g_object_unref (action_group);
-	window->priv->panes_action_group = action_group;
+	window->priv->panels_action_group = action_group;
 
 	/* now load the UI definition */
 	ui_file = gedit_dirs_get_ui_file (GEDIT_UIFILE);
@@ -2279,7 +2279,7 @@ clone_window (GeditWindow *origin)
 	else
 		gtk_window_unstick (GTK_WINDOW (window));
 
-	/* set the panes size, the paned position will be set when
+	/* set the panels size, the paned position will be set when
 	 * they are mapped */ 
 	window->priv->side_panel_size = origin->priv->side_panel_size;
 	window->priv->bottom_panel_size = origin->priv->bottom_panel_size;
@@ -3854,11 +3854,11 @@ side_panel_visibility_changed (GtkWidget   *side_panel,
 	visible = gtk_widget_get_visible (side_panel);
 
 	g_settings_set_boolean (window->priv->ui_settings,
-				GEDIT_SETTINGS_SIDE_PANE_VISIBLE,
+				GEDIT_SETTINGS_SIDE_PANEL_VISIBLE,
 				visible);
 
-	action = gtk_action_group_get_action (window->priv->panes_action_group,
-	                                      "ViewSidePane");
+	action = gtk_action_group_get_action (window->priv->panels_action_group,
+	                                      "ViewSidePanel");
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
@@ -3911,11 +3911,11 @@ bottom_panel_visibility_changed (GeditPanel  *bottom_panel,
 	visible = gtk_widget_get_visible (GTK_WIDGET (bottom_panel));
 
 	g_settings_set_boolean (window->priv->ui_settings,
-				GEDIT_SETTINGS_BOTTOM_PANE_VISIBLE,
+				GEDIT_SETTINGS_BOTTOM_PANEL_VISIBLE,
 				visible);
 
-	action = gtk_action_group_get_action (window->priv->panes_action_group,
-					      "ViewBottomPane");
+	action = gtk_action_group_get_action (window->priv->panels_action_group,
+					      "ViewBottomPanel");
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
@@ -3938,8 +3938,8 @@ bottom_panel_item_removed (GeditPanel  *panel,
 
 		gtk_widget_hide (GTK_WIDGET (panel));
 
-		action = gtk_action_group_get_action (window->priv->panes_action_group,
-						      "ViewBottomPane");
+		action = gtk_action_group_get_action (window->priv->panels_action_group,
+						      "ViewBottomPanel");
 		gtk_action_set_sensitive (action, FALSE);
 	}
 }
@@ -3956,8 +3956,8 @@ bottom_panel_item_added (GeditPanel  *panel,
 		GtkAction *action;
 		gboolean show;
 
-		action = gtk_action_group_get_action (window->priv->panes_action_group,
-						      "ViewBottomPane");
+		action = gtk_action_group_get_action (window->priv->panels_action_group,
+						      "ViewBottomPanel");
 		gtk_action_set_sensitive (action, TRUE);
 
 		show = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
@@ -3992,23 +3992,23 @@ static void
 init_panels_visibility (GeditWindow *window)
 {
 	gint active_page;
-	gboolean side_pane_visible;
-	gboolean bottom_pane_visible;
+	gboolean side_panel_visible;
+	gboolean bottom_panel_visible;
 
 	gedit_debug (DEBUG_WINDOW);
 
-	/* side pane */
+	/* side panel */
 	active_page = g_settings_get_int (window->priv->window_settings,
 					  GEDIT_SETTINGS_SIDE_PANEL_ACTIVE_PAGE);
 	_gedit_panel_set_active_item_by_id (GEDIT_PANEL (window->priv->side_panel),
 					    active_page);
 
-	side_pane_visible = g_settings_get_boolean (window->priv->ui_settings,
-						    GEDIT_SETTINGS_SIDE_PANE_VISIBLE);
-	bottom_pane_visible = g_settings_get_boolean (window->priv->ui_settings,
-						      GEDIT_SETTINGS_BOTTOM_PANE_VISIBLE);
+	side_panel_visible = g_settings_get_boolean (window->priv->ui_settings,
+						    GEDIT_SETTINGS_SIDE_PANEL_VISIBLE);
+	bottom_panel_visible = g_settings_get_boolean (window->priv->ui_settings,
+						      GEDIT_SETTINGS_BOTTOM_PANEL_VISIBLE);
 
-	if (side_pane_visible)
+	if (side_panel_visible)
 	{
 		gtk_widget_show (window->priv->side_panel);
 	}
@@ -4021,7 +4021,7 @@ init_panels_visibility (GeditWindow *window)
 		_gedit_panel_set_active_item_by_id (GEDIT_PANEL (window->priv->bottom_panel),
 						    active_page);
 
-		if (bottom_pane_visible)
+		if (bottom_panel_visible)
 		{
 			gtk_widget_show (window->priv->bottom_panel);
 		}
@@ -4029,8 +4029,8 @@ init_panels_visibility (GeditWindow *window)
 	else
 	{
 		GtkAction *action;
-		action = gtk_action_group_get_action (window->priv->panes_action_group,
-						      "ViewBottomPane");
+		action = gtk_action_group_get_action (window->priv->panels_action_group,
+						      "ViewBottomPanel");
 		gtk_action_set_sensitive (action, FALSE);
 	}
 
@@ -4246,8 +4246,8 @@ gedit_window_init (GeditWindow *window)
   	create_side_panel (window);
 	create_bottom_panel (window);
 
-	/* panes' state must be restored after panels have been mapped,
-	 * since the bottom pane position depends on the size of the vpaned. */
+	/* panels' state must be restored after panels have been mapped,
+	 * since the bottom panel position depends on the size of the vpaned. */
 	window->priv->side_panel_size = g_settings_get_int (window->priv->window_settings,
 							    GEDIT_SETTINGS_SIDE_PANEL_SIZE);
 	window->priv->bottom_panel_size = g_settings_get_int (window->priv->window_settings,
@@ -4326,7 +4326,7 @@ gedit_window_init (GeditWindow *window)
 	peas_extension_set_call (window->priv->extensions, "activate", window);
 
 
-	/* set visibility of panes.
+	/* set visibility of panels.
 	 * This needs to be done after plugins activatation */
 	init_panels_visibility (window);
 

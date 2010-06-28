@@ -88,7 +88,7 @@ struct _GeditWindowPrivate
 	GtkActionGroup *always_sensitive_action_group;
 	GtkActionGroup *close_action_group;
 	GtkActionGroup *quit_action_group;
-	GtkActionGroup *panes_action_group;
+	GtkActionGroup *panels_action_group;
 	GtkActionGroup *languages_action_group;
 	GtkActionGroup *documents_list_action_group;
 	guint           documents_list_menu_ui_id;

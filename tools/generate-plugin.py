@@ -35,8 +35,8 @@ options = {
     'author'            : os.getenv('USERNAME'),
     'email'             : os.getenv('LOGNAME') + '@email.com',
     'standalone'        : False,
-    'with-side-pane'    : False,
-    'with-bottom-pane'  : False,
+    'with-side-panel'   : False,
+    'with-bottom-panel' : False,
     'with-menu'         : False,
     'with-window-helper': True,
     'with-config-dlg'   : False
@@ -63,8 +63,8 @@ Features:
   window-helper         Create a window helper object (python only)
   config-dlg            Plugin configuration dialog
   menu                  Plugin menu entries
-  side-pane             Side pane item (N/A)
-  bottom-pane           Bottom pane item (N/A)
+  side-panel            Side panel item (N/A)
+  bottom-panel          Bottom panel item (N/A)
 """ % options
 
 TEMPLATE_DIR = os.path.join(os.path.dirname(sys.argv[0]), "plugin_template")
@@ -79,8 +79,8 @@ try:
                                 'email=',
                                 'standalone',
                                 'with-menu'         , 'without-menu',
-                                'with-side-pane'    , 'without-side-pane',
-                                'with-bottom-pane'  , 'without-bottom-pane',
+                                'with-side-panel'   , 'without-side-panel',
+                                'with-bottom-panel' , 'without-bottom-panel',
                                 'with-window-helper', 'without-window-helper', 
                                 'with-config-dlg'   , 'without-config-dlg',
                                 'help'])
@@ -154,11 +154,11 @@ else:
 if options['standalone']:
     output_files['configure.ac'] = 'configure.ac'
 
-if options['with-side-pane']:
-    directives['WITH_SIDE_PANE'] = True
+if options['with-side-panel']:
+    directives['WITH_SIDE_panel'] = True
 
-if options['with-bottom-pane']:
-    directives['WITH_BOTTOM_PANE'] = True
+if options['with-bottom-panel']:
+    directives['WITH_BOTTOM_panel'] = True
 
 if options['with-menu']:
     directives['WITH_MENU'] = True

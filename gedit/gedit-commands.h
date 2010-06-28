@@ -115,9 +115,9 @@ void		_gedit_cmd_view_show_toolbar		(GtkAction   *action,
 							 GeditWindow *window);
 void		_gedit_cmd_view_show_statusbar		(GtkAction   *action,
 							 GeditWindow *window);
-void		_gedit_cmd_view_show_side_pane		(GtkAction   *action,
+void		_gedit_cmd_view_show_side_panel		(GtkAction   *action,
 							 GeditWindow *window);
-void		_gedit_cmd_view_show_bottom_pane	(GtkAction   *action,
+void		_gedit_cmd_view_show_bottom_panel	(GtkAction   *action,
 							 GeditWindow *window);
 void		_gedit_cmd_view_toggle_fullscreen_mode	(GtkAction   *action,
 							 GeditWindow *window);

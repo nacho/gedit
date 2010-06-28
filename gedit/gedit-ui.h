@@ -174,15 +174,15 @@ static const GtkToggleActionEntry gedit_always_sensitive_toggle_menu_entries[] =
 	  G_CALLBACK (_gedit_cmd_view_toggle_fullscreen_mode), FALSE }
 };
 
-/* separate group, should be always sensitive except when there are no panes */
-static const GtkToggleActionEntry gedit_panes_toggle_menu_entries[] =
+/* separate group, should be always sensitive except when there are no panels */
+static const GtkToggleActionEntry gedit_panels_toggle_menu_entries[] =
 {
-	{ "ViewSidePane", NULL, N_("Side _Pane"), "F9",
-	  N_("Show or hide the side pane in the current window"),
-	  G_CALLBACK (_gedit_cmd_view_show_side_pane), FALSE },
-	{ "ViewBottomPane", NULL, N_("_Bottom Pane"), "<control>F9",
-	  N_("Show or hide the bottom pane in the current window"),
-	  G_CALLBACK (_gedit_cmd_view_show_bottom_pane), FALSE }
+	{ "ViewSidePanel", NULL, N_("Side _Panel"), "F9",
+	  N_("Show or hide the side panel in the current window"),
+	  G_CALLBACK (_gedit_cmd_view_show_side_panel), FALSE },
+	{ "ViewBottomPanel", NULL, N_("_Bottom Panel"), "<control>F9",
+	  N_("Show or hide the bottom panel in the current window"),
+	  G_CALLBACK (_gedit_cmd_view_show_bottom_panel), FALSE }
 };
 
 G_END_DECLS
