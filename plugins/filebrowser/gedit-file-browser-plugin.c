@@ -792,7 +792,7 @@ filetree_plugin_class_init (GeditFileBrowserPluginClass *klass)
 	object_class->dispose = filetree_plugin_dispose;
 
 	g_type_class_add_private (object_class,
-				  sizeof (GeditFileBrowserPlugin));
+				  sizeof (GeditFileBrowserPluginPrivate));
 }
 
 static void
