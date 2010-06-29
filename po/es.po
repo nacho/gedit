@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
-"POT-Creation-Date: 2010-06-27 23:06+0000\n"
-"PO-Revision-Date: 2010-06-28 20:50+0200\n"
+"POT-Creation-Date: 2010-06-28 21:58+0000\n"
+"PO-Revision-Date: 2010-06-29 05:09+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -227,7 +227,8 @@ msgid "Right Margin Position"
 msgstr "Posición del margen derecho"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:37
-msgid "Side Pane is Visible"
+#| msgid "Side Pane is Visible"
+msgid "Side panel is Visible"
 msgstr "El panel lateral es visible"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:38
@@ -246,14 +247,6 @@ msgstr ""
 "reconocidas."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:40
-#| msgid ""
-#| "Specifies how the cursor moves when the HOME and END keys are pressed. "
-#| "Use \"DISABLED\" to always move at the start/end of the line, \"AFTER\" "
-#| "to move to the start/end of the line the first time the keys are pressed "
-#| "and to the start/end of the text ignoring whitespaces the second time the "
-#| "keys are pressed, \"BEFORE\" to move to the start/end of the text before "
-#| "moving to the start/end of the line and \"ALWAYS\" to always move to the "
-#| "start/end of the text instead of the start/end of the line."
 msgid ""
 "Specifies how the cursor moves when the HOME and END keys are pressed. Use "
 "\"disabled\" to always move at the start/end of the line, \"after\" to move "
@@ -272,12 +265,6 @@ msgstr ""
 "al inicio/final del texto en lugar del inicio/final de la línea."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:41
-#| msgid ""
-#| "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for "
-#| "no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-#| "\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note "
-#| "that the values are case-sensitive, so make sure they appear exactly as "
-#| "mentioned here."
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"none\" for no wrapping, "
 "\"word\" for wrapping at word boundaries, and \"char\" for wrapping at "
@@ -291,12 +278,6 @@ msgstr ""
 "aparecen exactamente del mismo modo en que se mencionan aquí."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:42
-#| msgid ""
-#| "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE"
-#| "\" for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, "
-#| "and \"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. "
-#| "Note that the values are case-sensitive, so make sure they appear exactly "
-#| "as mentioned here."
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"none\" for no "
 "wrapping, \"word\" for wrapping at word boundaries, and \"char\" for "
@@ -356,12 +337,6 @@ msgid "Specifies the position of the right margin."
 msgstr "Especifica la posición del margen derecho."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:49
-#| msgid ""
-#| "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for "
-#| "no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-#| "\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note "
-#| "that the values are case-sensitive, so make sure they appear exactly as "
-#| "mentioned here."
 msgid ""
 "Specifies when to show the notebook tabs. Use \"never\" to never show the "
 "tabs, \"always\" to always show the tabs, and \"auto\" to show the tabs only "
@@ -383,13 +358,6 @@ msgid "Style Scheme"
 msgstr "Estilo"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:52
-#| msgid ""
-#| "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM"
-#| "\" to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display "
-#| "icons only, \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and "
-#| "text, and \"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" to display prioritized text "
-#| "beside icons. Note that the values are case-sensitive, so make sure they "
-#| "appear exactly as mentioned here."
 msgid ""
 "Style for the toolbar buttons. Possible values are \"system\" to use the "
 "system's default style, \"icons\" to display icons only, \"icons-and-text\" "
@@ -502,10 +470,13 @@ msgstr ""
 "carga un archivo."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:72
-msgid "Whether the side pane at the left of editing windows should be visible."
+#| msgid ""
+#| "Whether the side pane at the left of editing windows should be visible."
+msgid ""
+"Whether the side panel at the left of editing windows should be visible."
 msgstr ""
-"Indica si debe ser visible el panel lateral de la parte izquierda de las "
-"ventanas de edición."
+"Indica si el panel lateral de la parte izquierda de las ventanas de edición "
+"debe ser visible."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:73
 msgid ""
@@ -2225,19 +2196,23 @@ msgid "Edit text in fullscreen"
 msgstr "Editar texto a pantalla completa"
 
 #: ../gedit/gedit-ui.h:180
-msgid "Side _Pane"
+#| msgid "Side _Pane"
+msgid "Side _Panel"
 msgstr "Panel _lateral"
 
 #: ../gedit/gedit-ui.h:181
-msgid "Show or hide the side pane in the current window"
+#| msgid "Show or hide the side pane in the current window"
+msgid "Show or hide the side panel in the current window"
 msgstr "Mostrar u ocultar el panel lateral en la ventana actual"
 
 #: ../gedit/gedit-ui.h:183
-msgid "_Bottom Pane"
+#| msgid "_Bottom Pane"
+msgid "_Bottom Panel"
 msgstr "Panel _inferior"
 
 #: ../gedit/gedit-ui.h:184
-msgid "Show or hide the bottom pane in the current window"
+#| msgid "Show or hide the bottom pane in the current window"
+msgid "Show or hide the bottom panel in the current window"
 msgstr "Mostrar u ocultar el panel inferior en la ventana actual"
 
 #: ../gedit/gedit-utils.c:1096
@@ -2729,70 +2704,72 @@ msgid "Run command"
 msgstr "Ejecutar comando"
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
-msgid "Easy file access from the side pane"
+#| msgid "Easy file access from the side pane"
+msgid "Easy file access from the side panel"
 msgstr "Acceso a archivos fácil desde el panel lateral"
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
-msgid "File Browser Pane"
+#| msgid "File Browser Pane"
+msgid "File Browser Panel"
 msgstr "Panel del examinador de archivos"
 
-#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:239
+#: ../plugins/filebrowser/gedit-file-bookmarks-store.c:243
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:556
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:551
 msgid "_Set root to active document"
 msgstr "_Establecer raíz al documento activo"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:558
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:553
 msgid "Set the root to the active document location"
 msgstr "Establece la raíz en el lugar del documento activo"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:563
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:558
 msgid "_Open terminal here"
 msgstr "_Abrir terminal aquí"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:565
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:560
 msgid "Open a terminal at the currently opened directory"
 msgstr "Abrir un terminal en el directorio actualmente abierto"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:708
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:701
 msgid "File Browser"
 msgstr "Examinador de archivos"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:841
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:842
 msgid "An error occurred while creating a new directory"
 msgstr "Ocurrió un error al crear el directorio nuevo"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:844
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:845
 msgid "An error occurred while creating a new file"
 msgstr "Ocurrió un error al crear un archivo nuevo"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:847
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:848
 msgid "An error occurred while renaming a file or directory"
 msgstr "Ocurrió un error al renombrar un archivo o directorio"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:850
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:851
 msgid "An error occurred while deleting a file or directory"
 msgstr "Ocurrió un error al borrar un archivo o directorio"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:853
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:854
 msgid "An error occurred while opening a directory in the file manager"
 msgstr "Ocurrió un error al abrir un directorio en el gestor de archivos"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:856
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:857
 msgid "An error occurred while setting a root directory"
 msgstr "Ocurrió un error al establecer el directorio raíz"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:859
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:860
 msgid "An error occurred while loading a directory"
 msgstr "Ocurrió un error al cargar un directorio"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:862
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:863
 msgid "An error occurred"
 msgstr "Ocurrió un error"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1133
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1135
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
@@ -2801,12 +2778,12 @@ msgstr ""
 "a la papelera, ¿quiere borrarlo\n"
 "permanentemente?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1138
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1140
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "El archivo %s no se puede mover a la papelera."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1143
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1145
 msgid "The selected files cannot be moved to the trash."
 msgstr "Los archivos seleccionados no se pueden mover a la papelera."
 
@@ -2823,11 +2800,11 @@ msgstr "¿Seguro que quiere borrar permanentemente los archivos seleccionados?"
 msgid "If you delete an item, it is permanently lost."
 msgstr "Si borra un elemento, se pierde permanentemente."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:1725
+#: ../plugins/filebrowser/gedit-file-browser-store.c:1728
 msgid "(Empty)"
 msgstr "(Vacío)"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3439
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3442
 msgid ""
 "The renamed file is currently filtered out.You need to adjust your filter "
 "settings to make the file visible"
@@ -2836,11 +2813,11 @@ msgstr ""
 "ajustes de filtros para hacer el archivo visible."
 
 #. Translators: This is the default name of new files created by the file browser pane.
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3686
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3689
 msgid "file"
 msgstr "archivo"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3714
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3717
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2849,11 +2826,11 @@ msgstr ""
 "para hacerlo visible"
 
 #. Translators: This is the default name of new directories created by the file browser pane.
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3745
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3748
 msgid "directory"
 msgstr "directorio"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:3770
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3773
 msgid ""
 "The new directory is currently filtered out. You need to adjust your filter "
 "settings to make the directory visible"
@@ -2861,154 +2838,154 @@ msgstr ""
 "El directorio nuevo esta actualmente filtrado. Necesita ajustar los filtros "
 "para hacerlo visible."
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:737
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:740
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:824
 msgid "_Filter"
 msgstr "_Filtro"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:826
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:829
 msgid "_Move to Trash"
 msgstr "_Mover a la papelera"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:827
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:830
 msgid "Move selected file or folder to trash"
 msgstr "Mover el archivo o carpeta seleccionado a la papelera"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:829
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
 msgid "_Delete"
 msgstr "_Borrar"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:830
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
 msgid "Delete selected file or folder"
 msgstr "Borra el archivo o carpeta seleccionado"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:840
 msgid "Open selected file"
 msgstr "Abrir el archivo seleccionado"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:843
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:846
 msgid "Up"
 msgstr "Subir"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:844
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
 msgid "Open the parent folder"
 msgstr "Abrir la carpeta contenedora"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
 msgid "_New Folder"
 msgstr "_Carpeta nueva"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:850
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:853
 msgid "Add new empty folder"
 msgstr "Añade una carpeta vacía nueva"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:855
 msgid "New F_ile"
 msgstr "_Archivo nuevo"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:853
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:856
 msgid "Add new empty file"
 msgstr "Añade un archivo nuevo vacío"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:858
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:861
 msgid "_Rename"
 msgstr "_Renombrar"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:859
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:862
 msgid "Rename selected file or folder"
 msgstr "Renombra el archivo o carpeta seleccionada"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:865
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:868
 msgid "_Previous Location"
 msgstr "Ubicación _anterior"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:867
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:870
 msgid "Go to the previous visited location"
 msgstr "Ir al lugar anteriormente visitado"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:869
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:872
 msgid "_Next Location"
 msgstr "_Siguiente lugar"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:870
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:873
 msgid "Go to the next visited location"
 msgstr "Ir al siguiente lugar visitado"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:871
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:874
 msgid "Re_fresh View"
 msgstr "Re_frescar vista"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:872
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:875
 msgid "Refresh the view"
 msgstr "Refresca la vista"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:873
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:891
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:876
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:894
 msgid "_View Folder"
 msgstr "_Ver carpeta"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:874
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:892
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:877
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:895
 msgid "View folder in file manager"
 msgstr "Ver la carpeta en el gestor de archivos"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:881
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:884
 msgid "Show _Hidden"
 msgstr "Mostrar _ocultos"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:882
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:885
 msgid "Show hidden files and folders"
 msgstr "Mostrar archivos y carpetas ocultos"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:884
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:887
 msgid "Show _Binary"
 msgstr "Mostrar _binarios"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:885
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:888
 msgid "Show binary files"
 msgstr "Mostrar archivos binarios"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1018
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1027
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1048
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1021
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1030
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1051
 msgid "Previous location"
 msgstr "Ubicación anterior"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1020
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1023
 msgid "Go to previous location"
 msgstr "Ir al lugar anterior"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1022
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1043
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1025
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1046
 msgid "Go to a previously opened location"
 msgstr "Ir a un lugar anteriormente abierto"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1039
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1042
 msgid "Next location"
 msgstr "Siguiente lugar"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1041
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1044
 msgid "Go to next location"
 msgstr "Ir al siguiente lugar"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1251
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1254
 msgid "_Match Filename"
 msgstr "Coi_ncidir con el nombre de archivo"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2176
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2179
 #, c-format
 msgid "No mount object for mounted volume: %s"
 msgstr "No existe el objeto montado para el volumen montado: %s"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2254
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2257
 #, c-format
 msgid "Could not open media: %s"
 msgstr "No se pudo abrir el soporte: %s"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:2301
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:2304
 #, c-format
 msgid "Could not mount volume: %s"
 msgstr "No se pudo abrir el volumen: %s"
@@ -3600,21 +3577,21 @@ msgstr "Comprueba la ortografía del documento actual."
 msgid "Spell Checker"
 msgstr "Corrector ortográfico"
 
-#: ../plugins/taglist/gedit-taglist-plugin.c:99
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:694
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:710
+#: ../plugins/taglist/gedit-taglist-plugin.c:102
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:698
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:714
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:605
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:609
 msgid "Select the group of tags you want to use"
 msgstr "Seleccione el grupo de etiquetas que quiere usar"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:624
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:628
 msgid "_Preview"
 msgstr "Vista _previa"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:691
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:695
 msgid "Available Tag Lists"
 msgstr "Listas de etiquetas disponibles"
 
