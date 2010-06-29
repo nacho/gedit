@@ -46,18 +46,14 @@ IGNORE_HFILES=		\
 	gedit-documents-panel.h			\
 	gedit-io-error-info-bar.h		\
 	gedit-languages-manager.h		\
-	gedit-message-area.h			\
 	gedit-object-module.h			\
-	gedit-plugin-manager.h			\
 	gedit-plugins-engine.h			\
-	gedit-prefs-manager-private.h		\
 	gedit-session.h				\
 	gedit-ui.h				\
 	gedit-window-private.h			\
 	gedit-output-window.h			\
 	gedit-close-confirmation-dialog.h	\
 	gedit-encodings-dialog.h		\
-	gedit-open-location-dialog.h		\
 	gedit-page-setup-dialog.h		\
 	gedit-preferences-dialog.h		\
 	gedit-search-dialog.h			\
@@ -92,7 +88,8 @@ GTKDOC_CFLAGS=	\
 	$(GEDIT_CFLAGS)
 
 GTKDOC_LIBS=	\
-	$(top_builddir)/gedit/libgedit.la	\
+	$(top_builddir)/gedit/libgedit.la		\
+	$(top_builddir)/gedit/libgedit-private.la	\
 	$(GEDIT_LIBS)
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.
