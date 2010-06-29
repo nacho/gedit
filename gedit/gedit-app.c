@@ -300,26 +300,32 @@ ensure_user_config_dir (void)
 static void
 load_accels (void)
 {
-	const gchar *filename;
+	gchar *filename;
 
-	filename = gedit_dirs_get_user_accels_file ();
+	filename = g_build_filename (gedit_dirs_get_user_config_dir (),
+				     "accels",
+				     NULL);
 	if (filename != NULL)
 	{
 		gedit_debug_message (DEBUG_APP, "Loading keybindings from %s\n", filename);
 		gtk_accel_map_load (filename);
+		g_free (filename);
 	}
 }
 
 static void
 save_accels (void)
 {
-	const gchar *filename;
+	gchar *filename;
 
-	filename = gedit_dirs_get_user_accels_file ();
+	filename = g_build_filename (gedit_dirs_get_user_config_dir (),
+				     "accels",
+				     NULL);
 	if (filename != NULL)
 	{
 		gedit_debug_message (DEBUG_APP, "Saving keybindings in %s\n", filename);
 		gtk_accel_map_save (filename);
+		g_free (filename);
 	}
 }
 

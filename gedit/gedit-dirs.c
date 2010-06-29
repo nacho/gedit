@@ -16,8 +16,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA. 
+ * Foundation, Inc., 59 Temple Place, Suite 330,
+ * Boston, MA 02111-1307, USA.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -33,7 +33,6 @@
 static gchar *user_config_dir        = NULL;
 static gchar *user_cache_dir         = NULL;
 static gchar *user_plugins_dir       = NULL;
-static gchar *user_accels_file       = NULL;
 static gchar *gedit_data_dir         = NULL;
 static gchar *gedit_locale_dir       = NULL;
 static gchar *gedit_lib_dir          = NULL;
@@ -43,23 +42,11 @@ static gchar *gedit_plugins_data_dir = NULL;
 void
 gedit_dirs_init ()
 {
-	const gchar *g_config_dir = NULL;
-
-	g_config_dir = g_get_user_config_dir ();
-
 #ifdef G_OS_WIN32
 	gchar *win32_dir;
 
 	win32_dir = g_win32_get_package_installation_directory_of_module (NULL);
 
-
-	user_config_dir = g_build_filename (g_config_dir,
-					    "gedit",
-					    NULL);
-	user_accels_file = g_build_filename (user_config_dir,
-					     "accels",
-					     "gedit",
-					     NULL);
 	gedit_data_dir = g_build_filename (win32_dir,
 					   "share",
 					   "gedit",
@@ -93,9 +80,6 @@ gedit_dirs_init ()
 						  NULL);
 	}
 #endif /* !OS_OSX */
-	const gchar *envvar;
-	const gchar *home;
-
 	if (gedit_data_dir == NULL)
 	{
 		gedit_data_dir = g_build_filename (DATADIR,
@@ -108,47 +92,16 @@ gedit_dirs_init ()
 						  "gedit",
 						  NULL);
 	}
-
-	/* Support old libgnome env var */
-	envvar = g_getenv ("GNOME22_USER_DIR");
-	if (envvar != NULL)
-	{
-		user_config_dir = g_build_filename (envvar,
-						    "gedit",
-						    NULL);
-		user_accels_file = g_build_filename (envvar,
-						     "accels",
-						     "gedit",
-						     NULL);
-
-	}
-	else
-	{
-		home = g_get_home_dir ();
-
-		if (home != NULL)
-		{
-			user_config_dir = g_build_filename (home,
-							    ".gnome2",
-							    "gedit",
-							    NULL);
-
-			/* on linux accels are stored in .gnome2/accels
-			 * for historic reasons (backward compat with the
-			 * old libgnome that took care of saving them */
-			user_accels_file = g_build_filename (home,
-							     ".gnome2",
-							     "accels",
-							     "gedit",
-							     NULL);
-		}
-	}
 #endif /* !G_OS_WIN32 */
 
-	user_cache_dir = g_build_filename (g_config_dir,
+	user_cache_dir = g_build_filename (g_get_user_cache_dir (),
 					   "gedit",
 					   NULL);
-	user_plugins_dir = g_build_filename (user_config_dir,
+	user_config_dir = g_build_filename (g_get_user_config_dir (),
+					    "gedit",
+					    NULL);
+	user_plugins_dir = g_build_filename (g_get_user_data_dir (),
+					     "gedit",
 					     "plugins",
 					     NULL);
 	gedit_plugins_dir = g_build_filename (gedit_lib_dir,
@@ -165,7 +118,6 @@ gedit_dirs_shutdown ()
 	g_free (user_config_dir);
 	g_free (user_cache_dir);
 	g_free (user_plugins_dir);
-	g_free (user_accels_file);
 	g_free (gedit_data_dir);
 	g_free (gedit_locale_dir);
 	g_free (gedit_lib_dir);
@@ -189,12 +141,6 @@ const gchar *
 gedit_dirs_get_user_plugins_dir (void)
 {
 	return user_plugins_dir;
-}
-
-const gchar *
-gedit_dirs_get_user_accels_file (void)
-{
-	return user_accels_file;
 }
 
 const gchar *
@@ -236,17 +182,15 @@ gedit_dirs_get_binding_modules_dir (void)
 gchar *
 gedit_dirs_get_ui_file (const gchar *file)
 {
-	const gchar *datadir;
 	gchar *ui_file;
 
 	g_return_val_if_fail (file != NULL, NULL);
-	
-	datadir = gedit_dirs_get_gedit_data_dir ();
-	ui_file = g_build_filename (datadir,
+
+	ui_file = g_build_filename (gedit_dirs_get_gedit_data_dir (),
 				    "ui",
 				    file,
 				    NULL);
-	
+
 	return ui_file;
 }
 

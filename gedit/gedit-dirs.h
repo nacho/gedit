@@ -40,8 +40,6 @@ const gchar	*gedit_dirs_get_user_cache_dir		(void);
 
 const gchar	*gedit_dirs_get_user_plugins_dir	(void);
 
-const gchar	*gedit_dirs_get_user_accels_file	(void);
-
 const gchar	*gedit_dirs_get_gedit_data_dir		(void);
 
 const gchar	*gedit_dirs_get_gedit_locale_dir	(void);

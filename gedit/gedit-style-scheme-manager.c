@@ -62,7 +62,7 @@ add_gedit_styles_path (GtkSourceStyleSchemeManager *mgr)
 {
 	gchar *dir;
 
-	dir = get_gedit_styles_path();
+	dir = get_gedit_styles_path ();
 
 	if (dir != NULL)
 	{
