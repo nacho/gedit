@@ -304,56 +304,17 @@ gedit_time_plugin_update_state (GeditWindowActivatable *activatable,
 static GeditTimePluginPromptType
 get_prompt_type (GeditTimePlugin *plugin)
 {
-	gchar *prompt_type;
-	GeditTimePluginPromptType res;
-
-	prompt_type = g_settings_get_string (plugin->priv->settings,
-					     PROMPT_TYPE_KEY);
-
-	if (prompt_type == NULL)
-		return PROMPT_SELECTED_FORMAT;
-
-	if (strcmp (prompt_type, "USE_SELECTED_FORMAT") == 0)
-		res = USE_SELECTED_FORMAT;
-	else if (strcmp (prompt_type, "USE_CUSTOM_FORMAT") == 0)
-		res = USE_CUSTOM_FORMAT;
-	else if (strcmp (prompt_type, "PROMPT_CUSTOM_FORMAT") == 0)
-		res = PROMPT_CUSTOM_FORMAT;
-	else
-		res = PROMPT_SELECTED_FORMAT;
-
-	g_free (prompt_type);
-
-	return res;
+	return g_settings_get_enum (plugin->priv->settings,
+				    PROMPT_TYPE_KEY);
 }
 
 static void
 set_prompt_type (GeditTimePlugin           *plugin,
 		 GeditTimePluginPromptType  prompt_type)
 {
-	const gchar * str;
-
-	switch (prompt_type)
-	{
-		case USE_SELECTED_FORMAT:
-			str = "USE_SELECTED_FORMAT";
-			break;
-		case USE_CUSTOM_FORMAT:
-			str = "USE_CUSTOM_FORMAT";
-			break;
-		case PROMPT_CUSTOM_FORMAT:
-			str = "PROMPT_CUSTOM_FORMAT";
-			break;
-		default:
-			str = "PROMPT_SELECTED_FORMAT";
-	}
-
-	g_warning (g_settings_get_string (plugin->priv->settings,
-			       PROMPT_TYPE_KEY));
-
-	g_settings_set_string (plugin->priv->settings,
-			       PROMPT_TYPE_KEY,
-			       str);
+	g_settings_set_enum (plugin->priv->settings,
+			     PROMPT_TYPE_KEY,
+			     prompt_type);
 }
 
 /* The selected format in the list */
