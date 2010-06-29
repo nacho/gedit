@@ -191,7 +191,6 @@ libgedit_c_files =			\
 	gedit-message-type.c		\
 	gedit-message.c			\
 	gedit-multi-notebook.c		\
-	gedit-object-module.c		\
 	gedit-notebook.c		\
 	gedit-panel.c			\
 	gedit-plugins-engine.c		\
