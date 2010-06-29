@@ -16,8 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- *
- * $Id$
  */
 
 /*
@@ -38,16 +36,17 @@
 
 #include <glib/gi18n-lib.h>
 #include <glib.h>
-#include <gmodule.h>
 
 #include <gedit/gedit-debug.h>
 #include <gedit/gedit-utils.h>
+#include <gedit/gedit-window.h>
+#include <gedit/gedit-window-activatable.h>
+#include <libpeasui/peas-ui-configurable.h>
 
 #define GEDIT_TIME_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
 					      GEDIT_TYPE_TIME_PLUGIN, \
 					      GeditTimePluginPrivate))
 
-#define WINDOW_DATA_KEY "GeditTimePluginWindowData"
 #define MENU_PATH "/MenuBar/EditMenu/EditOps_4"
 
 /* gsettings keys */
@@ -103,6 +102,14 @@ enum
 	NUM_COLUMNS
 };
 
+typedef enum
+{
+	PROMPT_SELECTED_FORMAT = 0,	/* Popup dialog with list preselected */
+	PROMPT_CUSTOM_FORMAT,		/* Popup dialog with entry preselected */
+	USE_SELECTED_FORMAT,		/* Use selected format directly */
+	USE_CUSTOM_FORMAT		/* Use custom format directly */
+} GeditTimePluginPromptType;
+
 typedef struct _TimeConfigureDialog TimeConfigureDialog;
 
 struct _TimeConfigureDialog
@@ -143,34 +150,29 @@ struct _ChooseFormatDialog
 	GeditTimePlugin *plugin;
 };
 
-typedef enum
-{
-	PROMPT_SELECTED_FORMAT = 0,	/* Popup dialog with list preselected */
-	PROMPT_CUSTOM_FORMAT,		/* Popup dialog with entry preselected */
-	USE_SELECTED_FORMAT,		/* Use selected format directly */
-	USE_CUSTOM_FORMAT		/* Use custom format directly */
-} GeditTimePluginPromptType;
-
 struct _GeditTimePluginPrivate
 {
-	GSettings *settings;
-};
+	GSettings      *settings;
 
-GEDIT_PLUGIN_REGISTER_TYPE(GeditTimePlugin, gedit_time_plugin)
+	GeditWindow    *window;
 
-typedef struct
-{
 	GtkActionGroup *action_group;
 	guint           ui_id;
-} WindowData;
+};
 
-typedef struct
-{
-	GeditWindow     *window;
-	GeditTimePlugin *plugin;
-} ActionData;
+static void gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface);
+static void peas_ui_configurable_iface_init (PeasUIConfigurableInterface *iface);
 
-static void time_cb (GtkAction *action, ActionData *data);
+G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditTimePlugin,
+				gedit_time_plugin,
+				PEAS_TYPE_EXTENSION_BASE,
+				0,
+				G_IMPLEMENT_INTERFACE_DYNAMIC (GEDIT_TYPE_WINDOW_ACTIVATABLE,
+							       gedit_window_activatable_iface_init)
+				G_IMPLEMENT_INTERFACE_DYNAMIC (PEAS_UI_TYPE_CONFIGURABLE,
+							       peas_ui_configurable_iface_init))
+
+static void time_cb (GtkAction *action, GeditTimePlugin *plugin);
 
 static const GtkActionEntry action_entries[] =
 {
@@ -207,40 +209,28 @@ gedit_time_plugin_dispose (GObject *object)
 		plugin->priv->settings = NULL;
 	}
 
+	if (plugin->priv->action_group != NULL)
+	{
+		g_object_unref (plugin->priv->action_group);
+		plugin->priv->action_group = NULL;
+	}
+
 	G_OBJECT_CLASS (gedit_time_plugin_parent_class)->dispose (object);
 }
 
 static void
-free_window_data (WindowData *data)
-{
-	g_return_if_fail (data != NULL);
-
-	g_object_unref (data->action_group);
-	g_slice_free (WindowData, data);
-}
-
-static void
-free_action_data (ActionData *data)
-{
-	g_return_if_fail (data != NULL);
-
-	g_slice_free (ActionData, data);
-}
-
-static void
-update_ui_real (GeditWindow  *window,
-		WindowData   *data)
+update_ui (GeditTimePlugin *plugin)
 {
 	GeditView *view;
 	GtkAction *action;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	view = gedit_window_get_active_view (window);
+	view = gedit_window_get_active_view (plugin->priv->window);
 
 	gedit_debug_message (DEBUG_PLUGINS, "View: %p", view);
 
-	action = gtk_action_group_get_action (data->action_group,
+	action = gtk_action_group_get_action (plugin->priv->action_group,
 					      "InsertDateAndTime");
 	gtk_action_set_sensitive (action,
 				  (view != NULL) &&
@@ -248,84 +238,66 @@ update_ui_real (GeditWindow  *window,
 }
 
 static void
-impl_activate (GeditPlugin *plugin,
-	       GeditWindow *window)
+gedit_time_plugin_activate (GeditWindowActivatable *activatable,
+			    GeditWindow            *window)
 {
+	GeditTimePluginPrivate *priv;
 	GtkUIManager *manager;
-	WindowData *data;
-	ActionData *action_data;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	data = g_slice_new (WindowData);
-	action_data = g_slice_new (ActionData);
-
-	action_data->plugin = GEDIT_TIME_PLUGIN (plugin);
-	action_data->window = window;
+	priv = GEDIT_TIME_PLUGIN (activatable)->priv;
+	priv->window = window;
 
 	manager = gedit_window_get_ui_manager (window);
 
-	data->action_group = gtk_action_group_new ("GeditTimePluginActions");
-	gtk_action_group_set_translation_domain (data->action_group,
+	priv->action_group = gtk_action_group_new ("GeditTimePluginActions");
+	gtk_action_group_set_translation_domain (priv->action_group,
 						 GETTEXT_PACKAGE);
-	gtk_action_group_add_actions_full (data->action_group,
-				      	   action_entries,
-				      	   G_N_ELEMENTS (action_entries),
-				      	   action_data,
-				      	   (GDestroyNotify) free_action_data);
+	gtk_action_group_add_actions (priv->action_group,
+				      action_entries,
+				      G_N_ELEMENTS (action_entries),
+				      activatable);
 
-	gtk_ui_manager_insert_action_group (manager, data->action_group, -1);
+	gtk_ui_manager_insert_action_group (manager, priv->action_group, -1);
 
-	data->ui_id = gtk_ui_manager_new_merge_id (manager);
-
-	g_object_set_data_full (G_OBJECT (window),
-				WINDOW_DATA_KEY,
-				data,
-				(GDestroyNotify) free_window_data);
+	priv->ui_id = gtk_ui_manager_new_merge_id (manager);
 
 	gtk_ui_manager_add_ui (manager,
-			       data->ui_id,
+			       priv->ui_id,
 			       MENU_PATH,
 			       "InsertDateAndTime",
 			       "InsertDateAndTime",
 			       GTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 
-	update_ui_real (window, data);
+	update_ui (GEDIT_TIME_PLUGIN (activatable));
 }
 
 static void
-impl_deactivate	(GeditPlugin *plugin,
-		 GeditWindow *window)
+gedit_time_plugin_deactivate (GeditWindowActivatable *activatable,
+			      GeditWindow            *window)
 {
+	GeditTimePluginPrivate *priv;
 	GtkUIManager *manager;
-	WindowData *data;
 
 	gedit_debug (DEBUG_PLUGINS);
+
+	priv = GEDIT_TIME_PLUGIN (activatable)->priv;
 
 	manager = gedit_window_get_ui_manager (window);
 
-	data = (WindowData *) g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
-	g_return_if_fail (data != NULL);
-
-	gtk_ui_manager_remove_ui (manager, data->ui_id);
-	gtk_ui_manager_remove_action_group (manager, data->action_group);
-
-	g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
+	gtk_ui_manager_remove_ui (manager, priv->ui_id);
+	gtk_ui_manager_remove_action_group (manager, priv->action_group);
 }
 
 static void
-impl_update_ui	(GeditPlugin *plugin,
-		 GeditWindow *window)
+gedit_time_plugin_update_state (GeditWindowActivatable *activatable,
+				GeditWindow            *window)
 {
-	WindowData   *data;
-
 	gedit_debug (DEBUG_PLUGINS);
 
-	data = (WindowData *) g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
-	g_return_if_fail (data != NULL);
-
-	update_ui_real (window, data);
+	update_ui (GEDIT_TIME_PLUGIN (activatable));
 }
 
 /* whether we should prompt the user or use the specified format */
@@ -336,7 +308,7 @@ get_prompt_type (GeditTimePlugin *plugin)
 	GeditTimePluginPromptType res;
 
 	prompt_type = g_settings_get_string (plugin->priv->settings,
-			        	     PROMPT_TYPE_KEY);
+					     PROMPT_TYPE_KEY);
 
 	if (prompt_type == NULL)
 		return PROMPT_SELECTED_FORMAT;
@@ -376,9 +348,12 @@ set_prompt_type (GeditTimePlugin           *plugin,
 			str = "PROMPT_SELECTED_FORMAT";
 	}
 
+	g_warning (g_settings_get_string (plugin->priv->settings,
+			       PROMPT_TYPE_KEY));
+
 	g_settings_set_string (plugin->priv->settings,
 			       PROMPT_TYPE_KEY,
-		       	       str);
+			       str);
 }
 
 /* The selected format in the list */
@@ -401,7 +376,7 @@ set_selected_format (GeditTimePlugin *plugin,
 
 	g_settings_set_string (plugin->priv->settings,
 			       SELECTED_FORMAT_KEY,
-		       	       format);
+			       format);
 }
 
 /* the custom format in the entry */
@@ -424,17 +399,17 @@ set_custom_format (GeditTimePlugin *plugin,
 
 	g_settings_set_string (plugin->priv->settings,
 			       CUSTOM_FORMAT_KEY,
-		       	       format);
+			       format);
 }
 
 static gchar *
 get_time (const gchar* format)
 {
-  	gchar *out = NULL;
+	gchar *out = NULL;
 	gchar *out_utf8 = NULL;
-  	time_t clock;
-  	struct tm *now;
-  	size_t out_length = 0;
+	time_t clock;
+	struct tm *now;
+	size_t out_length = 0;
 	gchar *locale_format;
 
 	gedit_debug (DEBUG_PLUGINS);
@@ -448,15 +423,15 @@ get_time (const gchar* format)
 	if (locale_format == NULL)
 		return g_strdup (" ");
 
-  	clock = time (NULL);
-  	now = localtime (&clock);
+	clock = time (NULL);
+	now = localtime (&clock);
 
 	do
 	{
 		out_length += 255;
 		out = g_realloc (out, out_length);
 	}
-  	while (strftime (out, out_length, locale_format, now) == 0);
+	while (strftime (out, out_length, locale_format, now) == 0);
 
 	g_free (locale_format);
 
@@ -473,11 +448,23 @@ get_time (const gchar* format)
 			out_utf8 = g_strdup (" ");
 	}
 
-  	return out_utf8;
+	return out_utf8;
 }
 
 static void
-dialog_destroyed (GtkObject *obj, gpointer dialog_pointer)
+configure_dialog_destroyed (GtkObject *obj,
+			    gpointer   dialog_pointer)
+{
+	gedit_debug (DEBUG_PLUGINS);
+
+	g_free (dialog_pointer);
+
+	gedit_debug_message (DEBUG_PLUGINS, "END");
+}
+
+static void
+choose_format_dialog_destroyed (GtkObject *obj,
+				gpointer   dialog_pointer)
 {
 	gedit_debug (DEBUG_PLUGINS);
 
@@ -634,7 +621,7 @@ updated_custom_format_example (GtkEntry *format_entry,
 }
 
 static void
-choose_format_dialog_button_toggled (GtkToggleButton *button,
+choose_format_dialog_button_toggled (GtkToggleButton    *button,
 				     ChooseFormatDialog *dialog)
 {
 	gedit_debug (DEBUG_PLUGINS);
@@ -644,22 +631,22 @@ choose_format_dialog_button_toggled (GtkToggleButton *button,
 		gtk_widget_set_sensitive (dialog->list, FALSE);
 		gtk_widget_set_sensitive (dialog->custom_entry, TRUE);
 		gtk_widget_set_sensitive (dialog->custom_format_example, TRUE);
-
-		return;
 	}
-
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->use_list)))
+	else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->use_list)))
 	{
 		gtk_widget_set_sensitive (dialog->list, TRUE);
 		gtk_widget_set_sensitive (dialog->custom_entry, FALSE);
 		gtk_widget_set_sensitive (dialog->custom_format_example, FALSE);
-
-		return;
+	}
+	else
+	{
+		g_return_if_reached ();
 	}
 }
 
 static void
-configure_dialog_button_toggled (GtkToggleButton *button, TimeConfigureDialog *dialog)
+configure_dialog_button_toggled (GtkToggleButton     *button,
+				 TimeConfigureDialog *dialog)
 {
 	gedit_debug (DEBUG_PLUGINS);
 
@@ -668,26 +655,22 @@ configure_dialog_button_toggled (GtkToggleButton *button, TimeConfigureDialog *d
 		gtk_widget_set_sensitive (dialog->list, FALSE);
 		gtk_widget_set_sensitive (dialog->custom_entry, TRUE);
 		gtk_widget_set_sensitive (dialog->custom_format_example, TRUE);
-
-		return;
 	}
-
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->use_list)))
+	else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->use_list)))
 	{
 		gtk_widget_set_sensitive (dialog->list, TRUE);
 		gtk_widget_set_sensitive (dialog->custom_entry, FALSE);
 		gtk_widget_set_sensitive (dialog->custom_format_example, FALSE);
-
-		return;
 	}
-
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->prompt)))
+	else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->prompt)))
 	{
 		gtk_widget_set_sensitive (dialog->list, FALSE);
 		gtk_widget_set_sensitive (dialog->custom_entry, FALSE);
 		gtk_widget_set_sensitive (dialog->custom_format_example, FALSE);
-
-		return;
+	}
+	else
+	{
+		g_return_if_reached ();
 	}
 }
 
@@ -708,13 +691,13 @@ get_format_from_list (GtkWidget *listview)
 
 	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
 	{
-	        gint selected_value;
+		gint selected_value;
 
 		gtk_tree_model_get (model, &iter, COLUMN_INDEX, &selected_value, -1);
 
 		gedit_debug_message (DEBUG_PLUGINS, "Sel value: %d", selected_value);
 
-	        return selected_value;
+		return selected_value;
 	}
 
 	g_return_val_if_reached (0);
@@ -762,7 +745,7 @@ get_configure_dialog (GeditTimePlugin *plugin)
 
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
 
-	data_dir = gedit_plugin_get_data_dir (GEDIT_PLUGIN (plugin));
+	data_dir = peas_extension_base_get_data_dir (PEAS_EXTENSION_BASE (plugin));
 	ui_file = g_build_filename (data_dir, "gedit-time-setup-dialog.ui", NULL);
 	ret = gedit_utils_get_ui_objects (ui_file,
 					  root_objects,
@@ -802,36 +785,36 @@ get_configure_dialog (GeditTimePlugin *plugin)
 	prompt_type = get_prompt_type (plugin);
 
 	cf = get_custom_format (plugin);
-     	gtk_entry_set_text (GTK_ENTRY(dialog->custom_entry), cf);
-       	g_free (cf);
+	gtk_entry_set_text (GTK_ENTRY(dialog->custom_entry), cf);
+	g_free (cf);
 
-        if (prompt_type == USE_CUSTOM_FORMAT)
-        {
-	        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->custom), TRUE);
+	if (prompt_type == USE_CUSTOM_FORMAT)
+	{
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->custom), TRUE);
 
 		gtk_widget_set_sensitive (dialog->list, FALSE);
 		gtk_widget_set_sensitive (dialog->custom_entry, TRUE);
 		gtk_widget_set_sensitive (dialog->custom_format_example, TRUE);
-        }
-        else if (prompt_type == USE_SELECTED_FORMAT)
-        {
-	        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->use_list), TRUE);
+	}
+	else if (prompt_type == USE_SELECTED_FORMAT)
+	{
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->use_list), TRUE);
 
 		gtk_widget_set_sensitive (dialog->list, TRUE);
 		gtk_widget_set_sensitive (dialog->custom_entry, FALSE);
 		gtk_widget_set_sensitive (dialog->custom_format_example, FALSE);
-        }
-        else
-        {
-	        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->prompt), TRUE);
+	}
+	else
+	{
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->prompt), TRUE);
 
 		gtk_widget_set_sensitive (dialog->list, FALSE);
 		gtk_widget_set_sensitive (dialog->custom_entry, FALSE);
 		gtk_widget_set_sensitive (dialog->custom_format_example, FALSE);
-        }
+	}
 
 	updated_custom_format_example (GTK_ENTRY (dialog->custom_entry),
-			GTK_LABEL (dialog->custom_format_example));
+				       GTK_LABEL (dialog->custom_format_example));
 
 	/* setup a window of a sane size. */
 	gtk_widget_set_size_request (GTK_WIDGET (viewport), 10, 200);
@@ -848,7 +831,7 @@ get_configure_dialog (GeditTimePlugin *plugin)
 			  "toggled",
 			  G_CALLBACK (configure_dialog_button_toggled),
 			  dialog);
-   	g_signal_connect (dialog->prompt,
+	g_signal_connect (dialog->prompt,
 			  "toggled",
 			  G_CALLBACK (configure_dialog_button_toggled),
 			  dialog);
@@ -858,7 +841,7 @@ get_configure_dialog (GeditTimePlugin *plugin)
 			  dialog);
 	g_signal_connect (dialog->dialog,
 			  "destroy",
-			  G_CALLBACK (dialog_destroyed),
+			  G_CALLBACK (configure_dialog_destroyed),
 			  dialog);
 	g_signal_connect (dialog->custom_entry,
 			  "changed",
@@ -922,7 +905,7 @@ get_choose_format_dialog (GtkWindow                 *parent,
 
 	dialog = g_new0 (ChooseFormatDialog, 1);
 
-	data_dir = gedit_plugin_get_data_dir (GEDIT_PLUGIN (plugin));
+	data_dir = peas_extension_base_get_data_dir (PEAS_EXTENSION_BASE (plugin));
 	ui_file = g_build_filename (data_dir, "gedit-time-dialog.ui", NULL);
 	ret = gedit_utils_get_ui_objects (ui_file,
 					  NULL,
@@ -969,7 +952,7 @@ get_choose_format_dialog (GtkWindow                 *parent,
 	}
 
 	gtk_window_group_add_window (wg,
-			     	     GTK_WINDOW (dialog->dialog));
+				     GTK_WINDOW (dialog->dialog));
 	gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog), parent);
 	gtk_window_set_modal (GTK_WINDOW (dialog->dialog), TRUE);
 
@@ -978,7 +961,7 @@ get_choose_format_dialog (GtkWindow                 *parent,
 	g_free (sf);
 
 	cf = get_custom_format (plugin);
-     	gtk_entry_set_text (GTK_ENTRY(dialog->custom_entry), cf);
+	gtk_entry_set_text (GTK_ENTRY(dialog->custom_entry), cf);
 	g_free (cf);
 
 	updated_custom_format_example (GTK_ENTRY (dialog->custom_entry),
@@ -986,7 +969,7 @@ get_choose_format_dialog (GtkWindow                 *parent,
 
 	if (prompt_type == PROMPT_CUSTOM_FORMAT)
 	{
-        	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->custom), TRUE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->custom), TRUE);
 
 		gtk_widget_set_sensitive (dialog->list, FALSE);
 		gtk_widget_set_sensitive (dialog->custom_entry, TRUE);
@@ -1021,7 +1004,7 @@ get_choose_format_dialog (GtkWindow                 *parent,
 			  dialog);
 	g_signal_connect (dialog->dialog,
 			  "destroy",
-			  G_CALLBACK (dialog_destroyed),
+			  G_CALLBACK (choose_format_dialog_destroyed),
 			  dialog);
 	g_signal_connect (dialog->custom_entry,
 			  "changed",
@@ -1096,43 +1079,46 @@ choose_format_dialog_response_cb (GtkWidget          *widget,
 }
 
 static void
-time_cb (GtkAction  *action,
-	 ActionData *data)
+time_cb (GtkAction       *action,
+	 GeditTimePlugin *plugin)
 {
+	GeditTimePluginPrivate *priv;
 	GtkTextBuffer *buffer;
-	gchar *the_time = NULL;
 	GeditTimePluginPromptType prompt_type;
+	gchar *the_time = NULL;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	buffer = GTK_TEXT_BUFFER (gedit_window_get_active_document (data->window));
+	priv = plugin->priv;
+
+	buffer = GTK_TEXT_BUFFER (gedit_window_get_active_document (priv->window));
 	g_return_if_fail (buffer != NULL);
 
-	prompt_type = get_prompt_type (data->plugin);
+	prompt_type = get_prompt_type (plugin);
 
-        if (prompt_type == USE_CUSTOM_FORMAT)
-        {
-		gchar *cf = get_custom_format (data->plugin);
-	        the_time = get_time (cf);
+	if (prompt_type == USE_CUSTOM_FORMAT)
+	{
+		gchar *cf = get_custom_format (plugin);
+		the_time = get_time (cf);
 		g_free (cf);
 	}
-        else if (prompt_type == USE_SELECTED_FORMAT)
-        {
-		gchar *sf = get_selected_format (data->plugin);
-	        the_time = get_time (sf);
+	else if (prompt_type == USE_SELECTED_FORMAT)
+	{
+		gchar *sf = get_selected_format (plugin);
+		the_time = get_time (sf);
 		g_free (sf);
 	}
-        else
-        {
+	else
+	{
 		ChooseFormatDialog *dialog;
 
-		dialog = get_choose_format_dialog (GTK_WINDOW (data->window),
+		dialog = get_choose_format_dialog (GTK_WINDOW (priv->window),
 						   prompt_type,
-						   data->plugin);
+						   plugin);
 		if (dialog != NULL)
 		{
 			dialog->buffer = buffer;
-			dialog->plugin = data->plugin;
+			dialog->plugin = plugin;
 
 			g_signal_connect (dialog->dialog,
 					  "response",
@@ -1217,37 +1203,65 @@ configure_dialog_response_cb (GtkWidget           *widget,
 	}
 }
 
-static GtkWidget *
-impl_create_configure_dialog (GeditPlugin *plugin)
+static gboolean
+gedit_time_plugin_create_configure_dialog (PeasUIConfigurable *configurable,
+					   GtkWidget         **dialog)
 {
-	TimeConfigureDialog *dialog;
+	TimeConfigureDialog *dlg;
 
-	dialog = get_configure_dialog (GEDIT_TIME_PLUGIN (plugin));
+	dlg = get_configure_dialog (GEDIT_TIME_PLUGIN (configurable));
+	dlg->plugin = GEDIT_TIME_PLUGIN (configurable);
 
-	dialog->plugin = GEDIT_TIME_PLUGIN (plugin);
-
-	g_signal_connect (dialog->dialog,
+	g_signal_connect (dlg->dialog,
 			  "response",
 			  G_CALLBACK (configure_dialog_response_cb),
-			  dialog);
+			  dlg);
 
-	return GTK_WIDGET (dialog->dialog);
+	*dialog = GTK_WIDGET (dlg->dialog);
+
+	return TRUE;
 }
 
 static void
 gedit_time_plugin_class_init (GeditTimePluginClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	GeditPluginClass *plugin_class = GEDIT_PLUGIN_CLASS (klass);
 
 	object_class->dispose = gedit_time_plugin_dispose;
 
-	plugin_class->activate = impl_activate;
-	plugin_class->deactivate = impl_deactivate;
-	plugin_class->update_ui = impl_update_ui;
-
-	plugin_class->create_configure_dialog = impl_create_configure_dialog;
-
 	g_type_class_add_private (object_class, sizeof (GeditTimePluginPrivate));
 }
+
+static void
+gedit_time_plugin_class_finalize (GeditTimePluginClass *klass)
+{
+}
+
+static void
+peas_ui_configurable_iface_init (PeasUIConfigurableInterface *iface)
+{
+	iface->create_configure_dialog = gedit_time_plugin_create_configure_dialog;
+}
+
+static void
+gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface)
+{
+	iface->activate = gedit_time_plugin_activate;
+	iface->deactivate = gedit_time_plugin_deactivate;
+	iface->update_state = gedit_time_plugin_update_state;
+}
+
+G_MODULE_EXPORT void
+peas_register_types (PeasObjectModule *module)
+{
+	gedit_time_plugin_register_type (G_TYPE_MODULE (module));
+
+	peas_object_module_register_extension_type (module,
+						    GEDIT_TYPE_WINDOW_ACTIVATABLE,
+						    GEDIT_TYPE_TIME_PLUGIN);
+	peas_object_module_register_extension_type (module,
+						    PEAS_UI_TYPE_CONFIGURABLE,
+						    GEDIT_TYPE_TIME_PLUGIN);
+}
+
 /* ex:ts=8:noet: */
