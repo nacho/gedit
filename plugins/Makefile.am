@@ -5,10 +5,10 @@ DIST_SUBDIRS = \
 	filebrowser	\
 	modelines	\
 	sort		\
-	taglist
+	taglist		\
+	time
 
 #	spell 		\
-#	time
 #	externaltools
 #	pythonconsole
 #	quickopen
@@ -20,11 +20,11 @@ SUBDIRS = \
 	filebrowser	\
 	modelines	\
 	sort		\
-	taglist
+	taglist		\
+	time
 
 #	filebrowser
 #	modelines
-#	time
 #	pythonconsole
 #	quickopen
 #	snippets
