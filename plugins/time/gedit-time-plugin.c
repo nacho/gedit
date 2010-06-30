@@ -1161,9 +1161,8 @@ configure_dialog_response_cb (GtkWidget           *widget,
 	}
 }
 
-static gboolean
-gedit_time_plugin_create_configure_dialog (PeasUIConfigurable *configurable,
-					   GtkWidget         **dialog)
+static GtkWidget *
+gedit_time_plugin_create_configure_dialog (PeasUIConfigurable *configurable)
 {
 	TimeConfigureDialog *dlg;
 
@@ -1174,9 +1173,7 @@ gedit_time_plugin_create_configure_dialog (PeasUIConfigurable *configurable,
 			  G_CALLBACK (configure_dialog_response_cb),
 			  dlg);
 
-	*dialog = GTK_WIDGET (dlg->dialog);
-
-	return TRUE;
+	return GTK_WIDGET (dlg->dialog);
 }
 
 static void
