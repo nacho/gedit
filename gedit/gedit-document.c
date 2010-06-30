@@ -174,6 +174,7 @@ enum {
 	SAVING,
 	SAVED,
 	SEARCH_HIGHLIGHT_UPDATED,
+	SYNC_DOCUMENTS,
 	LAST_SIGNAL
 };
 
@@ -735,6 +736,21 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      2, 
 			      GTK_TYPE_TEXT_ITER | G_SIGNAL_TYPE_STATIC_SCOPE,
 			      GTK_TYPE_TEXT_ITER | G_SIGNAL_TYPE_STATIC_SCOPE);
+
+	/* This signal is used to sync splitted documents. This signal is
+	 * private and should not be used except for the tab.
+	 * NOTE: When an attribute needs to be sync this signal needs to be
+	         emitted.
+	 */
+	document_signals[SYNC_DOCUMENTS] =
+		g_signal_new ("sync-documents",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      0,
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
 
 	g_type_class_add_private (object_class, sizeof (GeditDocumentPrivate));
 }
@@ -1527,6 +1543,8 @@ document_loader_loaded (GeditDocumentLoader *loader,
 		}
 
 		gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
+
+		g_signal_emit (doc, document_signals[SYNC_DOCUMENTS], 0);
 	}
 
 	/* special case creating a named new doc */
@@ -1751,6 +1769,9 @@ document_saver_saving (GeditDocumentSaver *saver,
 			set_encoding (doc, 
 				      doc->priv->requested_encoding, 
 				      TRUE);
+
+			/* We need to sync the docs after saving */
+			g_signal_emit (doc, document_signals[SYNC_DOCUMENTS], 0);
 		}
 
 		g_signal_emit (doc,
@@ -3084,5 +3105,23 @@ gedit_document_set_metadata (GeditDocument *doc,
 	g_object_unref (info);
 }
 #endif
+
+void
+_gedit_document_sync_documents (GeditDocument *doc1,
+				GeditDocument *doc2)
+{
+	if (doc2->priv->untitled_number > 0 &&
+	    doc2->priv->untitled_number != doc1->priv->untitled_number)
+	{
+		release_untitled_number (doc2->priv->untitled_number);
+		doc2->priv->untitled_number = doc1->priv->untitled_number;
+	}
+
+	doc2->priv->encoding = gedit_encoding_copy (doc1->priv->encoding);
+	doc2->priv->mtime = doc1->priv->mtime;
+	doc2->priv->time_of_last_save_or_load = doc1->priv->time_of_last_save_or_load;
+	doc2->priv->readonly = doc1->priv->readonly;
+	doc2->priv->last_save_was_manually = doc1->priv->last_save_was_manually;
+}
 
 /* ex:ts=8:noet: */

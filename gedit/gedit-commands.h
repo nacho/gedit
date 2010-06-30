@@ -123,6 +123,12 @@ void		_gedit_cmd_view_toggle_fullscreen_mode	(GtkAction   *action,
 							 GeditWindow *window);
 void		_gedit_cmd_view_leave_fullscreen_mode	(GtkAction   *action,
 							 GeditWindow *window);
+void		_gedit_cmd_view_split_horizontally	(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_view_split_vertically	(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_view_unsplit			(GtkAction   *action,
+							 GeditWindow *window);
 
 void		_gedit_cmd_search_find			(GtkAction   *action,
 							 GeditWindow *window);

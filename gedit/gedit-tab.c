@@ -44,18 +44,72 @@
 #include "gedit-debug.h"
 #include "gedit-enum-types.h"
 #include "gedit-settings.h"
+#include "gedit-undo-manager.h"
+#include "gedit-marshal.h"
 
 #define GEDIT_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_TAB, GeditTabPrivate))
 
 #define GEDIT_TAB_KEY "GEDIT_TAB_KEY"
 
+typedef struct _DocumentView
+{
+	GtkWidget     *view;
+	GtkWidget     *scrolled_window;
+	GeditDocument *doc;
+} DocumentView;
+
+/* Properties to bind between views and documents */
+enum
+{
+	AUTO_INDENT,
+	DRAW_SPACES,
+	HIGHLIGHT_CURRENT_LINE,
+	INDENT_ON_TAB,
+	INDENT_WIDTH,
+	INSERT_SPACES_INSTEAD_OF_TABS,
+	RIGHT_MARGIN_POSITION,
+	SHOW_LINE_MARKS,
+	SHOW_LINE_NUMBERS,
+	SHOW_RIGHT_MARGIN,
+	SMART_HOME_END,
+	TAB_WIDTH,
+	HIGHLIGHT_MATCHING_BRACKETS,
+	HIGHLIGHT_SYNTAX,
+	LANGUAGE,
+	MAX_UNDO_LEVELS,
+	STYLE_SCHEME,
+	LOCATION,
+	SHORTNAME,
+	CONTENT_TYPE,
+	LAST_PROPERTY
+};
+
+enum
+{
+	REAL,
+	VIRTUAL,
+	N_VIEW_TYPES
+};
+
+typedef struct _Binding
+{
+	DocumentView           *views[N_VIEW_TYPES];
+
+	gulong                  insert_text_id[N_VIEW_TYPES];
+	gulong                  delete_range_id[N_VIEW_TYPES];
+
+	GBinding               *bindings[LAST_PROPERTY];
+} Binding;
+
 struct _GeditTabPrivate
 {
 	GSettings	       *editor;
 	GeditTabState	        state;
-	
-	GtkWidget	       *view;
-	GtkWidget	       *view_scrolled_window;
+
+	GSList		       *views;
+	DocumentView	       *active_view;
+	GSList                 *bindings;
+	GtkSourceUndoManager   *undo_manager;
 
 	GtkWidget	       *info_bar;
 	GtkWidget	       *print_preview;
@@ -82,6 +136,7 @@ struct _GeditTabPrivate
 	gint                    auto_save : 1;
 
 	gint                    ask_if_externally_modified : 1;
+	guint                   dispose_has_run : 1;
 };
 
 G_DEFINE_TYPE(GeditTab, gedit_tab, GTK_TYPE_VBOX)
@@ -98,6 +153,7 @@ enum
 /* Signals */
 enum
 {
+	ACTIVE_VIEW_CHANGED,
 	DROP_URIS,
 	LAST_SIGNAL
 };
@@ -105,6 +161,299 @@ enum
 static guint signals[LAST_SIGNAL] = { 0 };
 
 static gboolean gedit_tab_auto_save (GeditTab *tab);
+
+static void
+free_document_view (DocumentView *view)
+{
+	g_object_unref (view->doc);
+	g_slice_free (DocumentView, view);
+}
+
+static void
+unbind (Binding *binding)
+{
+	gint i;
+
+	for (i = 0; i < LAST_PROPERTY; i++)
+	{
+		g_object_unref (binding->bindings[i]);
+	}
+
+	g_signal_handler_disconnect (binding->views[REAL]->doc,
+				     binding->insert_text_id[REAL]);
+	g_signal_handler_disconnect (binding->views[VIRTUAL]->doc,
+				     binding->insert_text_id[VIRTUAL]);
+	g_signal_handler_disconnect (binding->views[REAL]->doc,
+				     binding->delete_range_id[REAL]);
+	g_signal_handler_disconnect (binding->views[VIRTUAL]->doc,
+				     binding->delete_range_id[VIRTUAL]);
+}
+
+static void
+insert_text_on_virtual_doc_cb (GtkTextBuffer *textbuffer,
+			       GtkTextIter   *location,
+			       gchar         *text,
+			       gint           len,
+			       gpointer       user_data)
+{
+	Binding *binding = (Binding *)user_data;
+	GtkTextBuffer *doc;
+	GtkTextIter iter;
+	gint offset;
+	gulong id;
+
+	if (textbuffer == GTK_TEXT_BUFFER (binding->views[REAL]->doc))
+	{
+		doc = GTK_TEXT_BUFFER (binding->views[VIRTUAL]->doc);
+		id = binding->insert_text_id[VIRTUAL];
+	}
+	else
+	{
+		doc = GTK_TEXT_BUFFER (binding->views[REAL]->doc);
+		id = binding->insert_text_id[REAL];
+	}
+
+	offset = gtk_text_iter_get_offset (location);
+	gtk_text_buffer_get_iter_at_offset (doc, &iter, offset);
+
+	g_signal_handler_block (doc, id);
+	gtk_text_buffer_insert (doc, &iter, text, len);
+	g_signal_handler_unblock (doc, id);
+}
+
+static void
+delete_range_on_virtual_doc_cb (GtkTextBuffer *textbuffer,
+				GtkTextIter   *start,
+				GtkTextIter   *end,
+				gpointer       user_data)
+{
+	Binding *binding = (Binding *)user_data;
+	GtkTextBuffer *doc;
+	GtkTextIter start_iter, end_iter;
+	gint offset;
+	gulong id;
+
+	if (textbuffer == GTK_TEXT_BUFFER (binding->views[REAL]->doc))
+	{
+		doc = GTK_TEXT_BUFFER (binding->views[VIRTUAL]->doc);
+		id = binding->delete_range_id[VIRTUAL];
+	}
+	else
+	{
+		doc = GTK_TEXT_BUFFER (binding->views[REAL]->doc);
+		id = binding->delete_range_id[REAL];
+	}
+
+	offset = gtk_text_iter_get_offset (start);
+	gtk_text_buffer_get_iter_at_offset (doc, &start_iter, offset);
+
+	offset = gtk_text_iter_get_offset (end);
+	gtk_text_buffer_get_iter_at_offset (doc, &end_iter, offset);
+
+	g_signal_handler_block (doc, id);
+	gtk_text_buffer_delete (doc, &start_iter, &end_iter);
+	g_signal_handler_unblock (doc, id);
+}
+
+static void
+bind (Binding *binding)
+{
+	/* Signals to sync the text inserted or deleted */
+	binding->insert_text_id[REAL] =
+		g_signal_connect (binding->views[REAL]->doc, "insert-text",
+				  G_CALLBACK (insert_text_on_virtual_doc_cb),
+				  binding);
+
+	binding->delete_range_id[REAL] =
+		g_signal_connect (binding->views[REAL]->doc, "delete-range",
+				  G_CALLBACK (delete_range_on_virtual_doc_cb),
+				  binding);
+
+	binding->insert_text_id[VIRTUAL] =
+		g_signal_connect (binding->views[VIRTUAL]->doc, "insert-text",
+				  G_CALLBACK (insert_text_on_virtual_doc_cb),
+				  binding);
+
+	binding->delete_range_id[VIRTUAL] =
+		g_signal_connect (binding->views[VIRTUAL]->doc, "delete-range",
+				  G_CALLBACK (delete_range_on_virtual_doc_cb),
+				  binding);
+
+	/* Bind all properties */
+	binding->bindings[AUTO_INDENT] =
+		g_object_bind_property (binding->views[REAL]->view,
+					"auto-indent",
+					binding->views[VIRTUAL]->view,
+					"auto-indent",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[DRAW_SPACES] =
+		g_object_bind_property (binding->views[REAL]->view,
+					"draw-spaces",
+					binding->views[VIRTUAL]->view,
+					"draw-spaces",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[HIGHLIGHT_CURRENT_LINE] =
+		g_object_bind_property (binding->views[REAL]->view,
+					"highlight-current-line",
+					binding->views[VIRTUAL]->view,
+					"highlight-current-line",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[INDENT_ON_TAB] =
+		g_object_bind_property (binding->views[REAL]->view,
+					"indent-on-tab",
+					binding->views[VIRTUAL]->view,
+					"indent-on-tab",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[INDENT_WIDTH] =
+		g_object_bind_property (binding->views[REAL]->view,
+					"indent-width",
+					binding->views[VIRTUAL]->view,
+					"indent-width",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[INSERT_SPACES_INSTEAD_OF_TABS] =
+		g_object_bind_property (binding->views[REAL]->view,
+					"insert-spaces-instead-of-tabs",
+					binding->views[VIRTUAL]->view,
+					"insert-spaces-instead-of-tabs",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[RIGHT_MARGIN_POSITION] =
+		g_object_bind_property (binding->views[REAL]->view,
+					"right-margin-position",
+					binding->views[VIRTUAL]->view,
+					"right-margin-position",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[SHOW_LINE_MARKS] =
+		g_object_bind_property (binding->views[REAL]->view,
+					"show-line-marks",
+					binding->views[VIRTUAL]->view,
+					"show-line-marks",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[SHOW_LINE_NUMBERS] =
+		g_object_bind_property (binding->views[REAL]->view,
+					"show-line-numbers",
+					binding->views[VIRTUAL]->view,
+					"show-line-numbers",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[SHOW_RIGHT_MARGIN] =
+		g_object_bind_property (binding->views[REAL]->view,
+					"show-right-margin",
+					binding->views[VIRTUAL]->view,
+					"show-right-margin",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[SMART_HOME_END] =
+		g_object_bind_property (binding->views[REAL]->view,
+					"smart-home-end",
+					binding->views[VIRTUAL]->view,
+					"smart-home-end",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[TAB_WIDTH] =
+		g_object_bind_property (binding->views[REAL]->view,
+					"tab-width",
+					binding->views[VIRTUAL]->view,
+					"tab-width",
+					G_BINDING_SYNC_CREATE);
+
+	binding->bindings[HIGHLIGHT_MATCHING_BRACKETS] =
+		g_object_bind_property (binding->views[REAL]->doc,
+					"highlight-matching-brackets",
+					binding->views[VIRTUAL]->doc,
+					"highlight-matching-brackets",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[HIGHLIGHT_SYNTAX] =
+		g_object_bind_property (binding->views[REAL]->doc,
+					"highlight-syntax",
+					binding->views[VIRTUAL]->doc,
+					"highlight-syntax",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[LANGUAGE] =
+		g_object_bind_property (binding->views[REAL]->doc,
+					"language",
+					binding->views[VIRTUAL]->doc,
+					"language",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[MAX_UNDO_LEVELS] =
+		g_object_bind_property (binding->views[REAL]->doc,
+					"max-undo-levels",
+					binding->views[VIRTUAL]->doc,
+					"max-undo-levels",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[STYLE_SCHEME] =
+		g_object_bind_property (binding->views[REAL]->doc,
+					"style-scheme",
+					binding->views[VIRTUAL]->doc,
+					"style-scheme",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[LOCATION] =
+		g_object_bind_property (binding->views[REAL]->doc,
+					"location",
+					binding->views[VIRTUAL]->doc,
+					"location",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[SHORTNAME] =
+		g_object_bind_property (binding->views[REAL]->doc,
+					"shortname",
+					binding->views[VIRTUAL]->doc,
+					"shortname",
+					G_BINDING_SYNC_CREATE);
+	binding->bindings[CONTENT_TYPE] =
+		g_object_bind_property (binding->views[REAL]->doc,
+					"content-type",
+					binding->views[VIRTUAL]->doc,
+					"content-type",
+					G_BINDING_SYNC_CREATE);
+}
+
+static void
+unbind_view (GeditTab     *tab,
+             DocumentView *view)
+{
+	GSList *l;
+	GSList *unbind_list = NULL;
+
+	for (l = tab->priv->bindings; l != NULL; l = g_slist_next (l))
+	{
+		Binding *binding = (Binding *)l->data;
+
+		if (view == binding->views[REAL] ||
+		    view == binding->views[VIRTUAL])
+		{
+			unbind_list = g_slist_prepend (unbind_list, binding);
+		}
+	}
+
+	for (l = unbind_list; l != NULL; l = g_slist_next (l))
+	{
+		Binding *b1 = (Binding *)l->data;
+
+		unbind (b1);
+
+		if (l->next != NULL)
+		{
+			Binding *b2 = (Binding *)l->next->data;
+			Binding *new_binding;
+			gint i, j;
+
+			i = (view == b1->views[REAL]) ? VIRTUAL : REAL;
+			j = (view == b2->views[REAL]) ? VIRTUAL : REAL;
+
+			new_binding = g_slice_new (Binding);
+			new_binding->views[REAL] = b1->views[i];
+			new_binding->views[VIRTUAL] = b2->views[j];
+
+			bind (new_binding);
+
+			tab->priv->bindings = g_slist_append (tab->priv->bindings,
+							      new_binding);
+		}
+
+		/* We remove the old binding */
+		tab->priv->bindings = g_slist_remove (tab->priv->bindings,
+						      b1);
+		g_slice_free (Binding, b1);
+	}
+
+	g_slist_free (unbind_list);
+}
 
 static void
 install_auto_save_timeout (GeditTab *tab)
@@ -248,6 +597,21 @@ gedit_tab_dispose (GObject *object)
 		tab->priv->editor = NULL;
 	}
 
+	if (!tab->priv->dispose_has_run)
+	{
+		GSList *l;
+
+		for (l = tab->priv->bindings; l != NULL; l = g_slist_next (l))
+		{
+			Binding *b = (Binding *)l->data;
+
+			unbind (b);
+			g_slice_free (Binding, b);
+		}
+
+		tab->priv->dispose_has_run = TRUE;
+	}
+
 	G_OBJECT_CLASS (gedit_tab_parent_class)->dispose (object);
 }
 
@@ -261,6 +625,8 @@ gedit_tab_finalize (GObject *object)
 
 	if (tab->priv->auto_save_timeout > 0)
 		remove_auto_save_timeout (tab);
+
+	g_slist_free (tab->priv->bindings);
 
 	G_OBJECT_CLASS (gedit_tab_parent_class)->finalize (object);
 }
@@ -333,6 +699,18 @@ gedit_tab_class_init (GeditTabClass *klass)
 							   0,
 							   G_PARAM_READWRITE |
 							   G_PARAM_STATIC_STRINGS));
+
+	signals[ACTIVE_VIEW_CHANGED] =
+		g_signal_new ("active-view-changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GeditTabClass, active_view_changed),
+			      NULL, NULL,
+			      gedit_marshal_VOID__OBJECT_OBJECT,
+			      G_TYPE_NONE,
+			      2,
+			      GEDIT_TYPE_VIEW,
+			      GEDIT_TYPE_VIEW);
 
 	signals[DROP_URIS] =
 		g_signal_new ("drop-uris",
@@ -419,31 +797,43 @@ static void
 set_view_properties_according_to_state (GeditTab      *tab,
 					GeditTabState  state)
 {
-	gboolean val;
+	GSList *l;
 	gboolean hl_current_line;
 	
 	hl_current_line = g_settings_get_boolean (tab->priv->editor,
 						  GEDIT_SETTINGS_HIGHLIGHT_CURRENT_LINE);
 
-	val = ((state == GEDIT_TAB_STATE_NORMAL) &&
-	       (tab->priv->print_preview == NULL) &&
-	       !tab->priv->not_editable);
-	gtk_text_view_set_editable (GTK_TEXT_VIEW (tab->priv->view), val);
+	for (l = tab->priv->views; l != NULL; l = g_slist_next (l))
+	{
+		DocumentView *view = (DocumentView *)l->data;
+		gboolean val;
 
-	val = ((state != GEDIT_TAB_STATE_LOADING) &&
-	       (state != GEDIT_TAB_STATE_CLOSING));
-	gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (tab->priv->view), val);
+		val = ((state == GEDIT_TAB_STATE_NORMAL) &&
+		       (tab->priv->print_preview == NULL) &&
+		       !tab->priv->not_editable);
+		gtk_text_view_set_editable (GTK_TEXT_VIEW (view->view),
+					    val);
 
-	val = ((state != GEDIT_TAB_STATE_LOADING) &&
-	       (state != GEDIT_TAB_STATE_CLOSING) &&
-	       (hl_current_line));
-	gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (tab->priv->view), val);
+		val = ((state != GEDIT_TAB_STATE_LOADING) &&
+		       (state != GEDIT_TAB_STATE_CLOSING));
+		gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (view->view),
+						  val);
+
+		val = ((state != GEDIT_TAB_STATE_LOADING) &&
+		       (state != GEDIT_TAB_STATE_CLOSING) &&
+		       (hl_current_line));
+		gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (view->view),
+							    val);
+	}
 }
 
 static void
 gedit_tab_set_state (GeditTab      *tab,
 		     GeditTabState  state)
 {
+	GSList *l;
+	DocumentView *first_view;
+
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 	g_return_if_fail ((state >= 0) && (state < GEDIT_TAB_NUM_OF_STATES));
 
@@ -454,21 +844,50 @@ gedit_tab_set_state (GeditTab      *tab,
 
 	set_view_properties_according_to_state (tab, state);
 
+	first_view = (DocumentView *)tab->priv->views->data;
+
 	if ((state == GEDIT_TAB_STATE_LOADING_ERROR) || /* FIXME: add other states if needed */
-	    (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW))
+		    (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW))
 	{
-		gtk_widget_hide (tab->priv->view_scrolled_window);
+		GtkWidget *parent;
+
+		/* FIXME: Better ideas here? */
+		parent = gtk_widget_get_parent (first_view->scrolled_window);
+
+		if (GTK_IS_PANED (parent))
+		{
+			gtk_widget_hide (parent);
+		}
+		else
+		{
+			gtk_widget_hide (first_view->scrolled_window);
+		}
 	}
-	else
+	else if (tab->priv->print_preview == NULL)
 	{
-		if (tab->priv->print_preview == NULL)
-			gtk_widget_show (tab->priv->view_scrolled_window);
+		GtkWidget *parent;
+
+		parent = gtk_widget_get_parent (first_view->scrolled_window);
+
+		if (GTK_IS_PANED (parent))
+		{
+			gtk_widget_show (parent);
+		}
+		else
+		{
+			gtk_widget_show (first_view->scrolled_window);
+		}
 	}
 
-	set_cursor_according_to_state (GTK_TEXT_VIEW (tab->priv->view),
-				       state);
+	for (l = tab->priv->views; l != NULL; l = g_slist_next (l))
+	{
+		DocumentView *view = (DocumentView *)l->data;
 
-	g_object_notify (G_OBJECT (tab), "state");		
+		set_cursor_according_to_state (GTK_TEXT_VIEW (view->view),
+					       state);
+	}
+
+	g_object_notify (G_OBJECT (tab), "state");
 }
 
 static void 
@@ -497,6 +916,29 @@ static void
 document_modified_changed (GtkTextBuffer *document,
 			   GeditTab      *tab)
 {
+	GSList *l;
+	gboolean modified;
+
+	/* Sync all the docs */
+	modified = gtk_text_buffer_get_modified (document);
+
+	for (l = tab->priv->views; l != NULL; l = g_slist_next (l))
+	{
+		DocumentView *view = (DocumentView *)l->data;
+
+		if (view == tab->priv->active_view)
+			continue;
+
+		g_signal_handlers_block_by_func (view->doc,
+						 document_modified_changed,
+						 tab);
+		gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (view->doc),
+					      modified);
+		g_signal_handlers_unblock_by_func (view->doc,
+						   document_modified_changed,
+						   tab);
+	}
+
 	g_object_notify (G_OBJECT (tab), "name");
 }
 
@@ -1071,7 +1513,7 @@ document_loaded (GeditDocument *document,
 		}
 
 		/* Scroll to the cursor when the document is loaded */
-		gedit_view_scroll_to_cursor (GEDIT_VIEW (tab->priv->view));
+		gedit_view_scroll_to_cursor (GEDIT_VIEW (tab->priv->active_view->view));
 
 		all_documents = gedit_app_get_documents (gedit_app_get_default ());
 
@@ -1450,6 +1892,23 @@ document_saved (GeditDocument *document,
 	}
 }
 
+static void
+document_sync_documents (GeditDocument *doc,
+			 GeditTab      *tab)
+{
+	GSList *l;
+
+	for (l = tab->priv->views; l != NULL; l = g_slist_next (l))
+	{
+		DocumentView *view = (DocumentView *)l->data;
+
+		if (view != tab->priv->active_view)
+		{
+			_gedit_document_sync_documents (doc, view->doc);
+		}
+	}
+}
+
 static void 
 externally_modified_notification_info_bar_response (GtkWidget *info_bar,
 							gint       response_id,
@@ -1546,6 +2005,44 @@ view_focused_in (GtkWidget     *widget,
 }
 
 static void
+on_grab_focus (GtkWidget *widget,
+	       GeditTab  *tab)
+{
+	/* Update the active view */
+	if (tab->priv->active_view->view != widget)
+	{
+		GSList *l;
+
+		for (l = tab->priv->views; l != NULL; l = g_slist_next (l))
+		{
+			DocumentView *view = (DocumentView *)l->data;
+
+			if (view->view == widget)
+			{
+				GtkWidget *old_view;
+
+				old_view = tab->priv->active_view->view;
+				tab->priv->active_view = view;
+
+				g_object_set (G_OBJECT (tab->priv->undo_manager),
+					      "buffer", view->doc, NULL);
+
+				/* Mark the old view as editable and the new one
+				   as non editable */
+				gtk_text_view_set_editable (GTK_TEXT_VIEW (view->view),
+							    gtk_text_view_get_editable (GTK_TEXT_VIEW (old_view)));
+				gtk_text_view_set_editable (GTK_TEXT_VIEW (old_view),
+							    FALSE);
+
+				g_signal_emit (G_OBJECT (tab), signals[ACTIVE_VIEW_CHANGED],
+				               0, old_view, view->view);
+				break;
+			}
+		}
+	}
+}
+
+static void
 on_drop_uris (GeditView *view,
 	      gchar    **uri_list,
 	      GeditTab  *tab)
@@ -1564,11 +2061,165 @@ tab_mount_operation_factory (GeditDocument *doc,
 	return gtk_mount_operation_new (GTK_WINDOW (window));
 }
 
+static DocumentView *
+create_document_view (GeditTab *tab)
+{
+	DocumentView *view;
+	GtkWidget    *sw;
+
+	gedit_debug (DEBUG_TAB);
+
+	view = g_slice_new (DocumentView);
+
+	view->doc = gedit_document_new ();
+	g_object_set_data (G_OBJECT (view->doc), GEDIT_TAB_KEY, tab);
+	gtk_source_buffer_set_undo_manager (GTK_SOURCE_BUFFER (view->doc),
+					    tab->priv->undo_manager);
+
+	_gedit_document_set_mount_operation_factory (view->doc,
+						     tab_mount_operation_factory,
+						     tab);
+
+	view->view = gedit_view_new (view->doc);
+	gtk_widget_show (view->view);
+	g_object_set_data (G_OBJECT (view->view), GEDIT_TAB_KEY, tab);
+
+	/* Create the scrolled window */
+	sw = gtk_scrolled_window_new (NULL, NULL);
+	view->scrolled_window = sw;
+
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+					GTK_POLICY_AUTOMATIC,
+					GTK_POLICY_AUTOMATIC);
+
+	gtk_container_add (GTK_CONTAINER (sw), view->view);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
+					     GTK_SHADOW_IN);
+	gtk_widget_show (sw);
+
+	g_signal_connect (view->doc,
+			  "notify::location",
+			  G_CALLBACK (document_location_notify_handler),
+			  tab);
+	g_signal_connect (view->doc,
+			  "notify::shortname",
+			  G_CALLBACK (document_shortname_notify_handler),
+			  tab);
+	g_signal_connect (view->doc,
+			  "modified_changed",
+			  G_CALLBACK (document_modified_changed),
+			  tab);
+	g_signal_connect (view->doc,
+			  "loading",
+			  G_CALLBACK (document_loading),
+			  tab);
+	g_signal_connect (view->doc,
+			  "loaded",
+			  G_CALLBACK (document_loaded),
+			  tab);
+	g_signal_connect (view->doc,
+			  "saving",
+			  G_CALLBACK (document_saving),
+			  tab);
+	g_signal_connect (view->doc,
+			  "saved",
+			  G_CALLBACK (document_saved),
+			  tab);
+	g_signal_connect (view->doc,
+			  "sync-documents",
+			  G_CALLBACK (document_sync_documents),
+			  tab);
+
+	g_signal_connect_after (view->view,
+				"grab-focus",
+				G_CALLBACK (on_grab_focus),
+				tab);
+	g_signal_connect_after (view->view,
+				"focus-in-event",
+				G_CALLBACK (view_focused_in),
+				tab);
+	g_signal_connect_after (view->view,
+				"realize",
+				G_CALLBACK (view_realized),
+				tab);
+	g_signal_connect (view->view,
+			  "drop-uris",
+			  G_CALLBACK (on_drop_uris),
+			  tab);
+
+	return view;
+}
+
+static void
+add_document_view (GeditTab       *tab,
+		   DocumentView   *dview,
+		   gboolean        main_container,
+		   GtkOrientation  orientation)
+{
+	gedit_debug (DEBUG_TAB);
+
+	if (main_container)
+	{
+		gtk_box_pack_end (GTK_BOX (tab), dview->scrolled_window,
+				  TRUE, TRUE, 0);
+	}
+	else
+	{
+		DocumentView *active_view = tab->priv->active_view;
+		GtkWidget *paned;
+		GtkWidget *parent;
+		GtkAllocation allocation;
+		gint pos;
+
+		gtk_widget_get_allocation (active_view->scrolled_window, &allocation);
+
+		if (orientation == GTK_ORIENTATION_HORIZONTAL)
+		{
+			paned = gtk_hpaned_new ();
+			pos = allocation.width / 2;
+		}
+		else
+		{
+			paned = gtk_vpaned_new ();
+			pos = allocation.height / 2;
+		}
+
+		gtk_widget_show (paned);
+
+		/* First we remove the active view from its parent, to do
+		   this we add a ref to it*/
+		g_object_ref (active_view->scrolled_window);
+		parent = gtk_widget_get_parent (active_view->scrolled_window);
+
+		gtk_container_remove (GTK_CONTAINER (parent),
+				      active_view->scrolled_window);
+
+		if (GTK_IS_VBOX (parent))
+		{
+			gtk_box_pack_end (GTK_BOX (parent), paned, TRUE, TRUE, 0);
+		}
+		else
+		{
+			gtk_container_add (GTK_CONTAINER (parent), paned);
+		}
+
+		gtk_paned_pack1 (GTK_PANED (paned), active_view->scrolled_window,
+				 FALSE, TRUE);
+		g_object_unref (active_view->scrolled_window);
+
+		gtk_paned_pack2 (GTK_PANED (paned), dview->scrolled_window,
+				 FALSE, FALSE);
+
+		/* We need to set the new paned in the right place */
+		gtk_paned_set_position (GTK_PANED (paned), pos);
+	}
+
+	tab->priv->views = g_slist_append (tab->priv->views, dview);
+}
+
 static void
 gedit_tab_init (GeditTab *tab)
 {
-	GtkWidget *sw;
-	GeditDocument *doc;
 	GeditLockdownMask lockdown;
 	gboolean auto_save;
 	gint auto_save_interval;
@@ -1584,14 +2235,6 @@ gedit_tab_init (GeditTab *tab)
 	tab->priv->save_flags = 0;
 
 	tab->priv->ask_if_externally_modified = TRUE;
-	
-	/* Create the scrolled window */
-	sw = gtk_scrolled_window_new (NULL, NULL);
-	tab->priv->view_scrolled_window = sw;
-
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
-					GTK_POLICY_AUTOMATIC,
-					GTK_POLICY_AUTOMATIC);
 
 	/* Manage auto save data */
 	auto_save = g_settings_get_boolean (tab->priv->editor,
@@ -1610,67 +2253,16 @@ gedit_tab_init (GeditTab *tab)
 		tab->priv->auto_save_interval = GPM_DEFAULT_AUTO_SAVE_INTERVAL;*/
 
 	/* Create the view */
-	doc = gedit_document_new ();
-	g_object_set_data (G_OBJECT (doc), GEDIT_TAB_KEY, tab);
+	tab->priv->active_view = create_document_view (tab);
+	add_document_view (tab, tab->priv->active_view,
+			   TRUE, GTK_ORIENTATION_HORIZONTAL);
 
-	_gedit_document_set_mount_operation_factory (doc,
-						     tab_mount_operation_factory,
-						     tab);
+	/* Create the default undo manager and assign it to the active view */
+	tab->priv->undo_manager = gedit_undo_manager_new (
+					GTK_SOURCE_BUFFER (tab->priv->active_view->doc));
 
-	tab->priv->view = gedit_view_new (doc);
-	g_object_unref (doc);
-	gtk_widget_show (tab->priv->view);
-	g_object_set_data (G_OBJECT (tab->priv->view), GEDIT_TAB_KEY, tab);
-
-	gtk_box_pack_end (GTK_BOX (tab), sw, TRUE, TRUE, 0);
-	gtk_container_add (GTK_CONTAINER (sw), tab->priv->view);
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
-					     GTK_SHADOW_IN);	
-	gtk_widget_show (sw);
-
-	g_signal_connect (doc,
-			  "notify::location",
-			  G_CALLBACK (document_location_notify_handler),
-			  tab);
-	g_signal_connect (doc,
-			  "notify::shortname",
-			  G_CALLBACK (document_shortname_notify_handler),
-			  tab);
-	g_signal_connect (doc,
-			  "modified_changed",
-			  G_CALLBACK (document_modified_changed),
-			  tab);
-	g_signal_connect (doc,
-			  "loading",
-			  G_CALLBACK (document_loading),
-			  tab);
-	g_signal_connect (doc,
-			  "loaded",
-			  G_CALLBACK (document_loaded),
-			  tab);
-	g_signal_connect (doc,
-			  "saving",
-			  G_CALLBACK (document_saving),
-			  tab);
-	g_signal_connect (doc,
-			  "saved",
-			  G_CALLBACK (document_saved),
-			  tab);
-
-	g_signal_connect_after (tab->priv->view,
-				"focus-in-event",
-				G_CALLBACK (view_focused_in),
-				tab);
-
-	g_signal_connect_after (tab->priv->view,
-				"realize",
-				G_CALLBACK (view_realized),
-				tab);
-
-	g_signal_connect (tab->priv->view,
-			  "drop-uris",
-			  G_CALLBACK (on_drop_uris),
-			  tab);
+	gtk_source_buffer_set_undo_manager (GTK_SOURCE_BUFFER (tab->priv->active_view->doc),
+					    tab->priv->undo_manager);
 }
 
 GtkWidget *
@@ -1739,7 +2331,7 @@ gedit_tab_get_view (GeditTab *tab)
 {
 	g_return_val_if_fail (GEDIT_IS_TAB (tab), NULL);
 
-	return GEDIT_VIEW (tab->priv->view);
+	return GEDIT_VIEW (tab->priv->active_view->view);
 }
 
 /**
@@ -1755,8 +2347,7 @@ gedit_tab_get_document (GeditTab *tab)
 {
 	g_return_val_if_fail (GEDIT_IS_TAB (tab), NULL);
 
-	return GEDIT_DOCUMENT (gtk_text_view_get_buffer (
-					GTK_TEXT_VIEW (tab->priv->view)));
+	return tab->priv->active_view->doc;
 }
 
 #define MAX_DOC_NAME_LENGTH 40
@@ -2949,6 +3540,150 @@ gedit_tab_set_info_bar (GeditTab  *tab,
 
 	/* FIXME: this can cause problems with the tab state machine */
 	set_info_bar (tab, info_bar);
+}
+
+static void
+split_tab (GeditTab       *tab,
+	   GtkOrientation  orientation)
+{
+	DocumentView *view;
+	Binding *binding;
+	GtkTextIter start, end;
+	gchar *content;
+
+	gedit_debug (DEBUG_TAB);
+
+	g_return_if_fail (GEDIT_IS_TAB (tab));
+
+	view = create_document_view (tab);
+	add_document_view (tab, view, FALSE, orientation);
+
+	binding = g_slice_new (Binding);
+	binding->views[REAL] = tab->priv->active_view;
+	binding->views[VIRTUAL] = view;
+
+	tab->priv->bindings = g_slist_append (tab->priv->bindings, binding);
+
+	/* Copy the content from the real doc to the virtual doc */
+	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (binding->views[REAL]->doc),
+				    &start, &end);
+
+	content = gtk_text_buffer_get_text (GTK_TEXT_BUFFER (binding->views[REAL]->doc),
+					    &start, &end, FALSE);
+
+	gtk_text_buffer_set_text (GTK_TEXT_BUFFER (binding->views[VIRTUAL]->doc),
+				  content, -1);
+
+	g_free (content);
+
+	/* Bind the views */
+	bind (binding);
+	_gedit_document_sync_documents (tab->priv->active_view->doc, view->doc);
+
+	/* When grabbing the focus the active changes, so be careful here
+	   to grab the focus after creating the binding */
+	gtk_widget_grab_focus (view->view);
+}
+
+static void
+remove_view (GeditTab     *tab,
+	     DocumentView *view)
+{
+	GtkWidget *parent;
+	GtkWidget *grandpa;
+	GList *children;
+	GSList *next_item;
+	DocumentView *next_view;
+
+	gedit_debug (DEBUG_TAB);
+
+	parent = gtk_widget_get_parent (view->scrolled_window);
+	if (GTK_IS_VBOX (parent))
+	{
+		g_warning ("We can't have an empty page");
+		return;
+	}
+
+	/* Get the next view */
+	next_item = g_slist_find (tab->priv->views, view);
+	if (next_item->next != NULL)
+	{
+		next_item = next_item->next;
+	}
+	else
+	{
+		next_item = tab->priv->views;
+	}
+
+	next_view = (DocumentView *)next_item->data;
+
+	/* Now we destroy the widget, we get the children of parent and we destroy
+	   parent too as the parent is a useless paned. Finally we add the child
+	   into the grand parent */
+	g_object_ref (view->scrolled_window);
+	unbind_view (tab, view);
+
+	tab->priv->views = g_slist_remove (tab->priv->views,
+					   view);
+
+	/* It is important to grab the focus before destroying the view and
+	   after unbind the view, in this way we don't have to make weird
+	   checks in the grab focus handler */
+	gtk_widget_grab_focus (next_view->view);
+
+	gtk_widget_destroy (view->scrolled_window);
+
+	children = gtk_container_get_children (GTK_CONTAINER (parent));
+	if (g_list_length (children) > 1)
+	{
+		g_warning ("The parent is not a paned");
+		return;
+	}
+	grandpa = gtk_widget_get_parent (parent);
+
+	g_object_ref (children->data);
+	gtk_container_remove (GTK_CONTAINER (parent),
+			      GTK_WIDGET (children->data));
+	gtk_widget_destroy (parent);
+	gtk_container_add (GTK_CONTAINER (grandpa),
+			   GTK_WIDGET (children->data));
+	g_object_unref (children->data);
+
+	g_list_free (children);
+	g_object_unref (view->scrolled_window);
+
+	free_document_view (view);
+
+	/* FIXME: this is a hack, the first grab focus is the one that emits
+	   the signal (ACTIVE_VIEW_CHANGED) and the second one makes the view
+	   get the focus as it is steal when destroying the active view */
+	gtk_widget_grab_focus (next_view->view);
+}
+
+void
+_gedit_tab_unsplit (GeditTab *tab)
+{
+	remove_view (tab, tab->priv->active_view);
+}
+
+gboolean
+_gedit_tab_can_unsplit (GeditTab *tab)
+{
+	return (tab->priv->views->next != NULL);
+}
+
+gboolean
+_gedit_tab_can_split (GeditTab *tab)
+{
+	/*TODO: for future expansion */
+	return TRUE;
+}
+
+void
+_gedit_tab_split (GeditTab       *tab,
+		  GtkOrientation  orientation)
+{
+	split_tab (tab, orientation);
 }
 
 /* ex:ts=8:noet: */

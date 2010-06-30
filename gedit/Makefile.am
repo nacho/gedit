@@ -124,6 +124,7 @@ NOINST_H_FILES =			\
 	gedit-tab-label.h		\
 	gedittextregion.h		\
 	gedit-ui.h			\
+	gedit-undo-manager.h		\
 	gedit-window-private.h
 
 INST_H_FILES =				\
@@ -205,6 +206,7 @@ libgedit_c_files =			\
 	gedit-style-scheme-manager.c	\
 	gedit-tab.c 			\
 	gedit-tab-label.c		\
+	gedit-undo-manager.c		\
 	gedit-utils.c 			\
 	gedit-view.c 			\
 	gedit-window.c			\

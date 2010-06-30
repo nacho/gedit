@@ -971,6 +971,27 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 				  (state != GEDIT_TAB_STATE_CLOSING) &&
 				  enable_syntax_highlighting);
 
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "SplitHorizontal");
+
+	gtk_action_set_sensitive (action, 
+				  (state != GEDIT_TAB_STATE_CLOSING) &&
+				  _gedit_tab_can_split (tab));
+
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "SplitVertical");
+
+	gtk_action_set_sensitive (action, 
+				  (state != GEDIT_TAB_STATE_CLOSING) &&
+				  _gedit_tab_can_split (tab));
+
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "SplitUnsplit");
+
+	gtk_action_set_sensitive (action, 
+				  (state != GEDIT_TAB_STATE_CLOSING) &&
+				  _gedit_tab_can_unsplit (tab));
+
 	update_next_prev_doc_sensitivity (window, tab);
 
 	peas_extension_set_call (window->priv->extensions, "update_state", window);
@@ -3108,7 +3129,6 @@ drag_data_received_cb (GtkWidget        *widget,
 	}
 }
 
-/* Handle drops on the GeditView */
 static void
 drop_uris_cb (GtkWidget    *widget,
 	      gchar       **uri_list,
@@ -3495,44 +3515,12 @@ update_sensitivity_according_to_open_tabs (GeditWindow *window,
 }
 
 static void
-on_tab_added (GeditMultiNotebook *multi,
-	      GeditNotebook      *notebook,
-	      GeditTab           *tab,
-	      GeditWindow        *window)
+connect_per_view_signals (GeditWindow *window,
+			  GeditView   *view)
 {
-	GeditView *view;
 	GeditDocument *doc;
-	gint num_tabs;
-	gint num_notebooks;
 
-	gedit_debug (DEBUG_WINDOW);
-
-	g_return_if_fail ((window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION) == 0);
-
-	num_notebooks = gedit_multi_notebook_get_n_notebooks (multi);
-	num_tabs = gedit_multi_notebook_get_n_tabs (multi);
-
-	update_sensitivity_according_to_open_tabs (window, num_notebooks,
-						   num_tabs);
-
-	view = gedit_tab_get_view (tab);
-	doc = gedit_tab_get_document (tab);
-
-	/* IMPORTANT: remember to disconnect the signal in notebook_tab_removed
-	 * if a new signal is connected here */
-
-	g_signal_connect (tab,
-			 "notify::name",
-			  G_CALLBACK (sync_name),
-			  window);
-	g_signal_connect (tab,
-			 "notify::state",
-			  G_CALLBACK (sync_state),
-			  window);
-	g_signal_connect (tab,
-			  "drop_uris",
-			  G_CALLBACK (drop_uris_cb),
-			  window);
+	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
 
 	g_signal_connect (doc,
 			  "bracket-matched",
@@ -3574,6 +3562,109 @@ on_tab_added (GeditMultiNotebook *multi,
 			  "notify::editable",
 			  G_CALLBACK (editable_changed),
 			  window);
+}
+
+static void
+disconnect_per_view_signals (GeditWindow *window,
+			     GeditView   *view)
+{
+	GeditDocument *doc;
+
+	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+
+	g_signal_handlers_disconnect_by_func (doc,
+					      G_CALLBACK (update_cursor_position_statusbar),
+					      window);
+	g_signal_handlers_disconnect_by_func (doc,
+					      G_CALLBACK (can_search_again),
+					      window);
+	g_signal_handlers_disconnect_by_func (doc,
+					      G_CALLBACK (can_undo),
+					      window);
+	g_signal_handlers_disconnect_by_func (doc,
+					      G_CALLBACK (can_redo),
+					      window);
+	g_signal_handlers_disconnect_by_func (doc,
+					      G_CALLBACK (selection_changed),
+					      window);
+	g_signal_handlers_disconnect_by_func (doc,
+					      G_CALLBACK (sync_languages_menu),
+					      window);
+	g_signal_handlers_disconnect_by_func (doc,
+					      G_CALLBACK (readonly_changed),
+					      window);
+	g_signal_handlers_disconnect_by_func (view,
+					      G_CALLBACK (update_overwrite_mode_statusbar),
+					      window);
+	g_signal_handlers_disconnect_by_func (view,
+					      G_CALLBACK (editable_changed),
+					      window);
+}
+
+static void
+on_active_view_changed (GeditTab    *tab,
+			GeditView   *old_view,
+			GeditView   *new_view,
+			GeditWindow *window)
+{
+	update_statusbar (window, old_view, new_view);
+
+	if (old_view)
+	{
+		disconnect_per_view_signals (window, old_view);
+	}
+
+	if (new_view)
+	{
+		connect_per_view_signals (window, new_view);
+	}
+
+	set_sensitivity_according_to_tab (window, tab);
+}
+
+static void
+on_tab_added (GeditMultiNotebook *multi,
+	      GeditNotebook      *notebook,
+	      GeditTab           *tab,
+	      GeditWindow        *window)
+{
+	GeditView *view;
+	gint num_tabs;
+	gint num_notebooks;
+
+	gedit_debug (DEBUG_WINDOW);
+
+	g_return_if_fail ((window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION) == 0);
+
+	num_notebooks = gedit_multi_notebook_get_n_notebooks (multi);
+	num_tabs = gedit_multi_notebook_get_n_tabs (multi);
+
+	update_sensitivity_according_to_open_tabs (window, num_notebooks,
+						   num_tabs);
+
+	view = gedit_tab_get_view (tab);
+
+	/* IMPORTANT: remember to disconnect the signal in notebook_tab_removed
+	 * if a new signal is connected here */
+
+	g_signal_connect (tab,
+			  "active-view-changed",
+			  G_CALLBACK (on_active_view_changed),
+			  window);
+	g_signal_connect (tab,
+			 "notify::name",
+			  G_CALLBACK (sync_name),
+			  window);
+	g_signal_connect (tab,
+			 "notify::state",
+			  G_CALLBACK (sync_state),
+			  window);
+	g_signal_connect (tab,
+			  "drop-uris",
+			  G_CALLBACK (drop_uris_cb),
+			  window);
+
+	connect_per_view_signals (window, view);
 
 	update_documents_list_menu (window);
 
@@ -3604,6 +3695,9 @@ on_tab_removed (GeditMultiNotebook *multi,
 	doc = gedit_tab_get_document (tab);
 
 	g_signal_handlers_disconnect_by_func (tab,
+					      G_CALLBACK (on_active_view_changed),
+					      window);
+	g_signal_handlers_disconnect_by_func (tab,
 					      G_CALLBACK (sync_name), 
 					      window);
 	g_signal_handlers_disconnect_by_func (tab,
@@ -3612,33 +3706,8 @@ on_tab_removed (GeditMultiNotebook *multi,
 	g_signal_handlers_disconnect_by_func (tab,
 					      G_CALLBACK (drop_uris_cb),
 					      window);
-	g_signal_handlers_disconnect_by_func (doc,
-					      G_CALLBACK (update_cursor_position_statusbar), 
-					      window);
-	g_signal_handlers_disconnect_by_func (doc, 
-					      G_CALLBACK (can_search_again),
-					      window);
-	g_signal_handlers_disconnect_by_func (doc, 
-					      G_CALLBACK (can_undo),
-					      window);
-	g_signal_handlers_disconnect_by_func (doc, 
-					      G_CALLBACK (can_redo),
-					      window);
-	g_signal_handlers_disconnect_by_func (doc,
-					      G_CALLBACK (selection_changed),
-					      window);
-	g_signal_handlers_disconnect_by_func (doc,
-					      G_CALLBACK (sync_languages_menu),
-					      window);
-	g_signal_handlers_disconnect_by_func (doc,
-					      G_CALLBACK (readonly_changed),
-					      window);
-	g_signal_handlers_disconnect_by_func (view, 
-					      G_CALLBACK (update_overwrite_mode_statusbar),
-					      window);
-	g_signal_handlers_disconnect_by_func (view, 
-					      G_CALLBACK (editable_changed),
-					      window);
+
+	disconnect_per_view_signals (window, view);
 
 	if (window->priv->tab_width_id && tab == gedit_multi_notebook_get_active_tab (multi))
 	{
