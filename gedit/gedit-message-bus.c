@@ -1148,16 +1148,16 @@ gedit_message_bus_send (GeditMessageBus *bus,
  * @bus: a #GeditMessageBus
  * @object_path: the object path
  * @method: the method
- * @...: NULL terminated list of key/value pairs
+ * @...: (allow-none): %NULL terminated list of key/value pairs
  *
  * This provides a convenient way to quickly send a message @method at 
  * @object_path synchronously over the bus. The variable argument list 
  * specifies key (string) value pairs used to construct the message 
  * arguments. To send a message asynchronously use gedit_message_bus_send().
  *
- * Return value: the constructed #GeditMessage. The caller owns a reference
- *               to the #GeditMessage and should call g_object_unref() when
- *               it is no longer needed
+ * Return value: (allow-none): the constructed #GeditMessage. The caller owns a 
+ *               reference to the #GeditMessage and should call g_object_unref()
+ *               when it is no longer needed
  */
 GeditMessage *
 gedit_message_bus_send_sync (GeditMessageBus *bus,

@@ -1190,6 +1190,12 @@ set_location (GeditDocument *doc,
 	}
 }
 
+/**
+ * gedit_document_get_location:
+ * @doc: a #GeditDocument
+ *
+ * Returns: (allow-none): a copy of the internal #GFile
+ */
 GFile *
 gedit_document_get_location (GeditDocument *doc)
 {
@@ -2121,7 +2127,7 @@ gedit_document_get_can_search_again (GeditDocument *doc)
  * @start: (allow-none):
  * @end: (allow-none):
  * @match_start: (allow-none):
- * @match_end: (allow=none):
+ * @match_end: (allow-none):
  **/
 gboolean
 gedit_document_search_forward (GeditDocument     *doc,
@@ -2202,7 +2208,7 @@ gedit_document_search_forward (GeditDocument     *doc,
  * @start: (allow-none):
  * @end: (allow-none):
  * @match_start: (allow-none):
- * @match_end: (allow=none):
+ * @match_end: (allow-none):
  **/
 gboolean
 gedit_document_search_backward (GeditDocument     *doc,
@@ -3005,7 +3011,7 @@ set_attributes_cb (GObject      *source,
  * gedit_document_set_metadata:
  * @doc: a #GeditDocument
  * @first_key: name of the first key to set
- * @...: value for the first key, followed optionally by more key/value pairs,
+ * @...: (allow-none): value for the first key, followed optionally by more key/value pairs,
  * followed by %NULL.
  *
  * Sets metadata on a document.

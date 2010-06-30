@@ -1700,7 +1700,7 @@ _gedit_tab_new_from_stream (GInputStream        *stream,
  *
  * Gets the #GeditView inside @tab.
  *
- * Returns: the #GeditView inside @tab
+ * Returns: (transfer none): the #GeditView inside @tab
  */
 GeditView *
 gedit_tab_get_view (GeditTab *tab)
@@ -1714,7 +1714,7 @@ gedit_tab_get_view (GeditTab *tab)
  *
  * Gets the #GeditDocument associated to @tab.
  *
- * Returns: the #GeditDocument associated to @tab
+ * Returns: (transfer none): the #GeditDocument associated to @tab
  */
 GeditDocument *
 gedit_tab_get_document (GeditTab *tab)
