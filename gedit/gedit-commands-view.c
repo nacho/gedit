@@ -139,4 +139,37 @@ _gedit_cmd_view_leave_fullscreen_mode (GtkAction   *action,
 					   window);
 }
 
+void
+_gedit_cmd_view_split_horizontally (GtkAction   *action,
+				    GeditWindow *window)
+{
+	GeditTab *tab;
+
+	tab = gedit_window_get_active_tab (window);
+
+	_gedit_tab_split (tab, GTK_ORIENTATION_HORIZONTAL);
+}
+
+void
+_gedit_cmd_view_split_vertically (GtkAction   *action,
+				  GeditWindow *window)
+{
+	GeditTab *tab;
+
+	tab = gedit_window_get_active_tab (window);
+
+	_gedit_tab_split (tab, GTK_ORIENTATION_VERTICAL);
+}
+
+void
+_gedit_cmd_view_unsplit (GtkAction   *action,
+			 GeditWindow *window)
+{
+	GeditTab *tab;
+
+	tab = gedit_window_get_active_tab (window);
+
+	_gedit_tab_unsplit (tab);
+}
+
 /* ex:ts=8:noet: */

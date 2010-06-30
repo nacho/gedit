@@ -106,6 +106,13 @@ static const GtkActionEntry gedit_menu_entries[] =
 
 	/* View menu */
 	{ "ViewHighlightMode", NULL, N_("_Highlight Mode") },
+	{ "ViewSplit", NULL, N_("S_plit") },
+	{ "SplitHorizontal", NULL, N_("Split _Horizontally"), NULL,
+	  N_("Split Horizontally"), G_CALLBACK (_gedit_cmd_view_split_horizontally) },
+	{ "SplitVertical", NULL, N_("Split _Vertically"), NULL,
+	  N_("Split Vertically"), G_CALLBACK (_gedit_cmd_view_split_vertically) },
+	{ "SplitUnsplit", NULL, N_("_Unsplit"), NULL,
+	  N_("Unsplit"), G_CALLBACK (_gedit_cmd_view_unsplit) },
 
 	/* Search menu */
 	{ "SearchFind", GTK_STOCK_FIND, N_("_Find..."), "<control>F",

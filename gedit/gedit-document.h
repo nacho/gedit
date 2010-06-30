@@ -317,20 +317,23 @@ void		 gedit_document_set_metadata	(GeditDocument       *doc,
 /* 
  * Non exported functions
  */
-void		 _gedit_document_set_readonly 	(GeditDocument       *doc,
+void		_gedit_document_set_readonly	(GeditDocument       *doc,
 						 gboolean             readonly);
 
-glong		 _gedit_document_get_seconds_since_last_save_or_load 
+glong		_gedit_document_get_seconds_since_last_save_or_load
 						(GeditDocument       *doc);
 
 /* Note: this is a sync stat: use only on local files */
 gboolean	_gedit_document_check_externally_modified
 						(GeditDocument       *doc);
 
-void		_gedit_document_search_region   (GeditDocument       *doc,
+void		_gedit_document_search_region	(GeditDocument       *doc,
 						 const GtkTextIter   *start,
 						 const GtkTextIter   *end);
-						  
+
+void		_gedit_document_sync_documents	(GeditDocument       *doc1,
+						 GeditDocument       *doc2);
+
 /* Search macros */
 #define GEDIT_SEARCH_IS_DONT_SET_FLAGS(sflags) ((sflags & GEDIT_SEARCH_DONT_SET_FLAGS) != 0)
 #define GEDIT_SEARCH_SET_DONT_SET_FLAGS(sflags,state) ((state == TRUE) ? \

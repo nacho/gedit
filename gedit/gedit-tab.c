@@ -44,7 +44,10 @@
 #include "gedit-debug.h"
 #include "gedit-enum-types.h"
 #include "gedit-settings.h"
+#include "gedit-marshal.h"
+#include "gedit-view-holder.h"
 #include "gedit-view-frame.h"
+#include "gedit-undo-manager.h"
 
 #define GEDIT_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_TAB, GeditTabPrivate))
 
@@ -55,7 +58,7 @@ struct _GeditTabPrivate
 	GSettings	       *editor;
 	GeditTabState	        state;
 
-	GeditViewFrame         *frame;
+	GeditViewHolder        *holder;
 
 	GtkWidget	       *info_bar;
 	GtkWidget	       *print_preview;
@@ -75,9 +78,9 @@ struct _GeditTabPrivate
 
 	GeditDocumentSaveFlags	save_flags;
 
-        gint                    auto_save_interval;
-        guint                   auto_save_timeout;
-        
+	gint                    auto_save_interval;
+	guint                   auto_save_timeout;
+
 	gint	                not_editable : 1;
 	gint                    auto_save : 1;
 
@@ -98,6 +101,7 @@ enum
 /* Signals */
 enum
 {
+	ACTIVE_VIEW_CHANGED,
 	DROP_URIS,
 	LAST_SIGNAL
 };
@@ -334,6 +338,18 @@ gedit_tab_class_init (GeditTabClass *klass)
 							   G_PARAM_READWRITE |
 							   G_PARAM_STATIC_STRINGS));
 
+	signals[ACTIVE_VIEW_CHANGED] =
+		g_signal_new ("active-view-changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GeditTabClass, active_view_changed),
+			      NULL, NULL,
+			      gedit_marshal_VOID__OBJECT_OBJECT,
+			      G_TYPE_NONE,
+			      2,
+			      GEDIT_TYPE_VIEW,
+			      GEDIT_TYPE_VIEW);
+
 	signals[DROP_URIS] =
 		g_signal_new ("drop-uris",
 			      G_TYPE_FROM_CLASS (object_class),
@@ -365,16 +381,9 @@ gedit_tab_get_state (GeditTab *tab)
 }
 
 static void
-set_cursor_according_to_state (GtkTextView   *view,
-			       GeditTabState  state)
+set_cursor_according_to_state (GeditViewHolder *holder,
+			       GeditTabState    state)
 {
-	GdkCursor *cursor;
-	GdkWindow *text_window;
-	GdkWindow *left_window;
-
-	text_window = gtk_text_view_get_window (view, GTK_TEXT_WINDOW_TEXT);
-	left_window = gtk_text_view_get_window (view, GTK_TEXT_WINDOW_LEFT);
-
 	if ((state == GEDIT_TAB_STATE_LOADING)          ||
 	    (state == GEDIT_TAB_STATE_REVERTING)        ||
 	    (state == GEDIT_TAB_STATE_SAVING)           ||
@@ -382,29 +391,11 @@ set_cursor_according_to_state (GtkTextView   *view,
 	    (state == GEDIT_TAB_STATE_PRINT_PREVIEWING) ||
 	    (state == GEDIT_TAB_STATE_CLOSING))
 	{
-		cursor = gdk_cursor_new_for_display (
-				gtk_widget_get_display (GTK_WIDGET (view)),
-				GDK_WATCH);
-
-		if (text_window != NULL)
-			gdk_window_set_cursor (text_window, cursor);
-		if (left_window != NULL)
-			gdk_window_set_cursor (left_window, cursor);
-
-		gdk_cursor_unref (cursor);
+		gedit_view_holder_set_cursor (holder, GDK_WATCH);
 	}
 	else
 	{
-		cursor = gdk_cursor_new_for_display (
-				gtk_widget_get_display (GTK_WIDGET (view)),
-				GDK_XTERM);
-
-		if (text_window != NULL)
-			gdk_window_set_cursor (text_window, cursor);
-		if (left_window != NULL)
-			gdk_window_set_cursor (left_window, NULL);
-
-		gdk_cursor_unref (cursor);
+		gedit_view_holder_set_cursor (holder, GDK_XTERM);
 	}
 }
 
@@ -412,35 +403,43 @@ static void
 view_realized (GtkTextView *view,
 	       GeditTab    *tab)
 {
-	set_cursor_according_to_state (view, tab->priv->state);
+	set_cursor_according_to_state (tab->priv->holder, tab->priv->state);
 }
 
 static void
-set_view_properties_according_to_state (GeditTab      *tab,
-					GeditTabState  state)
+set_view_properties_according_to_state (GeditTab *tab)
 {
-	GeditView *view;
-	gboolean val;
+	GSList *frames, *l;
 	gboolean hl_current_line;
-	
+
 	hl_current_line = g_settings_get_boolean (tab->priv->editor,
 						  GEDIT_SETTINGS_HIGHLIGHT_CURRENT_LINE);
 
-	view = gedit_view_frame_get_view (tab->priv->frame);
+	frames = gedit_view_holder_get_frames (tab->priv->holder);
 
-	val = ((state == GEDIT_TAB_STATE_NORMAL) &&
-	       (tab->priv->print_preview == NULL) &&
-	       !tab->priv->not_editable);
-	gtk_text_view_set_editable (GTK_TEXT_VIEW (view), val);
+	for (l = frames; l != NULL; l = g_slist_next (l))
+	{
+		GeditViewFrame *frame = GEDIT_VIEW_FRAME (l->data);
+		GtkTextView *view;
+		gboolean val;
 
-	val = ((state != GEDIT_TAB_STATE_LOADING) &&
-	       (state != GEDIT_TAB_STATE_CLOSING));
-	gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (view), val);
+		view = GTK_TEXT_VIEW (gedit_view_frame_get_view (frame));
 
-	val = ((state != GEDIT_TAB_STATE_LOADING) &&
-	       (state != GEDIT_TAB_STATE_CLOSING) &&
-	       (hl_current_line));
-	gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (view), val);
+		val = ((tab->priv->state == GEDIT_TAB_STATE_NORMAL) &&
+		       (tab->priv->print_preview == NULL) &&
+		       !tab->priv->not_editable);
+		gtk_text_view_set_editable (view, val);
+
+		val = ((tab->priv->state != GEDIT_TAB_STATE_LOADING) &&
+		       (tab->priv->state != GEDIT_TAB_STATE_CLOSING));
+		gtk_text_view_set_cursor_visible (view, val);
+
+		val = ((tab->priv->state != GEDIT_TAB_STATE_LOADING) &&
+		       (tab->priv->state != GEDIT_TAB_STATE_CLOSING) &&
+		       (hl_current_line));
+		gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (view),
+							    val);
+	}
 }
 
 static void
@@ -455,20 +454,19 @@ gedit_tab_set_state (GeditTab      *tab,
 
 	tab->priv->state = state;
 
-	set_view_properties_according_to_state (tab, state);
+	set_view_properties_according_to_state (tab);
 
 	if ((state == GEDIT_TAB_STATE_LOADING_ERROR) || /* FIXME: add other states if needed */
-	    (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW))
+		    (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW))
 	{
-		gtk_widget_hide (GTK_WIDGET (tab->priv->frame));
+		gtk_widget_hide (GTK_WIDGET (tab->priv->holder));
 	}
-	else
+	else if (tab->priv->print_preview == NULL)
 	{
-		if (tab->priv->print_preview == NULL)
-			gtk_widget_show (GTK_WIDGET (tab->priv->frame));
+		gtk_widget_show (GTK_WIDGET (tab->priv->holder));
 	}
 
-	set_cursor_according_to_state (GTK_TEXT_VIEW (gedit_view_frame_get_view (tab->priv->frame)),
+	set_cursor_according_to_state (tab->priv->holder,
 				       state);
 
 	g_object_notify (G_OBJECT (tab), "state");
@@ -500,6 +498,34 @@ static void
 document_modified_changed (GtkTextBuffer *document,
 			   GeditTab      *tab)
 {
+	GSList *frames, *l;
+	gboolean modified;
+
+	/* Sync all the docs */
+	modified = gtk_text_buffer_get_modified (document);
+
+	frames = gedit_view_holder_get_frames (tab->priv->holder);
+
+	for (l = frames; l != NULL; l = g_slist_next (l))
+	{
+		GeditViewFrame *frame = GEDIT_VIEW_FRAME (l->data);
+		GeditDocument *doc;
+
+		if (gedit_view_holder_get_active_frame (tab->priv->holder) == frame)
+			continue;
+
+		doc = gedit_view_frame_get_document (frame);
+
+		g_signal_handlers_block_by_func (doc,
+						 document_modified_changed,
+						 tab);
+		gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc),
+					      modified);
+		g_signal_handlers_unblock_by_func (doc,
+						   document_modified_changed,
+						   tab);
+	}
+
 	g_object_notify (G_OBJECT (tab), "name");
 }
 
@@ -1071,9 +1097,6 @@ document_loaded (GeditDocument *document,
 			gtk_widget_show (emsg);
 		}
 
-		/* Scroll to the cursor when the document is loaded */
-		gedit_view_scroll_to_cursor (gedit_view_frame_get_view (tab->priv->frame));
-
 		all_documents = gedit_app_get_documents (gedit_app_get_default ());
 
 		for (l = all_documents; l != NULL; l = g_list_next (l))
@@ -1555,50 +1578,19 @@ on_drop_uris (GeditView *view,
 }
 
 static void
-gedit_tab_init (GeditTab *tab)
+on_frame_added (GeditViewHolder *holder,
+		GeditViewFrame  *frame,
+		GeditTab        *tab)
 {
-	GeditLockdownMask lockdown;
-	gboolean auto_save;
-	gint auto_save_interval;
 	GeditDocument *doc;
 	GeditView *view;
 
-	tab->priv = GEDIT_TAB_GET_PRIVATE (tab);
+	gedit_debug (DEBUG_TAB);
 
-	tab->priv->editor = g_settings_new ("org.gnome.gedit.preferences.editor");
-
-	tab->priv->state = GEDIT_TAB_STATE_NORMAL;
-
-	tab->priv->not_editable = FALSE;
-
-	tab->priv->save_flags = 0;
-
-	tab->priv->ask_if_externally_modified = TRUE;
-
-	/* Manage auto save data */
-	auto_save = g_settings_get_boolean (tab->priv->editor,
-					    GEDIT_SETTINGS_AUTO_SAVE);
-	g_settings_get (tab->priv->editor, GEDIT_SETTINGS_AUTO_SAVE_INTERVAL,
-			"u", &auto_save_interval);
-	
-	lockdown = gedit_app_get_lockdown (gedit_app_get_default ());
-	tab->priv->auto_save = auto_save &&
-			       !(lockdown & GEDIT_LOCKDOWN_SAVE_TO_DISK);
-	tab->priv->auto_save = (tab->priv->auto_save != FALSE);
-
-	tab->priv->auto_save_interval = auto_save_interval;
-
-	/* Create the frame */
-	tab->priv->frame = gedit_view_frame_new ();
-	gtk_widget_show (GTK_WIDGET (tab->priv->frame));
-
-	gtk_box_pack_end (GTK_BOX (tab), GTK_WIDGET (tab->priv->frame),
-	                  TRUE, TRUE, 0);
-
-	doc = gedit_view_frame_get_document (tab->priv->frame);
+	doc = gedit_view_frame_get_document (frame);
 	g_object_set_data (G_OBJECT (doc), GEDIT_TAB_KEY, tab);
 
-	view = gedit_view_frame_get_view (tab->priv->frame);
+	view = gedit_view_frame_get_view (frame);
 	g_object_set_data (G_OBJECT (view), GEDIT_TAB_KEY, tab);
 
 	g_signal_connect (doc,
@@ -1634,16 +1626,83 @@ gedit_tab_init (GeditTab *tab)
 				"focus-in-event",
 				G_CALLBACK (view_focused_in),
 				tab);
-
 	g_signal_connect_after (view,
 				"realize",
 				G_CALLBACK (view_realized),
 				tab);
-
 	g_signal_connect (view,
 			  "drop-uris",
 			  G_CALLBACK (on_drop_uris),
 			  tab);
+}
+
+static void
+on_active_frame_changed (GeditViewHolder *holder,
+			 GeditViewFrame  *old_frame,
+			 GeditViewFrame  *new_frame,
+			 GeditTab        *tab)
+{
+	GeditView *old_view, *new_view;
+
+	old_view = gedit_view_frame_get_view (old_frame);
+	new_view = gedit_view_frame_get_view (new_frame);
+
+	g_signal_emit (G_OBJECT (tab), signals[ACTIVE_VIEW_CHANGED], 0,
+	               old_view, new_view);
+}
+
+static void
+gedit_tab_init (GeditTab *tab)
+{
+	GeditLockdownMask lockdown;
+	gboolean auto_save;
+	gint auto_save_interval;
+
+	tab->priv = GEDIT_TAB_GET_PRIVATE (tab);
+
+	tab->priv->editor = g_settings_new ("org.gnome.gedit.preferences.editor");
+
+	tab->priv->state = GEDIT_TAB_STATE_NORMAL;
+
+	tab->priv->not_editable = FALSE;
+
+	tab->priv->save_flags = 0;
+
+	tab->priv->ask_if_externally_modified = TRUE;
+
+	/* Manage auto save data */
+	auto_save = g_settings_get_boolean (tab->priv->editor,
+					    GEDIT_SETTINGS_AUTO_SAVE);
+	g_settings_get (tab->priv->editor, GEDIT_SETTINGS_AUTO_SAVE_INTERVAL,
+			"u", &auto_save_interval);
+	
+	lockdown = gedit_app_get_lockdown (gedit_app_get_default ());
+	tab->priv->auto_save = auto_save &&
+			       !(lockdown & GEDIT_LOCKDOWN_SAVE_TO_DISK);
+	tab->priv->auto_save = (tab->priv->auto_save != FALSE);
+
+	tab->priv->auto_save_interval = auto_save_interval;
+
+	/* Create the view holder */
+	tab->priv->holder = gedit_view_holder_new ();
+	gtk_widget_show (GTK_WIDGET (tab->priv->holder));
+
+	gtk_box_pack_end (GTK_BOX (tab), GTK_WIDGET (tab->priv->holder),
+			  TRUE, TRUE, 0);
+
+	g_signal_connect (tab->priv->holder,
+			  "frame-added",
+			  G_CALLBACK (on_frame_added),
+			  tab);
+	g_signal_connect (tab->priv->holder,
+			  "active-frame-changed",
+			  G_CALLBACK (on_active_frame_changed),
+			  tab);
+
+	/* Connect the signals for the active frame */
+	on_frame_added (tab->priv->holder,
+			gedit_view_holder_get_active_frame (tab->priv->holder),
+			tab);
 }
 
 GtkWidget *
@@ -1710,9 +1769,13 @@ _gedit_tab_new_from_stream (GInputStream        *stream,
 GeditView *
 gedit_tab_get_view (GeditTab *tab)
 {
+	GeditViewFrame *frame;
+
 	g_return_val_if_fail (GEDIT_IS_TAB (tab), NULL);
 
-	return gedit_view_frame_get_view (tab->priv->frame);
+	frame = gedit_view_holder_get_active_frame (tab->priv->holder);
+
+	return gedit_view_frame_get_view (frame);
 }
 
 /**
@@ -1726,9 +1789,13 @@ gedit_tab_get_view (GeditTab *tab)
 GeditDocument *
 gedit_tab_get_document (GeditTab *tab)
 {
+	GeditViewFrame *frame;
+
 	g_return_val_if_fail (GEDIT_IS_TAB (tab), NULL);
 
-	return gedit_view_frame_get_document (tab->priv->frame);
+	frame = gedit_view_holder_get_active_frame (tab->priv->holder);
+
+	return gedit_view_frame_get_document (frame);
 }
 
 #define MAX_DOC_NAME_LENGTH 40
@@ -2921,6 +2988,31 @@ gedit_tab_set_info_bar (GeditTab  *tab,
 
 	/* FIXME: this can cause problems with the tab state machine */
 	set_info_bar (tab, info_bar);
+}
+
+void
+_gedit_tab_split (GeditTab       *tab,
+		  GtkOrientation  orientation)
+{
+	gedit_view_holder_split (tab->priv->holder, orientation);
+}
+
+void
+_gedit_tab_unsplit (GeditTab *tab)
+{
+	gedit_view_holder_unsplit (tab->priv->holder);
+}
+
+gboolean
+_gedit_tab_can_unsplit (GeditTab *tab)
+{
+	return gedit_view_holder_can_unsplit (tab->priv->holder);
+}
+
+gboolean
+_gedit_tab_can_split (GeditTab *tab)
+{
+	return gedit_view_holder_can_split (tab->priv->holder);
 }
 
 /* ex:ts=8:noet: */

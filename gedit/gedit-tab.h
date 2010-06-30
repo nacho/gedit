@@ -92,8 +92,12 @@ struct _GeditTabClass
 {
 	GtkVBoxClass parent_class;
 
-	void (* drop_uris)	(GeditView *view,
-				 gchar    **uri_list);
+	void (* active_view_changed) (GeditTab  *tab,
+	                              GeditView *old_view,
+	                              GeditView *new_view);
+
+	void (* drop_uris)           (GeditView *view,
+	                              gchar    **uri_list);
 };
 
 /*
@@ -175,6 +179,11 @@ void		 _gedit_tab_mark_for_closing	(GeditTab	     *tab);
 
 gboolean	 _gedit_tab_can_close		(GeditTab	     *tab);
 
+void		 _gedit_tab_unsplit		(GeditTab            *tab);
+gboolean	 _gedit_tab_can_unsplit		(GeditTab            *tab);
+gboolean	 _gedit_tab_can_split		(GeditTab            *tab);
+void		 _gedit_tab_split		(GeditTab            *tab,
+						 GtkOrientation       orientation);
 
 G_END_DECLS
 
