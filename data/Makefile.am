@@ -18,6 +18,8 @@ pkgconfig_DATA = gedit.pc
 bugreportdir = $(libexecdir)/gedit
 bugreport_SCRIPTS = gedit-bugreport.sh
 
+gsettings_ENUM_NAMESPACE = org.gnome.gedit
+gsettings_ENUM_FILES = $(top_srcdir)/gedit/*.h
 gsettings_SCHEMAS = org.gnome.gedit.gschema.xml
 
 @INTLTOOL_XML_NOMERGE_RULE@

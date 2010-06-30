@@ -6,19 +6,6 @@
     <value nick="word-char" value="3"/>
   </enum>
 
-  <enum id="org.gnome.gedit.ShowTabs">
-    <value nick="never" value="0"/>
-    <value nick="auto" value="1"/>
-    <value nick="always" value="2"/>
-  </enum>
-
-  <enum id="org.gnome.gedit.ToolbarSetting">
-    <value nick="system" value="0"/>
-    <value nick="icons" value="1"/>
-    <value nick="icons-and-text" value="2"/>
-    <value nick="icons-both-horiz" value="3"/>
-  </enum>
-
   <enum id="org.gnome.gedit.SmartHomeEnd">
     <value nick="disabled" value="0"/>
     <value nick="before" value="1"/>
@@ -155,12 +142,12 @@
       <_summary>Toolbar is Visible</_summary>
       <_description>Whether the toolbar should be visible in editing windows.</_description>
     </key>
-    <key name="toolbar-buttons-style" enum="org.gnome.gedit.ToolbarSetting">
+    <key name="toolbar-buttons-style" enum="org.gnome.gedit.GeditToolbarSetting">
       <default>'@TOOLBAR_STYLE@'</default>
       <_summary>Toolbar Buttons Style</_summary>
       <_description>Style for the toolbar buttons. Possible values are "system" to use the system's default style, "icons" to display icons only, "icons-and-text" to display both icons and text, and "icons-both-horiz" to display prioritized text beside icons. Note that the values are case-sensitive, so make sure they appear exactly as mentioned here.</_description>
     </key>
-    <key name="notebook-show-tabs-mode" enum="org.gnome.gedit.ShowTabs">
+    <key name="notebook-show-tabs-mode" enum="org.gnome.gedit.GeditNotebookShowTabsModeType">
       <default>'always'</default>
       <_summary>Notebook Show Tabs Mode</_summary>
       <_description>Specifies when to show the notebook tabs. Use "never" to never show the tabs, "always" to always show the tabs, and "auto" to show the tabs only when there is more than one tab. Note that the values are case-sensitive, so make sure they appear exactly as mentioned here.</_description>
