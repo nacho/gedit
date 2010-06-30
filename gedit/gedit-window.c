@@ -4346,7 +4346,7 @@ gedit_window_init (GeditWindow *window)
  *
  * Gets the active #GeditView.
  *
- * Returns: the active #GeditView
+ * Returns: (transfer none): the active #GeditView
  */
 GeditView *
 gedit_window_get_active_view (GeditWindow *window)
@@ -4372,7 +4372,7 @@ gedit_window_get_active_view (GeditWindow *window)
  *
  * Gets the active #GeditDocument.
  * 
- * Returns: the active #GeditDocument
+ * Returns: (transfer none): the active #GeditDocument
  */
 GeditDocument *
 gedit_window_get_active_document (GeditWindow *window)
@@ -4526,7 +4526,7 @@ gedit_window_create_tab_from_stream (GeditWindow         *window,
  *
  * Gets the active #GeditTab in the @window.
  *
- * Returns: the active #GeditTab in the @window.
+ * Returns: (transfer none): the active #GeditTab in the @window.
  */
 GeditTab *
 gedit_window_get_active_tab (GeditWindow *window)
@@ -4729,7 +4729,7 @@ gedit_window_set_active_tab (GeditWindow *window,
  *
  * Gets the #GtkWindowGroup in which @window resides.
  *
- * Returns: the #GtkWindowGroup
+ * Returns: (transfer none): the #GtkWindowGroup
  */
 GtkWindowGroup *
 gedit_window_get_group (GeditWindow *window)
@@ -4753,7 +4753,7 @@ _gedit_window_is_removing_tabs (GeditWindow *window)
  *
  * Gets the #GtkUIManager associated with the @window.
  *
- * Returns: the #GtkUIManager of the @window.
+ * Returns: (transfer none): the #GtkUIManager of the @window.
  */
 GtkUIManager *
 gedit_window_get_ui_manager (GeditWindow *window)
@@ -4769,7 +4769,7 @@ gedit_window_get_ui_manager (GeditWindow *window)
  *
  * Gets the side #GeditPanel of the @window.
  *
- * Returns: the side #GeditPanel.
+ * Returns: (transfer none): the side #GeditPanel.
  */
 GeditPanel *
 gedit_window_get_side_panel (GeditWindow *window)
@@ -4785,7 +4785,7 @@ gedit_window_get_side_panel (GeditWindow *window)
  *
  * Gets the bottom #GeditPanel of the @window.
  *
- * Returns: the bottom #GeditPanel.
+ * Returns: (transfer none): the bottom #GeditPanel.
  */
 GeditPanel *
 gedit_window_get_bottom_panel (GeditWindow *window)
@@ -4801,7 +4801,7 @@ gedit_window_get_bottom_panel (GeditWindow *window)
  *
  * Gets the #GeditStatusbar of the @window.
  *
- * Returns: the #GeditStatusbar of the @window.
+ * Returns: (transfer none): the #GeditStatusbar of the @window.
  */
 GtkWidget *
 gedit_window_get_statusbar (GeditWindow *window)
@@ -5036,7 +5036,7 @@ _gedit_window_is_fullscreen (GeditWindow *window)
  *
  * Gets the #GeditTab that matches with the given @location.
  *
- * Returns: the #GeditTab that matches with the given @location.
+ * Returns: (transfer none): the #GeditTab that matches with the given @location.
  */
 GeditTab *
 gedit_window_get_tab_from_location (GeditWindow *window,
@@ -5090,7 +5090,7 @@ gedit_window_get_tab_from_location (GeditWindow *window,
  *
  * Return value: (transfer none): the #GeditMessageBus associated with @window
  */
-GeditMessageBus	*
+GeditMessageBus *
 gedit_window_get_message_bus (GeditWindow *window)
 {
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
