@@ -4,8 +4,7 @@ plugindir = $(GEDIT_PLUGINS_LIBS_DIR)/quickopen
 plugin_PYTHON =		\
 	__init__.py	\
 	popup.py	\
-	virtualdirs.py	\
-	windowhelper.py
+	virtualdirs.py
 
 CLEANFILES =
 DISTCLEANFILES =

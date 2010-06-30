@@ -18,10 +18,10 @@ SUBDIRS = \
 	filebrowser	\
 	modelines	\
 	pythonconsole	\
+	quickopen	\
 	sort		\
 	time
 
-#	quickopen
 #	snippets
 
 #if !OS_WIN32

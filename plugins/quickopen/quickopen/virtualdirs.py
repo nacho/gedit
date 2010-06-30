@@ -17,10 +17,9 @@
 #  Foundation, Inc., 59 Temple Place, Suite 330,
 #  Boston, MA 02111-1307, USA.
 
-import gtk
-import gio
+from gi.repository import Gio, Gtk
 
-class VirtualDirectory:
+class VirtualDirectory(object):
         def __init__(self, name):
                 self._name = name
                 self._children = []
@@ -31,7 +30,7 @@ class VirtualDirectory:
         def get_parent(self):
                 return None
 
-        def enumerate_children(self, attr):
+        def enumerate_children(self, attr, flags, callback):
                 return self._children
 
         def append(self, child):
@@ -40,24 +39,19 @@ class VirtualDirectory:
 
                 try:
                         info = child.query_info("standard::*")
-
                         if info:
                                 self._children.append((child, info))
                 except:
                         pass
 
 class RecentDocumentsDirectory(VirtualDirectory):
-        def __init__(self, maxitems=10, screen=None):
+        def __init__(self, maxitems=10):
                 VirtualDirectory.__init__(self, 'recent')
-
                 self._maxitems = maxitems
-                self.fill(screen)
+                self.fill()
 
-        def fill(self, screen):
-                if screen:
-                        manager = gtk.recent_manager_get_for_screen(screen)
-                else:
-                        manager = gtk.recent_manager_get_default()
+        def fill(self):
+                manager = Gtk.RecentManager.get_default()
 
                 items = manager.get_items()
                 items.sort(lambda a, b: cmp(b.get_visited(), a.get_visited()))
@@ -66,7 +60,7 @@ class RecentDocumentsDirectory(VirtualDirectory):
 
                 for item in items:
                         if item.has_group('gedit'):
-                                self.append(gio.File(item.get_uri()))
+                                self.append(Gio.file_new_for_uri(item.get_uri()))
                                 added += 1
 
                                 if added >= self._maxitems:
