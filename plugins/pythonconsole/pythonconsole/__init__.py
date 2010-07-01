@@ -24,56 +24,46 @@
 # Bits from gedit Python Console Plugin
 #     Copyrignt (C), 2005 Raphaël Slinckx
 
-import gtk
-import gedit
+from gi.repository import GObject, Gtk, Gedit, Peas, PeasUI
 
 from console import PythonConsole
 from config import PythonConsoleConfigDialog
-from config import PythonConsoleConfig
 
 PYTHON_ICON = 'gnome-mime-text-x-python'
 
-class PythonConsolePlugin(gedit.Plugin):
-    def __init__(self):
-        gedit.Plugin.__init__(self)
-        self.dlg = None
+class PythonConsolePlugin(GObject.Object, Gedit.WindowActivatable, PeasUI.Configurable):
+    __gtype_name__ = "PythonConsolePlugin"
 
-    def activate(self, window):
-        console = PythonConsole(namespace = {'__builtins__' : __builtins__,
-                                             'gedit' : gedit,
-                                             'window' : window})
-        console.eval('print "You can access the main window through ' \
-                     '\'window\' :\\n%s" % window', False)
+    def __init__(self):
+        GObject.Object.__init__(self)
+        self._dlg = None
+
+    def do_activate(self, window):
+        self._console = PythonConsole(namespace = {'__builtins__' : __builtins__,
+                                                   'gedit' : Gedit,
+                                                   'window' : window})
+        self._console.eval('print "You can access the main window through ' \
+                           '\'window\' :\\n%s" % window', False)
         bottom = window.get_bottom_panel()
-        image = gtk.Image()
-        image.set_from_icon_name(PYTHON_ICON, gtk.ICON_SIZE_MENU)
-        bottom.add_item(console, "GeditPythonConsolePanel",
+        image = Gtk.Image()
+        image.set_from_icon_name(PYTHON_ICON, Gtk.IconSize.MENU)
+        bottom.add_item(self._console, "GeditPythonConsolePanel",
                         _('Python Console'), image)
-        window.set_data('PythonConsolePluginInfo', console)
 
     def deactivate(self, window):
-        console = window.get_data("PythonConsolePluginInfo")
-        console.stop()
-        window.set_data("PythonConsolePluginInfo", None)
+        self._console.stop()
         bottom = window.get_bottom_panel()
-        bottom.remove_item(console)
+        bottom.remove_item(self._console)
 
-def create_configure_dialog(self):
+    def do_create_configure_dialog(self):
+        if not self._dlg:
+            self._dlg = PythonConsoleConfigDialog(self.plugin_info.get_data_dir())
 
-    if not self.dlg:
-        self.dlg = PythonConsoleConfigDialog(self.get_data_dir())
+        dialog = self._dlg.dialog()
 
-    dialog = self.dlg.dialog()
-    window = gedit.app_get_default().get_active_window()
-    if window:
-        dialog.set_transient_for(window)
+        app = Gedit.App.get_default()
+        dialog.set_transient_for(app.get_active_window())
 
-    return dialog
-
-# Here we dynamically insert create_configure_dialog based on if configuration
-# is enabled. This has to be done like this because gedit checks if a plugin
-# is configurable solely on the fact that it has this member defined or not
-if PythonConsoleConfig.enabled():
-    PythonConsolePlugin.create_configure_dialog = create_configure_dialog
+        return dialog
 
 # ex:et:ts=4:

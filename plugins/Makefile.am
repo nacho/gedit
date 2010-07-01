@@ -4,13 +4,13 @@ DIST_SUBDIRS = \
 	docinfo		\
 	filebrowser	\
 	modelines	\
+	pythonconsole	\
 	sort		\
 	spell 		\
 	taglist		\
 	time
 
 #	externaltools
-#	pythonconsole
 #	quickopen
 #	snippets
 
@@ -19,11 +19,11 @@ SUBDIRS = \
 	docinfo		\
 	filebrowser	\
 	modelines	\
+	pythonconsole	\
 	sort		\
 	taglist		\
 	time
 
-#	pythonconsole
 #	quickopen
 #	snippets
 

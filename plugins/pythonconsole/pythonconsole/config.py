@@ -25,97 +25,46 @@
 #     Copyrignt (C), 2005 Raphaël Slinckx
 
 import os
-import gtk
+from gi.repository import Gio, Gtk, Gdk
 
-__all__ = ('PythonConsoleConfig', 'PythonConsoleConfigDialog')
-
-GCONF_KEY_BASE = '/apps/gedit-2/plugins/pythonconsole'
-GCONF_KEY_COMMAND_COLOR = GCONF_KEY_BASE + '/command-color'
-GCONF_KEY_ERROR_COLOR = GCONF_KEY_BASE + '/error-color'
-
-DEFAULT_COMMAND_COLOR = '#314e6c' # Blue Shadow
-DEFAULT_ERROR_COLOR = '#990000' # Accent Red Dark
-
-class PythonConsoleConfig(object):
-    try:
-        import gconf
-    except ImportError:
-        gconf = None
-
-    def __init__(self):
-        pass
-
-    @staticmethod
-    def enabled():
-        return PythonConsoleConfig.gconf != None
-
-    @staticmethod
-    def add_handler(handler):
-        if PythonConsoleConfig.gconf:
-            PythonConsoleConfig.gconf.client_get_default().notify_add(GCONF_KEY_BASE, handler)
-
-    color_command = property(
-        lambda self: self.gconf_get_str(GCONF_KEY_COMMAND_COLOR, DEFAULT_COMMAND_COLOR),
-        lambda self, value: self.gconf_set_str(GCONF_KEY_COMMAND_COLOR, value))
-
-    color_error = property(
-        lambda self: self.gconf_get_str(GCONF_KEY_ERROR_COLOR, DEFAULT_ERROR_COLOR),
-        lambda self, value: self.gconf_set_str(GCONF_KEY_ERROR_COLOR, value))
-
-    @staticmethod
-    def gconf_get_str(key, default=''):
-        if not PythonConsoleConfig.gconf:
-            return default
-
-        val = PythonConsoleConfig.gconf.client_get_default().get(key)
-        if val is not None and val.type == gconf.VALUE_STRING:
-            return val.get_string()
-        else:
-            return default
-
-    @staticmethod
-    def gconf_set_str(key, value):
-        if not PythonConsoleConfig.gconf:
-            return
-
-        v = PythonConsoleConfig.gconf.Value(gconf.VALUE_STRING)
-        v.set_string(value)
-        PythonConsoleConfig.gconf.client_get_default().set(key, v)
+__all__ = ('PythonConsoleConfigDialog')
 
 class PythonConsoleConfigDialog(object):
+
+    CONSOLE_KEY_BASE = 'org.gnome.gedit.plugins.pythonconsole'
+    CONSOLE_KEY_COMMAND_COLOR = 'command-color'
+    CONSOLE_KEY_ERROR_COLOR = 'error-color'
 
     def __init__(self, datadir):
         object.__init__(self)
         self._dialog = None
         self._ui_path = os.path.join(datadir, 'ui', 'config.ui')
-        self.config = PythonConsoleConfig()
+        self._settings = Gio.Settings.new(self.CONSOLE_KEY_BASE)
 
     def dialog(self):
         if self._dialog is None:
-            self._ui = gtk.Builder()
+            self._ui = Gtk.Builder()
             self._ui.add_from_file(self._ui_path)
 
             self.set_colorbutton_color(self._ui.get_object('colorbutton-command'),
-                                        self.config.color_command)
+                                       self._settings.get_string(self.CONSOLE_KEY_COMMAND_COLOR))
             self.set_colorbutton_color(self._ui.get_object('colorbutton-error'),
-                                        self.config.color_error)
-            
+                                       self._settings.get_string(self.CONSOLE_KEY_ERROR_COLOR))
+
             self._ui.connect_signals(self)
-            
+
             self._dialog = self._ui.get_object('dialog-config')
             self._dialog.show_all()
         else:
             self._dialog.present()
-        
+
         return self._dialog
-    
+
     @staticmethod
     def set_colorbutton_color(colorbutton, value):
-        try:
-            color = gtk.gdk.color_parse(value)
-        except ValueError:
-            pass    # Default color in config.ui used
-        else:
+        parsed, color = Gdk.color_parse(value)
+
+        if parsed:
             colorbutton.set_color(color)
 
     def on_dialog_config_response(self, dialog, response_id):
@@ -126,9 +75,11 @@ class PythonConsoleConfigDialog(object):
         self._ui = None
         
     def on_colorbutton_command_color_set(self, colorbutton):
-        self.config.color_command = colorbutton.get_color().to_string()
+        self._settings.set_string(self.CONSOLE_KEY_COMMAND_COLOR,
+                                  colorbutton.get_color().to_string())
 
     def on_colorbutton_error_color_set(self, colorbutton):
-        self.config.color_error = colorbutton.get_color().to_string()
+        self._settings.set_string(self.CONSOLE_KEY_ERROR_COLOR,
+                                  colorbutton.get_color().to_string())
 
 # ex:et:ts=4:

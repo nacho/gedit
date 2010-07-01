@@ -33,6 +33,8 @@ PKG_PROG_PKG_CONFIG
 # needed on osx
 AC_PROG_OBJC
 
+AM_PATH_PYTHON
+
 # Initialize libtool
 LT_PREREQ([2.2.6])
 LT_INIT(disable-static)
@@ -410,6 +412,9 @@ plugins/docinfo/Makefile
 plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in
 plugins/filebrowser/Makefile
 plugins/modelines/Makefile
+plugins/pythonconsole/Makefile
+plugins/pythonconsole/pythonconsole/Makefile
+plugins/pythonconsole/pythonconsole/org.gnome.gedit.pythonconsole.gschema.xml.in
 plugins/sort/Makefile
 plugins/spell/Makefile
 plugins/taglist/Makefile
@@ -426,8 +431,6 @@ osx/Makefile])
 #plugins/externaltools/Makefile
 #plugins/externaltools/scripts/Makefile
 #plugins/externaltools/tools/Makefile
-#plugins/pythonconsole/Makefile
-#plugins/pythonconsole/pythonconsole/Makefile
 #plugins/quickopen/Makefile
 #plugins/quickopen/quickopen/Makefile
 #plugins/snippets/data/lang/Makefile
