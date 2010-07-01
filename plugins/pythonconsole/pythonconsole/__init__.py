@@ -27,7 +27,7 @@
 from gi.repository import GObject, Gtk, Gedit, Peas, PeasUI
 
 from console import PythonConsole
-from config import PythonConsoleConfigDialog
+from config import PythonConsoleConfigWidget
 
 PYTHON_ICON = 'gnome-mime-text-x-python'
 
@@ -36,7 +36,6 @@ class PythonConsolePlugin(GObject.Object, Gedit.WindowActivatable, PeasUI.Config
 
     def __init__(self):
         GObject.Object.__init__(self)
-        self._dlg = None
 
     def do_activate(self, window):
         self._console = PythonConsole(namespace = {'__builtins__' : __builtins__,
@@ -55,15 +54,9 @@ class PythonConsolePlugin(GObject.Object, Gedit.WindowActivatable, PeasUI.Config
         bottom = window.get_bottom_panel()
         bottom.remove_item(self._console)
 
-    def do_create_configure_dialog(self):
-        if not self._dlg:
-            self._dlg = PythonConsoleConfigDialog(self.plugin_info.get_data_dir())
+    def do_create_configure_widget(self):
+        config_widget = PythonConsoleConfigWidget(self.plugin_info.get_data_dir())
 
-        dialog = self._dlg.dialog()
-
-        app = Gedit.App.get_default()
-        dialog.set_transient_for(app.get_active_window())
-
-        return dialog
+        return config_widget.configure_widget()
 
 # ex:et:ts=4:

@@ -29,7 +29,7 @@ from gi.repository import Gio, Gtk, Gdk
 
 __all__ = ('PythonConsoleConfigDialog')
 
-class PythonConsoleConfigDialog(object):
+class PythonConsoleConfigWidget(object):
 
     CONSOLE_KEY_BASE = 'org.gnome.gedit.plugins.pythonconsole'
     CONSOLE_KEY_COMMAND_COLOR = 'command-color'
@@ -37,28 +37,27 @@ class PythonConsoleConfigDialog(object):
 
     def __init__(self, datadir):
         object.__init__(self)
-        self._dialog = None
+
         self._ui_path = os.path.join(datadir, 'ui', 'config.ui')
         self._settings = Gio.Settings.new(self.CONSOLE_KEY_BASE)
+        self._ui = Gtk.Builder()
 
-    def dialog(self):
-        if self._dialog is None:
-            self._ui = Gtk.Builder()
-            self._ui.add_from_file(self._ui_path)
+    def configure_widget(self):
+        try:
+            self._ui.add_objects_from_file(self._ui_path, ["table"])
+        except:
+            return None
 
-            self.set_colorbutton_color(self._ui.get_object('colorbutton-command'),
-                                       self._settings.get_string(self.CONSOLE_KEY_COMMAND_COLOR))
-            self.set_colorbutton_color(self._ui.get_object('colorbutton-error'),
-                                       self._settings.get_string(self.CONSOLE_KEY_ERROR_COLOR))
+        self.set_colorbutton_color(self._ui.get_object('colorbutton-command'),
+                                   self._settings.get_string(self.CONSOLE_KEY_COMMAND_COLOR))
+        self.set_colorbutton_color(self._ui.get_object('colorbutton-error'),
+                                   self._settings.get_string(self.CONSOLE_KEY_ERROR_COLOR))
 
-            self._ui.connect_signals(self)
+        self._ui.connect_signals(self)
 
-            self._dialog = self._ui.get_object('dialog-config')
-            self._dialog.show_all()
-        else:
-            self._dialog.present()
+        widget = self._ui.get_object('table')
 
-        return self._dialog
+        return widget
 
     @staticmethod
     def set_colorbutton_color(colorbutton, value):
@@ -67,13 +66,6 @@ class PythonConsoleConfigDialog(object):
         if parsed:
             colorbutton.set_color(color)
 
-    def on_dialog_config_response(self, dialog, response_id):
-        self._dialog.destroy()
-
-    def on_dialog_config_destroy(self, dialog):
-        self._dialog = None
-        self._ui = None
-        
     def on_colorbutton_command_color_set(self, colorbutton):
         self._settings.set_string(self.CONSOLE_KEY_COMMAND_COLOR,
                                   colorbutton.get_color().to_string())
