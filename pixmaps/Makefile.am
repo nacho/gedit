@@ -1,6 +1,3 @@
-icondir = $(datadir)/gedit/icons
-icon_DATA = gedit-plugin.png
-
 logodir = $(datadir)/gedit/logo
 logo_DATA = gedit-logo.png
 
