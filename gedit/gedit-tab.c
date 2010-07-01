@@ -1705,6 +1705,8 @@ _gedit_tab_new_from_stream (GInputStream        *stream,
 GeditView *
 gedit_tab_get_view (GeditTab *tab)
 {
+	g_return_val_if_fail (GEDIT_IS_TAB (tab), NULL);
+
 	return GEDIT_VIEW (tab->priv->view);
 }
 
@@ -1719,6 +1721,8 @@ gedit_tab_get_view (GeditTab *tab)
 GeditDocument *
 gedit_tab_get_document (GeditTab *tab)
 {
+	g_return_val_if_fail (GEDIT_IS_TAB (tab), NULL);
+
 	return GEDIT_DOCUMENT (gtk_text_view_get_buffer (
 					GTK_TEXT_VIEW (tab->priv->view)));
 }
