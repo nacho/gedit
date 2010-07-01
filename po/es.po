@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
-"POT-Creation-Date: 2010-06-28 21:58+0000\n"
-"PO-Revision-Date: 2010-06-29 05:09+0200\n"
+"POT-Creation-Date: 2010-07-01 16:56+0000\n"
+"PO-Revision-Date: 2010-07-01 20:15+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -227,7 +227,6 @@ msgid "Right Margin Position"
 msgstr "Posición del margen derecho"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:37
-#| msgid "Side Pane is Visible"
 msgid "Side panel is Visible"
 msgstr "El panel lateral es visible"
 
@@ -470,8 +469,6 @@ msgstr ""
 "carga un archivo."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:72
-#| msgid ""
-#| "Whether the side pane at the left of editing windows should be visible."
 msgid ""
 "Whether the side panel at the left of editing windows should be visible."
 msgstr ""
@@ -1122,7 +1119,7 @@ msgstr "Re_vertir"
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit es un editor de texto pequeño y ligero para el Escritorio GNOME"
 
-#: ../gedit/gedit-commands-help.c:111
+#: ../gedit/gedit-commands-help.c:110
 msgid "translator-credits"
 msgstr ""
 "Jorge González <jorgegonz@svn.gnome.org>, 2007-2010\n"
@@ -1149,7 +1146,7 @@ msgstr "Se encontró y reemplazó una aparición"
 msgid "\"%s\" not found"
 msgstr "No se encontró «%s»"
 
-#: ../gedit/gedit-document.c:1225 ../gedit/gedit-document.c:1251
+#: ../gedit/gedit-document.c:1231 ../gedit/gedit-document.c:1257
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Documento no guardado %d"
@@ -1828,7 +1825,7 @@ msgid_plural "There are %d tabs with errors"
 msgstr[0] "Hay una solapa con errores"
 msgstr[1] "Hay %d solapas con errores"
 
-#: ../gedit/gedit-style-scheme-manager.c:207
+#: ../gedit/gedit-style-scheme-manager.c:206
 #, c-format
 msgid "Directory '%s' could not be created: g_mkdir_with_parents() failed: %s"
 msgstr "No se pudo crear el directorio «%s»: falló g_mkdir_with_parents(): %s"
@@ -2196,22 +2193,18 @@ msgid "Edit text in fullscreen"
 msgstr "Editar texto a pantalla completa"
 
 #: ../gedit/gedit-ui.h:180
-#| msgid "Side _Pane"
 msgid "Side _Panel"
 msgstr "Panel _lateral"
 
 #: ../gedit/gedit-ui.h:181
-#| msgid "Show or hide the side pane in the current window"
 msgid "Show or hide the side panel in the current window"
 msgstr "Mostrar u ocultar el panel lateral en la ventana actual"
 
 #: ../gedit/gedit-ui.h:183
-#| msgid "_Bottom Pane"
 msgid "_Bottom Panel"
 msgstr "Panel _inferior"
 
 #: ../gedit/gedit-ui.h:184
-#| msgid "Show or hide the bottom pane in the current window"
 msgid "Show or hide the bottom panel in the current window"
 msgstr "Mostrar u ocultar el panel inferior en la ventana actual"
 
@@ -2704,12 +2697,10 @@ msgid "Run command"
 msgstr "Ejecutar comando"
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
-#| msgid "Easy file access from the side pane"
 msgid "Easy file access from the side panel"
 msgstr "Acceso a archivos fácil desde el panel lateral"
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
-#| msgid "File Browser Pane"
 msgid "File Browser Panel"
 msgstr "Panel del examinador de archivos"
 
@@ -3094,7 +3085,7 @@ msgid "Interactive Python console standing in the bottom panel"
 msgstr "Consola interactiva python en el panel inferior"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
-#: ../plugins/pythonconsole/pythonconsole/__init__.py:51
+#: ../plugins/pythonconsole/pythonconsole/__init__.py:50
 msgid "Python Console"
 msgstr "Consola Python"
 
@@ -3106,6 +3097,26 @@ msgstr "Color del c_omando:"
 #: ../plugins/pythonconsole/pythonconsole/config.ui.h:2
 msgid "_Error color:"
 msgstr "Color del _error:"
+
+#: ../plugins/pythonconsole/pythonconsole/org.gnome.gedit.pythonconsole.gschema.xml.in.in.h:1
+#| msgid "C_ommand color:"
+msgid "Command Color Text"
+msgstr "Color del texto del comando"
+
+#: ../plugins/pythonconsole/pythonconsole/org.gnome.gedit.pythonconsole.gschema.xml.in.in.h:2
+#| msgid "_Error color:"
+msgid "Error Color Text"
+msgstr "Color del texto de error"
+
+#: ../plugins/pythonconsole/pythonconsole/org.gnome.gedit.pythonconsole.gschema.xml.in.in.h:3
+#| msgid "C_ommand color:"
+msgid "The command color text"
+msgstr "El color del texto del comando"
+
+#: ../plugins/pythonconsole/pythonconsole/org.gnome.gedit.pythonconsole.gschema.xml.in.in.h:4
+#| msgid "_Error color:"
+msgid "The error color text"
+msgstr "El color del texto de error"
 
 #. ex:ts=8:et:
 #: ../plugins/quickopen/quickopen/popup.py:35
@@ -3475,36 +3486,36 @@ msgstr "Establecer idioma"
 msgid "Languages"
 msgstr "Idiomas"
 
-#: ../plugins/spell/gedit-spell-plugin.c:85
+#: ../plugins/spell/gedit-spell-plugin.c:100
 msgid "_Check Spelling..."
 msgstr "_Comprobar ortografía…"
 
-#: ../plugins/spell/gedit-spell-plugin.c:87
+#: ../plugins/spell/gedit-spell-plugin.c:102
 msgid "Check the current document for incorrect spelling"
 msgstr ""
 "Comprueba la ortografía del documento actual buscando palabras incorrectas"
 
-#: ../plugins/spell/gedit-spell-plugin.c:93
+#: ../plugins/spell/gedit-spell-plugin.c:108
 msgid "Set _Language..."
 msgstr "Establecer _idioma…"
 
-#: ../plugins/spell/gedit-spell-plugin.c:95
+#: ../plugins/spell/gedit-spell-plugin.c:110
 msgid "Set the language of the current document"
 msgstr "Establece el idioma del documento actual"
 
-#: ../plugins/spell/gedit-spell-plugin.c:104
+#: ../plugins/spell/gedit-spell-plugin.c:119
 msgid "_Highlight Misspelled Words"
 msgstr "_Resaltar palabras mal escritas"
 
-#: ../plugins/spell/gedit-spell-plugin.c:106
+#: ../plugins/spell/gedit-spell-plugin.c:121
 msgid "Automatically spell-check the current document"
 msgstr "Comprobar automáticamente la ortografía del documento actual"
 
-#: ../plugins/spell/gedit-spell-plugin.c:751
+#: ../plugins/spell/gedit-spell-plugin.c:766
 msgid "The document is empty."
 msgstr "El documento está vacío."
 
-#: ../plugins/spell/gedit-spell-plugin.c:781
+#: ../plugins/spell/gedit-spell-plugin.c:791
 msgid "No misspelled words"
 msgstr "Sin palabras mal escritas"
 
@@ -5140,19 +5151,19 @@ msgstr "propio"
 msgid "XUL — Tags"
 msgstr "XUL: etiquetas"
 
-#: ../plugins/time/gedit-time-plugin.c:180
+#: ../plugins/time/gedit-time-plugin.c:182
 msgid "In_sert Date and Time..."
 msgstr "In_sertar fecha y hora…"
 
-#: ../plugins/time/gedit-time-plugin.c:182
+#: ../plugins/time/gedit-time-plugin.c:184
 msgid "Insert current date and time at the cursor position"
 msgstr "Inserta la fecha y hora actual en la posición del cursor"
 
-#: ../plugins/time/gedit-time-plugin.c:591
+#: ../plugins/time/gedit-time-plugin.c:511
 msgid "Available formats"
 msgstr "Formatos disponibles"
 
-#: ../plugins/time/gedit-time-plugin.c:744
+#: ../plugins/time/gedit-time-plugin.c:661
 msgid "Configure insert date/time plugin..."
 msgstr "Configurar el complemento de inserción de fecha/hora…"
 
