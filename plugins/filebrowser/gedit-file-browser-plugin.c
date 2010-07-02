@@ -99,9 +99,6 @@ static void on_rename_cb		 (GeditFileBrowserStore         *model,
 					  GFile                         *oldfile,
 					  GFile                         *newfile,
 					  GeditWindow                   *window);
-static void on_filter_pattern_changed_cb (GeditFileBrowserWidget        *widget,
-                                          GParamSpec                    *param,
-                                          GeditFileBrowserPlugin        *plugin);
 static void on_tab_added_cb              (GeditWindow                   *window,
                                           GeditTab                      *tab,
                                           GeditFileBrowserPlugin        *plugin);
@@ -256,21 +253,6 @@ restore_default_location (GeditFileBrowserPlugin *plugin)
 
 	g_free (root);
 	g_free (virtual_root);
-}
-
-static void
-restore_filter (GeditFileBrowserPlugin *plugin)
-{
-	GeditFileBrowserPluginPrivate *priv = plugin->priv;
-	gchar *pattern;
-
-	pattern = g_settings_get_string (priv->settings,
-					 FILEBROWSER_FILTER_PATTERN);
-
-	gedit_file_browser_widget_set_filter_pattern (priv->tree_widget,
-	                                              pattern);
-
-	g_free (pattern);
 }
 
 static GeditFileBrowserViewClickPolicy
@@ -626,11 +608,6 @@ gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
 			  "error", G_CALLBACK (on_error_cb), plugin);
 
 	g_signal_connect (priv->tree_widget,
-	                  "notify::filter-pattern",
-	                  G_CALLBACK (on_filter_pattern_changed_cb),
-	                  plugin);
-
-	g_signal_connect (priv->tree_widget,
 	                  "confirm-delete",
 	                  G_CALLBACK (on_confirm_delete_cb),
 	                  plugin);
@@ -646,6 +623,12 @@ gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
 			  "changed",
 			  G_CALLBACK (on_selection_changed_cb),
 			  plugin);
+
+	g_settings_bind (priv->settings,
+	                 "filter-pattern",
+	                 priv->tree_widget,
+	                 "filter-pattern",
+	                 G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
 	panel = gedit_window_get_side_panel (window);
 	pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("system-file-manager",
@@ -671,10 +654,6 @@ gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
 
 	add_popup_ui (window, plugin);
 
-	/* Restore filter options */
-	/* TODO: bind with gsettings? */
-	restore_filter (plugin);
-
 	/* Install nautilus preferences */
 	install_nautilus_prefs (plugin);
 
@@ -686,7 +665,7 @@ gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
 
 	store = gedit_file_browser_widget_get_browser_store (priv->tree_widget);
 
-	g_settings_bind (plugin->priv->settings,
+	g_settings_bind (priv->settings,
 	                 "filter-mode",
 	                 store,
 	                 "filter-mode",
@@ -916,32 +895,6 @@ on_rename_cb (GeditFileBrowserStore *store,
 	}
 
 	g_list_free (documents);
-}
-
-static void
-on_filter_pattern_changed_cb (GeditFileBrowserWidget *widget,
-                              GParamSpec             *param,
-                              GeditFileBrowserPlugin *plugin)
-{
-	GeditFileBrowserPluginPrivate *priv = plugin->priv;
-	gchar *pattern;
-
-	g_object_get (G_OBJECT (widget), "filter-pattern", &pattern, NULL);
-
-	if (pattern == NULL)
-	{
-		g_settings_set_string (priv->settings,
-		                       FILEBROWSER_FILTER_PATTERN,
-		                       "");
-	}
-	else
-	{
-		g_settings_set_string (priv->settings,
-		                       FILEBROWSER_FILTER_PATTERN,
-		                       pattern);
-	}
-
-	g_free (pattern);
 }
 
 static void
