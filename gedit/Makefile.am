@@ -152,7 +152,7 @@ if !ENABLE_GVFS_METADATA
 INST_H_FILES += gedit-metadata-manager.h
 endif
 
-headerdir = $(prefix)/include/gedit/gedit
+headerdir = $(prefix)/include/gedit-$(GEDIT_API_VERSION)/gedit
 
 header_DATA = 				\
 	$(INST_H_FILES)
