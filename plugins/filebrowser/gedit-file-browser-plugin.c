@@ -95,9 +95,6 @@ static void on_model_set_cb              (GeditFileBrowserView          *widget,
 static void on_virtual_root_changed_cb   (GeditFileBrowserStore         *model,
                                           GParamSpec                    *param,
                                           GeditFileBrowserPlugin        *plugin);
-static void on_filter_mode_changed_cb    (GeditFileBrowserStore         *model,
-                                          GParamSpec                    *param,
-                                          GeditFileBrowserPlugin        *plugin);
 static void on_rename_cb		 (GeditFileBrowserStore         *model,
 					  GFile                         *oldfile,
 					  GFile                         *newfile,
@@ -265,36 +262,7 @@ static void
 restore_filter (GeditFileBrowserPlugin *plugin)
 {
 	GeditFileBrowserPluginPrivate *priv = plugin->priv;
-	gchar *filter_mode;
-	GeditFileBrowserStoreFilterMode mode;
 	gchar *pattern;
-
-	/* Get filter_mode */
-	filter_mode = g_settings_get_string (priv->settings,
-					     FILEBROWSER_FILTER_MODE);
-
-	/* Filter mode */
-	mode = gedit_file_browser_store_filter_mode_get_default ();
-
-	if (filter_mode != NULL)
-	{
-		if (strcmp (filter_mode, "hidden") == 0)
-			mode = GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN;
-		else if (strcmp (filter_mode, "binary") == 0)
-			mode = GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY;
-		else if (strcmp (filter_mode, "hidden-and-binary") == 0 ||
-		         strcmp (filter_mode, "binary-and-hidden") == 0)
-			mode = GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN |
-			       GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY;
-		else if (strcmp (filter_mode, "none") == 0 ||
-			 *filter_mode == '\0')
-			mode = GEDIT_FILE_BROWSER_STORE_FILTER_MODE_NONE;
-	}
-
-	/* Set the filter mode */
-	gedit_file_browser_store_set_filter_mode (
-		gedit_file_browser_widget_get_browser_store (priv->tree_widget),
-		mode);
 
 	pattern = g_settings_get_string (priv->settings,
 					 FILEBROWSER_FILTER_PATTERN);
@@ -302,7 +270,6 @@ restore_filter (GeditFileBrowserPlugin *plugin)
 	gedit_file_browser_widget_set_filter_pattern (priv->tree_widget,
 	                                              pattern);
 
-	g_free (filter_mode);
 	g_free (pattern);
 }
 
@@ -705,6 +672,7 @@ gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
 	add_popup_ui (window, plugin);
 
 	/* Restore filter options */
+	/* TODO: bind with gsettings? */
 	restore_filter (plugin);
 
 	/* Install nautilus preferences */
@@ -717,14 +685,16 @@ gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
 	                  plugin);
 
 	store = gedit_file_browser_widget_get_browser_store (priv->tree_widget);
+
+	g_settings_bind (plugin->priv->settings,
+	                 "filter-mode",
+	                 store,
+	                 "filter-mode",
+	                 G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
+
 	g_signal_connect (store,
 	                  "notify::virtual-root",
 	                  G_CALLBACK (on_virtual_root_changed_cb),
-	                  plugin);
-
-	g_signal_connect (store,
-	                  "notify::filter-mode",
-	                  G_CALLBACK (on_filter_mode_changed_cb),
 	                  plugin);
 
 	g_signal_connect (store,
@@ -892,43 +862,6 @@ on_model_set_cb (GeditFileBrowserView   *widget,
 	g_settings_set_boolean (priv->settings,
 	                        FILEBROWSER_TREE_VIEW,
 	                        GEDIT_IS_FILE_BROWSER_STORE (model));
-}
-
-static void
-on_filter_mode_changed_cb (GeditFileBrowserStore  *model,
-                           GParamSpec             *param,
-                           GeditFileBrowserPlugin *plugin)
-{
-	GeditFileBrowserPluginPrivate *priv = plugin->priv;
-	GeditFileBrowserStoreFilterMode mode;
-
-	mode = gedit_file_browser_store_get_filter_mode (model);
-
-	if ((mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN) &&
-	    (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY))
-	{
-		g_settings_set_string (priv->settings,
-		                       FILEBROWSER_FILTER_MODE,
-		                       "hidden-and-binary");
-	}
-	else if (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN)
-	{
-		g_settings_set_string (priv->settings,
-		                       FILEBROWSER_FILTER_MODE,
-		                       "hidden");
-	}
-	else if (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_BINARY)
-	{
-		g_settings_set_string (priv->settings,
-		                       FILEBROWSER_FILTER_MODE,
-		                       "binary");
-	}
-	else
-	{
-		g_settings_set_string (priv->settings,
-		                       FILEBROWSER_FILTER_MODE,
-		                       "none");
-	}
 }
 
 static void

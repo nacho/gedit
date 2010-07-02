@@ -409,7 +409,7 @@ plugins/changecase/Makefile
 plugins/checkupdate/org.gnome.gedit.checkupdate.gschema.xml.in
 plugins/checkupdate/Makefile
 plugins/docinfo/Makefile
-plugins/filebrowser/org.gnome.gedit.file-browser.gschema.xml.in
+plugins/filebrowser/org.gnome.gedit.plugins.filebrowser.gschema.xml.in
 plugins/filebrowser/Makefile
 plugins/modelines/Makefile
 plugins/pythonconsole/Makefile
