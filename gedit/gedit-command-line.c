@@ -335,14 +335,12 @@ gedit_command_line_parse (GeditCommandLine   *command_line,
 	/* Setup command line options */
 	context = g_option_context_new (_("- Edit text files"));
 	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
-	g_option_context_add_group (context, gtk_get_option_group (FALSE));
+	g_option_context_add_group (context, gtk_get_option_group (TRUE));
 	g_option_context_add_group (context, egg_sm_client_get_option_group ());
 
 #ifdef ENABLE_INTROSPECTION
 	g_option_context_add_group (context, g_irepository_get_option_group ());
 #endif
-
-	gtk_init (argc, argv);
 
 	if (!g_option_context_parse (context, argc, argv, &error))
 	{
