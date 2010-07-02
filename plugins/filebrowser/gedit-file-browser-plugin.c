@@ -117,7 +117,7 @@ static gboolean on_confirm_no_trash_cb   (GeditFileBrowserWidget        *widget,
                                           GeditWindow                   *window);
 
 G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditFileBrowserPlugin,
-				filetree_plugin,
+				gedit_file_browser_plugin,
 				PEAS_TYPE_EXTENSION_BASE,
 				0,
 				G_IMPLEMENT_INTERFACE_DYNAMIC (GEDIT_TYPE_WINDOW_ACTIVATABLE,
@@ -131,7 +131,7 @@ G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditFileBrowserPlugin,
 )
 
 static void
-filetree_plugin_init (GeditFileBrowserPlugin *plugin)
+gedit_file_browser_plugin_init (GeditFileBrowserPlugin *plugin)
 {
 	plugin->priv = GEDIT_FILE_BROWSER_PLUGIN_GET_PRIVATE (plugin);
 
@@ -141,7 +141,7 @@ filetree_plugin_init (GeditFileBrowserPlugin *plugin)
 }
 
 static void
-filetree_plugin_dispose (GObject *object)
+gedit_file_browser_plugin_dispose (GObject *object)
 {
 	GeditFileBrowserPlugin *plugin = GEDIT_FILE_BROWSER_PLUGIN (object);
 
@@ -163,7 +163,7 @@ filetree_plugin_dispose (GObject *object)
 		plugin->priv->terminal_settings = NULL;
 	}
 
-	G_OBJECT_CLASS (filetree_plugin_parent_class)->dispose (object);
+	G_OBJECT_CLASS (gedit_file_browser_plugin_parent_class)->dispose (object);
 }
 
 static void
@@ -785,11 +785,11 @@ gedit_file_browser_plugin_deactivate (GeditWindowActivatable *activatable,
 }
 
 static void
-filetree_plugin_class_init (GeditFileBrowserPluginClass *klass)
+gedit_file_browser_plugin_class_init (GeditFileBrowserPluginClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	object_class->dispose = filetree_plugin_dispose;
+	object_class->dispose = gedit_file_browser_plugin_dispose;
 
 	g_type_class_add_private (object_class,
 				  sizeof (GeditFileBrowserPluginPrivate));
@@ -804,7 +804,7 @@ gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface)
 }
 
 static void
-filetree_plugin_class_finalize (GeditFileBrowserPluginClass *klass)
+gedit_file_browser_plugin_class_finalize (GeditFileBrowserPluginClass *klass)
 {
 }
 
@@ -1199,7 +1199,7 @@ on_confirm_delete_cb (GeditFileBrowserWidget *widget,
 G_MODULE_EXPORT void
 peas_register_types (PeasObjectModule *module)
 {
-	filetree_plugin_register_type (G_TYPE_MODULE (module));
+	gedit_file_browser_plugin_register_type (G_TYPE_MODULE (module));
 
 	peas_object_module_register_extension_type (module,
 						    GEDIT_TYPE_WINDOW_ACTIVATABLE,

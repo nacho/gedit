@@ -31,7 +31,7 @@ G_BEGIN_DECLS
 /*
  * Type checking and casting macros
  */
-#define GEDIT_TYPE_FILE_BROWSER_PLUGIN		(filetree_plugin_get_type ())
+#define GEDIT_TYPE_FILE_BROWSER_PLUGIN		(gedit_file_browser_plugin_get_type ())
 #define GEDIT_FILE_BROWSER_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GEDIT_TYPE_FILE_BROWSER_PLUGIN, GeditFileBrowserPlugin))
 #define GEDIT_FILE_BROWSER_PLUGIN_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GEDIT_TYPE_FILE_BROWSER_PLUGIN, GeditFileBrowserPluginClass))
 #define GEDIT_IS_FILE_BROWSER_PLUGIN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GEDIT_TYPE_FILE_BROWSER_PLUGIN))
@@ -59,10 +59,10 @@ struct _GeditFileBrowserPluginClass
 /*
  * Public methods
  */
-GType			filetree_plugin_get_type	(void) G_GNUC_CONST;
+GType			gedit_file_browser_plugin_get_type	(void) G_GNUC_CONST;
 
 /* All the plugins must implement this function */
-G_MODULE_EXPORT void	peas_register_types		(PeasObjectModule *module);
+G_MODULE_EXPORT void	peas_register_types			(PeasObjectModule *module);
 
 G_END_DECLS
 
