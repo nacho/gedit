@@ -154,9 +154,9 @@ class PythonConsole(Gtk.ScrolledWindow):
             # Get the command
             buf = view.get_buffer()
             inp_mark = buf.get_mark("input")
-            inp = buf.get_it_at_mark(inp_mark)
+            inp = buf.get_iter_at_mark(inp_mark)
             cur = buf.get_end_iter()
-            line = buf.get_text(inp, cur)
+            line = buf.get_text(inp, cur, False)
             self.current_command = self.current_command + line + "\n"
             self.history_add(line)
 
@@ -224,7 +224,7 @@ class PythonConsole(Gtk.ScrolledWindow):
             # Next entry from history
             view.emit_stop_by_name("key_press_event")
             self.history_down()
-            gobject.idle_add(self.scroll_to_end)
+            GObject.idle_add(self.scroll_to_end)
             return True
 
         elif event.key.keyval == Gdk.KP_Up or event.key.keyval == Gdk.Up:
@@ -299,7 +299,7 @@ class PythonConsole(Gtk.ScrolledWindow):
         buf = self.view.get_buffer()
         inp = buf.get_iter_at_mark(buf.get_mark("input"))
         cur = buf.get_end_iter()
-        return buf.get_text(inp, cur)
+        return buf.get_text(inp, cur, False)
 
     def set_command_line(self, command):
         buf = self.view.get_buffer()
