@@ -368,6 +368,8 @@ gedit_file_browser_widget_finalize (GObject *object)
 
 	gdk_cursor_unref (obj->priv->busy_cursor);
 
+	g_free (obj->priv->filter_pattern_str);
+
 	G_OBJECT_CLASS (gedit_file_browser_widget_parent_class)->finalize (object);
 }
 
@@ -430,7 +432,7 @@ gedit_file_browser_widget_class_init (GeditFileBrowserWidgetClass *klass)
 					 g_param_spec_string ("filter-pattern",
 					 		      "Filter Pattern",
 					 		      "The filter pattern",
-					 		      NULL,
+					 		      "",
 					 		      G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_ENABLE_DELETE,
 					 g_param_spec_boolean ("enable-delete",
@@ -1281,6 +1283,7 @@ gedit_file_browser_widget_init (GeditFileBrowserWidget *obj)
 {
 	obj->priv = GEDIT_FILE_BROWSER_WIDGET_GET_PRIVATE (obj);
 
+	obj->priv->filter_pattern_str = g_strdup ("");
 	obj->priv->bookmarks_hash = g_hash_table_new_full (g_file_hash,
 			                                   (GEqualFunc)g_file_equal,
 			                                   g_object_unref,
@@ -1780,18 +1783,25 @@ set_filter_pattern_real (GeditFileBrowserWidget *obj,
 	if (pattern != NULL && *pattern == '\0')
 		pattern = NULL;
 
-	if (pattern == NULL && obj->priv->filter_pattern_str == NULL)
+	if (pattern == NULL && *obj->priv->filter_pattern_str == '\0')
 		return;
 
-	if (pattern != NULL && obj->priv->filter_pattern_str != NULL &&
-	    strcmp (pattern, obj->priv->filter_pattern_str) == 0)
+	if (pattern != NULL && strcmp (pattern, obj->priv->filter_pattern_str) == 0)
 	{
 		return;
 	}
 
 	/* Free the old pattern */
 	g_free (obj->priv->filter_pattern_str);
-	obj->priv->filter_pattern_str = g_strdup (pattern);
+
+	if (pattern == NULL)
+	{
+		obj->priv->filter_pattern_str = g_strdup ("");
+	}
+	else
+	{
+		obj->priv->filter_pattern_str = g_strdup (pattern);
+	}
 
 	if (obj->priv->filter_pattern)
 	{
@@ -1824,18 +1834,13 @@ set_filter_pattern_real (GeditFileBrowserWidget *obj,
 
 	if (update_entry)
 	{
-		if (obj->priv->filter_pattern_str == NULL)
-		{
-			gtk_entry_set_text (GTK_ENTRY (obj->priv->filter_entry),
-			                    "");
-		}
-		else
-		{
-			gtk_entry_set_text (GTK_ENTRY (obj->priv->filter_entry),
-			                    obj->priv->filter_pattern_str);
+		gtk_entry_set_text (GTK_ENTRY (obj->priv->filter_entry),
+		                    obj->priv->filter_pattern_str);
 
+		if (obj->priv->filter_pattern_str != '\0')
+		{
 			gtk_expander_set_expanded (GTK_EXPANDER (obj->priv->filter_expander),
-		        	                   TRUE);
+			                           TRUE);
 		}
 	}
 

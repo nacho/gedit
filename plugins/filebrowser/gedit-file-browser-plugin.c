@@ -625,9 +625,9 @@ gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
 			  plugin);
 
 	g_settings_bind (priv->settings,
-	                 "filter-pattern",
+	                 FILEBROWSER_FILTER_PATTERN,
 	                 priv->tree_widget,
-	                 "filter-pattern",
+	                 FILEBROWSER_FILTER_PATTERN,
 	                 G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
 	panel = gedit_window_get_side_panel (window);
