@@ -2633,21 +2633,17 @@ language_changed (GObject     *object,
 }
 
 static void
-tab_switched (GeditMultiNotebook *mnb,
-	      GeditNotebook      *old_notebook,
-	      GeditTab           *old_tab,
-	      GeditNotebook      *new_notebook,
-	      GeditTab           *new_tab,
-	      GeditWindow        *window)
+update_statusbar (GeditWindow *window,
+		  GeditView   *old_view,
+		  GeditView   *new_view)
 {
 	GeditDocument *doc;
-	GeditView *view;
 
-	if (old_tab)
+	if (old_view)
 	{
 		if (window->priv->tab_width_id)
 		{
-			g_signal_handler_disconnect (gedit_tab_get_view (old_tab),
+			g_signal_handler_disconnect (old_view,
 						     window->priv->tab_width_id);
 		
 			window->priv->tab_width_id = 0;
@@ -2655,7 +2651,7 @@ tab_switched (GeditMultiNotebook *mnb,
 		
 		if (window->priv->spaces_instead_of_tabs_id)
 		{
-			g_signal_handler_disconnect (gedit_tab_get_view (old_tab),
+			g_signal_handler_disconnect (old_view,
 						     window->priv->spaces_instead_of_tabs_id);
 		
 			window->priv->spaces_instead_of_tabs_id = 0;
@@ -2663,12 +2659,62 @@ tab_switched (GeditMultiNotebook *mnb,
 
 		if (window->priv->language_changed_id)
 		{
-			g_signal_handler_disconnect (gedit_tab_get_document (old_tab),
+			g_signal_handler_disconnect (gtk_text_view_get_buffer (GTK_TEXT_VIEW (old_view)),
 						     window->priv->language_changed_id);
 
 			window->priv->language_changed_id = 0;
 		}
 	}
+
+	if (new_view == NULL)
+		return;
+
+	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (new_view)));
+
+	/* sync the statusbar */
+	update_cursor_position_statusbar (GTK_TEXT_BUFFER (doc),
+					  window);
+
+	gedit_statusbar_set_overwrite (GEDIT_STATUSBAR (window->priv->statusbar),
+				       gtk_text_view_get_overwrite (GTK_TEXT_VIEW (new_view)));
+
+	gtk_widget_show (window->priv->tab_width_combo);
+	gtk_widget_show (window->priv->language_combo);
+
+	window->priv->tab_width_id = g_signal_connect (new_view,
+						       "notify::tab-width",
+						       G_CALLBACK (tab_width_changed),
+						       window);
+	window->priv->spaces_instead_of_tabs_id = g_signal_connect (new_view,
+								    "notify::insert-spaces-instead-of-tabs",
+								    G_CALLBACK (spaces_instead_of_tabs_changed),
+								    window);
+
+	window->priv->language_changed_id = g_signal_connect (doc,
+							      "notify::language",
+							      G_CALLBACK (language_changed),
+							      window);
+
+	/* call it for the first time */
+	tab_width_changed (G_OBJECT (new_view), NULL, window);
+	spaces_instead_of_tabs_changed (G_OBJECT (new_view), NULL, window);
+	language_changed (G_OBJECT (doc), NULL, window);
+}
+
+static void
+tab_switched (GeditMultiNotebook *mnb,
+	      GeditNotebook      *old_notebook,
+	      GeditTab           *old_tab,
+	      GeditNotebook      *new_notebook,
+	      GeditTab           *new_tab,
+	      GeditWindow        *window)
+{
+	GeditView *old_view, *new_view;
+
+	old_view = old_tab ? gedit_tab_get_view (old_tab) : NULL;
+	new_view = new_tab ? gedit_tab_get_view (new_tab) : NULL;
+
+	update_statusbar (window, old_view, new_view);
 
 	if (new_tab == NULL || window->priv->dispose_has_run)
 		return;
@@ -2681,38 +2727,6 @@ tab_switched (GeditMultiNotebook *mnb,
 
 	/* update the syntax menu */
 	update_languages_menu (window);
-
-	view = gedit_tab_get_view (new_tab);
-	doc = gedit_tab_get_document (new_tab);
-
-	/* sync the statusbar */
-	update_cursor_position_statusbar (GTK_TEXT_BUFFER (doc),
-					  window);
-
-	gedit_statusbar_set_overwrite (GEDIT_STATUSBAR (window->priv->statusbar),
-				       gtk_text_view_get_overwrite (GTK_TEXT_VIEW (view)));
-
-	gtk_widget_show (window->priv->tab_width_combo);
-	gtk_widget_show (window->priv->language_combo);
-
-	window->priv->tab_width_id = g_signal_connect (view, 
-						       "notify::tab-width", 
-						       G_CALLBACK (tab_width_changed),
-						       window);
-	window->priv->spaces_instead_of_tabs_id = g_signal_connect (view, 
-								    "notify::insert-spaces-instead-of-tabs", 
-								    G_CALLBACK (spaces_instead_of_tabs_changed),
-								    window);
-
-	window->priv->language_changed_id = g_signal_connect (doc,
-							      "notify::language",
-							      G_CALLBACK (language_changed),
-							      window);
-
-	/* call it for the first time */
-	tab_width_changed (G_OBJECT (view), NULL, window);
-	spaces_instead_of_tabs_changed (G_OBJECT (view), NULL, window);
-	language_changed (G_OBJECT (doc), NULL, window);
 
 	g_signal_emit (G_OBJECT (window), 
 		       signals[ACTIVE_TAB_CHANGED], 
