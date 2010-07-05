@@ -413,9 +413,18 @@ gedit_document_set_property (GObject      *object,
 	switch (prop_id)
 	{
 		case PROP_LOCATION:
-			gedit_document_set_location (doc,
-			                             g_value_get_object (value));
+		{
+			GFile *location;
+
+			location = g_value_get_object (value);
+
+			if (location != NULL)
+			{
+				gedit_document_set_location (doc, location);
+			}
+
 			break;
+		}
 		case PROP_SHORTNAME:
 			gedit_document_set_short_name_for_display (doc,
 			                                           g_value_get_string (value));
@@ -603,7 +612,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 	 * improve performance.
 	 */
 	document_signals[CURSOR_MOVED] =
-   		g_signal_new ("cursor-moved",
+		g_signal_new ("cursor-moved",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, cursor_moved),
@@ -654,7 +663,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_TYPE_UINT64);
 
 	document_signals[LOADED] =
-   		g_signal_new ("loaded",
+		g_signal_new ("loaded",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, loaded),
@@ -693,7 +702,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      GEDIT_TYPE_DOCUMENT_SAVE_FLAGS);
 
 	document_signals[SAVING] =
-   		g_signal_new ("saving",
+		g_signal_new ("saving",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, saving),
@@ -705,7 +714,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_TYPE_UINT64);
 
 	document_signals[SAVED] =
-   		g_signal_new ("saved",
+		g_signal_new ("saved",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, saved),
@@ -716,7 +725,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_TYPE_POINTER);
 
 	document_signals[SEARCH_HIGHLIGHT_UPDATED] =
-	    	g_signal_new ("search_highlight_updated",
+		g_signal_new ("search-highlight-updated",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, search_highlight_updated),
@@ -727,7 +736,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      GTK_TYPE_TEXT_ITER | G_SIGNAL_TYPE_STATIC_SCOPE,
 			      GTK_TYPE_TEXT_ITER | G_SIGNAL_TYPE_STATIC_SCOPE);
 
-	g_type_class_add_private (object_class, sizeof(GeditDocumentPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditDocumentPrivate));
 }
 
 static void
