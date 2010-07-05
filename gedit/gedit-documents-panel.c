@@ -1166,7 +1166,10 @@ pixbuf_data_func (GtkTreeViewColumn   *column,
 
 	gtk_cell_renderer_set_visible (cell, tab != NULL);
 
-	g_object_unref (tab);
+	if (tab != NULL)
+	{
+		g_object_unref (tab);
+	}
 }
 
 static void
