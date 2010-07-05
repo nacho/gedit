@@ -476,10 +476,14 @@ gedit_view_destroy (GtkObject *object)
 
 	view = GEDIT_VIEW (object);
 
-	peas_extension_set_call (view->priv->extensions,
-				 "deactivate",
-				 view);
-	g_object_unref (view->priv->extensions);
+	if (view->priv->extensions != NULL)
+	{
+		peas_extension_set_call (view->priv->extensions,
+					 "deactivate",
+					 view);
+		g_object_unref (view->priv->extensions);
+		view->priv->extensions = NULL;
+	}
 
 	if (view->priv->search_window != NULL)
 	{
