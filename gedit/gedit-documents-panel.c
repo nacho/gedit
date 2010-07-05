@@ -179,6 +179,7 @@ get_iters_from_notebook_and_tab (GeditDocumentsPanel *panel,
 		if (notebook != NULL)
 		{
 			GeditNotebook *current_notebook;
+			gboolean is_cur;
 
 			gtk_tree_model_get (panel->priv->model,
 					    &parent,
@@ -186,7 +187,11 @@ get_iters_from_notebook_and_tab (GeditDocumentsPanel *panel,
 					    -1);
 			g_assert (current_notebook != NULL);
 
-			if (current_notebook == notebook)
+			is_cur = (current_notebook == notebook);
+
+			g_object_unref (current_notebook);
+
+			if (is_cur)
 			{
 				success = TRUE;
 
@@ -211,13 +216,19 @@ get_iters_from_notebook_and_tab (GeditDocumentsPanel *panel,
 
 			do
 			{
+				gboolean is_cur;
+
 				gtk_tree_model_get (panel->priv->model,
 						    &iter,
 						    TAB_COLUMN, &current_tab,
 						    -1);
 				g_assert (current_tab != NULL);
 
-				if (current_tab == tab)
+				is_cur = (current_tab == tab);
+
+				g_object_unref (current_tab);
+
+				if (is_cur)
 				{
 					*tab_iter = iter;
 					success = TRUE;
@@ -556,11 +567,11 @@ multi_notebook_notebook_removed (GeditMultiNotebook  *mnb,
 	/* refresh the name of the notebooks */
 	if (gtk_tree_model_get_iter_first (panel->priv->model, &iter))
 	{
-		GeditNotebook *current_notebook;
-		gchar *notebook_name;
-
 		do
 		{
+			GeditNotebook *current_notebook;
+			gchar *notebook_name;
+
 			gtk_tree_model_get (panel->priv->model,
 					    &iter,
 					    NOTEBOOK_COLUMN, &current_notebook,
@@ -573,6 +584,7 @@ multi_notebook_notebook_removed (GeditMultiNotebook  *mnb,
 					    NAME_COLUMN, notebook_name,
 					    -1);
 
+			g_object_unref (current_notebook);
 			g_free (notebook_name);
 		} while (gtk_tree_model_iter_next (panel->priv->model, &iter));
 	}
@@ -701,6 +713,7 @@ treeview_cursor_changed (GtkTreeView         *view,
 		{
 			gedit_multi_notebook_set_active_tab (panel->priv->mnb,
 							     tab);
+			g_object_unref (tab);
 		}
 		else
 		{
@@ -966,6 +979,8 @@ panel_button_press_event (GtkTreeView         *treeview,
 
 					/* A row exists at the mouse position */
 					ret = show_tab_popup_menu (panel, event);
+
+					g_object_unref (tab);
 				}
 			}
 
@@ -1053,6 +1068,7 @@ treeview_query_tooltip (GtkWidget           *widget,
 	if (tab != NULL)
 	{
 		tip = _gedit_tab_get_tooltip (tab);
+		g_object_unref (tab);
 	}
 	else
 	{
@@ -1061,6 +1077,7 @@ treeview_query_tooltip (GtkWidget           *widget,
 
 	gtk_tooltip_set_markup (tooltip, tip);
 
+	g_object_unref (notebook);
 	g_free (tip);
 	gtk_tree_path_free (path);
 
@@ -1148,6 +1165,8 @@ pixbuf_data_func (GtkTreeViewColumn   *column,
 			    -1);
 
 	gtk_cell_renderer_set_visible (cell, tab != NULL);
+
+	g_object_unref (tab);
 }
 
 static void
