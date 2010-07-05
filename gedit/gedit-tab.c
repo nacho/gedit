@@ -95,6 +95,15 @@ enum
 	PROP_AUTO_SAVE_INTERVAL
 };
 
+/* Signals */
+enum
+{
+	DROP_URIS,
+	LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = { 0 };
+
 static gboolean gedit_tab_auto_save (GeditTab *tab);
 
 static void
@@ -281,7 +290,6 @@ gedit_tab_class_init (GeditTabClass *klass)
 
 	object_class->dispose = gedit_tab_dispose;
 	object_class->finalize = gedit_tab_finalize;
-	object_class->dispose = gedit_tab_dispose;
 	object_class->get_property = gedit_tab_get_property;
 	object_class->set_property = gedit_tab_set_property;
 	
@@ -325,6 +333,17 @@ gedit_tab_class_init (GeditTabClass *klass)
 							   0,
 							   G_PARAM_READWRITE |
 							   G_PARAM_STATIC_STRINGS));
+
+	signals[DROP_URIS] =
+		g_signal_new ("drop-uris",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+			      G_STRUCT_OFFSET (GeditTabClass, drop_uris),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__BOXED,
+			      G_TYPE_NONE,
+			      1,
+			      G_TYPE_STRV);
 
 	g_type_class_add_private (object_class, sizeof (GeditTabPrivate));
 }
@@ -1526,6 +1545,14 @@ view_focused_in (GtkWidget     *widget,
 	return FALSE;
 }
 
+static void
+on_drop_uris (GeditView *view,
+	      gchar    **uri_list,
+	      GeditTab  *tab)
+{
+	g_signal_emit (G_OBJECT (tab), signals[DROP_URIS], 0, uri_list);
+}
+
 static GMountOperation *
 tab_mount_operation_factory (GeditDocument *doc,
 			     gpointer       userdata)
@@ -1639,6 +1666,11 @@ gedit_tab_init (GeditTab *tab)
 				"realize",
 				G_CALLBACK (view_realized),
 				tab);
+
+	g_signal_connect (tab->priv->view,
+			  "drop-uris",
+			  G_CALLBACK (on_drop_uris),
+			  tab);
 }
 
 GtkWidget *

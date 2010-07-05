@@ -3097,15 +3097,9 @@ drag_data_received_cb (GtkWidget        *widget,
 /* Handle drops on the GeditView */
 static void
 drop_uris_cb (GtkWidget    *widget,
-	      gchar       **uri_list)
+	      gchar       **uri_list,
+	      GeditWindow  *window)
 {
-	GeditWindow *window;
-
-	window = get_drop_window (widget);
-	
-	if (window == NULL)
-		return;
-
 	load_uris_from_drop (window, uri_list);
 }
 
@@ -3521,6 +3515,10 @@ on_tab_added (GeditMultiNotebook *multi,
 			 "notify::state",
 			  G_CALLBACK (sync_state),
 			  window);
+	g_signal_connect (tab,
+			  "drop_uris",
+			  G_CALLBACK (drop_uris_cb),
+			  window);
 
 	g_signal_connect (doc,
 			  "bracket-matched",
@@ -3564,11 +3562,6 @@ on_tab_added (GeditMultiNotebook *multi,
 			  window);
 
 	update_documents_list_menu (window);
-	
-	g_signal_connect (view,
-			  "drop_uris",
-			  G_CALLBACK (drop_uris_cb),
-			  NULL);
 
 	update_window_state (window);
 
@@ -3602,6 +3595,9 @@ on_tab_removed (GeditMultiNotebook *multi,
 	g_signal_handlers_disconnect_by_func (tab,
 					      G_CALLBACK (sync_state), 
 					      window);
+	g_signal_handlers_disconnect_by_func (tab,
+					      G_CALLBACK (drop_uris_cb),
+					      window);
 	g_signal_handlers_disconnect_by_func (doc,
 					      G_CALLBACK (update_cursor_position_statusbar), 
 					      window);
@@ -3629,9 +3625,6 @@ on_tab_removed (GeditMultiNotebook *multi,
 	g_signal_handlers_disconnect_by_func (view, 
 					      G_CALLBACK (editable_changed),
 					      window);
-	g_signal_handlers_disconnect_by_func (view, 
-					      G_CALLBACK (drop_uris_cb),
-					      NULL);
 
 	if (window->priv->tab_width_id && tab == gedit_multi_notebook_get_active_tab (multi))
 	{
