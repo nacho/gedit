@@ -252,9 +252,9 @@ static void
 set_background_color (GtkSourceStyle *style, const GdkColor *color)
 {
 	gchar *color_str;
-	
-	color_str = gedit_gdk_color_to_string (*color);
-	
+
+	color_str = gdk_color_to_string (*color);
+
 	g_object_set (style,
 		      "background", color_str,
 		      "background-set", TRUE,
@@ -267,9 +267,9 @@ static void
 set_foreground_color (GtkSourceStyle *style, const GdkColor *color)
 {
 	gchar *color_str;
-	
-	color_str = gedit_gdk_color_to_string (*color);
-	
+
+	color_str = gdk_color_to_string (*color);
+
 	g_object_set (style,
 		      "foreground", color_str,
 		      "foreground-set", TRUE,

@@ -169,16 +169,6 @@ gedit_utils_menu_position_under_tree_view (GtkMenu  *menu,
 	}
 }
 
-/* FIXME: remove this with gtk 2.12, it has gdk_color_to_string */
-gchar * 
-gedit_gdk_color_to_string (GdkColor color)
-{
-	return g_strdup_printf ("#%04x%04x%04x",
-				color.red, 
-				color.green,
-				color.blue);
-}
-
 GtkWidget *
 gedit_gtk_button_new_with_stock_icon (const gchar *label,
 				      const gchar *stock_id)
@@ -190,7 +180,7 @@ gedit_gtk_button_new_with_stock_icon (const gchar *label,
 			      gtk_image_new_from_stock (stock_id,
 							GTK_ICON_SIZE_BUTTON));
 
-        return button;
+	return button;
 }
 
 GtkWidget *
