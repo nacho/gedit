@@ -125,6 +125,7 @@ NOINST_H_FILES =			\
 	gedittextregion.h		\
 	gedit-ui.h			\
 	gedit-undo-manager.h		\
+	gedit-view-holder.h		\
 	gedit-window-private.h
 
 INST_H_FILES =				\
@@ -209,6 +210,7 @@ libgedit_c_files =			\
 	gedit-undo-manager.c		\
 	gedit-utils.c 			\
 	gedit-view.c 			\
+	gedit-view-holder.c		\
 	gedit-window.c			\
 	gedittextregion.c
 
