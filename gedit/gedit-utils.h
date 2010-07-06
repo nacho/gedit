@@ -132,19 +132,17 @@ void		 gedit_utils_activate_url		(GtkAboutDialog   *about,
 gboolean	 gedit_utils_is_valid_location		(GFile            *location);
 
 gboolean	 gedit_utils_get_ui_objects		(const gchar      *filename,
-                                                         gchar           **root_objects,
+							 gchar           **root_objects,
 							 GtkWidget       **error_widget,
 							 const gchar      *object_name,
 							 ...) G_GNUC_NULL_TERMINATED;
-
-gboolean         gedit_utils_file_has_parent            (GFile            *gfile);
 
 /* Return NULL if str is not a valid URI and/or filename */
 gchar		*gedit_utils_make_canonical_uri_from_shell_arg
 							(const gchar      *str);
 		
 gchar		*gedit_utils_uri_for_display 	        (GFile            *location);
-gchar           *gedit_utils_basename_for_display	(GFile            *location);
+gchar		*gedit_utils_basename_for_display	(GFile            *location);
 gboolean	 gedit_utils_decode_uri 		(const gchar      *uri,
 							 gchar           **scheme,
 							 gchar           **user,
@@ -154,7 +152,7 @@ gboolean	 gedit_utils_decode_uri 		(const gchar      *uri,
 
 
 /* Turns data from a drop into a list of well formatted uris */
-gchar 	       **gedit_utils_drop_get_uris		(GtkSelectionData *selection_data);
+gchar		**gedit_utils_drop_get_uris		(GtkSelectionData *selection_data);
 
 gboolean	 gedit_utils_can_read_from_stdin	(void);
 

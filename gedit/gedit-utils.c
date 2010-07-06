@@ -1253,28 +1253,6 @@ gedit_utils_make_canonical_uri_from_shell_arg (const gchar *str)
 }
 
 /**
- * gedit_utils_file_has_parent:
- * @gfile: the GFile to check the parent for
- *
- * Return %TRUE if the specified gfile has a parent (is not the root), %FALSE
- * otherwise
- */
-gboolean
-gedit_utils_file_has_parent (GFile *gfile)
-{
-	GFile *parent;
-	gboolean ret;
-	
-	parent = g_file_get_parent (gfile);
-	ret = parent != NULL;
-	
-	if (parent)
-		g_object_unref (parent);
-	
-	return ret;
-}
-
-/**
  * gedit_utils_basename_for_display:
  * @location: location for which the basename should be displayed
  *
@@ -1318,7 +1296,8 @@ gedit_utils_basename_for_display (GFile *location)
 			g_free (local_path);
 		}
 	}
-	else if (gedit_utils_file_has_parent (location) || !gedit_utils_decode_uri (uri, NULL, NULL, &hn, NULL, NULL))
+	else if (g_file_has_parent (location, NULL) ||
+	          !gedit_utils_decode_uri (uri, NULL, NULL, &hn, NULL, NULL))
 	{
 		/* For remote files with a parent (so not just http://foo.com)
 		   or remote file for which the decoding of the host name fails,

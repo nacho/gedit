@@ -688,7 +688,8 @@ insert_location_path (GeditFileBrowserWidget *obj)
 							   obj);
 		}
 
-		if (g_file_equal (current, loc->root) || !gedit_utils_file_has_parent (current))
+		if (g_file_equal (current, loc->root) ||
+		    !g_file_has_parent (current, NULL))
 		{
 			if (current != loc->virtual_root)
 				g_object_unref (current);
