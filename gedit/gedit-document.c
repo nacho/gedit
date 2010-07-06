@@ -1907,7 +1907,7 @@ gedit_document_get_deleted (GeditDocument *doc)
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 
 	/* This is done sync, maybe we should do it async? */
-	return doc->priv->location && !gedit_utils_location_exists (doc->priv->location);
+	return doc->priv->location && !g_file_query_exists (doc->priv->location, NULL);
 }
 
 /*

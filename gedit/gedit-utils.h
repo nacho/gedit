@@ -95,8 +95,6 @@ void		 gedit_utils_set_atk_relation		(GtkWidget        *obj1,
 							 GtkWidget        *obj2,
 							 AtkRelationType   rel_type);
 
-gboolean	 gedit_utils_location_exists		(GFile            *location);
-
 gchar		*gedit_utils_escape_search_text		(const gchar      *text);
 
 gchar		*gedit_utils_unescape_search_text	(const gchar      *text);

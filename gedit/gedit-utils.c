@@ -313,25 +313,6 @@ gedit_utils_set_atk_relation (GtkWidget       *obj1,
 	g_object_unref (G_OBJECT (relation));
 }
 
-gboolean
-gedit_utils_location_exists (GFile *location)
-{
-	gboolean res;
-	gchar *uri;
-		
-	g_return_val_if_fail (G_IS_FILE (location), FALSE);
-
-	uri = g_file_get_uri (location);
-	gedit_debug_message (DEBUG_UTILS, "text_uri: %s", uri);
-	g_free (uri);
-
-	res = g_file_query_exists (location, NULL);
-
-	gedit_debug_message (DEBUG_UTILS, res ? "TRUE" : "FALSE");
-
-	return res;
-}
-
 gchar *
 gedit_utils_escape_search_text (const gchar* text)
 {
