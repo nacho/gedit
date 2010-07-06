@@ -1466,7 +1466,7 @@ update_recent_files_menu (GeditWindow *window)
 		/* gtk_recent_info_get_uri_display (info) is buggy and
 		 * works only for local files */
 		location = g_file_new_for_uri (gtk_recent_info_get_uri (info));
-		uri = gedit_utils_uri_for_display (location);
+		uri = g_file_get_parse_name (location);
 		g_object_unref (location);
 		ruri = gedit_utils_replace_home_dir_with_tilde (uri);
 		g_free (uri);

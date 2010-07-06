@@ -821,9 +821,7 @@ show_saving_info_bar (GeditTab *tab)
 		gchar *str;
 
 		from = short_name;
-
-		to = gedit_utils_uri_for_display (tab->priv->tmp_save_location);
-
+		to = g_file_get_parse_name (tab->priv->tmp_save_location);
 		str = gedit_utils_str_middle_truncate (to, 
 						       MAX (20, MAX_MSG_LENGTH - len));
 		g_free (to);

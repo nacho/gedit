@@ -399,7 +399,7 @@ gedit_unrecoverable_reverting_error_info_bar_new (GFile        *location,
 	g_return_val_if_fail ((error->domain == GEDIT_DOCUMENT_ERROR) || 
 			      (error->domain == G_IO_ERROR), NULL);
 
-	full_formatted_uri = gedit_utils_uri_for_display (location);
+	full_formatted_uri = g_file_get_parse_name (location);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -584,7 +584,7 @@ gedit_io_loading_error_info_bar_new (GFile               *location,
 
 	if (location)
 	{
-		full_formatted_uri = gedit_utils_uri_for_display (location);
+		full_formatted_uri = g_file_get_parse_name (location);
 	}
 	else
 	{
@@ -698,7 +698,7 @@ gedit_conversion_error_while_saving_info_bar_new (GFile               *location,
 	                      error->domain == G_IO_ERROR, NULL);
 	g_return_val_if_fail (encoding != NULL, NULL);
 	
-	full_formatted_uri = gedit_utils_uri_for_display (location);
+	full_formatted_uri = g_file_get_parse_name (location);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -766,7 +766,7 @@ gedit_file_already_open_warning_info_bar_new (GFile *location)
 
 	g_return_val_if_fail (G_IS_FILE (location), NULL);
 
-	full_formatted_uri = gedit_utils_uri_for_display (location);
+	full_formatted_uri = g_file_get_parse_name (location);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -858,7 +858,7 @@ gedit_externally_modified_saving_error_info_bar_new (GFile        *location,
 	g_return_val_if_fail (error->domain == GEDIT_DOCUMENT_ERROR, NULL);
 	g_return_val_if_fail (error->code == GEDIT_DOCUMENT_ERROR_EXTERNALLY_MODIFIED, NULL);
 
-	full_formatted_uri = gedit_utils_uri_for_display (location);
+	full_formatted_uri = g_file_get_parse_name (location);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -956,7 +956,7 @@ gedit_no_backup_saving_error_info_bar_new (GFile        *location,
 			       (error->domain == G_IO_ERROR &&
 			        error->code == G_IO_ERROR_CANT_CREATE_BACKUP)), NULL);
 
-	full_formatted_uri = gedit_utils_uri_for_display (location);
+	full_formatted_uri = g_file_get_parse_name (location);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -1059,7 +1059,7 @@ gedit_unrecoverable_saving_error_info_bar_new (GFile        *location,
 	g_return_val_if_fail ((error->domain == GEDIT_DOCUMENT_ERROR) || 
 			      (error->domain == G_IO_ERROR), NULL);
 
-	full_formatted_uri = gedit_utils_uri_for_display (location);
+	full_formatted_uri = g_file_get_parse_name (location);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -1177,7 +1177,7 @@ gedit_externally_modified_info_bar_new (GFile    *location,
 
 	g_return_val_if_fail (G_IS_FILE (location), NULL);
 
-	full_formatted_uri = gedit_utils_uri_for_display (location);
+	full_formatted_uri = g_file_get_parse_name (location);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain

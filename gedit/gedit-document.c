@@ -1242,7 +1242,7 @@ gedit_document_get_uri_for_display (GeditDocument *doc)
 	}
 	else
 	{
-		return gedit_utils_uri_for_display (doc->priv->location);
+		return g_file_get_parse_name (doc->priv->location);
 	}
 }
 

@@ -137,7 +137,6 @@ gboolean	 gedit_utils_get_ui_objects		(const gchar      *filename,
 gchar		*gedit_utils_make_canonical_uri_from_shell_arg
 							(const gchar      *str);
 		
-gchar		*gedit_utils_uri_for_display 	        (GFile            *location);
 gchar		*gedit_utils_basename_for_display	(GFile            *location);
 gboolean	 gedit_utils_decode_uri 		(const gchar      *uri,
 							 gchar           **scheme,

@@ -1311,23 +1311,6 @@ gedit_utils_basename_for_display (GFile *location)
 }
 
 /**
- * gedit_utils_uri_for_display:
- * @location: location to be displayed.
- *
- * Filter, modify, unescape and change @uri to make it appropriate
- * for display to users.
- * 
- * This function is a convenient wrapper for g_file_get_parse_name
- *
- * Return value: a string which represents @uri and can be displayed.
- */
-gchar *
-gedit_utils_uri_for_display (GFile *location)
-{
-	return g_file_get_parse_name (location);
-}
-
-/**
  * gedit_utils_drop_get_uris:
  * @selection_data: the #GtkSelectionData from drag_data_received
  *
