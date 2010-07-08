@@ -376,7 +376,9 @@ refresh_notebook (GeditDocumentsPanel *panel,
 
 		g_free (name);
 		if (pixbuf != NULL)
+		{
 			g_object_unref (pixbuf);
+		}
 
 		if (l->data == active_tab)
 		{
@@ -467,7 +469,9 @@ sync_name_and_icon (GeditTab            *tab,
 
 	g_free (name);
 	if (pixbuf != NULL)
+	{
 		g_object_unref (pixbuf);
+	}
 }
 
 static void
@@ -476,6 +480,8 @@ multi_notebook_tab_removed (GeditMultiNotebook  *mnb,
 			    GeditTab            *tab,
 			    GeditDocumentsPanel *panel)
 {
+	GtkTreeIter iter;
+
 	gedit_debug (DEBUG_PANEL);
 
 	g_signal_handlers_disconnect_by_func (gedit_tab_get_document (tab),
@@ -485,8 +491,6 @@ multi_notebook_tab_removed (GeditMultiNotebook  *mnb,
 	g_signal_handlers_disconnect_by_func (tab,
 					      G_CALLBACK (sync_name_and_icon),
 					      panel);
-
-	GtkTreeIter iter;
 
 	get_iter_from_tab (panel, notebook, tab, &iter);
 	gtk_tree_store_remove (GTK_TREE_STORE (panel->priv->model),
@@ -548,7 +552,9 @@ multi_notebook_tab_added (GeditMultiNotebook  *mnb,
 
 	g_free (name);
 	if (pixbuf != NULL)
+	{
 		g_object_unref (pixbuf);
+	}
 }
 
 static void
@@ -631,7 +637,6 @@ multi_notebook_notebook_added (GeditMultiNotebook  *mnb,
 	g_free (name);
 }
 
-/* TODO
 static void
 multi_notebook_tabs_reordered (GeditWindow         *window,
 			       GeditDocumentsPanel *panel)
@@ -642,8 +647,7 @@ multi_notebook_tabs_reordered (GeditWindow         *window,
 		return;
 
 	refresh_list (panel);
-} */
-
+}
 
 static void
 set_window (GeditDocumentsPanel *panel,
@@ -674,11 +678,10 @@ set_window (GeditDocumentsPanel *panel,
 			  "tab-removed",
 			  G_CALLBACK (multi_notebook_tab_removed),
 			  panel);
-	/* TODO
 	g_signal_connect (panel->priv->mnb,
 			  "tabs-reordered",
-			  G_CALLBACK (multi_notebook_tab_reordered),
-			  panel); */
+			  G_CALLBACK (multi_notebook_tabs_reordered),
+			  panel);
 	g_signal_connect (panel->priv->mnb,
 			  "switch-tab",
 			  G_CALLBACK (multi_notebook_tab_switched),
@@ -1095,60 +1098,31 @@ treeview_row_inserted (GtkTreeModel        *tree_model,
 	gint *indeces;
 	gchar *path_string;
 	GeditNotebook *notebook;
-	ItemTypes item_type;
-	gint old_position;
-	gint new_position;
 
 	gedit_debug (DEBUG_PANEL);
 
 	if (panel->priv->adding_tab)
 		return;
 
-	tab = gedit_window_get_active_tab (panel->priv->window);
-	g_return_if_fail (tab != NULL);
-
 	panel->priv->is_reodering = TRUE;
 
-	indeces = gtk_tree_path_get_indices (path);
 	path_string = gtk_tree_path_to_string (path);
 
 	gedit_debug_message (DEBUG_PANEL, "New Path: %s", path_string);
 
-	notebook = gedit_multi_notebook_get_nth_notebook (panel->priv->mnb,
-							  indeces[0]);
+	g_message ("%s", path_string);
 
 	gtk_tree_model_get (panel->priv->model,
 			    iter,
-			    ITEM_TYPE_COLUMN, &item_type,
+			    NOTEBOOK_COLUMN, &notebook,
+			    TAB_COLUMN, &tab,
 			    -1);
-
-	switch (item_type)
-	{
-		case ITEM_TYPE_TAB:
-			new_position = indeces[1];
-			old_position = gtk_notebook_page_num (GTK_NOTEBOOK (notebook),
-						    	      GTK_WIDGET (tab));
-
-			if (new_position > old_position)
-				new_position = MAX (0, new_position - 1);
-
-			gedit_notebook_reorder_tab (GEDIT_NOTEBOOK (notebook),
-						    tab,
-						    new_position);
-
-		case ITEM_TYPE_NOTEBOOK:
-			/ * Do we want to allow reordering the notebooks? * /
-			break;
-
-		default:
-			g_assert_not_reached ();
-			break;
-	}
 
 	panel->priv->is_reodering = FALSE;
 
 	g_free (path_string);
-} */
+}
+*/
 
 static void
 pixbuf_data_func (GtkTreeViewColumn   *column,
@@ -1194,7 +1168,7 @@ gedit_documents_panel_init (GeditDocumentsPanel *panel)
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
-                                             GTK_SHADOW_IN);
+	                                     GTK_SHADOW_IN);
 	gtk_widget_show (sw);
 	gtk_box_pack_start (GTK_BOX (panel), sw, TRUE, TRUE, 0);
 
@@ -1210,7 +1184,7 @@ gedit_documents_panel_init (GeditDocumentsPanel *panel)
 	g_object_unref (G_OBJECT (panel->priv->model));
 	gtk_container_add (GTK_CONTAINER (sw), panel->priv->treeview);
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (panel->priv->treeview), FALSE);
-	gtk_tree_view_set_reorderable (GTK_TREE_VIEW (panel->priv->treeview), FALSE /* TODO */);
+	gtk_tree_view_set_reorderable (GTK_TREE_VIEW (panel->priv->treeview), FALSE); /* TODO */
 	gtk_tree_view_set_show_expanders (GTK_TREE_VIEW (panel->priv->treeview), FALSE);
 	gtk_tree_view_set_level_indentation (GTK_TREE_VIEW (panel->priv->treeview), 18);
 
@@ -1259,11 +1233,11 @@ gedit_documents_panel_init (GeditDocumentsPanel *panel)
 			  G_CALLBACK (treeview_query_tooltip),
 			  panel);
 
-	/* TODO
+	/*
 	g_signal_connect (panel->priv->model,
 			  "row-inserted",
 			  G_CALLBACK (treeview_row_inserted),
-			  panel); */
+			  panel);*/
 }
 
 GtkWidget *
