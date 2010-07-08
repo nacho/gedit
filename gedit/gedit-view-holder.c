@@ -461,10 +461,10 @@ on_grab_focus (GtkWidget       *widget,
 
 				/* Mark the old view as non editable and the new
 				   one with the editability of the old one */
-				gtk_text_view_set_editable (GTK_TEXT_VIEW (view),
-							    gtk_text_view_get_editable (GTK_TEXT_VIEW (active_view)));
-				gtk_text_view_set_editable (GTK_TEXT_VIEW (active_view),
-							    FALSE);
+				gedit_view_set_editable (GEDIT_VIEW (view),
+							 gedit_view_get_editable (GEDIT_VIEW (active_view)));
+				gedit_view_set_editable (GEDIT_VIEW (active_view),
+							 FALSE);
 
 				g_signal_emit (G_OBJECT (holder), signals[ACTIVE_FRAME_CHANGED],
 				               0, old_frame, frame);
@@ -860,14 +860,21 @@ gedit_view_holder_set_cursor (GeditViewHolder *holder,
 	for (l = holder->priv->frames; l != NULL; l = g_slist_next (l))
 	{
 		GeditViewFrame *frame = GEDIT_VIEW_FRAME (l->data);
-		GtkTextView *view;
+		GeditView *view;
 		GdkCursor *cursor;
 		GdkWindow *text_window;
 		GdkWindow *left_window;
 
-		view = GTK_TEXT_VIEW (gedit_view_frame_get_view (frame));
-		text_window = gtk_text_view_get_window (view, GTK_TEXT_WINDOW_TEXT);
-		left_window = gtk_text_view_get_window (view, GTK_TEXT_WINDOW_LEFT);
+		view = gedit_view_frame_get_view (frame);
+
+		/* TODO: Maybe set the the cursor for other views too ? */
+		if (!GTK_IS_TEXT_VIEW (view))
+			continue;
+
+		text_window = gtk_text_view_get_window (GTK_TEXT_VIEW (view),
+							GTK_TEXT_WINDOW_TEXT);
+		left_window = gtk_text_view_get_window (GTK_TEXT_VIEW (view),
+							GTK_TEXT_WINDOW_LEFT);
 
 		cursor = gdk_cursor_new_for_display (
 				gtk_widget_get_display (GTK_WIDGET (view)),

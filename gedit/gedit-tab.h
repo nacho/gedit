@@ -33,7 +33,7 @@
 
 #include <gtk/gtk.h>
 
-#include <gedit/gedit-view.h>
+#include <gedit/gedit-view-interface.h>
 #include <gedit/gedit-document.h>
 
 G_BEGIN_DECLS

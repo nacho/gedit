@@ -25,7 +25,7 @@
 
 #include <gtk/gtk.h>
 #include "gedit-document.h"
-#include "gedit-view.h"
+#include "gedit-view-interface.h"
 
 G_BEGIN_DECLS
 

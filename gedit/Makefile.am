@@ -122,6 +122,7 @@ NOINST_H_FILES =			\
 	gedit-smart-charset-converter.h	\
 	gedit-style-scheme-manager.h	\
 	gedit-tab-label.h		\
+	gedit-text-view.h		\
 	gedittextregion.h		\
 	gedit-ui.h			\
 	gedit-undo-manager.h		\
@@ -146,7 +147,7 @@ INST_H_FILES =				\
 	gedit-status-combo-box.h	\
 	gedit-tab.h 			\
 	gedit-utils.h 			\
-	gedit-view.h 			\
+	gedit-view-interface.h		\
 	gedit-view-activatable.h	\
 	gedit-window.h			\
 	gedit-window-activatable.h
@@ -208,9 +209,10 @@ libgedit_c_files =			\
 	gedit-style-scheme-manager.c	\
 	gedit-tab.c 			\
 	gedit-tab-label.c		\
+	gedit-text-view.c		\
 	gedit-undo-manager.c		\
 	gedit-utils.c 			\
-	gedit-view.c 			\
+	gedit-view-interface.c		\
 	gedit-view-frame.c		\
 	gedit-view-holder.c		\
 	gedit-window.c			\

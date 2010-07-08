@@ -112,7 +112,7 @@ static void
 set_view (GeditPrintJob *job, GeditView *view)
 {
 	job->priv->view = view;
-	job->priv->doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+	job->priv->doc = gedit_view_get_document (view);
 }
 
 static void 

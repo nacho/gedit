@@ -155,7 +155,7 @@ run_search (GeditView   *view,
 	GtkTextIter match_end;
 	gboolean found = FALSE;
 
-	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+	doc = gedit_view_get_document (view);
 
 	if (!search_backwards)
 	{
@@ -244,7 +244,7 @@ do_find (GeditSearchDialog *dialog,
 	if (active_view == NULL)
 		return;
 
-	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view)));
+	doc = gedit_view_get_document (active_view);
 
 	entry_text = gedit_search_dialog_get_search_text (dialog);
 
@@ -397,7 +397,7 @@ do_replace_all (GeditSearchDialog *dialog,
 	if (active_view == NULL)
 		return;
 
-	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view)));
+	doc = gedit_view_get_document (active_view);
 
 	search_entry_text = gedit_search_dialog_get_search_text (dialog);
 	g_return_if_fail ((search_entry_text) != NULL);

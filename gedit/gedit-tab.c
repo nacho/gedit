@@ -420,19 +420,22 @@ set_view_properties_according_to_state (GeditTab *tab)
 	for (l = frames; l != NULL; l = g_slist_next (l))
 	{
 		GeditViewFrame *frame = GEDIT_VIEW_FRAME (l->data);
-		GtkTextView *view;
+		GeditView *view;
 		gboolean val;
 
-		view = GTK_TEXT_VIEW (gedit_view_frame_get_view (frame));
+		view = gedit_view_frame_get_view (frame);
+
+		if (!GTK_IS_TEXT_VIEW (view))
+			continue;
 
 		val = ((tab->priv->state == GEDIT_TAB_STATE_NORMAL) &&
 		       (tab->priv->print_preview == NULL) &&
 		       !tab->priv->not_editable);
-		gtk_text_view_set_editable (view, val);
+		gtk_text_view_set_editable (GTK_TEXT_VIEW (view), val);
 
 		val = ((tab->priv->state != GEDIT_TAB_STATE_LOADING) &&
 		       (tab->priv->state != GEDIT_TAB_STATE_CLOSING));
-		gtk_text_view_set_cursor_visible (view, val);
+		gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (view), val);
 
 		val = ((tab->priv->state != GEDIT_TAB_STATE_LOADING) &&
 		       (tab->priv->state != GEDIT_TAB_STATE_CLOSING) &&

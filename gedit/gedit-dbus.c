@@ -889,7 +889,7 @@ is_empty_window (GeditWindow *window,
 	else if (check_untouched && views->next == NULL)
 	{
 		GeditView *view = GEDIT_VIEW (views->data);
-		GeditDocument *doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+		GeditDocument *doc = gedit_view_get_document (view);
 
 		if (gedit_document_is_untouched (doc) &&
 		    gedit_tab_get_state (gedit_tab_get_from_document (doc)) == GEDIT_TAB_STATE_NORMAL)

@@ -824,9 +824,9 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	state_normal = (state == GEDIT_TAB_STATE_NORMAL);
 
 	view = gedit_tab_get_view (tab);
-	editable = gtk_text_view_get_editable (GTK_TEXT_VIEW (view));
+	editable = gedit_view_get_editable (view);
 
-	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+	doc = gedit_view_get_document (view);
 
 	clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
 					      GDK_SELECTION_CLIPBOARD);
@@ -2386,19 +2386,19 @@ update_cursor_position_statusbar (GtkTextBuffer *buffer,
 }
 
 static void
-update_overwrite_mode_statusbar (GtkTextView *view, 
+update_overwrite_mode_statusbar (GeditView   *view,
 				 GeditWindow *window)
 {
-	if (view != GTK_TEXT_VIEW (gedit_window_get_active_view (window)))
+	if (view != gedit_window_get_active_view (window))
 		return;
 		
-	/* Note that we have to use !gtk_text_view_get_overwrite since we
+	/* Note that we have to use !gedit_view_get_overwrite since we
 	   are in the in the signal handler of "toggle overwrite" that is
 	   G_SIGNAL_RUN_LAST
 	*/
 	gedit_statusbar_set_overwrite (
 			GEDIT_STATUSBAR (window->priv->statusbar),
-			!gtk_text_view_get_overwrite (view));
+			!gedit_view_get_overwrite (view));
 }
 
 #define MAX_TITLE_LENGTH 100
@@ -2677,7 +2677,7 @@ update_statusbar (GeditWindow *window,
 
 		if (window->priv->language_changed_id)
 		{
-			g_signal_handler_disconnect (gtk_text_view_get_buffer (GTK_TEXT_VIEW (old_view)),
+			g_signal_handler_disconnect (gedit_view_get_document (old_view),
 						     window->priv->language_changed_id);
 
 			window->priv->language_changed_id = 0;
@@ -2687,14 +2687,14 @@ update_statusbar (GeditWindow *window,
 	if (new_view == NULL)
 		return;
 
-	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (new_view)));
+	doc = gedit_view_get_document (new_view);
 
 	/* sync the statusbar */
 	update_cursor_position_statusbar (GTK_TEXT_BUFFER (doc),
 					  window);
 
 	gedit_statusbar_set_overwrite (GEDIT_STATUSBAR (window->priv->statusbar),
-				       gtk_text_view_get_overwrite (GTK_TEXT_VIEW (new_view)));
+				       gedit_view_get_overwrite (new_view));
 
 	gtk_widget_show (window->priv->tab_width_combo);
 	gtk_widget_show (window->priv->language_combo);
@@ -3425,7 +3425,7 @@ selection_changed (GeditDocument *doc,
 	state_normal = (state == GEDIT_TAB_STATE_NORMAL);
 
 	view = gedit_tab_get_view (tab);
-	editable = gtk_text_view_get_editable (GTK_TEXT_VIEW (view));
+	editable = gedit_view_get_editable (view);
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "EditCut");
@@ -3517,7 +3517,7 @@ connect_per_view_signals (GeditWindow *window,
 {
 	GeditDocument *doc;
 
-	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+	doc = gedit_view_get_document (view);
 
 	g_signal_connect (doc,
 			  "bracket-matched",
@@ -3567,7 +3567,7 @@ disconnect_per_view_signals (GeditWindow *window,
 {
 	GeditDocument *doc;
 
-	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+	doc = gedit_view_get_document (view);
 
 	g_signal_handlers_disconnect_by_func (doc,
 					      G_CALLBACK (update_cursor_position_statusbar),
@@ -4454,7 +4454,7 @@ gedit_window_get_active_document (GeditWindow *window)
 	if (view == NULL)
 		return NULL;
 
-	return GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+	return gedit_view_get_document (view);
 }
 
 GtkWidget *

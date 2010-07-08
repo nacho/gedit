@@ -26,7 +26,7 @@
 #include "gedit-settings.h"
 #include "gedit-app.h"
 #include "gedit-debug.h"
-#include "gedit-view.h"
+#include "gedit-view-interface.h"
 #include "gedit-window.h"
 #include "gedit-plugins-engine.h"
 #include "gedit-style-scheme-manager.h"
@@ -360,8 +360,13 @@ on_wrap_mode_changed (GSettings     *settings,
 	
 	for (l = views; l != NULL; l = g_list_next (l))
 	{
-		gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (l->data),
-					     wrap_mode);
+		GeditView *view = GEDIT_VIEW (l->data);
+
+		if (GTK_IS_TEXT_VIEW (view))
+		{
+			gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view),
+						     wrap_mode);
+		}
 	}
 	
 	g_list_free (views);
@@ -383,8 +388,13 @@ on_tabs_size_changed (GSettings     *settings,
 	
 	for (l = views; l != NULL; l = g_list_next (l))
 	{
-		gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (l->data),
-					       ts);
+		GeditView *view = GEDIT_VIEW (l->data);
+
+		if (GTK_IS_SOURCE_VIEW (view))
+		{
+			gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (view),
+						       ts);
+		}
 	}
 	
 	g_list_free (views);
@@ -406,9 +416,14 @@ on_insert_spaces_changed (GSettings     *settings,
 	
 	for (l = views; l != NULL; l = g_list_next (l))
 	{
-		gtk_source_view_set_insert_spaces_instead_of_tabs (
-					GTK_SOURCE_VIEW (l->data),
-					spaces);
+		GeditView *view = GEDIT_VIEW (l->data);
+
+		if (GTK_IS_SOURCE_VIEW (view))
+		{
+			gtk_source_view_set_insert_spaces_instead_of_tabs (
+						GTK_SOURCE_VIEW (view),
+						spaces);
+		}
 	}
 	
 	g_list_free (views);
@@ -428,8 +443,13 @@ on_auto_indent_changed (GSettings     *settings,
 	
 	for (l = views; l != NULL; l = g_list_next (l))
 	{
-		gtk_source_view_set_auto_indent (GTK_SOURCE_VIEW (l->data),
-						 enable);
+		GeditView *view = GEDIT_VIEW (l->data);
+
+		if (GTK_IS_SOURCE_VIEW (view))
+		{
+			gtk_source_view_set_auto_indent (GTK_SOURCE_VIEW (view),
+							 enable);
+		}
 	}
 	
 	g_list_free (views);
@@ -449,8 +469,13 @@ on_display_line_numbers_changed (GSettings     *settings,
 	
 	for (l = views; l != NULL; l = g_list_next (l))
 	{
-		gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (l->data),
-						       line_numbers);
+		GeditView *view = GEDIT_VIEW (l->data);
+
+		if (GTK_IS_SOURCE_VIEW (view))
+		{
+			gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (view),
+							       line_numbers);
+		}
 	}
 	
 	g_list_free (views);
@@ -470,8 +495,13 @@ on_hl_current_line_changed (GSettings     *settings,
 	
 	for (l = views; l != NULL; l = g_list_next (l))
 	{
-		gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (l->data),
-							    hl);
+		GeditView *view = GEDIT_VIEW (l->data);
+
+		if (GTK_IS_SOURCE_VIEW (view))
+		{
+			gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (view),
+								    hl);
+		}
 	}
 	
 	g_list_free (views);
@@ -512,8 +542,13 @@ on_display_right_margin_changed (GSettings     *settings,
 	
 	for (l = views; l != NULL; l = g_list_next (l))
 	{
-		gtk_source_view_set_show_right_margin (GTK_SOURCE_VIEW (l->data),
-						       display);
+		GeditView *view = GEDIT_VIEW (l->data);
+
+		if (GTK_IS_SOURCE_VIEW (view))
+		{
+			gtk_source_view_set_show_right_margin (GTK_SOURCE_VIEW (view),
+							       display);
+		}
 	}
 	
 	g_list_free (views);
@@ -535,8 +570,13 @@ on_right_margin_position_changed (GSettings     *settings,
 	
 	for (l = views; l != NULL; l = g_list_next (l))
 	{
-		gtk_source_view_set_right_margin_position (GTK_SOURCE_VIEW (l->data),
-							   pos);
+		GeditView *view = GEDIT_VIEW (l->data);
+
+		if (GTK_IS_SOURCE_VIEW (view))
+		{
+			gtk_source_view_set_right_margin_position (GTK_SOURCE_VIEW (view),
+								   pos);
+		}
 	}
 	
 	g_list_free (views);
@@ -556,8 +596,13 @@ on_smart_home_end_changed (GSettings     *settings,
 	
 	for (l = views; l != NULL; l = g_list_next (l))
 	{
-		gtk_source_view_set_smart_home_end (GTK_SOURCE_VIEW (l->data),
-						    smart_he);
+		GeditView *view = GEDIT_VIEW (l->data);
+
+		if (GTK_IS_SOURCE_VIEW (view))
+		{
+			gtk_source_view_set_smart_home_end (GTK_SOURCE_VIEW (view),
+							    smart_he);
+		}
 	}
 	
 	g_list_free (views);

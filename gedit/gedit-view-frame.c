@@ -21,6 +21,7 @@
  */
 
 #include "gedit-view-frame.h"
+#include "gedit-text-view.h"
 
 
 #define GEDIT_VIEW_FRAME_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_VIEW_FRAME, GeditViewFramePrivate))
@@ -122,7 +123,7 @@ gedit_view_frame_init (GeditViewFrame *frame)
 						     view_frame_mount_operation_factory,
 						     frame);
 
-	frame->priv->view = gedit_view_new (doc);
+	frame->priv->view = gedit_text_view_new (doc);
 	gtk_widget_show (frame->priv->view);
 
 	g_object_unref (doc);
