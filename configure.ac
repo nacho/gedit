@@ -4,7 +4,7 @@ AC_PREREQ(2.63.2)
 
 m4_define(gedit_major_version,  2)
 m4_define(gedit_minor_version, 31)
-m4_define(gedit_micro_version,  4)
+m4_define(gedit_micro_version,  5)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
 AC_INIT([gedit],[gedit_version],[http://bugzilla.gnome.org/enter_bug.cgi?product=gedit],[gedit],[http://projects.gnome.org/gedit/])
@@ -273,8 +273,8 @@ PKG_CHECK_MODULES(GEDIT, [
 	gio-2.0 >= 2.25.11
 	gtk+-3.0 >= 2.90.0
 	gtksourceview-3.0 >= 2.11.2
-	libpeas-1.0
-	libpeasui-1.0
+	libpeas-1.0 >= 0.5.2
+	libpeasui-1.0 >= 0.5.2
 ])
 
 if test "$os_osx" = "no" &&

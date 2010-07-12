@@ -66,7 +66,7 @@ gedit-file-browser-marshal.c: gedit-file-browser-marshal.list $(GLIB_GENMARSHAL)
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
 gsettings_ENUM_NAMESPACE = org.gnome.gedit.plugins.filebrowser
-gsettings_ENUM_FILES = $(NOINST_H_FILES)
+gsettings_ENUM_FILES = $(top_srcdir)/plugins/filebrowser/*.h
 gsettings_SCHEMAS = org.gnome.gedit.plugins.filebrowser.gschema.xml
 
 @INTLTOOL_XML_NOMERGE_RULE@
@@ -80,7 +80,7 @@ EXTRA_DIST = \
 	gedit-file-browser-enum-types.c.template	\
 	gedit-file-browser-enum-register.c.template	\
 	gedit-file-browser-marshal.list			\
-	org.gnome.gedit.file-browser.gschema.xml.in.in
+	org.gnome.gedit.plugins.filebrowser.gschema.xml.in.in
 
 CLEANFILES = \
 	$(plugin_DATA)		\

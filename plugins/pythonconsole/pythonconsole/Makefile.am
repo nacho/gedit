@@ -16,7 +16,7 @@ gsettings_SCHEMAS = org.gnome.gedit.pythonconsole.gschema.xml
 
 EXTRA_DIST =		\
 	$(ui_DATA)	\
-	org.gnome.gedit.plugins.pythonconsole.gschema.xml.in.in
+	org.gnome.gedit.pythonconsole.gschema.xml.in.in
 
 CLEANFILES = $(gsettings_SCHEMAS)
 DISTCLEANFILES = $(gsettings_SCHEMAS)

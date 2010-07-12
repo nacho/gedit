@@ -28,7 +28,7 @@ plugin_in_files = time.gedit-plugin.desktop.in
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
 gsettings_ENUM_NAMESPACE = org.gnome.gedit.plugins.time
-gsettings_ENUM_FILES = gedit-time-plugin.c
+gsettings_ENUM_FILES = $(top_srcdir)/plugins/time/gedit-time-plugin.c
 gsettings_SCHEMAS = org.gnome.gedit.time.gschema.xml
 
 @INTLTOOL_XML_NOMERGE_RULE@
