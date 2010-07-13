@@ -363,10 +363,10 @@ sync_title (GeditPanel     *panel,
 }
 
 static void
-notebook_page_changed (GtkNotebook     *notebook,
-                       GtkNotebookPage *page,
-                       guint            page_num,
-                       GeditPanel      *panel)
+notebook_page_changed (GtkNotebook *notebook,
+                       GtkWidget   *page,
+                       guint        page_num,
+                       GeditPanel  *panel)
 {
 	GtkWidget *item;
 	GeditPanelItem *data;

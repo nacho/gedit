@@ -748,10 +748,10 @@ gedit_notebook_new (void)
 }
 
 static void
-gedit_notebook_switch_page_cb (GtkNotebook     *notebook,
-                               GtkNotebookPage *page,
-                               guint            page_num,
-                               gpointer         data)
+gedit_notebook_switch_page_cb (GtkNotebook *notebook,
+                               GtkWidget   *page,
+                               guint        page_num,
+                               gpointer     data)
 {
 	GeditNotebook *nb = GEDIT_NOTEBOOK (notebook);
 	GtkWidget *child;

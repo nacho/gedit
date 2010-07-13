@@ -314,7 +314,7 @@ notebook_page_added (GtkNotebook        *notebook,
 
 static void 
 notebook_switch_page (GtkNotebook        *book,
-		      GtkNotebookPage    *pg,
+		      GtkWidget          *pg,
 		      gint                page_num,
 		      GeditMultiNotebook *mnb)
 {
