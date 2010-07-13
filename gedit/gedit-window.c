@@ -2696,27 +2696,35 @@ update_statusbar (GeditWindow *window,
 	gedit_statusbar_set_overwrite (GEDIT_STATUSBAR (window->priv->statusbar),
 				       gedit_view_get_overwrite (new_view));
 
-	gtk_widget_show (window->priv->tab_width_combo);
-	gtk_widget_show (window->priv->language_combo);
+	if (GTK_IS_TEXT_VIEW (new_view))
+	{
+		gtk_widget_show (window->priv->tab_width_combo);
+		gtk_widget_show (window->priv->language_combo);
 
-	window->priv->tab_width_id = g_signal_connect (new_view,
-						       "notify::tab-width",
-						       G_CALLBACK (tab_width_changed),
-						       window);
-	window->priv->spaces_instead_of_tabs_id = g_signal_connect (new_view,
-								    "notify::insert-spaces-instead-of-tabs",
-								    G_CALLBACK (spaces_instead_of_tabs_changed),
-								    window);
+		window->priv->tab_width_id = g_signal_connect (new_view,
+							       "notify::tab-width",
+							       G_CALLBACK (tab_width_changed),
+							       window);
+		window->priv->spaces_instead_of_tabs_id = g_signal_connect (new_view,
+									    "notify::insert-spaces-instead-of-tabs",
+									    G_CALLBACK (spaces_instead_of_tabs_changed),
+									    window);
 
-	window->priv->language_changed_id = g_signal_connect (doc,
-							      "notify::language",
-							      G_CALLBACK (language_changed),
-							      window);
+		window->priv->language_changed_id = g_signal_connect (doc,
+								      "notify::language",
+								      G_CALLBACK (language_changed),
+								      window);
 
-	/* call it for the first time */
-	tab_width_changed (G_OBJECT (new_view), NULL, window);
-	spaces_instead_of_tabs_changed (G_OBJECT (new_view), NULL, window);
-	language_changed (G_OBJECT (doc), NULL, window);
+		/* call it for the first time */
+		tab_width_changed (G_OBJECT (new_view), NULL, window);
+		spaces_instead_of_tabs_changed (G_OBJECT (new_view), NULL, window);
+		language_changed (G_OBJECT (doc), NULL, window);
+	}
+	else
+	{
+		gtk_widget_hide (window->priv->tab_width_combo);
+		gtk_widget_hide (window->priv->language_combo);
+	}
 }
 
 static void
