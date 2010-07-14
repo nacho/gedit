@@ -406,7 +406,7 @@ help/Makefile
 pixmaps/Makefile
 plugins/Makefile
 plugins/changecase/Makefile
-plugins/checkupdate/org.gnome.gedit.checkupdate.gschema.xml.in
+plugins/checkupdate/org.gnome.gedit.plugins.checkupdate.gschema.xml.in
 plugins/checkupdate/Makefile
 plugins/docinfo/Makefile
 plugins/filebrowser/org.gnome.gedit.plugins.filebrowser.gschema.xml.in
@@ -418,7 +418,7 @@ plugins/pythonconsole/pythonconsole/org.gnome.gedit.pythonconsole.gschema.xml.in
 plugins/sort/Makefile
 plugins/spell/Makefile
 plugins/taglist/Makefile
-plugins/time/org.gnome.gedit.time.gschema.xml.in
+plugins/time/org.gnome.gedit.plugins.time.gschema.xml.in
 plugins/time/Makefile
 po/Makefile.in
 tests/Makefile

@@ -24,14 +24,14 @@ plugin_in_files = checkupdate.gedit-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-gsettings_SCHEMAS = org.gnome.gedit.checkupdate.gschema.xml
+gsettings_SCHEMAS = org.gnome.gedit.plugins.checkupdate.gschema.xml
 
 @INTLTOOL_XML_NOMERGE_RULE@
 @GSETTINGS_RULES@
 
 EXTRA_DIST = \
 	$(plugin_in_files)	\
-	org.gnome.gedit.checkupdate.gschema.xml.in.in
+	org.gnome.gedit.plugins.checkupdate.gschema.xml.in.in
 
 CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
 

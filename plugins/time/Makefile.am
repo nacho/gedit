@@ -29,7 +29,7 @@ plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
 gsettings_ENUM_NAMESPACE = org.gnome.gedit.plugins.time
 gsettings_ENUM_FILES = $(top_srcdir)/plugins/time/gedit-time-plugin.c
-gsettings_SCHEMAS = org.gnome.gedit.time.gschema.xml
+gsettings_SCHEMAS = org.gnome.gedit.plugins.time.gschema.xml
 
 @INTLTOOL_XML_NOMERGE_RULE@
 @GSETTINGS_RULES@
@@ -37,7 +37,7 @@ gsettings_SCHEMAS = org.gnome.gedit.time.gschema.xml
 EXTRA_DIST =					\
 	$(ui_DATA)				\
 	$(plugin_in_files)			\
-	org.gnome.gedit.time.gschema.xml.in.in
+	org.gnome.gedit.plugins.time.gschema.xml.in.in
 
 CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
 DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
