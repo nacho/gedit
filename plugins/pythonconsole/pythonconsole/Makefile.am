@@ -9,14 +9,14 @@ plugin_PYTHON =		\
 uidir = $(GEDIT_PLUGINS_DATA_DIR)/pythonconsole/ui
 ui_DATA = config.ui
 
-gsettings_SCHEMAS = org.gnome.gedit.pythonconsole.gschema.xml
+gsettings_SCHEMAS = org.gnome.gedit.plugins.pythonconsole.gschema.xml
 
 @INTLTOOL_XML_NOMERGE_RULE@
 @GSETTINGS_RULES@
 
 EXTRA_DIST =		\
 	$(ui_DATA)	\
-	org.gnome.gedit.pythonconsole.gschema.xml.in.in
+	org.gnome.gedit.plugins.pythonconsole.gschema.xml.in.in
 
 CLEANFILES = $(gsettings_SCHEMAS)
 DISTCLEANFILES = $(gsettings_SCHEMAS)

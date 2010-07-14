@@ -414,7 +414,7 @@ plugins/filebrowser/Makefile
 plugins/modelines/Makefile
 plugins/pythonconsole/Makefile
 plugins/pythonconsole/pythonconsole/Makefile
-plugins/pythonconsole/pythonconsole/org.gnome.gedit.pythonconsole.gschema.xml.in
+plugins/pythonconsole/pythonconsole/org.gnome.gedit.plugins.pythonconsole.gschema.xml.in
 plugins/sort/Makefile
 plugins/spell/Makefile
 plugins/taglist/Makefile
