@@ -175,6 +175,7 @@ void		 _gedit_tab_mark_for_closing	(GeditTab	     *tab);
 
 gboolean	 _gedit_tab_can_close		(GeditTab	     *tab);
 
+GtkWidget	*_gedit_tab_get_view_frame	(GeditTab            *tab);
 
 G_END_DECLS
 

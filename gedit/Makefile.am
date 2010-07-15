@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-SUBDIRS = dialogs smclient
+SUBDIRS = dialogs smclient theatrics
 
 bin_PROGRAMS = gedit
 
@@ -40,7 +40,8 @@ libgedit_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_
 
 libgedit_la_LIBADD = \
 	dialogs/libdialogs.la		\
-	smclient/libeggsmclient.la
+	smclient/libeggsmclient.la	\
+	theatrics/libtheatrics.la
 
 # GEDIT_LIBS must be the last to ensure correct order on some platforms
 libgedit_la_LIBADD += $(GEDIT_LIBS)
