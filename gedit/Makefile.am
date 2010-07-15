@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-SUBDIRS = dialogs smclient
+SUBDIRS = dialogs smclient theatrics
 
 bin_PROGRAMS = gedit
 
@@ -40,7 +40,8 @@ libgedit_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_
 
 libgedit_la_LIBADD = \
 	dialogs/libdialogs.la		\
-	smclient/libeggsmclient.la
+	smclient/libeggsmclient.la	\
+	theatrics/libtheatrics.la
 
 # GEDIT_LIBS must be the last to ensure correct order on some platforms
 libgedit_la_LIBADD += $(GEDIT_LIBS)
@@ -114,9 +115,11 @@ NOINST_H_FILES =			\
 	gedit-language-manager.h	\
 	gedit-multi-notebook.h		\
 	gedit-notebook.h		\
+	gedit-overlay.h			\
 	gedit-plugins-engine.h		\
 	gedit-print-job.h		\
 	gedit-print-preview.h		\
+	gedit-rounded-frame.h		\
 	gedit-session.h			\
 	gedit-settings.h		\
 	gedit-smart-charset-converter.h	\
@@ -195,11 +198,13 @@ libgedit_c_files =			\
 	gedit-message.c			\
 	gedit-multi-notebook.c		\
 	gedit-notebook.c		\
+	gedit-overlay.c			\
 	gedit-panel.c			\
 	gedit-plugins-engine.c		\
 	gedit-print-job.c		\
 	gedit-print-preview.c		\
 	gedit-progress-info-bar.c	\
+	gedit-rounded-frame.c		\
 	gedit-session.c			\
 	gedit-settings.c		\
 	gedit-smart-charset-converter.c	\
@@ -260,6 +265,16 @@ EXTRA_DIST = 				\
 
 CLEANFILES = $(BUILT_SOURCES)
 
+theatrics_files =						\
+	./theatrics/gedit-theatrics-actor.h			\
+	./theatrics/gedit-theatrics-actor.c			\
+	./theatrics/gedit-theatrics-animated-widget.h		\
+	./theatrics/gedit-theatrics-animated-widget.c		\
+	./theatrics/gedit-theatrics-choreographer.h		\
+	./theatrics/gedit-theatrics-choreographer.c		\
+	./theatrics/gedit-theatrics-stage.h			\
+	./theatrics/gedit-theatrics-stage.c
+
 if HAVE_INTROSPECTION
 -include $(INTROSPECTION_MAKEFILE)
 INTROSPECTION_GIRS = Gedit-3.0.gir
@@ -269,7 +284,7 @@ INTROSPECTION_SCANNER_ARGS = -I$(top_srcdir) --warn-all
 Gedit_3_0_gir_NAMESPACE = Gedit
 Gedit_3_0_gir_VERSION = 3.0
 Gedit_3_0_gir_PROGRAM = $(builddir)/gedit
-Gedit_3_0_gir_FILES = $(INST_H_FILES) $(libgedit_c_files)
+Gedit_3_0_gir_FILES = $(theatrics_files) $(INST_H_FILES) $(libgedit_c_files)
 Gedit_3_0_gir_INCLUDES = Gtk-3.0 GtkSource-3.0
 
 girdir = $(datadir)/gedit/gir-1.0

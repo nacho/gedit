@@ -52,9 +52,6 @@
 #include "gedit-app.h"
 
 #define GEDIT_VIEW_SCROLL_MARGIN 0.02
-#define GEDIT_VIEW_SEARCH_DIALOG_TIMEOUT (30*1000) /* 30 seconds */
-
-#define MIN_SEARCH_COMPLETION_KEY_LEN	3
 
 #define GEDIT_VIEW_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_VIEW, GeditViewPrivate))
 
@@ -72,39 +69,11 @@ enum
 struct _GeditViewPrivate
 {
 	GSettings   *editor_settings;
-
-	SearchMode   search_mode;
-	
-	GtkTextIter  start_search_iter;
-
-	/* used to restore the search state if an
-	 * incremental search is cancelled
-	 */
- 	gchar       *old_search_text;
-	guint        old_search_flags;
-
-	/* used to remeber the state of the last
-	 * incremental search (the document search
-	 * state may be changed by the search dialog)
-	 */
-	guint        search_flags;
-	gboolean     wrap_around;
-
-	GtkWidget   *search_window;
-	GtkWidget   *search_entry;
-
-	guint        typeselect_flush_timeout;
-	guint        search_entry_changed_id;
-	
-	gboolean     disable_popdown;
 	
 	GtkTextBuffer *current_buffer;
 
 	PeasExtensionSet *extensions;
 };
-
-/* The search entry completion is shared among all the views */
-GtkListStore *search_completion_model = NULL;
 
 static void	gedit_view_destroy		(GtkObject        *object);
 static void	gedit_view_finalize		(GObject          *object);
@@ -131,12 +100,7 @@ static gboolean	gedit_view_button_press_event	(GtkWidget        *widget,
 						 GdkEventButton   *event);
 static void	gedit_view_realize		(GtkWidget        *widget);
 
-static gboolean start_interactive_search	(GeditView        *view);
-static gboolean start_interactive_goto_line	(GeditView        *view);
 static gboolean reset_searched_text		(GeditView        *view);
-
-static void	hide_search_window 		(GeditView        *view,
-						 gboolean          cancel);
 
 
 static gint	gedit_view_expose	 	(GtkWidget        *widget,
@@ -163,12 +127,6 @@ enum
 };
 
 static guint view_signals [LAST_SIGNAL] = { 0 };
-
-typedef enum
-{
-	GEDIT_SEARCH_ENTRY_NORMAL,
-	GEDIT_SEARCH_ENTRY_NOT_FOUND
-} GeditSearchEntryBgColor;
 
 static void
 document_read_only_notify_handler (GeditDocument *document, 
@@ -216,38 +174,36 @@ gedit_view_class_init (GeditViewClass *klass)
 	widget_class->drag_drop = gedit_view_drag_drop;
 	widget_class->button_press_event = gedit_view_button_press_event;
 	widget_class->realize = gedit_view_realize;
-	klass->start_interactive_search = start_interactive_search;
-	klass->start_interactive_goto_line = start_interactive_goto_line;
-	klass->reset_searched_text = reset_searched_text;	
+	klass->reset_searched_text = reset_searched_text;
 
 	text_view_class->delete_from_cursor = gedit_view_delete_from_cursor;
-	
+
 	view_signals[START_INTERACTIVE_SEARCH] =
-    		g_signal_new ("start_interactive_search",
-		  	      G_TYPE_FROM_CLASS (object_class),
-		  	      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-		  	      G_STRUCT_OFFSET (GeditViewClass, start_interactive_search),
-			      NULL, NULL,
-			      gedit_marshal_BOOLEAN__NONE,
-			      G_TYPE_BOOLEAN, 0);	
+		g_signal_new ("start-interactive-search",
+		              G_TYPE_FROM_CLASS (object_class),
+		              G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+		              G_STRUCT_OFFSET (GeditViewClass, start_interactive_search),
+		              NULL, NULL,
+		              gedit_marshal_BOOLEAN__NONE,
+		              G_TYPE_BOOLEAN, 0);
 
 	view_signals[START_INTERACTIVE_GOTO_LINE] =
-    		g_signal_new ("start_interactive_goto_line",
-		  	      G_TYPE_FROM_CLASS (object_class),
-		  	      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-		  	      G_STRUCT_OFFSET (GeditViewClass, start_interactive_goto_line),
+		g_signal_new ("start-interactive-goto-line",
+		              G_TYPE_FROM_CLASS (object_class),
+		              G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+		              G_STRUCT_OFFSET (GeditViewClass, start_interactive_goto_line),
+		              NULL, NULL,
+		              gedit_marshal_BOOLEAN__NONE,
+		              G_TYPE_BOOLEAN, 0);
+
+	view_signals[RESET_SEARCHED_TEXT] =
+		g_signal_new ("reset-searched-text",
+			      G_TYPE_FROM_CLASS (object_class),
+			      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+			      G_STRUCT_OFFSET (GeditViewClass, reset_searched_text),
 			      NULL, NULL,
 			      gedit_marshal_BOOLEAN__NONE,
 			      G_TYPE_BOOLEAN, 0);
-
-	view_signals[RESET_SEARCHED_TEXT] =
-    		g_signal_new ("reset_searched_text",
-		  	      G_TYPE_FROM_CLASS (object_class),
-		  	      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-		  	      G_STRUCT_OFFSET (GeditViewClass, reset_searched_text),
-			      NULL, NULL,
-			      gedit_marshal_BOOLEAN__NONE,
-			      G_TYPE_BOOLEAN, 0);		
 
 	/* A new signal DROP_URIS has been added to allow plugins to intercept
 	 * the default dnd behaviour of 'text/uri-list'. GeditView now handles
@@ -270,17 +226,17 @@ gedit_view_class_init (GeditViewClass *klass)
 	g_type_class_add_private (klass, sizeof (GeditViewPrivate));
 	
 	binding_set = gtk_binding_set_by_class (klass);
-	
+
 	gtk_binding_entry_add_signal (binding_set,
-				      GDK_k,
-				      GDK_CONTROL_MASK,
-				      "start_interactive_search", 0);
-		
+	                              GDK_k,
+	                              GDK_CONTROL_MASK,
+	                              "start-interactive-search", 0);
+
 	gtk_binding_entry_add_signal (binding_set,
-				      GDK_i,
-				      GDK_CONTROL_MASK,
-				      "start_interactive_goto_line", 0);
-	
+	                              GDK_i,
+	                              GDK_CONTROL_MASK,
+	                              "start-interactive-goto-line", 0);
+
 	gtk_binding_entry_add_signal (binding_set,
 				      GDK_k,
 				      GDK_CONTROL_MASK | GDK_SHIFT_MASK,
@@ -438,9 +394,6 @@ gedit_view_init (GeditView *view)
 		      "indent_on_tab", TRUE,
 		      NULL);
 
-	view->priv->typeselect_flush_timeout = 0;
-	view->priv->wrap_around = TRUE;
-
 	/* Drag and drop support */	
 	tl = gtk_drag_dest_get_target_list (GTK_WIDGET (view));
 
@@ -481,19 +434,6 @@ gedit_view_destroy (GtkObject *object)
 		view->priv->extensions = NULL;
 	}
 
-	if (view->priv->search_window != NULL)
-	{
-		gtk_widget_destroy (view->priv->search_window);
-		view->priv->search_window = NULL;
-		view->priv->search_entry = NULL;
-		
-		if (view->priv->typeselect_flush_timeout != 0)
-		{
-			g_source_remove (view->priv->typeselect_flush_timeout);
-			view->priv->typeselect_flush_timeout = 0;
-		}
-	}
-	
 	/* Disconnect notify buffer because the destroy of the textview will
 	   set the buffer to NULL, and we call get_buffer in the notify which
 	   would reinstate a GtkTextBuffer which we don't want */
@@ -505,7 +445,7 @@ gedit_view_destroy (GtkObject *object)
 		g_object_unref (view->priv->editor_settings);
 		view->priv->editor_settings = NULL;
 	}
-	
+
 	(* GTK_OBJECT_CLASS (gedit_view_parent_class)->destroy) (object);
 }
 
@@ -518,24 +458,16 @@ gedit_view_finalize (GObject *object)
 
 	current_buffer_removed (view);
 
-	g_free (view->priv->old_search_text);
-
 	(* G_OBJECT_CLASS (gedit_view_parent_class)->finalize) (object);
 }
 
 static gint
 gedit_view_focus_out (GtkWidget *widget, GdkEventFocus *event)
 {
-	GeditView *view = GEDIT_VIEW (widget);
-	
 	gtk_widget_queue_draw (widget);
-	
-	/* hide interactive search dialog */
-	if (view->priv->search_window != NULL)
-		hide_search_window (view, FALSE);
-	
+
 	(* GTK_WIDGET_CLASS (gedit_view_parent_class)->focus_out_event) (widget, event);
-	
+
 	return FALSE;
 }
 
@@ -776,1163 +708,6 @@ gedit_view_set_font (GeditView   *view,
 	pango_font_description_free (font_desc);
 }
 
-static void
-add_search_completion_entry (const gchar *str)
-{
-	gchar        *text;
-	gboolean      valid;
-	GtkTreeModel *model;
-	GtkTreeIter   iter;
-
-	if (str == NULL)
-		return;
-
-	text = gedit_utils_unescape_search_text (str);
-
-	if (g_utf8_strlen (text, -1) < MIN_SEARCH_COMPLETION_KEY_LEN)
-	{
-		g_free (text);
-		return;
-	}
-
-	g_return_if_fail (GTK_IS_TREE_MODEL (search_completion_model));
-
-	model = GTK_TREE_MODEL (search_completion_model);	
-
-	/* Get the first iter in the list */
-	valid = gtk_tree_model_get_iter_first (model, &iter);
-
-	while (valid)
-	{
-		/* Walk through the list, reading each row */
-     		gchar *str_data;
-
-		gtk_tree_model_get (model, 
-				    &iter, 
-                          	    0, 
-                          	    &str_data,
-                          	    -1);
-
-		if (strcmp (text, str_data) == 0)
-		{
-			g_free (text);
-			g_free (str_data);
-			gtk_list_store_move_after (GTK_LIST_STORE (model),
-						   &iter,
-						   NULL);
-
-			return;
-		}
-
-		g_free (str_data);
-
-		valid = gtk_tree_model_iter_next (model, &iter);
-    	}
-
-	gtk_list_store_prepend (GTK_LIST_STORE (model), &iter);
-	gtk_list_store_set (GTK_LIST_STORE (model),
-			    &iter,
-			    0,
-			    text,
-			    -1);
-
-	g_free (text);
-}
-
-static void
-set_entry_background (GtkWidget               *entry,
-		      GeditSearchEntryBgColor  col)
-{
-	if (col == GEDIT_SEARCH_ENTRY_NOT_FOUND)
-	{
-		GdkColor red;
-		GdkColor white;
-
-		/* FIXME: a11y and theme */
-
-		gdk_color_parse ("#FF6666", &red);
-		gdk_color_parse ("white", &white);
-
-		gtk_widget_modify_base (entry,
-				        GTK_STATE_NORMAL,
-				        &red);
-		gtk_widget_modify_text (entry,
-				        GTK_STATE_NORMAL,
-				        &white);
-	}
-	else /* reset */
-	{
-		gtk_widget_modify_base (entry,
-				        GTK_STATE_NORMAL,
-				        NULL);
-		gtk_widget_modify_text (entry,
-				        GTK_STATE_NORMAL,
-				        NULL);
-	}
-}
-
-static gboolean
-run_search (GeditView        *view,
-            const gchar      *entry_text,
-	    gboolean          search_backward,
-	    gboolean          wrap_around,
-            gboolean          typing)
-{
-	GtkTextIter    start_iter;
-	GtkTextIter    match_start;
-	GtkTextIter    match_end;	
-	gboolean       found = FALSE;
-	GeditDocument *doc;
-
-	g_return_val_if_fail (view->priv->search_mode == SEARCH, FALSE);
-
-	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
-	
-	start_iter = view->priv->start_search_iter;
-	
-	if (*entry_text != '\0')
-	{	
-		if (!search_backward)
-		{
-			if (!typing)
-			{
-				/* forward and _NOT_ typing */
-				gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
-							      &start_iter,
-							      &match_end);
-		
-				gtk_text_iter_order (&match_end, &start_iter);
-			}
-		
-			/* run search */
-			found = gedit_document_search_forward (doc,
-							       &start_iter,
-							       NULL,
-							       &match_start,
-							       &match_end);
-		}						       
-		else if (!typing)
-		{
-			/* backward and not typing */
-			gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
-							      &start_iter,
-							      &match_end);
-			
-			/* run search */
-			found = gedit_document_search_backward (doc,
-							        NULL,
-							        &start_iter,
-							        &match_start,
-							        &match_end);
-		} 
-		else
-		{
-			/* backward (while typing) */
-			g_return_val_if_reached (FALSE);
-
-		}
-		
-		if (!found && wrap_around)
-		{
-			if (!search_backward)
-			{
-				found = gedit_document_search_forward (doc,
-								       NULL,
-								       NULL, /* FIXME: set the end_inter */
-								       &match_start,
-								       &match_end);
-			}
-			else
-			{
-				found = gedit_document_search_backward (doc,
-								        NULL, /* FIXME: set the start_inter */
-								        NULL, 
-								        &match_start,
-								        &match_end);
-			}
-		}
-	}
-	else
-	{
-		gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
-						      &start_iter, 
-						      NULL);	
-	}	
-	
-	if (found)
-	{
-		gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc),
-					&match_start);
-
-		gtk_text_buffer_move_mark_by_name (GTK_TEXT_BUFFER (doc),
-					"selection_bound", &match_end);
-	}
-	else if (typing)
-	{
-		gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc),
-					      &view->priv->start_search_iter);
-	}
-						      
-	if (found || (*entry_text == '\0'))
-	{				   
-		gedit_view_scroll_to_cursor (view);
-
-		set_entry_background (view->priv->search_entry,
-				      GEDIT_SEARCH_ENTRY_NORMAL);	
-	}
-	else
-	{
-		set_entry_background (view->priv->search_entry,
-				      GEDIT_SEARCH_ENTRY_NOT_FOUND);
-	}
-
-	return found;
-}
-
-/* Cut and paste from gtkwindow.c */
-static void
-send_focus_change (GtkWidget *widget,
-		   gboolean   in)
-{
-	GdkEvent *fevent = gdk_event_new (GDK_FOCUS_CHANGE);
-
-	g_object_ref (widget);
-
-	fevent->focus_change.type = GDK_FOCUS_CHANGE;
-	fevent->focus_change.window = g_object_ref (gtk_widget_get_window (widget));
-	fevent->focus_change.in = in;
-
-	gtk_widget_send_focus_change (widget, fevent);
-
-	gdk_event_free (fevent);
-}
-
-static void
-hide_search_window (GeditView *view, gboolean cancel)
-{
-	if (view->priv->disable_popdown)
-		return;
-
-	if (view->priv->search_entry_changed_id != 0)
-	{
-		g_signal_handler_disconnect (view->priv->search_entry,
-					     view->priv->search_entry_changed_id);
-		view->priv->search_entry_changed_id = 0;
-    	}
-
-	if (view->priv->typeselect_flush_timeout != 0)
-	{
-		g_source_remove (view->priv->typeselect_flush_timeout);
-		view->priv->typeselect_flush_timeout = 0;
-	}
-
-	/* send focus-in event */
-	send_focus_change (GTK_WIDGET (view->priv->search_entry), FALSE);
-	gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (view), TRUE);
-	gtk_widget_hide (view->priv->search_window);
-	
-	if (cancel)
-	{
-		GtkTextBuffer *buffer;
-		
-		buffer = GTK_TEXT_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
-		gtk_text_buffer_place_cursor (buffer, &view->priv->start_search_iter);
-		
-		gedit_view_scroll_to_cursor (view);
-	}
-
-	/* make sure a focus event is sent for the edit area */
-	send_focus_change (GTK_WIDGET (view), TRUE);
-}
-
-static gboolean
-search_entry_flush_timeout (GeditView *view)
-{
-	GDK_THREADS_ENTER ();
-
-  	view->priv->typeselect_flush_timeout = 0;
-	hide_search_window (view, FALSE);
-
-	GDK_THREADS_LEAVE ();
-
-	return FALSE;
-}
-
-static void
-update_search_window_position (GeditView *view)
-{
-	gint x, y;
-	gint view_x, view_y;
-	GdkWindow *view_window = gtk_widget_get_window (GTK_WIDGET (view));
-
-	gtk_widget_realize (view->priv->search_window);
-
-	gdk_window_get_origin (view_window, &view_x, &view_y);
-  
-	x = MAX (12, view_x + 12);
-	y = MAX (12, view_y - 12);
-	
-	gtk_window_move (GTK_WINDOW (view->priv->search_window), x, y);
-}
-
-static gboolean
-search_window_delete_event (GtkWidget   *widget,
-			    GdkEventAny *event,
-			    GeditView   *view)
-{
-	hide_search_window (view, FALSE);
-
-	return TRUE;
-}
-
-static gboolean
-search_window_button_press_event (GtkWidget      *widget,
-				  GdkEventButton *event,
-				  GeditView      *view)
-{
-	hide_search_window (view, FALSE);
-	
-	gtk_propagate_event (GTK_WIDGET (view), (GdkEvent *)event);
-
-	return FALSE;
-}
-
-static void
-search_again (GeditView *view,
-	      gboolean   search_backward)
-{
-	const gchar *entry_text;
-
-	g_return_if_fail (view->priv->search_mode == SEARCH);
-		
-	/* SEARCH mode */	
-	/* renew the flush timeout */
-	if (view->priv->typeselect_flush_timeout != 0)
-	{
-		g_source_remove (view->priv->typeselect_flush_timeout);
-		view->priv->typeselect_flush_timeout =
-			g_timeout_add (GEDIT_VIEW_SEARCH_DIALOG_TIMEOUT,
-		       		       (GSourceFunc)search_entry_flush_timeout,
-		       		       view);
-	}
-	
-	entry_text = gtk_entry_get_text (GTK_ENTRY (view->priv->search_entry));
-	
-	add_search_completion_entry (entry_text);
-		
-	run_search (view,
-		    entry_text,
-		    search_backward,
-		    view->priv->wrap_around,
-		    FALSE);
-}
-
-static gboolean
-search_window_scroll_event (GtkWidget      *widget,
-			    GdkEventScroll *event,
-			    GeditView      *view)
-{
-	gboolean retval = FALSE;
-
-	if (view->priv->search_mode == GOTO_LINE)
-		return retval;
-		
-	/* SEARCH mode */	
-	if (event->direction == GDK_SCROLL_UP)
-	{
-		search_again (view, TRUE);
-		retval = TRUE;
-	}
-	else if (event->direction == GDK_SCROLL_DOWN)
-	{
-      		search_again (view, FALSE);
-      		retval = TRUE;
-	}
-
-	return retval;
-}
-
-static gboolean
-search_window_key_press_event (GtkWidget   *widget,
-			       GdkEventKey *event,
-			       GeditView   *view)
-{
-	gboolean retval = FALSE;
-	guint modifiers;
-
-	modifiers = gtk_accelerator_get_default_mod_mask ();
-
-	/* Close window */
-	if (event->keyval == GDK_Tab)
-	{
-		hide_search_window (view, FALSE);
-		retval = TRUE;
-	}
-
-	/* Close window and cancel the search */
-	if (event->keyval == GDK_Escape)
-	{
-		if (view->priv->search_mode == SEARCH)
-		{
-			GeditDocument *doc;
-
-			/* restore document search so that Find Next does the right thing */
-			doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
-			gedit_document_set_search_text (doc, 
-							view->priv->old_search_text,
-							view->priv->old_search_flags);
-						
-		}
-		
-		hide_search_window (view, TRUE);
-		retval = TRUE;
-	}
-	
-	if (view->priv->search_mode == GOTO_LINE)
-		return retval;
-		
-	/* SEARCH mode */
-
-	/* select previous matching iter */
-	if (event->keyval == GDK_Up || event->keyval == GDK_KP_Up)
-	{
-		search_again (view, TRUE);
-		retval = TRUE;
-	}
-
-	if (((event->state & modifiers) == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) && 
-	    (event->keyval == GDK_g || event->keyval == GDK_G))
-	{
-		search_again (view, TRUE);
-		retval = TRUE;
-	}
-
-	/* select next matching iter */
-	if (event->keyval == GDK_Down || event->keyval == GDK_KP_Down)
-	{
-		search_again (view, FALSE);
-		retval = TRUE;
-	}
-
-	if (((event->state & modifiers) == GDK_CONTROL_MASK) && 
-	    (event->keyval == GDK_g || event->keyval == GDK_G))
-	{
-		search_again (view, FALSE);
-		retval = TRUE;
-	}
-
-	return retval;
-}
-
-static void
-search_entry_activate (GtkEntry  *entry,
-		       GeditView *view)
-{
-	hide_search_window (view, FALSE);
-}
-
-static void
-wrap_around_menu_item_toggled (GtkCheckMenuItem *checkmenuitem,
-			       GeditView        *view)
-{	
-	view->priv->wrap_around = gtk_check_menu_item_get_active (checkmenuitem);
-}
-
-static void
-match_entire_word_menu_item_toggled (GtkCheckMenuItem *checkmenuitem,
-				     GeditView        *view)
-{
-	GEDIT_SEARCH_SET_ENTIRE_WORD (view->priv->search_flags,
-				      gtk_check_menu_item_get_active (checkmenuitem));
-}
-
-static void
-match_case_menu_item_toggled (GtkCheckMenuItem *checkmenuitem,
-			      GeditView        *view)
-{
-	GEDIT_SEARCH_SET_CASE_SENSITIVE (view->priv->search_flags,
-					 gtk_check_menu_item_get_active (checkmenuitem));
-}
-
-static gboolean
-real_search_enable_popdown (gpointer data)
-{
-	GeditView *view = (GeditView *)data;
-
-	GDK_THREADS_ENTER ();
-
-	view->priv->disable_popdown = FALSE;
-
-	GDK_THREADS_LEAVE ();
-
-	return FALSE;
-}
-
-static void
-search_enable_popdown (GtkWidget *widget,
-		       GeditView *view)
-{
-	g_timeout_add (200, real_search_enable_popdown, view);
-	
-	/* renew the flush timeout */
-	if (view->priv->typeselect_flush_timeout != 0)
-		g_source_remove (view->priv->typeselect_flush_timeout);
-
-	view->priv->typeselect_flush_timeout =
-		g_timeout_add (GEDIT_VIEW_SEARCH_DIALOG_TIMEOUT,
-	       		       (GSourceFunc)search_entry_flush_timeout,
-	       		       view);
-}
-
-static void
-add_popup_menu_items (GtkWidget *menu,
-		      GeditView *view)
-{
-	GtkWidget *menu_item;
-
-	/* create "Wrap Around" menu item. */
-	menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Wrap Around"));
-	g_signal_connect (G_OBJECT (menu_item), "toggled",
-			  G_CALLBACK (wrap_around_menu_item_toggled), 
-			  view);
-	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item),
-					view->priv->wrap_around);
-	gtk_widget_show (menu_item);
-
-	/* create "Match Entire Word Only" menu item. */
-	menu_item = gtk_check_menu_item_new_with_mnemonic (_("Match _Entire Word Only"));
-	g_signal_connect (G_OBJECT (menu_item), "toggled",
-			  G_CALLBACK (match_entire_word_menu_item_toggled), 
-			  view);
-	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item),
-					GEDIT_SEARCH_IS_ENTIRE_WORD (view->priv->search_flags));
-	gtk_widget_show (menu_item);
-
-	/* create "Match Case" menu item. */
-	menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Match Case"));
-	g_signal_connect (G_OBJECT (menu_item), "toggled",
-			  G_CALLBACK (match_case_menu_item_toggled), 
-			  view);
-	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item),
-					GEDIT_SEARCH_IS_CASE_SENSITIVE (view->priv->search_flags));
-	gtk_widget_show (menu_item);
-}
-
-static void
-search_entry_populate_popup (GtkEntry  *entry,
-			     GtkMenu   *menu,
-			     GeditView *view)
-{
-	GtkWidget *menu_item;
-
-	view->priv->disable_popdown = TRUE;
-	g_signal_connect (menu, "hide",
-			  G_CALLBACK (search_enable_popdown), view);
-
-	if (view->priv->search_mode == GOTO_LINE)
-		return;
-
-	/* separator */
-	menu_item = gtk_menu_item_new ();
-	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
-	gtk_widget_show (menu_item);
-
-	add_popup_menu_items (GTK_WIDGET (menu), view);
-}
-
-static void
-search_entry_icon_release (GtkEntry            *entry,
-			   GtkEntryIconPosition icon_pos,
-			   GdkEventButton      *event,
-			   GeditView           *view)
-{
-	GtkWidget *menu;
-
-	if (view->priv->search_mode == GOTO_LINE ||
-	    icon_pos != GTK_ENTRY_ICON_PRIMARY)
-		return;
-
-	menu = gtk_menu_new ();
-	gtk_widget_show (menu);
-
-	view->priv->disable_popdown = TRUE;
-	g_signal_connect (menu, "hide",
-			  G_CALLBACK (search_enable_popdown), view);
-
-	add_popup_menu_items (menu, view);
-
-	gtk_menu_popup (GTK_MENU (menu),
-			NULL, NULL,
-			NULL, NULL,
-			event->button, event->time);
-}
-
-static void
-search_entry_insert_text (GtkEditable *editable, 
-			  const gchar *text, 
-			  gint         length, 
-			  gint        *position,
-			  GeditView   *view)
-{
-	if (view->priv->search_mode == GOTO_LINE)
-	{
-		gunichar c;
-		const gchar *p;
-	 	const gchar *end;
-	 	const gchar *next;
-
-		p = text;
-		end = text + length;
-
-		if (p == end)
-			return;
-
-		c = g_utf8_get_char (p);
-		
-		if (((c == '-' || c == '+') && *position == 0) ||
-		    (c == ':' && *position != 0))
-		{
-			gchar *s = NULL;
-		
-			if (c == ':')
-			{
-				s = gtk_editable_get_chars (editable, 0, -1);
-				s = g_utf8_strchr (s, -1, ':');
-			}
-			
-			if (s == NULL || s == p)
-			{
-				next = g_utf8_next_char (p);
-				p = next;
-			}
-			
-			g_free (s);
-		}
-
-		while (p != end)
-		{
-			next = g_utf8_next_char (p);
-
-			c = g_utf8_get_char (p);
-
-			if (!g_unichar_isdigit (c))
-			{
-				g_signal_stop_emission_by_name (editable, "insert_text");
-				gtk_widget_error_bell (view->priv->search_entry);
-				break;
-			}
-
-			p = next;
-		}
-	}
-	else
-	{
-		/* SEARCH mode */
-		static gboolean  insert_text = FALSE;
-		gchar           *escaped_text;
-		gint             new_len;
-
-		gedit_debug_message (DEBUG_SEARCH, "Text: %s", text);
-
-		/* To avoid recursive behavior */
-		if (insert_text)
-			return;
-
-		escaped_text = gedit_utils_escape_search_text (text);
-
-		gedit_debug_message (DEBUG_SEARCH, "Escaped Text: %s", escaped_text);
-
-		new_len = strlen (escaped_text);
-
-		if (new_len == length)
-		{
-			g_free (escaped_text);
-			return;
-		}
-
-		insert_text = TRUE;
-
-		g_signal_stop_emission_by_name (editable, "insert_text");
-		
-		gtk_editable_insert_text (editable, escaped_text, new_len, position);
-
-		insert_text = FALSE;
-
-		g_free (escaped_text);
-	}
-}
-
-static void
-customize_for_search_mode (GeditView *view)
-{
-	if (view->priv->search_mode == SEARCH)
-	{
-		gtk_entry_set_icon_from_stock (GTK_ENTRY (view->priv->search_entry),
-					       GTK_ENTRY_ICON_PRIMARY,
-					       GTK_STOCK_FIND);
-		
-		gtk_widget_set_tooltip_text (view->priv->search_entry,
-					     _("String you want to search for"));
-	}
-	else
-	{
-		gtk_entry_set_icon_from_stock (GTK_ENTRY (view->priv->search_entry),
-					       GTK_ENTRY_ICON_PRIMARY,
-					       GTK_STOCK_JUMP_TO);
-		
-		gtk_widget_set_tooltip_text (view->priv->search_entry,
-					     _("Line you want to move the cursor to"));
-	}
-}
-
-static gboolean
-completion_func (GtkEntryCompletion *completion,
-                 const char         *key,
-		 GtkTreeIter        *iter,
-		 gpointer            data)
-{
-	gchar *item = NULL;
-	gboolean ret = FALSE;
-	GtkTreeModel *model;
-	GeditViewPrivate *priv = (GeditViewPrivate *)data;
-	const gchar *real_key;
-		
-	if (priv->search_mode == GOTO_LINE)
-		return FALSE;
-		
-	real_key = gtk_entry_get_text (GTK_ENTRY (gtk_entry_completion_get_entry (completion)));
-	
-	if (g_utf8_strlen (real_key, -1) <= MIN_SEARCH_COMPLETION_KEY_LEN)
-		return FALSE;
-		
-	model = gtk_entry_completion_get_model (completion);
-	g_return_val_if_fail (gtk_tree_model_get_column_type (model, 0) == G_TYPE_STRING, 
-			      FALSE);
-			      
-	gtk_tree_model_get (model, 
-			    iter,
-			    0, 
-			    &item,
-			    -1);
-	
-	if (item == NULL)
-		return FALSE;
-		
-	if (GEDIT_SEARCH_IS_CASE_SENSITIVE (priv->search_flags))
-	{		
-		if (!strncmp (real_key, item, strlen (real_key)))
-			ret = TRUE;
-	}
-	else
-	{
-		gchar *normalized_string;
-		gchar *case_normalized_string;
-		
-		normalized_string = g_utf8_normalize (item, -1, G_NORMALIZE_ALL);
-		case_normalized_string = g_utf8_casefold (normalized_string, -1);
-      
-      		if (!strncmp (key, case_normalized_string, strlen (key)))
-			ret = TRUE;
- 		
-		g_free (normalized_string);
-		g_free (case_normalized_string);
-		
-	}
-	
-	g_free (item);
-	
-	return ret;	
-}
-
-static void
-ensure_search_window (GeditView *view)
-{  
-	GtkWidget          *frame;
-	GtkWidget          *vbox;
-	GtkWidget          *toplevel;
-	GtkEntryCompletion *completion;
-	
-	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (view));
-
-	if (view->priv->search_window != NULL)
-	{
-		if (gtk_window_has_group (GTK_WINDOW (toplevel)))
-		{
-			gtk_window_group_add_window (gtk_window_get_group (GTK_WINDOW (toplevel)),
-						     GTK_WINDOW (view->priv->search_window));
-		}
-		else if (gtk_window_has_group (GTK_WINDOW (view->priv->search_window)))
-		{
-			gtk_window_group_remove_window (gtk_window_get_group (GTK_WINDOW (view->priv->search_window)),
-							GTK_WINDOW (view->priv->search_window));
-		}
-
-		customize_for_search_mode (view);
-		
-		return;
-	}
-   
-	view->priv->search_window = gtk_window_new (GTK_WINDOW_POPUP);
-
-	if (gtk_window_has_group (GTK_WINDOW (toplevel)))
-	{
-		gtk_window_group_add_window (gtk_window_get_group (GTK_WINDOW (toplevel)),
-					     GTK_WINDOW (view->priv->search_window));
-	}
-					     
-	gtk_window_set_modal (GTK_WINDOW (view->priv->search_window), TRUE);
-	
-	g_signal_connect (view->priv->search_window, "delete_event",
-			  G_CALLBACK (search_window_delete_event),
-			  view);
-	g_signal_connect (view->priv->search_window, "key_press_event",
-			  G_CALLBACK (search_window_key_press_event),
-			  view);
-	g_signal_connect (view->priv->search_window, "button_press_event",
-			  G_CALLBACK (search_window_button_press_event),
-			  view);
-	g_signal_connect (view->priv->search_window, "scroll_event",
-			  G_CALLBACK (search_window_scroll_event),
-			  view);
-
-	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_IN);
-	gtk_widget_show (frame);
-	gtk_container_add (GTK_CONTAINER (view->priv->search_window), frame);
-
-	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_widget_show (vbox);
-	gtk_container_add (GTK_CONTAINER (frame), vbox);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 3);
-
-	/* add entry */
-	view->priv->search_entry = gtk_entry_new ();
-	gtk_widget_show (view->priv->search_entry);
-
-	g_signal_connect (view->priv->search_entry, "populate-popup",
-			  G_CALLBACK (search_entry_populate_popup),
-			  view);
-	g_signal_connect (view->priv->search_entry, "icon-release",
-			  G_CALLBACK (search_entry_icon_release),
-			  view);
-	g_signal_connect (view->priv->search_entry, "activate", 
-			  G_CALLBACK (search_entry_activate),
-			  view);
-	/* CHECK: do we really need to connect to preedit too? -- Paolo
-	g_signal_connect (GTK_ENTRY (view->priv->search_entry)->im_context, "preedit-changed",
-			  G_CALLBACK (gtk_view_search_preedit_changed),
-			  view);
-	*/		
-	g_signal_connect (view->priv->search_entry, 
-			  "insert_text",
-			  G_CALLBACK (search_entry_insert_text), 
-			  view);	  
-			  
-	gtk_container_add (GTK_CONTAINER (vbox),
-			   view->priv->search_entry);
-
-	if (search_completion_model == NULL)
-	{
-		/* Create a tree model and use it as the completion model */
-		search_completion_model = gtk_list_store_new (1, G_TYPE_STRING);
-	}
-	
-	/* Create the completion object for the search entry */
-	completion = gtk_entry_completion_new ();
-	gtk_entry_completion_set_model (completion, 
-					GTK_TREE_MODEL (search_completion_model));
-		
-	/* Use model column 0 as the text column */
-	gtk_entry_completion_set_text_column (completion, 0);
-
-	gtk_entry_completion_set_minimum_key_length (completion,
-						     MIN_SEARCH_COMPLETION_KEY_LEN);
-
-	gtk_entry_completion_set_popup_completion (completion, FALSE);
-	gtk_entry_completion_set_inline_completion (completion, TRUE);
-	
-	gtk_entry_completion_set_match_func (completion, 
-					     completion_func,
-					     view->priv,
-					     NULL);
-
-	/* Assign the completion to the entry */
-	gtk_entry_set_completion (GTK_ENTRY (view->priv->search_entry), 
-				  completion);
-	g_object_unref (completion);
-
-	gtk_widget_realize (view->priv->search_entry);
-
-	customize_for_search_mode (view);	
-}
-
-static gboolean
-get_selected_text (GtkTextBuffer *doc, gchar **selected_text, gint *len)
-{
-	GtkTextIter start, end;
-
-	g_return_val_if_fail (selected_text != NULL, FALSE);
-	g_return_val_if_fail (*selected_text == NULL, FALSE);
-
-	if (!gtk_text_buffer_get_selection_bounds (doc, &start, &end))
-	{
-		if (len != NULL)
-			len = 0;
-
-		return FALSE;
-	}
-
-	*selected_text = gtk_text_buffer_get_slice (doc, &start, &end, TRUE);
-
-	if (len != NULL)
-		*len = g_utf8_strlen (*selected_text, -1);
-
-	return TRUE;
-}
-
-static void
-init_search_entry (GeditView *view)
-{
-	GtkTextBuffer *buffer;
-				
-	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
-	
-	if (view->priv->search_mode == GOTO_LINE)
-	{	
-		gint   line;
-		gchar *line_str;
-		
-		line = gtk_text_iter_get_line (&view->priv->start_search_iter);
-		
-		line_str = g_strdup_printf ("%d", line + 1);
-		
-		gtk_entry_set_text (GTK_ENTRY (view->priv->search_entry), 
-				    line_str);
-				    
-		g_free (line_str);
-		
-		return;
-	}
-	else
-	{
-		/* SEARCH mode */
-		gboolean  selection_exists;
-		gchar    *find_text = NULL;
-		gchar    *old_find_text;
-		guint     old_find_flags = 0;
-		gint      sel_len = 0;
-
-		g_free (view->priv->old_search_text);
-		
-		old_find_text = gedit_document_get_search_text (GEDIT_DOCUMENT (buffer), 
-								&old_find_flags);
-		if (old_find_text != NULL)
-		{
-			view->priv->old_search_text = old_find_text;
-			add_search_completion_entry (old_find_text);
-		}
-
-		if (old_find_flags != 0)
-		{
-			view->priv->old_search_flags = old_find_flags;
-		}
-
-		selection_exists = get_selected_text (buffer, 
-						      &find_text, 
-						      &sel_len);
-							      				
-		if (selection_exists  && (find_text != NULL) && (sel_len <= 160))
-		{
-			gtk_entry_set_text (GTK_ENTRY (view->priv->search_entry), 
-					    find_text);	
-		}
-		else
-		{
-			gtk_entry_set_text (GTK_ENTRY (view->priv->search_entry), 
-					    "");
-		}
-		
-		g_free (find_text);
-	}
-}
-
-static void
-search_init (GtkWidget *entry,
-	     GeditView *view)
-{
-	GeditDocument *doc;
-	const gchar *entry_text;
-
-	/* renew the flush timeout */
-	if (view->priv->typeselect_flush_timeout != 0)
-	{
-		g_source_remove (view->priv->typeselect_flush_timeout);
-		view->priv->typeselect_flush_timeout =
-			g_timeout_add (GEDIT_VIEW_SEARCH_DIALOG_TIMEOUT,
-		       		       (GSourceFunc)search_entry_flush_timeout,
-		       		       view);
-	}
-	
-	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
-			
-	entry_text = gtk_entry_get_text (GTK_ENTRY (entry));
-	
-	if (view->priv->search_mode == SEARCH)
-	{
-		gchar *search_text;
-		guint  search_flags;
-
-		search_text = gedit_document_get_search_text (doc, &search_flags);
-
-		if ((search_text == NULL) ||
-		    (strcmp (search_text, entry_text) != 0) ||
-		     search_flags != view->priv->search_flags)
-		{
-			gedit_document_set_search_text (doc, 
-							entry_text,
-							view->priv->search_flags);
-		}
-
-		g_free (search_text);
-
-		run_search (view,
-			    entry_text,
-			    FALSE,
-			    view->priv->wrap_around,
-			    TRUE);
-	}
-	else
-	{
-		if (*entry_text != '\0')
-		{
-			gboolean moved, moved_offset;
-			gint line;
-			gint offset_line = 0;
-			gint line_offset = 0;
-			gchar **split_text = NULL;
-			const gchar *text;
-			
-			split_text = g_strsplit (entry_text, ":", -1);
-			
-			if (g_strv_length (split_text) > 1)
-			{
-				text = split_text[0];
-			}
-			else
-			{
-				text = entry_text;
-			}
-			
-			if (*text == '-')
-			{
-				gint cur_line = gtk_text_iter_get_line (&view->priv->start_search_iter);
-			
-				if (*(text + 1) != '\0')
-					offset_line = MAX (atoi (text + 1), 0);
-				
-				line = MAX (cur_line - offset_line, 0);
-			}
-			else if (*entry_text == '+')
-			{
-				gint cur_line = gtk_text_iter_get_line (&view->priv->start_search_iter);
-			
-				if (*(text + 1) != '\0')
-					offset_line = MAX (atoi (text + 1), 0);
-				
-				line = cur_line + offset_line;
-			}
-			else
-			{
-				line = MAX (atoi (text) - 1, 0);
-			}
-			
-			if (split_text[1] != NULL)
-			{
-				line_offset = atoi (split_text[1]);
-			}
-			
-			g_strfreev (split_text);
-			
-			moved = gedit_document_goto_line (doc, line);
-			moved_offset = gedit_document_goto_line_offset (doc, line,
-									line_offset);
-			
-			gedit_view_scroll_to_cursor (view);
-
-			if (!moved || !moved_offset)
-			{
-				set_entry_background (view->priv->search_entry,
-						      GEDIT_SEARCH_ENTRY_NOT_FOUND);
-			}
-			else
-			{
-				set_entry_background (view->priv->search_entry,
-						      GEDIT_SEARCH_ENTRY_NORMAL);
-			}
-		}
-	}
-}
-
-static gboolean
-start_interactive_search_real (GeditView *view)
-{	
-	GtkTextBuffer *buffer;
-	
-	if ((view->priv->search_window != NULL) &&
-	    gtk_widget_get_visible (view->priv->search_window))
-	{
-		return TRUE;
-	}
-
-	if (!gtk_widget_has_focus (GTK_WIDGET (view)))
-		return FALSE;
-
-	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
-
-	if (view->priv->search_mode == SEARCH)
-	{
-		gtk_text_buffer_get_selection_bounds (buffer, &view->priv->start_search_iter, NULL);
-	}
-	else
-	{
-		gtk_text_buffer_get_iter_at_mark (buffer,
-						  &view->priv->start_search_iter,
-						  gtk_text_buffer_get_insert (buffer));
-	}
-
-	ensure_search_window (view);
-
-	/* done, show it */
-	update_search_window_position (view);
-	gtk_widget_show (view->priv->search_window);
-
-	if (view->priv->search_entry_changed_id == 0)
-	{
-      		view->priv->search_entry_changed_id =
-			g_signal_connect (view->priv->search_entry,
-					  "changed",
-					  G_CALLBACK (search_init),
-					  view);
-	}
-
-	init_search_entry (view);
-
-	view->priv->typeselect_flush_timeout =  
-		g_timeout_add (GEDIT_VIEW_SEARCH_DIALOG_TIMEOUT,
-		   	       (GSourceFunc) search_entry_flush_timeout,
-		   	       view);
-
-	gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (view), FALSE);
-	gtk_widget_grab_focus (view->priv->search_entry);
-	
-	send_focus_change (view->priv->search_entry, TRUE);
-	
-	return TRUE;
-}
-
 static gboolean
 reset_searched_text (GeditView *view)
 {		
@@ -1943,22 +718,6 @@ reset_searched_text (GeditView *view)
 	gedit_document_set_search_text (doc, "", GEDIT_SEARCH_DONT_SET_FLAGS);
 	
 	return TRUE;
-}
-
-static gboolean
-start_interactive_search (GeditView *view)
-{		
-	view->priv->search_mode = SEARCH;
-	
-	return start_interactive_search_real (view);
-}
-
-static gboolean 
-start_interactive_goto_line (GeditView *view)
-{
-	view->priv->search_mode = GOTO_LINE;
-	
-	return start_interactive_search_real (view);
 }
 
 static gint

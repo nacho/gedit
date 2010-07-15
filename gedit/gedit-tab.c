@@ -2923,4 +2923,10 @@ gedit_tab_set_info_bar (GeditTab  *tab,
 	set_info_bar (tab, info_bar);
 }
 
+GtkWidget *
+_gedit_tab_get_view_frame (GeditTab *tab)
+{
+	return GTK_WIDGET (tab->priv->frame);
+}
+
 /* ex:ts=8:noet: */

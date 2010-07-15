@@ -41,6 +41,7 @@
 #include "gedit-commands.h"
 #include "gedit-debug.h"
 #include "gedit-statusbar.h"
+#include "gedit-view-frame.h"
 #include "gedit-window.h"
 #include "gedit-window-private.h"
 #include "gedit-utils.h"
@@ -692,9 +693,8 @@ _gedit_cmd_search_goto_line (GtkAction   *action,
 	   activating the binding for goto line has no effect */
 	gtk_widget_grab_focus (GTK_WIDGET (active_view));
 
-
 	/* goto line is builtin in GeditView, just activate
-	 * the corrisponding binding.
+	 * the corresponding binding.
 	 */
 	gtk_bindings_activate (GTK_OBJECT (active_view),
 			       GDK_i,
@@ -714,11 +714,11 @@ _gedit_cmd_search_incremental_search (GtkAction   *action,
 		return;
 
 	/* Focus the view if needed: we need to focus the view otherwise 
-	   activating the binding for incremental search has no effect */
+	   activating the binding for goto line has no effect */
 	gtk_widget_grab_focus (GTK_WIDGET (active_view));
 	
 	/* incremental search is builtin in GeditView, just activate
-	 * the corrisponding binding.
+	 * the corresponding binding.
 	 */
 	gtk_bindings_activate (GTK_OBJECT (active_view),
 			       GDK_k,

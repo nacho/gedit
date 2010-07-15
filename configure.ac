@@ -402,6 +402,7 @@ docs/Makefile
 docs/reference/Makefile
 gedit/dialogs/Makefile
 gedit/smclient/Makefile
+gedit/theatrics/Makefile
 gedit/Makefile
 help/Makefile
 pixmaps/Makefile
