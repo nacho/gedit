@@ -381,7 +381,7 @@ GNOME_DOC_INIT([0.9.0],,
   [AC_MSG_WARN([[gnome-doc-utils not found: documentation will not be built.]])])
 
 # Introspection
-GOBJECT_INTROSPECTION_CHECK([0.6.7])
+GOBJECT_INTROSPECTION_CHECK([0.9.3])
 
 if test "$found_introspection" = "yes"; then
 	enable_introspection=yes
