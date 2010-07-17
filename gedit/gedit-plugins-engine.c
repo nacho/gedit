@@ -137,6 +137,7 @@ require_private_typelib (void)
 	GMappedFile *mfile;
 	GTypelib *typelib;
 	const gchar *ns;
+	GError *error = NULL;
 
 	lib_dir = gedit_dirs_get_gedit_lib_dir ();
 	filename = g_build_filename (lib_dir,
@@ -154,7 +155,17 @@ require_private_typelib (void)
 		return;
 	}
 
-	typelib = g_typelib_new_from_mapped_file (mfile);
+	typelib = g_typelib_new_from_mapped_file (mfile, &error);
+
+	if (typelib == NULL)
+	{
+		g_warning ("Private typelib 'Gedit-3.0' could not be loaded: %s",
+		           error->message);
+
+		g_error_free (error);
+		return;
+	}
+
 	ns = g_irepository_load_typelib (g_irepository_get_default (),
 					 typelib,
 					 0,
