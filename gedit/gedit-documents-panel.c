@@ -85,8 +85,7 @@ notebook_get_name (GeditMultiNotebook *mnb,
 {
 	guint num;
 
-	num = gedit_multi_notebook_get_notebook_num (mnb,
-						     notebook);
+	num = gedit_multi_notebook_get_notebook_num (mnb, notebook);
 
 	return g_markup_printf_escaped ("Tab Group %i", num + 1);
 }
@@ -145,14 +144,14 @@ tab_get_name (GeditTab *tab)
 }
 
 static gboolean
-get_iters_from_notebook_and_tab (GeditDocumentsPanel *panel,
-				 GeditNotebook       *notebook,
-				 GtkTreeIter         *notebook_iter,
-				 GeditTab            *tab,
-				 GtkTreeIter         *tab_iter)
+get_iter_from_tab (GeditDocumentsPanel *panel,
+		   GeditNotebook       *notebook,
+		   GeditTab            *tab,
+		   GtkTreeIter         *tab_iter)
 {
-	gboolean success;
 	GtkTreeIter parent;
+	gboolean success;
+	gboolean search_notebook;
 
 	/* Note: we cannot use the functions of the MultiNotebook
 	 *       because in cases where the notebook or tab has been
@@ -162,21 +161,18 @@ get_iters_from_notebook_and_tab (GeditDocumentsPanel *panel,
 	gedit_debug (DEBUG_PANEL);
 
 	g_assert (notebook != NULL || tab != NULL);
-	g_assert (notebook_iter != NULL || tab_iter != NULL);
-
-	g_assert (notebook_iter == NULL || (notebook_iter != NULL && notebook != NULL));
+	g_assert (tab_iter != NULL);
 	g_assert ((tab == NULL && tab_iter == NULL) || (tab != NULL && tab_iter != NULL));
 
 	success = FALSE;
+	search_notebook = (gedit_multi_notebook_get_n_notebooks (panel->priv->mnb) > 1);
 
 	/* We never ever ask for a notebook or tab if it does not already exist in the tree */
 	g_assert (gtk_tree_model_get_iter_first (panel->priv->model, &parent));
 
 	do
 	{
-		GtkTreeIter iter;
-
-		if (notebook != NULL)
+		if (search_notebook)
 		{
 			GeditNotebook *current_notebook;
 			gboolean is_cur;
@@ -185,7 +181,6 @@ get_iters_from_notebook_and_tab (GeditDocumentsPanel *panel,
 					    &parent,
 					    NOTEBOOK_COLUMN, &current_notebook,
 					    -1);
-			g_assert (current_notebook != NULL);
 
 			is_cur = (current_notebook == notebook);
 
@@ -195,24 +190,33 @@ get_iters_from_notebook_and_tab (GeditDocumentsPanel *panel,
 			{
 				success = TRUE;
 
-				if (notebook_iter != NULL)
-				{
-					*notebook_iter = parent;
-				}
-
 				if (tab == NULL)
 				{
 					break;
 				}
 			}
 		}
+		else if (tab == NULL)
+		{
+			success = TRUE;
 
-		if (notebook == NULL || success)
+			break;
+		}
+
+		if (success || !search_notebook)
 		{
 			GeditTab *current_tab;
+			GtkTreeIter iter;
 
-			/* We never ever ask for a tab if it does not already exist in the tree */
-			g_assert (gtk_tree_model_iter_children (panel->priv->model, &iter, &parent));
+			if (search_notebook)
+			{
+				g_assert (gtk_tree_model_iter_children (panel->priv->model,
+									&iter, &parent));
+			}
+			else
+			{
+				iter = parent;
+			}
 
 			do
 			{
@@ -248,13 +252,6 @@ out:
 	/* In the current code if we are not successful then something is wrong */
 	g_assert (success);
 
-	/* And therefore will always have valid iters for those that are asked for */
-	if (notebook_iter != NULL)
-	{
-		g_assert (gtk_tree_store_iter_is_valid (GTK_TREE_STORE (panel->priv->model),
-							notebook_iter));
-	}
-
 	if (tab_iter != NULL)
 	{
 		g_assert (gtk_tree_store_iter_is_valid (GTK_TREE_STORE (panel->priv->model),
@@ -263,16 +260,6 @@ out:
 
 	return success;
 }
-
-#define get_iter_from_notebook(panel, notebook, iter)		\
-	get_iters_from_notebook_and_tab ((panel),		\
-					 (notebook), (iter),	\
-					 NULL, NULL)
-
-#define get_iter_from_tab(panel, notebook, tab, iter)		\
-	get_iters_from_notebook_and_tab ((panel),		\
-					 (notebook), NULL,	\
-					 (tab), (iter))
 
 static void
 select_iter (GeditDocumentsPanel *panel,
@@ -299,11 +286,13 @@ select_active_tab (GeditDocumentsPanel *panel)
 {
 	GeditNotebook *notebook;
 	GeditTab *tab;
+	gboolean have_tabs;
 
 	notebook = gedit_multi_notebook_get_active_notebook (panel->priv->mnb);
+	have_tabs = gtk_notebook_get_n_pages (GTK_NOTEBOOK (notebook)) > 0;
 	tab = gedit_multi_notebook_get_active_tab (panel->priv->mnb);
 
-	if (notebook != NULL && tab != NULL)
+	if (notebook != NULL && tab != NULL && have_tabs)
 	{
 		GtkTreeIter iter;
 
@@ -393,25 +382,38 @@ static void
 refresh_notebook_foreach (GeditNotebook       *notebook,
 			  GeditDocumentsPanel *panel)
 {
-	gchar *name;
-	GtkTreeIter iter;
+	gboolean add_notebook;
 
-	name = notebook_get_name (panel->priv->mnb, notebook);
+	/* If we have only one notebook we don't want to show the notebook
+	   header */
+	add_notebook = (gedit_multi_notebook_get_n_notebooks (panel->priv->mnb) > 1);
 
-	gtk_tree_store_append (GTK_TREE_STORE (panel->priv->model),
-			       &iter, NULL);
+	if (add_notebook)
+	{
+		GtkTreeIter iter;
+		gchar *name;
 
-	gtk_tree_store_set (GTK_TREE_STORE (panel->priv->model),
-			    &iter,
-			    PIXBUF_COLUMN, NULL,
-			    NAME_COLUMN, name,
-			    NOTEBOOK_COLUMN, notebook,
-			    TAB_COLUMN, NULL,
-			    -1);
+		name = notebook_get_name (panel->priv->mnb, notebook);
 
-	refresh_notebook (panel, notebook, &iter);
+		gtk_tree_store_append (GTK_TREE_STORE (panel->priv->model),
+				       &iter, NULL);
 
-	g_free (name);
+		gtk_tree_store_set (GTK_TREE_STORE (panel->priv->model),
+				    &iter,
+				    PIXBUF_COLUMN, NULL,
+				    NAME_COLUMN, name,
+				    NOTEBOOK_COLUMN, notebook,
+				    TAB_COLUMN, NULL,
+				    -1);
+
+		refresh_notebook (panel, notebook, &iter);
+
+		g_free (name);
+	}
+	else
+	{
+		refresh_notebook (panel, notebook, NULL);
+	}
 }
 
 static void
@@ -480,8 +482,6 @@ multi_notebook_tab_removed (GeditMultiNotebook  *mnb,
 			    GeditTab            *tab,
 			    GeditDocumentsPanel *panel)
 {
-	GtkTreeIter iter;
-
 	gedit_debug (DEBUG_PANEL);
 
 	g_signal_handlers_disconnect_by_func (gedit_tab_get_document (tab),
@@ -492,9 +492,7 @@ multi_notebook_tab_removed (GeditMultiNotebook  *mnb,
 					      G_CALLBACK (sync_name_and_icon),
 					      panel);
 
-	get_iter_from_tab (panel, notebook, tab, &iter);
-	gtk_tree_store_remove (GTK_TREE_STORE (panel->priv->model),
-			       &iter);
+	refresh_list (panel);
 }
 
 static void
@@ -503,12 +501,6 @@ multi_notebook_tab_added (GeditMultiNotebook  *mnb,
 			  GeditTab            *tab,
 			  GeditDocumentsPanel *panel)
 {
-	GtkTreeIter iter;
-	GtkTreeIter parent;
-	GeditTab *active_tab;
-	GdkPixbuf *pixbuf;
-	gchar *name;
-
 	gedit_debug (DEBUG_PANEL);
 
 	g_signal_connect (tab,
@@ -520,41 +512,7 @@ multi_notebook_tab_added (GeditMultiNotebook  *mnb,
 			  G_CALLBACK (sync_name_and_icon),
 			  panel);
 
-	get_iter_from_notebook (panel, notebook, &parent);
-
-	panel->priv->adding_tab = TRUE;
-
-	gtk_tree_store_append (GTK_TREE_STORE (panel->priv->model),
-			       &iter,
-			       &parent);
-
-	active_tab = gedit_window_get_active_tab (panel->priv->window);
-
-	if (tab == active_tab)
-	{
-		select_iter (panel, &iter);
-	}
-
-	name = tab_get_name (tab);
-	pixbuf = _gedit_tab_get_icon (tab);
-
-	gtk_tree_store_set (GTK_TREE_STORE (panel->priv->model),
-			    &iter,
-		            PIXBUF_COLUMN, pixbuf,
-		            NAME_COLUMN, name,
-		            NOTEBOOK_COLUMN, notebook,
-		            TAB_COLUMN, tab,
-		            -1);
-
-	panel->priv->adding_tab = FALSE;
-
-	gtk_tree_view_expand_all (GTK_TREE_VIEW (panel->priv->treeview));
-
-	g_free (name);
-	if (pixbuf != NULL)
-	{
-		g_object_unref (pixbuf);
-	}
+	refresh_list (panel);
 }
 
 static void
@@ -562,79 +520,7 @@ multi_notebook_notebook_removed (GeditMultiNotebook  *mnb,
 				 GeditNotebook       *notebook,
 				 GeditDocumentsPanel *panel)
 {
-	GtkTreeIter iter;
-
-	gedit_debug (DEBUG_PANEL);
-
-	get_iter_from_notebook (panel, notebook, &iter);
-	gtk_tree_store_remove (GTK_TREE_STORE (panel->priv->model),
-			       &iter);
-
-	/* refresh the name of the notebooks */
-	if (gtk_tree_model_get_iter_first (panel->priv->model, &iter))
-	{
-		do
-		{
-			GeditNotebook *current_notebook;
-			gchar *notebook_name;
-
-			gtk_tree_model_get (panel->priv->model,
-					    &iter,
-					    NOTEBOOK_COLUMN, &current_notebook,
-					    -1);
-			g_assert (current_notebook != NULL);
-
-			notebook_name = notebook_get_name (mnb, current_notebook);
-			gtk_tree_store_set (GTK_TREE_STORE (panel->priv->model),
-					    &iter,
-					    NAME_COLUMN, notebook_name,
-					    -1);
-
-			g_object_unref (current_notebook);
-			g_free (notebook_name);
-		} while (gtk_tree_model_iter_next (panel->priv->model, &iter));
-	}
-}
-
-static void
-multi_notebook_notebook_added (GeditMultiNotebook  *mnb,
-			       GeditNotebook       *notebook,
-			       GeditDocumentsPanel *panel)
-{
-	GtkTreeIter iter;
-	GeditNotebook *active_notebook;
-	gchar *name;
-
-	gedit_debug (DEBUG_PANEL);
-
-	panel->priv->adding_tab = TRUE;
-
-	gtk_tree_store_append (GTK_TREE_STORE (panel->priv->model),
-			       &iter,
-			       NULL);
-
-	active_notebook = gedit_multi_notebook_get_active_notebook (panel->priv->mnb);
-
-	if (notebook == active_notebook)
-	{
-		select_iter (panel, &iter);
-	}
-
-	name = notebook_get_name (panel->priv->mnb, notebook);
-
-	gtk_tree_store_set (GTK_TREE_STORE (panel->priv->model),
-			    &iter,
-		            PIXBUF_COLUMN, NULL,
-		            NAME_COLUMN, name,
-		            NOTEBOOK_COLUMN, notebook,
-		            TAB_COLUMN, NULL,
-		            -1);
-
-	panel->priv->adding_tab = FALSE;
-
-	gtk_tree_view_expand_all (GTK_TREE_VIEW (panel->priv->treeview));
-
-	g_free (name);
+	refresh_list (panel);
 }
 
 static void
@@ -662,14 +548,9 @@ set_window (GeditDocumentsPanel *panel,
 	panel->priv->mnb = GEDIT_MULTI_NOTEBOOK (_gedit_window_get_multi_notebook (window));
 
 	g_signal_connect (panel->priv->mnb,
-			  "notebook-added",
-			  G_CALLBACK (multi_notebook_notebook_added),
-			  panel);
-	g_signal_connect (panel->priv->mnb,
 			  "notebook-removed",
 			  G_CALLBACK (multi_notebook_notebook_removed),
 			  panel);
-
 	g_signal_connect (panel->priv->mnb,
 			  "tab-added",
 			  G_CALLBACK (multi_notebook_tab_added),
