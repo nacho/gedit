@@ -276,6 +276,7 @@ PKG_CHECK_MODULES(GEDIT, [
 	libpeas-1.0 >= 0.5.4
 	libpeasui-1.0 >= 0.5.4
 	gsettings-desktop-schemas
+	webkitgtk-3.0
 ])
 
 if test "$os_osx" = "no" &&
