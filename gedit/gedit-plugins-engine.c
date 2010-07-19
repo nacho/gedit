@@ -169,11 +169,15 @@ require_private_typelib (void)
 	ns = g_irepository_load_typelib (g_irepository_get_default (),
 					 typelib,
 					 0,
-					 NULL);
+					 &error);
+
+	g_typelib_free (typelib);
+
 	if (!ns)
 	{
-		g_warning ("Typelib 'Gedit-3.0' could not be loaded");
-		g_typelib_free (typelib);
+		g_warning ("Typelib 'Gedit-3.0' could not be loaded: %s",
+		           error->message);
+		g_error_free (error);
 		return;
 	}
 
