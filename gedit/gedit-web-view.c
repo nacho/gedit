@@ -33,6 +33,12 @@ struct _GeditWebViewPrivate
 	GeditDocument *doc;
 };
 
+enum
+{
+	PROP_0,
+	PROP_DOCUMENT
+};
+
 static void	gedit_view_iface_init		(GeditViewIface  *iface);
 
 G_DEFINE_TYPE_WITH_CODE (GeditWebView,
@@ -42,9 +48,56 @@ G_DEFINE_TYPE_WITH_CODE (GeditWebView,
 			 			gedit_view_iface_init))
 
 static void
-gedit_web_view_finalize (GObject *object)
+gedit_web_view_dispose (GObject *object)
 {
+	GeditWebView *view = GEDIT_WEB_VIEW (object);
+
+	if (view->priv->doc != NULL)
+	{
+		g_object_unref (view->priv->doc);
+		view->priv->doc = NULL;
+	}
+
 	G_OBJECT_CLASS (gedit_web_view_parent_class)->finalize (object);
+}
+
+static void
+gedit_web_view_get_property (GObject    *object,
+			     guint       prop_id,
+			     GValue     *value,
+			     GParamSpec *pspec)
+{
+	GeditWebView *view = GEDIT_WEB_VIEW (object);
+
+	switch (prop_id)
+	{
+		case PROP_DOCUMENT:
+			g_value_set_object (value,
+					    view->priv->doc);
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_web_view_set_property (GObject    *object,
+			     guint       prop_id,
+			     const GValue     *value,
+			     GParamSpec *pspec)
+{
+	GeditWebView *view = GEDIT_WEB_VIEW (object);
+
+	switch (prop_id)
+	{
+		case PROP_DOCUMENT:
+			view->priv->doc = g_value_dup_object (value);
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
 }
 
 static void
@@ -52,7 +105,19 @@ gedit_web_view_class_init (GeditWebViewClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	object_class->finalize = gedit_web_view_finalize;
+	object_class->dispose = gedit_web_view_dispose;
+	object_class->get_property = gedit_web_view_get_property;
+	object_class->set_property = gedit_web_view_set_property;
+
+	g_object_class_install_property (object_class,
+					 PROP_DOCUMENT,
+					 g_param_spec_object ("document",
+							      "Document",
+							      "The Document",
+							      GEDIT_TYPE_DOCUMENT,
+							      G_PARAM_READWRITE |
+							      G_PARAM_CONSTRUCT_ONLY |
+							      G_PARAM_STATIC_STRINGS));
 
 	g_type_class_add_private (object_class, sizeof (GeditWebViewPrivate));
 }
@@ -151,10 +216,10 @@ gedit_view_iface_init (GeditViewIface *iface)
 	iface->set_font = gedit_view_set_font_impl;
 }
 
-GeditView *
+GtkWidget *
 gedit_web_view_new (GeditDocument *doc)
 {
-	return GEDIT_VIEW (g_object_new (GEDIT_TYPE_WEB_VIEW,
+	return GTK_WIDGET (g_object_new (GEDIT_TYPE_WEB_VIEW,
 					 "document", doc,
 					 NULL));
 }

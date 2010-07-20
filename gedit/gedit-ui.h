@@ -113,6 +113,11 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Split Vertically"), G_CALLBACK (_gedit_cmd_view_split_vertically) },
 	{ "SplitUnsplit", NULL, N_("_Unsplit"), NULL,
 	  N_("Unsplit"), G_CALLBACK (_gedit_cmd_view_unsplit) },
+	{ "Viewer", NULL, N_("View _Type") },
+	{ "ViewerTextView", NULL, N_("Text View"), NULL,
+	  N_("Text View"), G_CALLBACK (_gedit_cmd_view_text_view) },
+	{ "ViewerWebView", NULL, N_("Web View"), NULL,
+	  N_("Web View"), G_CALLBACK (_gedit_cmd_view_web_view) },
 
 	/* Search menu */
 	{ "SearchFind", GTK_STOCK_FIND, N_("_Find..."), "<control>F",

@@ -172,4 +172,18 @@ _gedit_cmd_view_unsplit (GtkAction   *action,
 	_gedit_tab_unsplit (tab);
 }
 
+void
+_gedit_cmd_view_text_view (GtkAction   *action,
+			   GeditWindow *window)
+{
+	GeditView *view;
+}
+
+void
+_gedit_cmd_view_web_view (GtkAction   *action,
+			  GeditWindow *window)
+{
+	
+}
+
 /* ex:ts=8:noet: */

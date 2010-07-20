@@ -129,6 +129,10 @@ void		_gedit_cmd_view_split_vertically	(GtkAction   *action,
 							 GeditWindow *window);
 void		_gedit_cmd_view_unsplit			(GtkAction   *action,
 							 GeditWindow *window);
+void		_gedit_cmd_view_text_view		(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_view_web_view		(GtkAction   *action,
+							 GeditWindow *window);
 
 void		_gedit_cmd_search_find			(GtkAction   *action,
 							 GeditWindow *window);

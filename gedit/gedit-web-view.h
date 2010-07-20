@@ -56,7 +56,7 @@ struct _GeditWebViewClass
 
 GType		 gedit_web_view_get_type	(void) G_GNUC_CONST;
 
-GeditView	*gedit_web_view_new		(GeditDocument *doc);
+GtkWidget	*gedit_web_view_new		(GeditDocument *doc);
 
 
 G_END_DECLS

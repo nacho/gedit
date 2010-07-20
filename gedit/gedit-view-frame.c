@@ -22,13 +22,15 @@
 
 #include "gedit-view-frame.h"
 #include "gedit-text-view.h"
+#include "gedit-web-view.h"
 
 
 #define GEDIT_VIEW_FRAME_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_VIEW_FRAME, GeditViewFramePrivate))
 
 struct _GeditViewFramePrivate
 {
-	GtkWidget     *view;
+	GtkWidget     *active_view;
+	GSList        *views;
 };
 
 enum
@@ -113,6 +115,7 @@ static void
 gedit_view_frame_init (GeditViewFrame *frame)
 {
 	GeditDocument *doc;
+	GtkWidget *web_view;
 	GtkWidget *sw;
 
 	frame->priv = GEDIT_VIEW_FRAME_GET_PRIVATE (frame);
@@ -123,10 +126,11 @@ gedit_view_frame_init (GeditViewFrame *frame)
 						     view_frame_mount_operation_factory,
 						     frame);
 
-	frame->priv->view = gedit_text_view_new (doc);
-	gtk_widget_show (frame->priv->view);
+	frame->priv->active_view = gedit_text_view_new (doc);
+	gtk_widget_show (frame->priv->active_view);
 
-	g_object_unref (doc);
+	frame->priv->views = g_slist_append (frame->priv->views,
+					     frame->priv->active_view);
 
 	/* Create the scrolled window */
 	sw = gtk_scrolled_window_new (NULL, NULL);
@@ -135,10 +139,30 @@ gedit_view_frame_init (GeditViewFrame *frame)
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
 
-	gtk_container_add (GTK_CONTAINER (sw), frame->priv->view);
+	gtk_container_add (GTK_CONTAINER (sw), frame->priv->active_view);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
 					     GTK_SHADOW_IN);
 	gtk_widget_show (sw);
+
+	gtk_box_pack_start (GTK_BOX (frame), sw, TRUE, TRUE, 0);
+
+	/* FIXME: this is for testing: Web view */
+	web_view = gedit_web_view_new (doc);
+
+	g_object_unref (doc);
+
+	holder->priv->views = g_slist_append (holder->priv->views, web_view);
+
+	/* Create the scrolled window */
+	sw = gtk_scrolled_window_new (NULL, NULL);
+
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+					GTK_POLICY_AUTOMATIC,
+					GTK_POLICY_AUTOMATIC);
+
+	gtk_container_add (GTK_CONTAINER (sw), web_view);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
+					     GTK_SHADOW_IN);
 
 	gtk_box_pack_start (GTK_BOX (frame), sw, TRUE, TRUE, 0);
 }
@@ -154,7 +178,7 @@ gedit_view_frame_get_document (GeditViewFrame *frame)
 {
 	g_return_val_if_fail (GEDIT_IS_VIEW_FRAME (frame), NULL);
 
-	return GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (frame->priv->view)));
+	return gedit_view_get_document (GEDIT_VIEW (frame->priv->active_view));
 }
 
 GeditView *
@@ -162,5 +186,27 @@ gedit_view_frame_get_view (GeditViewFrame *frame)
 {
 	g_return_val_if_fail (GEDIT_IS_VIEW_FRAME (frame), NULL);
 
-	return GEDIT_VIEW (frame->priv->view);
+	return GEDIT_VIEW (frame->priv->active_view);
+}
+
+void
+gedit_view_frame_set_active_view (GeditViewFrame *frame,
+				  GeditView      *view)
+{
+	g_return_if_fail (GEDIT_IS_VIEW_FRAME (frame));
+
+	if (frame->priv->active_view != GTK_WIDGET (view))
+	{
+		gtk_widget_hide (frame->priv->active_view);
+		frame->priv->active_view = GTK_WIDGET (view);
+		gtk_widget_show (frame->priv->active_view);
+	}
+}
+
+GSList *
+gedit_view_frame_get_views (GeditViewFrame *frame)
+{
+	g_return_val_if_fail (GEDIT_IS_VIEW_FRAME (frame), NULL);
+
+	return frame->priv->views;
 }
