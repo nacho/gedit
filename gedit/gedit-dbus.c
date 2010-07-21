@@ -698,6 +698,7 @@ command_line_proxy_ready (GDBusConnection *connection,
 
 	g_dbus_connection_send_message_with_reply (g_dbus_proxy_get_connection (proxy),
 	                                           message,
+	                                           G_DBUS_SEND_MESSAGE_FLAGS_NONE,
 	                                           -1,
 	                                           NULL,
 	                                           NULL,
