@@ -1522,6 +1522,7 @@ set_non_homogeneus (GtkWidget *widget,
 
 static void
 toolbar_visibility_changed (GtkWidget   *toolbar,
+			    GParamSpec  *pspec,
 			    GeditWindow *window)
 {
 	gboolean visible;
@@ -1766,11 +1767,7 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 			       NULL);
 
 	g_signal_connect_after (G_OBJECT (window->priv->toolbar),
-				"show",
-				G_CALLBACK (toolbar_visibility_changed),
-				window);
-	g_signal_connect_after (G_OBJECT (window->priv->toolbar),
-				"hide",
+				"notify::visible",
 				G_CALLBACK (toolbar_visibility_changed),
 				window);
 }
@@ -2020,6 +2017,7 @@ set_statusbar_style (GeditWindow *window,
 
 static void
 statusbar_visibility_changed (GtkWidget   *statusbar,
+			      GParamSpec  *pspec,
 			      GeditWindow *window)
 {
 	gboolean visible;
@@ -2239,11 +2237,7 @@ create_statusbar (GeditWindow *window,
 			  window);
 
 	g_signal_connect_after (G_OBJECT (window->priv->statusbar),
-				"show",
-				G_CALLBACK (statusbar_visibility_changed),
-				window);
-	g_signal_connect_after (G_OBJECT (window->priv->statusbar),
-				"hide",
+				"notify::visible",
 				G_CALLBACK (statusbar_visibility_changed),
 				window);
 
@@ -3853,6 +3847,7 @@ vpaned_restore_position (GtkWidget   *widget,
 
 static void
 side_panel_visibility_changed (GtkWidget   *side_panel,
+			       GParamSpec  *pspec,
 			       GeditWindow *window)
 {
 	gboolean visible;
@@ -3892,11 +3887,7 @@ create_side_panel (GeditWindow *window)
 			 FALSE);
 
 	g_signal_connect_after (window->priv->side_panel,
-				"show",
-				G_CALLBACK (side_panel_visibility_changed),
-				window);
-	g_signal_connect_after (window->priv->side_panel,
-				"hide",
+				"notify::visible",
 				G_CALLBACK (side_panel_visibility_changed),
 				window);
 
@@ -3910,6 +3901,7 @@ create_side_panel (GeditWindow *window)
 
 static void
 bottom_panel_visibility_changed (GeditPanel  *bottom_panel,
+				 GParamSpec  *pspec,
 				 GeditWindow *window)
 {
 	gboolean visible;
@@ -3986,11 +3978,7 @@ create_bottom_panel (GeditWindow *window)
 			 FALSE);
 
 	g_signal_connect_after (window->priv->bottom_panel,
-				"show",
-				G_CALLBACK (bottom_panel_visibility_changed),
-				window);
-	g_signal_connect_after (window->priv->bottom_panel,
-				"hide",
+				"notify::visible",
 				G_CALLBACK (bottom_panel_visibility_changed),
 				window);
 }
