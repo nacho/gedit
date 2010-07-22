@@ -339,7 +339,7 @@ gedit_commands_load_location (GeditWindow         *window,
  *
  * Ignore non-existing locations
  *
- * Returns: (transfer container):
+ * Returns: (element-type Gedit.Document) (transfer container):
  */
 GSList *
 gedit_commands_load_locations (GeditWindow         *window,
