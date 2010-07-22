@@ -73,6 +73,20 @@ gedit_plugins_engine_init (GeditPluginsEngine *engine)
 }
 
 static void
+gedit_plugins_engine_dispose (GObject *object)
+{
+	GeditPluginsEngine *engine = GEDIT_PLUGINS_ENGINE (object);
+
+	if (engine->priv->plugin_settings != NULL)
+	{
+		g_object_unref (engine->priv->plugin_settings);
+		engine->priv->plugin_settings = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_plugins_engine_parent_class)->dispose (object);
+}
+
+static void
 save_plugin_list (GeditPluginsEngine *engine)
 {
 	gchar **loaded_plugins;
@@ -121,7 +135,10 @@ gedit_plugins_engine_unload_plugin (PeasEngine     *engine,
 static void
 gedit_plugins_engine_class_init (GeditPluginsEngineClass *klass)
 {
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	PeasEngineClass *engine_class = PEAS_ENGINE_CLASS (klass);
+
+	object_class->dispose = gedit_plugins_engine_dispose;
 
 	engine_class->load_plugin = gedit_plugins_engine_load_plugin;
 	engine_class->unload_plugin = gedit_plugins_engine_unload_plugin;
