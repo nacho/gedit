@@ -171,8 +171,6 @@ require_private_typelib (void)
 					 0,
 					 &error);
 
-	g_typelib_free (typelib);
-
 	if (!ns)
 	{
 		g_warning ("Typelib 'Gedit-3.0' could not be loaded: %s",
