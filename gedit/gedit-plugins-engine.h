@@ -64,9 +64,6 @@ GType			 gedit_plugins_engine_get_type		(void) G_GNUC_CONST;
 
 GeditPluginsEngine	*gedit_plugins_engine_get_default	(void);
 
-/* private for gconf notification */
-void		 gedit_plugins_engine_active_plugins_changed	(GeditPluginsEngine *engine);
-
 G_END_DECLS
 
 #endif  /* __GEDIT_PLUGINS_ENGINE_H__ */

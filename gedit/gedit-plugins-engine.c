@@ -45,15 +45,11 @@
 #include "gedit-settings.h"
 #include "gedit-utils.h"
 
-#define GEDIT_PLUGINS_ENGINE_BASE_KEY "/apps/gedit-2/plugins"
-#define GEDIT_PLUGINS_ENGINE_KEY GEDIT_PLUGINS_ENGINE_BASE_KEY "/active-plugins"
-
 G_DEFINE_TYPE(GeditPluginsEngine, gedit_plugins_engine, PEAS_TYPE_ENGINE)
 
 struct _GeditPluginsEnginePrivate
 {
 	GSettings *plugin_settings;
-	gboolean loading_plugin_list : 1;
 };
 
 GeditPluginsEngine *default_engine = NULL;
@@ -68,8 +64,6 @@ gedit_plugins_engine_init (GeditPluginsEngine *engine)
 						    GeditPluginsEnginePrivate);
 
 	engine->priv->plugin_settings = g_settings_new ("org.gnome.gedit.plugins");
-
-	engine->priv->loading_plugin_list = FALSE;
 }
 
 static void
@@ -87,61 +81,11 @@ gedit_plugins_engine_dispose (GObject *object)
 }
 
 static void
-save_plugin_list (GeditPluginsEngine *engine)
-{
-	gchar **loaded_plugins;
-
-	loaded_plugins = peas_engine_get_loaded_plugins (PEAS_ENGINE (engine));
-
-	g_settings_set_strv (engine->priv->plugin_settings,
-			     GEDIT_SETTINGS_ACTIVE_PLUGINS,
-			     (const gchar * const *) loaded_plugins);
-
-	g_strfreev (loaded_plugins);
-}
-
-static void
-gedit_plugins_engine_load_plugin (PeasEngine     *engine,
-				  PeasPluginInfo *info)
-{
-	GeditPluginsEngine *gengine = GEDIT_PLUGINS_ENGINE (engine);
-
-	PEAS_ENGINE_CLASS (gedit_plugins_engine_parent_class)->load_plugin (engine, info);
-
-	/* We won't save the plugin list if we are currently loading the
-	 * plugins from the saved list */
-	if (!gengine->priv->loading_plugin_list && peas_plugin_info_is_loaded (info))
-	{
-		save_plugin_list (gengine);
-	}
-}
-
-static void
-gedit_plugins_engine_unload_plugin (PeasEngine     *engine,
-				    PeasPluginInfo *info)
-{
-	GeditPluginsEngine *gengine = GEDIT_PLUGINS_ENGINE (engine);
-
-	PEAS_ENGINE_CLASS (gedit_plugins_engine_parent_class)->unload_plugin (engine, info);
-
-	/* We won't save the plugin list if we are currently unloading the
-	 * plugins from the saved list */
-	if (!gengine->priv->loading_plugin_list && !peas_plugin_info_is_loaded (info))
-	{
-		save_plugin_list (gengine);
-	}
-}
-
-static void
 gedit_plugins_engine_class_init (GeditPluginsEngineClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	PeasEngineClass *engine_class = PEAS_ENGINE_CLASS (klass);
 
 	object_class->dispose = gedit_plugins_engine_dispose;
-
-	engine_class->load_plugin = gedit_plugins_engine_load_plugin;
-	engine_class->unload_plugin = gedit_plugins_engine_unload_plugin;
 
 	g_type_class_add_private (klass, sizeof (GeditPluginsEnginePrivate));
 }
@@ -239,24 +183,13 @@ gedit_plugins_engine_get_default (void)
 	g_object_add_weak_pointer (G_OBJECT (default_engine),
 				   (gpointer) &default_engine);
 
-	gedit_plugins_engine_active_plugins_changed (default_engine);
+	g_settings_bind (default_engine->priv->plugin_settings,
+	                 GEDIT_SETTINGS_ACTIVE_PLUGINS,
+	                 default_engine,
+	                 "loaded-plugins",
+	                 G_SETTINGS_BIND_DEFAULT);
 
 	return default_engine;
-}
-
-void
-gedit_plugins_engine_active_plugins_changed (GeditPluginsEngine *engine)
-{
-	gchar **loaded_plugins;
-
-	loaded_plugins = g_settings_get_strv (engine->priv->plugin_settings,
-					      GEDIT_SETTINGS_ACTIVE_PLUGINS);
-
-	engine->priv->loading_plugin_list = TRUE;
-	peas_engine_set_loaded_plugins (PEAS_ENGINE (engine),
-					(const gchar **) loaded_plugins);
-	engine->priv->loading_plugin_list = FALSE;
-	g_strfreev (loaded_plugins);
 }
 
 /* ex:set ts=8 noet: */

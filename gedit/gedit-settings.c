@@ -649,18 +649,6 @@ on_max_recents_changed (GSettings     *settings,
 }
 
 static void
-on_active_plugins_changed (GSettings     *settings,
-			   const gchar   *key,
-			   GeditSettings *gs)
-{
-	GeditPluginsEngine *engine;
-
-	engine = gedit_plugins_engine_get_default ();
-
-	gedit_plugins_engine_active_plugins_changed (engine);
-}
-
-static void
 gedit_settings_init (GeditSettings *gs)
 {
 	gs->priv = GEDIT_SETTINGS_GET_PRIVATE (gs);
@@ -772,12 +760,6 @@ initialize (GeditSettings *gs)
 	g_signal_connect (gs->priv->ui,
 			  "changed::max-recents",
 			  G_CALLBACK (on_max_recents_changed),
-			  gs);
-
-	/* plugins changes */
-	g_signal_connect (gs->priv->plugins,
-			  "changed::active-plugins",
-			  G_CALLBACK (on_active_plugins_changed),
 			  gs);
 }
 
