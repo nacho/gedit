@@ -385,6 +385,9 @@ gedit_window_window_state_event (GtkWidget           *widget,
 
 		_gedit_statusbar_set_has_resize_grip (GEDIT_STATUSBAR (window->priv->statusbar),
 						      show);
+
+		gedit_multi_notebook_collapse_notebook_border (window->priv->multi_notebook,
+							       !show);
 	}
 
 	if (GTK_WIDGET_CLASS (gedit_window_parent_class)->window_state_event)

@@ -134,6 +134,9 @@ void		gedit_notebook_set_tab_drag_and_drop_enabled
 gboolean	gedit_notebook_get_tab_drag_and_drop_enabled
 						(GeditNotebook *nb);
 
+void		gedit_notebook_collapse_border	(GeditNotebook *nb,
+						 gboolean       collapse);
+
 G_END_DECLS
 
 #endif /* GEDIT_NOTEBOOK_H */

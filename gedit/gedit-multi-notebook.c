@@ -859,6 +859,22 @@ gedit_multi_notebook_next_notebook (GeditMultiNotebook *mnb)
 }
 
 void
+gedit_multi_notebook_collapse_notebook_border (GeditMultiNotebook *mnb,
+					       gboolean            collapse)
+{
+	GList *l;
+
+	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb));
+
+	for (l = mnb->priv->notebooks; l != NULL; l = g_list_next (l))
+	{
+		GeditNotebook *notebook = GEDIT_NOTEBOOK (l->data);
+
+		gedit_notebook_collapse_border (notebook, collapse);
+	}
+}
+
+void
 gedit_multi_notebook_foreach_notebook (GeditMultiNotebook *mnb,
 				       GtkCallback         callback,
 				       gpointer            callback_data)

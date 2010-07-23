@@ -121,6 +121,9 @@ void			 gedit_multi_notebook_remove_active_notebook	(GeditMultiNotebook *mnb);
 void			 gedit_multi_notebook_previous_notebook		(GeditMultiNotebook *mnb);
 void			 gedit_multi_notebook_next_notebook		(GeditMultiNotebook *mnb);
 
+void			 gedit_multi_notebook_collapse_notebook_border	(GeditMultiNotebook *mnb,
+									 gboolean            collapse);
+
 void			 gedit_multi_notebook_foreach_notebook		(GeditMultiNotebook *mnb,
 									 GtkCallback         callback,
 									 gpointer            callback_data);

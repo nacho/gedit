@@ -68,10 +68,13 @@ struct _GeditNotebookPrivate
 
 	GeditNotebookShowTabsModeType show_tabs_mode;
 
+	gint           xthickness;
+
 	guint          drag_in_progress : 1;
 	guint          close_buttons_sensitive : 1;
 	guint          tab_drag_and_drop_enabled : 1;
 	guint          destroy_has_run : 1;
+	guint          collapse_border : 1;
 };
 
 G_DEFINE_TYPE(GeditNotebook, gedit_notebook, GTK_TYPE_NOTEBOOK)
@@ -216,6 +219,20 @@ gedit_notebook_grab_focus (GtkWidget *widget)
 }
 
 static void
+gedit_notebook_style_set (GtkWidget *widget,
+			  GtkStyle  *previous_style)
+{
+	GeditNotebook *nb = GEDIT_NOTEBOOK (widget);
+
+	if (previous_style != NULL && nb->priv->collapse_border)
+	{
+		previous_style->xthickness = 0;
+	}
+
+	GTK_WIDGET_CLASS (gedit_notebook_parent_class)->style_set (widget, previous_style);
+}
+
+static void
 gedit_notebook_class_init (GeditNotebookClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -228,7 +245,8 @@ gedit_notebook_class_init (GeditNotebookClass *klass)
 	object_class->set_property = gedit_notebook_set_property;
 
 	gtkwidget_class->grab_focus = gedit_notebook_grab_focus;
-	
+	gtkwidget_class->style_set = gedit_notebook_style_set;
+
 	notebook_class->change_current_page = gedit_notebook_change_current_page;
 
 	g_object_class_install_property (object_class, PROP_SHOW_TABS_MODE,
@@ -787,6 +805,7 @@ gedit_notebook_init (GeditNotebook *notebook)
 	gtk_notebook_set_scrollable (GTK_NOTEBOOK (notebook), TRUE);
 	gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
+	gtk_container_set_border_width (GTK_CONTAINER (notebook), 0);
 
 	g_settings_bind (notebook->priv->ui_settings,
 			 GEDIT_SETTINGS_SHOW_TABS_MODE,
@@ -1136,6 +1155,36 @@ gedit_notebook_get_tab_drag_and_drop_enabled (GeditNotebook *nb)
 	g_return_val_if_fail (GEDIT_IS_NOTEBOOK (nb), TRUE);
 	
 	return nb->priv->tab_drag_and_drop_enabled;
+}
+
+void
+gedit_notebook_collapse_border (GeditNotebook *nb,
+				gboolean       collapse)
+{
+	GtkRcStyle *rcstyle;
+	gint xthickness;
+
+	g_return_if_fail (GEDIT_IS_NOTEBOOK (nb));
+
+	nb->priv->collapse_border = collapse;
+
+	if (collapse)
+	{
+		GtkStyle *style;
+
+		style = gtk_widget_get_style (GTK_WIDGET (nb));
+		nb->priv->xthickness = style->xthickness;
+		xthickness = 0;
+	}
+	else
+	{
+		xthickness = nb->priv->xthickness;
+	}
+
+	rcstyle = gtk_rc_style_new ();
+	rcstyle->xthickness = xthickness;
+	gtk_widget_modify_style (GTK_WIDGET (nb), rcstyle);
+	g_object_unref (rcstyle);
 }
 
 /* ex:ts=8:noet: */
