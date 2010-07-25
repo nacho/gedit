@@ -1289,23 +1289,10 @@ search_enable_popdown (GtkWidget *widget,
 }
 
 static void
-search_entry_populate_popup (GtkEntry  *entry,
-			     GtkMenu   *menu,
-			     GeditView *view)
+add_popup_menu_items (GtkWidget *menu,
+		      GeditView *view)
 {
 	GtkWidget *menu_item;
-
-	view->priv->disable_popdown = TRUE;
-	g_signal_connect (menu, "hide",
-		    	  G_CALLBACK (search_enable_popdown), view);
-
-	if (view->priv->search_mode == GOTO_LINE)
-		return;
-
-	/* separator */
-	menu_item = gtk_menu_item_new ();
-	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
-	gtk_widget_show (menu_item);
 
 	/* create "Wrap Around" menu item. */
 	menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Wrap Around"));
@@ -1336,6 +1323,55 @@ search_entry_populate_popup (GtkEntry  *entry,
 	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item),
 					GEDIT_SEARCH_IS_CASE_SENSITIVE (view->priv->search_flags));
 	gtk_widget_show (menu_item);
+}
+
+static void
+search_entry_populate_popup (GtkEntry  *entry,
+			     GtkMenu   *menu,
+			     GeditView *view)
+{
+	GtkWidget *menu_item;
+
+	view->priv->disable_popdown = TRUE;
+	g_signal_connect (menu, "hide",
+			  G_CALLBACK (search_enable_popdown), view);
+
+	if (view->priv->search_mode == GOTO_LINE)
+		return;
+
+	/* separator */
+	menu_item = gtk_menu_item_new ();
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+	gtk_widget_show (menu_item);
+
+	add_popup_menu_items (GTK_WIDGET (menu), view);
+}
+
+static void
+search_entry_icon_release (GtkEntry            *entry,
+			   GtkEntryIconPosition icon_pos,
+			   GdkEventButton      *event,
+			   GeditView           *view)
+{
+	GtkWidget *menu;
+
+	if (view->priv->search_mode == GOTO_LINE ||
+	    icon_pos != GTK_ENTRY_ICON_PRIMARY)
+		return;
+
+	menu = gtk_menu_new ();
+	gtk_widget_show (menu);
+
+	view->priv->disable_popdown = TRUE;
+	g_signal_connect (menu, "hide",
+			  G_CALLBACK (search_enable_popdown), view);
+
+	add_popup_menu_items (menu, view);
+
+	gtk_menu_popup (GTK_MENU (menu),
+			NULL, NULL,
+			NULL, NULL,
+			event->button, event->time);
 }
 
 static void
@@ -1579,9 +1615,12 @@ ensure_search_window (GeditView *view)
 	/* add entry */
 	view->priv->search_entry = gtk_entry_new ();
 	gtk_widget_show (view->priv->search_entry);
-	
-	g_signal_connect (view->priv->search_entry, "populate_popup",
+
+	g_signal_connect (view->priv->search_entry, "populate-popup",
 			  G_CALLBACK (search_entry_populate_popup),
+			  view);
+	g_signal_connect (view->priv->search_entry, "icon-release",
+			  G_CALLBACK (search_entry_icon_release),
 			  view);
 	g_signal_connect (view->priv->search_entry, "activate", 
 			  G_CALLBACK (search_entry_activate),
