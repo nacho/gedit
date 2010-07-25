@@ -458,7 +458,9 @@ sync_name_and_icon (GeditTab            *tab,
 
 	gedit_debug (DEBUG_PANEL);
 
-	get_iter_from_tab (panel, NULL, tab, &iter);
+	get_iter_from_tab (panel,
+			   gedit_multi_notebook_get_active_notebook (panel->priv->mnb),
+			   tab, &iter);
 
 	name = tab_get_name (tab);
 	pixbuf = _gedit_tab_get_icon (tab);
