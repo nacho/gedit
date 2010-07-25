@@ -275,6 +275,7 @@ PKG_CHECK_MODULES(GEDIT, [
 	gtksourceview-3.0 >= 2.11.2
 	libpeas-1.0 >= 0.5.2
 	libpeasui-1.0 >= 0.5.2
+	gsettings-desktop-schemas
 ])
 
 if test "$os_osx" = "no" &&

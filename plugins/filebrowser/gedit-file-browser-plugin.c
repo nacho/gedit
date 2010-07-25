@@ -54,7 +54,7 @@
 #define NAUTILUS_ENABLE_DELETE_KEY	"enable-delete"
 #define NAUTILUS_CONFIRM_TRASH_KEY	"confirm-trash"
 
-#define TERMINAL_BASE_SETTINGS		"org.gnome.Desktop.Applications.Terminal"
+#define TERMINAL_BASE_SETTINGS		"org.gnome.desktop.default-applications.terminal"
 #define TERMINAL_EXEC_KEY		"exec"
 
 #define GEDIT_FILE_BROWSER_PLUGIN_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_FILE_BROWSER_PLUGIN, GeditFileBrowserPluginPrivate))

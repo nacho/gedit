@@ -668,17 +668,17 @@ initialize (GeditSettings *gs)
 	gs->priv->plugins = g_settings_get_child (G_SETTINGS (gs), "plugins");
 	
 	/* Load settings */
-	gs->priv->lockdown = g_settings_new ("org.gnome.Desktop.Lockdown");
+	gs->priv->lockdown = g_settings_new ("org.gnome.desktop.lockdown");
 	
 	g_signal_connect (gs->priv->lockdown,
 			  "changed",
 			  G_CALLBACK (on_lockdown_changed),
 			  NULL);
 
-	gs->priv->interface = g_settings_new ("org.gnome.Desktop.Interface");
+	gs->priv->interface = g_settings_new ("org.gnome.desktop.interface");
 	
 	g_signal_connect (gs->priv->interface,
-			  "changed",
+			  "changed::monospace-font-name",
 			  G_CALLBACK (on_system_font_changed),
 			  gs);
 
