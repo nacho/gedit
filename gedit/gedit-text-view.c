@@ -1316,9 +1316,9 @@ add_popup_menu_items (GtkWidget *menu,
 }
 
 static void
-search_entry_populate_popup (GtkEntry  *entry,
-			     GtkMenu   *menu,
-			     GeditView *view)
+search_entry_populate_popup (GtkEntry      *entry,
+			     GtkMenu       *menu,
+			     GeditTextView *view)
 {
 	GtkWidget *menu_item;
 
@@ -1341,7 +1341,7 @@ static void
 search_entry_icon_release (GtkEntry            *entry,
 			   GtkEntryIconPosition icon_pos,
 			   GdkEventButton      *event,
-			   GeditView           *view)
+			   GeditTextView       *view)
 {
 	GtkWidget *menu;
 
