@@ -40,7 +40,8 @@
 #include "gedit-debug.h"
 #include "gedit-window.h"
 #include "gedit-window-private.h"
-
+#include "gedit-view-frame.h"
+#include "gedit-view-holder.h"
 
 void
 _gedit_cmd_view_show_toolbar (GtkAction   *action,
@@ -176,14 +177,30 @@ void
 _gedit_cmd_view_text_view (GtkAction   *action,
 			   GeditWindow *window)
 {
-	GeditView *view;
+	GeditTab *tab;
+	GtkWidget *holder;
+	GeditViewFrame *frame;
+
+	tab = gedit_window_get_active_tab (window);
+	holder = _gedit_tab_get_view_holder (tab);
+	frame = gedit_view_holder_get_active_frame (GEDIT_VIEW_HOLDER (holder));
+
+	gedit_view_frame_set_text_view (frame);
 }
 
 void
 _gedit_cmd_view_web_view (GtkAction   *action,
 			  GeditWindow *window)
 {
-	
+	GeditTab *tab;
+	GtkWidget *holder;
+	GeditViewFrame *frame;
+
+	tab = gedit_window_get_active_tab (window);
+	holder = _gedit_tab_get_view_holder (tab);
+	frame = gedit_view_holder_get_active_frame (GEDIT_VIEW_HOLDER (holder));
+
+	gedit_view_frame_set_web_view (frame);
 }
 
 /* ex:ts=8:noet: */

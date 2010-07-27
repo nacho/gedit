@@ -3018,4 +3018,10 @@ _gedit_tab_can_split (GeditTab *tab)
 	return gedit_view_holder_can_split (tab->priv->holder);
 }
 
+GtkWidget *
+_gedit_tab_get_view_holder (GeditTab *tab)
+{
+	return GTK_WIDGET (tab->priv->holder);
+}
+
 /* ex:ts=8:noet: */

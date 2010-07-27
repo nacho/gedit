@@ -185,6 +185,8 @@ gboolean	 _gedit_tab_can_split		(GeditTab            *tab);
 void		 _gedit_tab_split		(GeditTab            *tab,
 						 GtkOrientation       orientation);
 
+GtkWidget	*_gedit_tab_get_view_holder	(GeditTab            *tab);
+
 G_END_DECLS
 
 #endif  /* __GEDIT_TAB_H__  */

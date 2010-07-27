@@ -66,6 +66,10 @@ void		 gedit_view_frame_set_active_view(GeditViewFrame *frame,
 
 GSList		*gedit_view_frame_get_views	(GeditViewFrame *frame);
 
+void		 gedit_view_frame_set_text_view	(GeditViewFrame *frame);
+
+void		 gedit_view_frame_set_web_view	(GeditViewFrame *frame);
+
 G_END_DECLS
 
 #endif /* __GEDIT_VIEW_FRAME_H__ */

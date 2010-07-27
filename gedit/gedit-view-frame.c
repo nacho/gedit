@@ -148,6 +148,7 @@ gedit_view_frame_init (GeditViewFrame *frame)
 
 	/* FIXME: this is for testing: Web view */
 	web_view = gedit_web_view_new (doc);
+	gtk_widget_show (web_view);
 
 	g_object_unref (doc);
 
@@ -209,4 +210,39 @@ gedit_view_frame_get_views (GeditViewFrame *frame)
 	g_return_val_if_fail (GEDIT_IS_VIEW_FRAME (frame), NULL);
 
 	return frame->priv->views;
+}
+
+/* FIXME: this is temporarily */
+void
+gedit_view_frame_set_text_view (GeditViewFrame *frame)
+{
+	GtkWidget *sw;
+
+	g_return_if_fail (GEDIT_IS_VIEW_FRAME (frame));
+
+	sw = gtk_widget_get_parent (frame->priv->active_view);
+
+	gtk_widget_hide (sw);
+
+	frame->priv->active_view = GTK_WIDGET (frame->priv->views->data);
+	sw = gtk_widget_get_parent (frame->priv->active_view);
+
+	gtk_widget_show (sw);
+}
+
+void
+gedit_view_frame_set_web_view (GeditViewFrame *frame)
+{
+	GtkWidget *sw;
+
+	g_return_if_fail (GEDIT_IS_VIEW_FRAME (frame));
+
+	sw = gtk_widget_get_parent (frame->priv->active_view);
+
+	gtk_widget_hide (sw);
+
+	frame->priv->active_view = GTK_WIDGET (frame->priv->views->next->data);
+	sw = gtk_widget_get_parent (frame->priv->active_view);
+
+	gtk_widget_show (sw);
 }
