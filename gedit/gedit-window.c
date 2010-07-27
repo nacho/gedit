@@ -2369,9 +2369,19 @@ update_cursor_position_statusbar (GtkTextBuffer *buffer,
   
  	if (buffer != GTK_TEXT_BUFFER (gedit_window_get_active_document (window)))
  		return;
- 		
+
  	view = gedit_window_get_active_view (window);
- 	
+
+	if (!GTK_IS_TEXT_VIEW (view))
+	{
+		gedit_statusbar_set_cursor_position (
+				GEDIT_STATUSBAR (window->priv->statusbar),
+				-1,
+				-1);
+
+		return;
+	}
+
 	gtk_text_buffer_get_iter_at_mark (buffer,
 					  &iter,
 					  gtk_text_buffer_get_insert (buffer));
@@ -2657,7 +2667,7 @@ update_statusbar (GeditWindow *window,
 {
 	GeditDocument *doc;
 
-	if (old_view)
+	if (old_view && GTK_IS_TEXT_VIEW (old_view))
 	{
 		if (window->priv->tab_width_id)
 		{
@@ -2693,11 +2703,11 @@ update_statusbar (GeditWindow *window,
 	update_cursor_position_statusbar (GTK_TEXT_BUFFER (doc),
 					  window);
 
-	gedit_statusbar_set_overwrite (GEDIT_STATUSBAR (window->priv->statusbar),
-				       gedit_view_get_overwrite (new_view));
-
 	if (GTK_IS_TEXT_VIEW (new_view))
 	{
+		gedit_statusbar_set_overwrite (GEDIT_STATUSBAR (window->priv->statusbar),
+					       gedit_view_get_overwrite (new_view));
+
 		gtk_widget_show (window->priv->tab_width_combo);
 		gtk_widget_show (window->priv->language_combo);
 
@@ -2722,6 +2732,8 @@ update_statusbar (GeditWindow *window,
 	}
 	else
 	{
+		gedit_statusbar_clear_overwrite (GEDIT_STATUSBAR (window->priv->statusbar));
+
 		gtk_widget_hide (window->priv->tab_width_combo);
 		gtk_widget_hide (window->priv->language_combo);
 	}

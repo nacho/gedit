@@ -140,7 +140,7 @@ gedit_view_get_name_impl (GeditView *view)
 static GeditDocument *
 gedit_view_get_document_impl (GeditView *view)
 {
-	return GEDIT_DOCUMENT (view);
+	return GEDIT_DOCUMENT (GEDIT_WEB_VIEW (view)->priv->doc);
 }
 
 static void
