@@ -48,7 +48,6 @@
 #define GEDIT_METADATA_ATTRIBUTE_SPELL_ENABLED  "metadata::gedit-spell-enabled"
 #endif
 
-#define WINDOW_DATA_KEY "GeditSpellPluginWindowData"
 #define MENU_PATH "/MenuBar/ToolsMenu/ToolsOps_1"
 
 #define GEDIT_SPELL_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
@@ -86,6 +85,12 @@ struct _CheckRange
 	gint mw_end;   /* end */
 
 	GtkTextMark *current_mark;
+};
+
+enum
+{
+	PROP_0,
+	PROP_WINDOW
 };
 
 static void	spell_cb	(GtkAction *action, GeditSpellPlugin *plugin);
@@ -150,7 +155,53 @@ gedit_spell_plugin_dispose (GObject *object)
 		plugin->priv->action_group = NULL;
 	}
 
+	if (plugin->priv->window != NULL)
+	{
+		g_object_unref (plugin->priv->window);
+		plugin->priv->window = NULL;
+	}
+
 	G_OBJECT_CLASS (gedit_spell_plugin_parent_class)->dispose (object);
+}
+
+static void
+gedit_spell_plugin_set_property (GObject      *object,
+                                 guint         prop_id,
+                                 const GValue *value,
+                                 GParamSpec   *pspec)
+{
+	GeditSpellPlugin *plugin = GEDIT_SPELL_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			plugin->priv->window = GEDIT_WINDOW (g_value_dup_object (value));
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_spell_plugin_get_property (GObject    *object,
+                                 guint       prop_id,
+                                 GValue     *value,
+                                 GParamSpec *pspec)
+{
+	GeditSpellPlugin *plugin = GEDIT_SPELL_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			g_value_set_object (value, plugin->priv->window);
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
 }
 
 static void 
@@ -1057,8 +1108,7 @@ tab_removed_cb (GeditWindow      *window,
 }
 
 static void
-gedit_spell_plugin_activate (GeditWindowActivatable *activatable,
-			     GeditWindow            *window)
+gedit_spell_plugin_activate (GeditWindowActivatable *activatable)
 {
 	GeditSpellPluginPrivate *priv;
 	GtkUIManager *manager;
@@ -1067,9 +1117,8 @@ gedit_spell_plugin_activate (GeditWindowActivatable *activatable,
 	gedit_debug (DEBUG_PLUGINS);
 
 	priv = GEDIT_SPELL_PLUGIN (activatable)->priv;
-	priv->window = window;
 
-	manager = gedit_window_get_ui_manager (window);
+	manager = gedit_window_get_ui_manager (priv->window);
 
 	priv->action_group = gtk_action_group_new ("GeditSpellPluginActions");
 	gtk_action_group_set_translation_domain (priv->action_group,
@@ -1081,14 +1130,14 @@ gedit_spell_plugin_activate (GeditWindowActivatable *activatable,
 	gtk_action_group_add_toggle_actions (priv->action_group,
 					     toggle_action_entries,
 					     G_N_ELEMENTS (toggle_action_entries),
-					     window);
+					     priv->window);
 
 	gtk_ui_manager_insert_action_group (manager, priv->action_group, -1);
 
 	priv->ui_id = gtk_ui_manager_new_merge_id (manager);
 
 	priv->message_cid = gtk_statusbar_get_context_id
-			(GTK_STATUSBAR (gedit_window_get_statusbar (window)),
+			(GTK_STATUSBAR (gedit_window_get_statusbar (priv->window)),
 			 "spell_plugin_message");
 
 	gtk_ui_manager_add_ui (manager,
@@ -1117,12 +1166,12 @@ gedit_spell_plugin_activate (GeditWindowActivatable *activatable,
 
 	update_ui (GEDIT_SPELL_PLUGIN (activatable));
 
-	docs = gedit_window_get_documents (window);
+	docs = gedit_window_get_documents (priv->window);
 	for (l = docs; l != NULL; l = g_list_next (l))
 	{
 		GeditDocument *doc = GEDIT_DOCUMENT (l->data);
 
-		set_auto_spell_from_metadata (window, doc,
+		set_auto_spell_from_metadata (priv->window, doc,
 					      priv->action_group);
 
 		g_signal_handlers_disconnect_by_func (doc,
@@ -1135,16 +1184,15 @@ gedit_spell_plugin_activate (GeditWindowActivatable *activatable,
 	}
 
 	priv->tab_added_id =
-		g_signal_connect (window, "tab-added",
+		g_signal_connect (priv->window, "tab-added",
 				  G_CALLBACK (tab_added_cb), activatable);
 	priv->tab_removed_id =
-		g_signal_connect (window, "tab-removed",
+		g_signal_connect (priv->window, "tab-removed",
 				  G_CALLBACK (tab_removed_cb), activatable);
 }
 
 static void
-gedit_spell_plugin_deactivate (GeditWindowActivatable *activatable,
-			       GeditWindow            *window)
+gedit_spell_plugin_deactivate (GeditWindowActivatable *activatable)
 {
 	GeditSpellPluginPrivate *priv;
 	GtkUIManager *manager;
@@ -1153,18 +1201,17 @@ gedit_spell_plugin_deactivate (GeditWindowActivatable *activatable,
 
 	priv = GEDIT_SPELL_PLUGIN (activatable)->priv;
 
-	manager = gedit_window_get_ui_manager (window);
+	manager = gedit_window_get_ui_manager (priv->window);
 
 	gtk_ui_manager_remove_ui (manager, priv->ui_id);
 	gtk_ui_manager_remove_action_group (manager, priv->action_group);
 
-	g_signal_handler_disconnect (window, priv->tab_added_id);
-	g_signal_handler_disconnect (window, priv->tab_removed_id);
+	g_signal_handler_disconnect (priv->window, priv->tab_added_id);
+	g_signal_handler_disconnect (priv->window, priv->tab_removed_id);
 }
 
 static void
-gedit_spell_plugin_update_state (GeditWindowActivatable *activatable,
-				 GeditWindow            *window)
+gedit_spell_plugin_update_state (GeditWindowActivatable *activatable)
 {
 	gedit_debug (DEBUG_PLUGINS);
 
@@ -1177,12 +1224,16 @@ gedit_spell_plugin_class_init (GeditSpellPluginClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->dispose = gedit_spell_plugin_dispose;
+	object_class->set_property = gedit_spell_plugin_set_property;
+	object_class->get_property = gedit_spell_plugin_get_property;
 
 	if (spell_checker_id == 0)
 		spell_checker_id = g_quark_from_string ("GeditSpellCheckerID");
 
 	if (check_range_id == 0)
 		check_range_id = g_quark_from_string ("CheckRangeID");
+
+	g_object_class_override_property (object_class, PROP_WINDOW, "window");
 
 	g_type_class_add_private (klass, sizeof (GeditSpellPluginPrivate));
 }
