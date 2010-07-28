@@ -49,7 +49,8 @@
 #define FILEBROWSER_FILTER_MODE		"filter-mode"
 #define FILEBROWSER_FILTER_PATTERN	"filter-pattern"
 
-#define NAUTILUS_BASE_SETTINGS		"org.gnome.Nautilus.preferences"
+#define NAUTILUS_BASE_SETTINGS		"org.gnome.nautilus.preferences"
+#define NAUTILUS_FALLBACK_SETTINGS	"org.gnome.gedit.plugins.filebrowser.nautilus"
 #define NAUTILUS_CLICK_POLICY_KEY	"click-policy"
 #define NAUTILUS_ENABLE_DELETE_KEY	"enable-delete"
 #define NAUTILUS_CONFIRM_TRASH_KEY	"confirm-trash"
@@ -133,11 +134,28 @@ G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditFileBrowserPlugin,
 static void
 gedit_file_browser_plugin_init (GeditFileBrowserPlugin *plugin)
 {
+	const gchar * const * schemas;
+
 	plugin->priv = GEDIT_FILE_BROWSER_PLUGIN_GET_PRIVATE (plugin);
 
 	plugin->priv->settings = g_settings_new (FILEBROWSER_BASE_SETTINGS);
-	plugin->priv->nautilus_settings = g_settings_new (NAUTILUS_BASE_SETTINGS);
 	plugin->priv->terminal_settings = g_settings_new (TERMINAL_BASE_SETTINGS);
+
+	schemas = g_settings_list_schemas ();
+
+	for (; schemas != NULL && *schemas != NULL; schemas++)
+	{
+		if (g_strcmp0 (*schemas, NAUTILUS_BASE_SETTINGS) == 0)
+		{
+			plugin->priv->nautilus_settings = g_settings_new (NAUTILUS_BASE_SETTINGS);
+			break;
+		}
+	}
+
+	if (plugin->priv->nautilus_settings == NULL)
+	{
+		plugin->priv->nautilus_settings = g_settings_new (NAUTILUS_FALLBACK_SETTINGS);
+	}
 }
 
 static void
