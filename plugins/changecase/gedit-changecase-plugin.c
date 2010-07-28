@@ -41,8 +41,16 @@ typedef enum {
 
 struct _GeditChangecasePluginPrivate
 {
+	GeditWindow    *window;
+
 	GtkActionGroup *action_group;
 	guint           ui_id;
+};
+
+enum
+{
+	PROP_0,
+	PROP_WINDOW
 };
 
 static void gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface);
@@ -279,6 +287,12 @@ gedit_changecase_plugin_dispose (GObject *object)
 
 	gedit_debug_message (DEBUG_PLUGINS, "GeditChangecasePlugin disponsing");
 
+	if (plugin->priv->window != NULL)
+	{
+		g_object_unref (plugin->priv->window);
+		plugin->priv->window = NULL;
+	}
+
 	if (plugin->priv->action_group != NULL)
 	{
 		g_object_unref (plugin->priv->action_group);
@@ -297,8 +311,47 @@ gedit_changecase_plugin_finalize (GObject *object)
 }
 
 static void
-update_ui (GeditChangecasePlugin *plugin,
-	   GeditWindow           *window)
+gedit_changecase_plugin_set_property (GObject      *object,
+                                      guint         prop_id,
+                                      const GValue *value,
+                                      GParamSpec   *pspec)
+{
+	GeditChangecasePlugin *plugin = GEDIT_CHANGECASE_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			plugin->priv->window = GEDIT_WINDOW (g_value_dup_object (value));
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_changecase_plugin_get_property (GObject    *object,
+                                      guint       prop_id,
+                                      GValue     *value,
+                                      GParamSpec *pspec)
+{
+	GeditChangecasePlugin *plugin = GEDIT_CHANGECASE_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			g_value_set_object (value, plugin->priv->window);
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+update_ui (GeditChangecasePlugin *plugin)
 {
 	GtkTextView *view;
 	GtkAction *action;
@@ -306,7 +359,7 @@ update_ui (GeditChangecasePlugin *plugin,
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	view = GTK_TEXT_VIEW (gedit_window_get_active_view (window));
+	view = GTK_TEXT_VIEW (gedit_window_get_active_view (plugin->priv->window));
 
 	if (view != NULL)
 	{
@@ -323,8 +376,7 @@ update_ui (GeditChangecasePlugin *plugin,
 }
 
 static void
-gedit_changecase_plugin_activate (GeditWindowActivatable *activatable,
-				  GeditWindow            *window)
+gedit_changecase_plugin_activate (GeditWindowActivatable *activatable)
 {
 	GeditChangecasePluginPrivate *priv;
 	GtkUIManager *manager;
@@ -334,15 +386,15 @@ gedit_changecase_plugin_activate (GeditWindowActivatable *activatable,
 
 	priv = GEDIT_CHANGECASE_PLUGIN (activatable)->priv;
 
-	manager = gedit_window_get_ui_manager (window);
+	manager = gedit_window_get_ui_manager (priv->window);
 
 	priv->action_group = gtk_action_group_new ("GeditChangecasePluginActions");
 	gtk_action_group_set_translation_domain (priv->action_group, 
 						 GETTEXT_PACKAGE);
 	gtk_action_group_add_actions (priv->action_group,
 				      action_entries,
-				      G_N_ELEMENTS (action_entries), 
-				      window);
+				      G_N_ELEMENTS (action_entries),
+				      priv->window);
 
 	gtk_ui_manager_insert_action_group (manager, priv->action_group, -1);
 
@@ -356,12 +408,11 @@ gedit_changecase_plugin_activate (GeditWindowActivatable *activatable,
 		return;
 	}
 
-	update_ui (GEDIT_CHANGECASE_PLUGIN (activatable), window);
+	update_ui (GEDIT_CHANGECASE_PLUGIN (activatable));
 }
 
 static void
-gedit_changecase_plugin_deactivate (GeditWindowActivatable *activatable,
-				    GeditWindow            *window)
+gedit_changecase_plugin_deactivate (GeditWindowActivatable *activatable)
 {
 	GeditChangecasePluginPrivate *priv;
 	GtkUIManager *manager;
@@ -370,19 +421,18 @@ gedit_changecase_plugin_deactivate (GeditWindowActivatable *activatable,
 
 	priv = GEDIT_CHANGECASE_PLUGIN (activatable)->priv;
 
-	manager = gedit_window_get_ui_manager (window);
+	manager = gedit_window_get_ui_manager (priv->window);
 
 	gtk_ui_manager_remove_ui (manager, priv->ui_id);
 	gtk_ui_manager_remove_action_group (manager, priv->action_group);
 }
 
 static void
-gedit_changecase_plugin_update_state (GeditWindowActivatable *activatable,
-				      GeditWindow            *window)
+gedit_changecase_plugin_update_state (GeditWindowActivatable *activatable)
 {
 	gedit_debug (DEBUG_PLUGINS);
 
-	update_ui (GEDIT_CHANGECASE_PLUGIN (activatable), window);
+	update_ui (GEDIT_CHANGECASE_PLUGIN (activatable));
 }
 
 static void
@@ -392,6 +442,10 @@ gedit_changecase_plugin_class_init (GeditChangecasePluginClass *klass)
 
 	object_class->dispose = gedit_changecase_plugin_dispose;
 	object_class->finalize = gedit_changecase_plugin_finalize;
+	object_class->set_property = gedit_changecase_plugin_set_property;
+	object_class->get_property = gedit_changecase_plugin_get_property;
+
+	g_object_class_override_property (object_class, PROP_WINDOW, "window");
 
 	g_type_class_add_private (klass, sizeof (GeditChangecasePluginPrivate));
 }
