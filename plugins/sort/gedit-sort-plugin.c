@@ -72,6 +72,12 @@ typedef struct
 	guint remove_duplicates : 1;
 } SortInfo;
 
+enum
+{
+	PROP_0,
+	PROP_WINDOW
+};
+
 static void sort_cb (GtkAction *action, GeditSortPlugin *plugin);
 static void sort_real (GeditSortPlugin *plugin);
 
@@ -442,8 +448,7 @@ update_ui (GeditSortPlugin *plugin)
 }
 
 static void
-gedit_sort_plugin_activate (GeditWindowActivatable *activatable,
-			    GeditWindow            *window)
+gedit_sort_plugin_activate (GeditWindowActivatable *activatable)
 {
 	GeditSortPluginPrivate *priv;
 	GtkUIManager *manager;
@@ -451,9 +456,8 @@ gedit_sort_plugin_activate (GeditWindowActivatable *activatable,
 	gedit_debug (DEBUG_PLUGINS);
 
 	priv = GEDIT_SORT_PLUGIN (activatable)->priv;
-	priv->window = window;
 
-	manager = gedit_window_get_ui_manager (window);
+	manager = gedit_window_get_ui_manager (priv->window);
 
 	priv->ui_action_group = gtk_action_group_new ("GeditSortPluginActions");
 	gtk_action_group_set_translation_domain (priv->ui_action_group,
@@ -481,8 +485,7 @@ gedit_sort_plugin_activate (GeditWindowActivatable *activatable,
 }
 
 static void
-gedit_sort_plugin_deactivate (GeditWindowActivatable *activatable,
-			      GeditWindow            *window)
+gedit_sort_plugin_deactivate (GeditWindowActivatable *activatable)
 {
 	GeditSortPluginPrivate *priv;
 	GtkUIManager *manager;
@@ -491,7 +494,7 @@ gedit_sort_plugin_deactivate (GeditWindowActivatable *activatable,
 
 	priv = GEDIT_SORT_PLUGIN (activatable)->priv;
 
-	manager = gedit_window_get_ui_manager (window);
+	manager = gedit_window_get_ui_manager (priv->window);
 
 	gtk_ui_manager_remove_ui (manager,
 				  priv->ui_id);
@@ -500,8 +503,7 @@ gedit_sort_plugin_deactivate (GeditWindowActivatable *activatable,
 }
 
 static void
-gedit_sort_plugin_update_state (GeditWindowActivatable *activatable,
-				GeditWindow            *window)
+gedit_sort_plugin_update_state (GeditWindowActivatable *activatable)
 {
 	gedit_debug (DEBUG_PLUGINS);
 
@@ -531,6 +533,12 @@ gedit_sort_plugin_dispose (GObject *object)
 		plugin->priv->ui_action_group = NULL;
 	}
 
+	if (plugin->priv->window != NULL)
+	{
+		g_object_unref (plugin->priv->window);
+		plugin->priv->window = NULL;
+	}
+
 	G_OBJECT_CLASS (gedit_sort_plugin_parent_class)->dispose (object);
 }
 
@@ -544,12 +552,56 @@ gedit_sort_plugin_finalize (GObject *object)
 }
 
 static void
+gedit_sort_plugin_set_property (GObject      *object,
+                                guint         prop_id,
+                                const GValue *value,
+                                GParamSpec   *pspec)
+{
+	GeditSortPlugin *plugin = GEDIT_SORT_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			plugin->priv->window = GEDIT_WINDOW (g_value_dup_object (value));
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_sort_plugin_get_property (GObject    *object,
+                                guint       prop_id,
+                                GValue     *value,
+                                GParamSpec *pspec)
+{
+	GeditSortPlugin *plugin = GEDIT_SORT_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			g_value_set_object (value, plugin->priv->window);
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
 gedit_sort_plugin_class_init (GeditSortPluginClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->dispose = gedit_sort_plugin_dispose;
 	object_class->finalize = gedit_sort_plugin_finalize;
+	object_class->set_property = gedit_sort_plugin_set_property;
+	object_class->get_property = gedit_sort_plugin_get_property;
+
+	g_object_class_override_property (object_class, PROP_WINDOW, "window");
 
 	g_type_class_add_private (klass, sizeof (GeditSortPluginPrivate));
 }
