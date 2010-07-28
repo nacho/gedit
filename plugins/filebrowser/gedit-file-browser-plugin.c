@@ -80,6 +80,12 @@ struct _GeditFileBrowserPluginPrivate
 	guint			confirm_trash_handle;
 };
 
+enum
+{
+	PROP_0,
+	PROP_WINDOW
+};
+
 static void gedit_window_activatable_iface_init	(GeditWindowActivatableInterface *iface);
 
 static void on_location_activated_cb     (GeditFileBrowserWidget        *widget,
@@ -157,7 +163,53 @@ gedit_file_browser_plugin_dispose (GObject *object)
 		plugin->priv->terminal_settings = NULL;
 	}
 
+	if (plugin->priv->window != NULL)
+	{
+		g_object_unref (plugin->priv->window);
+		plugin->priv->window = NULL;
+	}
+
 	G_OBJECT_CLASS (gedit_file_browser_plugin_parent_class)->dispose (object);
+}
+
+static void
+gedit_file_browser_plugin_set_property (GObject      *object,
+                                        guint         prop_id,
+                                        const GValue *value,
+                                        GParamSpec   *pspec)
+{
+	GeditFileBrowserPlugin *plugin = GEDIT_FILE_BROWSER_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			plugin->priv->window = GEDIT_WINDOW (g_value_dup_object (value));
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_file_browser_plugin_get_property (GObject    *object,
+                                        guint       prop_id,
+                                        GValue     *value,
+                                        GParamSpec *pspec)
+{
+	GeditFileBrowserPlugin *plugin = GEDIT_FILE_BROWSER_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			g_value_set_object (value, plugin->priv->window);
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
 }
 
 static void
@@ -511,8 +563,7 @@ static GtkActionEntry extra_single_selection_actions[] = {
 };
 
 static void
-add_popup_ui (GeditWindow            *window,
-	      GeditFileBrowserPlugin *plugin)
+add_popup_ui (GeditFileBrowserPlugin *plugin)
 {
 	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	GtkUIManager *manager;
@@ -535,7 +586,7 @@ add_popup_ui (GeditWindow            *window,
 	gtk_action_group_add_actions (action_group,
 				      extra_single_selection_actions,
 				      G_N_ELEMENTS (extra_single_selection_actions),
-				      window);
+				      priv->window);
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	priv->single_selection_action_group = action_group;
 
@@ -552,8 +603,7 @@ add_popup_ui (GeditWindow            *window,
 }
 
 static void
-remove_popup_ui (GeditWindow            *window,
-		 GeditFileBrowserPlugin *plugin)
+remove_popup_ui (GeditFileBrowserPlugin *plugin)
 {
 	GeditFileBrowserPluginPrivate *priv = plugin->priv;
 	GtkUIManager *manager;
@@ -569,13 +619,12 @@ remove_popup_ui (GeditWindow            *window,
 }
 
 static void
-gedit_file_browser_plugin_update_state (GeditWindowActivatable *activatable,
-					GeditWindow            *window)
+gedit_file_browser_plugin_update_state (GeditWindowActivatable *activatable)
 {
 	GeditFileBrowserPluginPrivate *priv = GEDIT_FILE_BROWSER_PLUGIN (activatable)->priv;
 	GeditDocument *doc;
 
-	doc = gedit_window_get_active_document (window);
+	doc = gedit_window_get_active_document (priv->window);
 
 	gtk_action_set_sensitive (gtk_action_group_get_action (priv->action_group,
 	                                                       "SetActiveRoot"),
@@ -583,18 +632,17 @@ gedit_file_browser_plugin_update_state (GeditWindowActivatable *activatable,
 }
 
 static void
-gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
-				    GeditWindow            *window)
+gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable)
 {
 	GeditFileBrowserPlugin *plugin = GEDIT_FILE_BROWSER_PLUGIN (activatable);
-	GeditFileBrowserPluginPrivate *priv = plugin->priv;
+	GeditFileBrowserPluginPrivate *priv;
 	GeditPanel *panel;
 	GtkWidget *image;
 	GdkPixbuf *pixbuf;
 	GeditFileBrowserStore *store;
 	gchar *data_dir;
 
-	priv->window = window;
+	priv = plugin->priv;
 
 	data_dir = peas_extension_base_get_data_dir (PEAS_EXTENSION_BASE (activatable));
 	priv->tree_widget = GEDIT_FILE_BROWSER_WIDGET (gedit_file_browser_widget_new (data_dir));
@@ -602,7 +650,7 @@ gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
 
 	g_signal_connect (priv->tree_widget,
 			  "location-activated",
-			  G_CALLBACK (on_location_activated_cb), window);
+			  G_CALLBACK (on_location_activated_cb), priv->window);
 
 	g_signal_connect (priv->tree_widget,
 			  "error", G_CALLBACK (on_error_cb), plugin);
@@ -615,7 +663,7 @@ gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
 	g_signal_connect (priv->tree_widget,
 	                  "confirm-no-trash",
 	                  G_CALLBACK (on_confirm_no_trash_cb),
-	                  window);
+	                  priv->window);
 
 	g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW
 			  (gedit_file_browser_widget_get_browser_view
@@ -630,7 +678,7 @@ gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
 	                 FILEBROWSER_FILTER_PATTERN,
 	                 G_SETTINGS_BIND_GET | G_SETTINGS_BIND_SET);
 
-	panel = gedit_window_get_side_panel (window);
+	panel = gedit_window_get_side_panel (priv->window);
 	pixbuf = gedit_file_browser_utils_pixbuf_from_theme ("system-file-manager",
 	                                                     GTK_ICON_SIZE_MENU);
 
@@ -652,7 +700,7 @@ gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
 	                      image);
 	gtk_widget_show (GTK_WIDGET (priv->tree_widget));
 
-	add_popup_ui (window, plugin);
+	add_popup_ui (plugin);
 
 	/* Install nautilus preferences */
 	install_nautilus_prefs (plugin);
@@ -679,22 +727,21 @@ gedit_file_browser_plugin_activate (GeditWindowActivatable *activatable,
 	g_signal_connect (store,
 			  "rename",
 			  G_CALLBACK (on_rename_cb),
-			  window);
+			  priv->window);
 
-	g_signal_connect (window,
+	g_signal_connect (priv->window,
 	                  "tab-added",
 	                  G_CALLBACK (on_tab_added_cb),
 	                  plugin);
 
 	/* Register messages on the bus */
-	gedit_file_browser_messages_register (window, priv->tree_widget);
+	gedit_file_browser_messages_register (priv->window, priv->tree_widget);
 
-	gedit_file_browser_plugin_update_state (activatable, window);
+	gedit_file_browser_plugin_update_state (activatable);
 }
 
 static void
-gedit_file_browser_plugin_deactivate (GeditWindowActivatable *activatable,
-				      GeditWindow            *window)
+gedit_file_browser_plugin_deactivate (GeditWindowActivatable *activatable)
 {
 	GeditFileBrowserPlugin *plugin = GEDIT_FILE_BROWSER_PLUGIN (activatable);
 	GeditFileBrowserPluginPrivate *priv = plugin->priv;
@@ -702,10 +749,10 @@ gedit_file_browser_plugin_deactivate (GeditWindowActivatable *activatable,
 
 
 	/* Unregister messages from the bus */
-	gedit_file_browser_messages_unregister (window);
+	gedit_file_browser_messages_unregister (priv->window);
 
 	/* Disconnect signals */
-	g_signal_handlers_disconnect_by_func (window,
+	g_signal_handlers_disconnect_by_func (priv->window,
 	                                      G_CALLBACK (on_tab_added_cb),
 	                                      plugin);
 
@@ -727,9 +774,9 @@ gedit_file_browser_plugin_deactivate (GeditWindowActivatable *activatable,
 					     priv->confirm_trash_handle);
 	}
 
-	remove_popup_ui (window, plugin);
+	remove_popup_ui (plugin);
 
-	panel = gedit_window_get_side_panel (window);
+	panel = gedit_window_get_side_panel (priv->window);
 	gedit_panel_remove_item (panel, GTK_WIDGET (priv->tree_widget));
 }
 
@@ -739,6 +786,10 @@ gedit_file_browser_plugin_class_init (GeditFileBrowserPluginClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->dispose = gedit_file_browser_plugin_dispose;
+	object_class->set_property = gedit_file_browser_plugin_set_property;
+	object_class->get_property = gedit_file_browser_plugin_get_property;
+
+	g_object_class_override_property (object_class, PROP_WINDOW, "window");
 
 	g_type_class_add_private (object_class,
 				  sizeof (GeditFileBrowserPluginPrivate));
