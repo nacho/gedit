@@ -30,10 +30,20 @@
 
 #include <gedit/gedit-debug.h>
 #include <gedit/gedit-view-activatable.h>
+#include <gedit/gedit-view.h>
 
-struct _GeditModelinePluginPrivate {
+struct _GeditModelinePluginPrivate
+{
+	GeditView *view;
+
 	gulong document_loaded_handler_id;
 	gulong document_saved_handler_id;
+};
+
+enum
+{
+	PROP_0,
+	PROP_VIEW
 };
 
 static void	gedit_view_activatable_iface_init (GeditViewActivatableInterface *iface);
@@ -69,6 +79,22 @@ gedit_modeline_plugin_init (GeditModelinePlugin *plugin)
 }
 
 static void
+gedit_modeline_plugin_dispose (GObject *object)
+{
+	GeditModelinePlugin *plugin = GEDIT_MODELINE_PLUGIN (object);
+
+	gedit_debug_message (DEBUG_PLUGINS, "GeditModelinePlugin disposing");
+
+	if (plugin->priv->view != NULL)
+	{
+		g_object_unref (plugin->priv->view);
+		plugin->priv->view = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_modeline_plugin_parent_class)->dispose (object);
+}
+
+static void
 gedit_modeline_plugin_finalize (GObject *object)
 {
 	gedit_debug_message (DEBUG_PLUGINS, "GeditModelinePlugin finalizing");
@@ -76,6 +102,46 @@ gedit_modeline_plugin_finalize (GObject *object)
 	modeline_parser_shutdown ();
 
 	G_OBJECT_CLASS (gedit_modeline_plugin_parent_class)->finalize (object);
+}
+
+static void
+gedit_modeline_plugin_set_property (GObject      *object,
+                                    guint         prop_id,
+                                    const GValue *value,
+                                    GParamSpec   *pspec)
+{
+	GeditModelinePlugin *plugin = GEDIT_MODELINE_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_VIEW:
+			plugin->priv->view = GEDIT_VIEW (g_value_dup_object (value));
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_modeline_plugin_get_property (GObject    *object,
+                                    guint       prop_id,
+                                    GValue     *value,
+                                    GParamSpec *pspec)
+{
+	GeditModelinePlugin *plugin = GEDIT_MODELINE_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_VIEW:
+			g_value_set_object (value, plugin->priv->view);
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
 }
 
 static void
@@ -87,8 +153,7 @@ on_document_loaded_or_saved (GeditDocument *document,
 }
 
 static void
-gedit_modeline_plugin_activate (GeditViewActivatable *activatable,
-				GeditView            *view)
+gedit_modeline_plugin_activate (GeditViewActivatable *activatable)
 {
 	GeditModelinePlugin *plugin;
         GtkTextBuffer *doc;
@@ -97,21 +162,20 @@ gedit_modeline_plugin_activate (GeditViewActivatable *activatable,
 
 	plugin = GEDIT_MODELINE_PLUGIN (activatable);
 
-        doc = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+        doc = gtk_text_view_get_buffer (GTK_TEXT_VIEW (plugin->priv->view));
 
 	plugin->priv->document_loaded_handler_id =
 		g_signal_connect (doc, "loaded",
 				  G_CALLBACK (on_document_loaded_or_saved),
-				  view);
+				  plugin->priv->view);
 	plugin->priv->document_saved_handler_id =
 		g_signal_connect (doc, "saved",
 				  G_CALLBACK (on_document_loaded_or_saved),
-				  view);
+				  plugin->priv->view);
 }
 
 static void
-gedit_modeline_plugin_deactivate (GeditViewActivatable *activatable,
-				  GeditView            *view)
+gedit_modeline_plugin_deactivate (GeditViewActivatable *activatable)
 {
 	GeditModelinePlugin *plugin;
 	GtkTextBuffer *doc;
@@ -120,7 +184,7 @@ gedit_modeline_plugin_deactivate (GeditViewActivatable *activatable,
 
 	plugin = GEDIT_MODELINE_PLUGIN (activatable);
 
-	doc = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+	doc = gtk_text_view_get_buffer (GTK_TEXT_VIEW (plugin->priv->view));
 
 	g_signal_handler_disconnect (doc, plugin->priv->document_loaded_handler_id);
 	g_signal_handler_disconnect (doc, plugin->priv->document_saved_handler_id);
@@ -132,7 +196,12 @@ gedit_modeline_plugin_class_init (GeditModelinePluginClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->constructed = gedit_modeline_plugin_constructed;
+	object_class->dispose = gedit_modeline_plugin_dispose;
 	object_class->finalize = gedit_modeline_plugin_finalize;
+	object_class->set_property = gedit_modeline_plugin_set_property;
+	object_class->get_property = gedit_modeline_plugin_get_property;
+
+	g_object_class_override_property (object_class, PROP_VIEW, "view");
 
 	g_type_class_add_private (klass, sizeof (GeditModelinePluginPrivate));
 }
