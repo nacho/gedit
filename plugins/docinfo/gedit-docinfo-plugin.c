@@ -66,6 +66,12 @@ struct _GeditDocinfoPluginPrivate
 	GtkWidget *selected_bytes_label;
 };
 
+enum
+{
+	PROP_0,
+	PROP_WINDOW
+};
+
 static void gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface);
 
 G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditDocinfoPlugin,
@@ -471,6 +477,12 @@ gedit_docinfo_plugin_dispose (GObject *object)
 		plugin->priv->action_group = NULL;
 	}
 
+	if (plugin->priv->window != NULL)
+	{
+		g_object_unref (plugin->priv->window);
+		plugin->priv->window = NULL;
+	}
+
 	G_OBJECT_CLASS (gedit_docinfo_plugin_parent_class)->dispose (object);
 }
 
@@ -481,6 +493,46 @@ gedit_docinfo_plugin_finalize (GObject *object)
 	gedit_debug_message (DEBUG_PLUGINS, "GeditDocinfoPlugin finalizing");
 
 	G_OBJECT_CLASS (gedit_docinfo_plugin_parent_class)->finalize (object);
+}
+
+static void
+gedit_docinfo_plugin_set_property (GObject      *object,
+                                   guint         prop_id,
+                                   const GValue *value,
+                                   GParamSpec   *pspec)
+{
+	GeditDocinfoPlugin *plugin = GEDIT_DOCINFO_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			plugin->priv->window = GEDIT_WINDOW (g_value_dup_object (value));
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_docinfo_plugin_get_property (GObject    *object,
+                                   guint       prop_id,
+                                   GValue     *value,
+                                   GParamSpec *pspec)
+{
+	GeditDocinfoPlugin *plugin = GEDIT_DOCINFO_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			g_value_set_object (value, plugin->priv->window);
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
 }
 
 static void
@@ -507,8 +559,7 @@ update_ui (GeditDocinfoPlugin *plugin)
 }
 
 static void
-gedit_docinfo_plugin_activate (GeditWindowActivatable *activatable,
-			       GeditWindow            *window)
+gedit_docinfo_plugin_activate (GeditWindowActivatable *activatable)
 {
 	GeditDocinfoPluginPrivate *priv;
 	GtkUIManager *manager;
@@ -517,9 +568,7 @@ gedit_docinfo_plugin_activate (GeditWindowActivatable *activatable,
 
 	priv = GEDIT_DOCINFO_PLUGIN (activatable)->priv;
 
-	priv->window = window;
-
-	manager = gedit_window_get_ui_manager (window);
+	manager = gedit_window_get_ui_manager (priv->window);
 
 	priv->action_group = gtk_action_group_new ("GeditDocinfoPluginActions");
 	gtk_action_group_set_translation_domain (priv->action_group,
@@ -545,8 +594,7 @@ gedit_docinfo_plugin_activate (GeditWindowActivatable *activatable,
 }
 
 static void
-gedit_docinfo_plugin_deactivate (GeditWindowActivatable *activatable,
-				 GeditWindow            *window)
+gedit_docinfo_plugin_deactivate (GeditWindowActivatable *activatable)
 {
 	GeditDocinfoPluginPrivate *priv;
 	GtkUIManager *manager;
@@ -555,15 +603,14 @@ gedit_docinfo_plugin_deactivate (GeditWindowActivatable *activatable,
 
 	priv = GEDIT_DOCINFO_PLUGIN (activatable)->priv;
 
-	manager = gedit_window_get_ui_manager (window);
+	manager = gedit_window_get_ui_manager (priv->window);
 
 	gtk_ui_manager_remove_ui (manager, priv->ui_id);
 	gtk_ui_manager_remove_action_group (manager, priv->action_group);
 }
 
 static void
-gedit_docinfo_plugin_update_state (GeditWindowActivatable *activatable,
-				   GeditWindow            *window)
+gedit_docinfo_plugin_update_state (GeditWindowActivatable *activatable)
 {
 	gedit_debug (DEBUG_PLUGINS);
 
@@ -577,6 +624,10 @@ gedit_docinfo_plugin_class_init (GeditDocinfoPluginClass *klass)
 
 	object_class->dispose = gedit_docinfo_plugin_dispose;
 	object_class->finalize = gedit_docinfo_plugin_finalize;
+	object_class->set_property = gedit_docinfo_plugin_set_property;
+	object_class->get_property = gedit_docinfo_plugin_get_property;
+
+	g_object_class_override_property (object_class, PROP_WINDOW, "window");
 
 	g_type_class_add_private (klass, sizeof (GeditDocinfoPluginPrivate));
 }
