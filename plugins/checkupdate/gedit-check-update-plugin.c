@@ -75,6 +75,12 @@ struct _GeditCheckUpdatePluginPrivate
 	gchar *version;
 };
 
+enum
+{
+	PROP_0,
+	PROP_WINDOW
+};
+
 static void
 gedit_check_update_plugin_init (GeditCheckUpdatePlugin *plugin)
 {
@@ -104,6 +110,12 @@ gedit_check_update_plugin_dispose (GObject *object)
 		g_object_unref (plugin->priv->settings);
 		plugin->priv->settings = NULL;
 	}
+	
+	if (plugin->priv->window != NULL)
+	{
+		g_object_unref (plugin->priv->window);
+		plugin->priv->window = NULL;
+	}
 
 	gedit_debug_message (DEBUG_PLUGINS,
 			     "GeditCheckUpdatePlugin disposing");
@@ -123,6 +135,46 @@ gedit_check_update_plugin_finalize (GObject *object)
 	g_free (plugin->priv->version);
 
 	G_OBJECT_CLASS (gedit_check_update_plugin_parent_class)->finalize (object);
+}
+
+static void
+gedit_check_update_plugin_set_property (GObject      *object,
+                                        guint         prop_id,
+                                        const GValue *value,
+                                        GParamSpec   *pspec)
+{
+	GeditCheckUpdatePlugin *plugin = GEDIT_CHECK_UPDATE_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			plugin->priv->window = GEDIT_WINDOW (g_value_dup_object (value));
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_check_update_plugin_get_property (GObject    *object,
+                                        guint       prop_id,
+                                        GValue     *value,
+                                        GParamSpec *pspec)
+{
+	GeditCheckUpdatePlugin *plugin = GEDIT_CHECK_UPDATE_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			g_value_set_object (value, plugin->priv->window);
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
 }
 
 static void
@@ -567,8 +619,7 @@ parse_page_version (SoupSession            *session,
 }
 
 static void
-gedit_check_update_plugin_activate (GeditWindowActivatable *activatable,
-				    GeditWindow            *window)
+gedit_check_update_plugin_activate (GeditWindowActivatable *activatable)
 {
 	GeditCheckUpdatePluginPrivate *priv;
 	SoupMessage *msg;
@@ -576,7 +627,6 @@ gedit_check_update_plugin_activate (GeditWindowActivatable *activatable,
 	gedit_debug (DEBUG_PLUGINS);
 
 	priv = GEDIT_CHECK_UPDATE_PLUGIN (activatable)->priv;
-	priv->window = window;
 
 	msg = soup_message_new ("GET", GEDIT_URL);
 
@@ -586,8 +636,7 @@ gedit_check_update_plugin_activate (GeditWindowActivatable *activatable,
 }
 
 static void
-gedit_check_update_plugin_deactivate (GeditWindowActivatable *activatable,
-				      GeditWindow            *window)
+gedit_check_update_plugin_deactivate (GeditWindowActivatable *activatable)
 {
 
 	gedit_debug (DEBUG_PLUGINS);
@@ -600,10 +649,14 @@ gedit_check_update_plugin_class_init (GeditCheckUpdatePluginClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	g_type_class_add_private (object_class, sizeof (GeditCheckUpdatePluginPrivate));
-
 	object_class->finalize = gedit_check_update_plugin_finalize;
 	object_class->dispose = gedit_check_update_plugin_dispose;
+	object_class->set_property = gedit_check_update_plugin_set_property;
+	object_class->get_property = gedit_check_update_plugin_get_property;
+	
+	g_object_class_override_property (object_class, PROP_WINDOW, "window");
+	
+	g_type_class_add_private (object_class, sizeof (GeditCheckUpdatePluginPrivate));
 }
 
 static void
