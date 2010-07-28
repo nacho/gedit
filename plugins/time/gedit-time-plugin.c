@@ -160,6 +160,12 @@ struct _GeditTimePluginPrivate
 	guint           ui_id;
 };
 
+enum
+{
+	PROP_0,
+	PROP_WINDOW
+};
+
 static void gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface);
 static void peas_ui_configurable_iface_init (PeasUIConfigurableInterface *iface);
 
@@ -215,7 +221,53 @@ gedit_time_plugin_dispose (GObject *object)
 		plugin->priv->action_group = NULL;
 	}
 
+	if (plugin->priv->window != NULL)
+	{
+		g_object_unref (plugin->priv->window);
+		plugin->priv->window = NULL;
+	}
+
 	G_OBJECT_CLASS (gedit_time_plugin_parent_class)->dispose (object);
+}
+
+static void
+gedit_time_plugin_set_property (GObject      *object,
+                                guint         prop_id,
+                                const GValue *value,
+                                GParamSpec   *pspec)
+{
+	GeditTimePlugin *plugin = GEDIT_TIME_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			plugin->priv->window = GEDIT_WINDOW (g_value_dup_object (value));
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_time_plugin_get_property (GObject    *object,
+                                guint       prop_id,
+                                GValue     *value,
+                                GParamSpec *pspec)
+{
+	GeditTimePlugin *plugin = GEDIT_TIME_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			g_value_set_object (value, plugin->priv->window);
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
 }
 
 static void
@@ -238,8 +290,7 @@ update_ui (GeditTimePlugin *plugin)
 }
 
 static void
-gedit_time_plugin_activate (GeditWindowActivatable *activatable,
-			    GeditWindow            *window)
+gedit_time_plugin_activate (GeditWindowActivatable *activatable)
 {
 	GeditTimePluginPrivate *priv;
 	GtkUIManager *manager;
@@ -247,9 +298,8 @@ gedit_time_plugin_activate (GeditWindowActivatable *activatable,
 	gedit_debug (DEBUG_PLUGINS);
 
 	priv = GEDIT_TIME_PLUGIN (activatable)->priv;
-	priv->window = window;
 
-	manager = gedit_window_get_ui_manager (window);
+	manager = gedit_window_get_ui_manager (priv->window);
 
 	priv->action_group = gtk_action_group_new ("GeditTimePluginActions");
 	gtk_action_group_set_translation_domain (priv->action_group,
@@ -275,8 +325,7 @@ gedit_time_plugin_activate (GeditWindowActivatable *activatable,
 }
 
 static void
-gedit_time_plugin_deactivate (GeditWindowActivatable *activatable,
-			      GeditWindow            *window)
+gedit_time_plugin_deactivate (GeditWindowActivatable *activatable)
 {
 	GeditTimePluginPrivate *priv;
 	GtkUIManager *manager;
@@ -285,27 +334,18 @@ gedit_time_plugin_deactivate (GeditWindowActivatable *activatable,
 
 	priv = GEDIT_TIME_PLUGIN (activatable)->priv;
 
-	manager = gedit_window_get_ui_manager (window);
+	manager = gedit_window_get_ui_manager (priv->window);
 
 	gtk_ui_manager_remove_ui (manager, priv->ui_id);
 	gtk_ui_manager_remove_action_group (manager, priv->action_group);
 }
 
 static void
-gedit_time_plugin_update_state (GeditWindowActivatable *activatable,
-				GeditWindow            *window)
+gedit_time_plugin_update_state (GeditWindowActivatable *activatable)
 {
 	gedit_debug (DEBUG_PLUGINS);
 
 	update_ui (GEDIT_TIME_PLUGIN (activatable));
-}
-
-/* whether we should prompt the user or use the specified format */
-static GeditTimePluginPromptType
-get_prompt_type (GeditTimePlugin *plugin)
-{
-	return g_settings_get_enum (plugin->priv->settings,
-				    PROMPT_TYPE_KEY);
 }
 
 /* The selected format in the list */
@@ -709,7 +749,8 @@ get_configure_widget (GeditTimePlugin *plugin)
 	create_formats_list (widget->list, sf, plugin);
 	g_free (sf);
 
-	prompt_type = get_prompt_type (plugin);
+	prompt_type = g_settings_get_enum (plugin->priv->settings,
+					   PROMPT_TYPE_KEY);
 
 	g_settings_bind (widget->settings,
 			 CUSTOM_FORMAT_KEY,
@@ -1035,7 +1076,8 @@ time_cb (GtkAction       *action,
 	buffer = GTK_TEXT_BUFFER (gedit_window_get_active_document (priv->window));
 	g_return_if_fail (buffer != NULL);
 
-	prompt_type = get_prompt_type (plugin);
+	prompt_type = g_settings_get_enum (plugin->priv->settings,
+					   PROMPT_TYPE_KEY);
 
 	if (prompt_type == USE_CUSTOM_FORMAT)
 	{
@@ -1095,6 +1137,10 @@ gedit_time_plugin_class_init (GeditTimePluginClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->dispose = gedit_time_plugin_dispose;
+	object_class->set_property = gedit_time_plugin_set_property;
+	object_class->get_property = gedit_time_plugin_get_property;
+
+	g_object_class_override_property (object_class, PROP_WINDOW, "window");
 
 	g_type_class_add_private (object_class, sizeof (GeditTimePluginPrivate));
 }
