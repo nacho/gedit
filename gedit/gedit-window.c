@@ -3032,7 +3032,7 @@ sync_name (GeditTab    *tab,
 	g_free (escaped_name);
 	g_free (tip);
 
-	peas_extension_set_call (window->priv->extensions, "update_state", window);
+	peas_extension_set_call (window->priv->extensions, "update_state");
 }
 
 static GeditWindow *
@@ -3428,7 +3428,7 @@ selection_changed (GeditDocument *doc,
 				  editable &&
 				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 
-	peas_extension_set_call (window->priv->extensions, "update_state", window);
+	peas_extension_set_call (window->priv->extensions, "update_state");
 }
 
 static void
@@ -3437,7 +3437,7 @@ sync_languages_menu (GeditDocument *doc,
 		     GeditWindow   *window)
 {
 	update_languages_menu (window);
-	peas_extension_set_call (window->priv->extensions, "update_state", window);
+	peas_extension_set_call (window->priv->extensions, "update_state");
 }
 
 static void
@@ -3450,7 +3450,7 @@ readonly_changed (GeditDocument *doc,
 
 	sync_name (gedit_window_get_active_tab (window), NULL, window);
 
-	peas_extension_set_call (window->priv->extensions, "update_state", window);
+	peas_extension_set_call (window->priv->extensions, "update_state");
 }
 
 static void
@@ -3458,7 +3458,7 @@ editable_changed (GeditView  *view,
                   GParamSpec  *arg1,
                   GeditWindow *window)
 {
-	peas_extension_set_call (window->priv->extensions, "update_state", window);
+	peas_extension_set_call (window->priv->extensions, "update_state");
 }
 
 static void
@@ -3689,7 +3689,7 @@ on_tab_removed (GeditMultiNotebook *multi,
 
 		if (num_tabs == 0)
 		{
-			peas_extension_set_call (window->priv->extensions, "update_state", window);
+			peas_extension_set_call (window->priv->extensions, "update_state");
 		}
 	}
 
@@ -4122,7 +4122,7 @@ extension_added (PeasExtensionSet *extensions,
 		 PeasExtension    *exten,
 		 GeditWindow      *window)
 {
-	peas_extension_call (exten, "activate", window);
+	peas_extension_call (exten, "activate");
 }
 
 static void
@@ -4131,7 +4131,7 @@ extension_removed (PeasExtensionSet *extensions,
 		   PeasExtension    *exten,
 		   GeditWindow      *window)
 {
-	peas_extension_call (exten, "deactivate", window);
+	peas_extension_call (exten, "deactivate");
 
 	/* Ensure update of ui manager, because we suspect it does something
 	 * with expected static strings in the type module (when unloaded the
@@ -4312,7 +4312,9 @@ gedit_window_init (GeditWindow *window)
 	gedit_debug_message (DEBUG_WINDOW, "Update plugins ui");
 	
 	window->priv->extensions = peas_extension_set_new (PEAS_ENGINE (gedit_plugins_engine_get_default ()),
-							   GEDIT_TYPE_WINDOW_ACTIVATABLE);
+							   GEDIT_TYPE_WINDOW_ACTIVATABLE,
+							   "window", window,
+							   NULL);
 	g_signal_connect (window->priv->extensions,
 			  "extension-added",
 			  G_CALLBACK (extension_added),
@@ -4321,7 +4323,7 @@ gedit_window_init (GeditWindow *window)
 			  "extension-removed",
 			  G_CALLBACK (extension_removed),
 			  window);
-	peas_extension_set_call (window->priv->extensions, "activate", window);
+	peas_extension_set_call (window->priv->extensions, "activate");
 
 
 	/* set visibility of panels.

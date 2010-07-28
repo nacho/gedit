@@ -24,8 +24,6 @@
 
 #include <glib-object.h>
 
-#include "gedit-window.h"
-
 G_BEGIN_DECLS
 
 /*
@@ -45,12 +43,9 @@ struct _GeditWindowActivatableInterface
 	GTypeInterface g_iface;
 
 	/* Virtual public methods */
-	void	(*activate)		(GeditWindowActivatable *activatable,
-					 GeditWindow            *window);
-	void	(*deactivate)		(GeditWindowActivatable	*activatable,
-					 GeditWindow            *window);
-	void	(*update_state)		(GeditWindowActivatable *activatable,
-                                         GeditWindow		*window);
+	void	(*activate)		(GeditWindowActivatable *activatable);
+	void	(*deactivate)		(GeditWindowActivatable *activatable);
+	void	(*update_state)		(GeditWindowActivatable *activatable);
 };
 
 /*
@@ -58,12 +53,9 @@ struct _GeditWindowActivatableInterface
  */
 GType	 gedit_window_activatable_get_type	(void)  G_GNUC_CONST;
 
-void	 gedit_window_activatable_activate	(GeditWindowActivatable *activatable,
-						 GeditWindow            *window);
-void	 gedit_window_activatable_deactivate	(GeditWindowActivatable *activatable,
-						 GeditWindow            *window);
-void	 gedit_window_activatable_update_state	(GeditWindowActivatable *activatable,
-						 GeditWindow            *window);
+void	 gedit_window_activatable_activate	(GeditWindowActivatable *activatable);
+void	 gedit_window_activatable_deactivate	(GeditWindowActivatable *activatable);
+void	 gedit_window_activatable_update_state	(GeditWindowActivatable *activatable);
 
 G_END_DECLS
 

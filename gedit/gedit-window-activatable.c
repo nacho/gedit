@@ -24,91 +24,103 @@
 #endif
 
 #include "gedit-window-activatable.h"
+#include "gedit-window.h"
 
 /**
  * SECTION:gedit-window-activatable
- * @short_description: Interface for extensions activatable on windows
+ * @short_description: Interface for activatable extensions on windows
  * @see_also: #PeasExtensionSet
  *
  * #GeditWindowActivatable is an interface which should be implemented by
  * extensions that should be activated on a gedit main window.
  **/
+
 G_DEFINE_INTERFACE(GeditWindowActivatable, gedit_window_activatable, G_TYPE_OBJECT)
 
 void
 gedit_window_activatable_default_init (GeditWindowActivatableInterface *iface)
 {
+	static gboolean initialized = FALSE;
+
+	if (!initialized)
+	{
+		/**
+		 * GeditWindowActivatable:window:
+		 *
+		 * The window property contains the gedit window for this
+		 * #GeditWindowActivatable instance.
+		 */
+		g_object_interface_install_property (iface,
+		                                     g_param_spec_object ("window",
+		                                                          "Window",
+		                                                          "The gedit window",
+		                                                          GEDIT_TYPE_WINDOW,
+		                                                          G_PARAM_READWRITE |
+		                                                          G_PARAM_CONSTRUCT_ONLY |
+		                                                          G_PARAM_STATIC_STRINGS));
+
+		initialized = TRUE;
+	}
 }
 
 /**
  * gedit_window_activatable_activate:
  * @activatable: A #GeditWindowActivatable.
- * @window: The #GeditWindow on which the plugin should be activated.
  *
- * Activates the extension on the given window.
+ * Activates the extension on the window property.
  */
 void
-gedit_window_activatable_activate (GeditWindowActivatable *activatable,
-				   GeditWindow            *window)
+gedit_window_activatable_activate (GeditWindowActivatable *activatable)
 {
 	GeditWindowActivatableInterface *iface;
 
 	g_return_if_fail (GEDIT_IS_WINDOW_ACTIVATABLE (activatable));
-	g_return_if_fail (GEDIT_IS_WINDOW (window));
 
 	iface = GEDIT_WINDOW_ACTIVATABLE_GET_IFACE (activatable);
-
 	if (iface->activate != NULL)
 	{
-		iface->activate (activatable, window);
+		iface->activate (activatable);
 	}
 }
 
 /**
  * gedit_window_activatable_deactivate:
  * @activatable: A #GeditWindowActivatable.
- * @window: A #GeditWindow.
  *
- * Deactivates the plugin on the given window.
+ * Deactivates the extension on the window property.
  */
 void
-gedit_window_activatable_deactivate (GeditWindowActivatable *activatable,
-				     GeditWindow            *window)
+gedit_window_activatable_deactivate (GeditWindowActivatable *activatable)
 {
 	GeditWindowActivatableInterface *iface;
 
 	g_return_if_fail (GEDIT_IS_WINDOW_ACTIVATABLE (activatable));
-	g_return_if_fail (GEDIT_IS_WINDOW (window));
 
 	iface = GEDIT_WINDOW_ACTIVATABLE_GET_IFACE (activatable);
-
 	if (iface->deactivate != NULL)
 	{
-		iface->deactivate (activatable, window);
+		iface->deactivate (activatable);
 	}
 }
 
 /**
  * gedit_window_activatable_update_state:
  * @activatable: A #GeditWindowActivatable.
- * @window: A #GeditWindow.
  *
- * Triggers an update of the plugin insternal state to take into account
- * state changes in the window state, due to a plugin or an user action.
+ * Triggers an update of the extension internal state to take into account
+ * state changes in the window, due to some event or user action.
  */
 void
-gedit_window_activatable_update_state (GeditWindowActivatable *activatable,
-				       GeditWindow            *window)
+gedit_window_activatable_update_state (GeditWindowActivatable *activatable)
 {
 	GeditWindowActivatableInterface *iface;
 
 	g_return_if_fail (GEDIT_IS_WINDOW_ACTIVATABLE (activatable));
-	g_return_if_fail (GEDIT_IS_WINDOW (window));
 
 	iface = GEDIT_WINDOW_ACTIVATABLE_GET_IFACE (activatable);
-
 	if (iface->update_state != NULL)
 	{
-		iface->update_state (activatable, window);
+		iface->update_state (activatable);
 	}
 }
+
