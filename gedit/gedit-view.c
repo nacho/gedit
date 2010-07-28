@@ -315,7 +315,7 @@ extension_added (PeasExtensionSet *extensions,
 		 PeasExtension    *exten,
 		 GeditView        *view)
 {
-	peas_extension_call (exten, "activate", view);
+	peas_extension_call (exten, "activate");
 }
 
 static void
@@ -324,7 +324,7 @@ extension_removed (PeasExtensionSet *extensions,
 		   PeasExtension    *exten,
 		   GeditView        *view)
 {
-	peas_extension_call (exten, "deactivate", view);
+	peas_extension_call (exten, "deactivate");
 }
 
 static void
@@ -357,7 +357,7 @@ on_notify_buffer_cb (GeditView  *view,
 	/* We only activate the extensions when the right buffer is set,
 	 * because most plugins will expect this behaviour, and we won't
 	 * change the buffer later anyway. */
-	peas_extension_set_call (view->priv->extensions, "activate", view);
+	peas_extension_set_call (view->priv->extensions, "activate");
 }
 
 static void 
@@ -451,7 +451,9 @@ gedit_view_init (GeditView *view)
 		gtk_target_list_add_uri_targets (tl, TARGET_URI_LIST);
 		
 	view->priv->extensions = peas_extension_set_new (PEAS_ENGINE (gedit_plugins_engine_get_default ()),
-							 GEDIT_TYPE_VIEW_ACTIVATABLE);
+							 GEDIT_TYPE_VIEW_ACTIVATABLE,
+							 "view", view,
+							 NULL);
 	g_signal_connect (view->priv->extensions,
 			  "extension-added",
 			  G_CALLBACK (extension_added),
@@ -479,8 +481,7 @@ gedit_view_destroy (GtkObject *object)
 	if (view->priv->extensions != NULL)
 	{
 		peas_extension_set_call (view->priv->extensions,
-					 "deactivate",
-					 view);
+					 "deactivate");
 		g_object_unref (view->priv->extensions);
 		view->priv->extensions = NULL;
 	}

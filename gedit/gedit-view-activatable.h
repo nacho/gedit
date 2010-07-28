@@ -24,8 +24,6 @@
 
 #include <glib-object.h>
 
-#include "gedit-view.h"
-
 G_BEGIN_DECLS
 
 /*
@@ -45,10 +43,8 @@ struct _GeditViewActivatableInterface
 	GTypeInterface g_iface;
 
 	/* Virtual public methods */
-	void	(*activate)		(GeditViewActivatable *activatable,
-					 GeditView            *view);
-	void	(*deactivate)		(GeditViewActivatable	*activatable,
-					 GeditView            *view);
+	void	(*activate)		(GeditViewActivatable *activatable);
+	void	(*deactivate)		(GeditViewActivatable *activatable);
 };
 
 /*
@@ -56,10 +52,8 @@ struct _GeditViewActivatableInterface
  */
 GType	 gedit_view_activatable_get_type	(void)  G_GNUC_CONST;
 
-void	 gedit_view_activatable_activate	(GeditViewActivatable *activatable,
-						 GeditView            *view);
-void	 gedit_view_activatable_deactivate	(GeditViewActivatable *activatable,
-						 GeditView            *view);
+void	 gedit_view_activatable_activate	(GeditViewActivatable *activatable);
+void	 gedit_view_activatable_deactivate	(GeditViewActivatable *activatable);
 
 G_END_DECLS
 

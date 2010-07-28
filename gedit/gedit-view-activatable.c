@@ -24,67 +24,82 @@
 #endif
 
 #include "gedit-view-activatable.h"
+#include "gedit-view.h"
 
 /**
  * SECTION:gedit-view-activatable
- * @short_description: Interface for extensions activatable on views
+ * @short_description: Interface for activatable extensions on views
  * @see_also: #PeasExtensionSet
  *
  * #GeditViewActivatable is an interface which should be implemented by
- * extensions that should be activated on a gedit view (or the document it
- * contains).
+ * extensions that should be activated on a gedit view.
  **/
+
 G_DEFINE_INTERFACE(GeditViewActivatable, gedit_view_activatable, G_TYPE_OBJECT)
 
 void
 gedit_view_activatable_default_init (GeditViewActivatableInterface *iface)
 {
+	static gboolean initialized = FALSE;
+
+	if (!initialized)
+	{
+		/**
+		 * GeditViewActivatable:view:
+		 *
+		 * The window property contains the gedit window for this
+		 * #GeditViewActivatable instance.
+		 */
+		g_object_interface_install_property (iface,
+		                                     g_param_spec_object ("view",
+		                                                          "view",
+		                                                          "A gedit view",
+		                                                          GEDIT_TYPE_VIEW,
+		                                                          G_PARAM_READWRITE |
+		                                                          G_PARAM_CONSTRUCT_ONLY |
+		                                                          G_PARAM_STATIC_STRINGS));
+
+		initialized = TRUE;
+	}
 }
 
 /**
  * gedit_view_activatable_activate:
  * @activatable: A #GeditViewActivatable.
- * @view: The #GeditView on which the plugin should be activated.
  *
- * Activates the extension on the given view.
+ * Activates the extension on the window property.
  */
 void
-gedit_view_activatable_activate (GeditViewActivatable *activatable,
-				   GeditView            *view)
+gedit_view_activatable_activate (GeditViewActivatable *activatable)
 {
 	GeditViewActivatableInterface *iface;
 
 	g_return_if_fail (GEDIT_IS_VIEW_ACTIVATABLE (activatable));
-	g_return_if_fail (GEDIT_IS_VIEW (view));
 
 	iface = GEDIT_VIEW_ACTIVATABLE_GET_IFACE (activatable);
-
 	if (iface->activate != NULL)
 	{
-		iface->activate (activatable, view);
+		iface->activate (activatable);
 	}
 }
 
 /**
  * gedit_view_activatable_deactivate:
  * @activatable: A #GeditViewActivatable.
- * @view: A #GeditView.
  *
- * Deactivates the plugin on the given view.
+ * Deactivates the extension on the window property.
  */
 void
-gedit_view_activatable_deactivate (GeditViewActivatable *activatable,
-				     GeditView            *view)
+gedit_view_activatable_deactivate (GeditViewActivatable *activatable)
 {
 	GeditViewActivatableInterface *iface;
 
 	g_return_if_fail (GEDIT_IS_VIEW_ACTIVATABLE (activatable));
-	g_return_if_fail (GEDIT_IS_VIEW (view));
 
 	iface = GEDIT_VIEW_ACTIVATABLE_GET_IFACE (activatable);
-
 	if (iface->deactivate != NULL)
 	{
-		iface->deactivate (activatable, view);
+		iface->deactivate (activatable);
 	}
 }
+
