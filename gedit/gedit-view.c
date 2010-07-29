@@ -129,6 +129,7 @@ static gboolean gedit_view_drag_drop		(GtkWidget        *widget,
 	      					 guint             timestamp);
 static gboolean	gedit_view_button_press_event	(GtkWidget        *widget,
 						 GdkEventButton   *event);
+static void	gedit_view_realize		(GtkWidget        *widget);
 
 static gboolean start_interactive_search	(GeditView        *view);
 static gboolean start_interactive_goto_line	(GeditView        *view);
@@ -214,6 +215,7 @@ gedit_view_class_init (GeditViewClass *klass)
 	widget_class->drag_data_received = gedit_view_drag_data_received;
 	widget_class->drag_drop = gedit_view_drag_drop;
 	widget_class->button_press_event = gedit_view_button_press_event;
+	widget_class->realize = gedit_view_realize;
 	klass->start_interactive_search = start_interactive_search;
 	klass->start_interactive_goto_line = start_interactive_goto_line;
 	klass->reset_searched_text = reset_searched_text;	
@@ -353,11 +355,6 @@ on_notify_buffer_cb (GeditView  *view,
 			  "search_highlight_updated",
 			  G_CALLBACK (search_highlight_updated_cb),
 			  view);
-
-	/* We only activate the extensions when the right buffer is set,
-	 * because most plugins will expect this behaviour, and we won't
-	 * change the buffer later anyway. */
-	peas_extension_set_call (view->priv->extensions, "activate");
 }
 
 static void 
@@ -468,7 +465,6 @@ gedit_view_init (GeditView *view)
 			  "notify::buffer", 
 			  G_CALLBACK (on_notify_buffer_cb),
 			  NULL);
-
 }
 
 static void
@@ -480,8 +476,7 @@ gedit_view_destroy (GtkObject *object)
 
 	if (view->priv->extensions != NULL)
 	{
-		peas_extension_set_call (view->priv->extensions,
-					 "deactivate");
+		peas_extension_set_call (view->priv->extensions, "deactivate");
 		g_object_unref (view->priv->extensions);
 		view->priv->extensions = NULL;
 	}
@@ -2162,6 +2157,19 @@ gedit_view_button_press_event (GtkWidget *widget, GdkEventButton *event)
 	}
 
 	return GTK_WIDGET_CLASS (gedit_view_parent_class)->button_press_event (widget, event);
+}
+
+static void
+gedit_view_realize (GtkWidget *widget)
+{
+	GeditView *view = GEDIT_VIEW (widget);
+
+	GTK_WIDGET_CLASS (gedit_view_parent_class)->realize (widget);
+
+	/* We only activate the extensions when the view is realized,
+	 * because most plugins will expect this behaviour, and we won't
+	 * change the buffer later anyway. */
+	peas_extension_set_call (view->priv->extensions, "activate");
 }
 
 static void 	
