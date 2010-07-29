@@ -2164,12 +2164,12 @@ gedit_view_realize (GtkWidget *widget)
 {
 	GeditView *view = GEDIT_VIEW (widget);
 
-	GTK_WIDGET_CLASS (gedit_view_parent_class)->realize (widget);
-
 	/* We only activate the extensions when the view is realized,
 	 * because most plugins will expect this behaviour, and we won't
 	 * change the buffer later anyway. */
 	peas_extension_set_call (view->priv->extensions, "activate");
+
+	GTK_WIDGET_CLASS (gedit_view_parent_class)->realize (widget);
 }
 
 static void 	
