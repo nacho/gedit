@@ -90,62 +90,10 @@ gedit_plugins_engine_class_init (GeditPluginsEngineClass *klass)
 	g_type_class_add_private (klass, sizeof (GeditPluginsEnginePrivate));
 }
 
-static void
-require_private_typelib (void)
-{
-	const gchar *lib_dir;
-	gchar *filename;
-	GMappedFile *mfile;
-	GTypelib *typelib;
-	const gchar *ns;
-	GError *error = NULL;
-
-	lib_dir = gedit_dirs_get_gedit_lib_dir ();
-	filename = g_build_filename (lib_dir,
-				     "girepository-1.0",
-				     "Gedit-3.0.typelib",
-				     NULL);
-
-	mfile = g_mapped_file_new (filename, FALSE, NULL);
-
-	g_free (filename);
-
-	if (mfile == NULL)
-	{
-		g_warning ("Private typelib 'Gedit-3.0' not found");
-		return;
-	}
-
-	typelib = g_typelib_new_from_mapped_file (mfile, &error);
-
-	if (typelib == NULL)
-	{
-		g_warning ("Private typelib 'Gedit-3.0' could not be loaded: %s",
-		           error->message);
-
-		g_error_free (error);
-		return;
-	}
-
-	ns = g_irepository_load_typelib (g_irepository_get_default (),
-					 typelib,
-					 0,
-					 &error);
-
-	if (!ns)
-	{
-		g_warning ("Typelib 'Gedit-3.0' could not be loaded: %s",
-		           error->message);
-		g_error_free (error);
-		return;
-	}
-
-	gedit_debug_message (DEBUG_PLUGINS, "Namespace '%s' loaded.", ns);
-}
-
 GeditPluginsEngine *
 gedit_plugins_engine_get_default (void)
 {
+	gchar *typelib_dir;
 	const gchar *modules_dir;
 	const gchar **search_paths;
 
@@ -154,12 +102,19 @@ gedit_plugins_engine_get_default (void)
 		return default_engine;
 	}
 
+	/* Require gedit's typelib. */
+	typelib_dir = g_build_filename (gedit_dirs_get_gedit_lib_dir (),
+					"girepository-1.0",
+					NULL);
+	g_irepository_require_private (g_irepository_get_default (),
+				       typelib_dir, "Gedit", "3.0", 0, NULL);
+	g_free (typelib_dir);
+
 	/* This should be moved to libpeas */
 	g_irepository_require (g_irepository_get_default (),
 			       "Peas", "1.0", 0, NULL);
 	g_irepository_require (g_irepository_get_default (),
 			       "PeasUI", "1.0", 0, NULL);
-	require_private_typelib ();
 
 	modules_dir = gedit_dirs_get_binding_modules_dir ();
 	search_paths = g_new (const gchar *, 5);
