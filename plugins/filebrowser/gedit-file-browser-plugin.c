@@ -131,26 +131,41 @@ G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditFileBrowserPlugin,
 				_gedit_file_browser_widget_register_type	(type_module);		\
 )
 
+static GSettings *
+settings_try_new (const gchar *schema)
+{
+	const gchar * const * schemas;
+	GSettings *settings = NULL;
+
+	schemas = g_settings_list_schemas ();
+
+	if (schemas == NULL)
+	{
+		return NULL;
+	}
+
+	for (; *schemas != NULL; schemas++)
+	{
+		if (g_strcmp0 (*schemas, schema) == 0)
+		{
+			settings = g_settings_new (schema);
+			break;
+		}
+	}
+
+	return settings;
+}
+
 static void
 gedit_file_browser_plugin_init (GeditFileBrowserPlugin *plugin)
 {
-	const gchar * const * schemas;
+	
 
 	plugin->priv = GEDIT_FILE_BROWSER_PLUGIN_GET_PRIVATE (plugin);
 
 	plugin->priv->settings = g_settings_new (FILEBROWSER_BASE_SETTINGS);
 	plugin->priv->terminal_settings = g_settings_new (TERMINAL_BASE_SETTINGS);
-
-	schemas = g_settings_list_schemas ();
-
-	for (; schemas != NULL && *schemas != NULL; schemas++)
-	{
-		if (g_strcmp0 (*schemas, NAUTILUS_BASE_SETTINGS) == 0)
-		{
-			plugin->priv->nautilus_settings = g_settings_new (NAUTILUS_BASE_SETTINGS);
-			break;
-		}
-	}
+	plugin->priv->nautilus_settings = settings_try_new (NAUTILUS_BASE_SETTINGS);
 
 	if (plugin->priv->nautilus_settings == NULL)
 	{
