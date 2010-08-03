@@ -124,6 +124,7 @@ NOINST_H_FILES =			\
 	gedit-tab-label.h		\
 	gedittextregion.h		\
 	gedit-ui.h			\
+	gedit-view-frame.h		\
 	gedit-window-private.h
 
 INST_H_FILES =				\
@@ -207,6 +208,7 @@ libgedit_c_files =			\
 	gedit-tab-label.c		\
 	gedit-utils.c 			\
 	gedit-view.c 			\
+	gedit-view-frame.c		\
 	gedit-window.c			\
 	gedittextregion.c
 
