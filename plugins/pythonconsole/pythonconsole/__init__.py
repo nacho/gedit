@@ -34,7 +34,7 @@ PYTHON_ICON = 'gnome-mime-text-x-python'
 class PythonConsolePlugin(GObject.Object, Gedit.WindowActivatable, PeasUI.Configurable):
     __gtype_name__ = "PythonConsolePlugin"
 
-    window = GObject.property(type=Gedit.Window)
+    window = GObject.property(type=GObject.Object)
 
     def __init__(self):
         GObject.Object.__init__(self)
