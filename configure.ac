@@ -4,7 +4,7 @@ AC_PREREQ(2.63.2)
 
 m4_define(gedit_major_version,  2)
 m4_define(gedit_minor_version, 31)
-m4_define(gedit_micro_version,  5)
+m4_define(gedit_micro_version,  6)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
 AC_INIT([gedit],[gedit_version],[http://bugzilla.gnome.org/enter_bug.cgi?product=gedit],[gedit],[http://projects.gnome.org/gedit/])
@@ -414,8 +414,8 @@ plugins/filebrowser/org.gnome.gedit.plugins.filebrowser.gschema.xml.in
 plugins/filebrowser/Makefile
 plugins/modelines/Makefile
 plugins/pythonconsole/Makefile
+plugins/pythonconsole/org.gnome.gedit.plugins.pythonconsole.gschema.xml.in
 plugins/pythonconsole/pythonconsole/Makefile
-plugins/pythonconsole/pythonconsole/org.gnome.gedit.plugins.pythonconsole.gschema.xml.in
 plugins/sort/Makefile
 plugins/spell/Makefile
 plugins/taglist/Makefile

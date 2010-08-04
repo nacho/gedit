@@ -7,9 +7,18 @@ plugin_in_files = pythonconsole.gedit-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-EXTRA_DIST = $(plugin_in_files)
+gsettings_SCHEMAS = org.gnome.gedit.plugins.pythonconsole.gschema.xml
 
-CLEANFILES = $(plugin_DATA)
-DISTCLEANFILES = $(plugin_DATA)
+@INTLTOOL_XML_NOMERGE_RULE@
+@GSETTINGS_RULES@
+
+EXTRA_DIST =			\
+	$(plugin_in_files)	\
+	org.gnome.gedit.plugins.pythonconsole.gschema.xml.in.in
+
+CLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
+DISTCLEANFILES = $(plugin_DATA) $(gsettings_SCHEMAS)
+
+MAINTAINERCLEANFILES = $(gsettings_SCHEMAS:.xml=.valid)
 
 -include $(top_srcdir)/git.mk
