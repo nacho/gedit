@@ -57,7 +57,15 @@ G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditTaglistPlugin,
 
 struct _GeditTaglistPluginPrivate
 {
+	GeditWindow *window;
+
 	GtkWidget *taglist_panel;
+};
+
+enum
+{
+	PROP_0,
+	PROP_WINDOW
 };
 
 static void
@@ -66,6 +74,22 @@ gedit_taglist_plugin_init (GeditTaglistPlugin *plugin)
 	plugin->priv = GEDIT_TAGLIST_PLUGIN_GET_PRIVATE (plugin);
 
 	gedit_debug_message (DEBUG_PLUGINS, "GeditTaglistPlugin initializing");
+}
+
+static void
+gedit_taglist_plugin_dispose (GObject *object)
+{
+	GeditTaglistPlugin *plugin = GEDIT_TAGLIST_PLUGIN (object);
+
+	gedit_debug_message (DEBUG_PLUGINS, "GeditTaglistPlugin disposing");
+
+	if (plugin->priv->window != NULL)
+	{
+		g_object_unref (plugin->priv->window);
+		plugin->priv->window = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_taglist_plugin_parent_class)->dispose (object);
 }
 
 static void
@@ -79,8 +103,47 @@ gedit_taglist_plugin_finalize (GObject *object)
 }
 
 static void
-gedit_taglist_plugin_activate (GeditWindowActivatable *activatable,
-			       GeditWindow            *window)
+gedit_taglist_plugin_set_property (GObject      *object,
+                                   guint         prop_id,
+                                   const GValue *value,
+                                   GParamSpec   *pspec)
+{
+	GeditTaglistPlugin *plugin = GEDIT_TAGLIST_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			plugin->priv->window = GEDIT_WINDOW (g_value_dup_object (value));
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_taglist_plugin_get_property (GObject    *object,
+                                   guint       prop_id,
+                                   GValue     *value,
+                                   GParamSpec *pspec)
+{
+	GeditTaglistPlugin *plugin = GEDIT_TAGLIST_PLUGIN (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			g_value_set_object (value, plugin->priv->window);
+			break;
+
+		default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_taglist_plugin_activate (GeditWindowActivatable *activatable)
 {
 	GeditTaglistPluginPrivate *priv;
 	GeditPanel *side_panel;
@@ -90,10 +153,10 @@ gedit_taglist_plugin_activate (GeditWindowActivatable *activatable,
 
 	priv = GEDIT_TAGLIST_PLUGIN (activatable)->priv;
 
-	side_panel = gedit_window_get_side_panel (window);
+	side_panel = gedit_window_get_side_panel (priv->window);
 
 	data_dir = peas_extension_base_get_data_dir (PEAS_EXTENSION_BASE (activatable));
-	priv->taglist_panel = gedit_taglist_plugin_panel_new (window, data_dir);
+	priv->taglist_panel = gedit_taglist_plugin_panel_new (priv->window, data_dir);
 	g_free (data_dir);
 
 	gedit_panel_add_item_with_stock_icon (side_panel,
@@ -104,8 +167,7 @@ gedit_taglist_plugin_activate (GeditWindowActivatable *activatable,
 }
 
 static void
-gedit_taglist_plugin_deactivate (GeditWindowActivatable *activatable,
-				 GeditWindow            *window)
+gedit_taglist_plugin_deactivate (GeditWindowActivatable *activatable)
 {
 	GeditTaglistPluginPrivate *priv;
 	GeditPanel *side_panel;
@@ -114,15 +176,14 @@ gedit_taglist_plugin_deactivate (GeditWindowActivatable *activatable,
 
 	priv = GEDIT_TAGLIST_PLUGIN (activatable)->priv;
 
-	side_panel = gedit_window_get_side_panel (window);
+	side_panel = gedit_window_get_side_panel (priv->window);
 
 	gedit_panel_remove_item (side_panel,
 				 priv->taglist_panel);
 }
 
 static void
-gedit_taglist_plugin_update_state (GeditWindowActivatable *activatable,
-				   GeditWindow            *window)
+gedit_taglist_plugin_update_state (GeditWindowActivatable *activatable)
 {
 	GeditTaglistPluginPrivate *priv;
 	GeditView *view;
@@ -131,7 +192,7 @@ gedit_taglist_plugin_update_state (GeditWindowActivatable *activatable,
 
 	priv = GEDIT_TAGLIST_PLUGIN (activatable)->priv;
 
-	view = gedit_window_get_active_view (window);
+	view = gedit_window_get_active_view (priv->window);
 
 	gtk_widget_set_sensitive (priv->taglist_panel,
 				  (view != NULL) &&
@@ -143,7 +204,12 @@ gedit_taglist_plugin_class_init (GeditTaglistPluginClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+	object_class->dispose = gedit_taglist_plugin_dispose;
 	object_class->finalize = gedit_taglist_plugin_finalize;
+	object_class->set_property = gedit_taglist_plugin_set_property;
+	object_class->get_property = gedit_taglist_plugin_get_property;
+
+	g_object_class_override_property (object_class, PROP_WINDOW, "window");
 
 	g_type_class_add_private (object_class, sizeof (GeditTaglistPluginPrivate));
 }
