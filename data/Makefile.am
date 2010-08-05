@@ -26,13 +26,17 @@ gsettings_SCHEMAS = org.gnome.gedit.gschema.xml
 
 @GSETTINGS_RULES@
 
+convertdir = $(datadir)/GConf/gsettings
+convert_DATA = gedit.convert
+
 EXTRA_DIST = 					\
 	$(desktop_in_files)			\
 	$(service_in_files)			\
 	$(man_MANS)				\
 	gedit.pc.in				\
 	gedit-bugreport.sh.in			\
-	org.gnome.gedit.gschema.xml.in.in
+	org.gnome.gedit.gschema.xml.in.in	\
+	gedit.convert
 
 CLEANFILES =	 			\
 	$(desktop_DATA)			\
