@@ -279,20 +279,32 @@ set_entry_background (GtkWidget               *entry,
 {
 	if (col == GEDIT_SEARCH_ENTRY_NOT_FOUND)
 	{
-		GdkColor red;
-		GdkColor white;
+		GdkColor error_default_bg = { 0, 0xff00, 0x6600, 0x6600 };
+		GdkColor error_default_fg = { 0, 0xff00, 0xff00, 0xff00 };
+		GdkColor sym_bg, sym_fg;
+		GdkColor fg, bg;
+		GtkStyle *style;
 
-		/* FIXME: a11y and theme */
+		style = gtk_widget_get_style (entry);
 
-		gdk_color_parse ("#FF6666", &red);
-		gdk_color_parse ("white", &white);
+		if (gtk_style_lookup_color (style, "error_fg_color", &sym_fg) &&
+		    gtk_style_lookup_color (style, "error_bg_color", &sym_bg))
+		{
+			fg = sym_fg;
+			bg = sym_bg;
+		}
+		else
+		{
+			fg = error_default_fg;
+			bg = error_default_bg;
+		}
 
 		gtk_widget_modify_base (entry,
 		                        GTK_STATE_NORMAL,
-		                        &red);
+		                        &bg);
 		gtk_widget_modify_text (entry,
 		                        GTK_STATE_NORMAL,
-		                        &white);
+		                        &fg);
 	}
 	else /* reset */
 	{
