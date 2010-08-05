@@ -996,8 +996,8 @@ gedit_document_init (GeditDocument *doc)
 
 	doc->priv->encoding = gedit_encoding_get_utf8 ();
 
-	g_settings_get (doc->priv->editor_settings, GEDIT_SETTINGS_MAX_UNDO_ACTIONS,
-			"u", &undo_actions);
+	undo_actions = g_settings_get_int (doc->priv->editor_settings,
+					   GEDIT_SETTINGS_MAX_UNDO_ACTIONS);
 	bracket_matching = g_settings_get_boolean (doc->priv->editor_settings,
 						   GEDIT_SETTINGS_BRACKET_MATCHING);
 	search_hl = g_settings_get_boolean (doc->priv->editor_settings,

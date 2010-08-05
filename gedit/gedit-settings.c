@@ -331,7 +331,7 @@ on_undo_actions_limit_changed (GSettings     *settings,
 	GList *docs, *l;
 	gint ul;
 	
-	g_settings_get (settings, key, "u", &ul);
+	ul = g_settings_get_int (settings, key);
 	
 	ul = CLAMP (ul, -1, 250);
 	
