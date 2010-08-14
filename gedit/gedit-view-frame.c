@@ -152,7 +152,7 @@ gedit_view_frame_init (GeditViewFrame *frame)
 
 	g_object_unref (doc);
 
-	holder->priv->views = g_slist_append (holder->priv->views, web_view);
+	frame->priv->views = g_slist_append (frame->priv->views, web_view);
 
 	/* Create the scrolled window */
 	sw = gtk_scrolled_window_new (NULL, NULL);

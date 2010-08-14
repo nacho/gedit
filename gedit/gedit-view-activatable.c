@@ -24,7 +24,7 @@
 #endif
 
 #include "gedit-view-activatable.h"
-#include "gedit-view.h"
+#include "gedit-view-interface.h"
 
 /**
  * SECTION:gedit-view-activatable
