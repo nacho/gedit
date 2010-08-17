@@ -156,13 +156,13 @@ static void
 gedit_modeline_plugin_activate (GeditViewActivatable *activatable)
 {
 	GeditModelinePlugin *plugin;
-        GtkTextBuffer *doc;
+	GtkTextBuffer *doc;
 
 	gedit_debug (DEBUG_PLUGINS);
 
 	plugin = GEDIT_MODELINE_PLUGIN (activatable);
 
-        doc = gtk_text_view_get_buffer (GTK_TEXT_VIEW (plugin->priv->view));
+	doc = gtk_text_view_get_buffer (GTK_TEXT_VIEW (plugin->priv->view));
 
 	plugin->priv->document_loaded_handler_id =
 		g_signal_connect (doc, "loaded",
