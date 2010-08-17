@@ -50,8 +50,6 @@ const gchar	*gedit_dirs_get_gedit_plugins_dir	(void);
 
 const gchar	*gedit_dirs_get_gedit_plugins_data_dir	(void);
 
-const gchar	*gedit_dirs_get_binding_modules_dir	(void);
-
 gchar		*gedit_dirs_get_ui_file			(const gchar *file);
 
 G_END_DECLS

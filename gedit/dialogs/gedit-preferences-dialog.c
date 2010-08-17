@@ -37,7 +37,7 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
-#include <libpeasui/peas-ui-plugin-manager.h>
+#include <libpeas-gtk/peas-gtk-plugin-manager.h>
 
 #include "gedit-preferences-dialog.h"
 #include "gedit-utils.h"
@@ -911,7 +911,7 @@ setup_plugins_page (GeditPreferencesDialog *dlg)
 
 	engine = gedit_plugins_engine_get_default ();
 
-	page_content = peas_ui_plugin_manager_new (PEAS_ENGINE (engine));
+	page_content = peas_gtk_plugin_manager_new (PEAS_ENGINE (engine));
 	g_return_if_fail (page_content != NULL);
 
 	gtk_box_pack_start (GTK_BOX (dlg->priv->plugin_manager_place_holder),

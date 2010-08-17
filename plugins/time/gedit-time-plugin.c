@@ -41,7 +41,7 @@
 #include <gedit/gedit-utils.h>
 #include <gedit/gedit-window.h>
 #include <gedit/gedit-window-activatable.h>
-#include <libpeasui/peas-ui-configurable.h>
+#include <libpeas-gtk/peas-gtk-configurable.h>
 
 #define GEDIT_TIME_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
 					      GEDIT_TYPE_TIME_PLUGIN, \
@@ -167,7 +167,7 @@ enum
 };
 
 static void gedit_window_activatable_iface_init (GeditWindowActivatableInterface *iface);
-static void peas_ui_configurable_iface_init (PeasUIConfigurableInterface *iface);
+static void peas_gtk_configurable_iface_init (PeasGtkConfigurableInterface *iface);
 
 G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditTimePlugin,
 				gedit_time_plugin,
@@ -175,8 +175,8 @@ G_DEFINE_DYNAMIC_TYPE_EXTENDED (GeditTimePlugin,
 				0,
 				G_IMPLEMENT_INTERFACE_DYNAMIC (GEDIT_TYPE_WINDOW_ACTIVATABLE,
 							       gedit_window_activatable_iface_init)
-				G_IMPLEMENT_INTERFACE_DYNAMIC (PEAS_UI_TYPE_CONFIGURABLE,
-							       peas_ui_configurable_iface_init))
+				G_IMPLEMENT_INTERFACE_DYNAMIC (PEAS_GTK_TYPE_CONFIGURABLE,
+							       peas_gtk_configurable_iface_init))
 
 static void time_cb (GtkAction *action, GeditTimePlugin *plugin);
 
@@ -1122,7 +1122,7 @@ time_cb (GtkAction       *action,
 }
 
 static GtkWidget *
-gedit_time_plugin_create_configure_widget (PeasUIConfigurable *configurable)
+gedit_time_plugin_create_configure_widget (PeasGtkConfigurable *configurable)
 {
 	TimeConfigureWidget *widget;
 
@@ -1151,7 +1151,7 @@ gedit_time_plugin_class_finalize (GeditTimePluginClass *klass)
 }
 
 static void
-peas_ui_configurable_iface_init (PeasUIConfigurableInterface *iface)
+peas_gtk_configurable_iface_init (PeasGtkConfigurableInterface *iface)
 {
 	iface->create_configure_widget = gedit_time_plugin_create_configure_widget;
 }
@@ -1173,7 +1173,7 @@ peas_register_types (PeasObjectModule *module)
 						    GEDIT_TYPE_WINDOW_ACTIVATABLE,
 						    GEDIT_TYPE_TIME_PLUGIN);
 	peas_object_module_register_extension_type (module,
-						    PEAS_UI_TYPE_CONFIGURABLE,
+						    PEAS_GTK_TYPE_CONFIGURABLE,
 						    GEDIT_TYPE_TIME_PLUGIN);
 }
 

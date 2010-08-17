@@ -173,12 +173,6 @@ gedit_dirs_get_gedit_plugins_data_dir (void)
 	return gedit_plugins_data_dir;
 }
 
-const gchar *
-gedit_dirs_get_binding_modules_dir (void)
-{
-	return gedit_lib_dir;
-}
-
 gchar *
 gedit_dirs_get_ui_file (const gchar *file)
 {

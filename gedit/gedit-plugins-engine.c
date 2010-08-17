@@ -94,7 +94,6 @@ GeditPluginsEngine *
 gedit_plugins_engine_get_default (void)
 {
 	gchar *typelib_dir;
-	const gchar *modules_dir;
 	const gchar **search_paths;
 
 	if (default_engine != NULL)
@@ -116,7 +115,6 @@ gedit_plugins_engine_get_default (void)
 	g_irepository_require (g_irepository_get_default (),
 			       "PeasUI", "1.0", 0, NULL);
 
-	modules_dir = gedit_dirs_get_binding_modules_dir ();
 	search_paths = g_new (const gchar *, 5);
 	/* Add the user plugins dir in ~ */
 	search_paths[0] = gedit_dirs_get_user_plugins_dir ();
@@ -129,7 +127,6 @@ gedit_plugins_engine_get_default (void)
 
 	default_engine = GEDIT_PLUGINS_ENGINE (g_object_new (GEDIT_TYPE_PLUGINS_ENGINE,
 							     "app-name", "Gedit",
-							     "base-module-dir", modules_dir,
 							     "search-paths", search_paths,
 							     NULL));
 
