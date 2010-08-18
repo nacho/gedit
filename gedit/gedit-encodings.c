@@ -46,6 +46,10 @@ struct _GeditEncoding
 	const gchar *name;
 };
 
+G_DEFINE_BOXED_TYPE (GeditEncoding, gedit_encoding,
+                     gedit_encoding_copy,
+                     gedit_encoding_free)
+
 /* 
  * The original versions of the following tables are taken from profterm 
  *
@@ -448,28 +452,6 @@ gedit_encoding_free (GeditEncoding *enc)
 {
 	g_return_if_fail (enc != NULL);
 }
-
-/**
- * gedit_encoding_get_type:
- * 
- * Retrieves the GType object which is associated with the
- * #GeditEncoding class.
- * 
- * Return value: the GType associated with #GeditEncoding.
- **/
-GType 
-gedit_encoding_get_type (void)
-{
-	static GType our_type = 0;
-
-	if (!our_type)
-		our_type = g_boxed_type_register_static (
-			"GeditEncoding",
-			(GBoxedCopyFunc) gedit_encoding_copy,
-			(GBoxedFreeFunc) gedit_encoding_free);
-
-	return our_type;
-} 
 
 static gboolean
 data_exists (GSList         *list,

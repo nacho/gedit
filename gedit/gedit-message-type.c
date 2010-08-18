@@ -79,6 +79,10 @@ struct _GeditMessageType
 	GHashTable *arguments; /* mapping of key -> ArgumentInfo */
 };
 
+G_DEFINE_BOXED_TYPE (GeditMessageType, gedit_message_type,
+                     gedit_message_type_ref,
+                     gedit_message_type_unref)
+
 /**
  * gedit_message_type_ref:
  * @message_type: the #GeditMessageType
@@ -118,28 +122,6 @@ gedit_message_type_unref (GeditMessageType *message_type)
 	
 	g_hash_table_destroy (message_type->arguments);
 	g_free (message_type);
-}
-
-/**
- * gedit_message_type_get_type:
- * 
- * Retrieves the GType object which is associated with the
- * #GeditMessageType class.
- * 
- * Return value: the GType associated with #GeditMessageType.
- **/
-GType 
-gedit_message_type_get_type (void)
-{
-	static GType our_type = 0;
-
-	if (!our_type)
-		our_type = g_boxed_type_register_static (
-			"GeditMessageType",
-			(GBoxedCopyFunc) gedit_message_type_ref,
-			(GBoxedFreeFunc) gedit_message_type_unref);
-
-	return our_type;
 }
 
 /**
