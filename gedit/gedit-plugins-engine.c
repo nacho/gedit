@@ -95,6 +95,7 @@ gedit_plugins_engine_get_default (void)
 {
 	gchar *typelib_dir;
 	const gchar **search_paths;
+	GError *error = NULL;
 
 	if (default_engine != NULL)
 	{
@@ -105,15 +106,33 @@ gedit_plugins_engine_get_default (void)
 	typelib_dir = g_build_filename (gedit_dirs_get_gedit_lib_dir (),
 					"girepository-1.0",
 					NULL);
-	g_irepository_require_private (g_irepository_get_default (),
-				       typelib_dir, "Gedit", "3.0", 0, NULL);
+
+	if (!g_irepository_require_private (g_irepository_get_default (),
+					    typelib_dir, "Gedit", "3.0", 0, &error))
+	{
+		g_warning ("Could not load Gedit repository: %s", error->message);
+		g_error_free (error);
+		error = NULL;
+	}
+
 	g_free (typelib_dir);
 
 	/* This should be moved to libpeas */
-	g_irepository_require (g_irepository_get_default (),
-			       "Peas", "1.0", 0, NULL);
-	g_irepository_require (g_irepository_get_default (),
-			       "PeasUI", "1.0", 0, NULL);
+	if (!g_irepository_require (g_irepository_get_default (),
+				    "Peas", "1.0", 0, &error))
+	{
+		g_warning ("Could not load Peas repository: %s", error->message);
+		g_error_free (error);
+		error = NULL;
+	}
+
+	if (!g_irepository_require (g_irepository_get_default (),
+				    "PeasGtk", "1.0", 0, &error))
+	{
+		g_warning ("Could not load PeasGtk repository: %s", error->message);
+		g_error_free (error);
+		error = NULL;
+	}
 
 	search_paths = g_new (const gchar *, 5);
 	/* Add the user plugins dir in ~ */
