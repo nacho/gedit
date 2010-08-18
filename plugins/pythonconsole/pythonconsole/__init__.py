@@ -51,7 +51,7 @@ class PythonConsolePlugin(GObject.Object, Gedit.WindowActivatable, PeasUI.Config
         bottom.add_item(self._console, "GeditPythonConsolePanel",
                         _('Python Console'), image)
 
-    def deactivate(self):
+    def do_deactivate(self):
         self._console.stop()
         bottom = self.window.get_bottom_panel()
         bottom.remove_item(self._console)
