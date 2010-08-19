@@ -15,6 +15,7 @@ snippets_DATA = \
 	javascript.xml \
 	java.xml \
 	latex.xml \
+	mallard.xml \
 	perl.xml \
 	php.xml \
 	python.xml \
