@@ -36,6 +36,7 @@
 #include <unistd.h>
 
 #include <glib/gi18n.h>
+#include <libpeas/peas-extension-set.h>
 
 #include "gedit-app.h"
 #include "gedit-commands.h"
@@ -45,6 +46,8 @@
 #include "gedit-enum-types.h"
 #include "gedit-dirs.h"
 #include "gedit-settings.h"
+#include "gedit-app-activatable.h"
+#include "gedit-plugins-engine.h"
 
 #ifdef OS_OSX
 #include "gedit-app-osx.h"
@@ -80,6 +83,8 @@ struct _GeditAppPrivate
 	
 	GSettings         *settings;
 	GSettings         *window_settings;
+
+	PeasExtensionSet  *extensions;
 };
 
 G_DEFINE_ABSTRACT_TYPE(GeditApp, gedit_app, G_TYPE_INITIALLY_UNOWNED)
@@ -102,7 +107,7 @@ gedit_app_finalize (GObject *object)
 static void
 gedit_app_dispose (GObject *object)
 {
-	GeditApp *app = GEDIT_APP (object); 
+	GeditApp *app = GEDIT_APP (object);
 
 	if (app->priv->window_settings != NULL)
 	{
@@ -114,6 +119,16 @@ gedit_app_dispose (GObject *object)
 	{
 		g_object_unref (app->priv->settings);
 		app->priv->settings = NULL;
+	}
+
+	if (app->priv->extensions != NULL)
+	{
+		peas_extension_set_call (app->priv->extensions,
+					 "deactivate",
+					 app);
+
+		g_object_unref (app->priv->extensions);
+		app->priv->extensions = NULL;
 	}
 
 	G_OBJECT_CLASS (gedit_app_parent_class)->dispose (object);
@@ -474,18 +489,53 @@ save_print_settings (GeditApp *app)
 }
 
 static void
+extension_added (PeasExtensionSet *extensions,
+		 PeasPluginInfo   *info,
+		 PeasExtension    *exten,
+		 GeditApp         *app)
+{
+	peas_extension_call (exten, "activate");
+}
+
+static void
+extension_removed (PeasExtensionSet *extensions,
+		   PeasPluginInfo   *info,
+		   PeasExtension    *exten,
+		   GeditApp         *app)
+{
+	peas_extension_call (exten, "deactivate");
+}
+
+static void
 gedit_app_init (GeditApp *app)
 {
 	app->priv = GEDIT_APP_GET_PRIVATE (app);
 
 	load_accels ();
-	
+
 	/* Load settings */
 	app->priv->settings = gedit_settings_new ();
 	app->priv->window_settings = g_settings_new ("org.gnome.gedit.state.window");
 
 	/* initial lockdown state */
 	app->priv->lockdown = gedit_settings_get_lockdown (GEDIT_SETTINGS (app->priv->settings));
+
+	app->priv->extensions = peas_extension_set_new (PEAS_ENGINE (gedit_plugins_engine_get_default ()),
+							GEDIT_TYPE_APP_ACTIVATABLE,
+							"app", app,
+							NULL);
+
+	g_signal_connect (app->priv->extensions,
+			  "extension-added",
+			  G_CALLBACK (extension_added),
+			  app);
+
+	g_signal_connect (app->priv->extensions,
+			  "extension-removed",
+			  G_CALLBACK (extension_removed),
+			  app);
+
+	peas_extension_set_call (app->priv->extensions, "activate");
 }
 
 /**

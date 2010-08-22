@@ -129,6 +129,7 @@ NOINST_H_FILES =			\
 
 INST_H_FILES =				\
 	gedit-app.h			\
+	gedit-app-activatable.h		\
 	gedit-commands.h		\
 	gedit-debug.h			\
 	gedit-document.h 		\
@@ -159,6 +160,7 @@ header_DATA = 				\
 	$(INST_H_FILES)
 
 libgedit_private_la_SOURCES =		\
+	gedit-app-activatable.c		\
 	gedit-view-activatable.c	\
 	gedit-window-activatable.c
 
