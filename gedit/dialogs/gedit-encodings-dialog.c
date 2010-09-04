@@ -350,8 +350,7 @@ gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
 
 	gtk_window_set_title (GTK_WINDOW (dlg), _("Character Encodings"));
 	gtk_window_set_default_size (GTK_WINDOW (dlg), 650, 400);
-	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
-	
+
 	/* HIG defaults */
 	gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);
 	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),

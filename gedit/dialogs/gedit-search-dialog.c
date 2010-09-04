@@ -324,7 +324,6 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 	dlg->priv = GEDIT_SEARCH_DIALOG_GET_PRIVATE (dlg);
 
 	gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
-	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
 	gtk_dialog_add_buttons (GTK_DIALOG (dlg),

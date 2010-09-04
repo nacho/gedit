@@ -953,7 +953,6 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 
 	gtk_window_set_title (GTK_WINDOW (dlg), _("gedit Preferences"));
 	gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
-	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
 	/* HIG defaults */
