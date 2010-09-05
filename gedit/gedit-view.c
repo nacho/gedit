@@ -2114,9 +2114,9 @@ create_line_numbers_menu (GtkWidget *view)
 					gtk_source_view_get_show_line_numbers (GTK_SOURCE_VIEW (view)));
 
 	g_settings_bind (GEDIT_VIEW (view)->priv->editor_settings,
-			 "active",
-			 item,
 			 GEDIT_SETTINGS_DISPLAY_LINE_NUMBERS,
+			 item,
+			 "active",
 			 G_SETTINGS_BIND_SET);
 	
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
