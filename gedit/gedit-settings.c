@@ -49,7 +49,6 @@ struct _GeditSettingsPrivate
 	GSettings *interface;
 	GSettings *editor;
 	GSettings *ui;
-	GSettings *plugins;
 	
 	gchar *old_scheme;
 };
@@ -93,12 +92,6 @@ gedit_settings_dispose (GObject *object)
 	{
 		g_object_unref (gs->priv->ui);
 		gs->priv->ui = NULL;
-	}
-	
-	if (gs->priv->plugins != NULL)
-	{
-		g_object_unref (gs->priv->plugins);
-		gs->priv->plugins = NULL;
 	}
 
 	G_OBJECT_CLASS (gedit_settings_parent_class)->dispose (object);
@@ -665,7 +658,6 @@ initialize (GeditSettings *gs)
 	gs->priv->editor = g_settings_get_child (prefs, "editor");
 	gs->priv->ui = g_settings_get_child (prefs, "ui");
 	g_object_unref (prefs);
-	gs->priv->plugins = g_settings_get_child (G_SETTINGS (gs), "plugins");
 	
 	/* Load settings */
 	gs->priv->lockdown = g_settings_new ("org.gnome.desktop.lockdown");
