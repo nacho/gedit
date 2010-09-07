@@ -27,7 +27,6 @@
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include "gedit-theatrics-animation.h"
 #include "gedit-theatrics-choreographer.h"
 
 G_BEGIN_DECLS

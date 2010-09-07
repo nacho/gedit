@@ -24,7 +24,6 @@
 
 #include "gedit-overlay.h"
 #include "gedit-marshal.h"
-#include "theatrics/gedit-theatrics-animation.h"
 #include "theatrics/gedit-theatrics-animated-widget.h"
 #include "theatrics/gedit-theatrics-stage.h"
 
