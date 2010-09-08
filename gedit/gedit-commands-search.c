@@ -483,12 +483,11 @@ search_dialog_destroyed (GeditWindow       *window,
 }
 
 static GtkWidget *
-create_dialog (GeditWindow *window,
-	       gboolean     show_replace)
+create_dialog (GeditWindow *window)
 {
 	GtkWidget *dialog;
 
-	dialog = gedit_search_dialog_new (GTK_WINDOW (window), show_replace);
+	dialog = gedit_search_dialog_new (GTK_WINDOW (window));
 
 	g_signal_connect (dialog,
 			  "response",
@@ -514,57 +513,24 @@ void
 _gedit_cmd_search_find (GtkAction   *action,
 			GeditWindow *window)
 {
-	gpointer data;
-	GtkWidget *search_dialog;
-	GeditDocument *doc;
-	gboolean selection_exists;
-	gchar *find_text = NULL;
-	gint sel_len;
+	GeditView *active_view;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	data = g_object_get_data (G_OBJECT (window), GEDIT_SEARCH_DIALOG_KEY);
+	active_view = gedit_window_get_active_view (window);
+	if (active_view == NULL)
+		return;
 
-	if (data == NULL)
-	{
-		search_dialog = create_dialog (window, FALSE);
-	}
-	else
-	{
-		g_return_if_fail (GEDIT_IS_SEARCH_DIALOG (data));
-		
-		search_dialog = GTK_WIDGET (data);
-		
-		/* turn the dialog into a find dialog if needed */
-		if (gedit_search_dialog_get_show_replace (GEDIT_SEARCH_DIALOG (search_dialog)))
-		{
-			gedit_search_dialog_set_show_replace (GEDIT_SEARCH_DIALOG (search_dialog),
-							      FALSE);
-		}
-	}
-
-	doc = gedit_window_get_active_document (window);
-	g_return_if_fail (doc != NULL);
-
-	selection_exists = get_selected_text (GTK_TEXT_BUFFER (doc),
-					      &find_text,
-					      &sel_len);
-
-	if (selection_exists && find_text != NULL && sel_len < 80)
-	{
-		gedit_search_dialog_set_search_text (GEDIT_SEARCH_DIALOG (search_dialog),
-						     find_text);
-		g_free (find_text);
-	}
-	else
-	{
-		g_free (find_text);
-	}
-
-	gtk_widget_show (search_dialog);
-	last_search_data_restore_position (GEDIT_SEARCH_DIALOG (search_dialog));
-	gedit_search_dialog_present_with_time (GEDIT_SEARCH_DIALOG (search_dialog),
-					       GDK_CURRENT_TIME);
+	/* Focus the view if needed: we need to focus the view otherwise 
+	   activating the binding for goto line has no effect */
+	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+	
+	/* incremental search is builtin in GeditView, just activate
+	 * the corresponding binding.
+	 */
+	gtk_bindings_activate (GTK_OBJECT (active_view),
+			       GDK_k,
+			       GDK_CONTROL_MASK);
 }
 
 void
@@ -584,20 +550,13 @@ _gedit_cmd_search_replace (GtkAction   *action,
 
 	if (data == NULL)
 	{
-		replace_dialog = create_dialog (window, TRUE);
+		replace_dialog = create_dialog (window);
 	}
 	else
 	{
 		g_return_if_fail (GEDIT_IS_SEARCH_DIALOG (data));
 		
 		replace_dialog = GTK_WIDGET (data);
-		
-		/* turn the dialog into a find dialog if needed */
-		if (!gedit_search_dialog_get_show_replace (GEDIT_SEARCH_DIALOG (replace_dialog)))
-		{
-			gedit_search_dialog_set_show_replace (GEDIT_SEARCH_DIALOG (replace_dialog),
-							      TRUE);
-		}
 	}
 
 	doc = gedit_window_get_active_document (window);
@@ -698,30 +657,6 @@ _gedit_cmd_search_goto_line (GtkAction   *action,
 	 */
 	gtk_bindings_activate (GTK_OBJECT (active_view),
 			       GDK_i,
-			       GDK_CONTROL_MASK);
-}
-
-void
-_gedit_cmd_search_incremental_search (GtkAction   *action,
-				      GeditWindow *window)
-{
-	GeditView *active_view;
-
-	gedit_debug (DEBUG_COMMANDS);
-
-	active_view = gedit_window_get_active_view (window);
-	if (active_view == NULL)
-		return;
-
-	/* Focus the view if needed: we need to focus the view otherwise 
-	   activating the binding for goto line has no effect */
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
-	
-	/* incremental search is builtin in GeditView, just activate
-	 * the corresponding binding.
-	 */
-	gtk_bindings_activate (GTK_OBJECT (active_view),
-			       GDK_k,
 			       GDK_CONTROL_MASK);
 }
 

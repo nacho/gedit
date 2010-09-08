@@ -932,12 +932,6 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 				   state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
-					      "SearchIncrementalSearch");
-	gtk_action_set_sensitive (action,
-				  (state_normal ||
-				   state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION));
-
-	action = gtk_action_group_get_action (window->priv->action_group,
 					      "SearchReplace");
 	gtk_action_set_sensitive (action,
 				  state_normal &&

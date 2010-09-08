@@ -67,12 +67,9 @@ struct _GeditSearchDialog
  */
 typedef struct _GeditSearchDialogClass GeditSearchDialogClass;
 
-struct _GeditSearchDialogClass 
+struct _GeditSearchDialogClass
 {
 	GtkDialogClass parent_class;
-	
-	/* Key bindings */
-	gboolean (* show_replace) (GeditSearchDialog *dlg);
 };
 
 enum
@@ -87,17 +84,10 @@ enum
  */
 GType 		 gedit_search_dialog_get_type 		(void) G_GNUC_CONST;
 
-GtkWidget	*gedit_search_dialog_new		(GtkWindow         *parent,
-							 gboolean           show_replace);
+GtkWidget	*gedit_search_dialog_new		(GtkWindow         *parent);
 
 void		 gedit_search_dialog_present_with_time	(GeditSearchDialog *dialog,
 							 guint32            timestamp);
-
-gboolean	 gedit_search_dialog_get_show_replace	(GeditSearchDialog *dialog);
-
-void		 gedit_search_dialog_set_show_replace	(GeditSearchDialog *dialog,
-							 gboolean           show_replace);
-
 
 void		 gedit_search_dialog_set_search_text	(GeditSearchDialog *dialog,
 							 const gchar       *text);
