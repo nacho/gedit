@@ -228,7 +228,7 @@ gedit_view_class_init (GeditViewClass *klass)
 	binding_set = gtk_binding_set_by_class (klass);
 
 	gtk_binding_entry_add_signal (binding_set,
-	                              GDK_k,
+	                              GDK_f,
 	                              GDK_CONTROL_MASK,
 	                              "start-interactive-search", 0);
 

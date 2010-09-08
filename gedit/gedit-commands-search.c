@@ -529,7 +529,7 @@ _gedit_cmd_search_find (GtkAction   *action,
 	 * the corresponding binding.
 	 */
 	gtk_bindings_activate (GTK_OBJECT (active_view),
-			       GDK_k,
+			       GDK_f,
 			       GDK_CONTROL_MASK);
 }
 
