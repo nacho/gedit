@@ -18,13 +18,13 @@ libdialogs_la_SOURCES = 			\
 	gedit-close-confirmation-dialog.h 	\
 	gedit-encodings-dialog.c		\
 	gedit-encodings-dialog.h		\
-	gedit-search-dialog.h			\
-	gedit-search-dialog.c
+	gedit-replace-dialog.h			\
+	gedit-replace-dialog.c
 
 ui_DATA =					\
 	gedit-encodings-dialog.ui		\
 	gedit-preferences-dialog.ui		\
-	gedit-search-dialog.ui
+	gedit-replace-dialog.ui
 
 EXTRA_DIST = $(ui_DATA) 
 

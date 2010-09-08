@@ -45,9 +45,9 @@
 #include "gedit-window.h"
 #include "gedit-window-private.h"
 #include "gedit-utils.h"
-#include "dialogs/gedit-search-dialog.h"
+#include "dialogs/gedit-replace-dialog.h"
 
-#define GEDIT_SEARCH_DIALOG_KEY		"gedit-search-dialog-key"
+#define GEDIT_REPLACE_DIALOG_KEY	"gedit-replace-dialog-key"
 #define GEDIT_LAST_SEARCH_DATA_KEY	"gedit-last-search-data-key"
 
 typedef struct _LastSearchData LastSearchData;
@@ -64,7 +64,7 @@ last_search_data_free (LastSearchData *data)
 }
 
 static void
-last_search_data_restore_position (GeditSearchDialog *dlg)
+last_search_data_restore_position (GeditReplaceDialog *dlg)
 {
 	LastSearchData *data;
 
@@ -79,7 +79,7 @@ last_search_data_restore_position (GeditSearchDialog *dlg)
 }
 
 static void
-last_search_data_store_position (GeditSearchDialog *dlg)
+last_search_data_store_position (GeditReplaceDialog *dlg)
 {
 	LastSearchData *data;
 
@@ -224,8 +224,8 @@ run_search (GeditView   *view,
 }
 
 static void
-do_find (GeditSearchDialog *dialog,
-	 GeditWindow       *window)
+do_find (GeditReplaceDialog *dialog,
+	 GeditWindow        *window)
 {
 	GeditView *active_view;
 	GeditDocument *doc;
@@ -247,12 +247,12 @@ do_find (GeditSearchDialog *dialog,
 
 	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view)));
 
-	entry_text = gedit_search_dialog_get_search_text (dialog);
+	entry_text = gedit_replace_dialog_get_search_text (dialog);
 
-	match_case = gedit_search_dialog_get_match_case (dialog);
-	entire_word = gedit_search_dialog_get_entire_word (dialog);
-	search_backwards = gedit_search_dialog_get_backwards (dialog);
-	wrap_around = gedit_search_dialog_get_wrap_around (dialog);
+	match_case = gedit_replace_dialog_get_match_case (dialog);
+	entire_word = gedit_replace_dialog_get_entire_word (dialog);
+	search_backwards = gedit_replace_dialog_get_backwards (dialog);
+	wrap_around = gedit_replace_dialog_get_wrap_around (dialog);
 
 	GEDIT_SEARCH_SET_CASE_SENSITIVE (flags, match_case);
 	GEDIT_SEARCH_SET_ENTIRE_WORD (flags, entire_word);
@@ -278,7 +278,7 @@ do_find (GeditSearchDialog *dialog,
 		text_not_found (window, entry_text);
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
-					   GEDIT_SEARCH_DIALOG_REPLACE_RESPONSE,
+					   GEDIT_REPLACE_DIALOG_REPLACE_RESPONSE,
 					   found);
 }
 
@@ -326,8 +326,8 @@ replace_selected_text (GtkTextBuffer *buffer,
 }
 
 static void
-do_replace (GeditSearchDialog *dialog,
-	    GeditWindow       *window)
+do_replace (GeditReplaceDialog *dialog,
+	    GeditWindow        *window)
 {
 	GeditDocument *doc;
 	const gchar *search_entry_text;
@@ -341,12 +341,12 @@ do_replace (GeditSearchDialog *dialog,
 	if (doc == NULL)
 		return;
 
-	search_entry_text = gedit_search_dialog_get_search_text (dialog);
+	search_entry_text = gedit_replace_dialog_get_search_text (dialog);
 	g_return_if_fail ((search_entry_text) != NULL);
 	g_return_if_fail ((*search_entry_text) != '\0');
 
 	/* replace text may be "", we just delete */
-	replace_entry_text = gedit_search_dialog_get_replace_text (dialog);
+	replace_entry_text = gedit_replace_dialog_get_replace_text (dialog);
 	g_return_if_fail ((replace_entry_text) != NULL);
 
 	unescaped_search_text = gedit_utils_unescape_search_text (search_entry_text);
@@ -355,7 +355,7 @@ do_replace (GeditSearchDialog *dialog,
 			   &selected_text, 
 			   NULL);
 
-	match_case = gedit_search_dialog_get_match_case (dialog);
+	match_case = gedit_replace_dialog_get_match_case (dialog);
 
 	if ((selected_text == NULL) ||
 	    (match_case && (strcmp (selected_text, unescaped_search_text) != 0)) || 
@@ -382,8 +382,8 @@ do_replace (GeditSearchDialog *dialog,
 }
 
 static void
-do_replace_all (GeditSearchDialog *dialog,
-		GeditWindow       *window)
+do_replace_all (GeditReplaceDialog *dialog,
+		GeditWindow        *window)
 {
 	GeditView *active_view;
 	GeditDocument *doc;
@@ -400,16 +400,16 @@ do_replace_all (GeditSearchDialog *dialog,
 
 	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view)));
 
-	search_entry_text = gedit_search_dialog_get_search_text (dialog);
+	search_entry_text = gedit_replace_dialog_get_search_text (dialog);
 	g_return_if_fail ((search_entry_text) != NULL);
 	g_return_if_fail ((*search_entry_text) != '\0');
 
 	/* replace text may be "", we just delete all occurrencies */
-	replace_entry_text = gedit_search_dialog_get_replace_text (dialog);
+	replace_entry_text = gedit_replace_dialog_get_replace_text (dialog);
 	g_return_if_fail ((replace_entry_text) != NULL);
 
-	match_case = gedit_search_dialog_get_match_case (dialog);
-	entire_word = gedit_search_dialog_get_entire_word (dialog);
+	match_case = gedit_replace_dialog_get_match_case (dialog);
+	entire_word = gedit_replace_dialog_get_entire_word (dialog);
 
 	GEDIT_SEARCH_SET_CASE_SENSITIVE (flags, match_case);
 	GEDIT_SEARCH_SET_ENTIRE_WORD (flags, entire_word);
@@ -429,26 +429,26 @@ do_replace_all (GeditSearchDialog *dialog,
 	}
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
-					   GEDIT_SEARCH_DIALOG_REPLACE_RESPONSE,
+					   GEDIT_REPLACE_DIALOG_REPLACE_RESPONSE,
 					   FALSE);
 }
 
 static void
-search_dialog_response_cb (GeditSearchDialog *dialog,
-			   gint               response_id,
-			   GeditWindow       *window)
+replace_dialog_response_cb (GeditReplaceDialog *dialog,
+			    gint                response_id,
+			    GeditWindow        *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
 
 	switch (response_id)
 	{
-		case GEDIT_SEARCH_DIALOG_FIND_RESPONSE:
+		case GEDIT_REPLACE_DIALOG_FIND_RESPONSE:
 			do_find (dialog, window);
 			break;
-		case GEDIT_SEARCH_DIALOG_REPLACE_RESPONSE:
+		case GEDIT_REPLACE_DIALOG_REPLACE_RESPONSE:
 			do_replace (dialog, window);
 			break;
-		case GEDIT_SEARCH_DIALOG_REPLACE_ALL_RESPONSE:
+		case GEDIT_REPLACE_DIALOG_REPLACE_ALL_RESPONSE:
 			do_replace_all (dialog, window);
 			break;
 		default:
@@ -458,9 +458,9 @@ search_dialog_response_cb (GeditSearchDialog *dialog,
 }
 
 static gboolean
-search_dialog_delete_event_cb (GtkWidget   *widget,
-			       GdkEventAny *event,
-			       gpointer     user_data)
+replace_dialog_delete_event_cb (GtkWidget   *widget,
+			        GdkEventAny *event,
+			        gpointer     user_data)
 {
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -469,13 +469,13 @@ search_dialog_delete_event_cb (GtkWidget   *widget,
 }
 
 static void
-search_dialog_destroyed (GeditWindow       *window,
-			 GeditSearchDialog *dialog)
+replace_dialog_destroyed (GeditWindow        *window,
+			  GeditReplaceDialog *dialog)
 {
 	gedit_debug (DEBUG_COMMANDS);
 
 	g_object_set_data (G_OBJECT (window),
-			   GEDIT_SEARCH_DIALOG_KEY,
+			   GEDIT_REPLACE_DIALOG_KEY,
 			   NULL);
 	g_object_set_data (G_OBJECT (dialog),
 			   GEDIT_LAST_SEARCH_DATA_KEY,
@@ -487,23 +487,23 @@ create_dialog (GeditWindow *window)
 {
 	GtkWidget *dialog;
 
-	dialog = gedit_search_dialog_new (GTK_WINDOW (window));
+	dialog = gedit_replace_dialog_new (GTK_WINDOW (window));
 
 	g_signal_connect (dialog,
 			  "response",
-			  G_CALLBACK (search_dialog_response_cb),
+			  G_CALLBACK (replace_dialog_response_cb),
 			  window);
 	g_signal_connect (dialog,
 			 "delete-event",
-			 G_CALLBACK (search_dialog_delete_event_cb),
+			 G_CALLBACK (replace_dialog_delete_event_cb),
 			 NULL);
 
 	g_object_set_data (G_OBJECT (window),
-			   GEDIT_SEARCH_DIALOG_KEY,
+			   GEDIT_REPLACE_DIALOG_KEY,
 			   dialog);
 
 	g_object_weak_ref (G_OBJECT (dialog),
-			   (GWeakNotify) search_dialog_destroyed,
+			   (GWeakNotify) replace_dialog_destroyed,
 			   window);
 
 	return dialog;
@@ -546,7 +546,7 @@ _gedit_cmd_search_replace (GtkAction   *action,
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	data = g_object_get_data (G_OBJECT (window), GEDIT_SEARCH_DIALOG_KEY);
+	data = g_object_get_data (G_OBJECT (window), GEDIT_REPLACE_DIALOG_KEY);
 
 	if (data == NULL)
 	{
@@ -554,7 +554,7 @@ _gedit_cmd_search_replace (GtkAction   *action,
 	}
 	else
 	{
-		g_return_if_fail (GEDIT_IS_SEARCH_DIALOG (data));
+		g_return_if_fail (GEDIT_IS_REPLACE_DIALOG (data));
 		
 		replace_dialog = GTK_WIDGET (data);
 	}
@@ -568,8 +568,8 @@ _gedit_cmd_search_replace (GtkAction   *action,
 
 	if (selection_exists && find_text != NULL && sel_len < 80)
 	{
-		gedit_search_dialog_set_search_text (GEDIT_SEARCH_DIALOG (replace_dialog),
-						     find_text);
+		gedit_replace_dialog_set_search_text (GEDIT_REPLACE_DIALOG (replace_dialog),
+						      find_text);
 		g_free (find_text);
 	}
 	else
@@ -578,9 +578,9 @@ _gedit_cmd_search_replace (GtkAction   *action,
 	}
 
 	gtk_widget_show (replace_dialog);
-	last_search_data_restore_position (GEDIT_SEARCH_DIALOG (replace_dialog));
-	gedit_search_dialog_present_with_time (GEDIT_SEARCH_DIALOG (replace_dialog),
-					       GDK_CURRENT_TIME);
+	last_search_data_restore_position (GEDIT_REPLACE_DIALOG (replace_dialog));
+	gedit_replace_dialog_present_with_time (GEDIT_REPLACE_DIALOG (replace_dialog),
+					        GDK_CURRENT_TIME);
 }
 
 static void
@@ -594,10 +594,10 @@ do_find_again (GeditWindow *window,
 	active_view = gedit_window_get_active_view (window);
 	g_return_if_fail (active_view != NULL);
 
-	data = g_object_get_data (G_OBJECT (window), GEDIT_SEARCH_DIALOG_KEY);
+	data = g_object_get_data (G_OBJECT (window), GEDIT_REPLACE_DIALOG_KEY);
 	
 	if (data != NULL)
-		wrap_around = gedit_search_dialog_get_wrap_around (GEDIT_SEARCH_DIALOG (data));
+		wrap_around = gedit_replace_dialog_get_wrap_around (GEDIT_REPLACE_DIALOG (data));
 	
 	run_search (active_view,
 		    wrap_around,

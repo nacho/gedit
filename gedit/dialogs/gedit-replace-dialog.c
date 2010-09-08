@@ -1,5 +1,5 @@
 /*
- * gedit-search-dialog.c
+ * gedit-replace-dialog.c
  * This file is part of gedit
  *
  * Copyright (C) 2005 Paolo Maggi
@@ -36,17 +36,17 @@
 #include <glib/gi18n.h>
 #include <gdk/gdkkeysyms.h>
 
-#include "gedit-search-dialog.h"
+#include "gedit-replace-dialog.h"
 #include "gedit-history-entry.h"
 #include "gedit-utils.h"
 #include "gedit-marshal.h"
 #include "gedit-dirs.h"
 
-#define GEDIT_SEARCH_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
-						GEDIT_TYPE_SEARCH_DIALOG,              \
-						GeditSearchDialogPrivate))
+#define GEDIT_REPLACE_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
+						GEDIT_TYPE_REPLACE_DIALOG,              \
+						GeditReplaceDialogPrivate))
 
-struct _GeditSearchDialogPrivate 
+struct _GeditReplaceDialogPrivate
 {
 	GtkWidget *table;
 	GtkWidget *search_label;
@@ -66,13 +66,13 @@ struct _GeditSearchDialogPrivate
 	gboolean   ui_error;
 };
 
-G_DEFINE_TYPE(GeditSearchDialog, gedit_search_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE(GeditReplaceDialog, gedit_replace_dialog, GTK_TYPE_DIALOG)
 
 void
-gedit_search_dialog_present_with_time (GeditSearchDialog *dialog,
+gedit_replace_dialog_present_with_time (GeditReplaceDialog *dialog,
 				       guint32            timestamp)
 {
-	g_return_if_fail (GEDIT_SEARCH_DIALOG (dialog));
+	g_return_if_fail (GEDIT_REPLACE_DIALOG (dialog));
 
 	gtk_window_present_with_time (GTK_WINDOW (dialog), timestamp);
 
@@ -80,11 +80,11 @@ gedit_search_dialog_present_with_time (GeditSearchDialog *dialog,
 }
 
 static void 
-gedit_search_dialog_class_init (GeditSearchDialogClass *klass)
+gedit_replace_dialog_class_init (GeditReplaceDialogClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	g_type_class_add_private (object_class, sizeof (GeditSearchDialogPrivate));
+	g_type_class_add_private (object_class, sizeof (GeditReplaceDialogPrivate));
 }
 
 static void
@@ -124,8 +124,8 @@ insert_text_handler (GtkEditable *editable,
 }
 
 static void
-search_text_entry_changed (GtkEditable       *editable,
-			   GeditSearchDialog *dialog)
+search_text_entry_changed (GtkEditable        *editable,
+			   GeditReplaceDialog *dialog)
 {
 	const gchar *search_string;
 
@@ -135,32 +135,32 @@ search_text_entry_changed (GtkEditable       *editable,
 	if (*search_string != '\0')
 	{
 		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), 
-			GEDIT_SEARCH_DIALOG_FIND_RESPONSE, TRUE);
+			GEDIT_REPLACE_DIALOG_FIND_RESPONSE, TRUE);
 		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), 
-			GEDIT_SEARCH_DIALOG_REPLACE_ALL_RESPONSE, TRUE);
+			GEDIT_REPLACE_DIALOG_REPLACE_ALL_RESPONSE, TRUE);
 	}
 	else
 	{
 		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), 
-			GEDIT_SEARCH_DIALOG_FIND_RESPONSE, FALSE);
+			GEDIT_REPLACE_DIALOG_FIND_RESPONSE, FALSE);
 		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), 
-			GEDIT_SEARCH_DIALOG_REPLACE_RESPONSE, FALSE);
+			GEDIT_REPLACE_DIALOG_REPLACE_RESPONSE, FALSE);
 		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), 
-			GEDIT_SEARCH_DIALOG_REPLACE_ALL_RESPONSE, FALSE);
+			GEDIT_REPLACE_DIALOG_REPLACE_ALL_RESPONSE, FALSE);
 	}
 }
 
 static void
-response_handler (GeditSearchDialog *dialog,
-		  gint               response_id,
-		  gpointer           data)
+response_handler (GeditReplaceDialog *dialog,
+		  gint                response_id,
+		  gpointer            data)
 {
 	const gchar *str;
 
 	switch (response_id)
 	{
-		case GEDIT_SEARCH_DIALOG_REPLACE_RESPONSE:
-		case GEDIT_SEARCH_DIALOG_REPLACE_ALL_RESPONSE:
+		case GEDIT_REPLACE_DIALOG_REPLACE_RESPONSE:
+		case GEDIT_REPLACE_DIALOG_REPLACE_ALL_RESPONSE:
 			str = gtk_entry_get_text (GTK_ENTRY (dialog->priv->replace_text_entry));
 			if (*str != '\0')
 			{
@@ -174,7 +174,7 @@ response_handler (GeditSearchDialog *dialog,
 				g_free (text);
 			}
 			/* fall through, so that we also save the find entry */
-		case GEDIT_SEARCH_DIALOG_FIND_RESPONSE:
+		case GEDIT_REPLACE_DIALOG_FIND_RESPONSE:
 			str = gtk_entry_get_text (GTK_ENTRY (dialog->priv->search_text_entry));
 			if (*str != '\0')
 			{
@@ -191,18 +191,18 @@ response_handler (GeditSearchDialog *dialog,
 }
 
 static void
-gedit_search_dialog_init (GeditSearchDialog *dlg)
+gedit_replace_dialog_init (GeditReplaceDialog *dlg)
 {
 	GtkWidget *content;
 	GtkWidget *error_widget;
 	gboolean ret;
 	gchar *file;
 	gchar *root_objects[] = {
-		"search_dialog_content",
+		"replace_dialog_content",
 		NULL
 	};
 
-	dlg->priv = GEDIT_SEARCH_DIALOG_GET_PRIVATE (dlg);
+	dlg->priv = GEDIT_REPLACE_DIALOG_GET_PRIVATE (dlg);
 
 	gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
@@ -221,11 +221,11 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_action_area (GTK_DIALOG (dlg))),
 			     6);
 
-	file = gedit_dirs_get_ui_file ("gedit-search-dialog.ui");
+	file = gedit_dirs_get_ui_file ("gedit-replace-dialog.ui");
 	ret = gedit_utils_get_ui_objects (file,
 					  root_objects,
 					  &error_widget,
-					  "search_dialog_content", &content,
+					  "replace_dialog_content", &content,
 					  "table", &dlg->priv->table,
 					  "search_label", &dlg->priv->search_label,
 					  "replace_with_label", &dlg->priv->replace_label,
@@ -294,29 +294,29 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 
 	gtk_dialog_add_action_widget (GTK_DIALOG (dlg),
 				      dlg->priv->replace_all_button,
-				      GEDIT_SEARCH_DIALOG_REPLACE_ALL_RESPONSE);
+				      GEDIT_REPLACE_DIALOG_REPLACE_ALL_RESPONSE);
 	gtk_dialog_add_action_widget (GTK_DIALOG (dlg),
 				      dlg->priv->replace_button,
-				      GEDIT_SEARCH_DIALOG_REPLACE_RESPONSE);
+				      GEDIT_REPLACE_DIALOG_REPLACE_RESPONSE);
 	gtk_dialog_add_action_widget (GTK_DIALOG (dlg),
 				      dlg->priv->find_button,
-				      GEDIT_SEARCH_DIALOG_FIND_RESPONSE);
+				      GEDIT_REPLACE_DIALOG_FIND_RESPONSE);
 	g_object_set (G_OBJECT (dlg->priv->find_button),
 		      "can-default", TRUE,
 		      NULL);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dlg),
-					 GEDIT_SEARCH_DIALOG_FIND_RESPONSE);
+					 GEDIT_REPLACE_DIALOG_FIND_RESPONSE);
 
 	/* insensitive by default */
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dlg),
-					   GEDIT_SEARCH_DIALOG_FIND_RESPONSE,
+					   GEDIT_REPLACE_DIALOG_FIND_RESPONSE,
 					   FALSE);
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dlg),
-					   GEDIT_SEARCH_DIALOG_REPLACE_RESPONSE,
+					   GEDIT_REPLACE_DIALOG_REPLACE_RESPONSE,
 					   FALSE);
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dlg),
-					   GEDIT_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
+					   GEDIT_REPLACE_DIALOG_REPLACE_ALL_RESPONSE,
 					   FALSE);
 
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dlg))),
@@ -346,11 +346,11 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 }
 
 GtkWidget *
-gedit_search_dialog_new (GtkWindow *parent)
+gedit_replace_dialog_new (GtkWindow *parent)
 {
-	GeditSearchDialog *dlg;
+	GeditReplaceDialog *dlg;
 
-	dlg = g_object_new (GEDIT_TYPE_SEARCH_DIALOG,
+	dlg = g_object_new (GEDIT_TYPE_REPLACE_DIALOG,
 			    NULL);
 
 	if (parent != NULL)
@@ -366,21 +366,21 @@ gedit_search_dialog_new (GtkWindow *parent)
 }
 
 void
-gedit_search_dialog_set_search_text (GeditSearchDialog *dialog,
-				     const gchar       *text)
+gedit_replace_dialog_set_search_text (GeditReplaceDialog *dialog,
+				      const gchar        *text)
 {
-	g_return_if_fail (GEDIT_IS_SEARCH_DIALOG (dialog));
+	g_return_if_fail (GEDIT_IS_REPLACE_DIALOG (dialog));
 	g_return_if_fail (text != NULL);
 
 	gtk_entry_set_text (GTK_ENTRY (dialog->priv->search_text_entry),
 			    text);
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
-					   GEDIT_SEARCH_DIALOG_FIND_RESPONSE,
+					   GEDIT_REPLACE_DIALOG_FIND_RESPONSE,
 					   (text != '\0'));
 					   
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
-					   GEDIT_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
+					   GEDIT_REPLACE_DIALOG_REPLACE_ALL_RESPONSE,
 					   (text != '\0'));
 }
 
@@ -388,18 +388,18 @@ gedit_search_dialog_set_search_text (GeditSearchDialog *dialog,
  * The text must be unescaped before searching.
  */
 const gchar *
-gedit_search_dialog_get_search_text (GeditSearchDialog *dialog)
+gedit_replace_dialog_get_search_text (GeditReplaceDialog *dialog)
 {
-	g_return_val_if_fail (GEDIT_IS_SEARCH_DIALOG (dialog), NULL);
+	g_return_val_if_fail (GEDIT_IS_REPLACE_DIALOG (dialog), NULL);
 
 	return gtk_entry_get_text (GTK_ENTRY (dialog->priv->search_text_entry));
 }
 
 void
-gedit_search_dialog_set_replace_text (GeditSearchDialog *dialog,
-				      const gchar       *text)
+gedit_replace_dialog_set_replace_text (GeditReplaceDialog *dialog,
+				       const gchar        *text)
 {
-	g_return_if_fail (GEDIT_IS_SEARCH_DIALOG (dialog));
+	g_return_if_fail (GEDIT_IS_REPLACE_DIALOG (dialog));
 	g_return_if_fail (text != NULL);
 
 	gtk_entry_set_text (GTK_ENTRY (dialog->priv->replace_text_entry),
@@ -407,81 +407,81 @@ gedit_search_dialog_set_replace_text (GeditSearchDialog *dialog,
 }
 
 const gchar *
-gedit_search_dialog_get_replace_text (GeditSearchDialog *dialog)
+gedit_replace_dialog_get_replace_text (GeditReplaceDialog *dialog)
 {
-	g_return_val_if_fail (GEDIT_IS_SEARCH_DIALOG (dialog), NULL);
+	g_return_val_if_fail (GEDIT_IS_REPLACE_DIALOG (dialog), NULL);
 
 	return gtk_entry_get_text (GTK_ENTRY (dialog->priv->replace_text_entry));
 }
 
 void
-gedit_search_dialog_set_match_case (GeditSearchDialog *dialog,
-				    gboolean           match_case)
+gedit_replace_dialog_set_match_case (GeditReplaceDialog *dialog,
+				     gboolean            match_case)
 {
-	g_return_if_fail (GEDIT_IS_SEARCH_DIALOG (dialog));
+	g_return_if_fail (GEDIT_IS_REPLACE_DIALOG (dialog));
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->match_case_checkbutton),
 				      match_case);
 }
 
 gboolean
-gedit_search_dialog_get_match_case (GeditSearchDialog *dialog)
+gedit_replace_dialog_get_match_case (GeditReplaceDialog *dialog)
 {
-	g_return_val_if_fail (GEDIT_IS_SEARCH_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GEDIT_IS_REPLACE_DIALOG (dialog), FALSE);
 
 	return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->priv->match_case_checkbutton));
 }
 
 void
-gedit_search_dialog_set_entire_word (GeditSearchDialog *dialog,
-				     gboolean           entire_word)
+gedit_replace_dialog_set_entire_word (GeditReplaceDialog *dialog,
+				      gboolean            entire_word)
 {
-	g_return_if_fail (GEDIT_IS_SEARCH_DIALOG (dialog));
+	g_return_if_fail (GEDIT_IS_REPLACE_DIALOG (dialog));
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->entire_word_checkbutton),
 				      entire_word);
 }
 
 gboolean
-gedit_search_dialog_get_entire_word (GeditSearchDialog *dialog)
+gedit_replace_dialog_get_entire_word (GeditReplaceDialog *dialog)
 {
-	g_return_val_if_fail (GEDIT_IS_SEARCH_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GEDIT_IS_REPLACE_DIALOG (dialog), FALSE);
 
 	return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->priv->entire_word_checkbutton));
 }
 
 void
-gedit_search_dialog_set_backwards (GeditSearchDialog *dialog,
-				  gboolean           backwards)
+gedit_replace_dialog_set_backwards (GeditReplaceDialog *dialog,
+				    gboolean            backwards)
 {
-	g_return_if_fail (GEDIT_IS_SEARCH_DIALOG (dialog));
+	g_return_if_fail (GEDIT_IS_REPLACE_DIALOG (dialog));
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->backwards_checkbutton),
 				      backwards);
 }
 
 gboolean
-gedit_search_dialog_get_backwards (GeditSearchDialog *dialog)
+gedit_replace_dialog_get_backwards (GeditReplaceDialog *dialog)
 {
-	g_return_val_if_fail (GEDIT_IS_SEARCH_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GEDIT_IS_REPLACE_DIALOG (dialog), FALSE);
 
 	return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->priv->backwards_checkbutton));
 }
 
 void
-gedit_search_dialog_set_wrap_around (GeditSearchDialog *dialog,
-				     gboolean           wrap_around)
+gedit_replace_dialog_set_wrap_around (GeditReplaceDialog *dialog,
+				      gboolean            wrap_around)
 {
-	g_return_if_fail (GEDIT_IS_SEARCH_DIALOG (dialog));
+	g_return_if_fail (GEDIT_IS_REPLACE_DIALOG (dialog));
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->wrap_around_checkbutton),
 				      wrap_around);
 }
 
 gboolean
-gedit_search_dialog_get_wrap_around (GeditSearchDialog *dialog)
+gedit_replace_dialog_get_wrap_around (GeditReplaceDialog *dialog)
 {
-	g_return_val_if_fail (GEDIT_IS_SEARCH_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GEDIT_IS_REPLACE_DIALOG (dialog), FALSE);
 
 	return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->priv->wrap_around_checkbutton));
 }
