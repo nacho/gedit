@@ -65,8 +65,6 @@ GeditTheatricsAnimatedWidget	*gedit_theatrics_animated_widget_new		(GtkWidget   
 										 GeditTheatricsChoreographerBlocking blocking,
 										 GtkOrientation                      orientation);
 
-GtkWidget			*gedit_theatrics_animated_widget_get_widget	(GeditTheatricsAnimatedWidget *aw);
-
 GeditTheatricsChoreographerEasing
 				 gedit_theatrics_animated_widget_get_easing	(GeditTheatricsAnimatedWidget *aw);
 

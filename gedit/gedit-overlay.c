@@ -595,7 +595,7 @@ gedit_overlay_move_widget (GeditOverlay *overlay,
 
 		if (child->is_animated)
 		{
-			w = gedit_theatrics_animated_widget_get_widget (GEDIT_THEATRICS_ANIMATED_WIDGET (child->child));
+			w = gtk_bin_get_child (GTK_BIN (child->child));
 		}
 		else
 		{

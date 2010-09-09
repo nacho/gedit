@@ -117,21 +117,6 @@ on_widget_destroyed (GtkWidget                    *widget,
 }
 
 static void
-set_widget (GeditTheatricsAnimatedWidget *aw,
-	    GtkWidget                    *widget)
-{
-	if (widget == NULL)
-		return;
-
-	aw->priv->widget = widget;
-	gtk_widget_set_parent (widget, GTK_WIDGET (aw));
-
-	g_signal_connect (widget, "destroy",
-			  G_CALLBACK (on_widget_destroyed),
-			  aw);
-}
-
-static void
 gedit_theatrics_animated_widget_finalize (GObject *object)
 {
 	G_OBJECT_CLASS (gedit_theatrics_animated_widget_parent_class)->finalize (object);
@@ -186,7 +171,8 @@ gedit_theatrics_animated_widget_set_property (GObject      *object,
 	{
 		case PROP_WIDGET:
 		{
-			set_widget (aw, g_value_get_object (value));
+			gtk_container_add (GTK_CONTAINER (aw),
+			                   g_value_get_object (value));
 			break;
 		}
 		case PROP_EASING:
@@ -355,27 +341,29 @@ gedit_theatrics_animated_widget_expose_event (GtkWidget      *widget,
 }
 
 static void
+gedit_theatrics_animated_widget_add (GtkContainer *container,
+				     GtkWidget    *widget)
+{
+	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (container);
+
+	aw->priv->widget = widget;
+
+	g_signal_connect (widget, "destroy",
+			  G_CALLBACK (on_widget_destroyed),
+			  aw);
+
+	GTK_CONTAINER_CLASS (gedit_theatrics_animated_widget_parent_class)->add (container, widget);
+}
+
+static void
 gedit_theatrics_animated_widget_remove (GtkContainer *container,
 					GtkWidget    *widget)
 {
 	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (container);
 
-	gtk_widget_unparent (widget);
 	aw->priv->widget = NULL;
-}
 
-static void
-gedit_theatrics_animated_widget_forall (GtkContainer *container,
-					gboolean      include_internals,
-					GtkCallback   callback,
-					gpointer      callback_data)
-{
-	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (container);
-
-	if (aw->priv->widget != NULL)
-	{
-		callback (aw->priv->widget, callback_data);
-	}
+	GTK_CONTAINER_CLASS (gedit_theatrics_animated_widget_parent_class)->remove (container, widget);
 }
 
 static void
@@ -394,8 +382,8 @@ gedit_theatrics_animated_widget_class_init (GeditTheatricsAnimatedWidgetClass *k
 	widget_class->size_allocate = gedit_theatrics_animated_widget_size_allocate;
 	widget_class->expose_event = gedit_theatrics_animated_widget_expose_event;
 
+	container_class->add = gedit_theatrics_animated_widget_add;
 	container_class->remove = gedit_theatrics_animated_widget_remove;
-	container_class->forall = gedit_theatrics_animated_widget_forall;
 
 	g_object_class_install_property (object_class, PROP_WIDGET,
 	                                 g_param_spec_object ("widget",
@@ -500,14 +488,6 @@ gedit_theatrics_animated_widget_new (GtkWidget                          *widget,
 			     "blocking", blocking,
 			     "orientation", orientation,
 			     NULL);
-}
-
-GtkWidget *
-gedit_theatrics_animated_widget_get_widget (GeditTheatricsAnimatedWidget *aw)
-{
-	g_return_val_if_fail (GEDIT_IS_THEATRICS_ANIMATED_WIDGET (aw), NULL);
-
-	return aw->priv->widget;
 }
 
 GeditTheatricsChoreographerEasing
