@@ -1021,10 +1021,40 @@ search_entry_focus_out_event (GtkWidget      *widget,
 }
 
 static GtkWidget *
+create_button_from_stock (const gchar *stock_id)
+{
+	GtkWidget *button;
+
+	button = gtk_button_new ();
+	gtk_widget_set_can_focus (button, FALSE);
+	gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+	gtk_button_set_image (GTK_BUTTON (button),
+			      gtk_image_new_from_stock (stock_id,
+							GTK_ICON_SIZE_MENU));
+
+	return button;
+}
+
+static void
+on_go_up_button_clicked (GtkWidget      *button,
+                         GeditViewFrame *frame)
+{
+	search_again (frame, TRUE);
+}
+
+static void
+on_go_down_button_clicked (GtkWidget      *button,
+                           GeditViewFrame *frame)
+{
+	search_again (frame, FALSE);
+}
+
+static GtkWidget *
 create_search_widget (GeditViewFrame *frame)
 {
 	GtkWidget          *search_widget;
-	GtkWidget          *vbox;
+	GtkWidget          *hbox;
+	GtkWidget          *button;
 	GtkEntryCompletion *completion;
 
 	search_widget = gedit_rounded_frame_new ();
@@ -1042,10 +1072,10 @@ create_search_widget (GeditViewFrame *frame)
 			          G_CALLBACK (search_widget_scroll_event),
 			          frame);
 
-	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_widget_show (vbox);
-	gtk_container_add (GTK_CONTAINER (search_widget), vbox);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 3);
+	hbox = gtk_hbox_new (FALSE, 3);
+	gtk_widget_show (hbox);
+	gtk_container_add (GTK_CONTAINER (search_widget), hbox);
+	gtk_container_set_border_width (GTK_CONTAINER (hbox), 3);
 
 	/* add entry */
 	frame->priv->search_entry = gtk_entry_new ();
@@ -1068,10 +1098,10 @@ create_search_widget (GeditViewFrame *frame)
 	                  frame);
 	frame->priv->search_entry_focus_out_id =
 		g_signal_connect (frame->priv->search_entry, "focus-out-event",
-			          G_CALLBACK (search_entry_focus_out_event),
-			          frame);
+		                  G_CALLBACK (search_entry_focus_out_event),
+		                  frame);
 
-	gtk_container_add (GTK_CONTAINER (vbox),
+	gtk_container_add (GTK_CONTAINER (hbox),
 	                   frame->priv->search_entry);
 
 	if (search_completion_model == NULL)
@@ -1105,6 +1135,27 @@ create_search_widget (GeditViewFrame *frame)
 	g_object_unref (completion);
 
 	customize_for_search_mode (frame);
+
+	/* Up/Down buttons */
+	button = create_button_from_stock (GTK_STOCK_GO_UP);
+	gtk_widget_show (button);
+
+	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+	g_signal_connect (button,
+	                  "clicked",
+	                  G_CALLBACK (on_go_up_button_clicked),
+	                  frame);
+
+	button = create_button_from_stock (GTK_STOCK_GO_DOWN);
+	gtk_widget_show (button);
+
+	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+	g_signal_connect (button,
+	                  "clicked",
+	                  G_CALLBACK (on_go_down_button_clicked),
+	                  frame);
 
 	return search_widget;
 }
