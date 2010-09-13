@@ -228,22 +228,22 @@ gedit_view_class_init (GeditViewClass *klass)
 	binding_set = gtk_binding_set_by_class (klass);
 
 	gtk_binding_entry_add_signal (binding_set,
-	                              GDK_f,
+	                              GDK_KEY_f,
 	                              GDK_CONTROL_MASK,
 	                              "start-interactive-search", 0);
 
 	gtk_binding_entry_add_signal (binding_set,
-	                              GDK_i,
+	                              GDK_KEY_i,
 	                              GDK_CONTROL_MASK,
 	                              "start-interactive-goto-line", 0);
 
 	gtk_binding_entry_add_signal (binding_set,
-				      GDK_k,
+				      GDK_KEY_k,
 				      GDK_CONTROL_MASK | GDK_SHIFT_MASK,
 				      "reset_searched_text", 0);
 
 	gtk_binding_entry_add_signal (binding_set, 
-				      GDK_d, 
+				      GDK_KEY_d,
 				      GDK_CONTROL_MASK,
 				      "delete_from_cursor", 2,
 				      G_TYPE_ENUM, GTK_DELETE_PARAGRAPHS,

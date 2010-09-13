@@ -243,12 +243,12 @@ gedit_panel_class_init (GeditPanelClass *klass)
 	binding_set = gtk_binding_set_by_class (klass);
 
 	gtk_binding_entry_add_signal (binding_set, 
-				      GDK_Escape, 
+				      GDK_KEY_Escape, 
 				      0, 
 				      "close", 
 				      0);
 	gtk_binding_entry_add_signal (binding_set, 
-				      GDK_Return, 
+				      GDK_KEY_Return, 
 				      GDK_CONTROL_MASK, 
 				      "focus_document", 
 				      0);

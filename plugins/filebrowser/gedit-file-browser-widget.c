@@ -2815,7 +2815,7 @@ do_change_directory (GeditFileBrowserWidget *obj,
 
 	if ((event->state &
 	    (~GDK_CONTROL_MASK & ~GDK_SHIFT_MASK & ~GDK_MOD1_MASK)) ==
-	     event->state && event->keyval == GDK_BackSpace)
+	     event->state && event->keyval == GDK_KEY_BackSpace)
 	{
 		action = gtk_action_group_get_action (obj->priv->action_group_sensitive,
 		                                      "DirectoryPrevious");
@@ -2828,15 +2828,15 @@ do_change_directory (GeditFileBrowserWidget *obj,
 
 	switch (event->keyval)
 	{
-		case GDK_Left:
+		case GDK_KEY_Left:
 			action = gtk_action_group_get_action (obj->priv->action_group_sensitive,
 			                                      "DirectoryPrevious");
 			break;
-		case GDK_Right:
+		case GDK_KEY_Right:
 			action = gtk_action_group_get_action (obj->priv->action_group_sensitive,
 			                                      "DirectoryNext");
 			break;
-		case GDK_Up:
+		case GDK_KEY_Up:
 			action = gtk_action_group_get_action (obj->priv->action_group,
 			                                      "DirectoryUp");
 			break;
@@ -2871,7 +2871,8 @@ on_treeview_key_press_event (GeditFileBrowserView   *treeview,
 
 	modifiers = gtk_accelerator_get_default_mod_mask ();
 
-	if (event->keyval == GDK_Delete || event->keyval == GDK_KP_Delete)
+	if (event->keyval == GDK_KEY_Delete ||
+	    event->keyval == GDK_KEY_KP_Delete)
 	{
 
 		if ((event->state & modifiers) == GDK_SHIFT_MASK &&
@@ -2887,7 +2888,7 @@ on_treeview_key_press_event (GeditFileBrowserView   *treeview,
 		}
 	}
 
-	if ((event->keyval == GDK_F2) && (event->state & modifiers) == 0)
+	if ((event->keyval == GDK_KEY_F2) && (event->state & modifiers) == 0)
 	{
 		rename_selected_file (obj);
 		return TRUE;

@@ -505,14 +505,14 @@ search_widget_key_press_event (GtkWidget      *widget,
 	modifiers = gtk_accelerator_get_default_mod_mask ();
 
 	/* Close window */
-	if (event->keyval == GDK_Tab)
+	if (event->keyval == GDK_KEY_Tab)
 	{
 		hide_search_widget (frame, FALSE);
 		retval = TRUE;
 	}
 
 	/* Close window and cancel the search */
-	if (event->keyval == GDK_Escape)
+	if (event->keyval == GDK_KEY_Escape)
 	{
 		if (frame->priv->search_mode == SEARCH)
 		{
@@ -535,28 +535,28 @@ search_widget_key_press_event (GtkWidget      *widget,
 	/* SEARCH mode */
 
 	/* select previous matching iter */
-	if (event->keyval == GDK_Up || event->keyval == GDK_KP_Up)
+	if (event->keyval == GDK_KEY_Up || event->keyval == GDK_KEY_KP_Up)
 	{
 		search_again (frame, TRUE);
 		retval = TRUE;
 	}
 
 	if (((event->state & modifiers) == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) && 
-	    (event->keyval == GDK_g || event->keyval == GDK_G))
+	    (event->keyval == GDK_KEY_g || event->keyval == GDK_KEY_G))
 	{
 		search_again (frame, TRUE);
 		retval = TRUE;
 	}
 
 	/* select next matching iter */
-	if (event->keyval == GDK_Down || event->keyval == GDK_KP_Down)
+	if (event->keyval == GDK_KEY_Down || event->keyval == GDK_KEY_KP_Down)
 	{
 		search_again (frame, FALSE);
 		retval = TRUE;
 	}
 
 	if (((event->state & modifiers) == GDK_CONTROL_MASK) && 
-	    (event->keyval == GDK_g || event->keyval == GDK_G))
+	    (event->keyval == GDK_KEY_g || event->keyval == GDK_KEY_G))
 	{
 		search_again (frame, FALSE);
 		retval = TRUE;

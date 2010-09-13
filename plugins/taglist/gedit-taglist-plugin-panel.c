@@ -277,7 +277,7 @@ tag_list_key_press_event_cb (GtkTreeView             *tag_list,
 
 	grab_focus = (event->state & GDK_CONTROL_MASK) != 0;
 
-	if (event->keyval == GDK_Return)
+	if (event->keyval == GDK_KEY_Return)
 	{
 		GtkTreeModel *model;
 		GtkTreeSelection *selection;
