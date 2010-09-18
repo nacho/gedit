@@ -24,14 +24,14 @@
 # Bits from gedit Python Console Plugin
 #     Copyrignt (C), 2005 Raphaël Slinckx
 
-from gi.repository import GObject, Gtk, Gedit, Peas, PeasUI
+from gi.repository import GObject, Gtk, Gedit, Peas, PeasGtk
 
 from console import PythonConsole
 from config import PythonConsoleConfigWidget
 
 PYTHON_ICON = 'gnome-mime-text-x-python'
 
-class PythonConsolePlugin(GObject.Object, Gedit.WindowActivatable, PeasUI.Configurable):
+class PythonConsolePlugin(GObject.Object, Gedit.WindowActivatable, PeasGtk.Configurable):
     __gtype_name__ = "PythonConsolePlugin"
 
     window = GObject.property(type=GObject.Object)
