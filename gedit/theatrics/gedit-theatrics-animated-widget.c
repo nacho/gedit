@@ -242,7 +242,8 @@ gedit_theatrics_animated_widget_size_request (GtkWidget      *widget,
 	{
 		GtkRequisition req;
 
-		gtk_widget_size_request (aw->priv->widget, &req);
+		gtk_size_request_get_size (GTK_SIZE_REQUEST (aw->priv->widget),
+		                           &req, NULL);
 		aw->priv->widget_alloc.width = req.width;
 		aw->priv->widget_alloc.height = req.height;
 	}

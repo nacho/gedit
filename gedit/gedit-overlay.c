@@ -234,7 +234,8 @@ set_children_positions (GeditOverlay *overlay)
 		if (child->child == overlay->priv->main_widget)
 			continue;
 
-		gtk_widget_size_request (child->child, &req);
+		gtk_size_request_get_size (GTK_SIZE_REQUEST (child->child), &req,
+		                           NULL);
 
 		alloc.x = child->fixed_position ? child->x :
 		          child->x * gtk_adjustment_get_value (overlay->priv->hadjustment);

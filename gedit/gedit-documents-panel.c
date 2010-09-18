@@ -758,7 +758,8 @@ menu_position (GtkMenu             *menu,
 
 	gdk_window_get_origin (gtk_widget_get_window (w), x, y);
 
-	gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
+	gtk_size_request_get_size (GTK_SIZE_REQUEST (menu), &requisition,
+	                           NULL);
 
 	gtk_widget_get_allocation (w, &allocation);
 

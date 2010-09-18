@@ -101,7 +101,8 @@ gedit_utils_menu_position_under_widget (GtkMenu  *menu,
 	widget = GTK_WIDGET (user_data);
 	widget_get_origin (widget, x, y);
 
-	gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
+	gtk_size_request_get_size (GTK_SIZE_REQUEST (menu), &requisition,
+	                           NULL);
 
 	gtk_widget_get_allocation (widget, &allocation);
 

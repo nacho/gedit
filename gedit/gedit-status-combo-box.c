@@ -178,8 +178,9 @@ menu_position_func (GtkMenu		*menu,
 	GtkAllocation allocation;
 	
 	*push_in = FALSE;
-	
-	gtk_widget_size_request (gtk_widget_get_toplevel (GTK_WIDGET (menu)), &request);
+
+	gtk_size_request_get_size (GTK_SIZE_REQUEST (gtk_widget_get_toplevel (GTK_WIDGET (menu))),
+	                           &request, NULL);
 	
 	/* get the origin... */
 	gdk_window_get_origin (gtk_widget_get_window (GTK_WIDGET (combo)), x, y);
@@ -203,8 +204,9 @@ show_menu (GeditStatusComboBox *combo,
 	GtkRequisition request;
 	gint max_height;
 	GtkAllocation allocation;
-	
-	gtk_widget_size_request (combo->priv->menu, &request);
+
+	gtk_size_request_get_size (GTK_SIZE_REQUEST (combo->priv->menu),
+	                           &request, NULL);
 
 	/* do something relative to our own height here, maybe we can do better */
 	gtk_widget_get_allocation (GTK_WIDGET (combo), &allocation);

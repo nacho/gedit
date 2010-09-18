@@ -58,7 +58,8 @@ gedit_rounded_frame_size_request (GtkWidget      *widget,
 		GtkRequisition child_requisition;
 
 		/* Add the child's width/height */
-		gtk_widget_size_request (frame->priv->child, &child_requisition);
+		gtk_size_request_get_size (GTK_SIZE_REQUEST (frame->priv->child),
+		                           &child_requisition, NULL);
 
 		requisition->width = MAX (0, child_requisition.width);
 		requisition->height = child_requisition.height;
