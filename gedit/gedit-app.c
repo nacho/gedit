@@ -544,7 +544,7 @@ gedit_app_init (GeditApp *app)
  * Returns the #GeditApp object. This object is a singleton and
  * represents the running gedit instance.
  *
- * Return value: the #GeditApp pointer
+ * Return value: (transfer none): the #GeditApp pointer
  */
 GeditApp *
 gedit_app_get_default (void)
@@ -765,7 +765,7 @@ gedit_app_create_window_real (GeditApp    *app,
  *
  * Create a new #GeditWindow part of @app.
  *
- * Return value: the new #GeditWindow
+ * Return value: (transfer none): the new #GeditWindow
  */
 GeditWindow *
 gedit_app_create_window (GeditApp  *app,
@@ -802,7 +802,7 @@ _gedit_app_restore_window (GeditApp    *app,
  *
  * Returns all the windows currently present in #GeditApp.
  *
- * Return value: (element-type Window) (transfer none): the list of #GeditWindows objects.
+ * Return value: (element-type Gedit.Window) (transfer none): the list of #GeditWindows objects.
  * The list should not be freed
  */
 const GList *
@@ -819,7 +819,7 @@ gedit_app_get_windows (GeditApp *app)
  *
  * Retrives the #GeditWindow currently active.
  *
- * Return value: the active #GeditWindow
+ * Return value: (transfer none): the active #GeditWindow
  */
 GeditWindow *
 gedit_app_get_active_window (GeditApp *app)

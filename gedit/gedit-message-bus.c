@@ -545,7 +545,7 @@ gedit_message_bus_init (GeditMessageBus *self)
  *
  * Get the default application #GeditMessageBus.
  *
- * Return value: the default #GeditMessageBus
+ * Return value: (transfer full): the default #GeditMessageBus
  *
  */
 GeditMessageBus *
@@ -816,7 +816,7 @@ foreach_type (const gchar      *key,
 /**
  * gedit_message_bus_foreach:
  * @bus: the #GeditMessagebus
- * @func: the callback function
+ * @func: (scope call): the callback function
  * @user_data: the user data to supply to the callback function
  *
  * Calls @func for each message type registered on the bus
@@ -894,7 +894,7 @@ gedit_message_bus_disconnect (GeditMessageBus *bus,
  * @bus: a #GeditMessageBus
  * @object_path: the object path
  * @method: the method
- * @callback: the connected callback
+ * @callback: (scope call): the connected callback
  * @user_data: the user_data with which the callback was connected
  *
  * Disconnects a previously connected message callback by matching the 
@@ -937,7 +937,7 @@ gedit_message_bus_block (GeditMessageBus *bus,
  * @bus: a #GeditMessageBus
  * @object_path: the object path
  * @method: the method
- * @callback: the callback to block
+ * @callback: (scope call): the callback to block
  * @user_data: the user_data with which the callback was connected
  *
  * Blocks evoking the callback that matches provided @callback and @user_data.
@@ -978,7 +978,7 @@ gedit_message_bus_unblock (GeditMessageBus *bus,
  * @bus: a #GeditMessageBus
  * @object_path: the object path
  * @method: the method
- * @callback: the callback to block
+ * @callback: (scope call): the callback to block
  * @user_data: the user_data with which the callback was connected
  *
  * Unblocks the callback that matches provided @callback and @user_data.
@@ -1155,9 +1155,9 @@ gedit_message_bus_send (GeditMessageBus *bus,
  * specifies key (string) value pairs used to construct the message 
  * arguments. To send a message asynchronously use gedit_message_bus_send().
  *
- * Return value: (allow-none): the constructed #GeditMessage. The caller owns a 
- *               reference to the #GeditMessage and should call g_object_unref()
- *               when it is no longer needed
+ * Return value: (allow-none) (transfer full): the constructed #GeditMessage.
+ *               The caller owns a reference to the #GeditMessage and should
+ *               call g_object_unref() when it is no longer needed.
  */
 GeditMessage *
 gedit_message_bus_send_sync (GeditMessageBus *bus,

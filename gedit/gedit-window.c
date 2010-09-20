@@ -4432,7 +4432,7 @@ process_create_tab (GeditWindow *window,
  * Creates a new #GeditTab and adds the new tab to the #GeditNotebook.
  * In case @jump_to is %TRUE the #GeditNotebook switches to that new #GeditTab.
  *
- * Returns: a new #GeditTab
+ * Returns: (transfer none): a new #GeditTab
  */
 GeditTab *
 gedit_window_create_tab (GeditWindow *window,
@@ -4456,6 +4456,7 @@ gedit_window_create_tab (GeditWindow *window,
  * @location: the location of the document
  * @encoding: a #GeditEncoding
  * @line_pos: the line position to visualize
+ * @column_pos: the column position to visualize
  * @create: %TRUE to create a new document in case @uri does exist
  * @jump_to: %TRUE to set the new #GeditTab as active
  *
@@ -4464,7 +4465,7 @@ gedit_window_create_tab (GeditWindow *window,
  * Whether @create is %TRUE, creates a new empty document if location does 
  * not refer to an existing file
  *
- * Returns: a new #GeditTab
+ * Returns: (transfer none): a new #GeditTab
  */
 GeditTab *
 gedit_window_create_tab_from_location (GeditWindow         *window,
@@ -4491,6 +4492,17 @@ gedit_window_create_tab_from_location (GeditWindow         *window,
 	return process_create_tab (window, notebook, GEDIT_TAB (tab), jump_to);
 }
 
+/**
+ * gedit_window_create_tab_from_stream:
+ * @window: a #GeditWindow
+ * @stream: a #GInputStream
+ * @encoding: a #GeditEncoding
+ * @line_pos: the line position to visualize
+ * @column_pos: the column position to visualize
+ * @jump_to: %TRUE to set the new #GeditTab as active
+ *
+ * Returns: (transfer none): a new #GeditTab
+ */
 GeditTab *
 gedit_window_create_tab_from_stream (GeditWindow         *window,
                                      GInputStream        *stream,

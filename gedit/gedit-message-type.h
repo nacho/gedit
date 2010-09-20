@@ -54,14 +54,14 @@ GeditMessageType	*gedit_message_type_new				(const gchar      *object_path,
 GeditMessageType	*gedit_message_type_new_valist			(const gchar      *object_path,
 									 const gchar      *method,
 									 guint             num_optional,
-									 va_list           va_args);
+									 va_list           var_args);
 
 void			 gedit_message_type_set				(GeditMessageType *message_type,
 									 guint             num_optional,
 									 ...) G_GNUC_NULL_TERMINATED;
 void			 gedit_message_type_set_valist			(GeditMessageType *message_type,
 									 guint             num_optional,
-									 va_list           va_args);
+									 va_list           var_args);
 
 GeditMessageType	*gedit_message_type_ref				(GeditMessageType *message_type);
 void			 gedit_message_type_unref			(GeditMessageType *message_type);

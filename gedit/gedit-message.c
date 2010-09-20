@@ -252,6 +252,20 @@ value_lookup (GeditMessage *message,
 }
 
 /**
+ * gedit_message_get_message_type:
+ * @message:
+ *
+ * Return value: (transfer none):
+ */
+GeditMessageType *
+gedit_message_get_message_type (GeditMessage *message)
+{
+	g_return_val_if_fail (GEDIT_IS_MESSAGE (message), NULL);
+
+	return message->priv->type;
+}
+
+/**
  * gedit_message_get_method:
  * @message: the #GeditMessage
  *

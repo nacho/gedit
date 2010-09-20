@@ -404,7 +404,7 @@ gedit_message_type_set_valist (GeditMessageType *message_type,
  * Instantiate a new message from the message type with specific values
  * for the message arguments.
  *
- * Return value: the newly created message
+ * Return value: (transfer full): the newly created message
  *
  */
 GeditMessage *
@@ -429,7 +429,7 @@ gedit_message_type_instantiate_valist (GeditMessageType *message_type,
  * Instantiate a new message from the message type with specific values
  * for the message arguments.
  *
- * Return value: the newly created message
+ * Return value: (transfer full): the newly created message
  *
  */
 GeditMessage *
@@ -523,7 +523,7 @@ foreach_gtype (const gchar  *key,
 /**
  * gedit_message_type_foreach:
  * @message_type: the #GeditMessageType
- * @func: the callback function
+ * @func: (scope call): the callback function
  * @user_data: user data supplied to the callback function
  *
  * Calls @func for each argument in the message type.

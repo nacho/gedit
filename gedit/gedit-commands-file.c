@@ -291,7 +291,7 @@ load_file_list (GeditWindow         *window,
 }
 
 /**
- * gedit_commands_load_uri:
+ * gedit_commands_load_location:
  * @window:
  * @location:
  * @encoding: (allow-none):
@@ -330,9 +330,9 @@ gedit_commands_load_location (GeditWindow         *window,
 }
 
 /**
- * gedit_commands_load_uris:
+ * gedit_commands_load_locations:
  * @window:
- * @locations: (element-type Glib.File) (transfer none):
+ * @locations: (element-type GLib.File) (transfer none):
  * @encoding: (allow-none):
  * @line_pos:
  * @column_pos:

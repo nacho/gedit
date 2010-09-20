@@ -123,10 +123,12 @@ NOINST_H_FILES =			\
 	gedit-session.h			\
 	gedit-settings.h		\
 	gedit-smart-charset-converter.h	\
+	gedit-status-combo-box.h	\
 	gedit-style-scheme-manager.h	\
 	gedit-tab-label.h		\
 	gedittextregion.h		\
 	gedit-ui.h			\
+	gedit-utils.h 			\
 	gedit-view-frame.h		\
 	gedit-window-private.h
 
@@ -145,9 +147,7 @@ INST_H_FILES =				\
 	gedit-panel.h			\
 	gedit-progress-info-bar.h	\
 	gedit-statusbar.h		\
-	gedit-status-combo-box.h	\
 	gedit-tab.h 			\
-	gedit-utils.h 			\
 	gedit-view.h 			\
 	gedit-view-activatable.h	\
 	gedit-window.h			\
@@ -284,7 +284,7 @@ INTROSPECTION_SCANNER_ARGS = -I$(top_srcdir) --warn-all
 Gedit_3_0_gir_NAMESPACE = Gedit
 Gedit_3_0_gir_VERSION = 3.0
 Gedit_3_0_gir_PROGRAM = $(builddir)/gedit
-Gedit_3_0_gir_FILES = $(theatrics_files) $(INST_H_FILES) $(libgedit_c_files)
+Gedit_3_0_gir_FILES = $(INST_H_FILES) $(libgedit_c_files)
 Gedit_3_0_gir_INCLUDES = Gtk-3.0 GtkSource-3.0
 
 girdir = $(datadir)/gedit/gir-1.0

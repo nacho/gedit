@@ -54,7 +54,7 @@ struct _GeditMessageClass
 
 GType		 gedit_message_get_type			(void) G_GNUC_CONST;
 
-struct _GeditMessageType gedit_message_get_message_type (GeditMessage  *message);
+struct _GeditMessageType *gedit_message_get_message_type (GeditMessage  *message);
 
 void		 gedit_message_get			(GeditMessage  *message,
 							 ...) G_GNUC_NULL_TERMINATED;

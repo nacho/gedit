@@ -2050,7 +2050,7 @@ _gedit_tab_get_icon (GeditTab *tab)
  *
  * Gets the #GeditTab associated with @doc.
  *
- * Returns: the #GeditTab associated with @doc
+ * Returns: (transfer none): the #GeditTab associated with @doc
  */
 GeditTab *
 gedit_tab_get_from_document (GeditDocument *doc)

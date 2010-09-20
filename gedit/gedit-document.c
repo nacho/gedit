@@ -1203,7 +1203,7 @@ set_location (GeditDocument *doc,
  * gedit_document_get_location:
  * @doc: a #GeditDocument
  *
- * Returns: (allow-none): a copy of the internal #GFile
+ * Returns: (allow-none) (transfer full): a copy of the internal #GFile
  */
 GFile *
 gedit_document_get_location (GeditDocument *doc)
@@ -2788,6 +2788,12 @@ gedit_document_set_language (GeditDocument     *doc,
 	set_language (doc, lang, TRUE);
 }
 
+/**
+ * gedit_document_get_language:
+ * @doc:
+ *
+ * Return value: (transfer none):
+ */
 GtkSourceLanguage *
 gedit_document_get_language (GeditDocument *doc)
 {

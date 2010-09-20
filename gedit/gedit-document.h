@@ -207,7 +207,7 @@ gchar		*gedit_document_get_short_name_for_display
 
 void		 gedit_document_set_short_name_for_display
 						(GeditDocument       *doc,
-						 const gchar         *name);
+						 const gchar         *short_name);
 
 gchar		*gedit_document_get_content_type
 					 	(GeditDocument       *doc);
@@ -344,6 +344,11 @@ void		_gedit_document_search_region   (GeditDocument       *doc,
 #define GEDIT_SEARCH_SET_CASE_SENSITIVE(sflags,state) ((state == TRUE) ? \
 (sflags |= GEDIT_SEARCH_CASE_SENSITIVE) : (sflags &= ~GEDIT_SEARCH_CASE_SENSITIVE))
 
+/**
+ * GeditMountOperationFactory: (skip)
+ * @doc:
+ * @userdata:
+ */
 typedef GMountOperation *(*GeditMountOperationFactory)(GeditDocument *doc, 
 						       gpointer       userdata);
 
