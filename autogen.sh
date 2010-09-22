@@ -22,4 +22,4 @@ which gnome-autogen.sh || {
 
 autopoint --force || exit $?
 
-ACLOCAL_FLAGS="$ACLOCAL_FLAGS -I m4" REQUIRED_AUTOMAKE_VERSION=1.10 REQUIRED_MACROS=python.m4 USE_GNOME2_MACROS=1 USE_COMMON_DOC_BUILD=yes . gnome-autogen.sh
+REQUIRED_MACROS=python.m4 USE_GNOME2_MACROS=1 USE_COMMON_DOC_BUILD=yes . gnome-autogen.sh
