@@ -178,8 +178,6 @@ gedit_main (gboolean service)
 	gedit_debug_message (DEBUG_APP, "Init plugins");
 	engine = gedit_plugins_engine_get_default ();
 
-	gtk_about_dialog_set_url_hook (gedit_utils_activate_url, NULL, NULL);
-
 	app = gedit_app_get_default ();
 
 	/* Initialize session management */

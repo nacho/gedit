@@ -121,10 +121,6 @@ void		 gedit_utils_get_current_viewport	(GdkScreen        *screen,
 							 gint             *x,
 							 gint             *y);
 
-void		 gedit_utils_activate_url		(GtkAboutDialog   *about,
-							 const gchar      *url,
-							 gpointer          data);
-
 gboolean	 gedit_utils_is_valid_location		(GFile            *location);
 
 gboolean	 gedit_utils_get_ui_objects		(const gchar      *filename,
