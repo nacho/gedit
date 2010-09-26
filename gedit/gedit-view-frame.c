@@ -1302,7 +1302,7 @@ start_interactive_search_real (GeditViewFrame *frame)
 	                                   GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
 	                                   GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
 	                                   GTK_ORIENTATION_VERTICAL,
-	                                   0, 0);
+	                                   GDK_GRAVITY_SOUTH_WEST);
 
 	init_search_entry (frame);
 
@@ -1357,24 +1357,6 @@ view_frame_mount_operation_factory (GeditDocument   *doc,
 	return gtk_mount_operation_new (GTK_WINDOW (window));
 }
 
-static void
-on_view_size_allocate (GeditView      *view,
-                       GtkAllocation  *allocation,
-                       GeditViewFrame *frame)
-{
-	if (frame->priv->search_widget != NULL)
-	{
-		GtkAllocation widget_alloc;
-
-		gtk_widget_get_allocation (frame->priv->search_widget,
-		                           &widget_alloc);
-		gedit_overlay_move_widget (GEDIT_OVERLAY (frame->priv->overlay),
-		                           frame->priv->search_widget,
-		                           allocation->width - widget_alloc.width - 8,
-		                           0);
-	}
-}
-
 static gboolean
 on_start_interactive_search (GeditView      *view,
                              GeditViewFrame *frame)
@@ -1414,12 +1396,6 @@ gedit_view_frame_init (GeditViewFrame *frame)
 	gtk_widget_show (frame->priv->view);
 
 	g_object_unref (doc);
-
-	/* TODO: connect it when the search widget exists */
-	g_signal_connect_after (frame->priv->view,
-	                        "size-allocate",
-	                        G_CALLBACK (on_view_size_allocate),
-	                        frame);
 
 	g_signal_connect (frame->priv->view,
 	                  "start-interactive-search",

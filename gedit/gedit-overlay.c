@@ -32,8 +32,7 @@
 typedef struct _ContainerChild
 {
 	GtkWidget *child;
-	gint x;
-	gint y;
+	GdkGravity gravity;
 
 	guint fixed_position : 1;
 	guint is_animated : 1;
@@ -42,7 +41,8 @@ typedef struct _ContainerChild
 struct _GeditOverlayPrivate
 {
 	GtkWidget *main_widget;
-	GSList *children;
+	GSList    *children;
+	GtkAllocation main_alloc;
 
 	GtkAdjustment *hadjustment;
 	GtkAdjustment *vadjustment;
@@ -79,15 +79,13 @@ add_toplevel_widget (GeditOverlay *overlay,
                      GtkWidget    *widget,
                      gboolean      fixed_position,
                      gboolean      is_animated,
-                     gint          x,
-                     gint          y)
+                     GdkGravity    gravity)
 {
 	ContainerChild *child = g_slice_new (ContainerChild);
 
 	gtk_widget_set_parent (widget, GTK_WIDGET (overlay));
 	child->child = widget;
-	child->x = x;
-	child->y = y;
+	child->gravity = gravity;
 	child->fixed_position = fixed_position;
 	child->is_animated = is_animated;
 
@@ -153,7 +151,7 @@ gedit_overlay_set_property (GObject      *object,
 			overlay->priv->main_widget = g_value_get_object (value);
 			add_toplevel_widget (overlay,
 			                     overlay->priv->main_widget,
-			                     TRUE, FALSE, 0, 0);
+			                     TRUE, FALSE, GDK_GRAVITY_STATIC);
 			break;
 		}
 		default:
@@ -237,10 +235,25 @@ set_children_positions (GeditOverlay *overlay)
 		gtk_size_request_get_size (GTK_SIZE_REQUEST (child->child), &req,
 		                           NULL);
 
-		alloc.x = child->fixed_position ? child->x :
-		          child->x * gtk_adjustment_get_value (overlay->priv->hadjustment);
-		alloc.y = child->fixed_position ? child->y :
-		          child->y * gtk_adjustment_get_value (overlay->priv->vadjustment);
+		/* FIXME: Add all the gravities here */
+		switch (child->gravity)
+		{
+			/* The gravity is the inverse of the place we want */
+			case GDK_GRAVITY_SOUTH_WEST:
+				alloc.x = overlay->priv->main_alloc.width - req.width;
+				alloc.y = 0;
+				break;
+			default:
+				alloc.x = 0;
+				alloc.y = 0;
+		}
+
+		if (!child->fixed_position)
+		{
+			alloc.x *= gtk_adjustment_get_value (overlay->priv->hadjustment);
+			alloc.y *= gtk_adjustment_get_value (overlay->priv->vadjustment);
+		}
+
 		alloc.width = req.width;
 		alloc.height = req.height;
 
@@ -253,17 +266,16 @@ gedit_overlay_size_allocate (GtkWidget     *widget,
                              GtkAllocation *allocation)
 {
 	GeditOverlay *overlay = GEDIT_OVERLAY (widget);
-	GtkAllocation alloc;
 
 	GTK_WIDGET_CLASS (gedit_overlay_parent_class)->size_allocate (widget, allocation);
 
-	alloc.x = 0;
-	alloc.y = 0;
-	alloc.width = allocation->width;
-	alloc.height = allocation->height;
+	overlay->priv->main_alloc.x = 0;
+	overlay->priv->main_alloc.y = 0;
+	overlay->priv->main_alloc.width = allocation->width;
+	overlay->priv->main_alloc.height = allocation->height;
 
 	gtk_widget_size_allocate (overlay->priv->main_widget,
-	                          &alloc);
+	                          &overlay->priv->main_alloc);
 	set_children_positions (overlay);
 }
 
@@ -272,7 +284,7 @@ gedit_overlay_add (GtkContainer *overlay,
                    GtkWidget    *widget)
 {
 	add_toplevel_widget (GEDIT_OVERLAY (overlay), widget,
-	                     FALSE, FALSE, 0, 0);
+	                     FALSE, FALSE, GDK_GRAVITY_STATIC);
 }
 
 static void
@@ -551,8 +563,7 @@ gedit_overlay_add_animated_widget (GeditOverlay                       *overlay,
                                    GeditTheatricsChoreographerEasing   easing,
                                    GeditTheatricsChoreographerBlocking blocking,
                                    GtkOrientation                      orientation,
-                                   gint                                x,
-                                   gint                                y)
+                                   GdkGravity                          gravity)
 {
 	GeditTheatricsAnimatedWidget *anim_widget;
 	GeditTheatricsActor *actor;
@@ -578,35 +589,5 @@ gedit_overlay_add_animated_widget (GeditOverlay                       *overlay,
 	                                                 duration);
 
 	add_toplevel_widget (overlay, GTK_WIDGET (anim_widget), TRUE,
-	                     TRUE, x, y);
-}
-
-void
-gedit_overlay_move_widget (GeditOverlay *overlay,
-                           GtkWidget    *widget,
-                           gint          x,
-                           gint          y)
-{
-	GSList *l;
-
-	for (l = overlay->priv->children; l != NULL; l = g_slist_next (l))
-	{
-		ContainerChild *child = (ContainerChild *)l->data;
-		GtkWidget *w;
-
-		if (child->is_animated)
-		{
-			w = gtk_bin_get_child (GTK_BIN (child->child));
-		}
-		else
-		{
-			w = child->child;
-		}
-
-		if (w == widget)
-		{
-			child->x = x;
-			child->y = y;
-		}
-	}
+	                     TRUE, gravity);
 }

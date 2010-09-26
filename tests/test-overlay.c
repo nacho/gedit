@@ -46,7 +46,7 @@ main ()
 	                                   GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
 	                                   GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
 	                                   GTK_ORIENTATION_VERTICAL,
-	                                   0, 0);
+	                                   GDK_GRAVITY_STATIC);
 
 	button = gtk_button_new_with_label ("Hide");
 	gtk_box_pack_end (GTK_BOX (vbox), button, FALSE, FALSE, 0);
