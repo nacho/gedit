@@ -87,9 +87,6 @@ struct _GeditNotebookClass
         GtkNotebookClass parent_class;
 
 	/* Signals */
-	void	 (* tab_detached)	(GeditNotebook *notebook,
-					 GeditTab      *tab);
-	void	 (* tabs_reordered)	(GeditNotebook *notebook);
 	void	 (* tab_close_request)	(GeditNotebook *notebook,
 					 GeditTab      *tab);
 };
@@ -106,32 +103,21 @@ void		gedit_notebook_add_tab		(GeditNotebook *nb,
 						 gint           position,
 						 gboolean       jump_to);
 
+void		gedit_notebook_move_tab		(GeditNotebook *src,
+						 GeditNotebook *dest,
+						 GeditTab      *tab,
+						 gint           dest_position);
+
 void		gedit_notebook_remove_tab	(GeditNotebook *nb,
 						 GeditTab      *tab);
 
 void		gedit_notebook_remove_all_tabs 	(GeditNotebook *nb);
-
-void		gedit_notebook_reorder_tab	(GeditNotebook *src,
-			    			 GeditTab      *tab,
-			    			 gint           dest_position);
-			    			 
-void            gedit_notebook_move_tab		(GeditNotebook *src,
-						 GeditNotebook *dest,
-						 GeditTab      *tab,
-						 gint           dest_position);
 
 void		gedit_notebook_set_close_buttons_sensitive
 						(GeditNotebook *nb,
 						 gboolean       sensitive);
 
 gboolean	gedit_notebook_get_close_buttons_sensitive
-						(GeditNotebook *nb);
-
-void		gedit_notebook_set_tab_drag_and_drop_enabled
-						(GeditNotebook *nb,
-						 gboolean       enable);
-
-gboolean	gedit_notebook_get_tab_drag_and_drop_enabled
 						(GeditNotebook *nb);
 
 void		gedit_notebook_collapse_border	(GeditNotebook *nb,

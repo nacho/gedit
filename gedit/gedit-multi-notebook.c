@@ -54,7 +54,7 @@ enum
 	TAB_REMOVED,
 	SWITCH_TAB,
 	TAB_CLOSE_REQUEST,
-	TAB_DETACHED,
+	CREATE_WINDOW,
 	TABS_REORDERED,
 	SHOW_POPUP_MENU,
 	LAST_SIGNAL
@@ -177,17 +177,16 @@ gedit_multi_notebook_class_init (GeditMultiNotebookClass *klass)
 			      2,
 			      GEDIT_TYPE_NOTEBOOK,
 			      GEDIT_TYPE_TAB);
-	signals[TAB_DETACHED] =
-		g_signal_new ("tab-detached",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (GeditMultiNotebookClass, tab_detached),
-			      NULL, NULL,
-			      gedit_marshal_VOID__OBJECT_OBJECT,
-			      G_TYPE_NONE,
-			      2,
-			      GEDIT_TYPE_NOTEBOOK,
-			      GEDIT_TYPE_TAB);
+	signals[CREATE_WINDOW] =
+		g_signal_new ("create-window",
+		              G_TYPE_FROM_CLASS (object_class),
+		              G_SIGNAL_RUN_LAST,
+		              G_STRUCT_OFFSET (GeditMultiNotebookClass, create_window),
+		              NULL, NULL,
+		              gedit_marshal_OBJECT__OBJECT_OBJECT_INT_INT,
+		              GTK_TYPE_NOTEBOOK, 4,
+		              GEDIT_TYPE_NOTEBOOK, GTK_TYPE_WIDGET,
+		              G_TYPE_INT, G_TYPE_INT);
 	signals[TABS_REORDERED] =
 		g_signal_new ("tabs-reordered",
 			      G_OBJECT_CLASS_TYPE (object_class),
@@ -251,18 +250,26 @@ notebook_tab_close_request (GeditNotebook      *notebook,
 		       notebook, tab);
 }
 
-static void
-notebook_tab_detached (GeditNotebook      *notebook,
-		       GeditTab           *tab,
-		       GeditMultiNotebook *mnb)
+static GtkNotebook *
+notebook_create_window (GeditNotebook      *notebook,
+			GtkWidget          *child,
+			gint                x,
+			gint                y,
+			GeditMultiNotebook *mnb)
 {
-	g_signal_emit (G_OBJECT (mnb), signals[TAB_DETACHED], 0,
-		       notebook, tab);
+	GtkNotebook *dest_notebook;
+
+	g_signal_emit (G_OBJECT (mnb), signals[CREATE_WINDOW], 0,
+	               notebook, child, x, y, &dest_notebook);
+
+	return dest_notebook;
 }
 
 static void
-notebook_tabs_reordered (GeditNotebook      *notebook,
-			 GeditMultiNotebook *mnb)
+notebook_page_reordered (GeditNotebook      *notebook,
+		         GtkWidget          *child,
+		         guint               page_num,
+		         GeditMultiNotebook *mnb)
 {
 	g_signal_emit (G_OBJECT (mnb), signals[TABS_REORDERED], 0);
 }
@@ -389,12 +396,12 @@ connect_notebook_signals (GeditMultiNotebook *mnb,
 			  G_CALLBACK (notebook_switch_page),
 			  mnb);
 	g_signal_connect (notebook,
-			  "tabs-reordered",
-			  G_CALLBACK (notebook_tabs_reordered),
+			  "page-reordered",
+			  G_CALLBACK (notebook_page_reordered),
 			  mnb);
 	g_signal_connect (notebook,
-			  "tab-detached",
-			  G_CALLBACK (notebook_tab_detached),
+			  "create-window",
+			  G_CALLBACK (notebook_create_window),
 			  mnb);
 	g_signal_connect (notebook,
 			  "tab-close-request",
@@ -418,9 +425,9 @@ disconnect_notebook_signals (GeditMultiNotebook *mnb,
 					      mnb);
 	g_signal_handlers_disconnect_by_func (notebook, notebook_page_removed,
 					      mnb);
-	g_signal_handlers_disconnect_by_func (notebook, notebook_tabs_reordered,
+	g_signal_handlers_disconnect_by_func (notebook, notebook_page_reordered,
 					      mnb);
-	g_signal_handlers_disconnect_by_func (notebook, notebook_tab_detached,
+	g_signal_handlers_disconnect_by_func (notebook, notebook_create_window,
 					      mnb);
 	g_signal_handlers_disconnect_by_func (notebook, notebook_tab_close_request,
 					      mnb);

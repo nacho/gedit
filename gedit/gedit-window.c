@@ -2249,7 +2249,7 @@ clone_window (GeditWindow *origin)
 	GeditApp  *app;
 	gint panel_page;
 
-	gedit_debug (DEBUG_WINDOW);	
+	gedit_debug (DEBUG_WINDOW);
 
 	app = gedit_app_get_default ();
 
@@ -2286,7 +2286,7 @@ clone_window (GeditWindow *origin)
 	gtk_widget_set_visible (window->priv->side_panel,
 				gtk_widget_get_visible (origin->priv->side_panel));
 	gtk_widget_set_visible (window->priv->bottom_panel,
-                                gtk_widget_get_visible (origin->priv->bottom_panel));
+	                        gtk_widget_get_visible (origin->priv->bottom_panel));
 
 	set_statusbar_style (window, origin);
 	set_toolbar_style (window, origin);
@@ -2775,9 +2775,6 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 	{
 		gedit_notebook_set_close_buttons_sensitive (notebook,
 							    !(window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION));
-							    
-		gedit_notebook_set_tab_drag_and_drop_enabled (notebook,
-							      !(window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION));
 		notebook = gedit_multi_notebook_get_nth_notebook (window->priv->multi_notebook,
 								  ++i);
 	}
@@ -3604,7 +3601,10 @@ on_tab_removed (GeditMultiNotebook *multi,
 					      G_CALLBACK (drop_uris_cb),
 					      window);
 	g_signal_handlers_disconnect_by_func (doc,
-					      G_CALLBACK (update_cursor_position_statusbar), 
+					      G_CALLBACK (bracket_matched_cb),
+					      window);
+	g_signal_handlers_disconnect_by_func (doc,
+					      G_CALLBACK (update_cursor_position_statusbar),
 					      window);
 	g_signal_handlers_disconnect_by_func (doc, 
 					      G_CALLBACK (can_search_again),
@@ -3702,28 +3702,25 @@ on_tabs_reordered (GeditMultiNotebook *multi,
 	g_signal_emit (G_OBJECT (window), signals[TABS_REORDERED], 0);
 }
 
-static void
-on_tab_detached (GeditMultiNotebook *multi,
-		 GeditNotebook      *notebook,
-		 GeditTab           *tab,
-		 GeditWindow        *window)
+static GtkNotebook *
+on_notebook_create_window (GeditMultiNotebook *mnb,
+                           GtkNotebook        *notebook,
+                           GtkWidget          *page,
+                           gint                x,
+                           gint                y,
+                           GeditWindow        *window)
 {
 	GeditWindow *new_window;
-	GeditNotebook *new_notebook;
-	
-	gedit_debug (DEBUG_WINDOW);
-	
+	GtkWidget *new_notebook;
+
 	new_window = clone_window (window);
-	new_notebook = gedit_multi_notebook_get_active_notebook (new_window->priv->multi_notebook);
 
-	gedit_notebook_move_tab (notebook,
-				 new_notebook,
-				 tab, 0);
-
-	gtk_window_set_position (GTK_WINDOW (new_window), 
-				 GTK_WIN_POS_MOUSE);
-
+	gtk_window_move (GTK_WINDOW (new_window), x, y);
 	gtk_widget_show (GTK_WIDGET (new_window));
+
+	new_notebook = _gedit_window_get_notebook (GEDIT_WINDOW (new_window));
+
+	return GTK_NOTEBOOK (new_notebook);
 }
 
 static void 
@@ -4220,14 +4217,14 @@ gedit_window_init (GeditWindow *window)
 			  window);
 
 	g_signal_connect (window->priv->multi_notebook,
-			  "tab-detached",
-			  G_CALLBACK (on_tab_detached),
-			  window);
-
-	g_signal_connect (window->priv->multi_notebook,
 			  "tabs-reordered",
 			  G_CALLBACK (on_tabs_reordered),
 			  window);
+
+	g_signal_connect (window->priv->multi_notebook,
+	                  "create-window",
+	                  G_CALLBACK (on_notebook_create_window),
+	                  window);
 
 	g_signal_connect (window->priv->multi_notebook,
 			  "show-popup-menu",

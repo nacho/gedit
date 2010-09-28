@@ -73,9 +73,11 @@ struct _GeditMultiNotebookClass
 	void	(* tab_close_request)		(GeditMultiNotebook *mnb,
 						 GeditNotebook      *notebook,
 						 GeditTab           *tab);
-	void	(* tab_detached)		(GeditMultiNotebook *mnb,
+	GtkNotebook *	(* create_window)	(GeditMultiNotebook *mnb,
 						 GeditNotebook      *notebook,
-						 GeditTab           *tab);
+						 GtkWidget          *page,
+						 gint                x,
+						 gint                y);
 	void	(* tabs_reordered)		(GeditMultiNotebook *mnb);
 	void	(* show_popup_menu)		(GeditMultiNotebook *mnb,
 						 GdkEvent           *event);
