@@ -185,18 +185,14 @@ gedit_overlay_destroy (GtkObject *object)
 static void
 gedit_overlay_realize (GtkWidget *widget)
 {
-	GdkWindowAttr attributes;
 	GtkAllocation allocation;
-	GdkWindowAttributesType mask;
-	GdkWindow *parent_window;
 	GdkWindow *window;
-	GtkStyle *style;
+	GdkWindowAttr attributes;
+	gint attributes_mask;
 
 	gtk_widget_set_realized (widget, TRUE);
-	gtk_widget_get_allocation (widget, &allocation);
 
-	parent_window = gtk_widget_get_parent_window (widget);
-	style = gtk_widget_get_style (widget);
+	gtk_widget_get_allocation (widget, &allocation);
 
 	attributes.window_type = GDK_WINDOW_CHILD;
 	attributes.x = allocation.x;
@@ -206,16 +202,19 @@ gedit_overlay_realize (GtkWidget *widget)
 	attributes.wclass = GDK_INPUT_OUTPUT;
 	attributes.visual = gtk_widget_get_visual (widget);
 	attributes.colormap = gtk_widget_get_colormap (widget);
-	attributes.event_mask = gtk_widget_get_events (widget) | GDK_EXPOSURE_MASK;
+	attributes.event_mask = gtk_widget_get_events (widget);
+	attributes.event_mask |= GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK;
 
-	mask = GDK_WA_X | GDK_WA_Y | GDK_WA_COLORMAP | GDK_WA_VISUAL;
-	window = gdk_window_new (parent_window, &attributes, mask);
-	gdk_window_set_user_data (window, widget);
+	attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
+
+	window = gdk_window_new (gtk_widget_get_parent_window (widget),
+	                         &attributes, attributes_mask);
 	gtk_widget_set_window (widget, window);
+	gdk_window_set_user_data (window, widget);
 
-	style = gtk_style_attach (style, window);
-	gtk_widget_set_style (widget, style);
-	gtk_style_set_background (style, window, GTK_STATE_NORMAL);
+	gtk_widget_style_attach (widget);
+	gtk_style_set_background (gtk_widget_get_style (widget), window,
+	                          GTK_STATE_NORMAL);
 }
 
 static void
@@ -304,6 +303,7 @@ gedit_overlay_remove (GtkContainer *overlay,
 			goverlay->priv->children = g_slist_remove (goverlay->priv->children,
 			                                           child);
 			free_container_child (child);
+			break;
 		}
 	}
 }
