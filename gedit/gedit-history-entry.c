@@ -116,12 +116,12 @@ gedit_history_entry_get_property (GObject    *object,
 }
 
 static void
-gedit_history_entry_destroy (GtkObject *object)
+gedit_history_entry_dispose (GObject *object)
 {
 	gedit_history_entry_set_enable_completion (GEDIT_HISTORY_ENTRY (object),
 						   FALSE);
 
-	GTK_OBJECT_CLASS (gedit_history_entry_parent_class)->destroy (object);
+	G_OBJECT_CLASS (gedit_history_entry_parent_class)->dispose (object);
 }
 
 static void
@@ -146,13 +146,12 @@ static void
 gedit_history_entry_class_init (GeditHistoryEntryClass *klass)
 {
 	GObjectClass   *object_class = G_OBJECT_CLASS (klass);
-	GtkObjectClass *gtkobject_class = GTK_OBJECT_CLASS (klass);
-	
+
 	object_class->set_property = gedit_history_entry_set_property;
 	object_class->get_property = gedit_history_entry_get_property;
+	object_class->dispose = gedit_history_entry_dispose;
 	object_class->finalize = gedit_history_entry_finalize;
-	gtkobject_class->destroy = gedit_history_entry_destroy;
-	
+
 	g_object_class_install_property (object_class,
 					 PROP_HISTORY_ID,
 					 g_param_spec_string ("history-id",

@@ -528,7 +528,7 @@ _gedit_cmd_search_find (GtkAction   *action,
 	/* incremental search is builtin in GeditView, just activate
 	 * the corresponding binding.
 	 */
-	gtk_bindings_activate (GTK_OBJECT (active_view),
+	gtk_bindings_activate (G_OBJECT (active_view),
 			       GDK_KEY_f,
 			       GDK_CONTROL_MASK);
 }
@@ -655,7 +655,7 @@ _gedit_cmd_search_goto_line (GtkAction   *action,
 	/* goto line is builtin in GeditView, just activate
 	 * the corresponding binding.
 	 */
-	gtk_bindings_activate (GTK_OBJECT (active_view),
+	gtk_bindings_activate (G_OBJECT (active_view),
 			       GDK_KEY_i,
 			       GDK_CONTROL_MASK);
 }

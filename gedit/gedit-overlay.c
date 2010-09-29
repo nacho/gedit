@@ -108,6 +108,20 @@ gedit_overlay_dispose (GObject *object)
 {
 	GeditOverlay *overlay = GEDIT_OVERLAY (object);
 
+	if (overlay->priv->hadjustment != NULL)
+	{
+		g_signal_handler_disconnect (overlay->priv->hadjustment,
+		                             overlay->priv->hadjustment_signal_id);
+		overlay->priv->hadjustment = NULL;
+	}
+
+	if (overlay->priv->vadjustment != NULL)
+	{
+		g_signal_handler_disconnect (overlay->priv->vadjustment,
+		                             overlay->priv->vadjustment_signal_id);
+		overlay->priv->vadjustment = NULL;
+	}
+
 	if (overlay->priv->stage != NULL)
 	{
 		g_object_unref (overlay->priv->stage);
@@ -158,28 +172,6 @@ gedit_overlay_set_property (GObject      *object,
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
 	}
-}
-
-static void
-gedit_overlay_destroy (GtkObject *object)
-{
-	GeditOverlay *overlay = GEDIT_OVERLAY (object);
-
-	if (overlay->priv->hadjustment != NULL)
-	{
-		g_signal_handler_disconnect (overlay->priv->hadjustment,
-		                             overlay->priv->hadjustment_signal_id);
-		overlay->priv->hadjustment = NULL;
-	}
-
-	if (overlay->priv->vadjustment != NULL)
-	{
-		g_signal_handler_disconnect (overlay->priv->vadjustment,
-		                             overlay->priv->vadjustment_signal_id);
-		overlay->priv->vadjustment = NULL;
-	}
-
-	GTK_OBJECT_CLASS (gedit_overlay_parent_class)->destroy (object);
 }
 
 static void
@@ -385,7 +377,6 @@ static void
 gedit_overlay_class_init (GeditOverlayClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	GtkObjectClass *gtkobject_class = GTK_OBJECT_CLASS (klass);
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 	GtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
 
@@ -393,8 +384,6 @@ gedit_overlay_class_init (GeditOverlayClass *klass)
 	object_class->dispose = gedit_overlay_dispose;
 	object_class->get_property = gedit_overlay_get_property;
 	object_class->set_property = gedit_overlay_set_property;
-
-	gtkobject_class->destroy = gedit_overlay_destroy;
 
 	widget_class->realize = gedit_overlay_realize;
 	widget_class->size_allocate = gedit_overlay_size_allocate;

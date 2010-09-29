@@ -422,7 +422,7 @@ get_time (const gchar* format)
 }
 
 static void
-configure_widget_destroyed (GtkObject *obj,
+configure_widget_destroyed (GtkWidget *widget,
 			    gpointer   data)
 {
 	TimeConfigureWidget *widget = (TimeConfigureWidget *)data;
@@ -436,7 +436,7 @@ configure_widget_destroyed (GtkObject *obj,
 }
 
 static void
-choose_format_dialog_destroyed (GtkObject *obj,
+choose_format_dialog_destroyed (GtkWidget *widget,
 				gpointer   dialog_pointer)
 {
 	gedit_debug (DEBUG_PLUGINS);

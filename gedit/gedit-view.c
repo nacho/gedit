@@ -68,16 +68,14 @@ enum
 
 struct _GeditViewPrivate
 {
-	GSettings   *editor_settings;
-	
+	GSettings *editor_settings;
 	GtkTextBuffer *current_buffer;
-
 	PeasExtensionSet *extensions;
 };
 
-static void	gedit_view_destroy		(GtkObject        *object);
 static void	gedit_view_finalize		(GObject          *object);
-static gint     gedit_view_focus_out		(GtkWidget        *widget,
+static void	gedit_view_destroy		(GtkWidget        *widget);
+static gint	gedit_view_focus_out		(GtkWidget        *widget,
 						 GdkEventFocus    *event);
 static gboolean gedit_view_drag_motion		(GtkWidget        *widget,
 						 GdkDragContext   *context,
@@ -143,18 +141,16 @@ static void
 gedit_view_class_init (GeditViewClass *klass)
 {
 	GObjectClass     *object_class = G_OBJECT_CLASS (klass);
-	GtkObjectClass   *gtkobject_class = GTK_OBJECT_CLASS (klass);
 	GtkWidgetClass   *widget_class = GTK_WIDGET_CLASS (klass);
 	GtkTextViewClass *text_view_class = GTK_TEXT_VIEW_CLASS (klass);
-	
 	GtkBindingSet    *binding_set;
 
-	gtkobject_class->destroy = gedit_view_destroy;
 	object_class->finalize = gedit_view_finalize;
 
+	widget_class->destroy = gedit_view_destroy;
 	widget_class->focus_out_event = gedit_view_focus_out;
 	widget_class->expose_event = gedit_view_expose;
-	
+
 	/*
 	 * Override the gtk_text_view_drag_motion and drag_drop
 	 * functions to get URIs
@@ -421,11 +417,11 @@ gedit_view_init (GeditView *view)
 }
 
 static void
-gedit_view_destroy (GtkObject *object)
+gedit_view_destroy (GtkWidget *widget)
 {
 	GeditView *view;
 
-	view = GEDIT_VIEW (object);
+	view = GEDIT_VIEW (widget);
 
 	if (view->priv->extensions != NULL)
 	{
@@ -439,14 +435,14 @@ gedit_view_destroy (GtkObject *object)
 	   would reinstate a GtkTextBuffer which we don't want */
 	current_buffer_removed (view);
 	g_signal_handlers_disconnect_by_func (view, on_notify_buffer_cb, NULL);
-	
+
 	if (view->priv->editor_settings != NULL)
 	{
 		g_object_unref (view->priv->editor_settings);
 		view->priv->editor_settings = NULL;
 	}
 
-	(* GTK_OBJECT_CLASS (gedit_view_parent_class)->destroy) (object);
+	GTK_WIDGET_CLASS (gedit_view_parent_class)->destroy (widget);
 }
 
 static void
@@ -458,7 +454,7 @@ gedit_view_finalize (GObject *object)
 
 	current_buffer_removed (view);
 
-	(* G_OBJECT_CLASS (gedit_view_parent_class)->finalize) (object);
+	G_OBJECT_CLASS (gedit_view_parent_class)->finalize (object);
 }
 
 static gint
@@ -466,7 +462,7 @@ gedit_view_focus_out (GtkWidget *widget, GdkEventFocus *event)
 {
 	gtk_widget_queue_draw (widget);
 
-	(* GTK_WIDGET_CLASS (gedit_view_parent_class)->focus_out_event) (widget, event);
+	GTK_WIDGET_CLASS (gedit_view_parent_class)->focus_out_event (widget, event);
 
 	return FALSE;
 }
@@ -726,11 +722,11 @@ gedit_view_expose (GtkWidget      *widget,
 {
 	GtkTextView *text_view;
 	GeditDocument *doc;
-	
+
 	text_view = GTK_TEXT_VIEW (widget);
-	
+
 	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (text_view));
-	
+
 	if ((event->window == gtk_text_view_get_window (text_view, GTK_TEXT_WINDOW_TEXT)) &&
 	    gedit_document_get_enable_search_highlighting (doc))
 	{
@@ -750,7 +746,7 @@ gedit_view_expose (GtkWidget      *widget,
 					       &iter2);
 	}
 
-	return (* GTK_WIDGET_CLASS (gedit_view_parent_class)->expose_event)(widget, event);
+	return GTK_WIDGET_CLASS (gedit_view_parent_class)->expose_event (widget, event);
 }
 
 static GdkAtom

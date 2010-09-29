@@ -112,7 +112,7 @@ static guint signals [LAST_SIGNAL] = { 0 };
 G_DEFINE_TYPE(GeditSpellCheckerDialog, gedit_spell_checker_dialog, GTK_TYPE_WINDOW)
 
 static void
-gedit_spell_checker_dialog_destroy (GtkObject *object)
+gedit_spell_checker_dialog_dispose (GObject *object)
 {
 	GeditSpellCheckerDialog *dlg = GEDIT_SPELL_CHECKER_DIALOG (object);
 
@@ -128,17 +128,15 @@ gedit_spell_checker_dialog_destroy (GtkObject *object)
 		dlg->misspelled_word = NULL;
 	}
 
-	GTK_OBJECT_CLASS (gedit_spell_checker_dialog_parent_class)->destroy (object);
+	G_OBJECT_CLASS (gedit_spell_checker_dialog_parent_class)->dipose (object);
 }
 
 static void
 gedit_spell_checker_dialog_class_init (GeditSpellCheckerDialogClass * klass)
 {
-	GObjectClass *object_class;
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	object_class = G_OBJECT_CLASS (klass);
-
-	GTK_OBJECT_CLASS (object_class)->destroy = gedit_spell_checker_dialog_destroy;
+	object_class->dispose = gedit_spell_checker_dialog_dispose;
 
 	signals[IGNORE] = 
 		g_signal_new ("ignore",
