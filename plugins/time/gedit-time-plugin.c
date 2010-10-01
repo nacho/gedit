@@ -425,11 +425,11 @@ static void
 configure_widget_destroyed (GtkWidget *widget,
 			    gpointer   data)
 {
-	TimeConfigureWidget *widget = (TimeConfigureWidget *)data;
+	TimeConfigureWidget *conf_widget = (TimeConfigureWidget *)data;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	g_object_unref (widget->settings);
+	g_object_unref (conf_widget->settings);
 	g_slice_free (TimeConfigureWidget, data);
 
 	gedit_debug_message (DEBUG_PLUGINS, "END");

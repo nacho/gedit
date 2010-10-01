@@ -224,7 +224,6 @@ gedit_theatrics_animated_widget_realize (GtkWidget *widget)
 	window = gdk_window_new (parent_window, &attributes, 0);
 	gdk_window_set_user_data (window, widget);
 	gtk_widget_set_window (widget, window);
-	gdk_window_set_back_pixmap (window, NULL, FALSE);
 	style = gtk_style_attach (style, window);
 	gtk_widget_set_style (widget, style);
 	gtk_style_set_background (style, window, GTK_STATE_NORMAL);
@@ -242,8 +241,8 @@ gedit_theatrics_animated_widget_size_request (GtkWidget      *widget,
 	{
 		GtkRequisition req;
 
-		gtk_size_request_get_size (GTK_SIZE_REQUEST (aw->priv->widget),
-		                           &req, NULL);
+		gtk_widget_get_preferred_size (aw->priv->widget,
+		                               &req, NULL);
 		aw->priv->widget_alloc.width = req.width;
 		aw->priv->widget_alloc.height = req.height;
 	}
@@ -311,8 +310,8 @@ gedit_theatrics_animated_widget_size_allocate (GtkWidget     *widget,
 }
 
 static gboolean
-gedit_theatrics_animated_widget_expose_event (GtkWidget      *widget,
-					      GdkEventExpose *event)
+gedit_theatrics_animated_widget_draw (GtkWidget      *widget,
+				      cairo_t        *cr)
 {
 	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (widget);
 
@@ -321,23 +320,19 @@ gedit_theatrics_animated_widget_expose_event (GtkWidget      *widget,
 		/* Do not scale if the size is 0 */
 		if (aw->priv->width > 0 && aw->priv->height > 0)
 		{
-			cairo_t *cr;
-			cr = gdk_cairo_create (event->window);
-
 			cairo_scale (cr,
 				     aw->priv->widget_alloc.width / aw->priv->width,
 				     aw->priv->widget_alloc.height / aw->priv->height);
 			cairo_set_source_surface (cr, aw->priv->surface, 0, 0);
 
 			cairo_paint (cr);
-			cairo_destroy (cr);
 		}
 
 		return TRUE;
 	}
 	else
 	{
-		return GTK_WIDGET_CLASS (gedit_theatrics_animated_widget_parent_class)->expose_event (widget, event);
+		return GTK_WIDGET_CLASS (gedit_theatrics_animated_widget_parent_class)->draw (widget, cr);
 	}
 }
 
@@ -381,7 +376,7 @@ gedit_theatrics_animated_widget_class_init (GeditTheatricsAnimatedWidgetClass *k
 	widget_class->realize = gedit_theatrics_animated_widget_realize;
 	widget_class->size_request = gedit_theatrics_animated_widget_size_request;
 	widget_class->size_allocate = gedit_theatrics_animated_widget_size_allocate;
-	widget_class->expose_event = gedit_theatrics_animated_widget_expose_event;
+	widget_class->draw = gedit_theatrics_animated_widget_draw;
 
 	container_class->add = gedit_theatrics_animated_widget_add;
 	container_class->remove = gedit_theatrics_animated_widget_remove;

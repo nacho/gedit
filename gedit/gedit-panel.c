@@ -268,15 +268,6 @@ set_gtk_image_from_gtk_image (GtkImage *image,
 		case GTK_IMAGE_EMPTY:
 			gtk_image_clear (image);
 			break;
-		case GTK_IMAGE_PIXMAP:
-			{
-				GdkPixmap *pm;
-				GdkBitmap *bm;
-
-				gtk_image_get_pixmap (source, &pm, &bm);
-				gtk_image_set_from_pixmap (image, pm, bm);
-			}
-			break;
 		case GTK_IMAGE_PIXBUF:
 			{
 				GdkPixbuf *pb;

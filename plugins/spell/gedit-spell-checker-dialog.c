@@ -128,7 +128,7 @@ gedit_spell_checker_dialog_dispose (GObject *object)
 		dlg->misspelled_word = NULL;
 	}
 
-	G_OBJECT_CLASS (gedit_spell_checker_dialog_parent_class)->dipose (object);
+	G_OBJECT_CLASS (gedit_spell_checker_dialog_parent_class)->dispose (object);
 }
 
 static void

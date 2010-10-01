@@ -877,7 +877,8 @@ is_in_viewport (GeditWindow  *window,
 	/* Check for viewport match */
 	gdkwindow = gtk_widget_get_window (GTK_WIDGET (window));
 	gdk_window_get_position (gdkwindow, &x, &y);
-	gdk_drawable_get_size (gdkwindow, &width, &height);
+	width = gdk_window_get_width (gdkwindow);
+	height = gdk_window_get_height (gdkwindow);
 	gedit_utils_get_current_viewport (screen, &vp_x, &vp_y);
 	x += vp_x;
 	y += vp_y;

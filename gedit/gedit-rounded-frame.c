@@ -58,8 +58,8 @@ gedit_rounded_frame_size_request (GtkWidget      *widget,
 		GtkRequisition child_requisition;
 
 		/* Add the child's width/height */
-		gtk_size_request_get_size (GTK_SIZE_REQUEST (frame->priv->child),
-		                           &child_requisition, NULL);
+		gtk_widget_get_preferred_size (frame->priv->child,
+		                               &child_requisition, NULL);
 
 		requisition->width = MAX (0, child_requisition.width);
 		requisition->height = child_requisition.height;
@@ -137,19 +137,16 @@ draw_frame (GeditRoundedFrame *frame,
 }
 
 static gboolean
-gedit_rounded_frame_expose_event (GtkWidget      *widget,
-                                  GdkEventExpose *event)
+gedit_rounded_frame_draw (GtkWidget      *widget,
+                          cairo_t        *cr)
 {
 	GeditRoundedFrame *frame = GEDIT_ROUNDED_FRAME (widget);
 	GdkRectangle area;
-	cairo_t *cr;
 
 	if (!gtk_widget_is_drawable (widget))
 	{
 		return FALSE;
 	}
-
-	cr = gdk_cairo_create (event->window);
 
 	area.x = frame->priv->child_allocation.x - frame->priv->frame_width;
 	area.y = frame->priv->child_allocation.y - 2 * frame->priv->frame_width - 1;
@@ -158,16 +155,7 @@ gedit_rounded_frame_expose_event (GtkWidget      *widget,
 
 	draw_frame (frame, cr, &area);
 
-	if (frame->priv->child != NULL)
-	{
-		gtk_container_propagate_expose (GTK_CONTAINER (frame),
-		                                frame->priv->child,
-		                                event);
-	}
-
-	cairo_destroy (cr);
-
-	return FALSE;
+	return GTK_WIDGET_CLASS (gedit_rounded_frame_parent_class)->draw (widget, cr);
 }
 
 static void
@@ -206,7 +194,7 @@ gedit_rounded_frame_class_init (GeditRoundedFrameClass *klass)
 
 	widget_class->size_request = gedit_rounded_frame_size_request;
 	widget_class->size_allocate = gedit_rounded_frame_size_allocate;
-	widget_class->expose_event = gedit_rounded_frame_expose_event;
+	widget_class->draw = gedit_rounded_frame_draw;
 
 	container_class->add = gedit_rounded_frame_add;
 	container_class->remove = gedit_rounded_frame_remove;

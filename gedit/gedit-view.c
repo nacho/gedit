@@ -101,8 +101,8 @@ static void	gedit_view_realize		(GtkWidget        *widget);
 static gboolean reset_searched_text		(GeditView        *view);
 
 
-static gint	gedit_view_expose	 	(GtkWidget        *widget,
-						 GdkEventExpose   *event);
+static gboolean	gedit_view_draw			(GtkWidget        *widget,
+						 cairo_t          *cr);
 static void 	search_highlight_updated_cb	(GeditDocument    *doc,
 						 GtkTextIter      *start,
 						 GtkTextIter      *end,
@@ -149,7 +149,7 @@ gedit_view_class_init (GeditViewClass *klass)
 
 	widget_class->destroy = gedit_view_destroy;
 	widget_class->focus_out_event = gedit_view_focus_out;
-	widget_class->expose_event = gedit_view_expose;
+	widget_class->draw = gedit_view_draw;
 
 	/*
 	 * Override the gtk_text_view_drag_motion and drag_drop
@@ -716,18 +716,20 @@ reset_searched_text (GeditView *view)
 	return TRUE;
 }
 
-static gint
-gedit_view_expose (GtkWidget      *widget,
-                   GdkEventExpose *event)
+static gboolean
+gedit_view_draw (GtkWidget *widget,
+                 cairo_t   *cr)
 {
 	GtkTextView *text_view;
 	GeditDocument *doc;
+	GdkWindow *window;
 
 	text_view = GTK_TEXT_VIEW (widget);
 
 	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (text_view));
+	window = gtk_text_view_get_window (text_view, GTK_TEXT_WINDOW_TEXT);
 
-	if ((event->window == gtk_text_view_get_window (text_view, GTK_TEXT_WINDOW_TEXT)) &&
+	if (gtk_cairo_should_draw_window (cr, window) &&
 	    gedit_document_get_enable_search_highlighting (doc))
 	{
 		GdkRectangle visible_rect;
@@ -746,7 +748,7 @@ gedit_view_expose (GtkWidget      *widget,
 					       &iter2);
 	}
 
-	return GTK_WIDGET_CLASS (gedit_view_parent_class)->expose_event (widget, event);
+	return GTK_WIDGET_CLASS (gedit_view_parent_class)->draw (widget, cr);
 }
 
 static GdkAtom

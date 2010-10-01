@@ -101,8 +101,8 @@ gedit_utils_menu_position_under_widget (GtkMenu  *menu,
 	widget = GTK_WIDGET (user_data);
 	widget_get_origin (widget, x, y);
 
-	gtk_size_request_get_size (GTK_SIZE_REQUEST (menu), &requisition,
-	                           NULL);
+	gtk_widget_get_preferred_size (GTK_WIDGET (menu), &requisition,
+	                               NULL);
 
 	gtk_widget_get_allocation (widget, &allocation);
 
@@ -157,8 +157,8 @@ gedit_utils_menu_position_under_tree_view (GtkMenu  *menu,
 		if (gtk_widget_get_direction (GTK_WIDGET (tree)) == GTK_TEXT_DIR_RTL)
 		{
 			GtkRequisition requisition;
-			gtk_size_request_get_size (GTK_SIZE_REQUEST (menu),
-			                           &requisition, NULL);
+			gtk_widget_get_preferred_size (GTK_WIDGET (menu),
+			                               &requisition, NULL);
 			*x += rect.width - requisition.width;
 		}
 	}
@@ -877,7 +877,7 @@ gedit_utils_get_window_workspace (GtkWindow *gtkwindow)
 	g_return_val_if_fail (gtk_widget_get_realized (GTK_WIDGET (gtkwindow)), 0);
 
 	window = gtk_widget_get_window (GTK_WIDGET (gtkwindow));
-	display = gdk_drawable_get_display (window);
+	display = gdk_window_get_display (window);
 
 	gdk_error_trap_push ();
 	result = XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
