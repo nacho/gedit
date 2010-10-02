@@ -29,14 +29,14 @@
 
 #define GEDIT_OVERLAY_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_OVERLAY, GeditOverlayPrivate))
 
-typedef struct _ContainerChild
+typedef struct _OverlayChild
 {
 	GtkWidget *child;
 	GdkGravity gravity;
 
 	guint fixed_position : 1;
 	guint is_animated : 1;
-} ContainerChild;
+} OverlayChild;
 
 struct _GeditOverlayPrivate
 {
@@ -69,9 +69,9 @@ static guint signals[LAST_SIGNAL] = { 0 };
 G_DEFINE_TYPE (GeditOverlay, gedit_overlay, GTK_TYPE_CONTAINER)
 
 static void
-free_container_child (ContainerChild *child)
+free_container_child (OverlayChild *child)
 {
-	g_slice_free (ContainerChild, child);
+	g_slice_free (OverlayChild, child);
 }
 
 static void
@@ -81,13 +81,14 @@ add_toplevel_widget (GeditOverlay *overlay,
                      gboolean      is_animated,
                      GdkGravity    gravity)
 {
-	ContainerChild *child = g_slice_new (ContainerChild);
+	OverlayChild *child = g_slice_new (OverlayChild);
 
-	gtk_widget_set_parent (widget, GTK_WIDGET (overlay));
 	child->child = widget;
 	child->gravity = gravity;
 	child->fixed_position = fixed_position;
 	child->is_animated = is_animated;
+
+	gtk_widget_set_parent (widget, GTK_WIDGET (overlay));
 
 	overlay->priv->children = g_slist_append (overlay->priv->children,
 	                                          child);
@@ -215,7 +216,7 @@ set_children_positions (GeditOverlay *overlay)
 
 	for (l = overlay->priv->children; l != NULL; l = g_slist_next (l))
 	{
-		ContainerChild *child = (ContainerChild *)l->data;
+		OverlayChild *child = (OverlayChild *)l->data;
 		GtkRequisition req;
 		GtkAllocation alloc;
 
@@ -285,13 +286,13 @@ gedit_overlay_remove (GtkContainer *overlay,
 
 	for (l = goverlay->priv->children; l != NULL; l = g_slist_next (l))
 	{
-		ContainerChild *child = (ContainerChild *)l->data;
+		OverlayChild *child = (OverlayChild *)l->data;
 
 		if (child->child == widget)
 		{
 			gtk_widget_unparent (widget);
-			goverlay->priv->children = g_slist_remove (goverlay->priv->children,
-			                                           child);
+			goverlay->priv->children = g_slist_remove_link (goverlay->priv->children,
+			                                                l);
 			free_container_child (child);
 			break;
 		}
@@ -309,9 +310,9 @@ gedit_overlay_forall (GtkContainer *overlay,
 
 	for (l = goverlay->priv->children; l != NULL; l = g_slist_next (l))
 	{
-		ContainerChild *child = (ContainerChild *)l->data;
+		OverlayChild *child = (OverlayChild *)l->data;
 
-		callback (child->child, callback_data);
+		(* callback) (child->child, callback_data);
 	}
 }
 
