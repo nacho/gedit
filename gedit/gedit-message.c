@@ -403,8 +403,8 @@ gedit_message_set_value (GeditMessage *message,
 /**
  * gedit_message_set_valuesv:
  * @message: the #GeditMessage
- * @keys: (array-length=n_values): keys to set values for
- * @values: (array-length=n_values): values to set
+ * @keys: (array length=n_values): keys to set values for
+ * @values: (array length=n_values): values to set
  * @n_values: number of arguments to set values for
  *
  * Set message argument values.
