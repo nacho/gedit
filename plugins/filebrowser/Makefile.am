@@ -44,9 +44,9 @@ libfilebrowser_la_LIBADD = $(GEDIT_LIBS)
 uidir = $(GEDIT_PLUGINS_DATA_DIR)/filebrowser
 ui_DATA = gedit-file-browser-widget-ui.xml
 
-plugin_in_files = filebrowser.gedit-plugin.desktop.in
+plugin_in_files = filebrowser.plugin.desktop.in
 
-%.gedit-plugin: %.gedit-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+%.plugin: %.plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
 gedit-file-browser-enum-types.h: gedit-file-browser-enum-types.h.template $(NOINST_H_FILES) $(GLIB_MKENUMS)
 	(cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-file-browser-enum-types.h.template $(NOINST_H_FILES)) > $@
@@ -63,7 +63,7 @@ gedit-file-browser-marshal.c: gedit-file-browser-marshal.list $(GLIB_GENMARSHAL)
 	$(AM_V_GEN) echo "#include \"gedit-file-browser-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_file_browser_marshal >> $@
 
-plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
+plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 gsettings_ENUM_NAMESPACE = org.gnome.gedit.plugins.filebrowser
 gsettings_ENUM_FILES = $(top_srcdir)/plugins/filebrowser/*.h

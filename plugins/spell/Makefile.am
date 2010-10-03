@@ -44,11 +44,11 @@ gedit-spell-marshal.c: gedit-spell-marshal.list $(GLIB_GENMARSHAL)
 	$(AM_V_GEN) echo "#include \"gedit-spell-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_marshal >> $@
 
-plugin_in_files = spell.gedit-plugin.desktop.in
+plugin_in_files = spell.plugin.desktop.in
 
-%.gedit-plugin: %.gedit-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+%.plugin: %.plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
-plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
+plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 EXTRA_DIST = 					\
 	$(ui_DATA)				\

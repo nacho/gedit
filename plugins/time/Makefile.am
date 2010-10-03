@@ -21,11 +21,11 @@ ui_DATA = \
 	gedit-time-dialog.ui				\
 	gedit-time-setup-dialog.ui
 
-plugin_in_files = time.gedit-plugin.desktop.in
+plugin_in_files = time.plugin.desktop.in
 
-%.gedit-plugin: %.gedit-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+%.plugin: %.plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
-plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
+plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
 gsettings_ENUM_NAMESPACE = org.gnome.gedit.plugins.time
 gsettings_ENUM_FILES = $(top_srcdir)/plugins/time/gedit-time-plugin.c
