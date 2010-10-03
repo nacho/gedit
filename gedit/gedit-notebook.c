@@ -900,21 +900,6 @@ create_tab_label (GeditNotebook *nb,
 	return tab_label;
 }
 
-static void
-remove_tab_label (GeditNotebook *nb,
-		  GeditTab      *tab)
-{
-	GtkWidget *tab_label;
-
-	tab_label = gedit_tab_label_new (tab);
-
-	g_signal_handlers_disconnect_by_func (tab_label,
-					      G_CALLBACK (close_button_clicked_cb),
-					      nb);
-
-	g_object_set_data (G_OBJECT (tab), "tab-label", NULL);
-}
-
 static GtkWidget *
 get_tab_label (GeditTab *tab)
 {
@@ -924,6 +909,21 @@ get_tab_label (GeditTab *tab)
 	g_return_val_if_fail (tab_label != NULL, NULL);
 
 	return tab_label;
+}
+
+static void
+remove_tab_label (GeditNotebook *nb,
+		  GeditTab      *tab)
+{
+	GtkWidget *tab_label;
+
+	tab_label = get_tab_label (tab);
+
+	g_signal_handlers_disconnect_by_func (tab_label,
+					      G_CALLBACK (close_button_clicked_cb),
+					      nb);
+
+	g_object_set_data (G_OBJECT (tab), "tab-label", NULL);
 }
 
 /**
