@@ -3,7 +3,7 @@ dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.63.2)
 
 m4_define(gedit_major_version,  2)
-m4_define(gedit_minor_version, 90)
+m4_define(gedit_minor_version, 91)
 m4_define(gedit_micro_version,  0)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 

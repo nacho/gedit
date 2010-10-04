@@ -44,8 +44,10 @@ gedit-theatrics-marshal.c: gedit-theatrics-marshal.list $(GLIB_GENMARSHAL)
 	$(AM_V_GEN) echo "#include \"gedit-theatrics-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_theatrics_marshal >> $@
 
-EXTRA_DIST =				\
-	gedit-theatrics-marshal.list
+EXTRA_DIST =					\
+	gedit-theatrics-marshal.list		\
+	gedit-theatrics-enum-types.h.template	\
+	gedit-theatrics-enum-types.c.template
 
 CLEANFILES = $(BUILT_SOURCES)
 

@@ -1,6 +1,6 @@
 INCLUDES = -g -I$(top_srcdir) -I$(top_srcdir)/gedit $(GEDIT_DEBUG_FLAGS) $(GEDIT_CFLAGS)
 
-noinst_PROGRAMS = $(TEST_PROGS)
+noinst_PROGRAMS = $(TEST_PROGS) $(TEST_GTK_PROGS)
 progs_ldadd     = $(top_builddir)/gedit/libgedit.la
 
 TEST_PROGS			= smart-converter
@@ -23,11 +23,11 @@ TEST_PROGS			+= document-saver
 document_saver_SOURCES		= document-saver.c
 document_saver_LDADD		= $(progs_ldadd)
 
-TEST_PROGS			+= test-rounded-frame
+TEST_GTK_PROGS			= test-rounded-frame
 test_rounded_frame_SOURCES	= test-rounded-frame.c
 test_rounded_frame_LDADD	= $(progs_ldadd)
 
-TEST_PROGS			+= test-overlay
+TEST_GTK_PROGS			+= test-overlay
 test_overlay_SOURCES		= test-overlay.c
 test_overlay_LDADD		= $(progs_ldadd)
 

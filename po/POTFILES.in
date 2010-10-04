@@ -8,8 +8,8 @@ gedit/dialogs/gedit-encodings-dialog.c
 [type: gettext/glade]gedit/dialogs/gedit-encodings-dialog.ui
 gedit/dialogs/gedit-preferences-dialog.c
 [type: gettext/glade]gedit/dialogs/gedit-preferences-dialog.ui
-gedit/dialogs/gedit-search-dialog.c
-[type: gettext/glade]gedit/dialogs/gedit-search-dialog.ui
+gedit/dialogs/gedit-replace-dialog.c
+[type: gettext/glade]gedit/dialogs/gedit-replace-dialog.ui
 gedit/gedit.c
 gedit/gedit-app.c
 gedit/gedit-command-line.c
@@ -39,17 +39,18 @@ gedit/gedit-ui.h
 gedit/gedit-ui.xml
 gedit/gedit-utils.c
 gedit/gedit-view.c
+gedit/gedit-view-frame.c
 gedit/gedit-window.c
-plugins/changecase/changecase.gedit-plugin.desktop.in
+plugins/changecase/changecase.plugin.desktop.in
 plugins/changecase/gedit-changecase-plugin.c
-plugins/checkupdate/checkupdate.gedit-plugin.desktop.in
+plugins/checkupdate/checkupdate.plugin.desktop.in
 plugins/checkupdate/gedit-check-update-plugin.c
 plugins/checkupdate/org.gnome.gedit.plugins.checkupdate.gschema.xml.in.in
-plugins/docinfo/docinfo.gedit-plugin.desktop.in
+plugins/docinfo/docinfo.plugin.desktop.in
 [type: gettext/glade]plugins/docinfo/gedit-docinfo-plugin.ui
 plugins/docinfo/gedit-docinfo-plugin.c
 plugins/externaltools/data/open-terminal-here-osx.desktop.in
-plugins/externaltools/externaltools.gedit-plugin.desktop.in
+plugins/externaltools/externaltools.plugin.desktop.in
 plugins/externaltools/tools/__init__.py
 plugins/externaltools/tools/capture.py
 plugins/externaltools/tools/functions.py
@@ -60,22 +61,22 @@ plugins/externaltools/data/build.desktop.in
 plugins/externaltools/data/open-terminal-here.desktop.in
 plugins/externaltools/data/remove-trailing-spaces.desktop.in
 plugins/externaltools/data/run-command.desktop.in
-plugins/filebrowser/filebrowser.gedit-plugin.desktop.in
+plugins/filebrowser/filebrowser.plugin.desktop.in
 plugins/filebrowser/gedit-file-bookmarks-store.c
 plugins/filebrowser/gedit-file-browser-plugin.c
 plugins/filebrowser/gedit-file-browser-store.c
 plugins/filebrowser/gedit-file-browser-view.c
 plugins/filebrowser/gedit-file-browser-widget.c
 plugins/filebrowser/org.gnome.gedit.plugins.filebrowser.gschema.xml.in.in
-plugins/modelines/modelines.gedit-plugin.desktop.in
+plugins/modelines/modelines.plugin.desktop.in
 plugins/pythonconsole/org.gnome.gedit.plugins.pythonconsole.gschema.xml.in.in
-plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in
+plugins/pythonconsole/pythonconsole.plugin.desktop.in
 plugins/pythonconsole/pythonconsole/__init__.py
 [type: gettext/glade]plugins/pythonconsole/pythonconsole/config.ui
 plugins/quickopen/quickopen/popup.py
 plugins/quickopen/quickopen/windowhelper.py
-plugins/quickopen/quickopen.gedit-plugin.desktop.in
-plugins/snippets/snippets.gedit-plugin.desktop.in
+plugins/quickopen/quickopen.plugin.desktop.in
+plugins/snippets/snippets.plugin.desktop.in
 [type: gettext/glade]plugins/snippets/snippets/snippets.ui
 plugins/snippets/snippets/Document.py
 plugins/snippets/snippets/WindowHelper.py
@@ -85,7 +86,7 @@ plugins/snippets/snippets/Importer.py
 plugins/snippets/snippets/Placeholder.py
 plugins/sort/gedit-sort-plugin.c
 [type: gettext/glade]plugins/sort/gedit-sort-plugin.ui
-plugins/sort/sort.gedit-plugin.desktop.in
+plugins/sort/sort.plugin.desktop.in
 plugins/spell/gedit-automatic-spell-checker.c
 plugins/spell/gedit-spell-checker.c
 plugins/spell/gedit-spell-checker-dialog.c
@@ -94,17 +95,17 @@ plugins/spell/gedit-spell-language-dialog.c
 plugins/spell/gedit-spell-plugin.c
 [type: gettext/glade]plugins/spell/languages-dialog.ui
 [type: gettext/glade]plugins/spell/spell-checker.ui
-plugins/spell/spell.gedit-plugin.desktop.in
+plugins/spell/spell.plugin.desktop.in
 plugins/taglist/gedit-taglist-plugin.c
 plugins/taglist/gedit-taglist-plugin-panel.c
 plugins/taglist/gedit-taglist-plugin-parser.c
 plugins/taglist/HTML.tags.xml.in
 plugins/taglist/Latex.tags.xml.in
-plugins/taglist/taglist.gedit-plugin.desktop.in
+plugins/taglist/taglist.plugin.desktop.in
 plugins/taglist/XSLT.tags.xml.in
 plugins/taglist/XUL.tags.xml.in
 plugins/time/gedit-time-plugin.c
-plugins/time/time.gedit-plugin.desktop.in
+plugins/time/time.plugin.desktop.in
 plugins/time/org.gnome.gedit.plugins.time.gschema.xml.in.in
 [type: gettext/glade]plugins/time/gedit-time-dialog.ui
 [type: gettext/glade]plugins/time/gedit-time-setup-dialog.ui
