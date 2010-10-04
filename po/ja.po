@@ -8,15 +8,17 @@
 # Takeshi AIHANA <takeshi.aihana@gmail.com>, 2003-2009.
 # Satoru SATOH <ss@gnome.gr.jp>, 2006.
 # Hideki Yamane (Debian-JP) <henrich@debian.or.jp>, 2009.
+# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-20 01:56+0900\n"
-"PO-Revision-Date: 2010-09-19 18:13+0900\n"
-"Last-Translator: Hideki Yamane (Debian-JP) <henrich@debian.or.jp>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gedit&component=general\n"
+"POT-Creation-Date: 2010-09-07 13:22+0000\n"
+"PO-Revision-Date: 2010-10-04 20:59+0900\n"
+"Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -166,19 +168,20 @@ msgstr "\"最近使ったファイル\" に表示する最大数"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:27
 msgid ""
-"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
-"\" for unlimited number of actions."
+"Maximum number of actions that gedit will be able to undo or redo. Use "
+"\"-1\" for unlimited number of actions."
 msgstr ""
 "gEdit で \"元に戻す\" または \"やり直す\" ことができる動作の回数を最大値で指"
 "定します (無制限にする場合は \"-1\")。"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:28
 msgid ""
-"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
-"\" for unlimited number of actions. Deprecated since 2.12.0"
+"Maximum number of actions that gedit will be able to undo or redo. Use "
+"\"-1\" for unlimited number of actions. Deprecated since 2.12.0"
 msgstr ""
 "gEdit で \"元に戻す\" や \"やり直す\" ことができる動作の最大数を指定します "
-"(無制限にする場合は \"-1\") (このキーは GNOME 2.12.0 から廃止になりました)。"
+"(無制限にする場合は \"-1\") (このキーは GNOME 2.12.0 から非推奨になりまし"
+"た)。"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:29
 msgid "Notebook Show Tabs Mode"
@@ -378,7 +381,7 @@ msgstr "ツールバーの表示可否"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:57
 msgid "Undo Actions Limit (DEPRECATED)"
-msgstr "\"元に戻す\" 動作の限度 (破棄)"
+msgstr "\"元に戻す\" 動作の限度 (非推奨)"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:58
 msgid "Use Default Font"
@@ -398,9 +401,9 @@ msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
-"ファイルを保存する時にバックアップ・コピーを作成するかどうかを指定します。"
-"\"バックアップ・コピーの拡張子\" オプションでバックアップ・ファイルの拡張子を"
-"設定することができます。"
+"ファイルを保存する時にバックアップ・コピーを作成するかどうかを指定しま"
+"す。\"バックアップ・コピーの拡張子\" オプションでバックアップ・ファイルの拡張"
+"子を設定することができます。"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:61
 msgid "Whether gedit should display line numbers in the editing area."
@@ -475,9 +478,8 @@ msgid ""
 "font."
 msgstr ""
 "gedit で指定したフォントの代わりにシステムのデフォルト・フォントを編集で使用"
-"するかどうかを指定します。このオプションを無効にした場合は、システム・フォン"
-"トではなく \"エディタのフォント\" オプションで指定したフォントが使用されま"
-"す。"
+"するかどうかを指定します。このオプションを無効にした場合は、システムフォント"
+"ではなく \"エディタのフォント\" オプションで指定したフォントが使用されます。"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:76
 msgid "Writable VFS schemes"
@@ -775,6 +777,53 @@ msgstr "タブの幅(_T):"
 msgid "_minutes"
 msgstr "分ごと(_M)"
 
+#: ../gedit/dialogs/gedit-search-dialog.c:300
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:2 ../gedit/gedit-window.c:1659
+msgid "Replace"
+msgstr "置換"
+
+#: ../gedit/dialogs/gedit-search-dialog.c:306 ../gedit/gedit-window.c:1657
+msgid "Find"
+msgstr "検索"
+
+#: ../gedit/dialogs/gedit-search-dialog.c:409
+msgid "Replace _All"
+msgstr "すべて置換(_A)"
+
+#: ../gedit/dialogs/gedit-search-dialog.c:410
+#: ../gedit/gedit-commands-file.c:576
+msgid "_Replace"
+msgstr "置換(_R)"
+
+#. ex:ts=8:noet:
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:1
+msgid "Match _entire word only"
+msgstr "単語全体にマッチさせる(_E)"
+
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:3
+msgid "Replace All"
+msgstr "すべて置換"
+
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:4
+msgid "Replace _with: "
+msgstr "置換後の文字列(_W): "
+
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:5
+msgid "Search _backwards"
+msgstr "先頭に向かって検索する(_B)"
+
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:6
+msgid "_Match case"
+msgstr "大/小文字を区別する(_M)"
+
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:7
+msgid "_Search for: "
+msgstr "検索する文字列(_S): "
+
+#: ../gedit/dialogs/gedit-search-dialog.ui.h:8
+msgid "_Wrap around"
+msgstr "折り返しも対象にする(_W)"
+
 #: ../gedit/gedit-app.c:235
 msgid "There was an error displaying the help."
 msgstr "ヘルプを表示する際にエラーが発生しました。"
@@ -873,10 +922,6 @@ msgstr "ファイル \"%s\" は読み込み専用です。"
 #: ../gedit/gedit-commands-file.c:568
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "このファイルで上書きしてみますか?"
-
-#: ../gedit/gedit-commands-file.c:576
-msgid "_Replace"
-msgstr "置換(_R)"
 
 #: ../gedit/gedit-commands-file.c:618
 msgid "Save the file using compression?"
@@ -1004,6 +1049,7 @@ msgstr ""
 "Yuusuke Tahara <tahara@gnome.gr.jp>\n"
 "Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>\n"
 "やまね ひでき <henrich@debian.or.jp>\n"
+"草野 貴之 <AE5T-KSN@asahi-net.or.jp>\n"
 "日本GNOMEユーザー会 http://www.gnome.gr.jp/"
 
 #: ../gedit/gedit-commands-search.c:112
@@ -1029,11 +1075,11 @@ msgid "Unsaved Document %d"
 msgstr "編集中のドキュメント %d"
 
 #: ../gedit/gedit-documents-panel.c:118 ../gedit/gedit-documents-panel.c:132
-#: ../gedit/gedit-window.c:2458 ../gedit/gedit-window.c:2465
+#: ../gedit/gedit-window.c:2464 ../gedit/gedit-window.c:2471
 msgid "Read-Only"
 msgstr "読み取りのみ"
 
-#: ../gedit/gedit-documents-panel.c:1088 ../gedit/gedit-window.c:3895
+#: ../gedit/gedit-documents-panel.c:1087 ../gedit/gedit-window.c:3901
 msgid "Documents"
 msgstr "ドキュメントの一覧"
 
@@ -1813,7 +1859,7 @@ msgstr "新しいドキュメントを作成します"
 msgid "_Open..."
 msgstr "開く(_O)..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1581
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1587
 msgid "Open a file"
 msgstr "ファイルを開きます"
 
@@ -1961,145 +2007,153 @@ msgstr "指定行へジャンプ(_L)..."
 msgid "Go to a specific line"
 msgstr "指定した行に移動します"
 
+#: ../gedit/gedit-ui.h:128
+msgid "_Incremental Search..."
+msgstr "インクリメンタル検索(_I)..."
+
+#: ../gedit/gedit-ui.h:129
+msgid "Incrementally search for text"
+msgstr "文字を入力しながら逐次検索します"
+
 #. Documents menu
-#: ../gedit/gedit-ui.h:130
+#: ../gedit/gedit-ui.h:132
 msgid "_Save All"
 msgstr "すべて保存(_S)"
 
-#: ../gedit/gedit-ui.h:131
+#: ../gedit/gedit-ui.h:133
 msgid "Save all open files"
 msgstr "開いているすべてのファイルを保存します"
 
-#: ../gedit/gedit-ui.h:132
+#: ../gedit/gedit-ui.h:134
 msgid "_Close All"
 msgstr "すべて閉じる(_C)"
 
-#: ../gedit/gedit-ui.h:133
+#: ../gedit/gedit-ui.h:135
 msgid "Close all open files"
 msgstr "開いているすべてのファイルを閉じます"
 
-#: ../gedit/gedit-ui.h:134
+#: ../gedit/gedit-ui.h:136
 msgid "_New Tab Group"
 msgstr ""
 
-#: ../gedit/gedit-ui.h:135
+#: ../gedit/gedit-ui.h:137
 #, fuzzy
 msgid "Create a new tab group"
 msgstr "新しいドキュメントを作成します"
 
-#: ../gedit/gedit-ui.h:136
+#: ../gedit/gedit-ui.h:138
 #, fuzzy
 msgid "P_revious Tab Group"
 msgstr "前の場所"
 
-#: ../gedit/gedit-ui.h:137
+#: ../gedit/gedit-ui.h:139
 #, fuzzy
 msgid "Switch to the previous tab group"
 msgstr "前のページに戻ります"
 
-#: ../gedit/gedit-ui.h:138
+#: ../gedit/gedit-ui.h:140
 msgid "Nex_t Tab Group"
 msgstr ""
 
-#: ../gedit/gedit-ui.h:139
+#: ../gedit/gedit-ui.h:141
 #, fuzzy
 msgid "Switch to the next tab group"
 msgstr "次のページに進みます"
 
-#: ../gedit/gedit-ui.h:140
+#: ../gedit/gedit-ui.h:142
 msgid "_Previous Document"
 msgstr "前のドキュメント(_P)"
 
-#: ../gedit/gedit-ui.h:141
+#: ../gedit/gedit-ui.h:143
 msgid "Activate previous document"
 msgstr "前のドキュメントをアクティブにします"
 
-#: ../gedit/gedit-ui.h:142
+#: ../gedit/gedit-ui.h:144
 #, fuzzy
 msgid "N_ext Document"
 msgstr "次のドキュメント(_N)"
 
-#: ../gedit/gedit-ui.h:143
+#: ../gedit/gedit-ui.h:145
 msgid "Activate next document"
 msgstr "次のドキュメントをアクティブにします"
 
-#: ../gedit/gedit-ui.h:144
+#: ../gedit/gedit-ui.h:146
 msgid "_Move to New Window"
 msgstr "新しいウィンドウへ移動(_M)"
 
-#: ../gedit/gedit-ui.h:145
+#: ../gedit/gedit-ui.h:147
 msgid "Move the current document to a new window"
 msgstr "このドキュメントを新しいウィンドウへ移動します"
 
-#: ../gedit/gedit-ui.h:152
+#: ../gedit/gedit-ui.h:154
 msgid "Close the current file"
 msgstr "このファイルを閉じます"
 
-#: ../gedit/gedit-ui.h:159
+#: ../gedit/gedit-ui.h:161
 msgid "Quit the program"
 msgstr "gedit を終了します"
 
-#: ../gedit/gedit-ui.h:164
+#: ../gedit/gedit-ui.h:166
 msgid "_Toolbar"
 msgstr "ツールバー(_T)"
 
-#: ../gedit/gedit-ui.h:165
+#: ../gedit/gedit-ui.h:167
 msgid "Show or hide the toolbar in the current window"
 msgstr "このウィンドウでツールバーの表示/非表示を切り替えます"
 
-#: ../gedit/gedit-ui.h:167
+#: ../gedit/gedit-ui.h:169
 msgid "_Statusbar"
 msgstr "ステータスバー(_S)"
 
-#: ../gedit/gedit-ui.h:168
+#: ../gedit/gedit-ui.h:170
 msgid "Show or hide the statusbar in the current window"
 msgstr "このウィンドウでステータスバーの表示/非表示を切り替えます"
 
-#: ../gedit/gedit-ui.h:171
+#: ../gedit/gedit-ui.h:173
 msgid "Edit text in fullscreen"
 msgstr "フルスクリーン表示で編集します"
 
-#: ../gedit/gedit-ui.h:178
+#: ../gedit/gedit-ui.h:180
 #, fuzzy
 msgid "Side _Panel"
 msgstr "サイド・ペイン(_P)"
 
-#: ../gedit/gedit-ui.h:179
+#: ../gedit/gedit-ui.h:181
 #, fuzzy
 msgid "Show or hide the side panel in the current window"
 msgstr "このウィンドウでサイド・ペインの表示/非表示を切り替えます"
 
-#: ../gedit/gedit-ui.h:181
+#: ../gedit/gedit-ui.h:183
 #, fuzzy
 msgid "_Bottom Panel"
 msgstr "ボトム・ペイン(_B)"
 
-#: ../gedit/gedit-ui.h:182
+#: ../gedit/gedit-ui.h:184
 #, fuzzy
 msgid "Show or hide the bottom panel in the current window"
 msgstr "このウィンドウでボトム・ペインの表示/非表示を切り替えます"
 
-#: ../gedit/gedit-utils.c:1069
+#: ../gedit/gedit-utils.c:1067
 msgid "Please check your installation."
 msgstr "gedit のインストールを確認してください。"
 
-#: ../gedit/gedit-utils.c:1139
+#: ../gedit/gedit-utils.c:1137
 #, c-format
 msgid "Unable to open UI file %s. Error: %s"
 msgstr "UI ファイル %s を開けません。エラー: %s"
 
-#: ../gedit/gedit-utils.c:1159
+#: ../gedit/gedit-utils.c:1157
 #, c-format
 msgid "Unable to find the object '%s' inside file %s."
 msgstr "オブジェクトの '%s' は %s というファイルの中にありませんでした。"
 
 #. Translators: '/ on <remote-share>'
-#: ../gedit/gedit-utils.c:1304
+#: ../gedit/gedit-utils.c:1302
 #, c-format
 msgid "/ on %s"
 msgstr "%s の / (ルート)"
 
-#: ../gedit/gedit-window.c:1082
+#: ../gedit/gedit-window.c:1088
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s 用の強調表示モードにします"
@@ -2107,7 +2161,7 @@ msgstr "%s 用の強調表示モードにします"
 #. add the "Plain Text" item before all the others
 #. Translators: "Plain Text" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:1149 ../gedit/gedit-window.c:2155
+#: ../gedit/gedit-window.c:1155 ../gedit/gedit-window.c:2161
 #: ../plugins/externaltools/tools/manager.py:121
 #: ../plugins/externaltools/tools/manager.py:419
 #: ../plugins/externaltools/tools/manager.py:529
@@ -2115,70 +2169,62 @@ msgstr "%s 用の強調表示モードにします"
 msgid "Plain Text"
 msgstr "なし"
 
-#: ../gedit/gedit-window.c:1150
+#: ../gedit/gedit-window.c:1156
 msgid "Disable syntax highlighting"
 msgstr "構文の強調表示を無効にします"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1472
+#: ../gedit/gedit-window.c:1478
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s' を開きます"
 
-#: ../gedit/gedit-window.c:1583
+#: ../gedit/gedit-window.c:1589
 msgid "Open a recently used file"
 msgstr "最近使用したファイルを開きます"
 
-#: ../gedit/gedit-window.c:1589
+#: ../gedit/gedit-window.c:1595
 msgid "Open"
 msgstr "開く"
 
-#: ../gedit/gedit-window.c:1647
+#: ../gedit/gedit-window.c:1653
 msgid "Save"
 msgstr "保存"
 
-#: ../gedit/gedit-window.c:1649
+#: ../gedit/gedit-window.c:1655
 msgid "Print"
 msgstr "印刷"
 
-#: ../gedit/gedit-window.c:1651
-msgid "Find"
-msgstr "検索"
-
-#: ../gedit/gedit-window.c:1653
-msgid "Replace"
-msgstr "置換"
-
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1800
+#: ../gedit/gedit-window.c:1806
 #, c-format
 msgid "Activate '%s'"
 msgstr "'%s' に切り替えます"
 
-#: ../gedit/gedit-window.c:2133
+#: ../gedit/gedit-window.c:2139
 msgid "Use Spaces"
 msgstr "空白にする"
 
-#: ../gedit/gedit-window.c:2206
+#: ../gedit/gedit-window.c:2212
 msgid "Tab Width"
 msgstr "タブの幅:"
 
-#: ../gedit/gedit-window.c:2315
+#: ../gedit/gedit-window.c:2321
 #, fuzzy
 msgid "Bracket match is out of range"
 msgstr "対応する括弧"
 
-#: ../gedit/gedit-window.c:2320
+#: ../gedit/gedit-window.c:2326
 #, fuzzy
 msgid "Bracket match not found"
 msgstr "対応する括弧"
 
-#: ../gedit/gedit-window.c:2325
+#: ../gedit/gedit-window.c:2331
 #, c-format
 msgid "Bracket match found on line: %d"
 msgstr ""
 
-#: ../gedit/gedit-window.c:4101
+#: ../gedit/gedit-window.c:4107
 msgid "About gedit"
 msgstr "gedit について"
 
@@ -3480,427 +3526,427 @@ msgstr "利用可能なタグの一覧"
 #. ex:ts=8:noet:
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
-msgstr "<ABBR> (略語/頭文字を表す)"
+msgstr "abbr 要素 (略語/頭文字を表す)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:2
 msgid "Abbreviation"
-msgstr "ABBR= (略語/頭文字を表す)"
+msgstr "abbr 属性 (tr, th 要素の内容の省略形)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
-msgstr "<ABOVE> (上の枠だけを表示する)"
+msgstr "above (上の枠だけを表示する)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
-msgstr "<ACCESSKEY> (ショートカット・キーの割り当て)"
+msgstr "accesskey 属性 (ショートカット・キーの割り当て)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:5
 msgid "Acronym"
-msgstr "<ACRONYM> (略語/頭文字を表す)"
+msgstr "acronym 要素 (略語/頭文字を表す)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:6
 msgid "Align"
-msgstr "ALIGN= (配置する場所)"
+msgstr "align 属性 (要素内容の配置方向)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
-msgstr "CHAR= (位置揃えする文字)"
+msgstr "char 属性 (表で位置揃えする文字)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:8
 msgid "Alternative"
-msgstr "ALT= (代替文字)"
+msgstr "alt 属性 (代替テキスト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:9
 msgid "Anchor"
-msgstr "<A> (アンカー)"
+msgstr "a 要素 (アンカー)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:10
 msgid "Anchor URI"
-msgstr "<A HREF=> (URI 付きアンカー)"
+msgstr "a 要素 href 属性付き (ハイパーリンク)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:11
 msgid "Applet class file code"
-msgstr "CODE= (アプレット・クラスのファイル)"
+msgstr "code 属性 (アプレット・クラスのファイル)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:13
 msgid "Applet class file code (deprecated)"
-msgstr "アプレットのクラス・ファイル (廃止)"
+msgstr "code 属性 (アプレットのクラス・ファイル [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:14
 msgid "Array"
-msgstr "<ARRAY>"
+msgstr "array 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:15
 msgid "Associated information"
-msgstr "CONTENT= (関連する情報)"
+msgstr "content 属性 (meta 要素の値)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:16
 msgid "Author info"
-msgstr "<ADDRESS> (作者の情報)"
+msgstr "address 要素 (ドキュメントの著者の情報)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:17
 msgid "Axis related headers"
-msgstr "AXIS= "
+msgstr "axis 属性 (表のセルの分類)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:18
 msgid "Background color"
-msgstr "BGCOLOR= (背景の色)"
+msgstr "bgcolor 属性 (背景の色)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:20
 msgid "Background color (deprecated)"
-msgstr "背景の色 (廃止)"
+msgstr "bgcolor 属性 (背景の色 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Background texture tile"
-msgstr "BACKGROUND= (背景画像)"
+msgstr "background 属性 (背景画像)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:23
 msgid "Background texture tile (deprecated)"
-msgstr "背景画像 (廃止)"
+msgstr "background 属性 (背景画像 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:24
 msgid "Base URI"
-msgstr "CODEBASE="
+msgstr "codebase 属性 (code 属性等の基準 URI)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:25
 msgid "Base font"
-msgstr "<BASEFONT> (基準となるフォント)"
+msgstr "basefont 要素 (font 要素の基準指定)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
 msgid "Base font (deprecated)"
-msgstr "Base font (廃止)"
+msgstr "basefont 要素 (font 要素の基準指定 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:28
 msgid "Bold"
-msgstr "太字"
+msgstr "b 要素 (太字)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Border"
-msgstr "BORDER= (画像の枠線)"
+msgstr "border 属性 (画像や表の枠線の太さ)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:31
 msgid "Border (deprecated)"
-msgstr "Border (廃止)"
+msgstr "border 属性 (画像や表の枠線の太さ [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Border color"
-msgstr "BORDERCOLOR= (枠線の色)"
+msgstr "bordercolor 属性 (枠線の色)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Cell rowspan"
-msgstr "ROWSPAN= (セルの縦方向の連結)"
+msgstr "rowspan 属性 (セルの縦方向の連結)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:34
 msgid "Center"
-msgstr "<CENTER> (中央揃え)"
+msgstr "center 要素 (中央揃え)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Center (deprecated)"
-msgstr "Center (廃止)"
+msgstr "center 要素 (中央揃え [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:37
 msgid "Character encoding of linked resource"
-msgstr "CHARSET= (文字コード)"
+msgstr "charset 属性 (リンク先のリソースの文字コード)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Checked (state)"
-msgstr "Checked (state)"
+msgstr "checked 属性 (状態)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:39
 msgid "Checked state"
-msgstr "Checked state"
+msgstr "checked 属性 (状態)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:40
 msgid "Citation"
-msgstr "<CITE>"
+msgstr "cite 要素 (引用、参照)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Cite reason for change"
-msgstr "CITE= "
+msgstr "cite 属性 (ins、del 要素で変更理由を説明する情報の URI)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:42
 msgid "Class implementation ID"
-msgstr "CLASSID="
+msgstr "classid 属性 (object の実装を指す URI)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:43
 msgid "Class list"
-msgstr "CLASS= (スタイルシートの属性)"
+msgstr "class 属性 (クラス名のリスト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:44
 msgid "Clear text flow control"
-msgstr "CLEAR="
+msgstr "clear 属性 (br で回り込みの解除の指定)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:45
 msgid "Code content type"
-msgstr "CODETYPE="
+msgstr "codetype 属性 (classid 属性で指定したオブジェクトの型)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:46
 msgid "Color of selected links"
-msgstr "ALINK="
+msgstr "alink 属性 (ユーザが選択したリンクの色)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Color of selected links (deprecated)"
-msgstr "選択したリンクの色 (廃止)"
+msgstr "alink 属性 (ユーザが選択したリンクの色 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:49
 msgid "Column span"
-msgstr "COLSPAN="
+msgstr "colspan 属性 (セルの横方向の連結)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Columns"
-msgstr "COLS="
+msgstr "cols 属性 (幅)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Comment"
-msgstr "<!--  -->"
+msgstr "<!--  --> (コメント) あるいは comment 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Computer code fragment"
-msgstr "<CODE>"
+msgstr "code 要素 (コンピュータのコード断片)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Content scheme"
-msgstr "SCHEME="
+msgstr "scheme 属性 (meta 要素で content 属性の値を解釈するスキーム)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Content type"
-msgstr "TYPE="
+msgstr "type 属性 (コンテンツのMIME型)"
 
 #. The "type" attribute is deprecated for the "ol" tag only,
 #. since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:57
 msgid "Content type (deprecated)"
-msgstr "コンテンツの種類 (廃止)"
+msgstr "type 属性 (コンテンツのMIME型 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Coordinates"
-msgstr "COORDS="
+msgstr "coords 属性 (座標)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:59
 msgid "DIV Style container"
-msgstr "<DIV>"
+msgstr "div 要素 style 属性付き (コンテナ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:60
 msgid "DIV container"
-msgstr "<DIV>"
+msgstr "div 要素 (コンテナ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Date and time of change"
-msgstr "DATETIME="
+msgstr "datetime 属性 (ins、del 要素で変更した日時)"
 
 #. NOTE: used in "object" tag
 #: ../plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Declare flag"
-msgstr "DECLARE"
+msgstr "declare 属性 (object 要素のフラグ)"
 
 #. Translators: DEFER is an optional attribute of the <script> tag.
 #. It indicates that the script is not going to generate any document
 #. content. The browser can continue parsing and drawing the page.
 #: ../plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Defer attribute"
-msgstr "Defer attribute"
+msgstr "defer 属性 (script 要素でドキュメントを生成しないことを宣言)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Definition description"
-msgstr "<DD>"
+msgstr "dd 要素 (定義型リストでの定義)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Definition list"
-msgstr "<DL>"
+msgstr "dl 要素 (定義型リスト)>"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Definition term"
-msgstr "<DT>"
+msgstr "dt 要素 (定義型リストでの用語)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Deleted text"
-msgstr "<DEL>"
+msgstr "del 要素 (削除したテキスト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Direction"
-msgstr "DIRECTION="
+msgstr "direction 属性 (marquee 要素でのスクロール方向)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Directionality"
-msgstr "DIR="
+msgstr "dir 属性 (テキストや表の基本方向)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Directionality (deprecated)"
-msgstr "Directionality (廃止)"
+msgstr "dir 属性 (テキストや表の基本方向 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Directory list"
-msgstr "<DIR>"
+msgstr "dir 要素 (ディレクトリリスト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Disabled"
-msgstr "DISABLED"
+msgstr "disabled 属性 (ユーザ入力を受け付けない)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Document base"
-msgstr "<BASE>"
+msgstr "base 要素 (相対URIの基準URI)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Document body"
-msgstr "<BODY> (ドキュメントの本文)"
+msgstr "body 要素 (ドキュメントの本文)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Document head"
-msgstr "<HEAD> (ドキュメントのヘッダ)"
+msgstr "head 要素 (ドキュメントのヘッダ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Document title"
-msgstr "<TITLE> (ドキュメントのタイトル)"
+msgstr "title 要素 (ドキュメントのタイトル)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Document type"
-msgstr "<IDOCTYPE> (ドキュメントの種類)"
+msgstr "DOCTYPE 宣言 (文書型宣言)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Element ID"
-msgstr "ID="
+msgstr "id 属性 (要素に一意の名前を指定)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Embedded object"
-msgstr "<EMBED>"
+msgstr "embed 要素 (埋め込みオブジェクト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:85
 #: ../plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
-msgstr "<EM> (文字の強調)"
+msgstr "em 要素 (文字の強調)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Encode type"
-msgstr "ENCTYPE="
+msgstr "enctype 属性 (form で送信する時の型)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Figure"
-msgstr "<FIG>"
+msgstr "fig 要素 (図表)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Font face"
-msgstr "FACE="
+msgstr "face 属性 (フォント名)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:90
 msgid "Font face (deprecated)"
-msgstr "Font face (廃止)"
+msgstr "face 属性 (フォント名 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:91
 msgid "For label"
-msgstr "FOR="
+msgstr "for 属性 (label 要素とコントロールの関連付け)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:92
 msgid "Forced line break"
-msgstr "<BR>"
+msgstr "br 要素 (強制行区切り)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:93
 msgid "Form"
-msgstr "<FORM>"
+msgstr "form 要素 (フォーム)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:94
 msgid "Form action handler"
-msgstr "ACTION="
+msgstr "action 属性 (フォームのアクションハンドラ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:95
 msgid "Form control group"
-msgstr "<FIELDSET>"
+msgstr "fieldset 要素 (コントロールとラベルのグループ化)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:96
 msgid "Form field label text"
-msgstr "<LABEL>"
+msgstr "label 要素 (コントロールの追加情報)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Form input"
-msgstr "<INPUT>"
+msgstr "input 要素 (入力コントロール)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Form input type"
-msgstr "<INPUT TYPE=>"
+msgstr "input 要素 type 属性付き (type 属性付き入力コントロール)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Form method"
-msgstr "<FORM METHOD=>"
+msgstr "form 要素 method 属性付き あるいは method 属性"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Forward link"
-msgstr "REL=<"
+msgstr "rel 属性 (正方向リンクの関係性)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Frame"
-msgstr "<FRAME>"
+msgstr "frame 要素 (フレーム)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Frame border"
-msgstr "frame の枠"
+msgstr "frameborder 属性 (フレームの枠を描画するかどうか)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Frame render parts"
-msgstr "FRAME="
+msgstr "frame 属性 (表の枠のどれを表示するか)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Frame source"
-msgstr "<FRAME SRC=>"
+msgstr "frame 要素 src 属性付き (src 属性付きフレーム)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Frame spacing"
-msgstr "frame 間隔"
+msgstr "framespacing 属性"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Frame target"
-msgstr "TARGET="
+msgstr "target 属性 (文書を開くフレームの名称)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Frameborder"
-msgstr "FRAMEBORDER="
+msgstr "frameborder 属性 (フレームの枠を描画するかどうか)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:108
 msgid "Frameset"
-msgstr "<FRAMESET>"
+msgstr "frameset 要素 (フレームの割り付け)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Frameset columns"
-msgstr "<FRAMESET COLS=>"
+msgstr "frameset 要素 cols 属性付き (cols 属性付きフレームの割り付け)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Frameset rows"
-msgstr "<FRAMESET ROWS=>"
+msgstr "frameset 要素 rows 属性付き (rows 属性付きフレームの割り付け)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Framespacing"
-msgstr "FRAMESPACING="
+msgstr "framespacing 属性"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Generic embedded object"
-msgstr "<OBJECT>"
+msgstr "object 要素 (汎用埋め込みオブジェクト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:113
 msgid "Generic metainformation"
-msgstr "<META>"
+msgstr "meta 要素 (汎用メタ情報)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Generic span"
-msgstr "<SPAN>"
+msgstr "span 要素 (汎用の構造化要素)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:115
 msgid "HREF URI"
-msgstr "HREF="
+msgstr "href 属性 (ハイパーリンクでURIを指定)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:116
 msgid "HTML root element"
-msgstr "<HTML>"
+msgstr "html 要素 (ルート要素)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:117
 msgid "HTML version"
-msgstr "VERSION="
+msgstr "version 属性 (HTML のバージョン)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:118
 #, fuzzy
@@ -3914,743 +3960,745 @@ msgstr "HTML - タグ"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:120
 msgid "HTTP header name"
-msgstr "HTTP-EQUIV="
+msgstr "http-equiv 属性 (HTTP 応答ヘッダ名)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Header cell IDs"
-msgstr ""
+msgstr "headers 属性 (見出しセルの id のリスト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Heading"
-msgstr "<H>"
+msgstr "h 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Heading 1"
-msgstr "<H1>"
+msgstr "h1 要素 (見出し1)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Heading 2"
-msgstr "<H2>"
+msgstr "h2 要素 (見出し2)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:125
 msgid "Heading 3"
-msgstr "<H3>"
+msgstr "h3 要素 (見出し3)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:126
 msgid "Heading 4"
-msgstr "<H4>"
+msgstr "h4 要素 (見出し4)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Heading 5"
-msgstr "<H5>"
+msgstr "h5 要素 (見出し5)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:128
 msgid "Heading 6"
-msgstr "<H6>"
+msgstr "h6 要素 (見出し6)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Height"
-msgstr "HEIGHT="
+msgstr "height 属性 (高さ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Horizontal rule"
-msgstr "<HR>"
+msgstr "hr 要素 (罫線)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Horizontal space"
-msgstr "HSPACE="
+msgstr "hspace 属性 (左右の空白の量)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Horizontal space (deprecated)"
-msgstr "Horizontal space (廃止)"
+msgstr "hspace 属性 (左右の空白の量 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:134
 msgid "I18N BiDi override"
-msgstr ""
+msgstr "bdo 要素 (文字固有の方向を上書き)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Image"
-msgstr "<IMG>"
+msgstr "img 要素 (画像)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Image map"
-msgstr "<MAP>"
+msgstr "map 要素 (クライアント側イメージマップ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Image map area"
-msgstr "<AREA>"
+msgstr "area 要素 (クライアント側イメージマップの区割り)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Image map name"
-msgstr "<MAP NAME=>"
+msgstr "map 要素 name 属性付き (name 属性付きクライアント側イメージマップ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Image source"
-msgstr "<IMG SRC=>"
+msgstr "img 要素 src 属性付き (src 属性付き画像)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Inline frame"
-msgstr "<IFRAME>"
+msgstr "iframe 要素 (インラインフレーム)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Inline layer"
-msgstr "<ILAYER>"
+msgstr "ilayer 要素 (インラインレイヤー)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Inserted text"
-msgstr "<INS>"
+msgstr "ins 要素 (挿入したテキスト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Instance definition"
-msgstr "<DFN>"
+msgstr "dfn 要素 (用語の定義)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Italic text"
-msgstr "<I>"
+msgstr "i 要素 (イタリック)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:145
 msgid "Java applet"
-msgstr "<APPLET>"
+msgstr "applet 要素 (Java アプレット)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "Java applet (deprecated)"
-msgstr "Java アプレット (廃止)"
+msgstr "applet 要素 (Java アプレット [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:148
 msgid "Label"
-msgstr "LABEL="
+msgstr "label 属性 (ラベル指定)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:149
 msgid "Language code"
-msgstr "HREFLANG="
+msgstr "hreflang または lang 属性 (言語情報)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:150
 msgid "Large text style"
-msgstr "<BIG>"
+msgstr "big 要素 (大きい文字)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:151
 msgid "Layer"
-msgstr "<LAYER>"
+msgstr "layer 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:152
 msgid "Link color"
-msgstr "LINK="
+msgstr "link 属性 (未訪問のリンクの色)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:154
 msgid "Link color (deprecated)"
-msgstr "リンクの色 (廃止)"
+msgstr "link 属性 (未訪問のリンクの色 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:155
 msgid "List item"
-msgstr "<LI>"
+msgstr "li 要素 (リスト項目)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:156
 msgid "List of MIME types for file upload"
-msgstr "ACCEPT="
+msgstr "accept 属性 (アップロードで受け付けることのできるファイルのMIME型)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:157
 msgid "List of supported character sets"
-msgstr "CCEPT-CHARSET="
+msgstr ""
+"accept-charset 属性 (フォーム処理サーバが受け付け能な文字符号化のリスト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:158
 msgid "Listing"
-msgstr "<LISTING>"
+msgstr "listing 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:159
 msgid "Local change to font"
-msgstr "<FONT>"
+msgstr "font 要素 (テキストのフォントや色等を局所的に変更)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:160
 msgid "Long description link"
-msgstr "LONGDESC="
+msgstr "longdesc 属性 (詳細を説明した文章へのリンクのURI)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:161
 msgid "Long quotation"
-msgstr "<BLOCKQUOTE>"
+msgstr "blockquote 要素 (長い引用)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:162
 msgid "Mail link"
-msgstr "MAILTO="
+msgstr "mailto 属性"
 
 #. Supported in XHTML 1.0 Frameset DTD only.
 #: ../plugins/taglist/HTML.tags.xml.in.h:164
 msgid "Margin pixel height"
-msgstr "MARGINHEIGHT="
+msgstr "marginheight 属性 (フレーム内容の上下のマージン量)"
 
 #. Supported in XHTML 1.0 Frameset DTD only.
 #: ../plugins/taglist/HTML.tags.xml.in.h:166
 msgid "Margin pixel width"
-msgstr "MARGINWIDTH="
+msgstr "marginwidth 属性 (フレーム内容の左右のマージン量)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:167
 msgid "Marquee"
-msgstr "<MARQUEE>"
+msgstr "marquee 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:168
 msgid "Maximum length of text field"
-msgstr "MAXLENGTH="
+msgstr "maxlength 属性 (コントロールに入力できる最大文字数)"
 
 #. Here I take some liberties: There's no mandatory attributes,
 #. but those are most common, and will likely be used.
 #: ../plugins/taglist/HTML.tags.xml.in.h:171
 msgid "Media-independent link"
-msgstr "<LINK>"
+msgstr "link 要素 rel 属性付き (メディア独立なリンク)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:172
 msgid "Menu list"
-msgstr "<MENU>"
+msgstr "menu 要素 (メニューリスト)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:174
 msgid "Menu list (deprecated)"
-msgstr "Menu list (廃止)"
+msgstr "menu 要素 (メニューリスト [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:175
 msgid "Multi-line text field"
-msgstr "<TEXTAREA>"
+msgstr "textarea 要素 (複数行のテキスト入力コントロール)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Multicolumn"
-msgstr "<MULTICOL>"
+msgstr "multicol 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Multiple"
-msgstr "MULTIPLE"
+msgstr "multiple 属性 (select 要素で複数選択を許容)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Name"
-msgstr "NAME="
+msgstr "name 属性 (名前の指定)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Named property value"
-msgstr "<PARAM>"
+msgstr "param 要素 (オブジェクトに指定する値)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Next ID"
-msgstr "<NEXTID>"
+msgstr "nextid 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:181
 msgid "No URI"
-msgstr "NOHREF"
+msgstr "nohref 属性 (area 要素が関連リンクを持たない)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:182
 msgid "No embedded objects"
-msgstr "<NOEMBED>"
+msgstr "noembed 要素 (embed 要素の代替コンテンツ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:183
 msgid "No frames"
-msgstr "<NOFRAMES>"
+msgstr "noframes 要素 (フレームの代替コンテンツ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:184
 msgid "No layers"
-msgstr "<NOLAYER>"
+msgstr "nolayer 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:185
 msgid "No line break"
-msgstr "<NOBR>"
+msgstr "nobr 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:186
 msgid "No resize"
-msgstr "NORESIZE"
+msgstr "noresize 属性 (フレームのサイズ変更不可)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:187
 msgid "No script"
-msgstr "<NOSCRIPT>"
+msgstr "noscript 要素 (スクリプト代替コンテンツ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:188
 msgid "No shade"
-msgstr "NOSHADE"
+msgstr "noshade 属性 (溝ではなく塗り潰しで罫線を表示)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:190
 msgid "No shade (deprecated)"
-msgstr "No shade (廃止)"
+msgstr "noshade 属性 (溝ではなく塗り潰しで罫線を表示 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:191
 msgid "No word wrap"
-msgstr "NOWRAP"
+msgstr "nowrap 属性 (表のセルにおいてテキスト折り返し不可)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:193
 msgid "No word wrap (deprecated)"
-msgstr "No word wrap (廃止)"
+msgstr "nowrap 属性 (表のセルにおいてテキスト折り返し不可 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Non-breaking space"
-msgstr "Non-breaking space"
+msgstr "ノーブレークスペース"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Note"
-msgstr "<NOTE>"
+msgstr "note 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Object applet file"
-msgstr "OBJECT="
+msgstr "object 属性"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Object applet file (deprecated)"
-msgstr "Object applet file (廃止)"
+msgstr "object 属性 [非推奨]"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Object data reference"
-msgstr "DATA="
+msgstr "data 属性 (オブジェクトへの参照の URI)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:200
 msgid "Offset for alignment character"
-msgstr "CHAROFF="
+msgstr "charoff 属性 (表において桁揃え文字のオフセットを指定)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:201
 msgid "OnBlur event"
-msgstr "ONBLUR="
+msgstr "onblur 属性 (OnBlur イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:202
 msgid "OnChange event"
-msgstr "ONCHANGE="
+msgstr "onchange 属性 (OnChange イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:203
 msgid "OnClick event"
-msgstr "ONCLICK="
+msgstr "onlick 属性 (OnClick イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:204
 msgid "OnDblClick event"
-msgstr "ONDBLCLICK="
+msgstr "ondblclick 属性 (OnDblClick イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:205
 msgid "OnFocus event"
-msgstr "ONFOCUS="
+msgstr "onfocus 属性 (OnFoucs イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:206
 msgid "OnKeyDown event"
-msgstr "ONKEYDOWN="
+msgstr "onkeydown 属性 (OnKeyDown イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:207
 msgid "OnKeyPress event"
-msgstr "ONKEYPRESS="
+msgstr "onkeypress 属性 (OnKeyPress イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:208
 msgid "OnKeyUp event"
-msgstr "ONKEYUP="
+msgstr "onkeyup 属性 (OnKeyUp イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:209
 msgid "OnLoad event"
-msgstr "ONLOAD="
+msgstr "onload 属性 (OnLoad イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:210
 msgid "OnMouseDown event"
-msgstr "ONMOUSEDOWN="
+msgstr "onmousedown 属性 (OnMouseDown イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:211
 msgid "OnMouseMove event"
-msgstr "ONMOUSEMOVE="
+msgstr "onmousemove 属性 (OnMouseMove イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:212
 msgid "OnMouseOut event"
-msgstr "ONMOUSEOUT="
+msgstr "onmouseout 属性 (OnMouseOut イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:213
 msgid "OnMouseOver event"
-msgstr "ONMOUSEOVER="
+msgstr "onmouseover 属性 (OnMouseOver イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:214
 msgid "OnMouseUp event"
-msgstr "ONMOUSEUP="
+msgstr "onmouseup 属性 (OnMouseUp イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:215
 msgid "OnReset event"
-msgstr "ONRESET="
+msgstr "onreset 属性 (OnReset イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:216
 msgid "OnSelect event"
-msgstr "ONSELECT="
+msgstr "onselect 属性 (OnSelect イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:217
 msgid "OnSubmit event"
-msgstr "ONSUBMIT="
+msgstr "onsubmit 属性 (OnSubmit イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:218
 msgid "OnUnload event"
-msgstr "ONUNLOAD="
+msgstr "onunload 属性 (OnUnload イベント)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Option group"
-msgstr "<OPTGROUP>"
+msgstr "optgroup 要素 (option 要素の論理的グループ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:220
 msgid "Option selector"
-msgstr "<SELECT>"
+msgstr "select 要素 (option による選択肢を選択するメニューを生成)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:221
 msgid "Ordered list"
-msgstr "<OL>"
+msgstr "ol 要素 (序列リスト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:222
 msgid "Output media"
-msgstr "MEDIA="
+msgstr "media 属性 (出力メディアを指定)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Paragraph"
-msgstr "<P>"
+msgstr "p 要素 (段落)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Paragraph class"
-msgstr "<P CLASS=>"
+msgstr "p 要素 class 属性付き (class 属性付き段落)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Paragraph style"
-msgstr "<P STYLE=>"
+msgstr "p 要素 style 属性付き (style 属性付き段落)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:226
 msgid "Preformatted listing"
-msgstr "<XMP>"
+msgstr "xmp 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Preformatted text"
-msgstr "<PRE>"
+msgstr "pre 要素 (整形済みテキスト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:228
 msgid "Profile metainfo dictionary"
-msgstr "PROFILE="
+msgstr "profile 属性 (メタデータプロファイルを表わす URI)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Prompt message"
-msgstr "PROMPT="
+msgstr "prompt 属性 (isindex 要素のプロンプト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:230
 msgid "Push button"
-msgstr "<BUTTON>"
+msgstr "button 要素 (押しボタン)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Quote"
-msgstr "<QUOTE>"
+msgstr "quote 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:232
 msgid "Range"
-msgstr "<RANGE>"
+msgstr "range 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:233
 msgid "ReadOnly text and password"
-msgstr "READONLY"
+msgstr "readonly 属性 (コントロール内容の変更を禁止)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:234
 msgid "Reduced spacing"
-msgstr "COMPACT"
+msgstr "compact 属性 (間隔を減らす)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Reduced spacing (deprecated)"
-msgstr "Reduced spacing (廃止)"
+msgstr "compact 属性 (間隔を減らす [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Reverse link"
-msgstr "REV="
+msgstr "rev 属性 (逆方向リンク)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Root"
-msgstr "<ROOT>"
+msgstr "root 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Rows"
-msgstr "ROWS="
+msgstr "rows 属性 (textarea の行数、フレームの水平方向の割り付け)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Rulings between rows and columns"
-msgstr "RULES="
+msgstr "rules 属性 (表においてどの罫線が出現するか)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:241
 msgid "Sample program output, scripts"
-msgstr "<SAMP>"
+msgstr "samp 要素 (プログラムやスクリプトの出力例)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:242
 msgid "Scope covered by header cells"
-msgstr "SCOPE="
+msgstr "scope 属性 (ヘッダセルでカバーするスコープ)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Script language name"
-msgstr "LANGUAGE"
+msgstr "language 属性 (スクリプト言語名)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:245
 msgid "Script statements"
-msgstr "スクリプト"
+msgstr "script 要素 (スクリプト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Scrollbar"
-msgstr "SCROLLING="
+msgstr "scrolling 属性 (フレームのスクロール情報)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Selectable option"
-msgstr "<OPTION>"
+msgstr "option 要素 (select 要素内での選択肢)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Selected"
-msgstr "SELECTED"
+msgstr "selected 属性 (選択肢が選択済み)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:249
 msgid "Server-side image map"
-msgstr "ISMAP"
+msgstr "ismap 属性 (サーバサイドイメージマップ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:250
 msgid "Shape"
-msgstr "SHAPE="
+msgstr "shape 属性 (領域の形状)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:251
 msgid "Short inline quotation"
-msgstr "<Q>"
+msgstr "q 要素 (短かいインラインの引用)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Single line prompt"
-msgstr "<ISINDEX>"
+msgstr "isindex 要素 (1行テキスト入力)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:253
 msgid "Size"
-msgstr "SIZE="
+msgstr "size 属性 (大きさ)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Size (deprecated)"
-msgstr "Size (廃止)"
+msgstr "size 属性 (大きさ [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Small text style"
-msgstr "<SMALL>"
+msgstr "small 要素 (小さい文字)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:257
 msgid "Soft line break"
-msgstr "<WBR>"
+msgstr "wbr 要素 (ソフト行区切り)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:258
 msgid "Sound"
-msgstr "<SOUND>"
+msgstr "sound 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Source"
-msgstr "ソース"
+msgstr "src 属性 (ソースの URI)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:260
 msgid "Space-separated archive list"
-msgstr ""
+msgstr "archive 属性 (空白区切りのアーカイブの URI のリスト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:261
 msgid "Spacer"
-msgstr "<SPACER>"
+msgstr "spacer 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:262
 msgid "Spacing between cells"
-msgstr "CELLSPACING="
+msgstr "cellspacing 属性 (表とセル、およびセル間の間隔)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:263
 msgid "Spacing within cells"
-msgstr "CELLPADDING="
+msgstr "cellpadding 属性 (セルの枠線とセルの内容の間隔)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:264
 msgid "Span"
-msgstr "SPAN"
+msgstr "span 属性 (col 要素が仕切る列の数、colgroup に属する列の数)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:265
 msgid "Square root"
-msgstr "<SQRT>"
+msgstr "sqrt 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:266
 msgid "Standby load message"
 msgstr ""
+"standby 属性 (object 要素がロード中にレンダリングに使用できるメッセージ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:267
 msgid "Starting sequence number"
-msgstr "START"
+msgstr "start 属性 (ol 要素の属性。最初の項目の番号)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:269
 msgid "Starting sequence number (deprecated)"
-msgstr "Starting sequence number (廃止)"
+msgstr "start 属性 (ol 要素の属性。最初の項目の番号 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:270
 msgid "Strike-through text"
-msgstr "<STRIKE>"
+msgstr "strike 要素 (取り消し線を引く)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:272
 msgid "Strike-through text (deprecated)"
-msgstr "文字列の打ち消し線 (廃止)"
+msgstr "strike 要素 (取り消し線を引く [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:273
 msgid "Strike-through text style"
-msgstr "<S>"
+msgstr "s 要素 (取り消し線を引く)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:275
 msgid "Strike-through text style (deprecated)"
-msgstr "文字列の打ち消し線のスタイル (廃止)"
+msgstr "s 要素 (取り消し線を引く [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:276
 msgid "Strong emphasis"
-msgstr "<STRONG>"
+msgstr "strong 要素 (より強い強調)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:277
 msgid "Style info"
-msgstr "<STYLE>"
+msgstr "style 要素 または 属性 (スタイルシート情報)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:278
 msgid "Subscript"
-msgstr "<SUB>"
+msgstr "sub 要素 (下付き)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:279
 msgid "Superscript"
-msgstr "<SUP>"
+msgstr "sup 要素 (上付き)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:280
 msgid "Tab order position"
-msgstr "TABINDEX="
+msgstr "tabindex 属性 (タブ移動順位)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:281
 msgid "Table"
-msgstr "<TABLE>"
+msgstr "table 要素 (表)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:282
 msgid "Table body"
-msgstr "<TBODY>"
+msgstr "tbody 要素 (表本体)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:283
 msgid "Table caption"
-msgstr "<CAPTION>"
+msgstr "caption 要素 (表のキャプション)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:284
 msgid "Table column group properties"
-msgstr "<COLGROUP>"
+msgstr "colgroup 要素 (列の構造的グループ化)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:285
 msgid "Table column properties"
-msgstr "<COL>"
+msgstr "col 要素 (列の属性指定のグループ化)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:286
 msgid "Table data cell"
-msgstr "<TD>"
+msgstr "td 要素 (表のデータセル)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:287
 msgid "Table footer"
-msgstr "<TFOOT>"
+msgstr "tfoot 要素 (表のフッタ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:288
 msgid "Table header"
-msgstr "<TH>"
+msgstr "thead 要素 (表のヘッダ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:289
 msgid "Table header cell"
-msgstr "<TH>"
+msgstr "th 要素 (表の見出しセル)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:290
 msgid "Table row"
-msgstr "<TR>"
+msgstr "tr 要素 (th および td から構成される行のコンテナ)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:291
 msgid "Table summary"
-msgstr "SUMMARY="
+msgstr "summary 属性 (表の目的と構造についての要約)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:292
 #, fuzzy
 msgid "Target — Blank"
-msgstr "<A TARGET=>"
+msgstr "a 要素 (target 属性 が \"_blank\")"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:293
 #, fuzzy
 msgid "Target — Parent"
-msgstr "<A TARGET=\"_parent\">"
+msgstr "a 要素 (target 属性 が \"_parent\")"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:294
 #, fuzzy
 msgid "Target — Self"
-msgstr "<A TARGET=\"_self\">"
+msgstr "a 要素 (target 属性 が \"_self\")"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:295
 #, fuzzy
 msgid "Target — Top"
-msgstr "<A TARGET=\"_top\">"
+msgstr "a 要素 (target 属性 が \"_top\")"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:296
 msgid "Teletype or monospace text style"
-msgstr "<TT>"
+msgstr "tt 要素 (テレタイプあるいは等幅)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:297
 msgid "Text"
-msgstr "<TEXT>"
+msgstr "text 要素"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:298
 msgid "Text color"
-msgstr "COLOR="
+msgstr "text または color 属性 (テキストの文字色)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:300
 msgid "Text color (deprecated)"
-msgstr "文字列の色 (廃止)"
+msgstr "text または color 属性 (テキストの文字色 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:301
 msgid "Text entered by user"
-msgstr "<KBD>"
+msgstr "kbd 要素 (ユーザが入力すべきテキスト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:302
 msgid "Title"
-msgstr "TITLE="
+msgstr "title 属性 (助言的情報)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:303
 msgid "Top margin in pixels"
-msgstr ""
+msgstr "topmargin 属性"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:304
 msgid "URL"
-msgstr "URL="
+msgstr "url 属性"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:305
 msgid "Underlined text style"
-msgstr "<U>"
+msgstr "u 要素 (下線を引く)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:306
 msgid "Unordered list"
-msgstr "<UL>"
+msgstr "ul 要素 (順不同リスト)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:307
 msgid "Use image map"
-msgstr "USEMAP="
+msgstr "usemap 属性 (要素とクライアント側イメージマップの関連付け)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:308
 msgid "Value"
-msgstr "VALUE="
+msgstr "value 属性 (コントロールの初期値、パラメータの値)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:309
 msgid "Value interpretation"
-msgstr "VALUETYPE="
+msgstr "valuetype 属性 (param 要素での value 属性の型)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:310
 msgid "Variable or program argument"
-msgstr "<VAR>"
+msgstr "var 要素 (変数またはプログラム引数のインスタンス)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:311
 msgid "Vertical cell alignment"
-msgstr "VALIGN="
+msgstr "valign 属性 (セル内での垂直方向の配置)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:312
 msgid "Vertical space"
-msgstr "VSPACE="
+msgstr "vspace 属性 (上下に挿入すべき空白の量)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:314
 msgid "Vertical space (deprecated)"
-msgstr "Vertical space (廃止)"
+msgstr "vspace 属性 (上下に挿入すべき空白の量 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:315
 msgid "Visited link color"
-msgstr "VLINK="
+msgstr "vlink 属性 (訪問済のリンクの色)"
 
 #. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
 #: ../plugins/taglist/HTML.tags.xml.in.h:317
 msgid "Visited link color (deprecated)"
-msgstr "Visited link color (廃止)"
+msgstr "vlink 属性 (訪問済のリンクの色 [非推奨])"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:318
 msgid "Width"
-msgstr "WIDTH="
+msgstr "width 属性 (幅)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:319
 #, fuzzy
@@ -4852,7 +4900,7 @@ msgstr "Reference ref"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol <<"
-msgstr "記号 <"
+msgstr "記号 <<"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:51
 msgid "Symbol <="
@@ -5069,12 +5117,12 @@ msgstr ""
 #: ../plugins/time/org.gnome.gedit.plugins.time.gschema.xml.in.in.h:3
 #, fuzzy
 msgid "Prompt Type"
-msgstr "PROMPT="
+msgstr "prompt 属性 (isindex 要素のプロンプト)"
 
 #: ../plugins/time/org.gnome.gedit.plugins.time.gschema.xml.in.in.h:4
 #, fuzzy
 msgid "Selected Format"
-msgstr "SELECTED"
+msgstr "selected 属性 (選択肢が選択済み)"
 
 #: ../plugins/time/org.gnome.gedit.plugins.time.gschema.xml.in.in.h:5
 #, fuzzy
@@ -5171,30 +5219,6 @@ msgstr "書式を毎回指定する(_P)"
 #~ msgid "_Right margin at column:"
 #~ msgstr "右マージンを表す列番号(_R):"
 
-#~ msgid "Replace _All"
-#~ msgstr "すべて置換(_A)"
-
-#~ msgid "Match _entire word only"
-#~ msgstr "単語全体にマッチさせる(_E)"
-
-#~ msgid "Replace All"
-#~ msgstr "すべて置換"
-
-#~ msgid "Replace _with: "
-#~ msgstr "置換後の文字列(_W): "
-
-#~ msgid "Search _backwards"
-#~ msgstr "先頭に向かって検索する(_B)"
-
-#~ msgid "_Match case"
-#~ msgstr "大/小文字を区別する(_M)"
-
-#~ msgid "_Search for: "
-#~ msgstr "検索する文字列(_S): "
-
-#~ msgid "_Wrap around"
-#~ msgstr "折り返しも対象にする(_W)"
-
 #~ msgid "[FILE...]"
 #~ msgstr "[ファイル...]"
 
@@ -5239,12 +5263,6 @@ msgstr "書式を毎回指定する(_P)"
 
 #~ msgid "Set up the page settings"
 #~ msgstr "ページを設定します"
-
-#~ msgid "_Incremental Search..."
-#~ msgstr "インクリメンタル検索(_I)..."
-
-#~ msgid "Incrementally search for text"
-#~ msgstr "文字を入力しながら逐次検索します"
 
 #~ msgid "_Wrap Around"
 #~ msgstr "折り返しも検索する(_W)"
