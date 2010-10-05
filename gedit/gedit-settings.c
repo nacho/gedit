@@ -53,7 +53,7 @@ struct _GeditSettingsPrivate
 	gchar *old_scheme;
 };
 
-G_DEFINE_TYPE (GeditSettings, gedit_settings, G_TYPE_SETTINGS)
+G_DEFINE_TYPE (GeditSettings, gedit_settings, G_TYPE_OBJECT)
 
 static void
 gedit_settings_finalize (GObject *object)
@@ -147,7 +147,7 @@ set_font (GeditSettings *gs,
 	
 	for (l = views; l != NULL; l = g_list_next (l))
 	{
-		/* Note: we use def=FALSE to avoid GeditView to query gconf */
+		/* Note: we use def=FALSE to avoid GeditView to query dconf */
 		gedit_view_set_font (GEDIT_VIEW (l->data), FALSE, font);
 
 		gtk_source_view_set_tab_width (GTK_SOURCE_VIEW (l->data), ts);
@@ -383,8 +383,6 @@ on_tabs_size_changed (GSettings     *settings,
 	g_list_free (views);
 }
 
-/* FIXME: insert_spaces and line_numbers are mostly the same it just changes
- the func called, maybe typedef the func and refactorize? */
 static void
 on_insert_spaces_changed (GSettings     *settings,
 			  const gchar   *key,
@@ -647,21 +645,12 @@ gedit_settings_init (GeditSettings *gs)
 	gs->priv = GEDIT_SETTINGS_GET_PRIVATE (gs);
 	
 	gs->priv->old_scheme = NULL;
-}
+	gs->priv->editor = g_settings_new ("org.gnome.gedit.preferences.editor");
+	gs->priv->ui = g_settings_new ("org.gnome.gedit.preferences.ui");
 
-static void
-initialize (GeditSettings *gs)
-{
-	GSettings *prefs;
-	
-	prefs = g_settings_get_child (G_SETTINGS (gs), "preferences");
-	gs->priv->editor = g_settings_get_child (prefs, "editor");
-	gs->priv->ui = g_settings_get_child (prefs, "ui");
-	g_object_unref (prefs);
-	
 	/* Load settings */
 	gs->priv->lockdown = g_settings_new ("org.gnome.desktop.lockdown");
-	
+
 	g_signal_connect (gs->priv->lockdown,
 			  "changed",
 			  G_CALLBACK (on_lockdown_changed),
@@ -766,18 +755,10 @@ gedit_settings_class_init (GeditSettingsClass *klass)
 	g_type_class_add_private (object_class, sizeof (GeditSettingsPrivate));
 }
 
-GSettings *
+GObject *
 gedit_settings_new ()
 {
-	GeditSettings *settings;
-
-	settings = g_object_new (GEDIT_TYPE_SETTINGS,
-				 "schema", "org.gnome.gedit",
-				 NULL);
-
-	initialize (settings);
-
-	return G_SETTINGS (settings);
+	return g_object_new (GEDIT_TYPE_SETTINGS, NULL);
 }
 
 GeditLockdownMask

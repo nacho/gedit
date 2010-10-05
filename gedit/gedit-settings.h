@@ -45,14 +45,14 @@ typedef struct _GeditSettingsPrivate	GeditSettingsPrivate;
 
 struct _GeditSettings
 {
-	GSettings parent;
+	GObject parent;
 
 	GeditSettingsPrivate *priv;
 };
 
 struct _GeditSettingsClass
 {
-	GSettingsClass parent_class;
+	GObjectClass parent_class;
 };
 
 typedef enum {
@@ -64,7 +64,7 @@ typedef enum {
 
 GType			 gedit_settings_get_type			(void) G_GNUC_CONST;
 
-GSettings		*gedit_settings_new				(void);
+GObject			*gedit_settings_new				(void);
 
 GeditLockdownMask	 gedit_settings_get_lockdown			(GeditSettings *gs);
 

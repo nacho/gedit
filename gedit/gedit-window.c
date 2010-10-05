@@ -662,7 +662,7 @@ set_toolbar_style (GeditWindow *window,
 	/* Set style */
 	if (origin == NULL)
 	{
-		GSettings *settings;
+		GObject *settings;
 
 		settings = _gedit_app_get_settings (gedit_app_get_default ());
 		style = g_settings_get_enum (window->priv->ui_settings,

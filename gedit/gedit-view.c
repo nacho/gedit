@@ -312,7 +312,7 @@ on_notify_buffer_cb (GeditView  *view,
 static void 
 gedit_view_init (GeditView *view)
 {
-	GSettings *gs;
+	GObject *gs;
 	GtkTargetList *tl;
 	gboolean use_default_font;
 	gboolean display_line_numbers;
@@ -681,7 +681,7 @@ gedit_view_set_font (GeditView   *view,
 
 	if (def)
 	{
-		GSettings *settings;
+		GObject *settings;
 		gchar *font;
 
 		settings = _gedit_app_get_settings (gedit_app_get_default ());

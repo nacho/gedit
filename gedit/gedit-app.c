@@ -81,7 +81,7 @@ struct _GeditAppPrivate
 	GtkPageSetup      *page_setup;
 	GtkPrintSettings  *print_settings;
 	
-	GSettings         *settings;
+	GObject           *settings;
 	GSettings         *window_settings;
 
 	PeasExtensionSet  *extensions;
@@ -1124,7 +1124,7 @@ _gedit_app_set_default_print_settings (GeditApp         *app,
 	app->priv->print_settings = g_object_ref (settings);
 }
 
-GSettings *
+GObject *
 _gedit_app_get_settings (GeditApp *app)
 {
 	g_return_val_if_fail (GEDIT_IS_APP (app), NULL);

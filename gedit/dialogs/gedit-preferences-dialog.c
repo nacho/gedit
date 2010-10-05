@@ -415,7 +415,7 @@ on_use_default_font_changed (GSettings              *settings,
 static void
 setup_font_colors_page_font_section (GeditPreferencesDialog *dlg)
 {
-	GSettings *settings;
+	GObject *settings;
 	gboolean use_default_font;
 	gchar *system_font = NULL;
 	gchar *label;
