@@ -50,6 +50,7 @@
 #include "gedit-utils.h"
 #include "gedit-settings.h"
 #include "gedit-app.h"
+#include "gedit-notebook.h"
 
 #define GEDIT_VIEW_SCROLL_MARGIN 0.02
 
@@ -63,7 +64,8 @@ typedef enum
 
 enum
 {
-	TARGET_URI_LIST = 100
+	TARGET_URI_LIST = 100,
+	TARGET_TAB
 };
 
 struct _GeditViewPrivate
@@ -390,12 +392,18 @@ gedit_view_init (GeditView *view)
 		      "indent_on_tab", TRUE,
 		      NULL);
 
-	/* Drag and drop support */	
+	/* Drag and drop support */
 	tl = gtk_drag_dest_get_target_list (GTK_WIDGET (view));
 
 	if (tl != NULL)
+	{
 		gtk_target_list_add_uri_targets (tl, TARGET_URI_LIST);
-		
+		gtk_target_list_add (tl,
+		                     gdk_atom_intern_static_string ("GTK_NOTEBOOK_TAB"),
+		                     GTK_TARGET_SAME_APP,
+		                     TARGET_TAB);
+	}
+
 	view->priv->extensions = peas_extension_set_new (PEAS_ENGINE (gedit_plugins_engine_get_default ()),
 							 GEDIT_TYPE_VIEW_ACTIVATABLE,
 							 "view", view,
@@ -793,6 +801,22 @@ gedit_view_drag_motion (GtkWidget      *widget,
 	return result;
 }
 
+static GtkWidget *
+get_notebook_from_view (GtkWidget *view)
+{
+	GtkWidget *widget;
+
+	widget = view;
+
+	do
+	{
+		widget = gtk_widget_get_parent (widget);
+	}
+	while (!GEDIT_IS_NOTEBOOK (widget));
+
+	return widget;
+}
+
 static void
 gedit_view_drag_data_received (GtkWidget        *widget,
 		       	       GdkDragContext   *context,
@@ -802,11 +826,11 @@ gedit_view_drag_data_received (GtkWidget        *widget,
 			       guint             info,
 			       guint             timestamp)
 {
-	gchar **uri_list;
-	
 	/* If this is an URL emit DROP_URIS, otherwise chain up the signal */
 	if (info == TARGET_URI_LIST)
 	{
+		gchar **uri_list;
+
 		uri_list = gedit_utils_drop_get_uris (selection_data);
 		
 		if (uri_list != NULL)
@@ -816,6 +840,33 @@ gedit_view_drag_data_received (GtkWidget        *widget,
 			
 			gtk_drag_finish (context, TRUE, FALSE, timestamp);
 		}
+	}
+	else if (info == TARGET_TAB)
+	{
+		GtkWidget *notebook;
+		GtkWidget *new_notebook;
+		GtkWidget *page;
+
+		notebook = gtk_drag_get_source_widget (context);
+
+		if (!GTK_IS_WIDGET (notebook))
+		{
+			return;
+		}
+
+		page = *(GtkWidget **) gtk_selection_data_get_data (selection_data);
+		g_return_if_fail (page != NULL);
+
+		/* We need to iterate and get the notebook of the target view
+		   because we can have several notebooks per window */
+		new_notebook = get_notebook_from_view (widget);
+
+		gedit_notebook_move_tab (GEDIT_NOTEBOOK (notebook),
+		                         GEDIT_NOTEBOOK (new_notebook),
+		                         GEDIT_TAB (page),
+		                         0);
+
+		gtk_drag_finish (context, TRUE, TRUE, timestamp);
 	}
 	else
 	{
