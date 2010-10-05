@@ -526,8 +526,11 @@ multi_notebook_notebook_removed (GeditMultiNotebook  *mnb,
 }
 
 static void
-multi_notebook_tabs_reordered (GeditWindow         *window,
-			       GeditDocumentsPanel *panel)
+multi_notebook_tabs_reordered (GeditMultiNotebook  *mnb,
+                               GeditNotebook       *notebook,
+                               GtkWidget           *page,
+                               gint                 page_num,
+                               GeditDocumentsPanel *panel)
 {
 	gedit_debug (DEBUG_PANEL);
 
@@ -562,7 +565,7 @@ set_window (GeditDocumentsPanel *panel,
 			  G_CALLBACK (multi_notebook_tab_removed),
 			  panel);
 	g_signal_connect (panel->priv->mnb,
-			  "tabs-reordered",
+			  "page-reordered",
 			  G_CALLBACK (multi_notebook_tabs_reordered),
 			  panel);
 	g_signal_connect (panel->priv->mnb,

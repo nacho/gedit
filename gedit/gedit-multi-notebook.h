@@ -78,7 +78,7 @@ struct _GeditMultiNotebookClass
 						 GtkWidget          *page,
 						 gint                x,
 						 gint                y);
-	void	(* tabs_reordered)		(GeditMultiNotebook *mnb);
+	void	(* page_reordered)		(GeditMultiNotebook *mnb);
 	void	(* show_popup_menu)		(GeditMultiNotebook *mnb,
 						 GdkEvent           *event);
 };

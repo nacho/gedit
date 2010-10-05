@@ -3693,12 +3693,15 @@ on_tab_removed (GeditMultiNotebook *multi,
 }
 
 static void
-on_tabs_reordered (GeditMultiNotebook *multi,
-		   GeditWindow        *window)
+on_page_reordered (GeditMultiNotebook *multi,
+                   GeditNotebook      *notebook,
+                   GtkWidget          *page,
+                   gint                page_num,
+                   GeditWindow        *window)
 {
 	update_documents_list_menu (window);
 	update_next_prev_doc_sensitivity_per_window (window);
-	
+
 	g_signal_emit (G_OBJECT (window), signals[TABS_REORDERED], 0);
 }
 
@@ -4217,8 +4220,8 @@ gedit_window_init (GeditWindow *window)
 			  window);
 
 	g_signal_connect (window->priv->multi_notebook,
-			  "tabs-reordered",
-			  G_CALLBACK (on_tabs_reordered),
+			  "page-reordered",
+			  G_CALLBACK (on_page_reordered),
 			  window);
 
 	g_signal_connect (window->priv->multi_notebook,

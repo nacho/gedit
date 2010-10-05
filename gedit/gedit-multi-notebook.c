@@ -55,7 +55,7 @@ enum
 	SWITCH_TAB,
 	TAB_CLOSE_REQUEST,
 	CREATE_WINDOW,
-	TABS_REORDERED,
+	PAGE_REORDERED,
 	SHOW_POPUP_MENU,
 	LAST_SIGNAL
 };
@@ -187,15 +187,17 @@ gedit_multi_notebook_class_init (GeditMultiNotebookClass *klass)
 		              GTK_TYPE_NOTEBOOK, 4,
 		              GEDIT_TYPE_NOTEBOOK, GTK_TYPE_WIDGET,
 		              G_TYPE_INT, G_TYPE_INT);
-	signals[TABS_REORDERED] =
-		g_signal_new ("tabs-reordered",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_FIRST,
-			      G_STRUCT_OFFSET (GeditMultiNotebookClass, tabs_reordered),
-			      NULL, NULL,
-			      g_cclosure_marshal_VOID__VOID,
-			      G_TYPE_NONE,
-			      0);
+	signals[PAGE_REORDERED] =
+		g_signal_new ("page-reordered",
+		              G_OBJECT_CLASS_TYPE (object_class),
+		              G_SIGNAL_RUN_FIRST,
+		              G_STRUCT_OFFSET (GeditMultiNotebookClass, page_reordered),
+		              NULL, NULL,
+		              gedit_marshal_VOID__OBJECT_OBJECT_INT,
+		              G_TYPE_NONE,
+		              3,
+		              GEDIT_TYPE_NOTEBOOK, GTK_TYPE_WIDGET,
+		              G_TYPE_INT);
 	signals[SHOW_POPUP_MENU] =
 		g_signal_new ("show-popup-menu",
 			      G_OBJECT_CLASS_TYPE (object_class),
@@ -271,7 +273,8 @@ notebook_page_reordered (GeditNotebook      *notebook,
 		         guint               page_num,
 		         GeditMultiNotebook *mnb)
 {
-	g_signal_emit (G_OBJECT (mnb), signals[TABS_REORDERED], 0);
+	g_signal_emit (G_OBJECT (mnb), signals[PAGE_REORDERED], 0, notebook,
+	               child, page_num);
 }
 
 static void
