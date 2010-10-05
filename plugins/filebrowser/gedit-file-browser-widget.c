@@ -742,7 +742,11 @@ fill_combo_model (GeditFileBrowserWidget *obj)
 			    COLUMN_ICON, icon,
 			    COLUMN_NAME, _("Bookmarks"),
 			    COLUMN_ID, BOOKMARKS_ID, -1);
-	g_object_unref (icon);
+
+	if (icon != NULL)
+	{
+		g_object_unref (icon);
+	}
 
 	gtk_combo_box_set_row_separator_func (GTK_COMBO_BOX (obj->priv->combo),
 					      separator_func, obj, NULL);
