@@ -1110,53 +1110,53 @@ draw_page (cairo_t           *cr,
 }
 
 static gboolean
-preview_expose (GtkWidget         *widget,
-		GdkEventExpose    *event,
-		GeditPrintPreview *preview)
+preview_draw (GtkWidget         *widget,
+	      cairo_t           *cr,
+	      GeditPrintPreview *preview)
 {
 	GeditPrintPreviewPrivate *priv;
 	GdkWindow *bin_window;
-	cairo_t *cr;
 	gint pg;
 	gint i, j;
 
 	priv = preview->priv;
 
 	bin_window = gtk_layout_get_bin_window (GTK_LAYOUT (priv->layout));
-	if (event->window != bin_window)
-		return FALSE;
 
-	cr = gdk_cairo_create (bin_window);
-
-	gdk_cairo_rectangle (cr, &event->area);
-	cairo_clip (cr);
-
-	/* get the first page to display */
-	pg = get_first_page_displayed (preview);
-
-	for (i = 0; i < priv->cols; ++i)
+	if (gtk_cairo_should_draw_window (cr, bin_window))
 	{
-		for (j = 0; j < priv->rows; ++j)
+		cairo_save (cr);
+
+		gtk_cairo_transform_to_window (cr, widget, bin_window);
+
+		/* get the first page to display */
+		pg = get_first_page_displayed (preview);
+
+		for (i = 0; i < priv->cols; ++i)
 		{
-			if (!gtk_print_operation_preview_is_selected (priv->gtk_preview,
-								      pg))
+			for (j = 0; j < priv->rows; ++j)
 			{
-				continue;
+				if (!gtk_print_operation_preview_is_selected (priv->gtk_preview,
+									      pg))
+				{
+					continue;
+				}
+
+				if (pg == priv->n_pages)
+					break;
+
+				draw_page (cr,
+					   j * priv->tile_w,
+					   i * priv->tile_h,
+					   pg,
+					   preview);
+
+				++pg;
 			}
-
-			if (pg == priv->n_pages)
-				break;
-
-			draw_page (cr,
-				   j * priv->tile_w,
-				   i * priv->tile_h,
-				   pg,
-				   preview);
-
-			++pg;
 		}
+
+		cairo_restore (cr);
 	}
-	cairo_destroy (cr);
 
 	return TRUE;
 }
@@ -1212,8 +1212,8 @@ preview_ready (GtkPrintOperationPreview *gtk_preview,
 
 	/* let the default gtklayout handler clear the background */
 	g_signal_connect_after (preview->priv->layout,
-				"expose-event",
-				G_CALLBACK (preview_expose),
+				"draw",
+				G_CALLBACK (preview_draw),
 				preview);
 
 	gtk_widget_queue_draw (preview->priv->layout);
