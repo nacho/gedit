@@ -392,6 +392,8 @@ gedit_notebook_page_added (GtkNotebook *notebook,
 	                  "close-clicked",
 	                  G_CALLBACK (close_button_clicked_cb),
 	                  nb);
+
+	update_tabs_visibility (GEDIT_NOTEBOOK (notebook), FALSE);
 }
 
 static void
@@ -518,8 +520,6 @@ gedit_notebook_add_tab (GeditNotebook *nb,
 	gtk_notebook_set_tab_detachable (GTK_NOTEBOOK (nb),
 	                                 GTK_WIDGET (tab),
 	                                 TRUE);
-
-	update_tabs_visibility (nb, FALSE);
 
 	/* The signal handler may have reordered the tabs */
 	position = gtk_notebook_page_num (GTK_NOTEBOOK (nb),
