@@ -106,6 +106,11 @@ static guint signals[LAST_SIGNAL] = { 0 };
 
 static gboolean gedit_tab_auto_save (GeditTab *tab);
 
+static void done_printing_cb        (GeditPrintJob       *job,
+                                     GeditPrintJobResult  result,
+                                     const GError        *error,
+                                     GeditTab            *tab);
+
 static void
 install_auto_save_timeout (GeditTab *tab)
 {
@@ -235,6 +240,15 @@ static void
 gedit_tab_dispose (GObject *object)
 {
 	GeditTab *tab = GEDIT_TAB (object);
+
+	if (tab->priv->print_job != NULL)
+	{
+		g_signal_handlers_disconnect_by_func (tab->priv->print_job,
+		                                      done_printing_cb, tab);
+		g_object_unref (tab->priv->print_job);
+		tab->priv->print_job = NULL;
+		tab->priv->print_preview = NULL;
+	}
 
 	if (tab->priv->tmp_save_location != NULL)
 	{
@@ -2489,8 +2503,11 @@ done_printing_cb (GeditPrintJob       *job,
 	view = gedit_tab_get_view (tab);
 	gtk_widget_grab_focus (GTK_WIDGET (view));
 
- 	g_object_unref (tab->priv->print_job);
-	tab->priv->print_job = NULL;
+	if (tab->priv->print_job != NULL)
+	{
+		g_object_unref (tab->priv->print_job);
+		tab->priv->print_job = NULL;
+	}
 }
 
 #if 0

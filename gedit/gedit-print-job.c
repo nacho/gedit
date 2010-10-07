@@ -108,6 +108,14 @@ static guint print_job_signals[LAST_SIGNAL] = { 0 };
 
 G_DEFINE_TYPE (GeditPrintJob, gedit_print_job, G_TYPE_OBJECT)
 
+static void          end_print_cb      (GtkPrintOperation *operation, 
+                                        GtkPrintContext   *context,
+                                        GeditPrintJob     *job);
+
+static void          done_cb           (GtkPrintOperation       *operation,
+                                        GtkPrintOperationResult  result,
+                                        GeditPrintJob           *job);
+
 static void
 set_view (GeditPrintJob *job, GeditView *view)
 {
@@ -159,12 +167,6 @@ gedit_print_job_finalize (GObject *object)
 	GeditPrintJob *job = GEDIT_PRINT_JOB (object);
 
 	g_free (job->priv->status_string);
-	
-	if (job->priv->compositor != NULL)
-		g_object_unref (job->priv->compositor);
-
-	if (job->priv->operation != NULL)
-		g_object_unref (job->priv->operation);
 
 	G_OBJECT_CLASS (gedit_print_job_parent_class)->finalize (object);
 }
@@ -173,11 +175,27 @@ static void
 gedit_print_job_dispose (GObject *object)
 {
 	GeditPrintJob *job = GEDIT_PRINT_JOB (object);
-	
+
 	if (job->priv->print_settings != NULL)
 	{
 		g_object_unref (job->priv->print_settings);
 		job->priv->print_settings = NULL;
+	}
+
+	if (job->priv->compositor != NULL)
+	{
+		g_object_unref (job->priv->compositor);
+		job->priv->compositor = NULL;
+	}
+
+	if (job->priv->operation != NULL)
+	{
+		g_signal_handlers_disconnect_by_func (job->priv->operation,
+		                                      end_print_cb, job);
+		g_signal_handlers_disconnect_by_func (job->priv->operation,
+		                                      done_cb, job);
+		g_object_unref (job->priv->operation);
+		job->priv->operation = NULL;
 	}
 	
 	G_OBJECT_CLASS (gedit_print_job_parent_class)->dispose (object);
@@ -702,8 +720,11 @@ end_print_cb (GtkPrintOperation *operation,
 	      GtkPrintContext   *context,
 	      GeditPrintJob     *job)
 {
-	g_object_unref (job->priv->compositor);
-	job->priv->compositor = NULL;
+	if (job->priv->compositor != NULL)
+	{
+		g_object_unref (job->priv->compositor);
+		job->priv->compositor = NULL;
+	}
 }
 
 static void
