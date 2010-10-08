@@ -47,15 +47,15 @@ typedef struct _GeditStatusbarClass	GeditStatusbarClass;
 
 struct _GeditStatusbar
 {
-        GtkStatusbar parent;
+	GtkStatusbar parent;
 
 	/* <private/> */
-        GeditStatusbarPrivate *priv;
+	GeditStatusbarPrivate *priv;
 };
 
 struct _GeditStatusbarClass
 {
-        GtkStatusbarClass parent_class;
+	GtkStatusbarClass parent_class;
 };
 
 GType		 gedit_statusbar_get_type		(void) G_GNUC_CONST;
@@ -81,18 +81,6 @@ void		 gedit_statusbar_flash_message		(GeditStatusbar   *statusbar,
 							 guint             context_id,
 							 const gchar      *format,
 							 ...) G_GNUC_PRINTF(3, 4);
-/* FIXME: these would be nice for plugins...
-void		 gedit_statusbar_add_widget		(GeditStatusbar   *statusbar,
-							 GtkWidget        *widget);
-void		 gedit_statusbar_remove_widget		(GeditStatusbar   *statusbar,
-							 GtkWidget        *widget);
-*/
-
-/*
- * Non exported functions
- */
-void		_gedit_statusbar_set_has_resize_grip	(GeditStatusbar   *statusbar,
-							 gboolean          show);
 
 G_END_DECLS
 

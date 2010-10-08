@@ -383,9 +383,6 @@ gedit_window_window_state_event (GtkWidget           *widget,
 		show = !(event->new_window_state &
 			(GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN));
 
-		_gedit_statusbar_set_has_resize_grip (GEDIT_STATUSBAR (window->priv->statusbar),
-						      show);
-
 		gedit_multi_notebook_collapse_notebook_border (window->priv->multi_notebook,
 							       !show);
 	}
