@@ -1082,6 +1082,8 @@ create_search_widget (GeditViewFrame *frame)
 	frame->priv->search_entry = gtk_entry_new ();
 	gtk_widget_show (frame->priv->search_entry);
 
+	gtk_entry_set_width_chars (GTK_ENTRY (frame->priv->search_entry), 25);
+
 	g_signal_connect (frame->priv->search_entry, "populate-popup",
 	                  G_CALLBACK (search_entry_populate_popup),
 	                  frame);
