@@ -67,7 +67,8 @@ void		 gedit_overlay_add_animated_widget	(GeditOverlay                       *ov
 							 GeditTheatricsChoreographerEasing   easing,
 							 GeditTheatricsChoreographerBlocking blocking,
 							 GtkOrientation                      orientation,
-							 GdkGravity                          gravity);
+							 GdkGravity                          gravity,
+							 guint                               offset);
 
 G_END_DECLS
 

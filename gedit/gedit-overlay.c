@@ -33,6 +33,7 @@ typedef struct _OverlayChild
 {
 	GtkWidget *child;
 	GdkGravity gravity;
+	guint      offset;
 
 	guint fixed_position : 1;
 	guint is_animated : 1;
@@ -79,7 +80,8 @@ add_toplevel_widget (GeditOverlay *overlay,
                      GtkWidget    *widget,
                      gboolean      fixed_position,
                      gboolean      is_animated,
-                     GdkGravity    gravity)
+                     GdkGravity    gravity,
+                     guint         offset)
 {
 	OverlayChild *child = g_slice_new (OverlayChild);
 
@@ -87,6 +89,7 @@ add_toplevel_widget (GeditOverlay *overlay,
 	child->gravity = gravity;
 	child->fixed_position = fixed_position;
 	child->is_animated = is_animated;
+	child->offset = offset;
 
 	gtk_widget_set_parent (widget, GTK_WIDGET (overlay));
 
@@ -166,7 +169,8 @@ gedit_overlay_set_property (GObject      *object,
 			overlay->priv->main_widget = g_value_get_object (value);
 			add_toplevel_widget (overlay,
 			                     overlay->priv->main_widget,
-			                     TRUE, FALSE, GDK_GRAVITY_STATIC);
+			                     TRUE, FALSE, GDK_GRAVITY_STATIC,
+			                     0);
 			break;
 		}
 		default:
@@ -230,7 +234,7 @@ set_children_positions (GeditOverlay *overlay)
 		{
 			/* The gravity is the inverse of the place we want */
 			case GDK_GRAVITY_SOUTH_WEST:
-				alloc.x = overlay->priv->main_alloc.width - req.width;
+				alloc.x = overlay->priv->main_alloc.width - req.width - child->offset;
 				alloc.y = 0;
 				break;
 			default:
@@ -274,7 +278,7 @@ gedit_overlay_add (GtkContainer *overlay,
                    GtkWidget    *widget)
 {
 	add_toplevel_widget (GEDIT_OVERLAY (overlay), widget,
-	                     FALSE, FALSE, GDK_GRAVITY_STATIC);
+	                     FALSE, FALSE, GDK_GRAVITY_STATIC, 0);
 }
 
 static void
@@ -551,7 +555,8 @@ gedit_overlay_add_animated_widget (GeditOverlay                       *overlay,
                                    GeditTheatricsChoreographerEasing   easing,
                                    GeditTheatricsChoreographerBlocking blocking,
                                    GtkOrientation                      orientation,
-                                   GdkGravity                          gravity)
+                                   GdkGravity                          gravity,
+                                   guint                               offset)
 {
 	GeditTheatricsAnimatedWidget *anim_widget;
 	GeditTheatricsActor *actor;
@@ -577,5 +582,5 @@ gedit_overlay_add_animated_widget (GeditOverlay                       *overlay,
 	                                                 duration);
 
 	add_toplevel_widget (overlay, GTK_WIDGET (anim_widget), TRUE,
-	                     TRUE, gravity);
+	                     TRUE, gravity, offset);
 }

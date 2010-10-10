@@ -34,6 +34,7 @@
 #define GEDIT_VIEW_FRAME_SEARCH_DIALOG_TIMEOUT (30*1000) /* 30 seconds */
 
 #define MIN_SEARCH_COMPLETION_KEY_LEN	3
+#define SEARCH_POPUP_OFFSET 12
 
 #define GEDIT_VIEW_FRAME_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_VIEW_FRAME, GeditViewFramePrivate))
 
@@ -1302,7 +1303,8 @@ start_interactive_search_real (GeditViewFrame *frame)
 	                                   GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
 	                                   GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
 	                                   GTK_ORIENTATION_VERTICAL,
-	                                   GDK_GRAVITY_SOUTH_WEST);
+	                                   GDK_GRAVITY_SOUTH_WEST,
+	                                   SEARCH_POPUP_OFFSET);
 
 	init_search_entry (frame);
 
