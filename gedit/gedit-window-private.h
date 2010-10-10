@@ -95,7 +95,6 @@ struct _GeditWindowPrivate
 	GtkWidget      *toolbar;
 	GtkWidget      *toolbar_recent_menu;
 	GtkWidget      *menubar;
-	GeditToolbarSetting toolbar_style;
 
 	/* recent files */
 	GtkActionGroup *recents_action_group;

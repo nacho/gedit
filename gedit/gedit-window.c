@@ -590,90 +590,35 @@ disconnect_proxy_cb (GtkUIManager *manager,
 	}
 }
 
-static void
-apply_toolbar_style (GeditWindow *window,
-		     GtkWidget *toolbar)
-{
-	switch (window->priv->toolbar_style)
-	{
-		case GEDIT_TOOLBAR_SYSTEM:
-			gedit_debug_message (DEBUG_WINDOW, "GEDIT: SYSTEM");
-			gtk_toolbar_unset_style (
-					GTK_TOOLBAR (toolbar));
-			break;
-
-		case GEDIT_TOOLBAR_ICONS:
-			gedit_debug_message (DEBUG_WINDOW, "GEDIT: ICONS");
-			gtk_toolbar_set_style (
-					GTK_TOOLBAR (toolbar),
-					GTK_TOOLBAR_ICONS);
-			break;
-
-		case GEDIT_TOOLBAR_ICONS_AND_TEXT:
-			gedit_debug_message (DEBUG_WINDOW, "GEDIT: ICONS_AND_TEXT");
-			gtk_toolbar_set_style (
-					GTK_TOOLBAR (toolbar),
-					GTK_TOOLBAR_BOTH);
-			break;
-
-		case GEDIT_TOOLBAR_ICONS_BOTH_HORIZ:
-			gedit_debug_message (DEBUG_WINDOW, "GEDIT: ICONS_BOTH_HORIZ");
-			gtk_toolbar_set_style (
-					GTK_TOOLBAR (toolbar),
-					GTK_TOOLBAR_BOTH_HORIZ);
-			break;
-
-		default:
-			g_assert_not_reached ();
-			break;
-	}
-}
-
 /* Returns TRUE if toolbar is visible */
 static gboolean
-set_toolbar_style (GeditWindow *window,
-		   GeditWindow *origin)
+set_toolbar_visibility (GeditWindow *window,
+                        GeditWindow *origin)
 {
 	gboolean visible;
-	GeditToolbarSetting style;
 	GtkAction *action;
-	gboolean toolbar_visible;
-
-	toolbar_visible = g_settings_get_boolean (window->priv->ui_settings,
-						  GEDIT_SETTINGS_TOOLBAR_VISIBLE);
 
 	if (origin == NULL)
-		visible = toolbar_visible;
+	{
+		visible = g_settings_get_boolean (window->priv->ui_settings,
+		                                  GEDIT_SETTINGS_TOOLBAR_VISIBLE);
+	}
 	else
+	{
 		visible = gtk_widget_get_visible (origin->priv->toolbar);
-	
+	}
+
 	/* Set visibility */
 	gtk_widget_set_visible (window->priv->toolbar, visible);
 
 	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					      "ViewToolbar");
+	                                      "ViewToolbar");
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
+	{
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
-
-	/* Set style */
-	if (origin == NULL)
-	{
-		GObject *settings;
-
-		settings = _gedit_app_get_settings (gedit_app_get_default ());
-		style = g_settings_get_enum (window->priv->ui_settings,
-					     GEDIT_SETTINGS_TOOLBAR_BUTTONS_STYLE);
 	}
-	else
-	{
-		style = origin->priv->toolbar_style;
-	}
-	
-	window->priv->toolbar_style = style;
-	
-	apply_toolbar_style (window, window->priv->toolbar);
-	
+
 	return visible;
 }
 
@@ -1751,7 +1696,15 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 			    FALSE,
 			    0);
 
-	set_toolbar_style (window, NULL);
+	/* XXX: We shouldn't need this special case, gtk+ should take care of
+	        using this setting when it is in windows */
+#ifdef G_OS_WIN32
+	gtk_toolbar_set_style (GTK_TOOLBAR (window->priv->toolbar),
+	                       GTK_TOOLBAR_ICONS);
+#else
+	gtk_toolbar_unset_style (GTK_TOOLBAR (window->priv->toolbar));
+#endif
+	set_toolbar_visibility (window, NULL);
 	
 	window->priv->toolbar_recent_menu = setup_toolbar_open_button (window,
 								       window->priv->toolbar);
@@ -2286,7 +2239,7 @@ clone_window (GeditWindow *origin)
 	                        gtk_widget_get_visible (origin->priv->bottom_panel));
 
 	set_statusbar_style (window, origin);
-	set_toolbar_style (window, origin);
+	set_toolbar_visibility (window, origin);
 
 	return window;
 }

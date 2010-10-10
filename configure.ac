@@ -54,16 +54,11 @@ dnl active plugins for gedit.schemas
 ACTIVE_PLUGINS="'docinfo', 'modelines', 'filebrowser', 'spell', 'time'"
 AC_SUBST(ACTIVE_PLUGINS)
 
-dnl toolbar style for gedit schemas
-TOOLBAR_STYLE="system"
-AC_SUBST(TOOLBAR_STYLE)
-
 dnl check for win32 platform
 AC_MSG_CHECKING([for Win32 platform])
 case "$host" in
   *-*-mingw*|*-*-cygwin*)
     platform_win32=yes
-    TOOLBAR_STYLE="icons"
     ;;
   *)
     platform_win32=no

@@ -55,13 +55,6 @@ struct _GeditSettingsClass
 	GObjectClass parent_class;
 };
 
-typedef enum {
-	GEDIT_TOOLBAR_SYSTEM = 0,
-	GEDIT_TOOLBAR_ICONS,
-	GEDIT_TOOLBAR_ICONS_AND_TEXT,
-	GEDIT_TOOLBAR_ICONS_BOTH_HORIZ
-} GeditToolbarSetting;
-
 GType			 gedit_settings_get_type			(void) G_GNUC_CONST;
 
 GObject			*gedit_settings_new				(void);
