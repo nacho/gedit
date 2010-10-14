@@ -306,7 +306,7 @@ gedit_statusbar_flash_message (GeditStatusbar *statusbar,
 								msg);
 
 	statusbar->priv->flash_timeout = g_timeout_add (flash_length,
-							(GtkFunction) remove_message_timeout,
+							(GSourceFunc) remove_message_timeout,
 							statusbar);
 
 	g_free (msg);
