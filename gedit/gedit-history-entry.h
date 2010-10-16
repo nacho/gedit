@@ -48,12 +48,12 @@ typedef struct _GeditHistoryEntryPrivate GeditHistoryEntryPrivate;
 
 struct _GeditHistoryEntryClass
 {
-	GtkComboBoxEntryClass parent_class;
+	GtkComboBoxClass parent_class;
 };
 
 struct _GeditHistoryEntry
 {
-	GtkComboBoxEntry parent_instance;
+	GtkComboBox parent_instance;
 
 	GeditHistoryEntryPrivate *priv;
 };

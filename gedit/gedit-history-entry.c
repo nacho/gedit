@@ -16,14 +16,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307, USA.
  */
- 
+
 /*
- * Modified by the gedit Team, 2006. See the AUTHORS file for a 
- * list of people on the gedit Team.  
- * See the ChangeLog files for a list of changes. 
+ * Modified by the gedit Team, 2006. See the AUTHORS file for a
+ * list of people on the gedit Team.
+ * See the ChangeLog files for a list of changes.
  *
  * $Id$
  */
@@ -56,13 +56,13 @@ struct _GeditHistoryEntryPrivate
 {
 	gchar              *history_id;
 	guint               history_length;
-	
+
 	GtkEntryCompletion *completion;
-	
+
 	GSettings          *settings;
 };
 
-G_DEFINE_TYPE(GeditHistoryEntry, gedit_history_entry, GTK_TYPE_COMBO_BOX_ENTRY)
+G_DEFINE_TYPE(GeditHistoryEntry, gedit_history_entry, GTK_TYPE_COMBO_BOX)
 
 static void
 gedit_history_entry_set_property (GObject      *object,
@@ -130,7 +130,7 @@ gedit_history_entry_finalize (GObject *object)
 	GeditHistoryEntryPrivate *priv;
 
 	priv = GEDIT_HISTORY_ENTRY (object)->priv;
-	
+
 	g_free (priv->history_id);
 
 	if (priv->settings != NULL)
@@ -142,7 +142,7 @@ gedit_history_entry_finalize (GObject *object)
 	G_OBJECT_CLASS (gedit_history_entry_parent_class)->finalize (object);
 }
 
-static void 
+static void
 gedit_history_entry_class_init (GeditHistoryEntryClass *klass)
 {
 	GObjectClass   *object_class = G_OBJECT_CLASS (klass);
@@ -220,7 +220,7 @@ get_history_items (GeditHistoryEntry *entry)
 		valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (store),
 						  &iter);
 	}
-	
+
 	g_ptr_array_add (array, NULL);
 
 	return (gchar **)g_ptr_array_free (array, FALSE);
@@ -310,7 +310,7 @@ insert_history_item (GeditHistoryEntry *entry,
 
 	if (g_utf8_strlen (text, -1) <= MIN_ITEM_LEN)
 		return;
-		
+
 	store = get_history_store (entry);
 
 	/* remove the text from the store if it was already
@@ -416,7 +416,7 @@ gedit_history_entry_init (GeditHistoryEntry *entry)
 	priv->history_length = GEDIT_HISTORY_ENTRY_HISTORY_LENGTH_DEFAULT;
 
 	priv->completion = NULL;
-	
+
 	priv->settings = g_settings_new ("org.gnome.gedit.state.history-entry");
 }
 
@@ -453,16 +453,16 @@ gedit_history_entry_set_enable_completion (GeditHistoryEntry *entry,
 					   gboolean           enable)
 {
 	g_return_if_fail (GEDIT_IS_HISTORY_ENTRY (entry));
-	
+
 	if (enable)
 	{
 		if (entry->priv->completion != NULL)
 			return;
-		
+
 		entry->priv->completion = gtk_entry_completion_new ();
-		gtk_entry_completion_set_model (entry->priv->completion, 
+		gtk_entry_completion_set_model (entry->priv->completion,
 						GTK_TREE_MODEL (get_history_store (entry)));
-		
+
 		/* Use model column 0 as the text column */
 		gtk_entry_completion_set_text_column (entry->priv->completion, 0);
 
@@ -471,9 +471,9 @@ gedit_history_entry_set_enable_completion (GeditHistoryEntry *entry,
 
 		gtk_entry_completion_set_popup_completion (entry->priv->completion, FALSE);
 		gtk_entry_completion_set_inline_completion (entry->priv->completion, TRUE);
-	
+
 		/* Assign the completion to the entry */
-		gtk_entry_set_completion (GTK_ENTRY (gedit_history_entry_get_entry(entry)), 
+		gtk_entry_set_completion (GTK_ENTRY (gedit_history_entry_get_entry (entry)),
 					  entry->priv->completion);
 	}
 	else
@@ -481,20 +481,20 @@ gedit_history_entry_set_enable_completion (GeditHistoryEntry *entry,
 		if (entry->priv->completion == NULL)
 			return;
 
-		gtk_entry_set_completion (GTK_ENTRY (gedit_history_entry_get_entry (entry)), 
+		gtk_entry_set_completion (GTK_ENTRY (gedit_history_entry_get_entry (entry)),
 					  NULL);
-		
+
 		g_object_unref (entry->priv->completion);
-		
+
 		entry->priv->completion = NULL;
 	}
 }
-							 
+
 gboolean
 gedit_history_entry_get_enable_completion (GeditHistoryEntry *entry)
 {
 	g_return_val_if_fail (GEDIT_IS_HISTORY_ENTRY (entry), FALSE);
-	
+
 	return entry->priv->completion != NULL;
 }
 
@@ -516,20 +516,21 @@ gedit_history_entry_new (const gchar *history_id,
 	store = gtk_list_store_new (1, G_TYPE_STRING);
 
 	ret = g_object_new (GEDIT_TYPE_HISTORY_ENTRY,
+			    "has-entry", TRUE,
 			    "history-id", history_id,
-	                    "model", store,
+			    "model", store,
 			    "text-column", 0,
-	                    NULL);
+			    NULL);
 
 	g_object_unref (store);
 
 	/* loading has to happen after the model
-	 * has been set. However the model is not a 
+	 * has been set. However the model is not a
 	 * G_PARAM_CONSTRUCT property of GtkComboBox
 	 * so we cannot do this in the constructor.
-	 * For now we simply do here since this widget is 
+	 * For now we simply do here since this widget is
 	 * not bound to other programming languages.
-	 * A maybe better alternative is to override the 
+	 * A maybe better alternative is to override the
 	 * model property of combobox and mark CONTRUCT_ONLY.
 	 * This would also ensure that the model cannot be
 	 * set explicitely at a later time.
@@ -544,8 +545,8 @@ gedit_history_entry_new (const gchar *history_id,
 
 /*
  * Utility function to get the editable text entry internal widget.
- * I would prefer to not expose this implementation detail and 
- * simply make the GeditHistoryEntry widget implement the 
+ * I would prefer to not expose this implementation detail and
+ * simply make the GeditHistoryEntry widget implement the
  * GtkEditable interface. Unfortunately both GtkEditable and
  * GtkComboBox have a "changed" signal and I am not sure how to
  * handle the conflict.
