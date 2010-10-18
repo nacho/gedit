@@ -60,15 +60,19 @@ enum
 
 G_DEFINE_TYPE (GeditDocumentOutputStream, gedit_document_output_stream, G_TYPE_OUTPUT_STREAM)
 
-static gssize	gedit_document_output_stream_write (GOutputStream    *stream,
-						    const void       *buffer,
-						    gsize             count,
-						    GCancellable     *cancellable,
-						    GError          **error);
+static gssize gedit_document_output_stream_write   (GOutputStream  *stream,
+                                                    const void     *buffer,
+                                                    gsize           count,
+                                                    GCancellable   *cancellable,
+                                                    GError        **error);
 
-static gboolean	gedit_document_output_stream_close (GOutputStream    *stream,
-						    GCancellable     *cancellable,
-						    GError          **error);
+static gboolean gedit_document_output_stream_close (GOutputStream  *stream,
+                                                    GCancellable   *cancellable,
+                                                    GError        **error);
+
+static gboolean gedit_document_output_stream_flush (GOutputStream  *stream,
+                                                    GCancellable   *cancellable,
+                                                    GError        **error);
 
 static void
 gedit_document_output_stream_set_property (GObject      *object,
@@ -155,6 +159,7 @@ gedit_document_output_stream_class_init (GeditDocumentOutputStreamClass *klass)
 
 	stream_class->write_fn = gedit_document_output_stream_write;
 	stream_class->close_fn = gedit_document_output_stream_close;
+	stream_class->flush = gedit_document_output_stream_flush;
 
 	g_object_class_install_property (object_class,
 					 PROP_DOCUMENT,
@@ -273,7 +278,7 @@ end_append_text_to_document (GeditDocumentOutputStream *stream)
 	remove_ending_newline (stream);
 
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (stream->priv->doc),
-				      FALSE);
+	                              FALSE);
 
 	gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (stream->priv->doc));
 }
@@ -294,7 +299,9 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 	gboolean valid;
 
 	if (g_cancellable_set_error_if_cancelled (cancellable, error))
+	{
 		return -1;
+	}
 
 	ostream = GEDIT_DOCUMENT_OUTPUT_STREAM (stream);
 
@@ -304,7 +311,8 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 		gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (ostream->priv->doc));
 
 		gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (ostream->priv->doc),
-						&ostream->priv->pos);
+		                                &ostream->priv->pos);
+
 		ostream->priv->is_initialized = TRUE;
 	}
 
@@ -312,12 +320,17 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 	{
 		len = ostream->priv->buflen + count;
 		text = g_new (gchar , len + 1);
+
 		memcpy (text, ostream->priv->buffer, ostream->priv->buflen);
 		memcpy (text + ostream->priv->buflen, buffer, count);
+
 		text[len] = '\0';
+
 		g_free (ostream->priv->buffer);
+
 		ostream->priv->buffer = NULL;
 		ostream->priv->buflen = 0;
+
 		freetext = TRUE;
 	}
 	else
@@ -345,32 +358,103 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 		}
 		else
 		{
-			/* TODO: we cuould escape invalid text and tag it in red
+			/* TODO: we could escape invalid text and tag it in red
 			 * and make the doc readonly.
 			 */
-			g_set_error (error, G_IO_ERROR, G_IO_ERROR_INVALID_DATA,
-				     _("Invalid UTF-8 sequence in input"));
+			g_set_error (error, G_IO_ERROR,
+			             G_IO_ERROR_INVALID_DATA,
+			             _("Invalid UTF-8 sequence in input"));
 
 			if (freetext)
+			{
 				g_free (text);
+			}
 
 			return -1;
 		}
 	}
+	else
+	{
+		gchar *ptr;
+
+		/* Note: this is a workaround for a 'bug' in GtkTextBuffer where
+		   inserting first a \r and then in a second insert, a \n,
+		   will result in two lines being added instead of a single
+		   one */
+
+		ptr = g_utf8_find_prev_char (text, text + len);
+
+		if (ptr && *ptr == '\r' && ptr - text == len - 1)
+		{
+			ostream->priv->buffer = g_new (gchar, 1);
+			ostream->priv->buffer[0] = '\r';
+			ostream->priv->buflen = 1;
+
+			--len;
+		}
+	}
 
 	gtk_text_buffer_insert (GTK_TEXT_BUFFER (ostream->priv->doc),
-				&ostream->priv->pos, text, len);
+	                        &ostream->priv->pos,
+	                        text,
+	                        len);
 
 	if (freetext)
+	{
 		g_free (text);
+	}
 
 	return count;
 }
 
 static gboolean
+gedit_document_output_stream_flush (GOutputStream  *stream,
+                                    GCancellable   *cancellable,
+                                    GError        **error)
+{
+	GeditDocumentOutputStream *ostream;
+
+	ostream = GEDIT_DOCUMENT_OUTPUT_STREAM (stream);
+
+	if (ostream->priv->is_closed)
+	{
+		return TRUE;
+	}
+
+	if (ostream->priv->buflen == 0)
+	{
+		return TRUE;
+	}
+	else if (ostream->priv->buflen == 1 && *ostream->priv->buffer == '\r')
+	{
+		/* See special case above, flush this */
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (ostream->priv->doc),
+		                        &ostream->priv->pos,
+		                        "\r",
+		                        1);
+
+		g_free (ostream->priv->buffer);
+		ostream->priv->buffer = NULL;
+		ostream->priv->buflen = 0;
+
+		return TRUE;
+	}
+	else
+	{
+		/* Conversion error */
+		g_set_error (error,
+		             G_IO_ERROR,
+		             G_IO_ERROR_INVALID_DATA,
+		             _("Incomplete UTF-8 sequence in input"));
+
+		return FALSE;
+	}
+}
+
+static gboolean
 gedit_document_output_stream_close (GOutputStream     *stream,
-				    GCancellable      *cancellable,
-				    GError           **error)
+                                    GCancellable      *cancellable,
+                                    GError           **error)
 {
 	GeditDocumentOutputStream *ostream = GEDIT_DOCUMENT_OUTPUT_STREAM (stream);
 
@@ -382,8 +466,11 @@ gedit_document_output_stream_close (GOutputStream     *stream,
 
 	if (ostream->priv->buflen > 0)
 	{
-		g_set_error (error, G_IO_ERROR, G_IO_ERROR_INVALID_DATA,
-			     _("Incomplete UTF-8 sequence in input"));
+		g_set_error (error,
+		             G_IO_ERROR,
+		             G_IO_ERROR_INVALID_DATA,
+		             _("Incomplete UTF-8 sequence in input"));
+
 		return FALSE;
 	}
 

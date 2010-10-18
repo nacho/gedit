@@ -56,6 +56,10 @@ test_consecutive_write (const gchar *inbuf,
 		n += w;
 	} while (w != 0);
 
+	g_output_stream_flush (out, NULL, &err);
+
+	g_assert_no_error (err);
+
 	g_object_get (G_OBJECT (doc), "text", &b, NULL);
 
 	g_assert_cmpstr (inbuf, ==, b);
@@ -116,6 +120,34 @@ test_big_char ()
 				GEDIT_DOCUMENT_NEWLINE_TYPE_LF);
 }
 
+static void
+test_boundary ()
+{
+	GeditDocument *doc;
+	GOutputStream *out;
+	gint line_count;
+	GError *err = NULL;
+
+	doc = gedit_document_new ();
+	out = gedit_document_output_stream_new (doc);
+
+	g_output_stream_write (out, "\r", 1, NULL, NULL);
+	g_output_stream_write (out, "\n", 1, NULL, NULL);
+
+	g_output_stream_flush (out, NULL, &err);
+	g_assert_no_error (err);
+
+	line_count = gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc));
+
+	g_assert_cmpint (line_count, ==, 2);
+
+	g_output_stream_close (out, NULL, &err);
+	g_assert_no_error (err);
+
+	g_object_unref (doc);
+	g_object_unref (out);
+}
+
 int main (int   argc,
           char *argv[])
 {
@@ -127,6 +159,7 @@ int main (int   argc,
 	g_test_add_func ("/document-output-stream/consecutive", test_consecutive);
 	g_test_add_func ("/document-output-stream/consecutive_tnewline", test_consecutive_tnewline);
 	g_test_add_func ("/document-output-stream/big-char", test_big_char);
+	g_test_add_func ("/document-output-stream/test-boundary", test_boundary);
 
 	return g_test_run ();
 }
