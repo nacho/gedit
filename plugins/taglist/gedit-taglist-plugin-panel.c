@@ -384,22 +384,22 @@ static void
 populate_tag_groups_combo (GeditTaglistPluginPanel *panel)
 {
 	GList *l;
-	GtkComboBox *combo;
+	GtkComboBoxText *combo;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	combo = GTK_COMBO_BOX (panel->priv->tag_groups_combo);
+	combo = GTK_COMBO_BOX_TEXT (panel->priv->tag_groups_combo);
 
 	if (taglist == NULL)
 		return;
 
 	for (l = taglist->tag_groups; l != NULL; l = g_list_next (l))
 	{
-		gtk_combo_box_append_text (combo,
-					   (gchar *)((TagGroup*)l->data)->name);
+		gtk_combo_box_text_append_text (combo,
+		                                (gchar *)((TagGroup*)l->data)->name);
 	}
 
-	gtk_combo_box_set_active (combo, 0);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
 
 	return;
 }
@@ -412,7 +412,7 @@ selected_group_changed (GtkComboBox             *combo,
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	group_name = gtk_combo_box_get_active_text (combo);
+	group_name = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (combo));
 
 	if ((group_name == NULL) || (strlen (group_name) <= 0))
 	{
@@ -667,7 +667,7 @@ gedit_taglist_plugin_panel_init (GeditTaglistPluginPanel *panel)
 	panel->priv->data_dir = NULL;
 
 	/* Build the window content */
-	panel->priv->tag_groups_combo = gtk_combo_box_new_text ();
+	panel->priv->tag_groups_combo = gtk_combo_box_text_new ();
 	gtk_box_pack_start (GTK_BOX (panel),
 			    panel->priv->tag_groups_combo,
 			    FALSE,
