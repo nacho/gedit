@@ -110,6 +110,7 @@ NOINST_H_FILES =			\
 	gedit-document-output-stream.h	\
 	gedit-document-saver.h		\
 	gedit-documents-panel.h		\
+	gedit-file-chooser-dialog.h	\
 	gedit-history-entry.h		\
 	gedit-io-error-info-bar.h	\
 	gedit-language-manager.h	\
@@ -140,7 +141,6 @@ INST_H_FILES =				\
 	gedit-document.h 		\
 	gedit-encodings.h		\
 	gedit-encodings-combo-box.h	\
-	gedit-file-chooser-dialog.h	\
 	gedit-message-bus.h		\
 	gedit-message-type.h		\
 	gedit-message.h			\
