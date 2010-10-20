@@ -577,10 +577,9 @@ tags_list_query_tooltip_cb (GtkWidget               *widget,
 	return FALSE;
 }
 
-static gboolean
-expose_event_cb (GtkWidget      *panel,
-                 GdkEventExpose *event,
-                 gpointer        user_data)
+static void
+map_panel_cb (GtkWidget *panel,
+              gpointer   useless)
 {
 	GeditTaglistPluginPanel *ppanel = GEDIT_TAGLIST_PLUGIN_PANEL (panel);
 
@@ -588,15 +587,15 @@ expose_event_cb (GtkWidget      *panel,
 
 	/* If needed load taglists from files at the first expose */
 	if (taglist == NULL)
+	{
 		create_taglist (ppanel->priv->data_dir);
+	}
 
 	/* And populate combo box */
-	populate_tag_groups_combo (GEDIT_TAGLIST_PLUGIN_PANEL (panel));
+	populate_tag_groups_combo (ppanel);
 
 	/* We need to manage only the first expose event -> disconnect */
-	g_signal_handlers_disconnect_by_func (panel, expose_event_cb, NULL);
-
-	return FALSE;
+	g_signal_handlers_disconnect_by_func (panel, map_panel_cb, NULL);
 }
 
 static void
@@ -685,7 +684,7 @@ gedit_taglist_plugin_panel_init (GeditTaglistPluginPanel *panel)
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
-                                             GTK_SHADOW_IN);
+	                                     GTK_SHADOW_IN);
 	gtk_box_pack_start (GTK_BOX (panel), sw, TRUE, TRUE, 0);
 
 	/* Create tree view */
@@ -757,9 +756,9 @@ gedit_taglist_plugin_panel_init (GeditTaglistPluginPanel *panel)
 			  G_CALLBACK (selected_group_changed),
 			  panel);
 	g_signal_connect (panel,
-			  "expose-event",
-			  G_CALLBACK (expose_event_cb),
-			  NULL);
+	                  "map",
+	                  G_CALLBACK (map_panel_cb),
+	                  NULL);
 }
 
 GtkWidget *
