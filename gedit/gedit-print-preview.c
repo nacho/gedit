@@ -155,6 +155,19 @@ gedit_print_preview_class_init (GeditPrintPreviewClass *klass)
 }
 
 static void
+get_adjustments (GeditPrintPreview  *preview,
+		 GtkAdjustment     **hadj,
+		 GtkAdjustment     **vadj)
+{
+	GeditPrintPreviewPrivate *priv;
+
+	priv = preview->priv;
+
+	*hadj = gtk_scrollable_get_hadjustment (GTK_SCROLLABLE (priv->layout));
+	*vadj = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (priv->layout));
+}
+
+static void
 update_layout_size (GeditPrintPreview *preview)
 {
 	GeditPrintPreviewPrivate *priv;
@@ -248,19 +261,18 @@ set_zoom_factor (GeditPrintPreview *preview,
 static void
 set_zoom_fit_to_size (GeditPrintPreview *preview)
 {
-	GeditPrintPreviewPrivate *priv;	
+	GeditPrintPreviewPrivate *priv;
+	GtkAdjustment *hadj, *vadj;
 	double width, height;
 	double p_width, p_height;
 	double zoomx, zoomy;
 
 	priv = preview->priv;
 
-	g_object_get (gtk_layout_get_hadjustment (GTK_LAYOUT (priv->layout)),
-		      "page-size", &width,
-		      NULL);
-	g_object_get (gtk_layout_get_vadjustment (GTK_LAYOUT (priv->layout)),
-		      "page-size", &height,
-		      NULL);
+	get_adjustments (preview, &hadj, &vadj);
+
+	g_object_get (hadj, "page-size", &width, NULL);
+	g_object_get (vadj, "page-size", &height, NULL);
 
 	width /= priv->cols;
 	height /= priv->rows;
@@ -731,8 +743,7 @@ get_page_at_coords (GeditPrintPreview *preview,
 	if (priv->tile_h <= 0 || priv->tile_h <= 0)
 		return -1;
 
-	hadj = gtk_layout_get_hadjustment (GTK_LAYOUT (priv->layout));
-	vadj = gtk_layout_get_vadjustment (GTK_LAYOUT (priv->layout));
+	get_adjustments (preview, &hadj, &vadj);
 
 	x += gtk_adjustment_get_value (hadj);
 	y += gtk_adjustment_get_value (vadj);
@@ -793,8 +804,7 @@ preview_layout_key_press (GtkWidget         *widget,
 
 	priv = preview->priv;
 
-	hadj = gtk_layout_get_hadjustment (GTK_LAYOUT (priv->layout));
-	vadj = gtk_layout_get_vadjustment (GTK_LAYOUT (priv->layout));
+	get_adjustments (preview, &hadj, &vadj);
 
 	x = gtk_adjustment_get_value (hadj);
 	y = gtk_adjustment_get_value (vadj);
