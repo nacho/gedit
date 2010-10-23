@@ -56,18 +56,18 @@ struct _GeditOverlayPrivate
 enum
 {
 	PROP_0,
-	PROP_MAIN_WIDGET
+	PROP_MAIN_WIDGET,
+	PROP_HADJUSTMENT,
+	PROP_VADJUSTMENT
 };
 
-enum
-{
-	SET_SCROLL_ADJUSTMENTS,
-	LAST_SIGNAL
-};
+static void	gedit_overlay_set_hadjustment		(GeditOverlay  *overlay,
+							 GtkAdjustment *adjustment);
+static void	gedit_overlay_set_vadjustment		(GeditOverlay  *overlay,
+							 GtkAdjustment *adjustment);
 
-static guint signals[LAST_SIGNAL] = { 0 };
-
-G_DEFINE_TYPE (GeditOverlay, gedit_overlay, GTK_TYPE_CONTAINER)
+G_DEFINE_TYPE_WITH_CODE (GeditOverlay, gedit_overlay, GTK_TYPE_CONTAINER,
+			 G_IMPLEMENT_INTERFACE (GTK_TYPE_SCROLLABLE, NULL))
 
 static void
 free_container_child (OverlayChild *child)
@@ -142,12 +142,22 @@ gedit_overlay_get_property (GObject    *object,
                             GParamSpec *pspec)
 {
 	GeditOverlay *overlay = GEDIT_OVERLAY (object);
+	GeditOverlayPrivate *priv = overlay->priv;
 
 	switch (prop_id)
 	{
 		case PROP_MAIN_WIDGET:
-			g_value_set_object (value, overlay->priv->main_widget);
+			g_value_set_object (value, priv->main_widget);
 			break;
+
+		case PROP_HADJUSTMENT:
+			g_value_set_object (value, priv->hadjustment);
+			break;
+
+		case PROP_VADJUSTMENT:
+			g_value_set_object (value, priv->vadjustment);
+			break;
+
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -165,14 +175,23 @@ gedit_overlay_set_property (GObject      *object,
 	switch (prop_id)
 	{
 		case PROP_MAIN_WIDGET:
-		{
 			overlay->priv->main_widget = g_value_get_object (value);
 			add_toplevel_widget (overlay,
 			                     overlay->priv->main_widget,
 			                     TRUE, FALSE, GDK_GRAVITY_STATIC,
 			                     0);
 			break;
-		}
+
+		case PROP_HADJUSTMENT:
+			gedit_overlay_set_hadjustment (overlay,
+						       g_value_get_object (value));
+			break;
+
+		case PROP_VADJUSTMENT:
+			gedit_overlay_set_vadjustment (overlay,
+						       g_value_get_object (value));
+			break;
+
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -220,11 +239,12 @@ set_children_positions (GeditOverlay *overlay)
 
 	for (l = overlay->priv->children; l != NULL; l = g_slist_next (l))
 	{
+		GeditOverlayPrivate *priv = overlay->priv;
 		OverlayChild *child = (OverlayChild *)l->data;
 		GtkRequisition req;
 		GtkAllocation alloc;
 
-		if (child->child == overlay->priv->main_widget)
+		if (child->child == priv->main_widget)
 			continue;
 
 		gtk_widget_get_preferred_size (child->child, &req, NULL);
@@ -234,7 +254,7 @@ set_children_positions (GeditOverlay *overlay)
 		{
 			/* The gravity is the inverse of the place we want */
 			case GDK_GRAVITY_SOUTH_WEST:
-				alloc.x = overlay->priv->main_alloc.width - req.width - child->offset;
+				alloc.x = priv->main_alloc.width - req.width - child->offset;
 				alloc.y = 0;
 				break;
 			default:
@@ -244,8 +264,8 @@ set_children_positions (GeditOverlay *overlay)
 
 		if (!child->fixed_position)
 		{
-			alloc.x *= gtk_adjustment_get_value (overlay->priv->hadjustment);
-			alloc.y *= gtk_adjustment_get_value (overlay->priv->vadjustment);
+			alloc.x *= gtk_adjustment_get_value (priv->hadjustment);
+			alloc.y *= gtk_adjustment_get_value (priv->vadjustment);
 		}
 
 		alloc.width = req.width;
@@ -334,46 +354,84 @@ adjustment_value_changed (GtkAdjustment *adjustment,
 }
 
 static void
-gedit_overlay_set_scroll_adjustments (GeditOverlay  *overlay,
-                                      GtkAdjustment *hadjustment,
-                                      GtkAdjustment *vadjustment)
+gedit_overlay_set_hadjustment (GeditOverlay  *overlay,
+                               GtkAdjustment *adjustment)
 {
-	if (overlay->priv->hadjustment != NULL)
+	GeditOverlayPrivate *priv = overlay->priv;
+
+	if (adjustment && priv->vadjustment == adjustment)
+		return;
+
+	if (priv->hadjustment != NULL)
 	{
-		g_signal_handler_disconnect (overlay->priv->hadjustment,
-		                             overlay->priv->hadjustment_signal_id);
+		g_signal_handler_disconnect (priv->hadjustment,
+		                             priv->hadjustment_signal_id);
+		g_object_unref (priv->hadjustment);
 	}
 
-	if (overlay->priv->vadjustment != NULL)
+	if (adjustment == NULL)
 	{
-		g_signal_handler_disconnect (overlay->priv->vadjustment,
-		                             overlay->priv->vadjustment_signal_id);
+		adjustment = gtk_adjustment_new (0.0, 0.0, 0.0,
+		                                 0.0, 0.0, 0.0);
 	}
 
-	if (hadjustment != NULL)
+	priv->hadjustment_signal_id =
+		g_signal_connect (adjustment,
+			          "value-changed",
+			          G_CALLBACK (adjustment_value_changed),
+			          overlay);
+
+	priv->hadjustment = g_object_ref_sink (adjustment);
+
+	if (GTK_IS_SCROLLABLE (priv->main_widget))
 	{
-		overlay->priv->hadjustment_signal_id =
-			g_signal_connect (hadjustment,
-			                  "value-changed",
-			                  G_CALLBACK (adjustment_value_changed),
-			                  overlay);
+		g_object_set (priv->main_widget,
+		              "hadjustment", adjustment,
+		              NULL);
+
 	}
 
-	if (vadjustment != NULL)
+	g_object_notify (G_OBJECT (overlay), "hadjustment");
+}
+
+static void
+gedit_overlay_set_vadjustment (GeditOverlay  *overlay,
+                               GtkAdjustment *adjustment)
+{
+	GeditOverlayPrivate *priv = overlay->priv;
+
+	if (adjustment && priv->vadjustment == adjustment)
+		return;
+
+	if (priv->vadjustment != NULL)
 	{
-		overlay->priv->vadjustment_signal_id =
-			g_signal_connect (vadjustment,
-			                  "value-changed",
-			                  G_CALLBACK (adjustment_value_changed),
-			                  overlay);
+		g_signal_handler_disconnect (priv->vadjustment,
+		                             priv->vadjustment_signal_id);
+		g_object_unref (priv->vadjustment);
 	}
 
-	overlay->priv->hadjustment = hadjustment;
-	overlay->priv->vadjustment = vadjustment;
+	if (adjustment == NULL)
+	{
+		adjustment = gtk_adjustment_new (0.0, 0.0, 0.0,
+		                                 0.0, 0.0, 0.0);
+	}
 
-	gtk_widget_set_scroll_adjustments (overlay->priv->main_widget,
-	                                   hadjustment,
-	                                   vadjustment);
+	overlay->priv->vadjustment_signal_id =
+		g_signal_connect (adjustment,
+			          "value-changed",
+			          G_CALLBACK (adjustment_value_changed),
+			          overlay);
+
+	priv->vadjustment = g_object_ref_sink (adjustment);
+
+	if (GTK_IS_SCROLLABLE (priv->main_widget))
+	{
+		g_object_set (priv->main_widget,
+		              "vadjustment", adjustment,
+		              NULL);
+	}
+
+	g_object_notify (G_OBJECT (overlay), "vadjustment");
 }
 
 static void
@@ -396,8 +454,6 @@ gedit_overlay_class_init (GeditOverlayClass *klass)
 	container_class->forall = gedit_overlay_forall;
 	container_class->child_type = gedit_overlay_child_type;
 
-	klass->set_scroll_adjustments = gedit_overlay_set_scroll_adjustments;
-
 	g_object_class_install_property (object_class, PROP_MAIN_WIDGET,
 	                                 g_param_spec_object ("main-widget",
 	                                                      "Main Widget",
@@ -407,17 +463,12 @@ gedit_overlay_class_init (GeditOverlayClass *klass)
 	                                                      G_PARAM_CONSTRUCT_ONLY |
 	                                                      G_PARAM_STATIC_STRINGS));
 
-	signals[SET_SCROLL_ADJUSTMENTS] =
-		g_signal_new ("set-scroll-adjustments",
-		              G_OBJECT_CLASS_TYPE (object_class),
-		              G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-		              G_STRUCT_OFFSET (GeditOverlayClass, set_scroll_adjustments),
-		              NULL, NULL,
-		              gedit_marshal_VOID__OBJECT_OBJECT,
-		              G_TYPE_NONE, 2,
-		              GTK_TYPE_ADJUSTMENT,
-		              GTK_TYPE_ADJUSTMENT);
-	widget_class->set_scroll_adjustments_signal = signals[SET_SCROLL_ADJUSTMENTS];
+	g_object_class_override_property (object_class,
+					  PROP_HADJUSTMENT,
+					  "hadjustment");
+	g_object_class_override_property (object_class,
+					  PROP_VADJUSTMENT,
+					  "vadjustment");
 
 	g_type_class_add_private (object_class, sizeof (GeditOverlayPrivate));
 }
