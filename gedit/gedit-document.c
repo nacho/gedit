@@ -2176,18 +2176,18 @@ gedit_document_search_forward (GeditDocument     *doc,
 
 	if (!GEDIT_SEARCH_IS_CASE_SENSITIVE (doc->priv->search_flags))
 	{
-		search_flags = search_flags | GTK_SOURCE_SEARCH_CASE_INSENSITIVE;
+		search_flags = search_flags | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
 	}
 		
 	while (!found)
 	{
-		found = gtk_source_iter_forward_search (&iter,
-							doc->priv->search_text, 
-							search_flags,
-                        	                	&m_start, 
-                        	                	&m_end,
-                                	               	end);
-      	               	
+		found = gtk_text_iter_forward_search (&iter,
+		                                      doc->priv->search_text,
+		                                      search_flags,
+		                                      &m_start,
+		                                      &m_end,
+		                                      end);
+
 		if (found && GEDIT_SEARCH_IS_ENTIRE_WORD (doc->priv->search_flags))
 		{
 			found = gtk_text_iter_starts_word (&m_start) && 
@@ -2257,18 +2257,18 @@ gedit_document_search_backward (GeditDocument     *doc,
 
 	if (!GEDIT_SEARCH_IS_CASE_SENSITIVE (doc->priv->search_flags))
 	{
-		search_flags = search_flags | GTK_SOURCE_SEARCH_CASE_INSENSITIVE;
+		search_flags = search_flags | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
 	}
 
 	while (!found)
 	{
-		found = gtk_source_iter_backward_search (&iter,
-							 doc->priv->search_text, 
-							 search_flags,
-                        	                	 &m_start, 
-                        	                	 &m_end,
-                                	               	 start);
-      	               	
+		found = gtk_text_iter_backward_search (&iter,
+		                                       doc->priv->search_text,
+		                                       search_flags,
+		                                       &m_start,
+		                                       &m_end,
+		                                       start);
+
 		if (found && GEDIT_SEARCH_IS_ENTIRE_WORD (doc->priv->search_flags))
 		{
 			found = gtk_text_iter_starts_word (&m_start) && 
@@ -2331,7 +2331,7 @@ gedit_document_replace_all (GeditDocument       *doc,
 
 	if (!GEDIT_SEARCH_IS_CASE_SENSITIVE (flags))
 	{
-		search_flags = search_flags | GTK_SOURCE_SEARCH_CASE_INSENSITIVE;
+		search_flags = search_flags | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
 	}
 
 	replace_text_len = strlen (replace_text);
@@ -2354,12 +2354,12 @@ gedit_document_replace_all (GeditDocument       *doc,
 
 	do
 	{
-		found = gtk_source_iter_forward_search (&iter,
-							search_text, 
-							search_flags,
-                        	                	&m_start, 
-                        	                	&m_end,
-                                	               	NULL);
+		found = gtk_text_iter_forward_search (&iter,
+		                                      search_text,
+		                                      search_flags,
+		                                      &m_start,
+		                                      &m_end,
+		                                      NULL);
 
 		if (found && GEDIT_SEARCH_IS_ENTIRE_WORD (flags))
 		{
@@ -2639,7 +2639,7 @@ search_region (GeditDocument *doc,
 
 	if (!GEDIT_SEARCH_IS_CASE_SENSITIVE (doc->priv->search_flags))
 	{
-		search_flags = search_flags | GTK_SOURCE_SEARCH_CASE_INSENSITIVE;
+		search_flags = search_flags | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
 	}
 	
 	do
@@ -2647,13 +2647,13 @@ search_region (GeditDocument *doc,
 		if ((end != NULL) && gtk_text_iter_is_end (end))
 			end = NULL;
 			
-		found = gtk_source_iter_forward_search (&iter,
-							doc->priv->search_text, 
-							search_flags,
-                        	                	&m_start, 
-                        	                	&m_end,
-                                	               	end);
-				
+		found = gtk_text_iter_forward_search (&iter,
+		                                      doc->priv->search_text,
+		                                      search_flags,
+		                                      &m_start,
+		                                      &m_end,
+		                                      end);
+
 		iter = m_end;
 						      	               	
 		if (found && GEDIT_SEARCH_IS_ENTIRE_WORD (doc->priv->search_flags))
