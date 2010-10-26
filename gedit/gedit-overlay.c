@@ -51,6 +51,11 @@ struct _GeditOverlayPrivate
 	glong          vadjustment_signal_id;
 
 	GeditTheatricsStage *stage;
+
+	/* GtkScrollablePolicy needs to be checked when
+	 * driving the scrollable adjustment values */
+	guint hscroll_policy : 1;
+	guint vscroll_policy : 1;
 };
 
 enum
@@ -58,7 +63,9 @@ enum
 	PROP_0,
 	PROP_MAIN_WIDGET,
 	PROP_HADJUSTMENT,
-	PROP_VADJUSTMENT
+	PROP_VADJUSTMENT,
+	PROP_HSCROLL_POLICY,
+	PROP_VSCROLL_POLICY
 };
 
 static void	gedit_overlay_set_hadjustment		(GeditOverlay  *overlay,
@@ -158,6 +165,14 @@ gedit_overlay_get_property (GObject    *object,
 			g_value_set_object (value, priv->vadjustment);
 			break;
 
+		case PROP_HSCROLL_POLICY:
+			g_value_set_enum (value, priv->hscroll_policy);
+			break;
+
+		case PROP_VSCROLL_POLICY:
+			g_value_set_enum (value, priv->vscroll_policy);
+			break;
+
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -171,6 +186,7 @@ gedit_overlay_set_property (GObject      *object,
                             GParamSpec   *pspec)
 {
 	GeditOverlay *overlay = GEDIT_OVERLAY (object);
+	GeditOverlayPrivate *priv = overlay->priv;
 
 	switch (prop_id)
 	{
@@ -190,6 +206,16 @@ gedit_overlay_set_property (GObject      *object,
 		case PROP_VADJUSTMENT:
 			gedit_overlay_set_vadjustment (overlay,
 						       g_value_get_object (value));
+			break;
+
+		case PROP_HSCROLL_POLICY:
+			priv->hscroll_policy = g_value_get_enum (value);
+			gtk_widget_queue_resize (GTK_WIDGET (overlay));
+			break;
+
+		case PROP_VSCROLL_POLICY:
+			priv->vscroll_policy = g_value_get_enum (value);
+			gtk_widget_queue_resize (GTK_WIDGET (overlay));
 			break;
 
 		default:
@@ -377,9 +403,9 @@ gedit_overlay_set_hadjustment (GeditOverlay  *overlay,
 
 	priv->hadjustment_signal_id =
 		g_signal_connect (adjustment,
-			          "value-changed",
-			          G_CALLBACK (adjustment_value_changed),
-			          overlay);
+		                  "value-changed",
+		                  G_CALLBACK (adjustment_value_changed),
+		                  overlay);
 
 	priv->hadjustment = g_object_ref_sink (adjustment);
 
@@ -418,9 +444,9 @@ gedit_overlay_set_vadjustment (GeditOverlay  *overlay,
 
 	overlay->priv->vadjustment_signal_id =
 		g_signal_connect (adjustment,
-			          "value-changed",
-			          G_CALLBACK (adjustment_value_changed),
-			          overlay);
+		                  "value-changed",
+		                  G_CALLBACK (adjustment_value_changed),
+		                  overlay);
 
 	priv->vadjustment = g_object_ref_sink (adjustment);
 
@@ -464,11 +490,17 @@ gedit_overlay_class_init (GeditOverlayClass *klass)
 	                                                      G_PARAM_STATIC_STRINGS));
 
 	g_object_class_override_property (object_class,
-					  PROP_HADJUSTMENT,
-					  "hadjustment");
+	                                  PROP_HADJUSTMENT,
+	                                  "hadjustment");
 	g_object_class_override_property (object_class,
-					  PROP_VADJUSTMENT,
-					  "vadjustment");
+	                                  PROP_VADJUSTMENT,
+	                                  "vadjustment");
+	g_object_class_override_property (object_class,
+	                                  PROP_HSCROLL_POLICY,
+	                                  "hscroll-policy");
+	g_object_class_override_property (object_class,
+	                                  PROP_VSCROLL_POLICY,
+	                                  "vscroll-policy");
 
 	g_type_class_add_private (object_class, sizeof (GeditOverlayPrivate));
 }
