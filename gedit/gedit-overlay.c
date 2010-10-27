@@ -166,11 +166,27 @@ gedit_overlay_get_property (GObject    *object,
 			break;
 
 		case PROP_HSCROLL_POLICY:
-			g_value_set_enum (value, priv->hscroll_policy);
+			if (GTK_IS_SCROLLABLE (priv->main_widget))
+			{
+				g_value_set_enum (value,
+				                  gtk_scrollable_get_hscroll_policy (GTK_SCROLLABLE (priv->main_widget)));
+			}
+			else
+			{
+				g_value_set_enum (value, priv->hscroll_policy);
+			}
 			break;
 
 		case PROP_VSCROLL_POLICY:
-			g_value_set_enum (value, priv->vscroll_policy);
+			if (GTK_IS_SCROLLABLE (priv->main_widget))
+			{
+				g_value_set_enum (value,
+				                  gtk_scrollable_get_vscroll_policy (GTK_SCROLLABLE (priv->main_widget)));
+			}
+			else
+			{
+				g_value_set_enum (value, priv->vscroll_policy);
+			}
 			break;
 
 		default:
@@ -209,13 +225,29 @@ gedit_overlay_set_property (GObject      *object,
 			break;
 
 		case PROP_HSCROLL_POLICY:
-			priv->hscroll_policy = g_value_get_enum (value);
-			gtk_widget_queue_resize (GTK_WIDGET (overlay));
+			if (GTK_IS_SCROLLABLE (priv->main_widget))
+			{
+				gtk_scrollable_set_hscroll_policy (GTK_SCROLLABLE (priv->main_widget),
+				                                   g_value_get_enum (value));
+			}
+			else
+			{
+				priv->hscroll_policy = g_value_get_enum (value);
+				gtk_widget_queue_resize (GTK_WIDGET (overlay));
+			}
 			break;
 
 		case PROP_VSCROLL_POLICY:
-			priv->vscroll_policy = g_value_get_enum (value);
-			gtk_widget_queue_resize (GTK_WIDGET (overlay));
+			if (GTK_IS_SCROLLABLE (priv->main_widget))
+			{
+				gtk_scrollable_set_vscroll_policy (GTK_SCROLLABLE (priv->main_widget),
+				                                   g_value_get_enum (value));
+			}
+			else
+			{
+				priv->vscroll_policy = g_value_get_enum (value);
+				gtk_widget_queue_resize (GTK_WIDGET (overlay));
+			}
 			break;
 
 		default:
