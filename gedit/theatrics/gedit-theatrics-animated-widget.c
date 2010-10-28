@@ -230,44 +230,69 @@ gedit_theatrics_animated_widget_realize (GtkWidget *widget)
 }
 
 static void
-gedit_theatrics_animated_widget_size_request (GtkWidget      *widget,
-					      GtkRequisition *requisition)
+gedit_theatrics_animated_widget_get_preferred_width (GtkWidget *widget,
+                                                     gint      *minimum,
+                                                     gint      *natural)
 {
 	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (widget);
 	gint width;
-	gint height;
 
 	if (aw->priv->widget != NULL)
 	{
-		GtkRequisition req;
+		gint child_min, child_nat;
 
-		gtk_widget_get_preferred_size (aw->priv->widget,
-		                               &req, NULL);
-		aw->priv->widget_alloc.width = req.width;
-		aw->priv->widget_alloc.height = req.height;
+		gtk_widget_get_preferred_width (aw->priv->widget,
+		                                &child_min, &child_nat);
+		aw->priv->widget_alloc.width = child_min;
 	}
 
 	if (aw->priv->orientation == GTK_ORIENTATION_HORIZONTAL)
 	{
 		width = gedit_theatrics_choreographer_pixel_compose (aw->priv->percent,
-								     aw->priv->widget_alloc.width +
-								     aw->priv->start_padding +
-								     aw->priv->end_padding,
-								     aw->priv->easing);
-		height = aw->priv->widget_alloc.height;
+		                                                     aw->priv->widget_alloc.width +
+		                                                     aw->priv->start_padding +
+		                                                     aw->priv->end_padding,
+		                                                     aw->priv->easing);
 	}
 	else
 	{
 		width = aw->priv->widget_alloc.width;
-		height = gedit_theatrics_choreographer_pixel_compose (aw->priv->percent,
-								      aw->priv->widget_alloc.height +
-								      aw->priv->start_padding +
-								      aw->priv->end_padding,
-								      aw->priv->easing);
 	}
 
-	requisition->width = width;
-	requisition->height = height;
+	*minimum = *natural = width;
+}
+
+static void
+gedit_theatrics_animated_widget_get_preferred_height (GtkWidget *widget,
+                                                      gint      *minimum,
+                                                      gint      *natural)
+{
+	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (widget);
+	gint height;
+
+	if (aw->priv->widget != NULL)
+	{
+		gint child_min, child_nat;
+
+		gtk_widget_get_preferred_height (aw->priv->widget,
+		                                 &child_min, &child_nat);
+		aw->priv->widget_alloc.height = child_min;
+	}
+
+	if (aw->priv->orientation == GTK_ORIENTATION_HORIZONTAL)
+	{
+		height = aw->priv->widget_alloc.height;
+	}
+	else
+	{
+		height = gedit_theatrics_choreographer_pixel_compose (aw->priv->percent,
+		                                                      aw->priv->widget_alloc.height +
+		                                                      aw->priv->start_padding +
+		                                                      aw->priv->end_padding,
+		                                                      aw->priv->easing);
+	}
+
+	*minimum = *natural = height;
 }
 
 static void
@@ -374,7 +399,8 @@ gedit_theatrics_animated_widget_class_init (GeditTheatricsAnimatedWidgetClass *k
 	object_class->set_property = gedit_theatrics_animated_widget_set_property;
 
 	widget_class->realize = gedit_theatrics_animated_widget_realize;
-	widget_class->size_request = gedit_theatrics_animated_widget_size_request;
+	widget_class->get_preferred_width = gedit_theatrics_animated_widget_get_preferred_width;
+	widget_class->get_preferred_height = gedit_theatrics_animated_widget_get_preferred_height;
 	widget_class->size_allocate = gedit_theatrics_animated_widget_size_allocate;
 	widget_class->draw = gedit_theatrics_animated_widget_draw;
 
