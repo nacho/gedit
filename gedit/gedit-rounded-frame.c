@@ -46,8 +46,9 @@ gedit_rounded_frame_finalize (GObject *object)
 }
 
 static void
-gedit_rounded_frame_size_request (GtkWidget      *widget,
-                                  GtkRequisition *requisition)
+gedit_rounded_frame_get_preferred_width (GtkWidget *widget,
+                                         gint      *minimum,
+                                         gint      *natural)
 {
 	GeditRoundedFrame *frame = GEDIT_ROUNDED_FRAME (widget);
 	gint border_width;
@@ -55,25 +56,53 @@ gedit_rounded_frame_size_request (GtkWidget      *widget,
 	if (frame->priv->child != NULL &&
 	    gtk_widget_get_visible (frame->priv->child))
 	{
-		GtkRequisition child_requisition;
+		gint child_min, child_nat;
 
-		/* Add the child's width/height */
-		gtk_widget_get_preferred_size (frame->priv->child,
-		                               &child_requisition, NULL);
+		gtk_widget_get_preferred_width (frame->priv->child, &child_min,
+		                                &child_nat);
 
-		requisition->width = MAX (0, child_requisition.width);
-		requisition->height = child_requisition.height;
+		*minimum = MAX (0, child_min);
+		*natural = MAX (0, child_nat);
 	}
 	else
 	{
-		requisition->width = 0;
-		requisition->height = 0;
+		*minimum = *natural = 0;
 	}
 
 	/* Add the border */
 	border_width = gtk_container_get_border_width (GTK_CONTAINER (widget));
-	requisition->width += (border_width + frame->priv->frame_width) * 2;
-	requisition->height += (border_width + frame->priv->frame_width) * 2;
+	*minimum += (border_width + frame->priv->frame_width) * 2;
+	*natural += (border_width + frame->priv->frame_width) * 2;
+}
+
+static void
+gedit_rounded_frame_get_preferred_height (GtkWidget *widget,
+                                          gint      *minimum,
+                                          gint      *natural)
+{
+	GeditRoundedFrame *frame = GEDIT_ROUNDED_FRAME (widget);
+	gint border_width;
+
+	if (frame->priv->child != NULL &&
+	    gtk_widget_get_visible (frame->priv->child))
+	{
+		gint child_min, child_nat;
+
+		gtk_widget_get_preferred_height (frame->priv->child, &child_min,
+		                                 &child_nat);
+
+		*minimum = MAX (0, child_min);
+		*natural = MAX (0, child_nat);
+	}
+	else
+	{
+		*minimum = *natural = 0;
+	}
+
+	/* Add the border */
+	border_width = gtk_container_get_border_width (GTK_CONTAINER (widget));
+	*minimum += (border_width + frame->priv->frame_width) * 2;
+	*natural += (border_width + frame->priv->frame_width) * 2;
 }
 
 static void
@@ -192,7 +221,8 @@ gedit_rounded_frame_class_init (GeditRoundedFrameClass *klass)
 
 	object_class->finalize = gedit_rounded_frame_finalize;
 
-	widget_class->size_request = gedit_rounded_frame_size_request;
+	widget_class->get_preferred_width = gedit_rounded_frame_get_preferred_width;
+	widget_class->get_preferred_height = gedit_rounded_frame_get_preferred_height;
 	widget_class->size_allocate = gedit_rounded_frame_size_allocate;
 	widget_class->draw = gedit_rounded_frame_draw;
 
