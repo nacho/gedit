@@ -861,10 +861,13 @@ gedit_view_drag_data_received (GtkWidget        *widget,
 		   because we can have several notebooks per window */
 		new_notebook = get_notebook_from_view (widget);
 
-		gedit_notebook_move_tab (GEDIT_NOTEBOOK (notebook),
-		                         GEDIT_NOTEBOOK (new_notebook),
-		                         GEDIT_TAB (page),
-		                         0);
+		if (notebook != new_notebook)
+		{
+			gedit_notebook_move_tab (GEDIT_NOTEBOOK (notebook),
+				                 GEDIT_NOTEBOOK (new_notebook),
+				                 GEDIT_TAB (page),
+				                 0);
+		}
 
 		gtk_drag_finish (context, TRUE, TRUE, timestamp);
 	}
