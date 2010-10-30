@@ -351,8 +351,7 @@ gedit_file_browser_widget_finalize (GObject *object)
 	g_object_unref (obj->priv->bookmarks_store);
 	g_object_unref (obj->priv->combo_model);
 
-	g_slist_foreach (obj->priv->filter_funcs, (GFunc)filter_func_free, NULL);
-	g_slist_free (obj->priv->filter_funcs);
+	g_slist_free_full (obj->priv->filter_funcs, (GDestroyNotify) filter_func_free);
 
 	for (loc = obj->priv->locations; loc; loc = loc->next)
 		location_free ((Location *) (loc->data));
@@ -1357,8 +1356,7 @@ gedit_file_browser_widget_get_first_selected (GeditFileBrowserWidget *obj,
 
 	result = gtk_tree_model_get_iter (model, iter, (GtkTreePath *)(rows->data));
 
-	g_list_foreach (rows, (GFunc)gtk_tree_path_free, NULL);
-	g_list_free (rows);
+	g_list_free_full (rows, (GDestroyNotify) gtk_tree_path_free);
 
 	return result;
 }
@@ -1498,8 +1496,7 @@ get_deletable_files (GeditFileBrowserWidget *obj) {
 		paths = g_list_append (paths, gtk_tree_path_copy (path));
 	}
 
-	g_list_foreach (rows, (GFunc)gtk_tree_path_free, NULL);
-	g_list_free (rows);
+	g_list_free_full (rows, (GDestroyNotify) gtk_tree_path_free);
 
 	return paths;
 }
@@ -1534,8 +1531,7 @@ delete_selected_files (GeditFileBrowserWidget *obj,
 	result = gedit_file_browser_store_delete_all (GEDIT_FILE_BROWSER_STORE (model),
 						      rows, trash);
 
-	g_list_foreach (rows, (GFunc)gtk_tree_path_free, NULL);
-	g_list_free (rows);
+	g_list_free_full (rows, (GDestroyNotify) gtk_tree_path_free);
 
 	return result == GEDIT_FILE_BROWSER_STORE_RESULT_OK;
 }
@@ -2112,8 +2108,7 @@ gedit_file_browser_widget_get_num_selected_files_or_directories (GeditFileBrowse
 		}
 	}
 
-	g_list_foreach (rows, (GFunc)gtk_tree_path_free, NULL);
-	g_list_free (rows);
+	g_list_free_full (rows, (GDestroyNotify) gtk_tree_path_free);
 
 	return result;
 }
@@ -2231,8 +2226,7 @@ try_activate_drive (GeditFileBrowserWidget *widget,
 		try_mount_volume (widget, volume);
 	}
 
-	g_list_foreach (volumes, (GFunc)g_object_unref, NULL);
-	g_list_free (volumes);
+	g_list_free_full (volumes, g_object_unref);
 }
 
 static void

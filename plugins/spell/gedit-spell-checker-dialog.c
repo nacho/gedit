@@ -400,38 +400,33 @@ gedit_spell_checker_dialog_set_misspelled_word (GeditSpellCheckerDialog *dlg,
 {
 	gchar *tmp;
 	GSList *sug;
-	
+
 	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
 	g_return_if_fail (word != NULL);
 
 	g_return_if_fail (dlg->spell_checker != NULL);
 	g_return_if_fail (!gedit_spell_checker_check_word (dlg->spell_checker, word, -1));
 
-	/* build_suggestions_list */
-	if (dlg->misspelled_word != NULL)
-		g_free (dlg->misspelled_word);
-
+	g_free (dlg->misspelled_word);
 	dlg->misspelled_word = g_strdup (word);
-	
+
 	tmp = g_strdup_printf("<b>%s</b>", word);
 	gtk_label_set_label (GTK_LABEL (dlg->misspelled_word_label), tmp);
 	g_free (tmp);
 
 	sug = gedit_spell_checker_get_suggestions (dlg->spell_checker,
-		       				   dlg->misspelled_word, 
-		       				   -1);
-	
+						   dlg->misspelled_word, 
+						   -1);
+
 	update_suggestions_list_model (dlg, sug);
 
-	/* free the suggestion list */
-	g_slist_foreach (sug, (GFunc)g_free, NULL);
-	g_slist_free (sug);
+	g_slist_free_full (sug, g_free);
 
 	gtk_widget_set_sensitive (dlg->ignore_button, TRUE);
 	gtk_widget_set_sensitive (dlg->ignore_all_button, TRUE);
-	gtk_widget_set_sensitive (dlg->add_word_button, TRUE);	
+	gtk_widget_set_sensitive (dlg->add_word_button, TRUE);
 }
-	
+
 static void
 update_suggestions_list_model (GeditSpellCheckerDialog *dlg, GSList *suggestions)
 {
@@ -542,18 +537,18 @@ check_word_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 {
 	const gchar *word;
 	gssize len;
-	
+
 	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
 
 	word = gtk_entry_get_text (GTK_ENTRY (dlg->word_entry));
 	len = strlen (word);
 	g_return_if_fail (len > 0);
-	
+
 	if (gedit_spell_checker_check_word (dlg->spell_checker, word, len))
 	{
 		GtkListStore *store;
 		GtkTreeIter iter;
-		
+
 		store = GTK_LIST_STORE (dlg->suggestions_list_model);
 		gtk_list_store_clear (store);
 
@@ -575,9 +570,7 @@ check_word_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 	
 		update_suggestions_list_model (dlg, sug);
 
-		/* free the suggestion list */
-		g_slist_foreach (sug, (GFunc)g_free, NULL);
-		g_slist_free (sug);
+		g_slist_free_full (sug, g_free);
 	}
 }
 

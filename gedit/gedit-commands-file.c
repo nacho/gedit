@@ -419,9 +419,7 @@ open_dialog_response_cb (GeditFileChooserDialog *dialog,
 	                                        0);
 
 	g_slist_free (loaded);
-
-	g_slist_foreach (files, (GFunc) g_object_unref, NULL);
-	g_slist_free (files);
+	g_slist_free_full (files, g_object_unref);
 }
 
 void

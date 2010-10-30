@@ -67,16 +67,13 @@ G_DEFINE_TYPE (GeditCommandLine, gedit_command_line, G_TYPE_INITIALLY_UNOWNED)
 static void
 gedit_command_line_finalize (GObject *object)
 {
-	GeditCommandLine *command_line = GEDIT_COMMAND_LINE (object);
+	GeditCommandLinePrivate *priv = GEDIT_COMMAND_LINE (object)->priv;
 
-	g_free (command_line->priv->encoding_charset);
-	g_free (command_line->priv->line_column_position);
-	g_strfreev (command_line->priv->remaining_args);
-
-	g_free (command_line->priv->geometry);
-
-	g_slist_foreach (command_line->priv->file_list, (GFunc)g_object_unref, NULL);
-	g_slist_free (command_line->priv->file_list);
+	g_free (priv->encoding_charset);
+	g_free (priv->line_column_position);
+	g_strfreev (priv->remaining_args);
+	g_free (priv->geometry);
+	g_slist_free_full (priv->file_list, g_object_unref);
 
 	G_OBJECT_CLASS (gedit_command_line_parent_class)->finalize (object);
 }

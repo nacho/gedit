@@ -98,8 +98,7 @@ get_window(NSAppleEventDescriptor *event)
 		GeditWindow *window = get_window (event);
 		gedit_commands_load_uris (window, uris, NULL, 0);
 
-		g_slist_foreach (uris, (GFunc)g_free, NULL);
-		g_slist_free (uris);
+		g_slist_free_full (uris, g_free);
 	}
 }
 

@@ -1447,9 +1447,7 @@ update_recent_files_menu (GeditWindow *window)
 	}
 
 	g_list_free (filtered_items);
-
-	g_list_foreach (items, (GFunc) gtk_recent_info_unref, NULL);
-	g_list_free (items);
+	g_list_free_full (items, (GDestroyNotify) gtk_recent_info_unref);
 }
 
 static void
@@ -3014,9 +3012,7 @@ load_uris_from_drop (GeditWindow  *window,
 	                                        0);
 
 	g_slist_free (loaded);
-
-	g_slist_foreach (locations, (GFunc) g_object_unref, NULL);
-	g_slist_free (locations);
+	g_slist_free_full (locations, g_object_unref);
 }
 
 /* Handle drops on the GeditWindow */
