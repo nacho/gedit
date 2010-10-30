@@ -454,7 +454,7 @@ add_notebook (GeditMultiNotebook *mnb,
 		GtkAllocation allocation;
 		GtkWidget *active_notebook = mnb->priv->active_notebook;
 
-		paned = gtk_hpaned_new ();
+		paned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
 		gtk_widget_show (paned);
 
 		/* First we remove the active container from its parent to make

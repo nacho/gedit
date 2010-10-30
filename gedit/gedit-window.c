@@ -4119,14 +4119,14 @@ gedit_window_init (GeditWindow *window)
 
 	/* Add the main area */
 	gedit_debug_message (DEBUG_WINDOW, "Add main area");		
-	window->priv->hpaned = gtk_hpaned_new ();
+	window->priv->hpaned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
   	gtk_box_pack_start (GTK_BOX (main_box), 
   			    window->priv->hpaned, 
   			    TRUE, 
   			    TRUE, 
   			    0);
 
-	window->priv->vpaned = gtk_vpaned_new ();
+	window->priv->vpaned = gtk_paned_new (GTK_ORIENTATION_VERTICAL);
   	gtk_paned_pack2 (GTK_PANED (window->priv->hpaned), 
   			 window->priv->vpaned, 
   			 TRUE, 
