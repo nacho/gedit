@@ -2245,13 +2245,13 @@ clone_window (GeditWindow *origin)
 static void
 bracket_matched_cb (GtkSourceBuffer           *buffer,
 		    GtkTextIter               *iter,
-		    GtkSourceBracketMatchType *result,
+		    GtkSourceBracketMatchType  result,
 		    GeditWindow               *window)
 {
 	if (buffer != GTK_SOURCE_BUFFER (gedit_window_get_active_document (window)))
 		return;
 
-	switch (*result)
+	switch (result)
 	{
 		case GTK_SOURCE_BRACKET_MATCH_NONE:
 			gtk_statusbar_pop (GTK_STATUSBAR (window->priv->statusbar),
