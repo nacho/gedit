@@ -38,7 +38,6 @@
 #include <stdlib.h>
 
 #include <glib/gi18n.h>
-#include <gtksourceview/gtksourceiter.h>
 
 #include "gedit-settings.h"
 #include "gedit-document.h"
@@ -2146,7 +2145,7 @@ gedit_document_search_forward (GeditDocument     *doc,
 			       GtkTextIter       *match_end)
 {
 	GtkTextIter iter;
-	GtkSourceSearchFlags search_flags;
+	GtkTextSearchFlags search_flags;
 	gboolean found = FALSE;
 	GtkTextIter m_start;
 	GtkTextIter m_end;
@@ -2172,7 +2171,7 @@ gedit_document_search_forward (GeditDocument     *doc,
 	else
 		iter = *start;
 		
-	search_flags = GTK_SOURCE_SEARCH_VISIBLE_ONLY | GTK_SOURCE_SEARCH_TEXT_ONLY;
+	search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 
 	if (!GEDIT_SEARCH_IS_CASE_SENSITIVE (doc->priv->search_flags))
 	{
@@ -2227,7 +2226,7 @@ gedit_document_search_backward (GeditDocument     *doc,
 				GtkTextIter       *match_end)
 {
 	GtkTextIter iter;
-	GtkSourceSearchFlags search_flags;
+	GtkTextSearchFlags search_flags;
 	gboolean found = FALSE;
 	GtkTextIter m_start;
 	GtkTextIter m_end;
@@ -2253,7 +2252,7 @@ gedit_document_search_backward (GeditDocument     *doc,
 	else
 		iter = *end;
 		
-	search_flags = GTK_SOURCE_SEARCH_VISIBLE_ONLY | GTK_SOURCE_SEARCH_TEXT_ONLY;
+	search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 
 	if (!GEDIT_SEARCH_IS_CASE_SENSITIVE (doc->priv->search_flags))
 	{
@@ -2302,7 +2301,7 @@ gedit_document_replace_all (GeditDocument       *doc,
 	GtkTextIter iter;
 	GtkTextIter m_start;
 	GtkTextIter m_end;
-	GtkSourceSearchFlags search_flags = 0;
+	GtkTextSearchFlags search_flags = 0;
 	gboolean found = TRUE;
 	gint cont = 0;
 	gchar *search_text;
@@ -2327,7 +2326,7 @@ gedit_document_replace_all (GeditDocument       *doc,
 
 	gtk_text_buffer_get_start_iter (buffer, &iter);
 
-	search_flags = GTK_SOURCE_SEARCH_VISIBLE_ONLY | GTK_SOURCE_SEARCH_TEXT_ONLY;
+	search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 
 	if (!GEDIT_SEARCH_IS_CASE_SENSITIVE (flags))
 	{
@@ -2570,8 +2569,8 @@ search_region (GeditDocument *doc,
 {
 	GtkTextIter iter;
 	GtkTextIter m_start;
-	GtkTextIter m_end;	
-	GtkSourceSearchFlags search_flags = 0;
+	GtkTextIter m_end;
+	GtkTextSearchFlags search_flags = 0;
 	gboolean found = TRUE;
 
 	GtkTextBuffer *buffer;	
@@ -2635,7 +2634,7 @@ search_region (GeditDocument *doc,
 
 	iter = *start;
 		
-	search_flags = GTK_SOURCE_SEARCH_VISIBLE_ONLY | GTK_SOURCE_SEARCH_TEXT_ONLY;
+	search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 
 	if (!GEDIT_SEARCH_IS_CASE_SENSITIVE (doc->priv->search_flags))
 	{
