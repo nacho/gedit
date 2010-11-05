@@ -827,7 +827,7 @@ window_from_display_arguments (gboolean           new_window,
                                DisplayParameters *dparams,
                                gboolean           create)
 {
-	GdkScreen *screen;
+	GdkScreen *screen = NULL;
 	GeditApp *app;
 	GeditWindow *ret;
 
