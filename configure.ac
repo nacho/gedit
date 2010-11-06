@@ -416,7 +416,6 @@ plugins/pythonconsole/org.gnome.gedit.plugins.pythonconsole.gschema.xml.in
 plugins/pythonconsole/pythonconsole/Makefile
 plugins/sort/Makefile
 plugins/spell/Makefile
-plugins/taglist/Makefile
 plugins/time/org.gnome.gedit.plugins.time.gschema.xml.in
 plugins/time/Makefile
 po/Makefile.in

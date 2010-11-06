@@ -7,7 +7,6 @@ DIST_SUBDIRS = \
 	pythonconsole	\
 	sort		\
 	spell 		\
-	taglist		\
 	time
 
 #	externaltools
@@ -21,7 +20,6 @@ SUBDIRS = \
 	modelines	\
 	pythonconsole	\
 	sort		\
-	taglist		\
 	time
 
 #	quickopen
