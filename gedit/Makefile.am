@@ -265,16 +265,6 @@ EXTRA_DIST = 				\
 
 CLEANFILES = $(BUILT_SOURCES)
 
-theatrics_files =						\
-	./theatrics/gedit-theatrics-actor.h			\
-	./theatrics/gedit-theatrics-actor.c			\
-	./theatrics/gedit-theatrics-animated-widget.h		\
-	./theatrics/gedit-theatrics-animated-widget.c		\
-	./theatrics/gedit-theatrics-choreographer.h		\
-	./theatrics/gedit-theatrics-choreographer.c		\
-	./theatrics/gedit-theatrics-stage.h			\
-	./theatrics/gedit-theatrics-stage.c
-
 if HAVE_INTROSPECTION
 -include $(INTROSPECTION_MAKEFILE)
 INTROSPECTION_GIRS = Gedit-3.0.gir
