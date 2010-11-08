@@ -407,6 +407,10 @@ plugins/Makefile
 plugins/changecase/Makefile
 plugins/checkupdate/org.gnome.gedit.plugins.checkupdate.gschema.xml.in
 plugins/checkupdate/Makefile
+plugins/externaltools/data/Makefile
+plugins/externaltools/Makefile
+plugins/externaltools/scripts/Makefile
+plugins/externaltools/tools/Makefile
 plugins/docinfo/Makefile
 plugins/filebrowser/org.gnome.gedit.plugins.filebrowser.gschema.xml.in
 plugins/filebrowser/Makefile
@@ -414,6 +418,12 @@ plugins/modelines/Makefile
 plugins/pythonconsole/Makefile
 plugins/pythonconsole/org.gnome.gedit.plugins.pythonconsole.gschema.xml.in
 plugins/pythonconsole/pythonconsole/Makefile
+plugins/quickopen/Makefile
+plugins/quickopen/quickopen/Makefile
+plugins/snippets/data/lang/Makefile
+plugins/snippets/data/Makefile
+plugins/snippets/Makefile
+plugins/snippets/snippets/Makefile
 plugins/sort/Makefile
 plugins/spell/Makefile
 plugins/time/org.gnome.gedit.plugins.time.gschema.xml.in
@@ -424,17 +434,6 @@ win32/gedit.iss
 win32/Makefile
 osx/Info.plist
 osx/Makefile])
-
-#plugins/externaltools/data/Makefile
-#plugins/externaltools/Makefile
-#plugins/externaltools/scripts/Makefile
-#plugins/externaltools/tools/Makefile
-#plugins/quickopen/Makefile
-#plugins/quickopen/quickopen/Makefile
-#plugins/snippets/data/lang/Makefile
-#plugins/snippets/data/Makefile
-#plugins/snippets/Makefile
-#plugins/snippets/snippets/Makefile
 
 AC_OUTPUT
 

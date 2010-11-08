@@ -2,16 +2,15 @@ DIST_SUBDIRS = \
 	changecase	\
 	checkupdate	\
 	docinfo		\
+	externaltools	\
 	filebrowser	\
 	modelines	\
 	pythonconsole	\
+	quickopen	\
+	snippets	\
 	sort		\
 	spell 		\
 	time
-
-#	externaltools
-#	quickopen
-#	snippets
 
 SUBDIRS = \
 	changecase	\
