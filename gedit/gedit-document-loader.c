@@ -624,6 +624,9 @@ async_read_cb (GInputStream *stream,
 	/* end of the file, we are done! */
 	if (async->read == 0)
 	{
+		/* flush the stream to ensure proper line ending detection */
+		g_output_stream_flush (loader->priv->output, NULL, NULL);
+
 		loader->priv->auto_detected_encoding =
 			gedit_smart_charset_converter_get_guessed (loader->priv->converter);
 
