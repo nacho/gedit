@@ -1086,4 +1086,4 @@ gedit_document_saver_get_info (GeditDocumentSaver *saver)
 	return saver->priv->info;
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

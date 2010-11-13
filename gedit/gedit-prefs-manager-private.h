@@ -43,4 +43,4 @@ extern GeditPrefsManager *gedit_prefs_manager;
 #endif /* __GEDIT_PREFS_MANAGER_PRIVATE_H__ */
 
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

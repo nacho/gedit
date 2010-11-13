@@ -445,4 +445,4 @@ gedit_command_line_get_geometry (GeditCommandLine *command_line)
 	return command_line->priv->geometry;
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

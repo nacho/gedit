@@ -129,4 +129,4 @@ gedit_app_win32_init (GeditAppWin32 *self)
 	gtk_window_set_default_icon_name ("accessories-text-editor");
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

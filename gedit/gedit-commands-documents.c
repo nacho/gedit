@@ -104,4 +104,4 @@ _gedit_cmd_documents_next_tab_group (GtkAction   *action,
 	gedit_multi_notebook_next_notebook (GEDIT_MULTI_NOTEBOOK (_gedit_window_get_multi_notebook (window)));
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

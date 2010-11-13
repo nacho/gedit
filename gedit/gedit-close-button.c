@@ -78,4 +78,4 @@ gedit_close_button_new ()
 	return GTK_WIDGET (button);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

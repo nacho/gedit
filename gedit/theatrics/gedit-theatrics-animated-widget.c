@@ -642,4 +642,4 @@ gedit_theatrics_animated_widget_set_end_padding (GeditTheatricsAnimatedWidget *a
 	aw->priv->end_padding = end_padding;
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

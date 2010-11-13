@@ -3090,4 +3090,4 @@ gedit_document_set_metadata (GeditDocument *doc,
 }
 #endif
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

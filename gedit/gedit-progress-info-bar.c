@@ -241,4 +241,4 @@ gedit_progress_info_bar_pulse (GeditProgressInfoBar *bar)
 	gtk_progress_bar_pulse (GTK_PROGRESS_BAR (bar->priv->progress));
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

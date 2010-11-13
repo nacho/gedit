@@ -158,4 +158,4 @@ EggDesktopFile *egg_get_desktop_file                  (void);
 G_END_DECLS
 
 #endif /* __EGG_DESKTOP_FILE_H__ */
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

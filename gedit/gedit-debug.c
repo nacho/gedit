@@ -160,4 +160,4 @@ void gedit_debug (GeditDebugSection  section,
 	}
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

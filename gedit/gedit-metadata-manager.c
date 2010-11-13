@@ -580,4 +580,4 @@ gedit_metadata_manager_save (gpointer data)
 	return FALSE;
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

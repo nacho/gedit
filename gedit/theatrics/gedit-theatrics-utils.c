@@ -128,4 +128,4 @@ gedit_theatrics_utils_draw_round_rectangle (cairo_t *cr,
 	cairo_close_path (cr);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

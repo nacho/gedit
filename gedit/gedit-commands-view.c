@@ -139,4 +139,4 @@ _gedit_cmd_view_leave_fullscreen_mode (GtkAction   *action,
 					   window);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

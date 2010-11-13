@@ -522,4 +522,4 @@ _gedit_encoding_list_to_strv (const GSList *enc_list)
 	return (gchar **)g_ptr_array_free (array, FALSE);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

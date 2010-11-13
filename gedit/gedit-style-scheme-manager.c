@@ -362,4 +362,4 @@ _gedit_style_scheme_manager_uninstall_scheme (GtkSourceStyleSchemeManager *manag
 	return TRUE;	
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

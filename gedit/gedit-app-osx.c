@@ -165,4 +165,4 @@ gedit_app_osx_init (GeditAppOSX *self)
 	gtk_window_set_default_icon_name ("accessories-text-editor");
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

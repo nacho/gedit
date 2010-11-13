@@ -2946,4 +2946,4 @@ _gedit_tab_get_view_frame (GeditTab *tab)
 	return GTK_WIDGET (tab->priv->frame);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

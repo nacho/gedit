@@ -1341,4 +1341,4 @@ gedit_print_preview_new (GtkPrintOperation        *op,
 	return GTK_WIDGET (preview);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

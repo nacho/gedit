@@ -422,4 +422,4 @@ gedit_smart_charset_converter_get_num_fallbacks (GeditSmartCharsetConverter *sma
 	return g_charset_converter_get_num_fallbacks (smart->priv->charset_conv) != 0;
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

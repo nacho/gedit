@@ -65,4 +65,4 @@ G_END_DECLS
 
 #endif /* __GEDIT_SMART_CHARSET_CONVERTER_H__ */
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

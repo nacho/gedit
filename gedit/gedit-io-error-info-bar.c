@@ -1223,4 +1223,4 @@ gedit_externally_modified_info_bar_new (GFile    *location,
 	return info_bar;
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

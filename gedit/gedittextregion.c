@@ -645,4 +645,4 @@ gedit_text_region_debug_print (GeditTextRegion *region)
 	g_print ("\n");
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

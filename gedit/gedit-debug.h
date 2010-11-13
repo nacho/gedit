@@ -94,4 +94,4 @@ void gedit_debug_message (GeditDebugSection  section,
 
 
 #endif /* __GEDIT_DEBUG_H__ */
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

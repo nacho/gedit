@@ -526,4 +526,4 @@ gedit_encodings_dialog_new (void)
 	return dlg;
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

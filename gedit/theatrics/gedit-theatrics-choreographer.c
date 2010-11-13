@@ -82,4 +82,4 @@ gedit_theatrics_choreographer_compose (gdouble                           percent
 	}
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

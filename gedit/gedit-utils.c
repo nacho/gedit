@@ -1539,4 +1539,4 @@ gedit_utils_get_compression_type_from_content_type (const gchar *content_type)
 	return GEDIT_DOCUMENT_COMPRESSION_TYPE_NONE;
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

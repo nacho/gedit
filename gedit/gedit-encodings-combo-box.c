@@ -484,4 +484,4 @@ gedit_encodings_combo_box_set_selected_encoding (GeditEncodingsComboBox *menu,
 	}
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

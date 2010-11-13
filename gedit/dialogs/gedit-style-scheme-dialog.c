@@ -220,4 +220,4 @@ gedit_style_scheme_dialog_new (GeditStyleSchemeGenerator *generator)
 	return GTK_WIDGET (dlg);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

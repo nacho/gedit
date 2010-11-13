@@ -1104,4 +1104,4 @@ gedit_document_loader_get_info (GeditDocumentLoader *loader)
 	return loader->priv->info;
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

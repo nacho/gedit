@@ -276,4 +276,4 @@ gedit_theatrics_actor_get_percent (GeditTheatricsActor *actor)
 	return MAX (0.0, MIN (1.0, actor->priv->percent));
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

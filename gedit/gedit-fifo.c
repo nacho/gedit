@@ -408,4 +408,4 @@ gedit_fifo_get_file (GeditFifo *fifo)
 	return g_file_dup (fifo->priv->file);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

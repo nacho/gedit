@@ -1138,4 +1138,4 @@ gedit_documents_panel_new (GeditWindow *window)
 			     NULL);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

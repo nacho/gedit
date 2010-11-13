@@ -99,4 +99,4 @@ G_END_DECLS
 
 #endif /* __GEDIT_STYLE_SCHEME_GENERATOR_H__ */
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

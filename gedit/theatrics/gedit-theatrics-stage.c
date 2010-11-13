@@ -310,4 +310,4 @@ gedit_theatrics_stage_get_playing (GeditTheatricsStage *stage)
 	return stage->priv->playing;
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

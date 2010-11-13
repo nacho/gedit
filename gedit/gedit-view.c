@@ -1146,4 +1146,4 @@ gedit_view_delete_from_cursor (GtkTextView   *text_view,
 	}
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

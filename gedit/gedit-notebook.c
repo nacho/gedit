@@ -696,4 +696,4 @@ gedit_notebook_collapse_border (GeditNotebook *nb,
 	g_object_unref (rcstyle);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

@@ -86,4 +86,4 @@ gedit_language_manager_list_languages_sorted (GtkSourceLanguageManager *lm,
 	return g_slist_sort (languages, (GCompareFunc)language_compare);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

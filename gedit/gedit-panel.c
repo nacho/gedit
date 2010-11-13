@@ -969,4 +969,4 @@ _gedit_panel_set_active_item_by_id (GeditPanel *panel,
 	}
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

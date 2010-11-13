@@ -486,4 +486,4 @@ gedit_replace_dialog_get_wrap_around (GeditReplaceDialog *dialog)
 	return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->priv->wrap_around_checkbutton));
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

@@ -167,4 +167,4 @@ void		_gedit_cmd_file_save_documents_list	(GeditWindow *window,
 G_END_DECLS
 
 #endif /* __GEDIT_COMMANDS_H__ */ 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

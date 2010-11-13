@@ -858,4 +858,4 @@ gedit_settings_set_list (GSettings    *settings,
 	g_free (values);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

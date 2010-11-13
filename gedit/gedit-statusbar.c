@@ -360,4 +360,4 @@ gedit_statusbar_set_window_state (GeditStatusbar   *statusbar,
 	}
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

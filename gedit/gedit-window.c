@@ -5050,4 +5050,4 @@ gedit_window_get_message_bus (GeditWindow *window)
 	return window->priv->message_bus;
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

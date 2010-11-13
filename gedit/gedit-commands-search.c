@@ -660,4 +660,4 @@ _gedit_cmd_search_goto_line (GtkAction   *action,
 			       GDK_CONTROL_MASK);
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

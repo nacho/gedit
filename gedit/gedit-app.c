@@ -1132,4 +1132,4 @@ _gedit_app_get_settings (GeditApp *app)
 	return app->priv->settings;
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */

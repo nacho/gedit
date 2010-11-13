@@ -47,4 +47,4 @@ gedit_app_x11_init (GeditAppX11 *self)
 	egg_set_desktop_file (DATADIR "/applications/gedit.desktop");
 }
 
-/* ex:ts=8:noet: */
+/* ex:set ts=8 noet: */
