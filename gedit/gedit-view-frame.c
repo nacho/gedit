@@ -1264,6 +1264,7 @@ start_interactive_search_real (GeditViewFrame *frame)
 	GtkTextBuffer *buffer;
 	GtkTextMark *mark;
 	GtkTextIter iter;
+	GdkGravity gravity;
 
 	/* FIXME: it enters here twice, why? */
 
@@ -1299,13 +1300,22 @@ start_interactive_search_real (GeditViewFrame *frame)
 
 	frame->priv->search_widget = create_search_widget (frame);
 
+	if (gtk_widget_get_direction (frame->priv->search_entry) == GTK_TEXT_DIR_RTL)
+	{
+		gravity = GDK_GRAVITY_NORTH_WEST;
+	}
+	else
+	{
+		gravity = GDK_GRAVITY_NORTH_EAST;
+	}
+
 	gedit_overlay_add_animated_widget (GEDIT_OVERLAY (frame->priv->overlay),
 	                                   frame->priv->search_widget,
 	                                   300,
 	                                   GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
 	                                   GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
 	                                   GTK_ORIENTATION_VERTICAL,
-	                                   GDK_GRAVITY_SOUTH_WEST,
+	                                   gravity,
 	                                   SEARCH_POPUP_OFFSET);
 
 	init_search_entry (frame);

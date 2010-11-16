@@ -310,9 +310,13 @@ set_children_positions (GeditOverlay *overlay)
 		/* FIXME: Add all the gravities here */
 		switch (child->gravity)
 		{
-			/* The gravity is the inverse of the place we want */
-			case GDK_GRAVITY_SOUTH_WEST:
+			/* The gravity is treated as position and not as a gravity */
+			case GDK_GRAVITY_NORTH_EAST:
 				alloc.x = priv->main_alloc.width - req.width - child->offset;
+				alloc.y = 0;
+				break;
+			case GDK_GRAVITY_NORTH_WEST:
+				alloc.x = child->offset;
 				alloc.y = 0;
 				break;
 			default:
@@ -663,6 +667,7 @@ gedit_overlay_new (GtkWidget *main_widget)
 	                                 NULL));
 }
 
+/* Note: see that we use the gravity as a position */
 void
 gedit_overlay_add_animated_widget (GeditOverlay                       *overlay,
                                    GtkWidget                          *widget,
