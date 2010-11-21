@@ -40,7 +40,6 @@
 
 #include "gedit-document-loader.h"
 #include "gedit-document-output-stream.h"
-#include "gedit-smart-charset-converter.h"
 #include "gedit-debug.h"
 #include "gedit-metadata-manager.h"
 #include "gedit-utils.h"
@@ -118,7 +117,6 @@ struct _GeditDocumentLoaderPrivate
 	GCancellable 	         *cancellable;
 	GInputStream	         *stream;
 	GOutputStream            *output;
-	GeditSmartCharsetConverter *converter;
 
 	gchar                     buffer[READ_CHUNK_SIZE];
 
@@ -223,12 +221,6 @@ gedit_document_loader_dispose (GObject *object)
 	{
 		g_object_unref (priv->output);
 		priv->output = NULL;
-	}
-
-	if (priv->converter != NULL)
-	{
-		g_object_unref (priv->converter);
-		priv->converter = NULL;
 	}
 
 	if (priv->error != NULL)
@@ -628,7 +620,7 @@ async_read_cb (GInputStream *stream,
 		g_output_stream_flush (loader->priv->output, NULL, NULL);
 
 		loader->priv->auto_detected_encoding =
-			gedit_smart_charset_converter_get_guessed (loader->priv->converter);
+			gedit_document_output_stream_get_guessed (GEDIT_DOCUMENT_OUTPUT_STREAM (loader->priv->output));
 
 		loader->priv->auto_detected_newline_type =
 			gedit_document_output_stream_detect_newline_type (GEDIT_DOCUMENT_OUTPUT_STREAM (loader->priv->output));
@@ -636,7 +628,7 @@ async_read_cb (GInputStream *stream,
 		/* Check if we needed some fallback char, if so, check if there was
 		   a previous error and if not set a fallback used error */
 		/* FIXME Uncomment this when we want to manage conversion fallback */
-		/*if ((gedit_smart_charset_converter_get_num_fallbacks (loader->priv->converter) != 0) &&
+		/*if ((gedit_document_output_stream_get_num_fallbacks (GEDIT_DOCUMENT_OUTPUT_STREAM (loader->priv->output)) != 0) &&
 		    loader->priv->error == NULL)
 		{
 			g_set_error_literal (&loader->priv->error,
@@ -721,19 +713,6 @@ start_stream_read (AsyncData *async)
 	loader = async->loader;
 	info = loader->priv->info;
 
-	/* Get the candidate encodings */
-	if (loader->priv->encoding == NULL)
-	{
-		candidate_encodings = get_candidate_encodings (loader);
-	}
-	else
-	{
-		candidate_encodings = g_slist_prepend (NULL, (gpointer)loader->priv->encoding);
-	}
-
-	loader->priv->converter = gedit_smart_charset_converter_new (candidate_encodings);
-	g_slist_free (candidate_encodings);
-
 	if (g_file_info_has_attribute (info, G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE))
 	{
 		const gchar *content_type = g_file_info_get_content_type (info);
@@ -756,12 +735,23 @@ start_stream_read (AsyncData *async)
 	}
 
 	g_object_unref (loader->priv->stream);
-	loader->priv->stream = g_converter_input_stream_new (base_stream,
-	                                                     G_CONVERTER (loader->priv->converter));
-	g_object_unref (base_stream);
+	loader->priv->stream = base_stream;
+
+	/* Get the candidate encodings */
+	if (loader->priv->encoding == NULL)
+	{
+		candidate_encodings = get_candidate_encodings (loader);
+	}
+	else
+	{
+		candidate_encodings = g_slist_prepend (NULL, (gpointer)loader->priv->encoding);
+	}
 
 	/* Output stream */
-	loader->priv->output = gedit_document_output_stream_new (loader->priv->document);
+	loader->priv->output = gedit_document_output_stream_new (loader->priv->document,
+	                                                         candidate_encodings);
+
+	g_slist_free (candidate_encodings);
 
 	/* start reading */
 	read_file_chunk (async);

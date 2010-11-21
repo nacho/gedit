@@ -26,6 +26,7 @@
 
 #include <gio/gio.h>
 #include "gedit-document.h"
+#include "gedit-encodings.h"
 
 G_BEGIN_DECLS
 
@@ -55,9 +56,14 @@ struct _GeditDocumentOutputStreamClass
 
 GType			 gedit_document_output_stream_get_type		(void) G_GNUC_CONST;
 
-GOutputStream		*gedit_document_output_stream_new		(GeditDocument *doc);
+GOutputStream		*gedit_document_output_stream_new		(GeditDocument *doc,
+									 GSList        *candidate_encodings);
 
 GeditDocumentNewlineType gedit_document_output_stream_detect_newline_type (GeditDocumentOutputStream *stream);
+
+const GeditEncoding	*gedit_document_output_stream_get_guessed	(GeditDocumentOutputStream *stream);
+
+guint			 gedit_document_output_stream_get_num_fallbacks	(GeditDocumentOutputStream *stream);
 
 G_END_DECLS
 

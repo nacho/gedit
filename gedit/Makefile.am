@@ -123,7 +123,6 @@ NOINST_H_FILES =			\
 	gedit-rounded-frame.h		\
 	gedit-session.h			\
 	gedit-settings.h		\
-	gedit-smart-charset-converter.h	\
 	gedit-status-combo-box.h	\
 	gedit-style-scheme-manager.h	\
 	gedit-tab-label.h		\
@@ -207,7 +206,6 @@ libgedit_c_files =			\
 	gedit-rounded-frame.c		\
 	gedit-session.c			\
 	gedit-settings.c		\
-	gedit-smart-charset-converter.c	\
 	gedit-statusbar.c		\
 	gedit-status-combo-box.c	\
 	gedit-style-scheme-manager.c	\
