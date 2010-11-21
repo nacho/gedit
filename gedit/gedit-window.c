@@ -3030,13 +3030,13 @@ drag_data_received_cb (GtkWidget        *widget,
 	gchar **uri_list;
 
 	window = get_drop_window (widget);
-	
+
 	if (window == NULL)
 		return;
 
 	if (info == TARGET_URI_LIST)
 	{
-		uri_list = gedit_utils_drop_get_uris(selection_data);
+		uri_list = gedit_utils_drop_get_uris (selection_data);
 		load_uris_from_drop (window, uri_list);
 		g_strfreev (uri_list);
 	}
