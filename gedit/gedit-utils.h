@@ -82,11 +82,6 @@ gchar		*gedit_utils_str_middle_truncate	(const gchar      *string,
 gchar		*gedit_utils_str_end_truncate		(const gchar      *string,
 							 guint             truncate_length);
 
-gboolean	 g_utf8_caselessnmatch			(const char       *s1,
-							 const char       *s2,
-							 gssize            n1,
-							 gssize            n2);
-
 void		 gedit_utils_set_atk_name_description	(GtkWidget        *widget,
 							 const gchar      *name,
 							 const gchar      *description);

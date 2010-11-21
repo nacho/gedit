@@ -209,50 +209,6 @@ gedit_dialog_add_button (GtkDialog   *dialog,
 	return button;
 }
 
-/*
- * n: len of the string in bytes
- */
-gboolean 
-g_utf8_caselessnmatch (const char *s1,
-		       const char *s2,
-		       gssize      n1,
-		       gssize      n2)
-{
-	gchar *casefold;
-	gchar *normalized_s1;
-      	gchar *normalized_s2;
-	gint len_s1;
-	gint len_s2;
-	gboolean ret = FALSE;
-
-	g_return_val_if_fail (s1 != NULL, FALSE);
-	g_return_val_if_fail (s2 != NULL, FALSE);
-	g_return_val_if_fail (n1 > 0, FALSE);
-	g_return_val_if_fail (n2 > 0, FALSE);
-
-	casefold = g_utf8_casefold (s1, n1);
-	normalized_s1 = g_utf8_normalize (casefold, -1, G_NORMALIZE_NFD);
-	g_free (casefold);
-
-	casefold = g_utf8_casefold (s2, n2);
-	normalized_s2 = g_utf8_normalize (casefold, -1, G_NORMALIZE_NFD);
-	g_free (casefold);
-
-	len_s1 = strlen (normalized_s1);
-	len_s2 = strlen (normalized_s2);
-
-	if (len_s1 < len_s2)
-		goto finally_2;
-
-	ret = (strncmp (normalized_s1, normalized_s2, len_s2) == 0);
-	
-finally_2:
-	g_free (normalized_s1);
-	g_free (normalized_s2);	
-
-	return ret;
-}
-
 /**
  * gedit_utils_set_atk_name_description:
  * @widget: The Gtk widget for which name/description to be set
