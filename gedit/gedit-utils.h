@@ -18,14 +18,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307, USA.
  */
- 
+
 /*
- * Modified by the gedit Team, 1998-2005. See the AUTHORS file for a 
- * list of people on the gedit Team.  
- * See the ChangeLog files for a list of changes. 
+ * Modified by the gedit Team, 1998-2005. See the AUTHORS file for a
+ * list of people on the gedit Team.
+ * See the ChangeLog files for a list of changes.
  *
  * $Id$
  */
@@ -70,13 +70,13 @@ GtkWidget	*gedit_gtk_button_new_with_stock_icon	(const gchar      *label,
 
 GtkWidget	*gedit_dialog_add_button		(GtkDialog        *dialog,
 							 const gchar      *text,
-							 const gchar      *stock_id, 
+							 const gchar      *stock_id,
 							 gint              response_id);
 
 gchar		*gedit_utils_escape_underscores		(const gchar      *text,
 							 gssize            length);
 
-gchar		*gedit_utils_str_middle_truncate	(const gchar      *string, 
+gchar		*gedit_utils_str_middle_truncate	(const gchar      *string,
 							 guint             truncate_length);
 
 gchar		*gedit_utils_str_end_truncate		(const gchar      *string,
@@ -127,7 +127,7 @@ gboolean	 gedit_utils_get_ui_objects		(const gchar      *filename,
 /* Return NULL if str is not a valid URI and/or filename */
 gchar		*gedit_utils_make_canonical_uri_from_shell_arg
 							(const gchar      *str);
-		
+
 gchar		*gedit_utils_basename_for_display	(GFile            *location);
 gboolean	 gedit_utils_decode_uri 		(const gchar      *uri,
 							 gchar           **scheme,

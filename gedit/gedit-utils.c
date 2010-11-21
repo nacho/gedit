@@ -3,8 +3,8 @@
  * This file is part of gedit
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
- * Copyright (C) 2000, 2002 Chema Celorio, Paolo Maggi 
- * Copyright (C) 2003-2005 Paolo Maggi 
+ * Copyright (C) 2000, 2002 Chema Celorio, Paolo Maggi
+ * Copyright (C) 2003-2005 Paolo Maggi
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,14 +18,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA. 
+ * Foundation, Inc., 59 Temple Place, Suite 330,
+ * Boston, MA 02111-1307, USA.
  */
- 
+
 /*
- * Modified by the gedit Team, 1998-2005. See the AUTHORS file for a 
- * list of people on the gedit Team.  
- * See the ChangeLog files for a list of changes. 
+ * Modified by the gedit Team, 1998-2005. See the AUTHORS file for a
+ * list of people on the gedit Team.
+ * See the ChangeLog files for a list of changes.
  *
  * $Id$
  */
@@ -131,7 +131,7 @@ gedit_utils_menu_position_under_tree_view (GtkMenu  *menu,
 	GtkTreeModel *model;
 	GtkTreeSelection *selection;
 	GtkTreeIter iter;
-	
+
 	model = gtk_tree_view_get_model (tree);
 	g_return_if_fail (model != NULL);
 
@@ -144,16 +144,16 @@ gedit_utils_menu_position_under_tree_view (GtkMenu  *menu,
 		GdkRectangle rect;
 
 		widget_get_origin (GTK_WIDGET (tree), x, y);
-			
+
 		path = gtk_tree_model_get_path (model, &iter);
 		gtk_tree_view_get_cell_area (tree, path,
 					     gtk_tree_view_get_column (tree, 0), /* FIXME 0 for RTL ? */
 					     &rect);
 		gtk_tree_path_free (path);
-		
+
 		*x += rect.x;
 		*y += rect.y + rect.height;
-		
+
 		if (gtk_widget_get_direction (GTK_WIDGET (tree)) == GTK_TEXT_DIR_RTL)
 		{
 			GtkRequisition requisition;
@@ -204,7 +204,7 @@ gedit_dialog_add_button (GtkDialog   *dialog,
 
 	gtk_widget_show (button);
 
-	gtk_dialog_add_action_widget (dialog, button, response_id);	
+	gtk_dialog_add_action_widget (dialog, button, response_id);
 
 	return button;
 }
@@ -219,7 +219,7 @@ gedit_dialog_add_button (GtkDialog   *dialog,
  * for a specified gtk widget.
  */
 void
-gedit_utils_set_atk_name_description (GtkWidget   *widget, 
+gedit_utils_set_atk_name_description (GtkWidget   *widget,
 				      const gchar *name,
 				      const gchar *description)
 {
@@ -247,8 +247,8 @@ gedit_utils_set_atk_name_description (GtkWidget   *widget,
  * between 2 specified widgets.
  */
 void
-gedit_utils_set_atk_relation (GtkWidget       *obj1, 
-			      GtkWidget       *obj2, 
+gedit_utils_set_atk_relation (GtkWidget       *obj1,
+			      GtkWidget       *obj2,
 			      AtkRelationType  rel_type)
 {
 	AtkObject *atk_obj1, *atk_obj2;
@@ -336,7 +336,7 @@ gedit_utils_unescape_search_text (const gchar *text)
 	const gchar *cur;
 	const gchar *end;
 	const gchar *prev;
-	
+
 	if (text == NULL)
 		return NULL;
 
@@ -347,15 +347,15 @@ gedit_utils_unescape_search_text (const gchar *text)
 	cur = text;
 	end = text + length;
 	prev = NULL;
-	
-	while (cur != end) 
+
+	while (cur != end)
 	{
 		const gchar *next;
 		next = g_utf8_next_char (cur);
 
-		if (prev && (*prev == '\\')) 
+		if (prev && (*prev == '\\'))
 		{
-			switch (*cur) 
+			switch (*cur)
 			{
 				case 'n':
 					str = g_string_append (str, "\n");
@@ -375,21 +375,21 @@ gedit_utils_unescape_search_text (const gchar *text)
 					str = g_string_append_len (str, cur, next - cur);
 					break;
 			}
-		} 
-		else if (*cur != '\\') 
+		}
+		else if (*cur != '\\')
 		{
 			str = g_string_append_len (str, cur, next - cur);
-		} 
-		else if ((next == end) && (*cur == '\\')) 
+		}
+		else if ((next == end) && (*cur == '\\'))
 		{
 			str = g_string_append (str, "\\");
 		}
-		
+
 		if (!drop_prev)
 		{
 			prev = cur;
 		}
-		else 
+		else
 		{
 			prev = NULL;
 			drop_prev = FALSE;
@@ -401,19 +401,19 @@ gedit_utils_unescape_search_text (const gchar *text)
 	return g_string_free (str, FALSE);
 }
 
-void 
+void
 gedit_warning (GtkWindow *parent, const gchar *format, ...)
 {
 	va_list         args;
 	gchar          *str;
 	GtkWidget      *dialog;
 	GtkWindowGroup *wg = NULL;
-	
+
 	g_return_if_fail (format != NULL);
 
 	if (parent != NULL)
 		wg = gtk_window_get_group (parent);
-		
+
 	va_start (args, format);
 	str = g_strdup_vprintf (format, args);
 	va_end (args);
@@ -429,7 +429,7 @@ gedit_warning (GtkWindow *parent, const gchar *format, ...)
 
 	if (wg != NULL)
 		gtk_window_group_add_window (wg, GTK_WINDOW (dialog));
-		
+
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
 	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
@@ -438,14 +438,14 @@ gedit_warning (GtkWindow *parent, const gchar *format, ...)
 			  "response",
 			  G_CALLBACK (gtk_widget_destroy),
 			  NULL);
-			  
+
 	gtk_widget_show (dialog);
 }
 
 /*
  * Doubles underscore to avoid spurious menu accels.
  */
-gchar * 
+gchar *
 gedit_utils_escape_underscores (const gchar *text,
 				gssize       length)
 {
@@ -541,7 +541,7 @@ gedit_utils_str_truncate (const gchar *string,
 					      g_utf8_offset_to_pointer (string, num_left_chars) - string);
 		g_string_append (truncated, delimiter);
 	}
-	
+
 	return g_string_free (truncated, FALSE);
 }
 
@@ -597,7 +597,7 @@ gedit_utils_make_valid_utf8 (const char *name)
 	}
 
 	g_string_append (string, remainder);
-	
+
 	g_assert (g_utf8_validate (string->str, -1, NULL));
 
 	return g_string_free (string, FALSE);
@@ -623,14 +623,14 @@ gedit_utils_uri_get_dirname (const gchar *uri)
 	if ((strlen (str) == 1) && (*str == '.'))
 	{
 		g_free (str);
-		
+
 		return NULL;
 	}
 
 	res = gedit_utils_replace_home_dir_with_tilde (str);
 
 	g_free (str);
-	
+
 	return res;
 }
 
@@ -683,7 +683,7 @@ gedit_utils_location_get_dirname_for_display (GFile *location)
 		{
 			dirname = gedit_utils_uri_get_dirname (path);
 		}
-		
+
 		if (dirname == NULL || strcmp (dirname, ".") == 0)
 		{
 			res = mount_name;
@@ -693,7 +693,7 @@ gedit_utils_location_get_dirname_for_display (GFile *location)
 			res = g_strdup_printf ("%s %s", mount_name, dirname);
 			g_free (mount_name);
 		}
-		
+
 		g_free (path);
 		g_free (dirname);
 	}
@@ -729,7 +729,7 @@ gedit_utils_replace_home_dir_with_tilde (const gchar *uri)
 	if (strcmp (uri, home) == 0)
 	{
 		g_free (home);
-		
+
 		return g_strdup ("~");
 	}
 
@@ -744,8 +744,8 @@ gedit_utils_replace_home_dir_with_tilde (const gchar *uri)
 		res = g_strdup_printf ("~/%s", uri + strlen (home));
 
 		g_free (home);
-		
-		return res;		
+
+		return res;
 	}
 
 	g_free (home);
@@ -975,7 +975,7 @@ gedit_utils_is_valid_location (GFile *location)
 				break;
 			}
 
-			++p;		
+			++p;
 			if (!g_ascii_isxdigit (*p))
 			{
 				is_valid = FALSE;
@@ -1067,12 +1067,12 @@ gedit_utils_get_ui_objects (const gchar  *filename,
 	*error_widget = NULL;
 
 	builder = gtk_builder_new ();
-	
+
 	if (root_objects != NULL)
 	{
-		gtk_builder_add_objects_from_file (builder, 
-						   filename, 
-						   root_objects, 
+		gtk_builder_add_objects_from_file (builder,
+						   filename,
+						   root_objects,
 						   &error);
 	}
 	else
@@ -1104,8 +1104,8 @@ gedit_utils_get_ui_objects (const gchar  *filename,
 
 		if (!*gobj)
 		{
-			*error_widget = handle_builder_error (_("Unable to find the object '%s' inside file %s."), 
-							      name, 
+			*error_widget = handle_builder_error (_("Unable to find the object '%s' inside file %s."),
+							      name,
 							      filename_markup),
 			ret = FALSE;
 			break;
@@ -1136,25 +1136,25 @@ gedit_utils_get_ui_objects (const gchar  *filename,
 
 gchar *
 gedit_utils_make_canonical_uri_from_shell_arg (const gchar *str)
-{	
+{
 	GFile *gfile;
 	gchar *uri;
 
 	g_return_val_if_fail (str != NULL, NULL);
 	g_return_val_if_fail (*str != '\0', NULL);
-	
-	/* Note for the future: 
+
+	/* Note for the future:
 	 * FIXME: is still still relevant?
 	 *
-	 * <federico> paolo: and flame whoever tells 
-	 * you that file:///gnome/test_files/hëllò 
+	 * <federico> paolo: and flame whoever tells
+	 * you that file:///gnome/test_files/hëllò
 	 * doesn't work --- that's not a valid URI
 	 *
-	 * <paolo> federico: well, another solution that 
-	 * does not requires patch to _from_shell_args 
-	 * is to check that the string returned by it 
+	 * <paolo> federico: well, another solution that
+	 * does not requires patch to _from_shell_args
+	 * is to check that the string returned by it
 	 * contains only ASCII chars
-	 * <federico> paolo: hmmmm, isn't there 
+	 * <federico> paolo: hmmmm, isn't there
 	 * gnome_vfs_is_uri_valid() or something?
 	 * <paolo>: I will use gedit_utils_is_valid_uri ()
 	 *
@@ -1168,7 +1168,7 @@ gedit_utils_make_canonical_uri_from_shell_arg (const gchar *str)
 		g_object_unref (gfile);
 		return uri;
 	}
-	
+
 	g_object_unref (gfile);
 	return NULL;
 }
@@ -1195,9 +1195,9 @@ gedit_utils_basename_for_display (GFile *location)
 	{
 		GFileInfo *info;
 		info = g_file_query_info (location,
-					  G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME, 
-					  G_FILE_QUERY_INFO_NONE, 
-					  NULL, 
+					  G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
+					  G_FILE_QUERY_INFO_NONE,
+					  NULL,
 					  NULL);
 
 		if (info)
@@ -1211,7 +1211,7 @@ gedit_utils_basename_for_display (GFile *location)
 			/* This is a local file, and therefore we will use
 			 * g_filename_display_basename on the local path */
 			gchar *local_path;
-		
+
 			local_path = g_file_get_path (location);
 			name = g_filename_display_basename (local_path);
 			g_free (local_path);
@@ -1229,8 +1229,8 @@ gedit_utils_basename_for_display (GFile *location)
 		parse_name = g_file_get_parse_name (location);
 		base = g_filename_display_basename (parse_name);
 		name = g_uri_unescape_string (base, NULL);
-		
-		g_free (base);		
+
+		g_free (base);
 		g_free (parse_name);
 	}
 	else
@@ -1267,7 +1267,7 @@ gedit_utils_basename_for_display (GFile *location)
  * Create a list of valid uri's from a uri-list drop.
  *
  * Returns: (transfer full): a string array which will hold the uris or
- *           %NULL if there were no valid uris. g_strfreev should be used when 
+ *           %NULL if there were no valid uris. g_strfreev should be used when
  *           the string array is no longer used
  */
 gchar **
@@ -1284,9 +1284,9 @@ gedit_utils_drop_get_uris (GtkSelectionData *selection_data)
 	for (i = 0; uris[i] != NULL; i++)
 	{
 		gchar *uri;
-		
+
 		uri = gedit_utils_make_canonical_uri_from_shell_arg (uris[i]);
-		
+
 		/* Silently ignore malformed URI/filename */
 		if (uri != NULL)
 			uri_list[p++] = uri;
@@ -1322,7 +1322,7 @@ null_ptr (gchar **ptr)
  * scheme, user info, port, host and path. The return value pointer can be
  * %NULL to ignore certain parts of the uri. If the function returns %TRUE, then
  * all return value pointers should be freed using g_free
- * 
+ *
  * Return value: %TRUE if the uri could be properly decoded, %FALSE otherwise.
  */
 gboolean
@@ -1334,7 +1334,7 @@ gedit_utils_decode_uri (const gchar  *uri,
 			gchar       **path
 )
 {
-	/* Largely copied from glib/gio/gdummyfile.c:_g_decode_uri. This 
+	/* Largely copied from glib/gio/gdummyfile.c:_g_decode_uri. This
 	 * functionality should be in glib/gio, but for now we implement it
 	 * ourselves (see bug #546182) */
 
@@ -1344,10 +1344,10 @@ gedit_utils_decode_uri (const gchar  *uri,
 
 	/* From RFC 3986 Decodes:
 	 * URI = scheme ":" hier-part [ "?" query ] [ "#" fragment ]
-	 */ 
+	 */
 
 	p = uri;
-	
+
 	null_ptr (scheme);
 	null_ptr (user);
 	null_ptr (port);
@@ -1376,34 +1376,34 @@ gedit_utils_decode_uri (const gchar  *uri,
 			return FALSE;
 		}
 	}
-	
+
 	if (scheme)
 	{
 		*scheme = g_malloc (p - uri);
 		out = *scheme;
-	
+
 		for (in = uri; in < p - 1; in++)
 		{
 			*out++ = g_ascii_tolower (*in);
 		}
-			
+
 		*out = '\0';
 	}
-	
+
 	hier_part_start = p;
 	hier_part_end = p + strlen (p);
-	
+
 	if (hier_part_start[0] == '/' && hier_part_start[1] == '/')
 	{
 		const char *authority_start, *authority_end;
 		const char *userinfo_start, *userinfo_end;
 		const char *host_start, *host_end;
 		const char *port_start;
-		
+
 		authority_start = hier_part_start + 2;
 		/* authority is always followed by / or nothing */
 		authority_end = memchr (authority_start, '/', hier_part_end - authority_start);
-		
+
 		if (authority_end == NULL)
 			authority_end = hier_part_end;
 
@@ -1412,14 +1412,14 @@ gedit_utils_decode_uri (const gchar  *uri,
 		 */
 
 		userinfo_end = memchr (authority_start, '@', authority_end - authority_start);
-		
+
 		if (userinfo_end)
 		{
 			userinfo_start = authority_start;
-			
+
 			if (user)
 				*user = g_uri_unescape_segment (userinfo_start, userinfo_end, NULL);
-			
+
 			if (user && *user == NULL)
 			{
 				if (scheme)
@@ -1427,7 +1427,7 @@ gedit_utils_decode_uri (const gchar  *uri,
 
 				return FALSE;
 			}
-	
+
 			host_start = userinfo_end + 1;
 		}
 		else
@@ -1457,7 +1457,7 @@ gedit_utils_decode_uri (const gchar  *uri,
 
 	if (path)
 		*path = g_uri_unescape_segment (hier_part_start, hier_part_end, "/");
-	
+
 	return TRUE;
 }
 
