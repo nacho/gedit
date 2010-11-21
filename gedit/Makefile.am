@@ -129,7 +129,6 @@ NOINST_H_FILES =			\
 	gedit-tab-label.h		\
 	gedittextregion.h		\
 	gedit-ui.h			\
-	gedit-utils.h 			\
 	gedit-view-frame.h		\
 	gedit-window-private.h
 
@@ -148,6 +147,7 @@ INST_H_FILES =				\
 	gedit-progress-info-bar.h	\
 	gedit-statusbar.h		\
 	gedit-tab.h 			\
+	gedit-utils.h 			\
 	gedit-view.h 			\
 	gedit-view-activatable.h	\
 	gedit-window.h			\
