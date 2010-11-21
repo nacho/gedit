@@ -1177,7 +1177,7 @@ gedit_utils_make_canonical_uri_from_shell_arg (const gchar *str)
  * gedit_utils_basename_for_display:
  * @location: location for which the basename should be displayed
  *
- * Return the basename of a file suitable for display to users.
+ * Returns: the basename of a file suitable for display to users.
  */
 gchar *
 gedit_utils_basename_for_display (GFile *location)
@@ -1265,10 +1265,10 @@ gedit_utils_basename_for_display (GFile *location)
  * @selection_data: the #GtkSelectionData from drag_data_received
  *
  * Create a list of valid uri's from a uri-list drop.
- * 
- * Return value: a string array which will hold the uris or %NULL if there 
- *		 were no valid uris. g_strfreev should be used when the 
- *		 string array is no longer used
+ *
+ * Returns: (transfer full): a string array which will hold the uris or
+ *           %NULL if there were no valid uris. g_strfreev should be used when 
+ *           the string array is no longer used
  */
 gchar **
 gedit_utils_drop_get_uris (GtkSelectionData *selection_data)
