@@ -323,6 +323,11 @@ void		 _gedit_document_set_readonly 	(GeditDocument       *doc,
 glong		 _gedit_document_get_seconds_since_last_save_or_load 
 						(GeditDocument       *doc);
 
+void		 _gedit_document_apply_error_style
+                                                (GeditDocument *doc,
+                                                 GtkTextIter   *start,
+                                                 GtkTextIter   *end);
+
 /* Note: this is a sync stat: use only on local files */
 gboolean	_gedit_document_check_externally_modified
 						(GeditDocument       *doc);

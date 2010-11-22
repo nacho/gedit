@@ -138,6 +138,8 @@ struct _GeditDocumentPrivate
 	GeditTextRegion *to_search_region;
 	GtkTextTag      *found_tag;
 
+	GtkTextTag      *error_tag;
+
 	/* Mount operation factory */
 	GeditMountOperationFactory  mount_operation_factory;
 	gpointer		    mount_operation_userdata;
@@ -3099,5 +3101,49 @@ gedit_document_set_metadata (GeditDocument *doc,
 	g_object_unref (info);
 }
 #endif
+
+static void
+sync_error_tag (GeditDocument *doc,
+                GParamSpec    *pspec,
+                gpointer       data)
+{
+	sync_tag_style (doc, doc->priv->error_tag, "def:error");
+}
+
+void
+_gedit_document_apply_error_style (GeditDocument *doc,
+                                   GtkTextIter   *start,
+                                   GtkTextIter   *end)
+{
+	GtkTextBuffer *buffer;
+
+	gedit_debug (DEBUG_DOCUMENT);
+
+	buffer = GTK_TEXT_BUFFER (doc);
+
+	if (doc->priv->error_tag == NULL)
+	{
+		doc->priv->error_tag = gtk_text_buffer_create_tag (GTK_TEXT_BUFFER (doc),
+		                                                   "error-style",
+		                                                   NULL);
+
+		sync_error_tag (doc, NULL, NULL);
+
+		g_signal_connect (doc,
+		                  "notify::style-scheme",
+		                  G_CALLBACK (sync_error_tag),
+		                  NULL);
+	}
+
+	/* make sure the 'error' tag has the priority over
+	 * syntax highlighting tags */
+	text_tag_set_highest_priority (doc->priv->error_tag,
+	                               GTK_TEXT_BUFFER (doc));
+
+	gtk_text_buffer_apply_tag (buffer,
+	                           doc->priv->error_tag,
+	                           start,
+	                           end);
+}
 
 /* ex:set ts=8 noet: */
