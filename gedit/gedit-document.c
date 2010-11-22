@@ -2410,21 +2410,22 @@ gedit_document_replace_all (GeditDocument       *doc,
 }
 
 static void
-get_search_match_colors (GeditDocument *doc,
-			 gboolean      *foreground_set,
-			 GdkColor      *foreground,
-			 gboolean      *background_set,
-			 GdkColor      *background,
-			 gboolean      *line_background_set,
-			 GdkColor      *line_background,
-			 gboolean      *bold_set,
-			 gboolean      *bold,
-			 gboolean      *italic_set,
-			 gboolean      *italic,
-			 gboolean      *underline_set,
-			 gboolean      *underline,
-			 gboolean      *strikethrough_set,
-			 gboolean      *strikethrough)
+get_style_colors (GeditDocument *doc,
+                  const gchar   *style_name,
+                  gboolean      *foreground_set,
+                  GdkColor      *foreground,
+                  gboolean      *background_set,
+                  GdkColor      *background,
+                  gboolean      *line_background_set,
+                  GdkColor      *line_background,
+                  gboolean      *bold_set,
+                  gboolean      *bold,
+                  gboolean      *italic_set,
+                  gboolean      *italic,
+                  gboolean      *underline_set,
+                  gboolean      *underline,
+                  gboolean      *strikethrough_set,
+                  gboolean      *strikethrough)
 {
 	GtkSourceStyleScheme *style_scheme;
 	GtkSourceStyle *style;
@@ -2437,7 +2438,7 @@ get_search_match_colors (GeditDocument *doc,
 		goto fallback;
 
 	style = gtk_source_style_scheme_get_style (style_scheme,
-						   "search-match");
+						   style_name);
 	if (style == NULL)
 		goto fallback;
 
@@ -2503,9 +2504,9 @@ get_search_match_colors (GeditDocument *doc,
 }
 
 static void
-sync_found_tag (GeditDocument *doc,
-		GParamSpec    *pspec,
-		gpointer       data)
+sync_tag_style (GeditDocument *doc,
+                GtkTextTag    *tag,
+                const gchar   *style_name)
 {
 	GdkColor fg;
 	GdkColor bg;
@@ -2524,30 +2525,39 @@ sync_found_tag (GeditDocument *doc,
 
 	gedit_debug (DEBUG_DOCUMENT);
 
-	g_return_if_fail (GTK_TEXT_TAG (doc->priv->found_tag));
+	g_return_if_fail (tag != NULL);
 
-	get_search_match_colors (doc,
-				 &fg_set, &fg,
-				 &bg_set, &bg,
-				 &line_bg_set, &line_bg,
-				 &bold_set, &bold,
-				 &italic_set, &italic,
-				 &underline_set, &underline,
-				 &strikethrough_set, &strikethrough);
+	get_style_colors (doc,
+	                  style_name,
+	                  &fg_set, &fg,
+	                  &bg_set, &bg,
+	                  &line_bg_set, &line_bg,
+	                  &bold_set, &bold,
+	                  &italic_set, &italic,
+	                  &underline_set, &underline,
+	                  &strikethrough_set, &strikethrough);
 
-	g_object_freeze_notify (G_OBJECT (doc->priv->found_tag));
+	g_object_freeze_notify (G_OBJECT (tag));
 
-	g_object_set (doc->priv->found_tag,
-		      "foreground-gdk", fg_set ? &fg : NULL,
-		      "background-gdk", bg_set ? &bg : NULL,
-		      "paragraph-background-gdk", line_bg_set ? &line_bg : NULL,
-		      "weight", bold_set && bold ? PANGO_WEIGHT_BOLD : PANGO_WEIGHT_NORMAL,
-		      "style", italic_set && italic ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL,
-		      "underline", underline_set && underline ? PANGO_UNDERLINE_SINGLE : PANGO_UNDERLINE_NONE,
-		      "strikethrough", strikethrough_set && strikethrough,
-		      NULL);
+	g_object_set (tag,
+	              "foreground-gdk", fg_set ? &fg : NULL,
+	              "background-gdk", bg_set ? &bg : NULL,
+	              "paragraph-background-gdk", line_bg_set ? &line_bg : NULL,
+	              "weight", bold_set && bold ? PANGO_WEIGHT_BOLD : PANGO_WEIGHT_NORMAL,
+	              "style", italic_set && italic ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL,
+	              "underline", underline_set && underline ? PANGO_UNDERLINE_SINGLE : PANGO_UNDERLINE_NONE,
+	              "strikethrough", strikethrough_set && strikethrough,
+	              NULL);
 
-	g_object_thaw_notify (G_OBJECT (doc->priv->found_tag));
+	g_object_thaw_notify (G_OBJECT (tag));
+}
+
+static void
+sync_found_tag (GeditDocument *doc,
+		GParamSpec    *pspec,
+		gpointer       data)
+{
+	sync_tag_style (doc, doc->priv->found_tag, "search-match");
 }
 
 static void
