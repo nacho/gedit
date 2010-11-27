@@ -540,6 +540,7 @@ remove_notebook (GeditMultiNotebook *mnb,
 	gtk_container_add (GTK_CONTAINER (grandpa),
 			   GTK_WIDGET (children->data));
 	g_object_unref (children->data);
+	g_list_free (children);
 
 	disconnect_notebook_signals (mnb, notebook);
 
