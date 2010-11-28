@@ -9,8 +9,19 @@
     <name>Jim Campbell</name>
     <email>jwcampbell@gmail.com</email>
   </credit>
+
+  <revision pkgversion="3.0" version="0.2" date="2010-11-28" status="draft"/>
+  <credit type="author">
+    <name>Daniel Neel</name>
+    <email>dneelyep@gmail.com</email>
+  </credit>
 </info>
 
-<title>*Undo a recent action</title>
+<title>Undo a recent action</title>
+
+<!-- TODO: Maybe include a note about how gedit undoes sequences of "similar" actions, rather than every individual keystroke? For example, whole words are deleted rather than letters.-->
+<p>Undoing actions in <app>gedit</app> allows you to recover from mistakes. To undo an action, press the key sequence <keyseq><key>Ctrl</key><key>Z</key></keyseq>, or click <guiseq><gui><menu>Edit</menu></gui><gui><menuitem>Undo</menuitem></gui></guiseq>.</p>
+
+<p><app>gedit</app> will undo one action every time <keyseq><key>Ctrl</key><key>Z</key></keyseq> or <guiseq><gui><menu>Edit</menu></gui><gui><menuitem>Undo</menuitem></gui></guiseq> is pressed, so you can undo multiple actions by repeating these sequences multiple times in a row.</p>
 
 </page>
