@@ -77,12 +77,10 @@ G_DEFINE_TYPE_EXTENDED (GeditTheatricsAnimatedWidget,
 
 static void
 on_widget_destroyed (GtkWidget                    *widget,
-		     GeditTheatricsAnimatedWidget *aw)
+                     GeditTheatricsAnimatedWidget *aw)
 {
 	GdkWindow *window;
 	cairo_t *img_cr;
-	cairo_t *cr;
-	cairo_surface_t *surface;
 
 	if (!gtk_widget_get_realized (GTK_WIDGET (aw)))
 		return;
@@ -91,24 +89,19 @@ on_widget_destroyed (GtkWidget                    *widget,
 	aw->priv->height = aw->priv->widget_alloc.height;
 
 	aw->priv->surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
-							aw->priv->width,
-							aw->priv->height);
+	                                                aw->priv->width,
+	                                                aw->priv->height);
 
 	img_cr = cairo_create (aw->priv->surface);
 
 	window = gtk_widget_get_window (GTK_WIDGET (aw));
 
-	cr = gdk_cairo_create (GDK_DRAWABLE (window));
-	surface = cairo_get_target (cr);
-
-	cairo_set_source_surface (img_cr, surface,
-	                          aw->priv->widget_alloc.x,
-	                          aw->priv->widget_alloc.y);
+	gdk_cairo_set_source_window (img_cr, window,
+	                             aw->priv->widget_alloc.x,
+	                             aw->priv->widget_alloc.y);
 
 	cairo_paint (img_cr);
-
 	cairo_destroy (img_cr);
-	cairo_destroy (cr);
 
 	if (aw->priv->animation_state != GEDIT_THEATRICS_ANIMATION_STATE_GOING)
 	{
