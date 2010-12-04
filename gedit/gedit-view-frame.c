@@ -278,44 +278,37 @@ static void
 set_entry_background (GtkWidget               *entry,
                       GeditSearchEntryBgColor  col)
 {
+	GdkRGBA *fg, *bg;
+
 	if (col == GEDIT_SEARCH_ENTRY_NOT_FOUND)
 	{
-		GdkColor error_default_bg = { 0, 0xff00, 0x6600, 0x6600 };
-		GdkColor error_default_fg = { 0, 0xff00, 0xff00, 0xff00 };
-		GdkColor sym_bg, sym_fg;
-		GdkColor fg, bg;
-		GtkStyle *style;
+		GdkRGBA error_default_fg = { 0.65, 0.15, 0.15, 1.0 };
+		GdkRGBA error_default_bg = { 0.93, 0.21, 0.21, 1.0 };
+		GdkRGBA sym_bg, sym_fg;
+		GtkStyleContext *context;
 
-		style = gtk_widget_get_style (entry);
+		context = gtk_widget_get_style_context (entry);
 
-		if (gtk_style_lookup_color (style, "error_fg_color", &sym_fg) &&
-		    gtk_style_lookup_color (style, "error_bg_color", &sym_bg))
+		if (gtk_style_context_lookup_color (context, "error_fg_color", &sym_fg) &&
+		    gtk_style_context_lookup_color (context, "error_bg_color", &sym_bg))
 		{
-			fg = sym_fg;
-			bg = sym_bg;
+			fg = &sym_fg;
+			bg = &sym_bg;
 		}
 		else
 		{
-			fg = error_default_fg;
-			bg = error_default_bg;
+			fg = &error_default_fg;
+			bg = &error_default_bg;
 		}
-
-		gtk_widget_modify_base (entry,
-		                        GTK_STATE_NORMAL,
-		                        &bg);
-		gtk_widget_modify_text (entry,
-		                        GTK_STATE_NORMAL,
-		                        &fg);
 	}
 	else /* reset */
 	{
-		gtk_widget_modify_base (entry,
-		                        GTK_STATE_NORMAL,
-		                        NULL);
-		gtk_widget_modify_text (entry,
-		                        GTK_STATE_NORMAL,
-		                        NULL);
+		fg = NULL;
+		bg = NULL;
 	}
+
+	gtk_widget_override_background_color (entry, 0, bg);
+	gtk_widget_override_color (entry, 0, fg);
 }
 
 static gboolean
