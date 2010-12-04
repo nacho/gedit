@@ -138,9 +138,9 @@ draw_frame (GeditRoundedFrame *frame,
             cairo_t           *cr,
             GdkRectangle      *area)
 {
-	GtkStyle *style;
-	GdkColor bg_color;
-	GdkColor border_color;
+	GtkStyleContext *context;
+	GdkRGBA bg_color;
+	GdkRGBA border_color;
 
 	gedit_theatrics_utils_draw_round_rectangle (cr,
 	                                            FALSE,
@@ -153,14 +153,15 @@ draw_frame (GeditRoundedFrame *frame,
 	                                            area->width,
 	                                            area->height);
 
-	style = gtk_widget_get_style (GTK_WIDGET (frame));
-	bg_color = style->bg[GTK_STATE_NORMAL];
-	border_color = style->dark[GTK_STATE_ACTIVE];
+	context = gtk_widget_get_style_context (GTK_WIDGET (frame));
+	gtk_style_context_get_background_color (context, 0, &bg_color);
+	gtk_style_context_get_border_color (context, GTK_STATE_FLAG_ACTIVE,
+	                                    &border_color);
 
-	gdk_cairo_set_source_color (cr, &bg_color);
+	gdk_cairo_set_source_rgba (cr, &bg_color);
 	cairo_fill_preserve (cr);
 
-	gdk_cairo_set_source_color (cr, &border_color);
+	gdk_cairo_set_source_rgba (cr, &border_color);
 	cairo_set_line_width (cr, frame->priv->frame_width / 2);
 	cairo_stroke (cr);
 }

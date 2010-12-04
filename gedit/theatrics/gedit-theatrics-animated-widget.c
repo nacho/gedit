@@ -203,12 +203,12 @@ gedit_theatrics_animated_widget_realize (GtkWidget *widget)
 	GdkWindowAttr attributes;
 	GdkWindow *parent_window;
 	GdkWindow *window;
-	GtkStyle *style;
+	GtkStyleContext *context;
 
 	gtk_widget_set_realized (widget, TRUE);
 
 	parent_window = gtk_widget_get_parent_window (widget);
-	style = gtk_widget_get_style (widget);
+	context = gtk_widget_get_style_context (widget);
 
 	attributes.window_type = GDK_WINDOW_CHILD;
 	attributes.wclass = GDK_INPUT_OUTPUT;
@@ -217,9 +217,8 @@ gedit_theatrics_animated_widget_realize (GtkWidget *widget)
 	window = gdk_window_new (parent_window, &attributes, 0);
 	gdk_window_set_user_data (window, widget);
 	gtk_widget_set_window (widget, window);
-	style = gtk_style_attach (style, window);
-	gtk_widget_set_style (widget, style);
-	gtk_style_set_background (style, window, GTK_STATE_NORMAL);
+	gtk_style_context_set_state (context, 0);
+	gtk_style_context_set_background (context, window);
 }
 
 static void

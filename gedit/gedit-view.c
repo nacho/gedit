@@ -707,7 +707,7 @@ gedit_view_set_font (GeditView   *view,
 
 	g_return_if_fail (font_desc != NULL);
 
-	gtk_widget_modify_font (GTK_WIDGET (view), font_desc);
+	gtk_widget_override_font (GTK_WIDGET (view), font_desc);
 
 	pango_font_description_free (font_desc);
 }

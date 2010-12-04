@@ -263,6 +263,7 @@ gedit_overlay_realize (GtkWidget *widget)
 	GdkWindow *window;
 	GdkWindowAttr attributes;
 	gint attributes_mask;
+	GtkStyleContext *context;
 
 	gtk_widget_set_realized (widget, TRUE);
 
@@ -285,9 +286,9 @@ gedit_overlay_realize (GtkWidget *widget)
 	gtk_widget_set_window (widget, window);
 	gdk_window_set_user_data (window, widget);
 
-	gtk_widget_style_attach (widget);
-	gtk_style_set_background (gtk_widget_get_style (widget), window,
-	                          GTK_STATE_NORMAL);
+	context = gtk_widget_get_style_context (widget);
+	gtk_style_context_set_state (context, 0);
+	gtk_style_context_set_background (context, window);
 }
 
 static void
