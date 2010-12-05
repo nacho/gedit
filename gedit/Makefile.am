@@ -272,7 +272,7 @@ INTROSPECTION_SCANNER_ARGS = -I$(top_srcdir) --warn-all
 Gedit_3_0_gir_NAMESPACE = Gedit
 Gedit_3_0_gir_VERSION = 3.0
 Gedit_3_0_gir_PROGRAM = $(builddir)/gedit
-Gedit_3_0_gir_FILES = $(INST_H_FILES) $(libgedit_c_files)
+Gedit_3_0_gir_FILES = $(INST_H_FILES) $(libgedit_c_files) $(BUILT_SOURCES)
 Gedit_3_0_gir_INCLUDES = Gtk-3.0 GtkSource-3.0
 
 girdir = $(datadir)/gedit/gir-1.0
