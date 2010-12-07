@@ -25,38 +25,46 @@
 G_DEFINE_TYPE (GeditCloseButton, gedit_close_button, GTK_TYPE_BUTTON)
 
 static void
-gedit_close_button_style_set (GtkWidget *button,
-			      GtkStyle  *previous_style)
+gedit_close_button_constructed (GObject *button)
 {
-	gint h, w;
+	GtkStyleContext *context;
+	GtkCssProvider *css;
+	GError *error = NULL;
+	const gchar button_style[] =
+		".button {\n"
+		"	-GtkButton-inner-border: 0;\n"
+		"	padding: 0;\n"
+		"}";
 
-	gtk_icon_size_lookup_for_settings (gtk_widget_get_settings (button),
-					   GTK_ICON_SIZE_MENU, &w, &h);
+	/* make it as small as possible */
+	css = gtk_css_provider_new ();
+	if (!gtk_css_provider_load_from_data (css, button_style,
+	                                      -1, &error))
+	{
+		g_warning ("%s", error->message);
+		g_error_free (error);
+	}
 
-	gtk_widget_set_size_request (button, w + 2, h + 2);
-
-	GTK_WIDGET_CLASS (gedit_close_button_parent_class)->style_set (button, previous_style);
+	context = gtk_widget_get_style_context (GTK_WIDGET (button));
+	gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
+	                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+	g_object_unref (css);
 }
 
 static void
 gedit_close_button_class_init (GeditCloseButtonClass *klass)
 {
-	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	widget_class->style_set = gedit_close_button_style_set;
+	object_class->constructed = gedit_close_button_constructed;
 }
 
 static void
 gedit_close_button_init (GeditCloseButton *button)
 {
-	GtkRcStyle *rcstyle;
-	GtkWidget *image;
 
-	/* make it as small as possible */
-	rcstyle = gtk_rc_style_new ();
-	rcstyle->xthickness = rcstyle->ythickness = 0;
-	gtk_widget_modify_style (GTK_WIDGET (button), rcstyle);
-	g_object_unref (rcstyle);
+	GtkWidget *image;
+	
 
 	image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
 					  GTK_ICON_SIZE_MENU);
@@ -68,14 +76,10 @@ gedit_close_button_init (GeditCloseButton *button)
 GtkWidget *
 gedit_close_button_new ()
 {
-	GeditCloseButton *button;
-
-	button = g_object_new (GEDIT_TYPE_CLOSE_BUTTON,
-			       "relief", GTK_RELIEF_NONE,
-			       "focus-on-click", FALSE,
-			       NULL);
-
-	return GTK_WIDGET (button);
+	return GTK_WIDGET (g_object_new (GEDIT_TYPE_CLOSE_BUTTON,
+	                                 "relief", GTK_RELIEF_NONE,
+	                                 "focus-on-click", FALSE,
+	                                 NULL));
 }
 
 /* ex:set ts=8 noet: */

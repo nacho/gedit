@@ -112,10 +112,10 @@ gedit_status_combo_box_constructed (GObject *object)
 	GtkCssProvider *css;
 	GError *error = NULL;
 	const gchar style[] =
-		"* {"
-		"	-GtkWidget-focus-line-width: 0;"
-		"	-GtkWidget-focus-padding: 0;"
-		"	padding: 0;"
+		"* {\n"
+		"	-GtkWidget-focus-line-width: 0;\n"
+		"	-GtkWidget-focus-padding: 0;\n"
+		"	padding: 0;\n"
 		"}";
 
 	/* make it as small as possible */
