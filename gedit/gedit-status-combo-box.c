@@ -105,6 +105,35 @@ gedit_status_combo_box_set_property (GObject      *object,
 }
 
 static void
+gedit_status_combo_box_constructed (GObject *object)
+{
+	GeditStatusComboBox *combo = GEDIT_STATUS_COMBO_BOX (object);
+	GtkStyleContext *context;
+	GtkCssProvider *css;
+	GError *error = NULL;
+	const gchar style[] =
+		"* {"
+		"	-GtkWidget-focus-line-width: 0;"
+		"	-GtkWidget-focus-padding: 0;"
+		"	padding: 0;"
+		"}";
+
+	/* make it as small as possible */
+	css = gtk_css_provider_new ();
+	if (!gtk_css_provider_load_from_data (css, style, -1, &error))
+	{
+		g_warning ("%s", error->message);
+		g_error_free (error);
+		return;
+	}
+
+	context = gtk_widget_get_style_context (GTK_WIDGET (combo));
+	gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
+	                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+	g_object_unref (css);
+}
+
+static void
 gedit_status_combo_box_changed (GeditStatusComboBox *combo,
 				GtkMenuItem         *item)
 {
@@ -127,6 +156,7 @@ gedit_status_combo_box_class_init (GeditStatusComboBoxClass *klass)
 	object_class->finalize = gedit_status_combo_box_finalize;
 	object_class->get_property = gedit_status_combo_box_get_property;
 	object_class->set_property = gedit_status_combo_box_set_property;
+	object_class->constructed = gedit_status_combo_box_constructed;
 	
 	klass->changed = gedit_status_combo_box_changed;
 
@@ -145,17 +175,6 @@ gedit_status_combo_box_class_init (GeditStatusComboBoxClass *klass)
 					 		      "The label",
 					 		      NULL,
 					 		      G_PARAM_READWRITE));
-
-	/* Set up a style for the button to decrease spacing. */
-	gtk_rc_parse_string (
-		"style \"gedit-status-combo-button-style\"\n"
-		"{\n"
-		"  GtkWidget::focus-padding = 0\n"
-		"  GtkWidget::focus-line-width = 0\n"
-		"  xthickness = 0\n"
-		"  ythickness = 0\n"
-		"}\n"
-		"widget \"*.gedit-status-combo-button\" style \"gedit-status-combo-button-style\"");
 
 	g_type_class_add_private (object_class, sizeof (GeditStatusComboBoxPrivate));
 }
@@ -268,14 +287,15 @@ key_press_event (GtkWidget           *widget,
 static void
 set_shadow_type (GeditStatusComboBox *combo)
 {
+	GtkStyleContext *context;
 	GtkShadowType shadow_type;
 	GtkWidget *statusbar;
 
 	/* This is a hack needed to use the shadow type of a statusbar */
 	statusbar = gtk_statusbar_new ();
-	gtk_widget_ensure_style (statusbar);
+	context = gtk_widget_get_style_context (statusbar);
 
-	gtk_widget_style_get (statusbar, "shadow-type", &shadow_type, NULL);
+	gtk_style_context_get_style (context, "shadow-type", &shadow_type, NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (combo->priv->frame), shadow_type);
 
 	gtk_widget_destroy (statusbar);
@@ -292,7 +312,6 @@ gedit_status_combo_box_init (GeditStatusComboBox *self)
 	gtk_widget_show (self->priv->frame);
 	
 	self->priv->button = gtk_toggle_button_new ();
-	gtk_widget_set_name (self->priv->button, "gedit-status-combo-button");
 	gtk_button_set_relief (GTK_BUTTON (self->priv->button), GTK_RELIEF_NONE);
 	gtk_widget_show (self->priv->button);
 
