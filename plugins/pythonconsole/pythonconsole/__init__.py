@@ -56,6 +56,9 @@ class PythonConsolePlugin(GObject.Object, Gedit.WindowActivatable, PeasGtk.Confi
         bottom = self.window.get_bottom_panel()
         bottom.remove_item(self._console)
 
+    def do_update_state(self):
+        pass
+
     def do_create_configure_widget(self):
         config_widget = PythonConsoleConfigWidget(self.plugin_info.get_data_dir())
 
