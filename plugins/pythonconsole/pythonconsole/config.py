@@ -43,10 +43,7 @@ class PythonConsoleConfigWidget(object):
         self._ui = Gtk.Builder()
 
     def configure_widget(self):
-        try:
-            self._ui.add_objects_from_file(self._ui_path, ["table"])
-        except:
-            return None
+        self._ui.add_objects_from_file(self._ui_path, ["table"])
 
         self.set_colorbutton_color(self._ui.get_object('colorbutton-command'),
                                    self._settings.get_string(self.CONSOLE_KEY_COMMAND_COLOR))
