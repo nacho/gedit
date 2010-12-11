@@ -292,15 +292,13 @@ load_file_list (GeditWindow         *window,
 
 /**
  * gedit_commands_load_location:
- * @window:
- * @location:
- * @encoding: (allow-none):
- * @line_pos:
- * @column_pos:
+ * @window: a #GeditWindow
+ * @location: a #GFile to be loaded
+ * @encoding: (allow-none): the #GeditEncoding of @location
+ * @line_pos: the line position to place the cursor when @location is loaded
+ * @column_pos: the line column to place the cursor when @location is loaded
  *
- * Ignore non-existing locations
- *
- * Returns: (transfer container):
+ * Loads @location. Ignores non-existing locations
  */
 void
 gedit_commands_load_location (GeditWindow         *window,
@@ -331,15 +329,15 @@ gedit_commands_load_location (GeditWindow         *window,
 
 /**
  * gedit_commands_load_locations:
- * @window:
- * @locations: (element-type GLib.File) (transfer none):
- * @encoding: (allow-none):
- * @line_pos:
- * @column_pos:
+ * @window: a #GeditWindow
+ * @locations: (element-type Gio.File): the locations to be loaded
+ * @encoding: (allow-none): the #GeditEncoding of @location
+ * @line_pos: the line position to place the cursor when @location is loaded
+ * @column_pos: the line column to place the cursor when @location is loaded
  *
- * Ignore non-existing locations
+ * Loads @locations. Ignore non-existing locations
  *
- * Returns: (element-type Gedit.Document) (transfer container):
+ * Returns: (element-type Gedit.Document) (transfer container): the locations that were loaded
  */
 GSList *
 gedit_commands_load_locations (GeditWindow         *window,
