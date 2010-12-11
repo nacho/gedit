@@ -3,11 +3,19 @@
 #include "gedit-overlay.h"
 #include "gedit-rounded-frame.h"
 
+static GtkWidget *overlay;
+
 static void
 on_button_clicked (GtkWidget *button,
                    GtkWidget *frame)
 {
-	gtk_widget_destroy (frame);
+	gedit_overlay_slide (GEDIT_OVERLAY (overlay),
+	                     frame,
+	                     1000,
+	                     GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
+	                     GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
+	                     GTK_ORIENTATION_VERTICAL,
+	                     GDK_GRAVITY_STATIC, 0, FALSE);
 }
 
 gint
@@ -15,7 +23,6 @@ main ()
 {
 	GtkWidget *window;
 	GtkWidget *textview;
-	GtkWidget *overlay;
 	GtkWidget *frame;
 	GtkWidget *entry;
 	GtkWidget *vbox;
@@ -40,13 +47,13 @@ main ()
 
 	gtk_container_add (GTK_CONTAINER (frame), entry);
 
-	gedit_overlay_add_animated_widget (GEDIT_OVERLAY (overlay),
-	                                   frame,
-	                                   1000,
-	                                   GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
-	                                   GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
-	                                   GTK_ORIENTATION_VERTICAL,
-	                                   GDK_GRAVITY_STATIC, 0);
+	gedit_overlay_slide (GEDIT_OVERLAY (overlay),
+	                     frame,
+	                     1000,
+	                     GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
+	                     GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
+	                     GTK_ORIENTATION_VERTICAL,
+	                     GDK_GRAVITY_STATIC, 0, TRUE);
 
 	button = gtk_button_new_with_label ("Hide");
 	gtk_box_pack_end (GTK_BOX (vbox), button, FALSE, FALSE, 0);

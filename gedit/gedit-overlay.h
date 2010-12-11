@@ -61,14 +61,15 @@ GType		 gedit_overlay_get_type			(void) G_GNUC_CONST;
 
 GtkWidget	*gedit_overlay_new			(GtkWidget *main_widget);
 
-void		 gedit_overlay_add_animated_widget	(GeditOverlay                       *overlay,
+void		 gedit_overlay_slide			(GeditOverlay                       *overlay,
 							 GtkWidget                          *widget,
 							 guint                               duration,
 							 GeditTheatricsChoreographerEasing   easing,
 							 GeditTheatricsChoreographerBlocking blocking,
 							 GtkOrientation                      orientation,
 							 GdkGravity                          gravity,
-							 guint                               offset);
+							 guint                               offset,
+							 gboolean                            in);
 
 G_END_DECLS
 

@@ -39,13 +39,6 @@ struct _GeditTheatricsAnimatedWidgetPrivate
 	gdouble bias;
 	gdouble percent;
 	GtkAllocation widget_alloc;
-
-	cairo_surface_t *surface;
-
-	gint width;
-	gint height;
-	gint start_padding;
-	gint end_padding;
 };
 
 enum
@@ -60,54 +53,12 @@ enum
 	PROP_ORIENTATION
 };
 
-enum
-{
-	REMOVE_CORE,
-	LAST_SIGNAL
-};
-
-static guint signals[LAST_SIGNAL] = { 0 };
-
 G_DEFINE_TYPE_EXTENDED (GeditTheatricsAnimatedWidget,
 			gedit_theatrics_animated_widget,
 			GTK_TYPE_BIN,
 			0,
 			G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE,
 					       NULL))
-
-static void
-on_widget_destroyed (GtkWidget                    *widget,
-                     GeditTheatricsAnimatedWidget *aw)
-{
-	GdkWindow *window;
-	cairo_t *img_cr;
-
-	if (!gtk_widget_get_realized (GTK_WIDGET (aw)))
-		return;
-
-	aw->priv->width = aw->priv->widget_alloc.width;
-	aw->priv->height = aw->priv->widget_alloc.height;
-
-	aw->priv->surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
-	                                                aw->priv->width,
-	                                                aw->priv->height);
-
-	img_cr = cairo_create (aw->priv->surface);
-
-	window = gtk_widget_get_window (GTK_WIDGET (aw));
-
-	gdk_cairo_set_source_window (img_cr, window,
-	                             aw->priv->widget_alloc.x,
-	                             aw->priv->widget_alloc.y);
-
-	cairo_paint (img_cr);
-	cairo_destroy (img_cr);
-
-	if (aw->priv->animation_state != GEDIT_THEATRICS_ANIMATION_STATE_GOING)
-	{
-		g_signal_emit (G_OBJECT (aw), signals[REMOVE_CORE], 0);
-	}
-}
 
 static void
 gedit_theatrics_animated_widget_finalize (GObject *object)
@@ -241,9 +192,7 @@ gedit_theatrics_animated_widget_get_preferred_width (GtkWidget *widget,
 	if (aw->priv->orientation == GTK_ORIENTATION_HORIZONTAL)
 	{
 		width = gedit_theatrics_choreographer_pixel_compose (aw->priv->percent,
-		                                                     aw->priv->widget_alloc.width +
-		                                                     aw->priv->start_padding +
-		                                                     aw->priv->end_padding,
+		                                                     aw->priv->widget_alloc.width,
 		                                                     aw->priv->easing);
 	}
 	else
@@ -278,9 +227,7 @@ gedit_theatrics_animated_widget_get_preferred_height (GtkWidget *widget,
 	else
 	{
 		height = gedit_theatrics_choreographer_pixel_compose (aw->priv->percent,
-		                                                      aw->priv->widget_alloc.height +
-		                                                      aw->priv->start_padding +
-		                                                      aw->priv->end_padding,
+		                                                      aw->priv->widget_alloc.height,
 		                                                      aw->priv->easing);
 	}
 
@@ -300,17 +247,17 @@ gedit_theatrics_animated_widget_size_allocate (GtkWidget     *widget,
 		if (aw->priv->orientation == GTK_ORIENTATION_HORIZONTAL)
 		{
 			aw->priv->widget_alloc.height = allocation->height;
-			aw->priv->widget_alloc.x = aw->priv->start_padding;
+			aw->priv->widget_alloc.x = 0;
 
 			if (aw->priv->blocking == GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE)
 			{
-				aw->priv->widget_alloc.x += allocation->width - aw->priv->widget_alloc.width;
+				aw->priv->widget_alloc.x = allocation->width - aw->priv->widget_alloc.width;
 			}
 		}
 		else
 		{
 			aw->priv->widget_alloc.width = allocation->width;
-			aw->priv->widget_alloc.y = aw->priv->start_padding;
+			aw->priv->widget_alloc.y = 0;
 
 			if (aw->priv->blocking == GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE)
 			{
@@ -326,33 +273,6 @@ gedit_theatrics_animated_widget_size_allocate (GtkWidget     *widget,
 	}
 }
 
-static gboolean
-gedit_theatrics_animated_widget_draw (GtkWidget      *widget,
-				      cairo_t        *cr)
-{
-	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (widget);
-
-	if (aw->priv->surface != NULL)
-	{
-		/* Do not scale if the size is 0 */
-		if (aw->priv->width > 0 && aw->priv->height > 0)
-		{
-			cairo_scale (cr,
-				     aw->priv->widget_alloc.width / aw->priv->width,
-				     aw->priv->widget_alloc.height / aw->priv->height);
-			cairo_set_source_surface (cr, aw->priv->surface, 0, 0);
-
-			cairo_paint (cr);
-		}
-
-		return TRUE;
-	}
-	else
-	{
-		return GTK_WIDGET_CLASS (gedit_theatrics_animated_widget_parent_class)->draw (widget, cr);
-	}
-}
-
 static void
 gedit_theatrics_animated_widget_add (GtkContainer *container,
 				     GtkWidget    *widget)
@@ -360,10 +280,6 @@ gedit_theatrics_animated_widget_add (GtkContainer *container,
 	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (container);
 
 	aw->priv->widget = widget;
-
-	g_signal_connect (widget, "destroy",
-			  G_CALLBACK (on_widget_destroyed),
-			  aw);
 
 	GTK_CONTAINER_CLASS (gedit_theatrics_animated_widget_parent_class)->add (container, widget);
 }
@@ -394,7 +310,6 @@ gedit_theatrics_animated_widget_class_init (GeditTheatricsAnimatedWidgetClass *k
 	widget_class->get_preferred_width = gedit_theatrics_animated_widget_get_preferred_width;
 	widget_class->get_preferred_height = gedit_theatrics_animated_widget_get_preferred_height;
 	widget_class->size_allocate = gedit_theatrics_animated_widget_size_allocate;
-	widget_class->draw = gedit_theatrics_animated_widget_draw;
 
 	container_class->add = gedit_theatrics_animated_widget_add;
 	container_class->remove = gedit_theatrics_animated_widget_remove;
@@ -463,16 +378,6 @@ gedit_theatrics_animated_widget_class_init (GeditTheatricsAnimatedWidgetClass *k
 	g_object_class_override_property (object_class,
 	                                  PROP_ORIENTATION,
 	                                  "orientation");
-
-	signals[REMOVE_CORE] =
-		g_signal_new ("remove-core",
-		              G_OBJECT_CLASS_TYPE (object_class),
-		              G_SIGNAL_RUN_LAST,
-		              G_STRUCT_OFFSET (GeditTheatricsAnimatedWidgetClass, remove_core),
-		              NULL, NULL,
-		              g_cclosure_marshal_VOID__VOID,
-		              G_TYPE_NONE,
-		              0);
 
 	g_type_class_add_private (object_class, sizeof (GeditTheatricsAnimatedWidgetPrivate));
 }
@@ -623,15 +528,6 @@ gedit_theatrics_animated_widget_set_bias (GeditTheatricsAnimatedWidget *aw,
 	g_return_if_fail (GEDIT_IS_THEATRICS_ANIMATED_WIDGET (aw));
 
 	aw->priv->bias = bias;
-}
-
-void
-gedit_theatrics_animated_widget_set_end_padding (GeditTheatricsAnimatedWidget *aw,
-                                                 gint                          end_padding)
-{
-	g_return_if_fail (GEDIT_IS_THEATRICS_ANIMATED_WIDGET (aw));
-
-	aw->priv->end_padding = end_padding;
 }
 
 /* ex:set ts=8 noet: */

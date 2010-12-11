@@ -148,6 +148,7 @@ hide_search_widget (GeditViewFrame *frame,
                     gboolean        cancel)
 {
 	GtkTextBuffer *buffer;
+	GdkGravity gravity;
 
 	if (frame->priv->disable_popdown)
 	{
@@ -174,7 +175,24 @@ hide_search_widget (GeditViewFrame *frame,
 		frame->priv->typeselect_flush_timeout = 0;
 	}
 
-	gtk_widget_destroy (frame->priv->search_widget);
+	if (gtk_widget_get_direction (frame->priv->search_entry) == GTK_TEXT_DIR_RTL)
+	{
+		gravity = GDK_GRAVITY_NORTH_WEST;
+	}
+	else
+	{
+		gravity = GDK_GRAVITY_NORTH_EAST;
+	}
+
+	gedit_overlay_slide (GEDIT_OVERLAY (frame->priv->overlay),
+	                     frame->priv->search_widget,
+	                     300,
+	                     GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
+	                     GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_UPSTAGE,
+	                     GTK_ORIENTATION_VERTICAL,
+	                     gravity,
+	                     SEARCH_POPUP_OFFSET,
+	                     FALSE);
 	frame->priv->search_widget = NULL;
 
 	if (cancel)
@@ -1302,14 +1320,15 @@ start_interactive_search_real (GeditViewFrame *frame)
 		gravity = GDK_GRAVITY_NORTH_EAST;
 	}
 
-	gedit_overlay_add_animated_widget (GEDIT_OVERLAY (frame->priv->overlay),
-	                                   frame->priv->search_widget,
-	                                   300,
-	                                   GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
-	                                   GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
-	                                   GTK_ORIENTATION_VERTICAL,
-	                                   gravity,
-	                                   SEARCH_POPUP_OFFSET);
+	gedit_overlay_slide (GEDIT_OVERLAY (frame->priv->overlay),
+	                     frame->priv->search_widget,
+	                     300,
+	                     GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
+	                     GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
+	                     GTK_ORIENTATION_VERTICAL,
+	                     gravity,
+	                     SEARCH_POPUP_OFFSET,
+	                     TRUE);
 
 	init_search_entry (frame);
 

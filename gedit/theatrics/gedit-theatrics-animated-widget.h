@@ -53,8 +53,6 @@ struct _GeditTheatricsAnimatedWidget
 struct _GeditTheatricsAnimatedWidgetClass
 {
 	GtkBinClass parent_class;
-
-	void (* remove_core) (GeditTheatricsAnimatedWidget *aw);
 };
 
 GType				 gedit_theatrics_animated_widget_get_type	(void) G_GNUC_CONST;
@@ -96,9 +94,6 @@ void				 gedit_theatrics_animated_widget_set_percent	(GeditTheatricsAnimatedWidg
 
 void				 gedit_theatrics_animated_widget_set_bias	(GeditTheatricsAnimatedWidget *aw,
 										 gdouble                       bias);
-
-void				 gedit_theatrics_animated_widget_set_end_padding(GeditTheatricsAnimatedWidget *aw,
-										 gint                          end_padding);
 
 G_END_DECLS
 
