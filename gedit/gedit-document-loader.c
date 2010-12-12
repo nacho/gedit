@@ -491,6 +491,18 @@ close_input_stream_ready_cb (GInputStream *stream,
 		return;
 	}
 
+	/* Check if we needed some fallback char, if so, check if there was
+	   a previous error and if not set a fallback used error */
+	if ((gedit_document_output_stream_get_num_fallbacks (GEDIT_DOCUMENT_OUTPUT_STREAM (async->loader->priv->output)) != 0) &&
+	    async->loader->priv->error == NULL)
+	{
+		g_set_error_literal (&async->loader->priv->error,
+		                     GEDIT_DOCUMENT_ERROR,
+		                     GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK,
+		                     "There was a conversion error and it was "
+		                     "needed to use a fallback char");
+	}
+
 	loader_load_completed_or_failed (async->loader, async);
 }
 
@@ -621,18 +633,7 @@ async_read_cb (GInputStream *stream,
 		loader->priv->auto_detected_newline_type =
 			gedit_document_output_stream_detect_newline_type (GEDIT_DOCUMENT_OUTPUT_STREAM (loader->priv->output));
 
-		/* Check if we needed some fallback char, if so, check if there was
-		   a previous error and if not set a fallback used error */
-		/* FIXME Uncomment this when we want to manage conversion fallback */
-		/*if ((gedit_document_output_stream_get_num_fallbacks (GEDIT_DOCUMENT_OUTPUT_STREAM (loader->priv->output)) != 0) &&
-		    loader->priv->error == NULL)
-		{
-			g_set_error_literal (&loader->priv->error,
-					     GEDIT_DOCUMENT_ERROR,
-					     GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK,
-					     "There was a conversion error and it was "
-					     "needed to use a fallback char");
-		}*/
+		
 
 		write_complete (async);
 

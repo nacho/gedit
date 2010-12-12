@@ -57,6 +57,9 @@ struct _GeditDocumentOutputStreamPrivate
 	GSList *encodings;
 	GSList *current_encoding;
 
+	gint error_offset;
+	guint n_fallback_errors;
+
 	guint is_utf8 : 1;
 	guint use_first : 1;
 
@@ -221,6 +224,8 @@ gedit_document_output_stream_init (GeditDocumentOutputStream *stream)
 	stream->priv->encodings = NULL;
 	stream->priv->current_encoding = NULL;
 
+	stream->priv->error_offset = -1;
+
 	stream->priv->is_initialized = FALSE;
 	stream->priv->is_closed = FALSE;
 	stream->priv->is_utf8 = FALSE;
@@ -244,7 +249,10 @@ get_encoding (GeditDocumentOutputStream *stream)
 		return (const GeditEncoding *)stream->priv->current_encoding->data;
 	}
 
-	return NULL;
+	stream->priv->use_first = TRUE;
+	stream->priv->current_encoding = stream->priv->encodings;
+
+	return (const GeditEncoding *)stream->priv->current_encoding->data;
 }
 
 static gboolean
@@ -497,77 +505,135 @@ gedit_document_output_stream_get_guessed (GeditDocumentOutputStream *stream)
 guint
 gedit_document_output_stream_get_num_fallbacks (GeditDocumentOutputStream *stream)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT_OUTPUT_STREAM (stream), FALSE);
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT_OUTPUT_STREAM (stream), 0);
 
-	if (stream->priv->charset_conv == NULL)
-	{
-		return FALSE;
-	}
-
-	return g_charset_converter_get_num_fallbacks (stream->priv->charset_conv) != 0;
+	return stream->priv->n_fallback_errors;
 }
 
-static gboolean
+static void
+apply_error_tag (GeditDocumentOutputStream *stream)
+{
+	GtkTextIter start;
+
+	if (stream->priv->error_offset == -1)
+	{
+		return;
+	}
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (stream->priv->doc),
+	                                    &start, stream->priv->error_offset);
+
+	_gedit_document_apply_error_style (stream->priv->doc,
+	                                   &start, &stream->priv->pos);
+
+	stream->priv->error_offset = -1;
+}
+
+static void
+insert_fallback (GeditDocumentOutputStream *stream,
+                 const gchar               *buffer)
+{
+	guint8 out[4];
+	guint8 v;
+	const gchar hex[] = "0123456789ABCDEF";
+
+	/* if we are here is because we are pointing to an invalid char
+	 * so we substitute it by an hex value */
+	v = *(guint8 *)buffer;
+	out[0] = '\\';
+	out[1] = hex[(v & 0xf0) >> 4];
+	out[2] = hex[(v & 0x0f) >> 0];
+	out[3] = '\0';
+
+	gtk_text_buffer_insert (GTK_TEXT_BUFFER (stream->priv->doc),
+	                        &stream->priv->pos, (const gchar *)out, 3);
+
+	stream->priv->n_fallback_errors++;
+}
+
+static void
 validate_and_insert (GeditDocumentOutputStream *stream,
                      const gchar               *buffer,
                      gsize                      count)
 {
-	const gchar *end;
-	gsize nvalid;
-	gboolean valid;
+	GtkTextBuffer *text_buffer;
+	GtkTextIter   *iter;
 	gsize len;
 
+	text_buffer = GTK_TEXT_BUFFER (stream->priv->doc);
+	iter = &stream->priv->pos;
 	len = count;
 
-	/* validate */
-	valid = g_utf8_validate (buffer, len, &end);
-	nvalid = end - buffer;
-
-	if (!valid)
+	while (len != 0)
 	{
-		gsize remainder;
+		const gchar *end;
+		gboolean valid;
+		gsize nvalid;
 
-		remainder = len - nvalid;
-
-		if ((remainder < MAX_UNICHAR_LEN) &&
-		    (g_utf8_get_char_validated (buffer + nvalid, remainder) == (gunichar)-2))
-		{
-			stream->priv->buffer = g_strndup (end, remainder);
-			stream->priv->buflen = remainder;
-			len -= remainder;
-		}
-		else
-		{
-			return FALSE;
-		}
-	}
-	else
-	{
-		gchar *ptr;
+		/* validate */
+		valid = g_utf8_validate (buffer, len, &end);
+		nvalid = end - buffer;
 
 		/* Note: this is a workaround for a 'bug' in GtkTextBuffer where
 		   inserting first a \r and then in a second insert, a \n,
 		   will result in two lines being added instead of a single
 		   one */
 
-		ptr = g_utf8_find_prev_char (buffer, buffer + len);
-
-		if (ptr && *ptr == '\r' && ptr - buffer == len - 1)
+		if (valid)
 		{
-			stream->priv->buffer = g_new (gchar, 1);
-			stream->priv->buffer[0] = '\r';
-			stream->priv->buflen = 1;
+			gchar *ptr;
 
-			--len;
+			ptr = g_utf8_find_prev_char (buffer, buffer + len);
+
+			if (ptr && *ptr == '\r' && ptr - buffer == len - 1)
+			{
+				stream->priv->buffer = g_new (gchar, 1);
+				stream->priv->buffer[0] = '\r';
+				stream->priv->buflen = 1;
+
+				/* Decrease also the len so in the check
+				   nvalid == len we get out of this method */
+				--nvalid;
+				--len;
+			}
 		}
+
+		/* if we've got any valid char we must tag the invalid chars */
+		if (nvalid > 0)
+		{
+			apply_error_tag (stream);
+		}
+
+		gtk_text_buffer_insert (text_buffer, iter, buffer, nvalid);
+
+		/* If we inserted all return */
+		if (nvalid == len)
+		{
+			break;
+		}
+
+		buffer += nvalid;
+		len = len - nvalid;
+
+		if ((len < MAX_UNICHAR_LEN) &&
+		    (g_utf8_get_char_validated (buffer, len) == (gunichar)-2))
+		{
+			stream->priv->buffer = g_strndup (end, len);
+			stream->priv->buflen = len;
+
+			break;
+		}
+
+		/* we need the start of the chunk of invalid chars */
+		if (stream->priv->error_offset == -1)
+		{
+			stream->priv->error_offset = gtk_text_iter_get_offset (&stream->priv->pos);
+		}
+
+		insert_fallback (stream, buffer);
+		buffer++;
+		len--;
 	}
-
-	gtk_text_buffer_insert (GTK_TEXT_BUFFER (stream->priv->doc),
-	                        &stream->priv->pos,
-	                        buffer,
-	                        len);
-
-	return TRUE;
 }
 
 /* If the last char is a newline, remove it from the buffer (otherwise
@@ -775,21 +841,7 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 		freetext = TRUE;
 	}
 
-	if (!validate_and_insert (ostream, text, len))
-	{
-		/* TODO: we could escape invalid text and tag it in red
-		 * and make the doc readonly.
-		 */
-		g_set_error (error, G_IO_ERROR,
-		             G_IO_ERROR_INVALID_DATA,
-		             _("Invalid UTF-8 sequence in input"));
-
-		if (freetext)
-		{
-			g_free (text);
-		}
-		return -1;
-	}
+	validate_and_insert (ostream, text, len);
 
 	if (freetext)
 	{
@@ -813,12 +865,33 @@ gedit_document_output_stream_flush (GOutputStream  *stream,
 		return TRUE;
 	}
 
-	if (ostream->priv->buflen == 0)
+	if (ostream->priv->buflen > 0 && *ostream->priv->buffer != '\r')
 	{
-		return TRUE;
+		/* If we reached here is because the last insertion was a half
+		   correct char, which has to be inserted as fallback */
+		gchar *text;
+
+		if (ostream->priv->error_offset == -1)
+		{
+			ostream->priv->error_offset = gtk_text_iter_get_offset (&ostream->priv->pos);
+		}
+
+		text = ostream->priv->buffer;
+		while (ostream->priv->buflen != 0)
+		{
+			insert_fallback (ostream, text);
+			text++;
+			ostream->priv->buflen--;
+		}
+
+		g_free (ostream->priv->buffer);
+		ostream->priv->buffer = NULL;
 	}
 	else if (ostream->priv->buflen == 1 && *ostream->priv->buffer == '\r')
 	{
+		/* The previous chars can be invalid */
+		apply_error_tag (ostream);
+
 		/* See special case above, flush this */
 		gtk_text_buffer_insert (GTK_TEXT_BUFFER (ostream->priv->doc),
 		                        &ostream->priv->pos,
@@ -828,19 +901,11 @@ gedit_document_output_stream_flush (GOutputStream  *stream,
 		g_free (ostream->priv->buffer);
 		ostream->priv->buffer = NULL;
 		ostream->priv->buflen = 0;
-
-		return TRUE;
 	}
-	else
-	{
-		/* Conversion error */
-		g_set_error (error,
-		             G_IO_ERROR,
-		             G_IO_ERROR_INVALID_DATA,
-		             _("Incomplete UTF-8 sequence in input"));
 
-		return FALSE;
-	}
+	apply_error_tag (ostream);
+
+	return TRUE;
 }
 
 static gboolean

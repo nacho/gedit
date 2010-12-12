@@ -138,15 +138,17 @@ struct _GeditDocumentPrivate
 	GeditTextRegion *to_search_region;
 	GtkTextTag      *found_tag;
 
+	GtkTextTag      *error_tag;
+
 	/* Mount operation factory */
 	GeditMountOperationFactory  mount_operation_factory;
 	gpointer		    mount_operation_userdata;
 
-	gint readonly : 1;
-	gint last_save_was_manually : 1; 
-	gint language_set_by_user : 1;
-	gint stop_cursor_moved_emission : 1;
-	gint dispose_has_run : 1;
+	guint readonly : 1;
+	guint last_save_was_manually : 1;
+	guint language_set_by_user : 1;
+	guint stop_cursor_moved_emission : 1;
+	guint dispose_has_run : 1;
 };
 
 enum {
@@ -1336,15 +1338,15 @@ set_readonly (GeditDocument *doc,
 }
 
 /**
- * gedit_document_set_readonly:
+ * _gedit_document_set_readonly:
  * @doc: a #GeditDocument
- * @readonly: %TRUE to se the document as read-only
+ * @readonly: %TRUE to set the document as read-only
  *
  * If @readonly is %TRUE sets @doc as read-only.
  */
 void
 _gedit_document_set_readonly (GeditDocument *doc,
-			      gboolean       readonly)
+                              gboolean       readonly)
 {
 	gedit_debug (DEBUG_DOCUMENT);
 
@@ -1704,6 +1706,29 @@ gedit_document_load_cancel (GeditDocument *doc)
 	return gedit_document_loader_cancel (doc->priv->loader);
 }
 
+static gboolean
+has_invalid_chars (GeditDocument *doc)
+{
+	GtkTextBuffer *buffer;
+	GtkTextIter start;
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+
+	gedit_debug (DEBUG_DOCUMENT);
+
+	buffer = GTK_TEXT_BUFFER (doc);
+
+	gtk_text_buffer_get_start_iter (buffer, &start);
+
+	if (gtk_text_iter_begins_tag (&start, doc->priv->error_tag) ||
+	    gtk_text_iter_forward_to_tag_toggle (&start, doc->priv->error_tag))
+	{
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
 static void
 document_saver_saving (GeditDocumentSaver *saver,
 		       gboolean            completed,
@@ -1790,25 +1815,42 @@ gedit_document_save_real (GeditDocument                *doc,
 {
 	g_return_if_fail (doc->priv->saver == NULL);
 
-	/* create a saver, it will be destroyed once saving is complete */
-	doc->priv->saver = gedit_document_saver_new (doc,
-	                                             location,
-	                                             encoding,
-	                                             newline_type,
-	                                             compression_type,
-	                                             flags);
+	if (!(flags & GEDIT_DOCUMENT_SAVE_IGNORE_INVALID_CHARS) && has_invalid_chars (doc))
+	{
+		GError *error = NULL;
 
-	g_signal_connect (doc->priv->saver,
-			  "saving",
-			  G_CALLBACK (document_saver_saving),
-			  doc);
+		g_set_error_literal (&error,
+		                     GEDIT_DOCUMENT_ERROR,
+		                     GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK,
+		                     "The document contains invalid characters");
 
-	doc->priv->requested_encoding = encoding;
-	doc->priv->newline_type = newline_type;
-	doc->priv->compression_type = compression_type;
+		g_signal_emit (doc,
+		               document_signals[SAVED],
+		               0,
+		               error);
+	}
+	else
+	{
+		/* create a saver, it will be destroyed once saving is complete */
+		doc->priv->saver = gedit_document_saver_new (doc,
+		                                             location,
+		                                             encoding,
+		                                             newline_type,
+		                                             compression_type,
+		                                             flags);
 
-	gedit_document_saver_save (doc->priv->saver,
-				   &doc->priv->mtime);
+		g_signal_connect (doc->priv->saver,
+		                  "saving",
+		                  G_CALLBACK (document_saver_saving),
+		                  doc);
+
+		doc->priv->requested_encoding = encoding;
+		doc->priv->newline_type = newline_type;
+		doc->priv->compression_type = compression_type;
+
+		gedit_document_saver_save (doc->priv->saver,
+		                           &doc->priv->mtime);
+	}
 }
 
 /**
@@ -1855,9 +1897,19 @@ gedit_document_save_as (GeditDocument                *doc,
 			GeditDocumentCompressionType  compression_type,
 			GeditDocumentSaveFlags        flags)
 {
+	GError *error = NULL;
+
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 	g_return_if_fail (G_IS_FILE (location));
 	g_return_if_fail (encoding != NULL);
+
+	if (has_invalid_chars (doc))
+	{
+		g_set_error_literal (&error,
+		                     GEDIT_DOCUMENT_ERROR,
+		                     GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK,
+		                     "The document contains invalid chars");
+	}
 
 	/* priv->mtime refers to the the old location (if any). Thus, it should be
 	 * ignored when saving as. */
@@ -1868,10 +1920,11 @@ gedit_document_save_as (GeditDocument                *doc,
 		       encoding,
 		       newline_type,
 		       compression_type,
-		       flags | GEDIT_DOCUMENT_SAVE_IGNORE_MTIME);
+		       flags | GEDIT_DOCUMENT_SAVE_IGNORE_MTIME,
+		       error);
 }
 
-gboolean	 
+gboolean
 gedit_document_is_untouched (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), TRUE);
@@ -3099,5 +3152,49 @@ gedit_document_set_metadata (GeditDocument *doc,
 	g_object_unref (info);
 }
 #endif
+
+static void
+sync_error_tag (GeditDocument *doc,
+                GParamSpec    *pspec,
+                gpointer       data)
+{
+	sync_tag_style (doc, doc->priv->error_tag, "def:error");
+}
+
+void
+_gedit_document_apply_error_style (GeditDocument *doc,
+                                   GtkTextIter   *start,
+                                   GtkTextIter   *end)
+{
+	GtkTextBuffer *buffer;
+
+	gedit_debug (DEBUG_DOCUMENT);
+
+	buffer = GTK_TEXT_BUFFER (doc);
+
+	if (doc->priv->error_tag == NULL)
+	{
+		doc->priv->error_tag = gtk_text_buffer_create_tag (GTK_TEXT_BUFFER (doc),
+		                                                   "invalid-char-style",
+		                                                   NULL);
+
+		sync_error_tag (doc, NULL, NULL);
+
+		g_signal_connect (doc,
+		                  "notify::style-scheme",
+		                  G_CALLBACK (sync_error_tag),
+		                  NULL);
+	}
+
+	/* make sure the 'error' tag has the priority over
+	 * syntax highlighting tags */
+	text_tag_set_highest_priority (doc->priv->error_tag,
+	                               GTK_TEXT_BUFFER (doc));
+
+	gtk_text_buffer_apply_tag (buffer,
+	                           doc->priv->error_tag,
+	                           start,
+	                           end);
+}
 
 /* ex:set ts=8 noet: */

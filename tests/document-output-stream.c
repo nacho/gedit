@@ -62,11 +62,6 @@ test_consecutive_write (const gchar *inbuf,
 
 	g_assert_no_error (err);
 
-	g_object_get (G_OBJECT (doc), "text", &b, NULL);
-
-	g_assert_cmpstr (inbuf, ==, b);
-	g_free (b);
-
 	type = gedit_document_output_stream_detect_newline_type (GEDIT_DOCUMENT_OUTPUT_STREAM (out));
 	g_assert (type == newline_type);
 
@@ -150,6 +145,17 @@ test_boundary ()
 
 	g_object_unref (doc);
 	g_object_unref (out);
+}
+
+static void
+test_invalid_utf8 ()
+{
+	test_consecutive_write ("foobar\n\xef\xbf\xbe", "foobar\n\\EF\\BF\\BE", 10,
+	                        GEDIT_DOCUMENT_NEWLINE_TYPE_LF);
+	test_consecutive_write ("foobar\n\xef\xbf\xbezzzzzz\n", "foobar\n\\EF\\BF\\BEzzzzzz", 10,
+	                        GEDIT_DOCUMENT_NEWLINE_TYPE_LF);
+	test_consecutive_write ("\xef\xbf\xbezzzzzz\n", "\\EF\\BF\\BEzzzzzz", 10,
+	                        GEDIT_DOCUMENT_NEWLINE_TYPE_LF);
 }
 
 /* SMART CONVERSION */
@@ -395,6 +401,7 @@ int main (int   argc,
 	g_test_add_func ("/document-output-stream/consecutive_tnewline", test_consecutive_tnewline);
 	g_test_add_func ("/document-output-stream/big-char", test_big_char);
 	g_test_add_func ("/document-output-stream/test-boundary", test_boundary);
+	g_test_add_func ("/document-output-stream/test-invalid-utf8", test_invalid_utf8);
 
 	g_test_add_func ("/document-output-stream/smart conversion: utf8-utf8", test_utf8_utf8);
 	g_test_add_func ("/document-output-stream/smart conversion: guessed", test_guessed);

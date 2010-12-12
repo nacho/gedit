@@ -63,6 +63,8 @@ GtkWidget	*gedit_unrecoverable_saving_error_info_bar_new		(GFile               *
 GtkWidget	*gedit_externally_modified_info_bar_new		 	(GFile               *location,
 									 gboolean             document_modified);
 
+GtkWidget	*gedit_invalid_character_info_bar_new			(GFile               *location);
+
 G_END_DECLS
 
 #endif  /* __GEDIT_IO_ERROR_INFO_BAR_H__  */

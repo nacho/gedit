@@ -109,7 +109,8 @@ typedef enum
 {
 	GEDIT_DOCUMENT_SAVE_IGNORE_MTIME 	= 1 << 0,
 	GEDIT_DOCUMENT_SAVE_IGNORE_BACKUP	= 1 << 1,
-	GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP	= 1 << 2
+	GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP	= 1 << 2,
+	GEDIT_DOCUMENT_SAVE_IGNORE_INVALID_CHARS= 1 << 3
 } GeditDocumentSaveFlags;
 
 /* Private structure type */
@@ -322,6 +323,11 @@ void		 _gedit_document_set_readonly 	(GeditDocument       *doc,
 
 glong		 _gedit_document_get_seconds_since_last_save_or_load 
 						(GeditDocument       *doc);
+
+void		 _gedit_document_apply_error_style
+                                                (GeditDocument *doc,
+                                                 GtkTextIter   *start,
+                                                 GtkTextIter   *end);
 
 /* Note: this is a sync stat: use only on local files */
 gboolean	_gedit_document_check_externally_modified

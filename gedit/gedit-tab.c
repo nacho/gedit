@@ -597,11 +597,9 @@ io_loading_error_info_bar_response (GtkWidget *info_bar,
 			break;
 		case GTK_RESPONSE_YES:
 			/* This means that we want to edit the document anyway */
-			set_info_bar (tab, NULL);
-			_gedit_document_set_readonly (doc, FALSE);
-			break;
-		case GTK_RESPONSE_NO:
-			/* We don't want to edit the document just show it */
+			tab->priv->not_editable = FALSE;
+			gtk_text_view_set_editable (GTK_TEXT_VIEW (view),
+			                            TRUE);
 			set_info_bar (tab, NULL);
 			break;
 		default:
@@ -1067,11 +1065,13 @@ document_loaded (GeditDocument *document,
 		{
 			GtkWidget *emsg;
 
-			_gedit_document_set_readonly (document, TRUE);
+			/* Set the tab as not editable as we have an error, the
+			   user can decide to make it editable again */
+			tab->priv->not_editable = TRUE;
 
 			emsg = gedit_io_loading_error_info_bar_new (location,
-									tab->priv->tmp_encoding,
-									error);
+								    tab->priv->tmp_encoding,
+								    error);
 
 			set_info_bar (tab, emsg);
 
@@ -1208,8 +1208,8 @@ end_saving (GeditTab *tab)
 
 static void 
 unrecoverable_saving_error_info_bar_response (GtkWidget        *info_bar,
-						  gint              response_id,
-						  GeditTab         *tab)
+                                              gint              response_id,
+                                              GeditTab         *tab)
 {
 	GeditView *view;
 	
@@ -1225,6 +1225,41 @@ unrecoverable_saving_error_info_bar_response (GtkWidget        *info_bar,
 	view = gedit_tab_get_view (tab);
 
 	gtk_widget_grab_focus (GTK_WIDGET (view));
+}
+
+static void 
+invalid_character_info_bar_response (GtkWidget *info_bar,
+                                     gint       response_id,
+                                     GeditTab  *tab)
+{
+	if (response_id == GTK_RESPONSE_YES)
+	{
+		GeditDocument *doc;
+
+		doc = gedit_tab_get_document (tab);
+		g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+		set_info_bar (tab, NULL);
+
+		g_return_if_fail (tab->priv->tmp_save_location != NULL);
+		g_return_if_fail (tab->priv->tmp_encoding != NULL);
+
+		gedit_tab_set_state (tab, GEDIT_TAB_STATE_SAVING);
+
+		/* don't bug the user again with this... */
+		tab->priv->save_flags |= GEDIT_DOCUMENT_SAVE_IGNORE_INVALID_CHARS;
+
+		g_return_if_fail (tab->priv->auto_save_timeout <= 0);
+		
+		/* Force saving */
+		gedit_document_save (doc, tab->priv->save_flags);
+	}
+	else
+	{
+		unrecoverable_saving_error_info_bar_response (info_bar,
+								  response_id,
+								  tab);
+	}
 }
 
 static void 
@@ -1357,9 +1392,12 @@ document_saved (GeditDocument *document,
 	g_return_if_fail (tab->priv->tmp_save_location != NULL);
 	g_return_if_fail (tab->priv->tmp_encoding != NULL);
 	g_return_if_fail (tab->priv->auto_save_timeout <= 0);
-	
-	g_timer_destroy (tab->priv->timer);
-	tab->priv->timer = NULL;
+
+	if (tab->priv->timer != NULL)
+	{
+		g_timer_destroy (tab->priv->timer);
+		tab->priv->timer = NULL;
+	}
 	tab->priv->times_called = 0;
 	
 	set_info_bar (tab, NULL);
@@ -1401,6 +1439,21 @@ document_saved (GeditDocument *document,
 					  "response",
 					  G_CALLBACK (no_backup_error_info_bar_response),
 					  tab);
+		}
+		else if (error->domain == GEDIT_DOCUMENT_ERROR &&
+		         error->code == GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK)
+		{
+			/* If we have any invalid char in the document we must warn the user
+			   as it can make the document useless if it is saved */
+			emsg = gedit_invalid_character_info_bar_new (tab->priv->tmp_save_location);
+			g_return_if_fail (emsg != NULL);
+
+			set_info_bar (tab, emsg);
+
+			g_signal_connect (emsg,
+			                  "response",
+			                  G_CALLBACK (invalid_character_info_bar_response),
+			                  tab);
 		}
 		else if (error->domain == GEDIT_DOCUMENT_ERROR ||
 			 (error->domain == G_IO_ERROR &&
@@ -2223,11 +2276,11 @@ _gedit_tab_save (GeditTab *tab)
 
 	/* uri used in error messages, will be freed in document_saved */
 	tab->priv->tmp_save_location = gedit_document_get_location (doc);
-	tab->priv->tmp_encoding = gedit_document_get_encoding (doc); 
+	tab->priv->tmp_encoding = gedit_document_get_encoding (doc);
 
 	if (tab->priv->auto_save_timeout > 0)
 		remove_auto_save_timeout (tab);
-		
+
 	gedit_document_save (doc, save_flags);
 }
 
