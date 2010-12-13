@@ -505,6 +505,69 @@ gedit_document_output_stream_get_num_fallbacks (GeditDocumentOutputStream *strea
 	return g_charset_converter_get_num_fallbacks (stream->priv->charset_conv) != 0;
 }
 
+static gboolean
+validate_and_insert (GeditDocumentOutputStream *stream,
+                     const gchar               *buffer,
+                     gsize                      count)
+{
+	const gchar *end;
+	gsize nvalid;
+	gboolean valid;
+	gsize len;
+
+	len = count;
+
+	/* validate */
+	valid = g_utf8_validate (buffer, len, &end);
+	nvalid = end - buffer;
+
+	if (!valid)
+	{
+		gsize remainder;
+
+		remainder = len - nvalid;
+
+		if ((remainder < MAX_UNICHAR_LEN) &&
+		    (g_utf8_get_char_validated (buffer + nvalid, remainder) == (gunichar)-2))
+		{
+			stream->priv->buffer = g_strndup (end, remainder);
+			stream->priv->buflen = remainder;
+			len -= remainder;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	else
+	{
+		gchar *ptr;
+
+		/* Note: this is a workaround for a 'bug' in GtkTextBuffer where
+		   inserting first a \r and then in a second insert, a \n,
+		   will result in two lines being added instead of a single
+		   one */
+
+		ptr = g_utf8_find_prev_char (buffer, buffer + len);
+
+		if (ptr && *ptr == '\r' && ptr - buffer == len - 1)
+		{
+			stream->priv->buffer = g_new (gchar, 1);
+			stream->priv->buffer[0] = '\r';
+			stream->priv->buflen = 1;
+
+			--len;
+		}
+	}
+
+	gtk_text_buffer_insert (GTK_TEXT_BUFFER (stream->priv->doc),
+	                        &stream->priv->pos,
+	                        buffer,
+	                        len);
+
+	return TRUE;
+}
+
 /* If the last char is a newline, remove it from the buffer (otherwise
    GtkTextView shows it as an empty line). See bug #324942. */
 static void
@@ -555,10 +618,6 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 	gchar *text;
 	gsize len;
 	gboolean freetext = FALSE;
-	const gchar *end;
-	gsize nvalid;
-	gboolean valid;
-	gsize remainder;
 
 	if (g_cancellable_set_error_if_cancelled (cancellable, error))
 	{
@@ -686,6 +745,8 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 
 		if (err != NULL)
 		{
+			gsize remainder;
+
 			remainder = len - conv_read;
 
 			/* Store the partial char for the next conversion */
@@ -712,63 +773,21 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 		freetext = TRUE;
 	}
 
-	/* validate */
-	valid = g_utf8_validate (text, len, &end);
-	nvalid = end - text;
-
-	if (!valid)
+	if (!validate_and_insert (ostream, text, len))
 	{
-		remainder = len - nvalid;
+		/* TODO: we could escape invalid text and tag it in red
+		 * and make the doc readonly.
+		 */
+		g_set_error (error, G_IO_ERROR,
+		             G_IO_ERROR_INVALID_DATA,
+		             _("Invalid UTF-8 sequence in input"));
 
-		if ((remainder < MAX_UNICHAR_LEN) &&
-		    (g_utf8_get_char_validated (text + nvalid, remainder) == (gunichar)-2))
+		if (freetext)
 		{
-			ostream->priv->buffer = g_strndup (end, remainder);
-			ostream->priv->buflen = remainder;
-			len -= remainder;
+			g_free (text);
 		}
-		else
-		{
-			/* TODO: we could escape invalid text and tag it in red
-			 * and make the doc readonly.
-			 */
-			g_set_error (error, G_IO_ERROR,
-			             G_IO_ERROR_INVALID_DATA,
-			             _("Invalid UTF-8 sequence in input"));
-
-			if (freetext)
-			{
-				g_free (text);
-			}
-
-			return -1;
-		}
+		return -1;
 	}
-	else
-	{
-		gchar *ptr;
-
-		/* Note: this is a workaround for a 'bug' in GtkTextBuffer where
-		   inserting first a \r and then in a second insert, a \n,
-		   will result in two lines being added instead of a single
-		   one */
-
-		ptr = g_utf8_find_prev_char (text, text + len);
-
-		if (ptr && *ptr == '\r' && ptr - text == len - 1)
-		{
-			ostream->priv->buffer = g_new (gchar, 1);
-			ostream->priv->buffer[0] = '\r';
-			ostream->priv->buflen = 1;
-
-			--len;
-		}
-	}
-
-	gtk_text_buffer_insert (GTK_TEXT_BUFFER (ostream->priv->doc),
-	                        &ostream->priv->pos,
-	                        text,
-	                        len);
 
 	if (freetext)
 	{
