@@ -2,15 +2,56 @@
       type="topic" style="task"
       id="gedit-plugins-install">
 
-<info>
-  <link type="guide" xref="gedit-plugin-guide#gedit-additional-plugins"/>
-  <revision pkgversion="3.0" version="0.1" date="2010-10-10" status="incomplete"/>
-  <credit type="author">
-    <name>Jim Campbell</name>
-    <email>jwcampbell@gmail.com</email>
-  </credit>
-</info>
+  <info>
+    <link type="guide" xref="gedit-plugin-guide#gedit-additional-plugins"/>
+    <revision pkgversion="3.0" version="0.1" date="2010-10-10" status="incomplete"/>
+    <credit type="author">
+      <name>Jim Campbell</name>
+      <email>jwcampbell@gmail.com</email>
+    </credit>
 
-<title>*Install Additional gedit Plugins</title>
+    <revision pkgversion="3.0" version="0.2" date="2010-12-12" status="draft"/>
+    <credit type="author">
+      <name>Daniel Neel</name>
+      <email>dneelyep@gmail.com</email>
+    </credit>
+  </info>
+
+  <title>Install Additional gedit Plugins</title>
+
+  <p>Installing third-party plugins gives you extra functionality that is not included by default in <app>gedit</app>. An online list of third-party plugins is maintained <link href="http://live.gnome.org/Gedit/Plugins#third_party">here</link>.</p>
+
+  <section id="gedit-plugins-install-download">
+    <title>Obtain</title>
+    <p>The first step to install a plugin in <app>gedit</app> is to obtain the plugin. Third-party plugins will often be obtained by downloading them from the plugin's web site. Refer to the plugin's documentation for further information on obtaining the plugin - instructions will vary depending on the plugin.</p>
+  </section>
+
+  <section id="gedit-plugins-install-install">
+    <title>Install</title>
+    <!-- Are all plugins released as tarballs? If so, this section should focus on extracting the tarball into the proper directory. If not, it should focus on copying the files into the proper directory, to avoid confusion. Or maybe it would be better to focus solely on copying the files into the directory, as this applies for both a tarball and any other set of files. -->
+    <p>After you have obtained the plugin you wish to install, you will need to install it.</p>
+    <steps>
+      <title>Installing a Plugin</title>
+      <item><p>Locate the plugin files to be installed.</p></item>
+      <item>
+        <p>Install the plugin files:</p>
+        <list>
+          <item><p>To make the plugin available for all users of the system: copy the plugin into <file>/usr/lib/help/C/gedit-2/plugins/</file></p></item>
+          <item><p>For just the current user: copy the plugin into <file>/home/<var>username</var>/.gnome/gedit/plugins</file></p></item>
+          <item><p>You will need to copy the plugin files with elevated permissions.</p></item>
+	  <!-- 'elevated permissions' - awkward phrase, explain better -->
+          <!-- Also, the '/username/' section is currently (12/12/10) displaying incorrectly - should just be emphasizing the 'username' portion, not the /'s also. -->
+        </list>
+      </item>
+    </steps>
+    <p>After you have moved the plugin files into the correct directory, the plugin will appear in the Preferences menu (<guiseq><gui>Edit</gui><gui>Preferences</gui><gui>Plugins</gui></guiseq>). From there, the plugin needs to be enabled to be used.</p>
+    <note style="tip">
+      <p>You will need to have hidden files displayed to view the <file>/.gnome</file> directory. To display hidden files, click <guiseq><gui>View</gui><gui>Show Hidden Files</gui></guiseq> or press <keyseq><key>Ctrl</key><key>H</key></keyseq>.</p>
+    </note>
+    <note style="important">
+      <!-- Find out under what cases the directory might not be installed. Explain that if possible. -->
+      <p>The <file>.gnome2/gedit/plugins/</file> directory may not be installed on your system. If it is not, you will need to create it.</p>
+    </note>
+  </section>
 
 </page>
