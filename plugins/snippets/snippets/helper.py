@@ -20,11 +20,10 @@ from xml.sax import saxutils
 from xml.etree.ElementTree import *
 import re
 
-import gtk
-from gtk import gdk
+from gi.repository import Gtk, Gdk
 
 def message_dialog(par, typ, msg):
-        d = gtk.MessageDialog(par, gtk.DIALOG_MODAL, typ, gtk.BUTTONS_OK, msg)
+        d = Gtk.MessageDialog(par, Gtk.DialogFlags.MODAL, typ, Gtk.ButtonsType.OK, msg)
         d.set_property('use-markup', True)
 
         d.run()
@@ -34,19 +33,19 @@ def compute_indentation(view, piter):
         line = piter.get_line()
         start = view.get_buffer().get_iter_at_line(line)
         end = start.copy()
-        
+
         ch = end.get_char()
-        
+
         while (ch.isspace() and ch != '\r' and ch != '\n' and \
                         end.compare(piter) < 0):
                 if not end.forward_char():
                         break;
-                
+
                 ch = end.get_char()
-        
+
         if start.equal(end):
                 return ''
-        
+
         return start.get_slice(end)
 
 def markup_escape(text):
@@ -76,7 +75,7 @@ def insert_with_indent(view, piter, text, indentfirst = True, context = None):
                                 text += indent + lines[i] + '\n'
                         else:
                                 text += lines[i] + '\n'
-                
+
                 view.get_buffer().insert(piter, text[:-1])
 
         view.get_buffer().set_data('GeditSnippetsPluginContext', None)
@@ -111,7 +110,7 @@ def _write_node(node, file, cdata_nodes=(), indent=0):
                 _write_indent(file, "<?%s?>\n" % saxutils.escape(node.text.encode('utf-8')), indent)
         else:
                 items = node.items()
-                
+
                 if items or node.text or len(node):
                         _write_indent(file, "<" + tag.encode('utf-8'), indent)
 
@@ -131,7 +130,7 @@ def _write_node(node, file, cdata_nodes=(), indent=0):
 
                                 for n in node:
                                         _write_node(n, file, cdata_nodes, indent + 1)
-                        
+
                                 if not len(node):
                                         file.write("</" + tag.encode('utf-8') + ">\n")
                                 else:
@@ -150,33 +149,33 @@ def _cdata(text, replace=string.replace):
 def buffer_word_boundary(buf):
         iter = buf.get_iter_at_mark(buf.get_insert())
         start = iter.copy()
-        
+
         if not iter.starts_word() and (iter.inside_word() or iter.ends_word()):
                 start.backward_word_start()
-        
+
         if not iter.ends_word() and iter.inside_word():
                 iter.forward_word_end()
-                
+
         return (start, iter)
 
 def buffer_line_boundary(buf):
         iter = buf.get_iter_at_mark(buf.get_insert())
         start = iter.copy()
         start.set_line_offset(0)
-        
+
         if not iter.ends_line():
                 iter.forward_to_line_end()
-        
+
         return (start, iter)
 
 def drop_get_uris(selection):
         lines = re.split('\\s*[\\n\\r]+\\s*', selection.data.strip())
         result = []
-        
+
         for line in lines:
                 if not line.startswith('#'):
                         result.append(line)
-        
+
         return result
 
 # ex:ts=8:et:

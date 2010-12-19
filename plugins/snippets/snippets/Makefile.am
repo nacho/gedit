@@ -3,19 +3,19 @@ plugindir = $(GEDIT_PLUGINS_LIBS_DIR)/snippets
 
 plugin_PYTHON = \
 	__init__.py \
-	WindowHelper.py \
-	Document.py \
-	Library.py \
-	Snippet.py \
-	Parser.py \
-	Placeholder.py \
-	Manager.py \
-	Helper.py \
-	SubstitutionParser.py \
-	Importer.py \
-	Exporter.py \
-	LanguageManager.py \
-	Completion.py
+	windowactivatable.py \
+	document.py \
+	library.py \
+	snippet.py \
+	parser.py \
+	placeholder.py \
+	manager.py \
+	helper.py \
+	substitutionparser.py \
+	importer.py \
+	exporter.py \
+	languagemanager.py \
+	completion.py
 
 uidir = $(GEDIT_PLUGINS_DATA_DIR)/snippets/ui
 ui_DATA = snippets.ui

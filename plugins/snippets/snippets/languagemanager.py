@@ -15,24 +15,26 @@
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import gtksourceview2 as gsv
+from gi.repository import GtkSource
 import os
 
-from Library import Library
+from library import Library
 
 global manager
 manager = None
 
 def get_language_manager():
         global manager
-        
+
         if not manager:
                 dirs = []
-        
+
                 for d in Library().systemdirs:
                         dirs.append(os.path.join(d, 'lang'))
-        
-                manager = gsv.LanguageManager()
+
+                manager = GtkSource.LanguageManager()
                 manager.set_search_path(dirs + manager.get_search_path())
-        
+
         return manager
+
+# ex:ts=8:et:

@@ -18,17 +18,14 @@
 import os
 import re
 
-import gtk
-from gtk import gdk
-import gio
-import gedit
-import gtksourceview2 as gsv
-import gobject
+import cairo
+from gi.repository import Gtk, Gdk, Gio, GLib, GtkSource, Gedit
+import glib
 
-from Library import Library
-from Snippet import Snippet
-from Placeholder import *
-import Completion
+from library import Library
+from snippet import Snippet
+from placeholder import *
+import completion
 
 class DynamicSnippet(dict):
         def __init__(self, text):
@@ -36,37 +33,37 @@ class DynamicSnippet(dict):
                 self.valid = True
 
 class Document:
-        TAB_KEY_VAL = (gtk.keysyms.Tab, \
-                        gtk.keysyms.ISO_Left_Tab)
-        SPACE_KEY_VAL = (gtk.keysyms.space,)
-        
+        TAB_KEY_VAL = (Gdk.KEY_Tab, \
+                        Gdk.KEY_ISO_Left_Tab)
+        SPACE_KEY_VAL = (Gdk.KEY_space,)
+
         def __init__(self, instance, view):
                 self.view = None
                 self.instance = instance
-                
+
                 self.placeholders = []
                 self.active_snippets = []
                 self.active_placeholder = None
                 self.signal_ids = {}
-                
+
                 self.ordered_placeholders = []
                 self.update_placeholders = []
                 self.jump_placeholders = []
                 self.language_id = 0
                 self.timeout_update_id = 0
-                
-                self.provider = Completion.Provider(_('Snippets'), self.language_id, self.on_proposal_activated)
-                self.defaults_provider = Completion.Defaults(self.on_default_activated)
-                
+
+                self.provider = completion.Provider(_('Snippets'), self.language_id, self.on_proposal_activated)
+                self.defaults_provider = completion.Defaults(self.on_default_activated)
+
                 # Always have a reference to the global snippets
                 Library().ref(None)
                 self.set_view(view)
-        
+
         # Stop controlling the view. Remove all active snippets, remove references
         # to the view and the plugin instance, disconnect all signal handlers
         def stop(self):
                 if self.timeout_update_id != 0:
-                        gobject.source_remove(self.timeout_update_id)
+                        GLib.source_remove(self.timeout_update_id)
                         self.timeout_update_id = 0
                         del self.update_placeholders[:]
                         del self.jump_placeholders[:]
@@ -81,15 +78,15 @@ class Document:
                 if (obj, signal) in self.signal_ids:
                         obj.disconnect(self.signal_ids[(obj, signal)])
                         del self.signal_ids[(obj, signal)]
-                
+
         def connect_signal(self, obj, signal, cb):
-                self.disconnect_signal(obj, signal)     
+                self.disconnect_signal(obj, signal)
                 self.signal_ids[(obj, signal)] = obj.connect(signal, cb)
 
         def connect_signal_after(self, obj, signal, cb):
                 self.disconnect_signal(obj, signal)
                 self.signal_ids[(obj, signal)] = obj.connect_after(signal, cb)
-                
+
         # Set the view to be controlled. Installs signal handlers and sets current
         # language. If there is already a view set this function will first remove
         # all currently active snippets and disconnect all current signals. So
@@ -100,28 +97,31 @@ class Document:
                         buf = self.view.get_buffer()
 
                         # Remove signals
-                        signals = {self.view: ('key-press-event', 'destroy', 
+                        signals = {self.view: ('key-press-event', 'destroy',
                                                'notify::editable', 'drag-data-received', 'expose-event'),
                                    buf:       ('notify::language', 'changed', 'cursor-moved', 'insert-text'),
                                    self.view.get_completion(): ('hide',)}
 
                         for obj, sig in signals.items():
-                                for s in sig:
-                                        self.disconnect_signal(obj, s)
-                        
+                                if obj:
+                                        for s in sig:
+                                                self.disconnect_signal(obj, s)
+
                         # Remove all active snippets
                         for snippet in list(self.active_snippets):
                                 self.deactivate_snippet(snippet, True)
-                        
+
                         completion = self.view.get_completion()
-                        completion.remove_provider(self.provider)
-                        completion.remove_provider(self.defaults_provider)                        
+
+                        if completion:
+                                completion.remove_provider(self.provider)
+                                completion.remove_provider(self.defaults_provider)
 
                 self.view = view
-                
+
                 if view != None:
                         buf = view.get_buffer()
-                       
+
                         self.connect_signal(view, 'destroy', self.on_view_destroy)
 
                         if view.get_editable():
@@ -130,22 +130,22 @@ class Document:
                         self.connect_signal(buf, 'notify::language', self.on_notify_language)
                         self.connect_signal(view, 'notify::editable', self.on_notify_editable)
                         self.connect_signal(view, 'drag-data-received', self.on_drag_data_received)
-                        self.connect_signal_after(view, 'expose-event', self.on_expose_event)
+                        self.connect_signal_after(view, 'draw', self.on_draw)
 
                         self.update_language()
 
                         completion = view.get_completion()
+
                         completion.add_provider(self.provider)
-                        
                         completion.add_provider(self.defaults_provider)
-                        
+
                         self.connect_signal(completion, 'hide', self.on_completion_hide)
                 elif self.language_id != 0:
                         langid = self.language_id
-                        
+
                         self.language_id = None;
                         self.provider.language_id = self.language_id
-                        
+
                         if self.instance:
                                 self.instance.language_changed(self)
 
@@ -154,7 +154,7 @@ class Document:
         def set_view(self, view):
                 if view == self.view:
                         return
-                
+
                 self._set_view(view)
 
         # Call this whenever the language in the view changes. This makes sure that
@@ -187,7 +187,7 @@ class Document:
                 if not self.view or not self.view.get_editable():
                         return False
 
-                accelerator = gtk.accelerator_name(keyval, mod)
+                accelerator = Gtk.accelerator_name(keyval, mod)
                 snippets = Library().from_accelerator(accelerator, \
                                 self.language_id)
 
@@ -206,11 +206,11 @@ class Document:
 
         def first_snippet_inserted(self):
                 buf = self.view.get_buffer()
-                
+
                 self.connect_signal(buf, 'changed', self.on_buffer_changed)
                 self.connect_signal(buf, 'cursor-moved', self.on_buffer_cursor_moved)
                 self.connect_signal_after(buf, 'insert-text', self.on_buffer_insert_text)
-        
+
         def last_snippet_removed(self):
                 buf = self.view.get_buffer()
                 self.disconnect_signal(buf, 'changed')
@@ -219,8 +219,8 @@ class Document:
 
         def current_placeholder(self):
                 buf = self.view.get_buffer()
-                
-                piter = buf.get_iter_at_mark(buf.get_insert())        
+
+                piter = buf.get_iter_at_mark(buf.get_insert())
                 found = []
 
                 for placeholder in self.placeholders:
@@ -240,17 +240,17 @@ class Document:
         def advance_placeholder(self, direction):
                 # Returns (CurrentPlaceholder, NextPlaceholder), depending on direction
                 buf = self.view.get_buffer()
-                
+
                 piter = buf.get_iter_at_mark(buf.get_insert())
                 found = current = next = None
                 length = len(self.placeholders)
-                
+
                 placeholders = list(self.placeholders)
-                
+
                 if self.active_placeholder:
                         begin = self.active_placeholder.begin_iter()
                         end = self.active_placeholder.end_iter()
-                        
+
                         if piter.compare(begin) >= 0 and piter.compare(end) <= 0:
                                 current = self.active_placeholder
                                 currentIndex = placeholders.index(self.active_placeholder)
@@ -270,19 +270,19 @@ class Document:
                         placeholder = placeholders[index]
                         begin = placeholder.begin_iter()
                         end = placeholder.end_iter()
-                        
+
                         # Find the nearest placeholder
                         if nearest(piter, begin, end, found):
                                 foundIndex = index
                                 found = placeholder
-                        
+
                         # Find the current placeholder
                         if piter.compare(begin) >= 0 and \
                                         piter.compare(end) <= 0 and \
                                         current == None:
                                 currentIndex = index
                                 current = placeholder
-                
+
                 if current and current != found and \
                    (current.begin_iter().compare(found.begin_iter()) == 0 or \
                     current.end_iter().compare(found.begin_iter()) == 0) and \
@@ -292,7 +292,7 @@ class Document:
                         # resolve the 'hugging' problem
                         current = self.active_placeholder
                         currentIndex = placeholders.index(current)
-                
+
                 if current:
                         if indexer(currentIndex):
                                 next = placeholders[currentIndex + direction]
@@ -300,19 +300,19 @@ class Document:
                         next = found
                 elif length > 0:
                         next = self.placeholders[0]
-                
+
                 return current, next
-        
+
         def next_placeholder(self):
                 return self.advance_placeholder(1)
-        
+
         def previous_placeholder(self):
                 return self.advance_placeholder(-1)
 
         def cursor_on_screen(self):
                 buf = self.view.get_buffer()
                 self.view.scroll_mark_onscreen(buf.get_insert())
-        
+
         def set_active_placeholder(self, placeholder):
                 self.active_placeholder = placeholder
 
@@ -323,20 +323,20 @@ class Document:
                         # Signal this placeholder to end action
                         self.view.get_completion().hide()
                         current.leave()
-                        
+
                         if current.__class__ == PlaceholderEnd:
                                 last = current
-                
+
                 self.set_active_placeholder(next)
-                
+
                 if next:
                         next.enter()
-                        
+
                         if next.__class__ == PlaceholderEnd:
                                 last = next
                         elif len(next.defaults) > 1 and next.get_text() == next.default:
                                 self.defaults_provider.set_defaults(next.defaults)
-                                
+
                                 cm = self.view.get_completion()
                                 cm.show([self.defaults_provider], cm.create_context())
 
@@ -346,15 +346,15 @@ class Document:
                                 if snippet.placeholders[0] == last:
                                         self.deactivate_snippet(snippet)
                                         break
-                
+
                 self.cursor_on_screen()
-                
+
                 return next != None
-        
+
         def skip_to_next_placeholder(self):
                 (current, next) = self.next_placeholder()
                 return self.goto_placeholder(current, next)
-        
+
         def skip_to_previous_placeholder(self):
                 (current, prev) = self.previous_placeholder()
                 return self.goto_placeholder(current, prev)
@@ -363,36 +363,36 @@ class Document:
                 bounds = buf.get_selection_bounds()
 
                 if bounds:
-                        return buf.get_text(bounds[0], bounds[1])
+                        return buf.get_text(bounds[0], bounds[1], False)
                 else:
                         return ''
 
         def env_get_current_word(self, buf):
                 start, end = buffer_word_boundary(buf)
-                
-                return buf.get_text(start, end)
+
+                return buf.get_text(start, end, False)
 
         def env_get_current_line(self, buf):
                 start, end = buffer_line_boundary(buf)
-                
-                return buf.get_text(start, end)
+
+                return buf.get_text(start, end, False)
 
         def env_get_current_line_number(self, buf):
                 start, end = buffer_line_boundary(buf)
-                
+
                 return str(start.get_line() + 1)
-                
+
         def env_get_document_uri(self, buf):
                 location = buf.get_location()
-                
+
                 if location:
                         return location.get_uri()
                 else:
                         return ''
-        
+
         def env_get_document_name(self, buf):
                 location = buf.get_location()
-                
+
                 if location:
                         return location.get_basename()
                 else:
@@ -400,7 +400,7 @@ class Document:
 
         def env_get_document_scheme(self, buf):
                 location = buf.get_location()
-                
+
                 if location:
                         return location.get_uri_scheme()
                 else:
@@ -408,7 +408,7 @@ class Document:
 
         def env_get_document_path(self, buf):
                 location = buf.get_location()
-                
+
                 if location:
                         return location.get_path()
                 else:
@@ -424,7 +424,7 @@ class Document:
 
         def env_get_document_type(self, buf):
                 typ = buf.get_mime_type()
-                
+
                 if typ:
                         return typ
                 else:
@@ -432,40 +432,40 @@ class Document:
 
         def env_get_documents_uri(self, buf):
                 toplevel = self.view.get_toplevel()
-                
-                if isinstance(toplevel, gedit.Window):
+
+                if isinstance(toplevel, Gedit.Window):
                         documents_uri = [doc.get_location().get_uri()
                                          for doc in toplevel.get_documents()
                                          if doc.get_location() is not None]
                 else:
                         documents_uri = []
-                
+
                 return ' '.join(documents_uri)
 
         def env_get_documents_path(self, buf):
                 toplevel = self.view.get_toplevel()
-                
-                if isinstance(toplevel, gedit.Window):
+
+                if isinstance(toplevel, Gedit.Window):
                         documents_location = [doc.get_location()
                                               for doc in toplevel.get_documents()
                                               if doc.get_location() is not None]
 
                         documents_path = [location.get_path()
                                           for location in documents_location
-                                          if gedit.utils.location_has_file_scheme(location)]
+                                          if Gedit.utils_location_has_file_scheme(location)]
                 else:
                         documents_path = []
-                
+
                 return ' '.join(documents_path)
 
         def update_environment(self):
                 buf = self.view.get_buffer()
-                
-                variables = {'GEDIT_SELECTED_TEXT': self.env_get_selected_text, 
-                             'GEDIT_CURRENT_WORD': self.env_get_current_word, 
+
+                variables = {'GEDIT_SELECTED_TEXT': self.env_get_selected_text,
+                             'GEDIT_CURRENT_WORD': self.env_get_current_word,
                              'GEDIT_CURRENT_LINE': self.env_get_current_line,
                              'GEDIT_CURRENT_LINE_NUMBER': self.env_get_current_line_number,
-                             'GEDIT_CURRENT_DOCUMENT_URI': self.env_get_document_uri, 
+                             'GEDIT_CURRENT_DOCUMENT_URI': self.env_get_document_uri,
                              'GEDIT_CURRENT_DOCUMENT_NAME': self.env_get_document_name,
                              'GEDIT_CURRENT_DOCUMENT_SCHEME': self.env_get_document_scheme,
                              'GEDIT_CURRENT_DOCUMENT_PATH': self.env_get_document_path,
@@ -474,26 +474,26 @@ class Document:
                              'GEDIT_DOCUMENTS_URI': self.env_get_documents_uri,
                              'GEDIT_DOCUMENTS_PATH': self.env_get_documents_path,
                              }
-                
+
                 for var in variables:
                         os.environ[var] = variables[var](buf)
-        
+
         def uses_current_word(self, snippet):
                 matches = re.findall('(\\\\*)\\$GEDIT_CURRENT_WORD', snippet['text'])
-                
+
                 for match in matches:
                         if len(match) % 2 == 0:
                                 return True
-                
+
                 return False
-        
+
         def uses_current_line(self, snippet):
                 matches = re.findall('(\\\\*)\\$GEDIT_CURRENT_LINE', snippet['text'])
-                
+
                 for match in matches:
                         if len(match) % 2 == 0:
                                 return True
-                
+
                 return False
 
         def apply_snippet(self, snippet, start = None, end = None):
@@ -502,40 +502,40 @@ class Document:
 
                 buf = self.view.get_buffer()
                 s = Snippet(snippet)
-                
+
                 if not start:
                         start = buf.get_iter_at_mark(buf.get_insert())
-                
+
                 if not end:
                         end = buf.get_iter_at_mark(buf.get_selection_bound())
 
                 if start.equal(end) and self.uses_current_word(s):
                         # There is no tab trigger and no selection and the snippet uses
-                        # the current word. Set start and end to the word boundary so that 
+                        # the current word. Set start and end to the word boundary so that
                         # it will be removed
                         start, end = buffer_word_boundary(buf)
                 elif start.equal(end) and self.uses_current_line(s):
                         # There is no tab trigger and no selection and the snippet uses
-                        # the current line. Set start and end to the line boundary so that 
+                        # the current line. Set start and end to the line boundary so that
                         # it will be removed
                         start, end = buffer_line_boundary(buf)
 
                 # Set environmental variables
                 self.update_environment()
-                
+
                 # You know, we could be in an end placeholder
                 (current, next) = self.next_placeholder()
                 if current and current.__class__ == PlaceholderEnd:
                         self.goto_placeholder(current, None)
-                
+
                 buf.begin_user_action()
 
                 # Remove the tag, selection or current word
                 buf.delete(start, end)
-                
+
                 # Insert the snippet
                 holders = len(self.placeholders)
-                
+
                 if len(self.active_snippets) == 0:
                         self.first_snippet_inserted()
 
@@ -559,12 +559,14 @@ class Document:
                         cur = buf.get_iter_at_mark(buf.get_insert())
                         last = sn.end_iter()
 
-                        curloc = self.view.get_iter_location(cur)
-                        lastloc = self.view.get_iter_location(last)
+                        # FIXME: get_iter_location doesnt work
 
-                        if (lastloc.y + lastloc.height) - curloc.y <= \
-                           self.view.get_visible_rect().height:
-                                self.view.scroll_mark_onscreen(sn.end_mark)
+                        #curloc = self.view.get_iter_location(cur)
+                        #lastloc = self.view.get_iter_location(last)
+
+                        #if (lastloc.y + lastloc.height) - curloc.y <= \
+                        #   self.view.get_visible_rect().height:
+                        #        self.view.scroll_mark_onscreen(sn.end_mark)
 
                 buf.end_user_action()
                 self.view.grab_focus()
@@ -576,21 +578,21 @@ class Document:
                         end = buf.get_iter_at_mark(buf.get_insert())
 
                 start = end.copy()
-                
+
                 word = None
-                
+
                 if start.backward_word_start():
                         # Check if we were at a word start ourselves
                         tmp = start.copy()
                         tmp.forward_word_end()
-                        
+
                         if tmp.equal(end):
-                                word = buf.get_text(start, end)
+                                word = buf.get_text(start, end, False)
                         else:
                                 start = end.copy()
                 else:
                         start = end.copy()
-                
+
                 if not word or word == '':
                         if start.backward_char():
                                 word = start.get_char()
@@ -619,12 +621,12 @@ class Document:
                                 # Do the fancy completion dialog
                                 self.provider.set_proposals(snippets)
                                 cm = self.view.get_completion()
-                                
+
                                 cm.show([self.provider], cm.create_context())
                                 return True
 
                 return False
-                
+
         def run_snippet(self):
                 if not self.view:
                         return False
@@ -652,12 +654,12 @@ class Document:
                                 placeholders = snippet.placeholders[-1]
                         else:
                                 placeholders = [snippet.placeholders[tabstop]]
-                        
+
                         for placeholder in placeholders:
                                 if placeholder in self.placeholders:
                                         if placeholder in self.update_placeholders:
                                                 placeholder.update_contents()
-                                                
+
                                                 self.update_placeholders.remove(placeholder)
                                         elif placeholder in self.jump_placeholders:
                                                 placeholder[0].leave()
@@ -716,7 +718,7 @@ class Document:
                         else:
                                 begin = snippet.begin_iter()
                                 end = snippet.end_iter()
-                        
+
                                 if piter.compare(begin) < 0 or piter.compare(end) > 0:
                                         # Oh no! Remove the snippet this instant!!
                                         self.deactivate_snippet(snippet)
@@ -727,7 +729,7 @@ class Document:
                         self.jump_placeholders.append((self.active_placeholder, current))
 
                         if self.timeout_update_id == 0:
-                                self.timeout_update_id = gobject.timeout_add(0, 
+                                self.timeout_update_id = glib.timeout_add(0,
                                                 self.update_snippet_contents)
 
         def on_buffer_changed(self, buf):
@@ -736,41 +738,41 @@ class Document:
                 if current:
                         if not current in self.update_placeholders:
                                 self.update_placeholders.append(current)
-                
+
                         if self.timeout_update_id == 0:
-                                self.timeout_update_id = gobject.timeout_add(0, \
+                                self.timeout_update_id = glib.timeout_add(0, \
                                                 self.update_snippet_contents)
-        
+
         def on_buffer_insert_text(self, buf, piter, text, length):
                 ctx = get_buffer_context(buf)
-                
-                # do nothing special if there is no context and no active 
+
+                # do nothing special if there is no context and no active
                 # placeholder
                 if (not ctx) and (not self.active_placeholder):
                         return
-                
+
                 if not ctx:
                         ctx = self.active_placeholder
-                
+
                 if not ctx in self.ordered_placeholders:
                         return
-                        
+
                 # move any marks that were incorrectly moved by this insertion
                 # back to where they belong
                 begin = ctx.begin_iter()
                 end = ctx.end_iter()
                 idx = self.ordered_placeholders.index(ctx)
-                
+
                 for placeholder in self.ordered_placeholders:
                         if placeholder == ctx:
                                 continue
-                        
+
                         ob = placeholder.begin_iter()
                         oe = placeholder.end_iter()
-                        
+
                         if ob.compare(begin) == 0 and ((not oe) or oe.compare(end) == 0):
                                 oidx = self.ordered_placeholders.index(placeholder)
-                                
+
                                 if oidx > idx and ob:
                                         buf.move_mark(placeholder.begin, end)
                                 elif oidx < idx and oe:
@@ -779,35 +781,37 @@ class Document:
                                 buf.move_mark(placeholder.begin, end)
                         elif (oe and oe.compare(begin) > 0) and ob.compare(begin) <= 0:
                                 buf.move_mark(placeholder.end, begin)
-        
+
         def on_notify_language(self, buf, spec):
                 self.update_language()
 
         def on_notify_editable(self, view, spec):
                 self._set_view(view)
-        
+
         def on_view_key_press(self, view, event):
                 library = Library()
 
-                if not (event.state & gdk.CONTROL_MASK) and \
-                                not (event.state & gdk.MOD1_MASK) and \
+                _, state = event.get_state()
+
+                if not (state & Gdk.ModifierType.CONTROL_MASK) and \
+                                not (state & Gdk.ModifierType.MOD1_MASK) and \
                                 event.keyval in self.TAB_KEY_VAL:
-                        if not event.state & gdk.SHIFT_MASK:
+                        if not state & Gdk.ModifierType.SHIFT_MASK:
                                 return self.run_snippet()
                         else:
                                 return self.skip_to_previous_placeholder()
                 elif not library.loaded and \
-                                library.valid_accelerator(event.keyval, event.state):
+                                library.valid_accelerator(event.keyval, state):
                         library.ensure_files()
                         library.ensure(self.language_id)
                         self.accelerator_activate(event.keyval, \
-                                        event.state & gtk.accelerator_get_default_mod_mask())
+                                        state & Gtk.accelerator_get_default_mod_mask())
 
                 return False
-        
+
         def path_split(self, path, components=[]):
                 head, tail = os.path.split(path)
-                
+
                 if not tail and head:
                         return [head] + components
                 elif tail:
@@ -852,7 +856,7 @@ class Document:
 
                         if not path2:
                                 result = os.path.basename(second)
-                
+
                 if path2:
                         result += os.path.join(*path2)
 
@@ -860,12 +864,12 @@ class Document:
 
         def apply_uri_snippet(self, snippet, mime, uri):
                 # Remove file scheme
-                gfile = gio.File(uri)
+                gfile = Gio.File(uri)
                 pathname = ''
                 dirname = ''
                 ruri = ''
 
-                if gedit.utils.location_has_file_scheme(gfile):
+                if Gedit.utils_location_has_file_scheme(gfile):
                         pathname = gfile.get_path()
                         dirname = gfile.get_parent().get_path()
 
@@ -889,7 +893,7 @@ class Document:
                 os.environ['GEDIT_DROP_DOCUMENT_RELATIVE_PATH'] = relpath
 
                 mark = buf.get_mark('gtk_drag_target')
-                
+
                 if not mark:
                         mark = buf.get_insert()
 
@@ -898,29 +902,29 @@ class Document:
 
         def in_bounds(self, x, y):
                 rect = self.view.get_visible_rect()
-                rect.x, rect.y = self.view.buffer_to_window_coords(gtk.TEXT_WINDOW_WIDGET, rect.x, rect.y)
+                rect.x, rect.y = self.view.buffer_to_window_coords(Gtk.TextWindowType.WIDGET, rect.x, rect.y)
 
                 return not (x < rect.x or x > rect.x + rect.width or y < rect.y or y > rect.y + rect.height)
-        
-        def on_drag_data_received(self, view, context, x, y, data, info, timestamp):   
-                if not (gtk.targets_include_uri(context.targets) and data.data and self.in_bounds(x, y)):
+
+        def on_drag_data_received(self, view, context, x, y, data, info, timestamp):
+                if not (Gtk.targets_include_uri(context.targets) and data.data and self.in_bounds(x, y)):
                         return
 
                 uris = drop_get_uris(data)
                 uris.reverse()
                 stop = False
-                
+
                 for uri in uris:
                         try:
-                                mime = gio.content_type_guess(uri)
+                                mime = Gio.content_type_guess(uri)
                         except:
                                 mime = None
 
                         if not mime:
                                 continue
-                        
+
                         snippets = Library().from_drop_target(mime, self.language_id)
-                        
+
                         if snippets:
                                 stop = True
                                 self.apply_uri_snippet(snippets[0], mime, uri)
@@ -930,19 +934,19 @@ class Document:
                         view.stop_emission('drag-data-received')
                         view.get_toplevel().present()
                         view.grab_focus()
-        
+
         def find_uri_target(self, context):
-                lst = gtk.target_list_add_uri_targets((), 0)
-                
+                lst = Gtk.target_list_add_uri_targets((), 0)
+
                 return self.view.drag_dest_find_target(context, lst)
-        
+
         def on_completion_hide(self, completion):
                 self.provider.set_proposals(None)
 
         def on_proposal_activated(self, proposal, piter):
                 buf = self.view.get_buffer()
                 bounds = buf.get_selection_bounds()
-                
+
                 if bounds:
                         self.apply_snippet(proposal.snippet(), None, None)
                 else:
@@ -950,7 +954,7 @@ class Document:
                         self.apply_snippet(proposal.snippet(), start, end)
 
                 return True
-        
+
         def on_default_activated(self, proposal, piter):
                 buf = self.view.get_buffer()
                 bounds = buf.get_selection_bounds()
@@ -967,7 +971,7 @@ class Document:
 
         def iter_coords(self, piter):
                 rect = self.view.get_iter_location(piter)
-                rect.x, rect.y = self.view.buffer_to_window_coords(gtk.TEXT_WINDOW_TEXT, rect.x, rect.y)
+                rect.x, rect.y = self.view.buffer_to_window_coords(Gtk.TextWindowType.TEXT, rect.x, rect.y)
 
                 return rect
 
@@ -996,13 +1000,13 @@ class Document:
 
                 line = start.copy()
                 line.set_line_offset(0)
-                geom = self.view.get_window(gtk.TEXT_WINDOW_TEXT).get_geometry()
-                
+                geom = self.view.get_window(Gtk.TextWindowType.TEXT).get_geometry()
+
                 ctx.translate(0.5, 0.5)
-                
+
                 while line.get_line() <= end_line:
                         ypos, height = self.view.get_line_yrange(line)
-                        x_, ypos = self.view.window_to_buffer_coords(gtk.TEXT_WINDOW_TEXT, 0, ypos)
+                        x_, ypos = self.view.window_to_buffer_coords(Gtk.TextWindowType.TEXT, 0, ypos)
 
                         if line.get_line() == start_line and line.get_line() == end_line:
                                 # Simply draw a box, both are on the same line
@@ -1026,7 +1030,7 @@ class Document:
         def draw_placeholder_bar(self, ctx, placeholder, col):
                 start = placeholder.begin_iter()
                 start_rect = self.iter_coords(start)
-                
+
                 ctx.translate(0.5, 0.5)
                 extend_width = 2.5
 
@@ -1035,7 +1039,7 @@ class Document:
 
                 ctx.move_to(start_rect.x, start_rect.y)
                 ctx.rel_line_to(0, start_rect.height - 1)
-                
+
                 ctx.rel_move_to(-extend_width, 0)
                 ctx.rel_line_to(extend_width * 2, 0)
                 ctx.stroke()
@@ -1049,9 +1053,9 @@ class Document:
 
                 buf = self.view.get_buffer()
 
-                col = self.from_color(self.view.get_style().text[gtk.STATE_INSENSITIVE])
+                col = self.from_color(self.view.get_style().text[Gtk.StateType.INSENSITIVE])
                 ctx.set_source_rgba(col[0], col[1], col[2], 0.5)
-                
+
                 if placeholder.tabstop > 0:
                         ctx.set_dash([], 0)
                 else:
@@ -1065,24 +1069,29 @@ class Document:
                 else:
                         self.draw_placeholder_rect(ctx, placeholder, col)
 
-        def on_expose_event(self, view, event):
-                if event.window != view.get_window(gtk.TEXT_WINDOW_TEXT):
-                        return False
+        def on_draw(self, view, ctx):
+#                window = view.get_window(Gtk.TextWindowType.TEXT)
 
-                # Draw something
-                ctx = event.window.cairo_create()
-                ctx.rectangle(event.area)
-                ctx.clip()
+#                if not Gtk.cairo_should_draw_window(ctx, window):
+#                        return False
 
-                ctx.set_line_width(1.0)
+#                # Draw something
+#                ctx.set_line_width(1.0)
 
-                for placeholder in self.ordered_placeholders:
-                        if not self.placeholder_in_area(placeholder, event.area):
-                                continue
+#                Gtk.cairo_transform_to_window(ctx, view, window)
 
-                        ctx.save()
-                        self.draw_placeholder(ctx, placeholder)
-                        ctx.restore()
+#                clipped, clip = Gdk.cairo_get_clip_rectangle(ctx)
+
+#                if not clipped:
+#                        return False
+
+#                for placeholder in self.ordered_placeholders:
+#                        if not self.placeholder_in_area(placeholder, clipped):
+#                                continue
+
+#                        ctx.save()
+#                        self.draw_placeholder(ctx, placeholder)
+#                        ctx.restore()
 
                 return False
 
