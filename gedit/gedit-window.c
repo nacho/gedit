@@ -266,10 +266,8 @@ gedit_window_dispose (GObject *object)
 		save_window_state (GTK_WIDGET (window));
 		save_panels_state (window);
 
-		peas_extension_set_call (window->priv->extensions,
-					 "deactivate",
-					 window);
-
+		/* Note that unreffing the extensions will automatically remove
+		   all extensions which in turn will deactivate the extension */
 		g_object_unref (window->priv->extensions);
 
 		peas_engine_garbage_collect (PEAS_ENGINE (gedit_plugins_engine_get_default ()));
