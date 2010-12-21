@@ -1,6 +1,6 @@
 # Vietnamese translation for GEdit.
 # Copyright © 2009 GNOME i18n Project for Vietnamese.
-# Nguyễn Thái Ngọc Duy <pclouds@gmail.com>, 2002-2004,2007.
+# Nguyễn Thái Ngọc Duy <pclouds@gmail.com>, 2002-2004,2007,2010.
 # Clytie Siddall <clytie@riverland.net.au>, 2005-2009.
 #
 msgid ""
@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gedit&component=general\n"
 "POT-Creation-Date: 2010-12-19 09:56+0000\n"
-"PO-Revision-Date: 2009-02-06 19:38+0930\n"
+"PO-Revision-Date: 2010-12-21 20:50+0700\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -31,10 +31,9 @@ msgid "gedit"
 msgstr "gedit"
 
 #: ../data/gedit.desktop.in.in.h:4
-#, fuzzy
 #| msgid "Text Editor"
 msgid "gedit Text Editor"
-msgstr "Bộ soạn văn bản"
+msgstr "gedit Bộ soạn văn bản"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:1
 msgid ""
@@ -105,7 +104,6 @@ msgid "Highlight Current Line"
 msgstr "Tô sáng dòng hiện có"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:17
-#, fuzzy
 #| msgid "Highlight Matching Bracket"
 msgid "Highlight Matching Brackets"
 msgstr "Tô sáng ngoặc khớp"
@@ -181,7 +179,7 @@ msgstr ""
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:29
 msgid "Notebook Show Tabs Mode"
-msgstr ""
+msgstr "Chế độ hiện tab tài liệu"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:30
 msgid ""
@@ -216,10 +214,9 @@ msgid "Right Margin Position"
 msgstr "Vị trí lề phải"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:37
-#, fuzzy
 #| msgid "Side Pane is Visible"
 msgid "Side panel is Visible"
-msgstr "Hiện ô bên"
+msgstr "Hiện khung bên"
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:38
 msgid "Smart Home End"
@@ -236,7 +233,6 @@ msgstr ""
 "thời.  Chỉ những bảng mã có thể nhận dạng được dùng."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:40
-#, fuzzy
 #| msgid ""
 #| "Specifies how the cursor moves when the HOME and END keys are pressed. "
 #| "Use \"DISABLED\" to always move at the start/end of the line, \"AFTER\" "
@@ -256,17 +252,16 @@ msgid ""
 msgstr ""
 "Ghi rõ cách di chuyển của con trỏ khi phím HOME và END được bấm. Đặt giá "
 "trị:\n"
-" • DISABLED\tđể luôn luôn đi tới đầu/cuối dòng\n"
-" • AFTER\t\tđể đi tới đầu/cuối dòng lần đầu tiên bấm phím,\n"
+" • disabled\tđể luôn luôn đi tới đầu/cuối dòng\n"
+" • after\t\tđể đi tới đầu/cuối dòng lần đầu tiên bấm phím,\n"
 "\t\t\trồi đi tới đầu/cuối văn bản, cũng bỏ qua khoảng trắng,\n"
 "\t\t\tlần thứ hai bấm phím\n"
-" • BEFORE\tđể đi tới đầu/cuối văn bản, cũng bỏ qua khoảng trắng,\n"
-"\t\t\tlần đầu tiên bấm phím, rồi đi tới đầu/cuối dòng,\t\t\tlần thứ hai bấm "
-"phím\n"
-" • ALWAYS\tđể luôn luôn đi tới đầu/cuối văn bản thay cho đầu/cuối dòng."
+" • before\tđể đi tới đầu/cuối văn bản, cũng bỏ qua khoảng trắng,\n"
+"\t\t\tlần đầu tiên bấm phím, rồi đi tới đầu/cuối dòng,\n"
+"\t\t\tlần thứ hai bấm phím\n"
+" • always\tđể luôn luôn đi tới đầu/cuối văn bản thay cho đầu/cuối dòng."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:41
-#, fuzzy
 #| msgid ""
 #| "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for "
 #| "no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -279,12 +274,11 @@ msgid ""
 "individual character boundaries. Note that the values are case-sensitive, so "
 "make sure they appear exactly as mentioned here."
 msgstr ""
-"Xác định cuộn dòng dài như thế nào khi in. Dùng \"GTK_WRAP_MODE\" nếu không "
-"cuộn, \"GTK_WRAP_WORD\" nếu cuốn theo biên từ, và \"GTK_WRAP_CHAR\" nếu cuộn "
-"theo các ký tự. Chú ý các giá trị này cần viết hoa."
+"Xác định cuộn dòng dài như thế nào khi in. Dùng \"none\" để khỏi cuộn, \"word"
+"\" để cuộn ở ranh giới từ, \"char\" để cuộn ở ranh giới ký tự. Chú ý rằng "
+"giá trị phân biệt hoa thường, nhớ nhập chính xác những gì ghi ở đây."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:42
-#, fuzzy
 #| msgid ""
 #| "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE"
 #| "\" for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, "
@@ -297,10 +291,9 @@ msgid ""
 "wrapping at individual character boundaries. Note that the values are case-"
 "sensitive, so make sure they appear exactly as mentioned here."
 msgstr ""
-"Xác định cuộn dòng dài như thế nào trong vùng biên soạn. Dùng \"GTK_WRAP_MODE"
-"\" nếu không cuộn, \"GTK_WRAP_WORD\" nếu cuốn theo biên từ, và "
-"\"GTK_WRAP_CHAR\" nếu cuộn theo các ký tự. Chú ý các giá trị này cần viết "
-"hoa."
+"Xác định cuộn dòng dài như thế nào trong vùng biên soạn. Dùng \"none\" để "
+"khỏi cuộn, \"word\" để cuộn ở ranh giới từ, \"char\" ở ranh giới ký tự. Chú "
+"ý giá trị phân biệt hoa thường. Nhớ nhập chính xác những gì ghi ở đây."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:43
 msgid ""
@@ -342,7 +335,6 @@ msgid "Specifies the position of the right margin."
 msgstr "Xác định vị trí lề phải."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:49
-#, fuzzy
 #| msgid ""
 #| "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for "
 #| "no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -355,9 +347,10 @@ msgid ""
 "when there is more than one tab. Note that the values are case-sensitive, so "
 "make sure they appear exactly as mentioned here."
 msgstr ""
-"Xác định cuộn dòng dài như thế nào khi in. Dùng \"GTK_WRAP_MODE\" nếu không "
-"cuộn, \"GTK_WRAP_WORD\" nếu cuốn theo biên từ, và \"GTK_WRAP_CHAR\" nếu cuộn "
-"theo các ký tự. Chú ý các giá trị này cần viết hoa."
+"Xác định hiện thế nào trong thẻ tài liệu. Dùng \"never\" để không bao giờ "
+"hiện thẻ, \"always\" để luôn hiện thẻ, \"auto\" để hiện thể khi có nhiều hơn "
+"một văn bản. Chú ý giá trị phân biệt hoa thường. Nhớ nhập chính xác những gì "
+"ghi ở đây."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:50
 msgid "Status Bar is Visible"
@@ -427,7 +420,6 @@ msgid ""
 msgstr "Gedit có nên tô sáng mọi lần gặp đoạn đã tìm kiếm hay không."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:64
-#, fuzzy
 #| msgid "Whether gedit should highlight matching bracket."
 msgid "Whether gedit should highlight matching brackets."
 msgstr "Gedit nên bật tô sáng ngoặc khớp hay không."
@@ -456,12 +448,11 @@ msgstr ""
 "Gedit có nên phục hồi vị trí con trỏ trước khi tập tin được tải hay không."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:70
-#, fuzzy
 #| msgid ""
 #| "Whether the side pane at the left of editing windows should be visible."
 msgid ""
 "Whether the side panel at the left of editing windows should be visible."
-msgstr "Có cho hay không thanh lề bên trái cửa sổ soạn thảo có thể thấy được."
+msgstr "Có cho hiện khung lề bên trái cửa sổ soạn thảo hay không."
 
 #: ../data/org.gnome.gedit.gschema.xml.in.in.h:71
 msgid ""
@@ -687,10 +678,9 @@ msgid "Create a _backup copy of files before saving"
 msgstr "Tạo _bản sao của tập tin trước khi lưu"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:3
-#, fuzzy
 #| msgid "Display right _margin"
 msgid "Display right _margin at column:"
-msgstr "Hiện lề _phải"
+msgstr "Hiện lề _phải tại cột:"
 
 #. ex:set ts=8 noet:
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:4
@@ -728,16 +718,14 @@ msgid "Highlight current _line"
 msgstr "Tô sán_g dòng hiện tại"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:12
-#, fuzzy
 #| msgid "Highlight matching _bracket"
 msgid "Highlight matching _brackets"
 msgstr "Tô sáng _ngoặc khớp"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:13
-#, fuzzy
 #| msgid "Syntax Highlighting"
 msgid "Highlighting"
-msgstr "Tô sáng cú pháp"
+msgstr "Tô sáng"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.ui.h:14
 msgid "Insert _spaces instead of tabs"
@@ -873,27 +861,27 @@ msgstr "Tạo tài liệu mới trong một trình gedit đang chạy"
 
 #: ../gedit/gedit-command-line.c:293
 msgid "Set the X geometry window size (WIDTHxHEIGHT+X+Y)"
-msgstr ""
+msgstr "Đặt toạ độ và kích thước cửa sổ (WIDTHxHEIGHT+X+Y)"
 
 #: ../gedit/gedit-command-line.c:294
 msgid "GEOMETRY"
-msgstr ""
+msgstr "TOẠ ĐỘ"
 
 #: ../gedit/gedit-command-line.c:301
 msgid "Open files and block process until files are closed"
-msgstr ""
+msgstr "Mở tập tin và chặn tiến trình đến khi tập tin bị đóng"
 
 #: ../gedit/gedit-command-line.c:309
 msgid "Run gedit in the background"
-msgstr ""
+msgstr "Chạy gedit ở nền"
 
 #: ../gedit/gedit-command-line.c:317
 msgid "Run gedit in standalone mode"
-msgstr ""
+msgstr "Chạy gedit độc lập"
 
 #: ../gedit/gedit-command-line.c:326
 msgid "[FILE...] [+LINE[:COLUMN]]"
-msgstr ""
+msgstr "[TẬP TIN...] [+DÒNG[:CỘT]]"
 
 #. Setup command line options
 #: ../gedit/gedit-command-line.c:333
@@ -936,7 +924,7 @@ msgstr "Bạn có muốn thay thế nó bằng tập tin bạn đang lưu không
 
 #: ../gedit/gedit-commands-file.c:614
 msgid "Save the file using compression?"
-msgstr ""
+msgstr "Lưu tập tin dạng nén chứ?"
 
 #: ../gedit/gedit-commands-file.c:615
 #, c-format
@@ -944,14 +932,15 @@ msgid ""
 "The file \"%s\" was previously saved as plain text and will now be saved "
 "using compression."
 msgstr ""
+"Tập tin \"%s\" trước đây được lưu dạng thô, bây giờ sẽ được lưu ở dạng nén."
 
 #: ../gedit/gedit-commands-file.c:617
 msgid "_Save Using Compression"
-msgstr ""
+msgstr "_Lưu dạng nén"
 
 #: ../gedit/gedit-commands-file.c:621
 msgid "Save the file as plain text?"
-msgstr ""
+msgstr "Lưu dạng văn bản thô chứ?"
 
 #: ../gedit/gedit-commands-file.c:622
 #, c-format
@@ -959,12 +948,12 @@ msgid ""
 "The file \"%s\" was previously saved using compression and will now be saved "
 "as plain text."
 msgstr ""
+"Tập tin \"%s\" trước đây được lưu dạng nén, bây giờ sẽ được lưu ở dạng thô."
 
 #: ../gedit/gedit-commands-file.c:624
-#, fuzzy
 #| msgid "Plain Text"
 msgid "_Save As Plain Text"
-msgstr "Văn bản thô"
+msgstr "Lưu dạng _văn bản thô"
 
 #: ../gedit/gedit-commands-file.c:742 ../gedit/gedit-commands-file.c:961
 #, c-format
@@ -972,10 +961,9 @@ msgid "Saving file '%s'…"
 msgstr "Đang lưu tập tin \"%s\"..."
 
 #: ../gedit/gedit-commands-file.c:847
-#, fuzzy
 #| msgid "Save As…"
 msgid "Save As"
-msgstr "Lưu dạng..."
+msgstr "Lưu dạng"
 
 #: ../gedit/gedit-commands-file.c:1175
 #, c-format
@@ -1650,7 +1638,7 @@ msgstr "dòng"
 
 #: ../gedit/gedit-print-preview.c:582
 msgid "Show the previous page"
-msgstr "HIện trang trước"
+msgstr "Hiện trang trước"
 
 #: ../gedit/gedit-print-preview.c:594
 msgid "Show the next page"
@@ -2020,35 +2008,31 @@ msgstr "Đóng tất cả các tập tin đang mở"
 
 #: ../gedit/gedit-ui.h:134
 msgid "_New Tab Group"
-msgstr ""
+msgstr "_Nhóm thẻ mới"
 
 #: ../gedit/gedit-ui.h:135
-#, fuzzy
 #| msgid "Create a new document"
 msgid "Create a new tab group"
-msgstr "Tạo tài liệu mới"
+msgstr "Tạo nhóm thẻ mới"
 
 #: ../gedit/gedit-ui.h:136
-#, fuzzy
 #| msgid "Previous location"
 msgid "P_revious Tab Group"
-msgstr "Vị trí trước"
+msgstr "Nhóm thẻ t_rước"
 
 #: ../gedit/gedit-ui.h:137
-#, fuzzy
 #| msgid "Show the previous page"
 msgid "Switch to the previous tab group"
-msgstr "HIện trang trước"
+msgstr "Chuyển sang nhóm thẻ trước"
 
 #: ../gedit/gedit-ui.h:138
 msgid "Nex_t Tab Group"
-msgstr ""
+msgstr "Nhóm thẻ _kế"
 
 #: ../gedit/gedit-ui.h:139
-#, fuzzy
 #| msgid "Show the next page"
 msgid "Switch to the next tab group"
-msgstr "Hiện trang kế tiếp"
+msgstr "Chuyển sang nhóm thẻ kế tiếp"
 
 #: ../gedit/gedit-ui.h:140
 msgid "_Previous Document"
@@ -2059,7 +2043,6 @@ msgid "Activate previous document"
 msgstr "Kích hoạt tài liệu trước đó"
 
 #: ../gedit/gedit-ui.h:142
-#, fuzzy
 #| msgid "_Next Document"
 msgid "N_ext Document"
 msgstr "Tài liệu _kế"
@@ -2106,28 +2089,24 @@ msgid "Edit text in fullscreen"
 msgstr "Soạn thảo văn bản ở chế độ toàn màn hình"
 
 #: ../gedit/gedit-ui.h:178
-#, fuzzy
 #| msgid "Side _Pane"
 msgid "Side _Panel"
-msgstr "Ô _lề"
+msgstr "Khung _lề"
 
 #: ../gedit/gedit-ui.h:179
-#, fuzzy
 #| msgid "Show or hide the side pane in the current window"
 msgid "Show or hide the side panel in the current window"
 msgstr "Hiện/Ẩn khung lề trên cửa sổ hiện thời"
 
 #: ../gedit/gedit-ui.h:181
-#, fuzzy
 #| msgid "_Bottom Pane"
 msgid "_Bottom Panel"
-msgstr "Ô _dưới"
+msgstr "Khung đá_y"
 
 #: ../gedit/gedit-ui.h:182
-#, fuzzy
 #| msgid "Show or hide the bottom pane in the current window"
 msgid "Show or hide the bottom panel in the current window"
-msgstr "Hiện/Ẩn ô dưới trong cửa sổ hiện thời"
+msgstr "Hiện/Ẩn khung đáy trong cửa sổ hiện thời"
 
 #: ../gedit/gedit-utils.c:1017
 msgid "Please check your installation."
@@ -2233,21 +2212,19 @@ msgid "Tab Width"
 msgstr "Bề rộng Tab:"
 
 #: ../gedit/gedit-window.c:2263
-#, fuzzy
 #| msgid "Bracket Matching"
 msgid "Bracket match is out of range"
-msgstr "Khớp dấu ngoặc"
+msgstr "Khớp dấu ngoặc ngoài phạm vi"
 
 #: ../gedit/gedit-window.c:2268
-#, fuzzy
 #| msgid "Phrase not found"
 msgid "Bracket match not found"
-msgstr "Không tìm thấy cụm từ"
+msgstr "Không tìm thấy dấu ngoặc khớp"
 
 #: ../gedit/gedit-window.c:2273
 #, c-format
 msgid "Bracket match found on line: %d"
-msgstr ""
+msgstr "Tìm thấy dấu ngoặc khớp trên dòng: %d"
 
 #: ../gedit/gedit-window.c:4047
 msgid "About gedit"
@@ -2334,14 +2311,13 @@ msgstr ""
 #. ex:set ts=8 noet:
 #: ../plugins/checkupdate/org.gnome.gedit.plugins.checkupdate.gschema.xml.in.in.h:1
 msgid "Version to Ignore"
-msgstr ""
+msgstr "Phiên bản cần bỏ qua"
 
 #. This is releated to the next gedit version to be released
 #: ../plugins/checkupdate/org.gnome.gedit.plugins.checkupdate.gschema.xml.in.in.h:3
-#, fuzzy
 #| msgid "Version to ignore until the next version is released"
 msgid "Version to ignore until a newer version is released."
-msgstr "Phiên bản lờ đi cho đến khi bản tiếp theo được phát hành"
+msgstr "Phiên bản cần lờ đi cho đến khi bản tiếp nữa được phát hành."
 
 #: ../plugins/docinfo/docinfo.plugin.desktop.in.h:1
 msgid ""
@@ -2627,16 +2603,14 @@ msgid "Run command"
 msgstr "Chạy lệnh"
 
 #: ../plugins/filebrowser/filebrowser.plugin.desktop.in.h:1
-#, fuzzy
 #| msgid "Easy file access from the side pane"
 msgid "Easy file access from the side panel"
-msgstr "Dễ truy cập tập tin từ ô bên"
+msgstr "Truy cập nhanh từ khung bên"
 
 #: ../plugins/filebrowser/filebrowser.plugin.desktop.in.h:2
-#, fuzzy
 #| msgid "File Browser Pane"
 msgid "File Browser Panel"
-msgstr "Ô duyệt tập tin"
+msgstr "Khung duyệt tập tin"
 
 #: ../plugins/filebrowser/gedit-file-bookmarks-store.c:243
 msgid "File System"
@@ -2729,7 +2703,6 @@ msgid "(Empty)"
 msgstr "(Rỗng)"
 
 #: ../plugins/filebrowser/gedit-file-browser-store.c:3442
-#, fuzzy
 #| msgid ""
 #| "The renamed file is currently filtered out. You need to adjust your "
 #| "filter settings to make the file visible"
@@ -2737,8 +2710,8 @@ msgid ""
 "The renamed file is currently filtered out.You need to adjust your filter "
 "settings to make the file visible"
 msgstr ""
-"Tập tin có tên đã thay đổi hiện thời bị lọc ra. Bạn cần phải điều chỉnh "
-"thiết lập lọc để hiển thị nó."
+"Tập tin bị đổi tên hiện thời bị lọc ra. Bạn cần phải điều chỉnh thiết lập "
+"lọc để hiển thị lại tập tin này."
 
 #. Translators: This is the default name of new files created by the file browser pane.
 #: ../plugins/filebrowser/gedit-file-browser-store.c:3686
@@ -2996,7 +2969,6 @@ msgstr ""
 "độ lọc (« filter_mode »)."
 
 #: ../plugins/filebrowser/org.gnome.gedit.plugins.filebrowser.gschema.xml.in.in.h:14
-#, fuzzy
 #| msgid ""
 #| "This value determines what files get filtered from the file browser. "
 #| "Valid values are: none (filter nothing), hidden (filter hidden files), "
@@ -3008,11 +2980,8 @@ msgid ""
 "hide-binary (filter binary files)."
 msgstr ""
 "Giá trị này quyết định những tập tin nào được lọc từ bộ duyệt tập tin. Giá "
-"trị có thể:\n"
-" • none\t(không có)\tkhông lọc gì\n"
-" • hidden\t\t\t\tlọc tập tin _bị ẩn_\n"
-" • binary\t\t\t\tlọc tập tin _nhị phân_\n"
-" • hidden_and_binary\tlọc tập tin cả hai kiểu _bị ẩn và nhị phân_."
+"trị có thể: none (không lọc gì), hide-hidden (lọc tập tin ẩn), hide-binary "
+"(lọc tập tin nhị phân)."
 
 #: ../plugins/modelines/modelines.plugin.desktop.in.h:1
 msgid "Emacs, Kate and Vim-style modelines support for gedit."
@@ -3023,28 +2992,24 @@ msgid "Modelines"
 msgstr "Dòng chế độ"
 
 #: ../plugins/pythonconsole/org.gnome.gedit.plugins.pythonconsole.gschema.xml.in.in.h:1
-#, fuzzy
 #| msgid "C_ommand color:"
 msgid "Command Color Text"
-msgstr "Mà_u lệnh:"
+msgstr "Mô tả màu cho lệnh"
 
 #: ../plugins/pythonconsole/org.gnome.gedit.plugins.pythonconsole.gschema.xml.in.in.h:2
-#, fuzzy
 #| msgid "_Error color:"
 msgid "Error Color Text"
-msgstr "Màu _lỗi:"
+msgstr "Mô tả màu cho lỗi:"
 
 #: ../plugins/pythonconsole/org.gnome.gedit.plugins.pythonconsole.gschema.xml.in.in.h:3
-#, fuzzy
 #| msgid "C_ommand color:"
 msgid "The command color text"
-msgstr "Mà_u lệnh:"
+msgstr "Mô tả màu cho lệnh"
 
 #: ../plugins/pythonconsole/org.gnome.gedit.plugins.pythonconsole.gschema.xml.in.in.h:4
-#, fuzzy
 #| msgid "_Error color:"
 msgid "The error color text"
-msgstr "Màu _lỗi:"
+msgstr "Mô tả màu cho lỗi"
 
 #: ../plugins/pythonconsole/pythonconsole.plugin.desktop.in.h:1
 msgid "Interactive Python console standing in the bottom panel"
@@ -3446,10 +3411,9 @@ msgid "Set the language of the current document"
 msgstr "Lập ngôn ngữ của tài liệu hiện thời"
 
 #: ../plugins/spell/gedit-spell-plugin.c:124
-#, fuzzy
 #| msgid "_Highlight Mode"
 msgid "_Highlight Misspelled Words"
-msgstr "C_hế độ tô sáng"
+msgstr "_Tô sáng từ viết sai"
 
 #: ../plugins/spell/gedit-spell-plugin.c:126
 msgid "Automatically spell-check the current document"
@@ -3554,38 +3518,36 @@ msgid "Inserts current date and time at the cursor position."
 msgstr "Chèn ngày, giờ hiện thời vào vị trí con trỏ hiện thời."
 
 #: ../plugins/time/org.gnome.gedit.plugins.time.gschema.xml.in.in.h:1
-#, fuzzy
 #| msgid "_Use custom format"
 msgid "Custom Format"
-msgstr "Dùng định dạng _riêng"
+msgstr "Định dạng riêng"
 
 #: ../plugins/time/org.gnome.gedit.plugins.time.gschema.xml.in.in.h:2
 msgid ""
 "If the user should be prompted for a format or if the selected or custom "
 "format should be used."
 msgstr ""
+"Người dùng nên được hỏi định dạng hoặcđịnh dạng được chọn hoặc định dạng "
+"riêng nên được dùng."
 
 #: ../plugins/time/org.gnome.gedit.plugins.time.gschema.xml.in.in.h:3
-#, fuzzy
 #| msgid "Prompt message"
 msgid "Prompt Type"
-msgstr "Thông điệp nhắc"
+msgstr "Kiểu dấu nhắc"
 
 #: ../plugins/time/org.gnome.gedit.plugins.time.gschema.xml.in.in.h:4
-#, fuzzy
 #| msgid "Selected"
 msgid "Selected Format"
-msgstr "Được lựa chọn"
+msgstr "Định dạng được chọn"
 
 #: ../plugins/time/org.gnome.gedit.plugins.time.gschema.xml.in.in.h:5
-#, fuzzy
 #| msgid "When inserting date/time..."
 msgid "The custom format used when inserting the date/time."
-msgstr "Khi chèn ngày/giờ..."
+msgstr "Định dạng được chọn để chèn chèn ngày/giờ."
 
 #: ../plugins/time/org.gnome.gedit.plugins.time.gschema.xml.in.in.h:6
 msgid "The selected format used when inserting the date/time."
-msgstr ""
+msgstr "Định dạng được chọn được dùng khi chèn ngày/giờ."
 
 #. Translators: Use the more common date format in your locale
 #: ../plugins/time/gedit-time-dialog.ui.h:3
