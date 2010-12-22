@@ -44,8 +44,6 @@ struct _GeditFileBrowserViewPrivate
 	GtkTreeModel *model;
 	GtkTreeRowReference *editable;
 
-	GdkCursor *busy_cursor;
-
 	/* Click policy */
 	GeditFileBrowserViewClickPolicy click_policy;
 	/* Both clicks in a double click need to be on the same row */
@@ -114,7 +112,7 @@ gedit_file_browser_view_finalize (GObject *object)
 	GeditFileBrowserView *obj = GEDIT_FILE_BROWSER_VIEW (object);
 
 	if (obj->priv->hand_cursor)
-		gdk_cursor_unref (obj->priv->hand_cursor);
+		g_object_unref (obj->priv->hand_cursor);
 
 	if (obj->priv->hover_path)
 		gtk_tree_path_free (obj->priv->hover_path);
@@ -124,8 +122,6 @@ gedit_file_browser_view_finalize (GObject *object)
 		g_hash_table_destroy (obj->priv->expand_state);
 		obj->priv->expand_state = NULL;
 	}
-
-	gdk_cursor_unref (obj->priv->busy_cursor);
 
 	G_OBJECT_CLASS (gedit_file_browser_view_parent_class)->finalize (object);
 }
@@ -334,7 +330,7 @@ set_click_policy_property (GeditFileBrowserView            *obj,
 
 		if (obj->priv->hand_cursor)
 		{
-			gdk_cursor_unref (obj->priv->hand_cursor);
+			g_object_unref (obj->priv->hand_cursor);
 			obj->priv->hand_cursor = NULL;
 		}
 	}
@@ -1022,8 +1018,6 @@ gedit_file_browser_view_init (GeditFileBrowserView *obj)
 						drag_source_targets,
 						G_N_ELEMENTS (drag_source_targets),
 						GDK_ACTION_COPY);
-
-	obj->priv->busy_cursor = gdk_cursor_new (GDK_WATCH);
 }
 
 static gboolean

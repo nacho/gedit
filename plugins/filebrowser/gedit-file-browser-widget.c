@@ -365,7 +365,8 @@ gedit_file_browser_widget_finalize (GObject *object)
 
 	cancel_async_operation (obj);
 
-	gdk_cursor_unref (obj->priv->busy_cursor);
+	if (obj->priv->busy_cursor)
+		g_object_unref (obj->priv->busy_cursor);
 
 	g_free (obj->priv->filter_pattern_str);
 
@@ -2158,7 +2159,7 @@ set_busy (GeditFileBrowserWidget *obj,
 	{
 		cursor = gdk_cursor_new (GDK_WATCH);
 		gdk_window_set_cursor (window, cursor);
-		gdk_cursor_unref (cursor);
+		g_object_unref (cursor);
 	}
 	else
 	{
