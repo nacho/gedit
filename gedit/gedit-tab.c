@@ -405,7 +405,7 @@ set_cursor_according_to_state (GtkTextView   *view,
 		if (left_window != NULL)
 			gdk_window_set_cursor (left_window, cursor);
 
-		gdk_cursor_unref (cursor);
+		g_object_unref (cursor);
 	}
 	else
 	{
@@ -418,7 +418,7 @@ set_cursor_according_to_state (GtkTextView   *view,
 		if (left_window != NULL)
 			gdk_window_set_cursor (left_window, NULL);
 
-		gdk_cursor_unref (cursor);
+		g_object_unref (cursor);
 	}
 }
 
