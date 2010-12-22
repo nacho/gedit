@@ -111,6 +111,7 @@ _gedit_cmd_help_about (GtkAction   *action,
 			       "translator-credits", _("translator-credits"),
 			       "version", VERSION,
 			       "website", "http://www.gedit.org",
+			       "website-label", "www.gedit.org",
 			       NULL);
 
 	if (logo)
