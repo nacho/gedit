@@ -25,16 +25,32 @@
 G_DEFINE_TYPE (GeditCloseButton, gedit_close_button, GTK_TYPE_BUTTON)
 
 static void
-gedit_close_button_constructed (GObject *button)
+gedit_close_button_class_init (GeditCloseButtonClass *klass)
 {
+}
+
+static void
+gedit_close_button_init (GeditCloseButton *button)
+{
+	GtkWidget *image;
 	GtkStyleContext *context;
 	GtkCssProvider *css;
 	GError *error = NULL;
 	const gchar button_style[] =
-		".button {\n"
+		"* {\n"
+		"	-GtkButton-default-border : 0;\n"
+		"	-GtkButton-default-outside-border : 0;\n"
 		"	-GtkButton-inner-border: 0;\n"
+		"	-GtkWidget-focus-line-width : 0;\n"
+		"	-GtkWidget-focus-padding : 0;\n"
 		"	padding: 0;\n"
 		"}";
+
+	image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
+	                                  GTK_ICON_SIZE_MENU);
+	gtk_widget_show (image);
+
+	gtk_container_add (GTK_CONTAINER (button), image);
 
 	/* make it as small as possible */
 	css = gtk_css_provider_new ();
@@ -49,28 +65,6 @@ gedit_close_button_constructed (GObject *button)
 	gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
 	                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 	g_object_unref (css);
-}
-
-static void
-gedit_close_button_class_init (GeditCloseButtonClass *klass)
-{
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-	object_class->constructed = gedit_close_button_constructed;
-}
-
-static void
-gedit_close_button_init (GeditCloseButton *button)
-{
-
-	GtkWidget *image;
-	
-
-	image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
-					  GTK_ICON_SIZE_MENU);
-	gtk_widget_show (image);
-
-	gtk_container_add (GTK_CONTAINER (button), image);
 }
 
 GtkWidget *
