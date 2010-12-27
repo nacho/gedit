@@ -66,7 +66,7 @@ class AppActivatable(GObject.Object, Gedit.AppActivatable, PeasGtk.Configurable)
                         dirs = []
 
                         for d in datadirs.split(os.pathsep):
-                                d = os.path.join(d, 'gedit-2', 'plugins', 'snippets')
+                                d = os.path.join(d, 'gedit', 'plugins', 'snippets')
 
                                 if os.path.isdir(d):
                                         dirs.append(d)
