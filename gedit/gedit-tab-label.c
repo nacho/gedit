@@ -184,8 +184,8 @@ sync_state (GeditTab      *tab,
 
 		gtk_widget_show (tab_label->priv->icon);
 
-		gtk_widget_hide (tab_label->priv->spinner);
 		gtk_spinner_stop (GTK_SPINNER (tab_label->priv->spinner));
+		gtk_widget_hide (tab_label->priv->spinner);
 	}
 
 	/* sync tip since encoding is known only after load/save end */
