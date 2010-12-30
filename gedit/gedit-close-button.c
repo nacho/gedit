@@ -33,7 +33,6 @@ static void
 gedit_close_button_init (GeditCloseButton *button)
 {
 	GtkWidget *image;
-	GtkStyleContext *context;
 	GtkCssProvider *css;
 	GError *error = NULL;
 	const gchar button_style[] =
@@ -54,17 +53,21 @@ gedit_close_button_init (GeditCloseButton *button)
 
 	/* make it as small as possible */
 	css = gtk_css_provider_new ();
-	if (!gtk_css_provider_load_from_data (css, button_style,
-	                                      -1, &error))
+	if (gtk_css_provider_load_from_data (css, button_style,
+	                                     -1, &error))
+	{
+		GtkStyleContext *context;
+
+		context = gtk_widget_get_style_context (GTK_WIDGET (button));
+		gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
+			                        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+		g_object_unref (css);
+	}
+	else
 	{
 		g_warning ("%s", error->message);
 		g_error_free (error);
 	}
-
-	context = gtk_widget_get_style_context (GTK_WIDGET (button));
-	gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
-	                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-	g_object_unref (css);
 }
 
 GtkWidget *

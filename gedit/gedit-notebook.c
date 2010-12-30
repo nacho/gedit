@@ -62,7 +62,7 @@ struct _GeditNotebookPrivate
 
 	GeditNotebookShowTabsModeType show_tabs_mode;
 
-	gint           xthickness;
+	GtkBorder      padding;
 
 	guint          close_buttons_sensitive : 1;
 	guint          collapse_border : 1;
@@ -193,20 +193,6 @@ gedit_notebook_grab_focus (GtkWidget *widget)
 	tab = gtk_notebook_get_nth_page (nb, current_page);
 
 	gtk_widget_grab_focus (tab);
-}
-
-static void
-gedit_notebook_style_set (GtkWidget *widget,
-			  GtkStyle  *previous_style)
-{
-	GeditNotebook *nb = GEDIT_NOTEBOOK (widget);
-
-	if (previous_style != NULL && nb->priv->collapse_border)
-	{
-		previous_style->xthickness = 0;
-	}
-
-	GTK_WIDGET_CLASS (gedit_notebook_parent_class)->style_set (widget, previous_style);
 }
 
 /*
@@ -409,7 +395,6 @@ gedit_notebook_class_init (GeditNotebookClass *klass)
 	object_class->set_property = gedit_notebook_set_property;
 
 	gtkwidget_class->grab_focus = gedit_notebook_grab_focus;
-	gtkwidget_class->style_set = gedit_notebook_style_set;
 
 	notebook_class->change_current_page = gedit_notebook_change_current_page;
 	notebook_class->switch_page = gedit_notebook_switch_page;
@@ -668,32 +653,51 @@ gedit_notebook_get_close_buttons_sensitive (GeditNotebook *nb)
 
 void
 gedit_notebook_collapse_border (GeditNotebook *nb,
-				gboolean       collapse)
+                                gboolean       collapse)
 {
-	GtkRcStyle *rcstyle;
-	gint xthickness;
+	GtkStyleContext *context;
+	GtkCssProvider *css;
+	GError *error = NULL;
+	gchar *modified_style;
+	const gchar notebook_style[] =
+		"* {\n"
+		"	padding-left: %d;\n"
+		"	padding-right: %d;\n"
+		"}";
 
 	g_return_if_fail (GEDIT_IS_NOTEBOOK (nb));
 
 	nb->priv->collapse_border = collapse;
+	context = gtk_widget_get_style_context (GTK_WIDGET (nb));
 
 	if (collapse)
 	{
-		GtkStyle *style;
-
-		style = gtk_widget_get_style (GTK_WIDGET (nb));
-		nb->priv->xthickness = style->xthickness;
-		xthickness = 0;
+		gtk_style_context_get_padding (context, 0, &nb->priv->padding);
+		modified_style = g_strdup_printf (notebook_style, 0, 0);
 	}
 	else
 	{
-		xthickness = nb->priv->xthickness;
+		modified_style = g_strdup_printf (notebook_style,
+		                                  nb->priv->padding.left,
+		                                  nb->priv->padding.right);
 	}
 
-	rcstyle = gtk_rc_style_new ();
-	rcstyle->xthickness = xthickness;
-	gtk_widget_modify_style (GTK_WIDGET (nb), rcstyle);
-	g_object_unref (rcstyle);
+	/* make it as small as possible */
+	css = gtk_css_provider_new ();
+	if (gtk_css_provider_load_from_data (css, modified_style,
+	                                     -1, &error))
+	{
+		gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
+			                        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+		g_object_unref (css);
+		g_free (modified_style);
+	}
+	else
+	{
+		g_warning ("%s", error->message);
+		g_error_free (error);
+		g_free (modified_style);
+	}
 }
 
 /* ex:set ts=8 noet: */
