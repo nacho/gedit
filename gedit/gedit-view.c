@@ -431,7 +431,8 @@ gedit_view_destroy (GtkWidget *widget)
 
 	if (view->priv->extensions != NULL)
 	{
-		peas_extension_set_call (view->priv->extensions, "deactivate");
+		/* Note that unreffing the extensions will automatically remove
+		   all extensions which in turn will deactivate the extension */
 		g_object_unref (view->priv->extensions);
 		view->priv->extensions = NULL;
 	}

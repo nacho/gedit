@@ -123,10 +123,8 @@ gedit_app_dispose (GObject *object)
 
 	if (app->priv->extensions != NULL)
 	{
-		peas_extension_set_call (app->priv->extensions,
-					 "deactivate",
-					 app);
-
+		/* Note that unreffing the extensions will automatically remove
+		   all extensions which in turn will deactivate the extension */
 		g_object_unref (app->priv->extensions);
 		app->priv->extensions = NULL;
 	}
