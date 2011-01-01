@@ -713,7 +713,7 @@ handle_slave (GeditDBus *dbus)
 {
 	/* send the requested commands to the master */
 	GDBusConnection *conn;
-	GDBusCallFlags flags;
+	GDBusProxyFlags flags;
 	GeditCommandLine *command_line;
 
 	conn = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
@@ -733,7 +733,7 @@ handle_slave (GeditDBus *dbus)
 	}
 
 	g_dbus_proxy_new (conn,
-	                  G_BUS_NAME_WATCHER_FLAGS_NONE,
+	                  flags,
 	                  NULL,
 	                  "org.gnome.gedit",
 	                  "/org/gnome/gedit",
