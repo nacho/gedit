@@ -122,9 +122,6 @@ struct _GeditPreferencesDialogPrivate
 
 	/* Plugins manager */
 	GtkWidget	*plugin_manager_place_holder;
-
-	/* Style Scheme editor dialog */
-	GtkWidget	*style_scheme_dialog;
 };
 
 

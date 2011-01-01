@@ -960,7 +960,6 @@ document_loaded (GeditDocument *document,
 {
 	GtkWidget *emsg;
 	GFile *location;
-	const GeditEncoding *encoding;
 
 	g_return_if_fail ((tab->priv->state == GEDIT_TAB_STATE_LOADING) ||
 			  (tab->priv->state == GEDIT_TAB_STATE_REVERTING));
@@ -981,6 +980,8 @@ document_loaded (GeditDocument *document,
 	if (error != NULL &&
 	    (error->domain != GEDIT_DOCUMENT_ERROR || error->code != GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK))
 	{
+		const GeditEncoding *encoding;
+
 		if (tab->priv->state == GEDIT_TAB_STATE_LOADING)
 			gedit_tab_set_state (tab, GEDIT_TAB_STATE_LOADING_ERROR);
 		else

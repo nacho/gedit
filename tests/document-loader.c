@@ -40,8 +40,6 @@ create_document (const gchar *filename,
                  const gchar *contents)
 {
 	GError *error = NULL;
-	GeditDocument *document;
-	gchar *uri;
 
 	if (!g_file_set_contents (filename, contents, -1, &error))
 	{
@@ -103,7 +101,6 @@ test_loader (const gchar *filename,
              gint         newline_type)
 {
 	GFile *file;
-	gchar *uri;
 	GeditDocument *document;
 
 	file = create_document (filename, contents);

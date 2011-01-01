@@ -2944,7 +2944,6 @@ gedit_document_get_metadata (GeditDocument *doc,
 			     const gchar   *key)
 {
 	gchar *value = NULL;
-	gchar *uri;
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 	g_return_val_if_fail (key != NULL, NULL);

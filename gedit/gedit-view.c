@@ -314,7 +314,6 @@ on_notify_buffer_cb (GeditView  *view,
 static void 
 gedit_view_init (GeditView *view)
 {
-	GObject *gs;
 	GtkTargetList *tl;
 	gboolean use_default_font;
 	gboolean display_line_numbers;
@@ -331,7 +330,6 @@ gedit_view_init (GeditView *view)
 	
 	view->priv = GEDIT_VIEW_GET_PRIVATE (view);
 
-	gs = _gedit_app_get_settings (gedit_app_get_default ());
 	view->priv->editor_settings = g_settings_new ("org.gnome.gedit.preferences.editor");
 
 	/* Get setting values */

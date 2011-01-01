@@ -204,7 +204,6 @@ test_saver (const gchar              *filename_or_uri,
             SaverTestData            *data)
 {
 	GFile *file;
-	gchar *uri;
 	GeditDocument *document;
 	gboolean existed;
 

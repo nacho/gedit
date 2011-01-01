@@ -1078,10 +1078,8 @@ tab_added_cb (GeditWindow      *window,
 	      GeditSpellPlugin *plugin)
 {
 	GeditDocument *doc;
-	GeditView *view;
 
 	doc = gedit_tab_get_document (tab);
-	view = gedit_tab_get_view (tab);
 
 	g_signal_connect (doc, "loaded",
 			  G_CALLBACK (on_document_loaded),
@@ -1098,10 +1096,8 @@ tab_removed_cb (GeditWindow      *window,
 		GeditSpellPlugin *plugin)
 {
 	GeditDocument *doc;
-	GeditView *view;
 
 	doc = gedit_tab_get_document (tab);
-	view = gedit_tab_get_view (tab);
 	
 	g_signal_handlers_disconnect_by_func (doc, on_document_loaded, plugin);
 	g_signal_handlers_disconnect_by_func (doc, on_document_saved, plugin);
