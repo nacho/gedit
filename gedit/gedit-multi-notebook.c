@@ -691,7 +691,10 @@ gedit_multi_notebook_set_current_page (GeditMultiNotebook *mnb,
 	gint single_num = page_num;
 
 	g_return_if_fail (GEDIT_IS_MULTI_NOTEBOOK (mnb));
-	
+
+	if (mnb->priv->notebooks == NULL)
+		return;
+
 	for (l = mnb->priv->notebooks; l != NULL; l = g_list_next (l))
 	{
 		gint p;
