@@ -524,7 +524,7 @@ custom_widget_apply_cb (GtkPrintOperation *operation,
 
 	g_settings_set_enum (job->priv->print_settings,
 			     GEDIT_SETTINGS_PRINT_WRAP_MODE,
-			     GTK_WRAP_NONE);
+			     wrap_mode);
 }
 
 static void
