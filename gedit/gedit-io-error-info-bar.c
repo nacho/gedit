@@ -1171,8 +1171,8 @@ gedit_externally_modified_info_bar_new (GFile    *location,
 	gchar *full_formatted_uri;
 	gchar *uri_for_display;
 	gchar *temp_uri_for_display;
-	const gchar *primary_text;
-	const gchar *secondary_text;
+	gchar *primary_text;
+	gchar *secondary_text;
 	GtkWidget *info_bar;
 
 	g_return_val_if_fail (G_IS_FILE (location), NULL);
@@ -1219,6 +1219,9 @@ gedit_externally_modified_info_bar_new (GFile    *location,
 					"gtk-dialog-warning",
 					primary_text,
 					secondary_text);
+
+	g_free (secondary_text);
+	g_free (primary_text);
 
 	return info_bar;
 }
