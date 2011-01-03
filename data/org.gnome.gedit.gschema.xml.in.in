@@ -13,18 +13,18 @@
     <value nick="always" value="3"/>
   </enum>
 
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit" path="/apps/gedit/">
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit" path="/org/gnome/gedit/">
     <child name="preferences" schema="org.gnome.gedit.preferences"/>
     <child name="state" schema="org.gnome.gedit.state"/>
     <child name="plugins" schema="org.gnome.gedit.plugins"/>
   </schema>
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.preferences" path="/apps/gedit/preferences/">
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.preferences" path="/org/gnome/gedit/preferences/">
     <child name="editor" schema="org.gnome.gedit.preferences.editor"/>
     <child name="ui" schema="org.gnome.gedit.preferences.ui"/>
     <child name="print" schema="org.gnome.gedit.preferences.print"/>
     <child name="encodings" schema="org.gnome.gedit.preferences.encodings"/>
   </schema>
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.preferences.editor" path="/apps/gedit/preferences/editor/">
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.preferences.editor" path="/org/gnome/gedit/preferences/editor/">
     <key name="use-default-font" type="b">
       <default>true</default>
       <_summary>Use Default Font</_summary>
@@ -147,7 +147,7 @@
       <_description>Whether gedit should highlight all the occurrences of the searched text.</_description>
     </key>
   </schema>
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.preferences.ui" path="/apps/gedit/preferences/ui/">
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.preferences.ui" path="/org/gnome/gedit/preferences/ui/">
     <key name="toolbar-visible" type="b">
       <default>true</default>
       <_summary>Toolbar is Visible</_summary>
@@ -177,7 +177,7 @@
       <_description>Specifies the maximum number of recently opened files that will be displayed in the "Recent Files" submenu.</_description>
     </key>
   </schema>
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.preferences.print" path="/apps/gedit/preferences/print/">
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.preferences.print" path="/org/gnome/gedit/preferences/print/">
     <key name="print-syntax-highlighting" type="b">
       <default>true</default>
       <_summary>Print Syntax Highlighting</_summary>
@@ -219,7 +219,7 @@
       <_description>Specifies the font to use for line numbers when printing. This will only take effect if the "Print Line Numbers" option is non-zero.</_description>
     </key>
   </schema>
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.preferences.encodings" path="/apps/gedit/preferences/encodings/">
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.preferences.encodings" path="/org/gnome/gedit/preferences/encodings/">
     <key name="auto-detected" type="as">
       <default l10n="messages">['UTF-8', 'CURRENT', 'ISO-8859-15', 'UTF-16']</default>
       <_summary>Automatically Detected Encodings</_summary>
@@ -231,12 +231,12 @@
       <_description>List of encodings shown in the Character Encoding menu in open/save file selector. Only recognized encodings are used.</_description>
     </key>
   </schema>
-  <schema id="org.gnome.gedit.state" path="/apps/gedit/state/">
+  <schema id="org.gnome.gedit.state" path="/org/gnome/gedit/state/">
     <child name="window" schema="org.gnome.gedit.state.window"/>
     <child name="file-filter" schema="org.gnome.gedit.state.file-filter"/>
     <child name="history-entry" schema="org.gnome.gedit.state.history-entry"/>
   </schema>
-  <schema id="org.gnome.gedit.state.window" path="/apps/gedit/state/window/">
+  <schema id="org.gnome.gedit.state.window" path="/org/gnome/gedit/state/window/">
     <key name="state" type="i">
       <default>0</default>
     </key>
@@ -256,12 +256,12 @@
       <default>0</default>
     </key>
   </schema>
-  <schema id="org.gnome.gedit.state.file-filter" path="/apps/gedit/state/file-filter/">
+  <schema id="org.gnome.gedit.state.file-filter" path="/org/gnome/gedit/state/file-filter/">
     <key name="filter-id" type="i">
       <default>0</default>
     </key>
   </schema>
-  <schema id="org.gnome.gedit.state.history-entry" path="/apps/gedit/state/history-entry/">
+  <schema id="org.gnome.gedit.state.history-entry" path="/org/gnome/gedit/state/history-entry/">
     <key name="search-for-entry" type="as">
       <default>['']</default>
     </key>
@@ -269,7 +269,7 @@
       <default>['']</default>
     </key>
   </schema>
-  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.plugins" path="/apps/gedit/plugins/">
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.plugins" path="/org/gnome/gedit/plugins/">
     <key name="active-plugins" type="as">
       <default>[@ACTIVE_PLUGINS@]</default>
       <_summary>Active plugins</_summary>
