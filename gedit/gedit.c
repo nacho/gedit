@@ -231,13 +231,13 @@ main (int argc, char *argv[])
 	/* Setup locale/gettext */
 	setlocale (LC_ALL, "");
 
+	gedit_dirs_init ();
+
 	dir = gedit_dirs_get_gedit_locale_dir ();
 	bindtextdomain (GETTEXT_PACKAGE, dir);
 
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
-
-	gedit_dirs_init ();
 
 	/* Parse command line arguments */
 	command_line = gedit_command_line_get_default ();
