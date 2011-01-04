@@ -519,7 +519,7 @@ gedit_history_entry_new (const gchar *history_id,
 			    "has-entry", TRUE,
 			    "history-id", history_id,
 			    "model", store,
-			    "text-column", 0,
+			    "id-column", 0,
 			    NULL);
 
 	g_object_unref (store);
