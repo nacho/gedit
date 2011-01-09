@@ -95,7 +95,21 @@ AC_MSG_RESULT([$platform_osx])
 AM_CONDITIONAL(PLATFORM_OSX, test "$platform_osx" = "yes")
 
 dnl check for native osx
-gdk_windowing=`$PKG_CONFIG --variable=target gdk-3.0`
+gdk_targets=`$PKG_CONFIG --variable=targets gdk-3.0`
+
+gdk_windowing="x11"
+
+for target in $gdk_targets;
+do
+	case "$target" in
+		quartz)
+			gdk_windowing=quartz
+			;;
+		win32)
+			gdk_windowing=win32
+			;;
+	esac
+done
 
 AC_MSG_CHECKING([for native Mac OS X])
 if test "$gdk_windowing" = "quartz"; then
@@ -447,6 +461,7 @@ Configuration:
 	Gvfs metadata enabled:	$enable_gvfs_metadata
 	Deprecations enabled:	$enable_deprecations
 	GObject Introspection:	$enable_introspection
+	GDK Backend:            $gdk_windowing
 "
 
 if expr ${GEDIT_MINOR_VERSION} % 2 > /dev/null; then
