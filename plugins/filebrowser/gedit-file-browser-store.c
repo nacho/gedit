@@ -1981,6 +1981,38 @@ backup_content_type (GFileInfo *info)
 	return content;
 }
 
+static gboolean
+content_type_is_text (gchar const *content_type)
+{
+#ifdef G_OS_WIN32
+	gchar *mime;
+	gboolean ret;
+#endif
+
+	if (!content_type || g_content_type_is_unknown (content_type))
+	{
+		return TRUE;
+	}
+
+#ifndef G_OS_WIN32
+	return g_content_type_is_a (content_type, "text/plain");
+#else
+	if (g_content_type_is_a (content_type, "text"))
+	{
+		return TRUE;
+	}
+
+	/* This covers a rare case in which on Windows the PerceivedType is
+	   not set to "text" but the Content Type is set to text/plain */
+	mime = g_content_type_get_mime_type (content_type);
+	ret = g_strcmp0 (mime, "text/plain");
+
+	g_free (mime);
+
+	return ret;
+#endif
+}
+
 static void
 file_browser_node_set_from_info (GeditFileBrowserStore *model,
 				 FileBrowserNode       *node,
@@ -2039,11 +2071,11 @@ file_browser_node_set_from_info (GeditFileBrowserStore *model,
 	else
 	{
 		if (!(content = backup_content_type (info)))
+		{
 			content = g_file_info_get_content_type (info);
+		}
 
-		if (!content ||
-		    g_content_type_is_unknown (content) ||
-		    g_content_type_is_a (content, "text/plain"))
+		if (content_type_is_text (content))
 		{
 			node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_TEXT;
 		}
