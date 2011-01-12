@@ -688,16 +688,16 @@ gedit_notebook_collapse_border (GeditNotebook *nb,
 	                                     -1, &error))
 	{
 		gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
-			                        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-		g_object_unref (css);
-		g_free (modified_style);
+		                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 	}
 	else
 	{
 		g_warning ("%s", error->message);
 		g_error_free (error);
-		g_free (modified_style);
 	}
+
+	g_free (modified_style);
+	g_object_unref (css);
 }
 
 /* ex:set ts=8 noet: */

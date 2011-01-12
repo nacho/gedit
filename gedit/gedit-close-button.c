@@ -61,13 +61,14 @@ gedit_close_button_init (GeditCloseButton *button)
 		context = gtk_widget_get_style_context (GTK_WIDGET (button));
 		gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
 			                        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-		g_object_unref (css);
 	}
 	else
 	{
 		g_warning ("%s", error->message);
 		g_error_free (error);
 	}
+
+	g_object_unref (css);
 }
 
 GtkWidget *
