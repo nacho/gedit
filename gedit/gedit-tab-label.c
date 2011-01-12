@@ -217,6 +217,11 @@ gedit_tab_label_constructed (GObject *object)
 				 G_CALLBACK (sync_state),
 				 tab_label,
 				 0);
+
+	if (G_OBJECT_CLASS (gedit_tab_label_parent_class)->constructed)
+	{
+		G_OBJECT_CLASS (gedit_tab_label_parent_class)->constructed (object);
+	}
 }
 
 static void

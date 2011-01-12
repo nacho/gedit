@@ -374,6 +374,11 @@ gedit_view_constructed (GObject *object)
 	              "smart_home_end", smart_home_end,
 	              "indent_on_tab", TRUE,
 	              NULL);
+
+	if (G_OBJECT_CLASS (gedit_view_parent_class)->constructed)
+	{
+		G_OBJECT_CLASS (gedit_view_parent_class)->constructed (object);
+	}
 }
 
 static gint

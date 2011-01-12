@@ -188,6 +188,11 @@ gedit_fifo_constructed (GObject *object)
 		g_object_unref (self->priv->file);
 		self->priv->file = NULL;
 	}
+
+	if (G_OBJECT_CLASS (gedit_fifo_parent_class)->constructed)
+	{
+		G_OBJECT_CLASS (gedit_fifo_parent_class)->constructed (object);
+	}
 }
 
 static void

@@ -20,7 +20,7 @@
  */
  
 #ifdef HAVE_CONFIG_H
-#	include <config.h>
+#include <config.h>
 #endif
 
 #include <glib/gi18n-lib.h>
@@ -65,6 +65,11 @@ gedit_modeline_plugin_constructed (GObject *object)
 	modeline_parser_init (data_dir);
 
 	g_free (data_dir);
+
+	if (G_OBJECT_CLASS (gedit_modeline_plugin_parent_class)->constructed)
+	{
+		G_OBJECT_CLASS (gedit_modeline_plugin_parent_class)->constructed (object);
+	}
 }
 
 static void
