@@ -62,10 +62,9 @@ struct _GeditNotebookPrivate
 
 	GeditNotebookShowTabsModeType show_tabs_mode;
 
-	GtkBorder      padding;
+	GtkCssProvider *css;
 
 	guint          close_buttons_sensitive : 1;
-	guint          collapse_border : 1;
 };
 
 G_DEFINE_TYPE(GeditNotebook, gedit_notebook, GTK_TYPE_NOTEBOOK)
@@ -167,6 +166,12 @@ gedit_notebook_dispose (GObject *object)
 	{
 		g_object_unref (notebook->priv->ui_settings);
 		notebook->priv->ui_settings = NULL;
+	}
+
+	if (notebook->priv->css != NULL)
+	{
+		g_object_unref (notebook->priv->css);
+		notebook->priv->css = NULL;
 	}
 
 	G_OBJECT_CLASS (gedit_notebook_parent_class)->dispose (object);
@@ -656,48 +661,42 @@ gedit_notebook_collapse_border (GeditNotebook *nb,
                                 gboolean       collapse)
 {
 	GtkStyleContext *context;
-	GtkCssProvider *css;
 	GError *error = NULL;
-	gchar *modified_style;
-	const gchar notebook_style[] =
+	const gchar style[] =
 		"* {\n"
-		"	padding-left: %d;\n"
-		"	padding-right: %d;\n"
+		"	padding-left: 0;\n"
+		"	padding-right: 0;\n"
 		"}";
 
 	g_return_if_fail (GEDIT_IS_NOTEBOOK (nb));
 
-	nb->priv->collapse_border = collapse;
 	context = gtk_widget_get_style_context (GTK_WIDGET (nb));
 
 	if (collapse)
 	{
-		gtk_style_context_get_padding (context, 0, &nb->priv->padding);
-		modified_style = g_strdup_printf (notebook_style, 0, 0);
-	}
-	else
-	{
-		modified_style = g_strdup_printf (notebook_style,
-		                                  nb->priv->padding.left,
-		                                  nb->priv->padding.right);
-	}
+		/* make it as small as possible */
+		if (nb->priv->css == NULL)
+		{
+			nb->priv->css = gtk_css_provider_new ();
+		}
 
-	/* make it as small as possible */
-	css = gtk_css_provider_new ();
-	if (gtk_css_provider_load_from_data (css, modified_style,
-	                                     -1, &error))
-	{
-		gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
-		                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+		if (gtk_css_provider_load_from_data (nb->priv->css, style, -1, &error))
+		{
+			gtk_style_context_add_provider (context,
+			                                GTK_STYLE_PROVIDER (nb->priv->css),
+			                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+		}
+		else
+		{
+			g_warning ("%s", error->message);
+			g_error_free (error);
+		}
 	}
-	else
+	else if (nb->priv->css != NULL)
 	{
-		g_warning ("%s", error->message);
-		g_error_free (error);
+		gtk_style_context_remove_provider (context,
+		                                   GTK_STYLE_PROVIDER (nb->priv->css));
 	}
-
-	g_free (modified_style);
-	g_object_unref (css);
 }
 
 /* ex:set ts=8 noet: */
