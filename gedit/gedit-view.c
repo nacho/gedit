@@ -375,10 +375,7 @@ gedit_view_constructed (GObject *object)
 	              "indent_on_tab", TRUE,
 	              NULL);
 
-	if (G_OBJECT_CLASS (gedit_view_parent_class)->constructed)
-	{
-		G_OBJECT_CLASS (gedit_view_parent_class)->constructed (object);
-	}
+	G_OBJECT_CLASS (gedit_view_parent_class)->constructed (object);
 }
 
 static gint

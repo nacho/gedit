@@ -66,10 +66,7 @@ gedit_modeline_plugin_constructed (GObject *object)
 
 	g_free (data_dir);
 
-	if (G_OBJECT_CLASS (gedit_modeline_plugin_parent_class)->constructed)
-	{
-		G_OBJECT_CLASS (gedit_modeline_plugin_parent_class)->constructed (object);
-	}
+	G_OBJECT_CLASS (gedit_modeline_plugin_parent_class)->constructed (object);
 }
 
 static void

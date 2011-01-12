@@ -178,10 +178,7 @@ gedit_document_output_stream_constructed (GObject *object)
 
 	gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (stream->priv->doc));
 
-	if (G_OBJECT_CLASS (gedit_document_output_stream_parent_class)->constructed)
-	{
-		G_OBJECT_CLASS (gedit_document_output_stream_parent_class)->constructed (object);
-	}
+	G_OBJECT_CLASS (gedit_document_output_stream_parent_class)->constructed (object);
 }
 
 static void

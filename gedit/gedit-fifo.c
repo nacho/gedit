@@ -189,10 +189,7 @@ gedit_fifo_constructed (GObject *object)
 		self->priv->file = NULL;
 	}
 
-	if (G_OBJECT_CLASS (gedit_fifo_parent_class)->constructed)
-	{
-		G_OBJECT_CLASS (gedit_fifo_parent_class)->constructed (object);
-	}
+	G_OBJECT_CLASS (gedit_fifo_parent_class)->constructed (object);
 }
 
 static void
