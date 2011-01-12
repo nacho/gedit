@@ -1666,6 +1666,7 @@ gedit_document_load_stream (GeditDocument       *doc,
  * @location: the location where to load the document from.
  * @encoding: (allow-none): the #GeditEncoding to encode the document, or %NULL.
  * @line_pos: the line to show.
+ * @column_pos: the column to show.
  * @create: whether the document should be created if it doesn't exist.
  *
  * Load a document. This results in the "load" signal to be emitted.

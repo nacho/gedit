@@ -142,7 +142,7 @@ struct _GeditDocumentClass
 	void (* cursor_moved)		(GeditDocument    *document);
 
 	/* Document load */
-	void (* load)			(GeditDocument       *document,
+	void (* load)			(GeditDocument       *doc,
 					 GFile               *location,
 					 const GeditEncoding *encoding,
 					 gint                 line_pos,

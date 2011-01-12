@@ -636,14 +636,14 @@ gedit_utils_uri_get_dirname (const gchar *uri)
 
 /**
  * gedit_utils_location_get_dirname_for_display
- * @file: the location
+ * @location: the location
  *
  * Returns a string suitable to be displayed in the UI indicating
  * the name of the directory where the file is located.
  * For remote files it may also contain the hostname etc.
  * For local files it tries to replace the home dir with ~.
  *
- * Returns: a string to display the dirname
+ * Returns: (transfer full): a string to display the dirname
  */
 gchar *
 gedit_utils_location_get_dirname_for_display (GFile *location)
@@ -757,8 +757,7 @@ gedit_utils_replace_home_dir_with_tilde (const gchar *uri)
 
 /**
  * gedit_utils_get_current_workspace:
- *
- * Get the current workspace
+ * @screen: a #GdkScreen
  *
  * Get the currently visible workspace for the #GdkScreen.
  *
@@ -859,8 +858,9 @@ gedit_utils_get_window_workspace (GtkWindow *gtkwindow)
 
 /**
  * gedit_utils_get_current_viewport:
- *
- * Get the current viewport origin
+ * @screen: a #GdkScreen
+ * @x: (out): x-axis point.
+ * @y: (out): y-axis point.
  *
  * Get the currently visible viewport origin for the #GdkScreen.
  *
@@ -1177,7 +1177,7 @@ gedit_utils_make_canonical_uri_from_shell_arg (const gchar *str)
  * gedit_utils_basename_for_display:
  * @location: location for which the basename should be displayed
  *
- * Returns: the basename of a file suitable for display to users.
+ * Returns: (transfer full): the basename of a file suitable for display to users.
  */
 gchar *
 gedit_utils_basename_for_display (GFile *location)
@@ -1311,12 +1311,12 @@ null_ptr (gchar **ptr)
 /**
  * gedit_utils_decode_uri:
  * @uri: the uri to decode
- * @scheme: (allow-none): return value pointer for the uri's
+ * @scheme: (out) (allow-none): return value pointer for the uri's
  * scheme (e.g. http, sftp, ...), or %NULL
- * @user: (allow-none): return value pointer for the uri user info, or %NULL
- * @port: (allow-none): return value pointer for the uri port, or %NULL
- * @host: (allow-none): return value pointer for the uri host, or %NULL
- * @path: (allow-none): return value pointer for the uri path, or %NULL
+ * @user: (out) (allow-none): return value pointer for the uri user info, or %NULL
+ * @port: (out) (allow-none): return value pointer for the uri port, or %NULL
+ * @host: (out) (allow-none): return value pointer for the uri host, or %NULL
+ * @path: (out) (allow-none): return value pointer for the uri path, or %NULL
  *
  * Parse and break an uri apart in its individual components like the uri
  * scheme, user info, port, host and path. The return value pointer can be
@@ -1331,8 +1331,7 @@ gedit_utils_decode_uri (const gchar  *uri,
 			gchar       **user,
 			gchar       **host,
 			gchar       **port,
-			gchar       **path
-)
+			gchar       **path)
 {
 	/* Largely copied from glib/gio/gdummyfile.c:_g_decode_uri. This
 	 * functionality should be in glib/gio, but for now we implement it
