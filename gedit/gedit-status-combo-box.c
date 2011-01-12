@@ -279,10 +279,13 @@ gedit_status_combo_box_init (GeditStatusComboBox *self)
 	GError *error = NULL;
 	const gchar style[] =
 		"* {\n"
+		"	-GtkButton-default-border : 0;\n"
+		"	-GtkButton-default-outside-border : 0;\n"
+		"	-GtkButton-inner-border: 0;\n"
 		"	-GtkWidget-focus-line-width: 0;\n"
 		"	-GtkWidget-focus-padding: 0;\n"
 		"	padding: 0;\n"
-		"}";
+		"}\n";
 
 	self->priv = GEDIT_STATUS_COMBO_BOX_GET_PRIVATE (self);
 
@@ -297,9 +300,9 @@ gedit_status_combo_box_init (GeditStatusComboBox *self)
 
 	set_shadow_type (self);
 
-	self->priv->hbox = gtk_hbox_new (FALSE, 3);
+	self->priv->hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
 	gtk_widget_show (self->priv->hbox);
-	
+
 	gtk_container_add (GTK_CONTAINER (self), self->priv->frame);
 	gtk_container_add (GTK_CONTAINER (self->priv->frame), self->priv->button);
 	gtk_container_add (GTK_CONTAINER (self->priv->button), self->priv->hbox);
@@ -346,7 +349,10 @@ gedit_status_combo_box_init (GeditStatusComboBox *self)
 	css = gtk_css_provider_new ();
 	if (gtk_css_provider_load_from_data (css, style, -1, &error))
 	{
-		context = gtk_widget_get_style_context (GTK_WIDGET (self));
+		context = gtk_widget_get_style_context (GTK_WIDGET (self->priv->button));
+		gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
+		                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+		context = gtk_widget_get_style_context (GTK_WIDGET (self->priv->frame));
 		gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
 		                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 	}
