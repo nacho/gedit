@@ -105,35 +105,6 @@ gedit_status_combo_box_set_property (GObject      *object,
 }
 
 static void
-gedit_status_combo_box_constructed (GObject *object)
-{
-	GeditStatusComboBox *combo = GEDIT_STATUS_COMBO_BOX (object);
-	GtkStyleContext *context;
-	GtkCssProvider *css;
-	GError *error = NULL;
-	const gchar style[] =
-		"* {\n"
-		"	-GtkWidget-focus-line-width: 0;\n"
-		"	-GtkWidget-focus-padding: 0;\n"
-		"	padding: 0;\n"
-		"}";
-
-	/* make it as small as possible */
-	css = gtk_css_provider_new ();
-	if (!gtk_css_provider_load_from_data (css, style, -1, &error))
-	{
-		g_warning ("%s", error->message);
-		g_error_free (error);
-		return;
-	}
-
-	context = gtk_widget_get_style_context (GTK_WIDGET (combo));
-	gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
-	                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-	g_object_unref (css);
-}
-
-static void
 gedit_status_combo_box_changed (GeditStatusComboBox *combo,
 				GtkMenuItem         *item)
 {
@@ -156,7 +127,6 @@ gedit_status_combo_box_class_init (GeditStatusComboBoxClass *klass)
 	object_class->finalize = gedit_status_combo_box_finalize;
 	object_class->get_property = gedit_status_combo_box_get_property;
 	object_class->set_property = gedit_status_combo_box_set_property;
-	object_class->constructed = gedit_status_combo_box_constructed;
 	
 	klass->changed = gedit_status_combo_box_changed;
 
@@ -304,8 +274,18 @@ set_shadow_type (GeditStatusComboBox *combo)
 static void
 gedit_status_combo_box_init (GeditStatusComboBox *self)
 {
+	GtkStyleContext *context;
+	GtkCssProvider *css;
+	GError *error = NULL;
+	const gchar style[] =
+		"* {\n"
+		"	-GtkWidget-focus-line-width: 0;\n"
+		"	-GtkWidget-focus-padding: 0;\n"
+		"	padding: 0;\n"
+		"}";
+
 	self->priv = GEDIT_STATUS_COMBO_BOX_GET_PRIVATE (self);
-	
+
 	gtk_event_box_set_visible_window (GTK_EVENT_BOX (self), TRUE);
 
 	self->priv->frame = gtk_frame_new (NULL);
@@ -361,6 +341,22 @@ gedit_status_combo_box_init (GeditStatusComboBox *self)
 			  "deactivate",
 			  G_CALLBACK (menu_deactivate),
 			  self);
+
+	/* make it as small as possible */
+	css = gtk_css_provider_new ();
+	if (gtk_css_provider_load_from_data (css, style, -1, &error))
+	{
+		context = gtk_widget_get_style_context (GTK_WIDGET (self));
+		gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
+		                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+	}
+	else
+	{
+		g_warning ("%s", error->message);
+		g_error_free (error);
+	}
+
+	g_object_unref (css);
 }
 
 /* public functions */
