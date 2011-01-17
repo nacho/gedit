@@ -24,6 +24,8 @@ import xml.sax.saxutils
 from virtualdirs import VirtualDirectory
 
 class Popup(Gtk.Dialog):
+        __gtype_name__ = "QuickOpenPopup"
+
         def __init__(self, window, paths, handler):
                 Gtk.Dialog.__init__(self,
                                     title=_('Quick Open'),
