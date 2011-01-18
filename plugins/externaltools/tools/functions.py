@@ -17,11 +17,7 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
-import gtk
-from gtk import gdk
-import gio
-import gedit
-#import gtksourceview
+from gi.repository import Gio, Gtk, Gdk, Gedit
 from outputpanel import OutputPanel
 from capture import *
 
@@ -92,7 +88,7 @@ def run_external_tool(window, node):
             capture.set_env(GEDIT_CURRENT_DOCUMENT_URI    = location.get_uri(),
                             GEDIT_CURRENT_DOCUMENT_NAME   = name,
                             GEDIT_CURRENT_DOCUMENT_SCHEME = scheme)
-            if gedit.utils.location_has_file_scheme(location):
+            if Gedit.utils.location_has_file_scheme(location):
                 path = location.get_path()
                 cwd = os.path.dirname(path)
                 capture.set_cwd(cwd)
@@ -107,7 +103,7 @@ def run_external_tool(window, node):
                          if location.get_uri() is not None]
         documents_path = [location.get_path()
                           for location in documents_location
-                          if gedit.utils.location_has_file_scheme(location)]
+                          if Gedit.utils.location_has_file_scheme(location)]
         capture.set_env(GEDIT_DOCUMENTS_URI  = ' '.join(documents_uri),
                         GEDIT_DOCUMENTS_PATH = ' '.join(documents_path))
 
@@ -226,7 +222,7 @@ class MultipleDocumentsSaver:
 
         for doc in docs:
             signals[doc] = doc.connect('saving', self.on_document_saving)
-            gedit.commands.save_document(window, doc)
+            Gedit.commands.save_document(window, doc)
             doc.disconnect(signals[doc])
     
     def on_document_saving(self, doc, size, total_size):
@@ -262,7 +258,7 @@ def capture_stderr_line_panel(capture, line, panel):
     panel.write(line, panel.error_tag)
 
 def capture_begin_execute_panel(capture, panel, view, label):
-    view.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(gdk.Cursor(gdk.WATCH))
+    view.get_window(Gtk.TextWindowType.TEXT).set_cursor(Gdk.Cursor(Gdk.CursorType.WATCH))
 
     panel['stop'].set_sensitive(True)
     panel.clear()
@@ -279,8 +275,8 @@ def capture_end_execute_panel(capture, exit_code, panel, view, output_type):
         end.forward_chars(300)
         uri = ''
 
-        mtype = gio.content_type_guess(data=doc.get_text(start, end))
-        lmanager = gedit.get_language_manager()
+        mtype = Gio.content_type_guess(data=doc.get_text(start, end))
+        lmanager = Gedit.get_language_manager()
         
         location = doc.get_location()
         if location:
@@ -290,7 +286,7 @@ def capture_end_execute_panel(capture, exit_code, panel, view, output_type):
         if language is not None:
             doc.set_language(language)
 
-    view.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(gdk.Cursor(gdk.XTERM))
+    view.get_window(Gtk.TEXT_WINDOW_TEXT).set_cursor(Gdk.Cursor(Gdk.CursorType.XTERM))
     view.set_cursor_visible(True)
     view.set_editable(True)
 

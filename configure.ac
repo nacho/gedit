@@ -423,6 +423,7 @@ plugins/checkupdate/org.gnome.gedit.plugins.checkupdate.gschema.xml.in
 plugins/checkupdate/Makefile
 plugins/externaltools/data/Makefile
 plugins/externaltools/Makefile
+plugins/externaltools/org.gnome.gedit.plugins.externaltools.gschema.xml.in
 plugins/externaltools/scripts/Makefile
 plugins/externaltools/tools/Makefile
 plugins/docinfo/Makefile

@@ -18,24 +18,23 @@
 
 __all__ = ('Manager', )
 
-import gedit
-import gtk
-import gtksourceview2 as gsv
 import os.path
 from library import *
 from functions import *
 import hashlib
 from xml.sax import saxutils
-import gobject
+from gi.repository import GObject, Gtk, GtkSource, Gedit
 
-class LanguagesPopup(gtk.Window):
+class LanguagesPopup(Gtk.Window):
+    __gtype_name__ = "LanguagePopup"
+
     COLUMN_NAME = 0
     COLUMN_ID = 1
     COLUMN_ENABLED = 2
 
     def __init__(self, languages):
-        gtk.Window.__init__(self, gtk.WINDOW_POPUP)
-        
+        Gtk.Window.__init__(self, type=Gtk.WindowType.POPUP)
+
         self.set_default_size(200, 200)
         self.props.can_focus = True
 
@@ -47,40 +46,40 @@ class LanguagesPopup(gtk.Window):
         
         self.grab_add()
         
-        gtk.gdk.keyboard_grab(self.window, False, 0L)
-        gtk.gdk.pointer_grab(self.window, False, gtk.gdk.BUTTON_PRESS_MASK |
-                                                 gtk.gdk.BUTTON_RELEASE_MASK |
-                                                 gtk.gdk.POINTER_MOTION_MASK |
-                                                 gtk.gdk.ENTER_NOTIFY_MASK |
-                                                 gtk.gdk.LEAVE_NOTIFY_MASK |
-                                                 gtk.gdk.PROXIMITY_IN_MASK |
-                                                 gtk.gdk.PROXIMITY_OUT_MASK, None, None, 0L)
+        Gdk.keyboard_grab(self.window, False, 0L)
+        Gdk.pointer_grab(self.window, False, Gdk.BUTTON_PRESS_MASK |
+                                             Gdk.BUTTON_RELEASE_MASK |
+                                             Gdk.POINTER_MOTION_MASK |
+                                             Gdk.ENTER_NOTIFY_MASK |
+                                             Gdk.LEAVE_NOTIFY_MASK |
+                                             Gdk.PROXIMITY_IN_MASK |
+                                             Gdk.PROXIMITY_OUT_MASK, None, None, 0L)
 
         self.view.get_selection().select_path((0,))
 
     def build(self):
-        self.model = gtk.ListStore(str, str, bool)
+        self.model = Gtk.ListStore(str, str, bool)
         
-        self.sw = gtk.ScrolledWindow()
+        self.sw = Gtk.ScrolledWindow()
         self.sw.show()
         
-        self.sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-        self.sw.set_shadow_type(gtk.SHADOW_ETCHED_IN)
+        self.sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
+        self.sw.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
         
-        self.view = gtk.TreeView(self.model)
+        self.view = Gtk.TreeView(self.model)
         self.view.show()
         
         self.view.set_headers_visible(False)
         
-        column = gtk.TreeViewColumn()
+        column = Gtk.TreeViewColumn()
         
-        renderer = gtk.CellRendererToggle()
+        renderer = Gtk.CellRendererToggle()
         column.pack_start(renderer, False)
         column.set_attributes(renderer, active=self.COLUMN_ENABLED)
         
         renderer.connect('toggled', self.on_language_toggled)
         
-        renderer = gtk.CellRendererText()
+        renderer = Gtk.CellRendererText()
         column.pack_start(renderer, True)
         column.set_attributes(renderer, text=self.COLUMN_NAME)
         
@@ -113,7 +112,7 @@ class LanguagesPopup(gtk.Window):
         return val == '-'
     
     def init_languages(self, languages):
-        manager = gsv.LanguageManager()
+        manager = GtkSource.LanguageManager()
         langs = gedit.language_manager_list_languages_sorted(manager, True)
         
         self.model.append([_('All languages'), None, not languages])
@@ -142,7 +141,7 @@ class LanguagesPopup(gtk.Window):
             self.model.set_value(self.model.get_iter_first(), self.COLUMN_ENABLED, False)
 
     def do_key_press_event(self, event):
-        if event.keyval == gtk.keysyms.Escape:
+        if event.keyval == Gtk.keysyms.Escape:
             self.destroy()
             return True
         else:
@@ -166,10 +165,10 @@ class LanguagesPopup(gtk.Window):
                event.y_root <= origin[1] + geometry[3]
     
     def do_destroy(self):
-        gtk.gdk.keyboard_ungrab(0L)
-        gtk.gdk.pointer_ungrab(0L)
+        Gdk.keyboard_ungrab(0L)
+        Gdk.pointer_ungrab(0L)
         
-        return gtk.Window.do_destroy(self)
+        return Gtk.Window.do_destroy(self)
     
     def setup_event(self, event, window):
         fr = event.window.get_origin()
@@ -182,7 +181,7 @@ class LanguagesPopup(gtk.Window):
     def resolve_widgets(self, root):
         res = [root]
         
-        if isinstance(root, gtk.Container):
+        if isinstance(root, Gtk.Container):
             root.forall(lambda x, y: res.extend(self.resolve_widgets(x)), None)
         
         return res
@@ -210,7 +209,7 @@ class LanguagesPopup(gtk.Window):
                 if not (window.get_events() & event.type):
                     continue
 
-                if self.in_window(event, window):                    
+                if self.in_window(event, window):
                     self.setup_event(event, window)
 
                     if widget.event(event):
@@ -248,8 +247,6 @@ class LanguagesPopup(gtk.Window):
     def do_proximity_out_event(self, event):
         return self.propagate_mouse_event(event)
 
-gobject.type_register(LanguagesPopup)
-
 class Manager:
     TOOL_COLUMN = 0 # For Tree
     NAME_COLUMN = 1 # For Combo
@@ -275,7 +272,7 @@ class Manager:
         }
 
         # Load the "main-window" widget from the ui file.
-        self.ui = gtk.Builder()
+        self.ui = Gtk.Builder()
         self.ui.add_from_file(os.path.join(self.datadir, 'ui', 'tools.ui'))
         self.ui.connect_signals(callbacks)
         self.dialog = self.ui.get_object('tool-manager-dialog')
@@ -345,7 +342,7 @@ class Manager:
             del self.accelerators[shortcut]
 
     def add_tool_to_language(self, tool, language):
-        if isinstance(language, gsv.Language):
+        if isinstance(language, GtkSource.Language):
             lid = language.get_id()
         else:
             lid = language
@@ -353,7 +350,7 @@ class Manager:
         if not lid in self._languages:
             piter = self.model.append(None, [language])
             
-            parent = gtk.TreeRowReference(self.model, self.model.get_path(piter))
+            parent = Gtk.TreeRowReference.new(self.model, self.model.get_path(piter))
             self._languages[lid] = parent
         else:
             parent = self._languages[lid]
@@ -364,11 +361,11 @@ class Manager:
         if not tool in self._tool_rows:
             self._tool_rows[tool] = []
         
-        self._tool_rows[tool].append(gtk.TreeRowReference(self.model, self.model.get_path(child)))
+        self._tool_rows[tool].append(Gtk.TreeRowReference.new(self.model, self.model.get_path(child)))
         return child
 
     def add_tool(self, tool):
-        manager = gsv.LanguageManager()
+        manager = GtkSource.LanguageManager()
         ret = None
         
         for lang in tool.languages:
@@ -391,16 +388,16 @@ class Manager:
         self.script_hash = None
         self.accelerators = dict()
 
-        self.model = gtk.TreeStore(object)
+        self.model = Gtk.TreeStore(object)
         self.view.set_model(self.model)
 
         for tool in self.tools.tree.tools:
             self.add_tool(tool)
 
         self.model.set_default_sort_func(self.sort_tools)
-        self.model.set_sort_column_id(-1, gtk.SORT_ASCENDING)
+        self.model.set_sort_column_id(-1, Gtk.SortType.ASCENDING)
 
-    def sort_tools(self, model, iter1, iter2):
+    def sort_tools(self, model, iter1, iter2, user_data=None):
         # For languages, sort All before everything else, otherwise alphabetical
         t1 = model.get_value(iter1, self.TOOL_COLUMN)
         t2 = model.get_value(iter2, self.TOOL_COLUMN)
@@ -413,7 +410,7 @@ class Manager:
                 return 1
             
             def lang_name(lang):
-                if isinstance(lang, gsv.Language):
+                if isinstance(lang, GtkSource.Language):
                     return lang.get_name()
                 else:
                     return _('Plain Text')
@@ -428,13 +425,13 @@ class Manager:
 
     def __init_tools_view(self):
         # Tools column
-        column = gtk.TreeViewColumn('Tools')
-        renderer = gtk.CellRendererText()
+        column = Gtk.TreeViewColumn('Tools')
+        renderer = Gtk.CellRendererText()
         column.pack_start(renderer, False)
         renderer.set_property('editable', True)
         self.view.append_column(column)
         
-        column.set_cell_data_func(renderer, self.get_cell_data_cb)
+        column.set_cell_data_func(renderer, self.get_cell_data_cb, None)
 
         renderer.connect('edited', self.on_view_label_cell_edited)
         renderer.connect('editing-started', self.on_view_label_cell_editing_started)
@@ -493,7 +490,8 @@ class Manager:
         self.current_node.save_files = combo_value(self, 'save-files')
 
         buf = self['commands'].get_buffer()
-        script  = buf.get_text(*buf.get_bounds())
+        (start, end) = buf.get_bounds()
+        script  = buf.get_text(start, end, False)
         h = self.compute_hash(script)
         if h != self.script_hash:
             # script has changed -> save it
@@ -521,7 +519,7 @@ class Manager:
         if not self.current_node or not self.current_node.languages:
             self['languages_label'].set_text(_('All Languages'))
         else:
-            manager = gsv.LanguageManager()
+            manager = GtkSource.LanguageManager()
             langs = []
             
             for lang in self.current_node.languages:
@@ -542,14 +540,15 @@ class Manager:
         buf = self['commands'].get_buffer()
         script = default(''.join(node.get_script()), '')
 
-	buf.begin_not_undoable_action()
-	buf.set_text(script)
-	buf.end_not_undoable_action()
+        buf.begin_not_undoable_action()
+        buf.set_text(script)
+        buf.end_not_undoable_action()
 
         self.script_hash = self.compute_hash(script)
-        contenttype = gio.content_type_guess(data=script)
-        lmanager = gedit.get_language_manager()
-        language = lmanager.guess_language(content_type=contenttype)
+
+        contenttype, uncertain = Gio.content_type_guess(None, script)
+        lmanager = GtkSource.LanguageManager.get_default()
+        language = lmanager.guess_language(None, contenttype)
 
         if language is not None:
             buf.set_language(language)
@@ -593,7 +592,7 @@ class Manager:
             self['tool-table'].set_sensitive(True)
         else:
             self.clear_fields()
-            self['tool-table'].set_sensitive(False)       
+            self['tool-table'].set_sensitive(False)
 
     def language_id_from_iter(self, piter):
         if not piter:
@@ -605,7 +604,7 @@ class Manager:
             piter = self.model.iter_parent(piter)
             tool = self.model.get_value(piter, self.TOOL_COLUMN)
         
-        if isinstance(tool, gsv.Language):
+        if isinstance(tool, GtkSource.Language):
             return tool.get_id()
         elif tool:
             return 'plain'
@@ -712,7 +711,7 @@ class Manager:
             piter = self.model.get_iter(path)
             tool = self.model.get_value(piter, self.TOOL_COLUMN)
 
-            if isinstance(editable, gtk.Entry):
+            if isinstance(editable, Gtk.Entry):
                 editable.set_text(tool.name)
                 editable.grab_focus()
     
@@ -742,7 +741,7 @@ class Manager:
         # Check whether accelerator already exists
         self.remove_accelerator(self.current_node)
 
-        name = gtk.accelerator_name(keyval, mod)
+        name = Gtk.accelerator_name(keyval, mod)
 
         if name == '':
             self.current_node.shorcut = None
@@ -752,15 +751,15 @@ class Manager:
         col = self.accelerator_collision(name, self.current_node)
         
         if col:
-            dialog = gtk.MessageDialog(self.dialog,
-                                       gtk.DIALOG_MODAL,
-                                       gtk.MESSAGE_ERROR,
-                                       gtk.BUTTONS_OK,
+            dialog = Gtk.MessageDialog(self.dialog,
+                                       Gtk.DIALOG_MODAL,
+                                       Gtk.MESSAGE_ERROR,
+                                       Gtk.BUTTONS_OK,
                                        _('This accelerator is already bound to %s') % (', '.join(map(lambda x: x.name, col)),))
 
             dialog.run()
             dialog.destroy()
-            
+
             self.add_accelerator(self.current_node)
             return False
 
@@ -771,20 +770,20 @@ class Manager:
         return True
 
     def on_accelerator_key_press(self, entry, event):
-        mask = event.state & gtk.accelerator_get_default_mod_mask()
+        mask = event.state & Gtk.accelerator_get_default_mod_mask()
 
-        if event.keyval == gtk.keysyms.Escape:
+        if event.keyval == Gdk.KEY_Escape:
             entry.set_text(default(self.current_node.shortcut, ''))
             self['commands'].grab_focus()
             return True
-        elif event.keyval == gtk.keysyms.Delete \
-          or event.keyval == gtk.keysyms.BackSpace:
+        elif event.keyval == Gdk.KEY_Delete \
+          or event.keyval == Gdk.KEY_BackSpace:
             entry.set_text('')
             self.remove_accelerator(self.current_node)
             self.current_node.shortcut = None
             self['commands'].grab_focus()
             return True
-        elif event.keyval in range(gtk.keysyms.F1, gtk.keysyms.F12 + 1):
+        elif event.keyval in range(Gdk.KEY_F1, Gdk.KEY_F12 + 1):
             # New accelerator
             if self.set_accelerator(event.keyval, mask):
                 entry.set_text(default(self.current_node.shortcut, ''))
@@ -792,7 +791,7 @@ class Manager:
     
             # Capture all `normal characters`
             return True
-        elif gtk.gdk.keyval_to_unicode(event.keyval):
+        elif Gdk.keyval_to_unicode(event.keyval):
             if mask:
                 # New accelerator
                 if self.set_accelerator(event.keyval, mask):
@@ -817,8 +816,8 @@ class Manager:
             self.tool_changed(self.current_node)
 
     def on_tool_manager_dialog_response(self, dialog, response):
-        if response == gtk.RESPONSE_HELP:
-            gedit.app_get_default().show_help(self.dialog, 'gedit', 'gedit-external-tools-plugin')
+        if response == Gtk.ResponseType.HELP:
+            Gedit.app_get_default().show_help(self.dialog, 'gedit', 'gedit-external-tools-plugin')
             return
 
         self.on_tool_manager_dialog_focus_out(dialog, None)
@@ -830,17 +829,20 @@ class Manager:
     def on_tool_manager_dialog_focus_out(self, dialog, event):
         self.save_current_tool()
 
+        #FIXME: this is wrong, we must emit a signal and let the plugin update the menu
+        """
         for window in gedit.app_get_default().get_windows():
             helper = window.get_data("ExternalToolsPluginWindowData")
             helper.menu.update()
-   
-    def get_cell_data_cb(self, column, cell, model, piter):
+        """
+
+    def get_cell_data_cb(self, column, cell, model, piter, user_data=None):
         tool = model.get_value(piter, self.TOOL_COLUMN)
 
         if tool == None or not isinstance(tool, Tool):
             if tool == None:
                 label = _('All Languages')
-            elif not isinstance(tool, gsv.Language):
+            elif not isinstance(tool, GtkSource.Language):
                 label = _('Plain Text')
             else:
                 label = tool.get_name()
@@ -882,7 +884,7 @@ class Manager:
         ret = None
         
         if node:
-            ref = gtk.TreeRowReference(self.model, self.model.get_path(piter))
+            ref = Gtk.TreeRowReference(self.model, self.model.get_path(piter))
         
         # Update languages, make sure to inhibit selection change stuff
         self.view.get_selection().handler_block(self.selection_changed_id)
@@ -908,7 +910,7 @@ class Manager:
                 del self._languages[language]
         
         # Now, add for any that are new
-        manager = gsv.LanguageManager()
+        manager = GtkSource.LanguageManager()
         
         for lang in self.current_node.languages:
             if not self.tool_in_language(self.current_node, lang):

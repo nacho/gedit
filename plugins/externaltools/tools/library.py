@@ -41,7 +41,7 @@ class ToolLibrary(Singleton):
 
         if platform.platform() != 'Windows':
             for d in self.get_xdg_data_dirs():
-                self.locations.append(os.path.join(d, 'gedit-2', 'plugins', 'externaltools', 'tools'))
+                self.locations.append(os.path.join(d, 'gedit', 'plugins', 'externaltools', 'tools'))
 
         self.locations.append(datadir)
 
@@ -53,7 +53,7 @@ class ToolLibrary(Singleton):
             if userdir:
                 toolsdir = os.path.join(userdir, 'gedit/tools')
             else:
-                toolsdir = os.path.expanduser('~/.gnome2/gedit/tools')
+                toolsdir = os.path.expanduser('~/.config/gedit/tools')
 
         self.locations.insert(0, toolsdir);
 
@@ -82,7 +82,7 @@ class ToolLibrary(Singleton):
         if userdir:
             filename = os.path.join(userdir, 'gedit/gedit-tools.xml')
         else:
-            filename = os.path.expanduser('~/.gnome2/gedit/gedit-tools.xml')
+            filename = os.path.expanduser('~/.config/gedit/gedit-tools.xml')
 
         if not os.path.isfile(filename):
             return

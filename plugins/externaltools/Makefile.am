@@ -7,7 +7,12 @@ plugin_in_files = externaltools.plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.plugin.desktop.in=.plugin)
 
-EXTRA_DIST = $(plugin_in_files)
+gsettings_SCHEMAS = org.gnome.gedit.plugins.externaltools.gschema.xml
+
+@INTLTOOL_XML_NOMERGE_RULE@
+@GSETTINGS_RULES@
+
+EXTRA_DIST = $(plugin_in_files) org.gnome.gedit.plugins.externaltools.gschema.xml.in.in
 
 CLEANFILES = $(plugin_DATA)
 DISTCLEANFILES = $(plugin_DATA)

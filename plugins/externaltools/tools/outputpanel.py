@@ -19,18 +19,13 @@
 
 __all__ = ('OutputPanel', 'UniqueById')
 
-import gtk, gedit
-import pango
-import gconf
-import gobject
 import os
 from weakref import WeakKeyDictionary
 from capture import *
-from gtk import gdk
 import re
-import gio
 import linkparsing
 import filelookup
+from gi.repository import GObject, Gio, Gdk, Gtk, Pango, Gedit
 
 class UniqueById:
     __shared_state = WeakKeyDictionary()
@@ -47,12 +42,6 @@ class UniqueById:
         return self.__class__.__shared_state
 
 class OutputPanel(UniqueById):
-
-    DEFAULT_FONT = "Monospace 10"
-
-    GCONF_INTERFACE_DIR = "/desktop/gnome/interface"
-    GCONF_PROFILE_DIR = "/apps/gnome-terminal/profiles/Default"
-
     def __init__(self, datadir, window):
         if UniqueById.__init__(self, window):
             return
@@ -64,23 +53,18 @@ class OutputPanel(UniqueById):
             'on_view_button_press_event': self.on_view_button_press_event
         }
 
-        gconf_client.add_dir(self.GCONF_INTERFACE_DIR,
-                             gconf.CLIENT_PRELOAD_NONE)
-        gconf_client.add_dir(self.GCONF_PROFILE_DIR,
-                             gconf.CLIENT_PRELOAD_NONE)
-
-        gconf_client.notify_add(self.GCONF_INTERFACE_DIR,
-                                self.on_gconf_notification)
-        gconf_client.notify_add(self.GCONF_PROFILE_DIR,
-                                self.on_gconf_notification)
+        self.profile_settings = self.get_profile_settings()
+        self.profile_settings.connect("changed", self.font_changed)
+        self.system_settings = Gio.Settings.new("org.gnome.desktop.interface")
+        self.system_settings.connect("changed::monospace-font-name", self.font_changed)
 
         self.window = window
-        self.ui = gtk.Builder()
+        self.ui = Gtk.Builder()
         self.ui.add_from_file(os.path.join(datadir, 'ui', 'outputpanel.ui'))
         self.ui.connect_signals(callbacks)
 
         self.panel = self["output-panel"]
-        self.reconfigure()
+        self.font_changed()
 
         buffer = self['view'].get_buffer()
 
@@ -90,18 +74,18 @@ class OutputPanel(UniqueById):
         self.error_tag.set_property('foreground', 'red')
 
         self.italic_tag = buffer.create_tag('italic')
-        self.italic_tag.set_property('style', pango.STYLE_OBLIQUE)
+        self.italic_tag.set_property('style', Pango.Style.OBLIQUE)
 
         self.bold_tag = buffer.create_tag('bold')
-        self.bold_tag.set_property('weight', pango.WEIGHT_BOLD)
+        self.bold_tag.set_property('weight', Pango.Weight.BOLD)
 
         self.invalid_link_tag = buffer.create_tag('invalid_link')
 
         self.link_tag = buffer.create_tag('link')
-        self.link_tag.set_property('underline', pango.UNDERLINE_SINGLE)
+        self.link_tag.set_property('underline', Pango.Underline.SINGLE)
 
-        self.link_cursor = gdk.Cursor(gdk.HAND2)
-        self.normal_cursor = gdk.Cursor(gdk.XTERM)
+        self.link_cursor = Gdk.Cursor.new(Gdk.CursorType.HAND2)
+        self.normal_cursor = Gdk.Cursor.new(Gdk.CursorType.XTERM)
 
         self.process = None
 
@@ -110,39 +94,19 @@ class OutputPanel(UniqueById):
         self.link_parser = linkparsing.LinkParser()
         self.file_lookup = filelookup.FileLookup()
 
-    def reconfigure(self):
-        # WORKING ON BUG: 611161
-        # Font
-        font_desc = None
-        system_font = gconf_get_str(self.GCONF_INTERFACE_DIR + "/monospace_font_name",
-                                    self.DEFAULT_FONT)
+    def get_profile_settings(self):
+        #FIXME return either the gnome-terminal settings or the gedit one
+        return Gio.Settings.new("org.gnome.gedit.plugins.externaltools")
 
-        if gconf_get_bool(self.GCONF_PROFILE_DIR + "/use_system_font"):
-            font_name = system_font
+    def font_changed(self, settings=None, key=None):
+        if self.profile_settings.get_boolean("use-system-font"):
+            font = self.system_settings.get_string("monospace-font-name")
         else:
-            font_name = gconf_get_str(self.GCONF_PROFILE_DIR + "/font", system_font)
+            font = self.profile_settings.get_string("font")
 
-        try:
-            font_desc = pango.FontDescription(font_name)
-        except:
-            if font_name != self.DEFAULT_FONT:
-                if font_name != system_font:
-                    try:
-                        font_desc = pango.FontDescription(system_font)
-                    except:
-                        pass
+        font_desc = Pango.font_description_from_string(font)
 
-                if font_desc == None:
-                    try:
-                        font_desc = pango.FontDescription(self.DEFAULT_FONT)
-                    except:
-                        pass
-
-        if font_desc != None:
-            self["view"].modify_font(font_desc)
-
-    def on_gconf_notification(self, client, cnxn_id, entry, what):
-        self.reconfigure()
+        self["view"].override_font(font_desc)
 
     def set_process(self, process):
         self.process = process
@@ -204,7 +168,7 @@ class OutputPanel(UniqueById):
             buffer.apply_tag(tag, start_iter, end_iter)
 
         buffer.delete_mark(insert)
-        gobject.idle_add(self.scroll_to_end)
+        GObject.idle_add(self.scroll_to_end)
 
     def show(self):
         panel = self.window.get_bottom_panel()
@@ -217,17 +181,17 @@ class OutputPanel(UniqueById):
         else:
             cursor = self.normal_cursor
 
-        view.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(cursor)
+        view.get_window(Gtk.TextWindowType.TEXT).set_cursor(cursor)
 
     def on_view_motion_notify_event(self, view, event):
-        if event.window == view.get_window(gtk.TEXT_WINDOW_TEXT):
+        if event.window == view.get_window(Gtk.TextWindowType.TEXT):
             self.update_cursor_style(view, int(event.x), int(event.y))
 
         return False
 
     def on_view_visibility_notify_event(self, view, event):
-        if event.window == view.get_window(gtk.TEXT_WINDOW_TEXT):
-            x, y, m = event.window.get_pointer()
+        if event.window == view.get_window(Gtk.TextWindowType.TEXT):
+            win, x, y, flags = event.window.get_pointer()
             self.update_cursor_style(view, x, y)
 
         return False
@@ -243,8 +207,8 @@ class OutputPanel(UniqueById):
         """
 
         # get the offset within the buffer from the x,y coordinates
-        buff_x, buff_y = view.window_to_buffer_coords(gtk.TEXT_WINDOW_TEXT, 
-                                                        x, y)
+        buff_x, buff_y = view.window_to_buffer_coords(Gtk.TextWindowType.TEXT, 
+                                                      x, y)
         iter_at_xy = view.get_iter_at_location(buff_x, buff_y)
         offset = iter_at_xy.get_offset()
 
@@ -257,8 +221,8 @@ class OutputPanel(UniqueById):
         return None
 
     def on_view_button_press_event(self, view, event):
-        if event.button != 1 or event.type != gdk.BUTTON_PRESS or \
-           event.window != view.get_window(gtk.TEXT_WINDOW_TEXT):
+        if event.button != 1 or event.type != Gdk.BUTTON_PRESS or \
+           event.window != view.get_window(Gtk.TextWindowType.TEXT):
             return False
 
         link = self.get_link_at_location(view, int(event.x), int(event.y))
@@ -268,24 +232,7 @@ class OutputPanel(UniqueById):
         gfile = self.file_lookup.lookup(link.path)
 
         if gfile:
-            gedit.commands.load_location(self.window, gfile, None, link.line_nr, -1)
-            gobject.idle_add(self.idle_grab_focus)
-
-gconf_client = gconf.client_get_default()
-def gconf_get_bool(key, default = False):
-    val = gconf_client.get(key)
-
-    if val is not None and val.type == gconf.VALUE_BOOL:
-        return val.get_bool()
-    else:
-        return default
-
-def gconf_get_str(key, default = ""):
-    val = gconf_client.get(key)
-
-    if val is not None and val.type == gconf.VALUE_STRING:
-        return val.get_string()
-    else:
-        return default
+            Gedit.commands_load_location(self.window, gfile, None, link.line_nr, -1)
+            GObject.idle_add(self.idle_grab_focus)
 
 # ex:ts=4:et:

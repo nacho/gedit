@@ -16,11 +16,9 @@
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-__all__ = ('ExternalToolsPlugin', 'ExternalToolsWindowHelper',
-           'Manager', 'OutputPanel', 'Capture', 'UniqueById')
+__all__ = ('ExternalToolsPlugin', 'Manager', 'OutputPanel', 'Capture', 'UniqueById')
 
-import gedit
-import gtk
+from gi.repository import GObject, Gtk, Gedit, PeasGtk
 from manager import Manager
 from library import ToolLibrary
 from outputpanel import OutputPanel
@@ -38,7 +36,7 @@ class ToolMenu(object):
         self._menupath = menupath
 
         self._merge_id = 0
-        self._action_group = gtk.ActionGroup("ExternalToolsPluginToolActions")
+        self._action_group = Gtk.ActionGroup("ExternalToolsPluginToolActions")
         self._signals = []
 
         self.update()
@@ -62,31 +60,31 @@ class ToolMenu(object):
             action.set_data(self.ACTION_HANDLER_DATA_KEY, None)
 
             self._action_group.remove_action(action)
-        
-        accelmap = gtk.accel_map_get()
+
+        accelmap = Gtk.AccelMap.get()
 
         for s in self._signals:
             accelmap.disconnect(s)
-        
+
         self._signals = []
 
     def _insert_directory(self, directory, path):
-        manager = self._window.get_ui_manager()
+        ui_manager = self._window.get_ui_manager()
 
         for item in directory.subdirs:
             action_name = 'ExternalToolDirectory%X' % id(item)
-            action = gtk.Action(action_name, item.name.replace('_', '__'), None, None)
+            action = Gtk.Action(action_name, item.name.replace('_', '__'), None, None)
             self._action_group.add_action(action)
 
-            manager.add_ui(self._merge_id, path,
-                           action_name, action_name,
-                           gtk.UI_MANAGER_MENU, False)
+            ui_manager.add_ui(self._merge_id, path,
+                              action_name, action_name,
+                              Gtk.UIManagerItemType.MENU, False)
                            
             self._insert_directory(item, path + '/' + action_name)
 
         for item in directory.tools:
             action_name = 'ExternalToolTool%X' % id(item)
-            action = gtk.Action(action_name, item.name.replace('_', '__'), item.comment, None)
+            action = Gtk.Action(action_name, item.name.replace('_', '__'), item.comment, None)
             handler = action.connect("activate", capture_menu_action, self._window, item)
 
             action.set_data(self.ACTION_ITEM_DATA_KEY, item)
@@ -96,19 +94,19 @@ class ToolMenu(object):
             accelpath = '<Actions>/ExternalToolsPluginToolActions/%s' % (action_name, )
             
             if item.shortcut:
-                key, mod = gtk.accelerator_parse(item.shortcut)
-                gtk.accel_map_change_entry(accelpath, key, mod, True)
+                key, mod = Gtk.accelerator_parse(item.shortcut)
+                Gtk.AccelMap.change_entry(accelpath, key, mod, True)
                 
-                self._signals.append(gtk.accel_map_get().connect('changed::%s' % (accelpath,), self.on_accelmap_changed, item))
-                
+                self._signals.append(Gtk.AccelMap.get().connect('changed::%s' % (accelpath,), self.on_accelmap_changed, item))
+
             self._action_group.add_action_with_accel(action, item.shortcut)
 
-            manager.add_ui(self._merge_id, path,
-                           action_name, action_name,
-                           gtk.UI_MANAGER_MENUITEM, False)
+            ui_manager.add_ui(self._merge_id, path,
+                              action_name, action_name,
+                              Gtk.UIManagerItemType.MENUITEM, False)
 
     def on_accelmap_changed(self, accelmap, path, key, mod, tool):
-        tool.shortcut = gtk.accelerator_name(key, mod)
+        tool.shortcut = Gtk.accelerator_name(key, mod)
         tool.save()
         
         self._window.get_data("ExternalToolsPluginWindowData").update_manager(tool)
@@ -155,31 +153,32 @@ class ToolMenu(object):
             if item is not None:
                 action.set_visible(states[item.applicability] and self.filter_language(language, item))
 
-class ExternalToolsWindowHelper(object):
-    def __init__(self, plugin, window):
-        super(ExternalToolsWindowHelper, self).__init__()
+class ExternalToolsPlugin(GObject.Object, Gedit.WindowActivatable, PeasGtk.Configurable):
+    __gtype_name__ = "ExternalToolsPlugin"
 
-        self._window = window
-        self._plugin = plugin
+    window = GObject.property(type=Gedit.Window)
+
+    def __init__(self):
+        GObject.Object.__init__(self)
+        self._manager = None
+        self._manager_default_size = None
+
+    def do_activate(self):
         self._library = ToolLibrary()
+        self._library.set_locations(os.path.join(self.plugin_info.get_data_dir(), 'tools'))
 
-        manager = window.get_ui_manager()
+        ui_manager = self.window.get_ui_manager()
 
-        self._action_group = gtk.ActionGroup('ExternalToolsPluginActions')
+        self._action_group = Gtk.ActionGroup(name='ExternalToolsPluginActions')
         self._action_group.set_translation_domain('gedit')
-        self._action_group.add_actions([('ExternalToolManager',
-                                         None,
-                                         _('Manage _External Tools...'),
-                                         None,
+        self._action_group.add_actions([('ExternalToolManager', None,
+                                         _('Manage _External Tools...'), None,
                                          _("Opens the External Tools Manager"),
-                                         lambda action: plugin.open_dialog()),
-                                        ('ExternalTools',
-                                        None,
-                                        _('External _Tools'),
-                                        None,
-                                        _("External tools"),
-                                        None)])
-        manager.insert_action_group(self._action_group, -1)
+                                         lambda action, data: self.open_dialog()),
+                                        ('ExternalTools', None,
+                                         _('External _Tools'), None,
+                                         _("External tools"), None)])
+        ui_manager.insert_action_group(self._action_group, -1)
 
         ui_string = """
             <ui>
@@ -199,72 +198,54 @@ class ExternalToolsWindowHelper(object):
               </menubar>
             </ui>"""
 
-        self._merge_id = manager.add_ui_from_string(ui_string)
+        self._merge_id = ui_manager.add_ui_from_string(ui_string)
 
-        self.menu = ToolMenu(self._library, self._window,
+        self.menu = ToolMenu(self._library, self.window,
                              "/MenuBar/ToolsMenu/ToolsOps_4/ExternalToolsMenu/ExternalToolPlaceholder")
-        manager.ensure_update()
+        ui_manager.ensure_update()
 
         # Create output console
-        self._output_buffer = OutputPanel(self._plugin.get_data_dir(), window)
-        bottom = window.get_bottom_panel()
+        self._output_buffer = OutputPanel(self.plugin_info.get_data_dir(), self.window)
+        bottom = self.window.get_bottom_panel()
+        image = Gtk.Image(stock=Gtk.STOCK_EXECUTE, icon_size=Gtk.IconSize.MENU)
         bottom.add_item(self._output_buffer.panel,
                         "GeditExternalToolsShellOutput",
                         _("Shell Output"),
-                        gtk.STOCK_EXECUTE)
+                        image)
 
-    def update_ui(self):
-        self.menu.filter(self._window.get_active_document())
-        self._window.get_ui_manager().ensure_update()
+    def do_update_state(self):
+        return
+        self.menu.filter(self.window.get_active_document())
+        self.window.get_ui_manager().ensure_update()
 
-    def deactivate(self):
-        manager = self._window.get_ui_manager()
+    def do_deactivate(self):
+        ui_manager = self.window.get_ui_manager()
         self.menu.deactivate()
-        manager.remove_ui(self._merge_id)
-        manager.remove_action_group(self._action_group)
-        manager.ensure_update()
+        ui_manager.remove_ui(self._merge_id)
+        ui_manager.remove_action_group(self._action_group)
+        ui_manager.ensure_update()
 
-        bottom = self._window.get_bottom_panel()
+        bottom = self.window.get_bottom_panel()
         bottom.remove_item(self._output_buffer.panel)
 
     def update_manager(self, tool):
-        self._plugin.update_manager(tool)
+        self.update_manager(tool)
 
-class ExternalToolsPlugin(gedit.Plugin):
-    WINDOW_DATA_KEY = "ExternalToolsPluginWindowData"
-
-    def __init__(self):
-        super(ExternalToolsPlugin, self).__init__()
-        
-        self._manager = None
-        self._manager_default_size = None
-
-        ToolLibrary().set_locations(os.path.join(self.get_data_dir(), 'tools'))
-
-    def activate(self, window):
-        helper = ExternalToolsWindowHelper(self, window)
-        window.set_data(self.WINDOW_DATA_KEY, helper)
-
-    def deactivate(self, window):
-        window.get_data(self.WINDOW_DATA_KEY).deactivate()
-        window.set_data(self.WINDOW_DATA_KEY, None)
-
-    def update_ui(self, window):
-        window.get_data(self.WINDOW_DATA_KEY).update_ui()
-
-    def create_configure_dialog(self):
-        return self.open_dialog()
+    def do_create_configure_widget(self):
+        #FIXME
+        #return self.open_dialog()
+        pass
 
     def open_dialog(self):
         if not self._manager:
-            self._manager = Manager(self.get_data_dir())
+            self._manager = Manager(self.plugin_info.get_data_dir())
 
             if self._manager_default_size:
                 self._manager.dialog.set_default_size(*self._manager_default_size)
 
             self._manager.dialog.connect('destroy', self.on_manager_destroy)
 
-        window = gedit.app_get_default().get_active_window()
+        window = Gedit.App.get_default().get_active_window()
         self._manager.run(window)
 
         return self._manager.dialog
@@ -276,7 +257,8 @@ class ExternalToolsPlugin(gedit.Plugin):
         self._manager.tool_changed(tool, True)
 
     def on_manager_destroy(self, dialog):
-        self._manager_default_size = [dialog.allocation.width, dialog.allocation.height]
+        alloc = dialog.get_allocation()
+        self._manager_default_size = [alloc.width, alloc.height]
         self._manager = None
 
 # ex:ts=4:et:

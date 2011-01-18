@@ -17,8 +17,7 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
-import gio
-import gedit
+from gi.repository import Gio, Gedit
 
 class FileLookup:
     """
@@ -110,7 +109,7 @@ class OpenDocumentRelPathFileLookupProvider(FileLookupProvider):
         if path.startswith('/'):
             return None
 
-        for doc in gedit.app_get_default().get_documents():
+        for doc in Gedit.app_get_default().get_documents():
             if doc.is_local():
                 location = doc.get_location()
                 if location:
@@ -135,7 +134,7 @@ class OpenDocumentFileLookupProvider(FileLookupProvider):
         if path.startswith('/'):
             return None
 
-        for doc in gedit.app_get_default().get_documents():
+        for doc in Gedit.app_get_default().get_documents():
             if doc.is_local():
                 location = doc.get_location()
                 if location and location.get_uri().endswith(path):
