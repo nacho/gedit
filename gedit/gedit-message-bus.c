@@ -541,7 +541,7 @@ gedit_message_bus_init (GeditMessageBus *self)
  *
  * Get the default application #GeditMessageBus.
  *
- * Return value: (transfer full): the default #GeditMessageBus
+ * Return value: (transfer none): the default #GeditMessageBus
  *
  */
 GeditMessageBus *
