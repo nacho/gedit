@@ -57,7 +57,7 @@ class PythonConsole(Gtk.ScrolledWindow):
         self._interface_settings = Gio.Settings.new(self.SETTINGS_INTERFACE_DIR)
         self._interface_settings.connect("changed", self.on_settings_changed)
 
-        self._profile_settings = Gio.Settings.new(self.SETTINGS_PROFILE_DIR)
+        self._profile_settings = self.get_profile_settings()
         self._profile_settings.connect("changed", self.on_settings_changed)
 
         self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
@@ -101,6 +101,10 @@ class PythonConsole(Gtk.ScrolledWindow):
         self.view.connect("key-press-event", self.__key_press_event_cb)
         buf.connect("mark-set", self.__mark_set_cb)
 
+    def get_profile_settings(self):
+        #FIXME return either the gnome-terminal settings or the gedit one
+        return Gio.Settings.new(self.CONSOLE_KEY_BASE)
+
     def do_grab_focus(self):
         self.view.grab_focus()
 
@@ -120,13 +124,13 @@ class PythonConsole(Gtk.ScrolledWindow):
             if font_name != self.DEFAULT_FONT:
                 if font_name != system_font:
                     try:
-                        font_desc = pango.FontDescription(system_font)
+                        font_desc = Pango.FontDescription(system_font)
                     except:
                         pass
 
                 if font_desc == None:
                     try:
-                        font_desc = pango.FontDescription(self.DEFAULT_FONT)
+                        font_desc = Pango.FontDescription(self.DEFAULT_FONT)
                     except:
                         pass
 
