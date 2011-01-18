@@ -27,7 +27,7 @@
 import os
 from gi.repository import Gio, Gtk, Gdk
 
-__all__ = ('PythonConsoleConfigDialog')
+__all__ = ('PythonConsoleConfigWidget')
 
 class PythonConsoleConfigWidget(object):
 
