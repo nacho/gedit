@@ -141,22 +141,13 @@ class Popup(Gtk.Dialog):
 
                 children = []
 
-                # FIXME: this sucks, let's fix it once the GFileEnumerator becomes an iterator
-                if isinstance(gfile, VirtualDirectory):
-                        for entry in entries:
-                                children.append((entry, entry.get_name(), entry.get_file_type(), entry.get_icon()))
-                else:
+                for entry in entries:
+                        if isinstance(gfile, VirtualDirectory):
+                                child = entry
+                        else:
+                                child = gfile.get_child(entry.get_name())
 
-                        while True:
-                                try:
-                                        info = entries.next_file(None)
-                                except GLib.Error:
-                                        pass
-
-                                if not info:
-                                        break
-
-                                children.append((gfile.get_child(info.get_name()), info.get_name(), info.get_file_type(), info.get_icon()))
+                        children.append((child, entry.get_name(), entry.get_file_type(), entry.get_icon()))
 
                 return children
 
