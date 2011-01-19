@@ -21,7 +21,7 @@ import shutil
 
 import cairo
 
-from gi.repository import Gtk, Gdk, Gedit, PeasGtk, GObject
+from gi.repository import GLib, Gtk, Gdk, Gedit, PeasGtk, GObject
 import platform
 
 from library import Library
@@ -52,7 +52,7 @@ class AppActivatable(GObject.Object, Gedit.AppActivatable, PeasGtk.Configurable)
                         if userdir:
                                 snippetsdir = os.path.join(userdir, 'gedit/snippets')
                         else:
-                                snippetsdir = os.path.expanduser('~/.gnome2/gedit/snippets')
+                                snippetsdir = os.path.join(GLib.get_user_config_dir(), 'gedit/snippets')
 
                 library.set_dirs(snippetsdir, self.system_dirs())
 

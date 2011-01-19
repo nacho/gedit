@@ -55,7 +55,10 @@ class Provider(GObject.Object, GtkSource.CompletionProvider):
                 theme = Gtk.IconTheme.get_default()
                 f, w, h = Gtk.icon_size_lookup(Gtk.IconSize.MENU)
 
-                self.icon = theme.load_icon(Gtk.STOCK_JUSTIFY_LEFT, w, 0)
+                try:
+                        self.icon = theme.load_icon(Gtk.STOCK_JUSTIFY_LEFT, w, 0)
+                except:
+                        self.icon = None
 
         def __del__(self):
                 if self.mark:
