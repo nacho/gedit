@@ -9,7 +9,8 @@ plugin_PYTHON =		\
 	manager.py	\
 	outputpanel.py	\
 	filelookup.py	\
-	linkparsing.py
+	linkparsing.py	\
+	windowactivatable.py
 
 uidir = $(GEDIT_PLUGINS_DATA_DIR)/externaltools/ui
 ui_DATA = tools.ui \
