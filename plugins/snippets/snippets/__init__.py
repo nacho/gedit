@@ -33,7 +33,7 @@ from windowactivatable import WindowActivatable
 class AppActivatable(GObject.Object, Gedit.AppActivatable, PeasGtk.Configurable):
         __gtype_name__ = "GeditSnippetsAppActivatable"
 
-        app = GObject.property(type=GObject.Object)
+        app = GObject.property(type=Gedit.App)
 
         def __init__(self):
                 GObject.Object.__init__(self)

@@ -27,7 +27,7 @@ from library import Library
 class WindowActivatable(GObject.Object, Gedit.WindowActivatable):
         __gtype_name__ = "GeditSnippetsWindowActivatable"
 
-        window = GObject.property(type=GObject.Object)
+        window = GObject.property(type=Gedit.Window)
 
         def __init__(self):
                 self.current_controller = None
