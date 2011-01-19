@@ -166,7 +166,6 @@ class WindowActivatable(GObject.Object, Gedit.WindowActivatable, PeasGtk.Configu
 
     def do_activate(self):
         self._library = ToolLibrary()
-        self._library.set_locations(os.path.join(self.plugin_info.get_data_dir(), 'tools'))
 
         ui_manager = self.window.get_ui_manager()
 
