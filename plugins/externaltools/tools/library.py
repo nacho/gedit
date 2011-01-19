@@ -20,6 +20,7 @@ import os
 import re
 import locale
 import platform
+from gi.repository import GLib
 
 class Singleton(object):
     _instance = None
@@ -53,7 +54,7 @@ class ToolLibrary(Singleton):
             if userdir:
                 toolsdir = os.path.join(userdir, 'gedit/tools')
             else:
-                toolsdir = os.path.expanduser('~/.config/gedit/tools')
+                toolsdir = os.path.join(GLib.get_user_config_dir(), 'gedit/tools')
 
         self.locations.insert(0, toolsdir);
 
@@ -82,7 +83,7 @@ class ToolLibrary(Singleton):
         if userdir:
             filename = os.path.join(userdir, 'gedit/gedit-tools.xml')
         else:
-            filename = os.path.expanduser('~/.config/gedit/gedit-tools.xml')
+            filename = os.path.join(GLib.get_user_config_dir(), 'gedit/gedit-tools.xml')
 
         if not os.path.isfile(filename):
             return

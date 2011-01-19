@@ -101,7 +101,7 @@ class Capture(GObject.Object):
             fcntl.fcntl(self.pipe.stdout.fileno(), fcntl.F_SETFL, flags)
 
             GObject.io_add_watch(self.pipe.stdout,
-                                 GObject.IO_IN | GObject.IO_HUP,
+                                 GObject.IOCondition.IN | GObject.IOCondition.HUP,
                                  self.on_output)
 
         if self.flags & self.CAPTURE_STDERR:
@@ -110,7 +110,7 @@ class Capture(GObject.Object):
             fcntl.fcntl(self.pipe.stderr.fileno(), fcntl.F_SETFL, flags)
 
             GObject.io_add_watch(self.pipe.stderr,
-                                 GObject.IO_IN | GObject.IO_HUP,
+                                 GObject.IOCondition.IN | GObject.IOCondition.HUP,
                                  self.on_output)
 
         # IO
@@ -152,7 +152,7 @@ class Capture(GObject.Object):
             return False
 
     def on_output(self, source, condition):
-        if condition & (GLib.IO_IN | GLib.IO_PRI):
+        if condition & (GLib.IOCondition.IN | GLib.IOCondition.PRI):
             line = source.read()
 
             if len(line) > 0:
@@ -178,7 +178,7 @@ class Capture(GObject.Object):
                     else:
                         self.emit('stderr-line', line)
 
-        if condition & ~(GLib.IO_IN | GLib.IO_PRI):
+        if condition & ~(GLib.IOCondition.IN | GLib.IOCondition.PRI):
             if self.read_buffer:
                 if source == self.pipe.stdout:
                     self.emit('stdout-line', self.read_buffer)

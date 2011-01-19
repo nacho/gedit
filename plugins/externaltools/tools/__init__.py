@@ -29,10 +29,11 @@ class ToolMenu(object):
     ACTION_HANDLER_DATA_KEY = "ExternalToolActionHandlerData"
     ACTION_ITEM_DATA_KEY = "ExternalToolActionItemData"
 
-    def __init__(self, library, window, menupath):
+    def __init__(self, library, window, panel, menupath):
         super(ToolMenu, self).__init__()
         self._library = library
         self._window = window
+        self._panel = panel
         self._menupath = menupath
 
         self._merge_id = 0
@@ -85,7 +86,7 @@ class ToolMenu(object):
         for item in directory.tools:
             action_name = 'ExternalToolTool%X' % id(item)
             action = Gtk.Action(action_name, item.name.replace('_', '__'), item.comment, None)
-            handler = action.connect("activate", capture_menu_action, self._window, item)
+            handler = action.connect("activate", capture_menu_action, self._window, self._panel, item)
 
             action.set_data(self.ACTION_ITEM_DATA_KEY, item)
             action.set_data(self.ACTION_HANDLER_DATA_KEY, handler)
@@ -200,12 +201,13 @@ class ExternalToolsPlugin(GObject.Object, Gedit.WindowActivatable, PeasGtk.Confi
 
         self._merge_id = ui_manager.add_ui_from_string(ui_string)
 
-        self.menu = ToolMenu(self._library, self.window,
+        # Create output console
+        self._output_buffer = OutputPanel(self.plugin_info.get_data_dir(), self.window)
+
+        self.menu = ToolMenu(self._library, self.window, self._output_buffer,
                              "/MenuBar/ToolsMenu/ToolsOps_4/ExternalToolsMenu/ExternalToolPlaceholder")
         ui_manager.ensure_update()
 
-        # Create output console
-        self._output_buffer = OutputPanel(self.plugin_info.get_data_dir(), self.window)
         bottom = self.window.get_bottom_panel()
         image = Gtk.Image(stock=Gtk.STOCK_EXECUTE, icon_size=Gtk.IconSize.MENU)
         bottom.add_item(self._output_buffer.panel,
@@ -214,7 +216,6 @@ class ExternalToolsPlugin(GObject.Object, Gedit.WindowActivatable, PeasGtk.Confi
                         image)
 
     def do_update_state(self):
-        return
         self.menu.filter(self.window.get_active_document())
         self.window.get_ui_manager().ensure_update()
 

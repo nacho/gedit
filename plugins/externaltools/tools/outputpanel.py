@@ -123,7 +123,7 @@ class OutputPanel(UniqueById):
 
     def scroll_to_end(self):
         iter = self['view'].get_buffer().get_end_iter()
-        self['view'].scroll_to_iter(iter, 0.0)
+        self['view'].scroll_to_iter(iter, 0.0, False, 0.5, 0.5)
         return False  # don't requeue this handler
 
     def clear(self):
