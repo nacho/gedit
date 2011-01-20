@@ -335,6 +335,12 @@ gedit_window_dispose (GObject *object)
 		window->priv->window_settings = NULL;
 	}
 
+	if (window->priv->default_location != NULL)
+	{
+		g_object_unref (window->priv->default_location);
+		window->priv->default_location = NULL;
+	}
+
 	/* Now that there have broken some reference loops,
 	 * force collection again.
 	 */
@@ -350,14 +356,7 @@ gedit_window_dispose (GObject *object)
 static void
 gedit_window_finalize (GObject *object)
 {
-	GeditWindow *window; 
-
 	gedit_debug (DEBUG_WINDOW);
-
-	window = GEDIT_WINDOW (object);
-
-	if (window->priv->default_location != NULL)
-		g_object_unref (window->priv->default_location);
 
 	G_OBJECT_CLASS (gedit_window_parent_class)->finalize (object);
 }
