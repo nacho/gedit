@@ -22,7 +22,7 @@ import os, sys, signal
 import locale
 import subprocess
 import fcntl
-from gi.repository import GObject, GLib
+from gi.repository import GObject
 
 class Capture(GObject.Object):
     CAPTURE_STDOUT = 0x01
@@ -152,7 +152,7 @@ class Capture(GObject.Object):
             return False
 
     def on_output(self, source, condition):
-        if condition & (GLib.IOCondition.IN | GLib.IOCondition.PRI):
+        if condition & (GObject.IO_IN | GObject.IO_PRI):
             line = source.read()
 
             if len(line) > 0:
@@ -178,7 +178,7 @@ class Capture(GObject.Object):
                     else:
                         self.emit('stderr-line', line)
 
-        if condition & ~(GLib.IOCondition.IN | GLib.IOCondition.PRI):
+        if condition & ~(GObject.IO_IN | GObject.IO_PRI):
             if self.read_buffer:
                 if source == self.pipe.stdout:
                     self.emit('stdout-line', self.read_buffer)

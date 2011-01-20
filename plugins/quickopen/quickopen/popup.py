@@ -19,7 +19,7 @@
 
 import os
 import fnmatch
-from gi.repository import Gio, GObject, Pango, Gtk, Gdk, GLib, Gedit
+from gi.repository import Gio, GObject, Pango, Gtk, Gdk, Gedit
 import xml.sax.saxutils
 from virtualdirs import VirtualDirectory
 
@@ -136,7 +136,7 @@ class Popup(Gtk.Dialog):
 
                 try:
                         entries = gfile.enumerate_children("standard::*", Gio.FileQueryInfoFlags.NONE, None)
-                except GLib.Error:
+                except GObject.Error:
                         pass
 
                 children = []

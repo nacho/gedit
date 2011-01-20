@@ -323,12 +323,12 @@ class PlaceholderExpand(Placeholder):
 
         def remove_timeout(self):
                 if self.timeout_id != None:
-                        GLib.source_remove(self.timeout_id)
+                        GObject.source_remove(self.timeout_id)
                         self.timeout_id = None
 
         def install_timeout(self):
                 self.remove_timeout()
-                self.timeout_id = GLib.timeout_add(1000, self.timeout_cb)
+                self.timeout_id = GObject.timeout_add(1000, self.timeout_cb)
 
         def timeout_cb(self):
                 self.timeout_id = None
@@ -398,7 +398,7 @@ class PlaceholderShell(PlaceholderExpand):
                 if not self.shell:
                         return False
 
-                GLib.source_remove(self.watch_id)
+                GObject.source_remove(self.watch_id)
                 self.close_shell()
 
                 if self.remove_me:
@@ -452,7 +452,7 @@ class PlaceholderShell(PlaceholderExpand):
                 self.remove_timeout()
 
                 if self.shell:
-                        GLib.source_remove(self.watch_id)
+                        GObject.source_remove(self.watch_id)
                         self.close_shell()
 
                 popen_args = {
@@ -465,7 +465,7 @@ class PlaceholderShell(PlaceholderExpand):
                 self.command = text
                 self.shell = subprocess.Popen(text, **popen_args)
                 self.shell_output = ''
-                self.watch_id = GLib.io_add_watch(self.shell.stdout, GObject.IO_IN | \
+                self.watch_id = GObject.io_add_watch(self.shell.stdout, GObject.IO_IN | \
                                 GObject.IO_HUP, self.process_cb)
                 self.install_timeout()
 

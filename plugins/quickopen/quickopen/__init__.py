@@ -19,7 +19,7 @@
 
 from popup import Popup
 import os
-from gi.repository import GObject, Gio, GLib, Gtk, Gedit
+from gi.repository import GObject, Gio, Gtk, Gedit
 from virtualdirs import RecentDocumentsDirectory
 from virtualdirs import CurrentDocumentsDirectory
 
