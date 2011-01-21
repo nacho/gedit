@@ -662,15 +662,22 @@ gedit_notebook_collapse_border (GeditNotebook *nb,
 {
 	GtkStyleContext *context;
 	GError *error = NULL;
+	GtkBorder padding;
+	gchar *modified_style;
 	const gchar style[] =
-		"* {\n"
-		"	padding-left: 0;\n"
-		"	padding-right: 0;\n"
+		".notebook {\n"
+		"	padding: %d 0 %d 0;\n"
 		"}";
 
 	g_return_if_fail (GEDIT_IS_NOTEBOOK (nb));
 
+	/* FIXME: find out a css like way to do this, right now padding-right/left
+	         doesn't work */
 	context = gtk_widget_get_style_context (GTK_WIDGET (nb));
+	gtk_style_context_get_padding (context, gtk_style_context_get_state (context),
+	                               &padding);
+
+	modified_style = g_strdup_printf (style, padding.top, padding.bottom);
 
 	if (collapse)
 	{
@@ -680,7 +687,7 @@ gedit_notebook_collapse_border (GeditNotebook *nb,
 			nb->priv->css = gtk_css_provider_new ();
 		}
 
-		if (gtk_css_provider_load_from_data (nb->priv->css, style, -1, &error))
+		if (gtk_css_provider_load_from_data (nb->priv->css, modified_style, -1, &error))
 		{
 			gtk_style_context_add_provider (context,
 			                                GTK_STYLE_PROVIDER (nb->priv->css),
@@ -697,6 +704,8 @@ gedit_notebook_collapse_border (GeditNotebook *nb,
 		gtk_style_context_remove_provider (context,
 		                                   GTK_STYLE_PROVIDER (nb->priv->css));
 	}
+
+	g_free (modified_style);
 }
 
 /* ex:set ts=8 noet: */
