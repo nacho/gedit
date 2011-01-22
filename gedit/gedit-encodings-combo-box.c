@@ -136,6 +136,26 @@ gedit_encodings_combo_box_dispose (GObject *object)
 }
 
 static void
+gedit_encodings_combo_box_constructed (GObject *object)
+{
+	GeditEncodingsComboBox *combo = GEDIT_ENCODINGS_COMBO_BOX (object);
+	GtkCellRenderer *text_renderer;
+
+	/* Setup up the cells */
+	text_renderer = gtk_cell_renderer_text_new ();
+	gtk_cell_layout_pack_end (GTK_CELL_LAYOUT (combo),
+				  text_renderer, TRUE);
+
+	gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo),
+					text_renderer,
+					"text",
+					NAME_COLUMN,
+					NULL);
+
+	G_OBJECT_CLASS (gedit_encodings_combo_box_parent_class)->constructed (object);
+}
+
+static void
 gedit_encodings_combo_box_class_init (GeditEncodingsComboBoxClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -143,6 +163,7 @@ gedit_encodings_combo_box_class_init (GeditEncodingsComboBoxClass *klass)
 	object_class->set_property = gedit_encodings_combo_box_set_property;
 	object_class->get_property = gedit_encodings_combo_box_get_property;
 	object_class->dispose = gedit_encodings_combo_box_dispose;
+	object_class->constructed = gedit_encodings_combo_box_constructed;
 
 	g_object_class_install_property (object_class,
 					 PROP_SAVE_MODE,
@@ -381,8 +402,6 @@ update_menu (GeditEncodingsComboBox *menu)
 static void
 gedit_encodings_combo_box_init (GeditEncodingsComboBox *menu)
 {
-	GtkCellRenderer *text_renderer;
-
 	menu->priv = GEDIT_ENCODINGS_COMBO_BOX_GET_PRIVATE (menu);
 
 	menu->priv->enc_settings = g_settings_new ("org.gnome.gedit.preferences.encodings");
@@ -391,17 +410,6 @@ gedit_encodings_combo_box_init (GeditEncodingsComboBox *menu)
 						G_TYPE_STRING,
 						G_TYPE_POINTER,
 						G_TYPE_BOOLEAN);
-
-	/* Setup up the cells */
-	text_renderer = gtk_cell_renderer_text_new ();
-	gtk_cell_layout_pack_end (GTK_CELL_LAYOUT (menu),
-				  text_renderer, TRUE);
-
-	gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (menu),
-					text_renderer,
-					"text",
-					NAME_COLUMN,
-					NULL);
 
 	gtk_combo_box_set_row_separator_func (GTK_COMBO_BOX (menu),
 					      separator_func, NULL,
