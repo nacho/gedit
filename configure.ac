@@ -318,6 +318,7 @@ if test "$os_osx" = "no" &&
    test "$os_win32" = "no"; then
 	PKG_CHECK_MODULES(EGG_SMCLIENT, [
 		sm >= 1.0.0
+		ice
 	])
 else
 	EGG_SMCLIENT_CFLAGS=
