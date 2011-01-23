@@ -158,6 +158,8 @@ gedit_encodings_combo_box_constructed (GObject *object)
 					NAME_COLUMN,
 					NULL);
 
+	update_menu (combo);
+
 	G_OBJECT_CLASS (gedit_encodings_combo_box_parent_class)->constructed (object);
 }
 
@@ -424,8 +426,6 @@ gedit_encodings_combo_box_init (GeditEncodingsComboBox *menu)
 	menu->priv->changed_id = g_signal_connect (menu, "changed",
 						   G_CALLBACK (add_or_remove),
 						   menu->priv->store);
-
-	update_menu (menu);
 }
 
 GtkWidget *
