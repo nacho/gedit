@@ -287,8 +287,62 @@ gedit_overlay_realize (GtkWidget *widget)
 	gdk_window_set_user_data (window, widget);
 
 	context = gtk_widget_get_style_context (widget);
-	gtk_style_context_set_state (context, 0);
+	gtk_style_context_set_state (context, GTK_STATE_FLAG_NORMAL);
 	gtk_style_context_set_background (context, window);
+}
+
+static void
+gedit_overlay_get_preferred_width (GtkWidget *widget,
+                                   gint      *minimum,
+                                   gint      *natural)
+{
+	GeditOverlayPrivate *priv = GEDIT_OVERLAY (widget)->priv;
+	OverlayChild *child;
+	GSList *children;
+	gint child_min, child_nat;
+
+	*minimum = 0;
+	*natural = 0;
+
+	for (children = priv->children; children; children = children->next)
+	{
+		child = children->data;
+
+		if (!gtk_widget_get_visible (child->child))
+			continue;
+
+		gtk_widget_get_preferred_width (child->child, &child_min, &child_nat);
+
+		*minimum = MAX (*minimum, child_min);
+		*natural = MAX (*natural, child_nat);
+	}
+}
+
+static void
+gedit_overlay_get_preferred_height (GtkWidget *widget,
+                                    gint      *minimum,
+                                    gint      *natural)
+{
+	GeditOverlayPrivate *priv = GEDIT_OVERLAY (widget)->priv;
+	OverlayChild *child;
+	GSList *children;
+	gint child_min, child_nat;
+
+	*minimum = 0;
+	*natural = 0;
+
+	for (children = priv->children; children; children = children->next)
+	{
+		child = children->data;
+
+		if (!gtk_widget_get_visible (child->child))
+			continue;
+
+		gtk_widget_get_preferred_height (child->child, &child_min, &child_nat);
+
+		*minimum = MAX (*minimum, child_min);
+		*natural = MAX (*natural, child_nat);
+	}
 }
 
 static void
@@ -510,6 +564,8 @@ gedit_overlay_class_init (GeditOverlayClass *klass)
 	object_class->set_property = gedit_overlay_set_property;
 
 	widget_class->realize = gedit_overlay_realize;
+	widget_class->get_preferred_width = gedit_overlay_get_preferred_width;
+	widget_class->get_preferred_height = gedit_overlay_get_preferred_height;
 	widget_class->size_allocate = gedit_overlay_size_allocate;
 
 	container_class->add = gedit_overlay_add;
