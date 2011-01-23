@@ -1559,6 +1559,8 @@ register_dbus_interface (GeditDBus       *dbus,
 	                                         NULL,
 	                                         NULL);
 
+	g_dbus_node_info_unref (info);
+
 	return ret != 0;
 }
 
