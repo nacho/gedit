@@ -168,7 +168,7 @@ gedit_theatrics_animated_widget_realize (GtkWidget *widget)
 	window = gdk_window_new (parent_window, &attributes, 0);
 	gdk_window_set_user_data (window, widget);
 	gtk_widget_set_window (widget, window);
-	gtk_style_context_set_state (context, 0);
+	gtk_style_context_set_state (context, GTK_STATE_FLAG_NORMAL);
 	gtk_style_context_set_background (context, window);
 }
 

@@ -154,7 +154,8 @@ draw_frame (GeditRoundedFrame *frame,
 	                                            area->height);
 
 	context = gtk_widget_get_style_context (GTK_WIDGET (frame));
-	gtk_style_context_get_background_color (context, 0, &bg_color);
+	gtk_style_context_get_background_color (context, GTK_STATE_FLAG_NORMAL,
+	                                        &bg_color);
 	gtk_style_context_get_border_color (context, GTK_STATE_FLAG_ACTIVE,
 	                                    &border_color);
 
