@@ -35,8 +35,8 @@
 
 G_BEGIN_DECLS
 
+void		 gedit_metadata_manager_init		(const gchar *metadata_filename);
 
-/* This function must be called before exiting gedit */
 void		 gedit_metadata_manager_shutdown 	(void);
 
 

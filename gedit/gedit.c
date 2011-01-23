@@ -54,6 +54,7 @@
 
 #ifndef ENABLE_GVFS_METADATA
 #include "gedit-metadata-manager.h"
+#define METADATA_FILE "gedit-metadata.xml"
 #endif
 
 #ifdef G_OS_UNIX
@@ -218,6 +219,11 @@ main (int argc, char *argv[])
 	GeditDBusResult dbusret;
 	gboolean service = FALSE;
 
+#ifndef ENABLE_GVFS_METADATA
+	const gchar *cache_dir;
+	gchar *metadata_filename;
+#endif
+
 	/* Init type system as soon as possible */
 	g_type_init ();
 
@@ -238,6 +244,17 @@ main (int argc, char *argv[])
 
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
+
+#ifndef ENABLE_GVFS_METADATA
+	/* Setup metadata-manager */
+	cache_dir = gedit_dirs_get_user_cache_dir ();
+
+	metadata_filename = g_build_filename (cache_dir, METADATA_FILE, NULL);
+
+	gedit_metadata_manager_init (metadata_filename);
+
+	g_free (metadata_filename);
+#endif
 
 	/* Parse command line arguments */
 	command_line = gedit_command_line_get_default ();
