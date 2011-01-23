@@ -405,12 +405,8 @@ get_metadata_encoding (GeditDocumentLoader *loader)
 
 #ifndef ENABLE_GVFS_METADATA
 	gchar *charset;
-	gchar *uri;
 
-	uri = g_file_get_uri (loader->priv->location);
-
-	charset = gedit_metadata_manager_get (uri, "encoding");
-	g_free (uri);
+	charset = gedit_metadata_manager_get (loader->priv->location, "encoding");
 
 	if (charset == NULL)
 		return NULL;

@@ -2983,7 +2983,7 @@ gedit_document_set_metadata (GeditDocument *doc,
 
 		if (doc->priv->location != NULL)
 		{
-			gedit_metadata_manager_set (location, key, value);
+			gedit_metadata_manager_set (doc->priv->location, key, value);
 		}
 	}
 
