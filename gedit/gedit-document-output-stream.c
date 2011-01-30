@@ -36,6 +36,13 @@
  * there is no I/O involved and should be accessed only by the main
  * thread */
 
+/* NOTE2: welcome to a really big headache. At the beginning this was
+ * splitted in several classes, one for encoding detection, another
+ * for UTF-8 conversion and another for validation. The reason this is
+ * all together is because we need specific information from all parts
+ * in other to be able to mark characters as invalid if there was some
+ * specific problem on the conversion */
+
 #define GEDIT_DOCUMENT_OUTPUT_STREAM_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object),\
 							 GEDIT_TYPE_DOCUMENT_OUTPUT_STREAM,\
 							 GeditDocumentOutputStreamPrivate))
@@ -133,12 +140,6 @@ static void
 gedit_document_output_stream_dispose (GObject *object)
 {
 	GeditDocumentOutputStream *stream = GEDIT_DOCUMENT_OUTPUT_STREAM (object);
-
-	if (stream->priv->iconv != NULL)
-	{
-		g_iconv_close (stream->priv->iconv);
-		stream->priv->iconv = NULL;
-	}
 
 	if (stream->priv->charset_conv != NULL)
 	{
@@ -675,6 +676,99 @@ end_append_text_to_document (GeditDocumentOutputStream *stream)
 	gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (stream->priv->doc));
 }
 
+static gboolean
+convert_text (GeditDocumentOutputStream *stream,
+              const gchar               *inbuf,
+              gsize                      inbuf_len,
+              gchar                    **outbuf,
+              gsize                     *outbuf_len,
+              GError                   **error)
+{
+	gchar *out, *dest;
+	gsize in_left, out_left, outbuf_size, res;
+	gint errsv;
+	gboolean done, have_error;
+
+	in_left = inbuf_len;
+	/* set an arbitrary length if inbuf_len is 0, this is needed to flush
+	   the iconv data */
+	outbuf_size = (inbuf_len > 0) ? inbuf_len : 100;
+
+	out_left = outbuf_size;
+	out = dest = g_malloc (outbuf_size);
+
+	done = FALSE;
+	have_error = FALSE;
+
+	while (!done && !have_error)
+	{
+		/* If we reached here is because we need to convert the text,
+		   so we convert it using iconv.
+		   See that if inbuf is NULL the data will be flushed */
+		res = g_iconv (stream->priv->iconv,
+		               (gchar **)&inbuf, &in_left,
+		               &out, &out_left);
+
+		/* something went wrong */
+		if (res == (gsize)-1)
+		{
+			errsv = errno;
+
+			switch (errsv)
+			{
+				case EINVAL:
+					/* Incomplete text, do not report an error */
+					/* FIXME: save the text? */
+					done = TRUE;
+					break;
+				case E2BIG:
+					{
+						/* allocate more space */
+						gsize used = out - dest;
+
+						outbuf_size *= 2;
+						dest = g_realloc (dest, outbuf_size);
+
+						out = dest + used;
+						out_left = outbuf_size - used;
+					}
+					break;
+				case EILSEQ:
+					/* TODO: we should escape this text.*/
+					g_set_error_literal (error, G_CONVERT_ERROR,
+					                     G_CONVERT_ERROR_ILLEGAL_SEQUENCE,
+					                     _("Invalid byte sequence in conversion input"));
+					have_error = TRUE;
+					break;
+				default:
+					g_set_error (error, G_CONVERT_ERROR, G_CONVERT_ERROR_FAILED,
+					             _("Error during conversion: %s"),
+					             g_strerror (errsv));
+					have_error = TRUE;
+					break;
+			}
+		}
+		else
+		{
+			done = TRUE;
+		}
+	}
+
+	if (have_error)
+	{
+		g_free (dest);
+		*outbuf = NULL;
+		*outbuf_len = 0;
+
+		return FALSE;
+	}
+
+	*outbuf = dest;
+	*outbuf_len = out - dest;
+
+	return TRUE;
+}
+
 static gssize
 gedit_document_output_stream_write (GOutputStream            *stream,
 				    const void               *buffer,
@@ -703,14 +797,13 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 		if (ostream->priv->charset_conv == NULL &&
 		    !ostream->priv->is_utf8)
 		{
-			/* FIXME: Add a different domain when we kill gedit_convert */
 			g_set_error_literal (error, GEDIT_DOCUMENT_ERROR,
-					     GEDIT_DOCUMENT_ERROR_ENCODING_AUTO_DETECTION_FAILED,
-					     _("It is not possible to detect the encoding automatically"));
+			                     GEDIT_DOCUMENT_ERROR_ENCODING_AUTO_DETECTION_FAILED,
+			                     _("It is not possible to detect the encoding automatically"));
 			return -1;
 		}
 
-		/* Do not initialize iconv if we are not going to conver anything */
+		/* Do not initialize iconv if we are not going to convert anything */
 		if (!ostream->priv->is_utf8)
 		{
 			gchar *from_charset;
@@ -757,7 +850,7 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 	if (ostream->priv->buflen > 0)
 	{
 		len = ostream->priv->buflen + count;
-		text = g_new (gchar , len + 1);
+		text = g_malloc (len + 1);
 
 		memcpy (text, ostream->priv->buffer, ostream->priv->buflen);
 		memcpy (text + ostream->priv->buflen, buffer, count);
@@ -779,11 +872,11 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 
 	if (!ostream->priv->is_utf8)
 	{
-		gchar *conv_text;
-		gsize conv_read;
-		gsize conv_written;
-		GError *err = NULL;
+		gchar *outbuf;
+		gsize outbuf_len;
 
+		/* check if iconv was correctly initializated, this shouldn't
+		   happen but better be safe */
 		if (ostream->priv->iconv == NULL)
 		{
 			g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_NOT_INITIALIZED,
@@ -797,48 +890,24 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 			return -1;
 		}
 
-		/* If we reached here is because we need to convert the text so, we
-		   convert it with the charset converter */
-		conv_text = g_convert_with_iconv (text,
-		                                  len,
-		                                  ostream->priv->iconv,
-		                                  &conv_read,
-		                                  &conv_written,
-		                                  &err);
+		if (!convert_text (ostream, text, len, &outbuf, &outbuf_len, error))
+		{
+			if (freetext)
+			{
+				g_free (text);
+			}
+
+			return -1;
+		}
 
 		if (freetext)
 		{
 			g_free (text);
 		}
 
-		if (err != NULL)
-		{
-			gsize remainder;
-
-			remainder = len - conv_read;
-
-			/* Store the partial char for the next conversion */
-			if (err->code == G_CONVERT_ERROR_ILLEGAL_SEQUENCE && 
-			    remainder < MAX_UNICHAR_LEN &&
-			    (g_utf8_get_char_validated (text + conv_read, remainder) == (gunichar)-2))
-			{
-				ostream->priv->buffer = g_strndup (text + conv_read, remainder);
-				ostream->priv->buflen = remainder;
-			}
-			else
-			{
-				/* Something went wrong with the conversion,
-				   propagate the error and finish */
-				g_propagate_error (error, err);
-				g_free (conv_text);
-
-				return -1;
-			}
-		}
-
-		text = conv_text;
-		len = conv_written;
-		freetext = TRUE;
+		/* set the converted text as the text to validate */
+		text = outbuf;
+		len = outbuf_len;
 	}
 
 	validate_and_insert (ostream, text, len);
@@ -863,6 +932,17 @@ gedit_document_output_stream_flush (GOutputStream  *stream,
 	if (ostream->priv->is_closed)
 	{
 		return TRUE;
+	}
+
+	/* if we have converted something flush residual data, validate and insert */
+	if (ostream->priv->iconv != NULL)
+	{
+		gchar *outbuf;
+		gsize outbuf_len;
+
+		convert_text (ostream, NULL, 0, &outbuf, &outbuf_len, error);
+		validate_and_insert (ostream, outbuf, outbuf_len);
+		g_free (outbuf);
 	}
 
 	if (ostream->priv->buflen > 0 && *ostream->priv->buffer != '\r')
@@ -918,6 +998,12 @@ gedit_document_output_stream_close (GOutputStream     *stream,
 	if (!ostream->priv->is_closed && ostream->priv->is_initialized)
 	{
 		end_append_text_to_document (ostream);
+
+		if (ostream->priv->iconv != NULL)
+		{
+			g_iconv_close (ostream->priv->iconv);
+		}
+
 		ostream->priv->is_closed = TRUE;
 	}
 
