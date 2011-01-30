@@ -273,10 +273,11 @@ get_all_encodings ()
 }
 
 static gchar *
-do_test (const gchar *test_in,
+do_test (const gchar *inbuf,
          const gchar *enc,
          GSList      *encodings,
-         gsize        nread,
+         gsize        len,
+         gsize        write_chunk_len,
          const GeditEncoding **guessed)
 {
 	GeditDocument *doc;
@@ -284,6 +285,8 @@ do_test (const gchar *test_in,
 	GError *err = NULL;
 	GtkTextIter start, end;
 	gchar *text;
+	gsize to_write;
+	gssize n, w;
 
 	if (enc != NULL)
 	{
@@ -295,8 +298,18 @@ do_test (const gchar *test_in,
 	encodings = g_slist_prepend (encodings, (gpointer)gedit_encoding_get_utf8 ());
 	out = gedit_document_output_stream_new (doc, encodings);
 
-	g_output_stream_write (out, test_in, nread, NULL, &err);
-	g_assert_no_error (err);
+	n = 0;
+
+	do
+	{
+		to_write = MIN (len, write_chunk_len);
+		w = g_output_stream_write (out, inbuf + n, to_write, NULL, &err);
+		g_assert_cmpint (w, >=, 0);
+		g_assert_no_error (err);
+
+		len -= w;
+		n += w;
+	} while (len != 0);
 
 	g_output_stream_flush (out, NULL, &err);
 	g_assert_no_error (err);
@@ -324,16 +337,17 @@ test_utf8_utf8 ()
 {
 	gchar *aux;
 
-	aux = do_test (TEXT_TO_CONVERT, "UTF-8", NULL, strlen (TEXT_TO_CONVERT), NULL);
+	aux = do_test (TEXT_TO_CONVERT, "UTF-8", NULL, strlen (TEXT_TO_CONVERT), strlen (TEXT_TO_CONVERT), NULL);
 	g_assert_cmpstr (aux, ==, TEXT_TO_CONVERT);
 	g_free (aux);
 
-	aux = do_test ("foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz", "UTF-8", NULL, 18, NULL);
+	aux = do_test ("foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz", "UTF-8", NULL, 18, 18, NULL);
 	g_assert_cmpstr (aux, ==, "foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz");
 	g_free (aux);
 
-	aux = do_test ("foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz", "UTF-8", NULL, 12, NULL);
-	g_assert_cmpstr (aux, ==, "foobar\xc3\xa8\xc3\xa8\xc3\xa8");
+	/* small chunk */
+	aux = do_test ("foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz", "UTF-8", NULL, 18, 2, NULL);
+	g_assert_cmpstr (aux, ==, "foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz");
 	g_free (aux);
 }
 
@@ -351,7 +365,7 @@ test_empty_conversion ()
 	encodings = g_slist_prepend (encodings, (gpointer)gedit_encoding_get_from_charset ("UTF-16"));
 	encodings = g_slist_prepend (encodings, (gpointer)gedit_encoding_get_from_charset ("ISO-8859-15"));
 
-	out = do_test ("", NULL, encodings, 0, &guessed);
+	out = do_test ("", NULL, encodings, 0, 0, &guessed);
 
 	g_assert_cmpstr (out, ==, "");
 	g_free (out);
@@ -385,7 +399,7 @@ test_guessed ()
 	encs = g_slist_append (encs, (gpointer)gedit_encoding_get_from_charset ("ISO-8859-15"));
 	encs = g_slist_append (encs, (gpointer)gedit_encoding_get_from_charset ("UTF-16"));
 
-	aux2 = do_test (aux, NULL, encs, aux_len, &guessed);
+	aux2 = do_test (aux, NULL, encs, aux_len, aux_len, &guessed);
 	g_free (aux);
 	g_free (aux2);
 
@@ -404,7 +418,7 @@ test_utf16_utf8 ()
 	                         &aux_len,
 	                         TRUE);
 
-	aux = do_test (text, "UTF-16", NULL, 6, NULL);
+	aux = do_test (text, "UTF-16", NULL, 6, 6, NULL);
 	g_assert_cmpstr (aux, ==, "\xe2\xb4\xb2\xe2\xb4\xb2");
 	g_free (aux);
 }
@@ -424,8 +438,8 @@ int main (int   argc,
 	g_test_add_func ("/document-output-stream/test-invalid-utf8", test_invalid_utf8);
 
 	g_test_add_func ("/document-output-stream/smart conversion: utf8-utf8", test_utf8_utf8);
-	g_test_add_func ("/document-output-stream/smart conversion: guessed", test_guessed);
 	g_test_add_func ("/document-output-stream/smart conversion: empty", test_empty_conversion);
+	g_test_add_func ("/document-output-stream/smart conversion: guessed", test_guessed);
 	g_test_add_func ("/document-output-stream/smart conversion: utf16-utf8", test_utf16_utf8);
 
 	return g_test_run ();
