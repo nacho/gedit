@@ -326,15 +326,15 @@ test_utf8_utf8 ()
 
 	aux = do_test (TEXT_TO_CONVERT, "UTF-8", NULL, strlen (TEXT_TO_CONVERT), NULL);
 	g_assert_cmpstr (aux, ==, TEXT_TO_CONVERT);
+	g_free (aux);
 
 	aux = do_test ("foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz", "UTF-8", NULL, 18, NULL);
 	g_assert_cmpstr (aux, ==, "foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz");
+	g_free (aux);
 
 	aux = do_test ("foobar\xc3\xa8\xc3\xa8\xc3\xa8zzzzzz", "UTF-8", NULL, 12, NULL);
 	g_assert_cmpstr (aux, ==, "foobar\xc3\xa8\xc3\xa8\xc3\xa8");
-
-	/* FIXME: Use the utf8 stream for a fallback? */
-	//do_test_with_error ("\xef\xbf\xbezzzzzz", encs, G_IO_ERROR_FAILED);
+	g_free (aux);
 }
 
 static void
@@ -354,6 +354,7 @@ test_empty_conversion ()
 	out = do_test ("", NULL, encodings, 0, &guessed);
 
 	g_assert_cmpstr (out, ==, "");
+	g_free (out);
 
 	g_assert (guessed == gedit_encoding_get_utf8 ());
 }
@@ -385,8 +386,27 @@ test_guessed ()
 	encs = g_slist_append (encs, (gpointer)gedit_encoding_get_from_charset ("UTF-16"));
 
 	aux2 = do_test (aux, NULL, encs, aux_len, &guessed);
+	g_free (aux);
+	g_free (aux2);
 
 	g_assert (guessed == gedit_encoding_get_from_charset ("UTF-16"));
+}
+
+static void
+test_utf16_utf8 ()
+{
+	gchar *text, *aux;
+	gsize aux_len;
+
+	text = get_encoded_text ("\xe2\xb4\xb2\xe2\xb4\xb2", -1,
+	                         gedit_encoding_get_from_charset ("UTF-16"),
+	                         gedit_encoding_get_from_charset ("UTF-8"),
+	                         &aux_len,
+	                         TRUE);
+
+	aux = do_test (text, "UTF-16", NULL, 6, NULL);
+	g_assert_cmpstr (aux, ==, "\xe2\xb4\xb2\xe2\xb4\xb2");
+	g_free (aux);
 }
 
 int main (int   argc,
@@ -406,6 +426,7 @@ int main (int   argc,
 	g_test_add_func ("/document-output-stream/smart conversion: utf8-utf8", test_utf8_utf8);
 	g_test_add_func ("/document-output-stream/smart conversion: guessed", test_guessed);
 	g_test_add_func ("/document-output-stream/smart conversion: empty", test_empty_conversion);
+	g_test_add_func ("/document-output-stream/smart conversion: utf16-utf8", test_utf16_utf8);
 
 	return g_test_run ();
 }
