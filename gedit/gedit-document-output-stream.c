@@ -57,6 +57,9 @@ struct _GeditDocumentOutputStreamPrivate
 	gchar *buffer;
 	gsize buflen;
 
+	gchar *iconv_buffer;
+	gsize iconv_buflen;
+
 	/* Encoding detection */
 	GIConv iconv;
 	GCharsetConverter *charset_conv;
@@ -156,6 +159,7 @@ gedit_document_output_stream_finalize (GObject *object)
 	GeditDocumentOutputStream *stream = GEDIT_DOCUMENT_OUTPUT_STREAM (object);
 
 	g_free (stream->priv->buffer);
+	g_free (stream->priv->iconv_buffer);
 	g_slist_free (stream->priv->encodings);
 
 	G_OBJECT_CLASS (gedit_document_output_stream_parent_class)->finalize (object);
@@ -549,7 +553,7 @@ insert_fallback (GeditDocumentOutputStream *stream,
 	gtk_text_buffer_insert (GTK_TEXT_BUFFER (stream->priv->doc),
 	                        &stream->priv->pos, (const gchar *)out, 3);
 
-	stream->priv->n_fallback_errors++;
+	++stream->priv->n_fallback_errors;
 }
 
 static void
@@ -632,8 +636,8 @@ validate_and_insert (GeditDocumentOutputStream *stream,
 		}
 
 		insert_fallback (stream, buffer);
-		buffer++;
-		len--;
+		++buffer;
+		--len;
 	}
 }
 
@@ -718,7 +722,8 @@ convert_text (GeditDocumentOutputStream *stream,
 			{
 				case EINVAL:
 					/* Incomplete text, do not report an error */
-					/* FIXME: save the text? */
+					stream->priv->iconv_buffer = g_strndup (inbuf, in_left);
+					stream->priv->iconv_buflen = in_left;
 					done = TRUE;
 					break;
 				case E2BIG:
@@ -890,6 +895,36 @@ gedit_document_output_stream_write (GOutputStream            *stream,
 			return -1;
 		}
 
+		/* manage the previous conversion buffer */
+		if (ostream->priv->iconv_buflen > 0)
+		{
+			gchar *text2;
+			gsize len2;
+
+			len2 = len + ostream->priv->iconv_buflen;
+			text2 = g_malloc (len2 + 1);
+
+			memcpy (text2, ostream->priv->iconv_buffer, ostream->priv->iconv_buflen);
+			memcpy (text2 + ostream->priv->iconv_buflen, text, len);
+
+			text2[len2] = '\0';
+
+			if (freetext)
+			{
+				g_free (text);
+			}
+
+			text = text2;
+			len = len2;
+
+			g_free (ostream->priv->iconv_buffer);
+
+			ostream->priv->iconv_buffer = NULL;
+			ostream->priv->iconv_buflen = 0;
+
+			freetext = TRUE;
+		}
+
 		if (!convert_text (ostream, text, len, &outbuf, &outbuf_len, error))
 		{
 			if (freetext)
@@ -960,8 +995,8 @@ gedit_document_output_stream_flush (GOutputStream  *stream,
 		while (ostream->priv->buflen != 0)
 		{
 			insert_fallback (ostream, text);
-			text++;
-			ostream->priv->buflen--;
+			++text;
+			--ostream->priv->buflen;
 		}
 
 		g_free (ostream->priv->buffer);
@@ -981,6 +1016,29 @@ gedit_document_output_stream_flush (GOutputStream  *stream,
 		g_free (ostream->priv->buffer);
 		ostream->priv->buffer = NULL;
 		ostream->priv->buflen = 0;
+	}
+
+	if (ostream->priv->iconv_buflen > 0 )
+	{
+		/* If we reached here is because the last insertion was a half
+		   correct char, which has to be inserted as fallback */
+		gchar *text;
+
+		if (ostream->priv->error_offset == -1)
+		{
+			ostream->priv->error_offset = gtk_text_iter_get_offset (&ostream->priv->pos);
+		}
+
+		text = ostream->priv->iconv_buffer;
+		while (ostream->priv->iconv_buflen != 0)
+		{
+			insert_fallback (ostream, text);
+			++text;
+			--ostream->priv->iconv_buflen;
+		}
+
+		g_free (ostream->priv->iconv_buffer);
+		ostream->priv->iconv_buffer = NULL;
 	}
 
 	apply_error_tag (ostream);
@@ -1007,7 +1065,7 @@ gedit_document_output_stream_close (GOutputStream     *stream,
 		ostream->priv->is_closed = TRUE;
 	}
 
-	if (ostream->priv->buflen > 0)
+	if (ostream->priv->buflen > 0 || ostream->priv->iconv_buflen > 0)
 	{
 		g_set_error (error,
 		             G_IO_ERROR,
