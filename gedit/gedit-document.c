@@ -1716,6 +1716,11 @@ has_invalid_chars (GeditDocument *doc)
 
 	gedit_debug (DEBUG_DOCUMENT);
 
+	if (doc->priv->error_tag == NULL)
+	{
+		return FALSE;
+	}
+
 	buffer = GTK_TEXT_BUFFER (doc);
 
 	gtk_text_buffer_get_start_iter (buffer, &start);
