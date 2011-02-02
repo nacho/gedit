@@ -771,15 +771,12 @@ static GeditDBusResult
 handle_service (GeditDBus *dbus)
 {
 	guint result;
-	GeditCommandLine *command_line;
 
 	if (activate_service (dbus, &result) == GEDIT_DBUS_RESULT_FAILED)
 	{
 		g_warning ("Could not activate gedit service");
 		return GEDIT_DBUS_RESULT_FAILED;
 	}
-
-	command_line = gedit_command_line_get_default ();
 
 	/* Finally, act as a slave. */
 	return handle_slave (dbus);
@@ -1606,7 +1603,6 @@ name_lost_cb (GDBusConnection *connection,
 GeditDBusResult
 gedit_dbus_run (GeditDBus *dbus)
 {
-	guint id;
 	GeditCommandLine *command_line;
 
 	g_return_val_if_fail (GEDIT_IS_DBUS (dbus), GEDIT_DBUS_RESULT_PROCEED);
@@ -1631,14 +1627,14 @@ gedit_dbus_run (GeditDBus *dbus)
 		}
 	}
 
-	id = g_bus_own_name (G_BUS_TYPE_SESSION,
-	                     "org.gnome.gedit",
-	                     G_BUS_NAME_OWNER_FLAGS_NONE,
-	                     (GBusAcquiredCallback)bus_acquired_cb,
-	                     (GBusNameAcquiredCallback)name_acquired_cb,
-	                     (GBusNameLostCallback)name_lost_cb,
-	                     dbus,
-	                     NULL);
+	g_bus_own_name (G_BUS_TYPE_SESSION,
+	                "org.gnome.gedit",
+	                G_BUS_NAME_OWNER_FLAGS_NONE,
+	                (GBusAcquiredCallback)bus_acquired_cb,
+	                (GBusNameAcquiredCallback)name_acquired_cb,
+	                (GBusNameLostCallback)name_lost_cb,
+	                dbus,
+	                NULL);
 
 	dbus->priv->main_loop = g_main_loop_new (NULL, FALSE);
 	g_main_loop_run (dbus->priv->main_loop);

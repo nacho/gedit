@@ -3215,7 +3215,6 @@ fullscreen_controls_build (GeditWindow *window)
 {
 	GeditWindowPrivate *priv = window->priv;
 	GtkWidget *toolbar;
-	GtkWidget *toolbar_recent_menu;
 	GtkAction *action;
 
 	if (priv->fullscreen_controls != NULL)
@@ -3235,7 +3234,7 @@ fullscreen_controls_build (GeditWindow *window)
 					      "LeaveFullscreen");
 	g_object_set (action, "is-important", TRUE, NULL);
 	
-	toolbar_recent_menu = setup_toolbar_open_button (window, toolbar);
+	setup_toolbar_open_button (window, toolbar);
 
 	gtk_container_foreach (GTK_CONTAINER (toolbar),
 			       (GtkCallback)set_non_homogeneus,

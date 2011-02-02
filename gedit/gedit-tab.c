@@ -978,14 +978,10 @@ document_loaded (GeditDocument *document,
 	if (error != NULL &&
 	    (error->domain != GEDIT_DOCUMENT_ERROR || error->code != GEDIT_DOCUMENT_ERROR_CONVERSION_FALLBACK))
 	{
-		const GeditEncoding *encoding;
-
 		if (tab->priv->state == GEDIT_TAB_STATE_LOADING)
 			gedit_tab_set_state (tab, GEDIT_TAB_STATE_LOADING_ERROR);
 		else
 			gedit_tab_set_state (tab, GEDIT_TAB_STATE_REVERTING_ERROR);
-
-		encoding = gedit_document_get_encoding (document);
 
 		if (error->domain == G_IO_ERROR &&
 		    error->code == G_IO_ERROR_CANCELLED)
@@ -2406,7 +2402,7 @@ _gedit_tab_save_as (GeditTab                     *tab,
 	                        encoding,
 	                        newline_type,
 	                        compression_type,
-	                        tab->priv->save_flags);
+	                        save_flags);
 }
 
 #define GEDIT_PAGE_SETUP_KEY "gedit-page-setup-key"

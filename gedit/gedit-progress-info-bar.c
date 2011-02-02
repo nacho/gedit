@@ -91,31 +91,12 @@ gedit_progress_info_bar_set_property (GObject      *object,
 	}
 }
 
-static void
-gedit_progress_info_bar_get_property (GObject      *object,
-				      guint         prop_id,
-				      GValue       *value,
-				      GParamSpec   *pspec)
-{
-	GeditProgressInfoBar *bar;
-
-	bar = GEDIT_PROGRESS_INFO_BAR (object);
-
-	switch (prop_id)
-	{
-		default:
-			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-			break;
-	}
-}
-
 static void 
 gedit_progress_info_bar_class_init (GeditProgressInfoBarClass *klass)
 {
 	GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
 	gobject_class->set_property = gedit_progress_info_bar_set_property;
-	gobject_class->get_property = gedit_progress_info_bar_get_property;
 
 	g_object_class_install_property (gobject_class,
 					 PROP_HAS_CANCEL_BUTTON,

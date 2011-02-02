@@ -637,7 +637,6 @@ gedit_message_bus_register (GeditMessageBus *bus,
 			    ...)
 {
 	gchar *identifier;
-	gpointer data;
 	va_list var_args;
 	GeditMessageType *message_type;
 
@@ -651,7 +650,6 @@ gedit_message_bus_register (GeditMessageBus *bus,
 	}
 
 	identifier = gedit_message_type_identifier (object_path, method);
-	data = g_hash_table_lookup (bus->priv->types, identifier);
 	
 	va_start (var_args, num_optional);
 	message_type = gedit_message_type_new_valist (object_path, 
