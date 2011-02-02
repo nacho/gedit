@@ -382,9 +382,9 @@ class PythonConsole(Gtk.ScrolledWindow):
             try:
                 r = eval(command, self.namespace, self.namespace)
                 if r is not None:
-                    print `r`
+                    print(r)
             except SyntaxError:
-                exec command in self.namespace
+                exec(command in self.namespace)
         except:
             if hasattr(sys, 'last_type') and sys.last_type == SystemExit:
                 self.destroy()
@@ -414,8 +414,8 @@ class OutFile:
     def readlines(self):     return []
     def write(self, s):      self.console.write(s, self.tag)
     def writelines(self, l): self.console.write(l, self.tag)
-    def seek(self, a):       raise IOError, (29, 'Illegal seek')
-    def tell(self):          raise IOError, (29, 'Illegal seek')
+    def seek(self, a):       raise IOError((29, 'Illegal seek'))
+    def tell(self):          raise IOError((29, 'Illegal seek'))
     truncate = tell
 
 # ex:et:ts=4:
