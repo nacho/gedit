@@ -22,6 +22,21 @@ GEDIT_APP_GET_CLASS
 </SECTION>
 
 <SECTION>
+<FILE>gedit-app-activatable</FILE>
+<TITLE>GeditAppActivatable</TITLE>
+GeditAppActivatable
+gedit_app_activatable_activate
+gedit_app_activatable_deactivate
+<SUBSECTION Standard>
+GEDIT_TYPE_APP_ACTIVATABLE
+GEDIT_APP_ACTIVATABLE
+GEDIT_APP_ACTIVATABLE_IFACE
+GEDIT_IS_APP_ACTIVATABLE
+GEDIT_APP_ACTIVATABLE_GET_IFACE
+gedit_app_activatable_get_type
+</SECTION>
+
+<SECTION>
 <FILE>gedit-document</FILE>
 GeditSearchFlags
 GeditDocumentPrivate
@@ -364,8 +379,8 @@ GEDIT_VIEW_GET_CLASS
 
 <SECTION>
 <FILE>gedit-view-activatable</FILE>
-<TITLE>GeditWiewActivatable</TITLE>
-GeditWiewActivatable
+<TITLE>GeditViewActivatable</TITLE>
+GeditViewActivatable
 gedit_view_activatable_activate
 gedit_view_activatable_deactivate
 gedit_view_activatable_update_state
