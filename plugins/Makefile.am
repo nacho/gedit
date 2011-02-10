@@ -10,7 +10,8 @@ DIST_SUBDIRS = \
 	snippets	\
 	sort		\
 	spell 		\
-	time
+	time		\
+	zeitgeist
 
 SUBDIRS = \
 	changecase	\
@@ -34,6 +35,10 @@ endif
 
 if ENABLE_UPDATER
 SUBDIRS      += checkupdate
+endif
+
+if ENABLE_ZEITGEIST
+SUBDIRS      += zeitgeist
 endif
 
 -include $(top_srcdir)/git.mk
