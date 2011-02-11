@@ -444,21 +444,20 @@ static void
 gedit_overlay_remove (GtkContainer *overlay,
                       GtkWidget    *widget)
 {
-	GeditOverlay *goverlay = GEDIT_OVERLAY (overlay);
+	GeditOverlayPrivate *goverlay = GEDIT_OVERLAY (overlay)->priv;
 	GSList *l;
 
-	for (l = goverlay->priv->children; l != NULL; l = g_slist_next (l))
+	for (l = priv->children; l != NULL; l = g_slist_next (l))
 	{
-		GtkWidget *child = GTK_WIDGET (l->data);
+		GtkWidget *child = l->data;
 
 		if (child == widget)
 		{
 			gtk_widget_unparent (widget);
-			goverlay->priv->children = g_slist_remove_link (goverlay->priv->children,
-			                                                l);
+			priv->children = g_slist_remove_link (priv->children,
+			                                      l);
 
-			/* FIXME: gtk_widget_destroy? */
-			g_object_unref (child);
+			g_slist_free (l);
 			break;
 		}
 	}
