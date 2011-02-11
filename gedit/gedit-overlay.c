@@ -376,16 +376,68 @@ gedit_overlay_size_allocate (GtkWidget     *widget,
 	set_children_positions (overlay);
 }
 
+static GeditOverlayChild *
+get_overlay_child (GeditOverlay *overlay,
+                   GtkWidget    *widget)
+{
+	GeditOverlayChild *overlay_child = NULL;
+	GSList *l;
+
+	for (l = overlay->priv->children; l != NULL; l = g_slist_next (l))
+	{
+		GtkWidget *child = GTK_WIDGET (l->data);
+
+		/* skip the main widget as it is not a OverlayChild */
+		if (child == overlay->priv->main_widget)
+			continue;
+
+		if (child == widget)
+		{
+			overlay_child = GEDIT_OVERLAY_CHILD (child);
+			break;
+		}
+		else
+		{
+			GtkWidget *in_widget;
+
+			/* let's try also with the internal widget */
+			g_object_get (child, "widget", &in_widget, NULL);
+			g_assert (in_widget != NULL);
+
+			if (in_widget == widget)
+			{
+				overlay_child = GEDIT_OVERLAY_CHILD (child);
+				break;
+			}
+		}
+	}
+
+	return overlay_child;
+}
+
 static void
 overlay_add (GtkContainer *overlay,
              GtkWidget    *widget)
 {
 	GeditOverlayChild *child;
 
-	child = gedit_overlay_child_new (widget, FALSE, FALSE,
-	                                 GEDIT_OVERLAY_CHILD_POSITION_STATIC,
-	                                 0);
-	add_toplevel_widget (GEDIT_OVERLAY (overlay), widget, child);
+	/* check that the widget is not added yet */
+	child = get_overlay_child (overlay, widget);
+
+	if (child == NULL)
+	{
+		if (GEDIT_IS_OVERLAY_CHILD (widget))
+		{
+			child = GEDIT_OVERLAY_CHILD (widget);
+		}
+		else
+		{
+			child = gedit_overlay_child_new (widget);
+			gtk_widget_show (GTK_WIDGET (child));
+		}
+
+		add_toplevel_widget (overlay, GTK_WIDGET (child));
+	}
 }
 
 static void
@@ -594,33 +646,6 @@ gedit_overlay_new (GtkWidget *main_widget)
 	                                 NULL));
 }
 
-static GeditOverlayChild *
-get_overlay_child (GeditOverlay *overlay,
-                   GtkWidget    *widget)
-{
-	GSList *l;
-
-	for (l = overlay->priv->children; l != NULL; l = g_slist_next (l))
-	{
-		GtkWidget *child = GTK_WIDGET (l->data);
-		GtkWidget *in_widget;
-
-		/* skip the main widget as it is not a OverlayChild */
-		if (child == overlay->priv->main_widget)
-			continue;
-
-		g_object_get (child, "widget", &in_widget, NULL);
-		g_assert (in_widget != NULL);
-
-		if (in_widget == widget)
-		{
-			return GEDIT_OVERLAY_CHILD (child);
-		}
-	}
-
-	return NULL;
-}
-
 /**
  * gedit_overlay_add:
  * @overlay: a #GeditOverlay
@@ -638,16 +663,15 @@ gedit_overlay_add (GeditOverlay             *overlay,
 {
 	GeditOverlayChild *child;
 
+	g_return_if_fail (GEDIT_IS_OVERLAY (overlay));
+	g_return_if_fail (GTK_IS_WIDGET (widget));
+
+	gtk_container_add (GTK_CONTAINER (overlay), widget);
+
+	/* NOTE: can we improve this without exposing overlay child? */
 	child = get_overlay_child (overlay, widget);
+	g_assert (child != NULL);
 
-	if (child == NULL)
-	{
-		/* For now we always add fixed widgets as we don't have any
-		   usecase for a non fixed widget. Maybe in the future we need
-		   to change this */
-		child = gedit_overlay_child_new (widget, position, offset, TRUE);
-		gtk_widget_show (GTK_WIDGET (child));
-
-		add_toplevel_widget (overlay, GTK_WIDGET (child));
-	}
+	gedit_overlay_child_set_position (child, position);
+	gedit_overlay_child_set_offset (child, offset);
 }
