@@ -421,7 +421,7 @@ overlay_add (GtkContainer *overlay,
 	GeditOverlayChild *child;
 
 	/* check that the widget is not added yet */
-	child = get_overlay_child (overlay, widget);
+	child = get_overlay_child (GEDIT_OVERLAY (overlay), widget);
 
 	if (child == NULL)
 	{
@@ -435,7 +435,7 @@ overlay_add (GtkContainer *overlay,
 			gtk_widget_show (GTK_WIDGET (child));
 		}
 
-		add_toplevel_widget (overlay, GTK_WIDGET (child));
+		add_toplevel_widget (GEDIT_OVERLAY (overlay), GTK_WIDGET (child));
 	}
 }
 
@@ -443,7 +443,7 @@ static void
 gedit_overlay_remove (GtkContainer *overlay,
                       GtkWidget    *widget)
 {
-	GeditOverlayPrivate *goverlay = GEDIT_OVERLAY (overlay)->priv;
+	GeditOverlayPrivate *priv = GEDIT_OVERLAY (overlay)->priv;
 	GSList *l;
 
 	for (l = priv->children; l != NULL; l = g_slist_next (l))
@@ -475,7 +475,7 @@ gedit_overlay_forall (GtkContainer *overlay,
 	{
 		GtkWidget *child = GTK_WIDGET (l->data);
 
-		(* callback) (child->child, callback_data);
+		(* callback) (child, callback_data);
 	}
 }
 

@@ -235,7 +235,7 @@ gedit_overlay_child_class_init (GeditOverlayChildClass *klass)
 	                                 g_param_spec_enum ("position",
 	                                                    "Position",
 	                                                    "The Widget Position",
-	                                                    GEDIT_OVERLAY_CHILD_POSITION_TYPE,
+	                                                    GEDIT_TYPE_OVERLAY_CHILD_POSITION,
 	                                                    GEDIT_OVERLAY_CHILD_POSITION_STATIC,
 	                                                    G_PARAM_READWRITE |
 	                                                    G_PARAM_CONSTRUCT |
@@ -269,7 +269,7 @@ gedit_overlay_child_init (GeditOverlayChild *child)
 {
 	child->priv = G_TYPE_INSTANCE_GET_PRIVATE (child,
 	                                           GEDIT_TYPE_OVERLAY_CHILD,
-	                                           GeditOverlayChildPrivate));
+	                                           GeditOverlayChildPrivate);
 
 	gtk_widget_set_has_window (GTK_WIDGET (child), TRUE);
 }

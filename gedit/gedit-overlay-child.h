@@ -63,7 +63,7 @@ typedef enum
 	GEDIT_OVERLAY_CHILD_POSITION_SOUTH,
 	GEDIT_OVERLAY_CHILD_POSITION_SOUTH_EAST,
 	GEDIT_OVERLAY_CHILD_POSITION_STATIC
-}; GeditOverlayChildPosition;
+} GeditOverlayChildPosition;
 
 GType                     gedit_overlay_child_get_type     (void) G_GNUC_CONST;
 
