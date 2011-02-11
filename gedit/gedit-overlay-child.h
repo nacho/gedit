@@ -68,16 +68,22 @@ typedef enum
 
 GType                     gedit_overlay_child_get_type     (void) G_GNUC_CONST;
 
-GeditOverlayChild        *gedit_overlay_child_new          (GtkWidget                *widget,
-                                                            GeditOverlayChildPosition position,
-                                                            guint                     offset,
-                                                            gboolean                  fixed);
+GeditOverlayChild        *gedit_overlay_child_new          (GtkWidget *widget);
 
 GeditOverlayChildPosition gedit_overlay_child_get_position (GeditOverlayChild *child);
 
+void                      gedit_overlay_child_set_position (GeditOverlayChild        *child,
+                                                            GeditOverlayChildPosition position);
+
 guint                     gedit_overlay_child_get_offset   (GeditOverlayChild *child);
 
+void                      gedit_overlay_child_set_offset   (GeditOverlayChild *child,
+                                                            guint              offset);
+
 gboolean                  gedit_overlay_child_get_fixed    (GeditOverlayChild *child);
+
+void                      gedit_overlay_child_set_fixed    (GeditOverlayChild *child,
+                                                            gboolean           fixed);
 
 G_END_DECLS
 

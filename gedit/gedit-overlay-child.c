@@ -239,7 +239,7 @@ gedit_overlay_child_class_init (GeditOverlayChildClass *klass)
 	                                                    GEDIT_OVERLAY_CHILD_POSITION_TYPE,
 	                                                    GEDIT_OVERLAY_CHILD_POSITION_STATIC,
 	                                                    G_PARAM_READWRITE |
-	                                                    G_PARAM_CONSTRUCT_ONLY |
+	                                                    G_PARAM_CONSTRUCT |
 	                                                    G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class, PROP_OFFSET,
@@ -250,7 +250,7 @@ gedit_overlay_child_class_init (GeditOverlayChildClass *klass)
 	                                                    G_MAXUINT,
 	                                                    0,
 	                                                    G_PARAM_READWRITE |
-	                                                    G_PARAM_CONSTRUCT_ONLY |
+	                                                    G_PARAM_CONSTRUCT |
 	                                                    G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class, PROP_FIXED,
@@ -259,7 +259,7 @@ gedit_overlay_child_class_init (GeditOverlayChildClass *klass)
 	                                                       "Wether the Widget is in a fixed position",
 	                                                       TRUE,
 	                                                       G_PARAM_READWRITE |
-	                                                       G_PARAM_CONSTRUCT_ONLY |
+	                                                       G_PARAM_CONSTRUCT |
 	                                                       G_PARAM_STATIC_STRINGS));
 
 	g_type_class_add_private (object_class, sizeof (GeditOverlayChildPrivate));
@@ -278,25 +278,16 @@ gedit_overlay_child_init (GeditOverlayChild *child)
 /**
  * gedit_overlay_child_new:
  * @widget: a #GtkWidget
- * @position: a #GeditOverlayChildPosition
- * @offset: offset for @widget
- * @fixed: wether @widget is fixed in its position
  *
  * Creates a new #GeditOverlayChild object
  *
  * Returns: a new #GeditOverlayChild object
  */
 GeditOverlayChild *
-gedit_overlay_child_new (GtkWidget                *widget,
-                         GeditOverlayChildPosition position,
-                         guint                     offset,
-                         gboolean                  fixed)
+gedit_overlay_child_new (GtkWidget *widget)
 {
 	return g_object_new (GEDIT_TYPE_OVERLAY_CHILD,
 	                     "widget", widget,
-	                     "position", position,
-	                     "offset", offset,
-	                     "fixed", fixed,
 	                     NULL);
 }
 
@@ -317,6 +308,27 @@ gedit_overlay_child_get_position (GeditOverlayChild *child)
 }
 
 /**
+ * gedit_overlay_child_set_position:
+ * @child: a #GeditOverlayChild
+ * @position: a #GeditOverlayChildPosition
+ *
+ * Sets the new position for @child
+ */
+void
+gedit_overlay_child_set_position (GeditOverlayChild        *child,
+                                  GeditOverlayChildPosition position)
+{
+	g_return_if_fail (GEDIT_IS_OVERLAY_CHILD (child));
+
+	if (child->priv->position != position)
+	{
+		child->priv->position = position;
+
+		g_object_notify (G_OBJECT (child), "position");
+	}
+}
+
+/**
  * gedit_overlay_child_get_offset:
  * @child: a #GeditOverlayChild
  *
@@ -334,6 +346,27 @@ gedit_overlay_child_get_offset (GeditOverlayChild *child)
 }
 
 /**
+ * gedit_overlay_child_set_offset:
+ * @child: a #GeditOverlayChild
+ * @offset: the offset for @child
+ *
+ * Sets the new offset for @child
+ */
+void
+gedit_overlay_child_set_offset (GeditOverlayChild *child,
+                                guint              offset)
+{
+	g_return_if_fail (GEDIT_IS_OVERLAY_CHILD (child));
+
+	if (child->priv->offset != offset)
+	{
+		child->priv->offset = offset;
+
+		g_object_notify (G_OBJECT (child), "offset");
+	}
+}
+
+/**
  * gedit_overlay_child_get_fixed:
  * @child: a #GeditOverlayChild
  *
@@ -348,6 +381,29 @@ gedit_overlay_child_get_fixed (GeditOverlayChild *child)
 	g_return_val_if_fail (GEDIT_IS_OVERLAY_CHILD (child), TRUE);
 
 	return child->priv->fixed;
+}
+
+/**
+ * gedit_overlay_child_set_fixed:
+ * @child: a #GeditOverlayChild
+ * @fixed: wether @child is in a fixed position
+ *
+ * Sets wether @child is in a fixed position
+ */
+void
+gedit_overlay_child_set_fixed (GeditOverlayChild *child,
+                               gboolean           fixed)
+{
+	g_return_if_fail (GEDIT_IS_OVERLAY_CHILD (child));
+
+	fixed = (fixed != FALSE);
+
+	if (child->priv->fixed != fixed)
+	{
+		child->priv->fixed = fixed;
+
+		g_object_notify (G_OBJECT (child), "fixed");
+	}
 }
 
 /* ex:set ts=8 noet: */
