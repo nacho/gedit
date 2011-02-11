@@ -25,6 +25,7 @@
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
+#include "gedit-overlay-child.h"
 
 G_BEGIN_DECLS
 
@@ -60,12 +61,10 @@ GType		 gedit_overlay_get_type			(void) G_GNUC_CONST;
 
 GtkWidget	*gedit_overlay_new			(GtkWidget *main_widget);
 
-void		 gedit_overlay_add			(GeditOverlay *overlay,
-							 GtkWidget    *widget,
-							 GtkOrientation orientation,
-							 GdkGravity    gravity,
-							 guint	       offset,
-							 gboolean      in);
+void		 gedit_overlay_add			(GeditOverlay             *overlay,
+							 GtkWidget                *widget,
+							 GeditOverlayChildPosition position,
+							 guint                     offset);
 
 G_END_DECLS
 
