@@ -23,9 +23,7 @@
  */
 
 #include "gedit-overlay.h"
-#include "gedit-marshal.h"
-#include "theatrics/gedit-theatrics-animated-widget.h"
-#include "theatrics/gedit-theatrics-stage.h"
+#include "gedit-theatrics-animated-widget.h"
 
 #define GEDIT_OVERLAY_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_OVERLAY, GeditOverlayPrivate))
 
@@ -49,8 +47,6 @@ struct _GeditOverlayPrivate
 	GtkAdjustment *vadjustment;
 	glong          hadjustment_signal_id;
 	glong          vadjustment_signal_id;
-
-	GeditTheatricsStage *stage;
 
 	/* GtkScrollablePolicy needs to be checked when
 	 * driving the scrollable adjustment values */
@@ -131,12 +127,6 @@ gedit_overlay_dispose (GObject *object)
 		g_signal_handler_disconnect (overlay->priv->vadjustment,
 		                             overlay->priv->vadjustment_signal_id);
 		overlay->priv->vadjustment = NULL;
-	}
-
-	if (overlay->priv->stage != NULL)
-	{
-		g_object_unref (overlay->priv->stage);
-		overlay->priv->stage = NULL;
 	}
 
 	G_OBJECT_CLASS (gedit_overlay_parent_class)->dispose (object);
@@ -374,6 +364,10 @@ set_children_positions (GeditOverlay *overlay)
 				alloc.x = child->offset;
 				alloc.y = 0;
 				break;
+			case GDK_GRAVITY_SOUTH_WEST:
+				alloc.x = child->offset;
+				alloc.y = priv->main_alloc.height - req.height;
+				break;
 			default:
 				alloc.x = 0;
 				alloc.y = 0;
@@ -411,8 +405,8 @@ gedit_overlay_size_allocate (GtkWidget     *widget,
 }
 
 static void
-gedit_overlay_add (GtkContainer *overlay,
-                   GtkWidget    *widget)
+overlay_add (GtkContainer *overlay,
+             GtkWidget    *widget)
 {
 	add_toplevel_widget (GEDIT_OVERLAY (overlay), widget,
 	                     FALSE, FALSE, GDK_GRAVITY_STATIC, 0);
@@ -568,7 +562,7 @@ gedit_overlay_class_init (GeditOverlayClass *klass)
 	widget_class->get_preferred_height = gedit_overlay_get_preferred_height;
 	widget_class->size_allocate = gedit_overlay_size_allocate;
 
-	container_class->add = gedit_overlay_add;
+	container_class->add = overlay_add;
 	container_class->remove = gedit_overlay_remove;
 	container_class->forall = gedit_overlay_forall;
 	container_class->child_type = gedit_overlay_child_type;
@@ -599,61 +593,9 @@ gedit_overlay_class_init (GeditOverlayClass *klass)
 }
 
 static void
-on_actor_step (GeditTheatricsStage *stage,
-               GeditTheatricsActor *actor,
-               GeditOverlay        *overlay)
-{
-	GeditTheatricsAnimationState animation_state;
-	GeditTheatricsAnimatedWidget *anim_widget;
-
-	anim_widget = GEDIT_THEATRICS_ANIMATED_WIDGET (gedit_theatrics_actor_get_target (actor));
-	animation_state = gedit_theatrics_animated_widget_get_animation_state (anim_widget);
-
-	switch (animation_state)
-	{
-		case GEDIT_THEATRICS_ANIMATION_STATE_COMING:
-			gtk_widget_queue_draw (GTK_WIDGET (anim_widget));
-			gedit_theatrics_animated_widget_set_percent (anim_widget,
-			                                             gedit_theatrics_actor_get_percent (actor));
-			if (gedit_theatrics_actor_get_expired (actor))
-			{
-				gedit_theatrics_animated_widget_set_animation_state (anim_widget,
-				                                                     GEDIT_THEATRICS_ANIMATION_STATE_IDLE);
-			}
-			break;
-		case GEDIT_THEATRICS_ANIMATION_STATE_INTENDING_TO_GO:
-			gedit_theatrics_animated_widget_set_animation_state (anim_widget,
-			                                                     GEDIT_THEATRICS_ANIMATION_STATE_GOING);
-			gedit_theatrics_animated_widget_set_bias (anim_widget,
-			                                          gedit_theatrics_actor_get_percent (actor));
-			gedit_theatrics_actor_reset (actor, gedit_theatrics_animated_widget_get_duration (anim_widget) *
-			                                    gedit_theatrics_actor_get_percent (actor));
-			break;
-		case GEDIT_THEATRICS_ANIMATION_STATE_GOING:
-			if (gedit_theatrics_actor_get_expired (actor))
-			{
-				gtk_widget_destroy (GTK_WIDGET (anim_widget));
-				return;
-			}
-			gtk_widget_queue_draw (GTK_WIDGET (anim_widget));
-			gedit_theatrics_animated_widget_set_percent (anim_widget, 1.0 - gedit_theatrics_actor_get_percent (actor));
-			break;
-		default:
-			break;
-	}
-}
-
-static void
 gedit_overlay_init (GeditOverlay *overlay)
 {
 	overlay->priv = GEDIT_OVERLAY_GET_PRIVATE (overlay);
-
-	overlay->priv->stage = gedit_theatrics_stage_new ();
-
-	g_signal_connect (overlay->priv->stage,
-	                  "actor-step",
-	                  G_CALLBACK (on_actor_step),
-	                  overlay);
 }
 
 GtkWidget *
@@ -692,44 +634,23 @@ get_animated_widget (GeditOverlay *overlay,
 
 /* Note: see that we use the gravity as a position */
 void
-gedit_overlay_slide (GeditOverlay                       *overlay,
-                     GtkWidget                          *widget,
-                     guint                               duration,
-                     GeditTheatricsChoreographerEasing   easing,
-                     GeditTheatricsChoreographerBlocking blocking,
-                     GtkOrientation                      orientation,
-                     GdkGravity                          gravity,
-                     guint                               offset,
-                     gboolean                            in)
+gedit_overlay_add (GeditOverlay *overlay,
+                   GtkWidget    *widget,
+                   GtkOrientation orientation,
+                   GdkGravity    gravity,
+                   guint         offset,
+                   gboolean      in)
 {
-	GeditTheatricsAnimatedWidget *anim_widget;
-
-	anim_widget = get_animated_widget (overlay, widget);
-
-	if (anim_widget == NULL)
-	{
-		anim_widget = gedit_theatrics_animated_widget_new (widget, duration,
-		                                                   easing,
-		                                                   blocking,
-		                                                   orientation);
-		gtk_widget_show (GTK_WIDGET (anim_widget));
-
-		add_toplevel_widget (overlay, GTK_WIDGET (anim_widget), TRUE,
-		                     TRUE, gravity, offset);
-	}
-	else
-	{
-		/* we are only interested in the easing and the blocking */
-		gedit_theatrics_animated_widget_set_easing (anim_widget, easing);
-		gedit_theatrics_animated_widget_set_blocking (anim_widget, blocking);
-	}
-
-	if (!in)
-	{
-		gedit_theatrics_animated_widget_set_animation_state (anim_widget, GEDIT_THEATRICS_ANIMATION_STATE_GOING);
-	}
-
-	gedit_theatrics_stage_add_with_duration (overlay->priv->stage,
-	                                         G_OBJECT (anim_widget),
-	                                         duration);
+    GeditTheatricsAnimatedWidget *anim_widget;
+    
+    anim_widget = get_animated_widget (overlay, widget);
+    
+    if (anim_widget == NULL)
+    {
+        anim_widget = gedit_theatrics_animated_widget_new (widget, orientation);
+        gtk_widget_show (GTK_WIDGET (anim_widget));
+        
+        add_toplevel_widget (overlay, GTK_WIDGET (anim_widget), TRUE,
+                             TRUE, gravity, offset);
+    }
 }

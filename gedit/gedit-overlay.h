@@ -11,7 +11,7 @@
  *
  * gedit is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -25,13 +25,12 @@
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include "theatrics/gedit-theatrics-choreographer.h"
 
 G_BEGIN_DECLS
 
 #define GEDIT_TYPE_OVERLAY		(gedit_overlay_get_type ())
 #define GEDIT_OVERLAY(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GEDIT_TYPE_OVERLAY, GeditOverlay))
-#define GEDIT_OVERLAY_CONST(obj)		(G_TYPE_CHECK_INSTANCE_CAST ((obj), GEDIT_TYPE_OVERLAY, GeditOverlay const))
+#define GEDIT_OVERLAY_CONST(obj)	(G_TYPE_CHECK_INSTANCE_CAST ((obj), GEDIT_TYPE_OVERLAY, GeditOverlay const))
 #define GEDIT_OVERLAY_CLASS(klass)	(G_TYPE_CHECK_CLASS_CAST ((klass), GEDIT_TYPE_OVERLAY, GeditOverlayClass))
 #define GEDIT_IS_OVERLAY(obj)		(G_TYPE_CHECK_INSTANCE_TYPE ((obj), GEDIT_TYPE_OVERLAY))
 #define GEDIT_IS_OVERLAY_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_OVERLAY))
@@ -52,24 +51,21 @@ struct _GeditOverlayClass
 {
 	GtkContainerClass parent_class;
 
-	void (* set_scroll_adjustments)   (GeditOverlay  *overlay,
-	                                   GtkAdjustment *hadjustment,
-	                                   GtkAdjustment *vadjustment);
+	void (* set_scroll_adjustments)	  (GeditOverlay	 *overlay,
+					   GtkAdjustment *hadjustment,
+					   GtkAdjustment *vadjustment);
 };
 
 GType		 gedit_overlay_get_type			(void) G_GNUC_CONST;
 
 GtkWidget	*gedit_overlay_new			(GtkWidget *main_widget);
 
-void		 gedit_overlay_slide			(GeditOverlay                       *overlay,
-							 GtkWidget                          *widget,
-							 guint                               duration,
-							 GeditTheatricsChoreographerEasing   easing,
-							 GeditTheatricsChoreographerBlocking blocking,
-							 GtkOrientation                      orientation,
-							 GdkGravity                          gravity,
-							 guint                               offset,
-							 gboolean                            in);
+void		 gedit_overlay_add			(GeditOverlay *overlay,
+							 GtkWidget    *widget,
+							 GtkOrientation orientation,
+							 GdkGravity    gravity,
+							 guint	       offset,
+							 gboolean      in);
 
 G_END_DECLS
 
