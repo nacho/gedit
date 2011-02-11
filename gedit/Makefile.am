@@ -117,6 +117,7 @@ NOINST_H_FILES =			\
 	gedit-multi-notebook.h		\
 	gedit-notebook.h		\
 	gedit-overlay.h			\
+	gedit-overlay-child.h		\
 	gedit-plugins-engine.h		\
 	gedit-print-job.h		\
 	gedit-print-preview.h		\
@@ -198,6 +199,7 @@ libgedit_c_files =			\
 	gedit-multi-notebook.c		\
 	gedit-notebook.c		\
 	gedit-overlay.c			\
+	gedit-overlay-child.c		\
 	gedit-panel.c			\
 	gedit-plugins-engine.c		\
 	gedit-print-job.c		\
@@ -234,6 +236,7 @@ endif
 
 ENUM_TYPES = 			\
 	gedit-notebook.h	\
+	gedit-overlay-child.h	\
 	$(INST_H_FILES)
 
 gedit-enum-types.h: gedit-enum-types.h.template $(ENUM_TYPES) $(GLIB_MKENUMS)
