@@ -1094,9 +1094,10 @@ gedit_unrecoverable_saving_error_info_bar_new (GFile        *location,
 	}
 	else if (is_gio_error (error, G_IO_ERROR_INVALID_FILENAME))
 	{
-		message_details = g_strdup (_("%s is not a valid location. " 
-					      "Please check that you typed the "
-					      "location correctly and try again."));
+		message_details = g_strdup_printf (_("%s is not a valid location. "
+						     "Please check that you typed the "
+						     "location correctly and try again."),
+						   uri_for_display);
 	}
 	else if (is_gio_error (error, G_IO_ERROR_PERMISSION_DENIED))
 	{
