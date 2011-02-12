@@ -4,13 +4,28 @@
 
   <info>
     <link type="guide" xref="index#gedit-working-with-files"/>
-    <revision pkgversion="3.0" version="0.1" date="2010-10-10" status="incomplete"/>
+    <revision pkgversion="3.0" version="0.1" date="2012-02-12" status="incomplete"/>
     <credit type="author">
       <name>Jim Campbell</name>
       <email>jwcampbell@gmail.com</email>
     </credit>
   </info>
 
-  <title>*Open a file that is located on a server</title>
+  <title>Open a file that is located on a server</title>
+
+  <p>To open a file from a server, perform the following steps:</p>
+
+    <steps>
+      <item><p>Choose <guiseq><gui>File</gui><gui>Open</gui></guiseq> to display the <em>Open</em> dialog.</p></item>
+      <item><p>Select the Enter the URI of the file that you want to open.</p></item>
+      <item><p>Use the Character coding drop-down list to select the appropriate character coding.</p></item>
+      <item><p>Click <gui>Open</gui>.</p></item>
+    </steps>
+
+  <p>Valid types of URI include http:, ftp:, file:, and all of the methods supported by gnome-vfs.</p>
+
+<note><p>Files from some types of URI are opened as read-only, and any changes you make must be saved to a different location. For example, HTTP only allows files to be read. Files opened from FTP are read-only because because not all FTP servers may correctly work with saving remote files.</p>
+
+<p>Saving to FTP servers can be enabled with Configuration Editor, setting the key /apps/gedit-2/preferences/editor/save/writable_vfs_schemes, but this may cause errors.</p></note>
 
 </page>
