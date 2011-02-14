@@ -307,8 +307,8 @@ PKG_CHECK_MODULES(GEDIT, [
 	gio-2.0 >= 2.25.11
 	gtk+-3.0 >= 2.99.0
 	gtksourceview-3.0 >= 2.91.1
-	libpeas-1.0 >= 0.7.0
-	libpeas-gtk-1.0 >= 0.7.0
+	libpeas-1.0 >= 0.7.2
+	libpeas-gtk-1.0 >= 0.7.2
 	gsettings-desktop-schemas
 ])
 

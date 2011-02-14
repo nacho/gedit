@@ -904,7 +904,7 @@ setup_plugins_page (GeditPreferencesDialog *dlg)
 
 	gedit_debug (DEBUG_PREFS);
 
-	page_content = peas_gtk_plugin_manager_new ();
+	page_content = peas_gtk_plugin_manager_new (NULL);
 	g_return_if_fail (page_content != NULL);
 
 	gtk_box_pack_start (GTK_BOX (dlg->priv->plugin_manager_place_holder),
