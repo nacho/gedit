@@ -1433,13 +1433,10 @@ gedit_view_frame_init (GeditViewFrame *frame)
 	                  G_CALLBACK (on_start_interactive_goto_line),
 	                  frame);
 
-	frame->priv->overlay = gedit_animated_overlay_new (frame->priv->view);
-	gtk_widget_show (frame->priv->overlay);
-
 	/* Create the scrolled window */
 	sw = gtk_scrolled_window_new (NULL, NULL);
 
-	gtk_container_add (GTK_CONTAINER (sw), frame->priv->overlay);
+	gtk_container_add (GTK_CONTAINER (sw), frame->priv->view);
 
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 					GTK_POLICY_AUTOMATIC,
@@ -1449,7 +1446,10 @@ gedit_view_frame_init (GeditViewFrame *frame)
 					     GTK_SHADOW_IN);
 	gtk_widget_show (sw);
 
-	gtk_box_pack_start (GTK_BOX (frame), sw, TRUE, TRUE, 0);
+	frame->priv->overlay = gedit_animated_overlay_new (sw);
+	gtk_widget_show (frame->priv->overlay);
+
+	gtk_box_pack_start (GTK_BOX (frame), frame->priv->overlay, TRUE, TRUE, 0);
 }
 
 GeditViewFrame *

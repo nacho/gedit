@@ -50,10 +50,6 @@ struct _GeditOverlay
 struct _GeditOverlayClass
 {
 	GtkContainerClass parent_class;
-
-	void (* set_scroll_adjustments)	  (GeditOverlay	 *overlay,
-					   GtkAdjustment *hadjustment,
-					   GtkAdjustment *vadjustment);
 };
 
 GType		 gedit_overlay_get_type			(void) G_GNUC_CONST;
