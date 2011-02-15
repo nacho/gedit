@@ -159,11 +159,16 @@ get_animated_widget (GeditAnimatedOverlay *overlay,
 			if (in_widget == widget)
 			{
 				anim_widget = GEDIT_THEATRICS_ANIMATED_WIDGET (child);
+				g_object_unref (in_widget);
+
 				break;
 			}
+
+			g_object_unref (in_widget);
 		}
 	}
 
+	g_object_unref (main_widget);
 	g_list_free (children);
 
 	return anim_widget;
