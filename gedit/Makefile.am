@@ -101,6 +101,7 @@ BUILT_SOURCES = 			\
 	gedit-marshal.h
 
 NOINST_H_FILES =			\
+	gedit-animated-overlay.h	\
 	gedit-close-button.h		\
 	gedit-command-line.h		\
 	gedit-dbus.h			\
@@ -168,6 +169,7 @@ libgedit_private_la_SOURCES =		\
 	gedit-window-activatable.c
 
 libgedit_c_files =			\
+	gedit-animated-overlay.c	\
 	gedit-app.c			\
 	gedit-close-button.c		\
 	gedit-command-line.c		\

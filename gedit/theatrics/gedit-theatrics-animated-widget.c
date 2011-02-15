@@ -25,12 +25,10 @@
 #include "gedit-theatrics-animated-widget.h"
 #include "gedit-theatrics-enum-types.h"
 
-
 #define GEDIT_THEATRICS_ANIMATED_WIDGET_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_THEATRICS_ANIMATED_WIDGET, GeditTheatricsAnimatedWidgetPrivate))
 
 struct _GeditTheatricsAnimatedWidgetPrivate
 {
-	GtkWidget *widget;
 	GeditTheatricsChoreographerEasing easing;
 	GeditTheatricsChoreographerBlocking blocking;
 	GeditTheatricsAnimationState animation_state;
@@ -44,7 +42,6 @@ struct _GeditTheatricsAnimatedWidgetPrivate
 enum
 {
 	PROP_0,
-	PROP_WIDGET,
 	PROP_EASING,
 	PROP_BLOCKING,
 	PROP_ANIMATION_STATE,
@@ -55,7 +52,7 @@ enum
 
 G_DEFINE_TYPE_EXTENDED (GeditTheatricsAnimatedWidget,
 			gedit_theatrics_animated_widget,
-			GTK_TYPE_BIN,
+			GEDIT_TYPE_OVERLAY_CHILD,
 			0,
 			G_IMPLEMENT_INTERFACE (GTK_TYPE_ORIENTABLE,
 					       NULL))
@@ -76,9 +73,6 @@ gedit_theatrics_animated_widget_get_property (GObject    *object,
 
 	switch (prop_id)
 	{
-		case PROP_WIDGET:
-			g_value_set_object (value, aw->priv->widget);
-			break;
 		case PROP_EASING:
 			g_value_set_enum (value, aw->priv->easing);
 			break;
@@ -113,12 +107,6 @@ gedit_theatrics_animated_widget_set_property (GObject      *object,
 
 	switch (prop_id)
 	{
-		case PROP_WIDGET:
-		{
-			gtk_container_add (GTK_CONTAINER (aw),
-			                   g_value_get_object (value));
-			break;
-		}
 		case PROP_EASING:
 			gedit_theatrics_animated_widget_set_easing (aw,
 			                                            g_value_get_enum (value));
@@ -178,14 +166,16 @@ gedit_theatrics_animated_widget_get_preferred_width (GtkWidget *widget,
                                                      gint      *natural)
 {
 	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (widget);
+	GtkWidget *child;
 	gint width;
 
-	if (aw->priv->widget != NULL)
+	child = gtk_bin_get_child (GTK_BIN (widget));
+
+	if (child != NULL)
 	{
 		gint child_min, child_nat;
 
-		gtk_widget_get_preferred_width (aw->priv->widget,
-		                                &child_min, &child_nat);
+		gtk_widget_get_preferred_width (child, &child_min, &child_nat);
 		aw->priv->widget_alloc.width = child_min;
 	}
 
@@ -209,14 +199,16 @@ gedit_theatrics_animated_widget_get_preferred_height (GtkWidget *widget,
                                                       gint      *natural)
 {
 	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (widget);
+	GtkWidget *child;
 	gint height;
 
-	if (aw->priv->widget != NULL)
+	child = gtk_bin_get_child (GTK_BIN (widget));
+
+	if (child != NULL)
 	{
 		gint child_min, child_nat;
 
-		gtk_widget_get_preferred_height (aw->priv->widget,
-		                                 &child_min, &child_nat);
+		gtk_widget_get_preferred_height (child, &child_min, &child_nat);
 		aw->priv->widget_alloc.height = child_min;
 	}
 
@@ -239,10 +231,13 @@ gedit_theatrics_animated_widget_size_allocate (GtkWidget     *widget,
 					       GtkAllocation *allocation)
 {
 	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (widget);
+	GtkWidget *child;
 
-	GTK_WIDGET_CLASS (gedit_theatrics_animated_widget_parent_class)->size_allocate (widget, allocation);
+	//GTK_WIDGET_CLASS (gedit_theatrics_animated_widget_parent_class)->size_allocate (widget, allocation);
 
-	if (aw->priv->widget != NULL)
+	child = gtk_bin_get_child (GTK_BIN (widget));
+
+	if (child != NULL)
 	{
 		if (aw->priv->orientation == GTK_ORIENTATION_HORIZONTAL)
 		{
@@ -267,32 +262,9 @@ gedit_theatrics_animated_widget_size_allocate (GtkWidget     *widget,
 
 		if (aw->priv->widget_alloc.height > 0 && aw->priv->widget_alloc.width > 0)
 		{
-			gtk_widget_size_allocate (aw->priv->widget,
-						  &aw->priv->widget_alloc);
+			gtk_widget_size_allocate (child, &aw->priv->widget_alloc);
 		}
 	}
-}
-
-static void
-gedit_theatrics_animated_widget_add (GtkContainer *container,
-				     GtkWidget    *widget)
-{
-	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (container);
-
-	aw->priv->widget = widget;
-
-	GTK_CONTAINER_CLASS (gedit_theatrics_animated_widget_parent_class)->add (container, widget);
-}
-
-static void
-gedit_theatrics_animated_widget_remove (GtkContainer *container,
-					GtkWidget    *widget)
-{
-	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (container);
-
-	aw->priv->widget = NULL;
-
-	GTK_CONTAINER_CLASS (gedit_theatrics_animated_widget_parent_class)->remove (container, widget);
 }
 
 static void
@@ -300,7 +272,6 @@ gedit_theatrics_animated_widget_class_init (GeditTheatricsAnimatedWidgetClass *k
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-	GtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
 	
 	object_class->finalize = gedit_theatrics_animated_widget_finalize;
 	object_class->get_property = gedit_theatrics_animated_widget_get_property;
@@ -310,18 +281,6 @@ gedit_theatrics_animated_widget_class_init (GeditTheatricsAnimatedWidgetClass *k
 	widget_class->get_preferred_width = gedit_theatrics_animated_widget_get_preferred_width;
 	widget_class->get_preferred_height = gedit_theatrics_animated_widget_get_preferred_height;
 	widget_class->size_allocate = gedit_theatrics_animated_widget_size_allocate;
-
-	container_class->add = gedit_theatrics_animated_widget_add;
-	container_class->remove = gedit_theatrics_animated_widget_remove;
-
-	g_object_class_install_property (object_class, PROP_WIDGET,
-	                                 g_param_spec_object ("widget",
-	                                                      "Widget",
-	                                                      "The Widget",
-	                                                      GTK_TYPE_WIDGET,
-	                                                      G_PARAM_READWRITE |
-	                                                      G_PARAM_CONSTRUCT_ONLY |
-	                                                      G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class, PROP_EASING,
 	                                 g_param_spec_enum ("easing",
@@ -386,8 +345,6 @@ static void
 gedit_theatrics_animated_widget_init (GeditTheatricsAnimatedWidget *aw)
 {
 	aw->priv = GEDIT_THEATRICS_ANIMATED_WIDGET_GET_PRIVATE (aw);
-
-	gtk_widget_set_has_window (GTK_WIDGET (aw), TRUE);
 
 	aw->priv->orientation = GTK_ORIENTATION_HORIZONTAL;
 	aw->priv->bias = 1.0;

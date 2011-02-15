@@ -24,7 +24,7 @@
 #include "gedit-marshal.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
-#include "gedit-overlay.h"
+#include "gedit-animated-overlay.h"
 #include "gedit-rounded-frame.h"
 
 #include <gdk/gdkkeysyms.h>
@@ -148,7 +148,7 @@ hide_search_widget (GeditViewFrame *frame,
                     gboolean        cancel)
 {
 	GtkTextBuffer *buffer;
-	GdkGravity gravity;
+	GeditOverlayChildPosition position;
 
 	if (frame->priv->disable_popdown)
 	{
@@ -177,22 +177,22 @@ hide_search_widget (GeditViewFrame *frame,
 
 	if (gtk_widget_get_direction (frame->priv->search_entry) == GTK_TEXT_DIR_RTL)
 	{
-		gravity = GDK_GRAVITY_NORTH_WEST;
+		position = GEDIT_OVERLAY_CHILD_POSITION_NORTH_WEST;
 	}
 	else
 	{
-		gravity = GDK_GRAVITY_NORTH_EAST;
+		position = GEDIT_OVERLAY_CHILD_POSITION_NORTH_EAST;
 	}
 
-	gedit_overlay_slide (GEDIT_OVERLAY (frame->priv->overlay),
-	                     frame->priv->search_widget,
-	                     300,
-	                     GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
-	                     GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_UPSTAGE,
-	                     GTK_ORIENTATION_VERTICAL,
-	                     gravity,
-	                     SEARCH_POPUP_OFFSET,
-	                     FALSE);
+	gedit_animated_overlay_slide (GEDIT_ANIMATED_OVERLAY (frame->priv->overlay),
+	                              frame->priv->search_widget,
+	                              position,
+	                              SEARCH_POPUP_OFFSET,
+	                              300,
+	                              GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
+	                              GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_UPSTAGE,
+	                              GTK_ORIENTATION_VERTICAL,
+	                              FALSE);
 	frame->priv->search_widget = NULL;
 
 	if (cancel)
@@ -1275,7 +1275,7 @@ start_interactive_search_real (GeditViewFrame *frame)
 	GtkTextBuffer *buffer;
 	GtkTextMark *mark;
 	GtkTextIter iter;
-	GdkGravity gravity;
+	GeditOverlayChildPosition position;
 
 	/* FIXME: it enters here twice, why? */
 
@@ -1313,22 +1313,22 @@ start_interactive_search_real (GeditViewFrame *frame)
 
 	if (gtk_widget_get_direction (frame->priv->search_entry) == GTK_TEXT_DIR_RTL)
 	{
-		gravity = GDK_GRAVITY_NORTH_WEST;
+		position = GEDIT_OVERLAY_CHILD_POSITION_NORTH_WEST;
 	}
 	else
 	{
-		gravity = GDK_GRAVITY_NORTH_EAST;
+		position = GEDIT_OVERLAY_CHILD_POSITION_NORTH_EAST;
 	}
 
-	gedit_overlay_slide (GEDIT_OVERLAY (frame->priv->overlay),
-	                     frame->priv->search_widget,
-	                     300,
-	                     GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
-	                     GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
-	                     GTK_ORIENTATION_VERTICAL,
-	                     gravity,
-	                     SEARCH_POPUP_OFFSET,
-	                     TRUE);
+	gedit_animated_overlay_slide (GEDIT_ANIMATED_OVERLAY (frame->priv->overlay),
+	                              frame->priv->search_widget,
+	                              position,
+	                              SEARCH_POPUP_OFFSET,
+	                              300,
+	                              GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
+	                              GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
+	                              GTK_ORIENTATION_VERTICAL,
+	                              TRUE);
 
 	init_search_entry (frame);
 
@@ -1433,7 +1433,7 @@ gedit_view_frame_init (GeditViewFrame *frame)
 	                  G_CALLBACK (on_start_interactive_goto_line),
 	                  frame);
 
-	frame->priv->overlay = gedit_overlay_new (frame->priv->view);
+	frame->priv->overlay = gedit_animated_overlay_new (frame->priv->view);
 	gtk_widget_show (frame->priv->overlay);
 
 	/* Create the scrolled window */

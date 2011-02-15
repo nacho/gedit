@@ -28,6 +28,7 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 #include "gedit-theatrics-choreographer.h"
+#include "gedit-overlay-child.h"
 
 G_BEGIN_DECLS
 
@@ -45,14 +46,14 @@ typedef struct _GeditTheatricsAnimatedWidgetPrivate	GeditTheatricsAnimatedWidget
 
 struct _GeditTheatricsAnimatedWidget
 {
-	GtkBin parent;
+	GeditOverlayChild parent;
 	
 	GeditTheatricsAnimatedWidgetPrivate *priv;
 };
 
 struct _GeditTheatricsAnimatedWidgetClass
 {
-	GtkBinClass parent_class;
+	GeditOverlayChildClass parent_class;
 };
 
 GType				 gedit_theatrics_animated_widget_get_type	(void) G_GNUC_CONST;
