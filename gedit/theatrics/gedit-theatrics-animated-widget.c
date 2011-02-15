@@ -137,30 +137,6 @@ gedit_theatrics_animated_widget_set_property (GObject      *object,
 }
 
 static void
-gedit_theatrics_animated_widget_realize (GtkWidget *widget)
-{
-	GdkWindowAttr attributes;
-	GdkWindow *parent_window;
-	GdkWindow *window;
-	GtkStyleContext *context;
-
-	gtk_widget_set_realized (widget, TRUE);
-
-	parent_window = gtk_widget_get_parent_window (widget);
-	context = gtk_widget_get_style_context (widget);
-
-	attributes.window_type = GDK_WINDOW_CHILD;
-	attributes.wclass = GDK_INPUT_OUTPUT;
-	attributes.event_mask = GDK_EXPOSURE_MASK;
-
-	window = gdk_window_new (parent_window, &attributes, 0);
-	gdk_window_set_user_data (window, widget);
-	gtk_widget_set_window (widget, window);
-	gtk_style_context_set_state (context, GTK_STATE_FLAG_NORMAL);
-	gtk_style_context_set_background (context, window);
-}
-
-static void
 gedit_theatrics_animated_widget_get_preferred_width (GtkWidget *widget,
                                                      gint      *minimum,
                                                      gint      *natural)
@@ -168,6 +144,8 @@ gedit_theatrics_animated_widget_get_preferred_width (GtkWidget *widget,
 	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (widget);
 	GtkWidget *child;
 	gint width;
+
+	GTK_WIDGET_CLASS (gedit_theatrics_animated_widget_parent_class)->get_preferred_width (widget, minimum, natural);
 
 	child = gtk_bin_get_child (GTK_BIN (widget));
 
@@ -202,6 +180,8 @@ gedit_theatrics_animated_widget_get_preferred_height (GtkWidget *widget,
 	GtkWidget *child;
 	gint height;
 
+	GTK_WIDGET_CLASS (gedit_theatrics_animated_widget_parent_class)->get_preferred_height (widget, minimum, natural);
+
 	child = gtk_bin_get_child (GTK_BIN (widget));
 
 	if (child != NULL)
@@ -233,7 +213,7 @@ gedit_theatrics_animated_widget_size_allocate (GtkWidget     *widget,
 	GeditTheatricsAnimatedWidget *aw = GEDIT_THEATRICS_ANIMATED_WIDGET (widget);
 	GtkWidget *child;
 
-	//GTK_WIDGET_CLASS (gedit_theatrics_animated_widget_parent_class)->size_allocate (widget, allocation);
+	GTK_WIDGET_CLASS (gedit_theatrics_animated_widget_parent_class)->size_allocate (widget, allocation);
 
 	child = gtk_bin_get_child (GTK_BIN (widget));
 
@@ -277,7 +257,6 @@ gedit_theatrics_animated_widget_class_init (GeditTheatricsAnimatedWidgetClass *k
 	object_class->get_property = gedit_theatrics_animated_widget_get_property;
 	object_class->set_property = gedit_theatrics_animated_widget_set_property;
 
-	widget_class->realize = gedit_theatrics_animated_widget_realize;
 	widget_class->get_preferred_width = gedit_theatrics_animated_widget_get_preferred_width;
 	widget_class->get_preferred_height = gedit_theatrics_animated_widget_get_preferred_height;
 	widget_class->size_allocate = gedit_theatrics_animated_widget_size_allocate;
