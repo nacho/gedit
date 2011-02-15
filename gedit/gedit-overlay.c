@@ -462,7 +462,7 @@ gedit_overlay_forall (GtkContainer *overlay,
 	GSList *children;
 
 	children = priv->children;
-	while (children);
+	while (children)
 	{
 		GtkWidget *child = GTK_WIDGET (children->data);
 		children = children->next;
