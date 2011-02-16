@@ -29,13 +29,15 @@
 struct _GeditOverlayPrivate
 {
 	GtkWidget *main_widget;
+	GtkWidget *relative_widget;
 	GSList    *children;
 };
 
 enum
 {
 	PROP_0,
-	PROP_MAIN_WIDGET
+	PROP_MAIN_WIDGET,
+	PROP_RELATIVE_WIDGET
 };
 
 G_DEFINE_TYPE (GeditOverlay, gedit_overlay, GTK_TYPE_CONTAINER)
@@ -71,6 +73,10 @@ gedit_overlay_get_property (GObject    *object,
 			g_value_set_object (value, priv->main_widget);
 			break;
 
+		case PROP_RELATIVE_WIDGET:
+			g_value_set_object (value, priv->relative_widget);
+			break;
+
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -91,6 +97,10 @@ gedit_overlay_set_property (GObject      *object,
 		case PROP_MAIN_WIDGET:
 			priv->main_widget = g_value_get_object (value);
 			add_toplevel_widget (overlay, priv->main_widget);
+			break;
+
+		case PROP_RELATIVE_WIDGET:
+			priv->relative_widget = g_value_get_object (value);
 			break;
 
 		default:
@@ -193,6 +203,7 @@ gedit_overlay_size_allocate (GtkWidget     *widget,
                              GtkAllocation *allocation)
 {
 	GeditOverlay *overlay = GEDIT_OVERLAY (widget);
+	GeditOverlayPrivate *priv = overlay->priv;
 	GtkAllocation main_alloc;
 	GSList *l;
 
@@ -204,22 +215,16 @@ gedit_overlay_size_allocate (GtkWidget     *widget,
 	main_alloc.width = allocation->width;
 	main_alloc.height = allocation->height;
 
-	gtk_widget_size_allocate (overlay->priv->main_widget,
-	                          &main_alloc);
+	gtk_widget_size_allocate (overlay->priv->main_widget, &main_alloc);
 
-	/* we special case the scrolled window to put the floating widgets
-	   in relation to the scrolled window child */
-	if (GTK_IS_SCROLLED_WINDOW (overlay->priv->main_widget))
+	/* if a relative widget exists place the floating widgets in relation to it */
+	if (priv->relative_widget)
 	{
-		GtkWidget *child;
-
-		child = gtk_bin_get_child (GTK_BIN (overlay->priv->main_widget));
-		gtk_widget_get_allocation (child, &main_alloc);
+		gtk_widget_get_allocation (priv->relative_widget, &main_alloc);
 	}
 
-	for (l = overlay->priv->children; l != NULL; l = g_slist_next (l))
+	for (l = priv->children; l != NULL; l = g_slist_next (l))
 	{
-		GeditOverlayPrivate *priv = overlay->priv;
 		GtkWidget *child = GTK_WIDGET (l->data);
 		GtkRequisition req;
 		GtkAllocation alloc;
@@ -406,6 +411,15 @@ gedit_overlay_class_init (GeditOverlayClass *klass)
 	                                                      G_PARAM_CONSTRUCT_ONLY |
 	                                                      G_PARAM_STATIC_STRINGS));
 
+	g_object_class_install_property (object_class, PROP_RELATIVE_WIDGET,
+	                                 g_param_spec_object ("relative-widget",
+	                                                      "Relative Widget",
+	                                                      "Widget on which the floating widgets are placed",
+	                                                      GTK_TYPE_WIDGET,
+	                                                      G_PARAM_READWRITE |
+	                                                      G_PARAM_CONSTRUCT_ONLY |
+	                                                      G_PARAM_STATIC_STRINGS));
+
 	g_type_class_add_private (object_class, sizeof (GeditOverlayPrivate));
 }
 
@@ -418,18 +432,23 @@ gedit_overlay_init (GeditOverlay *overlay)
 /**
  * gedit_overlay_new:
  * @main_widget: a #GtkWidget
+ * @relative_widget: (allow-none): a #Gtkwidget
  *
- * Creates a new #GeditOverlay
+ * Creates a new #GeditOverlay. If @relative_widget is not %NULL the floating
+ * widgets will be placed in relation to it, if not @main_widget will be use
+ * for this purpose.
  *
  * Returns: a new #GeditOverlay object.
  */
 GtkWidget *
-gedit_overlay_new (GtkWidget *main_widget)
+gedit_overlay_new (GtkWidget *main_widget,
+                   GtkWidget *relative_widget)
 {
 	g_return_val_if_fail (GTK_IS_WIDGET (main_widget), NULL);
 
 	return GTK_WIDGET (g_object_new (GEDIT_TYPE_OVERLAY,
 	                                 "main-widget", main_widget,
+	                                 "relative-widget", relative_widget,
 	                                 NULL));
 }
 

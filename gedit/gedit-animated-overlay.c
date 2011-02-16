@@ -116,11 +116,24 @@ gedit_animated_overlay_init (GeditAnimatedOverlay *overlay)
 	                  overlay);
 }
 
+/**
+ * gedit_animated_overlay_new:
+ * @main_widget: a #GtkWidget
+ * @relative_widget: (allow-none): a #Gtkwidget
+ *
+ * Creates a new #GeditAnimatedOverlay. If @relative_widget is not %NULL the
+ * floating widgets will be placed in relation to it, if not @main_widget will
+ * be use for this purpose.
+ *
+ * Returns: a new #GeditAnimatedOverlay object.
+ */
 GtkWidget *
-gedit_animated_overlay_new (GtkWidget *main_widget)
+gedit_animated_overlay_new (GtkWidget *main_widget,
+                            GtkWidget *relative_widget)
 {
 	return g_object_new (GEDIT_TYPE_ANIMATED_OVERLAY,
 	                     "main-widget", main_widget,
+	                     "relative-widget", relative_widget,
 	                     NULL);
 }
 
@@ -174,6 +187,20 @@ get_animated_widget (GeditAnimatedOverlay *overlay,
 	return anim_widget;
 }
 
+/**
+ * gedit_animated_overlay_slide:
+ * @overlay: a #GeditAnimatedOverlay
+ * @widget: a #GtkWidget to add to @overlay
+ * @position: a #GeditOverlayChildPosition
+ * @offset: offset for @widget
+ * @duration: the duration of the animation
+ * @easing: a #GeditTheatricsChoreographerEasing
+ * @blocking: a #GeditTheatricsChoreographerBlocking
+ * @orientation: the orientation of the animation
+ * @in: if %TRUE slide in if %FALSE slide out
+ *
+ * Adds @widget in @overlay with a slide in/out animation depending on @in.
+ */
 void
 gedit_animated_overlay_slide (GeditAnimatedOverlay               *overlay,
                               GtkWidget                          *widget,

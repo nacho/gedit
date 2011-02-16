@@ -1446,7 +1446,7 @@ gedit_view_frame_init (GeditViewFrame *frame)
 					     GTK_SHADOW_IN);
 	gtk_widget_show (sw);
 
-	frame->priv->overlay = gedit_animated_overlay_new (sw);
+	frame->priv->overlay = gedit_animated_overlay_new (sw, frame->priv->view);
 	gtk_widget_show (frame->priv->overlay);
 
 	gtk_box_pack_start (GTK_BOX (frame), frame->priv->overlay, TRUE, TRUE, 0);

@@ -53,7 +53,8 @@ struct _GeditAnimatedOverlayClass
 
 GType gedit_animated_overlay_get_type (void) G_GNUC_CONST;
 
-GtkWidget *gedit_animated_overlay_new (GtkWidget *main_widget);
+GtkWidget *gedit_animated_overlay_new (GtkWidget *main_widget,
+                                       GtkWidget *relative_widget);
 
 void gedit_animated_overlay_slide (GeditAnimatedOverlay               *overlay,
                                    GtkWidget                          *widget,
