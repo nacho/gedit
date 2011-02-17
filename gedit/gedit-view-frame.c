@@ -25,6 +25,7 @@
 #include "gedit-debug.h"
 #include "gedit-utils.h"
 #include "gedit-animated-overlay.h"
+#include "gedit-floating-slider.h"
 #include "gedit-rounded-frame.h"
 
 #include <gdk/gdkkeysyms.h>
@@ -66,6 +67,7 @@ struct _GeditViewFramePrivate
 	 */
 	guint        search_flags;
 
+	GtkWidget   *slider;
 	GtkWidget   *search_widget;
 	GtkWidget   *search_entry;
 
@@ -148,12 +150,14 @@ hide_search_widget (GeditViewFrame *frame,
                     gboolean        cancel)
 {
 	GtkTextBuffer *buffer;
-	GeditOverlayChildPosition position;
 
 	if (frame->priv->disable_popdown)
 	{
 		return;
 	}
+
+	g_signal_handler_block (frame->priv->search_entry,
+	                        frame->priv->search_entry_focus_out_id);
 
 	if (frame->priv->view_scroll_event_id != 0)
 	{
@@ -162,38 +166,16 @@ hide_search_widget (GeditViewFrame *frame,
 		frame->priv->view_scroll_event_id = 0;
 	}
 
-	if (frame->priv->search_entry_focus_out_id != 0)
-	{
-		g_signal_handler_disconnect (frame->priv->search_entry,
-		                             frame->priv->search_entry_focus_out_id);
-		frame->priv->search_entry_focus_out_id = 0;
-	}
-
 	if (frame->priv->typeselect_flush_timeout != 0)
 	{
 		g_source_remove (frame->priv->typeselect_flush_timeout);
 		frame->priv->typeselect_flush_timeout = 0;
 	}
 
-	if (gtk_widget_get_direction (frame->priv->search_entry) == GTK_TEXT_DIR_RTL)
-	{
-		position = GEDIT_OVERLAY_CHILD_POSITION_NORTH_WEST;
-	}
-	else
-	{
-		position = GEDIT_OVERLAY_CHILD_POSITION_NORTH_EAST;
-	}
-
-	gedit_animated_overlay_slide (GEDIT_ANIMATED_OVERLAY (frame->priv->overlay),
-	                              frame->priv->search_widget,
-	                              position,
-	                              SEARCH_POPUP_OFFSET,
-	                              300,
-	                              GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
-	                              GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_UPSTAGE,
-	                              GTK_ORIENTATION_VERTICAL,
-	                              FALSE);
-	frame->priv->search_widget = NULL;
+	/* To hide the slider we just set the animation-state property */
+	g_object_set (G_OBJECT (frame->priv->slider),
+	              "animation-state", GEDIT_THEATRICS_ANIMATION_STATE_INTENDING_TO_GO,
+	              NULL);
 
 	if (cancel)
 	{
@@ -214,6 +196,9 @@ hide_search_widget (GeditViewFrame *frame,
 	/* Make sure the view is the one who has the focus when we destroy
 	   the search widget */
 	gtk_widget_grab_focus (frame->priv->view);
+
+	g_signal_handler_unblock (frame->priv->search_entry,
+	                          frame->priv->search_entry_focus_out_id);
 }
 
 static void
@@ -1078,11 +1063,6 @@ create_search_widget (GeditViewFrame *frame)
 	g_signal_connect (search_widget, "scroll-event",
 	                  G_CALLBACK (search_widget_scroll_event),
 	                  frame);
-	/* Manage the scroll also for the view */
-	frame->priv->view_scroll_event_id =
-		g_signal_connect (frame->priv->view, "scroll-event",
-			          G_CALLBACK (search_widget_scroll_event),
-			          frame);
 
 	hbox = gtk_hbox_new (FALSE, 3);
 	gtk_widget_show (hbox);
@@ -1205,6 +1185,8 @@ init_search_entry (GeditViewFrame *frame)
 
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (frame->priv->view));
 
+	customize_for_search_mode (frame);
+
 	if (frame->priv->search_mode == GOTO_LINE)
 	{
 		gint   line;
@@ -1275,12 +1257,10 @@ start_interactive_search_real (GeditViewFrame *frame)
 	GtkTextBuffer *buffer;
 	GtkTextMark *mark;
 	GtkTextIter iter;
-	GeditOverlayChildPosition position;
 
 	/* FIXME: it enters here twice, why? */
 
-	if ((frame->priv->search_widget != NULL) &&
-	    gtk_widget_get_visible (frame->priv->search_widget))
+	if (gtk_widget_get_visible (frame->priv->slider))
 	{
 		if (frame->priv->search_mode != frame->priv->request_search_mode)
 		{
@@ -1309,28 +1289,18 @@ start_interactive_search_real (GeditViewFrame *frame)
 	frame->priv->start_mark = gtk_text_buffer_create_mark (buffer, NULL,
 	                                                       &iter, FALSE);
 
-	frame->priv->search_widget = create_search_widget (frame);
-
-	if (gtk_widget_get_direction (frame->priv->search_entry) == GTK_TEXT_DIR_RTL)
-	{
-		position = GEDIT_OVERLAY_CHILD_POSITION_NORTH_WEST;
-	}
-	else
-	{
-		position = GEDIT_OVERLAY_CHILD_POSITION_NORTH_EAST;
-	}
-
-	gedit_animated_overlay_slide (GEDIT_ANIMATED_OVERLAY (frame->priv->overlay),
-	                              frame->priv->search_widget,
-	                              position,
-	                              SEARCH_POPUP_OFFSET,
-	                              300,
-	                              GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
-	                              GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
-	                              GTK_ORIENTATION_VERTICAL,
-	                              TRUE);
+	/* To slide in we set the right animation state in the animatable */
+	g_object_set (G_OBJECT (frame->priv->slider),
+	              "animation-state", GEDIT_THEATRICS_ANIMATION_STATE_COMING,
+	              NULL);
 
 	init_search_entry (frame);
+
+	/* Manage the scroll also for the view */
+	frame->priv->view_scroll_event_id =
+		g_signal_connect (frame->priv->view, "scroll-event",
+			          G_CALLBACK (search_widget_scroll_event),
+			          frame);
 
 	frame->priv->typeselect_flush_timeout =
 		g_timeout_add (GEDIT_VIEW_FRAME_SEARCH_DIALOG_TIMEOUT,
@@ -1406,6 +1376,7 @@ gedit_view_frame_init (GeditViewFrame *frame)
 {
 	GeditDocument *doc;
 	GtkWidget *sw;
+	GeditOverlayChildPosition position;
 
 	frame->priv = GEDIT_VIEW_FRAME_GET_PRIVATE (frame);
 
@@ -1450,6 +1421,29 @@ gedit_view_frame_init (GeditViewFrame *frame)
 	gtk_widget_show (frame->priv->overlay);
 
 	gtk_box_pack_start (GTK_BOX (frame), frame->priv->overlay, TRUE, TRUE, 0);
+
+	/* Add slider */
+	if (gtk_widget_get_direction (GTK_WIDGET (frame)) == GTK_TEXT_DIR_RTL)
+	{
+		position = GEDIT_OVERLAY_CHILD_POSITION_NORTH_WEST;
+	}
+	else
+	{
+		position = GEDIT_OVERLAY_CHILD_POSITION_NORTH_EAST;
+	}
+
+	frame->priv->search_widget = create_search_widget (frame);
+	frame->priv->slider = gedit_floating_slider_new (frame->priv->search_widget);
+	g_object_set (G_OBJECT (frame->priv->slider),
+	              "position", position,
+	              "offset", SEARCH_POPUP_OFFSET,
+	              "easing", GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
+	              "blocking", GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
+	              "orientation", GTK_ORIENTATION_VERTICAL,
+	              NULL);
+
+	gedit_animated_overlay_add (GEDIT_ANIMATED_OVERLAY (frame->priv->overlay),
+	                            GEDIT_ANIMATABLE (frame->priv->slider));
 }
 
 GeditViewFrame *

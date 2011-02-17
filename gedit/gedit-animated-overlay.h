@@ -22,6 +22,7 @@
 #ifndef __GEDIT_ANIMATED_OVERLAY_H__
 #define __GEDIT_ANIMATED_OVERLAY_H__
 
+#include "gedit-animatable.h"
 #include "gedit-overlay.h"
 #include "theatrics/gedit-theatrics-choreographer.h"
 
@@ -56,15 +57,8 @@ GType gedit_animated_overlay_get_type (void) G_GNUC_CONST;
 GtkWidget *gedit_animated_overlay_new (GtkWidget *main_widget,
                                        GtkWidget *relative_widget);
 
-void gedit_animated_overlay_slide (GeditAnimatedOverlay               *overlay,
-                                   GtkWidget                          *widget,
-                                   GeditOverlayChildPosition           position,
-                                   guint                               offset,
-                                   guint                               duration,
-                                   GeditTheatricsChoreographerEasing   easing,
-                                   GeditTheatricsChoreographerBlocking blocking,
-                                   GtkOrientation                      orientation,
-                                   gboolean                            in);
+void gedit_animated_overlay_add (GeditAnimatedOverlay *overlay,
+                                 GeditAnimatable      *animatable);
 
 G_END_DECLS
 
