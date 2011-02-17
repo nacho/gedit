@@ -38,7 +38,7 @@ main ()
 	gtk_container_add (GTK_CONTAINER (window), vbox);
 
 	textview = gtk_text_view_new ();
-	overlay = gedit_animated_overlay_new (textview);
+	overlay = gedit_animated_overlay_new (textview, NULL);
 
 	gtk_box_pack_start (GTK_BOX (vbox), overlay, TRUE, TRUE, 0);
 
