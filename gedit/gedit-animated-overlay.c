@@ -62,39 +62,48 @@ on_actor_step (GeditTheatricsStage  *stage,
                GeditAnimatedOverlay *overlay)
 {
 	GeditTheatricsAnimationState animation_state;
-	GeditTheatricsAnimatedWidget *anim_widget;
+	GObject *anim_widget;
+	guint duration;
 
-	anim_widget = GEDIT_THEATRICS_ANIMATED_WIDGET (gedit_theatrics_actor_get_target (actor));
-	animation_state = gedit_theatrics_animated_widget_get_animation_state (anim_widget);
+	anim_widget = gedit_theatrics_actor_get_target (actor);
+	g_assert (GEDIT_IS_ANIMATABLE (anim_widget));
+
+	g_object_get (anim_widget, "animation-state", &animation_state,
+	              "duration", &duration, NULL);
 
 	switch (animation_state)
 	{
 		case GEDIT_THEATRICS_ANIMATION_STATE_COMING:
 			gtk_widget_queue_draw (GTK_WIDGET (anim_widget));
-			gedit_theatrics_animated_widget_set_percent (anim_widget,
-			                                             gedit_theatrics_actor_get_percent (actor));
+
+			g_object_set (anim_widget, "percent",
+			              gedit_theatrics_actor_get_percent (actor),
+			              NULL);
+
 			if (gedit_theatrics_actor_get_expired (actor))
 			{
-				gedit_theatrics_animated_widget_set_animation_state (anim_widget,
-				                                                     GEDIT_THEATRICS_ANIMATION_STATE_IDLE);
+				g_object_set (anim_widget, "animation-state",
+				              GEDIT_THEATRICS_ANIMATION_STATE_IDLE, NULL);
 			}
 			break;
 		case GEDIT_THEATRICS_ANIMATION_STATE_INTENDING_TO_GO:
-			gedit_theatrics_animated_widget_set_animation_state (anim_widget,
-			                                                     GEDIT_THEATRICS_ANIMATION_STATE_GOING);
-			gedit_theatrics_animated_widget_set_bias (anim_widget,
-			                                          gedit_theatrics_actor_get_percent (actor));
-			gedit_theatrics_actor_reset (actor, gedit_theatrics_animated_widget_get_duration (anim_widget) *
-			                                    gedit_theatrics_actor_get_percent (actor));
+			g_object_set (anim_widget,
+			              "animation-state", GEDIT_THEATRICS_ANIMATION_STATE_GOING,
+			              "bias", gedit_theatrics_actor_get_percent (actor),
+			               NULL);
+			gedit_theatrics_actor_reset (actor, duration * gedit_theatrics_actor_get_percent (actor));
 			break;
 		case GEDIT_THEATRICS_ANIMATION_STATE_GOING:
 			if (gedit_theatrics_actor_get_expired (actor))
 			{
-				gtk_widget_destroy (GTK_WIDGET (anim_widget));
+				/* let the widget manage it? and maybe set it as idle*/
+				//gtk_widget_destroy (GTK_WIDGET (anim_widget));
 				return;
 			}
 			gtk_widget_queue_draw (GTK_WIDGET (anim_widget));
-			gedit_theatrics_animated_widget_set_percent (anim_widget, 1.0 - gedit_theatrics_actor_get_percent (actor));
+			g_object_set (anim_widget, "percent",
+			              1.0 - gedit_theatrics_actor_get_percent (actor),
+			              NULL);
 			break;
 		default:
 			break;
@@ -114,6 +123,14 @@ gedit_animated_overlay_init (GeditAnimatedOverlay *overlay)
 	                  "actor-step",
 	                  G_CALLBACK (on_actor_step),
 	                  overlay);
+}
+
+static void
+on_animation_state_changed (GeditAnimatable      *animatable,
+                            GParamSpec           *pspec,
+                            GeditAnimatedOverlay *overlay)
+{
+	
 }
 
 /**
@@ -137,110 +154,29 @@ gedit_animated_overlay_new (GtkWidget *main_widget,
 	                     NULL);
 }
 
-static GeditTheatricsAnimatedWidget *
-get_animated_widget (GeditAnimatedOverlay *overlay,
-                     GtkWidget            *widget)
-{
-	GeditTheatricsAnimatedWidget *anim_widget = NULL;
-	GtkWidget *main_widget;
-	GList *children, *l;
-
-	children = gtk_container_get_children (GTK_CONTAINER (overlay));
-	g_object_get (G_OBJECT (overlay), "main-widget", &main_widget, NULL);
-
-	for (l = children; l != NULL; l = g_list_next (l))
-	{
-		GtkWidget *child = GTK_WIDGET (l->data);
-
-		/* skip the main widget as it is not a OverlayChild */
-		if (child == main_widget)
-			continue;
-
-		if (child == widget)
-		{
-			anim_widget = GEDIT_THEATRICS_ANIMATED_WIDGET (child);
-			break;
-		}
-		else
-		{
-			GtkWidget *in_widget;
-
-			/* let's try also with the internal widget */
-			g_object_get (child, "widget", &in_widget, NULL);
-			g_assert (in_widget != NULL);
-
-			if (in_widget == widget)
-			{
-				anim_widget = GEDIT_THEATRICS_ANIMATED_WIDGET (child);
-				g_object_unref (in_widget);
-
-				break;
-			}
-
-			g_object_unref (in_widget);
-		}
-	}
-
-	g_object_unref (main_widget);
-	g_list_free (children);
-
-	return anim_widget;
-}
-
-/**
- * gedit_animated_overlay_slide:
- * @overlay: a #GeditAnimatedOverlay
- * @widget: a #GtkWidget to add to @overlay
- * @position: a #GeditOverlayChildPosition
- * @offset: offset for @widget
- * @duration: the duration of the animation
- * @easing: a #GeditTheatricsChoreographerEasing
- * @blocking: a #GeditTheatricsChoreographerBlocking
- * @orientation: the orientation of the animation
- * @in: if %TRUE slide in if %FALSE slide out
- *
- * Adds @widget in @overlay with a slide in/out animation depending on @in.
- */
 void
-gedit_animated_overlay_slide (GeditAnimatedOverlay               *overlay,
-                              GtkWidget                          *widget,
-                              GeditOverlayChildPosition           position,
-                              guint                               offset,
-                              guint                               duration,
-                              GeditTheatricsChoreographerEasing   easing,
-                              GeditTheatricsChoreographerBlocking blocking,
-                              GtkOrientation                      orientation,
-                              gboolean                            in)
+gedit_animated_overlay_add (GeditAnimatedOverlay     *overlay,
+                            GeditAnimatable          *animatable,
+                            GeditOverlayChildPosition position,
+                            guint                     offset)
 {
-	GeditTheatricsAnimatedWidget *anim_widget;
+	guint duration;
 
-	anim_widget = get_animated_widget (overlay, widget);
+	g_return_if_fail (GEDIT_IS_OVERLAY (overlay));
+	g_return_if_fail (GEDIT_IS_ANIMATABLE (animatable));
 
-	if (anim_widget == NULL)
-	{
-		anim_widget = gedit_theatrics_animated_widget_new (widget, duration,
-		                                                   easing,
-		                                                   blocking,
-		                                                   orientation);
-		gtk_widget_show (GTK_WIDGET (anim_widget));
+	gedit_overlay_add (GEDIT_OVERLAY (overlay),
+	                   GTK_WIDGET (animatable),
+	                   position, offset);
 
-		gedit_overlay_add (GEDIT_OVERLAY (overlay),
-		                   GTK_WIDGET (anim_widget),
-		                   position, offset);
-	}
-	else
-	{
-		/* we are only interested in the easing and the blocking */
-		gedit_theatrics_animated_widget_set_easing (anim_widget, easing);
-		gedit_theatrics_animated_widget_set_blocking (anim_widget, blocking);
-	}
-
-	if (!in)
-	{
-		gedit_theatrics_animated_widget_set_animation_state (anim_widget, GEDIT_THEATRICS_ANIMATION_STATE_GOING);
-	}
+	g_object_get (G_OBJECT (animatable), "duration", &duration, NULL);
 
 	gedit_theatrics_stage_add_with_duration (overlay->priv->stage,
-	                                         G_OBJECT (anim_widget),
+	                                         G_OBJECT (animatable),
 	                                         duration);
+
+	g_signal_connect (animatable,
+	                  "notify::animation-state",
+	                  G_CALLBACK (on_animation_state_changed)
+	                  overlay);
 }

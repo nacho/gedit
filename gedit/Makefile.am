@@ -101,6 +101,7 @@ BUILT_SOURCES = 			\
 	gedit-marshal.h
 
 NOINST_H_FILES =			\
+	gedit-animatable.h		\|
 	gedit-animated-overlay.h	\
 	gedit-close-button.h		\
 	gedit-command-line.h		\
@@ -112,6 +113,7 @@ NOINST_H_FILES =			\
 	gedit-document-saver.h		\
 	gedit-documents-panel.h		\
 	gedit-file-chooser-dialog.h	\
+	gedit-floating-slider.h		\
 	gedit-history-entry.h		\
 	gedit-io-error-info-bar.h	\
 	gedit-language-manager.h	\
@@ -169,6 +171,7 @@ libgedit_private_la_SOURCES =		\
 	gedit-window-activatable.c
 
 libgedit_c_files =			\
+	gedit-animatable.c		\
 	gedit-animated-overlay.c	\
 	gedit-app.c			\
 	gedit-close-button.c		\
@@ -192,6 +195,7 @@ libgedit_c_files =			\
 	gedit-encodings.c		\
 	gedit-encodings-combo-box.c	\
 	gedit-file-chooser-dialog.c	\
+	gedit-floating-slider.c		\
 	gedit-history-entry.c		\
 	gedit-io-error-info-bar.c	\
 	gedit-language-manager.c	\

@@ -18,8 +18,6 @@ BUILT_SOURCES =					\
 libtheatrics_la_SOURCES =				\
 	gedit-theatrics-actor.h				\
 	gedit-theatrics-actor.c				\
-	gedit-theatrics-animated-widget.h		\
-	gedit-theatrics-animated-widget.c		\
 	gedit-theatrics-choreographer.h			\
 	gedit-theatrics-choreographer.c			\
 	gedit-theatrics-stage.h				\
