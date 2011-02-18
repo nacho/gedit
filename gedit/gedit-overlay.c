@@ -304,6 +304,9 @@ overlay_add (GtkContainer *overlay,
 		{
 			child = gedit_overlay_child_new (widget);
 			gtk_widget_show (GTK_WIDGET (child));
+
+			g_signal_connect_swapped (widget, "destroy",
+			                          G_CALLBACK (gtk_widget_destroy), child);
 		}
 
 		add_toplevel_widget (GEDIT_OVERLAY (overlay), GTK_WIDGET (child));
