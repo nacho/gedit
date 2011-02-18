@@ -41,7 +41,8 @@
 enum {
 	PROP_0,
 	PROP_HISTORY_ID,
-	PROP_HISTORY_LENGTH
+	PROP_HISTORY_LENGTH,
+	PROP_ENABLE_COMPLETION
 };
 
 #define MIN_ITEM_LEN 3
@@ -85,6 +86,10 @@ gedit_history_entry_set_property (GObject      *object,
 			gedit_history_entry_set_history_length (entry,
 								g_value_get_uint (value));
 			break;
+		case PROP_ENABLE_COMPLETION:
+			gedit_history_entry_set_enable_completion (entry,
+			                                           g_value_get_boolean (value));
+			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
 	}
@@ -109,6 +114,9 @@ gedit_history_entry_get_property (GObject    *object,
 			break;
 		case PROP_HISTORY_LENGTH:
 			g_value_set_uint (value, priv->history_length);
+			break;
+		case PROP_ENABLE_COMPLETION:
+			g_value_set_boolean (value, gedit_history_entry_get_enable_completion (GEDIT_HISTORY_ENTRY (object)));
 			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
@@ -147,6 +155,41 @@ gedit_history_entry_finalize (GObject *object)
 }
 
 static void
+gedit_history_entry_load_history (GeditHistoryEntry *entry)
+{
+	gchar **items;
+	gsize i;
+
+	items = g_settings_get_strv (entry->priv->settings,
+				     entry->priv->history_id);
+	i = 0;
+
+	gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (entry));
+
+	/* Now the default value is an empty string so we have to take care
+	   of it to not add the empty string in the search list */
+	while (items[i] != NULL && *items[i] != '\0' &&
+	       i < entry->priv->history_length)
+	{
+		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (entry), items[i]);
+		i++;
+	}
+
+	g_strfreev (items);
+}
+
+static void
+gedit_history_entry_constructed (GObject *object)
+{
+	/* We must load the history after the object has been constructed,
+	 * to ensure that the model is set properly.
+	 */
+	gedit_history_entry_load_history (GEDIT_HISTORY_ENTRY (object));
+
+	G_OBJECT_CLASS (gedit_history_entry_parent_class)->constructed (object);
+}
+
+static void
 gedit_history_entry_class_init (GeditHistoryEntryClass *klass)
 {
 	GObjectClass   *object_class = G_OBJECT_CLASS (klass);
@@ -155,6 +198,7 @@ gedit_history_entry_class_init (GeditHistoryEntryClass *klass)
 	object_class->get_property = gedit_history_entry_get_property;
 	object_class->dispose = gedit_history_entry_dispose;
 	object_class->finalize = gedit_history_entry_finalize;
+	object_class->constructed = gedit_history_entry_constructed;
 
 	g_object_class_install_property (object_class,
 					 PROP_HISTORY_ID,
@@ -163,6 +207,7 @@ gedit_history_entry_class_init (GeditHistoryEntryClass *klass)
 							      "History ID",
 							      NULL,
 							      G_PARAM_READWRITE |
+							      G_PARAM_CONSTRUCT_ONLY |
 							      G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class,
@@ -176,7 +221,14 @@ gedit_history_entry_class_init (GeditHistoryEntryClass *klass)
 							    G_PARAM_READWRITE |
 							    G_PARAM_STATIC_STRINGS));
 
-	/* TODO: Add enable-completion property */
+	g_object_class_install_property (object_class,
+	                                 PROP_ENABLE_COMPLETION,
+	                                 g_param_spec_boolean ("enable-completion",
+	                                                       "Enable Completion",
+	                                                       "Wether the completion is enabled",
+	                                                       TRUE,
+	                                                       G_PARAM_READWRITE |
+	                                                       G_PARAM_STATIC_STRINGS));
 
 	g_type_class_add_private (object_class, sizeof (GeditHistoryEntryPrivate));
 }
@@ -360,32 +412,6 @@ gedit_history_entry_append_text (GeditHistoryEntry *entry,
 	insert_history_item (entry, text, FALSE);
 }
 
-static void
-gedit_history_entry_load_history (GeditHistoryEntry *entry)
-{
-	gchar **items;
-	gsize i;
-
-	g_return_if_fail (GEDIT_IS_HISTORY_ENTRY (entry));
-
-	items = g_settings_get_strv (entry->priv->settings,
-				     entry->priv->history_id);
-	i = 0;
-
-	gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (entry));
-
-	/* Now the default value is an empty string so we have to take care
-	   of it to not add the empty string in the search list */
-	while (items[i] != NULL && *items[i] != '\0' &&
-	       i < entry->priv->history_length)
-	{
-		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (entry), items[i]);
-		i++;
-	}
-
-	g_strfreev (items);
-}
-
 void
 gedit_history_entry_clear (GeditHistoryEntry *entry)
 {
@@ -486,34 +512,17 @@ GtkWidget *
 gedit_history_entry_new (const gchar *history_id,
 			 gboolean     enable_completion)
 {
-	GtkWidget *ret;
-
 	g_return_val_if_fail (history_id != NULL, NULL);
 
-	ret = g_object_new (GEDIT_TYPE_HISTORY_ENTRY,
-			    "has-entry", TRUE,
-			    "entry-text-column", 0,
-	                    "id-column", 1,
-			    "history-id", history_id,
-			    NULL);
+	enable_completion = (enable_completion != FALSE);
 
-	/* loading has to happen after the model
-	 * has been set. However the model is not a
-	 * G_PARAM_CONSTRUCT property of GtkComboBox
-	 * so we cannot do this in the constructor.
-	 * For now we simply do here since this widget is
-	 * not bound to other programming languages.
-	 * A maybe better alternative is to override the
-	 * model property of combobox and mark CONTRUCT_ONLY.
-	 * This would also ensure that the model cannot be
-	 * set explicitely at a later time.
-	 */
-	gedit_history_entry_load_history (GEDIT_HISTORY_ENTRY (ret));
-
-	gedit_history_entry_set_enable_completion (GEDIT_HISTORY_ENTRY (ret),
-						   enable_completion);
-
-	return ret;
+	return g_object_new (GEDIT_TYPE_HISTORY_ENTRY,
+	                     "has-entry", TRUE,
+	                     "entry-text-column", 0,
+	                     "id-column", 1,
+	                     "history-id", history_id,
+	                     "enable-completion", enable_completion,
+	                     NULL);
 }
 
 /*
