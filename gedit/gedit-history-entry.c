@@ -62,7 +62,7 @@ struct _GeditHistoryEntryPrivate
 	GSettings          *settings;
 };
 
-G_DEFINE_TYPE(GeditHistoryEntry, gedit_history_entry, GTK_TYPE_COMBO_BOX)
+G_DEFINE_TYPE(GeditHistoryEntry, gedit_history_entry, GTK_TYPE_COMBO_BOX_TEXT)
 
 static void
 gedit_history_entry_set_property (GObject      *object,
@@ -118,8 +118,18 @@ gedit_history_entry_get_property (GObject    *object,
 static void
 gedit_history_entry_dispose (GObject *object)
 {
+	GeditHistoryEntryPrivate *priv;
+
+	priv = GEDIT_HISTORY_ENTRY (object)->priv;
+
 	gedit_history_entry_set_enable_completion (GEDIT_HISTORY_ENTRY (object),
 						   FALSE);
+
+	if (priv->settings != NULL)
+	{
+		g_object_unref (G_OBJECT (priv->settings));
+		priv->settings = NULL;
+	}
 
 	G_OBJECT_CLASS (gedit_history_entry_parent_class)->dispose (object);
 }
@@ -132,12 +142,6 @@ gedit_history_entry_finalize (GObject *object)
 	priv = GEDIT_HISTORY_ENTRY (object)->priv;
 
 	g_free (priv->history_id);
-
-	if (priv->settings != NULL)
-	{
-		g_object_unref (G_OBJECT (priv->settings));
-		priv->settings = NULL;
-	}
 
 	G_OBJECT_CLASS (gedit_history_entry_parent_class)->finalize (object);
 }
@@ -196,8 +200,10 @@ get_history_items (GeditHistoryEntry *entry)
 	GPtrArray *array;
 	gboolean valid;
 	gint n_children;
+	gint text_column;
 
 	store = get_history_store (entry);
+	text_column = gtk_combo_box_get_entry_text_column (GTK_COMBO_BOX (entry));
 
 	valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store),
 					       &iter);
@@ -212,7 +218,7 @@ get_history_items (GeditHistoryEntry *entry)
 
 		gtk_tree_model_get (GTK_TREE_MODEL (store),
 				    &iter,
-				    0, &str,
+				    text_column, &str,
 				    -1);
 
 		g_ptr_array_add (array, str);
@@ -243,12 +249,17 @@ gedit_history_entry_save_history (GeditHistoryEntry *entry)
 }
 
 static gboolean
-remove_item (GtkListStore *store,
-	     const gchar  *text)
+remove_item (GeditHistoryEntry *entry,
+	     const gchar       *text)
 {
+	GtkListStore *store;
 	GtkTreeIter iter;
+	gint text_column;
 
 	g_return_val_if_fail (text != NULL, FALSE);
+
+	store = get_history_store (entry);
+	text_column = gtk_combo_box_get_entry_text_column (GTK_COMBO_BOX (entry));
 
 	if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter))
 		return FALSE;
@@ -259,7 +270,7 @@ remove_item (GtkListStore *store,
 
 		gtk_tree_model_get (GTK_TREE_MODEL (store),
 				    &iter,
-				    0,
+				    text_column,
 				    &item_text,
 				    -1);
 
@@ -306,7 +317,6 @@ insert_history_item (GeditHistoryEntry *entry,
 		     gboolean           prepend)
 {
 	GtkListStore *store;
-	GtkTreeIter iter;
 
 	if (g_utf8_strlen (text, -1) <= MIN_ITEM_LEN)
 		return;
@@ -318,20 +328,14 @@ insert_history_item (GeditHistoryEntry *entry,
 	 * before inserting the new row, otherwise appending
 	 * would not work */
 
-	if (!remove_item (store, text))
+	if (!remove_item (entry, text))
 		clamp_list_store (store,
 				  entry->priv->history_length - 1);
 
 	if (prepend)
-		gtk_list_store_insert (store, &iter, 0);
+		gtk_combo_box_text_prepend_text (GTK_COMBO_BOX_TEXT (entry), text);
 	else
-		gtk_list_store_append (store, &iter);
-
-	gtk_list_store_set (store,
-			    &iter,
-			    0,
-			    text,
-			    -1);
+		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (entry), text);
 
 	gedit_history_entry_save_history (entry);
 }
@@ -360,31 +364,22 @@ static void
 gedit_history_entry_load_history (GeditHistoryEntry *entry)
 {
 	gchar **items;
-	GtkListStore *store;
-	GtkTreeIter iter;
 	gsize i;
 
 	g_return_if_fail (GEDIT_IS_HISTORY_ENTRY (entry));
-
-	store = get_history_store (entry);
 
 	items = g_settings_get_strv (entry->priv->settings,
 				     entry->priv->history_id);
 	i = 0;
 
-	gtk_list_store_clear (store);
+	gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (entry));
 
 	/* Now the default value is an empty string so we have to take care
 	   of it to not add the empty string in the search list */
 	while (items[i] != NULL && *items[i] != '\0' &&
 	       i < entry->priv->history_length)
 	{
-		gtk_list_store_append (store, &iter);
-		gtk_list_store_set (store,
-				    &iter,
-				    0,
-				    items[i],
-				    -1);
+		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (entry), items[i]);
 		i++;
 	}
 
@@ -394,12 +389,9 @@ gedit_history_entry_load_history (GeditHistoryEntry *entry)
 void
 gedit_history_entry_clear (GeditHistoryEntry *entry)
 {
-	GtkListStore *store;
-
 	g_return_if_fail (GEDIT_IS_HISTORY_ENTRY (entry));
 
-	store = get_history_store (entry);
-	gtk_list_store_clear (store);
+	gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (entry));
 
 	gedit_history_entry_save_history (entry);
 }
@@ -438,14 +430,6 @@ gedit_history_entry_get_history_length (GeditHistoryEntry *entry)
 	g_return_val_if_fail (GEDIT_IS_HISTORY_ENTRY (entry), 0);
 
 	return entry->priv->history_length;
-}
-
-gchar *
-gedit_history_entry_get_history_id (GeditHistoryEntry *entry)
-{
-	g_return_val_if_fail (GEDIT_IS_HISTORY_ENTRY (entry), NULL);
-
-	return g_strdup (entry->priv->history_id);
 }
 
 void
@@ -503,26 +487,15 @@ gedit_history_entry_new (const gchar *history_id,
 			 gboolean     enable_completion)
 {
 	GtkWidget *ret;
-	GtkListStore *store;
 
 	g_return_val_if_fail (history_id != NULL, NULL);
 
-	/* Note that we are setting the model, so
-	 * user must be careful to always manipulate
-	 * data in the history through gedit_history_entry_
-	 * functions.
-	 */
-
-	store = gtk_list_store_new (1, G_TYPE_STRING);
-
 	ret = g_object_new (GEDIT_TYPE_HISTORY_ENTRY,
 			    "has-entry", TRUE,
+			    "entry-text-column", 0,
+	                    "id-column", 1,
 			    "history-id", history_id,
-			    "model", store,
-			    "id-column", 0,
 			    NULL);
-
-	g_object_unref (store);
 
 	/* loading has to happen after the model
 	 * has been set. However the model is not a

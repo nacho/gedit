@@ -48,12 +48,12 @@ typedef struct _GeditHistoryEntryPrivate GeditHistoryEntryPrivate;
 
 struct _GeditHistoryEntryClass
 {
-	GtkComboBoxClass parent_class;
+	GtkComboBoxTextClass parent_class;
 };
 
 struct _GeditHistoryEntry
 {
-	GtkComboBox parent_instance;
+	GtkComboBoxText parent_instance;
 
 	GeditHistoryEntryPrivate *priv;
 };
@@ -75,8 +75,6 @@ void		 gedit_history_entry_set_history_length	(GeditHistoryEntry *entry,
 							 guint              max_saved);
 
 guint		 gedit_history_entry_get_history_length	(GeditHistoryEntry *gentry);
-
-gchar		*gedit_history_entry_get_history_id	(GeditHistoryEntry *entry);
 
 void             gedit_history_entry_set_enable_completion 
 							(GeditHistoryEntry *entry,
