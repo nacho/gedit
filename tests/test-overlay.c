@@ -2,22 +2,17 @@
 #include <glib.h>
 #include "gedit-animated-overlay.h"
 #include "gedit-rounded-frame.h"
+#include "gedit-floating-slider.h"
 
 static GtkWidget *overlay;
 
 static void
 on_button_clicked (GtkWidget *button,
-                   GtkWidget *frame)
+                   GtkWidget *slider)
 {
-	gedit_animated_overlay_slide (GEDIT_ANIMATED_OVERLAY (overlay),
-	                              frame,
-	                              GEDIT_OVERLAY_CHILD_POSITION_STATIC,
-	                              0,
-	                              1000,
-	                              GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
-	                              GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
-	                              GTK_ORIENTATION_VERTICAL,
-	                              FALSE);
+	g_object_set (G_OBJECT (slider),
+	              "animation-state", GEDIT_THEATRICS_ANIMATION_STATE_INTENDING_TO_GO,
+	              NULL);
 }
 
 gint
@@ -29,6 +24,7 @@ main ()
 	GtkWidget *entry;
 	GtkWidget *vbox;
 	GtkWidget *button;
+	GtkWidget *slider;
 
 	gtk_init (NULL, NULL);
 
@@ -49,21 +45,28 @@ main ()
 
 	gtk_container_add (GTK_CONTAINER (frame), entry);
 
-	gedit_animated_overlay_slide (GEDIT_ANIMATED_OVERLAY (overlay),
-	                              frame,
-	                              GEDIT_OVERLAY_CHILD_POSITION_STATIC,
-	                              0,
-	                              1000,
-	                              GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
-	                              GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
-	                              GTK_ORIENTATION_VERTICAL,
-	                              TRUE);
+	slider = gedit_floating_slider_new (frame);
+
+	g_object_set (G_OBJECT (slider),
+	              "duration", 1000,
+	              "easing", GEDIT_THEATRICS_CHOREOGRAPHER_EASING_EXPONENTIAL_IN_OUT,
+	              "blocking", GEDIT_THEATRICS_CHOREOGRAPHER_BLOCKING_DOWNSTAGE,
+	              "orientation", GTK_ORIENTATION_VERTICAL,
+	              NULL);
+
+	gedit_animated_overlay_add (GEDIT_ANIMATED_OVERLAY (overlay),
+	                            GEDIT_ANIMATABLE (slider));
+
+	/* set the animation state after it is added the widget */
+	g_object_set (G_OBJECT (slider),
+	              "animation-state", GEDIT_THEATRICS_ANIMATION_STATE_COMING,
+	              NULL);
 
 	button = gtk_button_new_with_label ("Hide");
 	gtk_box_pack_end (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 	g_signal_connect (button, "clicked",
 	                  G_CALLBACK (on_button_clicked),
-	                  frame);
+	                  slider);
 
 	gtk_widget_show_all (window);
 
