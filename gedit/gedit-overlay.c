@@ -230,6 +230,10 @@ gedit_overlay_size_allocate (GtkWidget     *widget,
 				alloc.x = offset;
 				alloc.y = main_alloc.height - req.height;
 				break;
+			case GEDIT_OVERLAY_CHILD_POSITION_SOUTH_EAST:
+				alloc.x = main_alloc.width - req.width - offset;
+				alloc.y = main_alloc.height - req.height;
+				break;
 			default:
 				alloc.x = 0;
 				alloc.y = 0;
