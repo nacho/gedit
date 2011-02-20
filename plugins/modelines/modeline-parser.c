@@ -846,6 +846,7 @@ modeline_parser_apply_modeline (GtkSourceView *view)
 	
 	if (previous)
 	{
+		g_free (previous->language_id);
 		*previous = options;
 		previous->language_id = g_strdup (options.language_id);
 	}
