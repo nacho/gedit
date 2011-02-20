@@ -36,8 +36,9 @@ G_BEGIN_DECLS
 #define GEDIT_STATUS_COMBO_BOX_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GEDIT_TYPE_STATUS_COMBO_BOX, GeditStatusComboBoxClass))
 
 typedef struct _GeditStatusComboBox		GeditStatusComboBox;
-typedef struct _GeditStatusComboBoxClass	GeditStatusComboBoxClass;
 typedef struct _GeditStatusComboBoxPrivate	GeditStatusComboBoxPrivate;
+typedef struct _GeditStatusComboBoxClass	GeditStatusComboBoxClass;
+typedef struct _GeditStatusComboBoxClassPrivate	GeditStatusComboBoxClassPrivate;
 
 struct _GeditStatusComboBox
 {
@@ -49,6 +50,8 @@ struct _GeditStatusComboBox
 struct _GeditStatusComboBoxClass
 {
 	GtkEventBoxClass parent_class;
+
+	GeditStatusComboBoxClassPrivate *priv;
 	
 	void (*changed) (GeditStatusComboBox *combo,
 			 GtkMenuItem         *item);

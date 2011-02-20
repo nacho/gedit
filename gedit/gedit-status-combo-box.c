@@ -41,6 +41,11 @@ struct _GeditStatusComboBoxPrivate
 	GtkWidget *current_item;
 };
 
+struct _GeditStatusComboBoxClassPrivate
+{
+	GtkCssProvider *css;
+};
+
 /* Signals */
 enum
 {
@@ -58,7 +63,8 @@ enum
 
 static guint signals[NUM_SIGNALS] = { 0 };
 
-G_DEFINE_TYPE(GeditStatusComboBox, gedit_status_combo_box, GTK_TYPE_EVENT_BOX)
+G_DEFINE_TYPE_WITH_CODE (GeditStatusComboBox, gedit_status_combo_box, GTK_TYPE_EVENT_BOX,
+                         g_type_add_class_private (g_define_type_id, sizeof (GeditStatusComboBoxClassPrivate)))
 
 static void
 gedit_status_combo_box_finalize (GObject *object)
@@ -123,6 +129,15 @@ static void
 gedit_status_combo_box_class_init (GeditStatusComboBoxClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	static const gchar style[] =
+		"* {\n"
+		  "-GtkButton-default-border : 0;\n"
+		  "-GtkButton-default-outside-border : 0;\n"
+		  "-GtkButton-inner-border: 0;\n"
+		  "-GtkWidget-focus-line-width : 0;\n"
+		  "-GtkWidget-focus-padding : 0;\n"
+		  "padding: 0;\n"
+		"}";
 	
 	object_class->finalize = gedit_status_combo_box_finalize;
 	object_class->get_property = gedit_status_combo_box_get_property;
@@ -147,6 +162,11 @@ gedit_status_combo_box_class_init (GeditStatusComboBoxClass *klass)
 					 		      G_PARAM_READWRITE));
 
 	g_type_class_add_private (object_class, sizeof (GeditStatusComboBoxPrivate));
+
+	klass->priv = G_TYPE_CLASS_GET_PRIVATE (klass, GEDIT_TYPE_STATUS_COMBO_BOX, GeditStatusComboBoxClassPrivate);
+
+	klass->priv->css = gtk_css_provider_new ();
+	gtk_css_provider_load_from_data (klass->priv->css, style, -1, NULL);
 }
 
 static void
@@ -275,17 +295,6 @@ static void
 gedit_status_combo_box_init (GeditStatusComboBox *self)
 {
 	GtkStyleContext *context;
-	GtkCssProvider *css;
-	GError *error = NULL;
-	const gchar style[] =
-		"* {\n"
-		"	-GtkButton-default-border : 0;\n"
-		"	-GtkButton-default-outside-border : 0;\n"
-		"	-GtkButton-inner-border: 0;\n"
-		"	-GtkWidget-focus-line-width: 0;\n"
-		"	-GtkWidget-focus-padding: 0;\n"
-		"	padding: 0;\n"
-		"}\n";
 
 	self->priv = GEDIT_STATUS_COMBO_BOX_GET_PRIVATE (self);
 
@@ -346,23 +355,14 @@ gedit_status_combo_box_init (GeditStatusComboBox *self)
 			  self);
 
 	/* make it as small as possible */
-	css = gtk_css_provider_new ();
-	if (gtk_css_provider_load_from_data (css, style, -1, &error))
-	{
-		context = gtk_widget_get_style_context (GTK_WIDGET (self->priv->button));
-		gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
-		                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-		context = gtk_widget_get_style_context (GTK_WIDGET (self->priv->frame));
-		gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
-		                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-	}
-	else
-	{
-		g_warning ("%s", error->message);
-		g_error_free (error);
-	}
-
-	g_object_unref (css);
+	context = gtk_widget_get_style_context (GTK_WIDGET (self->priv->button));
+	gtk_style_context_add_provider (context,
+	                                GTK_STYLE_PROVIDER (GEDIT_STATUS_COMBO_BOX_GET_CLASS (self)->priv->css),
+	                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+	context = gtk_widget_get_style_context (GTK_WIDGET (self->priv->frame));
+	gtk_style_context_add_provider (context,
+	                                GTK_STYLE_PROVIDER (GEDIT_STATUS_COMBO_BOX_GET_CLASS (self)->priv->css),
+	                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 /* public functions */
