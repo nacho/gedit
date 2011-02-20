@@ -35,9 +35,9 @@ G_BEGIN_DECLS
 #define GEDIT_IS_CLOSE_BUTTON_CLASS(klass)	(G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_CLOSE_BUTTON))
 #define GEDIT_CLOSE_BUTTON_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS ((obj), GEDIT_TYPE_CLOSE_BUTTON, GeditCloseButtonClass))
 
-typedef struct _GeditCloseButton	GeditCloseButton;
-typedef struct _GeditCloseButtonClass	GeditCloseButtonClass;
-typedef struct _GeditCloseButtonPrivate	GeditCloseButtonPrivate;
+typedef struct _GeditCloseButton		GeditCloseButton;
+typedef struct _GeditCloseButtonClass		GeditCloseButtonClass;
+typedef struct _GeditCloseButtonClassPrivate	GeditCloseButtonClassPrivate;
 
 struct _GeditCloseButton
 {
@@ -47,6 +47,8 @@ struct _GeditCloseButton
 struct _GeditCloseButtonClass
 {
 	GtkButtonClass parent_class;
+
+	GeditCloseButtonClassPrivate *priv;
 };
 
 GType		  gedit_close_button_get_type (void) G_GNUC_CONST;

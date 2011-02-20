@@ -3,6 +3,7 @@
  * This file is part of gedit
  *
  * Copyright (C) 2010 - Paolo Borelli
+ * Copyright (C) 2011 - Ignacio Casal Quinteiro
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,28 +23,38 @@
 
 #include "gedit-close-button.h"
 
-G_DEFINE_TYPE (GeditCloseButton, gedit_close_button, GTK_TYPE_BUTTON)
+struct _GeditCloseButtonClassPrivate
+{
+	GtkCssProvider *css;
+};
+
+G_DEFINE_TYPE_WITH_CODE (GeditCloseButton, gedit_close_button, GTK_TYPE_BUTTON,
+                         g_type_add_class_private (g_define_type_id, sizeof (GeditCloseButtonClassPrivate)))
 
 static void
 gedit_close_button_class_init (GeditCloseButtonClass *klass)
 {
+	static const gchar button_style[] =
+		"* {\n"
+		  "-GtkButton-default-border : 0;\n"
+		  "-GtkButton-default-outside-border : 0;\n"
+		  "-GtkButton-inner-border: 0;\n"
+		  "-GtkWidget-focus-line-width : 0;\n"
+		  "-GtkWidget-focus-padding : 0;\n"
+		  "padding: 0;\n"
+		"}";
+
+	klass->priv = G_TYPE_CLASS_GET_PRIVATE (klass, GEDIT_TYPE_CLOSE_BUTTON, GeditCloseButtonClassPrivate);
+
+	klass->priv->css = gtk_css_provider_new ();
+	gtk_css_provider_load_from_data (klass->priv->css, button_style, -1, NULL);
 }
 
 static void
 gedit_close_button_init (GeditCloseButton *button)
 {
+	GtkStyleContext *context;
 	GtkWidget *image;
-	GtkCssProvider *css;
-	GError *error = NULL;
-	const gchar button_style[] =
-		"* {\n"
-		"	-GtkButton-default-border : 0;\n"
-		"	-GtkButton-default-outside-border : 0;\n"
-		"	-GtkButton-inner-border: 0;\n"
-		"	-GtkWidget-focus-line-width : 0;\n"
-		"	-GtkWidget-focus-padding : 0;\n"
-		"	padding: 0;\n"
-		"}";
 
 	image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
 	                                  GTK_ICON_SIZE_MENU);
@@ -51,24 +62,11 @@ gedit_close_button_init (GeditCloseButton *button)
 
 	gtk_container_add (GTK_CONTAINER (button), image);
 
-	/* make it as small as possible */
-	css = gtk_css_provider_new ();
-	if (gtk_css_provider_load_from_data (css, button_style,
-	                                     -1, &error))
-	{
-		GtkStyleContext *context;
-
-		context = gtk_widget_get_style_context (GTK_WIDGET (button));
-		gtk_style_context_add_provider (context, GTK_STYLE_PROVIDER (css),
-			                        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-	}
-	else
-	{
-		g_warning ("%s", error->message);
-		g_error_free (error);
-	}
-
-	g_object_unref (css);
+	/* make it small */
+	context = gtk_widget_get_style_context (GTK_WIDGET (button));
+	gtk_style_context_add_provider (context,
+	                                GTK_STYLE_PROVIDER (GEDIT_CLOSE_BUTTON_GET_CLASS (button)->priv->css),
+		                        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 GtkWidget *
