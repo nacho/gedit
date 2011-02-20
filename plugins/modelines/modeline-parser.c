@@ -790,7 +790,7 @@ modeline_parser_apply_modeline (GtkSourceView *view)
 	{
 		guint tab_width;
 		
-		g_settings_get (settings, "u", GEDIT_SETTINGS_TABS_SIZE, &tab_width);
+		g_settings_get (settings, GEDIT_SETTINGS_TABS_SIZE, "u", &tab_width);
 	
 		gtk_source_view_set_tab_width (view, tab_width);
 	}
@@ -825,7 +825,7 @@ modeline_parser_apply_modeline (GtkSourceView *view)
 	{
 		guint right_margin_pos;
 		
-		g_settings_get (settings, "u", GEDIT_SETTINGS_RIGHT_MARGIN_POSITION,
+		g_settings_get (settings, GEDIT_SETTINGS_RIGHT_MARGIN_POSITION, "u",
 				&right_margin_pos);
 		gtk_source_view_set_right_margin_position (view, 
 		                                           right_margin_pos);
