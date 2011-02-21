@@ -74,6 +74,7 @@ struct _GeditViewFramePrivate
 	guint        typeselect_flush_timeout;
 	glong        view_scroll_event_id;
 	glong        search_entry_focus_out_id;
+	glong        search_entry_changed_id;
 
 	guint        disable_popdown : 1;
 	guint        wrap_around : 1;
@@ -1087,9 +1088,10 @@ create_search_widget (GeditViewFrame *frame)
 	g_signal_connect (frame->priv->search_entry, "insert_text",
 	                  G_CALLBACK (search_entry_insert_text),
 	                  frame);
-	g_signal_connect (frame->priv->search_entry, "changed",
-	                  G_CALLBACK (search_init),
-	                  frame);
+	frame->priv->search_entry_changed_id =
+		g_signal_connect (frame->priv->search_entry, "changed",
+		                  G_CALLBACK (search_init),
+		                  frame);
 	frame->priv->search_entry_focus_out_id =
 		g_signal_connect (frame->priv->search_entry, "focus-out-event",
 		                  G_CALLBACK (search_entry_focus_out_event),
@@ -1225,6 +1227,19 @@ init_search_entry (GeditViewFrame *frame)
 		{
 			frame->priv->old_search_text = old_find_text;
 			add_search_completion_entry (old_find_text);
+			g_signal_handler_block (frame->priv->search_entry,
+			                        frame->priv->search_entry_changed_id);
+
+			gtk_entry_set_text (GTK_ENTRY (frame->priv->search_entry),
+			                    old_find_text);
+
+			g_signal_handler_unblock (frame->priv->search_entry,
+			                          frame->priv->search_entry_changed_id);
+		}
+		else
+		{
+			gtk_entry_set_text (GTK_ENTRY (frame->priv->search_entry),
+			                    "");
 		}
 
 		if (old_find_flags != 0)
@@ -1240,11 +1255,6 @@ init_search_entry (GeditViewFrame *frame)
 		{
 			gtk_entry_set_text (GTK_ENTRY (frame->priv->search_entry),
 			                    find_text);
-		}
-		else
-		{
-			gtk_entry_set_text (GTK_ENTRY (frame->priv->search_entry),
-			                    "");
 		}
 
 		g_free (find_text);
