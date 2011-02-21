@@ -101,7 +101,7 @@ BUILT_SOURCES = 			\
 	gedit-marshal.h
 
 NOINST_H_FILES =			\
-	gedit-animatable.h		\|
+	gedit-animatable.h		\
 	gedit-animated-overlay.h	\
 	gedit-close-button.h		\
 	gedit-command-line.h		\
