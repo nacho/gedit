@@ -261,9 +261,21 @@ gedit_view_init (GeditView *view)
 static void
 gedit_view_destroy (GtkWidget *widget)
 {
-	GeditView *view;
+	GeditView *view = GEDIT_VIEW (widget);
 
-	view = GEDIT_VIEW (widget);
+	/* Disconnect notify buffer because the destroy of the textview will
+	   set the buffer to NULL, and we call get_buffer in the notify which
+	   would reinstate a GtkTextBuffer which we don't want */
+	current_buffer_removed (view);
+	g_signal_handlers_disconnect_by_func (view, on_notify_buffer_cb, NULL);
+
+	GTK_WIDGET_CLASS (gedit_view_parent_class)->destroy (widget);
+}
+
+static void
+gedit_view_dispose (GObject *object)
+{
+	GeditView *view = GEDIT_VIEW (object);
 
 	if (view->priv->extensions != NULL)
 	{
@@ -273,27 +285,19 @@ gedit_view_destroy (GtkWidget *widget)
 		view->priv->extensions = NULL;
 	}
 
-	/* Disconnect notify buffer because the destroy of the textview will
-	   set the buffer to NULL, and we call get_buffer in the notify which
-	   would reinstate a GtkTextBuffer which we don't want */
-	current_buffer_removed (view);
-	g_signal_handlers_disconnect_by_func (view, on_notify_buffer_cb, NULL);
-
 	if (view->priv->editor_settings != NULL)
 	{
 		g_object_unref (view->priv->editor_settings);
 		view->priv->editor_settings = NULL;
 	}
 
-	GTK_WIDGET_CLASS (gedit_view_parent_class)->destroy (widget);
+	G_OBJECT_CLASS (gedit_view_parent_class)->dispose (object);
 }
 
 static void
 gedit_view_finalize (GObject *object)
 {
-	GeditView *view;
-
-	view = GEDIT_VIEW (object);
+	GeditView *view = GEDIT_VIEW (object);
 
 	current_buffer_removed (view);
 
@@ -778,6 +782,7 @@ gedit_view_class_init (GeditViewClass *klass)
 	GtkTextViewClass *text_view_class = GTK_TEXT_VIEW_CLASS (klass);
 	GtkBindingSet    *binding_set;
 
+	object_class->dispose = gedit_view_dispose;
 	object_class->finalize = gedit_view_finalize;
 	object_class->constructed = gedit_view_constructed;
 
