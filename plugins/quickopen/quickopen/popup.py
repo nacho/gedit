@@ -56,6 +56,8 @@ class Popup(Gtk.Dialog):
                                 self._dirs.append(path)
                                 unique.append(path.get_uri())
 
+                self.connect('show', self.on_show)
+
         def _build_ui(self):
                 vbox = self.get_content_area()
                 vbox.set_spacing(3)
@@ -327,8 +329,10 @@ class Popup(Gtk.Dialog):
 
                 self.get_window().set_cursor(None)
 
-        def do_show(self):
-                Gtk.Window.do_show(self)
+        #FIXME: override doesn't work anymore for some reason, if we override
+        # the widget is not realized
+        def on_show(self, data=None):
+                #Gtk.Window.do_show(self)
 
                 self._entry.grab_focus()
                 self._entry.set_text("")
@@ -477,14 +481,14 @@ class Popup(Gtk.Dialog):
                         Gdk.KEY_Page_Up: -5
                 }
 
-                if event.key.keyval == Gdk.KEY_Escape:
+                if event.keyval == Gdk.KEY_Escape:
                         self.destroy()
                         return True
-                elif event.key.keyval in move_mapping:
-                        return self._move_selection(move_mapping[event.key.keyval], event.state & Gdk.ModifierType.CONTROL_MASK, event.state & Gdk.ModifierType.SHIFT_MASK)
-                elif event.key.keyval in [Gdk.KEY_Return, Gdk.KEY_KP_Enter, Gdk.KEY_Tab, Gdk.KEY_ISO_Left_Tab]:
+                elif event.keyval in move_mapping:
+                        return self._move_selection(move_mapping[event.keyval], event.state & Gdk.ModifierType.CONTROL_MASK, event.state & Gdk.ModifierType.SHIFT_MASK)
+                elif event.keyval in [Gdk.KEY_Return, Gdk.KEY_KP_Enter, Gdk.KEY_Tab, Gdk.KEY_ISO_Left_Tab]:
                         return self._activate()
-                elif event.key.keyval == Gdk.KEY_space and event.state & Gtk.gdk.CONTROL_MASK:
+                elif event.keyval == Gdk.KEY_space and event.state & Gtk.gdk.CONTROL_MASK:
                         self.toggle_cursor()
 
                 return False
