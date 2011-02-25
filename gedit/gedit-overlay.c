@@ -211,7 +211,7 @@ gedit_overlay_size_allocate (GtkWidget     *widget,
 		if (child == priv->main_widget)
 			continue;
 
-		gtk_widget_get_preferred_size (child, &req, NULL);
+		gtk_widget_get_preferred_size (child, NULL, &req);
 		offset = gedit_overlay_child_get_offset (GEDIT_OVERLAY_CHILD (child));
 
 		/* FIXME: Add all the positions here */
