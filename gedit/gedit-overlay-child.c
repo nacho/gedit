@@ -23,8 +23,8 @@
 
 struct _GeditOverlayChildPrivate
 {
-	GtkWidget		 *widget;
-	GBinding		 *binding;
+	GtkWidget                *widget;
+	GBinding                 *binding;
 	GeditOverlayChildPosition position;
 	guint                     offset;
 };
@@ -53,7 +53,7 @@ gedit_overlay_child_get_property (GObject    *object,
 			g_value_set_object (value, child->priv->widget);
 			break;
 		case PROP_POSITION:
-			g_value_set_enum (value, child->priv->position);
+			g_value_set_uint (value, child->priv->position);
 			break;
 		case PROP_OFFSET:
 			g_value_set_uint (value, child->priv->offset);
@@ -79,7 +79,7 @@ gedit_overlay_child_set_property (GObject      *object,
 			                   g_value_get_object (value));
 			break;
 		case PROP_POSITION:
-			child->priv->position = g_value_get_enum (value);
+			child->priv->position = g_value_get_uint (value);
 			break;
 		case PROP_OFFSET:
 			child->priv->offset = g_value_get_uint (value);
@@ -122,7 +122,7 @@ gedit_overlay_child_get_preferred_width (GtkWidget *widget,
                                          gint      *natural)
 {
 	GeditOverlayChild *child = GEDIT_OVERLAY_CHILD (widget);
-        gint child_min = 0, child_nat = 0;
+	gint child_min = 0, child_nat = 0;
 
 	if (child->priv->widget != NULL)
 	{
@@ -131,7 +131,7 @@ gedit_overlay_child_get_preferred_width (GtkWidget *widget,
 	}
 
 	*minimum = child_min;
-        *natural = child_nat;
+	*natural = child_nat;
 }
 
 static void
@@ -140,7 +140,7 @@ gedit_overlay_child_get_preferred_height (GtkWidget *widget,
                                           gint      *natural)
 {
 	GeditOverlayChild *child = GEDIT_OVERLAY_CHILD (widget);
-        gint child_min = 0, child_nat = 0;
+	gint child_min = 0, child_nat = 0;
 
 	if (child->priv->widget != NULL)
 	{
@@ -149,7 +149,7 @@ gedit_overlay_child_get_preferred_height (GtkWidget *widget,
 	}
 
 	*minimum = child_min;
-        *natural = child_nat;
+	*natural = child_nat;
 }
 
 static void
@@ -157,12 +157,12 @@ gedit_overlay_child_size_allocate (GtkWidget     *widget,
                                    GtkAllocation *allocation)
 {
 	GeditOverlayChild *child = GEDIT_OVERLAY_CHILD (widget);
-        GtkAllocation tmp;
+	GtkAllocation tmp;
 
-        tmp.width = allocation->width;
-        tmp.height = allocation->height;
-        tmp.x = tmp.y = 0;
-        
+	tmp.width = allocation->width;
+	tmp.height = allocation->height;
+	tmp.x = tmp.y = 0;
+
 	GTK_WIDGET_CLASS (gedit_overlay_child_parent_class)->size_allocate (widget, allocation);
 
 	if (child->priv->widget != NULL)
@@ -228,10 +228,10 @@ gedit_overlay_child_class_init (GeditOverlayChildClass *klass)
 	                                                      G_PARAM_STATIC_STRINGS));
 
 	g_object_class_install_property (object_class, PROP_POSITION,
-	                                 g_param_spec_enum ("position",
+	                                 g_param_spec_uint ("position",
 	                                                    "Position",
 	                                                    "The Widget Position",
-	                                                    GEDIT_TYPE_OVERLAY_CHILD_POSITION,
+	                                                    1, GEDIT_OVERLAY_CHILD_POSITION_STATIC,
 	                                                    GEDIT_OVERLAY_CHILD_POSITION_STATIC,
 	                                                    G_PARAM_READWRITE |
 	                                                    G_PARAM_CONSTRUCT |

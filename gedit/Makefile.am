@@ -242,7 +242,6 @@ endif
 
 ENUM_TYPES = 			\
 	gedit-notebook.h	\
-	gedit-overlay-child.h	\
 	$(INST_H_FILES)
 
 gedit-enum-types.h: gedit-enum-types.h.template $(ENUM_TYPES) $(GLIB_MKENUMS)
