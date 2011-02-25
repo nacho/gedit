@@ -219,7 +219,7 @@ gedit_overlay_size_allocate (GtkWidget     *widget,
 		{
 			/* The gravity is treated as position and not as a gravity */
 			case GEDIT_OVERLAY_CHILD_POSITION_NORTH_EAST:
-				alloc.x = main_alloc.width - req.width - offset;
+				alloc.x = MAX (main_alloc.x, main_alloc.width - req.width - (gint) offset);
 				alloc.y = 0;
 				break;
 			case GEDIT_OVERLAY_CHILD_POSITION_NORTH_WEST:
@@ -228,19 +228,19 @@ gedit_overlay_size_allocate (GtkWidget     *widget,
 				break;
 			case GEDIT_OVERLAY_CHILD_POSITION_SOUTH_WEST:
 				alloc.x = offset;
-				alloc.y = main_alloc.height - req.height;
+				alloc.y = MAX (main_alloc.y, main_alloc.height - req.height);
 				break;
 			case GEDIT_OVERLAY_CHILD_POSITION_SOUTH_EAST:
-				alloc.x = main_alloc.width - req.width - offset;
-				alloc.y = main_alloc.height - req.height;
+				alloc.x = MAX (main_alloc.x, main_alloc.width - req.width - (gint) offset);
+				alloc.y = MAX (main_alloc.y, main_alloc.height - req.height);
 				break;
 			default:
 				alloc.x = 0;
 				alloc.y = 0;
 		}
 
-		alloc.width = req.width;
-		alloc.height = req.height;
+		alloc.width = MIN (main_alloc.width, req.width);
+		alloc.height = MIN (main_alloc.height, req.height);
 
 		gtk_widget_size_allocate (child, &alloc);
 	}
