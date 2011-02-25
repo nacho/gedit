@@ -402,7 +402,6 @@ gedit_overlay_class_init (GeditOverlayClass *klass)
 	                                                      "Widget on which the floating widgets are placed",
 	                                                      GTK_TYPE_WIDGET,
 	                                                      G_PARAM_READWRITE |
-	                                                      G_PARAM_CONSTRUCT_ONLY |
 	                                                      G_PARAM_STATIC_STRINGS));
 
 	g_type_class_add_private (object_class, sizeof (GeditOverlayPrivate));
