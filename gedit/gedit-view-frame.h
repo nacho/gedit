@@ -65,7 +65,7 @@ void		 gedit_view_frame_popup_search	(GeditViewFrame *frame);
 
 void		 gedit_view_frame_popup_goto_line (GeditViewFrame *frame);
 
-void		 gedit_view_frame_clear_text	(GeditViewFrame *frame);
+void		 gedit_view_frame_clear_search	(GeditViewFrame *frame);
 
 G_END_DECLS
 

@@ -671,7 +671,7 @@ _gedit_cmd_search_clear_highlight (GtkAction   *action,
 		return;
 
 	frame = GEDIT_VIEW_FRAME (_gedit_tab_get_view_frame (active_tab));
-	gedit_view_frame_clear_text (frame);
+	gedit_view_frame_clear_search (frame);
 }
 
 void
