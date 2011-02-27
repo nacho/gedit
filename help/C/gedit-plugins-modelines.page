@@ -4,14 +4,54 @@
 
 <info>
   <link type="guide" xref="gedit-plugin-guide#gedit-default-plugins"/>
-  <desc>*Emacs, Kate and Vim-style modelines support for gedit.</desc>
-  <revision pkgversion="3.0" version="0.1" date="2010-12-5" status="stub"/>
+  <revision pkgversion="3.0" version="0.5" date="2011-02-26" status="draft"/>
   <credit type="author">
     <name>Daniel Neel</name>
     <email>dneelyep@gmail.com</email>
   </credit>
+  <credit type="author">
+    <name>Jim Campbell</name>
+    <email>jwcampbell@gmail.com</email>
+  </credit>
 </info>
 
-<title>*Modelines</title>
+<title>Emacs, Kate and Vim-style modelines support for gedit.</title>
 
+<p>The <app>Modelines</app> plugin analyzes the lines of text at the start and end of a file, and then applies a set of document preferences.  The <app>Modelines</app> plugin supports a subset of the options used by the <app>Emacs</app>, <app>Kate</app> and <app>Vim</app> text editors.</p>
+
+<p>You can set the following preferences with modelines:</p>
+<list>
+<item><p>Tab width</p></item>
+<item><p>Indent width</p></item>
+<item><p>Insert spaces instead of tabs</p></item>
+<item><p>Text Wrapping</p></item>
+<item><p>Right margin width</p></item>
+</list>
+
+<note><p>Preferences set using modelines take precedence over the ones specified in the preference dialog.</p></note>
+
+<section id="modelines-emacs">
+<title>Emacs Modelines:</title>
+
+<p>The first two lines of a document are scanned for <app>Emacs</app> modelines, and <app>gedit</app> supports the following modeline options:</p>
+<list>
+<item><p>Tab-width</p></item>
+<item><p>Indent-offset</p></item>
+<item><p>Indent-tabs-mode</p></item>
+<item><p>Text auto-wrap</p></item>
+</list>
+<p>For more information on <app>Emacs</app> modelines, visit the GNU Emacs Manual.</p>
+</section>
+
+<section id="modelines-kate">
+<title>Kate Modelines:</title>
+
+<p>The first and last ten lines a document are scanned for Kate modelines.
+
+The Kate options for tab-width, indent-width, space-indent, word-wrap and word-wrap-column are supported. For more information, visit the Kate website.
+
+The first and last three lines a document are scanned for Vim modelines.
+
+The Vim options for et, expandtab, ts, tabstop, sw, shiftwidth, wrap, and textwidth are supported. For more information, visit the Vim website.</p>
+</section>
 </page>
