@@ -61,6 +61,12 @@ GeditDocument	*gedit_view_frame_get_document	(GeditViewFrame *frame);
 
 GeditView	*gedit_view_frame_get_view	(GeditViewFrame *frame);
 
+void		 gedit_view_frame_popup_search	(GeditViewFrame *frame);
+
+void		 gedit_view_frame_popup_goto_line (GeditViewFrame *frame);
+
+void		 gedit_view_frame_clear_text	(GeditViewFrame *frame);
+
 G_END_DECLS
 
 #endif /* __GEDIT_VIEW_FRAME_H__ */

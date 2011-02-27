@@ -1261,7 +1261,7 @@ init_search_entry (GeditViewFrame *frame)
 	}
 }
 
-static gboolean
+static void
 start_interactive_search_real (GeditViewFrame *frame)
 {
 	GtkTextBuffer *buffer;
@@ -1278,7 +1278,7 @@ start_interactive_search_real (GeditViewFrame *frame)
 		}
 		else
 		{
-			return TRUE;
+			return;
 		}
 	}
 
@@ -1319,8 +1319,6 @@ start_interactive_search_real (GeditViewFrame *frame)
 
 	/* We need to grab the focus after the widget has been added */
 	gtk_widget_grab_focus (frame->priv->search_entry);
-
-	return TRUE;
 }
 
 static void
@@ -1363,24 +1361,6 @@ view_frame_mount_operation_factory (GeditDocument   *doc,
 	return gtk_mount_operation_new (GTK_WINDOW (window));
 }
 
-static gboolean
-on_start_interactive_search (GeditView      *view,
-                             GeditViewFrame *frame)
-{
-	frame->priv->request_search_mode = SEARCH;
-
-	return start_interactive_search_real (frame);
-}
-
-static gboolean
-on_start_interactive_goto_line (GeditView      *view,
-                                GeditViewFrame *frame)
-{
-	frame->priv->request_search_mode = GOTO_LINE;
-
-	return start_interactive_search_real (frame);
-}
-
 static void
 gedit_view_frame_init (GeditViewFrame *frame)
 {
@@ -1403,16 +1383,6 @@ gedit_view_frame_init (GeditViewFrame *frame)
 	gtk_widget_show (frame->priv->view);
 
 	g_object_unref (doc);
-
-	g_signal_connect (frame->priv->view,
-	                  "start-interactive-search",
-	                  G_CALLBACK (on_start_interactive_search),
-	                  frame);
-
-	g_signal_connect (frame->priv->view,
-	                  "start-interactive-goto-line",
-	                  G_CALLBACK (on_start_interactive_goto_line),
-	                  frame);
 
 	/* Create the scrolled window */
 	sw = gtk_scrolled_window_new (NULL, NULL);
@@ -1476,4 +1446,39 @@ gedit_view_frame_get_view (GeditViewFrame *frame)
 	g_return_val_if_fail (GEDIT_IS_VIEW_FRAME (frame), NULL);
 
 	return GEDIT_VIEW (frame->priv->view);
+}
+
+void
+gedit_view_frame_popup_search (GeditViewFrame *frame)
+{
+	g_return_if_fail (GEDIT_IS_VIEW_FRAME (frame));
+
+	frame->priv->request_search_mode = SEARCH;
+
+	start_interactive_search_real (frame);
+}
+
+void
+gedit_view_frame_popup_goto_line (GeditViewFrame *frame)
+{
+	g_return_if_fail (GEDIT_IS_VIEW_FRAME (frame));
+
+	frame->priv->request_search_mode = GOTO_LINE;
+
+	start_interactive_search_real (frame);
+}
+
+void
+gedit_view_frame_clear_text (GeditViewFrame *frame)
+{
+	GeditDocument *doc;
+
+	g_return_if_fail (GEDIT_IS_VIEW_FRAME (frame));
+
+	doc = gedit_view_frame_get_document (frame);
+
+	gedit_document_set_search_text (doc, "", GEDIT_SEARCH_DONT_SET_FLAGS);
+	gtk_entry_set_text (GTK_ENTRY (frame->priv->search_entry), "");
+
+	gtk_widget_grab_focus (frame->priv->view);
 }

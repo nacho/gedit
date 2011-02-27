@@ -80,9 +80,6 @@ G_DEFINE_TYPE(GeditView, gedit_view, GTK_TYPE_SOURCE_VIEW)
 /* Signals */
 enum
 {
-	START_INTERACTIVE_SEARCH,
-	START_INTERACTIVE_GOTO_LINE,
-	RESET_SEARCHED_TEXT,
 	DROP_URIS,
 	LAST_SIGNAL
 };
@@ -390,18 +387,6 @@ gedit_view_focus_out (GtkWidget *widget, GdkEventFocus *event)
 	GTK_WIDGET_CLASS (gedit_view_parent_class)->focus_out_event (widget, event);
 
 	return FALSE;
-}
-
-static gboolean
-reset_searched_text (GeditView *view)
-{		
-	GeditDocument *doc;
-
-	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
-	
-	gedit_document_set_search_text (doc, "", GEDIT_SEARCH_DONT_SET_FLAGS);
-	
-	return TRUE;
 }
 
 static gboolean
@@ -809,36 +794,8 @@ gedit_view_class_init (GeditViewClass *klass)
 	widget_class->drag_drop = gedit_view_drag_drop;
 	widget_class->button_press_event = gedit_view_button_press_event;
 	widget_class->realize = gedit_view_realize;
-	klass->reset_searched_text = reset_searched_text;
 
 	text_view_class->delete_from_cursor = gedit_view_delete_from_cursor;
-
-	view_signals[START_INTERACTIVE_SEARCH] =
-		g_signal_new ("start-interactive-search",
-		              G_TYPE_FROM_CLASS (object_class),
-		              G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-		              G_STRUCT_OFFSET (GeditViewClass, start_interactive_search),
-		              NULL, NULL,
-		              gedit_marshal_BOOLEAN__NONE,
-		              G_TYPE_BOOLEAN, 0);
-
-	view_signals[START_INTERACTIVE_GOTO_LINE] =
-		g_signal_new ("start-interactive-goto-line",
-		              G_TYPE_FROM_CLASS (object_class),
-		              G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-		              G_STRUCT_OFFSET (GeditViewClass, start_interactive_goto_line),
-		              NULL, NULL,
-		              gedit_marshal_BOOLEAN__NONE,
-		              G_TYPE_BOOLEAN, 0);
-
-	view_signals[RESET_SEARCHED_TEXT] =
-		g_signal_new ("reset-searched-text",
-		              G_TYPE_FROM_CLASS (object_class),
-		              G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-		              G_STRUCT_OFFSET (GeditViewClass, reset_searched_text),
-		              NULL, NULL,
-		              gedit_marshal_BOOLEAN__NONE,
-		              G_TYPE_BOOLEAN, 0);
 
 	/* A new signal DROP_URIS has been added to allow plugins to intercept
 	 * the default dnd behaviour of 'text/uri-list'. GeditView now handles
@@ -861,21 +818,6 @@ gedit_view_class_init (GeditViewClass *klass)
 	g_type_class_add_private (klass, sizeof (GeditViewPrivate));
 
 	binding_set = gtk_binding_set_by_class (klass);
-
-	gtk_binding_entry_add_signal (binding_set,
-	                              GDK_KEY_f,
-	                              GDK_CONTROL_MASK,
-	                              "start-interactive-search", 0);
-
-	gtk_binding_entry_add_signal (binding_set,
-	                              GDK_KEY_i,
-	                              GDK_CONTROL_MASK,
-	                              "start-interactive-goto-line", 0);
-
-	gtk_binding_entry_add_signal (binding_set,
-	                              GDK_KEY_k,
-	                              GDK_CONTROL_MASK | GDK_SHIFT_MASK,
-	                              "reset_searched_text", 0);
 
 	gtk_binding_entry_add_signal (binding_set,
 	                              GDK_KEY_d,

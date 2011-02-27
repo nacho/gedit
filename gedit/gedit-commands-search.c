@@ -555,24 +555,17 @@ void
 _gedit_cmd_search_find (GtkAction   *action,
 			GeditWindow *window)
 {
-	GeditView *active_view;
+	GeditTab *active_tab;
+	GeditViewFrame *frame;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	active_view = gedit_window_get_active_view (window);
-	if (active_view == NULL)
+	active_tab = gedit_window_get_active_tab (window);
+	if (active_tab == NULL)
 		return;
 
-	/* Focus the view if needed: we need to focus the view otherwise 
-	   activating the binding for goto line has no effect */
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
-	
-	/* incremental search is builtin in GeditView, just activate
-	 * the corresponding binding.
-	 */
-	gtk_bindings_activate (G_OBJECT (active_view),
-			       GDK_KEY_f,
-			       GDK_CONTROL_MASK);
+	frame = GEDIT_VIEW_FRAME (_gedit_tab_get_view_frame (active_tab));
+	gedit_view_frame_popup_search (frame);
 }
 
 void
@@ -668,38 +661,34 @@ void
 _gedit_cmd_search_clear_highlight (GtkAction   *action,
 				   GeditWindow *window)
 {
-	GeditDocument *doc;
+	GeditTab *active_tab;
+	GeditViewFrame *frame;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	doc = gedit_window_get_active_document (window);
-	gedit_document_set_search_text (GEDIT_DOCUMENT (doc),
-					"",
-					GEDIT_SEARCH_DONT_SET_FLAGS);
+	active_tab = gedit_window_get_active_tab (window);
+	if (active_tab == NULL)
+		return;
+
+	frame = GEDIT_VIEW_FRAME (_gedit_tab_get_view_frame (active_tab));
+	gedit_view_frame_clear_text (frame);
 }
 
 void
 _gedit_cmd_search_goto_line (GtkAction   *action,
 			     GeditWindow *window)
 {
-	GeditView *active_view;
+	GeditTab *active_tab;
+	GeditViewFrame *frame;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	active_view = gedit_window_get_active_view (window);
-	if (active_view == NULL)
+	active_tab = gedit_window_get_active_tab (window);
+	if (active_tab == NULL)
 		return;
 
-	/* Focus the view if needed: we need to focus the view otherwise 
-	   activating the binding for goto line has no effect */
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
-
-	/* goto line is builtin in GeditView, just activate
-	 * the corresponding binding.
-	 */
-	gtk_bindings_activate (G_OBJECT (active_view),
-			       GDK_KEY_i,
-			       GDK_CONTROL_MASK);
+	frame = GEDIT_VIEW_FRAME (_gedit_tab_get_view_frame (active_tab));
+	gedit_view_frame_popup_goto_line (frame);
 }
 
 /* ex:set ts=8 noet: */
