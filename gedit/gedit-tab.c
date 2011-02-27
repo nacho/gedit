@@ -75,9 +75,9 @@ struct _GeditTabPrivate
 
 	GeditDocumentSaveFlags	save_flags;
 
-        gint                    auto_save_interval;
-        guint                   auto_save_timeout;
-        
+	gint                    auto_save_interval;
+	guint                   auto_save_timeout;
+
 	gint	                not_editable : 1;
 	gint                    auto_save : 1;
 
@@ -1004,8 +1004,8 @@ document_loaded (GeditDocument *document,
 			if (tab->priv->state == GEDIT_TAB_STATE_LOADING_ERROR)
 			{
 				emsg = gedit_io_loading_error_info_bar_new (location,
-										tab->priv->tmp_encoding,
-										error);
+									    tab->priv->tmp_encoding,
+									    error);
 				g_signal_connect (emsg,
 						  "response",
 						  G_CALLBACK (io_loading_error_info_bar_response),
@@ -1016,7 +1016,7 @@ document_loaded (GeditDocument *document,
 				g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_REVERTING_ERROR);
 				
 				emsg = gedit_unrecoverable_reverting_error_info_bar_new (location,
-											     error);
+											 error);
 
 				g_signal_connect (emsg,
 						  "response",
@@ -1041,9 +1041,6 @@ document_loaded (GeditDocument *document,
 	}
 	else
 	{
-		GList *all_documents;
-		GList *l;
-
 		if (location != NULL)
 		{
 			gchar *mime;
@@ -1085,49 +1082,57 @@ document_loaded (GeditDocument *document,
 		/* Scroll to the cursor when the document is loaded */
 		gedit_view_scroll_to_cursor (gedit_view_frame_get_view (tab->priv->frame));
 
-		all_documents = gedit_app_get_documents (gedit_app_get_default ());
-
-		for (l = all_documents; l != NULL; l = g_list_next (l))
+		/* if the document is readonly we don't care how many times the document
+		   is opened */
+		if (!gedit_document_get_readonly (document))
 		{
-			GeditDocument *d = GEDIT_DOCUMENT (l->data);
-			
-			if (d != document)
+			GList *all_documents;
+			GList *l;
+
+			all_documents = gedit_app_get_documents (gedit_app_get_default ());
+
+			for (l = all_documents; l != NULL; l = g_list_next (l))
 			{
-				GFile *loc;
+				GeditDocument *d = GEDIT_DOCUMENT (l->data);
+			
+				if (d != document)
+				{
+					GFile *loc;
 
-				loc = gedit_document_get_location (d);
+					loc = gedit_document_get_location (d);
 
-				if (loc != NULL && location != NULL &&
-			    	    g_file_equal (location, loc))
-			    	{
-			    		GtkWidget *w;
+					if (loc != NULL && location != NULL &&
+					    g_file_equal (location, loc))
+					{
+						GtkWidget *w;
 
-			    		tab->priv->not_editable = TRUE;
+						tab->priv->not_editable = TRUE;
 
-			    		w = gedit_file_already_open_warning_info_bar_new (location);
+						w = gedit_file_already_open_warning_info_bar_new (location);
 
-					set_info_bar (tab, w);
+						set_info_bar (tab, w);
 
-					gtk_info_bar_set_default_response (GTK_INFO_BAR (w),
-									   GTK_RESPONSE_CANCEL);
+						gtk_info_bar_set_default_response (GTK_INFO_BAR (w),
+										   GTK_RESPONSE_CANCEL);
 
-					gtk_widget_show (w);
+						gtk_widget_show (w);
 
-					g_signal_connect (w,
-							  "response",
-							  G_CALLBACK (file_already_open_warning_info_bar_response),
-							  tab);
+						g_signal_connect (w,
+								  "response",
+								  G_CALLBACK (file_already_open_warning_info_bar_response),
+								  tab);
 
-			    		g_object_unref (loc);
-			    		break;
-			    	}
-			    	
-			    	if (loc != NULL)
-					g_object_unref (loc);
+						g_object_unref (loc);
+						break;
+					}
+				
+					if (loc != NULL)
+						g_object_unref (loc);
+				}
 			}
-		}
 
-		g_list_free (all_documents);
+			g_list_free (all_documents);
+		}
 
 		gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
 
